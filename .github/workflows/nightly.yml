@@ -158,12 +158,13 @@ jobs:
           cache_path="/tmp/fermatmind-gsc-nightly-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.php"
           printf -v q_cache '%q' "$cache_path"
           remote_prefix="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; cd \"\$current/backend\";"
-          remote_command="$remote_prefix sudo -n -u www-data -- env HTTPS_PROXY=$q_proxy HTTP_PROXY=$q_proxy NO_PROXY=127.0.0.1,localhost APP_CONFIG_CACHE=$q_cache SEO_INTEL_ENABLED=true SEO_INTEL_WRITE_ENABLED=true php artisan seo-intel:gsc-sync --window=90 --search-types=web --json"
+          remote_command="$remote_prefix sudo -n -u www-data -- env HTTPS_PROXY=$q_proxy HTTP_PROXY=$q_proxy NO_PROXY=127.0.0.1,localhost APP_CONFIG_CACHE=$q_cache SEO_INTEL_ENABLED=true SEO_INTEL_WRITE_ENABLED=true php artisan seo-intel:gsc-sync --window=90 --search-types=web --full-window --json"
           sync_json="$RUNNER_TEMP/gsc-sync.json"
           "${ssh_base[@]}" "$remote_command" > "$sync_json"
           jq -e '
             .status == "success"
             and .window_days == 90
+            and .fetch_mode == "full_window"
             and .search_types == ["web"]
             and .pages_fetched > 0
             and .rows_seen > 0
@@ -183,6 +184,8 @@ jobs:
               active_production_sha: $active_sha,
               status: $sync[0].status,
               window_days: $sync[0].window_days,
+              fetch_mode: $sync[0].fetch_mode,
+              requested_start_date: $sync[0].requested_start_date,
               start_date: $sync[0].start_date,
               end_date: $sync[0].end_date,
               search_types: $sync[0].search_types,
@@ -191,6 +194,9 @@ jobs:
               rows_upserted: $sync[0].rows_upserted,
               unmapped_rows: $sync[0].unmapped_rows,
               quality_gate: $sync[0].quality_gate.status,
+              gsc_data_quality: $sync[0].gsc_data_quality,
+              unmapped_classification: $sync[0].unmapped_classification,
+              issue_clusters: $sync[0].issue_clusters,
               read_only_gsc: true,
               search_submission_allowed: false,
               proxy_allowlist: ["oauth2.googleapis.com:443", "searchconsole.googleapis.com:443"]

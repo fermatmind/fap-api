@@ -24,13 +24,14 @@ final class GscReadModelSyncService
         private readonly GscReadonlyLiveAdapter $adapter,
         private readonly GscSearchAnalyticsRowNormalizer $normalizer,
         private readonly GscDataQualityGate $qualityGate,
+        private readonly GscRunCloseoutSummarizer $closeoutSummarizer,
     ) {}
 
     /**
      * @param  list<string>  $searchTypes
      * @return array<string, mixed>
      */
-    public function sync(int $windowDays = 28, array $searchTypes = ['web']): array
+    public function sync(int $windowDays = 28, array $searchTypes = ['web'], bool $fullWindow = false): array
     {
         if (! in_array($windowDays, self::WINDOWS, true)) {
             return $this->blocked('unsupported_window');
@@ -62,11 +63,19 @@ final class GscReadModelSyncService
         $lagDays = max(0, (int) config('seo_intel.gsc_backfill_lag_days', 3));
         $endDate = CarbonImmutable::now('UTC')->subDays($lagDays)->startOfDay();
         $requestedStartDate = $endDate->subDays($windowDays - 1);
-        $startDate = $this->incrementalStartDate(
+        $startDate = $fullWindow
+            ? $requestedStartDate
+            : $this->incrementalStartDate(
+                $connection,
+                $requestedStartDate,
+                $endDate,
+                $windowDays,
+                $searchTypes,
+            );
+        $readModelBefore = $this->closeoutSummarizer->readModelSnapshot(
             $connection,
             $requestedStartDate,
             $endDate,
-            $windowDays,
             $searchTypes,
         );
         $runUid = (string) Str::uuid();
@@ -108,6 +117,14 @@ final class GscReadModelSyncService
             }
 
             [$upserted, $unmapped] = $this->persistRows($connection, $runUid, $rows);
+            $closeout = $this->closeoutSummarizer->summarize(
+                $connection,
+                $rows,
+                $requestedStartDate,
+                $endDate,
+                $searchTypes,
+                $readModelBefore,
+            );
             $finished = CarbonImmutable::now('UTC');
             $connection->table('seo_gsc_sync_runs')->where('sync_run_uid', $runUid)->update([
                 'status' => 'success',
@@ -124,6 +141,8 @@ final class GscReadModelSyncService
                 'status' => 'success',
                 'sync_run_uid' => $runUid,
                 'window_days' => $windowDays,
+                'fetch_mode' => $fullWindow ? 'full_window' : 'incremental',
+                'requested_start_date' => $requestedStartDate->toDateString(),
                 'start_date' => $startDate->toDateString(),
                 'end_date' => $endDate->toDateString(),
                 'search_types' => $searchTypes,
@@ -132,6 +151,7 @@ final class GscReadModelSyncService
                 'rows_upserted' => $upserted,
                 'unmapped_rows' => $unmapped,
                 'quality_gate' => $quality,
+                ...$closeout,
                 'read_only_gsc' => true,
                 'search_submission_allowed' => false,
             ];

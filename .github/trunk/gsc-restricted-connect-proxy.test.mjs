@@ -25,7 +25,10 @@ test('nightly runs the active production sync without copying the GSC credential
 
   assert.match(workflow, /environment: production/);
   assert.match(workflow, /gsc_restricted_connect_proxy\.mjs/);
-  assert.match(workflow, /seo-intel:gsc-sync --window=90 --search-types=web --json/);
+  assert.match(workflow, /seo-intel:gsc-sync --window=90 --search-types=web --full-window --json/);
+  assert.match(workflow, /\.fetch_mode == "full_window"/);
+  assert.match(workflow, /unmapped_classification: \$sync\[0\]\.unmapped_classification/);
+  assert.match(workflow, /issue_clusters: \$sync\[0\]\.issue_clusters/);
   assert.doesNotMatch(workflow, /SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON/);
   assert.doesNotMatch(workflow, /SEO_INTEL_GSC_ACCESS_TOKEN/);
 });

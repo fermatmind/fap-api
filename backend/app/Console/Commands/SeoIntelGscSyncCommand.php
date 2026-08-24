@@ -12,6 +12,7 @@ final class SeoIntelGscSyncCommand extends Command
     protected $signature = 'seo-intel:gsc-sync
         {--window=28 : Import window: 7, 28, or 90 days}
         {--search-types=web : Comma-separated readonly Search Analytics types}
+        {--full-window : Fetch the complete requested window instead of the incremental overlap date}
         {--json : Emit JSON}';
 
     protected $description = 'Incrementally import real readonly GSC Search Analytics rows into the SEO read model.';
@@ -23,7 +24,7 @@ final class SeoIntelGscSyncCommand extends Command
             static fn (string $value): string => trim(mb_strtolower($value, 'UTF-8')),
             explode(',', (string) $this->option('search-types')),
         )));
-        $result = $sync->sync($window, $searchTypes);
+        $result = $sync->sync($window, $searchTypes, (bool) $this->option('full-window'));
         $encoded = json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
         if ((bool) $this->option('json')) {

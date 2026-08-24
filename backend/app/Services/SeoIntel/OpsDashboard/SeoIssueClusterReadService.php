@@ -177,6 +177,70 @@ final class SeoIssueClusterReadService extends AbstractSeoDashboardReadService
     }
 
     /**
+     * Sanitized production closeout statistics. No URL, query, note, or evidence
+     * body is returned from this boundary.
+     *
+     * @return array<string,mixed>
+     */
+    public function closeoutSummary(): array
+    {
+        $issues = $this->issueRows([]);
+        $activeIssues = $issues->filter(fn (object $row): bool => $this->isActiveIssue($row))->values();
+        $clusters = $this->clusters([], $activeIssues)
+            ->filter(fn (array $cluster): bool => ($cluster['status'] ?? null) === 'open')
+            ->values();
+        $semanticItems = $activeIssues->map(function (object $row): string {
+            return $this->clusterUid($this->axes($row)).'|'.($this->urlIdentity($row) ?? 'no-url');
+        });
+        $historicalCutoff = CarbonImmutable::now('UTC')->subDays(90);
+        $historicalNoise = $activeIssues->filter(function (object $row) use ($historicalCutoff): bool {
+            try {
+                return CarbonImmutable::parse((string) ($row->detected_at ?? $row->updated_at ?? ''))->lt($historicalCutoff);
+            } catch (Throwable) {
+                return false;
+            }
+        });
+        $handoffs = ['task_5_url_truth' => 0, 'task_7_runtime_slo' => 0, 'task_10_content_lifecycle' => 0, 'unknown' => 0];
+
+        foreach ($clusters as $cluster) {
+            $haystack = implode(' ', [
+                (string) ($cluster['root_cause'] ?? ''),
+                (string) ($cluster['page_family'] ?? ''),
+                (string) ($cluster['issue_type'] ?? ''),
+            ]);
+            if (str_contains($haystack, 'url_truth') || str_contains($haystack, 'canonical')) {
+                $handoffs['task_5_url_truth']++;
+            } elseif ($this->containsAny($haystack, ['runtime', 'slo', 'timeout', 'latency', 'crawl', '404', '5xx'])) {
+                $handoffs['task_7_runtime_slo']++;
+            } elseif ($this->containsAny($haystack, ['content', 'title', 'description', 'hreflang', 'schema', 'lastmod'])) {
+                $handoffs['task_10_content_lifecycle']++;
+            } else {
+                $handoffs['unknown']++;
+            }
+        }
+
+        return [
+            'raw_open_issue_count' => $activeIssues->count(),
+            'cluster_count' => $clusters->count(),
+            'distinct_root_cause_count' => $clusters->pluck('root_cause')->filter()->unique()->count(),
+            'affected_unique_url_count' => $activeIssues->map(fn (object $row): ?string => $this->urlIdentity($row))->filter()->unique()->count(),
+            'priority_distribution' => [
+                'P0' => $clusters->where('severity', 'critical')->count(),
+                'P1' => $clusters->where('severity', 'high')->count(),
+                'P2' => $clusters->filter(fn (array $cluster): bool => in_array(($cluster['severity'] ?? null), ['medium', 'warning'], true))->count(),
+                'P3' => $clusters->filter(fn (array $cluster): bool => in_array(($cluster['severity'] ?? null), ['low', 'info'], true))->count(),
+            ],
+            'historical_noise_candidate_count' => $historicalNoise->count(),
+            'duplicate_candidate_count' => max(0, $activeIssues->count() - $semanticItems->unique()->count()),
+            'auto_close_candidate_count' => $historicalNoise
+                ->filter(fn (object $row): bool => $semanticItems->countBy()->get($this->clusterUid($this->axes($row)).'|'.($this->urlIdentity($row) ?? 'no-url'), 0) > 1)
+                ->count(),
+            'handoffs' => $handoffs,
+            'cluster_key' => ['detector', 'root_cause', 'page_family', 'authority_revision'],
+        ];
+    }
+
+    /**
      * @param  array<string,string>  $filters
      * @return Collection<int,array<string,mixed>>
      */
@@ -307,7 +371,7 @@ final class SeoIssueClusterReadService extends AbstractSeoDashboardReadService
         return $query->get();
     }
 
-    /** @return array{root_cause:string,content_type:string,template:string,field:string,source_system:string,source_engine:string} */
+    /** @return array<string,string> */
     private function axes(object $row): array
     {
         $metadata = $this->decodeJson($row->metadata_json ?? null);
@@ -315,7 +379,13 @@ final class SeoIssueClusterReadService extends AbstractSeoDashboardReadService
         $contentType = $this->normalizeAxis((string) ($row->page_entity_type ?? 'unknown'));
 
         return [
+            'detector' => $this->normalizeAxis(implode(':', array_filter([
+                (string) ($row->source_system ?? 'unknown'),
+                (string) ($row->source_engine ?? ''),
+            ]))),
             'root_cause' => $this->normalizeAxis((string) ($metadata['root_cause'] ?? $issueType)),
+            'page_family' => $contentType,
+            'authority_revision' => $this->normalizeAxis((string) ($metadata['authority_revision'] ?? 'unknown')),
             'content_type' => $contentType,
             'template' => $this->normalizeAxis((string) ($metadata['template'] ?? $metadata['template_id'] ?? $contentType)),
             'field' => $this->normalizeAxis((string) ($metadata['field'] ?? $metadata['field_name'] ?? $this->inferField($issueType))),
@@ -327,6 +397,7 @@ final class SeoIssueClusterReadService extends AbstractSeoDashboardReadService
     /** @param array<string,string> $axes */
     private function clusterUid(array $axes): string
     {
+        $axes = array_intersect_key($axes, array_flip(['detector', 'root_cause', 'page_family', 'authority_revision']));
         ksort($axes);
 
         return 'seo-cluster:'.hash('sha256', json_encode($axes, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
@@ -529,5 +600,17 @@ final class SeoIssueClusterReadService extends AbstractSeoDashboardReadService
         $value = preg_replace('/[^a-z0-9._-]+/', '_', $value) ?? '';
 
         return trim($value, '_') !== '' ? trim($value, '_') : 'unknown';
+    }
+
+    /** @param list<string> $needles */
+    private function containsAny(string $haystack, array $needles): bool
+    {
+        foreach ($needles as $needle) {
+            if (str_contains($haystack, $needle)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

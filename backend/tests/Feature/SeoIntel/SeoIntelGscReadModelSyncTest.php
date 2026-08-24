@@ -145,6 +145,36 @@ final class SeoIntelGscReadModelSyncTest extends TestCase
     }
 
     #[Test]
+    public function scheduled_full_window_reconciles_all_dates_and_emits_only_sanitized_closeout_statistics(): void
+    {
+        config(['seo_intel.gsc_sync.max_pages_per_run' => 20]);
+        $this->seedPreviousSuccess();
+        Http::fake(static fn (Request $request) => (int) $request['startRow'] === 0
+            ? Http::response(['rows' => [[
+                'keys' => ['query', 'https://www.fermatmind.com/zh/articles/full-window', 'DESKTOP', 'CHN'],
+                'clicks' => 1,
+                'impressions' => 10,
+                'ctr' => 0.1,
+                'position' => 5,
+            ]]], 200)
+            : Http::response(['rows' => []], 200));
+
+        $result = app(GscReadModelSyncService::class)->sync(7, ['web'], true);
+
+        $this->assertSame('success', $result['status']);
+        $this->assertSame('full_window', $result['fetch_mode']);
+        $this->assertSame('2026-08-14', $result['start_date']);
+        $this->assertSame(7, data_get($result, 'gsc_data_quality.fetched.date_point_count'));
+        $this->assertSame(7, data_get($result, 'gsc_data_quality.fetched.natural_unique_key_count'));
+        $this->assertSame(0, data_get($result, 'gsc_data_quality.overlap_comparison.natural_key_duplicate_count'));
+        $this->assertSame(1, data_get($result, 'unmapped_classification.unique_normalized_canonical_url_count'));
+        $this->assertSame(1, data_get($result, 'unmapped_classification.page_family_distribution.Articles'));
+        $this->assertSame(1, data_get($result, 'unmapped_classification.locale_distribution.zh-CN'));
+        $this->assertFalse(data_get($result, 'unmapped_classification.raw_url_retained_or_emitted'));
+        $this->assertStringNotContainsString('full-window', json_encode($result['unmapped_classification'], JSON_THROW_ON_ERROR));
+    }
+
+    #[Test]
     public function disconnected_credentials_are_explicit_without_external_calls(): void
     {
         config(['seo_intel.gsc_readonly_adapter.access_token' => '']);

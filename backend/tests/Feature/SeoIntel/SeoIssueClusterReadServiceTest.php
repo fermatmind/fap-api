@@ -275,6 +275,32 @@ final class SeoIssueClusterReadServiceTest extends TestCase
         $this->assertSame(4, $recurred['affected_url_count']);
     }
 
+    public function test_closeout_uses_detector_root_cause_page_family_and_authority_revision_only(): void
+    {
+        $this->insertIssue(
+            uid: 'title-revision-2',
+            type: 'missing_title',
+            severity: 'warning',
+            url: 'https://fermatmind.com/en/articles/title-revision-2',
+            metadata: [
+                'root_cause' => 'article_template_missing_title',
+                'template' => 'article_detail',
+                'field' => 'title',
+                'authority_revision' => 'revision-2',
+            ],
+        );
+
+        $reader = new SeoIssueClusterReadService('seo_issue_cluster_test');
+        $clusters = $reader->read();
+        $summary = $reader->closeoutSummary();
+
+        $this->assertSame(3, $clusters['total_count']);
+        $this->assertSame(['detector', 'root_cause', 'page_family', 'authority_revision'], $summary['cluster_key']);
+        $this->assertSame(5, $summary['raw_open_issue_count']);
+        $this->assertSame(3, $summary['cluster_count']);
+        $this->assertSame(5, $summary['affected_unique_url_count']);
+    }
+
     /** @param array<string,mixed> $metadata */
     private function insertIssue(string $uid, string $type, string $severity, string $url, array $metadata): void
     {
