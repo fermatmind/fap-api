@@ -15,6 +15,7 @@ use App\Models\Occupation;
 use App\Models\OccupationFamily;
 use App\Services\Career\Review\CareerJobDetailReaderSafeReviewProjector;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
@@ -94,6 +95,25 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         self::assertSame(2, $result['public_readback']['verified_locale_page_count']);
         self::assertFalse($result['idempotent_noop']);
         self::assertFalse($cache->serveStaleActive);
+    }
+
+    public function test_it_pins_post_commit_cache_builds_and_readback_to_the_write_connection(): void
+    {
+        [$authority] = $this->fixture();
+        $connection = DB::connection();
+        $connection->useWriteConnectionWhenReading(false);
+
+        try {
+            $this->publisher(
+                $authority,
+                new FakeCareerCurrentAuthorityCacheGateway(new CareerCurrentAuthorityPackage, $authority['rows']),
+            )->execute(base_path(), true);
+
+            $property = new \ReflectionProperty($connection, 'readOnWriteConnection');
+            self::assertTrue($property->getValue($connection));
+        } finally {
+            $connection->useWriteConnectionWhenReading(false);
+        }
     }
 
     public function test_full_scan_keeps_manual_hold_in_database_authority_without_publishing_its_cache(): void

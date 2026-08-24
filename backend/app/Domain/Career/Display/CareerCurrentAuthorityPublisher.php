@@ -70,6 +70,7 @@ final class CareerCurrentAuthorityPublisher
             $databaseCommitted = ($plan['write_counts']['database_update_count']
                 + $plan['write_counts']['database_insert_count']
                 + $plan['write_counts']['database_delete_count']) > 0;
+            DB::connection()->useWriteConnectionWhenReading();
 
             $candidatePairs = [];
             foreach ($plan['changed_slugs'] as $slug) {
