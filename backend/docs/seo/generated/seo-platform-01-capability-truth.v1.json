@@ -1,112 +1,145 @@
 {
   "version": "seo-platform-01-capability-truth.v1",
-  "task": "SEO-PLATFORM-01",
-  "status": "complete_immediate_manual_production_closeout",
+  "task": "SEO-PLATFORM-01：生产 SEO 能力实况与即时数据质量闭环验收",
+  "status": "complete_immediate_production_data_quality_closeout",
   "run_metadata": {
-    "generated_at_utc": "2026-08-24T07:29:44Z",
-    "evidence_cutoff_utc": "2026-08-24T07:29:44Z",
-    "evidence_mode": "authenticated_production_read_plus_exact_sha_delivery_and_focused_contracts",
-    "user_override": "normal_scheduled_relay_is_not_a_completion_requirement",
+    "generated_at_utc": "2026-08-24T08:52:13Z",
+    "evidence_cutoff_utc": "2026-08-24T08:52:13Z",
+    "evidence_mode": "authenticated_production_aggregate_readback_plus_exact_sha_runtime_delivery",
+    "completion_authorization": "scheduled relay is intentionally deferred and non-blocking for the immediate closeout",
     "sanitized": true,
     "manual_dispatch_used": false,
-    "production_mutation_performed": false,
+    "production_mutation_performed_by_readback": false,
     "search_submission_performed": false
   },
   "release_chain": {
-    "active_production_sha": "53da4c53440b880a77327507cd2c36b15600712a",
+    "active_production_sha": "022b73a793a87626ec82c747023f7f340b858f60",
     "required_ancestor_shas": [
-      "fb68a20a",
-      "22c66b9d",
-      "ecd047c3",
-      "02c99395",
-      "fa9785df",
-      "14cd07de",
-      "f7bb7b3c",
-      "3e926a37",
+      "fb68a20a", "22c66b9d", "ecd047c3", "02c99395", "fa9785df",
+      "14cd07de", "f7bb7b3c", "3e926a37",
       "611802025fc2aa5f39289c254cbafbb8d3080d05",
       "745ac6f5ec5c135f5b06b6666aa919c0fd759037",
       "685aeb11f746faf29f368740c70953b50cfef068",
       "ee02437e0ccdf6104bc3672485b637ff1afc72c8",
-      "43bfaf214bfcc81ea52ef57b641c22cf6f0945d3"
+      "43bfaf214bfcc81ea52ef57b641c22cf6f0945d3",
+      "022b73a793a87626ec82c747023f7f340b858f60"
     ],
     "all_required_shas_are_ancestors": true,
-    "ci": {
-      "run_id": 32700545962,
-      "status": "success",
-      "completed_at_utc": "2026-08-24T07:19:10Z"
-    },
-    "staging": {
-      "deploy_run_id": 32700982052,
-      "status": "success",
-      "completed_at_utc": "2026-08-24T07:24:29Z"
-    },
-    "production": {
-      "deploy_run_id": 32700982052,
-      "status": "success",
-      "smoke_completed_at_utc": "2026-08-24T07:28:20Z",
+    "runtime_delivery": {
+      "ci_run_id": 32706502269,
+      "ci_status": "success",
+      "ci_completed_at_utc": "2026-08-24T08:33:56Z",
+      "deploy_run_id": 32706956241,
+      "staging_status": "success",
+      "staging_smoke_completed_at_utc": "2026-08-24T08:45:40Z",
+      "production_status": "success",
+      "production_smoke_completed_at_utc": "2026-08-24T08:49:49Z",
       "lkg_restore_used": false
+    },
+    "evidence_document_delivery": {
+      "classification": "docs_only",
+      "production": "not_applicable",
+      "required_receipt": "exact_sha_ci_plus_deploy_skip"
     }
   },
   "capabilities": [
-    {"capability": "seo_operations_ui", "status": "production_healthy", "evidence": "Authenticated production read verified all six workspace tabs."},
-    {"capability": "gsc_readonly_sync", "status": "production_healthy", "evidence": "Production reports a successful GSC read-model update and verified 90-day Search Analytics aggregates."},
-    {"capability": "scheduled_relay", "status": "production_unproven", "evidence": "No post-change normal schedule was awaited after the user removed it as a completion requirement."},
-    {"capability": "restricted_egress", "status": "production_unproven", "evidence": "Repository Node contracts pass; no post-change scheduled production receipt was executed."},
-    {"capability": "gsc_readmodel", "status": "production_healthy", "evidence": "Production Search Performance and Opportunity Queue render real masked GSC data."},
-    {"capability": "url_truth", "status": "production_degraded", "evidence": "URL Truth is connected, while production opportunities still include unmapped candidates."},
-    {"capability": "issue_queue", "status": "production_healthy", "evidence": "Production exposes five persisted open issues across three clusters."},
-    {"capability": "issue_clustering_priority", "status": "production_healthy", "evidence": "Production renders three prioritized clusters with five unique affected URLs and real GSC impact."},
-    {"capability": "runtime_audit", "status": "production_healthy", "evidence": "Production Technical Audit renders connected URL Truth, issue queue, and GSC sources."},
-    {"capability": "opportunity_queue", "status": "production_healthy", "evidence": "Production renders quality-gated, masked GSC opportunities for human review."},
-    {"capability": "cms_execution_boundary", "status": "production_healthy", "evidence": "The UI preserves human review and CMS/backend authority; this closeout performed no write."},
-    {"capability": "search_channel_submission_boundary", "status": "deployed_disabled", "evidence": "Production code and focused contracts keep search submission disabled."},
+    {"capability": "seo_operations_ui", "status": "production_healthy", "evidence": "Authenticated production read verified all six workspaces."},
+    {"capability": "gsc_readonly_readmodel", "status": "production_healthy", "evidence": "Persisted production 90-day web readmodel and aggregate-only closeout readback verified."},
+    {"capability": "scheduled_relay", "status": "production_unproven", "evidence": "Scheduled relay is intentionally deferred and non-blocking for the immediate closeout."},
+    {"capability": "scheduled_restricted_egress", "status": "production_unproven", "evidence": "Contracts pass, but no fresh scheduled production receipt exists."},
+    {"capability": "gsc_data_quality_queue", "status": "production_healthy", "evidence": "Production aggregate readback reconciled 2,073 persisted quality rows."},
+    {"capability": "url_truth", "status": "production_degraded", "evidence": "Seventeen current backend/CMS-authority-qualified candidates are missing from URL Truth."},
+    {"capability": "issue_queue", "status": "production_healthy", "evidence": "Five independent open issues form three active clusters."},
+    {"capability": "issue_clustering_priority", "status": "production_healthy", "evidence": "SeoIssueClusterReadService produced three P3 clusters using the approved four-field key."},
+    {"capability": "runtime_audit", "status": "production_healthy", "evidence": "Production Technical Audit uses connected URL Truth, Issue Queue, and GSC sources."},
+    {"capability": "opportunity_queue", "status": "production_healthy", "evidence": "Production renders masked, quality-gated GSC opportunities for human review."},
+    {"capability": "cms_execution_boundary", "status": "production_healthy", "evidence": "No CMS or authority write occurred."},
+    {"capability": "search_channel_submission_boundary", "status": "deployed_disabled", "evidence": "Production readback and classifier keep search submission disabled."},
     {"capability": "cwv", "status": "external_not_connected", "evidence": "Production UI explicitly reports the source as not connected."},
     {"capability": "rank_tracking", "status": "external_not_connected", "evidence": "Production UI explicitly reports the source as not connected."},
-    {"capability": "ai_visibility", "status": "external_not_connected", "evidence": "Production UI explicitly reports Phase 2 and the source as not connected."},
+    {"capability": "ai_visibility", "status": "external_not_connected", "evidence": "Production UI explicitly reports the source as not connected."},
     {"capability": "backlinks", "status": "external_not_connected", "evidence": "Production UI explicitly reports the source as not connected."}
   ],
   "scheduled_gsc_receipt": {
-    "status": "not_executed_user_override",
+    "status": "production_unproven",
+    "blocking_completion": false,
+    "reason": "scheduled relay is intentionally deferred and non-blocking for the immediate closeout",
     "workflow_run_id": null,
     "workflow_sha": null,
-    "active_production_sha": null,
-    "window_days": null,
-    "search_types": [],
-    "pages_fetched": null,
-    "rows_seen": null,
-    "rows_upserted": null,
-    "unmapped_rows": null,
-    "quality_gate": null,
-    "read_only_gsc": null,
-    "search_submission_allowed": null,
-    "proxy_allowlist": []
-  },
-  "gsc_data_quality": {
-    "status": "production_aggregate_verified_sync_internals_unproven",
-    "evidence_source": "authenticated_production_ui",
-    "last_success_displayed_at": "2026-08-24 01:58:11",
     "window_days": 90,
     "search_types": ["web"],
-    "totals": {"clicks": 278, "impressions": 22438, "ctr_percent": 1.24, "average_position": 14.87},
-    "query_display_masked": true,
-    "opportunity_quality_gate_visible": true,
-    "aggregation_strategy": "unbounded_database_aggregate",
+    "pages_fetched": "production_unproven",
+    "row_completeness": "production_unproven",
+    "scheduled_overlap": "production_unproven",
+    "scheduled_rerun_accumulation": "production_unproven",
+    "search_submission_allowed": false
+  },
+  "gsc_data_quality": {
+    "status": "production_persisted_readmodel_verified",
+    "evidence_source": "authenticated_aggregate_only_production_read_surface",
+    "property": "sc-domain:fermatmind.com",
+    "timezone": "UTC",
+    "last_success_displayed_at": "2026-08-24 01:58:11",
+    "window": {"anchor": "latest_persisted_report_date", "start_date": "2026-05-24", "end_date": "2026-08-21", "window_days": 90},
+    "date_coverage": {"date_point_count": 83, "min_report_date": "2026-05-31", "max_report_date": "2026-08-21", "latest_data_lag_days": 3},
+    "search_types": ["web"],
+    "detail_row_count": 15165,
+    "natural_unique_key_count": 15165,
+    "natural_key_duplicate_count": 0,
+    "totals": {"clicks": 278, "impressions": 22438, "ctr_percent": 1.239, "average_position": 14.8737},
+    "database_aggregate_matches_detail": true,
+    "aggregation_strategy": "unbounded_database_aggregate_reconciled_to_full_detail_set",
     "legacy_2000_row_aggregate_limit_present": false,
-    "production_unproven_fields": ["api_page_count", "row_completeness", "natural_key_duplicate_count", "manual_to_scheduled_overlap", "scheduled_rerun_accumulation"]
+    "production_unproven_fields": ["fresh_api_pages_fetched", "row_completeness", "scheduled_overlap", "scheduled_rerun_accumulation"]
   },
   "unmapped_classification": {
-    "status": "production_candidates_visible_exact_distribution_unproven",
-    "visible_unmapped_opportunity_rows_minimum": 7,
-    "unmapped_detail_row_count": null,
-    "unique_normalized_canonical_url_count": null,
-    "unique_query_page_date_combination_count": null,
-    "page_family_distribution": null,
-    "locale_distribution": null,
-    "root_cause_distribution": null,
-    "current_url_truth_missing_handoff_count": null,
-    "classification_implementation": "deployed_and_focused_tested",
+    "status": "production_verified",
+    "unmapped_detail_row_count": 4662,
+    "unique_normalized_canonical_url_count": 395,
+    "unique_query_page_date_combination_count": 3328,
+    "page_family_distribution": {"Tests": 18, "Articles": 7, "Career": 287, "Personality": 65, "Other": 18},
+    "locale_distribution": {"zh-CN": 245, "en": 143, "unknown": 7},
+    "root_cause_distribution": {
+      "host_canonical_normalization": 0,
+      "locale_path_normalization": 0,
+      "current_url_truth_missing": 17,
+      "historical_url": 0,
+      "redirect_alias": 0,
+      "query_parameters_or_malformed_url": 3,
+      "retired_noindex": 0,
+      "not_published": 0,
+      "private_deny_path": 1,
+      "raw_canonical_missing": 0,
+      "unknown": 374
+    },
+    "current_url_truth_missing_handoff_count": 17,
+    "classification_unit": "unique_normalized_canonical_url",
     "classification_authority": "backend_cms_and_persisted_url_truth_only",
-    "raw_url_retained_or_emitted": false
+    "identity_resolution": "authority_normalized_hash_or_distinct_opaque_source_hash",
+    "opaque_hash_fallback_count": 1,
+    "raw_query_url_hash_or_private_path_emitted": false,
+    "url_truth_write_performed": false
+  },
+  "queue_reconciliation": {
+    "gsc_data_quality_queue": {
+      "total_count": 2073, "open_count": 2073, "processed_count": 0,
+      "unique_url_hash_count": 403, "distinct_root_cause_count": 1,
+      "root_cause_distribution": {"canonical_url_not_in_url_truth": 2073},
+      "source_semantics": "historical_snapshot_quality_rows"
+    },
+    "seo_issue_queue": {
+      "total_count": 5, "open_count": 5, "processed_count": 0,
+      "unique_url_hash_count": 5, "distinct_root_cause_count": 1,
+      "root_cause_distribution": {"missing_lastmod_for_indexable_url": 5}
+    },
+    "relationship": {
+      "shared_unique_url_hash_count": 0,
+      "direct_foreign_key_or_row_equivalence": false,
+      "quality_items_are_issue_clusters": false,
+      "quality_queue_unit": "report_date_plus_canonical_url_hash_plus_issue_code",
+      "issue_queue_unit": "independent_operational_issue"
+    },
+    "bulk_close_delete_or_fix_performed": false
   },
   "issue_clusters": {
     "status": "production_verified",
@@ -124,28 +157,42 @@
     "bulk_close_performed": false
   },
   "roadmap_delta": [
-    {"task_id": 2, "scope": "historical_alias_duplicate_dimension_and_legal_nonindex_cleanup", "status": "full_implementation_required", "reason": "Production shows unmapped candidates, but exact root-cause distribution remains unproven."},
-    {"task_id": 3, "scope": "scope_not_named_in_instruction", "status": "delta_only", "reason": "Do not rebuild; only evidence-proven gaps remain eligible."},
-    {"task_id": 4, "scope": "scope_not_named_in_instruction", "status": "blocked", "reason": "No authoritative task definition is present."},
-    {"task_id": 5, "scope": "current_public_authoritative_url_truth_gaps", "status": "blocked", "reason": "No production authority-qualified missing URL Truth count is proven."},
-    {"task_id": 6, "scope": "scope_not_named_in_instruction", "status": "delta_only", "reason": "Do not rebuild; only evidence-proven gaps remain eligible."},
-    {"task_id": 7, "scope": "runtime_and_slo", "status": "completed_by_prior_work", "reason": "Runtime audit is production healthy and no runtime/SLO cluster handoff is present."},
-    {"task_id": 8, "scope": "scope_not_named_in_instruction", "status": "blocked", "reason": "No authoritative task definition is present."},
-    {"task_id": 9, "scope": "scope_not_named_in_instruction", "status": "blocked", "reason": "No authoritative task definition is present."},
-    {"task_id": 10, "scope": "content_lifecycle", "status": "full_implementation_required", "reason": "Three production clusters route to missing-lastmod content lifecycle work."},
-    {"task_id": 11, "scope": "scope_not_named_in_instruction", "status": "blocked", "reason": "No authoritative task definition is present."},
-    {"task_id": 12, "scope": "scope_not_named_in_instruction", "status": "blocked", "reason": "No authoritative task definition is present."}
+    {"task_id": 2, "scope": "historical_alias_parameter_legal_nonindex_and_unknown_classification", "status": "queued_after_task_5", "reason": "374 opaque unknown identities and small parameter/private cohorts need approved authority evidence."},
+    {"task_id": 3, "scope": "scope_not_named_in_instruction", "status": "delta_only", "reason": "Do not rebuild."},
+    {"task_id": 4, "scope": "scope_not_named_in_instruction", "status": "scope_unknown", "reason": "No authoritative definition is present."},
+    {"task_id": 5, "scope": "current_public_authoritative_url_truth_gaps", "status": "selected_next", "reason": "Production proves 17 backend/CMS-authority-qualified current URL Truth gaps."},
+    {"task_id": 6, "scope": "scope_not_named_in_instruction", "status": "delta_only", "reason": "Do not rebuild."},
+    {"task_id": 7, "scope": "runtime_and_slo", "status": "completed_by_prior_work", "reason": "No runtime/SLO cluster handoff is present."},
+    {"task_id": 8, "scope": "scope_not_named_in_instruction", "status": "scope_unknown", "reason": "No authoritative definition is present."},
+    {"task_id": 9, "scope": "scope_not_named_in_instruction", "status": "scope_unknown", "reason": "No authoritative definition is present."},
+    {"task_id": 10, "scope": "content_lifecycle", "status": "not_selected", "reason": "Three P3 lastmod clusters do not outrank 17 verified current URL Truth gaps."},
+    {"task_id": 11, "scope": "scope_not_named_in_instruction", "status": "scope_unknown", "reason": "No authoritative definition is present."},
+    {"task_id": 12, "scope": "scope_not_named_in_instruction", "status": "scope_unknown", "reason": "No authoritative definition is present."}
   ],
   "next_task_selection": {
-    "selected_task": 10,
-    "decision_status": "selected_from_verified_production_issue_clusters",
-    "reason": "Three production clusters route to content lifecycle; task 5 has no authority-qualified proof and task 2 lacks exact root-cause distribution."
+    "selected_task": 5,
+    "decision_status": "selected_from_verified_production_authority_distribution",
+    "reason": "Seventeen current backend/CMS-authority-qualified URL Truth gaps are proven; task 2 follows for unresolved cohorts and task 10 remains deferred."
   },
   "blocked_unknown_ledger": [
-    {"item": "scheduled_relay_and_restricted_egress_production_receipt", "status": "production_unproven", "blocking_completion": false, "reason": "Removed as a completion requirement by the user."},
-    {"item": "exact_production_unmapped_distribution", "status": "production_unproven", "blocking_completion": false, "next_evidence": "A future full-window production sync receipt or task 2 bounded classification."},
-    {"item": "gsc_sync_internal_idempotency_and_pagination", "status": "production_unproven", "blocking_completion": false, "next_evidence": "A future full-window production sync receipt; focused contracts already pass."},
+    {"item": "scheduled_relay_and_restricted_egress_production_receipt", "status": "production_unproven", "blocking_completion": false},
+    {"item": "fresh_api_pages_fetched_and_row_completeness", "status": "production_unproven", "blocking_completion": false},
+    {"item": "scheduled_overlap_and_rerun_accumulation", "status": "production_unproven", "blocking_completion": false},
+    {"item": "opaque_unmapped_authority_resolution", "status": "production_unproven", "blocking_completion": false, "count": 374},
     {"item": "cwv_rank_ai_visibility_backlinks", "status": "external_not_connected", "blocking_completion": false},
     {"item": "roadmap_task_definitions_4_8_9_11_12", "status": "scope_unknown", "blocking_completion": false}
-  ]
+  ],
+  "boundaries": {
+    "read_only": true,
+    "aggregate_only": true,
+    "raw_query_emitted": false,
+    "raw_url_emitted": false,
+    "url_hash_emitted": false,
+    "external_calls_attempted_by_closeout_read": false,
+    "writes_attempted": false,
+    "url_truth_write_allowed": false,
+    "issue_mutation_allowed": false,
+    "cms_publish_allowed": false,
+    "search_submission_allowed": false
+  }
 }
