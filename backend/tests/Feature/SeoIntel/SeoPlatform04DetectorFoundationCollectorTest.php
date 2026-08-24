@@ -220,6 +220,11 @@ final class SeoPlatform04DetectorFoundationCollectorTest extends TestCase
         $this->assertStringNotContainsString('test "$dry_fingerprint" = "$controlled_fingerprint"', $deploy);
         $this->assertStringContainsString('idempotent_rerun_receipt', $deploy);
         $this->assertStringContainsString('$rerun["created"]', $deploy);
+        $this->assertStringContainsString('exit 20', $deploy);
+        $this->assertStringContainsString('exit 21', $deploy);
+        $this->assertStringContainsString('exit 22', $deploy);
+        $this->assertStringContainsString('exit 31', $deploy);
+        $this->assertStringContainsString('exit 32', $deploy);
     }
 
     private function collector(DetectorFoundationEvidenceSource $source): DetectorFoundationCollector

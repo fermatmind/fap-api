@@ -848,7 +848,23 @@ task('seo:detector-foundation-receipt', function () {
     within('{{release_path}}/backend', function (): void {
         run(<<<'BASH'
 set -euo pipefail
+set +e
+{{bin/php}} -r 'require "vendor/autoload.php"; $app = require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); exit(config("seo_intel.enabled") ? 0 : 42);'
+config_status="$?"
+set -e
+if [ "$config_status" -eq 42 ]; then
+  exit 20
+fi
+if [ "$config_status" -ne 0 ]; then
+  exit 19
+fi
+set +e
 dry_run="$({{bin/php}} artisan seo-intel:collect --collector=detector_foundation --dry-run --canary --limit=10 --json --no-interaction --no-ansi)"
+dry_status="$?"
+set -e
+if [ "$dry_status" -ne 0 ]; then
+  exit 21
+fi
 printf '%s\n' "$dry_run"
 printf '%s' "$dry_run" | {{bin/php}} -r '
 $payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
@@ -863,9 +879,15 @@ $ok = ($payload["collector"] ?? null) === "detector_foundation"
     && ($payload["metadata"]["source"]["aggregate_fields_only"] ?? null) === true
     && ($payload["metadata"]["first_receipt"]["boundaries"]["raw_sensitive_fields_output"] ?? null) === false;
 exit($ok ? 0 : 1);
-'
+' || exit 22
 
+set +e
 controlled="$({{bin/php}} artisan seo-intel:collect --collector=detector_foundation --materialize-detector-queues --canary --limit=10 --json --no-interaction --no-ansi)"
+controlled_status="$?"
+set -e
+if [ "$controlled_status" -ne 0 ]; then
+  exit 31
+fi
 printf '%s\n' "$controlled"
 printf '%s' "$controlled" | {{bin/php}} -r '
 $payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
@@ -884,7 +906,7 @@ $ok = ($payload["collector"] ?? null) === "detector_foundation"
     && ($rerun["closed"] ?? null) === 0
     && ($payload["metadata"]["first_receipt"]["boundaries"]["raw_sensitive_fields_output"] ?? null) === false;
 exit($ok ? 0 : 1);
-'
+' || exit 32
 BASH);
     });
 });
