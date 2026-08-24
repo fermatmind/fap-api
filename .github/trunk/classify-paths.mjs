@@ -67,6 +67,7 @@ export function classifyPaths(inputPaths) {
     ]);
     const opsExecutionMigration = /^backend\/database\/migrations\/seo_intel\/\d{4}_\d{2}_\d{2}_\d+_expand_seo_execution_workflow\.php$/.test(path);
     const opsReadonlyGsc = matches(path, [
+      /^backend\/app\/Http\/Controllers\/API\/V0_5\/Ops\/SeoIntel\/SeoIntelDashboardController\.php$/,
       /^backend\/app\/Console\/Commands\/SeoIntelGscSyncCommand\.php$/,
       /^backend\/app\/Services\/SeoIntel\/Gsc(?:ReadModelSyncService|ReadonlyLiveAdapter)\.php$/,
       /^backend\/app\/Services\/SeoIntel\/GscRunCloseoutSummarizer\.php$/,

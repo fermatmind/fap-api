@@ -82,6 +82,7 @@ test("keeps Ops SEO dashboards in the application lane", () => {
 });
 test("keeps bounded readonly Ops GSC ingestion out of discoverability writes", () => {
   const result = classifyPaths([
+    "backend/app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php",
     "backend/app/Console/Commands/SeoIntelGscSyncCommand.php",
     "backend/app/Services/SeoIntel/GscReadModelSyncService.php",
     "backend/app/Services/SeoIntel/GscReadonlyLiveAdapter.php",

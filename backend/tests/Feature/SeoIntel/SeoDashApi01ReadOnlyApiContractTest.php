@@ -118,6 +118,7 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
                 '/api/v0.5/ops/seo-intel/trends',
                 '/api/v0.5/ops/seo-intel/page-performance',
                 '/api/v0.5/ops/seo-intel/opportunity-queue',
+                '/api/v0.5/ops/seo-intel/production-closeout',
             ] as $path) {
                 $this->actingAs($admin, (string) config('admin.guard', 'admin'))
                     ->getJson($path)

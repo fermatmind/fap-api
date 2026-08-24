@@ -49,6 +49,102 @@ final class GscRunCloseoutSummarizer
     }
 
     /**
+     * Build aggregate-only evidence from the persisted read model without an
+     * external GSC call or any database mutation.
+     *
+     * @param  list<string>  $searchTypes
+     * @return array<string,mixed>
+     */
+    public function summarizeCurrentReadModel(
+        ConnectionInterface $connection,
+        int $windowDays = 90,
+        array $searchTypes = ['web'],
+    ): array {
+        $windowDays = max(1, min($windowDays, 90));
+        $latest = $connection->table('seo_gsc_daily')
+            ->where('source_engine', 'google')
+            ->whereIn('search_type', $searchTypes)
+            ->max('report_date');
+        if (! is_string($latest) || $latest === '') {
+            return ['state' => 'unavailable', 'reason' => 'gsc_read_model_empty'];
+        }
+
+        $endDate = CarbonImmutable::parse($latest, 'UTC')->startOfDay();
+        $startDate = $endDate->subDays($windowDays - 1);
+        $query = $connection->table('seo_gsc_daily')
+            ->whereBetween('report_date', [$startDate->toDateString(), $endDate->toDateString()])
+            ->where('source_engine', 'google')
+            ->whereIn('search_type', $searchTypes);
+        $rows = (clone $query)->get([
+            'report_date',
+            'canonical_url_hash',
+            'canonical_url',
+            'query_hash',
+            'source_engine',
+            'device',
+            'country',
+            'search_type',
+            'clicks',
+            'impressions',
+            'average_position_milli',
+        ])->map(static fn (object $row): array => (array) $row)->all();
+        $detail = $this->metricSnapshot(collect($rows));
+        $aggregateRow = (clone $query)
+            ->selectRaw('COUNT(*) AS row_count')
+            ->selectRaw('COALESCE(SUM(clicks), 0) AS clicks')
+            ->selectRaw('COALESCE(SUM(impressions), 0) AS impressions')
+            ->selectRaw('COALESCE(SUM(CASE WHEN average_position_milli IS NOT NULL AND impressions > 0 THEN average_position_milli * impressions ELSE 0 END), 0) AS position_weight')
+            ->selectRaw('COALESCE(SUM(CASE WHEN average_position_milli IS NOT NULL AND impressions > 0 THEN impressions ELSE 0 END), 0) AS position_impressions')
+            ->first();
+        $aggregateClicks = (int) ($aggregateRow->clicks ?? 0);
+        $aggregateImpressions = (int) ($aggregateRow->impressions ?? 0);
+        $positionImpressions = (int) ($aggregateRow->position_impressions ?? 0);
+        $databaseAggregate = [
+            'row_count' => (int) ($aggregateRow->row_count ?? 0),
+            'clicks' => $aggregateClicks,
+            'impressions' => $aggregateImpressions,
+            'ctr_percent' => $aggregateImpressions > 0 ? round(($aggregateClicks / $aggregateImpressions) * 100, 4) : null,
+            'average_position' => $positionImpressions > 0
+                ? round(((int) ($aggregateRow->position_weight ?? 0) / $positionImpressions) / 1000, 4)
+                : null,
+        ];
+
+        return [
+            'state' => 'verified',
+            'gsc_data_quality' => [
+                'evidence_source' => 'persisted_production_read_model',
+                'property' => (string) config('seo_intel.gsc_property_url', 'unknown'),
+                'timezone' => 'UTC',
+                'window' => [
+                    'anchor' => 'latest_persisted_report_date',
+                    'start_date' => $startDate->toDateString(),
+                    'end_date' => $endDate->toDateString(),
+                    'window_days' => $windowDays,
+                ],
+                'filters' => [
+                    'country' => null,
+                    'device' => null,
+                    'search_types' => $searchTypes,
+                ],
+                'detail_snapshot' => $detail,
+                'database_aggregate' => $databaseAggregate,
+                'aggregate_matches_detail' => (int) $detail['row_count'] === $databaseAggregate['row_count']
+                    && (int) data_get($detail, 'metrics.clicks', -1) === $aggregateClicks
+                    && (int) data_get($detail, 'metrics.impressions', -1) === $aggregateImpressions
+                    && data_get($detail, 'metrics.average_position') === $databaseAggregate['average_position'],
+                'detail_read_limit' => null,
+                'aggregation_strategy' => 'unbounded_database_aggregate_reconciled_to_full_detail_set',
+                'fresh_api_pagination_receipt' => 'production_unproven',
+                'row_completeness' => 'production_unproven',
+                'scheduled_overlap' => 'production_unproven',
+                'scheduled_rerun_accumulation' => 'production_unproven',
+            ],
+            'unmapped_classification' => $this->unmappedClassification($connection, $rows),
+            'issue_clusters' => $this->issueClusters->closeoutSummary(),
+        ];
+    }
+
+    /**
      * @param  list<array<string,mixed>>  $rows
      * @param  list<string>  $searchTypes
      * @param  array<string,mixed>  $before
@@ -143,8 +239,13 @@ final class GscRunCloseoutSummarizer
         $unique = [];
         $combos = [];
 
+        $opaqueHashIndex = $this->opaqueHashClassificationIndex($truth, $backendAuthority);
         foreach ($unmappedRows as $row) {
-            $classified = $this->classifyUrl((string) ($row['canonical_url'] ?? ''), $truth, $backendAuthority);
+            $rawUrl = (string) ($row['canonical_url'] ?? '');
+            $rawHash = (string) ($row['canonical_url_hash'] ?? '');
+            $classified = $rawUrl !== ''
+                ? $this->classifyUrl($rawUrl, $truth, $backendAuthority)
+                : $this->classifyOpaqueHash($rawHash, $backendAuthority, $opaqueHashIndex);
             $identity = $classified['normalized_canonical_url_hash'] ?: (string) ($row['canonical_url_hash'] ?? 'missing');
             $unique[$identity] ??= $classified;
             $combos[hash('sha256', implode('|', [
@@ -174,6 +275,8 @@ final class GscRunCloseoutSummarizer
             'backend_authority_candidate_count' => $backendAuthority->count(),
             'classification_unit' => 'unique_normalized_canonical_url',
             'classification_authority' => 'backend_cms_and_persisted_url_truth_only',
+            'opaque_hash_fallback_count' => collect($unique)->where('opaque_hash_fallback', true)->count(),
+            'identity_resolution' => 'authority_normalized_hash_or_distinct_opaque_source_hash',
             'unknown_next_evidence' => 'backend_cms_publication_history_or_approved_alias_registry',
             'raw_url_retained_or_emitted' => false,
         ];
@@ -264,7 +367,110 @@ final class GscRunCloseoutSummarizer
             'root_cause' => $rootCause,
             'page_family' => $family,
             'locale' => $locale,
+            'opaque_hash_fallback' => false,
         ];
+    }
+
+    /**
+     * @param  Collection<string,mixed>  $backendAuthority
+     * @param  array<string,array<string,mixed>>  $opaqueHashIndex
+     * @return array<string,mixed>
+     */
+    private function classifyOpaqueHash(string $hash, Collection $backendAuthority, array $opaqueHashIndex): array
+    {
+        if ($hash === '') {
+            return $this->classification('', 'raw_canonical_missing', 'Other', 'unknown');
+        }
+        if ($backendAuthority->has($hash)) {
+            $record = $backendAuthority->get($hash);
+            $path = is_object($record) ? (string) parse_url((string) ($record->canonicalUrl ?? ''), PHP_URL_PATH) : '';
+
+            return $this->classification($hash, 'current_url_truth_missing', $this->pageFamily($path), $this->locale($path));
+        }
+        if (isset($opaqueHashIndex[$hash])) {
+            return $opaqueHashIndex[$hash];
+        }
+
+        return [
+            ...$this->classification($hash, 'unknown', 'Other', 'unknown'),
+            'opaque_hash_fallback' => true,
+        ];
+    }
+
+    /**
+     * @param  Collection<string,object>  $truth
+     * @param  Collection<string,mixed>  $backendAuthority
+     * @return array<string,array<string,mixed>>
+     */
+    private function opaqueHashClassificationIndex(Collection $truth, Collection $backendAuthority): array
+    {
+        $index = [];
+        foreach ($truth as $row) {
+            $canonical = (string) ($row->canonical_url ?? '');
+            $state = strtolower((string) ($row->indexability_state ?? ''));
+            $authority = strtolower((string) ($row->source_authority ?? ''));
+            $rootCause = $this->containsAny($state.' '.$authority, ['redirect', 'alias']) ? 'redirect_alias'
+                : ($this->containsAny($state, ['superseded', 'historical']) ? 'historical_url'
+                    : ($this->containsAny($state, ['retired', 'noindex', 'blocked']) ? 'retired_noindex'
+                        : ($this->containsAny($state, ['draft', 'unpublished', 'pending']) ? 'not_published' : null)));
+            $this->addCanonicalVariants($index, $canonical, $rootCause);
+        }
+        foreach ($backendAuthority as $record) {
+            if (is_object($record)) {
+                $this->addCanonicalVariants($index, (string) ($record->canonicalUrl ?? ''), null);
+            }
+        }
+
+        return $index;
+    }
+
+    /** @param array<string,array<string,mixed>> $index */
+    private function addCanonicalVariants(array &$index, string $canonicalUrl, ?string $authorityStateRootCause): void
+    {
+        $parts = parse_url($canonicalUrl);
+        if (! is_array($parts) || ! is_string($parts['path'] ?? null)) {
+            return;
+        }
+        $path = $this->normalizePath((string) $parts['path']);
+        $normalizedHash = hash('sha256', 'https://fermatmind.com'.$path);
+        $family = $this->pageFamily($path);
+        $locale = $this->locale($path);
+        $hostVariants = [
+            'https://www.fermatmind.com'.$path,
+            'http://fermatmind.com'.$path,
+            'http://www.fermatmind.com'.$path,
+        ];
+        if ($path !== '/') {
+            $hostVariants[] = 'https://fermatmind.com'.$path.'/';
+            $hostVariants[] = 'https://www.fermatmind.com'.$path.'/';
+        }
+        foreach ($hostVariants as $variant) {
+            $index[hash('sha256', $variant)] = $this->classification(
+                $normalizedHash,
+                $authorityStateRootCause ?? 'host_canonical_normalization',
+                $family,
+                $locale,
+            );
+        }
+
+        $localeVariants = [];
+        if (preg_match('#^/zh(/|$)#', $path) === 1) {
+            $localeVariants[] = preg_replace('#^/zh(/|$)#', '/zh-cn$1', $path);
+            $localeVariants[] = preg_replace('#^/zh(/|$)#', '/zh_CN$1', $path);
+        } elseif (preg_match('#^/en(/|$)#', $path) === 1) {
+            $localeVariants[] = preg_replace('#^/en(/|$)#', '/en-us$1', $path);
+            $localeVariants[] = preg_replace('#^/en(/|$)#', '/en_US$1', $path);
+        }
+        foreach (array_filter($localeVariants, 'is_string') as $variantPath) {
+            foreach (['https://fermatmind.com', 'https://www.fermatmind.com'] as $host) {
+                $index[hash('sha256', $host.$variantPath)] = $this->classification(
+                    $normalizedHash,
+                    $authorityStateRootCause ?? 'locale_path_normalization',
+                    $family,
+                    $locale,
+                );
+            }
+        }
     }
 
     private function normalizePath(string $path): string

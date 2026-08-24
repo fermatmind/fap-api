@@ -684,6 +684,8 @@ Route::prefix('v0.5')->group(function () {
                 ->name('api.v0_5.ops.seo_intel.page_performance');
             Route::get('/opportunity-queue', [SeoIntelDashboardController::class, 'opportunityQueue'])
                 ->name('api.v0_5.ops.seo_intel.opportunity_queue');
+            Route::get('/production-closeout', [SeoIntelDashboardController::class, 'productionCloseout'])
+                ->name('api.v0_5.ops.seo_intel.production_closeout');
             Route::get('/conversion-funnel', [SeoIntelDashboardController::class, 'conversionFunnel'])
                 ->name('api.v0_5.ops.seo_intel.conversion_funnel');
         });

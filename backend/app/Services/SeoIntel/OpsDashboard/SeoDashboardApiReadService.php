@@ -386,6 +386,12 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
     }
 
     /** @return array<string, mixed> */
+    public function productionCloseout(): array
+    {
+        return (new GscProductionCloseoutReadService($this->connectionName))->read();
+    }
+
+    /** @return array<string, mixed> */
     public function technicalAudits(int $limit = 25): array
     {
         return (new SeoTechnicalAuditReadService)->read($limit);
