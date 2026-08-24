@@ -218,35 +218,13 @@ final class CareerDisplayAssetComponentContract
         $quick = $page['career_quick_answers_block'] ?? null;
         $onet = $page['onet_structured_fields_block'] ?? null;
         if ($locale === 'en') {
-            return self::isSourceLocaleUnavailable($quick)
-                && self::isSourceLocaleUnavailable($onet);
-        }
-        if (! is_array($quick) || ! self::exactKeys($quick, ['availability', 'schema_version', 'heading', 'items'])
-            || ($quick['availability'] ?? null) !== 'published'
-            || ($quick['schema_version'] ?? null) !== 'career.quick_answers.v1'
-            || ! self::nonEmptyString($quick['heading'] ?? null)
-            || ! is_array($quick['items'] ?? null) || count($quick['items']) !== 3) {
-            return false;
-        }
-        foreach (['qa3', 'qa2', 'qa1'] as $index => $key) {
-            $item = $quick['items'][$index] ?? null;
-            if (! is_array($item) || ! self::exactKeys($item, ['key', 'question', 'answer', 'table'])
-                || ($item['key'] ?? null) !== $key
-                || ! self::nonEmptyString($item['question'] ?? null)
-                || ! self::nonEmptyString($item['answer'] ?? null)
-                || ! is_array($item['table'] ?? null)
-                || ! self::exactKeys($item['table'], ['rows'])
-                || ! self::validRows($item['table']['rows'] ?? null)) {
-                return false;
-            }
+            return (self::isSourceLocaleUnavailable($quick) && self::isSourceLocaleUnavailable($onet))
+                || (self::validPublishedQuickAnswers($quick, 'Career quick answers')
+                    && self::validPublishedOnetFields($onet, 'O*NET structured fields'));
         }
 
-        return is_array($onet)
-            && self::exactKeys($onet, ['availability', 'schema_version', 'heading', 'rows'])
-            && ($onet['availability'] ?? null) === 'published'
-            && ($onet['schema_version'] ?? null) === 'career.onet_structured_fields.v1'
-            && self::nonEmptyString($onet['heading'] ?? null)
-            && self::validRows($onet['rows'] ?? null);
+        return self::validPublishedQuickAnswers($quick, '职业速答')
+            && self::validPublishedOnetFields($onet, 'O*NET 结构化字段');
     }
 
     /** @param array<string,mixed> $page */
@@ -255,11 +233,14 @@ final class CareerDisplayAssetComponentContract
         $quick = $page['career_quick_answers_block'] ?? null;
         $onet = $page['onet_structured_fields_block'] ?? null;
         if ($locale === 'en') {
-            if (! self::isSourceLocaleUnavailable($quick)) {
+            if (self::isSourceLocaleUnavailable($quick) && self::isSourceLocaleUnavailable($onet)) {
+                return null;
+            }
+            if (! self::validPublishedQuickAnswers($quick, 'Career quick answers')) {
                 return 'CURRENT_DISPLAY_SURFACE_V43_EN_QUICK_ANSWERS_INVALID';
             }
 
-            return self::isSourceLocaleUnavailable($onet)
+            return self::validPublishedOnetFields($onet, 'O*NET structured fields')
                 ? null
                 : 'CURRENT_DISPLAY_SURFACE_V43_EN_ONET_FIELDS_INVALID';
         }
@@ -267,7 +248,7 @@ final class CareerDisplayAssetComponentContract
             || ! self::exactKeys($quick, ['availability', 'schema_version', 'heading', 'items'])
             || ($quick['availability'] ?? null) !== 'published'
             || ($quick['schema_version'] ?? null) !== 'career.quick_answers.v1'
-            || ! self::nonEmptyString($quick['heading'] ?? null)
+            || ($quick['heading'] ?? null) !== '职业速答'
             || ! is_array($quick['items'] ?? null)
             || count($quick['items']) !== 3) {
             return 'CURRENT_DISPLAY_SURFACE_V43_ZH_QUICK_ANSWERS_INVALID';
@@ -291,7 +272,7 @@ final class CareerDisplayAssetComponentContract
             || ! self::exactKeys($onet, ['availability', 'schema_version', 'heading', 'rows'])
             || ($onet['availability'] ?? null) !== 'published'
             || ($onet['schema_version'] ?? null) !== 'career.onet_structured_fields.v1'
-            || ! self::nonEmptyString($onet['heading'] ?? null)) {
+            || ($onet['heading'] ?? null) !== 'O*NET 结构化字段') {
             return 'CURRENT_DISPLAY_SURFACE_V43_ZH_ONET_FIELDS_INVALID';
         }
 
@@ -317,6 +298,41 @@ final class CareerDisplayAssetComponentContract
         }
 
         return true;
+    }
+
+    private static function validPublishedQuickAnswers(mixed $quick, string $heading): bool
+    {
+        if (! is_array($quick) || ! self::exactKeys($quick, ['availability', 'schema_version', 'heading', 'items'])
+            || ($quick['availability'] ?? null) !== 'published'
+            || ($quick['schema_version'] ?? null) !== 'career.quick_answers.v1'
+            || ($quick['heading'] ?? null) !== $heading
+            || ! is_array($quick['items'] ?? null) || count($quick['items']) !== 3) {
+            return false;
+        }
+        foreach (['qa3', 'qa2', 'qa1'] as $index => $key) {
+            $item = $quick['items'][$index] ?? null;
+            if (! is_array($item) || ! self::exactKeys($item, ['key', 'question', 'answer', 'table'])
+                || ($item['key'] ?? null) !== $key
+                || ! self::nonEmptyString($item['question'] ?? null)
+                || ! self::nonEmptyString($item['answer'] ?? null)
+                || ! is_array($item['table'] ?? null)
+                || ! self::exactKeys($item['table'], ['rows'])
+                || ! self::validRows($item['table']['rows'] ?? null)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static function validPublishedOnetFields(mixed $onet, string $heading): bool
+    {
+        return is_array($onet)
+            && self::exactKeys($onet, ['availability', 'schema_version', 'heading', 'rows'])
+            && ($onet['availability'] ?? null) === 'published'
+            && ($onet['schema_version'] ?? null) === 'career.onet_structured_fields.v1'
+            && ($onet['heading'] ?? null) === $heading
+            && self::validRows($onet['rows'] ?? null);
     }
 
     private static function isSourceLocaleUnavailable(mixed $component): bool

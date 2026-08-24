@@ -67,7 +67,7 @@ final class CareerCurrentEnBatchPreparer
         }
 
         $componentOrderHash = CareerCurrentAuthorityPackage::hashValue(
-            CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER,
+            CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER,
         );
         $perSlug = [];
         $enHashes = [];
@@ -79,8 +79,8 @@ final class CareerCurrentEnBatchPreparer
             $candidate = $this->candidateRow($baseline['rows'][$slug], $blocks);
             $this->assertCandidateScope($baseline['rows'][$slug], $candidate);
             $projection = $this->package->publicProjection($candidate, 'en');
-            if (count($projection['component_order']) !== 26
-                || array_values($projection['component_order']) !== CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER) {
+            if (count($projection['component_order']) !== 28
+                || array_values($projection['component_order']) !== CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER) {
                 throw new CareerTenBlockCompileFailure('CURRENT_EN_COMPONENT_CONTRACT_MISMATCH');
             }
             $projectionBytes = CareerCurrentAuthorityPackage::encodePrettyCanonical($projection);
@@ -130,7 +130,7 @@ final class CareerCurrentEnBatchPreparer
             'batch_set_sha256' => CareerCurrentAuthorityPackage::hashValue($batches),
             'cache_writes' => 0,
             'cms_writes' => 0,
-            'components_per_page' => 26,
+            'components_per_page' => 28,
             'contract_version' => self::CONTRACT_VERSION,
             'database_writes' => 0,
             'discoverability_writes' => 0,
@@ -167,7 +167,7 @@ final class CareerCurrentEnBatchPreparer
             'batch_sizes' => array_map(static fn (array $batch): int => $batch['target_count'], $batches),
             'before_after_bytes_unchanged' => true,
             'candidate_en_projection_changes' => $candidateEnChanges,
-            'components_per_page' => 26,
+            'components_per_page' => 28,
             'current_assets_sha256' => $currentBefore[$assetsPath],
             'current_zh_projection_aggregate_sha256' => CareerCurrentAuthorityPackage::hashValue($zhHashes),
             'current_manifest_sha256' => $currentBefore[$manifestPath],
@@ -298,6 +298,9 @@ final class CareerCurrentEnBatchPreparer
         $en['career_ai_description_block'] = ['body' => [$geo['one_line_definition']], 'heading' => $ai['ai_head_sub']];
         $en['responsibilities_block'] = $definition['duties'];
         $en['work_context_block'] = $definition['work_scene'];
+        $structured = new CareerStructuredComponentProjector;
+        $en['career_quick_answers_block'] = $structured->quickAnswers($definition, 'en');
+        $en['onet_structured_fields_block'] = $structured->onetStructuredFields($definition, 'en');
         $en['market_signal_card'] = ['callout' => $meta['signal_callout'], 'facts' => $meta['signal_facts'], 'intro' => $meta['signal_intro'], 'signals' => $meta['signal_list']];
         $en['adjacent_career_comparison_table'] = $compare['compare_rows'];
         $en['ai_impact_table'] = $ai;
@@ -318,6 +321,24 @@ final class CareerCurrentEnBatchPreparer
         $baseline['seo_payload_json']['en']['h1'] = $identity['title_en'];
         $baseline['seo_payload_json']['en']['title'] = $meta['meta_title'];
         $baseline['seo_payload_json']['en']['description'] = $meta['meta_description'];
+        $structuredMetadata = $baseline['metadata_json']['structured_components_v1'] ?? null;
+        $zhBindings = is_array($structuredMetadata)
+            && ($structuredMetadata['contract_version'] ?? null) === 'career.structured_components.locale_claim_bindings.v1'
+            ? ($structuredMetadata['locales']['zh-CN'] ?? null)
+            : $structuredMetadata;
+        if (! is_array($zhBindings)
+            || ($zhBindings['contract_version'] ?? null) !== 'career.structured_components.claim_bindings.v1'
+            || ! is_array($zhBindings['bindings'] ?? null)
+            || count($zhBindings['bindings']) !== 2) {
+            throw new CareerTenBlockCompileFailure('CURRENT_EN_ZH_CLAIM_BINDINGS_INVALID');
+        }
+        $baseline['metadata_json']['structured_components_v1'] = [
+            'contract_version' => 'career.structured_components.locale_claim_bindings.v1',
+            'locales' => [
+                'en' => $structured->evidenceBindings($definition, 'en'),
+                'zh-CN' => $zhBindings,
+            ],
+        ];
 
         return $baseline;
     }
@@ -332,7 +353,14 @@ final class CareerCurrentEnBatchPreparer
             $beforePage = &$before['page_payload_json'];
             $afterPage = &$after['page_payload_json'];
         }
-        unset($beforePage['en'], $afterPage['en'], $before['seo_payload_json']['en'], $after['seo_payload_json']['en']);
+        unset(
+            $beforePage['en'],
+            $afterPage['en'],
+            $before['seo_payload_json']['en'],
+            $after['seo_payload_json']['en'],
+            $before['metadata_json']['structured_components_v1'],
+            $after['metadata_json']['structured_components_v1'],
+        );
         if (! hash_equals(CareerCurrentAuthorityPackage::hashValue($before), CareerCurrentAuthorityPackage::hashValue($after))) {
             throw new CareerTenBlockCompileFailure('CURRENT_EN_CANDIDATE_SCOPE_INVALID');
         }
@@ -417,7 +445,14 @@ final class CareerCurrentEnBatchPreparer
     {
         $contract = [
             'identity.json' => ['slug' => 'string', 'title_en' => 'string', 'riasec' => 'string', 'riasec_short' => 'string'],
-            'definition.json' => ['quick_bound' => 'string', 'quick_how' => 'string', 'quick_suit' => 'string', 'def_callout' => 'string', 'definition' => 'string', 'duties' => 'list', 'work_scene' => 'string'],
+            'definition.json' => [
+                'quick_bound' => 'string', 'quick_how' => 'string', 'quick_suit' => 'string',
+                'def_callout' => 'string', 'definition' => 'string', 'duties' => 'list', 'work_scene' => 'string',
+                'qa3_q' => 'string', 'qa3_a' => 'string', 'qa3_table' => 'list',
+                'qa2_q' => 'string', 'qa2_a' => 'string', 'qa2_table' => 'list',
+                'qa1_q' => 'string', 'qa1_a' => 'string', 'qa1_table' => 'list',
+                'onet_struct' => 'list',
+            ],
             'salary.json' => ['bls_table' => 'list', 'us_growth' => 'string', 'us_median' => 'string'],
             'ai-impact.json' => ['ai_head_sub' => 'string'],
             'risk.json' => ['risk_badge' => 'string', 'risk_callout' => 'string', 'risk_contract' => 'string', 'risk_fact' => 'string', 'risk_list' => 'list', 'risk_path_table' => 'list'],

@@ -61,7 +61,17 @@ final class CareerCurrentEnBatchPreparerTest extends TestCase
         );
         self::assertSame($before['metadata_json']['presentation_v1'], $candidate['metadata_json']['presentation_v1']);
         self::assertSame($before['component_order_json'], $candidate['component_order_json']);
-        self::assertSame(26, count($package->publicProjection($candidate, 'en')['component_order']));
+        self::assertSame(28, count($package->publicProjection($candidate, 'en')['component_order']));
+        self::assertSame('published', data_get($candidate, 'page_payload_json.page.en.career_quick_answers_block.availability'));
+        self::assertSame('Career quick answers', data_get($candidate, 'page_payload_json.page.en.career_quick_answers_block.heading'));
+        self::assertSame(['qa3', 'qa2', 'qa1'], array_column(
+            data_get($candidate, 'page_payload_json.page.en.career_quick_answers_block.items'),
+            'key',
+        ));
+        self::assertSame('published', data_get($candidate, 'page_payload_json.page.en.onet_structured_fields_block.availability'));
+        self::assertSame('O*NET structured fields', data_get($candidate, 'page_payload_json.page.en.onet_structured_fields_block.heading'));
+        self::assertCount(2, data_get($candidate, 'metadata_json.structured_components_v1.locales.en.bindings'));
+        self::assertCount(2, data_get($candidate, 'metadata_json.structured_components_v1.locales.zh-CN.bindings'));
 
         $hrefs = [];
         $publicProjection = $package->publicProjection($candidate, 'en');

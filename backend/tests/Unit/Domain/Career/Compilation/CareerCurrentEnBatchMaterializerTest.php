@@ -55,7 +55,7 @@ final class CareerCurrentEnBatchMaterializerTest extends TestCase
             if ($completed === 21) {
                 self::assertSame(1046, $current['summary']['career_count']);
                 self::assertSame(2092, $current['summary']['locale_page_count']);
-                self::assertSame(26, $current['summary']['components_per_page']);
+                self::assertSame(28, $current['summary']['components_per_page']);
 
                 return;
             }
@@ -80,7 +80,7 @@ final class CareerCurrentEnBatchMaterializerTest extends TestCase
             self::assertFalse($first['diff']['software_developers_included']);
             self::assertSame(1046, $first['report']['package']['career_count']);
             self::assertSame(2092, $first['report']['package']['locale_page_count']);
-            self::assertSame(26, $first['report']['package']['components_per_page']);
+            self::assertSame(28, $first['report']['package']['components_per_page']);
             self::assertSame(0, $first['report']['database_writes']);
             self::assertSame(0, $first['report']['cache_writes']);
             self::assertSame(0, $first['report']['cms_writes']);
@@ -108,7 +108,7 @@ final class CareerCurrentEnBatchMaterializerTest extends TestCase
             self::assertTrue(mkdir($packageRoot, 0700, true));
             self::assertTrue(copy($firstOutput.'/candidate/assets.jsonl', $packageRoot.'/assets.jsonl'));
             self::assertTrue(copy($firstOutput.'/candidate/manifest.json', $packageRoot.'/manifest.json'));
-            foreach (['presentation-source-registry.json', 'supporting-evidence-v1.json'] as $auxiliary) {
+            foreach (['presentation-source-registry.json', 'structured-component-source-registry.json', 'supporting-evidence-v1.json'] as $auxiliary) {
                 $auxiliaryPath = base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH.'/'.$auxiliary);
                 if (is_file($auxiliaryPath)) {
                     self::assertTrue(copy($auxiliaryPath, $packageRoot.'/'.$auxiliary));

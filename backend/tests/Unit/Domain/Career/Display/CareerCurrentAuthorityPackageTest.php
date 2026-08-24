@@ -20,8 +20,14 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
         self::assertSame(2092, $package['summary']['locale_page_count']);
         self::assertSame(28, $package['summary']['components_per_page']);
         self::assertSame('v4.3', data_get($package, 'manifest.structural_contract.asset_version'));
+        self::assertSame(4184, data_get($package, 'manifest.structured_components_v1.claim_binding_count'));
         self::assertSame(2092, data_get($package, 'manifest.structured_components_v1.zh_published_component_count'));
-        self::assertSame(2092, data_get($package, 'manifest.structured_components_v1.en_unavailable_component_count'));
+        self::assertSame(2092, data_get($package, 'manifest.structured_components_v1.en_published_component_count'));
+        self::assertSame(0, data_get($package, 'manifest.structured_components_v1.en_unavailable_component_count'));
+        self::assertSame(
+            '690cce1c6ebefac3fd73030368cb1db8f5a2f6814f12aa3b91bd573f2cb33d9c',
+            data_get($package, 'manifest.structured_components_v1.en_source_aggregate_sha256'),
+        );
         self::assertSame(data_get($package, 'manifest.files.0.sha256'), $package['summary']['assets_sha256']);
         self::assertSame(
             CareerCurrentAuthorityPackage::declaredAssetsSha256(dirname(__DIR__, 5)),

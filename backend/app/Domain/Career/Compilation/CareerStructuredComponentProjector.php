@@ -15,12 +15,12 @@ final class CareerStructuredComponentProjector
     public const SOURCE_REGISTRY_VERSION = 'career.structured_components.source_registry.v1';
 
     /** @return array<string,mixed> */
-    public function quickAnswers(array $definition): array
+    public function quickAnswers(array $definition, string $locale = 'zh-CN'): array
     {
         return [
             'availability' => 'published',
             'schema_version' => self::QUICK_SCHEMA_VERSION,
-            'heading' => '职业速答',
+            'heading' => $locale === 'en' ? 'Career quick answers' : '职业速答',
             'items' => array_map(fn (string $key): array => [
                 'key' => $key,
                 'question' => $definition[$key.'_q'],
@@ -31,12 +31,12 @@ final class CareerStructuredComponentProjector
     }
 
     /** @return array<string,mixed> */
-    public function onetStructuredFields(array $definition): array
+    public function onetStructuredFields(array $definition, string $locale = 'zh-CN'): array
     {
         return [
             'availability' => 'published',
             'schema_version' => self::ONET_SCHEMA_VERSION,
-            'heading' => 'O*NET 结构化字段',
+            'heading' => $locale === 'en' ? 'O*NET structured fields' : 'O*NET 结构化字段',
             'rows' => $this->rows($definition['onet_struct']),
         ];
     }
@@ -51,7 +51,7 @@ final class CareerStructuredComponentProjector
     }
 
     /** @return array<string,mixed> */
-    public function evidenceBindings(array $definition): array
+    public function evidenceBindings(array $definition, string $locale = 'zh-CN'): array
     {
         $quickValue = [
             'qa3_q' => $definition['qa3_q'],
@@ -76,13 +76,17 @@ final class CareerStructuredComponentProjector
                         '$.definition.qa1_q', '$.definition.qa1_a', '$.definition.qa1_table',
                     ],
                     'normalized_value_sha256' => CareerCurrentAuthorityPackage::hashValue($quickValue),
-                    'source_registry_key' => 'career.ten_block.definition.quick_answers',
+                    'source_registry_key' => $locale === 'en'
+                        ? 'career.ten_block.en.definition.quick_answers'
+                        : 'career.ten_block.definition.quick_answers',
                 ],
                 [
                     'component_id' => 'onet_structured_fields_block',
                     'input_jsonpaths' => ['$.definition.onet_struct'],
                     'normalized_value_sha256' => CareerCurrentAuthorityPackage::hashValue($definition['onet_struct']),
-                    'source_registry_key' => 'career.ten_block.definition.onet_struct',
+                    'source_registry_key' => $locale === 'en'
+                        ? 'career.ten_block.en.definition.onet_struct'
+                        : 'career.ten_block.definition.onet_struct',
                 ],
             ],
         ];

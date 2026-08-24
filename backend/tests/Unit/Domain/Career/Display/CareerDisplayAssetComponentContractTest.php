@@ -49,7 +49,7 @@ final class CareerDisplayAssetComponentContractTest extends TestCase
         self::assertFalse(CareerDisplayAssetComponentContract::supports($reordered));
     }
 
-    public function test_v43_requires_published_zh_and_exact_unavailable_en_structured_components(): void
+    public function test_v43_requires_published_zh_and_accepts_rollback_unavailable_or_published_en_components(): void
     {
         $base = array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER, ['value' => 'verified']);
         $base['career_quick_answers_block'] = [
@@ -92,12 +92,20 @@ final class CareerDisplayAssetComponentContractTest extends TestCase
             CareerDisplayAssetComponentContract::pageFailureCodeForVersion($malformed, 'v4.3'),
         );
 
-        $translated = $payload;
-        $translated['page']['en']['career_quick_answers_block'] = $base['career_quick_answers_block'];
-        self::assertFalse(CareerDisplayAssetComponentContract::hasExactPagesForVersion($translated, 'v4.3'));
+        $published = $payload;
+        $published['page']['en']['career_quick_answers_block'] = $base['career_quick_answers_block'];
+        $published['page']['en']['career_quick_answers_block']['heading'] = 'Career quick answers';
+        $published['page']['en']['onet_structured_fields_block'] = $base['onet_structured_fields_block'];
+        $published['page']['en']['onet_structured_fields_block']['heading'] = 'O*NET structured fields';
+        self::assertTrue(CareerDisplayAssetComponentContract::hasExactPagesForVersion($published, 'v4.3'));
+        self::assertNull(CareerDisplayAssetComponentContract::pageFailureCodeForVersion($published, 'v4.3'));
+
+        $mixed = $published;
+        $mixed['page']['en']['onet_structured_fields_block'] = $unavailable;
+        self::assertFalse(CareerDisplayAssetComponentContract::hasExactPagesForVersion($mixed, 'v4.3'));
         self::assertSame(
-            'CURRENT_DISPLAY_SURFACE_V43_EN_QUICK_ANSWERS_INVALID',
-            CareerDisplayAssetComponentContract::pageFailureCodeForVersion($translated, 'v4.3'),
+            'CURRENT_DISPLAY_SURFACE_V43_EN_ONET_FIELDS_INVALID',
+            CareerDisplayAssetComponentContract::pageFailureCodeForVersion($mixed, 'v4.3'),
         );
     }
 

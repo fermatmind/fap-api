@@ -20,6 +20,7 @@ final class CareerCurrentAuthorityManifestRefresherTest extends TestCase
             @unlink($backendRoot.'/content_assets/career/current/assets.jsonl');
             @unlink($backendRoot.'/content_assets/career/current/manifest.json');
             @unlink($backendRoot.'/content_assets/career/current/presentation-source-registry.json');
+            @unlink($backendRoot.'/content_assets/career/current/structured-component-source-registry.json');
             @rmdir($backendRoot.'/content_assets/career/current');
             @rmdir($backendRoot.'/content_assets/career');
             @rmdir($backendRoot.'/content_assets');
@@ -90,18 +91,14 @@ final class CareerCurrentAuthorityManifestRefresherTest extends TestCase
         self::assertSame($manifestBytes, file_get_contents($manifestPath));
 
         $this->mutateFirstRow($assetsPath, static function (array &$row): void {
-            $pages = &$row['page_payload_json'];
-            if (is_array($pages['page'] ?? null)) {
-                $pages = &$pages['page'];
-            }
-            unset($pages['en']['career_path_block']);
+            unset($row['metadata_json']['structured_components_v1']['locales']['en']['bindings'][0]['source_registry_key']);
         });
         $manifestBeforeInvalidWrite = file_get_contents($manifestPath);
         try {
             $refresher->write($backendRoot);
             self::fail('Invalid assets must not rewrite the manifest.');
         } catch (CareerCurrentAuthorityPackageFailure $failure) {
-            self::assertSame('CURRENT_ASSET_STRUCTURE_INVALID', $failure->safeCode);
+            self::assertSame('CURRENT_STRUCTURED_COMPONENT_LINEAGE_INVALID', $failure->safeCode);
         }
         self::assertSame($manifestBeforeInvalidWrite, file_get_contents($manifestPath));
     }
@@ -115,6 +112,7 @@ final class CareerCurrentAuthorityManifestRefresherTest extends TestCase
         self::assertTrue(copy($sourceBackendRoot.'/content_assets/career/current/assets.jsonl', $target.'/assets.jsonl'));
         self::assertTrue(copy($sourceBackendRoot.'/content_assets/career/current/manifest.json', $target.'/manifest.json'));
         self::assertTrue(copy($sourceBackendRoot.'/content_assets/career/current/presentation-source-registry.json', $target.'/presentation-source-registry.json'));
+        self::assertTrue(copy($sourceBackendRoot.'/content_assets/career/current/structured-component-source-registry.json', $target.'/structured-component-source-registry.json'));
 
         return $backendRoot;
     }

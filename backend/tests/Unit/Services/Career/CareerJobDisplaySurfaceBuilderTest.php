@@ -145,8 +145,9 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $authority = app(CareerCurrentAuthorityPackage::class)->load(base_path());
         $row = $authority['rows']['accountants-and-auditors'];
         $pages = $row['page_payload_json']['page'];
+        $unavailable = ['availability' => 'unavailable', 'reason_code' => 'source_locale_unavailable'];
         foreach (['career_quick_answers_block', 'onet_structured_fields_block'] as $componentId) {
-            $pages['en'][$componentId] = array_reverse($pages['en'][$componentId], true);
+            $pages['en'][$componentId] = array_reverse($unavailable, true);
         }
         $row['page_payload_json']['page'] = $pages;
         $this->createDisplayAsset($occupation, app(CareerCurrentAuthorityPackage::class)->databaseAttributes($row));

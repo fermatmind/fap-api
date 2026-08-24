@@ -104,7 +104,7 @@ final class CareerCurrentEnBatchMaterializer
                 throw new CareerTenBlockCompileFailure('CURRENT_EN_CURRENT_PACKAGE_INVALID');
             }
             $this->writeFile($candidatePackageRoot.'/manifest.json', $manifestBytes);
-            foreach (['presentation-source-registry.json', 'supporting-evidence-v1.json'] as $auxiliary) {
+            foreach (['presentation-source-registry.json', 'structured-component-source-registry.json', 'supporting-evidence-v1.json'] as $auxiliary) {
                 $sourcePath = dirname($assetsPath).'/'.$auxiliary;
                 if (is_file($sourcePath) && ! is_link($sourcePath)) {
                     $bytes = file_get_contents($sourcePath);
