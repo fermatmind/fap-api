@@ -9,6 +9,7 @@ use Carbon\CarbonImmutable;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\Collection;
 
+/** Builds sanitized, aggregate-only evidence for a completed readonly GSC sync. */
 final class GscRunCloseoutSummarizer
 {
     private const ROOT_CAUSES = [
