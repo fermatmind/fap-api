@@ -64,6 +64,7 @@ export function classifyPaths(inputPaths) {
     const opsReadonlyGsc = matches(path, [
       /^backend\/app\/Console\/Commands\/SeoIntelGscSyncCommand\.php$/,
       /^backend\/app\/Services\/SeoIntel\/Gsc(?:ReadModelSyncService|ReadonlyLiveAdapter)\.php$/,
+      /^backend\/app\/Services\/SeoIntel\/GscRunCloseoutSummarizer\.php$/,
       /^backend\/scripts\/seo\/gsc_restricted_connect_proxy\.mjs$/,
       /^backend\/database\/migrations\/seo_intel\/\d{4}_\d{2}_\d{2}_\d+_expand_gsc_read_models\.php$/,
     ]);
