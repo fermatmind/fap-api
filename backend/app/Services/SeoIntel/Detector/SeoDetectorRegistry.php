@@ -46,6 +46,11 @@ final class SeoDetectorRegistry
         return [
             'http_404' => $this->issue('http_404', ['runtime_http'], ['bounded_http_observation', 'status_404']),
             'http_410' => $this->issue('http_410', ['runtime_http', 'backend_authority'], ['bounded_http_observation', 'status_410', 'retirement_authority_decision'], [
+                'applicability' => [
+                    'page_families' => [...PageFamilyPolicyRegistry::PUBLIC_FAMILY_IDS],
+                    'locales' => ['zh-CN', 'en'],
+                    'indexability_states' => ['indexable', 'retired'],
+                ],
                 'severity_policy' => $this->severityPolicy('pass_when_status_410_matches_explicit_retirement_authority'),
             ]),
             'http_5xx' => $this->issue('http_5xx', ['runtime_http'], ['bounded_http_observation', 'status_5xx'], [
