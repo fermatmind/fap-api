@@ -122,7 +122,11 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
             self::assertGreaterThanOrEqual(2, substr_count($workflow, $path));
         }
         self::assertStringContainsString(
-            '.public_readback.verified_locale_page_count == 2090',
+            '.public_readback.verified_slug_count == 1046',
+            $workflow,
+        );
+        self::assertStringContainsString(
+            '.public_readback.verified_locale_page_count == 2092',
             $workflow,
         );
     }
