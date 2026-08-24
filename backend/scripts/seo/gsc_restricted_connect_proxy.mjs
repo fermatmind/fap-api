@@ -38,7 +38,7 @@ function reject(socket, status, reason) {
 }
 
 export function createRestrictedProxy() {
-  return net.createServer((client) => {
+  const server = net.createServer((client) => {
     let header = Buffer.alloc(0);
     client.setTimeout(SOCKET_TIMEOUT_MS, () => client.destroy());
     client.on('error', () => {});
@@ -81,6 +81,10 @@ export function createRestrictedProxy() {
 
     client.on('data', onData);
   });
+
+  server.maxConnections = 16;
+
+  return server;
 }
 
 function portFromArgs(args) {

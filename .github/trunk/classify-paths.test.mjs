@@ -75,6 +75,7 @@ test("keeps bounded readonly Ops GSC ingestion out of discoverability writes", (
     "backend/app/Console/Commands/SeoIntelGscSyncCommand.php",
     "backend/app/Services/SeoIntel/GscReadModelSyncService.php",
     "backend/app/Services/SeoIntel/GscReadonlyLiveAdapter.php",
+    "backend/scripts/seo/gsc_restricted_connect_proxy.mjs",
     "backend/database/migrations/seo_intel/2026_08_23_140000_expand_gsc_read_models.php",
   ]);
   assert.equal(result.flags.application_code, true);
