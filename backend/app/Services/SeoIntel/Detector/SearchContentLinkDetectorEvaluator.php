@@ -145,7 +145,7 @@ final class SearchContentLinkDetectorEvaluator
             'outcome' => $triggered ? (string) $this->registry->detectors()[$detectorId]['output_type'] : 'pass',
             'root_cause' => $triggered
                 ? $this->safeAxis($evidence['root_cause_or_error_code'] ?? $detectorId)
-                : 'condition_not_observed',
+                : $this->safeAxis($evidence['root_cause_or_error_code'] ?? 'condition_not_observed'),
         ];
     }
 

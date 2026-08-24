@@ -161,7 +161,7 @@ final class TechnicalAuthorityDetectorEvaluator
             'outcome' => $issue ? 'issue' : 'pass',
             'root_cause' => $issue
                 ? $this->safeAxis($evidence['root_cause_or_error_code'] ?? $detectorId)
-                : 'condition_not_observed',
+                : $this->safeAxis($evidence['root_cause_or_error_code'] ?? 'condition_not_observed'),
         ];
     }
 
