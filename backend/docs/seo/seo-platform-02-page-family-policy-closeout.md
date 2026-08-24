@@ -6,22 +6,24 @@
 CMS lifecycle, Agent and authenticated SEO Operations reads. Its deterministic policy
 hash is `c4c8b6109b6e6bad19c5898cc0daf63f8d18d7ba5d1622f9025b5df37fd4bea9`.
 
-The 2026-08-24 current backend/CMS/public-authority snapshot contains 2,645 localized
-public authorities. Exactly 2,645 match one formal family; zero are unclassified and zero
-are ambiguous. The sitemap count is an equal consumer-consistency observation and did
-not create authority.
+The 2026-08-24 post-activation authenticated production read contains 2,623 localized
+public authorities. Exactly 2,623 match one formal family; zero are unclassified and zero
+are ambiguous. Two non-public authority rows are private-excluded before classification.
+The live sitemap exposes 2,643 URLs, 20 more than the current public-authority read; this
+is a consumer-consistency discrepancy and did not create authority.
 
 | Family | zh-CN | en | Total |
 | --- | ---: | ---: | ---: |
-| Tests | 9 | 9 | 18 |
-| Articles / Topics | 94 | 27 | 121 |
+| Tests | 11 | 11 | 22 |
+| Articles / Topics | 94 | 21 | 115 |
 | Career | 1,070 | 1,050 | 2,120 |
-| Personality | 182 | 175 | 357 |
-| Trust / Method / Help | 10 | 15 | 25 |
+| Personality | 165 | 158 | 323 |
+| Trust / Method / Help | 18 | 21 | 39 |
 | Other Public | 2 | 2 | 4 |
 
-Authority sources are Career runtime publish projection 2,092, backend CMS 515, exact
-registered backend public surfaces 26, and scale catalog 12. `other_public` accepts only
+Authority sources are Career runtime publish projection 2,092, backend CMS 491, exact
+registered backend public surfaces 26, and scale catalog 16. The source total includes
+the two private-excluded authority rows. `other_public` accepts only
 registered authority types and is never a fallback.
 
 ## Fail-closed boundaries
@@ -49,10 +51,13 @@ under `career.directory_authority.v1`. This is 26 below the 2,118 observation ba
 the live authority changed, while no count is encoded in classification. Sitemap remains
 a consumer consistency check.
 
-The latest authenticated production closeout still reports 17 current authority-qualified
-URL Truth gaps. The pre-policy closeout schema did not retain a family/locale breakdown,
-so this document does not invent one. The new authenticated policy output computes that
-breakdown from the shared classifier. The 17-item cohort is a read-only
+The post-activation authenticated production read reports 77 current authority-qualified
+URL Truth gaps, superseding the pre-deploy 17-row closeout observation. The cohort is
+computed from the current GSC read model and can change independently of deployment; this
+task performed no write that would create the change. The authenticated URL Truth API
+serves the family/locale breakdown from the shared classifier; the browser-visible
+aggregate exposes only the count, so this static closeout does not invent bucket values.
+The 77-item cohort is a read-only
 `SEO-PLATFORM-05` handoff; no URL Truth, GSC, CMS or search write or repair occurred.
 
 ## Compatibility and scope

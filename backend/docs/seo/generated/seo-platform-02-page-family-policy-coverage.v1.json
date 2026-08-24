@@ -5,26 +5,26 @@
   "policy_version": "seo-page-family-policy.v1",
   "policy_hash": "c4c8b6109b6e6bad19c5898cc0daf63f8d18d7ba5d1622f9025b5df37fd4bea9",
   "coverage": {
-    "current_public_authority_total": 2645,
-    "exactly_one_public_family_count": 2645,
+    "current_public_authority_total": 2623,
+    "exactly_one_public_family_count": 2623,
     "unclassified_count": 0,
     "ambiguous_count": 0,
-    "private_excluded_authority_count": 0,
+    "private_excluded_authority_count": 2,
     "complete": true
   },
   "family_locale_distribution": {
-    "tests": {"zh-CN": 9, "en": 9},
-    "articles_topics": {"zh-CN": 94, "en": 27},
+    "tests": {"zh-CN": 11, "en": 11},
+    "articles_topics": {"zh-CN": 94, "en": 21},
     "career": {"zh-CN": 1070, "en": 1050},
-    "personality": {"zh-CN": 182, "en": 175},
-    "trust_method_help": {"zh-CN": 10, "en": 15},
+    "personality": {"zh-CN": 165, "en": 158},
+    "trust_method_help": {"zh-CN": 18, "en": 21},
     "other_public": {"zh-CN": 2, "en": 2}
   },
   "authority_source_distribution": {
     "career_runtime_publish_projection": 2092,
-    "backend_cms": 515,
+    "backend_cms": 491,
     "backend_public_surface": 26,
-    "scale_catalog": 12
+    "scale_catalog": 16
   },
   "private_negative_set": {
     "test_count": 36,
@@ -42,16 +42,17 @@
   },
   "url_truth_missing_handoff": {
     "target_task": "SEO-PLATFORM-05",
-    "current_count": 17,
-    "count_evidence": "latest_authenticated_production_closeout",
-    "family_distribution": {"status": "not_captured_by_pre_policy_closeout_schema"},
-    "locale_distribution": {"status": "not_captured_by_pre_policy_closeout_schema"},
-    "runtime_policy_output_adds_distribution": true,
+    "current_count": 77,
+    "count_evidence": "post_activation_authenticated_seo_operations",
+    "family_distribution": {"status": "served_live_by_authenticated_url_truth_api_not_duplicated_from_browser_visible_aggregate"},
+    "locale_distribution": {"status": "served_live_by_authenticated_url_truth_api_not_duplicated_from_browser_visible_aggregate"},
+    "runtime_policy_output_includes_distribution": true,
     "write_or_repair_performed": false
   },
   "consumer_consistency": {
-    "public_sitemap_observed_count": 2645,
-    "count_matches_public_authority": true,
+    "public_sitemap_observed_count": 2643,
+    "count_matches_public_authority": false,
+    "sitemap_minus_public_authority": 20,
     "sitemap_used_as_authority": false
   },
   "registry_consumers": ["detector", "cms_lifecycle", "agent", "seo_operations"],
