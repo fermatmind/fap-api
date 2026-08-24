@@ -22,6 +22,7 @@ final class SeoIntelOpsSeoCrawlerObservationUiTest extends TestCase
         $this->assertStringContainsString('app(seooperationsreadservice::class)', $page);
         $this->assertStringContainsString('use app\\services\\seointel\\opsdashboard\\seocrawlerlogobservationreadservice;', $composition);
         $this->assertSame(2, substr_count($composition, 'new seocrawlerlogobservationreadservice'));
+        $this->assertStringContainsString("'search_submission_allowed' => false", $composition);
 
         preg_match_all("/data_get\\(\\\$platformoverview, 'crawler\\.([^']+)'\\)/", $view, $crawlerFields);
         $this->assertSame(['total_count'], array_values(array_unique($crawlerFields[1])));

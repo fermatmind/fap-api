@@ -228,7 +228,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mapfile -t changed_tests < <(git diff --diff-filter=AM --name-only '${{ needs.classify.outputs.base_sha }}' '${{ github.sha }}' -- 'backend/tests/**/*Test.php' | sed 's#^backend/##')
+          mapfile -t changed_php_test_paths < <(git diff --diff-filter=AM --name-only '${{ needs.classify.outputs.base_sha }}' '${{ github.sha }}' | grep -E '^backend/tests/.+Test\.php$' || true)
+          mapfile -t changed_tests < <(git diff --diff-filter=AM --name-only '${{ needs.classify.outputs.base_sha }}' '${{ github.sha }}' -- ':(top)backend/tests/**/*Test.php' | sed 's#^backend/##')
+          if [ "${#changed_php_test_paths[@]}" -ne "${#changed_tests[@]}" ]; then
+            echo "::error::Changed PHP tests were not fully selected: expected ${#changed_php_test_paths[@]}, selected ${#changed_tests[@]}." >&2
+            exit 1
+          fi
           if [ "${#changed_tests[@]}" -gt 0 ]; then php artisan test "${changed_tests[@]}" --no-ansi; fi
       - if: needs.classify.outputs.deploy != 'true'
         run: echo "Docs/rules/tests-only scope does not deploy."
