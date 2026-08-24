@@ -66,6 +66,19 @@ final class SeoIntelMigrationIsolationTest extends TestCase
     }
 
     #[Test]
+    public function detector_queue_expand_migration_can_resume_after_transactional_ddl_failure(): void
+    {
+        $migration = (string) file_get_contents(base_path(
+            'database/migrations/seo_intel/2026_08_25_010000_expand_detector_queue_materialization.php'
+        ));
+
+        $this->assertStringContainsString("hasColumn('seo_issue_queue', 'detector_id')", $migration);
+        $this->assertStringContainsString("hasTable('seo_detector_opportunities')", $migration);
+        $this->assertStringContainsString("dateTime('detected_at')", $migration);
+        $this->assertStringContainsString("dateTime('last_evidence_at')", $migration);
+    }
+
+    #[Test]
     public function non_seo_intel_cms_seo_migrations_remain_in_default_path(): void
     {
         foreach ([

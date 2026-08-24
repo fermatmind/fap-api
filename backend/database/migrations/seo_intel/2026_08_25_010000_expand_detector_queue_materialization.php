@@ -10,26 +10,34 @@ return new class extends Migration
 
     public function up(): void
     {
-        Schema::connection($this->getConnection())->table('seo_issue_queue', function (Blueprint $table): void {
-            $table->string('detector_id', 80)->nullable()->after('issue_type');
-            $table->string('detector_version', 32)->nullable()->after('detector_id');
-            $table->string('cluster_uid', 64)->nullable()->after('cluster');
-            $table->char('query_hash', 64)->nullable()->after('canonical_url_hash');
-            $table->string('authority_revision', 160)->nullable()->after('cluster_uid');
-            $table->string('url_truth_revision', 160)->nullable()->after('authority_revision');
-            $table->string('policy_version', 160)->nullable()->after('url_truth_revision');
-            $table->unsignedInteger('affected_url_count')->default(1)->after('policy_version');
-            $table->char('artifact_hash', 64)->nullable()->after('evidence_hash');
-            $table->timestamp('last_evidence_at')->nullable()->after('artifact_hash');
-            $table->unsignedInteger('reopen_count')->default(0)->after('last_evidence_at');
+        $schema = Schema::connection($this->getConnection());
 
-            $table->index('detector_id', 'seo_issue_queue_detector_idx');
-            $table->index('cluster_uid', 'seo_issue_queue_detector_cluster_idx');
-            $table->index('query_hash', 'seo_issue_queue_query_hash_idx');
-            $table->index('authority_revision', 'seo_issue_queue_authority_revision_idx');
-        });
+        if (! $schema->hasColumn('seo_issue_queue', 'detector_id')) {
+            $schema->table('seo_issue_queue', function (Blueprint $table): void {
+                $table->string('detector_id', 80)->nullable()->after('issue_type');
+                $table->string('detector_version', 32)->nullable()->after('detector_id');
+                $table->string('cluster_uid', 64)->nullable()->after('cluster');
+                $table->char('query_hash', 64)->nullable()->after('canonical_url_hash');
+                $table->string('authority_revision', 160)->nullable()->after('cluster_uid');
+                $table->string('url_truth_revision', 160)->nullable()->after('authority_revision');
+                $table->string('policy_version', 160)->nullable()->after('url_truth_revision');
+                $table->unsignedInteger('affected_url_count')->default(1)->after('policy_version');
+                $table->char('artifact_hash', 64)->nullable()->after('evidence_hash');
+                $table->timestamp('last_evidence_at')->nullable()->after('artifact_hash');
+                $table->unsignedInteger('reopen_count')->default(0)->after('last_evidence_at');
 
-        Schema::connection($this->getConnection())->create('seo_detector_opportunities', function (Blueprint $table): void {
+                $table->index('detector_id', 'seo_issue_queue_detector_idx');
+                $table->index('cluster_uid', 'seo_issue_queue_detector_cluster_idx');
+                $table->index('query_hash', 'seo_issue_queue_query_hash_idx');
+                $table->index('authority_revision', 'seo_issue_queue_authority_revision_idx');
+            });
+        }
+
+        if ($schema->hasTable('seo_detector_opportunities')) {
+            return;
+        }
+
+        $schema->create('seo_detector_opportunities', function (Blueprint $table): void {
             $table->id();
             $table->string('opportunity_uid', 128)->unique();
             $table->string('detector_id', 80);
@@ -48,8 +56,8 @@ return new class extends Migration
             $table->char('evidence_hash', 64);
             $table->char('artifact_hash', 64);
             $table->json('metadata_json')->nullable();
-            $table->timestamp('detected_at');
-            $table->timestamp('last_evidence_at');
+            $table->dateTime('detected_at');
+            $table->dateTime('last_evidence_at');
             $table->timestamp('resolved_at')->nullable();
             $table->unsignedInteger('reopen_count')->default(0);
             $table->timestamps();

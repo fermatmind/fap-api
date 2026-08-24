@@ -38,6 +38,7 @@ final class SeoPlatform04DetectorQueueMaterializerTest extends TestCase
     protected function tearDown(): void
     {
         DB::disconnect(self::CONNECTION);
+        DB::disconnect('seo_intel');
         parent::tearDown();
     }
 
@@ -189,6 +190,29 @@ final class SeoPlatform04DetectorQueueMaterializerTest extends TestCase
     }
 
     #[Test]
+    public function expand_migration_resumes_after_issue_columns_commit_but_opportunity_table_fails(): void
+    {
+        config([
+            'database.connections.seo_intel' => [
+                'driver' => 'sqlite',
+                'database' => ':memory:',
+                'prefix' => '',
+                'foreign_key_constraints' => true,
+            ],
+        ]);
+        DB::purge('seo_intel');
+        $this->createIssueQueue('seo_intel');
+        $migration = require base_path(
+            'database/migrations/seo_intel/2026_08_25_010000_expand_detector_queue_materialization.php'
+        );
+
+        $migration->up();
+
+        $this->assertTrue(Schema::connection('seo_intel')->hasColumn('seo_issue_queue', 'detector_id'));
+        $this->assertTrue(Schema::connection('seo_intel')->hasTable('seo_detector_opportunities'));
+    }
+
+    #[Test]
     public function expired_evidence_and_indirect_high_severity_fail_before_writes(): void
     {
         try {
@@ -320,9 +344,9 @@ final class SeoPlatform04DetectorQueueMaterializerTest extends TestCase
         return new DetectorQueueMaterializer(connectionName: self::CONNECTION);
     }
 
-    private function createIssueQueue(): void
+    private function createIssueQueue(string $connection = self::CONNECTION): void
     {
-        Schema::connection(self::CONNECTION)->create('seo_issue_queue', function (Blueprint $table): void {
+        Schema::connection($connection)->create('seo_issue_queue', function (Blueprint $table): void {
             $table->id();
             $table->string('issue_uid', 128)->unique();
             $table->string('issue_type', 80);
