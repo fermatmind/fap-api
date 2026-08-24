@@ -235,7 +235,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
                 'assets_sha256' => str_repeat('a', 64),
                 'career_count' => 1,
                 'locale_page_count' => 2,
-                'components_per_page' => 26,
+                'components_per_page' => 28,
             ],
         ];
 
@@ -245,8 +245,35 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
     /** @param array<string,mixed> $overrides @return array<string,mixed> */
     private function row(string $slug, string $title, array $overrides = []): array
     {
-        $page = array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER, ['value' => 'verified']);
+        $page = array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER, ['value' => 'verified']);
         $page['hero'] = ['title' => $title];
+        $page['career_quick_answers_block'] = [
+            'availability' => 'published',
+            'schema_version' => 'career.quick_answers.v1',
+            'heading' => '职业速答',
+            'items' => array_map(static fn (string $key): array => [
+                'key' => $key,
+                'question' => $key.' question',
+                'answer' => $key.' answer',
+                'table' => ['rows' => [[
+                    'label' => 'label', 'value' => 'value',
+                    'alternate_value' => null, 'secondary_value' => null,
+                ]],
+                ],
+            ], ['qa3', 'qa2', 'qa1']),
+        ];
+        $page['onet_structured_fields_block'] = [
+            'availability' => 'published',
+            'schema_version' => 'career.onet_structured_fields.v1',
+            'heading' => 'O*NET 结构化字段',
+            'rows' => [[
+                'label' => 'label', 'value' => 'value',
+                'alternate_value' => null, 'secondary_value' => null,
+            ]],
+        ];
+        $en = $page;
+        $en['career_quick_answers_block'] = ['availability' => 'unavailable', 'reason_code' => 'source_locale_unavailable'];
+        $en['onet_structured_fields_block'] = ['availability' => 'unavailable', 'reason_code' => 'source_locale_unavailable'];
 
         return array_replace([
             'canonical_slug' => $slug,
@@ -256,8 +283,8 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
             'asset_type' => CareerCurrentAuthorityPackage::ASSET_TYPE,
             'asset_role' => CareerCurrentAuthorityPackage::ASSET_ROLE,
             'status' => CareerCurrentAuthorityPackage::READY_STATUS,
-            'component_order_json' => CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER,
-            'page_payload_json' => ['en' => $page, 'zh' => $page],
+            'component_order_json' => CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER,
+            'page_payload_json' => ['en' => $en, 'zh' => $page],
             'seo_payload_json' => ['title' => $title],
             'sources_json' => ['references' => []],
             'structured_data_json' => ['@type' => 'Occupation'],

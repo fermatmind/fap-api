@@ -31,7 +31,7 @@ class SitemapGenerator
 {
     private const CAREER_DISPLAY_SURFACE_VERSION = 'display.surface.v1';
 
-    private const CAREER_DISPLAY_ASSET_VERSION = 'v4.2';
+    private const CAREER_DISPLAY_ASSET_VERSIONS = ['v4.2', 'v4.3'];
 
     private const CAREER_DISPLAY_ASSET_TYPE = 'career_job_public_display';
 
@@ -760,8 +760,8 @@ class SitemapGenerator
 
         $displayAssetLastmod = CareerJobDisplayAsset::query()
             ->where('surface_version', self::CAREER_DISPLAY_SURFACE_VERSION)
-            ->where('asset_version', self::CAREER_DISPLAY_ASSET_VERSION)
-            ->where('template_version', self::CAREER_DISPLAY_ASSET_VERSION)
+            ->whereIn('asset_version', self::CAREER_DISPLAY_ASSET_VERSIONS)
+            ->whereColumn('template_version', 'asset_version')
             ->where('status', self::CAREER_DISPLAY_READY_STATUS)
             ->where('asset_type', self::CAREER_DISPLAY_ASSET_TYPE)
             ->max('updated_at');
@@ -910,8 +910,8 @@ class SitemapGenerator
         $assets = CareerJobDisplayAsset::query()
             ->with('occupation')
             ->where('surface_version', self::CAREER_DISPLAY_SURFACE_VERSION)
-            ->where('asset_version', self::CAREER_DISPLAY_ASSET_VERSION)
-            ->where('template_version', self::CAREER_DISPLAY_ASSET_VERSION)
+            ->whereIn('asset_version', self::CAREER_DISPLAY_ASSET_VERSIONS)
+            ->whereColumn('template_version', 'asset_version')
             ->where('status', self::CAREER_DISPLAY_READY_STATUS)
             ->where('asset_type', self::CAREER_DISPLAY_ASSET_TYPE)
             ->orderBy('canonical_slug')
@@ -955,7 +955,7 @@ class SitemapGenerator
         }
 
         $componentOrder = is_array($asset->component_order_json) ? array_values($asset->component_order_json) : [];
-        if (! CareerDisplayAssetComponentContract::supports($componentOrder)) {
+        if (! CareerDisplayAssetComponentContract::matchesVersion($componentOrder, (string) $asset->asset_version)) {
             return false;
         }
 

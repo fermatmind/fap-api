@@ -136,10 +136,10 @@ try {
 
     if (($result['package']['career_count'] ?? null) !== 1046
         || ($result['package']['locale_page_count'] ?? null) !== 2092
-        || ($result['package']['components_per_page'] ?? null) !== 26
+        || ($result['package']['components_per_page'] ?? null) !== 28
         || ($result['authority']['target_count'] ?? null) !== 1046
         || ($result['authority']['unique_slug_count'] ?? null) !== 1046
-        || ($result['authority']['component_26_count'] ?? null) !== 1046
+        || ($result['authority']['component_28_count'] ?? null) !== 1046
         || ($result['manual_hold_verified'] ?? null) !== true
         || ($fullScan && ($result['public_readback']['verified_locale_page_count'] ?? null) !== 2092)
         || ($result['write_counts']['occupation_write_count'] ?? null) !== 0

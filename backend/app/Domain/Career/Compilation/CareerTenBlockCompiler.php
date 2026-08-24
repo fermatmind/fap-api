@@ -74,7 +74,7 @@ final class CareerTenBlockCompiler
                 'slug' => $slug,
                 'profile' => $detected['profile'],
                 'locale_count' => 2,
-                'component_count' => count(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER),
+                'component_count' => count(CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER),
                 'mapped_file_count' => count($blocks),
                 'orphan_fields' => [],
                 'omitted_fields' => $omittedFields,
@@ -180,10 +180,19 @@ final class CareerTenBlockCompiler
         if (isset($claimKeys['work_context.summary'])) {
             $zh['work_context_block'] = $definition['work_scene'];
         }
+        $structured = new CareerStructuredComponentProjector;
+        $zh['career_quick_answers_block'] = $structured->quickAnswers($definition);
+        $zh['onet_structured_fields_block'] = $structured->onetStructuredFields($definition);
         if (isset($claimKeys['faq.items'])) {
             $zh['faq_block'] = ['items' => $faqItems];
         }
         $baseline['page_payload_json']['page']['zh'] = $zh;
+        $baseline['page_payload_json']['page']['en']['career_quick_answers_block'] = $structured->unavailable();
+        $baseline['page_payload_json']['page']['en']['onet_structured_fields_block'] = $structured->unavailable();
+        $baseline['asset_version'] = CareerCurrentAuthorityPackage::ASSET_VERSION;
+        $baseline['template_version'] = CareerCurrentAuthorityPackage::ASSET_VERSION;
+        $baseline['component_order_json'] = CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER;
+        $baseline['metadata_json']['structured_components_v1'] = $structured->evidenceBindings($definition);
         if (isset($claimKeys['identity.title_zh'])) {
             $baseline['seo_payload_json']['zh']['h1'] = $identity['title_zh'];
         }

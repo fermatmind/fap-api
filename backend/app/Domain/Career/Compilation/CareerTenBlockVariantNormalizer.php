@@ -17,6 +17,10 @@ final class CareerTenBlockVariantNormalizer
             'files' => $generic['files'],
             'canonical_tables' => [
                 'definition' => $this->definitionTables($blocks['definition.json']),
+                'quick_answers' => $this->quickAnswers($blocks['definition.json']),
+                'onet_structured_fields' => [
+                    'rows' => $this->definitionTables($blocks['definition.json'])['onet_struct'],
+                ],
                 'ai_personas' => $this->aiPersonas($blocks['ai-impact.json']['ai_s5_persona']),
                 'ai_tools' => $this->aiTools($blocks['ai-impact.json']['ai_s6_tools']),
                 'salary' => $this->salaryTables($blocks['salary.json']),
@@ -42,6 +46,19 @@ final class CareerTenBlockVariantNormalizer
         ];
     }
 
+    /** @return list<array<string,mixed>> */
+    private function quickAnswers(array $definition): array
+    {
+        $tables = $this->definitionTables($definition);
+
+        return array_map(static fn (string $key): array => [
+            'key' => $key,
+            'question' => $definition[$key.'_q'],
+            'answer' => $definition[$key.'_a'],
+            'table' => ['rows' => $tables[$key.'_table']],
+        ], ['qa3', 'qa2', 'qa1']);
+    }
+
     /** @return array<string,list<array<string,mixed>>> */
     private function definitionTables(array $definition): array
     {
@@ -49,13 +66,15 @@ final class CareerTenBlockVariantNormalizer
         foreach (['qa1_table', 'qa2_table', 'qa3_table', 'onet_struct'] as $key) {
             $tables[$key] = array_map(static function (array $row): array {
                 $standard = array_key_exists('k', $row);
+                $alternate = ! $standard && array_key_exists('value', $row) && array_key_exists('v', $row)
+                    ? $row['v'] : null;
+                $secondary = $row['value2'] ?? null;
 
                 return [
                     'label' => $standard ? $row['k'] : $row['label'],
                     'value' => $standard ? $row['v'] : ($row['value'] ?? $row['v'] ?? null),
-                    'alternate_value' => ! $standard && array_key_exists('value', $row) && array_key_exists('v', $row)
-                        ? $row['v'] : null,
-                    'secondary_value' => $row['value2'] ?? null,
+                    'alternate_value' => is_string($alternate) && trim($alternate) === '' ? null : $alternate,
+                    'secondary_value' => is_string($secondary) && trim($secondary) === '' ? null : $secondary,
                     'column_contract' => array_keys($row),
                 ];
             }, $definition[$key]);
@@ -139,18 +158,29 @@ final class CareerTenBlockVariantNormalizer
         }, $rows);
     }
 
-    /** @param array<string,array<string,mixed>> $blocks @return list<array{input_jsonpath:string,disposition:string,reason:?string}> */
+    /** @param array<string,array<string,mixed>> $blocks @return list<array<string,mixed>> */
     private function coverage(array $blocks): array
     {
+        $publicDefinitionFields = array_fill_keys([
+            'qa1_q', 'qa1_a', 'qa1_table', 'qa2_q', 'qa2_a', 'qa2_table',
+            'qa3_q', 'qa3_a', 'qa3_table', 'onet_struct',
+        ], true);
         $coverage = [];
         foreach ($blocks as $file => $value) {
             foreach (array_keys($value) as $key) {
                 $metadata = ($file === 'geo.json' && $key === 'migrated_from_content_json')
                     || ($file === 'faq.json' && $key === 'intent');
+                $public = $file === 'definition.json' && isset($publicDefinitionFields[$key]);
                 $coverage[] = [
                     'input_jsonpath' => '$.'.substr($file, 0, -5).'.'.$key,
-                    'disposition' => $metadata ? 'intentional_internal_metadata' : 'mapped',
-                    'reason' => $metadata ? 'preserved in provenance IR and excluded from public copy synthesis' : null,
+                    'ir_disposition' => 'mapped_to_ir',
+                    'public_disposition' => $metadata
+                        ? 'omitted_with_reason'
+                        : ($public ? 'mapped_to_public_component' : 'mapped_to_ir'),
+                    'disposition' => $metadata
+                        ? 'omitted_with_reason'
+                        : ($public ? 'mapped_to_public_component' : 'mapped_to_ir'),
+                    'reason' => $metadata ? 'preserved in provenance IR and excluded from public projection' : null,
                 ];
             }
         }

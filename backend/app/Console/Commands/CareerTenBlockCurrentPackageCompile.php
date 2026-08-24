@@ -69,6 +69,11 @@ final class CareerTenBlockCurrentPackageCompile extends Command
                 throw new CareerTenBlockCompileFailure('PRESENTATION_V1_SOURCE_REGISTRY_MISSING');
             }
             $this->write($packageRoot.'/presentation-source-registry.json', (string) file_get_contents($registrySource));
+            $structuredRegistrySource = base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH.'/structured-component-source-registry.json');
+            if (! is_file($structuredRegistrySource) || is_link($structuredRegistrySource)) {
+                throw new CareerTenBlockCompileFailure('TEN_BLOCK_STRUCTURED_COMPONENT_SOURCE_REGISTRY_INVALID');
+            }
+            $this->write($packageRoot.'/structured-component-source-registry.json', (string) file_get_contents($structuredRegistrySource));
             $this->write(
                 $packageRoot.'/manifest.json',
                 CareerCurrentAuthorityPackage::encodePrettyCanonical($result['manifest_template']),

@@ -24,6 +24,19 @@ final class CareerTenBlockVariantNormalizerTest extends TestCase
 
         $ir = (new CareerTenBlockVariantNormalizer)->normalize($blocks, $expected, []);
         self::assertNotEmpty($ir['field_coverage']);
+        self::assertSame(['qa3', 'qa2', 'qa1'], array_column($ir['canonical_tables']['quick_answers'], 'key'));
+        self::assertSame('value', $ir['canonical_tables']['quick_answers'][0]['question']);
+        self::assertSame('value', $ir['canonical_tables']['quick_answers'][0]['answer']);
+        self::assertSame(
+            $ir['canonical_tables']['definition']['onet_struct'],
+            $ir['canonical_tables']['onet_structured_fields']['rows'],
+        );
+        foreach ($ir['field_coverage'] as $coverage) {
+            if (preg_match('/\.(?:qa[123]_(?:q|a|table)|onet_struct)\z/', $coverage['input_jsonpath']) === 1) {
+                self::assertSame('mapped_to_ir', $coverage['ir_disposition']);
+                self::assertSame('mapped_to_public_component', $coverage['public_disposition']);
+            }
+        }
         self::assertNotContains('产出', $ir['canonical_tables']['comparison']['semantic_columns']);
         if ($variant === 'role_focus_output') {
             self::assertSame(['role', 'focus', 'output'], $ir['canonical_tables']['comparison']['semantic_columns']);
@@ -50,6 +63,21 @@ final class CareerTenBlockVariantNormalizerTest extends TestCase
 
         self::assertSame('secondary', $ir['canonical_tables']['definition']['onet_struct'][0]['secondary_value']);
         self::assertSame(['label', 'value', 'value2'], $ir['canonical_tables']['definition']['onet_struct'][0]['column_contract']);
+        self::assertSame('secondary', $ir['canonical_tables']['onet_structured_fields']['rows'][0]['secondary_value']);
+    }
+
+    public function test_empty_optional_value2_is_canonicalized_to_null_without_losing_its_column_contract(): void
+    {
+        $blocks = $this->blocks('health-educators', 'value2');
+        $blocks['definition.json']['onet_struct'][0]['value2'] = '';
+        $profile = (new CareerTenBlockVariantSchema)->detectAndValidate($blocks);
+        $ir = (new CareerTenBlockVariantNormalizer)->normalize($blocks, $profile, []);
+
+        self::assertNull($ir['canonical_tables']['onet_structured_fields']['rows'][0]['secondary_value']);
+        self::assertSame(
+            ['label', 'value', 'value2'],
+            $ir['canonical_tables']['onet_structured_fields']['rows'][0]['column_contract'],
+        );
     }
 
     public function test_english_value_and_v_columns_remain_distinct(): void
@@ -61,6 +89,7 @@ final class CareerTenBlockVariantNormalizerTest extends TestCase
 
         self::assertSame('value', $ir['canonical_tables']['definition']['qa1_table'][0]['value']);
         self::assertSame('alternate', $ir['canonical_tables']['definition']['qa1_table'][0]['alternate_value']);
+        self::assertSame('alternate', $ir['canonical_tables']['quick_answers'][2]['table']['rows'][0]['alternate_value']);
     }
 
     public function test_variant_links_resolve_to_canonical_targets_without_mutating_source_identity(): void

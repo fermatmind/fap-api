@@ -18,7 +18,10 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
 
         self::assertSame(1046, $package['summary']['career_count']);
         self::assertSame(2092, $package['summary']['locale_page_count']);
-        self::assertSame(26, $package['summary']['components_per_page']);
+        self::assertSame(28, $package['summary']['components_per_page']);
+        self::assertSame('v4.3', data_get($package, 'manifest.structural_contract.asset_version'));
+        self::assertSame(2092, data_get($package, 'manifest.structured_components_v1.zh_published_component_count'));
+        self::assertSame(2092, data_get($package, 'manifest.structured_components_v1.en_unavailable_component_count'));
         self::assertSame(data_get($package, 'manifest.files.0.sha256'), $package['summary']['assets_sha256']);
         self::assertSame(
             CareerCurrentAuthorityPackage::declaredAssetsSha256(dirname(__DIR__, 5)),
@@ -124,19 +127,19 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
     {
         $page = array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER, ['value' => 'verified']);
         $payload = ['en' => $page, 'zh' => $page];
-        self::assertTrue(CareerDisplayAssetComponentContract::hasExactCurrentPages($payload));
+        self::assertTrue(CareerDisplayAssetComponentContract::hasExactPagesForVersion($payload, 'v4.2'));
 
         $missing = $payload;
         unset($missing['en']['career_path_block']);
-        self::assertFalse(CareerDisplayAssetComponentContract::hasExactCurrentPages($missing));
+        self::assertFalse(CareerDisplayAssetComponentContract::hasExactPagesForVersion($missing, 'v4.2'));
 
         $unknown = $payload;
         $unknown['zh']['sections'] = [];
-        self::assertFalse(CareerDisplayAssetComponentContract::hasExactCurrentPages($unknown));
+        self::assertFalse(CareerDisplayAssetComponentContract::hasExactPagesForVersion($unknown, 'v4.2'));
 
         $placeholder = $payload;
         $placeholder['en']['hero'] = ['content_available' => false];
-        self::assertFalse(CareerDisplayAssetComponentContract::hasExactCurrentPages($placeholder));
+        self::assertFalse(CareerDisplayAssetComponentContract::hasExactPagesForVersion($placeholder, 'v4.2'));
     }
 
     public function test_superseded_normal_display_writers_are_absent_and_explicit_exceptions_remain(): void

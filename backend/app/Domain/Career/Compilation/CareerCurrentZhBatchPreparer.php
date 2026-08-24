@@ -60,7 +60,7 @@ final class CareerCurrentZhBatchPreparer
         }
 
         $componentOrderHash = CareerCurrentAuthorityPackage::hashValue(
-            CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER,
+            CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER,
         );
         $perSlug = [];
         $zhHashes = [];
@@ -71,14 +71,14 @@ final class CareerCurrentZhBatchPreparer
             $blocks = $this->readBlocks($sourceRoot, $slug);
             $candidate = $this->candidateRow($baseline['rows'][$slug], $blocks);
             $projection = $this->package->publicProjection($candidate, 'zh-CN');
-            if (count($projection['component_order']) !== 26
-                || array_values($projection['component_order']) !== CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER) {
+            if (count($projection['component_order']) !== 28
+                || array_values($projection['component_order']) !== CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER) {
                 throw new CareerTenBlockCompileFailure('CURRENT_ZH_COMPONENT_CONTRACT_MISMATCH');
             }
             $projectionBytes = CareerCurrentAuthorityPackage::encodePrettyCanonical($projection);
             $this->write($projectionRoot.'/'.$slug.'.json', $projectionBytes);
             $zhHash = hash('sha256', CareerCurrentAuthorityPackage::encodeCanonical($projection));
-            $enHash = CareerCurrentAuthorityPackage::hashValue($this->package->publicProjection($baseline['rows'][$slug], 'en'));
+            $enHash = CareerCurrentAuthorityPackage::hashValue($this->package->publicProjection($candidate, 'en'));
             if (! hash_equals($this->package->publicContentHash($baseline['rows'][$slug], 'zh-CN'), $this->package->publicContentHash($candidate, 'zh-CN'))) {
                 $candidateZhChanges++;
             }
@@ -103,7 +103,7 @@ final class CareerCurrentZhBatchPreparer
             $batch['source_aggregate_sha256'] = CareerCurrentAuthorityPackage::hashValue($targetSourceHashes);
             $batch['candidate_projection_sha256'] = CareerCurrentAuthorityPackage::hashValue($targetProjectionHashes);
             $batch['expected_zh_changed_pages'] = count($batch['target_slugs']);
-            $batch['expected_en_changed_pages'] = 0;
+            $batch['expected_en_changed_pages'] = count($batch['target_slugs']);
             $batches[] = $batch;
             $this->writeJson($batchRoot.'/'.$batch['batch_id'].'.json', $batch);
         }
@@ -122,11 +122,11 @@ final class CareerCurrentZhBatchPreparer
             'batch_set_sha256' => CareerCurrentAuthorityPackage::hashValue($batches),
             'cache_writes' => 0,
             'cms_writes' => 0,
-            'components_per_page' => 26,
+            'components_per_page' => 28,
             'contract_version' => self::CONTRACT_VERSION,
             'database_writes' => 0,
             'discoverability_writes' => 0,
-            'en_changed_locale_pages' => 0,
+            'en_changed_locale_pages' => count($perSlug),
             'per_slug' => $perSlug,
             'pointer_writes' => 0,
             'search_submissions' => 0,
@@ -149,7 +149,7 @@ final class CareerCurrentZhBatchPreparer
             'candidate_zh_projection_changes' => $candidateZhChanges,
             'compiler_contract_changes' => 1,
             'current_package_changes' => 0,
-            'en_projection_changes' => 0,
+            'en_projection_changes' => count($perSlug),
             'runtime_writes' => 0,
             'source_asset_changes' => 0,
         ];
@@ -158,7 +158,7 @@ final class CareerCurrentZhBatchPreparer
             'batch_sizes' => array_map(static fn (array $batch): int => $batch['target_count'], $batches),
             'before_after_bytes_unchanged' => true,
             'candidate_zh_projection_changes' => $candidateZhChanges,
-            'components_per_page' => 26,
+            'components_per_page' => 28,
             'current_assets_sha256' => $currentBefore[$assetsPath],
             'current_en_projection_aggregate_sha256' => CareerCurrentAuthorityPackage::hashValue($enHashes),
             'current_manifest_sha256' => $currentBefore[$manifestPath],
@@ -172,7 +172,7 @@ final class CareerCurrentZhBatchPreparer
             'search_submissions' => 0,
             'duplicate_target_slugs' => $batchPlan['duplicate_target_slugs'],
             'en_projection_aggregate_sha256' => CareerCurrentAuthorityPackage::hashValue($enHashes),
-            'en_changed_pages' => 0,
+            'en_changed_pages' => count($perSlug),
             'maturity_exclusions' => 0,
             'missing_target_slugs' => $batchPlan['missing_target_slugs'],
             'ready_now_dependency' => false,
@@ -248,15 +248,15 @@ final class CareerCurrentZhBatchPreparer
     }
 
     /** @param array<string,mixed> $baseline @return array<string,mixed> */
-    public function candidateRowForSource(string $sourceRoot, string $slug, array $baseline): array
+    public function candidateRowForSource(string $sourceRoot, string $slug, array $baseline, bool $upgradeV43 = true): array
     {
         $sourceRoot = $this->sourceRoot($sourceRoot);
 
-        return $this->candidateRow($baseline, $this->readBlocks($sourceRoot, $slug));
+        return $this->candidateRow($baseline, $this->readBlocks($sourceRoot, $slug), $upgradeV43);
     }
 
     /** @param array<string,mixed> $baseline @param array<string,array<string,mixed>> $blocks @return array<string,mixed> */
-    private function candidateRow(array $baseline, array $blocks): array
+    private function candidateRow(array $baseline, array $blocks, bool $upgradeV43 = true): array
     {
         $identity = $blocks['identity.json'];
         $definition = $blocks['definition.json'];
@@ -284,6 +284,11 @@ final class CareerCurrentZhBatchPreparer
         $zh['career_ai_description_block'] = ['body' => [$geo['one_line_definition']], 'heading' => $ai['ai_head_sub']];
         $zh['responsibilities_block'] = $definition['duties'];
         $zh['work_context_block'] = $definition['work_scene'];
+        if ($upgradeV43) {
+            $structured = new CareerStructuredComponentProjector;
+            $zh['career_quick_answers_block'] = $structured->quickAnswers($definition);
+            $zh['onet_structured_fields_block'] = $structured->onetStructuredFields($definition);
+        }
         $zh['market_signal_card'] = ['callout' => $meta['signal_callout'], 'facts' => $meta['signal_facts'], 'intro' => $meta['signal_intro'], 'signals' => $meta['signal_list']];
         $zh['adjacent_career_comparison_table'] = $compare['compare_rows'];
         $zh['ai_impact_table'] = $ai;
@@ -298,14 +303,62 @@ final class CareerCurrentZhBatchPreparer
         $zh['boundary_notice'] = [$risk['risk_callout'], $fit['disclaimer']];
         if ($pagesWrapped) {
             $baseline['page_payload_json']['page']['zh'] = $zh;
+            if ($upgradeV43) {
+                $baseline['page_payload_json']['page']['en']['career_quick_answers_block'] = $structured->unavailable();
+                $baseline['page_payload_json']['page']['en']['onet_structured_fields_block'] = $structured->unavailable();
+            }
         } else {
             $baseline['page_payload_json']['zh'] = $zh;
+            if ($upgradeV43) {
+                $baseline['page_payload_json']['en']['career_quick_answers_block'] = $structured->unavailable();
+                $baseline['page_payload_json']['en']['onet_structured_fields_block'] = $structured->unavailable();
+            }
+        }
+        if ($upgradeV43) {
+            $baseline['asset_version'] = CareerCurrentAuthorityPackage::ASSET_VERSION;
+            $baseline['template_version'] = CareerCurrentAuthorityPackage::ASSET_VERSION;
+            $baseline['component_order_json'] = CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER;
+            $baseline['metadata_json']['structured_components_v1'] = $structured->evidenceBindings($definition);
         }
         $baseline['seo_payload_json']['zh']['h1'] = $identity['title_zh'];
         $baseline['seo_payload_json']['zh']['title'] = $meta['meta_title'];
         $baseline['seo_payload_json']['zh']['description'] = $meta['meta_description'];
+        $baseline['structured_data_json']['faq_page']['zh'] = $this->faqPage($zh['faq_block']['items']);
+        $enPage = $pagesWrapped
+            ? ($baseline['page_payload_json']['page']['en'] ?? null)
+            : ($baseline['page_payload_json']['en'] ?? null);
+        $baseline['structured_data_json']['faq_page']['en'] = $this->faqPage(
+            is_array($enPage) ? ($enPage['faq_block']['items'] ?? null) : null,
+        );
 
         return $baseline;
+    }
+
+    /** @return array<string,mixed> */
+    private function faqPage(mixed $items): array
+    {
+        if (! is_array($items) || ! array_is_list($items) || $items === []) {
+            throw new CareerTenBlockCompileFailure('CURRENT_ZH_PROJECTION_INPUT_INVALID');
+        }
+
+        return [
+            '@context' => 'https://schema.org',
+            '@type' => 'FAQPage',
+            'mainEntity' => array_map(static function (mixed $item): array {
+                $question = is_array($item) ? ($item['question'] ?? null) : null;
+                $answer = is_array($item) ? ($item['answer'] ?? null) : null;
+                if (! is_string($question) || trim($question) === ''
+                    || ! is_string($answer) || trim($answer) === '') {
+                    throw new CareerTenBlockCompileFailure('CURRENT_ZH_PROJECTION_INPUT_INVALID');
+                }
+
+                return [
+                    '@type' => 'Question',
+                    'acceptedAnswer' => ['@type' => 'Answer', 'text' => $answer],
+                    'name' => $question,
+                ];
+            }, $items),
+        ];
     }
 
     /** @return array<string,mixed> */
@@ -387,7 +440,14 @@ final class CareerCurrentZhBatchPreparer
     {
         $contract = [
             'identity.json' => ['slug' => 'string', 'title_zh' => 'string', 'riasec' => 'string', 'riasec_short' => 'string'],
-            'definition.json' => ['quick_bound' => 'string', 'quick_how' => 'string', 'quick_suit' => 'string', 'def_callout' => 'string', 'definition' => 'string', 'duties' => 'list', 'work_scene' => 'string'],
+            'definition.json' => [
+                'quick_bound' => 'string', 'quick_how' => 'string', 'quick_suit' => 'string',
+                'def_callout' => 'string', 'definition' => 'string', 'duties' => 'list',
+                'work_scene' => 'string', 'qa1_q' => 'string', 'qa1_a' => 'string',
+                'qa1_table' => 'list', 'qa2_q' => 'string', 'qa2_a' => 'string',
+                'qa2_table' => 'list', 'qa3_q' => 'string', 'qa3_a' => 'string',
+                'qa3_table' => 'list', 'onet_struct' => 'list',
+            ],
             'salary.json' => ['bls_table' => 'list', 'us_growth' => 'string', 'us_median' => 'string'],
             'ai-impact.json' => ['ai_head_sub' => 'string'],
             'risk.json' => ['risk_badge' => 'string', 'risk_callout' => 'string', 'risk_contract' => 'string', 'risk_fact' => 'string', 'risk_list' => 'list', 'risk_path_table' => 'list'],
@@ -418,6 +478,10 @@ final class CareerCurrentZhBatchPreparer
             if (! is_array($item) || ! is_string($item['q'] ?? null) || ! is_string($item['a'] ?? null)) {
                 throw new CareerTenBlockCompileFailure('CURRENT_ZH_PROJECTION_INPUT_INVALID');
             }
+        }
+        $projector = new CareerStructuredComponentProjector;
+        foreach (['qa1_table', 'qa2_table', 'qa3_table', 'onet_struct'] as $field) {
+            $projector->rows($blocks['definition.json'][$field]);
         }
     }
 

@@ -27,7 +27,7 @@ final class CareerDisplayAssetLineageReporter
         try {
             $asset = CareerJobDisplayAsset::query()
                 ->where('canonical_slug', $slug)
-                ->where('asset_version', 'v4.2')
+                ->whereIn('asset_version', ['v4.2', 'v4.3'])
                 ->latest('updated_at')
                 ->first();
         } catch (QueryException) {

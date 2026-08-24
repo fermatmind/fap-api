@@ -1,6 +1,6 @@
 ---
 name: fap-api-career-canonical-builder
-description: Use for deterministic fap-api Career canonical-package candidate compilation from approved zh-CN or en source assets, including schema, slug, locale, 26-component, link, hash, dry-compile, and package-diff validation; not for publication, deployment, frontend rendering, or search submission.
+description: Use for deterministic fap-api Career canonical-package candidate compilation from approved zh-CN or en source assets, including schema, slug, locale, current-component, link, hash, dry-compile, and package-diff validation; not for publication, deployment, frontend rendering, or search submission.
 ---
 
 # Career Canonical Builder
@@ -49,7 +49,7 @@ php artisan career:ten-block-current-package-compile \
 
 ## Acceptance
 
-- The compiler reports 1046 careers, 2092 locale pages, and the current exact 26-component contract.
+- The compiler reports 1046 careers, 2092 locale pages, and the current exact v4.3/28-component contract; v4.2/26 remains read-only compatible.
 - Only `Occupation`, `BreadcrumbList`, and visible-content `FAQPage` structured-data families are allowed.
 - Slug set, locale pairing, component order, source/evidence hashes, and package hashes validate.
 - The dry run reports zero CMS, database, cache, discoverability, and search writes.

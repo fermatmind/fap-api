@@ -31,7 +31,7 @@ final class CareerJobListBundleBuilder
 
     private const DISPLAY_SURFACE_VERSION = 'display.surface.v1';
 
-    private const DISPLAY_ASSET_VERSION = 'v4.2';
+    private const DISPLAY_ASSET_VERSIONS = ['v4.2', 'v4.3'];
 
     private const DISPLAY_ASSET_TYPE = 'career_job_public_display';
 
@@ -572,8 +572,8 @@ final class CareerJobListBundleBuilder
                 'reviewer_status' => 'pilot_display_asset',
                 'reviewed_at' => null,
                 ...$this->publicReviewContract->project('pilot_display_asset'),
-                'content_version' => 'display_asset_backed_v4_2',
-                'data_version' => 'career_job_display_assets.v4.2',
+                'content_version' => 'display_asset_backed_'.str_replace('.', '_', (string) $asset->asset_version),
+                'data_version' => 'career_job_display_assets.'.(string) $asset->asset_version,
                 'logic_version' => 'career.protocol.job_list.display_asset_backed.v1',
                 'editorial_patch_required' => false,
                 'editorial_patch_status' => null,
@@ -585,8 +585,8 @@ final class CareerJobListBundleBuilder
             scoreSummary: [],
             seoContract: $this->buildDisplayAssetBackedDirectoryDraftSeoContract($occupation),
             provenanceMeta: [
-                'content_version' => 'display_asset_backed_v4_2',
-                'data_version' => 'career_job_display_assets.v4.2',
+                'content_version' => 'display_asset_backed_'.str_replace('.', '_', (string) $asset->asset_version),
+                'data_version' => 'career_job_display_assets.'.(string) $asset->asset_version,
                 'logic_version' => 'career.protocol.job_list.display_asset_backed.v1',
                 'compiler_version' => null,
                 'compiled_at' => null,
@@ -976,11 +976,12 @@ final class CareerJobListBundleBuilder
         }
 
         $componentOrder = is_array($asset->component_order_json) ? array_values($asset->component_order_json) : [];
+        $assetVersion = (string) $asset->asset_version;
         if ((string) $asset->surface_version !== self::DISPLAY_SURFACE_VERSION
-            || (string) $asset->asset_version !== self::DISPLAY_ASSET_VERSION
-            || (string) $asset->template_version !== self::DISPLAY_ASSET_VERSION
-            || ! CareerDisplayAssetComponentContract::isCurrent($componentOrder)
-            || ! CareerDisplayAssetComponentContract::hasExactCurrentPages((array) $asset->page_payload_json)) {
+            || ! in_array($assetVersion, self::DISPLAY_ASSET_VERSIONS, true)
+            || (string) $asset->template_version !== $assetVersion
+            || ! CareerDisplayAssetComponentContract::matchesVersion($componentOrder, $assetVersion)
+            || ! CareerDisplayAssetComponentContract::hasExactPagesForVersion((array) $asset->page_payload_json, $assetVersion)) {
             return null;
         }
 

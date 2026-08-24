@@ -28,7 +28,7 @@ final class CareerDetailReadyPublicationCandidateScanner
 
     private const DISPLAY_SURFACE_VERSION = 'display.surface.v1';
 
-    private const DISPLAY_ASSET_VERSION = 'v4.2';
+    private const DISPLAY_ASSET_VERSIONS = ['v4.2', 'v4.3'];
 
     private const DISPLAY_ASSET_TYPE = 'career_job_public_display';
 
@@ -236,8 +236,7 @@ final class CareerDetailReadyPublicationCandidateScanner
         $assets = $occupation->displayAssets
             ->where('canonical_slug', $slug)
             ->where('surface_version', self::DISPLAY_SURFACE_VERSION)
-            ->where('asset_version', self::DISPLAY_ASSET_VERSION)
-            ->where('template_version', self::DISPLAY_ASSET_VERSION)
+            ->whereIn('asset_version', self::DISPLAY_ASSET_VERSIONS)
             ->where('status', self::DISPLAY_READY_STATUS)
             ->where('asset_type', self::DISPLAY_ASSET_TYPE)
             ->values();
@@ -255,7 +254,12 @@ final class CareerDetailReadyPublicationCandidateScanner
         $pages = is_array($asset->page_payload_json) ? $asset->page_payload_json : [];
         $localizedPages = is_array($pages['page'] ?? null) ? $pages['page'] : $pages;
 
-        return CareerDisplayAssetComponentContract::supports($componentOrder)
+        $assetVersion = (string) $asset->asset_version;
+
+        return (string) $asset->template_version === $assetVersion
+            && ($assetVersion === 'v4.2'
+                ? CareerDisplayAssetComponentContract::supports($componentOrder)
+                : CareerDisplayAssetComponentContract::matchesVersion($componentOrder, $assetVersion))
             && is_array($localizedPages['zh'] ?? null)
             && is_array($localizedPages['en'] ?? null);
     }

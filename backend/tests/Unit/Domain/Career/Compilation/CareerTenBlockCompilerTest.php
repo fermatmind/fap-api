@@ -60,7 +60,24 @@ final class CareerTenBlockCompilerTest extends TestCase
         self::assertSame($first['receipt']['output_row_digest'], $second['receipt']['output_row_digest']);
         self::assertSame($first['row'], $second['row']);
         self::assertCount(14, $first['row']);
-        self::assertSame(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER, $first['row']['component_order_json']);
+        self::assertSame('v4.3', $first['row']['asset_version']);
+        self::assertSame('v4.3', $first['row']['template_version']);
+        self::assertSame(CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER, $first['row']['component_order_json']);
+        self::assertSame(
+            ['qa3', 'qa2', 'qa1'],
+            array_column($first['row']['page_payload_json']['page']['zh']['career_quick_answers_block']['items'], 'key'),
+        );
+        self::assertSame('published', $first['row']['page_payload_json']['page']['zh']['career_quick_answers_block']['availability']);
+        self::assertSame('published', $first['row']['page_payload_json']['page']['zh']['onet_structured_fields_block']['availability']);
+        self::assertSame(
+            ['availability' => 'unavailable', 'reason_code' => 'source_locale_unavailable'],
+            $first['row']['page_payload_json']['page']['en']['career_quick_answers_block'],
+        );
+        self::assertSame(
+            ['availability' => 'unavailable', 'reason_code' => 'source_locale_unavailable'],
+            $first['row']['page_payload_json']['page']['en']['onet_structured_fields_block'],
+        );
+        self::assertSame(2, count($first['row']['metadata_json']['structured_components_v1']['bindings']));
         self::assertCount(9, $first['row']['page_payload_json']['page']['zh']['faq_block']['items']);
         self::assertCount(9, $first['row']['structured_data_json']['faq_page']['zh']['mainEntity']);
         self::assertSame(['en', 'zh'], array_keys($first['row']['page_payload_json']['page']));

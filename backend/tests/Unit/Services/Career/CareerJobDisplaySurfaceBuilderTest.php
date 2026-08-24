@@ -64,7 +64,7 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
             CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER,
             array_keys($asset->page_payload_json['en']),
         );
-        $this->assertTrue(CareerDisplayAssetComponentContract::hasExactCurrentPages($asset->page_payload_json));
+        $this->assertTrue(CareerDisplayAssetComponentContract::hasExactPagesForVersion($asset->page_payload_json, 'v4.2'));
 
         $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
 
@@ -85,6 +85,25 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $this->assertSame('direct', $surface['claim_permissions']['evidence_basis']['crosswalk']);
         $this->assertCount(26, $surface['component_order']);
         $this->assertContains('fermat_decision_card', $surface['component_order']);
+    }
+
+    public function test_it_returns_the_v43_structured_components_from_current_authority(): void
+    {
+        ini_set('memory_limit', '1024M');
+        $occupation = $this->createOccupation('accountants-and-auditors');
+        $authority = app(CareerCurrentAuthorityPackage::class)->load(base_path());
+        $row = $authority['rows']['accountants-and-auditors'];
+        $this->createDisplayAsset($occupation, app(CareerCurrentAuthorityPackage::class)->databaseAttributes($row));
+
+        $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
+
+        $this->assertSame('v4.3', $surface['asset_version']);
+        $this->assertSame(CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER, $surface['component_order']);
+        $this->assertSame(
+            ['qa3', 'qa2', 'qa1'],
+            array_column($surface['page']['content']['career_quick_answers_block']['items'], 'key'),
+        );
+        $this->assertSame('published', $surface['page']['content']['onet_structured_fields_block']['availability']);
     }
 
     public function test_it_exposes_presentation_v1_only_for_the_zh_surface(): void
@@ -701,10 +720,13 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
 
         $payload = is_array($attributes['page_payload_json'] ?? null) ? $attributes['page_payload_json'] : [];
         $pages = is_array($payload['page'] ?? null) ? $payload['page'] : $payload;
+        $componentOrder = ($attributes['asset_version'] ?? null) === 'v4.3'
+            ? CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER
+            : CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER;
         foreach (['en', 'zh'] as $locale) {
             if (is_array($pages[$locale] ?? null)) {
                 $pages[$locale] = array_replace(
-                    array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER, []),
+                    array_fill_keys($componentOrder, []),
                     $pages[$locale],
                 );
             }

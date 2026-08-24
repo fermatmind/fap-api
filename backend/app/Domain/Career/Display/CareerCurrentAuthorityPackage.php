@@ -28,7 +28,7 @@ final class CareerCurrentAuthorityPackage
 
     public const SURFACE_VERSION = 'display.surface.v1';
 
-    public const ASSET_VERSION = 'v4.2';
+    public const ASSET_VERSION = 'v4.3';
 
     public const ASSET_TYPE = 'career_job_public_display';
 
@@ -129,6 +129,7 @@ final class CareerCurrentAuthorityPackage
         $manifest = $this->readManifest($manifestPath);
         $this->assertManifestContract($manifest);
         $this->assertPresentationSourceRegistry($backendRoot, $manifest);
+        $this->assertStructuredComponentSourceRegistry($backendRoot, $manifest);
         $compiled = $this->compileAssets($assetsPath);
         $assetsSha256 = $compiled['summary']['assets_sha256'];
         $declaredAssetsSha256 = (string) self::value($manifest, 'files.0.sha256');
@@ -196,6 +197,7 @@ final class CareerCurrentAuthorityPackage
         $previousSlug = null;
         $localePageCount = 0;
         $numericRatingResidueCount = 0;
+        $componentsPerPage = null;
         $fieldHashContexts = [];
         foreach (self::EXPORTED_FIELDS as $field) {
             $fieldHashContexts[$field] = hash_init('sha256');
@@ -243,6 +245,11 @@ final class CareerCurrentAuthorityPackage
                     throw new CareerCurrentAuthorityPackageFailure('CURRENT_ASSET_SLUG_SET_INVALID');
                 }
                 $this->assertRow($row, $numericRatingResidueCount);
+                $rowComponentCount = count((array) ($row['component_order_json'] ?? []));
+                if ($componentsPerPage !== null && $componentsPerPage !== $rowComponentCount) {
+                    throw new CareerCurrentAuthorityPackageFailure('CURRENT_ASSET_STRUCTURE_INVALID');
+                }
+                $componentsPerPage = $rowComponentCount;
                 $rows[$slug] = $row;
                 $rowSeparator = $rowIndex === 0 ? '' : ',';
                 hash_update($fullAssetSetHashContext, $rowSeparator.self::encodeCanonical($row));
@@ -326,7 +333,7 @@ final class CareerCurrentAuthorityPackage
                 'assets_sha256' => $assetsSha256,
                 'career_count' => count($rows),
                 'locale_page_count' => $localePageCount,
-                'components_per_page' => count(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER),
+                'components_per_page' => $componentsPerPage,
                 'numeric_rating_statement_residue_count' => $numericRatingResidueCount,
                 'slug_set_sha256' => self::hashValue($slugs),
                 'full_asset_set_sha256' => $fullAssetSetSha256,
@@ -334,7 +341,7 @@ final class CareerCurrentAuthorityPackage
             'computed_manifest_fields' => [
                 'counts' => [
                     'careers' => count($rows),
-                    'components_per_page' => count(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER),
+                    'components_per_page' => $componentsPerPage,
                     'locale_pages' => $localePageCount,
                     'manual_hold_locale_pages' => count(self::LOCALES),
                     'numeric_rating_statement_residue_count' => $numericRatingResidueCount,
@@ -359,6 +366,9 @@ final class CareerCurrentAuthorityPackage
     /** @param array<string,mixed> $manifest */
     private function assertManifestContract(array $manifest): void
     {
+        $assetVersion = self::value($manifest, 'structural_contract.asset_version');
+        $templateVersion = self::value($manifest, 'structural_contract.template_version');
+        $componentOrder = self::value($manifest, 'structural_contract.component_order');
         if (($manifest['contract_version'] ?? null) !== self::CONTRACT_VERSION
             || ($manifest['authority_path'] ?? null) !== 'backend/content_assets/career/current'
             || self::value($manifest, 'delivery_evidence.initial_governance_full_scan_required') !== true
@@ -366,11 +376,12 @@ final class CareerCurrentAuthorityPackage
             || self::value($manifest, 'delivery_evidence.required_publish_fix') !== 'runner_autoload_order'
             || self::value($manifest, 'files.0.path') !== 'assets.jsonl'
             || self::value($manifest, 'structural_contract.surface_version') !== self::SURFACE_VERSION
-            || self::value($manifest, 'structural_contract.asset_version') !== self::ASSET_VERSION
-            || self::value($manifest, 'structural_contract.template_version') !== self::ASSET_VERSION
+            || ! in_array($assetVersion, ['v4.2', self::ASSET_VERSION], true)
+            || $templateVersion !== $assetVersion
             || self::value($manifest, 'structural_contract.asset_type') !== self::ASSET_TYPE
             || self::value($manifest, 'structural_contract.status') !== self::READY_STATUS
-            || self::value($manifest, 'structural_contract.component_order') !== CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER
+            || ! is_array($componentOrder)
+            || ! CareerDisplayAssetComponentContract::matchesVersion($componentOrder, (string) $assetVersion)
             || self::value($manifest, 'structural_contract.public_projection_excluded_manual_hold_slugs') !== [self::MANUAL_HOLD_SLUG]
             || self::value($manifest, 'export_evidence.artifact_id') !== 9248668854
             || self::value($manifest, 'export_evidence.artifact_digest') !== 'sha256:2cfb298b90a1c8443254686d659e8bbf78c918e0fbb29960ba007603384223bc'
@@ -385,6 +396,20 @@ final class CareerCurrentAuthorityPackage
         foreach ((array) ($manifest['superseded_sources'] ?? []) as $sha256) {
             if (! is_string($sha256) || preg_match('/\A[0-9a-f]{64}\z/', $sha256) !== 1) {
                 throw new CareerCurrentAuthorityPackageFailure('CURRENT_SUPERSEDED_SOURCE_HASH_INVALID');
+            }
+        }
+        if ($assetVersion === self::ASSET_VERSION) {
+            $profileCounts = self::value($manifest, 'structured_components_v1.profile_counts');
+            if (self::value($manifest, 'structured_components_v1.contract_version') !== 'career.structured_components.package_lineage.v1'
+                || self::value($manifest, 'structured_components_v1.schema_version') !== 'career.ten_block.variants.v1'
+                || self::value($manifest, 'structured_components_v1.claim_binding_count') !== self::EXPECTED_LOCALE_PAGES
+                || self::value($manifest, 'structured_components_v1.zh_published_component_count') !== self::EXPECTED_LOCALE_PAGES
+                || self::value($manifest, 'structured_components_v1.en_unavailable_component_count') !== self::EXPECTED_LOCALE_PAGES
+                || ! is_array($profileCounts)
+                || array_sum($profileCounts) !== self::EXPECTED_CAREERS
+                || preg_match('/\A[0-9a-f]{64}\z/', (string) self::value($manifest, 'structured_components_v1.source_root_digest')) !== 1
+                || preg_match('/\A[0-9a-f]{64}\z/', (string) self::value($manifest, 'structured_components_v1.schema_profile_manifest_sha256')) !== 1) {
+                throw new CareerCurrentAuthorityPackageFailure('CURRENT_STRUCTURED_COMPONENT_LINEAGE_INVALID');
             }
         }
     }
@@ -451,17 +476,63 @@ final class CareerCurrentAuthorityPackage
         }
     }
 
+    /** @param array<string,mixed> $manifest */
+    private function assertStructuredComponentSourceRegistry(string $backendRoot, array $manifest): void
+    {
+        $declared = self::value($manifest, 'structured_components_v1.source_registry');
+        if (self::value($manifest, 'structural_contract.asset_version') === 'v4.2' && $declared === null) {
+            return;
+        }
+        $path = rtrim($backendRoot, '/').'/'.self::RELATIVE_PATH.'/structured-component-source-registry.json';
+        if (! is_array($declared)
+            || ($declared['path'] ?? null) !== 'structured-component-source-registry.json'
+            || ! is_string($declared['sha256'] ?? null)
+            || ! is_file($path)
+            || is_link($path)
+            || ! hash_equals((string) $declared['sha256'], (string) hash_file('sha256', $path))) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_STRUCTURED_COMPONENT_SOURCE_REGISTRY_INVALID');
+        }
+        try {
+            $registry = json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_STRUCTURED_COMPONENT_SOURCE_REGISTRY_INVALID');
+        }
+        if (! is_array($registry)
+            || ($registry['contract_version'] ?? null) !== 'career.structured_components.source_registry.v1'
+            || ! is_array($registry['sources'] ?? null)
+            || $registry['sources'] !== [[
+                'authority_role' => 'approved_canonical_compile_input',
+                'component_id' => 'career_quick_answers_block',
+                'input_jsonpaths' => [
+                    '$.definition.qa3_q', '$.definition.qa3_a', '$.definition.qa3_table',
+                    '$.definition.qa2_q', '$.definition.qa2_a', '$.definition.qa2_table',
+                    '$.definition.qa1_q', '$.definition.qa1_a', '$.definition.qa1_table',
+                ],
+                'locale' => 'zh-CN',
+                'source_key' => 'career.ten_block.definition.quick_answers',
+            ], [
+                'authority_role' => 'approved_canonical_compile_input',
+                'component_id' => 'onet_structured_fields_block',
+                'input_jsonpaths' => ['$.definition.onet_struct'],
+                'locale' => 'zh-CN',
+                'source_key' => 'career.ten_block.definition.onet_struct',
+            ]]) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_STRUCTURED_COMPONENT_SOURCE_REGISTRY_INVALID');
+        }
+    }
+
     /** @param array<string,mixed> $row */
     private function assertRow(array $row, int &$numericRatingResidueCount): void
     {
+        $version = (string) ($row['asset_version'] ?? '');
         if (($row['surface_version'] ?? null) !== self::SURFACE_VERSION
-            || ($row['asset_version'] ?? null) !== self::ASSET_VERSION
-            || ($row['template_version'] ?? null) !== self::ASSET_VERSION
+            || ! in_array($version, ['v4.2', self::ASSET_VERSION], true)
+            || ($row['template_version'] ?? null) !== $version
             || ($row['asset_type'] ?? null) !== self::ASSET_TYPE
             || ($row['asset_role'] ?? null) !== self::ASSET_ROLE
             || ($row['status'] ?? null) !== self::READY_STATUS
-            || array_values((array) ($row['component_order_json'] ?? [])) !== CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER
-            || ! CareerDisplayAssetComponentContract::hasExactCurrentPages((array) ($row['page_payload_json'] ?? []))) {
+            || ! CareerDisplayAssetComponentContract::matchesVersion((array) ($row['component_order_json'] ?? []), $version)
+            || ! CareerDisplayAssetComponentContract::hasExactPagesForVersion((array) ($row['page_payload_json'] ?? []), $version)) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_ASSET_STRUCTURE_INVALID');
         }
         $pages = self::localizedPages($row);

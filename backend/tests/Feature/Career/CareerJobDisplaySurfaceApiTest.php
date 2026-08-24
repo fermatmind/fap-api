@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerCompileRun;
@@ -112,6 +113,41 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
         $this->assertStringNotContainsString('admin_review_state', $encoded);
         $this->assertStringNotContainsString('tracking_json', $encoded);
         $this->assertStringNotContainsString('raw_ai_exposure_score', $encoded);
+    }
+
+    public function test_v43_api_returns_authoritative_quick_answers_and_onet_rows(): void
+    {
+        ini_set('memory_limit', '1024M');
+        $occupation = $this->seedCompiledOccupation('accountants-and-auditors');
+        $this->addCrosswalks($occupation, 'accountants-and-auditors');
+        $package = app(CareerCurrentAuthorityPackage::class);
+        $row = $package->load(base_path())['rows']['accountants-and-auditors'];
+        $this->createDisplayAsset($occupation, $package->databaseAttributes($row));
+
+        $response = $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/accountants-and-auditors?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('display_surface_v1.asset_version', 'v4.3')
+            ->assertJsonPath('display_surface_v1.template_version', 'v4.3')
+            ->assertJsonPath('display_surface_v1.page.content.career_quick_answers_block.availability', 'published')
+            ->assertJsonPath('display_surface_v1.page.content.onet_structured_fields_block.availability', 'published');
+
+        $this->assertSame(
+            CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER,
+            $response->json('display_surface_v1.component_order'),
+        );
+        $this->assertSame(
+            ['qa3', 'qa2', 'qa1'],
+            array_column($response->json('display_surface_v1.page.content.career_quick_answers_block.items'), 'key'),
+        );
+        $this->assertCount(6, $response->json('display_surface_v1.page.content.onet_structured_fields_block.rows'));
+        $this->assertCount(9, $response->json('display_surface_v1.structured_data_from_visible_content.faq_page.zh.mainEntity'));
+        $this->assertFalse(
+            $response->json('display_surface_v1.structured_data_from_visible_content.schema_rules.occupation_schema_generated_locally'),
+        );
+        $this->assertArrayNotHasKey(
+            'onet_structured_fields_block',
+            $response->json('display_surface_v1.structured_data_from_visible_content'),
+        );
     }
 
     public function test_it_adds_display_surface_for_selected_second_pilot_assets(): void
@@ -716,10 +752,13 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
 
         $payload = is_array($attributes['page_payload_json'] ?? null) ? $attributes['page_payload_json'] : [];
         $pages = is_array($payload['page'] ?? null) ? $payload['page'] : $payload;
+        $componentOrder = ($attributes['asset_version'] ?? null) === 'v4.3'
+            ? CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER
+            : CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER;
         foreach (['en', 'zh'] as $locale) {
             if (is_array($pages[$locale] ?? null)) {
                 $pages[$locale] = array_replace(
-                    array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER, []),
+                    array_fill_keys($componentOrder, []),
                     $pages[$locale],
                 );
             }

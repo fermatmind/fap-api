@@ -75,7 +75,7 @@ final class CareerCurrentZhBatchMaterializer
                 throw new CareerTenBlockCompileFailure('CURRENT_ZH_TARGET_SET_INVALID');
             }
             $before = $baseline['rows'][$slug];
-            $candidate = $this->preparer->candidateRowForSource($sourceRoot, $slug, $before);
+            $candidate = $this->preparer->candidateRowForSource($sourceRoot, $slug, $before, false);
             $candidateHash = $this->projectionHash($candidate, 'zh-CN');
             if (! hash_equals((string) ($plan['manifest']['per_slug'][$slug]['zh_projection_sha256'] ?? ''), $candidateHash)) {
                 throw new CareerTenBlockCompileFailure('CURRENT_ZH_PLAN_PROJECTION_HASH_MISMATCH');

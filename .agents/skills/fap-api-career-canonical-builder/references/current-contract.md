@@ -5,7 +5,7 @@ Use source at the exact candidate SHA; these paths are the maintained contract:
 - `backend/app/Console/Commands/CareerTenBlockCurrentPackageCompile.php`: dry-compile command and temp-output boundary.
 - `backend/app/Domain/Career/Compilation/CareerTenBlockCompiler.php`: single-source normalization, lookup/evidence binding, omissions, and public-key guards.
 - `backend/app/Domain/Career/Compilation/CareerTenBlockCurrentPackageCompiler.php`: full-cohort baseline retention, deterministic candidate assembly, receipts, and package diff.
-- `backend/app/Domain/Career/Display/CareerDisplayAssetComponentContract.php`: exact current 26-component order and page-shape validation.
+- `backend/app/Domain/Career/Display/CareerDisplayAssetComponentContract.php`: exact current v4.3/28-component order, v4.2/26 read compatibility, and page-shape validation.
 - `backend/app/Domain/Career/Display/CareerCurrentAuthorityPackage.php`: 1046-row/2092-locale package, canonical encoding, hashes, and public projection.
 - `backend/tests/Unit/Domain/Career/Compilation/CareerTenBlockCurrentPackageCompilerTest.php` and `backend/tests/Unit/Domain/Career/Display/CareerDisplayAssetComponentContractTest.php`: focused executable coverage.
 
@@ -22,7 +22,7 @@ A dry compile produces candidate `assets.jsonl`, `manifest.json`, a full compile
 The candidate must preserve:
 
 - the exact Current canonical slug set and en/zh-CN locale pairing;
-- the current 26-component order and complete page fields;
+- the current v4.3/28-component order and complete page fields, while retaining v4.2/26 read compatibility;
 - allowed structured data only: `Occupation`, `BreadcrumbList`, and FAQ derived from visible content;
 - canonical link identities and zero unresolved/variant output links;
 - Current baseline copy for claims without exact active evidence binding;

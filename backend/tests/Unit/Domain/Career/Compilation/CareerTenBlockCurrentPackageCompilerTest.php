@@ -62,9 +62,9 @@ final class CareerTenBlockCurrentPackageCompilerTest extends TestCase
         $rows = $this->rowsFromAssets($first['assets_bytes']);
 
         self::assertSame($pages['en']['fermat_decision_card']['caveat'], $notices['en'][0]);
-        self::assertSame($pages['en']['ai_impact_table']['explanation']['en']['boundary'], $notices['en'][1]);
+        self::assertSame($pages['en']['boundary_notice'][0], $notices['en'][1]);
         self::assertSame($pages['zh']['fermat_decision_card']['caveat'], $notices['zh'][0]);
-        self::assertSame($pages['en']['ai_impact_table']['explanation']['zh']['boundary'], $notices['zh'][1]);
+        self::assertSame($pages['zh']['boundary_notice'][0], $notices['zh'][1]);
         self::assertCount(2, $rows['accountants-and-auditors']['page_payload_json']['page']['en']['boundary_notice']);
         self::assertCount(2, $rows['accountants-and-auditors']['page_payload_json']['page']['zh']['boundary_notice']);
         self::assertContains($first['package_diff']['changed_slugs'], [[], ['accountants-and-auditors']]);
@@ -91,6 +91,7 @@ final class CareerTenBlockCurrentPackageCompilerTest extends TestCase
         $package = app(CareerCurrentAuthorityPackage::class)->load(base_path());
         $pages = $package['rows']['accountants-and-auditors']['page_payload_json']['page'];
         unset($pages['en']['ai_impact_table']['explanation']['en']['boundary']);
+        unset($pages['en']['boundary_notice']);
 
         $this->expectException(CareerTenBlockCompileFailure::class);
         $this->expectExceptionMessage('TEN_BLOCK_ACCOUNTANTS_BOUNDARY_SOURCE_MISSING');

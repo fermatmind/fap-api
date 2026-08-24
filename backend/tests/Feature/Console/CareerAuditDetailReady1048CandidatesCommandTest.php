@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Console;
 
 use App\Console\Commands\CareerAuditDetailReady1048Candidates;
+use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerImportRun;
 use App\Models\CareerJob;
@@ -22,32 +23,7 @@ final class CareerAuditDetailReady1048CandidatesCommandTest extends TestCase
 {
     use RefreshDatabase;
 
-    private const DISPLAY_COMPONENT_ORDER = [
-        'breadcrumb',
-        'hero',
-        'fermat_decision_card',
-        'primary_cta',
-        'career_snapshot_primary_locale',
-        'career_snapshot_secondary_locale',
-        'fit_decision_checklist',
-        'riasec_fit_block',
-        'personality_fit_block',
-        'definition_block',
-        'responsibilities_block',
-        'work_context_block',
-        'market_signal_card',
-        'adjacent_career_comparison_table',
-        'ai_impact_table',
-        'career_risk_cards',
-        'contract_project_risk_block',
-        'next_steps_block',
-        'faq_block',
-        'related_next_pages',
-        'source_card',
-        'methodology_note',
-        'trust_footer',
-        'schema_anchor',
-    ];
+    private const DISPLAY_COMPONENT_ORDER = CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER;
 
     protected function setUp(): void
     {

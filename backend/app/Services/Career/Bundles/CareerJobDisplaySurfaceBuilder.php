@@ -16,9 +16,7 @@ final class CareerJobDisplaySurfaceBuilder
 {
     private const SURFACE_VERSION = 'display.surface.v1';
 
-    private const ASSET_VERSION = 'v4.2';
-
-    private const TEMPLATE_VERSION = 'v4.2';
+    private const SUPPORTED_ASSET_VERSIONS = ['v4.2', 'v4.3'];
 
     private const MANUAL_HOLD_SLUGS = [
         'software-developers',
@@ -270,15 +268,16 @@ final class CareerJobDisplaySurfaceBuilder
             return false;
         }
 
+        $assetVersion = (string) $asset->asset_version;
         if ((string) $asset->surface_version !== self::SURFACE_VERSION
-            || (string) $asset->asset_version !== self::ASSET_VERSION
-            || (string) $asset->template_version !== self::TEMPLATE_VERSION) {
+            || ! in_array($assetVersion, self::SUPPORTED_ASSET_VERSIONS, true)
+            || (string) $asset->template_version !== $assetVersion) {
             return false;
         }
 
         $componentOrder = is_array($asset->component_order_json) ? array_values($asset->component_order_json) : [];
-        if (! CareerDisplayAssetComponentContract::isCurrent($componentOrder)
-            || ! CareerDisplayAssetComponentContract::hasExactCurrentPages((array) $asset->page_payload_json)) {
+        if (! CareerDisplayAssetComponentContract::matchesVersion($componentOrder, $assetVersion)
+            || ! CareerDisplayAssetComponentContract::hasExactPagesForVersion((array) $asset->page_payload_json, $assetVersion)) {
             return false;
         }
 

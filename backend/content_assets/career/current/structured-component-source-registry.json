@@ -1,0 +1,31 @@
+{
+  "contract_version": "career.structured_components.source_registry.v1",
+  "sources": [
+    {
+      "authority_role": "approved_canonical_compile_input",
+      "component_id": "career_quick_answers_block",
+      "input_jsonpaths": [
+        "$.definition.qa3_q",
+        "$.definition.qa3_a",
+        "$.definition.qa3_table",
+        "$.definition.qa2_q",
+        "$.definition.qa2_a",
+        "$.definition.qa2_table",
+        "$.definition.qa1_q",
+        "$.definition.qa1_a",
+        "$.definition.qa1_table"
+      ],
+      "locale": "zh-CN",
+      "source_key": "career.ten_block.definition.quick_answers"
+    },
+    {
+      "authority_role": "approved_canonical_compile_input",
+      "component_id": "onet_structured_fields_block",
+      "input_jsonpaths": [
+        "$.definition.onet_struct"
+      ],
+      "locale": "zh-CN",
+      "source_key": "career.ten_block.definition.onet_struct"
+    }
+  ]
+}

@@ -36,7 +36,7 @@ final class CareerTenBlockBatchNormalizer
         $discriminatorCounts = [];
         $inputLinks = 0;
         $rewrites = 0;
-        $coverageCounts = ['mapped' => 0, 'intentional_internal_metadata' => 0, 'omitted_with_reason' => 0, 'blocked' => 0];
+        $coverageCounts = ['mapped_to_ir' => 0, 'mapped_to_public_component' => 0, 'omitted_with_reason' => 0, 'blocked' => 0];
         foreach ($slugs as $slug) {
             [$blocks, $inputDigest] = $this->readBlocks($root.'/'.$slug);
             if (($blocks['identity.json']['slug'] ?? null) !== $slug || ! isset($lookup[$slug])) {

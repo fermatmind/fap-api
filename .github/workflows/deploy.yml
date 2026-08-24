@@ -640,10 +640,10 @@ jobs:
               }
               and .package.career_count == 1046
               and .package.locale_page_count == 2092
-              and .package.components_per_page == 26
+              and .package.components_per_page == 28
               and .authority.target_count == 1046
               and .authority.unique_slug_count == 1046
-              and .authority.component_26_count == 1046
+              and .authority.component_28_count == 1046
               and .manual_hold_verified == true
               and (.full_scan == false or .public_readback.verified_locale_page_count == 2092)
               and .write_counts.occupation_write_count == 0

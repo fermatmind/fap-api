@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace App\Domain\Career\Compilation;
 
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
+use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 
 final class CareerTenBlockCurrentPackageCompiler
 {
-    public const VERSION = 'career.ten_block.current_package_compiler.v2';
+    public const VERSION = 'career.ten_block.current_package_compiler.v3';
 
     private const ACCOUNTANTS_SLUG = 'accountants-and-auditors';
 
@@ -17,6 +18,7 @@ final class CareerTenBlockCurrentPackageCompiler
         private readonly CareerTenBlockCompiler $singleCompiler,
         private readonly CareerEvidenceAuthorityLoader $evidenceLoader,
         private readonly CareerCurrentAuthorityPackage $package,
+        private readonly CareerCurrentZhBatchPreparer $sourcePreparer,
     ) {}
 
     /** @return array{assets_bytes:string,manifest_template:array<string,mixed>,receipt:array<string,mixed>,field_coverage:array<string,mixed>,package_diff:array<string,mixed>} */
@@ -34,7 +36,6 @@ final class CareerTenBlockCurrentPackageCompiler
         }
         $cohort = $this->evidenceLoader->cohort($evidenceRoot);
         $boundSlugs = $cohort['evidence_bound_slugs'];
-        $controlSlugs = $cohort['control_slugs'];
         if (array_diff($boundSlugs, $baseline['slugs']) !== []) {
             throw new CareerTenBlockCompileFailure('TEN_BLOCK_EVIDENCE_COHORT_INVALID');
         }
@@ -59,6 +60,10 @@ final class CareerTenBlockCurrentPackageCompiler
         $cohortDigest = $this->fileDigest(rtrim($evidenceRoot, '/').'/cohort.json', 'TEN_BLOCK_EVIDENCE_INVALID');
         $selectionReportDigest = $this->fileDigest(rtrim($evidenceRoot, '/').'/selection-report.json', 'TEN_BLOCK_EVIDENCE_INVALID');
         $lookupDigest = $this->fileDigest($lookupPath, 'TEN_BLOCK_LOOKUP_INVALID');
+        $componentRegistryDigest = $this->fileDigest(
+            rtrim($backendRoot, '/').'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH.'/structured-component-source-registry.json',
+            'TEN_BLOCK_STRUCTURED_COMPONENT_SOURCE_REGISTRY_INVALID',
+        );
         $candidateRows = [];
         $publicChangedLocalePages = 0;
         $changedRows = 0;
@@ -66,31 +71,27 @@ final class CareerTenBlockCurrentPackageCompiler
         $activeSources = [];
         foreach ($baseline['slugs'] as $slug) {
             $baselineRow = $baseline['rows'][$slug];
-            $candidate = isset($compiled[$slug]) ? $compiled[$slug]['row'] : $baselineRow;
-            if (isset($compiled[$slug])) {
-                $profile = $batch['manifest']['profiles'][$slug];
-                $candidate['metadata_json']['ten_block_compilation_v1'] = [
-                    'contract_version' => 'career.ten_block.row_lineage.v1',
-                    'compiler_version' => self::VERSION,
-                    'source_input_digest' => $profile['input_digest'],
-                    'schema_profile' => $profile['input_profile'],
-                    'normalized_ir_digest' => $profile['ir_digest'],
-                    'evidence_authority_digest' => $evidenceAuthorityDigest,
-                    'content_application' => 'exact_claim_binding',
-                    'unsupported_claim_policy' => 'omit_or_retain_current_baseline',
-                ];
-                $activeClaimBindings += count($compiled[$slug]['receipt']['claim_blockers']) === 0
-                    ? count($cohort['required_claim_keys']) : 0;
-                foreach ($candidate['sources_json']['references'] ?? [] as $source) {
-                    if (is_array($source) && is_string($source['source_key'] ?? null)) {
-                        $activeSources[$source['source_key']] = true;
-                    }
+            $candidate = $this->sourcePreparer->candidateRowForSource($sourceRoot, $slug, $baselineRow);
+            $profile = $batch['manifest']['profiles'][$slug];
+            $candidate['metadata_json']['ten_block_compilation_v1'] = [
+                'contract_version' => 'career.ten_block.row_lineage.v1',
+                'compiler_version' => self::VERSION,
+                'source_input_digest' => $profile['input_digest'],
+                'schema_profile' => $profile['input_profile'],
+                'normalized_ir_digest' => $profile['ir_digest'],
+                'evidence_authority_digest' => $evidenceAuthorityDigest,
+                'structured_component_source_registry_sha256' => $componentRegistryDigest,
+                'content_application' => 'full_v4_3_structured_component_projection',
+                'unsupported_claim_policy' => 'fail_closed',
+            ];
+            $activeClaimBindings += 2;
+            foreach ($candidate['sources_json']['references'] ?? [] as $source) {
+                if (is_array($source) && is_string($source['source_key'] ?? null)) {
+                    $activeSources[$source['source_key']] = true;
                 }
             }
             foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
-                $comparisonHash = isset($compiled[$slug])
-                    ? $cohort['baseline_rows'][$slug]['public_content_sha256'][$locale]
-                    : $this->package->publicContentHash($baselineRow, $locale);
+                $comparisonHash = $this->package->publicContentHash($baselineRow, $locale);
                 if (! hash_equals(
                     $comparisonHash,
                     $this->package->publicContentHash($candidate, $locale),
@@ -98,9 +99,7 @@ final class CareerTenBlockCurrentPackageCompiler
                     $publicChangedLocalePages++;
                 }
             }
-            $comparisonRowHash = isset($compiled[$slug])
-                ? $cohort['baseline_rows'][$slug]['row_sha256']
-                : CareerCurrentAuthorityPackage::hashValue($baselineRow);
+            $comparisonRowHash = CareerCurrentAuthorityPackage::hashValue($baselineRow);
             if (! hash_equals(
                 $comparisonRowHash,
                 CareerCurrentAuthorityPackage::hashValue($candidate),
@@ -109,27 +108,19 @@ final class CareerTenBlockCurrentPackageCompiler
             }
             $candidateRows[$slug] = $candidate;
         }
-        foreach ($controlSlugs as $slug) {
-            foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
-                if (! hash_equals(
-                    $cohort['baseline_rows'][$slug]['public_content_sha256'][$locale],
-                    $this->package->publicContentHash($candidateRows[$slug], $locale),
-                )) {
-                    throw new CareerTenBlockCompileFailure('TEN_BLOCK_CONTROL_PUBLIC_DRIFT');
-                }
-            }
-        }
-        $expectedChangedPages = $cohort['expected_public_changed_locale_page_count'] ?? null;
-        $expectedRetained = $cohort['expected_baseline_retained_slug_count'] ?? null;
-        if (! is_int($expectedChangedPages) || $publicChangedLocalePages !== $expectedChangedPages
-            || ! is_int($expectedRetained) || count($candidateRows) - count($boundSlugs) !== $expectedRetained) {
-            throw new CareerTenBlockCompileFailure('TEN_BLOCK_COHORT_DIFF_INVALID');
+        $baselineVersion = data_get($baseline, 'manifest.structural_contract.asset_version');
+        if ($baselineVersion === 'v4.2'
+            && ($publicChangedLocalePages !== count($candidateRows) * 2 || $changedRows !== count($candidateRows))) {
+            throw new CareerTenBlockCompileFailure('TEN_BLOCK_V4_3_DIFF_INVALID');
         }
         $assetsBytes = implode("\n", array_map(
             static fn (array $row): string => CareerCurrentAuthorityPackage::encodeCanonical($row),
             $candidateRows,
         ))."\n";
         $manifest = $baseline['manifest'];
+        $manifest['structural_contract']['asset_version'] = CareerCurrentAuthorityPackage::ASSET_VERSION;
+        $manifest['structural_contract']['template_version'] = CareerCurrentAuthorityPackage::ASSET_VERSION;
+        $manifest['structural_contract']['component_order'] = CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER;
         $manifest['ten_block_compilation'] = [
             'contract_version' => 'career.ten_block.current_package_lineage.v1',
             'compiler_version' => self::VERSION,
@@ -143,9 +134,23 @@ final class CareerTenBlockCurrentPackageCompiler
             'input_link_count' => $batch['receipt']['input_link_count'],
             'variant_rewrite_count' => $batch['receipt']['variant_rewrite_count'],
             'output_variant_link_count' => 0,
-            'candidate_claim_policy' => 'exact_bound_or_current_baseline',
+            'candidate_claim_policy' => 'full_structured_component_projection_with_exact_source_value_digests',
             'discoverability_writes' => 0,
             'search_submissions' => 0,
+        ];
+        $manifest['structured_components_v1'] = [
+            'contract_version' => 'career.structured_components.package_lineage.v1',
+            'source_registry' => [
+                'path' => 'structured-component-source-registry.json',
+                'sha256' => $componentRegistryDigest,
+            ],
+            'source_root_digest' => $batch['manifest']['source_root_digest'],
+            'schema_version' => CareerTenBlockVariantSchema::VERSION,
+            'schema_profile_manifest_sha256' => CareerCurrentAuthorityPackage::hashValue($batch['manifest']),
+            'profile_counts' => $batch['receipt']['profile_counts'],
+            'claim_binding_count' => $activeClaimBindings,
+            'zh_published_component_count' => count($candidateRows) * 2,
+            'en_unavailable_component_count' => count($candidateRows) * 2,
         ];
         $this->assertCandidatePublicContract($candidateRows);
 
@@ -163,10 +168,10 @@ final class CareerTenBlockCurrentPackageCompiler
                 'selection_report_digest' => $selectionReportDigest,
                 'career_count' => count($candidateRows),
                 'locale_page_count' => count($candidateRows) * 2,
-                'components_per_page' => 26,
+                'components_per_page' => 28,
                 'profile_counts' => $batch['receipt']['profile_counts'],
                 'evidence_bound_slug_count' => count($boundSlugs),
-                'baseline_retained_slug_count' => count($candidateRows) - count($boundSlugs),
+                'baseline_retained_slug_count' => 0,
                 'active_claim_binding_count' => $activeClaimBindings,
                 'active_evidence_source_count' => count($activeSources),
                 'input_link_count' => $batch['receipt']['input_link_count'],
@@ -191,9 +196,9 @@ final class CareerTenBlockCurrentPackageCompiler
                 'source_field_dispositions' => $batch['receipt']['field_coverage_counts'],
                 'silent_drop_count' => 0,
                 'evidence_bound_slug_count' => count($boundSlugs),
-                'baseline_retained_with_reason_slug_count' => count($candidateRows) - count($boundSlugs),
+                'baseline_retained_with_reason_slug_count' => 0,
                 'blocked_count' => 0,
-                'baseline_retention_reason' => 'candidate claims without exact active binding remain on Current baseline authority',
+                'baseline_retention_reason' => null,
             ],
             'package_diff' => [
                 'contract_version' => 'career.ten_block.package_diff_report.v1',
@@ -331,6 +336,14 @@ final class CareerTenBlockCurrentPackageCompiler
                 }
             }
             $boundary = count($boundaries) === 1 ? array_key_first($boundaries) : null;
+            if ($boundary === null && is_array($page['boundary_notice'] ?? null)) {
+                foreach ($page['boundary_notice'] as $candidate) {
+                    if (is_string($candidate) && trim($candidate) !== '') {
+                        $boundary = trim($candidate);
+                        break;
+                    }
+                }
+            }
             if (! is_string($caveat) || trim($caveat) === '' || ! is_string($boundary) || trim($boundary) === '') {
                 throw new CareerTenBlockCompileFailure('TEN_BLOCK_ACCOUNTANTS_BOUNDARY_SOURCE_MISSING');
             }

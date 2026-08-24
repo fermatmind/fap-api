@@ -4,37 +4,11 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\DTO\Career\CareerJobDetailBundle;
 
 final class CareerRuntimePublishedDisplaySurfaceBuilder
 {
-    private const COMPONENT_ORDER = [
-        'breadcrumb',
-        'hero',
-        'fermat_decision_card',
-        'primary_cta',
-        'career_snapshot_primary_locale',
-        'career_snapshot_secondary_locale',
-        'fit_decision_checklist',
-        'riasec_fit_block',
-        'personality_fit_block',
-        'definition_block',
-        'responsibilities_block',
-        'work_context_block',
-        'market_signal_card',
-        'adjacent_career_comparison_table',
-        'ai_impact_table',
-        'career_risk_cards',
-        'contract_project_risk_block',
-        'next_steps_block',
-        'faq_block',
-        'related_next_pages',
-        'source_card',
-        'review_validity_card',
-        'boundary_notice',
-        'final_cta',
-    ];
-
     /**
      * @param  array<string, mixed>  $projectionItem
      * @return array<string, mixed>
@@ -85,7 +59,7 @@ final class CareerRuntimePublishedDisplaySurfaceBuilder
                 'locale' => $publicLocale,
                 'content' => $this->pageContent($slug, $title, $path, $testPath, $isZh),
             ],
-            'component_order' => self::COMPONENT_ORDER,
+            'component_order' => CareerDisplayAssetComponentContract::LEGACY_V4_2_ORDER,
             'sources' => [
                 [
                     'key' => 'runtime_publish_projection',
