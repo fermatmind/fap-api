@@ -24,7 +24,7 @@ final class SeoTechnicalAuditOpportunityReadModelsTest extends TestCase
             'seo_intel.connection' => 'seo_task7_test',
             'seo_intel.public_canonical_host' => 'https://fermatmind.com',
             'seo_intel.search_channel_queue.allowed_page_entity_types' => ['article'],
-            'seo_intel.search_channel_queue.approved_source_authorities' => ['cms'],
+            'seo_intel.search_channel_queue.approved_source_authorities' => ['backend_cms'],
             'seo_intel.search_channel_queue.forbidden_page_entity_types' => [],
             'seo_intel.search_channel_queue.forbidden_source_authorities' => [],
             'seo_intel.gsc_data_quality.min_rows' => 1,
@@ -115,10 +115,13 @@ final class SeoTechnicalAuditOpportunityReadModelsTest extends TestCase
             'canonical_url' => $url,
             'locale' => 'en',
             'page_entity_type' => 'article',
-            'source_authority' => 'cms',
+            'source_authority' => 'backend_cms',
             'indexability_state' => 'indexable',
             'is_private_flow' => false,
-            'metadata_json' => json_encode(['claim_boundary_state' => 'claim_safe'], JSON_THROW_ON_ERROR),
+            'metadata_json' => json_encode([
+                'claim_boundary_state' => 'claim_safe',
+                'entity_source' => 'articles',
+            ], JSON_THROW_ON_ERROR),
         ]);
 
         return $hash;

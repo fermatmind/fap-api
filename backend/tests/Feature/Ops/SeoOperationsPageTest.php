@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Ops;
 
+use App\Filament\Ops\Pages\SeoDashboardAccessPage;
 use App\Filament\Ops\Pages\SeoOperationsPage;
 use App\Models\AdminUser;
 use App\Models\Article;
@@ -768,6 +769,45 @@ final class SeoOperationsPageTest extends TestCase
         $this->assertFalse($admin->hasPermission(PermissionNames::ADMIN_CONTENT_READ));
         $rbac->grantRole($admin, $roleName);
         $this->assertTrue($admin->hasPermission(PermissionNames::ADMIN_CONTENT_READ));
+    }
+
+    public function test_legacy_seo_route_redirects_to_the_canonical_operations_entry_without_rendering_a_dashboard(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_OPS_READ]);
+        $organization = $this->createOrganization('Legacy SEO Redirect Org');
+
+        $this->withSession($this->opsSession($admin, $organization))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/seo?locale=en')
+            ->assertRedirect('/ops/seo-operations');
+
+        $legacySource = (string) file_get_contents(app_path('Filament/Ops/Pages/SeoDashboardAccessPage.php'));
+        $this->assertStringContainsString('shouldRegisterNavigation = false', $legacySource);
+        $this->assertStringContainsString('SeoOperationsPage::getUrl()', $legacySource);
+        $this->assertStringNotContainsString('SeoDashboardOverviewReadService', $legacySource);
+        $this->assertStringNotContainsString('statusCards', $legacySource);
+        $this->assertFileDoesNotExist(resource_path('views/filament/ops/pages/seo-dashboard-access.blade.php'));
+    }
+
+    public function test_canonical_entry_is_the_only_registered_seo_navigation_and_all_workspaces_use_real_state_contracts(): void
+    {
+        $legacyNavigation = new \ReflectionProperty(SeoDashboardAccessPage::class, 'shouldRegisterNavigation');
+        $view = (string) file_get_contents(resource_path('views/filament/ops/pages/seo-operations.blade.php'));
+        $service = (string) file_get_contents(app_path('Services/Ops/SeoOperationsReadService.php'));
+
+        $this->assertFalse($legacyNavigation->getValue());
+        foreach (['overview', 'performance', 'technical', 'opportunities', 'ai', 'execution'] as $workspace) {
+            $this->assertStringContainsString("'{$workspace}'", $view);
+        }
+        foreach (['state', 'source', 'observed_at', 'updated_at', 'unavailable_reason'] as $field) {
+            $this->assertStringContainsString("'{$field}'", $service);
+        }
+        foreach (['canonical_url_hash', 'query_hash', 'evidence_hash', 'session_id_hash'] as $forbidden) {
+            $this->assertStringContainsString("'{$forbidden}'", $service);
+        }
+        $this->assertStringContainsString('global_search_submission_disabled', $service);
+        $this->assertStringContainsString("'not_implemented'", $service);
+        $this->assertStringContainsString("'measurement_hold'", $service);
     }
 
     private function createOrganization(string $name): Organization

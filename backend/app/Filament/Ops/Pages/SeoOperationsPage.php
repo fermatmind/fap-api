@@ -12,9 +12,10 @@ use App\Models\CareerJob;
 use App\Models\OpsDeployEvent;
 use App\Services\Audit\AuditLogger;
 use App\Services\Ops\SeoContentScopeViewModel;
+use App\Services\Ops\SeoOperationsReadService;
 use App\Services\Ops\SeoOperationsService;
-use App\Services\SeoIntel\OpsDashboard\SeoDashboardApiReadService;
 use App\Services\SeoIntel\OpsDashboard\SeoIssueWorkflowService;
+use App\Support\Rbac\PermissionNames;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -156,6 +157,9 @@ class SeoOperationsPage extends Page
     /** @var list<array<string, mixed>> */
     public array $clusterUrls = [];
 
+    /** @var array<string,mixed> */
+    public array $pageInspector = [];
+
     public int $clusterUrlPage = 1;
 
     public int $clusterUrlTotal = 0;
@@ -185,6 +189,9 @@ class SeoOperationsPage extends Page
 
     /** @var list<array<string, mixed>> */
     public array $deploymentEvents = [];
+
+    /** @var array<string,array<string,mixed>> */
+    public array $platformReadModels = [];
 
     public function mount(SeoOperationsService $service): void
     {
@@ -236,7 +243,7 @@ class SeoOperationsPage extends Page
     public function updatedSortBy(): void
     {
         $this->issueClusterPage = 1;
-        $this->refreshIssueClusters(app(SeoDashboardApiReadService::class));
+        $this->refreshIssueClusters(app(SeoOperationsReadService::class));
     }
 
     public function updatedDisplayPreset(): void
@@ -338,31 +345,38 @@ class SeoOperationsPage extends Page
     {
         $this->selectedClusterUid = $clusterUid;
         $this->clusterUrlPage = 1;
-        $this->refreshClusterUrls(app(SeoDashboardApiReadService::class));
+        $this->refreshClusterUrls(app(SeoOperationsReadService::class));
+    }
+
+    public function inspectPage(string $issueUid): void
+    {
+        $this->selectedIssueUid = $issueUid;
+        $this->syncSelectedIssueVersion();
+        $this->pageInspector = app(SeoOperationsReadService::class)->pageInspector($issueUid);
     }
 
     public function previousIssueClusterPage(): void
     {
         $this->issueClusterPage = max(1, $this->issueClusterPage - 1);
-        $this->refreshIssueClusters(app(SeoDashboardApiReadService::class));
+        $this->refreshIssueClusters(app(SeoOperationsReadService::class));
     }
 
     public function nextIssueClusterPage(): void
     {
         $this->issueClusterPage = min($this->issueClusterLastPage, $this->issueClusterPage + 1);
-        $this->refreshIssueClusters(app(SeoDashboardApiReadService::class));
+        $this->refreshIssueClusters(app(SeoOperationsReadService::class));
     }
 
     public function previousClusterUrlPage(): void
     {
         $this->clusterUrlPage = max(1, $this->clusterUrlPage - 1);
-        $this->refreshClusterUrls(app(SeoDashboardApiReadService::class));
+        $this->refreshClusterUrls(app(SeoOperationsReadService::class));
     }
 
     public function nextClusterUrlPage(): void
     {
         $this->clusterUrlPage = min($this->clusterUrlLastPage, $this->clusterUrlPage + 1);
-        $this->refreshClusterUrls(app(SeoDashboardApiReadService::class));
+        $this->refreshClusterUrls(app(SeoOperationsReadService::class));
     }
 
     public function applyIssueWorkflow(SeoIssueWorkflowService $workflow, AuditLogger $audit): void
@@ -612,7 +626,16 @@ class SeoOperationsPage extends Page
 
     public static function canAccess(): bool
     {
-        return ContentAccess::canRead();
+        if (ContentAccess::canRead()) {
+            return true;
+        }
+
+        $user = auth((string) config('admin.guard', 'admin'))->user();
+
+        return is_object($user)
+            && method_exists($user, 'hasPermission')
+            && ($user->hasPermission(PermissionNames::ADMIN_OWNER)
+                || $user->hasPermission(PermissionNames::ADMIN_OPS_READ));
     }
 
     /**
@@ -868,23 +891,39 @@ class SeoOperationsPage extends Page
 
     private function refreshSeoIntel(): void
     {
+        $reader = app(SeoOperationsReadService::class);
+        $this->platformReadModels = $reader->read([
+            'days' => $this->gscDays,
+            'device' => $this->gscDevice,
+            'country' => $this->gscCountry,
+            'locale' => $this->gscLocale,
+            'search_type' => $this->gscSearchType,
+        ]);
+
         try {
-            $reader = app(SeoDashboardApiReadService::class);
-            $this->searchPerformance = $reader->searchPerformance([
-                'days' => $this->gscDays,
-                'device' => $this->gscDevice,
-                'country' => $this->gscCountry,
-                'locale' => $this->gscLocale,
-                'search_type' => $this->gscSearchType,
+            $this->searchPerformance = (array) data_get($this->platformReadModels, 'performance.gsc', [
+                'connected' => false,
+                'state' => 'unavailable',
+                'totals' => [],
+                'daily' => [],
+                'query_page_rows' => [],
             ]);
-            $this->opportunityReadModel = $reader->opportunityQueue(self::ISSUE_QUEUE_PER_PAGE);
+            $this->opportunityReadModel = (array) data_get($this->platformReadModels, 'opportunities', [
+                'state' => 'unavailable',
+                'recent_rows' => [],
+            ]);
             $this->opportunityQueue = (array) data_get($this->opportunityReadModel, 'recent_rows', []);
-            $this->technicalAudit = $reader->technicalAudits(self::ISSUE_QUEUE_PER_PAGE);
+            $this->technicalAudit = (array) data_get($this->platformReadModels, 'technical.audit', [
+                'state' => 'unavailable',
+                'rows' => [],
+                'sources' => [],
+            ]);
             $this->refreshIssueClusters($reader);
             if ($this->selectedClusterUid !== '') {
                 $this->refreshClusterUrls($reader);
             }
-            $this->seoIntelAvailable = true;
+            $this->seoIntelAvailable = collect($this->platformReadModels)
+                ->contains(fn (array $model): bool => ($model['state'] ?? null) === 'connected');
         } catch (Throwable) {
             $this->searchPerformance = ['connected' => false, 'state' => 'unavailable', 'totals' => [], 'daily' => [], 'query_page_rows' => []];
             $this->opportunityQueue = [];
@@ -902,12 +941,12 @@ class SeoOperationsPage extends Page
 
         $gscConnected = (bool) ($this->searchPerformance['source_connected'] ?? $this->searchPerformance['connected'] ?? false);
         $this->dataSources = [
-            ['key' => 'cms', 'label' => __('ops.custom_pages.seo_operations.sources.cms'), 'connected' => true, 'source' => 'primary database', 'updated_at' => now()->toAtomString()],
-            ['key' => 'gsc', 'label' => __('ops.custom_pages.seo_operations.sources.gsc'), 'connected' => $gscConnected, 'state' => $this->searchPerformance['state'] ?? 'disconnected', 'source' => ($this->searchPerformance['data_available'] ?? false) ? 'seo_intel.seo_gsc_daily' : null, 'updated_at' => $this->searchPerformance['last_success_at'] ?? $this->searchPerformance['updated_at'] ?? null],
-            ['key' => 'cwv', 'label' => __('ops.custom_pages.seo_operations.sources.cwv'), 'connected' => false, 'phase' => __('ops.custom_pages.seo_operations.phase_two')],
-            ['key' => 'rank', 'label' => __('ops.custom_pages.seo_operations.sources.rank_tracking'), 'connected' => false, 'phase' => __('ops.custom_pages.seo_operations.phase_two')],
-            ['key' => 'ai', 'label' => __('ops.custom_pages.seo_operations.workspace.ai'), 'connected' => false, 'phase' => __('ops.custom_pages.seo_operations.phase_two')],
-            ['key' => 'backlinks', 'label' => __('ops.custom_pages.seo_operations.sources.backlinks'), 'connected' => false, 'phase' => __('ops.custom_pages.seo_operations.phase_two')],
+            ['key' => 'cms', 'label' => __('ops.custom_pages.seo_operations.sources.cms'), 'connected' => true, 'state' => 'connected', 'source' => 'primary_database', 'updated_at' => now()->toAtomString(), 'unavailable_reason' => null],
+            ['key' => 'gsc', 'label' => __('ops.custom_pages.seo_operations.sources.gsc'), 'connected' => $gscConnected, 'state' => $this->searchPerformance['state'] ?? 'unavailable', 'source' => 'seo_intel.seo_gsc_daily', 'updated_at' => $this->searchPerformance['last_success_at'] ?? $this->searchPerformance['updated_at'] ?? null, 'unavailable_reason' => $gscConnected ? null : ($this->searchPerformance['failure_code'] ?? 'gsc_read_model_unavailable')],
+            ['key' => 'cwv', 'label' => __('ops.custom_pages.seo_operations.sources.cwv'), 'connected' => false, 'state' => 'not_connected', 'source' => 'crux_or_pagespeed_field_data', 'updated_at' => null, 'unavailable_reason' => 'provider_not_connected'],
+            ['key' => 'rank', 'label' => __('ops.custom_pages.seo_operations.sources.rank_tracking'), 'connected' => false, 'state' => 'not_implemented', 'source' => 'rank_tracking', 'updated_at' => null, 'unavailable_reason' => 'not_implemented'],
+            ['key' => 'ai', 'label' => __('ops.custom_pages.seo_operations.workspace.ai'), 'connected' => false, 'state' => 'not_implemented', 'source' => 'seo_agent_runtime', 'updated_at' => null, 'unavailable_reason' => 'not_implemented'],
+            ['key' => 'backlinks', 'label' => __('ops.custom_pages.seo_operations.sources.backlinks'), 'connected' => false, 'state' => 'not_connected', 'source' => 'backlink_provider', 'updated_at' => null, 'unavailable_reason' => 'provider_not_connected'],
         ];
 
         try {
@@ -930,7 +969,7 @@ class SeoOperationsPage extends Page
         $this->refreshDecisionOverview();
     }
 
-    private function refreshIssueClusters(SeoDashboardApiReadService $reader): void
+    private function refreshIssueClusters(SeoOperationsReadService $reader): void
     {
         $result = $reader->issueClusters($this->clusterFilters(), page: $this->issueClusterPage, perPage: self::ISSUE_QUEUE_PER_PAGE);
         $this->issueClusters = (array) ($result['rows'] ?? []);
@@ -1072,7 +1111,7 @@ class SeoOperationsPage extends Page
         $this->inspectIssueCluster($clusterUid);
     }
 
-    private function refreshClusterUrls(SeoDashboardApiReadService $reader): void
+    private function refreshClusterUrls(SeoOperationsReadService $reader): void
     {
         if ($this->selectedClusterUid === '') {
             $this->clusterUrls = [];
@@ -1108,7 +1147,7 @@ class SeoOperationsPage extends Page
     private function fullClusterExport(): array
     {
         try {
-            $reader = app(SeoDashboardApiReadService::class);
+            $reader = app(SeoOperationsReadService::class);
             $export = $reader->issueClusterExport($this->clusterFilters());
             $clusters = (array) ($export['clusters'] ?? []);
             $urls = (array) ($export['urls'] ?? []);

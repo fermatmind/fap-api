@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel\OpsDashboard;
 
+use App\Services\SeoIntel\PageFamily\PageFamilyClassifier;
 use Illuminate\Support\Facades\Schema;
+use Throwable;
 
 final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
 {
@@ -382,7 +384,7 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
      */
     public function opportunityQueue(int $limit = 25): array
     {
-        return (new SeoOpportunityQueueReadService)->read($limit);
+        return (new SeoOpportunityQueueReadService($this->connectionName))->read($limit);
     }
 
     /** @return array<string, mixed> */
@@ -394,7 +396,95 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
     /** @return array<string, mixed> */
     public function technicalAudits(int $limit = 25): array
     {
-        return (new SeoTechnicalAuditReadService)->read($limit);
+        return (new SeoTechnicalAuditReadService($this->connectionName))->read($limit);
+    }
+
+    /** @return array<string,mixed> */
+    public function pageInspector(string $issueUid): array
+    {
+        $issue = $this->table('seo_issue_queue')->where('issue_uid', $issueUid)->first();
+        if ($issue === null) {
+            return ['state' => 'unavailable', 'unavailable_reason' => 'issue_not_found'];
+        }
+
+        $urlHash = trim((string) ($issue->canonical_url_hash ?? ''));
+        $truth = $urlHash === '' ? null : $this->table('seo_urls')->where('canonical_url_hash', $urlHash)->first();
+        $canonicalPath = $this->safePath(is_string($truth->canonical_url ?? $issue->canonical_url ?? null)
+            ? (string) ($truth->canonical_url ?? $issue->canonical_url)
+            : null);
+        if ($canonicalPath === null || $this->isPrivatePath($canonicalPath) || (bool) ($truth->is_private_flow ?? false)) {
+            return ['state' => 'unavailable', 'unavailable_reason' => 'private_or_unmapped_surface'];
+        }
+
+        $metadata = $this->decodeJson($truth->metadata_json ?? null);
+        $entity = null;
+        try {
+            $entity = $this->table('seo_url_entities')
+                ->where('locale', (string) ($truth->locale ?? $issue->locale ?? ''))
+                ->where('page_entity_type', (string) ($truth->page_entity_type ?? $issue->page_entity_type ?? ''))
+                ->where('entity_id_or_slug', (string) ($truth->entity_id_or_slug ?? ''))
+                ->first();
+        } catch (Throwable) {
+            $entity = null;
+        }
+
+        $classification = (new PageFamilyClassifier)->classify([
+            'canonical_url' => (string) ($truth->canonical_url ?? $issue->canonical_url ?? ''),
+            'locale' => (string) ($truth->locale ?? $issue->locale ?? ''),
+            'page_entity_type' => (string) ($truth->page_entity_type ?? $issue->page_entity_type ?? ''),
+            'entity_source' => (string) ($entity->entity_source ?? $metadata['entity_source'] ?? ''),
+            'source_authority' => (string) ($truth->source_authority ?? ''),
+            'authority_status' => (string) ($entity->authority_status ?? $metadata['authority_status'] ?? ''),
+            'indexability_state' => (string) ($truth->indexability_state ?? ''),
+            'is_private_flow' => false,
+        ]);
+        $gsc = $urlHash === '' ? null : $this->table('seo_gsc_daily')
+            ->where('canonical_url_hash', $urlHash)
+            ->selectRaw('COALESCE(SUM(clicks), 0) AS clicks')
+            ->selectRaw('COALESCE(SUM(impressions), 0) AS impressions')
+            ->selectRaw('MAX(report_date) AS last_report_date')
+            ->first();
+
+        return [
+            'state' => 'connected',
+            'source' => 'seo_intel.page_inspector',
+            'observed_at' => now()->toAtomString(),
+            'updated_at' => $this->normalizeTimestamp($truth->updated_at ?? $issue->updated_at ?? null),
+            'unavailable_reason' => null,
+            'canonical_path' => $canonicalPath,
+            'family' => $classification['family_id'] ?? null,
+            'family_state' => $classification['classification_status'] ?? 'unclassified',
+            'family_risk_cap' => $classification['agent_risk_cap'] ?? 'L0',
+            'locale' => (string) ($truth->locale ?? $issue->locale ?? ''),
+            'entity_type' => (string) ($truth->page_entity_type ?? $issue->page_entity_type ?? ''),
+            'authority' => (string) ($truth->source_authority ?? ''),
+            'entity_source' => (string) ($entity->entity_source ?? $metadata['entity_source'] ?? ''),
+            'publication_state' => (string) ($entity->authority_status ?? $metadata['authority_status'] ?? 'unavailable'),
+            'indexability_state' => (string) ($truth->indexability_state ?? 'unavailable'),
+            'canonical_state' => (string) ($metadata['canonical_state'] ?? 'authority_path_present'),
+            'hreflang_state' => $metadata['hreflang_state'] ?? 'unavailable',
+            'schema_state' => $metadata['schema_state'] ?? 'unavailable',
+            'sitemap_eligible' => $metadata['sitemap_eligible'] ?? null,
+            'llms_eligible' => $metadata['llms_eligible'] ?? null,
+            'cms_revision' => $metadata['cms_revision'] ?? $metadata['revision_id'] ?? null,
+            'cms_edit_url' => $this->safeAuthenticatedPath($metadata['cms_edit_url'] ?? null),
+            'preview_url' => $this->safePublicPath($metadata['preview_url'] ?? null),
+            'revert_state' => $metadata['revert_state'] ?? $metadata['rollback_state'] ?? 'unavailable',
+            'gsc' => $gsc === null ? ['state' => 'unavailable', 'unavailable_reason' => 'no_url_truth_binding'] : [
+                'state' => $gsc->last_report_date === null ? 'measurement_hold' : 'connected',
+                'clicks' => $gsc->last_report_date === null ? null : (int) $gsc->clicks,
+                'impressions' => $gsc->last_report_date === null ? null : (int) $gsc->impressions,
+                'updated_at' => $this->normalizeTimestamp($gsc->last_report_date),
+                'unavailable_reason' => $gsc->last_report_date === null ? 'no_gsc_rows' : null,
+            ],
+            'issue' => [
+                'issue_uid' => (string) $issue->issue_uid,
+                'type' => (string) $issue->issue_type,
+                'status' => (string) $issue->status,
+                'summary' => $issue->summary ?? null,
+                'recommendation' => $issue->recommendation ?? null,
+            ],
+        ];
     }
 
     /**
@@ -507,5 +597,34 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
         }
 
         return $sourceSystem.':'.$sourceEngine;
+    }
+
+    private function isPrivatePath(string $path): bool
+    {
+        return preg_match('#/(?:result|results|attempt|attempts|report|reports|history|share|shares|order|orders|payment|payments|token)(?:/|$)#i', $path) === 1;
+    }
+
+    private function safeAuthenticatedPath(mixed $value): ?string
+    {
+        $path = is_string($value) ? $this->safePath($value) : null;
+
+        return is_string($path) && str_starts_with($path, '/ops/') ? $path : null;
+    }
+
+    private function safePublicPath(mixed $value): ?string
+    {
+        $path = is_string($value) ? $this->safePath($value) : null;
+
+        if (! is_string($path) || $this->isPrivatePath($path)) {
+            return null;
+        }
+
+        foreach (['/ops', '/api', '/admin'] as $protectedPrefix) {
+            if ($path === $protectedPrefix || str_starts_with($path, $protectedPrefix.'/')) {
+                return null;
+            }
+        }
+
+        return $path;
     }
 }

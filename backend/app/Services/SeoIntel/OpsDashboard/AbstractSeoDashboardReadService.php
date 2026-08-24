@@ -83,13 +83,11 @@ abstract class AbstractSeoDashboardReadService
         }
 
         $path = parse_url($canonicalUrl, PHP_URL_PATH);
-        $query = parse_url($canonicalUrl, PHP_URL_QUERY);
-
         if (! is_string($path) || $path === '') {
             return '/';
         }
 
-        return is_string($query) && $query !== '' ? $path.'?'.$query : $path;
+        return $path;
     }
 
     /**

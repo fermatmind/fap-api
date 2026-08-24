@@ -186,7 +186,7 @@
 
         <section class="ops-seo-source-strip" aria-label="{{ __('ops.custom_pages.seo_operations.sources.title') }}">
             @foreach ($dataSources as $source)
-                <div @class(['ops-seo-source', 'ops-seo-source--connected' => !empty($source['connected'])])>
+                <div @class(['ops-seo-source', 'ops-seo-source--connected' => !empty($source['connected'])]) data-state="{{ $source['state'] ?? (!empty($source['connected']) ? 'connected' : 'not_connected') }}">
                     <span class="ops-seo-source__signal" aria-hidden="true"></span>
                     <div>
                         <strong>{{ $source['label'] }}</strong>
@@ -195,6 +195,48 @@
                 </div>
             @endforeach
         </section>
+
+        @if ($activeWorkspace === 'overview')
+            @php
+                $platformOverview = (array) data_get($platformReadModels, 'overview', []);
+                $familyPolicy = (array) data_get($platformOverview, 'url_truth.page_family_policy', []);
+                $platformMetrics = [
+                    ['label' => __('ops.custom_pages.seo_operations.platform.public_authority'), 'value' => data_get($familyPolicy, 'coverage.current_public_authority_total')],
+                    ['label' => __('ops.custom_pages.seo_operations.platform.url_truth'), 'value' => data_get($platformOverview, 'url_truth.total_count')],
+                    ['label' => __('ops.custom_pages.seo_operations.platform.url_truth_gaps'), 'value' => data_get($familyPolicy, 'url_truth_missing_handoff.current_count')],
+                    ['label' => __('ops.custom_pages.seo_operations.platform.issues'), 'value' => data_get($platformOverview, 'issues.total_count')],
+                    ['label' => __('ops.custom_pages.seo_operations.platform.opportunities'), 'value' => data_get($platformReadModels, 'opportunities.total_count')],
+                    ['label' => __('ops.custom_pages.seo_operations.platform.private_leaks'), 'value' => data_get($platformOverview, 'url_truth.safety_counts.private_flow_count')],
+                    ['label' => __('ops.custom_pages.seo_operations.platform.search_submission'), 'value' => data_get($platformOverview, 'search_submission.state')],
+                    ['label' => __('ops.custom_pages.seo_operations.platform.scheduler'), 'value' => data_get($platformOverview, 'scheduler.state')],
+                ];
+            @endphp
+            <x-filament-ops::ops-section
+                :title="__('ops.custom_pages.seo_operations.platform.title')"
+                :description="__('ops.custom_pages.seo_operations.platform.description')"
+            >
+                <p class="ops-control-hint">
+                    {{ __('ops.custom_pages.seo_operations.platform.source_contract', [
+                        'state' => $platformOverview['state'] ?? 'unavailable',
+                        'source' => $platformOverview['source'] ?? 'seo_intel',
+                        'observed' => $platformOverview['observed_at'] ?? '-',
+                    ]) }}
+                </p>
+                <div class="ops-data-strip">
+                    @foreach ($platformMetrics as $metric)
+                        <div class="ops-metric">
+                            <span class="ops-metric__label">{{ $metric['label'] }}</span>
+                            <span class="ops-metric__value tnum">{{ $metric['value'] === null ? __('ops.custom_pages.seo_operations.platform.not_available') : $metric['value'] }}</span>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="ops-tag-list">
+                    <span class="ops-tag">{{ __('ops.custom_pages.seo_operations.platform.page_family') }} · {{ $familyPolicy['policy_version'] ?? __('ops.custom_pages.seo_operations.platform.not_available') }}</span>
+                    <span class="ops-tag">{{ __('ops.custom_pages.seo_operations.platform.search_queue') }} · {{ data_get($platformOverview, 'search_channel.total_counts.items') ?? __('ops.custom_pages.seo_operations.platform.not_available') }}</span>
+                    <span class="ops-tag">{{ __('ops.custom_pages.seo_operations.platform.crawler') }} · {{ data_get($platformOverview, 'crawler.total_count') ?? __('ops.custom_pages.seo_operations.platform.not_available') }}</span>
+                </div>
+            </x-filament-ops::ops-section>
+        @endif
 
         @if ($activeWorkspace !== 'overview')
         <nav class="ops-seo-related-links" aria-label="{{ __('ops.custom_pages.seo_operations.title') }}">
@@ -266,6 +308,21 @@
                             @endforeach
                         </div>
                     @endif
+                    @php($publicFunnel = (array) data_get($platformReadModels, 'performance.public_funnel', []))
+                    <h3>{{ __('ops.custom_pages.seo_operations.platform.public_funnel') }}</h3>
+                    @if ((array) ($publicFunnel['warnings'] ?? []) === [])
+                        <div class="ops-data-strip">
+                            @foreach ([
+                                ['label' => __('ops.custom_pages.seo_operations.platform.landing_views'), 'value' => data_get($publicFunnel, 'totals.landing_pv_count')],
+                                ['label' => __('ops.custom_pages.seo_operations.platform.test_starts'), 'value' => data_get($publicFunnel, 'totals.start_test_count')],
+                                ['label' => __('ops.custom_pages.seo_operations.platform.result_views'), 'value' => data_get($publicFunnel, 'totals.view_result_count')],
+                            ] as $metric)
+                                <div class="ops-metric"><span class="ops-metric__label">{{ $metric['label'] }}</span><span class="ops-metric__value tnum">{{ $metric['value'] ?? __('ops.custom_pages.seo_operations.platform.not_available') }}</span></div>
+                            @endforeach
+                        </div>
+                    @else
+                        <p class="ops-control-hint">measurement_hold · {{ collect($publicFunnel['warnings'])->join(' · ') }}</p>
+                    @endif
                 @else
                     <x-filament-ops::ops-not-connected
                         :title="__('ops.custom_pages.seo_operations.performance.source_name')"
@@ -301,8 +358,18 @@
         @endif
 
         @if ($activeWorkspace === 'ai')
-            <x-filament-ops::ops-section :title="__('ops.custom_pages.seo_operations.workspace.ai')" :description="__('ops.custom_pages.seo_operations.phase_two')">
-                <x-filament-ops::ops-not-connected :title="__('ops.custom_pages.seo_operations.workspace.ai')" :description="__('ops.custom_pages.seo_operations.sources.not_connected')" />
+            <x-filament-ops::ops-section :title="__('ops.custom_pages.seo_operations.workspace.ai')" :description="__('ops.custom_pages.seo_operations.platform.not_implemented')">
+                <x-filament-ops::ops-not-connected :title="__('ops.custom_pages.seo_operations.workspace.ai')" :description="data_get($platformReadModels, 'ai.unavailable_reason', 'not_implemented')" />
+                <p class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.platform.source_contract', [
+                    'state' => data_get($platformReadModels, 'ai.state', 'not_implemented'),
+                    'source' => data_get($platformReadModels, 'ai.source', 'seo_agent_runtime'),
+                    'observed' => data_get($platformReadModels, 'ai.observed_at', '-'),
+                ]) }}</p>
+                <div class="ops-tag-list">
+                    @foreach ((array) data_get($platformReadModels, 'ai.risk_caps', []) as $family => $cap)
+                        <span class="ops-tag">{{ $this->operatorLabel($family) }} · {{ $cap }}</span>
+                    @endforeach
+                </div>
             </x-filament-ops::ops-section>
         @endif
 
@@ -379,6 +446,19 @@
             @if (($technicalAudit['state'] ?? 'unavailable') === 'unavailable')
                 <x-filament-ops::ops-not-connected :title="__('ops.custom_pages.seo_operations.technical.title')" :description="__('ops.custom_pages.seo_operations.technical.unavailable')" />
             @else
+                <p class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.platform.source_contract', [
+                    'state' => data_get($platformReadModels, 'technical.state', 'unavailable'),
+                    'source' => data_get($platformReadModels, 'technical.source', 'seo_intel'),
+                    'observed' => data_get($platformReadModels, 'technical.observed_at', '-'),
+                ]) }}</p>
+                <h3>{{ __('ops.custom_pages.seo_operations.platform.family_distribution') }}</h3>
+                <div class="ops-tag-list">
+                    @forelse ((array) data_get($platformReadModels, 'technical.url_truth.page_family_policy.family_locale_distribution', []) as $family => $locales)
+                        <span class="ops-tag">{{ $family }} · zh-CN {{ $locales['zh-CN'] ?? 0 }} · en {{ $locales['en'] ?? 0 }} · unknown {{ $locales['unknown'] ?? 0 }}</span>
+                    @empty
+                        <span class="ops-tag">{{ __('ops.custom_pages.seo_operations.platform.not_available') }}</span>
+                    @endforelse
+                </div>
                 <div class="ops-seo-source-strip">
                     @foreach (($technicalAudit['sources'] ?? []) as $source => $sourceState)
                         <div @class(['ops-seo-source', 'ops-seo-source--connected' => ($sourceState['state'] ?? '') === 'connected'])>
@@ -431,6 +511,12 @@
             @if (!$seoIntelAvailable)
                 <x-filament-ops::ops-not-connected :title="__('ops.custom_pages.seo_operations.workspace.execution')" :description="__('ops.custom_pages.seo_operations.execution.unavailable')" />
             @else
+                <h3>{{ __('ops.custom_pages.seo_operations.platform.execution_boundaries') }}</h3>
+                <div class="ops-tag-list">
+                    <span class="ops-tag">{{ __('ops.custom_pages.seo_operations.platform.search_queue') }} · {{ data_get($platformReadModels, 'execution.search_channel.state', 'unavailable') }} · {{ data_get($platformReadModels, 'execution.search_channel.total_counts.items') ?? __('ops.custom_pages.seo_operations.platform.not_available') }}</span>
+                    <span class="ops-tag">{{ __('ops.custom_pages.seo_operations.platform.search_submission') }} · {{ data_get($platformReadModels, 'execution.boundaries.search_submission_allowed', false) ? 'enabled' : 'measurement_hold' }}</span>
+                    <span class="ops-tag">{{ __('ops.custom_pages.seo_operations.platform.canary') }} · {{ collect((array) data_get($platformReadModels, 'execution.boundaries.career_canary_sequence', []))->join(' → ') }}</span>
+                </div>
                 @if (\App\Filament\Ops\Support\ContentAccess::canWrite())
                     <x-filament-ops::ops-toolbar>
                         <div class="ops-toolbar-inline">
@@ -492,9 +578,46 @@
                 @if ($selectedClusterUid !== '')
                     <aside class="ops-seo-inspector" aria-label="{{ __('ops.custom_pages.seo_operations.clusters.inspector') }}">
                     <div class="ops-seo-section-heading"><div><h3>{{ __('ops.custom_pages.seo_operations.clusters.inspector') }}</h3><p>{{ __('ops.custom_pages.seo_operations.clusters.issue_rows', ['count' => $clusterUrlTotal]) }}</p></div></div>
+                    @if ($pageInspector !== [])
+                        <div class="ops-card-list" data-page-inspector-state="{{ $pageInspector['state'] ?? 'unavailable' }}">
+                            <x-filament-ops::ops-result-card
+                                :title="$pageInspector['canonical_path'] ?? __('ops.custom_pages.seo_operations.platform.not_available')"
+                                :meta="collect([$pageInspector['family'] ?? 'unclassified', $pageInspector['locale'] ?? '-', $pageInspector['entity_type'] ?? '-'])->join(' · ')"
+                            >
+                                <div class="ops-tag-list">
+                                    @foreach ([
+                                        'authority' => $pageInspector['authority'] ?? null,
+                                        'publication' => $pageInspector['publication_state'] ?? null,
+                                        'indexability' => $pageInspector['indexability_state'] ?? null,
+                                        'canonical' => $pageInspector['canonical_state'] ?? null,
+                                        'hreflang' => $pageInspector['hreflang_state'] ?? null,
+                                        'schema' => $pageInspector['schema_state'] ?? null,
+                                        'sitemap' => $pageInspector['sitemap_eligible'] ?? null,
+                                        'llms' => $pageInspector['llms_eligible'] ?? null,
+                                        'cms revision' => $pageInspector['cms_revision'] ?? null,
+                                        'family risk cap' => $pageInspector['family_risk_cap'] ?? null,
+                                        'rollback' => $pageInspector['revert_state'] ?? null,
+                                    ] as $label => $value)
+                                        <span class="ops-tag">{{ $this->operatorLabel($label) }} · {{ $value === null ? 'unavailable' : (is_bool($value) ? ($value ? 'eligible' : 'ineligible') : $value) }}</span>
+                                    @endforeach
+                                </div>
+                                <p class="ops-control-hint">GSC · {{ data_get($pageInspector, 'gsc.state', 'unavailable') }} · {{ data_get($pageInspector, 'gsc.clicks') ?? 'unavailable' }} clicks · {{ data_get($pageInspector, 'gsc.impressions') ?? 'unavailable' }} impressions</p>
+                                <p>{{ data_get($pageInspector, 'issue.summary') ?? '-' }}</p>
+                                <p class="ops-control-hint">{{ data_get($pageInspector, 'issue.recommendation') ?? '-' }}</p>
+                                <x-slot name="actions">
+                                    @if (!empty($pageInspector['cms_edit_url']))
+                                        <x-filament::button size="xs" tag="a" href="{{ $pageInspector['cms_edit_url'] }}">CMS edit</x-filament::button>
+                                    @endif
+                                    @if (!empty($pageInspector['preview_url']))
+                                        <x-filament::button size="xs" color="gray" tag="a" href="{{ $pageInspector['preview_url'] }}">Preview</x-filament::button>
+                                    @endif
+                                </x-slot>
+                            </x-filament-ops::ops-result-card>
+                        </div>
+                    @endif
                     <div class="ops-table-shell"><table class="ops-table"><thead><tr><th>{{ __('ops.custom_pages.seo_operations.table.page') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.type_locale') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.severity') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.status') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.evidence') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.recommendation') }}</th></tr></thead><tbody>
                         @forelse ($clusterUrls as $url)
-                            <tr><td>{{ $url['canonical_path'] ?? '-' }}</td><td>{{ $this->operatorLabel($url['page_entity_type'] ?? null) }} · {{ $url['locale'] ?? '-' }}</td><td>{{ $this->operatorLabel($url['severity']) }}</td><td>{{ $this->operatorLabel($url['status']) }} / {{ $this->operatorLabel($url['lifecycle_state']) }}<br><span class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.execution.owner') }}: {{ empty($url['owner_admin_user_id']) ? __('ops.custom_pages.seo_operations.execution.unassigned') : __('ops.custom_pages.seo_operations.execution.assigned') }} · {{ __('ops.custom_pages.seo_operations.execution.sla') }} {{ $url['sla_due_at'] ?? '-' }}</span><br><span class="ops-control-hint">{{ $url['ignore_reason'] ?? $url['verification_note'] ?? $url['operator_note'] ?? '-' }}</span></td><td><details><summary>{{ __('ops.custom_pages.seo_operations.technical.evidence_available') }}</summary><span class="ops-control-hint">{{ $url['summary'] ?? '-' }}</span></details></td><td>{{ $url['recommendation'] ?? '-' }}</td></tr>
+                            <tr><td>{{ $url['canonical_path'] ?? '-' }}<br><x-filament::button size="xs" color="gray" type="button" wire:click="inspectPage('{{ $url['issue_uid'] }}')">{{ __('ops.custom_pages.common.actions.inspect') }}</x-filament::button></td><td>{{ $this->operatorLabel($url['page_entity_type'] ?? null) }} · {{ $url['locale'] ?? '-' }}</td><td>{{ $this->operatorLabel($url['severity']) }}</td><td>{{ $this->operatorLabel($url['status']) }} / {{ $this->operatorLabel($url['lifecycle_state']) }}<br><span class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.execution.owner') }}: {{ empty($url['owner_admin_user_id']) ? __('ops.custom_pages.seo_operations.execution.unassigned') : __('ops.custom_pages.seo_operations.execution.assigned') }} · {{ __('ops.custom_pages.seo_operations.execution.sla') }} {{ $url['sla_due_at'] ?? '-' }}</span><br><span class="ops-control-hint">{{ $url['ignore_reason'] ?? $url['verification_note'] ?? $url['operator_note'] ?? '-' }}</span></td><td><details><summary>{{ __('ops.custom_pages.seo_operations.technical.evidence_available') }}</summary><span class="ops-control-hint">{{ $url['summary'] ?? '-' }}</span></details></td><td>{{ $url['recommendation'] ?? '-' }}</td></tr>
                         @empty
                             <tr><td colspan="6">{{ __('ops.custom_pages.seo_operations.no_issues') }}</td></tr>
                         @endforelse

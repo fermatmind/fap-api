@@ -1,0 +1,59 @@
+{
+  "schema_version": "seo-platform-03-entry-consolidation.v1",
+  "task": "SEO-PLATFORM-03",
+  "canonical_ui": "/ops/seo-operations",
+  "legacy_ui": {
+    "path": "/ops/seo",
+    "mode": "authenticated_compatibility_redirect",
+    "dashboard_queries": false,
+    "navigation_registered": false
+  },
+  "composition": {
+    "service": "App\\Services\\Ops\\SeoOperationsReadService",
+    "authority_owned": false,
+    "sql_copied": false,
+    "required_state_fields": ["state", "source", "observed_at", "updated_at", "unavailable_reason"],
+    "workspaces": ["overview", "performance", "technical", "opportunities", "ai", "execution"]
+  },
+  "production_baseline": {
+    "observed_at": "2026-08-24",
+    "public_authority_total": 2623,
+    "exactly_one_family_count": 2623,
+    "unclassified_count": 0,
+    "ambiguous_count": 0,
+    "private_negative_set_leak_count": 0,
+    "current_url_truth_gap_count": 77,
+    "public_sitemap_count": 2643,
+    "sitemap_minus_public_authority": 20,
+    "gsc_detail_rows": 15165,
+    "gsc_date_points": 83,
+    "gsc_clicks": 278,
+    "gsc_impressions": 22438,
+    "gsc_latest_lag_days": 3,
+    "open_issue_count": 5,
+    "issue_cluster_count": 3,
+    "search_submission_enabled": false
+  },
+  "unavailable_capabilities": {
+    "seo_scheduler": "not_implemented",
+    "seo_agent_workspace": "not_implemented",
+    "field_cwv": "not_connected",
+    "rank_tracking": "not_implemented",
+    "backlinks": "not_connected"
+  },
+  "writes_performed": {
+    "cms": false,
+    "url_truth": false,
+    "gsc": false,
+    "search_channel": false,
+    "indexnow": false,
+    "search_submission": false
+  },
+  "schema_or_authority_changes": {
+    "migration": false,
+    "new_table": false,
+    "new_external_api": false,
+    "new_authority": false,
+    "new_write_service": false
+  }
+}
