@@ -94,6 +94,7 @@ final class SeoConversionDailyBuilderTest extends TestCase
         $this->assertSame(1, (int) $row->view_result_count);
         $this->assertSame(1, (int) $row->return_public_content_count);
         $this->assertSame('pass', data_get($result, 'readback_receipt.status'));
+        $this->assertSame(1, data_get($result, 'readback_receipt.expected_metrics.return_public_content_count'));
         $this->assertFalse(data_get($result, 'readback_receipt.raw_session_or_business_identifiers_exposed'));
         $this->assertStringNotContainsString($sessionId, json_encode((array) $row, JSON_THROW_ON_ERROR));
         $this->assertStringNotContainsString('secret', json_encode((array) $row, JSON_THROW_ON_ERROR));

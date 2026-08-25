@@ -20,6 +20,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        // Expand-only: historical public funnel observations remain available.
+        // Expand-only: all five public funnel stages remain available to the rolling read model.
     }
 };
