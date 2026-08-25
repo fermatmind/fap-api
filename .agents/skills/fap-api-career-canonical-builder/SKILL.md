@@ -58,6 +58,18 @@ php .agents/skills/fap-api-career-canonical-builder/scripts/split_legacy_current
 
 The splitter binds the committed legacy `assets.jsonl` and manifest before and after execution, normalizes the 1045 wrapped plus one direct locale shape, writes exactly 10 × 64 candidate shards, mechanically reconstructs every source row before accepting it, and emits coverage, ownership, integrity, manifest, and repository-zero-write evidence. It rejects symlinks, repository/path escape, unknown output files, invalid locale/slug/canonical JSON, duplicate identity, wrong ordering, coverage drift, and mid-run baseline drift. Repeating the same input must reproduce identical candidate bytes. A PASS keeps publication/current/deploy/search authority false.
 
+## Sharded candidate assembly
+
+Use `scripts/assemble_sharded_current.php` to assemble a complete temporary legacy projection from splitter candidate shards. Both roots must already exist outside the repository under a system temporary root, and they must differ:
+
+```bash
+php .agents/skills/fap-api-career-canonical-builder/scripts/assemble_sharded_current.php \
+  --candidate-root=<existing-candidate-temp-dir> \
+  --output-root=<existing-assembly-temp-dir>
+```
+
+The assembler validates the manifest aggregate, all 640 shard declarations and hashes, every canonical line identity and deterministic shard placement, 1046 × 2 × 10 coverage, exact module content fields, 28-component ownership/order, locale pairing, source/claim dependencies, and visible-FAQ-to-FAQPage derivation. It assembles only from module records; legacy `assets.jsonl` is read afterward solely as an equivalence oracle and is never an unmapped-field fallback. A PASS requires byte-identical 1046-row output plus separately identical hashes for all 2092 public pages, SEO, FAQ/schema, sources/claims, CTA/links, component payloads, and all 1046 zh-CN `presentation_v1` projections. Output and receipts remain temporary candidate evidence with zero Current/runtime/publication writes.
+
 ## Acceptance
 
 - The compiler reports 1046 careers, 2092 locale pages, and the current exact v4.3/28-component contract; v4.2/26 remains read-only compatible.

@@ -77,6 +77,18 @@ final class CareerLegacyCurrentSharder
         'template_version',
     ];
 
+    /** @return array<string,string> */
+    public static function componentModuleMap(): array
+    {
+        return self::COMPONENT_MODULE;
+    }
+
+    /** @return list<string> */
+    public static function expectedRowKeys(): array
+    {
+        return self::EXPECTED_ROW_KEYS;
+    }
+
     private const EXPECTED_SLUGS = 1046;
 
     private const EXPECTED_LOCALE_PAGES = 2092;

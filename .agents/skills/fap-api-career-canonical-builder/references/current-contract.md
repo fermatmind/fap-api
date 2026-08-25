@@ -8,6 +8,9 @@ Use source at the exact candidate SHA; these paths are the maintained contract:
 - `backend/app/Domain/Career/Display/CareerDisplayAssetComponentContract.php`: exact current v4.3/28-component order, v4.2/26 read compatibility, and page-shape validation.
 - `backend/app/Domain/Career/Display/CareerCurrentAuthorityPackage.php`: 1046-row/2092-locale package, canonical encoding, hashes, and public projection.
 - `backend/tests/Unit/Domain/Career/Compilation/CareerTenBlockCurrentPackageCompilerTest.php` and `backend/tests/Unit/Domain/Career/Display/CareerDisplayAssetComponentContractTest.php`: focused executable coverage.
+- `.agents/skills/fap-api-career-canonical-builder/scripts/split_legacy_current.php`: deterministic read-only legacy-to-module sharder.
+- `.agents/skills/fap-api-career-canonical-builder/scripts/assemble_sharded_current.php`: full module-only assembler and legacy equivalence oracle boundary.
+- `backend/tests/Unit/Domain/Career/Compilation/CareerShardedCurrentAssemblerTest.php`: full-cohort equivalence and fail-closed assembly coverage.
 
 ## Input contract
 
@@ -40,3 +43,5 @@ The future Current shape is frozen by:
 - `backend/docs/career/contracts/career-sharded-current-field-ownership.v1.json`
 
 Until an explicitly scoped release installs that package, legacy `current/assets.jsonl` remains the only readable Current authority. `scripts/split_legacy_current.php` may create only an external temporary candidate and zero-write reports; it must not write `current/`, runtime, CMS, database, cache, sitemap, discoverability, or search state.
+
+`scripts/assemble_sharded_current.php` consumes only a validated temporary shard candidate to build its row projection. The committed legacy row is an equality oracle after assembly, never a source or fallback. Assembly fails on manifest/shard/line drift, missing or unknown module fields, incomplete locale/module/component coverage, duplicate bindings, cross-module claim conflicts, unresolved source ordering, FAQ derivation conflict, component-order drift, or any mismatch across the 2092 locale projections. Its output remains outside the repository and grants no publication, Current replacement, runtime, deploy, or search authority.
