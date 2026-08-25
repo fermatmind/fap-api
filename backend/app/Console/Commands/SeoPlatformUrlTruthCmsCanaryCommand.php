@@ -28,7 +28,11 @@ final class SeoPlatformUrlTruthCmsCanaryCommand extends Command
             // Staging deliberately has no queue worker. Keep the post-commit event,
             // listener, and unified job handler while using a deterministic canary-only
             // dispatch path that cannot be blocked by a stale async unique lock.
-            config(['seo_intel.incremental_sync_inline' => true]);
+            config([
+                'seo_intel.enabled' => true,
+                'seo_intel.write_enabled' => true,
+                'seo_intel.incremental_sync_inline' => true,
+            ]);
 
             $article = Article::query()
                 ->withoutGlobalScopes()
@@ -74,6 +78,7 @@ final class SeoPlatformUrlTruthCmsCanaryCommand extends Command
                 'cms_publish_service_used' => true,
                 'post_commit_event_path' => true,
                 'canary_queue_transport' => 'sync',
+                'runtime_flags_persisted' => false,
                 'url_truth_readback' => $readback,
                 'identity_hash' => hash('sha256', 'article|'.$published->locale.'|'.$published->id),
                 'revision_hash' => $expectedRevision,

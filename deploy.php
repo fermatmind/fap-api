@@ -1074,6 +1074,7 @@ $ok = ($payload["schema_version"] ?? null) === "seo-platform-url-truth-cms-canar
     && ($payload["cms_publish_service_used"] ?? null) === true
     && ($payload["post_commit_event_path"] ?? null) === true
     && ($payload["canary_queue_transport"] ?? null) === "sync"
+    && ($payload["runtime_flags_persisted"] ?? null) === false
     && ($payload["url_truth_readback"] ?? null) === true
     && ($payload["boundaries"]["content_body_changed"] ?? null) === false
     && ($payload["boundaries"]["sitemap_authority_mutation_attempted"] ?? null) === false
