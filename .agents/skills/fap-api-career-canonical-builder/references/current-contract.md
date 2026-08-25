@@ -29,3 +29,14 @@ The candidate must preserve:
 - zero CMS, database, cache, discoverability, and search writes.
 
 Do not duplicate the component list or package schema in this Skill. Read the classes above so future contract changes have one code authority.
+
+## Sharded transition contract
+
+The future Current shape is frozen by:
+
+- `backend/docs/career/contracts/career-sharded-current.v1.json`
+- `backend/docs/career/contracts/career-sharded-current-manifest.v1.schema.json`
+- `backend/docs/career/contracts/career-sharded-current-record.v1.schema.json`
+- `backend/docs/career/contracts/career-sharded-current-field-ownership.v1.json`
+
+Until an explicitly scoped release installs that package, legacy `current/assets.jsonl` remains the only readable Current authority. `scripts/split_legacy_current.php` may create only an external temporary candidate and zero-write reports; it must not write `current/`, runtime, CMS, database, cache, sitemap, discoverability, or search state.

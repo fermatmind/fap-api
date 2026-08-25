@@ -47,6 +47,17 @@ php artisan career:ten-block-current-package-compile \
 6. Compare candidate bytes and hashes with Current. Do not install a candidate unless the task explicitly includes a Current package change and the diff is the approved scope.
 7. Hand any approved Current package change to `fap-api-career-release-authority`; let normal trunk CI/deploy classification own later release behavior.
 
+## Legacy Current sharding candidate
+
+Use `scripts/split_legacy_current.php` only for the read-only legacy-to-sharded transition. Its output is a deterministic candidate, never Current or publication authority. The output root must already exist outside the repository under a system temporary root:
+
+```bash
+php .agents/skills/fap-api-career-canonical-builder/scripts/split_legacy_current.php \
+  --output-root=<existing-task-temp-dir>
+```
+
+The splitter binds the committed legacy `assets.jsonl` and manifest before and after execution, normalizes the 1045 wrapped plus one direct locale shape, writes exactly 10 × 64 candidate shards, mechanically reconstructs every source row before accepting it, and emits coverage, ownership, integrity, manifest, and repository-zero-write evidence. It rejects symlinks, repository/path escape, unknown output files, invalid locale/slug/canonical JSON, duplicate identity, wrong ordering, coverage drift, and mid-run baseline drift. Repeating the same input must reproduce identical candidate bytes. A PASS keeps publication/current/deploy/search authority false.
+
 ## Acceptance
 
 - The compiler reports 1046 careers, 2092 locale pages, and the current exact v4.3/28-component contract; v4.2/26 remains read-only compatible.
