@@ -40,6 +40,8 @@ final class SeoUxImpl04WorkbenchTest extends TestCase
         $this->assertStringContainsString('data-default-decision-count', $workspace);
         $this->assertStringContainsString('data-max-decision-count', $workspace);
         $this->assertStringContainsString('SeoOperationsUiState::metricValue', $workspace);
+        $this->assertStringContainsString('states.MEASUREMENT_HOLD.label', $workspace);
+        $this->assertStringNotContainsString('states.measurement_hold.label', $workspace);
         $this->assertStringNotContainsString('wire:click', $workspace);
         $this->assertStringNotContainsString('wire:model', $workspace);
         $this->assertStringNotContainsString('canonical_path', $workspace);
