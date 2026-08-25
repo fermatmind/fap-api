@@ -15,9 +15,6 @@
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentOverviewPage::getUrl() }}">
                         {{ __('ops.custom_pages.common.nav.overview') }}
                     </x-filament::button>
-                    <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\EditorialOperationsPage::getUrl() }}">
-                        {{ __('ops.custom_pages.common.nav.editorial_ops') }}
-                    </x-filament::button>
                     @if (\App\Filament\Ops\Support\ContentAccess::canRelease())
                         <x-filament::button color="primary" tag="a" href="{{ \App\Filament\Ops\Pages\ContentReleasePage::getUrl() }}">
                             {{ __('ops.custom_pages.content_workspace.release_surface') }}
@@ -25,6 +22,13 @@
                     @endif
                 </x-slot>
             </x-filament-ops::ops-toolbar>
+        </x-filament-ops::ops-section>
+
+        <x-filament-ops::ops-section
+            :title="__('ops.custom_pages.content_workspace.snapshot_title')"
+            :description="__('ops.custom_pages.content_workspace.snapshot_desc')"
+        >
+            <x-filament-ops::ops-field-grid :fields="$snapshotFields" />
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
@@ -38,6 +42,7 @@
                         :meta="$card['meta']"
                     >
                         <p class="ops-control-hint">{{ $card['description'] }}</p>
+                        <p class="ops-control-hint">{{ $card['status_meta'] }}</p>
 
                         <x-slot name="actions">
                             <x-filament::button size="xs" color="gray" tag="a" href="{{ $card['index_url'] }}">

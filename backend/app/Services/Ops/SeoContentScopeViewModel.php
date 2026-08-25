@@ -61,6 +61,34 @@ final class SeoContentScopeViewModel
             ->where('org_id', self::GLOBAL_ORG_ID);
     }
 
+    /**
+     * @return array{
+     *     articles:array{total:int,draft:int,published:int},
+     *     career_guides:array{total:int,draft:int,published:int},
+     *     career_jobs:array{total:int,draft:int,published:int},
+     *     categories:int,
+     *     tags:int,
+     *     draft_handoff:int,
+     *     published:int
+     * }
+     */
+    public function workspaceMetrics(): array
+    {
+        $articles = $this->statusCounts($this->articles(), 'draft', 'published');
+        $guides = $this->statusCounts($this->careerGuides(), CareerGuide::STATUS_DRAFT, CareerGuide::STATUS_PUBLISHED);
+        $jobs = $this->statusCounts($this->careerJobs(), CareerJob::STATUS_DRAFT, CareerJob::STATUS_PUBLISHED);
+
+        return [
+            'articles' => $articles,
+            'career_guides' => $guides,
+            'career_jobs' => $jobs,
+            'categories' => $this->articleCategories()->count(),
+            'tags' => $this->articleTags()->count(),
+            'draft_handoff' => $articles['draft'] + $guides['draft'] + $jobs['draft'],
+            'published' => $articles['published'] + $guides['published'] + $jobs['published'],
+        ];
+    }
+
     /** @return Builder<CareerGuide> */
     public function careerGuides(string $locale = 'all', string $status = 'all'): Builder
     {
@@ -134,5 +162,27 @@ final class SeoContentScopeViewModel
         }
 
         return $query;
+    }
+
+    /**
+     * @param  Builder<*>  $query
+     * @return array{total:int,draft:int,published:int}
+     */
+    private function statusCounts(Builder $query, string $draftStatus, string $publishedStatus): array
+    {
+        $row = (clone $query)
+            ->selectRaw(
+                'COUNT(*) AS total_count, '
+                .'SUM(CASE WHEN status = ? THEN 1 ELSE 0 END) AS draft_count, '
+                .'SUM(CASE WHEN status = ? THEN 1 ELSE 0 END) AS published_count',
+                [$draftStatus, $publishedStatus],
+            )
+            ->first();
+
+        return [
+            'total' => (int) ($row?->total_count ?? 0),
+            'draft' => (int) ($row?->draft_count ?? 0),
+            'published' => (int) ($row?->published_count ?? 0),
+        ];
     }
 }

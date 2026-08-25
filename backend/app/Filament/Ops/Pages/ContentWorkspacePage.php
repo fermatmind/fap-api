@@ -10,12 +10,7 @@ use App\Filament\Ops\Resources\ArticleTagResource;
 use App\Filament\Ops\Resources\CareerGuideResource;
 use App\Filament\Ops\Resources\CareerJobResource;
 use App\Filament\Ops\Support\ContentAccess;
-use App\Models\Article;
-use App\Models\ArticleCategory;
-use App\Models\ArticleTag;
-use App\Models\CareerGuide;
-use App\Models\CareerJob;
-use App\Support\OrgContext;
+use App\Services\Ops\SeoContentScopeViewModel;
 use Filament\Pages\Page;
 
 class ContentWorkspacePage extends Page
@@ -41,31 +36,62 @@ class ContentWorkspacePage extends Page
     public array $dataCards = [];
 
     /** @var list<array<string, mixed>> */
+    public array $snapshotFields = [];
+
+    /** @var list<array<string, mixed>> */
     public array $permissionFields = [];
 
     public function mount(): void
     {
-        $currentOrgIds = $this->currentOrgIds();
+        $metrics = app(SeoContentScopeViewModel::class)->workspaceMetrics();
+
+        $this->snapshotFields = [
+            [
+                'label' => __('ops.custom_pages.editorial_operations.fields.article_drafts'),
+                'value' => (string) $metrics['articles']['draft'],
+                'hint' => __('ops.custom_pages.editorial_operations.fields.article_drafts_hint'),
+            ],
+            [
+                'label' => __('ops.custom_pages.editorial_operations.fields.published_articles'),
+                'value' => (string) $metrics['articles']['published'],
+                'hint' => __('ops.custom_pages.editorial_operations.fields.published_articles_hint'),
+            ],
+            [
+                'label' => __('ops.custom_pages.editorial_operations.fields.career_drafts'),
+                'value' => (string) ($metrics['career_guides']['draft'] + $metrics['career_jobs']['draft']),
+                'hint' => __('ops.custom_pages.editorial_operations.fields.career_drafts_hint'),
+            ],
+            [
+                'label' => __('ops.custom_pages.editorial_operations.fields.career_published'),
+                'value' => (string) ($metrics['career_guides']['published'] + $metrics['career_jobs']['published']),
+                'hint' => __('ops.custom_pages.editorial_operations.fields.career_published_hint'),
+            ],
+            [
+                'label' => __('ops.custom_pages.editorial_operations.fields.release_ready'),
+                'value' => (string) $metrics['draft_handoff'],
+                'hint' => __('ops.custom_pages.editorial_operations.fields.release_ready_hint'),
+            ],
+        ];
 
         $this->editorialCards = [
             $this->workspaceCard(
                 __('ops.custom_pages.content_workspace.cards.articles'),
                 __('ops.custom_pages.content_workspace.cards.articles_desc'),
-                Article::query()->whereIn('org_id', $currentOrgIds)->count(),
+                $metrics['articles'],
                 ArticleResource::getUrl(),
                 ArticleResource::getUrl('create')
             ),
             $this->workspaceCard(
                 __('ops.custom_pages.content_workspace.cards.career_guides'),
                 __('ops.custom_pages.content_workspace.cards.career_guides_desc'),
-                CareerGuide::query()->where('org_id', 0)->count(),
+                $metrics['career_guides'],
                 CareerGuideResource::getUrl(),
                 CareerGuideResource::getUrl('create')
             ),
             $this->workspaceCard(
                 __('ops.custom_pages.content_workspace.cards.career_jobs'),
                 __('ops.custom_pages.content_workspace.cards.career_jobs_desc'),
-                CareerJob::query()->where('org_id', 0)->count(),
+                $metrics['career_jobs'],
                 CareerJobResource::getUrl(),
                 CareerJobResource::getUrl('create')
             ),
@@ -75,14 +101,14 @@ class ContentWorkspacePage extends Page
             $this->workspaceCard(
                 __('ops.custom_pages.content_workspace.cards.categories'),
                 __('ops.custom_pages.content_workspace.cards.categories_desc'),
-                ArticleCategory::query()->whereIn('org_id', $currentOrgIds)->count(),
+                ['total' => $metrics['categories'], 'draft' => 0, 'published' => 0],
                 ArticleCategoryResource::getUrl(),
                 ArticleCategoryResource::getUrl('create')
             ),
             $this->workspaceCard(
                 __('ops.custom_pages.content_workspace.cards.tags'),
                 __('ops.custom_pages.content_workspace.cards.tags_desc'),
-                ArticleTag::query()->whereIn('org_id', $currentOrgIds)->count(),
+                ['total' => $metrics['tags'], 'draft' => 0, 'published' => 0],
                 ArticleTagResource::getUrl(),
                 ArticleTagResource::getUrl('create')
             ),
@@ -134,24 +160,22 @@ class ContentWorkspacePage extends Page
     }
 
     /**
-     * @return array<int, int>
-     */
-    private function currentOrgIds(): array
-    {
-        $orgId = max(0, (int) app(OrgContext::class)->orgId());
-
-        return $orgId > 0 ? [$orgId] : [];
-    }
-
-    /**
+     * @param  array{total:int,draft:int,published:int}  $counts
      * @return array<string, mixed>
      */
-    private function workspaceCard(string $title, string $description, int $count, string $indexUrl, string $createUrl): array
+    private function workspaceCard(string $title, string $description, array $counts, string $indexUrl, string $createUrl): array
     {
         return [
             'title' => $title,
             'description' => $description,
-            'meta' => __('ops.custom_pages.content_workspace.cards.record_count', ['count' => $count]),
+            'count' => $counts['total'],
+            'draft_count' => $counts['draft'],
+            'published_count' => $counts['published'],
+            'meta' => __('ops.custom_pages.content_workspace.cards.record_count', ['count' => $counts['total']]),
+            'status_meta' => __('ops.custom_pages.content_workspace.cards.status_count', [
+                'draft' => $counts['draft'],
+                'published' => $counts['published'],
+            ]),
             'index_url' => $indexUrl,
             'create_url' => $createUrl,
             'can_write' => ContentAccess::canWrite(),
