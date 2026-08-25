@@ -106,16 +106,7 @@ final class SeoPlatformUrlTruthCmsCanaryCommand extends Command
                 'boundaries' => ['search_submission_allowed' => false, 'raw_error_output' => false],
             ];
             if ($exception instanceof QueryException) {
-                $receipt['database_error'] = [
-                    'sqlstate' => preg_match('/^[A-Z0-9]{5}$/', (string) ($exception->errorInfo[0] ?? '')) === 1
-                        ? (string) $exception->errorInfo[0]
-                        : 'unknown',
-                    'driver_code' => is_numeric($exception->errorInfo[1] ?? null)
-                        ? (int) $exception->errorInfo[1]
-                        : null,
-                    'sql_emitted' => false,
-                    'bindings_emitted' => false,
-                ];
+                $receipt['database_error'] = $this->databaseError($exception);
             }
         }
 
@@ -137,5 +128,29 @@ final class SeoPlatformUrlTruthCmsCanaryCommand extends Command
             str_contains($exception::class, 'ModelNotFoundException') => 'eligible_article_absent',
             default => 'unexpected_'.strtolower((new \ReflectionClass($exception))->getShortName()),
         };
+    }
+
+    /** @return array{surface:string,sqlstate:string,driver_code:?int,sql_emitted:bool,bindings_emitted:bool} */
+    private function databaseError(QueryException $exception): array
+    {
+        $sql = strtolower($exception->getSql());
+        $surface = match (true) {
+            str_contains($sql, 'seo_url_entities') => 'url_truth_binding',
+            str_contains($sql, 'seo_urls') => 'url_truth_url',
+            str_contains($sql, 'content_release_audits') => 'cms_audit',
+            str_contains($sql, 'articles') || str_contains($sql, 'article_translation_revisions') => 'cms_article',
+            default => 'other',
+        };
+        $message = $exception->getMessage();
+        preg_match('/SQLSTATE\[([A-Z0-9]{5})\]/', $message, $stateMatch);
+        preg_match('/SQLSTATE\[[A-Z0-9]{5}\](?:\[[^]]*\])?:\s*([0-9]+)/', $message, $driverMatch);
+
+        return [
+            'surface' => $surface,
+            'sqlstate' => (string) ($stateMatch[1] ?? 'unknown'),
+            'driver_code' => isset($driverMatch[1]) ? (int) $driverMatch[1] : null,
+            'sql_emitted' => false,
+            'bindings_emitted' => false,
+        ];
     }
 }

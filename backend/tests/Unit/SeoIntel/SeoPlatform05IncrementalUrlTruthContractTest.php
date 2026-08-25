@@ -76,6 +76,8 @@ final class SeoPlatform05IncrementalUrlTruthContractTest extends TestCase
         self::assertStringContainsString("'blocked_reason' => \$this->blockedReason(\$exception)", $canary);
         self::assertStringContainsString("'sql_emitted' => false", $canary);
         self::assertStringContainsString("'bindings_emitted' => false", $canary);
+        self::assertStringContainsString("'url_truth_binding'", $canary);
+        self::assertStringContainsString("'cms_article'", $canary);
         self::assertStringContainsString('$job->handle(app(IncrementalUrlTruthSyncService::class))', file_get_contents($root.'/app/Listeners/QueueUrlTruthIncrementalSync.php'));
     }
 
