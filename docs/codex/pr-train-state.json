@@ -105927,8 +105927,11 @@
     "base": "main",
     "branch": "codex/ops-content-taxonomy-02",
     "title": "fix(ops): align article taxonomy with public authority",
-    "status": "local_validation_passed",
+    "status": "pr_open",
     "depends_on": ["OPS-CONTENT-NAV-01"],
+    "commit_sha": "b4acd92f12c0d4ee564c5735ec7f5f590341446a",
+    "pr_number": 3784,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3784",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -105968,6 +105971,11 @@
         "at": "2026-08-26T07:04:50+08:00",
         "status": "local_validation_passed",
         "note": "Focused T2 coverage passed 3 tests / 37 assertions. A wider pre-existing 403 baseline was reproduced on unmodified origin/main. Local historical inventory could not connect because the configured SQLite file is absent; no data was read or written, all historical non-zero rows remain preserved, and no migration is needed."
+      },
+      {
+        "at": "2026-08-26T07:10:00+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #3784 from codex/ops-content-taxonomy-02 at validated implementation commit b4acd92f12c0d4ee564c5735ec7f5f590341446a. Required checks and merge review are pending."
       }
     ]
   },
