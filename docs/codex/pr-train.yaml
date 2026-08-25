@@ -50096,7 +50096,7 @@ prs:
     base: main
     branch: codex/ops-content-workspace-03
     title: "fix(ops): unify content workspace metrics"
-    status: pr_open
+    status: merged
     depends_on: [OPS-CONTENT-TAXONOMY-02]
     train_scope: ops_content_workspace_unification
     risk_level: product_read_model
@@ -50129,14 +50129,35 @@ prs:
     base: main
     branch: codex/ops-personality-desktop-04
     title: "feat(ops): link desktop templates from personality content"
-    status: registered
+    status: pr_open
     depends_on: [OPS-CONTENT-WORKSPACE-03]
     train_scope: ops_personality_desktop_context
     risk_level: product_ui_navigation
     scope:
       - Add variant-aware desktop-template actions and empty-state creation from personality context.
       - Preserve independent models, validation, publication, public APIs, permissions, and the legacy URL.
+      - Correct the single stale T3 compatibility-page expectation identified by exact-SHA CI without changing T3 runtime behavior.
+    allowed_paths:
+      - backend/app/Filament/Ops/Resources/PersonalityProfileResource.php
+      - backend/app/Filament/Ops/Resources/PersonalityProfileResource/Pages/EditPersonalityProfile.php
+      - backend/app/Filament/Ops/Resources/PersonalityVariantCloneContentResource.php
+      - backend/app/Filament/Ops/Resources/PersonalityVariantCloneContentResource/Pages/ListPersonalityVariantCloneContents.php
+      - backend/lang/en/ops.php
+      - backend/lang/zh_CN/ops.php
+      - backend/tests/Feature/Ops/PersonalityWorkspaceTest.php
+      - backend/tests/Feature/Ops/ContentCmsProductLayerTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && php artisan test tests/Feature/Ops/PersonalityWorkspaceTest.php --filter='personality_context_exposes_filtered_desktop_templates_and_empty_creation_path|resource_query_is_locked_to_global_mbti_profiles' --no-ansi
+      - cd backend && php artisan test tests/Feature/PersonalityCms/PersonalityDesktopCloneOpsResourceTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/Ops/OpsNavigationInventoryTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test for changed PHP files
+      - verify personality and legacy desktop-clone routes; parse pr-train JSON and YAML; exact-scope validation; git diff --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false
 
   - id: OPS-CONTENT-DORMANT-05
     repo: fap-api

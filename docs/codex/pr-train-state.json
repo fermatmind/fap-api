@@ -106000,11 +106000,13 @@
     "base": "main",
     "branch": "codex/ops-content-workspace-03",
     "title": "fix(ops): unify content workspace metrics",
-    "status": "pr_open",
+    "status": "merged",
     "depends_on": ["OPS-CONTENT-TAXONOMY-02"],
     "commit_sha": "3d71543c312632b858124a0465845f13b9821805",
     "pr_number": 3785,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3785",
+    "merge_commit_sha": "b4c0d9761dfa4797f8e39b478e76883e01ce0d1b",
+    "merged_at": "2026-08-26T07:19:24+08:00",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -106021,6 +106023,14 @@
       "scope": {
         "status": "passed",
         "evidence": "The change is limited to the shared global content metrics read model, canonical workspace, compatibility page, bilingual copy, focused tests, and train bookkeeping. No publish action or write path was added."
+      },
+      "github_ci": {
+        "status": "failed_corrective_pending",
+        "evidence": "Exact-SHA CI run 32910245119 passed every selected job except verify-mbti-legacy: one pre-existing T3 test expectation still required the retired compatibility-page copy 'Editorial operations' instead of the canonical 'Content workspace'. Runtime-focused T3 coverage and the I18n contract passed. The failed SHA did not deploy; T4 carries the minimal two-line expectation correction so the next exact SHA validates the merged runtime."
+      },
+      "deployment": {
+        "status": "not_deployed",
+        "evidence": "Automatic deployment for failed SHA b4c0d9761dfa4797f8e39b478e76883e01ce0d1b was cancelled or left non-executing by the failed CI receipt. No workflow was manually dispatched."
       }
     },
     "production_write_execution": false,
@@ -106042,19 +106052,70 @@
         "note": "The canonical content workspace and editorial compatibility page now share one org_id=0 metrics implementation. Focused metrics, bilingual rendering, navigation, route, Pint, syntax, and diff checks passed. No write path or external action was added."
       },
       {
-        "at": "2026-08-26T07:20:00+08:00",
+        "at": "2026-08-26T07:18:40+08:00",
         "status": "pr_open",
         "note": "Opened PR #3785 from codex/ops-content-workspace-03 at validated implementation commit 3d71543c312632b858124a0465845f13b9821805. Required checks and merge review are pending."
+      },
+      {
+        "at": "2026-08-26T07:19:24+08:00",
+        "status": "merged",
+        "note": "PR #3785 was squash-merged as b4c0d9761dfa4797f8e39b478e76883e01ce0d1b after mergeability, review, and required-check state were verified. Post-merge exact-SHA CI found one stale compatibility-page text expectation; all other selected jobs passed and the failed SHA did not deploy. The minimal test-only correction is carried by T4 before further merge."
       }
     ]
   },
   "OPS-PERSONALITY-DESKTOP-04": {
     "id": "OPS-PERSONALITY-DESKTOP-04",
     "repo": "fap-api",
+    "base": "main",
     "branch": "codex/ops-personality-desktop-04",
-    "status": "registered",
+    "title": "feat(ops): link desktop templates from personality content",
+    "status": "pr_open",
     "depends_on": ["OPS-CONTENT-WORKSPACE-03"],
-    "production_write_execution": false
+    "commit_sha": "bd33ad9dc2064d7245d600ee1a8d71faf49da05f",
+    "pr_number": 3786,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3786",
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The operator explicitly authorized T4 as the fourth item of the sequential Ops content-navigation train."
+      },
+      "dependency": {
+        "status": "passed_with_corrective",
+        "evidence": "T3 merged as exact main SHA b4c0d9761dfa4797f8e39b478e76883e01ce0d1b. Its post-merge CI exposed one stale text assertion; T4 includes only that two-line non-runtime correction before its scoped implementation."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Contextual desktop-template filtering and empty/create path passed 2 tests / 17 assertions; the clone resource contract passed 1 test / 9 assertions; navigation and legacy routes passed 3 tests / 168 assertions; scoped Pint, PHP syntax, route, and diff checks passed. The broader personality HTTP test retains the same pre-existing local Ops 403 environment issue, while the new Livewire path passes."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "Runtime changes are limited to personality-context actions, public A/T variant filtering, empty/create context, bilingual copy, and tests. Models, validation, publish state, public APIs, and the legacy URL remain independent and unchanged."
+      }
+    },
+    "production_write_execution": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "search_channel_action": false,
+    "transitions": [
+      {
+        "at": "2026-08-26T07:20:30+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started T4 only after T3 merged. Scope is personality-context desktop-template access plus the minimal T3 stale-assertion correction; no CMS, database, cache, Search, staging, or production action occurred."
+      },
+      {
+        "at": "2026-08-26T07:27:41+08:00",
+        "status": "local_validation_passed",
+        "note": "Personality list/edit actions, profile-filtered A/T template rows, context-limited create options, explicit empty state, legacy URL, permissions, bilingual copy, navigation, and syntax/format checks passed. No content or publication state was written."
+      },
+      {
+        "at": "2026-08-26T07:31:00+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #3786 from codex/ops-personality-desktop-04 at validated implementation commit bd33ad9dc2064d7245d600ee1a8d71faf49da05f. Required checks and merge review are pending."
+      }
+    ]
   },
   "OPS-CONTENT-DORMANT-05": {
     "id": "OPS-CONTENT-DORMANT-05",

@@ -6,6 +6,7 @@ namespace App\Filament\Ops\Resources\PersonalityProfileResource\Pages;
 
 use App\Filament\Ops\Resources\PersonalityProfileResource;
 use App\Filament\Ops\Resources\PersonalityProfileResource\Support\PersonalityWorkspace;
+use App\Filament\Ops\Resources\PersonalityVariantCloneContentResource;
 use App\Models\PersonalityProfile;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
@@ -38,6 +39,12 @@ class EditPersonalityProfile extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
+            Action::make('desktopTemplates')
+                ->label(__('ops.resources.personality_profiles.actions.desktop_templates'))
+                ->url(PersonalityProfileResource::desktopTemplatesUrl($this->getRecord()))
+                ->icon('heroicon-o-window')
+                ->color('gray')
+                ->visible(fn (): bool => PersonalityVariantCloneContentResource::canViewAny()),
             Action::make('backToPersonality')
                 ->label(__('ops.resources.personality_profiles.actions.all'))
                 ->url(PersonalityProfileResource::getUrl())

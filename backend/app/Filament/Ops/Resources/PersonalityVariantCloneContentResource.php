@@ -229,10 +229,13 @@ class PersonalityVariantCloneContentResource extends Resource
             ->with([
                 'variant.profile',
             ])
-            ->whereHas('variant.profile', function (Builder $query): void {
-                $query->withoutGlobalScopes()
-                    ->where('org_id', 0)
-                    ->where('scale_code', PersonalityProfile::SCALE_CODE_MBTI);
+            ->whereHas('variant', function (Builder $variantQuery): void {
+                $variantQuery->withoutGlobalScopes()
+                    ->whereHas('profile', function (Builder $profileQuery): void {
+                        $profileQuery->withoutGlobalScopes()
+                            ->where('org_id', 0)
+                            ->where('scale_code', PersonalityProfile::SCALE_CODE_MBTI);
+                    });
             });
     }
 
@@ -261,10 +264,17 @@ class PersonalityVariantCloneContentResource extends Resource
     /**
      * @return array<int, string>
      */
-    private static function variantOptions(): array
+    public static function variantOptions(?int $personalityProfileId = null): array
     {
+        $personalityProfileId ??= max(0, (int) request()->query('profile', 0));
+
         return PersonalityProfileVariant::query()
+            ->withoutGlobalScopes()
             ->with('profile')
+            ->when(
+                $personalityProfileId > 0,
+                fn (Builder $query): Builder => $query->where('personality_profile_id', $personalityProfileId),
+            )
             ->whereHas('profile', function (Builder $query): void {
                 $query->withoutGlobalScopes()
                     ->where('org_id', 0)

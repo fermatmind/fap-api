@@ -5,24 +5,41 @@ declare(strict_types=1);
 namespace Tests\Feature\Ops;
 
 use App\Filament\Ops\Resources\PersonalityProfileResource;
+use App\Filament\Ops\Resources\PersonalityProfileResource\Pages\EditPersonalityProfile;
+use App\Filament\Ops\Resources\PersonalityProfileResource\Pages\ListPersonalityProfiles;
 use App\Filament\Ops\Resources\PersonalityProfileResource\Support\PersonalityWorkspace;
+use App\Filament\Ops\Resources\PersonalityVariantCloneContentResource;
+use App\Filament\Ops\Resources\PersonalityVariantCloneContentResource\Pages\ListPersonalityVariantCloneContents;
 use App\Models\AdminUser;
 use App\Models\Organization;
 use App\Models\Permission;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileRevision;
 use App\Models\PersonalityProfileSection;
+use App\Models\PersonalityProfileVariant;
+use App\Models\PersonalityProfileVariantCloneContent;
 use App\Models\Role;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
+use Filament\Facades\Filament;
+use Filament\PanelRegistry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 final class PersonalityWorkspaceTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Filament::setCurrentPanel(app(PanelRegistry::class)->get('ops'));
+    }
 
     public function test_personality_workspace_pages_render_for_authorized_admin(): void
     {
@@ -94,6 +111,110 @@ final class PersonalityWorkspaceTest extends TestCase
             'revision_no' => 1,
             'note' => 'Initial workspace snapshot',
         ]);
+    }
+
+    public function test_personality_context_exposes_filtered_desktop_templates_and_empty_creation_path(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_PUBLISH,
+        ]);
+        $selectedOrg = $this->createSelectedOrg();
+        $profile = $this->seedProfile([
+            'type_code' => 'INTJ',
+            'canonical_type_code' => 'INTJ',
+            'slug' => 'intj-desktop-context',
+        ]);
+        $otherProfile = $this->seedProfile([
+            'type_code' => 'INTP',
+            'canonical_type_code' => 'INTP',
+            'slug' => 'intp-desktop-context',
+            'title' => 'INTP - Logician',
+        ]);
+        $assertive = $this->seedVariant($profile, 'A');
+        $turbulent = $this->seedVariant($profile, 'T');
+        $otherVariant = $this->seedVariant($otherProfile, 'A');
+        $contextContentId = DB::table('personality_profile_variant_clone_contents')->insertGetId([
+            'personality_profile_variant_id' => (int) $assertive->id,
+            'template_key' => PersonalityProfileVariantCloneContent::TEMPLATE_KEY_MBTI_DESKTOP_CLONE_V1,
+            'status' => PersonalityProfileVariantCloneContent::STATUS_DRAFT,
+            'schema_version' => 'v1',
+            'content_json' => '{}',
+            'asset_slots_json' => '[]',
+            'meta_json' => null,
+            'published_at' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        $otherContentId = DB::table('personality_profile_variant_clone_contents')->insertGetId([
+            'personality_profile_variant_id' => (int) $otherVariant->id,
+            'template_key' => PersonalityProfileVariantCloneContent::TEMPLATE_KEY_MBTI_DESKTOP_CLONE_V1,
+            'status' => PersonalityProfileVariantCloneContent::STATUS_DRAFT,
+            'schema_version' => 'v1',
+            'content_json' => '{}',
+            'asset_slots_json' => '[]',
+            'meta_json' => null,
+            'published_at' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        session([
+            'ops_org_id' => (int) $selectedOrg->id,
+            'ops_admin_totp_verified_user_id' => (int) $admin->id,
+        ]);
+        app()->instance('request', Request::create('/ops/personality', 'GET'));
+        $context = app(OrgContext::class);
+        $context->set((int) $selectedOrg->id, (int) $admin->id, 'admin');
+        app()->instance(OrgContext::class, $context);
+
+        $desktopUrl = PersonalityProfileResource::desktopTemplatesUrl($profile);
+        $this->assertStringContainsString('/ops/personality-desktop-clone', $desktopUrl);
+        $this->assertStringContainsString('profile='.(int) $profile->id, $desktopUrl);
+
+        Livewire::test(ListPersonalityProfiles::class)
+            ->assertTableActionExists('desktopTemplates');
+
+        $editPage = Livewire::test(EditPersonalityProfile::class, ['record' => $profile->getKey()]);
+        $editActions = collect($editPage->instance()->getCachedHeaderActions())->keyBy(
+            fn ($action): string => $action->getName(),
+        );
+        $this->assertSame('Desktop Templates', $editActions->get('desktopTemplates')?->getLabel());
+        $this->assertSame($desktopUrl, $editActions->get('desktopTemplates')?->getUrl());
+
+        $listPage = Livewire::withQueryParams(['profile' => (int) $profile->id])
+            ->test(ListPersonalityVariantCloneContents::class)
+            ->loadTable()
+            ->assertSee('Desktop templates for INTJ (en)')
+            ->assertCanSeeTableRecords([
+                PersonalityProfileVariantCloneContent::query()->findOrFail($contextContentId),
+            ])
+            ->assertCanNotSeeTableRecords([
+                PersonalityProfileVariantCloneContent::query()->findOrFail($otherContentId),
+            ]);
+        $listActions = collect($listPage->instance()->getCachedHeaderActions())->keyBy(
+            fn ($action): string => $action->getName(),
+        );
+        $this->assertStringContainsString('profile='.(int) $profile->id, (string) $listActions->get('create')?->getUrl());
+
+        $emptyHeading = new \ReflectionMethod($listPage->instance(), 'getTableEmptyStateHeading');
+        $emptyActions = new \ReflectionMethod($listPage->instance(), 'getTableEmptyStateActions');
+        $this->assertSame('No desktop templates for this personality', $emptyHeading->invoke($listPage->instance()));
+        $this->assertSame(
+            'Create First Desktop Template',
+            collect($emptyActions->invoke($listPage->instance()))->first()?->getLabel(),
+        );
+
+        $variantOptionIds = array_map('intval', array_keys(PersonalityVariantCloneContentResource::variantOptions((int) $profile->id)));
+        $this->assertSame([(int) $assertive->id, (int) $turbulent->id], $variantOptionIds);
+        $this->assertNotContains((int) $otherVariant->id, $variantOptionIds);
+
+        app()->instance('request', Request::create('/ops/personality-desktop-clone/create?profile='.(int) $profile->id, 'GET'));
+        $this->assertSame(
+            $variantOptionIds,
+            array_map('intval', array_keys(PersonalityVariantCloneContentResource::variantOptions())),
+        );
     }
 
     public function test_workspace_sync_updates_profile_sections_seo_and_revision_counter(): void
@@ -357,6 +478,22 @@ final class PersonalityWorkspaceTest extends TestCase
             'is_indexable' => true,
             'schema_version' => PersonalityProfile::SCHEMA_VERSION_V1,
         ], $overrides));
+    }
+
+    private function seedVariant(PersonalityProfile $profile, string $variantCode): PersonalityProfileVariant
+    {
+        $variantCode = strtoupper($variantCode);
+        $typeCode = strtoupper((string) $profile->type_code);
+
+        return PersonalityProfileVariant::query()->create([
+            'org_id' => 0,
+            'personality_profile_id' => (int) $profile->id,
+            'canonical_type_code' => $typeCode,
+            'variant_code' => $variantCode,
+            'runtime_type_code' => $typeCode.'-'.$variantCode,
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+            'is_published' => false,
+        ]);
     }
 
     /**

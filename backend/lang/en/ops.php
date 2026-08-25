@@ -2849,10 +2849,21 @@ return [
                 'create' => 'Create Personality Profile',
                 'all' => 'All Personality Profiles',
                 'back_to_list' => 'Back to Personality',
+                'desktop_templates' => 'Desktop Templates',
             ],
             'notifications' => [
                 'created' => 'Personality profile created',
                 'updated' => 'Personality profile updated',
+            ],
+        ],
+        'personality_desktop' => [
+            'list_subheading' => 'Independent A/T desktop templates for the public MBTI personality variants.',
+            'profile_subheading' => 'Desktop templates for :type (:locale). Each A/T variant keeps independent content, validation, and publish state.',
+            'empty_title' => 'No desktop templates for this personality',
+            'empty_description' => 'Create the first A/T desktop template without changing the base personality profile.',
+            'actions' => [
+                'create' => 'Create Desktop Template',
+                'create_first' => 'Create First Desktop Template',
             ],
         ],
         'topics' => [

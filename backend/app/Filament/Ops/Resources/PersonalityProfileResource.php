@@ -446,6 +446,12 @@ class PersonalityProfileResource extends Resource
             ->defaultSort('updated_at', 'desc')
             ->recordUrl(fn (PersonalityProfile $record): string => static::getUrl('edit', ['record' => $record]))
             ->actions([
+                Tables\Actions\Action::make('desktopTemplates')
+                    ->label(__('ops.resources.personality_profiles.actions.desktop_templates'))
+                    ->icon('heroicon-o-window')
+                    ->color('gray')
+                    ->url(fn (PersonalityProfile $record): string => self::desktopTemplatesUrl($record))
+                    ->visible(fn (): bool => PersonalityVariantCloneContentResource::canViewAny()),
                 Tables\Actions\EditAction::make()
                     ->label(__('ops.resources.articles.actions.edit'))
                     ->icon('heroicon-o-pencil-square')
@@ -469,6 +475,13 @@ class PersonalityProfileResource extends Resource
             ->withoutGlobalScopes()
             ->where('org_id', 0)
             ->where('scale_code', PersonalityProfile::SCALE_CODE_MBTI);
+    }
+
+    public static function desktopTemplatesUrl(PersonalityProfile $profile): string
+    {
+        return PersonalityVariantCloneContentResource::getUrl('index', [
+            'profile' => (int) $profile->getKey(),
+        ]);
     }
 
     /**
