@@ -33,15 +33,21 @@ class ContentAgentContractTest(unittest.TestCase):
         self.temp.cleanup()
 
     def request(self, risk: str = "standard", mode: str = "c3_6c_single_slug") -> dict[str, Any]:
+        slugs = ["accountants-and-auditors"]
+        row_hashes, shard_hashes = validator.expected_current_locks("faq", slugs)
         return {
             "contract_version": "career.content_agent.request.v1",
             "batch_id": "c3-6b-contract-test",
-            "slugs": ["accountants-and-auditors"],
+            "module": "faq",
+            "slugs": slugs,
             "locales": ["zh-CN", "en"],
             "markets": ["CN", "US"],
             "jurisdictions": {"primary": {"code": "CN", "status": "known"}, "comparison": [{"code": "US", "status": "known"}]},
             "research_as_of": "2026-08-22",
             "source_policy_version": "career.source-policy.v1",
+            "evidence_policy_version": "career.compiler-evidence-policy.v1",
+            "expected_row_hashes": row_hashes,
+            "expected_shard_hashes": shard_hashes,
             "risk_class": {"batch_max": risk, "by_slug": [{"slug": "accountants-and-auditors", "class": risk}]},
             "authorized_content_scope": {"mode": mode, "modules": MODULES, "slugs": ["accountants-and-auditors"], "locales": ["zh-CN", "en"], "markets": ["CN", "US"]},
             "output_root": str(self.output),
@@ -56,6 +62,7 @@ class ContentAgentContractTest(unittest.TestCase):
             "contract_version": "career.content_agent.receipt.v1", "batch_id": request["batch_id"],
             "request_hash": locked["request_hash"], "inventory_hash": locked["inventory_hash"],
             "source_policy": {"version": request["source_policy_version"], "hash": __import__("hashlib").sha256((validator.repository_root() / ".agents/skills/fap-api-career-content-research-producer/references/source-policy.md").read_bytes()).hexdigest()},
+            "evidence_policy_version": request["evidence_policy_version"],
             "adapter_version": "career.research.compiler_evidence_adapter.v1",
             "batch_risk": request["risk_class"]["batch_max"], "final_state": "ORCHESTRATED",
             "gates": [
@@ -70,7 +77,8 @@ class ContentAgentContractTest(unittest.TestCase):
                 "research_package": {"canonical_path": str(self.output / "research-package"), "package_aggregate_sha256": H[1], "candidate_tree_sha256": H[0], "research_receipt_sha256": H[2], "source_registry_sha256": H[3], "claim_bindings_sha256": H[4], "careers_tree_sha256": H[5], "entry_manifest_sha256": H[0], "validated_slugs": list(request["slugs"]), "validator_version": "career.research-package-validator.v1"},
                 "compiler_inputs": {"source_root_canonical_path": str(self.output / "source"), "source_root_digest": H[2], "lookup_canonical_path": str(self.output / "lookup.json"), "lookup_digest": H[3], "control_slug": "health-educators", "evidence_packages": [{"slug": slug, "canonical_path": str(self.output / f"evidence-{slug}"), "tree_sha256": validator.sha256_value({"slug": slug, "evidence": "fixture"}), "entry_manifest_sha256": H[4]} for slug in request["slugs"]], "evidence_package_digest": H[3]},
             },
-            "slug_results": [{"slug": slug, "evidence_adapter_state": "PASS", "evidence_package_digest": validator.sha256_value({"slug": slug, "evidence": "fixture"}), "dry_compile_state": "PASS", "candidate_row_digest": validator.sha256_value({"slug": slug, "candidate": "fixture"})} for slug in request["slugs"]],
+            "publishable_slugs": sorted(request["slugs"]),
+            "slug_results": [{"slug": slug, "editorial_state": "PASS", "evidence_adapter_state": "PASS", "evidence_package_digest": validator.sha256_value({"slug": slug, "evidence": "fixture"}), "dry_compile_state": "PASS", "candidate_row_digest": validator.sha256_value({"slug": slug, "candidate": "fixture"})} for slug in request["slugs"]],
             "dimension_binding": {"claim_rows": 8, "source_rows": 4, "adapter_rows": 8, "binding_digest": H[0], "mismatch_count": 0},
             "evidence_contract_versions": sorted(validator.EVIDENCE_CONTRACTS), "dry_compile_status": "PASS_TEN_BLOCK_DRY_COMPILE",
             "counts": {"research_modules_per_slug": 10, "producer_errors": 0, "expired_sources": 0, "unresolved": 0, "unmapped": 2, "sensitive_claims_without_tier_1_2": 0, "dimension_mismatches": 0, "auto_rewrite_attempts": 0, "misrouted_unmapped_claims": 0, "research_deterministic_rerun_pass": True, "evidence_contracts_passed": 6, "loader_cohort_pass": True, "loader_single_slug_pass": True, "evidence_deterministic_rerun_pass": True, "required_compiler_claim_coverage_percent": 100, "dry_compile_source_files": 10, "dry_compile_locale_projections": 2, "components_per_page": 26, "dry_compile_blockers": 0, "candidate_rows": 1, "dry_compile_deterministic_rerun_pass": True},
@@ -123,6 +131,29 @@ class ContentAgentContractTest(unittest.TestCase):
 
     def test_standard_happy_path_five_gates_passes(self) -> None:
         self.assertTrue(validator.validate_receipt(self.receipt(), self.request())["ok"])
+
+    def test_module_row_shard_and_evidence_policy_are_bound_into_request_hash(self) -> None:
+        request = self.request()
+        first = validator.validate_request(request)
+        self.assertTrue(first["ok"], first)
+        changed = copy.deepcopy(request)
+        changed["module"] = "page-meta"
+        changed["expected_row_hashes"], changed["expected_shard_hashes"] = validator.expected_current_locks("page-meta", changed["slugs"])
+        second = validator.validate_request(changed)
+        self.assertTrue(second["ok"], second)
+        self.assertNotEqual(first["request_hash"], second["request_hash"])
+
+    def test_stale_expected_row_and_shard_hashes_fail_request_lock(self) -> None:
+        request = self.request(); request["expected_row_hashes"][0]["sha256"] = "0" * 64
+        self.assert_request_error(request, "expected_row_hash_mismatch")
+        request = self.request(); request["expected_shard_hashes"][0]["sha256"] = "0" * 64
+        self.assert_request_error(request, "expected_shard_hash_mismatch")
+
+    def test_full_module_batch_never_targets_more_than_64_shards(self) -> None:
+        slugs, _inventory_hash = validator.inventory()
+        rows, shards = validator.expected_current_locks("faq", sorted(slugs))
+        self.assertEqual(1046, len(rows))
+        self.assertEqual(64, len(shards))
 
     def test_final_receipt_requires_artifact_input_bindings(self) -> None:
         request = self.request(); receipt = self.receipt(request); del receipt["input_bindings"]
@@ -307,6 +338,7 @@ class ContentAgentContractTest(unittest.TestCase):
 
     def test_multi_slug_requires_per_slug_compile_results(self) -> None:
         request = self.request(mode="c3_6d_batch"); request["slugs"].append("health-educators"); request["authorized_content_scope"]["slugs"].append("health-educators"); request["risk_class"]["by_slug"].append({"slug": "health-educators", "class": "standard"})
+        request["expected_row_hashes"], request["expected_shard_hashes"] = validator.expected_current_locks(request["module"], request["slugs"])
         receipt = self.receipt(request)
         self.assert_receipt_error(receipt, request, "per_slug_compile_results_incomplete")
         receipt["counts"]["candidate_rows"] = 2
@@ -315,11 +347,31 @@ class ContentAgentContractTest(unittest.TestCase):
 
     def test_multi_slug_rejects_reused_per_slug_digests(self) -> None:
         request = self.request(mode="c3_6d_batch"); request["slugs"].append("health-educators"); request["authorized_content_scope"]["slugs"].append("health-educators"); request["risk_class"]["by_slug"].append({"slug": "health-educators", "class": "standard"})
+        request["expected_row_hashes"], request["expected_shard_hashes"] = validator.expected_current_locks(request["module"], request["slugs"])
         receipt = self.receipt(request); receipt["counts"]["candidate_rows"] = 2; receipt["slug_results"][1]["evidence_package_digest"] = receipt["slug_results"][0]["evidence_package_digest"]
         receipt["artifact_hashes"]["evidence_package"] = validator.evidence_aggregate_hash(receipt["slug_results"]); receipt["gates"][2]["output_hash"] = receipt["artifact_hashes"]["evidence_package"]
         for gate in receipt["gates"][2:]: gate["input_hash"] = validator.expected_gate_input_hash(receipt, gate["gate"])
         self.refresh_orchestrator_hash(receipt)
         self.assert_receipt_error(receipt, request, "per_slug_evidence_digests_must_be_distinct")
+
+    def test_partial_editorial_failure_isolated_from_publishable_set(self) -> None:
+        request = self.request(mode="c3_6d_batch"); request["slugs"].append("health-educators"); request["authorized_content_scope"]["slugs"].append("health-educators"); request["risk_class"]["by_slug"].append({"slug": "health-educators", "class": "standard"})
+        request["expected_row_hashes"], request["expected_shard_hashes"] = validator.expected_current_locks(request["module"], request["slugs"])
+        receipt = self.receipt(request)
+        isolated = next(row for row in receipt["slug_results"] if row["slug"] == "health-educators")
+        isolated.update({"editorial_state": "BLOCKED", "evidence_adapter_state": "NOT_RUN", "evidence_package_digest": None, "dry_compile_state": "NOT_RUN", "candidate_row_digest": None})
+        receipt["publishable_slugs"] = ["accountants-and-auditors"]
+        receipt["counts"]["candidate_rows"] = 1
+        receipt["input_bindings"]["compiler_inputs"]["evidence_packages"] = [row for row in receipt["input_bindings"]["compiler_inputs"]["evidence_packages"] if row["slug"] in receipt["publishable_slugs"]]
+        receipt["artifact_hashes"]["evidence_package"] = validator.evidence_aggregate_hash(receipt["slug_results"])
+        receipt["input_bindings"]["compiler_inputs"]["evidence_package_digest"] = receipt["artifact_hashes"]["evidence_package"]
+        receipt["gates"][2]["output_hash"] = receipt["artifact_hashes"]["evidence_package"]
+        receipt["artifact_hashes"]["dry_compile_candidate"] = validator.dry_compile_aggregate_hash(receipt["slug_results"])
+        receipt["gates"][3]["output_hash"] = receipt["artifact_hashes"]["dry_compile_candidate"]
+        for gate in receipt["gates"]:
+            gate["input_hash"] = validator.expected_gate_input_hash(receipt, gate["gate"])
+        self.refresh_orchestrator_hash(receipt)
+        self.assertTrue(validator.validate_receipt(receipt, request)["ok"])
 
     def test_evidence_aggregate_remains_bound_when_compile_blocks(self) -> None:
         request = self.request(); receipt = self.receipt(request); receipt["gates"] = receipt["gates"][:4]; receipt["gates"][3]["state"] = "BLOCKED"; receipt["final_state"] = "BLOCKED_COMPILE"; receipt["slug_results"][0].update({"dry_compile_state": "BLOCKED", "candidate_row_digest": None}); receipt["artifact_hashes"]["dry_compile_candidate"] = None; receipt["dry_compile_status"] = None

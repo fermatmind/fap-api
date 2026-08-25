@@ -36,7 +36,7 @@ SCHEMA_ROOT = Path(__file__).resolve().parents[1] / "references" / "schemas"
 def repository_root() -> Path:
     here = Path(__file__).resolve()
     for parent in here.parents:
-        if (parent / "backend/content_assets/career/current/assets.jsonl").is_file():
+        if (parent / "backend/content_assets/career/current/manifest.json").is_file():
             return parent
     raise RuntimeError("repository_root_not_found")
 
@@ -142,31 +142,95 @@ def _is_type(value: Any, expected: str) -> bool:
     }.get(expected, False)
 
 
+MODULES = ["identity", "definition", "salary", "geo", "ai-impact", "fit-personality", "risk", "compare-links", "faq", "page-meta"]
+
+
+def shard_index(slug: str) -> int:
+    return int(hashlib.sha256(slug.encode("utf-8")).hexdigest()[:8], 16) % 64
+
+
+def _current_manifest(repo: Path | None = None) -> tuple[Path, dict[str, Any], dict[str, dict[str, Any]]]:
+    current = (repo or repository_root()) / "backend/content_assets/career/current"
+    manifest = load_json(current / "manifest.json")
+    if manifest.get("contract_version") != "career.sharded_current.manifest.v1" or manifest.get("modules") != MODULES:
+        raise ValueError("inventory_manifest_contract_invalid")
+    declarations = {row.get("path"): row for row in manifest.get("shards", []) if isinstance(row, dict)}
+    expected_paths = {f"{module}/shard-{index:02d}.jsonl" for module in MODULES for index in range(64)}
+    if len(declarations) != 640 or set(declarations) != expected_paths:
+        raise ValueError("inventory_manifest_shards_invalid")
+    for path, declaration in declarations.items():
+        module, filename = path.split("/", 1)
+        index = int(filename.removeprefix("shard-").removesuffix(".jsonl"))
+        if declaration.get("module") != module or declaration.get("shard_index") != index:
+            raise ValueError("inventory_manifest_shard_identity_invalid")
+    projection = {key: manifest[key] for key in ("contract_version", "modules", "shards", "registries", "coverage", "module_completeness")}
+    if manifest.get("aggregate_sha256") != sha256_value(projection):
+        raise ValueError("inventory_manifest_aggregate_mismatch")
+    return current, manifest, declarations
+
+
+def _load_declared_shard(current: Path, declarations: dict[str, dict[str, Any]], relative: str) -> list[dict[str, Any]]:
+    declaration = declarations.get(relative)
+    path = current / relative
+    if declaration is None or not path.is_file() or path.is_symlink():
+        raise ValueError("inventory_shard_missing:" + relative)
+    raw = path.read_bytes()
+    if hashlib.sha256(raw).hexdigest() != declaration.get("sha256"):
+        raise ValueError("inventory_shard_hash_mismatch:" + relative)
+    rows = [json.loads(line) for line in raw.decode("utf-8").splitlines() if line]
+    if len(rows) != declaration.get("row_count"):
+        raise ValueError("inventory_shard_count_mismatch:" + relative)
+    return rows
+
+
 @functools.lru_cache(maxsize=1)
 def inventory() -> tuple[set[str], str]:
-    assets = repository_root() / "backend/content_assets/career/current/assets.jsonl"
-    slugs: list[str] = []
-    with assets.open("r", encoding="utf-8") as handle:
-        for line_number, line in enumerate(handle, 1):
-            if not line.strip():
-                continue
-            row = json.loads(line)
+    return inventory_at(repository_root())
+
+
+def inventory_at(repo: Path) -> tuple[set[str], str]:
+    current, manifest, declarations = _current_manifest(repo)
+    locales: dict[str, set[str]] = {}
+    for index in range(64):
+        relative = f"identity/shard-{index:02d}.jsonl"
+        for row in _load_declared_shard(current, declarations, relative):
+            if row.get("module") != "identity" or row.get("locale") not in {"en", "zh-CN"}:
+                raise ValueError("inventory_identity_row_invalid")
             slug = row.get("canonical_slug")
-            if not isinstance(slug, str) or not slug:
-                raise ValueError(f"inventory_slug_invalid:{line_number}")
-            slugs.append(slug)
-    if len(slugs) != 1046 or len(set(slugs)) != 1046 or slugs != sorted(slugs) or "software-developers" in slugs:
+            if not isinstance(slug, str) or shard_index(slug) != index:
+                raise ValueError("inventory_slug_invalid")
+            locales.setdefault(slug, set()).add(row["locale"])
+    ordered = sorted(locales)
+    if len(ordered) != 1046 or any(value != {"en", "zh-CN"} for value in locales.values()) or "software-developers" in locales:
         raise ValueError("inventory_contract_invalid")
-    ordered = sorted(slugs)
-    manifest_path = assets.parent / "manifest.json"
-    if manifest_path.is_file():
-        manifest = load_json(manifest_path)
-        declared = manifest.get("set_hashes", {}).get("slug_set_sha256")
-        computed = sha256_value(ordered)
-        if declared != computed:
-            raise ValueError("inventory_manifest_hash_mismatch")
-        return set(ordered), declared
-    raise ValueError("inventory_manifest_missing")
+    if manifest.get("coverage", {}).get("slugs") != 1046:
+        raise ValueError("inventory_manifest_coverage_mismatch")
+    return set(ordered), sha256_value(ordered)
+
+
+def expected_current_locks(module: str, slugs: list[str], repo: Path | None = None) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
+    current, _manifest, declarations = _current_manifest(repo)
+    by_shard: dict[int, list[str]] = {}
+    for slug in slugs:
+        by_shard.setdefault(shard_index(slug), []).append(slug)
+    row_locks: list[dict[str, str]] = []
+    shard_locks: list[dict[str, str]] = []
+    for index, shard_slugs in sorted(by_shard.items()):
+        relative = f"{module}/shard-{index:02d}.jsonl"
+        declaration = declarations[relative]
+        rows = _load_declared_shard(current, declarations, relative)
+        pairs: dict[str, dict[str, Any]] = {}
+        for row in rows:
+            slug = row.get("canonical_slug")
+            if slug in shard_slugs:
+                pairs.setdefault(slug, {})[row.get("locale")] = row
+        for slug in sorted(shard_slugs):
+            if set(pairs.get(slug, {})) != {"en", "zh-CN"}:
+                raise ValueError("expected_row_missing:" + slug)
+            projection = {"module": module, "rows": pairs[slug], "slug": slug}
+            row_locks.append({"slug": slug, "sha256": sha256_value(projection)})
+        shard_locks.append({"path": relative, "sha256": declaration["sha256"]})
+    return row_locks, shard_locks
 
 
 def normalize_request(request: dict[str, Any]) -> dict[str, Any]:
@@ -177,6 +241,8 @@ def normalize_request(request: dict[str, Any]) -> dict[str, Any]:
         normalized["jurisdictions"]["comparison"], key=lambda item: (item["code"], item["status"]),
     )
     normalized["risk_class"]["by_slug"] = sorted(normalized["risk_class"]["by_slug"], key=lambda item: item["slug"])
+    normalized["expected_row_hashes"] = sorted(normalized["expected_row_hashes"], key=lambda item: item["slug"])
+    normalized["expected_shard_hashes"] = sorted(normalized["expected_shard_hashes"], key=lambda item: item["path"])
     for key in ("modules", "slugs", "locales", "markets"):
         normalized["authorized_content_scope"][key] = sorted(normalized["authorized_content_scope"][key])
     normalized["output_root"] = str(Path(normalized["output_root"]).resolve(strict=True))
@@ -189,7 +255,7 @@ def validate_request(request: Any, repo_root: Path | None = None) -> dict[str, A
         return {"ok": False, "errors": sorted(set(errors)), "state": "BLOCKED_INPUT"}
     repo = (repo_root or repository_root()).resolve()
     try:
-        canonical_slugs, inventory_hash = inventory()
+        canonical_slugs, inventory_hash = inventory() if repo_root is None else inventory_at(repo)
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         return {"ok": False, "errors": [str(exc)], "state": "BLOCKED_INPUT"}
 
@@ -210,6 +276,15 @@ def validate_request(request: Any, repo_root: Path | None = None) -> dict[str, A
     for key in ("slugs", "locales", "markets"):
         if set(scope[key]) != set(request[key]):
             errors.append(f"authorized_{key}_must_match_request")
+
+    try:
+        expected_rows, expected_shards = expected_current_locks(request["module"], slugs, repo)
+        if sorted(request["expected_row_hashes"], key=lambda item: item["slug"]) != expected_rows:
+            errors.append("expected_row_hash_mismatch")
+        if sorted(request["expected_shard_hashes"], key=lambda item: item["path"]) != expected_shards:
+            errors.append("expected_shard_hash_mismatch")
+    except (OSError, ValueError, KeyError, json.JSONDecodeError) as exc:
+        errors.append(str(exc))
 
     jurisdictions = [request["jurisdictions"]["primary"], *request["jurisdictions"]["comparison"]]
     for item in jurisdictions:
@@ -313,8 +388,9 @@ def orchestrator_projection_hash(receipt: dict[str, Any]) -> str:
     return sha256_value({
         "contract_version": receipt["contract_version"], "batch_id": receipt["batch_id"],
         "request_hash": receipt["request_hash"], "inventory_hash": receipt["inventory_hash"],
-        "source_policy": receipt["source_policy"], "batch_risk": receipt["batch_risk"],
+        "source_policy": receipt["source_policy"], "evidence_policy_version": receipt["evidence_policy_version"], "batch_risk": receipt["batch_risk"],
         "adapter_version": receipt["adapter_version"], "final_state": receipt["final_state"], "gates": gates, "artifact_hashes": receipt["artifact_hashes"], "input_bindings": receipt["input_bindings"],
+        "publishable_slugs": receipt["publishable_slugs"],
         "slug_results": receipt["slug_results"], "dimension_binding": receipt["dimension_binding"],
         "evidence_contract_versions": receipt["evidence_contract_versions"], "dry_compile_status": receipt["dry_compile_status"],
         "counts": receipt["counts"], "source_access_blockers": receipt["source_access_blockers"],
@@ -324,12 +400,12 @@ def orchestrator_projection_hash(receipt: dict[str, Any]) -> str:
 
 
 def dry_compile_aggregate_hash(slug_results: list[dict[str, Any]]) -> str:
-    rows = [{"slug": row["slug"], "state": row["dry_compile_state"], "candidate_row_digest": row["candidate_row_digest"]} for row in sorted(slug_results, key=lambda item: item["slug"])]
+    rows = [{"slug": row["slug"], "state": row["dry_compile_state"], "candidate_row_digest": row["candidate_row_digest"]} for row in sorted(slug_results, key=lambda item: item["slug"]) if row["dry_compile_state"] == "PASS"]
     return sha256_value(rows)
 
 
 def evidence_aggregate_hash(slug_results: list[dict[str, Any]]) -> str:
-    rows = [{"slug": row["slug"], "state": row["evidence_adapter_state"], "evidence_package_digest": row["evidence_package_digest"]} for row in sorted(slug_results, key=lambda item: item["slug"])]
+    rows = [{"slug": row["slug"], "state": row["evidence_adapter_state"], "evidence_package_digest": row["evidence_package_digest"]} for row in sorted(slug_results, key=lambda item: item["slug"]) if row["evidence_adapter_state"] == "PASS"]
     return sha256_value(rows)
 
 
@@ -349,6 +425,8 @@ def validate_receipt(receipt: Any, request: Any, repo_root: Path | None = None) 
         errors.append("inventory_hash_mismatch")
     if receipt["source_policy"]["version"] != request["source_policy_version"]:
         errors.append("source_policy_version_mismatch")
+    if receipt["evidence_policy_version"] != request["evidence_policy_version"]:
+        errors.append("evidence_policy_version_mismatch")
     source_policy_path = repository_root() / ".agents/skills/fap-api-career-content-research-producer/references/source-policy.md"
     if receipt["source_policy"]["hash"] != hashlib.sha256(source_policy_path.read_bytes()).hexdigest():
         errors.append("source_policy_hash_mismatch")
@@ -422,6 +500,7 @@ def validate_receipt(receipt: Any, request: Any, repo_root: Path | None = None) 
         errors.append("source_access_blocker_not_terminal")
 
     counts = receipt["counts"]
+    publishable = receipt["publishable_slugs"]
     if "research" in gate_names and gates[0]["state"] == "PASS":
         if counts["research_modules_per_slug"] != 10 or counts["producer_errors"] != 0 or counts["expired_sources"] != 0 or not counts["research_deterministic_rerun_pass"]:
             errors.append("research_pass_threshold_invalid")
@@ -438,7 +517,7 @@ def validate_receipt(receipt: Any, request: Any, repo_root: Path | None = None) 
         if receipt["evidence_contract_versions"] or counts["evidence_contracts_passed"] != 0 or counts["loader_cohort_pass"] or counts["loader_single_slug_pass"] or counts["evidence_deterministic_rerun_pass"] or counts["required_compiler_claim_coverage_percent"] != 0 or receipt["dimension_binding"]["adapter_rows"] != 0:
             errors.append("unexecuted_evidence_metrics_must_be_zero")
     if "dry_compile" in gate_names and gates[3]["state"] == "PASS":
-        if (counts["dry_compile_source_files"], counts["dry_compile_locale_projections"], counts["components_per_page"], counts["dry_compile_blockers"]) != (10, 2, 26, 0) or counts["candidate_rows"] != len(request["slugs"]) or receipt["dry_compile_status"] != "PASS_TEN_BLOCK_DRY_COMPILE" or not counts["dry_compile_deterministic_rerun_pass"]:
+        if (counts["dry_compile_source_files"], counts["dry_compile_locale_projections"], counts["components_per_page"], counts["dry_compile_blockers"]) != (10, 2, 26, 0) or counts["candidate_rows"] != len(publishable) or receipt["dry_compile_status"] != "PASS_TEN_BLOCK_DRY_COMPILE" or not counts["dry_compile_deterministic_rerun_pass"]:
             errors.append("dry_compile_pass_threshold_invalid")
         if receipt["artifact_hashes"]["dry_compile_candidate"] is None:
             errors.append("candidate_row_digest_missing")
@@ -448,17 +527,24 @@ def validate_receipt(receipt: Any, request: Any, repo_root: Path | None = None) 
     slug_results = receipt["slug_results"]
     if sorted(row["slug"] for row in slug_results) != sorted(request["slugs"]) or len({row["slug"] for row in slug_results}) != len(slug_results):
         errors.append("slug_results_must_match_request")
+    editorial_pass = sorted(row["slug"] for row in slug_results if row["editorial_state"] == "PASS")
+    if sorted(publishable) != editorial_pass or (final == "ORCHESTRATED" and not publishable):
+        errors.append("publishable_slug_set_invalid")
     if gate_by_name.get("evidence_adapter", {}).get("state") == "PASS":
-        if any(row["evidence_adapter_state"] != "PASS" or row["evidence_package_digest"] is None for row in slug_results):
+        if any(row["evidence_adapter_state"] != "PASS" or row["evidence_package_digest"] is None for row in slug_results if row["slug"] in publishable):
             errors.append("per_slug_evidence_results_incomplete")
-        elif len({row["evidence_package_digest"] for row in slug_results}) != len(slug_results):
+        elif any(row["evidence_adapter_state"] != "NOT_RUN" or row["evidence_package_digest"] is not None for row in slug_results if row["slug"] not in publishable):
+            errors.append("isolated_slug_evidence_forbidden")
+        elif len({row["evidence_package_digest"] for row in slug_results if row["slug"] in publishable}) != len(publishable):
             errors.append("per_slug_evidence_digests_must_be_distinct")
         elif receipt["artifact_hashes"]["evidence_package"] != evidence_aggregate_hash(slug_results):
             errors.append("evidence_aggregate_hash_mismatch")
     if gate_by_name.get("dry_compile", {}).get("state") == "PASS":
-        if counts["candidate_rows"] != len(request["slugs"]) or any(row["dry_compile_state"] != "PASS" or row["candidate_row_digest"] is None for row in slug_results):
+        if counts["candidate_rows"] != len(publishable) or any(row["dry_compile_state"] != "PASS" or row["candidate_row_digest"] is None for row in slug_results if row["slug"] in publishable):
             errors.append("per_slug_compile_results_incomplete")
-        elif len({row["candidate_row_digest"] for row in slug_results}) != len(slug_results):
+        elif any(row["dry_compile_state"] != "NOT_RUN" or row["candidate_row_digest"] is not None for row in slug_results if row["slug"] not in publishable):
+            errors.append("isolated_slug_compile_forbidden")
+        elif len({row["candidate_row_digest"] for row in slug_results if row["slug"] in publishable}) != len(publishable):
             errors.append("per_slug_candidate_digests_must_be_distinct")
         elif receipt["artifact_hashes"]["dry_compile_candidate"] != dry_compile_aggregate_hash(slug_results):
             errors.append("dry_compile_aggregate_hash_mismatch")

@@ -4,10 +4,11 @@
   "title": "Career Content Agent request v1",
   "type": "object",
   "additionalProperties": false,
-  "required": ["contract_version", "batch_id", "slugs", "locales", "markets", "jurisdictions", "research_as_of", "source_policy_version", "risk_class", "authorized_content_scope", "output_root", "execution_limits"],
+  "required": ["contract_version", "batch_id", "module", "slugs", "locales", "markets", "jurisdictions", "research_as_of", "source_policy_version", "evidence_policy_version", "expected_row_hashes", "expected_shard_hashes", "risk_class", "authorized_content_scope", "output_root", "execution_limits"],
   "properties": {
     "contract_version": {"const": "career.content_agent.request.v1"},
     "batch_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,127}$"},
+    "module": {"enum": ["identity", "definition", "salary", "geo", "ai-impact", "fit-personality", "risk", "compare-links", "faq", "page-meta"]},
     "slugs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"}},
     "locales": {"type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true, "items": {"enum": ["en", "zh-CN"]}},
     "markets": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^(?:[A-Z]{2}|GLOBAL)$"}},
@@ -20,6 +21,21 @@
     },
     "research_as_of": {"type": "string", "format": "date"},
     "source_policy_version": {"const": "career.source-policy.v1"},
+    "evidence_policy_version": {"const": "career.compiler-evidence-policy.v1"},
+    "expected_row_hashes": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["slug", "sha256"],
+        "properties": {"slug": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"}, "sha256": {"$ref": "#/$defs/hash"}}
+      }
+    },
+    "expected_shard_hashes": {
+      "type": "array", "minItems": 1, "maxItems": 64, "uniqueItems": true,
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["path", "sha256"],
+        "properties": {"path": {"type": "string", "pattern": "^[a-z-]+/shard-(?:[0-5][0-9]|6[0-3])\\.jsonl$"}, "sha256": {"$ref": "#/$defs/hash"}}
+      }
+    },
     "risk_class": {
       "type": "object", "additionalProperties": false, "required": ["batch_max", "by_slug"],
       "properties": {
@@ -60,6 +76,7 @@
     }
   },
   "$defs": {
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "risk": {"enum": ["standard", "regulated", "ymyl_high"]},
     "jurisdiction": {
       "type": "object", "additionalProperties": false, "required": ["code", "status"],

@@ -6,14 +6,15 @@ This is the authoritative request and execution boundary for `career.content_age
 
 Validate requests with `../scripts/validate_content_agent_contract.py request <request.json>`. The CLI always loads repository Current inventory and exposes no inventory override. Canonical JSON uses sorted object keys, compact separators, UTF-8, and no ASCII escaping. Arrays whose order has no business meaning are normalized before hashing: `slugs`, `locales`, `markets`, authorized modules and all authorized dimension lists are unique and lexicographically sorted; `risk_class.by_slug` is sorted by slug. `research_as_of` is the only lifecycle clock. Runtime timestamps and observations never enter the request or business artifact digest.
 
-- `slugs` is a non-empty subset of the 1046 `canonical_slug` values in `backend/content_assets/career/current/assets.jsonl`. The validator reads that inventory and rejects duplicates, aliases, additions, replacements, and `software-developers`.
+- `module` is exactly one of the ten canonical modules. `slugs` is a non-empty subset of the 1046 identities reconstructed from manifest-bound Current shards; the validator rejects duplicates, aliases, additions, replacements, and `software-developers`.
+- `expected_row_hashes` binds the exact en/zh-CN Current module-row pair for every requested slug. `expected_shard_hashes` binds every deterministic target-module shard touched by those slugs, contains at most 64 paths, and participates in the request hash. Missing, extra, stale, or changed locks fail closed; last-write-wins is forbidden.
 - `locales` is page language and locks the current paired projections `en` and `zh-CN`. The existing compiler adapter alone maps `zh-CN` to `zh`; market and jurisdiction never select a locale.
 - `markets` is the labor/economic data market. It is explicit ISO 3166-1 alpha-2 or `GLOBAL`; BLS remains `US`, regardless of page language.
 - `jurisdictions.primary` and every `comparison` entry are explicit `{code,status}` objects. `status=unknown` requires `code=UNKNOWN`; no locale or market supplies a default jurisdiction.
 - `risk_class.by_slug` has exactly one entry per requested slug and supports `standard`, `regulated`, and `ymyl_high`. `batch_max` must equal the highest per-slug class (`standard < regulated < ymyl_high`) and may never be lowered by the agent.
 - `authorized_content_scope` separately locks all ten modules plus the exact request slugs, locales, and markets. An extra source or discovered topic cannot expand or narrow them.
 - `output_root` resolves through every symlink to an existing task candidate directory under the system temporary root. Repository, Current, approved zh-CN master, English assets, runtime, production, traversal, and symlink escape targets fail closed.
-- `execution_limits` explicitly supplies non-negative finite integer request/retry/wall-time/token limits, non-negative finite decimal external spend, a three-letter uppercase currency, and non-negative `review_due_soon_days`. Zero external spend forbids paid APIs. No limit may be omitted or interpreted as unlimited.
+- `source_policy_version` and `evidence_policy_version` are independent locked policies. `execution_limits` explicitly supplies non-negative finite integer request/retry/wall-time/token limits, non-negative finite decimal external spend, a three-letter uppercase currency, and non-negative `review_due_soon_days`. Zero external spend forbids paid APIs. No limit may be omitted or interpreted as unlimited.
 
 ## Resource enforcement
 
@@ -37,9 +38,14 @@ Gate inputs are canonical hashes, not a lossy previous-output chain. Gate 1 bind
 
 Gate 5 output is the canonical hash of a non-circular business projection: contract/batch/request/inventory/source-policy/adapter/risk/final state, gates with Gate 5 `output_hash` omitted, artifact hashes, per-slug results, dimension binding, exact evidence contracts, dry-compile status, deterministic counts, access blockers, manual review, lifecycle, zero permissions and zero writes. Only resource observations are excluded. Each slug has its own adapter state/evidence digest and dry-compile state/candidate-row digest; Gate 3 and Gate 4 outputs are the respective canonical hashes of those sorted rows, so a batch cannot be represented by one boolean or repeated aggregate digest.
 
+## Deterministic merger and release handoff
+
+Workers write only isolated temporary candidates. Per-slug Editorial QA may isolate WARN/BLOCKED candidates; `publishable_slugs` is the explicit remaining set and every member must pass all five gates. After `career.content_agent.release_handoff.v1` binds the request hash, raw receipt hash, module, exact publication set, and `fap-api-career-release-authority`, one merger may write Current. It serializes manifest activation, rechecks row and shard hashes under lock, permits independent different-shard merges, rejects same-shard or stale-row conflicts, rewrites only affected target-module shards, then updates `manifest.json` last. FAQ reconstruction validates visible FAQ and `FAQPage`; the canonical assembler expands identity, page-meta, compare-link, source, claim, CTA, SEO, and component dependencies without rewriting unauthorized module bodies. The merger receipt records zero DB/cache/CMS/publisher/deploy/sitemap/discoverability/search writes.
+
 ## Machine contracts
 
 - [request schema](schemas/career.content_agent.request.v1.schema.json)
 - [receipt schema](schemas/career.content_agent.receipt.v1.schema.json)
+- [release-authority handoff schema](schemas/career.content_agent.release_handoff.v1.schema.json)
 
 The schema enforces shape; the validator additionally enforces repository inventory, canonical hashing, path confinement, cross-field equality, risk maximum, state ordering, budgets, hash binding, and zero-authority invariants.

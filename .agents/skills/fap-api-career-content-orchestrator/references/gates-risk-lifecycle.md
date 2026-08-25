@@ -14,7 +14,7 @@ Input is the locked request, current 1046 inventory and hash, source policy vers
 
 ## Gate 2 — editorial QA
 
-Use only `fermatmind-career-editorial-qa`. `PASS` advances standard/regulated candidates. `WARN` preserves candidate/report and stops as `WARN_EDITORIAL`; `BLOCKED` stops as `BLOCKED_EDITORIAL`. Never rewrite-loop, weaken a WARN, hide missing evidence with style edits, or modify the approved 1046 zh-CN master. For `ymyl_high`, QA PASS stops as `MANUAL_REVIEW_REQUIRED`; adapter and later gates must be absent.
+Use only `fermatmind-career-editorial-qa`. QA is recorded per slug. A mixed batch may isolate WARN/BLOCKED slugs and continue only its explicit non-empty `publishable_slugs`; isolated slugs remain `NOT_RUN` in later gates. A batch-level `WARN`/`BLOCKED`, or an empty publication set, stops. Never rewrite-loop, weaken a WARN, hide missing evidence with style edits, or modify the approved 1046 zh-CN master. For `ymyl_high`, QA PASS stops as `MANUAL_REVIEW_REQUIRED`; adapter and later gates must be absent.
 
 ## Gate 3 — C3.6A-R evidence adapter
 

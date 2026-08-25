@@ -9,9 +9,13 @@ interface:
     $fap-api-career-content-orchestrator. Write only beneath the locked temporary
     output_root and execute, in order, request lock, research producer, Editorial
     QA, the existing C3.6A-R evidence adapter, the real single-slug dry compile,
-    and the no-authority receipt gate. Stop immediately on WARN or BLOCKED; after
+    and the no-authority receipt gate. Isolate per-slug QA failures and advance
+    only an explicit set whose five gates pass. Stop on a batch-level WARN or BLOCKED; after
     a PASS for ymyl_high stop at MANUAL_REVIEW_REQUIRED for human review. Never
-    publish, replace Current, deploy, write CMS/database/cache, change
+    publish, deploy, write CMS/database/cache, change
     sitemap/discoverability, submit search, or create schedules/automations. The
     final career.content_agent.receipt.v1 must keep every publication, Current,
     deploy, and search permission false and every non-target write count zero.
+    Only after a separately bound fap-api-career-release-authority handoff may
+    the same harness invoke its single deterministic Current merger; workers
+    never write Current and no second or publishing Agent may be created.

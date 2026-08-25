@@ -12,6 +12,7 @@ record-editorial --output-root <locked-root> --result <qa-result.json>
 run-evidence-adapter --output-root <locked-root> --research-package <Gate-1-package> --source-root <ten-block-root> --lookup <lookup.json> --control-slug <slug>
 run-dry-compile --output-root <locked-root> --source-root <ten-block-root> --lookup <lookup.json>
 finalize --output-root <locked-root>
+merge-current --output-root <locked-root> --handoff <release-handoff.json> [--write]
 resume --output-root <locked-root>
 ```
 
@@ -33,4 +34,4 @@ The locked root contains `request.locked.json`, `agent-state.json`, `gate-01-res
 
 Each checkpoint binds a command-input hash. Repeating the same gate with the same locked artifacts is a safe no-op. If a previously locked research or compiler input changes, the affected PASS is replaced by its fail-closed gate result and cannot be reused. Other changed command inputs raise `gate_input_hash_conflict` without replacing prior evidence. `resume` and `status` are read-only and return the next legal command. Stop states are terminal; a corrected attempt requires a new request and `batch_id`.
 
-All business hashes use canonical JSON and exclude wall time, token, cost, and other runtime observations. Outputs remain under the locked system-temporary `output_root`; the harness has no publisher, release, deployment, CMS, database, cache, sitemap, discoverability, search-submission, cron, queue, or automation call.
+All business hashes use canonical JSON and exclude wall time, token, cost, and other runtime observations. Workers and Gate checkpoints remain under the locked system-temporary `output_root`. `merge-current` defaults to dry-run and accepts only an in-root release handoff bound to the five-PASS receipt; `--write` invokes the one Current merger and writes only affected module shards plus the compiler-owned manifest. The harness has no publisher, deployment, CMS, database, cache, sitemap, discoverability, search-submission, cron, queue, or automation call.

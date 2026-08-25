@@ -25,10 +25,11 @@ VALIDATOR_PATH = SKILL_ROOT / "scripts" / "validate_content_agent_contract.py"
 RESEARCH_SKILL = REPO_ROOT / ".agents/skills/fap-api-career-content-research-producer"
 RESEARCH_VALIDATOR = RESEARCH_SKILL / "scripts/validate_research_package.py"
 ADAPTER = RESEARCH_SKILL / "scripts/adapt_research_package_to_compiler_evidence.php"
+CURRENT_MERGER = SKILL_ROOT / "scripts/merge_career_content_candidates.php"
 SOURCE_POLICY = RESEARCH_SKILL / "references/source-policy.md"
 BASELINE_ASSETS = REPO_ROOT / "backend/content_assets/career/current/assets.jsonl"
 BACKEND = REPO_ROOT / "backend"
-STATE_VERSION = "career.content_agent.state.v2"
+STATE_VERSION = "career.content_agent.state.v3"
 ADAPTER_VERSION = "career.research.compiler_evidence_adapter.v1"
 MODULE_FILES = (
     "identity.json", "definition.json", "salary.json", "geo.json", "ai-impact.json",
@@ -371,7 +372,8 @@ def init_agent(request_path: Path) -> dict[str, Any]:
             "completed_gates": [], "execution_input_hashes": {},
             "artifact_hashes": {"research_candidate": None, "evidence_package": None, "dry_compile_candidate": None},
             "input_bindings": {"research_package": None, "compiler_inputs": None},
-            "slug_results": [{"slug": slug, "evidence_adapter_state": "NOT_RUN", "evidence_package_digest": None, "dry_compile_state": "NOT_RUN", "candidate_row_digest": None} for slug in sorted(request["slugs"])],
+            "publishable_slugs": [],
+            "slug_results": [{"slug": slug, "editorial_state": "NOT_RUN", "evidence_adapter_state": "NOT_RUN", "evidence_package_digest": None, "dry_compile_state": "NOT_RUN", "candidate_row_digest": None} for slug in sorted(request["slugs"])],
             "dimension_binding": {"claim_rows": 0, "source_rows": 0, "adapter_rows": 0, "binding_digest": hash_value([]), "mismatch_count": 0},
             "evidence_contract_versions": [], "dry_compile_status": None,
             "counts": empty_counts(), "resources": empty_resources(), "source_access_blockers": [],
@@ -593,6 +595,18 @@ def record_editorial(root: Path, result_path: Path) -> dict[str, Any]:
         if rewrite_attempts != 0:
             raise AgentError("automatic_rewrite_forbidden")
         state["counts"]["auto_rewrite_attempts"] = 0
+        per_slug = result.get("slug_results")
+        if per_slug is None:
+            per_slug = [{"slug": slug, "decision": decision} for slug in request_for(state, root)["slugs"]]
+        if (not isinstance(per_slug, list)
+            or sorted(row.get("slug") for row in per_slug if isinstance(row, dict)) != sorted(request_for(state, root)["slugs"])
+            or len({row.get("slug") for row in per_slug if isinstance(row, dict)}) != len(per_slug)
+            or any(not isinstance(row, dict) or row.get("decision") not in {"PASS", "WARN", "BLOCKED"} for row in per_slug)):
+            raise AgentError("editorial_slug_results_invalid")
+        decisions = {row["slug"]: row["decision"] for row in per_slug}
+        for row in state["slug_results"]:
+            row["editorial_state"] = decisions[row["slug"]]
+        state["publishable_slugs"] = sorted(slug for slug, slug_decision in decisions.items() if slug_decision == "PASS")
         output_hash = hash_value(result)
         previous = state["completed_gates"][0]
         gate = {"gate": "editorial", "state": decision, "input_hash": hash_value({"request_hash": state["request_hash"], "research_candidate": state["artifact_hashes"]["research_candidate"], "research_output": previous["output_hash"]}), "output_hash": output_hash}
@@ -601,6 +615,9 @@ def record_editorial(root: Path, result_path: Path) -> dict[str, Any]:
             state["state"], state["blocker"] = "WARN_EDITORIAL", "WARN_EDITORIAL"
         elif decision == "BLOCKED":
             state["state"], state["blocker"] = "BLOCKED_EDITORIAL", "BLOCKED_EDITORIAL"
+        elif not state["publishable_slugs"]:
+            stop = "WARN_EDITORIAL" if "WARN" in decisions.values() else "BLOCKED_EDITORIAL"
+            state["state"], state["blocker"] = stop, stop
         elif request["risk_class"]["batch_max"] == "ymyl_high":
             state["state"], state["blocker"] = "MANUAL_REVIEW_REQUIRED", "MANUAL_REVIEW_REQUIRED"
             state["manual_review"] = {"required": True, "status": "required_pending"}
@@ -713,7 +730,7 @@ def run_evidence(root: Path, package: Path, source_root: Path, lookup: Path, con
         adapter_roots = []
         outputs = []
         try:
-            for slug in sorted(request["slugs"]):
+            for slug in state["publishable_slugs"]:
                 if slug == control:
                     raise AgentError("adapter_control_target_overlap")
                 output = root / f"evidence-{slug}"
@@ -745,8 +762,9 @@ def run_evidence(root: Path, package: Path, source_root: Path, lookup: Path, con
             "loader_cohort_pass": all(item["receipt"].get("loader_cohort_validation") == "passed" for item in outputs),
             "loader_single_slug_pass": all(all(v == "passed" for v in item["receipt"].get("loader_single_slug_validation", {}).values()) for item in outputs),
             "evidence_deterministic_rerun_pass": True, "required_compiler_claim_coverage_percent": 100})
-        for row, output in zip(state["slug_results"], outputs):
-            row.update({"evidence_adapter_state": "PASS", "evidence_package_digest": output["digest"]})
+        by_slug = {row["slug"]: row for row in state["slug_results"]}
+        for output in outputs:
+            by_slug[output["slug"]].update({"evidence_adapter_state": "PASS", "evidence_package_digest": output["digest"]})
         aggregate = CONTRACT.evidence_aggregate_hash(state["slug_results"])
         compiler["evidence_packages"] = [{"slug": item["slug"], "canonical_path": item["output_root"], "tree_sha256": item["digest"], "entry_manifest_sha256": item["entry_manifest_sha256"]} for item in outputs]
         compiler["evidence_package_digest"] = aggregate
@@ -777,6 +795,8 @@ def current_gate4_inputs(state: dict[str, Any], source_root: Path, lookup: Path)
     evidence_packages = []
     evidence_rows = []
     for row in state["slug_results"]:
+        if row["slug"] not in state["publishable_slugs"]:
+            continue
         evidence = locked_tree(Path(state["output_root"]) / f"evidence-{row['slug']}")
         evidence_packages.append({
             "slug": row["slug"], "canonical_path": evidence["canonical_path"],
@@ -854,6 +874,8 @@ def run_compile(root: Path, source_root: Path, lookup: Path) -> dict[str, Any]:
         outputs = []
         try:
             for row in state["slug_results"]:
+                if row["slug"] not in state["publishable_slugs"]:
+                    continue
                 slug = row["slug"]
                 output = root / f"dry-compile-{slug}"
                 output.mkdir(mode=0o700, exist_ok=True)
@@ -917,10 +939,11 @@ def receipt_from_state(state: dict[str, Any], request: dict[str, Any]) -> dict[s
     return {
         "contract_version": "career.content_agent.receipt.v1", "batch_id": request["batch_id"],
         "request_hash": state["request_hash"], "inventory_hash": state["inventory_hash"],
-        "source_policy": state["source_policy"], "adapter_version": ADAPTER_VERSION,
+        "source_policy": state["source_policy"], "evidence_policy_version": request["evidence_policy_version"], "adapter_version": ADAPTER_VERSION,
         "batch_risk": request["risk_class"]["batch_max"], "final_state": "ORCHESTRATED",
         "gates": list(state["completed_gates"]), "artifact_hashes": state["artifact_hashes"],
         "input_bindings": receipt_bindings,
+        "publishable_slugs": state["publishable_slugs"],
         "slug_results": state["slug_results"], "dimension_binding": state["dimension_binding"],
         "evidence_contract_versions": state["evidence_contract_versions"],
         "dry_compile_status": state["dry_compile_status"], "counts": state["counts"],
@@ -950,6 +973,31 @@ def finalize(root: Path) -> dict[str, Any]:
         state["state"], state["blocker"] = "ORCHESTRATED", None
         save_state(root, state)
         return public_status(state)
+
+
+def merge_current(root: Path, handoff_path: Path, *, write: bool) -> dict[str, Any]:
+    with output_lock(root):
+        state = load_state(root)
+        if state["state"] != "ORCHESTRATED":
+            raise AgentError("merge_requires_orchestrated_receipt")
+        request = request_for(state, root)
+        receipt_path = root / "career-content-agent-receipt.json"
+        receipt = read_json(receipt_path)
+        validation = CONTRACT.validate_receipt(receipt, request)
+        if not validation["ok"]:
+            raise AgentError("merge_receipt_validation_failed:" + ",".join(validation["errors"]))
+        handoff = locked_file(handoff_path)
+        if not Path(handoff["canonical_path"]).is_relative_to(root.resolve(strict=True)):
+            raise AgentError("release_handoff_outside_locked_root")
+        command = [
+            "php", str(CURRENT_MERGER), f"--request={root / 'request.locked.json'}",
+            f"--receipt={receipt_path}", f"--handoff={handoff['canonical_path']}",
+        ]
+        if write:
+            command.append("--write")
+        result = run_json(command, REPO_ROOT)
+        atomic_json(root / ("current-merge-receipt.json" if write else "current-merge-dry-run.json"), result)
+        return result
 
 
 def next_command(state: dict[str, Any]) -> str | None:
@@ -985,6 +1033,8 @@ def parser() -> argparse.ArgumentParser:
     evidence.add_argument("--output-root", required=True); evidence.add_argument("--research-package", required=True, type=Path); evidence.add_argument("--source-root", required=True, type=Path); evidence.add_argument("--lookup", required=True, type=Path); evidence.add_argument("--control-slug", required=True)
     compile_parser = commands.add_parser("run-dry-compile")
     compile_parser.add_argument("--output-root", required=True); compile_parser.add_argument("--source-root", required=True, type=Path); compile_parser.add_argument("--lookup", required=True, type=Path)
+    merge = commands.add_parser("merge-current")
+    merge.add_argument("--output-root", required=True); merge.add_argument("--handoff", required=True, type=Path); merge.add_argument("--write", action="store_true")
     return root
 
 
@@ -1000,6 +1050,7 @@ def main() -> int:
             elif args.command == "run-evidence-adapter": result = run_evidence(root, args.research_package, args.source_root, args.lookup, args.control_slug)
             elif args.command == "run-dry-compile": result = run_compile(root, args.source_root, args.lookup)
             elif args.command == "finalize": result = finalize(root)
+            elif args.command == "merge-current": result = merge_current(root, args.handoff, write=args.write)
             else: raise AgentError("unknown_command")
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))
         return 0
