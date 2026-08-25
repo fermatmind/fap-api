@@ -984,6 +984,79 @@ BASH);
     });
 });
 
+task('seo:url-truth-controlled-reconcile', function () {
+    within('{{release_path}}/backend', function (): void {
+        run(<<<'BASH'
+set -euo pipefail
+set +e
+{{bin/php}} -r 'require "vendor/autoload.php"; $app = require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); exit(config("seo_intel.enabled") && config("seo_intel.write_enabled") ? 0 : 42);'
+write_status="$?"
+set -e
+args=(--no-http)
+if [ "$write_status" -eq 0 ]; then
+  args=(--execute --batch-size=250 --max-records=5000)
+fi
+set +e
+receipt="$({{bin/php}} artisan seo-intel:url-truth-controlled-reconcile "${args[@]}" --json --no-interaction --no-ansi)"
+command_status="$?"
+set -e
+printf '%s\n' "$receipt"
+printf '%s' "$receipt" | WRITE_STATUS="$write_status" COMMAND_STATUS="$command_status" {{bin/php}} -r '
+$payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
+$boundaries = $payload["boundaries"] ?? [];
+$ok = ($payload["schema_version"] ?? null) === "seo-platform-controlled-url-truth-reconciliation.v1"
+    && ($boundaries["search_submission_allowed"] ?? null) === false
+    && ($boundaries["hard_delete"] ?? null) === false;
+if ((int) getenv("WRITE_STATUS") === 42) {
+    $ok = $ok
+        && (int) getenv("COMMAND_STATUS") !== 0
+        && ($payload["status"] ?? null) === "blocked"
+        && in_array("url_truth_hardened_schema_unavailable", $payload["issues"] ?? [], true)
+        && ($payload["writes_committed"] ?? null) === false;
+} else {
+    $rerun = $payload["idempotent_rerun"] ?? [];
+    $batches = $payload["batches"] ?? [];
+    $detector = $payload["sitemap_authority_detector"] ?? [];
+    $detectorDifference = $detector["sitemap_without_authority_count"] ?? null;
+    $detectorCounts = $detector["materialization"]["counts"] ?? [];
+    $detectorMaterialized = array_sum(array_map(
+        "intval",
+        array_intersect_key($detectorCounts, array_flip(["created", "updated", "reopened", "no_change"])),
+    ));
+    $ok = $ok
+        && (int) getenv("COMMAND_STATUS") === 0
+        && ($payload["status"] ?? null) === "success"
+        && ($payload["mode"] ?? null) === "controlled_write"
+        && ($payload["writes_attempted"] ?? null) === true
+        && ($payload["writes_committed"] ?? null) === true
+        && is_int($payload["artifact"]["record_count"] ?? null)
+        && ($payload["artifact"]["record_count"] ?? 0) > 0
+        && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["artifact"]["artifact_hash"] ?? "")) === 1
+        && ($rerun["added"] ?? null) === 0
+        && ($rerun["duplicate"] ?? null) === 0
+        && ($rerun["unexpected_updated"] ?? null) === 0
+        && ($rerun["private_leakage"] ?? null) === 0
+        && ($rerun["current_binding_conflicts"] ?? null) === 0
+        && ($rerun["passed"] ?? null) === true
+        && $batches !== []
+        && count(array_filter($batches, static fn (array $batch): bool => ($batch["database_readback_ok"] ?? null) !== true)) === 0
+        && ($boundaries["backend_cms_authority_only"] ?? null) === true
+        && ($boundaries["cms_write"] ?? null) === false
+        && ($boundaries["content_publication"] ?? null) === false
+        && ($boundaries["sitemap_authority_write"] ?? null) === false
+        && ($detector["status"] ?? null) === "success"
+        && is_int($detectorDifference)
+        && ($detectorDifference === 0
+            || (($detector["planned_issues"] ?? 0) > 0
+                && ($detector["materialization"]["mode"] ?? null) === "controlled_materialization"
+                && $detectorMaterialized > 0));
+}
+exit($ok ? 0 : 1);
+' || exit 43
+BASH, timeout: 1800);
+    });
+});
+
 task('artisan:migrate-schema-only', function () {
     $migration = deploySchemaOnlyMigration();
     $migrationPath = 'database/migrations/'.$migration;
@@ -2572,6 +2645,7 @@ after('deploy:symlink', 'healthcheck:public');
 after('healthcheck:public', 'healthcheck:sitemap-source');
 after('healthcheck:sitemap-source', 'healthcheck:public-dns');
 after('healthcheck:public-dns', 'seo:url-truth-reconciliation-receipt');
+after('seo:url-truth-reconciliation-receipt', 'seo:url-truth-controlled-reconcile');
 after('deploy:symlink', 'healthcheck:auth-guest-contract');
 after('deploy:symlink', 'healthcheck:public-static-media-assets');
 after('deploy:symlink', 'healthcheck:scale-lookup');
