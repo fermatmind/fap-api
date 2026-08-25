@@ -8,11 +8,14 @@
 
     $snapshot = SeoContentPublishingUiContract::unavailableSnapshot();
     $copy = 'ops.custom_pages.seo_operations.content_publishing';
-    $authorityUrls = [
-        'article' => ArticleResource::getUrl(),
-        'career_guide' => CareerGuideResource::getUrl(),
-        'career_job' => CareerJobResource::getUrl(),
-    ];
+    $canReadAuthority = ContentAccess::canRead();
+    $authorityUrls = $canReadAuthority
+        ? [
+            'article' => ArticleResource::getUrl(),
+            'career_guide' => CareerGuideResource::getUrl(),
+            'career_job' => CareerJobResource::getUrl(),
+        ]
+        : [];
 @endphp
 
 <div class="ops-content-publishing" data-contract-state="{{ $snapshot['state'] }}">
@@ -32,7 +35,7 @@
         </div>
         <div class="ops-content-publishing__authority-links">
             @foreach ($snapshot['authority_types'] as $type)
-                @if (ContentAccess::canRead())
+                @if ($canReadAuthority)
                     <a href="{{ $authorityUrls[$type] }}">{{ __($copy.'.authority.types.'.$type) }}</a>
                 @else
                     <span aria-disabled="true">{{ __($copy.'.authority.types.'.$type) }} · {{ __('ops.custom_pages.seo_operations.states.permission_denied.label') }}</span>

@@ -34,7 +34,9 @@ final class SeoUxImpl05ContentPublishingTest extends TestCase
         $this->assertStringContainsString('ArticleResource::getUrl()', $workspace);
         $this->assertStringContainsString('CareerGuideResource::getUrl()', $workspace);
         $this->assertStringContainsString('CareerJobResource::getUrl()', $workspace);
-        $this->assertStringContainsString('ContentAccess::canRead()', $workspace);
+        $this->assertStringContainsString('$canReadAuthority = ContentAccess::canRead()', $workspace);
+        $this->assertStringContainsString('$authorityUrls = $canReadAuthority', $workspace);
+        $this->assertStringContainsString('@if ($canReadAuthority)', $workspace);
         $this->assertStringNotContainsString("getUrl('create')", $workspace);
         $this->assertStringNotContainsString("getUrl('edit'", $workspace);
         $this->assertStringNotContainsString('<form', $workspace);
