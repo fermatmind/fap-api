@@ -187,13 +187,12 @@ final class SeoPlatform05UrlTruthWriterHardeningTest extends TestCase
         return new UrlTruthInventoryRecord(
             canonicalUrl: $canonicalUrl,
             locale: 'en',
-            pageEntityType: 'career_detail',
+            pageEntityType: 'career_job',
             entityIdOrSlug: 'example',
-            sourceAuthority: 'cms_article',
-            entitySource: 'cms_article',
+            sourceAuthority: 'career_runtime_publish_projection',
+            entitySource: 'career_directory_authority',
             authorityStatus: 'published_approved',
             metadata: [
-                'page_family' => 'career',
                 'authority_revision' => str_repeat('a', 64),
                 'canonical_revision' => str_repeat('b', 64),
             ],

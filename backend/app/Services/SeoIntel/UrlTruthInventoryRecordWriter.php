@@ -194,8 +194,9 @@ final class UrlTruthInventoryRecordWriter
     /** @return array{page_family:string,authority_revision:string,canonical_revision:string} */
     private function traceability(UrlTruthInventoryRecord $record): array
     {
-        $pageFamily = mb_substr((string) ($record->metadata['page_family'] ?? $record->attributes['page_family'] ?? $record->pageEntityType), 0, 64);
-        $authorityRevision = (string) ((new EffectivePublicUrlEvaluator)->evaluate($record)['authority_revision'] ?? '');
+        $evaluation = (new EffectivePublicUrlEvaluator)->evaluate($record);
+        $pageFamily = mb_substr((string) ($evaluation['family_id'] ?? $record->pageEntityType), 0, 64);
+        $authorityRevision = (string) ($evaluation['authority_revision'] ?? '');
         if ($authorityRevision === '') {
             $authorityRevision = hash('sha256', json_encode([
                 $record->sourceAuthority,
