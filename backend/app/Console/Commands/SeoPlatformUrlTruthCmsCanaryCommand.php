@@ -11,7 +11,6 @@ use App\Services\SeoIntel\UrlTruth\EffectivePublicUrlEvaluator;
 use App\Services\SeoIntel\UrlTruthInventoryRecord;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Queue;
 use Throwable;
 
 final class SeoPlatformUrlTruthCmsCanaryCommand extends Command
@@ -26,10 +25,10 @@ final class SeoPlatformUrlTruthCmsCanaryCommand extends Command
         EffectivePublicUrlEvaluator $evaluator,
     ): int {
         try {
-            // Staging deliberately has no queue worker. Keep the production listener/job
-            // path intact while making this bounded deploy canary deterministic.
-            config(['queue.default' => 'sync']);
-            Queue::setDefaultDriver('sync');
+            // Staging deliberately has no queue worker. Keep the post-commit event,
+            // listener, and unified job handler while using a deterministic canary-only
+            // dispatch path that cannot be blocked by a stale async unique lock.
+            config(['seo_intel.incremental_sync_inline' => true]);
 
             $article = Article::query()
                 ->withoutGlobalScopes()

@@ -15,12 +15,20 @@ final class QueueUrlTruthIncrementalSync
             return;
         }
 
-        SyncPublicAuthorityUrlTruth::dispatch(
+        $arguments = [
             $event->pageEntityType,
             $event->entityIdentity,
             $event->locale,
             $event->revision,
             $event->change,
-        );
+        ];
+
+        if ((bool) config('seo_intel.incremental_sync_inline', false)) {
+            SyncPublicAuthorityUrlTruth::dispatchSync(...$arguments);
+
+            return;
+        }
+
+        SyncPublicAuthorityUrlTruth::dispatch(...$arguments);
     }
 }

@@ -136,6 +136,7 @@ return [
     'connection' => env('SEO_INTEL_DB_CONNECTION', 'seo_intel'),
     'public_canonical_host' => env('SEO_INTEL_PUBLIC_CANONICAL_HOST', 'https://fermatmind.com'),
     'write_enabled' => env('SEO_INTEL_WRITE_ENABLED', false),
+    'incremental_sync_inline' => false,
     'collectors_enabled' => env('SEO_INTEL_COLLECTORS_ENABLED', false),
     'dry_run_default' => env('SEO_INTEL_DRY_RUN_DEFAULT', true),
     'allow_external_api_calls' => env('SEO_INTEL_ALLOW_EXTERNAL_API_CALLS', false),

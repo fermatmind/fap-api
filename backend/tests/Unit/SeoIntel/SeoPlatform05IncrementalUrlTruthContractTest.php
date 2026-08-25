@@ -10,6 +10,7 @@ use App\Listeners\QueueUrlTruthIncrementalSync;
 use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Queue;
 use Tests\TestCase;
 
@@ -42,6 +43,20 @@ final class SeoPlatform05IncrementalUrlTruthContractTest extends TestCase
         self::assertNotSame($this->job('revision-a')->uniqueId(), $otherLocale->uniqueId());
     }
 
+    public function test_canary_inline_mode_dispatches_the_same_job_synchronously(): void
+    {
+        config([
+            'seo_intel.enabled' => true,
+            'seo_intel.write_enabled' => true,
+            'seo_intel.incremental_sync_inline' => true,
+        ]);
+        Bus::fake();
+
+        (new QueueUrlTruthIncrementalSync)->handle($this->event('revision-a'));
+
+        Bus::assertDispatchedSync(SyncPublicAuthorityUrlTruth::class, fn (SyncPublicAuthorityUrlTruth $job): bool => $job->uniqueId() === $this->job('revision-a')->uniqueId());
+    }
+
     public function test_disabled_url_truth_lane_does_not_queue_or_block_cms_publication(): void
     {
         config(['seo_intel.enabled' => false, 'seo_intel.write_enabled' => false]);
@@ -68,7 +83,8 @@ final class SeoPlatform05IncrementalUrlTruthContractTest extends TestCase
         self::assertStringContainsString('->onOneServer()', $scheduler);
         self::assertStringContainsString("task('seo:url-truth-incremental-cms-canary'", $deploy);
         self::assertStringContainsString("after('seo:url-truth-controlled-reconcile', 'seo:url-truth-incremental-cms-canary')", $deploy);
-        self::assertStringContainsString("Queue::setDefaultDriver('sync')", file_get_contents($root.'/app/Console/Commands/SeoPlatformUrlTruthCmsCanaryCommand.php'));
+        self::assertStringContainsString("config(['seo_intel.incremental_sync_inline' => true])", file_get_contents($root.'/app/Console/Commands/SeoPlatformUrlTruthCmsCanaryCommand.php'));
+        self::assertStringContainsString('SyncPublicAuthorityUrlTruth::dispatchSync(...$arguments)', file_get_contents($root.'/app/Listeners/QueueUrlTruthIncrementalSync.php'));
     }
 
     private function event(string $revision): PublicAuthorityChanged
