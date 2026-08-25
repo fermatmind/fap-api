@@ -5425,4 +5425,142 @@
             padding: 1rem;
         }
     }
+
+    .fi-body.fi-panel-ops .ops-automation-nav {
+        display: flex;
+        gap: .25rem;
+        margin-bottom: 1rem;
+        padding: .25rem;
+        border: 1px solid var(--ops-border-default);
+        border-radius: var(--ops-radius-card);
+        background: var(--ops-bg-surface-subtle);
+    }
+
+    .fi-body.fi-panel-ops .ops-automation-nav__item {
+        min-height: 44px;
+        padding: .55rem .9rem;
+        border-radius: var(--ops-radius-button);
+        color: var(--ops-text-secondary);
+        font-size: .8125rem;
+        font-weight: 650;
+    }
+
+    .fi-body.fi-panel-ops .ops-automation-nav__item:hover,
+    .fi-body.fi-panel-ops .ops-automation-nav__item--active {
+        background: var(--ops-bg-surface);
+        color: var(--ops-electric);
+        box-shadow: var(--ops-shadow-surface);
+    }
+
+    .fi-body.fi-panel-ops .ops-automation-nav__item:focus-visible {
+        outline: 2px solid var(--ops-electric);
+        outline-offset: 2px;
+    }
+
+    .fi-body.fi-panel-ops .ops-experiment-ledger {
+        padding: 1.25rem;
+        border: 1px solid var(--ops-border-default);
+        border-radius: var(--ops-radius-card);
+        background: var(--ops-bg-surface);
+        box-shadow: var(--ops-shadow-surface);
+    }
+
+    .fi-body.fi-panel-ops .ops-experiment-ledger__status-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .5rem;
+        margin-top: 1rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-experiment-ledger__layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(18rem, .34fr);
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-experiment-ledger__list,
+    .fi-body.fi-panel-ops .ops-experiment-ledger__inspector {
+        min-width: 0;
+        padding: 1rem;
+        border: 1px solid var(--ops-border-default);
+        border-radius: var(--ops-radius-card);
+        background: var(--ops-bg-surface-subtle);
+    }
+
+    .fi-body.fi-panel-ops .ops-experiment-ledger__list-head {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr .8fr 1fr .8fr .7fr;
+        gap: .75rem;
+        margin-bottom: .75rem;
+        color: var(--ops-text-tertiary);
+        font-size: .6875rem;
+        font-weight: 650;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+    }
+
+    .fi-body.fi-panel-ops .ops-experiment-ledger__inspector h3 {
+        margin-top: .35rem;
+        color: var(--ops-text-primary);
+        font-size: 1rem;
+        font-weight: 700;
+    }
+
+    .fi-body.fi-panel-ops .ops-experiment-ledger__inspector > p {
+        margin-top: .35rem;
+        color: var(--ops-text-secondary);
+    }
+
+    .fi-body.fi-panel-ops .ops-experiment-ledger__inspector dl {
+        display: grid;
+        gap: .5rem;
+        margin-top: 1rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-experiment-ledger__inspector dl div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: .75rem;
+        min-height: 32px;
+        border-bottom: 1px solid var(--ops-border-default);
+    }
+
+    .fi-body.fi-panel-ops .ops-experiment-ledger__inspector dt {
+        color: var(--ops-text-secondary);
+    }
+
+    .fi-body.fi-panel-ops .ops-experiment-ledger__inspector dd {
+        color: var(--ops-text-tertiary);
+        font-family: var(--ops-font-mono);
+    }
+
+    .fi-body.fi-panel-ops .ops-experiment-ledger > .ops-control-hint {
+        margin-top: 1rem;
+    }
+
+    @media (max-width: 1024px) {
+        .fi-body.fi-panel-ops .ops-experiment-ledger__layout {
+            grid-template-columns: 1fr;
+        }
+
+        .fi-body.fi-panel-ops .ops-experiment-ledger__list-head {
+            display: none;
+        }
+    }
+
+    @media (max-width: 720px) {
+        .fi-body.fi-panel-ops .ops-automation-nav {
+            overflow-x: auto;
+        }
+
+        .fi-body.fi-panel-ops .ops-automation-nav__item {
+            flex: 0 0 auto;
+        }
+
+        .fi-body.fi-panel-ops .ops-experiment-ledger {
+            padding: 1rem;
+        }
+    }
 }

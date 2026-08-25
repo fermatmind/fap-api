@@ -28,6 +28,9 @@ class SeoOperationsPage extends Page
     /** @var list<string> */
     public const WORKSPACES = ['overview', 'performance', 'technical', 'url-truth', 'content', 'automation'];
 
+    /** @var list<string> */
+    public const AUTOMATION_SECTIONS = ['experiments', 'operations'];
+
     public const ISSUE_QUEUE_PER_PAGE = 25;
 
     public const MAX_INITIAL_QUERY_COUNT = 45;
@@ -73,6 +76,9 @@ class SeoOperationsPage extends Page
 
     #[Url(as: 'workspace', history: true)]
     public string $activeWorkspace = 'overview';
+
+    #[Url(as: 'automation-view', history: true)]
+    public string $activeAutomationSection = 'experiments';
 
     public string $savedView = 'all';
 
@@ -201,6 +207,7 @@ class SeoOperationsPage extends Page
     public function mount(SeoOperationsService $service): void
     {
         $this->activeWorkspace = $this->normalizedWorkspace($this->activeWorkspace);
+        $this->activeAutomationSection = $this->normalizedAutomationSection($this->activeAutomationSection);
         $this->reopenExpiredIgnores();
         $this->refreshDashboard($service);
         $this->refreshSeoIntel();
@@ -209,6 +216,11 @@ class SeoOperationsPage extends Page
     public function updatedSelectedIssueUid(): void
     {
         $this->syncSelectedIssueVersion();
+    }
+
+    public function updatedActiveAutomationSection(): void
+    {
+        $this->activeAutomationSection = $this->normalizedAutomationSection($this->activeAutomationSection);
     }
 
     public function updatedTypeFilter(): void
@@ -297,6 +309,7 @@ class SeoOperationsPage extends Page
     public function focusIssue(string $issue): void
     {
         $this->activeWorkspace = 'automation';
+        $this->activeAutomationSection = 'operations';
         $this->issueFilter = $issue;
         $this->refreshDashboard(app(SeoOperationsService::class));
     }
@@ -310,6 +323,9 @@ class SeoOperationsPage extends Page
         $state = self::SAVED_VIEWS[$this->savedView];
 
         $this->activeWorkspace = $state['workspace'];
+        if ($this->activeWorkspace === 'automation') {
+            $this->activeAutomationSection = 'operations';
+        }
         $this->scopeFilter = $state['scope'];
         $this->typeFilter = $state['type'];
         $this->issueFilter = $state['issue'];
@@ -1108,12 +1124,21 @@ class SeoOperationsPage extends Page
     {
         if (in_array($workspace, self::WORKSPACES, true)) {
             $this->activeWorkspace = $workspace;
+            if ($workspace === 'automation') {
+                $this->activeAutomationSection = 'operations';
+            }
         }
+    }
+
+    public function openAutomationSection(string $section): void
+    {
+        $this->activeAutomationSection = $this->normalizedAutomationSection($section);
     }
 
     public function openClusterExecution(string $clusterUid): void
     {
         $this->activeWorkspace = 'automation';
+        $this->activeAutomationSection = 'operations';
         $this->inspectIssueCluster($clusterUid);
     }
 
@@ -1123,9 +1148,20 @@ class SeoOperationsPage extends Page
         return self::WORKSPACES;
     }
 
+    /** @return list<string> */
+    public static function automationSectionKeys(): array
+    {
+        return self::AUTOMATION_SECTIONS;
+    }
+
     private function normalizedWorkspace(string $workspace): string
     {
         return in_array($workspace, self::WORKSPACES, true) ? $workspace : 'overview';
+    }
+
+    private function normalizedAutomationSection(string $section): string
+    {
+        return in_array($section, self::AUTOMATION_SECTIONS, true) ? $section : 'experiments';
     }
 
     private function refreshClusterUrls(SeoOperationsReadService $reader): void

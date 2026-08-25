@@ -240,6 +240,17 @@
 
         <div id="ops-seo-workspace-panel" class="ops-seo-workspace-panel" data-workspace="{{ $activeWorkspace }}">
 
+        @if ($activeWorkspace === 'automation')
+            <x-filament-ops::ops-automation-nav
+                :sections="\App\Filament\Ops\Pages\SeoOperationsPage::automationSectionKeys()"
+                :active="$activeAutomationSection"
+            />
+        @endif
+
+        @if ($activeWorkspace === 'automation' && $activeAutomationSection === 'experiments')
+            <x-filament-ops::ops-experiment-ledger-workspace />
+        @endif
+
         @if ($activeWorkspace === 'performance')
             <x-filament-ops::ops-section
                 :title="__('ops.custom_pages.seo_operations.performance.title')"
@@ -344,7 +355,7 @@
             </x-filament-ops::ops-section>
         @endif
 
-        @if ($activeWorkspace === 'automation')
+        @if ($activeWorkspace === 'automation' && $activeAutomationSection === 'operations')
             <x-filament-ops::ops-section :title="__('ops.custom_pages.seo_operations.workspace.ai')" :description="__('ops.custom_pages.seo_operations.platform.not_implemented')">
                 <x-filament-ops::ops-not-connected :title="__('ops.custom_pages.seo_operations.workspace.ai')" :description="data_get($platformReadModels, 'ai.unavailable_reason', 'not_implemented')" />
                 <p class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.platform.source_contract', [
@@ -429,7 +440,7 @@
             <x-filament-ops::ops-technical-health-workspace />
         @endif
 
-        @if ($activeWorkspace === 'automation')
+        @if ($activeWorkspace === 'automation' && $activeAutomationSection === 'operations')
         <x-filament-ops::ops-section :title="__('ops.custom_pages.seo_operations.execution.title')" :description="__('ops.custom_pages.seo_operations.execution.description')">
             @if (!$seoIntelAvailable)
                 <x-filament-ops::ops-not-connected :title="__('ops.custom_pages.seo_operations.workspace.execution')" :description="__('ops.custom_pages.seo_operations.execution.unavailable')" />
@@ -559,7 +570,7 @@
 
         @endif
 
-        @if ($activeWorkspace === 'automation')
+        @if ($activeWorkspace === 'automation' && $activeAutomationSection === 'operations')
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.seo_operations.issue_queue_title')"
             :description="__('ops.custom_pages.seo_operations.issue_queue_desc')"

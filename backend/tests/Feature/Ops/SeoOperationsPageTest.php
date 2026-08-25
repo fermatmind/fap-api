@@ -361,6 +361,7 @@ final class SeoOperationsPageTest extends TestCase
             ->assertSet('growthFields.2.value', '1')
             ->assertSet('growthFields.3.value', '50% (3/6)')
             ->assertCount('issueQueue', 3)
+            ->set('activeAutomationSection', 'operations')
             ->set('activeWorkspace', 'automation')
             ->assertSee('Published with discovery blockers')
             ->assertDontSee('Other Org SEO Article')
@@ -484,6 +485,7 @@ final class SeoOperationsPageTest extends TestCase
             ->assertCount('issueQueue', 0)
             ->set('issueFilter', SeoOperationsService::ISSUE_SOCIAL)
             ->assertCount('issueQueue', 2)
+            ->set('activeAutomationSection', 'operations')
             ->set('activeWorkspace', 'automation')
             ->assertSee('Fix Guide')
             ->assertSee('Fix Me Article');
@@ -547,6 +549,7 @@ final class SeoOperationsPageTest extends TestCase
             ->assertSet('headlineFields.0.value', '100% (1/1)')
             ->set('issueFilter', SeoOperationsService::ISSUE_SOCIAL)
             ->assertCount('issueQueue', 1)
+            ->set('activeAutomationSection', 'operations')
             ->set('activeWorkspace', 'automation')
             ->assertSee('Social preview gaps')
             ->set('selectedTargets', [
