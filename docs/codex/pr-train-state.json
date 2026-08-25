@@ -221,7 +221,9 @@
     "branch": "codex/api-ad-01-rewarded-unlock",
     "title": "API-AD-01: add residual-risk rewarded-ad report unlock",
     "depends_on": ["API-UNLOCK-01"],
-    "status": "local_validation_passed",
+    "status": "pr_open",
+    "pr": 3787,
+    "head_sha": "180fdaa532137657f98b4b2b455eaf79feb5276f",
     "commit_sha": "46a5b82b851d9ecda568151387a82421cb970c6b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3469",
     "checks": {
@@ -106175,6 +106177,11 @@
         "at": "2026-08-26T07:34:15+08:00",
         "status": "local_validation_passed",
         "note": "Zero-record English/Chinese empty context, first-record links, original permissions, hidden navigation, and all six legacy resource routes passed focused checks. No content or publication state was written."
+      },
+      {
+        "at": "2026-08-26T07:39:48+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #3787 from codex/ops-content-dormant-05 at validated implementation commit 180fdaa532137657f98b4b2b455eaf79feb5276f. Required-check and merge review are pending."
       }
     ]
   },

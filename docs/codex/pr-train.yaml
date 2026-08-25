@@ -386,7 +386,9 @@ prs:
     base: main
     branch: codex/api-iap-01-apple-provider
     title: "API-IAP-01: add fail-closed WeChat-routed Apple IAP provider"
-    status: local_validation_passed
+    status: pr_open
+    pr: 3787
+    head_sha: 180fdaa532137657f98b4b2b455eaf79feb5276f
     depends_on:
       - API-UNLOCK-01
       - API-VPAY-01
@@ -50181,7 +50183,7 @@ prs:
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     validation:
-      - cd backend && php artisan test tests/Feature/Ops/ContentCmsProductLayerTest.php --filter='content_workspace_exposes_dormant_content_types_without_navigation_registration|content_workspace_and_editorial_compatibility_page_share_global_metrics' --no-ansi
+      - cd backend && php artisan test tests/Feature/Ops/ContentCmsProductLayerTest.php --filter='test_content_workspace_exposes_zero_record_optional_content_types_contextually|test_content_workspace_is_the_canonical_content_overview' --no-ansi
       - cd backend && php artisan test tests/Feature/Ops/OpsNavigationInventoryTest.php --no-ansi
       - cd backend && vendor/bin/pint --test for changed PHP files
       - verify support/interpretation list-create-edit routes; parse pr-train JSON and YAML; exact-scope validation; git diff --check
