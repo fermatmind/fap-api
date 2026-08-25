@@ -91,6 +91,11 @@ final class SeoIntelGscProductionCloseoutReadServiceTest extends TestCase
         $this->assertFalse(data_get($result, 'queue_reconciliation.relationship.quality_items_are_issue_clusters'));
         $this->assertFalse(data_get($result, 'boundaries.search_submission_allowed'));
         $this->assertFalse(data_get($result, 'boundaries.writes_attempted'));
+        $this->assertSame('production_healthy_observing', data_get($result, 'scheduler_slo_28d.state'));
+        $this->assertSame(1, data_get($result, 'scheduler_slo_28d.successful_run_count'));
+        $this->assertSame(100.0, data_get($result, 'scheduler_slo_28d.receipt_completeness_percent'));
+        $this->assertFalse(data_get($result, 'scheduler_slo_28d.complete_28_day_proof'));
+        $this->assertSame('SEO-PLATFORM-12', data_get($result, 'scheduler_slo_28d.handoff'));
 
         $encoded = json_encode($result, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
         foreach (['missing-authority', 'existing-authority', 'private-token'] as $forbidden) {
@@ -134,6 +139,14 @@ final class SeoIntelGscProductionCloseoutReadServiceTest extends TestCase
             $table->char('canonical_url_hash', 64);
             $table->string('issue_code', 128);
             $table->string('status', 32);
+        });
+        $schema->create('seo_gsc_sync_runs', function (Blueprint $table): void {
+            $table->id();
+            $table->string('trigger_mode', 32);
+            $table->string('status', 32);
+            $table->date('end_date');
+            $table->json('receipt_json')->nullable();
+            $table->timestamp('started_at');
         });
         $schema->create('seo_issue_queue', function (Blueprint $table): void {
             $table->id();
@@ -181,6 +194,34 @@ final class SeoIntelGscProductionCloseoutReadServiceTest extends TestCase
             'source_authority' => 'backend_cms',
             'indexability_state' => 'indexable',
             'is_private_flow' => false,
+        ]);
+        $sha = str_repeat('a', 40);
+        $connection->table('seo_gsc_sync_runs')->insert([
+            'trigger_mode' => 'scheduled',
+            'status' => 'success',
+            'end_date' => $date,
+            'started_at' => now('UTC')->subHour(),
+            'receipt_json' => json_encode([
+                'application_sha' => $sha,
+                'workflow_sha' => $sha,
+                'active_production_sha' => $sha,
+                'property_hash' => str_repeat('b', 64),
+                'window_days' => 28,
+                'search_types' => ['web'],
+                'reporting_timezone' => 'America/Los_Angeles',
+                'pages_fetched' => 2,
+                'rows_seen' => 4,
+                'rows_upserted' => 4,
+                'duplicate_natural_keys' => 0,
+                'mapped_rows' => 1,
+                'unmapped_rows' => 3,
+                'data_max_date' => $date,
+                'data_lag_days' => 3,
+                'quality_gate' => ['status' => 'pass'],
+                'restricted_egress' => ['status' => 'restricted'],
+                'read_only_gsc' => true,
+                'search_submission_allowed' => false,
+            ], JSON_THROW_ON_ERROR),
         ]);
         $rows = [
             [hash('sha256', $existing), $existing, 1, 10, 10000],

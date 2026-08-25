@@ -140,9 +140,13 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
      */
     public function searchPerformance(array $filters = []): array
     {
-        $days = max(1, min((int) ($filters['days'] ?? 28), 90));
+        $requestedDays = (int) ($filters['days'] ?? 28);
+        $days = in_array($requestedDays, [7, 28, 90], true) ? $requestedDays : 28;
         $query = $this->table('seo_gsc_daily')
             ->where('report_date', '>=', now()->subDays($days - 1)->toDateString());
+        if ($this->connection()->getSchemaBuilder()->hasColumn('seo_gsc_daily', 'mapping_state')) {
+            $query->where('mapping_state', 'mapped');
+        }
 
         foreach (['device', 'country', 'locale'] as $filter) {
             $value = trim((string) ($filters[$filter] ?? ''));
@@ -205,11 +209,14 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
 
         $syncState = $this->gscSyncState();
         $stale = is_string($latestReportDate)
-            && $latestReportDate < now()->subDays(max(3, (int) config('seo_intel.gsc_data_quality.max_report_age_days', 10)))->toDateString();
+            && $latestReportDate < now((string) config('seo_intel.gsc_reporting_timezone', 'America/Los_Angeles'))
+                ->subDays((int) config('seo_intel.gsc_backfill_lag_days', 3))
+                ->toDateString();
         $dataAvailable = is_string($latestReportDate) && $latestReportDate !== '';
         $state = $dataAvailable
             ? ($stale ? 'stale' : 'connected')
             : (string) ($syncState['state'] ?? 'disconnected');
+        $measurementHold = $state !== 'connected';
 
         return [
             'connected' => $state === 'connected',
@@ -232,14 +239,30 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
             ] : [],
             'source' => 'seo_intel.seo_gsc_daily',
             'window_days' => $days,
+            'available_windows' => [7, 28, 90],
             'updated_at' => $this->normalizeTimestamp($updatedAt),
-            'totals' => [
-                'clicks' => $clicks,
-                'impressions' => $impressions,
-                'ctr_percent' => $impressions > 0 ? round(($clicks / $impressions) * 100, 2) : null,
-                'average_position' => $positionImpressions > 0
-                    ? round(($positionWeight / $positionImpressions) / 1000, 2)
-                    : null,
+            'measurement_state' => $measurementHold ? 'MEASUREMENT_HOLD' : 'production_healthy',
+            'measurement_hold_reason' => $measurementHold ? 'gsc_data_missing_or_beyond_reporting_lag' : null,
+            'totals' => $measurementHold ? $this->nullGscMetrics() : $this->gscMetrics(
+                $clicks,
+                $impressions,
+                $positionWeight,
+                $positionImpressions,
+            ),
+            'breakdowns' => $measurementHold ? [
+                'brand' => null,
+                'page_family' => null,
+                'locale' => null,
+                'device' => null,
+                'country' => null,
+                'search_type' => null,
+            ] : [
+                'brand' => $this->gscDimensionBreakdown($query, 'query_type'),
+                'page_family' => $this->gscPageFamilyBreakdown($query),
+                'locale' => $this->gscDimensionBreakdown($query, 'locale'),
+                'device' => $this->gscDimensionBreakdown($query, 'device'),
+                'country' => $this->gscDimensionBreakdown($query, 'country'),
+                'search_type' => $this->gscDimensionBreakdown($query, 'search_type'),
             ],
             'daily' => $daily,
             'query_page_rows' => $rows
@@ -257,6 +280,79 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
                 ->values()
                 ->all(),
         ];
+    }
+
+    /** @return array{clicks:?int,impressions:?int,ctr_percent:?float,average_position:?float} */
+    private function nullGscMetrics(): array
+    {
+        return ['clicks' => null, 'impressions' => null, 'ctr_percent' => null, 'average_position' => null];
+    }
+
+    /** @return array{clicks:int,impressions:int,ctr_percent:?float,average_position:?float} */
+    private function gscMetrics(int $clicks, int $impressions, int $positionWeight, int $positionImpressions): array
+    {
+        return [
+            'clicks' => $clicks,
+            'impressions' => $impressions,
+            'ctr_percent' => $impressions > 0 ? round(($clicks / $impressions) * 100, 2) : null,
+            'average_position' => $positionImpressions > 0
+                ? round(($positionWeight / $positionImpressions) / 1000, 2)
+                : null,
+        ];
+    }
+
+    /** @return list<array<string,mixed>> */
+    private function gscDimensionBreakdown(\Illuminate\Database\Query\Builder $query, string $dimension): array
+    {
+        return (clone $query)
+            ->selectRaw("COALESCE(NULLIF($dimension, ''), 'unknown') AS dimension")
+            ->selectRaw('COALESCE(SUM(clicks), 0) AS clicks')
+            ->selectRaw('COALESCE(SUM(impressions), 0) AS impressions')
+            ->selectRaw('COALESCE(SUM(CASE WHEN average_position_milli IS NOT NULL AND impressions > 0 THEN average_position_milli * impressions ELSE 0 END), 0) AS position_weight')
+            ->selectRaw('COALESCE(SUM(CASE WHEN average_position_milli IS NOT NULL AND impressions > 0 THEN impressions ELSE 0 END), 0) AS position_impressions')
+            ->groupBy($dimension)
+            ->orderByDesc('impressions')
+            ->get()
+            ->map(fn (object $row): array => [
+                'dimension' => (string) $row->dimension,
+                ...$this->gscMetrics(
+                    (int) $row->clicks,
+                    (int) $row->impressions,
+                    (int) $row->position_weight,
+                    (int) $row->position_impressions,
+                ),
+            ])->all();
+    }
+
+    /** @return list<array<string,mixed>> */
+    private function gscPageFamilyBreakdown(\Illuminate\Database\Query\Builder $query): array
+    {
+        $familySql = "CASE
+            WHEN LOWER(canonical_url) LIKE '%/tests/%' OR LOWER(canonical_url) LIKE '%/tests' THEN 'tests'
+            WHEN LOWER(canonical_url) LIKE '%/articles/%' OR LOWER(canonical_url) LIKE '%/topics/%' THEN 'articles_topics'
+            WHEN LOWER(canonical_url) LIKE '%/career/%' OR LOWER(canonical_url) LIKE '%/career' THEN 'career'
+            WHEN LOWER(canonical_url) LIKE '%/personality/%' OR LOWER(canonical_url) LIKE '%/personality' THEN 'personality'
+            WHEN LOWER(canonical_url) LIKE '%/support/%' OR LOWER(canonical_url) LIKE '%/method%' THEN 'trust_method_help'
+            ELSE 'other_public' END";
+
+        return (clone $query)
+            ->selectRaw("$familySql AS dimension")
+            ->selectRaw('COALESCE(SUM(clicks), 0) AS clicks')
+            ->selectRaw('COALESCE(SUM(impressions), 0) AS impressions')
+            ->selectRaw('COALESCE(SUM(CASE WHEN average_position_milli IS NOT NULL AND impressions > 0 THEN average_position_milli * impressions ELSE 0 END), 0) AS position_weight')
+            ->selectRaw('COALESCE(SUM(CASE WHEN average_position_milli IS NOT NULL AND impressions > 0 THEN impressions ELSE 0 END), 0) AS position_impressions')
+            ->groupByRaw($familySql)
+            ->orderByDesc('impressions')
+            ->get()
+            ->map(fn (object $row): array => [
+                'dimension' => (string) $row->dimension,
+                ...$this->gscMetrics(
+                    (int) $row->clicks,
+                    (int) $row->impressions,
+                    (int) $row->position_weight,
+                    (int) $row->position_impressions,
+                ),
+            ])->all();
     }
 
     /** @return array{state:string,failure_code:?string,last_success_at:?string,last_attempt_at:?string} */

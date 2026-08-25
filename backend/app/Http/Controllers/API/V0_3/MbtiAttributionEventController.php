@@ -121,6 +121,7 @@ final class MbtiAttributionEventController extends Controller
         'article_to_test_click',
         'start_test',
         'complete_test',
+        'return_public_content',
         'questions_load_failure',
         'submit_failure',
     ];
@@ -134,6 +135,7 @@ final class MbtiAttributionEventController extends Controller
         'start_test',
         'complete_test',
         'view_result',
+        'return_public_content',
     ];
 
     /**
@@ -254,6 +256,9 @@ final class MbtiAttributionEventController extends Controller
         if ($isSeoConversionEvent) {
             $path = $this->sanitizeSeoPublicUrl($path, 'path') ?? '/';
             $payload = $this->sanitizeSeoConversionPayload($payload);
+            if ($eventName === 'return_public_content') {
+                $this->assertPublicReturnSurface($payload['page_type'] ?? null, $path);
+            }
         }
         $anonymousId = $this->normalizeOptionalString($data['anonymousId'] ?? null, 128);
         $occurredAt = Carbon::parse((string) ($data['timestamp'] ?? now()->toISOString()));
@@ -534,6 +539,25 @@ final class MbtiAttributionEventController extends Controller
     private function isPrivateAnalyticsPath(string $path): bool
     {
         return preg_match('#(^|/)(result|results|order|orders|share|shares|pay|payment|history)(/|$)#i', $path) === 1;
+    }
+
+    private function assertPublicReturnSurface(mixed $pageType, string $path): void
+    {
+        $family = strtolower(trim((string) $pageType));
+        $publicFamily = in_array($family, [
+            'tests', 'test', 'test_detail', 'test_hub',
+            'articles_topics', 'article', 'article_hub', 'topic', 'topic_hub',
+            'career', 'career_job', 'career_guide', 'career_hub',
+            'personality', 'personality_hub', 'personality_profile',
+            'trust_method_help', 'methodology', 'support_article', 'support_hub',
+            'other_public', 'home', 'landing_page',
+        ], true);
+        $privatePath = preg_match('#(^|/)(take|attempt|attempts|result|results|report|reports|order|orders|share|shares|pay|payment|payments|history|account|recovery)(/|$)#i', $this->decodePath($path)) === 1;
+        if (! $publicFamily || $privatePath) {
+            throw ValidationException::withMessages([
+                'payload.page_type' => 'Return attribution requires a registered public Page Family Policy surface.',
+            ]);
+        }
     }
 
     private function decodePath(string $path): string

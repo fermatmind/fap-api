@@ -64,7 +64,7 @@ final class SeoConversionDailyBuilderTest extends TestCase
             'referrer' => 'https://www.google.com/search?q=mbti&email=person@example.com',
         ];
 
-        foreach (['landing_pv', 'article_to_test_click', 'start_test', 'complete_test', 'view_result'] as $offset => $eventCode) {
+        foreach (['landing_pv', 'article_to_test_click', 'start_test', 'complete_test', 'view_result', 'return_public_content'] as $offset => $eventCode) {
             $this->insertSeoEvent($orgId, $eventCode, $day->addMinutes($offset), $basePayload);
         }
 
@@ -86,12 +86,15 @@ final class SeoConversionDailyBuilderTest extends TestCase
         $this->assertSame('MBTI', (string) $row->scale_id);
         $this->assertSame('mbti_144', (string) $row->form_id);
         $this->assertSame('www.google.com', (string) $row->referrer_host);
-        $this->assertSame(hash('sha256', $sessionId), (string) $row->session_id_hash);
+        $this->assertSame('', (string) $row->session_id_hash);
         $this->assertSame(1, (int) $row->landing_pv_count);
         $this->assertSame(1, (int) $row->article_to_test_click_count);
         $this->assertSame(1, (int) $row->start_test_count);
         $this->assertSame(1, (int) $row->complete_test_count);
         $this->assertSame(1, (int) $row->view_result_count);
+        $this->assertSame(1, (int) $row->return_public_content_count);
+        $this->assertSame('pass', data_get($result, 'readback_receipt.status'));
+        $this->assertFalse(data_get($result, 'readback_receipt.raw_session_or_business_identifiers_exposed'));
         $this->assertStringNotContainsString($sessionId, json_encode((array) $row, JSON_THROW_ON_ERROR));
         $this->assertStringNotContainsString('secret', json_encode((array) $row, JSON_THROW_ON_ERROR));
         $this->assertStringNotContainsString('person@example.com', json_encode((array) $row, JSON_THROW_ON_ERROR));

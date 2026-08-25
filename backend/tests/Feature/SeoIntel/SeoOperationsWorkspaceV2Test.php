@@ -116,8 +116,15 @@ final class SeoOperationsWorkspaceV2Test extends TestCase
         $this->assertSame(240, data_get($result, 'totals.impressions'));
         $this->assertSame(5.0, data_get($result, 'totals.ctr_percent'));
         $this->assertSame(8.5, data_get($result, 'totals.average_position'));
+        $this->assertSame('production_healthy', $result['measurement_state']);
+        $this->assertSame([7, 28, 90], $result['available_windows']);
+        $this->assertSame('articles_topics', data_get($result, 'breakdowns.page_family.0.dimension'));
+        $this->assertSame(240, data_get($result, 'breakdowns.locale.0.impressions'));
         $this->assertSame('/zh/articles/seo-workspace', data_get($result, 'query_page_rows.0.canonical_path'));
-        $this->assertFalse((bool) $reader->searchPerformance(['device' => 'desktop'])['connected']);
+        $desktop = $reader->searchPerformance(['device' => 'desktop']);
+        $this->assertFalse((bool) $desktop['connected']);
+        $this->assertSame('MEASUREMENT_HOLD', $desktop['measurement_state']);
+        $this->assertNull(data_get($desktop, 'totals.clicks'));
     }
 
     public function test_gsc_aggregates_cover_the_complete_window_beyond_detail_row_limit(): void

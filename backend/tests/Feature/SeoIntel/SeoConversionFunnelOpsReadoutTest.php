@@ -19,7 +19,7 @@ final class SeoConversionFunnelOpsReadoutTest extends TestCase
     use RefreshDatabase;
 
     #[Test]
-    public function seo_intel_read_admin_can_query_conversion_funnel_by_url_article_test_and_session(): void
+    public function seo_intel_read_admin_can_query_public_funnel_without_session_dimension(): void
     {
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_SEO_INTEL_READ]);
 
@@ -38,6 +38,7 @@ final class SeoConversionFunnelOpsReadoutTest extends TestCase
             'start_test_count' => 1,
             'complete_test_count' => 1,
             'view_result_count' => 1,
+            'return_public_content_count' => 1,
         ]);
 
         $this->actingAs($admin, (string) config('admin.guard', 'admin'))
@@ -51,6 +52,9 @@ final class SeoConversionFunnelOpsReadoutTest extends TestCase
             ->assertJsonPath('data.recent_rows.0.metrics.start_test_count', 1)
             ->assertJsonPath('data.recent_rows.0.metrics.complete_test_count', 1)
             ->assertJsonPath('data.recent_rows.0.metrics.view_result_count', 1)
+            ->assertJsonPath('data.recent_rows.0.metrics.return_public_content_count', 1)
+            ->assertJsonPath('data.measurement_state', 'production_healthy')
+            ->assertJsonPath('data.available_windows', [7, 28, 90])
             ->assertJsonPath('data.privacy.raw_session_id_exposed', false);
 
         $this->actingAs($admin, (string) config('admin.guard', 'admin'))
@@ -69,13 +73,13 @@ final class SeoConversionFunnelOpsReadoutTest extends TestCase
             ->assertJsonPath('data.recent_rows.0.metrics.complete_test_count', 1);
 
         $sessionResponse = $this->actingAs($admin, (string) config('admin.guard', 'admin'))
-            ->getJson('/api/v0.5/ops/seo-intel/conversion-funnel?group_by=session')
+            ->getJson('/api/v0.5/ops/seo-intel/conversion-funnel?group_by=session&session_id_hash=forbidden')
             ->assertOk()
-            ->assertJsonPath('data.group_by', 'session')
-            ->assertJsonPath('data.recent_rows.0.group_key', hash('sha256', 'seo_sess_abc123'));
+            ->assertJsonPath('data.group_by', 'url');
 
         $json = $sessionResponse->getContent();
         $this->assertStringNotContainsString('seo_sess_abc123', $json);
+        $this->assertStringNotContainsString('session_id_hash', $json);
     }
 
     #[Test]
@@ -167,7 +171,7 @@ final class SeoConversionFunnelOpsReadoutTest extends TestCase
             'landing_pv_count' => 9,
         ]);
 
-        foreach (['article', 'test', 'session'] as $groupBy) {
+        foreach (['article', 'test', 'url'] as $groupBy) {
             $response = $this->withSession(['ops_org_id' => 41])
                 ->actingAs($admin, (string) config('admin.guard', 'admin'))
                 ->getJson('/api/v0.5/ops/seo-intel/conversion-funnel?group_by='.$groupBy)
@@ -189,13 +193,33 @@ final class SeoConversionFunnelOpsReadoutTest extends TestCase
         }
     }
 
+    #[Test]
+    public function stale_funnel_returns_measurement_hold_with_null_metrics(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_SEO_INTEL_READ]);
+        $this->insertDailyRow([
+            'landing_pv_count' => 9,
+            'last_refreshed_at' => now()->subDays(3),
+        ]);
+
+        $response = $this->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->getJson('/api/v0.5/ops/seo-intel/conversion-funnel?window_days=7')
+            ->assertOk()
+            ->assertJsonPath('data.measurement_state', 'MEASUREMENT_HOLD')
+            ->assertJsonPath('data.totals.landing_pv_count', null)
+            ->assertJsonPath('data.recent_rows.0.metrics.landing_pv_count', null)
+            ->assertJsonPath('data.stage_status.return_public_content.status', 'MEASUREMENT_HOLD');
+
+        $this->assertStringNotContainsString('session_id_hash', $response->getContent());
+    }
+
     /**
      * @param  array<string,mixed>  $overrides
      */
     private function insertDailyRow(array $overrides): void
     {
         DB::table('analytics_seo_conversion_daily')->insert(array_merge([
-            'day' => '2026-06-09',
+            'day' => now()->toDateString(),
             'org_id' => 0,
             'url' => 'https://fermatmind.com/en/articles/personality-types',
             'url_hash' => sha1('https://fermatmind.com/en/articles/personality-types'),
@@ -217,9 +241,10 @@ final class SeoConversionFunnelOpsReadoutTest extends TestCase
             'start_test_count' => 0,
             'complete_test_count' => 0,
             'view_result_count' => 0,
-            'last_refreshed_at' => '2026-06-09 00:00:00',
-            'created_at' => '2026-06-09 00:00:00',
-            'updated_at' => '2026-06-09 00:00:00',
+            'return_public_content_count' => 0,
+            'last_refreshed_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ], $overrides));
     }
 

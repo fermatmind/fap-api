@@ -139,6 +139,7 @@ final class MbtiAttributionEventIngestTest extends TestCase
             'start_test' => '/en/tests/mbti-personality-test-16-personality-types/take?attempt_id=raw_attempt',
             'complete_test' => '/en/tests/mbti-personality-test-16-personality-types/take?result_id=raw_result',
             'view_result' => '/en/tests/mbti-personality-test-16-personality-types?order_id=raw_order',
+            'return_public_content' => '/en/articles/personality-types?from=result',
         ];
 
         foreach ($events as $eventName => $path) {
@@ -151,7 +152,7 @@ final class MbtiAttributionEventIngestTest extends TestCase
                 'payload' => [
                     'url' => 'https://fermatmind.com'.$path,
                     'lang' => 'en',
-                    'page_type' => $eventName === 'landing_pv' ? 'article' : 'test',
+                    'page_type' => in_array($eventName, ['landing_pv', 'return_public_content'], true) ? 'article' : 'test',
                     'source_url' => 'https://fermatmind.com/en/articles/personality-types?token=secret',
                     'source_article' => 'personality-types',
                     'target_test' => '/en/tests/mbti-personality-test-16-personality-types?session=secret',
@@ -228,6 +229,20 @@ final class MbtiAttributionEventIngestTest extends TestCase
         ]);
 
         $rawIdentifier->assertStatus(422);
+
+        $privateReturn = $this->withHeaders([
+            'Authorization' => 'Bearer ingest_test_token',
+        ])->postJson('/api/v0.5/seo/attribution/events', [
+            'eventName' => 'return_public_content',
+            'path' => '/en/tests/mbti-personality-test-16-personality-types/take',
+            'payload' => [
+                'url' => '/en/tests/mbti-personality-test-16-personality-types/take',
+                'lang' => 'en',
+                'page_type' => 'test_detail',
+            ],
+        ]);
+
+        $privateReturn->assertStatus(422);
 
         $this->assertSame(0, DB::table('events')->count());
     }

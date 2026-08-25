@@ -84,7 +84,73 @@ final class GscProductionCloseoutReadService extends AbstractSeoDashboardReadSer
                     'quality_items_are_issue_clusters' => false,
                 ],
             ],
+            'scheduler_slo_28d' => $this->schedulerSlo28d($schema),
             'boundaries' => $this->boundaries(),
+        ];
+    }
+
+    /** @return array<string,mixed> */
+    private function schedulerSlo28d(mixed $schema): array
+    {
+        if (! $schema->hasTable('seo_gsc_sync_runs')
+            || ! $schema->hasColumn('seo_gsc_sync_runs', 'trigger_mode')
+            || ! $schema->hasColumn('seo_gsc_sync_runs', 'receipt_json')) {
+            return [
+                'state' => 'production_unproven',
+                'planned_run_count' => 28,
+                'successful_run_count' => 0,
+                'success_rate_percent' => null,
+                'complete_28_day_proof' => false,
+                'handoff' => 'SEO-PLATFORM-12',
+            ];
+        }
+
+        $rows = $this->table('seo_gsc_sync_runs')
+            ->where('trigger_mode', 'scheduled')
+            ->where('started_at', '>=', now('UTC')->subDays(27)->startOfDay())
+            ->orderBy('started_at')
+            ->get(['status', 'end_date', 'receipt_json', 'started_at']);
+        $successful = $rows->where('status', 'success');
+        $completeReceipts = 0;
+        $maximumLag = null;
+        foreach ($successful as $row) {
+            $receipt = $this->decodeJson($row->receipt_json ?? null);
+            $required = [
+                'application_sha', 'workflow_sha', 'active_production_sha', 'property_hash',
+                'window_days', 'search_types', 'reporting_timezone', 'pages_fetched', 'rows_seen',
+                'rows_upserted', 'duplicate_natural_keys', 'mapped_rows', 'unmapped_rows',
+                'data_max_date', 'data_lag_days', 'quality_gate', 'restricted_egress',
+            ];
+            if (collect($required)->every(static fn (string $key): bool => array_key_exists($key, $receipt))
+                && ($receipt['read_only_gsc'] ?? false) === true
+                && ($receipt['search_submission_allowed'] ?? true) === false) {
+                $completeReceipts++;
+            }
+            if (is_numeric($receipt['data_lag_days'] ?? null)) {
+                $maximumLag = max($maximumLag ?? 0, (float) $receipt['data_lag_days']);
+            }
+        }
+        $firstRunAt = $rows->first()?->started_at;
+        $coverageDays = $firstRunAt === null ? 0 : min(28, now('UTC')->diffInDays($firstRunAt, true) + 1);
+        $scheduled = $rows->count();
+
+        return [
+            'state' => $successful->isNotEmpty() ? 'production_healthy_observing' : 'production_unproven',
+            'window_days' => 28,
+            'planned_run_count' => 28,
+            'observed_run_count' => $scheduled,
+            'successful_run_count' => $successful->count(),
+            'success_rate_percent' => $scheduled > 0 ? round(($successful->count() / $scheduled) * 100, 2) : null,
+            'maximum_data_lag_days' => $maximumLag,
+            'complete_receipt_count' => $completeReceipts,
+            'receipt_completeness_percent' => $successful->isNotEmpty()
+                ? round(($completeReceipts / $successful->count()) * 100, 2)
+                : null,
+            'coverage_days' => $coverageDays,
+            'complete_28_day_proof' => $coverageDays >= 28,
+            'target_success_rate_percent' => 95,
+            'target_maximum_data_lag_days' => 3,
+            'handoff' => 'SEO-PLATFORM-12',
         ];
     }
 

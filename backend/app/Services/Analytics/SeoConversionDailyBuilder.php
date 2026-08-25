@@ -22,6 +22,18 @@ final class SeoConversionDailyBuilder
         'complete_test' => 'complete_test_count',
         'result_ready' => 'result_ready_count',
         'view_result' => 'view_result_count',
+        'return_public_content' => 'return_public_content_count',
+    ];
+
+    /** @var list<string> */
+    private const METRICS = [
+        'landing_pv_count',
+        'article_to_test_click_count',
+        'start_test_count',
+        'complete_test_count',
+        'result_ready_count',
+        'view_result_count',
+        'return_public_content_count',
     ];
 
     /**
@@ -93,6 +105,11 @@ final class SeoConversionDailyBuilder
                 ? $this->resolveResultReadyDimensions($meta, $event)
                 : $this->resolveDimensions($seoConversion, $event);
             if ($dimensions === null) {
+                $skippedRows++;
+
+                continue;
+            }
+            if ($eventCode === 'return_public_content' && ! $this->isPublicReturnUrl((string) $dimensions['url'])) {
                 $skippedRows++;
 
                 continue;
@@ -176,6 +193,7 @@ final class SeoConversionDailyBuilder
                         'complete_test_count',
                         'result_ready_count',
                         'view_result_count',
+                        'return_public_content_count',
                         'last_refreshed_at',
                         'updated_at',
                     ]
@@ -185,10 +203,57 @@ final class SeoConversionDailyBuilder
             });
         }
 
+        $readbackReceipt = $dryRun
+            ? ['status' => 'not_executed', 'reason' => 'dry_run']
+            : $this->readbackReceipt($payload, $rows);
+
         return $payload + [
             'deleted_rows' => $deletedRows,
             'upserted_rows' => $upsertedRows,
             'dry_run' => $dryRun,
+            'readback_receipt' => $readbackReceipt,
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @param  list<array<string,mixed>>  $rows
+     * @return array<string,mixed>
+     */
+    private function readbackReceipt(array $payload, array $rows): array
+    {
+        if (! SchemaBaseline::hasTable(self::TABLE)) {
+            return ['status' => 'blocked', 'reason' => 'read_model_missing'];
+        }
+
+        $query = DB::table(self::TABLE)
+            ->whereBetween('day', [(string) $payload['from'], (string) $payload['to']]);
+        if (($payload['org_scope'] ?? []) !== []) {
+            $query->whereIn('org_id', (array) $payload['org_scope']);
+        }
+        foreach (self::METRICS as $metric) {
+            $query->selectRaw(sprintf('COALESCE(SUM(%s), 0) AS %s', $metric, $metric));
+        }
+        $persisted = $query->first();
+        $expected = array_fill_keys(self::METRICS, 0);
+        foreach ($rows as $row) {
+            foreach (self::METRICS as $metric) {
+                $expected[$metric] += max(0, (int) ($row[$metric] ?? 0));
+            }
+        }
+        $actual = [];
+        foreach (self::METRICS as $metric) {
+            $actual[$metric] = max(0, (int) ($persisted->{$metric} ?? 0));
+        }
+
+        return [
+            'status' => $expected === $actual ? 'pass' : 'blocked',
+            'authority' => 'events_to_analytics_seo_conversion_daily',
+            'from' => $payload['from'],
+            'to' => $payload['to'],
+            'expected_metrics' => $expected,
+            'persisted_metrics' => $actual,
+            'raw_session_or_business_identifiers_exposed' => false,
         ];
     }
 
@@ -229,17 +294,21 @@ final class SeoConversionDailyBuilder
             return null;
         }
 
+        $pageType = strtolower($this->normalizeDimension($seoConversion['page_type'] ?? null, 64));
+        if (! $this->isRegisteredPublicPageType($pageType)) {
+            return null;
+        }
+
         $sourceUrl = $this->normalizePublicUrl($seoConversion['source_url'] ?? null, true);
         $targetTest = $this->normalizePublicUrl($seoConversion['target_test'] ?? null, true);
         $referrerHost = $this->normalizeReferrerHost($seoConversion['referrer'] ?? null);
-        $sessionId = $this->normalizeDimension($seoConversion['session_id'] ?? $event->session_id ?? null, 160);
 
         return [
             'org_id' => max(0, (int) ($event->org_id ?? 0)),
             'url' => $url,
             'url_hash' => sha1($url),
             'lang' => $this->normalizeLang($seoConversion['lang'] ?? $event->locale ?? null),
-            'page_type' => $this->normalizeDimension($seoConversion['page_type'] ?? null, 64),
+            'page_type' => $pageType,
             'source_url' => $sourceUrl,
             'source_url_hash' => $sourceUrl === null ? '' : sha1($sourceUrl),
             'source_article' => $this->normalizeDimension($seoConversion['source_article'] ?? null, 160),
@@ -249,7 +318,7 @@ final class SeoConversionDailyBuilder
             'target_test_hash' => $targetTest === null ? '' : sha1($targetTest),
             'scale_id' => $this->normalizeDimension($seoConversion['scale_id'] ?? null, 64),
             'form_id' => $this->normalizeDimension($seoConversion['form_id'] ?? null, 64),
-            'session_id_hash' => $sessionId === '' ? '' : hash('sha256', $sessionId),
+            'session_id_hash' => '',
             'referrer_host' => $referrerHost,
             'referrer_host_hash' => $referrerHost === '' ? '' : sha1($referrerHost),
         ];
@@ -328,7 +397,6 @@ final class SeoConversionDailyBuilder
             $dimensions['target_test_hash'],
             $dimensions['scale_id'],
             $dimensions['form_id'],
-            $dimensions['session_id_hash'],
             $dimensions['referrer_host_hash'],
         ]);
 
@@ -358,6 +426,7 @@ final class SeoConversionDailyBuilder
                 'complete_test_count' => 0,
                 'result_ready_count' => 0,
                 'view_result_count' => 0,
+                'return_public_content_count' => 0,
             ];
         }
 
@@ -397,12 +466,34 @@ final class SeoConversionDailyBuilder
         $host = strtolower((string) ($parts['host'] ?? ''));
 
         if ($host !== '') {
+            if (! in_array($host, ['fermatmind.com', 'www.fermatmind.com'], true)) {
+                return null;
+            }
             $prefix = in_array($scheme, ['http', 'https'], true) ? $scheme.'://'.$host : 'https://'.$host;
 
             return $prefix.$path;
         }
 
         return $path;
+    }
+
+    private function isRegisteredPublicPageType(string $pageType): bool
+    {
+        return in_array($pageType, [
+            'tests', 'test', 'test_detail', 'test_hub',
+            'articles_topics', 'article', 'article_hub', 'topic', 'topic_hub',
+            'career', 'career_job', 'career_guide', 'career_hub',
+            'personality', 'personality_hub', 'personality_profile',
+            'trust_method_help', 'methodology', 'support_article', 'support_hub',
+            'other_public', 'home', 'landing_page',
+        ], true);
+    }
+
+    private function isPublicReturnUrl(string $url): bool
+    {
+        $path = (string) (parse_url($url, PHP_URL_PATH) ?: '/');
+
+        return preg_match('#(^|/)(take|attempt|attempts|result|results|report|reports|order|orders|share|shares|pay|payment|payments|history|account|recovery)(/|$)#i', $path) !== 1;
     }
 
     private function normalizePath(string $path): ?string

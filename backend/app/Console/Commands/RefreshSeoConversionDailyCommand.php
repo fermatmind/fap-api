@@ -14,9 +14,10 @@ final class RefreshSeoConversionDailyCommand extends Command
         {--from= : Inclusive start date (Y-m-d)}
         {--to= : Inclusive end date (Y-m-d)}
         {--org=* : Limit refresh to one or more org ids}
-        {--dry-run : Preview aggregation without writing rows}';
+        {--dry-run : Preview aggregation without writing rows}
+        {--json : Emit the refresh and readback receipt as JSON}';
 
-    protected $description = 'Refresh the SEO conversion funnel daily read model grouped by safe URL/article/test/session dimensions.';
+    protected $description = 'Refresh the privacy-safe SEO conversion funnel daily read model.';
 
     public function __construct(
         private readonly SeoConversionDailyBuilder $builder,
@@ -42,6 +43,14 @@ final class RefreshSeoConversionDailyCommand extends Command
 
         $dryRun = (bool) $this->option('dry-run');
         $result = $this->builder->refresh($from, $to, $orgIds, $dryRun);
+
+        if ((bool) $this->option('json')) {
+            $this->line(json_encode($result, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
+
+            return data_get($result, 'readback_receipt.status') === 'pass' || $dryRun
+                ? self::SUCCESS
+                : self::FAILURE;
+        }
 
         $this->line('from='.$result['from']);
         $this->line('to='.$result['to']);

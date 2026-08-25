@@ -20,6 +20,7 @@ final class SeoConversionFunnelReadService
         'start_test_count',
         'complete_test_count',
         'view_result_count',
+        'return_public_content_count',
     ];
 
     /**
@@ -44,47 +45,85 @@ final class SeoConversionFunnelReadService
     public function read(int $orgId, array $filters = [], int $limit = 25): array
     {
         $groupBy = $this->normalizeGroupBy($filters['group_by'] ?? null);
+        $windowDays = $this->normalizeWindow($filters['window_days'] ?? null);
         $limit = max(1, min($limit, 100));
 
         if (! SchemaBaseline::hasTable(self::TABLE)) {
             return $this->emptyPayload($groupBy, ['analytics_seo_conversion_daily_missing']);
         }
 
-        $groupColumns = $this->groupColumns($groupBy);
-        $query = DB::table(self::TABLE)
-            ->select($groupColumns)
-            ->where('org_id', max(0, $orgId));
+        $allRows = $this->mappedRows($orgId, $filters, $groupBy, $windowDays);
+        $lastRefreshedAt = DB::table(self::TABLE)
+            ->where('org_id', max(0, $orgId))
+            ->max('last_refreshed_at');
+        $freshnessAgeHours = $lastRefreshedAt === null
+            ? null
+            : now()->diffInHours($lastRefreshedAt, true);
+        $measurementHold = $freshnessAgeHours === null || $freshnessAgeHours > 48;
+        $warnings = $measurementHold ? ['seo_conversion_daily_missing_or_stale'] : [];
+        $totals = $measurementHold ? $this->nullMetrics() : $this->totals($allRows);
+        $rows = array_slice($allRows, 0, $limit);
+        if ($measurementHold) {
+            $rows = array_map(function (array $row): array {
+                $row['metrics'] = $this->nullMetrics();
 
-        foreach (self::METRICS as $metric) {
-            $query->selectRaw(sprintf('SUM(%s) AS %s', $metric, $metric));
+                return $row;
+            }, $rows);
         }
 
-        $this->applyFilters($query, $filters);
-
-        $query->groupBy($groupColumns)
-            ->orderByDesc('landing_pv_count')
-            ->orderByDesc('start_test_count')
-            ->limit($limit);
-
-        $rows = [];
-        foreach ($query->get() as $row) {
-            $mapped = $this->mapRow($row, $groupBy);
-            if ($mapped === null) {
-                continue;
-            }
-
-            $rows[] = $mapped;
+        $windowTotals = [];
+        foreach ([7, 28, 90] as $days) {
+            $windowTotals[(string) $days] = $measurementHold
+                ? $this->nullMetrics()
+                : $this->totals($this->mappedRows($orgId, $filters, $groupBy, $days));
         }
 
         return [
             'source_table' => self::TABLE,
             'group_by' => $groupBy,
+            'window_days' => $windowDays,
+            'available_windows' => [7, 28, 90],
             'filters' => $this->safeFilters($filters),
             'privacy' => $this->privacyStatus(),
-            'totals' => $this->totals($rows),
+            'measurement_state' => $measurementHold ? 'MEASUREMENT_HOLD' : 'production_healthy',
+            'freshness' => [
+                'last_successful_refresh_at' => $lastRefreshedAt,
+                'age_hours' => $freshnessAgeHours,
+                'max_age_hours' => 48,
+            ],
+            'stage_status' => $this->stageStatus($measurementHold, $lastRefreshedAt),
+            'totals' => $totals,
+            'window_totals' => $windowTotals,
             'recent_rows' => $rows,
-            'warnings' => [],
+            'warnings' => $warnings,
         ];
+    }
+
+    /** @return list<array<string,mixed>> */
+    private function mappedRows(int $orgId, array $filters, string $groupBy, int $windowDays): array
+    {
+        $groupColumns = $this->groupColumns($groupBy);
+        $query = DB::table(self::TABLE)
+            ->select($groupColumns)
+            ->where('org_id', max(0, $orgId))
+            ->where('day', '>=', now()->subDays($windowDays - 1)->toDateString());
+        foreach (self::METRICS as $metric) {
+            $query->selectRaw(sprintf('SUM(%s) AS %s', $metric, $metric));
+        }
+        $this->applyFilters($query, $filters);
+        $query->groupBy($groupColumns)
+            ->orderByDesc('landing_pv_count')
+            ->orderByDesc('start_test_count');
+
+        $rows = [];
+        foreach ($query->get() as $row) {
+            $mapped = $this->mapRow($row, $groupBy);
+            if ($mapped !== null) {
+                $rows[] = $mapped;
+            }
+        }
+
+        return $rows;
     }
 
     /**
@@ -98,12 +137,10 @@ final class SeoConversionFunnelReadService
             'filters' => [],
             'privacy' => $this->privacyStatus(),
             'totals' => [
-                'landing_pv_count' => 0,
-                'article_to_test_click_count' => 0,
-                'start_test_count' => 0,
-                'complete_test_count' => 0,
-                'view_result_count' => 0,
+                ...$this->nullMetrics(),
             ],
+            'measurement_state' => 'MEASUREMENT_HOLD',
+            'stage_status' => $this->stageStatus(true, null),
             'recent_rows' => [],
             'warnings' => $warnings,
         ];
@@ -116,7 +153,7 @@ final class SeoConversionFunnelReadService
     {
         return [
             'raw_session_id_exposed' => false,
-            'session_dimension' => 'sha256_hash_only',
+            'session_dimension' => 'not_stored_or_exposed_in_seo_operations',
             'query_policy' => 'query_and_fragment_stripped_before_daily_storage',
             'private_path_policy' => 'result_order_share_pay_history_excluded',
             'raw_business_identifier_policy' => 'business_identifiers_rejected_before_daily_storage',
@@ -131,7 +168,6 @@ final class SeoConversionFunnelReadService
         return match ($groupBy) {
             'article' => ['source_article', 'lang', 'page_type', 'scale_id', 'form_id', 'url', 'source_url', 'target_test'],
             'test' => ['target_test', 'lang', 'scale_id', 'form_id', 'url', 'source_url'],
-            'session' => ['session_id_hash', 'lang', 'source_article', 'target_test', 'scale_id', 'form_id', 'url', 'source_url'],
             default => ['url', 'lang', 'page_type', 'source_article', 'target_test', 'scale_id', 'form_id', 'source_url'],
         };
     }
@@ -144,7 +180,6 @@ final class SeoConversionFunnelReadService
             'source_article',
             'scale_id',
             'form_id',
-            'session_id_hash',
         ] as $field) {
             $value = $this->normalizeText($filters[$field] ?? null, 160);
             if ($value !== '') {
@@ -169,6 +204,9 @@ final class SeoConversionFunnelReadService
     private function safeFilters(array $filters): array
     {
         $safe = [];
+        if (array_key_exists('window_days', $filters)) {
+            $safe['window_days'] = (string) $this->normalizeWindow($filters['window_days']);
+        }
         foreach ([
             'group_by',
             'lang',
@@ -176,7 +214,6 @@ final class SeoConversionFunnelReadService
             'source_article',
             'scale_id',
             'form_id',
-            'session_id_hash',
         ] as $field) {
             $value = $this->normalizeText($filters[$field] ?? null, 160);
             if ($value !== '') {
@@ -222,7 +259,6 @@ final class SeoConversionFunnelReadService
             'target_test_path' => $targetPath,
             'scale_id' => (string) ($row->scale_id ?? ''),
             'form_id' => (string) ($row->form_id ?? ''),
-            'session_id_hash' => (string) ($row->session_id_hash ?? ''),
             'referrer_host' => (string) ($row->referrer_host ?? ''),
             'metrics' => $metrics,
             'privacy' => [
@@ -238,7 +274,6 @@ final class SeoConversionFunnelReadService
         return match ($groupBy) {
             'article' => (string) ($row->source_article ?? ''),
             'test' => $targetPath ?? '',
-            'session' => (string) ($row->session_id_hash ?? ''),
             default => $urlPath ?? '',
         };
     }
@@ -265,7 +300,41 @@ final class SeoConversionFunnelReadService
     {
         $candidate = $this->normalizeText($value, 32);
 
-        return in_array($candidate, ['url', 'article', 'test', 'session'], true) ? $candidate : 'url';
+        return in_array($candidate, ['url', 'article', 'test'], true) ? $candidate : 'url';
+    }
+
+    private function normalizeWindow(mixed $value): int
+    {
+        $window = (int) $value;
+
+        return in_array($window, [7, 28, 90], true) ? $window : 28;
+    }
+
+    /** @return array<string,null> */
+    private function nullMetrics(): array
+    {
+        return array_fill_keys(self::METRICS, null);
+    }
+
+    /** @return array<string,array<string,mixed>> */
+    private function stageStatus(bool $hold, mixed $lastRefreshedAt): array
+    {
+        $status = $hold ? 'MEASUREMENT_HOLD' : 'pass';
+        $stages = [
+            'search_landing' => 'landing_pv_count',
+            'test_start' => 'start_test_count',
+            'test_complete' => 'complete_test_count',
+            'result_view' => 'view_result_count',
+            'return_public_content' => 'return_public_content_count',
+        ];
+
+        return collect($stages)->mapWithKeys(static fn (string $metric, string $stage): array => [
+            $stage => [
+                'status' => $status,
+                'metric' => $metric,
+                'last_refreshed_at' => $lastRefreshedAt,
+            ],
+        ])->all();
     }
 
     private function normalizeText(mixed $value, int $maxLength): string

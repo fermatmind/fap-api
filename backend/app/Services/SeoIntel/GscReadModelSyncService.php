@@ -61,7 +61,7 @@ final class GscReadModelSyncService
 
         $connectionName = (string) config('seo_intel.connection', 'seo_intel');
         $schema = Schema::connection($connectionName);
-        foreach (['seo_gsc_daily', 'seo_urls', 'seo_gsc_sync_runs', 'seo_gsc_data_quality_queue'] as $table) {
+        foreach (['seo_gsc_daily', 'seo_urls', 'seo_url_entities', 'seo_gsc_sync_runs', 'seo_gsc_data_quality_queue'] as $table) {
             if (! $schema->hasTable($table)) {
                 return $this->blocked('gsc_read_model_schema_missing', [$table], $preflight);
             }

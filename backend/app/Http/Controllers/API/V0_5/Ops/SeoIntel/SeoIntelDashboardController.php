@@ -89,6 +89,7 @@ final class SeoIntelDashboardController
     {
         return $request->only([
             'group_by',
+            'window_days',
             'url',
             'lang',
             'page_type',
@@ -97,7 +98,6 @@ final class SeoIntelDashboardController
             'target_test',
             'scale_id',
             'form_id',
-            'session_id_hash',
         ]);
     }
 
