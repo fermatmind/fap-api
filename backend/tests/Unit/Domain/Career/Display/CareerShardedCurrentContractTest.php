@@ -63,24 +63,23 @@ final class CareerShardedCurrentContractTest extends TestCase
         }
     }
 
-    public function test_legacy_current_recursive_inventory_has_exactly_one_owner_or_derived_rule(): void
+    public function test_versionless_sharded_projection_has_exactly_one_owner_or_derived_rule(): void
     {
         ini_set('memory_limit', '2048M');
         $ownership = $this->contract('career-sharded-current-field-ownership.v1.json');
         $rules = $ownership['legacy_projection_rules'];
-        $path = $this->backendRoot.'/content_assets/career/current/assets.jsonl';
-        $handle = fopen($path, 'rb');
-        self::assertIsResource($handle);
+        $contract = new CareerCurrentAuthorityPackage;
+        $loaded = (new CareerCurrentAuthorityPackageLoader(
+            $contract,
+            new CareerShardedCurrentAuthorityPackage($contract),
+        ))->load($this->backendRoot);
         $rowCount = 0;
         $localePageCount = 0;
         $wrapped = 0;
         $direct = 0;
         $seenSlugs = [];
         $inventoriedPaths = [];
-        while (($line = fgets($handle)) !== false) {
-            $canonical = rtrim($line, "\r\n");
-            $row = json_decode($canonical, true, 512, JSON_THROW_ON_ERROR);
-            self::assertSame(Gate::canonicalJson($row), $canonical);
+        foreach ($loaded['rows'] as $row) {
             $rowCount++;
             $slug = $row['canonical_slug'];
             self::assertArrayNotHasKey($slug, $seenSlugs);
@@ -128,8 +127,6 @@ final class CareerShardedCurrentContractTest extends TestCase
                 }
             }
         }
-        fclose($handle);
-
         self::assertSame(1046, $rowCount);
         self::assertSame(1046, count($seenSlugs));
         self::assertSame(2092, $localePageCount);
@@ -165,7 +162,7 @@ final class CareerShardedCurrentContractTest extends TestCase
         }
     }
 
-    public function test_installed_current_inventory_is_manifest_bound_and_legacy_projection_is_equivalent(): void
+    public function test_installed_current_inventory_is_manifest_bound_and_versionless_projection_is_deterministic(): void
     {
         ini_set('memory_limit', '2048M');
         $currentRoot = $this->backendRoot.'/content_assets/career/current';
@@ -176,7 +173,7 @@ final class CareerShardedCurrentContractTest extends TestCase
         }
         Gate::assertCandidate($manifest, $files);
 
-        $expectedInventory = array_merge(['assets.jsonl', 'manifest.json'], array_keys($files));
+        $expectedInventory = array_merge(['manifest.json'], array_keys($files));
         sort($expectedInventory, SORT_STRING);
         $actualInventory = [];
         $iterator = new \RecursiveIteratorIterator(
@@ -198,7 +195,19 @@ final class CareerShardedCurrentContractTest extends TestCase
         self::assertSame('sharded', $loaded['summary']['source_format']);
         self::assertSame(1046, $loaded['summary']['career_count']);
         self::assertSame(2092, $loaded['summary']['locale_page_count']);
-        self::assertSame(hash_file('sha256', $currentRoot.'/assets.jsonl'), $loaded['summary']['assets_sha256']);
+        self::assertSame($manifest['versionless_projection_sha256'], $loaded['summary']['versionless_projection_sha256']);
+        self::assertSame(
+            '2fa74e5c7c55a748423a2bde7dcc9bce47551d89f0fcb496115551f4b37c9df7',
+            $loaded['summary']['versionless_projection_sha256'],
+        );
+        self::assertSame(
+            CareerCurrentAuthorityPackage::hashValue(array_values($loaded['rows'])),
+            $loaded['summary']['versionless_projection_sha256'],
+        );
+        foreach ($loaded['rows'] as $row) {
+            self::assertArrayNotHasKey('asset_version', $row);
+            self::assertArrayNotHasKey('template_version', $row);
+        }
     }
 
     public function test_candidate_gate_rejects_unknown_empty_misplaced_unsorted_duplicate_and_incomplete_inputs(): void

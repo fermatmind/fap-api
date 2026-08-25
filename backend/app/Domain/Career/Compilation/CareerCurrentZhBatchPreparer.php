@@ -33,9 +33,7 @@ final class CareerCurrentZhBatchPreparer
         $sourceRoot = $this->sourceRoot($sourceRoot);
         $outputRoot = $this->emptyOutputRoot($outputRoot);
         $baseline = $this->package->load($backendRoot);
-        $manifestPath = rtrim($backendRoot, '/').'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH.'/manifest.json';
-        $assetsPath = rtrim($backendRoot, '/').'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH.'/assets.jsonl';
-        $currentBefore = $this->fileHashes([$manifestPath, $assetsPath]);
+        $currentBefore = $this->currentPackageFingerprint($baseline);
         $sourceBefore = $this->sourceLock($sourceRoot);
 
         if ($sourceBefore['career_count'] !== self::EXPECTED_CAREERS
@@ -109,7 +107,7 @@ final class CareerCurrentZhBatchPreparer
         }
 
         $sourceAfter = $this->sourceLock($sourceRoot);
-        $currentAfter = $this->fileHashes([$manifestPath, $assetsPath]);
+        $currentAfter = $this->currentPackageFingerprint($this->package->load($backendRoot));
         if ($sourceBefore !== $sourceAfter) {
             throw new CareerTenBlockCompileFailure('CURRENT_ZH_SOURCE_BYTES_CHANGED');
         }
@@ -205,6 +203,16 @@ final class CareerCurrentZhBatchPreparer
         $this->writeJson($outputRoot.'/acceptance-report.json', $report);
 
         return ['manifest' => $manifest, 'report' => $report, 'diff' => $diff];
+    }
+
+    /** @param array<string,mixed> $package */
+    private function currentPackageFingerprint(array $package): array
+    {
+        return [
+            'manifest_sha256' => $package['summary']['manifest_sha256'] ?? null,
+            'sharded_aggregate_sha256' => $package['summary']['sharded_aggregate_sha256'] ?? null,
+            'versionless_projection_sha256' => $package['summary']['versionless_projection_sha256'] ?? null,
+        ];
     }
 
     /** @param list<string> $slugs @param list<string> $controls @return array<string,mixed> */
@@ -315,8 +323,6 @@ final class CareerCurrentZhBatchPreparer
             }
         }
         if ($upgradeV43) {
-            $baseline['asset_version'] = CareerCurrentAuthorityPackage::ASSET_VERSION;
-            $baseline['template_version'] = CareerCurrentAuthorityPackage::ASSET_VERSION;
             $baseline['component_order_json'] = CareerDisplayAssetComponentContract::CURRENT_ORDER;
             $baseline['metadata_json']['structured_components_v1'] = $structured->evidenceBindings($definition);
         }

@@ -39,9 +39,7 @@ final class CareerCurrentEnBatchPreparer
         $sourceRoot = $this->sourceRoot($sourceRoot);
         $outputRoot = $this->emptyOutputRoot($outputRoot);
         $baseline = $this->package->load($backendRoot);
-        $manifestPath = rtrim($backendRoot, '/').'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH.'/manifest.json';
-        $assetsPath = rtrim($backendRoot, '/').'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH.'/assets.jsonl';
-        $currentBefore = $this->fileHashes([$manifestPath, $assetsPath]);
+        $currentBefore = $this->currentPackageFingerprint($baseline);
         $sourceBefore = $this->sourceLock($sourceRoot);
 
         $this->assertSealedAuthority($sourceRoot, $sourceBefore);
@@ -117,7 +115,7 @@ final class CareerCurrentEnBatchPreparer
         }
 
         $sourceAfter = $this->sourceLock($sourceRoot);
-        $currentAfter = $this->fileHashes([$manifestPath, $assetsPath]);
+        $currentAfter = $this->currentPackageFingerprint($this->package->load($backendRoot));
         if ($sourceBefore !== $sourceAfter) {
             throw new CareerTenBlockCompileFailure('CURRENT_EN_SOURCE_BYTES_CHANGED');
         }
@@ -215,6 +213,16 @@ final class CareerCurrentEnBatchPreparer
         $this->writeJson($outputRoot.'/acceptance-report.json', $report);
 
         return ['manifest' => $manifest, 'report' => $report, 'diff' => $diff];
+    }
+
+    /** @param array<string,mixed> $package */
+    private function currentPackageFingerprint(array $package): array
+    {
+        return [
+            'manifest_sha256' => $package['summary']['manifest_sha256'] ?? null,
+            'sharded_aggregate_sha256' => $package['summary']['sharded_aggregate_sha256'] ?? null,
+            'versionless_projection_sha256' => $package['summary']['versionless_projection_sha256'] ?? null,
+        ];
     }
 
     /** @param list<string> $slugs @param list<string> $controls @return array<string,mixed> */

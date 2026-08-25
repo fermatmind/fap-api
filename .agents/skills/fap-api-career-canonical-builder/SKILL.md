@@ -18,7 +18,7 @@ Do not use it to publish, deploy, write CMS/database/cache state, render fronten
 ## Authority and boundaries
 
 - `backend/content_assets/career/current/manifest.json` and its bound 640 shards are the repository Current content authority.
-- `backend/content_assets/career/current/assets.jsonl` is a compiler-owned legacy LKG compatibility projection. It is not an editorial or compilation input and must not be edited by hand.
+- No committed flat projection exists. When a compiler needs whole-row evidence, it must synthesize a versionless projection from the manifest-bound shards into a system temporary directory.
 - The compiler and package contracts under `backend/app/Domain/Career/{Compilation,Display}` define accepted input, output, locale, component, and hash behavior.
 - Source assets, lookup files, evidence files, Desktop directories, dry-run output, and a PASS receipt are candidates or evidence only.
 - Never change input copy during compilation. Report a blocker when normalization would require an editorial decision.
@@ -48,16 +48,9 @@ php artisan career:ten-block-current-package-compile \
 6. Compare candidate bytes and hashes with Current. Do not install a candidate unless the task explicitly includes a Current package change and the diff is the approved scope.
 7. Hand any approved Current package change to `fap-api-career-release-authority`; let normal trunk CI/deploy classification own later release behavior.
 
-## Legacy Current sharding candidate
+## Historical sharding recovery
 
-Use `scripts/split_legacy_current.php` only for the read-only legacy-to-sharded transition. Its output is a deterministic candidate, never Current or publication authority. The output root must already exist outside the repository under a system temporary root:
-
-```bash
-php .agents/skills/fap-api-career-canonical-builder/scripts/split_legacy_current.php \
-  --output-root=<existing-task-temp-dir>
-```
-
-The splitter is retained only as the deterministic transition/recovery tool that produced the installed package. It binds the compiler-owned legacy `assets.jsonl` and legacy manifest before and after execution, normalizes the 1045 wrapped plus one direct locale shape, writes exactly 10 × 64 candidate shards, mechanically reconstructs every source row before accepting it, and emits coverage, ownership, integrity, manifest, and repository-zero-write evidence. It rejects symlinks, repository/path escape, unknown output files, invalid locale/slug/canonical JSON, duplicate identity, wrong ordering, coverage drift, and mid-run baseline drift. Repeating the same legacy input must reproduce identical candidate bytes. A PASS keeps publication/deploy/search authority false; only an explicitly scoped release may install its verified candidate.
+`scripts/split_legacy_current.php` is preserved temporarily as inert historical transition evidence. It has no valid default input after the flat projection was removed and must not be used for Current compilation. Current compilation starts from the installed manifest-bound shards.
 
 ## Sharded candidate assembly
 
@@ -69,7 +62,7 @@ php .agents/skills/fap-api-career-canonical-builder/scripts/assemble_sharded_cur
   --output-root=<existing-assembly-temp-dir>
 ```
 
-The assembler validates the manifest aggregate, all 640 shard declarations and hashes, every canonical line identity and deterministic shard placement, 1046 × 2 × 10 coverage, exact module content fields, 28-component ownership/order, locale pairing, source/claim dependencies, and visible-FAQ-to-FAQPage derivation. It assembles only from module records; legacy `assets.jsonl` is read afterward solely as an equivalence oracle and is never an unmapped-field fallback. A PASS requires byte-identical 1046-row output plus separately identical hashes for all 2092 public pages, SEO, FAQ/schema, sources/claims, CTA/links, component payloads, and all 1046 zh-CN `presentation_v1` projections. Output and receipts remain temporary candidate evidence with zero Current/runtime/publication writes.
+The assembler is historical equivalence tooling. Active Current compilation validates and assembles only the manifest-bound shards; any whole-row projection is temporary, versionless, and derived. Output and receipts remain candidate evidence with zero Current/runtime/publication writes.
 
 ## Acceptance
 

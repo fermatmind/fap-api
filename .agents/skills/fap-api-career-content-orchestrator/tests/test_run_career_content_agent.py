@@ -107,6 +107,14 @@ class CareerContentAgentHarnessTest(unittest.TestCase):
     def fake_process(self, command: list[str], cwd: Path | None = None) -> tuple[int, dict[str, object]]:
         if str(runner.RESEARCH_VALIDATOR) in command:
             return 0, self.research_report()
+        if str(runner.VERSIONLESS_CURRENT_EXPORTER) in command:
+            output = Path(command[-1])
+            output.write_text('{"canonical_slug":"fixture"}\n', encoding="utf-8")
+            return 0, {
+                "career_count": 1046,
+                "sha256": hashlib.sha256(output.read_bytes()).hexdigest(),
+                "versionless_projection_sha256": "a" * 64,
+            }
         if str(runner.ADAPTER) in command:
             options = dict(item[2:].split("=", 1) for item in command if item.startswith("--") and "=" in item)
             output = Path(options["output-root"]); target = options["target-slug"]
@@ -121,7 +129,7 @@ class CareerContentAgentHarnessTest(unittest.TestCase):
             options = dict(item[2:].split("=", 1) for item in command if item.startswith("--") and "=" in item)
             output = Path(options["output-root"]); output.mkdir(exist_ok=True)
             (output / "candidate-row.json").write_text(json.dumps({"slug": slug}, sort_keys=True) + "\n", encoding="utf-8")
-            return 0, {"status": "PASS_TEN_BLOCK_DRY_COMPILE", "receipt": {"mapped_file_count": 10, "locale_count": 2, "component_count": 26, "blocked_fields": []}, "output_written": True}
+            return 0, {"status": "PASS_TEN_BLOCK_DRY_COMPILE", "receipt": {"mapped_file_count": 10, "locale_count": 2, "component_count": 28, "blocked_fields": []}, "output_written": True}
         raise AssertionError(command)
 
     def init(self) -> None:
@@ -416,14 +424,17 @@ class CareerContentAgentHarnessTest(unittest.TestCase):
     def test_bad_dry_compile_shape_blocks(self) -> None:
         self.reach_compile()
         def bad(command: list[str], cwd: Path | None = None):
-            code, payload = self.fake_process(command, cwd); payload["receipt"]["component_count"] = 25; return code, payload
+            code, payload = self.fake_process(command, cwd)
+            if "receipt" in payload:
+                payload["receipt"]["component_count"] = 25
+            return code, payload
         with mock.patch.object(runner, "run_process_json", side_effect=bad):
             self.assertEqual("BLOCKED_COMPILE", runner.run_compile(self.output, self.source_root, self.lookup)["state"])
 
     def test_missing_candidate_digest_blocks(self) -> None:
         self.reach_compile()
         def missing(command: list[str], cwd: Path | None = None):
-            return 0, {"status": "PASS_TEN_BLOCK_DRY_COMPILE", "receipt": {"mapped_file_count": 10, "locale_count": 2, "component_count": 26, "blocked_fields": []}}
+            return 0, {"status": "PASS_TEN_BLOCK_DRY_COMPILE", "receipt": {"mapped_file_count": 10, "locale_count": 2, "component_count": 28, "blocked_fields": []}}
         with mock.patch.object(runner, "run_process_json", side_effect=missing):
             self.assertEqual("BLOCKED_COMPILE", runner.run_compile(self.output, self.source_root, self.lookup)["state"])
 

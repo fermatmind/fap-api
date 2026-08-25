@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 require_once dirname(__DIR__, 2).'/fap-api-career-canonical-builder/scripts/assemble_sharded_current.php';
 
+ini_set('memory_limit', '1024M');
+
 final class CareerContentMergeFailure extends RuntimeException
 {
     public function __construct(public readonly string $safeCode)
@@ -145,6 +147,11 @@ final class CareerContentCurrentMerger
             $declaration['row_count'] = substr_count($stagedBytes[$relative], "\n");
         }
         unset($declaration);
+        $updatedManifest['versionless_projection_sha256'] = $this->versionlessProjectionHash(
+            $currentRoot,
+            $updatedManifest,
+            $stagedBytes,
+        );
         $updatedManifest['aggregate_sha256'] = $this->aggregateHash($updatedManifest);
         $manifestBytes = $this->prettyJson($updatedManifest);
         $manifestChanged = ! hash_equals(hash('sha256', (string) file_get_contents($manifestPath)), hash('sha256', $manifestBytes));
@@ -376,6 +383,11 @@ final class CareerContentCurrentMerger
                 }
             }
             unset($declaration);
+            $liveManifest['versionless_projection_sha256'] = $this->versionlessProjectionHash(
+                $currentRoot,
+                $liveManifest,
+                $stagedBytes,
+            );
             $liveManifest['aggregate_sha256'] = $this->aggregateHash($liveManifest);
             $manifestBytes = $this->prettyJson($liveManifest);
             foreach ($changed as $relative) {
@@ -426,6 +438,41 @@ final class CareerContentCurrentMerger
         ]));
 
         return hash('sha256', CareerLegacyCurrentSharder::canonicalJson($projection));
+    }
+
+    /** @param array<string,mixed> $manifest @param array<string,string> $stagedBytes */
+    private function versionlessProjectionHash(string $currentRoot, array $manifest, array $stagedBytes): string
+    {
+        $records = [];
+        foreach ($manifest['shards'] as $declaration) {
+            $relative = $declaration['path'];
+            $bytes = $stagedBytes[$relative] ?? (string) file_get_contents($currentRoot.'/'.$relative);
+            foreach ($this->decodeShard($bytes, $declaration['module'], (int) $declaration['shard_index']) as $record) {
+                $records[$record['canonical_slug']][$record['locale']][$record['module']] = $record;
+            }
+        }
+        ksort($records, SORT_STRING);
+        $rows = [];
+        $assembler = new CareerShardedCurrentAssembler;
+        foreach ($records as $localeRecords) {
+            $ordered = [];
+            foreach (['en', 'zh-CN'] as $locale) {
+                foreach (CareerLegacyCurrentSharder::MODULES as $module) {
+                    $ordered[$locale][$module] = $localeRecords[$locale][$module]
+                        ?? throw new CareerContentMergeFailure('CURRENT_VERSIONLESS_PROJECTION_INCOMPLETE');
+                }
+            }
+            $row = $assembler->assembleRecords($ordered);
+            if (array_key_exists('asset_version', $row) || array_key_exists('template_version', $row)) {
+                throw new CareerContentMergeFailure('CURRENT_VERSION_FIELD_FORBIDDEN');
+            }
+            $rows[] = $row;
+        }
+        if (count($rows) !== 1046) {
+            throw new CareerContentMergeFailure('CURRENT_VERSIONLESS_PROJECTION_INCOMPLETE');
+        }
+
+        return hash('sha256', CareerLegacyCurrentSharder::canonicalJson($rows));
     }
 
     /** @return array<string,mixed> */

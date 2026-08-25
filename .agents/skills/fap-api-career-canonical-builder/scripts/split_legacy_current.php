@@ -63,7 +63,6 @@ final class CareerLegacyCurrentSharder
     private const EXPECTED_ROW_KEYS = [
         'asset_role',
         'asset_type',
-        'asset_version',
         'canonical_slug',
         'component_order_json',
         'implementation_contract_json',
@@ -74,7 +73,6 @@ final class CareerLegacyCurrentSharder
         'status',
         'structured_data_json',
         'surface_version',
-        'template_version',
     ];
 
     /** @return array<string,string> */

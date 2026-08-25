@@ -19,6 +19,9 @@ use ReflectionClass;
 
 final class CareerTenBlockCompilerTest extends TestCase
 {
+    /** @var array<string,mixed>|null */
+    private static ?array $baselineRow = null;
+
     private string $root;
 
     protected function setUp(): void
@@ -36,6 +39,14 @@ final class CareerTenBlockCompilerTest extends TestCase
             ]],
         ], JSON_THROW_ON_ERROR));
         $this->writeEvidenceAuthority();
+        if (self::$baselineRow === null) {
+            ini_set('memory_limit', '1024M');
+            self::$baselineRow = (new CareerCurrentAuthorityPackage)->load(dirname(__DIR__, 5))['rows']['accountants-and-auditors'];
+        }
+        file_put_contents(
+            $this->root.'/baseline.jsonl',
+            CareerCurrentAuthorityPackage::encodeCanonical(self::$baselineRow)."\n",
+        );
     }
 
     protected function tearDown(): void
@@ -59,10 +70,10 @@ final class CareerTenBlockCompilerTest extends TestCase
         self::assertTrue($first['receipt']['publication_eligible']);
         self::assertSame($first['receipt']['output_row_digest'], $second['receipt']['output_row_digest']);
         self::assertSame($first['row'], $second['row']);
-        self::assertCount(14, $first['row']);
-        self::assertSame('v4.3', $first['row']['asset_version']);
-        self::assertSame('v4.3', $first['row']['template_version']);
-        self::assertSame(CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER, $first['row']['component_order_json']);
+        self::assertCount(12, $first['row']);
+        self::assertArrayNotHasKey('asset_version', $first['row']);
+        self::assertArrayNotHasKey('template_version', $first['row']);
+        self::assertSame(CareerDisplayAssetComponentContract::CURRENT_ORDER, $first['row']['component_order_json']);
         self::assertSame(
             ['qa3', 'qa2', 'qa1'],
             array_column($first['row']['page_payload_json']['page']['zh']['career_quick_answers_block']['items'], 'key'),
@@ -158,7 +169,7 @@ final class CareerTenBlockCompilerTest extends TestCase
             $this->root.'/source',
             'accountants-and-auditors',
             $this->root.'/lookup.json',
-            dirname(__DIR__, 5).'/content_assets/career/current/assets.jsonl',
+            $this->root.'/baseline.jsonl',
             $evidence,
         );
     }

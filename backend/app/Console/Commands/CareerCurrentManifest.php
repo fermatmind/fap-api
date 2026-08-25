@@ -43,6 +43,7 @@ final class CareerCurrentManifest extends Command
                     'assets_sha256' => $authority['summary']['assets_sha256'],
                     'manifest_sha256' => $authority['summary']['manifest_sha256'],
                     'sharded_aggregate_sha256' => $authority['summary']['sharded_aggregate_sha256'],
+                    'versionless_projection_sha256' => $authority['summary']['versionless_projection_sha256'],
                     'career_count' => $authority['summary']['career_count'],
                     'locale_page_count' => $authority['summary']['locale_page_count'],
                     'components_per_page' => $authority['summary']['components_per_page'],

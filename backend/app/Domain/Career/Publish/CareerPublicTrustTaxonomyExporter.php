@@ -160,7 +160,6 @@ final class CareerPublicTrustTaxonomyExporter
                 'asset_type',
                 'asset_role',
                 'status',
-                'asset_version',
                 'seo_payload_json',
                 'page_payload_json',
                 'structured_data_json',
@@ -309,7 +308,6 @@ final class CareerPublicTrustTaxonomyExporter
                 'canonical_target' => $this->stringValue($indexState->canonical_target ?? null),
                 'index_state' => $this->stringValue($indexState->index_state ?? null),
                 'display_asset_status' => $assetStatus,
-                'asset_version' => $this->stringValue($displayAsset->asset_version ?? null),
             ],
             'seoEvidence' => [
                 'seo_payload_present' => $seoPayload !== [],

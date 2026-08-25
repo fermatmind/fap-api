@@ -34,7 +34,6 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
             rmdir($authorityRoot);
             rmdir(dirname($authorityRoot));
             rmdir(dirname($authorityRoot, 2));
-            rmdir(dirname($authorityRoot, 3));
             rmdir($backendRoot);
         }
     }
@@ -61,8 +60,12 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
             $package['manifest']['aggregate_sha256'],
         );
         self::assertSame(
-            hash_file('sha256', dirname(__DIR__, 5).'/content_assets/career/current/assets.jsonl'),
-            $package['summary']['assets_sha256'],
+            $package['manifest']['versionless_projection_sha256'],
+            $package['summary']['versionless_projection_sha256'],
+        );
+        self::assertSame(
+            CareerCurrentAuthorityPackage::hashValue(array_values($package['rows'])),
+            $package['summary']['versionless_projection_sha256'],
         );
         self::assertArrayNotHasKey('software-developers', $package['rows']);
     }
@@ -162,21 +165,36 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
 
     public function test_current_page_contract_rejects_legacy_unknown_and_placeholder_structures(): void
     {
-        $page = array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER, ['value' => 'verified']);
+        $page = array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_ORDER, ['value' => 'verified']);
+        $row = ['label' => 'label', 'value' => 'value', 'alternate_value' => null, 'secondary_value' => null];
+        $page['career_quick_answers_block'] = [
+            'availability' => 'published', 'schema_version' => 'career.quick_answers.v1',
+            'heading' => '职业速答',
+            'items' => array_map(static fn (string $key): array => [
+                'key' => $key, 'question' => $key.' question', 'answer' => $key.' answer',
+                'table' => ['rows' => [$row]],
+            ], ['qa3', 'qa2', 'qa1']),
+        ];
+        $page['onet_structured_fields_block'] = [
+            'availability' => 'published', 'schema_version' => 'career.onet_structured_fields.v1',
+            'heading' => 'O*NET 结构化字段', 'rows' => [$row],
+        ];
         $payload = ['en' => $page, 'zh' => $page];
-        self::assertTrue(CareerDisplayAssetComponentContract::hasExactPagesForVersion($payload, 'v4.2'));
+        $payload['en']['career_quick_answers_block']['heading'] = 'Career quick answers';
+        $payload['en']['onet_structured_fields_block']['heading'] = 'O*NET structured fields';
+        self::assertTrue(CareerDisplayAssetComponentContract::hasExactCurrentPages($payload));
 
         $missing = $payload;
         unset($missing['en']['career_path_block']);
-        self::assertFalse(CareerDisplayAssetComponentContract::hasExactPagesForVersion($missing, 'v4.2'));
+        self::assertFalse(CareerDisplayAssetComponentContract::hasExactCurrentPages($missing));
 
         $unknown = $payload;
         $unknown['zh']['sections'] = [];
-        self::assertFalse(CareerDisplayAssetComponentContract::hasExactPagesForVersion($unknown, 'v4.2'));
+        self::assertFalse(CareerDisplayAssetComponentContract::hasExactCurrentPages($unknown));
 
         $placeholder = $payload;
         $placeholder['en']['hero'] = ['content_available' => false];
-        self::assertFalse(CareerDisplayAssetComponentContract::hasExactPagesForVersion($placeholder, 'v4.2'));
+        self::assertFalse(CareerDisplayAssetComponentContract::hasExactCurrentPages($placeholder));
     }
 
     public function test_superseded_normal_display_writers_are_absent_and_explicit_exceptions_remain(): void

@@ -20,8 +20,8 @@ final class CareerSitemapDisplayAssetVersionCompatibilityTest extends TestCase
     public function test_v43_adds_no_url_loss_while_v42_remains_readable(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
-        $this->asset('legacy-career', 'v4.2', CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER);
-        $this->asset('current-career', 'v4.3', CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER);
+        $this->asset('legacy-career', 'v4.2', CareerDisplayAssetComponentContract::CURRENT_ORDER);
+        $this->asset('current-career', 'v4.3', CareerDisplayAssetComponentContract::CURRENT_ORDER);
 
         $method = new ReflectionMethod(SitemapGenerator::class, 'getDisplayAssetCareerJobDetailUrls');
         $urls = $method->invoke(app(SitemapGenerator::class));

@@ -7,64 +7,6 @@ namespace App\Domain\Career\Display;
 final class CareerDisplayAssetComponentContract
 {
     /** @var list<string> */
-    public const LEGACY_V4_2_ORDER = [
-        'breadcrumb',
-        'hero',
-        'fermat_decision_card',
-        'primary_cta',
-        'career_snapshot_primary_locale',
-        'career_snapshot_secondary_locale',
-        'fit_decision_checklist',
-        'riasec_fit_block',
-        'personality_fit_block',
-        'definition_block',
-        'responsibilities_block',
-        'work_context_block',
-        'market_signal_card',
-        'adjacent_career_comparison_table',
-        'ai_impact_table',
-        'career_risk_cards',
-        'contract_project_risk_block',
-        'next_steps_block',
-        'faq_block',
-        'related_next_pages',
-        'source_card',
-        'review_validity_card',
-        'boundary_notice',
-        'final_cta',
-    ];
-
-    /** @var list<string> */
-    public const CURRENT_V4_2_ORDER = [
-        'breadcrumb',
-        'hero',
-        'fermat_decision_card',
-        'primary_cta',
-        'career_snapshot_primary_locale',
-        'career_snapshot_secondary_locale',
-        'fit_decision_checklist',
-        'riasec_fit_block',
-        'personality_fit_block',
-        'definition_block',
-        'career_ai_description_block',
-        'responsibilities_block',
-        'work_context_block',
-        'market_signal_card',
-        'adjacent_career_comparison_table',
-        'ai_impact_table',
-        'career_risk_cards',
-        'career_path_block',
-        'contract_project_risk_block',
-        'next_steps_block',
-        'faq_block',
-        'related_next_pages',
-        'source_card',
-        'review_validity_card',
-        'boundary_notice',
-        'final_cta',
-    ];
-
-    /** @var list<string> */
     public const CURRENT_ORDER = [
         'breadcrumb',
         'hero',
@@ -96,17 +38,12 @@ final class CareerDisplayAssetComponentContract
         'final_cta',
     ];
 
-    /** @var list<string> */
-    public const CURRENT_V4_3_ORDER = self::CURRENT_ORDER;
-
     /** @param array<mixed> $order */
     public static function supports(array $order): bool
     {
         $order = array_values($order);
 
-        return $order === self::LEGACY_V4_2_ORDER
-            || $order === self::CURRENT_V4_2_ORDER
-            || $order === self::CURRENT_ORDER;
+        return $order === self::CURRENT_ORDER;
     }
 
     /** @param array<mixed> $order */
@@ -141,59 +78,29 @@ final class CareerDisplayAssetComponentContract
     }
 
     /** @param array<mixed> $payload */
-    public static function hasExactPagesForVersion(array $payload, string $version): bool
+    public static function pageFailureCode(array $payload): ?string
     {
-        if ($version === 'v4.3') {
-            return self::hasExactCurrentPages($payload);
-        }
-        if ($version !== 'v4.2') {
-            return false;
-        }
-        $pages = is_array($payload['page'] ?? null) ? $payload['page'] : $payload;
-        $allowed = array_merge(self::CURRENT_V4_2_ORDER, ['path', 'secondary_cta']);
-        foreach (['en', 'zh'] as $locale) {
-            $page = $pages[$locale] ?? null;
-            if (! is_array($page)
-                || array_diff(self::CURRENT_V4_2_ORDER, array_keys($page)) !== []
-                || array_diff(array_keys($page), $allowed) !== []
-                || self::containsPlaceholder($page)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /** @param array<mixed> $payload */
-    public static function pageFailureCodeForVersion(array $payload, string $version): ?string
-    {
-        if ($version !== 'v4.3') {
-            return self::hasExactPagesForVersion($payload, $version)
-                ? null
-                : 'CURRENT_DISPLAY_SURFACE_PAGE_CONTRACT_FAILED';
-        }
-
         $pages = is_array($payload['page'] ?? null) ? $payload['page'] : $payload;
         foreach (['en', 'zh'] as $locale) {
             $page = $pages[$locale] ?? null;
             if (! is_array($page)) {
-                return 'CURRENT_DISPLAY_SURFACE_V43_LOCALE_PAGE_MISSING';
+                return 'CURRENT_DISPLAY_SURFACE_LOCALE_PAGE_MISSING';
             }
             if (array_diff(self::CURRENT_ORDER, array_keys($page)) !== []) {
-                return 'CURRENT_DISPLAY_SURFACE_V43_COMPONENT_MISSING';
+                return 'CURRENT_DISPLAY_SURFACE_COMPONENT_MISSING';
             }
             if (array_diff(array_keys($page), array_merge(self::CURRENT_ORDER, ['path', 'secondary_cta'])) !== []) {
-                return 'CURRENT_DISPLAY_SURFACE_V43_COMPONENT_UNEXPECTED';
+                return 'CURRENT_DISPLAY_SURFACE_COMPONENT_UNEXPECTED';
             }
             if (array_key_exists('sections', $page) || array_key_exists('content_sections', $page)) {
-                return 'CURRENT_DISPLAY_SURFACE_V43_LEGACY_SECTION_PRESENT';
+                return 'CURRENT_DISPLAY_SURFACE_LEGACY_SECTION_PRESENT';
             }
             $structuredFailure = self::structuredComponentFailureCode($page, $locale);
             if ($structuredFailure !== null) {
                 return $structuredFailure;
             }
             if (self::containsPlaceholder($page)) {
-                return 'CURRENT_DISPLAY_SURFACE_V43_PLACEHOLDER_PRESENT';
+                return 'CURRENT_DISPLAY_SURFACE_PLACEHOLDER_PRESENT';
             }
         }
 
@@ -202,17 +109,7 @@ final class CareerDisplayAssetComponentContract
 
         return $localeKeys === ['en', 'zh']
             ? null
-            : 'CURRENT_DISPLAY_SURFACE_V43_LOCALE_SET_MISMATCH';
-    }
-
-    /** @param array<mixed> $order */
-    public static function matchesVersion(array $order, string $version): bool
-    {
-        return array_values($order) === match ($version) {
-            'v4.3' => self::CURRENT_ORDER,
-            'v4.2' => self::CURRENT_V4_2_ORDER,
-            default => [],
-        };
+            : 'CURRENT_DISPLAY_SURFACE_LOCALE_SET_MISMATCH';
     }
 
     /** @param array<string,mixed> $page */
@@ -240,12 +137,12 @@ final class CareerDisplayAssetComponentContract
                 return null;
             }
             if (! self::validPublishedQuickAnswers($quick, 'Career quick answers')) {
-                return 'CURRENT_DISPLAY_SURFACE_V43_EN_QUICK_ANSWERS_INVALID';
+                return 'CURRENT_DISPLAY_SURFACE_EN_QUICK_ANSWERS_INVALID';
             }
 
             return self::validPublishedOnetFields($onet, 'O*NET structured fields')
                 ? null
-                : 'CURRENT_DISPLAY_SURFACE_V43_EN_ONET_FIELDS_INVALID';
+                : 'CURRENT_DISPLAY_SURFACE_EN_ONET_FIELDS_INVALID';
         }
         if (! is_array($quick)
             || ! self::exactKeys($quick, ['availability', 'schema_version', 'heading', 'items'])
@@ -254,7 +151,7 @@ final class CareerDisplayAssetComponentContract
             || ($quick['heading'] ?? null) !== '职业速答'
             || ! is_array($quick['items'] ?? null)
             || count($quick['items']) !== 3) {
-            return 'CURRENT_DISPLAY_SURFACE_V43_ZH_QUICK_ANSWERS_INVALID';
+            return 'CURRENT_DISPLAY_SURFACE_ZH_QUICK_ANSWERS_INVALID';
         }
         foreach (['qa3', 'qa2', 'qa1'] as $index => $key) {
             $item = $quick['items'][$index] ?? null;
@@ -263,12 +160,12 @@ final class CareerDisplayAssetComponentContract
                 || ($item['key'] ?? null) !== $key
                 || ! self::nonEmptyString($item['question'] ?? null)
                 || ! self::nonEmptyString($item['answer'] ?? null)) {
-                return 'CURRENT_DISPLAY_SURFACE_V43_ZH_QUICK_ANSWER_ITEM_INVALID';
+                return 'CURRENT_DISPLAY_SURFACE_ZH_QUICK_ANSWER_ITEM_INVALID';
             }
             if (! is_array($item['table'] ?? null)
                 || ! self::exactKeys($item['table'], ['rows'])
                 || ! self::validRows($item['table']['rows'] ?? null)) {
-                return 'CURRENT_DISPLAY_SURFACE_V43_ZH_QUICK_ANSWER_TABLE_INVALID';
+                return 'CURRENT_DISPLAY_SURFACE_ZH_QUICK_ANSWER_TABLE_INVALID';
             }
         }
         if (! is_array($onet)
@@ -276,12 +173,12 @@ final class CareerDisplayAssetComponentContract
             || ($onet['availability'] ?? null) !== 'published'
             || ($onet['schema_version'] ?? null) !== 'career.onet_structured_fields.v1'
             || ($onet['heading'] ?? null) !== 'O*NET 结构化字段') {
-            return 'CURRENT_DISPLAY_SURFACE_V43_ZH_ONET_FIELDS_INVALID';
+            return 'CURRENT_DISPLAY_SURFACE_ZH_ONET_FIELDS_INVALID';
         }
 
         return self::validRows($onet['rows'] ?? null)
             ? null
-            : 'CURRENT_DISPLAY_SURFACE_V43_ZH_ONET_ROWS_INVALID';
+            : 'CURRENT_DISPLAY_SURFACE_ZH_ONET_ROWS_INVALID';
     }
 
     private static function validRows(mixed $rows): bool

@@ -633,6 +633,8 @@ jobs:
               and .status == "PASS_CURRENT_AUTHORITY_PUBLISH"
               and .release_sha == $release
               and .assets_sha256 == $assets
+              and (.versionless_projection_sha256 | test("^[0-9a-f]{64}$"))
+              and .versionless_projection_sha256 == .package.versionless_projection_sha256
               and .operation_key == $operation
               and .full_scan == ($full_scan == 1)
               and .resource_guard == {

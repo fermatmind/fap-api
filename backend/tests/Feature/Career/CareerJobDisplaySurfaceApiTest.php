@@ -59,7 +59,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
         'software-developers' => ['soc' => '15-1252', 'onet' => '15-1252.00', 'title' => 'Software Developers'],
     ];
 
-    private const COMPONENT_ORDER = CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER;
+    private const COMPONENT_ORDER = CareerDisplayAssetComponentContract::CURRENT_ORDER;
 
     protected function setUp(): void
     {
@@ -86,7 +86,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             ->assertOk()
             ->assertJsonPath('identity.canonical_slug', 'actors')
             ->assertJsonPath('display_surface_v1.surface_version', 'display.surface.v1')
-            ->assertJsonPath('display_surface_v1.template_version', 'v4.2')
+            ->assertJsonMissingPath('display_surface_v1.template_version')
             ->assertJsonPath('display_surface_v1.subject.canonical_slug', 'actors')
             ->assertJsonPath('display_surface_v1.subject.soc_code', '27-2011')
             ->assertJsonPath('display_surface_v1.subject.onet_code', '27-2011.00')
@@ -103,7 +103,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             ->assertJsonPath('display_surface_v1.page.content.hero.title', '演员职业判断');
 
         $this->assertContains('fermat_decision_card', $response->json('display_surface_v1.component_order'));
-        $this->assertCount(26, $response->json('display_surface_v1.component_order'));
+        $this->assertCount(28, $response->json('display_surface_v1.component_order'));
         $this->assertIsArray($response->json('display_surface_v1.page.content.hero'));
 
         $encoded = json_encode($response->json('display_surface_v1'), JSON_THROW_ON_ERROR);
@@ -126,13 +126,13 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
 
         $response = $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/accountants-and-auditors?locale=zh-CN')
             ->assertOk()
-            ->assertJsonPath('display_surface_v1.asset_version', 'v4.3')
-            ->assertJsonPath('display_surface_v1.template_version', 'v4.3')
+            ->assertJsonMissingPath('display_surface_v1.asset_version')
+            ->assertJsonMissingPath('display_surface_v1.template_version')
             ->assertJsonPath('display_surface_v1.page.content.career_quick_answers_block.availability', 'published')
             ->assertJsonPath('display_surface_v1.page.content.onet_structured_fields_block.availability', 'published');
 
         $this->assertSame(
-            CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER,
+            CareerDisplayAssetComponentContract::CURRENT_ORDER,
             $response->json('display_surface_v1.component_order'),
         );
         $this->assertSame(
@@ -161,7 +161,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
                 ->assertOk()
                 ->assertJsonPath('identity.canonical_slug', $slug)
                 ->assertJsonPath('display_surface_v1.surface_version', 'display.surface.v1')
-                ->assertJsonPath('display_surface_v1.template_version', 'v4.2')
+                ->assertJsonMissingPath('display_surface_v1.template_version')
                 ->assertJsonPath('display_surface_v1.subject.canonical_slug', $slug)
                 ->assertJsonPath('display_surface_v1.subject.soc_code', self::PILOT_SLUGS[$slug]['soc'])
                 ->assertJsonPath('display_surface_v1.subject.onet_code', self::PILOT_SLUGS[$slug]['onet'])
@@ -286,7 +286,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
                 ->assertOk()
                 ->assertJsonPath('identity.canonical_slug', $slug)
                 ->assertJsonPath('display_surface_v1.surface_version', 'display.surface.v1')
-                ->assertJsonPath('display_surface_v1.template_version', 'v4.2')
+                ->assertJsonMissingPath('display_surface_v1.template_version')
                 ->assertJsonPath('display_surface_v1.subject.canonical_slug', $slug)
                 ->assertJsonPath('display_surface_v1.subject.soc_code', self::PILOT_SLUGS[$slug]['soc'])
                 ->assertJsonPath('display_surface_v1.subject.onet_code', self::PILOT_SLUGS[$slug]['onet'])
@@ -297,7 +297,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
                 ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN');
 
             $this->assertContains('fermat_decision_card', $response->json('display_surface_v1.component_order'));
-            $this->assertCount(26, $response->json('display_surface_v1.component_order'));
+            $this->assertCount(28, $response->json('display_surface_v1.component_order'));
 
             $encoded = json_encode($response->json('display_surface_v1'), JSON_THROW_ON_ERROR);
             $this->assertStringNotContainsString('release_gate', $encoded);
@@ -340,15 +340,15 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
                 ->assertOk()
                 ->assertJsonPath('identity.canonical_slug', $slug)
                 ->assertJsonPath('display_surface_v1.surface_version', 'display.surface.v1')
-                ->assertJsonPath('display_surface_v1.asset_version', 'v4.2')
-                ->assertJsonPath('display_surface_v1.template_version', 'v4.2')
+                ->assertJsonMissingPath('display_surface_v1.asset_version')
+                ->assertJsonMissingPath('display_surface_v1.template_version')
                 ->assertJsonPath('display_surface_v1.subject.canonical_slug', $slug)
                 ->assertJsonPath('display_surface_v1.subject.soc_code', self::PILOT_SLUGS[$slug]['soc'])
                 ->assertJsonPath('display_surface_v1.subject.onet_code', self::PILOT_SLUGS[$slug]['onet'])
                 ->assertJsonPath('display_surface_v1.claim_permissions.integrity_state', 'full')
                 ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN');
 
-            $this->assertCount(26, $response->json('display_surface_v1.component_order'));
+            $this->assertCount(28, $response->json('display_surface_v1.component_order'));
 
             $encoded = json_encode($response->json('display_surface_v1'), JSON_THROW_ON_ERROR);
             $this->assertStringNotContainsString('Product', $encoded);
@@ -386,15 +386,15 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
                 ->assertJsonPath('seo_contract.reason_codes.0', 'validated_display_asset_backed_release')
                 ->assertJsonPath('provenance_meta.logic_version', 'career.protocol.job_detail.display_asset_backed.v1')
                 ->assertJsonPath('display_surface_v1.surface_version', 'display.surface.v1')
-                ->assertJsonPath('display_surface_v1.asset_version', 'v4.2')
-                ->assertJsonPath('display_surface_v1.template_version', 'v4.2')
+                ->assertJsonMissingPath('display_surface_v1.asset_version')
+                ->assertJsonMissingPath('display_surface_v1.template_version')
                 ->assertJsonPath('display_surface_v1.subject.canonical_slug', $slug)
                 ->assertJsonPath('display_surface_v1.subject.soc_code', self::PILOT_SLUGS[$slug]['soc'])
                 ->assertJsonPath('display_surface_v1.subject.onet_code', self::PILOT_SLUGS[$slug]['onet'])
                 ->assertJsonPath('display_surface_v1.claim_permissions.allow_strong_claim', false)
                 ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN');
 
-            $this->assertCount(26, $response->json('display_surface_v1.component_order'));
+            $this->assertCount(28, $response->json('display_surface_v1.component_order'));
 
             $encoded = json_encode($response->json(), JSON_THROW_ON_ERROR);
             $this->assertStringNotContainsString('Product', $encoded);
@@ -428,7 +428,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             ->assertJsonPath('display_surface_v1.subject.canonical_slug', 'architects')
             ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN');
 
-        $this->assertCount(26, $response->json('display_surface_v1.component_order'));
+        $this->assertCount(28, $response->json('display_surface_v1.component_order'));
     }
 
     public function test_display_asset_backed_bundle_remains_noindex_when_runtime_projection_rejects_indexing(): void
@@ -752,15 +752,41 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
 
         $payload = is_array($attributes['page_payload_json'] ?? null) ? $attributes['page_payload_json'] : [];
         $pages = is_array($payload['page'] ?? null) ? $payload['page'] : $payload;
-        $componentOrder = ($attributes['asset_version'] ?? null) === 'v4.3'
-            ? CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER
-            : CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER;
+        $componentOrder = CareerDisplayAssetComponentContract::CURRENT_ORDER;
         foreach (['en', 'zh'] as $locale) {
             if (is_array($pages[$locale] ?? null)) {
                 $pages[$locale] = array_replace(
                     array_fill_keys($componentOrder, []),
                     $pages[$locale],
                 );
+                if (($pages[$locale]['career_quick_answers_block'] ?? null) !== []
+                    || ($pages[$locale]['onet_structured_fields_block'] ?? null) !== []) {
+                    continue;
+                }
+                if ($locale === 'en') {
+                    $unavailable = ['availability' => 'unavailable', 'reason_code' => 'source_locale_unavailable'];
+                    $pages[$locale]['career_quick_answers_block'] = $unavailable;
+                    $pages[$locale]['onet_structured_fields_block'] = $unavailable;
+                } else {
+                    $row = ['label' => 'label', 'value' => 'value', 'alternate_value' => null, 'secondary_value' => null];
+                    $pages[$locale]['career_quick_answers_block'] = [
+                        'availability' => 'published',
+                        'schema_version' => 'career.quick_answers.v1',
+                        'heading' => '职业速答',
+                        'items' => array_map(static fn (string $key): array => [
+                            'key' => $key,
+                            'question' => $key.' question',
+                            'answer' => $key.' answer',
+                            'table' => ['rows' => [$row]],
+                        ], ['qa3', 'qa2', 'qa1']),
+                    ];
+                    $pages[$locale]['onet_structured_fields_block'] = [
+                        'availability' => 'published',
+                        'schema_version' => 'career.onet_structured_fields.v1',
+                        'heading' => 'O*NET 结构化字段',
+                        'rows' => [$row],
+                    ];
+                }
             }
         }
         $attributes['page_payload_json'] = is_array($payload['page'] ?? null)

@@ -9,49 +9,31 @@ use PHPUnit\Framework\TestCase;
 
 final class CareerDisplayAssetComponentContractTest extends TestCase
 {
-    public function test_it_accepts_only_the_exact_24_26_and_28_component_orders(): void
+    public function test_it_accepts_only_the_exact_current_component_order(): void
     {
         self::assertTrue(CareerDisplayAssetComponentContract::supports(
-            CareerDisplayAssetComponentContract::LEGACY_V4_2_ORDER,
-        ));
-        self::assertTrue(CareerDisplayAssetComponentContract::supports(
-            CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER,
-        ));
-        self::assertTrue(CareerDisplayAssetComponentContract::supports(
-            CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER,
-        ));
-        self::assertTrue(CareerDisplayAssetComponentContract::matchesVersion(
-            CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER,
-            'v4.2',
-        ));
-        self::assertTrue(CareerDisplayAssetComponentContract::matchesVersion(
-            CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER,
-            'v4.3',
-        ));
-        self::assertFalse(CareerDisplayAssetComponentContract::matchesVersion(
-            CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER,
-            'v4.3',
+            CareerDisplayAssetComponentContract::CURRENT_ORDER,
         ));
         self::assertFalse(CareerDisplayAssetComponentContract::supports(
-            array_slice(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER, 0, 25),
+            array_slice(CareerDisplayAssetComponentContract::CURRENT_ORDER, 0, 27),
         ));
 
-        $unknown = CareerDisplayAssetComponentContract::LEGACY_V4_2_ORDER;
+        $unknown = CareerDisplayAssetComponentContract::CURRENT_ORDER;
         $unknown[5] = 'unknown_component';
         self::assertFalse(CareerDisplayAssetComponentContract::supports($unknown));
 
-        $duplicate = CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER;
+        $duplicate = CareerDisplayAssetComponentContract::CURRENT_ORDER;
         $duplicate[11] = $duplicate[10];
         self::assertFalse(CareerDisplayAssetComponentContract::supports($duplicate));
 
-        $reordered = CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER;
+        $reordered = CareerDisplayAssetComponentContract::CURRENT_ORDER;
         [$reordered[10], $reordered[11]] = [$reordered[11], $reordered[10]];
         self::assertFalse(CareerDisplayAssetComponentContract::supports($reordered));
     }
 
-    public function test_v43_requires_published_zh_and_accepts_rollback_unavailable_or_published_en_components(): void
+    public function test_current_pages_require_published_zh_and_accept_unavailable_or_published_en_components(): void
     {
-        $base = array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER, ['value' => 'verified']);
+        $base = array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_ORDER, ['value' => 'verified']);
         $base['career_quick_answers_block'] = [
             'availability' => 'published',
             'schema_version' => 'career.quick_answers.v1',
@@ -75,21 +57,21 @@ final class CareerDisplayAssetComponentContractTest extends TestCase
         $en['onet_structured_fields_block'] = $unavailable;
         $payload = ['page' => ['en' => $en, 'zh' => $base]];
 
-        self::assertTrue(CareerDisplayAssetComponentContract::hasExactPagesForVersion($payload, 'v4.3'));
-        self::assertNull(CareerDisplayAssetComponentContract::pageFailureCodeForVersion($payload, 'v4.3'));
+        self::assertTrue(CareerDisplayAssetComponentContract::hasExactCurrentPages($payload));
+        self::assertNull(CareerDisplayAssetComponentContract::pageFailureCode($payload));
 
         $databaseOrdered = $payload;
         $databaseOrdered['page']['en']['career_quick_answers_block'] = array_reverse($unavailable, true);
         $databaseOrdered['page']['en']['onet_structured_fields_block'] = array_reverse($unavailable, true);
-        self::assertTrue(CareerDisplayAssetComponentContract::hasExactPagesForVersion($databaseOrdered, 'v4.3'));
-        self::assertNull(CareerDisplayAssetComponentContract::pageFailureCodeForVersion($databaseOrdered, 'v4.3'));
+        self::assertTrue(CareerDisplayAssetComponentContract::hasExactCurrentPages($databaseOrdered));
+        self::assertNull(CareerDisplayAssetComponentContract::pageFailureCode($databaseOrdered));
 
         $malformed = $payload;
         unset($malformed['page']['zh']['career_quick_answers_block']['items'][0]['table']['rows'][0]['alternate_value']);
-        self::assertFalse(CareerDisplayAssetComponentContract::hasExactPagesForVersion($malformed, 'v4.3'));
+        self::assertFalse(CareerDisplayAssetComponentContract::hasExactCurrentPages($malformed));
         self::assertSame(
-            'CURRENT_DISPLAY_SURFACE_V43_ZH_QUICK_ANSWER_TABLE_INVALID',
-            CareerDisplayAssetComponentContract::pageFailureCodeForVersion($malformed, 'v4.3'),
+            'CURRENT_DISPLAY_SURFACE_ZH_QUICK_ANSWER_TABLE_INVALID',
+            CareerDisplayAssetComponentContract::pageFailureCode($malformed),
         );
 
         $published = $payload;
@@ -97,15 +79,15 @@ final class CareerDisplayAssetComponentContractTest extends TestCase
         $published['page']['en']['career_quick_answers_block']['heading'] = 'Career quick answers';
         $published['page']['en']['onet_structured_fields_block'] = $base['onet_structured_fields_block'];
         $published['page']['en']['onet_structured_fields_block']['heading'] = 'O*NET structured fields';
-        self::assertTrue(CareerDisplayAssetComponentContract::hasExactPagesForVersion($published, 'v4.3'));
-        self::assertNull(CareerDisplayAssetComponentContract::pageFailureCodeForVersion($published, 'v4.3'));
+        self::assertTrue(CareerDisplayAssetComponentContract::hasExactCurrentPages($published));
+        self::assertNull(CareerDisplayAssetComponentContract::pageFailureCode($published));
 
         $mixed = $published;
         $mixed['page']['en']['onet_structured_fields_block'] = $unavailable;
-        self::assertFalse(CareerDisplayAssetComponentContract::hasExactPagesForVersion($mixed, 'v4.3'));
+        self::assertFalse(CareerDisplayAssetComponentContract::hasExactCurrentPages($mixed));
         self::assertSame(
-            'CURRENT_DISPLAY_SURFACE_V43_EN_ONET_FIELDS_INVALID',
-            CareerDisplayAssetComponentContract::pageFailureCodeForVersion($mixed, 'v4.3'),
+            'CURRENT_DISPLAY_SURFACE_EN_ONET_FIELDS_INVALID',
+            CareerDisplayAssetComponentContract::pageFailureCode($mixed),
         );
     }
 

@@ -55,6 +55,7 @@ $receipt = [
     'release_sha' => $releaseSha,
     'release_name_sha256' => hash('sha256', $releaseName),
     'assets_sha256' => $assetsSha256,
+    'versionless_projection_sha256' => null,
     'operation_key' => $operationKey,
     'workflow_run_id' => ctype_digit($workflowRunId) ? (int) $workflowRunId : null,
     'workflow_run_attempt' => ctype_digit($workflowRunAttempt) ? (int) $workflowRunAttempt : null,
@@ -135,6 +136,7 @@ try {
     foreach (['package', 'authority', 'public_readback', 'manual_hold_verified', 'idempotent_noop', 'write_counts', 'state_sha256'] as $key) {
         $receipt[$key] = $result[$key];
     }
+    $receipt['versionless_projection_sha256'] = $result['package']['versionless_projection_sha256'] ?? null;
 
     if (($result['package']['source_format'] ?? null) !== 'sharded'
         || ! hash_equals(
@@ -144,6 +146,7 @@ try {
         || ($result['package']['career_count'] ?? null) !== 1046
         || ($result['package']['locale_page_count'] ?? null) !== 2092
         || ($result['package']['components_per_page'] ?? null) !== 28
+        || preg_match('/\A[0-9a-f]{64}\z/', (string) ($result['package']['versionless_projection_sha256'] ?? '')) !== 1
         || ($result['authority']['target_count'] ?? null) !== 1046
         || ($result['authority']['unique_slug_count'] ?? null) !== 1046
         || ($result['authority']['component_28_count'] ?? null) !== 1046

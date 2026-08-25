@@ -14,6 +14,7 @@ from pathlib import Path
 
 SKILL_ROOT = Path(__file__).resolve().parents[1]
 MERGER = SKILL_ROOT / "scripts/merge_career_content_candidates.php"
+EXPORTER = SKILL_ROOT / "scripts/export_versionless_current.php"
 VALIDATOR = SKILL_ROOT / "scripts/validate_content_agent_contract.py"
 SPEC = importlib.util.spec_from_file_location("career_content_agent_validator_for_merge", VALIDATOR)
 assert SPEC and SPEC.loader
@@ -36,13 +37,16 @@ class CareerContentCurrentMergerTest(unittest.TestCase):
     def setUpClass(cls) -> None:
         wanted = {cls.SLUG_A, cls.SLUG_B}
         cls.rows = {}
-        with (CURRENT / "assets.jsonl").open(encoding="utf-8") as handle:
-            for line in handle:
-                row = json.loads(line)
-                if row["canonical_slug"] in wanted:
-                    cls.rows[row["canonical_slug"]] = row
-                    if len(cls.rows) == len(wanted):
-                        break
+        with tempfile.TemporaryDirectory(prefix="career-current-versionless-") as temporary:
+            output = Path(temporary) / "rows.jsonl"
+            subprocess.run(["php", str(EXPORTER), str(output)], cwd=REPO, check=True, capture_output=True, text=True)
+            with output.open(encoding="utf-8") as handle:
+                for line in handle:
+                    row = json.loads(line)
+                    if row["canonical_slug"] in wanted:
+                        cls.rows[row["canonical_slug"]] = row
+                        if len(cls.rows) == len(wanted):
+                            break
         assert set(cls.rows) == wanted
 
     def setUp(self) -> None:
@@ -50,16 +54,8 @@ class CareerContentCurrentMergerTest(unittest.TestCase):
         self.root = Path(self.temp.name)
         self.repo = self.root / "repo"
         self.current = self.repo / "backend/content_assets/career/current"
-        self.current.mkdir(parents=True)
-        shutil.copy2(CURRENT / "manifest.json", self.current / "manifest.json")
-        for module in MODULES:
-            (self.current / module).mkdir()
-            for slug in (self.SLUG_A, self.SLUG_B):
-                index = validator.shard_index(slug)
-                source = CURRENT / module / f"shard-{index:02d}.jsonl"
-                target = self.current / module / source.name
-                if not target.exists():
-                    shutil.copy2(source, target)
+        self.current.parent.mkdir(parents=True)
+        shutil.copytree(CURRENT, self.current)
 
     def tearDown(self) -> None:
         self.temp.cleanup()

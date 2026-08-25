@@ -166,6 +166,8 @@ def _current_manifest(repo: Path | None = None) -> tuple[Path, dict[str, Any], d
     projection = {key: manifest[key] for key in ("contract_version", "modules", "shards", "registries", "coverage", "module_completeness")}
     if manifest.get("aggregate_sha256") != sha256_value(projection):
         raise ValueError("inventory_manifest_aggregate_mismatch")
+    if not isinstance(manifest.get("versionless_projection_sha256"), str) or len(manifest["versionless_projection_sha256"]) != 64:
+        raise ValueError("inventory_versionless_projection_missing")
     return current, manifest, declarations
 
 
@@ -517,7 +519,7 @@ def validate_receipt(receipt: Any, request: Any, repo_root: Path | None = None) 
         if receipt["evidence_contract_versions"] or counts["evidence_contracts_passed"] != 0 or counts["loader_cohort_pass"] or counts["loader_single_slug_pass"] or counts["evidence_deterministic_rerun_pass"] or counts["required_compiler_claim_coverage_percent"] != 0 or receipt["dimension_binding"]["adapter_rows"] != 0:
             errors.append("unexecuted_evidence_metrics_must_be_zero")
     if "dry_compile" in gate_names and gates[3]["state"] == "PASS":
-        if (counts["dry_compile_source_files"], counts["dry_compile_locale_projections"], counts["components_per_page"], counts["dry_compile_blockers"]) != (10, 2, 26, 0) or counts["candidate_rows"] != len(publishable) or receipt["dry_compile_status"] != "PASS_TEN_BLOCK_DRY_COMPILE" or not counts["dry_compile_deterministic_rerun_pass"]:
+        if (counts["dry_compile_source_files"], counts["dry_compile_locale_projections"], counts["components_per_page"], counts["dry_compile_blockers"]) != (10, 2, 28, 0) or counts["candidate_rows"] != len(publishable) or receipt["dry_compile_status"] != "PASS_TEN_BLOCK_DRY_COMPILE" or not counts["dry_compile_deterministic_rerun_pass"]:
             errors.append("dry_compile_pass_threshold_invalid")
         if receipt["artifact_hashes"]["dry_compile_candidate"] is None:
             errors.append("candidate_row_digest_missing")

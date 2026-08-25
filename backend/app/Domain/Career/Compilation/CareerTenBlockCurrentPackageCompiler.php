@@ -39,19 +39,28 @@ final class CareerTenBlockCurrentPackageCompiler
         if (array_diff($boundSlugs, $baseline['slugs']) !== []) {
             throw new CareerTenBlockCompileFailure('TEN_BLOCK_EVIDENCE_COHORT_INVALID');
         }
+        $baselineProjectionPath = tempnam(sys_get_temp_dir(), 'career-current-');
+        if (! is_string($baselineProjectionPath)
+            || file_put_contents($baselineProjectionPath, $this->versionlessRowsBytes($baseline['rows']), LOCK_EX) === false) {
+            throw new CareerTenBlockCompileFailure('TEN_BLOCK_CURRENT_BASELINE_EXPORT_FAILED');
+        }
         $compiled = [];
-        foreach ($boundSlugs as $slug) {
-            $result = $this->singleCompiler->compile(
-                $sourceRoot,
-                $slug,
-                $lookupPath,
-                rtrim($backendRoot, '/').'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH.'/assets.jsonl',
-                $evidenceRoot,
-            );
-            if ($result['row'] === null || ($result['receipt']['publication_eligible'] ?? false) !== true) {
-                throw new CareerTenBlockCompileFailure('TEN_BLOCK_REQUIRED_EVIDENCE_BLOCKED');
+        try {
+            foreach ($boundSlugs as $slug) {
+                $result = $this->singleCompiler->compile(
+                    $sourceRoot,
+                    $slug,
+                    $lookupPath,
+                    $baselineProjectionPath,
+                    $evidenceRoot,
+                );
+                if ($result['row'] === null || ($result['receipt']['publication_eligible'] ?? false) !== true) {
+                    throw new CareerTenBlockCompileFailure('TEN_BLOCK_REQUIRED_EVIDENCE_BLOCKED');
+                }
+                $compiled[$slug] = $result;
             }
-            $compiled[$slug] = $result;
+        } finally {
+            @unlink($baselineProjectionPath);
         }
         $evidenceManifestPath = rtrim($evidenceRoot, '/').'/manifest.json';
         $schemaManifestPath = rtrim($evidenceRoot, '/').'/schema-profile-manifest.json';
@@ -108,18 +117,11 @@ final class CareerTenBlockCurrentPackageCompiler
             }
             $candidateRows[$slug] = $candidate;
         }
-        $baselineVersion = data_get($baseline, 'manifest.structural_contract.asset_version');
-        if ($baselineVersion === 'v4.2'
-            && ($publicChangedLocalePages !== count($candidateRows) * 2 || $changedRows !== count($candidateRows))) {
-            throw new CareerTenBlockCompileFailure('TEN_BLOCK_V4_3_DIFF_INVALID');
-        }
         $assetsBytes = implode("\n", array_map(
             static fn (array $row): string => CareerCurrentAuthorityPackage::encodeCanonical($row),
             $candidateRows,
         ))."\n";
         $manifest = $baseline['manifest'];
-        $manifest['structural_contract']['asset_version'] = CareerCurrentAuthorityPackage::ASSET_VERSION;
-        $manifest['structural_contract']['template_version'] = CareerCurrentAuthorityPackage::ASSET_VERSION;
         $manifest['structural_contract']['component_order'] = CareerDisplayAssetComponentContract::CURRENT_ORDER;
         $manifest['ten_block_compilation'] = [
             'contract_version' => 'career.ten_block.current_package_lineage.v1',
@@ -219,6 +221,17 @@ final class CareerTenBlockCurrentPackageCompiler
                 'forbidden_structured_data_type_count' => 0,
             ],
         ];
+    }
+
+    /** @param array<string,array<string,mixed>> $rows */
+    private function versionlessRowsBytes(array $rows): string
+    {
+        ksort($rows, SORT_STRING);
+
+        return implode("\n", array_map(
+            static fn (array $row): string => CareerCurrentAuthorityPackage::encodeCanonical($row),
+            $rows,
+        ))."\n";
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
@@ -26,32 +27,7 @@ final class CareerJobListApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    private const DISPLAY_COMPONENT_ORDER = [
-        'breadcrumb',
-        'hero',
-        'fermat_decision_card',
-        'primary_cta',
-        'career_snapshot_primary_locale',
-        'career_snapshot_secondary_locale',
-        'fit_decision_checklist',
-        'riasec_fit_block',
-        'personality_fit_block',
-        'definition_block',
-        'responsibilities_block',
-        'work_context_block',
-        'market_signal_card',
-        'adjacent_career_comparison_table',
-        'ai_impact_table',
-        'career_risk_cards',
-        'contract_project_risk_block',
-        'next_steps_block',
-        'faq_block',
-        'related_next_pages',
-        'source_card',
-        'methodology_note',
-        'trust_footer',
-        'schema_anchor',
-    ];
+    private const DISPLAY_COMPONENT_ORDER = CareerDisplayAssetComponentContract::CURRENT_ORDER;
 
     protected function setUp(): void
     {
@@ -89,7 +65,7 @@ final class CareerJobListApiTest extends TestCase
                     'trust_summary',
                     'score_summary',
                     'seo_contract' => ['canonical_path', 'index_state', 'index_eligible', 'reason_codes'],
-                    'provenance_meta' => ['compiler_version', 'compile_run_id'],
+                    'provenance_meta' => ['compiler_version'],
                 ]],
             ]);
     }
@@ -685,7 +661,7 @@ final class CareerJobListApiTest extends TestCase
      */
     private function createDisplayAsset(Occupation $occupation, array $overrides = []): CareerJobDisplayAsset
     {
-        return CareerJobDisplayAsset::query()->create(array_replace([
+        $attributes = array_replace([
             'occupation_id' => $occupation->id,
             'canonical_slug' => (string) $occupation->canonical_slug,
             'surface_version' => 'display.surface.v1',
@@ -738,6 +714,35 @@ final class CareerJobListApiTest extends TestCase
             'metadata_json' => [
                 'validator_version' => 'career_asset_import_validator_v0.1',
             ],
-        ], $overrides));
+        ], $overrides);
+        $pages = (array) $attributes['page_payload_json'];
+        foreach (['en', 'zh'] as $locale) {
+            $pages[$locale] = array_replace(
+                array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_ORDER, []),
+                (array) ($pages[$locale] ?? []),
+            );
+        }
+        $unavailable = ['availability' => 'unavailable', 'reason_code' => 'source_locale_unavailable'];
+        $pages['en']['career_quick_answers_block'] = $unavailable;
+        $pages['en']['onet_structured_fields_block'] = $unavailable;
+        $row = ['label' => 'label', 'value' => 'value', 'alternate_value' => null, 'secondary_value' => null];
+        $pages['zh']['career_quick_answers_block'] = [
+            'availability' => 'published',
+            'schema_version' => 'career.quick_answers.v1',
+            'heading' => '职业速答',
+            'items' => array_map(static fn (string $key): array => [
+                'key' => $key, 'question' => $key.' question', 'answer' => $key.' answer',
+                'table' => ['rows' => [$row]],
+            ], ['qa3', 'qa2', 'qa1']),
+        ];
+        $pages['zh']['onet_structured_fields_block'] = [
+            'availability' => 'published',
+            'schema_version' => 'career.onet_structured_fields.v1',
+            'heading' => 'O*NET 结构化字段',
+            'rows' => [$row],
+        ];
+        $attributes['page_payload_json'] = $pages;
+
+        return CareerJobDisplayAsset::query()->create($attributes);
     }
 }

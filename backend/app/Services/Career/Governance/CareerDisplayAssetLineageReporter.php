@@ -26,8 +26,8 @@ final class CareerDisplayAssetLineageReporter
     {
         try {
             $asset = CareerJobDisplayAsset::query()
+                ->runtimeColumns()
                 ->where('canonical_slug', $slug)
-                ->whereIn('asset_version', ['v4.2', 'v4.3'])
                 ->latest('updated_at')
                 ->first();
         } catch (QueryException) {
@@ -52,7 +52,7 @@ final class CareerDisplayAssetLineageReporter
                 'lineage_complete' => false,
                 'blockers' => ['missing_display_asset'],
                 'rollback_target' => null,
-                'rollback_command_note' => 'No display asset row exists for this slug/version.',
+                'rollback_command_note' => 'No current display asset row exists for this slug.',
             ];
         }
 
@@ -64,9 +64,7 @@ final class CareerDisplayAssetLineageReporter
             'canonical_slug' => $slug,
             'display_asset_found' => true,
             'display_asset_id' => $asset->id,
-            'asset_version' => $asset->asset_version,
             'surface_version' => $asset->surface_version,
-            'template_version' => $asset->template_version,
             'asset_type' => $asset->asset_type,
             'status' => $asset->status,
             'lineage_status' => $blockers === [] ? 'complete' : 'incomplete',
@@ -78,10 +76,9 @@ final class CareerDisplayAssetLineageReporter
             'updated_at' => $asset->updated_at?->toISOString(),
             'rollback_target' => [
                 'canonical_slug' => $asset->canonical_slug,
-                'asset_version' => $asset->asset_version,
                 'display_asset_id' => $asset->id,
             ],
-            'rollback_command_note' => 'Rollback must be a guarded follow-up that deletes or supersedes only this display asset version; this validator is read-only.',
+            'rollback_command_note' => 'Rollback must restore the exact previous current display asset row; this validator is read-only.',
             'blockers' => $blockers,
         ];
     }
@@ -97,7 +94,6 @@ final class CareerDisplayAssetLineageReporter
             'workbook_path_or_basename' => data_get($metadata, 'workbook_basename') ?? data_get($metadata, 'workbook_path'),
             'workbook_row_number' => data_get($metadata, 'row_number'),
             'canonical_slug' => $asset->canonical_slug,
-            'asset_version' => $asset->asset_version,
             'import_command' => data_get($metadata, 'command'),
             'import_run_id' => $asset->import_run_id,
             'display_asset_id' => $asset->id,
@@ -119,7 +115,6 @@ final class CareerDisplayAssetLineageReporter
             'workbook_path_or_basename',
             'workbook_row_number',
             'canonical_slug',
-            'asset_version',
             'import_command',
             'display_asset_id',
             'mapper_version',
@@ -140,8 +135,6 @@ final class CareerDisplayAssetLineageReporter
     {
         $payload = [
             'surface_version' => $asset->surface_version,
-            'asset_version' => $asset->asset_version,
-            'template_version' => $asset->template_version,
             'component_order' => $asset->component_order_json,
             'page' => $asset->page_payload_json,
             'seo' => $asset->seo_payload_json,

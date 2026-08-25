@@ -27,7 +27,7 @@ RESEARCH_VALIDATOR = RESEARCH_SKILL / "scripts/validate_research_package.py"
 ADAPTER = RESEARCH_SKILL / "scripts/adapt_research_package_to_compiler_evidence.php"
 CURRENT_MERGER = SKILL_ROOT / "scripts/merge_career_content_candidates.php"
 SOURCE_POLICY = RESEARCH_SKILL / "references/source-policy.md"
-BASELINE_ASSETS = REPO_ROOT / "backend/content_assets/career/current/assets.jsonl"
+VERSIONLESS_CURRENT_EXPORTER = SKILL_ROOT / "scripts/export_versionless_current.php"
 BACKEND = REPO_ROOT / "backend"
 STATE_VERSION = "career.content_agent.state.v3"
 ADAPTER_VERSION = "career.research.compiler_evidence_adapter.v1"
@@ -202,6 +202,16 @@ def read_json(path: Path) -> Any:
 
 def read_jsonl(path: Path) -> list[dict[str, Any]]:
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+
+
+def versionless_baseline(root: Path) -> Path:
+    output = root / "versionless-current-rows.jsonl"
+    result = run_json(["php", str(VERSIONLESS_CURRENT_EXPORTER), str(output)], REPO_ROOT)
+    if result.get("career_count") != 1046 or not isinstance(result.get("versionless_projection_sha256"), str):
+        raise AgentError("versionless_current_export_failed")
+    if hash_file(output) != result.get("sha256"):
+        raise AgentError("versionless_current_export_hash_mismatch")
+    return output
 
 
 def atomic_json(path: Path, value: Any) -> None:
@@ -630,9 +640,9 @@ def record_editorial(root: Path, result_path: Path) -> dict[str, Any]:
         return public_status(state)
 
 
-def adapter_command(package: Path, source_root: Path, lookup: Path, control: str, target: str, output: Path, evaluation_date: str) -> list[str]:
+def adapter_command(package: Path, source_root: Path, lookup: Path, baseline: Path, control: str, target: str, output: Path, evaluation_date: str) -> list[str]:
     return ["php", str(ADAPTER), f"--research-package={package}", f"--source-root={source_root}",
-            f"--lookup={lookup}", f"--baseline-assets={BASELINE_ASSETS}", f"--control-slug={control}",
+            f"--lookup={lookup}", f"--baseline-assets={baseline}", f"--control-slug={control}",
             f"--target-slug={target}", f"--evaluation-date={evaluation_date}", f"--output-root={output}"]
 
 
@@ -727,6 +737,7 @@ def run_evidence(root: Path, package: Path, source_root: Path, lookup: Path, con
         if gate_repeat(state, "evidence_adapter", execution_hash):
             return public_status(state)
         state["input_bindings"]["compiler_inputs"] = compiler
+        baseline = versionless_baseline(root)
         adapter_roots = []
         outputs = []
         try:
@@ -738,11 +749,11 @@ def run_evidence(root: Path, package: Path, source_root: Path, lookup: Path, con
                 before = current_gate3_inputs(package, root, source_root, lookup, expected_package["validator_version"])
                 if before != (expected_package, source_now, lookup_now):
                     raise AgentError("adapter_input_toctou_drift")
-                first = run_json(adapter_command(package, source_root, lookup, control, slug, output, request["research_as_of"]), REPO_ROOT)
+                first = run_json(adapter_command(package, source_root, lookup, baseline, control, slug, output, request["research_as_of"]), REPO_ROOT)
                 if current_gate3_inputs(package, root, source_root, lookup, expected_package["validator_version"]) != before:
                     raise AgentError("adapter_input_toctou_drift")
                 first_output_lock = locked_tree(output)
-                second = run_json(adapter_command(package, source_root, lookup, control, slug, output, request["research_as_of"]), REPO_ROOT)
+                second = run_json(adapter_command(package, source_root, lookup, baseline, control, slug, output, request["research_as_of"]), REPO_ROOT)
                 if current_gate3_inputs(package, root, source_root, lookup, expected_package["validator_version"]) != before:
                     raise AgentError("adapter_input_toctou_drift")
                 second_output_lock = locked_tree(output)
@@ -783,9 +794,9 @@ def run_evidence(root: Path, package: Path, source_root: Path, lookup: Path, con
         return public_status(state)
 
 
-def compile_command(slug: str, source_root: Path, lookup: Path, evidence: Path, output: Path) -> list[str]:
+def compile_command(slug: str, source_root: Path, lookup: Path, baseline: Path, evidence: Path, output: Path) -> list[str]:
     return ["php", "artisan", "career:current-candidate-compile", slug, f"--source-root={source_root}",
-            f"--lookup={lookup}", f"--evidence={evidence}", f"--baseline-assets={BASELINE_ASSETS}",
+            f"--lookup={lookup}", f"--evidence={evidence}", f"--baseline-assets={baseline}",
             f"--output-root={output}"]
 
 
@@ -873,13 +884,14 @@ def run_compile(root: Path, source_root: Path, lookup: Path) -> dict[str, Any]:
             return public_status(state)
         outputs = []
         try:
+            baseline = versionless_baseline(root)
             for row in state["slug_results"]:
                 if row["slug"] not in state["publishable_slugs"]:
                     continue
                 slug = row["slug"]
                 output = root / f"dry-compile-{slug}"
                 output.mkdir(mode=0o700, exist_ok=True)
-                command = compile_command(slug, source_root, lookup, root / f"evidence-{slug}", output)
+                command = compile_command(slug, source_root, lookup, baseline, root / f"evidence-{slug}", output)
                 before = current_gate4_inputs(state, source_root, lookup)
                 if before != expected:
                     raise AgentError("compiler_input_toctou_drift")
@@ -893,7 +905,7 @@ def run_compile(root: Path, source_root: Path, lookup: Path) -> dict[str, Any]:
                 second_digest = hash_file(output / "candidate-row.json") if (output / "candidate-row.json").is_file() else None
                 receipt = first.get("receipt", {})
                 if (first.get("status") != "PASS_TEN_BLOCK_DRY_COMPILE" or first != second or first_digest is None or first_digest != second_digest
-                    or (receipt.get("mapped_file_count"), receipt.get("locale_count"), receipt.get("component_count")) != (10, 2, 26)
+                    or (receipt.get("mapped_file_count"), receipt.get("locale_count"), receipt.get("component_count")) != (10, 2, 28)
                     or receipt.get("blocked_fields") != []):
                     raise AgentError("dry_compile_contract_failed")
                 row.update({"dry_compile_state": "PASS", "candidate_row_digest": first_digest})
@@ -904,7 +916,7 @@ def run_compile(root: Path, source_root: Path, lookup: Path) -> dict[str, Any]:
         state["artifact_hashes"]["dry_compile_candidate"] = aggregate
         state["dry_compile_status"] = "PASS_TEN_BLOCK_DRY_COMPILE"
         state["counts"].update({"dry_compile_source_files": 10, "dry_compile_locale_projections": 2,
-            "components_per_page": 26, "dry_compile_blockers": 0, "candidate_rows": len(outputs),
+            "components_per_page": 28, "dry_compile_blockers": 0, "candidate_rows": len(outputs),
             "dry_compile_deterministic_rerun_pass": True})
         gate = {"gate": "dry_compile", "state": "PASS", "input_hash": compile_gate_input_hash(state, expected), "output_hash": aggregate}
         state["execution_input_hashes"]["dry_compile"] = execution_hash

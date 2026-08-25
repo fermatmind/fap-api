@@ -189,8 +189,6 @@ final class CareerTenBlockCompiler
         $baseline['page_payload_json']['page']['zh'] = $zh;
         $baseline['page_payload_json']['page']['en']['career_quick_answers_block'] = $structured->unavailable();
         $baseline['page_payload_json']['page']['en']['onet_structured_fields_block'] = $structured->unavailable();
-        $baseline['asset_version'] = CareerCurrentAuthorityPackage::ASSET_VERSION;
-        $baseline['template_version'] = CareerCurrentAuthorityPackage::ASSET_VERSION;
         $baseline['component_order_json'] = CareerDisplayAssetComponentContract::CURRENT_ORDER;
         $baseline['metadata_json']['structured_components_v1'] = $structured->evidenceBindings($definition);
         if (isset($claimKeys['identity.title_zh'])) {

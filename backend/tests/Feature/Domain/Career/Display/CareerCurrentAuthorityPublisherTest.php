@@ -26,7 +26,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_it_updates_in_place_deletes_historical_rows_switches_cache_and_replays_as_zero_write(): void
+    public function test_it_rebuilds_the_existing_current_row_switches_cache_and_replays_as_zero_write(): void
     {
         [$authority, $target, $old] = $this->fixture();
         $cache = new FakeCareerCurrentAuthorityCacheGateway(new CareerCurrentAuthorityPackage, $authority['rows']);
@@ -36,7 +36,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
 
         self::assertSame(1, $result['write_counts']['database_update_count']);
         self::assertSame(0, $result['write_counts']['database_insert_count']);
-        self::assertSame(2, $result['write_counts']['database_delete_count']);
+        self::assertSame(0, $result['write_counts']['database_delete_count']);
         self::assertSame(4, $result['write_counts']['cache_candidate_write_count']);
         self::assertSame(2, $result['write_counts']['cache_pointer_activation_count']);
         self::assertSame(2, $result['public_readback']['verified_locale_page_count']);
@@ -68,10 +68,10 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         }
 
         self::assertSame([], $cache->preparedSlugs);
-        self::assertDatabaseCount('career_job_display_assets', 3);
+        self::assertDatabaseCount('career_job_display_assets', 1);
     }
 
-    public function test_it_inserts_only_when_the_package_slug_has_one_occupation(): void
+    public function test_it_fails_closed_when_a_compatibility_row_is_missing(): void
     {
         [$authority] = $this->fixture();
         $occupation = Occupation::query()->create([
@@ -92,13 +92,14 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         $authority['summary']['locale_page_count'] = 4;
         $cache = new FakeCareerCurrentAuthorityCacheGateway(new CareerCurrentAuthorityPackage, $authority['rows']);
 
-        $result = $this->publisher($authority, $cache)->execute(base_path(), true);
-
-        self::assertSame(1, $result['write_counts']['database_insert_count']);
-        self::assertSame(2, CareerJobDisplayAsset::query()->count());
-        $inserted = CareerJobDisplayAsset::query()->where('canonical_slug', 'new-current-career')->sole();
-        self::assertSame((string) $occupation->id, (string) $inserted->occupation_id);
-        self::assertSame('new current title', data_get($inserted->page_payload_json, 'en.hero.title'));
+        try {
+            $this->publisher($authority, $cache)->execute(base_path(), true);
+            self::fail('Expected a missing compatibility row to fail closed.');
+        } catch (CareerCurrentAuthorityPublisherFailure $failure) {
+            self::assertSame('CURRENT_COMPATIBILITY_ROW_MISSING', $failure->safeCode);
+        }
+        self::assertSame(1, CareerJobDisplayAsset::query()->count());
+        self::assertFalse(CareerJobDisplayAsset::query()->where('canonical_slug', 'new-current-career')->exists());
     }
 
     public function test_it_rejects_any_duplicate_canonical_slug_before_database_or_cache_writes(): void
@@ -108,9 +109,9 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
             $table->dropUnique('career_job_display_assets_canonical_slug_unique');
         });
         $occupation = Occupation::query()->where('canonical_slug', 'actors')->sole();
-        CareerJobDisplayAsset::query()->create($this->row('actors', 'duplicate', [
-            'asset_version' => 'v4.2',
-            'template_version' => 'v4.2',
+        CareerJobDisplayAsset::query()->create($this->databaseRow('actors', 'duplicate', [
+            'asset_version' => 'other-compatibility-only',
+            'template_version' => 'other-compatibility-only',
             'asset_role' => 'historical_master',
             'status' => 'retired',
         ]) + ['occupation_id' => $occupation->id]);
@@ -124,7 +125,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
             self::assertSame('confirmed_zero_write', $failure->writeCommitState);
         }
         self::assertSame([], $cache->preparedSlugs);
-        self::assertDatabaseCount('career_job_display_assets', 4);
+        self::assertDatabaseCount('career_job_display_assets', 2);
     }
 
     public function test_full_scan_repairs_active_cache_drift_when_database_is_already_current(): void
@@ -137,7 +138,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
 
         $result = $publisher->execute(base_path(), true);
 
-        self::assertSame(0, $result['write_counts']['database_update_count']);
+        self::assertSame(1, $result['write_counts']['database_update_count']);
         self::assertSame(4, $result['write_counts']['cache_candidate_write_count']);
         self::assertSame(2, $result['write_counts']['cache_pointer_activation_count']);
         self::assertSame(2, $result['public_readback']['verified_locale_page_count']);
@@ -180,7 +181,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
             'search_h1_zh' => '软件开发人员',
         ]);
         CareerJobDisplayAsset::query()->create(
-            $this->row('software-developers', 'old held title') + ['occupation_id' => $occupation->id],
+            $this->databaseRow('software-developers', 'old held title') + ['occupation_id' => $occupation->id],
         );
         $authority['rows']['software-developers'] = $this->row('software-developers', 'new held title');
         $authority['slugs'][] = 'software-developers';
@@ -255,6 +256,20 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         }
     }
 
+    public function test_it_rejects_a_version_discriminator_in_a_cache_candidate(): void
+    {
+        [$authority] = $this->fixture();
+        $cache = new FakeCareerCurrentAuthorityCacheGateway(new CareerCurrentAuthorityPackage, $authority['rows'], 'prepared_version_field');
+
+        try {
+            $this->publisher($authority, $cache)->execute(base_path(), true);
+            self::fail('Expected a versioned cache candidate to fail closed.');
+        } catch (CareerCurrentAuthorityPublisherFailure $failure) {
+            self::assertSame('CURRENT_CACHE_VERSION_FIELD_FORBIDDEN', $failure->safeCode);
+            self::assertSame('rolled_back', $failure->writeCommitState);
+        }
+    }
+
     public function test_it_rejects_accountants_without_a_non_empty_boundary_notice_before_writes(): void
     {
         [$authority] = $this->fixture();
@@ -287,7 +302,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
             self::assertSame('rolled_back', $failure->writeCommitState);
         }
 
-        self::assertCount(3, CareerJobDisplayAsset::query()->get());
+        self::assertCount(1, CareerJobDisplayAsset::query()->get());
         $restored = CareerJobDisplayAsset::query()->findOrFail($old['id']);
         self::assertSame('old title', data_get($restored->page_payload_json, 'en.hero.title'));
         self::assertTrue($cache->forgotten);
@@ -335,16 +350,9 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         ]);
 
         $oldRow = $this->row('actors', 'old title');
-        $old = CareerJobDisplayAsset::query()->create($oldRow + ['occupation_id' => $occupation->id]);
-        CareerJobDisplayAsset::query()->create($this->row('historical-actors', 'historical', [
-            'asset_version' => 'v4.1',
-            'template_version' => 'v4.1',
-            'asset_role' => 'historical_master',
-            'status' => 'retired',
-        ]) + ['occupation_id' => $occupation->id]);
-        CareerJobDisplayAsset::query()->create($this->row('outside-current', 'outside') + [
-            'occupation_id' => $outsideOccupation->id,
-        ]);
+        $old = CareerJobDisplayAsset::query()->create(
+            $this->databaseRow('actors', 'old title') + ['occupation_id' => $occupation->id],
+        );
 
         $target = $this->row('actors', 'new title');
         $authority = [
@@ -357,6 +365,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
             'summary' => [
                 'assets_sha256' => str_repeat('a', 64),
                 'sharded_aggregate_sha256' => str_repeat('b', 64),
+                'versionless_projection_sha256' => str_repeat('c', 64),
                 'source_format' => 'sharded',
                 'career_count' => 1,
                 'locale_page_count' => 2,
@@ -370,7 +379,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
     /** @param array<string,mixed> $overrides @return array<string,mixed> */
     private function row(string $slug, string $title, array $overrides = []): array
     {
-        $page = array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER, ['value' => 'verified']);
+        $page = array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_ORDER, ['value' => 'verified']);
         $page['hero'] = ['title' => $title];
         $page['career_quick_answers_block'] = [
             'availability' => 'published',
@@ -403,12 +412,10 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         return array_replace([
             'canonical_slug' => $slug,
             'surface_version' => CareerCurrentAuthorityPackage::SURFACE_VERSION,
-            'asset_version' => CareerCurrentAuthorityPackage::ASSET_VERSION,
-            'template_version' => CareerCurrentAuthorityPackage::ASSET_VERSION,
             'asset_type' => CareerCurrentAuthorityPackage::ASSET_TYPE,
             'asset_role' => CareerCurrentAuthorityPackage::ASSET_ROLE,
             'status' => CareerCurrentAuthorityPackage::READY_STATUS,
-            'component_order_json' => CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER,
+            'component_order_json' => CareerDisplayAssetComponentContract::CURRENT_ORDER,
             'page_payload_json' => ['en' => $en, 'zh' => $page],
             'seo_payload_json' => ['title' => $title],
             'sources_json' => ['references' => []],
@@ -417,6 +424,15 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
             'metadata_json' => ['authority' => 'fixture'],
             'import_run_id' => null,
         ], $overrides);
+    }
+
+    /** @param array<string,mixed> $overrides @return array<string,mixed> */
+    private function databaseRow(string $slug, string $title, array $overrides = []): array
+    {
+        return $this->row($slug, $title, $overrides) + [
+            'asset_version' => 'compatibility-only',
+            'template_version' => 'compatibility-only',
+        ];
     }
 
     /** @param array<string,mixed> $authority */
@@ -490,6 +506,12 @@ final class FakeCareerCurrentAuthorityCacheGateway extends CareerCurrentAuthorit
 
     public function preparedPayload(array $entry): ?array
     {
+        if ($this->mode === 'prepared_version_field') {
+            $surface = $this->package->publicProjection($this->rows[$entry['slug']], $entry['locale']);
+            $surface['asset_version'] = 'v4.3';
+
+            return ['display_surface_v1' => $surface];
+        }
         if ($this->mode === 'prepared_content_failure') {
             $surface = $this->package->publicProjection(
                 $this->rows[$entry['slug']],

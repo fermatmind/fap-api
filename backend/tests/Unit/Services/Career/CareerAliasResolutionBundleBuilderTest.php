@@ -541,6 +541,28 @@ final class CareerAliasResolutionBundleBuilderTest extends TestCase
 
     private function createDisplayAsset(Occupation $occupation): CareerJobDisplayAsset
     {
+        $row = ['label' => 'label', 'value' => 'value', 'alternate_value' => null, 'secondary_value' => null];
+        $zh = array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_ORDER, []);
+        $zh['hero'] = ['title' => $occupation->canonical_title_zh];
+        $zh['career_quick_answers_block'] = [
+            'availability' => 'published',
+            'schema_version' => 'career.quick_answers.v1',
+            'heading' => '职业速答',
+            'items' => array_map(static fn (string $key): array => [
+                'key' => $key, 'question' => $key.' question', 'answer' => $key.' answer',
+                'table' => ['rows' => [$row]],
+            ], ['qa3', 'qa2', 'qa1']),
+        ];
+        $zh['onet_structured_fields_block'] = [
+            'availability' => 'published', 'schema_version' => 'career.onet_structured_fields.v1',
+            'heading' => 'O*NET 结构化字段', 'rows' => [$row],
+        ];
+        $en = array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_ORDER, []);
+        $en['hero'] = ['title' => $occupation->canonical_title_en];
+        $unavailable = ['availability' => 'unavailable', 'reason_code' => 'source_locale_unavailable'];
+        $en['career_quick_answers_block'] = $unavailable;
+        $en['onet_structured_fields_block'] = $unavailable;
+
         return CareerJobDisplayAsset::query()->create([
             'occupation_id' => $occupation->id,
             'canonical_slug' => (string) $occupation->canonical_slug,
@@ -550,17 +572,11 @@ final class CareerAliasResolutionBundleBuilderTest extends TestCase
             'asset_type' => 'career_job_public_display',
             'asset_role' => 'formal_pilot_master',
             'status' => 'ready_for_pilot',
-            'component_order_json' => CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER,
+            'component_order_json' => CareerDisplayAssetComponentContract::CURRENT_ORDER,
             'page_payload_json' => [
                 'page' => [
-                    'zh' => array_replace(
-                        array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER, []),
-                        ['hero' => ['title' => $occupation->canonical_title_zh]],
-                    ),
-                    'en' => array_replace(
-                        array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER, []),
-                        ['hero' => ['title' => $occupation->canonical_title_en]],
-                    ),
+                    'zh' => $zh,
+                    'en' => $en,
                 ],
             ],
             'seo_payload_json' => [],

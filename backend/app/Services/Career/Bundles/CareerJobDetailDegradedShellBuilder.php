@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
-use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 
 final class CareerJobDetailDegradedShellBuilder
@@ -132,8 +131,6 @@ final class CareerJobDetailDegradedShellBuilder
 
         return [
             'surface_version' => 'display.surface.v1',
-            'asset_version' => CareerCurrentAuthorityPackage::ASSET_VERSION,
-            'template_version' => CareerCurrentAuthorityPackage::ASSET_VERSION,
             'asset_type' => 'career_job_public_display',
             'asset_role' => 'formal_pilot_master',
             'status' => 'ready_for_pilot',

@@ -16,8 +16,6 @@ final class CareerJobDisplaySurfaceBuilder
 {
     private const SURFACE_VERSION = 'display.surface.v1';
 
-    private const SUPPORTED_ASSET_VERSIONS = ['v4.2', 'v4.3'];
-
     private const MANUAL_HOLD_SLUGS = [
         'software-developers',
     ];
@@ -166,8 +164,6 @@ final class CareerJobDisplaySurfaceBuilder
 
         $surface = [
             'surface_version' => (string) $asset->surface_version,
-            'asset_version' => (string) $asset->asset_version,
-            'template_version' => (string) $asset->template_version,
             'asset_type' => (string) $asset->asset_type,
             'asset_role' => (string) $asset->asset_role,
             'status' => (string) $asset->status,
@@ -219,21 +215,15 @@ final class CareerJobDisplaySurfaceBuilder
             if (strtolower((string) $asset->canonical_slug) !== $normalizedSlug) {
                 return 'CURRENT_DISPLAY_SURFACE_CANONICAL_SLUG_MISMATCH';
             }
-            $assetVersion = (string) $asset->asset_version;
-            if ((string) $asset->surface_version !== self::SURFACE_VERSION
-                || ! in_array($assetVersion, self::SUPPORTED_ASSET_VERSIONS, true)
-                || (string) $asset->template_version !== $assetVersion) {
+            if ((string) $asset->surface_version !== self::SURFACE_VERSION) {
                 return 'CURRENT_DISPLAY_SURFACE_VERSION_CONTRACT_FAILED';
             }
             $componentOrder = is_array($asset->component_order_json) ? array_values($asset->component_order_json) : [];
-            if (! CareerDisplayAssetComponentContract::matchesVersion($componentOrder, $assetVersion)) {
+            if (! CareerDisplayAssetComponentContract::isCurrent($componentOrder)) {
                 return 'CURRENT_DISPLAY_SURFACE_COMPONENT_ORDER_FAILED';
             }
-            if (! CareerDisplayAssetComponentContract::hasExactPagesForVersion((array) $asset->page_payload_json, $assetVersion)) {
-                return CareerDisplayAssetComponentContract::pageFailureCodeForVersion(
-                    (array) $asset->page_payload_json,
-                    $assetVersion,
-                );
+            if (! CareerDisplayAssetComponentContract::hasExactCurrentPages((array) $asset->page_payload_json)) {
+                return CareerDisplayAssetComponentContract::pageFailureCode((array) $asset->page_payload_json);
             }
             if ($this->containsProductSchema([
                 $pageContent,
@@ -304,6 +294,7 @@ final class CareerJobDisplaySurfaceBuilder
         }
 
         $assets = $occupation->displayAssets()
+            ->runtimeColumns()
             ->where('canonical_slug', $canonicalSlug)
             ->where('status', self::READY_STATUS)
             ->where('asset_type', self::ASSET_TYPE)
@@ -333,16 +324,13 @@ final class CareerJobDisplaySurfaceBuilder
             return false;
         }
 
-        $assetVersion = (string) $asset->asset_version;
-        if ((string) $asset->surface_version !== self::SURFACE_VERSION
-            || ! in_array($assetVersion, self::SUPPORTED_ASSET_VERSIONS, true)
-            || (string) $asset->template_version !== $assetVersion) {
+        if ((string) $asset->surface_version !== self::SURFACE_VERSION) {
             return false;
         }
 
         $componentOrder = is_array($asset->component_order_json) ? array_values($asset->component_order_json) : [];
-        if (! CareerDisplayAssetComponentContract::matchesVersion($componentOrder, $assetVersion)
-            || ! CareerDisplayAssetComponentContract::hasExactPagesForVersion((array) $asset->page_payload_json, $assetVersion)) {
+        if (! CareerDisplayAssetComponentContract::isCurrent($componentOrder)
+            || ! CareerDisplayAssetComponentContract::hasExactCurrentPages((array) $asset->page_payload_json)) {
             return false;
         }
 

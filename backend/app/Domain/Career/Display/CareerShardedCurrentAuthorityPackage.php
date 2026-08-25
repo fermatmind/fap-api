@@ -62,7 +62,6 @@ final class CareerShardedCurrentAuthorityPackage
     private const ROW_KEYS = [
         'asset_role',
         'asset_type',
-        'asset_version',
         'canonical_slug',
         'component_order_json',
         'implementation_contract_json',
@@ -73,7 +72,6 @@ final class CareerShardedCurrentAuthorityPackage
         'status',
         'structured_data_json',
         'surface_version',
-        'template_version',
     ];
 
     public function __construct(private readonly CareerCurrentAuthorityPackage $legacyContract) {}
@@ -145,7 +143,10 @@ final class CareerShardedCurrentAuthorityPackage
 
         ksort($records, SORT_STRING);
         $rows = [];
-        $assetLines = [];
+        $assetsHash = hash_init('sha256');
+        $versionlessHash = hash_init('sha256');
+        hash_update($versionlessHash, '[');
+        $rowIndex = 0;
         $publicContentHashes = [];
         foreach ($records as $slug => $locales) {
             $orderedLocales = [];
@@ -172,25 +173,35 @@ final class CareerShardedCurrentAuthorityPackage
             }
             $this->assertAssembledRow($row);
             $rows[$slug] = $row;
-            $assetLines[] = CareerCurrentAuthorityPackage::encodeCanonical($row);
+            $rowBytes = CareerCurrentAuthorityPackage::encodeCanonical($row);
+            hash_update($assetsHash, $rowBytes."\n");
+            hash_update($versionlessHash, ($rowIndex === 0 ? '' : ',').$rowBytes);
+            $rowIndex++;
             foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
                 $publicContentHashes[] = $this->legacyContract->publicContentHash($row, $locale);
             }
         }
 
-        $assetsBytes = implode("\n", $assetLines)."\n";
         $slugs = array_keys($rows);
         sort($publicContentHashes, SORT_STRING);
+        hash_update($versionlessHash, ']');
+        $versionlessProjectionSha256 = hash_final($versionlessHash);
+        if (! hash_equals(
+            (string) ($manifest['versionless_projection_sha256'] ?? ''),
+            $versionlessProjectionSha256,
+        )) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_VERSIONLESS_PROJECTION_MISMATCH');
+        }
 
         return [
             'manifest' => $manifest,
             'rows' => $rows,
             'slugs' => $slugs,
             'summary' => [
-                'assets_sha256' => hash('sha256', $assetsBytes),
+                'assets_sha256' => hash_final($assetsHash),
                 'career_count' => count($rows),
                 'components_per_page' => count(CareerDisplayAssetComponentContract::CURRENT_ORDER),
-                'full_asset_set_sha256' => CareerCurrentAuthorityPackage::hashValue(array_values($rows)),
+                'full_asset_set_sha256' => $versionlessProjectionSha256,
                 'locale_page_count' => CareerCurrentAuthorityPackage::EXPECTED_LOCALE_PAGES,
                 'manifest_sha256' => hash_file('sha256', $root.'/manifest.json'),
                 'numeric_rating_statement_residue_count' => 0,
@@ -198,6 +209,7 @@ final class CareerShardedCurrentAuthorityPackage
                 'sharded_aggregate_sha256' => $manifest['aggregate_sha256'],
                 'slug_set_sha256' => CareerCurrentAuthorityPackage::hashValue($slugs),
                 'source_format' => 'sharded',
+                'versionless_projection_sha256' => $versionlessProjectionSha256,
             ],
         ];
     }
@@ -220,7 +232,8 @@ final class CareerShardedCurrentAuthorityPackage
             ]
             || ! is_array($manifest['shards'] ?? null)
             || count($manifest['shards']) !== 640
-            || ! is_array($manifest['registries'] ?? null)) {
+            || ! is_array($manifest['registries'] ?? null)
+            || preg_match('/\A[0-9a-f]{64}\z/', (string) ($manifest['versionless_projection_sha256'] ?? '')) !== 1) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_SHARDED_MANIFEST_INVALID');
         }
         $projection = array_intersect_key($manifest, array_flip([
@@ -431,8 +444,6 @@ final class CareerShardedCurrentAuthorityPackage
         $keys = array_keys($row);
         sort($keys, SORT_STRING);
         if ($keys !== self::ROW_KEYS
-            || ($row['asset_version'] ?? null) !== CareerCurrentAuthorityPackage::ASSET_VERSION
-            || ($row['template_version'] ?? null) !== CareerCurrentAuthorityPackage::ASSET_VERSION
             || ($row['component_order_json'] ?? null) !== CareerDisplayAssetComponentContract::CURRENT_ORDER
             || ! CareerDisplayAssetComponentContract::hasExactCurrentPages((array) ($row['page_payload_json'] ?? []))) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_SHARDED_ASSEMBLY_INVALID');

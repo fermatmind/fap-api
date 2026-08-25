@@ -18,11 +18,11 @@ class CareerCurrentAuthorityPackageLoader
     {
         $manifest = $this->readManifest($backendRoot);
 
-        return match ($manifest['contract_version'] ?? null) {
-            CareerCurrentAuthorityPackage::CONTRACT_VERSION => $this->package->load($backendRoot),
-            CareerShardedCurrentAuthorityPackage::CONTRACT_VERSION => $this->shardedPackage->load($backendRoot, $manifest),
-            default => throw new CareerCurrentAuthorityPackageFailure('CURRENT_MANIFEST_CONTRACT_UNSUPPORTED'),
-        };
+        if (($manifest['contract_version'] ?? null) !== CareerShardedCurrentAuthorityPackage::CONTRACT_VERSION) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_SHARDED_AUTHORITY_REQUIRED');
+        }
+
+        return $this->shardedPackage->load($backendRoot, $manifest);
     }
 
     /** @return array<string,mixed> */

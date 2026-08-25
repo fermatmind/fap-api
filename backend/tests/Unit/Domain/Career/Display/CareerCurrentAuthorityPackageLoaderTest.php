@@ -20,7 +20,6 @@ final class CareerCurrentAuthorityPackageLoaderTest extends TestCase
     {
         parent::setUp();
         $this->repoRoot = dirname(__DIR__, 6);
-        require_once $this->repoRoot.'/.agents/skills/fap-api-career-canonical-builder/scripts/split_legacy_current.php';
     }
 
     public function test_installed_manifest_explicitly_selects_sharded_read_without_legacy_fallback(): void
@@ -34,22 +33,22 @@ final class CareerCurrentAuthorityPackageLoaderTest extends TestCase
         $installed = $loader->loadShardedForPublish($this->repoRoot.'/backend');
         self::assertSame('sharded', $installed['summary']['source_format']);
 
-        $candidateRoot = $this->temporaryDirectory('career-loader-candidate-');
         $fixtureBackend = $this->temporaryDirectory('career-loader-backend-');
         try {
-            (new \CareerLegacyCurrentSharder)->split(
-                $this->repoRoot,
-                $this->repoRoot.'/backend/content_assets/career/current/assets.jsonl',
-                $this->repoRoot.'/backend/content_assets/career/current/manifest.json',
-                $candidateRoot,
-            );
             $currentRoot = $fixtureBackend.'/content_assets/career/current';
             self::assertTrue(mkdir($currentRoot, 0700, true));
-            copy($candidateRoot.'/manifest.json', $currentRoot.'/manifest.json');
-            foreach (\CareerLegacyCurrentSharder::MODULES as $module) {
-                self::assertTrue(mkdir($currentRoot.'/'.$module, 0700));
-                foreach (glob($candidateRoot.'/'.$module.'/shard-*.jsonl') ?: [] as $shard) {
-                    copy($shard, $currentRoot.'/'.$module.'/'.basename($shard));
+            $installedRoot = $this->repoRoot.'/backend/content_assets/career/current';
+            $iterator = new RecursiveIteratorIterator(
+                new RecursiveDirectoryIterator($installedRoot, \FilesystemIterator::SKIP_DOTS),
+                RecursiveIteratorIterator::SELF_FIRST,
+            );
+            foreach ($iterator as $entry) {
+                $relative = substr($entry->getPathname(), strlen($installedRoot) + 1);
+                $target = $currentRoot.'/'.$relative;
+                if ($entry->isDir()) {
+                    self::assertTrue(mkdir($target, 0700));
+                } else {
+                    self::assertTrue(copy($entry->getPathname(), $target));
                 }
             }
             file_put_contents($currentRoot.'/assets.jsonl', "legacy fallback must not be read\n");
@@ -76,13 +75,12 @@ final class CareerCurrentAuthorityPackageLoaderTest extends TestCase
             $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
             $manifest['contract_version'] = 'career.unknown.v1';
             file_put_contents($manifestPath, CareerCurrentAuthorityPackage::encodePrettyCanonical($manifest));
-            $this->assertFailure('CURRENT_MANIFEST_CONTRACT_UNSUPPORTED', fn () => $loader->load($fixtureBackend));
+            $this->assertFailure('CURRENT_SHARDED_AUTHORITY_REQUIRED', fn () => $loader->load($fixtureBackend));
             $this->assertFailure(
                 'CURRENT_PUBLISH_SHARDED_AUTHORITY_REQUIRED',
                 fn () => $loader->loadShardedForPublish($fixtureBackend),
             );
         } finally {
-            $this->deleteTemporaryDirectory($candidateRoot);
             $this->deleteTemporaryDirectory($fixtureBackend);
         }
     }

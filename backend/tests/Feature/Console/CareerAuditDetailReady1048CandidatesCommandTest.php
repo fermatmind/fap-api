@@ -23,7 +23,7 @@ final class CareerAuditDetailReady1048CandidatesCommandTest extends TestCase
 {
     use RefreshDatabase;
 
-    private const DISPLAY_COMPONENT_ORDER = CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER;
+    private const DISPLAY_COMPONENT_ORDER = CareerDisplayAssetComponentContract::CURRENT_ORDER;
 
     protected function setUp(): void
     {
@@ -179,10 +179,7 @@ final class CareerAuditDetailReady1048CandidatesCommandTest extends TestCase
             'asset_role' => 'formal_pilot_master',
             'status' => 'ready_for_pilot',
             'component_order_json' => self::DISPLAY_COMPONENT_ORDER,
-            'page_payload_json' => [
-                'zh' => ['hero' => ['title' => '测试职业']],
-                'en' => ['hero' => ['title' => 'Fixture Job']],
-            ],
+            'page_payload_json' => $this->currentPages(),
             'seo_payload_json' => [],
             'sources_json' => [],
             'structured_data_json' => [],
@@ -191,5 +188,38 @@ final class CareerAuditDetailReady1048CandidatesCommandTest extends TestCase
         ]);
 
         return $occupation->refresh();
+    }
+
+    /** @return array<string,array<string,mixed>> */
+    private function currentPages(): array
+    {
+        $pages = [];
+        foreach (['en', 'zh'] as $locale) {
+            $pages[$locale] = array_fill_keys(self::DISPLAY_COMPONENT_ORDER, []);
+            $pages[$locale]['hero'] = ['title' => $locale === 'zh' ? '测试职业' : 'Fixture Job'];
+        }
+        $unavailable = ['availability' => 'unavailable', 'reason_code' => 'source_locale_unavailable'];
+        $pages['en']['career_quick_answers_block'] = $unavailable;
+        $pages['en']['onet_structured_fields_block'] = $unavailable;
+        $row = ['label' => 'label', 'value' => 'value', 'alternate_value' => null, 'secondary_value' => null];
+        $pages['zh']['career_quick_answers_block'] = [
+            'availability' => 'published',
+            'schema_version' => 'career.quick_answers.v1',
+            'heading' => '职业速答',
+            'items' => array_map(static fn (string $key): array => [
+                'key' => $key,
+                'question' => $key.' question',
+                'answer' => $key.' answer',
+                'table' => ['rows' => [$row]],
+            ], ['qa3', 'qa2', 'qa1']),
+        ];
+        $pages['zh']['onet_structured_fields_block'] = [
+            'availability' => 'published',
+            'schema_version' => 'career.onet_structured_fields.v1',
+            'heading' => 'O*NET 结构化字段',
+            'rows' => [$row],
+        ];
+
+        return $pages;
     }
 }

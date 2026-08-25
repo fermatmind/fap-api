@@ -148,6 +148,9 @@
       "maxItems": 640,
       "minItems": 640,
       "type": "array"
+    },
+    "versionless_projection_sha256": {
+      "$ref": "#/$defs/sha256"
     }
   },
   "required": [
@@ -158,7 +161,8 @@
     "registries",
     "coverage",
     "module_completeness",
-    "aggregate_sha256"
+    "aggregate_sha256",
+    "versionless_projection_sha256"
   ],
   "type": "object",
   "$defs": {

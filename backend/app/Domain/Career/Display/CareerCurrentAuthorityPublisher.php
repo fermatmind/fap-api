@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace App\Domain\Career\Display;
 
 use App\Models\CareerJobDisplayAsset;
-use App\Models\Occupation;
 use App\Services\Career\Bundles\CareerJobDisplaySurfaceBuilder;
 use App\Services\Career\Review\CareerJobDetailReaderSafeReviewProjector;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Ramsey\Uuid\Uuid;
 use RuntimeException;
 use Throwable;
 
@@ -68,7 +66,7 @@ final class CareerCurrentAuthorityPublisher
         try {
             $authority = $this->loader->loadShardedForPublish($backendRoot);
             $this->assertAccountantsBoundaryNotice($authority['rows']);
-            $plan = DB::transaction(fn (): array => $this->applyDatabasePlan($authority['rows']), 1);
+            $plan = DB::transaction(fn (): array => $this->applyDatabasePlan($authority['rows'], $fullScan), 1);
             $databaseCommitted = ($plan['write_counts']['database_update_count']
                 + $plan['write_counts']['database_insert_count']
                 + $plan['write_counts']['database_delete_count']) > 0;
@@ -152,7 +150,7 @@ final class CareerCurrentAuthorityPublisher
                 'idempotent_noop' => $noop,
                 'write_counts' => $writeCounts,
                 'state_sha256' => CareerCurrentAuthorityPackage::hashValue([
-                    'assets_sha256' => $authority['summary']['assets_sha256'],
+                    'versionless_projection_sha256' => $authority['summary']['versionless_projection_sha256'],
                     'database_sha256' => $plan['after_state_sha256'],
                     'public_readback_sha256' => $readback['aggregate_sha256'],
                 ]),
@@ -229,9 +227,9 @@ final class CareerCurrentAuthorityPublisher
      * @param  array<string,array<string,mixed>>  $targetRows
      * @return array<string,mixed>
      */
-    private function applyDatabasePlan(array $targetRows): array
+    private function applyDatabasePlan(array $targetRows, bool $forceRewrite): array
     {
-        $assets = CareerJobDisplayAsset::query()->orderBy('id')->lockForUpdate()->get();
+        $assets = CareerJobDisplayAsset::query()->runtimeColumns()->orderBy('id')->lockForUpdate()->get();
         $beforeStateSha256 = $this->snapshotModelsHash($assets);
         $bySlug = $assets->groupBy(static fn (CareerJobDisplayAsset $asset): string => strtolower(trim((string) $asset->canonical_slug)));
         if ($bySlug->contains(static fn (Collection $rows): bool => $rows->count() > 1)) {
@@ -239,7 +237,6 @@ final class CareerCurrentAuthorityPublisher
         }
         $selectedIds = [];
         $updates = [];
-        $inserts = [];
         $changedSlugs = [];
 
         foreach ($targetRows as $slug => $row) {
@@ -257,7 +254,7 @@ final class CareerCurrentAuthorityPublisher
             $asset = $formalRows->first();
             if ($asset instanceof CareerJobDisplayAsset) {
                 $selectedIds[(string) $asset->id] = true;
-                if (! $this->matchesTarget($asset, $desired)) {
+                if ($forceRewrite || ! $this->matchesTarget($asset, $desired)) {
                     $updates[] = [
                         'id' => (string) $asset->id,
                         'slug' => $slug,
@@ -270,24 +267,7 @@ final class CareerCurrentAuthorityPublisher
                 continue;
             }
 
-            $occupations = Occupation::query()->where('canonical_slug', $slug)->lockForUpdate()->get();
-            if ($occupations->count() !== 1) {
-                throw new CareerCurrentAuthorityPublisherFailure('CURRENT_INSERT_OCCUPATION_NOT_UNIQUE');
-            }
-            /** @var Occupation $occupation */
-            $occupation = $occupations->first();
-            $id = Uuid::uuid5(Uuid::NAMESPACE_URL, 'https://fermatmind.com/authority/career/current/'.$slug)->toString();
-            if (CareerJobDisplayAsset::query()->whereKey($id)->exists()) {
-                throw new CareerCurrentAuthorityPublisherFailure('CURRENT_INSERT_ID_COLLISION');
-            }
-            $selectedIds[$id] = true;
-            $inserts[] = [
-                'id' => $id,
-                'slug' => $slug,
-                'occupation_id' => (string) $occupation->id,
-                'attributes' => $desired,
-            ];
-            $changedSlugs[] = $slug;
+            throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPATIBILITY_ROW_MISSING');
         }
 
         $deletes = $assets
@@ -297,7 +277,7 @@ final class CareerCurrentAuthorityPublisher
             ->all();
 
         if ($deletes !== []) {
-            DB::table('career_job_display_assets')->whereIn('id', array_column($deletes, 'id'))->delete();
+            throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPATIBILITY_ROW_UNEXPECTED');
         }
         foreach ($updates as $update) {
             $affected = DB::table('career_job_display_assets')->where('id', $update['id'])->update(
@@ -307,29 +287,20 @@ final class CareerCurrentAuthorityPublisher
                 throw new CareerCurrentAuthorityPublisherFailure('CURRENT_DATABASE_UPDATE_FAILED');
             }
         }
-        foreach ($inserts as $insert) {
-            CareerJobDisplayAsset::query()->create($insert['attributes'] + [
-                'id' => $insert['id'],
-                'occupation_id' => $insert['occupation_id'],
-                'canonical_slug' => $insert['slug'],
-                'import_run_id' => null,
-            ]);
-        }
-
         $afterStateSha256 = $this->assertDatabaseReadback($targetRows, true);
         sort($changedSlugs, SORT_STRING);
 
         return [
             'changed_slugs' => array_values(array_unique($changedSlugs)),
             'updates' => $updates,
-            'inserts' => $inserts,
+            'inserts' => [],
             'deletes' => $deletes,
             'before_state_sha256' => $beforeStateSha256,
             'after_state_sha256' => $afterStateSha256,
             'write_counts' => [
                 'database_update_count' => count($updates),
-                'database_insert_count' => count($inserts),
-                'database_delete_count' => count($deletes),
+                'database_insert_count' => 0,
+                'database_delete_count' => 0,
             ],
         ];
     }
@@ -337,7 +308,7 @@ final class CareerCurrentAuthorityPublisher
     /** @param array<string,array<string,mixed>> $targetRows */
     private function assertDatabaseReadback(array $targetRows, bool $lockForUpdate = false): string
     {
-        $query = CareerJobDisplayAsset::query()->orderBy('id');
+        $query = CareerJobDisplayAsset::query()->runtimeColumns()->orderBy('id');
         if ($lockForUpdate) {
             $query->lockForUpdate();
         }
@@ -405,6 +376,9 @@ final class CareerCurrentAuthorityPublisher
     /** @param array<string,mixed>|null $payload @param array<string,mixed> $row */
     private function cachedPayloadMismatchCode(?array $payload, array $row, string $locale): ?string
     {
+        if (is_array($payload) && $this->containsVersionDiscriminator($payload)) {
+            return 'CURRENT_CACHE_VERSION_FIELD_FORBIDDEN';
+        }
         $surface = is_array($payload) ? data_get($payload, 'display_surface_v1') : null;
         if (! is_array($surface)) {
             return 'CURRENT_CACHE_CONTENT_MISMATCH';
@@ -426,8 +400,6 @@ final class CareerCurrentAuthorityPublisher
                     )) {
                     return match ($field) {
                         'surface_version' => 'CURRENT_CACHE_SURFACE_VERSION_MISMATCH',
-                        'asset_version' => 'CURRENT_CACHE_ASSET_VERSION_MISMATCH',
-                        'template_version' => 'CURRENT_CACHE_TEMPLATE_VERSION_MISMATCH',
                         'available_locales' => 'CURRENT_CACHE_AVAILABLE_LOCALES_MISMATCH',
                         'page' => $this->pageMismatchCode((array) $expected[$field], (array) ($actual[$field] ?? [])),
                         'component_order' => 'CURRENT_CACHE_COMPONENT_ORDER_MISMATCH',
@@ -444,6 +416,21 @@ final class CareerCurrentAuthorityPublisher
         } catch (CareerCurrentAuthorityPackageFailure) {
             return 'CURRENT_CACHE_CONTENT_MISMATCH';
         }
+    }
+
+    /** @param array<mixed> $value */
+    private function containsVersionDiscriminator(array $value): bool
+    {
+        foreach ($value as $key => $item) {
+            if ($key === 'asset_version' || $key === 'template_version') {
+                return true;
+            }
+            if (is_array($item) && $this->containsVersionDiscriminator($item)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /** @param array<string,mixed> $expected @param array<string,mixed> $actual */
@@ -633,8 +620,6 @@ final class CareerCurrentAuthorityPublisher
             'occupation_id' => (string) $asset->occupation_id,
             'canonical_slug' => (string) $asset->canonical_slug,
             'surface_version' => (string) $asset->surface_version,
-            'asset_version' => (string) $asset->asset_version,
-            'template_version' => (string) $asset->template_version,
             'asset_type' => (string) $asset->asset_type,
             'asset_role' => (string) $asset->asset_role,
             'status' => (string) $asset->status,
@@ -686,14 +671,9 @@ final class CareerCurrentAuthorityPublisher
     private function restoreDatabase(array $plan): void
     {
         DB::transaction(function () use ($plan): void {
-            $current = CareerJobDisplayAsset::query()->orderBy('id')->lockForUpdate()->get();
+            $current = CareerJobDisplayAsset::query()->runtimeColumns()->orderBy('id')->lockForUpdate()->get();
             if (! hash_equals($plan['after_state_sha256'], $this->snapshotModelsHash($current))) {
                 throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPENSATION_STATE_DRIFT');
-            }
-            foreach ($plan['inserts'] as $insert) {
-                if (CareerJobDisplayAsset::query()->whereKey($insert['id'])->delete() !== 1) {
-                    throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPENSATION_INSERT_DELETE_FAILED');
-                }
             }
             foreach ($plan['updates'] as $update) {
                 $before = $update['before'];
@@ -703,10 +683,7 @@ final class CareerCurrentAuthorityPublisher
                     throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPENSATION_UPDATE_FAILED');
                 }
             }
-            foreach ($plan['deletes'] as $deleted) {
-                DB::table('career_job_display_assets')->insert($this->databaseValues($deleted));
-            }
-            $restored = CareerJobDisplayAsset::query()->orderBy('id')->lockForUpdate()->get();
+            $restored = CareerJobDisplayAsset::query()->runtimeColumns()->orderBy('id')->lockForUpdate()->get();
             if (! hash_equals($plan['before_state_sha256'], $this->snapshotModelsHash($restored))) {
                 throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPENSATION_READBACK_FAILED');
             }

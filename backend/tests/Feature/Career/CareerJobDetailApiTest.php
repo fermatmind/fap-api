@@ -28,7 +28,7 @@ final class CareerJobDetailApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    private const DISPLAY_COMPONENT_ORDER = CareerDisplayAssetComponentContract::LEGACY_V4_2_ORDER;
+    private const DISPLAY_COMPONENT_ORDER = CareerDisplayAssetComponentContract::CURRENT_ORDER;
 
     protected function setUp(): void
     {

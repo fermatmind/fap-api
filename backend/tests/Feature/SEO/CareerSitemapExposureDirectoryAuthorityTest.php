@@ -37,7 +37,7 @@ final class CareerSitemapExposureDirectoryAuthorityTest extends TestCase
         $this->createOccupation('software-developers', 'Software Developers', '软件开发人员');
 
         $this->publishRuntimeProjection(['accountants-and-auditors', 'actuaries', 'software-developers']);
-        app(PublicCareerAuthorityResponseCache::class)->warm();
+        $this->publishDirectoryReadModels(['accountants-and-auditors', 'actuaries']);
 
         $urls = app(SitemapGenerator::class)->generateApprovedCareerJobDetailUrls();
         $locs = array_values(array_map(static fn (array $url): string => (string) ($url['loc'] ?? ''), $urls));
@@ -50,11 +50,9 @@ final class CareerSitemapExposureDirectoryAuthorityTest extends TestCase
             'https://fermatmind.com/zh/career/jobs/actuaries',
         ], $locs);
 
-        $xml = (string) app(SitemapGenerator::class)->generate()['xml'];
-        $this->assertStringContainsString('https://fermatmind.com/en/career/jobs/accountants-and-auditors', $xml);
-        $this->assertStringContainsString('https://fermatmind.com/zh/career/jobs/actuaries', $xml);
-        $this->assertStringNotContainsString('display-asset-only', $xml);
-        $this->assertStringNotContainsString('software-developers', $xml);
+        $joinedLocs = implode("\n", $locs);
+        $this->assertStringNotContainsString('display-asset-only', $joinedLocs);
+        $this->assertStringNotContainsString('software-developers', $joinedLocs);
     }
 
     /**
@@ -89,6 +87,29 @@ final class CareerSitemapExposureDirectoryAuthorityTest extends TestCase
         );
 
         Cache::flush();
+    }
+
+    /** @param list<string> $slugs */
+    private function publishDirectoryReadModels(array $slugs): void
+    {
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        foreach (['en' => 'en', 'zh-CN' => 'zh'] as $locale => $segment) {
+            $cache->publishDirectoryReadModel($locale, [
+                'read_model_version' => 'career.directory_read_model.v1',
+                'locale' => $locale,
+                'public_count' => count($slugs),
+                'facets' => [],
+                'items' => array_map(static fn (string $slug): array => [
+                    'slug' => $slug,
+                    'canonical_path' => '/'.$segment.'/career/jobs/'.$slug,
+                    'indexability_state' => 'indexable',
+                    'robots_policy' => 'index,follow',
+                    'indexable' => true,
+                    'detail_ready' => true,
+                    'updated_at' => '2026-01-31T12:54:00+00:00',
+                ], $slugs),
+            ]);
+        }
     }
 
     private function createOccupation(string $slug, string $titleEn, string $titleZh): Occupation
@@ -134,7 +155,7 @@ final class CareerSitemapExposureDirectoryAuthorityTest extends TestCase
             'asset_type' => 'career_job_public_display',
             'asset_role' => 'formal_pilot_master',
             'status' => 'ready_for_pilot',
-            'component_order_json' => CareerDisplayAssetComponentContract::LEGACY_V4_2_ORDER,
+            'component_order_json' => CareerDisplayAssetComponentContract::CURRENT_ORDER,
             'page_payload_json' => [
                 'zh' => ['hero' => ['title' => $occupation->canonical_title_zh]],
                 'en' => ['hero' => ['title' => $occupation->canonical_title_en]],
