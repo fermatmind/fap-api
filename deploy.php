@@ -920,6 +920,70 @@ BASH);
     });
 });
 
+task('seo:url-truth-reconciliation-receipt', function () {
+    within('{{release_path}}/backend', function (): void {
+        run(<<<'BASH'
+set -euo pipefail
+set +e
+{{bin/php}} -r 'require "vendor/autoload.php"; $app = require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); exit(config("seo_intel.enabled") ? 0 : 42);'
+seo_intel_status="$?"
+set -e
+if [ "$seo_intel_status" -ne 0 ] && [ "$seo_intel_status" -ne 42 ]; then
+  exit 41
+fi
+probe_args=(--no-http)
+if [ "$seo_intel_status" -eq 0 ]; then
+  probe_args=(--limit=10 --concurrency=4 --timeout=10 --retries=1)
+fi
+snapshot="$({{bin/php}} artisan seo-intel:url-truth-reconcile-snapshot "${probe_args[@]}" --json --no-interaction --no-ansi)"
+printf '%s\n' "$snapshot"
+printf '%s' "$snapshot" | SEO_INTEL_STATUS="$seo_intel_status" {{bin/php}} -r '
+$payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
+$counts = $payload["counts"] ?? [];
+$sources = $payload["source_state"] ?? [];
+$boundaries = $payload["boundaries"] ?? [];
+$ok = ($payload["schema_version"] ?? null) === "seo-platform-url-truth-reconciliation.v1"
+    && ($boundaries["backend_cms_authority_only"] ?? null) === true
+    && ($boundaries["consumers_create_authority"] ?? null) === false
+    && ($boundaries["database_write"] ?? null) === false
+    && ($boundaries["cms_write"] ?? null) === false
+    && ($boundaries["search_submission_allowed"] ?? null) === false
+    && ($boundaries["read_only_gsc"] ?? null) === true
+    && ($boundaries["raw_url_emitted"] ?? null) === false
+    && ($boundaries["response_body_emitted"] ?? null) === false
+    && is_int($counts["private_negative_set"] ?? null)
+    && $counts["private_negative_set"] > 0;
+if ((int) getenv("SEO_INTEL_STATUS") === 42) {
+    $ok = $ok
+        && ($sources["url_truth"] ?? null) === "measurement_hold"
+        && ($sources["entity_bindings"] ?? null) === "measurement_hold"
+        && ($sources["live_http"] ?? null) === "measurement_hold"
+        && array_key_exists("url_truth_total", $counts)
+        && $counts["url_truth_total"] === null;
+} else {
+    $live = $payload["live_http"] ?? [];
+    $ok = $ok
+        && ($sources["authority"] ?? null) === "available"
+        && ($sources["url_truth"] ?? null) === "available"
+        && ($sources["entity_bindings"] ?? null) === "available"
+        && ($sources["live_http"] ?? null) === "available"
+        && is_int($counts["authority_total"] ?? null)
+        && is_int($counts["effective_public"] ?? null)
+        && is_int($counts["url_truth_total"] ?? null)
+        && ($live["bounded"] ?? null) === true
+        && ($live["requested_count"] ?? 0) <= 10
+        && ($live["concurrency"] ?? 0) <= 4
+        && ($live["timeout_seconds"] ?? 0) <= 10
+        && ($live["max_retries"] ?? 0) <= 1
+        && ($live["raw_url_emitted"] ?? null) === false
+        && ($live["response_body_emitted"] ?? null) === false;
+}
+exit($ok ? 0 : 1);
+' || exit 42
+BASH);
+    });
+});
+
 task('artisan:migrate-schema-only', function () {
     $migration = deploySchemaOnlyMigration();
     $migrationPath = 'database/migrations/'.$migration;
@@ -2507,6 +2571,7 @@ after('deploy:symlink', 'queue:reload-workers');
 after('deploy:symlink', 'healthcheck:public');
 after('healthcheck:public', 'healthcheck:sitemap-source');
 after('healthcheck:sitemap-source', 'healthcheck:public-dns');
+after('healthcheck:public-dns', 'seo:url-truth-reconciliation-receipt');
 after('deploy:symlink', 'healthcheck:auth-guest-contract');
 after('deploy:symlink', 'healthcheck:public-static-media-assets');
 after('deploy:symlink', 'healthcheck:scale-lookup');

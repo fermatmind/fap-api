@@ -125,6 +125,7 @@ final class SeoPlatform05DynamicUrlTruthSnapshotTest extends TestCase
     public function live_probe_is_bounded_and_returns_a_sanitized_resume_cursor(): void
     {
         config(['seo_intel.public_canonical_host' => 'https://fermatmind.com']);
+        config(['app.public_api_url' => 'https://api.fermatmind.com']);
         $records = [
             $this->record('https://fermatmind.com/en/articles/alpha', 'en', 'alpha'),
             $this->record('https://fermatmind.com/en/articles/bravo', 'en', 'bravo'),
@@ -160,6 +161,21 @@ final class SeoPlatform05DynamicUrlTruthSnapshotTest extends TestCase
         $this->assertFalse((bool) data_get($probe, 'live_http.response_body_emitted', true));
         $this->assertCount(3, $probe['consumer_urls']['public_api'] ?? []);
         $this->assertCount(3, $probe['consumer_urls']['sitemap'] ?? []);
+        Http::assertSent(static fn (Request $request): bool => $request->url() === 'https://api.fermatmind.com/api/v0.5/seo/sitemap-source');
+    }
+
+    #[Test]
+    public function deploy_receipt_runs_after_public_dns_and_preserves_read_only_boundaries(): void
+    {
+        $deploy = (string) file_get_contents(dirname(__DIR__, 4).'/deploy.php');
+
+        $this->assertStringContainsString("task('seo:url-truth-reconciliation-receipt'", $deploy);
+        $this->assertStringContainsString("after('healthcheck:public-dns', 'seo:url-truth-reconciliation-receipt');", $deploy);
+        $this->assertStringContainsString('seo-intel:url-truth-reconcile-snapshot', $deploy);
+        $this->assertStringContainsString('$boundaries["search_submission_allowed"] ?? null) === false', $deploy);
+        $this->assertStringContainsString('$sources["live_http"] ?? null) === "measurement_hold"', $deploy);
+        $this->assertStringContainsString('$live["requested_count"] ?? 0) <= 10', $deploy);
+        $this->assertStringNotContainsString('request-indexing', $deploy);
     }
 
     private function record(

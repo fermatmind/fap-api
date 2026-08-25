@@ -28,6 +28,7 @@ final class BoundedPublicUrlEvidenceProbe
         $timeoutSeconds = max(1, min($timeoutSeconds, 15));
         $maxRetries = max(0, min($maxRetries, 2));
         $base = rtrim((string) config('seo_intel.public_canonical_host', 'https://fermatmind.com'), '/');
+        $apiBase = rtrim((string) config('app.public_api_url', 'https://api.fermatmind.com'), '/');
 
         $effective = [];
         $counterparts = [];
@@ -48,7 +49,7 @@ final class BoundedPublicUrlEvidenceProbe
         $batch = array_slice($effective, 0, $limit, true);
 
         $surfaceUrls = [
-            'public_api' => $base.'/api/v0.5/seo/sitemap-source',
+            'public_api' => $apiBase.'/api/v0.5/seo/sitemap-source',
             'sitemap' => $base.'/sitemap.xml',
             'llms' => $base.'/llms.txt',
             'llms_full' => $base.'/llms-full.txt',
