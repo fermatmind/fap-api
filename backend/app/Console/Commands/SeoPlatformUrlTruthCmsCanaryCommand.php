@@ -10,6 +10,7 @@ use App\Services\SeoIntel\Sources\CurrentPublicUrlAuthoritySource;
 use App\Services\SeoIntel\UrlTruth\EffectivePublicUrlEvaluator;
 use App\Services\SeoIntel\UrlTruthInventoryRecord;
 use Illuminate\Console\Command;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
@@ -104,6 +105,18 @@ final class SeoPlatformUrlTruthCmsCanaryCommand extends Command
                 'url_truth_readback' => false,
                 'boundaries' => ['search_submission_allowed' => false, 'raw_error_output' => false],
             ];
+            if ($exception instanceof QueryException) {
+                $receipt['database_error'] = [
+                    'sqlstate' => preg_match('/^[A-Z0-9]{5}$/', (string) ($exception->errorInfo[0] ?? '')) === 1
+                        ? (string) $exception->errorInfo[0]
+                        : 'unknown',
+                    'driver_code' => is_numeric($exception->errorInfo[1] ?? null)
+                        ? (int) $exception->errorInfo[1]
+                        : null,
+                    'sql_emitted' => false,
+                    'bindings_emitted' => false,
+                ];
+            }
         }
 
         $this->line((string) json_encode($receipt, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
