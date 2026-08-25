@@ -105853,8 +105853,11 @@
     "base": "main",
     "branch": "codex/ops-content-nav-01",
     "title": "refactor(ops): reduce content navigation to eight entries",
-    "status": "local_validation_passed",
+    "status": "pr_open",
     "depends_on": [],
+    "commit_sha": "6823b189e171d1cc0e6322c4d43a87a760557316",
+    "pr_number": 3783,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3783",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -105895,6 +105898,11 @@
         "at": "2026-08-26T06:48:24+08:00",
         "status": "local_validation_passed",
         "note": "The exact eight-entry bilingual order and all nine hidden-entry compatibility paths passed focused tests and route inspection. Scoped Pint, manifest/state parsing, exact allowlist, and diff checks passed; no CMS, database, cache, Search, staging, or production action occurred."
+      },
+      {
+        "at": "2026-08-26T06:50:00+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #3783 from codex/ops-content-nav-01 at validated implementation commit 6823b189e171d1cc0e6322c4d43a87a760557316. Required checks and merge review are pending."
       }
     ]
   },
