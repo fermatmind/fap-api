@@ -24,6 +24,8 @@ use App\Filament\Ops\Resources\CareerGuideResource;
 use App\Filament\Ops\Resources\CareerJobResource;
 use App\Filament\Ops\Resources\ContentPackReleaseResource;
 use App\Filament\Ops\Resources\ContentPackVersionResource;
+use App\Filament\Ops\Resources\InterpretationGuideResource;
+use App\Filament\Ops\Resources\SupportArticleResource;
 use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Models\AdminUser;
 use App\Models\Article;
@@ -673,6 +675,42 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->assertSame(__('ops.group.content_control_plane'), ContentPackVersionResource::getNavigationGroup());
         $this->assertSame(__('ops.group.content_control_plane'), ContentPackReleaseResource::getNavigationGroup());
         $this->assertFalse(Route::has('filament.ops.resources.content-releases.index'));
+    }
+
+    public function test_content_workspace_exposes_dormant_content_types_without_navigation_registration(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
+        $session = $this->opsSession((int) $admin->id);
+        $selectedOrgId = (int) $session['ops_org_id'];
+
+        session($session);
+        $this->setOpsContext($selectedOrgId, $admin, '/ops/content-workspace', 'GET');
+
+        $workspace = Livewire::test(ContentWorkspacePage::class);
+        $cards = collect($workspace->get('optionalContentCards'))->keyBy('title');
+
+        $this->assertSame(0, $cards->get('Interpretation Guides')['count']);
+        $this->assertSame(InterpretationGuideResource::getUrl(), $cards->get('Interpretation Guides')['index_url']);
+        $this->assertSame(InterpretationGuideResource::getUrl('create'), $cards->get('Interpretation Guides')['create_url']);
+        $this->assertTrue($cards->get('Interpretation Guides')['can_create']);
+        $this->assertSame(0, $cards->get('Support Articles')['count']);
+        $this->assertSame(SupportArticleResource::getUrl(), $cards->get('Support Articles')['index_url']);
+        $this->assertSame(SupportArticleResource::getUrl('create'), $cards->get('Support Articles')['create_url']);
+        $this->assertTrue($cards->get('Support Articles')['can_create']);
+        $this->assertFalse(InterpretationGuideResource::shouldRegisterNavigation());
+        $this->assertFalse(SupportArticleResource::shouldRegisterNavigation());
+        $workspace
+            ->assertSee('On-demand content types')
+            ->assertSee('Not enabled yet')
+            ->assertSee('Create First Record');
+
+        app()->setLocale('zh_CN');
+        Livewire::test(ContentWorkspacePage::class)
+            ->assertSee('按需启用的内容类型')
+            ->assertSee('尚未启用')
+            ->assertSee('创建第一条记录');
     }
 
     public function test_content_pack_release_resource_uses_locale_aware_page_labels(): void

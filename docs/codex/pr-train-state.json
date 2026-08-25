@@ -221,7 +221,9 @@
     "branch": "codex/api-ad-01-rewarded-unlock",
     "title": "API-AD-01: add residual-risk rewarded-ad report unlock",
     "depends_on": ["API-UNLOCK-01"],
-    "status": "local_validation_passed",
+    "status": "pr_open",
+    "pr": 3787,
+    "head_sha": "180fdaa532137657f98b4b2b455eaf79feb5276f",
     "commit_sha": "46a5b82b851d9ecda568151387a82421cb970c6b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3469",
     "checks": {
@@ -105960,8 +105962,8 @@
         "evidence": "Exact-SHA CI run 32909426040 passed all classifier-selected jobs and emitted its immutable validation receipt for merge SHA 3447f5e290ee65f3e8e138c81679531aba8749c2."
       },
       "deployment": {
-        "status": "in_progress",
-        "evidence": "Automatic deploy run 32909810990 bound the successful exact-SHA CI receipt; staging deployment and smoke are in progress. No workflow was manually dispatched."
+        "status": "passed",
+        "evidence": "Automatic deploy run 32909810990 passed exact-SHA receipt binding, staging deployment/smoke, production activation/smoke, and LKG safety for 3447f5e290ee65f3e8e138c81679531aba8749c2. No workflow was manually dispatched."
       }
     },
     "production_write_execution": false,
@@ -106069,11 +106071,13 @@
     "base": "main",
     "branch": "codex/ops-personality-desktop-04",
     "title": "feat(ops): link desktop templates from personality content",
-    "status": "pr_open",
+    "status": "merged",
     "depends_on": ["OPS-CONTENT-WORKSPACE-03"],
     "commit_sha": "bd33ad9dc2064d7245d600ee1a8d71faf49da05f",
     "pr_number": 3786,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3786",
+    "merge_commit_sha": "657b9246c87cf82cb4975142d5b5b61ff247b9bf",
+    "merged_at": "2026-08-26T07:30:55+08:00",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -106090,6 +106094,14 @@
       "scope": {
         "status": "passed",
         "evidence": "Runtime changes are limited to personality-context actions, public A/T variant filtering, empty/create context, bilingual copy, and tests. Models, validation, publish state, public APIs, and the legacy URL remain independent and unchanged."
+      },
+      "github_ci": {
+        "status": "passed",
+        "evidence": "Exact-SHA CI run 32911107385 passed every classifier-selected job, including the previously failing verify-mbti-legacy path, and emitted its immutable validation receipt for merge SHA 657b9246c87cf82cb4975142d5b5b61ff247b9bf."
+      },
+      "deployment": {
+        "status": "pending_automatic_start",
+        "evidence": "The exact-SHA CI receipt succeeded; no automatic deploy run is visible yet for 657b9246c87cf82cb4975142d5b5b61ff247b9bf. No workflow was manually dispatched."
       }
     },
     "production_write_execution": false,
@@ -106111,19 +106123,67 @@
         "note": "Personality list/edit actions, profile-filtered A/T template rows, context-limited create options, explicit empty state, legacy URL, permissions, bilingual copy, navigation, and syntax/format checks passed. No content or publication state was written."
       },
       {
-        "at": "2026-08-26T07:31:00+08:00",
+        "at": "2026-08-26T07:30:35+08:00",
         "status": "pr_open",
         "note": "Opened PR #3786 from codex/ops-personality-desktop-04 at validated implementation commit bd33ad9dc2064d7245d600ee1a8d71faf49da05f. Required checks and merge review are pending."
+      },
+      {
+        "at": "2026-08-26T07:30:55+08:00",
+        "status": "merged",
+        "note": "PR #3786 was squash-merged as 657b9246c87cf82cb4975142d5b5b61ff247b9bf after mergeability, review, and required-check state were verified. Exact-SHA CI has confirmed the T3 legacy-test correction and is completing remaining selected jobs. The remote task branch and isolated T4 worktree were removed."
       }
     ]
   },
   "OPS-CONTENT-DORMANT-05": {
     "id": "OPS-CONTENT-DORMANT-05",
     "repo": "fap-api",
+    "base": "main",
     "branch": "codex/ops-content-dormant-05",
-    "status": "registered",
+    "title": "feat(ops): expose dormant content types contextually",
+    "status": "local_validation_passed",
     "depends_on": ["OPS-PERSONALITY-DESKTOP-04"],
-    "production_write_execution": false
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The operator explicitly authorized T5 as the fifth item of the sequential Ops content-navigation train."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "T4 merged as exact main SHA 657b9246c87cf82cb4975142d5b5b61ff247b9bf before T5 implementation began."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "The zero-record contextual path passed 2 tests / 31 assertions; hidden-navigation and direct-route compatibility passed 3 tests / 168 assertions; scoped Pint, PHP syntax, six list/create/edit routes, bilingual rendering, and diff checks passed."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "The change adds only a Content workspace on-demand section backed by read-only org_id=0 counts and existing permission-gated links. Support articles and interpretation guides remain independent hidden resources; APIs, review states, models, and publication are unchanged."
+      }
+    },
+    "production_write_execution": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "search_channel_action": false,
+    "transitions": [
+      {
+        "at": "2026-08-26T07:31:30+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started T5 only after T4 merged. Scope is the workspace context for dormant support/interpretation resources; no CMS, database, cache, Search, staging, or production action occurred."
+      },
+      {
+        "at": "2026-08-26T07:34:15+08:00",
+        "status": "local_validation_passed",
+        "note": "Zero-record English/Chinese empty context, first-record links, original permissions, hidden navigation, and all six legacy resource routes passed focused checks. No content or publication state was written."
+      },
+      {
+        "at": "2026-08-26T07:39:48+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #3787 from codex/ops-content-dormant-05 at validated implementation commit 180fdaa532137657f98b4b2b455eaf79feb5276f. Required-check and merge review are pending."
+      }
+    ]
   },
   "OPS-SCALE-V2-MANAGEMENT-06": {
     "id": "OPS-SCALE-V2-MANAGEMENT-06",

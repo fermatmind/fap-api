@@ -9,6 +9,8 @@ use App\Filament\Ops\Resources\ArticleResource;
 use App\Filament\Ops\Resources\ArticleTagResource;
 use App\Filament\Ops\Resources\CareerGuideResource;
 use App\Filament\Ops\Resources\CareerJobResource;
+use App\Filament\Ops\Resources\InterpretationGuideResource;
+use App\Filament\Ops\Resources\SupportArticleResource;
 use App\Filament\Ops\Support\ContentAccess;
 use App\Services\Ops\SeoContentScopeViewModel;
 use Filament\Pages\Page;
@@ -34,6 +36,9 @@ class ContentWorkspacePage extends Page
 
     /** @var list<array<string, mixed>> */
     public array $dataCards = [];
+
+    /** @var list<array<string, mixed>> */
+    public array $optionalContentCards = [];
 
     /** @var list<array<string, mixed>> */
     public array $snapshotFields = [];
@@ -114,6 +119,25 @@ class ContentWorkspacePage extends Page
             ),
         ];
 
+        $this->optionalContentCards = [
+            $this->optionalContentCard(
+                __('ops.custom_pages.content_workspace.cards.interpretation_guides'),
+                __('ops.custom_pages.content_workspace.cards.interpretation_guides_desc'),
+                $metrics['interpretation_guides'],
+                InterpretationGuideResource::getUrl(),
+                InterpretationGuideResource::getUrl('create'),
+                InterpretationGuideResource::canCreate(),
+            ),
+            $this->optionalContentCard(
+                __('ops.custom_pages.content_workspace.cards.support_articles'),
+                __('ops.custom_pages.content_workspace.cards.support_articles_desc'),
+                $metrics['support_articles'],
+                SupportArticleResource::getUrl(),
+                SupportArticleResource::getUrl('create'),
+                SupportArticleResource::canCreate(),
+            ),
+        ];
+
         $this->permissionFields = [
             [
                 'label' => __('ops.custom_pages.content_workspace.permissions.content_read'),
@@ -179,6 +203,28 @@ class ContentWorkspacePage extends Page
             'index_url' => $indexUrl,
             'create_url' => $createUrl,
             'can_write' => ContentAccess::canWrite(),
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    private function optionalContentCard(
+        string $title,
+        string $description,
+        int $count,
+        string $indexUrl,
+        string $createUrl,
+        bool $canCreate,
+    ): array {
+        return [
+            'title' => $title,
+            'description' => $description,
+            'count' => $count,
+            'meta' => $count === 0
+                ? __('ops.custom_pages.content_workspace.cards.not_enabled')
+                : __('ops.custom_pages.content_workspace.cards.record_count', ['count' => $count]),
+            'index_url' => $indexUrl,
+            'create_url' => $createUrl,
+            'can_create' => $canCreate,
         ];
     }
 }
