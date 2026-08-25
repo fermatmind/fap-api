@@ -1733,7 +1733,18 @@ return [
                 'label' => '自动化工作区',
                 'experiments' => 'Experiment Ledger',
                 'agents' => 'Agent Council',
+                'scheduler' => '调度与验收',
                 'operations' => '现有运营',
+            ],
+            'scheduler_workspace' => [
+                'eyebrow' => '定时证据', 'title' => '调度与验收',
+                'description' => '查看真实 scheduled receipt、失败、延迟和受约束的 Activation Gate。',
+                'cadence_label' => '调度周期', 'cadences' => ['daily' => '每日', 'weekly' => '每周', 'monthly' => '每月'],
+                'receipts' => ['eyebrow' => 'Receipt 真值', 'title' => '最近 scheduled receipt', 'description' => '手工命令绝不视为 scheduled 证据。', 'sources' => ['gsc' => 'GSC 只读同步', 'funnel' => '公开漏斗刷新']],
+                'fields' => ['status' => '状态', 'completed_at' => '完成时间', 'latency' => '新鲜度 / 延迟'],
+                'gate' => ['eyebrow' => '28 天证明', 'title' => 'Post-#12 Activation Gate', 'description' => '每个必需运行时都必须发布经过清洗且绑定生产的 scheduled 合同。', 'fields' => ['detector' => 'Detector', 'url_truth' => 'URL Truth', 'content_lifecycle' => '内容生命周期', 'agent_runs' => 'Agent run', 'notifications' => '通知 / 失败', 'next_run' => '下次运行', 'acceptance_28d' => '连续 28 天验收', 'post_12_gate' => 'Activation Gate']],
+                'hold_title' => '调度验收处于 MEASUREMENT_HOLD',
+                'hold_description' => '#12 尚未提供完整的每日、每周、每月、通知、运行时与连续 28 天验收合同。已有 GSC 与漏斗 scheduled receipt 仅作为局部证据。',
             ],
             'agent_council' => [
                 'eyebrow' => '受约束自动化',

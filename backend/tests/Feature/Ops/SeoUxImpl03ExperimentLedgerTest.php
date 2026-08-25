@@ -17,7 +17,7 @@ final class SeoUxImpl03ExperimentLedgerTest extends TestCase
             ['overview', 'performance', 'technical', 'url-truth', 'content', 'automation'],
             SeoOperationsPage::workspaceKeys(),
         );
-        $this->assertSame(['experiments', 'agents', 'operations'], SeoOperationsPage::automationSectionKeys());
+        $this->assertSame(['experiments', 'agents', 'scheduler', 'operations'], SeoOperationsPage::automationSectionKeys());
 
         $source = (string) file_get_contents(app_path('Filament/Ops/Pages/SeoOperationsPage.php'));
         $this->assertStringContainsString("#[Url(as: 'automation-view', history: true)]", $source);

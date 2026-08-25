@@ -32,7 +32,7 @@ final class SeoUxImpl06AgentCouncilTest extends TestCase
         $page = (string) file_get_contents(resource_path('views/filament/ops/pages/seo-operations.blade.php'));
         $workspace = (string) file_get_contents(resource_path('views/filament/ops/components/ops-agent-council-workspace.blade.php'));
 
-        $this->assertSame(['experiments', 'agents', 'operations'], SeoOperationsPage::automationSectionKeys());
+        $this->assertSame(['experiments', 'agents', 'scheduler', 'operations'], SeoOperationsPage::automationSectionKeys());
         $this->assertStringContainsString('ops-agent-council-workspace', $page);
         $this->assertStringContainsString('data-read-only-gsc', $workspace);
         $this->assertStringContainsString('data-search-submission-allowed', $workspace);

@@ -1733,7 +1733,18 @@ return [
                 'label' => 'Automation workspace',
                 'experiments' => 'Experiment Ledger',
                 'agents' => 'Agent Council',
+                'scheduler' => 'Scheduler & acceptance',
                 'operations' => 'Existing operations',
+            ],
+            'scheduler_workspace' => [
+                'eyebrow' => 'Scheduled evidence', 'title' => 'Scheduler and acceptance',
+                'description' => 'Observe true scheduled receipts, failures, latency, and the bounded activation gate.',
+                'cadence_label' => 'Scheduler cadence', 'cadences' => ['daily' => 'Daily', 'weekly' => 'Weekly', 'monthly' => 'Monthly'],
+                'receipts' => ['eyebrow' => 'Receipt truth', 'title' => 'Latest scheduled receipts', 'description' => 'Manual commands are never accepted as scheduled evidence.', 'sources' => ['gsc' => 'GSC read-only sync', 'funnel' => 'Public funnel refresh']],
+                'fields' => ['status' => 'Status', 'completed_at' => 'Completed at', 'latency' => 'Age / latency'],
+                'gate' => ['eyebrow' => '28-day proof', 'title' => 'Post-#12 Activation Gate', 'description' => 'Every required runtime must publish one sanitized, production-bound scheduled contract.', 'fields' => ['detector' => 'Detector', 'url_truth' => 'URL Truth', 'content_lifecycle' => 'Content lifecycle', 'agent_runs' => 'Agent runs', 'notifications' => 'Notifications / failure', 'next_run' => 'Next run', 'acceptance_28d' => '28-day acceptance', 'post_12_gate' => 'Activation Gate']],
+                'hold_title' => 'Scheduler acceptance is on MEASUREMENT_HOLD',
+                'hold_description' => '#12 does not yet provide the complete daily, weekly, monthly, notification, runtime, and 28-day acceptance contract. Available GSC and funnel scheduled receipts remain partial evidence only.',
             ],
             'agent_council' => [
                 'eyebrow' => 'Constrained automation',

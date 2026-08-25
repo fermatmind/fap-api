@@ -6065,4 +6065,19 @@
             grid-template-columns: 1fr;
         }
     }
+
+    .fi-body.fi-panel-ops .ops-scheduler-workspace { display:grid; gap:1rem; padding:1.25rem; border:1px solid var(--ops-border-default); border-radius:var(--ops-radius-card); background:var(--ops-bg-surface); box-shadow:var(--ops-shadow-surface); }
+    .fi-body.fi-panel-ops .ops-scheduler-workspace__cadence { display:grid; grid-template-columns:repeat(3,1fr); gap:.75rem; }
+    .fi-body.fi-panel-ops .ops-scheduler-workspace__cadence div { display:flex; justify-content:space-between; gap:.75rem; padding:.9rem 1rem; border:1px solid var(--ops-border-default); border-radius:var(--ops-radius-input); background:var(--ops-bg-surface-subtle); }
+    .fi-body.fi-panel-ops .ops-scheduler-workspace__layout { display:grid; grid-template-columns:minmax(0,1.4fr) minmax(18rem,.7fr); gap:1rem; }
+    .fi-body.fi-panel-ops .ops-scheduler-workspace__layout > * { padding:1rem; border:1px solid var(--ops-border-default); border-radius:var(--ops-radius-card); background:var(--ops-bg-surface-subtle); }
+    .fi-body.fi-panel-ops .ops-scheduler-workspace h3 { margin-top:.35rem; font-size:1rem; font-weight:700; }
+    .fi-body.fi-panel-ops .ops-scheduler-workspace__layout p { margin-top:.35rem; color:var(--ops-text-secondary); }
+    .fi-body.fi-panel-ops .ops-scheduler-workspace__receipts { display:grid; grid-template-columns:repeat(2,1fr); gap:.75rem; margin-top:1rem; }
+    .fi-body.fi-panel-ops .ops-scheduler-workspace__receipts article { padding:.9rem; border:1px solid var(--ops-border-default); border-radius:var(--ops-radius-input); background:var(--ops-bg-surface); }
+    .fi-body.fi-panel-ops .ops-scheduler-workspace dl { display:grid; gap:.45rem; margin-top:.75rem; }
+    .fi-body.fi-panel-ops .ops-scheduler-workspace dl div { display:flex; justify-content:space-between; gap:.75rem; border-bottom:1px solid var(--ops-border-default); }
+    .fi-body.fi-panel-ops .ops-scheduler-workspace dd { color:var(--ops-text-tertiary); font-family:var(--ops-font-mono); }
+    @media(max-width:900px){.fi-body.fi-panel-ops .ops-scheduler-workspace__layout{grid-template-columns:1fr}.fi-body.fi-panel-ops .ops-scheduler-workspace__cadence{grid-template-columns:1fr}}
+    @media(max-width:620px){.fi-body.fi-panel-ops .ops-scheduler-workspace{padding:1rem}.fi-body.fi-panel-ops .ops-scheduler-workspace__receipts{grid-template-columns:1fr}}
 }

@@ -235,6 +235,10 @@
             <x-filament-ops::ops-agent-council-workspace />
         @endif
 
+        @if ($activeWorkspace === 'automation' && $activeAutomationSection === 'scheduler')
+            <x-filament-ops::ops-scheduler-workspace :scheduler="(array) data_get($platformReadModels, 'overview.scheduler', [])" />
+        @endif
+
         @if ($activeWorkspace === 'performance')
             <x-filament-ops::ops-section
                 :title="__('ops.custom_pages.seo_operations.performance.title')"

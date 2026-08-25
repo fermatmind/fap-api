@@ -795,9 +795,8 @@ final class SeoOperationsPageTest extends TestCase
         foreach (['state', 'source', 'observed_at', 'updated_at', 'unavailable_reason'] as $field) {
             $this->assertStringContainsString("'{$field}'", $service);
         }
-        foreach (['canonical_url_hash', 'query_hash', 'evidence_hash', 'session_id_hash'] as $forbidden) {
-            $this->assertStringContainsString("'{$forbidden}'", $service);
-        }
+        $this->assertStringContainsString("str_contains(\$normalized, 'hash')", $service);
+        $this->assertStringContainsString("str_ends_with(\$normalized, '_sha')", $service);
         $this->assertStringContainsString('global_search_submission_disabled', $service);
         $this->assertStringContainsString("'not_implemented'", $service);
         $this->assertStringContainsString("'measurement_hold'", $service);

@@ -157,8 +157,11 @@ final class SeoOperationsReadService
     /** @param array<string,mixed> $payload @return array<string,mixed> */
     private function sanitize(array $payload): array
     {
-        foreach (['canonical_url_hash', 'query_hash', 'evidence_hash', 'evidence_fingerprint', 'session_id_hash'] as $forbiddenKey) {
-            unset($payload[$forbiddenKey]);
+        foreach (array_keys($payload) as $key) {
+            $normalized = strtolower((string) $key);
+            if (str_contains($normalized, 'hash') || str_ends_with($normalized, '_sha')) {
+                unset($payload[$key]);
+            }
         }
 
         foreach ($payload as $key => $value) {
