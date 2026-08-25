@@ -187,6 +187,10 @@ final class CareerCurrentAuthorityPackage
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_MANIFEST_INVALID');
         }
         $contractVersion = is_array($manifest) ? ($manifest['contract_version'] ?? null) : null;
+        if ($contractVersion === CareerShardedCurrentAuthorityPackage::CONTRACT_VERSION
+            && ($manifest['authority_path'] ?? null) !== 'backend/'.self::RELATIVE_PATH) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_MANIFEST_INVALID');
+        }
         $sha256 = $contractVersion === CareerShardedCurrentAuthorityPackage::CONTRACT_VERSION
             ? ($manifest['aggregate_sha256'] ?? null)
             : (is_array($manifest) ? self::value($manifest, 'files.0.sha256') : null);

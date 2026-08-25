@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Domain\Career\Display;
 
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
+use App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageLoader;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Display\CareerShardedCurrentAuthorityPackage;
@@ -12,6 +13,32 @@ use PHPUnit\Framework\TestCase;
 
 final class CareerCurrentAuthorityPackageTest extends TestCase
 {
+    public function test_operation_binding_rejects_a_sharded_manifest_outside_the_current_authority_path(): void
+    {
+        $backendRoot = sys_get_temp_dir().'/career-current-binding-'.bin2hex(random_bytes(8));
+        $authorityRoot = $backendRoot.'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH;
+        self::assertTrue(mkdir($authorityRoot, 0755, true));
+        file_put_contents($authorityRoot.'/manifest.json', json_encode([
+            'contract_version' => CareerShardedCurrentAuthorityPackage::CONTRACT_VERSION,
+            'authority_path' => 'backend/content_assets/career/candidate',
+            'aggregate_sha256' => str_repeat('a', 64),
+        ], JSON_THROW_ON_ERROR));
+
+        try {
+            CareerCurrentAuthorityPackage::declaredAssetsSha256($backendRoot);
+            self::fail('An out-of-path sharded manifest must not bind a publish operation.');
+        } catch (CareerCurrentAuthorityPackageFailure $failure) {
+            self::assertSame('CURRENT_MANIFEST_INVALID', $failure->safeCode);
+        } finally {
+            unlink($authorityRoot.'/manifest.json');
+            rmdir($authorityRoot);
+            rmdir(dirname($authorityRoot));
+            rmdir(dirname($authorityRoot, 2));
+            rmdir(dirname($authorityRoot, 3));
+            rmdir($backendRoot);
+        }
+    }
+
     public function test_it_validates_the_complete_current_authority_and_locked_provenance(): void
     {
         ini_set('memory_limit', '2048M');
