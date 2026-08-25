@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Resources\ArticleTagResource\Pages;
 
 use App\Filament\Ops\Resources\ArticleTagResource;
-use App\Models\ArticleTag;
+use App\Services\Ops\SeoContentScopeViewModel;
 use Filament\Resources\Pages\EditRecord;
 
 class EditArticleTag extends EditRecord
@@ -18,9 +18,7 @@ class EditArticleTag extends EditRecord
      */
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        /** @var ArticleTag $record */
-        $record = $this->getRecord();
-        $data['org_id'] = (int) $record->org_id;
+        $data['org_id'] = SeoContentScopeViewModel::GLOBAL_ORG_ID;
 
         return $data;
     }

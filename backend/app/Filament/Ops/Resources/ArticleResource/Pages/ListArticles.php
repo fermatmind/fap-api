@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Resources\ArticleResource\Pages;
 
+use App\Filament\Ops\Resources\ArticleCategoryResource;
 use App\Filament\Ops\Resources\ArticleResource;
+use App\Filament\Ops\Resources\ArticleTagResource;
 use App\Filament\Ops\Resources\Pages\Concerns\HasSharedListEmptyState;
 use App\Models\Article;
 use App\Support\SchemaBaseline;
@@ -58,6 +60,18 @@ class ListArticles extends ListRecords
             Actions\CreateAction::make()
                 ->label(__('ops.resources.articles.actions.create'))
                 ->icon('heroicon-o-plus'),
+            Actions\Action::make('manageCategories')
+                ->label(__('ops.resources.articles.actions.manage_categories'))
+                ->url(ArticleCategoryResource::getUrl())
+                ->icon('heroicon-o-folder')
+                ->color('gray')
+                ->visible(fn (): bool => ArticleCategoryResource::canViewAny()),
+            Actions\Action::make('manageTags')
+                ->label(__('ops.resources.articles.actions.manage_tags'))
+                ->url(ArticleTagResource::getUrl())
+                ->icon('heroicon-o-tag')
+                ->color('gray')
+                ->visible(fn (): bool => ArticleTagResource::canViewAny()),
         ];
     }
 
