@@ -47,4 +47,12 @@ final class SeoUxImpl07SchedulerAcceptanceTest extends TestCase
             $this->assertStringContainsString('scheduled', strtolower($copy['receipts']['description']));
         }
     }
+
+    public function test_scheduler_workspace_renders_with_missing_receipts(): void
+    {
+        $html = view('filament.ops.components.ops-scheduler-workspace', ['scheduler' => []])->render();
+
+        $this->assertStringContainsString('MEASUREMENT_HOLD', $html);
+        $this->assertStringContainsString('data-read-only-gsc="true"', $html);
+    }
 }
