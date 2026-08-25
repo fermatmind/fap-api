@@ -106069,8 +106069,11 @@
     "base": "main",
     "branch": "codex/ops-personality-desktop-04",
     "title": "feat(ops): link desktop templates from personality content",
-    "status": "local_validation_passed",
+    "status": "pr_open",
     "depends_on": ["OPS-CONTENT-WORKSPACE-03"],
+    "commit_sha": "bd33ad9dc2064d7245d600ee1a8d71faf49da05f",
+    "pr_number": 3786,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3786",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -106106,6 +106109,11 @@
         "at": "2026-08-26T07:27:41+08:00",
         "status": "local_validation_passed",
         "note": "Personality list/edit actions, profile-filtered A/T template rows, context-limited create options, explicit empty state, legacy URL, permissions, bilingual copy, navigation, and syntax/format checks passed. No content or publication state was written."
+      },
+      {
+        "at": "2026-08-26T07:31:00+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #3786 from codex/ops-personality-desktop-04 at validated implementation commit bd33ad9dc2064d7245d600ee1a8d71faf49da05f. Required checks and merge review are pending."
       }
     ]
   },
