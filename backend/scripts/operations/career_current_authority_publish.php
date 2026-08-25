@@ -136,7 +136,12 @@ try {
         $receipt[$key] = $result[$key];
     }
 
-    if (($result['package']['career_count'] ?? null) !== 1046
+    if (($result['package']['source_format'] ?? null) !== 'sharded'
+        || ! hash_equals(
+            $assetsSha256,
+            (string) ($result['package']['sharded_aggregate_sha256'] ?? ''),
+        )
+        || ($result['package']['career_count'] ?? null) !== 1046
         || ($result['package']['locale_page_count'] ?? null) !== 2092
         || ($result['package']['components_per_page'] ?? null) !== 28
         || ($result['authority']['target_count'] ?? null) !== 1046

@@ -52,6 +52,25 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         self::assertSame($old['id'], $target['id']);
     }
 
+    public function test_it_rejects_a_non_sharded_authority_before_database_or_cache_writes(): void
+    {
+        [$authority] = $this->fixture();
+        $authority['manifest']['contract_version'] = CareerCurrentAuthorityPackage::CONTRACT_VERSION;
+        $authority['summary']['source_format'] = 'legacy';
+        $cache = new FakeCareerCurrentAuthorityCacheGateway(new CareerCurrentAuthorityPackage, $authority['rows']);
+
+        try {
+            $this->publisher($authority, $cache)->execute(base_path(), true);
+            self::fail('The production publisher must reject a legacy Current authority.');
+        } catch (CareerCurrentAuthorityPublisherFailure $failure) {
+            self::assertSame('CURRENT_PUBLISH_SHARDED_AUTHORITY_REQUIRED', $failure->safeCode);
+            self::assertSame('confirmed_zero_write', $failure->writeCommitState);
+        }
+
+        self::assertSame([], $cache->preparedSlugs);
+        self::assertDatabaseCount('career_job_display_assets', 3);
+    }
+
     public function test_it_inserts_only_when_the_package_slug_has_one_occupation(): void
     {
         [$authority] = $this->fixture();
@@ -329,10 +348,16 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
 
         $target = $this->row('actors', 'new title');
         $authority = [
+            'manifest' => [
+                'contract_version' => 'career.sharded_current.manifest.v1',
+                'aggregate_sha256' => str_repeat('b', 64),
+            ],
             'rows' => ['actors' => $target],
             'slugs' => ['actors'],
             'summary' => [
                 'assets_sha256' => str_repeat('a', 64),
+                'sharded_aggregate_sha256' => str_repeat('b', 64),
+                'source_format' => 'sharded',
                 'career_count' => 1,
                 'locale_page_count' => 2,
                 'components_per_page' => 28,
@@ -404,6 +429,17 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
 
             public function load(string $backendRoot): array
             {
+                return $this->authority;
+            }
+
+            public function loadShardedForPublish(string $backendRoot): array
+            {
+                if (($this->authority['manifest']['contract_version'] ?? null) !== 'career.sharded_current.manifest.v1') {
+                    throw new \App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure(
+                        'CURRENT_PUBLISH_SHARDED_AUTHORITY_REQUIRED',
+                    );
+                }
+
                 return $this->authority;
             }
         };

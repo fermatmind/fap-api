@@ -59,7 +59,6 @@ final class CareerCurrentAuthorityPublisher
     /** @return array<string,mixed> */
     public function execute(string $backendRoot, bool $fullScan = false): array
     {
-        $authority = $this->loader->load($backendRoot);
         $databaseCommitted = false;
         $pointersActivated = false;
         $prepared = [];
@@ -67,6 +66,7 @@ final class CareerCurrentAuthorityPublisher
         $plan = null;
 
         try {
+            $authority = $this->loader->loadShardedForPublish($backendRoot);
             $this->assertAccountantsBoundaryNotice($authority['rows']);
             $plan = DB::transaction(fn (): array => $this->applyDatabasePlan($authority['rows']), 1);
             $databaseCommitted = ($plan['write_counts']['database_update_count']

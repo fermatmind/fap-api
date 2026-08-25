@@ -31,7 +31,7 @@ final class CareerCurrentAuthorityPackageLoaderTest extends TestCase
             $legacyPackage,
             new CareerShardedCurrentAuthorityPackage($legacyPackage),
         );
-        $installed = $loader->load($this->repoRoot.'/backend');
+        $installed = $loader->loadShardedForPublish($this->repoRoot.'/backend');
         self::assertSame('sharded', $installed['summary']['source_format']);
 
         $candidateRoot = $this->temporaryDirectory('career-loader-candidate-');
@@ -54,7 +54,7 @@ final class CareerCurrentAuthorityPackageLoaderTest extends TestCase
             }
             file_put_contents($currentRoot.'/assets.jsonl', "legacy fallback must not be read\n");
 
-            $sharded = $loader->load($fixtureBackend);
+            $sharded = $loader->loadShardedForPublish($fixtureBackend);
             self::assertSame('sharded', $sharded['summary']['source_format']);
             self::assertSame(1046, $sharded['summary']['career_count']);
             self::assertSame(2092, $sharded['summary']['locale_page_count']);
@@ -77,6 +77,10 @@ final class CareerCurrentAuthorityPackageLoaderTest extends TestCase
             $manifest['contract_version'] = 'career.unknown.v1';
             file_put_contents($manifestPath, CareerCurrentAuthorityPackage::encodePrettyCanonical($manifest));
             $this->assertFailure('CURRENT_MANIFEST_CONTRACT_UNSUPPORTED', fn () => $loader->load($fixtureBackend));
+            $this->assertFailure(
+                'CURRENT_PUBLISH_SHARDED_AUTHORITY_REQUIRED',
+                fn () => $loader->loadShardedForPublish($fixtureBackend),
+            );
         } finally {
             $this->deleteTemporaryDirectory($candidateRoot);
             $this->deleteTemporaryDirectory($fixtureBackend);

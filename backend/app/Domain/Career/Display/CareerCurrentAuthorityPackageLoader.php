@@ -16,6 +16,37 @@ class CareerCurrentAuthorityPackageLoader
     /** @return array<string,mixed> */
     public function load(string $backendRoot): array
     {
+        $manifest = $this->readManifest($backendRoot);
+
+        return match ($manifest['contract_version'] ?? null) {
+            CareerCurrentAuthorityPackage::CONTRACT_VERSION => $this->package->load($backendRoot),
+            CareerShardedCurrentAuthorityPackage::CONTRACT_VERSION => $this->shardedPackage->load($backendRoot, $manifest),
+            default => throw new CareerCurrentAuthorityPackageFailure('CURRENT_MANIFEST_CONTRACT_UNSUPPORTED'),
+        };
+    }
+
+    /** @return array<string,mixed> */
+    public function loadShardedForPublish(string $backendRoot): array
+    {
+        $manifest = $this->readManifest($backendRoot);
+        if (($manifest['contract_version'] ?? null) !== CareerShardedCurrentAuthorityPackage::CONTRACT_VERSION) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_PUBLISH_SHARDED_AUTHORITY_REQUIRED');
+        }
+        $authority = $this->shardedPackage->load($backendRoot, $manifest);
+        if (($authority['summary']['source_format'] ?? null) !== 'sharded'
+            || ! hash_equals(
+                (string) ($manifest['aggregate_sha256'] ?? ''),
+                (string) ($authority['summary']['sharded_aggregate_sha256'] ?? ''),
+            )) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_PUBLISH_SHARDED_AUTHORITY_INVALID');
+        }
+
+        return $authority;
+    }
+
+    /** @return array<string,mixed> */
+    private function readManifest(string $backendRoot): array
+    {
         $manifestPath = rtrim($backendRoot, '/').'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH.'/manifest.json';
         if (! is_file($manifestPath) || is_link($manifestPath)) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_PACKAGE_FILE_MISSING');
@@ -29,10 +60,6 @@ class CareerCurrentAuthorityPackageLoader
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_MANIFEST_INVALID');
         }
 
-        return match ($manifest['contract_version'] ?? null) {
-            CareerCurrentAuthorityPackage::CONTRACT_VERSION => $this->package->load($backendRoot),
-            CareerShardedCurrentAuthorityPackage::CONTRACT_VERSION => $this->shardedPackage->load($backendRoot, $manifest),
-            default => throw new CareerCurrentAuthorityPackageFailure('CURRENT_MANIFEST_CONTRACT_UNSUPPORTED'),
-        };
+        return $manifest;
     }
 }
