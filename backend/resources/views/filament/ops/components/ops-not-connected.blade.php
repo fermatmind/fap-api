@@ -4,7 +4,9 @@
     <span class="ops-not-connected__signal" aria-hidden="true"></span>
     <div>
         <strong>{{ $title }}</strong>
-        <p>{{ $description }}</p>
+        @if (filled($description))
+            <p>{{ $description }}</p>
+        @endif
         @if ($source)<small>{{ $source }}</small>@endif
     </div>
 </div>

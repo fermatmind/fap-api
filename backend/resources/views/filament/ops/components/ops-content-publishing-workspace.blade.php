@@ -23,7 +23,6 @@
         <div>
             <span class="ops-shell-eyebrow">{{ __($copy.'.eyebrow') }}</span>
             <h2>{{ __($copy.'.title') }}</h2>
-            <p>{{ __($copy.'.description') }}</p>
         </div>
         <span class="ops-tag">#10 · {{ __('ops.custom_pages.seo_operations.states.production_unproven.label') }}</span>
     </header>
@@ -36,7 +35,6 @@
     >
         <div>
             <strong>{{ __($copy.'.authority.title') }}</strong>
-            <small>{{ __($copy.'.authority.description') }}</small>
         </div>
         <div class="ops-content-publishing__authority-links">
             @foreach ($snapshot['authority_types'] as $type)
@@ -64,7 +62,6 @@
                 <div>
                     <span class="ops-shell-eyebrow">{{ __($copy.'.editor.eyebrow') }}</span>
                     <h3 id="content-structure-title">{{ __($copy.'.editor.title') }}</h3>
-                    <p>{{ __($copy.'.editor.description') }}</p>
                 </div>
             </div>
             <div class="ops-content-publishing__groups">
@@ -92,7 +89,6 @@
         <aside class="ops-content-publishing__preview" aria-labelledby="content-preview-title">
             <span class="ops-shell-eyebrow">{{ __($copy.'.preview.eyebrow') }}</span>
             <h3 id="content-preview-title">{{ __($copy.'.preview.title') }}</h3>
-            <p>{{ __($copy.'.preview.description') }}</p>
             <div class="ops-content-publishing__devices" aria-label="{{ __($copy.'.preview.devices_label') }}">
                 @foreach ($snapshot['preview_devices'] as $device)
                     <span aria-disabled="true">{{ __($copy.'.preview.devices.'.$device) }}</span>
@@ -101,7 +97,7 @@
             <x-filament-ops::ops-state-message
                 :state="SeoOperationsUiState::UNAVAILABLE"
                 :title="__('ops.custom_pages.seo_operations.states.unavailable.label')"
-                :description="__($copy.'.preview.hold')"
+                :description="''"
             />
         </aside>
     </div>
@@ -110,7 +106,6 @@
         <div>
             <span class="ops-shell-eyebrow">{{ __($copy.'.release.eyebrow') }}</span>
             <h3 id="content-release-title">{{ __($copy.'.release.title') }}</h3>
-            <p>{{ __($copy.'.release.description') }}</p>
         </div>
         <ol>
             @foreach ($snapshot['lifecycle'] as $stage)
@@ -132,8 +127,7 @@
         <x-filament-ops::ops-state-message
             :state="$snapshot['state']"
             :title="__($copy.'.hold_title')"
-            :description="__($copy.'.hold_description')"
+            :description="''"
         />
-        <p class="ops-control-hint">{{ __($copy.'.release.lastmod_rule') }}</p>
     </footer>
 </div>

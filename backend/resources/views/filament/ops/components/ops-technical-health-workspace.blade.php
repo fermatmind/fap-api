@@ -23,7 +23,6 @@
                 <div>
                     <span class="ops-shell-eyebrow">{{ __($copy.'.reliability.eyebrow') }}</span>
                     <h2 id="technical-reliability-title">{{ __($copy.'.reliability.title') }}</h2>
-                    <p>{{ __($copy.'.reliability.description') }}</p>
                 </div>
                 <span class="ops-tag">24h</span>
             </div>
@@ -39,7 +38,6 @@
                 <div>
                     <span class="ops-shell-eyebrow">{{ __($copy.'.clusters.eyebrow') }}</span>
                     <h2 id="technical-clusters-title">{{ __($copy.'.clusters.title') }}</h2>
-                    <p>{{ __($copy.'.clusters.description') }}</p>
                 </div>
             </div>
             <div class="ops-technical-health__cluster-head" aria-hidden="true">
@@ -50,7 +48,7 @@
             <x-filament-ops::ops-state-message
                 :state="$snapshot['state']"
                 :title="__($copy.'.clusters.hold_title')"
-                :description="__($copy.'.clusters.hold_description')"
+                :description="''"
             />
         </section>
 
@@ -59,7 +57,6 @@
                 <div>
                     <span class="ops-shell-eyebrow">{{ __($copy.'.evidence.eyebrow') }}</span>
                     <h2 id="technical-evidence-title">{{ __($copy.'.evidence.title') }}</h2>
-                    <p>{{ __($copy.'.evidence.description') }}</p>
                 </div>
             </div>
             <ol class="ops-technical-health__evidence-chain">
@@ -80,13 +77,12 @@
                 <div>
                     <span class="ops-shell-eyebrow">{{ __($copy.'.samples.eyebrow') }}</span>
                     <h2 id="technical-samples-title">{{ __($copy.'.samples.title') }}</h2>
-                    <p>{{ __($copy.'.samples.description') }}</p>
                 </div>
             </div>
             <x-filament-ops::ops-state-message
                 :state="SeoOperationsUiState::UNAVAILABLE"
                 :title="__('ops.custom_pages.seo_operations.states.unavailable.label')"
-                :description="__($copy.'.samples.hold')"
+                :description="''"
             />
         </section>
     </div>

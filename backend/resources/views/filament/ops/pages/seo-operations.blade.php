@@ -47,11 +47,6 @@
         data-display-preset="{{ $displayPreset }}"
     >
         <header class="ops-seo-page-header">
-            <div class="ops-seo-page-header__copy">
-                <span class="ops-shell-eyebrow">{{ __('ops.custom_pages.seo_operations.eyebrow') }}</span>
-                <h1>{{ __('ops.custom_pages.seo_operations.title') }}</h1>
-                <p>{{ __('ops.custom_pages.seo_operations.description') }}</p>
-            </div>
             <div class="ops-seo-page-header__actions">
                 <x-filament::button color="gray" type="button" wire:click="exportReport">
                     {{ __('ops.custom_pages.seo_operations.export_report') }}
@@ -180,7 +175,6 @@
             @endphp
             <x-filament-ops::ops-section
                 :title="__('ops.custom_pages.seo_operations.platform.title')"
-                :description="__('ops.custom_pages.seo_operations.platform.description')"
             >
                 <p class="ops-control-hint">
                     {{ __('ops.custom_pages.seo_operations.platform.source_contract', [
@@ -196,11 +190,6 @@
                             <span class="ops-metric__value tnum">{{ $metric['value'] === null ? __('ops.custom_pages.seo_operations.platform.not_available') : $metric['value'] }}</span>
                         </div>
                     @endforeach
-                </div>
-                <div class="ops-tag-list">
-                    <span class="ops-tag">{{ __('ops.custom_pages.seo_operations.platform.page_family') }} · {{ $familyPolicy['policy_version'] ?? __('ops.custom_pages.seo_operations.platform.not_available') }}</span>
-                    <span class="ops-tag">{{ __('ops.custom_pages.seo_operations.platform.search_queue') }} · {{ data_get($platformOverview, 'search_channel.total_counts.items') ?? __('ops.custom_pages.seo_operations.platform.not_available') }}</span>
-                    <span class="ops-tag">{{ __('ops.custom_pages.seo_operations.platform.crawler') }} · {{ data_get($platformOverview, 'crawler.total_count') ?? __('ops.custom_pages.seo_operations.platform.not_available') }}</span>
                 </div>
             </x-filament-ops::ops-section>
         @endif
@@ -242,7 +231,6 @@
         @if ($activeWorkspace === 'performance')
             <x-filament-ops::ops-section
                 :title="__('ops.custom_pages.seo_operations.performance.title')"
-                :description="__('ops.custom_pages.seo_operations.performance.description')"
             >
                 <x-filament-ops::ops-toolbar>
                     <div class="ops-toolbar-inline">
@@ -312,7 +300,7 @@
                 @else
                     <x-filament-ops::ops-not-connected
                         :title="__('ops.custom_pages.seo_operations.performance.source_name')"
-                        :description="__('ops.custom_pages.seo_operations.performance.states.'.($searchPerformance['state'] ?? 'disconnected'))"
+                        :description="''"
                     />
                     @if (!empty($searchPerformance['failure_code']))
                         <p class="ops-muted">{{ __('ops.custom_pages.seo_operations.performance.failure_code') }}: {{ $searchPerformance['failure_code'] }}</p>
@@ -325,7 +313,7 @@
         @endif
 
         @if ($activeWorkspace === 'performance')
-            <x-filament-ops::ops-section :title="__('ops.custom_pages.seo_operations.opportunities.title')" :description="__('ops.custom_pages.seo_operations.opportunities.description')">
+            <x-filament-ops::ops-section :title="__('ops.custom_pages.seo_operations.opportunities.title')">
                 @if (($opportunityReadModel['state'] ?? 'unavailable') !== 'connected' && ($opportunityReadModel['state'] ?? '') !== 'empty')
                     <x-filament-ops::ops-not-connected
                         :title="__('ops.custom_pages.seo_operations.opportunities.title')"

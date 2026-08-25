@@ -11,7 +11,6 @@
         <div>
             <span class="ops-shell-eyebrow">{{ __($copy.'.eyebrow') }}</span>
             <h2 id="experiment-ledger-title">{{ __($copy.'.title') }}</h2>
-            <p>{{ __($copy.'.description') }}</p>
         </div>
         <span class="ops-tag">#8</span>
     </div>
@@ -32,14 +31,13 @@
             <x-filament-ops::ops-state-message
                 :state="$snapshot['state']"
                 :title="__($copy.'.hold_title')"
-                :description="__($copy.'.hold_description')"
+                :description="''"
             />
         </div>
 
         <aside class="ops-experiment-ledger__inspector" aria-labelledby="experiment-prerequisites-title">
             <span class="ops-shell-eyebrow">{{ __($copy.'.inspector_eyebrow') }}</span>
             <h3 id="experiment-prerequisites-title">{{ __($copy.'.inspector_title') }}</h3>
-            <p>{{ __($copy.'.inspector_description') }}</p>
             <dl>
                 @foreach ($snapshot['required_fields'] as $field)
                     <div>
@@ -51,5 +49,4 @@
         </aside>
     </div>
 
-    <p class="ops-control-hint">{{ __($copy.'.causality_note') }}</p>
 </section>
