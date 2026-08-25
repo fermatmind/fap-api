@@ -11,6 +11,7 @@ use App\Services\SeoIntel\UrlTruth\EffectivePublicUrlEvaluator;
 use App\Services\SeoIntel\UrlTruthInventoryRecord;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Queue;
 use Throwable;
 
 final class SeoPlatformUrlTruthCmsCanaryCommand extends Command
@@ -25,6 +26,11 @@ final class SeoPlatformUrlTruthCmsCanaryCommand extends Command
         EffectivePublicUrlEvaluator $evaluator,
     ): int {
         try {
+            // Staging deliberately has no queue worker. Keep the production listener/job
+            // path intact while making this bounded deploy canary deterministic.
+            config(['queue.default' => 'sync']);
+            Queue::setDefaultDriver('sync');
+
             $article = Article::query()
                 ->withoutGlobalScopes()
                 ->where('org_id', 0)
@@ -68,6 +74,7 @@ final class SeoPlatformUrlTruthCmsCanaryCommand extends Command
                 'change' => 'authority_revision',
                 'cms_publish_service_used' => true,
                 'post_commit_event_path' => true,
+                'canary_queue_transport' => 'sync',
                 'url_truth_readback' => $readback,
                 'identity_hash' => hash('sha256', 'article|'.$published->locale.'|'.$published->id),
                 'revision_hash' => $expectedRevision,
