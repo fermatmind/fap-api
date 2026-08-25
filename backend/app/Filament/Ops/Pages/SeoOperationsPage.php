@@ -20,10 +20,14 @@ use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Collection;
+use Livewire\Attributes\Url;
 use Throwable;
 
 class SeoOperationsPage extends Page
 {
+    /** @var list<string> */
+    public const WORKSPACES = ['overview', 'performance', 'technical', 'url-truth', 'content', 'automation'];
+
     public const ISSUE_QUEUE_PER_PAGE = 25;
 
     public const MAX_INITIAL_QUERY_COUNT = 45;
@@ -40,9 +44,9 @@ class SeoOperationsPage extends Page
 
     private const SAVED_VIEWS = [
         'all' => ['workspace' => 'overview', 'scope' => 'combined', 'type' => 'all', 'issue' => 'all', 'locale' => 'all', 'status' => 'all', 'sort' => 'priority', 'display' => 'decision'],
-        'high_impressions_low_ctr' => ['workspace' => 'opportunities', 'scope' => 'combined', 'type' => 'all', 'issue' => 'all', 'locale' => 'all', 'status' => 'all', 'sort' => 'impact', 'display' => 'evidence'],
-        'global_article_blockers' => ['workspace' => 'execution', 'scope' => SeoContentScopeViewModel::SCOPE_GLOBAL_ARTICLES, 'type' => 'article', 'issue' => SeoOperationsService::ISSUE_GROWTH, 'locale' => 'all', 'status' => 'published', 'sort' => 'priority', 'display' => 'workflow'],
-        'global_career_gaps' => ['workspace' => 'execution', 'scope' => SeoContentScopeViewModel::SCOPE_GLOBAL_CAREER, 'type' => 'all', 'issue' => 'all', 'locale' => 'all', 'status' => 'all', 'sort' => 'affected_urls', 'display' => 'decision'],
+        'high_impressions_low_ctr' => ['workspace' => 'performance', 'scope' => 'combined', 'type' => 'all', 'issue' => 'all', 'locale' => 'all', 'status' => 'all', 'sort' => 'impact', 'display' => 'evidence'],
+        'global_article_blockers' => ['workspace' => 'automation', 'scope' => SeoContentScopeViewModel::SCOPE_GLOBAL_ARTICLES, 'type' => 'article', 'issue' => SeoOperationsService::ISSUE_GROWTH, 'locale' => 'all', 'status' => 'published', 'sort' => 'priority', 'display' => 'workflow'],
+        'global_career_gaps' => ['workspace' => 'automation', 'scope' => SeoContentScopeViewModel::SCOPE_GLOBAL_CAREER, 'type' => 'all', 'issue' => 'all', 'locale' => 'all', 'status' => 'all', 'sort' => 'affected_urls', 'display' => 'decision'],
     ];
 
     protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
@@ -67,6 +71,7 @@ class SeoOperationsPage extends Page
 
     public string $scopeFilter = 'combined';
 
+    #[Url(as: 'workspace', history: true)]
     public string $activeWorkspace = 'overview';
 
     public string $savedView = 'all';
@@ -195,6 +200,7 @@ class SeoOperationsPage extends Page
 
     public function mount(SeoOperationsService $service): void
     {
+        $this->activeWorkspace = $this->normalizedWorkspace($this->activeWorkspace);
         $this->reopenExpiredIgnores();
         $this->refreshDashboard($service);
         $this->refreshSeoIntel();
@@ -290,7 +296,7 @@ class SeoOperationsPage extends Page
 
     public function focusIssue(string $issue): void
     {
-        $this->activeWorkspace = 'execution';
+        $this->activeWorkspace = 'automation';
         $this->issueFilter = $issue;
         $this->refreshDashboard(app(SeoOperationsService::class));
     }
@@ -997,19 +1003,19 @@ class SeoOperationsPage extends Page
                 ['canonical', 'robots', 'indexability', 'growth'],
             ) !== []));
 
-        $signals[] = $this->decisionSignal('affected_urls', $affectedUrls, 'execution');
+        $signals[] = $this->decisionSignal('affected_urls', $affectedUrls, 'automation');
         $signals[] = $this->decisionSignal('index_blockers', $indexBlockers, 'technical');
 
         if ($this->seoIntelAvailable) {
             $signals[] = $this->decisionSignal(
                 'high_priority_issues',
                 (int) ($this->issueClusterSummary['high_priority_cluster_count'] ?? 0),
-                'execution',
+                'automation',
             );
             $signals[] = $this->decisionSignal(
                 'overdue_tasks',
                 (int) ($this->issueClusterSummary['overdue_task_count'] ?? 0),
-                'execution',
+                'automation',
             );
         }
 
@@ -1100,15 +1106,26 @@ class SeoOperationsPage extends Page
 
     public function openDecisionWorkspace(string $workspace): void
     {
-        if (in_array($workspace, ['overview', 'performance', 'technical', 'opportunities', 'ai', 'execution'], true)) {
+        if (in_array($workspace, self::WORKSPACES, true)) {
             $this->activeWorkspace = $workspace;
         }
     }
 
     public function openClusterExecution(string $clusterUid): void
     {
-        $this->activeWorkspace = 'execution';
+        $this->activeWorkspace = 'automation';
         $this->inspectIssueCluster($clusterUid);
+    }
+
+    /** @return list<string> */
+    public static function workspaceKeys(): array
+    {
+        return self::WORKSPACES;
+    }
+
+    private function normalizedWorkspace(string $workspace): string
+    {
+        return in_array($workspace, self::WORKSPACES, true) ? $workspace : 'overview';
     }
 
     private function refreshClusterUrls(SeoOperationsReadService $reader): void

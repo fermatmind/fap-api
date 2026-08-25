@@ -81,6 +81,23 @@ final class SeoOperationsPageTest extends TestCase
         $this->assertSame('performance', $signal['workspace']);
     }
 
+    public function test_workspace_query_is_recoverable_and_unknown_values_fail_to_overview(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $organization = $this->createOrganization('SEO Workspace Route Org');
+        $client = $this->withSession($this->opsSession($admin, $organization))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        $client->get('/ops/seo-operations?workspace=content')
+            ->assertOk()
+            ->assertSee('data-workspace="content"', false)
+            ->assertSee('data-state="production_unproven"', false);
+
+        $client->get('/ops/seo-operations?workspace=unknown')
+            ->assertOk()
+            ->assertSee('data-workspace="overview"', false);
+    }
+
     public function test_seo_operations_page_renders_operational_seo_and_growth_signals(): void
     {
         $admin = $this->createAdminWithPermissions([
@@ -293,8 +310,8 @@ final class SeoOperationsPageTest extends TestCase
             ->assertSee('SEO operations')
             ->assertSee('ops-seo-page-header', false)
             ->assertSee('ops-seo-commandbar', false)
-            ->assertSee('ops-seo-workspace-tabs', false)
-            ->assertSee('ops-seo-source-strip', false)
+            ->assertSee('ops-seo-council-nav', false)
+            ->assertSee('ops-trust-strip', false)
             ->assertSee('ops-seo-decision-strip', false)
             ->assertSee('data-signal-count="2"', false)
             ->assertSee('id="ops-seo-issue-filter"', false)
@@ -344,7 +361,7 @@ final class SeoOperationsPageTest extends TestCase
             ->assertSet('growthFields.2.value', '1')
             ->assertSet('growthFields.3.value', '50% (3/6)')
             ->assertCount('issueQueue', 3)
-            ->set('activeWorkspace', 'execution')
+            ->set('activeWorkspace', 'automation')
             ->assertSee('Published with discovery blockers')
             ->assertDontSee('Other Org SEO Article')
             ->set('scopeFilter', 'global_articles')
@@ -366,7 +383,7 @@ final class SeoOperationsPageTest extends TestCase
             ->assertDontSee('12,840')
             ->set('activeWorkspace', 'technical')
             ->assertSee('Evidence-backed technical audits')
-            ->set('activeWorkspace', 'opportunities')
+            ->set('activeWorkspace', 'performance')
             ->assertSee('The opportunity read model is unavailable in this environment.');
     }
 
@@ -466,7 +483,7 @@ final class SeoOperationsPageTest extends TestCase
             ->assertCount('issueQueue', 0)
             ->set('issueFilter', SeoOperationsService::ISSUE_SOCIAL)
             ->assertCount('issueQueue', 2)
-            ->set('activeWorkspace', 'execution')
+            ->set('activeWorkspace', 'automation')
             ->assertSee('Fix Guide')
             ->assertSee('Fix Me Article');
 
@@ -529,7 +546,7 @@ final class SeoOperationsPageTest extends TestCase
             ->assertSet('headlineFields.0.value', '100% (1/1)')
             ->set('issueFilter', SeoOperationsService::ISSUE_SOCIAL)
             ->assertCount('issueQueue', 1)
-            ->set('activeWorkspace', 'execution')
+            ->set('activeWorkspace', 'automation')
             ->assertSee('Social preview gaps')
             ->set('selectedTargets', [
                 'article:'.$article->id,
@@ -701,7 +718,7 @@ final class SeoOperationsPageTest extends TestCase
         $page->applySavedView('global_article_blockers');
 
         $this->assertSame('global_article_blockers', $page->savedView);
-        $this->assertSame('execution', $page->activeWorkspace);
+        $this->assertSame('automation', $page->activeWorkspace);
         $this->assertSame('global_articles', $page->scopeFilter);
         $this->assertSame('article', $page->typeFilter);
         $this->assertSame(SeoOperationsService::ISSUE_GROWTH, $page->issueFilter);
@@ -792,12 +809,12 @@ final class SeoOperationsPageTest extends TestCase
     public function test_canonical_entry_is_the_only_registered_seo_navigation_and_all_workspaces_use_real_state_contracts(): void
     {
         $legacyNavigation = new \ReflectionProperty(SeoDashboardAccessPage::class, 'shouldRegisterNavigation');
-        $view = (string) file_get_contents(resource_path('views/filament/ops/pages/seo-operations.blade.php'));
+        $page = (string) file_get_contents(app_path('Filament/Ops/Pages/SeoOperationsPage.php'));
         $service = (string) file_get_contents(app_path('Services/Ops/SeoOperationsReadService.php'));
 
         $this->assertFalse($legacyNavigation->getValue());
-        foreach (['overview', 'performance', 'technical', 'opportunities', 'ai', 'execution'] as $workspace) {
-            $this->assertStringContainsString("'{$workspace}'", $view);
+        foreach (['overview', 'performance', 'technical', 'url-truth', 'content', 'automation'] as $workspace) {
+            $this->assertStringContainsString("'{$workspace}'", $page);
         }
         foreach (['state', 'source', 'observed_at', 'updated_at', 'unavailable_reason'] as $field) {
             $this->assertStringContainsString("'{$field}'", $service);

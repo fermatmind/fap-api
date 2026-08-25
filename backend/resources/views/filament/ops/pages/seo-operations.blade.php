@@ -64,19 +64,10 @@
             </div>
         </header>
 
-        <div class="ops-seo-workspace-tabs" role="tablist" aria-label="{{ __('ops.custom_pages.seo_operations.title') }}">
-            @foreach (['overview', 'performance', 'technical', 'opportunities', 'ai', 'execution'] as $workspace)
-                <button
-                    type="button"
-                    wire:click="$set('activeWorkspace', '{{ $workspace }}')"
-                    @class(['ops-seo-workspace-tab', 'ops-seo-workspace-tab--active' => $activeWorkspace === $workspace])
-                    role="tab"
-                    aria-selected="{{ $activeWorkspace === $workspace ? 'true' : 'false' }}"
-                >
-                    {{ __('ops.custom_pages.seo_operations.workspace.'.$workspace) }}
-                </button>
-            @endforeach
-        </div>
+        <x-filament-ops::ops-seo-council-nav
+            :workspaces="\App\Filament\Ops\Pages\SeoOperationsPage::workspaceKeys()"
+            :active="$activeWorkspace"
+        />
 
         @if ($activeWorkspace === 'overview')
             <section class="ops-seo-decision-strip" aria-labelledby="ops-seo-decision-title">
@@ -184,19 +175,15 @@
             </div>
         </div>
 
-        <section class="ops-seo-source-strip" aria-label="{{ __('ops.custom_pages.seo_operations.sources.title') }}">
-            @foreach ($dataSources as $source)
-                <div @class(['ops-seo-source', 'ops-seo-source--connected' => !empty($source['connected'])]) data-state="{{ $source['state'] ?? (!empty($source['connected']) ? 'connected' : 'not_connected') }}">
-                    <span class="ops-seo-source__signal" aria-hidden="true"></span>
-                    <div>
-                        <strong>{{ $source['label'] }}</strong>
-                        <p>{{ !empty($source['connected']) ? __('ops.custom_pages.seo_operations.sources.connected') : __('ops.custom_pages.seo_operations.sources.not_connected') }}@if (!empty($source['updated_at'])) · {{ __('ops.custom_pages.seo_operations.sources.updated_at', ['time' => $source['updated_at']]) }}@endif</p>
-                    </div>
-                </div>
-            @endforeach
-        </section>
+        <x-filament-ops::ops-trust-strip
+            :label="__('ops.custom_pages.seo_operations.sources.title')"
+            :items="collect($dataSources)->map(fn (array $source): array => [
+                ...$source,
+                'state' => !empty($source['connected']) ? 'production_healthy' : 'external_not_connected',
+            ])->all()"
+        />
 
-        @if ($activeWorkspace === 'overview')
+        @if ($activeWorkspace === 'url-truth')
             @php
                 $platformOverview = (array) data_get($platformReadModels, 'overview', []);
                 $familyPolicy = (array) data_get($platformOverview, 'url_truth.page_family_policy', []);
@@ -251,7 +238,7 @@
         </nav>
         @endif
 
-        <div class="ops-seo-workspace-panel" data-workspace="{{ $activeWorkspace }}">
+        <div id="ops-seo-workspace-panel" class="ops-seo-workspace-panel" data-workspace="{{ $activeWorkspace }}">
 
         @if ($activeWorkspace === 'performance')
             <x-filament-ops::ops-section
@@ -338,7 +325,7 @@
             </x-filament-ops::ops-section>
         @endif
 
-        @if ($activeWorkspace === 'opportunities')
+        @if ($activeWorkspace === 'performance')
             <x-filament-ops::ops-section :title="__('ops.custom_pages.seo_operations.opportunities.title')" :description="__('ops.custom_pages.seo_operations.opportunities.description')">
                 @if (($opportunityReadModel['state'] ?? 'unavailable') !== 'connected' && ($opportunityReadModel['state'] ?? '') !== 'empty')
                     <x-filament-ops::ops-not-connected
@@ -357,7 +344,7 @@
             </x-filament-ops::ops-section>
         @endif
 
-        @if ($activeWorkspace === 'ai')
+        @if ($activeWorkspace === 'automation')
             <x-filament-ops::ops-section :title="__('ops.custom_pages.seo_operations.workspace.ai')" :description="__('ops.custom_pages.seo_operations.platform.not_implemented')">
                 <x-filament-ops::ops-not-connected :title="__('ops.custom_pages.seo_operations.workspace.ai')" :description="data_get($platformReadModels, 'ai.unavailable_reason', 'not_implemented')" />
                 <p class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.platform.source_contract', [
@@ -506,7 +493,7 @@
         </x-filament-ops::ops-section>
         @endif
 
-        @if ($activeWorkspace === 'execution')
+        @if ($activeWorkspace === 'automation')
         <x-filament-ops::ops-section :title="__('ops.custom_pages.seo_operations.execution.title')" :description="__('ops.custom_pages.seo_operations.execution.description')">
             @if (!$seoIntelAvailable)
                 <x-filament-ops::ops-not-connected :title="__('ops.custom_pages.seo_operations.workspace.execution')" :description="__('ops.custom_pages.seo_operations.execution.unavailable')" />
@@ -636,7 +623,7 @@
 
         @endif
 
-        @if ($activeWorkspace === 'execution')
+        @if ($activeWorkspace === 'automation')
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.seo_operations.issue_queue_title')"
             :description="__('ops.custom_pages.seo_operations.issue_queue_desc')"
@@ -729,6 +716,14 @@
                 </nav>
             @endif
         </x-filament-ops::ops-section>
+        @endif
+
+        @if ($activeWorkspace === 'content')
+            <x-filament-ops::ops-state-message
+                state="production_unproven"
+                :title="__('ops.custom_pages.seo_operations.workspace.content')"
+                :description="__('ops.custom_pages.seo_operations.content_unproven')"
+            />
         @endif
         </div>
     </div>

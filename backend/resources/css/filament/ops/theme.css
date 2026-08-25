@@ -315,7 +315,7 @@
     .fi-body.fi-panel-ops .fi-header-subheading {
         margin-top: 0.4375rem;
         color: var(--ops-text-secondary);
-        font-size: 0.6875rem;
+        font-size: 0.875rem;
         line-height: 1.5;
     }
 
@@ -4915,7 +4915,7 @@
         gap: 0.5rem;
     }
 
-    .fi-body.fi-panel-ops .ops-seo-workspace-tabs {
+    .fi-body.fi-panel-ops .ops-seo-council-nav {
         display: flex;
         gap: 0;
         overflow-x: auto;
@@ -4923,22 +4923,28 @@
         scrollbar-width: thin;
     }
 
-    .fi-body.fi-panel-ops .ops-seo-workspace-tab {
-        min-height: 2.625rem;
+    .fi-body.fi-panel-ops .ops-seo-council-nav__item {
+        min-height: 2.75rem;
         flex: 0 0 auto;
-        padding: 0 0.875rem;
+        padding: 0 1rem;
         border: 0;
         border-bottom: 2px solid transparent;
         color: var(--ops-text-secondary);
-        font-size: 0.6875rem;
+        font-size: 0.875rem;
         font-weight: 600;
         transition: color 140ms ease, border-color 140ms ease;
     }
 
-    .fi-body.fi-panel-ops .ops-seo-workspace-tab:hover,
-    .fi-body.fi-panel-ops .ops-seo-workspace-tab--active {
-        border-bottom-color: var(--ops-electric);
-        color: var(--ops-electric);
+    .fi-body.fi-panel-ops .ops-seo-council-nav__item:hover,
+    .fi-body.fi-panel-ops .ops-seo-council-nav__item--active {
+        border-bottom-color: var(--ops-electric-solid);
+        color: var(--ops-electric-solid);
+    }
+
+    .fi-body.fi-panel-ops .ops-seo-council-nav__item:focus-visible {
+        border-radius: 7px;
+        outline: 2px solid var(--ops-electric-solid);
+        outline-offset: -2px;
     }
 
     .fi-body.fi-panel-ops .ops-seo-commandbar {
@@ -4974,7 +4980,7 @@
     .fi-body.fi-panel-ops .ops-seo-commandbar__contract strong {
         color: var(--ops-text-tertiary);
         font-family: var(--ops-font-mono);
-        font-size: 0.5rem;
+        font-size: 0.75rem;
         font-weight: 600;
         letter-spacing: 0.08em;
         text-transform: uppercase;
@@ -4987,7 +4993,7 @@
         border-radius: 0;
         background-color: transparent;
         color: var(--ops-text-primary);
-        font-size: 0.6875rem;
+        font-size: 0.875rem;
         font-weight: 600;
         box-shadow: none;
     }
@@ -5011,7 +5017,7 @@
     .fi-body.fi-panel-ops .ops-seo-commandbar__contract span {
         overflow: hidden;
         color: var(--ops-text-secondary);
-        font-size: 0.625rem;
+        font-size: 0.75rem;
         line-height: 1.4;
         text-overflow: ellipsis;
     }
@@ -5023,7 +5029,7 @@
 
     .fi-body.fi-panel-ops .ops-seo-related-links a {
         color: var(--ops-text-tertiary);
-        font-size: 0.625rem;
+        font-size: 0.75rem;
         font-weight: 600;
         text-decoration: none;
     }
@@ -5048,7 +5054,7 @@
     .fi-body.fi-panel-ops .ops-seo-section-heading h2 {
         margin: 0;
         color: var(--ops-text-primary);
-        font-size: 0.8125rem;
+        font-size: 0.875rem;
         font-weight: 700;
     }
 
@@ -5056,7 +5062,7 @@
     .fi-body.fi-panel-ops .ops-seo-section-heading__meta {
         margin: 0.25rem 0 0;
         color: var(--ops-text-tertiary);
-        font-size: 0.5625rem;
+        font-size: 0.75rem;
     }
 
     .fi-body.fi-panel-ops .ops-seo-scope-strip {
@@ -5074,7 +5080,7 @@
         box-shadow: inset 0 -2px 0 var(--ops-electric);
     }
 
-    .fi-body.fi-panel-ops .ops-seo-source-strip {
+    .fi-body.fi-panel-ops .ops-trust-strip {
         display: grid;
         grid-template-columns: repeat(6, minmax(0, 1fr));
         overflow: hidden;
@@ -5083,7 +5089,7 @@
         background: var(--ops-bg-surface);
     }
 
-    .fi-body.fi-panel-ops .ops-seo-source {
+    .fi-body.fi-panel-ops .ops-trust-strip__item {
         display: grid;
         grid-template-columns: auto minmax(0, 1fr);
         gap: 0.5rem;
@@ -5092,11 +5098,11 @@
         border-right: 1px solid var(--ops-border-default);
     }
 
-    .fi-body.fi-panel-ops .ops-seo-source:last-child {
+    .fi-body.fi-panel-ops .ops-trust-strip__item:last-child {
         border-right: 0;
     }
 
-    .fi-body.fi-panel-ops .ops-seo-source__signal {
+    .fi-body.fi-panel-ops .ops-trust-strip__signal {
         width: 0.375rem;
         height: 0.375rem;
         margin-top: 0.1875rem;
@@ -5104,27 +5110,27 @@
         background: var(--ops-text-tertiary);
     }
 
-    .fi-body.fi-panel-ops .ops-seo-source--connected .ops-seo-source__signal {
+    .fi-body.fi-panel-ops .ops-trust-strip__signal.ops-state-success {
         background: var(--ops-state-success-signal);
         box-shadow: 0 0 0 3px color-mix(in srgb, var(--ops-state-success) 10%, transparent);
     }
 
-    .fi-body.fi-panel-ops .ops-seo-source strong {
+    .fi-body.fi-panel-ops .ops-trust-strip__item strong {
         display: block;
         overflow: hidden;
         color: var(--ops-text-primary);
-        font-size: 0.625rem;
+        font-size: 0.875rem;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
 
-    .fi-body.fi-panel-ops .ops-seo-source p {
+    .fi-body.fi-panel-ops .ops-trust-strip__item p {
         display: -webkit-box;
         margin: 0.25rem 0 0;
         overflow: hidden;
         color: var(--ops-text-tertiary);
         font-family: var(--ops-font-mono);
-        font-size: 0.4375rem;
+        font-size: 0.75rem;
         line-height: 1.45;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
@@ -5191,15 +5197,15 @@
             border-top: 1px solid var(--ops-border-default);
         }
 
-        .fi-body.fi-panel-ops .ops-seo-source-strip {
+        .fi-body.fi-panel-ops .ops-trust-strip {
             grid-template-columns: repeat(3, minmax(0, 1fr));
         }
 
-        .fi-body.fi-panel-ops .ops-seo-source:nth-child(3n) {
+        .fi-body.fi-panel-ops .ops-trust-strip__item:nth-child(3n) {
             border-right: 0;
         }
 
-        .fi-body.fi-panel-ops .ops-seo-source:nth-child(-n+3) {
+        .fi-body.fi-panel-ops .ops-trust-strip__item:nth-child(-n+3) {
             border-bottom: 1px solid var(--ops-border-default);
         }
     }
@@ -5212,14 +5218,14 @@
 
         .fi-body.fi-panel-ops .ops-seo-commandbar,
         .fi-body.fi-panel-ops .ops-seo-scope-strip,
-        .fi-body.fi-panel-ops .ops-seo-source-strip {
+        .fi-body.fi-panel-ops .ops-trust-strip {
             grid-template-columns: minmax(0, 1fr);
         }
 
         .fi-body.fi-panel-ops .ops-seo-commandbar__field,
         .fi-body.fi-panel-ops .ops-seo-commandbar__views,
         .fi-body.fi-panel-ops .ops-seo-commandbar__contract,
-        .fi-body.fi-panel-ops .ops-seo-source {
+        .fi-body.fi-panel-ops .ops-trust-strip__item {
             grid-column: auto;
             border-right: 0;
             border-bottom: 1px solid var(--ops-border-default);
@@ -5231,12 +5237,57 @@
         }
 
         .fi-body.fi-panel-ops .ops-seo-commandbar__contract,
-        .fi-body.fi-panel-ops .ops-seo-source:last-child {
+        .fi-body.fi-panel-ops .ops-trust-strip__item:last-child {
             border-bottom: 0;
         }
 
         .fi-body.fi-panel-ops .ops-seo-scope-strip .ops-metric {
             border-right: 0;
         }
+    }
+
+    .fi-body.fi-panel-ops .ops-state-message {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 0.75rem;
+        align-items: start;
+        padding: 1rem;
+        border: 1px solid var(--ops-border-default);
+        border-radius: 8px;
+        background: var(--ops-bg-surface);
+    }
+
+    .fi-body.fi-panel-ops .ops-state-message__signal {
+        width: 8px;
+        height: 8px;
+        margin-top: 0.375rem;
+        border-radius: 999px;
+        background: var(--ops-text-tertiary);
+    }
+
+    .fi-body.fi-panel-ops .ops-state-message--info .ops-state-message__signal {
+        background: var(--ops-electric-solid);
+    }
+
+    .fi-body.fi-panel-ops .ops-state-message--warning .ops-state-message__signal {
+        background: var(--ops-state-warning);
+    }
+
+    .fi-body.fi-panel-ops .ops-state-message--danger .ops-state-message__signal {
+        background: var(--ops-state-danger);
+    }
+
+    .fi-body.fi-panel-ops .ops-state-message strong {
+        color: var(--ops-text-primary);
+        font-size: 0.875rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-state-message p,
+    .fi-body.fi-panel-ops .ops-state-message small {
+        display: block;
+        margin: 0.25rem 0 0;
+        color: var(--ops-text-secondary);
+        font-size: 0.75rem;
+        line-height: 1.5;
     }
 }
