@@ -65,7 +65,7 @@ final class CareerShardedCurrentContractTest extends TestCase
 
     public function test_legacy_current_recursive_inventory_has_exactly_one_owner_or_derived_rule(): void
     {
-        ini_set('memory_limit', '1024M');
+        ini_set('memory_limit', '2048M');
         $ownership = $this->contract('career-sharded-current-field-ownership.v1.json');
         $rules = $ownership['legacy_projection_rules'];
         $path = $this->backendRoot.'/content_assets/career/current/assets.jsonl';
@@ -167,7 +167,7 @@ final class CareerShardedCurrentContractTest extends TestCase
 
     public function test_installed_current_inventory_is_manifest_bound_and_legacy_projection_is_equivalent(): void
     {
-        ini_set('memory_limit', '1536M');
+        ini_set('memory_limit', '2048M');
         $currentRoot = $this->backendRoot.'/content_assets/career/current';
         $manifest = Gate::decodeJsonFile($currentRoot.'/manifest.json');
         $files = [];
@@ -203,7 +203,7 @@ final class CareerShardedCurrentContractTest extends TestCase
 
     public function test_candidate_gate_rejects_unknown_empty_misplaced_unsorted_duplicate_and_incomplete_inputs(): void
     {
-        ini_set('memory_limit', '1024M');
+        ini_set('memory_limit', '2048M');
         [$manifest, $files] = $this->validCandidate();
         Gate::assertCandidate($manifest, $files);
 

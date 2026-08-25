@@ -11,7 +11,7 @@ final class CareerCurrentManifestCommandTest extends TestCase
 {
     public function test_it_checks_and_noops_the_current_manifest_without_runtime_writes(): void
     {
-        ini_set('memory_limit', '1024M');
+        ini_set('memory_limit', '2048M');
 
         $manifestPath = base_path('content_assets/career/current/manifest.json');
         $before = hash_file('sha256', $manifestPath);

@@ -29,7 +29,7 @@ final class CareerLegacyCurrentSharderTest extends TestCase
 
     public function test_it_splits_the_complete_legacy_current_deterministically_without_repository_writes(): void
     {
-        ini_set('memory_limit', '1536M');
+        ini_set('memory_limit', '2048M');
         $outputRoot = $this->temporaryDirectory();
         $assetsBefore = hash_file('sha256', $this->assetsPath);
         $manifestBefore = hash_file('sha256', $this->manifestPath);

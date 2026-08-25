@@ -25,7 +25,7 @@ final class CareerCurrentAuthorityPackageLoaderTest extends TestCase
 
     public function test_installed_manifest_explicitly_selects_sharded_read_without_legacy_fallback(): void
     {
-        ini_set('memory_limit', '1536M');
+        ini_set('memory_limit', '2048M');
         $legacyPackage = new CareerCurrentAuthorityPackage;
         $loader = new CareerCurrentAuthorityPackageLoader(
             $legacyPackage,

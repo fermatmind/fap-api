@@ -14,7 +14,7 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
 {
     public function test_it_validates_the_complete_current_authority_and_locked_provenance(): void
     {
-        ini_set('memory_limit', '1024M');
+        ini_set('memory_limit', '2048M');
 
         $legacyContract = new CareerCurrentAuthorityPackage;
         $package = (new CareerCurrentAuthorityPackageLoader(
