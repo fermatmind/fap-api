@@ -31,8 +31,12 @@ final class GscReadModelSyncService
      * @param  list<string>  $searchTypes
      * @return array<string, mixed>
      */
-    public function sync(int $windowDays = 28, array $searchTypes = ['web'], bool $fullWindow = false): array
-    {
+    public function sync(
+        int $windowDays = 28,
+        array $searchTypes = ['web'],
+        bool $fullWindow = false,
+        string $triggerMode = 'manual',
+    ): array {
         if (! in_array($windowDays, self::WINDOWS, true)) {
             return $this->blocked('unsupported_window');
         }
@@ -40,6 +44,10 @@ final class GscReadModelSyncService
         $searchTypes = array_values(array_unique(array_intersect($searchTypes, self::SEARCH_TYPES)));
         if ($searchTypes === []) {
             return $this->blocked('unsupported_search_type');
+        }
+        $triggerMode = strtolower(trim($triggerMode));
+        if (! in_array($triggerMode, ['manual', 'scheduled', 'rerun'], true)) {
+            return $this->blocked('unsupported_trigger_mode');
         }
 
         $preflight = $this->adapter->preflight(['allow_external_api_calls' => true]);
@@ -61,7 +69,8 @@ final class GscReadModelSyncService
 
         $connection = DB::connection($connectionName);
         $lagDays = max(0, (int) config('seo_intel.gsc_backfill_lag_days', 3));
-        $endDate = CarbonImmutable::now('UTC')->subDays($lagDays)->startOfDay();
+        $reportingTimezone = (string) config('seo_intel.gsc_reporting_timezone', 'America/Los_Angeles');
+        $endDate = CarbonImmutable::now($reportingTimezone)->subDays($lagDays)->startOfDay();
         $requestedStartDate = $endDate->subDays($windowDays - 1);
         $startDate = $fullWindow
             ? $requestedStartDate
@@ -87,6 +96,7 @@ final class GscReadModelSyncService
             'start_date' => $startDate->toDateString(),
             'end_date' => $endDate->toDateString(),
             'search_types_json' => json_encode($searchTypes, JSON_THROW_ON_ERROR),
+            'trigger_mode' => $triggerMode,
             'status' => 'running',
             'started_at' => $now->toDateTimeString(),
             'created_at' => $now->toDateTimeString(),
@@ -137,7 +147,7 @@ final class GscReadModelSyncService
                 'updated_at' => $finished->toDateTimeString(),
             ]);
 
-            return [
+            $receipt = [
                 'status' => 'success',
                 'sync_run_uid' => $runUid,
                 'window_days' => $windowDays,
@@ -146,18 +156,54 @@ final class GscReadModelSyncService
                 'start_date' => $startDate->toDateString(),
                 'end_date' => $endDate->toDateString(),
                 'search_types' => $searchTypes,
+                'trigger_mode' => $triggerMode,
+                'reporting_timezone' => $reportingTimezone,
                 'pages_fetched' => $pages,
                 'rows_seen' => count($rows),
                 'rows_upserted' => $upserted,
                 'unmapped_rows' => $unmapped,
+                'mapped_rows' => max(0, count($rows) - $unmapped),
                 'quality_gate' => $quality,
                 ...$closeout,
+                'duplicate_natural_keys' => (int) data_get(
+                    $closeout,
+                    'gsc_data_quality.overlap_comparison.natural_key_duplicate_count',
+                    0,
+                ),
+                'data_max_date' => data_get($closeout, 'gsc_data_quality.fetched.max_report_date'),
+                'data_lag_days' => data_get($closeout, 'gsc_data_quality.fetched.latest_data_lag_days'),
                 'read_only_gsc' => true,
                 'search_submission_allowed' => false,
+                'restricted_egress' => $preflight['restricted_egress'] ?? ['status' => 'blocked'],
+                'application_sha' => $this->releaseSha(),
+                'workflow_sha' => $this->releaseSha(),
+                'active_production_sha' => $this->releaseSha(),
+                'property_hash' => $preflight['property_hash'] ?? null,
             ];
+            $connection->table('seo_gsc_sync_runs')->where('sync_run_uid', $runUid)->update([
+                'receipt_json' => json_encode($receipt, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES),
+                'updated_at' => $finished->toDateTimeString(),
+            ]);
+
+            return $receipt;
         } catch (Throwable) {
             return $this->finishFailure($connection, $runUid, 'gsc_sync_internal_failure', 0, 0, $preflight);
         }
+    }
+
+    private function releaseSha(): ?string
+    {
+        $candidates = [
+            trim((string) config('app.git_sha', '')),
+            is_file(dirname(base_path()).'/REVISION') ? trim((string) file_get_contents(dirname(base_path()).'/REVISION')) : '',
+        ];
+        foreach ($candidates as $candidate) {
+            if (preg_match('/^[a-f0-9]{40}$/', $candidate) === 1) {
+                return $candidate;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -231,6 +277,17 @@ final class GscReadModelSyncService
         ))));
         $truth = $connection->table('seo_urls')
             ->whereIn('canonical_url_hash', $hashes)
+            ->where('indexability_state', 'indexable')
+            ->where('is_private_flow', false)
+            ->whereExists(function ($query): void {
+                $query->selectRaw('1')
+                    ->from('seo_url_entities')
+                    ->whereColumn('seo_url_entities.canonical_url_hash', 'seo_urls.canonical_url_hash')
+                    ->whereColumn('seo_url_entities.locale', 'seo_urls.locale')
+                    ->whereColumn('seo_url_entities.page_entity_type', 'seo_urls.page_entity_type')
+                    ->whereColumn('seo_url_entities.entity_id_or_slug', 'seo_urls.entity_id_or_slug')
+                    ->where('seo_url_entities.binding_status', 'current');
+            })
             ->orderBy('id')
             ->get(['id', 'canonical_url_hash', 'canonical_url', 'locale'])
             ->keyBy('canonical_url_hash');

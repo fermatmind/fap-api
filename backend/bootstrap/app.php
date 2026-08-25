@@ -73,7 +73,7 @@ return Application::configure(basePath: dirname(__DIR__))
         if ((bool) config('seo_intel.gsc_sync_enabled')) {
             $window = (int) config('seo_intel.gsc_sync.window_days', 28);
             $searchTypes = implode(',', (array) config('seo_intel.gsc_sync.search_types', ['web']));
-            $schedule->command("seo-intel:gsc-sync --window={$window} --search-types={$searchTypes} --json")
+            $schedule->command("seo-intel:gsc-sync --window={$window} --search-types={$searchTypes} --trigger=scheduled --json")
                 ->dailyAt('05:20')
                 ->withoutOverlapping(120)
                 ->onOneServer();

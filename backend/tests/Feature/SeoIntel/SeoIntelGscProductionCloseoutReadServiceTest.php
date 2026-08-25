@@ -46,7 +46,7 @@ final class SeoIntelGscProductionCloseoutReadServiceTest extends TestCase
 
         $this->assertSame('verified', $result['state']);
         $this->assertSame('sc-domain:fermatmind.com', data_get($result, 'gsc_data_quality.property'));
-        $this->assertSame('UTC', data_get($result, 'gsc_data_quality.timezone'));
+        $this->assertSame('America/Los_Angeles', data_get($result, 'gsc_data_quality.timezone'));
         $this->assertSame(['web'], data_get($result, 'gsc_data_quality.filters.search_types'));
         $this->assertSame(4, data_get($result, 'gsc_data_quality.detail_snapshot.row_count'));
         $this->assertSame(4, data_get($result, 'gsc_data_quality.detail_snapshot.natural_unique_key_count'));

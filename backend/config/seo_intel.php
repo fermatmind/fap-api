@@ -381,6 +381,7 @@ return [
     'gsc_property_url' => env('SEO_INTEL_GSC_PROPERTY_URL', null),
     'gsc_backfill_lag_days' => 3,
     'gsc_default_window_days' => 28,
+    'gsc_reporting_timezone' => 'America/Los_Angeles',
     'gsc_readonly_adapter' => [
         'auth_mode' => env('SEO_INTEL_GSC_AUTH_MODE', 'disabled'),
         'service_account_json' => env('SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON', ''),
@@ -393,8 +394,8 @@ return [
         ),
         'scope' => env('SEO_INTEL_GSC_SCOPE', 'https://www.googleapis.com/auth/webmasters.readonly'),
         'timeout_seconds' => (int) env('SEO_INTEL_GSC_TIMEOUT_SECONDS', 10),
-        'default_limit' => (int) env('SEO_INTEL_GSC_DEFAULT_LIMIT', 250),
-        'max_limit' => (int) env('SEO_INTEL_GSC_MAX_LIMIT', 250),
+        'default_limit' => (int) env('SEO_INTEL_GSC_DEFAULT_LIMIT', 25000),
+        'max_limit' => (int) env('SEO_INTEL_GSC_MAX_LIMIT', 25000),
     ],
     'gsc_sync' => [
         'window_days' => (int) env('SEO_INTEL_GSC_SYNC_WINDOW_DAYS', 28),

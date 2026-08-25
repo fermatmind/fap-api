@@ -115,7 +115,7 @@ final class GscRunCloseoutSummarizer
             'gsc_data_quality' => [
                 'evidence_source' => 'persisted_production_read_model',
                 'property' => (string) config('seo_intel.gsc_property_url', 'unknown'),
-                'timezone' => 'UTC',
+                'timezone' => (string) config('seo_intel.gsc_reporting_timezone', 'America/Los_Angeles'),
                 'window' => [
                     'anchor' => 'latest_persisted_report_date',
                     'start_date' => $startDate->toDateString(),
@@ -165,7 +165,7 @@ final class GscRunCloseoutSummarizer
         return [
             'gsc_data_quality' => [
                 'property' => (string) config('seo_intel.gsc_property_url', 'unknown'),
-                'timezone' => 'UTC',
+                'timezone' => (string) config('seo_intel.gsc_reporting_timezone', 'America/Los_Angeles'),
                 'requested_window' => [
                     'start_date' => $requestedStartDate->toDateString(),
                     'end_date' => $endDate->toDateString(),

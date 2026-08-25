@@ -35,6 +35,7 @@ final class SeoIntelGscReadModelSyncTest extends TestCase
             'seo_intel.gsc_live_api_enabled' => true,
             'seo_intel.gsc_property_url' => 'sc-domain:fermatmind.com',
             'seo_intel.gsc_backfill_lag_days' => 3,
+            'seo_intel.gsc_reporting_timezone' => 'America/Los_Angeles',
             'seo_intel.gsc_readonly_adapter.auth_mode' => 'access_token',
             'seo_intel.gsc_readonly_adapter.access_token' => 'test-secret-token',
             'seo_intel.gsc_readonly_adapter.default_limit' => 1,
@@ -59,6 +60,17 @@ final class SeoIntelGscReadModelSyncTest extends TestCase
             'canonical_url_hash' => hash('sha256', $url),
             'canonical_url' => $url,
             'locale' => 'zh-CN',
+            'page_entity_type' => 'article',
+            'entity_id_or_slug' => 'gsc-live',
+            'indexability_state' => 'indexable',
+            'is_private_flow' => false,
+        ]);
+        DB::connection('seo_intel_gsc_sync_test')->table('seo_url_entities')->insert([
+            'canonical_url_hash' => hash('sha256', $url),
+            'locale' => 'zh-CN',
+            'page_entity_type' => 'article',
+            'entity_id_or_slug' => 'gsc-live',
+            'binding_status' => 'current',
         ]);
         $this->seedPreviousSuccess(28);
 
@@ -168,10 +180,18 @@ final class SeoIntelGscReadModelSyncTest extends TestCase
             ]]], 200)
             : Http::response(['rows' => []], 200));
 
-        $result = app(GscReadModelSyncService::class)->sync(7, ['web'], true);
+        $result = app(GscReadModelSyncService::class)->sync(7, ['web'], true, 'scheduled');
 
         $this->assertSame('success', $result['status']);
         $this->assertSame('full_window', $result['fetch_mode']);
+        $this->assertSame('scheduled', $result['trigger_mode']);
+        $this->assertSame('America/Los_Angeles', $result['reporting_timezone']);
+        $this->assertSame('restricted', data_get($result, 'restricted_egress.status'));
+        $this->assertTrue(data_get($result, 'read_only_gsc'));
+        $this->assertSame(0, $result['duplicate_natural_keys']);
+        $this->assertSame('2026-08-20', $result['data_max_date']);
+        $this->assertEquals(3, $result['data_lag_days']);
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', (string) $result['property_hash']);
         $this->assertSame('2026-08-14', $result['start_date']);
         $this->assertSame(7, data_get($result, 'gsc_data_quality.fetched.date_point_count'));
         $this->assertSame(7, data_get($result, 'gsc_data_quality.fetched.natural_unique_key_count'));
@@ -277,6 +297,18 @@ final class SeoIntelGscReadModelSyncTest extends TestCase
             $table->char('canonical_url_hash', 64)->unique();
             $table->text('canonical_url');
             $table->string('locale', 16)->nullable();
+            $table->string('page_entity_type', 64)->nullable();
+            $table->string('entity_id_or_slug')->nullable();
+            $table->string('indexability_state', 64)->default('indexable');
+            $table->boolean('is_private_flow')->default(false);
+        });
+        $schema->create('seo_url_entities', function (Blueprint $table): void {
+            $table->id();
+            $table->char('canonical_url_hash', 64);
+            $table->string('locale', 16);
+            $table->string('page_entity_type', 64);
+            $table->string('entity_id_or_slug');
+            $table->string('binding_status', 64)->nullable();
         });
         $schema->create('seo_gsc_daily', function (Blueprint $table): void {
             $table->id();
@@ -311,6 +343,7 @@ final class SeoIntelGscReadModelSyncTest extends TestCase
             $table->date('start_date');
             $table->date('end_date');
             $table->json('search_types_json');
+            $table->string('trigger_mode', 32)->default('manual');
             $table->string('status', 32);
             $table->unsignedInteger('pages_fetched')->default(0);
             $table->unsignedInteger('rows_seen')->default(0);
@@ -318,6 +351,7 @@ final class SeoIntelGscReadModelSyncTest extends TestCase
             $table->unsignedInteger('unmapped_rows')->default(0);
             $table->string('failure_code')->nullable();
             $table->json('quality_gate_json')->nullable();
+            $table->json('receipt_json')->nullable();
             $table->timestamp('started_at');
             $table->timestamp('finished_at')->nullable();
             $table->timestamps();

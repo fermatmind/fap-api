@@ -39,6 +39,17 @@ final class GscReadonlyLiveAdapter
             $issues = [...$issues, ...$credential['issues']];
         }
 
+        $readonlyScopeValid = trim((string) config('seo_intel.gsc_readonly_adapter.scope'))
+            === 'https://www.googleapis.com/auth/webmasters.readonly';
+        if (! $readonlyScopeValid) {
+            $issues[] = 'gsc_readonly_scope_required';
+        }
+
+        $restrictedEgress = $this->restrictedEgress();
+        if (($restrictedEgress['status'] ?? 'blocked') !== 'restricted') {
+            $issues[] = 'gsc_restricted_egress_required';
+        }
+
         $issues = array_values(array_unique(array_map('strval', $issues)));
 
         return [
@@ -52,10 +63,12 @@ final class GscReadonlyLiveAdapter
             'credential_source' => $credential['credential_source'],
             'credential_valid' => $credential['credential_valid'],
             'credential_checks' => $credential['credential_checks'],
+            'readonly_scope_valid' => $readonlyScopeValid,
             'gsc_enabled' => (bool) config('seo_intel.gsc_enabled', false),
             'gsc_live_api_enabled' => (bool) config('seo_intel.gsc_live_api_enabled', false),
             'external_api_calls_allowed' => $this->externalApiCallsAllowed($options),
             'live_read_allowed' => $issues === [],
+            'restricted_egress' => $restrictedEgress,
             'writes_attempted' => false,
             'writes_committed' => false,
             'cms_write_allowed' => false,
@@ -65,6 +78,21 @@ final class GscReadonlyLiveAdapter
             'scheduler_enabled' => false,
             'queue_worker_enabled' => false,
             'issues' => $issues,
+        ];
+    }
+
+    /** @return array{status:string,search_analytics_host_allowlisted:bool,token_host_allowlisted:bool} */
+    private function restrictedEgress(): array
+    {
+        $analyticsHost = strtolower((string) parse_url((string) config('seo_intel.gsc_readonly_adapter.search_analytics_endpoint'), PHP_URL_HOST));
+        $tokenHost = strtolower((string) parse_url((string) config('seo_intel.gsc_readonly_adapter.token_uri'), PHP_URL_HOST));
+        $analyticsAllowed = $analyticsHost === 'searchconsole.googleapis.com';
+        $tokenAllowed = $tokenHost === 'oauth2.googleapis.com';
+
+        return [
+            'status' => $analyticsAllowed && $tokenAllowed ? 'restricted' : 'blocked',
+            'search_analytics_host_allowlisted' => $analyticsAllowed,
+            'token_host_allowlisted' => $tokenAllowed,
         ];
     }
 
