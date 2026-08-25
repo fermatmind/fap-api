@@ -106000,8 +106000,11 @@
     "base": "main",
     "branch": "codex/ops-content-workspace-03",
     "title": "fix(ops): unify content workspace metrics",
-    "status": "local_validation_passed",
+    "status": "pr_open",
     "depends_on": ["OPS-CONTENT-TAXONOMY-02"],
+    "commit_sha": "3d71543c312632b858124a0465845f13b9821805",
+    "pr_number": 3785,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3785",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -106037,6 +106040,11 @@
         "at": "2026-08-26T07:16:30+08:00",
         "status": "local_validation_passed",
         "note": "The canonical content workspace and editorial compatibility page now share one org_id=0 metrics implementation. Focused metrics, bilingual rendering, navigation, route, Pint, syntax, and diff checks passed. No write path or external action was added."
+      },
+      {
+        "at": "2026-08-26T07:20:00+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #3785 from codex/ops-content-workspace-03 at validated implementation commit 3d71543c312632b858124a0465845f13b9821805. Required checks and merge review are pending."
       }
     ]
   },
