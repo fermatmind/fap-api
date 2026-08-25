@@ -2849,10 +2849,21 @@ return [
                 'create' => '创建人格档案',
                 'all' => '全部人格档案',
                 'back_to_list' => '返回人格内容',
+                'desktop_templates' => '桌面模板',
             ],
             'notifications' => [
                 'created' => '人格档案已创建',
                 'updated' => '人格档案已更新',
+            ],
+        ],
+        'personality_desktop' => [
+            'list_subheading' => '公共 MBTI 人格变体对应的独立 A/T 桌面模板。',
+            'profile_subheading' => ':type（:locale）的桌面模板；A/T 变体各自保持独立内容、校验和发布状态。',
+            'empty_title' => '该人格暂无桌面模板',
+            'empty_description' => '可创建第一条 A/T 桌面模板，且不会改变基础人格档案。',
+            'actions' => [
+                'create' => '创建桌面模板',
+                'create_first' => '创建第一条桌面模板',
             ],
         ],
         'topics' => [

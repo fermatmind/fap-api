@@ -93,8 +93,8 @@ final class ContentCmsProductLayerTest extends TestCase
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/editorial-operations')
             ->assertOk()
-            ->assertSee('Editorial operations')
-            ->assertSee('Operations snapshot')
+            ->assertSee('Content workspace')
+            ->assertSee('Editorial snapshot')
             ->assertSee('Articles')
             ->assertSee('Career Guides')
             ->assertSee('Career Jobs');
