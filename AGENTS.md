@@ -114,6 +114,7 @@ Provide a relevant focused verification command for each touched layer. Do not i
 ### CMS and content authority
 
 - Backend CMS/database authority, repository content packages, public projections, and derived caches are distinct. A deploy or cache warm must not silently become publication authority.
+- Career Current 去版本化迁移由 `backend/docs/career/contracts/career-sharded-current.v1.json`、其 manifest schema 与字段 ownership map 共同约束。安装阶段完成前，legacy `current/assets.jsonl` 仍是唯一可读 Current；任何 candidate 都不得凭规则或测试 PASS 获得 Current、publisher、数据库、cache 或 discoverability 写权限。安装完成后仅允许 `current/` 下固定 10 模块 × 64 分片成为正文权威，DB/cache/API/SEO 结构均为确定性派生投影。
 - Exact-package content promotion must validate manifest, digests, schema, locale, readback, public QA, and rollback compatibility. Transaction failure rolls back the whole write and leaves the cache pointer unchanged.
 - Generic content publication is prohibited. Only the explicitly scoped, classifier-governed content path may write the exact validated package; it must not broaden into discoverability actions unless the URL or search surface actually changed.
 - Big Five and Enneagram description-only edits are text-only authority changes: preserve identity, score topology, assignments, relations, slugs, aliases, and public structure. Historical aliases are redirect-only and must never appear in canonical URLs, sitemap inventory, or alternate-link output.

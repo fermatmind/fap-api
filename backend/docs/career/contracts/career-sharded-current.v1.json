@@ -1,0 +1,87 @@
+{
+  "aggregate_hash": {
+    "algorithm": "sha256",
+    "canonical_input": "canonical_json({contract_version,modules,shards,registries,coverage,module_completeness})",
+    "excludes": [
+      "aggregate_sha256",
+      "manifest_sha256"
+    ]
+  },
+  "authority_path": "backend/content_assets/career/current",
+  "canonical_json": {
+    "arrays_preserve_business_order": true,
+    "encoding": "utf-8",
+    "escape_slashes": false,
+    "escape_unicode": false,
+    "object_keys": "lexicographic",
+    "record_terminator": "lf",
+    "whitespace": "compact"
+  },
+  "contract_version": "career.sharded_current.v1",
+  "forbidden": {
+    "content_version_directories": true,
+    "new_v4x_content": true,
+    "second_current": true,
+    "unknown_files": true,
+    "unknown_modules": true,
+    "version_discriminator": true
+  },
+  "legacy_inventory_baseline": {
+    "careers": 1046,
+    "components_per_page": 28,
+    "direct_locale_wrapper_rows": 1,
+    "locale_pages": 2092,
+    "locales": [
+      "en",
+      "zh-CN"
+    ],
+    "manual_hold_slug": "software-developers",
+    "page_locale_wrapper_rows": 1045
+  },
+  "line_identity": [
+    "canonical_slug",
+    "locale",
+    "module"
+  ],
+  "manifest": {
+    "aggregate_hash_excludes_manifest_self": true,
+    "binds": [
+      "fixed_module_order",
+      "fixed_shard_inventory",
+      "per_shard_sha256",
+      "per_shard_row_count",
+      "slug_locale_coverage",
+      "module_completeness",
+      "registries",
+      "aggregate_sha256"
+    ],
+    "schema": "backend/docs/career/contracts/career-sharded-current-manifest.v1.schema.json"
+  },
+  "module_count": 10,
+  "modules": [
+    "identity",
+    "definition",
+    "salary",
+    "geo",
+    "ai-impact",
+    "fit-personality",
+    "risk",
+    "compare-links",
+    "faq",
+    "page-meta"
+  ],
+  "ownership_map": "backend/docs/career/contracts/career-sharded-current-field-ownership.v1.json",
+  "record_order": [
+    "canonical_slug",
+    "locale"
+  ],
+  "record_schema": "backend/docs/career/contracts/career-sharded-current-record.v1.schema.json",
+  "shard_count_per_module": 64,
+  "shard_filename": "shard-%02d.jsonl",
+  "shard_formula": {
+    "digest": "lowercase_hex(sha256(canonical_slug))",
+    "index": "unsigned_big_endian_uint32_from_hex(digest[0:8]) % 64",
+    "prefix_hex_chars": 8
+  },
+  "total_shard_files": 640
+}

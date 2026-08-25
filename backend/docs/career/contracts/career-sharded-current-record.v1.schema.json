@@ -1,0 +1,55 @@
+{
+  "$id": "https://api.fermatmind.com/contracts/career-sharded-current-record.v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "canonical_slug": {
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "type": "string"
+    },
+    "claim_bindings": {
+      "items": {
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "content": {
+      "type": "object"
+    },
+    "locale": {
+      "enum": [
+        "en",
+        "zh-CN"
+      ]
+    },
+    "module": {
+      "enum": [
+        "identity",
+        "definition",
+        "salary",
+        "geo",
+        "ai-impact",
+        "fit-personality",
+        "risk",
+        "compare-links",
+        "faq",
+        "page-meta"
+      ]
+    },
+    "source_bindings": {
+      "items": {
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "canonical_slug",
+    "locale",
+    "module",
+    "content",
+    "source_bindings",
+    "claim_bindings"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,170 @@
+{
+  "$id": "https://api.fermatmind.com/contracts/career-sharded-current-manifest.v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "aggregate_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "authority_path": {
+      "const": "backend/content_assets/career/current"
+    },
+    "contract_version": {
+      "const": "career.sharded_current.manifest.v1"
+    },
+    "coverage": {
+      "additionalProperties": false,
+      "properties": {
+        "locale_pages": {
+          "const": 2092
+        },
+        "locales": {
+          "items": false,
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "const": "en"
+            },
+            {
+              "const": "zh-CN"
+            }
+          ],
+          "type": "array"
+        },
+        "module_rows": {
+          "const": 20920
+        },
+        "slugs": {
+          "const": 1046
+        }
+      },
+      "required": [
+        "slugs",
+        "locales",
+        "locale_pages",
+        "module_rows"
+      ],
+      "type": "object"
+    },
+    "module_completeness": {
+      "additionalProperties": false,
+      "properties": {
+        "modules_per_slug_locale": {
+          "const": 10
+        },
+        "rows_per_module": {
+          "const": 2092
+        }
+      },
+      "required": [
+        "rows_per_module",
+        "modules_per_slug_locale"
+      ],
+      "type": "object"
+    },
+    "modules": {
+      "items": false,
+      "maxItems": 10,
+      "minItems": 10,
+      "prefixItems": [
+        { "const": "identity" },
+        { "const": "definition" },
+        { "const": "salary" },
+        { "const": "geo" },
+        { "const": "ai-impact" },
+        { "const": "fit-personality" },
+        { "const": "risk" },
+        { "const": "compare-links" },
+        { "const": "faq" },
+        { "const": "page-meta" }
+      ],
+      "type": "array"
+    },
+    "registries": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "pattern": "^registries/[a-z0-9]+(?:-[a-z0-9]+)*\\.json$",
+            "type": "string"
+          },
+          "sha256": {
+            "$ref": "#/$defs/sha256"
+          }
+        },
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "shards": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "module": {
+            "enum": [
+              "identity",
+              "definition",
+              "salary",
+              "geo",
+              "ai-impact",
+              "fit-personality",
+              "risk",
+              "compare-links",
+              "faq",
+              "page-meta"
+            ]
+          },
+          "path": {
+            "pattern": "^(?:identity|definition|salary|geo|ai-impact|fit-personality|risk|compare-links|faq|page-meta)/shard-(?:0[0-9]|[1-5][0-9]|6[0-3])\\.jsonl$",
+            "type": "string"
+          },
+          "row_count": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "sha256": {
+            "$ref": "#/$defs/sha256"
+          },
+          "shard_index": {
+            "maximum": 63,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "module",
+          "shard_index",
+          "path",
+          "sha256",
+          "row_count"
+        ],
+        "type": "object"
+      },
+      "maxItems": 640,
+      "minItems": 640,
+      "type": "array"
+    }
+  },
+  "required": [
+    "contract_version",
+    "authority_path",
+    "modules",
+    "shards",
+    "registries",
+    "coverage",
+    "module_completeness",
+    "aggregate_sha256"
+  ],
+  "type": "object",
+  "$defs": {
+    "sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    }
+  }
+}
