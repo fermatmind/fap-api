@@ -77,7 +77,11 @@ final class UrlTruthReconciliationSnapshot
 
         $bindings = [];
         foreach ($entityRows ?? [] as $row) {
-            if (! in_array(strtolower((string) ($row['authority_status'] ?? '')), ['active', 'published', 'published_approved'], true)) {
+            $hasCurrentBindingSchema = array_key_exists('current_binding_key', $row);
+            $isCurrentBinding = $hasCurrentBindingSchema
+                ? ($row['current_binding_key'] ?? null) !== null && ($row['binding_status'] ?? null) === 'current'
+                : in_array(strtolower((string) ($row['authority_status'] ?? '')), ['active', 'published', 'published_approved'], true);
+            if (! $isCurrentBinding) {
                 continue;
             }
             $key = implode('|', [
@@ -90,6 +94,12 @@ final class UrlTruthReconciliationSnapshot
 
         $missing = 0;
         $valid = 0;
+        $bindingMismatch = 0;
+        $staleAuthorityRevision = 0;
+        $revisionComparable = $urlTruthRows !== null && count(array_filter(
+            $urlTruthRows,
+            static fn (array $row): bool => array_key_exists('authority_revision', $row),
+        )) > 0;
         $localeBindings = [];
         foreach ($authority as $key => $record) {
             $entityIdentity = trim((string) ($record['entity_id_or_slug'] ?? ''));
@@ -115,6 +125,15 @@ final class UrlTruthReconciliationSnapshot
                 && $this->truthMatchesAuthority($rows[0], $record)
                 && hash_equals((string) $record['hash'], (string) ($currentBindings[0]['canonical_url_hash'] ?? ''))) {
                 $valid++;
+            } else {
+                $bindingMismatch++;
+            }
+            if ($revisionComparable && count($rows) === 1
+                && ! hash_equals(
+                    $this->revisionFingerprint((string) $record['authority_revision']),
+                    (string) ($rows[0]['authority_revision'] ?? ''),
+                )) {
+                $staleAuthorityRevision++;
             }
         }
         $duplicateUrls = $urlTruthRows === null ? null : count(array_filter($truth, static fn (array $rows): bool => count($rows) > 1));
@@ -144,6 +163,32 @@ final class UrlTruthReconciliationSnapshot
                 'extra' => count(array_diff_key($hashes, $authorityHashes)),
             ];
         }
+
+        $truthStateCounts = $this->truthStateCounts($urlTruthRows);
+        $differenceClassification = [
+            'authority_without_url_truth' => $urlTruthRows === null || ! $authorityAvailable ? null : $missing,
+            'url_truth_duplicate' => $duplicateUrls,
+            'current_binding_duplicate' => $duplicateBindings,
+            'canonical_host_or_path_error' => $urlTruthRows === null ? null : $this->canonicalShapeErrors($urlTruthRows),
+            'stale_authority_revision' => $revisionComparable && $authorityAvailable ? $staleAuthorityRevision : null,
+            'locale_or_counterpart_drift' => $authorityAvailable ? $counterpartMissing + $this->localePathDrift($urlTruthRows) : null,
+            'private_or_noindex_included' => $truthStateCounts['private_or_noindex'],
+            'redirect_only_as_current' => $truthStateCounts['redirect_only'],
+            'sitemap_without_authority' => data_get($consumerDiffs, 'sitemap.extra'),
+            'authority_omitted_by_consumer' => [
+                'public_api' => data_get($consumerDiffs, 'public_api.missing'),
+                'sitemap' => data_get($consumerDiffs, 'sitemap.missing'),
+                'llms' => data_get($consumerDiffs, 'llms.missing'),
+                'llms_full' => data_get($consumerDiffs, 'llms_full.missing'),
+                'runtime_http_sample' => ($liveHttp['state'] ?? null) === 'available'
+                    ? (int) ($liveHttp['issue_count'] ?? 0)
+                    : null,
+            ],
+            'retired_or_historical_as_current' => $authorityAvailable ? $retired : null,
+            'family_locale_or_authority_binding_mismatch' => $urlTruthRows === null || $entityRows === null || ! $authorityAvailable
+                ? null
+                : $bindingMismatch,
+        ];
 
         ksort($familyLocale);
 
@@ -178,6 +223,7 @@ final class UrlTruthReconciliationSnapshot
             'classification_counts' => $classificationCounts,
             'family_locale_distribution' => $familyLocale,
             'consumer_differences' => $consumerDiffs,
+            'difference_classification' => $differenceClassification,
             'live_http' => $liveHttp,
             'boundaries' => [
                 'backend_cms_authority_only' => true,
@@ -212,5 +258,75 @@ final class UrlTruthReconciliationSnapshot
         $normalized = rtrim(trim($url), '/');
 
         return hash('sha256', $normalized === '' ? '/' : $normalized);
+    }
+
+    /** @param list<array<string,mixed>>|null $rows @return array{private_or_noindex:int|null,redirect_only:int|null} */
+    private function truthStateCounts(?array $rows): array
+    {
+        if ($rows === null) {
+            return ['private_or_noindex' => null, 'redirect_only' => null];
+        }
+
+        $privateOrNoindex = 0;
+        $redirectOnly = 0;
+        foreach ($rows as $row) {
+            $state = strtolower((string) ($row['indexability_state'] ?? ''));
+            if ((bool) ($row['is_private_flow'] ?? false) || str_contains($state, 'private') || str_contains($state, 'noindex')) {
+                $privateOrNoindex++;
+            }
+            if (str_contains($state, 'redirect') || str_contains(strtolower((string) ($row['authority_status'] ?? '')), 'redirect')) {
+                $redirectOnly++;
+            }
+        }
+
+        return ['private_or_noindex' => $privateOrNoindex, 'redirect_only' => $redirectOnly];
+    }
+
+    /** @param list<array<string,mixed>> $rows */
+    private function canonicalShapeErrors(array $rows): int
+    {
+        $configured = parse_url((string) config('seo_intel.public_canonical_host', 'https://fermatmind.com'));
+        $expectedHost = strtolower((string) ($configured['host'] ?? 'fermatmind.com'));
+        $errors = 0;
+
+        foreach ($rows as $row) {
+            $url = (string) ($row['canonical_url'] ?? '');
+            $parts = parse_url($url);
+            $path = is_array($parts) ? (string) ($parts['path'] ?? '/') : '';
+            if (! is_array($parts)
+                || strtolower((string) ($parts['scheme'] ?? '')) !== 'https'
+                || strtolower((string) ($parts['host'] ?? '')) !== $expectedHost
+                || isset($parts['query'])
+                || isset($parts['fragment'])
+                || $path === ''
+                || ($path !== '/' && (str_ends_with($path, '/') || str_contains($path, '//')))) {
+                $errors++;
+            }
+        }
+
+        return $errors;
+    }
+
+    /** @param list<array<string,mixed>>|null $rows */
+    private function localePathDrift(?array $rows): int
+    {
+        if ($rows === null) {
+            return 0;
+        }
+
+        return count(array_filter($rows, static function (array $row): bool {
+            $path = (string) (parse_url((string) ($row['canonical_url'] ?? ''), PHP_URL_PATH) ?? '');
+            $locale = (string) ($row['locale'] ?? '');
+
+            return (str_starts_with($path, '/en/') && $locale !== 'en')
+                || (str_starts_with($path, '/zh/') && $locale !== 'zh-CN');
+        }));
+    }
+
+    private function revisionFingerprint(string $revision): string
+    {
+        $revision = trim($revision);
+
+        return preg_match('/^[a-f0-9]{64}$/', $revision) === 1 ? $revision : hash('sha256', $revision);
     }
 }

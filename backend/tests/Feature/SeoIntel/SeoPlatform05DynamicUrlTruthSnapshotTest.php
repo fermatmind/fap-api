@@ -80,6 +80,15 @@ final class SeoPlatform05DynamicUrlTruthSnapshotTest extends TestCase
         $this->assertSame(1, data_get($snapshot, 'consumer_differences.sitemap.missing'));
         $this->assertSame(1, data_get($snapshot, 'consumer_differences.sitemap.extra'));
         $this->assertSame('measurement_hold', data_get($snapshot, 'consumer_differences.llms.state'));
+        $this->assertSame(1, data_get($snapshot, 'difference_classification.authority_without_url_truth'));
+        $this->assertSame(0, data_get($snapshot, 'difference_classification.url_truth_duplicate'));
+        $this->assertSame(1, data_get($snapshot, 'difference_classification.current_binding_duplicate'));
+        $this->assertSame(0, data_get($snapshot, 'difference_classification.canonical_host_or_path_error'));
+        $this->assertSame(0, data_get($snapshot, 'difference_classification.stale_authority_revision'));
+        $this->assertSame(1, data_get($snapshot, 'difference_classification.sitemap_without_authority'));
+        $this->assertSame(1, data_get($snapshot, 'difference_classification.authority_omitted_by_consumer.sitemap'));
+        $this->assertNull(data_get($snapshot, 'difference_classification.authority_omitted_by_consumer.llms'));
+        $this->assertSame(1, data_get($snapshot, 'difference_classification.retired_or_historical_as_current'));
         $this->assertFalse((bool) data_get($snapshot, 'boundaries.consumers_create_authority', true));
         $this->assertFalse((bool) data_get($snapshot, 'boundaries.search_submission_allowed', true));
     }
@@ -216,6 +225,7 @@ final class SeoPlatform05DynamicUrlTruthSnapshotTest extends TestCase
             'page_entity_type' => $record->pageEntityType,
             'entity_id_or_slug' => $record->entityIdOrSlug,
             'source_authority' => $record->sourceAuthority,
+            'authority_revision' => hash('sha256', 'authority_revision|'.(string) ($record->metadata['authority_revision'] ?? '')),
             'indexability_state' => 'indexable',
             'is_private_flow' => false,
         ];
