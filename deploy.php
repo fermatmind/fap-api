@@ -798,7 +798,7 @@ task('artisan:migrate', function () {
 });
 
 task('artisan:migrate-seo-intel', function () {
-    within('{{release_path}}/backend', function () use ($canaryMode): void {
+    within('{{release_path}}/backend', function (): void {
         run(<<<'BASH'
 set -euo pipefail
 set +e
