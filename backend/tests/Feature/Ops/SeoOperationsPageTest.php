@@ -56,31 +56,6 @@ final class SeoOperationsPageTest extends TestCase
             ->assertRedirectContains('/ops/select-org');
     }
 
-    public function test_search_change_signal_requires_two_real_collected_days(): void
-    {
-        $page = new SeoOperationsPage;
-        $page->searchPerformance = [
-            'connected' => true,
-            'daily' => [
-                ['report_date' => '2026-08-22', 'clicks' => 10, 'impressions' => 100],
-            ],
-        ];
-        $method = new \ReflectionMethod($page, 'searchChangeSignal');
-
-        $this->assertNull($method->invoke($page));
-
-        $page->searchPerformance['daily'][] = [
-            'report_date' => '2026-08-23',
-            'clicks' => 15,
-            'impressions' => 120,
-        ];
-        $signal = $method->invoke($page);
-
-        $this->assertSame('search_change', $signal['key']);
-        $this->assertSame('+50.0%', $signal['value']);
-        $this->assertSame('performance', $signal['workspace']);
-    }
-
     public function test_workspace_query_is_recoverable_and_unknown_values_fail_to_overview(): void
     {
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
@@ -312,14 +287,16 @@ final class SeoOperationsPageTest extends TestCase
             ->assertSee('ops-seo-commandbar', false)
             ->assertSee('ops-seo-council-nav', false)
             ->assertSee('ops-trust-strip', false)
-            ->assertSee('ops-seo-decision-strip', false)
-            ->assertSee('data-signal-count="2"', false)
+            ->assertSee('ops-seo-workbench-home', false)
+            ->assertSee('data-contract-state="MEASUREMENT_HOLD"', false)
+            ->assertSee('data-default-decision-count="3"', false)
+            ->assertSee('data-max-decision-count="5"', false)
             ->assertSee('id="ops-seo-issue-filter"', false)
             ->assertSee('<select id="ops-seo-issue-filter"', false)
             ->assertDontSee('ops-seo-intro', false)
-            ->assertSee('Today’s SEO decisions')
-            ->assertSee('Priority issue clusters')
-            ->assertSee('Today’s Action Queue')
+            ->assertSee('28-day visibility trend')
+            ->assertSee('Priority decisions')
+            ->assertSee('Weekly decisions are on MEASUREMENT_HOLD')
             ->assertSee('Data sources & freshness')
             ->assertDontSee('Growth diagnostics')
             ->assertDontSee('Current query snapshot')
@@ -338,11 +315,6 @@ final class SeoOperationsPageTest extends TestCase
 
         Livewire::test(SeoOperationsPage::class)
             ->assertOk()
-            ->assertSet('decisionSignals.0.key', 'affected_urls')
-            ->assertSet('decisionSignals.0.value', '3')
-            ->assertSet('decisionSignals.1.key', 'index_blockers')
-            ->assertSet('decisionSignals.1.value', '3')
-            ->assertCount('todayActions', 3)
             ->assertSet('headlineFields.0.value', '50% (1/2)')
             ->assertSet('headlineFields.1.value', '50% (2/4)')
             ->assertSet('headlineFields.2.value', '5')

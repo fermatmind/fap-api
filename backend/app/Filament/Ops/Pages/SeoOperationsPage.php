@@ -184,18 +184,6 @@ class SeoOperationsPage extends Page
     public array $issueClusterSummary = [];
 
     /** @var list<array<string, mixed>> */
-    public array $decisionSignals = [];
-
-    /** @var list<array<string, mixed>> */
-    public array $criticalAnomalies = [];
-
-    /** @var list<array<string, mixed>> */
-    public array $overviewPriorityClusters = [];
-
-    /** @var list<array<string, mixed>> */
-    public array $todayActions = [];
-
-    /** @var list<array<string, mixed>> */
     public array $scopeSummary = [];
 
     /** @var list<array<string, mixed>> */
@@ -894,7 +882,6 @@ class SeoOperationsPage extends Page
             array_merge(['key' => SeoContentScopeViewModel::SCOPE_COMBINED, 'label' => __('ops.custom_pages.seo_operations.scopes.combined'), 'count' => $totalInventory], $combinedContract),
         ];
 
-        $this->refreshDecisionOverview();
     }
 
     /**
@@ -988,7 +975,6 @@ class SeoOperationsPage extends Page
             $this->deploymentEvents = [];
         }
 
-        $this->refreshDecisionOverview();
     }
 
     private function refreshIssueClusters(SeoOperationsReadService $reader): void
@@ -1001,133 +987,9 @@ class SeoOperationsPage extends Page
         $this->issueClusterLastPage = (int) ($result['last_page'] ?? 1);
     }
 
-    private function refreshDecisionOverview(): void
-    {
-        $signals = [];
-        $searchChange = $this->searchChangeSignal();
-        if ($searchChange !== null) {
-            $signals[] = $searchChange;
-        }
-
-        $affectedUrls = $this->seoIntelAvailable
-            ? (int) ($this->issueClusterSummary['affected_url_count'] ?? 0)
-            : count($this->issueQueue);
-        $indexBlockers = $this->seoIntelAvailable
-            ? (int) ($this->issueClusterSummary['index_blocker_url_count'] ?? 0)
-            : count(array_filter($this->issueQueue, static fn (array $row): bool => array_intersect(
-                (array) ($row['issue_codes'] ?? []),
-                ['canonical', 'robots', 'indexability', 'growth'],
-            ) !== []));
-
-        $signals[] = $this->decisionSignal('affected_urls', $affectedUrls, 'automation');
-        $signals[] = $this->decisionSignal('index_blockers', $indexBlockers, 'technical');
-
-        if ($this->seoIntelAvailable) {
-            $signals[] = $this->decisionSignal(
-                'high_priority_issues',
-                (int) ($this->issueClusterSummary['high_priority_cluster_count'] ?? 0),
-                'automation',
-            );
-            $signals[] = $this->decisionSignal(
-                'overdue_tasks',
-                (int) ($this->issueClusterSummary['overdue_task_count'] ?? 0),
-                'automation',
-            );
-        }
-
-        $this->decisionSignals = array_slice($signals, 0, 5);
-        $this->criticalAnomalies = array_values(array_slice(array_filter(
-            $this->issueClusters,
-            static fn (array $cluster): bool => ($cluster['status'] ?? null) === 'open'
-                && in_array(($cluster['severity'] ?? null), ['high', 'critical'], true),
-        ), 0, 3));
-        $this->overviewPriorityClusters = array_values(array_slice(array_filter(
-            $this->issueClusters,
-            static fn (array $cluster): bool => ($cluster['status'] ?? null) === 'open'
-                && (bool) data_get($cluster, 'priority.ranking_eligible', false),
-        ), 0, 3));
-        $this->todayActions = array_map(static fn (array $cluster): array => [
-            'cluster_uid' => (string) $cluster['cluster_uid'],
-            'edit_url' => null,
-            'title' => (string) $cluster['issue_type'],
-            'reason' => (string) ($cluster['summary'] ?? $cluster['root_cause'] ?? '-'),
-            'impact' => (int) ($cluster['affected_url_count'] ?? 0),
-            'score' => data_get($cluster, 'priority.score', '-'),
-            'action' => (string) ($cluster['recommendation'] ?? '-'),
-        ], array_slice($this->overviewPriorityClusters, 0, 5));
-
-        if ($this->todayActions === []) {
-            $this->todayActions = array_map(static fn (array $row): array => [
-                'cluster_uid' => null,
-                'edit_url' => (string) ($row['edit_url'] ?? '#'),
-                'title' => (string) ($row['title'] ?? '-'),
-                'reason' => implode(' · ', (array) ($row['issue_labels'] ?? [])),
-                'impact' => 1,
-                'score' => '-',
-                'action' => implode(' · ', array_map(
-                    static fn (string $action): string => __('ops.custom_pages.seo_operations.filters.'.$action),
-                    (array) ($row['autofix_actions'] ?? []),
-                )),
-            ], array_slice($this->issueQueue, 0, 5));
-        }
-    }
-
-    /** @return array<string,mixed>|null */
-    private function searchChangeSignal(): ?array
-    {
-        if (! (bool) ($this->searchPerformance['connected'] ?? false)) {
-            return null;
-        }
-
-        $daily = collect((array) ($this->searchPerformance['daily'] ?? []))
-            ->sortBy('report_date')
-            ->values();
-        if ($daily->count() < 2) {
-            return null;
-        }
-
-        $current = (array) $daily->last();
-        $previous = (array) $daily->get($daily->count() - 2);
-        $currentClicks = (int) ($current['clicks'] ?? 0);
-        $previousClicks = (int) ($previous['clicks'] ?? 0);
-        $delta = $previousClicks > 0
-            ? round((($currentClicks - $previousClicks) / $previousClicks) * 100, 1)
-            : null;
-
-        return [
-            'key' => 'search_change',
-            'label' => __('ops.custom_pages.seo_operations.decision.signals.search_change'),
-            'value' => $delta === null ? (string) ($currentClicks - $previousClicks) : sprintf('%+.1f%%', $delta),
-            'hint' => __('ops.custom_pages.seo_operations.decision.search_change_hint', [
-                'current' => $currentClicks,
-                'previous' => $previousClicks,
-            ]),
-            'workspace' => 'performance',
-            'tone' => ($delta ?? ($currentClicks - $previousClicks)) < 0 ? 'danger' : 'success',
-        ];
-    }
-
-    /** @return array<string,mixed> */
-    private function decisionSignal(string $key, int $value, string $workspace): array
-    {
-        return [
-            'key' => $key,
-            'label' => __('ops.custom_pages.seo_operations.decision.signals.'.$key),
-            'value' => (string) $value,
-            'hint' => __('ops.custom_pages.seo_operations.decision.signal_hints.'.$key),
-            'workspace' => $workspace,
-            'tone' => $value > 0 ? 'warning' : 'success',
-        ];
-    }
-
     public function openDecisionWorkspace(string $workspace): void
     {
-        if (in_array($workspace, self::WORKSPACES, true)) {
-            $this->activeWorkspace = $workspace;
-            if ($workspace === 'automation') {
-                $this->activeAutomationSection = 'operations';
-            }
-        }
+        $this->activeWorkspace = $this->normalizedWorkspace($workspace);
     }
 
     public function openAutomationSection(string $section): void

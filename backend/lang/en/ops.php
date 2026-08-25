@@ -1597,6 +1597,36 @@ return [
                 'sources' => ['url_truth' => 'URL Truth', 'issue_queue' => 'Issue queue', 'crawler_logs' => 'Crawler logs', 'gsc_search_analytics' => 'GSC Search Analytics', 'field_cwv' => 'Field CWV (CrUX/PageSpeed)'],
                 'evidence_available' => 'View supporting evidence',
             ],
+            'workbench' => [
+                'trend' => [
+                    'eyebrow' => 'Search visibility',
+                    'title' => '28-day visibility trend',
+                    'description' => 'A production trend requires one authoritative window, freshness receipt, latency, and explainable change points.',
+                    'metrics' => ['clicks' => 'Clicks', 'impressions' => 'Impressions', 'ctr' => 'CTR', 'position' => 'Average position'],
+                    'hold' => '#9 has not published the unified workbench read model. Partial GSC rows are not promoted into a weekly decision trend.',
+                ],
+                'decisions' => [
+                    'eyebrow' => 'This week',
+                    'title' => 'Priority decisions',
+                    'description' => 'Show :default decisions by default and never more than :max. Missing evidence leaves the slot empty; low-value work never fills it.',
+                    'columns' => ['cause' => 'Detector / cause', 'scope' => 'Family / locale', 'evidence' => 'Evidence / freshness', 'impact' => 'Gain / blast radius', 'action' => 'Allowed action / next step'],
+                    'hold_title' => 'Weekly decisions are on MEASUREMENT_HOLD',
+                    'hold_description' => 'The #9 authoritative contract is unavailable. Existing GSC, Issue, CMS, and deployment models are not joined into synthetic decisions, counts, or priorities.',
+                ],
+                'health' => [
+                    'eyebrow' => 'Site health',
+                    'title' => 'Only release-critical health',
+                    'description' => 'The workbench intentionally withholds the full platform inventory.',
+                    'fields' => ['p0' => 'P0', 'p1' => 'P1', 'p2' => 'P2', 'runtime_slo' => 'Runtime SLO', 'latest_crawl' => 'Latest crawl', 'release_chain' => 'Release chain'],
+                ],
+                'inspector' => [
+                    'eyebrow' => 'SEO ↔ CMS',
+                    'title' => 'Decision handoff',
+                    'description' => 'A selected, source-backed decision may hand off to the existing content authority without creating another editor.',
+                    'actions' => ['preview' => 'Public preview', 'editor' => 'Open content editor', 'diff' => 'View version diff'],
+                    'hold' => 'No decision is eligible, so no target, identity, path, or write control is resolved.',
+                ],
+            ],
             'technical_health' => [
                 'trust_label' => 'Technical health trust status',
                 'trust' => [

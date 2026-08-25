@@ -69,26 +69,6 @@
             :active="$activeWorkspace"
         />
 
-        @if ($activeWorkspace === 'overview')
-            <section class="ops-seo-decision-strip" aria-labelledby="ops-seo-decision-title">
-                <div class="ops-seo-section-heading">
-                    <div>
-                        <h2 id="ops-seo-decision-title">{{ __('ops.custom_pages.seo_operations.decision.title') }}</h2>
-                        <p>{{ __('ops.custom_pages.seo_operations.decision.description') }}</p>
-                    </div>
-                </div>
-                <div class="ops-data-strip" data-signal-count="{{ count($decisionSignals) }}">
-                    @foreach ($decisionSignals as $signal)
-                        <button type="button" class="ops-metric" wire:click="openDecisionWorkspace('{{ $signal['workspace'] }}')">
-                            <span class="ops-metric__label">{{ $signal['label'] }}</span>
-                            <span class="ops-metric__value tnum">{{ $signal['value'] }}</span>
-                            <small>{{ $signal['hint'] }}</small>
-                        </button>
-                    @endforeach
-                </div>
-            </section>
-        @endif
-
         <div class="ops-seo-commandbar" role="toolbar" aria-label="{{ __('ops.custom_pages.seo_operations.toolbar') }}">
             <label class="ops-seo-commandbar__field" for="ops-seo-scope-filter">
                 <span>{{ __('ops.custom_pages.seo_operations.scopes.title') }}</span>
@@ -372,68 +352,7 @@
         @endif
 
         @if ($activeWorkspace === 'overview')
-            @if ($criticalAnomalies !== [])
-                <x-filament-ops::ops-section :title="__('ops.custom_pages.seo_operations.decision.critical_anomalies')">
-                    <div class="ops-card-list">
-                        @foreach ($criticalAnomalies as $cluster)
-                            <x-filament-ops::ops-result-card
-                                :title="$cluster['issue_type']"
-                                :meta="$cluster['severity'].' · '.__('ops.custom_pages.seo_operations.decision.affected_url_count', ['count' => $cluster['affected_url_count']])"
-                            >
-                                <p class="ops-control-hint">{{ $cluster['summary'] ?? $cluster['root_cause'] }}</p>
-                                <x-slot name="actions">
-                                    <x-filament::button size="xs" color="gray" type="button" wire:click="openClusterExecution('{{ $cluster['cluster_uid'] }}')">
-                                        {{ __('ops.custom_pages.seo_operations.decision.review_action') }}
-                                    </x-filament::button>
-                                </x-slot>
-                            </x-filament-ops::ops-result-card>
-                        @endforeach
-                    </div>
-                </x-filament-ops::ops-section>
-            @endif
-
-            <x-filament-ops::ops-section :title="__('ops.custom_pages.seo_operations.decision.priority_clusters')">
-                <div class="ops-table-shell">
-                    <table class="ops-table">
-                        <thead><tr><th>{{ __('ops.custom_pages.seo_operations.clusters.cluster') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.priority') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.affected_urls') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.recommendation') }}</th></tr></thead>
-                        <tbody>
-                            @forelse ($overviewPriorityClusters as $cluster)
-                                <tr><td>{{ $cluster['issue_type'] }}</td><td class="tnum">{{ data_get($cluster, 'priority.score', '-') }}</td><td class="tnum">{{ $cluster['affected_url_count'] }}</td><td>{{ $cluster['recommendation'] ?? '-' }}</td></tr>
-                            @empty
-                                <tr><td colspan="4">{{ __('ops.custom_pages.seo_operations.decision.no_priority_clusters') }}</td></tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </x-filament-ops::ops-section>
-
-            <x-filament-ops::ops-section :title="__('ops.custom_pages.seo_operations.decision.today_actions')">
-                <div class="ops-card-list">
-                    @forelse ($todayActions as $action)
-                        <x-filament-ops::ops-result-card
-                            :title="$action['title']"
-                            :meta="__('ops.custom_pages.seo_operations.decision.action_meta', ['score' => $action['score'], 'count' => $action['impact']])"
-                        >
-                            <p>{{ $action['action'] }}</p>
-                            <p class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.decision.why') }}: {{ $action['reason'] }}</p>
-                            <x-slot name="actions">
-                                @if (!empty($action['cluster_uid']))
-                                    <x-filament::button size="xs" type="button" wire:click="openClusterExecution('{{ $action['cluster_uid'] }}')">
-                                        {{ __('ops.custom_pages.seo_operations.decision.start_action') }}
-                                    </x-filament::button>
-                                @else
-                                    <x-filament::button size="xs" tag="a" href="{{ $action['edit_url'] }}">
-                                        {{ __('ops.custom_pages.seo_operations.decision.start_action') }}
-                                    </x-filament::button>
-                                @endif
-                            </x-slot>
-                        </x-filament-ops::ops-result-card>
-                    @empty
-                        <p class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.decision.no_today_actions') }}</p>
-                    @endforelse
-                </div>
-            </x-filament-ops::ops-section>
-
+            <x-filament-ops::ops-seo-workbench-workspace />
         @endif
 
         @if ($activeWorkspace === 'technical')

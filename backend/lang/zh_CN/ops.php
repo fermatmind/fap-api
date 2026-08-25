@@ -1597,6 +1597,36 @@ return [
                 'sources' => ['url_truth' => 'URL Truth', 'issue_queue' => '问题队列', 'crawler_logs' => 'Crawler 日志', 'gsc_search_analytics' => 'GSC Search Analytics', 'field_cwv' => 'Field CWV（CrUX/PageSpeed）'],
                 'evidence_available' => '查看支持证据',
             ],
+            'workbench' => [
+                'trend' => [
+                    'eyebrow' => '搜索可见度',
+                    'title' => '28 天可见度趋势',
+                    'description' => '生产趋势必须来自同一权威窗口，并同时证明新鲜度、延迟与可解释变更点。',
+                    'metrics' => ['clicks' => '点击', 'impressions' => '展现', 'ctr' => 'CTR', 'position' => '平均排名'],
+                    'hold' => '#9 尚未发布统一工作台 read model；局部 GSC 记录不会被提升为本周决策趋势。',
+                ],
+                'decisions' => [
+                    'eyebrow' => '本周',
+                    'title' => '优先决策',
+                    'description' => '默认显示 :default 条，最多 :max 条；证据不足时留空，不用低价值事项补位。',
+                    'columns' => ['cause' => 'Detector / 根因', 'scope' => 'Family / locale', 'evidence' => '证据 / 新鲜度', 'impact' => '收益 / 爆炸半径', 'action' => '允许动作 / 下一步'],
+                    'hold_title' => '本周决策处于 MEASUREMENT_HOLD',
+                    'hold_description' => '#9 权威合同不可用；现有 GSC、Issue、CMS 与部署模型不会被拼接成虚构决策、数量或优先级。',
+                ],
+                'health' => [
+                    'eyebrow' => '站点健康',
+                    'title' => '只显示发布关键健康',
+                    'description' => '工作台有意不展示完整平台指标仓库。',
+                    'fields' => ['p0' => 'P0', 'p1' => 'P1', 'p2' => 'P2', 'runtime_slo' => 'Runtime SLO', 'latest_crawl' => '最近抓取', 'release_chain' => '发布链'],
+                ],
+                'inspector' => [
+                    'eyebrow' => 'SEO ↔ CMS',
+                    'title' => '决策联动',
+                    'description' => '选中的真实决策可交给现有内容 authority，不建立第二套编辑器。',
+                    'actions' => ['preview' => '线上预览', 'editor' => '打开内容编辑器', 'diff' => '查看版本差异'],
+                    'hold' => '当前没有合格决策，因此不会解析目标、身份、路径或写入控制。',
+                ],
+            ],
             'technical_health' => [
                 'trust_label' => '技术健康信任状态',
                 'trust' => [

@@ -5327,6 +5327,131 @@
         line-height: 1.5;
     }
 
+    .fi-body.fi-panel-ops .ops-seo-workbench-home {
+        display: grid;
+        grid-template-columns: minmax(0, 1.4fr) minmax(18rem, .6fr);
+        gap: 1rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-seo-workbench-home > section,
+    .fi-body.fi-panel-ops .ops-seo-workbench-home > aside {
+        min-width: 0;
+        padding: 1.25rem;
+        border: 1px solid var(--ops-border-default);
+        border-radius: var(--ops-radius-card);
+        background: var(--ops-bg-surface);
+        box-shadow: var(--ops-shadow-surface);
+    }
+
+    .fi-body.fi-panel-ops .ops-seo-workbench-home__decisions {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+
+    .fi-body.fi-panel-ops .ops-seo-workbench-home__metrics {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: .5rem;
+        margin: 1rem 0;
+    }
+
+    .fi-body.fi-panel-ops .ops-seo-workbench-home__metrics div,
+    .fi-body.fi-panel-ops .ops-seo-workbench-home__health dl div {
+        padding: .75rem;
+        border: 1px solid var(--ops-border-default);
+        border-radius: var(--ops-radius-input);
+        background: var(--ops-bg-surface-subtle);
+    }
+
+    .fi-body.fi-panel-ops .ops-seo-workbench-home__metrics span,
+    .fi-body.fi-panel-ops .ops-seo-workbench-home__metrics strong {
+        display: block;
+    }
+
+    .fi-body.fi-panel-ops .ops-seo-workbench-home__metrics span,
+    .fi-body.fi-panel-ops .ops-seo-workbench-home__health dt {
+        color: var(--ops-text-tertiary);
+        font-size: .75rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-seo-workbench-home__metrics strong {
+        margin-top: .25rem;
+        color: var(--ops-text-primary);
+        font-size: 1.25rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-seo-workbench-home__decision-head {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr 1.15fr 1fr 1.25fr;
+        gap: .75rem;
+        margin: 1rem 1rem .5rem;
+        color: var(--ops-text-tertiary);
+        font-size: .6875rem;
+        font-weight: 650;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+    }
+
+    .fi-body.fi-panel-ops .ops-seo-workbench-home__health dl {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: .5rem;
+        margin-top: 1rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-seo-workbench-home__health dd {
+        margin-top: .25rem;
+        color: var(--ops-text-primary);
+        font-weight: 700;
+    }
+
+    .fi-body.fi-panel-ops .ops-seo-workbench-home__inspector h2,
+    .fi-body.fi-panel-ops .ops-seo-workbench-home__inspector > p {
+        margin-top: .4rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-seo-workbench-home__action-list {
+        display: grid;
+        gap: .5rem;
+        margin-top: 1rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-seo-workbench-home__action-list span {
+        min-height: 40px;
+        padding: .65rem .75rem;
+        border: 1px solid var(--ops-border-default);
+        border-radius: var(--ops-radius-input);
+        background: var(--ops-bg-surface-subtle);
+        color: var(--ops-text-tertiary);
+    }
+
+    @media (max-width: 1024px) {
+        .fi-body.fi-panel-ops .ops-seo-workbench-home {
+            grid-template-columns: 1fr;
+        }
+
+        .fi-body.fi-panel-ops .ops-seo-workbench-home__decisions {
+            grid-column: auto;
+            grid-row: auto;
+        }
+    }
+
+    @media (max-width: 720px) {
+        .fi-body.fi-panel-ops .ops-seo-workbench-home > section,
+        .fi-body.fi-panel-ops .ops-seo-workbench-home > aside {
+            padding: 1rem;
+        }
+
+        .fi-body.fi-panel-ops .ops-seo-workbench-home__metrics,
+        .fi-body.fi-panel-ops .ops-seo-workbench-home__health dl {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .fi-body.fi-panel-ops .ops-seo-workbench-home__decision-head {
+            display: none;
+        }
+    }
+
     .fi-body.fi-panel-ops .ops-technical-health {
         display: grid;
         gap: 1rem;
