@@ -949,7 +949,6 @@ return [
             'empty_desc' => 'Recent CMS activity will appear here once editorial or taxonomy records exist.',
             'fields' => [
                 'current_org_editorial' => 'Current org editorial',
-                'current_org_editorial_hint' => 'Article records bound to the currently selected Ops organization.',
                 'current_org_taxonomy' => 'Current org taxonomy',
                 'current_org_taxonomy_hint' => 'Categories and tags available to the currently selected organization.',
                 'global_career_content' => 'Global career content',

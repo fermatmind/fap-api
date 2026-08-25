@@ -492,6 +492,7 @@ final class ContentCmsProductLayerTest extends TestCase
             ->assertOk()
             ->assertSee('Current org editorial')
             ->assertSee('Global career content')
+            ->assertDontSee('Article records bound to the currently selected Ops organization.')
             ->assertDontSee('Content versions')
             ->assertDontSee('Release records');
     }

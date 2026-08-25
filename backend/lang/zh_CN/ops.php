@@ -949,7 +949,6 @@ return [
             'empty_desc' => '有编辑内容或分类标签记录后，近期 CMS 活动会显示在这里。',
             'fields' => [
                 'current_org_editorial' => '当前组织编辑内容',
-                'current_org_editorial_hint' => '绑定到当前所选 Ops 组织的文章记录。',
                 'current_org_taxonomy' => '当前组织分类标签',
                 'current_org_taxonomy_hint' => '当前所选组织可用的分类和标签。',
                 'global_career_content' => '全局职业内容',

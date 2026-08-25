@@ -71,7 +71,7 @@ class ContentOverviewPage extends Page
             [
                 'label' => __('ops.custom_pages.content_overview.fields.current_org_editorial'),
                 'value' => (string) $articleCount,
-                'hint' => __('ops.custom_pages.content_overview.fields.current_org_editorial_hint'),
+                'hint' => null,
             ],
             [
                 'label' => __('ops.custom_pages.content_overview.fields.current_org_taxonomy'),

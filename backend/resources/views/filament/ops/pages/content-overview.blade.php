@@ -58,7 +58,6 @@
                     'label' => $stage['label'],
                     'value' => $stage['count'],
                     'tone' => $stage['tone'],
-                    'meta' => __('ops.custom_pages.content_overview.fields.current_org_editorial_hint'),
                 ])->all()"
             />
         </x-filament-ops::ops-section>
