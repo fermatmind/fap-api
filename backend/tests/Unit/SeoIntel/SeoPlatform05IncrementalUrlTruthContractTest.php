@@ -72,6 +72,8 @@ final class SeoPlatform05IncrementalUrlTruthContractTest extends TestCase
         self::assertStringContainsString("'seo_intel.enabled' => true", $canary);
         self::assertStringContainsString("'seo_intel.write_enabled' => true", $canary);
         self::assertStringContainsString("'seo_intel.incremental_sync_inline' => true", $canary);
+        self::assertStringContainsString("'blocked_stage' => \$stage", $canary);
+        self::assertStringContainsString("'blocked_reason' => \$this->blockedReason(\$exception)", $canary);
         self::assertStringContainsString('$job->handle(app(IncrementalUrlTruthSyncService::class))', file_get_contents($root.'/app/Listeners/QueueUrlTruthIncrementalSync.php'));
     }
 
