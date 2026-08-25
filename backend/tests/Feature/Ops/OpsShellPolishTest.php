@@ -137,6 +137,7 @@ final class OpsShellPolishTest extends TestCase
             resource_path('views/filament/ops/pages/test-kpi-daily-page.blade.php'),
             resource_path('views/filament/ops/pages/content-search.blade.php'),
             resource_path('views/filament/ops/pages/content-metrics.blade.php'),
+            resource_path('views/filament/ops/pages/content-growth-attribution.blade.php'),
             resource_path('views/filament/ops/pages/global-search-page.blade.php'),
             resource_path('views/filament/ops/pages/delivery-tools.blade.php'),
             resource_path('views/filament/ops/pages/secure-link.blade.php'),
@@ -156,6 +157,11 @@ final class OpsShellPolishTest extends TestCase
             'workspace_scope',
             "content_search.description')",
             "content_metrics.contract_hint')",
+            "content_growth_attribution.description')",
+            "content_growth_attribution.contract_hint')",
+            "content_growth_attribution.dashboard_desc')",
+            "content_growth_attribution.diagnostics_desc')",
+            "content_growth_attribution.matrix_desc')",
             "global_search.description')",
             "delivery_tools.reason_hint')",
             "public-content-health.generated_at'",
@@ -169,6 +175,11 @@ final class OpsShellPolishTest extends TestCase
         $this->assertStringContainsString('.ops-kpi-card-centered', $theme);
         $this->assertStringContainsString('.ops-field-grid--centered', $theme);
         $this->assertStringContainsString('.ops-toolbar--center-actions', $theme);
+
+        $growthAttribution = (string) file_get_contents(resource_path('views/filament/ops/pages/content-growth-attribution.blade.php'));
+        $this->assertStringContainsString('class="ops-toolbar--center-actions"', $growthAttribution);
+        $this->assertStringContainsString('class="ops-field-grid--centered"', $growthAttribution);
+        $this->assertStringContainsString(':show-hints="false"', $growthAttribution);
     }
 
     public function test_ops_theme_tokens_match_complete_preview_light_and_dark_contract(): void
