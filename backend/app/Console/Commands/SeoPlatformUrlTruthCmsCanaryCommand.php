@@ -16,7 +16,7 @@ use Throwable;
 
 final class SeoPlatformUrlTruthCmsCanaryCommand extends Command
 {
-    protected $signature = 'seo-intel:url-truth-cms-canary {--timeout=45} {--json}';
+    protected $signature = 'seo-intel:url-truth-cms-canary {--timeout=45} {--json} {--allow-measurement-hold}';
 
     protected $description = 'Republish one unchanged public CMS article and prove post-commit URL Truth incremental readback.';
 
@@ -25,14 +25,34 @@ final class SeoPlatformUrlTruthCmsCanaryCommand extends Command
         CurrentPublicUrlAuthoritySource $authority,
         EffectivePublicUrlEvaluator $evaluator,
     ): int {
+        $writeLaneEnabled = (bool) config('seo_intel.enabled', false)
+            && (bool) config('seo_intel.write_enabled', false);
+        if (! $writeLaneEnabled && (bool) $this->option('allow-measurement-hold')) {
+            $this->line((string) json_encode([
+                'schema_version' => 'seo-platform-url-truth-cms-canary.v1',
+                'status' => 'measurement_hold',
+                'reason' => 'write_lane_disabled',
+                'cms_publish_service_used' => false,
+                'post_commit_event_path' => false,
+                'url_truth_readback' => false,
+                'runtime_flags_persisted' => false,
+                'boundaries' => [
+                    'content_body_changed' => false,
+                    'sitemap_authority_mutation_attempted' => false,
+                    'search_submission_allowed' => false,
+                    'raw_error_output' => false,
+                ],
+            ], JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+
+            return self::SUCCESS;
+        }
+
         $stage = 'configure_canary';
         try {
             // Staging deliberately has no queue worker. Keep the post-commit event,
             // listener, and unified job handler while using a deterministic canary-only
             // dispatch path that cannot be blocked by a stale async unique lock.
             config([
-                'seo_intel.enabled' => true,
-                'seo_intel.write_enabled' => true,
                 'seo_intel.incremental_sync_inline' => true,
             ]);
 

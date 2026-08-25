@@ -798,7 +798,7 @@ task('artisan:migrate', function () {
 });
 
 task('artisan:migrate-seo-intel', function () {
-    within('{{release_path}}/backend', function (): void {
+    within('{{release_path}}/backend', function () use ($canaryMode): void {
         run(<<<'BASH'
 set -euo pipefail
 set +e
@@ -1058,18 +1058,32 @@ BASH, timeout: 1800);
 });
 
 task('seo:url-truth-incremental-cms-canary', function () {
-    within('{{release_path}}/backend', function (): void {
-        run(<<<'BASH'
+    $canaryMode = currentHost()->getAlias() === 'staging' ? '--allow-measurement-hold' : '';
+    within('{{release_path}}/backend', function () use ($canaryMode): void {
+        $script = str_replace('__CANARY_MODE__', $canaryMode, <<<'BASH'
 set -euo pipefail
 set +e
-receipt="$({{bin/php}} artisan seo-intel:url-truth-cms-canary --timeout=10 --json --no-interaction --no-ansi)"
+canary_mode="__CANARY_MODE__"
+receipt="$({{bin/php}} artisan seo-intel:url-truth-cms-canary --timeout=10 $canary_mode --json --no-interaction --no-ansi)"
 command_status="$?"
 set -e
 printf '%s\n' "$receipt"
 test "$command_status" -eq 0 || exit 44
-printf '%s' "$receipt" | {{bin/php}} -r '
+printf '%s' "$receipt" | CANARY_MODE="$canary_mode" {{bin/php}} -r '
 $payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
-$ok = ($payload["schema_version"] ?? null) === "seo-platform-url-truth-cms-canary.v1"
+$ok = ($payload["schema_version"] ?? null) === "seo-platform-url-truth-cms-canary.v1";
+if (getenv("CANARY_MODE") === "--allow-measurement-hold" && ($payload["status"] ?? null) === "measurement_hold") {
+    $ok = $ok
+        && ($payload["reason"] ?? null) === "write_lane_disabled"
+        && ($payload["cms_publish_service_used"] ?? null) === false
+        && ($payload["post_commit_event_path"] ?? null) === false
+        && ($payload["url_truth_readback"] ?? null) === false
+        && ($payload["runtime_flags_persisted"] ?? null) === false
+        && ($payload["boundaries"]["content_body_changed"] ?? null) === false
+        && ($payload["boundaries"]["sitemap_authority_mutation_attempted"] ?? null) === false
+        && ($payload["boundaries"]["search_submission_allowed"] ?? null) === false;
+} else {
+    $ok = $ok
     && ($payload["status"] ?? null) === "success"
     && ($payload["cms_publish_service_used"] ?? null) === true
     && ($payload["post_commit_event_path"] ?? null) === true
@@ -1081,9 +1095,11 @@ $ok = ($payload["schema_version"] ?? null) === "seo-platform-url-truth-cms-canar
     && ($payload["boundaries"]["search_submission_allowed"] ?? null) === false
     && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["identity_hash"] ?? "")) === 1
     && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["revision_hash"] ?? "")) === 1;
+}
 exit($ok ? 0 : 1);
 ' || exit 44
 BASH);
+        run($script);
     });
 });
 
