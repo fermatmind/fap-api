@@ -110,6 +110,34 @@ final class OpsShellPolishTest extends TestCase
         );
     }
 
+    public function test_requested_ops_surfaces_omit_redundant_helper_copy(): void
+    {
+        $views = [
+            resource_path('views/filament/ops/pages/webhook-monitor.blade.php'),
+            resource_path('views/filament/ops/pages/queue-monitor.blade.php'),
+            resource_path('views/filament/ops/pages/select-org-page.blade.php'),
+            resource_path('views/filament/ops/pages/test-kpi-daily-page.blade.php'),
+            resource_path('views/filament/ops/widgets/ops-action-queue-widget.blade.php'),
+            resource_path('views/filament/ops/widgets/test-kpi-daily-inline-widget.blade.php'),
+        ];
+
+        $source = implode("\n", array_map(static fn (string $path): string => (string) file_get_contents($path), $views));
+
+        foreach ([
+            'signature_ok = false',
+            'status or handle failure backlog',
+            'test_kpi_daily_detail_desc',
+            'visible_workspaces',
+            'workspace_scope',
+        ] as $removedCopy) {
+            $this->assertStringNotContainsString($removedCopy, $source);
+        }
+
+        $theme = (string) file_get_contents(resource_path('css/filament/ops/theme.css'));
+        $this->assertStringContainsString('.fi-wi-stats-overview-stat.ops-stat-centered', $theme);
+        $this->assertStringContainsString('.ops-kpi-card-centered', $theme);
+    }
+
     public function test_ops_theme_tokens_match_complete_preview_light_and_dark_contract(): void
     {
         $theme = (string) file_get_contents(resource_path('css/filament/ops/theme.css'));

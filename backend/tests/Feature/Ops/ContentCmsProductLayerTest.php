@@ -603,6 +603,49 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->assertFalse(Route::has('filament.ops.resources.content-releases.index'));
     }
 
+    public function test_content_pack_release_resource_uses_locale_aware_page_labels(): void
+    {
+        app()->setLocale('zh_CN');
+        $this->assertSame('内容包发布', ContentPackReleaseResource::getModelLabel());
+        $this->assertSame('内容包发布', ContentPackReleaseResource::getPluralModelLabel());
+
+        app()->setLocale('en');
+        $this->assertSame('Content Pack Release', ContentPackReleaseResource::getModelLabel());
+        $this->assertSame('Content Pack Releases', ContentPackReleaseResource::getPluralModelLabel());
+    }
+
+    public function test_content_pack_release_list_is_fully_labeled_in_chinese(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_RELEASE]);
+        $session = $this->opsSession((int) $admin->id);
+        $session[\App\Http\Middleware\SetOpsLocale::SESSION_KEY] = 'zh_CN';
+
+        \Illuminate\Support\Facades\DB::table('content_pack_releases')->insert([
+            'id' => (string) Str::uuid(),
+            'action' => 'publish',
+            'region' => 'GLOBAL',
+            'locale' => 'global',
+            'dir_alias' => 'v1',
+            'status' => 'success',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $this->withSession($session)
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/content-pack-releases')
+            ->assertOk()
+            ->assertSee('内容包发布')
+            ->assertSee('操作类型')
+            ->assertSee('目录别名')
+            ->assertSee('来源内容包')
+            ->assertSee('目标内容包')
+            ->assertSee('探针通过')
+            ->assertSee('探针运行时间')
+            ->assertDontSee('Content Pack Release')
+            ->assertDontSee('DIR ALIAS');
+    }
+
     public function test_editorial_review_surface_marks_missing_inputs_for_attention(): void
     {
         $admin = $this->createAdminWithPermissions([

@@ -88,16 +88,22 @@ class CommerceKpiWidget extends BaseWidget
             ->count();
 
         return [
-            Stat::make(__('ops.widgets.paid_orders_today'), (string) $paidOrders),
+            Stat::make(__('ops.widgets.paid_orders_today'), (string) $paidOrders)
+                ->extraAttributes(['class' => 'ops-stat-centered']),
             Stat::make(__('ops.widgets.pending_unresolved'), (string) $pendingUnresolved)
+                ->extraAttributes(['class' => 'ops-stat-centered'])
                 ->color($pendingUnresolved > 0 ? 'warning' : 'success'),
             Stat::make(__('ops.widgets.paid_without_grant'), (string) $paidNoGrant)
+                ->extraAttributes(['class' => 'ops-stat-centered'])
                 ->color($paidNoGrant > 0 ? 'danger' : 'success'),
             Stat::make(__('ops.widgets.compensated_today'), (string) $compensatedRecently)
+                ->extraAttributes(['class' => 'ops-stat-centered'])
                 ->color($compensatedRecently > 0 ? 'warning' : 'gray'),
             Stat::make(__('ops.widgets.refund_count'), (string) $refundCount)
+                ->extraAttributes(['class' => 'ops-stat-centered'])
                 ->color($refundCount > 0 ? 'warning' : 'success'),
             Stat::make(__('ops.widgets.webhook_failures'), (string) $webhookFailures)
+                ->extraAttributes(['class' => 'ops-stat-centered'])
                 ->color($webhookFailures > 0 ? 'danger' : 'success'),
         ];
     }
@@ -106,6 +112,7 @@ class CommerceKpiWidget extends BaseWidget
     {
         return Stat::make($label, self::NO_ORG_PLACEHOLDER)
             ->description($description)
+            ->extraAttributes(['class' => 'ops-stat-centered'])
             ->color('gray');
     }
 

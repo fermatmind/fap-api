@@ -2,7 +2,6 @@
     <section class="ops-inline-data-section">
         <div class="ops-inline-data-section__header">
             <h2>{{ __('ops.widgets.test_kpi_daily_detail') }}</h2>
-            <p>{{ __('ops.widgets.test_kpi_daily_detail_desc') }}</p>
         </div>
 
         @if ($warning !== null)

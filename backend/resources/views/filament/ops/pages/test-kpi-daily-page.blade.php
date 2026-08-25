@@ -69,15 +69,16 @@
         <section class="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm">
             <div class="mb-4">
                 <h2 class="text-lg font-semibold text-slate-950">{{ __('ops.pages.test_kpi_daily.sections.kpis') }}</h2>
-                <p class="text-sm text-slate-500">{{ __('ops.pages.test_kpi_daily.sections.kpis_desc') }}</p>
             </div>
 
             <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
                 @foreach ($kpis as $card)
-                    <article class="rounded-2xl border border-slate-200 bg-slate-50/70 p-4">
+                    <article class="ops-kpi-card-centered rounded-2xl border border-slate-200 bg-slate-50/70 p-4">
                         <div class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{{ $card['label'] }}</div>
                         <div class="mt-3 text-2xl font-semibold tracking-tight text-slate-950">{{ $this->formatInt((int) $card['value']) }}</div>
-                        <p class="mt-2 text-sm leading-6 text-slate-600">{{ $card['description'] }}</p>
+                        @if (filled($card['description']))
+                            <p class="mt-2 text-sm leading-6 text-slate-600">{{ $card['description'] }}</p>
+                        @endif
                     </article>
                 @endforeach
             </div>
@@ -86,7 +87,6 @@
         <section class="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm">
             <div class="mb-4">
                 <h2 class="text-lg font-semibold text-slate-950">{{ __('ops.pages.test_kpi_daily.sections.detail') }}</h2>
-                <p class="text-sm text-slate-500">{{ __('ops.pages.test_kpi_daily.sections.detail_desc') }}</p>
             </div>
 
             <div class="overflow-x-auto">

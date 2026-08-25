@@ -68,7 +68,7 @@ class SelectOrgPage extends Page
 
     public function getSubheading(): ?string
     {
-        return __('ops.select_org.subheading');
+        return null;
     }
 
     public function updatedSearch(): void

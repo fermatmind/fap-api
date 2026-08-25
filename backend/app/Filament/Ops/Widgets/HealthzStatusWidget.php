@@ -54,12 +54,14 @@ class HealthzStatusWidget extends BaseWidget
         }
 
         return [
-            Stat::make(__('ops.widgets.status'), $ok ? __('ops.widgets.ok') : __('ops.widgets.fail'))
-                ->color($ok ? 'success' : 'danger')
-                ->description((string) ($row->env ?? '')),
+            Stat::make('', $ok ? __('ops.widgets.ok') : __('ops.widgets.fail'))
+                ->extraAttributes(['class' => 'ops-stat-centered'])
+                ->color($ok ? 'success' : 'danger'),
             Stat::make(__('ops.widgets.failed_deps'), (string) $failedDeps)
+                ->extraAttributes(['class' => 'ops-stat-centered'])
                 ->color($failedDeps > 0 ? 'danger' : 'success'),
             Stat::make(__('ops.widgets.error_codes'), (string) count($errorCodes))
+                ->extraAttributes(['class' => 'ops-stat-centered'])
                 ->color(count($errorCodes) > 0 ? 'warning' : 'success'),
         ];
     }

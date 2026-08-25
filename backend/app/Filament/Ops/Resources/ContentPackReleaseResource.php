@@ -46,6 +46,16 @@ class ContentPackReleaseResource extends Resource
         return __('ops.nav.content_pack_releases');
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('ops.resources.content_pack_releases.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('ops.resources.content_pack_releases.plural');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([]);
@@ -55,25 +65,27 @@ class ContentPackReleaseResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('action')->badge()->sortable(),
-                Tables\Columns\TextColumn::make('region')->sortable(),
-                Tables\Columns\TextColumn::make('locale')->sortable(),
-                Tables\Columns\TextColumn::make('dir_alias')->searchable(),
-                Tables\Columns\TextColumn::make('from_pack_id')->label('From Pack')->toggleable(),
-                Tables\Columns\TextColumn::make('to_pack_id')->label('To Pack')->toggleable(),
+                Tables\Columns\TextColumn::make('action')->label(__('ops.resources.content_pack_releases.fields.action'))->badge()->sortable(),
+                Tables\Columns\TextColumn::make('region')->label(__('ops.resources.content_pack_releases.fields.region'))->sortable(),
+                Tables\Columns\TextColumn::make('locale')->label(__('ops.resources.content_pack_releases.fields.locale'))->sortable(),
+                Tables\Columns\TextColumn::make('dir_alias')->label(__('ops.resources.content_pack_releases.fields.dir_alias'))->searchable(),
+                Tables\Columns\TextColumn::make('from_pack_id')->label(__('ops.resources.content_pack_releases.fields.from_pack'))->toggleable(),
+                Tables\Columns\TextColumn::make('to_pack_id')->label(__('ops.resources.content_pack_releases.fields.to_pack'))->toggleable(),
                 Tables\Columns\TextColumn::make('status')
+                    ->label(__('ops.resources.content_pack_releases.fields.status'))
                     ->badge()
+                    ->formatStateUsing(fn (string $state): string => StatusBadge::label($state))
                     ->color(fn (string $state): string => StatusBadge::color($state))
                     ->sortable(),
-                Tables\Columns\IconColumn::make('probe_ok')->boolean()->label('Probe OK'),
-                Tables\Columns\TextColumn::make('probe_run_at')->dateTime()->toggleable(),
-                Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
+                Tables\Columns\IconColumn::make('probe_ok')->boolean()->label(__('ops.resources.content_pack_releases.fields.probe_ok')),
+                Tables\Columns\TextColumn::make('probe_run_at')->label(__('ops.resources.content_pack_releases.fields.probe_run_at'))->dateTime()->toggleable(),
+                Tables\Columns\TextColumn::make('created_at')->label(__('ops.resources.content_pack_releases.fields.created_at'))->dateTime()->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\Action::make('probe')
-                    ->label('Run Probe')
+                    ->label(__('ops.resources.content_pack_releases.actions.run_probe'))
                     ->icon('heroicon-o-sparkles')
                     ->requiresConfirmation()
                     ->visible(fn (): bool => ContentAccess::canReleaseContentPacks())
@@ -104,23 +116,24 @@ class ContentPackReleaseResource extends Resource
                         );
 
                         Notification::make()
-                            ->title('Probe queued')
+                            ->title(__('ops.resources.content_pack_releases.notifications.probe_queued'))
                             ->success()
                             ->send();
                     }),
                 Tables\Actions\Action::make('release')
-                    ->label('Release')
+                    ->label(__('ops.resources.content_pack_releases.actions.release'))
                     ->icon('heroicon-o-paper-airplane')
                     ->requiresConfirmation()
                     ->visible(fn (ContentPackRelease $record): bool => ContentAccess::canReleaseContentPacks() && (bool) $record->probe_ok)
                     ->form([
                         Forms\Components\Textarea::make('reason')
+                            ->label(__('ops.resources.content_pack_releases.fields.reason'))
                             ->required()
                             ->maxLength(255),
                     ])
                     ->action(function (ContentPackRelease $record, array $data): void {
                         if (! ((bool) $record->probe_ok)) {
-                            Notification::make()->title('Probe must pass before release')->danger()->send();
+                            Notification::make()->title(__('ops.resources.content_pack_releases.notifications.probe_required'))->danger()->send();
 
                             return;
                         }
@@ -154,15 +167,16 @@ class ContentPackReleaseResource extends Resource
                             );
                         });
 
-                        Notification::make()->title('Release marked as success')->success()->send();
+                        Notification::make()->title(__('ops.resources.content_pack_releases.notifications.release_success'))->success()->send();
                     }),
                 Tables\Actions\Action::make('requestRollback')
-                    ->label('Request Rollback')
+                    ->label(__('ops.resources.content_pack_releases.actions.request_rollback'))
                     ->icon('heroicon-o-arrow-uturn-left')
                     ->requiresConfirmation()
                     ->visible(fn (): bool => ContentAccess::canReleaseContentPacks())
                     ->form([
                         Forms\Components\Textarea::make('reason')
+                            ->label(__('ops.resources.content_pack_releases.fields.reason'))
                             ->required()
                             ->maxLength(255),
                     ])
@@ -212,14 +226,14 @@ class ContentPackReleaseResource extends Resource
                         );
 
                         Notification::make()
-                            ->title('Rollback request submitted')
-                            ->body('Approval #'.$approval->id)
+                            ->title(__('ops.resources.content_pack_releases.notifications.rollback_requested'))
+                            ->body(__('ops.resources.content_pack_releases.notifications.approval_id', ['id' => $approval->id]))
                             ->success()
                             ->send();
                     }),
                 Tables\Actions\Action::make('viewProbeJson')
-                    ->label('Probe JSON')
-                    ->modalHeading('Probe JSON')
+                    ->label(__('ops.resources.content_pack_releases.actions.view_probe_json'))
+                    ->modalHeading(__('ops.resources.content_pack_releases.actions.view_probe_json'))
                     ->modalContent(function (ContentPackRelease $record) {
                         $json = is_array($record->probe_json)
                             ? json_encode($record->probe_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)

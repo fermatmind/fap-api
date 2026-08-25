@@ -16,8 +16,6 @@ final class TestKpiSummaryWidget extends BaseWidget
 
     private const GLOBAL_ORG_ID = 0;
 
-    private const EMPTY_READ_MODEL_MESSAGE = 'No analytics_test_metrics_daily rows match global org_id=0. Run analytics:refresh-test-metrics-daily in a controlled task.';
-
     public static function canView(): bool
     {
         return OpsMetricsAccess::canViewTestMetrics();
@@ -31,7 +29,7 @@ final class TestKpiSummaryWidget extends BaseWidget
     protected function getStats(): array
     {
         if (! SchemaBaseline::hasTable('analytics_test_metrics_daily')) {
-            return [$this->emptyReadModelStat('analytics_test_metrics_daily table is missing. Run php artisan migrate first.')];
+            return [$this->emptyReadModelStat()];
         }
 
         $today = now()->toDateString();
@@ -47,7 +45,7 @@ final class TestKpiSummaryWidget extends BaseWidget
             ->first();
 
         if ((int) ($row->row_count ?? 0) <= 0) {
-            return [$this->emptyReadModelStat(self::EMPTY_READ_MODEL_MESSAGE)];
+            return [$this->emptyReadModelStat()];
         }
 
         $todaySuccess = (int) ($row->today_successful_attempts ?? 0);
@@ -57,24 +55,24 @@ final class TestKpiSummaryWidget extends BaseWidget
 
         return [
             Stat::make(__('ops.widgets.test_success_today'), (string) $todaySuccess)
-                ->description('analytics_test_metrics_daily.successful_attempts today')
+                ->extraAttributes(['class' => 'ops-stat-centered'])
                 ->color($todaySuccess > 0 ? 'success' : 'gray'),
             Stat::make(__('ops.widgets.test_failures_today'), (string) $todayFailures)
-                ->description('analytics_test_metrics_daily.failed_attempts today')
+                ->extraAttributes(['class' => 'ops-stat-centered'])
                 ->color($todayFailures > 0 ? 'danger' : 'success'),
             Stat::make(__('ops.widgets.site_success_cumulative'), (string) $cumulativeSuccess)
-                ->description('analytics_test_metrics_daily.successful_attempts all days')
+                ->extraAttributes(['class' => 'ops-stat-centered'])
                 ->color($cumulativeSuccess > 0 ? 'success' : 'gray'),
             Stat::make(__('ops.widgets.site_failures_cumulative'), (string) $cumulativeFailures)
-                ->description('analytics_test_metrics_daily.failed_attempts all days')
+                ->extraAttributes(['class' => 'ops-stat-centered'])
                 ->color($cumulativeFailures > 0 ? 'warning' : 'success'),
         ];
     }
 
-    private function emptyReadModelStat(string $description): Stat
+    private function emptyReadModelStat(): Stat
     {
         return Stat::make(__('ops.widgets.test_kpi'), __('ops.widgets.no_data'))
-            ->description($description)
+            ->extraAttributes(['class' => 'ops-stat-centered'])
             ->color('gray');
     }
 }

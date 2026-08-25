@@ -1,6 +1,6 @@
 @props([
     'eyebrow' => null,
-    'meta' => __('ops.topbar.operations_shell'),
+    'meta' => null,
     'title' => 'Fermat Ops',
 ])
 
@@ -12,7 +12,9 @@
 
         <div class="ops-topbar-context__body">
             <span class="ops-topbar-context__title">{{ $title }}</span>
-            <span class="ops-topbar-context__meta">{{ $meta }}</span>
+            @if (filled($meta))
+                <span class="ops-topbar-context__meta">{{ $meta }}</span>
+            @endif
         </div>
     </div>
 

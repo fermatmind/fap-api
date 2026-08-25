@@ -2739,6 +2739,36 @@ return [
     ],
 
     'resources' => [
+        'content_pack_releases' => [
+            'label' => 'Content Pack Release',
+            'plural' => 'Content Pack Releases',
+            'fields' => [
+                'action' => 'Action Type',
+                'region' => 'Region',
+                'locale' => 'Locale',
+                'dir_alias' => 'Directory Alias',
+                'from_pack' => 'From Pack',
+                'to_pack' => 'To Pack',
+                'status' => 'Status',
+                'probe_ok' => 'Probe OK',
+                'probe_run_at' => 'Probe Run At',
+                'created_at' => 'Created At',
+                'reason' => 'Reason',
+            ],
+            'actions' => [
+                'run_probe' => 'Run Probe',
+                'release' => 'Release',
+                'request_rollback' => 'Request Rollback',
+                'view_probe_json' => 'View Probe JSON',
+            ],
+            'notifications' => [
+                'probe_queued' => 'Probe queued',
+                'probe_required' => 'Probe must pass before release',
+                'release_success' => 'Release marked as success',
+                'rollback_requested' => 'Rollback request submitted',
+                'approval_id' => 'Approval #:id',
+            ],
+        ],
         'common' => [
             'actions' => [
                 'create_another' => 'Create & Add Another',

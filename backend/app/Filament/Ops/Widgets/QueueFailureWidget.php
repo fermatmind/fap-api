@@ -34,10 +34,10 @@ class QueueFailureWidget extends BaseWidget
 
         return [
             Stat::make(__('ops.widgets.failed_jobs_count'), (string) $failedJobsCount)
-                ->description(__('ops.widgets.queue_failure_backlog'))
+                ->extraAttributes(['class' => 'ops-stat-centered'])
                 ->color($failedJobsCount > 0 ? 'danger' : 'success'),
             Stat::make(__('ops.widgets.pending_approvals'), (string) $pendingApprovals)
-                ->description(__('ops.widgets.risk_badge_pending_approvals'))
+                ->extraAttributes(['class' => 'ops-stat-centered'])
                 ->color($pendingApprovals > 0 ? 'warning' : 'success'),
         ];
     }
