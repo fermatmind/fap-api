@@ -17,6 +17,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ScaleSlugResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = ScaleSlug::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-link';

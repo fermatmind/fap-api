@@ -16,6 +16,8 @@ use Filament\Pages\Page;
 
 class EditorialOperationsPage extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $navigationIcon = 'heroicon-o-pencil-square';
 
     protected static ?string $navigationGroup = null;

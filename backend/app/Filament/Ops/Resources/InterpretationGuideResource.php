@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class InterpretationGuideResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = InterpretationGuide::class;
 
     protected static ?string $slug = 'interpretation-guides';

@@ -21,6 +21,8 @@ use Illuminate\Validation\ValidationException;
 
 class PersonalityVariantCloneContentResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = PersonalityProfileVariantCloneContent::class;
 
     protected static ?string $slug = 'personality-desktop-clone';

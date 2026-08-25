@@ -24,6 +24,8 @@ use Illuminate\Support\Str;
 
 class ArticleTagResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = ArticleTag::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';

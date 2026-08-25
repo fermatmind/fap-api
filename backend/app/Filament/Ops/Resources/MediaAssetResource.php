@@ -31,6 +31,8 @@ class MediaAssetResource extends Resource
 
     protected static ?string $navigationLabel = 'Media Library';
 
+    protected static ?int $navigationSort = 6;
+
     public static function canViewAny(): bool
     {
         return self::canRead();

@@ -32,6 +32,8 @@ class ContentPageResource extends Resource
 
     protected static ?string $navigationLabel = 'Content Pages';
 
+    protected static ?int $navigationSort = 4;
+
     public static function canViewAny(): bool
     {
         return ContentAccess::canRead();

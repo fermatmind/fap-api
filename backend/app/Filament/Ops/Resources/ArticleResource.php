@@ -40,6 +40,8 @@ class ArticleResource extends Resource
 
     protected static ?string $navigationLabel = 'Articles';
 
+    protected static ?int $navigationSort = 1;
+
     public static function canViewAny(): bool
     {
         return self::canRead();
