@@ -179,7 +179,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mapfile -t migrations < <(git diff --diff-filter=AM --name-only '${{ needs.classify.outputs.base_sha }}' '${{ github.sha }}' -- 'backend/database/migrations/**/*.php')
+          mapfile -t migrations < <(git diff --diff-filter=AM --name-only '${{ needs.classify.outputs.base_sha }}' '${{ github.sha }}' -- 'backend/database/migrations/*.php' 'backend/database/migrations/**/*.php')
           test "${#migrations[@]}" -gt 0
           node .github/trunk/validate-migrations.mjs "${migrations[@]}"
           cd backend
