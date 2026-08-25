@@ -4,17 +4,10 @@
         $emptyTitle = $hasQuery
             ? __('ops.custom_pages.content_search.empty_query_title')
             : __('ops.custom_pages.content_search.empty_initial_title');
-        $emptyDescription = $hasQuery
-            ? __('ops.custom_pages.content_search.empty_query_desc')
-            : __('ops.custom_pages.content_search.empty_initial_desc');
     @endphp
 
     <div class="ops-shell-page ops-shell-page--content-search">
-        <x-filament-ops::ops-section
-            :eyebrow="__('ops.custom_pages.content_search.eyebrow')"
-            :title="__('ops.custom_pages.content_search.title')"
-            :description="__('ops.custom_pages.content_search.description')"
-        >
+        <x-filament-ops::ops-section>
             <form id="ops-content-search-form" wire:submit.prevent="runSearch" class="contents">
                 <x-filament-ops::ops-toolbar class="ops-content-search-toolbar">
                     <div class="ops-control-stack ops-content-search-toolbar__query">
@@ -26,7 +19,6 @@
                             placeholder="{{ __('ops.custom_pages.content_search.placeholder') }}"
                             class="ops-input"
                         />
-                        <p class="ops-control-hint">{{ __('ops.custom_pages.content_search.hint') }}</p>
                     </div>
 
                     <x-slot name="actions">
@@ -85,7 +77,6 @@
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.content_search.results_title')"
-            :description="__('ops.custom_pages.content_search.results_desc')"
         >
             <x-slot name="actions">
                 <div class="ops-content-search-results-actions">
@@ -130,10 +121,10 @@
                     </x-filament-ops::ops-result-card>
                 @empty
                     <x-filament-ops::ops-empty-state
-                        :eyebrow="__('ops.custom_pages.content_search.eyebrow')"
+                        eyebrow=""
                         icon="heroicon-o-magnifying-glass"
                         :title="$emptyTitle"
-                        :description="$emptyDescription"
+                        description=""
                     />
                 @endforelse
             </div>

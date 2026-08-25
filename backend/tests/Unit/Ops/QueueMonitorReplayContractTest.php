@@ -72,7 +72,7 @@ final class QueueMonitorReplayContractTest extends TestCase
         $page = new QueueMonitor;
         $page->retry(42);
 
-        $this->assertSame('Replay queued for failed job #42', $page->statusMessage);
+        $this->assertSame('失败任务 #42 已加入重试队列', $page->statusMessage);
     }
 
     public function test_queue_monitor_source_cannot_bypass_dlq_service_with_artisan_retry(): void

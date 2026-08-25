@@ -150,7 +150,7 @@ class QualityResearchPage extends Page
 
     public function getSubheading(): ?string
     {
-        return __('ops.pages.quality_research.subheading');
+        return null;
     }
 
     public static function getNavigationGroup(): ?string

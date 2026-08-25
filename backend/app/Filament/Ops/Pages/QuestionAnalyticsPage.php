@@ -154,7 +154,7 @@ class QuestionAnalyticsPage extends Page
 
     public function getSubheading(): ?string
     {
-        return __('ops.pages.question_analytics.subheading');
+        return null;
     }
 
     public static function getNavigationGroup(): ?string

@@ -35,6 +35,11 @@ class QueueMonitor extends Page
         return __('ops.nav.queue_monitor');
     }
 
+    public function getTitle(): string
+    {
+        return __('ops.nav.queue_monitor');
+    }
+
     public static function canAccess(): bool
     {
         $guard = (string) config('admin.guard', 'admin');
@@ -127,9 +132,9 @@ class QueueMonitor extends Page
         );
 
         $this->statusMessage = match ($status) {
-            'replayed' => 'Replay queued for failed job #'.$failedJobId,
-            'already_replayed' => 'Failed job #'.$failedJobId.' was already replayed',
-            default => 'Replay failed for job #'.$failedJobId.' ('.$status.')',
+            'replayed' => '失败任务 #'.$failedJobId.' 已加入重试队列',
+            'already_replayed' => '失败任务 #'.$failedJobId.' 已重试',
+            default => '任务 #'.$failedJobId.' 重试失败（'.$status.'）',
         };
         $this->refresh();
     }

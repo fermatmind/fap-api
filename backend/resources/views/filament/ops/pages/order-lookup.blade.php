@@ -32,11 +32,7 @@
     @endphp
 
     <div class="ops-shell-page">
-        <x-filament-ops::ops-section
-            :eyebrow="__('ops.custom_pages.order_lookup.eyebrow')"
-            :title="__('ops.custom_pages.order_lookup.title')"
-            :description="__('ops.custom_pages.order_lookup.description')"
-        >
+        <x-filament-ops::ops-section>
             <x-filament-ops::ops-toolbar>
                 <div class="ops-page-grid ops-page-grid--3">
                     <div class="ops-control-stack">

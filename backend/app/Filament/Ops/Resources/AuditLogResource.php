@@ -53,6 +53,16 @@ class AuditLogResource extends BaseTenantResource
         return __('ops.nav.audit_logs');
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('ops.nav.audit_logs');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('ops.nav.audit_logs');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([]);

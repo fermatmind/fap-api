@@ -31,6 +31,11 @@ class OrganizationsImportPage extends Page
         return __('ops.nav.import_organizations');
     }
 
+    public function getTitle(): string
+    {
+        return __('ops.select_org.import_page.title');
+    }
+
     public static function canAccess(): bool
     {
         $guard = (string) config('admin.guard', 'admin');

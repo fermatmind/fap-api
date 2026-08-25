@@ -76,9 +76,6 @@
                     <article class="ops-kpi-card-centered rounded-2xl border border-slate-200 bg-slate-50/70 p-4">
                         <div class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{{ $card['label'] }}</div>
                         <div class="mt-3 text-2xl font-semibold tracking-tight text-slate-950">{{ $this->formatInt((int) $card['value']) }}</div>
-                        @if (filled($card['description']))
-                            <p class="mt-2 text-sm leading-6 text-slate-600">{{ $card['description'] }}</p>
-                        @endif
                     </article>
                 @endforeach
             </div>

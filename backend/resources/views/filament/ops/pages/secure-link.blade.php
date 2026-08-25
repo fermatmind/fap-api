@@ -1,14 +1,10 @@
 <x-filament-panels::page>
     <div class="ops-shell-page">
-        <x-filament-ops::ops-section
-            eyebrow="Support tools"
-            title="Secure link"
-            description="Generate a short-lived claim URL for a single order inside the active organization context."
-        >
+        <x-filament-ops::ops-section>
             <x-filament-ops::ops-toolbar>
                 <div class="ops-page-grid ops-page-grid--2">
                     <div class="ops-control-stack">
-                        <label class="ops-control-label" for="ops-secure-link-order-no">Order number</label>
+                        <label class="ops-control-label" for="ops-secure-link-order-no">订单号</label>
                         <input
                             id="ops-secure-link-order-no"
                             type="text"
@@ -19,7 +15,7 @@
                     </div>
 
                     <div class="ops-control-stack">
-                        <label class="ops-control-label" for="ops-secure-link-ttl">TTL minutes</label>
+                        <label class="ops-control-label" for="ops-secure-link-ttl">有效期（分钟）</label>
                         <input
                             id="ops-secure-link-ttl"
                             type="number"
@@ -33,19 +29,18 @@
                 </div>
 
                 <x-slot name="actions">
-                    <x-filament::button wire:click="generate">Generate Secure Link</x-filament::button>
+                    <x-filament::button wire:click="generate">生成安全链接</x-filament::button>
                 </x-slot>
             </x-filament-ops::ops-toolbar>
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
-            title="Generation result"
-            description="The latest secure-link outcome and the generated URL when available."
+            title="生成结果"
         >
             @if ($statusMessage !== '' || $generatedLink !== '')
                 <x-filament-ops::ops-result-card
-                    title="Latest status"
-                    :meta="$statusMessage !== '' ? $statusMessage : 'Secure link generated.'"
+                    title="最新状态"
+                    :meta="$statusMessage !== '' ? $statusMessage : '安全链接已生成。'"
                 >
                     @if ($generatedLink !== '')
                         <a href="{{ $generatedLink }}" target="_blank" class="text-primary-600 underline break-all">{{ $generatedLink }}</a>
@@ -53,10 +48,10 @@
                 </x-filament-ops::ops-result-card>
             @else
                 <x-filament-ops::ops-empty-state
-                    eyebrow="Secure link"
+                    eyebrow=""
                     icon="heroicon-o-key"
-                    title="No secure link generated yet"
-                    description="Provide an order number and TTL to mint a short-lived claim URL."
+                    title="尚未生成安全链接"
+                    description=""
                 />
             @endif
         </x-filament-ops::ops-section>

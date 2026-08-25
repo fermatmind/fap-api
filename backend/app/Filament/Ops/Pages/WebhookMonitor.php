@@ -33,6 +33,11 @@ class WebhookMonitor extends Page
         return __('ops.nav.webhook_monitor');
     }
 
+    public function getTitle(): string
+    {
+        return __('ops.nav.webhook_monitor');
+    }
+
     public static function canAccess(): bool
     {
         $guard = (string) config('admin.guard', 'admin');

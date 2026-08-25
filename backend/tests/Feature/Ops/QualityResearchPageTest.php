@@ -52,10 +52,11 @@ final class QualityResearchPageTest extends TestCase
             ->get('/ops/quality-research')
             ->assertOk()
             ->assertSee('质量 / 心理测量 / 常模与漂移')
-            ->assertSee('Quality')
-            ->assertSee('Psychometrics')
-            ->assertSee('Norms & Drift')
-            ->assertSee('内部质量、心理测量快照、常模覆盖与发布/漂移参考视图。');
+            ->assertSee('质量')
+            ->assertSee('心理测量')
+            ->assertSee('常模与漂移')
+            ->assertDontSee('内部质量、心理测量快照、常模覆盖与发布/漂移参考视图。')
+            ->assertDontSee('Quality data is not available for the current scope yet.');
 
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));
         app()->instance('request', Request::create('/ops/quality-research', 'GET'));

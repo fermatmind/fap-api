@@ -6,9 +6,10 @@
     'emptyTitle' => 'No diagnostic fields',
     'fields' => [],
     'notes' => [],
+    'showHints' => true,
 ])
 
-<div class="ops-field-grid">
+<div {{ $attributes->class(['ops-field-grid']) }}>
     <div class="ops-field-grid__items">
         @forelse ($fields as $field)
             @if ($cardless)
@@ -27,7 +28,7 @@
                         <p class="ops-result-card__title break-all">{{ (string) ($field['value'] ?? '-') }}</p>
                     @endif
 
-                    @if (filled($field['hint'] ?? null))
+                    @if ($showHints && filled($field['hint'] ?? null))
                         <p class="ops-control-hint">{{ (string) $field['hint'] }}</p>
                     @endif
                 </div>
@@ -47,7 +48,7 @@
                         <p class="ops-result-card__title break-all">{{ (string) ($field['value'] ?? '-') }}</p>
                     @endif
 
-                    @if (filled($field['hint'] ?? null))
+                    @if ($showHints && filled($field['hint'] ?? null))
                         <p class="ops-control-hint">{{ (string) $field['hint'] }}</p>
                     @endif
                 </x-filament-ops::ops-result-card>

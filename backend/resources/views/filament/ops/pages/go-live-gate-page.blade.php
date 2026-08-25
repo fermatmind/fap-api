@@ -3,18 +3,11 @@
         <x-filament::section>
             <div class="ops-workbench-toolbar ops-workbench-toolbar--split">
                 <div class="ops-workbench-toolbar__main">
-                    <div class="ops-shell-inline-intro">
-                        <span class="ops-shell-inline-intro__eyebrow">{{ __('ops.custom_pages.go_live_gate.eyebrow') }}</span>
-                        <p class="ops-shell-inline-intro__meta">
-                            {{ __('ops.custom_pages.go_live_gate.description') }}
-                        </p>
-                    </div>
-
                     <div class="flex flex-wrap items-center gap-3">
                         <span class="ops-control-label">{{ __('ops.custom_pages.go_live_gate.status_label') }}</span>
                         <x-filament.ops.shared.status-pill
                             :state="(($gate['status'] ?? 'STOP-SHIP') === 'PASS') ? 'success' : 'failed'"
-                            :label="(string) ($gate['status'] ?? 'STOP-SHIP')"
+                            :label="(($gate['status'] ?? 'STOP-SHIP') === 'PASS') ? '通过' : '禁止上线'"
                         />
                         <span class="ops-control-hint">{{ __('ops.custom_pages.go_live_gate.generated_at', ['time' => (string) ($gate['generated_at'] ?? '-')]) }}</span>
                     </div>
@@ -32,7 +25,6 @@
                 <div class="ops-results-header">
                     <div>
                         <h3 class="ops-results-header__title">{{ $this->groupLabel((string) $groupKey, (array) $group) }}</h3>
-                        <p class="ops-results-header__meta">{{ __('ops.custom_pages.go_live_gate.group_hint') }}</p>
                     </div>
                 </div>
 
@@ -43,10 +35,9 @@
                                 <p class="ops-result-card__title">{{ $this->checkLabel((array) $check) }}</p>
                                 <x-filament.ops.shared.status-pill
                                     :state="($check['passed'] ?? false) ? 'success' : 'failed'"
-                                    :label="(($check['passed'] ?? false) ? 'PASS' : 'STOP-SHIP')"
+                                    :label="(($check['passed'] ?? false) ? '通过' : '禁止上线')"
                                 />
                             </div>
-                            <p class="ops-result-card__meta">{{ $this->checkMessage((array) $check) }}</p>
                         </div>
                     @endforeach
                 </div>

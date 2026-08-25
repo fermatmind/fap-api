@@ -92,9 +92,9 @@ final class QualityResearchInsightsSupport
     {
         $warnings = [];
         $notes = [
-            'Quality KPI cards stay rooted in analytics_scale_quality_daily. Local quality filters shape the tables only; drill-through stays in Attempts / Results Explorer.',
-            'Cross-scale validity is derived from stable quality.level buckets first, then falls back to results.is_valid only when quality.level is missing.',
-            'Longstring, straightlining, extreme responding, and inconsistency stay first-phase reference counters. Some flags are available on subset scales only.',
+            '质量 KPI 卡片以 analytics_scale_quality_daily 为数据源；本地质量筛选仅影响下方表格，明细仍通过作答与结果查看器进入。',
+            '跨量表有效性优先来自稳定的 quality.level 分组，仅在缺失时回退到 results.is_valid。',
+            '长字符串、直线作答、极端作答和不一致性为第一阶段参考计数；部分标记仅适用于部分量表。',
         ];
 
         if (! SchemaBaseline::hasTable('analytics_scale_quality_daily')) {
@@ -279,9 +279,9 @@ final class QualityResearchInsightsSupport
     public function pageScopeNotes(): array
     {
         return [
-            'AIC-08 is admin-only / internal-only. Quality uses analytics_scale_quality_daily for daily summary and keeps per-attempt drill-through in existing Attempts / Results explorers.',
-            'Psychometrics is snapshot-driven. Norms coverage reads scale_norms_versions + scale_norm_stats directly. Drift stays a compare reference, not a hard trend dashboard.',
-            'Global filters keep version context explicit. Content/scoring selectors are first-class on Quality and rollout observation coverage, but not direct psychometric snapshot dimensions in v1.',
+            'AIC-08 仅供管理员内部使用。质量日报使用 analytics_scale_quality_daily，单次作答明细沿用作答与结果查看器。',
+            '心理测量由快照驱动。常模覆盖直接读取 scale_norms_versions 与 scale_norm_stats；漂移仅作为对比参考。',
+            '全局筛选保留明确的版本上下文；内容与计分版本用于质量和发布观察覆盖，不作为 v1 心理测量快照的直接维度。',
         ];
     }
 

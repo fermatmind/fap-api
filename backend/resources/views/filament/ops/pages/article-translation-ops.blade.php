@@ -1,15 +1,9 @@
 <x-filament-panels::page>
     <div class="ops-shell-page">
-        <x-filament-ops::ops-section
-            :eyebrow="__('ops.translation_ops.eyebrow')"
-            :title="__('ops.translation_ops.heading')"
-            :description="__('ops.translation_ops.description')"
-        >
+        <x-filament-ops::ops-section :title="__('ops.translation_ops.heading')">
             <x-filament-ops::ops-toolbar>
                 <div class="ops-control-stack">
                     <span class="ops-control-label">{{ __('ops.translation_ops.authority_label') }}</span>
-                    <p class="ops-control-hint">{{ __('ops.translation_ops.authority_revision') }}</p>
-                    <p class="ops-control-hint">{{ __('ops.translation_ops.authority_provider') }}</p>
                 </div>
 
                 <x-slot name="actions">
@@ -20,11 +14,11 @@
             </x-filament-ops::ops-toolbar>
         </x-filament-ops::ops-section>
 
-        <x-filament-ops::ops-section :title="__('ops.translation_ops.summary.title')" :description="__('ops.translation_ops.summary.description')">
+        <x-filament-ops::ops-section :title="__('ops.translation_ops.summary.title')">
             <x-filament-ops::ops-coverage-summary-cards :cards="$summaryCards" />
         </x-filament-ops::ops-section>
 
-        <x-filament-ops::ops-section :title="__('ops.translation_ops.filters_title')" :description="__('ops.translation_ops.filters_description')">
+        <x-filament-ops::ops-section :title="__('ops.translation_ops.filters_title')">
             <div class="ops-toolbar-grid ops-toolbar-grid--translation">
                 <label class="ops-control-stack">
                     <span class="ops-control-label">{{ __('ops.translation_ops.filters.content_type') }}</span>
@@ -108,7 +102,7 @@
             </div>
         </x-filament-ops::ops-section>
 
-        <x-filament-ops::ops-section :title="__('ops.translation_ops.matrix.title')" :description="__('ops.translation_ops.matrix.description')">
+        <x-filament-ops::ops-section :title="__('ops.translation_ops.matrix.title')">
             <x-filament-ops::ops-coverage-matrix :columns="$localeColumns" :rows="$coverageMatrix" />
         </x-filament-ops::ops-section>
 

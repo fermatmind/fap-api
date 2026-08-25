@@ -75,9 +75,6 @@
             <div class="flex flex-wrap items-center justify-between gap-4">
                 <div>
                     <h2 class="text-lg font-semibold text-slate-950">Authority Scope</h2>
-                    <p class="text-sm text-slate-500">
-                        Fixed to {{ $canonicalScale['scale_code'] }} only, with dual-write recognition for {{ $canonicalScale['scale_code_v2'] }}.
-                    </p>
                 </div>
 
                 <div class="flex flex-wrap gap-2">

@@ -1,16 +1,7 @@
 <x-filament-panels::page>
     <div class="ops-shell-page">
-        <x-filament-ops::ops-section
-            :eyebrow="__('ops.custom_pages.content_metrics.eyebrow')"
-            :title="__('ops.custom_pages.content_metrics.title')"
-            :description="__('ops.custom_pages.content_metrics.description')"
-        >
-            <x-filament-ops::ops-toolbar>
-                <div class="ops-control-stack">
-                    <span class="ops-control-label">{{ __('ops.custom_pages.content_metrics.contract_label') }}</span>
-                    <p class="ops-control-hint">{{ __('ops.custom_pages.content_metrics.contract_hint') }}</p>
-                </div>
-
+        <x-filament-ops::ops-section>
+            <x-filament-ops::ops-toolbar class="ops-toolbar--center-actions">
                 <x-slot name="actions">
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentOverviewPage::getUrl() }}">
                         {{ __('ops.custom_pages.common.nav.overview') }}
@@ -38,21 +29,18 @@
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.content_metrics.snapshot_title')"
-            :description="__('ops.custom_pages.content_metrics.snapshot_desc')"
         >
-            <x-filament-ops::ops-field-grid :fields="$headlineFields" />
+            <x-filament-ops::ops-field-grid class="ops-field-grid--centered" :fields="$headlineFields" :show-hints="false" />
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.content_metrics.boundary_title')"
-            :description="__('ops.custom_pages.content_metrics.boundary_desc')"
         >
-            <x-filament-ops::ops-field-grid :fields="$scopeFields" />
+            <x-filament-ops::ops-field-grid class="ops-field-grid--centered" :fields="$scopeFields" :show-hints="false" />
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.content_metrics.freshness_title')"
-            :description="__('ops.custom_pages.content_metrics.freshness_desc')"
         >
             <div class="ops-card-list">
                 @foreach ($freshnessCards as $card)
@@ -60,7 +48,6 @@
                         :title="$card['title']"
                         :meta="$card['meta']"
                     >
-                        <p class="ops-control-hint">{{ $card['description'] }}</p>
                         <p class="ops-control-hint">{{ __('ops.custom_pages.content_metrics.latest_record', ['title' => $card['latest_title'] ?? __('ops.custom_pages.common.values.no_recent_record')]) }}</p>
                         <x-slot name="actions">
                             <div class="ops-toolbar-inline">

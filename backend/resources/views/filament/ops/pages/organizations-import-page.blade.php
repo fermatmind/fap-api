@@ -1,16 +1,12 @@
 <x-filament-panels::page>
     <div class="ops-shell-page">
-        <x-filament-ops::ops-section
-            :eyebrow="__('ops.select_org.import_page.eyebrow')"
-            :title="__('ops.select_org.import_page.title')"
-            :description="__('ops.select_org.import_page.description')"
-        >
+        <x-filament-ops::ops-section>
             <x-filament-ops::ops-toolbar>
                 <x-filament-ops::ops-empty-state
-                    :eyebrow="__('ops.select_org.import_page.empty_eyebrow')"
+                    eyebrow=""
                     icon="heroicon-o-arrow-down-tray"
                     :title="__('ops.select_org.import_page.empty_title')"
-                    :description="__('ops.select_org.import_page.empty_description')"
+                    description=""
                 />
 
                 <x-slot name="actions">

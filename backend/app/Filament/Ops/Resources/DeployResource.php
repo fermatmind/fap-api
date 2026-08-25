@@ -43,6 +43,16 @@ class DeployResource extends Resource
         return __('ops.nav.deploy_events');
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('ops.nav.deploy_events');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('ops.nav.deploy_events');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([]);

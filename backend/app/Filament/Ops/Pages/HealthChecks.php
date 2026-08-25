@@ -33,6 +33,11 @@ class HealthChecks extends Page
         return __('ops.nav.health_checks');
     }
 
+    public function getTitle(): string
+    {
+        return __('ops.nav.health_checks');
+    }
+
     public static function canAccess(): bool
     {
         $guard = (string) config('admin.guard', 'admin');

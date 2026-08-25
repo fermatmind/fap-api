@@ -70,7 +70,6 @@
                 :metrics="collect($summaryFields)->map(fn (array $field): array => [
                     'label' => $field['label'],
                     'value' => $field['value'],
-                    'meta' => $field['hint'],
                 ])->all()"
             />
         </x-filament-ops::ops-section>

@@ -14,10 +14,14 @@ use App\Filament\Ops\Pages\QuestionAnalyticsPage;
 use App\Filament\Ops\Pages\SeoOperationsPage;
 use App\Filament\Ops\Resources\AdminUserResource;
 use App\Filament\Ops\Resources\ArticleResource;
+use App\Filament\Ops\Resources\AuditLogResource;
 use App\Filament\Ops\Resources\ContentPageResource;
 use App\Filament\Ops\Resources\DailyGivingRecordResource;
+use App\Filament\Ops\Resources\DeployResource;
 use App\Filament\Ops\Resources\MediaAssetResource;
 use App\Filament\Ops\Resources\OrganizationResource;
+use App\Filament\Ops\Resources\PermissionResource;
+use App\Filament\Ops\Resources\RoleResource;
 use App\Filament\Ops\Resources\SupportArticleResource;
 use App\Livewire\Filament\Ops\Livewire\LocaleSwitcher;
 use Livewire\Livewire;
@@ -25,6 +29,18 @@ use Tests\TestCase;
 
 final class OpsShellPolishTest extends TestCase
 {
+    public function test_governance_and_observability_resources_use_chinese_model_labels(): void
+    {
+        app()->setLocale('zh_CN');
+
+        $this->assertSame('审计日志', AuditLogResource::getModelLabel());
+        $this->assertSame('部署事件', DeployResource::getModelLabel());
+        $this->assertSame('管理员用户', AdminUserResource::getModelLabel());
+        $this->assertSame('权限', PermissionResource::getModelLabel());
+        $this->assertSame('角色', RoleResource::getModelLabel());
+        $this->assertSame('组织', OrganizationResource::getModelLabel());
+    }
+
     public function test_locale_switcher_renders_as_compact_segmented_control(): void
     {
         app()->setLocale('en');
@@ -37,7 +53,7 @@ final class OpsShellPolishTest extends TestCase
             ->assertDontSee('语言 中文');
     }
 
-    public function test_shell_hooks_render_command_search_environment_badge_and_system_footer(): void
+    public function test_shell_hooks_render_environment_badge_and_compact_system_footer(): void
     {
         app()->setLocale('en');
 
@@ -45,7 +61,9 @@ final class OpsShellPolishTest extends TestCase
         $sidebarFooter = view('filament.ops.hooks.sidebar-footer')->render();
 
         $this->assertStringContainsString('ops-environment-badge', $environmentBadge);
-        $this->assertStringContainsString('System status', $sidebarFooter);
+        $this->assertStringContainsString('Ready', $sidebarFooter);
+        $this->assertStringNotContainsString('System status', $sidebarFooter);
+        $this->assertStringNotContainsString('Operations console', $sidebarFooter);
         $this->assertStringNotContainsString('Content, commerce, governance, and runtime operations share the same shell.', $sidebarFooter);
     }
 
@@ -117,6 +135,13 @@ final class OpsShellPolishTest extends TestCase
             resource_path('views/filament/ops/pages/queue-monitor.blade.php'),
             resource_path('views/filament/ops/pages/select-org-page.blade.php'),
             resource_path('views/filament/ops/pages/test-kpi-daily-page.blade.php'),
+            resource_path('views/filament/ops/pages/content-search.blade.php'),
+            resource_path('views/filament/ops/pages/content-metrics.blade.php'),
+            resource_path('views/filament/ops/pages/global-search-page.blade.php'),
+            resource_path('views/filament/ops/pages/delivery-tools.blade.php'),
+            resource_path('views/filament/ops/pages/secure-link.blade.php'),
+            resource_path('views/filament/ops/pages/public-content-health.blade.php'),
+            resource_path('views/filament/ops/pages/go-live-gate-page.blade.php'),
             resource_path('views/filament/ops/widgets/ops-action-queue-widget.blade.php'),
             resource_path('views/filament/ops/widgets/test-kpi-daily-inline-widget.blade.php'),
         ];
@@ -129,6 +154,12 @@ final class OpsShellPolishTest extends TestCase
             'test_kpi_daily_detail_desc',
             'visible_workspaces',
             'workspace_scope',
+            "content_search.description')",
+            "content_metrics.contract_hint')",
+            "global_search.description')",
+            "delivery_tools.reason_hint')",
+            "public-content-health.generated_at'",
+            "go_live_gate.group_hint')",
         ] as $removedCopy) {
             $this->assertStringNotContainsString($removedCopy, $source);
         }
@@ -136,6 +167,8 @@ final class OpsShellPolishTest extends TestCase
         $theme = (string) file_get_contents(resource_path('css/filament/ops/theme.css'));
         $this->assertStringContainsString('.fi-wi-stats-overview-stat.ops-stat-centered', $theme);
         $this->assertStringContainsString('.ops-kpi-card-centered', $theme);
+        $this->assertStringContainsString('.ops-field-grid--centered', $theme);
+        $this->assertStringContainsString('.ops-toolbar--center-actions', $theme);
     }
 
     public function test_ops_theme_tokens_match_complete_preview_light_and_dark_contract(): void

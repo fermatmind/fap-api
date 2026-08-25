@@ -55,6 +55,16 @@ class PermissionResource extends Resource
         return __('ops.nav.permissions');
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('ops.nav.permissions');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('ops.nav.permissions');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

@@ -101,9 +101,6 @@
             <div class="flex flex-wrap items-center justify-between gap-4">
                 <div>
                     <h2 class="text-lg font-semibold text-slate-950">{{ __('ops.custom_pages.question_analytics.authority.title') }}</h2>
-                    <p class="text-sm text-slate-500">
-                        {{ __('ops.custom_pages.question_analytics.authority.description', ['scale' => $canonicalScale['scale_code'], 'scale_v2' => $canonicalScale['scale_code_v2']]) }}
-                    </p>
                 </div>
 
                 <div class="flex flex-wrap gap-2">

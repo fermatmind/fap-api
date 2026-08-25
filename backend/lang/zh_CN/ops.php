@@ -2446,7 +2446,7 @@ return [
             ],
             'groups' => [
                 'commerce_payments' => '交易 / 支付',
-                'sre_devops' => 'SRE / DevOps',
+                'sre_devops' => '运行 / 部署',
                 'compliance_comm' => '合规 / 通信',
                 'growth_observability' => '增长 / 可观测性',
             ],

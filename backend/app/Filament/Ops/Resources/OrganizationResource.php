@@ -58,6 +58,16 @@ class OrganizationResource extends Resource
         return __('ops.nav.organizations');
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('ops.nav.organizations');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('ops.nav.organizations');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

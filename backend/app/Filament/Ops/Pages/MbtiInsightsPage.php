@@ -131,7 +131,7 @@ class MbtiInsightsPage extends Page
 
     public function getSubheading(): ?string
     {
-        return __('ops.pages.mbti_insights.subheading');
+        return null;
     }
 
     public static function getNavigationGroup(): ?string

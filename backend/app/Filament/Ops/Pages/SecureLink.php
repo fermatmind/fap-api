@@ -35,6 +35,11 @@ class SecureLink extends Page
         return __('ops.nav.secure_link');
     }
 
+    public function getTitle(): string
+    {
+        return __('ops.nav.secure_link');
+    }
+
     public static function canAccess(): bool
     {
         $guard = (string) config('admin.guard', 'admin');
@@ -73,7 +78,7 @@ class SecureLink extends Page
     public function generate(): void
     {
         if (! $this->canGenerateSecureLink()) {
-            $this->statusMessage = 'permission denied.';
+            $this->statusMessage = '没有生成权限。';
             $this->generatedLink = '';
 
             return;
@@ -82,7 +87,7 @@ class SecureLink extends Page
         $orgId = max(0, (int) app(OrgContext::class)->orgId());
         $orderNo = trim($this->orderNo);
         if ($orderNo === '') {
-            $this->statusMessage = 'order_no is required.';
+            $this->statusMessage = '请输入订单号。';
 
             return;
         }
@@ -93,7 +98,7 @@ class SecureLink extends Page
             ->first();
 
         if (! $order) {
-            $this->statusMessage = 'order not found.';
+            $this->statusMessage = '未找到订单。';
 
             return;
         }
@@ -127,6 +132,6 @@ class SecureLink extends Page
             'success',
         );
 
-        $this->statusMessage = 'Secure link generated.';
+        $this->statusMessage = '安全链接已生成。';
     }
 }

@@ -2103,6 +2103,26 @@
         gap: 0.65rem;
     }
 
+    .ops-toolbar--center-actions .ops-workbench-toolbar__actions {
+        justify-content: center;
+    }
+
+    .ops-toolbar--center-actions.ops-workbench-toolbar--split {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ops-field-grid--centered .ops-result-card__body,
+    .ops-field-grid--centered-head .ops-result-card__body {
+        align-content: center;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .ops-field-grid--centered-head .ops-control-hint {
+        justify-self: stretch;
+        text-align: left;
+    }
+
     .ops-toolbar-inline {
         display: inline-flex;
         align-items: center;

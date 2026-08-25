@@ -33,9 +33,7 @@ class ListReportSnapshots extends ListRecords
 
     public function getSubheading(): ?string
     {
-        return __('ops.resources.support.report_pdf_subheading', [
-            'days' => app(ReportSnapshotExplorerSupport::class)->indexLookbackDays(),
-        ]);
+        return null;
     }
 
     protected function getHeaderActions(): array

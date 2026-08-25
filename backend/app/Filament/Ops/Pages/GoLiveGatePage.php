@@ -85,6 +85,12 @@ class GoLiveGatePage extends Page
     {
         $key = (string) ($check['key'] ?? '');
 
+        if (str_starts_with($key, 'provider_') && str_ends_with($key, '_configured')) {
+            $provider = substr($key, strlen('provider_'), -strlen('_configured'));
+
+            return $provider.' 配置';
+        }
+
         return $this->translated("ops.custom_pages.go_live_gate.checks.{$key}.label", $key !== '' ? $key : '-');
     }
 

@@ -1,10 +1,6 @@
 <x-filament-panels::page>
     <div class="ops-shell-page">
-        <x-filament-ops::ops-section
-            :eyebrow="__('ops.custom_pages.delivery_tools.eyebrow')"
-            :title="__('ops.custom_pages.delivery_tools.title')"
-            :description="__('ops.custom_pages.delivery_tools.description')"
-        >
+        <x-filament-ops::ops-section>
             <x-filament-ops::ops-toolbar>
                 <div class="ops-page-grid ops-page-grid--2">
                     <div class="ops-control-stack">
@@ -36,7 +32,6 @@
                         placeholder="{{ __('ops.custom_pages.delivery_tools.reason_placeholder') }}"
                         class="ops-input"
                     ></textarea>
-                    <p class="ops-control-hint">{{ __('ops.custom_pages.delivery_tools.reason_hint') }}</p>
                 </div>
 
                 <x-slot name="actions">
@@ -47,7 +42,6 @@
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.delivery_tools.status_title')"
-            :description="__('ops.custom_pages.delivery_tools.status_desc')"
         >
             @if ($statusMessage !== '')
                 <x-filament-ops::ops-result-card
@@ -56,10 +50,10 @@
                 />
             @else
                 <x-filament-ops::ops-empty-state
-                    :eyebrow="__('ops.custom_pages.delivery_tools.title')"
+                    eyebrow=""
                     icon="heroicon-o-truck"
                     :title="__('ops.custom_pages.delivery_tools.empty_title')"
-                    :description="__('ops.custom_pages.delivery_tools.empty_desc')"
+                    description=""
                 />
             @endif
         </x-filament-ops::ops-section>

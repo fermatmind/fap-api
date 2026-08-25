@@ -215,7 +215,7 @@ final class OpsAccessBoundaryTest extends TestCase
         Livewire::test(SecureLink::class)
             ->set('orderNo', $chain['order_no'])
             ->call('generate')
-            ->assertSet('statusMessage', 'permission denied.')
+            ->assertSet('statusMessage', '没有生成权限。')
             ->assertSet('generatedLink', '');
     }
 

@@ -81,14 +81,11 @@
         <section class="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm">
             <div class="flex flex-wrap items-center justify-between gap-4">
                 <div>
-                    <h2 class="text-lg font-semibold text-slate-950">Authority Scope</h2>
-                    <p class="text-sm text-slate-500">
-                        Admin-only / internal-only. Quality stays org-scoped; psychometrics and norm objects remain reference layers with explicit authority boundaries.
-                    </p>
+                    <h2 class="text-lg font-semibold text-slate-950">权威范围</h2>
                 </div>
 
                 <div class="flex flex-wrap gap-2">
-                    @foreach (['quality' => 'Quality', 'psychometrics' => 'Psychometrics', 'norms-drift' => 'Norms & Drift'] as $tabKey => $label)
+                    @foreach (['quality' => '质量', 'psychometrics' => '心理测量', 'norms-drift' => '常模与漂移'] as $tabKey => $label)
                         <button
                             type="button"
                             wire:click="setActiveTab('{{ $tabKey }}')"
@@ -123,8 +120,7 @@
             <section class="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm">
                 <div class="flex flex-wrap items-center justify-between gap-4">
                     <div>
-                        <h2 class="text-lg font-semibold text-slate-950">Quality</h2>
-                        <p class="text-sm text-slate-500">analytics_scale_quality_daily drives the summary layer. Attempts / Results explorers remain the drill-through path.</p>
+                        <h2 class="text-lg font-semibold text-slate-950">质量</h2>
                     </div>
 
                     <div class="flex flex-wrap gap-2">
@@ -319,7 +315,7 @@
                 </section>
             @else
                 <section class="rounded-2xl border border-dashed border-slate-300 bg-white/80 p-8 text-center text-sm text-slate-500">
-                    Quality data is not available for the current scope yet.
+                    当前范围暂无质量数据。
                 </section>
             @endif
         @elseif ($activeTab === 'psychometrics')

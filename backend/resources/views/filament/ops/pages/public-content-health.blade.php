@@ -1,15 +1,5 @@
 <x-filament-panels::page>
     <div class="ops-shell-page">
-        <x-filament-ops::ops-section
-            :eyebrow="__('public-content-health.eyebrow')"
-            :title="__('public-content-health.title')"
-            :description="__('public-content-health.description')"
-        >
-            <p class="ops-control-hint">
-                {{ __('public-content-health.generated_at', ['time' => $generatedAt]) }}
-            </p>
-        </x-filament-ops::ops-section>
-
         @if ($sourceErrors !== [])
             <x-filament-ops::ops-section
                 :title="__('public-content-health.source_errors.title')"
@@ -36,19 +26,16 @@
 
         <x-filament-ops::ops-section
             :title="__('public-content-health.overview.title')"
-            :description="__('public-content-health.overview.description')"
         >
-            <x-filament-ops::ops-field-grid :fields="$overviewFields" />
+            <x-filament-ops::ops-field-grid class="ops-field-grid--centered" :fields="$overviewFields" :show-hints="false" />
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
             :title="__('public-content-health.runtime.title')"
-            :description="__('public-content-health.runtime.section_description', ['minutes' => $windowMinutes])"
         >
             <div class="ops-card-list">
                 @forelse ($runtimeCards as $card)
                     <x-filament-ops::ops-result-card :title="$card['title']" :meta="$card['meta']">
-                        <p class="ops-control-hint">{{ $card['description'] }}</p>
                         <x-slot name="actions">
                             <x-filament.ops.shared.status-pill
                                 :state="$card['status_state']"
@@ -69,12 +56,10 @@
 
         <x-filament-ops::ops-section
             :title="__('public-content-health.probe.title')"
-            :description="__('public-content-health.probe.section_description')"
         >
             <div class="ops-card-list">
                 @forelse ($probeCards as $card)
                     <x-filament-ops::ops-result-card :title="$card['title']" :meta="$card['meta']">
-                        <p class="ops-control-hint">{{ $card['description'] }}</p>
                         <x-slot name="actions">
                             <x-filament.ops.shared.status-pill
                                 :state="$card['status_state']"
@@ -95,12 +80,10 @@
 
         <x-filament-ops::ops-section
             :title="__('public-content-health.publication.title')"
-            :description="__('public-content-health.publication.section_description')"
         >
             <div class="ops-card-list">
                 @forelse ($publicationCards as $card)
                     <x-filament-ops::ops-result-card :title="$card['title']" :meta="$card['meta']">
-                        <p class="ops-control-hint">{{ $card['description'] }}</p>
                         <x-slot name="actions">
                             <x-filament.ops.shared.status-pill
                                 :state="$card['status_state']"
@@ -121,9 +104,8 @@
 
         <x-filament-ops::ops-section
             :title="__('public-content-health.boundary.title')"
-            :description="__('public-content-health.boundary.description')"
         >
-            <x-filament-ops::ops-field-grid :fields="$boundaryFields" />
+            <x-filament-ops::ops-field-grid class="ops-field-grid--centered-head" :fields="$boundaryFields" />
         </x-filament-ops::ops-section>
     </div>
 </x-filament-panels::page>
