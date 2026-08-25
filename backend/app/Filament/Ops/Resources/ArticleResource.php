@@ -276,7 +276,9 @@ class ArticleResource extends Resource
                                     ->relationship(
                                         'category',
                                         'name',
-                                        fn (Builder $query): Builder => $query->where('article_categories.org_id', self::publicArticleOrgId())
+                                        fn (Builder $query): Builder => $query
+                                            ->withoutGlobalScopes()
+                                            ->where('article_categories.org_id', self::publicArticleOrgId())
                                     )
                                     ->searchable()
                                     ->preload()
@@ -286,7 +288,9 @@ class ArticleResource extends Resource
                                     ->relationship(
                                         'tags',
                                         'name',
-                                        fn (Builder $query): Builder => $query->where('article_tags.org_id', self::publicArticleOrgId())
+                                        fn (Builder $query): Builder => $query
+                                            ->withoutGlobalScopes()
+                                            ->where('article_tags.org_id', self::publicArticleOrgId())
                                     )
                                     ->searchable()
                                     ->preload()

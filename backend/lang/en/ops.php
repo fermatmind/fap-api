@@ -2914,6 +2914,8 @@ return [
                 'save' => 'Save Changes',
                 'edit' => 'Edit',
                 'release' => 'Release',
+                'manage_categories' => 'Manage Categories',
+                'manage_tags' => 'Manage Tags',
             ],
             'notifications' => [
                 'created' => 'Article created',

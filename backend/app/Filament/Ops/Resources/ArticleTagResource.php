@@ -9,7 +9,7 @@ use App\Filament\Ops\Support\ContentAccess;
 use App\Filament\Ops\Support\OpsTable;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\ArticleTag;
-use App\Support\OrgContext;
+use App\Services\Ops\SeoContentScopeViewModel;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -78,7 +78,7 @@ class ArticleTagResource extends Resource
     {
         return $form->schema([
             Hidden::make('org_id')
-                ->default(fn (): int => max(0, (int) app(OrgContext::class)->orgId())),
+                ->default(SeoContentScopeViewModel::GLOBAL_ORG_ID),
             TextInput::make('name')
                 ->label(__('ops.resources.taxonomy.fields.name'))
                 ->required()
@@ -139,13 +139,7 @@ class ArticleTagResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()
-            ->where('org_id', self::currentOrgId());
-    }
-
-    private static function currentOrgId(): int
-    {
-        return max(0, (int) app(OrgContext::class)->orgId());
+        return app(SeoContentScopeViewModel::class)->articleTags();
     }
 
     private static function canRead(): bool

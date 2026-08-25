@@ -50013,7 +50013,7 @@ prs:
     base: main
     branch: codex/ops-content-nav-01
     title: "refactor(ops): reduce content navigation to eight entries"
-    status: pr_open
+    status: merged
     depends_on: []
     train_scope: ops_content_navigation_convergence
     risk_level: low_ui_navigation
@@ -50056,7 +50056,7 @@ prs:
     base: main
     branch: codex/ops-content-taxonomy-02
     title: "fix(ops): align article taxonomy with public authority"
-    status: registered
+    status: pr_open
     depends_on: [OPS-CONTENT-NAV-01]
     train_scope: ops_content_taxonomy_authority
     risk_level: controlled_content_authority
@@ -50064,10 +50064,32 @@ prs:
       - Make article category and tag reads and writes use the existing org_id=0 public article scope.
       - Add article-workspace contextual taxonomy links while preserving routes, models, relations, and permissions.
       - Inventory non-zero historical taxonomy read-only and use only backward-compatible remediation if required.
+    allowed_paths:
+      - backend/app/Filament/Ops/Resources/ArticleCategoryResource.php
+      - backend/app/Filament/Ops/Resources/ArticleCategoryResource/Pages/CreateArticleCategory.php
+      - backend/app/Filament/Ops/Resources/ArticleCategoryResource/Pages/EditArticleCategory.php
+      - backend/app/Filament/Ops/Resources/ArticleResource.php
+      - backend/app/Filament/Ops/Resources/ArticleResource/Pages/ListArticles.php
+      - backend/app/Filament/Ops/Resources/ArticleTagResource.php
+      - backend/app/Filament/Ops/Resources/ArticleTagResource/Pages/CreateArticleTag.php
+      - backend/app/Filament/Ops/Resources/ArticleTagResource/Pages/EditArticleTag.php
+      - backend/app/Services/Ops/SeoContentScopeViewModel.php
+      - backend/lang/en/ops.php
+      - backend/lang/zh_CN/ops.php
+      - backend/tests/Feature/Ops/ContentCmsProductLayerTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && php artisan test tests/Feature/Ops/ContentCmsProductLayerTest.php --filter='article_and_taxonomy_resources_share_public_org_authority|article_list_exposes_contextual_public_taxonomy_management_links|filament_taxonomy_pages_ignore_client_supplied_org_id' --no-ansi
+      - cd backend && vendor/bin/pint --test for changed PHP files
+      - parse pr-train JSON and YAML; exact-scope validation; git diff --check
     do_not:
       - Delete or overwrite historical taxonomy records or apply a production migration.
       - Restore categories or tags to top-level navigation.
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false
 
   - id: OPS-CONTENT-WORKSPACE-03
     repo: fap-api

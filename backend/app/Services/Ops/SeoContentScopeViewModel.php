@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Services\Ops;
 
 use App\Models\Article;
+use App\Models\ArticleCategory;
+use App\Models\ArticleTag;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use Illuminate\Database\Eloquent\Builder;
@@ -41,6 +43,22 @@ final class SeoContentScopeViewModel
             $locale,
             $status,
         );
+    }
+
+    /** @return Builder<ArticleCategory> */
+    public function articleCategories(): Builder
+    {
+        return ArticleCategory::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', self::GLOBAL_ORG_ID);
+    }
+
+    /** @return Builder<ArticleTag> */
+    public function articleTags(): Builder
+    {
+        return ArticleTag::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', self::GLOBAL_ORG_ID);
     }
 
     /** @return Builder<CareerGuide> */

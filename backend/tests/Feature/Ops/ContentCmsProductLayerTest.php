@@ -16,6 +16,7 @@ use App\Filament\Ops\Resources\ArticleCategoryResource\Pages\EditArticleCategory
 use App\Filament\Ops\Resources\ArticleResource;
 use App\Filament\Ops\Resources\ArticleResource\Pages\CreateArticle;
 use App\Filament\Ops\Resources\ArticleResource\Pages\EditArticle;
+use App\Filament\Ops\Resources\ArticleResource\Pages\ListArticles;
 use App\Filament\Ops\Resources\ArticleTagResource;
 use App\Filament\Ops\Resources\ArticleTagResource\Pages\CreateArticleTag;
 use App\Filament\Ops\Resources\ArticleTagResource\Pages\EditArticleTag;
@@ -1227,7 +1228,7 @@ final class ContentCmsProductLayerTest extends TestCase
             ->assertSee($reviewer->name);
     }
 
-    public function test_article_resource_uses_public_org_while_taxonomy_resources_remain_selected_org_scoped(): void
+    public function test_article_and_taxonomy_resources_share_public_org_authority(): void
     {
         $selectedOrg = Organization::query()->create([
             'name' => 'Scoped Org',
@@ -1301,6 +1302,18 @@ final class ContentCmsProductLayerTest extends TestCase
             'name' => 'Other Tag',
             'is_active' => true,
         ]);
+        $publicCategory = ArticleCategory::query()->create([
+            'org_id' => 0,
+            'slug' => 'public-category',
+            'name' => 'Public Category',
+            'is_active' => true,
+        ]);
+        $publicTag = ArticleTag::query()->create([
+            'org_id' => 0,
+            'slug' => 'public-tag',
+            'name' => 'Public Tag',
+            'is_active' => true,
+        ]);
 
         $request = Request::create('/ops/articles', 'GET');
         app()->instance('request', $request);
@@ -1316,10 +1329,32 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->assertSame([(int) $publicArticle->id], $articleIds);
         $this->assertNotContains((int) $selectedOrgArticle->id, $articleIds);
         $this->assertNotContains((int) $otherOrgArticle->id, $articleIds);
-        $this->assertSame([(int) $selectedCategory->id], $categoryIds);
+        $this->assertSame([(int) $publicCategory->id], $categoryIds);
+        $this->assertNotContains((int) $selectedCategory->id, $categoryIds);
         $this->assertNotContains((int) $otherCategory->id, $categoryIds);
-        $this->assertSame([(int) $selectedTag->id], $tagIds);
+        $this->assertSame([(int) $publicTag->id], $tagIds);
+        $this->assertNotContains((int) $selectedTag->id, $tagIds);
         $this->assertNotContains((int) $otherTag->id, $tagIds);
+    }
+
+    public function test_article_list_exposes_contextual_public_taxonomy_management_links(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);
+        $session = $this->opsSession((int) $admin->id);
+
+        session($session);
+        $this->setOpsContext((int) $session['ops_org_id'], $admin, '/ops/articles');
+
+        $component = Livewire::test(ListArticles::class);
+        $actions = collect($component->instance()->getCachedHeaderActions())
+            ->keyBy(fn ($action): string => $action->getName());
+
+        $this->assertTrue(ArticleCategoryResource::canViewAny());
+        $this->assertTrue(ArticleTagResource::canViewAny());
+        $this->assertSame('Manage Categories', $actions->get('manageCategories')?->getLabel());
+        $this->assertSame('Manage Tags', $actions->get('manageTags')?->getLabel());
+        $this->assertSame(ArticleCategoryResource::getUrl(), $actions->get('manageCategories')?->getUrl());
+        $this->assertSame(ArticleTagResource::getUrl(), $actions->get('manageTags')?->getUrl());
     }
 
     public function test_article_edit_page_resolves_public_org_articles_from_tenant_ops_session(): void
@@ -1402,22 +1437,22 @@ final class ContentCmsProductLayerTest extends TestCase
                 'org_id' => (int) $otherOrg->id,
                 'name' => 'Scoped Category',
                 'slug' => 'scoped-category',
-                'description' => 'Category must stay in selected org.',
+                'description' => 'Category must stay in public article authority.',
                 'sort_order' => 1,
                 'is_active' => true,
             ])
             ->call('create')
             ->assertHasNoFormErrors();
 
-        $category = ArticleCategory::query()->where('slug', 'scoped-category')->firstOrFail();
-        $this->assertSame((int) $selectedOrg->id, (int) $category->org_id);
+        $category = ArticleCategory::query()->withoutGlobalScopes()->where('slug', 'scoped-category')->firstOrFail();
+        $this->assertSame(0, (int) $category->org_id);
 
         Livewire::test(EditArticleCategory::class, ['record' => $category->getKey()])
             ->fillForm([
                 'org_id' => (int) $otherOrg->id,
                 'name' => 'Scoped Category Edited',
                 'slug' => 'scoped-category',
-                'description' => 'Edited category must stay in selected org.',
+                'description' => 'Edited category must stay in public article authority.',
                 'sort_order' => 2,
                 'is_active' => true,
             ])
@@ -1425,7 +1460,7 @@ final class ContentCmsProductLayerTest extends TestCase
             ->assertHasNoFormErrors();
 
         $category->refresh();
-        $this->assertSame((int) $selectedOrg->id, (int) $category->org_id);
+        $this->assertSame(0, (int) $category->org_id);
 
         Livewire::test(CreateArticleTag::class)
             ->fillForm([
@@ -1437,8 +1472,8 @@ final class ContentCmsProductLayerTest extends TestCase
             ->call('create')
             ->assertHasNoFormErrors();
 
-        $tag = ArticleTag::query()->where('slug', 'scoped-tag')->firstOrFail();
-        $this->assertSame((int) $selectedOrg->id, (int) $tag->org_id);
+        $tag = ArticleTag::query()->withoutGlobalScopes()->where('slug', 'scoped-tag')->firstOrFail();
+        $this->assertSame(0, (int) $tag->org_id);
 
         Livewire::test(EditArticleTag::class, ['record' => $tag->getKey()])
             ->fillForm([
@@ -1451,7 +1486,27 @@ final class ContentCmsProductLayerTest extends TestCase
             ->assertHasNoFormErrors();
 
         $tag->refresh();
-        $this->assertSame((int) $selectedOrg->id, (int) $tag->org_id);
+        $this->assertSame(0, (int) $tag->org_id);
+
+        Livewire::test(CreateArticle::class)
+            ->fillForm([
+                'title' => 'Public Taxonomy Article',
+                'slug' => 'public-taxonomy-article',
+                'content_md' => 'Article using newly created public taxonomy.',
+                'locale' => 'en',
+                'category_id' => (int) $category->id,
+                'tags' => [(int) $tag->id],
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $article = Article::query()->withoutGlobalScopes()->where('slug', 'public-taxonomy-article')->firstOrFail();
+        $this->assertSame(0, (int) $article->org_id);
+        $this->assertSame((int) $category->id, (int) $article->category_id);
+        $this->assertSame(
+            [(int) $tag->id],
+            $article->tags()->withoutGlobalScopes()->pluck('article_tags.id')->all()
+        );
     }
 
     public function test_filament_article_pages_preserve_public_article_org_scope(): void

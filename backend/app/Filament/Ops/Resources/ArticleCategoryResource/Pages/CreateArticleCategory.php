@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Resources\ArticleCategoryResource\Pages;
 
 use App\Filament\Ops\Resources\ArticleCategoryResource;
-use App\Support\OrgContext;
+use App\Services\Ops\SeoContentScopeViewModel;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateArticleCategory extends CreateRecord
@@ -18,7 +18,7 @@ class CreateArticleCategory extends CreateRecord
      */
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        $data['org_id'] = max(0, (int) app(OrgContext::class)->orgId());
+        $data['org_id'] = SeoContentScopeViewModel::GLOBAL_ORG_ID;
 
         return $data;
     }

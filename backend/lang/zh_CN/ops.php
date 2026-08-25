@@ -2914,6 +2914,8 @@ return [
                 'save' => '保存修改',
                 'edit' => '编辑',
                 'release' => '发布',
+                'manage_categories' => '管理分类',
+                'manage_tags' => '管理标签',
             ],
             'notifications' => [
                 'created' => '文章已创建',
