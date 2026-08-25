@@ -50129,7 +50129,7 @@ prs:
     base: main
     branch: codex/ops-personality-desktop-04
     title: "feat(ops): link desktop templates from personality content"
-    status: pr_open
+    status: merged
     depends_on: [OPS-CONTENT-WORKSPACE-03]
     train_scope: ops_personality_desktop_context
     risk_level: product_ui_navigation
@@ -50164,14 +50164,31 @@ prs:
     base: main
     branch: codex/ops-content-dormant-05
     title: "feat(ops): expose dormant content types contextually"
-    status: registered
+    status: local_validation_passed
     depends_on: [OPS-PERSONALITY-DESKTOP-04]
     train_scope: ops_dormant_content_context
     risk_level: product_ui_navigation
     scope:
       - Keep support articles and interpretation guides hidden from top-level navigation.
       - Add a contextual first-record path without changing their routes, APIs, models, review state, or authority.
+    allowed_paths:
+      - backend/app/Filament/Ops/Pages/ContentWorkspacePage.php
+      - backend/app/Services/Ops/SeoContentScopeViewModel.php
+      - backend/resources/views/filament/ops/pages/content-workspace.blade.php
+      - backend/lang/en/ops.php
+      - backend/lang/zh_CN/ops.php
+      - backend/tests/Feature/Ops/ContentCmsProductLayerTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && php artisan test tests/Feature/Ops/ContentCmsProductLayerTest.php --filter='content_workspace_exposes_dormant_content_types_without_navigation_registration|content_workspace_and_editorial_compatibility_page_share_global_metrics' --no-ansi
+      - cd backend && php artisan test tests/Feature/Ops/OpsNavigationInventoryTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test for changed PHP files
+      - verify support/interpretation list-create-edit routes; parse pr-train JSON and YAML; exact-scope validation; git diff --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false
 
   - id: OPS-SCALE-V2-MANAGEMENT-06
     repo: fap-api

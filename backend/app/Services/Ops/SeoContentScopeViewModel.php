@@ -9,6 +9,8 @@ use App\Models\ArticleCategory;
 use App\Models\ArticleTag;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
+use App\Models\InterpretationGuide;
+use App\Models\SupportArticle;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
@@ -68,6 +70,8 @@ final class SeoContentScopeViewModel
      *     career_jobs:array{total:int,draft:int,published:int},
      *     categories:int,
      *     tags:int,
+     *     interpretation_guides:int,
+     *     support_articles:int,
      *     draft_handoff:int,
      *     published:int
      * }
@@ -84,6 +88,8 @@ final class SeoContentScopeViewModel
             'career_jobs' => $jobs,
             'categories' => $this->articleCategories()->count(),
             'tags' => $this->articleTags()->count(),
+            'interpretation_guides' => InterpretationGuide::query()->withoutGlobalScopes()->where('org_id', self::GLOBAL_ORG_ID)->count(),
+            'support_articles' => SupportArticle::query()->withoutGlobalScopes()->where('org_id', self::GLOBAL_ORG_ID)->count(),
             'draft_handoff' => $articles['draft'] + $guides['draft'] + $jobs['draft'],
             'published' => $articles['published'] + $guides['published'] + $jobs['published'],
         ];

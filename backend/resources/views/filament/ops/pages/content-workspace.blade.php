@@ -87,6 +87,33 @@
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
+            :title="__('ops.custom_pages.content_workspace.optional_types_title')"
+            :description="__('ops.custom_pages.content_workspace.optional_types_desc')"
+        >
+            <div class="ops-card-list">
+                @foreach ($optionalContentCards as $card)
+                    <x-filament-ops::ops-result-card
+                        :title="$card['title']"
+                        :meta="$card['meta']"
+                    >
+                        <p class="ops-control-hint">{{ $card['description'] }}</p>
+
+                        <x-slot name="actions">
+                            <x-filament::button size="xs" color="gray" tag="a" href="{{ $card['index_url'] }}">
+                                {{ __('ops.custom_pages.common.actions.open') }}
+                            </x-filament::button>
+                            @if ($card['can_create'])
+                                <x-filament::button size="xs" color="primary" tag="a" href="{{ $card['create_url'] }}">
+                                    {{ $card['count'] === 0 ? __('ops.custom_pages.content_workspace.create_first') : __('ops.custom_pages.common.actions.create') }}
+                                </x-filament::button>
+                            @endif
+                        </x-slot>
+                    </x-filament-ops::ops-result-card>
+                @endforeach
+            </div>
+        </x-filament-ops::ops-section>
+
+        <x-filament-ops::ops-section
             :title="__('ops.custom_pages.content_workspace.access_model_title')"
             :description="__('ops.custom_pages.content_workspace.access_model_desc')"
         >
