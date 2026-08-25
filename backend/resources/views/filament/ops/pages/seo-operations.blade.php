@@ -585,11 +585,7 @@
         @endif
 
         @if ($activeWorkspace === 'content')
-            <x-filament-ops::ops-state-message
-                state="production_unproven"
-                :title="__('ops.custom_pages.seo_operations.workspace.content')"
-                :description="__('ops.custom_pages.seo_operations.content_unproven')"
-            />
+            <x-filament-ops::ops-content-publishing-workspace />
         @endif
         </div>
     </div>

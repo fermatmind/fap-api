@@ -1627,6 +1627,56 @@ return [
                     'hold' => 'No decision is eligible, so no target, identity, path, or write control is resolved.',
                 ],
             ],
+            'content_publishing' => [
+                'eyebrow' => 'Structured CMS',
+                'title' => 'Content and publishing',
+                'description' => 'Keep editing, SEO validation, preview, and release gates anchored to the existing CMS authority.',
+                'authority' => [
+                    'label' => 'Existing CMS authority',
+                    'title' => 'Authoritative Resources',
+                    'description' => 'These links open the existing Filament Resources; this workspace does not copy their fields or records.',
+                    'types' => ['article' => 'Articles', 'career_guide' => 'Career guides', 'career_job' => 'Career jobs'],
+                ],
+                'context_label' => 'Selected content context',
+                'context' => [
+                    'content_type' => 'Content type', 'page_family' => 'Page Family', 'locale' => 'Locale',
+                    'revision' => 'Draft / revision', 'version_diff' => 'Version diff',
+                    'public_preview' => 'Public preview', 'submit_review' => 'Submit review',
+                ],
+                'editor' => [
+                    'eyebrow' => 'Field authority',
+                    'title' => 'Structured content fields',
+                    'description' => 'Field groups describe the target interaction model; actual values remain in the selected existing Resource.',
+                    'groups' => [
+                        'core_content' => 'Core content', 'visible_modules' => 'Visible modules',
+                        'locale_authority' => 'Locale and authority', 'claim_risk' => 'Claim risk',
+                    ],
+                ],
+                'checks' => [
+                    'title' => 'Inline SEO validation',
+                    'items' => [
+                        'canonical' => 'Canonical', 'hreflang' => 'Hreflang',
+                        'structured_visible' => 'JSON-LD ↔ visible content', 'private_url' => 'Private URL exclusion',
+                        'metadata' => 'Required metadata',
+                    ],
+                ],
+                'preview' => [
+                    'eyebrow' => 'Public context', 'title' => 'Live page preview',
+                    'description' => 'Preview may render only public modules and must never include private results or user data.',
+                    'devices_label' => 'Preview devices',
+                    'devices' => ['desktop' => 'Desktop', 'tablet' => 'Tablet', 'mobile' => 'Mobile'],
+                    'hold' => '#10 has not supplied a revision-bound public preview contract, so no target or private record is resolved.',
+                ],
+                'release' => [
+                    'eyebrow' => 'Release gate', 'title' => 'Controlled lifecycle',
+                    'description' => 'Backend permission, Policy Gateway, version lock, Canary, and public readback remain mandatory.',
+                    'stages' => ['draft' => 'Draft', 'review' => 'Review', 'canary' => 'Canary', 'publish' => 'Publish'],
+                    'fields' => ['saved_at' => 'Saved at', 'review_state' => 'Review state', 'material_lastmod' => 'Material lastmod'],
+                    'lastmod_rule' => 'Material lastmod changes only after a substantive public-content change is published. Notes, spelling-only edits, private fields, and workflow state do not refresh it.',
+                ],
+                'hold_title' => 'Content lifecycle is not production-proven',
+                'hold_description' => '#10 has not published a unified revision, preview, Canary, readback, and material-lastmod contract. No review or publish action is exposed.',
+            ],
             'technical_health' => [
                 'trust_label' => 'Technical health trust status',
                 'trust' => [

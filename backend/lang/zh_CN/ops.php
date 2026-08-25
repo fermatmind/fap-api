@@ -1627,6 +1627,56 @@ return [
                     'hold' => '当前没有合格决策，因此不会解析目标、身份、路径或写入控制。',
                 ],
             ],
+            'content_publishing' => [
+                'eyebrow' => '结构化 CMS',
+                'title' => '内容与发布',
+                'description' => '编辑、SEO 校验、预览和发布门禁始终锚定现有 CMS authority。',
+                'authority' => [
+                    'label' => '现有 CMS authority',
+                    'title' => '权威 Resource',
+                    'description' => '这些链接进入现有 Filament Resource；本工作区不复制字段或记录。',
+                    'types' => ['article' => '文章', 'career_guide' => '职业指南', 'career_job' => '职业岗位'],
+                ],
+                'context_label' => '所选内容上下文',
+                'context' => [
+                    'content_type' => '内容类型', 'page_family' => 'Page Family', 'locale' => 'Locale',
+                    'revision' => '草稿 / revision', 'version_diff' => '版本差异',
+                    'public_preview' => '线上预览', 'submit_review' => '提交审核',
+                ],
+                'editor' => [
+                    'eyebrow' => '字段 authority',
+                    'title' => '结构化内容字段',
+                    'description' => '字段分组只描述目标交互；真实值仍由所选现有 Resource 管理。',
+                    'groups' => [
+                        'core_content' => '核心内容', 'visible_modules' => '可见内容模块',
+                        'locale_authority' => 'Locale 与 authority', 'claim_risk' => 'Claim 风险',
+                    ],
+                ],
+                'checks' => [
+                    'title' => '内联 SEO 校验',
+                    'items' => [
+                        'canonical' => 'Canonical', 'hreflang' => 'Hreflang',
+                        'structured_visible' => 'JSON-LD ↔ 可见内容', 'private_url' => '私人 URL 排除',
+                        'metadata' => '必要 metadata',
+                    ],
+                ],
+                'preview' => [
+                    'eyebrow' => '公开上下文', 'title' => '线上页面预览',
+                    'description' => '预览只能呈现公开模块，绝不包含私人结果或用户数据。',
+                    'devices_label' => '预览设备',
+                    'devices' => ['desktop' => '桌面', 'tablet' => '平板', 'mobile' => '移动'],
+                    'hold' => '#10 尚未提供绑定 revision 的公开预览合同，因此不会解析目标或私人记录。',
+                ],
+                'release' => [
+                    'eyebrow' => '发布门禁', 'title' => '受控生命周期',
+                    'description' => '后端权限、Policy Gateway、版本锁、Canary 与公开 readback 始终是必需条件。',
+                    'stages' => ['draft' => '草稿', 'review' => '审核', 'canary' => 'Canary', 'publish' => '发布'],
+                    'fields' => ['saved_at' => '保存时间', 'review_state' => '审核状态', 'material_lastmod' => 'Material lastmod'],
+                    'lastmod_rule' => 'Material lastmod 只在实质性公开内容变更发布后更新；后台备注、仅拼写修改、私人字段与流程状态不得刷新。',
+                ],
+                'hold_title' => '内容生命周期尚未得到生产证明',
+                'hold_description' => '#10 尚未发布统一 revision、预览、Canary、readback 与 material-lastmod 合同，因此不显示审核或发布动作。',
+            ],
             'technical_health' => [
                 'trust_label' => '技术健康信任状态',
                 'trust' => [
