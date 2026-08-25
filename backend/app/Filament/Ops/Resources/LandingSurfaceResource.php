@@ -30,6 +30,8 @@ class LandingSurfaceResource extends Resource
 
     protected static ?string $navigationLabel = 'Landing Surfaces';
 
+    protected static ?int $navigationSort = 5;
+
     public static function canViewAny(): bool
     {
         return self::canRead();

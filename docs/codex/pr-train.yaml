@@ -50007,3 +50007,137 @@ prs:
     deploy_allowed: false
     content_authority: exact Task 7A receipt, active generation pointer, immutable document bytes, Task 3B database authority, and a no-clobber Task 7B permit; control remains unexecuted
     repository_rule_impact: repairs acceptance evidence and automatic cache invalidation without authorizing any external action
+
+  - id: OPS-CONTENT-NAV-01
+    repo: fap-api
+    base: main
+    branch: codex/ops-content-nav-01
+    title: "refactor(ops): reduce content navigation to eight entries"
+    status: pr_open
+    depends_on: []
+    train_scope: ops_content_navigation_convergence
+    risk_level: low_ui_navigation
+    scope:
+      - Keep exactly eight fixed, bilingual Content navigation entries in the approved order.
+      - Hide nine legacy entries from navigation without changing their pages, routes, permissions, models, APIs, or authority.
+      - Add focused regressions proving the hidden resources retain index, create, and edit routes.
+    allowed_paths:
+      - backend/app/Filament/Ops/Pages/ContentWorkspacePage.php
+      - backend/app/Filament/Ops/Pages/EditorialOperationsPage.php
+      - backend/app/Filament/Ops/Resources/ArticleCategoryResource.php
+      - backend/app/Filament/Ops/Resources/ArticleResource.php
+      - backend/app/Filament/Ops/Resources/ArticleTagResource.php
+      - backend/app/Filament/Ops/Resources/CareerGuideResource.php
+      - backend/app/Filament/Ops/Resources/CareerJobResource.php
+      - backend/app/Filament/Ops/Resources/ContentPageResource.php
+      - backend/app/Filament/Ops/Resources/InterpretationGuideResource.php
+      - backend/app/Filament/Ops/Resources/LandingSurfaceResource.php
+      - backend/app/Filament/Ops/Resources/MediaAssetResource.php
+      - backend/app/Filament/Ops/Resources/PersonalityProfileResource.php
+      - backend/app/Filament/Ops/Resources/PersonalityVariantCloneContentResource.php
+      - backend/app/Filament/Ops/Resources/ScaleRegistryResource.php
+      - backend/app/Filament/Ops/Resources/ScaleSlugResource.php
+      - backend/app/Filament/Ops/Resources/SupportArticleResource.php
+      - backend/app/Filament/Ops/Resources/TopicProfileResource.php
+      - backend/tests/Feature/Ops/OpsNavigationInventoryTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && php artisan test tests/Feature/Ops/OpsNavigationInventoryTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test for changed PHP files
+      - parse pr-train JSON and YAML; exact-scope validation; git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false
+
+  - id: OPS-CONTENT-TAXONOMY-02
+    repo: fap-api
+    base: main
+    branch: codex/ops-content-taxonomy-02
+    title: "fix(ops): align article taxonomy with public authority"
+    status: registered
+    depends_on: [OPS-CONTENT-NAV-01]
+    train_scope: ops_content_taxonomy_authority
+    risk_level: controlled_content_authority
+    scope:
+      - Make article category and tag reads and writes use the existing org_id=0 public article scope.
+      - Add article-workspace contextual taxonomy links while preserving routes, models, relations, and permissions.
+      - Inventory non-zero historical taxonomy read-only and use only backward-compatible remediation if required.
+    do_not:
+      - Delete or overwrite historical taxonomy records or apply a production migration.
+      - Restore categories or tags to top-level navigation.
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: OPS-CONTENT-WORKSPACE-03
+    repo: fap-api
+    base: main
+    branch: codex/ops-content-workspace-03
+    title: "fix(ops): unify content workspace metrics"
+    status: registered
+    depends_on: [OPS-CONTENT-TAXONOMY-02]
+    train_scope: ops_content_workspace_unification
+    risk_level: product_read_model
+    scope:
+      - Reuse one global content-scope read model for article, career, category, tag, and editorial lifecycle metrics.
+      - Preserve both legacy workspace URLs and their permissions without adding publish writes.
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: OPS-PERSONALITY-DESKTOP-04
+    repo: fap-api
+    base: main
+    branch: codex/ops-personality-desktop-04
+    title: "feat(ops): link desktop templates from personality content"
+    status: registered
+    depends_on: [OPS-CONTENT-WORKSPACE-03]
+    train_scope: ops_personality_desktop_context
+    risk_level: product_ui_navigation
+    scope:
+      - Add variant-aware desktop-template actions and empty-state creation from personality context.
+      - Preserve independent models, validation, publication, public APIs, permissions, and the legacy URL.
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: OPS-CONTENT-DORMANT-05
+    repo: fap-api
+    base: main
+    branch: codex/ops-content-dormant-05
+    title: "feat(ops): expose dormant content types contextually"
+    status: registered
+    depends_on: [OPS-PERSONALITY-DESKTOP-04]
+    train_scope: ops_dormant_content_context
+    risk_level: product_ui_navigation
+    scope:
+      - Keep support articles and interpretation guides hidden from top-level navigation.
+      - Add a contextual first-record path without changing their routes, APIs, models, review state, or authority.
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: OPS-SCALE-V2-MANAGEMENT-06
+    repo: fap-api
+    base: main
+    branch: codex/ops-scale-v2-management-06
+    title: "fix(ops): align scale management with V2 runtime"
+    status: registered
+    depends_on: [OPS-CONTENT-DORMANT-05]
+    train_scope: ops_scale_v2_management
+    risk_level: high_scale_authority
+    scope:
+      - Read the real V2 scale authority and route every mutation through the existing writer, transaction, slug projection, and cache invalidation boundary.
+      - Preserve tenant isolation and legacy URLs while preventing direct slug writes.
+    do_not:
+      - Add schema, apply migrations, or mutate production database, cache, artifacts, pointers, or sitemap state.
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: OPS-CONTENT-NAV-A11Y-07
+    repo: fap-api
+    base: main
+    branch: codex/ops-content-nav-a11y-07
+    title: "fix(ops): complete content navigation accessibility"
+    status: registered
+    depends_on: [OPS-SCALE-V2-MANAGEMENT-06]
+    train_scope: ops_content_navigation_accessibility
+    risk_level: product_ui_accessibility
+    scope:
+      - Give all eight collapsed navigation icons stable accessible names and tooltips with fixed bilingual labels and semantic icons.
+      - Prevent content, editorial, and taxonomy translation aliases from accidental grouping without exposing hidden entries.
+      - Run final focused route, permission, keyboard, focus, zoom, collapsed, expanded, and bilingual acceptance for T1 through T6.
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }

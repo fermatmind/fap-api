@@ -25,6 +25,8 @@ use Illuminate\Support\Str;
 
 class ArticleCategoryResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = ArticleCategory::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-folder';

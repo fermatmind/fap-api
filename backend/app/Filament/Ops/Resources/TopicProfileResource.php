@@ -32,6 +32,8 @@ class TopicProfileResource extends Resource
 
     protected static ?string $navigationLabel = 'Topics';
 
+    protected static ?int $navigationSort = 8;
+
     protected static ?string $modelLabel = 'Topic Profile';
 
     protected static ?string $pluralModelLabel = 'Topic Profiles';

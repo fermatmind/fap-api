@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class SupportArticleResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = SupportArticle::class;
 
     protected static ?string $slug = 'support-articles';

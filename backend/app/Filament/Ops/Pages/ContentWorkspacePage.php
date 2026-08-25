@@ -20,6 +20,8 @@ use Filament\Pages\Page;
 
 class ContentWorkspacePage extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $navigationGroup = null;

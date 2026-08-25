@@ -105846,5 +105846,112 @@
     "deploy_allowed": false,
     "transitions": [{"at": "2026-08-12T17:15:00+08:00", "status": "implementation_in_progress", "note": "Started from merged 07C origin/main in an isolated worktree. Scope batches all Task 7B P1/P2 runner, receipt-lineage, gate, cache-identity, and public-contract repairs. No workflow dispatch, SSH, production/staging access, deploy, migration, CMS, database, cache, authority, pointer, sitemap, llms, Search, IndexNow, GSC, or URL Inspection action occurred."}, {"at": "2026-08-12T17:30:00+08:00", "status": "local_validation_passed", "note": "Real runner execution passes preflight, receipt-hash-bound apply, no-clobber, lineage, committed/ambiguous write-state, and failure receipt contracts. Public HTTP coverage proves missing/malformed/hold, release, and authority-loss transitions across sitemap, llms.txt, and llms-full.txt with exact 2092 locale URLs / 1046 slugs, one authority validation per build, non-target preservation, and ETag/304 compatibility. Focused regressions, ReviewPolicyRegistry, runtime freeze, Pint, PHP syntax, actionlint, YAML/JSON, diff checks, and the full ci_verify_mbti chain pass. No workflow dispatch, SSH, production/staging access, or controlled external action occurred."}, {"at": "2026-08-12T17:42:00+08:00", "status": "github_review_repairing", "note": "The single review collection identified three actionable same-scope findings: execution-step shell scope, the existing SEO13 sitemap cache caller, and atomic body/identity cache pairing. They are batched into the one permitted review repair commit with focused compatibility and runtime-freeze coverage; no workflow or external action occurred."}, {"at": "2026-08-12T17:52:00+08:00", "status": "local_validation_passed", "note": "The consolidated repair passes 17 focused runner/public/cache/SEO13 tests with 2386 assertions, ReviewPolicyRegistry, the full Big Five runtime-freeze suite with 1235 assertions, Pint, PHP syntax, actionlint, YAML/JSON parsing, diff checks, and the complete ci_verify_mbti chain (including 1694 Big Five tests / 196740 assertions and all downstream gates). Generated test artifacts were restored. No workflow dispatch, SSH, production/staging access, or controlled external action occurred."}],
     "updated_at": "2026-08-12T17:52:00+08:00"
+  },
+  "OPS-CONTENT-NAV-01": {
+    "id": "OPS-CONTENT-NAV-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/ops-content-nav-01",
+    "title": "refactor(ops): reduce content navigation to eight entries",
+    "status": "pr_open",
+    "depends_on": [],
+    "commit_sha": "6823b189e171d1cc0e6322c4d43a87a760557316",
+    "pr_number": 3783,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3783",
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The operator explicitly authorized the sequential seven-PR Ops content-navigation train and creation of missing manifest/state identities."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "T1 has no dependency and started from origin/main 7917c9b5eae6de6b3dff781e6a6ab71dad37d6b8 in an isolated worktree."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "OpsNavigationInventoryTest passed 3 tests / 168 assertions; scoped Pint passed 18 files; the filtered Ops route inventory retained every hidden index/create/edit route and both workspace URLs; YAML, JSON, and git diff checks passed."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "Changed files match the T1 allowlist: navigation registration/order, one focused test, and the operator-authorized minimal seven-item manifest/state registration only."
+      }
+    },
+    "production_write_execution": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "search_channel_action": false,
+    "transitions": [
+      {
+        "at": "2026-08-26T00:00:00+08:00",
+        "status": "registered",
+        "note": "Registered T1 through T7 from the operator-provided exact scopes; no pre-existing matching task or PR identity was found."
+      },
+      {
+        "at": "2026-08-26T00:00:00+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started T1 only. Scope is fixed navigation registration/order plus focused route regressions; no T2 through T7 implementation or external mutation is included."
+      },
+      {
+        "at": "2026-08-26T06:48:24+08:00",
+        "status": "local_validation_passed",
+        "note": "The exact eight-entry bilingual order and all nine hidden-entry compatibility paths passed focused tests and route inspection. Scoped Pint, manifest/state parsing, exact allowlist, and diff checks passed; no CMS, database, cache, Search, staging, or production action occurred."
+      },
+      {
+        "at": "2026-08-26T06:50:00+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #3783 from codex/ops-content-nav-01 at validated implementation commit 6823b189e171d1cc0e6322c4d43a87a760557316. Required checks and merge review are pending."
+      }
+    ]
+  },
+  "OPS-CONTENT-TAXONOMY-02": {
+    "id": "OPS-CONTENT-TAXONOMY-02",
+    "repo": "fap-api",
+    "branch": "codex/ops-content-taxonomy-02",
+    "status": "registered",
+    "depends_on": ["OPS-CONTENT-NAV-01"],
+    "production_write_execution": false
+  },
+  "OPS-CONTENT-WORKSPACE-03": {
+    "id": "OPS-CONTENT-WORKSPACE-03",
+    "repo": "fap-api",
+    "branch": "codex/ops-content-workspace-03",
+    "status": "registered",
+    "depends_on": ["OPS-CONTENT-TAXONOMY-02"],
+    "production_write_execution": false
+  },
+  "OPS-PERSONALITY-DESKTOP-04": {
+    "id": "OPS-PERSONALITY-DESKTOP-04",
+    "repo": "fap-api",
+    "branch": "codex/ops-personality-desktop-04",
+    "status": "registered",
+    "depends_on": ["OPS-CONTENT-WORKSPACE-03"],
+    "production_write_execution": false
+  },
+  "OPS-CONTENT-DORMANT-05": {
+    "id": "OPS-CONTENT-DORMANT-05",
+    "repo": "fap-api",
+    "branch": "codex/ops-content-dormant-05",
+    "status": "registered",
+    "depends_on": ["OPS-PERSONALITY-DESKTOP-04"],
+    "production_write_execution": false
+  },
+  "OPS-SCALE-V2-MANAGEMENT-06": {
+    "id": "OPS-SCALE-V2-MANAGEMENT-06",
+    "repo": "fap-api",
+    "branch": "codex/ops-scale-v2-management-06",
+    "status": "registered",
+    "depends_on": ["OPS-CONTENT-DORMANT-05"],
+    "production_write_execution": false
+  },
+  "OPS-CONTENT-NAV-A11Y-07": {
+    "id": "OPS-CONTENT-NAV-A11Y-07",
+    "repo": "fap-api",
+    "branch": "codex/ops-content-nav-a11y-07",
+    "status": "registered",
+    "depends_on": ["OPS-SCALE-V2-MANAGEMENT-06"],
+    "production_write_execution": false
   }
 }

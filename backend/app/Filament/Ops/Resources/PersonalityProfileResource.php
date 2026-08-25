@@ -32,6 +32,8 @@ class PersonalityProfileResource extends Resource
 
     protected static ?string $navigationLabel = 'Personality';
 
+    protected static ?int $navigationSort = 7;
+
     protected static ?string $modelLabel = 'Personality Profile';
 
     protected static ?string $pluralModelLabel = 'Personality Profiles';

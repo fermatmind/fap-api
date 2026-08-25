@@ -32,6 +32,8 @@ class CareerJobResource extends Resource
 
     protected static ?string $navigationLabel = 'Career Jobs';
 
+    protected static ?int $navigationSort = 3;
+
     protected static ?string $modelLabel = 'Career Job';
 
     protected static ?string $pluralModelLabel = 'Career Jobs';

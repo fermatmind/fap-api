@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ScaleRegistryResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = ScaleRegistry::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
