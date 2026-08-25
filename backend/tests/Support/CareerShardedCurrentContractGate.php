@@ -208,12 +208,12 @@ final class CareerShardedCurrentContractGate
                 }
             }
         }
-        if (($manifest['coverage'] ?? null) !== [
+        if (($manifest['coverage'] ?? null) != [
             'slugs' => self::EXPECTED_SLUGS,
             'locales' => ['en', 'zh-CN'],
             'locale_pages' => self::EXPECTED_LOCALE_PAGES,
             'module_rows' => self::EXPECTED_MODULE_ROWS,
-        ] || ($manifest['module_completeness'] ?? null) !== [
+        ] || ($manifest['module_completeness'] ?? null) != [
             'rows_per_module' => self::EXPECTED_LOCALE_PAGES,
             'modules_per_slug_locale' => count(self::MODULES),
         ]) {

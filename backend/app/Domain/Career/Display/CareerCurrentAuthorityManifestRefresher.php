@@ -29,6 +29,11 @@ final class CareerCurrentAuthorityManifestRefresher
         if (! is_file($manifestPath) || is_link($manifestPath)) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_PACKAGE_FILE_MISSING');
         }
+        $manifest = json_decode((string) file_get_contents($manifestPath), true);
+        if (is_array($manifest)
+            && ($manifest['contract_version'] ?? null) === CareerShardedCurrentAuthorityPackage::CONTRACT_VERSION) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_SHARDED_MANIFEST_COMPILER_OWNED');
+        }
 
         $built = $this->package->expectedManifest($backendRoot);
         $expectedBytes = CareerCurrentAuthorityPackage::encodePrettyCanonical($built['manifest']);

@@ -46,7 +46,10 @@ test("keeps all SEO platform closeout evidence docs-only", () => {
 
 test("classifies application code", () => assert.equal(has(["backend/app/Models/User.php"], "application_code"), true));
 test("classifies content assets", () => assert.equal(has(["backend/content_packs/BIG5/v1/manifest.json"], "content_assets"), true));
-test("classifies Career Current assets", () => assert.equal(has(["backend/content_assets/career/current/assets.jsonl"], "content_assets"), true));
+test("classifies Career Current legacy and sharded assets", () => {
+  assert.equal(has(["backend/content_assets/career/current/assets.jsonl"], "content_assets"), true);
+  assert.equal(has(["backend/content_assets/career/current/identity/shard-00.jsonl"], "content_assets"), true);
+});
 test("binds only the exact MBTI zh authority release manifest to its operation", () => {
   const exact = classifyPaths([
     "backend/content_assets/personality_public/mbti_zh_result_authority_release.v1.json",

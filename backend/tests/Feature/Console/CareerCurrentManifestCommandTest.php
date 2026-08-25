@@ -28,10 +28,10 @@ final class CareerCurrentManifestCommandTest extends TestCase
             'search_submissions',
         ]))));
 
-        self::assertSame(0, Artisan::call('career:current-manifest', ['--write' => true]));
+        self::assertSame(1, Artisan::call('career:current-manifest', ['--write' => true]));
         $write = json_decode(trim(Artisan::output()), true, 512, JSON_THROW_ON_ERROR);
-        self::assertSame('PASS_CAREER_CURRENT_MANIFEST', $write['status'] ?? null);
-        self::assertFalse($write['changed'] ?? true);
+        self::assertSame('FAIL_CAREER_CURRENT_MANIFEST', $write['status'] ?? null);
+        self::assertSame('CURRENT_SHARDED_MANIFEST_COMPILER_OWNED', $write['safe_error_code'] ?? null);
         self::assertSame($before, hash_file('sha256', $manifestPath));
     }
 }

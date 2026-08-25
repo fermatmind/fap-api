@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Tests\Unit\Domain\Career\Display;
 
 use App\Domain\Career\Compilation\CareerTenBlockInputSchema;
+use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
+use App\Domain\Career\Display\CareerCurrentAuthorityPackageLoader;
+use App\Domain\Career\Display\CareerShardedCurrentAuthorityPackage;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use RuntimeException;
@@ -160,6 +163,42 @@ final class CareerShardedCurrentContractTest extends TestCase
                 self::assertDoesNotMatchRegularExpression('/v4\.(?:[4-9]|[1-9][0-9]+)/', (string) file_get_contents($entry->getPathname()));
             }
         }
+    }
+
+    public function test_installed_current_inventory_is_manifest_bound_and_legacy_projection_is_equivalent(): void
+    {
+        ini_set('memory_limit', '1536M');
+        $currentRoot = $this->backendRoot.'/content_assets/career/current';
+        $manifest = Gate::decodeJsonFile($currentRoot.'/manifest.json');
+        $files = [];
+        foreach (array_merge($manifest['shards'], $manifest['registries']) as $declaration) {
+            $files[$declaration['path']] = (string) file_get_contents($currentRoot.'/'.$declaration['path']);
+        }
+        Gate::assertCandidate($manifest, $files);
+
+        $expectedInventory = array_merge(['assets.jsonl', 'manifest.json'], array_keys($files));
+        sort($expectedInventory, SORT_STRING);
+        $actualInventory = [];
+        $iterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($currentRoot, \FilesystemIterator::SKIP_DOTS),
+        );
+        foreach ($iterator as $entry) {
+            if ($entry->isFile()) {
+                $actualInventory[] = substr($entry->getPathname(), strlen($currentRoot) + 1);
+            }
+        }
+        sort($actualInventory, SORT_STRING);
+        self::assertSame($expectedInventory, $actualInventory);
+
+        $legacyContract = new CareerCurrentAuthorityPackage;
+        $loaded = (new CareerCurrentAuthorityPackageLoader(
+            $legacyContract,
+            new CareerShardedCurrentAuthorityPackage($legacyContract),
+        ))->load(dirname($currentRoot, 3));
+        self::assertSame('sharded', $loaded['summary']['source_format']);
+        self::assertSame(1046, $loaded['summary']['career_count']);
+        self::assertSame(2092, $loaded['summary']['locale_page_count']);
+        self::assertSame(hash_file('sha256', $currentRoot.'/assets.jsonl'), $loaded['summary']['assets_sha256']);
     }
 
     public function test_candidate_gate_rejects_unknown_empty_misplaced_unsorted_duplicate_and_incomplete_inputs(): void

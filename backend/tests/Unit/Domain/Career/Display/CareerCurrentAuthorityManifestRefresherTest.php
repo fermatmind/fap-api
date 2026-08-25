@@ -33,74 +33,22 @@ final class CareerCurrentAuthorityManifestRefresherTest extends TestCase
 
     public function test_it_refreshes_only_computed_fields_and_is_deterministic_and_fail_closed(): void
     {
-        ini_set('memory_limit', '1024M');
-
-        $sourceBackendRoot = dirname(__DIR__, 5);
-        $backendRoot = $this->copyCurrentPackage($sourceBackendRoot);
+        $backendRoot = dirname(__DIR__, 5);
         $manifestPath = $backendRoot.'/content_assets/career/current/manifest.json';
         $assetsPath = $backendRoot.'/content_assets/career/current/assets.jsonl';
-        $originalManifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
-        $originalHistory = array_intersect_key($originalManifest, array_flip([
-            'delivery_evidence',
-            'export_evidence',
-            'superseded_source_coverage',
-            'superseded_sources',
-        ]));
-
-        $this->mutateFirstRow($assetsPath, static function (array &$row): void {
-            $pages = &$row['page_payload_json'];
-            if (is_array($pages['page'] ?? null)) {
-                $pages = &$pages['page'];
+        $manifestHash = hash_file('sha256', $manifestPath);
+        $assetsHash = hash_file('sha256', $assetsPath);
+        $refresher = new CareerCurrentAuthorityManifestRefresher(new CareerCurrentAuthorityPackage);
+        foreach (['check', 'write'] as $method) {
+            try {
+                $refresher->{$method}($backendRoot);
+                self::fail('The legacy manifest refresher must reject installed sharded authority.');
+            } catch (CareerCurrentAuthorityPackageFailure $failure) {
+                self::assertSame('CURRENT_SHARDED_MANIFEST_COMPILER_OWNED', $failure->safeCode);
             }
-            self::appendToFirstString($pages['en']['definition_block']);
-        });
-
-        $package = new CareerCurrentAuthorityPackage;
-        $refresher = new CareerCurrentAuthorityManifestRefresher($package);
-        $check = $refresher->check($backendRoot);
-        self::assertTrue($check['stale']);
-        self::assertFalse($check['changed']);
-        self::assertSame('STALE_CAREER_CURRENT_MANIFEST', $check['status']);
-
-        try {
-            $package->load($backendRoot);
-            self::fail('A stale manifest must not load.');
-        } catch (CareerCurrentAuthorityPackageFailure $failure) {
-            self::assertSame('CURRENT_ASSETS_HASH_MISMATCH', $failure->safeCode);
         }
-
-        $write = $refresher->write($backendRoot);
-        self::assertSame('UPDATED_CAREER_CURRENT_MANIFEST', $write['status']);
-        self::assertTrue($write['changed']);
-        self::assertFalse($write['stale']);
-        self::assertTrue(str_ends_with((string) file_get_contents($manifestPath), "\n"));
-
-        $updatedManifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
-        self::assertSame($originalHistory, array_intersect_key($updatedManifest, array_flip(array_keys($originalHistory))));
-        self::assertNotSame(data_get($originalManifest, 'files.0.sha256'), data_get($updatedManifest, 'files.0.sha256'));
-        self::assertNotSame(
-            data_get($originalManifest, 'set_hashes.public_content_aggregate_sha256'),
-            data_get($updatedManifest, 'set_hashes.public_content_aggregate_sha256'),
-        );
-        self::assertSame(1046, $package->load($backendRoot)['summary']['career_count']);
-
-        $manifestBytes = file_get_contents($manifestPath);
-        $secondWrite = $refresher->write($backendRoot);
-        self::assertSame('PASS_CAREER_CURRENT_MANIFEST', $secondWrite['status']);
-        self::assertFalse($secondWrite['changed']);
-        self::assertSame($manifestBytes, file_get_contents($manifestPath));
-
-        $this->mutateFirstRow($assetsPath, static function (array &$row): void {
-            unset($row['metadata_json']['structured_components_v1']['locales']['en']['bindings'][0]['source_registry_key']);
-        });
-        $manifestBeforeInvalidWrite = file_get_contents($manifestPath);
-        try {
-            $refresher->write($backendRoot);
-            self::fail('Invalid assets must not rewrite the manifest.');
-        } catch (CareerCurrentAuthorityPackageFailure $failure) {
-            self::assertSame('CURRENT_STRUCTURED_COMPONENT_LINEAGE_INVALID', $failure->safeCode);
-        }
-        self::assertSame($manifestBeforeInvalidWrite, file_get_contents($manifestPath));
+        self::assertSame($manifestHash, hash_file('sha256', $manifestPath));
+        self::assertSame($assetsHash, hash_file('sha256', $assetsPath));
     }
 
     private function copyCurrentPackage(string $sourceBackendRoot): string

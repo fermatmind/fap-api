@@ -186,7 +186,10 @@ final class CareerCurrentAuthorityPackage
         } catch (JsonException) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_MANIFEST_INVALID');
         }
-        $sha256 = is_array($manifest) ? self::value($manifest, 'files.0.sha256') : null;
+        $contractVersion = is_array($manifest) ? ($manifest['contract_version'] ?? null) : null;
+        $sha256 = $contractVersion === CareerShardedCurrentAuthorityPackage::CONTRACT_VERSION
+            ? ($manifest['aggregate_sha256'] ?? null)
+            : (is_array($manifest) ? self::value($manifest, 'files.0.sha256') : null);
         if (! is_string($sha256) || preg_match('/\A[0-9a-f]{64}\z/', $sha256) !== 1) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_MANIFEST_INVALID');
         }

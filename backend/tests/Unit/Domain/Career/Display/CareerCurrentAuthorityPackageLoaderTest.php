@@ -23,7 +23,7 @@ final class CareerCurrentAuthorityPackageLoaderTest extends TestCase
         require_once $this->repoRoot.'/.agents/skills/fap-api-career-canonical-builder/scripts/split_legacy_current.php';
     }
 
-    public function test_manifest_explicitly_selects_equivalent_legacy_or_sharded_read_without_fallback(): void
+    public function test_installed_manifest_explicitly_selects_sharded_read_without_legacy_fallback(): void
     {
         ini_set('memory_limit', '1536M');
         $legacyPackage = new CareerCurrentAuthorityPackage;
@@ -31,7 +31,8 @@ final class CareerCurrentAuthorityPackageLoaderTest extends TestCase
             $legacyPackage,
             new CareerShardedCurrentAuthorityPackage($legacyPackage),
         );
-        $legacy = $loader->load($this->repoRoot.'/backend');
+        $installed = $loader->load($this->repoRoot.'/backend');
+        self::assertSame('sharded', $installed['summary']['source_format']);
 
         $candidateRoot = $this->temporaryDirectory('career-loader-candidate-');
         $fixtureBackend = $this->temporaryDirectory('career-loader-backend-');
@@ -57,13 +58,13 @@ final class CareerCurrentAuthorityPackageLoaderTest extends TestCase
             self::assertSame('sharded', $sharded['summary']['source_format']);
             self::assertSame(1046, $sharded['summary']['career_count']);
             self::assertSame(2092, $sharded['summary']['locale_page_count']);
-            self::assertSame($legacy['slugs'], $sharded['slugs']);
+            self::assertSame($installed['slugs'], $sharded['slugs']);
             self::assertSame(
-                CareerCurrentAuthorityPackage::hashValue($legacy['rows']),
+                CareerCurrentAuthorityPackage::hashValue($installed['rows']),
                 CareerCurrentAuthorityPackage::hashValue($sharded['rows']),
             );
-            self::assertSame($legacy['summary']['assets_sha256'], $sharded['summary']['assets_sha256']);
-            self::assertSame($legacy['summary']['full_asset_set_sha256'], $sharded['summary']['full_asset_set_sha256']);
+            self::assertSame($installed['summary']['assets_sha256'], $sharded['summary']['assets_sha256']);
+            self::assertSame($installed['summary']['full_asset_set_sha256'], $sharded['summary']['full_asset_set_sha256']);
 
             $firstShard = $currentRoot.'/identity/shard-00.jsonl';
             $original = (string) file_get_contents($firstShard);

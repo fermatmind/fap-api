@@ -112,9 +112,19 @@ final class CareerLegacyCurrentSharder
         $assetsShaBefore = hash_file('sha256', $assetsPath) ?: throw new CareerLegacyCurrentSplitFailure('LEGACY_ASSETS_UNREADABLE');
         $manifestShaBefore = hash_file('sha256', $legacyManifestPath) ?: throw new CareerLegacyCurrentSplitFailure('LEGACY_MANIFEST_UNREADABLE');
         $legacyManifest = $this->decodeObject((string) file_get_contents($legacyManifestPath), 'LEGACY_MANIFEST_INVALID');
-        if (($legacyManifest['files'][0]['sha256'] ?? null) !== $assetsShaBefore
-            || ($legacyManifest['files'][0]['row_count'] ?? null) !== self::EXPECTED_SLUGS) {
+        $manifestContract = $legacyManifest['contract_version'] ?? null;
+        $isLegacyManifest = $manifestContract === 'career.current_authority_manifest.v1';
+        $isInstalledShardedManifest = $manifestContract === 'career.sharded_current.manifest.v1';
+        if (! $isLegacyManifest && ! $isInstalledShardedManifest) {
             throw new CareerLegacyCurrentSplitFailure('LEGACY_MANIFEST_BINDING_INVALID');
+        }
+        if ($isLegacyManifest
+            && (($legacyManifest['files'][0]['sha256'] ?? null) !== $assetsShaBefore
+                || ($legacyManifest['files'][0]['row_count'] ?? null) !== self::EXPECTED_SLUGS)) {
+            throw new CareerLegacyCurrentSplitFailure('LEGACY_MANIFEST_BINDING_INVALID');
+        }
+        if ($isInstalledShardedManifest) {
+            $this->assertInstalledShardedPackage($repoRoot, $legacyManifest);
         }
 
         $this->assertOutputInventory($outputRoot);
@@ -183,7 +193,9 @@ final class CareerLegacyCurrentSharder
             || $moduleRows !== array_fill_keys(self::MODULES, self::EXPECTED_LOCALE_PAGES)) {
             throw new CareerLegacyCurrentSplitFailure('LEGACY_COVERAGE_INVALID');
         }
-        $this->assertSlugSet($slugList, (string) ($legacyManifest['set_hashes']['slug_set_sha256'] ?? ''));
+        if ($isLegacyManifest) {
+            $this->assertSlugSet($slugList, (string) ($legacyManifest['set_hashes']['slug_set_sha256'] ?? ''));
+        }
         $this->assertStableInputs($assetsShaBefore, $manifestShaBefore, $assetsPath, $legacyManifestPath);
 
         $shards = [];
@@ -230,6 +242,10 @@ final class CareerLegacyCurrentSharder
             'shards' => $shards,
         ];
         $manifest['aggregate_sha256'] = $this->aggregateHash($manifest);
+        if ($isInstalledShardedManifest
+            && ! hash_equals(self::canonicalJson($legacyManifest), self::canonicalJson($manifest))) {
+            throw new CareerLegacyCurrentSplitFailure('INSTALLED_SHARDED_PROJECTION_MISMATCH');
+        }
         $coverageReport = [
             'contract_version' => 'career.sharded_current.coverage_report.v1',
             'slugs' => $rowCount,
@@ -592,6 +608,34 @@ final class CareerLegacyCurrentSharder
         ]));
 
         return hash('sha256', self::canonicalJson($projection));
+    }
+
+    /** @param array<string,mixed> $manifest */
+    private function assertInstalledShardedPackage(string $repoRoot, array $manifest): void
+    {
+        if (($manifest['modules'] ?? null) !== self::MODULES
+            || ($manifest['registries'] ?? null) !== []
+            || ! is_array($manifest['shards'] ?? null)
+            || count($manifest['shards']) !== 640
+            || ! hash_equals((string) ($manifest['aggregate_sha256'] ?? ''), $this->aggregateHash($manifest))) {
+            throw new CareerLegacyCurrentSplitFailure('INSTALLED_SHARDED_MANIFEST_INVALID');
+        }
+        $currentRoot = $repoRoot.'/backend/content_assets/career/current';
+        foreach ($manifest['shards'] as $position => $declaration) {
+            $module = self::MODULES[intdiv($position, 64)] ?? null;
+            $index = $position % 64;
+            $relativePath = sprintf('%s/shard-%02d.jsonl', $module, $index);
+            $path = $currentRoot.'/'.$relativePath;
+            if (! is_array($declaration)
+                || ($declaration['module'] ?? null) !== $module
+                || ($declaration['shard_index'] ?? null) !== $index
+                || ($declaration['path'] ?? null) !== $relativePath
+                || ! is_file($path)
+                || is_link($path)
+                || ! hash_equals((string) ($declaration['sha256'] ?? ''), (string) hash_file('sha256', $path))) {
+                throw new CareerLegacyCurrentSplitFailure('INSTALLED_SHARDED_FILE_INVALID');
+            }
+        }
     }
 
     /** @return array<string,string> */

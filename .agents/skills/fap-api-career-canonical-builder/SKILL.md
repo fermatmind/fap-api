@@ -17,7 +17,8 @@ Do not use it to publish, deploy, write CMS/database/cache state, render fronten
 
 ## Authority and boundaries
 
-- `backend/content_assets/career/current/{assets.jsonl,manifest.json}` is the repository Current package authority.
+- `backend/content_assets/career/current/manifest.json` and its bound 640 shards are the repository Current content authority.
+- `backend/content_assets/career/current/assets.jsonl` is a compiler-owned legacy LKG compatibility projection. It is not an editorial or compilation input and must not be edited by hand.
 - The compiler and package contracts under `backend/app/Domain/Career/{Compilation,Display}` define accepted input, output, locale, component, and hash behavior.
 - Source assets, lookup files, evidence files, Desktop directories, dry-run output, and a PASS receipt are candidates or evidence only.
 - Never change input copy during compilation. Report a blocker when normalization would require an editorial decision.
@@ -56,7 +57,7 @@ php .agents/skills/fap-api-career-canonical-builder/scripts/split_legacy_current
   --output-root=<existing-task-temp-dir>
 ```
 
-The splitter binds the committed legacy `assets.jsonl` and manifest before and after execution, normalizes the 1045 wrapped plus one direct locale shape, writes exactly 10 × 64 candidate shards, mechanically reconstructs every source row before accepting it, and emits coverage, ownership, integrity, manifest, and repository-zero-write evidence. It rejects symlinks, repository/path escape, unknown output files, invalid locale/slug/canonical JSON, duplicate identity, wrong ordering, coverage drift, and mid-run baseline drift. Repeating the same input must reproduce identical candidate bytes. A PASS keeps publication/current/deploy/search authority false.
+The splitter is retained only as the deterministic transition/recovery tool that produced the installed package. It binds the compiler-owned legacy `assets.jsonl` and legacy manifest before and after execution, normalizes the 1045 wrapped plus one direct locale shape, writes exactly 10 × 64 candidate shards, mechanically reconstructs every source row before accepting it, and emits coverage, ownership, integrity, manifest, and repository-zero-write evidence. It rejects symlinks, repository/path escape, unknown output files, invalid locale/slug/canonical JSON, duplicate identity, wrong ordering, coverage drift, and mid-run baseline drift. Repeating the same legacy input must reproduce identical candidate bytes. A PASS keeps publication/deploy/search authority false; only an explicitly scoped release may install its verified candidate.
 
 ## Sharded candidate assembly
 

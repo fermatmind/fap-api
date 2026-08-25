@@ -103,10 +103,17 @@ final class CareerLegacyCurrentSharderTest extends TestCase
         $this->assertFailure('LEGACY_DUPLICATE_SLUG', fn () => $sharder->acceptSlug('accountants-and-auditors', $previous, $seen));
 
         $unknownSlugs = array_map(static fn (int $index): string => sprintf('unknown-%04d', $index), range(0, 1045));
-        $legacyManifest = json_decode((string) file_get_contents($this->manifestPath), true, 512, JSON_THROW_ON_ERROR);
+        $expectedSlugs = [];
+        foreach (file($this->assetsPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $assetLine) {
+            $asset = json_decode($assetLine, true, 512, JSON_THROW_ON_ERROR);
+            $expectedSlugs[] = $asset['canonical_slug'];
+        }
         $this->assertFailure(
             'LEGACY_SLUG_SET_INVALID',
-            fn () => $sharder->assertSlugSet($unknownSlugs, $legacyManifest['set_hashes']['slug_set_sha256']),
+            fn () => $sharder->assertSlugSet(
+                $unknownSlugs,
+                hash('sha256', \CareerLegacyCurrentSharder::canonicalJson($expectedSlugs)),
+            ),
         );
 
         $assetsHash = hash_file('sha256', $this->assetsPath);

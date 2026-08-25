@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Tests\Unit\Domain\Career\Display;
 
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
+use App\Domain\Career\Display\CareerCurrentAuthorityPackageLoader;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
+use App\Domain\Career\Display\CareerShardedCurrentAuthorityPackage;
 use PHPUnit\Framework\TestCase;
 
 final class CareerCurrentAuthorityPackageTest extends TestCase
@@ -14,36 +16,28 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
     {
         ini_set('memory_limit', '1024M');
 
-        $package = (new CareerCurrentAuthorityPackage)->load(dirname(__DIR__, 5));
+        $legacyContract = new CareerCurrentAuthorityPackage;
+        $package = (new CareerCurrentAuthorityPackageLoader(
+            $legacyContract,
+            new CareerShardedCurrentAuthorityPackage($legacyContract),
+        ))->load(dirname(__DIR__, 5));
 
         self::assertSame(1046, $package['summary']['career_count']);
         self::assertSame(2092, $package['summary']['locale_page_count']);
         self::assertSame(28, $package['summary']['components_per_page']);
-        self::assertSame('v4.3', data_get($package, 'manifest.structural_contract.asset_version'));
-        self::assertSame(4184, data_get($package, 'manifest.structured_components_v1.claim_binding_count'));
-        self::assertSame(2092, data_get($package, 'manifest.structured_components_v1.zh_published_component_count'));
-        self::assertSame(2092, data_get($package, 'manifest.structured_components_v1.en_published_component_count'));
-        self::assertSame(0, data_get($package, 'manifest.structured_components_v1.en_unavailable_component_count'));
-        self::assertSame(
-            '690cce1c6ebefac3fd73030368cb1db8f5a2f6814f12aa3b91bd573f2cb33d9c',
-            data_get($package, 'manifest.structured_components_v1.en_source_aggregate_sha256'),
-        );
-        self::assertSame(data_get($package, 'manifest.files.0.sha256'), $package['summary']['assets_sha256']);
+        self::assertSame('sharded', $package['summary']['source_format']);
+        self::assertSame('career.sharded_current.manifest.v1', $package['manifest']['contract_version']);
+        self::assertCount(640, $package['manifest']['shards']);
+        self::assertSame([], $package['manifest']['registries']);
         self::assertSame(
             CareerCurrentAuthorityPackage::declaredAssetsSha256(dirname(__DIR__, 5)),
+            $package['manifest']['aggregate_sha256'],
+        );
+        self::assertSame(
+            hash_file('sha256', dirname(__DIR__, 5).'/content_assets/career/current/assets.jsonl'),
             $package['summary']['assets_sha256'],
         );
         self::assertArrayNotHasKey('software-developers', $package['rows']);
-        self::assertSame(4184, data_get($package, 'manifest.superseded_source_coverage.workbuddy_block_count'));
-        self::assertSame(0, data_get($package, 'manifest.superseded_source_coverage.workbuddy_block_mismatch_count'));
-        self::assertSame(576, data_get($package, 'manifest.superseded_source_coverage.missing_12_original_component_count'));
-        self::assertSame(0, data_get($package, 'manifest.superseded_source_coverage.missing_12_component_mismatch_count'));
-        self::assertCount(
-            isset($package['manifest']['presentation_v1']) ? 13 : 12,
-            data_get($package, 'manifest.public_projection_field_set_sha256'),
-        );
-        self::assertSame('pass', data_get($package, 'manifest.export_evidence.exporter_result'));
-        self::assertSame('failure', data_get($package, 'manifest.export_evidence.workflow_conclusion'));
     }
 
     public function test_publish_runner_loads_authority_classes_before_validating_execution_contract(): void
@@ -131,6 +125,8 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
             '.public_readback.verified_slug_count == 1046',
             $workflow,
         );
+        self::assertStringContainsString('startswith("backend/content_assets/career/current/")', $workflow);
+        self::assertStringContainsString('assets_sha256="$(jq -r \'.aggregate_sha256\' "$manifest")"', $workflow);
         self::assertStringContainsString(
             '.public_readback.verified_locale_page_count == 2092',
             $workflow,
