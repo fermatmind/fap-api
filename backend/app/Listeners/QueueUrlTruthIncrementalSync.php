@@ -6,6 +6,7 @@ namespace App\Listeners;
 
 use App\Events\PublicAuthorityChanged;
 use App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth;
+use App\Services\SeoIntel\UrlTruth\IncrementalUrlTruthSyncService;
 
 final class QueueUrlTruthIncrementalSync
 {
@@ -23,12 +24,13 @@ final class QueueUrlTruthIncrementalSync
             $event->change,
         ];
 
+        $job = new SyncPublicAuthorityUrlTruth(...$arguments);
         if ((bool) config('seo_intel.incremental_sync_inline', false)) {
-            SyncPublicAuthorityUrlTruth::dispatchSync(...$arguments);
+            $job->handle(app(IncrementalUrlTruthSyncService::class));
 
             return;
         }
 
-        SyncPublicAuthorityUrlTruth::dispatch(...$arguments);
+        dispatch($job);
     }
 }

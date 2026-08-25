@@ -1061,8 +1061,12 @@ task('seo:url-truth-incremental-cms-canary', function () {
     within('{{release_path}}/backend', function (): void {
         run(<<<'BASH'
 set -euo pipefail
-receipt="$({{bin/php}} artisan seo-intel:url-truth-cms-canary --timeout=45 --json --no-interaction --no-ansi)"
+set +e
+receipt="$({{bin/php}} artisan seo-intel:url-truth-cms-canary --timeout=10 --json --no-interaction --no-ansi)"
+command_status="$?"
+set -e
 printf '%s\n' "$receipt"
+test "$command_status" -eq 0 || exit 44
 printf '%s' "$receipt" | {{bin/php}} -r '
 $payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
 $ok = ($payload["schema_version"] ?? null) === "seo-platform-url-truth-cms-canary.v1"

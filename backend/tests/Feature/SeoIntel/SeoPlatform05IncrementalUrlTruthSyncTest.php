@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SeoIntel;
 
+use App\Events\PublicAuthorityChanged;
+use App\Listeners\QueueUrlTruthIncrementalSync;
 use App\Services\SeoIntel\Sources\UrlTruthInventorySource;
 use App\Services\SeoIntel\UrlTruth\EffectivePublicUrlEvaluator;
 use App\Services\SeoIntel\UrlTruth\IncrementalUrlTruthSyncService;
@@ -79,6 +81,42 @@ final class SeoPlatform05IncrementalUrlTruthSyncTest extends TestCase
         self::assertSame('retired', DB::connection('seo_intel')->table('seo_urls')->value('indexability_state'));
         self::assertSame('retired', DB::connection('seo_intel')->table('seo_url_entities')->value('binding_status'));
         self::assertNull(DB::connection('seo_intel')->table('seo_url_entities')->value('current_binding_key'));
+    }
+
+    public function test_canary_inline_listener_executes_the_unified_job_handler(): void
+    {
+        $this->prepareSchema();
+        config([
+            'seo_intel.enabled' => true,
+            'seo_intel.write_enabled' => true,
+            'seo_intel.incremental_sync_inline' => true,
+            'seo_intel.public_canonical_host' => 'https://fermatmind.com',
+        ]);
+        $source = new class($this->record()) implements UrlTruthInventorySource
+        {
+            public function __construct(private readonly UrlTruthInventoryRecord $record) {}
+
+            public function candidates(): array
+            {
+                return [$this->record];
+            }
+
+            public function metadata(): array
+            {
+                return ['fixture' => true];
+            }
+        };
+        app()->instance(IncrementalUrlTruthSyncService::class, new IncrementalUrlTruthSyncService(
+            $source,
+            new EffectivePublicUrlEvaluator,
+            new UrlTruthInventoryRecordWriter,
+        ));
+
+        (new QueueUrlTruthIncrementalSync)->handle(
+            new PublicAuthorityChanged('career_job', 'safe-job', 'en', 'revision-1', 'publish'),
+        );
+
+        self::assertSame(1, DB::connection('seo_intel')->table('seo_url_entities')->where('binding_status', 'current')->count());
     }
 
     private function record(): UrlTruthInventoryRecord

@@ -8,8 +8,6 @@ use App\Contracts\Security\PiiEnvelopeAdapter;
 use App\Domain\Career\Publish\CareerJobDetailExposureReadiness;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionLookup;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
-use App\Events\PublicAuthorityChanged;
-use App\Listeners\QueueUrlTruthIncrementalSync;
 use App\Livewire\Filament\Ops\Livewire\CurrentOrgSwitcher;
 use App\Livewire\Filament\Ops\Livewire\LocaleSwitcher;
 use App\Models\AdminApproval;
@@ -333,8 +331,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Event::listen(PublicAuthorityChanged::class, QueueUrlTruthIncrementalSync::class);
-
         PersonalityPublicContentAsset::observe(PersonalityPublicContentAssetObserver::class);
 
         FilamentAsset::register([
