@@ -90,6 +90,10 @@ rollback/close` 串联。真实观测值 0 必须同时带 numerator、denominat
 | `closed` | observation complete，结果为 kept/no-effect/inconclusive，证据齐 | owner：只读归档 | terminal；更改需新 ledger |
 | `rejected` | deterministic denial 或 policy deny，原因齐 | owner/gateway：只读归档 | terminal；重新提议需新 ledger |
 
+结构化 JSON 为上述 13 个状态逐项固化 `entry_conditions`、`required_evidence`、`actors`、
+`allowed_actions`、`stop_conditions` 和 `fallback_or_close`，供后续 transition policy 直接实现；Markdown
+表是同一合同的压缩视图。
+
 合法主路径为：
 `draft → evidence_ready → policy_review → approved → canary_ready → canary_running → observing →
 expanded → closed`。允许的安全旁路只有显式 `held`、`rollback_required → rolled_back → closed` 和
