@@ -22,8 +22,8 @@ return new class extends Migration
                     'deleted_rows' => static fn () => $table->unsignedInteger('deleted_rows')->default(0),
                     'upserted_rows' => static fn () => $table->unsignedInteger('upserted_rows')->default(0),
                     'receipt_json' => static fn () => $table->json('receipt_json')->nullable(),
-                    'started_at' => static fn () => $table->timestamp('started_at')->nullable(),
-                    'completed_at' => static fn () => $table->timestamp('completed_at')->nullable(),
+                    'started_at' => static fn () => $table->dateTime('started_at')->nullable(),
+                    'completed_at' => static fn () => $table->dateTime('completed_at')->nullable(),
                     'created_at' => static fn () => $table->timestamp('created_at')->nullable(),
                     'updated_at' => static fn () => $table->timestamp('updated_at')->nullable(),
                 ];
@@ -49,8 +49,8 @@ return new class extends Migration
             $table->unsignedInteger('deleted_rows')->default(0);
             $table->unsignedInteger('upserted_rows')->default(0);
             $table->json('receipt_json');
-            $table->timestamp('started_at');
-            $table->timestamp('completed_at');
+            $table->dateTime('started_at');
+            $table->dateTime('completed_at');
             $table->timestamps();
 
             $table->index(
