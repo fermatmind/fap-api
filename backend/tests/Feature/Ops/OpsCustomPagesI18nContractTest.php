@@ -160,10 +160,10 @@ final class OpsCustomPagesI18nContractTest extends TestCase
 
         yield 'editorial operations' => [
             '/ops/editorial-operations',
-            '内容编辑运营',
-            'Editorial operations',
-            ['Editorial Operations Page', 'Editorial operations', 'Operations snapshot', 'Editorial surfaces', 'Release Queue'],
-            ['内容编辑运营', '运营快照', '编辑界面', '发布队列'],
+            '内容工作台',
+            'Content workspace',
+            ['Editorial Operations Page', 'Content workspace', 'Permission boundary', 'Editorial snapshot', 'Access model'],
+            ['内容工作台', '权限边界', '编辑快照', '访问模型'],
         ];
 
         yield 'editorial review' => [

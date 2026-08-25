@@ -41,6 +41,7 @@ use App\Models\Organization;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Services\Cms\ArticlePublishService;
+use App\Services\Ops\SeoContentScopeViewModel;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
@@ -587,11 +588,80 @@ final class ContentCmsProductLayerTest extends TestCase
         }
     }
 
+    public function test_content_workspace_and_editorial_compatibility_page_share_global_metrics(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+        ]);
+        $session = $this->opsSession((int) $admin->id);
+        $selectedOrgId = (int) $session['ops_org_id'];
+
+        $this->seedArticle(['status' => 'draft']);
+        $this->seedArticle(['status' => 'published', 'is_public' => true, 'published_at' => now()]);
+        $this->seedArticle(['org_id' => $selectedOrgId, 'status' => 'draft']);
+        $this->seedGuide(['status' => CareerGuide::STATUS_DRAFT]);
+        $this->seedGuide(['status' => CareerGuide::STATUS_PUBLISHED, 'is_public' => true, 'published_at' => now()]);
+        $this->seedJob(['status' => CareerJob::STATUS_DRAFT]);
+        $this->seedJob(['status' => CareerJob::STATUS_PUBLISHED, 'is_public' => true, 'published_at' => now()]);
+
+        ArticleCategory::query()->create([
+            'org_id' => 0,
+            'slug' => 'workspace-public-category',
+            'name' => 'Workspace Public Category',
+            'is_active' => true,
+        ]);
+        ArticleCategory::query()->create([
+            'org_id' => $selectedOrgId,
+            'slug' => 'workspace-tenant-category',
+            'name' => 'Workspace Tenant Category',
+            'is_active' => true,
+        ]);
+        ArticleTag::query()->create([
+            'org_id' => 0,
+            'slug' => 'workspace-public-tag',
+            'name' => 'Workspace Public Tag',
+            'is_active' => true,
+        ]);
+        ArticleTag::query()->create([
+            'org_id' => $selectedOrgId,
+            'slug' => 'workspace-tenant-tag',
+            'name' => 'Workspace Tenant Tag',
+            'is_active' => true,
+        ]);
+
+        session($session);
+        $this->setOpsContext($selectedOrgId, $admin, '/ops/content-workspace', 'GET');
+
+        $workspace = Livewire::test(ContentWorkspacePage::class);
+        $compatibilityPage = Livewire::test(EditorialOperationsPage::class);
+        $metrics = app(SeoContentScopeViewModel::class)->workspaceMetrics();
+
+        $this->assertSame(['total' => 2, 'draft' => 1, 'published' => 1], $metrics['articles']);
+        $this->assertSame(['total' => 2, 'draft' => 1, 'published' => 1], $metrics['career_guides']);
+        $this->assertSame(['total' => 2, 'draft' => 1, 'published' => 1], $metrics['career_jobs']);
+        $this->assertSame(1, $metrics['categories']);
+        $this->assertSame(1, $metrics['tags']);
+        $this->assertSame(3, $metrics['draft_handoff']);
+        $this->assertSame(3, $metrics['published']);
+        $this->assertSame($workspace->get('snapshotFields'), $compatibilityPage->get('snapshotFields'));
+        $this->assertSame($workspace->get('editorialCards'), $compatibilityPage->get('editorialCards'));
+        $this->assertSame($workspace->get('dataCards'), $compatibilityPage->get('dataCards'));
+        $this->assertTrue(is_subclass_of(EditorialOperationsPage::class, ContentWorkspacePage::class));
+        $workspace
+            ->assertSee('Editorial snapshot')
+            ->assertSee('Draft: 1 | Published: 1');
+
+        app()->setLocale('zh_CN');
+        Livewire::test(ContentWorkspacePage::class)
+            ->assertSee('编辑快照')
+            ->assertSee('草稿：1 | 已发布：1');
+    }
+
     public function test_navigation_groups_match_cms_bootstrap_blueprint(): void
     {
         $this->assertSame(__('ops.group.content_overview'), ContentOverviewPage::getNavigationGroup());
         $this->assertSame(__('ops.group.content'), ContentWorkspacePage::getNavigationGroup());
-        $this->assertSame(__('ops.group.editorial'), EditorialOperationsPage::getNavigationGroup());
+        $this->assertSame(__('ops.group.content'), EditorialOperationsPage::getNavigationGroup());
         $this->assertSame(__('ops.group.translation'), ArticleTranslationOpsPage::getNavigationGroup());
         $this->assertSame(__('ops.group.content_release'), EditorialReviewPage::getNavigationGroup());
         $this->assertSame(__('ops.group.editorial'), ArticleResource::getNavigationGroup());

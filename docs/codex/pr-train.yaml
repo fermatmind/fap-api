@@ -50056,7 +50056,7 @@ prs:
     base: main
     branch: codex/ops-content-taxonomy-02
     title: "fix(ops): align article taxonomy with public authority"
-    status: pr_open
+    status: merged
     depends_on: [OPS-CONTENT-NAV-01]
     train_scope: ops_content_taxonomy_authority
     risk_level: controlled_content_authority
@@ -50096,14 +50096,33 @@ prs:
     base: main
     branch: codex/ops-content-workspace-03
     title: "fix(ops): unify content workspace metrics"
-    status: registered
+    status: local_validation_passed
     depends_on: [OPS-CONTENT-TAXONOMY-02]
     train_scope: ops_content_workspace_unification
     risk_level: product_read_model
     scope:
       - Reuse one global content-scope read model for article, career, category, tag, and editorial lifecycle metrics.
       - Preserve both legacy workspace URLs and their permissions without adding publish writes.
+    allowed_paths:
+      - backend/app/Filament/Ops/Pages/ContentWorkspacePage.php
+      - backend/app/Filament/Ops/Pages/EditorialOperationsPage.php
+      - backend/app/Services/Ops/SeoContentScopeViewModel.php
+      - backend/resources/views/filament/ops/pages/content-workspace.blade.php
+      - backend/lang/en/ops.php
+      - backend/lang/zh_CN/ops.php
+      - backend/tests/Feature/Ops/ContentCmsProductLayerTest.php
+      - backend/tests/Feature/Ops/OpsCustomPagesI18nContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && php artisan test tests/Feature/Ops/ContentCmsProductLayerTest.php --filter='content_workspace_and_editorial_compatibility_page_share_global_metrics|navigation_groups_match_cms_bootstrap_blueprint' --no-ansi
+      - cd backend && php artisan test tests/Feature/Ops/OpsNavigationInventoryTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test for changed PHP files
+      - verify both workspace routes; parse pr-train JSON and YAML; exact-scope validation; git diff --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false
 
   - id: OPS-PERSONALITY-DESKTOP-04
     repo: fap-api

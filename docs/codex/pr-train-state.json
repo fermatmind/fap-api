@@ -105882,8 +105882,8 @@
         "evidence": "Exact-SHA CI run 32908102909 passed all classifier-selected jobs and emitted its immutable validation receipt for merge SHA 4cfbaa331b54464f6385890356922f6893b37ee6."
       },
       "deployment": {
-        "status": "in_progress",
-        "evidence": "Automatic deploy run 32908499164 bound the exact CI receipt and passed staging deployment and smoke; exact-SHA production activation and smoke remain in progress. No workflow was manually dispatched."
+        "status": "passed",
+        "evidence": "Automatic deploy run 32908499164 passed exact-SHA receipt binding, staging deployment/smoke, production activation/smoke, and LKG safety for 4cfbaa331b54464f6385890356922f6893b37ee6. No workflow was manually dispatched."
       }
     },
     "production_write_execution": false,
@@ -105927,11 +105927,13 @@
     "base": "main",
     "branch": "codex/ops-content-taxonomy-02",
     "title": "fix(ops): align article taxonomy with public authority",
-    "status": "pr_open",
+    "status": "merged",
     "depends_on": ["OPS-CONTENT-NAV-01"],
     "commit_sha": "b4acd92f12c0d4ee564c5735ec7f5f590341446a",
     "pr_number": 3784,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3784",
+    "merge_commit_sha": "3447f5e290ee65f3e8e138c81679531aba8749c2",
+    "merged_at": "2026-08-26T07:08:34+08:00",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -105952,6 +105954,14 @@
       "scope": {
         "status": "passed",
         "evidence": "The change is limited to article taxonomy authority, contextual article-list links, bilingual labels, focused tests, and train bookkeeping."
+      },
+      "github_ci": {
+        "status": "passed",
+        "evidence": "Exact-SHA CI run 32909426040 passed all classifier-selected jobs and emitted its immutable validation receipt for merge SHA 3447f5e290ee65f3e8e138c81679531aba8749c2."
+      },
+      "deployment": {
+        "status": "in_progress",
+        "evidence": "Automatic deploy run 32909810990 bound the successful exact-SHA CI receipt; staging deployment and smoke are in progress. No workflow was manually dispatched."
       }
     },
     "production_write_execution": false,
@@ -105973,19 +105983,62 @@
         "note": "Focused T2 coverage passed 3 tests / 37 assertions. A wider pre-existing 403 baseline was reproduced on unmodified origin/main. Local historical inventory could not connect because the configured SQLite file is absent; no data was read or written, all historical non-zero rows remain preserved, and no migration is needed."
       },
       {
-        "at": "2026-08-26T07:10:00+08:00",
+        "at": "2026-08-26T07:07:50+08:00",
         "status": "pr_open",
         "note": "Opened PR #3784 from codex/ops-content-taxonomy-02 at validated implementation commit b4acd92f12c0d4ee564c5735ec7f5f590341446a. Required checks and merge review are pending."
+      },
+      {
+        "at": "2026-08-26T07:08:34+08:00",
+        "status": "merged",
+        "note": "PR #3784 was squash-merged as 3447f5e290ee65f3e8e138c81679531aba8749c2 after mergeability, review, and required-check state were verified. Exact-SHA CI passed; automatic deployment is in progress. The remote task branch and isolated T2 worktree were removed."
       }
     ]
   },
   "OPS-CONTENT-WORKSPACE-03": {
     "id": "OPS-CONTENT-WORKSPACE-03",
     "repo": "fap-api",
+    "base": "main",
     "branch": "codex/ops-content-workspace-03",
-    "status": "registered",
+    "title": "fix(ops): unify content workspace metrics",
+    "status": "local_validation_passed",
     "depends_on": ["OPS-CONTENT-TAXONOMY-02"],
-    "production_write_execution": false
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The operator explicitly authorized T3 as the third item of the sequential Ops content-navigation train."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "T2 merged as exact main SHA 3447f5e290ee65f3e8e138c81679531aba8749c2 before T3 implementation began."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "The canonical workspace and compatibility page passed 2 focused tests / 29 assertions; navigation compatibility passed 3 tests / 168 assertions; scoped Pint, PHP syntax, both route checks, bilingual Livewire rendering, and diff checks passed. The existing HTTP I18n contract remains locally blocked by the pre-existing Ops 403 environment, while direct bilingual component rendering passed."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "The change is limited to the shared global content metrics read model, canonical workspace, compatibility page, bilingual copy, focused tests, and train bookkeeping. No publish action or write path was added."
+      }
+    },
+    "production_write_execution": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "search_channel_action": false,
+    "transitions": [
+      {
+        "at": "2026-08-26T07:10:30+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started T3 only after T2 merged. Scope is the shared global workspace read model and the two compatibility URLs; no publish, CMS, database, cache, Search, staging, or production action occurred."
+      },
+      {
+        "at": "2026-08-26T07:16:30+08:00",
+        "status": "local_validation_passed",
+        "note": "The canonical content workspace and editorial compatibility page now share one org_id=0 metrics implementation. Focused metrics, bilingual rendering, navigation, route, Pint, syntax, and diff checks passed. No write path or external action was added."
+      }
+    ]
   },
   "OPS-PERSONALITY-DESKTOP-04": {
     "id": "OPS-PERSONALITY-DESKTOP-04",
