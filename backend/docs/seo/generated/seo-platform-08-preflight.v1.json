@@ -1,0 +1,126 @@
+{
+  "schema_version": "seo-platform-08-preflight.v1",
+  "task": "SEO-PLATFORM-08-PREFLIGHT",
+  "status": "complete_preflight_docs_only",
+  "run": {
+    "evidence_cutoff_utc": "2026-08-25T23:13:59Z",
+    "fap_api_source_sha": "3447f5e290ee65f3e8e138c81679531aba8749c2",
+    "evidence_state": "verified",
+    "read_only": true,
+    "sanitized": true
+  },
+  "github_evidence": {
+    "seo_platform_08_bound_pr_count": 0,
+    "special_title_stage_and_promotion_history_observed": true,
+    "historical_pr_flow_reused": false
+  },
+  "current_conclusion": {
+    "capability_status": "production_unproven",
+    "unified_seo_ledger_published": false,
+    "product_or_scoring_governance_is_seo_ledger": false,
+    "special_title_package_is_generic_ledger": false,
+    "ui_state": "production_unproven"
+  },
+  "reuse_audit": [
+    {"id":"experiment_registry_assigner","authority":"tenant_product_assignment","status":"production_unproven","reuse":["experiment_key","variant","deterministic_allocation_semantics"],"exclude":["assignment_rows","anon_id","user_id","private_identity"]},
+    {"id":"scoring_model_rollouts","authority":"tenant_scoring_model","status":"production_unproven","reuse":["rollout_percent","starts_at","ends_at","priority"],"exclude":["scoring_authority_as_seo_authority","private_variant_rows"]},
+    {"id":"experiment_guardrails","authority":"tenant_rollout_policy","status":"production_unproven","reuse":["metric_key","operator","threshold","window_minutes","min_sample_size","trigger_times"],"exclude":["direct_seo_auto_rollback"]},
+    {"id":"experiment_rollout_audits","authority":"tenant_rollout_audit","status":"production_unproven","reuse":["action","status","reason","opaque_actor_ref","occurred_at"],"exclude":["raw_meta_json","private_funnel_context"]},
+    {"id":"experiment_governance_service","authority":"tenant_rollout_write_service","status":"production_unproven","reuse":["fail_closed_transitions","guardrail_evaluation","audit_pattern"],"exclude":["direct_service_call","seo_authority","policy_gateway_bypass"]},
+    {"id":"experiment_kpi_evaluator","authority":"tenant_private_product_funnel","status":"production_unproven","reuse":["aggregate_numerator_denominator_shape","window","sample_state"],"exclude":["attempt","result","order","payment","user_or_anon","automatic_causal_claim"]},
+    {"id":"ops_deploy_events","authority":"release_evidence","status":"production_unproven","reuse":["environment","revision","status","occurred_at"],"exclude":["raw_meta_json","deploy_time_as_change_time"]},
+    {"id":"audit_logs","authority":"tenant_admin_audit","status":"production_unproven","reuse":["sanitized_action","result","reason","opaque_actor_ref"],"exclude":["ip","user_agent","request_id","raw_meta_json","private_target"]},
+    {"id":"zh_intp_a_seo_title_package","authority":"specialized_single_surface_package","status":"code_only","reuse":["baseline_shape","hypothesis_shape","single_variable","negative_guarantees","promotion_receipt_shape"],"exclude":["generic_ledger_authority","current_live_status","ranking_or_revenue_claim"]},
+    {"id":"seo_experiment_ledger_ui_contract","authority":"read_only_ui_placeholder","status":"production_unproven","reuse":["fail_closed_unavailable_state","field_vocabulary"],"exclude":["database_authority","write_action","false_rows"]}
+  ],
+  "record_contract": {
+    "field_count": 23,
+    "fields": [
+      {"id":"ledger_id","required_from":"draft","source":"ledger_service","privacy":"public_safe_opaque"},
+      {"id":"change_type","required_from":"draft","source":"versioned_policy_enum","privacy":"public_safe"},
+      {"id":"hypothesis","required_from":"draft","source":"actor_and_evidence","privacy":"sanitized"},
+      {"id":"rationale","required_from":"draft","source":"actor_and_evidence","privacy":"sanitized"},
+      {"id":"source","required_from":"evidence_ready","source":"detector_opportunity_or_root_cause","privacy":"opaque_refs_only"},
+      {"id":"public_url_cohort","required_from":"evidence_ready","source":"url_truth_and_page_family","privacy":"selector_digest_and_count_no_raw_urls"},
+      {"id":"page_family","required_from":"evidence_ready","source":"page_family_policy","privacy":"public_safe"},
+      {"id":"locale","required_from":"evidence_ready","source":"page_family_policy","privacy":"public_safe"},
+      {"id":"authority_revision","required_from":"evidence_ready","source":"cms_or_repository_authority_adapter","privacy":"public_safe_revision"},
+      {"id":"baseline_window","required_from":"policy_review","source":"metrics_adapter","privacy":"aggregate"},
+      {"id":"primary_metric","required_from":"policy_review","source":"policy_and_metrics_source","privacy":"aggregate"},
+      {"id":"guardrail_metrics","required_from":"policy_review","source":"policy","privacy":"aggregate"},
+      {"id":"observation_window","required_from":"approved","source":"policy","privacy":"public_safe"},
+      {"id":"change_revision","required_from":"canary_running","source":"cms_revision_and_deploy_event","privacy":"public_safe_revision"},
+      {"id":"canary_scope","required_from":"canary_ready","source":"signed_policy_scope","privacy":"aggregate"},
+      {"id":"blast_radius","required_from":"canary_ready","source":"signed_policy_scope","privacy":"aggregate"},
+      {"id":"public_runtime_readback","required_from":"canary_running","source":"seo_platform_07_read_model","privacy":"sanitized_aggregate"},
+      {"id":"gsc_funnel_evidence_state","required_from":"observing","source":"read_only_gsc_and_aggregate_adapter","privacy":"aggregate_only"},
+      {"id":"rollback_plan","required_from":"approved","source":"authority_and_deploy","privacy":"sanitized"},
+      {"id":"owner_actor","required_from":"draft","source":"auth_and_audit_adapter","privacy":"opaque_ref_no_identity_payload"},
+      {"id":"approval_policy_decision","required_from":"approved","source":"future_policy_gateway","privacy":"sanitized"},
+      {"id":"current_state","required_from":"draft","source":"ledger_transition_service","privacy":"public_safe"},
+      {"id":"close_reason","required_from":"terminal_state","source":"actor_and_evidence","privacy":"sanitized"}
+    ],
+    "trace_chain": ["source","ledger_id","authority_revision","change_revision","deploy_sha","observation","rollback_or_close"],
+    "missing_value_contract": "null_with_evidence_state_and_reason",
+    "real_zero_contract": "zero_with_numerator_denominator_window_and_fresh_receipt"
+  },
+  "state_machine": {
+    "state_count": 13,
+    "states": ["draft","evidence_ready","policy_review","approved","canary_ready","canary_running","observing","expanded","held","rollback_required","rolled_back","closed","rejected"],
+    "main_path": ["draft","evidence_ready","policy_review","approved","canary_ready","canary_running","observing","expanded","closed"],
+    "allowed_transitions": {
+      "draft": ["evidence_ready","held","rejected"],
+      "evidence_ready": ["draft","policy_review","held","rejected"],
+      "policy_review": ["approved","held","rejected"],
+      "approved": ["canary_ready","held"],
+      "canary_ready": ["canary_running","held"],
+      "canary_running": ["observing","held","rollback_required"],
+      "observing": ["expanded","held","rollback_required","closed"],
+      "expanded": ["held","rollback_required","closed"],
+      "held": ["draft","evidence_ready","policy_review","approved","canary_ready","observing","rejected"],
+      "rollback_required": ["rolled_back","held"],
+      "rolled_back": ["closed","held"],
+      "closed": [],
+      "rejected": []
+    },
+    "unlisted_transition_action": "fail_closed",
+    "permissions": {
+      "L0": "read_only_analysis",
+      "L1": "suggestion_or_draft_only",
+      "L2": "controlled_candidate_and_evidence_preparation_only",
+      "L3": "disabled_until_future_policy_gateway_and_post_12_activation_gate",
+      "L4": "disabled_until_future_policy_gateway_and_post_12_activation_gate"
+    },
+    "deterministic_denials": ["private_url_or_entity","authority_unknown","page_family_unclassified","evidence_insufficient_or_stale","open_p0_or_p1","rollback_unavailable","search_submission_requested","blast_radius_outside_signed_scope"]
+  },
+  "measurement_contract": {
+    "sources": ["seo_platform_07_runtime_read_model","url_truth","page_family_policy","issue_queue","opportunity_queue","cms_or_repository_authority_revision","ops_deploy_events","read_only_gsc_aggregate","minimum_sample_private_funnel_aggregate"],
+    "primary_metric_count": 1,
+    "causal_claim_requires_randomized_or_credible_exogenous_design": true,
+    "otherwise_result_language": "associational_observation",
+    "measurement_hold_triggers": ["source_unavailable","stale_data","gsc_lag","low_sample","seasonality_uncontrolled","new_page_cold_start","control_contamination","runtime_incident","canonical_incident","noindex_incident","revision_mismatch"],
+    "canary_requires": ["authority_defined_public_scope","signed_blast_radius","frozen_baseline","non_overlapping_control_when_available","observation_window","lag_and_grace","stop_conditions","rollback_plan"],
+    "invented_ranking_conversion_or_revenue_data_allowed": false
+  },
+  "privacy_contract": {
+    "allowed": ["opaque_ids","public_family","locale","cohort_digest","cohort_count","aggregate_numerator_denominator","metric_state","time_window","authority_revision","change_revision","deploy_revision","policy_result","audit_result","sanitized_public_readback"],
+    "forbidden": ["raw_url","raw_query","raw_response","attempt","result","report","order","payment","token","user_id","anon_id","ip","user_agent","request_id","low_cardinality_slice","internal_topology","reversible_sensitive_hash"]
+  },
+  "implementation_handoff": {
+    "minimum_order": ["versioned_schema_privacy_validator_transition_policy","read_only_authority_runtime_deploy_gsc_adapters","append_only_transition_audit_service","read_only_snapshot_api_and_ui_binding","future_l3_l4_gate_only_after_policy_gateway_and_post_12"],
+    "focused_tests": ["23_field_requirements","13_states_and_illegal_transitions","8_deterministic_denials","private_and_low_sample_sanitization","null_vs_real_zero","lag_seasonality_measurement_hold","revision_trace","canary_scope","rollback_readback","ui_api_parity","no_search_or_write_capability"],
+    "runtime_implementation_performed": false,
+    "table_created": false,
+    "experiment_enabled": false
+  },
+  "boundaries": {
+    "database_write": false,
+    "cms_write": false,
+    "cache_write": false,
+    "url_truth_write": false,
+    "seo_change": false,
+    "production_deploy": false,
+    "read_only_gsc": true,
+    "search_submission_allowed": false
+  }
+}
