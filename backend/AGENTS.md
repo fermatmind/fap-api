@@ -1,109 +1,32 @@
-# Night PR Train Rules
+# Backend Delivery Rules
 
 ## Delivery risk applicability
 
-- Fast and Product lane work follows the root `AGENTS.md` one-loop, one-PR, focused-validation defaults. Controlled lane work preserves the applicable backend preflight/apply, receipt, approval, and fail-closed boundaries.
-- PR-train manifest/state and ledger rules apply only when the task explicitly identifies PR-train work. Ordinary backend PRs must not add process-only train metadata.
+- Ordinary Fast and Product lane work inherits the root `AGENTS.md` trunk-based, validated-tree flow: use an isolated named `codex/` branch locally, then push the validated commit directly to `main` without a pull request.
+- The PR, PR lifecycle, PR branch, dependency, merge, and ledger rules below apply only when the user explicitly requests a PR or identifies a PR-train scope. They never convert ordinary backend work into PR work.
+- Controlled lane work preserves every applicable migration, payment, security, permission, CMS, content-authority, production-data, preflight/apply, approval, audit-evidence, and fail-closed boundary in this file. Direct delivery does not weaken or bypass those controls.
 
-## Scope discipline
-- One PR = one scope.
-- Never combine adjacent PR scopes.
-- Never “fix future PRs” inside the current PR.
-- Stop immediately if changed files drift outside the declared scope and `stop_if_changed_files_outside_scope` is true.
+## Scope and continuous execution
 
-## Goal execution standing authorization
-- FermatMind is a solo-developed project. At all times, treat every concrete end-to-end execution goal as continuous execution mode: make safe, reversible, in-scope decisions, record them, and continue without waiting for acknowledgements. This repository-wide working rule does not depend on time of day or unattended execution.
-- A concrete `/goal` or equivalent end-to-end execution instruction for an identified scope is standing authorization for its normal PR lifecycle: branch, scoped implementation, checks, explicit staging, commit, push, PR creation, polling, same-scope CI/review fixes, policy-compliant merge, synchronization, and cleanup. Do not ask again for those actions.
-- The same goal authorizes exact manifest/state initialization for an explicitly named PR-train task/card and declared dependency completion in dependency order.
-- When a required check is blocked by a defect proven to pre-exist on `main` outside the current PR scope, report the evidence and keep the current PR isolated. Do not create a sidecar baseline-repair PR unless the user explicitly requests it or a Controlled lane boundary makes the separate repair necessary.
-- Required checks and reviews remain mandatory. Stop only for materially ambiguous scope/authority, non-isolatable user changes, separately controlled production/CMS/database actions, unavailable external permission/review, or a repair that cannot be isolated and validated safely.
-- Do not mark a goal blocked merely because an explicitly applicable manifest/state entry, declared dependency, same-scope CI/review fix, or wait/poll cycle is needed. Resolve those autonomously.
-- This section overrides narrower repeat-authorization requirements below, but not planning-only/read-only instructions or controlled production-publish confirmations.
+- Ordinary work follows the root one-loop, exact-path staging, validated-tree reuse, focused verification, direct-main push, exact-SHA CI/deploy tracking, and cleanup rules.
+- Keep one demonstrable scope per delivery and never add adjacent fixes. Stop when changed files drift outside a declared fail-closed scope.
+- A concrete end-to-end goal is standing authorization for safe, reversible, in-scope implementation, focused checks, commit, direct push, CI/deploy polling, same-scope fixes, synchronization, and cleanup.
+- Required checks remain mandatory. Stop only for materially ambiguous scope or authority, non-isolatable user changes, separately controlled destructive or production/CMS/database actions, unavailable external permission, or a repair that cannot be isolated and validated safely.
 
-## Branch discipline
-- Always start from the latest `main`.
-- Always pull with `git pull --ff-only origin main` before creating a PR.
-- A dirty worktree does not automatically block a PR start if unrelated changes are clearly isolated from the current PR.
-- “Clearly isolated” means at least one of:
-  - the unrelated changes are in files outside the declared PR scope, and the current PR can avoid touching them
-  - the current PR can be staged with an explicit path-limited file list
-  - the unrelated changes are already committed on another branch and are not part of the current branch diff
-- Dirty worktree is allowed when the current task can stage only explicit scoped paths. Stop only when scoped paths overlap unrelated dirty changes or cannot be isolated cleanly.
-- If scoped changes were made on `main` before a PR branch was created, Codex may still create the correct PR branch immediately, provided:
-  - the changes are fully within the declared scope
-  - the worktree contains no unrelated modifications
-  - the branch is created before commit, push, or PR creation
-- Stop if the target branch already exists locally or remotely with unrelated commits.
+## Explicit PR and PR-train discipline
 
-## Dependency discipline
-- A PR may start only when all `depends_on` items are already merged into `main`.
-- If a dependency is not merged, do not start the dependent PR. Under an active execution goal, complete or wait for the declared dependency, then continue automatically. Mark `blocked_dependency` and stop only when the dependency requires unavailable external authority or cannot be completed safely.
+- Use `$yeet` only when the user explicitly requests a PR. For that explicit scope, one PR equals one scope; start from latest `origin/main`, use an isolated `codex/` branch, stage only declared paths, and do not combine adjacent work.
+- PR lifecycle actions—remote branch push, PR creation, check/review polling, same-scope repair, policy-compliant merge, remote branch deletion, and local cleanup—are authorized only by the explicit PR request. Do not merge or deploy merely because a PR was created.
+- PR dependency ordering, manifest/state initialization, PR ids, train metadata, and `docs/codex/pr-train-state.json` ledger updates apply only to an explicitly identified PR-train task. An explicit ad-hoc PR must not create or update train metadata.
+- For explicit PR-train work, run the manifest checks before push, satisfy declared dependencies, keep required checks green, follow the declared merge policy, and record only the current train item's material state and final closeout.
+- Never add a persistent validation receipt or ledger for ordinary Fast/Product work. This prohibition does not affect immutable exact-SHA CI/deploy receipts or Controlled lane business audit evidence.
+- When an explicit PR is open, do not advance a dependent train item until its required checks, review, merge, and cleanup conditions are satisfied. Do not create a baseline-repair sidecar unless the user explicitly requests it or a Controlled lane boundary requires separate isolation.
 
 ## Verification discipline
-- For explicit PR-train work, run all local checks listed in the PR manifest before push. Ordinary work follows the root delivery lane and focused verification rules.
-- For docs-only, rules-only, and generated-contract-only changes, use lightweight validation such as `git diff --check` plus JSON/YAML/focused contract checks when relevant. Do not require full runtime checks unless runtime, API, migration, or scheduler files changed.
-- If local checks fail, do not open a PR.
-- For explicit PR-train work, record a material unresolved check failure in `docs/codex/pr-train-state.json`. Ordinary PRs must not create a ledger entry for a failed check.
-- Never continue to the next PR after a failed check.
-- Draft PR exception: when a local check fails only on behavior clearly outside the current declared PR scope, an active execution goal supplies the required authorization to proceed. Keep the current scope isolated and do not create a baseline-repair sidecar without an explicit request or Controlled lane necessity. Codex may open a draft PR for the current scope if all scoped checks pass; the body must list the failed command, failed tests, why they are outside scope, and state that the PR is not mergeable until required checks are green.
-- This exception does not allow merging a PR with failed local or GitHub required checks.
 
-## PR discipline
-- Open exactly one PR for the current task.
-- For PR-train PRs, the PR title must match the PR id and scope from the manifest.
-- The PR body must include:
-  - what changed
-  - why
-  - validation commands
-  - intentionally deferred items
-- If a PR is open and checks are pending, wait; do not start the next PR.
-- Stacked draft PR exception: if the user explicitly asks to split the current task into multiple PRs, Codex may open multiple draft PRs for the same declared task only when each PR has a distinct scope, the dependency order is stated in every dependent PR body, and no PR contains files from another PR's scope.
-- This exception does not allow merging dependent PRs out of order or bypassing required checks.
-
-## Ad-hoc PR discipline
-- Not every PR needs a PR-train id.
-- Only PR-train work requires a PR id and PR-train metadata.
-- Ordinary scoped PRs, such as repository rule updates, documentation summaries, cleanup-only changes, CI fixes, and small emergency repairs, may be opened without a train id.
-- Ad-hoc PRs must not modify `docs/codex/pr-train.yaml` or `docs/codex/pr-train-state.json` unless the user explicitly asks for PR-train metadata updates.
-
-## Merge discipline
-- Merge only when the current PR satisfies its `merge_policy`.
-- Use squash merge unless the manifest explicitly says otherwise.
-- After merge, delete the remote branch.
-- After merging a PR-train PR, close its state as `merged` in the same workflow whenever possible.
-- If branch protection prevents direct ledger closeout, report the verified merge and cleanup facts and leave that closeout pending. Do not update the previous item from the next task or open a standalone ledger-only follow-up unless the user explicitly requests a separate reconciliation task.
-- If running in a local clone, run `scripts/post_merge_cleanup.sh <branch> [base]`.
-- If running outside a local clone, do not claim local cleanup was executed.
-
-## State ledger discipline
-- This section applies only to explicit PR-train work. Ordinary backend PRs must not touch `docs/codex/pr-train-state.json` merely to record process.
-- Update only the current task, normally once before PR creation and once after final merge. Add an intermediate update only for a material failure, hold, or externally visible state that must survive the run.
-- Update at minimum:
-  - status
-  - commit_sha
-  - pr_url
-  - checks
-  - failure_reason
-  - merged_at
-  - remote_branch_deleted
-  - local_cleanup_executed
-- Do not create a new PR-train task just to mark the previous task as `merged`.
-- Never advance to the next PR after a failed PR unless the manifest permits it. Under an active execution goal, diagnose, fix, and rerun the current scoped PR without a new user prompt; record only a material unresolved failure or the final result.
-
-## Failure policy
-- Do not merge the current PR or advance to an unrelated next PR while any of the following remains unresolved:
-  - preflight failure
-  - failed local checks, except for the documented draft PR exception above
-  - failed required GitHub checks
-  - merge block
-  - review requirement block
-  - ambiguous repository state
-- Do not improvise around failures.
-- Under an active execution goal, exhaust safe in-scope diagnosis, retry, same-PR repair, and declared dependency completion before stopping. Do not create a baseline-repair sidecar without an explicit request or Controlled lane necessity; otherwise prefer a clean, evidence-backed hold.
-
-## Local vs cloud execution
-- If operating in a cloud-only environment, remote branch deletion is allowed, but local cleanup must be reported as not executed.
-- If operating in a local clone, keep the local worktree clean between PRs.
+- Ordinary docs-only, rules-only, and generated-contract-only work uses the root focused validation rules, including contract checks and `git diff --check`; do not invent runtime checks when runtime, API, migration, scheduler, PHP/Laravel, database, or global test configuration is untouched.
+- Explicit PR-train work additionally runs every local check listed by its manifest. A material unresolved train check failure may be recorded only in the explicit train ledger; ordinary work must keep validation results in the active task context only.
+- Controlled lane verification and audit evidence remain mandatory regardless of whether delivery is direct or explicitly PR-based.
 
 ## Truth boundary
 - Codex may draft, refactor, and open PRs.

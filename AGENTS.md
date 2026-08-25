@@ -4,8 +4,8 @@
 
 ## Trunk-based zero-touch delivery
 
-- Start ordinary work in a clean isolated worktree created from the latest `origin/main`; never edit, clean, switch, or reuse the operator's existing workspace or uncommitted files.
-- Deliver one small, demonstrable, reversible loop at a time. Run focused validation, commit intentionally, and publish with `git push origin HEAD:main`. Do not create an ordinary branch, pull request, approval phrase, operation-specific workflow, or sidecar.
+- Start ordinary work on a named `codex/` branch in a clean isolated worktree created from the latest `origin/main`; never edit, clean, switch, or reuse the operator's existing workspace or uncommitted files.
+- Deliver one small, demonstrable, reversible loop at a time. Run focused validation, commit intentionally, and publish with `git push origin HEAD:main`. Do not push the ordinary task branch, open a pull request, add an approval phrase, create an operation-specific workflow, or create a sidecar.
 - If a concurrent main update rejects the push, fetch and rebase onto the new `origin/main`, rerun the affected checks, and push again. Force-push and non-fast-forward updates are forbidden.
 - Follow the pushed exact SHA through `ci.yml` and `deploy.yml`. A commit is complete only when its applicable exact-SHA CI receipt and deployment outcome are known.
 - A failed SHA stays out of production. Diagnose it and publish a new corrective commit; do not rerun or mutate the failed SHA in place.
@@ -14,6 +14,16 @@
 - Main protection must continue to prohibit deletion and non-fast-forward updates. Ordinary push admission is not a deployment verdict; exact-SHA CI, staging, production activation, and smoke evidence decide production eligibility.
 - Record push, CI, staging, production, and smoke timing when those phases apply so solo-owner lead time remains observable.
 - Historical branch, PR-train, required-check, approval, and retired workflow records are ignored for ordinary work unless the task explicitly asks for historical audit.
+
+## Validated-tree fast delivery
+
+- Declare the exact changed-file scope and stage only those paths with `git add -- <paths>`; never stage the whole worktree. Record `git write-tree` as the candidate tree SHA in the active task context after path-limited staging.
+- Associate focused PHPUnit, Pint, and relevant static-check results with that tree SHA. Reuse those results when the candidate tree is unchanged; do not persist a local validation receipt, ledger, manifest, or other process artifact.
+- Fetch `origin/main` and rebase the isolated task branch before final validation and commit. If upstream advanced, rerun affected checks only when upstream paths intersect the declared scope or touch `composer.lock`, PHP/Laravel behavior, database behavior, or repository-wide test/build configuration; otherwise the unchanged-tree results remain valid.
+- Always repeat worktree status, staged-path scope, unstaged scoped-delta, and `git diff --cached --check` checks before commit. After commit, require `git rev-parse HEAD^{tree}` to equal the validated tree SHA.
+- Use `$yeet` only when the user explicitly requests a pull request. Ordinary work continues to push the validated commit directly with `git push origin HEAD:main`.
+- For an explicitly requested pull request, target 1–2 minutes from validated tree to PR creation and 30–60 seconds from merge to branch/worktree cleanup; these are performance targets, not reasons to skip validation or exact-SHA evidence.
+- The no-persisted-local-validation rule does not remove immutable exact-SHA CI receipts, deployment receipts, or Controlled lane business and audit evidence.
 
 ## Solo-owner maximum efficiency
 
