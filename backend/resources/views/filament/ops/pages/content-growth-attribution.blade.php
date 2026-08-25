@@ -1,16 +1,7 @@
 <x-filament-panels::page>
     <div class="ops-shell-page">
-        <x-filament-ops::ops-section
-            :eyebrow="__('ops.custom_pages.content_growth_attribution.eyebrow')"
-            :title="__('ops.custom_pages.content_growth_attribution.title')"
-            :description="__('ops.custom_pages.content_growth_attribution.description')"
-        >
-            <x-filament-ops::ops-toolbar>
-                <div class="ops-control-stack">
-                    <span class="ops-control-label">{{ __('ops.custom_pages.content_growth_attribution.contract_label') }}</span>
-                    <p class="ops-control-hint">{{ __('ops.custom_pages.content_growth_attribution.contract_hint') }}</p>
-                </div>
-
+        <x-filament-ops::ops-section>
+            <x-filament-ops::ops-toolbar class="ops-toolbar--center-actions">
                 <x-slot name="actions">
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentOverviewPage::getUrl() }}">
                         {{ __('ops.custom_pages.common.nav.overview') }}
@@ -30,14 +21,12 @@
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.content_growth_attribution.dashboard_title')"
-            :description="__('ops.custom_pages.content_growth_attribution.dashboard_desc')"
         >
-            <x-filament-ops::ops-field-grid :fields="$headlineFields" />
+            <x-filament-ops::ops-field-grid class="ops-field-grid--centered" :fields="$headlineFields" :show-hints="false" />
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.content_growth_attribution.diagnostics_title')"
-            :description="__('ops.custom_pages.content_growth_attribution.diagnostics_desc')"
         >
             <div class="ops-card-list">
                 @foreach ($diagnosticCards as $card)
@@ -60,7 +49,6 @@
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.content_growth_attribution.matrix_title')"
-            :description="__('ops.custom_pages.content_growth_attribution.matrix_desc')"
         >
             <x-filament-ops::ops-table
                 :has-rows="$matrixRows !== []"
