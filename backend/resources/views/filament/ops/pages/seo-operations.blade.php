@@ -426,71 +426,7 @@
         @endif
 
         @if ($activeWorkspace === 'technical')
-        <x-filament-ops::ops-section
-            :title="__('ops.custom_pages.seo_operations.technical.title')"
-            :description="__('ops.custom_pages.seo_operations.technical.description')"
-        >
-            @if (($technicalAudit['state'] ?? 'unavailable') === 'unavailable')
-                <x-filament-ops::ops-not-connected :title="__('ops.custom_pages.seo_operations.technical.title')" :description="__('ops.custom_pages.seo_operations.technical.unavailable')" />
-            @else
-                <p class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.platform.source_contract', [
-                    'state' => data_get($platformReadModels, 'technical.state', 'unavailable'),
-                    'source' => data_get($platformReadModels, 'technical.source', 'seo_intel'),
-                    'observed' => data_get($platformReadModels, 'technical.observed_at', '-'),
-                ]) }}</p>
-                <h3>{{ __('ops.custom_pages.seo_operations.platform.family_distribution') }}</h3>
-                <div class="ops-tag-list">
-                    @forelse ((array) data_get($platformReadModels, 'technical.url_truth.page_family_policy.family_locale_distribution', []) as $family => $locales)
-                        <span class="ops-tag">{{ $family }} · zh-CN {{ $locales['zh-CN'] ?? 0 }} · en {{ $locales['en'] ?? 0 }} · unknown {{ $locales['unknown'] ?? 0 }}</span>
-                    @empty
-                        <span class="ops-tag">{{ __('ops.custom_pages.seo_operations.platform.not_available') }}</span>
-                    @endforelse
-                </div>
-                <div class="ops-seo-source-strip">
-                    @foreach (($technicalAudit['sources'] ?? []) as $source => $sourceState)
-                        <div @class(['ops-seo-source', 'ops-seo-source--connected' => ($sourceState['state'] ?? '') === 'connected'])>
-                            <span class="ops-seo-source__signal" aria-hidden="true"></span>
-                            <div><strong>{{ __('ops.custom_pages.seo_operations.technical.sources.'.$source) }}</strong><p>{{ __('ops.custom_pages.seo_operations.technical.states.'.($sourceState['state'] ?? 'disconnected')) }}</p></div>
-                        </div>
-                    @endforeach
-                </div>
-                <div class="ops-table-shell"><table class="ops-table"><thead><tr><th>{{ __('ops.custom_pages.seo_operations.technical.check') }}</th><th>{{ __('ops.custom_pages.seo_operations.technical.scope') }}</th><th>{{ __('ops.custom_pages.seo_operations.table.page') }}</th><th>{{ __('ops.custom_pages.seo_operations.technical.root_cause') }}</th><th>{{ __('ops.custom_pages.seo_operations.technical.evidence') }}</th><th>{{ __('ops.custom_pages.common.table.actions') }}</th></tr></thead><tbody>
-                    @forelse (($technicalAudit['rows'] ?? []) as $row)
-                        <tr><td>{{ __('ops.custom_pages.seo_operations.technical.checks.'.($row['check'] ?? 'cms_indexability')) }}</td><td>{{ __('ops.custom_pages.seo_operations.technical.scopes.'.($row['scope'] ?? 'site')) }}</td><td>{{ $row['canonical_path'] ?? '-' }}</td><td>{{ $this->operatorLabel($row['root_cause'] ?? null) }}<br><span class="ops-control-hint">{{ $row['summary'] ?? '-' }}</span></td><td><details><summary>{{ $this->operatorLabel($row['evidence']['source_system'] ?? null) }}</summary><span class="ops-control-hint">{{ $row['summary'] ?? __('ops.custom_pages.seo_operations.technical.evidence_available') }}</span></details></td><td>{{ $this->operatorLabel($row['recommended_action'] ?? null) }}</td></tr>
-                    @empty
-                        <tr><td colspan="6">{{ __('ops.custom_pages.seo_operations.technical.empty') }}</td></tr>
-                    @endforelse
-                </tbody></table></div>
-            @endif
-        </x-filament-ops::ops-section>
-
-        <x-filament-ops::ops-section
-            :title="__('ops.custom_pages.seo_operations.issue_breakdown_title')"
-            :description="__('ops.custom_pages.seo_operations.issue_breakdown_desc')"
-        >
-            @if ($issueBreakdown === [])
-                <p class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.no_issue_breakdown') }}</p>
-            @else
-                <div class="ops-breakdown-stack">
-                    @foreach ($issueBreakdown as $row)
-                        <button type="button" class="ops-breakdown-row" wire:click="focusIssue('{{ $row['code'] }}')">
-                            <span class="ops-breakdown-row__label">{{ $row['label'] }}</span>
-                            <div class="ops-breakdown-row__track">
-                                <div class="ops-breakdown-row__bar" style="width: {{ $row['pct'] }}%"></div>
-                            </div>
-                            <span class="ops-breakdown-row__value tnum">{{ $row['count'] }}</span>
-                        </button>
-                    @endforeach
-                </div>
-            @endif
-        </x-filament-ops::ops-section>
-
-        <x-filament-ops::ops-section
-            :title="__('ops.custom_pages.seo_operations.coverage_title')"
-            :description="__('ops.custom_pages.seo_operations.coverage_desc')"
-        >
-            <x-filament-ops::ops-field-grid :fields="$coverageFields" />
-        </x-filament-ops::ops-section>
+            <x-filament-ops::ops-technical-health-workspace />
         @endif
 
         @if ($activeWorkspace === 'automation')

@@ -382,7 +382,8 @@ final class SeoOperationsPageTest extends TestCase
             ->assertSee('The SEO read model is unavailable in this environment.')
             ->assertDontSee('12,840')
             ->set('activeWorkspace', 'technical')
-            ->assertSee('Evidence-backed technical audits')
+            ->assertSee('Root-cause clusters')
+            ->assertSee('Root-cause clusters are not production-proven')
             ->set('activeWorkspace', 'performance')
             ->assertSee('The opportunity read model is unavailable in this environment.');
     }
