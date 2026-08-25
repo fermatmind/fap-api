@@ -6,6 +6,7 @@ namespace App\Services\Ops;
 
 use App\Services\SeoIntel\OpsDashboard\SeoCrawlerLogObservationReadService;
 use App\Services\SeoIntel\OpsDashboard\SeoDashboardApiReadService;
+use App\Services\SeoIntel\OpsDashboard\SeoSchedulerReceiptReadService;
 use App\Services\SeoIntel\OpsDashboard\SeoSearchChannelQueueReadService;
 use Throwable;
 
@@ -33,12 +34,7 @@ final class SeoOperationsReadService
             'issues' => $reader->issues(10),
             'search_channel' => (new SeoSearchChannelQueueReadService($this->connectionName))->read(10),
             'crawler' => (new SeoCrawlerLogObservationReadService($this->connectionName))->read(10),
-            'scheduler' => [
-                'state' => 'not_implemented',
-                'source' => 'seo_intel.scheduler',
-                'observed_at' => now()->toAtomString(),
-                'unavailable_reason' => 'seo_intel_scheduler_receipt_not_implemented',
-            ],
+            'scheduler' => (new SeoSchedulerReceiptReadService)->read(),
             'search_submission' => [
                 'state' => 'measurement_hold',
                 'enabled' => false,

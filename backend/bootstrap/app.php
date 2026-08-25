@@ -78,7 +78,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->withoutOverlapping(120)
                 ->onOneServer();
         }
-        $schedule->command('analytics:refresh-seo-conversion-daily --json')
+        $schedule->command('analytics:refresh-seo-conversion-daily --trigger=scheduled --json')
             ->dailyAt('05:50')
             ->withoutOverlapping(120)
             ->onOneServer();

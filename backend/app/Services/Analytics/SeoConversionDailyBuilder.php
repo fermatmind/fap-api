@@ -7,10 +7,13 @@ namespace App\Services\Analytics;
 use App\Support\SchemaBaseline;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 final class SeoConversionDailyBuilder
 {
     private const TABLE = 'analytics_seo_conversion_daily';
+
+    private const RUN_TABLE = 'analytics_seo_conversion_refresh_runs';
 
     /**
      * @var array<string, string>
@@ -150,7 +153,15 @@ final class SeoConversionDailyBuilder
         \DateTimeInterface $to,
         array $orgIds = [],
         bool $dryRun = false,
+        string $triggerMode = 'manual',
     ): array {
+        $triggerMode = strtolower(trim($triggerMode));
+        if (! in_array($triggerMode, ['manual', 'scheduled', 'rerun'], true)) {
+            throw new \InvalidArgumentException('Unsupported SEO conversion refresh trigger mode.');
+        }
+
+        $runUid = (string) Str::uuid();
+        $startedAt = CarbonImmutable::now('UTC');
         $payload = $this->build($from, $to, $orgIds);
         $rows = $payload['rows'];
         $deletedRows = 0;
@@ -207,12 +218,90 @@ final class SeoConversionDailyBuilder
             ? ['status' => 'not_executed', 'reason' => 'dry_run']
             : $this->readbackReceipt($payload, $rows);
 
-        return $payload + [
+        $result = $payload + [
+            'run_uid' => $runUid,
+            'trigger_mode' => $triggerMode,
             'deleted_rows' => $deletedRows,
             'upserted_rows' => $upsertedRows,
             'dry_run' => $dryRun,
             'readback_receipt' => $readbackReceipt,
         ];
+
+        $result['refresh_receipt'] = $dryRun
+            ? null
+            : $this->persistRefreshReceipt($result, $startedAt);
+
+        return $result;
+    }
+
+    /** @param array<string,mixed> $result @return array<string,mixed> */
+    private function persistRefreshReceipt(array $result, CarbonImmutable $startedAt): array
+    {
+        if (! SchemaBaseline::hasTable(self::RUN_TABLE)) {
+            throw new \RuntimeException('SEO conversion refresh receipt table is missing.');
+        }
+
+        $completedAt = CarbonImmutable::now('UTC');
+        $status = data_get($result, 'readback_receipt.status') === 'pass' ? 'success' : 'blocked';
+        $receipt = [
+            'schema_version' => 'analytics-seo-conversion-refresh-receipt.v1',
+            'run_uid' => $result['run_uid'],
+            'trigger_mode' => $result['trigger_mode'],
+            'status' => $status,
+            'application_sha' => $this->releaseSha(),
+            'workflow_sha' => $this->releaseSha(),
+            'active_production_sha' => $this->releaseSha(),
+            'from' => $result['from'],
+            'to' => $result['to'],
+            'reporting_timezone' => $result['reporting_timezone'],
+            'storage_timezone' => $result['storage_timezone'],
+            'org_scope_mode' => ($result['org_scope'] ?? []) === [] ? 'all' : 'bounded',
+            'org_scope_count' => count((array) ($result['org_scope'] ?? [])),
+            'attempted_rows' => (int) ($result['attempted_rows'] ?? 0),
+            'skipped_rows' => (int) ($result['skipped_rows'] ?? 0),
+            'deleted_rows' => (int) ($result['deleted_rows'] ?? 0),
+            'upserted_rows' => (int) ($result['upserted_rows'] ?? 0),
+            'readback_receipt' => $result['readback_receipt'],
+            'raw_query_exposed' => false,
+            'raw_session_or_business_identifiers_exposed' => false,
+            'private_paths_allowed' => false,
+            'search_submission_allowed' => false,
+        ];
+
+        DB::table(self::RUN_TABLE)->insert([
+            'run_uid' => $result['run_uid'],
+            'trigger_mode' => $result['trigger_mode'],
+            'status' => $status,
+            'from_date' => $result['from'],
+            'to_date' => $result['to'],
+            'org_scope_count' => count((array) ($result['org_scope'] ?? [])),
+            'attempted_rows' => (int) ($result['attempted_rows'] ?? 0),
+            'skipped_rows' => (int) ($result['skipped_rows'] ?? 0),
+            'deleted_rows' => (int) ($result['deleted_rows'] ?? 0),
+            'upserted_rows' => (int) ($result['upserted_rows'] ?? 0),
+            'receipt_json' => json_encode($receipt, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES),
+            'started_at' => $startedAt->toDateTimeString(),
+            'completed_at' => $completedAt->toDateTimeString(),
+            'created_at' => $completedAt->toDateTimeString(),
+            'updated_at' => $completedAt->toDateTimeString(),
+        ]);
+
+        return $receipt;
+    }
+
+    private function releaseSha(): ?string
+    {
+        $candidates = [
+            trim((string) config('app.git_sha', '')),
+            is_file(dirname(base_path()).'/REVISION') ? trim((string) file_get_contents(dirname(base_path()).'/REVISION')) : '',
+        ];
+        foreach ($candidates as $candidate) {
+            if (preg_match('/^[a-f0-9]{40}$/', $candidate) === 1) {
+                return $candidate;
+            }
+        }
+
+        return null;
     }
 
     /**

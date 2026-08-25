@@ -11,6 +11,8 @@ final class SeoConversionFunnelReadService
 {
     private const TABLE = 'analytics_seo_conversion_daily';
 
+    private const RUN_TABLE = 'analytics_seo_conversion_refresh_runs';
+
     /**
      * @var list<string>
      */
@@ -53,14 +55,15 @@ final class SeoConversionFunnelReadService
         }
 
         $allRows = $this->mappedRows($orgId, $filters, $groupBy, $windowDays);
-        $lastRefreshedAt = DB::table(self::TABLE)
-            ->where('org_id', max(0, $orgId))
-            ->max('last_refreshed_at');
+        $refreshEvidence = $this->refreshEvidence($orgId);
+        $lastRefreshedAt = $refreshEvidence['last_successful_refresh_at'];
         $freshnessAgeHours = $lastRefreshedAt === null
             ? null
             : now()->diffInHours($lastRefreshedAt, true);
-        $measurementHold = $freshnessAgeHours === null || $freshnessAgeHours > 48;
-        $warnings = $measurementHold ? ['seo_conversion_daily_missing_or_stale'] : [];
+        $measurementHold = $freshnessAgeHours === null
+            || $freshnessAgeHours > 48
+            || ($refreshEvidence['latest_status'] ?? null) === 'blocked';
+        $warnings = $measurementHold ? [$refreshEvidence['warning']] : [];
         $totals = $measurementHold ? $this->nullMetrics() : $this->totals($allRows);
         $rows = array_slice($allRows, 0, $limit);
         if ($measurementHold) {
@@ -88,6 +91,9 @@ final class SeoConversionFunnelReadService
             'measurement_state' => $measurementHold ? 'MEASUREMENT_HOLD' : 'production_healthy',
             'freshness' => [
                 'last_successful_refresh_at' => $lastRefreshedAt,
+                'latest_attempt_at' => $refreshEvidence['latest_attempt_at'],
+                'latest_attempt_status' => $refreshEvidence['latest_status'],
+                'latest_trigger_mode' => $refreshEvidence['trigger_mode'],
                 'age_hours' => $freshnessAgeHours,
                 'max_age_hours' => 48,
             ],
@@ -96,6 +102,45 @@ final class SeoConversionFunnelReadService
             'window_totals' => $windowTotals,
             'recent_rows' => $rows,
             'warnings' => $warnings,
+        ];
+    }
+
+    /** @return array{last_successful_refresh_at:mixed,latest_attempt_at:mixed,latest_status:?string,trigger_mode:?string,warning:string} */
+    private function refreshEvidence(int $orgId): array
+    {
+        if (SchemaBaseline::hasTable(self::RUN_TABLE)) {
+            $latest = DB::table(self::RUN_TABLE)
+                ->where('org_scope_count', 0)
+                ->orderByDesc('completed_at')
+                ->first(['status', 'trigger_mode', 'completed_at']);
+            $lastSuccess = DB::table(self::RUN_TABLE)
+                ->where('org_scope_count', 0)
+                ->where('status', 'success')
+                ->max('completed_at');
+
+            if ($latest !== null || $lastSuccess !== null) {
+                return [
+                    'last_successful_refresh_at' => $lastSuccess,
+                    'latest_attempt_at' => $latest?->completed_at,
+                    'latest_status' => $latest === null ? null : (string) $latest->status,
+                    'trigger_mode' => $latest === null ? null : (string) $latest->trigger_mode,
+                    'warning' => $latest !== null && (string) $latest->status === 'blocked'
+                        ? 'seo_conversion_refresh_readback_blocked'
+                        : 'seo_conversion_refresh_missing_or_stale',
+                ];
+            }
+        }
+
+        $legacy = DB::table(self::TABLE)
+            ->where('org_id', max(0, $orgId))
+            ->max('last_refreshed_at');
+
+        return [
+            'last_successful_refresh_at' => $legacy,
+            'latest_attempt_at' => $legacy,
+            'latest_status' => $legacy === null ? null : 'legacy_success',
+            'trigger_mode' => null,
+            'warning' => 'seo_conversion_daily_missing_or_stale',
         ];
     }
 

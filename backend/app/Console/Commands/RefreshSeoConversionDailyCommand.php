@@ -15,6 +15,7 @@ final class RefreshSeoConversionDailyCommand extends Command
         {--to= : Inclusive end date (Y-m-d)}
         {--org=* : Limit refresh to one or more org ids}
         {--dry-run : Preview aggregation without writing rows}
+        {--trigger=manual : Trigger mode: manual, scheduled, or rerun}
         {--json : Emit the refresh and readback receipt as JSON}';
 
     protected $description = 'Refresh the privacy-safe SEO conversion funnel daily read model.';
@@ -36,16 +37,35 @@ final class RefreshSeoConversionDailyCommand extends Command
             return self::FAILURE;
         }
 
+        $triggerMode = strtolower(trim((string) $this->option('trigger')));
+        if (! in_array($triggerMode, ['manual', 'scheduled', 'rerun'], true)) {
+            $this->error('The --trigger value must be manual, scheduled, or rerun.');
+
+            return self::FAILURE;
+        }
+
         $orgIds = array_values(array_filter(array_map(
             static fn (mixed $value): int => max(0, (int) $value),
             (array) $this->option('org')
         ), static fn (int $value): bool => $value >= 0));
 
         $dryRun = (bool) $this->option('dry-run');
-        $result = $this->builder->refresh($from, $to, $orgIds, $dryRun);
+        $result = $this->builder->refresh($from, $to, $orgIds, $dryRun, $triggerMode);
 
         if ((bool) $this->option('json')) {
-            $this->line(json_encode($result, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
+            $receipt = $dryRun ? [
+                'schema_version' => 'analytics-seo-conversion-refresh-dry-run.v1',
+                'trigger_mode' => $triggerMode,
+                'status' => 'not_executed',
+                'from' => $result['from'],
+                'to' => $result['to'],
+                'org_scope_mode' => $orgIds === [] ? 'all' : 'bounded',
+                'org_scope_count' => count($orgIds),
+                'attempted_rows' => (int) ($result['attempted_rows'] ?? 0),
+                'skipped_rows' => (int) ($result['skipped_rows'] ?? 0),
+                'raw_session_or_business_identifiers_exposed' => false,
+            ] : $result['refresh_receipt'];
+            $this->line(json_encode($receipt, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
 
             return data_get($result, 'readback_receipt.status') === 'pass' || $dryRun
                 ? self::SUCCESS
@@ -67,7 +87,9 @@ final class RefreshSeoConversionDailyCommand extends Command
             $this->info($dryRun ? 'dry-run complete' : 'refresh complete');
         }
 
-        return self::SUCCESS;
+        return data_get($result, 'readback_receipt.status') === 'pass' || $dryRun
+            ? self::SUCCESS
+            : self::FAILURE;
     }
 
     private function parseDateOption(string $value, string $fallback): CarbonImmutable

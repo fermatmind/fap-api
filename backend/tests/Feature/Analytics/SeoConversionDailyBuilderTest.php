@@ -7,6 +7,7 @@ namespace Tests\Feature\Analytics;
 use App\Services\Analytics\SeoConversionDailyBuilder;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
@@ -311,6 +312,54 @@ final class SeoConversionDailyBuilderTest extends TestCase
             ->assertExitCode(0);
 
         $this->assertSame(0, DB::table('analytics_seo_conversion_daily')->count());
+        $this->assertSame(0, DB::table('analytics_seo_conversion_refresh_runs')->count());
+    }
+
+    public function test_scheduled_zero_event_refresh_records_a_sanitized_success_receipt(): void
+    {
+        config()->set('app.git_sha', str_repeat('a', 40));
+        $day = CarbonImmutable::parse('2026-08-25 00:00:00');
+
+        $result = app(SeoConversionDailyBuilder::class)->refresh($day, $day, [], false, 'scheduled');
+
+        $this->assertSame(0, $result['attempted_rows']);
+        $this->assertSame('pass', data_get($result, 'readback_receipt.status'));
+        $this->assertSame(0, DB::table('analytics_seo_conversion_daily')->count());
+
+        $run = DB::table('analytics_seo_conversion_refresh_runs')->sole();
+        $receipt = json_decode((string) $run->receipt_json, true, flags: JSON_THROW_ON_ERROR);
+        $this->assertSame('scheduled', $run->trigger_mode);
+        $this->assertSame('success', $run->status);
+        $this->assertSame(str_repeat('a', 40), $receipt['active_production_sha']);
+        $this->assertSame('all', $receipt['org_scope_mode']);
+        $this->assertSame(0, $receipt['attempted_rows']);
+        $this->assertFalse($receipt['raw_query_exposed']);
+        $this->assertFalse($receipt['raw_session_or_business_identifiers_exposed']);
+        $this->assertFalse($receipt['private_paths_allowed']);
+        $this->assertFalse($receipt['search_submission_allowed']);
+        $this->assertArrayNotHasKey('org_scope', $receipt);
+        $this->assertSame($receipt, $result['refresh_receipt']);
+    }
+
+    public function test_scheduled_json_command_emits_only_the_sanitized_receipt(): void
+    {
+        config()->set('app.git_sha', str_repeat('c', 40));
+
+        $exitCode = Artisan::call('analytics:refresh-seo-conversion-daily', [
+            '--from' => '2026-08-25',
+            '--to' => '2026-08-25',
+            '--trigger' => 'scheduled',
+            '--json' => true,
+        ]);
+        $receipt = json_decode(trim(Artisan::output()), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertSame('scheduled', $receipt['trigger_mode']);
+        $this->assertSame('success', $receipt['status']);
+        $this->assertSame(str_repeat('c', 40), $receipt['workflow_sha']);
+        $this->assertArrayNotHasKey('rows', $receipt);
+        $this->assertArrayNotHasKey('org_scope', $receipt);
+        $this->assertArrayNotHasKey('session_id_hash', $receipt);
     }
 
     /**
