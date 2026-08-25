@@ -234,6 +234,9 @@ final class CareerCurrentAuthorityPublisher
         $assets = CareerJobDisplayAsset::query()->orderBy('id')->lockForUpdate()->get();
         $beforeStateSha256 = $this->snapshotModelsHash($assets);
         $bySlug = $assets->groupBy(static fn (CareerJobDisplayAsset $asset): string => strtolower(trim((string) $asset->canonical_slug)));
+        if ($bySlug->contains(static fn (Collection $rows): bool => $rows->count() > 1)) {
+            throw new CareerCurrentAuthorityPublisherFailure('CURRENT_DISPLAY_SLUG_NOT_UNIQUE');
+        }
         $selectedIds = [];
         $updates = [];
         $inserts = [];

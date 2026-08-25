@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Services\Career;
 
+use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Services\Career\Import\CareerSelectedDisplayAssetMapper;
 use Tests\TestCase;
 
@@ -17,7 +18,7 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
         $this->assertSame('data-scientists', $result['slug']);
         $this->assertSame('15-2051', $result['expected_soc']);
         $this->assertSame('15-2051.00', $result['expected_onet']);
-        $this->assertSame(24, $result['summary']['component_order_count']);
+        $this->assertSame(count(CareerDisplayAssetComponentContract::CURRENT_ORDER), $result['summary']['component_order_count']);
         $this->assertTrue($result['summary']['has_zh_page']);
         $this->assertTrue($result['summary']['has_en_page']);
         $this->assertSame(3, $result['summary']['faq_main_entity_count']['en']);
@@ -54,7 +55,7 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
         $this->assertSame('manifest-only-career', $result['slug']);
         $this->assertSame('15-2011', $result['expected_soc']);
         $this->assertSame('15-2011.00', $result['expected_onet']);
-        $this->assertSame(24, $result['summary']['component_order_count']);
+        $this->assertSame(count(CareerDisplayAssetComponentContract::CURRENT_ORDER), $result['summary']['component_order_count']);
     }
 
     public function test_it_rejects_manifest_rows_that_copy_english_into_core_chinese_fields(): void
@@ -83,7 +84,7 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
             $this->assertSame($row['Slug'], $result['slug']);
             $this->assertSame($row['SOC_Code'], $result['expected_soc']);
             $this->assertSame($row['O_NET_Code'], $result['expected_onet']);
-            $this->assertSame(24, $result['summary']['component_order_count']);
+            $this->assertSame(count(CareerDisplayAssetComponentContract::CURRENT_ORDER), $result['summary']['component_order_count']);
             $this->assertTrue($result['summary']['has_zh_page']);
             $this->assertTrue($result['summary']['has_en_page']);
             $this->assertSame([], $result['summary']['public_payload_forbidden_keys_found']);
@@ -99,7 +100,7 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
             $this->assertSame($row['Slug'], $result['slug']);
             $this->assertSame($row['SOC_Code'], $result['expected_soc']);
             $this->assertSame($row['O_NET_Code'], $result['expected_onet']);
-            $this->assertSame(24, $result['summary']['component_order_count']);
+            $this->assertSame(count(CareerDisplayAssetComponentContract::CURRENT_ORDER), $result['summary']['component_order_count']);
             $this->assertTrue($result['summary']['has_zh_page']);
             $this->assertTrue($result['summary']['has_en_page']);
             $this->assertSame([], $result['summary']['public_payload_forbidden_keys_found']);
@@ -124,7 +125,7 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
             $this->assertSame($row['Slug'], $result['slug']);
             $this->assertSame($row['SOC_Code'], $result['expected_soc']);
             $this->assertSame($row['O_NET_Code'], $result['expected_onet']);
-            $this->assertSame(24, $result['summary']['component_order_count']);
+            $this->assertSame(count(CareerDisplayAssetComponentContract::CURRENT_ORDER), $result['summary']['component_order_count']);
             $this->assertTrue($result['summary']['has_zh_page']);
             $this->assertTrue($result['summary']['has_en_page']);
             $this->assertSame([], $result['summary']['public_payload_forbidden_keys_found']);
@@ -140,7 +141,7 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
             $this->assertSame($row['Slug'], $result['slug']);
             $this->assertSame($row['SOC_Code'], $result['expected_soc']);
             $this->assertSame($row['O_NET_Code'], $result['expected_onet']);
-            $this->assertSame(24, $result['summary']['component_order_count']);
+            $this->assertSame(count(CareerDisplayAssetComponentContract::CURRENT_ORDER), $result['summary']['component_order_count']);
             $this->assertTrue($result['summary']['has_zh_page']);
             $this->assertTrue($result['summary']['has_en_page']);
             $this->assertSame([], $result['summary']['public_payload_forbidden_keys_found']);
@@ -158,7 +159,7 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
             $this->assertSame($row['Slug'], $result['slug']);
             $this->assertSame($row['SOC_Code'], $result['expected_soc']);
             $this->assertSame($row['O_NET_Code'], $result['expected_onet']);
-            $this->assertSame(24, $result['summary']['component_order_count']);
+            $this->assertSame(count(CareerDisplayAssetComponentContract::CURRENT_ORDER), $result['summary']['component_order_count']);
             $this->assertTrue($result['summary']['has_zh_page']);
             $this->assertTrue($result['summary']['has_en_page']);
             $this->assertSame([], $result['summary']['public_payload_forbidden_keys_found']);
@@ -177,7 +178,7 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
             $this->assertSame($row['Slug'], $result['slug']);
             $this->assertSame($row['SOC_Code'], $result['expected_soc']);
             $this->assertSame($row['O_NET_Code'], $result['expected_onet']);
-            $this->assertSame(24, $result['summary']['component_order_count']);
+            $this->assertSame(count(CareerDisplayAssetComponentContract::CURRENT_ORDER), $result['summary']['component_order_count']);
             $this->assertTrue($result['summary']['has_zh_page']);
             $this->assertTrue($result['summary']['has_en_page']);
             $this->assertSame([], $result['summary']['public_payload_forbidden_keys_found']);

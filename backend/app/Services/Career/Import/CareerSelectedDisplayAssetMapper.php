@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Career\Import;
 
 use App\Console\Commands\CareerDisplayAssetPublishGate;
+use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Support\Xlsx\XlsxCellReference;
 use DOMDocument;
 use DOMElement;
@@ -355,32 +356,7 @@ final class CareerSelectedDisplayAssetMapper
     ];
 
     /** @var list<string> */
-    public const COMPONENT_ORDER = [
-        'breadcrumb',
-        'hero',
-        'fermat_decision_card',
-        'primary_cta',
-        'career_snapshot_primary_locale',
-        'career_snapshot_secondary_locale',
-        'fit_decision_checklist',
-        'riasec_fit_block',
-        'personality_fit_block',
-        'definition_block',
-        'responsibilities_block',
-        'work_context_block',
-        'market_signal_card',
-        'adjacent_career_comparison_table',
-        'ai_impact_table',
-        'career_risk_cards',
-        'contract_project_risk_block',
-        'next_steps_block',
-        'faq_block',
-        'related_next_pages',
-        'source_card',
-        'review_validity_card',
-        'boundary_notice',
-        'final_cta',
-    ];
+    public const COMPONENT_ORDER = CareerDisplayAssetComponentContract::CURRENT_ORDER;
 
     /** @var list<string> */
     public const REQUIRED_HEADERS = [
@@ -529,7 +505,11 @@ final class CareerSelectedDisplayAssetMapper
         }
 
         $expected = $expectedOverride ?? self::ALLOWED_SLUGS[$slug] ?? ['soc' => '', 'onet' => ''];
-        $this->expect($this->stringValue($row, 'Asset_Version') === self::TEMPLATE_VERSION, 'Asset_Version must be v4.2.', $errors);
+        $this->expect(
+            $this->stringValue($row, 'Asset_Version') === self::TEMPLATE_VERSION,
+            'Asset_Version must be v4.2.',
+            $errors,
+        );
         $this->expect($this->stringValue($row, 'SOC_Code') === $expected['soc'], "SOC_Code must be {$expected['soc']}.", $errors);
         $this->expect($this->stringValue($row, 'O_NET_Code') === $expected['onet'], "O_NET_Code must be {$expected['onet']}.", $errors);
         $this->expect($this->stringValue($row, 'Content_Status') === 'approved', 'Content_Status must be approved.', $errors);
@@ -748,11 +728,17 @@ final class CareerSelectedDisplayAssetMapper
             'riasec_fit_block' => $decoded[$decodedPrefix.'_riasec'] ?? [],
             'personality_fit_block' => $decoded[$decodedPrefix.'_personality'] ?? [],
             'definition_block' => $this->stringValue($row, $prefix.'_Definition'),
+            'career_ai_description_block' => [
+                'heading' => $isZh ? '职业与 AI 影响说明' : 'Career and AI impact overview',
+                'body' => [$this->stringValue($row, $prefix.'_Definition')],
+            ],
             'responsibilities_block' => $decoded[$decodedPrefix.'_responsibilities'] ?? [],
             'work_context_block' => [
                 'search_intent_type' => $this->decodeJsonOrText($row, 'Search_Intent_Type'),
                 'target_queries' => $this->decodeJsonOrText($row, $prefix.'_Target_Queries'),
             ],
+            'career_quick_answers_block' => $this->quickAnswersBlock($row, $isZh),
+            'onet_structured_fields_block' => $this->onetStructuredFieldsBlock($row, $isZh),
             'market_signal_card' => [
                 'snapshot' => $decoded[$decodedPrefix.'_snapshot'] ?? [],
                 'sample_only_notice' => true,
@@ -767,6 +753,7 @@ final class CareerSelectedDisplayAssetMapper
             'career_risk_cards' => [
                 'caveat' => $this->stringValue($row, $prefix.'_Caveat'),
             ],
+            'career_path_block' => $decoded[$decodedPrefix.'_next_steps'] ?? $this->stringValue($row, $prefix.'_Next_Steps'),
             'contract_project_risk_block' => [
                 'caveat' => $this->stringValue($row, $prefix.'_Caveat'),
             ],
@@ -787,6 +774,49 @@ final class CareerSelectedDisplayAssetMapper
             'secondary_cta' => [
                 'label' => $this->stringValue($row, 'Secondary_CTA_Label'),
                 'href' => $decoded['secondary_cta'] ?? $this->stringValue($row, 'Secondary_CTA_URL'),
+            ],
+        ];
+    }
+
+    /** @param array<string, string|int> $row @return array<string,mixed> */
+    private function quickAnswersBlock(array $row, bool $isZh): array
+    {
+        if (! $isZh) {
+            return ['availability' => 'unavailable', 'reason_code' => 'source_locale_unavailable'];
+        }
+
+        $facts = [
+            ['label' => '职业', 'value' => $this->stringValue($row, 'CN_Title'), 'alternate_value' => null, 'secondary_value' => null],
+            ['label' => 'SOC 代码', 'value' => $this->stringValue($row, 'SOC_Code'), 'alternate_value' => null, 'secondary_value' => null],
+            ['label' => 'O*NET 代码', 'value' => $this->stringValue($row, 'O_NET_Code'), 'alternate_value' => null, 'secondary_value' => null],
+        ];
+
+        return [
+            'availability' => 'published',
+            'schema_version' => 'career.quick_answers.v1',
+            'heading' => '职业速答',
+            'items' => [
+                ['key' => 'qa3', 'question' => '这个职业是什么？', 'answer' => $this->stringValue($row, 'CN_Definition'), 'table' => ['rows' => [$facts[0]]]],
+                ['key' => 'qa2', 'question' => '这个职业的核心判断是什么？', 'answer' => $this->stringValue($row, 'CN_Quick_Answer'), 'table' => ['rows' => [$facts[1]]]],
+                ['key' => 'qa1', 'question' => '查看这个职业时要注意什么？', 'answer' => $this->stringValue($row, 'CN_Caveat'), 'table' => ['rows' => [$facts[2]]]],
+            ],
+        ];
+    }
+
+    /** @param array<string, string|int> $row @return array<string,mixed> */
+    private function onetStructuredFieldsBlock(array $row, bool $isZh): array
+    {
+        if (! $isZh) {
+            return ['availability' => 'unavailable', 'reason_code' => 'source_locale_unavailable'];
+        }
+
+        return [
+            'availability' => 'published',
+            'schema_version' => 'career.onet_structured_fields.v1',
+            'heading' => 'O*NET 结构化字段',
+            'rows' => [
+                ['label' => 'SOC 代码', 'value' => $this->stringValue($row, 'SOC_Code'), 'alternate_value' => null, 'secondary_value' => null],
+                ['label' => 'O*NET 代码', 'value' => $this->stringValue($row, 'O_NET_Code'), 'alternate_value' => null, 'secondary_value' => null],
             ],
         ];
     }

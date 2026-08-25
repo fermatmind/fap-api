@@ -13,8 +13,10 @@ use App\Models\OccupationCrosswalk;
 use App\Models\OccupationFamily;
 use App\Services\Career\Bundles\CareerJobDetailBundleBuilder;
 use App\Services\Career\Bundles\CareerJobDisplaySurfaceBuilder;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 final class CareerJobDisplaySurfaceBuilderTest extends TestCase
@@ -343,6 +345,10 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
 
     public function test_it_fails_closed_for_two_formal_rows_instead_of_selecting_by_asset_version(): void
     {
+        Schema::table('career_job_display_assets', function (Blueprint $table): void {
+            $table->dropUnique('career_job_display_assets_canonical_slug_unique');
+        });
+
         $occupation = $this->createOccupation('data-scientists');
         $this->createDisplayAsset($occupation);
         $this->createDisplayAsset($occupation, [

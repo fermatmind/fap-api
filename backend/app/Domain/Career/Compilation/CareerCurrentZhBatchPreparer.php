@@ -60,7 +60,7 @@ final class CareerCurrentZhBatchPreparer
         }
 
         $componentOrderHash = CareerCurrentAuthorityPackage::hashValue(
-            CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER,
+            CareerDisplayAssetComponentContract::CURRENT_ORDER,
         );
         $perSlug = [];
         $zhHashes = [];
@@ -72,7 +72,7 @@ final class CareerCurrentZhBatchPreparer
             $candidate = $this->candidateRow($baseline['rows'][$slug], $blocks);
             $projection = $this->package->publicProjection($candidate, 'zh-CN');
             if (count($projection['component_order']) !== 28
-                || array_values($projection['component_order']) !== CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER) {
+                || array_values($projection['component_order']) !== CareerDisplayAssetComponentContract::CURRENT_ORDER) {
                 throw new CareerTenBlockCompileFailure('CURRENT_ZH_COMPONENT_CONTRACT_MISMATCH');
             }
             $projectionBytes = CareerCurrentAuthorityPackage::encodePrettyCanonical($projection);
@@ -317,7 +317,7 @@ final class CareerCurrentZhBatchPreparer
         if ($upgradeV43) {
             $baseline['asset_version'] = CareerCurrentAuthorityPackage::ASSET_VERSION;
             $baseline['template_version'] = CareerCurrentAuthorityPackage::ASSET_VERSION;
-            $baseline['component_order_json'] = CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER;
+            $baseline['component_order_json'] = CareerDisplayAssetComponentContract::CURRENT_ORDER;
             $baseline['metadata_json']['structured_components_v1'] = $structured->evidenceBindings($definition);
         }
         $baseline['seo_payload_json']['zh']['h1'] = $identity['title_zh'];

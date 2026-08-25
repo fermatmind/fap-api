@@ -67,7 +67,7 @@ final class CareerCurrentEnBatchPreparer
         }
 
         $componentOrderHash = CareerCurrentAuthorityPackage::hashValue(
-            CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER,
+            CareerDisplayAssetComponentContract::CURRENT_ORDER,
         );
         $perSlug = [];
         $enHashes = [];
@@ -80,7 +80,7 @@ final class CareerCurrentEnBatchPreparer
             $this->assertCandidateScope($baseline['rows'][$slug], $candidate);
             $projection = $this->package->publicProjection($candidate, 'en');
             if (count($projection['component_order']) !== 28
-                || array_values($projection['component_order']) !== CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER) {
+                || array_values($projection['component_order']) !== CareerDisplayAssetComponentContract::CURRENT_ORDER) {
                 throw new CareerTenBlockCompileFailure('CURRENT_EN_COMPONENT_CONTRACT_MISMATCH');
             }
             $projectionBytes = CareerCurrentAuthorityPackage::encodePrettyCanonical($projection);

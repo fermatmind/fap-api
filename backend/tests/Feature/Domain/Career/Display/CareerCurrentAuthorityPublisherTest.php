@@ -15,8 +15,10 @@ use App\Models\Occupation;
 use App\Models\OccupationFamily;
 use App\Services\Career\Bundles\CareerJobDisplaySurfaceBuilder;
 use App\Services\Career\Review\CareerJobDetailReaderSafeReviewProjector;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
@@ -78,6 +80,32 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         $inserted = CareerJobDisplayAsset::query()->where('canonical_slug', 'new-current-career')->sole();
         self::assertSame((string) $occupation->id, (string) $inserted->occupation_id);
         self::assertSame('new current title', data_get($inserted->page_payload_json, 'en.hero.title'));
+    }
+
+    public function test_it_rejects_any_duplicate_canonical_slug_before_database_or_cache_writes(): void
+    {
+        [$authority] = $this->fixture();
+        Schema::table('career_job_display_assets', function (Blueprint $table): void {
+            $table->dropUnique('career_job_display_assets_canonical_slug_unique');
+        });
+        $occupation = Occupation::query()->where('canonical_slug', 'actors')->sole();
+        CareerJobDisplayAsset::query()->create($this->row('actors', 'duplicate', [
+            'asset_version' => 'v4.2',
+            'template_version' => 'v4.2',
+            'asset_role' => 'historical_master',
+            'status' => 'retired',
+        ]) + ['occupation_id' => $occupation->id]);
+        $cache = new FakeCareerCurrentAuthorityCacheGateway(new CareerCurrentAuthorityPackage, $authority['rows']);
+
+        try {
+            $this->publisher($authority, $cache)->execute(base_path(), true);
+            self::fail('Expected duplicate slug rejection.');
+        } catch (CareerCurrentAuthorityPublisherFailure $failure) {
+            self::assertSame('CURRENT_DISPLAY_SLUG_NOT_UNIQUE', $failure->safeCode);
+            self::assertSame('confirmed_zero_write', $failure->writeCommitState);
+        }
+        self::assertSame([], $cache->preparedSlugs);
+        self::assertDatabaseCount('career_job_display_assets', 4);
     }
 
     public function test_full_scan_repairs_active_cache_drift_when_database_is_already_current(): void
@@ -289,7 +317,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
 
         $oldRow = $this->row('actors', 'old title');
         $old = CareerJobDisplayAsset::query()->create($oldRow + ['occupation_id' => $occupation->id]);
-        CareerJobDisplayAsset::query()->create($this->row('actors', 'historical', [
+        CareerJobDisplayAsset::query()->create($this->row('historical-actors', 'historical', [
             'asset_version' => 'v4.1',
             'template_version' => 'v4.1',
             'asset_role' => 'historical_master',

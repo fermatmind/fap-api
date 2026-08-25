@@ -74,7 +74,7 @@ final class CareerTenBlockCompiler
                 'slug' => $slug,
                 'profile' => $detected['profile'],
                 'locale_count' => 2,
-                'component_count' => count(CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER),
+                'component_count' => count(CareerDisplayAssetComponentContract::CURRENT_ORDER),
                 'mapped_file_count' => count($blocks),
                 'orphan_fields' => [],
                 'omitted_fields' => $omittedFields,
@@ -191,7 +191,7 @@ final class CareerTenBlockCompiler
         $baseline['page_payload_json']['page']['en']['onet_structured_fields_block'] = $structured->unavailable();
         $baseline['asset_version'] = CareerCurrentAuthorityPackage::ASSET_VERSION;
         $baseline['template_version'] = CareerCurrentAuthorityPackage::ASSET_VERSION;
-        $baseline['component_order_json'] = CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER;
+        $baseline['component_order_json'] = CareerDisplayAssetComponentContract::CURRENT_ORDER;
         $baseline['metadata_json']['structured_components_v1'] = $structured->evidenceBindings($definition);
         if (isset($claimKeys['identity.title_zh'])) {
             $baseline['seo_payload_json']['zh']['h1'] = $identity['title_zh'];

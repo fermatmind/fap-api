@@ -4,38 +4,11 @@ declare(strict_types=1);
 
 namespace App\Services\Career\AiImpactAssets;
 
+use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
+use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
+
 final class CareerAiImpactPreviewDetailShellBuilder
 {
-    /**
-     * @var list<string>
-     */
-    private const COMPONENT_ORDER = [
-        'breadcrumb',
-        'hero',
-        'fermat_decision_card',
-        'primary_cta',
-        'career_snapshot_primary_locale',
-        'career_snapshot_secondary_locale',
-        'fit_decision_checklist',
-        'riasec_fit_block',
-        'personality_fit_block',
-        'definition_block',
-        'responsibilities_block',
-        'work_context_block',
-        'market_signal_card',
-        'adjacent_career_comparison_table',
-        'ai_impact_table',
-        'career_risk_cards',
-        'contract_project_risk_block',
-        'next_steps_block',
-        'faq_block',
-        'related_next_pages',
-        'source_card',
-        'review_validity_card',
-        'boundary_notice',
-        'final_cta',
-    ];
-
     public function __construct(
         private readonly CareerAiImpactAssetPreviewService $previewService,
     ) {}
@@ -118,8 +91,8 @@ final class CareerAiImpactPreviewDetailShellBuilder
     {
         return [
             'surface_version' => 'display.surface.v1',
-            'asset_version' => 'v4.2',
-            'template_version' => 'v4.2',
+            'asset_version' => CareerCurrentAuthorityPackage::ASSET_VERSION,
+            'template_version' => CareerCurrentAuthorityPackage::ASSET_VERSION,
             'asset_type' => 'career_job_public_display',
             'asset_role' => 'formal_pilot_master',
             'status' => 'ready_for_pilot',
@@ -127,7 +100,7 @@ final class CareerAiImpactPreviewDetailShellBuilder
                 'canonical_slug' => $slug,
             ],
             'claim_permissions' => $this->claimPermissions(),
-            'component_order' => self::COMPONENT_ORDER,
+            'component_order' => CareerDisplayAssetComponentContract::CURRENT_ORDER,
             'sources' => $this->displaySources(is_array($aiImpact['sources'] ?? null) ? $aiImpact['sources'] : []),
             'support_components' => [
                 'boundary_notice' => [

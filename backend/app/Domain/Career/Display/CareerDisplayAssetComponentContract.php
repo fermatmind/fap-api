@@ -65,7 +65,7 @@ final class CareerDisplayAssetComponentContract
     ];
 
     /** @var list<string> */
-    public const CURRENT_V4_3_ORDER = [
+    public const CURRENT_ORDER = [
         'breadcrumb',
         'hero',
         'fermat_decision_card',
@@ -96,6 +96,9 @@ final class CareerDisplayAssetComponentContract
         'final_cta',
     ];
 
+    /** @var list<string> */
+    public const CURRENT_V4_3_ORDER = self::CURRENT_ORDER;
+
     /** @param array<mixed> $order */
     public static function supports(array $order): bool
     {
@@ -103,25 +106,25 @@ final class CareerDisplayAssetComponentContract
 
         return $order === self::LEGACY_V4_2_ORDER
             || $order === self::CURRENT_V4_2_ORDER
-            || $order === self::CURRENT_V4_3_ORDER;
+            || $order === self::CURRENT_ORDER;
     }
 
     /** @param array<mixed> $order */
     public static function isCurrent(array $order): bool
     {
-        return array_values($order) === self::CURRENT_V4_3_ORDER;
+        return array_values($order) === self::CURRENT_ORDER;
     }
 
     /** @param array<mixed> $payload */
     public static function hasExactCurrentPages(array $payload): bool
     {
         $pages = is_array($payload['page'] ?? null) ? $payload['page'] : $payload;
-        $allowed = array_merge(self::CURRENT_V4_3_ORDER, ['path', 'secondary_cta']);
+        $allowed = array_merge(self::CURRENT_ORDER, ['path', 'secondary_cta']);
 
         foreach (['en', 'zh'] as $locale) {
             $page = $pages[$locale] ?? null;
             if (! is_array($page)
-                || array_diff(self::CURRENT_V4_3_ORDER, array_keys($page)) !== []
+                || array_diff(self::CURRENT_ORDER, array_keys($page)) !== []
                 || array_diff(array_keys($page), $allowed) !== []
                 || array_key_exists('sections', $page)
                 || array_key_exists('content_sections', $page)
@@ -176,10 +179,10 @@ final class CareerDisplayAssetComponentContract
             if (! is_array($page)) {
                 return 'CURRENT_DISPLAY_SURFACE_V43_LOCALE_PAGE_MISSING';
             }
-            if (array_diff(self::CURRENT_V4_3_ORDER, array_keys($page)) !== []) {
+            if (array_diff(self::CURRENT_ORDER, array_keys($page)) !== []) {
                 return 'CURRENT_DISPLAY_SURFACE_V43_COMPONENT_MISSING';
             }
-            if (array_diff(array_keys($page), array_merge(self::CURRENT_V4_3_ORDER, ['path', 'secondary_cta'])) !== []) {
+            if (array_diff(array_keys($page), array_merge(self::CURRENT_ORDER, ['path', 'secondary_cta'])) !== []) {
                 return 'CURRENT_DISPLAY_SURFACE_V43_COMPONENT_UNEXPECTED';
             }
             if (array_key_exists('sections', $page) || array_key_exists('content_sections', $page)) {
@@ -206,7 +209,7 @@ final class CareerDisplayAssetComponentContract
     public static function matchesVersion(array $order, string $version): bool
     {
         return array_values($order) === match ($version) {
-            'v4.3' => self::CURRENT_V4_3_ORDER,
+            'v4.3' => self::CURRENT_ORDER,
             'v4.2' => self::CURRENT_V4_2_ORDER,
             default => [],
         };

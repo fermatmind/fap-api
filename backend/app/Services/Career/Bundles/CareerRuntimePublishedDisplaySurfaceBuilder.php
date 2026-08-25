@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\DTO\Career\CareerJobDetailBundle;
 
@@ -29,8 +30,8 @@ final class CareerRuntimePublishedDisplaySurfaceBuilder
 
         return [
             'surface_version' => 'display.surface.v1',
-            'asset_version' => 'v4.2',
-            'template_version' => 'v4.2',
+            'asset_version' => CareerCurrentAuthorityPackage::ASSET_VERSION,
+            'template_version' => CareerCurrentAuthorityPackage::ASSET_VERSION,
             'asset_type' => 'career_job_public_display',
             'asset_role' => 'formal_pilot_master',
             'status' => 'ready_for_pilot',
@@ -59,7 +60,7 @@ final class CareerRuntimePublishedDisplaySurfaceBuilder
                 'locale' => $publicLocale,
                 'content' => $this->pageContent($slug, $title, $path, $testPath, $isZh),
             ],
-            'component_order' => CareerDisplayAssetComponentContract::LEGACY_V4_2_ORDER,
+            'component_order' => CareerDisplayAssetComponentContract::CURRENT_ORDER,
             'sources' => [
                 [
                     'key' => 'runtime_publish_projection',

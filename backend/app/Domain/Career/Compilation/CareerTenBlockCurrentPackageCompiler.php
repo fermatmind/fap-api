@@ -120,7 +120,7 @@ final class CareerTenBlockCurrentPackageCompiler
         $manifest = $baseline['manifest'];
         $manifest['structural_contract']['asset_version'] = CareerCurrentAuthorityPackage::ASSET_VERSION;
         $manifest['structural_contract']['template_version'] = CareerCurrentAuthorityPackage::ASSET_VERSION;
-        $manifest['structural_contract']['component_order'] = CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER;
+        $manifest['structural_contract']['component_order'] = CareerDisplayAssetComponentContract::CURRENT_ORDER;
         $manifest['ten_block_compilation'] = [
             'contract_version' => 'career.ten_block.current_package_lineage.v1',
             'compiler_version' => self::VERSION,
