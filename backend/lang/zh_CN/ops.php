@@ -1732,7 +1732,50 @@ return [
             'automation_nav' => [
                 'label' => '自动化工作区',
                 'experiments' => 'Experiment Ledger',
+                'agents' => 'Agent Council',
                 'operations' => '现有运营',
+            ],
+            'agent_council' => [
+                'eyebrow' => '受约束自动化',
+                'title' => 'Agent Council',
+                'description' => '查看受控能力及其治理证据，不建立新的内容 authority。',
+                'access_levels' => ['l0_read_only' => 'L0 只读'],
+                'boundaries' => [
+                    'label' => 'Agent Council 边界',
+                    'evidence_bundle' => '必须绑定 Evidence Bundle',
+                    'no_authority' => '现有 CMS 仍是 authority',
+                ],
+                'capabilities' => [
+                    'eyebrow' => '能力注册表',
+                    'title' => '受控能力',
+                    'description' => '每项合格能力必须声明输入、输出、工具、权限、成本、停止条件和当前状态。',
+                    'fields' => [
+                        'capability' => '能力', 'inputs' => '输入', 'outputs' => '输出', 'tools' => '工具',
+                        'permissions' => '权限', 'cost' => '成本', 'stop_condition' => '停止条件', 'current_state' => '状态',
+                    ],
+                ],
+                'trace' => [
+                    'eyebrow' => '决策证据',
+                    'title' => 'Policy 与 trace',
+                    'description' => '检查器只能呈现经过清洗且绑定生产的证据。',
+                    'fields' => [
+                        'policy_decision' => 'Policy Gateway', 'trace' => 'Trace', 'canary' => 'Canary',
+                        'circuit_breaker' => '熔断', 'rollback' => 'Rollback',
+                    ],
+                ],
+                'governance' => [
+                    'eyebrow' => 'Fail-closed 路由',
+                    'title' => '治理链',
+                    'description' => '任何能力都不能跳过步骤，也不能把建议直接转换为已授权写入。',
+                    'steps' => [
+                        'orchestrator' => 'Orchestrator 路由', 'policy_gateway' => 'Policy Gateway 判断',
+                        'safety_review' => 'Independent Safety Review', 'canary' => 'Canary',
+                        'circuit_breaker' => '熔断', 'rollback' => 'Rollback 就绪',
+                    ],
+                ],
+                'hold_title' => 'Agent Council 尚未得到生产证明',
+                'hold_description' => '#11 统一能力、Policy Gateway、安全审核与 trace 合同尚不可用。现有 partial Agent 命令和 risk cap 不会被提升为能力行或运行证据。',
+                'privacy_note' => '本页面及其 Livewire state 排除 raw URI、User-Agent、query 原文、hash、私人路径、身份、secret 和未清洗工具输出。',
             ],
             'experiment_ledger' => [
                 'eyebrow' => 'Experiment governance',

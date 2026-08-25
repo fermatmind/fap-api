@@ -1732,7 +1732,50 @@ return [
             'automation_nav' => [
                 'label' => 'Automation workspace',
                 'experiments' => 'Experiment Ledger',
+                'agents' => 'Agent Council',
                 'operations' => 'Existing operations',
+            ],
+            'agent_council' => [
+                'eyebrow' => 'Constrained automation',
+                'title' => 'Agent Council',
+                'description' => 'Inspect bounded capabilities and their governance evidence without creating another content authority.',
+                'access_levels' => ['l0_read_only' => 'L0 read-only'],
+                'boundaries' => [
+                    'label' => 'Agent Council boundaries',
+                    'evidence_bundle' => 'Evidence Bundle required',
+                    'no_authority' => 'Existing CMS remains authority',
+                ],
+                'capabilities' => [
+                    'eyebrow' => 'Capability registry',
+                    'title' => 'Controlled capabilities',
+                    'description' => 'Each eligible capability must declare its inputs, outputs, tools, permission, cost, stop condition, and current state.',
+                    'fields' => [
+                        'capability' => 'Capability', 'inputs' => 'Inputs', 'outputs' => 'Outputs', 'tools' => 'Tools',
+                        'permissions' => 'Permission', 'cost' => 'Cost', 'stop_condition' => 'Stop condition', 'current_state' => 'State',
+                    ],
+                ],
+                'trace' => [
+                    'eyebrow' => 'Decision evidence',
+                    'title' => 'Policy and trace',
+                    'description' => 'Only sanitized, production-bound evidence may populate this inspector.',
+                    'fields' => [
+                        'policy_decision' => 'Policy Gateway', 'trace' => 'Trace', 'canary' => 'Canary',
+                        'circuit_breaker' => 'Circuit breaker', 'rollback' => 'Rollback',
+                    ],
+                ],
+                'governance' => [
+                    'eyebrow' => 'Fail-closed route',
+                    'title' => 'Governance chain',
+                    'description' => 'A capability cannot skip a step or turn a recommendation into an authorized write.',
+                    'steps' => [
+                        'orchestrator' => 'Orchestrator routing', 'policy_gateway' => 'Policy Gateway decision',
+                        'safety_review' => 'Independent Safety Review', 'canary' => 'Canary',
+                        'circuit_breaker' => 'Circuit breaker', 'rollback' => 'Rollback readiness',
+                    ],
+                ],
+                'hold_title' => 'Agent Council is not production-proven',
+                'hold_description' => 'The #11 unified capability, Policy Gateway, safety-review, and trace contract is unavailable. Partial agent commands and risk caps are not promoted into capability rows or run evidence.',
+                'privacy_note' => 'Raw URI, User-Agent, queries, hashes, private paths, identities, secrets, and unsanitized tool output are excluded from this surface and its Livewire state.',
             ],
             'experiment_ledger' => [
                 'eyebrow' => 'Experiment governance',

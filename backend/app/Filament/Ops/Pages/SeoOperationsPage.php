@@ -29,7 +29,7 @@ class SeoOperationsPage extends Page
     public const WORKSPACES = ['overview', 'performance', 'technical', 'url-truth', 'content', 'automation'];
 
     /** @var list<string> */
-    public const AUTOMATION_SECTIONS = ['experiments', 'operations'];
+    public const AUTOMATION_SECTIONS = ['experiments', 'agents', 'operations'];
 
     public const ISSUE_QUEUE_PER_PAGE = 25;
 

@@ -231,6 +231,10 @@
             <x-filament-ops::ops-experiment-ledger-workspace />
         @endif
 
+        @if ($activeWorkspace === 'automation' && $activeAutomationSection === 'agents')
+            <x-filament-ops::ops-agent-council-workspace />
+        @endif
+
         @if ($activeWorkspace === 'performance')
             <x-filament-ops::ops-section
                 :title="__('ops.custom_pages.seo_operations.performance.title')"

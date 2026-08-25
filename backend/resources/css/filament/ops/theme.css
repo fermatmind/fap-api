@@ -5926,4 +5926,143 @@
             padding: 1rem;
         }
     }
+
+    .fi-body.fi-panel-ops .ops-agent-council {
+        display: grid;
+        gap: 1rem;
+        padding: 1.25rem;
+        border: 1px solid var(--ops-border-default);
+        border-radius: var(--ops-radius-card);
+        background: var(--ops-bg-surface);
+        box-shadow: var(--ops-shadow-surface);
+    }
+
+    .fi-body.fi-panel-ops .ops-agent-council__boundaries {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .5rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-agent-council__layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.6fr) minmax(18rem, .72fr);
+        gap: 1rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-agent-council__capabilities,
+    .fi-body.fi-panel-ops .ops-agent-council__trace,
+    .fi-body.fi-panel-ops .ops-agent-council__governance {
+        min-width: 0;
+        padding: 1rem;
+        border: 1px solid var(--ops-border-default);
+        border-radius: var(--ops-radius-card);
+        background: var(--ops-bg-surface-subtle);
+    }
+
+    .fi-body.fi-panel-ops .ops-agent-council h3 {
+        margin-top: .35rem;
+        color: var(--ops-text-primary);
+        font-size: 1rem;
+        font-weight: 700;
+    }
+
+    .fi-body.fi-panel-ops .ops-agent-council section > p,
+    .fi-body.fi-panel-ops .ops-agent-council aside > p {
+        margin-top: .35rem;
+        color: var(--ops-text-secondary);
+    }
+
+    .fi-body.fi-panel-ops .ops-agent-council__capability-head {
+        display: grid;
+        grid-template-columns: 1.1fr repeat(3, .8fr) .8fr .6fr 1fr .7fr;
+        gap: .6rem;
+        margin-block: 1rem .75rem;
+        color: var(--ops-text-tertiary);
+        font-size: .65rem;
+        font-weight: 650;
+        letter-spacing: .035em;
+        text-transform: uppercase;
+    }
+
+    .fi-body.fi-panel-ops .ops-agent-council__trace dl {
+        display: grid;
+        gap: .5rem;
+        margin-top: 1rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-agent-council__trace dl div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: .75rem;
+        min-height: 36px;
+        border-bottom: 1px solid var(--ops-border-default);
+    }
+
+    .fi-body.fi-panel-ops .ops-agent-council__trace dt {
+        color: var(--ops-text-secondary);
+    }
+
+    .fi-body.fi-panel-ops .ops-agent-council__trace dd {
+        color: var(--ops-text-tertiary);
+        font-family: var(--ops-font-mono);
+    }
+
+    .fi-body.fi-panel-ops .ops-agent-council__governance ol {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: .5rem;
+        margin-top: 1rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-agent-council__governance li {
+        display: grid;
+        gap: .35rem;
+        min-height: 106px;
+        padding: .75rem;
+        border: 1px solid var(--ops-border-default);
+        border-radius: var(--ops-radius-input);
+        background: var(--ops-bg-surface);
+    }
+
+    .fi-body.fi-panel-ops .ops-agent-council__governance li > span {
+        display: grid;
+        width: 1.7rem;
+        height: 1.7rem;
+        place-items: center;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--ops-electric) 12%, var(--ops-bg-surface));
+        color: var(--ops-electric);
+        font-size: .7rem;
+        font-weight: 700;
+    }
+
+    .fi-body.fi-panel-ops .ops-agent-council__governance small {
+        align-self: end;
+        color: var(--ops-text-tertiary);
+    }
+
+    @media (max-width: 1100px) {
+        .fi-body.fi-panel-ops .ops-agent-council__layout {
+            grid-template-columns: 1fr;
+        }
+
+        .fi-body.fi-panel-ops .ops-agent-council__governance ol {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .fi-body.fi-panel-ops .ops-agent-council__capability-head {
+            display: none;
+        }
+    }
+
+    @media (max-width: 720px) {
+        .fi-body.fi-panel-ops .ops-agent-council {
+            padding: 1rem;
+        }
+
+        .fi-body.fi-panel-ops .ops-agent-council__governance ol {
+            grid-template-columns: 1fr;
+        }
+    }
 }
