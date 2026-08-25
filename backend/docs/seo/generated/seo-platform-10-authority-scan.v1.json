@@ -1,0 +1,202 @@
+{
+  "schema_version": "seo-platform-10-authority-scan.v1",
+  "task": "SEO-PLATFORM-10-AUTHORITY-SCAN",
+  "status": "complete_authority_scan_docs_only",
+  "run": {
+    "evidence_cutoff_utc": "2026-08-25T23:44:01Z",
+    "fap_api_source_sha": "580cfbae0be537a2a8ee97a0ac6be3038582d2bf",
+    "evidence_state": "verified",
+    "read_only": true,
+    "sanitized": true
+  },
+  "github_evidence": {
+    "bound_pr_count": 0,
+    "bound_issue_count": 0,
+    "historical_task_10_state": "not_selected",
+    "historical_state_is_implementation_proof": false
+  },
+  "current_conclusion": {
+    "capability_status": "production_unproven",
+    "ui_state": "production_unproven",
+    "material_lastmod_state": "MEASUREMENT_HOLD",
+    "unified_read_model_published": false,
+    "ordinary_updated_at_is_material_authority": false,
+    "sitemap_is_content_authority": false,
+    "p0_count": 0,
+    "p1_count": 0
+  },
+  "public_sitemap_observation": {
+    "observed_at_utc": "2026-08-25T23:38:57Z",
+    "evidence_state": "observed",
+    "baseline_only": true,
+    "raw_url_output": false,
+    "total_entries": 2643,
+    "total_lastmod_present": 2643,
+    "families": {
+      "article": {"entries":113,"lastmod_present":113,"lastmod_missing":0,"distinct_lastmod_values":100,"minimum":"2026-05-14T14:42:00.000Z","maximum":"2026-08-25T23:27:55.000Z","largest_same_timestamp_count":4},
+      "career": {"entries":2118,"lastmod_present":2118,"lastmod_missing":0,"distinct_lastmod_values":4,"minimum":"2026-08-04T03:22:29.000Z","maximum":"2026-08-25T23:30:07.000Z","largest_same_timestamp":"2026-08-25T23:30:06.000Z","largest_same_timestamp_count":2092,"compile_or_release_time_causality":"inferred"},
+      "personality": {"entries":357,"lastmod_present":357,"lastmod_missing":0,"distinct_lastmod_values":48,"minimum":"2026-03-18T05:19:49.000Z","maximum":"2026-08-25T23:30:07.000Z","largest_same_timestamp_count":23}
+    },
+    "material_truth_proven": false
+  },
+  "authority_chains": [
+    {
+      "family": "article",
+      "status": "production_unproven",
+      "content_authority": "cms_article_plus_published_article_translation_revision_pointer",
+      "candidate_authority": "repository_import_package",
+      "states": ["source","machine_draft","human_review","approved","published","stale","archived","active","soft_deleted"],
+      "revision_fields": ["published_revision_id","revision_number","supersedes_revision_id","source_version_hash","authority_source_hash","authority_package_sha256"],
+      "review_fields": ["reviewed_by","reviewed_at","approved_at"],
+      "time_fields": ["published_at","created_at","updated_at","reviewed_at","approved_at"],
+      "missing_fields": ["last_substantive_update_at","next_review_due_at","material_fingerprint","explicit_revision_publisher"],
+      "public_projection": "article_public_read_model",
+      "url_truth_current_lastmod_source": "articles.updated_at",
+      "sitemap_current_lastmod_order": ["articles.updated_at","articles.published_at","now"],
+      "conflicts": ["source_version_hash_excludes_full_search_surface","row_updated_at_is_not_material_time"]
+    },
+    {
+      "family": "career",
+      "status": "production_unproven",
+      "content_authority": "career_current_contract_manifest_and_fixed_module_shards",
+      "derived_layers": ["database_import","compile_snapshot","runtime_publish_projection","directory_read_model","cache","public_api"],
+      "cms_states": ["draft","published","active","downranked","archived","soft_deleted"],
+      "revision_fields": ["revision_no","snapshot_json","note","aggregate_sha256","per_shard_sha256","compile_run_id","import_run_id"],
+      "review_fields": ["trust_manifest.reviewer_status","trust_manifest.reviewer_id","trust_manifest.reviewed_at"],
+      "time_fields": ["published_at","updated_at","compiled_at","last_substantive_update_at","next_review_due_at"],
+      "last_substantive_scope": "trust_freshness_only_not_unified_page_material_authority",
+      "missing_fields": ["unified_material_fingerprint","page_revision_to_review_binding","url_truth_material_event"],
+      "public_projection": "career_runtime_projection_and_directory_authority_cache",
+      "url_truth_current_lastmod_source": "career_guides.updated_at_for_guides_unified_job_source_missing",
+      "sitemap_current_lastmod_source": "directory_item.updated_at_from_provenance_meta.compiled_at",
+      "conflicts": ["compile_time_can_become_sitemap_lastmod","cache_projection_is_not_content_authority","multiple_revision_lineages"]
+    },
+    {
+      "family": "personality",
+      "status": "production_unproven",
+      "content_authority": "published_mbti_profile_or_published_personality_public_content_asset",
+      "candidate_authority": "repository_package_and_immutable_working_revision",
+      "states": ["draft","review","approved","content_ready","content_stub","published","archived"],
+      "revision_fields": ["published_revision_id","revision_no","snapshot_json","source_hash","authority_package_sha256"],
+      "review_fields": ["review_state","last_reviewed_at","immutable_review_evidence.reviewer_name","immutable_review_evidence.reviewed_at","immutable_review_evidence.decision","immutable_review_evidence.evidence_sha256"],
+      "time_fields": ["published_at","updated_at","last_reviewed_at","revision.created_at"],
+      "missing_fields": ["last_substantive_update_at","next_review_due_at","unified_cross_surface_material_fingerprint"],
+      "public_projection": "published_profile_variant_or_public_content_asset_api",
+      "url_truth_current_lastmod_source": "profile_or_personality_public_content_assets.updated_at",
+      "sitemap_current_lastmod_order": ["profile_or_variant_or_asset.updated_at","published_at","now"],
+      "conflicts": ["mbti_profile_and_authority_v2_asset_lineages_are_separate","strong_source_hash_not_bound_to_material_lastmod"]
+    }
+  ],
+  "time_semantics": {
+    "published_at": "public_effective_time",
+    "reviewed_at": "human_review_evidence_time",
+    "updated_at": "row_write_time_only",
+    "last_substantive_update_at": "material_fingerprint_change_public_effective_time",
+    "next_review_due_at": "versioned_review_policy_result",
+    "substitution_allowed": false
+  },
+  "material_change_contract": {
+    "material_class_count": 6,
+    "material_classes": [
+      "visible_fact_conclusion_or_boundary_change",
+      "public_module_add_remove_or_substantive_rewrite",
+      "claim_source_or_evidence_change",
+      "title_description_canonical_hreflang_indexability_robots_or_eligible_jsonld_change",
+      "locale_counterpart_content_search_surface_or_authority_linkage_change",
+      "authority_revision_canonical_public_structure_internal_link_or_publication_state_change"
+    ],
+    "non_material_class_count": 8,
+    "non_material_classes": [
+      "format_whitespace_or_semantically_neutral_order",
+      "backend_note",
+      "non_public_internal_field",
+      "view_or_analytics_count",
+      "cache_warm",
+      "deploy_time",
+      "same_content_projection_rebuild",
+      "style_only_change_without_visible_or_search_surface_change"
+    ],
+    "unknown_action": "MEASUREMENT_HOLD_without_timestamp_write"
+  },
+  "fingerprint_contract": {
+    "schema_version": "seo.material_fingerprint.v1",
+    "algorithm": "sha256",
+    "canonical_json": {"encoding":"utf-8","object_keys":"lexicographic","arrays":"business_semantic_order","escape_unicode":false,"escape_slashes":false,"whitespace":"compact"},
+    "common_inputs": ["schema_version","family","locale","public_identity","authority_revision_kind","visible_content","claims_and_sources","search_surface","locale_linkage","public_structure"],
+    "family_inputs": {
+      "article": ["published_translation_revision","seo_meta"],
+      "career": ["current_fixed_modules_for_locale","approved_search_contract","approved_review_contract"],
+      "personality": ["published_profile_variant_or_public_asset_snapshot","review_bound_search_surface"]
+    },
+    "exclusions": ["database_ids","actor_or_user","review_publish_updated_timestamps","revision_counter","cache_time","deploy_time","compile_time","view_or_analytics","private_notes","runtime_envelope","random_order"],
+    "idempotent_same_hash_action": "preserve_material_time",
+    "missing_or_unknown_hash_action": "MEASUREMENT_HOLD",
+    "existing_hashes_are_lineage_not_automatic_material_fingerprint": ["article_source_version_hash","career_aggregate_and_shard_hashes","personality_source_hash"]
+  },
+  "propagation_contract": {
+    "steps": ["content_authority","material_fingerprint_decision","publish_revision","url_truth_lastmod","sitemap_and_llms_consumers","public_readback"],
+    "url_truth_event_fields": ["family","locale","public_identity","authority_revision","material_fingerprint","material_changed_at","decision_code","evidence_ref"],
+    "lastmod_source_format": "material_fingerprint.v1:<authority_revision_kind>",
+    "sitemap_and_llms_must_consume_url_truth_only": true,
+    "now_fallback_allowed": false,
+    "events": {
+      "initial_publish": "first_public_effective_time",
+      "republish_changed": "new_public_effective_time",
+      "republish_unchanged": "preserve_previous_time",
+      "locale_update": "per_locale_independent_decision",
+      "search_surface_change": "material_when_search_surface_fingerprint_changes",
+      "unpublish_or_retire": "remove_active_consumer_entry_preserve_audit",
+      "rollback_changed": "rollback_public_effective_time_with_target_historical_revision_ref",
+      "rollback_unchanged": "preserve_previous_time",
+      "idempotent_rerun": "preserve_pointer_and_time",
+      "projection_or_cache_rebuild": "never_changes_material_time"
+    },
+    "failure_action": "retain_last_trusted_url_truth_and_open_one_cluster_with_MEASUREMENT_HOLD",
+    "recovery": "two_consecutive_authority_fingerprint_url_truth_consumer_readbacks_aligned"
+  },
+  "review_and_decay_contract": {
+    "review_cadence_authority": "versioned_family_locale_claim_risk_policy",
+    "family_reuse": {
+      "article": "translation_revision_human_review_evidence",
+      "career": "trust_manifest_cadence_bound_to_current_revision",
+      "personality": "immutable_revision_review_evidence_and_last_reviewed_at"
+    },
+    "review_overdue_action": "candidate_only",
+    "initial_decay_rule": {
+      "status": "proposed",
+      "comparison": "latest_complete_28d_vs_previous_comparable_28d",
+      "impressions_decline_percent": 30,
+      "minimum_impressions_each_window": 500,
+      "maximum_gsc_lag_days": 3,
+      "minimum_page_age_days": 56,
+      "minimum_days_since_material_change": 28,
+      "required_exclusions": ["seasonality_uncontrolled","new_page_cold_start","runtime_incident","canonical_incident","noindex_incident","authority_readback_mismatch","locale_not_comparable","gsc_stale"],
+      "supporting_metrics": ["clicks","ctr","position"],
+      "causal_claim_allowed": false,
+      "sensitivity_minimum_impressions": [200,500,1000],
+      "sensitivity_decline_percent": [20,30,40]
+    },
+    "candidate_types": ["refresh","merge_or_consolidate","retire_or_noindex"],
+    "required_candidate_evidence": ["measurement_window","material_revision","runtime_health","canonical_and_indexability","replacement_or_redirect_plan","recovery_condition","human_decision"],
+    "agent_maximum_permission": "L1_read_analyze_and_draft_candidate",
+    "automatic_refresh_merge_noindex_retire_or_delete_allowed": false,
+    "close_condition": "human_review_complete_and_two_full_recovery_windows"
+  },
+  "implementation_handoff": {
+    "minimum_order": ["fingerprint_library_family_adapters_and_golden_vectors","append_only_material_decision_in_publish_transactions","url_truth_material_event_only_and_safe_backfill","sitemap_llms_url_truth_only_without_now_fallback","unified_read_model_api_and_ui_binding","review_decay_candidate_evaluator_L1_only"],
+    "focused_tests": ["three_family_golden_hashes","material_non_material_matrix","locale_behavior","publish_republish_rollback_idempotency","unpublish_retire","unknown_hash_hold","url_truth_lineage","no_direct_timestamp_or_now_fallback","consumer_lkg","review_overdue","28d_decay_exclusions","agent_permissions","ui_null_vs_zero"],
+    "runtime_implementation_performed": false,
+    "migration_performed": false,
+    "backfill_performed": false
+  },
+  "boundaries": {
+    "database_write": false,
+    "cms_write": false,
+    "cache_write": false,
+    "url_truth_write": false,
+    "sitemap_write": false,
+    "production_data_mutation": false,
+    "read_only_gsc": true,
+    "search_submission_allowed": false
+  }
+}
