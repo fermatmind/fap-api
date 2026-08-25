@@ -1057,6 +1057,30 @@ BASH, timeout: 1800);
     });
 });
 
+task('seo:url-truth-incremental-cms-canary', function () {
+    within('{{release_path}}/backend', function (): void {
+        run(<<<'BASH'
+set -euo pipefail
+receipt="$({{bin/php}} artisan seo-intel:url-truth-cms-canary --timeout=45 --json --no-interaction --no-ansi)"
+printf '%s\n' "$receipt"
+printf '%s' "$receipt" | {{bin/php}} -r '
+$payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
+$ok = ($payload["schema_version"] ?? null) === "seo-platform-url-truth-cms-canary.v1"
+    && ($payload["status"] ?? null) === "success"
+    && ($payload["cms_publish_service_used"] ?? null) === true
+    && ($payload["post_commit_event_path"] ?? null) === true
+    && ($payload["url_truth_readback"] ?? null) === true
+    && ($payload["boundaries"]["content_body_changed"] ?? null) === false
+    && ($payload["boundaries"]["sitemap_authority_mutation_attempted"] ?? null) === false
+    && ($payload["boundaries"]["search_submission_allowed"] ?? null) === false
+    && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["identity_hash"] ?? "")) === 1
+    && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["revision_hash"] ?? "")) === 1;
+exit($ok ? 0 : 1);
+' || exit 44
+BASH);
+    });
+});
+
 task('artisan:migrate-schema-only', function () {
     $migration = deploySchemaOnlyMigration();
     $migrationPath = 'database/migrations/'.$migration;
@@ -2646,6 +2670,7 @@ after('healthcheck:public', 'healthcheck:sitemap-source');
 after('healthcheck:sitemap-source', 'healthcheck:public-dns');
 after('healthcheck:public-dns', 'seo:url-truth-reconciliation-receipt');
 after('seo:url-truth-reconciliation-receipt', 'seo:url-truth-controlled-reconcile');
+after('seo:url-truth-controlled-reconcile', 'seo:url-truth-incremental-cms-canary');
 after('deploy:symlink', 'healthcheck:auth-guest-contract');
 after('deploy:symlink', 'healthcheck:public-static-media-assets');
 after('deploy:symlink', 'healthcheck:scale-lookup');

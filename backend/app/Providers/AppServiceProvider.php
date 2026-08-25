@@ -8,6 +8,8 @@ use App\Contracts\Security\PiiEnvelopeAdapter;
 use App\Domain\Career\Publish\CareerJobDetailExposureReadiness;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionLookup;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
+use App\Events\PublicAuthorityChanged;
+use App\Listeners\QueueUrlTruthIncrementalSync;
 use App\Livewire\Filament\Ops\Livewire\CurrentOrgSwitcher;
 use App\Livewire\Filament\Ops\Livewire\LocaleSwitcher;
 use App\Models\AdminApproval;
@@ -42,6 +44,8 @@ use App\Services\Content\ContentPacksIndex;
 use App\Services\Content\ContentStore;
 use App\Services\ContentPackResolver;
 use App\Services\Ops\OpsDistributedLimiter;
+use App\Services\SeoIntel\Sources\CurrentPublicUrlAuthoritySource;
+use App\Services\SeoIntel\Sources\UrlTruthInventorySource;
 use App\Support\Career\CareerVerifyOnlyRequestAuthorizer;
 use App\Support\Logging\RedactProcessor;
 use App\Support\OrgContext;
@@ -74,6 +78,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->bind(UrlTruthInventorySource::class, CurrentPublicUrlAuthoritySource::class);
+
         $this->app->singleton(OrgContext::class, static fn (): OrgContext => new OrgContext);
 
         $this->app->singleton(
@@ -327,6 +333,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Event::listen(PublicAuthorityChanged::class, QueueUrlTruthIncrementalSync::class);
+
         PersonalityPublicContentAsset::observe(PersonalityPublicContentAssetObserver::class);
 
         FilamentAsset::register([

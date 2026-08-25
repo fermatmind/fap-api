@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Cms;
 
+use App\Events\PublicAuthorityChanged;
 use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Models\Article;
 use App\Models\ArticleEditorialPackageImport;
@@ -60,6 +61,7 @@ final class ArticlePublishService
 
         ContentReleaseAudit::log('article', $article, $source);
         $this->seoDiscoverabilityCacheInvalidator->flushArticleDiscoverabilityCaches();
+        $this->dispatchUrlTruthChange($article, 'publish');
 
         return $article;
     }
@@ -89,6 +91,7 @@ final class ArticlePublishService
         });
 
         $this->seoDiscoverabilityCacheInvalidator->flushArticleDiscoverabilityCaches(false);
+        $this->dispatchUrlTruthChange($article, 'unpublish');
 
         return $article;
     }
@@ -255,6 +258,7 @@ final class ArticlePublishService
         if ($invalidateDiscoverabilityCaches) {
             $this->seoDiscoverabilityCacheInvalidator->flushArticleDiscoverabilityCaches();
         }
+        $this->dispatchUrlTruthChange($article, 'authority_revision');
 
         return $article;
     }
@@ -377,6 +381,25 @@ final class ArticlePublishService
             (string) $article->content_md,
             (string) ($article->content_html ?? '')
         );
+    }
+
+    private function dispatchUrlTruthChange(Article $article, string $change): void
+    {
+        event(new PublicAuthorityChanged(
+            pageEntityType: 'article',
+            entityIdentity: (string) $article->id,
+            locale: (string) $article->locale,
+            revision: hash('sha256', json_encode([
+                'article',
+                (string) $article->id,
+                (string) $article->locale,
+                (string) $article->status,
+                (bool) $article->is_public,
+                (int) ($article->published_revision_id ?? 0),
+                $article->updated_at?->toIso8601String(),
+            ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES)),
+            change: $change,
+        ));
     }
 
     private function assertPublishableArticleProjection(Article $article): void
