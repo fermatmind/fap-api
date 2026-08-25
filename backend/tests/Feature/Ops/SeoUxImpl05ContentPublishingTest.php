@@ -37,6 +37,8 @@ final class SeoUxImpl05ContentPublishingTest extends TestCase
         $this->assertStringContainsString('$canReadAuthority = ContentAccess::canRead()', $workspace);
         $this->assertStringContainsString('$authorityUrls = $canReadAuthority', $workspace);
         $this->assertStringContainsString('@if ($canReadAuthority)', $workspace);
+        $this->assertStringContainsString('data-authority-access', $workspace);
+        $this->assertStringContainsString('data-write-state="unavailable"', $workspace);
         $this->assertStringNotContainsString("getUrl('create')", $workspace);
         $this->assertStringNotContainsString("getUrl('edit'", $workspace);
         $this->assertStringNotContainsString('<form', $workspace);

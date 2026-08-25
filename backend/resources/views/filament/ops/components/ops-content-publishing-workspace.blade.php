@@ -28,7 +28,12 @@
         <span class="ops-tag">#10 · {{ __('ops.custom_pages.seo_operations.states.production_unproven.label') }}</span>
     </header>
 
-    <div class="ops-content-publishing__authority" aria-label="{{ __($copy.'.authority.label') }}">
+    <div
+        class="ops-content-publishing__authority"
+        aria-label="{{ __($copy.'.authority.label') }}"
+        data-authority-access="{{ $canReadAuthority ? 'granted' : 'denied' }}"
+        data-write-state="unavailable"
+    >
         <div>
             <strong>{{ __($copy.'.authority.title') }}</strong>
             <small>{{ __($copy.'.authority.description') }}</small>
