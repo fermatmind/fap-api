@@ -17,7 +17,6 @@
                 />
             </span>
             <span class="ops-org-switcher__body">
-                <span class="ops-org-switcher__label">{{ __('ops.topbar.org_prefix') }}</span>
                 <span class="ops-org-switcher__value">{{ $orgName }}</span>
             </span>
             <x-filament::icon

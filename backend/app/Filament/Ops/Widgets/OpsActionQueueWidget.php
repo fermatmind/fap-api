@@ -20,7 +20,7 @@ final class OpsActionQueueWidget extends Widget
 
     protected int|string|array $columnSpan = 'full';
 
-    /** @return array{rows:list<array{label:string,description:string,count:int,tone:string,url:string}>} */
+    /** @return array{rows:list<array{label:string,count:int,tone:string,url:string}>} */
     protected function getViewData(): array
     {
         $rows = [];
@@ -28,7 +28,6 @@ final class OpsActionQueueWidget extends Widget
         if (SchemaBaseline::hasTable('failed_jobs')) {
             $rows[] = $this->row(
                 __('ops.widgets.action_queue.failed_jobs'),
-                __('ops.widgets.action_queue.failed_jobs_hint'),
                 (int) DB::table('failed_jobs')->count(),
                 '/ops/queue-monitor',
             );
@@ -37,7 +36,6 @@ final class OpsActionQueueWidget extends Widget
         if (ContentAccess::canReview() && SchemaBaseline::hasTable('admin_approvals')) {
             $rows[] = $this->row(
                 __('ops.widgets.action_queue.pending_approvals'),
-                __('ops.widgets.action_queue.pending_approvals_hint'),
                 (int) DB::table('admin_approvals')->where('status', AdminApproval::STATUS_PENDING)->count(),
                 '/ops/admin-approvals',
             );
@@ -48,7 +46,6 @@ final class OpsActionQueueWidget extends Widget
             if (SchemaBaseline::hasTable('orders')) {
                 $rows[] = $this->row(
                     __('ops.widgets.action_queue.ungranted_orders'),
-                    __('ops.widgets.action_queue.ungranted_orders_hint'),
                     (int) DB::table('orders')
                         ->where('org_id', $orgId)
                         ->where('payment_state', 'paid')
@@ -61,7 +58,6 @@ final class OpsActionQueueWidget extends Widget
             if (SchemaBaseline::hasTable('payment_events')) {
                 $rows[] = $this->row(
                     __('ops.widgets.action_queue.webhook_failures'),
-                    __('ops.widgets.action_queue.webhook_failures_hint'),
                     (int) DB::table('payment_events')
                         ->where('org_id', $orgId)
                         ->where(function ($query): void {
@@ -78,12 +74,11 @@ final class OpsActionQueueWidget extends Widget
         return ['rows' => $rows];
     }
 
-    /** @return array{label:string,description:string,count:int,tone:string,url:string} */
-    private function row(string $label, string $description, int $count, string $url): array
+    /** @return array{label:string,count:int,tone:string,url:string} */
+    private function row(string $label, int $count, string $url): array
     {
         return [
             'label' => $label,
-            'description' => $description,
             'count' => $count,
             'tone' => $count > 0 ? 'warning' : 'success',
             'url' => $url,

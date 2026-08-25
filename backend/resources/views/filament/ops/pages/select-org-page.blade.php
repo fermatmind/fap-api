@@ -12,11 +12,7 @@
             <div class="ops-select-org-shell">
                 <div class="ops-select-org-shell__hero">
                     <div class="ops-shell-inline-intro">
-                        <span class="ops-shell-inline-intro__eyebrow">{{ __('ops.select_org.workspace_scope') }}</span>
                         <h2 class="ops-select-org-shell__title">{{ __('ops.select_org.choose_active') }}</h2>
-                        <p class="ops-shell-inline-intro__meta">
-                            {{ __('ops.select_org.shell_meta') }}
-                        </p>
                     </div>
 
                     <div class="ops-select-org-shell__chips">
@@ -26,7 +22,6 @@
                             </span>
 
                             <div class="ops-topbar-chip__stack">
-                                <span class="ops-topbar-chip__label">{{ __('ops.topbar.current_org') }}</span>
                                 <span class="ops-topbar-chip__value">
                                     {{ $currentOrgId > 0 ? $currentOrgName.' (#'.$currentOrgId.')' : __('ops.topbar.no_org_selected') }}
                                 </span>
@@ -39,7 +34,6 @@
                             </span>
 
                             <div class="ops-topbar-chip__stack">
-                                <span class="ops-topbar-chip__label">{{ __('ops.select_org.visible_scope') }}</span>
                                 <span class="ops-topbar-chip__value">{{ __('ops.select_org.visible_scope_meta') }}</span>
                             </div>
                         </div>
@@ -79,7 +73,6 @@
 
         <x-filament-ops::ops-section
             :title="__('ops.select_org.organizations')"
-            :description="trans_choice('ops.select_org.visible_workspaces', $this->visibleOrganizationsCount(), ['count' => $this->visibleOrganizationsCount()])"
         >
             @if ($returnTo !== '')
                 <x-slot name="actions">

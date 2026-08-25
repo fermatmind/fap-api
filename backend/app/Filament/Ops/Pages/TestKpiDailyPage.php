@@ -93,7 +93,7 @@ final class TestKpiDailyPage extends Page
 
     public function getSubheading(): ?string
     {
-        return __('ops.pages.test_kpi_daily.subheading');
+        return null;
     }
 
     public function applyFilters(): void
@@ -337,12 +337,12 @@ final class TestKpiDailyPage extends Page
             [
                 'label' => __('ops.pages.test_kpi_daily.kpis.total'),
                 'value' => $total,
-                'description' => __('ops.pages.test_kpi_daily.kpis.total_desc'),
+                'description' => null,
             ],
             [
                 'label' => __('ops.pages.test_kpi_daily.kpis.days'),
                 'value' => $rows->pluck('day')->unique()->count(),
-                'description' => __('ops.pages.test_kpi_daily.kpis.days_desc'),
+                'description' => null,
             ],
         ];
     }

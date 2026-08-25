@@ -4049,6 +4049,17 @@
         font-size: 0.75rem;
     }
 
+    .fi-body.fi-panel-ops .fi-wi-stats-overview-stat.ops-stat-centered > .grid,
+    .fi-body.fi-panel-ops .ops-kpi-card-centered {
+        justify-items: center;
+        text-align: center;
+    }
+
+    .fi-body.fi-panel-ops .fi-wi-stats-overview-stat.ops-stat-centered .flex.items-center {
+        width: 100%;
+        justify-content: center;
+    }
+
     .ops-shell-page {
         gap: 1rem;
     }

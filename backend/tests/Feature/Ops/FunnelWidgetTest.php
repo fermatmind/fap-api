@@ -156,20 +156,17 @@ final class FunnelWidgetTest extends TestCase
             $globalStats = $this->widgetStats();
 
             $this->assertCount(1, $globalStats);
-            $this->assertSame(__('ops.widgets.funnel'), (string) $globalStats[0]->getLabel());
+            $this->assertSame('', (string) $globalStats[0]->getLabel());
             $this->assertSame(__('ops.widgets.no_data'), (string) $globalStats[0]->getValue());
-            $this->assertSame(
-                'No analytics_funnel_daily global rows for this range. Refresh org_id=0 read model rows before reviewing global funnel metrics.',
-                (string) $globalStats[0]->getDescription()
-            );
+            $this->assertNull($globalStats[0]->getDescription());
 
             $this->setOpsOrg(0);
             $tenantStats = $this->widgetStats();
 
             $this->assertCount(1, $tenantStats);
-            $this->assertSame(__('ops.widgets.funnel'), (string) $tenantStats[0]->getLabel());
+            $this->assertSame('', (string) $tenantStats[0]->getLabel());
             $this->assertSame(__('ops.widgets.no_data'), (string) $tenantStats[0]->getValue());
-            $this->assertSame(__('ops.widgets.select_org_to_view_metrics'), (string) $tenantStats[0]->getDescription());
+            $this->assertNull($tenantStats[0]->getDescription());
         } finally {
             Carbon::setTestNow();
         }
@@ -205,12 +202,9 @@ final class FunnelWidgetTest extends TestCase
             $stats = $this->widgetStats();
 
             $this->assertCount(1, $stats);
-            $this->assertSame(__('ops.widgets.funnel'), (string) $stats[0]->getLabel());
+            $this->assertSame('', (string) $stats[0]->getLabel());
             $this->assertSame(__('ops.widgets.no_data'), (string) $stats[0]->getValue());
-            $this->assertSame(
-                'No analytics_funnel_daily rows for this range. Run analytics:refresh-funnel-daily in a controlled task.',
-                (string) $stats[0]->getDescription()
-            );
+            $this->assertNull($stats[0]->getDescription());
         } finally {
             Carbon::setTestNow();
         }

@@ -29,8 +29,8 @@ class WebhookFailureWidget extends BaseWidget
         $orgId = max(0, (int) app(OrgContext::class)->orgId());
         if ($orgId <= 0) {
             return [
-                Stat::make(__('ops.widgets.webhook_failures_15m'), '0')->description(__('ops.widgets.select_org_to_view_metrics')),
-                Stat::make(__('ops.widgets.webhook_failures_all'), '0')->description(__('ops.widgets.select_org_to_view_metrics')),
+                Stat::make(__('ops.widgets.webhook_failures_15m'), '0')->extraAttributes(['class' => 'ops-stat-centered']),
+                Stat::make(__('ops.widgets.webhook_failures_all'), '0')->extraAttributes(['class' => 'ops-stat-centered']),
             ];
         }
 
@@ -61,10 +61,10 @@ class WebhookFailureWidget extends BaseWidget
 
         return [
             Stat::make(__('ops.widgets.webhook_failures_15m'), (string) $failures15m)
-                ->description(__('ops.widgets.rolling_15m'))
+                ->extraAttributes(['class' => 'ops-stat-centered'])
                 ->color($failures15m > 0 ? 'danger' : 'success'),
             Stat::make(__('ops.widgets.webhook_failures_all'), (string) ($signatureFailed + $processedFailed))
-                ->description(__('ops.widgets.signature_processing_failures'))
+                ->extraAttributes(['class' => 'ops-stat-centered'])
                 ->color(($signatureFailed + $processedFailed) > 0 ? 'danger' : 'success'),
         ];
     }

@@ -3,7 +3,6 @@
         <x-filament-ops::ops-section
             eyebrow="SRE controls"
             title="Queue monitor"
-            description="Inspect failed jobs and retry individual records without leaving the Ops shell."
         >
             <x-filament-ops::ops-toolbar :split="false">
                 <x-slot name="actions">
@@ -16,7 +15,6 @@
 
         <x-filament-ops::ops-section
             title="Failed jobs"
-            description="Latest failed queue jobs across the current runtime with direct retry controls."
         >
             @if ($statusMessage !== '')
                 <x-slot name="actions">
@@ -26,8 +24,8 @@
 
             <x-filament-ops::ops-table
                 :has-rows="$failedJobs !== []"
-                empty-description="There are currently no failed jobs in the queue backlog."
-                empty-eyebrow="Queue monitor"
+                empty-description=""
+                empty-eyebrow=""
                 empty-icon="heroicon-o-queue-list"
                 empty-title="No failed jobs"
             >

@@ -32,6 +32,8 @@ final class TestKpiSummaryWidgetTest extends TestCase
             $valuesByLabel = [];
             foreach ($this->widgetStats() as $stat) {
                 $valuesByLabel[(string) $stat->getLabel()] = (string) $stat->getValue();
+                $this->assertNull($stat->getDescription());
+                $this->assertSame('ops-stat-centered', $stat->getExtraAttributes()['class'] ?? null);
             }
 
             $this->assertSame('18', $valuesByLabel[__('ops.widgets.test_success_today')] ?? null);
@@ -75,10 +77,7 @@ final class TestKpiSummaryWidgetTest extends TestCase
             $this->assertCount(1, $stats);
             $this->assertSame(__('ops.widgets.test_kpi'), (string) $stats[0]->getLabel());
             $this->assertSame(__('ops.widgets.no_data'), (string) $stats[0]->getValue());
-            $this->assertSame(
-                'No analytics_test_metrics_daily rows match global org_id=0. Run analytics:refresh-test-metrics-daily in a controlled task.',
-                (string) $stats[0]->getDescription()
-            );
+            $this->assertNull($stats[0]->getDescription());
         } finally {
             Carbon::setTestNow();
         }

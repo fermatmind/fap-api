@@ -272,7 +272,7 @@ return [
 
     'widgets' => [
         'action_queue' => [
-            'title' => 'Action Queue',
+            'title' => '待办队列',
             'description' => '仅展示当前权限与组织范围内的真实待处理事实。',
             'failed_jobs' => '失败任务',
             'failed_jobs_hint' => 'failed_jobs 当前积压',
@@ -2739,6 +2739,36 @@ return [
     ],
 
     'resources' => [
+        'content_pack_releases' => [
+            'label' => '内容包发布',
+            'plural' => '内容包发布',
+            'fields' => [
+                'action' => '操作类型',
+                'region' => '地区',
+                'locale' => '语言',
+                'dir_alias' => '目录别名',
+                'from_pack' => '来源内容包',
+                'to_pack' => '目标内容包',
+                'status' => '状态',
+                'probe_ok' => '探针通过',
+                'probe_run_at' => '探针运行时间',
+                'created_at' => '创建时间',
+                'reason' => '原因',
+            ],
+            'actions' => [
+                'run_probe' => '运行探针',
+                'release' => '发布',
+                'request_rollback' => '申请回滚',
+                'view_probe_json' => '查看探针 JSON',
+            ],
+            'notifications' => [
+                'probe_queued' => '探针任务已进入队列',
+                'probe_required' => '发布前必须通过探针检查',
+                'release_success' => '发布已标记为成功',
+                'rollback_requested' => '回滚申请已提交',
+                'approval_id' => '审批 #:id',
+            ],
+        ],
         'common' => [
             'actions' => [
                 'create_another' => '创建并继续新增',

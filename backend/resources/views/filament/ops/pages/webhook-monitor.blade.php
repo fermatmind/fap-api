@@ -3,7 +3,6 @@
         <x-filament-ops::ops-section
             eyebrow="SRE controls"
             title="Webhook monitor"
-            description="Inspect recent payment event failures inside the active organization context without leaving the Ops shell."
         >
             <x-filament-ops::ops-toolbar>
                 <div class="ops-toolbar-inline">
@@ -28,12 +27,10 @@
 
         <x-filament-ops::ops-section
             title="Failure snapshot"
-            description="Current counts for signature failures and processing failures in the active organization."
         >
             <div class="ops-page-grid ops-page-grid--2">
                 <x-filament-ops::ops-result-card
                     title="Signature failures"
-                    meta="signature_ok = false"
                 >
                     <x-slot name="badges">
                         <x-filament.ops.shared.status-pill
@@ -47,7 +44,6 @@
 
                 <x-filament-ops::ops-result-card
                     title="Processing failures"
-                    meta="status or handle failure backlog"
                 >
                     <x-slot name="badges">
                         <x-filament.ops.shared.status-pill
@@ -63,12 +59,11 @@
 
         <x-filament-ops::ops-section
             title="Recent payment events"
-            description="Latest-first event feed with signature state, webhook status, handling status, and error code."
         >
             <x-filament-ops::ops-table
                 :has-rows="$events !== []"
-                empty-description="The current organization has no recent payment events in the selected monitoring window."
-                empty-eyebrow="Webhook monitor"
+                empty-description=""
+                empty-eyebrow=""
                 empty-icon="heroicon-o-bolt"
                 empty-title="No payment events found"
             >
