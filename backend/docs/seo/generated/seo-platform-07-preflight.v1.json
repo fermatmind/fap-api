@@ -1,0 +1,142 @@
+{
+  "schema_version": "seo-platform-07-preflight.v1",
+  "task": "SEO-PLATFORM-07-PREFLIGHT",
+  "status": "complete_preflight_docs_only",
+  "run": {
+    "evidence_cutoff_utc": "2026-08-25T22:50:59Z",
+    "fap_api_source_sha": "7917c9b5eae6de6b3dff781e6a6ab71dad37d6b8",
+    "fap_web_source_sha": "90bcaf7e6b1a53d679d56df6de643b6ae8725410",
+    "evidence_state": "verified",
+    "read_only": true,
+    "sanitized": true
+  },
+  "current_conclusion": {
+    "capability_status": "production_unproven",
+    "ui_state": "MEASUREMENT_HOLD",
+    "historical_status": "completed_by_prior_work",
+    "historical_status_evidence": "absence_of_runtime_slo_cluster_handoff",
+    "current_direct_evidence": "SeoTechnicalHealthUiContract unavailableSnapshot declares unified production read model unpublished",
+    "conflict_resolved": true
+  },
+  "capabilities": [
+    {"id":"public_content_runtime","status":"production_unproven","scheduled_in_code":true,"production_read_model":true,"reusable":true,"owner":"backend_ops"},
+    {"id":"core_entry_slo","status":"code_only","scheduled_in_code":false,"production_read_model":false,"reusable":true,"owner":"seo_runtime"},
+    {"id":"career_runtime_slo","status":"production_unproven","scheduled_in_code":true,"production_read_model":true,"reusable":true,"owner":"career_runtime"},
+    {"id":"crawler_observation","status":"code_only","scheduled_in_code":false,"production_read_model":false,"reusable":true,"owner":"seo_observability"},
+    {"id":"url_truth","status":"production_degraded","scheduled_in_code":true,"production_read_model":true,"reusable":true,"owner":"seo_authority"},
+    {"id":"page_family_policy","status":"production_healthy","scheduled_in_code":false,"production_read_model":true,"reusable":true,"owner":"seo_authority"},
+    {"id":"frontend_public_read_resilience","status":"production_unproven","scheduled_in_code":false,"production_read_model":false,"reusable":true,"owner":"frontend"},
+    {"id":"unified_revision_evidence","status":"production_unproven","scheduled_in_code":false,"production_read_model":false,"reusable":false,"owner":"release_and_authority"},
+    {"id":"technical_health_ui","status":"production_unproven","scheduled_in_code":false,"production_read_model":false,"reusable":true,"owner":"ops_ui"}
+  ],
+  "page_family_policy": {
+    "version": "seo-page-family-policy.v1",
+    "sha256": "f020887403238b3f6ac8f521d46c9a2c6a080216d65dfe31eb835d41a489708e",
+    "public_families": ["tests","articles_topics","career","personality","trust_method_help","other_public"],
+    "locales": ["zh-CN","en"],
+    "isolation_families": ["unclassified","private_excluded"]
+  },
+  "cohort_contract": {
+    "key": ["policy_version","page_family","locale","authority_revision","cohort_role"],
+    "roles": ["core","long_tail","recent","historical","redirect_boundary","changed_revision"],
+    "dynamic_authority_driven": true,
+    "fixed_url_inventory_allowed": false,
+    "authority_missing_action": "fail_closed_unobserved",
+    "unclassified_action": "fail_closed_excluded",
+    "negative_set": {
+      "authority_classes": ["private_flow","private_page_entity_type","noindex_private","unpublished_authority","user_bound","unclassified","permission_unknown"],
+      "examples": ["attempt","result","report","order","payment","token","private_share","history"],
+      "raw_url_or_query_output_allowed": false,
+      "route_and_entity_authority_required": true,
+      "path_segment_only_classification_allowed": false,
+      "personality_order_segment_collision_candidates": 2,
+      "collision_evidence_state": "unknown",
+      "verified_private_leak_count": null
+    }
+  },
+  "baselines": [
+    {
+      "id": "existing_core_entry_observer",
+      "observed_at_utc": "2026-08-25T22:49:20Z",
+      "evidence_state": "observed",
+      "baseline_only": true,
+      "manifest_sha256": "fdeedeaed052f646034e7a3c2fc5c6471ec9c5ecac31f16c80500cac875f37e8",
+      "artifact_sha256": "65b628902187c7bfad26c1f47fe7214945ce40aacaa3371b7960f6e2bf267c23",
+      "sample_count": 16,
+      "success_count": 13,
+      "failure_count": 3,
+      "unobserved_count": 0,
+      "incident_categories": {"ttfb_breach":1,"http_redirect":2},
+      "max_concurrency": 4,
+      "timeout_seconds": 10,
+      "retry_limit": 0
+    },
+    {
+      "id": "dynamic_sitemap_family_locale_observation",
+      "observed_at_utc": "2026-08-25T22:50:59Z",
+      "evidence_state": "observed",
+      "baseline_only": true,
+      "sitemap_entry_count": 2643,
+      "sitemap_sha256": "5316a0f7859c33d3556eca03f4a87867a4ab714b7b9ef8ec71298b13eb3a1306",
+      "sample_count": 31,
+      "success_count": 31,
+      "failure_count": 0,
+      "unobserved_count": 0,
+      "http": {"200":31,"404":0,"410":0,"5xx":0,"other":0},
+      "false_404_count": 0,
+      "false_noindex_count": 0,
+      "canonical_mismatch_count": 0,
+      "hreflang_missing_count": 2,
+      "json_ld_missing_count": 6,
+      "visible_content_missing_count": 0,
+      "metadata_missing_count": 0,
+      "response_elapsed_ms": {"minimum":347,"maximum":2743},
+      "max_concurrency": 4,
+      "timeout_seconds": 8,
+      "retry_limit": 0,
+      "revision_evidence": {"authority_revision":"unavailable","render_revision":"unavailable","cache_revision":"unavailable","deploy_revision":"unavailable"}
+    }
+  ],
+  "sli_contracts": [
+    {"id":"public_availability","formula":"eligible_2xx/eligible_observed","windows":["10m","24h"],"minimum_samples":"3_schedule_slots_per_family_locale","threshold_state":"proposed"},
+    {"id":"false_404_410","formula":"authority_eligible_404_or_410/eligible_observed","windows":["10m","24h"],"minimum_samples":3,"threshold_state":"proposed"},
+    {"id":"false_noindex","formula":"authority_indexable_rendered_noindex/eligible_rendered","windows":["10m","24h"],"minimum_samples":3,"threshold_state":"proposed"},
+    {"id":"shell_or_core_missing","formula":"required_visible_module_failure/http_200","windows":["10m","24h"],"minimum_samples":3,"threshold_state":"proposed"},
+    {"id":"canonical_hreflang_schema_drift","formula":"authority_render_consumer_mismatch/eligible_observed","windows":["deploy_canary","24h"],"minimum_samples":3,"threshold_state":"proposed"},
+    {"id":"revision_drift","formula":"authority_revision_not_equal_render_or_cache_readback","windows":["event","30m_recovery"],"minimum_samples":2,"threshold_state":"proposed"},
+    {"id":"page_latency","formula":"ttfb_p50_p95_p99_by_family_locale_cache_state","windows":["10m","24h"],"minimum_samples":30,"threshold_state":"unknown"},
+    {"id":"api_timeout","formula":"timeout_count/eligible_public_api_calls","windows":["10m","24h"],"minimum_samples":30,"threshold_state":"unknown"},
+    {"id":"crawler_readback_stale","formula":"now-last_successful_scheduled_receipt","windows":["2_expected_intervals_plus_grace"],"minimum_samples":"one_exact_scheduled_receipt","threshold_state":"proposed"},
+    {"id":"private_url_exposure","formula":"verified_private_authority_identity_in_public_evidence","windows":["event"],"minimum_samples":1,"threshold_state":"direct_evidence_required"}
+  ],
+  "severity_contract": {
+    "p0_p1_require_direct_evidence": true,
+    "single_url_inference_maximum": "P2_or_MEASUREMENT_HOLD",
+    "template_api_cache_revision_failure_clustered": true,
+    "data_missing_or_stale_state": "MEASUREMENT_HOLD"
+  },
+  "issue_cluster": {
+    "key": ["detector_version","normalized_root_cause","page_family","locale","authority_revision","runtime_or_cache_revision"],
+    "algorithm": "sha256_canonical_components",
+    "url_storage": "irreversible_identity_hash_and_unique_count_only",
+    "idempotent": true
+  },
+  "implementation_handoff": {
+    "reuse": ["PageFamilyPolicyRegistry","PageFamilyClassifier","URL Truth","PublicContentRuntimeMetricsService","CoreEntrySloInspector","CareerRuntimeSloService","SeoCrawlerLogObservationReadService"],
+    "minimum_new_scope": ["authority_driven_cohort_resolver","revision_adapters","detector_cluster_projector","scheduled_receipt","unified_readonly_snapshot_api","technical_health_ui_binding"],
+    "scheduler_activation_in_scope": false,
+    "runtime_implementation_performed": false
+  },
+  "boundaries": {
+    "database_write": false,
+    "cms_write": false,
+    "cache_write": false,
+    "url_truth_write": false,
+    "sitemap_write": false,
+    "search_submission": false,
+    "scheduler_activation": false,
+    "production_deploy": false,
+    "read_only_gsc": true,
+    "search_submission_allowed": false
+  }
+}
