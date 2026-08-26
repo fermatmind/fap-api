@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-26T19:40:35Z",
+  "updated_at": "2026-08-26T19:43:47Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,9 +9,9 @@
     "SEO-PLATFORM-07-G-CRAWLER-AGGREGATE-RUNTIME-IDENTITY": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "in_progress",
+      "status": "committed",
       "branch": "codex/seo-platform-07-crawler-runtime-identity",
-      "commit_sha": null,
+      "commit_sha": "235d6bbaa8b65417215a9b6b60e2c5d0b564d653",
       "pr_url": null,
       "checks": {
         "dependency": {
@@ -54,6 +54,11 @@
           "at": "2026-08-26T19:40:35Z",
           "status": "local_checks_passed",
           "summary": "The helper now validates ordinary, non-empty and readable source state as www-data before any shared env mutation, while the collector uses Laravel's existing ten-minute scheduler as the same runtime identity. Existing single-source canary compatibility was restored with the missing global SplFileObject import. Focused and full crawler/SEO-PLATFORM-07 regressions, scoped formatting and syntax passed; no production collector or scheduler was manually triggered."
+        },
+        {
+          "at": "2026-08-26T19:43:47Z",
+          "status": "committed",
+          "summary": "Committed the validated implementation as 235d6bbaa8b65417215a9b6b60e2c5d0b564d653 with candidate tree cfaf136cac9cd32c907294e63ec8a990a9b15925. The tree contains exactly the eight manifest-allowed paths and no user workspace changes."
         }
       ]
     },
