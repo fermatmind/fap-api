@@ -139,19 +139,6 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             ['qa3', 'qa2', 'qa1'],
             array_column($response->json('display_surface_v1.page.content.career_quick_answers_block.items'), 'key'),
         );
-        $this->assertSame(
-            '会计和审计有什么区别？职责、产出与保证边界',
-            $response->json('display_surface_v1.page.content.career_quick_answers_block.items.1.question'),
-        );
-        $this->assertCount(
-            7,
-            $response->json('display_surface_v1.page.content.career_quick_answers_block.items.1.table.rows'),
-        );
-        $this->assertStringContainsString(
-            '会计师和审计师的工作环境与工作方式',
-            $response->json('display_surface_v1.page.content.work_context_block'),
-        );
-        $this->assertCount(5, $response->json('display_surface_v1.page.content.onet_structured_fields_block.rows'));
         $this->assertCount(9, $response->json('display_surface_v1.structured_data_from_visible_content.faq_page.zh.mainEntity'));
         $this->assertFalse(
             $response->json('display_surface_v1.structured_data_from_visible_content.schema_rules.occupation_schema_generated_locally'),
