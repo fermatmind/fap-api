@@ -5,6 +5,8 @@ set -euo pipefail
 supervisorctl_bin="/usr/bin/supervisorctl"
 sudo_bin="/usr/bin/sudo"
 timeout_bin="/usr/bin/timeout"
+crontab_bin="/usr/bin/crontab"
+php_bin="/usr/bin/php"
 restart_script=""
 deploy_path=""
 proc_root="/proc"
@@ -15,6 +17,8 @@ for argument in "$@"; do
     --supervisorctl=*) supervisorctl_bin="${argument#*=}" ;;
     --sudo=*) sudo_bin="${argument#*=}" ;;
     --timeout-bin=*) timeout_bin="${argument#*=}" ;;
+    --crontab=*) crontab_bin="${argument#*=}" ;;
+    --php-bin=*) php_bin="${argument#*=}" ;;
     --restart-script=*) restart_script="${argument#*=}" ;;
     --deploy-path=*) deploy_path="${argument#*=}" ;;
     --proc-root=*) proc_root="${argument#*=}" ;;
@@ -28,7 +32,7 @@ fail() {
   exit 1
 }
 
-for path in "$supervisorctl_bin" "$sudo_bin" "$timeout_bin" "$restart_script" "$deploy_path" "$proc_root"; do
+for path in "$supervisorctl_bin" "$sudo_bin" "$timeout_bin" "$crontab_bin" "$php_bin" "$restart_script" "$deploy_path" "$proc_root"; do
   [[ "$path" =~ ^/[A-Za-z0-9._/-]+$ ]] || fail invalid_path
   [[ "$path" != *".."* ]] || fail invalid_path
 done
@@ -46,6 +50,100 @@ current_release="$(readlink -f "$deploy_root/current")"
 active_revision="$(tr -d '\r\n' < "$current_release/REVISION")"
 [[ "$active_revision" =~ ^[0-9a-f]{40}$ ]] || fail active_revision_invalid
 current_backend="$(readlink -f "$current_release/backend")"
+
+refresh_current_release_cron() {
+  local current_crontab=""
+  local crontab_rc=0
+  local begin_marker="# BEGIN fap-api managed scheduler"
+  local end_marker="# END fap-api managed scheduler"
+  local begin_count=0
+  local end_count=0
+  local unmanaged_schedule_count=0
+  local candidate=""
+  local crontab_error=""
+  local marker_layout=""
+  local installed=""
+  local canonical_line="* * * * * cd $deploy_root/current/backend && $php_bin artisan schedule:run --no-interaction >> /dev/null 2>&1"
+
+  [[ -x "$crontab_bin" ]] || fail crontab_unavailable
+  [[ -x "$php_bin" ]] || fail php_unavailable
+  [[ -f "$current_backend/artisan" ]] || fail artisan_unavailable
+  (
+    cd "$current_backend"
+    "$php_bin" artisan schedule:list --json --no-ansi 2>/dev/null
+  ) | grep -Fq 'seo:runtime-probe-scheduled' || fail scheduler_registration_missing
+
+  crontab_error="$(mktemp)"
+  trap 'rm -f "${candidate:-}" "${crontab_error:-}"' EXIT
+  set +e
+  current_crontab="$(LC_ALL=C "$crontab_bin" -l 2>"$crontab_error")"
+  crontab_rc=$?
+  set -e
+  if [[ "$crontab_rc" -eq 1 ]] && grep -Eq '^no crontab for ' "$crontab_error"; then
+    current_crontab=""
+  elif [[ "$crontab_rc" -ne 0 ]]; then
+    fail crontab_read_failed
+  fi
+
+  begin_count="$(grep -Fxc "$begin_marker" <<< "$current_crontab" || true)"
+  end_count="$(grep -Fxc "$end_marker" <<< "$current_crontab" || true)"
+  [[ "$begin_count" -eq "$end_count" && "$begin_count" -le 1 ]] || fail cron_managed_block_invalid
+  marker_layout="$(awk -v begin="$begin_marker" -v end="$end_marker" '
+    $0 == begin {
+      if (managed || seen_begin) invalid=1
+      managed=1
+      seen_begin=1
+      next
+    }
+    $0 == end {
+      if (!managed || seen_end) invalid=1
+      managed=0
+      seen_end=1
+      next
+    }
+    END { print (!invalid && !managed && seen_begin == seen_end) ? "valid" : "invalid" }
+  ' <<< "$current_crontab")"
+  [[ "$marker_layout" == valid ]] || fail cron_managed_block_invalid
+
+  candidate="$(mktemp)"
+  printf '%s\n' "$current_crontab" | awk -v begin="$begin_marker" -v end="$end_marker" '
+    $0 == begin { managed=1; next }
+    $0 == end { managed=0; next }
+    !managed { print }
+  ' > "$candidate"
+
+  unmanaged_schedule_count="$(awk '
+    /^[[:space:]]*#/ { next }
+    /(^|[[:space:]\/])artisan[[:space:]]+schedule:run([[:space:]]|$)/ { count++ }
+    END { print count + 0 }
+  ' "$candidate")"
+  [[ "$unmanaged_schedule_count" -le 1 ]] || fail cron_scheduler_identity_count
+  if [[ "$unmanaged_schedule_count" -eq 1 ]]; then
+    awk '
+      /^[[:space:]]*#/ { print; next }
+      /(^|[[:space:]\/])artisan[[:space:]]+schedule:run([[:space:]]|$)/ { next }
+      { print }
+    ' "$candidate" > "$candidate.next"
+    mv "$candidate.next" "$candidate"
+  fi
+
+  printf '%s\n%s\n%s\n' "$begin_marker" "$canonical_line" "$end_marker" >> "$candidate"
+  "$crontab_bin" "$candidate" || fail crontab_install_failed
+
+  installed="$("$crontab_bin" -l 2>/dev/null)" || fail crontab_verify_failed
+  [[ "$(grep -Fxc "$begin_marker" <<< "$installed" || true)" -eq 1 ]] || fail cron_managed_block_verify
+  [[ "$(grep -Fxc "$end_marker" <<< "$installed" || true)" -eq 1 ]] || fail cron_managed_block_verify
+  [[ "$(grep -Fxc "$canonical_line" <<< "$installed" || true)" -eq 1 ]] || fail cron_current_release_verify
+  [[ "$(awk '
+    /^[[:space:]]*#/ { next }
+    /(^|[[:space:]\/])artisan[[:space:]]+schedule:run([[:space:]]|$)/ { count++ }
+    END { print count + 0 }
+  ' <<< "$installed")" -eq 1 ]] || fail cron_scheduler_identity_count
+
+  rm -f "$candidate" "$crontab_error"
+  trap - EXIT
+  printf 'scheduler_refresh_pass revision=%s mode=cron_current\n' "$active_revision"
+}
 
 read_status() {
   local output=""
@@ -135,6 +233,10 @@ programs_before="$(discover_scheduler "$status_before")"
 program_count="$(awk 'NF { count++ } END { print count + 0 }' <<< "$programs_before")"
 if [[ "$program_count" -eq 0 && "$required" == false ]]; then
   printf 'scheduler_refresh_optional_skip reason=not_managed\n'
+  exit 0
+fi
+if [[ "$program_count" -eq 0 ]]; then
+  refresh_current_release_cron
   exit 0
 fi
 [[ "$program_count" -eq 1 ]] || fail scheduler_identity_count

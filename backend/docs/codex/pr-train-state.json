@@ -1,15 +1,70 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-26T11:50:34Z",
+  "updated_at": "2026-08-26T12:21:42Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
-    "SEO-PLATFORM-07-G-SCHEDULER-REFRESH-V3": {
+    "SEO-PLATFORM-07-G-SCHEDULER-REFRESH-V4": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "pr_open",
+      "branch": "codex/seo-platform-07-scheduler-refresh-v4",
+      "commit_sha": "7b9ba55994dd8e314ce3d0e5b974525e88a20e8f",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3802",
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "details": "PR #3801 merged as b125faeb901417a52fa75eb1507a8f97f719dcf9. Exact-SHA CI and staging passed; production still found no unique Supervisor scheduler, failed closed at scheduler_identity_count, and restored 2117895ad725735ce8f88aad90077e54920a511c as LKG."
+        },
+        "local": [
+          {
+            "command": "focused Supervisor/cron scheduler and existing Supervisor group reload PHPUnit",
+            "status": "passed",
+            "details": "27 tests and 114 assertions passed across Supervisor discovery/restart, cron installation, legacy migration, idempotency, unreadable/malformed/ambiguous fail-closed state, receipt behavior and effective Laravel 11 schedule-list registration."
+          },
+          {
+            "command": "effective schedule:list, Bash/ShellCheck/PHP syntax, scoped Pint, classifier/workflow contracts, JSON/YAML and git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": [],
+        "production": []
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": true,
+      "production_readback_allowed": true,
+      "history": [
+        {
+          "at": "2026-08-26T12:14:48Z",
+          "status": "in_progress",
+          "summary": "User explicitly authorized the fourth same-scope corrective PR to extend deploy with a fail-closed cron/current-release scheduler refresh and continue through three natural production slots. Direct schedule:list verification showed the command was registered only in the legacy Console Kernel, so this correction also moves that same command into Laravel 11's effective bootstrap scheduler. No manual scheduler trigger, workflow dispatch, SSH or application-data mutation is authorized."
+        },
+        {
+          "at": "2026-08-26T12:20:12Z",
+          "status": "local_checks_passed",
+          "summary": "The effective schedule now exposes exactly one ten-minute runtime probe. Supervisor and cron paths, existing group reload, receipt behavior, syntax, format, workflow contracts, manifests and exact changed-file scope passed focused validation."
+        },
+        {
+          "at": "2026-08-26T12:21:42Z",
+          "status": "pr_open",
+          "summary": "Opened authorized fourth same-scope corrective PR #3802 at validated implementation commit 7b9ba55994dd8e314ce3d0e5b974525e88a20e8f. No manual runtime action was performed."
+        }
+      ]
+    },
+    "SEO-PLATFORM-07-G-SCHEDULER-REFRESH-V3": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "merged",
       "branch": "codex/seo-platform-07-scheduler-refresh-v3",
       "commit_sha": "1ccc2f6251c3f50f1bcb2881402e56104f8f2d70",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3801",
@@ -29,14 +84,26 @@
             "status": "passed"
           }
         ],
-        "github": [],
-        "production": []
+        "github": [
+          {
+            "name": "exact-SHA CI",
+            "status": "passed",
+            "details": "Run 32965491261 passed all selected jobs and the exact-SHA receipt for b125faeb901417a52fa75eb1507a8f97f719dcf9."
+          }
+        ],
+        "production": [
+          {
+            "name": "automatic deploy",
+            "status": "failed_closed",
+            "details": "Run 32965731362 passed staging, then production again rejected scheduler discovery with scheduler_identity_count and restored LKG 2117895ad725735ce8f88aad90077e54920a511c."
+          }
+        ]
       },
-      "failure_reason": null,
+      "failure_reason": "Production has no uniquely discoverable Supervisor scheduler program; its existing scheduler runner must be maintained through cron against the current-release symlink.",
       "resume_policy": "continuous_goal",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-08-26T11:51:40Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "database_mutation": false,
       "cms_mutation": false,
@@ -58,6 +125,11 @@
           "at": "2026-08-26T11:50:34Z",
           "status": "pr_open",
           "summary": "Opened authorized third same-scope corrective PR #3801 at validated implementation commit 1ccc2f6251c3f50f1bcb2881402e56104f8f2d70. Mergeability is clean and no manual runtime action was performed."
+        },
+        {
+          "at": "2026-08-26T12:05:10Z",
+          "status": "production_failed_closed",
+          "summary": "PR #3801 merged as b125faeb901417a52fa75eb1507a8f97f719dcf9. Exact-SHA CI and staging passed; production had no unique Supervisor scheduler identity, failed closed, and automatically restored 2117895ad725735ce8f88aad90077e54920a511c."
         }
       ]
     },

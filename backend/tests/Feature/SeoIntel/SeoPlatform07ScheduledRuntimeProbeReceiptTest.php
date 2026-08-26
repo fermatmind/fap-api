@@ -9,6 +9,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use PHPUnit\Framework\Attributes\Test;
+use Symfony\Component\Process\Process;
 use Tests\TestCase;
 
 final class SeoPlatform07ScheduledRuntimeProbeReceiptTest extends TestCase
@@ -94,11 +95,26 @@ final class SeoPlatform07ScheduledRuntimeProbeReceiptTest extends TestCase
     #[Test]
     public function scheduler_contract_uses_existing_control_plane_guards(): void
     {
+        $bootstrap = file_get_contents(base_path('bootstrap/app.php'));
         $kernel = file_get_contents(app_path('Console/Kernel.php'));
 
-        $this->assertStringContainsString('seo:runtime-probe-scheduled --trigger=scheduled --json', $kernel);
-        $this->assertMatchesRegularExpression('/seo:runtime-probe-scheduled[\\s\\S]+everyTenMinutes\(\)[\\s\\S]+withoutOverlapping\(\)[\\s\\S]+onOneServer\(\)/', $kernel);
+        $this->assertStringContainsString('seo:runtime-probe-scheduled --trigger=scheduled --json', $bootstrap);
+        $this->assertMatchesRegularExpression('/seo:runtime-probe-scheduled[\\s\\S]+everyTenMinutes\(\)[\\s\\S]+withoutOverlapping\(\)[\\s\\S]+onOneServer\(\)/', $bootstrap);
+        $this->assertStringNotContainsString('seo:runtime-probe-scheduled', $kernel);
         $this->assertStringNotContainsString('schedule:run', $kernel);
+
+        $process = new Process([PHP_BINARY, 'artisan', 'schedule:list', '--json', '--no-ansi'], base_path());
+        $process->mustRun();
+        $events = json_decode($process->getOutput(), true, flags: JSON_THROW_ON_ERROR);
+        $event = collect($events)->first(
+            fn (array $candidate): bool => str_contains(
+                (string) ($candidate['command'] ?? ''),
+                'seo:runtime-probe-scheduled --trigger=scheduled --json',
+            ),
+        );
+
+        $this->assertIsArray($event);
+        $this->assertSame('*/10 * * * *', $event['expression'] ?? null);
     }
 
     #[Test]
