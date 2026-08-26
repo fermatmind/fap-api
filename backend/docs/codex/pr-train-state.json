@@ -1,14 +1,14 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-26T10:05:00Z",
+  "updated_at": "2026-08-26T10:06:40Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
     "SEO-PLATFORM-07-G": {
       "repo": "fap-api", "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_validation", "branch": "codex/seo-platform-07-g-production-closeout", "commit_sha": null, "pr_url": null,
+      "status": "pr_open", "branch": "codex/seo-platform-07-g-production-closeout", "commit_sha": "db0121b9bb4a063db1351c53bccbe22faf729e13", "pr_url": "https://github.com/fermatmind/fap-api/pull/3797",
       "checks": {
         "dependency": {"status": "passed", "details": "SEO-PLATFORM-07-F merged as 4ed0670be3a461ddc1dad516da64ebe41f706cdf; exact-SHA CI receipt 32953968001 passed."},
         "local": [
@@ -26,7 +26,8 @@
       "production_write_execution": false, "database_mutation": false, "cms_mutation": false,
       "publish_allowed": false, "deploy_allowed": false, "production_readback_allowed": true,
       "history": [
-        {"at": "2026-08-26T10:05:00Z", "status": "local_checks_passed", "summary": "Validated fail-closed six-family bilingual calibration, private negative set, one-deploy three-slot closeout, MySQL-compatible receipt migration and shared API/UI/receipt projection. Read-only precheck found 11/12 selected core entries at 200 and one zh-CN Career redirect; no threshold was lowered. No manual schedule, deployment dispatch or production write was executed."}
+        {"at": "2026-08-26T10:05:00Z", "status": "local_checks_passed", "summary": "Validated fail-closed six-family bilingual calibration, private negative set, one-deploy three-slot closeout, MySQL-compatible receipt migration and shared API/UI/receipt projection. Read-only precheck found 11/12 selected core entries at 200 and one zh-CN Career redirect; no threshold was lowered. No manual schedule, deployment dispatch or production write was executed."},
+        {"at": "2026-08-26T10:06:40Z", "status": "pr_open", "summary": "Opened PR #3797 at validated implementation commit db0121b9bb4a063db1351c53bccbe22faf729e13. Mergeability is clean; exact-SHA CI and automatic deployment run after merge."}
       ]
     },
     "SEO-PLATFORM-07-F": {
