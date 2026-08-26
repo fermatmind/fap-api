@@ -85,7 +85,7 @@ final class OpsShellPolishTest extends TestCase
         app()->setLocale('en');
 
         $this->assertSame('Content', ArticleResource::getNavigationGroup());
-        $this->assertSame('Content', SupportArticleResource::getNavigationGroup());
+        $this->assertSame('Editorial Tools', SupportArticleResource::getNavigationGroup());
         $this->assertSame('Content', ContentPageResource::getNavigationGroup());
         $this->assertSame('Content', MediaAssetResource::getNavigationGroup());
         $this->assertSame('Content', ContentWorkspacePage::getNavigationGroup());
