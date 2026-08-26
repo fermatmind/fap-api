@@ -26,7 +26,7 @@ class CareerGuideResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'title';
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
     protected static ?string $navigationGroup = 'Content';
 
@@ -60,7 +60,7 @@ class CareerGuideResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.group.editorial');
+        return __('ops.group.content');
     }
 
     public static function getNavigationLabel(): string
