@@ -9,10 +9,10 @@
     "SEO-PLATFORM-07-D": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/seo-platform-07-d-runtime-clusters",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "1daafdab6814328ad314f4d7b5163dfe90782751",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3794",
       "checks": {
         "dependency": {"status": "passed", "details": "SEO-PLATFORM-07-C merged as 877303511feed9b8738ea39e230cc338a28d9da9; exact-SHA CI receipt 32951244953 passed."},
         "local": [
@@ -32,7 +32,8 @@
       "publish_allowed": false,
       "deploy_allowed": false,
       "history": [
-        {"at": "2026-08-26T09:14:00Z", "status": "local_checks_passed", "summary": "Validated the exact 07-D runtime cluster and recovery materializer against the existing queue contract. No parallel queue, scheduler, database write, deployment, publication or production operation was executed."}
+        {"at": "2026-08-26T09:14:00Z", "status": "local_checks_passed", "summary": "Validated the exact 07-D runtime cluster and recovery materializer against the existing queue contract. No parallel queue, scheduler, database write, deployment, publication or production operation was executed."},
+        {"at": "2026-08-26T09:16:00Z", "status": "pr_open", "summary": "Opened PR #3794 for the validated 07-D scope at implementation commit 1daafdab6814328ad314f4d7b5163dfe90782751; exact-SHA CI runs after merge."}
       ]
     },
     "SEO-PLATFORM-07-C": {
