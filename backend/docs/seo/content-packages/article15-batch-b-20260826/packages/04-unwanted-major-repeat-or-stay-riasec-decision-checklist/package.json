@@ -1,0 +1,442 @@
+{
+  "schema_version": "fermatmind.article15_content_package.v1",
+  "package_id": "ARTICLE15-BATCH-B-04-unwanted-major-repeat-or-stay-riasec-decision-checklist",
+  "package_order": 4,
+  "status": {
+    "content_package_only": true,
+    "intended_cms_status": "draft",
+    "requires_operator_review": true,
+    "cms_draft_created": false,
+    "publish_allowed": false,
+    "search_submit_allowed": false,
+    "import_ready": false
+  },
+  "bindings": {
+    "baseline_commit": "6f172f279a02ef1b6ac57f59ed88cf99e6235793",
+    "batch_a_manifest_sha256": "48a79cdcfc5b10766b58658aadb601e0682257af56d4fd108ed920a2ed6fa20a",
+    "top100_source_sha256": "e4c9788d6fadff53bc33170299971ab57dbff1810ad1fcdb4f97f5f4ee94d150",
+    "article15_target_set_sha256": "9ccd8cab8b44f10409e0ef3ced944ba663376c84a5032bd74ddba143d88cd35a",
+    "baseline_authority": "production_public_article_api_read_only",
+    "baseline_observed_at": "2026-08-26"
+  },
+  "identity_lock": {
+    "article_id": 74,
+    "translation_group_id": "tg_unwanted_major_repeat_stay_riasec_2026v1",
+    "published_revision_id": 94,
+    "locale": "zh-CN",
+    "slug": "unwanted-major-repeat-or-stay-riasec-decision-checklist",
+    "canonical_url": "https://fermatmind.com/zh/articles/unwanted-major-repeat-or-stay-riasec-decision-checklist",
+    "current_status": "published",
+    "current_is_public": true,
+    "current_is_indexable": true
+  },
+  "current_to_proposed": {
+    "article_id": {
+      "status": "KEEP",
+      "current": 74,
+      "proposed": 74
+    },
+    "translation_group_id": {
+      "status": "KEEP",
+      "current": "tg_unwanted_major_repeat_stay_riasec_2026v1",
+      "proposed": "tg_unwanted_major_repeat_stay_riasec_2026v1"
+    },
+    "published_revision_id": {
+      "status": "KEEP",
+      "current": 94,
+      "proposed": 94,
+      "note": "identity precondition only; no revision write in this task"
+    },
+    "locale": {
+      "status": "KEEP",
+      "current": "zh-CN",
+      "proposed": "zh-CN"
+    },
+    "slug": {
+      "status": "KEEP",
+      "current": "unwanted-major-repeat-or-stay-riasec-decision-checklist",
+      "proposed": "unwanted-major-repeat-or-stay-riasec-decision-checklist"
+    },
+    "canonical_url": {
+      "status": "KEEP",
+      "current": "https://fermatmind.com/zh/articles/unwanted-major-repeat-or-stay-riasec-decision-checklist",
+      "proposed": "https://fermatmind.com/zh/articles/unwanted-major-repeat-or-stay-riasec-decision-checklist"
+    },
+    "publication": {
+      "status": "KEEP",
+      "current": {
+        "status": "published",
+        "is_public": true
+      },
+      "proposed": {
+        "status": "published",
+        "is_public": true
+      }
+    },
+    "title": {
+      "status": "KEEP",
+      "current": "录取专业不理想要不要复读？课程成本、转专业窗口和霍兰德兴趣决策清单",
+      "proposed": "录取专业不理想要不要复读？课程成本、转专业窗口和霍兰德兴趣决策清单"
+    },
+    "h1": {
+      "status": "KEEP",
+      "current": "录取专业不理想要不要复读？课程成本、转专业窗口和霍兰德兴趣决策清单",
+      "proposed": "录取专业不理想要不要复读？课程成本、转专业窗口和霍兰德兴趣决策清单",
+      "note": "CMS title is the page H1; body snapshot contains no H1"
+    },
+    "seo_title": {
+      "status": "KEEP",
+      "current": "录取专业不理想要不要复读？课程、转专业与兴趣清单",
+      "proposed": "录取专业不理想要不要复读？课程、转专业与兴趣清单"
+    },
+    "seo_description": {
+      "status": "KEEP",
+      "current": "录取专业不理想时，先查课程红线、转专业窗口、家庭成本和兴趣排斥度，再比较先读、转专业、辅修、考研转向和复读。",
+      "proposed": "录取专业不理想时，先查课程红线、转专业窗口、家庭成本和兴趣排斥度，再比较先读、转专业、辅修、考研转向和复读。"
+    },
+    "intro": {
+      "status": "KEEP",
+      "current": "录取专业不理想时，先查课程红线、转专业窗口、家庭成本和兴趣排斥度，再比较先读、转专业、辅修、考研转向和复读。",
+      "proposed": "录取专业不理想时，先查课程红线、转专业窗口、家庭成本和兴趣排斥度，再比较先读、转专业、辅修、考研转向和复读。"
+    },
+    "body_markdown": {
+      "status": "CHANGE",
+      "current": {
+        "sha256": "c66f17e4fe28e3b1f28e1c13f288324a346223cf3bbe8947268cc1638b730e20"
+      },
+      "proposed": {
+        "file": "body.zh-CN.md",
+        "sha256": "bd584d6f8213f1d4c46b2db085f087137d38701b6d5331aa1f11d6a868d28697"
+      }
+    },
+    "faq": {
+      "status": "KEEP",
+      "current": [
+        {
+          "question": "录取专业不理想，是不是一定要复读？",
+          "answer": "不是。复读只是路径之一，不是默认答案。先核查课程成本、转专业窗口、家庭成本、复读风险和兴趣排斥度，再决定是否进入复读讨论。"
+        },
+        {
+          "question": "不喜欢专业但学校不错，要不要先读？",
+          "answer": "要看专业的核心课程是否能承受、学校资源是否能为你提供项目或辅修机会，以及转专业或考研转向是否有现实路径。学校不错不等于专业风险自动消失。"
+        },
+        {
+          "question": "先读大学再转专业现实吗？",
+          "answer": "取决于学校规则和目标学院门槛。要查申请时间、成绩要求、挂科限制、笔试面试、转入名额、跨学院限制，以及转不成后的辅修或项目备选。"
+        },
+        {
+          "question": "霍兰德职业兴趣测试能决定我要不要复读吗？",
+          "answer": "不能。霍兰德/RIASEC 只能帮助你识别兴趣倾向和工作活动偏好，不能决定复读、转专业、升学或职业结果。它只能作为决策清单中的一列证据。"
+        },
+        {
+          "question": "如果父母不同意复读怎么办？",
+          "answer": "不要只说“不喜欢”。把培养方案、核心课程、转专业政策、复读成本、再考不确定性、第一学期验证计划和备选路径列成证据表，再谈是否值得复读。"
+        },
+        {
+          "question": "转专业、辅修和考研转向哪个更稳？",
+          "answer": "没有统一答案。转专业受规则和名额限制；辅修能补能力但不替代主修；考研转向周期更长，要求目标明确和持续准备。要结合学校政策和个人执行能力判断。"
+        },
+        {
+          "question": "什么时候才需要认真考虑复读？",
+          "answer": "当核心课程长期不可接受、转专业和辅修路径都很窄、家庭与心理成本可承受、再考目标明确且复读规则允许时，复读才进入严肃讨论区。"
+        }
+      ],
+      "proposed": [
+        {
+          "question": "录取专业不理想，是不是一定要复读？",
+          "answer": "不是。复读只是路径之一，不是默认答案。先核查课程成本、转专业窗口、家庭成本、复读风险和兴趣排斥度，再决定是否进入复读讨论。"
+        },
+        {
+          "question": "不喜欢专业但学校不错，要不要先读？",
+          "answer": "要看专业的核心课程是否能承受、学校资源是否能为你提供项目或辅修机会，以及转专业或考研转向是否有现实路径。学校不错不等于专业风险自动消失。"
+        },
+        {
+          "question": "先读大学再转专业现实吗？",
+          "answer": "取决于学校规则和目标学院门槛。要查申请时间、成绩要求、挂科限制、笔试面试、转入名额、跨学院限制，以及转不成后的辅修或项目备选。"
+        },
+        {
+          "question": "霍兰德职业兴趣测试能决定我要不要复读吗？",
+          "answer": "不能。霍兰德/RIASEC 只能帮助你识别兴趣倾向和工作活动偏好，不能决定复读、转专业、升学或职业结果。它只能作为决策清单中的一列证据。"
+        },
+        {
+          "question": "如果父母不同意复读怎么办？",
+          "answer": "不要只说“不喜欢”。把培养方案、核心课程、转专业政策、复读成本、再考不确定性、第一学期验证计划和备选路径列成证据表，再谈是否值得复读。"
+        },
+        {
+          "question": "转专业、辅修和考研转向哪个更稳？",
+          "answer": "没有统一答案。转专业受规则和名额限制；辅修能补能力但不替代主修；考研转向周期更长，要求目标明确和持续准备。要结合学校政策和个人执行能力判断。"
+        },
+        {
+          "question": "什么时候才需要认真考虑复读？",
+          "answer": "当核心课程长期不可接受、转专业和辅修路径都很窄、家庭与心理成本可承受、再考目标明确且复读规则允许时，复读才进入严肃讨论区。"
+        }
+      ]
+    },
+    "answer_surface_v1": {
+      "status": "CHANGE",
+      "current": {
+        "source": "current public answer_surface_v1.faq_blocks",
+        "faq_count": 2,
+        "faq_items": [
+          {
+            "question": "什么时候适合阅读这篇文章？",
+            "answer": "当你想把公开内容和测评、人格画像或职业建议串起来时，先从这篇文章的核心摘要开始。"
+          },
+          {
+            "question": "这篇文章会替代正式判断吗？",
+            "answer": "不会。它只提供公开解释和行动线索，不替代医疗、法律或专业诊断。"
+          }
+        ]
+      },
+      "proposed": {
+        "policy": "editor_supplied",
+        "faq_items": [
+          {
+            "question": "录取专业不理想，是不是一定要复读？",
+            "answer": "不是。复读只是路径之一，不是默认答案。先核查课程成本、转专业窗口、家庭成本、复读风险和兴趣排斥度，再决定是否进入复读讨论。"
+          },
+          {
+            "question": "不喜欢专业但学校不错，要不要先读？",
+            "answer": "要看专业的核心课程是否能承受、学校资源是否能为你提供项目或辅修机会，以及转专业或考研转向是否有现实路径。学校不错不等于专业风险自动消失。"
+          },
+          {
+            "question": "先读大学再转专业现实吗？",
+            "answer": "取决于学校规则和目标学院门槛。要查申请时间、成绩要求、挂科限制、笔试面试、转入名额、跨学院限制，以及转不成后的辅修或项目备选。"
+          },
+          {
+            "question": "霍兰德职业兴趣测试能决定我要不要复读吗？",
+            "answer": "不能。霍兰德/RIASEC 只能帮助你识别兴趣倾向和工作活动偏好，不能决定复读、转专业、升学或职业结果。它只能作为决策清单中的一列证据。"
+          },
+          {
+            "question": "如果父母不同意复读怎么办？",
+            "answer": "不要只说“不喜欢”。把培养方案、核心课程、转专业政策、复读成本、再考不确定性、第一学期验证计划和备选路径列成证据表，再谈是否值得复读。"
+          },
+          {
+            "question": "转专业、辅修和考研转向哪个更稳？",
+            "answer": "没有统一答案。转专业受规则和名额限制；辅修能补能力但不替代主修；考研转向周期更长，要求目标明确和持续准备。要结合学校政策和个人执行能力判断。"
+          },
+          {
+            "question": "什么时候才需要认真考虑复读？",
+            "answer": "当核心课程长期不可接受、转专业和辅修路径都很窄、家庭与心理成本可承受、再考目标明确且复读规则允许时，复读才进入严肃讨论区。"
+          }
+        ],
+        "visible_faq_count": 7,
+        "expected_faq_schema_mainEntity_count": 7
+      },
+      "note": "visible FAQ and revision-bound answer-surface draft must remain identical"
+    },
+    "primary_cta": {
+      "status": "CHANGE",
+      "current": [
+        {
+          "key": "article_cta_1",
+          "title": "先做霍兰德职业兴趣测试，把兴趣结果放进专业决策表",
+          "body": null,
+          "href": "/zh/tests/holland-career-interest-test-riasec",
+          "kind": "start_test"
+        },
+        {
+          "key": "article_cta_2",
+          "title": "开始霍兰德 / RIASEC 职业兴趣测试",
+          "body": null,
+          "href": "/zh/tests/holland-career-interest-test-riasec",
+          "kind": "start_test"
+        }
+      ],
+      "proposed": [
+        {
+          "label": "开始霍兰德 / RIASEC 职业兴趣测试",
+          "href": "/zh/tests/holland-career-interest-test-riasec",
+          "kind": "start_test",
+          "intent": "test_intent_handoff"
+        }
+      ],
+      "note": "exactly one primary CTA; ordinary contextual body links are not CTA slots"
+    },
+    "canonical_internal_links": {
+      "status": "KEEP",
+      "current": [
+        {
+          "href": "/zh/tests/holland-career-interest-test-riasec",
+          "role": "primary_cta",
+          "owner": "test_landing"
+        }
+      ],
+      "proposed": [
+        {
+          "href": "/zh/tests/holland-career-interest-test-riasec",
+          "role": "primary_cta",
+          "owner": "test_landing"
+        }
+      ]
+    },
+    "related_test_slug": {
+      "status": "KEEP",
+      "current": "holland-career-interest-test-riasec",
+      "proposed": "holland-career-interest-test-riasec"
+    },
+    "reading_minutes": {
+      "status": "KEEP",
+      "current": 12,
+      "proposed": 12
+    },
+    "schema": {
+      "status": "KEEP",
+      "current": {
+        "article_schema_gate_v1": {
+          "enabled": true
+        },
+        "breadcrumb_schema_gate_v1": {
+          "enabled": true
+        },
+        "faq_schema_gate_v1": {
+          "enabled": false
+        }
+      },
+      "proposed": {
+        "article_schema_gate_v1": {
+          "enabled": true
+        },
+        "breadcrumb_schema_gate_v1": {
+          "enabled": true
+        },
+        "faq_schema_gate_v1": {
+          "enabled": false
+        }
+      }
+    },
+    "hreflang": {
+      "status": "KEEP",
+      "current": {
+        "enabled": true,
+        "policy": "reciprocal_counterparts_verified"
+      },
+      "proposed": {
+        "enabled": true,
+        "policy": "reciprocal_counterparts_verified"
+      }
+    },
+    "sitemap": {
+      "status": "KEEP",
+      "current": true,
+      "proposed": true
+    },
+    "llms": {
+      "status": "KEEP",
+      "current": true,
+      "proposed": true
+    },
+    "search_channel": {
+      "status": "KEEP",
+      "current": "HOLD",
+      "proposed": "HOLD"
+    },
+    "revalidation": {
+      "status": "KEEP",
+      "current": "HOLD",
+      "proposed": "HOLD"
+    }
+  },
+  "body_patch": {
+    "policy": "minimal_editorial_patch_over_locked_baseline_snapshot",
+    "operations": [
+      "KEEP title/H1/SEO title/description/intro/正文主体/7 FAQ/reading_minutes/RIASEC related_test_slug",
+      "CHANGE answer_surface_v1 从通用 2 FAQ 同步为正文现有 7 FAQ",
+      "CHANGE 正文两个重复 RIASEC CTA 合并为一个"
+    ],
+    "body_file": "body.zh-CN.md",
+    "current_body_sha256": "c66f17e4fe28e3b1f28e1c13f288324a346223cf3bbe8947268cc1638b730e20",
+    "proposed_body_sha256": "bd584d6f8213f1d4c46b2db085f087137d38701b6d5331aa1f11d6a868d28697"
+  },
+  "cta": {
+    "primary_count": 1,
+    "primary": {
+      "label": "开始霍兰德 / RIASEC 职业兴趣测试",
+      "href": "/zh/tests/holland-career-interest-test-riasec",
+      "kind": "start_test",
+      "intent": "test_intent_handoff"
+    },
+    "tracking_expectation": "article_to_test_click",
+    "public_canonical_route_only": true
+  },
+  "internal_link_plan": [
+    {
+      "href": "/zh/tests/holland-career-interest-test-riasec",
+      "role": "primary_cta",
+      "owner": "test_landing"
+    }
+  ],
+  "full_body_internal_links": {
+    "unique_count": 1,
+    "hrefs": [
+      "/zh/tests/holland-career-interest-test-riasec"
+    ],
+    "validation_scope": "complete_body_markdown_not_only_internal_link_plan"
+  },
+  "claim_boundary": "只拥有复读、先读和转专业的证据化决策；高考调剂、RIASEC 模型与测试意图仍归各自 owner；不承诺录取、转专业成功、职业适配或结果保证。",
+  "forbidden_claims": [
+    "hidden_query_inference",
+    "diagnosis",
+    "ability_prediction",
+    "career_determination",
+    "admission_prediction",
+    "relationship_prediction",
+    "hiring_screening",
+    "official_endorsement"
+  ],
+  "private_url_guard": {
+    "status": "HOLD",
+    "forbidden_route_families": [
+      "result",
+      "results",
+      "order",
+      "orders",
+      "share",
+      "pay",
+      "payment",
+      "history",
+      "private",
+      "token",
+      "session"
+    ],
+    "public_canonical_only": true
+  },
+  "references": [
+    {
+      "title": "Current published article revision 74/94",
+      "url": "https://fermatmind.com/zh/articles/unwanted-major-repeat-or-stay-riasec-decision-checklist",
+      "authority": "FermatMind CMS public article authority",
+      "use_boundary": "本批次只做 CTA 去重与 answer-surface FAQ 对齐，不新增院校、地区、录取或转专业政策主张。"
+    },
+    {
+      "title": "Holland career interest test landing",
+      "url": "https://fermatmind.com/zh/tests/holland-career-interest-test-riasec",
+      "authority": "FermatMind public test landing authority",
+      "use_boundary": "仅承接测试入口意图；兴趣结果不能决定复读、专业或职业。"
+    }
+  ],
+  "adapter_requirements": {
+    "required_before_later_import": true,
+    "revision_bound": true,
+    "fields": [
+      "reading_minutes",
+      "related_test_slug",
+      "answer_surface_v1.faq_items"
+    ],
+    "current_existing_article_updater_supports_all": false,
+    "import_state_must_remain_false": true
+  },
+  "downstream_holds": {
+    "identity": true,
+    "publication": true,
+    "schema": true,
+    "hreflang": true,
+    "sitemap": true,
+    "llms": true,
+    "search_channel": true,
+    "revalidation": true,
+    "cms_import": true,
+    "cache_refresh": true
+  },
+  "package_sha256": "3418ba5d13ce8f7944ada923a27f7c043215c9b6f76a6b822bbb702fd8ba2aef"
+}

@@ -1,0 +1,446 @@
+{
+  "schema_version": "fermatmind.article15_content_package.v1",
+  "package_id": "ARTICLE15-BATCH-B-03-which-love-script-fits-you-best",
+  "package_order": 3,
+  "status": {
+    "content_package_only": true,
+    "intended_cms_status": "draft",
+    "requires_operator_review": true,
+    "cms_draft_created": false,
+    "publish_allowed": false,
+    "search_submit_allowed": false,
+    "import_ready": false
+  },
+  "bindings": {
+    "baseline_commit": "6f172f279a02ef1b6ac57f59ed88cf99e6235793",
+    "batch_a_manifest_sha256": "48a79cdcfc5b10766b58658aadb601e0682257af56d4fd108ed920a2ed6fa20a",
+    "top100_source_sha256": "e4c9788d6fadff53bc33170299971ab57dbff1810ad1fcdb4f97f5f4ee94d150",
+    "article15_target_set_sha256": "9ccd8cab8b44f10409e0ef3ced944ba663376c84a5032bd74ddba143d88cd35a",
+    "baseline_authority": "production_public_article_api_read_only",
+    "baseline_observed_at": "2026-08-26"
+  },
+  "identity_lock": {
+    "article_id": 16,
+    "translation_group_id": "article-16",
+    "published_revision_id": 435,
+    "locale": "zh-CN",
+    "slug": "which-love-script-fits-you-best",
+    "canonical_url": "https://fermatmind.com/zh/articles/which-love-script-fits-you-best",
+    "current_status": "published",
+    "current_is_public": true,
+    "current_is_indexable": true
+  },
+  "current_to_proposed": {
+    "article_id": {
+      "status": "KEEP",
+      "current": 16,
+      "proposed": 16
+    },
+    "translation_group_id": {
+      "status": "KEEP",
+      "current": "article-16",
+      "proposed": "article-16"
+    },
+    "published_revision_id": {
+      "status": "KEEP",
+      "current": 435,
+      "proposed": 435,
+      "note": "identity precondition only; no revision write in this task"
+    },
+    "locale": {
+      "status": "KEEP",
+      "current": "zh-CN",
+      "proposed": "zh-CN"
+    },
+    "slug": {
+      "status": "KEEP",
+      "current": "which-love-script-fits-you-best",
+      "proposed": "which-love-script-fits-you-best"
+    },
+    "canonical_url": {
+      "status": "KEEP",
+      "current": "https://fermatmind.com/zh/articles/which-love-script-fits-you-best",
+      "proposed": "https://fermatmind.com/zh/articles/which-love-script-fits-you-best"
+    },
+    "publication": {
+      "status": "KEEP",
+      "current": {
+        "status": "published",
+        "is_public": true
+      },
+      "proposed": {
+        "status": "published",
+        "is_public": true
+      }
+    },
+    "title": {
+      "status": "KEEP",
+      "current": "爱情三角理论：亲密、激情与承诺如何组成不同关系状态",
+      "proposed": "爱情三角理论：亲密、激情与承诺如何组成不同关系状态"
+    },
+    "h1": {
+      "status": "KEEP",
+      "current": "爱情三角理论：亲密、激情与承诺如何组成不同关系状态",
+      "proposed": "爱情三角理论：亲密、激情与承诺如何组成不同关系状态",
+      "note": "CMS title is the page H1; body snapshot contains no H1"
+    },
+    "seo_title": {
+      "status": "KEEP",
+      "current": "爱情三角理论：亲密、激情与承诺如何组成不同关系状态",
+      "proposed": "爱情三角理论：亲密、激情与承诺如何组成不同关系状态"
+    },
+    "seo_description": {
+      "status": "KEEP",
+      "current": "系统解释 Sternberg 爱情三角理论及亲密、激情、承诺的不同组合，附现实三角练习与关系边界，不做伴侣匹配预测。",
+      "proposed": "系统解释 Sternberg 爱情三角理论及亲密、激情、承诺的不同组合，附现实三角练习与关系边界，不做伴侣匹配预测。"
+    },
+    "intro": {
+      "status": "KEEP",
+      "current": "爱情三角理论帮助描述一段关系中的亲密、激情与承诺，但不能测出命定伴侣或预测关系结局。",
+      "proposed": "爱情三角理论帮助描述一段关系中的亲密、激情与承诺，但不能测出命定伴侣或预测关系结局。"
+    },
+    "body_markdown": {
+      "status": "CHANGE",
+      "current": {
+        "sha256": "5b97f26d12cf222b559c2eefbb79a667ed3b1175b71f9571c681ad730d17f288"
+      },
+      "proposed": {
+        "file": "body.zh-CN.md",
+        "sha256": "7627660dcef05c91a837c672e8a1c97050734dbdec5d67e10bd80d51d4f7d39d"
+      }
+    },
+    "faq": {
+      "status": "KEEP",
+      "current": [
+        {
+          "question": "爱情三角理论可以测出最适合我的伴侣吗？",
+          "answer": "不可以。它帮助描述关系成分，不预测具体对象，也不能代替对价值观、安全、边界和现实条件的判断。"
+        },
+        {
+          "question": "七种爱情类型是固定的吗？",
+          "answer": "不是。更准确的说法是不同组合形成的关系状态。亲密、激情和承诺会随阶段与情境变化。"
+        },
+        {
+          "question": "三个成分哪一个最重要？",
+          "answer": "没有适用于所有关系的单一答案。不同阶段的重点可能不同，但任何长期关系都需要双方对期待和投入有足够清楚的共识。"
+        },
+        {
+          "question": "可以用 MBTI 判断双方的爱情类型吗？",
+          "answer": "不建议。MBTI-style 偏好最多帮助讨论沟通和决策差异，不能推出关系质量或“最佳匹配”。"
+        }
+      ],
+      "proposed": [
+        {
+          "question": "爱情三角理论可以测出最适合我的伴侣吗？",
+          "answer": "不可以。它帮助描述关系成分，不预测具体对象，也不能代替对价值观、安全、边界和现实条件的判断。"
+        },
+        {
+          "question": "七种爱情类型是固定的吗？",
+          "answer": "不是。更准确的说法是不同组合形成的关系状态。亲密、激情和承诺会随阶段与情境变化。"
+        },
+        {
+          "question": "三个成分哪一个最重要？",
+          "answer": "没有适用于所有关系的单一答案。不同阶段的重点可能不同，但任何长期关系都需要双方对期待和投入有足够清楚的共识。"
+        },
+        {
+          "question": "可以用 MBTI 判断双方的爱情类型吗？",
+          "answer": "不建议。MBTI-style 偏好最多帮助讨论沟通和决策差异，不能推出关系质量或“最佳匹配”。"
+        }
+      ]
+    },
+    "answer_surface_v1": {
+      "status": "KEEP",
+      "current": {
+        "policy": "editor_supplied",
+        "faq_items": [
+          {
+            "question": "爱情三角理论可以测出最适合我的伴侣吗？",
+            "answer": "不可以。它帮助描述关系成分，不预测具体对象，也不能代替对价值观、安全、边界和现实条件的判断。"
+          },
+          {
+            "question": "七种爱情类型是固定的吗？",
+            "answer": "不是。更准确的说法是不同组合形成的关系状态。亲密、激情和承诺会随阶段与情境变化。"
+          },
+          {
+            "question": "三个成分哪一个最重要？",
+            "answer": "没有适用于所有关系的单一答案。不同阶段的重点可能不同，但任何长期关系都需要双方对期待和投入有足够清楚的共识。"
+          },
+          {
+            "question": "可以用 MBTI 判断双方的爱情类型吗？",
+            "answer": "不建议。MBTI-style 偏好最多帮助讨论沟通和决策差异，不能推出关系质量或“最佳匹配”。"
+          }
+        ],
+        "visible_faq_count": 4,
+        "expected_faq_schema_mainEntity_count": 4
+      },
+      "proposed": {
+        "policy": "editor_supplied",
+        "faq_items": [
+          {
+            "question": "爱情三角理论可以测出最适合我的伴侣吗？",
+            "answer": "不可以。它帮助描述关系成分，不预测具体对象，也不能代替对价值观、安全、边界和现实条件的判断。"
+          },
+          {
+            "question": "七种爱情类型是固定的吗？",
+            "answer": "不是。更准确的说法是不同组合形成的关系状态。亲密、激情和承诺会随阶段与情境变化。"
+          },
+          {
+            "question": "三个成分哪一个最重要？",
+            "answer": "没有适用于所有关系的单一答案。不同阶段的重点可能不同，但任何长期关系都需要双方对期待和投入有足够清楚的共识。"
+          },
+          {
+            "question": "可以用 MBTI 判断双方的爱情类型吗？",
+            "answer": "不建议。MBTI-style 偏好最多帮助讨论沟通和决策差异，不能推出关系质量或“最佳匹配”。"
+          }
+        ],
+        "visible_faq_count": 4,
+        "expected_faq_schema_mainEntity_count": 4
+      }
+    },
+    "primary_cta": {
+      "status": "CHANGE",
+      "current": [
+        {
+          "key": "articles_index",
+          "title": "继续浏览文章",
+          "body": "回到文章目录，继续扩展公开内容阅读链路。",
+          "href": "/zh/articles",
+          "kind": "content_continue"
+        },
+        {
+          "key": "topic_hub",
+          "title": "进入主题聚合",
+          "body": "把文章阅读继续到更结构化的主题入口。",
+          "href": "/zh/topics",
+          "kind": "discover"
+        },
+        {
+          "key": "start_test",
+          "title": "开始测试",
+          "body": "如果你想把阅读转成自我测量，可以从测试入口开始。",
+          "href": "/zh/tests/mbti-personality-test-16-personality-types",
+          "kind": "start_test"
+        }
+      ],
+      "proposed": [
+        {
+          "label": "继续阅读情人节约会行动指南",
+          "href": "/zh/articles/best-valentines-date-by-personality-and-relationship-science",
+          "kind": "content_continue",
+          "intent": "content_continue"
+        }
+      ],
+      "note": "exactly one primary CTA; ordinary contextual body links are not CTA slots"
+    },
+    "canonical_internal_links": {
+      "status": "CHANGE",
+      "current": [
+        {
+          "href": "/zh/articles",
+          "role": "primary_cta",
+          "owner": "current_public_surface"
+        },
+        {
+          "href": "/zh/articles/best-valentines-date-by-personality-and-relationship-science",
+          "role": "context",
+          "owner": "current_public_surface"
+        },
+        {
+          "href": "/zh/tests/mbti-personality-test-16-personality-types",
+          "role": "primary_cta",
+          "owner": "current_public_surface"
+        },
+        {
+          "href": "/zh/topics",
+          "role": "primary_cta",
+          "owner": "current_public_surface"
+        }
+      ],
+      "proposed": [
+        {
+          "href": "/zh/articles/best-valentines-date-by-personality-and-relationship-science",
+          "role": "primary_cta",
+          "owner": "related_article"
+        }
+      ]
+    },
+    "related_test_slug": {
+      "status": "KEEP",
+      "current": null,
+      "proposed": null
+    },
+    "reading_minutes": {
+      "status": "CHANGE",
+      "current": 4,
+      "proposed": 5,
+      "note": "operator-locked ranking-protection value; existing-article updater does not support this field"
+    },
+    "schema": {
+      "status": "KEEP",
+      "current": {
+        "article_schema_gate_v1": {
+          "enabled": true
+        },
+        "breadcrumb_schema_gate_v1": {
+          "enabled": true
+        },
+        "faq_schema_gate_v1": {
+          "enabled": true
+        }
+      },
+      "proposed": {
+        "article_schema_gate_v1": {
+          "enabled": true
+        },
+        "breadcrumb_schema_gate_v1": {
+          "enabled": true
+        },
+        "faq_schema_gate_v1": {
+          "enabled": true
+        }
+      }
+    },
+    "hreflang": {
+      "status": "KEEP",
+      "current": {
+        "enabled": false,
+        "policy": "no_hreflang",
+        "reason": "no_direct_english_counterpart_approved"
+      },
+      "proposed": {
+        "enabled": false,
+        "policy": "no_hreflang",
+        "reason": "no_direct_english_counterpart_approved"
+      }
+    },
+    "sitemap": {
+      "status": "KEEP",
+      "current": true,
+      "proposed": true
+    },
+    "llms": {
+      "status": "KEEP",
+      "current": true,
+      "proposed": true
+    },
+    "search_channel": {
+      "status": "KEEP",
+      "current": "HOLD",
+      "proposed": "HOLD"
+    },
+    "revalidation": {
+      "status": "KEEP",
+      "current": "HOLD",
+      "proposed": "HOLD"
+    }
+  },
+  "body_patch": {
+    "policy": "minimal_editorial_patch_over_locked_baseline_snapshot",
+    "operations": [
+      "KEEP title/H1/SEO title/description/正文结构/4 FAQ/related_test_slug=null",
+      "CHANGE 首屏增加固定的现实三角/理想三角行动句",
+      "CHANGE 3 个 answer-surface CTA 收敛为一个相关内容 CTA",
+      "CHANGE reading_minutes 4→5"
+    ],
+    "body_file": "body.zh-CN.md",
+    "current_body_sha256": "5b97f26d12cf222b559c2eefbb79a667ed3b1175b71f9571c681ad730d17f288",
+    "proposed_body_sha256": "7627660dcef05c91a837c672e8a1c97050734dbdec5d67e10bd80d51d4f7d39d"
+  },
+  "cta": {
+    "primary_count": 1,
+    "primary": {
+      "label": "继续阅读情人节约会行动指南",
+      "href": "/zh/articles/best-valentines-date-by-personality-and-relationship-science",
+      "kind": "content_continue",
+      "intent": "content_continue"
+    },
+    "tracking_expectation": "article_to_article_click",
+    "public_canonical_route_only": true
+  },
+  "internal_link_plan": [
+    {
+      "href": "/zh/articles/best-valentines-date-by-personality-and-relationship-science",
+      "role": "primary_cta",
+      "owner": "related_article"
+    }
+  ],
+  "full_body_internal_links": {
+    "unique_count": 1,
+    "hrefs": [
+      "/zh/articles/best-valentines-date-by-personality-and-relationship-science"
+    ],
+    "validation_scope": "complete_body_markdown_not_only_internal_link_plan"
+  },
+  "claim_boundary": "只拥有 Sternberg 亲密、激情、承诺三成分及关系状态解释；不得承诺伴侣匹配、命定对象、关系质量或关系结局预测，不强行绑定人格测试。",
+  "forbidden_claims": [
+    "hidden_query_inference",
+    "diagnosis",
+    "ability_prediction",
+    "career_determination",
+    "admission_prediction",
+    "relationship_prediction",
+    "hiring_screening",
+    "official_endorsement"
+  ],
+  "private_url_guard": {
+    "status": "HOLD",
+    "forbidden_route_families": [
+      "result",
+      "results",
+      "order",
+      "orders",
+      "share",
+      "pay",
+      "payment",
+      "history",
+      "private",
+      "token",
+      "session"
+    ],
+    "public_canonical_only": true
+  },
+  "references": [
+    {
+      "title": "A triangular theory of love",
+      "url": "https://doi.org/10.1037/0033-295X.93.2.119",
+      "authority": "Psychological Review",
+      "use_boundary": "支持亲密、激情、承诺三成分理论，不支持伴侣匹配或关系结局预测。"
+    },
+    {
+      "title": "Love theory overview",
+      "url": "https://www.robertjsternberg.com/love/",
+      "authority": "Robert J. Sternberg",
+      "use_boundary": "用于理论公开介绍，不把关系状态当作固定人格类型。"
+    },
+    {
+      "title": "Intimacy, passion and commitment in adult romantic relationships",
+      "url": "https://doi.org/10.1177/0265407592091002",
+      "authority": "Journal of Social and Personal Relationships",
+      "use_boundary": "支持三成分研究背景，不预测具体关系结果。"
+    }
+  ],
+  "adapter_requirements": {
+    "required_before_later_import": true,
+    "revision_bound": true,
+    "fields": [
+      "reading_minutes",
+      "related_test_slug",
+      "answer_surface_v1.faq_items"
+    ],
+    "current_existing_article_updater_supports_all": false,
+    "import_state_must_remain_false": true
+  },
+  "downstream_holds": {
+    "identity": true,
+    "publication": true,
+    "schema": true,
+    "hreflang": true,
+    "sitemap": true,
+    "llms": true,
+    "search_channel": true,
+    "revalidation": true,
+    "cms_import": true,
+    "cache_refresh": true
+  },
+  "package_sha256": "701d3391a8d23cb19566e9a31ab61039a1e6d2f887c27878776211b97825e3c8"
+}

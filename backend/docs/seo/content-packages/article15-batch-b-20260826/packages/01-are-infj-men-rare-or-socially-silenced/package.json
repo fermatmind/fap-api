@@ -1,0 +1,474 @@
+{
+  "schema_version": "fermatmind.article15_content_package.v1",
+  "package_id": "ARTICLE15-BATCH-B-01-are-infj-men-rare-or-socially-silenced",
+  "package_order": 1,
+  "status": {
+    "content_package_only": true,
+    "intended_cms_status": "draft",
+    "requires_operator_review": true,
+    "cms_draft_created": false,
+    "publish_allowed": false,
+    "search_submit_allowed": false,
+    "import_ready": false
+  },
+  "bindings": {
+    "baseline_commit": "6f172f279a02ef1b6ac57f59ed88cf99e6235793",
+    "batch_a_manifest_sha256": "48a79cdcfc5b10766b58658aadb601e0682257af56d4fd108ed920a2ed6fa20a",
+    "top100_source_sha256": "e4c9788d6fadff53bc33170299971ab57dbff1810ad1fcdb4f97f5f4ee94d150",
+    "article15_target_set_sha256": "9ccd8cab8b44f10409e0ef3ced944ba663376c84a5032bd74ddba143d88cd35a",
+    "baseline_authority": "production_public_article_api_read_only",
+    "baseline_observed_at": "2026-08-26"
+  },
+  "identity_lock": {
+    "article_id": 11,
+    "translation_group_id": "article-11",
+    "published_revision_id": 436,
+    "locale": "zh-CN",
+    "slug": "are-infj-men-rare-or-socially-silenced",
+    "canonical_url": "https://fermatmind.com/zh/articles/are-infj-men-rare-or-socially-silenced",
+    "current_status": "published",
+    "current_is_public": true,
+    "current_is_indexable": true
+  },
+  "current_to_proposed": {
+    "article_id": {
+      "status": "KEEP",
+      "current": 11,
+      "proposed": 11
+    },
+    "translation_group_id": {
+      "status": "KEEP",
+      "current": "article-11",
+      "proposed": "article-11"
+    },
+    "published_revision_id": {
+      "status": "KEEP",
+      "current": 436,
+      "proposed": 436,
+      "note": "identity precondition only; no revision write in this task"
+    },
+    "locale": {
+      "status": "KEEP",
+      "current": "zh-CN",
+      "proposed": "zh-CN"
+    },
+    "slug": {
+      "status": "KEEP",
+      "current": "are-infj-men-rare-or-socially-silenced",
+      "proposed": "are-infj-men-rare-or-socially-silenced"
+    },
+    "canonical_url": {
+      "status": "KEEP",
+      "current": "https://fermatmind.com/zh/articles/are-infj-men-rare-or-socially-silenced",
+      "proposed": "https://fermatmind.com/zh/articles/are-infj-men-rare-or-socially-silenced"
+    },
+    "publication": {
+      "status": "KEEP",
+      "current": {
+        "status": "published",
+        "is_public": true
+      },
+      "proposed": {
+        "status": "published",
+        "is_public": true
+      }
+    },
+    "title": {
+      "status": "KEEP",
+      "current": "INFJ 男性为什么常被认为少见？数据来源、性别规范与类型误读",
+      "proposed": "INFJ 男性为什么常被认为少见？数据来源、性别规范与类型误读"
+    },
+    "h1": {
+      "status": "KEEP",
+      "current": "INFJ 男性为什么常被认为少见？数据来源、性别规范与类型误读",
+      "proposed": "INFJ 男性为什么常被认为少见？数据来源、性别规范与类型误读",
+      "note": "CMS title is the page H1; body snapshot contains no H1"
+    },
+    "seo_title": {
+      "status": "KEEP",
+      "current": "INFJ 男性为什么常被认为少见？数据来源与类型误读",
+      "proposed": "INFJ 男性为什么常被认为少见？数据来源与类型误读"
+    },
+    "seo_description": {
+      "status": "KEEP",
+      "current": "INFJ 男性真的少见吗？本文区分测试样本、人口比例、性别表达规范和可见度偏差，不把高敏感或情绪克制等同于 INFJ。",
+      "proposed": "INFJ 男性真的少见吗？本文区分测试样本、人口比例、性别表达规范和可见度偏差，不把高敏感或情绪克制等同于 INFJ。"
+    },
+    "intro": {
+      "status": "KEEP",
+      "current": "INFJ 男性的公开比例依赖具体样本与工具；性别规范可能影响表达和可见度，却不能证明大量 INFJ 被隐藏。",
+      "proposed": "INFJ 男性的公开比例依赖具体样本与工具；性别规范可能影响表达和可见度，却不能证明大量 INFJ 被隐藏。"
+    },
+    "body_markdown": {
+      "status": "KEEP",
+      "current": {
+        "sha256": "663d92e7d8bcdefd5a91640e81b5c172e84c8820bcc4f8a0d7239fc388c54d05"
+      },
+      "proposed": {
+        "file": "body.zh-CN.md",
+        "sha256": "663d92e7d8bcdefd5a91640e81b5c172e84c8820bcc4f8a0d7239fc388c54d05"
+      },
+      "note": "full Markdown bytes preserved; repository file normalization adds one trailing LF to the public API string"
+    },
+    "faq": {
+      "status": "KEEP",
+      "current": [
+        {
+          "question": "INFJ 男性到底占多少？",
+          "answer": "公开资料中存在不同数字，但它们依赖特定样本、工具和地区。没有足够证据时，应写明来源限制，而不是给出全球或中国男性的确定比例。"
+        },
+        {
+          "question": "社会压力会让 INFJ 男性测成别的类型吗？",
+          "answer": "社会期望可能影响自我表达和答题方式，但类型变化也可能来自分界线、状态、题目理解和测量误差。不能把所有变化归因于社会压抑。"
+        },
+        {
+          "question": "高敏感男性就是 INFJ 吗？",
+          "answer": "不是。高敏感、内向、共情和 INFJ 属于不同概念。一个人可能同时符合若干描述，也可能只符合其中一项。"
+        },
+        {
+          "question": "INFJ 男性更适合某些职业吗？",
+          "answer": "类型可以帮助提出工作环境偏好的问题，但不能预测能力或职业成功。职业探索还应结合兴趣、技能、机会、价值观和现实约束。"
+        },
+        {
+          "question": "怎样判断结果是否适合自己？",
+          "answer": "检查四组偏好在不同场景中的证据和反例，尤其关注接近分界线的维度。把结果当作工作假设，不要为了符合网络画像而修改自己的经历。"
+        }
+      ],
+      "proposed": [
+        {
+          "question": "INFJ 男性到底占多少？",
+          "answer": "公开资料中存在不同数字，但它们依赖特定样本、工具和地区。没有足够证据时，应写明来源限制，而不是给出全球或中国男性的确定比例。"
+        },
+        {
+          "question": "社会压力会让 INFJ 男性测成别的类型吗？",
+          "answer": "社会期望可能影响自我表达和答题方式，但类型变化也可能来自分界线、状态、题目理解和测量误差。不能把所有变化归因于社会压抑。"
+        },
+        {
+          "question": "高敏感男性就是 INFJ 吗？",
+          "answer": "不是。高敏感、内向、共情和 INFJ 属于不同概念。一个人可能同时符合若干描述，也可能只符合其中一项。"
+        },
+        {
+          "question": "INFJ 男性更适合某些职业吗？",
+          "answer": "类型可以帮助提出工作环境偏好的问题，但不能预测能力或职业成功。职业探索还应结合兴趣、技能、机会、价值观和现实约束。"
+        },
+        {
+          "question": "怎样判断结果是否适合自己？",
+          "answer": "检查四组偏好在不同场景中的证据和反例，尤其关注接近分界线的维度。把结果当作工作假设，不要为了符合网络画像而修改自己的经历。"
+        }
+      ]
+    },
+    "answer_surface_v1": {
+      "status": "KEEP",
+      "current": {
+        "policy": "editor_supplied",
+        "faq_items": [
+          {
+            "question": "INFJ 男性到底占多少？",
+            "answer": "公开资料中存在不同数字，但它们依赖特定样本、工具和地区。没有足够证据时，应写明来源限制，而不是给出全球或中国男性的确定比例。"
+          },
+          {
+            "question": "社会压力会让 INFJ 男性测成别的类型吗？",
+            "answer": "社会期望可能影响自我表达和答题方式，但类型变化也可能来自分界线、状态、题目理解和测量误差。不能把所有变化归因于社会压抑。"
+          },
+          {
+            "question": "高敏感男性就是 INFJ 吗？",
+            "answer": "不是。高敏感、内向、共情和 INFJ 属于不同概念。一个人可能同时符合若干描述，也可能只符合其中一项。"
+          },
+          {
+            "question": "INFJ 男性更适合某些职业吗？",
+            "answer": "类型可以帮助提出工作环境偏好的问题，但不能预测能力或职业成功。职业探索还应结合兴趣、技能、机会、价值观和现实约束。"
+          },
+          {
+            "question": "怎样判断结果是否适合自己？",
+            "answer": "检查四组偏好在不同场景中的证据和反例，尤其关注接近分界线的维度。把结果当作工作假设，不要为了符合网络画像而修改自己的经历。"
+          }
+        ],
+        "visible_faq_count": 5,
+        "expected_faq_schema_mainEntity_count": 5
+      },
+      "proposed": {
+        "policy": "editor_supplied",
+        "faq_items": [
+          {
+            "question": "INFJ 男性到底占多少？",
+            "answer": "公开资料中存在不同数字，但它们依赖特定样本、工具和地区。没有足够证据时，应写明来源限制，而不是给出全球或中国男性的确定比例。"
+          },
+          {
+            "question": "社会压力会让 INFJ 男性测成别的类型吗？",
+            "answer": "社会期望可能影响自我表达和答题方式，但类型变化也可能来自分界线、状态、题目理解和测量误差。不能把所有变化归因于社会压抑。"
+          },
+          {
+            "question": "高敏感男性就是 INFJ 吗？",
+            "answer": "不是。高敏感、内向、共情和 INFJ 属于不同概念。一个人可能同时符合若干描述，也可能只符合其中一项。"
+          },
+          {
+            "question": "INFJ 男性更适合某些职业吗？",
+            "answer": "类型可以帮助提出工作环境偏好的问题，但不能预测能力或职业成功。职业探索还应结合兴趣、技能、机会、价值观和现实约束。"
+          },
+          {
+            "question": "怎样判断结果是否适合自己？",
+            "answer": "检查四组偏好在不同场景中的证据和反例，尤其关注接近分界线的维度。把结果当作工作假设，不要为了符合网络画像而修改自己的经历。"
+          }
+        ],
+        "visible_faq_count": 5,
+        "expected_faq_schema_mainEntity_count": 5
+      }
+    },
+    "primary_cta": {
+      "status": "CHANGE",
+      "current": [
+        {
+          "key": "articles_index",
+          "title": "继续浏览文章",
+          "body": "回到文章目录，继续扩展公开内容阅读链路。",
+          "href": "/zh/articles",
+          "kind": "content_continue"
+        },
+        {
+          "key": "topic_hub",
+          "title": "进入主题聚合",
+          "body": "把文章阅读继续到更结构化的主题入口。",
+          "href": "/zh/topics",
+          "kind": "discover"
+        },
+        {
+          "key": "start_test",
+          "title": "开始测试",
+          "body": "如果你想把阅读转成自我测量，可以从测试入口开始。",
+          "href": "/zh/tests/mbti-personality-test-16-personality-types",
+          "kind": "start_test"
+        }
+      ],
+      "proposed": [
+        {
+          "label": "开始 MBTI 性格测试",
+          "href": "/zh/tests/mbti-personality-test-16-personality-types",
+          "kind": "start_test",
+          "intent": "test_intent_handoff"
+        }
+      ],
+      "note": "exactly one primary CTA; ordinary contextual body links are not CTA slots"
+    },
+    "canonical_internal_links": {
+      "status": "CHANGE",
+      "current": [
+        {
+          "href": "/zh/articles",
+          "role": "primary_cta",
+          "owner": "current_public_surface"
+        },
+        {
+          "href": "/zh/articles/mbti-narrative-portrait",
+          "role": "context",
+          "owner": "current_public_surface"
+        },
+        {
+          "href": "/zh/tests/mbti-personality-test-16-personality-types",
+          "role": "primary_cta",
+          "owner": "current_public_surface"
+        },
+        {
+          "href": "/zh/topics",
+          "role": "primary_cta",
+          "owner": "current_public_surface"
+        }
+      ],
+      "proposed": [
+        {
+          "href": "/zh/articles/mbti-narrative-portrait",
+          "role": "context",
+          "owner": "existing_body_link_owner"
+        },
+        {
+          "href": "/zh/tests/mbti-personality-test-16-personality-types",
+          "role": "primary_cta",
+          "owner": "test_landing"
+        }
+      ]
+    },
+    "related_test_slug": {
+      "status": "CHANGE",
+      "current": null,
+      "proposed": "mbti-personality-test-16-personality-types",
+      "note": "article-level adapter requirement; existing-article updater does not support this field"
+    },
+    "reading_minutes": {
+      "status": "CHANGE",
+      "current": 4,
+      "proposed": 5,
+      "note": "operator-locked ranking-protection value; existing-article updater does not support this field"
+    },
+    "schema": {
+      "status": "KEEP",
+      "current": {
+        "article_schema_gate_v1": {
+          "enabled": true
+        },
+        "breadcrumb_schema_gate_v1": {
+          "enabled": true
+        },
+        "faq_schema_gate_v1": {
+          "enabled": true
+        }
+      },
+      "proposed": {
+        "article_schema_gate_v1": {
+          "enabled": true
+        },
+        "breadcrumb_schema_gate_v1": {
+          "enabled": true
+        },
+        "faq_schema_gate_v1": {
+          "enabled": true
+        }
+      }
+    },
+    "hreflang": {
+      "status": "KEEP",
+      "current": {
+        "enabled": false,
+        "policy": "no_hreflang",
+        "reason": "no_direct_english_counterpart_approved"
+      },
+      "proposed": {
+        "enabled": false,
+        "policy": "no_hreflang",
+        "reason": "no_direct_english_counterpart_approved"
+      }
+    },
+    "sitemap": {
+      "status": "KEEP",
+      "current": true,
+      "proposed": true
+    },
+    "llms": {
+      "status": "KEEP",
+      "current": true,
+      "proposed": true
+    },
+    "search_channel": {
+      "status": "KEEP",
+      "current": "HOLD",
+      "proposed": "HOLD"
+    },
+    "revalidation": {
+      "status": "KEEP",
+      "current": "HOLD",
+      "proposed": "HOLD"
+    }
+  },
+  "body_patch": {
+    "policy": "minimal_editorial_patch_over_locked_baseline_snapshot",
+    "operations": [
+      "KEEP title/H1/SEO title/description/intro/完整正文/5 FAQ/现有正文内链",
+      "CHANGE 3 个 answer-surface CTA 收敛为一个 MBTI 测试 CTA",
+      "CHANGE reading_minutes 4→5",
+      "CHANGE related_test_slug null→MBTI 测试 slug"
+    ],
+    "body_file": "body.zh-CN.md",
+    "current_body_sha256": "663d92e7d8bcdefd5a91640e81b5c172e84c8820bcc4f8a0d7239fc388c54d05",
+    "proposed_body_sha256": "663d92e7d8bcdefd5a91640e81b5c172e84c8820bcc4f8a0d7239fc388c54d05"
+  },
+  "cta": {
+    "primary_count": 1,
+    "primary": {
+      "label": "开始 MBTI 性格测试",
+      "href": "/zh/tests/mbti-personality-test-16-personality-types",
+      "kind": "start_test",
+      "intent": "test_intent_handoff"
+    },
+    "tracking_expectation": "article_to_test_click",
+    "public_canonical_route_only": true
+  },
+  "internal_link_plan": [
+    {
+      "href": "/zh/articles/mbti-narrative-portrait",
+      "role": "context",
+      "owner": "existing_body_link_owner"
+    },
+    {
+      "href": "/zh/tests/mbti-personality-test-16-personality-types",
+      "role": "primary_cta",
+      "owner": "test_landing"
+    }
+  ],
+  "full_body_internal_links": {
+    "unique_count": 1,
+    "hrefs": [
+      "/zh/articles/mbti-narrative-portrait"
+    ],
+    "validation_scope": "complete_body_markdown_not_only_internal_link_plan"
+  },
+  "claim_boundary": "只拥有 INFJ 男性可见度、样本与类型误读；不新增或占用 INFJ 人格目录，不处理 registry gap，不把表达差异写成固定人口比例、诊断、能力或职业预测。",
+  "forbidden_claims": [
+    "hidden_query_inference",
+    "diagnosis",
+    "ability_prediction",
+    "career_determination",
+    "admission_prediction",
+    "relationship_prediction",
+    "hiring_screening",
+    "official_endorsement"
+  ],
+  "private_url_guard": {
+    "status": "HOLD",
+    "forbidden_route_families": [
+      "result",
+      "results",
+      "order",
+      "orders",
+      "share",
+      "pay",
+      "payment",
+      "history",
+      "private",
+      "token",
+      "session"
+    ],
+    "public_canonical_only": true
+  },
+  "references": [
+    {
+      "title": "MBTI facts",
+      "url": "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+      "authority": "The Myers-Briggs Company",
+      "use_boundary": "仅支持 MBTI 使用边界，不证明 INFJ 男性的固定人口比例。"
+    },
+    {
+      "title": "Men, masculinity, and the contexts of help seeking",
+      "url": "https://doi.org/10.1037/0003-066X.58.1.5",
+      "authority": "American Psychologist",
+      "use_boundary": "仅支持男性规范与求助情境的研究背景，不推断具体人的类型。"
+    },
+    {
+      "title": "Masculinity norms and emotion restriction research",
+      "url": "https://doi.org/10.1037/men0000144",
+      "authority": "Psychology of Men & Masculinity",
+      "use_boundary": "仅支持男性情绪表达规范的研究背景，不证明社会规范会改变具体 MBTI 类型。"
+    }
+  ],
+  "adapter_requirements": {
+    "required_before_later_import": true,
+    "revision_bound": true,
+    "fields": [
+      "reading_minutes",
+      "related_test_slug",
+      "answer_surface_v1.faq_items"
+    ],
+    "current_existing_article_updater_supports_all": false,
+    "import_state_must_remain_false": true
+  },
+  "downstream_holds": {
+    "identity": true,
+    "publication": true,
+    "schema": true,
+    "hreflang": true,
+    "sitemap": true,
+    "llms": true,
+    "search_channel": true,
+    "revalidation": true,
+    "cms_import": true,
+    "cache_refresh": true
+  },
+  "package_sha256": "0bebdf6a606709b834184eb2e538a67612be8c80b35f69ab6d6fecdee8150149"
+}

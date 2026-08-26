@@ -1,0 +1,226 @@
+{
+  "schema_version": "fermatmind.article15_content_package_qa.v1",
+  "batch_id": "ARTICLE15-BATCH-B-20260826",
+  "bindings": {
+    "baseline_commit": "6f172f279a02ef1b6ac57f59ed88cf99e6235793",
+    "batch_a_manifest_sha256": "48a79cdcfc5b10766b58658aadb601e0682257af56d4fd108ed920a2ed6fa20a",
+    "top100_source_sha256": "e4c9788d6fadff53bc33170299971ab57dbff1810ad1fcdb4f97f5f4ee94d150",
+    "article15_target_set_sha256": "9ccd8cab8b44f10409e0ef3ced944ba663376c84a5032bd74ddba143d88cd35a"
+  },
+  "checks": {
+    "exact_target_count_and_order": "PASS",
+    "live_identity_revision_lock": "PASS",
+    "package_and_body_sha_independent_recalculation": "PASS",
+    "batch_a_b_overlap_count": 0,
+    "cumulative_article15_coverage": "10/15",
+    "keep_fields_byte_identical": "PASS",
+    "infj_and_mbti_narrative_body_sha_unchanged": "PASS",
+    "faq_body_package_answer_surface_alignment": "PASS",
+    "expected_faq_counts": "5/7/4/7/5",
+    "exactly_one_primary_cta_per_package": "PASS",
+    "complete_markdown_internal_link_checks": "PASS",
+    "forbidden_infj_personality_path_occurrences": 0,
+    "private_url_occurrences": 0,
+    "hidden_query_inference_overreach_claims": 0,
+    "diagnosis_ability_career_admission_relationship_prediction_overreach_claims": 0,
+    "json_markdown_format": "PASS",
+    "claim_boundary_present": "PASS",
+    "adapter_gap_declared_import_false": "PASS"
+  },
+  "package_evidence": [
+    {
+      "order": 1,
+      "slug": "are-infj-men-rare-or-socially-silenced",
+      "article_id": 11,
+      "published_revision_id": 436,
+      "package_sha256": "0bebdf6a606709b834184eb2e538a67612be8c80b35f69ab6d6fecdee8150149",
+      "body_sha256": "663d92e7d8bcdefd5a91640e81b5c172e84c8820bcc4f8a0d7239fc388c54d05",
+      "current_body_sha256": "663d92e7d8bcdefd5a91640e81b5c172e84c8820bcc4f8a0d7239fc388c54d05",
+      "body_sha_unchanged": true,
+      "faq_count": 5,
+      "primary_cta_count": 1,
+      "planned_internal_link_count": 2,
+      "full_body_unique_internal_link_count": 1
+    },
+    {
+      "order": 2,
+      "slug": "iq-test-score-and-limits-explained",
+      "article_id": 50,
+      "published_revision_id": 57,
+      "package_sha256": "21b1edec935f9298cfb316a712ef1ebde2e9846a9910fbf8f37d371ddd20631f",
+      "body_sha256": "55557e360d5871b913944780f280064a345e9730a68c813d78879f0435b75dd0",
+      "current_body_sha256": "002c4cecf9af5d6e5d5dd8c7bac3265057789dbf8680d1aef18434d409baadcd",
+      "body_sha_unchanged": false,
+      "faq_count": 7,
+      "primary_cta_count": 1,
+      "planned_internal_link_count": 11,
+      "full_body_unique_internal_link_count": 11
+    },
+    {
+      "order": 3,
+      "slug": "which-love-script-fits-you-best",
+      "article_id": 16,
+      "published_revision_id": 435,
+      "package_sha256": "701d3391a8d23cb19566e9a31ab61039a1e6d2f887c27878776211b97825e3c8",
+      "body_sha256": "7627660dcef05c91a837c672e8a1c97050734dbdec5d67e10bd80d51d4f7d39d",
+      "current_body_sha256": "5b97f26d12cf222b559c2eefbb79a667ed3b1175b71f9571c681ad730d17f288",
+      "body_sha_unchanged": false,
+      "faq_count": 4,
+      "primary_cta_count": 1,
+      "planned_internal_link_count": 1,
+      "full_body_unique_internal_link_count": 1
+    },
+    {
+      "order": 4,
+      "slug": "unwanted-major-repeat-or-stay-riasec-decision-checklist",
+      "article_id": 74,
+      "published_revision_id": 94,
+      "package_sha256": "3418ba5d13ce8f7944ada923a27f7c043215c9b6f76a6b822bbb702fd8ba2aef",
+      "body_sha256": "bd584d6f8213f1d4c46b2db085f087137d38701b6d5331aa1f11d6a868d28697",
+      "current_body_sha256": "c66f17e4fe28e3b1f28e1c13f288324a346223cf3bbe8947268cc1638b730e20",
+      "body_sha_unchanged": false,
+      "faq_count": 7,
+      "primary_cta_count": 1,
+      "planned_internal_link_count": 1,
+      "full_body_unique_internal_link_count": 1
+    },
+    {
+      "order": 5,
+      "slug": "mbti-narrative-portrait",
+      "article_id": 10,
+      "published_revision_id": 440,
+      "package_sha256": "dd17e189f9a2bdeeced01595448c967822dc4b9d90391efe9f6088dfdec8ec3e",
+      "body_sha256": "98b544382218f3f26bf89f46dd36df5050fb1a6469f9f538eb6ee8361a22fc82",
+      "current_body_sha256": "98b544382218f3f26bf89f46dd36df5050fb1a6469f9f538eb6ee8361a22fc82",
+      "body_sha_unchanged": true,
+      "faq_count": 5,
+      "primary_cta_count": 1,
+      "planned_internal_link_count": 3,
+      "full_body_unique_internal_link_count": 2
+    }
+  ],
+  "live_internal_link_evidence": [
+    {
+      "href": "/zh/articles/best-valentines-date-by-personality-and-relationship-science",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/articles/best-valentines-date-by-personality-and-relationship-science",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/articles/iq-test-growth-guide",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/articles/iq-test-growth-guide",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/articles/iq-test-narrative-portrait",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/articles/iq-test-narrative-portrait",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/articles/iq-test-tool-guide",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/articles/iq-test-tool-guide",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/articles/mbti-basics",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/articles/mbti-basics",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/articles/mbti-growth-guide",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/articles/mbti-growth-guide",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/articles/mbti-narrative-portrait",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/articles/mbti-narrative-portrait",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/common-misconceptions",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/common-misconceptions",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/data-privacy",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/data-privacy",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/item-design-notes",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/item-design-notes",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/method-boundaries",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/method-boundaries",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/reliability-validity",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/reliability-validity",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/science",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/science",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/tests/eq-test-emotional-intelligence-assessment",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/tests/holland-career-interest-test-riasec",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/tests/holland-career-interest-test-riasec",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/tests/iq-test-intelligence-quotient-assessment",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/tests/mbti-personality-test-16-personality-types",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+      "checked_at": "2026-08-26"
+    }
+  ],
+  "scope": {
+    "allowed_root": "backend/docs/seo/content-packages/article15-batch-b-20260826",
+    "importer_changes": 0,
+    "cms_changes": 0,
+    "database_changes": 0,
+    "query_owner_registry_changes": 0,
+    "infj_registry_changes": 0,
+    "public_page_changes": 0
+  },
+  "local_validation": {
+    "json_markdown": "PASS",
+    "sha": "PASS",
+    "reading_minutes": "PASS",
+    "classifier_workflow": "PASS_44_OF_44",
+    "classification": "docs_rules_tests_only",
+    "deploy": false,
+    "git_diff_check": "PASS",
+    "changed_file_scope_check": "PASS"
+  },
+  "result": "PASS"
+}

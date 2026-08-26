@@ -1,0 +1,596 @@
+{
+  "schema_version": "fermatmind.article15_content_package.v1",
+  "package_id": "ARTICLE15-BATCH-B-02-iq-test-score-and-limits-explained",
+  "package_order": 2,
+  "status": {
+    "content_package_only": true,
+    "intended_cms_status": "draft",
+    "requires_operator_review": true,
+    "cms_draft_created": false,
+    "publish_allowed": false,
+    "search_submit_allowed": false,
+    "import_ready": false
+  },
+  "bindings": {
+    "baseline_commit": "6f172f279a02ef1b6ac57f59ed88cf99e6235793",
+    "batch_a_manifest_sha256": "48a79cdcfc5b10766b58658aadb601e0682257af56d4fd108ed920a2ed6fa20a",
+    "top100_source_sha256": "e4c9788d6fadff53bc33170299971ab57dbff1810ad1fcdb4f97f5f4ee94d150",
+    "article15_target_set_sha256": "9ccd8cab8b44f10409e0ef3ced944ba663376c84a5032bd74ddba143d88cd35a",
+    "baseline_authority": "production_public_article_api_read_only",
+    "baseline_observed_at": "2026-08-26"
+  },
+  "identity_lock": {
+    "article_id": 50,
+    "translation_group_id": "tg_article_iq_test_score_and_limits_explained_2026v1",
+    "published_revision_id": 57,
+    "locale": "zh-CN",
+    "slug": "iq-test-score-and-limits-explained",
+    "canonical_url": "https://fermatmind.com/zh/articles/iq-test-score-and-limits-explained",
+    "current_status": "published",
+    "current_is_public": true,
+    "current_is_indexable": true
+  },
+  "current_to_proposed": {
+    "article_id": {
+      "status": "KEEP",
+      "current": 50,
+      "proposed": 50
+    },
+    "translation_group_id": {
+      "status": "KEEP",
+      "current": "tg_article_iq_test_score_and_limits_explained_2026v1",
+      "proposed": "tg_article_iq_test_score_and_limits_explained_2026v1"
+    },
+    "published_revision_id": {
+      "status": "KEEP",
+      "current": 57,
+      "proposed": 57,
+      "note": "identity precondition only; no revision write in this task"
+    },
+    "locale": {
+      "status": "KEEP",
+      "current": "zh-CN",
+      "proposed": "zh-CN"
+    },
+    "slug": {
+      "status": "KEEP",
+      "current": "iq-test-score-and-limits-explained",
+      "proposed": "iq-test-score-and-limits-explained"
+    },
+    "canonical_url": {
+      "status": "KEEP",
+      "current": "https://fermatmind.com/zh/articles/iq-test-score-and-limits-explained",
+      "proposed": "https://fermatmind.com/zh/articles/iq-test-score-and-limits-explained"
+    },
+    "publication": {
+      "status": "KEEP",
+      "current": {
+        "status": "published",
+        "is_public": true
+      },
+      "proposed": {
+        "status": "published",
+        "is_public": true
+      }
+    },
+    "title": {
+      "status": "KEEP",
+      "current": "在线 IQ 测试准吗？智商分数、题型和正式测验的区别一次讲清",
+      "proposed": "在线 IQ 测试准吗？智商分数、题型和正式测验的区别一次讲清"
+    },
+    "h1": {
+      "status": "KEEP",
+      "current": "在线 IQ 测试准吗？智商分数、题型和正式测验的区别一次讲清",
+      "proposed": "在线 IQ 测试准吗？智商分数、题型和正式测验的区别一次讲清",
+      "note": "CMS title is the page H1; body snapshot contains no H1"
+    },
+    "seo_title": {
+      "status": "KEEP",
+      "current": "在线 IQ 测试准吗？智商分数和题型解释",
+      "proposed": "在线 IQ 测试准吗？智商分数和题型解释"
+    },
+    "seo_description": {
+      "status": "KEEP",
+      "current": "在线 IQ 测试可以观察矩阵推理、模式识别和抽象问题解决表现，但不等于正式智力测验。本文解释智商分数、题型、正式测验边界和安全使用方式。",
+      "proposed": "在线 IQ 测试可以观察矩阵推理、模式识别和抽象问题解决表现，但不等于正式智力测验。本文解释智商分数、题型、正式测验边界和安全使用方式。"
+    },
+    "intro": {
+      "status": "KEEP",
+      "current": "在线 IQ 测试可以观察矩阵推理、模式识别和抽象问题解决表现，但不等于正式智力测验。本文解释智商分数、题型、正式测验边界和安全使用方式。",
+      "proposed": "在线 IQ 测试可以观察矩阵推理、模式识别和抽象问题解决表现，但不等于正式智力测验。本文解释智商分数、题型、正式测验边界和安全使用方式。"
+    },
+    "body_markdown": {
+      "status": "CHANGE",
+      "current": {
+        "sha256": "002c4cecf9af5d6e5d5dd8c7bac3265057789dbf8680d1aef18434d409baadcd"
+      },
+      "proposed": {
+        "file": "body.zh-CN.md",
+        "sha256": "55557e360d5871b913944780f280064a345e9730a68c813d78879f0435b75dd0"
+      }
+    },
+    "faq": {
+      "status": "KEEP",
+      "current": [
+        {
+          "question": "在线 IQ 测试准吗？",
+          "answer": "它可以帮助你观察特定推理任务中的表现，例如矩阵推理、模式识别和抽象问题解决。但它不能直接等同于正式智力测验。正式 IQ 解释需要标准化施测、常模和专业解释。"
+        },
+        {
+          "question": "FermatMind 的 IQ 测试是正式智商测验吗？",
+          "answer": "本内容包不能这样宣称。FermatMind 当前公开产品说明支持的是在线推理任务、矩阵推理、模式识别和抽象问题解决。除非产品 authority 明确证明正式 IQ、常模和百分位，否则文章必须使用原始分、维度参考和在线推理表现语言。"
+        },
+        {
+          "question": "IQ 分数怎么看？",
+          "answer": "先看它是什么类型的分数。如果是原始分，它只代表你在本套题中的表现。如果没有常模，就不能写成人群百分位或排名。更安全的读法是用它复盘题型、策略和注意力状态。"
+        },
+        {
+          "question": "IQ 测试通常有哪些题型？",
+          "answer": "FermatMind 当前公开支持的表达包括矩阵推理、模式识别和抽象问题解决。可以谨慎讨论视觉、空间或数字模式推理，但不能主动扩展到工作记忆、处理速度、语言理解或完整智力结构，除非产品文档明确支持。"
+        },
+        {
+          "question": "IQ 能决定一个人的能力吗？",
+          "answer": "不能。IQ 或在线推理测试只能反映部分任务表现，不能概括创造力、情绪能力、学习习惯、社会判断、长期努力或人的价值。它也不能预测收入、职业成功或人生结果。"
+        },
+        {
+          "question": "IQ 和 EQ 有什么区别？",
+          "answer": "IQ 更偏向推理任务、模式识别和抽象问题解决表现；EQ 更偏向情绪觉察、调节、关系沟通和压力恢复。两者观察的是不同方面，不能互相替代，也不能决定人的价值。"
+        },
+        {
+          "question": "做完 IQ 测试后下一步应该做什么？",
+          "answer": "不要只盯分数。先记录自己在哪类题型上卡住，再复盘解题策略和注意力状态。你可以用短周期训练验证是否只是题型不熟，也可以结合学习目标决定下一步练习方向。"
+        }
+      ],
+      "proposed": [
+        {
+          "question": "在线 IQ 测试准吗？",
+          "answer": "它可以帮助你观察特定推理任务中的表现，例如矩阵推理、模式识别和抽象问题解决。但它不能直接等同于正式智力测验。正式 IQ 解释需要标准化施测、常模和专业解释。"
+        },
+        {
+          "question": "FermatMind 的 IQ 测试是正式智商测验吗？",
+          "answer": "本内容包不能这样宣称。FermatMind 当前公开产品说明支持的是在线推理任务、矩阵推理、模式识别和抽象问题解决。除非产品 authority 明确证明正式 IQ、常模和百分位，否则文章必须使用原始分、维度参考和在线推理表现语言。"
+        },
+        {
+          "question": "IQ 分数怎么看？",
+          "answer": "先看它是什么类型的分数。如果是原始分，它只代表你在本套题中的表现。如果没有常模，就不能写成人群百分位或排名。更安全的读法是用它复盘题型、策略和注意力状态。"
+        },
+        {
+          "question": "IQ 测试通常有哪些题型？",
+          "answer": "FermatMind 当前公开支持的表达包括矩阵推理、模式识别和抽象问题解决。可以谨慎讨论视觉、空间或数字模式推理，但不能主动扩展到工作记忆、处理速度、语言理解或完整智力结构，除非产品文档明确支持。"
+        },
+        {
+          "question": "IQ 能决定一个人的能力吗？",
+          "answer": "不能。IQ 或在线推理测试只能反映部分任务表现，不能概括创造力、情绪能力、学习习惯、社会判断、长期努力或人的价值。它也不能预测收入、职业成功或人生结果。"
+        },
+        {
+          "question": "IQ 和 EQ 有什么区别？",
+          "answer": "IQ 更偏向推理任务、模式识别和抽象问题解决表现；EQ 更偏向情绪觉察、调节、关系沟通和压力恢复。两者观察的是不同方面，不能互相替代，也不能决定人的价值。"
+        },
+        {
+          "question": "做完 IQ 测试后下一步应该做什么？",
+          "answer": "不要只盯分数。先记录自己在哪类题型上卡住，再复盘解题策略和注意力状态。你可以用短周期训练验证是否只是题型不熟，也可以结合学习目标决定下一步练习方向。"
+        }
+      ]
+    },
+    "answer_surface_v1": {
+      "status": "CHANGE",
+      "current": {
+        "source": "current public answer_surface_v1.faq_blocks",
+        "faq_count": 2,
+        "faq_items": [
+          {
+            "question": "什么时候适合阅读这篇文章？",
+            "answer": "当你想把公开内容和测评、人格画像或职业建议串起来时，先从这篇文章的核心摘要开始。"
+          },
+          {
+            "question": "这篇文章会替代正式判断吗？",
+            "answer": "不会。它只提供公开解释和行动线索，不替代医疗、法律或专业诊断。"
+          }
+        ]
+      },
+      "proposed": {
+        "policy": "editor_supplied",
+        "faq_items": [
+          {
+            "question": "在线 IQ 测试准吗？",
+            "answer": "它可以帮助你观察特定推理任务中的表现，例如矩阵推理、模式识别和抽象问题解决。但它不能直接等同于正式智力测验。正式 IQ 解释需要标准化施测、常模和专业解释。"
+          },
+          {
+            "question": "FermatMind 的 IQ 测试是正式智商测验吗？",
+            "answer": "本内容包不能这样宣称。FermatMind 当前公开产品说明支持的是在线推理任务、矩阵推理、模式识别和抽象问题解决。除非产品 authority 明确证明正式 IQ、常模和百分位，否则文章必须使用原始分、维度参考和在线推理表现语言。"
+          },
+          {
+            "question": "IQ 分数怎么看？",
+            "answer": "先看它是什么类型的分数。如果是原始分，它只代表你在本套题中的表现。如果没有常模，就不能写成人群百分位或排名。更安全的读法是用它复盘题型、策略和注意力状态。"
+          },
+          {
+            "question": "IQ 测试通常有哪些题型？",
+            "answer": "FermatMind 当前公开支持的表达包括矩阵推理、模式识别和抽象问题解决。可以谨慎讨论视觉、空间或数字模式推理，但不能主动扩展到工作记忆、处理速度、语言理解或完整智力结构，除非产品文档明确支持。"
+          },
+          {
+            "question": "IQ 能决定一个人的能力吗？",
+            "answer": "不能。IQ 或在线推理测试只能反映部分任务表现，不能概括创造力、情绪能力、学习习惯、社会判断、长期努力或人的价值。它也不能预测收入、职业成功或人生结果。"
+          },
+          {
+            "question": "IQ 和 EQ 有什么区别？",
+            "answer": "IQ 更偏向推理任务、模式识别和抽象问题解决表现；EQ 更偏向情绪觉察、调节、关系沟通和压力恢复。两者观察的是不同方面，不能互相替代，也不能决定人的价值。"
+          },
+          {
+            "question": "做完 IQ 测试后下一步应该做什么？",
+            "answer": "不要只盯分数。先记录自己在哪类题型上卡住，再复盘解题策略和注意力状态。你可以用短周期训练验证是否只是题型不熟，也可以结合学习目标决定下一步练习方向。"
+          }
+        ],
+        "visible_faq_count": 7,
+        "expected_faq_schema_mainEntity_count": 7
+      },
+      "note": "visible FAQ and revision-bound answer-surface draft must remain identical"
+    },
+    "primary_cta": {
+      "status": "KEEP",
+      "current": [
+        {
+          "label": "开始 IQ 智商测试",
+          "href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+          "kind": "start_test",
+          "intent": "test_intent_handoff"
+        }
+      ],
+      "proposed": [
+        {
+          "label": "开始 IQ 智商测试",
+          "href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+          "kind": "start_test",
+          "intent": "test_intent_handoff"
+        }
+      ]
+    },
+    "canonical_internal_links": {
+      "status": "KEEP",
+      "current": [
+        {
+          "href": "/zh/articles/iq-test-growth-guide",
+          "role": "context",
+          "owner": "existing_body_link_owner"
+        },
+        {
+          "href": "/zh/articles/iq-test-narrative-portrait",
+          "role": "context",
+          "owner": "existing_body_link_owner"
+        },
+        {
+          "href": "/zh/articles/iq-test-tool-guide",
+          "role": "context",
+          "owner": "existing_body_link_owner"
+        },
+        {
+          "href": "/zh/common-misconceptions",
+          "role": "context",
+          "owner": "existing_body_link_owner"
+        },
+        {
+          "href": "/zh/data-privacy",
+          "role": "context",
+          "owner": "existing_body_link_owner"
+        },
+        {
+          "href": "/zh/item-design-notes",
+          "role": "context",
+          "owner": "existing_body_link_owner"
+        },
+        {
+          "href": "/zh/method-boundaries",
+          "role": "context",
+          "owner": "existing_body_link_owner"
+        },
+        {
+          "href": "/zh/reliability-validity",
+          "role": "context",
+          "owner": "existing_body_link_owner"
+        },
+        {
+          "href": "/zh/science",
+          "role": "context",
+          "owner": "existing_body_link_owner"
+        },
+        {
+          "href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+          "role": "context",
+          "owner": "existing_body_link_owner"
+        },
+        {
+          "href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+          "role": "primary_cta",
+          "owner": "test_landing"
+        }
+      ],
+      "proposed": [
+        {
+          "href": "/zh/articles/iq-test-growth-guide",
+          "role": "context",
+          "owner": "existing_body_link_owner"
+        },
+        {
+          "href": "/zh/articles/iq-test-narrative-portrait",
+          "role": "context",
+          "owner": "existing_body_link_owner"
+        },
+        {
+          "href": "/zh/articles/iq-test-tool-guide",
+          "role": "context",
+          "owner": "existing_body_link_owner"
+        },
+        {
+          "href": "/zh/common-misconceptions",
+          "role": "context",
+          "owner": "existing_body_link_owner"
+        },
+        {
+          "href": "/zh/data-privacy",
+          "role": "context",
+          "owner": "existing_body_link_owner"
+        },
+        {
+          "href": "/zh/item-design-notes",
+          "role": "context",
+          "owner": "existing_body_link_owner"
+        },
+        {
+          "href": "/zh/method-boundaries",
+          "role": "context",
+          "owner": "existing_body_link_owner"
+        },
+        {
+          "href": "/zh/reliability-validity",
+          "role": "context",
+          "owner": "existing_body_link_owner"
+        },
+        {
+          "href": "/zh/science",
+          "role": "context",
+          "owner": "existing_body_link_owner"
+        },
+        {
+          "href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+          "role": "context",
+          "owner": "existing_body_link_owner"
+        },
+        {
+          "href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+          "role": "primary_cta",
+          "owner": "test_landing"
+        }
+      ]
+    },
+    "related_test_slug": {
+      "status": "KEEP",
+      "current": "iq-test-intelligence-quotient-assessment",
+      "proposed": "iq-test-intelligence-quotient-assessment"
+    },
+    "reading_minutes": {
+      "status": "KEEP",
+      "current": 10,
+      "proposed": 10
+    },
+    "schema": {
+      "status": "KEEP",
+      "current": {
+        "article_schema_gate_v1": {
+          "enabled": true
+        },
+        "breadcrumb_schema_gate_v1": {
+          "enabled": true
+        },
+        "faq_schema_gate_v1": {
+          "enabled": false
+        }
+      },
+      "proposed": {
+        "article_schema_gate_v1": {
+          "enabled": true
+        },
+        "breadcrumb_schema_gate_v1": {
+          "enabled": true
+        },
+        "faq_schema_gate_v1": {
+          "enabled": false
+        }
+      }
+    },
+    "hreflang": {
+      "status": "KEEP",
+      "current": {
+        "enabled": false,
+        "policy": "no_hreflang",
+        "reason": "no_direct_english_counterpart_approved"
+      },
+      "proposed": {
+        "enabled": false,
+        "policy": "no_hreflang",
+        "reason": "no_direct_english_counterpart_approved"
+      }
+    },
+    "sitemap": {
+      "status": "KEEP",
+      "current": true,
+      "proposed": true
+    },
+    "llms": {
+      "status": "KEEP",
+      "current": true,
+      "proposed": true
+    },
+    "search_channel": {
+      "status": "KEEP",
+      "current": "HOLD",
+      "proposed": "HOLD"
+    },
+    "revalidation": {
+      "status": "KEEP",
+      "current": "HOLD",
+      "proposed": "HOLD"
+    }
+  },
+  "body_patch": {
+    "policy": "minimal_editorial_patch_over_locked_baseline_snapshot",
+    "operations": [
+      "KEEP title/H1/SEO title/description/正文主体/7 个可见 FAQ/单一 IQ CTA/reading_minutes/related_test_slug",
+      "CHANGE “Quick answer”→“快速答案”",
+      "CHANGE 首屏增加固定的题型表现与常模依据行动句",
+      "CHANGE answer_surface_v1 从通用 2 FAQ 同步为正文现有 7 FAQ"
+    ],
+    "body_file": "body.zh-CN.md",
+    "current_body_sha256": "002c4cecf9af5d6e5d5dd8c7bac3265057789dbf8680d1aef18434d409baadcd",
+    "proposed_body_sha256": "55557e360d5871b913944780f280064a345e9730a68c813d78879f0435b75dd0"
+  },
+  "cta": {
+    "primary_count": 1,
+    "primary": {
+      "label": "开始 IQ 智商测试",
+      "href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+      "kind": "start_test",
+      "intent": "test_intent_handoff"
+    },
+    "tracking_expectation": "article_to_test_click",
+    "public_canonical_route_only": true
+  },
+  "internal_link_plan": [
+    {
+      "href": "/zh/articles/iq-test-growth-guide",
+      "role": "context",
+      "owner": "existing_body_link_owner"
+    },
+    {
+      "href": "/zh/articles/iq-test-narrative-portrait",
+      "role": "context",
+      "owner": "existing_body_link_owner"
+    },
+    {
+      "href": "/zh/articles/iq-test-tool-guide",
+      "role": "context",
+      "owner": "existing_body_link_owner"
+    },
+    {
+      "href": "/zh/common-misconceptions",
+      "role": "context",
+      "owner": "existing_body_link_owner"
+    },
+    {
+      "href": "/zh/data-privacy",
+      "role": "context",
+      "owner": "existing_body_link_owner"
+    },
+    {
+      "href": "/zh/item-design-notes",
+      "role": "context",
+      "owner": "existing_body_link_owner"
+    },
+    {
+      "href": "/zh/method-boundaries",
+      "role": "context",
+      "owner": "existing_body_link_owner"
+    },
+    {
+      "href": "/zh/reliability-validity",
+      "role": "context",
+      "owner": "existing_body_link_owner"
+    },
+    {
+      "href": "/zh/science",
+      "role": "context",
+      "owner": "existing_body_link_owner"
+    },
+    {
+      "href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+      "role": "context",
+      "owner": "existing_body_link_owner"
+    },
+    {
+      "href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+      "role": "primary_cta",
+      "owner": "test_landing"
+    }
+  ],
+  "full_body_internal_links": {
+    "unique_count": 11,
+    "hrefs": [
+      "/zh/articles/iq-test-growth-guide",
+      "/zh/articles/iq-test-narrative-portrait",
+      "/zh/articles/iq-test-tool-guide",
+      "/zh/common-misconceptions",
+      "/zh/data-privacy",
+      "/zh/item-design-notes",
+      "/zh/method-boundaries",
+      "/zh/reliability-validity",
+      "/zh/science",
+      "/zh/tests/eq-test-emotional-intelligence-assessment",
+      "/zh/tests/iq-test-intelligence-quotient-assessment"
+    ],
+    "validation_scope": "complete_body_markdown_not_only_internal_link_plan"
+  },
+  "claim_boundary": "只拥有在线结果怎么看及正式测验边界；IQ 测试入口意图归 IQ landing；不把在线任务表现解释为正式 IQ、能力总评、诊断、录取、招聘、职业或人生结果。",
+  "forbidden_claims": [
+    "hidden_query_inference",
+    "diagnosis",
+    "ability_prediction",
+    "career_determination",
+    "admission_prediction",
+    "relationship_prediction",
+    "hiring_screening",
+    "official_endorsement"
+  ],
+  "private_url_guard": {
+    "status": "HOLD",
+    "forbidden_route_families": [
+      "result",
+      "results",
+      "order",
+      "orders",
+      "share",
+      "pay",
+      "payment",
+      "history",
+      "private",
+      "token",
+      "session"
+    ],
+    "public_canonical_only": true
+  },
+  "references": [
+    {
+      "title": "ITC Guidelines on Test Use",
+      "url": "https://www.intestcom.org/files/guideline_test_use.pdf",
+      "authority": "International Test Commission",
+      "use_boundary": "支持测验用途、解释和高影响决策边界，不验证 FermatMind 的正式 IQ、常模或百分位。"
+    },
+    {
+      "title": "Standards for Educational and Psychological Testing",
+      "url": "https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf",
+      "authority": "AERA / APA / NCME",
+      "use_boundary": "支持分数解释应绑定相应证据与常模，不把在线原始分转成正式 IQ。"
+    }
+  ],
+  "adapter_requirements": {
+    "required_before_later_import": true,
+    "revision_bound": true,
+    "fields": [
+      "reading_minutes",
+      "related_test_slug",
+      "answer_surface_v1.faq_items"
+    ],
+    "current_existing_article_updater_supports_all": false,
+    "import_state_must_remain_false": true
+  },
+  "downstream_holds": {
+    "identity": true,
+    "publication": true,
+    "schema": true,
+    "hreflang": true,
+    "sitemap": true,
+    "llms": true,
+    "search_channel": true,
+    "revalidation": true,
+    "cms_import": true,
+    "cache_refresh": true
+  },
+  "package_sha256": "21b1edec935f9298cfb316a712ef1ebde2e9846a9910fbf8f37d371ddd20631f"
+}
