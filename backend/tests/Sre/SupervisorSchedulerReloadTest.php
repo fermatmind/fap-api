@@ -259,6 +259,16 @@ BASH);
     }
 
     #[Test]
+    public function scheduler_refresh_rejects_a_relative_php_binary_before_cron_mutation(): void
+    {
+        $process = $this->runScript(['FAKE_MISSING' => 'true'], phpBin: 'php');
+
+        $this->assertFalse($process->isSuccessful());
+        $this->assertStringContainsString('reason=invalid_path', $process->getErrorOutput());
+        $this->assertFileDoesNotExist($this->temporaryDirectory.'/crontab-state');
+    }
+
+    #[Test]
     public function cron_fallback_fails_closed_when_the_existing_crontab_cannot_be_read(): void
     {
         $process = $this->runScript([
@@ -311,6 +321,9 @@ BASH);
         $this->assertIsString($deploy);
         $this->assertStringContainsString('restart_supervisor_scheduler.sh', $deploy);
         $this->assertStringContainsString("currentHost()->getAlias() === 'production'", $deploy);
+        $this->assertStringContainsString('php_bin="$(command -v {{bin/php}})"', $deploy);
+        $this->assertStringContainsString('--php-bin="$php_bin"', $deploy);
+        $this->assertStringNotContainsString("--php-bin='.deployPlaceholderPathArg('{{bin/php}}')", $deploy);
         $queueRestart = strpos($deploy, 'foreach ($optionalPrograms as $program)');
         $schedulerRestart = strpos($deploy, 'restart_supervisor_scheduler.sh');
 
@@ -320,7 +333,7 @@ BASH);
     }
 
     /** @param array<string,string> $environment */
-    private function runScript(array $environment = [], bool $required = true): Process
+    private function runScript(array $environment = [], bool $required = true, ?string $phpBin = null): Process
     {
         $backendRoot = dirname(__DIR__, 2);
         $process = new Process([
@@ -330,7 +343,7 @@ BASH);
             '--sudo='.$this->temporaryDirectory.'/sudo',
             '--timeout-bin='.$this->temporaryDirectory.'/timeout',
             '--crontab='.$this->temporaryDirectory.'/crontab',
-            '--php-bin='.$this->temporaryDirectory.'/php',
+            '--php-bin='.($phpBin ?? $this->temporaryDirectory.'/php'),
             '--restart-script='.$backendRoot.'/scripts/deploy/restart_supervisor_program_group.sh',
             '--deploy-path='.$this->temporaryDirectory.'/deploy',
             '--proc-root='.$this->temporaryDirectory.'/proc',
