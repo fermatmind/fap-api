@@ -36,6 +36,7 @@ final class SeoPlatform07ScheduledRuntimeProbeReceiptTest extends TestCase
         Schema::connection(self::CONNECTION)->create('seo_crawler_log_daily_aggregates', function (Blueprint $table): void {
             $table->id();
             $table->unsignedInteger('hit_count');
+            $table->timestamp('last_seen_at')->nullable();
             $table->timestamp('updated_at');
         });
     }
@@ -49,7 +50,11 @@ final class SeoPlatform07ScheduledRuntimeProbeReceiptTest extends TestCase
     #[Test]
     public function scheduled_slot_is_idempotent_and_contains_a_sanitized_crawler_source_receipt(): void
     {
-        DB::connection(self::CONNECTION)->table('seo_crawler_log_daily_aggregates')->insert(['hit_count' => 7, 'updated_at' => '2026-08-26 09:00:00']);
+        DB::connection(self::CONNECTION)->table('seo_crawler_log_daily_aggregates')->insert([
+            'hit_count' => 7,
+            'last_seen_at' => '2026-08-26 09:00:00',
+            'updated_at' => '2026-08-26 09:01:00',
+        ]);
         $service = $this->service();
         $first = $service->record('scheduled', '2026-08-26T09:01:00Z', ['state' => 'success']);
         $second = $service->record('scheduled', '2026-08-26T09:08:00Z', ['state' => 'success']);
@@ -58,6 +63,8 @@ final class SeoPlatform07ScheduledRuntimeProbeReceiptTest extends TestCase
         $this->assertSame($first['receipt_hash'], $second['receipt_hash']);
         $this->assertSame(1, DB::connection(self::CONNECTION)->table('seo_runtime_probe_receipts')->count());
         $this->assertTrue(data_get($first, 'crawler_source_receipt.complete'));
+        $this->assertSame('last_seen_at', data_get($first, 'crawler_source_receipt.observation_time_basis'));
+        $this->assertSame('2026-08-26T09:00:00+00:00', data_get($first, 'crawler_source_receipt.latest_observation_at'));
         $this->assertFalse(data_get($first, 'boundaries.raw_url_emitted'));
         $this->assertFalse(data_get($first, 'boundaries.search_submission_allowed'));
     }
@@ -76,7 +83,11 @@ final class SeoPlatform07ScheduledRuntimeProbeReceiptTest extends TestCase
     #[Test]
     public function only_three_fresh_consecutive_natural_slots_complete_the_window(): void
     {
-        DB::connection(self::CONNECTION)->table('seo_crawler_log_daily_aggregates')->insert(['hit_count' => 7, 'updated_at' => '2026-08-26 09:00:00']);
+        DB::connection(self::CONNECTION)->table('seo_crawler_log_daily_aggregates')->insert([
+            'hit_count' => 7,
+            'last_seen_at' => '2026-08-26 09:00:00',
+            'updated_at' => '2026-08-26 09:00:00',
+        ]);
         $service = $this->service();
         $service->record('manual', '2026-08-26T08:55:00Z', ['state' => 'success']);
         $service->record('scheduled', '2026-08-26T09:00:00Z', ['state' => 'success']);

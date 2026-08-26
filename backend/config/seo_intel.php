@@ -603,8 +603,10 @@ return [
         'write_gate_env' => 'SEO_INTEL_CRAWLER_LOG_AGGREGATE_WRITE_ENABLED',
         'dry_run_required_before_write' => true,
         'raw_persistence_allowed' => false,
-        'production_log_read_allowed' => false,
-        'scheduler_enabled' => false,
+        'production_log_read_allowed' => env('SEO_INTEL_CRAWLER_LOG_PRODUCTION_READ_ENABLED', false),
+        'scheduler_enabled' => env('SEO_INTEL_CRAWLER_LOG_SCHEDULER_ENABLED', false),
+        'max_lines' => 1000,
+        'maximum_source_age_minutes' => 2880,
     ],
     'chinese_crawler_log_foundation' => [
         'source_engine_mapping' => [

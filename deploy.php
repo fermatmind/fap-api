@@ -766,6 +766,26 @@ task('artisan:config:cache', function () {
     run('{{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' config:cache --ansi');
 });
 
+task('crawler:configure-aggregate-runtime', function () {
+    if (currentHost()->getAlias() !== 'production') {
+        writeln('<comment>Skipping crawler aggregate runtime configuration outside production.</comment>');
+
+        return;
+    }
+
+    $sourcePath = deploySafeAbsolutePath(
+        (string) (getenv('SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY') ?: ''),
+        'SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY',
+    );
+
+    run(sprintf(
+        'SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY=%s {{bin/php}} %s %s',
+        deployShellArg($sourcePath),
+        deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/configure_crawler_aggregate_runtime.php'),
+        deployPlaceholderPathArg('{{deploy_path}}', 'shared/backend/.env'),
+    ));
+});
+
 task('guard:sitemap-authority', function () {
     within('{{release_path}}/backend', function () {
         run(<<<'BASH'
@@ -2671,6 +2691,7 @@ after('deploy:update_code', 'release:prune-non-runtime-source');
 after('deploy:vendors', 'bootstrap-cache:clear-release');
 
 after('deploy:shared', 'guard:shared-permissions');
+after('guard:shared-permissions', 'crawler:configure-aggregate-runtime');
 
 /**
  * vendor 必须先安装完成：

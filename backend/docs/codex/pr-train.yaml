@@ -4896,3 +4896,60 @@ prs:
     deploy_allowed: true
     production_readback_allowed: true
     content_authority: existing_deploy_scheduler_runtime
+
+  - id: SEO-PLATFORM-07-G-CRAWLER-AGGREGATE-RUNTIME
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/seo-platform-07-crawler-aggregate-runtime
+    base: main
+    depends_on: ["SEO-PLATFORM-07-G-SCHEDULER-REFRESH-V5"]
+    mode: execute
+    title: "feat(seo): enable sanitized crawler aggregate runtime"
+    scope: >
+      Use the existing deploy and scheduler control plane to configure one
+      approved production crawler-log source, read only a bounded tail,
+      persist privacy-transformed crawler aggregates through the existing
+      write-gated table, and run the collector before each ten-minute runtime
+      receipt. Bind receipt freshness to the crawler observation timestamp,
+      keep all raw log lines, IPs, URLs, queries and User-Agent values out of
+      storage and output, and fail closed on missing gates, source, read,
+      write or freshness evidence. Do not add a workflow, manual dispatch,
+      SSH path, search submission, URL Truth mutation or CMS mutation.
+    allowed_paths:
+      - ../.github/workflows/deploy.yml
+      - ../deploy.php
+      - app/Console/Commands/SeoIntelCrawlerLogAggregateScheduled.php
+      - app/Services/SeoIntel/CrawlerLog/CrawlerLogSingleSourceReader.php
+      - app/Services/SeoIntel/CrawlerLog/CrawlerLogScheduledAggregateCollector.php
+      - app/Services/SeoIntel/Runtime/ScheduledRuntimeProbeReceiptService.php
+      - bootstrap/app.php
+      - config/seo_intel.php
+      - scripts/deploy/configure_crawler_aggregate_runtime.php
+      - tests/Feature/SeoIntel/SeoPlatform07CrawlerAggregateRuntimeTest.php
+      - tests/Feature/SeoIntel/SeoPlatform07ScheduledRuntimeProbeReceiptTest.php
+      - tests/Sre/CrawlerAggregateRuntimeDeployTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    checks:
+      - "focused crawler collection, write gate, scheduler receipt and deploy-control PHPUnit"
+      - "PHP syntax, scoped Pint, effective schedule and deploy source contract"
+      - "JSON/YAML, exact scope and diff checks"
+      - "exact-SHA automatic deploy followed by three natural successful production scheduler slots"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: continuous_goal
+    merge_policy:
+      mode: github_checks_required
+      local_verify_required: true
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+    production_write_execution: true
+    database_mutation: true
+    cms_mutation: false
+    publish_allowed: false
+    deploy_allowed: true
+    production_readback_allowed: true
+    content_authority: approved_crawler_log_aggregate_observation

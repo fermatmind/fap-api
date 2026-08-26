@@ -143,7 +143,10 @@ final class ScheduledRuntimeProbeReceiptService
 
         $rowCount = $connection->table('seo_crawler_log_daily_aggregates')->count();
         $hitCount = (int) $connection->table('seo_crawler_log_daily_aggregates')->sum('hit_count');
-        $latest = $connection->table('seo_crawler_log_daily_aggregates')->max('updated_at');
+        $observationColumn = $schema->hasColumn('seo_crawler_log_daily_aggregates', 'last_seen_at')
+            ? 'last_seen_at'
+            : 'updated_at';
+        $latest = $connection->table('seo_crawler_log_daily_aggregates')->max($observationColumn);
         $latestAt = $latest === null ? null : CarbonImmutable::parse((string) $latest)->utc();
         $ageMinutes = $latestAt?->diffInMinutes($now, false);
         $complete = $rowCount > 0 && $hitCount > 0 && $ageMinutes !== null && $ageMinutes >= 0 && $ageMinutes <= 2_880;
@@ -154,6 +157,7 @@ final class ScheduledRuntimeProbeReceiptService
             'row_count' => $rowCount,
             'hit_count' => $hitCount,
             'latest_observation_at' => $latestAt?->toAtomString(),
+            'observation_time_basis' => $observationColumn,
             'age_minutes' => $ageMinutes,
             'source_identity_hash' => hash('sha256', implode('|', [$rowCount, $hitCount, (string) $latest])),
             'raw_url_emitted' => false,
