@@ -4506,3 +4506,54 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: existing_issue_and_opportunity_queues
+
+  - id: SEO-PLATFORM-07-E
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/seo-platform-07-e-scheduler-receipts
+    base: main
+    depends_on: ["SEO-PLATFORM-07-D"]
+    mode: execute
+    title: "SEO-PLATFORM-07-E: schedule idempotent runtime probe receipts"
+    scope: >
+      Connect only the SEO runtime probe receipt to the existing Laravel
+      scheduler with ten-minute slots, withoutOverlapping, onOneServer,
+      idempotent storage, freshness evaluation and a sanitized crawler source
+      receipt. Manual receipts never count as natural slots. Do not dispatch the
+      scheduler, deploy manually, probe private URLs, publish or submit search.
+    allowed_paths:
+      - app/Console/Kernel.php
+      - app/Console/Commands/SeoPlatformRuntimeProbeScheduled.php
+      - app/Services/SeoIntel/Runtime/ScheduledRuntimeProbeReceiptService.php
+      - database/migrations/seo_intel/2026_08_26_090000_create_runtime_probe_receipts.php
+      - tests/Feature/SeoIntel/SeoPlatform07ScheduledRuntimeProbeReceiptTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    checks:
+      - "php -l scoped PHP and migration files"
+      - "vendor/bin/pint --test scoped PHP, migration and test files"
+      - "php artisan test tests/Feature/SeoIntel/SeoPlatform07ScheduledRuntimeProbeReceiptTest.php --no-ansi"
+      - "php artisan list --raw | rg 'seo:runtime-probe-scheduled'"
+      - "fresh SQLite expand-only migration contract"
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "ruby -e 'require \"yaml\"; YAML.safe_load(File.read(\"docs/codex/pr-train.yaml\"), aliases: true)'"
+      - "git diff --check"
+      - "git diff --cached --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: continuous_goal
+    merge_policy:
+      mode: github_checks_required
+      local_verify_required: true
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: natural_scheduler_receipts
