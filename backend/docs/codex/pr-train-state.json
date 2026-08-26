@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-26T12:48:10Z",
+  "updated_at": "2026-08-26T12:49:49Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-07-G-SCHEDULER-REFRESH-V5": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "in_progress",
+      "status": "pr_open",
       "branch": "codex/seo-platform-07-scheduler-refresh-v5",
       "commit_sha": "6d8419cefe9d3ae9b303ce77eda25216d697eddc",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3803",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -53,6 +53,11 @@
           "at": "2026-08-26T12:48:10Z",
           "status": "local_checks_passed",
           "summary": "Focused scheduler and existing Supervisor group regressions, PHP syntax, scoped formatting, workflow contracts, manifests and exact changed-file scope passed. The deploy caller now resolves PHP before invoking the unchanged fail-closed helper."
+        },
+        {
+          "at": "2026-08-26T12:49:49Z",
+          "status": "pr_open",
+          "summary": "Opened authorized fifth same-scope corrective PR #3803 at validated implementation commit 6d8419cefe9d3ae9b303ce77eda25216d697eddc. No manual runtime action was performed."
         }
       ]
     },
