@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-26T11:49:37Z",
+  "updated_at": "2026-08-26T11:50:34Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-07-G-SCHEDULER-REFRESH-V3": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/seo-platform-07-scheduler-refresh-v3",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "1ccc2f6251c3f50f1bcb2881402e56104f8f2d70",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3801",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -53,6 +53,11 @@
           "at": "2026-08-26T11:49:37Z",
           "status": "authorized",
           "summary": "User explicitly authorized the third same-scope corrective PR. No additional scope, manual runtime action or production write was authorized."
+        },
+        {
+          "at": "2026-08-26T11:50:34Z",
+          "status": "pr_open",
+          "summary": "Opened authorized third same-scope corrective PR #3801 at validated implementation commit 1ccc2f6251c3f50f1bcb2881402e56104f8f2d70. Mergeability is clean and no manual runtime action was performed."
         }
       ]
     },
