@@ -4661,3 +4661,49 @@ prs:
     deploy_allowed: false
     production_readback_allowed: true
     content_authority: natural_scheduler_production_closeout
+
+  - id: SEO-PLATFORM-07-G-SCHEDULER-REFRESH
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/seo-platform-07-scheduler-refresh
+    base: main
+    depends_on: ["SEO-PLATFORM-07-G"]
+    mode: execute
+    title: "fix(deploy): refresh scheduler on release activation"
+    scope: >
+      Correct the production closeout blocker by making the existing deploy
+      discover the unique Supervisor-managed artisan schedule:work runtime,
+      restart only that exact program through the existing bounded helper, and
+      verify its working directory resolves to the activated release. Fail
+      closed on missing or ambiguous production identity; staging may skip only
+      when it has no managed scheduler. Do not add a workflow, manual dispatch,
+      SSH path, scheduler trigger, production data write or runtime threshold.
+    allowed_paths:
+      - ../deploy.php
+      - scripts/deploy/restart_supervisor_scheduler.sh
+      - tests/Sre/SupervisorSchedulerReloadTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    checks:
+      - "bash syntax and focused Supervisor scheduler reload PHPUnit"
+      - "deploy source contract and existing Supervisor group reload regression"
+      - "JSON/YAML, exact scope and diff checks"
+      - "exact-SHA automatic deploy followed by three natural production scheduler slots"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: continuous_goal
+    merge_policy:
+      mode: github_checks_required
+      local_verify_required: true
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    deploy_allowed: true
+    production_readback_allowed: true
+    content_authority: existing_deploy_scheduler_runtime

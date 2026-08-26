@@ -1823,6 +1823,23 @@ task('queue:reload-workers', function () {
             run($restartSupervisorProgram($program, false), timeout: 1200);
         }
 
+        $schedulerRestartScript = deployPlaceholderPathArg(
+            '{{release_path}}',
+            'backend/scripts/deploy/restart_supervisor_scheduler.sh',
+        );
+        $schedulerRequired = currentHost()->getAlias() === 'production' ? 'true' : 'false';
+        run(
+            'bash '.$schedulerRestartScript
+                .' --supervisorctl='.$quotedSupervisorctl
+                .' --sudo='.$quotedSudo
+                .' --timeout-bin='.$quotedTimeout
+                .' --restart-script='.$supervisorRestartScript
+                .' --deploy-path='.deployPlaceholderPathArg('{{deploy_path}}')
+                .' --proc-root=/proc'
+                .' --required='.escapeshellarg($schedulerRequired),
+            timeout: 1200,
+        );
+
         if ($legacySystemdService !== '') {
             $quotedService = deploySystemdServiceArg($legacySystemdService, 'legacy_queue_systemd_service');
             run("if sudo -n /usr/bin/systemctl list-unit-files {$quotedService} >/dev/null 2>&1; then sudo -n /usr/bin/systemctl stop {$quotedService} >/dev/null 2>&1 || true; fi");

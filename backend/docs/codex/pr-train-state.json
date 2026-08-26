@@ -1,14 +1,73 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-26T10:06:40Z",
+  "updated_at": "2026-08-26T11:06:32Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "SEO-PLATFORM-07-G-SCHEDULER-REFRESH": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open",
+      "branch": "codex/seo-platform-07-scheduler-refresh",
+      "commit_sha": "bb243dcda255aaabe4beb39010874d3497a44f6a",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3798",
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "details": "SEO-PLATFORM-07-G merged as 2117895ad725735ce8f88aad90077e54920a511c; exact-SHA CI and automatic production activation passed. Three natural slots produced zero receipts because the managed scheduler remained release-stale."
+        },
+        "local": [
+          {
+            "command": "focused scheduler and existing Supervisor reload PHPUnit",
+            "status": "passed",
+            "details": "14 tests and 52 assertions passed across discovery, bounded restart, fail-closed identity/release checks, staging optional topology and existing queue reload behavior."
+          },
+          {
+            "command": "bash/php syntax, ShellCheck and scoped Pint --test",
+            "status": "passed"
+          },
+          {
+            "command": "JSON/YAML, exact scope and git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": [],
+        "production": []
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": true,
+      "production_readback_allowed": true,
+      "history": [
+        {
+          "at": "2026-08-26T10:57:00Z",
+          "status": "in_progress",
+          "summary": "User authorized one focused corrective PR to refresh the existing managed scheduler through deploy. Scope excludes manual restart, workflow dispatch, SSH, production writes and runtime threshold changes."
+        },
+        {
+          "at": "2026-08-26T11:05:19Z",
+          "status": "local_checks_passed",
+          "summary": "Deploy now discovers the unique Supervisor-owned artisan schedule:work program, restarts it through the existing bounded helper, and verifies its cwd resolves to the active release. Focused behavior, regression, syntax, lint, format, manifest and scope checks passed."
+        },
+        {
+          "at": "2026-08-26T11:06:32Z",
+          "status": "pr_open",
+          "summary": "Opened focused corrective PR #3798 at validated implementation commit bb243dcda255aaabe4beb39010874d3497a44f6a. Mergeability is clean; no manual runtime action was performed."
+        }
+      ]
+    },
     "SEO-PLATFORM-07-G": {
       "repo": "fap-api", "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open", "branch": "codex/seo-platform-07-g-production-closeout", "commit_sha": "db0121b9bb4a063db1351c53bccbe22faf729e13", "pr_url": "https://github.com/fermatmind/fap-api/pull/3797",
+      "status": "merged", "branch": "codex/seo-platform-07-g-production-closeout", "commit_sha": "2117895ad725735ce8f88aad90077e54920a511c", "pr_url": "https://github.com/fermatmind/fap-api/pull/3797",
       "checks": {
         "dependency": {"status": "passed", "details": "SEO-PLATFORM-07-F merged as 4ed0670be3a461ddc1dad516da64ebe41f706cdf; exact-SHA CI receipt 32953968001 passed."},
         "local": [
@@ -21,13 +80,15 @@
         "github": [],
         "production": []
       },
-      "failure_reason": null, "resume_policy": "continuous_goal", "merged_at": null,
-      "remote_branch_deleted": false, "local_cleanup_executed": false,
+      "failure_reason": "Production closeout remains production_unproven until the authorized scheduler refresh correction deploys and three natural slots pass.", "resume_policy": "continuous_goal", "merged_at": "2026-08-26T10:07:20Z",
+      "remote_branch_deleted": true, "local_cleanup_executed": true,
       "production_write_execution": false, "database_mutation": false, "cms_mutation": false,
       "publish_allowed": false, "deploy_allowed": false, "production_readback_allowed": true,
       "history": [
         {"at": "2026-08-26T10:05:00Z", "status": "local_checks_passed", "summary": "Validated fail-closed six-family bilingual calibration, private negative set, one-deploy three-slot closeout, MySQL-compatible receipt migration and shared API/UI/receipt projection. Read-only precheck found 11/12 selected core entries at 200 and one zh-CN Career redirect; no threshold was lowered. No manual schedule, deployment dispatch or production write was executed."},
-        {"at": "2026-08-26T10:06:40Z", "status": "pr_open", "summary": "Opened PR #3797 at validated implementation commit db0121b9bb4a063db1351c53bccbe22faf729e13. Mergeability is clean; exact-SHA CI and automatic deployment run after merge."}
+        {"at": "2026-08-26T10:06:40Z", "status": "pr_open", "summary": "Opened PR #3797 at validated implementation commit db0121b9bb4a063db1351c53bccbe22faf729e13. Mergeability is clean; exact-SHA CI and automatic deployment run after merge."},
+        {"at": "2026-08-26T10:27:33Z", "status": "merged", "summary": "PR #3797 merged as 2117895ad725735ce8f88aad90077e54920a511c. Exact-SHA CI, staging, production activation and smoke passed."},
+        {"at": "2026-08-26T10:52:04Z", "status": "production_unproven", "summary": "Natural 10:30, 10:40 and 10:50 UTC slots elapsed with zero scheduled receipts. Protected Technical Health remained production_unproven; no manual scheduler action or production write was performed."}
       ]
     },
     "SEO-PLATFORM-07-F": {
