@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-26T11:28:06Z",
+  "updated_at": "2026-08-26T11:29:06Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-07-G-SCHEDULER-REFRESH-V2": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/seo-platform-07-scheduler-refresh-v2",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "281ebb7ee8c5d8bb6bfc95a37244a645473ce665",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3800",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -57,6 +57,11 @@
           "at": "2026-08-26T11:28:06Z",
           "status": "local_checks_passed",
           "summary": "Wrapped scheduler behavior, existing Supervisor reload regression, syntax, ShellCheck, Pint, manifests and exact four-file scope passed. The branch remains based on current origin/main 294c2f19da76f38908bf439b9929a9e77b24cc00."
+        },
+        {
+          "at": "2026-08-26T11:29:06Z",
+          "status": "pr_open",
+          "summary": "Opened authorized second same-scope corrective PR #3800 at validated implementation commit 281ebb7ee8c5d8bb6bfc95a37244a645473ce665. Mergeability is clean and no manual runtime action was performed."
         }
       ]
     },
