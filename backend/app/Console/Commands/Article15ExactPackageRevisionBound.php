@@ -11,16 +11,16 @@ use Throwable;
 final class Article15ExactPackageRevisionBound extends Command
 {
     protected $signature = 'articles:article15-exact-package
-        {--phase=preflight : preflight|draft-import|readback|publish}
+        {--phase=preflight : snapshot|preflight|draft-import|readback|publish}
         {--batch=ALL : A|B|C|ALL}
         {--execution-manifest-sha256= : Exact adapter execution manifest SHA-256}
         {--expected-state-sha256= : Exact public Article/SEO state SHA-256}
         {--expected-revision-set-sha256= : Exact published/working revision-set SHA-256}
         {--dry-run : Validate and plan without writing}
-        {--execute : Execute a local/testing-only write phase}
+        {--execute : Execute an explicitly locked single-batch write phase}
         {--json : Emit JSON}';
 
-    protected $description = 'Preflight, draft, read back, or atomically publish the fixed Article15 exact packages.';
+    protected $description = 'Snapshot, preflight, draft, read back, or atomically publish the fixed Article15 exact packages.';
 
     public function handle(Article15ExactPackageRevisionBoundAdapter $adapter): int
     {
@@ -35,13 +35,17 @@ final class Article15ExactPackageRevisionBound extends Command
                 'execute' => (bool) $this->option('execute'),
             ]);
         } catch (Throwable $exception) {
+            $error = $exception->getMessage();
             $summary = [
                 'ok' => false,
                 'phase' => (string) $this->option('phase'),
                 'batch' => strtoupper((string) $this->option('batch')),
                 'dry_run' => ! (bool) $this->option('execute'),
                 'executed' => false,
-                'error' => $exception->getMessage(),
+                'error' => $error,
+                'manifest_error' => preg_match('/^(?:execution_manifest|batch_manifest|source_batch|source_target|json_object_required|file_missing|body_file_missing|package_identity|source_package|unsupported_patch|keep_patch|faq_parity|visible_faq|primary_cta|canonical_internal_link)/', $error) === 1
+                    ? $error
+                    : null,
                 'write_boundaries' => [
                     'cms_content_write' => false,
                     'database_write' => false,

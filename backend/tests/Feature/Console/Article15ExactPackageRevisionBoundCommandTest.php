@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Console;
 
+use App\Events\PublicAuthorityChanged;
 use App\Models\Article;
 use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
@@ -11,6 +12,9 @@ use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\Article15ExactPackageRevisionBoundAdapter;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\File;
 use RuntimeException;
 use Tests\TestCase;
 
@@ -20,19 +24,151 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
 
     private const MANIFEST_SHA = 'eb9a0254600991e2b4d7967b7c4d46c27d604719d8c40ba63353a20cd50a96e7';
 
-    public function test_preflight_recomputes_exact_manifest_package_and_body_chain_for_all_fifteen_targets(): void
+    public function test_snapshot_then_locked_preflight_emit_complete_zero_write_contract_for_all_fifteen_targets(): void
     {
         $this->seedBatch('ALL');
+        $before = $this->publicFingerprint('ALL');
+
+        $this->assertSame(0, Artisan::call('articles:article15-exact-package', $this->snapshotOptions()));
+        $snapshot = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $snapshot['state_sha256']);
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $snapshot['revision_set_sha256']);
         $options = $this->commandOptions('preflight', 'ALL');
+        $options['--expected-state-sha256'] = $snapshot['state_sha256'];
+        $options['--expected-revision-set-sha256'] = $snapshot['revision_set_sha256'];
 
         $this->assertSame(0, Artisan::call('articles:article15-exact-package', $options));
         $payload = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
 
         $this->assertTrue($payload['ok']);
+        $this->assertSame(15, $payload['target']);
         $this->assertSame(15, $payload['target_count']);
+        $this->assertSame(0, $payload['unknown']);
+        $this->assertSame(0, $payload['revision_drift']);
+        $this->assertSame(0, $payload['package_sha_mismatch']);
+        $this->assertSame(0, $payload['public_mutations']);
+        $this->assertSame($snapshot['database_row_counts'], $payload['database_row_counts']);
+        $this->assertSame([
+            'articles' => 15,
+            'article_seo_meta' => 15,
+            'article_translation_revisions' => 15,
+            'article_editorial_package_imports' => 0,
+        ], $payload['database_row_counts']);
+        $this->assertSame(['CHANGE' => 9, 'KEEP' => 6], $payload['field_counts']['declared']['body_markdown']);
+        $this->assertSame(['changed' => 2, 'unchanged' => 13], $payload['field_counts']['effective']['title/H1']);
+        $this->assertSame(['changed' => 5, 'unchanged' => 10], $payload['field_counts']['effective']['intro']);
+        $this->assertSame(['changed' => 9, 'unchanged' => 6], $payload['field_counts']['effective']['body']);
+        $this->assertSame(['changed' => 2, 'unchanged' => 13], $payload['field_counts']['effective']['SEO title']);
+        $this->assertSame(['changed' => 4, 'unchanged' => 11], $payload['field_counts']['effective']['SEO description']);
+        $this->assertSame(['changed' => 3, 'unchanged' => 12], $payload['field_counts']['effective']['FAQ']);
+        $this->assertSame(['changed' => 13, 'unchanged' => 2], $payload['field_counts']['effective']['CTA']);
+        $this->assertSame(['changed' => 10, 'unchanged' => 5], $payload['field_counts']['effective']['reading minutes']);
+        $this->assertSame(['changed' => 5, 'unchanged' => 10], $payload['field_counts']['effective']['related test']);
+        $this->assertCount(15, $payload['expected_readback']);
+        foreach ($payload['expected_readback'] as $expected) {
+            $this->assertSame(1, $expected['cta_count']);
+            $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $expected['cta_sha256']);
+            $this->assertMatchesRegularExpression('~^/(?:en|zh)/~', $expected['cta_canonical_href']);
+            $this->assertGreaterThan(0, $expected['faq_count']);
+            $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $expected['faq_sha256']);
+        }
         $this->assertCount(15, array_unique(array_column($this->manifest()['targets'], 'article_id')));
         $this->assertFalse($payload['executed']);
         $this->assertFalse($payload['write_boundaries']['database_write']);
+        $this->assertSame($before, $this->publicFingerprint('ALL'));
+    }
+
+    public function test_snapshot_counts_missing_identity_and_published_revision_drift_without_writes(): void
+    {
+        $this->seedBatch('ALL');
+        Article::query()->withoutGlobalScopes()->findOrFail(58)->forceDelete();
+        $drift = Article::query()->withoutGlobalScopes()->findOrFail(3);
+        $drift->forceFill(['published_revision_id' => 72])->saveQuietly();
+
+        $this->assertSame(1, Artisan::call('articles:article15-exact-package', $this->snapshotOptions()));
+        $payload = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame(1, $payload['unknown']);
+        $this->assertSame(1, $payload['revision_drift']);
+        $this->assertSame(0, $payload['public_mutations']);
+        $this->assertSame(0, ArticleEditorialPackageImport::query()->count());
+    }
+
+    public function test_snapshot_fails_closed_on_keep_faq_and_cta_public_drift(): void
+    {
+        $this->seedBatch('ALL');
+        $title = ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', 3)->firstOrFail();
+        $title->forceFill(['title' => 'forged KEEP title'])->saveQuietly();
+        foreach ([[58, 'answer_surface_v1.faq_items'], [40, 'cta_slots']] as [$articleId, $path]) {
+            $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->where('article_id', $articleId)->firstOrFail();
+            $schema = $seo->schema_json;
+            data_set($schema, 'editorial_package_v1.'.$path, [['forged' => true]]);
+            $seo->forceFill(['schema_json' => $schema])->saveQuietly();
+        }
+
+        $this->assertSame(1, Artisan::call('articles:article15-exact-package', $this->snapshotOptions()));
+        $payload = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertFalse($payload['ok']);
+        $this->assertSame(3, $payload['public_authority_drift']);
+        $this->assertContains('current_value_drift:title_h1:3', $payload['public_authority_errors']);
+        $this->assertContains('current_value_drift:faq:58', $payload['public_authority_errors']);
+        $this->assertContains('current_value_drift:primary_cta:40', $payload['public_authority_errors']);
+        $this->assertSame(0, $payload['public_mutations']);
+    }
+
+    public function test_effective_counts_compare_live_values_to_proposed_values(): void
+    {
+        $this->seedBatch('ALL');
+        $target = $this->targets('ALL')[0];
+        $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->where('article_id', 58)->firstOrFail();
+        $seo->forceFill([
+            'seo_description' => data_get($target, 'package.current_to_proposed.seo_description.proposed'),
+        ])->saveQuietly();
+
+        $this->assertSame(1, Artisan::call('articles:article15-exact-package', $this->snapshotOptions()));
+        $payload = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame(['changed' => 3, 'unchanged' => 12], $payload['field_counts']['effective']['SEO description']);
+        $this->assertContains('current_value_drift:seo_description:58', $payload['public_authority_errors']);
+    }
+
+    public function test_locked_preflight_detects_change_between_its_two_observations(): void
+    {
+        $this->seedBatch('ALL');
+        $locks = app(Article15ExactPackageRevisionBoundAdapter::class)->currentLockHashes('ALL');
+        $options = $this->commandOptions('preflight', 'ALL');
+        $options['--expected-state-sha256'] = $locks['state_sha256'];
+        $options['--expected-revision-set-sha256'] = $locks['revision_set_sha256'];
+        $retrieved = 0;
+        Article::retrieved(function () use (&$retrieved): void {
+            $retrieved++;
+            if ($retrieved === 15) {
+                Article::query()->withoutGlobalScopes()->whereKey(58)->update(['updated_at' => now()->addSecond()]);
+            }
+        });
+        $this->assertSame(1, Artisan::call('articles:article15-exact-package', $options));
+        $this->assertStringContainsString('preflight_observation_drift', Artisan::output());
+        $this->assertSame(0, ArticleEditorialPackageImport::query()->count());
+    }
+
+    public function test_package_and_body_digest_mismatch_are_target_level_failures(): void
+    {
+        $target = $this->targets('A')[0];
+        $adapter = app(Article15ExactPackageRevisionBoundAdapter::class);
+        $bodyPath = dirname(base_path()).'/'.dirname($target['package_path']).'/'.basename(data_get($target, 'package.body_patch.body_file'));
+        $body = file_get_contents($bodyPath);
+        $this->assertIsString($body);
+        $this->assertTrue($adapter->packageDigestMatches($target, $target['package'], $body));
+        $this->assertFalse($adapter->packageDigestMatches($target, [...$target['package'], 'title' => 'forged'], $body));
+        $this->assertFalse($adapter->packageDigestMatches($target, $target['package'], 'forged body'));
+    }
+
+    public function test_snapshot_reports_package_mismatch_as_failed_target_integrity(): void
+    {
+        $this->assertSnapshotIntegrityMismatch('package');
+    }
+
+    public function test_snapshot_reports_body_mismatch_as_failed_target_integrity(): void
+    {
+        $this->assertSnapshotIntegrityMismatch('body');
     }
 
     public function test_target_inventory_rejects_missing_extra_duplicate_and_order_drift(): void
@@ -140,6 +276,7 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
 
     public function test_publish_is_one_batch_transaction_and_exact_readback_is_idempotent(): void
     {
+        Event::fake([PublicAuthorityChanged::class]);
         $this->seedBatch('B');
         $exitCode = Artisan::call('articles:article15-exact-package', $this->commandOptions('draft-import', 'B', true));
         $this->assertSame(0, $exitCode, Artisan::output());
@@ -153,6 +290,8 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
             $this->assertCount(1, (array) data_get($article->seoMeta?->schema_json, 'editorial_package_v1.cta_slots'));
             $this->assertSame('published', data_get($article->publishedRevision?->authority_metadata_json, 'article15_exact_package_v1.status'));
         }
+        $this->assertSame(5, DB::table('audit_logs')->where('action', 'content_release_publish')->count());
+        Event::assertDispatchedTimes(PublicAuthorityChanged::class, 5);
 
         $revisionCount = ArticleTranslationRevision::query()->count();
         $this->assertSame(0, Artisan::call('articles:article15-exact-package', $this->commandOptions('publish', 'B', true)));
@@ -177,7 +316,7 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
         }
     }
 
-    public function test_article15_seven_and_eight_faqs_are_complete_while_normal_articles_remain_bounded_to_six(): void
+    public function test_article15_seven_and_eight_faqs_are_complete_while_normal_api_stays_at_six_and_json_ld_returns_eight(): void
     {
         foreach (['B', 'C'] as $batch) {
             $this->seedBatch($batch);
@@ -201,7 +340,7 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
         $this->assertCount(6, $response->json('answer_surface_v1.faq_blocks'));
         $seoResponse = $this->getJson('/api/v0.5/articles/'.$normal->slug.'/seo?locale=en')->assertOk();
         $faqPage = collect((array) $seoResponse->json('jsonld.hasPart'))->firstWhere('@type', 'FAQPage');
-        $this->assertCount(6, (array) ($faqPage['mainEntity'] ?? []));
+        $this->assertCount(8, (array) ($faqPage['mainEntity'] ?? []));
     }
 
     /** @return array<string,mixed> */
@@ -217,6 +356,18 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
             '--expected-revision-set-sha256' => $hashes['revision_set_sha256'],
             '--json' => true,
             ...($execute ? ['--execute' => true] : ['--dry-run' => true]),
+        ];
+    }
+
+    /** @return array<string,mixed> */
+    private function snapshotOptions(): array
+    {
+        return [
+            '--phase' => 'snapshot',
+            '--batch' => 'ALL',
+            '--execution-manifest-sha256' => self::MANIFEST_SHA,
+            '--dry-run' => true,
+            '--json' => true,
         ];
     }
 
@@ -279,7 +430,13 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
                 'og_title' => 'preserved og '.$target['article_id'],
                 'og_description' => 'preserved og description '.$target['article_id'],
                 'robots' => 'index,follow',
-                'schema_json' => ['preserved_gate' => true],
+                'schema_json' => [
+                    'preserved_gate' => true,
+                    'editorial_package_v1' => [
+                        'answer_surface_v1' => ['faq_items' => data_get($current, 'faq.current', [])],
+                        'cta_slots' => data_get($current, 'primary_cta.current', []),
+                    ],
+                ],
                 'is_indexable' => true,
             ]);
         }
@@ -345,5 +502,53 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
         ]);
 
         return $article->fresh() ?? $article;
+    }
+
+    private function isolatedPackageRepository(string $mutation): string
+    {
+        $sourceRoot = dirname(base_path());
+        $root = storage_path('framework/testing/article15-'.$mutation.'-'.bin2hex(random_bytes(4)));
+        $manifest = $this->manifest();
+        $paths = [Article15ExactPackageRevisionBoundAdapter::MANIFEST_PATH];
+        foreach ((array) $manifest['batches'] as $batch) {
+            $paths[] = (string) $batch['manifest_path'];
+        }
+        foreach ((array) $manifest['targets'] as $target) {
+            $paths[] = (string) $target['package_path'];
+            $package = json_decode(file_get_contents($sourceRoot.'/'.$target['package_path']), true, 512, JSON_THROW_ON_ERROR);
+            $paths[] = dirname((string) $target['package_path']).'/'.basename((string) data_get($package, 'body_patch.body_file'));
+        }
+        foreach (array_unique($paths) as $path) {
+            File::ensureDirectoryExists(dirname($root.'/'.$path));
+            File::copy($sourceRoot.'/'.$path, $root.'/'.$path);
+        }
+
+        $target = $manifest['targets'][0];
+        $packagePath = $root.'/'.$target['package_path'];
+        if ($mutation === 'package') {
+            $package = json_decode(file_get_contents($packagePath), true, 512, JSON_THROW_ON_ERROR);
+            $package['test_only_forgery'] = true;
+            File::put($packagePath, json_encode($package, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+        } else {
+            $package = json_decode(file_get_contents($packagePath), true, 512, JSON_THROW_ON_ERROR);
+            $bodyPath = dirname($packagePath).'/'.basename((string) data_get($package, 'body_patch.body_file'));
+            File::append($bodyPath, "\ntest-only-forgery\n");
+        }
+
+        return $root;
+    }
+
+    private function assertSnapshotIntegrityMismatch(string $mutation): void
+    {
+        $root = $this->isolatedPackageRepository($mutation);
+        $this->beforeApplicationDestroyed(static fn () => File::deleteDirectory($root));
+        config(['article15_test.repository_root' => $root]);
+        $this->seedBatch('ALL');
+
+        $this->assertSame(1, Artisan::call('articles:article15-exact-package', $this->snapshotOptions()));
+        $payload = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertFalse($payload['ok']);
+        $this->assertSame(1, $payload['package_sha_mismatch']);
+        $this->assertSame(0, $payload['public_mutations']);
     }
 }

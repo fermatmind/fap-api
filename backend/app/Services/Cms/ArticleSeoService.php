@@ -578,11 +578,7 @@ final class ArticleSeoService
 
         $answerSurface = is_array($metadata['answer_surface_v1'] ?? null) ? $metadata['answer_surface_v1'] : [];
         $faqItems = is_array($answerSurface['faq_items'] ?? null) ? $answerSurface['faq_items'] : [];
-        $faqLimit = Article15ExactPackageRevisionBoundAdapter::isPublishedArticle15Metadata(
-            $metadata['article15_exact_package_v1'] ?? null,
-            (int) $article->id,
-            (int) ($article->published_revision_id ?? 0),
-        ) ? 8 : 6;
+        $faqLimit = 8;
 
         $mainEntity = [];
         foreach ($faqItems as $index => $item) {

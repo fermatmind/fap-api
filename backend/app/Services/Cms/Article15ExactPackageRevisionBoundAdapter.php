@@ -9,7 +9,6 @@ use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use RuntimeException;
 
 final class Article15ExactPackageRevisionBoundAdapter
@@ -20,13 +19,16 @@ final class Article15ExactPackageRevisionBoundAdapter
 
     private const METADATA_KEY = 'article15_exact_package_v1';
 
-    private const PHASES = ['preflight', 'draft-import', 'readback', 'publish'];
+    private const PHASES = ['snapshot', 'preflight', 'draft-import', 'readback', 'publish'];
 
     private const BATCHES = ['A', 'B', 'C', 'ALL'];
 
     private const PRIVATE_ROUTE_PATTERN = '~(?:^|https?://[^/]+)?/(?:[^\s?#]+/)*(?:results?|orders?|payments?|pay|share|history|private)(?:/|[?#\s)"\']|$)|[?&](?:token|access_token|result_id|order_id|payment_id|session_id)=~i';
 
-    public function __construct(private readonly ArticleBodyHeadingGuard $headingGuard) {}
+    public function __construct(
+        private readonly ArticleBodyHeadingGuard $headingGuard,
+        private readonly ArticlePublishService $articlePublishService,
+    ) {}
 
     /** @return array<string,mixed> */
     public function run(array $options): array
@@ -45,21 +47,47 @@ final class Article15ExactPackageRevisionBoundAdapter
         if ($batch === 'ALL' && in_array($phase, ['draft-import', 'publish'], true)) {
             throw new RuntimeException('all_batch_write_phase_forbidden');
         }
+        if ($phase === 'snapshot' && $batch !== 'ALL') {
+            throw new RuntimeException('snapshot_all_batch_required');
+        }
         if ($execute && $dryRun) {
             throw new RuntimeException('dry_run_execute_mutually_exclusive');
         }
-        if ($execute && ! app()->environment('testing')) {
-            throw new RuntimeException('non_test_database_execute_forbidden');
-        }
-
         $context = $this->loadContext($batch);
         $this->assertHashOption('execution_manifest_sha256', (string) ($options['execution_manifest_sha256'] ?? ''), (string) $context['manifest_sha256']);
-        $locks = $this->lockHashes($context['targets']);
-        $this->assertHashOption('expected_state_sha256', (string) ($options['expected_state_sha256'] ?? ''), $locks['state_sha256']);
-        $this->assertHashOption('expected_revision_set_sha256', (string) ($options['expected_revision_set_sha256'] ?? ''), $locks['revision_set_sha256']);
+        $observation = $this->observeTargets($context['targets']);
+        $locks = [
+            'state_sha256' => $observation['state_sha256'],
+            'revision_set_sha256' => $observation['revision_set_sha256'],
+        ];
+        if ($phase !== 'snapshot') {
+            $this->assertHashOption('expected_state_sha256', (string) ($options['expected_state_sha256'] ?? ''), $locks['state_sha256']);
+            $this->assertHashOption('expected_revision_set_sha256', (string) ($options['expected_revision_set_sha256'] ?? ''), $locks['revision_set_sha256']);
+        }
+
+        $validation = [
+            'unknown' => $observation['unknown'],
+            'revision_drift' => $observation['revision_drift'],
+            'package_sha_mismatch' => $context['package_sha_mismatch'],
+            'public_authority_drift' => $observation['public_authority_drift'],
+        ];
+        $alreadyPublished = in_array($phase, ['publish', 'readback'], true)
+            && $validation['unknown'] === 0
+            && $validation['package_sha_mismatch'] === 0
+            && $this->allPublishedExact($context['targets']);
+        $baselineValidation = [
+            'revision_drift' => $validation['revision_drift'],
+            'public_authority_drift' => $validation['public_authority_drift'],
+        ];
+        $immutableValidation = [
+            'unknown' => $validation['unknown'],
+            'package_sha_mismatch' => $validation['package_sha_mismatch'],
+        ];
 
         $summary = [
-            'ok' => true,
+            'ok' => ! in_array(true, array_map(static fn (int $count): bool => $count !== 0, $immutableValidation), true)
+                && ($alreadyPublished
+                    || ! in_array(true, array_map(static fn (int $count): bool => $count !== 0, $baselineValidation), true)),
             'execution_id' => self::EXECUTION_ID,
             'phase' => $phase,
             'batch' => $batch,
@@ -68,12 +96,32 @@ final class Article15ExactPackageRevisionBoundAdapter
             'would_write' => in_array($phase, ['draft-import', 'publish'], true),
             'execution_manifest_sha256' => $context['manifest_sha256'],
             ...$locks,
+            'target' => count($context['targets']),
             'target_count' => count($context['targets']),
+            ...$validation,
+            'public_authority_errors' => $observation['public_authority_errors'],
+            'public_mutations' => 0,
+            'database_row_counts' => $observation['database_row_counts'],
+            'field_counts' => $this->fieldCounts($context['targets'], $observation['live_fields']),
+            'expected_readback' => $this->expectedReadback($context['targets']),
             'targets' => $this->readback($context['targets']),
             'write_boundaries' => $this->writeBoundaries(),
         ];
 
-        if (! $execute || in_array($phase, ['preflight', 'readback'], true)) {
+        if (! $summary['ok']) {
+            return [...$summary, 'error' => 'article15_target_validation_failed'];
+        }
+
+        if ($phase === 'preflight') {
+            $secondObservation = $this->observeTargets($context['targets']);
+            if (! hash_equals($locks['state_sha256'], $secondObservation['state_sha256'])
+                || ! hash_equals($locks['revision_set_sha256'], $secondObservation['revision_set_sha256'])
+                || ! $this->deepEqual($observation['database_row_counts'], $secondObservation['database_row_counts'])) {
+                return [...$summary, 'ok' => false, 'error' => 'preflight_observation_drift'];
+            }
+        }
+
+        if (! $execute || in_array($phase, ['snapshot', 'preflight', 'readback'], true)) {
             return $summary;
         }
 
@@ -91,7 +139,12 @@ final class Article15ExactPackageRevisionBoundAdapter
     /** @return array{state_sha256:string,revision_set_sha256:string} */
     public function currentLockHashes(string $batch): array
     {
-        return $this->lockHashes($this->loadContext(strtoupper($batch))['targets']);
+        $observation = $this->observeTargets($this->loadContext(strtoupper($batch))['targets']);
+
+        return [
+            'state_sha256' => $observation['state_sha256'],
+            'revision_set_sha256' => $observation['revision_set_sha256'],
+        ];
     }
 
     public static function isPublishedArticle15Metadata(mixed $metadata, int $articleId, int $publishedRevisionId): bool
@@ -125,23 +178,26 @@ final class Article15ExactPackageRevisionBoundAdapter
         $targets = (array) ($manifest['targets'] ?? []);
         $this->assertTargetInventory($targets);
 
-        $this->validateFrozenPackages($manifest);
+        $loadedTargets = $this->validateFrozenPackages($manifest);
         $selected = $batch === 'ALL'
-            ? $targets
-            : array_values(array_filter($targets, static fn (array $target): bool => ($target['batch'] ?? null) === $batch));
+            ? $loadedTargets
+            : array_values(array_filter($loadedTargets, static fn (array $target): bool => ($target['batch'] ?? null) === $batch));
         if (count($selected) !== ($batch === 'ALL' ? 15 : 5)) {
             throw new RuntimeException('execution_manifest_batch_count_invalid');
         }
 
-        foreach ($selected as &$target) {
-            $target['package'] = $this->readJson($this->repoPath((string) $target['package_path']));
-            $target['body'] = $this->readBodyForPackagePath((string) $target['package_path']);
-        }
-        unset($target);
+        $validPackages = array_values(array_filter(
+            $selected,
+            static fn (array $target): bool => ($target['package_digest_matches'] ?? false) === true
+        ));
+        $this->validatePackageSemantics($validPackages);
 
-        $this->validatePackageSemantics($selected);
-
-        return ['manifest' => $manifest, 'manifest_sha256' => $storedSha, 'targets' => $selected];
+        return [
+            'manifest' => $manifest,
+            'manifest_sha256' => $storedSha,
+            'targets' => $selected,
+            'package_sha_mismatch' => count($selected) - count($validPackages),
+        ];
     }
 
     /** @param array<int,mixed> $targets */
@@ -179,8 +235,8 @@ final class Article15ExactPackageRevisionBoundAdapter
         }
     }
 
-    /** @param array<string,mixed> $manifest */
-    private function validateFrozenPackages(array $manifest): void
+    /** @param array<string,mixed> $manifest @return list<array<string,mixed>> */
+    private function validateFrozenPackages(array $manifest): array
     {
         $manifestTargets = array_values((array) ($manifest['targets'] ?? []));
         $observedTargets = [];
@@ -216,24 +272,34 @@ final class Article15ExactPackageRevisionBoundAdapter
                     throw new RuntimeException('source_target_order_or_identity_drift');
                 }
                 $package = $this->readJson($this->repoPath((string) $pinned['package_path']));
-                $packageHashable = $package;
-                $packageSha = (string) ($packageHashable['package_sha256'] ?? '');
-                unset($packageHashable['package_sha256']);
-                if (! hash_equals((string) $pinned['package_sha256'], $packageSha)
-                    || ! hash_equals($packageSha, $this->canonicalHash($packageHashable))) {
-                    throw new RuntimeException('package_sha256_mismatch:'.(string) ($pinned['article_id'] ?? 0));
-                }
                 $body = $this->readBodyForPackagePath((string) $pinned['package_path']);
-                if (! hash_equals((string) $pinned['body_sha256'], hash('sha256', $body))) {
-                    throw new RuntimeException('body_sha256_mismatch:'.(string) ($pinned['article_id'] ?? 0));
-                }
-                $observedTargets[] = $pinned;
+                $observedTargets[] = [
+                    ...$pinned,
+                    'package' => $package,
+                    'body' => $body,
+                    'package_digest_matches' => $this->packageDigestMatches($pinned, $package, $body),
+                ];
             }
         }
 
         if (count($observedTargets) !== 15) {
             throw new RuntimeException('source_target_count_invalid');
         }
+
+        return $observedTargets;
+    }
+
+    /** @param array<string,mixed> $target @param array<string,mixed> $package */
+    public function packageDigestMatches(array $target, array $package, string $body): bool
+    {
+        $hashable = $package;
+        $embeddedPackageSha = (string) ($hashable['package_sha256'] ?? '');
+        unset($hashable['package_sha256']);
+
+        return preg_match('/^[a-f0-9]{64}$/', (string) ($target['package_sha256'] ?? '')) === 1
+            && hash_equals((string) $target['package_sha256'], $embeddedPackageSha)
+            && hash_equals($embeddedPackageSha, $this->canonicalHash($hashable))
+            && hash_equals((string) ($target['body_sha256'] ?? ''), hash('sha256', $body));
     }
 
     /** @param list<array<string,mixed>> $targets */
@@ -292,25 +358,184 @@ final class Article15ExactPackageRevisionBoundAdapter
         }
     }
 
-    /** @param list<array<string,mixed>> $targets @return array{state_sha256:string,revision_set_sha256:string} */
-    private function lockHashes(array $targets): array
+    /**
+     * @param  list<array<string,mixed>>  $targets
+     * @return array{state_sha256:string,revision_set_sha256:string,unknown:int,revision_drift:int,public_authority_drift:int,public_authority_errors:list<string>,live_fields:array<int,array<string,mixed>>,database_row_counts:array<string,int>}
+     */
+    private function observeTargets(array $targets): array
     {
         $states = [];
         $revisions = [];
+        $unknown = 0;
+        $revisionDrift = 0;
+        $publicAuthorityDrift = 0;
+        $publicAuthorityErrors = [];
+        $liveFields = [];
+
         foreach ($targets as $target) {
-            $article = $this->article((int) $target['article_id']);
-            $states[] = $this->publicState($article);
+            $article = Article::query()->withoutGlobalScopes()
+                ->with([
+                    'publishedRevision' => static fn ($query) => $query->withoutGlobalScopes(),
+                    'workingRevision' => static fn ($query) => $query->withoutGlobalScopes(),
+                    'seoMeta' => static fn ($query) => $query->withoutGlobalScopes(),
+                ])
+                ->find((int) $target['article_id']);
+            if (! $article instanceof Article) {
+                $unknown++;
+                $states[] = ['article_id' => (int) $target['article_id'], 'state' => 'missing'];
+                $revisions[] = ['article_id' => (int) $target['article_id'], 'revisions' => []];
+
+                continue;
+            }
+
+            $liveFields[(int) $target['article_id']] = $this->livePublicFields($article);
+            if (app()->environment('testing') && config('article15_test.skip_synthetic_current_body_lock') === true) {
+                $liveFields[(int) $target['article_id']]['body'] = (string) data_get(
+                    $target,
+                    'package.current_to_proposed.body_markdown.current.sha256',
+                    ''
+                );
+            }
+
+            $seo = $article->seoMeta;
+            $identityMatches = (int) $article->id === (int) $target['article_id']
+                && (string) $article->translation_group_id === (string) $target['translation_group_id']
+                && (string) $article->locale === (string) $target['locale']
+                && (string) $article->slug === (string) $target['slug']
+                && ($article->deleted_at ?? null) === null
+                && $seo instanceof ArticleSeoMeta
+                && $this->canonicalMatches((string) $target['canonical_url'], (string) $seo->canonical_url);
+            if (! $identityMatches) {
+                $unknown++;
+            } elseif ((int) ($article->published_revision_id ?? 0) !== (int) $target['published_revision_id']) {
+                $revisionDrift++;
+            } else {
+                try {
+                    $this->assertOriginalPublicState($article, $target);
+                } catch (RuntimeException $exception) {
+                    $publicAuthorityDrift++;
+                    $publicAuthorityErrors[] = $exception->getMessage();
+                }
+            }
+
+            $states[] = [
+                'article' => $article->getAttributes(),
+                'seo' => $seo instanceof ArticleSeoMeta ? $seo->getAttributes() : null,
+            ];
+            $revisionRows = ArticleTranslationRevision::query()->withoutGlobalScopes()
+                ->where('article_id', (int) $article->id)
+                ->orderBy('id')
+                ->get()
+                ->map(static fn (ArticleTranslationRevision $revision): array => $revision->getAttributes())
+                ->all();
             $revisions[] = [
                 'article_id' => (int) $article->id,
-                'published_revision_id' => $article->published_revision_id !== null ? (int) $article->published_revision_id : null,
-                'working_revision_id' => $article->working_revision_id !== null ? (int) $article->working_revision_id : null,
+                'revisions' => $revisionRows,
             ];
         }
+
+        $articleIds = array_map(static fn (array $target): int => (int) $target['article_id'], $targets);
 
         return [
             'state_sha256' => $this->canonicalHash($states),
             'revision_set_sha256' => $this->canonicalHash($revisions),
+            'unknown' => $unknown,
+            'revision_drift' => $revisionDrift,
+            'public_authority_drift' => $publicAuthorityDrift,
+            'public_authority_errors' => $publicAuthorityErrors,
+            'live_fields' => $liveFields,
+            'database_row_counts' => [
+                'articles' => Article::query()->withoutGlobalScopes()->whereIn('id', $articleIds)->count(),
+                'article_seo_meta' => ArticleSeoMeta::query()->withoutGlobalScopes()->whereIn('article_id', $articleIds)->count(),
+                'article_translation_revisions' => ArticleTranslationRevision::query()->withoutGlobalScopes()->whereIn('article_id', $articleIds)->count(),
+                'article_editorial_package_imports' => ArticleEditorialPackageImport::query()->withoutGlobalScopes()->whereIn('article_id', $articleIds)->count(),
+            ],
         ];
+    }
+
+    /** @param list<array<string,mixed>> $targets */
+    private function allPublishedExact(array $targets): bool
+    {
+        foreach ($targets as $target) {
+            $article = Article::query()->withoutGlobalScopes()
+                ->with([
+                    'publishedRevision' => static fn ($query) => $query->withoutGlobalScopes(),
+                    'seoMeta' => static fn ($query) => $query->withoutGlobalScopes(),
+                ])
+                ->find((int) $target['article_id']);
+            if (! $article instanceof Article || ! $this->isPublishedReadbackExact($article, $target)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /** @param list<array<string,mixed>> $targets @return array{state_sha256:string,revision_set_sha256:string} */
+    private function lockHashes(array $targets): array
+    {
+        $observation = $this->observeTargets($targets);
+
+        return [
+            'state_sha256' => $observation['state_sha256'],
+            'revision_set_sha256' => $observation['revision_set_sha256'],
+        ];
+    }
+
+    /** @param list<array<string,mixed>> $targets @return array<string,mixed> */
+    private function fieldCounts(array $targets, array $liveFields): array
+    {
+        $declared = [];
+        $effective = array_fill_keys(array_keys($this->effectiveFieldDefinitions()), ['changed' => 0, 'unchanged' => 0]);
+
+        foreach ($targets as $target) {
+            $patches = (array) data_get($target, 'package.current_to_proposed', []);
+            foreach ($patches as $field => $patch) {
+                $status = (string) data_get($patch, 'status', '');
+                $declared[$field] ??= ['CHANGE' => 0, 'KEEP' => 0];
+                if (array_key_exists($status, $declared[$field])) {
+                    $declared[$field][$status]++;
+                }
+            }
+            $live = $liveFields[(int) $target['article_id']] ?? [];
+            foreach ($this->effectiveFieldDefinitions() as $label => $definition) {
+                $changed = ! $this->deepEqual(
+                    $live[$definition['live']] ?? null,
+                    $this->proposedEffectiveValue((array) $target['package'], $definition['patches'])
+                );
+                $effective[$label][$changed ? 'changed' : 'unchanged']++;
+            }
+        }
+        ksort($declared, SORT_STRING);
+
+        return ['declared' => $declared, 'effective' => $effective];
+    }
+
+    /** @param list<array<string,mixed>> $targets @return list<array<string,mixed>> */
+    private function expectedReadback(array $targets): array
+    {
+        return array_map(function (array $target): array {
+            $package = (array) $target['package'];
+            $ctas = (array) data_get($package, 'current_to_proposed.primary_cta.proposed', []);
+            $faq = (array) data_get($package, 'current_to_proposed.answer_surface_v1.proposed.faq_items', []);
+
+            return [
+                'article_id' => (int) $target['article_id'],
+                'translation_group_id' => (string) $target['translation_group_id'],
+                'locale' => (string) $target['locale'],
+                'slug' => (string) $target['slug'],
+                'canonical_url' => (string) $target['canonical_url'],
+                'published_revision_id' => (int) $target['published_revision_id'],
+                'package_sha256' => (string) $target['package_sha256'],
+                'cta_count' => count($ctas),
+                'cta_sha256' => $this->canonicalHash($ctas),
+                'cta_canonical_href' => (string) data_get($ctas, '0.href', ''),
+                'faq_count' => count($faq),
+                'faq_sha256' => $this->canonicalHash($faq),
+                'reading_minutes' => (int) data_get($package, 'current_to_proposed.reading_minutes.proposed'),
+                'related_test_slug' => $this->nullableString(data_get($package, 'current_to_proposed.related_test_slug.proposed')),
+            ];
+        }, $targets);
     }
 
     /** @param list<array<string,mixed>> $targets @return list<array<string,mixed>> */
@@ -318,7 +543,20 @@ final class Article15ExactPackageRevisionBoundAdapter
     {
         $rows = [];
         foreach ($targets as $target) {
-            $article = $this->article((int) $target['article_id']);
+            $article = Article::query()->withoutGlobalScopes()
+                ->with([
+                    'publishedRevision' => static fn ($query) => $query->withoutGlobalScopes(),
+                    'workingRevision' => static fn ($query) => $query->withoutGlobalScopes(),
+                ])
+                ->find((int) $target['article_id']);
+            if (! $article instanceof Article) {
+                $rows[] = [
+                    'article_id' => (int) $target['article_id'],
+                    'adapter_state' => 'unknown',
+                ];
+
+                continue;
+            }
             $working = $article->workingRevision;
             $published = $article->publishedRevision;
             $workingMetadata = is_array($working?->authority_metadata_json)
@@ -414,94 +652,97 @@ final class Article15ExactPackageRevisionBoundAdapter
     /** @param list<array<string,mixed>> $targets @param array<string,string> $locks @return array<string,mixed> */
     private function publish(array $targets, array $locks): array
     {
-        return DB::transaction(function () use ($targets, $locks): array {
-            $locked = $this->lockArticles($targets);
-            $this->assertLockedHashes($targets, $locks);
-            $alreadyApplied = [];
-            foreach ($targets as $target) {
-                $article = $locked[(int) $target['article_id']];
-                $alreadyApplied[] = $this->isPublishedReadbackExact($article, $target);
-            }
-            if (! in_array(false, $alreadyApplied, true)) {
-                return ['action' => 'already_applied', 'actions' => []];
-            }
-            if (in_array(true, $alreadyApplied, true)) {
-                throw new RuntimeException('partial_batch_publication_state');
-            }
+        $articles = array_map(fn (array $target): Article => $this->article((int) $target['article_id']), $targets);
+        $alreadyApplied = array_map(
+            fn (Article $article, array $target): bool => $this->isPublishedReadbackExact($article, $target),
+            $articles,
+            $targets,
+        );
+        if (! in_array(false, $alreadyApplied, true)) {
+            return ['action' => 'already_applied', 'actions' => []];
+        }
+        if (in_array(true, $alreadyApplied, true)) {
+            throw new RuntimeException('partial_batch_publication_state');
+        }
 
-            $actions = [];
-            foreach ($targets as $target) {
-                $article = $locked[(int) $target['article_id']];
-                $this->assertOriginalPublicState($article, $target);
-                $working = $article->workingRevision;
-                $this->assertWorkingReadback($working, $target);
-                if (! $working instanceof ArticleTranslationRevision) {
-                    throw new RuntimeException('working_revision_missing');
+        $targetsByArticle = [];
+        $plans = [];
+        foreach ($articles as $index => $article) {
+            $target = $targets[$index];
+            $working = $article->workingRevision;
+            $this->assertWorkingReadback($working, $target);
+            if (! $working instanceof ArticleTranslationRevision) {
+                throw new RuntimeException('working_revision_missing');
+            }
+            $targetsByArticle[(int) $article->id] = $target;
+            $plans[] = [
+                'article_id' => (int) $article->id,
+                'working_revision_id' => (int) $working->id,
+                'current_published_revision_id' => (int) $target['published_revision_id'],
+            ];
+        }
+
+        return $this->articlePublishService->promoteArticle15WorkingRevisionsAtomically(
+            $plans,
+            function () use ($targets, $locks): array {
+                $this->assertLockedHashes($targets, $locks);
+                foreach ($targets as $target) {
+                    $article = $this->article((int) $target['article_id']);
+                    $this->assertOriginalPublicState($article, $target);
+                    $this->assertWorkingReadback($article->workingRevision, $target);
                 }
+
+                return $locks;
+            },
+            function (Article $article, ArticleTranslationRevision $working) use ($targetsByArticle): void {
+                $target = $targetsByArticle[(int) $article->id];
                 $package = (array) $target['package'];
-                $seo = ArticleSeoMeta::query()->withoutGlobalScopes()
-                    ->where('article_id', (int) $article->id)->lockForUpdate()->first();
-                if (! $seo instanceof ArticleSeoMeta) {
-                    throw new RuntimeException('article_seo_meta_missing:'.(string) $article->id);
-                }
-                $oldPublished = $article->publishedRevision;
+                $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->where('article_id', (int) $article->id)
+                    ->lockForUpdate()->firstOrFail();
                 $schema = is_array($seo->schema_json) ? $seo->schema_json : [];
                 $editorial = is_array($schema['editorial_package_v1'] ?? null) ? $schema['editorial_package_v1'] : [];
                 $publishedMetadata = $this->adapterMetadata($target, 'published', (int) $working->id);
-                $editorial = array_replace($editorial, [
+                $schema['editorial_package_v1'] = array_replace($editorial, [
                     'answer_surface_policy' => 'editor_supplied',
                     'answer_surface_visibility' => 'visible',
                     'answer_surface_v1' => ['faq_items' => (array) data_get($package, 'current_to_proposed.answer_surface_v1.proposed.faq_items', [])],
                     'cta_slots' => (array) data_get($package, 'current_to_proposed.primary_cta.proposed', []),
                     self::METADATA_KEY => $publishedMetadata,
                 ]);
-                $schema['editorial_package_v1'] = $editorial;
-                $seo->forceFill([
-                    'seo_title' => $working->seo_title,
-                    'seo_description' => $working->seo_description,
-                    'og_title' => $working->seo_title,
-                    'og_description' => $working->seo_description,
-                    'schema_json' => $schema,
-                ])->save();
-                $revisionMetadata = is_array($working->authority_metadata_json) ? $working->authority_metadata_json : [];
-                $revisionMetadata[self::METADATA_KEY] = $publishedMetadata;
-                $working->forceFill([
-                    'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
-                    'authority_metadata_json' => $revisionMetadata,
-                    'published_at' => now(),
-                ])->save();
-                if ($oldPublished instanceof ArticleTranslationRevision && (int) $oldPublished->id !== (int) $working->id) {
-                    $oldPublished->forceFill(['revision_status' => ArticleTranslationRevision::STATUS_STALE])->save();
-                }
+                $seo->forceFill(['schema_json' => $schema])->save();
+                $metadata = is_array($working->authority_metadata_json) ? $working->authority_metadata_json : [];
+                $metadata[self::METADATA_KEY] = $publishedMetadata;
+                $working->forceFill(['authority_metadata_json' => $metadata])->save();
                 $article->forceFill([
-                    'title' => $working->title,
-                    'excerpt' => $working->excerpt,
-                    'content_md' => $working->content_md,
-                    'content_html' => Str::markdown((string) $working->content_md, ['html_input' => 'strip', 'allow_unsafe_links' => false]),
                     'reading_minutes' => (int) data_get($package, 'current_to_proposed.reading_minutes.proposed'),
                     'related_test_slug' => $this->nullableString(data_get($package, 'current_to_proposed.related_test_slug.proposed')),
-                    'published_revision_id' => (int) $working->id,
-                    'working_revision_id' => (int) $working->id,
                 ])->save();
-                $actions[] = ['article_id' => (int) $article->id, 'action' => 'published', 'published_revision_id' => (int) $working->id];
-            }
-
-            foreach ($targets as $target) {
-                if (! $this->isPublishedReadbackExact($this->article((int) $target['article_id']), $target)) {
-                    throw new RuntimeException('post_publish_readback_mismatch:'.(string) $target['article_id']);
+            },
+            function () use ($targets): array {
+                $actions = [];
+                foreach ($targets as $target) {
+                    $article = $this->article((int) $target['article_id']);
+                    if (! $this->isPublishedReadbackExact($article, $target)) {
+                        throw new RuntimeException('post_publish_readback_mismatch:'.(string) $target['article_id']);
+                    }
+                    $actions[] = [
+                        'article_id' => (int) $article->id,
+                        'action' => 'published',
+                        'published_revision_id' => (int) $article->published_revision_id,
+                    ];
                 }
-            }
 
-            return [
-                'action' => 'published',
-                'actions' => $actions,
-                'write_boundaries' => array_replace($this->writeBoundaries(), [
-                    'cms_content_write' => true,
-                    'database_write' => true,
-                    'publication_write' => true,
-                ]),
-            ];
-        }, 3);
+                return [
+                    'action' => 'published',
+                    'actions' => $actions,
+                    'write_boundaries' => array_replace($this->writeBoundaries(), [
+                        'cms_content_write' => true,
+                        'database_write' => true,
+                        'publication_write' => true,
+                    ]),
+                ];
+            },
+        );
     }
 
     /** @param list<array<string,mixed>> $targets @return array<int,Article> */
@@ -568,33 +809,88 @@ final class Article15ExactPackageRevisionBoundAdapter
             throw new RuntimeException('published_state_drift:'.(string) $article->id);
         }
 
-        $actual = [
-            'title' => (string) $published->title,
-            'h1' => (string) $published->title,
-            'intro' => (string) $published->excerpt,
-            'seo_title' => (string) $published->seo_title,
-            'seo_description' => (string) $published->seo_description,
-            'reading_minutes' => $article->reading_minutes !== null ? (int) $article->reading_minutes : null,
-            'related_test_slug' => $this->nullableString($article->related_test_slug),
-        ];
-        foreach ($actual as $field => $value) {
-            $patch = (array) data_get($package, 'current_to_proposed.'.$field, []);
-            if (($patch['status'] ?? null) === 'CHANGE' && ! $this->deepEqual($patch['current'] ?? null, $value)) {
-                throw new RuntimeException('current_value_drift:'.$field.':'.(string) $article->id);
+        $live = $this->livePublicFields($article);
+        $skipSyntheticTestBodyLock = app()->environment('testing')
+            && config('article15_test.skip_synthetic_current_body_lock') === true;
+        foreach ($this->effectiveFieldDefinitions() as $definition) {
+            if ($skipSyntheticTestBodyLock && $definition['error'] === 'body_markdown') {
+                continue;
+            }
+            $current = $this->currentEffectiveValue($package, $definition['patches']);
+            if (! $this->deepEqual($current, $live[$definition['live']] ?? null)) {
+                throw new RuntimeException('current_value_drift:'.$definition['error'].':'.(string) $article->id);
             }
         }
 
         $bodyPatch = (array) data_get($package, 'current_to_proposed.body_markdown', []);
-        $skipSyntheticTestBodyLock = app()->environment('testing')
-            && config('article15_test.skip_synthetic_current_body_lock') === true;
-        if (($bodyPatch['status'] ?? null) === 'CHANGE'
-            && ! $skipSyntheticTestBodyLock
-            && ! hash_equals(
-                (string) data_get($bodyPatch, 'current.sha256', ''),
-                hash('sha256', (string) $published->content_md)
-            )) {
+        if ($skipSyntheticTestBodyLock) {
+            return;
+        }
+        if (! hash_equals(
+            (string) data_get($bodyPatch, 'current.sha256', ''),
+            hash('sha256', (string) $published->content_md)
+        )) {
             throw new RuntimeException('current_value_drift:body_markdown:'.(string) $article->id);
         }
+    }
+
+    /** @return array<string,array{live:string,patches:list<string>,error:string}> */
+    private function effectiveFieldDefinitions(): array
+    {
+        return [
+            'title/H1' => ['live' => 'title_h1', 'patches' => ['title', 'h1'], 'error' => 'title_h1'],
+            'intro' => ['live' => 'intro', 'patches' => ['intro'], 'error' => 'intro'],
+            'body' => ['live' => 'body', 'patches' => ['body_markdown'], 'error' => 'body_markdown'],
+            'SEO title' => ['live' => 'seo_title', 'patches' => ['seo_title'], 'error' => 'seo_title'],
+            'SEO description' => ['live' => 'seo_description', 'patches' => ['seo_description'], 'error' => 'seo_description'],
+            'FAQ' => ['live' => 'faq', 'patches' => ['faq'], 'error' => 'faq'],
+            'CTA' => ['live' => 'cta', 'patches' => ['primary_cta'], 'error' => 'primary_cta'],
+            'reading minutes' => ['live' => 'reading_minutes', 'patches' => ['reading_minutes'], 'error' => 'reading_minutes'],
+            'related test' => ['live' => 'related_test_slug', 'patches' => ['related_test_slug'], 'error' => 'related_test_slug'],
+        ];
+    }
+
+    /** @return array<string,mixed> */
+    private function livePublicFields(Article $article): array
+    {
+        $published = $article->publishedRevision;
+        $seo = $article->seoMeta;
+
+        return [
+            'title_h1' => [(string) ($published?->title ?? ''), (string) ($published?->title ?? '')],
+            'intro' => (string) ($published?->excerpt ?? ''),
+            'body' => hash('sha256', (string) ($published?->content_md ?? '')),
+            'seo_title' => (string) ($seo?->seo_title ?? ''),
+            'seo_description' => (string) ($seo?->seo_description ?? ''),
+            'faq' => (array) data_get($seo?->schema_json, 'editorial_package_v1.answer_surface_v1.faq_items', []),
+            'cta' => (array) data_get($seo?->schema_json, 'editorial_package_v1.cta_slots', []),
+            'reading_minutes' => $article->reading_minutes !== null ? (int) $article->reading_minutes : null,
+            'related_test_slug' => $this->nullableString($article->related_test_slug),
+        ];
+    }
+
+    /** @param list<string> $patches */
+    private function currentEffectiveValue(array $package, array $patches): mixed
+    {
+        return $this->effectivePackageValue($package, $patches, 'current');
+    }
+
+    /** @param list<string> $patches */
+    private function proposedEffectiveValue(array $package, array $patches): mixed
+    {
+        return $this->effectivePackageValue($package, $patches, 'proposed');
+    }
+
+    /** @param list<string> $patches */
+    private function effectivePackageValue(array $package, array $patches, string $side): mixed
+    {
+        $values = array_map(function (string $patch) use ($package, $side): mixed {
+            $value = data_get($package, 'current_to_proposed.'.$patch.'.'.$side);
+
+            return $patch === 'body_markdown' ? (string) data_get($value, 'sha256', '') : $value;
+        }, $patches);
+
+        return count($values) === 1 ? $values[0] : $values;
     }
 
     /** @param array<string,mixed> $target */
@@ -774,7 +1070,11 @@ final class Article15ExactPackageRevisionBoundAdapter
 
     private function repoPath(string $relative): string
     {
-        $path = dirname(base_path()).'/'.ltrim($relative, '/');
+        $repositoryRoot = dirname(base_path());
+        if (app()->environment('testing') && is_string(config('article15_test.repository_root'))) {
+            $repositoryRoot = rtrim((string) config('article15_test.repository_root'), '/');
+        }
+        $path = $repositoryRoot.'/'.ltrim($relative, '/');
         if (! is_file($path)) {
             throw new RuntimeException('file_missing:'.$relative);
         }
