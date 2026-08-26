@@ -377,7 +377,11 @@ return [
     ],
     'gsc_enabled' => env('SEO_INTEL_GSC_ENABLED', false),
     'gsc_live_api_enabled' => env('SEO_INTEL_GSC_LIVE_API_ENABLED', false),
-    'gsc_sync_enabled' => env('SEO_INTEL_GSC_SYNC_ENABLED', false),
+    'gsc_sync_enabled' => env(
+        'SEO_INTEL_GSC_SYNC_ENABLED',
+        (bool) env('SEO_INTEL_GSC_ENABLED', false)
+            && (bool) env('SEO_INTEL_GSC_LIVE_API_ENABLED', false),
+    ),
     'gsc_property_url' => env('SEO_INTEL_GSC_PROPERTY_URL', null),
     'gsc_backfill_lag_days' => 3,
     'gsc_default_window_days' => 28,
