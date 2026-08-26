@@ -1,17 +1,37 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-26T09:14:00Z",
+  "updated_at": "2026-08-26T09:25:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "SEO-PLATFORM-07-E": {
+      "repo": "fap-api", "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_checks_passed", "branch": "codex/seo-platform-07-e-scheduler-receipts",
+      "commit_sha": null, "pr_url": null,
+      "checks": {
+        "dependency": {"status": "passed", "details": "SEO-PLATFORM-07-D merged as 999243577927116b3bdb748ae3e1a1d18f783e35; exact-SHA CI receipt 32952068534 passed."},
+        "local": [
+          {"command": "syntax and scoped Pint", "status": "passed"},
+          {"command": "php artisan test tests/Feature/SeoIntel/SeoPlatform07ScheduledRuntimeProbeReceiptTest.php --no-ansi", "status": "passed_with_local_env_warning", "details": "Idempotency, HOLD, three-slot freshness, scheduler guards and expand-only migration passed; only isolated-worktree .env warnings."}
+        ],
+        "github": []
+      },
+      "failure_reason": null, "resume_policy": "continuous_goal", "merged_at": null,
+      "remote_branch_deleted": false, "local_cleanup_executed": false,
+      "production_write_execution": false, "database_mutation": false, "cms_mutation": false,
+      "publish_allowed": false, "deploy_allowed": false,
+      "history": [
+        {"at": "2026-08-26T09:25:00Z", "status": "local_checks_passed", "summary": "Validated the exact 07-E scheduler, idempotent receipt, freshness and crawler-source receipt scope. No manual schedule run/dispatch, deploy or production write was executed."}
+      ]
+    },
     "SEO-PLATFORM-07-D": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "merged",
       "branch": "codex/seo-platform-07-d-runtime-clusters",
-      "commit_sha": "1daafdab6814328ad314f4d7b5163dfe90782751",
+      "commit_sha": "999243577927116b3bdb748ae3e1a1d18f783e35",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3794",
       "checks": {
         "dependency": {"status": "passed", "details": "SEO-PLATFORM-07-C merged as 877303511feed9b8738ea39e230cc338a28d9da9; exact-SHA CI receipt 32951244953 passed."},
@@ -19,13 +39,13 @@
           {"command": "php -l and vendor/bin/pint --test scoped implementation and test", "status": "passed"},
           {"command": "php artisan test SEO-PLATFORM-07-D plus existing detector queue materializer regression", "status": "passed_with_local_env_warning", "details": "14 tests and 72 assertions passed; only isolated-worktree .env warnings were emitted."}
         ],
-        "github": []
+        "github": [{"name": "exact-SHA CI", "status": "passed", "details": "Run 32952068534 passed all selected jobs and exact-SHA receipt."}]
       },
       "failure_reason": null,
       "resume_policy": "continuous_goal",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-08-26T09:15:54Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "database_mutation": false,
       "cms_mutation": false,
@@ -33,7 +53,8 @@
       "deploy_allowed": false,
       "history": [
         {"at": "2026-08-26T09:14:00Z", "status": "local_checks_passed", "summary": "Validated the exact 07-D runtime cluster and recovery materializer against the existing queue contract. No parallel queue, scheduler, database write, deployment, publication or production operation was executed."},
-        {"at": "2026-08-26T09:16:00Z", "status": "pr_open", "summary": "Opened PR #3794 for the validated 07-D scope at implementation commit 1daafdab6814328ad314f4d7b5163dfe90782751; exact-SHA CI runs after merge."}
+        {"at": "2026-08-26T09:16:00Z", "status": "pr_open", "summary": "Opened PR #3794 for the validated 07-D scope at implementation commit 1daafdab6814328ad314f4d7b5163dfe90782751; exact-SHA CI runs after merge."},
+        {"at": "2026-08-26T09:24:00Z", "status": "merged", "summary": "PR #3794 merged as 999243577927116b3bdb748ae3e1a1d18f783e35. Exact-SHA CI passed and cleanup completed."}
       ]
     },
     "SEO-PLATFORM-07-C": {
