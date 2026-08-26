@@ -288,6 +288,8 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
             $this->assertSame(data_get($target, 'package.current_to_proposed.related_test_slug.proposed'), $article->related_test_slug);
             $this->assertSame(data_get($target, 'package.current_to_proposed.answer_surface_v1.proposed.faq_items'), data_get($article->seoMeta?->schema_json, 'editorial_package_v1.answer_surface_v1.faq_items'));
             $this->assertCount(1, (array) data_get($article->seoMeta?->schema_json, 'editorial_package_v1.cta_slots'));
+            $this->assertSame('/images/preserved.webp', data_get($article->cover_image_variants, 'preserved_media.src'));
+            $this->assertNull(data_get($article->cover_image_variants, 'editorial_package_v1'));
             $this->assertSame('published', data_get($article->publishedRevision?->authority_metadata_json, 'article15_exact_package_v1.status'));
         }
         $this->assertSame(5, DB::table('audit_logs')->where('action', 'content_release_publish')->count());
@@ -390,6 +392,15 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
                 'excerpt' => data_get($current, 'intro.current'),
                 'content_md' => 'baseline body '.$target['article_id'],
                 'content_html' => '<p>baseline body</p>',
+                'cover_image_variants' => [
+                    'preserved_media' => ['src' => '/images/preserved.webp'],
+                    'editorial_package_v1' => [
+                        'answer_surface_policy' => 'editor_supplied',
+                        'answer_surface_visibility' => 'visible',
+                        'answer_surface_v1' => ['faq_items' => data_get($current, 'faq.current', [])],
+                        'cta_slots' => data_get($current, 'primary_cta.current', []),
+                    ],
+                ],
                 'reading_minutes' => data_get($current, 'reading_minutes.current'),
                 'related_test_slug' => data_get($current, 'related_test_slug.current'),
                 'status' => 'published',
@@ -430,13 +441,7 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
                 'og_title' => 'preserved og '.$target['article_id'],
                 'og_description' => 'preserved og description '.$target['article_id'],
                 'robots' => 'index,follow',
-                'schema_json' => [
-                    'preserved_gate' => true,
-                    'editorial_package_v1' => [
-                        'answer_surface_v1' => ['faq_items' => data_get($current, 'faq.current', [])],
-                        'cta_slots' => data_get($current, 'primary_cta.current', []),
-                    ],
-                ],
+                'schema_json' => ['preserved_gate' => true],
                 'is_indexable' => true,
             ]);
         }

@@ -713,7 +713,19 @@ final class Article15ExactPackageRevisionBoundAdapter
                 $metadata = is_array($working->authority_metadata_json) ? $working->authority_metadata_json : [];
                 $metadata[self::METADATA_KEY] = $publishedMetadata;
                 $working->forceFill(['authority_metadata_json' => $metadata])->save();
+                $variants = is_array($article->cover_image_variants) ? $article->cover_image_variants : [];
+                $variantEditorial = is_array($variants['editorial_package_v1'] ?? null)
+                    ? $variants['editorial_package_v1'] : [];
+                foreach (['answer_surface_policy', 'answer_surface_visibility', 'answer_surface_v1', 'cta_slots', self::METADATA_KEY] as $field) {
+                    unset($variantEditorial[$field]);
+                }
+                if ($variantEditorial === []) {
+                    unset($variants['editorial_package_v1']);
+                } else {
+                    $variants['editorial_package_v1'] = $variantEditorial;
+                }
                 $article->forceFill([
+                    'cover_image_variants' => $variants,
                     'reading_minutes' => (int) data_get($package, 'current_to_proposed.reading_minutes.proposed'),
                     'related_test_slug' => $this->nullableString(data_get($package, 'current_to_proposed.related_test_slug.proposed')),
                 ])->save();
@@ -855,6 +867,7 @@ final class Article15ExactPackageRevisionBoundAdapter
     {
         $published = $article->publishedRevision;
         $seo = $article->seoMeta;
+        $editorial = $this->publicEditorialMetadata($article);
 
         return [
             'title_h1' => [(string) ($published?->title ?? ''), (string) ($published?->title ?? '')],
@@ -862,8 +875,8 @@ final class Article15ExactPackageRevisionBoundAdapter
             'body' => hash('sha256', (string) ($published?->content_md ?? '')),
             'seo_title' => (string) ($seo?->seo_title ?? ''),
             'seo_description' => (string) ($seo?->seo_description ?? ''),
-            'faq' => (array) data_get($seo?->schema_json, 'editorial_package_v1.answer_surface_v1.faq_items', []),
-            'cta' => (array) data_get($seo?->schema_json, 'editorial_package_v1.cta_slots', []),
+            'faq' => (array) data_get($editorial, 'answer_surface_v1.faq_items', []),
+            'cta' => (array) data_get($editorial, 'cta_slots', []),
             'reading_minutes' => $article->reading_minutes !== null ? (int) $article->reading_minutes : null,
             'related_test_slug' => $this->nullableString($article->related_test_slug),
         ];
@@ -928,8 +941,8 @@ final class Article15ExactPackageRevisionBoundAdapter
         }
         $revisionMetadata = is_array($published->authority_metadata_json)
             ? ($published->authority_metadata_json[self::METADATA_KEY] ?? null) : null;
-        $schemaMetadata = is_array($seo->schema_json)
-            ? data_get($seo->schema_json, 'editorial_package_v1.'.self::METADATA_KEY) : null;
+        $publicEditorial = $this->publicEditorialMetadata($article);
+        $schemaMetadata = data_get($publicEditorial, self::METADATA_KEY);
 
         return self::isPublishedArticle15Metadata($revisionMetadata, (int) $article->id, (int) $published->id)
             && self::isPublishedArticle15Metadata($schemaMetadata, (int) $article->id, (int) $published->id)
@@ -943,8 +956,21 @@ final class Article15ExactPackageRevisionBoundAdapter
             && (string) $seo->seo_description === $this->proposedString($package, 'seo_description')
             && (string) $seo->og_title === $this->proposedString($package, 'seo_title')
             && (string) $seo->og_description === $this->proposedString($package, 'seo_description')
-            && $this->deepEqual(data_get($seo->schema_json, 'editorial_package_v1.answer_surface_v1.faq_items', []), data_get($package, 'current_to_proposed.answer_surface_v1.proposed.faq_items', []))
-            && $this->deepEqual(data_get($seo->schema_json, 'editorial_package_v1.cta_slots', []), data_get($package, 'current_to_proposed.primary_cta.proposed', []));
+            && $this->deepEqual(data_get($publicEditorial, 'answer_surface_v1.faq_items', []), data_get($package, 'current_to_proposed.answer_surface_v1.proposed.faq_items', []))
+            && $this->deepEqual(data_get($publicEditorial, 'cta_slots', []), data_get($package, 'current_to_proposed.primary_cta.proposed', []));
+    }
+
+    /** @return array<string,mixed> */
+    private function publicEditorialMetadata(Article $article): array
+    {
+        $variants = is_array($article->cover_image_variants) ? $article->cover_image_variants : [];
+        $variantMetadata = is_array($variants['editorial_package_v1'] ?? null)
+            ? $variants['editorial_package_v1'] : [];
+        $schema = $article->seoMeta?->schema_json;
+        $schemaMetadata = is_array($schema) && is_array($schema['editorial_package_v1'] ?? null)
+            ? $schema['editorial_package_v1'] : [];
+
+        return array_replace_recursive($variantMetadata, $schemaMetadata);
     }
 
     /** @param array<string,mixed> $target @return array<string,mixed> */
