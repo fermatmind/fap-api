@@ -106211,7 +106211,7 @@
     "pr_number": 3788,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3788",
     "merge_commit_sha": "1853f0e58608452ca13b95d93e63b6cd31fe76be",
-    "merged_at": "2026-08-26T08:07:00+08:00",
+    "merged_at": "2026-08-26T08:06:47+08:00",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -106266,7 +106266,7 @@
         "note": "Opened PR #3788 from codex/ops-scale-v2-management-06 at validated implementation commit 6c7e9be3ccb3d741209c101540681c1d579c8d3c. Required-check and merge review are pending."
       },
       {
-        "at": "2026-08-26T08:07:00+08:00",
+        "at": "2026-08-26T08:06:47+08:00",
         "status": "merged",
         "note": "PR #3788 was squash-merged as 1853f0e58608452ca13b95d93e63b6cd31fe76be after mergeability and scope review. Exact-SHA CI later exposed three stale legacy-only Big Five test setups; T7 contains the minimal V2 Writer correction, and the failed T6 SHA did not deploy."
       }
@@ -106276,11 +106276,13 @@
     "id": "OPS-CONTENT-NAV-A11Y-07",
     "repo": "fap-api",
     "branch": "codex/ops-content-nav-a11y-07",
-    "status": "pr_open",
+    "status": "merged",
     "depends_on": ["OPS-SCALE-V2-MANAGEMENT-06"],
     "commit_sha": "e1de616a66b3714ab10adef91fc5dadb33e0bf80",
     "pr_number": 3789,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3789",
+    "merge_commit_sha": "d80ac79119d54358c2a613be8e82c917cf823fde",
+    "merged_at": "2026-08-26T08:30:37+08:00",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -106321,6 +106323,11 @@
         "at": "2026-08-26T08:28:35+08:00",
         "status": "pr_open",
         "note": "Opened PR #3789 from codex/ops-content-nav-a11y-07 at validated implementation commit e1de616a66b3714ab10adef91fc5dadb33e0bf80. Required checks and merge review are pending."
+      },
+      {
+        "at": "2026-08-26T08:30:37+08:00",
+        "status": "merged",
+        "note": "PR #3789 was squash-merged as d80ac79119d54358c2a613be8e82c917cf823fde after exact changed-file scope, clean mergeability, no blocking review, and the repository's zero PR-check state were verified. Exact-SHA main CI and automatic deployment are pending; no workflow was manually dispatched."
       }
     ]
   }
