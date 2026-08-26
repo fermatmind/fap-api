@@ -54,7 +54,7 @@ class LandingSurfaceResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.group.editorial');
+        return __('ops.group.content');
     }
 
     public static function getNavigationLabel(): string

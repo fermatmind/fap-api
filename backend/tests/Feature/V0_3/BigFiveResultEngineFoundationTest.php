@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Tests\Feature\V0_3;
 
 use App\Models\Attempt;
+use App\Models\ScaleRegistryV2;
 use App\Services\Assessment\Scorers\BigFiveScorerV3;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Content\BigFivePackLoader;
 use App\Services\Report\ReportAccess;
+use App\Services\Scale\ScaleRegistryWriter;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -248,36 +250,30 @@ final class BigFiveResultEngineFoundationTest extends TestCase
 
     private function configureBigFivePaidReports(): void
     {
-        $scale = DB::table('scales_registry')
+        $scale = ScaleRegistryV2::queryByOrgWhitelist([0])
             ->where('org_id', 0)
             ->where('code', 'BIG5_OCEAN')
-            ->first();
+            ->firstOrFail();
 
-        $capabilities = json_decode((string) ($scale->capabilities_json ?? '{}'), true);
-        if (! is_array($capabilities)) {
-            $capabilities = [];
-        }
+        $capabilities = (array) $scale->capabilities_json;
         $capabilities['paywall_mode'] = 'full';
 
-        DB::table('scales_registry')
-            ->where('org_id', 0)
-            ->where('code', 'BIG5_OCEAN')
-            ->update([
-                'capabilities_json' => json_encode($capabilities, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-                'view_policy_json' => json_encode([
-                    'free_sections' => ['disclaimer_top', 'summary', 'domains_overview', 'disclaimer'],
-                    'blur_others' => true,
-                    'teaser_percent' => 0.0,
-                    'upgrade_sku' => 'SKU_BIG5_FULL_REPORT_499',
-                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-                'commercial_json' => json_encode([
-                    'price_tier' => 'PAID',
-                    'report_benefit_code' => 'BIG5_FULL_REPORT',
-                    'credit_benefit_code' => 'BIG5_FULL_REPORT',
-                    'report_unlock_sku' => 'SKU_BIG5_FULL_REPORT_499',
-                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-                'updated_at' => now(),
-            ]);
+        $payload = $scale->only($scale->getFillable());
+        $payload['capabilities_json'] = $capabilities;
+        $payload['view_policy_json'] = [
+            'free_sections' => ['disclaimer_top', 'summary', 'domains_overview', 'disclaimer'],
+            'blur_others' => true,
+            'teaser_percent' => 0.0,
+            'upgrade_sku' => 'SKU_BIG5_FULL_REPORT_499',
+        ];
+        $payload['commercial_json'] = [
+            'price_tier' => 'PAID',
+            'report_benefit_code' => 'BIG5_FULL_REPORT',
+            'credit_benefit_code' => 'BIG5_FULL_REPORT',
+            'report_unlock_sku' => 'SKU_BIG5_FULL_REPORT_499',
+        ];
+
+        app(ScaleRegistryWriter::class)->upsertScale($payload);
     }
 
     private function enableBigFiveCommerceForAttempt(string $attemptId): void

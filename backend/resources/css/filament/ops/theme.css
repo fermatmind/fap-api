@@ -254,6 +254,11 @@
         transition: background-color 180ms cubic-bezier(.2, .8, .2, 1), color 180ms cubic-bezier(.2, .8, .2, 1), transform 180ms cubic-bezier(.2, .8, .2, 1);
     }
 
+    .fi-body.fi-panel-ops .fi-sidebar-item-button:focus-visible {
+        outline: 2px solid var(--ops-electric);
+        outline-offset: 2px;
+    }
+
     .fi-body.fi-panel-ops .fi-sidebar-group-button,
     .fi-body.fi-panel-ops .fi-sidebar-item-icon,
     .fi-body.fi-panel-ops .fi-sidebar-group-icon {

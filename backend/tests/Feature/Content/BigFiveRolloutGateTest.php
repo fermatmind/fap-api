@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Tests\Feature\Content;
 
 use App\Models\Attempt;
+use App\Models\ScaleRegistryV2;
+use App\Services\Scale\ScaleRegistryWriter;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -85,12 +87,16 @@ final class BigFiveRolloutGateTest extends TestCase
     {
         (new ScaleRegistrySeeder)->run();
 
-        DB::table('scales_registry')
+        $scale = ScaleRegistryV2::queryByOrgWhitelist([0])
             ->where('code', 'BIG5_OCEAN')
-            ->update([
-                'capabilities_json' => json_encode($rollout, JSON_UNESCAPED_UNICODE),
-                'updated_at' => now(),
-            ]);
+            ->firstOrFail();
+        $payload = $scale->only($scale->getFillable());
+        $payload['capabilities_json'] = array_replace(
+            (array) $scale->capabilities_json,
+            $rollout,
+        );
+
+        app(ScaleRegistryWriter::class)->upsertScale($payload);
     }
 
     private function issueAnonToken(string $anonId): string
