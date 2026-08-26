@@ -1,17 +1,65 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-26T08:52:00Z",
+  "updated_at": "2026-08-26T09:02:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
-    "SEO-PLATFORM-07-B": {
+    "SEO-PLATFORM-07-C": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "pr_open",
+      "branch": "codex/seo-platform-07-c-revision-adapters",
+      "commit_sha": "aafd84591041c1952c32efc21c89d1c83912e0d6",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3793",
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "details": "SEO-PLATFORM-07-B merged as 1c0a816fd2c49fd3c07de611381db4c11e8a04aa; exact-SHA CI receipt 32950300700 passed."
+        },
+        "local": [
+          {
+            "command": "php -l and vendor/bin/pint --test scoped implementation and test",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/SeoIntel/SeoPlatform07RevisionEvidenceAdapterTest.php --no-ansi",
+            "status": "passed_with_local_env_warning",
+            "details": "4 tests and 23 assertions passed; only the isolated-worktree missing ignored .env warning was emitted."
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": false,
+      "history": [
+        {
+          "at": "2026-08-26T09:02:00Z",
+          "status": "local_checks_passed",
+          "summary": "Initialized and validated the exact 07-C sanitized read-only revision adapter after 07-B merged and exact-SHA CI passed. Missing revisions remain null; no publication, cache activation, persistence, deployment or production write was executed."
+        },
+        {
+          "at": "2026-08-26T09:05:00Z",
+          "status": "pr_open",
+          "summary": "Opened PR #3793 for the exact 07-C scope at validated implementation commit aafd84591041c1952c32efc21c89d1c83912e0d6. GitHub has no PR check requirement; exact-SHA CI runs after merge under the current repository control plane."
+        }
+      ]
+    },
+    "SEO-PLATFORM-07-B": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "merged",
       "branch": "codex/seo-platform-07-b-unified-runtime-probe",
-      "commit_sha": "83095d254b7fc89c3f25cf9ed3ab703223811506",
+      "commit_sha": "1c0a816fd2c49fd3c07de611381db4c11e8a04aa",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3792",
       "checks": {
         "dependency": {
@@ -34,13 +82,19 @@
             "details": "27 tests and 636 assertions passed across all four reused observer boundaries; only the same local .env warning was emitted."
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "exact-SHA CI",
+            "status": "passed",
+            "details": "Run 32950300700 passed classifier, hygiene, supply-chain, content-pack, verify-bigfive, verify-mbti-v2, verify-mbti-legacy and exact-SHA receipt."
+          }
+        ]
       },
       "failure_reason": null,
       "resume_policy": "continuous_goal",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-08-26T08:55:49Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "database_mutation": false,
       "cms_mutation": false,
@@ -56,6 +110,11 @@
           "at": "2026-08-26T08:55:00Z",
           "status": "pr_open",
           "summary": "Opened PR #3792 for the exact 07-B scope at validated implementation commit 83095d254b7fc89c3f25cf9ed3ab703223811506. GitHub has no PR check requirement; exact-SHA CI runs after merge under the current repository control plane."
+        },
+        {
+          "at": "2026-08-26T09:01:00Z",
+          "status": "merged",
+          "summary": "PR #3792 merged as 1c0a816fd2c49fd3c07de611381db4c11e8a04aa. Exact-SHA CI passed, and the remote branch and isolated worktree were removed."
         }
       ]
     },
