@@ -197,7 +197,7 @@ final class CareerShardedCurrentContractTest extends TestCase
         self::assertSame(2092, $loaded['summary']['locale_page_count']);
         self::assertSame($manifest['versionless_projection_sha256'], $loaded['summary']['versionless_projection_sha256']);
         self::assertSame(
-            '2fa74e5c7c55a748423a2bde7dcc9bce47551d89f0fcb496115551f4b37c9df7',
+            '4e05bcd2c480d429bf14b46cf647ffdac2c611ddbbb8a3cfbfabc808fc466b14',
             $loaded['summary']['versionless_projection_sha256'],
         );
         self::assertSame(
