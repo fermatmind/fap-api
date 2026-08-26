@@ -1,15 +1,70 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-26T11:29:06Z",
+  "updated_at": "2026-08-26T11:50:34Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
-    "SEO-PLATFORM-07-G-SCHEDULER-REFRESH-V2": {
+    "SEO-PLATFORM-07-G-SCHEDULER-REFRESH-V3": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "pr_open",
+      "branch": "codex/seo-platform-07-scheduler-refresh-v3",
+      "commit_sha": "1ccc2f6251c3f50f1bcb2881402e56104f8f2d70",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3801",
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "details": "PR #3800 merged as c7c4800a445b6998190b6d05c371a48c15685d8b; exact-SHA CI and staging passed. Production still found no unique scheduler through readable /proc metadata, failed closed, and restored 2117895ad725735ce8f88aad90077e54920a511c as LKG."
+        },
+        "local": [
+          {
+            "command": "focused scheduler identity fallback and existing Supervisor reload PHPUnit",
+            "status": "passed",
+            "details": "16 tests and 60 assertions passed, including unique semantic program-name fallback when process metadata is unavailable, ambiguity rejection and all prior direct/wrapper/release checks."
+          },
+          {
+            "command": "bash syntax, ShellCheck, PHP syntax, scoped Pint --test and git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": [],
+        "production": []
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": true,
+      "production_readback_allowed": true,
+      "history": [
+        {
+          "at": "2026-08-26T11:47:32Z",
+          "status": "local_checks_passed",
+          "summary": "After two failed-closed production attempts, simplified discovery to prefer process evidence when readable and otherwise accept only one semantically named Supervisor scheduler program. Exact-program bounded restart remains mandatory; ambiguity still fails closed. Local candidate is ready but not pushed."
+        },
+        {
+          "at": "2026-08-26T11:49:37Z",
+          "status": "authorized",
+          "summary": "User explicitly authorized the third same-scope corrective PR. No additional scope, manual runtime action or production write was authorized."
+        },
+        {
+          "at": "2026-08-26T11:50:34Z",
+          "status": "pr_open",
+          "summary": "Opened authorized third same-scope corrective PR #3801 at validated implementation commit 1ccc2f6251c3f50f1bcb2881402e56104f8f2d70. Mergeability is clean and no manual runtime action was performed."
+        }
+      ]
+    },
+    "SEO-PLATFORM-07-G-SCHEDULER-REFRESH-V2": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "merged",
       "branch": "codex/seo-platform-07-scheduler-refresh-v2",
       "commit_sha": "281ebb7ee8c5d8bb6bfc95a37244a645473ce665",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3800",
@@ -33,14 +88,26 @@
             "status": "passed"
           }
         ],
-        "github": [],
-        "production": []
+        "github": [
+          {
+            "name": "exact-SHA CI",
+            "status": "passed",
+            "details": "Run 32963619374 passed all selected jobs and exact-SHA receipt for c7c4800a445b6998190b6d05c371a48c15685d8b."
+          }
+        ],
+        "production": [
+          {
+            "name": "automatic deploy",
+            "status": "failed_closed",
+            "details": "Run 32963871152 passed staging, then production again rejected scheduler discovery with scheduler_identity_count and rolled back to LKG 2117895ad725735ce8f88aad90077e54920a511c."
+          }
+        ]
       },
-      "failure_reason": null,
+      "failure_reason": "The production deploy identity cannot obtain a unique scheduler program from readable /proc process metadata, including bounded parent-chain resolution.",
       "resume_policy": "continuous_goal",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-08-26T11:29:59Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "database_mutation": false,
       "cms_mutation": false,
@@ -62,6 +129,11 @@
           "at": "2026-08-26T11:29:06Z",
           "status": "pr_open",
           "summary": "Opened authorized second same-scope corrective PR #3800 at validated implementation commit 281ebb7ee8c5d8bb6bfc95a37244a645473ce665. Mergeability is clean and no manual runtime action was performed."
+        },
+        {
+          "at": "2026-08-26T11:43:57Z",
+          "status": "production_failed_closed",
+          "summary": "PR #3800 merged as c7c4800a445b6998190b6d05c371a48c15685d8b. Exact-SHA CI and staging passed; production again failed closed at scheduler_identity_count and restored 2117895ad725735ce8f88aad90077e54920a511c as LKG."
         }
       ]
     },

@@ -4752,3 +4752,49 @@ prs:
     deploy_allowed: true
     production_readback_allowed: true
     content_authority: existing_deploy_scheduler_runtime
+
+  - id: SEO-PLATFORM-07-G-SCHEDULER-REFRESH-V3
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/seo-platform-07-scheduler-refresh-v3
+    base: main
+    depends_on: ["SEO-PLATFORM-07-G-SCHEDULER-REFRESH-V2"]
+    mode: execute
+    title: "fix(deploy): resolve scheduler without proc metadata"
+    scope: >
+      Correct the exact production failure from PR #3800 by retaining direct
+      and descendant process evidence when readable while permitting a fallback
+      only to one semantically named Supervisor scheduler program when /proc
+      metadata is unavailable to the deploy identity. Preserve ambiguity
+      rejection, bounded exact-program restart, optional staging topology,
+      sanitized output and all existing production fail-closed behavior. Do not
+      add a workflow, manual dispatch, SSH path, scheduler trigger, production
+      data write or runtime threshold.
+    allowed_paths:
+      - scripts/deploy/restart_supervisor_scheduler.sh
+      - tests/Sre/SupervisorSchedulerReloadTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    checks:
+      - "bash syntax, ShellCheck and focused scheduler identity fallback PHPUnit"
+      - "existing Supervisor group reload regression"
+      - "JSON/YAML, exact scope and diff checks"
+      - "exact-SHA automatic deploy followed by three natural production scheduler slots"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: continuous_goal
+    merge_policy:
+      mode: github_checks_required
+      local_verify_required: true
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    deploy_allowed: true
+    production_readback_allowed: true
+    content_authority: existing_deploy_scheduler_runtime

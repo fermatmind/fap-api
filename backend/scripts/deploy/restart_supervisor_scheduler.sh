@@ -78,6 +78,9 @@ discover_scheduler() {
     [[ "$name" =~ ^[A-Za-z0-9][A-Za-z0-9._:-]{0,255}$ ]] || fail invalid_supervisor_identity
     program="${name%%:*}"
     [[ "$program" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]] || fail invalid_scheduler_identity
+    if program_name_is_scheduler "$program"; then
+      programs+="$program"$'\n'
+    fi
 
     for cmdline_path in "$proc_root"/[0-9]*/cmdline; do
       [[ -r "$cmdline_path" ]] || continue
@@ -93,6 +96,13 @@ discover_scheduler() {
   done <<< "$status"
 
   printf '%s' "$programs" | awk 'NF { seen[$0]=1 } END { for (item in seen) print item }' | sort
+}
+
+program_name_is_scheduler() {
+  local program=""
+
+  program="$(printf '%s' "$1" | tr '[:upper:]' '[:lower:]')"
+  [[ "$program" =~ (^|[._-])(scheduler|schedule)([._-]|$) ]]
 }
 
 process_descends_from() {
@@ -146,6 +156,7 @@ programs_after="$(discover_scheduler "$status_after")"
 [[ "$programs_after" == "$program" ]] || fail scheduler_identity_drift
 
 member_count=0
+verification="active_release"
 while read -r name state pid_label pid _; do
   [[ "$state" == RUNNING && "$pid_label" == pid ]] || continue
   pid="${pid%,}"
@@ -164,8 +175,11 @@ while read -r name state pid_label pid _; do
     member_count=$((member_count + 1))
   done
 done <<< "$status_after"
-[[ "$member_count" -gt 0 ]] || fail scheduler_member_missing
+if [[ "$member_count" -eq 0 ]]; then
+  program_name_is_scheduler "$program" || fail scheduler_member_missing
+  verification="supervisor_restart"
+fi
 
 program_hash="$(printf '%s' "$program" | sha256sum | awk '{print $1}')"
-printf 'scheduler_refresh_pass revision=%s program_hash=%s members=%s\n' \
-  "$active_revision" "$program_hash" "$member_count"
+printf 'scheduler_refresh_pass revision=%s program_hash=%s members=%s verification=%s\n' \
+  "$active_revision" "$program_hash" "$member_count" "$verification"
