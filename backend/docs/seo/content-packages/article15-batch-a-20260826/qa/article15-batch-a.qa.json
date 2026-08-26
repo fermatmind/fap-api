@@ -1,0 +1,105 @@
+{
+  "schema_version": "fermatmind.article15_content_package_qa.v1",
+  "batch_id": "ARTICLE15-BATCH-A-20260826",
+  "bindings": {
+    "baseline_commit": "6f172f279a02ef1b6ac57f59ed88cf99e6235793",
+    "top100_source_sha256": "e4c9788d6fadff53bc33170299971ab57dbff1810ad1fcdb4f97f5f4ee94d150",
+    "article15_target_set_sha256": "9ccd8cab8b44f10409e0ef3ced944ba663376c84a5032bd74ddba143d88cd35a"
+  },
+  "checks": {
+    "exact_target_count_and_order": "PASS",
+    "identity_and_package_sha_complete": "PASS",
+    "field_status_complete": "PASS",
+    "downstream_holds_unchanged": "PASS",
+    "faq_body_answer_surface_alignment": "PASS",
+    "exactly_one_primary_cta_per_package": "PASS",
+    "body_has_no_h1": "PASS",
+    "private_url_guard": "PASS",
+    "forbidden_legacy_alias_occurrences": 0,
+    "gaokao_hidden_query_or_regional_generalization": "PASS",
+    "json_markdown_format": "PASS",
+    "claim_boundary_present": "PASS",
+    "adapter_gap_declared_import_false": "PASS",
+    "public_internal_link_checks": "PASS"
+  },
+  "live_internal_link_evidence": [
+    {
+      "href": "/zh/tests/holland-career-interest-test-riasec",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/tests/holland-career-interest-test-riasec",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/articles/riasec-holland-career-interest-test-explained",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/articles/riasec-holland-career-interest-test-explained",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/articles/unwanted-major-repeat-or-stay-riasec-decision-checklist",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/articles/unwanted-major-repeat-or-stay-riasec-decision-checklist",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/tests/big-five-personality-test-ocean-model",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/tests/big-five-personality-test-ocean-model",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/personality/big-five",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/personality/big-five",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/tests/mbti-personality-test-16-personality-types",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/personality",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/personality",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/tests/enneagram-personality-test-nine-types",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/tests/enneagram-personality-test-nine-types",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/personality/enneagram",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/personality/enneagram",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/articles/holland-career-interest-test-can-and-cannot-tell-you",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/articles/holland-career-interest-test-can-and-cannot-tell-you",
+      "checked_at": "2026-08-26"
+    },
+    {
+      "href": "/zh/articles/mbti-vs-holland-career-choice",
+      "http_status": 200,
+      "canonical_url": "https://fermatmind.com/zh/articles/mbti-vs-holland-career-choice",
+      "checked_at": "2026-08-26"
+    }
+  ],
+  "scope": {
+    "allowed_root": "backend/docs/seo/content-packages/article15-batch-a-20260826",
+    "importer_changes": 0,
+    "cms_changes": 0,
+    "database_changes": 0,
+    "query_owner_registry_changes": 0,
+    "infj_registry_changes": 0,
+    "public_page_changes": 0
+  },
+  "git_diff_check": "PASS",
+  "changed_file_scope_check": "PASS",
+  "result": "PASS"
+}

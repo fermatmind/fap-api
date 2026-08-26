@@ -1,0 +1,421 @@
+{
+  "schema_version": "fermatmind.article15_content_package.v1",
+  "package_id": "ARTICLE15-BATCH-A-05-riasec-holland-career-interest-test-explained",
+  "package_order": 5,
+  "status": {
+    "content_package_only": true,
+    "intended_cms_status": "draft",
+    "requires_operator_review": true,
+    "cms_draft_created": false,
+    "publish_allowed": false,
+    "search_submit_allowed": false,
+    "import_ready": false
+  },
+  "bindings": {
+    "baseline_commit": "6f172f279a02ef1b6ac57f59ed88cf99e6235793",
+    "top100_source_sha256": "e4c9788d6fadff53bc33170299971ab57dbff1810ad1fcdb4f97f5f4ee94d150",
+    "article15_target_set_sha256": "9ccd8cab8b44f10409e0ef3ced944ba663376c84a5032bd74ddba143d88cd35a",
+    "baseline_authority": "production_public_article_api_read_only",
+    "baseline_observed_at": "2026-08-26"
+  },
+  "identity_lock": {
+    "article_id": 40,
+    "translation_group_id": "riasec-explanation-article-2026-06-v2",
+    "published_revision_id": 69,
+    "locale": "zh-CN",
+    "slug": "riasec-holland-career-interest-test-explained",
+    "canonical_url": "https://fermatmind.com/zh/articles/riasec-holland-career-interest-test-explained",
+    "current_status": "published",
+    "current_is_public": true,
+    "current_is_indexable": true
+  },
+  "current_to_proposed": {
+    "article_id": {
+      "status": "KEEP",
+      "current": 40,
+      "proposed": 40
+    },
+    "translation_group_id": {
+      "status": "KEEP",
+      "current": "riasec-explanation-article-2026-06-v2",
+      "proposed": "riasec-explanation-article-2026-06-v2"
+    },
+    "published_revision_id": {
+      "status": "KEEP",
+      "current": 69,
+      "proposed": 69,
+      "note": "identity precondition only; no revision write in this task"
+    },
+    "locale": {
+      "status": "KEEP",
+      "current": "zh-CN",
+      "proposed": "zh-CN"
+    },
+    "slug": {
+      "status": "KEEP",
+      "current": "riasec-holland-career-interest-test-explained",
+      "proposed": "riasec-holland-career-interest-test-explained"
+    },
+    "canonical_url": {
+      "status": "KEEP",
+      "current": "https://fermatmind.com/zh/articles/riasec-holland-career-interest-test-explained",
+      "proposed": "https://fermatmind.com/zh/articles/riasec-holland-career-interest-test-explained"
+    },
+    "publication": {
+      "status": "KEEP",
+      "current": {
+        "status": "published",
+        "is_public": true
+      },
+      "proposed": {
+        "status": "published",
+        "is_public": true
+      }
+    },
+    "title": {
+      "status": "KEEP",
+      "current": "霍兰德职业兴趣测试是什么？RIASEC 六型如何帮助职业探索",
+      "proposed": "霍兰德职业兴趣测试是什么？RIASEC 六型如何帮助职业探索"
+    },
+    "h1": {
+      "status": "KEEP",
+      "current": "霍兰德职业兴趣测试是什么？RIASEC 六型如何帮助职业探索",
+      "proposed": "霍兰德职业兴趣测试是什么？RIASEC 六型如何帮助职业探索",
+      "note": "CMS title is the page H1; body snapshot contains no H1"
+    },
+    "seo_title": {
+      "status": "KEEP",
+      "current": "RIASEC 是什么？霍兰德职业兴趣测试解释",
+      "proposed": "RIASEC 是什么？霍兰德职业兴趣测试解释"
+    },
+    "seo_description": {
+      "status": "KEEP",
+      "current": "解释 RIASEC 六种职业兴趣类型、霍兰德测试能说明什么，以及如何把结果用于专业和职业探索。",
+      "proposed": "解释 RIASEC 六种职业兴趣类型、霍兰德测试能说明什么，以及如何把结果用于专业和职业探索。"
+    },
+    "intro": {
+      "status": "CHANGE",
+      "current": "霍兰德职业兴趣测试基于 RIASEC 六型，帮助你观察职业兴趣、工作活动和职业环境。它适合生成探索假设，但不能决定职业结果。",
+      "proposed": "RIASEC 是用现实型、研究型、艺术型、社会型、企业型和常规型六类职业兴趣整理工作活动与环境的模型。本页拥有模型和结果解释：帮助你读六型、前三项兴趣及其验证方法；正式测试页拥有测试与入口意图。结果只能生成职业探索假设，不能指定唯一职业、判断能力或预测成功。",
+      "note": "current value is the baseline article excerpt; proposed value is the answer-first visible intro"
+    },
+    "body_markdown": {
+      "status": "CHANGE",
+      "current": {
+        "sha256": "265435fbbd24db027c4ab7b5e0ec41d27ad73ce41fe5f481c8abd1fc08e9cc99"
+      },
+      "proposed": {
+        "file": "body.zh-CN.md",
+        "sha256": "b46b0c3a2811859ea08d81421286a708668e4ba16ddbd782e56f9731c3255b50"
+      }
+    },
+    "faq": {
+      "status": "KEEP",
+      "current": [
+        {
+          "question": "RIASEC 是职业测试吗？",
+          "answer": "RIASEC 是职业兴趣模型，常用于职业探索和职业兴趣测试。它帮助你理解自己更偏好的活动和工作环境，但不决定你的职业结果。"
+        },
+        {
+          "question": "霍兰德职业兴趣测试和 RIASEC 是一回事吗？",
+          "answer": "通常可以这样理解。RIASEC 是霍兰德职业兴趣模型中的六个兴趣方向：现实型、研究型、艺术型、社会型、企业型和常规型。"
+        },
+        {
+          "question": "RIASEC 能告诉我最适合的职业吗？",
+          "answer": "不能直接保证某个职业最适合你。它可以帮助你缩小探索范围，但职业选择仍要结合技能、经验、行业信息和真实反馈。"
+        },
+        {
+          "question": "什么是 Holland Code 的一致性和区分度？",
+          "answer": "一致性关注你的高分兴趣是否彼此接近，区分度关注最高兴趣和其他兴趣之间差距是否明显。它们可以帮助你理解结果结构，但不能单独决定职业方向。"
+        },
+        {
+          "question": "RIASEC 和 MBTI 哪个更适合选职业？",
+          "answer": "如果你的问题是职业兴趣和工作环境，RIASEC 通常更直接。如果你想理解人格偏好和互动风格，MBTI 可以提供另一个角度。"
+        },
+        {
+          "question": "RIASEC 测试结果需要和 Big Five 一起看吗？",
+          "answer": "不一定。RIASEC 可以单独用于职业兴趣探索。Big Five 更适合补充观察行为倾向，例如尽责性、外向性或情绪稳定性。"
+        }
+      ],
+      "proposed": [
+        {
+          "question": "RIASEC 是职业测试吗？",
+          "answer": "RIASEC 是职业兴趣模型，常用于职业探索和职业兴趣测试。它帮助你理解自己更偏好的活动和工作环境，但不决定你的职业结果。"
+        },
+        {
+          "question": "霍兰德职业兴趣测试和 RIASEC 是一回事吗？",
+          "answer": "通常可以这样理解。RIASEC 是霍兰德职业兴趣模型中的六个兴趣方向：现实型、研究型、艺术型、社会型、企业型和常规型。"
+        },
+        {
+          "question": "RIASEC 能告诉我最适合的职业吗？",
+          "answer": "不能直接保证某个职业最适合你。它可以帮助你缩小探索范围，但职业选择仍要结合技能、经验、行业信息和真实反馈。"
+        },
+        {
+          "question": "什么是 Holland Code 的一致性和区分度？",
+          "answer": "一致性关注你的高分兴趣是否彼此接近，区分度关注最高兴趣和其他兴趣之间差距是否明显。它们可以帮助你理解结果结构，但不能单独决定职业方向。"
+        },
+        {
+          "question": "RIASEC 和 MBTI 哪个更适合选职业？",
+          "answer": "如果你的问题是职业兴趣和工作环境，RIASEC 通常更直接。如果你想理解人格偏好和互动风格，MBTI 可以提供另一个角度。"
+        },
+        {
+          "question": "RIASEC 测试结果需要和 Big Five 一起看吗？",
+          "answer": "不一定。RIASEC 可以单独用于职业兴趣探索。Big Five 更适合补充观察行为倾向，例如尽责性、外向性或情绪稳定性。"
+        }
+      ]
+    },
+    "answer_surface_v1": {
+      "status": "CHANGE",
+      "current": {
+        "source": "current public answer_surface_v1.faq_blocks",
+        "faq_count": 6
+      },
+      "proposed": {
+        "policy": "editor_supplied",
+        "faq_items": [
+          {
+            "question": "RIASEC 是职业测试吗？",
+            "answer": "RIASEC 是职业兴趣模型，常用于职业探索和职业兴趣测试。它帮助你理解自己更偏好的活动和工作环境，但不决定你的职业结果。"
+          },
+          {
+            "question": "霍兰德职业兴趣测试和 RIASEC 是一回事吗？",
+            "answer": "通常可以这样理解。RIASEC 是霍兰德职业兴趣模型中的六个兴趣方向：现实型、研究型、艺术型、社会型、企业型和常规型。"
+          },
+          {
+            "question": "RIASEC 能告诉我最适合的职业吗？",
+            "answer": "不能直接保证某个职业最适合你。它可以帮助你缩小探索范围，但职业选择仍要结合技能、经验、行业信息和真实反馈。"
+          },
+          {
+            "question": "什么是 Holland Code 的一致性和区分度？",
+            "answer": "一致性关注你的高分兴趣是否彼此接近，区分度关注最高兴趣和其他兴趣之间差距是否明显。它们可以帮助你理解结果结构，但不能单独决定职业方向。"
+          },
+          {
+            "question": "RIASEC 和 MBTI 哪个更适合选职业？",
+            "answer": "如果你的问题是职业兴趣和工作环境，RIASEC 通常更直接。如果你想理解人格偏好和互动风格，MBTI 可以提供另一个角度。"
+          },
+          {
+            "question": "RIASEC 测试结果需要和 Big Five 一起看吗？",
+            "answer": "不一定。RIASEC 可以单独用于职业兴趣探索。Big Five 更适合补充观察行为倾向，例如尽责性、外向性或情绪稳定性。"
+          }
+        ],
+        "visible_faq_count": 6,
+        "expected_faq_schema_mainEntity_count": 6
+      },
+      "note": "FAQ copy stays byte-identical; answer-surface draft is revision-bound later"
+    },
+    "primary_cta": {
+      "status": "CHANGE",
+      "current": [
+        {
+          "key": "p0_ctr_primary_test_cta",
+          "title": "免费做霍兰德职业兴趣测试",
+          "body": null,
+          "href": "/zh/tests/holland-career-interest-test-riasec",
+          "kind": "start_test"
+        }
+      ],
+      "proposed": [
+        {
+          "label": "开始霍兰德职业兴趣测试",
+          "href": "/zh/tests/holland-career-interest-test-riasec",
+          "intent": "test_intent_handoff"
+        }
+      ],
+      "note": "exactly one primary CTA; ordinary contextual links are not CTA slots"
+    },
+    "canonical_internal_links": {
+      "status": "CHANGE",
+      "current": "baseline body links",
+      "proposed": [
+        {
+          "href": "/zh/tests/holland-career-interest-test-riasec",
+          "role": "primary_cta",
+          "owner": "riasec_test"
+        },
+        {
+          "href": "/zh/articles/holland-career-interest-test-can-and-cannot-tell-you",
+          "role": "context",
+          "owner": "riasec_capability_limits"
+        },
+        {
+          "href": "/zh/articles/mbti-vs-holland-career-choice",
+          "role": "context",
+          "owner": "mbti_vs_holland_comparison"
+        }
+      ]
+    },
+    "related_test_slug": {
+      "status": "KEEP",
+      "current": "holland-career-interest-test-riasec",
+      "proposed": "holland-career-interest-test-riasec",
+      "note": "article-level adapter requirement; existing-article updater does not support this field"
+    },
+    "reading_minutes": {
+      "status": "KEEP",
+      "current": 10,
+      "proposed": 10,
+      "note": "recommendation = max(1, ceil(mb_strlen(strip_tags(body))/700)); existing-article updater does not support this field"
+    },
+    "schema": {
+      "status": "KEEP",
+      "current": {
+        "article_schema_gate_v1": {
+          "enabled": true
+        },
+        "breadcrumb_schema_gate_v1": {
+          "enabled": true
+        },
+        "faq_schema_gate_v1": {
+          "enabled": false
+        }
+      },
+      "proposed": {
+        "article_schema_gate_v1": {
+          "enabled": true
+        },
+        "breadcrumb_schema_gate_v1": {
+          "enabled": true
+        },
+        "faq_schema_gate_v1": {
+          "enabled": false
+        }
+      }
+    },
+    "hreflang": {
+      "status": "KEEP",
+      "current": {
+        "enabled": true,
+        "policy": "reciprocal_counterparts_verified"
+      },
+      "proposed": {
+        "enabled": true,
+        "policy": "reciprocal_counterparts_verified"
+      }
+    },
+    "sitemap": {
+      "status": "KEEP",
+      "current": true,
+      "proposed": true
+    },
+    "llms": {
+      "status": "KEEP",
+      "current": true,
+      "proposed": true
+    },
+    "search_channel": {
+      "status": "KEEP",
+      "current": "HOLD",
+      "proposed": "HOLD"
+    },
+    "revalidation": {
+      "status": "KEEP",
+      "current": "HOLD",
+      "proposed": "HOLD"
+    }
+  },
+  "body_patch": {
+    "policy": "minimal_editorial_patch_over_baseline_snapshot",
+    "operations": [
+      "KEEP title/H1/SEO title/description/6 个 answer-surface FAQ/slug/canonical",
+      "CHANGE 首屏明确模型与结果解释 owner",
+      "CHANGE 删除正文中未进入 answer surface 的第 7 个 FAQ",
+      "CHANGE 最小调整 RIASEC 能与不能、MBTI vs Holland 内链",
+      "CHANGE 删除重复测试行动文案，测试入口保留为唯一主 CTA"
+    ],
+    "body_file": "body.zh-CN.md",
+    "current_body_sha256": "265435fbbd24db027c4ab7b5e0ec41d27ad73ce41fe5f481c8abd1fc08e9cc99",
+    "proposed_body_sha256": "b46b0c3a2811859ea08d81421286a708668e4ba16ddbd782e56f9731c3255b50"
+  },
+  "cta": {
+    "primary_count": 1,
+    "primary": {
+      "label": "开始霍兰德职业兴趣测试",
+      "href": "/zh/tests/holland-career-interest-test-riasec",
+      "intent": "test_intent_handoff"
+    },
+    "tracking_expectation": "article_to_test_click",
+    "public_canonical_route_only": true
+  },
+  "internal_link_plan": [
+    {
+      "href": "/zh/tests/holland-career-interest-test-riasec",
+      "role": "primary_cta",
+      "owner": "riasec_test"
+    },
+    {
+      "href": "/zh/articles/holland-career-interest-test-can-and-cannot-tell-you",
+      "role": "context",
+      "owner": "riasec_capability_limits"
+    },
+    {
+      "href": "/zh/articles/mbti-vs-holland-career-choice",
+      "role": "context",
+      "owner": "mbti_vs_holland_comparison"
+    }
+  ],
+  "claim_boundary": "拥有 RIASEC 模型与结果解释；测试意图交给正式测试页。兴趣不是能力，不指定唯一职业，不预测职业成功、收入、录取或专业适配；O*NET 证据不转移到 FermatMind 工具。",
+  "forbidden_claims": [
+    "diagnosis",
+    "guaranteed_admission",
+    "unique_career",
+    "fixed_personality",
+    "hiring_screening",
+    "ability_prediction",
+    "official_endorsement"
+  ],
+  "references": [
+    {
+      "title": "O*NET Interest Profiler Manual",
+      "url": "https://www.onetcenter.org/reports/IP_Manual.html",
+      "authority": "National Center for O*NET Development / U.S. Department of Labor",
+      "use_boundary": "用于RIASEC职业兴趣、教育规划和职业探索定位；不把O*NET量表证据转移到FermatMind工具。"
+    },
+    {
+      "title": "O*NET Interest Profiler",
+      "url": "https://www.onetcenter.org/IP.html",
+      "authority": "National Center for O*NET Development / U.S. Department of Labor",
+      "use_boundary": "用于六类兴趣与工作活动探索说明，不支持唯一职业、能力或成功预测。"
+    }
+  ],
+  "private_url_guard": {
+    "status": "HOLD",
+    "forbidden_route_families": [
+      "result",
+      "results",
+      "order",
+      "orders",
+      "share",
+      "pay",
+      "payment",
+      "history",
+      "private",
+      "token",
+      "session"
+    ],
+    "public_canonical_only": true
+  },
+  "downstream_holds": {
+    "identity": true,
+    "publication": true,
+    "schema": true,
+    "hreflang": true,
+    "sitemap": true,
+    "llms": true,
+    "search_channel": true,
+    "revalidation": true,
+    "cms_import": true,
+    "cache_refresh": true
+  },
+  "adapter_requirements": {
+    "required_before_later_import": true,
+    "revision_bound": true,
+    "fields": [
+      "reading_minutes",
+      "related_test_slug",
+      "answer_surface_v1.faq_items"
+    ],
+    "current_existing_article_updater_supports_all": false,
+    "import_state_must_remain_false": true
+  },
+  "package_sha256": "e5a4f0482cdde5c23918262fcc05054fb6fe1bde7ffbdc973e6860ada2ea8c8d"
+}

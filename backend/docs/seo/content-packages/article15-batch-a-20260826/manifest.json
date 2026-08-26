@@ -1,0 +1,113 @@
+{
+  "schema_version": "fermatmind.article15_content_package_batch.v1",
+  "batch_id": "ARTICLE15-BATCH-A-20260826",
+  "status": "content_package_only",
+  "content_package_only": true,
+  "target_count": 5,
+  "target_order": [
+    "gaokao-major-adjustment-unacceptable-major-checklist",
+    "big-five-tool-guide",
+    "mbti-basics",
+    "enneagram-personality-test-explained",
+    "riasec-holland-career-interest-test-explained"
+  ],
+  "bindings": {
+    "baseline_commit": "6f172f279a02ef1b6ac57f59ed88cf99e6235793",
+    "top100_source_sha256": "e4c9788d6fadff53bc33170299971ab57dbff1810ad1fcdb4f97f5f4ee94d150",
+    "article15_target_set_sha256": "9ccd8cab8b44f10409e0ef3ced944ba663376c84a5032bd74ddba143d88cd35a"
+  },
+  "packages": [
+    {
+      "order": 1,
+      "slug": "gaokao-major-adjustment-unacceptable-major-checklist",
+      "article_id": 58,
+      "translation_group_id": "tg_gaokao_adjustment_unacceptable_major_2026v1",
+      "published_revision_id": 78,
+      "package_directory": "packages/01-gaokao-major-adjustment-unacceptable-major-checklist",
+      "package_sha256": "ea75bf63659b9738153a4d0895242d03b9ae937b2f91eb065a256ebe6900650d",
+      "body_sha256": "62bde8b8ac8c4d11f9d3a07bd433e327d8da878a83d9fa2d0646598caf61a055",
+      "reading_minutes_suggestion": 13,
+      "faq_count": 4,
+      "primary_cta_count": 1
+    },
+    {
+      "order": 2,
+      "slug": "big-five-tool-guide",
+      "article_id": 3,
+      "translation_group_id": "big5-v2-df8d5e7f157e301b9a0f4dc8e6b8c3b66c7e31f4",
+      "published_revision_id": 383,
+      "package_directory": "packages/02-big-five-tool-guide",
+      "package_sha256": "ccc0b4c617171307eaacf0b659886b57907c2a0d9664e42aab8b0cb72e8c04d4",
+      "body_sha256": "d98f2ada7e33c237aa15b6a028bb067815f4d07049373c5645834051718f5d01",
+      "reading_minutes_suggestion": 9,
+      "faq_count": 5,
+      "primary_cta_count": 1
+    },
+    {
+      "order": 3,
+      "slug": "mbti-basics",
+      "article_id": 8,
+      "translation_group_id": "article-8",
+      "published_revision_id": 72,
+      "package_directory": "packages/03-mbti-basics",
+      "package_sha256": "20b570e5269deca9644f8e2f7f1a37669c192fe77bcdf65e54960ab90d381138",
+      "body_sha256": "96caec7e1447bc4e6744551d8d751f9e669147fcd9d6330c1ce2aa2edc30c4af",
+      "reading_minutes_suggestion": 10,
+      "faq_count": 5,
+      "primary_cta_count": 1
+    },
+    {
+      "order": 4,
+      "slug": "enneagram-personality-test-explained",
+      "article_id": 51,
+      "translation_group_id": "tg_article_enneagram_personality_test_explained_2026v1",
+      "published_revision_id": 73,
+      "package_directory": "packages/04-enneagram-personality-test-explained",
+      "package_sha256": "cf15980428ae6f9338f7aa0de9f4a4723ff45ce2085a6ba6df7cb180290dbc5e",
+      "body_sha256": "6f31ec07cdfa130b84fc5fcce6e06073a07b73b211f84be5a0bd2cd9273fa6ed",
+      "reading_minutes_suggestion": 15,
+      "faq_count": 6,
+      "primary_cta_count": 1
+    },
+    {
+      "order": 5,
+      "slug": "riasec-holland-career-interest-test-explained",
+      "article_id": 40,
+      "translation_group_id": "riasec-explanation-article-2026-06-v2",
+      "published_revision_id": 69,
+      "package_directory": "packages/05-riasec-holland-career-interest-test-explained",
+      "package_sha256": "e5a4f0482cdde5c23918262fcc05054fb6fe1bde7ffbdc973e6860ada2ea8c8d",
+      "body_sha256": "b46b0c3a2811859ea08d81421286a708668e4ba16ddbd782e56f9731c3255b50",
+      "reading_minutes_suggestion": 10,
+      "faq_count": 6,
+      "primary_cta_count": 1
+    }
+  ],
+  "permissions": {
+    "cms_draft": false,
+    "cms_import": false,
+    "publication": false,
+    "database_write": false,
+    "cache_refresh": false,
+    "search_submission": false,
+    "staging": false,
+    "production": false
+  },
+  "expected_delivery_lane": "docs_content_package_only_deploy_skip",
+  "downstream_holds": [
+    "identity",
+    "publication",
+    "schema",
+    "hreflang",
+    "sitemap",
+    "llms",
+    "search_channel",
+    "revalidation"
+  ],
+  "adapter_requirements": [
+    "reading_minutes",
+    "related_test_slug",
+    "answer_surface_v1.faq_items"
+  ],
+  "batch_manifest_sha256": "48a79cdcfc5b10766b58658aadb601e0682257af56d4fd108ed920a2ed6fa20a"
+}

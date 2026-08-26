@@ -1,0 +1,416 @@
+{
+  "schema_version": "fermatmind.article15_content_package.v1",
+  "package_id": "ARTICLE15-BATCH-A-02-big-five-tool-guide",
+  "package_order": 2,
+  "status": {
+    "content_package_only": true,
+    "intended_cms_status": "draft",
+    "requires_operator_review": true,
+    "cms_draft_created": false,
+    "publish_allowed": false,
+    "search_submit_allowed": false,
+    "import_ready": false
+  },
+  "bindings": {
+    "baseline_commit": "6f172f279a02ef1b6ac57f59ed88cf99e6235793",
+    "top100_source_sha256": "e4c9788d6fadff53bc33170299971ab57dbff1810ad1fcdb4f97f5f4ee94d150",
+    "article15_target_set_sha256": "9ccd8cab8b44f10409e0ef3ced944ba663376c84a5032bd74ddba143d88cd35a",
+    "baseline_authority": "production_public_article_api_read_only",
+    "baseline_observed_at": "2026-08-26"
+  },
+  "identity_lock": {
+    "article_id": 3,
+    "translation_group_id": "big5-v2-df8d5e7f157e301b9a0f4dc8e6b8c3b66c7e31f4",
+    "published_revision_id": 383,
+    "locale": "zh-CN",
+    "slug": "big-five-tool-guide",
+    "canonical_url": "https://fermatmind.com/zh/articles/big-five-tool-guide",
+    "current_status": "published",
+    "current_is_public": true,
+    "current_is_indexable": true
+  },
+  "current_to_proposed": {
+    "article_id": {
+      "status": "KEEP",
+      "current": 3,
+      "proposed": 3
+    },
+    "translation_group_id": {
+      "status": "KEEP",
+      "current": "big5-v2-df8d5e7f157e301b9a0f4dc8e6b8c3b66c7e31f4",
+      "proposed": "big5-v2-df8d5e7f157e301b9a0f4dc8e6b8c3b66c7e31f4"
+    },
+    "published_revision_id": {
+      "status": "KEEP",
+      "current": 383,
+      "proposed": 383,
+      "note": "identity precondition only; no revision write in this task"
+    },
+    "locale": {
+      "status": "KEEP",
+      "current": "zh-CN",
+      "proposed": "zh-CN"
+    },
+    "slug": {
+      "status": "KEEP",
+      "current": "big-five-tool-guide",
+      "proposed": "big-five-tool-guide"
+    },
+    "canonical_url": {
+      "status": "KEEP",
+      "current": "https://fermatmind.com/zh/articles/big-five-tool-guide",
+      "proposed": "https://fermatmind.com/zh/articles/big-five-tool-guide"
+    },
+    "publication": {
+      "status": "KEEP",
+      "current": {
+        "status": "published",
+        "is_public": true
+      },
+      "proposed": {
+        "status": "published",
+        "is_public": true
+      }
+    },
+    "title": {
+      "status": "CHANGE",
+      "current": "大五人格测试工具使用与边界指南",
+      "proposed": "大五人格测试结果怎么看？五维分数、使用方法与边界"
+    },
+    "h1": {
+      "status": "CHANGE",
+      "current": "大五人格测试工具使用与边界指南",
+      "proposed": "大五人格测试结果怎么看？五维分数、使用方法与边界",
+      "note": "CMS title is the page H1; body snapshot contains no H1"
+    },
+    "seo_title": {
+      "status": "CHANGE",
+      "current": "大五人格测试工具：怎么用、怎么看分数与边界",
+      "proposed": "大五人格测试结果怎么看？五维分数、使用方法与边界"
+    },
+    "seo_description": {
+      "status": "CHANGE",
+      "current": "大五人格测试适合支持结构化自我反思，不应用于诊断、筛选或预测。本文说明测试前、作答时、读报告后的核对方法与产品信息 Unknown 边界。",
+      "proposed": "大五人格结果先看开放性、尽责性、外倾性、宜人性和负性情绪倾向的分数依据，再用情境与反例验证；不用于诊断、招聘筛选、能力或未来预测。"
+    },
+    "intro": {
+      "status": "CHANGE",
+      "current": "先核对工具、分数与比较依据，再用低风险观察收集吻合与反例；不要让一次人格测试替你判定能力、身份或未来。",
+      "proposed": "大五人格结果通常用开放性、尽责性、外倾性、宜人性和负性情绪倾向五个连续维度呈现。先核对量表、分数类型和比较依据，再把高低分翻译成具体情境中的观察问题，同时寻找反例。结果可以支持自我反思，但不能判断能力、诊断心理状态、筛选求职者或预测未来。",
+      "note": "current value is the baseline article excerpt; proposed value is the answer-first visible intro"
+    },
+    "body_markdown": {
+      "status": "CHANGE",
+      "current": {
+        "sha256": "39fe3bc0faad16c726cf5a0025d8b92d46e7b7ef75e191d7ffa50b0e08c521cf"
+      },
+      "proposed": {
+        "file": "body.zh-CN.md",
+        "sha256": "d98f2ada7e33c237aa15b6a028bb067815f4d07049373c5645834051718f5d01"
+      }
+    },
+    "faq": {
+      "status": "CHANGE",
+      "current": [
+        {
+          "question": "什么时候适合阅读这篇文章？",
+          "answer": "当你想把公开内容和测评、人格画像或职业建议串起来时，先从这篇文章的核心摘要开始。"
+        },
+        {
+          "question": "这篇文章会替代正式判断吗？",
+          "answer": "不会。它只提供公开解释和行动线索，不替代医疗、法律或专业诊断。"
+        }
+      ],
+      "proposed": [
+        {
+          "question": "大五人格结果应该先看什么？",
+          "answer": "先看工具与版本、五维名称、分数类型和比较依据，再看每个维度的高低位置。缺少量尺、常模或参照群体时，不要把一个数字直接解释成排名、优劣或能力。"
+        },
+        {
+          "question": "大五人格五个维度的高分和低分代表好坏吗？",
+          "answer": "不代表普遍的好坏。开放性、尽责性、外倾性、宜人性和负性情绪倾向都是连续维度；同一倾向在不同任务、关系和压力环境中可能带来不同优势与代价。"
+        },
+        {
+          "question": "两个维度要不要组合起来看？",
+          "answer": "可以把多个维度放回同一个场景观察，但不要据此发明固定人格类型。例如会议参与可能同时受外倾性、压力、准备时间和团队结构影响，组合解读仍要保留情境与反例。"
+        },
+        {
+          "question": "大五人格结果不同或复测变化怎么办？",
+          "answer": "先核对是否为同一工具、版本、计分方式和比较群体，再记录作答时的疲劳、压力与近期事件。差异可能来自工具、情境或真实变化；在信息不足时标记“待核实”。"
+        },
+        {
+          "question": "大五人格结果可以用于招聘、诊断或职业预测吗？",
+          "answer": "本文不支持这些用途。一次在线结果不能单独用于招聘筛选、医疗或心理诊断、能力判断、录取、职业适配或成功预测；高影响决策需要与用途匹配的独立证据和专业流程。"
+        }
+      ]
+    },
+    "answer_surface_v1": {
+      "status": "CHANGE",
+      "current": {
+        "source": "current public answer_surface_v1.faq_blocks",
+        "faq_count": 2
+      },
+      "proposed": {
+        "policy": "editor_supplied",
+        "faq_items": [
+          {
+            "question": "大五人格结果应该先看什么？",
+            "answer": "先看工具与版本、五维名称、分数类型和比较依据，再看每个维度的高低位置。缺少量尺、常模或参照群体时，不要把一个数字直接解释成排名、优劣或能力。"
+          },
+          {
+            "question": "大五人格五个维度的高分和低分代表好坏吗？",
+            "answer": "不代表普遍的好坏。开放性、尽责性、外倾性、宜人性和负性情绪倾向都是连续维度；同一倾向在不同任务、关系和压力环境中可能带来不同优势与代价。"
+          },
+          {
+            "question": "两个维度要不要组合起来看？",
+            "answer": "可以把多个维度放回同一个场景观察，但不要据此发明固定人格类型。例如会议参与可能同时受外倾性、压力、准备时间和团队结构影响，组合解读仍要保留情境与反例。"
+          },
+          {
+            "question": "大五人格结果不同或复测变化怎么办？",
+            "answer": "先核对是否为同一工具、版本、计分方式和比较群体，再记录作答时的疲劳、压力与近期事件。差异可能来自工具、情境或真实变化；在信息不足时标记“待核实”。"
+          },
+          {
+            "question": "大五人格结果可以用于招聘、诊断或职业预测吗？",
+            "answer": "本文不支持这些用途。一次在线结果不能单独用于招聘筛选、医疗或心理诊断、能力判断、录取、职业适配或成功预测；高影响决策需要与用途匹配的独立证据和专业流程。"
+          }
+        ],
+        "visible_faq_count": 5,
+        "expected_faq_schema_mainEntity_count": 5
+      },
+      "note": "visible FAQ and answer-surface draft are replaced together"
+    },
+    "primary_cta": {
+      "status": "CHANGE",
+      "current": [
+        {
+          "key": "articles_index",
+          "title": "继续浏览文章",
+          "body": "回到文章目录，继续扩展公开内容阅读链路。",
+          "href": "/zh/articles",
+          "kind": "content_continue"
+        },
+        {
+          "key": "topic_hub",
+          "title": "进入主题聚合",
+          "body": "把文章阅读继续到更结构化的主题入口。",
+          "href": "/zh/topics",
+          "kind": "discover"
+        },
+        {
+          "key": "start_test",
+          "title": "开始测试",
+          "body": "如果你想把阅读转成自我测量，可以从测试入口开始。",
+          "href": "/zh/tests/big-five-personality-test-ocean-model",
+          "kind": "start_test"
+        }
+      ],
+      "proposed": [
+        {
+          "label": "开始大五人格测试",
+          "href": "/zh/tests/big-five-personality-test-ocean-model",
+          "intent": "test_intent_handoff"
+        }
+      ],
+      "note": "exactly one primary CTA; ordinary contextual links are not CTA slots"
+    },
+    "canonical_internal_links": {
+      "status": "CHANGE",
+      "current": "baseline body links",
+      "proposed": [
+        {
+          "href": "/zh/tests/big-five-personality-test-ocean-model",
+          "role": "primary_cta",
+          "owner": "big_five_test"
+        },
+        {
+          "href": "/zh/personality/big-five",
+          "role": "context",
+          "owner": "big_five_model_overview"
+        }
+      ]
+    },
+    "related_test_slug": {
+      "status": "KEEP",
+      "current": "big-five-personality-test-ocean-model",
+      "proposed": "big-five-personality-test-ocean-model",
+      "note": "article-level adapter requirement; existing-article updater does not support this field"
+    },
+    "reading_minutes": {
+      "status": "CHANGE",
+      "current": 1,
+      "proposed": 9,
+      "note": "recommendation = max(1, ceil(mb_strlen(strip_tags(body))/700)); existing-article updater does not support this field"
+    },
+    "schema": {
+      "status": "KEEP",
+      "current": {
+        "article_schema_gate_v1": {
+          "enabled": true
+        },
+        "breadcrumb_schema_gate_v1": {
+          "enabled": true
+        },
+        "faq_schema_gate_v1": {
+          "enabled": false
+        }
+      },
+      "proposed": {
+        "article_schema_gate_v1": {
+          "enabled": true
+        },
+        "breadcrumb_schema_gate_v1": {
+          "enabled": true
+        },
+        "faq_schema_gate_v1": {
+          "enabled": false
+        }
+      }
+    },
+    "hreflang": {
+      "status": "KEEP",
+      "current": {
+        "enabled": false,
+        "policy": "no_hreflang",
+        "reason": "no_verified_public_indexable_english_counterpart"
+      },
+      "proposed": {
+        "enabled": false,
+        "policy": "no_hreflang",
+        "reason": "no_verified_public_indexable_english_counterpart"
+      }
+    },
+    "sitemap": {
+      "status": "KEEP",
+      "current": true,
+      "proposed": true
+    },
+    "llms": {
+      "status": "KEEP",
+      "current": true,
+      "proposed": true
+    },
+    "search_channel": {
+      "status": "KEEP",
+      "current": "HOLD",
+      "proposed": "HOLD"
+    },
+    "revalidation": {
+      "status": "KEEP",
+      "current": "HOLD",
+      "proposed": "HOLD"
+    }
+  },
+  "body_patch": {
+    "policy": "minimal_editorial_patch_over_baseline_snapshot",
+    "operations": [
+      "CHANGE title/H1/SEO title/description/intro 为结果解读 owner",
+      "CHANGE 首段移除故事先行，改为 answer-first",
+      "CHANGE 新增五维结果阅读小节",
+      "CHANGE 新增 5 个结果解读 FAQ",
+      "CHANGE 仅保留一个正式测试主 CTA",
+      "CHANGE reading_minutes 建议按 importer 公式重算"
+    ],
+    "body_file": "body.zh-CN.md",
+    "current_body_sha256": "39fe3bc0faad16c726cf5a0025d8b92d46e7b7ef75e191d7ffa50b0e08c521cf",
+    "proposed_body_sha256": "d98f2ada7e33c237aa15b6a028bb067815f4d07049373c5645834051718f5d01"
+  },
+  "cta": {
+    "primary_count": 1,
+    "primary": {
+      "label": "开始大五人格测试",
+      "href": "/zh/tests/big-five-personality-test-ocean-model",
+      "intent": "test_intent_handoff"
+    },
+    "tracking_expectation": "article_to_test_click",
+    "public_canonical_route_only": true
+  },
+  "internal_link_plan": [
+    {
+      "href": "/zh/tests/big-five-personality-test-ocean-model",
+      "role": "primary_cta",
+      "owner": "big_five_test"
+    },
+    {
+      "href": "/zh/personality/big-five",
+      "role": "context",
+      "owner": "big_five_model_overview"
+    }
+  ],
+  "claim_boundary": "只拥有结果怎么看、怎么使用和使用边界；模型总览交给 Big Five Hub，测试意图交给正式测试页；不转移量表证据，不作诊断、筛选、能力或未来预测。",
+  "forbidden_claims": [
+    "diagnosis",
+    "guaranteed_admission",
+    "unique_career",
+    "fixed_personality",
+    "hiring_screening",
+    "ability_prediction",
+    "official_endorsement"
+  ],
+  "references": [
+    {
+      "title": "Goldberg (1990), An alternative description of personality: The Big-Five factor structure",
+      "url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+      "authority": "Journal of Personality and Social Psychology",
+      "use_boundary": "仅支持五因素结构研究背景，不验证任何具体在线工具、分数或常模。"
+    },
+    {
+      "title": "Big Five Inventory 2",
+      "url": "https://www.ocf.berkeley.edu/~johnlab/bfi.html",
+      "authority": "Berkeley Personality Lab",
+      "use_boundary": "用于说明BFI-2维度、分面、版本与计分资料边界，不把BFI-2证据转移到FermatMind工具。"
+    },
+    {
+      "title": "ITC Guidelines on Test Use",
+      "url": "https://www.intestcom.org/files/guideline_test_use.pdf",
+      "authority": "International Test Commission",
+      "use_boundary": "支持用途、解释、比较群体和高影响决策边界。"
+    },
+    {
+      "title": "Standards for Educational and Psychological Testing",
+      "url": "https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf",
+      "authority": "AERA / APA / NCME",
+      "use_boundary": "支持解释与用途必须有相应证据，不把描述性结果自动当作预测。"
+    }
+  ],
+  "private_url_guard": {
+    "status": "HOLD",
+    "forbidden_route_families": [
+      "result",
+      "results",
+      "order",
+      "orders",
+      "share",
+      "pay",
+      "payment",
+      "history",
+      "private",
+      "token",
+      "session"
+    ],
+    "public_canonical_only": true
+  },
+  "downstream_holds": {
+    "identity": true,
+    "publication": true,
+    "schema": true,
+    "hreflang": true,
+    "sitemap": true,
+    "llms": true,
+    "search_channel": true,
+    "revalidation": true,
+    "cms_import": true,
+    "cache_refresh": true
+  },
+  "adapter_requirements": {
+    "required_before_later_import": true,
+    "revision_bound": true,
+    "fields": [
+      "reading_minutes",
+      "related_test_slug",
+      "answer_surface_v1.faq_items"
+    ],
+    "current_existing_article_updater_supports_all": false,
+    "import_state_must_remain_false": true
+  },
+  "package_sha256": "ccc0b4c617171307eaacf0b659886b57907c2a0d9664e42aab8b0cb72e8c04d4"
+}

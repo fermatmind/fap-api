@@ -1,0 +1,375 @@
+{
+  "schema_version": "fermatmind.article15_content_package.v1",
+  "package_id": "ARTICLE15-BATCH-A-01-gaokao-major-adjustment-unacceptable-major-checklist",
+  "package_order": 1,
+  "status": {
+    "content_package_only": true,
+    "intended_cms_status": "draft",
+    "requires_operator_review": true,
+    "cms_draft_created": false,
+    "publish_allowed": false,
+    "search_submit_allowed": false,
+    "import_ready": false
+  },
+  "bindings": {
+    "baseline_commit": "6f172f279a02ef1b6ac57f59ed88cf99e6235793",
+    "top100_source_sha256": "e4c9788d6fadff53bc33170299971ab57dbff1810ad1fcdb4f97f5f4ee94d150",
+    "article15_target_set_sha256": "9ccd8cab8b44f10409e0ef3ced944ba663376c84a5032bd74ddba143d88cd35a",
+    "baseline_authority": "production_public_article_api_read_only",
+    "baseline_observed_at": "2026-08-26"
+  },
+  "identity_lock": {
+    "article_id": 58,
+    "translation_group_id": "tg_gaokao_adjustment_unacceptable_major_2026v1",
+    "published_revision_id": 78,
+    "locale": "zh-CN",
+    "slug": "gaokao-major-adjustment-unacceptable-major-checklist",
+    "canonical_url": "/zh/articles/gaokao-major-adjustment-unacceptable-major-checklist",
+    "current_status": "published",
+    "current_is_public": true,
+    "current_is_indexable": true
+  },
+  "current_to_proposed": {
+    "article_id": {
+      "status": "KEEP",
+      "current": 58,
+      "proposed": 58
+    },
+    "translation_group_id": {
+      "status": "KEEP",
+      "current": "tg_gaokao_adjustment_unacceptable_major_2026v1",
+      "proposed": "tg_gaokao_adjustment_unacceptable_major_2026v1"
+    },
+    "published_revision_id": {
+      "status": "KEEP",
+      "current": 78,
+      "proposed": 78,
+      "note": "identity precondition only; no revision write in this task"
+    },
+    "locale": {
+      "status": "KEEP",
+      "current": "zh-CN",
+      "proposed": "zh-CN"
+    },
+    "slug": {
+      "status": "KEEP",
+      "current": "gaokao-major-adjustment-unacceptable-major-checklist",
+      "proposed": "gaokao-major-adjustment-unacceptable-major-checklist"
+    },
+    "canonical_url": {
+      "status": "KEEP",
+      "current": "/zh/articles/gaokao-major-adjustment-unacceptable-major-checklist",
+      "proposed": "/zh/articles/gaokao-major-adjustment-unacceptable-major-checklist"
+    },
+    "publication": {
+      "status": "KEEP",
+      "current": {
+        "status": "published",
+        "is_public": true
+      },
+      "proposed": {
+        "status": "published",
+        "is_public": true
+      }
+    },
+    "title": {
+      "status": "KEEP",
+      "current": "高考志愿要不要服从调剂？先看院校专业组里的“不能接受专业”",
+      "proposed": "高考志愿要不要服从调剂？先看院校专业组里的“不能接受专业”"
+    },
+    "h1": {
+      "status": "KEEP",
+      "current": "高考志愿要不要服从调剂？先看院校专业组里的“不能接受专业”",
+      "proposed": "高考志愿要不要服从调剂？先看院校专业组里的“不能接受专业”",
+      "note": "CMS title is the page H1; body snapshot contains no H1"
+    },
+    "seo_title": {
+      "status": "KEEP",
+      "current": "高考志愿要不要服从调剂？先排除不能接受专业",
+      "proposed": "高考志愿要不要服从调剂？先排除不能接受专业"
+    },
+    "seo_description": {
+      "status": "CHANGE",
+      "current": "填院校专业组前，别先争服从调剂。先把全部专业分成不能接受、待验证、可接受，再用课程、硬条件和家庭成本判断能否承担调剂风险。",
+      "proposed": "高考志愿是否服从调剂，先核对院校专业组全部专业、选科体检等硬条件和不能接受项。附三栏清单；RIASEC 仅辅助兴趣梳理，不预测录取。"
+    },
+    "intro": {
+      "status": "CHANGE",
+      "current": "填院校专业组前，别先争服从调剂。先把全部专业分成不能接受、待验证、可接受，再用课程、硬条件和家庭成本判断能否承担调剂风险。",
+      "proposed": "是否服从调剂，不能脱离本省当年投档规则、目标高校招生章程和具体院校专业组回答。先列出组内全部专业，再核对选科、体检、单科、外语等硬条件，把其余专业分成“不能接受、待验证、可接受”。只有你能承担组内最坏结果时，才继续讨论是否服从调剂。本文提供决策清单，不预测录取，也不替代官方填报规则。",
+      "note": "current value is the baseline article excerpt; proposed value is the answer-first visible intro"
+    },
+    "body_markdown": {
+      "status": "CHANGE",
+      "current": {
+        "sha256": "d7e11b3d7d0be68a668b925614c5bed9f42f32edf9430a3d65a4743440b55b8d"
+      },
+      "proposed": {
+        "file": "body.zh-CN.md",
+        "sha256": "62bde8b8ac8c4d11f9d3a07bd433e327d8da878a83d9fa2d0646598caf61a055"
+      }
+    },
+    "faq": {
+      "status": "CHANGE",
+      "current": [
+        {
+          "question": "什么时候适合阅读这篇文章？",
+          "answer": "当你想把公开内容和测评、人格画像或职业建议串起来时，先从这篇文章的核心摘要开始。"
+        },
+        {
+          "question": "这篇文章会替代正式判断吗？",
+          "answer": "不会。它只提供公开解释和行动线索，不替代医疗、法律或专业诊断。"
+        }
+      ],
+      "proposed": [
+        {
+          "question": "高考志愿是否必须服从调剂？",
+          "answer": "不是所有考生、所有省份或所有志愿模式都存在同一种“必须”答案。先查本省当年投档规则和目标高校招生章程，再看院校专业组内是否有你不能接受或不符合条件的专业。本文不替你作录取决定。"
+        },
+        {
+          "question": "怎样列出“不能接受专业”？",
+          "answer": "把组内全部专业逐项写入三栏表：不能接受、待验证、可接受。只有能写出明确证据，例如硬条件不符、长期课程或任务无法承受、家庭成本不可行，才放入“不能接受”；信息不足先放“待验证”。"
+        },
+        {
+          "question": "院校专业组需要核对哪些硬条件？",
+          "answer": "至少核对本省当年规则、高校招生章程、选考科目、体检限制、单科成绩、外语语种、学制学费、培养校区和具体专业录取条件。不同省份、批次、院校和专业可能不同，不要用其他地区经验代替官方文件。"
+        },
+        {
+          "question": "RIASEC 能代替服从调剂决定吗？",
+          "answer": "不能。RIASEC 只能帮助你把兴趣和排斥转成课程、任务与环境的验证问题；它不预测录取、不保证专业适配，也不能替代省考试院规则、高校招生章程和现实成本判断。"
+        }
+      ]
+    },
+    "answer_surface_v1": {
+      "status": "CHANGE",
+      "current": {
+        "source": "current public answer_surface_v1.faq_blocks",
+        "faq_count": 2
+      },
+      "proposed": {
+        "policy": "editor_supplied",
+        "faq_items": [
+          {
+            "question": "高考志愿是否必须服从调剂？",
+            "answer": "不是所有考生、所有省份或所有志愿模式都存在同一种“必须”答案。先查本省当年投档规则和目标高校招生章程，再看院校专业组内是否有你不能接受或不符合条件的专业。本文不替你作录取决定。"
+          },
+          {
+            "question": "怎样列出“不能接受专业”？",
+            "answer": "把组内全部专业逐项写入三栏表：不能接受、待验证、可接受。只有能写出明确证据，例如硬条件不符、长期课程或任务无法承受、家庭成本不可行，才放入“不能接受”；信息不足先放“待验证”。"
+          },
+          {
+            "question": "院校专业组需要核对哪些硬条件？",
+            "answer": "至少核对本省当年规则、高校招生章程、选考科目、体检限制、单科成绩、外语语种、学制学费、培养校区和具体专业录取条件。不同省份、批次、院校和专业可能不同，不要用其他地区经验代替官方文件。"
+          },
+          {
+            "question": "RIASEC 能代替服从调剂决定吗？",
+            "answer": "不能。RIASEC 只能帮助你把兴趣和排斥转成课程、任务与环境的验证问题；它不预测录取、不保证专业适配，也不能替代省考试院规则、高校招生章程和现实成本判断。"
+          }
+        ],
+        "visible_faq_count": 4,
+        "expected_faq_schema_mainEntity_count": 4
+      },
+      "note": "visible FAQ and answer-surface draft are replaced together"
+    },
+    "primary_cta": {
+      "status": "CHANGE",
+      "current": [
+        {
+          "key": "article_cta_1",
+          "title": "做一次霍兰德职业兴趣测试，把“不喜欢”拆成可验证任务",
+          "body": null,
+          "href": "/zh/tests/holland-career-interest-test-riasec",
+          "kind": "start_test"
+        },
+        {
+          "key": "article_cta_2",
+          "title": "用 MBTI 辅助理解学习和沟通偏好",
+          "body": null,
+          "href": "/zh/tests/mbti-personality-test-16-personality-types",
+          "kind": "start_test"
+        }
+      ],
+      "proposed": [
+        {
+          "label": "做霍兰德职业兴趣测试，整理专业验证问题",
+          "href": "/zh/tests/holland-career-interest-test-riasec",
+          "intent": "test_intent_handoff"
+        }
+      ],
+      "note": "exactly one primary CTA; ordinary contextual links are not CTA slots"
+    },
+    "canonical_internal_links": {
+      "status": "CHANGE",
+      "current": "baseline body links",
+      "proposed": [
+        {
+          "href": "/zh/tests/holland-career-interest-test-riasec",
+          "role": "primary_cta",
+          "owner": "riasec_test"
+        },
+        {
+          "href": "/zh/articles/riasec-holland-career-interest-test-explained",
+          "role": "context",
+          "owner": "riasec_model_result_explainer"
+        },
+        {
+          "href": "/zh/articles/unwanted-major-repeat-or-stay-riasec-decision-checklist",
+          "role": "context",
+          "owner": "repeat_or_stay_decision_checklist"
+        }
+      ]
+    },
+    "related_test_slug": {
+      "status": "KEEP",
+      "current": "holland-career-interest-test-riasec",
+      "proposed": "holland-career-interest-test-riasec",
+      "note": "article-level adapter requirement; existing-article updater does not support this field"
+    },
+    "reading_minutes": {
+      "status": "CHANGE",
+      "current": 14,
+      "proposed": 13,
+      "note": "recommendation = max(1, ceil(mb_strlen(strip_tags(body))/700)); existing-article updater does not support this field"
+    },
+    "schema": {
+      "status": "KEEP",
+      "current": "baseline schema state",
+      "proposed": "baseline schema state"
+    },
+    "hreflang": {
+      "status": "KEEP",
+      "current": "baseline hreflang state",
+      "proposed": "baseline hreflang state"
+    },
+    "sitemap": {
+      "status": "KEEP",
+      "current": true,
+      "proposed": true
+    },
+    "llms": {
+      "status": "KEEP",
+      "current": true,
+      "proposed": true
+    },
+    "search_channel": {
+      "status": "KEEP",
+      "current": "HOLD",
+      "proposed": "HOLD"
+    },
+    "revalidation": {
+      "status": "KEEP",
+      "current": "HOLD",
+      "proposed": "HOLD"
+    }
+  },
+  "body_patch": {
+    "policy": "minimal_editorial_patch_over_baseline_snapshot",
+    "operations": [
+      "CHANGE 首屏直接回答并锁定年度/地区边界",
+      "CHANGE 可见 FAQ 为固定 4 个调剂决策问题",
+      "CHANGE RIASEC 重复行动链接为一个主 CTA",
+      "CHANGE 增加 RIASEC 解释页与复读/继续就读清单上下文内链"
+    ],
+    "body_file": "body.zh-CN.md",
+    "current_body_sha256": "d7e11b3d7d0be68a668b925614c5bed9f42f32edf9430a3d65a4743440b55b8d",
+    "proposed_body_sha256": "62bde8b8ac8c4d11f9d3a07bd433e327d8da878a83d9fa2d0646598caf61a055"
+  },
+  "cta": {
+    "primary_count": 1,
+    "primary": {
+      "label": "做霍兰德职业兴趣测试，整理专业验证问题",
+      "href": "/zh/tests/holland-career-interest-test-riasec",
+      "intent": "test_intent_handoff"
+    },
+    "tracking_expectation": "article_to_test_click",
+    "public_canonical_route_only": true
+  },
+  "internal_link_plan": [
+    {
+      "href": "/zh/tests/holland-career-interest-test-riasec",
+      "role": "primary_cta",
+      "owner": "riasec_test"
+    },
+    {
+      "href": "/zh/articles/riasec-holland-career-interest-test-explained",
+      "role": "context",
+      "owner": "riasec_model_result_explainer"
+    },
+    {
+      "href": "/zh/articles/unwanted-major-repeat-or-stay-riasec-decision-checklist",
+      "role": "context",
+      "owner": "repeat_or_stay_decision_checklist"
+    }
+  ],
+  "claim_boundary": "不预测录取、退档、调剂结果或转专业成功；不从隐藏查询扩写院校、地区、批次或政策；所有规则判断回到本省当年文件与目标高校招生章程；RIASEC 只整理兴趣线索。",
+  "forbidden_claims": [
+    "diagnosis",
+    "guaranteed_admission",
+    "unique_career",
+    "fixed_personality",
+    "hiring_screening",
+    "ability_prediction",
+    "official_endorsement"
+  ],
+  "references": [
+    {
+      "title": "教育部关于做好2026年普通高校招生工作的通知（教学〔2026〕1号）",
+      "url": "https://www.moe.gov.cn/srcsite/A15/moe_776/s3258/202601/t20260121_1427110.html",
+      "authority": "中华人民共和国教育部",
+      "use_boundary": "仅支持2026年全国招生治理、院校专业组优化与应查官方规则的表述；不代替省级投档规则或高校招生章程。"
+    },
+    {
+      "title": "2024年高考志愿填报十问十答",
+      "url": "https://www.moe.gov.cn/jyb_xwfb/gzdt_gzdt/s5987/202406/t20240619_1136514.html",
+      "authority": "中华人民共和国教育部",
+      "use_boundary": "仅支持阅读高校招生章程、核对专业录取条件及不服从调剂可能带来退档风险的一般解释；具体到2026年仍以本省与目标高校规则为准。"
+    },
+    {
+      "title": "阳光高考招生章程查询",
+      "url": "https://gaokao.chsi.com.cn/zsgs/",
+      "authority": "教育部学生服务与素质发展中心阳光高考平台",
+      "use_boundary": "用于逐校核对当年招生章程，不从单所高校规则泛化到其他院校、地区或批次。"
+    }
+  ],
+  "private_url_guard": {
+    "status": "HOLD",
+    "forbidden_route_families": [
+      "result",
+      "results",
+      "order",
+      "orders",
+      "share",
+      "pay",
+      "payment",
+      "history",
+      "private",
+      "token",
+      "session"
+    ],
+    "public_canonical_only": true
+  },
+  "downstream_holds": {
+    "identity": true,
+    "publication": true,
+    "schema": true,
+    "hreflang": true,
+    "sitemap": true,
+    "llms": true,
+    "search_channel": true,
+    "revalidation": true,
+    "cms_import": true,
+    "cache_refresh": true
+  },
+  "adapter_requirements": {
+    "required_before_later_import": true,
+    "revision_bound": true,
+    "fields": [
+      "reading_minutes",
+      "related_test_slug",
+      "answer_surface_v1.faq_items"
+    ],
+    "current_existing_article_updater_supports_all": false,
+    "import_state_must_remain_false": true
+  },
+  "package_sha256": "ea75bf63659b9738153a4d0895242d03b9ae937b2f91eb065a256ebe6900650d"
+}
