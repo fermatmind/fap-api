@@ -131,7 +131,7 @@ final class PageFamilyPolicyRegistry
                     'page_entity_types' => ['career_job', 'career_recommendation', 'career_directory', 'career_guide', 'career_hub'],
                     'entity_sources' => ['career_directory_authority', 'career_runtime_publish_projection', 'career_recommendations', 'career_guides', 'landing_surfaces'],
                     'source_authorities' => ['career_runtime_publish_projection', 'backend_cms', 'backend_public_surface'],
-                    'route_authority' => ['exact_static_templates' => ['/en/career', '/en/career/guides', '/en/career/recommendations', '/en/career/tests', '/zh/career', '/zh/career/guides', '/zh/career/recommendations', '/zh/career/tests'], 'dynamic_route_source' => 'CareerDirectoryAuthorityService', 'sitemap_role' => 'consumer_consistency_only'],
+                    'route_authority' => ['exact_static_templates' => ['/en/career', '/en/career/guides', '/en/career/recommendations', '/en/career/tests', '/zh/career/jobs', '/zh/career/guides', '/zh/career/recommendations', '/zh/career/tests'], 'dynamic_route_source' => 'CareerDirectoryAuthorityService', 'sitemap_role' => 'consumer_consistency_only'],
                 ],
                 'business_priority' => 'L3_career_discovery',
                 'locale_policy' => $commonLocalePolicy,

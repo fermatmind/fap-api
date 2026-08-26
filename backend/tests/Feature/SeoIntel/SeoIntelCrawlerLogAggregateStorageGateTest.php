@@ -105,6 +105,8 @@ final class SeoIntelCrawlerLogAggregateStorageGateTest extends TestCase
 
         $row = (array) DB::connection('seo_intel')->table('seo_crawler_log_daily_aggregates')->first();
         $this->assertSame('/en/research/safe-report', $row['canonical_path'] ?? null);
+        $this->assertSame('2026-05-22 01:00:00', $row['first_seen_at'] ?? null);
+        $this->assertSame('2026-05-22 01:05:00', $row['last_seen_at'] ?? null);
         $this->assertArrayNotHasKey('raw_user_agent', $row);
         $this->assertArrayNotHasKey('metadata_json', $row);
     }
@@ -160,8 +162,8 @@ final class SeoIntelCrawlerLogAggregateStorageGateTest extends TestCase
             'query_risk_state' => 'none',
             'private_path_blocked' => false,
             'hit_count' => 3,
-            'first_seen_at' => '2026-05-22T01:00:00+00:00',
-            'last_seen_at' => '2026-05-22T01:05:00+00:00',
+            'first_seen_at' => '2026-05-22T09:00:00+08:00',
+            'last_seen_at' => '2026-05-22T09:05:00+08:00',
             'source_log_family' => 'nginx_openresty_access_log',
             'privacy_transform_version' => 'crawler_log_privacy_transform_v1',
             'raw_user_agent' => 'must-not-persist',

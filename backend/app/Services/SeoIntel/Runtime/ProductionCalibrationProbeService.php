@@ -108,6 +108,9 @@ final class ProductionCalibrationProbeService
         $cells = [];
         foreach ($targets as $key => $target) {
             $response = $responses[$key] ?? null;
+            if (! $response instanceof Response) {
+                $response = $this->retryTransport((string) $target['canonical_url']);
+            }
             $status = $response instanceof Response ? $response->status() : null;
             $success = is_int($status) && $status >= 200 && $status < 300;
             $cells[$key] = [
@@ -130,6 +133,20 @@ final class ProductionCalibrationProbeService
         ksort($cells);
 
         return $cells;
+    }
+
+    private function retryTransport(string $canonicalUrl): ?Response
+    {
+        try {
+            return Http::accept('text/html')
+                ->withUserAgent('FermatMind-SEO-Platform-07-Calibrator/1.0')
+                ->connectTimeout(4)
+                ->timeout(self::TIMEOUT_SECONDS)
+                ->withOptions(['allow_redirects' => false])
+                ->get($canonicalUrl);
+        } catch (Throwable) {
+            return null;
+        }
     }
 
     /** @return array<string,mixed> */

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel\CrawlerLog;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 final class CrawlerLogAggregateStorageWriter
 {
@@ -112,8 +114,8 @@ final class CrawlerLogAggregateStorageWriter
             'query_risk_state' => (string) ($row['query_risk_state'] ?? 'none'),
             'private_path_blocked' => (bool) ($row['private_path_blocked'] ?? false),
             'hit_count' => max(0, (int) ($row['hit_count'] ?? 0)),
-            'first_seen_at' => $this->nullableString($row['first_seen_at'] ?? null),
-            'last_seen_at' => $this->nullableString($row['last_seen_at'] ?? null),
+            'first_seen_at' => $this->nullableUtcDateTime($row['first_seen_at'] ?? null),
+            'last_seen_at' => $this->nullableUtcDateTime($row['last_seen_at'] ?? null),
             'source_log_family' => (string) ($row['source_log_family'] ?? 'nginx_openresty_access_log'),
             'privacy_transform_version' => (string) ($row['privacy_transform_version'] ?? CrawlerLogFixtureParser::PRIVACY_TRANSFORM_VERSION),
         ];
@@ -165,5 +167,19 @@ final class CrawlerLogAggregateStorageWriter
         }
 
         return (int) $value;
+    }
+
+    private function nullableUtcDateTime(mixed $value): ?string
+    {
+        $normalized = $this->nullableString($value);
+        if ($normalized === null) {
+            return null;
+        }
+
+        try {
+            return CarbonImmutable::parse($normalized)->utc()->format('Y-m-d H:i:s');
+        } catch (Throwable) {
+            return null;
+        }
     }
 }

@@ -15,6 +15,15 @@ use Tests\TestCase;
 final class SeoPlatform07AuthorityDrivenCohortResolverTest extends TestCase
 {
     #[Test]
+    public function chinese_career_core_uses_the_current_non_redirecting_jobs_hub(): void
+    {
+        $templates = data_get((new PageFamilyPolicyRegistry)->families(), 'career.authority.route_authority.exact_static_templates');
+
+        $this->assertContains('/zh/career/jobs', $templates);
+        $this->assertNotContains('/zh/career', $templates);
+    }
+
+    #[Test]
     public function it_builds_six_stable_authority_driven_roles_for_every_public_family_and_locale(): void
     {
         [$records, $baseline] = $this->completeAuthority();
