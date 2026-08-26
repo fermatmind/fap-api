@@ -89,6 +89,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $schedule->command('norms:big5:monthly-drift-check')->monthlyOn(1, '04:50')->withoutOverlapping();
         $schedule->command('norms:eq60:drift-check --from=active --to=candidate')->monthlyOn(1, '05:00')->withoutOverlapping();
         $schedule->command('seo:warm-sitemap-source-cache --json')->everyTenMinutes()->withoutOverlapping();
+        $schedule->command('seo:runtime-probe-scheduled --trigger=scheduled --json')
+            ->everyTenMinutes()
+            ->withoutOverlapping()
+            ->onOneServer();
         $schedule->command('seo-intel:url-truth-controlled-reconcile --execute --no-http --max-records=5000 --batch-size=250')
             ->dailyAt('02:40')
             ->withoutOverlapping()

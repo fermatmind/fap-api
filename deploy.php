@@ -1833,6 +1833,8 @@ task('queue:reload-workers', function () {
                 .' --supervisorctl='.$quotedSupervisorctl
                 .' --sudo='.$quotedSudo
                 .' --timeout-bin='.$quotedTimeout
+                .' --crontab='.deployPlaceholderPathArg('/usr/bin/crontab')
+                .' --php-bin='.deployPlaceholderPathArg('{{bin/php}}')
                 .' --restart-script='.$supervisorRestartScript
                 .' --deploy-path='.deployPlaceholderPathArg('{{deploy_path}}')
                 .' --proc-root=/proc'

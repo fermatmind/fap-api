@@ -4798,3 +4798,55 @@ prs:
     deploy_allowed: true
     production_readback_allowed: true
     content_authority: existing_deploy_scheduler_runtime
+
+  - id: SEO-PLATFORM-07-G-SCHEDULER-REFRESH-V4
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/seo-platform-07-scheduler-refresh-v4
+    base: main
+    depends_on: ["SEO-PLATFORM-07-G-SCHEDULER-REFRESH-V3"]
+    mode: execute
+    title: "fix(deploy): refresh current-release cron scheduler"
+    scope: >
+      Correct the exact production failure from PR #3801 by preserving the
+      unique Supervisor schedule:work restart path and, only when no Supervisor
+      scheduler exists, atomically maintaining one cron schedule:run managed
+      block that resolves through deploy/current/backend. Move the runtime probe
+      registration from the legacy Console Kernel into Laravel 11's effective
+      bootstrap scheduler, validate it before mutation, migrate at most one legacy runner,
+      preserve unrelated crontab entries, verify the installed singleton and
+      fail closed on unreadable, malformed or ambiguous cron state. Do not add
+      a workflow, manual dispatch, scheduler trigger, direct SSH path, runtime
+      threshold change or application-data mutation.
+    allowed_paths:
+      - ../deploy.php
+      - bootstrap/app.php
+      - app/Console/Kernel.php
+      - scripts/deploy/restart_supervisor_scheduler.sh
+      - tests/Sre/SupervisorSchedulerReloadTest.php
+      - tests/Feature/SeoIntel/SeoPlatform07ScheduledRuntimeProbeReceiptTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    checks:
+      - "bash syntax, ShellCheck and focused Supervisor/cron scheduler PHPUnit"
+      - "existing Supervisor group reload regression"
+      - "PHP syntax, scoped Pint, JSON/YAML, exact scope and diff checks"
+      - "exact-SHA automatic deploy followed by three natural production scheduler slots"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: continuous_goal
+    merge_policy:
+      mode: github_checks_required
+      local_verify_required: true
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    deploy_allowed: true
+    production_readback_allowed: true
+    content_authority: existing_deploy_scheduler_runtime

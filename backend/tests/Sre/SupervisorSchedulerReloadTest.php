@@ -36,6 +36,7 @@ final class SupervisorSchedulerReloadTest extends TestCase
             $this->temporaryDirectory.'/deploy/releases/'.$this->revision.'/REVISION',
             $this->revision."\n",
         );
+        file_put_contents($this->temporaryDirectory.'/deploy/releases/'.$this->revision.'/backend/artisan', "#!/usr/bin/env php\n");
         file_put_contents($this->temporaryDirectory.'/proc/101/cmdline', "/usr/bin/php\0/old/backend/artisan\0schedule:work\0");
         file_put_contents($this->temporaryDirectory.'/proc/202/cmdline', "/usr/bin/php\0/current/backend/artisan\0schedule:work\0");
         file_put_contents($this->temporaryDirectory.'/proc/301/cmdline', "/usr/local/bin/run-scheduler\0");
@@ -59,6 +60,30 @@ while [[ "${1:-}" == --signal=* || "${1:-}" == --kill-after=* ]]; do shift; done
 [[ "${1:-}" =~ ^[0-9]+s$ ]]
 shift
 exec "$@"
+BASH);
+        $this->writeExecutable('crontab', <<<'BASH'
+#!/usr/bin/env bash
+set -euo pipefail
+if [[ "${1:-}" == -l ]]; then
+  if [[ "${FAKE_CRONTAB_READ_ERROR:-false}" == true ]]; then
+    printf 'permission denied\n' >&2
+    exit 1
+  fi
+  if [[ ! -f "$FAKE_CRONTAB_FILE" ]]; then
+    printf 'no crontab for test\n' >&2
+    exit 1
+  fi
+  cat "$FAKE_CRONTAB_FILE"
+  exit 0
+fi
+[[ $# -eq 1 && -f "$1" ]]
+cp "$1" "$FAKE_CRONTAB_FILE"
+BASH);
+        $this->writeExecutable('php', <<<'BASH'
+#!/usr/bin/env bash
+set -euo pipefail
+[[ "${FAKE_SCHEDULE_REGISTRATION_MISSING:-false}" != true ]] || exit 1
+printf '[{"command":"seo:runtime-probe-scheduled --trigger=scheduled --json"}]\n'
 BASH);
         $this->writeExecutable('supervisorctl', <<<'BASH'
 #!/usr/bin/env bash
@@ -161,12 +186,102 @@ BASH);
     }
 
     #[Test]
-    public function production_mode_fails_when_no_managed_scheduler_exists(): void
+    public function production_mode_installs_a_single_current_release_cron_when_supervisor_has_no_scheduler(): void
     {
+        $process = $this->runScript(['FAKE_MISSING' => 'true']);
+        $output = $process->getOutput().$process->getErrorOutput();
+        $crontab = file_get_contents($this->temporaryDirectory.'/crontab-state');
+
+        $this->assertTrue($process->isSuccessful(), $output);
+        $this->assertIsString($crontab);
+        $this->assertStringContainsString('mode=cron_current', $output);
+        $this->assertStringContainsString($this->temporaryDirectory.'/deploy/current/backend', $crontab);
+        $this->assertSame(1, substr_count($crontab, 'artisan schedule:run'));
+        $this->assertStringNotContainsString($this->temporaryDirectory, $output);
+    }
+
+    #[Test]
+    public function cron_fallback_replaces_one_legacy_schedule_runner_and_preserves_unrelated_entries(): void
+    {
+        file_put_contents(
+            $this->temporaryDirectory.'/crontab-state',
+            "MAILTO=ops@example.test\n* * * * * cd /stale/backend && /usr/bin/php artisan schedule:run\n",
+        );
+
+        $process = $this->runScript(['FAKE_MISSING' => 'true']);
+        $crontab = file_get_contents($this->temporaryDirectory.'/crontab-state');
+
+        $this->assertTrue($process->isSuccessful(), $process->getErrorOutput());
+        $this->assertIsString($crontab);
+        $this->assertStringContainsString('MAILTO=ops@example.test', $crontab);
+        $this->assertStringNotContainsString('/stale/backend', $crontab);
+        $this->assertSame(1, substr_count($crontab, 'artisan schedule:run'));
+    }
+
+    #[Test]
+    public function cron_fallback_is_idempotent(): void
+    {
+        $first = $this->runScript(['FAKE_MISSING' => 'true']);
+        $second = $this->runScript(['FAKE_MISSING' => 'true']);
+        $crontab = file_get_contents($this->temporaryDirectory.'/crontab-state');
+
+        $this->assertTrue($first->isSuccessful(), $first->getErrorOutput());
+        $this->assertTrue($second->isSuccessful(), $second->getErrorOutput());
+        $this->assertIsString($crontab);
+        $this->assertSame(1, substr_count($crontab, '# BEGIN fap-api managed scheduler'));
+        $this->assertSame(1, substr_count($crontab, 'artisan schedule:run'));
+    }
+
+    #[Test]
+    public function cron_fallback_fails_closed_on_ambiguous_existing_schedule_runners(): void
+    {
+        $original = "* * * * * cd /one && php artisan schedule:run\n* * * * * cd /two && php artisan schedule:run\n";
+        file_put_contents($this->temporaryDirectory.'/crontab-state', $original);
+
         $process = $this->runScript(['FAKE_MISSING' => 'true']);
 
         $this->assertFalse($process->isSuccessful());
-        $this->assertStringContainsString('reason=scheduler_identity_count', $process->getErrorOutput());
+        $this->assertStringContainsString('reason=cron_scheduler_identity_count', $process->getErrorOutput());
+        $this->assertSame($original, file_get_contents($this->temporaryDirectory.'/crontab-state'));
+    }
+
+    #[Test]
+    public function cron_fallback_fails_before_mutation_when_the_runtime_probe_is_not_registered(): void
+    {
+        $process = $this->runScript([
+            'FAKE_MISSING' => 'true',
+            'FAKE_SCHEDULE_REGISTRATION_MISSING' => 'true',
+        ]);
+
+        $this->assertFalse($process->isSuccessful());
+        $this->assertStringContainsString('reason=scheduler_registration_missing', $process->getErrorOutput());
+        $this->assertFileDoesNotExist($this->temporaryDirectory.'/crontab-state');
+    }
+
+    #[Test]
+    public function cron_fallback_fails_closed_when_the_existing_crontab_cannot_be_read(): void
+    {
+        $process = $this->runScript([
+            'FAKE_MISSING' => 'true',
+            'FAKE_CRONTAB_READ_ERROR' => 'true',
+        ]);
+
+        $this->assertFalse($process->isSuccessful());
+        $this->assertStringContainsString('reason=crontab_read_failed', $process->getErrorOutput());
+        $this->assertFileDoesNotExist($this->temporaryDirectory.'/crontab-state');
+    }
+
+    #[Test]
+    public function cron_fallback_fails_closed_on_a_malformed_managed_block(): void
+    {
+        $original = "# END fap-api managed scheduler\n# BEGIN fap-api managed scheduler\n";
+        file_put_contents($this->temporaryDirectory.'/crontab-state', $original);
+
+        $process = $this->runScript(['FAKE_MISSING' => 'true']);
+
+        $this->assertFalse($process->isSuccessful());
+        $this->assertStringContainsString('reason=cron_managed_block_invalid', $process->getErrorOutput());
+        $this->assertSame($original, file_get_contents($this->temporaryDirectory.'/crontab-state'));
     }
 
     #[Test]
@@ -214,11 +329,16 @@ BASH);
             '--supervisorctl='.$this->temporaryDirectory.'/supervisorctl',
             '--sudo='.$this->temporaryDirectory.'/sudo',
             '--timeout-bin='.$this->temporaryDirectory.'/timeout',
+            '--crontab='.$this->temporaryDirectory.'/crontab',
+            '--php-bin='.$this->temporaryDirectory.'/php',
             '--restart-script='.$backendRoot.'/scripts/deploy/restart_supervisor_program_group.sh',
             '--deploy-path='.$this->temporaryDirectory.'/deploy',
             '--proc-root='.$this->temporaryDirectory.'/proc',
             '--required='.($required ? 'true' : 'false'),
-        ], $backendRoot, $environment + ['FAKE_STATE_FILE' => $this->temporaryDirectory.'/state']);
+        ], $backendRoot, $environment + [
+            'FAKE_STATE_FILE' => $this->temporaryDirectory.'/state',
+            'FAKE_CRONTAB_FILE' => $this->temporaryDirectory.'/crontab-state',
+        ]);
         $process->setTimeout(20);
         $process->run();
 
