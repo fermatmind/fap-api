@@ -38,30 +38,62 @@ final class CareerDisplayAssetComponentContract
         'final_cta',
     ];
 
+    /** @var list<string> */
+    public const CURRENT_ORDER_WITHOUT_AI_DESCRIPTION = [
+        'breadcrumb',
+        'hero',
+        'fermat_decision_card',
+        'primary_cta',
+        'career_snapshot_primary_locale',
+        'career_snapshot_secondary_locale',
+        'fit_decision_checklist',
+        'riasec_fit_block',
+        'personality_fit_block',
+        'definition_block',
+        'responsibilities_block',
+        'work_context_block',
+        'career_quick_answers_block',
+        'onet_structured_fields_block',
+        'market_signal_card',
+        'adjacent_career_comparison_table',
+        'ai_impact_table',
+        'career_risk_cards',
+        'career_path_block',
+        'contract_project_risk_block',
+        'next_steps_block',
+        'faq_block',
+        'related_next_pages',
+        'source_card',
+        'review_validity_card',
+        'boundary_notice',
+        'final_cta',
+    ];
+
     /** @param array<mixed> $order */
     public static function supports(array $order): bool
     {
         $order = array_values($order);
 
-        return $order === self::CURRENT_ORDER;
+        return $order === self::CURRENT_ORDER || $order === self::CURRENT_ORDER_WITHOUT_AI_DESCRIPTION;
     }
 
     /** @param array<mixed> $order */
     public static function isCurrent(array $order): bool
     {
-        return array_values($order) === self::CURRENT_ORDER;
+        return self::supports($order);
     }
 
     /** @param array<mixed> $payload */
     public static function hasExactCurrentPages(array $payload): bool
     {
         $pages = is_array($payload['page'] ?? null) ? $payload['page'] : $payload;
-        $allowed = array_merge(self::CURRENT_ORDER, ['path', 'secondary_cta']);
+        $order = self::expectedOrderForPages($pages);
+        $allowed = array_merge($order, ['path', 'secondary_cta']);
 
         foreach (['en', 'zh'] as $locale) {
             $page = $pages[$locale] ?? null;
             if (! is_array($page)
-                || array_diff(self::CURRENT_ORDER, array_keys($page)) !== []
+                || array_diff($order, array_keys($page)) !== []
                 || array_diff(array_keys($page), $allowed) !== []
                 || array_key_exists('sections', $page)
                 || array_key_exists('content_sections', $page)
@@ -81,15 +113,16 @@ final class CareerDisplayAssetComponentContract
     public static function pageFailureCode(array $payload): ?string
     {
         $pages = is_array($payload['page'] ?? null) ? $payload['page'] : $payload;
+        $order = self::expectedOrderForPages($pages);
         foreach (['en', 'zh'] as $locale) {
             $page = $pages[$locale] ?? null;
             if (! is_array($page)) {
                 return 'CURRENT_DISPLAY_SURFACE_LOCALE_PAGE_MISSING';
             }
-            if (array_diff(self::CURRENT_ORDER, array_keys($page)) !== []) {
+            if (array_diff($order, array_keys($page)) !== []) {
                 return 'CURRENT_DISPLAY_SURFACE_COMPONENT_MISSING';
             }
-            if (array_diff(array_keys($page), array_merge(self::CURRENT_ORDER, ['path', 'secondary_cta'])) !== []) {
+            if (array_diff(array_keys($page), array_merge($order, ['path', 'secondary_cta'])) !== []) {
                 return 'CURRENT_DISPLAY_SURFACE_COMPONENT_UNEXPECTED';
             }
             if (array_key_exists('sections', $page) || array_key_exists('content_sections', $page)) {
@@ -110,6 +143,22 @@ final class CareerDisplayAssetComponentContract
         return $localeKeys === ['en', 'zh']
             ? null
             : 'CURRENT_DISPLAY_SURFACE_LOCALE_SET_MISMATCH';
+    }
+
+    /** @param array<string,mixed> $pages @return list<string> */
+    private static function expectedOrderForPages(array $pages): array
+    {
+        $enPath = $pages['en']['path'] ?? null;
+        $zhPath = $pages['zh']['path'] ?? null;
+        $isAccountants = is_string($enPath) && is_string($zhPath)
+            && str_ends_with($enPath, '/accountants-and-auditors')
+            && str_ends_with($zhPath, '/accountants-and-auditors');
+        $omitsAiDescription = ! array_key_exists('career_ai_description_block', (array) ($pages['en'] ?? []))
+            && ! array_key_exists('career_ai_description_block', (array) ($pages['zh'] ?? []));
+
+        return $isAccountants && $omitsAiDescription
+            ? self::CURRENT_ORDER_WITHOUT_AI_DESCRIPTION
+            : self::CURRENT_ORDER;
     }
 
     /** @param array<string,mixed> $page */
