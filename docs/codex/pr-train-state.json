@@ -106205,8 +106205,11 @@
     "id": "OPS-SCALE-V2-MANAGEMENT-06",
     "repo": "fap-api",
     "branch": "codex/ops-scale-v2-management-06",
-    "status": "local_validation_passed",
+    "status": "pr_open",
     "depends_on": ["OPS-CONTENT-DORMANT-05"],
+    "commit_sha": "6c7e9be3ccb3d741209c101540681c1d579c8d3c",
+    "pr_number": 3788,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3788",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -106246,6 +106249,11 @@
         "at": "2026-08-26T08:02:29+08:00",
         "status": "local_validation_passed",
         "note": "V2-first management/runtime reads, atomic Writer plus slug projection, cache invalidation, tenant isolation, old Slug URL compatibility, advanced contextual access, and all named critical callers passed focused validation. No external or production mutation occurred."
+      },
+      {
+        "at": "2026-08-26T08:05:46+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #3788 from codex/ops-scale-v2-management-06 at validated implementation commit 6c7e9be3ccb3d741209c101540681c1d579c8d3c. Required-check and merge review are pending."
       }
     ]
   },

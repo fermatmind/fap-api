@@ -50198,7 +50198,9 @@ prs:
     base: main
     branch: codex/ops-scale-v2-management-06
     title: "fix(ops): align scale management with V2 runtime"
-    status: local_validation_passed
+    status: pr_open
+    pr: 3788
+    head_sha: 6c7e9be3ccb3d741209c101540681c1d579c8d3c
     depends_on: [OPS-CONTENT-DORMANT-05]
     train_scope: ops_scale_v2_management
     risk_level: high_scale_authority
