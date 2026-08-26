@@ -4557,3 +4557,52 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: natural_scheduler_receipts
+
+  - id: SEO-PLATFORM-07-F
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/seo-platform-07-f-technical-health
+    base: main
+    depends_on: ["SEO-PLATFORM-07-E"]
+    mode: execute
+    title: "SEO-PLATFORM-07-F: expose protected technical health read model"
+    scope: >
+      Connect only the unified sanitized runtime read model to the existing
+      protected Ops SEO Technical Health workspace and read-only API. Display
+      bilingual state, cluster aggregates, scheduled trends and evidence
+      summaries while preserving null versus verified zero. Do not expose raw
+      URL, query, User-Agent, response body or topology and do not add writes.
+    allowed_paths:
+      - routes/api.php
+      - app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php
+      - app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php
+      - app/Services/SeoIntel/OpsDashboard/SeoTechnicalHealthReadService.php
+      - app/Services/SeoIntel/Runtime/ScheduledRuntimeProbeReceiptService.php
+      - app/Filament/Ops/Support/SeoTechnicalHealthUiContract.php
+      - resources/views/filament/ops/components/ops-technical-health-workspace.blade.php
+      - tests/Feature/SeoIntel/SeoPlatform07TechnicalHealthReadModelTest.php
+      - tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    checks:
+      - "scoped PHP syntax and Pint"
+      - "php artisan test SEO-PLATFORM-07 technical health, protected API and existing UI contracts"
+      - "php artisan route:list --name=api.v0_5.ops.seo_intel.technical_health"
+      - "JSON/YAML, exact scope and diff checks"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: continuous_goal
+    merge_policy:
+      mode: github_checks_required
+      local_verify_required: true
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: protected_ops_read_model

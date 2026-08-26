@@ -79,6 +79,22 @@ final class ScheduledRuntimeProbeReceiptService
     public function readWindow(?string $now = null): array
     {
         $observedAt = $now === null ? CarbonImmutable::now('UTC') : CarbonImmutable::parse($now)->utc();
+        $schema = Schema::connection($this->connection()->getName());
+        if (! $schema->hasTable('seo_runtime_probe_receipts')) {
+            return [
+                'state' => UnifiedRuntimeProbeEvaluator::MEASUREMENT_HOLD,
+                'slot_count' => null,
+                'consecutive' => false,
+                'fresh' => false,
+                'successful' => false,
+                'receipts' => [],
+                'boundaries' => [
+                    'manual_receipts_excluded' => true,
+                    'fixtures_count_as_production_evidence' => false,
+                    'raw_sensitive_evidence_emitted' => false,
+                ],
+            ];
+        }
         $rows = $this->connection()->table('seo_runtime_probe_receipts')
             ->where('trigger_mode', 'scheduled')
             ->orderByDesc('scheduled_for')

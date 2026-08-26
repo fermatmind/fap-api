@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Support;
 
+use App\Services\SeoIntel\OpsDashboard\SeoTechnicalHealthReadService;
+use Throwable;
+
 final class SeoTechnicalHealthUiContract
 {
     /**
@@ -36,6 +39,28 @@ final class SeoTechnicalHealthUiContract
         ];
     }
 
+    /** @return array<string,mixed> */
+    public static function snapshot(): array
+    {
+        try {
+            $readModel = app(SeoTechnicalHealthReadService::class)->read();
+            $slotCount = data_get($readModel, 'metrics.scheduled_slot_count');
+            $crawlerHits = data_get($readModel, 'metrics.crawler_hit_count');
+
+            return $readModel + [
+                'trust' => [
+                    self::metricTrustItem('runtime_slo', $slotCount),
+                    self::trustItem('public_urls', SeoOperationsUiState::UNAVAILABLE),
+                    self::metricTrustItem('latest_crawl', $crawlerHits),
+                    self::trustItem('cache_revision', SeoOperationsUiState::UNAVAILABLE),
+                ],
+                'evidence' => ['http', 'rendered_robots', 'url_truth', 'canonical_sitemap', 'authority_revision'],
+            ];
+        } catch (Throwable) {
+            return self::unavailableSnapshot();
+        }
+    }
+
     /** @return array{label_key:string,state:string,value:null,detail_key:string} */
     private static function trustItem(string $key, string $state): array
     {
@@ -43,6 +68,19 @@ final class SeoTechnicalHealthUiContract
             'label_key' => $key,
             'state' => $state,
             'value' => null,
+            'detail_key' => $key.'_hint',
+        ];
+    }
+
+    /** @return array{label_key:string,state:string,value:int|null,detail_key:string} */
+    private static function metricTrustItem(string $key, mixed $value): array
+    {
+        $numeric = is_numeric($value) ? (int) $value : null;
+
+        return [
+            'label_key' => $key,
+            'state' => $numeric === null ? SeoOperationsUiState::UNAVAILABLE : ($numeric === 0 ? SeoOperationsUiState::VERIFIED_ZERO : SeoOperationsUiState::PRODUCTION_HEALTHY),
+            'value' => $numeric,
             'detail_key' => $key.'_hint',
         ];
     }

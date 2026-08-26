@@ -68,23 +68,27 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
     #[Test]
     public function unauthenticated_and_unrelated_admins_cannot_read_seo_intel_api(): void
     {
-        $this->getJson('/api/v0.5/ops/seo-intel/overview')
-            ->assertUnauthorized()
-            ->assertJson([
-                'ok' => false,
-                'error_code' => 'UNAUTHORIZED',
-            ]);
+        foreach (['/api/v0.5/ops/seo-intel/overview', '/api/v0.5/ops/seo-intel/technical-health'] as $path) {
+            $this->getJson($path)
+                ->assertUnauthorized()
+                ->assertJson([
+                    'ok' => false,
+                    'error_code' => 'UNAUTHORIZED',
+                ]);
+        }
 
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
 
-        $this->actingAs($admin, (string) config('admin.guard', 'admin'))
-            ->getJson('/api/v0.5/ops/seo-intel/overview')
-            ->assertForbidden()
-            ->assertJson([
-                'ok' => false,
-                'error_code' => 'FORBIDDEN',
-                'message' => 'admin_seo_intel_read_required',
-            ]);
+        foreach (['/api/v0.5/ops/seo-intel/overview', '/api/v0.5/ops/seo-intel/technical-health'] as $path) {
+            $this->actingAs($admin, (string) config('admin.guard', 'admin'))
+                ->getJson($path)
+                ->assertForbidden()
+                ->assertJson([
+                    'ok' => false,
+                    'error_code' => 'FORBIDDEN',
+                    'message' => 'admin_seo_intel_read_required',
+                ]);
+        }
     }
 
     #[Test]
@@ -119,6 +123,7 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
                 '/api/v0.5/ops/seo-intel/page-performance',
                 '/api/v0.5/ops/seo-intel/opportunity-queue',
                 '/api/v0.5/ops/seo-intel/production-closeout',
+                '/api/v0.5/ops/seo-intel/technical-health',
             ] as $path) {
                 $response = $this->actingAs($admin, (string) config('admin.guard', 'admin'))
                     ->getJson($path);

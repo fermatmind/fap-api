@@ -2,7 +2,7 @@
     use App\Filament\Ops\Support\SeoOperationsUiState;
     use App\Filament\Ops\Support\SeoTechnicalHealthUiContract;
 
-    $snapshot = SeoTechnicalHealthUiContract::unavailableSnapshot();
+    $snapshot = SeoTechnicalHealthUiContract::snapshot();
     $copy = 'ops.custom_pages.seo_operations.technical_health';
 @endphp
 
@@ -27,10 +27,15 @@
                 <span class="ops-tag">24h</span>
             </div>
             <x-filament-ops::ops-state-message
-                :state="$snapshot['state']"
+                :state="data_get($snapshot, 'scheduler_window.state', SeoOperationsUiState::MEASUREMENT_HOLD)"
                 :title="__('ops.custom_pages.seo_operations.states.production_unproven.label')"
                 :description="__($copy.'.reliability.hold')"
             />
+            <div class="ops-tag-list">
+                @foreach ((array) data_get($snapshot, 'trend', []) as $point)
+                    <span class="ops-tag">{{ $point['scheduled_for'] ?? '—' }} · {{ $point['status'] ?? '—' }} · {{ $point['crawler_hit_count'] ?? '—' }}</span>
+                @endforeach
+            </div>
         </section>
 
         <section class="ops-technical-health__panel ops-technical-health__panel--clusters" aria-labelledby="technical-clusters-title">
@@ -45,11 +50,18 @@
                     <span>{{ __($copy.'.clusters.columns.'.$column) }}</span>
                 @endforeach
             </div>
-            <x-filament-ops::ops-state-message
-                :state="$snapshot['state']"
-                :title="__($copy.'.clusters.hold_title')"
-                :description="''"
-            />
+            @forelse ((array) data_get($snapshot, 'clusters', []) as $cluster)
+                <div class="ops-technical-health__cluster-head">
+                    <span>{{ $cluster['severity'] }}</span>
+                    <span>{{ $cluster['detector'] }}</span>
+                    <span>{{ $cluster['page_family'] }} · {{ $cluster['locale'] }}</span>
+                    <span>{{ $cluster['affected_count'] }}</span>
+                    <span>{{ $cluster['first_observed_at'] ?? '—' }} / {{ $cluster['last_observed_at'] ?? '—' }}</span>
+                    <span>{{ $cluster['status'] }}</span>
+                </div>
+            @empty
+                <x-filament-ops::ops-state-message :state="$snapshot['state']" :title="__($copy.'.clusters.hold_title')" :description="''" />
+            @endforelse
         </section>
 
         <section class="ops-technical-health__panel" aria-labelledby="technical-evidence-title">

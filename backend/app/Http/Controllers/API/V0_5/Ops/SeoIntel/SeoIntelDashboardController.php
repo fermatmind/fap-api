@@ -49,6 +49,11 @@ final class SeoIntelDashboardController
         return $this->respond($this->readService->productionCloseout());
     }
 
+    public function technicalHealth(): JsonResponse
+    {
+        return $this->respond($this->readService->technicalHealth());
+    }
+
     public function conversionFunnel(Request $request): JsonResponse
     {
         return $this->respond($this->readService->conversionFunnel(
