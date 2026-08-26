@@ -1,0 +1,379 @@
+{
+  "schema_version": "seo-platform-09-preflight.v1",
+  "task": "SEO-PLATFORM-09-PREFLIGHT",
+  "status": "complete_preflight_docs_only",
+  "run": {
+    "repository": "FermatMind/fap-api",
+    "source_sha": "1853f0e58608452ca13b95d93e63b6cd31fe76be",
+    "evidence_cutoff": "2026-08-26T00:10:24Z",
+    "timezone": "UTC",
+    "github_open_pr_count": 0,
+    "github_open_issue_count": 0,
+    "mode": "repository_and_existing_sanitized_production_evidence_read_only"
+  },
+  "boundaries": {
+    "database_write": false,
+    "cms_write": false,
+    "decision_materialization": false,
+    "scorer_change": false,
+    "scheduler_activation": false,
+    "queue_worker_activation": false,
+    "production_deploy": false,
+    "read_only_gsc": true,
+    "search_submission_allowed": false
+  },
+  "current_conclusion": {
+    "evidence_state": "verified",
+    "capability_state": "production_unproven",
+    "decision": "MEASUREMENT_HOLD",
+    "reason": "The Issue Queue, Opportunity Queue, clustering and priority components have production readback evidence, but no unified decision-card authority, weekly selector, lifecycle materializer or Workbench production read model exists.",
+    "must_not_infer": [
+      "existing_queue_rows_are_weekly_decision_cards",
+      "a_numeric_zero_means_missing_measurement",
+      "the_generic_ops_action_queue_is_seo_decision_authority",
+      "manual_or_external runner contracts prove scheduled execution"
+    ]
+  },
+  "sources": [
+    {
+      "id": "current_repository",
+      "evidence_state": "verified",
+      "authority": "current code, migrations and tests at source_sha"
+    },
+    {
+      "id": "seo_platform_01_production_closeout",
+      "evidence_state": "verified",
+      "authority": "authenticated aggregate production readback captured 2026-08-24",
+      "freshness_note": "valid for capability existence; not a current weekly decision receipt"
+    },
+    {
+      "id": "seo_platform_03_single_entry_closeout",
+      "evidence_state": "verified",
+      "authority": "current canonical UI and read-service boundary"
+    },
+    {
+      "id": "github_task_binding_search",
+      "evidence_state": "verified",
+      "authority": "open PR and issue title/body search for exact task id"
+    }
+  ],
+  "capability_inventory": [
+    {
+      "id": "issue_queue_authority",
+      "path": "backend/database/migrations/seo_intel/2026_05_17_001700_create_seo_issue_queue_table.php",
+      "caller": "SeoIssueQueueReadService and SeoIssueClusterReadService",
+      "data_source": "seo_intel.seo_issue_queue",
+      "scheduled": false,
+      "production_read_model": true,
+      "capability_state": "production_healthy",
+      "evidence_state": "verified",
+      "reuse": "backing issue lifecycle and sanitized evidence only",
+      "gap": "not a decision-card authority"
+    },
+    {
+      "id": "detector_opportunity_authority",
+      "path": "backend/database/migrations/seo_intel/2026_08_25_010000_expand_detector_queue_materialization.php",
+      "caller": "DetectorQueueMaterializer and SeoOpportunityQueueReadService",
+      "data_source": "seo_intel.seo_detector_opportunities",
+      "scheduled": false,
+      "production_read_model": true,
+      "capability_state": "code_only",
+      "evidence_state": "verified",
+      "reuse": "detector, cluster_uid, revision, lifecycle and freshness fields",
+      "gap": "no current production materialization receipt was used by this preflight"
+    },
+    {
+      "id": "issue_cluster_read_model",
+      "path": "backend/app/Services/SeoIntel/OpsDashboard/SeoIssueClusterReadService.php",
+      "caller": "SEO Operations read services, API and cluster export",
+      "data_source": "seo_issue_queue plus quality-gated seo_gsc_daily",
+      "scheduled": false,
+      "production_read_model": true,
+      "capability_state": "production_healthy",
+      "evidence_state": "verified",
+      "reuse": "root-cause grouping and stable cluster tie-breaker",
+      "gap": "legacy fallback cluster key does not consume persisted detector cluster_uid"
+    },
+    {
+      "id": "issue_priority_scorer",
+      "path": "backend/app/Services/SeoIntel/OpsDashboard/SeoIssuePriorityScorer.php",
+      "caller": "SeoIssueClusterReadService",
+      "data_source": "cluster severity, affected URLs, metadata and quality-gated GSC aggregates",
+      "scheduled": false,
+      "production_read_model": true,
+      "capability_state": "production_healthy",
+      "evidence_state": "verified",
+      "reuse": "impact, confidence and effort primitives",
+      "gap": "does not model business value, risk, freshness or a nullable score contract"
+    },
+    {
+      "id": "opportunity_queue_read_model",
+      "path": "backend/app/Services/SeoIntel/OpsDashboard/SeoOpportunityQueueReadService.php",
+      "caller": "private Ops SEO Intel API and canonical SEO Operations UI",
+      "data_source": "seo_detector_opportunities plus quality-gated seo_gsc_daily and seo_urls",
+      "scheduled": false,
+      "production_read_model": true,
+      "capability_state": "production_healthy",
+      "evidence_state": "verified",
+      "reuse": "read-only candidate projection and source-state separation",
+      "gap": "detector and GSC candidates do not share one decision eligibility contract"
+    },
+    {
+      "id": "legacy_opportunity_aggregator",
+      "path": "backend/app/Services/SeoAgent/OpportunityAggregator.php",
+      "caller": "SeoAgentOpportunityAggregateCommand and SeoAgentRunCommand",
+      "data_source": "sanitized scanner artifacts",
+      "scheduled": false,
+      "production_read_model": false,
+      "capability_state": "code_only",
+      "evidence_state": "verified",
+      "reuse": "artifact-level normalization and deterministic tie-breaker",
+      "gap": "subject-based dedupe differs from authoritative root-cause cluster identity"
+    },
+    {
+      "id": "priority_queue_runner",
+      "path": "backend/app/Console/Commands/SeoAgentPriorityQueueSchedulerCommand.php",
+      "caller": "manual CLI or external cron contract",
+      "data_source": "sanitized proposal artifacts",
+      "scheduled": false,
+      "production_read_model": false,
+      "capability_state": "deployed_disabled",
+      "evidence_state": "verified",
+      "reuse": "bounded execution envelope and negative guarantees",
+      "gap": "not registered in the Laravel production scheduler and not decision authority"
+    },
+    {
+      "id": "seo_workbench_placeholder",
+      "path": "backend/app/Filament/Ops/Support/SeoWorkbenchUiContract.php",
+      "caller": "ops-seo-workbench-workspace.blade.php",
+      "data_source": "unavailable static contract",
+      "scheduled": false,
+      "production_read_model": false,
+      "capability_state": "production_unproven",
+      "evidence_state": "verified",
+      "reuse": "maximum five cards and fail-closed empty state",
+      "gap": "no unified production decision snapshot"
+    },
+    {
+      "id": "generic_ops_action_queue",
+      "path": "backend/app/Filament/Ops/Widgets/OpsActionQueueWidget.php",
+      "caller": "generic Ops dashboard",
+      "data_source": "failed_jobs, admin approvals and tenant-bound commerce operations",
+      "scheduled": false,
+      "production_read_model": true,
+      "capability_state": "not_required",
+      "evidence_state": "verified",
+      "reuse": "none for SEO decision authority",
+      "gap": "name collision only; it must remain separate from SEO decisions"
+    }
+  ],
+  "decision_card_contract": {
+    "version": "seo.decision_card.v1",
+    "authority_state": "proposed",
+    "identity": {
+      "primary_key": "cluster_uid",
+      "one_current_card_per_cluster": true,
+      "fallback_allowed": false,
+      "invalid_or_missing_cluster_action": "MEASUREMENT_HOLD"
+    },
+    "required_fields": [
+      "decision_card_id",
+      "cluster_uid",
+      "detector",
+      "root_cause",
+      "page_family",
+      "locale",
+      "authority_revision",
+      "affected_unique_url_count",
+      "evidence_state",
+      "evidence_freshness",
+      "measurement_state",
+      "measurement_independent",
+      "business_priority",
+      "risk_tier",
+      "estimated_fix_cost",
+      "priority_score",
+      "highest_allowed_action",
+      "next_step",
+      "first_observed_at",
+      "last_observed_at",
+      "expires_at",
+      "status",
+      "close_reason"
+    ],
+    "forbidden_fields": [
+      "raw_query",
+      "raw_private_url",
+      "user_identifier",
+      "attempt_identifier",
+      "result_identifier",
+      "order_identifier",
+      "payment_identifier",
+      "token",
+      "raw_user_agent",
+      "reversible_sensitive_hash"
+    ]
+  },
+  "priority_contract": {
+    "version": "seo.priority.candidate.v1",
+    "activation_state": "proposed_not_active",
+    "inputs": [
+      {
+        "key": "impact_scope",
+        "source": "affected unique public URLs and family scope",
+        "missing_action": "MEASUREMENT_HOLD"
+      },
+      {
+        "key": "evidence_strength",
+        "source": "verified, observed, inferred, unknown or blocked",
+        "missing_action": "MEASUREMENT_HOLD"
+      },
+      {
+        "key": "business_value",
+        "source": "Business Surface Matrix L1, L2, L3, trust or conditional priority",
+        "missing_action": "MEASUREMENT_HOLD"
+      },
+      {
+        "key": "risk",
+        "source": "direct-evidence severity and blast radius",
+        "missing_action": "MEASUREMENT_HOLD"
+      },
+      {
+        "key": "estimated_fix_cost",
+        "source": "bounded deterministic, manual, template, engineering or external dependency",
+        "missing_action": "MEASUREMENT_HOLD"
+      },
+      {
+        "key": "evidence_freshness",
+        "source": "source-specific observed_at and max_age",
+        "missing_action": "MEASUREMENT_HOLD"
+      },
+      {
+        "key": "measurement_state",
+        "source": "source quality, completeness, lag and comparability gates",
+        "missing_action": "MEASUREMENT_HOLD"
+      }
+    ],
+    "missing_measurement_semantics": {
+      "priority_score": null,
+      "zero_allowed": false,
+      "ranking_eligible": false,
+      "state": "MEASUREMENT_HOLD"
+    },
+    "measurement_independent_exception": {
+      "allowed": true,
+      "requires": [
+        "deterministic technical rule",
+        "fresh direct evidence",
+        "public authority binding",
+        "explicit measurement_independent=true"
+      ],
+      "p0_p1_requires_direct_evidence": true
+    },
+    "stable_sort": [
+      "direct_evidence_P0_then_P1",
+      "ranking_eligible_true",
+      "impact_scope_desc",
+      "evidence_strength_desc",
+      "business_value_desc",
+      "risk_desc",
+      "estimated_fix_cost_asc",
+      "evidence_freshness_desc",
+      "cluster_uid_asc"
+    ],
+    "weights": {
+      "state": "candidate_requires_sensitivity_validation",
+      "production_active": false
+    }
+  },
+  "weekly_selection_contract": {
+    "cadence": "ISO_week",
+    "default_card_count": 3,
+    "maximum_card_count": 5,
+    "minimum_card_count": 0,
+    "pad_to_limit": false,
+    "include_measurement_hold": false,
+    "one_card_per_cluster": true,
+    "selection_revision_required": true,
+    "selection_is_execution_authority": false
+  },
+  "lifecycle_contract": {
+    "states": [
+      "candidate",
+      "selected",
+      "held",
+      "in_progress",
+      "recovery_pending",
+      "closed",
+      "superseded"
+    ],
+    "dedupe": "merge new evidence into the current card for the same cluster_uid",
+    "expiry": "use each source's declared max_age; missing max_age or stale evidence becomes held",
+    "single_missing_observation_closes": false,
+    "automatic_close_requires": [
+      "all backing issues and opportunities are resolved or closed",
+      "latest detector or public readback directly proves the same cluster recovery condition",
+      "recovery evidence is fresh and bound to the current authority and runtime revisions"
+    ],
+    "p0_p1_without_recovery_evidence": "remain_open",
+    "duplicate_card_action": "supersede duplicate and retain canonical cluster card"
+  },
+  "implementation_handoff": {
+    "minimum_runtime_scope": [
+      "unified decision read model",
+      "versioned nullable-score priority evaluator",
+      "bounded weekly selector",
+      "idempotent cluster dedupe and lifecycle materializer",
+      "read-only SeoWorkbench adapter"
+    ],
+    "reuse": [
+      "persisted detector cluster_uid and revisions",
+      "SeoIssueClusterReadService evidence grouping",
+      "SeoIssuePriorityScorer primitives after nullable-score correction",
+      "GscDataQualityGate",
+      "Business Surface Matrix",
+      "SeoWorkbenchUiContract maximum-card boundary"
+    ],
+    "acceptance": [
+      "same cluster produces one current card under rerun",
+      "failed or stale measurement produces null score and MEASUREMENT_HOLD",
+      "zero is emitted only for an observed numeric zero",
+      "weekly output contains at most five stable cards",
+      "P0 and P1 require direct evidence",
+      "automatic close requires verified recovery",
+      "Workbench remains read-only and exposes no private paths, raw queries or write controls"
+    ],
+    "deferred": [
+      "database schema",
+      "runtime scorer implementation",
+      "weekly scheduler activation",
+      "decision materialization",
+      "real decision creation"
+    ]
+  },
+  "blocked_or_unknown": [
+    {
+      "id": "current_weekly_decision_receipt",
+      "state": "unknown",
+      "impact": "no production decision cards may be claimed"
+    },
+    {
+      "id": "scheduler_execution_receipt",
+      "state": "production_unproven",
+      "impact": "manual and external-trigger contracts do not prove a weekly run"
+    },
+    {
+      "id": "priority_weight_calibration",
+      "state": "unknown",
+      "impact": "candidate weights require sensitivity validation before activation"
+    }
+  ],
+  "mutations_not_performed": [
+    "runtime code",
+    "database or queue rows",
+    "CMS",
+    "scheduler or worker",
+    "production or cache",
+    "GSC or search submission"
+  ]
+}
