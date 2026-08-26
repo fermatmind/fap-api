@@ -8,8 +8,8 @@
   "items": {
     "SEO-PLATFORM-07-E": {
       "repo": "fap-api", "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed", "branch": "codex/seo-platform-07-e-scheduler-receipts",
-      "commit_sha": null, "pr_url": null,
+      "status": "pr_open", "branch": "codex/seo-platform-07-e-scheduler-receipts",
+      "commit_sha": "de99730c7449c26b173c9ced6326233a237b72e4", "pr_url": "https://github.com/fermatmind/fap-api/pull/3795",
       "checks": {
         "dependency": {"status": "passed", "details": "SEO-PLATFORM-07-D merged as 999243577927116b3bdb748ae3e1a1d18f783e35; exact-SHA CI receipt 32952068534 passed."},
         "local": [
@@ -23,7 +23,8 @@
       "production_write_execution": false, "database_mutation": false, "cms_mutation": false,
       "publish_allowed": false, "deploy_allowed": false,
       "history": [
-        {"at": "2026-08-26T09:25:00Z", "status": "local_checks_passed", "summary": "Validated the exact 07-E scheduler, idempotent receipt, freshness and crawler-source receipt scope. No manual schedule run/dispatch, deploy or production write was executed."}
+        {"at": "2026-08-26T09:25:00Z", "status": "local_checks_passed", "summary": "Validated the exact 07-E scheduler, idempotent receipt, freshness and crawler-source receipt scope. No manual schedule run/dispatch, deploy or production write was executed."},
+        {"at": "2026-08-26T09:28:00Z", "status": "pr_open", "summary": "Opened PR #3795 at validated implementation commit de99730c7449c26b173c9ced6326233a237b72e4; no scheduler dispatch or production operation was executed."}
       ]
     },
     "SEO-PLATFORM-07-D": {
