@@ -46,6 +46,9 @@ final class ArticleDraftPreviewController extends Controller
         $seoTitle = $this->firstNonEmpty($revision?->seo_title, $seoMeta?->seo_title, $title);
         $seoDescription = $this->firstNonEmpty($revision?->seo_description, $seoMeta?->seo_description, $excerpt);
         $redacted = $this->redactSensitivePreviewText($contentMd);
+        $article15Metadata = is_array($revision?->authority_metadata_json)
+            ? (array) ($revision->authority_metadata_json['article15_exact_package_v1'] ?? [])
+            : [];
         $bodyHtml = (string) Str::markdown($redacted['text'], [
             'html_input' => 'strip',
             'allow_unsafe_links' => false,
@@ -64,6 +67,7 @@ final class ArticleDraftPreviewController extends Controller
             'coverImageUrl' => PublicMediaUrlGuard::sanitizeNullableUrl($record->cover_image_url),
             'bodyVisual' => $this->previewBodyVisual($record, $contentMd),
             'redactionCount' => $redacted['count'],
+            'article15Metadata' => $article15Metadata,
             'previewContext' => [
                 'is_preview' => true,
                 'article_id' => (int) $record->id,

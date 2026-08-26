@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\Commands\AdminBootstrapOwner;
 use App\Console\Commands\ArchiveColdData;
+use App\Console\Commands\Article15ExactPackageRevisionBound;
 use App\Console\Commands\ArticleCoverPropagationSmoke;
 use App\Console\Commands\ArticleDiscoverabilityRelease;
 use App\Console\Commands\ArticleEnsureSeoMetaBaseline;
@@ -247,6 +248,7 @@ class Kernel extends ConsoleKernel
      * @var array<int, class-string>
      */
     protected $commands = [
+        Article15ExactPackageRevisionBound::class,
         FapEmailOutboxSend::class,
         FapEmailLifecycleRollout::class,
         FapResolvePack::class,

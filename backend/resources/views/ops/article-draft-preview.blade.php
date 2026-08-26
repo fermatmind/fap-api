@@ -129,6 +129,12 @@
                     <div class="field"><span>Canonical metadata value</span>{{ $canonicalUrl ?? 'not set' }}</div>
                     <div class="field"><span>SEO title</span>{{ $seoTitle }}</div>
                     <div class="field"><span>SEO description</span>{{ $seoDescription !== '' ? $seoDescription : 'not set' }}</div>
+                    @if ($article15Metadata !== [])
+                        <div class="field"><span>Proposed reading minutes</span>{{ $article15Metadata['reading_minutes'] ?? 'not set' }}</div>
+                        <div class="field"><span>Proposed related test</span>{{ $article15Metadata['related_test_slug'] ?? 'not set' }}</div>
+                        <div class="field"><span>Proposed FAQ count</span>{{ count((array) ($article15Metadata['faq_items'] ?? [])) }}</div>
+                        <div class="field"><span>Proposed CTA count</span>{{ count((array) ($article15Metadata['cta_slots'] ?? [])) }}</div>
+                    @endif
                     <div class="field"><span>Private URL redactions</span>{{ $redactionCount }}</div>
                     <div class="field"><span>Body visual asset key</span>{{ $bodyVisual['asset_key'] ?? 'not set' }}</div>
                     <div class="field"><span>Body visual URL</span>{{ $bodyVisual['image_url'] ?? 'not set' }}</div>

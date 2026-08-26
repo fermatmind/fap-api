@@ -10,6 +10,7 @@ use App\Models\ArticleCategory;
 use App\Models\ArticleTag;
 use App\Models\ArticleTestEdge;
 use App\Models\ArticleTranslationRevision;
+use App\Services\Cms\Article15ExactPackageRevisionBoundAdapter;
 use App\Services\Cms\ArticleBodyHeadingGuard;
 use App\Services\Cms\ArticlePublicListQuery;
 use App\Services\Cms\ArticlePublicListReadCache;
@@ -469,6 +470,12 @@ class ArticleController extends Controller
 
         $answerSurface = is_array($metadata['answer_surface_v1'] ?? null) ? $metadata['answer_surface_v1'] : [];
         $faqItems = is_array($answerSurface['faq_items'] ?? null) ? $answerSurface['faq_items'] : [];
+        $article15Metadata = $metadata['article15_exact_package_v1'] ?? null;
+        $faqLimit = Article15ExactPackageRevisionBoundAdapter::isPublishedArticle15Metadata(
+            $article15Metadata,
+            (int) $article->id,
+            (int) ($article->published_revision_id ?? 0),
+        ) ? 8 : 6;
         $blocks = [];
 
         foreach ($faqItems as $index => $item) {
@@ -488,7 +495,7 @@ class ArticleController extends Controller
                 'answer' => $answer,
             ];
 
-            if (count($blocks) >= 6) {
+            if (count($blocks) >= $faqLimit) {
                 break;
             }
         }
