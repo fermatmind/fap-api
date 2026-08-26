@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-26T11:47:32Z",
+  "updated_at": "2026-08-26T11:49:37Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -32,7 +32,7 @@
         "github": [],
         "production": []
       },
-      "failure_reason": "External delivery is not authorized until the user explicitly permits a third same-scope corrective PR.",
+      "failure_reason": null,
       "resume_policy": "continuous_goal",
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -48,6 +48,11 @@
           "at": "2026-08-26T11:47:32Z",
           "status": "local_checks_passed",
           "summary": "After two failed-closed production attempts, simplified discovery to prefer process evidence when readable and otherwise accept only one semantically named Supervisor scheduler program. Exact-program bounded restart remains mandatory; ambiguity still fails closed. Local candidate is ready but not pushed."
+        },
+        {
+          "at": "2026-08-26T11:49:37Z",
+          "status": "authorized",
+          "summary": "User explicitly authorized the third same-scope corrective PR. No additional scope, manual runtime action or production write was authorized."
         }
       ]
     },
