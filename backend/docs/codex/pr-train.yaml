@@ -4312,3 +4312,53 @@ prs:
     cleanup:
       delete_remote_branch: true
       run_local_cleanup: true
+
+  - id: SEO-PLATFORM-07-A
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/seo-platform-07-a-cohort-resolver
+    base: main
+    depends_on: []
+    mode: execute
+    title: "SEO-PLATFORM-07-A: resolve authority-driven runtime cohorts"
+    scope: >
+      Build only the deterministic bilingual runtime cohort resolver from current
+      URL Truth and the Page Family policy. Cover core, long-tail, recent,
+      historical, redirect-boundary and changed-revision roles across all six
+      public families and both locales, while permanently excluding private,
+      unclassified, non-public and query-bearing targets. Do not probe runtime,
+      schedule work, mutate Issue Queue, publish, deploy, write URL Truth, or
+      change sitemap, llms or search state.
+    allowed_paths:
+      - app/Services/SeoIntel/Runtime/AuthorityDrivenCohortResolver.php
+      - tests/Feature/SeoIntel/SeoPlatform07AuthorityDrivenCohortResolverTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    checks:
+      - "php -l app/Services/SeoIntel/Runtime/AuthorityDrivenCohortResolver.php"
+      - "php -l tests/Feature/SeoIntel/SeoPlatform07AuthorityDrivenCohortResolverTest.php"
+      - "vendor/bin/pint --test app/Services/SeoIntel/Runtime/AuthorityDrivenCohortResolver.php tests/Feature/SeoIntel/SeoPlatform07AuthorityDrivenCohortResolverTest.php"
+      - "php artisan test tests/Feature/SeoIntel/SeoPlatform07AuthorityDrivenCohortResolverTest.php --no-ansi"
+      - "php artisan test tests/Feature/SeoIntel/SeoPlatform02PageFamilyPolicyTest.php tests/Feature/SeoIntel/SeoPlatform05DynamicUrlTruthSnapshotTest.php --no-ansi"
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "ruby -e 'require \"yaml\"; YAML.safe_load(File.read(\"docs/codex/pr-train.yaml\"), aliases: true)'"
+      - "git diff --check"
+      - "git diff --cached --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: continuous_goal
+    merge_policy:
+      mode: github_checks_required
+      local_verify_required: true
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend_url_truth_and_page_family_policy
