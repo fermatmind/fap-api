@@ -138,7 +138,7 @@ final class CareerCurrentAuthorityPublisher
                 'authority' => [
                     'target_count' => count($authority['rows']),
                     'unique_slug_count' => count($authority['rows']),
-                    'component_28_count' => count($authority['rows']),
+                    'valid_component_order_count' => count($authority['rows']),
                     'changed_slug_count' => count($plan['changed_slugs']),
                     'changed_slug_set_sha256' => CareerCurrentAuthorityPackage::hashValue($plan['changed_slugs']),
                     'first_governance_cleanup' => $fullScan,

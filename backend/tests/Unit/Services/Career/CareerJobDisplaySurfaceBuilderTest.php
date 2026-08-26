@@ -198,7 +198,7 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $this->assertSame(8, data_get($zh, 'presentation_v1.hero.ai_exposure.value'));
     }
 
-    public function test_it_returns_the_complete_28_component_surface_with_both_workbuddy_blocks(): void
+    public function test_it_returns_the_default_supported_component_surface_with_both_workbuddy_blocks(): void
     {
         $occupation = $this->createOccupation('actors');
         $asset = $this->createDisplayAsset($occupation, [

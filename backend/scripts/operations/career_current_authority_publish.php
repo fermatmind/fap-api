@@ -149,7 +149,7 @@ try {
         || preg_match('/\A[0-9a-f]{64}\z/', (string) ($result['package']['versionless_projection_sha256'] ?? '')) !== 1
         || ($result['authority']['target_count'] ?? null) !== 1046
         || ($result['authority']['unique_slug_count'] ?? null) !== 1046
-        || ($result['authority']['component_28_count'] ?? null) !== 1046
+        || ($result['authority']['valid_component_order_count'] ?? null) !== 1046
         || ($result['manual_hold_verified'] ?? null) !== true
         || ($fullScan && ($result['public_readback']['verified_slug_count'] ?? null) !== 1046)
         || ($fullScan && ($result['public_readback']['verified_locale_page_count'] ?? null) !== 2092)
