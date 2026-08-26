@@ -179,10 +179,10 @@ final class CareerDisplayAssetComponentContract
 
         return self::validPublishedQuickAnswers(
             $quick,
-            $isAccountantsProfile ? '职业画像结构化说明' : '职业速答',
+            $isAccountantsProfile ? null : '职业速答',
         ) && self::validPublishedOnetFields(
             $onet,
-            $isAccountantsProfile ? '专业依据与使用边界' : 'O*NET 结构化字段',
+            $isAccountantsProfile ? null : 'O*NET 结构化字段',
         );
     }
 
@@ -207,13 +207,14 @@ final class CareerDisplayAssetComponentContract
             (string) ($page['path'] ?? ''),
             '/accountants-and-auditors',
         );
-        $expectedQuickHeading = $isAccountantsProfile ? '职业画像结构化说明' : '职业速答';
-        $expectedOnetHeading = $isAccountantsProfile ? '专业依据与使用边界' : 'O*NET 结构化字段';
+        $expectedQuickHeading = $isAccountantsProfile ? null : '职业速答';
+        $expectedOnetHeading = $isAccountantsProfile ? null : 'O*NET 结构化字段';
         if (! is_array($quick)
             || ! self::exactKeys($quick, ['availability', 'schema_version', 'heading', 'items'])
             || ($quick['availability'] ?? null) !== 'published'
             || ($quick['schema_version'] ?? null) !== 'career.quick_answers.v1'
-            || ($quick['heading'] ?? null) !== $expectedQuickHeading
+            || ! self::nonEmptyString($quick['heading'] ?? null)
+            || ($expectedQuickHeading !== null && ($quick['heading'] ?? null) !== $expectedQuickHeading)
             || ! is_array($quick['items'] ?? null)
             || count($quick['items']) !== 3) {
             return 'CURRENT_DISPLAY_SURFACE_ZH_QUICK_ANSWERS_INVALID';
@@ -237,7 +238,8 @@ final class CareerDisplayAssetComponentContract
             || ! self::exactKeys($onet, ['availability', 'schema_version', 'heading', 'rows'])
             || ($onet['availability'] ?? null) !== 'published'
             || ($onet['schema_version'] ?? null) !== 'career.onet_structured_fields.v1'
-            || ($onet['heading'] ?? null) !== $expectedOnetHeading) {
+            || ! self::nonEmptyString($onet['heading'] ?? null)
+            || ($expectedOnetHeading !== null && ($onet['heading'] ?? null) !== $expectedOnetHeading)) {
             return 'CURRENT_DISPLAY_SURFACE_ZH_ONET_FIELDS_INVALID';
         }
 
@@ -265,12 +267,13 @@ final class CareerDisplayAssetComponentContract
         return true;
     }
 
-    private static function validPublishedQuickAnswers(mixed $quick, string $heading): bool
+    private static function validPublishedQuickAnswers(mixed $quick, ?string $heading): bool
     {
         if (! is_array($quick) || ! self::exactKeys($quick, ['availability', 'schema_version', 'heading', 'items'])
             || ($quick['availability'] ?? null) !== 'published'
             || ($quick['schema_version'] ?? null) !== 'career.quick_answers.v1'
-            || ($quick['heading'] ?? null) !== $heading
+            || ! self::nonEmptyString($quick['heading'] ?? null)
+            || ($heading !== null && ($quick['heading'] ?? null) !== $heading)
             || ! is_array($quick['items'] ?? null) || count($quick['items']) !== 3) {
             return false;
         }
@@ -290,13 +293,14 @@ final class CareerDisplayAssetComponentContract
         return true;
     }
 
-    private static function validPublishedOnetFields(mixed $onet, string $heading): bool
+    private static function validPublishedOnetFields(mixed $onet, ?string $heading): bool
     {
         return is_array($onet)
             && self::exactKeys($onet, ['availability', 'schema_version', 'heading', 'rows'])
             && ($onet['availability'] ?? null) === 'published'
             && ($onet['schema_version'] ?? null) === 'career.onet_structured_fields.v1'
-            && ($onet['heading'] ?? null) === $heading
+            && self::nonEmptyString($onet['heading'] ?? null)
+            && ($heading === null || ($onet['heading'] ?? null) === $heading)
             && self::validRows($onet['rows'] ?? null);
     }
 
