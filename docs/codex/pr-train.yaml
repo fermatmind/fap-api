@@ -50198,9 +50198,10 @@ prs:
     base: main
     branch: codex/ops-scale-v2-management-06
     title: "fix(ops): align scale management with V2 runtime"
-    status: pr_open
+    status: merged
     pr: 3788
     head_sha: 6c7e9be3ccb3d741209c101540681c1d579c8d3c
+    merge_commit_sha: 1853f0e58608452ca13b95d93e63b6cd31fe76be
     depends_on: [OPS-CONTENT-DORMANT-05]
     train_scope: ops_scale_v2_management
     risk_level: high_scale_authority
@@ -50248,7 +50249,9 @@ prs:
     base: main
     branch: codex/ops-content-nav-a11y-07
     title: "fix(ops): complete content navigation accessibility"
-    status: registered
+    status: pr_open
+    pr: 3789
+    head_sha: e1de616a66b3714ab10adef91fc5dadb33e0bf80
     depends_on: [OPS-SCALE-V2-MANAGEMENT-06]
     train_scope: ops_content_navigation_accessibility
     risk_level: product_ui_accessibility
@@ -50256,4 +50259,32 @@ prs:
       - Give all eight collapsed navigation icons stable accessible names and tooltips with fixed bilingual labels and semantic icons.
       - Prevent content, editorial, and taxonomy translation aliases from accidental grouping without exposing hidden entries.
       - Run final focused route, permission, keyboard, focus, zoom, collapsed, expanded, and bilingual acceptance for T1 through T6.
+      - Correct legacy-only Big Five test setup exposed by T6 exact-SHA CI so tests mutate V2 authority through ScaleRegistryWriter.
+    allowed_paths:
+      - backend/app/Filament/Ops/Resources/ArticleResource.php
+      - backend/app/Filament/Ops/Resources/CareerGuideResource.php
+      - backend/app/Filament/Ops/Resources/CareerJobResource.php
+      - backend/app/Filament/Ops/Resources/ContentPageResource.php
+      - backend/app/Filament/Ops/Resources/LandingSurfaceResource.php
+      - backend/app/Filament/Ops/Resources/MediaAssetResource.php
+      - backend/app/Filament/Ops/Resources/TopicProfileResource.php
+      - backend/app/Providers/Filament/AdminPanelProvider.php
+      - backend/lang/en/ops.php
+      - backend/lang/zh_CN/ops.php
+      - backend/resources/css/filament/ops/theme.css
+      - backend/resources/css/filament/ops/theme.compiled.css
+      - backend/resources/views/filament/ops/hooks/sidebar-accessibility.blade.php
+      - backend/tests/Feature/Content/BigFiveRolloutGateTest.php
+      - backend/tests/Feature/Ops/OpsNavigationInventoryTest.php
+      - backend/tests/Feature/V0_3/BigFiveResultEngineFoundationTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && php artisan test tests/Feature/Ops/OpsNavigationInventoryTest.php --no-ansi
+      - cd backend && php artisan test --filter='(BigFive|Big5|NonMbtiReportContractRegressionTest)' --no-ansi
+      - final focused T2-T6 authority, workspace, personality, dormant-content, V2 writer, cache, lookup, attempt, report, route, and permission regressions
+      - scoped Pint, PHP syntax, Ops theme compilation, Playwright keyboard/focus/zoom/collapse/bilingual checks, exact-scope validation, and git diff --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false

@@ -106205,11 +106205,13 @@
     "id": "OPS-SCALE-V2-MANAGEMENT-06",
     "repo": "fap-api",
     "branch": "codex/ops-scale-v2-management-06",
-    "status": "pr_open",
+    "status": "merged",
     "depends_on": ["OPS-CONTENT-DORMANT-05"],
     "commit_sha": "6c7e9be3ccb3d741209c101540681c1d579c8d3c",
     "pr_number": 3788,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3788",
+    "merge_commit_sha": "1853f0e58608452ca13b95d93e63b6cd31fe76be",
+    "merged_at": "2026-08-26T08:07:00+08:00",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -106230,6 +106232,14 @@
       "scope": {
         "status": "passed",
         "evidence": "No schema or migration was added or applied. No production database, Redis/cache, artifact, pointer, CMS, Sitemap, Search, secret, infrastructure, staging, or production operation was executed."
+      },
+      "github_ci": {
+        "status": "failed_corrective_pending",
+        "evidence": "Exact-SHA CI run 32913714552 passed every selected job except verify-bigfive. Three existing tests still mutated only the legacy registry, so they no longer controlled the intentional V2-first Runtime. The failed SHA did not deploy; T7 carries the minimal Writer-based test correction and its CI-equivalent Big Five chain passes 678 tests / 60,444 assertions."
+      },
+      "deployment": {
+        "status": "not_deployed",
+        "evidence": "Automatic Deploy run 32914086909 skipped because T6 exact-SHA CI failed. No workflow was manually dispatched."
       }
     },
     "production_write_execution": false,
@@ -106254,6 +106264,11 @@
         "at": "2026-08-26T08:05:46+08:00",
         "status": "pr_open",
         "note": "Opened PR #3788 from codex/ops-scale-v2-management-06 at validated implementation commit 6c7e9be3ccb3d741209c101540681c1d579c8d3c. Required-check and merge review are pending."
+      },
+      {
+        "at": "2026-08-26T08:07:00+08:00",
+        "status": "merged",
+        "note": "PR #3788 was squash-merged as 1853f0e58608452ca13b95d93e63b6cd31fe76be after mergeability and scope review. Exact-SHA CI later exposed three stale legacy-only Big Five test setups; T7 contains the minimal V2 Writer correction, and the failed T6 SHA did not deploy."
       }
     ]
   },
@@ -106261,8 +106276,52 @@
     "id": "OPS-CONTENT-NAV-A11Y-07",
     "repo": "fap-api",
     "branch": "codex/ops-content-nav-a11y-07",
-    "status": "registered",
+    "status": "pr_open",
     "depends_on": ["OPS-SCALE-V2-MANAGEMENT-06"],
-    "production_write_execution": false
+    "commit_sha": "e1de616a66b3714ab10adef91fc5dadb33e0bf80",
+    "pr_number": 3789,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3789",
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The operator explicitly authorized T7 as the final accessibility and acceptance item of the sequential Ops content-navigation train."
+      },
+      "dependency": {
+        "status": "passed_with_corrective",
+        "evidence": "T6 merged as exact main SHA 1853f0e58608452ca13b95d93e63b6cd31fe76be. Its post-merge CI exposed three stale legacy-only test setups; T7 corrects only those tests through the established V2 Writer boundary."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Navigation, routes, stable accessible names/tooltips, bilingual labels, fixed semantic icons, hidden-resource read/write permissions, and focus CSS passed 5 tests / 218 assertions. T2-T6 final focused paths passed 20 tests / 309 assertions. The CI-equivalent Big Five chain passed 678 tests / 60,444 assertions; scoped Pint, PHP syntax, theme compilation, diff checks, and browser keyboard/collapse/200-percent-zoom/bilingual checks passed."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "The change is limited to navigation grouping/icons/accessibility, focused acceptance coverage, and the minimal T6 stale-test correction. No route, permission, model, API, publication, schema, or external authority behavior was removed or broadened."
+      }
+    },
+    "production_write_execution": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "search_channel_action": false,
+    "transitions": [
+      {
+        "at": "2026-08-26T08:10:00+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started T7 only after T6 merged. Scope is the final navigation accessibility and focused T1-T6 acceptance pass; no external or production mutation occurred."
+      },
+      {
+        "at": "2026-08-26T08:24:00+08:00",
+        "status": "local_validation_passed",
+        "note": "Eight-entry navigation, stable collapsed accessible names/tooltips, visible keyboard focus, distinct grouping, bilingual layout, direct hidden routes and permissions, T2-T6 user paths, and the full Big Five focused chain passed. Browser artifacts and generated content fixtures were excluded from the candidate tree."
+      },
+      {
+        "at": "2026-08-26T08:28:35+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #3789 from codex/ops-content-nav-a11y-07 at validated implementation commit e1de616a66b3714ab10adef91fc5dadb33e0bf80. Required checks and merge review are pending."
+      }
+    ]
   }
 }
