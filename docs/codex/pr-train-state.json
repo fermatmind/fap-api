@@ -106025,12 +106025,12 @@
         "evidence": "The change is limited to the shared global content metrics read model, canonical workspace, compatibility page, bilingual copy, focused tests, and train bookkeeping. No publish action or write path was added."
       },
       "github_ci": {
-        "status": "failed_corrective_pending",
-        "evidence": "Exact-SHA CI run 32910245119 passed every selected job except verify-mbti-legacy: one pre-existing T3 test expectation still required the retired compatibility-page copy 'Editorial operations' instead of the canonical 'Content workspace'. Runtime-focused T3 coverage and the I18n contract passed. The failed SHA did not deploy; T4 carries the minimal two-line expectation correction so the next exact SHA validates the merged runtime."
+        "status": "corrected_by_descendant",
+        "evidence": "Exact-SHA CI run 32910245119 exposed one stale compatibility-page text expectation, so T3's failed SHA did not deploy. T4 supplied the minimal two-line expectation correction, CI run 32911107385 passed, and final cumulative CI run 32915376202 revalidated the complete train."
       },
       "deployment": {
-        "status": "not_deployed",
-        "evidence": "Automatic deployment for failed SHA b4c0d9761dfa4797f8e39b478e76883e01ce0d1b was cancelled or left non-executing by the failed CI receipt. No workflow was manually dispatched."
+        "status": "cumulatively_deployed",
+        "evidence": "The failed T3 SHA b4c0d9761dfa4797f8e39b478e76883e01ce0d1b correctly stayed out of production. Its corrected runtime was included first in T4 and finally in d80ac79119d54358c2a613be8e82c917cf823fde, whose automatic Deploy run 32915703861 passed staging and production activation/smoke without LKG fallback."
       }
     },
     "production_write_execution": false,
@@ -106060,6 +106060,11 @@
         "at": "2026-08-26T07:19:24+08:00",
         "status": "merged",
         "note": "PR #3785 was squash-merged as b4c0d9761dfa4797f8e39b478e76883e01ce0d1b after mergeability, review, and required-check state were verified. Post-merge exact-SHA CI found one stale compatibility-page text expectation; all other selected jobs passed and the failed SHA did not deploy. The minimal test-only correction is carried by T4 before further merge."
+      },
+      {
+        "at": "2026-08-26T08:50:00+08:00",
+        "status": "corrective_closure_validated",
+        "note": "T4 corrected the stale T3-only assertion, and final cumulative SHA d80ac79119d54358c2a613be8e82c917cf823fde passed exact-SHA CI 32915376202 plus automatic staging and production deployment 32915703861."
       }
     ]
   },
@@ -106167,8 +106172,8 @@
         "evidence": "Exact-SHA CI run 32911824173 passed for merge SHA 580cfbae0be537a2a8ee97a0ac6be3038582d2bf."
       },
       "deployment": {
-        "status": "superseded_before_staging",
-        "evidence": "Automatic Deploy run 32912163838 was cancelled before jobs started while the preceding exact-SHA production deployment was serialized and newer main commits arrived. No workflow was manually dispatched; T5 remains cumulatively included in subsequent application deployments."
+        "status": "cumulatively_deployed",
+        "evidence": "Automatic Deploy run 32912163838 was superseded before staging while deployments were serialized and newer main commits arrived. T5 remained intact in final cumulative SHA d80ac79119d54358c2a613be8e82c917cf823fde, whose automatic Deploy run 32915703861 passed staging and production activation/smoke."
       }
     },
     "production_write_execution": false,
@@ -106198,6 +106203,11 @@
         "at": "2026-08-26T07:40:35+08:00",
         "status": "merged",
         "note": "PR #3787 was squash-merged as 580cfbae0be537a2a8ee97a0ac6be3038582d2bf after CLEAN mergeability and scope review. Exact-SHA CI passed; its automatic deployment was later superseded before staging. The remote branch and isolated worktree were removed."
+      },
+      {
+        "at": "2026-08-26T08:50:00+08:00",
+        "status": "cumulative_production_validated",
+        "note": "Final cumulative SHA d80ac79119d54358c2a613be8e82c917cf823fde retained T5 and passed exact-SHA CI 32915376202 plus automatic staging and production deployment 32915703861."
       }
     ]
   },
@@ -106234,12 +106244,12 @@
         "evidence": "No schema or migration was added or applied. No production database, Redis/cache, artifact, pointer, CMS, Sitemap, Search, secret, infrastructure, staging, or production operation was executed."
       },
       "github_ci": {
-        "status": "failed_corrective_pending",
-        "evidence": "Exact-SHA CI run 32913714552 passed every selected job except verify-bigfive. Three existing tests still mutated only the legacy registry, so they no longer controlled the intentional V2-first Runtime. The failed SHA did not deploy; T7 carries the minimal Writer-based test correction and its CI-equivalent Big Five chain passes 678 tests / 60,444 assertions."
+        "status": "corrected_by_descendant",
+        "evidence": "Exact-SHA CI run 32913714552 exposed three stale legacy-only Big Five test setups, so T6's failed SHA did not deploy. T7 moved those setups through the established V2 Writer boundary; final CI run 32915376202 passed every selected job, including 678 Big Five tests / 60,444 assertions."
       },
       "deployment": {
-        "status": "not_deployed",
-        "evidence": "Automatic Deploy run 32914086909 skipped because T6 exact-SHA CI failed. No workflow was manually dispatched."
+        "status": "cumulatively_deployed",
+        "evidence": "Automatic Deploy run 32914086909 correctly skipped the failed T6 SHA. The corrected T6 runtime was retained in final cumulative SHA d80ac79119d54358c2a613be8e82c917cf823fde, whose automatic Deploy run 32915703861 passed staging and production activation/smoke without LKG fallback."
       }
     },
     "production_write_execution": false,
@@ -106269,6 +106279,11 @@
         "at": "2026-08-26T08:06:47+08:00",
         "status": "merged",
         "note": "PR #3788 was squash-merged as 1853f0e58608452ca13b95d93e63b6cd31fe76be after mergeability and scope review. Exact-SHA CI later exposed three stale legacy-only Big Five test setups; T7 contains the minimal V2 Writer correction, and the failed T6 SHA did not deploy."
+      },
+      {
+        "at": "2026-08-26T08:50:00+08:00",
+        "status": "corrective_closure_validated",
+        "note": "T7 corrected the three stale legacy-only setups through ScaleRegistryWriter, and final cumulative SHA d80ac79119d54358c2a613be8e82c917cf823fde passed exact-SHA CI 32915376202 plus automatic staging and production deployment 32915703861."
       }
     ]
   },
