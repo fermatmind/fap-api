@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-26T11:05:19Z",
+  "updated_at": "2026-08-26T11:06:32Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-07-G-SCHEDULER-REFRESH": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/seo-platform-07-scheduler-refresh",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "bb243dcda255aaabe4beb39010874d3497a44f6a",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3798",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -57,6 +57,11 @@
           "at": "2026-08-26T11:05:19Z",
           "status": "local_checks_passed",
           "summary": "Deploy now discovers the unique Supervisor-owned artisan schedule:work program, restarts it through the existing bounded helper, and verifies its cwd resolves to the active release. Focused behavior, regression, syntax, lint, format, manifest and scope checks passed."
+        },
+        {
+          "at": "2026-08-26T11:06:32Z",
+          "status": "pr_open",
+          "summary": "Opened focused corrective PR #3798 at validated implementation commit bb243dcda255aaabe4beb39010874d3497a44f6a. Mergeability is clean; no manual runtime action was performed."
         }
       ]
     },
