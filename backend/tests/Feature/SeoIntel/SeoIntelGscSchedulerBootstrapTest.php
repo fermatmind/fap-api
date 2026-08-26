@@ -18,6 +18,8 @@ final class SeoIntelGscSchedulerBootstrapTest extends TestCase
 
         $this->assertMatchesRegularExpression('/20\s+5 \* \* \*/', $schedule);
         $this->assertStringContainsString('seo-intel:gsc-sync', $schedule);
+        $this->assertStringContainsString('--window=28', $schedule);
+        $this->assertStringContainsString('--search-types=web', $schedule);
         $this->assertStringContainsString('--trigger=scheduled', $schedule);
         $this->assertStringContainsString('--json', $schedule);
     }

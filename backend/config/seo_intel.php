@@ -378,6 +378,7 @@ return [
     'gsc_enabled' => env('SEO_INTEL_GSC_ENABLED', false),
     'gsc_live_api_enabled' => env('SEO_INTEL_GSC_LIVE_API_ENABLED', false),
     // An explicit false remains the kill switch; otherwise live readonly GSC owns scheduler activation.
+    // This only registers the read-model sync and never grants search-submission authority.
     'gsc_sync_enabled' => env(
         'SEO_INTEL_GSC_SYNC_ENABLED',
         (bool) env('SEO_INTEL_GSC_ENABLED', false)
