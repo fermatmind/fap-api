@@ -21,29 +21,29 @@ final class SeoIntelGscConfigTest extends TestCase
 
     private function configuredSyncEnabled(string|false $syncValue): bool
     {
-        $environment = getenv();
-        unset(
-            $environment['SEO_INTEL_GSC_ENABLED'],
-            $environment['SEO_INTEL_GSC_LIVE_API_ENABLED'],
-            $environment['SEO_INTEL_GSC_SYNC_ENABLED'],
-        );
-        $environment['SEO_INTEL_GSC_ENABLED'] = 'true';
-        $environment['SEO_INTEL_GSC_LIVE_API_ENABLED'] = 'true';
-        if ($syncValue !== false) {
-            $environment['SEO_INTEL_GSC_SYNC_ENABLED'] = $syncValue;
-        }
-
         $backendRoot = dirname(__DIR__, 3);
+        $syncEnvironment = $syncValue === false
+            ? 'unset($_ENV["SEO_INTEL_GSC_SYNC_ENABLED"], $_SERVER["SEO_INTEL_GSC_SYNC_ENABLED"]);'
+                .'putenv("SEO_INTEL_GSC_SYNC_ENABLED");'
+            : '$_ENV["SEO_INTEL_GSC_SYNC_ENABLED"] = "false";'
+                .'$_SERVER["SEO_INTEL_GSC_SYNC_ENABLED"] = "false";'
+                .'putenv("SEO_INTEL_GSC_SYNC_ENABLED=false");';
         $process = new Process(
             [
                 PHP_BINARY,
                 '-r',
-                'require "vendor/autoload.php";'
+                '$_ENV["SEO_INTEL_GSC_ENABLED"] = "true";'
+                    .'$_SERVER["SEO_INTEL_GSC_ENABLED"] = "true";'
+                    .'putenv("SEO_INTEL_GSC_ENABLED=true");'
+                    .'$_ENV["SEO_INTEL_GSC_LIVE_API_ENABLED"] = "true";'
+                    .'$_SERVER["SEO_INTEL_GSC_LIVE_API_ENABLED"] = "true";'
+                    .'putenv("SEO_INTEL_GSC_LIVE_API_ENABLED=true");'
+                    .$syncEnvironment
+                    .'require "vendor/autoload.php";'
                     .'$config = require "config/seo_intel.php";'
                     .'echo json_encode($config["gsc_sync_enabled"]);',
             ],
             $backendRoot,
-            $environment,
         );
         $process->mustRun();
 
