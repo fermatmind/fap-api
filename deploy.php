@@ -779,10 +779,12 @@ task('crawler:configure-aggregate-runtime', function () {
     );
 
     run(sprintf(
-        'SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY=%s {{bin/php}} %s %s',
+        'SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY=%s {{bin/php}} %s %s %s %s',
         deployShellArg($sourcePath),
         deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/configure_crawler_aggregate_runtime.php'),
         deployPlaceholderPathArg('{{deploy_path}}', 'shared/backend/.env'),
+        deployPlaceholderPathArg('/usr/bin/sudo'),
+        deployShellArg('www-data'),
     ));
 });
 

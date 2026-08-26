@@ -143,7 +143,7 @@ final class SeoPlatform07CrawlerAggregateRuntimeTest extends TestCase
         $this->assertIsInt($receiptPosition);
         $this->assertLessThan($receiptPosition, $collectorPosition);
         $this->assertMatchesRegularExpression(
-            '/crawler-log-aggregate-scheduled[\\s\\S]+everyTenMinutes\(\)[\\s\\S]+withoutOverlapping\(20\)[\\s\\S]+onOneServer\(\)/',
+            '/crawler-log-aggregate-scheduled[\\s\\S]+user\(\'www-data\'\)[\\s\\S]+everyTenMinutes\(\)[\\s\\S]+withoutOverlapping\(20\)[\\s\\S]+onOneServer\(\)/',
             $bootstrap,
         );
 
@@ -159,6 +159,26 @@ final class SeoPlatform07CrawlerAggregateRuntimeTest extends TestCase
 
         $this->assertIsArray($event);
         $this->assertSame('*/10 * * * *', $event['expression'] ?? null);
+
+        $identityInspection = <<<'PHP'
+require 'vendor/autoload.php';
+$app = require 'bootstrap/app.php';
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+$kernel->bootstrap();
+$kernel->call('schedule:list', ['--json' => true, '--no-ansi' => true]);
+foreach ($app->make(Illuminate\Console\Scheduling\Schedule::class)->events() as $event) {
+    if (str_contains($event->command ?? '', 'crawler-log-aggregate-scheduled')) {
+        echo $event->user ?? 'missing';
+    }
+}
+PHP;
+        $identityProcess = new Process(
+            [PHP_BINARY, '-r', $identityInspection],
+            base_path(),
+            ['APP_ENV' => 'testing', 'SEO_INTEL_CRAWLER_LOG_SCHEDULER_ENABLED' => 'true'],
+        );
+        $identityProcess->mustRun();
+        $this->assertSame('www-data', trim($identityProcess->getOutput()));
     }
 
     private function enableRuntime(): void

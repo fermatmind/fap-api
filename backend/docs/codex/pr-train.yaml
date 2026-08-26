@@ -4953,3 +4953,54 @@ prs:
     deploy_allowed: true
     production_readback_allowed: true
     content_authority: approved_crawler_log_aggregate_observation
+
+  - id: SEO-PLATFORM-07-G-CRAWLER-AGGREGATE-RUNTIME-IDENTITY
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/seo-platform-07-crawler-runtime-identity
+    base: main
+    depends_on: ["SEO-PLATFORM-07-G-CRAWLER-AGGREGATE-RUNTIME"]
+    mode: execute
+    title: "fix(seo): run crawler aggregate collection as source reader"
+    scope: >
+      Correct the approved crawler aggregate runtime after production proved
+      that the current-release cron identity cannot read the active Nginx log.
+      Validate the masked source as the existing www-data runtime identity
+      before changing shared environment gates, and execute only the gated
+      collector as www-data through Laravel's existing ten-minute scheduler.
+      Preserve bounded reads, aggregate-only idempotent writes, receipt
+      freshness, cron/current-release ownership and all raw-data redaction.
+      Do not change Nginx, ACLs, sudo policy, cron, workflows, schemas, APIs,
+      search submission, URL Truth or CMS authority.
+    allowed_paths:
+      - ../deploy.php
+      - app/Services/SeoIntel/CrawlerLog/CrawlerLogSingleSourceReader.php
+      - bootstrap/app.php
+      - scripts/deploy/configure_crawler_aggregate_runtime.php
+      - tests/Feature/SeoIntel/SeoPlatform07CrawlerAggregateRuntimeTest.php
+      - tests/Sre/CrawlerAggregateRuntimeDeployTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    checks:
+      - "focused crawler deploy-helper and scheduler identity PHPUnit"
+      - "existing crawler aggregate, scheduled receipt and production closeout PHPUnit"
+      - "PHP syntax, scoped Pint, classifier, JSON/YAML, exact scope and diff checks"
+      - "exact-SHA automatic deploy followed by three natural successful production scheduler slots"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: continuous_goal
+    merge_policy:
+      mode: github_checks_required
+      local_verify_required: true
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+    production_write_execution: true
+    database_mutation: true
+    cms_mutation: false
+    publish_allowed: false
+    deploy_allowed: true
+    production_readback_allowed: true
+    content_authority: approved_crawler_log_aggregate_observation

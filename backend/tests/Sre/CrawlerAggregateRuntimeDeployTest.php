@@ -13,6 +13,29 @@ final class CrawlerAggregateRuntimeDeployTest extends TestCase
     /** @var list<string> */
     private array $temporaryPaths = [];
 
+    private string $sudoBin;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->sudoBin = $this->temporaryExecutable(<<<'SH'
+#!/bin/sh
+set -eu
+[ "$1" = "-n" ]
+[ "$2" = "-u" ]
+[ "$4" = "--" ]
+shift 4
+if [ "${SEO07_FAKE_DENY_READ:-0}" = "1" ] && [ "${2:-}" = "-r" ]; then
+    exit 1
+fi
+if [ "$1" = "/usr/bin/test" ] && [ -x /bin/test ]; then
+    shift
+    exec /bin/test "$@"
+fi
+exec "$@"
+SH);
+    }
+
     protected function tearDown(): void
     {
         foreach (array_reverse($this->temporaryPaths) as $path) {
@@ -27,7 +50,7 @@ final class CrawlerAggregateRuntimeDeployTest extends TestCase
     {
         $envFile = $this->temporaryEnvFile("APP_ENV=production\nUNRELATED=value\nSEO_INTEL_CRAWLER_LOG_SCHEDULER_ENABLED=false\n");
         $source = $this->temporaryFile("safe log line\n", 'access.log');
-        $command = [PHP_BINARY, base_path('scripts/deploy/configure_crawler_aggregate_runtime.php'), $envFile];
+        $command = [PHP_BINARY, base_path('scripts/deploy/configure_crawler_aggregate_runtime.php'), $envFile, $this->sudoBin, 'www-data'];
 
         foreach ([1, 2] as $_attempt) {
             $process = new Process($command, base_path(), ['SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY' => $source]);
@@ -55,7 +78,7 @@ final class CrawlerAggregateRuntimeDeployTest extends TestCase
         $envFile = $this->temporaryEnvFile("APP_ENV=production\n");
         $before = file_get_contents($envFile);
         $process = new Process(
-            [PHP_BINARY, base_path('scripts/deploy/configure_crawler_aggregate_runtime.php'), $envFile],
+            [PHP_BINARY, base_path('scripts/deploy/configure_crawler_aggregate_runtime.php'), $envFile, $this->sudoBin, 'www-data'],
             base_path(),
             ['SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY' => '/missing/crawler.log'],
         );
@@ -63,6 +86,46 @@ final class CrawlerAggregateRuntimeDeployTest extends TestCase
 
         $this->assertNotSame(0, $process->getExitCode());
         $this->assertStringContainsString('crawler_runtime_source_invalid', $process->getErrorOutput());
+        $this->assertSame($before, file_get_contents($envFile));
+    }
+
+    #[Test]
+    public function deploy_helper_rejects_empty_source_without_mutating_env(): void
+    {
+        $envFile = $this->temporaryEnvFile("APP_ENV=production\n");
+        $source = $this->temporaryFile('', 'access.log');
+        $before = file_get_contents($envFile);
+        $process = new Process(
+            [PHP_BINARY, base_path('scripts/deploy/configure_crawler_aggregate_runtime.php'), $envFile, $this->sudoBin, 'www-data'],
+            base_path(),
+            ['SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY' => $source],
+        );
+        $process->run();
+
+        $this->assertNotSame(0, $process->getExitCode());
+        $this->assertStringContainsString('crawler_runtime_source_invalid', $process->getErrorOutput());
+        $this->assertSame($before, file_get_contents($envFile));
+    }
+
+    #[Test]
+    public function deploy_helper_rejects_source_unreadable_by_runtime_identity_without_mutating_env(): void
+    {
+        $envFile = $this->temporaryEnvFile("APP_ENV=production\n");
+        $source = $this->temporaryFile("safe log line\n", 'access.log');
+        $before = file_get_contents($envFile);
+        $process = new Process(
+            [PHP_BINARY, base_path('scripts/deploy/configure_crawler_aggregate_runtime.php'), $envFile, $this->sudoBin, 'www-data'],
+            base_path(),
+            [
+                'SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY' => $source,
+                'SEO07_FAKE_DENY_READ' => '1',
+            ],
+        );
+        $process->run();
+
+        $this->assertNotSame(0, $process->getExitCode());
+        $this->assertStringContainsString('crawler_runtime_source_invalid', $process->getErrorOutput());
+        $this->assertStringNotContainsString($source, $process->getErrorOutput());
         $this->assertSame($before, file_get_contents($envFile));
     }
 
@@ -75,6 +138,8 @@ final class CrawlerAggregateRuntimeDeployTest extends TestCase
         $this->assertStringContainsString("task('crawler:configure-aggregate-runtime'", $deploy);
         $this->assertStringContainsString("currentHost()->getAlias() !== 'production'", $deploy);
         $this->assertStringContainsString('deploySafeAbsolutePath(', $deploy);
+        $this->assertStringContainsString("deployPlaceholderPathArg('/usr/bin/sudo')", $deploy);
+        $this->assertStringContainsString("deployShellArg('www-data')", $deploy);
         $this->assertStringContainsString("after('guard:shared-permissions', 'crawler:configure-aggregate-runtime')", $deploy);
         $this->assertStringContainsString('SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY: ${{ secrets.SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY }}', $workflow);
         $this->assertStringNotContainsString('SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY: ${{ vars.', $workflow);
@@ -102,5 +167,13 @@ final class CrawlerAggregateRuntimeDeployTest extends TestCase
         $this->temporaryPaths[] = $target;
 
         return $target;
+    }
+
+    private function temporaryExecutable(string $contents): string
+    {
+        $path = $this->temporaryFile($contents."\n", 'sudo');
+        chmod($path, 0700);
+
+        return $path;
     }
 }

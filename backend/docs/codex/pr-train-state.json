@@ -1,15 +1,76 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-26T14:26:34Z",
+  "updated_at": "2026-08-26T19:45:07Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
-    "SEO-PLATFORM-07-G-CRAWLER-AGGREGATE-RUNTIME": {
+    "SEO-PLATFORM-07-G-CRAWLER-AGGREGATE-RUNTIME-IDENTITY": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "pr_open",
+      "branch": "codex/seo-platform-07-crawler-runtime-identity",
+      "commit_sha": "235d6bbaa8b65417215a9b6b60e2c5d0b564d653",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3806",
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "details": "PR #3805 merged as c6722a16d28116cecd3db3832a51015a5a91cd22. Exact-SHA CI and staging passed; production failed closed before activation because the deploy/cron identity could not read the approved source while the existing www-data application identity could. Production remained on the prior healthy release and no crawler aggregate write occurred."
+        },
+        "local": [
+          {
+            "command": "focused SEO-PLATFORM-07 and existing crawler-log runtime PHPUnit",
+            "status": "passed_with_local_env_warning",
+            "details": "119 tests and 1930 assertions passed across runtime identity, bounded aggregate collection, idempotent writes, canary compatibility, scheduled receipts, production calibration closeout and protected read-model contracts; only isolated-worktree .env warnings were emitted."
+          },
+          {
+            "command": "scoped Pint and PHP syntax",
+            "status": "passed",
+            "details": "Six changed PHP files passed scoped Pint and syntax checks."
+          }
+        ],
+        "github": [],
+        "production": []
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": true,
+      "database_mutation": true,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": true,
+      "production_readback_allowed": true,
+      "history": [
+        {
+          "at": "2026-08-26T19:37:37Z",
+          "status": "in_progress",
+          "summary": "User explicitly authorized one same-scope corrective PR. Read-only production discovery found exactly one fresh, non-empty Nginx access-log source with sanitized identity hash 32d34ffbc65f9f95; it is readable by www-data but not by the current-release cron identity and contains bounded parseable crawler evidence. The Production Environment secret was updated directly from the discovery stream without exposing the path. This correction changes only fail-closed runtime-user validation and collector execution identity; no manual deploy, workflow dispatch, scheduler trigger, raw log output, Nginx, ACL, cron or sudo-policy mutation is allowed."
+        },
+        {
+          "at": "2026-08-26T19:40:35Z",
+          "status": "local_checks_passed",
+          "summary": "The helper now validates ordinary, non-empty and readable source state as www-data before any shared env mutation, while the collector uses Laravel's existing ten-minute scheduler as the same runtime identity. Existing single-source canary compatibility was restored with the missing global SplFileObject import. Focused and full crawler/SEO-PLATFORM-07 regressions, scoped formatting and syntax passed; no production collector or scheduler was manually triggered."
+        },
+        {
+          "at": "2026-08-26T19:43:47Z",
+          "status": "committed",
+          "summary": "Committed the validated implementation as 235d6bbaa8b65417215a9b6b60e2c5d0b564d653 with candidate tree cfaf136cac9cd32c907294e63ec8a990a9b15925. The tree contains exactly the eight manifest-allowed paths and no user workspace changes."
+        },
+        {
+          "at": "2026-08-26T19:45:07Z",
+          "status": "pr_open",
+          "summary": "Opened the single authorized corrective PR #3806 at head ffa3454f19a405d067769cac28f07fa783456dd5. No manual workflow, deploy, scheduler trigger or aggregate write was performed; the next production evidence must come from the exact-SHA automatic control plane."
+        }
+      ]
+    },
+    "SEO-PLATFORM-07-G-CRAWLER-AGGREGATE-RUNTIME": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "merged",
       "branch": "codex/seo-platform-07-crawler-aggregate-runtime",
       "commit_sha": "730c14d143ecf6d23564ff021a15e759fae501b5",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3805",
@@ -29,13 +90,25 @@
             "status": "passed"
           }
         ],
-        "github": [],
-        "production": []
+        "github": [
+          {
+            "name": "exact-SHA CI",
+            "status": "passed",
+            "details": "Run 32980800826 passed for merge SHA c6722a16d28116cecd3db3832a51015a5a91cd22."
+          }
+        ],
+        "production": [
+          {
+            "name": "automatic deploy",
+            "status": "failed_closed",
+            "details": "Run 32981448814 passed staging and failed before production activation with sanitized source validation; the prior healthy production release remained active and no crawler aggregate write occurred."
+          }
+        ]
       },
-      "failure_reason": null,
+      "failure_reason": "Automatic production deploy run 32981448814 failed closed before activation with sanitized marker crawler_runtime_source_invalid; staging passed, production remained on the prior healthy release, and no crawler aggregate write occurred.",
       "resume_policy": "continuous_goal",
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-08-26T14:31:16Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "production_write_execution": true,
       "database_mutation": true,
@@ -58,6 +131,11 @@
           "at": "2026-08-26T14:26:34Z",
           "status": "pr_open",
           "summary": "Opened the single authorized new-scope PR #3805 from validated implementation commit 730c14d143ecf6d23564ff021a15e759fae501b5. Required checks are pending; no manual runtime action occurred."
+        },
+        {
+          "at": "2026-08-26T14:37:35Z",
+          "status": "merged",
+          "summary": "PR #3805 merged as c6722a16d28116cecd3db3832a51015a5a91cd22. Exact-SHA CI run 32980800826 and staging passed; automatic production run 32981448814 failed closed before activation because the configured source was unavailable to the deploy identity. Production remained on the prior healthy release and no crawler aggregate write occurred."
         }
       ]
     },
