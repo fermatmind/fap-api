@@ -106299,6 +106299,14 @@
       "scope": {
         "status": "passed",
         "evidence": "The change is limited to navigation grouping/icons/accessibility, focused acceptance coverage, and the minimal T6 stale-test correction. No route, permission, model, API, publication, schema, or external authority behavior was removed or broadened."
+      },
+      "github_ci": {
+        "status": "passed",
+        "evidence": "Exact-SHA CI run 32915376202 passed every classifier-selected job, including the complete Big Five regression that failed for T6, and emitted the immutable validation receipt for merge SHA d80ac79119d54358c2a613be8e82c917cf823fde."
+      },
+      "deployment": {
+        "status": "passed",
+        "evidence": "Automatic Deploy run 32915703861 bound d80ac79119d54358c2a613be8e82c917cf823fde, then passed staging deploy/smoke and production activation/smoke with LKG fallback available. No workflow was manually dispatched and no fallback was required."
       }
     },
     "production_write_execution": false,
@@ -106328,6 +106336,11 @@
         "at": "2026-08-26T08:30:37+08:00",
         "status": "merged",
         "note": "PR #3789 was squash-merged as d80ac79119d54358c2a613be8e82c917cf823fde after exact changed-file scope, clean mergeability, no blocking review, and the repository's zero PR-check state were verified. Exact-SHA main CI and automatic deployment are pending; no workflow was manually dispatched."
+      },
+      {
+        "at": "2026-08-26T08:50:00+08:00",
+        "status": "production_validated",
+        "note": "Exact-SHA CI run 32915376202 and automatic Deploy run 32915703861 passed. Staging and production smoke succeeded for d80ac79119d54358c2a613be8e82c917cf823fde; LKG fallback remained available and was not used."
       }
     ]
   }
