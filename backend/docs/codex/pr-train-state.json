@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-26T14:21:59Z",
+  "updated_at": "2026-08-26T14:26:34Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-07-G-CRAWLER-AGGREGATE-RUNTIME": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "in_progress",
+      "status": "pr_open",
       "branch": "codex/seo-platform-07-crawler-aggregate-runtime",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "730c14d143ecf6d23564ff021a15e759fae501b5",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3805",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -53,6 +53,11 @@
           "at": "2026-08-26T14:21:59Z",
           "status": "local_checks_passed",
           "summary": "Bounded newest-tail reading, sanitized crawler-only aggregation, transactional idempotent writes, production-only deploy gates, effective ten-minute scheduling before the runtime receipt, and last-seen-based freshness passed focused and existing regression checks. The production Environment now holds the approved source only as a masked secret; no production log read or database write has occurred yet."
+        },
+        {
+          "at": "2026-08-26T14:26:34Z",
+          "status": "pr_open",
+          "summary": "Opened the single authorized new-scope PR #3805 from validated implementation commit 730c14d143ecf6d23564ff021a15e759fae501b5. Required checks are pending; no manual runtime action occurred."
         }
       ]
     },
