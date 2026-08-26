@@ -135,6 +135,22 @@ BASH);
     }
 
     #[Test]
+    public function it_uses_a_unique_scheduler_program_name_when_process_metadata_is_unreadable(): void
+    {
+        foreach (glob($this->temporaryDirectory.'/proc/*/cmdline') ?: [] as $cmdline) {
+            unlink($cmdline);
+        }
+
+        $process = $this->runScript();
+        $output = $process->getOutput().$process->getErrorOutput();
+
+        $this->assertTrue($process->isSuccessful(), $output);
+        $this->assertSame('new', file_get_contents($this->temporaryDirectory.'/state'));
+        $this->assertStringContainsString('members=0 verification=supervisor_restart', $output);
+        $this->assertStringNotContainsString($this->temporaryDirectory, $output);
+    }
+
+    #[Test]
     public function it_fails_closed_when_more_than_one_supervisor_program_owns_schedule_work(): void
     {
         $process = $this->runScript(['FAKE_SECOND_PROGRAM' => 'true']);
