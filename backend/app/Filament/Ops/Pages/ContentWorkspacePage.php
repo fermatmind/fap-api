@@ -10,6 +10,7 @@ use App\Filament\Ops\Resources\ArticleTagResource;
 use App\Filament\Ops\Resources\CareerGuideResource;
 use App\Filament\Ops\Resources\CareerJobResource;
 use App\Filament\Ops\Resources\InterpretationGuideResource;
+use App\Filament\Ops\Resources\ScaleRegistryResource;
 use App\Filament\Ops\Resources\SupportArticleResource;
 use App\Filament\Ops\Support\ContentAccess;
 use App\Services\Ops\SeoContentScopeViewModel;
@@ -39,6 +40,9 @@ class ContentWorkspacePage extends Page
 
     /** @var list<array<string, mixed>> */
     public array $optionalContentCards = [];
+
+    /** @var list<array<string, mixed>> */
+    public array $advancedContentCards = [];
 
     /** @var list<array<string, mixed>> */
     public array $snapshotFields = [];
@@ -137,6 +141,15 @@ class ContentWorkspacePage extends Page
                 SupportArticleResource::canCreate(),
             ),
         ];
+
+        $this->advancedContentCards = [[
+            'title' => __('ops.custom_pages.content_workspace.cards.scale_registry'),
+            'description' => __('ops.custom_pages.content_workspace.cards.scale_registry_desc'),
+            'meta' => __('ops.custom_pages.content_workspace.cards.scale_registry_authority'),
+            'index_url' => ScaleRegistryResource::getUrl(),
+            'create_url' => ScaleRegistryResource::getUrl('create'),
+            'can_create' => ScaleRegistryResource::canCreate(),
+        ]];
 
         $this->permissionFields = [
             [

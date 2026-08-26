@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Services\Scale\ScaleRegistryWriter;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -307,35 +308,26 @@ final class CiScalesRegistrySeeder extends Seeder
             }));
         }
 
-        DB::table('scales_registry')->upsert(
-            $rows,
-            ['code'],
-            [
-                'primary_slug',
-                'slugs_json',
-                'driver_type',
-                'assessment_driver',
-                'default_pack_id',
-                'default_region',
-                'default_locale',
-                'default_dir_version',
-                'capabilities_json',
-                'commercial_json',
-                'is_public',
-                'is_active',
-                'updated_at',
-            ]
-        );
+        $writer = app(ScaleRegistryWriter::class);
+        foreach ($rows as $row) {
+            $writer->upsertScale($row);
+        }
 
         if (! $includeDemoScales) {
-            DB::table('scales_registry')
-                ->where('org_id', 0)
-                ->whereIn('code', ['DEMO_ANSWERS', 'SIMPLE_SCORE_DEMO'])
-                ->update([
-                    'is_active' => 0,
-                    'is_public' => 0,
-                    'updated_at' => $now,
-                ]);
+            foreach (['DEMO_ANSWERS', 'SIMPLE_SCORE_DEMO'] as $code) {
+                $existing = DB::table('scales_registry_v2')
+                    ->where('org_id', 0)
+                    ->where('code', $code)
+                    ->first();
+                if (! $existing) {
+                    continue;
+                }
+
+                $payload = $this->decodeRegistryRow((array) $existing);
+                $payload['is_active'] = false;
+                $payload['is_public'] = false;
+                $writer->upsertScale($payload);
+            }
         }
 
         $this->command?->info(sprintf(
@@ -358,5 +350,28 @@ final class CiScalesRegistrySeeder extends Seeder
         }
 
         return ! in_array($normalized, ['0', 'false', 'off', 'no'], true);
+    }
+
+    /** @param array<string,mixed> $row */
+    private function decodeRegistryRow(array $row): array
+    {
+        unset($row['id'], $row['created_at'], $row['updated_at']);
+        foreach ([
+            'slugs_json',
+            'capabilities_json',
+            'view_policy_json',
+            'commercial_json',
+            'seo_schema_json',
+            'seo_i18n_json',
+            'content_i18n_json',
+            'report_summary_i18n_json',
+        ] as $column) {
+            if (is_string($row[$column] ?? null)) {
+                $decoded = json_decode($row[$column], true);
+                $row[$column] = is_array($decoded) ? $decoded : null;
+            }
+        }
+
+        return $row;
     }
 }

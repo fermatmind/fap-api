@@ -164,7 +164,7 @@ class AttemptsStartSubmitTest extends TestCase
         $this->assertSame('blocked_unscored', (string) $dup->json('result.breakdown_json.status'));
     }
 
-    public function test_mbti_report_locked_true_without_entitlement(): void
+    public function test_mbti_free_only_report_is_full_without_entitlement(): void
     {
         $this->seedScales();
         $anonToken = $this->issueAnonToken('anon_test');
@@ -264,9 +264,10 @@ class AttemptsStartSubmitTest extends TestCase
         $report->assertStatus(200);
         $report->assertJson([
             'ok' => true,
-            'locked' => true,
-            'access_level' => 'free',
-            'variant' => 'free',
+            'locked' => false,
+            'access_level' => 'full',
+            'variant' => 'full',
+            'access_source' => 'scale_free_only',
         ]);
 
         $this->assertNotNull($report->json('view_policy'));

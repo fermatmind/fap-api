@@ -221,9 +221,7 @@
     "branch": "codex/api-ad-01-rewarded-unlock",
     "title": "API-AD-01: add residual-risk rewarded-ad report unlock",
     "depends_on": ["API-UNLOCK-01"],
-    "status": "pr_open",
-    "pr": 3787,
-    "head_sha": "180fdaa532137657f98b4b2b455eaf79feb5276f",
+    "status": "local_validation_passed",
     "commit_sha": "46a5b82b851d9ecda568151387a82421cb970c6b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3469",
     "checks": {
@@ -106100,8 +106098,8 @@
         "evidence": "Exact-SHA CI run 32911107385 passed every classifier-selected job, including the previously failing verify-mbti-legacy path, and emitted its immutable validation receipt for merge SHA 657b9246c87cf82cb4975142d5b5b61ff247b9bf."
       },
       "deployment": {
-        "status": "pending_automatic_start",
-        "evidence": "The exact-SHA CI receipt succeeded; no automatic deploy run is visible yet for 657b9246c87cf82cb4975142d5b5b61ff247b9bf. No workflow was manually dispatched."
+        "status": "passed",
+        "evidence": "Automatic Deploy run 32911509282 bound the successful T4 exact-SHA CI receipt, then passed staging deployment/smoke and production activation/smoke with LKG fallback available. No workflow was manually dispatched."
       }
     },
     "production_write_execution": false,
@@ -106140,8 +106138,13 @@
     "base": "main",
     "branch": "codex/ops-content-dormant-05",
     "title": "feat(ops): expose dormant content types contextually",
-    "status": "local_validation_passed",
+    "status": "merged",
     "depends_on": ["OPS-PERSONALITY-DESKTOP-04"],
+    "commit_sha": "180fdaa532137657f98b4b2b455eaf79feb5276f",
+    "pr_number": 3787,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3787",
+    "merge_commit_sha": "580cfbae0be537a2a8ee97a0ac6be3038582d2bf",
+    "merged_at": "2026-08-26T07:40:35+08:00",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -106158,6 +106161,14 @@
       "scope": {
         "status": "passed",
         "evidence": "The change adds only a Content workspace on-demand section backed by read-only org_id=0 counts and existing permission-gated links. Support articles and interpretation guides remain independent hidden resources; APIs, review states, models, and publication are unchanged."
+      },
+      "github_ci": {
+        "status": "passed",
+        "evidence": "Exact-SHA CI run 32911824173 passed for merge SHA 580cfbae0be537a2a8ee97a0ac6be3038582d2bf."
+      },
+      "deployment": {
+        "status": "superseded_before_staging",
+        "evidence": "Automatic Deploy run 32912163838 was cancelled before jobs started while the preceding exact-SHA production deployment was serialized and newer main commits arrived. No workflow was manually dispatched; T5 remains cumulatively included in subsequent application deployments."
       }
     },
     "production_write_execution": false,
@@ -106182,6 +106193,11 @@
         "at": "2026-08-26T07:39:48+08:00",
         "status": "pr_open",
         "note": "Opened PR #3787 from codex/ops-content-dormant-05 at validated implementation commit 180fdaa532137657f98b4b2b455eaf79feb5276f. Required-check and merge review are pending."
+      },
+      {
+        "at": "2026-08-26T07:40:35+08:00",
+        "status": "merged",
+        "note": "PR #3787 was squash-merged as 580cfbae0be537a2a8ee97a0ac6be3038582d2bf after CLEAN mergeability and scope review. Exact-SHA CI passed; its automatic deployment was later superseded before staging. The remote branch and isolated worktree were removed."
       }
     ]
   },
@@ -106189,9 +106205,49 @@
     "id": "OPS-SCALE-V2-MANAGEMENT-06",
     "repo": "fap-api",
     "branch": "codex/ops-scale-v2-management-06",
-    "status": "registered",
+    "status": "local_validation_passed",
     "depends_on": ["OPS-CONTENT-DORMANT-05"],
-    "production_write_execution": false
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The operator explicitly authorized T6 as the high-risk sixth item of the sequential Ops content-navigation train."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "T5 merged as exact main SHA 580cfbae0be537a2a8ee97a0ac6be3038582d2bf before T6 implementation began."
+      },
+      "authority": {
+        "status": "passed",
+        "evidence": "Ops and public runtime now read scales_registry_v2 first. primary_slug plus slugs_json are the write authority; scale_slugs is a deterministic read-only projection rebuilt by ScaleRegistryWriter in the same transaction. Legacy registry remains a compatibility projection."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "39 focused tests / 977 assertions passed across V2 management, eight-item navigation, tenant isolation, CI and Big Five commands, public cache/catalog, lookup/Sitemap, start/submit, report, and share paths. Scoped Pint passed 24 files; syntax, routes, bilingual copy, and diff checks passed."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "No schema or migration was added or applied. No production database, Redis/cache, artifact, pointer, CMS, Sitemap, Search, secret, infrastructure, staging, or production operation was executed."
+      }
+    },
+    "production_write_execution": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "search_channel_action": false,
+    "transitions": [
+      {
+        "at": "2026-08-26T07:41:10+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started T6 only after T5 merged. Read-only discovery confirmed public Runtime was legacy-first, Ops used the legacy model, and top-level Slug pages could bypass the Writer."
+      },
+      {
+        "at": "2026-08-26T08:02:29+08:00",
+        "status": "local_validation_passed",
+        "note": "V2-first management/runtime reads, atomic Writer plus slug projection, cache invalidation, tenant isolation, old Slug URL compatibility, advanced contextual access, and all named critical callers passed focused validation. No external or production mutation occurred."
+      }
+    ]
   },
   "OPS-CONTENT-NAV-A11Y-07": {
     "id": "OPS-CONTENT-NAV-A11Y-07",

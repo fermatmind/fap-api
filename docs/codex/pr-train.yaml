@@ -386,9 +386,7 @@ prs:
     base: main
     branch: codex/api-iap-01-apple-provider
     title: "API-IAP-01: add fail-closed WeChat-routed Apple IAP provider"
-    status: pr_open
-    pr: 3787
-    head_sha: 180fdaa532137657f98b4b2b455eaf79feb5276f
+    status: local_validation_passed
     depends_on:
       - API-UNLOCK-01
       - API-VPAY-01
@@ -50166,7 +50164,10 @@ prs:
     base: main
     branch: codex/ops-content-dormant-05
     title: "feat(ops): expose dormant content types contextually"
-    status: local_validation_passed
+    status: merged
+    pr: 3787
+    implementation_sha: 180fdaa532137657f98b4b2b455eaf79feb5276f
+    merge_commit_sha: 580cfbae0be537a2a8ee97a0ac6be3038582d2bf
     depends_on: [OPS-PERSONALITY-DESKTOP-04]
     train_scope: ops_dormant_content_context
     risk_level: product_ui_navigation
@@ -50197,7 +50198,7 @@ prs:
     base: main
     branch: codex/ops-scale-v2-management-06
     title: "fix(ops): align scale management with V2 runtime"
-    status: registered
+    status: local_validation_passed
     depends_on: [OPS-CONTENT-DORMANT-05]
     train_scope: ops_scale_v2_management
     risk_level: high_scale_authority
@@ -50206,6 +50207,38 @@ prs:
       - Preserve tenant isolation and legacy URLs while preventing direct slug writes.
     do_not:
       - Add schema, apply migrations, or mutate production database, cache, artifacts, pointers, or sitemap state.
+    allowed_paths:
+      - backend/app/Console/Commands/ActivateBigFiveReportUnlockCommerce.php
+      - backend/app/Console/Commands/SyncScaleSlugs.php
+      - backend/app/Filament/Ops/Pages/ContentWorkspacePage.php
+      - backend/app/Filament/Ops/Resources/ScaleRegistryResource.php
+      - backend/app/Filament/Ops/Resources/ScaleRegistryResource/Pages/CreateScaleRegistry.php
+      - backend/app/Filament/Ops/Resources/ScaleRegistryResource/Pages/EditScaleRegistry.php
+      - backend/app/Filament/Ops/Resources/ScaleRegistryResource/RelationManagers/ScaleSlugsRelationManager.php
+      - backend/app/Filament/Ops/Resources/ScaleSlugResource.php
+      - backend/app/Filament/Ops/Resources/ScaleSlugResource/Pages/CreateScaleSlug.php
+      - backend/app/Filament/Ops/Resources/ScaleSlugResource/Pages/EditScaleSlug.php
+      - backend/app/Filament/Ops/Resources/ScaleSlugResource/Pages/ListScaleSlugs.php
+      - backend/app/Http/Controllers/API/V0_3/ScalesSitemapSourceController.php
+      - backend/app/Models/ScaleRegistryV2.php
+      - backend/app/Providers/AppServiceProvider.php
+      - backend/app/Services/Scale/ScaleRegistry.php
+      - backend/app/Services/Scale/ScaleRegistryWriter.php
+      - backend/database/seeders/CiScalesRegistrySeeder.php
+      - backend/lang/en/ops.php
+      - backend/lang/zh_CN/ops.php
+      - backend/resources/views/filament/ops/pages/content-workspace.blade.php
+      - backend/tests/Feature/Ops/ScaleRegistryV2ManagementTest.php
+      - backend/tests/Feature/Report/ReportGatekeeperDecompositionContractTest.php
+      - backend/tests/Feature/V0_3/AttemptsStartSubmitTest.php
+      - backend/tests/Feature/V0_3/PublicScaleResponseCacheTest.php
+      - backend/tests/Feature/V0_3/ScalesLookupTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && php artisan test for 10 focused Ops, registry, lookup, attempt, report, share, catalog, sitemap, tenant, and command test files
+      - cd backend && vendor/bin/pint --test for 24 changed PHP files
+      - verify scale registry, legacy slug, and sitemap routes; PHP syntax; bilingual rendering; parse pr-train JSON and YAML; exact-scope validation; git diff --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
 
   - id: OPS-CONTENT-NAV-A11Y-07

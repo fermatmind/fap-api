@@ -58,7 +58,7 @@ class ScaleRegistry
             return $cached;
         }
 
-        if ($this->useV2ForTenantReads($orgId)) {
+        if ($this->canUseV2ForReads()) {
             $tenantRows = $this->v2RegistryQuery()
                 ->where('org_id', $orgId)
                 ->where('is_active', true)
@@ -101,9 +101,9 @@ class ScaleRegistry
             return $cached;
         }
 
-        $rows = $this->listActivePublicFromLegacy();
+        $rows = $this->listActivePublicFromV2();
         if ($rows === []) {
-            $rows = $this->listActivePublicFromV2();
+            $rows = $this->listActivePublicFromLegacy();
         }
 
         Cache::put($cacheKey, $rows, self::CACHE_TTL_SECONDS);
@@ -120,9 +120,9 @@ class ScaleRegistry
             return [];
         }
 
-        $rows = $this->listActivePublicCatalogFromLegacy();
+        $rows = $this->listActivePublicCatalogFromV2();
         if ($rows === []) {
-            $rows = $this->listActivePublicCatalogFromV2();
+            $rows = $this->listActivePublicCatalogFromLegacy();
         }
 
         return $rows;
@@ -175,7 +175,7 @@ class ScaleRegistry
             return $this->canExposeRegistryRow($cached, $orgId) ? $cached : null;
         }
 
-        if ($this->useV2ForTenantReads($orgId)) {
+        if ($this->canUseV2ForReads()) {
             $row = $this->lookupBySlugFromV2($slug, $orgId, $allowAlias);
             if ($row) {
                 Cache::put($cacheKey, $row, self::CACHE_TTL_SECONDS);
@@ -252,23 +252,23 @@ class ScaleRegistry
 
     private function findByCode(string $code, int $orgId): ?array
     {
-        if ($this->useV2ForTenantReads($orgId)) {
+        if ($orgId <= 0) {
+            $v2Row = $this->findPublicByCodeFromV2($code);
+            if ($v2Row !== null) {
+                return $v2Row;
+            }
+
+            return $this->findPublicByCodeFromLegacy($code);
+        }
+
+        if ($this->canUseV2ForReads()) {
             $tenantRow = $this->v2RegistryQuery()
                 ->where('org_id', $orgId)
                 ->where('code', $code)
                 ->first();
             if ($tenantRow) {
-                return (array) $tenantRow;
+                return $this->normalizeV2RegistryRow((array) $tenantRow);
             }
-        }
-
-        if ($orgId <= 0) {
-            $legacyRow = $this->findPublicByCodeFromLegacy($code);
-            if ($legacyRow !== null) {
-                return $legacyRow;
-            }
-
-            return $this->findPublicByCodeFromV2($code);
         }
 
         $row = $this->registryQueryForOrg($orgId)
@@ -314,12 +314,8 @@ class ScaleRegistry
         return ScaleSlug::queryByOrgWhitelist($orgWhitelist);
     }
 
-    private function useV2ForTenantReads(int $orgId): bool
+    private function canUseV2ForReads(): bool
     {
-        if ($orgId <= 0) {
-            return false;
-        }
-
         if (! (bool) config('fap.scales_registry.use_v2', true)) {
             return false;
         }
@@ -546,12 +542,16 @@ class ScaleRegistry
     private function lookupBySlugFromV2(string $slug, int $orgId, bool $allowAlias): ?array
     {
         if (! $allowAlias) {
-            $tenantRegistry = $this->v2RegistryQuery()
+            $registry = $this->v2RegistryQuery()
                 ->where('org_id', $orgId)
                 ->where('primary_slug', $slug)
+                ->when($orgId === 0, function ($query): void {
+                    $query->where('is_public', true)
+                        ->where('is_active', true);
+                })
                 ->first();
-            if ($tenantRegistry) {
-                return (array) $tenantRegistry;
+            if ($registry) {
+                return $this->normalizeV2RegistryRow((array) $registry);
             }
 
             return null;
@@ -571,14 +571,16 @@ class ScaleRegistry
             return null;
         }
 
-        if ($slugOrgId > 0) {
-            $tenantRegistry = $this->v2RegistryQuery()
-                ->where('org_id', $slugOrgId)
-                ->where('code', $scaleCode)
-                ->first();
-            if ($tenantRegistry) {
-                return (array) $tenantRegistry;
-            }
+        $registry = $this->v2RegistryQuery()
+            ->where('org_id', $slugOrgId)
+            ->where('code', $scaleCode)
+            ->when($slugOrgId === 0, function ($query): void {
+                $query->where('is_public', true)
+                    ->where('is_active', true);
+            })
+            ->first();
+        if ($registry) {
+            return $this->normalizeV2RegistryRow((array) $registry);
         }
 
         return null;

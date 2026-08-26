@@ -18,6 +18,7 @@ use App\Models\PaymentEvent;
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\ReportSnapshot;
 use App\Models\ScaleRegistry;
+use App\Models\ScaleRegistryV2;
 use App\Models\ScaleSlug;
 use App\Models\Share;
 use App\Observers\PersonalityPublicContentAssetObserver;
@@ -347,6 +348,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(ReportSnapshot::class, ReportSnapshotPolicy::class);
         Gate::policy(Share::class, SharePolicy::class);
         Gate::policy(ScaleRegistry::class, ScaleRegistryPolicy::class);
+        Gate::policy(ScaleRegistryV2::class, ScaleRegistryPolicy::class);
         Gate::policy(ScaleSlug::class, ScaleSlugPolicy::class);
         Livewire::component('filament.ops.livewire.current-org-switcher', CurrentOrgSwitcher::class);
         Livewire::component('filament.ops.livewire.locale-switcher', LocaleSwitcher::class);

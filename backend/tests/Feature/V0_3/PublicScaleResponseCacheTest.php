@@ -59,7 +59,7 @@ final class PublicScaleResponseCacheTest extends TestCase
         $this->getJson('/api/v0.3/scales/catalog?locale=zh')->assertOk();
 
         $catalogSelect = collect(DB::getQueryLog())->first(
-            static fn (array $query): bool => str_contains((string) ($query['query'] ?? ''), 'from "scales_registry"')
+            static fn (array $query): bool => str_contains((string) ($query['query'] ?? ''), 'from "scales_registry_v2"')
                 && str_contains((string) ($query['query'] ?? ''), '"content_i18n_json"')
         );
         $this->assertIsArray($catalogSelect);
