@@ -1,0 +1,381 @@
+{
+  "schema": "seo.platform_11a.inventory_preflight.v1",
+  "task_id": "SEO-PLATFORM-11A-INVENTORY-PREFLIGHT",
+  "status": "draft_unfrozen",
+  "evidence_cutoff": "2026-08-26T00:30:59Z",
+  "repository_snapshots": {
+    "fap-api": "d80ac79119d54358c2a613be8e82c917cf823fde",
+    "fap-web": "90bcaf7e6b1a53d679d56df6de643b6ae8725410"
+  },
+  "authority": {
+    "owner_repository": "fap-api",
+    "document_root": "backend/docs/seo",
+    "fap_web_role": "read_only_evidence_source",
+    "runtime_authority_created": false,
+    "policy_frozen": false
+  },
+  "classification_enum": [
+    "retained_agent",
+    "bounded_capability",
+    "deterministic_tool",
+    "review_mode",
+    "contract_only",
+    "historical_or_superseded",
+    "retire_candidate"
+  ],
+  "disposition_enum": [
+    "retain",
+    "tool_adapter",
+    "merge",
+    "disable",
+    "retire"
+  ],
+  "scan_rules": [
+    {
+      "repository": "fap-api",
+      "rule": "backend/app/Console/Commands/SeoAgent*.php",
+      "observed_count": 35
+    },
+    {
+      "repository": "fap-api",
+      "rule": "backend/app/Services/SeoAgent/*.php",
+      "observed_count": 5
+    },
+    {
+      "repository": "fap-api",
+      "rule": "SEO Agent docs, generated contracts, tests, Ops Council placeholder, repository Skill and four permanent workflows referenced by current code or contracts",
+      "observed_count": null
+    },
+    {
+      "repository": "fap-web",
+      "rule": ".agents/skills directories whose names contain seo, agent, content or cms and that expose SEO capability",
+      "observed_count": 6
+    },
+    {
+      "repository": "fap-web",
+      "rule": "docs/seo/agent/**",
+      "observed_count": 47
+    },
+    {
+      "repository": "fap-web",
+      "rule": "scripts/seo/**",
+      "observed_count": 138
+    },
+    {
+      "repository": "fap-web",
+      "rule": "tests/contracts/*agent* and tests/contracts/*seo-agent*",
+      "observed_count": 44
+    }
+  ],
+  "capability_inventory": [
+    {
+      "id": "api.seo_agent.command_surface",
+      "repository": "fap-api",
+      "path": "backend/app/Console/Commands/SeoAgent*.php",
+      "type": "command_group",
+      "entrypoint": "php artisan seo-agent:*",
+      "callers": ["operator_cli", "external_cron_contracts", "command_to_command_calls", "tests"],
+      "input": "CLI options plus repository, database, GSC read model or prior artifact inputs depending on command",
+      "output": "stdout and versioned evidence/artifact files; bounded commands may also write CMS/search state",
+      "write_permission": "mixed",
+      "model_invocation": false,
+      "scheduler": "not_registered_in_laravel_scheduler",
+      "authority": "existing_command_specific_contracts_only",
+      "test_evidence": "backend/tests/Feature/SeoIntel/SeoAgent*Test.php and backend/tests/Feature/Console/SeoAgent*Test.php",
+      "classification": "bounded_capability",
+      "capability_state": "registered_by_console_directory_autoload",
+      "evidence_state": "current_tree_verified",
+      "members_reference": "seo_agent_command_dispositions"
+    },
+    {
+      "id": "api.seo_agent.services",
+      "repository": "fap-api",
+      "path": "backend/app/Services/SeoAgent/*.php",
+      "type": "service_group",
+      "entrypoint": "injected into SeoAgent commands",
+      "callers": ["SeoAgentCmsFaqGapScanCommand", "SeoAgentCmsTdkGapScanCommand", "SeoAgentOpportunityAggregateCommand", "SeoAgentRuntimeSeoQaScanCommand", "mutating command policy checks"],
+      "input": "database/read-model rows and bounded command inputs",
+      "output": "scanner results, aggregate candidates and policy decisions",
+      "write_permission": "none_in_scanners_and_aggregator; policy_can_admit_separate_writers",
+      "model_invocation": false,
+      "scheduler": "none",
+      "authority": "command_local_domain_logic",
+      "test_evidence": "backend/tests/Feature/SeoIntel/SeoAgent*Test.php",
+      "classification": "deterministic_tool",
+      "capability_state": "implemented",
+      "evidence_state": "current_tree_verified",
+      "members": [
+        "backend/app/Services/SeoAgent/AutoApprovalPolicy.php",
+        "backend/app/Services/SeoAgent/CmsFaqGapReadonlyScanner.php",
+        "backend/app/Services/SeoAgent/CmsTdkGapReadonlyScanner.php",
+        "backend/app/Services/SeoAgent/OpportunityAggregator.php",
+        "backend/app/Services/SeoAgent/RuntimeSeoQaReadonlyScanner.php"
+      ]
+    },
+    {
+      "id": "api.agent_orchestrator_non_seo",
+      "repository": "fap-api",
+      "path": "backend/app/Services/Agent/AgentOrchestrator.php",
+      "type": "service",
+      "entrypoint": "AgentTickJob",
+      "callers": ["backend/app/Jobs/AgentTickJob.php"],
+      "input": "wellbeing trigger context",
+      "output": "in-app notification decisions",
+      "write_permission": "bounded_notification_domain",
+      "model_invocation": false,
+      "scheduler": "job_entrypoint_outside_seo_scope",
+      "authority": "non_seo_product_agent",
+      "test_evidence": "current service and job references",
+      "classification": "retained_agent",
+      "capability_state": "implemented_but_excluded_from_seo_council",
+      "evidence_state": "current_tree_verified"
+    },
+    {
+      "id": "api.council_placeholder",
+      "repository": "fap-api",
+      "path": "backend/app/Filament/Ops/Support/SeoAgentCouncilUiContract.php",
+      "type": "ui_contract",
+      "entrypoint": "Ops Agent Council workspace",
+      "callers": ["backend/resources/views/filament/ops/components/ops-agent-council-workspace.blade.php"],
+      "input": "static UI contract",
+      "output": "empty capability and production-unproven placeholder state",
+      "write_permission": "none",
+      "model_invocation": false,
+      "scheduler": "none",
+      "authority": "placeholder_only",
+      "test_evidence": "backend/tests/Feature/Ops/SeoUxImpl06AgentCouncilTest.php",
+      "classification": "contract_only",
+      "capability_state": "production_unproven",
+      "evidence_state": "current_tree_verified"
+    },
+    {
+      "id": "api.seo_growth_skill",
+      "repository": "fap-api",
+      "path": ".agents/skills/fermatmind-global-seo-geo-growth-scan/SKILL.md",
+      "type": "skill",
+      "entrypoint": "explicit Codex skill selection",
+      "callers": ["Codex sessions"],
+      "input": "bounded SEO/GEO evidence scan request",
+      "output": "evidence-backed findings and proposals",
+      "write_permission": "repository_docs_only_when_authorized",
+      "model_invocation": "host_managed_not_runtime",
+      "scheduler": "none",
+      "authority": "research_and_planning_only",
+      "test_evidence": "skill file and required role-playbook contracts",
+      "classification": "bounded_capability",
+      "capability_state": "available_to_codex_not_council_enabled",
+      "evidence_state": "current_tree_verified"
+    },
+    {
+      "id": "api.workflows",
+      "repository": "fap-api",
+      "path": ".github/workflows/{ci,deploy,nightly,recovery}.yml",
+      "type": "workflow_group",
+      "entrypoint": "GitHub Actions",
+      "callers": ["main push", "successful exact-SHA CI", "schedule", "manual recovery only"],
+      "input": "repository SHA and classifier receipt",
+      "output": "CI, deploy, nightly or recovery receipts",
+      "write_permission": "deployment_control_plane_only",
+      "model_invocation": false,
+      "scheduler": "nightly_only; no SEO Agent runtime schedule",
+      "authority": "delivery_control_plane_not_seo_council",
+      "test_evidence": "backend/tests/Feature/Deployment/RepositoryWorkflowContractTest.php",
+      "classification": "deterministic_tool",
+      "capability_state": "active",
+      "evidence_state": "current_tree_verified"
+    },
+    {
+      "id": "web.seo_skills",
+      "repository": "fap-web",
+      "path": ".agents/skills/{fap-web-cms-rich-content,fap-web-seo-geo-authority,fermatmind-daily-seo-ops,fermatmind-seo-ops,fermatmind-wechat-seo-article-editor,public-profile-seo-asset-factory}/**",
+      "type": "skill_group",
+      "entrypoint": "explicit skill selection or historical operator runbook",
+      "callers": ["Codex sessions", "operator workflows"],
+      "input": "SEO, content, CMS or public-profile goals and evidence",
+      "output": "plans, packages, reviews and conditionally authorized operations",
+      "write_permission": "mixed_and_skill_guarded",
+      "model_invocation": "host_managed_or_documented_session; no unified runtime adapter",
+      "scheduler": "none_in_skill_files",
+      "authority": "frontend_implementation_and_evidence_only; never CMS, URL Truth, search or execution authority",
+      "test_evidence": "skill files, referenced guardrails and repository contract tests",
+      "classification": "bounded_capability",
+      "capability_state": "present_but_not_council_enabled",
+      "evidence_state": "origin_main_tree_verified"
+    },
+    {
+      "id": "web.agent_contracts",
+      "repository": "fap-web",
+      "path": "docs/seo/agent/**",
+      "type": "contract_group",
+      "entrypoint": "package contract checks and operator reference",
+      "callers": ["seo:gpt55-handoff", "seo:weekly-control-packet", "seo:opportunity-queue-contract", "seo:cms-draft-package-contract"],
+      "input": "tracked Markdown, JSON, schemas and fixture artifacts",
+      "output": "contract validation results",
+      "write_permission": "none",
+      "model_invocation": false,
+      "scheduler": "none",
+      "authority": "historical_or_frontend_contract_evidence",
+      "test_evidence": "scripts/seo/check-seo-agent-*.mjs and tests/contracts/*seo-agent*.test.ts",
+      "classification": "historical_or_superseded",
+      "capability_state": "mixed_current_and_hold_records",
+      "evidence_state": "47_paths_at_origin_main"
+    },
+    {
+      "id": "web.seo_tools",
+      "repository": "fap-web",
+      "path": "scripts/seo/**",
+      "type": "script_group",
+      "entrypoint": "node/python directly or package.json scripts",
+      "callers": ["developer", "package scripts", "CI contracts"],
+      "input": "tracked assets, live read-only endpoints or explicit package inputs",
+      "output": "checks, inventories, generated artifacts; push-baidu is a live submission outlier",
+      "write_permission": "mixed; most local artifact generation, push-baidu external write",
+      "model_invocation": false,
+      "scheduler": "no Agent scheduler workflow found",
+      "authority": "deterministic frontend tools only",
+      "test_evidence": "package scripts and tests/contracts",
+      "classification": "deterministic_tool",
+      "capability_state": "138_paths_at_origin_main",
+      "evidence_state": "origin_main_tree_verified"
+    },
+    {
+      "id": "web.code_pr_writer",
+      "repository": "fap-web",
+      "path": "scripts/seo/generate-seo-agent-fapweb-code-pr-writer.mjs",
+      "type": "script",
+      "entrypoint": "pnpm seo-agent:fapweb-code-pr-writer",
+      "callers": ["operator_cli", "contract_test"],
+      "input": "SEO Agent control packet",
+      "output": "frontend code-writer artifact",
+      "write_permission": "repository_artifact_generation",
+      "model_invocation": false,
+      "scheduler": "none",
+      "authority": "frontend_proposal_only",
+      "test_evidence": "tests/contracts/seo-agent-fapweb-code-pr-writer.contract.test.ts",
+      "classification": "retire_candidate",
+      "capability_state": "present_but_overlaps_future_single_admission",
+      "evidence_state": "origin_main_tree_verified"
+    },
+    {
+      "id": "web.baidu_submitter",
+      "repository": "fap-web",
+      "path": "scripts/seo/push-baidu.mjs",
+      "type": "script",
+      "entrypoint": "pnpm seo:push-baidu",
+      "callers": ["operator_cli"],
+      "input": "URL list and external credential",
+      "output": "live Baidu submission response",
+      "write_permission": "external_search_submission",
+      "model_invocation": false,
+      "scheduler": "none_found",
+      "authority": "must_not_be_frontend_council_authority",
+      "test_evidence": "package.json command existence only",
+      "classification": "bounded_capability",
+      "capability_state": "must_remain_disabled_from_council",
+      "evidence_state": "origin_main_tree_verified"
+    }
+  ],
+  "seo_agent_command_dispositions": [
+    {"repository":"fap-api","command":"seo-agent:article-cms-publish-canary","path":"backend/app/Console/Commands/SeoAgentArticleCmsPublishCanaryCommand.php","type":"command","entrypoint":"operator_cli","callers":["tests","manual bounded run"],"input":"verified article draft revision","output":"published article canary and audit evidence","write_permission":"cms_publish","model_invocation":false,"scheduler":"none","authority":"ArticlePublishService bounded authority","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentArticleCmsPublishCanaryTest.php","classification":"bounded_capability","capability_state":"implemented_not_council_enabled","evidence_state":"current_tree_verified","disposition":"disable","migration_dependency":"formal Phase 1 and Phase 2 policy plus CMS authority contract"},
+    {"repository":"fap-api","command":"seo-agent:article-draft-claim-risk-qa","path":"backend/app/Console/Commands/SeoAgentArticleDraftClaimRiskQaCommand.php","type":"command","entrypoint":"operator_cli","callers":["tests","review chain"],"input":"article draft artifact","output":"claim-risk QA evidence","write_permission":"artifact_only","model_invocation":false,"scheduler":"none","authority":"review_only","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentArticleDraftClaimRiskQaTest.php","classification":"review_mode","capability_state":"implemented","evidence_state":"current_tree_verified","disposition":"tool_adapter","migration_dependency":"read-only Tool Adapter schema"},
+    {"repository":"fap-api","command":"seo-agent:article-draft-preview-runtime-qa","path":"backend/app/Console/Commands/SeoAgentArticleDraftPreviewRuntimeQaCommand.php","type":"command","entrypoint":"operator_cli","callers":["tests","review chain"],"input":"draft preview identity","output":"runtime QA evidence","write_permission":"artifact_only","model_invocation":false,"scheduler":"none","authority":"review_only","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentArticleDraftPreviewRuntimeQaTest.php","classification":"review_mode","capability_state":"implemented","evidence_state":"current_tree_verified","disposition":"tool_adapter","migration_dependency":"read-only Tool Adapter schema"},
+    {"repository":"fap-api","command":"seo-agent:article-post-publish-propagation-dry-run","path":"backend/app/Console/Commands/SeoAgentArticlePostPublishPropagationDryRunCommand.php","type":"command","entrypoint":"operator_cli","callers":["tests","post-publish review"],"input":"published URL evidence","output":"URL Truth and search readiness plan","write_permission":"artifact_only","model_invocation":false,"scheduler":"none","authority":"review_only","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentArticlePostPublishPropagationDryRunTest.php","classification":"review_mode","capability_state":"implemented","evidence_state":"current_tree_verified","disposition":"tool_adapter","migration_dependency":"URL Truth read-only adapter"},
+    {"repository":"fap-api","command":"seo-agent:article-release","path":"backend/app/Console/Commands/SeoAgentArticleReleaseCommand.php","type":"command","entrypoint":"operator_cli","callers":["tests"],"input":"Mode C package","output":"no-write release gate report","write_permission":"none","model_invocation":false,"scheduler":"none","authority":"review_only","test_evidence":"backend/tests/Feature/Console/SeoAgentArticleReleaseCommandTest.php","classification":"review_mode","capability_state":"implemented","evidence_state":"current_tree_verified","disposition":"tool_adapter","migration_dependency":"package review adapter"},
+    {"repository":"fap-api","command":"seo-agent:auto-rollback-guard","path":"backend/app/Console/Commands/SeoAgentAutoRollbackGuardCommand.php","type":"command","entrypoint":"operator_cli","callers":["tests","L5-A chain"],"input":"run and canary evidence","output":"stop-the-line or bounded rollback evidence","write_permission":"bounded_rollback","model_invocation":false,"scheduler":"none","authority":"safety_guard_only","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentAutoRollbackGuardTest.php","classification":"bounded_capability","capability_state":"implemented_not_council_enabled","evidence_state":"current_tree_verified","disposition":"retain","migration_dependency":"preserve fail-closed safety; place behind Phase 2 policy before Council use"},
+    {"repository":"fap-api","command":"seo-agent:cms-draft-package-dry-run","path":"backend/app/Console/Commands/SeoAgentCmsDraftPackageDryRunCommand.php","type":"command","entrypoint":"operator_cli","callers":["SeoAgentRunCommand","tests"],"input":"review verdicts","output":"CMS draft dry-run artifact","write_permission":"artifact_only","model_invocation":false,"scheduler":"none","authority":"proposal_only","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentCmsDraftPackageDryRunTest.php","classification":"deterministic_tool","capability_state":"implemented","evidence_state":"current_tree_verified","disposition":"tool_adapter","migration_dependency":"artifact Tool Adapter schema"},
+    {"repository":"fap-api","command":"seo-agent:cms-draft-payload-repair-canary","path":"backend/app/Console/Commands/SeoAgentCmsDraftPayloadRepairCanaryCommand.php","type":"command","entrypoint":"operator_cli","callers":["tests","manual repair"],"input":"old draft payload and repair evidence","output":"appended draft revision","write_permission":"cms_draft_write","model_invocation":false,"scheduler":"none","authority":"bounded_repair","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentCmsDraftPayloadRepairCanaryTest.php","classification":"bounded_capability","capability_state":"implemented_not_council_enabled","evidence_state":"current_tree_verified","disposition":"disable","migration_dependency":"formal CMS write admission and post-write readback"},
+    {"repository":"fap-api","command":"seo-agent:cms-draft-readback-qa","path":"backend/app/Console/Commands/SeoAgentCmsDraftReadbackQaCommand.php","type":"command","entrypoint":"operator_cli","callers":["tests","draft write chain"],"input":"dry-run package and write evidence","output":"readback QA evidence","write_permission":"artifact_only","model_invocation":false,"scheduler":"none","authority":"review_only","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentCmsDraftReadbackQaTest.php","classification":"review_mode","capability_state":"implemented","evidence_state":"current_tree_verified","disposition":"tool_adapter","migration_dependency":"post-action readback adapter"},
+    {"repository":"fap-api","command":"seo-agent:cms-draft-write","path":"backend/app/Console/Commands/SeoAgentCmsDraftWriteCommand.php","type":"command","entrypoint":"operator_cli","callers":["tests","controlled manual chain"],"input":"approved draft package","output":"draft revision or dry-run","write_permission":"cms_draft_write_when_explicit","model_invocation":false,"scheduler":"none","authority":"bounded_writer","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentControlledCmsDraftWriterTest.php","classification":"bounded_capability","capability_state":"implemented_not_council_enabled","evidence_state":"current_tree_verified","disposition":"disable","migration_dependency":"formal Phase 1 admission and Phase 2 acceptance"},
+    {"repository":"fap-api","command":"seo-agent:cms-faq-gap-scan","path":"backend/app/Console/Commands/SeoAgentCmsFaqGapScanCommand.php","type":"command","entrypoint":"operator_cli","callers":["SeoAgentRunCommand","tests"],"input":"CMS read model","output":"FAQ gap artifact","write_permission":"artifact_only","model_invocation":false,"scheduler":"none","authority":"read_only","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentCmsFaqGapReadonlyScannerTest.php","classification":"deterministic_tool","capability_state":"implemented","evidence_state":"current_tree_verified","disposition":"tool_adapter","migration_dependency":"read-only Tool Adapter schema"},
+    {"repository":"fap-api","command":"seo-agent:cms-publish-auto-canary","path":"backend/app/Console/Commands/SeoAgentCmsPublishAutoCanaryCommand.php","type":"command","entrypoint":"operator_cli","callers":["tests","priority scheduler chain"],"input":"auto-approved low-risk proposals","output":"up to three published ContentPage canaries","write_permission":"cms_publish","model_invocation":false,"scheduler":"not_laravel_scheduled","authority":"AutoApprovalPolicy guarded writer","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentCmsPublishAutoCanaryTest.php","classification":"bounded_capability","capability_state":"implemented_not_council_enabled","evidence_state":"current_tree_verified","disposition":"disable","migration_dependency":"replace AutoApprovalPolicy authority with frozen two-phase policy"},
+    {"repository":"fap-api","command":"seo-agent:cms-publish-canary","path":"backend/app/Console/Commands/SeoAgentCmsPublishCanaryCommand.php","type":"command","entrypoint":"operator_cli","callers":["tests","controlled manual chain"],"input":"low-risk ContentPage draft","output":"one published canary","write_permission":"cms_publish","model_invocation":false,"scheduler":"none","authority":"bounded_writer","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentCmsPublishCanaryTest.php","classification":"bounded_capability","capability_state":"implemented_not_council_enabled","evidence_state":"current_tree_verified","disposition":"disable","migration_dependency":"formal CMS publish authority and two-phase policy"},
+    {"repository":"fap-api","command":"seo-agent:cms-tdk-gap-scan","path":"backend/app/Console/Commands/SeoAgentCmsTdkGapScanCommand.php","type":"command","entrypoint":"operator_cli","callers":["SeoAgentRunCommand","tests"],"input":"CMS read model","output":"TDK gap and review artifacts","write_permission":"artifact_only","model_invocation":false,"scheduler":"none","authority":"read_only","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentCmsTdkGapReadonlyScannerTest.php","classification":"deterministic_tool","capability_state":"implemented","evidence_state":"current_tree_verified","disposition":"tool_adapter","migration_dependency":"read-only Tool Adapter schema"},
+    {"repository":"fap-api","command":"seo-agent:codex-review-runner","path":"backend/app/Console/Commands/SeoAgentCodexReviewRunnerCommand.php","type":"command","entrypoint":"operator_cli","callers":["SeoAgentRunCommand","tests"],"input":"handoff artifacts","output":"deterministic verdict JSON","write_permission":"artifact_only","model_invocation":false,"scheduler":"none","authority":"deterministic_review_only","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentCodexReviewRunnerTest.php","classification":"review_mode","capability_state":"implemented_without_model","evidence_state":"current_tree_verified","disposition":"tool_adapter","migration_dependency":"rename semantics so Codex does not imply runtime model authority"},
+    {"repository":"fap-api","command":"seo-agent:compile-mode-c-package","path":"backend/app/Console/Commands/SeoAgentCompileModeCPackageCommand.php","type":"command","entrypoint":"operator_cli","callers":["tests","content package flow"],"input":"daily Mode C package","output":"deterministic importer-ready package","write_permission":"artifact_only","model_invocation":false,"scheduler":"none","authority":"compiler_only","test_evidence":"current command and compiler contract tests","classification":"deterministic_tool","capability_state":"implemented","evidence_state":"current_tree_verified","disposition":"tool_adapter","migration_dependency":"package compiler adapter"},
+    {"repository":"fap-api","command":"seo-agent:gsc-batch-draft-qa-support","path":"backend/app/Console/Commands/SeoAgentGscBatchDraftQaSupportCommand.php","type":"command","entrypoint":"operator_cli","callers":["tests","GSC cohort flow"],"input":"GSC cohort draft evidence","output":"batch QA summary","write_permission":"artifact_only","model_invocation":false,"scheduler":"none","authority":"review_only","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentGscBatchDraftQaSupportTest.php","classification":"review_mode","capability_state":"implemented","evidence_state":"current_tree_verified","disposition":"tool_adapter","migration_dependency":"GSC read-only adapter"},
+    {"repository":"fap-api","command":"seo-agent:gsc-cohort-handoff","path":"backend/app/Console/Commands/SeoAgentGscCohortHandoffCommand.php","type":"command","entrypoint":"operator_cli","callers":["tests","GSC cohort flow"],"input":"exported GSC cohort artifact","output":"review and CMS draft dry-run artifacts","write_permission":"artifact_only","model_invocation":false,"scheduler":"none","authority":"proposal_only","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentGscCohortHandoffTest.php","classification":"deterministic_tool","capability_state":"implemented","evidence_state":"current_tree_verified","disposition":"tool_adapter","migration_dependency":"GSC handoff adapter"},
+    {"repository":"fap-api","command":"seo-agent:gsc-draft-publish-gate-readiness","path":"backend/app/Console/Commands/SeoAgentGscDraftPublishGateReadinessCommand.php","type":"command","entrypoint":"operator_cli","callers":["tests","GSC cohort flow"],"input":"CMS draft readback evidence","output":"publish readiness evidence","write_permission":"artifact_only","model_invocation":false,"scheduler":"none","authority":"review_only","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentGscDraftPublishGateReadinessTest.php","classification":"review_mode","capability_state":"implemented","evidence_state":"current_tree_verified","disposition":"tool_adapter","migration_dependency":"Phase 1 evidence adapter"},
+    {"repository":"fap-api","command":"seo-agent:gsc-opportunity-auto-draft","path":"backend/app/Console/Commands/SeoAgentGscOpportunityAutoDraftCommand.php","type":"command","entrypoint":"operator_cli","callers":["tests","GSC cohort flow"],"input":"measurement-eligible GSC opportunity rows","output":"review and CMS dry-run artifacts","write_permission":"artifact_only","model_invocation":false,"scheduler":"none","authority":"proposal_only","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentGscOpportunityAutoDraftTest.php","classification":"deterministic_tool","capability_state":"implemented","evidence_state":"current_tree_verified","disposition":"tool_adapter","migration_dependency":"measurement-aware proposal adapter"},
+    {"repository":"fap-api","command":"seo-agent:gsc-post-publish-feedback","path":"backend/app/Console/Commands/SeoAgentGscPostPublishFeedbackCommand.php","type":"command","entrypoint":"operator_cli","callers":["tests","post-publish review"],"input":"GSC read model for published canary","output":"feedback classification","write_permission":"artifact_only","model_invocation":false,"scheduler":"none","authority":"read_only","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentGscPostPublishFeedbackTest.php","classification":"review_mode","capability_state":"implemented","evidence_state":"current_tree_verified","disposition":"tool_adapter","migration_dependency":"Phase 2 measurement readback adapter"},
+    {"repository":"fap-api","command":"seo-agent:gsc-remaining-candidate-batch-plan","path":"backend/app/Console/Commands/SeoAgentGscRemainingCandidateBatchPlanCommand.php","type":"command","entrypoint":"operator_cli","callers":["tests","GSC cohort flow"],"input":"remaining GSC cohort","output":"bounded next-batch recommendation","write_permission":"artifact_only","model_invocation":false,"scheduler":"none","authority":"proposal_only","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentGscRemainingCandidateBatchPlanTest.php","classification":"review_mode","capability_state":"implemented","evidence_state":"current_tree_verified","disposition":"tool_adapter","migration_dependency":"decision-card selector adapter"},
+    {"repository":"fap-api","command":"seo-agent:l5a-candidate-review","path":"backend/app/Console/Commands/SeoAgentL5aCandidateReviewCommand.php","type":"command","entrypoint":"operator_cli_autodiscovery","callers":["tests","L5-A chain"],"input":"L5-A preflight artifacts","output":"safest candidate recommendation","write_permission":"artifact_only","model_invocation":false,"scheduler":"none","authority":"review_only","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentL5aCandidateReviewTest.php","classification":"review_mode","capability_state":"implemented","evidence_state":"current_tree_verified","disposition":"tool_adapter","migration_dependency":"decision-card evidence adapter; L5 activation remains disabled"},
+    {"repository":"fap-api","command":"seo-agent:l5a-cms-draft-write-canary","path":"backend/app/Console/Commands/SeoAgentL5aCmsDraftWriteCanaryCommand.php","type":"command","entrypoint":"operator_cli_autodiscovery","callers":["tests","L5-A chain"],"input":"reviewed L5-A candidate","output":"CMS draft write canary","write_permission":"cms_draft_write","model_invocation":false,"scheduler":"none","authority":"bounded_writer","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentL5aCmsDraftWriteCanaryTest.php","classification":"bounded_capability","capability_state":"implemented_not_council_enabled","evidence_state":"current_tree_verified","disposition":"disable","migration_dependency":"L3/L4 remain disabled; formal write policy required"},
+    {"repository":"fap-api","command":"seo-agent:l5a-contentpage-publish-canary","path":"backend/app/Console/Commands/SeoAgentL5aContentPagePublishCanaryCommand.php","type":"command","entrypoint":"operator_cli","callers":["tests","priority scheduler chain"],"input":"verified draft write evidence","output":"one published ContentPage canary","write_permission":"cms_publish","model_invocation":false,"scheduler":"not_laravel_scheduled","authority":"bounded_writer","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentL5aContentPagePublishCanaryTest.php","classification":"bounded_capability","capability_state":"implemented_not_council_enabled","evidence_state":"current_tree_verified","disposition":"disable","migration_dependency":"L3/L4 remain disabled; formal publish policy required"},
+    {"repository":"fap-api","command":"seo-agent:l5a-indexnow-submit-canary","path":"backend/app/Console/Commands/SeoAgentL5aIndexnowSubmitCanaryCommand.php","type":"command","entrypoint":"operator_cli","callers":["tests","priority scheduler chain"],"input":"published URL Truth canary","output":"live IndexNow submission evidence","write_permission":"external_search_submission","model_invocation":false,"scheduler":"not_laravel_scheduled","authority":"bounded_search_writer","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentL5aIndexnowSubmitCanaryTest.php","classification":"bounded_capability","capability_state":"implemented_not_council_enabled","evidence_state":"current_tree_verified","disposition":"disable","migration_dependency":"search submission authority and Phase 2 readback"},
+    {"repository":"fap-api","command":"seo-agent:opportunity-aggregate","path":"backend/app/Console/Commands/SeoAgentOpportunityAggregateCommand.php","type":"command","entrypoint":"operator_cli","callers":["SeoAgentRunCommand","tests"],"input":"sanitized opportunity source artifacts","output":"ranked read-only pool","write_permission":"artifact_only","model_invocation":false,"scheduler":"none","authority":"read_only","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentOpportunityAggregatorTest.php","classification":"deterministic_tool","capability_state":"implemented_legacy_to_platform09","evidence_state":"current_tree_verified","disposition":"tool_adapter","migration_dependency":"platform 09 decision read model and scorer"},
+    {"repository":"fap-api","command":"seo-agent:post-publish-indexnow-auto","path":"backend/app/Console/Commands/SeoAgentPostPublishIndexnowAutoCommand.php","type":"command","entrypoint":"operator_cli","callers":["tests","post-publish chain"],"input":"published low-risk ContentPage canary","output":"live IndexNow submission evidence","write_permission":"external_search_submission","model_invocation":false,"scheduler":"none","authority":"AutoApprovalPolicy guarded search writer","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentPostPublishIndexnowAutoTest.php","classification":"bounded_capability","capability_state":"implemented_not_council_enabled","evidence_state":"current_tree_verified","disposition":"disable","migration_dependency":"formal search authority and two-phase policy"},
+    {"repository":"fap-api","command":"seo-agent:post-publish-search-submit","path":"backend/app/Console/Commands/SeoAgentPostPublishSearchSubmitCommand.php","type":"command","entrypoint":"operator_cli","callers":["tests","post-publish chain"],"input":"publish canary evidence","output":"Search Channel queue evidence","write_permission":"search_queue_write_no_live_submission","model_invocation":false,"scheduler":"none","authority":"bounded_queue_writer","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentPostPublishSearchSubmitTest.php","classification":"bounded_capability","capability_state":"implemented_not_council_enabled","evidence_state":"current_tree_verified","disposition":"disable","migration_dependency":"single Admission envelope and search authority"},
+    {"repository":"fap-api","command":"seo-agent:priority-queue-scheduler","path":"backend/app/Console/Commands/SeoAgentPriorityQueueSchedulerCommand.php","type":"command","entrypoint":"external_cron_contract","callers":["tests","external operator only"],"input":"priority queue and L5-A artifacts","output":"draft, publish and IndexNow chain","write_permission":"cms_and_external_search","model_invocation":false,"scheduler":"external_only_not_laravel_registered","authority":"duplicate_orchestrator_with_write_semantics","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentPriorityQueueSchedulerTest.php","classification":"retire_candidate","capability_state":"implemented_not_scheduled","evidence_state":"current_tree_verified","disposition":"disable","migration_dependency":"merge into future single Council after platform 09 and policy freeze"},
+    {"repository":"fap-api","command":"seo-agent:replace-article-covers","path":"backend/app/Console/Commands/SeoAgentReplaceArticleCovers.php","type":"command","entrypoint":"operator_cli_autodiscovery","callers":["tests","manual media operation"],"input":"bilingual article cover batch","output":"Media Library replacement receipt","write_permission":"cms_media_write","model_invocation":false,"scheduler":"none","authority":"bounded_media_writer","test_evidence":"backend/tests/Feature/Console/SeoAgentReplaceArticleCoversCommandTest.php","classification":"bounded_capability","capability_state":"implemented_not_council_enabled","evidence_state":"current_tree_verified","disposition":"disable","migration_dependency":"CMS/media authority and two-phase policy"},
+    {"repository":"fap-api","command":"seo-agent:run","path":"backend/app/Console/Commands/SeoAgentRunCommand.php","type":"command","entrypoint":"operator_cli","callers":["SeoAgentWeeklyReadonlyRunnerCommand","tests"],"input":"scanner configuration and current read models","output":"control packet, deterministic review, dry-run and evidence","write_permission":"artifact_only","model_invocation":false,"scheduler":"none","authority":"duplicate_readonly_orchestrator","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentRunOrchestratorTest.php","classification":"retire_candidate","capability_state":"implemented_readonly_chain","evidence_state":"current_tree_verified","disposition":"merge","migration_dependency":"single Council Admission plus adapters"},
+    {"repository":"fap-api","command":"seo-agent:runtime-seo-qa-scan","path":"backend/app/Console/Commands/SeoAgentRuntimeSeoQaScanCommand.php","type":"command","entrypoint":"operator_cli","callers":["SeoAgentRunCommand","tests"],"input":"CMS indexable public paths","output":"runtime SEO QA artifact","write_permission":"artifact_only","model_invocation":false,"scheduler":"none","authority":"read_only","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentRuntimeSeoQaReadonlyScannerTest.php","classification":"deterministic_tool","capability_state":"implemented","evidence_state":"current_tree_verified","disposition":"tool_adapter","migration_dependency":"read-only runtime QA adapter"},
+    {"repository":"fap-api","command":"seo-agent:weekly-draft-write-auto","path":"backend/app/Console/Commands/SeoAgentWeeklyDraftWriteAutoCommand.php","type":"command","entrypoint":"operator_cli_or_external_cron_contract","callers":["tests","external operator only"],"input":"weekly discovery and auto-approval evidence","output":"bounded CMS draft revisions","write_permission":"cms_draft_write","model_invocation":false,"scheduler":"not_laravel_registered","authority":"AutoApprovalPolicy guarded duplicate orchestrator","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentWeeklyDraftWriteAutoTest.php","classification":"retire_candidate","capability_state":"implemented_not_scheduled","evidence_state":"current_tree_verified","disposition":"disable","migration_dependency":"platform 09 selector and formal two-phase policy"},
+    {"repository":"fap-api","command":"seo-agent:weekly-readonly-runner","path":"backend/app/Console/Commands/SeoAgentWeeklyReadonlyRunnerCommand.php","type":"command","entrypoint":"operator_cli_or_external_cron_contract","callers":["tests","external operator only"],"input":"weekly run options","output":"standard evidence artifact","write_permission":"artifact_only","model_invocation":false,"scheduler":"not_laravel_registered","authority":"wrapper_over_seo-agent:run","test_evidence":"backend/tests/Feature/SeoIntel/SeoAgentWeeklyReadonlyRunnerTest.php","classification":"retire_candidate","capability_state":"implemented_readonly_wrapper","evidence_state":"current_tree_verified","disposition":"merge","migration_dependency":"single Council Admission entrypoint"}
+  ],
+  "conflicts": [
+    {
+      "type": "duplicate_orchestrator",
+      "evidence": ["seo-agent:run", "seo-agent:weekly-readonly-runner", "seo-agent:priority-queue-scheduler", "fap-web Skill and package runner surfaces"],
+      "decision": "preserve current state; future entrances must converge on one Admission envelope, with deterministic work delegated to adapters"
+    },
+    {
+      "type": "duplicate_policy",
+      "evidence": ["backend/app/Services/SeoAgent/AutoApprovalPolicy.php", "backend/app/Services/SeoIntel/PageFamily/PageFamilyPolicyGuard.php", "fap-web Skill guardrails", "docs/seo/agent historical approval contracts"],
+      "decision": "none becomes Council authority before #6-#10 contracts stabilize and the two-phase policy is frozen"
+    },
+    {
+      "type": "authority_conflict",
+      "evidence": ["fap-web SEO/CMS Skills", "fap-web code PR writer", "fap-web push-baidu"],
+      "decision": "frontend Agent, Skill and scripts may provide implementation or evidence only; they cannot authorize CMS/content/URL Truth/search submission or execution"
+    }
+  ],
+  "draft_council_contract": {
+    "status": "draft_unfrozen",
+    "thin_codex_skill": {
+      "allowed": ["intent_routing", "evidence_packaging", "admission_request"],
+      "forbidden": ["domain_logic", "write_permission", "policy_override", "direct_execution"]
+    },
+    "admission_envelope": {
+      "entrances": ["cli", "ops_ui", "scheduler", "api", "codex_skill"],
+      "required_fields": ["request_id", "actor", "intent", "scope", "authority_claim", "evidence_refs", "requested_actions", "cost_bound", "negative_set", "idempotency_key"]
+    },
+    "phase_1_pre_execution_policy": ["actor", "scope", "authority", "evidence", "permissions", "cost", "negative_set", "allowed_actions"],
+    "phase_2_post_execution_policy": ["result_hash", "side_effects", "readback", "canary", "circuit_breaker", "rollback", "accept_or_reject"],
+    "activation": {
+      "l3_enabled": false,
+      "l4_enabled": false,
+      "runtime_model_invocation_enabled": false,
+      "codex_skill_enabled": false,
+      "role_prompt_policy_frozen": false
+    }
+  },
+  "migration_plan": [
+    {"phase":0,"state":"current","action":"retain existing surfaces without activation or authority changes","exit_criteria":"this inventory remains reproducible at its pinned SHAs"},
+    {"phase":1,"state":"future","action":"wrap deterministic read and review commands with read-only Tool Adapters","exit_criteria":"adapter input/output schemas and negative sets accepted"},
+    {"phase":2,"state":"future","action":"freeze one Admission envelope and two-phase Policy after #6-#10 production contracts stabilize","exit_criteria":"authority, evidence, failure and rollback contracts accepted"},
+    {"phase":3,"state":"future","action":"merge duplicate runners and disable direct dangerous entrances","exit_criteria":"all supported entrances route through the same Admission service"},
+    {"phase":4,"state":"future","action":"activate only explicitly authorized bounded capabilities","exit_criteria":"canary and readback prove acceptability; L3/L4 require separate authorization"},
+    {"phase":5,"state":"future","action":"retire superseded wrappers only after replacement and absence of callers are both proven","exit_criteria":"reference scan, telemetry and rollback window complete"}
+  ],
+  "boundaries": {
+    "docs_contracts_only": true,
+    "read_only_gsc": true,
+    "search_submission_allowed": false,
+    "cms_write_allowed": false,
+    "orchestrator_created": false,
+    "database_or_migration_created": false,
+    "scheduler_or_queue_activated": false,
+    "model_invocation_performed": false,
+    "skill_activated": false,
+    "commands_retired": false,
+    "seo_operations_placeholder_replaced": false
+  },
+  "acceptance_contract": [
+    "both repository SHAs and evidence cutoff are present",
+    "all current SeoAgent command paths are listed exactly once and use allowed classification and disposition enums",
+    "every inventory item records path, entrypoint, callers, input, output, write permission, model invocation, scheduler, authority, test evidence, capability state and evidence state",
+    "duplicate orchestrator, duplicate policy and authority conflicts are explicit",
+    "future Council, Skill, Admission and two-phase Policy remain draft_unfrozen and disabled",
+    "no runtime, database, workflow, scheduler, queue, CMS or search state is changed"
+  ]
+}
