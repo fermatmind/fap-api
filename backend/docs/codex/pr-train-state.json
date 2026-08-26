@@ -1,17 +1,47 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-26T09:02:00Z",
+  "updated_at": "2026-08-26T09:14:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
-    "SEO-PLATFORM-07-C": {
+    "SEO-PLATFORM-07-D": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "pr_open",
+      "branch": "codex/seo-platform-07-d-runtime-clusters",
+      "commit_sha": "1daafdab6814328ad314f4d7b5163dfe90782751",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3794",
+      "checks": {
+        "dependency": {"status": "passed", "details": "SEO-PLATFORM-07-C merged as 877303511feed9b8738ea39e230cc338a28d9da9; exact-SHA CI receipt 32951244953 passed."},
+        "local": [
+          {"command": "php -l and vendor/bin/pint --test scoped implementation and test", "status": "passed"},
+          {"command": "php artisan test SEO-PLATFORM-07-D plus existing detector queue materializer regression", "status": "passed_with_local_env_warning", "details": "14 tests and 72 assertions passed; only isolated-worktree .env warnings were emitted."}
+        ],
+        "github": []
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": false,
+      "history": [
+        {"at": "2026-08-26T09:14:00Z", "status": "local_checks_passed", "summary": "Validated the exact 07-D runtime cluster and recovery materializer against the existing queue contract. No parallel queue, scheduler, database write, deployment, publication or production operation was executed."},
+        {"at": "2026-08-26T09:16:00Z", "status": "pr_open", "summary": "Opened PR #3794 for the validated 07-D scope at implementation commit 1daafdab6814328ad314f4d7b5163dfe90782751; exact-SHA CI runs after merge."}
+      ]
+    },
+    "SEO-PLATFORM-07-C": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "merged",
       "branch": "codex/seo-platform-07-c-revision-adapters",
-      "commit_sha": "aafd84591041c1952c32efc21c89d1c83912e0d6",
+      "commit_sha": "877303511feed9b8738ea39e230cc338a28d9da9",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3793",
       "checks": {
         "dependency": {
@@ -29,13 +59,15 @@
             "details": "4 tests and 23 assertions passed; only the isolated-worktree missing ignored .env warning was emitted."
           }
         ],
-        "github": []
+        "github": [
+          {"name": "exact-SHA CI", "status": "passed", "details": "Run 32951244953 passed classifier, hygiene, supply-chain, content-pack, verify-bigfive, verify-mbti-v2, verify-mbti-legacy and exact-SHA receipt."}
+        ]
       },
       "failure_reason": null,
       "resume_policy": "continuous_goal",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-08-26T09:06:36Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "database_mutation": false,
       "cms_mutation": false,
@@ -51,6 +83,11 @@
           "at": "2026-08-26T09:05:00Z",
           "status": "pr_open",
           "summary": "Opened PR #3793 for the exact 07-C scope at validated implementation commit aafd84591041c1952c32efc21c89d1c83912e0d6. GitHub has no PR check requirement; exact-SHA CI runs after merge under the current repository control plane."
+        },
+        {
+          "at": "2026-08-26T09:13:00Z",
+          "status": "merged",
+          "summary": "PR #3793 merged as 877303511feed9b8738ea39e230cc338a28d9da9. Exact-SHA CI passed, and remote branch and isolated worktree cleanup completed."
         }
       ]
     },
