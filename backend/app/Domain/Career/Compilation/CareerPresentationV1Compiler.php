@@ -56,7 +56,7 @@ final class CareerPresentationV1Compiler
         }
 
         $baseline = $this->package->load($backendRoot);
-        $this->registry = $this->sourceRegistry->load($backendRoot, $baseline['manifest']);
+        $this->registry = $this->sourceRegistry->load($backendRoot, $baseline['manifest'], $baseline['rows']);
         if ($sourceBefore['slugs'] !== $baseline['slugs']) {
             throw new CareerTenBlockCompileFailure('PRESENTATION_V1_SOURCE_SLUG_SET_MISMATCH');
         }
@@ -111,7 +111,7 @@ final class CareerPresentationV1Compiler
             $candidateRows,
         ))."\n";
         $manifest = $baseline['manifest'];
-        $manifest['presentation_v1'] = [
+        $presentationLineage = [
             'compiler_version' => self::VERSION,
             'contract_version' => CareerPresentationV1Contract::CONTRACT_VERSION,
             'design_authority' => [
@@ -120,9 +120,14 @@ final class CareerPresentationV1Compiler
             ],
             'source_aggregate_sha256' => $sourceBefore['aggregate_sha256'],
             'field_coverage_sha256' => CareerCurrentAuthorityPackage::hashValue($coverage),
-            'source_registry' => $baseline['manifest']['presentation_v1']['source_registry'],
             'zh_presentation_count' => count($candidateRows),
         ];
+        if (($baseline['summary']['source_format'] ?? null) === 'sharded') {
+            $presentationLineage['source_bindings_sha256'] = CareerCurrentAuthorityPackage::hashValue($this->registry['document']);
+        } else {
+            $presentationLineage['source_registry'] = $baseline['manifest']['presentation_v1']['source_registry'];
+        }
+        $manifest['presentation_v1'] = $presentationLineage;
 
         return [
             'assets_bytes' => $assetsBytes,
@@ -591,7 +596,7 @@ final class CareerPresentationV1Compiler
     {
         if ($this->registry === null) {
             $authority = $this->package->load(base_path());
-            $this->registry = $this->sourceRegistry->load(base_path(), $authority['manifest']);
+            $this->registry = $this->sourceRegistry->load(base_path(), $authority['manifest'], $authority['rows']);
         }
 
         return $this->registry;

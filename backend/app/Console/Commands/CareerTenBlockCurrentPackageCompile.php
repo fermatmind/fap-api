@@ -9,6 +9,7 @@ use App\Domain\Career\Compilation\CareerTenBlockCompileFailure;
 use App\Domain\Career\Compilation\CareerTenBlockCurrentPackageCompiler;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure;
+use App\Domain\Career\Display\CareerShardedCurrentAuthorityPackage;
 use Illuminate\Console\Command;
 use Throwable;
 
@@ -58,35 +59,50 @@ final class CareerTenBlockCurrentPackageCompile extends Command
                 $result = $compiler->compile($sourceRoot, $lookup, $evidenceRoot, base_path());
             }
             $this->write($outputRoot.'/assets.jsonl', $result['assets_bytes']);
-            $scratch = $outputRoot.'/.package-backend-'.bin2hex(random_bytes(8));
-            $packageRoot = $scratch.'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH;
-            if (! mkdir($packageRoot, 0700, true)) {
-                throw new CareerTenBlockCompileFailure('TEN_BLOCK_OUTPUT_WRITE_FAILED');
+            $current = $package->load(base_path());
+            $sharded = ($current['manifest']['contract_version'] ?? null) === CareerShardedCurrentAuthorityPackage::CONTRACT_VERSION;
+            if ($sharded) {
+                if ((bool) $this->option('write-current')) {
+                    throw new CareerTenBlockCompileFailure('TEN_BLOCK_SHARDED_CURRENT_WRITE_FORBIDDEN');
+                }
+                $manifestBytes = (string) file_get_contents(
+                    base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH.'/manifest.json'),
+                );
+                $validated = $current;
+            } else {
+                $scratch = $outputRoot.'/.package-backend-'.bin2hex(random_bytes(8));
+                $packageRoot = $scratch.'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH;
+                if (! mkdir($packageRoot, 0700, true)) {
+                    throw new CareerTenBlockCompileFailure('TEN_BLOCK_OUTPUT_WRITE_FAILED');
+                }
+                $this->write($packageRoot.'/assets.jsonl', $result['assets_bytes']);
+                foreach (['presentation-source-registry.json', 'structured-component-source-registry.json'] as $registry) {
+                    $source = base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH.'/'.$registry);
+                    if (! is_file($source) || is_link($source)) {
+                        throw new CareerTenBlockCompileFailure('TEN_BLOCK_LEGACY_SOURCE_REGISTRY_INVALID');
+                    }
+                    $this->write($packageRoot.'/'.$registry, (string) file_get_contents($source));
+                }
+                $this->write(
+                    $packageRoot.'/manifest.json',
+                    CareerCurrentAuthorityPackage::encodePrettyCanonical($result['manifest_template']),
+                );
+                $expected = $package->expectedManifest($scratch);
+                $manifestBytes = CareerCurrentAuthorityPackage::encodePrettyCanonical($expected['manifest']);
+                $this->write($packageRoot.'/manifest.json', $manifestBytes);
+                $validated = $package->load($scratch);
             }
-            $this->write($packageRoot.'/assets.jsonl', $result['assets_bytes']);
-            $registrySource = base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH.'/presentation-source-registry.json');
-            if (! is_file($registrySource) || is_link($registrySource)) {
-                throw new CareerTenBlockCompileFailure('PRESENTATION_V1_SOURCE_REGISTRY_MISSING');
-            }
-            $this->write($packageRoot.'/presentation-source-registry.json', (string) file_get_contents($registrySource));
-            $structuredRegistrySource = base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH.'/structured-component-source-registry.json');
-            if (! is_file($structuredRegistrySource) || is_link($structuredRegistrySource)) {
-                throw new CareerTenBlockCompileFailure('TEN_BLOCK_STRUCTURED_COMPONENT_SOURCE_REGISTRY_INVALID');
-            }
-            $this->write($packageRoot.'/structured-component-source-registry.json', (string) file_get_contents($structuredRegistrySource));
-            $this->write(
-                $packageRoot.'/manifest.json',
-                CareerCurrentAuthorityPackage::encodePrettyCanonical($result['manifest_template']),
-            );
-            $expected = $package->expectedManifest($scratch);
-            $manifestBytes = CareerCurrentAuthorityPackage::encodePrettyCanonical($expected['manifest']);
-            $this->write($packageRoot.'/manifest.json', $manifestBytes);
-            $validated = $package->load($scratch);
             $this->write($outputRoot.'/manifest.json', $manifestBytes);
-            $result['receipt']['assets_sha256'] = $validated['summary']['assets_sha256'];
+            $result['receipt']['assets_sha256'] = hash('sha256', $result['assets_bytes']);
             $result['receipt']['manifest_sha256'] = $validated['summary']['manifest_sha256'];
-            $result['receipt']['full_asset_set_sha256'] = $validated['summary']['full_asset_set_sha256'];
-            $result['receipt']['slug_set_sha256'] = $validated['summary']['slug_set_sha256'];
+            if ($sharded) {
+                $projection = $this->projectionHashes($result['assets_bytes']);
+                $result['receipt']['full_asset_set_sha256'] = $projection['full_asset_set_sha256'];
+                $result['receipt']['slug_set_sha256'] = $projection['slug_set_sha256'];
+            } else {
+                $result['receipt']['full_asset_set_sha256'] = $validated['summary']['full_asset_set_sha256'];
+                $result['receipt']['slug_set_sha256'] = $validated['summary']['slug_set_sha256'];
+            }
             $this->writeJson($outputRoot.'/full-compile-receipt.json', $result['receipt']);
             if (isset($result['field_coverage'])) {
                 $this->writeJson($outputRoot.'/field-coverage-report.json', $result['field_coverage']);
@@ -145,6 +161,26 @@ final class CareerTenBlockCurrentPackageCompile extends Command
         }
 
         return $resolved;
+    }
+
+    /** @return array{full_asset_set_sha256:string,slug_set_sha256:string} */
+    private function projectionHashes(string $assetsBytes): array
+    {
+        $rows = [];
+        $slugs = [];
+        foreach (explode("\n", rtrim($assetsBytes, "\n")) as $line) {
+            $row = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
+            if (! is_array($row) || ! is_string($row['canonical_slug'] ?? null)) {
+                throw new CareerTenBlockCompileFailure('TEN_BLOCK_OUTPUT_PROJECTION_INVALID');
+            }
+            $rows[] = $row;
+            $slugs[] = $row['canonical_slug'];
+        }
+
+        return [
+            'full_asset_set_sha256' => CareerCurrentAuthorityPackage::hashValue($rows),
+            'slug_set_sha256' => CareerCurrentAuthorityPackage::hashValue($slugs),
+        ];
     }
 
     private function assertCurrentWriteAllowed(): void

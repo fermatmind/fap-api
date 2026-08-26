@@ -11,6 +11,35 @@ use Tests\TestCase;
 
 final class CareerTenBlockCurrentPackageCompilerTest extends TestCase
 {
+    public function test_sharded_current_dry_compile_does_not_require_retired_top_level_registries(): void
+    {
+        $output = sys_get_temp_dir().'/career-ten-block-sharded-'.bin2hex(random_bytes(8));
+        self::assertTrue(mkdir($output, 0700));
+        try {
+            self::assertFileDoesNotExist(base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH.'/presentation-source-registry.json'));
+            self::assertFileDoesNotExist(base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH.'/structured-component-source-registry.json'));
+
+            $this->artisan('career:ten-block-current-package-compile', [
+                '--output-root' => $output,
+                '--accountants-boundary-notice' => true,
+            ])->assertSuccessful();
+
+            self::assertFileExists($output.'/assets.jsonl');
+            self::assertFileExists($output.'/manifest.json');
+            self::assertFileDoesNotExist($output.'/presentation-source-registry.json');
+            self::assertFileDoesNotExist($output.'/structured-component-source-registry.json');
+            self::assertSame(
+                'career.sharded_current.manifest.v1',
+                json_decode((string) file_get_contents($output.'/manifest.json'), true, 512, JSON_THROW_ON_ERROR)['contract_version'],
+            );
+        } finally {
+            foreach (glob($output.'/*') ?: [] as $path) {
+                unlink($path);
+            }
+            rmdir($output);
+        }
+    }
+
     public function test_current_rows_satisfy_recursive_public_negative_contract(): void
     {
         $package = app(CareerCurrentAuthorityPackage::class)->load(base_path());

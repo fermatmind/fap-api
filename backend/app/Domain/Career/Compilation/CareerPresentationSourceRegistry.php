@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Career\Compilation;
 
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
+use App\Domain\Career\Display\CareerShardedCurrentAuthorityPackage;
 use JsonException;
 
 final class CareerPresentationSourceRegistry
@@ -14,8 +15,12 @@ final class CareerPresentationSourceRegistry
     public const RELATIVE_PATH = 'content_assets/career/current/presentation-source-registry.json';
 
     /** @return array<string,mixed> */
-    public function load(string $backendRoot, array $manifest): array
+    public function load(string $backendRoot, array $manifest, ?array $rows = null): array
     {
+        if (($manifest['contract_version'] ?? null) === CareerShardedCurrentAuthorityPackage::CONTRACT_VERSION) {
+            return $this->fromShardedRows($rows);
+        }
+
         $path = rtrim($backendRoot, '/').'/'.self::RELATIVE_PATH;
         if (! is_file($path) || is_link($path)) {
             throw new CareerTenBlockCompileFailure('PRESENTATION_V1_SOURCE_REGISTRY_MISSING');
@@ -100,6 +105,103 @@ final class CareerPresentationSourceRegistry
         }
 
         return ['document' => $registry, 'onet' => $onet, 'bls' => $bls];
+    }
+
+    /**
+     * @param  array<string,array<string,mixed>>|null  $rows
+     * @return array<string,mixed>
+     */
+    private function fromShardedRows(?array $rows): array
+    {
+        if (! is_array($rows) || count($rows) !== CareerCurrentAuthorityPackage::EXPECTED_CAREERS) {
+            throw new CareerTenBlockCompileFailure('PRESENTATION_V1_SHARDED_SOURCE_BINDINGS_INVALID');
+        }
+
+        $onet = [];
+        $bls = [];
+        foreach ($rows as $slug => $row) {
+            $presentation = data_get($row, 'metadata_json.presentation_v1.zh.hero');
+            $references = data_get($row, 'sources_json.references');
+            if ($references === null) {
+                $references = [];
+            }
+            if (! is_array($presentation) || ! is_array($references) || ! array_is_list($references)) {
+                throw new CareerTenBlockCompileFailure('PRESENTATION_V1_SHARDED_SOURCE_BINDINGS_INVALID');
+            }
+
+            $children = [];
+            foreach ($references as $reference) {
+                if (! is_array($reference)
+                    || preg_match('/\Ahttps:\/\/www\.onetonline\.org\/link\/details\/([0-9]{2}-[0-9]{4}\.[0-9]{2})\z/', (string) ($reference['url'] ?? ''), $matches) !== 1
+                    || preg_match('/\AO\*NET OnLine: (.+) [0-9]{2}-[0-9]{4}\.[0-9]{2}\z/', (string) ($reference['label'] ?? ''), $label) !== 1) {
+                    continue;
+                }
+                $children[] = [
+                    'code' => $matches[1],
+                    'official_url' => $reference['url'],
+                    'title' => $label[1],
+                ];
+            }
+            if (($presentation['onet_code'] ?? null) === null && count($children) === 2) {
+                $onet[$slug] = [
+                    'canonical_slug' => $slug,
+                    'child_occupations' => $children,
+                    'scope' => 'multiple_official_occupations',
+                    'summary_soc' => $presentation['soc_code'] ?? null,
+                ];
+            }
+
+            $stats = $presentation['stats'] ?? null;
+            $sourceKey = is_array($stats) ? data_get($stats, '0.source_keys.0') : null;
+            if (! is_string($sourceKey) || ! str_starts_with($sourceKey, 'bls.')) {
+                continue;
+            }
+            if (! array_is_list($stats) || count($stats) < 4) {
+                throw new CareerTenBlockCompileFailure('PRESENTATION_V1_SHARDED_SOURCE_BINDINGS_INVALID');
+            }
+            $sourceLabel = (string) ($stats[0]['source_label'] ?? '');
+            $scope = match (true) {
+                str_contains($sourceLabel, '上级职业代理：') => 'parent_occupation_proxy',
+                str_contains($sourceLabel, '官方组合口径') => 'combined_official',
+                str_contains($sourceLabel, '精确职业') => 'exact',
+                default => null,
+            };
+            preg_match('/\ABLS ([0-9]{4}) · /', $sourceLabel, $year);
+            preg_match('/上级职业代理：(.+)\z/', $sourceLabel, $title);
+            $metricKeys = ['中位年薪', '就业增长', '在岗人数', '年均职位空缺'];
+            $metrics = [];
+            foreach ($metricKeys as $index => $metric) {
+                if (($stats[$index]['source_keys'] ?? null) !== [$sourceKey]
+                    || ! is_string($stats[$index]['value'] ?? null)) {
+                    throw new CareerTenBlockCompileFailure('PRESENTATION_V1_SHARDED_SOURCE_BINDINGS_INVALID');
+                }
+                $metrics[$metric] = $stats[$index]['value'];
+            }
+            if ($scope === null || ! isset($year[1]) || isset($bls[$slug])) {
+                throw new CareerTenBlockCompileFailure('PRESENTATION_V1_SHARDED_SOURCE_BINDINGS_INVALID');
+            }
+            $bls[$slug] = [
+                'canonical_slug' => $slug,
+                'data_year' => (int) $year[1],
+                'metrics' => $metrics,
+                'source_key' => $sourceKey,
+                'source_scope' => $scope,
+                'title' => $title[1] ?? (string) ($presentation['title_en'] ?? $slug),
+            ];
+        }
+
+        if (count($onet) !== 2 || count($bls) !== 5) {
+            throw new CareerTenBlockCompileFailure('PRESENTATION_V1_SHARDED_SOURCE_BINDINGS_INVALID');
+        }
+        ksort($onet, SORT_STRING);
+        ksort($bls, SORT_STRING);
+        $document = [
+            'contract_version' => 'career.presentation_v1.sharded_source_bindings.v1',
+            'onet_multiple_occupations' => array_values($onet),
+            'bls_projections' => array_values($bls),
+        ];
+
+        return ['document' => $document, 'onet' => $onet, 'bls' => $bls];
     }
 
     private function slug(mixed $value): bool

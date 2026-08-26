@@ -69,10 +69,18 @@ final class CareerTenBlockCurrentPackageCompiler
         $cohortDigest = $this->fileDigest(rtrim($evidenceRoot, '/').'/cohort.json', 'TEN_BLOCK_EVIDENCE_INVALID');
         $selectionReportDigest = $this->fileDigest(rtrim($evidenceRoot, '/').'/selection-report.json', 'TEN_BLOCK_EVIDENCE_INVALID');
         $lookupDigest = $this->fileDigest($lookupPath, 'TEN_BLOCK_LOOKUP_INVALID');
-        $componentRegistryDigest = $this->fileDigest(
-            rtrim($backendRoot, '/').'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH.'/structured-component-source-registry.json',
-            'TEN_BLOCK_STRUCTURED_COMPONENT_SOURCE_REGISTRY_INVALID',
-        );
+        $componentRegistryDigest = ($baseline['summary']['source_format'] ?? null) === 'sharded'
+            ? CareerCurrentAuthorityPackage::hashValue(array_map(
+                static fn (array $row): array => [
+                    'sources' => $row['sources_json'],
+                    'structured_components' => $row['metadata_json']['structured_components_v1'] ?? null,
+                ],
+                $baseline['rows'],
+            ))
+            : $this->fileDigest(
+                rtrim($backendRoot, '/').'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH.'/structured-component-source-registry.json',
+                'TEN_BLOCK_STRUCTURED_COMPONENT_SOURCE_REGISTRY_INVALID',
+            );
         $candidateRows = [];
         $publicChangedLocalePages = 0;
         $changedRows = 0;
@@ -140,12 +148,8 @@ final class CareerTenBlockCurrentPackageCompiler
             'discoverability_writes' => 0,
             'search_submissions' => 0,
         ];
-        $manifest['structured_components_v1'] = [
+        $structuredLineage = [
             'contract_version' => 'career.structured_components.package_lineage.v1',
-            'source_registry' => [
-                'path' => 'structured-component-source-registry.json',
-                'sha256' => $componentRegistryDigest,
-            ],
             'source_root_digest' => $batch['manifest']['source_root_digest'],
             'schema_version' => CareerTenBlockVariantSchema::VERSION,
             'schema_profile_manifest_sha256' => CareerCurrentAuthorityPackage::hashValue($batch['manifest']),
@@ -154,6 +158,15 @@ final class CareerTenBlockCurrentPackageCompiler
             'zh_published_component_count' => count($candidateRows) * 2,
             'en_unavailable_component_count' => count($candidateRows) * 2,
         ];
+        if (($baseline['summary']['source_format'] ?? null) === 'sharded') {
+            $structuredLineage['source_bindings_sha256'] = $componentRegistryDigest;
+        } else {
+            $structuredLineage['source_registry'] = [
+                'path' => 'structured-component-source-registry.json',
+                'sha256' => $componentRegistryDigest,
+            ];
+        }
+        $manifest['structured_components_v1'] = $structuredLineage;
         $this->assertCandidatePublicContract($candidateRows);
 
         return [

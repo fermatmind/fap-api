@@ -32,23 +32,19 @@ final class CareerPresentationSourceRegistryTest extends TestCase
     public function test_registry_is_manifest_bound_and_contains_only_the_approved_source_scopes(): void
     {
         $package = app(CareerCurrentAuthorityPackage::class)->load(base_path());
-        $registry = app(CareerPresentationSourceRegistry::class)->load(base_path(), $package['manifest']);
+        $registry = app(CareerPresentationSourceRegistry::class)->load(base_path(), $package['manifest'], $package['rows']);
 
         self::assertCount(2, $registry['onet']);
         self::assertCount(5, $registry['bls']);
-        self::assertSame(2, data_get($package, 'manifest.presentation_v1.source_registry.onet_multiple_occupation_count'));
-        self::assertSame(5, data_get($package, 'manifest.presentation_v1.source_registry.bls_projection_count'));
-        self::assertSame(
-            hash_file('sha256', base_path(CareerPresentationSourceRegistry::RELATIVE_PATH)),
-            data_get($package, 'manifest.presentation_v1.source_registry.sha256'),
-        );
+        self::assertFileDoesNotExist(base_path(CareerPresentationSourceRegistry::RELATIVE_PATH));
+        self::assertFileDoesNotExist(base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH.'/structured-component-source-registry.json'));
         self::assertStringNotContainsString('17-3012.00', CareerCurrentAuthorityPackage::encodeCanonical($registry['document']));
     }
 
     public function test_multiple_occupation_records_keep_the_single_onet_slot_null_and_publish_both_children(): void
     {
         $package = app(CareerCurrentAuthorityPackage::class)->load(base_path());
-        $registry = app(CareerPresentationSourceRegistry::class)->load(base_path(), $package['manifest']);
+        $registry = app(CareerPresentationSourceRegistry::class)->load(base_path(), $package['manifest'], $package['rows']);
         $expected = [
             'electrical-and-electronics-engineers' => ['17-2070', ['17-2071.00', '17-2072.00']],
             'mathematicians-and-statisticians' => ['15-2020', ['15-2021.00', '15-2041.00']],
@@ -77,7 +73,7 @@ final class CareerPresentationSourceRegistryTest extends TestCase
         array $expectedValues,
     ): void {
         $package = app(CareerCurrentAuthorityPackage::class)->load(base_path());
-        $registry = app(CareerPresentationSourceRegistry::class)->load(base_path(), $package['manifest']);
+        $registry = app(CareerPresentationSourceRegistry::class)->load(base_path(), $package['manifest'], $package['rows']);
         $presentation = $package['rows'][$slug]['metadata_json']['presentation_v1']['zh'];
         $stats = array_slice(data_get($presentation, 'hero.stats'), 0, 4);
 
