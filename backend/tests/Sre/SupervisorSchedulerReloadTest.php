@@ -23,15 +23,27 @@ final class SupervisorSchedulerReloadTest extends TestCase
         mkdir($this->temporaryDirectory.'/deploy/releases/old/backend', 0700, true);
         mkdir($this->temporaryDirectory.'/proc/101', 0700, true);
         mkdir($this->temporaryDirectory.'/proc/202', 0700, true);
+        mkdir($this->temporaryDirectory.'/proc/301', 0700, true);
+        mkdir($this->temporaryDirectory.'/proc/302', 0700, true);
+        mkdir($this->temporaryDirectory.'/proc/401', 0700, true);
+        mkdir($this->temporaryDirectory.'/proc/402', 0700, true);
         symlink('releases/'.$this->revision, $this->temporaryDirectory.'/deploy/current');
         symlink($this->temporaryDirectory.'/deploy/releases/old/backend', $this->temporaryDirectory.'/proc/101/cwd');
         symlink($this->temporaryDirectory.'/deploy/releases/'.$this->revision.'/backend', $this->temporaryDirectory.'/proc/202/cwd');
+        symlink($this->temporaryDirectory.'/deploy/releases/old/backend', $this->temporaryDirectory.'/proc/401/cwd');
+        symlink($this->temporaryDirectory.'/deploy/releases/'.$this->revision.'/backend', $this->temporaryDirectory.'/proc/402/cwd');
         file_put_contents(
             $this->temporaryDirectory.'/deploy/releases/'.$this->revision.'/REVISION',
             $this->revision."\n",
         );
         file_put_contents($this->temporaryDirectory.'/proc/101/cmdline', "/usr/bin/php\0/old/backend/artisan\0schedule:work\0");
         file_put_contents($this->temporaryDirectory.'/proc/202/cmdline', "/usr/bin/php\0/current/backend/artisan\0schedule:work\0");
+        file_put_contents($this->temporaryDirectory.'/proc/301/cmdline', "/usr/local/bin/run-scheduler\0");
+        file_put_contents($this->temporaryDirectory.'/proc/302/cmdline', "/usr/local/bin/run-scheduler\0");
+        file_put_contents($this->temporaryDirectory.'/proc/401/cmdline', "/usr/bin/php\0artisan\0schedule:work\0");
+        file_put_contents($this->temporaryDirectory.'/proc/402/cmdline', "/usr/bin/php\0artisan\0schedule:work\0");
+        file_put_contents($this->temporaryDirectory.'/proc/401/stat', "401 (php) S 301 0 0 0\n");
+        file_put_contents($this->temporaryDirectory.'/proc/402/stat', "402 (php) S 302 0 0 0\n");
         file_put_contents($this->temporaryDirectory.'/state', 'old');
 
         $this->writeExecutable('sudo', <<<'BASH'
@@ -56,6 +68,10 @@ target="${2:-}"
 state="$(cat "$FAKE_STATE_FILE")"
 pid=101
 [[ "$state" == new ]] && pid=202
+if [[ "${FAKE_WRAPPER:-false}" == true ]]; then
+  pid=301
+  [[ "$state" == new ]] && pid=302
+fi
 
 case "$command" in
   status)
@@ -104,6 +120,18 @@ BASH);
         $this->assertStringContainsString('scheduler_refresh_pass revision='.$this->revision, $output);
         $this->assertStringNotContainsString($this->temporaryDirectory, $output);
         $this->assertStringNotContainsString('pid ', $output);
+    }
+
+    #[Test]
+    public function it_discovers_a_relative_artisan_scheduler_below_a_supervisor_wrapper(): void
+    {
+        $process = $this->runScript(['FAKE_WRAPPER' => 'true']);
+        $output = $process->getOutput().$process->getErrorOutput();
+
+        $this->assertTrue($process->isSuccessful(), $output);
+        $this->assertSame('new', file_get_contents($this->temporaryDirectory.'/state'));
+        $this->assertStringContainsString('scheduler_refresh_pass revision='.$this->revision, $output);
+        $this->assertStringNotContainsString($this->temporaryDirectory, $output);
     }
 
     #[Test]

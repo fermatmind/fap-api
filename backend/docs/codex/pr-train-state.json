@@ -1,31 +1,31 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-26T11:06:32Z",
+  "updated_at": "2026-08-26T11:28:06Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
-    "SEO-PLATFORM-07-G-SCHEDULER-REFRESH": {
+    "SEO-PLATFORM-07-G-SCHEDULER-REFRESH-V2": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
-      "branch": "codex/seo-platform-07-scheduler-refresh",
-      "commit_sha": "bb243dcda255aaabe4beb39010874d3497a44f6a",
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/3798",
+      "status": "local_checks_passed",
+      "branch": "codex/seo-platform-07-scheduler-refresh-v2",
+      "commit_sha": null,
+      "pr_url": null,
       "checks": {
         "dependency": {
           "status": "passed",
-          "details": "SEO-PLATFORM-07-G merged as 2117895ad725735ce8f88aad90077e54920a511c; exact-SHA CI and automatic production activation passed. Three natural slots produced zero receipts because the managed scheduler remained release-stale."
+          "details": "PR #3798 merged as 294c2f19da76f38908bf439b9929a9e77b24cc00; exact-SHA CI and staging passed. Production failed closed with scheduler_identity_count and automatically restored 2117895ad725735ce8f88aad90077e54920a511c as LKG."
         },
         "local": [
           {
-            "command": "focused scheduler and existing Supervisor reload PHPUnit",
+            "command": "focused wrapped scheduler and existing Supervisor reload PHPUnit",
             "status": "passed",
-            "details": "14 tests and 52 assertions passed across discovery, bounded restart, fail-closed identity/release checks, staging optional topology and existing queue reload behavior."
+            "details": "15 tests and 56 assertions passed, including direct, wrapper-child, relative artisan, ambiguity, missing topology, stale release and existing bounded queue reload behavior."
           },
           {
-            "command": "bash/php syntax, ShellCheck and scoped Pint --test",
+            "command": "bash syntax, ShellCheck, PHP syntax and scoped Pint --test",
             "status": "passed"
           },
           {
@@ -49,6 +49,72 @@
       "production_readback_allowed": true,
       "history": [
         {
+          "at": "2026-08-26T11:27:04Z",
+          "status": "in_progress",
+          "summary": "User explicitly authorized a second same-scope corrective PR. The correction follows Supervisor root PIDs through a bounded /proc parent chain to relative or absolute artisan schedule:work children, preserving unique identity and active-release fail-closed checks."
+        },
+        {
+          "at": "2026-08-26T11:28:06Z",
+          "status": "local_checks_passed",
+          "summary": "Wrapped scheduler behavior, existing Supervisor reload regression, syntax, ShellCheck, Pint, manifests and exact four-file scope passed. The branch remains based on current origin/main 294c2f19da76f38908bf439b9929a9e77b24cc00."
+        }
+      ]
+    },
+    "SEO-PLATFORM-07-G-SCHEDULER-REFRESH": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "merged",
+      "branch": "codex/seo-platform-07-scheduler-refresh",
+      "commit_sha": "bb243dcda255aaabe4beb39010874d3497a44f6a",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3798",
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "details": "SEO-PLATFORM-07-G merged as 2117895ad725735ce8f88aad90077e54920a511c; exact-SHA CI and automatic production activation passed. Three natural slots produced zero receipts because the managed scheduler remained release-stale."
+        },
+        "local": [
+          {
+            "command": "focused scheduler and existing Supervisor reload PHPUnit",
+            "status": "passed",
+            "details": "14 tests and 52 assertions passed across discovery, bounded restart, fail-closed identity/release checks, staging optional topology and existing queue reload behavior."
+          },
+          {
+            "command": "bash/php syntax, ShellCheck and scoped Pint --test",
+            "status": "passed"
+          },
+          {
+            "command": "JSON/YAML, exact scope and git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "exact-SHA CI",
+            "status": "passed",
+            "details": "Run 32961717621 passed all selected jobs and exact-SHA receipt for 294c2f19da76f38908bf439b9929a9e77b24cc00."
+          }
+        ],
+        "production": [
+          {
+            "name": "automatic deploy",
+            "status": "failed_closed",
+            "details": "Run 32961944972 passed staging, then production rejected scheduler discovery with scheduler_identity_count and rolled back to LKG 2117895ad725735ce8f88aad90077e54920a511c."
+          }
+        ]
+      },
+      "failure_reason": "Production Supervisor owns the scheduler through a wrapper process, while the first correction inspected only the direct managed PID command line.",
+      "resume_policy": "continuous_goal",
+      "merged_at": "2026-08-26T11:07:22Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": true,
+      "production_readback_allowed": true,
+      "history": [
+        {
           "at": "2026-08-26T10:57:00Z",
           "status": "in_progress",
           "summary": "User authorized one focused corrective PR to refresh the existing managed scheduler through deploy. Scope excludes manual restart, workflow dispatch, SSH, production writes and runtime threshold changes."
@@ -62,6 +128,11 @@
           "at": "2026-08-26T11:06:32Z",
           "status": "pr_open",
           "summary": "Opened focused corrective PR #3798 at validated implementation commit bb243dcda255aaabe4beb39010874d3497a44f6a. Mergeability is clean; no manual runtime action was performed."
+        },
+        {
+          "at": "2026-08-26T11:20:19Z",
+          "status": "production_failed_closed",
+          "summary": "PR #3798 merged as 294c2f19da76f38908bf439b9929a9e77b24cc00. Exact-SHA CI and staging passed; production failed closed at scheduler_identity_count and restored 2117895ad725735ce8f88aad90077e54920a511c as LKG."
         }
       ]
     },
