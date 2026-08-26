@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-26T12:20:12Z",
+  "updated_at": "2026-08-26T12:21:42Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-07-G-SCHEDULER-REFRESH-V4": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "in_progress",
+      "status": "pr_open",
       "branch": "codex/seo-platform-07-scheduler-refresh-v4",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "7b9ba55994dd8e314ce3d0e5b974525e88a20e8f",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3802",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -53,6 +53,11 @@
           "at": "2026-08-26T12:20:12Z",
           "status": "local_checks_passed",
           "summary": "The effective schedule now exposes exactly one ten-minute runtime probe. Supervisor and cron paths, existing group reload, receipt behavior, syntax, format, workflow contracts, manifests and exact changed-file scope passed focused validation."
+        },
+        {
+          "at": "2026-08-26T12:21:42Z",
+          "status": "pr_open",
+          "summary": "Opened authorized fourth same-scope corrective PR #3802 at validated implementation commit 7b9ba55994dd8e314ce3d0e5b974525e88a20e8f. No manual runtime action was performed."
         }
       ]
     },
