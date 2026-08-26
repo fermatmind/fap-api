@@ -81,6 +81,31 @@ final class SeoPlatform07ScheduledRuntimeProbeReceiptTest extends TestCase
     }
 
     #[Test]
+    public function future_legacy_rows_cannot_mask_a_fresh_utc_observation(): void
+    {
+        DB::connection(self::CONNECTION)->table('seo_crawler_log_daily_aggregates')->insert([
+            [
+                'hit_count' => 3,
+                'last_seen_at' => '2026-08-26 17:00:00',
+                'updated_at' => '2026-08-26 08:00:00',
+            ],
+            [
+                'hit_count' => 2,
+                'last_seen_at' => '2026-08-26 08:59:00',
+                'updated_at' => '2026-08-26 09:00:00',
+            ],
+        ]);
+
+        $receipt = $this->service()->record('scheduled', '2026-08-26T09:00:00Z', ['state' => 'success']);
+
+        $this->assertSame('success', $receipt['status']);
+        $this->assertTrue(data_get($receipt, 'crawler_source_receipt.complete'));
+        $this->assertSame(5, data_get($receipt, 'crawler_source_receipt.hit_count'));
+        $this->assertSame('2026-08-26T08:59:00+00:00', data_get($receipt, 'crawler_source_receipt.latest_observation_at'));
+        $this->assertSame(1, data_get($receipt, 'crawler_source_receipt.age_minutes'));
+    }
+
+    #[Test]
     public function only_three_fresh_consecutive_natural_slots_complete_the_window(): void
     {
         DB::connection(self::CONNECTION)->table('seo_crawler_log_daily_aggregates')->insert([
