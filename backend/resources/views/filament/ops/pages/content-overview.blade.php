@@ -1,16 +1,7 @@
 <x-filament-panels::page>
     <div class="ops-shell-page">
-        <x-filament-ops::ops-section
-            :eyebrow="__('ops.custom_pages.content_overview.eyebrow')"
-            :title="__('ops.custom_pages.content_overview.title')"
-            :description="__('ops.custom_pages.content_overview.description')"
-        >
-            <x-filament-ops::ops-toolbar>
-                <div class="ops-control-stack">
-                    <span class="ops-control-label">{{ __('ops.custom_pages.content_overview.contract_label') }}</span>
-                    <p class="ops-control-hint">{{ __('ops.custom_pages.content_overview.contract_hint') }}</p>
-                </div>
-
+        <x-filament-ops::ops-section>
+            <x-filament-ops::ops-toolbar class="ops-toolbar--center-actions">
                 <x-slot name="actions">
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\EditorialOperationsPage::getUrl() }}">
                         {{ __('ops.custom_pages.common.nav.editorial_ops') }}
@@ -50,7 +41,6 @@
         {{-- 内容生命周期：草稿 / 审阅中 / 已排期 / 已发布 / 需更新 --}}
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.content_overview.lifecycle.title')"
-            :description="__('ops.custom_pages.content_overview.lifecycle.hint')"
         >
             <x-filament-ops::ops-data-strip
                 :label="__('ops.custom_pages.content_overview.lifecycle.title')"
@@ -64,7 +54,6 @@
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.content_overview.health_title')"
-            :description="__('ops.custom_pages.content_overview.health_desc')"
         >
             <x-filament-ops::ops-data-strip
                 :metrics="collect($summaryFields)->map(fn (array $field): array => [
@@ -93,14 +82,12 @@
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.content_overview.recent_title')"
-            :description="__('ops.custom_pages.content_overview.recent_desc')"
         >
             @if ($recentItems === [])
                     <x-filament-ops::ops-empty-state
-                        :eyebrow="__('ops.custom_pages.content_overview.title')"
+                        eyebrow=""
                         icon="heroicon-o-clipboard-document-list"
                         :title="__('ops.custom_pages.content_overview.empty_title')"
-                        :description="__('ops.custom_pages.content_overview.empty_desc')"
                     />
             @else
                 <div class="ops-table-shell">

@@ -1,16 +1,7 @@
 <x-filament-panels::page>
     <div class="ops-shell-page">
-        <x-filament-ops::ops-section
-            :eyebrow="__('ops.custom_pages.editorial_review.eyebrow')"
-            :title="__('ops.custom_pages.editorial_review.title')"
-            :description="__('ops.custom_pages.editorial_review.description')"
-        >
-            <x-filament-ops::ops-toolbar>
-                <div class="ops-control-stack">
-                    <span class="ops-control-label">{{ __('ops.custom_pages.editorial_review.approval_boundary') }}</span>
-                    <p class="ops-control-hint">{{ __('ops.custom_pages.editorial_review.approval_hint') }}</p>
-                </div>
-
+        <x-filament-ops::ops-section>
+            <x-filament-ops::ops-toolbar class="ops-toolbar--center-actions">
                 <x-slot name="actions">
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\EditorialOperationsPage::getUrl() }}">
                         {{ __('ops.custom_pages.common.nav.editorial_ops') }}
@@ -24,19 +15,16 @@
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.editorial_review.snapshot_title')"
-            :description="__('ops.custom_pages.editorial_review.snapshot_desc')"
         >
-            <x-filament-ops::ops-field-grid :fields="$reviewFields" />
+            <x-filament-ops::ops-field-grid :fields="$reviewFields" :show-hints="false" />
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.editorial_review.queue_title')"
-            :description="__('ops.custom_pages.editorial_review.queue_desc')"
         >
             <x-filament-ops::ops-toolbar :split="false">
                 <div class="ops-control-stack">
                     <span class="ops-control-label">{{ __('ops.custom_pages.editorial_review.filters_label') }}</span>
-                    <p class="ops-control-hint">{{ __('ops.custom_pages.editorial_review.filters_hint') }}</p>
                 </div>
 
                 <x-slot name="actions">
@@ -69,9 +57,9 @@
 
             <x-filament-ops::ops-table
                 :has-rows="count($reviewItems) > 0"
-                :empty-eyebrow="__('ops.custom_pages.editorial_review.eyebrow')"
+                empty-eyebrow=""
                 :empty-title="__('ops.custom_pages.editorial_review.empty_title')"
-                :empty-description="__('ops.custom_pages.editorial_review.empty_desc')"
+                empty-description=""
             >
                 <x-slot name="head">
                     <tr>

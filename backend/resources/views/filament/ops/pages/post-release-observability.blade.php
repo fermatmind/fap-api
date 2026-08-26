@@ -1,16 +1,7 @@
 <x-filament-panels::page>
     <div class="ops-shell-page">
-        <x-filament-ops::ops-section
-            :eyebrow="__('ops.custom_pages.post_release_observability.eyebrow')"
-            :title="__('ops.custom_pages.post_release_observability.title')"
-            :description="__('ops.custom_pages.post_release_observability.description')"
-        >
-            <x-filament-ops::ops-toolbar>
-                <div class="ops-control-stack">
-                    <span class="ops-control-label">{{ __('ops.custom_pages.post_release_observability.contract_label') }}</span>
-                    <p class="ops-control-hint">{{ __('ops.custom_pages.post_release_observability.contract_hint') }}</p>
-                </div>
-
+        <x-filament-ops::ops-section>
+            <x-filament-ops::ops-toolbar class="ops-toolbar--center-actions">
                 <x-slot name="actions">
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentOverviewPage::getUrl() }}">
                         {{ __('ops.custom_pages.common.nav.overview') }}
@@ -27,14 +18,12 @@
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.post_release_observability.telemetry_title')"
-            :description="__('ops.custom_pages.post_release_observability.telemetry_desc')"
         >
-            <x-filament-ops::ops-field-grid :fields="$headlineFields" />
+            <x-filament-ops::ops-field-grid :fields="$headlineFields" :show-hints="false" />
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.post_release_observability.published_title')"
-            :description="__('ops.custom_pages.post_release_observability.published_desc')"
         >
             <div class="ops-card-list">
                 @forelse ($releaseCards as $card)
@@ -64,7 +53,6 @@
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.post_release_observability.events_title')"
-            :description="__('ops.custom_pages.post_release_observability.events_desc')"
         >
             <div class="ops-card-list">
                 @forelse ($auditCards as $card)
@@ -84,10 +72,9 @@
                     </x-filament-ops::ops-result-card>
                 @empty
                     <x-filament-ops::ops-empty-state
-                        :eyebrow="__('ops.custom_pages.post_release_observability.empty_audits_eyebrow')"
+                        eyebrow=""
                         icon="heroicon-o-clipboard-document-check"
                         :title="__('ops.custom_pages.post_release_observability.empty_audits_title')"
-                        :description="__('ops.custom_pages.post_release_observability.empty_audits_desc')"
                     />
                 @endforelse
             </div>

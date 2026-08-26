@@ -1,16 +1,7 @@
 <x-filament-panels::page>
     <div class="ops-shell-page">
-        <x-filament-ops::ops-section
-            :eyebrow="__('ops.custom_pages.article_publishing_ops.eyebrow')"
-            :title="__('ops.custom_pages.article_publishing_ops.title')"
-            :description="__('ops.custom_pages.article_publishing_ops.description')"
-        >
-            <x-filament-ops::ops-toolbar>
-                <div class="ops-control-stack">
-                    <span class="ops-control-label">{{ __('ops.custom_pages.article_publishing_ops.contract_label') }}</span>
-                    <p class="ops-control-hint">{{ __('ops.custom_pages.article_publishing_ops.contract_hint') }}</p>
-                </div>
-
+        <x-filament-ops::ops-section>
+            <x-filament-ops::ops-toolbar class="ops-toolbar--center-actions">
                 <x-slot name="actions">
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Resources\ArticleResource::getUrl() }}">
                         {{ __('ops.nav.articles') }}
@@ -27,21 +18,18 @@
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.article_publishing_ops.queue_title')"
-            :description="__('ops.custom_pages.article_publishing_ops.queue_desc')"
         >
-            <x-filament-ops::ops-field-grid :fields="$queueFields" />
+            <x-filament-ops::ops-field-grid class="ops-field-grid--centered" :fields="$queueFields" :show-hints="false" />
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.article_publishing_ops.daily_title')"
-            :description="__('ops.custom_pages.article_publishing_ops.daily_desc')"
         >
-            <x-filament-ops::ops-field-grid :fields="$dailyHealthFields" />
+            <x-filament-ops::ops-field-grid class="ops-field-grid--centered" :fields="$dailyHealthFields" :show-hints="false" />
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.article_publishing_ops.queue_table_title')"
-            :description="__('ops.custom_pages.article_publishing_ops.queue_table_desc')"
         >
             <div class="ops-table-shell">
                 <table class="ops-table">
@@ -85,7 +73,6 @@
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.article_publishing_ops.import_table_title')"
-            :description="__('ops.custom_pages.article_publishing_ops.import_table_desc')"
         >
             <div class="ops-table-shell">
                 <table class="ops-table">
@@ -124,7 +111,6 @@
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.article_publishing_ops.release_failure_title')"
-            :description="__('ops.custom_pages.article_publishing_ops.release_failure_desc')"
         >
             <div class="ops-card-list">
                 @forelse ($releaseRows as $row)
@@ -133,10 +119,9 @@
                     </x-filament-ops::ops-result-card>
                 @empty
                     <x-filament-ops::ops-empty-state
-                        :eyebrow="__('ops.custom_pages.article_publishing_ops.eyebrow')"
+                        eyebrow=""
                         icon="heroicon-o-check-circle"
                         :title="__('ops.custom_pages.article_publishing_ops.empty_release_title')"
-                        :description="__('ops.custom_pages.article_publishing_ops.empty_release_desc')"
                     />
                 @endforelse
             </div>
@@ -144,7 +129,6 @@
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.article_publishing_ops.review_due_title')"
-            :description="__('ops.custom_pages.article_publishing_ops.review_due_desc')"
         >
             <div class="ops-card-list">
                 @forelse ($reviewDueRows as $row)
@@ -153,10 +137,9 @@
                     </x-filament-ops::ops-result-card>
                 @empty
                     <x-filament-ops::ops-empty-state
-                        :eyebrow="__('ops.custom_pages.article_publishing_ops.eyebrow')"
+                        eyebrow=""
                         icon="heroicon-o-calendar-days"
                         :title="__('ops.custom_pages.article_publishing_ops.empty_review_title')"
-                        :description="__('ops.custom_pages.article_publishing_ops.empty_review_desc')"
                     />
                 @endforelse
             </div>

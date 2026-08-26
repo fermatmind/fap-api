@@ -182,6 +182,104 @@ final class OpsShellPolishTest extends TestCase
         $this->assertStringContainsString(':show-hints="false"', $growthAttribution);
     }
 
+    public function test_cms_operator_surfaces_keep_compact_copy_and_alignment_contracts(): void
+    {
+        $contentOverview = (string) file_get_contents(resource_path('views/filament/ops/pages/content-overview.blade.php'));
+        $contentWorkspace = (string) file_get_contents(resource_path('views/filament/ops/pages/content-workspace.blade.php'));
+        $editorialReview = (string) file_get_contents(resource_path('views/filament/ops/pages/editorial-review.blade.php'));
+        $postRelease = (string) file_get_contents(resource_path('views/filament/ops/pages/post-release-observability.blade.php'));
+        $articlePublishing = (string) file_get_contents(resource_path('views/filament/ops/pages/article-publishing-ops.blade.php'));
+
+        foreach ([$contentOverview, $contentWorkspace, $editorialReview, $postRelease, $articlePublishing] as $view) {
+            $this->assertStringContainsString('class="ops-toolbar--center-actions"', $view);
+        }
+
+        foreach ([
+            'content_overview.eyebrow',
+            'content_overview.description',
+            'content_overview.contract_label',
+            'content_overview.contract_hint',
+            'content_overview.lifecycle.hint',
+            'content_overview.health_desc',
+            'content_overview.recent_desc',
+            'content_overview.empty_desc',
+        ] as $removedCopy) {
+            $this->assertStringNotContainsString($removedCopy, $contentOverview);
+        }
+
+        foreach ([
+            'content_workspace.eyebrow',
+            'content_workspace.description',
+            'content_workspace.permission_boundary',
+            'content_workspace.permission_boundary_hint',
+            'content_workspace.advanced_tools_desc',
+            'content_workspace.snapshot_desc',
+            'content_workspace.editorial_desc',
+            'content_workspace.taxonomy_desc',
+            'content_workspace.optional_types_desc',
+            'content_workspace.access_model_desc',
+            '$card[\'description\']',
+        ] as $removedCopy) {
+            $this->assertStringNotContainsString($removedCopy, $contentWorkspace);
+        }
+
+        $this->assertStringContainsString(':show-hints="false"', $contentWorkspace);
+        $this->assertStringContainsString('class="ops-field-grid--centered-head"', $contentWorkspace);
+
+        foreach ([
+            'editorial_review.eyebrow',
+            'editorial_review.description',
+            'editorial_review.approval_boundary',
+            'editorial_review.approval_hint',
+            'editorial_review.snapshot_desc',
+            'editorial_review.queue_desc',
+            'editorial_review.filters_hint',
+            'editorial_review.empty_desc',
+        ] as $removedCopy) {
+            $this->assertStringNotContainsString($removedCopy, $editorialReview);
+        }
+
+        $this->assertStringContainsString(':show-hints="false"', $editorialReview);
+        $this->assertStringContainsString('empty-eyebrow=""', $editorialReview);
+        $this->assertStringContainsString('empty-description=""', $editorialReview);
+
+        foreach ([
+            'post_release_observability.description',
+            'post_release_observability.contract_label',
+            'post_release_observability.contract_hint',
+            'post_release_observability.telemetry_desc',
+            'post_release_observability.published_desc',
+            'post_release_observability.events_desc',
+            'post_release_observability.empty_audits_eyebrow',
+            'post_release_observability.empty_audits_desc',
+        ] as $removedCopy) {
+            $this->assertStringNotContainsString($removedCopy, $postRelease);
+        }
+
+        $this->assertSame(1, substr_count($postRelease, 'post_release_observability.eyebrow'));
+        $this->assertStringContainsString(':show-hints="false"', $postRelease);
+
+        foreach ([
+            'article_publishing_ops.eyebrow',
+            'article_publishing_ops.description',
+            'article_publishing_ops.contract_label',
+            'article_publishing_ops.contract_hint',
+            'article_publishing_ops.queue_desc',
+            'article_publishing_ops.daily_desc',
+            'article_publishing_ops.queue_table_desc',
+            'article_publishing_ops.import_table_desc',
+            'article_publishing_ops.release_failure_desc',
+            'article_publishing_ops.empty_release_desc',
+            'article_publishing_ops.review_due_desc',
+            'article_publishing_ops.empty_review_desc',
+        ] as $removedCopy) {
+            $this->assertStringNotContainsString($removedCopy, $articlePublishing);
+        }
+
+        $this->assertSame(2, substr_count($articlePublishing, 'class="ops-field-grid--centered"'));
+        $this->assertSame(2, substr_count($articlePublishing, ':show-hints="false"'));
+    }
+
     public function test_ops_theme_tokens_match_complete_preview_light_and_dark_contract(): void
     {
         $theme = (string) file_get_contents(resource_path('css/filament/ops/theme.css'));
