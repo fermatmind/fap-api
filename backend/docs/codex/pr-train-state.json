@@ -1,15 +1,65 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-26T12:21:42Z",
+  "updated_at": "2026-08-26T12:48:10Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "SEO-PLATFORM-07-G-SCHEDULER-REFRESH-V5": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "in_progress",
+      "branch": "codex/seo-platform-07-scheduler-refresh-v5",
+      "commit_sha": "6d8419cefe9d3ae9b303ce77eda25216d697eddc",
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "details": "PR #3802 merged as a5567fc6f87ef8452b2880326e6694ae976aa1bb. Exact-SHA CI and staging passed; production rejected the relative --php-bin=php argument before cron mutation, then restored 2117895ad725735ce8f88aad90077e54920a511c as LKG. Public flags, protected health boundary and Big Five source-hash smoke remained healthy."
+        },
+        "local": [
+          {
+            "command": "focused deploy PHP-path contract, Supervisor/cron scheduler and existing Supervisor group reload PHPUnit",
+            "status": "passed_with_local_env_warning",
+            "details": "23 tests and 92 assertions passed, including deploy absolute-path resolution source contract and helper rejection of a relative PHP binary before cron mutation; only isolated-worktree .env warnings were emitted."
+          },
+          {
+            "command": "PHP syntax, scoped Pint, classifier/workflow contracts, JSON/YAML and git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": [],
+        "production": []
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": true,
+      "production_readback_allowed": true,
+      "history": [
+        {
+          "at": "2026-08-26T12:45:29Z",
+          "status": "in_progress",
+          "summary": "User explicitly authorized the fifth same-scope corrective PR. The correction resolves the configured PHP command to an absolute executable path in the existing deploy shell while retaining the helper's fail-closed absolute-path guard. No manual scheduler trigger, workflow dispatch, SSH or application-data mutation is authorized."
+        },
+        {
+          "at": "2026-08-26T12:48:10Z",
+          "status": "local_checks_passed",
+          "summary": "Focused scheduler and existing Supervisor group regressions, PHP syntax, scoped formatting, workflow contracts, manifests and exact changed-file scope passed. The deploy caller now resolves PHP before invoking the unchanged fail-closed helper."
+        }
+      ]
+    },
     "SEO-PLATFORM-07-G-SCHEDULER-REFRESH-V4": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "merged",
       "branch": "codex/seo-platform-07-scheduler-refresh-v4",
       "commit_sha": "7b9ba55994dd8e314ce3d0e5b974525e88a20e8f",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3802",
@@ -29,14 +79,26 @@
             "status": "passed"
           }
         ],
-        "github": [],
-        "production": []
+        "github": [
+          {
+            "name": "exact-SHA CI",
+            "status": "passed",
+            "details": "Run 32968241253 passed all selected jobs and the exact-SHA receipt for a5567fc6f87ef8452b2880326e6694ae976aa1bb."
+          }
+        ],
+        "production": [
+          {
+            "name": "automatic deploy",
+            "status": "failed_closed",
+            "details": "Run 32968733381 passed staging; production rejected the relative --php-bin=php argument with scheduler_refresh_failed reason=invalid_path before cron mutation and restored LKG 2117895ad725735ce8f88aad90077e54920a511c."
+          }
+        ]
       },
-      "failure_reason": null,
+      "failure_reason": "The deploy caller passed the configured relative php command to a helper that correctly requires absolute executable paths; resolve it before helper invocation.",
       "resume_policy": "continuous_goal",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-08-26T12:22:38Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "database_mutation": false,
       "cms_mutation": false,
@@ -58,6 +120,11 @@
           "at": "2026-08-26T12:21:42Z",
           "status": "pr_open",
           "summary": "Opened authorized fourth same-scope corrective PR #3802 at validated implementation commit 7b9ba55994dd8e314ce3d0e5b974525e88a20e8f. No manual runtime action was performed."
+        },
+        {
+          "at": "2026-08-26T12:39:13Z",
+          "status": "production_failed_closed",
+          "summary": "PR #3802 merged as a5567fc6f87ef8452b2880326e6694ae976aa1bb. Exact-SHA CI and staging passed; production rejected relative --php-bin=php before cron mutation and restored 2117895ad725735ce8f88aad90077e54920a511c as LKG."
         }
       ]
     },

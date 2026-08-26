@@ -4850,3 +4850,49 @@ prs:
     deploy_allowed: true
     production_readback_allowed: true
     content_authority: existing_deploy_scheduler_runtime
+
+  - id: SEO-PLATFORM-07-G-SCHEDULER-REFRESH-V5
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/seo-platform-07-scheduler-refresh-v5
+    base: main
+    depends_on: ["SEO-PLATFORM-07-G-SCHEDULER-REFRESH-V4"]
+    mode: execute
+    title: "fix(deploy): resolve scheduler php binary"
+    scope: >
+      Correct the exact production failure from PR #3802 by resolving the
+      configured PHP command to a non-empty absolute executable path inside the
+      existing deploy shell before invoking the fail-closed scheduler refresh
+      helper. Preserve the helper's absolute-path rejection, current-release
+      cron singleton, Supervisor path, sanitized output and all existing
+      deployment boundaries. Do not add a workflow, manual dispatch, scheduler
+      trigger, direct SSH path, runtime threshold change or application-data
+      mutation.
+    allowed_paths:
+      - ../deploy.php
+      - tests/Sre/SupervisorSchedulerReloadTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    checks:
+      - "focused deploy PHP-path contract and existing Supervisor/cron scheduler PHPUnit"
+      - "existing Supervisor group reload regression"
+      - "PHP syntax, scoped Pint, JSON/YAML, exact scope and diff checks"
+      - "exact-SHA automatic deploy followed by three natural production scheduler slots"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: continuous_goal
+    merge_policy:
+      mode: github_checks_required
+      local_verify_required: true
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    deploy_allowed: true
+    production_readback_allowed: true
+    content_authority: existing_deploy_scheduler_runtime
