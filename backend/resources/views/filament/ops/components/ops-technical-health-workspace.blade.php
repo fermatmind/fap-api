@@ -4,6 +4,11 @@
 
     $snapshot = SeoTechnicalHealthUiContract::snapshot();
     $copy = 'ops.custom_pages.seo_operations.technical_health';
+    $statusLabel = data_get(
+        $snapshot,
+        'status_labels.'.app()->getLocale().'.'.$snapshot['state'],
+        data_get($snapshot, 'status_labels.en.'.$snapshot['state'], $snapshot['state']),
+    );
 @endphp
 
 <div class="ops-technical-health" data-contract-state="{{ $snapshot['state'] }}">
@@ -27,8 +32,8 @@
                 <span class="ops-tag">24h</span>
             </div>
             <x-filament-ops::ops-state-message
-                :state="data_get($snapshot, 'scheduler_window.state', SeoOperationsUiState::MEASUREMENT_HOLD)"
-                :title="__('ops.custom_pages.seo_operations.states.production_unproven.label')"
+                :state="$snapshot['state']"
+                :title="$statusLabel"
                 :description="__($copy.'.reliability.hold')"
             />
             <div class="ops-tag-list">
@@ -77,7 +82,7 @@
                         <span class="ops-technical-health__step">{{ $loop->iteration }}</span>
                         <div>
                             <strong>{{ __($copy.'.evidence.steps.'.$step) }}</strong>
-                            <small>{{ __('ops.custom_pages.seo_operations.states.unavailable.label') }}</small>
+                            <small>{{ $statusLabel }}</small>
                         </div>
                     </li>
                 @endforeach
@@ -92,8 +97,8 @@
                 </div>
             </div>
             <x-filament-ops::ops-state-message
-                :state="SeoOperationsUiState::UNAVAILABLE"
-                :title="__('ops.custom_pages.seo_operations.states.unavailable.label')"
+                :state="$snapshot['state']"
+                :title="$statusLabel"
                 :description="''"
             />
         </section>

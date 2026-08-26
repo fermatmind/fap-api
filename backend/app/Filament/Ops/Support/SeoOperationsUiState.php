@@ -8,6 +8,8 @@ final class SeoOperationsUiState
 {
     public const PRODUCTION_HEALTHY = 'production_healthy';
 
+    public const PRODUCTION_PROVEN = 'production_proven';
+
     public const PRODUCTION_UNPROVEN = 'production_unproven';
 
     public const PRODUCTION_DEGRADED = 'production_degraded';
@@ -37,6 +39,7 @@ final class SeoOperationsUiState
     /** @var list<string> */
     public const ALL = [
         self::PRODUCTION_HEALTHY,
+        self::PRODUCTION_PROVEN,
         self::PRODUCTION_UNPROVEN,
         self::PRODUCTION_DEGRADED,
         self::DEPLOYED_DISABLED,
@@ -60,7 +63,7 @@ final class SeoOperationsUiState
     public static function tone(?string $state): string
     {
         return match (self::normalize($state)) {
-            self::PRODUCTION_HEALTHY, self::VERIFIED_ZERO => 'success',
+            self::PRODUCTION_HEALTHY, self::PRODUCTION_PROVEN, self::VERIFIED_ZERO => 'success',
             self::PRODUCTION_DEGRADED, self::MEASUREMENT_HOLD, self::STALE => 'warning',
             self::ERROR, self::PERMISSION_DENIED => 'danger',
             self::PRODUCTION_UNPROVEN => 'info',
@@ -94,6 +97,6 @@ final class SeoOperationsUiState
 
     public static function blocksExpansion(?string $state): bool
     {
-        return self::normalize($state) !== self::PRODUCTION_HEALTHY;
+        return ! in_array(self::normalize($state), [self::PRODUCTION_HEALTHY, self::PRODUCTION_PROVEN], true);
     }
 }

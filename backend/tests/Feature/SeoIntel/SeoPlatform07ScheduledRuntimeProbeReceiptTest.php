@@ -50,8 +50,8 @@ final class SeoPlatform07ScheduledRuntimeProbeReceiptTest extends TestCase
     {
         DB::connection(self::CONNECTION)->table('seo_crawler_log_daily_aggregates')->insert(['hit_count' => 7, 'updated_at' => '2026-08-26 09:00:00']);
         $service = $this->service();
-        $first = $service->record('scheduled', '2026-08-26T09:01:00Z');
-        $second = $service->record('scheduled', '2026-08-26T09:08:00Z');
+        $first = $service->record('scheduled', '2026-08-26T09:01:00Z', ['state' => 'success']);
+        $second = $service->record('scheduled', '2026-08-26T09:08:00Z', ['state' => 'success']);
 
         $this->assertSame('success', $first['status']);
         $this->assertSame($first['receipt_hash'], $second['receipt_hash']);
@@ -77,12 +77,12 @@ final class SeoPlatform07ScheduledRuntimeProbeReceiptTest extends TestCase
     {
         DB::connection(self::CONNECTION)->table('seo_crawler_log_daily_aggregates')->insert(['hit_count' => 7, 'updated_at' => '2026-08-26 09:00:00']);
         $service = $this->service();
-        $service->record('manual', '2026-08-26T08:55:00Z');
-        $service->record('scheduled', '2026-08-26T09:00:00Z');
-        $service->record('scheduled', '2026-08-26T09:10:00Z');
+        $service->record('manual', '2026-08-26T08:55:00Z', ['state' => 'success']);
+        $service->record('scheduled', '2026-08-26T09:00:00Z', ['state' => 'success']);
+        $service->record('scheduled', '2026-08-26T09:10:00Z', ['state' => 'success']);
         $this->assertSame('MEASUREMENT_HOLD', $service->readWindow('2026-08-26T09:11:00Z')['state']);
 
-        $service->record('scheduled', '2026-08-26T09:20:00Z');
+        $service->record('scheduled', '2026-08-26T09:20:00Z', ['state' => 'success']);
         $window = $service->readWindow('2026-08-26T09:21:00Z');
 
         $this->assertSame('complete', $window['state']);
@@ -104,6 +104,10 @@ final class SeoPlatform07ScheduledRuntimeProbeReceiptTest extends TestCase
     #[Test]
     public function expand_only_migration_creates_the_receipt_store_and_never_drops_it(): void
     {
+        $source = (string) file_get_contents(database_path('migrations/seo_intel/2026_08_26_090000_create_runtime_probe_receipts.php'));
+        $this->assertStringContainsString("->dateTime('scheduled_for')", $source);
+        $this->assertStringContainsString("->dateTime('completed_at')", $source);
+        $this->assertStringNotContainsString("->timestamp('completed_at')", $source);
         config(['database.connections.seo_intel' => ['driver' => 'sqlite', 'database' => ':memory:', 'prefix' => '']]);
         DB::purge('seo_intel');
         $migration = require database_path('migrations/seo_intel/2026_08_26_090000_create_runtime_probe_receipts.php');
@@ -111,6 +115,8 @@ final class SeoPlatform07ScheduledRuntimeProbeReceiptTest extends TestCase
         $migration->up();
         $this->assertTrue(Schema::connection('seo_intel')->hasTable('seo_runtime_probe_receipts'));
         $this->assertTrue(Schema::connection('seo_intel')->hasColumn('seo_runtime_probe_receipts', 'crawler_source_receipt_json'));
+        $this->assertSame('datetime', Schema::connection('seo_intel')->getColumnType('seo_runtime_probe_receipts', 'scheduled_for'));
+        $this->assertSame('datetime', Schema::connection('seo_intel')->getColumnType('seo_runtime_probe_receipts', 'completed_at'));
 
         $migration->down();
         $this->assertTrue(Schema::connection('seo_intel')->hasTable('seo_runtime_probe_receipts'));

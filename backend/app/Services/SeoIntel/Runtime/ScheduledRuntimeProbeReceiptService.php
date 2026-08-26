@@ -12,14 +12,14 @@ use InvalidArgumentException;
 
 final class ScheduledRuntimeProbeReceiptService
 {
-    public const SCHEMA_VERSION = 'seo-platform-07-scheduled-receipt.v1';
+    public const SCHEMA_VERSION = 'seo-platform-07-scheduled-receipt.v2';
 
     public const SLOT_MINUTES = 10;
 
     public function __construct(private readonly ?string $connectionName = null) {}
 
     /** @return array<string,mixed> */
-    public function record(string $triggerMode = 'manual', ?string $now = null): array
+    public function record(string $triggerMode = 'manual', ?string $now = null, ?array $calibration = null): array
     {
         if (! in_array($triggerMode, ['manual', 'scheduled'], true)) {
             throw new InvalidArgumentException('Runtime probe trigger mode is invalid.');
@@ -29,7 +29,10 @@ final class ScheduledRuntimeProbeReceiptService
         $scheduledFor = $observedAt->startOfMinute()->subMinutes($observedAt->minute % self::SLOT_MINUTES);
         $slotKey = $triggerMode.'|'.$scheduledFor->format('Y-m-d\TH:i:00\Z');
         $crawler = $this->crawlerSourceReceipt($observedAt);
-        $status = ($crawler['complete'] ?? false) === true ? 'success' : UnifiedRuntimeProbeEvaluator::MEASUREMENT_HOLD;
+        $calibration ??= $this->missingCalibration();
+        $status = ($crawler['complete'] ?? false) === true && ($calibration['state'] ?? null) === 'success'
+            ? 'success'
+            : UnifiedRuntimeProbeEvaluator::MEASUREMENT_HOLD;
         $receipt = [
             'schema_version' => self::SCHEMA_VERSION,
             'slot_key' => $slotKey,
@@ -38,6 +41,7 @@ final class ScheduledRuntimeProbeReceiptService
             'scheduled_for' => $scheduledFor->toAtomString(),
             'completed_at' => $observedAt->toAtomString(),
             'crawler_source_receipt' => $crawler,
+            'production_calibration' => $calibration,
             'freshness' => [
                 'maximum_receipt_age_minutes' => self::SLOT_MINUTES * 2,
                 'maximum_crawler_source_age_minutes' => 2_880,
@@ -173,6 +177,25 @@ final class ScheduledRuntimeProbeReceiptService
             'raw_url_emitted' => false,
             'query_emitted' => false,
             'user_agent_emitted' => false,
+        ];
+    }
+
+    /** @return array<string,mixed> */
+    private function missingCalibration(): array
+    {
+        return [
+            'schema_version' => ProductionCalibrationProbeService::SCHEMA_VERSION,
+            'state' => UnifiedRuntimeProbeEvaluator::MEASUREMENT_HOLD,
+            'expected_cell_count' => 12,
+            'observed_cell_count' => 0,
+            'cells' => [],
+            'private_negative_set' => [
+                'checked' => false,
+                'accepted' => false,
+                'exposure_count' => null,
+            ],
+            'deploy_revision' => null,
+            'unavailable_reason' => 'calibration_not_supplied',
         ];
     }
 

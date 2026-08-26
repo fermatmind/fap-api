@@ -10,8 +10,7 @@ use Throwable;
 final class SeoTechnicalHealthUiContract
 {
     /**
-     * SEO-PLATFORM-07 has not published its unified production read model yet.
-     * Keep every metric withheld until that authoritative contract is available.
+     * Fail closed when the unified production read model cannot be read.
      *
      * @return array{
      *     state:string,
@@ -49,7 +48,7 @@ final class SeoTechnicalHealthUiContract
 
             return $readModel + [
                 'trust' => [
-                    self::metricTrustItem('runtime_slo', $slotCount),
+                    self::metricTrustItem('runtime_slo', $slotCount, (string) ($readModel['state'] ?? SeoOperationsUiState::PRODUCTION_UNPROVEN)),
                     self::trustItem('public_urls', SeoOperationsUiState::UNAVAILABLE),
                     self::metricTrustItem('latest_crawl', $crawlerHits),
                     self::trustItem('cache_revision', SeoOperationsUiState::UNAVAILABLE),
@@ -73,13 +72,15 @@ final class SeoTechnicalHealthUiContract
     }
 
     /** @return array{label_key:string,state:string,value:int|null,detail_key:string} */
-    private static function metricTrustItem(string $key, mixed $value): array
+    private static function metricTrustItem(string $key, mixed $value, ?string $verifiedState = null): array
     {
         $numeric = is_numeric($value) ? (int) $value : null;
 
         return [
             'label_key' => $key,
-            'state' => $numeric === null ? SeoOperationsUiState::UNAVAILABLE : ($numeric === 0 ? SeoOperationsUiState::VERIFIED_ZERO : SeoOperationsUiState::PRODUCTION_HEALTHY),
+            'state' => $numeric === null
+                ? SeoOperationsUiState::UNAVAILABLE
+                : ($numeric === 0 ? SeoOperationsUiState::VERIFIED_ZERO : ($verifiedState ?? SeoOperationsUiState::PRODUCTION_HEALTHY)),
             'value' => $numeric,
             'detail_key' => $key.'_hint',
         ];
