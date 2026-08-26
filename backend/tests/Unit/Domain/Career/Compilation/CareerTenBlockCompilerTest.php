@@ -73,7 +73,7 @@ final class CareerTenBlockCompilerTest extends TestCase
         self::assertCount(12, $first['row']);
         self::assertArrayNotHasKey('asset_version', $first['row']);
         self::assertArrayNotHasKey('template_version', $first['row']);
-        self::assertSame(CareerDisplayAssetComponentContract::CURRENT_ORDER, $first['row']['component_order_json']);
+        self::assertSame(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS, $first['row']['component_order_json']);
         self::assertSame(
             ['qa3', 'qa2', 'qa1'],
             array_column($first['row']['page_payload_json']['page']['zh']['career_quick_answers_block']['items'], 'key'),

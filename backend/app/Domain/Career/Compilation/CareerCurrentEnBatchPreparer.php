@@ -65,7 +65,7 @@ final class CareerCurrentEnBatchPreparer
         }
 
         $componentOrderHash = CareerCurrentAuthorityPackage::hashValue(
-            CareerDisplayAssetComponentContract::CURRENT_ORDER,
+            CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS,
         );
         $perSlug = [];
         $enHashes = [];
@@ -77,8 +77,7 @@ final class CareerCurrentEnBatchPreparer
             $candidate = $this->candidateRow($baseline['rows'][$slug], $blocks);
             $this->assertCandidateScope($baseline['rows'][$slug], $candidate);
             $projection = $this->package->publicProjection($candidate, 'en');
-            if (count($projection['component_order']) !== 28
-                || array_values($projection['component_order']) !== CareerDisplayAssetComponentContract::CURRENT_ORDER) {
+            if (! CareerDisplayAssetComponentContract::supports((array) $projection['component_order'])) {
                 throw new CareerTenBlockCompileFailure('CURRENT_EN_COMPONENT_CONTRACT_MISMATCH');
             }
             $projectionBytes = CareerCurrentAuthorityPackage::encodePrettyCanonical($projection);
@@ -128,7 +127,7 @@ final class CareerCurrentEnBatchPreparer
             'batch_set_sha256' => CareerCurrentAuthorityPackage::hashValue($batches),
             'cache_writes' => 0,
             'cms_writes' => 0,
-            'components_per_page' => 28,
+            'components_per_page' => count(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS),
             'contract_version' => self::CONTRACT_VERSION,
             'database_writes' => 0,
             'discoverability_writes' => 0,
@@ -165,7 +164,7 @@ final class CareerCurrentEnBatchPreparer
             'batch_sizes' => array_map(static fn (array $batch): int => $batch['target_count'], $batches),
             'before_after_bytes_unchanged' => true,
             'candidate_en_projection_changes' => $candidateEnChanges,
-            'components_per_page' => 28,
+            'components_per_page' => count(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS),
             'current_assets_sha256' => $currentBefore[$assetsPath],
             'current_zh_projection_aggregate_sha256' => CareerCurrentAuthorityPackage::hashValue($zhHashes),
             'current_manifest_sha256' => $currentBefore[$manifestPath],

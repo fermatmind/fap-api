@@ -356,7 +356,7 @@ final class CareerSelectedDisplayAssetMapper
     ];
 
     /** @var list<string> */
-    public const COMPONENT_ORDER = CareerDisplayAssetComponentContract::CURRENT_ORDER;
+    public const COMPONENT_ORDER = CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS;
 
     /** @var list<string> */
     public const REQUIRED_HEADERS = [

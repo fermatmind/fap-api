@@ -542,7 +542,7 @@ final class CareerAliasResolutionBundleBuilderTest extends TestCase
     private function createDisplayAsset(Occupation $occupation): CareerJobDisplayAsset
     {
         $row = ['label' => 'label', 'value' => 'value', 'alternate_value' => null, 'secondary_value' => null];
-        $zh = array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_ORDER, []);
+        $zh = array_fill_keys(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS, []);
         $zh['hero'] = ['title' => $occupation->canonical_title_zh];
         $zh['career_quick_answers_block'] = [
             'availability' => 'published',
@@ -557,7 +557,7 @@ final class CareerAliasResolutionBundleBuilderTest extends TestCase
             'availability' => 'published', 'schema_version' => 'career.onet_structured_fields.v1',
             'heading' => 'O*NET 结构化字段', 'rows' => [$row],
         ];
-        $en = array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_ORDER, []);
+        $en = array_fill_keys(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS, []);
         $en['hero'] = ['title' => $occupation->canonical_title_en];
         $unavailable = ['availability' => 'unavailable', 'reason_code' => 'source_locale_unavailable'];
         $en['career_quick_answers_block'] = $unavailable;
@@ -572,7 +572,7 @@ final class CareerAliasResolutionBundleBuilderTest extends TestCase
             'asset_type' => 'career_job_public_display',
             'asset_role' => 'formal_pilot_master',
             'status' => 'ready_for_pilot',
-            'component_order_json' => CareerDisplayAssetComponentContract::CURRENT_ORDER,
+            'component_order_json' => CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS,
             'page_payload_json' => [
                 'page' => [
                     'zh' => $zh,

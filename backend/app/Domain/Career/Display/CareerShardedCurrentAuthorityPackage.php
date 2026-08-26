@@ -200,7 +200,7 @@ final class CareerShardedCurrentAuthorityPackage
             'summary' => [
                 'assets_sha256' => hash_final($assetsHash),
                 'career_count' => count($rows),
-                'components_per_page' => count(CareerDisplayAssetComponentContract::CURRENT_ORDER),
+                'components_per_page' => count(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS),
                 'full_asset_set_sha256' => $versionlessProjectionSha256,
                 'locale_page_count' => CareerCurrentAuthorityPackage::EXPECTED_LOCALE_PAGES,
                 'manifest_sha256' => hash_file('sha256', $root.'/manifest.json'),
@@ -450,7 +450,10 @@ final class CareerShardedCurrentAuthorityPackage
         sort($keys, SORT_STRING);
         if ($keys !== self::ROW_KEYS
             || ! CareerDisplayAssetComponentContract::supports((array) ($row['component_order_json'] ?? []))
-            || ! CareerDisplayAssetComponentContract::hasExactCurrentPages((array) ($row['page_payload_json'] ?? []))) {
+            || ! CareerDisplayAssetComponentContract::hasDeclaredPages(
+                (array) ($row['page_payload_json'] ?? []),
+                (array) ($row['component_order_json'] ?? []),
+            )) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_SHARDED_ASSEMBLY_INVALID');
         }
         foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {

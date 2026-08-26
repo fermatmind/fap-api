@@ -97,7 +97,7 @@ final class CareerAiImpactPreviewDetailShellBuilder
                 'canonical_slug' => $slug,
             ],
             'claim_permissions' => $this->claimPermissions(),
-            'component_order' => CareerDisplayAssetComponentContract::CURRENT_ORDER,
+            'component_order' => CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS,
             'sources' => $this->displaySources(is_array($aiImpact['sources'] ?? null) ? $aiImpact['sources'] : []),
             'support_components' => [
                 'boundary_notice' => [

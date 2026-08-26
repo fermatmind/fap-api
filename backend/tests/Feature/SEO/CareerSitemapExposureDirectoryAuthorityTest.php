@@ -155,7 +155,7 @@ final class CareerSitemapExposureDirectoryAuthorityTest extends TestCase
             'asset_type' => 'career_job_public_display',
             'asset_role' => 'formal_pilot_master',
             'status' => 'ready_for_pilot',
-            'component_order_json' => CareerDisplayAssetComponentContract::CURRENT_ORDER,
+            'component_order_json' => CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS,
             'page_payload_json' => [
                 'zh' => ['hero' => ['title' => $occupation->canonical_title_zh]],
                 'en' => ['hero' => ['title' => $occupation->canonical_title_en]],

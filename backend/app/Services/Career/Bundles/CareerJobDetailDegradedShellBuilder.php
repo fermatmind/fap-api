@@ -185,7 +185,7 @@ final class CareerJobDetailDegradedShellBuilder
                     ],
                 ],
             ],
-            'component_order' => CareerDisplayAssetComponentContract::CURRENT_ORDER,
+            'component_order' => CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS,
             'sources' => [[
                 'key' => 'runtime_publish_projection',
                 'label' => 'Career runtime publish projection',

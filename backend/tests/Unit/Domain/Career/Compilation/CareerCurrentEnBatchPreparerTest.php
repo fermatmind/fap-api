@@ -6,6 +6,7 @@ namespace Tests\Unit\Domain\Career\Compilation;
 
 use App\Domain\Career\Compilation\CareerCurrentEnBatchPreparer;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
+use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use Tests\TestCase;
 
 final class CareerCurrentEnBatchPreparerTest extends TestCase
@@ -61,7 +62,10 @@ final class CareerCurrentEnBatchPreparerTest extends TestCase
         );
         self::assertSame($before['metadata_json']['presentation_v1'], $candidate['metadata_json']['presentation_v1']);
         self::assertSame($before['component_order_json'], $candidate['component_order_json']);
-        self::assertSame(28, count($package->publicProjection($candidate, 'en')['component_order']));
+        self::assertSame(
+            count(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS),
+            count($package->publicProjection($candidate, 'en')['component_order']),
+        );
         self::assertSame('published', data_get($candidate, 'page_payload_json.page.en.career_quick_answers_block.availability'));
         self::assertSame('Career quick answers', data_get($candidate, 'page_payload_json.page.en.career_quick_answers_block.heading'));
         self::assertSame(['qa3', 'qa2', 'qa1'], array_column(

@@ -957,7 +957,9 @@ class SitemapGenerator
         $pages = is_array($asset->page_payload_json) ? $asset->page_payload_json : [];
         $localizedPages = is_array($pages['page'] ?? null) ? $pages['page'] : $pages;
 
-        return is_array($localizedPages['zh'] ?? null) && is_array($localizedPages['en'] ?? null);
+        return CareerDisplayAssetComponentContract::hasDeclaredPages($pages, $componentOrder)
+            && is_array($localizedPages['zh'] ?? null)
+            && is_array($localizedPages['en'] ?? null);
     }
 
     private function getCareerGuideUrls(): array

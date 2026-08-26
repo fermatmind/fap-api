@@ -8,6 +8,7 @@ use App\Domain\Career\Compilation\CareerCurrentZhBatchMaterializer;
 use App\Domain\Career\Compilation\CareerCurrentZhBatchPreparer;
 use App\Domain\Career\Compilation\CareerTenBlockCompileFailure;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
+use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use Tests\TestCase;
 
 final class CareerCurrentZhBatchMaterializerTest extends TestCase
@@ -55,7 +56,7 @@ final class CareerCurrentZhBatchMaterializerTest extends TestCase
             if ($completed === 21) {
                 self::assertSame(1046, $current['summary']['career_count']);
                 self::assertSame(2092, $current['summary']['locale_page_count']);
-                self::assertSame(26, $current['summary']['components_per_page']);
+                self::assertSame(count(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS), $current['summary']['components_per_page']);
 
                 return;
             }
@@ -80,7 +81,7 @@ final class CareerCurrentZhBatchMaterializerTest extends TestCase
             self::assertFalse($first['diff']['software_developers_included']);
             self::assertSame(1046, $first['report']['package']['career_count']);
             self::assertSame(2092, $first['report']['package']['locale_page_count']);
-            self::assertSame(26, $first['report']['package']['components_per_page']);
+            self::assertSame(count(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS), $first['report']['package']['components_per_page']);
             self::assertSame(0, $first['report']['database_writes']);
             self::assertSame(0, $first['report']['cache_writes']);
             self::assertSame(0, $first['report']['cms_writes']);

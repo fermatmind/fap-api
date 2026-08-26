@@ -27,7 +27,7 @@ final class CareerJobListApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    private const DISPLAY_COMPONENT_ORDER = CareerDisplayAssetComponentContract::CURRENT_ORDER;
+    private const DISPLAY_COMPONENT_ORDER = CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS;
 
     protected function setUp(): void
     {
@@ -718,7 +718,7 @@ final class CareerJobListApiTest extends TestCase
         $pages = (array) $attributes['page_payload_json'];
         foreach (['en', 'zh'] as $locale) {
             $pages[$locale] = array_replace(
-                array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_ORDER, []),
+                array_fill_keys(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS, []),
                 (array) ($pages[$locale] ?? []),
             );
         }

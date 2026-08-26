@@ -122,7 +122,7 @@ final class CareerTenBlockCurrentPackageCompiler
             $candidateRows,
         ))."\n";
         $manifest = $baseline['manifest'];
-        $manifest['structural_contract']['component_order'] = CareerDisplayAssetComponentContract::CURRENT_ORDER;
+        $manifest['structural_contract']['component_order'] = CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS;
         $manifest['ten_block_compilation'] = [
             'contract_version' => 'career.ten_block.current_package_lineage.v1',
             'compiler_version' => self::VERSION,
@@ -170,7 +170,7 @@ final class CareerTenBlockCurrentPackageCompiler
                 'selection_report_digest' => $selectionReportDigest,
                 'career_count' => count($candidateRows),
                 'locale_page_count' => count($candidateRows) * 2,
-                'components_per_page' => 28,
+                'components_per_page' => count(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS),
                 'profile_counts' => $batch['receipt']['profile_counts'],
                 'evidence_bound_slug_count' => count($boundSlugs),
                 'baseline_retained_slug_count' => 0,

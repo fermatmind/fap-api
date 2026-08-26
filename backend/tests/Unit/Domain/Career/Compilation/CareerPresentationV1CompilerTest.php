@@ -7,6 +7,7 @@ namespace Tests\Unit\Domain\Career\Compilation;
 use App\Domain\Career\Compilation\CareerPresentationV1Compiler;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure;
+use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Display\CareerPresentationV1Contract;
 use Tests\TestCase;
 
@@ -22,7 +23,10 @@ final class CareerPresentationV1CompilerTest extends TestCase
 
         self::assertCount(1046, $authority['rows']);
         self::assertSame(2092, $authority['summary']['locale_page_count']);
-        self::assertSame(26, $authority['summary']['components_per_page']);
+        self::assertSame(
+            count(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS),
+            $authority['summary']['components_per_page'],
+        );
         foreach ($authority['rows'] as $row) {
             $presentation = $row['metadata_json']['presentation_v1']['zh'] ?? null;
             self::assertIsArray($presentation);

@@ -58,7 +58,7 @@ final class CareerCurrentZhBatchPreparer
         }
 
         $componentOrderHash = CareerCurrentAuthorityPackage::hashValue(
-            CareerDisplayAssetComponentContract::CURRENT_ORDER,
+            CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS,
         );
         $perSlug = [];
         $zhHashes = [];
@@ -69,8 +69,7 @@ final class CareerCurrentZhBatchPreparer
             $blocks = $this->readBlocks($sourceRoot, $slug);
             $candidate = $this->candidateRow($baseline['rows'][$slug], $blocks);
             $projection = $this->package->publicProjection($candidate, 'zh-CN');
-            if (count($projection['component_order']) !== 28
-                || array_values($projection['component_order']) !== CareerDisplayAssetComponentContract::CURRENT_ORDER) {
+            if (! CareerDisplayAssetComponentContract::supports((array) $projection['component_order'])) {
                 throw new CareerTenBlockCompileFailure('CURRENT_ZH_COMPONENT_CONTRACT_MISMATCH');
             }
             $projectionBytes = CareerCurrentAuthorityPackage::encodePrettyCanonical($projection);
@@ -120,7 +119,7 @@ final class CareerCurrentZhBatchPreparer
             'batch_set_sha256' => CareerCurrentAuthorityPackage::hashValue($batches),
             'cache_writes' => 0,
             'cms_writes' => 0,
-            'components_per_page' => 28,
+            'components_per_page' => count(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS),
             'contract_version' => self::CONTRACT_VERSION,
             'database_writes' => 0,
             'discoverability_writes' => 0,
@@ -156,7 +155,7 @@ final class CareerCurrentZhBatchPreparer
             'batch_sizes' => array_map(static fn (array $batch): int => $batch['target_count'], $batches),
             'before_after_bytes_unchanged' => true,
             'candidate_zh_projection_changes' => $candidateZhChanges,
-            'components_per_page' => 28,
+            'components_per_page' => count(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS),
             'current_assets_sha256' => $currentBefore[$assetsPath],
             'current_en_projection_aggregate_sha256' => CareerCurrentAuthorityPackage::hashValue($enHashes),
             'current_manifest_sha256' => $currentBefore[$manifestPath],
@@ -323,7 +322,7 @@ final class CareerCurrentZhBatchPreparer
             }
         }
         if ($upgradeV43) {
-            $baseline['component_order_json'] = CareerDisplayAssetComponentContract::CURRENT_ORDER;
+            $baseline['component_order_json'] = CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS;
             $baseline['metadata_json']['structured_components_v1'] = $structured->evidenceBindings($definition);
         }
         $baseline['seo_payload_json']['zh']['h1'] = $identity['title_zh'];

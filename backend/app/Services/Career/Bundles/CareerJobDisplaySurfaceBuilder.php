@@ -222,8 +222,8 @@ final class CareerJobDisplaySurfaceBuilder
             if (! CareerDisplayAssetComponentContract::isCurrent($componentOrder)) {
                 return 'CURRENT_DISPLAY_SURFACE_COMPONENT_ORDER_FAILED';
             }
-            if (! CareerDisplayAssetComponentContract::hasExactCurrentPages((array) $asset->page_payload_json)) {
-                return CareerDisplayAssetComponentContract::pageFailureCode((array) $asset->page_payload_json);
+            if (! CareerDisplayAssetComponentContract::hasDeclaredPages((array) $asset->page_payload_json, $componentOrder)) {
+                return CareerDisplayAssetComponentContract::pageFailureCode((array) $asset->page_payload_json, $componentOrder);
             }
             if ($this->containsProductSchema([
                 $pageContent,
@@ -330,7 +330,7 @@ final class CareerJobDisplaySurfaceBuilder
 
         $componentOrder = is_array($asset->component_order_json) ? array_values($asset->component_order_json) : [];
         if (! CareerDisplayAssetComponentContract::isCurrent($componentOrder)
-            || ! CareerDisplayAssetComponentContract::hasExactCurrentPages((array) $asset->page_payload_json)) {
+            || ! CareerDisplayAssetComponentContract::hasDeclaredPages((array) $asset->page_payload_json, $componentOrder)) {
             return false;
         }
 

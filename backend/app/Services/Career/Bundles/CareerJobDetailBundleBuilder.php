@@ -1230,7 +1230,7 @@ final class CareerJobDetailBundleBuilder
         $componentOrder = is_array($asset->component_order_json) ? array_values($asset->component_order_json) : [];
         if ((string) $asset->surface_version !== self::DISPLAY_SURFACE_VERSION
             || ! CareerDisplayAssetComponentContract::isCurrent($componentOrder)
-            || ! CareerDisplayAssetComponentContract::hasExactCurrentPages((array) $asset->page_payload_json)) {
+            || ! CareerDisplayAssetComponentContract::hasDeclaredPages((array) $asset->page_payload_json, $componentOrder)) {
             return null;
         }
 

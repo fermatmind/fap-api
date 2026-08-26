@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SEO;
 
-use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
@@ -20,8 +19,8 @@ final class CareerSitemapDisplayAssetVersionCompatibilityTest extends TestCase
     public function test_v43_adds_no_url_loss_while_v42_remains_readable(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
-        $this->asset('legacy-career', 'v4.2', CareerDisplayAssetComponentContract::CURRENT_ORDER);
-        $this->asset('current-career', 'v4.3', CareerDisplayAssetComponentContract::CURRENT_ORDER);
+        $this->asset('legacy-career', 'v4.2', ['definition_block']);
+        $this->asset('current-career', 'v4.3', ['definition_block']);
 
         $method = new ReflectionMethod(SitemapGenerator::class, 'getDisplayAssetCareerJobDetailUrls');
         $urls = $method->invoke(app(SitemapGenerator::class));
@@ -66,7 +65,10 @@ final class CareerSitemapDisplayAssetVersionCompatibilityTest extends TestCase
             'asset_role' => 'formal_pilot_master',
             'status' => 'ready_for_pilot',
             'component_order_json' => $order,
-            'page_payload_json' => ['en' => [], 'zh' => []],
+            'page_payload_json' => [
+                'en' => ['definition_block' => 'Definition'],
+                'zh' => ['definition_block' => '职业定义'],
+            ],
             'seo_payload_json' => [],
             'sources_json' => [],
             'structured_data_json' => [],

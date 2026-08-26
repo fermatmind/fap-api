@@ -255,7 +255,7 @@ final class CareerDetailReadyPublicationCandidateScanner
         $localizedPages = is_array($pages['page'] ?? null) ? $pages['page'] : $pages;
 
         return CareerDisplayAssetComponentContract::isCurrent($componentOrder)
-            && CareerDisplayAssetComponentContract::hasExactCurrentPages((array) $asset->page_payload_json)
+            && CareerDisplayAssetComponentContract::hasDeclaredPages((array) $asset->page_payload_json, $componentOrder)
             && is_array($localizedPages['zh'] ?? null)
             && is_array($localizedPages['en'] ?? null);
     }

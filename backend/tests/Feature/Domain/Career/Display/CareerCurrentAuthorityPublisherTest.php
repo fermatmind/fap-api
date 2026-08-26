@@ -369,7 +369,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
                 'source_format' => 'sharded',
                 'career_count' => 1,
                 'locale_page_count' => 2,
-                'components_per_page' => 28,
+                'components_per_page' => count(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS),
             ],
         ];
 
@@ -379,7 +379,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
     /** @param array<string,mixed> $overrides @return array<string,mixed> */
     private function row(string $slug, string $title, array $overrides = []): array
     {
-        $page = array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_ORDER, ['value' => 'verified']);
+        $page = array_fill_keys(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS, ['value' => 'verified']);
         $page['hero'] = ['title' => $title];
         $page['career_quick_answers_block'] = [
             'availability' => 'published',
@@ -415,7 +415,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
             'asset_type' => CareerCurrentAuthorityPackage::ASSET_TYPE,
             'asset_role' => CareerCurrentAuthorityPackage::ASSET_ROLE,
             'status' => CareerCurrentAuthorityPackage::READY_STATUS,
-            'component_order_json' => CareerDisplayAssetComponentContract::CURRENT_ORDER,
+            'component_order_json' => CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS,
             'page_payload_json' => ['en' => $en, 'zh' => $page],
             'seo_payload_json' => ['title' => $title],
             'sources_json' => ['references' => []],

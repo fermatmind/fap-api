@@ -248,11 +248,7 @@ final class CareerCurrentAuthorityPackage
                     $enPublishedComponentCount,
                     $enUnavailableComponentCount,
                 );
-                $rowComponentCount = count((array) ($row['component_order_json'] ?? []));
-                if ($componentsPerPage !== null && $componentsPerPage !== $rowComponentCount) {
-                    throw new CareerCurrentAuthorityPackageFailure('CURRENT_ASSET_STRUCTURE_INVALID');
-                }
-                $componentsPerPage = $rowComponentCount;
+                $componentsPerPage ??= count((array) ($row['component_order_json'] ?? []));
                 $rows[$slug] = $row;
                 $rowSeparator = $rowIndex === 0 ? '' : ',';
                 hash_update($fullAssetSetHashContext, $rowSeparator.self::encodeCanonical($row));
@@ -590,7 +586,10 @@ final class CareerCurrentAuthorityPackage
             || ($row['asset_role'] ?? null) !== self::ASSET_ROLE
             || ($row['status'] ?? null) !== self::READY_STATUS
             || ! CareerDisplayAssetComponentContract::isCurrent((array) ($row['component_order_json'] ?? []))
-            || ! CareerDisplayAssetComponentContract::hasExactCurrentPages((array) ($row['page_payload_json'] ?? []))) {
+            || ! CareerDisplayAssetComponentContract::hasDeclaredPages(
+                (array) ($row['page_payload_json'] ?? []),
+                (array) ($row['component_order_json'] ?? []),
+            )) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_ASSET_STRUCTURE_INVALID');
         }
         $pages = self::localizedPages($row);

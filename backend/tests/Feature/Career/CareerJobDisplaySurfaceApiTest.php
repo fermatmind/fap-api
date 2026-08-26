@@ -59,7 +59,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
         'software-developers' => ['soc' => '15-1252', 'onet' => '15-1252.00', 'title' => 'Software Developers'],
     ];
 
-    private const COMPONENT_ORDER = CareerDisplayAssetComponentContract::CURRENT_ORDER;
+    private const COMPONENT_ORDER = CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS;
 
     protected function setUp(): void
     {
@@ -103,7 +103,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             ->assertJsonPath('display_surface_v1.page.content.hero.title', '演员职业判断');
 
         $this->assertContains('fermat_decision_card', $response->json('display_surface_v1.component_order'));
-        $this->assertCount(28, $response->json('display_surface_v1.component_order'));
+        $this->assertTrue(CareerDisplayAssetComponentContract::supports($response->json('display_surface_v1.component_order')));
         $this->assertIsArray($response->json('display_surface_v1.page.content.hero'));
 
         $encoded = json_encode($response->json('display_surface_v1'), JSON_THROW_ON_ERROR);
@@ -132,7 +132,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             ->assertJsonPath('display_surface_v1.page.content.onet_structured_fields_block.availability', 'published');
 
         $this->assertSame(
-            CareerDisplayAssetComponentContract::CURRENT_ORDER_WITHOUT_AI_DESCRIPTION,
+            $row['component_order_json'],
             $response->json('display_surface_v1.component_order'),
         );
         $this->assertSame(
@@ -296,7 +296,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
                 ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN');
 
             $this->assertContains('fermat_decision_card', $response->json('display_surface_v1.component_order'));
-            $this->assertCount(28, $response->json('display_surface_v1.component_order'));
+            $this->assertTrue(CareerDisplayAssetComponentContract::supports($response->json('display_surface_v1.component_order')));
 
             $encoded = json_encode($response->json('display_surface_v1'), JSON_THROW_ON_ERROR);
             $this->assertStringNotContainsString('release_gate', $encoded);
@@ -347,7 +347,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
                 ->assertJsonPath('display_surface_v1.claim_permissions.integrity_state', 'full')
                 ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN');
 
-            $this->assertCount(28, $response->json('display_surface_v1.component_order'));
+            $this->assertTrue(CareerDisplayAssetComponentContract::supports($response->json('display_surface_v1.component_order')));
 
             $encoded = json_encode($response->json('display_surface_v1'), JSON_THROW_ON_ERROR);
             $this->assertStringNotContainsString('Product', $encoded);
@@ -393,7 +393,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
                 ->assertJsonPath('display_surface_v1.claim_permissions.allow_strong_claim', false)
                 ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN');
 
-            $this->assertCount(28, $response->json('display_surface_v1.component_order'));
+            $this->assertTrue(CareerDisplayAssetComponentContract::supports($response->json('display_surface_v1.component_order')));
 
             $encoded = json_encode($response->json(), JSON_THROW_ON_ERROR);
             $this->assertStringNotContainsString('Product', $encoded);
@@ -427,7 +427,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             ->assertJsonPath('display_surface_v1.subject.canonical_slug', 'architects')
             ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN');
 
-        $this->assertCount(28, $response->json('display_surface_v1.component_order'));
+        $this->assertTrue(CareerDisplayAssetComponentContract::supports($response->json('display_surface_v1.component_order')));
     }
 
     public function test_display_asset_backed_bundle_remains_noindex_when_runtime_projection_rejects_indexing(): void
@@ -751,7 +751,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
 
         $payload = is_array($attributes['page_payload_json'] ?? null) ? $attributes['page_payload_json'] : [];
         $pages = is_array($payload['page'] ?? null) ? $payload['page'] : $payload;
-        $componentOrder = CareerDisplayAssetComponentContract::CURRENT_ORDER;
+        $componentOrder = CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS;
         foreach (['en', 'zh'] as $locale) {
             if (is_array($pages[$locale] ?? null)) {
                 $pages[$locale] = array_replace(

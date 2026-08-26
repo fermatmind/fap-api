@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Career\Compilation;
 
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
+use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Display\CareerPresentationV1Contract;
 use JsonException;
 
@@ -133,7 +134,7 @@ final class CareerPresentationV1Compiler
                 'design_authority_sha256' => CareerPresentationV1Contract::DESIGN_AUTHORITY_SHA256,
                 'career_count' => count($candidateRows),
                 'locale_page_count' => count($candidateRows) * 2,
-                'components_per_page' => 28,
+                'components_per_page' => count(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS),
                 'zh_presentation_count' => count($candidateRows),
                 'missing_field_count' => count($missingFields),
                 'database_writes' => 0,
@@ -163,7 +164,7 @@ final class CareerPresentationV1Compiler
                 'changed_row_count' => $presentationChanges + $sourceReferenceChanges,
                 'slug_count' => count($candidateRows),
                 'locale_page_count' => count($candidateRows) * 2,
-                'components_per_page' => 28,
+                'components_per_page' => count(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS),
                 'software_developers_included' => false,
                 'canonical_route_inventory_changed' => false,
                 'discoverability_surface_changed' => false,

@@ -58,7 +58,7 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         'software-developers' => ['soc' => '15-1252', 'onet' => '15-1252.00', 'title' => 'Software Developers'],
     ];
 
-    private const COMPONENT_ORDER = CareerDisplayAssetComponentContract::CURRENT_ORDER;
+    private const COMPONENT_ORDER = CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS;
 
     public function test_it_returns_surface_for_actors_ready_asset(): void
     {
@@ -66,10 +66,13 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $asset = $this->createDisplayAsset($occupation);
 
         $this->assertSame(
-            CareerDisplayAssetComponentContract::CURRENT_ORDER,
+            CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS,
             array_keys($asset->page_payload_json['en']),
         );
-        $this->assertTrue(CareerDisplayAssetComponentContract::hasExactCurrentPages($asset->page_payload_json));
+        $this->assertTrue(CareerDisplayAssetComponentContract::hasDeclaredPages(
+            $asset->page_payload_json,
+            $asset->component_order_json,
+        ));
 
         $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
 
@@ -89,7 +92,7 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $this->assertSame('official', $surface['claim_permissions']['evidence_basis']['salary']);
         $this->assertSame('central_score', $surface['claim_permissions']['evidence_basis']['ai_exposure']);
         $this->assertSame('direct', $surface['claim_permissions']['evidence_basis']['crosswalk']);
-        $this->assertCount(28, $surface['component_order']);
+        $this->assertTrue(CareerDisplayAssetComponentContract::supports($surface['component_order']));
         $this->assertContains('fermat_decision_card', $surface['component_order']);
     }
 
@@ -109,11 +112,14 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
 
         $this->assertArrayNotHasKey('asset_version', $surface);
         $this->assertArrayNotHasKey('template_version', $surface);
-        $this->assertSame(
-            CareerCurrentAuthorityPackage::hashValue(app(CareerCurrentAuthorityPackage::class)->publicProjection($row, 'zh-CN')),
-            CareerCurrentAuthorityPackage::hashValue(app(CareerCurrentAuthorityPackage::class)->displayOwnedProjection($surface)),
-        );
-        $this->assertSame(CareerDisplayAssetComponentContract::CURRENT_ORDER, $surface['component_order']);
+        $expected = app(CareerCurrentAuthorityPackage::class)->publicProjection($row, 'zh-CN');
+        $this->assertSame($row['component_order_json'], $surface['component_order']);
+        foreach ($surface['component_order'] as $componentId) {
+            $this->assertSame(
+                $expected['page']['content'][$componentId],
+                $surface['page']['content'][$componentId],
+            );
+        }
         $this->assertSame(
             ['qa3', 'qa2', 'qa1'],
             array_column($surface['page']['content']['career_quick_answers_block']['items'], 'key'),
@@ -137,8 +143,8 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
             Request::create('/api/v0.5/career/jobs/accountants-and-auditors', 'GET', ['locale' => 'zh-CN']),
         );
         $this->assertSame(
-            CareerCurrentAuthorityPackage::hashValue(app(CareerCurrentAuthorityPackage::class)->publicProjection($row, 'zh-CN')),
-            CareerCurrentAuthorityPackage::hashValue(app(CareerCurrentAuthorityPackage::class)->displayOwnedProjection($payload['display_surface_v1'])),
+            app(CareerCurrentAuthorityPackage::class)->displayOwnedProjection($surface),
+            app(CareerCurrentAuthorityPackage::class)->displayOwnedProjection($payload['display_surface_v1']),
         );
     }
 
@@ -196,7 +202,7 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
     {
         $occupation = $this->createOccupation('actors');
         $asset = $this->createDisplayAsset($occupation, [
-            'component_order_json' => CareerDisplayAssetComponentContract::CURRENT_ORDER,
+            'component_order_json' => CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS,
         ]);
         $pages = $asset->page_payload_json;
         foreach (['zh', 'en'] as $locale) {
@@ -218,7 +224,7 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
 
         $this->assertIsArray($surface);
-        $this->assertSame(CareerDisplayAssetComponentContract::CURRENT_ORDER, $surface['component_order']);
+        $this->assertSame(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS, $surface['component_order']);
         $this->assertSame('演员职业判断', $surface['page']['content']['hero']['title']);
         $this->assertSame('AI 职业解读', $surface['page']['content']['career_ai_description_block']['heading']);
         $this->assertSame('职业发展路径', $surface['page']['content']['career_path_block']['heading']);
@@ -262,7 +268,7 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
             $this->assertSame(self::PILOT_SLUGS[$slug]['soc'], $surface['subject']['soc_code']);
             $this->assertSame(self::PILOT_SLUGS[$slug]['onet'], $surface['subject']['onet_code']);
             $this->assertSame('display.surface.v1', $surface['surface_version']);
-            $this->assertCount(28, $surface['component_order']);
+            $this->assertTrue(CareerDisplayAssetComponentContract::supports($surface['component_order']));
         }
     }
 
@@ -301,7 +307,7 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
             $this->assertSame('display.surface.v1', $surface['surface_version']);
             $this->assertArrayNotHasKey('asset_version', $surface);
             $this->assertArrayNotHasKey('template_version', $surface);
-            $this->assertCount(28, $surface['component_order']);
+            $this->assertTrue(CareerDisplayAssetComponentContract::supports($surface['component_order']));
         }
     }
 
@@ -367,7 +373,7 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $this->assertNull($surface);
     }
 
-    public function test_it_returns_null_if_component_order_is_not_complete(): void
+    public function test_it_accepts_a_supported_component_subset(): void
     {
         $occupation = $this->createOccupation('data-scientists');
         $this->createDisplayAsset($occupation, [
@@ -376,7 +382,8 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
 
         $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
 
-        $this->assertNull($surface);
+        $this->assertIsArray($surface);
+        $this->assertSame(array_slice(self::COMPONENT_ORDER, 0, 23), $surface['component_order']);
     }
 
     public function test_it_returns_null_if_product_schema_is_present(): void
@@ -795,7 +802,7 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
 
         $payload = is_array($attributes['page_payload_json'] ?? null) ? $attributes['page_payload_json'] : [];
         $pages = is_array($payload['page'] ?? null) ? $payload['page'] : $payload;
-        $componentOrder = CareerDisplayAssetComponentContract::CURRENT_ORDER;
+        $componentOrder = CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS;
         foreach (['en', 'zh'] as $locale) {
             if (is_array($pages[$locale] ?? null)) {
                 $pages[$locale] = array_replace(

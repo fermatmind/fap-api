@@ -7,7 +7,7 @@ namespace App\Domain\Career\Display;
 final class CareerDisplayAssetComponentContract
 {
     /** @var list<string> */
-    public const CURRENT_ORDER = [
+    public const SUPPORTED_COMPONENTS = [
         'breadcrumb',
         'hero',
         'fermat_decision_card',
@@ -38,43 +38,24 @@ final class CareerDisplayAssetComponentContract
         'final_cta',
     ];
 
-    /** @var list<string> */
-    public const CURRENT_ORDER_WITHOUT_AI_DESCRIPTION = [
-        'breadcrumb',
-        'hero',
-        'fermat_decision_card',
-        'primary_cta',
-        'career_snapshot_primary_locale',
-        'career_snapshot_secondary_locale',
-        'fit_decision_checklist',
-        'riasec_fit_block',
-        'personality_fit_block',
-        'definition_block',
-        'responsibilities_block',
-        'work_context_block',
-        'career_quick_answers_block',
-        'onet_structured_fields_block',
-        'market_signal_card',
-        'adjacent_career_comparison_table',
-        'ai_impact_table',
-        'career_risk_cards',
-        'career_path_block',
-        'contract_project_risk_block',
-        'next_steps_block',
-        'faq_block',
-        'related_next_pages',
-        'source_card',
-        'review_validity_card',
-        'boundary_notice',
-        'final_cta',
-    ];
-
     /** @param array<mixed> $order */
     public static function supports(array $order): bool
     {
-        $order = array_values($order);
+        if ($order === [] || ! array_is_list($order)) {
+            return false;
+        }
 
-        return $order === self::CURRENT_ORDER || $order === self::CURRENT_ORDER_WITHOUT_AI_DESCRIPTION;
+        $seen = [];
+        foreach ($order as $componentId) {
+            if (! is_string($componentId)
+                || ! in_array($componentId, self::SUPPORTED_COMPONENTS, true)
+                || isset($seen[$componentId])) {
+                return false;
+            }
+            $seen[$componentId] = true;
+        }
+
+        return true;
     }
 
     /** @param array<mixed> $order */
@@ -84,20 +65,23 @@ final class CareerDisplayAssetComponentContract
     }
 
     /** @param array<mixed> $payload */
-    public static function hasExactCurrentPages(array $payload): bool
+    public static function hasDeclaredPages(array $payload, array $componentOrder): bool
     {
+        if (! self::supports($componentOrder)) {
+            return false;
+        }
+
         $pages = is_array($payload['page'] ?? null) ? $payload['page'] : $payload;
-        $order = self::expectedOrderForPages($pages);
-        $allowed = array_merge($order, ['path', 'secondary_cta']);
+        $allowed = array_merge(self::SUPPORTED_COMPONENTS, ['path', 'secondary_cta']);
 
         foreach (['en', 'zh'] as $locale) {
             $page = $pages[$locale] ?? null;
             if (! is_array($page)
-                || array_diff($order, array_keys($page)) !== []
+                || array_diff($componentOrder, array_keys($page)) !== []
                 || array_diff(array_keys($page), $allowed) !== []
                 || array_key_exists('sections', $page)
                 || array_key_exists('content_sections', $page)
-                || ! self::validStructuredComponents($page, $locale)
+                || self::structuredComponentFailureCode($page, $locale, $componentOrder) !== null
                 || self::containsPlaceholder($page)) {
                 return false;
             }
@@ -110,25 +94,28 @@ final class CareerDisplayAssetComponentContract
     }
 
     /** @param array<mixed> $payload */
-    public static function pageFailureCode(array $payload): ?string
+    public static function pageFailureCode(array $payload, array $componentOrder): ?string
     {
+        if (! self::supports($componentOrder)) {
+            return 'CURRENT_DISPLAY_SURFACE_COMPONENT_ORDER_INVALID';
+        }
+
         $pages = is_array($payload['page'] ?? null) ? $payload['page'] : $payload;
-        $order = self::expectedOrderForPages($pages);
         foreach (['en', 'zh'] as $locale) {
             $page = $pages[$locale] ?? null;
             if (! is_array($page)) {
                 return 'CURRENT_DISPLAY_SURFACE_LOCALE_PAGE_MISSING';
             }
-            if (array_diff($order, array_keys($page)) !== []) {
+            if (array_diff($componentOrder, array_keys($page)) !== []) {
                 return 'CURRENT_DISPLAY_SURFACE_COMPONENT_MISSING';
             }
-            if (array_diff(array_keys($page), array_merge($order, ['path', 'secondary_cta'])) !== []) {
+            if (array_diff(array_keys($page), array_merge(self::SUPPORTED_COMPONENTS, ['path', 'secondary_cta'])) !== []) {
                 return 'CURRENT_DISPLAY_SURFACE_COMPONENT_UNEXPECTED';
             }
             if (array_key_exists('sections', $page) || array_key_exists('content_sections', $page)) {
                 return 'CURRENT_DISPLAY_SURFACE_LEGACY_SECTION_PRESENT';
             }
-            $structuredFailure = self::structuredComponentFailureCode($page, $locale);
+            $structuredFailure = self::structuredComponentFailureCode($page, $locale, $componentOrder);
             if ($structuredFailure !== null) {
                 return $structuredFailure;
             }
@@ -145,63 +132,25 @@ final class CareerDisplayAssetComponentContract
             : 'CURRENT_DISPLAY_SURFACE_LOCALE_SET_MISMATCH';
     }
 
-    /** @param array<string,mixed> $pages @return list<string> */
-    private static function expectedOrderForPages(array $pages): array
+    /** @param array<string,mixed> $page @param array<mixed> $componentOrder */
+    private static function structuredComponentFailureCode(array $page, string $locale, array $componentOrder): ?string
     {
-        $enPath = $pages['en']['path'] ?? null;
-        $zhPath = $pages['zh']['path'] ?? null;
-        $isAccountants = is_string($enPath) && is_string($zhPath)
-            && str_ends_with($enPath, '/accountants-and-auditors')
-            && str_ends_with($zhPath, '/accountants-and-auditors');
-        $omitsAiDescription = ! array_key_exists('career_ai_description_block', (array) ($pages['en'] ?? []))
-            && ! array_key_exists('career_ai_description_block', (array) ($pages['zh'] ?? []));
-
-        return $isAccountants && $omitsAiDescription
-            ? self::CURRENT_ORDER_WITHOUT_AI_DESCRIPTION
-            : self::CURRENT_ORDER;
-    }
-
-    /** @param array<string,mixed> $page */
-    private static function validStructuredComponents(array $page, string $locale): bool
-    {
+        $declaresQuickAnswers = in_array('career_quick_answers_block', $componentOrder, true);
+        $declaresOnetFields = in_array('onet_structured_fields_block', $componentOrder, true);
         $quick = $page['career_quick_answers_block'] ?? null;
         $onet = $page['onet_structured_fields_block'] ?? null;
         if ($locale === 'en') {
-            return (self::isSourceLocaleUnavailable($quick) && self::isSourceLocaleUnavailable($onet))
-                || (self::validPublishedQuickAnswers($quick, 'Career quick answers')
-                    && self::validPublishedOnetFields($onet, 'O*NET structured fields'));
-        }
-
-        $isAccountantsProfile = str_ends_with(
-            (string) ($page['path'] ?? ''),
-            '/accountants-and-auditors',
-        );
-
-        return self::validPublishedQuickAnswers(
-            $quick,
-            $isAccountantsProfile ? null : '职业速答',
-        ) && self::validPublishedOnetFields(
-            $onet,
-            $isAccountantsProfile ? null : 'O*NET 结构化字段',
-        );
-    }
-
-    /** @param array<string,mixed> $page */
-    private static function structuredComponentFailureCode(array $page, string $locale): ?string
-    {
-        $quick = $page['career_quick_answers_block'] ?? null;
-        $onet = $page['onet_structured_fields_block'] ?? null;
-        if ($locale === 'en') {
-            if (self::isSourceLocaleUnavailable($quick) && self::isSourceLocaleUnavailable($onet)) {
-                return null;
-            }
-            if (! self::validPublishedQuickAnswers($quick, 'Career quick answers')) {
+            if ($declaresQuickAnswers
+                && ! self::isSourceLocaleUnavailable($quick)
+                && ! self::validPublishedQuickAnswers($quick, 'Career quick answers')) {
                 return 'CURRENT_DISPLAY_SURFACE_EN_QUICK_ANSWERS_INVALID';
             }
 
-            return self::validPublishedOnetFields($onet, 'O*NET structured fields')
-                ? null
-                : 'CURRENT_DISPLAY_SURFACE_EN_ONET_FIELDS_INVALID';
+            return $declaresOnetFields
+                && ! self::isSourceLocaleUnavailable($onet)
+                && ! self::validPublishedOnetFields($onet, 'O*NET structured fields')
+                    ? 'CURRENT_DISPLAY_SURFACE_EN_ONET_FIELDS_INVALID'
+                    : null;
         }
         $isAccountantsProfile = str_ends_with(
             (string) ($page['path'] ?? ''),
@@ -209,17 +158,17 @@ final class CareerDisplayAssetComponentContract
         );
         $expectedQuickHeading = $isAccountantsProfile ? null : '职业速答';
         $expectedOnetHeading = $isAccountantsProfile ? null : 'O*NET 结构化字段';
-        if (! is_array($quick)
+        if ($declaresQuickAnswers && (! is_array($quick)
             || ! self::exactKeys($quick, ['availability', 'schema_version', 'heading', 'items'])
             || ($quick['availability'] ?? null) !== 'published'
             || ($quick['schema_version'] ?? null) !== 'career.quick_answers.v1'
             || ! self::nonEmptyString($quick['heading'] ?? null)
             || ($expectedQuickHeading !== null && ($quick['heading'] ?? null) !== $expectedQuickHeading)
             || ! is_array($quick['items'] ?? null)
-            || count($quick['items']) !== 3) {
+            || count($quick['items']) !== 3)) {
             return 'CURRENT_DISPLAY_SURFACE_ZH_QUICK_ANSWERS_INVALID';
         }
-        foreach (['qa3', 'qa2', 'qa1'] as $index => $key) {
+        foreach ($declaresQuickAnswers ? ['qa3', 'qa2', 'qa1'] : [] as $index => $key) {
             $item = $quick['items'][$index] ?? null;
             if (! is_array($item)
                 || ! self::exactKeys($item, ['key', 'question', 'answer', 'table'])
@@ -234,18 +183,18 @@ final class CareerDisplayAssetComponentContract
                 return 'CURRENT_DISPLAY_SURFACE_ZH_QUICK_ANSWER_TABLE_INVALID';
             }
         }
-        if (! is_array($onet)
+        if ($declaresOnetFields && (! is_array($onet)
             || ! self::exactKeys($onet, ['availability', 'schema_version', 'heading', 'rows'])
             || ($onet['availability'] ?? null) !== 'published'
             || ($onet['schema_version'] ?? null) !== 'career.onet_structured_fields.v1'
             || ! self::nonEmptyString($onet['heading'] ?? null)
-            || ($expectedOnetHeading !== null && ($onet['heading'] ?? null) !== $expectedOnetHeading)) {
+            || ($expectedOnetHeading !== null && ($onet['heading'] ?? null) !== $expectedOnetHeading))) {
             return 'CURRENT_DISPLAY_SURFACE_ZH_ONET_FIELDS_INVALID';
         }
 
-        return self::validRows($onet['rows'] ?? null)
-            ? null
-            : 'CURRENT_DISPLAY_SURFACE_ZH_ONET_ROWS_INVALID';
+        return $declaresOnetFields && ! self::validRows($onet['rows'] ?? null)
+            ? 'CURRENT_DISPLAY_SURFACE_ZH_ONET_ROWS_INVALID'
+            : null;
     }
 
     private static function validRows(mixed $rows): bool

@@ -50,7 +50,10 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
 
         self::assertSame(1046, $package['summary']['career_count']);
         self::assertSame(2092, $package['summary']['locale_page_count']);
-        self::assertSame(28, $package['summary']['components_per_page']);
+        self::assertSame(
+            count(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS),
+            $package['summary']['components_per_page'],
+        );
         self::assertSame('sharded', $package['summary']['source_format']);
         self::assertSame('career.sharded_current.manifest.v1', $package['manifest']['contract_version']);
         self::assertCount(640, $package['manifest']['shards']);
@@ -165,7 +168,7 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
 
     public function test_current_page_contract_rejects_legacy_unknown_and_placeholder_structures(): void
     {
-        $page = array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_ORDER, ['value' => 'verified']);
+        $page = array_fill_keys(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS, ['value' => 'verified']);
         $row = ['label' => 'label', 'value' => 'value', 'alternate_value' => null, 'secondary_value' => null];
         $page['career_quick_answers_block'] = [
             'availability' => 'published', 'schema_version' => 'career.quick_answers.v1',
@@ -182,19 +185,20 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
         $payload = ['en' => $page, 'zh' => $page];
         $payload['en']['career_quick_answers_block']['heading'] = 'Career quick answers';
         $payload['en']['onet_structured_fields_block']['heading'] = 'O*NET structured fields';
-        self::assertTrue(CareerDisplayAssetComponentContract::hasExactCurrentPages($payload));
+        $componentOrder = CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS;
+        self::assertTrue(CareerDisplayAssetComponentContract::hasDeclaredPages($payload, $componentOrder));
 
         $missing = $payload;
         unset($missing['en']['career_path_block']);
-        self::assertFalse(CareerDisplayAssetComponentContract::hasExactCurrentPages($missing));
+        self::assertFalse(CareerDisplayAssetComponentContract::hasDeclaredPages($missing, $componentOrder));
 
         $unknown = $payload;
         $unknown['zh']['sections'] = [];
-        self::assertFalse(CareerDisplayAssetComponentContract::hasExactCurrentPages($unknown));
+        self::assertFalse(CareerDisplayAssetComponentContract::hasDeclaredPages($unknown, $componentOrder));
 
         $placeholder = $payload;
         $placeholder['en']['hero'] = ['content_available' => false];
-        self::assertFalse(CareerDisplayAssetComponentContract::hasExactCurrentPages($placeholder));
+        self::assertFalse(CareerDisplayAssetComponentContract::hasDeclaredPages($placeholder, $componentOrder));
     }
 
     public function test_superseded_normal_display_writers_are_absent_and_explicit_exceptions_remain(): void

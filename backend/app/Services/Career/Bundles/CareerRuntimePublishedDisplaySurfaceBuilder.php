@@ -57,7 +57,7 @@ final class CareerRuntimePublishedDisplaySurfaceBuilder
                 'locale' => $publicLocale,
                 'content' => $this->pageContent($slug, $title, $path, $testPath, $isZh),
             ],
-            'component_order' => CareerDisplayAssetComponentContract::CURRENT_ORDER,
+            'component_order' => CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS,
             'sources' => [
                 [
                     'key' => 'runtime_publish_projection',
