@@ -9,10 +9,10 @@
     "SEO-PLATFORM-07-B": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/seo-platform-07-b-unified-runtime-probe",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "83095d254b7fc89c3f25cf9ed3ab703223811506",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3792",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -51,6 +51,11 @@
           "at": "2026-08-26T08:52:00Z",
           "status": "local_checks_passed",
           "summary": "Initialized and validated the exact 07-B unified read-only runtime evaluator after 07-A merged and exact-SHA CI passed. No scheduler, Issue Queue, persistence, production write, publication, sitemap, llms or search operation was executed."
+        },
+        {
+          "at": "2026-08-26T08:55:00Z",
+          "status": "pr_open",
+          "summary": "Opened PR #3792 for the exact 07-B scope at validated implementation commit 83095d254b7fc89c3f25cf9ed3ab703223811506. GitHub has no PR check requirement; exact-SHA CI runs after merge under the current repository control plane."
         }
       ]
     },
