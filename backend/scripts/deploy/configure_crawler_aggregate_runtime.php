@@ -7,6 +7,8 @@ if (PHP_SAPI !== 'cli') {
 }
 
 $envFile = $argv[1] ?? '';
+$sudoBin = $argv[2] ?? '/usr/bin/sudo';
+$runtimeUser = $argv[3] ?? 'www-data';
 $sourcePath = trim((string) getenv('SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY'));
 
 if ($envFile === '' || $envFile[0] !== '/' || basename($envFile) !== '.env' || ! is_file($envFile)) {
@@ -18,11 +20,32 @@ if ($sourcePath === ''
     || $sourcePath[0] !== '/'
     || preg_match('#\A/[A-Za-z0-9._~+/\-]+\z#', $sourcePath) !== 1
     || str_contains($sourcePath, '/./')
-    || str_contains($sourcePath, '/../')
-    || ! is_file($sourcePath)
-    || ! is_readable($sourcePath)) {
+    || str_contains($sourcePath, '/../')) {
     fwrite(STDERR, "crawler_runtime_source_invalid\n");
     exit(1);
+}
+
+if ($sudoBin === ''
+    || $sudoBin[0] !== '/'
+    || preg_match('#\A/[A-Za-z0-9._~+/\-]+\z#', $sudoBin) !== 1
+    || ! is_executable($sudoBin)
+    || preg_match('/\A[A-Za-z0-9_.-]+\z/', $runtimeUser) !== 1) {
+    fwrite(STDERR, "crawler_runtime_identity_invalid\n");
+    exit(1);
+}
+
+foreach (['-f', '-s', '-r'] as $predicate) {
+    $process = proc_open(
+        [$sudoBin, '-n', '-u', $runtimeUser, '--', '/usr/bin/test', $predicate, $sourcePath],
+        [0 => ['file', '/dev/null', 'r'], 1 => ['file', '/dev/null', 'w'], 2 => ['file', '/dev/null', 'w']],
+        $pipes,
+    );
+    $exitCode = is_resource($process) ? proc_close($process) : 1;
+
+    if ($exitCode !== 0) {
+        fwrite(STDERR, "crawler_runtime_source_invalid\n");
+        exit(1);
+    }
 }
 
 $updates = [

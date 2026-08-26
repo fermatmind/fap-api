@@ -91,6 +91,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $schedule->command('seo:warm-sitemap-source-cache --json')->everyTenMinutes()->withoutOverlapping();
         if ((bool) config('seo_intel.crawler_log_aggregate_storage.scheduler_enabled', false)) {
             $schedule->command('seo-intel:crawler-log-aggregate-scheduled --json')
+                ->user('www-data')
                 ->everyTenMinutes()
                 ->withoutOverlapping(20)
                 ->onOneServer();

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\SeoIntel\CrawlerLog;
 
 use RuntimeException;
+use SplFileObject;
 
 final class CrawlerLogSingleSourceReader
 {
