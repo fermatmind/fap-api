@@ -1,0 +1,450 @@
+{
+  "schema_version": "fermatmind.article15_content_package.v1",
+  "package_id": "ARTICLE15-BATCH-C-01-holland-career-interest-test-can-and-cannot-tell-you",
+  "package_order": 1,
+  "status": {
+    "content_package_only": true,
+    "intended_cms_status": "draft",
+    "requires_operator_review": true,
+    "cms_draft_created": false,
+    "publish_allowed": false,
+    "search_submit_allowed": false,
+    "import_ready": false
+  },
+  "bindings": {
+    "baseline_commit": "6f172f279a02ef1b6ac57f59ed88cf99e6235793",
+    "batch_a_manifest_sha256": "48a79cdcfc5b10766b58658aadb601e0682257af56d4fd108ed920a2ed6fa20a",
+    "batch_b_manifest_sha256": "91156cf83eba46b2f687e527aaf3dc1694a63c4bd660ee3ea5e8d82c9d6bc96a",
+    "top100_source_sha256": "e4c9788d6fadff53bc33170299971ab57dbff1810ad1fcdb4f97f5f4ee94d150",
+    "article15_target_set_sha256": "9ccd8cab8b44f10409e0ef3ced944ba663376c84a5032bd74ddba143d88cd35a",
+    "baseline_authority": "production_public_article_api_read_only",
+    "baseline_observed_at": "2026-08-26"
+  },
+  "identity_lock": {
+    "article_id": 31,
+    "translation_group_id": "ddf3d56d-0b47-4b9b-816e-0d2de9dcbbc6",
+    "published_revision_id": 36,
+    "locale": "zh-CN",
+    "slug": "holland-career-interest-test-can-and-cannot-tell-you",
+    "canonical_url": "https://fermatmind.com/zh/articles/holland-career-interest-test-can-and-cannot-tell-you",
+    "current_status": "published",
+    "current_is_public": true,
+    "current_is_indexable": true
+  },
+  "current_to_proposed": {
+    "article_id": {
+      "status": "KEEP",
+      "current": 31,
+      "proposed": 31
+    },
+    "translation_group_id": {
+      "status": "KEEP",
+      "current": "ddf3d56d-0b47-4b9b-816e-0d2de9dcbbc6",
+      "proposed": "ddf3d56d-0b47-4b9b-816e-0d2de9dcbbc6"
+    },
+    "published_revision_id": {
+      "status": "KEEP",
+      "current": 36,
+      "proposed": 36,
+      "note": "identity precondition only; no revision write in this task"
+    },
+    "locale": {
+      "status": "KEEP",
+      "current": "zh-CN",
+      "proposed": "zh-CN"
+    },
+    "slug": {
+      "status": "KEEP",
+      "current": "holland-career-interest-test-can-and-cannot-tell-you",
+      "proposed": "holland-career-interest-test-can-and-cannot-tell-you"
+    },
+    "canonical_url": {
+      "status": "KEEP",
+      "current": "https://fermatmind.com/zh/articles/holland-career-interest-test-can-and-cannot-tell-you",
+      "proposed": "https://fermatmind.com/zh/articles/holland-career-interest-test-can-and-cannot-tell-you"
+    },
+    "publication": {
+      "status": "KEEP",
+      "current": {
+        "status": "published",
+        "is_public": true
+      },
+      "proposed": {
+        "status": "published",
+        "is_public": true
+      }
+    },
+    "title": {
+      "status": "KEEP",
+      "current": "霍兰德职业兴趣测试能告诉你什么，不能告诉你什么？",
+      "proposed": "霍兰德职业兴趣测试能告诉你什么，不能告诉你什么？"
+    },
+    "h1": {
+      "status": "KEEP",
+      "current": "霍兰德职业兴趣测试能告诉你什么，不能告诉你什么？",
+      "proposed": "霍兰德职业兴趣测试能告诉你什么，不能告诉你什么？",
+      "note": "CMS title is the page H1; body snapshot contains no H1"
+    },
+    "seo_title": {
+      "status": "KEEP",
+      "current": "霍兰德职业兴趣测试能测什么？RIASEC职业方向解释",
+      "proposed": "霍兰德职业兴趣测试能测什么？RIASEC职业方向解释"
+    },
+    "seo_description": {
+      "status": "KEEP",
+      "current": "霍兰德职业兴趣测试能帮你理解职业兴趣结构，但不能精准决定职业。用RIASEC看清方向、边界与下一步。",
+      "proposed": "霍兰德职业兴趣测试能帮你理解职业兴趣结构，但不能精准决定职业。用RIASEC看清方向、边界与下一步。"
+    },
+    "intro": {
+      "status": "KEEP",
+      "current": "霍兰德测试不是职业答案，而是帮你识别职业兴趣结构、探索方向与下一步验证路径。",
+      "proposed": "霍兰德测试不是职业答案，而是帮你识别职业兴趣结构、探索方向与下一步验证路径。"
+    },
+    "body_markdown": {
+      "status": "CHANGE",
+      "current": {
+        "sha256": "17890610ef5e47deafdfc994306b988af219e389faa2bcb89c35703d3435d61a"
+      },
+      "proposed": {
+        "file": "body.zh-CN.md",
+        "sha256": "e8a1416d4d8dc6975f807e878034c4d11a8b05eeac8b85fc6e1cc63e7ba21619"
+      },
+      "note": "only the exact non-canonical Big Five path changes"
+    },
+    "faq": {
+      "status": "KEEP",
+      "current": [
+        {
+          "question": "霍兰德职业兴趣测试能告诉我最适合的职业吗？",
+          "answer": "不能。它能帮助你理解职业兴趣结构和优先探索方向，但不能直接决定唯一职业答案。"
+        },
+        {
+          "question": "RIASEC 测的是人格还是兴趣？",
+          "answer": "RIASEC 主要测职业兴趣和工作环境偏好，不是人格诊断，也不等同于能力评估。"
+        },
+        {
+          "question": "霍兰德测试和 MBTI、大五人格有什么区别？",
+          "answer": "霍兰德测试更关注职业活动和工作环境，大五人格更关注稳定特质，MBTI 更适合作为身份与沟通偏好入口。"
+        },
+        {
+          "question": "如果我的 RIASEC 结果很分散，说明什么？",
+          "answer": "这通常说明兴趣结构较广，需要通过真实任务、职业访谈和低风险实验进一步验证方向。"
+        }
+      ],
+      "proposed": [
+        {
+          "question": "霍兰德职业兴趣测试能告诉我最适合的职业吗？",
+          "answer": "不能。它能帮助你理解职业兴趣结构和优先探索方向，但不能直接决定唯一职业答案。"
+        },
+        {
+          "question": "RIASEC 测的是人格还是兴趣？",
+          "answer": "RIASEC 主要测职业兴趣和工作环境偏好，不是人格诊断，也不等同于能力评估。"
+        },
+        {
+          "question": "霍兰德测试和 MBTI、大五人格有什么区别？",
+          "answer": "霍兰德测试更关注职业活动和工作环境，大五人格更关注稳定特质，MBTI 更适合作为身份与沟通偏好入口。"
+        },
+        {
+          "question": "如果我的 RIASEC 结果很分散，说明什么？",
+          "answer": "这通常说明兴趣结构较广，需要通过真实任务、职业访谈和低风险实验进一步验证方向。"
+        }
+      ]
+    },
+    "answer_surface_v1": {
+      "status": "KEEP",
+      "current": {
+        "policy": "editor_supplied",
+        "faq_items": [
+          {
+            "question": "霍兰德职业兴趣测试能告诉我最适合的职业吗？",
+            "answer": "不能。它能帮助你理解职业兴趣结构和优先探索方向，但不能直接决定唯一职业答案。"
+          },
+          {
+            "question": "RIASEC 测的是人格还是兴趣？",
+            "answer": "RIASEC 主要测职业兴趣和工作环境偏好，不是人格诊断，也不等同于能力评估。"
+          },
+          {
+            "question": "霍兰德测试和 MBTI、大五人格有什么区别？",
+            "answer": "霍兰德测试更关注职业活动和工作环境，大五人格更关注稳定特质，MBTI 更适合作为身份与沟通偏好入口。"
+          },
+          {
+            "question": "如果我的 RIASEC 结果很分散，说明什么？",
+            "answer": "这通常说明兴趣结构较广，需要通过真实任务、职业访谈和低风险实验进一步验证方向。"
+          }
+        ],
+        "visible_faq_count": 4,
+        "expected_faq_schema_mainEntity_count": 4
+      },
+      "proposed": {
+        "policy": "editor_supplied",
+        "faq_items": [
+          {
+            "question": "霍兰德职业兴趣测试能告诉我最适合的职业吗？",
+            "answer": "不能。它能帮助你理解职业兴趣结构和优先探索方向，但不能直接决定唯一职业答案。"
+          },
+          {
+            "question": "RIASEC 测的是人格还是兴趣？",
+            "answer": "RIASEC 主要测职业兴趣和工作环境偏好，不是人格诊断，也不等同于能力评估。"
+          },
+          {
+            "question": "霍兰德测试和 MBTI、大五人格有什么区别？",
+            "answer": "霍兰德测试更关注职业活动和工作环境，大五人格更关注稳定特质，MBTI 更适合作为身份与沟通偏好入口。"
+          },
+          {
+            "question": "如果我的 RIASEC 结果很分散，说明什么？",
+            "answer": "这通常说明兴趣结构较广，需要通过真实任务、职业访谈和低风险实验进一步验证方向。"
+          }
+        ],
+        "visible_faq_count": 4,
+        "expected_faq_schema_mainEntity_count": 4
+      }
+    },
+    "primary_cta": {
+      "status": "CHANGE",
+      "current": [
+        {
+          "key": "articles_index",
+          "title": "继续浏览文章",
+          "body": "回到文章目录，继续扩展公开内容阅读链路。",
+          "href": "/zh/articles",
+          "kind": "content_continue"
+        },
+        {
+          "key": "topic_hub",
+          "title": "进入主题聚合",
+          "body": "把文章阅读继续到更结构化的主题入口。",
+          "href": "/zh/topics",
+          "kind": "discover"
+        },
+        {
+          "key": "start_test",
+          "title": "开始测试",
+          "body": "如果你想把阅读转成自我测量，可以从测试入口开始。",
+          "href": "/zh/tests/mbti-personality-test-16-personality-types",
+          "kind": "start_test"
+        }
+      ],
+      "proposed": [
+        {
+          "label": "开始霍兰德职业兴趣测试",
+          "href": "/zh/tests/holland-career-interest-test-riasec",
+          "kind": "start_test",
+          "intent": "test_intent_handoff"
+        }
+      ],
+      "note": "exactly one primary CTA; context links are not CTA slots"
+    },
+    "canonical_internal_links": {
+      "status": "CHANGE",
+      "current": [
+        "/zh/articles",
+        "/zh/tests/big-five-personality-test",
+        "/zh/tests/holland-career-interest-test-riasec",
+        "/zh/tests/mbti-personality-test-16-personality-types",
+        "/zh/topics"
+      ],
+      "proposed": [
+        {
+          "href": "/zh/tests/big-five-personality-test-ocean-model",
+          "role": "context",
+          "owner": "existing_body_link_owner",
+          "label": "大五人格稳定特质补充视角"
+        },
+        {
+          "href": "/zh/tests/holland-career-interest-test-riasec",
+          "role": "primary_cta",
+          "owner": "test_landing"
+        },
+        {
+          "href": "/zh/tests/mbti-personality-test-16-personality-types",
+          "role": "context",
+          "owner": "existing_body_link_owner",
+          "label": "MBTI 工作方式补充视角"
+        }
+      ]
+    },
+    "related_test_slug": {
+      "status": "CHANGE",
+      "current": null,
+      "proposed": "holland-career-interest-test-riasec",
+      "note": "revision-bound adapter requirement; existing-article updater does not support this field"
+    },
+    "reading_minutes": {
+      "status": "CHANGE",
+      "current": 9,
+      "proposed": 8,
+      "note": "formula-derived value; existing-article updater does not support this field"
+    },
+    "schema": {
+      "status": "KEEP",
+      "current": [
+        "Answer",
+        "Article",
+        "FAQPage",
+        "Person",
+        "Question"
+      ],
+      "proposed": [
+        "Answer",
+        "Article",
+        "FAQPage",
+        "Person",
+        "Question"
+      ]
+    },
+    "hreflang": {
+      "status": "KEEP",
+      "current": {
+        "en": "https://fermatmind.com/en/articles/holland-career-interest-test-can-and-cannot-tell-you",
+        "zh": "https://fermatmind.com/zh/articles/holland-career-interest-test-can-and-cannot-tell-you",
+        "zh-CN": "https://fermatmind.com/zh/articles/holland-career-interest-test-can-and-cannot-tell-you"
+      },
+      "proposed": {
+        "en": "https://fermatmind.com/en/articles/holland-career-interest-test-can-and-cannot-tell-you",
+        "zh": "https://fermatmind.com/zh/articles/holland-career-interest-test-can-and-cannot-tell-you",
+        "zh-CN": "https://fermatmind.com/zh/articles/holland-career-interest-test-can-and-cannot-tell-you"
+      }
+    },
+    "sitemap": {
+      "status": "KEEP",
+      "current": true,
+      "proposed": true
+    },
+    "llms": {
+      "status": "KEEP",
+      "current": true,
+      "proposed": true
+    },
+    "search_channel": {
+      "status": "KEEP",
+      "current": "HOLD",
+      "proposed": "HOLD"
+    },
+    "revalidation": {
+      "status": "KEEP",
+      "current": "HOLD",
+      "proposed": "HOLD"
+    }
+  },
+  "body_patch": {
+    "policy": "minimal_editorial_patch_over_locked_baseline_snapshot",
+    "operations": [
+      "KEEP title/H1/SEO title/description、intro、完整正文结构与 4 FAQ",
+      "CHANGE 3 个 answer-surface CTA 收敛为一个 RIASEC 测试 CTA",
+      "CHANGE related_test_slug null→RIASEC 测试 slug",
+      "CHANGE reading_minutes 9→8",
+      "CHANGE 正文唯一旧路径 /zh/tests/big-five-personality-test→正式 -ocean-model 路径"
+    ],
+    "body_file": "body.zh-CN.md",
+    "current_body_sha256": "17890610ef5e47deafdfc994306b988af219e389faa2bcb89c35703d3435d61a",
+    "proposed_body_sha256": "e8a1416d4d8dc6975f807e878034c4d11a8b05eeac8b85fc6e1cc63e7ba21619"
+  },
+  "cta": {
+    "primary_count": 1,
+    "primary": {
+      "label": "开始霍兰德职业兴趣测试",
+      "href": "/zh/tests/holland-career-interest-test-riasec",
+      "kind": "start_test",
+      "intent": "test_intent_handoff"
+    },
+    "tracking_expectation": "article_to_test_click",
+    "public_canonical_route_only": true
+  },
+  "internal_link_plan": [
+    {
+      "href": "/zh/tests/big-five-personality-test-ocean-model",
+      "role": "context",
+      "owner": "existing_body_link_owner",
+      "label": "大五人格稳定特质补充视角"
+    },
+    {
+      "href": "/zh/tests/holland-career-interest-test-riasec",
+      "role": "primary_cta",
+      "owner": "test_landing"
+    },
+    {
+      "href": "/zh/tests/mbti-personality-test-16-personality-types",
+      "role": "context",
+      "owner": "existing_body_link_owner",
+      "label": "MBTI 工作方式补充视角"
+    }
+  ],
+  "full_body_internal_links": {
+    "unique_count": 3,
+    "hrefs": [
+      "/zh/tests/big-five-personality-test-ocean-model",
+      "/zh/tests/holland-career-interest-test-riasec",
+      "/zh/tests/mbti-personality-test-16-personality-types"
+    ],
+    "validation_scope": "complete_body_markdown_not_only_internal_link_plan"
+  },
+  "claim_boundary": "只拥有霍兰德/RIASEC 能与不能说明的使用边界；RIASEC 模型解释归 explainer，测试意图归 test landing；不把兴趣解释为能力、招聘结论、职业保证或诊断。",
+  "forbidden_claims": [
+    "hidden_query_inference",
+    "diagnosis",
+    "ability_prediction",
+    "career_guarantee",
+    "hiring_screening",
+    "relationship_prediction",
+    "official_endorsement"
+  ],
+  "private_url_guard": {
+    "status": "HOLD",
+    "forbidden_route_families": [
+      "result",
+      "results",
+      "order",
+      "orders",
+      "share",
+      "pay",
+      "payment",
+      "history",
+      "private",
+      "token",
+      "session"
+    ],
+    "public_canonical_only": true
+  },
+  "references": [
+    {
+      "title": "O*NET Interest Profiler",
+      "url": "https://www.onetcenter.org/IP.html",
+      "authority": "U.S. Department of Labor O*NET Center",
+      "use_boundary": "支持 RIASEC 职业兴趣测量与探索用途，不支持职业保证或录用预测。"
+    },
+    {
+      "title": "Making Vocational Choices (3rd ed.)",
+      "authority": "John L. Holland / Psychological Assessment Resources",
+      "use_boundary": "支持正文已有 Holland 理论归属，不新增正文主张。"
+    },
+    {
+      "title": "Evaluating Holland’s and Gati’s vocational-interest models",
+      "authority": "Psychological Bulletin",
+      "use_boundary": "支持正文已有 RIASEC 结构边界，不支持能力或成功预测。"
+    }
+  ],
+  "adapter_requirements": {
+    "required_before_later_import": true,
+    "revision_bound": true,
+    "fields": [
+      "reading_minutes",
+      "related_test_slug",
+      "answer_surface_v1.faq_items"
+    ],
+    "current_existing_article_updater_supports_all": false,
+    "import_state_must_remain_false": true
+  },
+  "downstream_holds": {
+    "identity": true,
+    "publication": true,
+    "schema": true,
+    "hreflang": true,
+    "sitemap": true,
+    "llms": true,
+    "search_channel": true,
+    "revalidation": true,
+    "cms_import": true,
+    "cache_refresh": true
+  },
+  "package_sha256": "4cc742709545d3bc2ad952fae64078d9d8b4d8275a6d055c0823e28ae242a9ef"
+}

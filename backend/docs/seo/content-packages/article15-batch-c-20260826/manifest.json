@@ -1,0 +1,136 @@
+{
+  "schema_version": "fermatmind.article15_content_package_batch.v1",
+  "batch_id": "ARTICLE15-BATCH-C-20260826",
+  "status": "content_package_only",
+  "content_package_only": true,
+  "target_count": 5,
+  "target_order": [
+    "holland-career-interest-test-can-and-cannot-tell-you",
+    "eq-test-tool-guide",
+    "big-five-emotional-stability-stress-recovery-communication",
+    "mbti-vs-holland-code-career-choice",
+    "mbti-full-report-career-relationship-communication"
+  ],
+  "bindings": {
+    "baseline_commit": "6f172f279a02ef1b6ac57f59ed88cf99e6235793",
+    "batch_a_manifest_sha256": "48a79cdcfc5b10766b58658aadb601e0682257af56d4fd108ed920a2ed6fa20a",
+    "batch_b_manifest_sha256": "91156cf83eba46b2f687e527aaf3dc1694a63c4bd660ee3ea5e8d82c9d6bc96a",
+    "top100_source_sha256": "e4c9788d6fadff53bc33170299971ab57dbff1810ad1fcdb4f97f5f4ee94d150",
+    "article15_target_set_sha256": "9ccd8cab8b44f10409e0ef3ced944ba663376c84a5032bd74ddba143d88cd35a"
+  },
+  "packages": [
+    {
+      "order": 1,
+      "slug": "holland-career-interest-test-can-and-cannot-tell-you",
+      "article_id": 31,
+      "translation_group_id": "ddf3d56d-0b47-4b9b-816e-0d2de9dcbbc6",
+      "published_revision_id": 36,
+      "package_directory": "packages/01-holland-career-interest-test-can-and-cannot-tell-you",
+      "package_sha256": "4cc742709545d3bc2ad952fae64078d9d8b4d8275a6d055c0823e28ae242a9ef",
+      "body_sha256": "e8a1416d4d8dc6975f807e878034c4d11a8b05eeac8b85fc6e1cc63e7ba21619",
+      "reading_minutes_suggestion": 8,
+      "faq_count": 4,
+      "primary_cta_count": 1,
+      "planned_internal_link_count": 3,
+      "full_body_unique_internal_link_count": 3
+    },
+    {
+      "order": 2,
+      "slug": "eq-test-tool-guide",
+      "article_id": 4,
+      "translation_group_id": "article-4",
+      "published_revision_id": 58,
+      "package_directory": "packages/02-eq-test-tool-guide",
+      "package_sha256": "ee1f35c23b57863505a2620acc7440f53a195a452a2d760fad38309e09c610ea",
+      "body_sha256": "7fb7d75e16749882605de8cc6b5d5eedb7d780a3427876a4020e7a4afb7ae1bc",
+      "reading_minutes_suggestion": 11,
+      "faq_count": 7,
+      "primary_cta_count": 1,
+      "planned_internal_link_count": 11,
+      "full_body_unique_internal_link_count": 11
+    },
+    {
+      "order": 3,
+      "slug": "big-five-emotional-stability-stress-recovery-communication",
+      "article_id": 79,
+      "translation_group_id": "tg_big_five_emotional_stability_stress_2026v1",
+      "published_revision_id": 99,
+      "package_directory": "packages/03-big-five-emotional-stability-stress-recovery-communication",
+      "package_sha256": "e58e9742f92651bbf8465a4387b051aa95643bd8c47dae9ec261c65b0316d3a2",
+      "body_sha256": "9df6bad52840e2fd17d03c9c02dd889bc4ccbac29f9e88559db9c28737991e00",
+      "reading_minutes_suggestion": 23,
+      "faq_count": 6,
+      "primary_cta_count": 1,
+      "planned_internal_link_count": 1,
+      "full_body_unique_internal_link_count": 1
+    },
+    {
+      "order": 4,
+      "slug": "mbti-vs-holland-code-career-choice",
+      "article_id": 39,
+      "translation_group_id": "article_mbti_vs_holland_career_choice_v1",
+      "published_revision_id": 44,
+      "package_directory": "packages/04-mbti-vs-holland-code-career-choice",
+      "package_sha256": "043dae5246afe27b47b3bf337f80792f81693a570d9b6dea7f36f6707963060b",
+      "body_sha256": "6ef3118abe6572483d65e2ab6f38bee6b87835df4a1a3b70924108e6a92ab625",
+      "reading_minutes_suggestion": 19,
+      "faq_count": 5,
+      "primary_cta_count": 1,
+      "planned_internal_link_count": 3,
+      "full_body_unique_internal_link_count": 0
+    },
+    {
+      "order": 5,
+      "slug": "mbti-full-report-career-relationship-communication",
+      "article_id": 61,
+      "translation_group_id": "tg_mbti_full_report_career_relationship_2026v1",
+      "published_revision_id": 81,
+      "package_directory": "packages/05-mbti-full-report-career-relationship-communication",
+      "package_sha256": "78428063f356b0955cff9574da8fc87ff964edeaf4a9fa21519a62e89884ca35",
+      "body_sha256": "1e9a4c6768fc2e21bae87b5990d55302bf9bfb03d884839f2354a92ff41f7148",
+      "reading_minutes_suggestion": 26,
+      "faq_count": 8,
+      "primary_cta_count": 1,
+      "planned_internal_link_count": 2,
+      "full_body_unique_internal_link_count": 2
+    }
+  ],
+  "cumulative_article15_coverage": {
+    "batch_a_count": 5,
+    "batch_b_count": 5,
+    "batch_c_count": 5,
+    "covered_count": 15,
+    "target_count": 15,
+    "batch_a_b_overlap_count": 0,
+    "batch_a_c_overlap_count": 0,
+    "batch_b_c_overlap_count": 0,
+    "all_batches_overlap_count": 0
+  },
+  "permissions": {
+    "cms_draft": false,
+    "cms_import": false,
+    "publication": false,
+    "database_write": false,
+    "cache_refresh": false,
+    "search_submission": false,
+    "staging": false,
+    "production": false
+  },
+  "expected_delivery_lane": "docs_content_package_only_deploy_skip",
+  "downstream_holds": [
+    "identity",
+    "publication",
+    "schema",
+    "hreflang",
+    "sitemap",
+    "llms",
+    "search_channel",
+    "revalidation"
+  ],
+  "adapter_requirements": [
+    "reading_minutes",
+    "related_test_slug",
+    "answer_surface_v1.faq_items"
+  ],
+  "batch_manifest_sha256": "d1813ce799ead9cfad90701ecd7fe716855b128e0d12bea0a7b882b7d2e0273a"
+}
