@@ -1,7 +1,7 @@
 <x-filament-panels::page>
     <div class="ops-shell-page">
         <x-filament-ops::ops-section>
-            <x-filament-ops::ops-toolbar class="ops-toolbar--center-actions">
+            <x-filament-ops::ops-toolbar :split="false" class="ops-toolbar--center-actions">
                 <x-slot name="actions">
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentOverviewPage::getUrl() }}">
                         {{ __('ops.custom_pages.common.nav.overview') }}
