@@ -9,10 +9,10 @@
     "SEO-PLATFORM-07-A": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/seo-platform-07-a-cohort-resolver",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "8641a118aa4c70a8a05909954358739e876da117",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3791",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -60,6 +60,11 @@
           "at": "2026-08-26T08:39:00Z",
           "status": "local_checks_passed",
           "summary": "Scoped syntax, Pint, 411 resolver assertions, 508 Page Family and dynamic URL Truth regression assertions, JSON/YAML and diff checks passed. No runtime or production operation was executed."
+        },
+        {
+          "at": "2026-08-26T08:42:00Z",
+          "status": "pr_open",
+          "summary": "Opened PR #3791 for the exact 07-A scope at validated implementation commit 8641a118aa4c70a8a05909954358739e876da117. Required GitHub checks are pending; no production operation was executed."
         }
       ]
     },
