@@ -109,7 +109,11 @@ final class CareerShardedCurrentContractTest extends TestCase
             foreach (['en' => 'en', 'zh' => 'zh-CN'] as $sourceLocale => $locale) {
                 $localePageCount++;
                 $page = $pages[$sourceLocale];
-                self::assertCount(28, $row['component_order_json']);
+                self::assertCount($slug === 'accountants-and-auditors' ? 27 : 28, $row['component_order_json']);
+                if ($slug === 'accountants-and-auditors') {
+                    self::assertNotContains('career_ai_description_block', $row['component_order_json']);
+                    self::assertArrayNotHasKey('career_ai_description_block', $page);
+                }
                 foreach ($row['component_order_json'] as $component) {
                     self::assertArrayHasKey($component, $page);
                 }
@@ -197,7 +201,7 @@ final class CareerShardedCurrentContractTest extends TestCase
         self::assertSame(2092, $loaded['summary']['locale_page_count']);
         self::assertSame($manifest['versionless_projection_sha256'], $loaded['summary']['versionless_projection_sha256']);
         self::assertSame(
-            '4e05bcd2c480d429bf14b46cf647ffdac2c611ddbbb8a3cfbfabc808fc466b14',
+            'ba9e93228061c812f85ddc82af00b441ca41fb25acb6ae38e305ed43206ea351',
             $loaded['summary']['versionless_projection_sha256'],
         );
         self::assertSame(

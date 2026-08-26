@@ -298,6 +298,11 @@ final class CareerShardedCurrentAuthorityPackage
      */
     private function assembleRow(array $records): array
     {
+        $componentOrder = $records['en']['page-meta']['content']['row']['component_order_json'] ?? null;
+        if (! is_array($componentOrder) || ! CareerDisplayAssetComponentContract::supports($componentOrder)) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_SHARDED_COMPONENT_SET_INVALID');
+        }
+
         $components = [];
         foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
             foreach (self::MODULES as $module) {
@@ -319,7 +324,7 @@ final class CareerShardedCurrentAuthorityPackage
             }
             $keys = array_keys($components[$locale]);
             sort($keys, SORT_STRING);
-            $expected = array_keys(self::COMPONENT_MODULE);
+            $expected = array_merge($componentOrder, ['path', 'secondary_cta']);
             sort($expected, SORT_STRING);
             if ($keys !== $expected) {
                 throw new CareerCurrentAuthorityPackageFailure('CURRENT_SHARDED_COMPONENT_SET_INVALID');
@@ -348,7 +353,7 @@ final class CareerShardedCurrentAuthorityPackage
         $pages = [];
         foreach (['en' => 'en', 'zh-CN' => 'zh'] as $locale => $legacyLocale) {
             $page = [];
-            foreach (array_keys(self::COMPONENT_MODULE) as $component) {
+            foreach (array_merge($componentOrder, ['path', 'secondary_cta']) as $component) {
                 $page[$component] = $components[$locale][$component];
             }
             $pages[$legacyLocale] = $page;
@@ -444,7 +449,7 @@ final class CareerShardedCurrentAuthorityPackage
         $keys = array_keys($row);
         sort($keys, SORT_STRING);
         if ($keys !== self::ROW_KEYS
-            || ($row['component_order_json'] ?? null) !== CareerDisplayAssetComponentContract::CURRENT_ORDER
+            || ! CareerDisplayAssetComponentContract::supports((array) ($row['component_order_json'] ?? []))
             || ! CareerDisplayAssetComponentContract::hasExactCurrentPages((array) ($row['page_payload_json'] ?? []))) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_SHARDED_ASSEMBLY_INVALID');
         }
