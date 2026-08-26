@@ -1,17 +1,67 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-26T12:49:49Z",
+  "updated_at": "2026-08-26T14:21:59Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "SEO-PLATFORM-07-G-CRAWLER-AGGREGATE-RUNTIME": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "in_progress",
+      "branch": "codex/seo-platform-07-crawler-aggregate-runtime",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "details": "PR #3803 merged as 46644bc248bd505000f20e187cfd262039449a4f. Exact-SHA CI, staging, production activation and scheduler refresh passed; subsequent natural runtime receipts remained MEASUREMENT_HOLD because the crawler aggregate source and write scheduler were disabled."
+        },
+        "local": [
+          {
+            "command": "focused crawler aggregate runtime, deploy control, scheduled receipt, production closeout and existing crawler contracts PHPUnit",
+            "status": "passed",
+            "details": "44 tests and 500 assertions passed across bounded tail reading, privacy transform, crawler-only aggregation, transactional idempotent writes, gates, schedule ordering, actual last-seen freshness, three-slot closeout and historical canary boundaries."
+          },
+          {
+            "command": "PHP syntax, scoped Pint, classifier/workflow contracts, JSON/YAML and git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": [],
+        "production": []
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": true,
+      "database_mutation": true,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": true,
+      "production_readback_allowed": true,
+      "history": [
+        {
+          "at": "2026-08-26T14:13:30Z",
+          "status": "in_progress",
+          "summary": "User explicitly authorized one new scope to enable sanitized crawler aggregate collection, controlled writes and scheduling through the existing deploy control plane, then restart the three-natural-success-window closeout. The implementation remains bounded to one approved source, 1000 tail lines, a 48-hour direct-observation freshness ceiling and aggregate-only storage; no raw evidence, manual scheduler trigger, workflow dispatch, SSH, CMS, URL Truth or search mutation is authorized."
+        },
+        {
+          "at": "2026-08-26T14:21:59Z",
+          "status": "local_checks_passed",
+          "summary": "Bounded newest-tail reading, sanitized crawler-only aggregation, transactional idempotent writes, production-only deploy gates, effective ten-minute scheduling before the runtime receipt, and last-seen-based freshness passed focused and existing regression checks. The production Environment now holds the approved source only as a masked secret; no production log read or database write has occurred yet."
+        }
+      ]
+    },
     "SEO-PLATFORM-07-G-SCHEDULER-REFRESH-V5": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "merged",
       "branch": "codex/seo-platform-07-scheduler-refresh-v5",
-      "commit_sha": "6d8419cefe9d3ae9b303ce77eda25216d697eddc",
+      "commit_sha": "c37f421935b8b30a85b46ed61c6180e72410a1a1",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3803",
       "checks": {
         "dependency": {
@@ -29,14 +79,26 @@
             "status": "passed"
           }
         ],
-        "github": [],
-        "production": []
+        "github": [
+          {
+            "name": "exact-SHA CI",
+            "status": "passed",
+            "details": "Run 32970753224 passed for merge SHA 46644bc248bd505000f20e187cfd262039449a4f."
+          }
+        ],
+        "production": [
+          {
+            "name": "automatic deploy",
+            "status": "passed",
+            "details": "Run 32971014581 passed staging, production activation, scheduler refresh and production smoke for merge SHA 46644bc248bd505000f20e187cfd262039449a4f."
+          }
+        ]
       },
       "failure_reason": null,
       "resume_policy": "continuous_goal",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-08-26T12:50:26Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "database_mutation": false,
       "cms_mutation": false,
@@ -58,6 +120,11 @@
           "at": "2026-08-26T12:49:49Z",
           "status": "pr_open",
           "summary": "Opened authorized fifth same-scope corrective PR #3803 at validated implementation commit 6d8419cefe9d3ae9b303ce77eda25216d697eddc. No manual runtime action was performed."
+        },
+        {
+          "at": "2026-08-26T12:50:26Z",
+          "status": "merged",
+          "summary": "PR #3803 merged as 46644bc248bd505000f20e187cfd262039449a4f after required checks passed. Exact-SHA CI, staging, production activation, public smoke and fail-closed current-release cron scheduler refresh succeeded; local and remote task branches were cleaned."
         }
       ]
     },

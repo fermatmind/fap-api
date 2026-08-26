@@ -89,6 +89,12 @@ return Application::configure(basePath: dirname(__DIR__))
         $schedule->command('norms:big5:monthly-drift-check')->monthlyOn(1, '04:50')->withoutOverlapping();
         $schedule->command('norms:eq60:drift-check --from=active --to=candidate')->monthlyOn(1, '05:00')->withoutOverlapping();
         $schedule->command('seo:warm-sitemap-source-cache --json')->everyTenMinutes()->withoutOverlapping();
+        if ((bool) config('seo_intel.crawler_log_aggregate_storage.scheduler_enabled', false)) {
+            $schedule->command('seo-intel:crawler-log-aggregate-scheduled --json')
+                ->everyTenMinutes()
+                ->withoutOverlapping(20)
+                ->onOneServer();
+        }
         $schedule->command('seo:runtime-probe-scheduled --trigger=scheduled --json')
             ->everyTenMinutes()
             ->withoutOverlapping()
