@@ -9,10 +9,10 @@
     "SEO-PLATFORM-07-C": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/seo-platform-07-c-revision-adapters",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "aafd84591041c1952c32efc21c89d1c83912e0d6",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3793",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -46,6 +46,11 @@
           "at": "2026-08-26T09:02:00Z",
           "status": "local_checks_passed",
           "summary": "Initialized and validated the exact 07-C sanitized read-only revision adapter after 07-B merged and exact-SHA CI passed. Missing revisions remain null; no publication, cache activation, persistence, deployment or production write was executed."
+        },
+        {
+          "at": "2026-08-26T09:05:00Z",
+          "status": "pr_open",
+          "summary": "Opened PR #3793 for the exact 07-C scope at validated implementation commit aafd84591041c1952c32efc21c89d1c83912e0d6. GitHub has no PR check requirement; exact-SHA CI runs after merge under the current repository control plane."
         }
       ]
     },
