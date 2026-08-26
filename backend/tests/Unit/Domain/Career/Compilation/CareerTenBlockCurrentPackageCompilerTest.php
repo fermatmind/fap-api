@@ -84,23 +84,7 @@ final class CareerTenBlockCurrentPackageCompilerTest extends TestCase
         $package = app(CareerCurrentAuthorityPackage::class)->load(base_path());
         $compiler = app(CareerTenBlockCurrentPackageCompiler::class);
         $pages = $package['rows']['accountants-and-auditors']['page_payload_json']['page'];
-
-        $notices = $compiler->deriveAccountantsBoundaryNotices($pages);
-        $first = $compiler->compileAccountantsBoundaryNoticeProjection(base_path());
-        $second = $compiler->compileAccountantsBoundaryNoticeProjection(base_path());
-        $rows = $this->rowsFromAssets($first['assets_bytes']);
-
-        self::assertSame($pages['en']['fermat_decision_card']['caveat'], $notices['en'][0]);
-        self::assertSame($pages['en']['boundary_notice'][0], $notices['en'][1]);
-        self::assertSame($pages['zh']['fermat_decision_card']['caveat'], $notices['zh'][0]);
-        self::assertSame($pages['zh']['boundary_notice'][0], $notices['zh'][1]);
-        self::assertCount(2, $rows['accountants-and-auditors']['page_payload_json']['page']['en']['boundary_notice']);
-        self::assertCount(2, $rows['accountants-and-auditors']['page_payload_json']['page']['zh']['boundary_notice']);
-        self::assertContains($first['package_diff']['changed_slugs'], [[], ['accountants-and-auditors']]);
-        self::assertContains($first['package_diff']['changed_row_count'], [0, 1]);
-        self::assertContains($first['package_diff']['public_changed_locale_page_count'], [0, 1, 2]);
-        self::assertSame($first['assets_bytes'], $second['assets_bytes']);
-        self::assertSame($first['receipt'], $second['receipt']);
+        $controlHashes = [];
         foreach ([
             'health-educators',
             'dancers',
@@ -108,10 +92,32 @@ final class CareerTenBlockCurrentPackageCompilerTest extends TestCase
             'veterinarians',
             'preventive-medicine-physicians',
         ] as $slug) {
-            self::assertSame(
-                CareerCurrentAuthorityPackage::hashValue($package['rows'][$slug]),
-                CareerCurrentAuthorityPackage::hashValue($rows[$slug]),
-            );
+            $controlHashes[$slug] = CareerCurrentAuthorityPackage::hashValue($package['rows'][$slug]);
+        }
+        unset($package);
+
+        $notices = $compiler->deriveAccountantsBoundaryNotices($pages);
+        $first = $compiler->compileAccountantsBoundaryNoticeProjection(base_path());
+        $firstAssetsSha256 = hash('sha256', $first['assets_bytes']);
+        $firstReceipt = $first['receipt'];
+        $firstPackageDiff = $first['package_diff'];
+        [$accountants, $rowHashes] = $this->accountantsAndRowHashes($first['assets_bytes']);
+        unset($first);
+        $second = $compiler->compileAccountantsBoundaryNoticeProjection(base_path());
+
+        self::assertSame($pages['en']['fermat_decision_card']['caveat'], $notices['en'][0]);
+        self::assertSame($pages['en']['boundary_notice'][0], $notices['en'][1]);
+        self::assertSame($pages['zh']['fermat_decision_card']['caveat'], $notices['zh'][0]);
+        self::assertSame($pages['zh']['boundary_notice'][0], $notices['zh'][1]);
+        self::assertCount(2, $accountants['page_payload_json']['page']['en']['boundary_notice']);
+        self::assertCount(2, $accountants['page_payload_json']['page']['zh']['boundary_notice']);
+        self::assertContains($firstPackageDiff['changed_slugs'], [[], ['accountants-and-auditors']]);
+        self::assertContains($firstPackageDiff['changed_row_count'], [0, 1]);
+        self::assertContains($firstPackageDiff['public_changed_locale_page_count'], [0, 1, 2]);
+        self::assertSame($firstAssetsSha256, hash('sha256', $second['assets_bytes']));
+        self::assertSame($firstReceipt, $second['receipt']);
+        foreach ($controlHashes as $slug => $hash) {
+            self::assertSame($hash, $rowHashes[$slug]);
         }
     }
 
@@ -138,5 +144,24 @@ final class CareerTenBlockCurrentPackageCompilerTest extends TestCase
         }
 
         return $rows;
+    }
+
+    /** @return array{array<string,mixed>,array<string,string>} */
+    private function accountantsAndRowHashes(string $assets): array
+    {
+        $accountants = null;
+        $hashes = [];
+        foreach (explode("\n", trim($assets)) as $line) {
+            $row = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
+            $slug = $row['canonical_slug'];
+            $hashes[$slug] = CareerCurrentAuthorityPackage::hashValue($row);
+            if ($slug === 'accountants-and-auditors') {
+                $accountants = $row;
+            }
+            unset($row);
+        }
+        self::assertIsArray($accountants);
+
+        return [$accountants, $hashes];
     }
 }

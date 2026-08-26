@@ -11,6 +11,9 @@ use Tests\TestCase;
 
 final class CareerPresentationSourceRegistryTest extends TestCase
 {
+    /** @var array<string,mixed>|null */
+    private static ?array $package = null;
+
     private const BLS_EXPECTED = [
         'appraisers-of-personal-and-business-property' => [
             'combined_official', ['$65,420', '4%', '77,300 人', '6,300 个'],
@@ -31,7 +34,7 @@ final class CareerPresentationSourceRegistryTest extends TestCase
 
     public function test_registry_is_manifest_bound_and_contains_only_the_approved_source_scopes(): void
     {
-        $package = app(CareerCurrentAuthorityPackage::class)->load(base_path());
+        $package = self::package();
         $registry = app(CareerPresentationSourceRegistry::class)->load(base_path(), $package['manifest'], $package['rows']);
 
         self::assertCount(2, $registry['onet']);
@@ -43,7 +46,7 @@ final class CareerPresentationSourceRegistryTest extends TestCase
 
     public function test_multiple_occupation_records_keep_the_single_onet_slot_null_and_publish_both_children(): void
     {
-        $package = app(CareerCurrentAuthorityPackage::class)->load(base_path());
+        $package = self::package();
         $registry = app(CareerPresentationSourceRegistry::class)->load(base_path(), $package['manifest'], $package['rows']);
         $expected = [
             'electrical-and-electronics-engineers' => ['17-2070', ['17-2071.00', '17-2072.00']],
@@ -72,7 +75,7 @@ final class CareerPresentationSourceRegistryTest extends TestCase
         string $scope,
         array $expectedValues,
     ): void {
-        $package = app(CareerCurrentAuthorityPackage::class)->load(base_path());
+        $package = self::package();
         $registry = app(CareerPresentationSourceRegistry::class)->load(base_path(), $package['manifest'], $package['rows']);
         $presentation = $package['rows'][$slug]['metadata_json']['presentation_v1']['zh'];
         $stats = array_slice(data_get($presentation, 'hero.stats'), 0, 4);
@@ -99,5 +102,17 @@ final class CareerPresentationSourceRegistryTest extends TestCase
         foreach (self::BLS_EXPECTED as $slug => [$scope, $values]) {
             yield $slug => [$slug, $scope, $values];
         }
+    }
+
+    public static function tearDownAfterClass(): void
+    {
+        self::$package = null;
+        parent::tearDownAfterClass();
+    }
+
+    /** @return array<string,mixed> */
+    private static function package(): array
+    {
+        return self::$package ??= app(CareerCurrentAuthorityPackage::class)->load(base_path());
     }
 }

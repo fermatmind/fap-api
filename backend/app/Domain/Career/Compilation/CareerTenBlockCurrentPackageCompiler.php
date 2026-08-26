@@ -125,10 +125,7 @@ final class CareerTenBlockCurrentPackageCompiler
             }
             $candidateRows[$slug] = $candidate;
         }
-        $assetsBytes = implode("\n", array_map(
-            static fn (array $row): string => CareerCurrentAuthorityPackage::encodeCanonical($row),
-            $candidateRows,
-        ))."\n";
+        $assetsBytes = $this->rowsBytes($candidateRows);
         $manifest = $baseline['manifest'];
         $manifest['structural_contract']['component_order'] = CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS;
         $manifest['ten_block_compilation'] = [
@@ -241,10 +238,18 @@ final class CareerTenBlockCurrentPackageCompiler
     {
         ksort($rows, SORT_STRING);
 
-        return implode("\n", array_map(
-            static fn (array $row): string => CareerCurrentAuthorityPackage::encodeCanonical($row),
-            $rows,
-        ))."\n";
+        return $this->rowsBytes($rows);
+    }
+
+    /** @param array<string,array<string,mixed>> $rows */
+    private function rowsBytes(array $rows): string
+    {
+        $bytes = '';
+        foreach ($rows as $row) {
+            $bytes .= CareerCurrentAuthorityPackage::encodeCanonical($row)."\n";
+        }
+
+        return $bytes;
     }
 
     /**
@@ -298,10 +303,7 @@ final class CareerTenBlockCurrentPackageCompiler
         $this->assertCandidatePublicContract($candidateRows);
 
         return [
-            'assets_bytes' => implode("\n", array_map(
-                static fn (array $row): string => CareerCurrentAuthorityPackage::encodeCanonical($row),
-                $candidateRows,
-            ))."\n",
+            'assets_bytes' => $this->rowsBytes($candidateRows),
             'manifest_template' => $baseline['manifest'],
             'receipt' => [
                 'contract_version' => 'career.ten_block.accountants_boundary_projection_receipt.v1',
