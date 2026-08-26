@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Services\Scale\ScaleRegistryWriter;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
@@ -83,20 +84,21 @@ final class ActivateBigFiveReportUnlockCommerce extends Command
                 ]);
             }
 
-            $scale = DB::table('scales_registry')->where('org_id', 0)->where('code', 'BIG5_OCEAN')->lockForUpdate()->first();
+            $scale = DB::table('scales_registry_v2')->where('org_id', 0)->where('code', 'BIG5_OCEAN')->lockForUpdate()->first();
             if ($scale === null) {
-                throw new \RuntimeException('BIG5_OCEAN scale registry missing.');
+                throw new \RuntimeException('BIG5_OCEAN V2 scale registry missing.');
             }
-            $capabilities = $this->json($scale->capabilities_json ?? null);
-            $commercial = $this->json($scale->commercial_json ?? null);
-            $capabilities['paywall_mode'] = 'full';
-            $commercial['report_unlock_sku'] = $evidence['sku'];
-            $commercial['report_benefit_code'] = $evidence['benefit_code'];
-            DB::table('scales_registry')->where('org_id', 0)->where('code', 'BIG5_OCEAN')->update([
-                'capabilities_json' => json_encode($capabilities, JSON_UNESCAPED_SLASHES),
-                'commercial_json' => json_encode($commercial, JSON_UNESCAPED_SLASHES),
-                'updated_at' => $now,
-            ]);
+            $payload = (array) $scale;
+            unset($payload['id'], $payload['created_at'], $payload['updated_at']);
+            foreach (['slugs_json', 'capabilities_json', 'view_policy_json', 'commercial_json', 'seo_schema_json', 'seo_i18n_json', 'content_i18n_json', 'report_summary_i18n_json'] as $column) {
+                if (is_string($payload[$column] ?? null)) {
+                    $payload[$column] = $this->json($payload[$column]);
+                }
+            }
+            $payload['capabilities_json']['paywall_mode'] = 'full';
+            $payload['commercial_json']['report_unlock_sku'] = $evidence['sku'];
+            $payload['commercial_json']['report_benefit_code'] = $evidence['benefit_code'];
+            app(ScaleRegistryWriter::class)->upsertScale($payload);
         });
 
         $this->info('Big Five commerce activated; rollout was not changed.');

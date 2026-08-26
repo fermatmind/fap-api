@@ -6,7 +6,9 @@ namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\ScaleRegistryResource\Pages;
 use App\Filament\Ops\Resources\ScaleRegistryResource\RelationManagers\ScaleSlugsRelationManager;
-use App\Models\ScaleRegistry;
+use App\Filament\Ops\Support\ContentAccess;
+use App\Models\ScaleRegistryV2;
+use App\Models\Scopes\TenantScope;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
@@ -20,7 +22,7 @@ class ScaleRegistryResource extends Resource
 {
     protected static bool $shouldRegisterNavigation = false;
 
-    protected static ?string $model = ScaleRegistry::class;
+    protected static ?string $model = ScaleRegistryV2::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
 
@@ -39,6 +41,23 @@ class ScaleRegistryResource extends Resource
                 $user->hasPermission(PermissionNames::ADMIN_CONTENT_READ)
                 || $user->hasPermission(PermissionNames::ADMIN_OWNER)
             );
+    }
+
+    public static function canCreate(): bool
+    {
+        return ContentAccess::canWrite();
+    }
+
+    public static function canEdit($record): bool
+    {
+        return $record instanceof ScaleRegistryV2
+            && self::recordIsInWriteScope($record)
+            && ContentAccess::canWrite();
+    }
+
+    public static function canDelete($record): bool
+    {
+        return false;
     }
 
     public static function getNavigationGroup(): ?string
@@ -63,10 +82,12 @@ class ScaleRegistryResource extends Resource
                                     Forms\Components\TextInput::make('code')
                                         ->label('Scale Code')
                                         ->required()
+                                        ->disabled(fn (?ScaleRegistryV2 $record): bool => $record !== null)
                                         ->maxLength(64),
                                     Forms\Components\TextInput::make('org_id')
                                         ->numeric()
                                         ->required()
+                                        ->disabled(fn (?ScaleRegistryV2 $record): bool => $record !== null)
                                         ->default(fn () => max(0, (int) app(OrgContext::class)->orgId())),
                                     Forms\Components\TextInput::make('driver_type')
                                         ->required()
@@ -110,6 +131,7 @@ class ScaleRegistryResource extends Resource
                             Forms\Components\TextInput::make('primary_slug')
                                 ->label('Primary Slug')
                                 ->required()
+                                ->rule('regex:/^[a-z0-9-]+$/')
                                 ->maxLength(127),
                             Forms\Components\TextInput::make('seo_i18n_json.en.title')
                                 ->label('SEO Title')
@@ -280,7 +302,7 @@ class ScaleRegistryResource extends Resource
                 Tables\Columns\IconColumn::make('indexable')
                     ->label('Indexable')
                     ->boolean()
-                    ->state(fn (ScaleRegistry $record): bool => (bool) ($record->is_indexable ?? ($record->view_policy_json['indexable'] ?? true))),
+                    ->state(fn (ScaleRegistryV2 $record): bool => (bool) ($record->is_indexable ?? ($record->view_policy_json['indexable'] ?? true))),
                 Tables\Columns\TextColumn::make('updated_at')->dateTime()->sortable(),
             ])
             ->defaultSort('updated_at', 'desc')
@@ -311,6 +333,14 @@ class ScaleRegistryResource extends Resource
         $orgId = max(0, (int) app(OrgContext::class)->orgId());
 
         return parent::getEloquentQuery()
+            ->withoutGlobalScope(TenantScope::class)
             ->whereIn('org_id', $orgId > 0 ? [0, $orgId] : [0]);
+    }
+
+    private static function recordIsInWriteScope(ScaleRegistryV2 $record): bool
+    {
+        $orgId = max(0, (int) app(OrgContext::class)->orgId());
+
+        return (int) $record->org_id === $orgId;
     }
 }

@@ -8,8 +8,6 @@ use App\Filament\Ops\Resources\ScaleSlugResource\Pages;
 use App\Models\ScaleSlug;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
-use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -50,21 +48,19 @@ class ScaleSlugResource extends Resource
         return __('ops.nav.scale_slugs');
     }
 
-    public static function form(Form $form): Form
+    public static function canCreate(): bool
     {
-        return $form->schema([
-            Forms\Components\TextInput::make('org_id')
-                ->numeric()
-                ->required()
-                ->default(fn () => max(0, (int) app(OrgContext::class)->orgId())),
-            Forms\Components\TextInput::make('scale_code')
-                ->required()
-                ->maxLength(64),
-            Forms\Components\TextInput::make('slug')
-                ->required()
-                ->maxLength(127),
-            Forms\Components\Toggle::make('is_primary')->default(false),
-        ]);
+        return false;
+    }
+
+    public static function canEdit($record): bool
+    {
+        return false;
+    }
+
+    public static function canDelete($record): bool
+    {
+        return false;
     }
 
     public static function table(Table $table): Table
@@ -78,10 +74,7 @@ class ScaleSlugResource extends Resource
                 Tables\Columns\TextColumn::make('updated_at')->dateTime()->sortable(),
             ])
             ->defaultSort('updated_at', 'desc')
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-            ])
+            ->description(__('ops.resources.scale_registry.slug_projection_help'))
             ->bulkActions([]);
     }
 

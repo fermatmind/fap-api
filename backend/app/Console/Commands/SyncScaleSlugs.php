@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Models\ScaleRegistry as ScaleRegistryModel;
-use App\Models\ScaleSlug;
 use App\Services\Scale\ScaleRegistryWriter;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -27,14 +26,8 @@ class SyncScaleSlugs extends Command
 
         $writer = app(ScaleRegistryWriter::class);
 
-        DB::transaction(function () {
-            ScaleSlug::query()->delete();
-        });
-
         $scales = $this->loadScalesForSlugSync();
-        foreach ($scales as $scale) {
-            $writer->syncSlugsForScale($scale);
-        }
+        $writer->rebuildSlugProjections($scales);
 
         $this->info('Scale slugs sync complete.');
 

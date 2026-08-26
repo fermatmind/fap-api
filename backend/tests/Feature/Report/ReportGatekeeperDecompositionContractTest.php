@@ -9,6 +9,7 @@ use App\Models\Result;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportGatekeeper;
+use App\Services\Scale\ScaleRegistryWriter;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -156,29 +157,44 @@ final class ReportGatekeeperDecompositionContractTest extends TestCase
 
     private function configureSdsCommercialOffers(): void
     {
-        DB::table('scales_registry')
+        $row = (array) DB::table('scales_registry_v2')
             ->where('org_id', 0)
             ->where('code', 'SDS_20')
-            ->update([
-                'commercial_json' => json_encode([
-                    'report_benefit_code' => 'SDS_20_FULL',
-                    'credit_benefit_code' => 'SDS_20_FULL',
-                    'report_unlock_sku' => 'SKU_SDS_20_FULL_299',
-                    'offers' => [[
-                        'sku' => 'SKU_SDS_20_FULL_299',
-                        'sku_code' => 'SKU_SDS_20_FULL_299',
-                        'price_cents' => 29900,
-                        'currency' => 'CNY',
-                        'title' => 'SDS Full Report',
-                        'modules_included' => [
-                            ReportAccess::MODULE_SDS_FULL,
-                            ReportAccess::MODULE_SDS_FACTOR_DEEPDIVE,
-                            ReportAccess::MODULE_SDS_ACTION_PLAN,
-                        ],
-                    ]],
-                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-                'updated_at' => now(),
-            ]);
+            ->firstOrFail();
+        foreach ([
+            'slugs_json',
+            'capabilities_json',
+            'view_policy_json',
+            'commercial_json',
+            'seo_schema_json',
+            'seo_i18n_json',
+            'content_i18n_json',
+            'report_summary_i18n_json',
+        ] as $column) {
+            if (is_string($row[$column] ?? null)) {
+                $row[$column] = json_decode($row[$column], true);
+            }
+        }
+        $row['commercial_json'] = [
+            'report_benefit_code' => 'SDS_20_FULL',
+            'credit_benefit_code' => 'SDS_20_FULL',
+            'report_unlock_sku' => 'SKU_SDS_20_FULL_299',
+            'offers' => [[
+                'sku' => 'SKU_SDS_20_FULL_299',
+                'sku_code' => 'SKU_SDS_20_FULL_299',
+                'price_cents' => 29900,
+                'currency' => 'CNY',
+                'title' => 'SDS Full Report',
+                'modules_included' => [
+                    ReportAccess::MODULE_SDS_FULL,
+                    ReportAccess::MODULE_SDS_FACTOR_DEEPDIVE,
+                    ReportAccess::MODULE_SDS_ACTION_PLAN,
+                ],
+            ]],
+        ];
+        unset($row['id'], $row['created_at'], $row['updated_at']);
+
+        app(ScaleRegistryWriter::class)->upsertScale($row);
     }
 
     private function createSdsAttemptWithResult(string $anonId, bool $crisis): string

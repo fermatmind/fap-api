@@ -6,15 +6,16 @@ namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
 use App\Services\Scale\ScaleDiscoverabilityPolicy;
+use App\Services\Scale\ScaleRegistry;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class ScalesSitemapSourceController extends Controller
 {
     public function __construct(
         private readonly ScaleDiscoverabilityPolicy $scaleDiscoverabilityPolicy,
+        private readonly ScaleRegistry $scaleRegistry,
     ) {}
 
     /**
@@ -24,22 +25,16 @@ class ScalesSitemapSourceController extends Controller
     {
         $locale = $this->resolveLocale($request);
 
-        $rows = DB::table('scales_registry')
-            ->select(['code', 'primary_slug', 'slugs_json', 'view_policy_json', 'is_indexable', 'updated_at'])
-            ->where('org_id', 0)
-            ->where('is_public', 1)
-            ->where('is_active', 1)
-            ->orderBy('primary_slug')
-            ->get();
+        $rows = $this->scaleRegistry->listActivePublic(0);
 
         /** @var array<string,array{slug:string,lastmod:string,is_indexable:bool}> $itemsBySlug */
         $itemsBySlug = [];
 
         foreach ($rows as $row) {
-            $isIndexable = $this->scaleDiscoverabilityPolicy->isIndexable((array) $row);
-            $lastmod = $this->resolveLastmod($row->updated_at ?? null);
+            $isIndexable = $this->scaleDiscoverabilityPolicy->isIndexable($row);
+            $lastmod = $this->resolveLastmod($row['updated_at'] ?? null);
 
-            foreach ($this->collectSlugs($row->primary_slug ?? null, $row->slugs_json ?? null) as $slug) {
+            foreach ($this->collectSlugs($row['primary_slug'] ?? null, $row['slugs_json'] ?? null) as $slug) {
                 if ($slug === '') {
                     continue;
                 }

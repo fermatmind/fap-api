@@ -2411,6 +2411,8 @@ return [
             'taxonomy_desc' => 'Supporting data structures that keep editorial taxonomies consistent and keep the workspace discoverable.',
             'optional_types_title' => 'On-demand content types',
             'optional_types_desc' => 'These independent resources stay out of daily navigation until needed, while their original workspaces and contracts remain available.',
+            'advanced_tools_title' => 'Advanced content tools',
+            'advanced_tools_desc' => 'High-impact registries stay contextual and outside the primary navigation.',
             'create_first' => 'Create First Record',
             'access_model_title' => 'Access model',
             'access_model_desc' => 'The CMS product layer shares the same Ops security model but makes the content boundary explicit.',
@@ -2429,6 +2431,9 @@ return [
                 'interpretation_guides_desc' => 'Independent guidance for explaining assessment results and report contexts.',
                 'support_articles' => 'Support Articles',
                 'support_articles_desc' => 'Independent help content for support intents, troubleshooting, and account workflows.',
+                'scale_registry' => 'Scale Registry V2',
+                'scale_registry_desc' => 'Manage the same versioned scale authority used by lookup, attempts, reports, sharing, catalog, and sitemap readers.',
+                'scale_registry_authority' => 'V2 authority · slugs are a read-only projection',
                 'not_enabled' => 'Not enabled yet',
                 'record_count' => ':count records',
                 'status_count' => 'Draft: :draft | Published: :published',
@@ -2749,6 +2754,9 @@ return [
     ],
 
     'resources' => [
+        'scale_registry' => [
+            'slug_projection_help' => 'Read-only projection derived transactionally from Primary Slug and Slugs JSON. Edit the parent V2 scale to change slugs.',
+        ],
         'content_pack_releases' => [
             'label' => 'Content Pack Release',
             'plural' => 'Content Pack Releases',

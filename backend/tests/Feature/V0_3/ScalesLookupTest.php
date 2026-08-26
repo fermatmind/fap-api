@@ -485,20 +485,28 @@ class ScalesLookupTest extends TestCase
     {
         $this->artisan('migrate', ['--force' => true]);
 
-        DB::table('scales_registry')
+        $writer = app(ScaleRegistryWriter::class);
+        $clinical = (array) DB::table('scales_registry_v2')
+            ->where('org_id', 0)
             ->where('code', 'CLINICAL_COMBO_68')
-            ->update([
-                'is_public' => 1,
-                'is_active' => 1,
-                'is_indexable' => 1,
-            ]);
+            ->firstOrFail();
+        foreach (['slugs_json', 'capabilities_json', 'view_policy_json', 'commercial_json', 'seo_schema_json', 'seo_i18n_json', 'content_i18n_json', 'report_summary_i18n_json'] as $column) {
+            if (is_string($clinical[$column] ?? null)) {
+                $clinical[$column] = json_decode($clinical[$column], true);
+            }
+        }
+        $clinical['is_public'] = true;
+        $clinical['is_active'] = true;
+        $clinical['is_indexable'] = true;
+        unset($clinical['id'], $clinical['created_at'], $clinical['updated_at']);
+        $writer->upsertScale($clinical);
 
-        DB::table('scales_registry')->insert([
+        foreach ([
             [
                 'code' => 'SITEMAP_A',
                 'org_id' => 0,
                 'primary_slug' => 'sitemap-a',
-                'slugs_json' => json_encode(['sitemap-a', 'sitemap-a-alt']),
+                'slugs_json' => ['sitemap-a', 'sitemap-a-alt'],
                 'driver_type' => 'mbti',
                 'default_pack_id' => null,
                 'default_region' => null,
@@ -514,21 +522,19 @@ class ScalesLookupTest extends TestCase
                 'is_public' => 1,
                 'is_active' => 1,
                 'is_indexable' => 1,
-                'created_at' => now()->subDay(),
-                'updated_at' => now()->subDay(),
             ],
             [
                 'code' => 'SITEMAP_B',
                 'org_id' => 0,
                 'primary_slug' => 'sitemap-b',
-                'slugs_json' => json_encode(['sitemap-b']),
+                'slugs_json' => ['sitemap-b'],
                 'driver_type' => 'mbti',
                 'default_pack_id' => null,
                 'default_region' => null,
                 'default_locale' => 'en',
                 'default_dir_version' => null,
                 'capabilities_json' => null,
-                'view_policy_json' => json_encode(['indexable' => false]),
+                'view_policy_json' => ['indexable' => false],
                 'commercial_json' => null,
                 'seo_schema_json' => null,
                 'seo_i18n_json' => null,
@@ -537,10 +543,10 @@ class ScalesLookupTest extends TestCase
                 'is_public' => 1,
                 'is_active' => 1,
                 'is_indexable' => 0,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
-        ]);
+        ] as $payload) {
+            $writer->upsertScale($payload);
+        }
 
         $response = $this->getJson('/api/v0.3/scales/sitemap-source?locale=zh');
         $response->assertStatus(200);

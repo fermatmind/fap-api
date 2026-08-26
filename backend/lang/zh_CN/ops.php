@@ -2411,6 +2411,8 @@ return [
             'taxonomy_desc' => '支持编辑分类保持一致，并让工作台内容更容易被发现的数据结构。',
             'optional_types_title' => '按需启用的内容类型',
             'optional_types_desc' => '这些独立资源在需要前不占用日常导航，同时保留原工作区和全部契约。',
+            'advanced_tools_title' => '高级内容工具',
+            'advanced_tools_desc' => '高影响注册表通过上下文入口访问，不占用主导航。',
             'create_first' => '创建第一条记录',
             'access_model_title' => '访问模型',
             'access_model_desc' => 'CMS 产品层复用同一套 Ops 安全模型，同时明确内容边界。',
@@ -2429,6 +2431,9 @@ return [
                 'interpretation_guides_desc' => '用于解释测评结果和报告场景的独立指南内容。',
                 'support_articles' => '支持文章',
                 'support_articles_desc' => '用于支持意图、故障排查和账户流程的独立帮助内容。',
+                'scale_registry' => '量表注册表 V2',
+                'scale_registry_desc' => '管理 lookup、作答、报告、分享、公共目录与 Sitemap 共同读取的版本化量表权威。',
+                'scale_registry_authority' => 'V2 权威 · Slug 为只读派生投影',
                 'not_enabled' => '尚未启用',
                 'record_count' => ':count 条记录',
                 'status_count' => '草稿：:draft | 已发布：:published',
@@ -2749,6 +2754,9 @@ return [
     ],
 
     'resources' => [
+        'scale_registry' => [
+            'slug_projection_help' => '该只读投影由主 Slug 与 Slugs JSON 在同一事务中确定性生成；请编辑父级 V2 量表来修改 Slug。',
+        ],
         'content_pack_releases' => [
             'label' => '内容包发布',
             'plural' => '内容包发布',
