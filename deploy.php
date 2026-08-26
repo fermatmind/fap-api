@@ -1829,12 +1829,12 @@ task('queue:reload-workers', function () {
         );
         $schedulerRequired = currentHost()->getAlias() === 'production' ? 'true' : 'false';
         run(
-            'bash '.$schedulerRestartScript
+            'php_bin="$(command -v {{bin/php}})"; test -n "$php_bin"; bash '.$schedulerRestartScript
                 .' --supervisorctl='.$quotedSupervisorctl
                 .' --sudo='.$quotedSudo
                 .' --timeout-bin='.$quotedTimeout
                 .' --crontab='.deployPlaceholderPathArg('/usr/bin/crontab')
-                .' --php-bin='.deployPlaceholderPathArg('{{bin/php}}')
+                .' --php-bin="$php_bin"'
                 .' --restart-script='.$supervisorRestartScript
                 .' --deploy-path='.deployPlaceholderPathArg('{{deploy_path}}')
                 .' --proc-root=/proc'
