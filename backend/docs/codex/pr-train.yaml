@@ -4362,3 +4362,53 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend_url_truth_and_page_family_policy
+
+  - id: SEO-PLATFORM-07-B
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/seo-platform-07-b-unified-runtime-probe
+    base: main
+    depends_on: ["SEO-PLATFORM-07-A"]
+    mode: execute
+    title: "SEO-PLATFORM-07-B: unify runtime probe evidence and SLIs"
+    scope: >
+      Unify only the existing Core Entry, Public Content, Career Runtime and
+      crawler observations into one sanitized read-only evaluator. Distinguish
+      success, incident and no-data states; detect 404, 410, 5xx, false noindex,
+      empty shell, canonical, hreflang and schema drift, latency and timeout;
+      hold on missing evidence; and permit P1 only from direct multi-identity
+      template or API evidence. Do not schedule probes, persist snapshots,
+      mutate Issue Queue, publish, deploy, or change production state.
+    allowed_paths:
+      - app/Services/SeoIntel/Runtime/UnifiedRuntimeProbeEvaluator.php
+      - tests/Feature/SeoIntel/SeoPlatform07UnifiedRuntimeProbeEvaluatorTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    checks:
+      - "php -l app/Services/SeoIntel/Runtime/UnifiedRuntimeProbeEvaluator.php"
+      - "php -l tests/Feature/SeoIntel/SeoPlatform07UnifiedRuntimeProbeEvaluatorTest.php"
+      - "vendor/bin/pint --test app/Services/SeoIntel/Runtime/UnifiedRuntimeProbeEvaluator.php tests/Feature/SeoIntel/SeoPlatform07UnifiedRuntimeProbeEvaluatorTest.php"
+      - "php artisan test tests/Feature/SeoIntel/SeoPlatform07UnifiedRuntimeProbeEvaluatorTest.php --no-ansi"
+      - "php artisan test tests/Feature/SEO/SeoCoreEntrySloObservabilityTest.php tests/Feature/Ops/PublicContentRuntimeMetricsTest.php tests/Feature/Observability/CareerRuntimeSloAlertingTest.php tests/Feature/SeoIntel/SeoIntelOpsSeoCrawlerObservationReadModelTest.php --no-ansi"
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "ruby -e 'require \"yaml\"; YAML.safe_load(File.read(\"docs/codex/pr-train.yaml\"), aliases: true)'"
+      - "git diff --check"
+      - "git diff --cached --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: continuous_goal
+    merge_policy:
+      mode: github_checks_required
+      local_verify_required: true
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: existing_runtime_observers

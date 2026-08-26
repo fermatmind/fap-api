@@ -1,17 +1,70 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-03T00:00:00Z",
+  "updated_at": "2026-08-26T08:52:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
-    "SEO-PLATFORM-07-A": {
+    "SEO-PLATFORM-07-B": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "pr_open",
+      "branch": "codex/seo-platform-07-b-unified-runtime-probe",
+      "commit_sha": "83095d254b7fc89c3f25cf9ed3ab703223811506",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3792",
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "details": "SEO-PLATFORM-07-A merged as a30817754ac85fba9c81141d7bf33b77fbfcf3b1; exact-SHA CI receipt 32949081186 passed."
+        },
+        "local": [
+          {
+            "command": "php -l scoped implementation and test; vendor/bin/pint --test scoped implementation and test",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/SeoIntel/SeoPlatform07UnifiedRuntimeProbeEvaluatorTest.php --no-ansi",
+            "status": "passed_with_local_env_warning",
+            "details": "6 tests and 149 assertions passed; only the isolated-worktree missing ignored .env warning was emitted."
+          },
+          {
+            "command": "php artisan test tests/Feature/SEO/SeoCoreEntrySloObservabilityTest.php tests/Feature/Ops/PublicContentRuntimeMetricsTest.php tests/Feature/Observability/CareerRuntimeSloAlertingTest.php tests/Feature/SeoIntel/SeoIntelOpsSeoCrawlerObservationReadModelTest.php --no-ansi",
+            "status": "passed_with_local_env_warning",
+            "details": "27 tests and 636 assertions passed across all four reused observer boundaries; only the same local .env warning was emitted."
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": false,
+      "history": [
+        {
+          "at": "2026-08-26T08:52:00Z",
+          "status": "local_checks_passed",
+          "summary": "Initialized and validated the exact 07-B unified read-only runtime evaluator after 07-A merged and exact-SHA CI passed. No scheduler, Issue Queue, persistence, production write, publication, sitemap, llms or search operation was executed."
+        },
+        {
+          "at": "2026-08-26T08:55:00Z",
+          "status": "pr_open",
+          "summary": "Opened PR #3792 for the exact 07-B scope at validated implementation commit 83095d254b7fc89c3f25cf9ed3ab703223811506. GitHub has no PR check requirement; exact-SHA CI runs after merge under the current repository control plane."
+        }
+      ]
+    },
+    "SEO-PLATFORM-07-A": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "merged",
       "branch": "codex/seo-platform-07-a-cohort-resolver",
-      "commit_sha": "8641a118aa4c70a8a05909954358739e876da117",
+      "commit_sha": "a30817754ac85fba9c81141d7bf33b77fbfcf3b1",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3791",
       "checks": {
         "dependency": {
@@ -38,13 +91,19 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "exact-SHA CI",
+            "status": "passed",
+            "details": "Run 32949081186 passed classifier, hygiene, supply-chain, content-pack, verify-bigfive, verify-mbti-v2, verify-mbti-legacy and exact-SHA receipt."
+          }
+        ]
       },
       "failure_reason": null,
       "resume_policy": "continuous_goal",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-08-26T08:41:44Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "database_mutation": false,
       "cms_mutation": false,
@@ -65,6 +124,11 @@
           "at": "2026-08-26T08:42:00Z",
           "status": "pr_open",
           "summary": "Opened PR #3791 for the exact 07-A scope at validated implementation commit 8641a118aa4c70a8a05909954358739e876da117. Required GitHub checks are pending; no production operation was executed."
+        },
+        {
+          "at": "2026-08-26T08:52:00Z",
+          "status": "merged",
+          "summary": "PR #3791 merged as a30817754ac85fba9c81141d7bf33b77fbfcf3b1. Exact-SHA CI passed, the remote branch and isolated worktree were removed, and the automatic non-required deploy was still running when 07-B began."
         }
       ]
     },
