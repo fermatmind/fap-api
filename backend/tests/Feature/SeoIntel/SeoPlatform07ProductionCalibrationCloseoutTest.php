@@ -62,6 +62,18 @@ final class SeoPlatform07ProductionCalibrationCloseoutTest extends TestCase
     }
 
     #[Test]
+    public function database_json_object_key_reordering_does_not_invalidate_receipts(): void
+    {
+        $window = $this->window();
+        $window['receipts'] = array_map($this->reverseObjectKeys(...), $window['receipts']);
+
+        $result = (new ProductionCalibrationCloseoutService)->evaluate($window);
+
+        $this->assertSame('production_proven', $result['state']);
+        $this->assertSame([], $result['blockers']);
+    }
+
+    #[Test]
     public function indexable_success_response_in_the_private_negative_set_fails_closed(): void
     {
         config(['app.git_sha' => str_repeat('a', 40)]);
@@ -156,9 +168,26 @@ final class SeoPlatform07ProductionCalibrationCloseoutTest extends TestCase
             'crawler_source_receipt' => ['complete' => true],
             'production_calibration' => $this->calibration(),
         ];
-        $receipt['receipt_hash'] = hash('sha256', json_encode($receipt, JSON_THROW_ON_ERROR));
+        $receipt['receipt_hash'] = ScheduledRuntimeProbeReceiptService::contentHash($receipt);
 
         return $receipt;
+    }
+
+    private function reverseObjectKeys(mixed $value): mixed
+    {
+        if (! is_array($value)) {
+            return $value;
+        }
+        if (array_is_list($value)) {
+            return array_map($this->reverseObjectKeys(...), $value);
+        }
+
+        $reordered = [];
+        foreach (array_reverse(array_keys($value)) as $key) {
+            $reordered[$key] = $this->reverseObjectKeys($value[$key]);
+        }
+
+        return $reordered;
     }
 
     /** @return array<string,mixed> */

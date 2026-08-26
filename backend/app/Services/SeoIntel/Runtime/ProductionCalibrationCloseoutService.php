@@ -38,9 +38,7 @@ final class ProductionCalibrationCloseoutService
                 $blockers[] = $prefix.'receipt_invalid';
             }
             $receiptHash = $receipt['receipt_hash'] ?? null;
-            $hashPayload = $receipt;
-            unset($hashPayload['receipt_hash']);
-            $computedHash = hash('sha256', json_encode($hashPayload, JSON_THROW_ON_ERROR));
+            $computedHash = ScheduledRuntimeProbeReceiptService::contentHash($receipt);
             if (! is_string($receiptHash)
                 || preg_match('/^[a-f0-9]{64}$/', $receiptHash) !== 1
                 || ! hash_equals($computedHash, $receiptHash)) {

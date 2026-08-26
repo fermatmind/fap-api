@@ -58,7 +58,7 @@ final class ScheduledRuntimeProbeReceiptService
                 'write_authorization_granted' => false,
             ],
         ];
-        $receiptHash = $this->hash($receipt);
+        $receiptHash = self::contentHash($receipt);
         $receipt['receipt_hash'] = $receiptHash;
 
         $this->connection()->table('seo_runtime_probe_receipts')->insertOrIgnore([
@@ -211,9 +211,25 @@ final class ScheduledRuntimeProbeReceiptService
     }
 
     /** @param array<string,mixed> $receipt */
-    private function hash(array $receipt): string
+    public static function contentHash(array $receipt): string
     {
-        return hash('sha256', json_encode($receipt, JSON_THROW_ON_ERROR));
+        unset($receipt['receipt_hash']);
+
+        return hash('sha256', json_encode(self::canonicalize($receipt), JSON_THROW_ON_ERROR));
+    }
+
+    private static function canonicalize(mixed $value): mixed
+    {
+        if (! is_array($value)) {
+            return $value;
+        }
+        if (array_is_list($value)) {
+            return array_map(self::canonicalize(...), $value);
+        }
+
+        ksort($value, SORT_STRING);
+
+        return array_map(self::canonicalize(...), $value);
     }
 
     /** @return array<string,mixed> */
