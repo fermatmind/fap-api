@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-26T19:43:47Z",
+  "updated_at": "2026-08-26T19:45:07Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-07-G-CRAWLER-AGGREGATE-RUNTIME-IDENTITY": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "committed",
+      "status": "pr_open",
       "branch": "codex/seo-platform-07-crawler-runtime-identity",
       "commit_sha": "235d6bbaa8b65417215a9b6b60e2c5d0b564d653",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3806",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -59,6 +59,11 @@
           "at": "2026-08-26T19:43:47Z",
           "status": "committed",
           "summary": "Committed the validated implementation as 235d6bbaa8b65417215a9b6b60e2c5d0b564d653 with candidate tree cfaf136cac9cd32c907294e63ec8a990a9b15925. The tree contains exactly the eight manifest-allowed paths and no user workspace changes."
+        },
+        {
+          "at": "2026-08-26T19:45:07Z",
+          "status": "pr_open",
+          "summary": "Opened the single authorized corrective PR #3806 at head ffa3454f19a405d067769cac28f07fa783456dd5. No manual workflow, deploy, scheduler trigger or aggregate write was performed; the next production evidence must come from the exact-SHA automatic control plane."
         }
       ]
     },
