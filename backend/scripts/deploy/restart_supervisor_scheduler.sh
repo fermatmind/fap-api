@@ -68,22 +68,56 @@ discover_scheduler() {
   local command_line=""
   local program=""
   local programs=""
+  local cmdline_path=""
+  local scheduler_pid=""
 
   while read -r name state pid_label pid _; do
     [[ "$state" == RUNNING && "$pid_label" == pid ]] || continue
     pid="${pid%,}"
     [[ "$pid" =~ ^[1-9][0-9]*$ ]] || continue
     [[ "$name" =~ ^[A-Za-z0-9][A-Za-z0-9._:-]{0,255}$ ]] || fail invalid_supervisor_identity
-    [[ -r "$proc_root/$pid/cmdline" ]] || continue
-    command_line="$(tr '\0' ' ' < "$proc_root/$pid/cmdline")"
-    if [[ "$command_line" =~ (^|[[:space:]])[^[:space:]]*/artisan[[:space:]]+schedule:work([[:space:]]|$) ]]; then
-      program="${name%%:*}"
-      [[ "$program" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]] || fail invalid_scheduler_identity
-      programs+="$program"$'\n'
-    fi
+    program="${name%%:*}"
+    [[ "$program" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]] || fail invalid_scheduler_identity
+
+    for cmdline_path in "$proc_root"/[0-9]*/cmdline; do
+      [[ -r "$cmdline_path" ]] || continue
+      scheduler_pid="${cmdline_path%/cmdline}"
+      scheduler_pid="${scheduler_pid##*/}"
+      [[ "$scheduler_pid" =~ ^[1-9][0-9]*$ ]] || continue
+      command_line="$(tr '\0' ' ' < "$cmdline_path")"
+      [[ "$command_line" =~ (^|[[:space:]])([^[:space:]]*/)?artisan[[:space:]]+schedule:work([[:space:]]|$) ]] || continue
+      if process_descends_from "$scheduler_pid" "$pid"; then
+        programs+="$program"$'\n'
+      fi
+    done
   done <<< "$status"
 
   printf '%s' "$programs" | awk 'NF { seen[$0]=1 } END { for (item in seen) print item }' | sort
+}
+
+process_descends_from() {
+  local current_pid="$1"
+  local ancestor_pid="$2"
+  local stat_line=""
+  local stat_tail=""
+  local state=""
+  local parent_pid=""
+  local depth=0
+
+  while [[ "$current_pid" =~ ^[1-9][0-9]*$ && "$depth" -lt 64 ]]; do
+    [[ "$current_pid" == "$ancestor_pid" ]] && return 0
+    [[ -r "$proc_root/$current_pid/stat" ]] || return 1
+    stat_line="$(< "$proc_root/$current_pid/stat")"
+    [[ "$stat_line" == *') '* ]] || return 1
+    stat_tail="${stat_line##*) }"
+    read -r state parent_pid _ <<< "$stat_tail"
+    [[ "$parent_pid" =~ ^[0-9]+$ ]] || return 1
+    [[ "$parent_pid" != "$current_pid" && "$parent_pid" != 0 ]] || return 1
+    current_pid="$parent_pid"
+    depth=$((depth + 1))
+  done
+
+  return 1
 }
 
 status_before="$(read_status)"
@@ -116,13 +150,19 @@ while read -r name state pid_label pid _; do
   [[ "$state" == RUNNING && "$pid_label" == pid ]] || continue
   pid="${pid%,}"
   [[ "$pid" =~ ^[1-9][0-9]*$ ]] || continue
-  [[ -r "$proc_root/$pid/cmdline" ]] || continue
-  command_line="$(tr '\0' ' ' < "$proc_root/$pid/cmdline")"
-  [[ "$command_line" =~ (^|[[:space:]])[^[:space:]]*/artisan[[:space:]]+schedule:work([[:space:]]|$) ]] || continue
   [[ "${name%%:*}" == "$program" ]] || continue
-  process_cwd="$(readlink -f "$proc_root/$pid/cwd")"
-  [[ "$process_cwd" == "$current_backend" ]] || fail scheduler_release_drift
-  member_count=$((member_count + 1))
+  for cmdline_path in "$proc_root"/[0-9]*/cmdline; do
+    [[ -r "$cmdline_path" ]] || continue
+    scheduler_pid="${cmdline_path%/cmdline}"
+    scheduler_pid="${scheduler_pid##*/}"
+    [[ "$scheduler_pid" =~ ^[1-9][0-9]*$ ]] || continue
+    command_line="$(tr '\0' ' ' < "$cmdline_path")"
+    [[ "$command_line" =~ (^|[[:space:]])([^[:space:]]*/)?artisan[[:space:]]+schedule:work([[:space:]]|$) ]] || continue
+    process_descends_from "$scheduler_pid" "$pid" || continue
+    process_cwd="$(readlink -f "$proc_root/$scheduler_pid/cwd")"
+    [[ "$process_cwd" == "$current_backend" ]] || fail scheduler_release_drift
+    member_count=$((member_count + 1))
+  done
 done <<< "$status_after"
 [[ "$member_count" -gt 0 ]] || fail scheduler_member_missing
 
