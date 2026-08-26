@@ -19,6 +19,12 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
         return (new SeoDashboardOverviewReadService($this->connectionName))->read();
     }
 
+    /** @return array<string,mixed> */
+    public function technicalHealth(): array
+    {
+        return (new SeoTechnicalHealthReadService($this->connectionName))->read();
+    }
+
     /**
      * @return array<string, mixed>
      */
