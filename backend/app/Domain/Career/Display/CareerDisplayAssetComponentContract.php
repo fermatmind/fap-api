@@ -172,8 +172,18 @@ final class CareerDisplayAssetComponentContract
                     && self::validPublishedOnetFields($onet, 'O*NET structured fields'));
         }
 
-        return self::validPublishedQuickAnswers($quick, '职业速答')
-            && self::validPublishedOnetFields($onet, 'O*NET 结构化字段');
+        $isAccountantsProfile = str_ends_with(
+            (string) ($page['path'] ?? ''),
+            '/accountants-and-auditors',
+        );
+
+        return self::validPublishedQuickAnswers(
+            $quick,
+            $isAccountantsProfile ? '职业画像结构化说明' : '职业速答',
+        ) && self::validPublishedOnetFields(
+            $onet,
+            $isAccountantsProfile ? '专业依据与使用边界' : 'O*NET 结构化字段',
+        );
     }
 
     /** @param array<string,mixed> $page */
@@ -193,11 +203,17 @@ final class CareerDisplayAssetComponentContract
                 ? null
                 : 'CURRENT_DISPLAY_SURFACE_EN_ONET_FIELDS_INVALID';
         }
+        $isAccountantsProfile = str_ends_with(
+            (string) ($page['path'] ?? ''),
+            '/accountants-and-auditors',
+        );
+        $expectedQuickHeading = $isAccountantsProfile ? '职业画像结构化说明' : '职业速答';
+        $expectedOnetHeading = $isAccountantsProfile ? '专业依据与使用边界' : 'O*NET 结构化字段';
         if (! is_array($quick)
             || ! self::exactKeys($quick, ['availability', 'schema_version', 'heading', 'items'])
             || ($quick['availability'] ?? null) !== 'published'
             || ($quick['schema_version'] ?? null) !== 'career.quick_answers.v1'
-            || ($quick['heading'] ?? null) !== '职业速答'
+            || ($quick['heading'] ?? null) !== $expectedQuickHeading
             || ! is_array($quick['items'] ?? null)
             || count($quick['items']) !== 3) {
             return 'CURRENT_DISPLAY_SURFACE_ZH_QUICK_ANSWERS_INVALID';
@@ -221,7 +237,7 @@ final class CareerDisplayAssetComponentContract
             || ! self::exactKeys($onet, ['availability', 'schema_version', 'heading', 'rows'])
             || ($onet['availability'] ?? null) !== 'published'
             || ($onet['schema_version'] ?? null) !== 'career.onet_structured_fields.v1'
-            || ($onet['heading'] ?? null) !== 'O*NET 结构化字段') {
+            || ($onet['heading'] ?? null) !== $expectedOnetHeading) {
             return 'CURRENT_DISPLAY_SURFACE_ZH_ONET_FIELDS_INVALID';
         }
 
