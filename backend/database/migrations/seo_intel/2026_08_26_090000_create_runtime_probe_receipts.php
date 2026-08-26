@@ -20,8 +20,10 @@ return new class extends Migration
             $table->string('slot_key', 80)->unique();
             $table->string('trigger_mode', 32)->index();
             $table->string('status', 32)->index();
-            $table->timestamp('scheduled_for')->index();
-            $table->timestamp('completed_at')->index();
+            // DATETIME avoids the legacy MySQL two-NOT-NULL-TIMESTAMP implicit
+            // default rule while preserving the UTC application contract.
+            $table->dateTime('scheduled_for')->index();
+            $table->dateTime('completed_at')->index();
             $table->string('receipt_hash', 64);
             $table->json('crawler_source_receipt_json');
             $table->json('receipt_json');

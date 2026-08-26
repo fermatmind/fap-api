@@ -1,14 +1,37 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-26T09:40:00Z",
+  "updated_at": "2026-08-26T10:05:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "SEO-PLATFORM-07-G": {
+      "repo": "fap-api", "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_validation", "branch": "codex/seo-platform-07-g-production-closeout", "commit_sha": null, "pr_url": null,
+      "checks": {
+        "dependency": {"status": "passed", "details": "SEO-PLATFORM-07-F merged as 4ed0670be3a461ddc1dad516da64ebe41f706cdf; exact-SHA CI receipt 32953968001 passed."},
+        "local": [
+          {"command": "scoped Pint --test", "status": "passed", "details": "10 changed PHP files passed."},
+          {"command": "php artisan test complete SEO-PLATFORM-07 chain, protected API and existing UI contracts", "status": "passed_with_local_env_warning", "details": "44 tests and 952 assertions passed; only isolated-worktree .env warnings."},
+          {"command": "php artisan route:list --name=api.v0_5.ops.seo_intel.technical_health --no-ansi", "status": "passed", "details": "Exactly one protected GET route remains registered."},
+          {"command": "JSON/YAML and git diff --check", "status": "passed"},
+          {"command": "production deployment failure diagnosis", "status": "passed", "details": "F staging passed; production rejected E's two NOT NULL TIMESTAMP columns under legacy MySQL implicit-default rules and retained D as LKG. G applies the minimal pre-first-success DATETIME compatibility correction."}
+        ],
+        "github": [],
+        "production": []
+      },
+      "failure_reason": null, "resume_policy": "continuous_goal", "merged_at": null,
+      "remote_branch_deleted": false, "local_cleanup_executed": false,
+      "production_write_execution": false, "database_mutation": false, "cms_mutation": false,
+      "publish_allowed": false, "deploy_allowed": false, "production_readback_allowed": true,
+      "history": [
+        {"at": "2026-08-26T10:05:00Z", "status": "local_checks_passed", "summary": "Validated fail-closed six-family bilingual calibration, private negative set, one-deploy three-slot closeout, MySQL-compatible receipt migration and shared API/UI/receipt projection. Read-only precheck found 11/12 selected core entries at 200 and one zh-CN Career redirect; no threshold was lowered. No manual schedule, deployment dispatch or production write was executed."}
+      ]
+    },
     "SEO-PLATFORM-07-F": {
       "repo": "fap-api", "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open", "branch": "codex/seo-platform-07-f-technical-health", "commit_sha": "d7e1ca9a7743a89e6907643c55247144140b54d5", "pr_url": "https://github.com/fermatmind/fap-api/pull/3796",
+      "status": "merged", "branch": "codex/seo-platform-07-f-technical-health", "commit_sha": "4ed0670be3a461ddc1dad516da64ebe41f706cdf", "pr_url": "https://github.com/fermatmind/fap-api/pull/3796",
       "checks": {
         "dependency": {"status": "passed", "details": "SEO-PLATFORM-07-E merged as dd4b918a8b7914f7e6ca685cf19a5c48aaa5b203; exact-SHA CI receipt 32953050678 passed."},
         "local": [
@@ -16,15 +39,16 @@
           {"command": "php artisan test technical health read model, protected API and existing UI contracts", "status": "passed_with_local_env_warning", "details": "16 tests and 292 assertions passed before explicit endpoint-negative additions; only isolated-worktree .env warnings."},
           {"command": "php artisan route:list --name=api.v0_5.ops.seo_intel.technical_health", "status": "passed"}
         ],
-        "github": []
+        "github": [{"name": "exact-SHA CI", "status": "passed", "details": "Run 32953968001 passed all selected jobs and exact-SHA receipt."}]
       },
-      "failure_reason": null, "resume_policy": "continuous_goal", "merged_at": null,
-      "remote_branch_deleted": false, "local_cleanup_executed": false,
+      "failure_reason": null, "resume_policy": "continuous_goal", "merged_at": "2026-08-26T09:41:54Z",
+      "remote_branch_deleted": true, "local_cleanup_executed": true,
       "production_write_execution": false, "database_mutation": false, "cms_mutation": false,
       "publish_allowed": false, "deploy_allowed": false,
       "history": [
         {"at": "2026-08-26T09:40:00Z", "status": "local_checks_passed", "summary": "Validated the exact 07-F protected API and existing Filament Technical Health workspace. No cross-repo write, deployment or production operation was executed."},
-        {"at": "2026-08-26T09:43:00Z", "status": "pr_open", "summary": "Opened PR #3796 at validated implementation commit d7e1ca9a7743a89e6907643c55247144140b54d5; no production operation was executed."}
+        {"at": "2026-08-26T09:43:00Z", "status": "pr_open", "summary": "Opened PR #3796 at validated implementation commit d7e1ca9a7743a89e6907643c55247144140b54d5; no production operation was executed."},
+        {"at": "2026-08-26T09:49:00Z", "status": "merged", "summary": "PR #3796 merged as 4ed0670be3a461ddc1dad516da64ebe41f706cdf. Exact-SHA CI passed and cleanup completed; automatic deploy remains under the existing control plane."}
       ]
     },
     "SEO-PLATFORM-07-E": {

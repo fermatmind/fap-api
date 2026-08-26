@@ -4526,6 +4526,7 @@ prs:
       - app/Console/Commands/SeoPlatformRuntimeProbeScheduled.php
       - app/Services/SeoIntel/Runtime/ScheduledRuntimeProbeReceiptService.php
       - database/migrations/seo_intel/2026_08_26_090000_create_runtime_probe_receipts.php
+      - database/migrations/seo_intel/2026_08_26_090000_create_runtime_probe_receipts.php
       - tests/Feature/SeoIntel/SeoPlatform07ScheduledRuntimeProbeReceiptTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -4606,3 +4607,57 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: protected_ops_read_model
+
+  - id: SEO-PLATFORM-07-G
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/seo-platform-07-g-production-closeout
+    base: main
+    depends_on: ["SEO-PLATFORM-07-F"]
+    mode: execute
+    title: "SEO-PLATFORM-07-G: calibrate and prove production runtime health"
+    scope: >
+      Calibrate the production runtime receipt for the exact six authoritative
+      Page Families and two locales, execute a bounded read-only private
+      negative set in each natural scheduled slot, and close out only after
+      three fresh consecutive scheduled receipts from one deployed revision
+      share a complete API/UI/receipt projection. Missing, manual, stale,
+      inferred or drifted evidence must remain production_unproven. Do not add
+      a state write, manual trigger, deployment dispatch or search action.
+    allowed_paths:
+      - app/Console/Commands/SeoPlatformRuntimeProbeScheduled.php
+      - app/Filament/Ops/Support/SeoOperationsUiState.php
+      - app/Filament/Ops/Support/SeoTechnicalHealthUiContract.php
+      - app/Services/SeoIntel/OpsDashboard/SeoTechnicalHealthReadService.php
+      - app/Services/SeoIntel/Runtime/ProductionCalibrationCloseoutService.php
+      - app/Services/SeoIntel/Runtime/ProductionCalibrationProbeService.php
+      - app/Services/SeoIntel/Runtime/ScheduledRuntimeProbeReceiptService.php
+      - resources/views/filament/ops/components/ops-technical-health-workspace.blade.php
+      - tests/Feature/SeoIntel/SeoPlatform07ProductionCalibrationCloseoutTest.php
+      - tests/Feature/SeoIntel/SeoPlatform07ScheduledRuntimeProbeReceiptTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    checks:
+      - "scoped PHP syntax and Pint"
+      - "php artisan test production calibration, scheduler receipt, technical health, protected API and UI contracts"
+      - "fresh SQLite migration and MySQL-compatible DATETIME DDL contract"
+      - "natural production scheduler receipt window and sanitized protected API/UI parity readback"
+      - "JSON/YAML, exact scope and diff checks"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: continuous_goal
+    merge_policy:
+      mode: github_checks_required
+      local_verify_required: true
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    deploy_allowed: false
+    production_readback_allowed: true
+    content_authority: natural_scheduler_production_closeout
