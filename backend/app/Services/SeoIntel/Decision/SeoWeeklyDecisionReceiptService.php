@@ -37,7 +37,7 @@ final class SeoWeeklyDecisionReceiptService
         }
 
         $slot = ($scheduledFor ?? CarbonImmutable::now('UTC'))->setTimezone('UTC');
-        if ((int) $slot->isoWeekday() !== 4 || $slot->format('H:i') !== '06:00') {
+        if ((int) $slot->isoWeekday() !== 4 || $slot->format('H:i') !== '08:10') {
             return [
                 'schema_version' => self::CONTRACT_VERSION,
                 'status' => 'MEASUREMENT_HOLD',

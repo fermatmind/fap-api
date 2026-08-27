@@ -2478,7 +2478,7 @@ test "\$permission_status" = 401
 {{bin/php}} artisan seo:weekly-decision-closeout \
   --expected-sha={$expectedShaArg} \
   {$closeoutOptions} --json --no-interaction --no-ansi
-BASH);
+BASH, timeout: 1500);
     });
 });
 
