@@ -1,15 +1,56 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T02:50:48Z",
+  "updated_at": "2026-08-27T03:23:09Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "SEO-PLATFORM-09-A": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_checks_passed",
+      "branch": "codex/seo-platform-09-a-decision-authority",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "details": "SEO-PLATFORM-08-E merged as 64c386fa0e0fa5167c08c207befe33be75bb447d; exact-SHA CI run 33034575597 and automatic deploy run 33034854926 completed successfully with a sanitized production_proven receipt."
+        },
+        "local": [
+          {
+            "command": "focused decision authority, migration isolation and activation contract PHPUnit plus scoped Pint",
+            "status": "passed",
+            "details": "18 tests and 203 assertions cover the seo.decision_card.v1 contract, expand-only isolated schema, unique current pointer per cluster_uid, true zero, authority-only joins, forbidden-field exclusion, fail-closed weak identities and the existing migration activation boundary."
+          }
+        ],
+        "github": [],
+        "production": []
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": true,
+      "production_readback_allowed": false,
+      "history": [
+        {
+          "at": "2026-08-27T03:23:09Z",
+          "status": "local_checks_passed",
+          "summary": "Established only the seo.decision_card.v1 authority and its pointer-only current read model. Every current pointer is unique by authoritative cluster_uid and joins back to one immutable card revision bound to the existing SEO ledger; subject fallback, synthetic cards, evaluator, lifecycle, selector, UI and scheduler behavior remain excluded."
+        }
+      ]
+    },
     "SEO-PLATFORM-08-E": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "merged",
       "branch": "codex/seo-platform-08-e-production-closeout",
       "commit_sha": "b2fc54320c7de3e5bfa218d33103322fb087d414",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3811",
@@ -25,14 +66,26 @@
             "details": "11 tests and 120 assertions plus 44 classifier/workflow tests cover exact SHA, schema/readback, 401 permission negative, true zero, bilingual UI, L3/L4 disablement and zero production writes."
           }
         ],
-        "github": [],
-        "production": []
+        "github": [
+          {
+            "name": "CI / exact-SHA validation receipt",
+            "status": "passed",
+            "details": "Main push run 33034575597 passed the exact-SHA classifier, hygiene, focused runtime, migration, MBTI, Big Five, supply-chain and content-pack jobs."
+          }
+        ],
+        "production": [
+          {
+            "name": "automatic exact-SHA deploy and sanitized closeout",
+            "status": "passed",
+            "details": "Deploy run 33034854926 passed staging and production for 64c386fa0e0fa5167c08c207befe33be75bb447d. The read-only receipt reported production_proven, schema ready, exact SHA bound, protected endpoint 401, verified zero rows, highest enabled L2, L3/L4 disabled, and no production DB write or real experiment."
+          }
+        ]
       },
       "failure_reason": null,
       "resume_policy": "continuous_goal",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-08-27T02:51:27Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "database_mutation": false,
       "cms_mutation": false,
@@ -49,6 +102,11 @@
           "at": "2026-08-27T02:50:48Z",
           "status": "pr_open",
           "summary": "Opened the single scoped PR #3811 from validated implementation commit b2fc54320c7de3e5bfa218d33103322fb087d414. Only the existing automatic exact-SHA deploy channel may produce production proof; no manual dispatch, SSH, migration, DB write, experiment or search action was triggered."
+        },
+        {
+          "at": "2026-08-27T03:19:01Z",
+          "status": "merged",
+          "summary": "PR #3811 squash-merged as 64c386fa0e0fa5167c08c207befe33be75bb447d. Exact-SHA CI and the automatic staging/production deploy passed; the sanitized production closeout proved a protected readable zero-row ledger at L2 with L3/L4 disabled and no manual production action."
         }
       ]
     },
