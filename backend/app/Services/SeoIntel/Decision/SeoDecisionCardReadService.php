@@ -63,7 +63,13 @@ final class SeoDecisionCardReadService
     /** @return array<string, mixed> */
     private function present(object $row): array
     {
-        $card = ['schema_version' => (string) $row->schema_version];
+        $card = [
+            'schema_version' => (string) $row->schema_version,
+            'decision_revision_id' => (string) $row->decision_revision_id,
+            'revision_number' => (int) $row->revision_number,
+            'ledger_id' => (string) $row->ledger_id,
+            'selection_revision' => $row->selection_revision === null ? null : (string) $row->selection_revision,
+        ];
         foreach (SeoDecisionCardContract::REQUIRED_FIELDS as $field) {
             $card[$field] = match ($field) {
                 'affected_unique_url_count' => (int) $row->{$field},

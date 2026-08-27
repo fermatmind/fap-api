@@ -1609,8 +1609,11 @@ return [
                     'title' => 'Priority decisions',
                     'description' => 'Show :default decisions by default and never more than :max. Missing evidence leaves the slot empty; low-value work never fills it.',
                     'columns' => ['cause' => 'Detector / cause', 'scope' => 'Family / locale', 'evidence' => 'Evidence / freshness', 'impact' => 'Gain / blast radius', 'action' => 'Allowed action / next step'],
+                    'empty_title' => 'No eligible decisions this ISO week',
                     'hold_title' => 'Weekly decisions are on MEASUREMENT_HOLD',
                     'hold_description' => 'The #9 authoritative contract is unavailable. Existing GSC, Issue, CMS, and deployment models are not joined into synthetic decisions, counts, or priorities.',
+                    'selection_revision' => 'Selection revision',
+                    'current_status' => 'Leading decision status',
                 ],
                 'health' => [
                     'eyebrow' => 'Site health',

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API\V0_5\Ops\SeoIntel;
 
+use App\Services\SeoIntel\Decision\SeoWeeklyDecisionSelector;
 use App\Services\SeoIntel\Ledger\SeoLedgerSnapshotReadService;
 use App\Services\SeoIntel\OpsDashboard\SeoDashboardApiReadService;
 use Illuminate\Http\JsonResponse;
@@ -14,6 +15,7 @@ final class SeoIntelDashboardController
     public function __construct(
         private readonly SeoDashboardApiReadService $readService,
         private readonly SeoLedgerSnapshotReadService $ledgerReadService,
+        private readonly SeoWeeklyDecisionSelector $weeklyDecisionSelector,
     ) {}
 
     public function overview(): JsonResponse
@@ -81,6 +83,21 @@ final class SeoIntelDashboardController
         ]);
     }
 
+    public function weeklyDecisions(): JsonResponse
+    {
+        $snapshot = $this->weeklyDecisionSelector->snapshot();
+
+        return response()->json([
+            'ok' => true,
+            'data' => $snapshot,
+            'meta' => [
+                'contract_version' => SeoWeeklyDecisionSelector::CONTRACT_VERSION,
+                'read_only' => true,
+                'authority' => 'fap-api seo decision cards',
+            ],
+        ]);
+    }
+
     /**
      * @param  array<string, mixed>  $data
      */
@@ -97,12 +114,12 @@ final class SeoIntelDashboardController
         ]);
     }
 
-    private function limit(Request $request): int
+    private function limit(Request $request, int $default = 25, int $maximum = 100): int
     {
-        $raw = $request->query('limit', 25);
-        $limit = is_numeric($raw) ? (int) $raw : 25;
+        $raw = $request->query('limit', $default);
+        $limit = is_numeric($raw) ? (int) $raw : $default;
 
-        return max(1, min($limit, 100));
+        return max(1, min($limit, $maximum));
     }
 
     /**

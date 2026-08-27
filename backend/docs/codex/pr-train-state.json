@@ -1,28 +1,28 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T04:02:48Z",
+  "updated_at": "2026-08-27T04:14:39Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
-    "SEO-PLATFORM-09-D": {
+    "SEO-PLATFORM-09-E": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
-      "branch": "codex/seo-platform-09-d-lifecycle",
-      "commit_sha": "ffb18a55e85e58a41443c29c1f89c1433639b3e2",
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/3815",
+      "status": "local_checks_passed",
+      "branch": "codex/seo-platform-09-e-weekly-workbench",
+      "commit_sha": null,
+      "pr_url": null,
       "checks": {
         "dependency": {
           "status": "passed",
-          "details": "SEO-PLATFORM-09-C merged as cb719ef5b794b7fdf6a62624026974a1dae3be9f and exact-SHA CI run 33037579996 completed successfully."
+          "details": "SEO-PLATFORM-09-D merged as 838f4553943dd8ffc052fd5f8e5ee0e0b2af0f12 and exact-SHA CI run 33038229881 completed successfully."
         },
         "local": [
           {
-            "command": "focused lifecycle materializer, decision authority and ledger state-machine PHPUnit plus scoped Pint",
+            "command": "focused weekly selector, existing Workbench and decision authority PHPUnit plus scoped Pint and route listing",
             "status": "passed",
-            "details": "14 tests and 120 assertions cover all seven lifecycle states, duplicate-evidence idempotency, deterministic immutable revisions, current-pointer replacement, recurrence, stale HOLD, illegal-transition denial, recovery-proof closure and append-only ledger sequencing."
+            "details": "11 tests and 106 assertions cover ISO week identity, default 3, hard maximum 5, true 0-5 without padding, HOLD/stale exclusion, deterministic priority order, protected read API and exact API/UI order-count-selection_revision parity."
           }
         ],
         "github": [],
@@ -41,6 +41,53 @@
       "production_readback_allowed": false,
       "history": [
         {
+          "at": "2026-08-27T04:14:39Z",
+          "status": "local_checks_passed",
+          "summary": "Implemented only the deterministic ISO-week selector and connected its read-only snapshot to the existing SEO Workbench and protected Ops API. The selection defaults to three, caps at five, excludes held/stale/unscored cards, never pads, preserves true zero and exposes one identical order, count and revision across API and bilingual UI."
+        }
+      ]
+    },
+    "SEO-PLATFORM-09-D": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "merged",
+      "branch": "codex/seo-platform-09-d-lifecycle",
+      "commit_sha": "ffb18a55e85e58a41443c29c1f89c1433639b3e2",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3815",
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "details": "SEO-PLATFORM-09-C merged as cb719ef5b794b7fdf6a62624026974a1dae3be9f and exact-SHA CI run 33037579996 completed successfully."
+        },
+        "local": [
+          {
+            "command": "focused lifecycle materializer, decision authority and ledger state-machine PHPUnit plus scoped Pint",
+            "status": "passed",
+            "details": "14 tests and 120 assertions cover all seven lifecycle states, duplicate-evidence idempotency, deterministic immutable revisions, current-pointer replacement, recurrence, stale HOLD, illegal-transition denial, recovery-proof closure and append-only ledger sequencing."
+          }
+        ],
+        "github": [
+          {
+            "name": "CI / exact-SHA validation receipt",
+            "status": "passed",
+            "details": "Main push run 33038229881 passed classifier, hygiene, focused runtime, MBTI, Big Five, supply-chain, content-pack and exact-SHA receipt jobs."
+          }
+        ],
+        "production": []
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": "2026-08-27T04:03:26Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": true,
+      "production_readback_allowed": false,
+      "history": [
+        {
           "at": "2026-08-27T04:01:28Z",
           "status": "local_checks_passed",
           "summary": "Implemented only the decision-card lifecycle materializer. Every accepted change atomically appends one immutable decision revision, moves the single current pointer and appends a bound SEO ledger audit event; identical evidence is replayed without another card or event. Closure requires fresh direct recovery proof bound to current authority/runtime revisions, while stale or illegal transitions fail closed."
@@ -49,6 +96,11 @@
           "at": "2026-08-27T04:02:48Z",
           "status": "pr_open",
           "summary": "Opened focused PR #3815 from implementation commit ffb18a55e85e58a41443c29c1f89c1433639b3e2; the exact four-file scope is mergeable and contains no selector, UI, scheduler or production operation."
+        },
+        {
+          "at": "2026-08-27T04:09:00Z",
+          "status": "merged",
+          "summary": "PR #3815 squash-merged as 838f4553943dd8ffc052fd5f8e5ee0e0b2af0f12. Exact-SHA CI passed and the remote/local task branch plus isolated worktree were removed without touching the operator workspace."
         }
       ]
     },

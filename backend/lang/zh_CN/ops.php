@@ -1609,8 +1609,11 @@ return [
                     'title' => '优先决策',
                     'description' => '默认显示 :default 条，最多 :max 条；证据不足时留空，不用低价值事项补位。',
                     'columns' => ['cause' => 'Detector / 根因', 'scope' => 'Family / locale', 'evidence' => '证据 / 新鲜度', 'impact' => '收益 / 爆炸半径', 'action' => '允许动作 / 下一步'],
+                    'empty_title' => '本 ISO 周暂无合格决策',
                     'hold_title' => '本周决策处于 MEASUREMENT_HOLD',
                     'hold_description' => '#9 权威合同不可用；现有 GSC、Issue、CMS 与部署模型不会被拼接成虚构决策、数量或优先级。',
+                    'selection_revision' => '选择 revision',
+                    'current_status' => '首项决策状态',
                 ],
                 'health' => [
                     'eyebrow' => '站点健康',
