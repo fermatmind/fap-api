@@ -2410,6 +2410,44 @@ task('healthcheck:ops-entry-contract', function () {
     );
 });
 
+task('seo:ledger-production-closeout', function () {
+    $target = currentHost()->getAlias();
+    $configuredHost = trim((string) get('ops_entry_host', ''));
+
+    if ($configuredHost === '') {
+        if ($target === 'production') {
+            throw new \RuntimeException('Production SEO ledger closeout requires ops_entry_host.');
+        }
+
+        writeln('<comment>Skip staging SEO ledger closeout (ops_entry_host not configured)</comment>');
+
+        return;
+    }
+
+    $expectedSha = strtolower(trim((string) (getenv('DEPLOY_REVISION') ?: '')));
+    if (preg_match('/\A[a-f0-9]{40}\z/', $expectedSha) !== 1) {
+        throw new \RuntimeException('SEO ledger closeout requires an exact deploy SHA.');
+    }
+
+    $host = deploySafeHost($configuredHost, 'ops_entry_host');
+    $resolveArg = deployCurlResolveArg($host, true);
+    $url = deployHttpsUrlArg($host, '/api/v0.5/ops/seo-intel/experiment-ledger');
+    $expectedShaArg = deployShellArg($expectedSha);
+    $allowUnproven = $target === 'staging' ? '--allow-unproven' : '';
+
+    within('{{current_path}}/backend', function () use ($resolveArg, $url, $expectedShaArg, $allowUnproven): void {
+        run(<<<BASH
+set -euo pipefail
+permission_status="\$(curl -sS -o /dev/null --max-time 15 -w '%{http_code}' {$resolveArg}{$url})"
+test "\$permission_status" = 401
+{{bin/php}} artisan seo-ledger:production-closeout \
+  --expected-sha={$expectedShaArg} \
+  --permission-negative-status="\$permission_status" \
+  {$allowUnproven} --json --no-interaction --no-ansi
+BASH);
+    });
+});
+
 task('healthcheck:queue-smoke', function () {
     within('{{current_path}}/backend', function () {
         run(<<<'BASH'
@@ -2739,6 +2777,7 @@ after('deploy:symlink', 'healthcheck:auth-guest-contract');
 after('deploy:symlink', 'healthcheck:public-static-media-assets');
 after('deploy:symlink', 'healthcheck:scale-lookup');
 after('deploy:symlink', 'healthcheck:ops-entry-contract');
+after('healthcheck:ops-entry-contract', 'seo:ledger-production-closeout');
 after('deploy:symlink', 'healthcheck:queue-smoke');
 
 /**
