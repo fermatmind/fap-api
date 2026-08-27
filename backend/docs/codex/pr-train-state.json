@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T03:23:09Z",
+  "updated_at": "2026-08-27T03:25:51Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-09-A": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/seo-platform-09-a-decision-authority",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "21b99fc6c25b76c3415fba6957f097442c59f1ee",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3812",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -44,6 +44,11 @@
           "at": "2026-08-27T03:23:09Z",
           "status": "local_checks_passed",
           "summary": "Established only the seo.decision_card.v1 authority and its pointer-only current read model. Every current pointer is unique by authoritative cluster_uid and joins back to one immutable card revision bound to the existing SEO ledger; subject fallback, synthetic cards, evaluator, lifecycle, selector, UI and scheduler behavior remain excluded."
+        },
+        {
+          "at": "2026-08-27T03:25:51Z",
+          "status": "pr_open",
+          "summary": "Opened the single scoped PR #3812 from validated implementation commit 21b99fc6c25b76c3415fba6957f097442c59f1ee. The exact scope contains only the decision contract, authority/current-pointer schema, read service, focused tests and train evidence; no runtime or production write was triggered."
         }
       ]
     },
