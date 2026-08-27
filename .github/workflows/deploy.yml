@@ -247,7 +247,7 @@ jobs:
     needs: [policy, staging]
     if: needs.staging.result == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 80
     environment: production
     env:
       TARGET: production
