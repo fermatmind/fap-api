@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Support;
 
+use App\Services\SeoIntel\Ledger\SeoLedgerSnapshotReadService;
+
 final class SeoExperimentLedgerUiContract
 {
     /** @return array{state:string,statuses:list<string>,required_fields:list<string>} */
@@ -26,5 +28,11 @@ final class SeoExperimentLedgerUiContract
                 'rollback',
             ],
         ];
+    }
+
+    /** @return array<string, mixed> */
+    public static function snapshot(): array
+    {
+        return app(SeoLedgerSnapshotReadService::class)->snapshot();
     }
 }

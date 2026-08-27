@@ -690,6 +690,8 @@ Route::prefix('v0.5')->group(function () {
                 ->name('api.v0_5.ops.seo_intel.technical_health');
             Route::get('/conversion-funnel', [SeoIntelDashboardController::class, 'conversionFunnel'])
                 ->name('api.v0_5.ops.seo_intel.conversion_funnel');
+            Route::get('/experiment-ledger', [SeoIntelDashboardController::class, 'experimentLedger'])
+                ->name('api.v0_5.ops.seo_intel.experiment_ledger');
         });
 
     Route::prefix('ops/public-content-health')

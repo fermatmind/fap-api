@@ -1,15 +1,56 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T02:22:37Z",
+  "updated_at": "2026-08-27T02:33:36Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "SEO-PLATFORM-08-D": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_checks_passed",
+      "branch": "codex/seo-platform-08-d-readonly-ledger",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "details": "SEO-PLATFORM-08-C merged as 90c386319f503bb85b6245c8586bd2b4b107fbf7 and exact-SHA CI run 33033127291 completed successfully."
+        },
+        "local": [
+          {
+            "command": "focused API/UI PHPUnit, route wiring and scoped Pint",
+            "status": "passed",
+            "details": "7 tests and 86 assertions cover protected read permission, pagination, sanitized evidence/status readback, true empty state, bilingual existing UI integration and copy compactness."
+          }
+        ],
+        "github": [],
+        "production": []
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": true,
+      "production_readback_allowed": false,
+      "history": [
+        {
+          "at": "2026-08-27T02:33:36Z",
+          "status": "local_checks_passed",
+          "summary": "Connected the authoritative ledger to the existing protected SEO Intel API and Experiment Ledger workspace using a paginated allowlist read model. Empty storage remains a real zero-row state; private URLs, raw evidence, actors, hashes, topology and all write controls are excluded."
+        }
+      ]
+    },
     "SEO-PLATFORM-08-C": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "merged",
       "branch": "codex/seo-platform-08-c-state-machine",
       "commit_sha": "7e33864b473001f72275f63ebe59413a87ccee9a",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3809",
@@ -30,14 +71,20 @@
             "details": "3 tests and 51 assertions cover exact transitions, eight denials, skip denial, L3/L4 disablement, atomic apply/deny, immutable append audit, context-bound idempotency and privacy-safe evidence."
           }
         ],
-        "github": [],
+        "github": [
+          {
+            "name": "CI / exact-SHA validation receipt",
+            "status": "passed",
+            "details": "Main push run 33033127291 passed all classifier, hygiene, focused runtime, MBTI, Big Five, supply-chain, content-pack and exact-SHA receipt jobs."
+          }
+        ],
         "production": []
       },
       "failure_reason": null,
       "resume_policy": "continuous_goal",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-08-27T02:23:20Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "database_mutation": false,
       "cms_mutation": false,
@@ -54,6 +101,11 @@
           "at": "2026-08-27T02:22:37Z",
           "status": "pr_open",
           "summary": "Opened the single scoped PR #3809 from validated implementation commit 7e33864b473001f72275f63ebe59413a87ccee9a. No production, CMS, search, experiment or scheduler action was triggered."
+        },
+        {
+          "at": "2026-08-27T02:33:36Z",
+          "status": "merged",
+          "summary": "PR #3809 squash-merged as 90c386319f503bb85b6245c8586bd2b4b107fbf7. Exact-SHA CI passed and the remote/local branch plus isolated worktree were removed without touching the operator workspace."
         }
       ]
     },
