@@ -149,19 +149,19 @@ final class SchedulerEvidenceMonitorTest extends TestCase
     }
 
     #[Test]
-    public function nightly_separates_lightweight_monitor_from_daily_jobs(): void
+    public function nightly_archives_scheduler_evidence_once_daily_without_notifications(): void
     {
         $workflow = (string) file_get_contents(base_path('../.github/workflows/nightly.yml'));
 
-        $this->assertStringContainsString('- cron: "*/5 * * * *"', $workflow);
+        $this->assertStringNotContainsString('*/5 * * * *', $workflow);
+        $this->assertSame(1, substr_count($workflow, '- cron: "17 18 * * *"'));
         $this->assertStringContainsString('scheduler-evidence-monitor-${{ github.run_id }}-${{ github.run_attempt }}', $workflow);
         $this->assertStringContainsString('timeout-minutes: 5', $workflow);
-        $this->assertStringContainsString("github.event.schedule == '*/5 * * * *'", $workflow);
-        $this->assertSame(4, substr_count($workflow, "github.event.schedule == '17 18 * * *'"));
-        $this->assertStringContainsString("format('scheduler-evidence-monitor-{0}', github.repository)", $workflow);
-        $this->assertStringContainsString("format('nightly-{0}', github.repository)", $workflow);
+        $this->assertSame(5, substr_count($workflow, "github.event.schedule == '17 18 * * *'"));
+        $this->assertStringContainsString('group: nightly-${{ github.repository }}', $workflow);
         $this->assertStringContainsString('environment: production', $workflow);
-        $this->assertStringContainsString('ops:scheduler-evidence-monitor --notify --json', $workflow);
+        $this->assertStringContainsString('ops:scheduler-evidence-monitor --json', $workflow);
+        $this->assertStringNotContainsString('ops:scheduler-evidence-monitor --notify', $workflow);
         $this->assertStringContainsString('deployment_action == false', $workflow);
         $this->assertStringContainsString('lkg_action == false', $workflow);
     }

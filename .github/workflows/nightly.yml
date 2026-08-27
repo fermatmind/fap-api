@@ -2,7 +2,6 @@ name: Nightly
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
     - cron: "17 18 * * *"
 
 permissions:
@@ -11,13 +10,13 @@ permissions:
   security-events: write
 
 concurrency:
-  group: ${{ github.event.schedule == '*/5 * * * *' && format('scheduler-evidence-monitor-{0}', github.repository) || format('nightly-{0}', github.repository) }}
+  group: nightly-${{ github.repository }}
   cancel-in-progress: true
 
 jobs:
   scheduler-evidence-monitor:
-    name: Production scheduler evidence monitor
-    if: github.event_name == 'schedule' && github.event.schedule == '*/5 * * * *'
+    name: Daily production scheduler evidence archive
+    if: github.event_name == 'schedule' && github.event.schedule == '17 18 * * *'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     environment: production
@@ -63,7 +62,7 @@ jobs:
 
           set +e
           active_sha="$("${ssh_base[@]}" "$remote_prefix tr -d '\\r\\n' < ../REVISION" 2>/dev/null)"
-          "${ssh_base[@]}" "$remote_prefix sudo -n -u www-data -- php artisan ops:scheduler-evidence-monitor --notify --json --no-interaction --no-ansi" > "$raw_receipt" 2>/dev/null
+          "${ssh_base[@]}" "$remote_prefix sudo -n -u www-data -- php artisan ops:scheduler-evidence-monitor --json --no-interaction --no-ansi" > "$raw_receipt" 2>/dev/null
           monitor_rc=$?
           set -e
 
