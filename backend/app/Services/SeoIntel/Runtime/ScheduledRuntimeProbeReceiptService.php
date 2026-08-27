@@ -220,6 +220,11 @@ final class ScheduledRuntimeProbeReceiptService
 
     private static function canonicalize(mixed $value): mixed
     {
+        if (is_float($value) && is_finite($value)) {
+            $rounded = round($value, 6);
+
+            return floor($rounded) === $rounded ? (int) $rounded : $rounded;
+        }
         if (! is_array($value)) {
             return $value;
         }

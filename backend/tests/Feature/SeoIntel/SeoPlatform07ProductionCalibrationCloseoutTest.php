@@ -66,6 +66,10 @@ final class SeoPlatform07ProductionCalibrationCloseoutTest extends TestCase
     {
         $window = $this->window();
         $window['receipts'] = array_map($this->reverseObjectKeys(...), $window['receipts']);
+        foreach ($window['receipts'] as &$receipt) {
+            $receipt['crawler_source_receipt']['age_minutes'] = 11.314861916666668;
+        }
+        unset($receipt);
 
         $result = (new ProductionCalibrationCloseoutService)->evaluate($window);
 
@@ -165,7 +169,7 @@ final class SeoPlatform07ProductionCalibrationCloseoutTest extends TestCase
             'status' => 'success',
             'scheduled_for' => $scheduledFor,
             'completed_at' => $scheduledFor,
-            'crawler_source_receipt' => ['complete' => true],
+            'crawler_source_receipt' => ['complete' => true, 'age_minutes' => 11.314861916666667],
             'production_calibration' => $this->calibration(),
         ];
         $receipt['receipt_hash'] = ScheduledRuntimeProbeReceiptService::contentHash($receipt);
