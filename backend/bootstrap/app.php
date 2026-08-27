@@ -101,7 +101,7 @@ return Application::configure(basePath: dirname(__DIR__))
             ->withoutOverlapping()
             ->onOneServer();
         $schedule->command('seo:weekly-decisions --trigger=scheduled --json')
-            ->weeklyOn(4, '05:30')
+            ->weeklyOn(4, '06:00')
             ->withoutOverlapping(120)
             ->onOneServer();
         $schedule->command('seo-intel:url-truth-controlled-reconcile --execute --no-http --max-records=5000 --batch-size=250')

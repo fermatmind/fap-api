@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T04:56:43Z",
+  "updated_at": "2026-08-27T05:25:02Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,9 +9,9 @@
     "SEO-PLATFORM-09-F": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
-      "branch": "codex/seo-platform-09-f-scheduled-closeout",
-      "commit_sha": "857564d82d80715db39d4dac15e43047b1c8d10c",
+      "status": "corrective_local_checks_passed",
+      "branch": "codex/seo-platform-09-f-closeout-heartbeat",
+      "commit_sha": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3817",
       "checks": {
         "dependency": {
@@ -25,10 +25,22 @@
             "details": "18 tests and 146 assertions cover one natural weekly slot, off-slot/manual exclusion, exact-week idempotency, immutable selected revisions, real 0-5 output, expand-only receipt storage and read-only exact-SHA closeout."
           }
         ],
-        "github": [],
-        "production": []
+        "github": [
+          {
+            "name": "CI / exact-SHA validation receipt",
+            "status": "passed",
+            "details": "PR #3817 merged as 91bc8fe47f9c90fe200af9800edab7d22dbd7e96; main CI run 33040979938 completed successfully."
+          }
+        ],
+        "production": [
+          {
+            "name": "automatic staging and production deployment",
+            "status": "corrective_required",
+            "details": "Deploy run 33041252418 passed staging and activated production, then the read-only closeout SSH session ended after 266 seconds without output. Automatic LKG restoration returned production to c0a0adf016f1b9c4388bd09ebe5bfe1d773e0989 before the natural slot."
+          }
+        ]
       },
-      "failure_reason": null,
+      "failure_reason": "The bounded closeout emitted no progress while waiting, so the remote session disconnected before the natural scheduler slot; no receipt was created and automatic LKG recovery succeeded.",
       "resume_policy": "continuous_goal",
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -49,6 +61,16 @@
           "at": "2026-08-27T04:56:43Z",
           "status": "pr_open",
           "summary": "Opened focused PR #3817 from validated implementation commit 857564d82d80715db39d4dac15e43047b1c8d10c."
+        },
+        {
+          "at": "2026-08-27T05:22:12Z",
+          "status": "production_failed_lkg_restored",
+          "summary": "PR #3817 merged as 91bc8fe47f9c90fe200af9800edab7d22dbd7e96 and exact-SHA CI passed. Deploy 33041252418 passed staging but the silent closeout SSH session disconnected before the natural slot; automatic LKG restoration succeeded and no scheduler receipt was fabricated."
+        },
+        {
+          "at": "2026-08-27T05:25:02Z",
+          "status": "corrective_local_checks_passed",
+          "summary": "Added a sanitized 30-second read-only wait heartbeat and moved the still-single Thursday natural slot to 06:00 UTC. Focused scheduler, Workbench and lifecycle tests pass with 13 tests and 107 assertions."
         }
       ]
     },
