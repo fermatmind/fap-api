@@ -1,28 +1,28 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T03:37:18Z",
+  "updated_at": "2026-08-27T03:47:34Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
-    "SEO-PLATFORM-09-B": {
+    "SEO-PLATFORM-09-C": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
-      "branch": "codex/seo-platform-09-b-nullable-priority",
-      "commit_sha": "3cfa30ab43793734026e75645b4f3f5ab8e15d79",
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/3813",
+      "status": "local_checks_passed",
+      "branch": "codex/seo-platform-09-c-stable-ranking",
+      "commit_sha": null,
+      "pr_url": null,
       "checks": {
         "dependency": {
           "status": "passed",
-          "details": "SEO-PLATFORM-09-A merged as 095753fa1f0d6a2bd0a8d05e94250e4bd2c5fbb2 and exact-SHA CI run 33036380610 completed successfully."
+          "details": "SEO-PLATFORM-09-B merged as bf799d4798c7c298e8408f886011b95a6d77a74d and exact-SHA CI run 33036956206 completed successfully."
         },
         "local": [
           {
-            "command": "focused nullable evaluator and decision authority regression PHPUnit plus scoped Pint",
+            "command": "focused nullable evaluator and stable ranking PHPUnit plus scoped Pint",
             "status": "passed",
-            "details": "10 tests and 76 assertions cover all seven required inputs, null-on-missing semantics, malformed/stale/failed measurement HOLD, observed zero, deterministic score/order and the unchanged unified authority boundary."
+            "details": "15 tests and 107 assertions cover bounded weight profiles, sensitivity guardrails, direct verified P0/P1 precedence, non-direct P0/P1 HOLD, low-evidence protection, null preservation, deterministic tie-break, unchanged authority and zero randomness/filling/threshold lowering."
           }
         ],
         "github": [],
@@ -41,6 +41,53 @@
       "production_readback_allowed": false,
       "history": [
         {
+          "at": "2026-08-27T03:47:34Z",
+          "status": "local_checks_passed",
+          "summary": "Calibrated only the existing nullable evaluator with three bounded versioned weight profiles, explicit sensitivity guardrails and a deterministic ranker. Direct verified P0 then P1 are immutable prefixes; non-direct P0/P1 fail closed, evidence bands prevent low-evidence elevation under any allowed profile, and exact ties end at cluster_uid ASC without random or filled values."
+        }
+      ]
+    },
+    "SEO-PLATFORM-09-B": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "merged",
+      "branch": "codex/seo-platform-09-b-nullable-priority",
+      "commit_sha": "3cfa30ab43793734026e75645b4f3f5ab8e15d79",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3813",
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "details": "SEO-PLATFORM-09-A merged as 095753fa1f0d6a2bd0a8d05e94250e4bd2c5fbb2 and exact-SHA CI run 33036380610 completed successfully."
+        },
+        "local": [
+          {
+            "command": "focused nullable evaluator and decision authority regression PHPUnit plus scoped Pint",
+            "status": "passed",
+            "details": "10 tests and 76 assertions cover all seven required inputs, null-on-missing semantics, malformed/stale/failed measurement HOLD, observed zero, deterministic score/order and the unchanged unified authority boundary."
+          }
+        ],
+        "github": [
+          {
+            "name": "CI / exact-SHA validation receipt",
+            "status": "passed",
+            "details": "Main push run 33036956206 passed classifier, hygiene, focused runtime, MBTI, Big Five, supply-chain, content-pack and exact-SHA receipt jobs."
+          }
+        ],
+        "production": []
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": "2026-08-27T03:38:08Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": true,
+      "production_readback_allowed": false,
+      "history": [
+        {
           "at": "2026-08-27T03:35:10Z",
           "status": "local_checks_passed",
           "summary": "Implemented only the seo.priority.candidate.v1 nullable evaluator. Missing, malformed, stale, incomplete, quality-failed, incomparable or lagged required evidence returns priority_score=null and MEASUREMENT_HOLD; a fully explicit input yields a repeatable candidate score and deterministic tie-break without clock or randomness. Weight sensitivity and production ranking policy remain deferred to 09-C."
@@ -49,6 +96,11 @@
           "at": "2026-08-27T03:37:18Z",
           "status": "pr_open",
           "summary": "Opened the single scoped PR #3813 from validated implementation commit 3cfa30ab43793734026e75645b4f3f5ab8e15d79. Scope is limited to the pure evaluator, focused unit tests and train evidence; no runtime or production write was triggered."
+        },
+        {
+          "at": "2026-08-27T03:43:27Z",
+          "status": "merged",
+          "summary": "PR #3813 squash-merged as bf799d4798c7c298e8408f886011b95a6d77a74d. Exact-SHA CI passed and the remote/local task branch plus isolated worktree were removed without touching the operator workspace."
         }
       ]
     },

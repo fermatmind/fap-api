@@ -88,6 +88,11 @@ final class SeoNullablePriorityEvaluator
             'priority_score' => round(array_sum($components) / count($components), 4),
             'ranking_eligible' => true,
             'components' => $components,
+            'ranking_dimensions' => [
+                'severity' => $input['risk']['severity'],
+                'direct_evidence' => $input['risk']['direct_evidence'],
+                'evidence_strength' => $input['evidence_strength'],
+            ],
             'hold_reasons' => [],
         ];
     }
@@ -139,9 +144,10 @@ final class SeoNullablePriorityEvaluator
         $risk = $input['risk'];
         $severityKey = is_array($risk) ? ($risk['severity'] ?? null) : null;
         $blastRadiusKey = is_array($risk) ? ($risk['blast_radius'] ?? null) : null;
+        $directEvidence = is_array($risk) ? ($risk['direct_evidence'] ?? null) : null;
         $severity = is_string($severityKey) ? (self::SEVERITY_POINTS[$severityKey] ?? null) : null;
         $blastRadius = is_string($blastRadiusKey) ? (self::BLAST_RADIUS_POINTS[$blastRadiusKey] ?? null) : null;
-        if ($severity === null || $blastRadius === null) {
+        if ($severity === null || $blastRadius === null || ! is_bool($directEvidence)) {
             return 'invalid_risk';
         }
         $costKey = $input['estimated_fix_cost'];
@@ -224,6 +230,7 @@ final class SeoNullablePriorityEvaluator
             'priority_score' => null,
             'ranking_eligible' => false,
             'components' => null,
+            'ranking_dimensions' => null,
             'hold_reasons' => $reasons,
         ];
     }

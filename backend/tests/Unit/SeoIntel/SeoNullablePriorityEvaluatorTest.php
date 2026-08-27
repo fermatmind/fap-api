@@ -102,6 +102,7 @@ class SeoNullablePriorityEvaluatorTest extends TestCase
             'risk' => [
                 'severity' => 'P1',
                 'blast_radius' => 'medium',
+                'direct_evidence' => true,
             ],
             'estimated_fix_cost' => 'bounded',
             'evidence_freshness' => [
