@@ -13,6 +13,8 @@ final class SeoWeeklyDecisionCloseoutService
 {
     public const CONTRACT_VERSION = 'seo.weekly_decision_closeout.v1';
 
+    private const MAX_EVIDENCE_AGE_SECONDS = 8 * 24 * 60 * 60;
+
     public function __construct(
         private readonly SeoWeeklyDecisionSelector $selector,
         private readonly string $connection = 'seo_intel',
@@ -27,30 +29,54 @@ final class SeoWeeklyDecisionCloseoutService
         }
 
         try {
-            if (! Schema::connection($this->connection)->hasTable('seo_weekly_decision_receipts')) {
+            $schema = Schema::connection($this->connection);
+            if (! $schema->hasTable('seo_weekly_decision_capability_receipts')
+                || ! $schema->hasTable('seo_weekly_decision_receipts')) {
                 return $this->unproven('receipt_store_unavailable');
             }
             $selection = $this->selector->snapshot($now);
             if ($selection['state'] === 'unavailable') {
                 return $this->unproven('decision_snapshot_unavailable');
             }
-            $row = DB::connection($this->connection)->table('seo_weekly_decision_receipts')
-                ->where('iso_week', $selection['iso_week'])
+            $capabilityRevision = SeoWeeklyDecisionReceiptService::capabilityRevision();
+            $row = DB::connection($this->connection)->table('seo_weekly_decision_capability_receipts')
+                ->where('capability_revision', $capabilityRevision)
                 ->orderByDesc('scheduled_for')
                 ->first();
             if ($row === null) {
-                return $this->unproven('natural_scheduled_receipt_pending');
+                return $this->unproven('natural_capability_receipt_pending');
             }
             $receipt = json_decode((string) $row->receipt_json, true);
+            $scheduledFor = CarbonImmutable::parse((string) ($receipt['scheduled_for'] ?? ''), 'UTC');
+            $evaluatedAt = ($now ?? CarbonImmutable::now('UTC'))->setTimezone('UTC');
+            $evidenceAgeSeconds = $evaluatedAt->getTimestamp() - $scheduledFor->getTimestamp();
+            $selectionRow = DB::connection($this->connection)->table('seo_weekly_decision_receipts')
+                ->where('selection_revision', (string) ($receipt['selection_revision'] ?? ''))
+                ->first();
+            $selectionReceipt = $selectionRow === null
+                ? null
+                : json_decode((string) $selectionRow->receipt_json, true);
             if (! is_array($receipt)
                 || ! hash_equals((string) $row->receipt_hash, hash('sha256', (string) $row->receipt_json))
+                || ($receipt['schema_version'] ?? null) !== SeoWeeklyDecisionReceiptService::CONTRACT_VERSION
                 || ($receipt['trigger'] ?? null) !== 'scheduled'
                 || ($receipt['manual_receipts_excluded'] ?? null) !== true
-                || ! hash_equals($expectedSha, (string) ($receipt['release_sha'] ?? ''))
-                || ! hash_equals((string) $selection['selection_revision'], (string) ($receipt['selection_revision'] ?? ''))
-                || (int) ($receipt['decision_count'] ?? -1) !== (int) $selection['count']
-                || (int) $selection['count'] < 0
-                || (int) $selection['count'] > SeoWeeklyDecisionSelector::MAX_COUNT) {
+                || preg_match('/\A[a-f0-9]{40}\z/', (string) ($receipt['release_sha'] ?? '')) !== 1
+                || ! hash_equals($capabilityRevision, (string) ($row->capability_revision ?? ''))
+                || ! hash_equals($capabilityRevision, (string) ($receipt['capability_revision'] ?? ''))
+                || ($receipt['capability_version'] ?? null) !== SeoWeeklyDecisionReceiptService::CAPABILITY_VERSION
+                || ! SeoWeeklyDecisionReceiptService::isNaturalSlot($scheduledFor)
+                || (string) ($receipt['iso_week'] ?? '') !== $scheduledFor->format('o-\WW')
+                || $evidenceAgeSeconds < 0
+                || $evidenceAgeSeconds > self::MAX_EVIDENCE_AGE_SECONDS
+                || ! is_array($selectionReceipt)
+                || ! hash_equals((string) ($selectionRow->receipt_hash ?? ''), hash('sha256', (string) ($selectionRow->receipt_json ?? '')))
+                || ! hash_equals((string) ($selectionReceipt['selection_revision'] ?? ''), (string) ($receipt['selection_revision'] ?? ''))
+                || (int) ($selectionReceipt['decision_count'] ?? -1) !== (int) ($receipt['decision_count'] ?? -2)
+                || array_values((array) ($selectionReceipt['decision_card_ids'] ?? [])) !== array_values((array) ($receipt['decision_card_ids'] ?? []))
+                || array_values((array) ($selectionReceipt['decision_revision_ids'] ?? [])) !== array_values((array) ($receipt['decision_revision_ids'] ?? []))
+                || (int) ($receipt['decision_count'] ?? -1) < 0
+                || (int) ($receipt['decision_count'] ?? -1) > SeoWeeklyDecisionSelector::MAX_COUNT) {
                 return $this->unproven('receipt_or_snapshot_mismatch');
             }
 
@@ -58,10 +84,14 @@ final class SeoWeeklyDecisionCloseoutService
                 'schema_version' => self::CONTRACT_VERSION,
                 'state' => 'production_proven',
                 'release_sha' => $expectedSha,
-                'iso_week' => $selection['iso_week'],
-                'selection_revision' => $selection['selection_revision'],
-                'decision_count' => $selection['count'],
+                'evidence_release_sha' => (string) $receipt['release_sha'],
+                'capability_version' => SeoWeeklyDecisionReceiptService::CAPABILITY_VERSION,
+                'capability_revision' => $capabilityRevision,
+                'iso_week' => (string) $receipt['iso_week'],
+                'selection_revision' => (string) $receipt['selection_revision'],
+                'decision_count' => (int) $receipt['decision_count'],
                 'receipt_hash' => (string) $row->receipt_hash,
+                'evidence_age_seconds' => $evidenceAgeSeconds,
                 'natural_scheduler_proven' => true,
                 'idempotent_selection_proven' => true,
                 'manual_receipts_excluded' => true,

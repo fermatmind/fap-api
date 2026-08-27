@@ -20,6 +20,8 @@ final class SeoPlatform09ScheduledCloseoutTest extends TestCase
 {
     private const SHA = '1234567890abcdef1234567890abcdef12345678';
 
+    private const NEXT_SHA = 'abcdef1234567890abcdef1234567890abcdef12';
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -39,28 +41,30 @@ final class SeoPlatform09ScheduledCloseoutTest extends TestCase
     #[Test]
     public function manual_trigger_is_excluded_and_never_persists_a_receipt(): void
     {
-        $receipt = $this->receiptService()->record('manual', CarbonImmutable::parse('2026-08-27T12:10:00Z'));
+        $receipt = $this->receiptService()->record('manual', CarbonImmutable::parse('2026-08-27T13:45:00Z'));
 
         $this->assertSame('MEASUREMENT_HOLD', $receipt['status']);
         $this->assertSame('natural_scheduler_receipt_required', $receipt['reason']);
         $this->assertFalse($receipt['persisted']);
         $this->assertTrue($receipt['manual_receipts_excluded']);
         $this->assertSame(0, DB::connection('seo_intel')->table('seo_weekly_decision_receipts')->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_weekly_decision_capability_receipts')->count());
 
         Artisan::call('seo:weekly-decisions', ['--trigger' => 'manual', '--json' => true]);
         $this->assertSame(0, DB::connection('seo_intel')->table('seo_weekly_decision_receipts')->count());
 
-        $outsideSlot = $this->receiptService()->record('scheduled', CarbonImmutable::parse('2026-08-27T05:29:59Z'));
+        $outsideSlot = $this->receiptService()->record('scheduled', CarbonImmutable::parse('2026-08-27T13:44:59Z'));
         $this->assertSame('MEASUREMENT_HOLD', $outsideSlot['status']);
         $this->assertSame('outside_natural_scheduler_slot', $outsideSlot['reason']);
         $this->assertSame(0, DB::connection('seo_intel')->table('seo_weekly_decision_receipts')->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_weekly_decision_capability_receipts')->count());
     }
 
     #[Test]
     public function natural_slot_is_idempotent_and_does_not_duplicate_selected_cards(): void
     {
         $this->seedLedgerAndCandidate();
-        $slot = CarbonImmutable::parse('2026-08-27T12:10:00Z');
+        $slot = CarbonImmutable::parse('2026-08-27T13:45:00Z');
         $service = $this->receiptService();
 
         $first = $service->record('scheduled', $slot);
@@ -76,27 +80,39 @@ final class SeoPlatform09ScheduledCloseoutTest extends TestCase
         $this->assertTrue($second['idempotent_replay']);
         $this->assertSame($first['selection_revision'], $second['selection_revision']);
         $this->assertSame($first['receipt_hash'], $second['receipt_hash']);
+        $this->assertSame(SeoWeeklyDecisionReceiptService::CAPABILITY_VERSION, $first['capability_version']);
+        $this->assertSame(SeoWeeklyDecisionReceiptService::capabilityRevision(), $first['capability_revision']);
         $this->assertSame(1, DB::connection('seo_intel')->table('seo_weekly_decision_receipts')->count());
+        $this->assertSame(1, DB::connection('seo_intel')->table('seo_weekly_decision_capability_receipts')->count());
         $this->assertSame(2, DB::connection('seo_intel')->table('seo_decision_cards')->count());
         $this->assertSame(1, DB::connection('seo_intel')->table('seo_change_ledger_events')->count());
         $this->assertSame('selected', $this->selector()->snapshot($slot)['decisions'][0]['status']);
     }
 
     #[Test]
-    public function closeout_requires_a_natural_exact_release_receipt_and_accepts_real_zero(): void
+    public function closeout_reuses_matching_natural_capability_evidence_across_releases(): void
     {
-        $slot = CarbonImmutable::parse('2026-08-27T12:10:00Z');
+        $slot = CarbonImmutable::parse('2026-08-27T13:45:00Z');
         $closeout = new SeoWeeklyDecisionCloseoutService($this->selector(), 'seo_intel');
         $pending = $closeout->evaluate(self::SHA, $slot);
         $this->assertSame('production_unproven', $pending['state']);
-        $this->assertSame('natural_scheduled_receipt_pending', $pending['reason']);
+        $this->assertSame('natural_capability_receipt_pending', $pending['reason']);
 
         $receipt = $this->receiptService()->record('scheduled', $slot);
-        $proven = $closeout->evaluate(self::SHA, $slot);
+        config(['app.git_sha' => self::NEXT_SHA]);
+        $replay = $this->receiptService()->record('scheduled', $slot);
+        $proven = $closeout->evaluate(self::NEXT_SHA, CarbonImmutable::parse('2026-08-31T12:00:00Z'));
 
         $this->assertSame(0, $receipt['decision_count']);
+        $this->assertTrue($replay['idempotent_replay']);
+        $this->assertSame(self::SHA, $replay['release_sha']);
         $this->assertSame('production_proven', $proven['state']);
-        $this->assertSame(self::SHA, $proven['release_sha']);
+        $this->assertSame(self::NEXT_SHA, $proven['release_sha']);
+        $this->assertSame(self::SHA, $proven['evidence_release_sha']);
+        $this->assertSame(SeoWeeklyDecisionReceiptService::CAPABILITY_VERSION, $proven['capability_version']);
+        $this->assertSame(SeoWeeklyDecisionReceiptService::capabilityRevision(), $proven['capability_revision']);
+        $this->assertSame('2026-W35', $proven['iso_week']);
+        $this->assertGreaterThan(0, $proven['evidence_age_seconds']);
         $this->assertSame(0, $proven['decision_count']);
         $this->assertTrue($proven['natural_scheduler_proven']);
         $this->assertTrue($proven['idempotent_selection_proven']);
@@ -112,14 +128,16 @@ final class SeoPlatform09ScheduledCloseoutTest extends TestCase
     {
         $schema = Schema::connection('seo_intel');
         $this->assertTrue($schema->hasTable('seo_weekly_decision_receipts'));
+        $this->assertTrue($schema->hasTable('seo_weekly_decision_capability_receipts'));
         $this->assertTrue($schema->hasColumn('seo_weekly_decision_receipts', 'selection_revision'));
+        $this->assertTrue($schema->hasColumn('seo_weekly_decision_capability_receipts', 'capability_revision'));
         $this->assertTrue($schema->hasColumn('seo_weekly_decision_receipts', 'receipt_hash'));
         $migration = require database_path('migrations/seo_intel/2026_08_27_030000_create_seo_weekly_decision_receipts.php');
         $migration->down();
         $this->assertTrue($schema->hasTable('seo_weekly_decision_receipts'));
 
         $bootstrap = (string) file_get_contents(base_path('bootstrap/app.php'));
-        $this->assertMatchesRegularExpression('/withSchedule[\s\S]+seo:weekly-decisions --trigger=scheduled --json[\s\S]+weeklyOn\(4, \'12:10\'\)[\s\S]+withoutOverlapping\(120\)[\s\S]+name\(\'seo-weekly-decisions:\'[\s\S]+onOneServer\(\)[\s\S]+runInBackground\(\)/', $bootstrap);
+        $this->assertMatchesRegularExpression('/withSchedule[\s\S]+seo:weekly-decisions --trigger=scheduled --json[\s\S]+weeklyOn\(4, \'13:45\'\)[\s\S]+withoutOverlapping\(120\)[\s\S]+name\(\'seo-weekly-decisions:v2:\'[\s\S]+onOneServer\(\)[\s\S]+runInBackground\(\)/', $bootstrap);
         $this->assertSame(1, substr_count($bootstrap, 'seo:weekly-decisions --trigger=scheduled --json'));
         $this->assertLessThan(
             strpos($bootstrap, 'email:outbox-send --limit=50'),
@@ -127,10 +145,9 @@ final class SeoPlatform09ScheduledCloseoutTest extends TestCase
         );
         $deploy = (string) file_get_contents(base_path('../deploy.php'));
         $this->assertStringContainsString('seo:weekly-decision-production-closeout', $deploy);
-        $this->assertStringContainsString('--wait-seconds=3600', $deploy);
-        $this->assertStringContainsString('BASH, timeout: 3900);', $deploy);
-        $this->assertStringContainsString('artisan schedule:work --no-interaction --no-ansi', $deploy);
-        $this->assertStringContainsString('--kill-after=10s 3700', $deploy);
+        $this->assertStringContainsString('--wait-seconds=1800', $deploy);
+        $this->assertStringContainsString('BASH, timeout: 2100);', $deploy);
+        $this->assertStringNotContainsString('artisan schedule:work --no-interaction --no-ansi', $deploy);
         $this->assertStringContainsString('/api/v0.5/ops/seo-intel/weekly-decisions', $deploy);
         $this->assertStringNotContainsString('seo:weekly-decisions --trigger=scheduled', $deploy);
         $workflow = (string) file_get_contents(base_path('../.github/workflows/deploy.yml'));
@@ -145,6 +162,8 @@ final class SeoPlatform09ScheduledCloseoutTest extends TestCase
         $closeoutCommand = (string) file_get_contents(app_path('Console/Commands/SeoWeeklyDecisionCloseout.php'));
         $this->assertStringContainsString('waiting_for_natural_scheduler_receipt', $closeoutCommand);
         $this->assertStringContainsString('$nextHeartbeat = time() + 30', $closeoutCommand);
+        $this->assertStringContainsString('min(1800', $closeoutCommand);
+        $this->assertStringContainsString('naturalSlotForWeek($now)->addMinutes(2)', $closeoutCommand);
     }
 
     private function migrateAuthority(): void
@@ -152,6 +171,7 @@ final class SeoPlatform09ScheduledCloseoutTest extends TestCase
         (require database_path('migrations/seo_intel/2026_08_27_010000_create_seo_change_ledger_tables.php'))->up();
         (require database_path('migrations/seo_intel/2026_08_27_020000_create_seo_decision_card_authority.php'))->up();
         (require database_path('migrations/seo_intel/2026_08_27_030000_create_seo_weekly_decision_receipts.php'))->up();
+        (require database_path('migrations/seo_intel/2026_08_27_040000_expand_weekly_decision_receipt_capability.php'))->up();
     }
 
     private function selector(): SeoWeeklyDecisionSelector

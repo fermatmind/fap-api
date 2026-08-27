@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\SeoIntel\Decision\SeoWeeklyDecisionCloseoutService;
+use App\Services\SeoIntel\Decision\SeoWeeklyDecisionReceiptService;
+use Carbon\CarbonImmutable;
 use Illuminate\Console\Command;
 
 final class SeoWeeklyDecisionCloseout extends Command
@@ -19,8 +21,10 @@ final class SeoWeeklyDecisionCloseout extends Command
 
     public function handle(SeoWeeklyDecisionCloseoutService $service): int
     {
-        $waitSeconds = max(0, min(3600, (int) $this->option('wait-seconds')));
-        $deadline = time() + $waitSeconds;
+        $waitSeconds = max(0, min(1800, (int) $this->option('wait-seconds')));
+        $now = CarbonImmutable::now('UTC');
+        $slotGraceDeadline = SeoWeeklyDecisionReceiptService::naturalSlotForWeek($now)->addMinutes(2)->getTimestamp();
+        $deadline = min(time() + $waitSeconds, $slotGraceDeadline);
         $nextHeartbeat = time();
         do {
             $receipt = $service->evaluate((string) $this->option('expected-sha'));

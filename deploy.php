@@ -2468,33 +2468,17 @@ task('seo:weekly-decision-production-closeout', function () {
     $resolveArg = deployCurlResolveArg($host, true);
     $url = deployHttpsUrlArg($host, '/api/v0.5/ops/seo-intel/weekly-decisions');
     $expectedShaArg = deployShellArg($expectedSha);
-    $closeoutOptions = $target === 'production' ? '--wait-seconds=3600' : '--allow-unproven';
+    $closeoutOptions = $target === 'production' ? '--wait-seconds=1800' : '--allow-unproven';
 
     within('{{current_path}}/backend', function () use ($resolveArg, $url, $expectedShaArg, $closeoutOptions): void {
         run(<<<BASH
 set -euo pipefail
 permission_status="\$(curl -sS -o /dev/null --max-time 15 -w '%{http_code}' {$resolveArg}{$url})"
 test "\$permission_status" = 401
-timeout_bin="\$(command -v timeout)"
-test -x "\$timeout_bin"
-scheduler_pid=''
-stop_bounded_scheduler() {
-  if test -n "\$scheduler_pid" && kill -0 "\$scheduler_pid" 2>/dev/null; then
-    kill "\$scheduler_pid" 2>/dev/null || true
-  fi
-  if test -n "\$scheduler_pid"; then
-    wait "\$scheduler_pid" 2>/dev/null || true
-  fi
-}
-trap stop_bounded_scheduler EXIT INT TERM
-"\$timeout_bin" --signal=TERM --kill-after=10s 3700 \
-  {{bin/php}} artisan schedule:work --no-interaction --no-ansi \
-  >/dev/null 2>&1 &
-scheduler_pid="\$!"
 {{bin/php}} artisan seo:weekly-decision-closeout \
   --expected-sha={$expectedShaArg} \
   {$closeoutOptions} --json --no-interaction --no-ansi
-BASH, timeout: 3900);
+BASH, timeout: 2100);
     });
 });
 
