@@ -1,33 +1,34 @@
 # Article15 Baseline-Reconciled v2 内容包 QA
 
 - 状态：content_package_only；requires_operator_review=true；import_ready=false；publish_allowed=false。
-- 生产基线 active SHA：`095753fa1f0d6a2bd0a8d05e94250e4bd2c5fbb2`。
+- 生产基线 active SHA：`c0a0adf016f1b9c4388bd09ebe5bfe1d773e0989`。
 - target=15；CHANGE=9；KEEP=6；v1_package_mutations=0。
 - revision_body_matches=15；public_body_matches=15；unresolved_body_authority=0。
 - unplanned_live_block_deletions=0；ID 16 仅新增一个行动段落；6 个 KEEP 页正文写入计划为零。
+- 相同 production lock 连续重建结果一致（deterministic_regeneration=PASS）。
 - 7/14 天运营字段：Unknown。
-- QA SHA-256：`ff6444c42cac67760ab409b8f1f93ca08a3bd14ec573e7069c6fe589663ece81`。
-- Manifest SHA-256：`ced3fe9f2d71384d2a08cd47e1bab5b01ea7151fa70dfbd5523edf52ed0e3c54`。
+- QA SHA-256：`ca660ed4a0617e37982f4681184a8f45878e73a610d143cd52d7def5aa77c431`。
+- Manifest SHA-256：`9e70df20d75c92a3aa3f4b5e292a2ed2104b8553bea830ce47381f05dcfdd07f`。
 
 - 生产快照中的 Markdown 双空格换行按原字节保留；`.gitattributes` 仅豁免对应两个快照文件，SHA-256：`8a32e20de1baf7e1b232e545a2e160110d43c1a71030cc20010e3d6c106bba3d`。
 
 ## Package SHA-256
 
-01. `gaokao-major-adjustment-unacceptable-major-checklist` — `d1330c9ecb0835ab786fca15865e9977cafbfcd85020141c2f6116ad87a27bbe` (CHANGE)
-02. `big-five-tool-guide` — `914fd0d2196b1e4e1e33672d5fc080fbc798b0bf36e1a84cb3a32776f782595a` (CHANGE)
-03. `mbti-basics` — `4723e787a77f17df9ec76b7ae4ecb8b170fc8c809cbaa53a3adb6ac954cf9b4d` (CHANGE)
-04. `enneagram-personality-test-explained` — `6fbca60d1781787411d0a207f0cb829844f0d854b0b8d2302dd6df022d0ca495` (CHANGE)
-05. `riasec-holland-career-interest-test-explained` — `bdcdc9f2ac577548d8003d1de47e1129f5630b90dc9115387e5b738d960321bc` (CHANGE)
-06. `are-infj-men-rare-or-socially-silenced` — `0b43686f354b86c3eed76786785327dac903bc21c622e3692af1818de0bdc048` (KEEP)
-07. `iq-test-score-and-limits-explained` — `07cdc4f0e6354efa690d6a097db824d993aa1b9364957d18a8e3506c4f4b32f5` (CHANGE)
-08. `which-love-script-fits-you-best` — `1b72b221dc75bf1f7760ca67718738cd6130d8ebc7193c4b9c7109a594163929` (CHANGE)
-09. `unwanted-major-repeat-or-stay-riasec-decision-checklist` — `a374ca7ee136bc1e49cda7263df4b3893d1674d925d4c8a77cd8ed2a6b97132c` (CHANGE)
-10. `mbti-narrative-portrait` — `69436dd83a59ce3c97b53a311d913ce2ae4fbf254816d29871789faf8d4effad` (KEEP)
-11. `holland-career-interest-test-can-and-cannot-tell-you` — `1faadaae0847b577cc79304aed9ba2f8314eb89e312a4b75b178ac2b2f006cf5` (CHANGE)
-12. `eq-test-tool-guide` — `26937e3e103785e6c9f4fbd20c0b900a1ec153a0ebdc5c7fac4122bea6591c30` (KEEP)
-13. `big-five-emotional-stability-stress-recovery-communication` — `813b16953dd22679a8a53c2b668eaf6030e93d7bd5c15cb7517363b446b0a1ac` (KEEP)
-14. `mbti-vs-holland-code-career-choice` — `65a9ad8f88b251b5481257b4021330e822dbd0a32fcd45439f97e75f8e64bbcb` (KEEP)
-15. `mbti-full-report-career-relationship-communication` — `14d1803c342a3a9a2929843ef2a7c34a4362d560a74fb8ba64acdb515bd082b2` (KEEP)
+01. `gaokao-major-adjustment-unacceptable-major-checklist` — `0ac68d0ba5057f4cd87ab892d9e4a565018bdc9fc93ddc615332d3b2943d6fe2` (CHANGE)
+02. `big-five-tool-guide` — `649451eac2e487ce729455a98f4af7325298b4bf2379582d5452146e1753e0fc` (CHANGE)
+03. `mbti-basics` — `8336d9fd83a38ba15e3f6d830a5dfe14e6eacc53ac70ed32f8e685c036d8c7e5` (CHANGE)
+04. `enneagram-personality-test-explained` — `8b546af20420df80e37059f0ce7543d508767ea4514e99e97e37f23a93af99f0` (CHANGE)
+05. `riasec-holland-career-interest-test-explained` — `4d1b8200ff423f3947e6b5a8c11eb615e350056285ba595f47f321c8de0b470b` (CHANGE)
+06. `are-infj-men-rare-or-socially-silenced` — `d60a6b4926cc09f43f83ed022a55c3a0652c9d3dfef91525cead3155aff8be77` (KEEP)
+07. `iq-test-score-and-limits-explained` — `673720212f65e13dcddfde89ba706ccbf0d4e51bd290d2c6b315bd7547db3f79` (CHANGE)
+08. `which-love-script-fits-you-best` — `3e9e22a11413aa8851764d2cdb6bb9be92983e93921ed9f9098f673511003c7e` (CHANGE)
+09. `unwanted-major-repeat-or-stay-riasec-decision-checklist` — `a942a82ab928f74735077079b318bffb9ed392437e257738b3d9838e300dec47` (CHANGE)
+10. `mbti-narrative-portrait` — `2d5464f36cb1ab2665eef4f0d153d80a46874712f5115fb15624657ff141b024` (KEEP)
+11. `holland-career-interest-test-can-and-cannot-tell-you` — `1ab66b33c22750e32532c94baed8b07254832e21e4f24ca8668c25c282a5269a` (CHANGE)
+12. `eq-test-tool-guide` — `72c7af54a12e4ac6031cfb515f96a065fee50c586b258b0739f3556f8a8a8f56` (KEEP)
+13. `big-five-emotional-stability-stress-recovery-communication` — `8c945bca8302182988aed4ec824ff21872ad1eabfeb67a4dfb2776a840b7c986` (KEEP)
+14. `mbti-vs-holland-code-career-choice` — `77154855168683f598ba3caf7de3777ba4b907f80f2336e70b094b96fae5cffc` (KEEP)
+15. `mbti-full-report-career-relationship-communication` — `e81a25e87a8782a945128500677c8f2128b6ea6e81f81e995cdcc60f7cd14846` (KEEP)
 
 ## 边界
 
