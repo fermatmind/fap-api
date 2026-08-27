@@ -56,9 +56,9 @@ return Application::configure(basePath: dirname(__DIR__))
         // Keep the exact weekly natural tick ahead of other due work so a slow
         // minute/5/10/15-minute task cannot push receipt creation off-slot.
         $schedule->command('seo:weekly-decisions --trigger=scheduled --json')
-            ->weeklyOn(4, '12:10')
+            ->weeklyOn(4, '13:45')
             ->withoutOverlapping(120)
-            ->name('seo-weekly-decisions:'.substr(hash('sha256', (string) config('app.url')), 0, 16))
+            ->name('seo-weekly-decisions:v2:'.substr(hash('sha256', (string) config('app.url')), 0, 16))
             ->onOneServer()
             ->runInBackground();
         $schedule->command('storage:prune --execute --scope=reports_backups --strategy=strict')->dailyAt('03:10')->withoutOverlapping();
