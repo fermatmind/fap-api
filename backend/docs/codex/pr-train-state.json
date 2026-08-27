@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T04:54:16Z",
+  "updated_at": "2026-08-27T04:56:43Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-09-F": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/seo-platform-09-f-scheduled-closeout",
-      "commit_sha": null,
-      "pr_url": "",
+      "commit_sha": "857564d82d80715db39d4dac15e43047b1c8d10c",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3817",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -44,6 +44,11 @@
           "at": "2026-08-27T04:54:16Z",
           "status": "local_checks_passed",
           "summary": "Implemented the single Thursday 05:30 UTC natural scheduler, idempotent sanitized weekly receipt, candidate-to-selected immutable materialization, manual-trigger exclusion and automatic read-only exact-SHA production closeout. No L3/L4 action or search submission is enabled."
+        },
+        {
+          "at": "2026-08-27T04:56:43Z",
+          "status": "pr_open",
+          "summary": "Opened focused PR #3817 from validated implementation commit 857564d82d80715db39d4dac15e43047b1c8d10c."
         }
       ]
     },
