@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T09:51:02Z",
+  "updated_at": "2026-08-27T09:51:58Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-09-F": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "natural_scheduler_worker_local_checks_passed",
+      "status": "natural_scheduler_worker_pr_open",
       "branch": "codex/seo-platform-09-f-natural-scheduler-worker",
-      "commit_sha": null,
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/3821",
+      "commit_sha": "30f62cc50d4eda7a59014472d68c30b0edd94402",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3822",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -166,6 +166,11 @@
           "at": "2026-08-27T09:51:02Z",
           "status": "natural_scheduler_worker_local_checks_passed",
           "summary": "Bounded natural scheduler worker and production timeout correction passed 17 focused SEO tests with 144 assertions, 20 scheduler/deploy SRE tests with 101 assertions, 25 classifier/workflow tests, scoped Pint, workflow validation, schedule listing, deploy syntax, JSON and diff checks."
+        },
+        {
+          "at": "2026-08-27T09:51:58Z",
+          "status": "natural_scheduler_worker_pr_open",
+          "summary": "Opened same-scope corrective PR #3822 from validated commit 30f62cc50d4eda7a59014472d68c30b0edd94402."
         }
       ]
     },
