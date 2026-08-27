@@ -9,10 +9,10 @@
     "SEO-PLATFORM-09-C": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/seo-platform-09-c-stable-ranking",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "c395990410f46b77f8cce8e42faa2f8012408512",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3814",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -44,6 +44,11 @@
           "at": "2026-08-27T03:47:34Z",
           "status": "local_checks_passed",
           "summary": "Calibrated only the existing nullable evaluator with three bounded versioned weight profiles, explicit sensitivity guardrails and a deterministic ranker. Direct verified P0 then P1 are immutable prefixes; non-direct P0/P1 fail closed, evidence bands prevent low-evidence elevation under any allowed profile, and exact ties end at cluster_uid ASC without random or filled values."
+        },
+        {
+          "at": "2026-08-27T03:50:13Z",
+          "status": "pr_open",
+          "summary": "Opened focused PR #3814 from implementation commit c395990410f46b77f8cce8e42faa2f8012408512; the exact five-file scope is mergeable and has no unrelated paths."
         }
       ]
     },
