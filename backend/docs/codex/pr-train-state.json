@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T07:41:39Z",
+  "updated_at": "2026-08-27T07:42:55Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-09-F": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "corrective_local_checks_passed",
+      "status": "corrective_pr_open",
       "branch": "codex/seo-platform-09-f-election-timeout",
-      "commit_sha": null,
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/3818",
+      "commit_sha": "050efcc0d137f2c7a8438fc50ba2aeaec090f74d",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3819",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -96,6 +96,11 @@
           "at": "2026-08-27T07:41:39Z",
           "status": "corrective_local_checks_passed",
           "summary": "Raised only the weekly closeout task timeout to 1500 seconds, isolated scheduler election identity by hashed app URL and moved the still-unproven natural Thursday slot to 08:10 UTC. Focused tests pass with 13 tests and 108 assertions."
+        },
+        {
+          "at": "2026-08-27T07:42:55Z",
+          "status": "corrective_pr_open",
+          "summary": "Opened same-scope corrective PR #3819 from validated commit 050efcc0d137f2c7a8438fc50ba2aeaec090f74d."
         }
       ]
     },
