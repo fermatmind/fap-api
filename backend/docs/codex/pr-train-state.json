@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T09:51:58Z",
+  "updated_at": "2026-08-27T10:12:30Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-09-F": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "natural_scheduler_worker_pr_open",
-      "branch": "codex/seo-platform-09-f-natural-scheduler-worker",
-      "commit_sha": "30f62cc50d4eda7a59014472d68c30b0edd94402",
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/3822",
+      "status": "stale_lock_recovery_local_checks_passed",
+      "branch": "codex/seo-platform-09-f-stale-lock",
+      "commit_sha": "22049087d46b3b88eb6409244eb3788d247ed772",
+      "pr_url": null,
       "checks": {
         "dependency": {
           "status": "passed",
@@ -20,9 +20,9 @@
         },
         "local": [
           {
-            "command": "focused 09-A through 09-F decision authority, lifecycle, weekly Workbench and scheduler-closeout PHPUnit plus scoped Pint, schedule listing and deploy syntax",
+            "command": "focused 09-A through 09-F decision authority, lifecycle, weekly Workbench and scheduler-closeout PHPUnit; deploy/scheduler SRE PHPUnit; classifier/workflow Node tests; scoped Pint; schedule listing; deploy syntax; stale-lock fixtures; JSON and diff checks",
             "status": "passed",
-            "details": "18 tests and 146 assertions cover one natural weekly slot, off-slot/manual exclusion, exact-week idempotency, immutable selected revisions, real 0-5 output, expand-only receipt storage and read-only exact-SHA closeout."
+            "details": "18 SEO tests with 159 assertions, 22 deploy/scheduler tests with 134 assertions, 25 Node tests and direct absent/fresh/legacy/owned stale-lock fixtures passed. The single 11:00 UTC natural slot, manual exclusion, serialized ownership and ambiguous-lock fail-closed boundaries remain covered."
           }
         ],
         "github": [
@@ -45,6 +45,11 @@
             "name": "bounded wait corrective CI / exact-SHA validation receipt",
             "status": "passed",
             "details": "PR #3821 merged as 9c0f1c476c72f4fbefdb5ad0a18f3af18471fe2e; main CI run 33053076692 completed successfully."
+          },
+          {
+            "name": "natural scheduler worker corrective CI / exact-SHA validation receipt",
+            "status": "passed",
+            "details": "PR #3822 merged as 732650bc43e35042a976da0465eed8fca16ab544; main CI run 33060573114 completed successfully."
           }
         ],
         "production": [
@@ -72,10 +77,15 @@
             "name": "bounded natural wait deployment",
             "status": "corrective_required_cancelled",
             "details": "Deploy run 33053464924 passed staging and activated 9c0f1c476c72f4fbefdb5ad0a18f3af18471fe2e. Its 3900-second Deployer wait exceeded the production job's fixed 45-minute limit and was cancelled; the installed cron scheduler produced no accepted 09:30 natural receipt."
+          },
+          {
+            "name": "natural scheduler worker deployment",
+            "status": "corrective_required_pre_mutation",
+            "details": "Deploy run 33060969253 passed staging for 732650bc43e35042a976da0465eed8fca16ab544, then failed closed at production deploy:lock before mutation because the cancelled prior run left a CI lock. The serialized workflow did not switch production."
           }
         ]
       },
-      "failure_reason": "The production job timeout was shorter than the bounded Deployer closeout, and the cron-only scheduler fallback produced no accepted natural tick. The same-scope correction adds an automatic bounded schedule:work runner without directly invoking the weekly command.",
+      "failure_reason": "A cancelled serialized deploy left a CI-owned Deployer lock, and the next run correctly stopped before production mutation. The same-scope correction reclaims only a regular, exact CI lock older than five minutes when serialized GitHub run ownership is proven, while retaining fail-closed behavior for every ambiguous lock.",
       "resume_policy": "continuous_goal",
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -171,6 +181,16 @@
           "at": "2026-08-27T09:51:58Z",
           "status": "natural_scheduler_worker_pr_open",
           "summary": "Opened same-scope corrective PR #3822 from validated commit 30f62cc50d4eda7a59014472d68c30b0edd94402."
+        },
+        {
+          "at": "2026-08-27T10:06:58Z",
+          "status": "natural_scheduler_worker_deploy_blocked_pre_mutation",
+          "summary": "PR #3822 merged as 732650bc43e35042a976da0465eed8fca16ab544 and exact-SHA CI passed. Deploy 33060969253 passed staging but production stopped at deploy:lock before mutation because the cancelled prior run left a CI lock."
+        },
+        {
+          "at": "2026-08-27T10:12:30Z",
+          "status": "stale_lock_recovery_local_checks_passed",
+          "summary": "Added fail-closed reclamation for an exact stale CI lock only inside the repository's serialized deploy workflow, persisted run ownership for future locks and moved the still-single Thursday natural slot to 11:00 UTC. Focused scheduler coverage, PHP syntax and diff checks pass."
         }
       ]
     },
