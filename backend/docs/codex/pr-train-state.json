@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T10:12:30Z",
+  "updated_at": "2026-08-27T10:18:20Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-09-F": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "stale_lock_recovery_local_checks_passed",
+      "status": "stale_lock_recovery_pr_open",
       "branch": "codex/seo-platform-09-f-stale-lock",
       "commit_sha": "22049087d46b3b88eb6409244eb3788d247ed772",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3823",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -191,6 +191,11 @@
           "at": "2026-08-27T10:12:30Z",
           "status": "stale_lock_recovery_local_checks_passed",
           "summary": "Added fail-closed reclamation for an exact stale CI lock only inside the repository's serialized deploy workflow, persisted run ownership for future locks and moved the still-single Thursday natural slot to 11:00 UTC. Focused scheduler coverage, PHP syntax and diff checks pass."
+        },
+        {
+          "at": "2026-08-27T10:18:20Z",
+          "status": "stale_lock_recovery_pr_open",
+          "summary": "Opened same-scope corrective PR #3823 from validated implementation commit 22049087d46b3b88eb6409244eb3788d247ed772."
         }
       ]
     },
