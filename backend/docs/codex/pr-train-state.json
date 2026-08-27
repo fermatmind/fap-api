@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T07:42:55Z",
+  "updated_at": "2026-08-27T08:08:37Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-09-F": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "corrective_pr_open",
-      "branch": "codex/seo-platform-09-f-election-timeout",
-      "commit_sha": "050efcc0d137f2c7a8438fc50ba2aeaec090f74d",
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/3819",
+      "status": "natural_receipt_retry_pr_open",
+      "branch": "codex/seo-platform-09-f-natural-receipt",
+      "commit_sha": "085852909ed57d3ec5920ae7ae3901a9484d8060",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3820",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -35,6 +35,11 @@
             "name": "corrective CI / exact-SHA validation receipt",
             "status": "passed",
             "details": "PR #3818 merged as acb412f7f84d47624eba790b658e1000779b9fd2; main CI run 33042496580 completed successfully."
+          },
+          {
+            "name": "election corrective CI / exact-SHA validation receipt",
+            "status": "passed",
+            "details": "PR #3819 merged as 313c4f20fea1141d4e6ebaf661b70d78b59ed64e; main CI run 33050914562 completed successfully."
           }
         ],
         "production": [
@@ -47,10 +52,15 @@
             "name": "heartbeat corrective deployment",
             "status": "corrective_required",
             "details": "Deploy run 33042762957 passed staging and kept the production closeout session alive with sanitized heartbeats until the repository default 900-second task timeout. No 06:00 receipt appeared, consistent with staging and production contending for the same unnamed onOneServer election; automatic LKG restoration succeeded."
+          },
+          {
+            "name": "election corrective deployment",
+            "status": "unrelated_failure_lkg_restored",
+            "details": "Deploy run 33051287330 passed staging and refreshed the production scheduler, but the pre-existing URL-truth reconciliation failed first because its sitemap detector reported comparable_sitemap_snapshot_unavailable. Weekly closeout did not run; automatic LKG restoration succeeded."
           }
         ]
       },
-      "failure_reason": "The task timeout was shorter than its bounded command wait, and the unnamed onOneServer event could contend across staging and production. Both are corrected in the current scope; no receipt was fabricated and LKG recovery succeeded.",
+      "failure_reason": "The 09-F timeout and election defects are corrected. Its latest deployment was prevented from reaching closeout by an unrelated transient URL-truth sitemap measurement hold; no receipt was fabricated and LKG recovery succeeded.",
       "resume_policy": "continuous_goal",
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -101,6 +111,21 @@
           "at": "2026-08-27T07:42:55Z",
           "status": "corrective_pr_open",
           "summary": "Opened same-scope corrective PR #3819 from validated commit 050efcc0d137f2c7a8438fc50ba2aeaec090f74d."
+        },
+        {
+          "at": "2026-08-27T08:03:55Z",
+          "status": "production_unrelated_failure_lkg_restored",
+          "summary": "PR #3819 merged as 313c4f20fea1141d4e6ebaf661b70d78b59ed64e and exact-SHA CI passed. Deploy 33051287330 passed staging but an unrelated URL-truth sitemap measurement hold failed before weekly closeout; automatic LKG restoration succeeded."
+        },
+        {
+          "at": "2026-08-27T08:07:06Z",
+          "status": "natural_receipt_retry_local_checks_passed",
+          "summary": "Kept the corrected scheduler and moved only the still-unproven Thursday natural slot to 09:00 UTC, allowing existing bounded sitemap warming to recover without modifying the unrelated URL-truth lane. Focused tests pass with 7 tests and 80 assertions."
+        },
+        {
+          "at": "2026-08-27T08:08:37Z",
+          "status": "natural_receipt_retry_pr_open",
+          "summary": "Opened same-scope natural receipt retry PR #3820 from validated commit 085852909ed57d3ec5920ae7ae3901a9484d8060."
         }
       ]
     },
