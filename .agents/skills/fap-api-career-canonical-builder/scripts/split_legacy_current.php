@@ -425,6 +425,17 @@ final class CareerLegacyCurrentSharder
         if ($presentation !== null) {
             $records['zh-CN']['page-meta']['content']['presentation_v1'] = $presentation;
         }
+        $presentationV2 = $metadata['presentation_v2'] ?? null;
+        unset($metadata['presentation_v2']);
+        if (! is_array($presentationV2)) {
+            throw new CareerLegacyCurrentSplitFailure('LEGACY_PRESENTATION_V2_INVALID');
+        }
+        foreach (['en' => 'en', 'zh' => 'zh-CN'] as $legacyLocale => $locale) {
+            if (! is_array($presentationV2[$legacyLocale] ?? null)) {
+                throw new CareerLegacyCurrentSplitFailure('LEGACY_PRESENTATION_V2_INVALID');
+            }
+            $records[$locale]['page-meta']['content']['presentation_v2'] = $presentationV2[$legacyLocale];
+        }
         $claimEnvelope = $metadata['structured_components_v1'] ?? null;
         unset($metadata['structured_components_v1']);
         $records['en']['page-meta']['content']['metadata'] = $metadata;
@@ -490,6 +501,10 @@ final class CareerLegacyCurrentSharder
         if (isset($records['zh-CN']['page-meta']['content']['presentation_v1'])) {
             $metadata['presentation_v1'] = $records['zh-CN']['page-meta']['content']['presentation_v1'];
         }
+        $metadata['presentation_v2'] = [
+            'en' => $records['en']['page-meta']['content']['presentation_v2'],
+            'zh' => $records['zh-CN']['page-meta']['content']['presentation_v2'],
+        ];
         if (isset($records['en']['definition']['content']['claim_envelope'])) {
             $claimEnvelope = $records['en']['definition']['content']['claim_envelope'];
             $claimEnvelope['locales'] = [];

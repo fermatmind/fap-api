@@ -11,6 +11,37 @@ use Tests\TestCase;
 
 final class CareerTenBlockCurrentPackageCompilerTest extends TestCase
 {
+    public function test_bilingual_presentation_v2_dry_compile_is_deterministic_and_zero_write(): void
+    {
+        ini_set('memory_limit', '2048M');
+        $output = sys_get_temp_dir().'/career-presentation-v2-'.bin2hex(random_bytes(8));
+        self::assertTrue(mkdir($output, 0700));
+        try {
+            $this->artisan('career:ten-block-current-package-compile', [
+                '--output-root' => $output,
+                '--presentation-v2' => true,
+            ])->assertSuccessful();
+
+            $receipt = json_decode((string) file_get_contents($output.'/full-compile-receipt.json'), true, 512, JSON_THROW_ON_ERROR);
+            $diff = json_decode((string) file_get_contents($output.'/package-diff-report.json'), true, 512, JSON_THROW_ON_ERROR);
+            self::assertSame(1046, $receipt['career_count']);
+            self::assertSame(2092, $receipt['locale_page_count']);
+            self::assertSame(2, $receipt['enhanced_locale_page_count']);
+            self::assertSame(2090, $receipt['legacy_locale_page_count']);
+            self::assertSame(0, $receipt['database_writes']);
+            self::assertSame(0, $receipt['cache_writes']);
+            self::assertSame(0, $receipt['discoverability_writes']);
+            self::assertSame(0, $diff['existing_component_content_changes']);
+            self::assertSame(0, $diff['presentation_changes']);
+            self::assertSame(0, $diff['component_order_changes']);
+        } finally {
+            foreach (glob($output.'/*') ?: [] as $path) {
+                unlink($path);
+            }
+            rmdir($output);
+        }
+    }
+
     public function test_sharded_current_dry_compile_does_not_require_retired_top_level_registries(): void
     {
         $output = sys_get_temp_dir().'/career-ten-block-sharded-'.bin2hex(random_bytes(8));

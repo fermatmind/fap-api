@@ -415,6 +415,15 @@ final class CareerShardedCurrentAuthorityPackage
         if ($presentation !== null) {
             $metadata['presentation_v1'] = $presentation;
         }
+        $presentationV2 = [];
+        foreach (['en' => 'en', 'zh-CN' => 'zh'] as $sourceLocale => $metadataLocale) {
+            $localized = $records[$sourceLocale]['page-meta']['content']['presentation_v2'] ?? null;
+            if (! is_array($localized)) {
+                throw new CareerCurrentAuthorityPackageFailure('CURRENT_PRESENTATION_V2_INVALID');
+            }
+            $presentationV2[$metadataLocale] = $localized;
+        }
+        $metadata['presentation_v2'] = $presentationV2;
         $claimEnvelope = $records['en']['definition']['content']['claim_envelope'] ?? null;
         if ($claimEnvelope !== null) {
             if (! is_array($claimEnvelope)) {

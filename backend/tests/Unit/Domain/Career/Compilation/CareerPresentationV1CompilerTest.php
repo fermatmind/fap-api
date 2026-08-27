@@ -106,9 +106,6 @@ final class CareerPresentationV1CompilerTest extends TestCase
             ],
             'salary' => [
                 'china_ai_row' => '8/10，较高',
-                'bls_table' => [
-                    ['指标' => '中位年薪', '数值' => '$1', '说明' => '美国劳工统计局'],
-                ],
             ],
         ];
 
@@ -118,7 +115,7 @@ final class CareerPresentationV1CompilerTest extends TestCase
         self::assertNull(data_get($presentation, 'hero.ai_exposure.display_value'));
         self::assertSame('missing', data_get($presentation, 'hero.ai_exposure.availability'));
         self::assertSame('测试职业', data_get($presentation, 'hero.title_zh'));
-        self::assertSame(['us_median_pay'], array_column(data_get($presentation, 'hero.stats'), 'key'));
+        self::assertSame([], data_get($presentation, 'hero.stats'));
         self::assertSame($before, $row);
         self::assertNull(data_get($row, 'page_payload_json.page.zh.truth_layer.ai_exposure'));
         self::assertNull(data_get($row, 'page_payload_json.page.zh.score_bundle.ai_survival_score'));

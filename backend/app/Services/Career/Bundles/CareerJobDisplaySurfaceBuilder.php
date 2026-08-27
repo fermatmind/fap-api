@@ -6,6 +6,7 @@ namespace App\Services\Career\Bundles;
 
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Display\CareerPresentationV1Contract;
+use App\Domain\Career\Display\CareerPresentationV2Contract;
 use App\DTO\Career\CareerJobDetailBundle;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
@@ -157,8 +158,20 @@ final class CareerJobDisplaySurfaceBuilder
             }
             $presentation = $this->stripForbiddenKeys($presentation);
         }
+        $presentationV2 = data_get($asset->metadata_json, 'presentation_v2.'.$normalizedLocale);
+        if ($presentationV2 !== null) {
+            if (! is_array($presentationV2)) {
+                return null;
+            }
+            try {
+                CareerPresentationV2Contract::assert($presentationV2, $componentOrder);
+            } catch (\Throwable) {
+                return null;
+            }
+            $presentationV2 = $this->stripForbiddenKeys($presentationV2);
+        }
 
-        if ($this->containsForbiddenPublicKey([$page, $componentOrder, $sources, $structuredData, $implementationContract, $claimPermissions, $presentation])) {
+        if ($this->containsForbiddenPublicKey([$page, $componentOrder, $sources, $structuredData, $implementationContract, $claimPermissions, $presentation, $presentationV2])) {
             return null;
         }
 
@@ -178,6 +191,9 @@ final class CareerJobDisplaySurfaceBuilder
         ];
         if (is_array($presentation)) {
             $surface['presentation_v1'] = $presentation;
+        }
+        if (is_array($presentationV2)) {
+            $surface['presentation_v2'] = $presentationV2;
         }
 
         return $surface;

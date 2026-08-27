@@ -72,11 +72,15 @@ final class CareerPresentationV1Contract
         if ($value !== null && (! is_int($value) || $value < 0 || $value > 10)) {
             self::fail();
         }
+        $labelAndSource = [$aiExposure['label'] ?? null, $aiExposure['source_label'] ?? null];
+        $allowedLabelAndSource = [
+            ['AI 曝光评分', 'FermatMind 内部 rubric'],
+            ['AI任务暴露', 'FermatMind 任务级 rubric'],
+        ];
         if (($aiExposure['scale'] ?? null) !== 10
             || ($aiExposure['display_value'] ?? null) !== ($value === null ? null : $value.'/10')
-            || ($aiExposure['label'] ?? null) !== 'AI 曝光评分'
-            || ($aiExposure['metric_kind'] ?? null) !== 'fermatmind_internal_rubric'
-            || ($aiExposure['source_label'] ?? null) !== 'FermatMind 内部 rubric') {
+            || ! in_array($labelAndSource, $allowedLabelAndSource, true)
+            || ($aiExposure['metric_kind'] ?? null) !== 'fermatmind_internal_rubric') {
             self::fail();
         }
         self::assertNullableString($aiExposure['note'] ?? null);

@@ -70,6 +70,11 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
             CareerCurrentAuthorityPackage::hashValue(array_values($package['rows'])),
             $package['summary']['versionless_projection_sha256'],
         );
+        foreach ($package['rows'] as $row) {
+            self::assertSame(['en', 'zh'], array_keys($row['metadata_json']['presentation_v2']));
+            self::assertArrayHasKey('presentation_v2', $legacyContract->publicProjection($row, 'en'));
+            self::assertArrayHasKey('presentation_v2', $legacyContract->publicProjection($row, 'zh-CN'));
+        }
         self::assertArrayNotHasKey('software-developers', $package['rows']);
     }
 

@@ -257,6 +257,7 @@ final class CareerShardedCurrentAssembler
             }
         } elseif ($module === 'page-meta') {
             $expectedContentKeys[] = 'seo';
+            $expectedContentKeys[] = 'presentation_v2';
             if ($locale === 'en') {
                 array_push($expectedContentKeys, 'assembly', 'metadata', 'row');
             } else {
@@ -439,6 +440,12 @@ final class CareerShardedCurrentAssembler
                 throw new CareerShardedCurrentAssemblyFailure('ZH_PRESENTATION_EQUIVALENCE_MISMATCH');
             }
             $counts['zh_presentation_v1_projection_identical']++;
+        }
+        if (! hash_equals(
+            $this->valueHash($legacy['metadata_json']['presentation_v2'][$legacyLocale] ?? null),
+            $this->valueHash($assembled['metadata_json']['presentation_v2'][$legacyLocale] ?? null),
+        )) {
+            throw new CareerShardedCurrentAssemblyFailure('PRESENTATION_V2_EQUIVALENCE_MISMATCH');
         }
     }
 

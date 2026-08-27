@@ -90,6 +90,7 @@ final class CareerCurrentAuthorityPackage
 
     private const OPTIONAL_DISPLAY_OWNED_PUBLIC_FIELDS = [
         'presentation_v1',
+        'presentation_v2',
     ];
 
     private const FORBIDDEN_PUBLIC_KEYS = [
@@ -624,6 +625,16 @@ final class CareerCurrentAuthorityPackage
             }
             CareerPresentationV1Contract::assert($presentation['zh']);
         }
+        $presentationV2 = $row['metadata_json']['presentation_v2'] ?? null;
+        if (! is_array($presentationV2) || array_keys($presentationV2) !== ['en', 'zh']) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_PRESENTATION_V2_INVALID');
+        }
+        foreach (['en', 'zh'] as $locale) {
+            if (! is_array($presentationV2[$locale] ?? null)) {
+                throw new CareerCurrentAuthorityPackageFailure('CURRENT_PRESENTATION_V2_INVALID');
+            }
+            CareerPresentationV2Contract::assert($presentationV2[$locale], (array) $row['component_order_json']);
+        }
     }
 
     private function assertLocalizedStructuredBindings(mixed $metadata): void
@@ -699,6 +710,12 @@ final class CareerCurrentAuthorityPackage
             CareerPresentationV1Contract::assert($presentation);
             $projection['presentation_v1'] = $this->stripForbiddenKeys($presentation);
         }
+        $presentationV2 = $row['metadata_json']['presentation_v2'][$normalizedLocale] ?? null;
+        if (! is_array($presentationV2)) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_PRESENTATION_V2_INVALID');
+        }
+        CareerPresentationV2Contract::assert($presentationV2, (array) $row['component_order_json']);
+        $projection['presentation_v2'] = $this->stripForbiddenKeys($presentationV2);
 
         return $projection;
     }
