@@ -408,6 +408,27 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         $en = $page;
         $en['career_quick_answers_block'] = ['availability' => 'unavailable', 'reason_code' => 'source_locale_unavailable'];
         $en['onet_structured_fields_block'] = ['availability' => 'unavailable', 'reason_code' => 'source_locale_unavailable'];
+        $presentation = static fn (string $locale): array => [
+            'contract_version' => 'career.detail.presentation.v2',
+            'design_authority' => ['id' => 'universal-career-dossier-v2'],
+            'template_id' => 'career-dossier-universal-v2',
+            'locale' => $locale,
+            'hero' => [
+                'title' => $title,
+                'lead' => null,
+                'badges' => [],
+                'stats' => [],
+                'ai_exposure' => null,
+                'cta' => null,
+            ],
+            'groups' => [[
+                'id' => 'fixture',
+                'label' => 'Fixture group',
+                'component_ids' => CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS,
+                'content_state' => 'legacy',
+                'pending_enrichment' => 'display_placeholder',
+            ]],
+        ];
 
         return array_replace([
             'canonical_slug' => $slug,
@@ -421,7 +442,13 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
             'sources_json' => ['references' => []],
             'structured_data_json' => ['@type' => 'Occupation'],
             'implementation_contract_json' => ['version' => 'v1'],
-            'metadata_json' => ['authority' => 'fixture'],
+            'metadata_json' => [
+                'authority' => 'fixture',
+                'presentation_v2' => [
+                    'en' => $presentation('en'),
+                    'zh' => $presentation('zh-CN'),
+                ],
+            ],
             'import_run_id' => null,
         ], $overrides);
     }

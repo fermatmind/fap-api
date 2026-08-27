@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPublisher;
 use App\Domain\Career\Display\CareerCurrentAuthorityPublisherFailure;
+use App\Domain\Career\Display\CareerCurrentAuthorityReleaseIntent;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\DB;
@@ -21,6 +22,9 @@ $releaseSha = $env('CAREER_CURRENT_PUBLISH_RELEASE_SHA');
 $releaseName = $env('CAREER_CURRENT_PUBLISH_RELEASE_NAME');
 $backendRoot = $env('CAREER_CURRENT_PUBLISH_BACKEND_ROOT');
 $assetsSha256 = $env('CAREER_CURRENT_PUBLISH_ASSETS_SHA256');
+$sourceMergeSha = $env('CAREER_CURRENT_PUBLISH_SOURCE_MERGE_SHA');
+$manifestSha256 = $env('CAREER_CURRENT_PUBLISH_MANIFEST_SHA256');
+$versionlessProjectionSha256 = $env('CAREER_CURRENT_PUBLISH_VERSIONLESS_PROJECTION_SHA256');
 $operationKey = $env('CAREER_CURRENT_PUBLISH_OPERATION_KEY');
 $workflowRunId = $env('CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ID');
 $workflowRunAttempt = $env('CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ATTEMPT');
@@ -55,7 +59,9 @@ $receipt = [
     'release_sha' => $releaseSha,
     'release_name_sha256' => hash('sha256', $releaseName),
     'assets_sha256' => $assetsSha256,
-    'versionless_projection_sha256' => null,
+    'source_merge_sha' => $sourceMergeSha,
+    'manifest_sha256' => $manifestSha256,
+    'versionless_projection_sha256' => $versionlessProjectionSha256,
     'operation_key' => $operationKey,
     'workflow_run_id' => ctype_digit($workflowRunId) ? (int) $workflowRunId : null,
     'workflow_run_attempt' => ctype_digit($workflowRunAttempt) ? (int) $workflowRunAttempt : null,
@@ -100,10 +106,13 @@ try {
     $declaredAssetsSha256 = CareerCurrentAuthorityPackage::declaredAssetsSha256($backendRoot);
     $expectedOperationKey = hash(
         'sha256',
-        'career-current-authority|'.$releaseSha.'|'.$assetsSha256,
+        'career-current-authority|'.$sourceMergeSha.'|'.$assetsSha256.'|'.$versionlessProjectionSha256,
     );
     if ($env('CAREER_CURRENT_PUBLISH_EXECUTE') !== '1'
         || preg_match('/\A[0-9a-f]{40}\z/', $releaseSha) !== 1
+        || preg_match('/\A[0-9a-f]{40}\z/', $sourceMergeSha) !== 1
+        || preg_match('/\A[0-9a-f]{64}\z/', $manifestSha256) !== 1
+        || preg_match('/\A[0-9a-f]{64}\z/', $versionlessProjectionSha256) !== 1
         || $releaseName === ''
         || ! hash_equals($declaredAssetsSha256, $assetsSha256)
         || ! hash_equals($expectedOperationKey, $operationKey)
@@ -124,6 +133,19 @@ try {
 
     $app = require $backendRoot.'/bootstrap/app.php';
     $app->make(Kernel::class)->bootstrap();
+    /** @var CareerCurrentAuthorityReleaseIntent $releaseIntent */
+    $releaseIntent = $app->make(CareerCurrentAuthorityReleaseIntent::class);
+    $verifiedIntent = $releaseIntent->verify($backendRoot);
+    $intent = $verifiedIntent['intent'];
+    if (! hash_equals((string) $intent['source_merge_sha'], $sourceMergeSha)
+        || ! hash_equals((string) $intent['manifest_sha256'], $manifestSha256)
+        || ! hash_equals((string) $intent['aggregate_sha256'], $assetsSha256)
+        || ! hash_equals((string) $intent['versionless_projection_sha256'], $versionlessProjectionSha256)
+        || ! hash_equals((string) $verifiedIntent['operation_key'], $operationKey)) {
+        $receipt['safe_error_code'] = 'CURRENT_PUBLISH_EXECUTION_CONTRACT_INVALID';
+        $receipt['write_commit_state'] = 'confirmed_zero_write';
+        $emit($receipt);
+    }
     DB::listen(static function (QueryExecuted $query) use (&$receipt): void {
         if (preg_match('/\A(?:insert|update|delete|replace|alter|create|drop|truncate|rename)\b/', strtolower(ltrim($query->sql))) === 1) {
             $receipt['observed_database_mutation_query_count']++;
@@ -136,8 +158,6 @@ try {
     foreach (['package', 'authority', 'public_readback', 'manual_hold_verified', 'idempotent_noop', 'write_counts', 'state_sha256'] as $key) {
         $receipt[$key] = $result[$key];
     }
-    $receipt['versionless_projection_sha256'] = $result['package']['versionless_projection_sha256'] ?? null;
-
     if (($result['package']['source_format'] ?? null) !== 'sharded'
         || ! hash_equals(
             $assetsSha256,
@@ -147,6 +167,7 @@ try {
         || ($result['package']['locale_page_count'] ?? null) !== 2092
         || ($result['package']['components_per_page'] ?? null) !== 28
         || preg_match('/\A[0-9a-f]{64}\z/', (string) ($result['package']['versionless_projection_sha256'] ?? '')) !== 1
+        || ! hash_equals($versionlessProjectionSha256, (string) ($result['package']['versionless_projection_sha256'] ?? ''))
         || ($result['authority']['target_count'] ?? null) !== 1046
         || ($result['authority']['unique_slug_count'] ?? null) !== 1046
         || ($result['authority']['valid_component_order_count'] ?? null) !== 1046

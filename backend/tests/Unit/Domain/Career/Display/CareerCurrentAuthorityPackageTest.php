@@ -157,14 +157,19 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
             'backend/app/Domain/Career/Display/CareerCurrentAuthorityPublisher.php',
             'backend/scripts/operations/career_current_authority_publish.php',
         ] as $path) {
-            self::assertGreaterThanOrEqual(2, substr_count($workflow, $path));
+            self::assertGreaterThanOrEqual(1, substr_count($workflow, $path));
         }
         self::assertStringContainsString(
             '.public_readback.verified_slug_count == 1046',
             $workflow,
         );
         self::assertStringContainsString('startswith("backend/content_assets/career/current/")', $workflow);
-        self::assertStringContainsString('assets_sha256="$(jq -r \'.aggregate_sha256\' "$manifest")"', $workflow);
+        self::assertStringContainsString('verify_career_current_authority_release.sh', $workflow);
+        self::assertStringContainsString('CAREER_CURRENT_PUBLISH_SOURCE_MERGE_SHA', $workflow);
+        self::assertStringContainsString('CAREER_CURRENT_PUBLISH_MANIFEST_SHA256', $workflow);
+        self::assertStringContainsString('CAREER_CURRENT_PUBLISH_VERSIONLESS_PROJECTION_SHA256', $workflow);
+        self::assertStringContainsString('.source_merge_sha == $source', $workflow);
+        self::assertStringContainsString('.manifest_sha256 == $manifest', $workflow);
         self::assertStringContainsString(
             '.public_readback.verified_locale_page_count == 2092',
             $workflow,

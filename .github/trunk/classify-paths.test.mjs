@@ -50,6 +50,17 @@ test("classifies Career Current legacy and sharded assets", () => {
   assert.equal(has(["backend/content_assets/career/current/assets.jsonl"], "content_assets"), true);
   assert.equal(has(["backend/content_assets/career/current/identity/shard-00.jsonl"], "content_assets"), true);
 });
+test("binds only the exact Career Current release intent to its operation", () => {
+  const exact = classifyPaths([
+    "backend/content_assets/career/career_current_authority_release.v1.json",
+  ]);
+  const adjacent = classifyPaths([
+    "backend/content_assets/career/career_current_authority_review.json",
+  ]);
+  assert.equal(exact.flags.content_assets, true);
+  assert.equal(exact.operations.career_current_authority_release, true);
+  assert.equal(adjacent.operations.career_current_authority_release, false);
+});
 test("binds only the exact MBTI zh authority release manifest to its operation", () => {
   const exact = classifyPaths([
     "backend/content_assets/personality_public/mbti_zh_result_authority_release.v1.json",
