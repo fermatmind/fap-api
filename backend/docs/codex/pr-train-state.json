@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T08:07:06Z",
+  "updated_at": "2026-08-27T08:08:37Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-09-F": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "natural_receipt_retry_local_checks_passed",
+      "status": "natural_receipt_retry_pr_open",
       "branch": "codex/seo-platform-09-f-natural-receipt",
-      "commit_sha": null,
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/3819",
+      "commit_sha": "085852909ed57d3ec5920ae7ae3901a9484d8060",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3820",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -121,6 +121,11 @@
           "at": "2026-08-27T08:07:06Z",
           "status": "natural_receipt_retry_local_checks_passed",
           "summary": "Kept the corrected scheduler and moved only the still-unproven Thursday natural slot to 09:00 UTC, allowing existing bounded sitemap warming to recover without modifying the unrelated URL-truth lane. Focused tests pass with 7 tests and 80 assertions."
+        },
+        {
+          "at": "2026-08-27T08:08:37Z",
+          "status": "natural_receipt_retry_pr_open",
+          "summary": "Opened same-scope natural receipt retry PR #3820 from validated commit 085852909ed57d3ec5920ae7ae3901a9484d8060."
         }
       ]
     },
