@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T08:08:37Z",
+  "updated_at": "2026-08-27T08:11:53Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,9 +9,9 @@
     "SEO-PLATFORM-09-F": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "natural_receipt_retry_pr_open",
-      "branch": "codex/seo-platform-09-f-natural-receipt",
-      "commit_sha": "085852909ed57d3ec5920ae7ae3901a9484d8060",
+      "status": "bounded_natural_wait_local_checks_passed",
+      "branch": "codex/seo-platform-09-f-bounded-natural-wait",
+      "commit_sha": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3820",
       "checks": {
         "dependency": {
@@ -126,6 +126,11 @@
           "at": "2026-08-27T08:08:37Z",
           "status": "natural_receipt_retry_pr_open",
           "summary": "Opened same-scope natural receipt retry PR #3820 from validated commit 085852909ed57d3ec5920ae7ae3901a9484d8060."
+        },
+        {
+          "at": "2026-08-27T08:11:53Z",
+          "status": "bounded_natural_wait_local_checks_passed",
+          "summary": "Revalidated queue timing before deployment, moved the still-single Thursday natural slot to 09:30 UTC and bounded the production read-only wait at 3600 seconds with a 3900-second task timeout. Focused scheduler, Workbench, lifecycle and prior production closeout tests pass with 17 tests and 141 assertions."
         }
       ]
     },

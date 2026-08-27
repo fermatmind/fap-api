@@ -19,7 +19,7 @@ final class SeoWeeklyDecisionCloseout extends Command
 
     public function handle(SeoWeeklyDecisionCloseoutService $service): int
     {
-        $waitSeconds = max(0, min(1200, (int) $this->option('wait-seconds')));
+        $waitSeconds = max(0, min(3600, (int) $this->option('wait-seconds')));
         $deadline = time() + $waitSeconds;
         $nextHeartbeat = time();
         do {
