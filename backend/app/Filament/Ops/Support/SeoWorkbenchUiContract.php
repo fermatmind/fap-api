@@ -4,11 +4,27 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Support;
 
+use App\Services\SeoIntel\Decision\SeoWeeklyDecisionSelector;
+
 final class SeoWorkbenchUiContract
 {
     public const DEFAULT_DECISION_COUNT = 3;
 
     public const MAX_DECISION_COUNT = 5;
+
+    /** @return array<string, mixed> */
+    public static function snapshot(): array
+    {
+        $selection = app(SeoWeeklyDecisionSelector::class)->snapshot();
+
+        return array_merge($selection, [
+            'trend_state' => SeoOperationsUiState::MEASUREMENT_HOLD,
+            'health_state' => SeoOperationsUiState::MEASUREMENT_HOLD,
+            'trend' => self::unavailableSnapshot()['trend'],
+            'health' => self::unavailableSnapshot()['health'],
+            'required_decision_fields' => self::unavailableSnapshot()['required_decision_fields'],
+        ]);
+    }
 
     /**
      * SEO-PLATFORM-09 has not published its unified production read model yet.
