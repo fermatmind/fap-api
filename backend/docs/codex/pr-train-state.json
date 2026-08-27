@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T02:48:45Z",
+  "updated_at": "2026-08-27T02:50:48Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-08-E": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/seo-platform-08-e-production-closeout",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "b2fc54320c7de3e5bfa218d33103322fb087d414",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3811",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -44,6 +44,11 @@
           "at": "2026-08-27T02:48:45Z",
           "status": "local_checks_passed",
           "summary": "Extended the existing deploy control plane with a sanitized read-only ledger closeout. It fails closed unless schema, protected route, external 401 negative probe, snapshot and exact REVISION SHA agree; zero rows remain verified zero while the capability becomes production_proven. L3/L4 and search remain disabled, and no real experiment or production write is required."
+        },
+        {
+          "at": "2026-08-27T02:50:48Z",
+          "status": "pr_open",
+          "summary": "Opened the single scoped PR #3811 from validated implementation commit b2fc54320c7de3e5bfa218d33103322fb087d414. Only the existing automatic exact-SHA deploy channel may produce production proof; no manual dispatch, SSH, migration, DB write, experiment or search action was triggered."
         }
       ]
     },
