@@ -1884,6 +1884,12 @@ task('queue:reload-workers', function () {
 });
 
 task('scheduler:install-managed-cron', function () {
+    if (currentHost()->getAlias() !== 'production') {
+        writeln('<comment>Skip managed scheduler installation outside production</comment>');
+
+        return;
+    }
+
     $supervisorctl = trim((string) get('queue_supervisorctl', '/usr/bin/supervisorctl'));
     $resolvedSupervisorctl = trim((string) run(
         'if [ -x '.escapeshellarg($supervisorctl).' ]; then echo '.escapeshellarg($supervisorctl).'; else command -v supervisorctl; fi'
@@ -1896,7 +1902,6 @@ task('scheduler:install-managed-cron', function () {
         '{{release_path}}',
         'backend/scripts/deploy/restart_supervisor_scheduler.sh',
     );
-    $schedulerRequired = currentHost()->getAlias() === 'production' ? 'true' : 'false';
     run(
         'php_bin="$(command -v {{bin/php}})"; test -n "$php_bin"; /usr/bin/timeout --signal=TERM --kill-after=5s 90s bash '.$schedulerScript
             .' --supervisorctl='.escapeshellarg($resolvedSupervisorctl)
@@ -1906,7 +1911,7 @@ task('scheduler:install-managed-cron', function () {
             .' --php-bin="$php_bin"'
             .' --deploy-path='.deployPlaceholderPathArg('{{deploy_path}}')
             .' --proc-root=/proc'
-            .' --required='.escapeshellarg($schedulerRequired),
+            .' --required=true',
         timeout: 90,
     );
 });

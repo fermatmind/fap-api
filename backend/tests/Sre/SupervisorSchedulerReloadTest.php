@@ -197,6 +197,7 @@ BASH);
         $this->assertStringContainsString('timeout --signal=TERM --kill-after=5s 90s bash', $deploy);
         $this->assertStringContainsString("after('queue:reload-workers', 'scheduler:install-managed-cron')", $deploy);
         $this->assertStringContainsString("after('scheduler:install-managed-cron', 'scheduler:wait-natural-heartbeat')", $deploy);
+        $this->assertMatchesRegularExpression("/task\\('scheduler:install-managed-cron'[\\s\\S]+currentHost\\(\\)->getAlias\\(\\) !== 'production'[\\s\\S]+return;/", $deploy);
     }
 
     private function addSupervisorScheduleWork(bool $owned): void
