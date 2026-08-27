@@ -1,0 +1,280 @@
+{
+    "schema_version": "fermatmind.article15_baseline_reconciled_content_package.v2.1",
+    "package_id": "ARTICLE15-BASELINE-RECONCILED-V2.1-08-which-love-script-fits-you-best",
+    "package_order": 8,
+    "decision": "CHANGE",
+    "status": {
+        "content_package_only": true,
+        "requires_operator_review": true,
+        "import_ready": false,
+        "publish_allowed": false,
+        "search_submit_allowed": false
+    },
+    "revises_package": {
+        "source_manifest_declared_sha256": "9e70df20d75c92a3aa3f4b5e292a2ed2104b8553bea830ce47381f05dcfdd07f",
+        "source_manifest_file_sha256": "44a1b63e5958ce7c514836b1a068643b8b662237676231dfeb62963de527dde9",
+        "source_package_path": "backend/docs/seo/content-packages/article15-baseline-reconciled-v2-20260827/packages/08-which-love-script-fits-you-best/package.json",
+        "source_package_declared_sha256": "3e9e22a11413aa8851764d2cdb6bb9be92983e93921ed9f9098f673511003c7e",
+        "source_package_file_sha256": "05a7d63c0507029a599a2f75982c0fc59c6fa8c557f958edc42b00765da18618",
+        "revision_reason": "Replace the article CTA with a canonical public test entry and correct faq_visible_body from CHANGE to KEEP without changing the one-paragraph body addition."
+    },
+    "supersedes_for_execution": {
+        "execution_id": "ARTICLE15-EXACT-PACKAGE-REVISION-BOUND-20260826-v1",
+        "execution_manifest_path": "backend/docs/seo/content-packages/article15-exact-package-revision-bound-20260826/manifest.json",
+        "execution_manifest_sha256": "eb9a0254600991e2b4d7967b7c4d46c27d604719d8c40ba63353a20cd50a96e7",
+        "v1_package_id": "ARTICLE15-BATCH-B-03-which-love-script-fits-you-best",
+        "v1_package_path": "backend/docs/seo/content-packages/article15-batch-b-20260826/packages/03-which-love-script-fits-you-best/package.json",
+        "v1_package_sha256": "701d3391a8d23cb19566e9a31ab61039a1e6d2f887c27878776211b97825e3c8",
+        "v1_body_sha256": "7627660dcef05c91a837c672e8a1c97050734dbdec5d67e10bd80d51d4f7d39d",
+        "v1_is_historical_source_only": true
+    },
+    "identity_lock": {
+        "article_id": 16,
+        "translation_group_id": "article-16",
+        "published_revision_id": 435,
+        "locale": "zh-CN",
+        "slug": "which-love-script-fits-you-best",
+        "canonical_url": "https://fermatmind.com/zh/articles/which-love-script-fits-you-best",
+        "query_owner_relationships": [
+            {
+                "cluster_id": "love_script_triangle_zh-CN",
+                "relationship": "primary_owner",
+                "primary_owner": "/zh/articles/which-love-script-fits-you-best",
+                "confidence": "high"
+            }
+        ]
+    },
+    "baseline_lock": {
+        "production_active_sha": "c0a0adf016f1b9c4388bd09ebe5bfe1d773e0989",
+        "production_state_sha256": "2ef8def16b4806fb8db5c4351edbf3a4a360171f1915f7d191ec098effa99b6e",
+        "production_revision_set_sha256": "f42e1db146ec104d657dff77d147a8dc17164e899850f4c2dbd059eb346a50a9",
+        "article_row_body_sha256": "8e69c469c40a1de115776d82e00394dcde1771da2be6ffa7b26d0ce03d04202e",
+        "current_revision_body_sha256": "8e69c469c40a1de115776d82e00394dcde1771da2be6ffa7b26d0ce03d04202e",
+        "current_public_body_sha256": "8e69c469c40a1de115776d82e00394dcde1771da2be6ffa7b26d0ce03d04202e",
+        "published_revision_id": 435,
+        "projection_contract": {
+            "payload_method": "ArticleController::publicArticlePayload",
+            "body_transform_method": "ArticleBodyHeadingGuard::downgradeMarkdownH1ToH2",
+            "implementation_file_sha256": {
+                "backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php": "dbd2daf09e30b2bc15c052793dd8d78719f9340fcfb20fd3dda911b44984ea0c",
+                "backend/app/Services/Cms/ArticleBodyHeadingGuard.php": "11f353485a97adc266bb207921c3befa4a9cb886d446ada128bef8b03aaef3cc"
+            }
+        }
+    },
+    "files": {
+        "current.public.zh-CN.md": {
+            "sha256": "8e69c469c40a1de115776d82e00394dcde1771da2be6ffa7b26d0ce03d04202e",
+            "authority": "production_public_api_projection"
+        },
+        "proposed.cms.zh-CN.md": {
+            "sha256": "dfebab6e697ead50094d5f1cc917ebdaa2881184ba9bffc03ebcc645205fa7b9",
+            "authority": "operator_review_candidate_only"
+        }
+    },
+    "body_write_plan": {
+        "write_count": 1,
+        "mode": "replace_with_exact_proposed_cms_bytes",
+        "proposed_cms_file": "proposed.cms.zh-CN.md",
+        "proposed_cms_sha256": "dfebab6e697ead50094d5f1cc917ebdaa2881184ba9bffc03ebcc645205fa7b9",
+        "projected_public_sha256": "dfebab6e697ead50094d5f1cc917ebdaa2881184ba9bffc03ebcc645205fa7b9"
+    },
+    "field_plan": {
+        "title": {
+            "status": "KEEP",
+            "current": "爱情三角理论：亲密、激情与承诺如何组成不同关系状态",
+            "proposed": "爱情三角理论：亲密、激情与承诺如何组成不同关系状态"
+        },
+        "h1": {
+            "status": "KEEP",
+            "current": "爱情三角理论：亲密、激情与承诺如何组成不同关系状态",
+            "proposed": "爱情三角理论：亲密、激情与承诺如何组成不同关系状态"
+        },
+        "seo_title": {
+            "status": "KEEP",
+            "current": "爱情三角理论：亲密、激情与承诺如何组成不同关系状态",
+            "proposed": "爱情三角理论：亲密、激情与承诺如何组成不同关系状态"
+        },
+        "seo_description": {
+            "status": "KEEP",
+            "current": "系统解释 Sternberg 爱情三角理论及亲密、激情、承诺的不同组合，附现实三角练习与关系边界，不做伴侣匹配预测。",
+            "proposed": "系统解释 Sternberg 爱情三角理论及亲密、激情、承诺的不同组合，附现实三角练习与关系边界，不做伴侣匹配预测。"
+        },
+        "intro": {
+            "status": "KEEP",
+            "current": "爱情三角理论帮助描述一段关系中的亲密、激情与承诺，但不能测出命定伴侣或预测关系结局。",
+            "proposed": "爱情三角理论帮助描述一段关系中的亲密、激情与承诺，但不能测出命定伴侣或预测关系结局。"
+        },
+        "body_markdown": {
+            "status": "CHANGE",
+            "current_revision_sha256": "8e69c469c40a1de115776d82e00394dcde1771da2be6ffa7b26d0ce03d04202e",
+            "current_public_sha256": "8e69c469c40a1de115776d82e00394dcde1771da2be6ffa7b26d0ce03d04202e",
+            "proposed_cms_sha256": "dfebab6e697ead50094d5f1cc917ebdaa2881184ba9bffc03ebcc645205fa7b9"
+        },
+        "faq_visible_body": {
+            "status": "KEEP",
+            "current": [
+                {
+                    "question": "爱情三角理论可以测出最适合我的伴侣吗？",
+                    "answer": "不可以。它帮助描述关系成分，不预测具体对象，也不能代替对价值观、安全、边界和现实条件的判断。"
+                },
+                {
+                    "question": "七种爱情类型是固定的吗？",
+                    "answer": "不是。更准确的说法是不同组合形成的关系状态。亲密、激情和承诺会随阶段与情境变化。"
+                },
+                {
+                    "question": "三个成分哪一个最重要？",
+                    "answer": "没有适用于所有关系的单一答案。不同阶段的重点可能不同，但任何长期关系都需要双方对期待和投入有足够清楚的共识。"
+                },
+                {
+                    "question": "可以用 MBTI 判断双方的爱情类型吗？",
+                    "answer": "不建议。MBTI-style 偏好最多帮助讨论沟通和决策差异，不能推出关系质量或“最佳匹配”。"
+                }
+            ],
+            "proposed": [
+                {
+                    "question": "爱情三角理论可以测出最适合我的伴侣吗？",
+                    "answer": "不可以。它帮助描述关系成分，不预测具体对象，也不能代替对价值观、安全、边界和现实条件的判断。"
+                },
+                {
+                    "question": "七种爱情类型是固定的吗？",
+                    "answer": "不是。更准确的说法是不同组合形成的关系状态。亲密、激情和承诺会随阶段与情境变化。"
+                },
+                {
+                    "question": "三个成分哪一个最重要？",
+                    "answer": "没有适用于所有关系的单一答案。不同阶段的重点可能不同，但任何长期关系都需要双方对期待和投入有足够清楚的共识。"
+                },
+                {
+                    "question": "可以用 MBTI 判断双方的爱情类型吗？",
+                    "answer": "不建议。MBTI-style 偏好最多帮助讨论沟通和决策差异，不能推出关系质量或“最佳匹配”。"
+                }
+            ]
+        },
+        "answer_surface_v1": {
+            "status": "KEEP",
+            "current_public_api": [
+                {
+                    "question": "爱情三角理论可以测出最适合我的伴侣吗？",
+                    "answer": "不可以。它帮助描述关系成分，不预测具体对象，也不能代替对价值观、安全、边界和现实条件的判断。"
+                },
+                {
+                    "question": "七种爱情类型是固定的吗？",
+                    "answer": "不是。更准确的说法是不同组合形成的关系状态。亲密、激情和承诺会随阶段与情境变化。"
+                },
+                {
+                    "question": "三个成分哪一个最重要？",
+                    "answer": "没有适用于所有关系的单一答案。不同阶段的重点可能不同，但任何长期关系都需要双方对期待和投入有足够清楚的共识。"
+                },
+                {
+                    "question": "可以用 MBTI 判断双方的爱情类型吗？",
+                    "answer": "不建议。MBTI-style 偏好最多帮助讨论沟通和决策差异，不能推出关系质量或“最佳匹配”。"
+                }
+            ],
+            "proposed": [
+                {
+                    "question": "爱情三角理论可以测出最适合我的伴侣吗？",
+                    "answer": "不可以。它帮助描述关系成分，不预测具体对象，也不能代替对价值观、安全、边界和现实条件的判断。"
+                },
+                {
+                    "question": "七种爱情类型是固定的吗？",
+                    "answer": "不是。更准确的说法是不同组合形成的关系状态。亲密、激情和承诺会随阶段与情境变化。"
+                },
+                {
+                    "question": "三个成分哪一个最重要？",
+                    "answer": "没有适用于所有关系的单一答案。不同阶段的重点可能不同，但任何长期关系都需要双方对期待和投入有足够清楚的共识。"
+                },
+                {
+                    "question": "可以用 MBTI 判断双方的爱情类型吗？",
+                    "answer": "不建议。MBTI-style 偏好最多帮助讨论沟通和决策差异，不能推出关系质量或“最佳匹配”。"
+                }
+            ],
+            "v1_intent_supported_by_visible_body": true
+        },
+        "primary_cta": {
+            "status": "CHANGE",
+            "current_public_api": [
+                {
+                    "key": "articles_index",
+                    "title": "继续浏览文章",
+                    "body": "回到文章目录，继续扩展公开内容阅读链路。",
+                    "href": "/zh/articles",
+                    "kind": "content_continue"
+                },
+                {
+                    "key": "topic_hub",
+                    "title": "进入主题聚合",
+                    "body": "把文章阅读继续到更结构化的主题入口。",
+                    "href": "/zh/topics",
+                    "kind": "discover"
+                },
+                {
+                    "key": "start_test",
+                    "title": "开始测试",
+                    "body": "如果你想把阅读转成自我测量，可以从测试入口开始。",
+                    "href": "/zh/tests/mbti-personality-test-16-personality-types",
+                    "kind": "start_test"
+                }
+            ],
+            "proposed": [
+                {
+                    "label": "开始 EQ 情商测试，观察情绪与沟通习惯",
+                    "href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+                    "kind": "start_test",
+                    "intent": "test_intent_handoff"
+                }
+            ],
+            "effective_primary": [
+                {
+                    "label": "开始 EQ 情商测试，观察情绪与沟通习惯",
+                    "href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+                    "kind": "start_test",
+                    "intent": "test_intent_handoff"
+                }
+            ]
+        },
+        "reading_minutes": {
+            "status": "CHANGE",
+            "current": 4,
+            "proposed": 5,
+            "formula_result": 5
+        },
+        "related_test_slug": {
+            "status": "CHANGE",
+            "current": null,
+            "proposed": "eq-test-emotional-intelligence-assessment"
+        }
+    },
+    "editorial_rebase": {
+        "source": "latest_locked_production_revision_bytes",
+        "v1_proposed_full_body_reused": false,
+        "allowed_change_summary": [
+            "one_action_paragraph_after_first_screen",
+            "primary_cta_to_canonical_eq_test",
+            "related_test_to_eq"
+        ],
+        "planned_removed_top_level_blocks": [],
+        "unplanned_removed_top_level_blocks": []
+    },
+    "internal_links": [
+        {
+            "label": "开始 EQ 情商测试，观察情绪与沟通习惯",
+            "href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "role": "primary_cta"
+        }
+    ],
+    "claim_boundary": "只拥有 Sternberg 亲密、激情、承诺三成分及关系状态解释；EQ 入口仅用于观察情绪与沟通习惯，不测量爱情类型，也不得承诺伴侣匹配、命定对象、关系质量或关系结局预测。",
+    "forbidden_claims": [
+        "hidden_query_inference",
+        "diagnosis",
+        "ability_prediction",
+        "career_determination",
+        "admission_prediction",
+        "relationship_prediction",
+        "hiring_screening",
+        "official_endorsement"
+    ],
+    "operational_measurement": {
+        "seven_day": "Unknown",
+        "fourteen_day": "Unknown"
+    },
+    "package_sha256": "daa970af8d8b9b5664d80bb09d3f0fb305007ed7eea20d253612e0d554652e16"
+}

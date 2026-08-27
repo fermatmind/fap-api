@@ -1,0 +1,298 @@
+{
+    "schema_version": "fermatmind.article15_baseline_reconciled_content_package.v2.1",
+    "package_id": "ARTICLE15-BASELINE-RECONCILED-V2.1-07-iq-test-score-and-limits-explained",
+    "package_order": 7,
+    "decision": "CHANGE",
+    "status": {
+        "content_package_only": true,
+        "requires_operator_review": true,
+        "import_ready": false,
+        "publish_allowed": false,
+        "search_submit_allowed": false
+    },
+    "revises_package": {
+        "source_manifest_declared_sha256": "9e70df20d75c92a3aa3f4b5e292a2ed2104b8553bea830ce47381f05dcfdd07f",
+        "source_manifest_file_sha256": "44a1b63e5958ce7c514836b1a068643b8b662237676231dfeb62963de527dde9",
+        "source_package_path": "backend/docs/seo/content-packages/article15-baseline-reconciled-v2-20260827/packages/07-iq-test-score-and-limits-explained/package.json",
+        "source_package_declared_sha256": "673720212f65e13dcddfde89ba706ccbf0d4e51bd290d2c6b315bd7547db3f79",
+        "source_package_file_sha256": "68b3743bd0401aefefca4a01f05a1a9906d19c512397f358539882420509c994",
+        "revision_reason": "Correct faq_visible_body from CHANGE to KEEP because the current and proposed visible FAQ arrays are byte-equivalent; preserve both Markdown files."
+    },
+    "supersedes_for_execution": {
+        "execution_id": "ARTICLE15-EXACT-PACKAGE-REVISION-BOUND-20260826-v1",
+        "execution_manifest_path": "backend/docs/seo/content-packages/article15-exact-package-revision-bound-20260826/manifest.json",
+        "execution_manifest_sha256": "eb9a0254600991e2b4d7967b7c4d46c27d604719d8c40ba63353a20cd50a96e7",
+        "v1_package_id": "ARTICLE15-BATCH-B-02-iq-test-score-and-limits-explained",
+        "v1_package_path": "backend/docs/seo/content-packages/article15-batch-b-20260826/packages/02-iq-test-score-and-limits-explained/package.json",
+        "v1_package_sha256": "21b1edec935f9298cfb316a712ef1ebde2e9846a9910fbf8f37d371ddd20631f",
+        "v1_body_sha256": "55557e360d5871b913944780f280064a345e9730a68c813d78879f0435b75dd0",
+        "v1_is_historical_source_only": true
+    },
+    "identity_lock": {
+        "article_id": 50,
+        "translation_group_id": "tg_article_iq_test_score_and_limits_explained_2026v1",
+        "published_revision_id": 57,
+        "locale": "zh-CN",
+        "slug": "iq-test-score-and-limits-explained",
+        "canonical_url": "https://fermatmind.com/zh/articles/iq-test-score-and-limits-explained",
+        "query_owner_relationships": [
+            {
+                "cluster_id": "iq_result_limits_zh-CN",
+                "relationship": "primary_owner",
+                "primary_owner": "/zh/articles/iq-test-score-and-limits-explained",
+                "confidence": "high"
+            }
+        ]
+    },
+    "baseline_lock": {
+        "production_active_sha": "c0a0adf016f1b9c4388bd09ebe5bfe1d773e0989",
+        "production_state_sha256": "2ef8def16b4806fb8db5c4351edbf3a4a360171f1915f7d191ec098effa99b6e",
+        "production_revision_set_sha256": "f42e1db146ec104d657dff77d147a8dc17164e899850f4c2dbd059eb346a50a9",
+        "article_row_body_sha256": "ac2c537fc14236f0dd2f867bb6b9ee3d818df4b66a0fa953244c2af79448c728",
+        "current_revision_body_sha256": "ac2c537fc14236f0dd2f867bb6b9ee3d818df4b66a0fa953244c2af79448c728",
+        "current_public_body_sha256": "ac2c537fc14236f0dd2f867bb6b9ee3d818df4b66a0fa953244c2af79448c728",
+        "published_revision_id": 57,
+        "projection_contract": {
+            "payload_method": "ArticleController::publicArticlePayload",
+            "body_transform_method": "ArticleBodyHeadingGuard::downgradeMarkdownH1ToH2",
+            "implementation_file_sha256": {
+                "backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php": "dbd2daf09e30b2bc15c052793dd8d78719f9340fcfb20fd3dda911b44984ea0c",
+                "backend/app/Services/Cms/ArticleBodyHeadingGuard.php": "11f353485a97adc266bb207921c3befa4a9cb886d446ada128bef8b03aaef3cc"
+            }
+        }
+    },
+    "files": {
+        "current.public.zh-CN.md": {
+            "sha256": "ac2c537fc14236f0dd2f867bb6b9ee3d818df4b66a0fa953244c2af79448c728",
+            "authority": "production_public_api_projection"
+        },
+        "proposed.cms.zh-CN.md": {
+            "sha256": "108170e97c5917dfe2ebc0cf349a56b2dd6a39ac9344c1779f715cae1b19691b",
+            "authority": "operator_review_candidate_only"
+        }
+    },
+    "body_write_plan": {
+        "write_count": 1,
+        "mode": "replace_with_exact_proposed_cms_bytes",
+        "proposed_cms_file": "proposed.cms.zh-CN.md",
+        "proposed_cms_sha256": "108170e97c5917dfe2ebc0cf349a56b2dd6a39ac9344c1779f715cae1b19691b",
+        "projected_public_sha256": "108170e97c5917dfe2ebc0cf349a56b2dd6a39ac9344c1779f715cae1b19691b"
+    },
+    "field_plan": {
+        "title": {
+            "status": "KEEP",
+            "current": "在线 IQ 测试准吗？智商分数、题型和正式测验的区别一次讲清",
+            "proposed": "在线 IQ 测试准吗？智商分数、题型和正式测验的区别一次讲清"
+        },
+        "h1": {
+            "status": "KEEP",
+            "current": "在线 IQ 测试准吗？智商分数、题型和正式测验的区别一次讲清",
+            "proposed": "在线 IQ 测试准吗？智商分数、题型和正式测验的区别一次讲清"
+        },
+        "seo_title": {
+            "status": "KEEP",
+            "current": "在线 IQ 测试准吗？智商分数和题型解释",
+            "proposed": "在线 IQ 测试准吗？智商分数和题型解释"
+        },
+        "seo_description": {
+            "status": "KEEP",
+            "current": "在线 IQ 测试可以观察矩阵推理、模式识别和抽象问题解决表现，但不等于正式智力测验。本文解释智商分数、题型、正式测验边界和安全使用方式。",
+            "proposed": "在线 IQ 测试可以观察矩阵推理、模式识别和抽象问题解决表现，但不等于正式智力测验。本文解释智商分数、题型、正式测验边界和安全使用方式。"
+        },
+        "intro": {
+            "status": "KEEP",
+            "current": "在线 IQ 测试可以观察矩阵推理、模式识别和抽象问题解决表现，但不等于正式智力测验。本文解释智商分数、题型、正式测验边界和安全使用方式。",
+            "proposed": "在线 IQ 测试可以观察矩阵推理、模式识别和抽象问题解决表现，但不等于正式智力测验。本文解释智商分数、题型、正式测验边界和安全使用方式。"
+        },
+        "body_markdown": {
+            "status": "CHANGE",
+            "current_revision_sha256": "ac2c537fc14236f0dd2f867bb6b9ee3d818df4b66a0fa953244c2af79448c728",
+            "current_public_sha256": "ac2c537fc14236f0dd2f867bb6b9ee3d818df4b66a0fa953244c2af79448c728",
+            "proposed_cms_sha256": "108170e97c5917dfe2ebc0cf349a56b2dd6a39ac9344c1779f715cae1b19691b"
+        },
+        "faq_visible_body": {
+            "status": "KEEP",
+            "current": [
+                {
+                    "question": "在线 IQ 测试准吗？",
+                    "answer": "它可以帮助你观察特定推理任务中的表现，例如矩阵推理、模式识别和抽象问题解决。但它不能直接等同于正式智力测验。正式 IQ 解释需要标准化施测、常模和专业解释。"
+                },
+                {
+                    "question": "FermatMind 的 IQ 测试是正式智商测验吗？",
+                    "answer": "本内容包不能这样宣称。FermatMind 当前公开产品说明支持的是在线推理任务、矩阵推理、模式识别和抽象问题解决。除非产品 authority 明确证明正式 IQ、常模和百分位，否则文章必须使用原始分、维度参考和在线推理表现语言。"
+                },
+                {
+                    "question": "IQ 分数怎么看？",
+                    "answer": "先看它是什么类型的分数。如果是原始分，它只代表你在本套题中的表现。如果没有常模，就不能写成人群百分位或排名。更安全的读法是用它复盘题型、策略和注意力状态。"
+                },
+                {
+                    "question": "IQ 测试通常有哪些题型？",
+                    "answer": "FermatMind 当前公开支持的表达包括矩阵推理、模式识别和抽象问题解决。可以谨慎讨论视觉、空间或数字模式推理，但不能主动扩展到工作记忆、处理速度、语言理解或完整智力结构，除非产品文档明确支持。"
+                },
+                {
+                    "question": "IQ 能决定一个人的能力吗？",
+                    "answer": "不能。IQ 或在线推理测试只能反映部分任务表现，不能概括创造力、情绪能力、学习习惯、社会判断、长期努力或人的价值。它也不能预测收入、职业成功或人生结果。"
+                },
+                {
+                    "question": "IQ 和 EQ 有什么区别？",
+                    "answer": "IQ 更偏向推理任务、模式识别和抽象问题解决表现；EQ 更偏向情绪觉察、调节、关系沟通和压力恢复。两者观察的是不同方面，不能互相替代，也不能决定人的价值。"
+                },
+                {
+                    "question": "做完 IQ 测试后下一步应该做什么？",
+                    "answer": "不要只盯分数。先记录自己在哪类题型上卡住，再复盘解题策略和注意力状态。你可以用短周期训练验证是否只是题型不熟，也可以结合学习目标决定下一步练习方向。"
+                }
+            ],
+            "proposed": [
+                {
+                    "question": "在线 IQ 测试准吗？",
+                    "answer": "它可以帮助你观察特定推理任务中的表现，例如矩阵推理、模式识别和抽象问题解决。但它不能直接等同于正式智力测验。正式 IQ 解释需要标准化施测、常模和专业解释。"
+                },
+                {
+                    "question": "FermatMind 的 IQ 测试是正式智商测验吗？",
+                    "answer": "本内容包不能这样宣称。FermatMind 当前公开产品说明支持的是在线推理任务、矩阵推理、模式识别和抽象问题解决。除非产品 authority 明确证明正式 IQ、常模和百分位，否则文章必须使用原始分、维度参考和在线推理表现语言。"
+                },
+                {
+                    "question": "IQ 分数怎么看？",
+                    "answer": "先看它是什么类型的分数。如果是原始分，它只代表你在本套题中的表现。如果没有常模，就不能写成人群百分位或排名。更安全的读法是用它复盘题型、策略和注意力状态。"
+                },
+                {
+                    "question": "IQ 测试通常有哪些题型？",
+                    "answer": "FermatMind 当前公开支持的表达包括矩阵推理、模式识别和抽象问题解决。可以谨慎讨论视觉、空间或数字模式推理，但不能主动扩展到工作记忆、处理速度、语言理解或完整智力结构，除非产品文档明确支持。"
+                },
+                {
+                    "question": "IQ 能决定一个人的能力吗？",
+                    "answer": "不能。IQ 或在线推理测试只能反映部分任务表现，不能概括创造力、情绪能力、学习习惯、社会判断、长期努力或人的价值。它也不能预测收入、职业成功或人生结果。"
+                },
+                {
+                    "question": "IQ 和 EQ 有什么区别？",
+                    "answer": "IQ 更偏向推理任务、模式识别和抽象问题解决表现；EQ 更偏向情绪觉察、调节、关系沟通和压力恢复。两者观察的是不同方面，不能互相替代，也不能决定人的价值。"
+                },
+                {
+                    "question": "做完 IQ 测试后下一步应该做什么？",
+                    "answer": "不要只盯分数。先记录自己在哪类题型上卡住，再复盘解题策略和注意力状态。你可以用短周期训练验证是否只是题型不熟，也可以结合学习目标决定下一步练习方向。"
+                }
+            ]
+        },
+        "answer_surface_v1": {
+            "status": "CHANGE",
+            "current_public_api": [
+                {
+                    "question": "什么时候适合阅读这篇文章？",
+                    "answer": "当你想把公开内容和测评、人格画像或职业建议串起来时，先从这篇文章的核心摘要开始。"
+                },
+                {
+                    "question": "这篇文章会替代正式判断吗？",
+                    "answer": "不会。它只提供公开解释和行动线索，不替代医疗、法律或专业诊断。"
+                }
+            ],
+            "proposed": [
+                {
+                    "question": "在线 IQ 测试准吗？",
+                    "answer": "它可以帮助你观察特定推理任务中的表现，例如矩阵推理、模式识别和抽象问题解决。但它不能直接等同于正式智力测验。正式 IQ 解释需要标准化施测、常模和专业解释。"
+                },
+                {
+                    "question": "FermatMind 的 IQ 测试是正式智商测验吗？",
+                    "answer": "本内容包不能这样宣称。FermatMind 当前公开产品说明支持的是在线推理任务、矩阵推理、模式识别和抽象问题解决。除非产品 authority 明确证明正式 IQ、常模和百分位，否则文章必须使用原始分、维度参考和在线推理表现语言。"
+                },
+                {
+                    "question": "IQ 分数怎么看？",
+                    "answer": "先看它是什么类型的分数。如果是原始分，它只代表你在本套题中的表现。如果没有常模，就不能写成人群百分位或排名。更安全的读法是用它复盘题型、策略和注意力状态。"
+                },
+                {
+                    "question": "IQ 测试通常有哪些题型？",
+                    "answer": "FermatMind 当前公开支持的表达包括矩阵推理、模式识别和抽象问题解决。可以谨慎讨论视觉、空间或数字模式推理，但不能主动扩展到工作记忆、处理速度、语言理解或完整智力结构，除非产品文档明确支持。"
+                },
+                {
+                    "question": "IQ 能决定一个人的能力吗？",
+                    "answer": "不能。IQ 或在线推理测试只能反映部分任务表现，不能概括创造力、情绪能力、学习习惯、社会判断、长期努力或人的价值。它也不能预测收入、职业成功或人生结果。"
+                },
+                {
+                    "question": "IQ 和 EQ 有什么区别？",
+                    "answer": "IQ 更偏向推理任务、模式识别和抽象问题解决表现；EQ 更偏向情绪觉察、调节、关系沟通和压力恢复。两者观察的是不同方面，不能互相替代，也不能决定人的价值。"
+                },
+                {
+                    "question": "做完 IQ 测试后下一步应该做什么？",
+                    "answer": "不要只盯分数。先记录自己在哪类题型上卡住，再复盘解题策略和注意力状态。你可以用短周期训练验证是否只是题型不熟，也可以结合学习目标决定下一步练习方向。"
+                }
+            ],
+            "v1_intent_supported_by_visible_body": true
+        },
+        "primary_cta": {
+            "status": "KEEP",
+            "current_public_api": [
+                {
+                    "key": "primary_iq_test",
+                    "title": "开始 IQ 智商测试",
+                    "body": null,
+                    "href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+                    "kind": "start_test"
+                }
+            ],
+            "proposed": [
+                {
+                    "key": "primary_iq_test",
+                    "title": "开始 IQ 智商测试",
+                    "body": null,
+                    "href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+                    "kind": "start_test"
+                }
+            ],
+            "effective_primary": [
+                {
+                    "key": "primary_iq_test",
+                    "title": "开始 IQ 智商测试",
+                    "body": null,
+                    "href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+                    "kind": "start_test"
+                }
+            ]
+        },
+        "reading_minutes": {
+            "status": "KEEP",
+            "current": 10,
+            "proposed": 10,
+            "formula_result": 10
+        },
+        "related_test_slug": {
+            "status": "KEEP",
+            "current": "iq-test-intelligence-quotient-assessment",
+            "proposed": "iq-test-intelligence-quotient-assessment"
+        }
+    },
+    "editorial_rebase": {
+        "source": "latest_locked_production_revision_bytes",
+        "v1_proposed_full_body_reused": false,
+        "allowed_change_summary": [
+            "localized_quick_answer",
+            "result_action_sentence",
+            "seven_faq_answer_surface_sync"
+        ],
+        "planned_removed_top_level_blocks": [
+            "Quick answer：在线 IQ 测试准吗？"
+        ],
+        "unplanned_removed_top_level_blocks": []
+    },
+    "internal_links": [
+        {
+            "label": "开始 IQ 智商测试",
+            "href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "role": "primary_cta"
+        }
+    ],
+    "claim_boundary": "只拥有在线结果怎么看及正式测验边界；IQ 测试入口意图归 IQ landing；不把在线任务表现解释为正式 IQ、能力总评、诊断、录取、招聘、职业或人生结果。",
+    "forbidden_claims": [
+        "hidden_query_inference",
+        "diagnosis",
+        "ability_prediction",
+        "career_determination",
+        "admission_prediction",
+        "relationship_prediction",
+        "hiring_screening",
+        "official_endorsement"
+    ],
+    "operational_measurement": {
+        "seven_day": "Unknown",
+        "fourteen_day": "Unknown"
+    },
+    "package_sha256": "9725759685f5a75caa93c489071a72309078e9227051ec9cb5b4f541c2ff58e5"
+}
