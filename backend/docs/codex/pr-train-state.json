@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T03:35:10Z",
+  "updated_at": "2026-08-27T03:37:18Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-09-B": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/seo-platform-09-b-nullable-priority",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "3cfa30ab43793734026e75645b4f3f5ab8e15d79",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3813",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -44,6 +44,11 @@
           "at": "2026-08-27T03:35:10Z",
           "status": "local_checks_passed",
           "summary": "Implemented only the seo.priority.candidate.v1 nullable evaluator. Missing, malformed, stale, incomplete, quality-failed, incomparable or lagged required evidence returns priority_score=null and MEASUREMENT_HOLD; a fully explicit input yields a repeatable candidate score and deterministic tie-break without clock or randomness. Weight sensitivity and production ranking policy remain deferred to 09-C."
+        },
+        {
+          "at": "2026-08-27T03:37:18Z",
+          "status": "pr_open",
+          "summary": "Opened the single scoped PR #3813 from validated implementation commit 3cfa30ab43793734026e75645b4f3f5ab8e15d79. Scope is limited to the pure evaluator, focused unit tests and train evidence; no runtime or production write was triggered."
         }
       ]
     },
