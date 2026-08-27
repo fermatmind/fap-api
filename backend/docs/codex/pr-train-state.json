@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T04:14:39Z",
+  "updated_at": "2026-08-27T04:15:56Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-09-E": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/seo-platform-09-e-weekly-workbench",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "c8701cb3ed738d67cfd23601491083427b6b1769",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3816",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -44,6 +44,11 @@
           "at": "2026-08-27T04:14:39Z",
           "status": "local_checks_passed",
           "summary": "Implemented only the deterministic ISO-week selector and connected its read-only snapshot to the existing SEO Workbench and protected Ops API. The selection defaults to three, caps at five, excludes held/stale/unscored cards, never pads, preserves true zero and exposes one identical order, count and revision across API and bilingual UI."
+        },
+        {
+          "at": "2026-08-27T04:15:56Z",
+          "status": "pr_open",
+          "summary": "Opened focused PR #3816 from implementation commit c8701cb3ed738d67cfd23601491083427b6b1769; exact scope reuses the existing Workbench and contains no scheduler, receipt or production operation."
         }
       ]
     },
