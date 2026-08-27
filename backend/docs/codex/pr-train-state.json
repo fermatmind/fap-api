@@ -1,17 +1,63 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T04:15:56Z",
+  "updated_at": "2026-08-27T04:56:43Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
-    "SEO-PLATFORM-09-E": {
+    "SEO-PLATFORM-09-F": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "pr_open",
+      "branch": "codex/seo-platform-09-f-scheduled-closeout",
+      "commit_sha": "857564d82d80715db39d4dac15e43047b1c8d10c",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3817",
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "details": "SEO-PLATFORM-09-E merged as c0a0adf016f1b9c4388bd09ebe5bfe1d773e0989; exact-SHA CI run 33038910837 and deploy run 33039179011 completed successfully."
+        },
+        "local": [
+          {
+            "command": "focused 09-A through 09-F decision authority, lifecycle, weekly Workbench and scheduler-closeout PHPUnit plus scoped Pint, schedule listing and deploy syntax",
+            "status": "passed",
+            "details": "18 tests and 146 assertions cover one natural weekly slot, off-slot/manual exclusion, exact-week idempotency, immutable selected revisions, real 0-5 output, expand-only receipt storage and read-only exact-SHA closeout."
+          }
+        ],
+        "github": [],
+        "production": []
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": true,
+      "production_readback_allowed": true,
+      "history": [
+        {
+          "at": "2026-08-27T04:54:16Z",
+          "status": "local_checks_passed",
+          "summary": "Implemented the single Thursday 05:30 UTC natural scheduler, idempotent sanitized weekly receipt, candidate-to-selected immutable materialization, manual-trigger exclusion and automatic read-only exact-SHA production closeout. No L3/L4 action or search submission is enabled."
+        },
+        {
+          "at": "2026-08-27T04:56:43Z",
+          "status": "pr_open",
+          "summary": "Opened focused PR #3817 from validated implementation commit 857564d82d80715db39d4dac15e43047b1c8d10c."
+        }
+      ]
+    },
+    "SEO-PLATFORM-09-E": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "merged",
       "branch": "codex/seo-platform-09-e-weekly-workbench",
-      "commit_sha": "c8701cb3ed738d67cfd23601491083427b6b1769",
+      "commit_sha": "c0a0adf016f1b9c4388bd09ebe5bfe1d773e0989",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3816",
       "checks": {
         "dependency": {
@@ -25,14 +71,26 @@
             "details": "11 tests and 106 assertions cover ISO week identity, default 3, hard maximum 5, true 0-5 without padding, HOLD/stale exclusion, deterministic priority order, protected read API and exact API/UI order-count-selection_revision parity."
           }
         ],
-        "github": [],
-        "production": []
+        "github": [
+          {
+            "name": "CI / exact-SHA validation receipt",
+            "status": "passed",
+            "details": "Main push run 33038910837 completed successfully for c0a0adf016f1b9c4388bd09ebe5bfe1d773e0989."
+          }
+        ],
+        "production": [
+          {
+            "name": "automatic staging and production deployment",
+            "status": "passed",
+            "details": "Deploy run 33039179011 completed staging, production activation and smoke successfully."
+          }
+        ]
       },
       "failure_reason": null,
       "resume_policy": "continuous_goal",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-08-27T04:16:24Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "database_mutation": false,
       "cms_mutation": false,
@@ -49,6 +107,11 @@
           "at": "2026-08-27T04:15:56Z",
           "status": "pr_open",
           "summary": "Opened focused PR #3816 from implementation commit c8701cb3ed738d67cfd23601491083427b6b1769; exact scope reuses the existing Workbench and contains no scheduler, receipt or production operation."
+        },
+        {
+          "at": "2026-08-27T04:54:16Z",
+          "status": "merged",
+          "summary": "PR #3816 squash-merged as c0a0adf016f1b9c4388bd09ebe5bfe1d773e0989. Exact-SHA CI and automatic staging/production deployment passed; remote/local task cleanup completed."
         }
       ]
     },

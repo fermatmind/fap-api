@@ -103,7 +103,7 @@ final class SeoWeeklyDecisionSelector
     private function selectionRevision(string $isoWeek, array $decisions): string
     {
         $identities = array_map(
-            fn (array $card): string => (string) ($card['decision_revision_id'] ?? ''),
+            fn (array $card): string => (string) ($card['decision_card_id'] ?? ''),
             $decisions,
         );
 
