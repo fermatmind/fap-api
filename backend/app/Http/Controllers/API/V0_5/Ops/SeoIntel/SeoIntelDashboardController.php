@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API\V0_5\Ops\SeoIntel;
 
+use App\Services\SeoIntel\Ledger\SeoLedgerSnapshotReadService;
 use App\Services\SeoIntel\OpsDashboard\SeoDashboardApiReadService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ final class SeoIntelDashboardController
 {
     public function __construct(
         private readonly SeoDashboardApiReadService $readService,
+        private readonly SeoLedgerSnapshotReadService $ledgerReadService,
     ) {}
 
     public function overview(): JsonResponse
@@ -61,6 +63,22 @@ final class SeoIntelDashboardController
             $this->safeFilters($request),
             $this->limit($request),
         ));
+    }
+
+    public function experimentLedger(Request $request): JsonResponse
+    {
+        $page = max(1, (int) $request->query('page', 1));
+        $snapshot = $this->ledgerReadService->snapshot($page, $this->limit($request));
+
+        return response()->json([
+            'ok' => true,
+            'data' => $snapshot,
+            'meta' => [
+                'contract_version' => SeoLedgerSnapshotReadService::CONTRACT_VERSION,
+                'read_only' => true,
+                'authority' => 'fap-api seo change ledger',
+            ],
+        ]);
     }
 
     /**
