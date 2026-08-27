@@ -158,6 +158,7 @@ try {
     foreach (['package', 'authority', 'public_readback', 'manual_hold_verified', 'idempotent_noop', 'write_counts', 'state_sha256'] as $key) {
         $receipt[$key] = $result[$key];
     }
+    $receipt['authority']['component_28_count'] = $result['authority']['valid_component_order_count'] ?? null;
     if (($result['package']['source_format'] ?? null) !== 'sharded'
         || ! hash_equals(
             $assetsSha256,

@@ -67,7 +67,12 @@ final class CareerCurrentAuthorityReleaseIntentTest extends TestCase
         self::assertStringContainsString('.classification.operations.career_current_authority_release == true', $workflow);
         self::assertStringContainsString('verify_career_current_authority_release.sh', $workflow);
         self::assertStringContainsString('source_merge_sha == $source', $workflow);
+        self::assertStringContainsString('.authority.component_28_count == 1046', $workflow);
         self::assertStringContainsString('automatic_retry_allowed == false', $workflow);
+        self::assertStringContainsString(
+            "\$receipt['authority']['component_28_count'] = \$result['authority']['valid_component_order_count'] ?? null;",
+            $publisher,
+        );
         self::assertStringContainsString(
             "'career-current-authority|'.\$sourceMergeSha.'|'.\$assetsSha256.'|'.\$versionlessProjectionSha256",
             $publisher,
