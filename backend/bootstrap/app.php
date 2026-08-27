@@ -53,6 +53,14 @@ return Application::configure(basePath: dirname(__DIR__))
         \App\Console\Commands\ActivateBigFiveReportUnlockCommerce::class,
     ])
     ->withSchedule(function (Schedule $schedule): void {
+        // Keep the exact weekly natural tick ahead of other due work so a slow
+        // minute/5/10/15-minute task cannot push receipt creation off-slot.
+        $schedule->command('seo:weekly-decisions --trigger=scheduled --json')
+            ->weeklyOn(4, '12:10')
+            ->withoutOverlapping(120)
+            ->name('seo-weekly-decisions:'.substr(hash('sha256', (string) config('app.url')), 0, 16))
+            ->onOneServer()
+            ->runInBackground();
         $schedule->command('storage:prune --execute --scope=reports_backups --strategy=strict')->dailyAt('03:10')->withoutOverlapping();
         $schedule->command('storage:prune --execute --scope=content_releases_retention')->dailyAt('03:20')->withoutOverlapping();
         $schedule->command('storage:prune --execute --scope=legacy_private_private_cleanup')->dailyAt('03:30')->withoutOverlapping();
@@ -99,11 +107,6 @@ return Application::configure(basePath: dirname(__DIR__))
         $schedule->command('seo:runtime-probe-scheduled --trigger=scheduled --json')
             ->everyTenMinutes()
             ->withoutOverlapping()
-            ->onOneServer();
-        $schedule->command('seo:weekly-decisions --trigger=scheduled --json')
-            ->weeklyOn(4, '11:00')
-            ->withoutOverlapping(120)
-            ->name('seo-weekly-decisions:'.substr(hash('sha256', (string) config('app.url')), 0, 16))
             ->onOneServer();
         $schedule->command('seo-intel:url-truth-controlled-reconcile --execute --no-http --max-records=5000 --batch-size=250')
             ->dailyAt('02:40')
