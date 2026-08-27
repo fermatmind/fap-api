@@ -22,15 +22,17 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
 {
     use RefreshDatabase;
 
-    private const MANIFEST_SHA = 'eb9a0254600991e2b4d7967b7c4d46c27d604719d8c40ba63353a20cd50a96e7';
+    private const MANIFEST_SHA = '6fa5fb22df81062fed26ebf7743cd24c0e42f67c28d5b5ef2d61f7ec7fd3e13c';
 
     public function test_snapshot_then_locked_preflight_emit_complete_zero_write_contract_for_all_fifteen_targets(): void
     {
         $this->seedBatch('ALL');
         $before = $this->publicFingerprint('ALL');
 
-        $this->assertSame(0, Artisan::call('articles:article15-exact-package', $this->snapshotOptions()));
-        $snapshot = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+        $exitCode = Artisan::call('articles:article15-exact-package', $this->snapshotOptions());
+        $output = Artisan::output();
+        $this->assertSame(0, $exitCode, $output);
+        $snapshot = json_decode($output, true, 512, JSON_THROW_ON_ERROR);
         $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $snapshot['state_sha256']);
         $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $snapshot['revision_set_sha256']);
         $options = $this->commandOptions('preflight', 'ALL');
@@ -46,6 +48,11 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
         $this->assertSame(0, $payload['unknown']);
         $this->assertSame(0, $payload['revision_drift']);
         $this->assertSame(0, $payload['package_sha_mismatch']);
+        $this->assertSame(0, $payload['revision_body_drift']);
+        $this->assertSame(0, $payload['public_body_drift']);
+        $this->assertSame(0, $payload['keep_body_writes']);
+        $this->assertSame(15, $payload['approved']);
+        $this->assertSame('article-public-payload.v1', $payload['projection_contract_version']);
         $this->assertSame(0, $payload['public_mutations']);
         $this->assertSame($snapshot['database_row_counts'], $payload['database_row_counts']);
         $this->assertSame([
@@ -60,10 +67,10 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
         $this->assertSame(['changed' => 9, 'unchanged' => 6], $payload['field_counts']['effective']['body']);
         $this->assertSame(['changed' => 2, 'unchanged' => 13], $payload['field_counts']['effective']['SEO title']);
         $this->assertSame(['changed' => 4, 'unchanged' => 11], $payload['field_counts']['effective']['SEO description']);
-        $this->assertSame(['changed' => 3, 'unchanged' => 12], $payload['field_counts']['effective']['FAQ']);
-        $this->assertSame(['changed' => 13, 'unchanged' => 2], $payload['field_counts']['effective']['CTA']);
+        $this->assertSame(['changed' => 5, 'unchanged' => 10], $payload['field_counts']['effective']['FAQ']);
+        $this->assertSame(['changed' => 10, 'unchanged' => 5], $payload['field_counts']['effective']['CTA']);
         $this->assertSame(['changed' => 10, 'unchanged' => 5], $payload['field_counts']['effective']['reading minutes']);
-        $this->assertSame(['changed' => 5, 'unchanged' => 10], $payload['field_counts']['effective']['related test']);
+        $this->assertSame(['changed' => 4, 'unchanged' => 11], $payload['field_counts']['effective']['related test']);
         $this->assertCount(15, $payload['expected_readback']);
         foreach ($payload['expected_readback'] as $expected) {
             $this->assertSame(1, $expected['cta_count']);
@@ -153,12 +160,12 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
     {
         $target = $this->targets('A')[0];
         $adapter = app(Article15ExactPackageRevisionBoundAdapter::class);
-        $bodyPath = dirname(base_path()).'/'.dirname($target['package_path']).'/'.basename(data_get($target, 'package.body_patch.body_file'));
+        $bodyPath = dirname(base_path()).'/'.dirname($target['package_path']).'/'.basename((string) data_get($target, 'package.body_write_plan.proposed_cms_file'));
         $body = file_get_contents($bodyPath);
         $this->assertIsString($body);
-        $this->assertTrue($adapter->packageDigestMatches($target, $target['package'], $body));
-        $this->assertFalse($adapter->packageDigestMatches($target, [...$target['package'], 'title' => 'forged'], $body));
-        $this->assertFalse($adapter->packageDigestMatches($target, $target['package'], 'forged body'));
+        $this->assertTrue($adapter->packageDigestMatches($target, $target['raw_package'], $body));
+        $this->assertFalse($adapter->packageDigestMatches($target, [...$target['raw_package'], 'title' => 'forged'], $body));
+        $this->assertFalse($adapter->packageDigestMatches($target, $target['raw_package'], 'forged body'));
     }
 
     public function test_snapshot_reports_package_mismatch_as_failed_target_integrity(): void
@@ -169,6 +176,40 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
     public function test_snapshot_reports_body_mismatch_as_failed_target_integrity(): void
     {
         $this->assertSnapshotIntegrityMismatch('body');
+    }
+
+    public function test_approval_manifest_review_and_projection_contract_forgery_fail_closed(): void
+    {
+        $this->seedBatch('ALL');
+        foreach (['approval', 'final_manifest', 'review', 'projection_contract'] as $mutation) {
+            $root = $this->isolatedPackageRepository($mutation);
+            config(['article15_test.repository_root' => $root]);
+
+            $this->assertSame(1, Artisan::call('articles:article15-exact-package', $this->snapshotOptions()), $mutation);
+            $this->assertSame(0, ArticleEditorialPackageImport::query()->count(), $mutation);
+            config(['article15_test.repository_root' => null]);
+            File::deleteDirectory($root);
+        }
+    }
+
+    public function test_forged_revision_and_projection_body_locks_fail_closed_independently(): void
+    {
+        $this->seedBatch('ALL');
+        foreach (['revision_lock', 'public_projection_lock'] as $mutation) {
+            $root = $this->isolatedPackageRepository($mutation);
+            config(['article15_test.repository_root' => $root]);
+            $manifest = json_decode(file_get_contents($root.'/'.Article15ExactPackageRevisionBoundAdapter::MANIFEST_PATH), true, 512, JSON_THROW_ON_ERROR);
+
+            $options = $this->snapshotOptions();
+            $options['--execution-manifest-sha256'] = $manifest['execution_manifest_sha256'];
+            $this->assertSame(1, Artisan::call('articles:article15-exact-package', $options), $mutation);
+            $payload = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+            $this->assertStringContainsString('package_dual_body_lock_mismatch', (string) $payload['error'], $mutation);
+            $this->assertSame(0, ArticleEditorialPackageImport::query()->count(), $mutation);
+
+            config(['article15_test.repository_root' => null]);
+            File::deleteDirectory($root);
+        }
     }
 
     public function test_target_inventory_rejects_missing_extra_duplicate_and_order_drift(): void
@@ -211,11 +252,12 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
     public function test_current_body_hash_drift_fails_closed_without_writes(): void
     {
         $this->seedBatch('A');
-        config(['article15_test.skip_synthetic_current_body_lock' => false]);
+        ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', 58)
+            ->update(['content_md' => 'forged revision raw body']);
         $options = $this->commandOptions('draft-import', 'A', true);
 
         $this->assertSame(1, Artisan::call('articles:article15-exact-package', $options));
-        $this->assertStringContainsString('current_value_drift:body_markdown', Artisan::output());
+        $this->assertStringContainsString('revision_body_drift', Artisan::output());
         $this->assertSame(0, ArticleEditorialPackageImport::query()->count());
     }
 
@@ -249,6 +291,30 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
         $this->assertSame(5, ArticleEditorialPackageImport::query()->count());
         $this->assertSame(10, ArticleTranslationRevision::query()->count());
         $this->assertStringContainsString('unchanged', Artisan::output());
+    }
+
+    public function test_all_partitions_create_exact_change_bodies_and_zero_keep_working_revision_bodies(): void
+    {
+        $this->seedBatch('ALL');
+
+        foreach (['A', 'B', 'C'] as $batch) {
+            $exitCode = Artisan::call('articles:article15-exact-package', $this->commandOptions('draft-import', $batch, true));
+            $this->assertSame(0, $exitCode, Artisan::output());
+        }
+
+        foreach ($this->targets('ALL') as $target) {
+            $article = Article::query()->withoutGlobalScopes()->with('workingRevision')->findOrFail($target['article_id']);
+            if ($target['decision'] === 'KEEP') {
+                $this->assertSame($article->published_revision_id, $article->working_revision_id);
+                $this->assertSame(0, ArticleEditorialPackageImport::query()->where('article_id', $article->id)->count());
+
+                continue;
+            }
+            $this->assertNotSame($article->published_revision_id, $article->working_revision_id);
+            $this->assertSame($target['proposed_body_sha256'], hash('sha256', (string) $article->workingRevision?->content_md));
+            $this->assertSame(1, ArticleEditorialPackageImport::query()->where('article_id', $article->id)->count());
+        }
+        $this->assertSame(9, ArticleEditorialPackageImport::query()->count());
     }
 
     public function test_draft_import_rolls_back_all_five_when_one_working_revision_collides(): void
@@ -287,7 +353,11 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
             $this->assertSame(data_get($target, 'package.current_to_proposed.reading_minutes.proposed'), $article->reading_minutes);
             $this->assertSame(data_get($target, 'package.current_to_proposed.related_test_slug.proposed'), $article->related_test_slug);
             $this->assertSame(data_get($target, 'package.current_to_proposed.answer_surface_v1.proposed.faq_items'), data_get($article->seoMeta?->schema_json, 'editorial_package_v1.answer_surface_v1.faq_items'));
-            $this->assertCount(1, (array) data_get($article->seoMeta?->schema_json, 'editorial_package_v1.cta_slots'));
+            $this->assertSame(
+                data_get($target, 'package.current_to_proposed.primary_cta.proposed'),
+                data_get($article->seoMeta?->schema_json, 'editorial_package_v1.cta_slots')
+            );
+            $this->assertCount(1, (array) data_get($target, 'package.field_plan.primary_cta.effective_primary'));
             $this->assertSame('/images/preserved.webp', data_get($article->cover_image_variants, 'preserved_media.src'));
             $this->assertNull(data_get($article->cover_image_variants, 'editorial_package_v1'));
             $this->assertSame('published', data_get($article->publishedRevision?->authority_metadata_json, 'article15_exact_package_v1.status'));
@@ -308,7 +378,7 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
         $this->assertSame(0, $exitCode, Artisan::output());
         $before = $this->publicFingerprint('C');
         $options = $this->commandOptions('publish', 'C', true);
-        $article = Article::query()->withoutGlobalScopes()->with('workingRevision')->findOrFail(61);
+        $article = Article::query()->withoutGlobalScopes()->with('workingRevision')->findOrFail(31);
         $article->workingRevision->forceFill(['content_md' => 'forged working body'])->save();
 
         $this->assertSame(1, Artisan::call('articles:article15-exact-package', $options));
@@ -324,7 +394,8 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
             $this->seedBatch($batch);
             $exitCode = Artisan::call('articles:article15-exact-package', $this->commandOptions('draft-import', $batch, true));
             $this->assertSame(0, $exitCode, Artisan::output());
-            $this->assertSame(0, Artisan::call('articles:article15-exact-package', $this->commandOptions('publish', $batch, true)));
+            $publishExit = Artisan::call('articles:article15-exact-package', $this->commandOptions('publish', $batch, true));
+            $this->assertSame(0, $publishExit, Artisan::output());
         }
 
         foreach ([[50, 7], [61, 8]] as [$id, $count]) {
@@ -375,7 +446,10 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
 
     private function seedBatch(string $batch): void
     {
-        config(['article15_test.skip_synthetic_current_body_lock' => true]);
+        config([
+            'article15_test.skip_synthetic_current_body_lock' => false,
+            'article15_test.skip_manifest_production_lock' => true,
+        ]);
 
         foreach ($this->targets($batch) as $target) {
             $package = $target['package'];
@@ -390,7 +464,7 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
                 'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
                 'title' => data_get($current, 'title.current'),
                 'excerpt' => data_get($current, 'intro.current'),
-                'content_md' => 'baseline body '.$target['article_id'],
+                'content_md' => $this->revisionRawBody($target),
                 'content_html' => '<p>baseline body</p>',
                 'cover_image_variants' => [
                     'preserved_media' => ['src' => '/images/preserved.webp'],
@@ -422,7 +496,7 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
                 'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
                 'title' => data_get($current, 'title.current'),
                 'excerpt' => data_get($current, 'intro.current'),
-                'content_md' => 'baseline body '.$target['article_id'],
+                'content_md' => $this->revisionRawBody($target),
                 'seo_title' => data_get($current, 'seo_title.current'),
                 'seo_description' => data_get($current, 'seo_description.current'),
                 'published_at' => now()->subDay(),
@@ -455,7 +529,9 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
             static fn (array $target): bool => $batch === 'ALL' || $target['batch'] === $batch
         ));
         foreach ($targets as &$target) {
-            $target['package'] = json_decode(file_get_contents(dirname(base_path()).'/'.$target['package_path']), true, 512, JSON_THROW_ON_ERROR);
+            $raw = json_decode(file_get_contents(dirname(base_path()).'/'.$target['package_path']), true, 512, JSON_THROW_ON_ERROR);
+            $target['raw_package'] = $raw;
+            $target['package'] = $this->normalizePackageForTest($raw, $target);
         }
 
         return $targets;
@@ -514,14 +590,21 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
         $sourceRoot = dirname(base_path());
         $root = storage_path('framework/testing/article15-'.$mutation.'-'.bin2hex(random_bytes(4)));
         $manifest = $this->manifest();
-        $paths = [Article15ExactPackageRevisionBoundAdapter::MANIFEST_PATH];
-        foreach ((array) $manifest['batches'] as $batch) {
-            $paths[] = (string) $batch['manifest_path'];
-        }
+        $paths = [
+            Article15ExactPackageRevisionBoundAdapter::MANIFEST_PATH,
+            (string) data_get($manifest, 'bindings.approval_manifest_path'),
+            (string) data_get($manifest, 'bindings.final_manifest_path'),
+            (string) data_get($manifest, 'bindings.review_artifact_path'),
+            ...array_keys((array) data_get($manifest, 'bindings.projection_contract.implementation_file_sha256', [])),
+        ];
         foreach ((array) $manifest['targets'] as $target) {
             $paths[] = (string) $target['package_path'];
             $package = json_decode(file_get_contents($sourceRoot.'/'.$target['package_path']), true, 512, JSON_THROW_ON_ERROR);
-            $paths[] = dirname((string) $target['package_path']).'/'.basename((string) data_get($package, 'body_patch.body_file'));
+            $locale = (string) data_get($package, 'identity_lock.locale');
+            $paths[] = dirname((string) $target['package_path']).'/current.public.'.$locale.'.md';
+            if (($target['decision'] ?? null) === 'CHANGE') {
+                $paths[] = dirname((string) $target['package_path']).'/'.basename((string) data_get($package, 'body_write_plan.proposed_cms_file'));
+            }
         }
         foreach (array_unique($paths) as $path) {
             File::ensureDirectoryExists(dirname($root.'/'.$path));
@@ -534,10 +617,30 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
             $package = json_decode(file_get_contents($packagePath), true, 512, JSON_THROW_ON_ERROR);
             $package['test_only_forgery'] = true;
             File::put($packagePath, json_encode($package, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
-        } else {
+        } elseif ($mutation === 'body') {
             $package = json_decode(file_get_contents($packagePath), true, 512, JSON_THROW_ON_ERROR);
-            $bodyPath = dirname($packagePath).'/'.basename((string) data_get($package, 'body_patch.body_file'));
+            $bodyPath = dirname($packagePath).'/'.basename((string) data_get($package, 'body_write_plan.proposed_cms_file'));
             File::append($bodyPath, "\ntest-only-forgery\n");
+        } elseif (in_array($mutation, ['approval', 'final_manifest', 'review'], true)) {
+            $binding = match ($mutation) {
+                'approval' => 'approval_manifest_path',
+                'final_manifest' => 'final_manifest_path',
+                default => 'review_artifact_path',
+            };
+            File::append($root.'/'.data_get($manifest, 'bindings.'.$binding), "\n");
+        } elseif ($mutation === 'projection_contract') {
+            $projectionPath = array_key_first((array) data_get($manifest, 'bindings.projection_contract.implementation_file_sha256'));
+            $this->assertIsString($projectionPath);
+            File::append($root.'/'.$projectionPath, "\n");
+        } elseif (in_array($mutation, ['revision_lock', 'public_projection_lock'], true)) {
+            $field = $mutation === 'revision_lock' ? 'revision_raw_body_sha256' : 'public_projection_body_sha256';
+            $manifest['targets'][0][$field] = str_repeat('0', 64);
+            unset($manifest['execution_manifest_sha256']);
+            $manifest['execution_manifest_sha256'] = $this->canonicalHashForTest($manifest);
+            File::put(
+                $root.'/'.Article15ExactPackageRevisionBoundAdapter::MANIFEST_PATH,
+                json_encode($manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)."\n"
+            );
         }
 
         return $root;
@@ -555,5 +658,77 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
         $this->assertFalse($payload['ok']);
         $this->assertSame(1, $payload['package_sha_mismatch']);
         $this->assertSame(0, $payload['public_mutations']);
+    }
+
+    /** @param array<string,mixed> $package @param array<string,mixed> $target @return array<string,mixed> */
+    private function normalizePackageForTest(array $package, array $target): array
+    {
+        $fields = (array) ($package['field_plan'] ?? []);
+        $patch = static fn (array $field, string $current = 'current'): array => [
+            'status' => (string) ($field['status'] ?? ''),
+            'current' => $field[$current] ?? null,
+            'proposed' => $field['proposed'] ?? null,
+        ];
+        $normalized = [];
+        foreach (['title', 'h1', 'intro', 'seo_title', 'seo_description', 'reading_minutes', 'related_test_slug'] as $field) {
+            $normalized[$field] = $patch((array) ($fields[$field] ?? []));
+        }
+        $normalized['body_markdown'] = [
+            'status' => (string) data_get($fields, 'body_markdown.status'),
+            'current' => ['sha256' => (string) $target['public_projection_body_sha256']],
+            'proposed' => ['sha256' => $target['proposed_body_sha256'] ?? $target['public_projection_body_sha256']],
+        ];
+        $normalized['faq'] = $patch((array) ($fields['faq_visible_body'] ?? []));
+        $answerSurface = $patch((array) ($fields['answer_surface_v1'] ?? []), 'current_public_api');
+        $normalized['answer_surface_v1'] = [
+            ...$answerSurface,
+            'current' => ['faq_items' => (array) $answerSurface['current']],
+            'proposed' => ['faq_items' => (array) $answerSurface['proposed']],
+        ];
+        $normalized['primary_cta'] = $patch((array) ($fields['primary_cta'] ?? []), 'current_public_api');
+        $normalized['publication'] = [
+            'status' => 'KEEP',
+            'current' => ['status' => 'published', 'is_public' => true],
+            'proposed' => ['status' => 'published', 'is_public' => true],
+        ];
+
+        return [...$package, 'current_to_proposed' => $normalized];
+    }
+
+    /** @param array<string,mixed> $target */
+    private function revisionRawBody(array $target): string
+    {
+        $package = (array) $target['raw_package'];
+        $locale = (string) data_get($package, 'identity_lock.locale');
+        $path = dirname(base_path()).'/'.dirname((string) $target['package_path']).'/current.public.'.$locale.'.md';
+        $public = (string) file_get_contents($path);
+        if (hash('sha256', $public) === (string) $target['revision_raw_body_sha256']) {
+            return $public;
+        }
+        $raw = preg_replace('/^## /', '# ', $public, 1);
+        $this->assertIsString($raw);
+        $this->assertSame((string) $target['revision_raw_body_sha256'], hash('sha256', $raw));
+
+        return $raw;
+    }
+
+    private function canonicalHashForTest(mixed $value): string
+    {
+        $canonicalize = function (mixed $item) use (&$canonicalize): mixed {
+            if (! is_array($item)) {
+                return $item;
+            }
+            if (array_is_list($item)) {
+                return array_map($canonicalize, $item);
+            }
+            ksort($item, SORT_STRING);
+            foreach ($item as $key => $nested) {
+                $item[$key] = $canonicalize($nested);
+            }
+
+            return $item;
+        };
+
+        return hash('sha256', json_encode($canonicalize($value), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
     }
 }

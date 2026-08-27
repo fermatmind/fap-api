@@ -11,11 +11,12 @@ use App\Models\ArticleTranslationRevision;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
+/** @review-surface article */
 final class Article15ExactPackageRevisionBoundAdapter
 {
-    public const EXECUTION_ID = 'ARTICLE15-EXACT-PACKAGE-REVISION-BOUND-20260826-v1';
+    public const EXECUTION_ID = 'ARTICLE15-EXACT-PACKAGE-V2.1-REVISION-BOUND-20260827';
 
-    public const MANIFEST_PATH = 'backend/docs/seo/content-packages/article15-exact-package-revision-bound-20260826/manifest.json';
+    public const MANIFEST_PATH = 'backend/docs/seo/content-packages/article15-exact-package-v2.1-revision-bound-20260827/manifest.json';
 
     private const METADATA_KEY = 'article15_exact_package_v1';
 
@@ -56,6 +57,17 @@ final class Article15ExactPackageRevisionBoundAdapter
         $context = $this->loadContext($batch);
         $this->assertHashOption('execution_manifest_sha256', (string) ($options['execution_manifest_sha256'] ?? ''), (string) $context['manifest_sha256']);
         $observation = $this->observeTargets($context['targets']);
+        $enforceProductionBaseline = $batch === 'ALL'
+            && in_array($phase, ['snapshot', 'preflight'], true)
+            && ! (app()->environment('testing') && config('article15_test.skip_manifest_production_lock') === true);
+        $productionStateDrift = $enforceProductionBaseline && ! hash_equals(
+            (string) data_get($context, 'manifest.bindings.production_state_sha256', ''),
+            $observation['state_sha256']
+        ) ? 1 : 0;
+        $productionRevisionSetDrift = $enforceProductionBaseline && ! hash_equals(
+            (string) data_get($context, 'manifest.bindings.production_revision_set_sha256', ''),
+            $observation['revision_set_sha256']
+        ) ? 1 : 0;
         $locks = [
             'state_sha256' => $observation['state_sha256'],
             'revision_set_sha256' => $observation['revision_set_sha256'],
@@ -69,6 +81,10 @@ final class Article15ExactPackageRevisionBoundAdapter
             'unknown' => $observation['unknown'],
             'revision_drift' => $observation['revision_drift'],
             'package_sha_mismatch' => $context['package_sha_mismatch'],
+            'revision_body_drift' => $observation['revision_body_drift'],
+            'public_body_drift' => $observation['public_body_drift'],
+            'production_state_drift' => $productionStateDrift,
+            'production_revision_set_drift' => $productionRevisionSetDrift,
             'public_authority_drift' => $observation['public_authority_drift'],
         ];
         $alreadyPublished = in_array($phase, ['publish', 'readback'], true)
@@ -77,6 +93,10 @@ final class Article15ExactPackageRevisionBoundAdapter
             && $this->allPublishedExact($context['targets']);
         $baselineValidation = [
             'revision_drift' => $validation['revision_drift'],
+            'revision_body_drift' => $validation['revision_body_drift'],
+            'public_body_drift' => $validation['public_body_drift'],
+            'production_state_drift' => $validation['production_state_drift'],
+            'production_revision_set_drift' => $validation['production_revision_set_drift'],
             'public_authority_drift' => $validation['public_authority_drift'],
         ];
         $immutableValidation = [
@@ -98,6 +118,11 @@ final class Article15ExactPackageRevisionBoundAdapter
             ...$locks,
             'target' => count($context['targets']),
             'target_count' => count($context['targets']),
+            'approved' => (int) data_get($context, 'approval.summary.approved', 0),
+            'keep_body_writes' => 0,
+            'projection_contract_version' => (string) data_get($context, 'manifest.hash_contract.projection_contract_version', ''),
+            'approval_manifest_sha256' => (string) data_get($context, 'manifest.bindings.approval_manifest_declared_sha256', ''),
+            'exact_package_set_sha256' => (string) data_get($context, 'manifest.bindings.exact_package_set_sha256', ''),
             ...$validation,
             'public_authority_errors' => $observation['public_authority_errors'],
             'public_mutations' => 0,
@@ -163,7 +188,8 @@ final class Article15ExactPackageRevisionBoundAdapter
     /** @return array<string,mixed> */
     private function loadContext(string $batch): array
     {
-        $manifest = $this->readJson($this->repoPath(self::MANIFEST_PATH));
+        $manifestPath = $this->repoPath(self::MANIFEST_PATH);
+        $manifest = $this->readJson($manifestPath);
         if (($manifest['execution_id'] ?? null) !== self::EXECUTION_ID) {
             throw new RuntimeException('execution_manifest_id_mismatch');
         }
@@ -174,6 +200,45 @@ final class Article15ExactPackageRevisionBoundAdapter
         if (! hash_equals($storedSha, $this->canonicalHash($hashable))) {
             throw new RuntimeException('execution_manifest_sha256_mismatch');
         }
+
+        $bindings = (array) ($manifest['bindings'] ?? []);
+        $approval = $this->readBoundJson(
+            (string) ($bindings['approval_manifest_path'] ?? ''),
+            (string) ($bindings['approval_manifest_file_sha256'] ?? ''),
+            'approval_manifest_file_sha256_mismatch'
+        );
+        $this->assertDeclaredObjectHash(
+            $approval,
+            'approval_manifest_sha256',
+            (string) ($bindings['approval_manifest_declared_sha256'] ?? ''),
+            'approval_manifest_declared_sha256_mismatch'
+        );
+        if ((int) data_get($approval, 'summary.target', 0) !== 15
+            || (int) data_get($approval, 'summary.approved', 0) !== 15
+            || (int) data_get($approval, 'summary.revise', -1) !== 0
+            || (int) data_get($approval, 'summary.hold', -1) !== 0
+            || data_get($approval, 'status.editorial_approved') !== true) {
+            throw new RuntimeException('approval_manifest_not_fully_approved');
+        }
+
+        $finalManifest = $this->readBoundJson(
+            (string) ($bindings['final_manifest_path'] ?? ''),
+            (string) ($bindings['final_manifest_file_sha256'] ?? ''),
+            'final_manifest_file_sha256_mismatch'
+        );
+        $this->assertDeclaredObjectHash(
+            $finalManifest,
+            'manifest_sha256',
+            (string) ($bindings['final_manifest_declared_sha256'] ?? ''),
+            'final_manifest_declared_sha256_mismatch'
+        );
+        $review = $this->readBoundJson(
+            (string) ($bindings['review_artifact_path'] ?? ''),
+            (string) ($bindings['review_artifact_file_sha256'] ?? ''),
+            'review_artifact_file_sha256_mismatch'
+        );
+        $this->assertAuthorityChain($manifest, $finalManifest, $review, $approval);
+        $this->assertProjectionContract($manifest);
 
         $targets = (array) ($manifest['targets'] ?? []);
         $this->assertTargetInventory($targets);
@@ -195,6 +260,7 @@ final class Article15ExactPackageRevisionBoundAdapter
         return [
             'manifest' => $manifest,
             'manifest_sha256' => $storedSha,
+            'approval' => $approval,
             'targets' => $selected,
             'package_sha_mismatch' => count($selected) - count($validPackages),
         ];
@@ -238,48 +304,34 @@ final class Article15ExactPackageRevisionBoundAdapter
     /** @param array<string,mixed> $manifest @return list<array<string,mixed>> */
     private function validateFrozenPackages(array $manifest): array
     {
-        $manifestTargets = array_values((array) ($manifest['targets'] ?? []));
         $observedTargets = [];
 
-        foreach ((array) ($manifest['batches'] ?? []) as $batch) {
-            if (! is_array($batch)) {
-                throw new RuntimeException('batch_manifest_entry_invalid');
+        foreach ((array) ($manifest['targets'] ?? []) as $pinned) {
+            if (! is_array($pinned)) {
+                throw new RuntimeException('source_target_invalid');
             }
-            $source = $this->readJson($this->repoPath((string) ($batch['manifest_path'] ?? '')));
-            $sourceHashable = $source;
-            $sourceSha = (string) ($sourceHashable['batch_manifest_sha256'] ?? '');
-            unset($sourceHashable['batch_manifest_sha256']);
-            if (! hash_equals((string) ($batch['manifest_sha256'] ?? ''), $sourceSha)
-                || ! hash_equals($sourceSha, $this->canonicalHash($sourceHashable))) {
-                throw new RuntimeException('batch_manifest_sha256_mismatch:'.(string) ($batch['batch'] ?? ''));
-            }
-            if (($source['content_package_only'] ?? false) !== true
-                || ($source['permissions']['cms_import'] ?? true) !== false
-                || ($source['permissions']['publication'] ?? true) !== false) {
-                throw new RuntimeException('source_batch_permissions_drift');
-            }
-
-            foreach ((array) ($source['packages'] ?? []) as $sourceTarget) {
-                if (! is_array($sourceTarget)) {
-                    throw new RuntimeException('source_target_invalid');
-                }
-                $position = count($observedTargets);
-                $pinned = $manifestTargets[$position] ?? null;
-                if (! is_array($pinned)
-                    || (int) ($pinned['article_id'] ?? 0) !== (int) ($sourceTarget['article_id'] ?? 0)
-                    || (string) ($pinned['package_sha256'] ?? '') !== (string) ($sourceTarget['package_sha256'] ?? '')
-                    || (int) ($pinned['published_revision_id'] ?? 0) !== (int) ($sourceTarget['published_revision_id'] ?? 0)) {
-                    throw new RuntimeException('source_target_order_or_identity_drift');
-                }
-                $package = $this->readJson($this->repoPath((string) $pinned['package_path']));
-                $body = $this->readBodyForPackagePath((string) $pinned['package_path']);
-                $observedTargets[] = [
-                    ...$pinned,
-                    'package' => $package,
-                    'body' => $body,
-                    'package_digest_matches' => $this->packageDigestMatches($pinned, $package, $body),
-                ];
-            }
+            $packagePath = (string) ($pinned['package_path'] ?? '');
+            $packageAbsolute = $this->repoPath($packagePath);
+            $package = $this->readJson($packageAbsolute);
+            $currentPublicBody = $this->readPackageBody($packagePath, $package, false);
+            $proposedBody = ($pinned['decision'] ?? null) === 'CHANGE'
+                ? $this->readPackageBody($packagePath, $package, true)
+                : null;
+            $normalized = $this->normalizePackage($package, $pinned);
+            $body = $proposedBody ?? $currentPublicBody;
+            $observedTargets[] = [
+                ...$pinned,
+                'package' => $normalized,
+                'raw_package' => $package,
+                'body' => $body,
+                'current_public_body' => $currentPublicBody,
+                'package_digest_matches' => $this->packageDigestMatches($pinned, $package, $body)
+                    && hash_equals((string) ($pinned['package_json_file_sha256'] ?? ''), hash_file('sha256', $packageAbsolute))
+                    && hash_equals((string) ($pinned['current_body_sha256'] ?? ''), hash('sha256', $currentPublicBody))
+                    && (($pinned['decision'] ?? null) === 'KEEP'
+                        ? $proposedBody === null && ($pinned['proposed_body_sha256'] ?? null) === null
+                        : is_string($proposedBody) && hash_equals((string) ($pinned['proposed_body_sha256'] ?? ''), hash('sha256', $proposedBody))),
+            ];
         }
 
         if (count($observedTargets) !== 15) {
@@ -299,7 +351,12 @@ final class Article15ExactPackageRevisionBoundAdapter
         return preg_match('/^[a-f0-9]{64}$/', (string) ($target['package_sha256'] ?? '')) === 1
             && hash_equals((string) $target['package_sha256'], $embeddedPackageSha)
             && hash_equals($embeddedPackageSha, $this->canonicalHash($hashable))
-            && hash_equals((string) ($target['body_sha256'] ?? ''), hash('sha256', $body));
+            && hash_equals(
+                (string) (($target['decision'] ?? null) === 'KEEP'
+                    ? $target['current_body_sha256'] ?? ''
+                    : $target['proposed_body_sha256'] ?? ''),
+                hash('sha256', $body)
+            );
     }
 
     /** @param list<array<string,mixed>> $targets */
@@ -317,6 +374,29 @@ final class Article15ExactPackageRevisionBoundAdapter
                 || ($package['status']['import_ready'] ?? true) !== false
                 || ($package['status']['publish_allowed'] ?? true) !== false) {
                 throw new RuntimeException('source_package_readiness_drift');
+            }
+            $decision = (string) ($target['decision'] ?? '');
+            $bodyStatus = (string) data_get($package, 'current_to_proposed.body_markdown.status', '');
+            $writeCount = (int) data_get($package, 'body_write_plan.write_count', -1);
+            if ($decision !== $bodyStatus || ! in_array($decision, ['KEEP', 'CHANGE'], true)) {
+                throw new RuntimeException('body_decision_mismatch:'.(string) $target['article_id']);
+            }
+            if ($decision === 'KEEP') {
+                if ($writeCount !== 0 || ($target['proposed_body_sha256'] ?? null) !== null
+                    || data_get($package, 'body_write_plan.proposed_cms_file') !== null) {
+                    throw new RuntimeException('keep_body_write_forbidden:'.(string) $target['article_id']);
+                }
+            } elseif ($writeCount !== 1
+                || ! hash_equals((string) $target['proposed_body_sha256'], hash('sha256', (string) $target['body']))
+                || ! hash_equals(
+                    (string) data_get($package, 'body_write_plan.projected_public_sha256', ''),
+                    $this->publicProjectionBodySha((string) $target['body'])
+                )) {
+                throw new RuntimeException('change_body_exact_bytes_invalid:'.(string) $target['article_id']);
+            }
+            if (! hash_equals((string) data_get($package, 'baseline_lock.current_revision_body_sha256', ''), (string) $target['revision_raw_body_sha256'])
+                || ! hash_equals((string) data_get($package, 'baseline_lock.current_public_body_sha256', ''), (string) $target['public_projection_body_sha256'])) {
+                throw new RuntimeException('package_dual_body_lock_mismatch:'.(string) $target['article_id']);
             }
             foreach ((array) ($package['current_to_proposed'] ?? []) as $field => $patch) {
                 if (! is_array($patch) || ! in_array(($patch['status'] ?? null), ['KEEP', 'CHANGE'], true)) {
@@ -343,7 +423,7 @@ final class Article15ExactPackageRevisionBoundAdapter
                     throw new RuntimeException('visible_faq_body_parity_invalid:'.(string) $target['article_id']);
                 }
             }
-            $ctas = (array) data_get($package, 'current_to_proposed.primary_cta.proposed', []);
+            $ctas = (array) data_get($package, 'field_plan.primary_cta.effective_primary', []);
             if (count($ctas) !== 1 || ! $this->isPublicCanonicalRoute((string) data_get($ctas, '0.href', ''))) {
                 throw new RuntimeException('primary_cta_invalid:'.(string) $target['article_id']);
             }
@@ -360,7 +440,7 @@ final class Article15ExactPackageRevisionBoundAdapter
 
     /**
      * @param  list<array<string,mixed>>  $targets
-     * @return array{state_sha256:string,revision_set_sha256:string,unknown:int,revision_drift:int,public_authority_drift:int,public_authority_errors:list<string>,live_fields:array<int,array<string,mixed>>,database_row_counts:array<string,int>}
+     * @return array{state_sha256:string,revision_set_sha256:string,unknown:int,revision_drift:int,revision_body_drift:int,public_body_drift:int,public_authority_drift:int,public_authority_errors:list<string>,live_fields:array<int,array<string,mixed>>,database_row_counts:array<string,int>}
      */
     private function observeTargets(array $targets): array
     {
@@ -368,6 +448,8 @@ final class Article15ExactPackageRevisionBoundAdapter
         $revisions = [];
         $unknown = 0;
         $revisionDrift = 0;
+        $revisionBodyDrift = 0;
+        $publicBodyDrift = 0;
         $publicAuthorityDrift = 0;
         $publicAuthorityErrors = [];
         $liveFields = [];
@@ -392,7 +474,7 @@ final class Article15ExactPackageRevisionBoundAdapter
             if (app()->environment('testing') && config('article15_test.skip_synthetic_current_body_lock') === true) {
                 $liveFields[(int) $target['article_id']]['body'] = (string) data_get(
                     $target,
-                    'package.current_to_proposed.body_markdown.current.sha256',
+                    'public_projection_body_sha256',
                     ''
                 );
             }
@@ -410,6 +492,20 @@ final class Article15ExactPackageRevisionBoundAdapter
             } elseif ((int) ($article->published_revision_id ?? 0) !== (int) $target['published_revision_id']) {
                 $revisionDrift++;
             } else {
+                $skipSyntheticTestBodyLock = app()->environment('testing')
+                    && config('article15_test.skip_synthetic_current_body_lock') === true;
+                if (! $skipSyntheticTestBodyLock && ! hash_equals(
+                    (string) ($target['revision_raw_body_sha256'] ?? ''),
+                    hash('sha256', (string) $article->publishedRevision?->content_md)
+                )) {
+                    $revisionBodyDrift++;
+                }
+                if (! $skipSyntheticTestBodyLock && ! hash_equals(
+                    (string) ($target['public_projection_body_sha256'] ?? ''),
+                    $this->publicProjectionBodySha((string) $article->publishedRevision?->content_md)
+                )) {
+                    $publicBodyDrift++;
+                }
                 try {
                     $this->assertOriginalPublicState($article, $target);
                 } catch (RuntimeException $exception) {
@@ -441,6 +537,8 @@ final class Article15ExactPackageRevisionBoundAdapter
             'revision_set_sha256' => $this->canonicalHash($revisions),
             'unknown' => $unknown,
             'revision_drift' => $revisionDrift,
+            'revision_body_drift' => $revisionBodyDrift,
+            'public_body_drift' => $publicBodyDrift,
             'public_authority_drift' => $publicAuthorityDrift,
             'public_authority_errors' => $publicAuthorityErrors,
             'live_fields' => $liveFields,
@@ -516,7 +614,7 @@ final class Article15ExactPackageRevisionBoundAdapter
     {
         return array_map(function (array $target): array {
             $package = (array) $target['package'];
-            $ctas = (array) data_get($package, 'current_to_proposed.primary_cta.proposed', []);
+            $ctas = (array) data_get($package, 'field_plan.primary_cta.effective_primary', []);
             $faq = (array) data_get($package, 'current_to_proposed.answer_surface_v1.proposed.faq_items', []);
 
             return [
@@ -588,6 +686,19 @@ final class Article15ExactPackageRevisionBoundAdapter
                 $article = $locked[(int) $target['article_id']];
                 $this->assertOriginalPublicState($article, $target);
                 $package = (array) $target['package'];
+                if (($target['decision'] ?? null) === 'KEEP') {
+                    if ($article->working_revision_id !== null && $article->published_revision_id !== null
+                        && (int) $article->working_revision_id !== (int) $article->published_revision_id) {
+                        throw new RuntimeException('working_revision_collision:'.(string) $article->id);
+                    }
+                    $actions[] = [
+                        'article_id' => (int) $article->id,
+                        'action' => 'keep_body_write_skipped',
+                        'body_writes' => 0,
+                    ];
+
+                    continue;
+                }
                 $working = $article->workingRevision;
                 $existing = is_array($working?->authority_metadata_json)
                     ? (array) ($working->authority_metadata_json[self::METADATA_KEY] ?? []) : [];
@@ -622,7 +733,7 @@ final class Article15ExactPackageRevisionBoundAdapter
                     'supersedes_revision_id' => (int) $published->id,
                     'authority_asset_key' => (string) ($published->authority_asset_key ?? ''),
                     'authority_source_package' => self::EXECUTION_ID,
-                    'authority_source_hash' => (string) $target['body_sha256'],
+                    'authority_source_hash' => $this->expectedBodySha($target),
                     'authority_package_sha256' => (string) $target['package_sha256'],
                     'authority_metadata_json' => array_replace($metadata, [self::METADATA_KEY => $this->adapterMetadata($target, 'drafted', null)]),
                     'title' => $this->proposedString($package, 'title'),
@@ -669,16 +780,20 @@ final class Article15ExactPackageRevisionBoundAdapter
         $plans = [];
         foreach ($articles as $index => $article) {
             $target = $targets[$index];
-            $working = $article->workingRevision;
-            $this->assertWorkingReadback($working, $target);
-            if (! $working instanceof ArticleTranslationRevision) {
-                throw new RuntimeException('working_revision_missing');
+            $bodyWrite = ($target['decision'] ?? null) === 'CHANGE';
+            $working = $bodyWrite ? $article->workingRevision : $article->publishedRevision;
+            if ($bodyWrite) {
+                $this->assertWorkingReadback($working, $target);
+            } elseif (! $working instanceof ArticleTranslationRevision
+                || (int) $working->id !== (int) $target['published_revision_id']) {
+                throw new RuntimeException('keep_published_revision_missing:'.(string) $target['article_id']);
             }
             $targetsByArticle[(int) $article->id] = $target;
             $plans[] = [
                 'article_id' => (int) $article->id,
                 'working_revision_id' => (int) $working->id,
                 'current_published_revision_id' => (int) $target['published_revision_id'],
+                'body_write' => $bodyWrite,
             ];
         }
 
@@ -689,7 +804,9 @@ final class Article15ExactPackageRevisionBoundAdapter
                 foreach ($targets as $target) {
                     $article = $this->article((int) $target['article_id']);
                     $this->assertOriginalPublicState($article, $target);
-                    $this->assertWorkingReadback($article->workingRevision, $target);
+                    if (($target['decision'] ?? null) === 'CHANGE') {
+                        $this->assertWorkingReadback($article->workingRevision, $target);
+                    }
                 }
 
                 return $locks;
@@ -709,7 +826,13 @@ final class Article15ExactPackageRevisionBoundAdapter
                     'cta_slots' => (array) data_get($package, 'current_to_proposed.primary_cta.proposed', []),
                     self::METADATA_KEY => $publishedMetadata,
                 ]);
-                $seo->forceFill(['schema_json' => $schema])->save();
+                $seo->forceFill([
+                    'seo_title' => $this->proposedString($package, 'seo_title'),
+                    'seo_description' => $this->proposedString($package, 'seo_description'),
+                    'og_title' => $this->proposedString($package, 'seo_title'),
+                    'og_description' => $this->proposedString($package, 'seo_description'),
+                    'schema_json' => $schema,
+                ])->save();
                 $metadata = is_array($working->authority_metadata_json) ? $working->authority_metadata_json : [];
                 $metadata[self::METADATA_KEY] = $publishedMetadata;
                 $working->forceFill(['authority_metadata_json' => $metadata])->save();
@@ -725,6 +848,8 @@ final class Article15ExactPackageRevisionBoundAdapter
                     $variants['editorial_package_v1'] = $variantEditorial;
                 }
                 $article->forceFill([
+                    'title' => $this->proposedString($package, 'title'),
+                    'excerpt' => $this->proposedString($package, 'intro'),
                     'cover_image_variants' => $variants,
                     'reading_minutes' => (int) data_get($package, 'current_to_proposed.reading_minutes.proposed'),
                     'related_test_slug' => $this->nullableString(data_get($package, 'current_to_proposed.related_test_slug.proposed')),
@@ -834,15 +959,20 @@ final class Article15ExactPackageRevisionBoundAdapter
             }
         }
 
-        $bodyPatch = (array) data_get($package, 'current_to_proposed.body_markdown', []);
         if ($skipSyntheticTestBodyLock) {
             return;
         }
         if (! hash_equals(
-            (string) data_get($bodyPatch, 'current.sha256', ''),
+            (string) ($target['revision_raw_body_sha256'] ?? ''),
             hash('sha256', (string) $published->content_md)
         )) {
-            throw new RuntimeException('current_value_drift:body_markdown:'.(string) $article->id);
+            throw new RuntimeException('revision_body_drift:'.(string) $article->id);
+        }
+        if (! hash_equals(
+            (string) ($target['public_projection_body_sha256'] ?? ''),
+            $this->publicProjectionBodySha((string) $published->content_md)
+        )) {
+            throw new RuntimeException('public_body_drift:'.(string) $article->id);
         }
     }
 
@@ -872,7 +1002,7 @@ final class Article15ExactPackageRevisionBoundAdapter
         return [
             'title_h1' => [(string) ($published?->title ?? ''), (string) ($published?->title ?? '')],
             'intro' => (string) ($published?->excerpt ?? ''),
-            'body' => hash('sha256', (string) ($published?->content_md ?? '')),
+            'body' => $this->publicProjectionBodySha((string) ($published?->content_md ?? '')),
             'seo_title' => (string) ($seo?->seo_title ?? ''),
             'seo_description' => (string) ($seo?->seo_description ?? ''),
             'faq' => (array) data_get($editorial, 'answer_surface_v1.faq_items', []),
@@ -920,6 +1050,8 @@ final class Article15ExactPackageRevisionBoundAdapter
             || (string) $revision->title !== $this->proposedString($package, 'title')
             || (string) $revision->excerpt !== $this->proposedString($package, 'intro')
             || (string) $revision->content_md !== $this->expectedRevisionBody($revision, $target)
+            || ! hash_equals($this->expectedBodySha($target), hash('sha256', (string) $revision->content_md))
+            || ! hash_equals($this->expectedProjectedBodySha($target), $this->publicProjectionBodySha((string) $revision->content_md))
             || (string) $revision->seo_title !== $this->proposedString($package, 'seo_title')
             || (string) $revision->seo_description !== $this->proposedString($package, 'seo_description')) {
             throw new RuntimeException('working_revision_readback_mismatch:'.(string) $target['article_id']);
@@ -950,6 +1082,8 @@ final class Article15ExactPackageRevisionBoundAdapter
             && (string) $article->title === $this->proposedString($package, 'title')
             && (string) $article->excerpt === $this->proposedString($package, 'intro')
             && (string) $article->content_md === $this->expectedRevisionBody($published, $target)
+            && hash_equals($this->expectedBodySha($target), hash('sha256', (string) $published->content_md))
+            && hash_equals($this->expectedProjectedBodySha($target), $this->publicProjectionBodySha((string) $published->content_md))
             && (int) $article->reading_minutes === (int) data_get($package, 'current_to_proposed.reading_minutes.proposed')
             && ($this->nullableString($article->related_test_slug) ?? '') === ($this->nullableString(data_get($package, 'current_to_proposed.related_test_slug.proposed')) ?? '')
             && (string) $seo->seo_title === $this->proposedString($package, 'seo_title')
@@ -986,7 +1120,9 @@ final class Article15ExactPackageRevisionBoundAdapter
             'source_published_revision_id' => (int) $target['published_revision_id'],
             'published_revision_id' => $publishedRevisionId,
             'package_sha256' => (string) $target['package_sha256'],
-            'body_sha256' => (string) $target['body_sha256'],
+            'body_sha256' => $this->expectedBodySha($target),
+            'revision_raw_body_sha256' => (string) $target['revision_raw_body_sha256'],
+            'public_projection_body_sha256' => (string) $target['public_projection_body_sha256'],
             'reading_minutes' => (int) data_get($package, 'current_to_proposed.reading_minutes.proposed'),
             'related_test_slug' => $this->nullableString(data_get($package, 'current_to_proposed.related_test_slug.proposed')),
             'faq_items' => (array) data_get($package, 'current_to_proposed.answer_surface_v1.proposed.faq_items', []),
@@ -1014,14 +1150,14 @@ final class Article15ExactPackageRevisionBoundAdapter
             'claim_result_json' => ['status' => 'package_bound'],
             'exactness_json' => [
                 'package_sha256' => $target['package_sha256'],
-                'body_sha256' => $target['body_sha256'],
+                'body_sha256' => $this->expectedBodySha($target),
                 'working_revision_id' => (int) $revision->id,
             ],
             'references_json' => ['status' => 'preserved'],
             'media_json' => ['status' => 'unchanged'],
             'graph_json' => ['status' => 'unchanged'],
             'answer_surface_json' => ['status' => 'revision_bound'],
-            'body_hash' => (string) $target['body_sha256'],
+            'body_hash' => $this->expectedBodySha($target),
             'heading_sequence_json' => [],
             'references_count' => 0,
             'missing_fields_json' => [],
@@ -1081,6 +1217,7 @@ final class Article15ExactPackageRevisionBoundAdapter
             'cms_content_write' => false,
             'database_write' => false,
             'publication_write' => false,
+            'cache_write' => false,
             'sitemap_write' => false,
             'llms_write' => false,
             'search_channel_write' => false,
@@ -1119,17 +1256,173 @@ final class Article15ExactPackageRevisionBoundAdapter
         return $decoded;
     }
 
-    private function readBodyForPackagePath(string $packagePath): string
+    /** @return array<string,mixed> */
+    private function readBoundJson(string $relativePath, string $expectedFileSha, string $error): array
     {
-        $packageAbsolute = $this->repoPath($packagePath);
-        $package = $this->readJson($packageAbsolute);
-        $bodyFile = basename((string) data_get($package, 'body_patch.body_file', ''));
-        $bodyPath = dirname($packageAbsolute).'/'.$bodyFile;
-        if ($bodyFile === '' || ! is_file($bodyPath)) {
+        $path = $this->repoPath($relativePath);
+        if (preg_match('/^[a-f0-9]{64}$/', $expectedFileSha) !== 1
+            || ! hash_equals($expectedFileSha, hash_file('sha256', $path))) {
+            throw new RuntimeException($error);
+        }
+
+        return $this->readJson($path);
+    }
+
+    /** @param array<string,mixed> $object */
+    private function assertDeclaredObjectHash(array $object, string $field, string $expected, string $error): void
+    {
+        $declared = (string) ($object[$field] ?? '');
+        $hashable = $object;
+        unset($hashable[$field]);
+        if (! hash_equals($expected, $declared) || ! hash_equals($declared, $this->canonicalHash($hashable))) {
+            throw new RuntimeException($error);
+        }
+    }
+
+    /** @param array<string,mixed> $execution @param array<string,mixed> $final @param array<string,mixed> $review @param array<string,mixed> $approval */
+    private function assertAuthorityChain(array $execution, array $final, array $review, array $approval): void
+    {
+        $executionTargets = array_values((array) ($execution['targets'] ?? []));
+        $finalPackages = array_values((array) ($final['packages'] ?? []));
+        $reviewPages = array_values((array) data_get($review, 'final_v2_1_review.pages', []));
+        $approvedPackages = array_values((array) ($approval['exact_packages'] ?? []));
+        if (count($executionTargets) !== 15 || count($finalPackages) !== 15
+            || count($reviewPages) !== 15 || count($approvedPackages) !== 15) {
+            throw new RuntimeException('authority_chain_target_count_invalid');
+        }
+
+        $packageSet = [];
+        foreach ($executionTargets as $index => $target) {
+            $finalPackage = (array) ($finalPackages[$index] ?? []);
+            $reviewPage = (array) ($reviewPages[$index] ?? []);
+            $approvedPackage = (array) ($approvedPackages[$index] ?? []);
+            $declared = (string) ($target['package_sha256'] ?? '');
+            $fileSha = (string) ($target['package_json_file_sha256'] ?? '');
+            if ((int) ($target['order'] ?? 0) !== $index + 1
+                || (int) ($target['article_id'] ?? 0) !== (int) ($finalPackage['article_id'] ?? 0)
+                || (int) ($target['article_id'] ?? 0) !== (int) ($reviewPage['article_id'] ?? 0)
+                || (int) ($target['article_id'] ?? 0) !== (int) ($approvedPackage['article_id'] ?? 0)
+                || ! hash_equals($declared, (string) ($finalPackage['package_sha256'] ?? ''))
+                || ! hash_equals($declared, (string) ($reviewPage['declared_package_sha256'] ?? ''))
+                || ! hash_equals($declared, (string) ($approvedPackage['package_sha256'] ?? ''))
+                || ! hash_equals($fileSha, (string) ($finalPackage['package_json_file_sha256'] ?? ''))
+                || ! hash_equals($fileSha, (string) ($reviewPage['package_json_file_sha256'] ?? ''))
+                || ! hash_equals($fileSha, (string) ($approvedPackage['package_json_file_sha256'] ?? ''))
+                || ($reviewPage['decision'] ?? null) !== 'APPROVE') {
+                throw new RuntimeException('declared_package_sha_authority_drift:'.(string) ($target['article_id'] ?? 0));
+            }
+            $packageSet[] = [
+                'order' => (int) $finalPackage['order'],
+                'article_id' => (int) $finalPackage['article_id'],
+                'locale' => (string) $finalPackage['locale'],
+                'slug' => (string) $finalPackage['slug'],
+                'package_sha256' => (string) $finalPackage['package_sha256'],
+                'package_json_file_sha256' => (string) $finalPackage['package_json_file_sha256'],
+                'current_body_sha256' => (string) $finalPackage['current_body_sha256'],
+                'proposed_body_sha256' => $finalPackage['proposed_body_sha256'] ?? null,
+            ];
+        }
+        $expectedSet = (string) data_get($execution, 'bindings.exact_package_set_sha256', '');
+        if (! hash_equals($expectedSet, $this->canonicalHash($packageSet))
+            || ! hash_equals($expectedSet, (string) data_get($approval, 'bindings.exact_package_set_sha256', ''))
+            || ! hash_equals($expectedSet, (string) data_get($review, 'review_scope.exact_package_set_sha256', ''))) {
+            throw new RuntimeException('exact_package_set_sha256_mismatch');
+        }
+    }
+
+    /** @param array<string,mixed> $manifest */
+    private function assertProjectionContract(array $manifest): void
+    {
+        $contract = (array) data_get($manifest, 'bindings.projection_contract', []);
+        if (($contract['version'] ?? null) !== data_get($manifest, 'hash_contract.projection_contract_version')) {
+            throw new RuntimeException('projection_contract_version_mismatch');
+        }
+        foreach ((array) ($contract['implementation_file_sha256'] ?? []) as $path => $sha) {
+            if (! is_string($path) || ! is_string($sha)
+                || ! hash_equals($sha, hash_file('sha256', $this->repoPath($path)))) {
+                throw new RuntimeException('projection_contract_file_sha256_mismatch');
+            }
+        }
+    }
+
+    /** @param array<string,mixed> $package */
+    private function readPackageBody(string $packagePath, array $package, bool $proposed): string
+    {
+        $locale = (string) data_get($package, 'identity_lock.locale', '');
+        $fileKey = $proposed ? 'proposed.cms.'.$locale.'.md' : 'current.public.'.$locale.'.md';
+        $file = (string) ($proposed
+            ? data_get($package, 'body_write_plan.proposed_cms_file', $fileKey)
+            : $fileKey);
+        $bodyPath = dirname($this->repoPath($packagePath)).'/'.basename($file);
+        if ($file === '' || ! is_file($bodyPath)) {
             throw new RuntimeException('body_file_missing:'.$packagePath);
         }
 
         return (string) file_get_contents($bodyPath);
+    }
+
+    /** @param array<string,mixed> $package @param array<string,mixed> $target @return array<string,mixed> */
+    private function normalizePackage(array $package, array $target): array
+    {
+        $fields = (array) ($package['field_plan'] ?? []);
+        $patch = static function (array $field, string $currentKey = 'current', string $proposedKey = 'proposed'): array {
+            return [
+                'status' => (string) ($field['status'] ?? ''),
+                'current' => $field[$currentKey] ?? null,
+                'proposed' => $field[$proposedKey] ?? null,
+            ];
+        };
+        $bodyStatus = (string) data_get($fields, 'body_markdown.status', '');
+        $currentToProposed = [];
+        foreach (['title', 'h1', 'intro', 'seo_title', 'seo_description', 'reading_minutes', 'related_test_slug'] as $field) {
+            $currentToProposed[$field] = $patch((array) ($fields[$field] ?? []));
+        }
+        $currentToProposed['body_markdown'] = [
+            'status' => $bodyStatus,
+            'current' => ['sha256' => (string) ($target['public_projection_body_sha256'] ?? '')],
+            'proposed' => ['sha256' => $target['proposed_body_sha256'] ?? $target['public_projection_body_sha256'] ?? ''],
+        ];
+        $currentToProposed['faq'] = $patch((array) ($fields['faq_visible_body'] ?? []));
+        $answerSurface = $patch((array) ($fields['answer_surface_v1'] ?? []), 'current_public_api');
+        $currentToProposed['answer_surface_v1'] = [
+            ...$answerSurface,
+            'current' => ['faq_items' => (array) $answerSurface['current']],
+            'proposed' => ['faq_items' => (array) $answerSurface['proposed']],
+        ];
+        $currentToProposed['primary_cta'] = $patch((array) ($fields['primary_cta'] ?? []), 'current_public_api');
+        $currentToProposed['publication'] = [
+            'status' => 'KEEP',
+            'current' => ['status' => 'published', 'is_public' => true],
+            'proposed' => ['status' => 'published', 'is_public' => true],
+        ];
+        $currentToProposed['canonical_internal_links'] = [
+            'status' => 'KEEP',
+            'current' => (array) ($package['internal_links'] ?? []),
+            'proposed' => (array) ($package['internal_links'] ?? []),
+        ];
+
+        return [...$package, 'current_to_proposed' => $currentToProposed];
+    }
+
+    /** @param array<string,mixed> $target */
+    private function expectedBodySha(array $target): string
+    {
+        return (string) (($target['decision'] ?? null) === 'KEEP'
+            ? $target['revision_raw_body_sha256'] ?? ''
+            : $target['proposed_body_sha256'] ?? '');
+    }
+
+    /** @param array<string,mixed> $target */
+    private function expectedProjectedBodySha(array $target): string
+    {
+        return (string) (($target['decision'] ?? null) === 'KEEP'
+            ? $target['public_projection_body_sha256'] ?? ''
+            : data_get($target, 'package.body_write_plan.projected_public_sha256', ''));
+    }
+
+    private function publicProjectionBodySha(string $rawBody): string
+    {
+        return hash('sha256', $this->headingGuard->downgradeMarkdownH1ToH2($rawBody));
     }
 
     private function canonicalHash(mixed $value): string

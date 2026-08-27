@@ -391,11 +391,17 @@ final class ArticlePublishService
         }
 
         $articleIds = array_map(static fn (array $target): int => (int) ($target['article_id'] ?? 0), $targets);
-        $workingRevisionIds = array_map(static fn (array $target): int => (int) ($target['working_revision_id'] ?? 0), $targets);
+        $bodyWriteTargets = array_values(array_filter(
+            $targets,
+            static fn (array $target): bool => ($target['body_write'] ?? true) === true
+        ));
+        $workingRevisionIds = array_map(static fn (array $target): int => (int) ($target['working_revision_id'] ?? 0), $bodyWriteTargets);
         $publishedRevisionIds = array_map(static fn (array $target): int => (int) ($target['current_published_revision_id'] ?? 0), $targets);
         if (in_array(0, $articleIds, true) || in_array(0, $workingRevisionIds, true) || in_array(0, $publishedRevisionIds, true)
             || count(array_unique($articleIds)) !== 5
-            || count(array_unique([...$workingRevisionIds, ...$publishedRevisionIds])) !== 10) {
+            || count(array_unique($workingRevisionIds)) !== count($workingRevisionIds)
+            || count(array_unique($publishedRevisionIds)) !== 5
+            || array_intersect($workingRevisionIds, $publishedRevisionIds) !== []) {
             throw new InvalidArgumentException('Article15 atomic promotion identities must be positive, isolated, and unique.');
         }
 
@@ -417,7 +423,7 @@ final class ArticlePublishService
                 ->orderBy('article_id')->lockForUpdate()->get()->count();
             ArticleEditorialPackageImport::query()->withoutGlobalScopes()->whereIn('article_id', $articleIds)
                 ->orderBy('article_id')->orderBy('id')->lockForUpdate()->get();
-            if ($articleCount !== 5 || $revisionCount !== 10 || $seoCount !== 5) {
+            if ($articleCount !== 5 || $revisionCount !== 5 + count($workingRevisionIds) || $seoCount !== 5) {
                 throw new RuntimeException('Article15 atomic promotion locked identity set is incomplete.');
             }
 
@@ -427,6 +433,14 @@ final class ArticlePublishService
             }
 
             foreach ($targets as $target) {
+                if (($target['body_write'] ?? true) !== true) {
+                    $article = Article::query()->withoutGlobalScopes()->findOrFail((int) $target['article_id']);
+                    $published = ArticleTranslationRevision::query()->withoutGlobalScopes()
+                        ->findOrFail((int) $target['current_published_revision_id']);
+                    $prepareTarget($article, $published);
+
+                    continue;
+                }
                 ArticleTranslationRevision::query()->withoutGlobalScopes()
                     ->whereKey((int) $target['working_revision_id'])
                     ->update(['revision_status' => ArticleTranslationRevision::STATUS_APPROVED]);
@@ -450,9 +464,12 @@ final class ArticlePublishService
             return $result;
         }, 1);
 
-        foreach ($articleIds as $articleId) {
-            $article = Article::query()->withoutGlobalScopes()->findOrFail($articleId);
+        foreach ($targets as $target) {
+            $article = Article::query()->withoutGlobalScopes()->findOrFail((int) $target['article_id']);
             ContentReleaseAudit::log('article', $article, self::ARTICLE15_ATOMIC_PROMOTION_SOURCE, false);
+            if (($target['body_write'] ?? true) !== true) {
+                $this->dispatchUrlTruthChange($article, 'authority_revision');
+            }
         }
         $this->seoDiscoverabilityCacheInvalidator->flushArticleDiscoverabilityCaches();
 
