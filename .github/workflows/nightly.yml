@@ -2,6 +2,7 @@ name: Nightly
 
 on:
   schedule:
+    - cron: "*/5 * * * *"
     - cron: "17 18 * * *"
 
 permissions:
@@ -10,12 +11,106 @@ permissions:
   security-events: write
 
 concurrency:
-  group: nightly-${{ github.repository }}
+  group: ${{ github.event.schedule == '*/5 * * * *' && format('scheduler-evidence-monitor-{0}', github.repository) || format('nightly-{0}', github.repository) }}
   cancel-in-progress: true
 
 jobs:
+  scheduler-evidence-monitor:
+    name: Production scheduler evidence monitor
+    if: github.event_name == 'schedule' && github.event.schedule == '*/5 * * * *'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: production
+    env:
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
+      - name: Start SSH agent without key metadata output
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          eval "$(ssh-agent -s)" >/dev/null
+          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
+          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
+          printf '%s\n' "$SSH_PRIVATE_KEY" | ssh-add - >/dev/null 2>&1
+      - name: Install pinned known_hosts
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+      - name: Read active scheduler evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/scheduler-evidence-monitor
+          raw_receipt="$RUNNER_TEMP/scheduler-evidence-monitor.raw.json"
+          output_receipt="artifacts/scheduler-evidence-monitor/receipt.json"
+          ssh_base=(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o ServerAliveInterval=15 -o ServerAliveCountMax=4 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST")
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          remote_prefix="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; cd \"\$current/backend\";"
+
+          set +e
+          active_sha="$("${ssh_base[@]}" "$remote_prefix tr -d '\\r\\n' < ../REVISION" 2>/dev/null)"
+          "${ssh_base[@]}" "$remote_prefix sudo -n -u www-data -- php artisan ops:scheduler-evidence-monitor --notify --json --no-interaction --no-ansi" > "$raw_receipt" 2>/dev/null
+          monitor_rc=$?
+          set -e
+
+          if [[ ! "$active_sha" =~ ^[0-9a-f]{40}$ ]]; then
+            active_sha=""
+            monitor_rc=1
+          fi
+          if jq -e '
+            .schema_version == "scheduler-evidence-monitor.v1"
+            and (.status == "pass" or .status == "fail")
+            and .read_only == true
+            and .deployment_action == false
+            and .lkg_action == false
+          ' "$raw_receipt" >/dev/null 2>&1; then
+            jq --arg active_sha "$active_sha" '. + {active_production_sha: $active_sha}' "$raw_receipt" > "$output_receipt"
+          else
+            monitor_rc=1
+            jq -n --arg active_sha "$active_sha" '{
+              schema_version: "scheduler-evidence-monitor.v1",
+              status: "fail",
+              reason: "monitor_transport_or_contract_failed",
+              active_production_sha: $active_sha,
+              read_only: true,
+              deployment_action: false,
+              lkg_action: false
+            }' > "$output_receipt"
+          fi
+          if [ "$monitor_rc" -ne 0 ]; then
+            echo "SCHEDULER_MONITOR_EXIT_CODE=1" >> "$GITHUB_ENV"
+          else
+            echo "SCHEDULER_MONITOR_EXIT_CODE=0" >> "$GITHUB_ENV"
+          fi
+      - name: Upload sanitized scheduler evidence receipt
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: scheduler-evidence-monitor-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/scheduler-evidence-monitor/receipt.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Enforce scheduler evidence verdict
+        if: always()
+        run: exit "${SCHEDULER_MONITOR_EXIT_CODE:-1}"
+
   full-regression:
     name: Full regression, content consistency, dependencies, and performance
+    if: github.event_name == 'schedule' && github.event.schedule == '17 18 * * *'
     runs-on: ubuntu-latest
     timeout-minutes: 90
     services:
@@ -66,6 +161,7 @@ jobs:
 
   codeql:
     name: CodeQL and Semgrep security scan
+    if: github.event_name == 'schedule' && github.event.schedule == '17 18 * * *'
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -84,6 +180,7 @@ jobs:
 
   gsc-read-model-sync:
     name: Production GSC readonly sync through restricted egress
+    if: github.event_name == 'schedule' && github.event.schedule == '17 18 * * *'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     environment: production
@@ -213,7 +310,7 @@ jobs:
   alert:
     name: Actionable nightly diagnostic
     needs: [full-regression, codeql, gsc-read-model-sync]
-    if: failure()
+    if: failure() && github.event.schedule == '17 18 * * *'
     runs-on: ubuntu-latest
     steps:
       - run: echo "Nightly failed. Production remains on its current healthy SHA; inspect this run for the failing boundary."
