@@ -138,7 +138,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
 
         $result = $publisher->execute(base_path(), true);
 
-        self::assertSame(1, $result['write_counts']['database_update_count']);
+        self::assertSame(0, $result['write_counts']['database_update_count']);
         self::assertSame(4, $result['write_counts']['cache_candidate_write_count']);
         self::assertSame(2, $result['write_counts']['cache_pointer_activation_count']);
         self::assertSame(2, $result['public_readback']['verified_locale_page_count']);

@@ -66,7 +66,7 @@ final class CareerCurrentAuthorityPublisher
         try {
             $authority = $this->loader->loadShardedForPublish($backendRoot);
             $this->assertAccountantsBoundaryNotice($authority['rows']);
-            $plan = DB::transaction(fn (): array => $this->applyDatabasePlan($authority['rows'], $fullScan), 1);
+            $plan = DB::transaction(fn (): array => $this->applyDatabasePlan($authority['rows']), 1);
             $databaseCommitted = ($plan['write_counts']['database_update_count']
                 + $plan['write_counts']['database_insert_count']
                 + $plan['write_counts']['database_delete_count']) > 0;
@@ -227,7 +227,7 @@ final class CareerCurrentAuthorityPublisher
      * @param  array<string,array<string,mixed>>  $targetRows
      * @return array<string,mixed>
      */
-    private function applyDatabasePlan(array $targetRows, bool $forceRewrite): array
+    private function applyDatabasePlan(array $targetRows): array
     {
         $assets = CareerJobDisplayAsset::query()->runtimeColumns()->orderBy('id')->lockForUpdate()->get();
         $beforeStateSha256 = $this->snapshotModelsHash($assets);
@@ -254,7 +254,7 @@ final class CareerCurrentAuthorityPublisher
             $asset = $formalRows->first();
             if ($asset instanceof CareerJobDisplayAsset) {
                 $selectedIds[(string) $asset->id] = true;
-                if ($forceRewrite || ! $this->matchesTarget($asset, $desired)) {
+                if (! $this->matchesTarget($asset, $desired)) {
                     $updates[] = [
                         'id' => (string) $asset->id,
                         'slug' => $slug,
@@ -279,6 +279,7 @@ final class CareerCurrentAuthorityPublisher
         if ($deletes !== []) {
             throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPATIBILITY_ROW_UNEXPECTED');
         }
+        unset($bySlug, $assets);
         foreach ($updates as $update) {
             $affected = DB::table('career_job_display_assets')->where('id', $update['id'])->update(
                 $this->databaseValues($update['attributes']) + ['import_run_id' => null, 'updated_at' => now()],
