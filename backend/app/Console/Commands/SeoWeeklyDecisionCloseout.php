@@ -21,10 +21,20 @@ final class SeoWeeklyDecisionCloseout extends Command
     {
         $waitSeconds = max(0, min(1200, (int) $this->option('wait-seconds')));
         $deadline = time() + $waitSeconds;
+        $nextHeartbeat = time();
         do {
             $receipt = $service->evaluate((string) $this->option('expected-sha'));
             if (($receipt['state'] ?? null) === 'production_proven' || time() >= $deadline) {
                 break;
+            }
+            if ($waitSeconds > 0 && time() >= $nextHeartbeat) {
+                $this->line(json_encode([
+                    'schema_version' => SeoWeeklyDecisionCloseoutService::CONTRACT_VERSION,
+                    'state' => 'waiting_for_natural_scheduler_receipt',
+                    'manual_receipts_excluded' => true,
+                    'read_only' => true,
+                ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
+                $nextHeartbeat = time() + 30;
             }
             sleep(10);
         } while (true);
