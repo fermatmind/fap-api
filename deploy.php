@@ -2601,11 +2601,110 @@ task('fap:seed_shared_content_packages', function () {
  * Deploy lock metadata / ownership-aware cleanup
  * ======================================================
  */
+task('fap:reclaim-stale-serialized-ci-lock', function () {
+    if (getenv('TRUNK_DEPLOY_SERIALIZED') !== 'true') {
+        return;
+    }
+
+    $runId = trim((string) (getenv('DEPLOY_LOCK_RUN_ID') ?: ''));
+    $runAttempt = trim((string) (getenv('DEPLOY_LOCK_RUN_ATTEMPT') ?: ''));
+    if (preg_match('/\A[1-9][0-9]*\z/', $runId) !== 1 || preg_match('/\A[1-9][0-9]*\z/', $runAttempt) !== 1) {
+        throw new \RuntimeException('Serialized deploy lock recovery requires numeric run ownership.');
+    }
+
+    $lockPath = '{{deploy_path}}/.dep/deploy.lock';
+    $metaPath = '{{deploy_path}}/'.get('deploy_lock_metadata_path');
+    $reclaimScript = <<<'PHP'
+$lockPath = $argv[1] ?? '';
+$metaPath = $argv[2] ?? '';
+$currentRunId = $argv[3] ?? '';
+$currentRunAttempt = $argv[4] ?? '';
+$minimumAgeSeconds = 300;
+
+if (! file_exists($lockPath) && ! is_link($lockPath)) {
+    echo "absent\n";
+    exit(0);
+}
+
+if (is_link($lockPath) || ! is_file($lockPath)) {
+    fwrite(STDERR, "deploy lock is not a regular file\n");
+    exit(2);
+}
+
+if (trim((string) file_get_contents($lockPath)) !== 'ci') {
+    fwrite(STDERR, "deploy lock is not CI-owned\n");
+    exit(3);
+}
+
+$lockMtime = filemtime($lockPath);
+if ($lockMtime === false || (time() - $lockMtime) < $minimumAgeSeconds) {
+    fwrite(STDERR, "deploy lock is not stale\n");
+    exit(4);
+}
+
+if (file_exists($metaPath) || is_link($metaPath)) {
+    if (is_link($metaPath) || ! is_file($metaPath)) {
+        fwrite(STDERR, "deploy lock metadata is not a regular file\n");
+        exit(5);
+    }
+
+    $metadata = json_decode((string) file_get_contents($metaPath), true);
+    $ownerRunId = is_array($metadata) ? (string) ($metadata['run_id'] ?? '') : '';
+    $ownerRunAttempt = is_array($metadata) ? (string) ($metadata['run_attempt'] ?? '') : '';
+    if (
+        preg_match('/\A[1-9][0-9]*\z/', $ownerRunId) !== 1
+        || preg_match('/\A[1-9][0-9]*\z/', $ownerRunAttempt) !== 1
+    ) {
+        fwrite(STDERR, "deploy lock metadata is invalid\n");
+        exit(6);
+    }
+
+    if ($ownerRunId === $currentRunId && $ownerRunAttempt === $currentRunAttempt) {
+        fwrite(STDERR, "deploy lock is owned by the current run\n");
+        exit(7);
+    }
+
+    if (! unlink($metaPath)) {
+        fwrite(STDERR, "deploy lock metadata could not be removed\n");
+        exit(8);
+    }
+}
+
+if (! unlink($lockPath)) {
+    fwrite(STDERR, "stale deploy lock could not be removed\n");
+    exit(9);
+}
+
+echo "stale_ci_deploy_lock_reclaimed\n";
+PHP;
+
+    $result = run(
+        'php -r '.deployShellArg($reclaimScript)
+        .' '.deployShellArg($lockPath)
+        .' '.deployShellArg($metaPath)
+        .' '.deployShellArg($runId)
+        .' '.deployShellArg($runAttempt),
+    );
+
+    if (trim($result) === 'stale_ci_deploy_lock_reclaimed') {
+        writeln('<info>Reclaimed a stale serialized CI deploy lock.</info>');
+    }
+});
+
 task('fap:write-deploy-lock-metadata', function () {
     $metadata = getenv('DEPLOY_LOCK_METADATA');
 
     if (! is_string($metadata) || trim($metadata) === '') {
-        return;
+        $runId = trim((string) (getenv('DEPLOY_LOCK_RUN_ID') ?: ''));
+        $runAttempt = trim((string) (getenv('DEPLOY_LOCK_RUN_ATTEMPT') ?: ''));
+        if (preg_match('/\A[1-9][0-9]*\z/', $runId) !== 1 || preg_match('/\A[1-9][0-9]*\z/', $runAttempt) !== 1) {
+            return;
+        }
+
+        $metadata = json_encode([
+            'run_id' => $runId,
+            'run_attempt' => $runAttempt,
+        ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
     }
 
     json_decode($metadata, true, 512, JSON_THROW_ON_ERROR);
@@ -2774,6 +2873,7 @@ before('rollback', 'guard:deploy-shell-config');
 before('deploy:prepare', 'ensure:phpredis');
 before('deploy:shared', 'fap:seed_shared_content_packages');
 
+before('deploy:lock', 'fap:reclaim-stale-serialized-ci-lock');
 after('deploy:lock', 'fap:write-deploy-lock-metadata');
 after('deploy:unlock', 'fap:remove-deploy-lock-metadata');
 
