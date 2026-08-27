@@ -6,6 +6,55 @@ require_clean_worktree: true
 execution_mode: local_clone_preferred
 
 prs:
+  - id: SEO-PLATFORM-08-A
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/seo-platform-08-a-ledger-schema
+    base: main
+    depends_on: []
+    mode: execute
+    title: "SEO-PLATFORM-08-A: establish the SEO change ledger schema"
+    scope: >
+      Establish only the dedicated SEO change ledger and append-only event
+      persistence contract. Freeze the preflight-authoritative 23 fields and
+      13 states, idempotency and uniqueness boundaries, and forward-only
+      rollback compatibility. Do not add evidence adapters, transition
+      behavior, APIs, UI, scheduler, experiments, search submission, or any
+      production write path.
+    allowed_paths:
+      - app/Services/SeoIntel/Ledger/SeoChangeLedgerContract.php
+      - database/migrations/seo_intel/2026_08_27_010000_create_seo_change_ledger_tables.php
+      - tests/Feature/SeoIntel/SeoPlatform08LedgerSchemaTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    checks:
+      - "php -l app/Services/SeoIntel/Ledger/SeoChangeLedgerContract.php"
+      - "php -l database/migrations/seo_intel/2026_08_27_010000_create_seo_change_ledger_tables.php"
+      - "php -l tests/Feature/SeoIntel/SeoPlatform08LedgerSchemaTest.php"
+      - "vendor/bin/pint --test app/Services/SeoIntel/Ledger/SeoChangeLedgerContract.php database/migrations/seo_intel/2026_08_27_010000_create_seo_change_ledger_tables.php tests/Feature/SeoIntel/SeoPlatform08LedgerSchemaTest.php"
+      - "php artisan test tests/Feature/SeoIntel/SeoPlatform08LedgerSchemaTest.php --no-ansi"
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "ruby -e 'require \"yaml\"; YAML.safe_load(File.read(\"docs/codex/pr-train.yaml\"), aliases: true)'"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: continuous_goal
+    merge_policy:
+      mode: github_checks_required
+      local_verify_required: true
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    deploy_allowed: true
+    content_authority: backend
+
   - id: EN-PARITY-W3-ARTICLES-BACKEND-PROMOTION-PACKAGE-01
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
