@@ -103,6 +103,56 @@ prs:
     deploy_allowed: true
     content_authority: backend
 
+  - id: SEO-PLATFORM-08-C
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/seo-platform-08-c-state-machine
+    base: main
+    depends_on: ["SEO-PLATFORM-08-B"]
+    mode: execute
+    title: "SEO-PLATFORM-08-C: enforce ledger transitions and denials"
+    scope: >
+      Add only the authoritative SEO ledger transition policy, exact eight
+      deterministic denials and transactional append-only audit service.
+      Fail closed on illegal transitions and keep L3/L4 disabled. Do not add
+      API/UI, evidence sources, scheduler, SEO execution, search submission or
+      production actions.
+    allowed_paths:
+      - app/Services/SeoIntel/Ledger/SeoChangeLedgerContract.php
+      - app/Services/SeoIntel/Ledger/SeoLedgerTransitionPolicy.php
+      - app/Services/SeoIntel/Ledger/SeoLedgerTransitionService.php
+      - tests/Feature/SeoIntel/SeoPlatform08StateMachineTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    checks:
+      - "php -l app/Services/SeoIntel/Ledger/SeoChangeLedgerContract.php"
+      - "php -l app/Services/SeoIntel/Ledger/SeoLedgerTransitionPolicy.php"
+      - "php -l app/Services/SeoIntel/Ledger/SeoLedgerTransitionService.php"
+      - "php -l tests/Feature/SeoIntel/SeoPlatform08StateMachineTest.php"
+      - "vendor/bin/pint --test app/Services/SeoIntel/Ledger/SeoChangeLedgerContract.php app/Services/SeoIntel/Ledger/SeoLedgerTransitionPolicy.php app/Services/SeoIntel/Ledger/SeoLedgerTransitionService.php tests/Feature/SeoIntel/SeoPlatform08StateMachineTest.php"
+      - "php artisan test tests/Feature/SeoIntel/SeoPlatform08StateMachineTest.php --no-ansi"
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "ruby -e 'require \"yaml\"; YAML.safe_load(File.read(\"docs/codex/pr-train.yaml\"), aliases: true)'"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: continuous_goal
+    merge_policy:
+      mode: github_checks_required
+      local_verify_required: true
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    deploy_allowed: true
+    content_authority: backend
+
   - id: EN-PARITY-W3-ARTICLES-BACKEND-PROMOTION-PACKAGE-01
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
