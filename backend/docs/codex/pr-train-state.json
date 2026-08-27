@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T01:54:38Z",
+  "updated_at": "2026-08-27T01:56:52Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-08-A": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/seo-platform-08-a-ledger-schema",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "ff2a3f51a79fe6d4e867d2049bd6412e5f49c644",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3807",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -54,6 +54,11 @@
           "at": "2026-08-27T01:54:38Z",
           "status": "local_checks_passed",
           "summary": "Initialized the missing current-task manifest/state entry and implemented only the dedicated SEO ledger schema foundation. No evidence adapter, transition execution, API/UI, experiment, search submission, scheduler, production deploy or production write was performed."
+        },
+        {
+          "at": "2026-08-27T01:56:52Z",
+          "status": "pr_open",
+          "summary": "Opened the single scoped PR #3807 from implementation commit ff2a3f51a79fe6d4e867d2049bd6412e5f49c644. Required checks and merge readiness are pending; no manual deploy or runtime write was triggered."
         }
       ]
     },
