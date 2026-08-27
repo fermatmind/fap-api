@@ -129,7 +129,10 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             ->assertJsonMissingPath('display_surface_v1.asset_version')
             ->assertJsonMissingPath('display_surface_v1.template_version')
             ->assertJsonPath('display_surface_v1.page.content.career_quick_answers_block.availability', 'published')
-            ->assertJsonPath('display_surface_v1.page.content.onet_structured_fields_block.availability', 'published');
+            ->assertJsonPath('display_surface_v1.page.content.onet_structured_fields_block.availability', 'published')
+            ->assertJsonPath('display_surface_v1.presentation_v2.contract_version', 'career.detail.presentation.v2')
+            ->assertJsonPath('display_surface_v1.presentation_v2.locale', 'zh-CN')
+            ->assertJsonPath('display_surface_v1.presentation_v2.groups.0.content_state', 'enhanced');
 
         $this->assertSame(
             $row['component_order_json'],
@@ -147,6 +150,12 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             'onet_structured_fields_block',
             $response->json('display_surface_v1.structured_data_from_visible_content'),
         );
+
+        $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/accountants-and-auditors?locale=en')
+            ->assertOk()
+            ->assertJsonPath('display_surface_v1.presentation_v2.contract_version', 'career.detail.presentation.v2')
+            ->assertJsonPath('display_surface_v1.presentation_v2.locale', 'en')
+            ->assertJsonPath('display_surface_v1.presentation_v2.groups.0.content_state', 'enhanced');
     }
 
     public function test_it_adds_display_surface_for_selected_second_pilot_assets(): void

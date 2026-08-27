@@ -257,13 +257,12 @@ final class CareerTenBlockCurrentPackageCompiler
      * same-locale authority fields. This intentionally does not read source packages,
      * templates, or another occupation's projection.
      *
-     * @return array{assets_bytes:string,manifest_template:array<string,mixed>,receipt:array<string,mixed>,package_diff:array<string,mixed>}
+     * @return array{assets_bytes:string,manifest_template:array<string,mixed>,validated_summary:array<string,mixed>,receipt:array<string,mixed>,package_diff:array<string,mixed>}
      */
     public function compileAccountantsBoundaryNoticeProjection(string $backendRoot): array
     {
         $baseline = $this->package->load($backendRoot);
-        $candidateRows = $baseline['rows'];
-        $accountants = $candidateRows[self::ACCOUNTANTS_SLUG] ?? null;
+        $accountants = $baseline['rows'][self::ACCOUNTANTS_SLUG] ?? null;
         if (! is_array($accountants)) {
             throw new CareerTenBlockCompileFailure('TEN_BLOCK_ACCOUNTANTS_BOUNDARY_TARGET_MISSING');
         }
@@ -273,25 +272,23 @@ final class CareerTenBlockCurrentPackageCompiler
             throw new CareerTenBlockCompileFailure('TEN_BLOCK_ACCOUNTANTS_BOUNDARY_SOURCE_MISSING');
         }
         $notices = $this->deriveAccountantsBoundaryNotices($pages);
+        $before = $accountants;
         foreach (['en', 'zh'] as $locale) {
-            $candidateRows[self::ACCOUNTANTS_SLUG]['page_payload_json']['page'][$locale]['boundary_notice'] = $notices[$locale];
+            $baseline['rows'][self::ACCOUNTANTS_SLUG]['page_payload_json']['page'][$locale]['boundary_notice'] = $notices[$locale];
         }
 
         $changedSlugs = [];
         $publicChangedLocalePages = 0;
-        foreach ($baseline['slugs'] as $slug) {
-            $before = $baseline['rows'][$slug];
-            $after = $candidateRows[$slug];
-            if (! hash_equals(CareerCurrentAuthorityPackage::hashValue($before), CareerCurrentAuthorityPackage::hashValue($after))) {
-                $changedSlugs[] = $slug;
-            }
-            foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
-                if (! hash_equals(
-                    $this->package->publicContentHash($before, $locale),
-                    $this->package->publicContentHash($after, $locale),
-                )) {
-                    $publicChangedLocalePages++;
-                }
+        $after = $baseline['rows'][self::ACCOUNTANTS_SLUG];
+        if (! hash_equals(CareerCurrentAuthorityPackage::hashValue($before), CareerCurrentAuthorityPackage::hashValue($after))) {
+            $changedSlugs[] = self::ACCOUNTANTS_SLUG;
+        }
+        foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
+            if (! hash_equals(
+                $this->package->publicContentHash($before, $locale),
+                $this->package->publicContentHash($after, $locale),
+            )) {
+                $publicChangedLocalePages++;
             }
         }
         if (($changedSlugs !== [] && $changedSlugs !== [self::ACCOUNTANTS_SLUG])
@@ -300,11 +297,14 @@ final class CareerTenBlockCurrentPackageCompiler
             || (count($changedSlugs) === 1 && $publicChangedLocalePages === 0)) {
             throw new CareerTenBlockCompileFailure('TEN_BLOCK_ACCOUNTANTS_BOUNDARY_SCOPE_INVALID');
         }
-        $this->assertCandidatePublicContract($candidateRows);
+        $this->assertCandidatePublicContract($baseline['rows']);
+        $careerCount = count($baseline['rows']);
+        $assetsBytes = $this->rowsBytes($baseline['rows']);
 
         return [
-            'assets_bytes' => $this->rowsBytes($candidateRows),
+            'assets_bytes' => $assetsBytes,
             'manifest_template' => $baseline['manifest'],
+            'validated_summary' => $baseline['summary'],
             'receipt' => [
                 'contract_version' => 'career.ten_block.accountants_boundary_projection_receipt.v1',
                 'compiler_version' => self::VERSION,
@@ -322,8 +322,8 @@ final class CareerTenBlockCurrentPackageCompiler
             ],
             'package_diff' => [
                 'contract_version' => 'career.ten_block.package_diff_report.v1',
-                'before_career_count' => count($baseline['rows']),
-                'after_career_count' => count($candidateRows),
+                'before_career_count' => $careerCount,
+                'after_career_count' => $careerCount,
                 'missing_slug_count' => 0,
                 'extra_slug_count' => 0,
                 'duplicate_slug_count' => 0,

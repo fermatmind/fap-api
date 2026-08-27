@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Domain\Career\Compilation\CareerPresentationV1Compiler;
+use App\Domain\Career\Compilation\CareerPresentationV2Compiler;
 use App\Domain\Career\Compilation\CareerTenBlockCompileFailure;
 use App\Domain\Career\Compilation\CareerTenBlockCurrentPackageCompiler;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
@@ -22,6 +23,7 @@ final class CareerTenBlockCurrentPackageCompile extends Command
         {--output-root= : Required existing task temp directory}
         {--accountants-boundary-notice : Compile the accountants same-locale boundary authority projection}
         {--presentation-v1 : Compile the full zh-CN visual presentation projection}
+        {--presentation-v2 : Compile the bilingual universal dossier presentation projection}
         {--design-authority= : Read-only v1.2 visual authority HTML}
         {--write-current : Atomically install the validated candidate into repository Current authority}';
 
@@ -30,6 +32,7 @@ final class CareerTenBlockCurrentPackageCompile extends Command
     public function handle(
         CareerTenBlockCurrentPackageCompiler $compiler,
         CareerPresentationV1Compiler $presentationCompiler,
+        CareerPresentationV2Compiler $presentationV2Compiler,
         CareerCurrentAuthorityPackage $package,
     ): int {
         ini_set('memory_limit', '1024M');
@@ -41,10 +44,13 @@ final class CareerTenBlockCurrentPackageCompile extends Command
             $outputRoot = $this->outputRoot((string) $this->option('output-root'));
             $accountantsBoundaryNotice = (bool) $this->option('accountants-boundary-notice');
             $presentationV1 = (bool) $this->option('presentation-v1');
-            if ($accountantsBoundaryNotice && $presentationV1) {
+            $presentationV2 = (bool) $this->option('presentation-v2');
+            if (count(array_filter([$accountantsBoundaryNotice, $presentationV1, $presentationV2])) > 1) {
                 throw new CareerTenBlockCompileFailure('TEN_BLOCK_COMMAND_INPUT_INVALID');
             }
-            if ($presentationV1) {
+            if ($presentationV2) {
+                $result = $presentationV2Compiler->compile(base_path());
+            } elseif ($presentationV1) {
                 $designAuthority = trim((string) $this->option('design-authority'));
                 if ($sourceRoot === '' || $designAuthority === '') {
                     throw new CareerTenBlockCompileFailure('TEN_BLOCK_COMMAND_INPUT_INVALID');
@@ -59,7 +65,9 @@ final class CareerTenBlockCurrentPackageCompile extends Command
                 $result = $compiler->compile($sourceRoot, $lookup, $evidenceRoot, base_path());
             }
             $this->write($outputRoot.'/assets.jsonl', $result['assets_bytes']);
-            $current = $package->load(base_path());
+            $current = ($presentationV2 || $accountantsBoundaryNotice) && isset($result['validated_summary'])
+                ? ['manifest' => $result['manifest_template'], 'summary' => $result['validated_summary']]
+                : $package->load(base_path());
             $sharded = ($current['manifest']['contract_version'] ?? null) === CareerShardedCurrentAuthorityPackage::CONTRACT_VERSION;
             if ($sharded) {
                 if ((bool) $this->option('write-current')) {
