@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T02:09:17Z",
+  "updated_at": "2026-08-27T02:10:40Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-08-B": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/seo-platform-08-b-evidence-adapters",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "36b213e72c0f365e1fdf68e5e04eb998d4a17135",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3808",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -54,6 +54,11 @@
           "at": "2026-08-27T02:09:17Z",
           "status": "local_checks_passed",
           "summary": "The adapter now reads the existing sanitized runtime, public URL authority, page-family policy, authority revision, deploy and aggregate GSC boundaries. It emits only allowlisted aggregates and fails stale, missing, private, raw or quality-failed evidence to MEASUREMENT_HOLD without writes."
+        },
+        {
+          "at": "2026-08-27T02:10:40Z",
+          "status": "pr_open",
+          "summary": "Opened the single scoped PR #3808 from validated implementation commit 36b213e72c0f365e1fdf68e5e04eb998d4a17135. No manual deploy, ledger write, scheduler, GSC mutation or search action was triggered."
         }
       ]
     },
