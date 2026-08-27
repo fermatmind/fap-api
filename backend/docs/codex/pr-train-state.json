@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T04:01:28Z",
+  "updated_at": "2026-08-27T04:02:48Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-09-D": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/seo-platform-09-d-lifecycle",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "ffb18a55e85e58a41443c29c1f89c1433639b3e2",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3815",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -44,6 +44,11 @@
           "at": "2026-08-27T04:01:28Z",
           "status": "local_checks_passed",
           "summary": "Implemented only the decision-card lifecycle materializer. Every accepted change atomically appends one immutable decision revision, moves the single current pointer and appends a bound SEO ledger audit event; identical evidence is replayed without another card or event. Closure requires fresh direct recovery proof bound to current authority/runtime revisions, while stale or illegal transitions fail closed."
+        },
+        {
+          "at": "2026-08-27T04:02:48Z",
+          "status": "pr_open",
+          "summary": "Opened focused PR #3815 from implementation commit ffb18a55e85e58a41443c29c1f89c1433639b3e2; the exact four-file scope is mergeable and contains no selector, UI, scheduler or production operation."
         }
       ]
     },
