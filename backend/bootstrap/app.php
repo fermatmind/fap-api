@@ -101,7 +101,7 @@ return Application::configure(basePath: dirname(__DIR__))
             ->withoutOverlapping()
             ->onOneServer();
         $schedule->command('seo:weekly-decisions --trigger=scheduled --json')
-            ->weeklyOn(4, '08:10')
+            ->weeklyOn(4, '09:00')
             ->withoutOverlapping(120)
             ->name('seo-weekly-decisions:'.substr(hash('sha256', (string) config('app.url')), 0, 16))
             ->onOneServer();
