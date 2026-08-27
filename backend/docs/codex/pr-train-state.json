@@ -1,15 +1,61 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T02:10:40Z",
+  "updated_at": "2026-08-27T02:20:56Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "SEO-PLATFORM-08-C": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_checks_passed",
+      "branch": "codex/seo-platform-08-c-state-machine",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "details": "SEO-PLATFORM-08-B merged as 4ce065e6efd7fe45104d9d482d75fbc1dc36fccf and exact-SHA CI run 33032508687 completed successfully."
+        },
+        "local": [
+          {
+            "command": "scoped PHP syntax and Pint",
+            "status": "passed",
+            "details": "The contract, transition policy, transactional audit service and focused tests pass syntax and formatting checks."
+          },
+          {
+            "command": "php artisan test tests/Feature/SeoIntel/SeoPlatform08StateMachineTest.php --no-ansi",
+            "status": "passed",
+            "details": "3 tests and 51 assertions cover exact transitions, eight denials, skip denial, L3/L4 disablement, atomic apply/deny, immutable append audit, context-bound idempotency and privacy-safe evidence."
+          }
+        ],
+        "github": [],
+        "production": []
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": true,
+      "production_readback_allowed": false,
+      "history": [
+        {
+          "at": "2026-08-27T02:20:56Z",
+          "status": "local_checks_passed",
+          "summary": "Implemented only the exact state-machine and denial boundary. L3/L4 remain disabled, search submission is always false, and every applied or denied request creates a sanitized append-only event without overwriting prior audit evidence."
+        }
+      ]
+    },
     "SEO-PLATFORM-08-B": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "merged",
       "branch": "codex/seo-platform-08-b-evidence-adapters",
       "commit_sha": "36b213e72c0f365e1fdf68e5e04eb998d4a17135",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3808",
@@ -30,14 +76,20 @@
             "details": "5 tests and 33 assertions cover fresh aggregates, true zero, stale and missing HOLD, private/raw rejection, GSC quality HOLD, real URL Truth/Page Family/CMS revision/deploy/GSC table reads and zero writes."
           }
         ],
-        "github": [],
+        "github": [
+          {
+            "name": "CI / exact-SHA validation receipt",
+            "status": "passed",
+            "details": "Main push run 33032508687 passed all classifier, hygiene, focused runtime, MBTI, Big Five, supply-chain, content-pack and exact-SHA receipt jobs."
+          }
+        ],
         "production": []
       },
       "failure_reason": null,
       "resume_policy": "continuous_goal",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-08-27T02:11:29Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "database_mutation": false,
       "cms_mutation": false,
@@ -59,6 +111,11 @@
           "at": "2026-08-27T02:10:40Z",
           "status": "pr_open",
           "summary": "Opened the single scoped PR #3808 from validated implementation commit 36b213e72c0f365e1fdf68e5e04eb998d4a17135. No manual deploy, ledger write, scheduler, GSC mutation or search action was triggered."
+        },
+        {
+          "at": "2026-08-27T02:20:56Z",
+          "status": "merged",
+          "summary": "PR #3808 squash-merged as 4ce065e6efd7fe45104d9d482d75fbc1dc36fccf. Exact-SHA CI passed and the remote/local branch plus isolated worktree were removed without touching the operator workspace."
         }
       ]
     },
