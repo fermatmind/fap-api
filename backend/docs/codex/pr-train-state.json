@@ -1,15 +1,61 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T02:35:43Z",
+  "updated_at": "2026-08-27T02:50:48Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
-    "SEO-PLATFORM-08-D": {
+    "SEO-PLATFORM-08-E": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "pr_open",
+      "branch": "codex/seo-platform-08-e-production-closeout",
+      "commit_sha": "b2fc54320c7de3e5bfa218d33103322fb087d414",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3811",
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "details": "SEO-PLATFORM-08-D merged as 065107908b89eba5e82dafc936ec54e89784130d and exact-SHA CI run 33033798301 completed successfully."
+        },
+        "local": [
+          {
+            "command": "focused closeout/API/UI PHPUnit, scoped Pint, deploy syntax and classifier contracts",
+            "status": "passed",
+            "details": "11 tests and 120 assertions plus 44 classifier/workflow tests cover exact SHA, schema/readback, 401 permission negative, true zero, bilingual UI, L3/L4 disablement and zero production writes."
+          }
+        ],
+        "github": [],
+        "production": []
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": true,
+      "production_readback_allowed": true,
+      "history": [
+        {
+          "at": "2026-08-27T02:48:45Z",
+          "status": "local_checks_passed",
+          "summary": "Extended the existing deploy control plane with a sanitized read-only ledger closeout. It fails closed unless schema, protected route, external 401 negative probe, snapshot and exact REVISION SHA agree; zero rows remain verified zero while the capability becomes production_proven. L3/L4 and search remain disabled, and no real experiment or production write is required."
+        },
+        {
+          "at": "2026-08-27T02:50:48Z",
+          "status": "pr_open",
+          "summary": "Opened the single scoped PR #3811 from validated implementation commit b2fc54320c7de3e5bfa218d33103322fb087d414. Only the existing automatic exact-SHA deploy channel may produce production proof; no manual dispatch, SSH, migration, DB write, experiment or search action was triggered."
+        }
+      ]
+    },
+    "SEO-PLATFORM-08-D": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "merged",
       "branch": "codex/seo-platform-08-d-readonly-ledger",
       "commit_sha": "b2c81bd38c0ec674c6277e01b521bab06618f858",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3810",
@@ -25,14 +71,20 @@
             "details": "7 tests and 86 assertions cover protected read permission, pagination, sanitized evidence/status readback, true empty state, bilingual existing UI integration and copy compactness."
           }
         ],
-        "github": [],
+        "github": [
+          {
+            "name": "CI / exact-SHA validation receipt",
+            "status": "passed",
+            "details": "Main push run 33033798301 passed all classifier, hygiene, focused runtime, MBTI, Big Five, supply-chain, content-pack and exact-SHA receipt jobs."
+          }
+        ],
         "production": []
       },
       "failure_reason": null,
       "resume_policy": "continuous_goal",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-08-27T02:36:25Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "database_mutation": false,
       "cms_mutation": false,
@@ -49,6 +101,11 @@
           "at": "2026-08-27T02:35:43Z",
           "status": "pr_open",
           "summary": "Opened the single scoped PR #3810 from validated implementation commit b2c81bd38c0ec674c6277e01b521bab06618f858. No manual deploy, ledger write, experiment, scheduler, CMS, GSC or search action was triggered."
+        },
+        {
+          "at": "2026-08-27T02:48:45Z",
+          "status": "merged",
+          "summary": "PR #3810 squash-merged as 065107908b89eba5e82dafc936ec54e89784130d. Exact-SHA CI passed and the remote/local branch plus isolated worktree were removed without touching the operator workspace."
         }
       ]
     },

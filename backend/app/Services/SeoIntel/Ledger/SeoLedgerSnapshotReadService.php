@@ -24,7 +24,7 @@ final class SeoLedgerSnapshotReadService
 
         try {
             if (! Schema::connection($this->connection)->hasTable('seo_change_ledgers')) {
-                return $this->emptySnapshot($page, $perPage);
+                return $this->unavailableSnapshot($page, $perPage);
             }
 
             $query = DB::connection($this->connection)
@@ -32,18 +32,23 @@ final class SeoLedgerSnapshotReadService
                 ->orderByDesc('updated_at')
                 ->orderBy('ledger_id');
             $total = (int) (clone $query)->count();
+            if ($total === 0) {
+                return $this->emptySnapshot($page, $perPage);
+            }
             $rows = $query->forPage($page, $perPage)->get();
 
             return [
-                'state' => $total === 0 ? 'verified_zero' : 'production_proven',
+                'state' => 'production_proven',
+                'data_state' => 'available',
                 'items' => $rows->map(fn (object $row): array => $this->present($row))->values()->all(),
                 'pagination' => $this->pagination($page, $perPage, $total),
-                'empty' => $total === 0,
+                'empty' => false,
                 'read_only' => true,
             ];
         } catch (Throwable) {
             return [
                 'state' => 'unavailable',
+                'data_state' => 'unavailable',
                 'items' => [],
                 'pagination' => $this->pagination($page, $perPage, 0),
                 'empty' => false,
@@ -142,10 +147,24 @@ final class SeoLedgerSnapshotReadService
     private function emptySnapshot(int $page, int $perPage): array
     {
         return [
-            'state' => 'verified_zero',
+            'state' => 'production_proven',
+            'data_state' => 'verified_zero',
             'items' => [],
             'pagination' => $this->pagination($page, $perPage, 0),
             'empty' => true,
+            'read_only' => true,
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    private function unavailableSnapshot(int $page, int $perPage): array
+    {
+        return [
+            'state' => 'unavailable',
+            'data_state' => 'unavailable',
+            'items' => [],
+            'pagination' => $this->pagination($page, $perPage, 0),
+            'empty' => false,
             'read_only' => true,
         ];
     }

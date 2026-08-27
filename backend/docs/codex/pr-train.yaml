@@ -204,6 +204,59 @@ prs:
     deploy_allowed: true
     content_authority: backend
 
+  - id: SEO-PLATFORM-08-E
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/seo-platform-08-e-production-closeout
+    base: main
+    depends_on: ["SEO-PLATFORM-08-D"]
+    mode: execute
+    title: "SEO-PLATFORM-08-E: prove the production ledger capability"
+    scope: >
+      Add only a sanitized, read-only production closeout receipt to the
+      existing exact-SHA deploy control plane. Verify the deployed REVISION,
+      expand-compatible ledger schema, protected snapshot route, unauthenticated
+      401 negative probe, true empty snapshot and L3/L4 disablement. Do not run
+      a real experiment, manually dispatch, migrate, SSH, write production data,
+      publish content or submit to search.
+    allowed_paths:
+      - ../deploy.php
+      - app/Console/Commands/SeoLedgerProductionCloseout.php
+      - app/Services/SeoIntel/Ledger/SeoLedgerProductionCloseoutService.php
+      - app/Services/SeoIntel/Ledger/SeoLedgerSnapshotReadService.php
+      - tests/Feature/SeoIntel/SeoPlatform08ProductionCloseoutTest.php
+      - tests/Feature/SeoIntel/SeoPlatform08ReadOnlyLedgerTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    checks:
+      - "php -l ../deploy.php"
+      - "scoped PHP syntax and Pint"
+      - "php artisan test tests/Feature/SeoIntel/SeoPlatform08ProductionCloseoutTest.php tests/Feature/SeoIntel/SeoPlatform08ReadOnlyLedgerTest.php tests/Feature/Ops/SeoUxImpl03ExperimentLedgerTest.php tests/Feature/Ops/SeoOperationsCopyCleanupTest.php --no-ansi"
+      - "node --test ../.github/trunk/*.test.mjs"
+      - "automatic exact-SHA staging/production deploy and sanitized closeout receipt"
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "ruby -e 'require \"yaml\"; YAML.safe_load(File.read(\"docs/codex/pr-train.yaml\"), aliases: true)'"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: continuous_goal
+    merge_policy:
+      mode: github_checks_required
+      local_verify_required: true
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    deploy_allowed: true
+    production_readback_allowed: true
+    content_authority: exact_sha_production_closeout
+
   - id: EN-PARITY-W3-ARTICLES-BACKEND-PROMOTION-PACKAGE-01
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend

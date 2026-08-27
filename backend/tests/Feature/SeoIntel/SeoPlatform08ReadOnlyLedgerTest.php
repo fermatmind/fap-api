@@ -60,7 +60,8 @@ final class SeoPlatform08ReadOnlyLedgerTest extends TestCase
     {
         $snapshot = (new SeoLedgerSnapshotReadService)->snapshot();
 
-        $this->assertSame('verified_zero', $snapshot['state']);
+        $this->assertSame('production_proven', $snapshot['state']);
+        $this->assertSame('verified_zero', $snapshot['data_state']);
         $this->assertTrue($snapshot['empty']);
         $this->assertSame([], $snapshot['items']);
         $this->assertSame(0, $snapshot['pagination']['total']);
