@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T08:12:43Z",
+  "updated_at": "2026-08-27T09:51:58Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-09-F": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "bounded_natural_wait_pr_open",
-      "branch": "codex/seo-platform-09-f-bounded-natural-wait",
-      "commit_sha": "bd2380f1416c12f3d30f541b72078c8155b4edaa",
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/3821",
+      "status": "natural_scheduler_worker_pr_open",
+      "branch": "codex/seo-platform-09-f-natural-scheduler-worker",
+      "commit_sha": "30f62cc50d4eda7a59014472d68c30b0edd94402",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3822",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -40,6 +40,11 @@
             "name": "election corrective CI / exact-SHA validation receipt",
             "status": "passed",
             "details": "PR #3819 merged as 313c4f20fea1141d4e6ebaf661b70d78b59ed64e; main CI run 33050914562 completed successfully."
+          },
+          {
+            "name": "bounded wait corrective CI / exact-SHA validation receipt",
+            "status": "passed",
+            "details": "PR #3821 merged as 9c0f1c476c72f4fbefdb5ad0a18f3af18471fe2e; main CI run 33053076692 completed successfully."
           }
         ],
         "production": [
@@ -57,10 +62,20 @@
             "name": "election corrective deployment",
             "status": "unrelated_failure_lkg_restored",
             "details": "Deploy run 33051287330 passed staging and refreshed the production scheduler, but the pre-existing URL-truth reconciliation failed first because its sitemap detector reported comparable_sitemap_snapshot_unavailable. Weekly closeout did not run; automatic LKG restoration succeeded."
+          },
+          {
+            "name": "09:00 natural receipt deployment",
+            "status": "corrective_required_lkg_restored",
+            "details": "Deploy run 33053154995 passed staging and production activation for 496a486c4a4f76dbb8ec2de28bab0ae91b969e44, then exhausted the prior 1200-second closeout before its 09:00 slot. It returned production_unproven and restored c0a0adf016f1b9c4388bd09ebe5bfe1d773e0989."
+          },
+          {
+            "name": "bounded natural wait deployment",
+            "status": "corrective_required_cancelled",
+            "details": "Deploy run 33053464924 passed staging and activated 9c0f1c476c72f4fbefdb5ad0a18f3af18471fe2e. Its 3900-second Deployer wait exceeded the production job's fixed 45-minute limit and was cancelled; the installed cron scheduler produced no accepted 09:30 natural receipt."
           }
         ]
       },
-      "failure_reason": "The 09-F timeout and election defects are corrected. Its latest deployment was prevented from reaching closeout by an unrelated transient URL-truth sitemap measurement hold; no receipt was fabricated and LKG recovery succeeded.",
+      "failure_reason": "The production job timeout was shorter than the bounded Deployer closeout, and the cron-only scheduler fallback produced no accepted natural tick. The same-scope correction adds an automatic bounded schedule:work runner without directly invoking the weekly command.",
       "resume_policy": "continuous_goal",
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -136,6 +151,26 @@
           "at": "2026-08-27T08:12:43Z",
           "status": "bounded_natural_wait_pr_open",
           "summary": "Opened same-scope corrective PR #3821 from validated commit bd2380f1416c12f3d30f541b72078c8155b4edaa."
+        },
+        {
+          "at": "2026-08-27T09:42:24Z",
+          "status": "bounded_natural_wait_cancelled",
+          "summary": "PR #3821 merged as 9c0f1c476c72f4fbefdb5ad0a18f3af18471fe2e and exact-SHA CI passed. Deploy 33053464924 passed staging and activated production, but the cron-only fallback produced no accepted 09:30 receipt and GitHub cancelled the production job at its fixed 45-minute limit before the 3900-second Deployer bound."
+        },
+        {
+          "at": "2026-08-27T09:48:51Z",
+          "status": "natural_scheduler_worker_implementation",
+          "summary": "Implementing a bounded automatic Laravel schedule:work process alongside read-only closeout, raising only the production workflow timeout to 80 minutes and moving the still-single Thursday natural slot to 10:30 UTC. The deploy path still never invokes seo:weekly-decisions directly."
+        },
+        {
+          "at": "2026-08-27T09:51:02Z",
+          "status": "natural_scheduler_worker_local_checks_passed",
+          "summary": "Bounded natural scheduler worker and production timeout correction passed 17 focused SEO tests with 144 assertions, 20 scheduler/deploy SRE tests with 101 assertions, 25 classifier/workflow tests, scoped Pint, workflow validation, schedule listing, deploy syntax, JSON and diff checks."
+        },
+        {
+          "at": "2026-08-27T09:51:58Z",
+          "status": "natural_scheduler_worker_pr_open",
+          "summary": "Opened same-scope corrective PR #3822 from validated commit 30f62cc50d4eda7a59014472d68c30b0edd94402."
         }
       ]
     },

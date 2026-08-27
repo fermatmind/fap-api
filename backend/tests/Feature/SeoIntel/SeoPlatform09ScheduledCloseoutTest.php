@@ -39,7 +39,7 @@ final class SeoPlatform09ScheduledCloseoutTest extends TestCase
     #[Test]
     public function manual_trigger_is_excluded_and_never_persists_a_receipt(): void
     {
-        $receipt = $this->receiptService()->record('manual', CarbonImmutable::parse('2026-08-27T09:30:00Z'));
+        $receipt = $this->receiptService()->record('manual', CarbonImmutable::parse('2026-08-27T10:30:00Z'));
 
         $this->assertSame('MEASUREMENT_HOLD', $receipt['status']);
         $this->assertSame('natural_scheduler_receipt_required', $receipt['reason']);
@@ -60,7 +60,7 @@ final class SeoPlatform09ScheduledCloseoutTest extends TestCase
     public function natural_slot_is_idempotent_and_does_not_duplicate_selected_cards(): void
     {
         $this->seedLedgerAndCandidate();
-        $slot = CarbonImmutable::parse('2026-08-27T09:30:00Z');
+        $slot = CarbonImmutable::parse('2026-08-27T10:30:00Z');
         $service = $this->receiptService();
 
         $first = $service->record('scheduled', $slot);
@@ -85,7 +85,7 @@ final class SeoPlatform09ScheduledCloseoutTest extends TestCase
     #[Test]
     public function closeout_requires_a_natural_exact_release_receipt_and_accepts_real_zero(): void
     {
-        $slot = CarbonImmutable::parse('2026-08-27T09:30:00Z');
+        $slot = CarbonImmutable::parse('2026-08-27T10:30:00Z');
         $closeout = new SeoWeeklyDecisionCloseoutService($this->selector(), 'seo_intel');
         $pending = $closeout->evaluate(self::SHA, $slot);
         $this->assertSame('production_unproven', $pending['state']);
@@ -119,14 +119,18 @@ final class SeoPlatform09ScheduledCloseoutTest extends TestCase
         $this->assertTrue($schema->hasTable('seo_weekly_decision_receipts'));
 
         $bootstrap = (string) file_get_contents(base_path('bootstrap/app.php'));
-        $this->assertMatchesRegularExpression('/seo:weekly-decisions --trigger=scheduled --json[\s\S]+weeklyOn\(4, \'09:30\'\)[\s\S]+withoutOverlapping\(120\)[\s\S]+name\(\'seo-weekly-decisions:\'[\s\S]+onOneServer\(\)/', $bootstrap);
+        $this->assertMatchesRegularExpression('/seo:weekly-decisions --trigger=scheduled --json[\s\S]+weeklyOn\(4, \'10:30\'\)[\s\S]+withoutOverlapping\(120\)[\s\S]+name\(\'seo-weekly-decisions:\'[\s\S]+onOneServer\(\)/', $bootstrap);
         $this->assertSame(1, substr_count($bootstrap, 'seo:weekly-decisions --trigger=scheduled --json'));
         $deploy = (string) file_get_contents(base_path('../deploy.php'));
         $this->assertStringContainsString('seo:weekly-decision-production-closeout', $deploy);
         $this->assertStringContainsString('--wait-seconds=3600', $deploy);
         $this->assertStringContainsString('BASH, timeout: 3900);', $deploy);
+        $this->assertStringContainsString('artisan schedule:work --no-interaction --no-ansi', $deploy);
+        $this->assertStringContainsString('--kill-after=10s 3700', $deploy);
         $this->assertStringContainsString('/api/v0.5/ops/seo-intel/weekly-decisions', $deploy);
         $this->assertStringNotContainsString('seo:weekly-decisions --trigger=scheduled', $deploy);
+        $workflow = (string) file_get_contents(base_path('../.github/workflows/deploy.yml'));
+        $this->assertMatchesRegularExpression('/production:[\s\S]+timeout-minutes: 80[\s\S]+environment: production/', $workflow);
         $closeoutCommand = (string) file_get_contents(app_path('Console/Commands/SeoWeeklyDecisionCloseout.php'));
         $this->assertStringContainsString('waiting_for_natural_scheduler_receipt', $closeoutCommand);
         $this->assertStringContainsString('$nextHeartbeat = time() + 30', $closeoutCommand);
