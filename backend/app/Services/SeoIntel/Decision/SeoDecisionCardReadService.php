@@ -69,6 +69,11 @@ final class SeoDecisionCardReadService
             'revision_number' => (int) $row->revision_number,
             'ledger_id' => (string) $row->ledger_id,
             'selection_revision' => $row->selection_revision === null ? null : (string) $row->selection_revision,
+            'runtime_revision' => $row->runtime_revision === null ? null : (string) $row->runtime_revision,
+            'cache_revision' => $row->cache_revision === null ? null : (string) $row->cache_revision,
+            'release_revision' => $row->release_revision === null ? null : (string) $row->release_revision,
+            'owner' => (string) $row->owner,
+            'evidence_hash' => (string) $row->evidence_hash,
         ];
         foreach (SeoDecisionCardContract::REQUIRED_FIELDS as $field) {
             $card[$field] = match ($field) {

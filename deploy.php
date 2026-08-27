@@ -2448,6 +2448,40 @@ BASH);
     });
 });
 
+task('seo:weekly-decision-production-closeout', function () {
+    $target = currentHost()->getAlias();
+    $configuredHost = trim((string) get('ops_entry_host', ''));
+    if ($configuredHost === '') {
+        if ($target === 'production') {
+            throw new \RuntimeException('Production weekly decision closeout requires ops_entry_host.');
+        }
+
+        return;
+    }
+
+    $expectedSha = strtolower(trim((string) (getenv('DEPLOY_REVISION') ?: '')));
+    if (preg_match('/\A[a-f0-9]{40}\z/', $expectedSha) !== 1) {
+        throw new \RuntimeException('Weekly decision closeout requires an exact deploy SHA.');
+    }
+
+    $host = deploySafeHost($configuredHost, 'ops_entry_host');
+    $resolveArg = deployCurlResolveArg($host, true);
+    $url = deployHttpsUrlArg($host, '/api/v0.5/ops/seo-intel/weekly-decisions');
+    $expectedShaArg = deployShellArg($expectedSha);
+    $closeoutOptions = $target === 'production' ? '--wait-seconds=1200' : '--allow-unproven';
+
+    within('{{current_path}}/backend', function () use ($resolveArg, $url, $expectedShaArg, $closeoutOptions): void {
+        run(<<<BASH
+set -euo pipefail
+permission_status="\$(curl -sS -o /dev/null --max-time 15 -w '%{http_code}' {$resolveArg}{$url})"
+test "\$permission_status" = 401
+{{bin/php}} artisan seo:weekly-decision-closeout \
+  --expected-sha={$expectedShaArg} \
+  {$closeoutOptions} --json --no-interaction --no-ansi
+BASH);
+    });
+});
+
 task('healthcheck:queue-smoke', function () {
     within('{{current_path}}/backend', function () {
         run(<<<'BASH'
@@ -2778,6 +2812,7 @@ after('deploy:symlink', 'healthcheck:public-static-media-assets');
 after('deploy:symlink', 'healthcheck:scale-lookup');
 after('deploy:symlink', 'healthcheck:ops-entry-contract');
 after('healthcheck:ops-entry-contract', 'seo:ledger-production-closeout');
+after('seo:ledger-production-closeout', 'seo:weekly-decision-production-closeout');
 after('deploy:symlink', 'healthcheck:queue-smoke');
 
 /**

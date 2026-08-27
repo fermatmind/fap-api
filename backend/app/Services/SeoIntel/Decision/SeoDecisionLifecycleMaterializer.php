@@ -47,7 +47,9 @@ final class SeoDecisionLifecycleMaterializer
             if ($current !== null && ! hash_equals((string) $current->ledger_id, (string) $card['ledger_id'])) {
                 throw new RuntimeException('Decision cluster ledger binding mismatch.');
             }
-            if ($current !== null && hash_equals((string) $current->evidence_hash, (string) $card['evidence_hash'])) {
+            if ($current !== null
+                && hash_equals((string) $current->evidence_hash, (string) $card['evidence_hash'])
+                && hash_equals((string) $current->status, $targetState)) {
                 return $this->result($current, true, true);
             }
 
