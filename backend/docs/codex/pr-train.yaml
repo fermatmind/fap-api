@@ -55,6 +55,54 @@ prs:
     deploy_allowed: true
     content_authority: backend
 
+  - id: SEO-PLATFORM-08-B
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/seo-platform-08-b-evidence-adapters
+    base: main
+    depends_on: ["SEO-PLATFORM-08-A"]
+    mode: execute
+    title: "SEO-PLATFORM-08-B: adapt sanitized ledger evidence"
+    scope: >
+      Add only the read-only SEO ledger evidence adapter for SEO-PLATFORM-07
+      runtime, URL Truth, Page Family, CMS revision, deploy and aggregate GSC
+      evidence. Fail closed to MEASUREMENT_HOLD on unavailable, stale, private,
+      raw or quality-failed evidence. Do not add transitions, ledger writes,
+      APIs, UI, scheduler, search submission or production execution.
+    allowed_paths:
+      - app/Services/SeoIntel/Ledger/SeoLedgerEvidenceAdapter.php
+      - app/Services/SeoIntel/Ledger/SeoLedgerEvidenceReadService.php
+      - tests/Feature/SeoIntel/SeoPlatform08EvidenceAdapterTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    checks:
+      - "php -l app/Services/SeoIntel/Ledger/SeoLedgerEvidenceAdapter.php"
+      - "php -l app/Services/SeoIntel/Ledger/SeoLedgerEvidenceReadService.php"
+      - "php -l tests/Feature/SeoIntel/SeoPlatform08EvidenceAdapterTest.php"
+      - "vendor/bin/pint --test app/Services/SeoIntel/Ledger/SeoLedgerEvidenceAdapter.php app/Services/SeoIntel/Ledger/SeoLedgerEvidenceReadService.php tests/Feature/SeoIntel/SeoPlatform08EvidenceAdapterTest.php"
+      - "php artisan test tests/Feature/SeoIntel/SeoPlatform08EvidenceAdapterTest.php --no-ansi"
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "ruby -e 'require \"yaml\"; YAML.safe_load(File.read(\"docs/codex/pr-train.yaml\"), aliases: true)'"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: continuous_goal
+    merge_policy:
+      mode: github_checks_required
+      local_verify_required: true
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    deploy_allowed: true
+    content_authority: backend
+
   - id: EN-PARITY-W3-ARTICLES-BACKEND-PROMOTION-PACKAGE-01
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
