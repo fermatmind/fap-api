@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T02:20:56Z",
+  "updated_at": "2026-08-27T02:22:37Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-08-C": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/seo-platform-08-c-state-machine",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "7e33864b473001f72275f63ebe59413a87ccee9a",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3809",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -49,6 +49,11 @@
           "at": "2026-08-27T02:20:56Z",
           "status": "local_checks_passed",
           "summary": "Implemented only the exact state-machine and denial boundary. L3/L4 remain disabled, search submission is always false, and every applied or denied request creates a sanitized append-only event without overwriting prior audit evidence."
+        },
+        {
+          "at": "2026-08-27T02:22:37Z",
+          "status": "pr_open",
+          "summary": "Opened the single scoped PR #3809 from validated implementation commit 7e33864b473001f72275f63ebe59413a87ccee9a. No production, CMS, search, experiment or scheduler action was triggered."
         }
       ]
     },
