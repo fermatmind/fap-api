@@ -23,6 +23,8 @@ Do not treat a local state file, candidate PASS, package generation, database re
 6. Execute the locked state machine and merger with `scripts/run_career_content_agent.py`; read [references/agent-harness.md](references/agent-harness.md) for its command and checkpoint contract.
 7. If this contract itself changes in the repository, use `fap-api-deploy-sre` only to follow the pushed exact SHA and classifier-selected deploy-skip receipt. This is delivery observation, never an Agent gate or deploy authorization.
 
+Module authoring Skills are expert roles inside this one controlled Agent profile. They may improve a bounded candidate but may not create another Agent profile, gate, Current module, or authority. The research producer routes the `quick-decision` visual group through `fap-api-career-quick-decision-authoring`.
+
 ## Change routing
 
 - Source or candidate preparation only: dry compile and evidence handoff; no repository or runtime write unless explicitly requested.

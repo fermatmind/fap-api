@@ -26,6 +26,8 @@ Use O*NET tasks/work activities, public research, institutional reports, and a v
 
 Use O*NET Interests/Work Styles/Work Values and a versioned FermatMind mapping rubric for RIASEC, work patterns, fit signals, pressures, and environmental conditions. Use probabilistic and conditional language only. Never claim a personality certainly fits/fails and never use private assessment data.
 
+When the rendered scope includes the `quick-decision` visual group, use `fap-api-career-quick-decision-authoring` and its field/quality contracts. In particular, `how` must be a safe occupation-specific work sample, not a degree list, certification list, career ladder, or assessment CTA. Preserve the repository field-ownership map when projecting the candidate.
+
 ## 7. `risk.json`
 
 Use regulators, occupational-safety bodies, standards, O*NET work context, and professional norms for licensing/compliance, safety, liability, pressure, occupational change, and contract/project risks. Legal, medical, financial, and qualification content states its jurisdiction and is not individualized advice.

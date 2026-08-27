@@ -35,7 +35,7 @@ Require a non-empty explicit slug/cohort, locale list, primary jurisdiction, res
 
 1. Lock the request fields and canonical slug set. Do not expand the cohort implicitly.
 2. Read [references/source-policy.md](references/source-policy.md), then collect only allowed public evidence. Browse for current facts; record unavailable sources as blockers instead of filling them from model knowledge.
-3. Read [references/module-generation-contract.md](references/module-generation-contract.md), separate facts, proxies, market signals, internal rubrics, editorial synthesis, and conditional guidance, and generate exactly ten modules per slug and locale.
+3. Read [references/module-generation-contract.md](references/module-generation-contract.md), separate facts, proxies, market signals, internal rubrics, editorial synthesis, and conditional guidance, and generate exactly ten modules per slug and locale. When the requested content includes the `quick-decision` visual group, use `fap-api-career-quick-decision-authoring`; it is a bounded authoring specialist inside this producer flow, not a separate Agent or authority.
 4. Read [references/evidence-contract.md](references/evidence-contract.md). Bind every factual or time-sensitive claim to stable source keys, and record all unresolved claims explicitly.
 5. Run the validator against `<output_root>/<batch_id>` and inspect every error. The validator is read-only and must not repair input:
 

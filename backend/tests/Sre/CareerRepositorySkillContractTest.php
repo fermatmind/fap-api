@@ -15,6 +15,7 @@ final class CareerRepositorySkillContractTest extends TestCase
         yield 'canonical builder' => ['fap-api-career-canonical-builder'];
         yield 'content research producer' => ['fap-api-career-content-research-producer'];
         yield 'content orchestrator' => ['fap-api-career-content-orchestrator'];
+        yield 'quick decision authoring' => ['fap-api-career-quick-decision-authoring'];
         yield 'editorial QA' => ['fermatmind-career-editorial-qa'];
     }
 
@@ -33,6 +34,7 @@ final class CareerRepositorySkillContractTest extends TestCase
         $builder = (string) file_get_contents($root.'fap-api-career-canonical-builder/SKILL.md');
         $producer = (string) file_get_contents($root.'fap-api-career-content-research-producer/SKILL.md');
         $orchestrator = (string) file_get_contents($root.'fap-api-career-content-orchestrator/SKILL.md');
+        $quickDecision = (string) file_get_contents($root.'fap-api-career-quick-decision-authoring/SKILL.md');
         $editorial = (string) file_get_contents($root.'fermatmind-career-editorial-qa/SKILL.md');
 
         self::assertStringContainsString('career:ten-block-current-package-compile', $builder);
@@ -56,6 +58,15 @@ final class CareerRepositorySkillContractTest extends TestCase
         );
         self::assertStringContainsString('scripts/run_career_content_agent.py', $orchestrator);
         self::assertStringContainsString('exactly one controlled Agent profile', $orchestrator);
+        self::assertStringContainsString('fap-api-career-quick-decision-authoring', $producer.$orchestrator);
+        self::assertStringContainsString('career-sharded-current-field-ownership.v1.json', (string) file_get_contents(
+            $root.'fap-api-career-quick-decision-authoring/references/authoring-contract.md',
+        ));
+        self::assertStringContainsString('Do not create `agents/openai.yaml`', $quickDecision);
+        self::assertFileDoesNotExist($root.'fap-api-career-quick-decision-authoring/agents/openai.yaml');
+        foreach (['authoring-contract.md', 'source-routing.md', 'quality-rubric.md'] as $reference) {
+            self::assertFileExists($root.'fap-api-career-quick-decision-authoring/references/'.$reference);
+        }
         self::assertFileExists(
             $root.'fap-api-career-content-orchestrator/references/schemas/career.content_agent.request.v1.schema.json',
         );
@@ -76,6 +87,7 @@ final class CareerRepositorySkillContractTest extends TestCase
                 $root.'fap-api-career-canonical-builder/SKILL.md',
                 $root.'fap-api-career-content-research-producer/SKILL.md',
                 $root.'fap-api-career-content-orchestrator/SKILL.md',
+                $root.'fap-api-career-quick-decision-authoring/SKILL.md',
                 $root.'fermatmind-career-editorial-qa/SKILL.md',
             ],
         ));
