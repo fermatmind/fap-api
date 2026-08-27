@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T05:25:02Z",
+  "updated_at": "2026-08-27T05:25:56Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-09-F": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "corrective_local_checks_passed",
+      "status": "corrective_pr_open",
       "branch": "codex/seo-platform-09-f-closeout-heartbeat",
-      "commit_sha": null,
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/3817",
+      "commit_sha": "f5c2b81185964823112d62e611f5931c97471c5c",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3818",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -71,6 +71,11 @@
           "at": "2026-08-27T05:25:02Z",
           "status": "corrective_local_checks_passed",
           "summary": "Added a sanitized 30-second read-only wait heartbeat and moved the still-single Thursday natural slot to 06:00 UTC. Focused scheduler, Workbench and lifecycle tests pass with 13 tests and 107 assertions."
+        },
+        {
+          "at": "2026-08-27T05:25:56Z",
+          "status": "corrective_pr_open",
+          "summary": "Opened same-scope corrective PR #3818 from validated commit f5c2b81185964823112d62e611f5931c97471c5c."
         }
       ]
     },
