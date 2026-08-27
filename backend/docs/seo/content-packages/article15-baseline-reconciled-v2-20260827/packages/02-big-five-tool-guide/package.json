@@ -1,0 +1,291 @@
+{
+    "schema_version": "fermatmind.article15_baseline_reconciled_content_package.v2",
+    "package_id": "ARTICLE15-BASELINE-RECONCILED-V2-02-big-five-tool-guide",
+    "package_order": 2,
+    "decision": "CHANGE",
+    "status": {
+        "content_package_only": true,
+        "requires_operator_review": true,
+        "import_ready": false,
+        "publish_allowed": false,
+        "search_submit_allowed": false
+    },
+    "supersedes_for_execution": {
+        "execution_id": "ARTICLE15-EXACT-PACKAGE-REVISION-BOUND-20260826-v1",
+        "execution_manifest_path": "backend/docs/seo/content-packages/article15-exact-package-revision-bound-20260826/manifest.json",
+        "execution_manifest_sha256": "eb9a0254600991e2b4d7967b7c4d46c27d604719d8c40ba63353a20cd50a96e7",
+        "v1_package_id": "ARTICLE15-BATCH-A-02-big-five-tool-guide",
+        "v1_package_path": "backend/docs/seo/content-packages/article15-batch-a-20260826/packages/02-big-five-tool-guide/package.json",
+        "v1_package_sha256": "ccc0b4c617171307eaacf0b659886b57907c2a0d9664e42aab8b0cb72e8c04d4",
+        "v1_body_sha256": "d98f2ada7e33c237aa15b6a028bb067815f4d07049373c5645834051718f5d01",
+        "v1_is_historical_source_only": true
+    },
+    "identity_lock": {
+        "article_id": 3,
+        "translation_group_id": "big5-v2-df8d5e7f157e301b9a0f4dc8e6b8c3b66c7e31f4",
+        "published_revision_id": 383,
+        "locale": "zh-CN",
+        "slug": "big-five-tool-guide",
+        "canonical_url": "https://fermatmind.com/zh/articles/big-five-tool-guide",
+        "query_owner_relationships": [
+            {
+                "cluster_id": "big_five_model_overview_en",
+                "relationship": "supporting_url",
+                "primary_owner": "/en/personality/big-five",
+                "confidence": "high"
+            },
+            {
+                "cluster_id": "big_five_model_overview_zh-CN",
+                "relationship": "supporting_url",
+                "primary_owner": "/zh/personality/big-five",
+                "confidence": "medium"
+            },
+            {
+                "cluster_id": "big_five_test_zh-CN",
+                "relationship": "supporting_url",
+                "primary_owner": "/zh/tests/big-five-personality-test-ocean-model",
+                "confidence": "high"
+            },
+            {
+                "cluster_id": "generic_personality_test_zh-CN",
+                "relationship": "supporting_url",
+                "primary_owner": "/zh/tests",
+                "confidence": "medium"
+            },
+            {
+                "cluster_id": "mbti_model_overview_en",
+                "relationship": "supporting_url",
+                "primary_owner": "/en/topics/mbti",
+                "confidence": "medium"
+            },
+            {
+                "cluster_id": "mbti_model_overview_zh-CN",
+                "relationship": "supporting_url",
+                "primary_owner": "/zh/topics/mbti",
+                "confidence": "medium"
+            }
+        ]
+    },
+    "baseline_lock": {
+        "observed_at_utc": "2026-08-27T03:35:44Z",
+        "production_active_sha": "64c386fa0e0fa5167c08c207befe33be75bb447d",
+        "production_state_sha256": "2ef8def16b4806fb8db5c4351edbf3a4a360171f1915f7d191ec098effa99b6e",
+        "production_revision_set_sha256": "f42e1db146ec104d657dff77d147a8dc17164e899850f4c2dbd059eb346a50a9",
+        "article_row_body_sha256": "30d2c0c00d7d373c5dbad02856c67f9f238ff2f058a90726cd9663e60c884ef6",
+        "current_revision_body_sha256": "30d2c0c00d7d373c5dbad02856c67f9f238ff2f058a90726cd9663e60c884ef6",
+        "current_public_body_sha256": "30d2c0c00d7d373c5dbad02856c67f9f238ff2f058a90726cd9663e60c884ef6",
+        "published_revision_id": 383,
+        "projection_contract": {
+            "payload_method": "ArticleController::publicArticlePayload",
+            "body_transform_method": "ArticleBodyHeadingGuard::downgradeMarkdownH1ToH2",
+            "implementation_file_sha256": {
+                "backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php": "dbd2daf09e30b2bc15c052793dd8d78719f9340fcfb20fd3dda911b44984ea0c",
+                "backend/app/Services/Cms/ArticleBodyHeadingGuard.php": "11f353485a97adc266bb207921c3befa4a9cb886d446ada128bef8b03aaef3cc"
+            }
+        }
+    },
+    "files": {
+        "current.public.zh-CN.md": {
+            "sha256": "30d2c0c00d7d373c5dbad02856c67f9f238ff2f058a90726cd9663e60c884ef6",
+            "authority": "production_public_api_projection"
+        },
+        "proposed.cms.zh-CN.md": {
+            "sha256": "3006dcab9b82819a582455569dc5adb703a55918859a3c486f8f3f4ee0ad6981",
+            "authority": "operator_review_candidate_only"
+        }
+    },
+    "body_write_plan": {
+        "write_count": 1,
+        "mode": "replace_with_exact_proposed_cms_bytes",
+        "proposed_cms_file": "proposed.cms.zh-CN.md",
+        "proposed_cms_sha256": "3006dcab9b82819a582455569dc5adb703a55918859a3c486f8f3f4ee0ad6981",
+        "projected_public_sha256": "3006dcab9b82819a582455569dc5adb703a55918859a3c486f8f3f4ee0ad6981"
+    },
+    "field_plan": {
+        "title": {
+            "status": "CHANGE",
+            "current": "大五人格测试工具使用与边界指南",
+            "proposed": "大五人格测试结果怎么看？五维分数、使用方法与边界"
+        },
+        "h1": {
+            "status": "CHANGE",
+            "current": "大五人格测试工具使用与边界指南",
+            "proposed": "大五人格测试结果怎么看？五维分数、使用方法与边界"
+        },
+        "seo_title": {
+            "status": "CHANGE",
+            "current": "大五人格测试工具：怎么用、怎么看分数与边界",
+            "proposed": "大五人格测试结果怎么看？五维分数、使用方法与边界"
+        },
+        "seo_description": {
+            "status": "CHANGE",
+            "current": "大五人格测试适合支持结构化自我反思，不应用于诊断、筛选或预测。本文说明测试前、作答时、读报告后的核对方法与产品信息 Unknown 边界。",
+            "proposed": "大五人格结果先看开放性、尽责性、外倾性、宜人性和负性情绪倾向的分数依据，再用情境与反例验证；不用于诊断、招聘筛选、能力或未来预测。"
+        },
+        "intro": {
+            "status": "CHANGE",
+            "current": "先核对工具、分数与比较依据，再用低风险观察收集吻合与反例；不要让一次人格测试替你判定能力、身份或未来。",
+            "proposed": "大五人格结果通常用开放性、尽责性、外倾性、宜人性和负性情绪倾向五个连续维度呈现。先核对量表、分数类型和比较依据，再把高低分翻译成具体情境中的观察问题，同时寻找反例。结果可以支持自我反思，但不能判断能力、诊断心理状态、筛选求职者或预测未来。"
+        },
+        "body_markdown": {
+            "status": "CHANGE",
+            "current_revision_sha256": "30d2c0c00d7d373c5dbad02856c67f9f238ff2f058a90726cd9663e60c884ef6",
+            "current_public_sha256": "30d2c0c00d7d373c5dbad02856c67f9f238ff2f058a90726cd9663e60c884ef6",
+            "proposed_cms_sha256": "3006dcab9b82819a582455569dc5adb703a55918859a3c486f8f3f4ee0ad6981"
+        },
+        "faq_visible_body": {
+            "status": "CHANGE",
+            "current": [],
+            "proposed": [
+                {
+                    "question": "大五人格结果应该先看什么？",
+                    "answer": "先看工具与版本、五维名称、分数类型和比较依据，再看每个维度的高低位置。缺少量尺、常模或参照群体时，不要把一个数字直接解释成排名、优劣或能力。"
+                },
+                {
+                    "question": "大五人格五个维度的高分和低分代表好坏吗？",
+                    "answer": "不代表普遍的好坏。开放性、尽责性、外倾性、宜人性和负性情绪倾向都是连续维度；同一倾向在不同任务、关系和压力环境中可能带来不同优势与代价。"
+                },
+                {
+                    "question": "两个维度要不要组合起来看？",
+                    "answer": "可以把多个维度放回同一个场景观察，但不要据此发明固定人格类型。例如会议参与可能同时受外倾性、压力、准备时间和团队结构影响，组合解读仍要保留情境与反例。"
+                },
+                {
+                    "question": "大五人格结果不同或复测变化怎么办？",
+                    "answer": "先核对是否为同一工具、版本、计分方式和比较群体，再记录作答时的疲劳、压力与近期事件。差异可能来自工具、情境或真实变化；在信息不足时标记“待核实”。"
+                },
+                {
+                    "question": "大五人格结果可以用于招聘、诊断或职业预测吗？",
+                    "answer": "本文不支持这些用途。一次在线结果不能单独用于招聘筛选、医疗或心理诊断、能力判断、录取、职业适配或成功预测；高影响决策需要与用途匹配的独立证据和专业流程。"
+                }
+            ]
+        },
+        "answer_surface_v1": {
+            "status": "CHANGE",
+            "current_public_api": [
+                {
+                    "question": "什么时候适合阅读这篇文章？",
+                    "answer": "当你想把公开内容和测评、人格画像或职业建议串起来时，先从这篇文章的核心摘要开始。"
+                },
+                {
+                    "question": "这篇文章会替代正式判断吗？",
+                    "answer": "不会。它只提供公开解释和行动线索，不替代医疗、法律或专业诊断。"
+                }
+            ],
+            "proposed": [
+                {
+                    "question": "大五人格结果应该先看什么？",
+                    "answer": "先看工具与版本、五维名称、分数类型和比较依据，再看每个维度的高低位置。缺少量尺、常模或参照群体时，不要把一个数字直接解释成排名、优劣或能力。"
+                },
+                {
+                    "question": "大五人格五个维度的高分和低分代表好坏吗？",
+                    "answer": "不代表普遍的好坏。开放性、尽责性、外倾性、宜人性和负性情绪倾向都是连续维度；同一倾向在不同任务、关系和压力环境中可能带来不同优势与代价。"
+                },
+                {
+                    "question": "两个维度要不要组合起来看？",
+                    "answer": "可以把多个维度放回同一个场景观察，但不要据此发明固定人格类型。例如会议参与可能同时受外倾性、压力、准备时间和团队结构影响，组合解读仍要保留情境与反例。"
+                },
+                {
+                    "question": "大五人格结果不同或复测变化怎么办？",
+                    "answer": "先核对是否为同一工具、版本、计分方式和比较群体，再记录作答时的疲劳、压力与近期事件。差异可能来自工具、情境或真实变化；在信息不足时标记“待核实”。"
+                },
+                {
+                    "question": "大五人格结果可以用于招聘、诊断或职业预测吗？",
+                    "answer": "本文不支持这些用途。一次在线结果不能单独用于招聘筛选、医疗或心理诊断、能力判断、录取、职业适配或成功预测；高影响决策需要与用途匹配的独立证据和专业流程。"
+                }
+            ],
+            "v1_intent_supported_by_visible_body": false
+        },
+        "primary_cta": {
+            "status": "CHANGE",
+            "current_public_api": [
+                {
+                    "key": "articles_index",
+                    "title": "继续浏览文章",
+                    "body": "回到文章目录，继续扩展公开内容阅读链路。",
+                    "href": "/zh/articles",
+                    "kind": "content_continue"
+                },
+                {
+                    "key": "topic_hub",
+                    "title": "进入主题聚合",
+                    "body": "把文章阅读继续到更结构化的主题入口。",
+                    "href": "/zh/topics",
+                    "kind": "discover"
+                },
+                {
+                    "key": "start_test",
+                    "title": "开始测试",
+                    "body": "如果你想把阅读转成自我测量，可以从测试入口开始。",
+                    "href": "/zh/tests/big-five-personality-test-ocean-model",
+                    "kind": "start_test"
+                }
+            ],
+            "proposed": [
+                {
+                    "label": "开始大五人格测试",
+                    "href": "/zh/tests/big-five-personality-test-ocean-model",
+                    "intent": "test_intent_handoff"
+                }
+            ],
+            "effective_primary": [
+                {
+                    "label": "开始大五人格测试",
+                    "href": "/zh/tests/big-five-personality-test-ocean-model",
+                    "intent": "test_intent_handoff"
+                }
+            ]
+        },
+        "reading_minutes": {
+            "status": "CHANGE",
+            "current": 1,
+            "proposed": 9,
+            "formula_result": 9
+        },
+        "related_test_slug": {
+            "status": "KEEP",
+            "current": "big-five-personality-test-ocean-model",
+            "proposed": "big-five-personality-test-ocean-model"
+        }
+    },
+    "editorial_rebase": {
+        "source": "latest_locked_production_revision_bytes",
+        "v1_proposed_full_body_reused": false,
+        "allowed_change_summary": [
+            "title_h1_seo_first_screen",
+            "five_dimension_reading",
+            "five_faqs",
+            "duplicate_cta"
+        ],
+        "planned_removed_top_level_blocks": [
+            "大五人格测试工具使用与边界指南"
+        ],
+        "unplanned_removed_top_level_blocks": []
+    },
+    "internal_links": [
+        {
+            "label": "大五人格 Hub",
+            "href": "/zh/personality/big-five",
+            "role": "context"
+        },
+        {
+            "label": "开始大五人格测试",
+            "href": "/zh/tests/big-five-personality-test-ocean-model",
+            "role": "primary_cta"
+        }
+    ],
+    "claim_boundary": "只拥有结果怎么看、怎么使用和使用边界；模型总览交给 Big Five Hub，测试意图交给正式测试页；不转移量表证据，不作诊断、筛选、能力或未来预测。",
+    "forbidden_claims": [
+        "diagnosis",
+        "guaranteed_admission",
+        "unique_career",
+        "fixed_personality",
+        "hiring_screening",
+        "ability_prediction",
+        "official_endorsement"
+    ],
+    "operational_measurement": {
+        "seven_day": "Unknown",
+        "fourteen_day": "Unknown"
+    },
+    "package_sha256": "4ddc140f416c060c7654fecfaf04f73bda6e24f6724d573621d076d7c3a8343f"
+}

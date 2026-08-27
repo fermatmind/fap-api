@@ -1,0 +1,292 @@
+{
+    "schema_version": "fermatmind.article15_baseline_reconciled_content_package.v2",
+    "package_id": "ARTICLE15-BASELINE-RECONCILED-V2-14-mbti-vs-holland-code-career-choice",
+    "package_order": 14,
+    "decision": "KEEP",
+    "status": {
+        "content_package_only": true,
+        "requires_operator_review": true,
+        "import_ready": false,
+        "publish_allowed": false,
+        "search_submit_allowed": false
+    },
+    "supersedes_for_execution": {
+        "execution_id": "ARTICLE15-EXACT-PACKAGE-REVISION-BOUND-20260826-v1",
+        "execution_manifest_path": "backend/docs/seo/content-packages/article15-exact-package-revision-bound-20260826/manifest.json",
+        "execution_manifest_sha256": "eb9a0254600991e2b4d7967b7c4d46c27d604719d8c40ba63353a20cd50a96e7",
+        "v1_package_id": "ARTICLE15-BATCH-C-04-mbti-vs-holland-code-career-choice",
+        "v1_package_path": "backend/docs/seo/content-packages/article15-batch-c-20260826/packages/04-mbti-vs-holland-code-career-choice/package.json",
+        "v1_package_sha256": "043dae5246afe27b47b3bf337f80792f81693a570d9b6dea7f36f6707963060b",
+        "v1_body_sha256": "6ef3118abe6572483d65e2ab6f38bee6b87835df4a1a3b70924108e6a92ab625",
+        "v1_is_historical_source_only": true
+    },
+    "identity_lock": {
+        "article_id": 39,
+        "translation_group_id": "article_mbti_vs_holland_career_choice_v1",
+        "published_revision_id": 44,
+        "locale": "en",
+        "slug": "mbti-vs-holland-code-career-choice",
+        "canonical_url": "https://fermatmind.com/en/articles/mbti-vs-holland-code-career-choice",
+        "query_owner_relationships": [
+            {
+                "cluster_id": null,
+                "relationship": "no_active_cluster_assignment",
+                "primary_owner": null,
+                "confidence": "not_applicable"
+            }
+        ]
+    },
+    "baseline_lock": {
+        "observed_at_utc": "2026-08-27T03:35:44Z",
+        "production_active_sha": "64c386fa0e0fa5167c08c207befe33be75bb447d",
+        "production_state_sha256": "2ef8def16b4806fb8db5c4351edbf3a4a360171f1915f7d191ec098effa99b6e",
+        "production_revision_set_sha256": "f42e1db146ec104d657dff77d147a8dc17164e899850f4c2dbd059eb346a50a9",
+        "article_row_body_sha256": "be91e8c640a4b14f374804f9967e78b389fa31c9921c667fce90959df1e1e35b",
+        "current_revision_body_sha256": "be91e8c640a4b14f374804f9967e78b389fa31c9921c667fce90959df1e1e35b",
+        "current_public_body_sha256": "202709dc269c766ec7887f15309c1e1d9fcbc8e09e24b7e24945fe6d1f237447",
+        "published_revision_id": 44,
+        "projection_contract": {
+            "payload_method": "ArticleController::publicArticlePayload",
+            "body_transform_method": "ArticleBodyHeadingGuard::downgradeMarkdownH1ToH2",
+            "implementation_file_sha256": {
+                "backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php": "dbd2daf09e30b2bc15c052793dd8d78719f9340fcfb20fd3dda911b44984ea0c",
+                "backend/app/Services/Cms/ArticleBodyHeadingGuard.php": "11f353485a97adc266bb207921c3befa4a9cb886d446ada128bef8b03aaef3cc"
+            }
+        }
+    },
+    "files": {
+        "current.public.en.md": {
+            "sha256": "202709dc269c766ec7887f15309c1e1d9fcbc8e09e24b7e24945fe6d1f237447",
+            "authority": "production_public_api_projection"
+        }
+    },
+    "body_write_plan": {
+        "write_count": 0,
+        "mode": "preserve_current_raw_revision_bytes",
+        "proposed_cms_file": null,
+        "proposed_cms_sha256": null,
+        "projected_public_sha256": "202709dc269c766ec7887f15309c1e1d9fcbc8e09e24b7e24945fe6d1f237447"
+    },
+    "field_plan": {
+        "title": {
+            "status": "KEEP",
+            "current": "MBTI vs. Holland Code/RIASEC: Which Career Test Should You Take?",
+            "proposed": "MBTI vs. Holland Code/RIASEC: Which Career Test Should You Take?"
+        },
+        "h1": {
+            "status": "KEEP",
+            "current": "MBTI vs. Holland Code/RIASEC: Which Career Test Should You Take?",
+            "proposed": "MBTI vs. Holland Code/RIASEC: Which Career Test Should You Take?"
+        },
+        "seo_title": {
+            "status": "KEEP",
+            "current": "MBTI vs Holland Code: Which Career Test? | FermatMind",
+            "proposed": "MBTI vs Holland Code: Which Career Test? | FermatMind"
+        },
+        "seo_description": {
+            "status": "KEEP",
+            "current": "Use Holland Code/RIASEC to explore interests and work environments; use MBTI to understand work style. Compare both for majors, jobs, and career change.",
+            "proposed": "Use Holland Code/RIASEC to explore interests and work environments; use MBTI to understand work style. Compare both for majors, jobs, and career change."
+        },
+        "intro": {
+            "status": "KEEP",
+            "current": "If your question is “What career fits me?”, the Holland Code/RIASEC framework is usually more direct than MBTI. If your question is “How do I tend to work with people, structure, and decisions?”, MBTI can be useful as a work-style lens. The strongest approach is not choosing one test over the other, but combining career interests, personality preferences, and real job evidence.",
+            "proposed": "If your question is “What career fits me?”, the Holland Code/RIASEC framework is usually more direct than MBTI. If your question is “How do I tend to work with people, structure, and decisions?”, MBTI can be useful as a work-style lens. The strongest approach is not choosing one test over the other, but combining career interests, personality preferences, and real job evidence."
+        },
+        "body_markdown": {
+            "status": "KEEP",
+            "current_revision_sha256": "be91e8c640a4b14f374804f9967e78b389fa31c9921c667fce90959df1e1e35b",
+            "current_public_sha256": "202709dc269c766ec7887f15309c1e1d9fcbc8e09e24b7e24945fe6d1f237447",
+            "proposed_cms_sha256": null
+        },
+        "faq_visible_body": {
+            "status": "KEEP",
+            "current": [
+                {
+                    "question": "Is MBTI or Holland Code better for career choice?",
+                    "answer": "If you can only start with one, Holland Code/RIASEC is usually more direct for career exploration because it focuses on career interests, work activities, and work environments. MBTI is better for understanding work style, communication, and collaboration preferences."
+                },
+                {
+                    "question": "Can MBTI be used for career choice?",
+                    "answer": "Yes, but only as a reference. MBTI is more useful for understanding work preferences and communication style than for deciding whether a specific career is definitely suitable or unsuitable."
+                },
+                {
+                    "question": "What is the Holland Career Interest Test?",
+                    "answer": "The Holland Career Interest Test uses the RIASEC framework to describe career interests: Realistic, Investigative, Artistic, Social, Enterprising, and Conventional. It is useful for exploring majors, career directions, and career-change options."
+                },
+                {
+                    "question": "What if my MBTI and Holland Code results seem to conflict?",
+                    "answer": "They may not truly conflict. MBTI focuses more on work style, while Holland Code/RIASEC focuses more on career interests. For example, you may prefer lower-interaction environments but still have strong Social or Enterprising interests, or you may enjoy Investigative work but need deep independent time. Interpret the two results at different levels."
+                },
+                {
+                    "question": "What should I do after taking the tests?",
+                    "answer": "Turn your results into real questions: Which careers should I explore? What do these jobs involve every day? What skills do they require? Can I test this through a course, project, internship, interview, or job shadowing? Assessments are a starting point, not a final decision."
+                }
+            ],
+            "proposed": [
+                {
+                    "question": "Is MBTI or Holland Code better for career choice?",
+                    "answer": "If you can only start with one, Holland Code/RIASEC is usually more direct for career exploration because it focuses on career interests, work activities, and work environments. MBTI is better for understanding work style, communication, and collaboration preferences."
+                },
+                {
+                    "question": "Can MBTI be used for career choice?",
+                    "answer": "Yes, but only as a reference. MBTI is more useful for understanding work preferences and communication style than for deciding whether a specific career is definitely suitable or unsuitable."
+                },
+                {
+                    "question": "What is the Holland Career Interest Test?",
+                    "answer": "The Holland Career Interest Test uses the RIASEC framework to describe career interests: Realistic, Investigative, Artistic, Social, Enterprising, and Conventional. It is useful for exploring majors, career directions, and career-change options."
+                },
+                {
+                    "question": "What if my MBTI and Holland Code results seem to conflict?",
+                    "answer": "They may not truly conflict. MBTI focuses more on work style, while Holland Code/RIASEC focuses more on career interests. For example, you may prefer lower-interaction environments but still have strong Social or Enterprising interests, or you may enjoy Investigative work but need deep independent time. Interpret the two results at different levels."
+                },
+                {
+                    "question": "What should I do after taking the tests?",
+                    "answer": "Turn your results into real questions: Which careers should I explore? What do these jobs involve every day? What skills do they require? Can I test this through a course, project, internship, interview, or job shadowing? Assessments are a starting point, not a final decision."
+                }
+            ]
+        },
+        "answer_surface_v1": {
+            "status": "KEEP",
+            "current_public_api": [
+                {
+                    "question": "Is MBTI or Holland Code better for career choice?",
+                    "answer": "If you can only start with one, Holland Code/RIASEC is usually more direct for career exploration because it focuses on career interests, work activities, and work environments. MBTI is better for understanding work style, communication, and collaboration preferences."
+                },
+                {
+                    "question": "Can MBTI be used for career choice?",
+                    "answer": "Yes, but only as a reference. MBTI is more useful for understanding work preferences and communication style than for deciding whether a specific career is definitely suitable or unsuitable."
+                },
+                {
+                    "question": "What is the Holland Career Interest Test?",
+                    "answer": "The Holland Career Interest Test uses the RIASEC framework to describe career interests: Realistic, Investigative, Artistic, Social, Enterprising, and Conventional. It is useful for exploring majors, career directions, and career-change options."
+                },
+                {
+                    "question": "What if my MBTI and Holland Code results seem to conflict?",
+                    "answer": "They may not truly conflict. MBTI focuses more on work style, while Holland Code/RIASEC focuses more on career interests. For example, you may prefer lower-interaction environments but still have strong Social or Enterprising interests, or you may enjoy Investigative work but need deep independent time. Interpret the two results at different levels."
+                },
+                {
+                    "question": "What should I do after taking the tests?",
+                    "answer": "Turn your results into real questions: Which careers should I explore? What do these jobs involve every day? What skills do they require? Can I test this through a course, project, internship, interview, or job shadowing? Assessments are a starting point, not a final decision."
+                }
+            ],
+            "proposed": [
+                {
+                    "question": "Is MBTI or Holland Code better for career choice?",
+                    "answer": "If you can only start with one, Holland Code/RIASEC is usually more direct for career exploration because it focuses on career interests, work activities, and work environments. MBTI is better for understanding work style, communication, and collaboration preferences."
+                },
+                {
+                    "question": "Can MBTI be used for career choice?",
+                    "answer": "Yes, but only as a reference. MBTI is more useful for understanding work preferences and communication style than for deciding whether a specific career is definitely suitable or unsuitable."
+                },
+                {
+                    "question": "What is the Holland Career Interest Test?",
+                    "answer": "The Holland Career Interest Test uses the RIASEC framework to describe career interests: Realistic, Investigative, Artistic, Social, Enterprising, and Conventional. It is useful for exploring majors, career directions, and career-change options."
+                },
+                {
+                    "question": "What if my MBTI and Holland Code results seem to conflict?",
+                    "answer": "They may not truly conflict. MBTI focuses more on work style, while Holland Code/RIASEC focuses more on career interests. For example, you may prefer lower-interaction environments but still have strong Social or Enterprising interests, or you may enjoy Investigative work but need deep independent time. Interpret the two results at different levels."
+                },
+                {
+                    "question": "What should I do after taking the tests?",
+                    "answer": "Turn your results into real questions: Which careers should I explore? What do these jobs involve every day? What skills do they require? Can I test this through a course, project, internship, interview, or job shadowing? Assessments are a starting point, not a final decision."
+                }
+            ],
+            "v1_intent_supported_by_visible_body": true
+        },
+        "primary_cta": {
+            "status": "KEEP",
+            "current_public_api": [
+                {
+                    "key": "article_mbti_vs_holland_primary_riasec",
+                    "title": "Start with the Holland Code/RIASEC Test",
+                    "body": null,
+                    "href": "/en/tests/holland-career-interest-test-riasec",
+                    "kind": "start_test"
+                },
+                {
+                    "key": "article_mbti_vs_holland_secondary_mbti",
+                    "title": "Then take the MBTI Personality Test",
+                    "body": null,
+                    "href": "/en/tests/mbti-personality-test-16-personality-types",
+                    "kind": "start_test"
+                },
+                {
+                    "key": "article_mbti_vs_holland_tertiary_big_five",
+                    "title": "Add the Big Five Personality Test",
+                    "body": null,
+                    "href": "/en/tests/big-five-personality-test-ocean-model",
+                    "kind": "start_test"
+                }
+            ],
+            "proposed": [
+                {
+                    "key": "article_mbti_vs_holland_primary_riasec",
+                    "title": "Start with the Holland Code/RIASEC Test",
+                    "body": null,
+                    "href": "/en/tests/holland-career-interest-test-riasec",
+                    "kind": "start_test"
+                },
+                {
+                    "key": "article_mbti_vs_holland_secondary_mbti",
+                    "title": "Then take the MBTI Personality Test",
+                    "body": null,
+                    "href": "/en/tests/mbti-personality-test-16-personality-types",
+                    "kind": "start_test"
+                },
+                {
+                    "key": "article_mbti_vs_holland_tertiary_big_five",
+                    "title": "Add the Big Five Personality Test",
+                    "body": null,
+                    "href": "/en/tests/big-five-personality-test-ocean-model",
+                    "kind": "start_test"
+                }
+            ],
+            "effective_primary": [
+                {
+                    "key": "article_mbti_vs_holland_primary_riasec",
+                    "title": "Start with the Holland Code/RIASEC Test",
+                    "body": null,
+                    "href": "/en/tests/holland-career-interest-test-riasec",
+                    "kind": "start_test"
+                }
+            ]
+        },
+        "reading_minutes": {
+            "status": "CHANGE",
+            "current": 22,
+            "proposed": 19,
+            "formula_result": 19
+        },
+        "related_test_slug": {
+            "status": "KEEP",
+            "current": "holland-career-interest-test-riasec",
+            "proposed": "holland-career-interest-test-riasec"
+        }
+    },
+    "editorial_rebase": {
+        "source": "latest_locked_production_revision_bytes",
+        "v1_proposed_full_body_reused": false,
+        "allowed_change_summary": [
+            "preserve_current_raw_revision_bytes"
+        ],
+        "planned_removed_top_level_blocks": [],
+        "unplanned_removed_top_level_blocks": []
+    },
+    "internal_links": [],
+    "claim_boundary": "Owns the career-choice comparison between MBTI and Holland/RIASEC. RIASEC leads interest direction; MBTI and Big Five remain supplemental context and cannot guarantee a career, ability, hiring outcome, or admission result.",
+    "forbidden_claims": [
+        "hidden_query_inference",
+        "diagnosis",
+        "ability_prediction",
+        "career_guarantee",
+        "hiring_screening",
+        "relationship_prediction",
+        "official_endorsement"
+    ],
+    "operational_measurement": {
+        "seven_day": "Unknown",
+        "fourteen_day": "Unknown"
+    },
+    "package_sha256": "b6b280d89c4883a8a97ca9234961b91f3458c5ea66b0799516d522bfc9817e55"
+}

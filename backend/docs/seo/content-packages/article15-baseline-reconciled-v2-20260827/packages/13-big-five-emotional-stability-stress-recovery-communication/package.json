@@ -1,0 +1,281 @@
+{
+    "schema_version": "fermatmind.article15_baseline_reconciled_content_package.v2",
+    "package_id": "ARTICLE15-BASELINE-RECONCILED-V2-13-big-five-emotional-stability-stress-recovery-communication",
+    "package_order": 13,
+    "decision": "KEEP",
+    "status": {
+        "content_package_only": true,
+        "requires_operator_review": true,
+        "import_ready": false,
+        "publish_allowed": false,
+        "search_submit_allowed": false
+    },
+    "supersedes_for_execution": {
+        "execution_id": "ARTICLE15-EXACT-PACKAGE-REVISION-BOUND-20260826-v1",
+        "execution_manifest_path": "backend/docs/seo/content-packages/article15-exact-package-revision-bound-20260826/manifest.json",
+        "execution_manifest_sha256": "eb9a0254600991e2b4d7967b7c4d46c27d604719d8c40ba63353a20cd50a96e7",
+        "v1_package_id": "ARTICLE15-BATCH-C-03-big-five-emotional-stability-stress-recovery-communication",
+        "v1_package_path": "backend/docs/seo/content-packages/article15-batch-c-20260826/packages/03-big-five-emotional-stability-stress-recovery-communication/package.json",
+        "v1_package_sha256": "e58e9742f92651bbf8465a4387b051aa95643bd8c47dae9ec261c65b0316d3a2",
+        "v1_body_sha256": "9df6bad52840e2fd17d03c9c02dd889bc4ccbac29f9e88559db9c28737991e00",
+        "v1_is_historical_source_only": true
+    },
+    "identity_lock": {
+        "article_id": 79,
+        "translation_group_id": "tg_big_five_emotional_stability_stress_2026v1",
+        "published_revision_id": 99,
+        "locale": "en",
+        "slug": "big-five-emotional-stability-stress-recovery-communication",
+        "canonical_url": "https://fermatmind.com/en/articles/big-five-emotional-stability-stress-recovery-communication",
+        "query_owner_relationships": [
+            {
+                "cluster_id": "big_five_emotional_stability_en",
+                "relationship": "primary_owner",
+                "primary_owner": "/en/articles/big-five-emotional-stability-stress-recovery-communication",
+                "confidence": "high"
+            },
+            {
+                "cluster_id": "big_five_model_overview_en",
+                "relationship": "supporting_url",
+                "primary_owner": "/en/personality/big-five",
+                "confidence": "high"
+            }
+        ]
+    },
+    "baseline_lock": {
+        "observed_at_utc": "2026-08-27T03:35:44Z",
+        "production_active_sha": "64c386fa0e0fa5167c08c207befe33be75bb447d",
+        "production_state_sha256": "2ef8def16b4806fb8db5c4351edbf3a4a360171f1915f7d191ec098effa99b6e",
+        "production_revision_set_sha256": "f42e1db146ec104d657dff77d147a8dc17164e899850f4c2dbd059eb346a50a9",
+        "article_row_body_sha256": "0038ff486e8de6bec03319a23926711b0265d98f7d2ee4bc154182c890952c17",
+        "current_revision_body_sha256": "0038ff486e8de6bec03319a23926711b0265d98f7d2ee4bc154182c890952c17",
+        "current_public_body_sha256": "0038ff486e8de6bec03319a23926711b0265d98f7d2ee4bc154182c890952c17",
+        "published_revision_id": 99,
+        "projection_contract": {
+            "payload_method": "ArticleController::publicArticlePayload",
+            "body_transform_method": "ArticleBodyHeadingGuard::downgradeMarkdownH1ToH2",
+            "implementation_file_sha256": {
+                "backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php": "dbd2daf09e30b2bc15c052793dd8d78719f9340fcfb20fd3dda911b44984ea0c",
+                "backend/app/Services/Cms/ArticleBodyHeadingGuard.php": "11f353485a97adc266bb207921c3befa4a9cb886d446ada128bef8b03aaef3cc"
+            }
+        }
+    },
+    "files": {
+        "current.public.en.md": {
+            "sha256": "0038ff486e8de6bec03319a23926711b0265d98f7d2ee4bc154182c890952c17",
+            "authority": "production_public_api_projection"
+        }
+    },
+    "body_write_plan": {
+        "write_count": 0,
+        "mode": "preserve_current_raw_revision_bytes",
+        "proposed_cms_file": null,
+        "proposed_cms_sha256": null,
+        "projected_public_sha256": "0038ff486e8de6bec03319a23926711b0265d98f7d2ee4bc154182c890952c17"
+    },
+    "field_plan": {
+        "title": {
+            "status": "KEEP",
+            "current": "Low Emotional Stability in the Big Five: Stress Triggers, Recovery Habits, and Communication Boundaries",
+            "proposed": "Low Emotional Stability in the Big Five: Stress Triggers, Recovery Habits, and Communication Boundaries"
+        },
+        "h1": {
+            "status": "KEEP",
+            "current": "Low Emotional Stability in the Big Five: Stress Triggers, Recovery Habits, and Communication Boundaries",
+            "proposed": "Low Emotional Stability in the Big Five: Stress Triggers, Recovery Habits, and Communication Boundaries"
+        },
+        "seo_title": {
+            "status": "KEEP",
+            "current": "Big Five Emotional Stability: Stress Triggers and Recovery",
+            "proposed": "Big Five Emotional Stability: Stress Triggers and Recovery"
+        },
+        "seo_description": {
+            "status": "KEEP",
+            "current": "Use low Emotional Stability as a stress-sensitivity signal, not a diagnosis. Map triggers, recovery habits, communication boundaries, and support signals.",
+            "proposed": "Use low Emotional Stability as a stress-sensitivity signal, not a diagnosis. Map triggers, recovery habits, communication boundaries, and support signals."
+        },
+        "intro": {
+            "status": "KEEP",
+            "current": "Use low Emotional Stability as a stress-sensitivity signal, not a diagnosis. Map triggers, recovery habits, communication boundaries, and support signals.",
+            "proposed": "Use low Emotional Stability as a stress-sensitivity signal, not a diagnosis. Map triggers, recovery habits, communication boundaries, and support signals."
+        },
+        "body_markdown": {
+            "status": "KEEP",
+            "current_revision_sha256": "0038ff486e8de6bec03319a23926711b0265d98f7d2ee4bc154182c890952c17",
+            "current_public_sha256": "0038ff486e8de6bec03319a23926711b0265d98f7d2ee4bc154182c890952c17",
+            "proposed_cms_sha256": null
+        },
+        "faq_visible_body": {
+            "status": "KEEP",
+            "current": [
+                {
+                    "question": "Does low Emotional Stability mean I have a mental-health problem?",
+                    "answer": "No. A lower Emotional Stability or higher Neuroticism score is only a self-observation signal about stress sensitivity and emotional reactivity. It cannot diagnose a mental-health condition. If distress is persistent or functionally impairing, seek professional support."
+                },
+                {
+                    "question": "Is high Neuroticism a bad personality trait?",
+                    "answer": "No. It is not a moral judgment or an ability judgment. It may mean you notice risk, conflict, uncertainty, or criticism more intensely and need clearer structure and recovery habits."
+                },
+                {
+                    "question": "What jobs are good for people with lower Emotional Stability?",
+                    "answer": "A single trait cannot decide career fit. Look at the work environment: clarity of goals, feedback quality, pace, conflict load, recovery space, and support. The same person may function very differently across teams."
+                },
+                {
+                    "question": "Can Big Five results be used for career decisions?",
+                    "answer": "They can support reflection, but they should not decide a career. Career decisions also require interests, skills, real tasks, job requirements, and opportunity context."
+                },
+                {
+                    "question": "Does work stress prove that my Emotional Stability is low?",
+                    "answer": "No. Stress may come from overload, poor management, sleep loss, conflict, unhealthy team norms, or external pressure. A test result does not replace situational analysis."
+                },
+                {
+                    "question": "When should I seek professional help?",
+                    "answer": "Consider professional support if emotional distress repeatedly disrupts sleep, study, work, relationships, or basic daily functioning, or if you experience panic, self-harm thoughts, or safety risk."
+                }
+            ],
+            "proposed": [
+                {
+                    "question": "Does low Emotional Stability mean I have a mental-health problem?",
+                    "answer": "No. A lower Emotional Stability or higher Neuroticism score is only a self-observation signal about stress sensitivity and emotional reactivity. It cannot diagnose a mental-health condition. If distress is persistent or functionally impairing, seek professional support."
+                },
+                {
+                    "question": "Is high Neuroticism a bad personality trait?",
+                    "answer": "No. It is not a moral judgment or an ability judgment. It may mean you notice risk, conflict, uncertainty, or criticism more intensely and need clearer structure and recovery habits."
+                },
+                {
+                    "question": "What jobs are good for people with lower Emotional Stability?",
+                    "answer": "A single trait cannot decide career fit. Look at the work environment: clarity of goals, feedback quality, pace, conflict load, recovery space, and support. The same person may function very differently across teams."
+                },
+                {
+                    "question": "Can Big Five results be used for career decisions?",
+                    "answer": "They can support reflection, but they should not decide a career. Career decisions also require interests, skills, real tasks, job requirements, and opportunity context."
+                },
+                {
+                    "question": "Does work stress prove that my Emotional Stability is low?",
+                    "answer": "No. Stress may come from overload, poor management, sleep loss, conflict, unhealthy team norms, or external pressure. A test result does not replace situational analysis."
+                },
+                {
+                    "question": "When should I seek professional help?",
+                    "answer": "Consider professional support if emotional distress repeatedly disrupts sleep, study, work, relationships, or basic daily functioning, or if you experience panic, self-harm thoughts, or safety risk."
+                }
+            ]
+        },
+        "answer_surface_v1": {
+            "status": "CHANGE",
+            "current_public_api": [
+                {
+                    "question": "When should I use this article?",
+                    "answer": "Use this article when you want to connect public content with tests, personality profiles, or career guidance from a single starting point."
+                },
+                {
+                    "question": "Does this replace formal judgment?",
+                    "answer": "No. It offers public explanation and action cues, but does not replace medical, legal, or professional judgment."
+                }
+            ],
+            "proposed": [
+                {
+                    "question": "Does low Emotional Stability mean I have a mental-health problem?",
+                    "answer": "No. A lower Emotional Stability or higher Neuroticism score is only a self-observation signal about stress sensitivity and emotional reactivity. It cannot diagnose a mental-health condition. If distress is persistent or functionally impairing, seek professional support."
+                },
+                {
+                    "question": "Is high Neuroticism a bad personality trait?",
+                    "answer": "No. It is not a moral judgment or an ability judgment. It may mean you notice risk, conflict, uncertainty, or criticism more intensely and need clearer structure and recovery habits."
+                },
+                {
+                    "question": "What jobs are good for people with lower Emotional Stability?",
+                    "answer": "A single trait cannot decide career fit. Look at the work environment: clarity of goals, feedback quality, pace, conflict load, recovery space, and support. The same person may function very differently across teams."
+                },
+                {
+                    "question": "Can Big Five results be used for career decisions?",
+                    "answer": "They can support reflection, but they should not decide a career. Career decisions also require interests, skills, real tasks, job requirements, and opportunity context."
+                },
+                {
+                    "question": "Does work stress prove that my Emotional Stability is low?",
+                    "answer": "No. Stress may come from overload, poor management, sleep loss, conflict, unhealthy team norms, or external pressure. A test result does not replace situational analysis."
+                },
+                {
+                    "question": "When should I seek professional help?",
+                    "answer": "Consider professional support if emotional distress repeatedly disrupts sleep, study, work, relationships, or basic daily functioning, or if you experience panic, self-harm thoughts, or safety risk."
+                }
+            ],
+            "v1_intent_supported_by_visible_body": true
+        },
+        "primary_cta": {
+            "status": "CHANGE",
+            "current_public_api": [
+                {
+                    "key": "article_cta_1",
+                    "title": "Take the Big Five test, then map your stress triggers",
+                    "body": null,
+                    "href": "/en/tests/big-five-personality-test-ocean-model",
+                    "kind": "start_test"
+                },
+                {
+                    "key": "article_cta_2",
+                    "title": "Review your OCEAN profile",
+                    "body": null,
+                    "href": "/en/tests/big-five-personality-test-ocean-model",
+                    "kind": "start_test"
+                }
+            ],
+            "proposed": [
+                {
+                    "label": "Take the Big Five Personality Test",
+                    "href": "/en/tests/big-five-personality-test-ocean-model",
+                    "kind": "start_test",
+                    "intent": "test_intent_handoff"
+                }
+            ],
+            "effective_primary": [
+                {
+                    "label": "Take the Big Five Personality Test",
+                    "href": "/en/tests/big-five-personality-test-ocean-model",
+                    "kind": "start_test",
+                    "intent": "test_intent_handoff"
+                }
+            ]
+        },
+        "reading_minutes": {
+            "status": "KEEP",
+            "current": 23,
+            "proposed": 23,
+            "formula_result": 23
+        },
+        "related_test_slug": {
+            "status": "KEEP",
+            "current": "big-five-personality-test-ocean-model",
+            "proposed": "big-five-personality-test-ocean-model"
+        }
+    },
+    "editorial_rebase": {
+        "source": "latest_locked_production_revision_bytes",
+        "v1_proposed_full_body_reused": false,
+        "allowed_change_summary": [
+            "preserve_current_raw_revision_bytes"
+        ],
+        "planned_removed_top_level_blocks": [],
+        "unplanned_removed_top_level_blocks": []
+    },
+    "internal_links": [
+        {
+            "label": "Big Five Personality Test",
+            "href": "/en/tests/big-five-personality-test-ocean-model",
+            "role": "primary_cta"
+        }
+    ],
+    "claim_boundary": "Owns only the Emotional Stability boundaries for stress triggers, recovery habits, and communication. It does not replace the Big Five Hub or test landing and does not diagnose or predict ability.",
+    "forbidden_claims": [
+        "hidden_query_inference",
+        "diagnosis",
+        "ability_prediction",
+        "career_guarantee",
+        "hiring_screening",
+        "relationship_prediction",
+        "official_endorsement"
+    ],
+    "operational_measurement": {
+        "seven_day": "Unknown",
+        "fourteen_day": "Unknown"
+    },
+    "package_sha256": "f5905df8b8038654a8e28b3535d6d0521585cf236e3ccb9c25a80dcbaa8ad847"
+}

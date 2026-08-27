@@ -1,0 +1,305 @@
+{
+    "schema_version": "fermatmind.article15_baseline_reconciled_content_package.v2",
+    "package_id": "ARTICLE15-BASELINE-RECONCILED-V2-06-are-infj-men-rare-or-socially-silenced",
+    "package_order": 6,
+    "decision": "KEEP",
+    "status": {
+        "content_package_only": true,
+        "requires_operator_review": true,
+        "import_ready": false,
+        "publish_allowed": false,
+        "search_submit_allowed": false
+    },
+    "supersedes_for_execution": {
+        "execution_id": "ARTICLE15-EXACT-PACKAGE-REVISION-BOUND-20260826-v1",
+        "execution_manifest_path": "backend/docs/seo/content-packages/article15-exact-package-revision-bound-20260826/manifest.json",
+        "execution_manifest_sha256": "eb9a0254600991e2b4d7967b7c4d46c27d604719d8c40ba63353a20cd50a96e7",
+        "v1_package_id": "ARTICLE15-BATCH-B-01-are-infj-men-rare-or-socially-silenced",
+        "v1_package_path": "backend/docs/seo/content-packages/article15-batch-b-20260826/packages/01-are-infj-men-rare-or-socially-silenced/package.json",
+        "v1_package_sha256": "0bebdf6a606709b834184eb2e538a67612be8c80b35f69ab6d6fecdee8150149",
+        "v1_body_sha256": "663d92e7d8bcdefd5a91640e81b5c172e84c8820bcc4f8a0d7239fc388c54d05",
+        "v1_is_historical_source_only": true
+    },
+    "identity_lock": {
+        "article_id": 11,
+        "translation_group_id": "article-11",
+        "published_revision_id": 436,
+        "locale": "zh-CN",
+        "slug": "are-infj-men-rare-or-socially-silenced",
+        "canonical_url": "https://fermatmind.com/zh/articles/are-infj-men-rare-or-socially-silenced",
+        "query_owner_relationships": [
+            {
+                "cluster_id": "infj_men_visibility_zh-CN",
+                "relationship": "primary_owner",
+                "primary_owner": "/zh/articles/are-infj-men-rare-or-socially-silenced",
+                "confidence": "high"
+            },
+            {
+                "cluster_id": "mbti_type_infj_zh-CN",
+                "relationship": "supporting_url",
+                "primary_owner": "/zh/personality/infj",
+                "confidence": "high"
+            }
+        ]
+    },
+    "baseline_lock": {
+        "observed_at_utc": "2026-08-27T03:35:44Z",
+        "production_active_sha": "64c386fa0e0fa5167c08c207befe33be75bb447d",
+        "production_state_sha256": "2ef8def16b4806fb8db5c4351edbf3a4a360171f1915f7d191ec098effa99b6e",
+        "production_revision_set_sha256": "f42e1db146ec104d657dff77d147a8dc17164e899850f4c2dbd059eb346a50a9",
+        "article_row_body_sha256": "758ab4875f557856b4f581a04612fe1cca279fb1c40194006b106ba55c63af1e",
+        "current_revision_body_sha256": "758ab4875f557856b4f581a04612fe1cca279fb1c40194006b106ba55c63af1e",
+        "current_public_body_sha256": "758ab4875f557856b4f581a04612fe1cca279fb1c40194006b106ba55c63af1e",
+        "published_revision_id": 436,
+        "projection_contract": {
+            "payload_method": "ArticleController::publicArticlePayload",
+            "body_transform_method": "ArticleBodyHeadingGuard::downgradeMarkdownH1ToH2",
+            "implementation_file_sha256": {
+                "backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php": "dbd2daf09e30b2bc15c052793dd8d78719f9340fcfb20fd3dda911b44984ea0c",
+                "backend/app/Services/Cms/ArticleBodyHeadingGuard.php": "11f353485a97adc266bb207921c3befa4a9cb886d446ada128bef8b03aaef3cc"
+            }
+        }
+    },
+    "files": {
+        "current.public.zh-CN.md": {
+            "sha256": "758ab4875f557856b4f581a04612fe1cca279fb1c40194006b106ba55c63af1e",
+            "authority": "production_public_api_projection"
+        }
+    },
+    "body_write_plan": {
+        "write_count": 0,
+        "mode": "preserve_current_raw_revision_bytes",
+        "proposed_cms_file": null,
+        "proposed_cms_sha256": null,
+        "projected_public_sha256": "758ab4875f557856b4f581a04612fe1cca279fb1c40194006b106ba55c63af1e"
+    },
+    "field_plan": {
+        "title": {
+            "status": "KEEP",
+            "current": "INFJ 男性为什么常被认为少见？数据来源、性别规范与类型误读",
+            "proposed": "INFJ 男性为什么常被认为少见？数据来源、性别规范与类型误读"
+        },
+        "h1": {
+            "status": "KEEP",
+            "current": "INFJ 男性为什么常被认为少见？数据来源、性别规范与类型误读",
+            "proposed": "INFJ 男性为什么常被认为少见？数据来源、性别规范与类型误读"
+        },
+        "seo_title": {
+            "status": "KEEP",
+            "current": "INFJ 男性为什么常被认为少见？数据来源与类型误读",
+            "proposed": "INFJ 男性为什么常被认为少见？数据来源与类型误读"
+        },
+        "seo_description": {
+            "status": "KEEP",
+            "current": "INFJ 男性真的少见吗？本文区分测试样本、人口比例、性别表达规范和可见度偏差，不把高敏感或情绪克制等同于 INFJ。",
+            "proposed": "INFJ 男性真的少见吗？本文区分测试样本、人口比例、性别表达规范和可见度偏差，不把高敏感或情绪克制等同于 INFJ。"
+        },
+        "intro": {
+            "status": "KEEP",
+            "current": "INFJ 男性的公开比例依赖具体样本与工具；性别规范可能影响表达和可见度，却不能证明大量 INFJ 被隐藏。",
+            "proposed": "INFJ 男性的公开比例依赖具体样本与工具；性别规范可能影响表达和可见度，却不能证明大量 INFJ 被隐藏。"
+        },
+        "body_markdown": {
+            "status": "KEEP",
+            "current_revision_sha256": "758ab4875f557856b4f581a04612fe1cca279fb1c40194006b106ba55c63af1e",
+            "current_public_sha256": "758ab4875f557856b4f581a04612fe1cca279fb1c40194006b106ba55c63af1e",
+            "proposed_cms_sha256": null
+        },
+        "faq_visible_body": {
+            "status": "KEEP",
+            "current": [
+                {
+                    "question": "INFJ 男性到底占多少？",
+                    "answer": "公开资料中存在不同数字，但它们依赖特定样本、工具和地区。没有足够证据时，应写明来源限制，而不是给出全球或中国男性的确定比例。"
+                },
+                {
+                    "question": "社会压力会让 INFJ 男性测成别的类型吗？",
+                    "answer": "社会期望可能影响自我表达和答题方式，但类型变化也可能来自分界线、状态、题目理解和测量误差。不能把所有变化归因于社会压抑。"
+                },
+                {
+                    "question": "高敏感男性就是 INFJ 吗？",
+                    "answer": "不是。高敏感、内向、共情和 INFJ 属于不同概念。一个人可能同时符合若干描述，也可能只符合其中一项。"
+                },
+                {
+                    "question": "INFJ 男性更适合某些职业吗？",
+                    "answer": "类型可以帮助提出工作环境偏好的问题，但不能预测能力或职业成功。职业探索还应结合兴趣、技能、机会、价值观和现实约束。"
+                },
+                {
+                    "question": "怎样判断结果是否适合自己？",
+                    "answer": "检查四组偏好在不同场景中的证据和反例，尤其关注接近分界线的维度。把结果当作工作假设，不要为了符合网络画像而修改自己的经历。"
+                }
+            ],
+            "proposed": [
+                {
+                    "question": "INFJ 男性到底占多少？",
+                    "answer": "公开资料中存在不同数字，但它们依赖特定样本、工具和地区。没有足够证据时，应写明来源限制，而不是给出全球或中国男性的确定比例。"
+                },
+                {
+                    "question": "社会压力会让 INFJ 男性测成别的类型吗？",
+                    "answer": "社会期望可能影响自我表达和答题方式，但类型变化也可能来自分界线、状态、题目理解和测量误差。不能把所有变化归因于社会压抑。"
+                },
+                {
+                    "question": "高敏感男性就是 INFJ 吗？",
+                    "answer": "不是。高敏感、内向、共情和 INFJ 属于不同概念。一个人可能同时符合若干描述，也可能只符合其中一项。"
+                },
+                {
+                    "question": "INFJ 男性更适合某些职业吗？",
+                    "answer": "类型可以帮助提出工作环境偏好的问题，但不能预测能力或职业成功。职业探索还应结合兴趣、技能、机会、价值观和现实约束。"
+                },
+                {
+                    "question": "怎样判断结果是否适合自己？",
+                    "answer": "检查四组偏好在不同场景中的证据和反例，尤其关注接近分界线的维度。把结果当作工作假设，不要为了符合网络画像而修改自己的经历。"
+                }
+            ]
+        },
+        "answer_surface_v1": {
+            "status": "KEEP",
+            "current_public_api": [
+                {
+                    "question": "INFJ 男性到底占多少？",
+                    "answer": "公开资料中存在不同数字，但它们依赖特定样本、工具和地区。没有足够证据时，应写明来源限制，而不是给出全球或中国男性的确定比例。"
+                },
+                {
+                    "question": "社会压力会让 INFJ 男性测成别的类型吗？",
+                    "answer": "社会期望可能影响自我表达和答题方式，但类型变化也可能来自分界线、状态、题目理解和测量误差。不能把所有变化归因于社会压抑。"
+                },
+                {
+                    "question": "高敏感男性就是 INFJ 吗？",
+                    "answer": "不是。高敏感、内向、共情和 INFJ 属于不同概念。一个人可能同时符合若干描述，也可能只符合其中一项。"
+                },
+                {
+                    "question": "INFJ 男性更适合某些职业吗？",
+                    "answer": "类型可以帮助提出工作环境偏好的问题，但不能预测能力或职业成功。职业探索还应结合兴趣、技能、机会、价值观和现实约束。"
+                },
+                {
+                    "question": "怎样判断结果是否适合自己？",
+                    "answer": "检查四组偏好在不同场景中的证据和反例，尤其关注接近分界线的维度。把结果当作工作假设，不要为了符合网络画像而修改自己的经历。"
+                }
+            ],
+            "proposed": [
+                {
+                    "question": "INFJ 男性到底占多少？",
+                    "answer": "公开资料中存在不同数字，但它们依赖特定样本、工具和地区。没有足够证据时，应写明来源限制，而不是给出全球或中国男性的确定比例。"
+                },
+                {
+                    "question": "社会压力会让 INFJ 男性测成别的类型吗？",
+                    "answer": "社会期望可能影响自我表达和答题方式，但类型变化也可能来自分界线、状态、题目理解和测量误差。不能把所有变化归因于社会压抑。"
+                },
+                {
+                    "question": "高敏感男性就是 INFJ 吗？",
+                    "answer": "不是。高敏感、内向、共情和 INFJ 属于不同概念。一个人可能同时符合若干描述，也可能只符合其中一项。"
+                },
+                {
+                    "question": "INFJ 男性更适合某些职业吗？",
+                    "answer": "类型可以帮助提出工作环境偏好的问题，但不能预测能力或职业成功。职业探索还应结合兴趣、技能、机会、价值观和现实约束。"
+                },
+                {
+                    "question": "怎样判断结果是否适合自己？",
+                    "answer": "检查四组偏好在不同场景中的证据和反例，尤其关注接近分界线的维度。把结果当作工作假设，不要为了符合网络画像而修改自己的经历。"
+                }
+            ],
+            "v1_intent_supported_by_visible_body": true
+        },
+        "primary_cta": {
+            "status": "KEEP",
+            "current_public_api": [
+                {
+                    "key": "articles_index",
+                    "title": "继续浏览文章",
+                    "body": "回到文章目录，继续扩展公开内容阅读链路。",
+                    "href": "/zh/articles",
+                    "kind": "content_continue"
+                },
+                {
+                    "key": "topic_hub",
+                    "title": "进入主题聚合",
+                    "body": "把文章阅读继续到更结构化的主题入口。",
+                    "href": "/zh/topics",
+                    "kind": "discover"
+                },
+                {
+                    "key": "start_test",
+                    "title": "开始测试",
+                    "body": "如果你想把阅读转成自我测量，可以从测试入口开始。",
+                    "href": "/zh/tests/mbti-personality-test-16-personality-types",
+                    "kind": "start_test"
+                }
+            ],
+            "proposed": [
+                {
+                    "key": "articles_index",
+                    "title": "继续浏览文章",
+                    "body": "回到文章目录，继续扩展公开内容阅读链路。",
+                    "href": "/zh/articles",
+                    "kind": "content_continue"
+                },
+                {
+                    "key": "topic_hub",
+                    "title": "进入主题聚合",
+                    "body": "把文章阅读继续到更结构化的主题入口。",
+                    "href": "/zh/topics",
+                    "kind": "discover"
+                },
+                {
+                    "key": "start_test",
+                    "title": "开始测试",
+                    "body": "如果你想把阅读转成自我测量，可以从测试入口开始。",
+                    "href": "/zh/tests/mbti-personality-test-16-personality-types",
+                    "kind": "start_test"
+                }
+            ],
+            "effective_primary": [
+                {
+                    "key": "start_test",
+                    "title": "开始测试",
+                    "body": "如果你想把阅读转成自我测量，可以从测试入口开始。",
+                    "href": "/zh/tests/mbti-personality-test-16-personality-types",
+                    "kind": "start_test"
+                }
+            ]
+        },
+        "reading_minutes": {
+            "status": "CHANGE",
+            "current": 4,
+            "proposed": 5,
+            "formula_result": 5
+        },
+        "related_test_slug": {
+            "status": "KEEP",
+            "current": null,
+            "proposed": null
+        }
+    },
+    "editorial_rebase": {
+        "source": "latest_locked_production_revision_bytes",
+        "v1_proposed_full_body_reused": false,
+        "allowed_change_summary": [
+            "preserve_current_raw_revision_bytes"
+        ],
+        "planned_removed_top_level_blocks": [],
+        "unplanned_removed_top_level_blocks": []
+    },
+    "internal_links": [
+        {
+            "label": "MBTI 结果怎么看：用真实场景验证四组偏好",
+            "href": "/zh/articles/mbti-narrative-portrait",
+            "role": "context"
+        }
+    ],
+    "claim_boundary": "只拥有 INFJ 男性可见度、样本与类型误读；不新增或占用 INFJ 人格目录，不处理 registry gap，不把表达差异写成固定人口比例、诊断、能力或职业预测。",
+    "forbidden_claims": [
+        "hidden_query_inference",
+        "diagnosis",
+        "ability_prediction",
+        "career_determination",
+        "admission_prediction",
+        "relationship_prediction",
+        "hiring_screening",
+        "official_endorsement"
+    ],
+    "operational_measurement": {
+        "seven_day": "Unknown",
+        "fourteen_day": "Unknown"
+    },
+    "package_sha256": "315c96afc70dff6697c994045229d22aa1683b7489fa86546641a7c50fc1ee02"
+}

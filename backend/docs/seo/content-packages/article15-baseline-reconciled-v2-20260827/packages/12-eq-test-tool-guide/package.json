@@ -1,0 +1,304 @@
+{
+    "schema_version": "fermatmind.article15_baseline_reconciled_content_package.v2",
+    "package_id": "ARTICLE15-BASELINE-RECONCILED-V2-12-eq-test-tool-guide",
+    "package_order": 12,
+    "decision": "KEEP",
+    "status": {
+        "content_package_only": true,
+        "requires_operator_review": true,
+        "import_ready": false,
+        "publish_allowed": false,
+        "search_submit_allowed": false
+    },
+    "supersedes_for_execution": {
+        "execution_id": "ARTICLE15-EXACT-PACKAGE-REVISION-BOUND-20260826-v1",
+        "execution_manifest_path": "backend/docs/seo/content-packages/article15-exact-package-revision-bound-20260826/manifest.json",
+        "execution_manifest_sha256": "eb9a0254600991e2b4d7967b7c4d46c27d604719d8c40ba63353a20cd50a96e7",
+        "v1_package_id": "ARTICLE15-BATCH-C-02-eq-test-tool-guide",
+        "v1_package_path": "backend/docs/seo/content-packages/article15-batch-c-20260826/packages/02-eq-test-tool-guide/package.json",
+        "v1_package_sha256": "ee1f35c23b57863505a2620acc7440f53a195a452a2d760fad38309e09c610ea",
+        "v1_body_sha256": "7fb7d75e16749882605de8cc6b5d5eedb7d780a3427876a4020e7a4afb7ae1bc",
+        "v1_is_historical_source_only": true
+    },
+    "identity_lock": {
+        "article_id": 4,
+        "translation_group_id": "article-4",
+        "published_revision_id": 58,
+        "locale": "zh-CN",
+        "slug": "eq-test-tool-guide",
+        "canonical_url": "https://fermatmind.com/zh/articles/eq-test-tool-guide",
+        "query_owner_relationships": [
+            {
+                "cluster_id": "eq_test_zh-CN",
+                "relationship": "supporting_url",
+                "primary_owner": "/zh/tests/eq-test-emotional-intelligence-assessment",
+                "confidence": "high"
+            }
+        ]
+    },
+    "baseline_lock": {
+        "observed_at_utc": "2026-08-27T03:35:44Z",
+        "production_active_sha": "64c386fa0e0fa5167c08c207befe33be75bb447d",
+        "production_state_sha256": "2ef8def16b4806fb8db5c4351edbf3a4a360171f1915f7d191ec098effa99b6e",
+        "production_revision_set_sha256": "f42e1db146ec104d657dff77d147a8dc17164e899850f4c2dbd059eb346a50a9",
+        "article_row_body_sha256": "0c09892a846736e018f2f52bed4f685ca139ef854d02d39086885058a18c8602",
+        "current_revision_body_sha256": "0c09892a846736e018f2f52bed4f685ca139ef854d02d39086885058a18c8602",
+        "current_public_body_sha256": "0c09892a846736e018f2f52bed4f685ca139ef854d02d39086885058a18c8602",
+        "published_revision_id": 58,
+        "projection_contract": {
+            "payload_method": "ArticleController::publicArticlePayload",
+            "body_transform_method": "ArticleBodyHeadingGuard::downgradeMarkdownH1ToH2",
+            "implementation_file_sha256": {
+                "backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php": "dbd2daf09e30b2bc15c052793dd8d78719f9340fcfb20fd3dda911b44984ea0c",
+                "backend/app/Services/Cms/ArticleBodyHeadingGuard.php": "11f353485a97adc266bb207921c3befa4a9cb886d446ada128bef8b03aaef3cc"
+            }
+        }
+    },
+    "files": {
+        "current.public.zh-CN.md": {
+            "sha256": "0c09892a846736e018f2f52bed4f685ca139ef854d02d39086885058a18c8602",
+            "authority": "production_public_api_projection"
+        }
+    },
+    "body_write_plan": {
+        "write_count": 0,
+        "mode": "preserve_current_raw_revision_bytes",
+        "proposed_cms_file": null,
+        "proposed_cms_sha256": null,
+        "projected_public_sha256": "0c09892a846736e018f2f52bed4f685ca139ef854d02d39086885058a18c8602"
+    },
+    "field_plan": {
+        "title": {
+            "status": "KEEP",
+            "current": "情商测试（EQ）准吗？分数怎么看，情绪管理和人际关系到底测什么",
+            "proposed": "情商测试（EQ）准吗？分数怎么看，情绪管理和人际关系到底测什么"
+        },
+        "h1": {
+            "status": "KEEP",
+            "current": "情商测试（EQ）准吗？分数怎么看，情绪管理和人际关系到底测什么",
+            "proposed": "情商测试（EQ）准吗？分数怎么看，情绪管理和人际关系到底测什么"
+        },
+        "seo_title": {
+            "status": "KEEP",
+            "current": "情商测试（EQ）准吗？分数怎么看，情绪管理和人际关系到底测什么",
+            "proposed": "情商测试（EQ）准吗？分数怎么看，情绪管理和人际关系到底测什么"
+        },
+        "seo_description": {
+            "status": "KEEP",
+            "current": "情商测试不等于会说话，也不是心理诊断。本文解释 EQ 分数、情绪管理、人际关系、压力恢复和使用边界，说明它能帮你观察什么，不能替你判断什么。",
+            "proposed": "情商测试不等于会说话，也不是心理诊断。本文解释 EQ 分数、情绪管理、人际关系、压力恢复和使用边界，说明它能帮你观察什么，不能替你判断什么。"
+        },
+        "intro": {
+            "status": "KEEP",
+            "current": "情商测试可以帮助观察情绪觉察、情绪调节、人际沟通和压力恢复等习惯线索，但不能作为心理诊断、成功预测或招聘筛选。本文解释 EQ 分数怎么读、它到底测什么，以及结果如何转成可验证的行动。",
+            "proposed": "情商测试可以帮助观察情绪觉察、情绪调节、人际沟通和压力恢复等习惯线索，但不能作为心理诊断、成功预测或招聘筛选。本文解释 EQ 分数怎么读、它到底测什么，以及结果如何转成可验证的行动。"
+        },
+        "body_markdown": {
+            "status": "KEEP",
+            "current_revision_sha256": "0c09892a846736e018f2f52bed4f685ca139ef854d02d39086885058a18c8602",
+            "current_public_sha256": "0c09892a846736e018f2f52bed4f685ca139ef854d02d39086885058a18c8602",
+            "proposed_cms_sha256": null
+        },
+        "faq_visible_body": {
+            "status": "KEEP",
+            "current": [
+                {
+                    "question": "情商测试（EQ）准吗？",
+                    "answer": "它可以帮助你观察情绪觉察、情绪调节、人际沟通和压力恢复等习惯线索，但不应被当作心理诊断、正式 EQ 分数或成功预测。更安全的用法是把结果转成可复盘的行为假设。"
+                },
+                {
+                    "question": "EQ 分数怎么看？",
+                    "answer": "先看维度分布，不要只看总分。某个维度较高，可能提示你在相应场景中已有可用习惯；某个维度较低，可能提示你需要更多练习或支持。没有公开常模和百分位依据时，不要把结果写成人群排名。"
+                },
+                {
+                    "question": "情商测试能测出情商高低吗？",
+                    "answer": "它可以提供维度参考，但不能把一个人的“情商高低”作为固定标签。更好的问题是：在哪类情绪或关系场景里，我更容易卡住？下一次可以练习什么？"
+                },
+                {
+                    "question": "情商等于会说话吗？",
+                    "answer": "不等于。会说话可能只是表达技巧，甚至可能是讨好或社交表演。EQ 更关注情绪觉察、调节、共情、沟通修复和压力恢复等习惯。"
+                },
+                {
+                    "question": "EQ 和 IQ 有什么区别？",
+                    "answer": "IQ 更偏向推理任务、模式识别和抽象问题解决表现；EQ 更偏向情绪觉察、调节、人际沟通和压力恢复。两者都不能决定一个人的价值、成功或职业结果。"
+                },
+                {
+                    "question": "情商能提高吗？",
+                    "answer": "某些情绪和沟通习惯可以通过复盘、练习和反馈改善。但文章不能承诺一定提高，也不能把 EQ 结果写成固定能力。更实际的目标是选择一个场景，设计一个可验证的微行动。"
+                },
+                {
+                    "question": "情商测试可以用于招聘或诊断吗？",
+                    "answer": "不应该。FermatMind 文章语境下，EQ 测试不用于招聘筛选、晋升判断、心理诊断、治疗建议或危机评估。它更适合教育性自我理解和行为复盘。"
+                }
+            ],
+            "proposed": [
+                {
+                    "question": "情商测试（EQ）准吗？",
+                    "answer": "它可以帮助你观察情绪觉察、情绪调节、人际沟通和压力恢复等习惯线索，但不应被当作心理诊断、正式 EQ 分数或成功预测。更安全的用法是把结果转成可复盘的行为假设。"
+                },
+                {
+                    "question": "EQ 分数怎么看？",
+                    "answer": "先看维度分布，不要只看总分。某个维度较高，可能提示你在相应场景中已有可用习惯；某个维度较低，可能提示你需要更多练习或支持。没有公开常模和百分位依据时，不要把结果写成人群排名。"
+                },
+                {
+                    "question": "情商测试能测出情商高低吗？",
+                    "answer": "它可以提供维度参考，但不能把一个人的“情商高低”作为固定标签。更好的问题是：在哪类情绪或关系场景里，我更容易卡住？下一次可以练习什么？"
+                },
+                {
+                    "question": "情商等于会说话吗？",
+                    "answer": "不等于。会说话可能只是表达技巧，甚至可能是讨好或社交表演。EQ 更关注情绪觉察、调节、共情、沟通修复和压力恢复等习惯。"
+                },
+                {
+                    "question": "EQ 和 IQ 有什么区别？",
+                    "answer": "IQ 更偏向推理任务、模式识别和抽象问题解决表现；EQ 更偏向情绪觉察、调节、人际沟通和压力恢复。两者都不能决定一个人的价值、成功或职业结果。"
+                },
+                {
+                    "question": "情商能提高吗？",
+                    "answer": "某些情绪和沟通习惯可以通过复盘、练习和反馈改善。但文章不能承诺一定提高，也不能把 EQ 结果写成固定能力。更实际的目标是选择一个场景，设计一个可验证的微行动。"
+                },
+                {
+                    "question": "情商测试可以用于招聘或诊断吗？",
+                    "answer": "不应该。FermatMind 文章语境下，EQ 测试不用于招聘筛选、晋升判断、心理诊断、治疗建议或危机评估。它更适合教育性自我理解和行为复盘。"
+                }
+            ]
+        },
+        "answer_surface_v1": {
+            "status": "CHANGE",
+            "current_public_api": [
+                {
+                    "question": "什么时候适合阅读这篇文章？",
+                    "answer": "当你想把公开内容和测评、人格画像或职业建议串起来时，先从这篇文章的核心摘要开始。"
+                },
+                {
+                    "question": "这篇文章会替代正式判断吗？",
+                    "answer": "不会。它只提供公开解释和行动线索，不替代医疗、法律或专业诊断。"
+                }
+            ],
+            "proposed": [
+                {
+                    "question": "情商测试（EQ）准吗？",
+                    "answer": "它可以帮助你观察情绪觉察、情绪调节、人际沟通和压力恢复等习惯线索，但不应被当作心理诊断、正式 EQ 分数或成功预测。更安全的用法是把结果转成可复盘的行为假设。"
+                },
+                {
+                    "question": "EQ 分数怎么看？",
+                    "answer": "先看维度分布，不要只看总分。某个维度较高，可能提示你在相应场景中已有可用习惯；某个维度较低，可能提示你需要更多练习或支持。没有公开常模和百分位依据时，不要把结果写成人群排名。"
+                },
+                {
+                    "question": "情商测试能测出情商高低吗？",
+                    "answer": "它可以提供维度参考，但不能把一个人的“情商高低”作为固定标签。更好的问题是：在哪类情绪或关系场景里，我更容易卡住？下一次可以练习什么？"
+                },
+                {
+                    "question": "情商等于会说话吗？",
+                    "answer": "不等于。会说话可能只是表达技巧，甚至可能是讨好或社交表演。EQ 更关注情绪觉察、调节、共情、沟通修复和压力恢复等习惯。"
+                },
+                {
+                    "question": "EQ 和 IQ 有什么区别？",
+                    "answer": "IQ 更偏向推理任务、模式识别和抽象问题解决表现；EQ 更偏向情绪觉察、调节、人际沟通和压力恢复。两者都不能决定一个人的价值、成功或职业结果。"
+                },
+                {
+                    "question": "情商能提高吗？",
+                    "answer": "某些情绪和沟通习惯可以通过复盘、练习和反馈改善。但文章不能承诺一定提高，也不能把 EQ 结果写成固定能力。更实际的目标是选择一个场景，设计一个可验证的微行动。"
+                },
+                {
+                    "question": "情商测试可以用于招聘或诊断吗？",
+                    "answer": "不应该。FermatMind 文章语境下，EQ 测试不用于招聘筛选、晋升判断、心理诊断、治疗建议或危机评估。它更适合教育性自我理解和行为复盘。"
+                }
+            ],
+            "v1_intent_supported_by_visible_body": true
+        },
+        "primary_cta": {
+            "status": "KEEP",
+            "current_public_api": [
+                {
+                    "key": "articles_index",
+                    "title": "继续浏览文章",
+                    "body": "回到文章目录，继续扩展公开内容阅读链路。",
+                    "href": "/zh/articles",
+                    "kind": "content_continue"
+                },
+                {
+                    "key": "topic_hub",
+                    "title": "进入主题聚合",
+                    "body": "把文章阅读继续到更结构化的主题入口。",
+                    "href": "/zh/topics",
+                    "kind": "discover"
+                },
+                {
+                    "key": "start_test",
+                    "title": "开始测试",
+                    "body": "如果你想把阅读转成自我测量，可以从测试入口开始。",
+                    "href": "/zh/tests/mbti-personality-test-16-personality-types",
+                    "kind": "start_test"
+                }
+            ],
+            "proposed": [
+                {
+                    "key": "articles_index",
+                    "title": "继续浏览文章",
+                    "body": "回到文章目录，继续扩展公开内容阅读链路。",
+                    "href": "/zh/articles",
+                    "kind": "content_continue"
+                },
+                {
+                    "key": "topic_hub",
+                    "title": "进入主题聚合",
+                    "body": "把文章阅读继续到更结构化的主题入口。",
+                    "href": "/zh/topics",
+                    "kind": "discover"
+                },
+                {
+                    "key": "start_test",
+                    "title": "开始测试",
+                    "body": "如果你想把阅读转成自我测量，可以从测试入口开始。",
+                    "href": "/zh/tests/mbti-personality-test-16-personality-types",
+                    "kind": "start_test"
+                }
+            ],
+            "effective_primary": [
+                {
+                    "key": "start_test",
+                    "title": "开始测试",
+                    "body": "如果你想把阅读转成自我测量，可以从测试入口开始。",
+                    "href": "/zh/tests/mbti-personality-test-16-personality-types",
+                    "kind": "start_test"
+                }
+            ]
+        },
+        "reading_minutes": {
+            "status": "CHANGE",
+            "current": null,
+            "proposed": 11,
+            "formula_result": 11
+        },
+        "related_test_slug": {
+            "status": "CHANGE",
+            "current": null,
+            "proposed": "eq-test-emotional-intelligence-assessment"
+        }
+    },
+    "editorial_rebase": {
+        "source": "latest_locked_production_revision_bytes",
+        "v1_proposed_full_body_reused": false,
+        "allowed_change_summary": [
+            "preserve_current_raw_revision_bytes"
+        ],
+        "planned_removed_top_level_blocks": [],
+        "unplanned_removed_top_level_blocks": []
+    },
+    "internal_links": [],
+    "claim_boundary": "只拥有 EQ 分数、维度、情绪与沟通习惯的阅读方法和使用边界；不得扩写为心理诊断、招聘筛选、固定能力或成功判断。",
+    "forbidden_claims": [
+        "hidden_query_inference",
+        "diagnosis",
+        "ability_prediction",
+        "career_guarantee",
+        "hiring_screening",
+        "relationship_prediction",
+        "official_endorsement"
+    ],
+    "operational_measurement": {
+        "seven_day": "Unknown",
+        "fourteen_day": "Unknown"
+    },
+    "package_sha256": "d13cdb3baab11526d8cc8c6a0ffd3a74b86ea43bfe7e897b1f474d00c2ffcb35"
+}

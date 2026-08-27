@@ -1,0 +1,369 @@
+{
+    "schema_version": "fermatmind.article15_baseline_reconciled_content_package.v2",
+    "package_id": "ARTICLE15-BASELINE-RECONCILED-V2-04-enneagram-personality-test-explained",
+    "package_order": 4,
+    "decision": "CHANGE",
+    "status": {
+        "content_package_only": true,
+        "requires_operator_review": true,
+        "import_ready": false,
+        "publish_allowed": false,
+        "search_submit_allowed": false
+    },
+    "supersedes_for_execution": {
+        "execution_id": "ARTICLE15-EXACT-PACKAGE-REVISION-BOUND-20260826-v1",
+        "execution_manifest_path": "backend/docs/seo/content-packages/article15-exact-package-revision-bound-20260826/manifest.json",
+        "execution_manifest_sha256": "eb9a0254600991e2b4d7967b7c4d46c27d604719d8c40ba63353a20cd50a96e7",
+        "v1_package_id": "ARTICLE15-BATCH-A-04-enneagram-personality-test-explained",
+        "v1_package_path": "backend/docs/seo/content-packages/article15-batch-a-20260826/packages/04-enneagram-personality-test-explained/package.json",
+        "v1_package_sha256": "cf15980428ae6f9338f7aa0de9f4a4723ff45ce2085a6ba6df7cb180290dbc5e",
+        "v1_body_sha256": "6f31ec07cdfa130b84fc5fcce6e06073a07b73b211f84be5a0bd2cd9273fa6ed",
+        "v1_is_historical_source_only": true
+    },
+    "identity_lock": {
+        "article_id": 51,
+        "translation_group_id": "tg_article_enneagram_personality_test_explained_2026v1",
+        "published_revision_id": 73,
+        "locale": "zh-CN",
+        "slug": "enneagram-personality-test-explained",
+        "canonical_url": "https://fermatmind.com/zh/articles/enneagram-personality-test-explained",
+        "query_owner_relationships": [
+            {
+                "cluster_id": "enneagram_model_explainer_zh-CN",
+                "relationship": "primary_owner",
+                "primary_owner": "/zh/articles/enneagram-personality-test-explained",
+                "confidence": "high"
+            },
+            {
+                "cluster_id": "enneagram_test_zh-CN",
+                "relationship": "supporting_url",
+                "primary_owner": "/zh/tests/enneagram-personality-test-nine-types",
+                "confidence": "high"
+            },
+            {
+                "cluster_id": "enneagram_type_9_wing_1_zh-CN",
+                "relationship": "supporting_url",
+                "primary_owner": "/zh/personality/enneagram/wings/9w1",
+                "confidence": "high"
+            },
+            {
+                "cluster_id": "enneagram_type_9_zh-CN",
+                "relationship": "supporting_url",
+                "primary_owner": "/zh/personality/enneagram/type-9",
+                "confidence": "high"
+            },
+            {
+                "cluster_id": "generic_personality_test_zh-CN",
+                "relationship": "supporting_url",
+                "primary_owner": "/zh/tests",
+                "confidence": "medium"
+            },
+            {
+                "cluster_id": "mbti_test_zh-CN",
+                "relationship": "supporting_url",
+                "primary_owner": "/zh/tests/mbti-personality-test-16-personality-types",
+                "confidence": "high"
+            }
+        ]
+    },
+    "baseline_lock": {
+        "observed_at_utc": "2026-08-27T03:35:44Z",
+        "production_active_sha": "64c386fa0e0fa5167c08c207befe33be75bb447d",
+        "production_state_sha256": "2ef8def16b4806fb8db5c4351edbf3a4a360171f1915f7d191ec098effa99b6e",
+        "production_revision_set_sha256": "f42e1db146ec104d657dff77d147a8dc17164e899850f4c2dbd059eb346a50a9",
+        "article_row_body_sha256": "c68fd79fa9838367c56006a78442a40324dfe3aae366ebc01b6ea704c9434db9",
+        "current_revision_body_sha256": "c68fd79fa9838367c56006a78442a40324dfe3aae366ebc01b6ea704c9434db9",
+        "current_public_body_sha256": "c68fd79fa9838367c56006a78442a40324dfe3aae366ebc01b6ea704c9434db9",
+        "published_revision_id": 73,
+        "projection_contract": {
+            "payload_method": "ArticleController::publicArticlePayload",
+            "body_transform_method": "ArticleBodyHeadingGuard::downgradeMarkdownH1ToH2",
+            "implementation_file_sha256": {
+                "backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php": "dbd2daf09e30b2bc15c052793dd8d78719f9340fcfb20fd3dda911b44984ea0c",
+                "backend/app/Services/Cms/ArticleBodyHeadingGuard.php": "11f353485a97adc266bb207921c3befa4a9cb886d446ada128bef8b03aaef3cc"
+            }
+        }
+    },
+    "files": {
+        "current.public.zh-CN.md": {
+            "sha256": "c68fd79fa9838367c56006a78442a40324dfe3aae366ebc01b6ea704c9434db9",
+            "authority": "production_public_api_projection"
+        },
+        "proposed.cms.zh-CN.md": {
+            "sha256": "ba0d9ef8b000f9c0ef2990fa4d54565549c104e692d1708f505dcfaf51ca123f",
+            "authority": "operator_review_candidate_only"
+        }
+    },
+    "body_write_plan": {
+        "write_count": 1,
+        "mode": "replace_with_exact_proposed_cms_bytes",
+        "proposed_cms_file": "proposed.cms.zh-CN.md",
+        "proposed_cms_sha256": "ba0d9ef8b000f9c0ef2990fa4d54565549c104e692d1708f505dcfaf51ca123f",
+        "projected_public_sha256": "ba0d9ef8b000f9c0ef2990fa4d54565549c104e692d1708f505dcfaf51ca123f"
+    },
+    "field_plan": {
+        "title": {
+            "status": "CHANGE",
+            "current": "九型人格测试准吗？9种类型、核心动机和结果解读一次讲清",
+            "proposed": "九型人格是什么？9 种类型、核心动机与结果怎么看"
+        },
+        "h1": {
+            "status": "CHANGE",
+            "current": "九型人格测试准吗？9种类型、核心动机和结果解读一次讲清",
+            "proposed": "九型人格是什么？9 种类型、核心动机与结果怎么看"
+        },
+        "seo_title": {
+            "status": "CHANGE",
+            "current": "九型人格测试准吗？9种类型、核心动机和结果解读 | FermatMind",
+            "proposed": "九型人格是什么？9 种类型、核心动机与结果怎么看"
+        },
+        "seo_description": {
+            "status": "CHANGE",
+            "current": "九型人格测试适合做自我观察，不适合当专业诊断。本文解释9种类型、核心动机、核心恐惧、结果怎么看，以及九型人格和MBTI、大五人格、EQ的区别。",
+            "proposed": "九型人格是什么？了解 9 种类型、核心动机与压力反应，学习安全解读结果。九型人格只用于自我观察，不替代诊断，也不预测职业或关系结果。"
+        },
+        "intro": {
+            "status": "CHANGE",
+            "current": "九型人格测试可以帮助你观察核心动机、注意力习惯和压力下的自动反应，但不应被当成专业诊断、招聘筛选或职业成功预测。",
+            "proposed": "九型人格是一套用九种类型讨论核心动机、注意力习惯和压力反应的自我观察语言。读结果时不要只追问“我是几型”，而要检查主类型、接近类型和具体场景是否吻合。现有研究对其信度与效度给出混合证据，因此本页不把九型人格当作诊断、招聘筛选或职业与关系预测工具；测试、免费测试、题目和入口意图由正式测试页承接。"
+        },
+        "body_markdown": {
+            "status": "CHANGE",
+            "current_revision_sha256": "c68fd79fa9838367c56006a78442a40324dfe3aae366ebc01b6ea704c9434db9",
+            "current_public_sha256": "c68fd79fa9838367c56006a78442a40324dfe3aae366ebc01b6ea704c9434db9",
+            "proposed_cms_sha256": "ba0d9ef8b000f9c0ef2990fa4d54565549c104e692d1708f505dcfaf51ca123f"
+        },
+        "faq_visible_body": {
+            "status": "CHANGE",
+            "current": [
+                {
+                    "question": "九型人格测试准吗？",
+                    "answer": "它可以提供自我观察线索，尤其是核心动机、注意力习惯和压力下的自动反应。但它不应被当作专业诊断、临床评估或高确定性的科学结论。更安全的用法，是把结果当作观察假设，在真实关系和压力场景中验证。"
+                },
+                {
+                    "question": "九型人格的 9 种类型分别代表什么？",
+                    "answer": "9 种类型分别围绕不同的关注点和动机语言展开，例如标准、关系、成就、独特性、理解、安全、可能性、控制感与和谐。它们不是命运分类，也不是职业推荐。类型名称只是入口，更重要的是看背后的核心动机和自动反应。"
+                },
+                {
+                    "question": "九型人格结果怎么看？",
+                    "answer": "不要只看主类型。你需要同时看分数接近的类型、结果是否和真实场景吻合、自己在压力下的默认反应，以及他人长期反馈。结果越能帮助你提出具体观察问题，越有价值。"
+                },
+                {
+                    "question": "核心动机、核心恐惧和核心欲望是什么意思？",
+                    "answer": "核心动机指你反复追求什么；核心恐惧指你最不愿面对什么；核心欲望指你希望通过什么获得稳定感。它们适合做自我观察语言，不适合被写成诊断或心理病因。"
+                },
+                {
+                    "question": "九型人格可以诊断心理问题吗？",
+                    "answer": "不可以。九型人格不是专业诊断，不是临床评估，也不是专业支持或心理咨询替代。如果你正在处理严重焦虑、抑郁、创伤、成瘾、危机状态或其他心理健康问题，应寻求合格专业支持。"
+                },
+                {
+                    "question": "九型人格和 MBTI 有什么区别？",
+                    "answer": "MBTI 更常用于描述信息处理、决策、互动和生活组织偏好；九型人格更常用于讨论核心动机、恐惧、注意力习惯和压力反应。两者都不能用来判断职业结果、招聘适配或关系结果。"
+                },
+                {
+                    "question": "九型人格和大五人格有什么区别？",
+                    "answer": "大五人格更像连续特质模型，用来描述长期行为倾向；九型人格更像动机和自我观察语言，用来讨论“为什么会这样反应”。如果你需要更稳健的特质框架，可以同时参考大五人格，但不要把任何测试当作最终判决。"
+                }
+            ],
+            "proposed": [
+                {
+                    "question": "九型人格测试准吗？",
+                    "answer": "它可以提供自我观察线索，尤其是核心动机、注意力习惯和压力下的自动反应。但它不应被当作专业诊断、临床评估或高确定性的科学结论。更安全的用法，是把结果当作观察假设，在真实关系和压力场景中验证。"
+                },
+                {
+                    "question": "九型人格的 9 种类型分别代表什么？",
+                    "answer": "9 种类型分别围绕不同的关注点和动机语言展开，例如标准、关系、成就、独特性、理解、安全、可能性、控制感与和谐。它们不是命运分类，也不是职业推荐。类型名称只是入口，更重要的是看背后的核心动机和自动反应。"
+                },
+                {
+                    "question": "九型人格结果怎么看？",
+                    "answer": "不要只看主类型。你需要同时看分数接近的类型、结果是否和真实场景吻合、自己在压力下的默认反应，以及他人长期反馈。结果越能帮助你提出具体观察问题，越有价值。"
+                },
+                {
+                    "question": "核心动机、核心恐惧和核心欲望是什么意思？",
+                    "answer": "核心动机指你反复追求什么；核心恐惧指你最不愿面对什么；核心欲望指你希望通过什么获得稳定感。它们适合做自我观察语言，不适合被写成诊断或心理病因。"
+                },
+                {
+                    "question": "九型人格可以诊断心理问题吗？",
+                    "answer": "不可以。九型人格不是专业诊断，不是临床评估，也不是专业支持或心理咨询替代。如果你正在处理严重焦虑、抑郁、创伤、成瘾、危机状态或其他心理健康问题，应寻求合格专业支持。"
+                },
+                {
+                    "question": "九型人格和 MBTI 有什么区别？",
+                    "answer": "MBTI 更常用于描述信息处理、决策、互动和生活组织偏好；九型人格更常用于讨论核心动机、恐惧、注意力习惯和压力反应。两者都不能用来判断职业结果、招聘适配或关系结果。"
+                }
+            ]
+        },
+        "answer_surface_v1": {
+            "status": "KEEP",
+            "current_public_api": [
+                {
+                    "question": "九型人格测试准吗？",
+                    "answer": "它可以提供自我观察线索，尤其是核心动机、注意力习惯和压力下的自动反应。但它不应被当作专业诊断、临床评估或高确定性的科学结论。更安全的用法，是把结果当作观察假设，在真实关系和压力场景中验证。"
+                },
+                {
+                    "question": "九型人格的 9 种类型分别代表什么？",
+                    "answer": "9 种类型分别围绕不同的关注点和动机语言展开，例如标准、关系、成就、独特性、理解、安全、可能性、控制感与和谐。它们不是命运分类，也不是职业推荐。类型名称只是入口，更重要的是看背后的核心动机和自动反应。"
+                },
+                {
+                    "question": "九型人格结果怎么看？",
+                    "answer": "不要只看主类型。你需要同时看分数接近的类型、结果是否和真实场景吻合、自己在压力下的默认反应，以及他人长期反馈。结果越能帮助你提出具体观察问题，越有价值。"
+                },
+                {
+                    "question": "核心动机、核心恐惧和核心欲望是什么意思？",
+                    "answer": "核心动机指你反复追求什么；核心恐惧指你最不愿面对什么；核心欲望指你希望通过什么获得稳定感。它们适合做自我观察语言，不适合被写成诊断或心理病因。"
+                },
+                {
+                    "question": "九型人格可以诊断心理问题吗？",
+                    "answer": "不可以。九型人格不是专业诊断，不是临床评估，也不是专业支持或心理咨询替代。如果你正在处理严重焦虑、抑郁、创伤、成瘾、危机状态或其他心理健康问题，应寻求合格专业支持。"
+                },
+                {
+                    "question": "九型人格和 MBTI 有什么区别？",
+                    "answer": "MBTI 更常用于描述信息处理、决策、互动和生活组织偏好；九型人格更常用于讨论核心动机、恐惧、注意力习惯和压力反应。两者都不能用来判断职业结果、招聘适配或关系结果。"
+                }
+            ],
+            "proposed": [
+                {
+                    "question": "九型人格测试准吗？",
+                    "answer": "它可以提供自我观察线索，尤其是核心动机、注意力习惯和压力下的自动反应。但它不应被当作专业诊断、临床评估或高确定性的科学结论。更安全的用法，是把结果当作观察假设，在真实关系和压力场景中验证。"
+                },
+                {
+                    "question": "九型人格的 9 种类型分别代表什么？",
+                    "answer": "9 种类型分别围绕不同的关注点和动机语言展开，例如标准、关系、成就、独特性、理解、安全、可能性、控制感与和谐。它们不是命运分类，也不是职业推荐。类型名称只是入口，更重要的是看背后的核心动机和自动反应。"
+                },
+                {
+                    "question": "九型人格结果怎么看？",
+                    "answer": "不要只看主类型。你需要同时看分数接近的类型、结果是否和真实场景吻合、自己在压力下的默认反应，以及他人长期反馈。结果越能帮助你提出具体观察问题，越有价值。"
+                },
+                {
+                    "question": "核心动机、核心恐惧和核心欲望是什么意思？",
+                    "answer": "核心动机指你反复追求什么；核心恐惧指你最不愿面对什么；核心欲望指你希望通过什么获得稳定感。它们适合做自我观察语言，不适合被写成诊断或心理病因。"
+                },
+                {
+                    "question": "九型人格可以诊断心理问题吗？",
+                    "answer": "不可以。九型人格不是专业诊断，不是临床评估，也不是专业支持或心理咨询替代。如果你正在处理严重焦虑、抑郁、创伤、成瘾、危机状态或其他心理健康问题，应寻求合格专业支持。"
+                },
+                {
+                    "question": "九型人格和 MBTI 有什么区别？",
+                    "answer": "MBTI 更常用于描述信息处理、决策、互动和生活组织偏好；九型人格更常用于讨论核心动机、恐惧、注意力习惯和压力反应。两者都不能用来判断职业结果、招聘适配或关系结果。"
+                }
+            ],
+            "v1_intent_supported_by_visible_body": false
+        },
+        "primary_cta": {
+            "status": "CHANGE",
+            "current_public_api": [
+                {
+                    "key": "article_cta_1",
+                    "title": "开始九型人格测试",
+                    "body": null,
+                    "href": "/zh/tests/enneagram-personality-test-nine-types",
+                    "kind": "start_test"
+                },
+                {
+                    "key": "article_cta_2",
+                    "title": "开始九型人格测试",
+                    "body": null,
+                    "href": "/zh/tests/enneagram-personality-test-nine-types",
+                    "kind": "start_test"
+                }
+            ],
+            "proposed": [
+                {
+                    "label": "开始九型人格测试",
+                    "href": "/zh/tests/enneagram-personality-test-nine-types",
+                    "intent": "test_intent_handoff"
+                }
+            ],
+            "effective_primary": [
+                {
+                    "label": "开始九型人格测试",
+                    "href": "/zh/tests/enneagram-personality-test-nine-types",
+                    "intent": "test_intent_handoff"
+                }
+            ]
+        },
+        "reading_minutes": {
+            "status": "CHANGE",
+            "current": 18,
+            "proposed": 15,
+            "formula_result": 15
+        },
+        "related_test_slug": {
+            "status": "KEEP",
+            "current": "enneagram-personality-test-nine-types",
+            "proposed": "enneagram-personality-test-nine-types"
+        }
+    },
+    "editorial_rebase": {
+        "source": "latest_locked_production_revision_bytes",
+        "v1_proposed_full_body_reused": false,
+        "allowed_change_summary": [
+            "definition_owner_title_seo_first_screen",
+            "delete_seventh_faq",
+            "duplicate_cta",
+            "formal_hub_link"
+        ],
+        "planned_removed_top_level_blocks": [
+            "Quick answer：九型人格测试准吗？",
+            "下一步怎么做",
+            "相关阅读 / internal links"
+        ],
+        "unplanned_removed_top_level_blocks": []
+    },
+    "internal_links": [
+        {
+            "label": "九型人格 Hub",
+            "href": "/zh/personality/enneagram",
+            "role": "context"
+        },
+        {
+            "label": "MBTI 入门",
+            "href": "/zh/articles/mbti-basics",
+            "role": "context"
+        },
+        {
+            "label": "大五人格结果指南",
+            "href": "/zh/articles/big-five-tool-guide",
+            "role": "context"
+        },
+        {
+            "label": "EQ 工具指南",
+            "href": "/zh/articles/eq-test-tool-guide",
+            "role": "context"
+        },
+        {
+            "label": "方法边界",
+            "href": "/zh/method-boundaries",
+            "role": "context"
+        },
+        {
+            "label": "信度效度说明",
+            "href": "/zh/reliability-validity",
+            "role": "context"
+        },
+        {
+            "label": "九型人格模型总览",
+            "href": "/zh/personality/enneagram",
+            "role": "context"
+        },
+        {
+            "label": "开始九型人格测试",
+            "href": "/zh/tests/enneagram-personality-test-nine-types",
+            "role": "primary_cta"
+        }
+    ],
+    "claim_boundary": "只拥有“九型人格是什么”；测试、免费测试、题目和入口意图交给正式测试页。系统综述显示证据混合，不作诊断、招聘、人格定型、职业或关系预测。",
+    "forbidden_claims": [
+        "diagnosis",
+        "guaranteed_admission",
+        "unique_career",
+        "fixed_personality",
+        "hiring_screening",
+        "ability_prediction",
+        "official_endorsement"
+    ],
+    "operational_measurement": {
+        "seven_day": "Unknown",
+        "fourteen_day": "Unknown"
+    },
+    "package_sha256": "4d7634187f54790edd21b57d155c5a0abf9e3d97b49b850ebb261a7f51269deb"
+}

@@ -1,0 +1,315 @@
+{
+    "schema_version": "fermatmind.article15_baseline_reconciled_content_package.v2",
+    "package_id": "ARTICLE15-BASELINE-RECONCILED-V2-01-gaokao-major-adjustment-unacceptable-major-checklist",
+    "package_order": 1,
+    "decision": "CHANGE",
+    "status": {
+        "content_package_only": true,
+        "requires_operator_review": true,
+        "import_ready": false,
+        "publish_allowed": false,
+        "search_submit_allowed": false
+    },
+    "supersedes_for_execution": {
+        "execution_id": "ARTICLE15-EXACT-PACKAGE-REVISION-BOUND-20260826-v1",
+        "execution_manifest_path": "backend/docs/seo/content-packages/article15-exact-package-revision-bound-20260826/manifest.json",
+        "execution_manifest_sha256": "eb9a0254600991e2b4d7967b7c4d46c27d604719d8c40ba63353a20cd50a96e7",
+        "v1_package_id": "ARTICLE15-BATCH-A-01-gaokao-major-adjustment-unacceptable-major-checklist",
+        "v1_package_path": "backend/docs/seo/content-packages/article15-batch-a-20260826/packages/01-gaokao-major-adjustment-unacceptable-major-checklist/package.json",
+        "v1_package_sha256": "ea75bf63659b9738153a4d0895242d03b9ae937b2f91eb065a256ebe6900650d",
+        "v1_body_sha256": "62bde8b8ac8c4d11f9d3a07bd433e327d8da878a83d9fa2d0646598caf61a055",
+        "v1_is_historical_source_only": true
+    },
+    "identity_lock": {
+        "article_id": 58,
+        "translation_group_id": "tg_gaokao_adjustment_unacceptable_major_2026v1",
+        "published_revision_id": 78,
+        "locale": "zh-CN",
+        "slug": "gaokao-major-adjustment-unacceptable-major-checklist",
+        "canonical_url": "/zh/articles/gaokao-major-adjustment-unacceptable-major-checklist",
+        "query_owner_relationships": [
+            {
+                "cluster_id": "gaokao_major_adjustment_zh-CN",
+                "relationship": "primary_owner",
+                "primary_owner": "/zh/articles/gaokao-major-adjustment-unacceptable-major-checklist",
+                "confidence": "high"
+            }
+        ]
+    },
+    "baseline_lock": {
+        "observed_at_utc": "2026-08-27T03:35:44Z",
+        "production_active_sha": "64c386fa0e0fa5167c08c207befe33be75bb447d",
+        "production_state_sha256": "2ef8def16b4806fb8db5c4351edbf3a4a360171f1915f7d191ec098effa99b6e",
+        "production_revision_set_sha256": "f42e1db146ec104d657dff77d147a8dc17164e899850f4c2dbd059eb346a50a9",
+        "article_row_body_sha256": "1f8b7ec9bf5fedc67c289b9ad1f4a370a430d9ba1a4ea57c8d14ecd882f6506f",
+        "current_revision_body_sha256": "1f8b7ec9bf5fedc67c289b9ad1f4a370a430d9ba1a4ea57c8d14ecd882f6506f",
+        "current_public_body_sha256": "1f8b7ec9bf5fedc67c289b9ad1f4a370a430d9ba1a4ea57c8d14ecd882f6506f",
+        "published_revision_id": 78,
+        "projection_contract": {
+            "payload_method": "ArticleController::publicArticlePayload",
+            "body_transform_method": "ArticleBodyHeadingGuard::downgradeMarkdownH1ToH2",
+            "implementation_file_sha256": {
+                "backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php": "dbd2daf09e30b2bc15c052793dd8d78719f9340fcfb20fd3dda911b44984ea0c",
+                "backend/app/Services/Cms/ArticleBodyHeadingGuard.php": "11f353485a97adc266bb207921c3befa4a9cb886d446ada128bef8b03aaef3cc"
+            }
+        }
+    },
+    "files": {
+        "current.public.zh-CN.md": {
+            "sha256": "1f8b7ec9bf5fedc67c289b9ad1f4a370a430d9ba1a4ea57c8d14ecd882f6506f",
+            "authority": "production_public_api_projection"
+        },
+        "proposed.cms.zh-CN.md": {
+            "sha256": "5bcf5c0b113a0a726fc56a216d1ac351b9e7e647e44a9d90926897e669a2fd87",
+            "authority": "operator_review_candidate_only"
+        }
+    },
+    "body_write_plan": {
+        "write_count": 1,
+        "mode": "replace_with_exact_proposed_cms_bytes",
+        "proposed_cms_file": "proposed.cms.zh-CN.md",
+        "proposed_cms_sha256": "5bcf5c0b113a0a726fc56a216d1ac351b9e7e647e44a9d90926897e669a2fd87",
+        "projected_public_sha256": "5bcf5c0b113a0a726fc56a216d1ac351b9e7e647e44a9d90926897e669a2fd87"
+    },
+    "field_plan": {
+        "title": {
+            "status": "KEEP",
+            "current": "高考志愿要不要服从调剂？先看院校专业组里的“不能接受专业”",
+            "proposed": "高考志愿要不要服从调剂？先看院校专业组里的“不能接受专业”"
+        },
+        "h1": {
+            "status": "KEEP",
+            "current": "高考志愿要不要服从调剂？先看院校专业组里的“不能接受专业”",
+            "proposed": "高考志愿要不要服从调剂？先看院校专业组里的“不能接受专业”"
+        },
+        "seo_title": {
+            "status": "KEEP",
+            "current": "高考志愿要不要服从调剂？先排除不能接受专业",
+            "proposed": "高考志愿要不要服从调剂？先排除不能接受专业"
+        },
+        "seo_description": {
+            "status": "CHANGE",
+            "current": "填院校专业组前，别先争服从调剂。先把全部专业分成不能接受、待验证、可接受，再用课程、硬条件和家庭成本判断能否承担调剂风险。",
+            "proposed": "高考志愿是否服从调剂，先核对院校专业组全部专业、选科体检等硬条件和不能接受项。附三栏清单；RIASEC 仅辅助兴趣梳理，不预测录取。"
+        },
+        "intro": {
+            "status": "CHANGE",
+            "current": "填院校专业组前，别先争服从调剂。先把全部专业分成不能接受、待验证、可接受，再用课程、硬条件和家庭成本判断能否承担调剂风险。",
+            "proposed": "是否服从调剂，不能脱离本省当年投档规则、目标高校招生章程和具体院校专业组回答。先列出组内全部专业，再核对选科、体检、单科、外语等硬条件，把其余专业分成“不能接受、待验证、可接受”。只有你能承担组内最坏结果时，才继续讨论是否服从调剂。本文提供决策清单，不预测录取，也不替代官方填报规则。"
+        },
+        "body_markdown": {
+            "status": "CHANGE",
+            "current_revision_sha256": "1f8b7ec9bf5fedc67c289b9ad1f4a370a430d9ba1a4ea57c8d14ecd882f6506f",
+            "current_public_sha256": "1f8b7ec9bf5fedc67c289b9ad1f4a370a430d9ba1a4ea57c8d14ecd882f6506f",
+            "proposed_cms_sha256": "5bcf5c0b113a0a726fc56a216d1ac351b9e7e647e44a9d90926897e669a2fd87"
+        },
+        "faq_visible_body": {
+            "status": "CHANGE",
+            "current": [
+                {
+                    "question": "高考志愿要不要服从调剂？",
+                    "answer": "不能脱离具体院校专业组回答。先看组内所有专业，如果都能接受，再讨论服从调剂能否降低某些录取环节的不确定性；如果有完全不能接受的专业，就要先处理专业组风险。"
+                },
+                {
+                    "question": "服从调剂会被调到不喜欢的专业吗？",
+                    "answer": "存在这种可能，具体范围和规则要以本省考试院政策、院校专业组设置和高校招生章程为准。不要只看最想去的专业，要把组内所有专业都列出来。"
+                },
+                {
+                    "question": "高考志愿不服从调剂会怎样？",
+                    "answer": "可能带来退档或无法被该组其他专业录取的风险，具体要看本省投档录取规则和学校专业录取规则。本文不预测结果，只建议先把“不能接受专业”和“可接受调剂范围”查清楚。"
+                },
+                {
+                    "question": "院校专业组里有一个不能接受专业，还能填吗？",
+                    "answer": "要看这个专业为什么不能接受。如果是硬限制、长期无法承受的课程或任务，而且你无法接受被调剂过去，就要非常谨慎。如果只是不了解，先放“待验证”，查完课程和规则再判断。"
+                },
+                {
+                    "question": "专业+院校模式还需要考虑服从调剂吗？",
+                    "answer": "不同省份和批次规则不同。一般来说，“专业+院校”更接近一个志愿对应一个明确专业或专业组合，重点是不要把自己不愿意读的专业填进去。正式判断仍以本省考试院规则为准。"
+                },
+                {
+                    "question": "被调剂到不喜欢的专业怎么办？",
+                    "answer": "先查培养方案、转专业政策、辅修或转方向路径，再用第一学期课程和任务体验判断。不要马上把结果等同于失败，也不要完全依赖“以后一定能转专业”。"
+                },
+                {
+                    "question": "霍兰德职业兴趣测试能决定要不要服从调剂吗？",
+                    "answer": "不能。霍兰德 / RIASEC 只能帮助你观察职业兴趣和工作活动偏好，适合把“不喜欢”拆成可验证问题。它不是录取预测工具，也不是专业匹配器。"
+                },
+                {
+                    "question": "MBTI 能用来判断专业组是否能接受吗？",
+                    "answer": "MBTI 可以辅助理解学习、沟通和决策偏好，但不能直接判断某个专业是否适合。专业组风险首先要看硬条件、课程、培养方案和现实约束。"
+                },
+                {
+                    "question": "FermatMind 是官方志愿填报系统吗？",
+                    "answer": "不是。FermatMind 不是官方志愿填报系统，也不预测录取结果。正式填报应以省考试院、阳光高考、学校招生章程、选科要求、招生计划和真实课程信息为准。"
+                }
+            ],
+            "proposed": [
+                {
+                    "question": "高考志愿是否必须服从调剂？",
+                    "answer": "不是所有考生、所有省份或所有志愿模式都存在同一种“必须”答案。先查本省当年投档规则和目标高校招生章程，再看院校专业组内是否有你不能接受或不符合条件的专业。本文不替你作录取决定。"
+                },
+                {
+                    "question": "怎样列出“不能接受专业”？",
+                    "answer": "把组内全部专业逐项写入三栏表：不能接受、待验证、可接受。只有能写出明确证据，例如硬条件不符、长期课程或任务无法承受、家庭成本不可行，才放入“不能接受”；信息不足先放“待验证”。"
+                },
+                {
+                    "question": "院校专业组需要核对哪些硬条件？",
+                    "answer": "至少核对本省当年规则、高校招生章程、选考科目、体检限制、单科成绩、外语语种、学制学费、培养校区和具体专业录取条件。不同省份、批次、院校和专业可能不同，不要用其他地区经验代替官方文件。"
+                },
+                {
+                    "question": "RIASEC 能代替服从调剂决定吗？",
+                    "answer": "不能。RIASEC 只能帮助你把兴趣和排斥转成课程、任务与环境的验证问题；它不预测录取、不保证专业适配，也不能替代省考试院规则、高校招生章程和现实成本判断。"
+                }
+            ]
+        },
+        "answer_surface_v1": {
+            "status": "CHANGE",
+            "current_public_api": [
+                {
+                    "question": "什么时候适合阅读这篇文章？",
+                    "answer": "当你想把公开内容和测评、人格画像或职业建议串起来时，先从这篇文章的核心摘要开始。"
+                },
+                {
+                    "question": "这篇文章会替代正式判断吗？",
+                    "answer": "不会。它只提供公开解释和行动线索，不替代医疗、法律或专业诊断。"
+                }
+            ],
+            "proposed": [
+                {
+                    "question": "高考志愿是否必须服从调剂？",
+                    "answer": "不是所有考生、所有省份或所有志愿模式都存在同一种“必须”答案。先查本省当年投档规则和目标高校招生章程，再看院校专业组内是否有你不能接受或不符合条件的专业。本文不替你作录取决定。"
+                },
+                {
+                    "question": "怎样列出“不能接受专业”？",
+                    "answer": "把组内全部专业逐项写入三栏表：不能接受、待验证、可接受。只有能写出明确证据，例如硬条件不符、长期课程或任务无法承受、家庭成本不可行，才放入“不能接受”；信息不足先放“待验证”。"
+                },
+                {
+                    "question": "院校专业组需要核对哪些硬条件？",
+                    "answer": "至少核对本省当年规则、高校招生章程、选考科目、体检限制、单科成绩、外语语种、学制学费、培养校区和具体专业录取条件。不同省份、批次、院校和专业可能不同，不要用其他地区经验代替官方文件。"
+                },
+                {
+                    "question": "RIASEC 能代替服从调剂决定吗？",
+                    "answer": "不能。RIASEC 只能帮助你把兴趣和排斥转成课程、任务与环境的验证问题；它不预测录取、不保证专业适配，也不能替代省考试院规则、高校招生章程和现实成本判断。"
+                }
+            ],
+            "v1_intent_supported_by_visible_body": false
+        },
+        "primary_cta": {
+            "status": "CHANGE",
+            "current_public_api": [
+                {
+                    "key": "article_cta_1",
+                    "title": "做一次霍兰德职业兴趣测试，把“不喜欢”拆成可验证任务",
+                    "body": null,
+                    "href": "/zh/tests/holland-career-interest-test-riasec",
+                    "kind": "start_test"
+                },
+                {
+                    "key": "article_cta_2",
+                    "title": "用 MBTI 辅助理解学习和沟通偏好",
+                    "body": null,
+                    "href": "/zh/tests/mbti-personality-test-16-personality-types",
+                    "kind": "start_test"
+                }
+            ],
+            "proposed": [
+                {
+                    "label": "做霍兰德职业兴趣测试，整理专业验证问题",
+                    "href": "/zh/tests/holland-career-interest-test-riasec",
+                    "intent": "test_intent_handoff"
+                }
+            ],
+            "effective_primary": [
+                {
+                    "label": "做霍兰德职业兴趣测试，整理专业验证问题",
+                    "href": "/zh/tests/holland-career-interest-test-riasec",
+                    "intent": "test_intent_handoff"
+                }
+            ]
+        },
+        "reading_minutes": {
+            "status": "CHANGE",
+            "current": 14,
+            "proposed": 13,
+            "formula_result": 13
+        },
+        "related_test_slug": {
+            "status": "KEEP",
+            "current": "holland-career-interest-test-riasec",
+            "proposed": "holland-career-interest-test-riasec"
+        }
+    },
+    "editorial_rebase": {
+        "source": "latest_locked_production_revision_bytes",
+        "v1_proposed_full_body_reused": false,
+        "allowed_change_summary": [
+            "first_screen",
+            "four_faqs",
+            "duplicate_cta",
+            "riasec_context_link",
+            "repeat_or_stay_context_link"
+        ],
+        "planned_removed_top_level_blocks": [
+            "快速答案：先别急着点“服从”，先把最坏结果写出来",
+            "什么时候用霍兰德职业兴趣测试？"
+        ],
+        "unplanned_removed_top_level_blocks": []
+    },
+    "internal_links": [
+        {
+            "label": "RIASEC / 霍兰德模型与结果解释",
+            "href": "/zh/articles/riasec-holland-career-interest-test-explained",
+            "role": "context"
+        },
+        {
+            "label": "RIASEC 模型与结果解释",
+            "href": "/zh/articles/riasec-holland-career-interest-test-explained",
+            "role": "context"
+        },
+        {
+            "label": "高考出分后专业筛选清单",
+            "href": "/zh/articles/gaokao-score-major-shortlist-riasec-checklist",
+            "role": "context"
+        },
+        {
+            "label": "选专业父母不同意怎么办",
+            "href": "/zh/articles/gaokao-major-choice-parent-conflict-riasec-course-checklist",
+            "role": "context"
+        },
+        {
+            "label": "复读还是继续就读决策清单",
+            "href": "/zh/articles/unwanted-major-repeat-or-stay-riasec-decision-checklist",
+            "role": "context"
+        },
+        {
+            "label": "霍兰德职业兴趣测试解释",
+            "href": "/zh/articles/riasec-holland-career-interest-test-explained",
+            "role": "context"
+        },
+        {
+            "label": "职业兴趣测试和性格测试的区别",
+            "href": "/zh/articles/career-interest-vs-personality-test-differences",
+            "role": "context"
+        },
+        {
+            "label": "做霍兰德职业兴趣测试，整理专业验证问题",
+            "href": "/zh/tests/holland-career-interest-test-riasec",
+            "role": "primary_cta"
+        }
+    ],
+    "claim_boundary": "不预测录取、退档、调剂结果或转专业成功；不从隐藏查询扩写院校、地区、批次或政策；所有规则判断回到本省当年文件与目标高校招生章程；RIASEC 只整理兴趣线索。",
+    "forbidden_claims": [
+        "diagnosis",
+        "guaranteed_admission",
+        "unique_career",
+        "fixed_personality",
+        "hiring_screening",
+        "ability_prediction",
+        "official_endorsement"
+    ],
+    "operational_measurement": {
+        "seven_day": "Unknown",
+        "fourteen_day": "Unknown"
+    },
+    "package_sha256": "d876c3eee3cc85efc276ab6dd4d120d1a89c454ed9d6f99bdc8f96ae6046e74b"
+}

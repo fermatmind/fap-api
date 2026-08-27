@@ -1,0 +1,304 @@
+{
+    "schema_version": "fermatmind.article15_baseline_reconciled_content_package.v2",
+    "package_id": "ARTICLE15-BASELINE-RECONCILED-V2-15-mbti-full-report-career-relationship-communication",
+    "package_order": 15,
+    "decision": "KEEP",
+    "status": {
+        "content_package_only": true,
+        "requires_operator_review": true,
+        "import_ready": false,
+        "publish_allowed": false,
+        "search_submit_allowed": false
+    },
+    "supersedes_for_execution": {
+        "execution_id": "ARTICLE15-EXACT-PACKAGE-REVISION-BOUND-20260826-v1",
+        "execution_manifest_path": "backend/docs/seo/content-packages/article15-exact-package-revision-bound-20260826/manifest.json",
+        "execution_manifest_sha256": "eb9a0254600991e2b4d7967b7c4d46c27d604719d8c40ba63353a20cd50a96e7",
+        "v1_package_id": "ARTICLE15-BATCH-C-05-mbti-full-report-career-relationship-communication",
+        "v1_package_path": "backend/docs/seo/content-packages/article15-batch-c-20260826/packages/05-mbti-full-report-career-relationship-communication/package.json",
+        "v1_package_sha256": "78428063f356b0955cff9574da8fc87ff964edeaf4a9fa21519a62e89884ca35",
+        "v1_body_sha256": "1e9a4c6768fc2e21bae87b5990d55302bf9bfb03d884839f2354a92ff41f7148",
+        "v1_is_historical_source_only": true
+    },
+    "identity_lock": {
+        "article_id": 61,
+        "translation_group_id": "tg_mbti_full_report_career_relationship_2026v1",
+        "published_revision_id": 81,
+        "locale": "en",
+        "slug": "mbti-full-report-career-relationship-communication",
+        "canonical_url": "https://fermatmind.com/en/articles/mbti-full-report-career-relationship-communication",
+        "query_owner_relationships": [
+            {
+                "cluster_id": null,
+                "relationship": "no_active_cluster_assignment",
+                "primary_owner": null,
+                "confidence": "not_applicable"
+            }
+        ]
+    },
+    "baseline_lock": {
+        "observed_at_utc": "2026-08-27T03:35:44Z",
+        "production_active_sha": "64c386fa0e0fa5167c08c207befe33be75bb447d",
+        "production_state_sha256": "2ef8def16b4806fb8db5c4351edbf3a4a360171f1915f7d191ec098effa99b6e",
+        "production_revision_set_sha256": "f42e1db146ec104d657dff77d147a8dc17164e899850f4c2dbd059eb346a50a9",
+        "article_row_body_sha256": "442f729819cb6385491d861a3a6542a3c335459a9e53eec119358efd546d024b",
+        "current_revision_body_sha256": "e258cb31c88d60183df10eaa3f8fd90a08ad7d5c29d15eac9f83fd15268aadd1",
+        "current_public_body_sha256": "e258cb31c88d60183df10eaa3f8fd90a08ad7d5c29d15eac9f83fd15268aadd1",
+        "published_revision_id": 81,
+        "projection_contract": {
+            "payload_method": "ArticleController::publicArticlePayload",
+            "body_transform_method": "ArticleBodyHeadingGuard::downgradeMarkdownH1ToH2",
+            "implementation_file_sha256": {
+                "backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php": "dbd2daf09e30b2bc15c052793dd8d78719f9340fcfb20fd3dda911b44984ea0c",
+                "backend/app/Services/Cms/ArticleBodyHeadingGuard.php": "11f353485a97adc266bb207921c3befa4a9cb886d446ada128bef8b03aaef3cc"
+            }
+        }
+    },
+    "files": {
+        "current.public.en.md": {
+            "sha256": "e258cb31c88d60183df10eaa3f8fd90a08ad7d5c29d15eac9f83fd15268aadd1",
+            "authority": "production_public_api_projection"
+        }
+    },
+    "body_write_plan": {
+        "write_count": 0,
+        "mode": "preserve_current_raw_revision_bytes",
+        "proposed_cms_file": null,
+        "proposed_cms_sha256": null,
+        "projected_public_sha256": "e258cb31c88d60183df10eaa3f8fd90a08ad7d5c29d15eac9f83fd15268aadd1"
+    },
+    "field_plan": {
+        "title": {
+            "status": "KEEP",
+            "current": "How to Read Your Full MBTI Report: From 16 Personality Results to Career, Relationships, and Communication",
+            "proposed": "How to Read Your Full MBTI Report: From 16 Personality Results to Career, Relationships, and Communication"
+        },
+        "h1": {
+            "status": "KEEP",
+            "current": "How to Read Your Full MBTI Report: From 16 Personality Results to Career, Relationships, and Communication",
+            "proposed": "How to Read Your Full MBTI Report: From 16 Personality Results to Career, Relationships, and Communication"
+        },
+        "seo_title": {
+            "status": "KEEP",
+            "current": "How to Read a Full MBTI Report | 16 Personality Results",
+            "proposed": "How to Read a Full MBTI Report | 16 Personality Results"
+        },
+        "seo_description": {
+            "status": "KEEP",
+            "current": "Learn how to read a full MBTI-style report beyond the four-letter label, with career, relationship, communication, teamwork, and self-growth examples.",
+            "proposed": "Learn how to read a full MBTI-style report beyond the four-letter label, with career, relationship, communication, teamwork, and self-growth examples."
+        },
+        "intro": {
+            "status": "KEEP",
+            "current": "Learn how to read a full MBTI-style report beyond the four-letter label, with career, relationship, communication, teamwork, and self-growth examples.",
+            "proposed": "Learn how to read a full MBTI-style report beyond the four-letter label, with career, relationship, communication, teamwork, and self-growth examples."
+        },
+        "body_markdown": {
+            "status": "KEEP",
+            "current_revision_sha256": "e258cb31c88d60183df10eaa3f8fd90a08ad7d5c29d15eac9f83fd15268aadd1",
+            "current_public_sha256": "e258cb31c88d60183df10eaa3f8fd90a08ad7d5c29d15eac9f83fd15268aadd1",
+            "proposed_cms_sha256": null
+        },
+        "faq_visible_body": {
+            "status": "KEEP",
+            "current": [
+                {
+                    "question": "What does a full MBTI report usually include?",
+                    "answer": "It usually includes the type label, four preference pairs, strengths, possible blind spots, stress reactions, career exploration suggestions, relationship communication patterns, and action recommendations. Exact modules vary by platform."
+                },
+                {
+                    "question": "Can a free MBTI test show full results?",
+                    "answer": "FermatMind provides a free MBTI test with a readable 16 personality result. The exact report modules should be verified on the current product page. Free or paid, the result should be treated as self-observation input, not diagnosis or career verdict."
+                },
+                {
+                    "question": "Can I use MBTI to choose a college major?",
+                    "answer": "Only as a secondary input. MBTI can help you reflect on learning style, communication preference, decision habits, and stress response. Major choice still requires admission rules, curriculum, cost, location, academic fit, and real task validation."
+                },
+                {
+                    "question": "Can MBTI decide which career fits me?",
+                    "answer": "No. MBTI can help you ask better questions about tasks and work environments, but it cannot predict career success, income, promotion, or job fit."
+                },
+                {
+                    "question": "Can MBTI results change?",
+                    "answer": "They can. Results may vary with life stage, test state, environment, question interpretation, and self-awareness. Focus on repeated behavioral patterns rather than a single result."
+                },
+                {
+                    "question": "Is MBTI accurate?",
+                    "answer": "It can be useful for describing preferences and communication patterns for some people, but it should not be treated as a medical diagnosis, formal psychological assessment, or ability measure. Use it as a hypothesis and test it against real behavior."
+                },
+                {
+                    "question": "Can MBTI tell whether a relationship will work?",
+                    "answer": "No. It can help you discuss communication rhythm, planning needs, conflict style, and feedback preferences. It cannot predict relationship success or guarantee compatibility."
+                },
+                {
+                    "question": "What should I do after taking MBTI?",
+                    "answer": "Compare the report with real behavior, ask for feedback, and test one small action in work, study, relationships, or teamwork. Do not keep reading type descriptions forever without changing any behavior."
+                }
+            ],
+            "proposed": [
+                {
+                    "question": "What does a full MBTI report usually include?",
+                    "answer": "It usually includes the type label, four preference pairs, strengths, possible blind spots, stress reactions, career exploration suggestions, relationship communication patterns, and action recommendations. Exact modules vary by platform."
+                },
+                {
+                    "question": "Can a free MBTI test show full results?",
+                    "answer": "FermatMind provides a free MBTI test with a readable 16 personality result. The exact report modules should be verified on the current product page. Free or paid, the result should be treated as self-observation input, not diagnosis or career verdict."
+                },
+                {
+                    "question": "Can I use MBTI to choose a college major?",
+                    "answer": "Only as a secondary input. MBTI can help you reflect on learning style, communication preference, decision habits, and stress response. Major choice still requires admission rules, curriculum, cost, location, academic fit, and real task validation."
+                },
+                {
+                    "question": "Can MBTI decide which career fits me?",
+                    "answer": "No. MBTI can help you ask better questions about tasks and work environments, but it cannot predict career success, income, promotion, or job fit."
+                },
+                {
+                    "question": "Can MBTI results change?",
+                    "answer": "They can. Results may vary with life stage, test state, environment, question interpretation, and self-awareness. Focus on repeated behavioral patterns rather than a single result."
+                },
+                {
+                    "question": "Is MBTI accurate?",
+                    "answer": "It can be useful for describing preferences and communication patterns for some people, but it should not be treated as a medical diagnosis, formal psychological assessment, or ability measure. Use it as a hypothesis and test it against real behavior."
+                },
+                {
+                    "question": "Can MBTI tell whether a relationship will work?",
+                    "answer": "No. It can help you discuss communication rhythm, planning needs, conflict style, and feedback preferences. It cannot predict relationship success or guarantee compatibility."
+                },
+                {
+                    "question": "What should I do after taking MBTI?",
+                    "answer": "Compare the report with real behavior, ask for feedback, and test one small action in work, study, relationships, or teamwork. Do not keep reading type descriptions forever without changing any behavior."
+                }
+            ]
+        },
+        "answer_surface_v1": {
+            "status": "CHANGE",
+            "current_public_api": [
+                {
+                    "question": "When should I use this article?",
+                    "answer": "Use this article when you want to connect public content with tests, personality profiles, or career guidance from a single starting point."
+                },
+                {
+                    "question": "Does this replace formal judgment?",
+                    "answer": "No. It offers public explanation and action cues, but does not replace medical, legal, or professional judgment."
+                }
+            ],
+            "proposed": [
+                {
+                    "question": "What does a full MBTI report usually include?",
+                    "answer": "It usually includes the type label, four preference pairs, strengths, possible blind spots, stress reactions, career exploration suggestions, relationship communication patterns, and action recommendations. Exact modules vary by platform."
+                },
+                {
+                    "question": "Can a free MBTI test show full results?",
+                    "answer": "FermatMind provides a free MBTI test with a readable 16 personality result. The exact report modules should be verified on the current product page. Free or paid, the result should be treated as self-observation input, not diagnosis or career verdict."
+                },
+                {
+                    "question": "Can I use MBTI to choose a college major?",
+                    "answer": "Only as a secondary input. MBTI can help you reflect on learning style, communication preference, decision habits, and stress response. Major choice still requires admission rules, curriculum, cost, location, academic fit, and real task validation."
+                },
+                {
+                    "question": "Can MBTI decide which career fits me?",
+                    "answer": "No. MBTI can help you ask better questions about tasks and work environments, but it cannot predict career success, income, promotion, or job fit."
+                },
+                {
+                    "question": "Can MBTI results change?",
+                    "answer": "They can. Results may vary with life stage, test state, environment, question interpretation, and self-awareness. Focus on repeated behavioral patterns rather than a single result."
+                },
+                {
+                    "question": "Is MBTI accurate?",
+                    "answer": "It can be useful for describing preferences and communication patterns for some people, but it should not be treated as a medical diagnosis, formal psychological assessment, or ability measure. Use it as a hypothesis and test it against real behavior."
+                },
+                {
+                    "question": "Can MBTI tell whether a relationship will work?",
+                    "answer": "No. It can help you discuss communication rhythm, planning needs, conflict style, and feedback preferences. It cannot predict relationship success or guarantee compatibility."
+                },
+                {
+                    "question": "What should I do after taking MBTI?",
+                    "answer": "Compare the report with real behavior, ask for feedback, and test one small action in work, study, relationships, or teamwork. Do not keep reading type descriptions forever without changing any behavior."
+                }
+            ],
+            "v1_intent_supported_by_visible_body": true
+        },
+        "primary_cta": {
+            "status": "KEEP",
+            "current_public_api": [
+                {
+                    "key": "article_cta_1",
+                    "title": "Take the free MBTI test",
+                    "body": null,
+                    "href": "/en/tests/mbti-personality-test-16-personality-types",
+                    "kind": "start_test"
+                }
+            ],
+            "proposed": [
+                {
+                    "key": "article_cta_1",
+                    "title": "Take the free MBTI test",
+                    "body": null,
+                    "href": "/en/tests/mbti-personality-test-16-personality-types",
+                    "kind": "start_test"
+                }
+            ],
+            "effective_primary": [
+                {
+                    "key": "article_cta_1",
+                    "title": "Take the free MBTI test",
+                    "body": null,
+                    "href": "/en/tests/mbti-personality-test-16-personality-types",
+                    "kind": "start_test"
+                }
+            ]
+        },
+        "reading_minutes": {
+            "status": "KEEP",
+            "current": 26,
+            "proposed": 26,
+            "formula_result": 26
+        },
+        "related_test_slug": {
+            "status": "KEEP",
+            "current": "mbti-personality-test-16-personality-types",
+            "proposed": "mbti-personality-test-16-personality-types"
+        }
+    },
+    "editorial_rebase": {
+        "source": "latest_locked_production_revision_bytes",
+        "v1_proposed_full_body_reused": false,
+        "allowed_change_summary": [
+            "preserve_current_raw_revision_bytes"
+        ],
+        "planned_removed_top_level_blocks": [],
+        "unplanned_removed_top_level_blocks": []
+    },
+    "internal_links": [
+        {
+            "label": "MBTI 16 personality test",
+            "href": "/en/tests/mbti-personality-test-16-personality-types",
+            "role": "primary_cta"
+        },
+        {
+            "label": "How to use Holland, MBTI, and career-interest tests when choosing a major",
+            "href": "/en/articles/mbti-vs-holland-code-career-choice",
+            "role": "context"
+        },
+        {
+            "label": "free MBTI test",
+            "href": "/en/tests/mbti-personality-test-16-personality-types",
+            "role": "context"
+        }
+    ],
+    "claim_boundary": "Owns only how to read a full MBTI-style result report. Test-taking, career matching, hiring, ability, diagnosis, and relationship prediction remain outside this page’s authority.",
+    "forbidden_claims": [
+        "hidden_query_inference",
+        "diagnosis",
+        "ability_prediction",
+        "career_guarantee",
+        "hiring_screening",
+        "relationship_prediction",
+        "official_endorsement"
+    ],
+    "operational_measurement": {
+        "seven_day": "Unknown",
+        "fourteen_day": "Unknown"
+    },
+    "package_sha256": "767f2d7c222880ceb65c7a0e466b5392e104c044705cd11a680a1e2d590b701a"
+}

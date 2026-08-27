@@ -1,0 +1,316 @@
+{
+    "schema_version": "fermatmind.article15_baseline_reconciled_content_package.v2",
+    "package_id": "ARTICLE15-BASELINE-RECONCILED-V2-10-mbti-narrative-portrait",
+    "package_order": 10,
+    "decision": "KEEP",
+    "status": {
+        "content_package_only": true,
+        "requires_operator_review": true,
+        "import_ready": false,
+        "publish_allowed": false,
+        "search_submit_allowed": false
+    },
+    "supersedes_for_execution": {
+        "execution_id": "ARTICLE15-EXACT-PACKAGE-REVISION-BOUND-20260826-v1",
+        "execution_manifest_path": "backend/docs/seo/content-packages/article15-exact-package-revision-bound-20260826/manifest.json",
+        "execution_manifest_sha256": "eb9a0254600991e2b4d7967b7c4d46c27d604719d8c40ba63353a20cd50a96e7",
+        "v1_package_id": "ARTICLE15-BATCH-B-05-mbti-narrative-portrait",
+        "v1_package_path": "backend/docs/seo/content-packages/article15-batch-b-20260826/packages/05-mbti-narrative-portrait/package.json",
+        "v1_package_sha256": "dd17e189f9a2bdeeced01595448c967822dc4b9d90391efe9f6088dfdec8ec3e",
+        "v1_body_sha256": "98b544382218f3f26bf89f46dd36df5050fb1a6469f9f538eb6ee8361a22fc82",
+        "v1_is_historical_source_only": true
+    },
+    "identity_lock": {
+        "article_id": 10,
+        "translation_group_id": "article-10",
+        "published_revision_id": 440,
+        "locale": "zh-CN",
+        "slug": "mbti-narrative-portrait",
+        "canonical_url": "https://fermatmind.com/zh/articles/mbti-narrative-portrait",
+        "query_owner_relationships": [
+            {
+                "cluster_id": "mbti_model_overview_zh-CN",
+                "relationship": "supporting_url",
+                "primary_owner": "/zh/topics/mbti",
+                "confidence": "medium"
+            },
+            {
+                "cluster_id": "mbti_result_use_zh-CN",
+                "relationship": "primary_owner",
+                "primary_owner": "/zh/articles/mbti-narrative-portrait",
+                "confidence": "high"
+            },
+            {
+                "cluster_id": "mbti_test_zh-CN",
+                "relationship": "supporting_url",
+                "primary_owner": "/zh/tests/mbti-personality-test-16-personality-types",
+                "confidence": "high"
+            }
+        ]
+    },
+    "baseline_lock": {
+        "observed_at_utc": "2026-08-27T03:35:44Z",
+        "production_active_sha": "64c386fa0e0fa5167c08c207befe33be75bb447d",
+        "production_state_sha256": "2ef8def16b4806fb8db5c4351edbf3a4a360171f1915f7d191ec098effa99b6e",
+        "production_revision_set_sha256": "f42e1db146ec104d657dff77d147a8dc17164e899850f4c2dbd059eb346a50a9",
+        "article_row_body_sha256": "d1c57876ff64a99acb80aa8605f1c950087087c3f814aefd8256ac54d699dd77",
+        "current_revision_body_sha256": "d1c57876ff64a99acb80aa8605f1c950087087c3f814aefd8256ac54d699dd77",
+        "current_public_body_sha256": "d1c57876ff64a99acb80aa8605f1c950087087c3f814aefd8256ac54d699dd77",
+        "published_revision_id": 440,
+        "projection_contract": {
+            "payload_method": "ArticleController::publicArticlePayload",
+            "body_transform_method": "ArticleBodyHeadingGuard::downgradeMarkdownH1ToH2",
+            "implementation_file_sha256": {
+                "backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php": "dbd2daf09e30b2bc15c052793dd8d78719f9340fcfb20fd3dda911b44984ea0c",
+                "backend/app/Services/Cms/ArticleBodyHeadingGuard.php": "11f353485a97adc266bb207921c3befa4a9cb886d446ada128bef8b03aaef3cc"
+            }
+        }
+    },
+    "files": {
+        "current.public.zh-CN.md": {
+            "sha256": "d1c57876ff64a99acb80aa8605f1c950087087c3f814aefd8256ac54d699dd77",
+            "authority": "production_public_api_projection"
+        }
+    },
+    "body_write_plan": {
+        "write_count": 0,
+        "mode": "preserve_current_raw_revision_bytes",
+        "proposed_cms_file": null,
+        "proposed_cms_sha256": null,
+        "projected_public_sha256": "d1c57876ff64a99acb80aa8605f1c950087087c3f814aefd8256ac54d699dd77"
+    },
+    "field_plan": {
+        "title": {
+            "status": "KEEP",
+            "current": "MBTI 结果怎么看？用真实场景验证四组偏好",
+            "proposed": "MBTI 结果怎么看？用真实场景验证四组偏好"
+        },
+        "h1": {
+            "status": "KEEP",
+            "current": "MBTI 结果怎么看？用真实场景验证四组偏好",
+            "proposed": "MBTI 结果怎么看？用真实场景验证四组偏好"
+        },
+        "seo_title": {
+            "status": "KEEP",
+            "current": "MBTI 结果怎么看？用真实场景验证 E/I、S/N、T/F、J/P",
+            "proposed": "MBTI 结果怎么看？用真实场景验证 E/I、S/N、T/F、J/P"
+        },
+        "seo_description": {
+            "status": "KEEP",
+            "current": "不要只看四个字母。本文用证据、反例和情境变量解读 E/I、S/N、T/F、J/P，并说明复测变化与使用边界。",
+            "proposed": "不要只看四个字母。本文用证据、反例和情境变量解读 E/I、S/N、T/F、J/P，并说明复测变化与使用边界。"
+        },
+        "intro": {
+            "status": "KEEP",
+            "current": "把 MBTI-style 结果拆成四组偏好，用真实场景、反例和情境变化形成暂定假设，而不是固定身份。",
+            "proposed": "把 MBTI-style 结果拆成四组偏好，用真实场景、反例和情境变化形成暂定假设，而不是固定身份。"
+        },
+        "body_markdown": {
+            "status": "KEEP",
+            "current_revision_sha256": "d1c57876ff64a99acb80aa8605f1c950087087c3f814aefd8256ac54d699dd77",
+            "current_public_sha256": "d1c57876ff64a99acb80aa8605f1c950087087c3f814aefd8256ac54d699dd77",
+            "proposed_cms_sha256": null
+        },
+        "faq_visible_body": {
+            "status": "KEEP",
+            "current": [
+                {
+                    "question": "MBTI 结果和我感觉不一样怎么办？",
+                    "answer": "先检查题目情境、接近分界线的维度和真实反例。把结果当作需要验证的假设，不必为了符合报告而修改自我叙述。"
+                },
+                {
+                    "question": "为什么我复测变了一个字母？",
+                    "answer": "可能与偏好较弱、状态、角色、题目理解或测量误差有关。关注哪些维度稳定、哪些情境会变化，比追求唯一真型更有用。"
+                },
+                {
+                    "question": "MBTI 的四个字母有强弱吗？",
+                    "answer": "有些工具会呈现连续倾向，但不同产品的计分和口径不一定相同。没有公开口径时，不应把数字解释成正式百分位或能力强度。"
+                },
+                {
+                    "question": "可以根据类型选择职业吗？",
+                    "answer": "可以用类型提出环境和协作问题，不能据此筛掉职业。还要结合兴趣、技能、价值观、机会和真实岗位信息。"
+                },
+                {
+                    "question": "MBTI 可以用于招聘吗？",
+                    "answer": "不应将类型作为录用、晋升或人员筛选依据。类型偏好不等于能力，也不足以预测工作绩效。"
+                }
+            ],
+            "proposed": [
+                {
+                    "question": "MBTI 结果和我感觉不一样怎么办？",
+                    "answer": "先检查题目情境、接近分界线的维度和真实反例。把结果当作需要验证的假设，不必为了符合报告而修改自我叙述。"
+                },
+                {
+                    "question": "为什么我复测变了一个字母？",
+                    "answer": "可能与偏好较弱、状态、角色、题目理解或测量误差有关。关注哪些维度稳定、哪些情境会变化，比追求唯一真型更有用。"
+                },
+                {
+                    "question": "MBTI 的四个字母有强弱吗？",
+                    "answer": "有些工具会呈现连续倾向，但不同产品的计分和口径不一定相同。没有公开口径时，不应把数字解释成正式百分位或能力强度。"
+                },
+                {
+                    "question": "可以根据类型选择职业吗？",
+                    "answer": "可以用类型提出环境和协作问题，不能据此筛掉职业。还要结合兴趣、技能、价值观、机会和真实岗位信息。"
+                },
+                {
+                    "question": "MBTI 可以用于招聘吗？",
+                    "answer": "不应将类型作为录用、晋升或人员筛选依据。类型偏好不等于能力，也不足以预测工作绩效。"
+                }
+            ]
+        },
+        "answer_surface_v1": {
+            "status": "KEEP",
+            "current_public_api": [
+                {
+                    "question": "MBTI 结果和我感觉不一样怎么办？",
+                    "answer": "先检查题目情境、接近分界线的维度和真实反例。把结果当作需要验证的假设，不必为了符合报告而修改自我叙述。"
+                },
+                {
+                    "question": "为什么我复测变了一个字母？",
+                    "answer": "可能与偏好较弱、状态、角色、题目理解或测量误差有关。关注哪些维度稳定、哪些情境会变化，比追求唯一真型更有用。"
+                },
+                {
+                    "question": "MBTI 的四个字母有强弱吗？",
+                    "answer": "有些工具会呈现连续倾向，但不同产品的计分和口径不一定相同。没有公开口径时，不应把数字解释成正式百分位或能力强度。"
+                },
+                {
+                    "question": "可以根据类型选择职业吗？",
+                    "answer": "可以用类型提出环境和协作问题，不能据此筛掉职业。还要结合兴趣、技能、价值观、机会和真实岗位信息。"
+                },
+                {
+                    "question": "MBTI 可以用于招聘吗？",
+                    "answer": "不应将类型作为录用、晋升或人员筛选依据。类型偏好不等于能力，也不足以预测工作绩效。"
+                }
+            ],
+            "proposed": [
+                {
+                    "question": "MBTI 结果和我感觉不一样怎么办？",
+                    "answer": "先检查题目情境、接近分界线的维度和真实反例。把结果当作需要验证的假设，不必为了符合报告而修改自我叙述。"
+                },
+                {
+                    "question": "为什么我复测变了一个字母？",
+                    "answer": "可能与偏好较弱、状态、角色、题目理解或测量误差有关。关注哪些维度稳定、哪些情境会变化，比追求唯一真型更有用。"
+                },
+                {
+                    "question": "MBTI 的四个字母有强弱吗？",
+                    "answer": "有些工具会呈现连续倾向，但不同产品的计分和口径不一定相同。没有公开口径时，不应把数字解释成正式百分位或能力强度。"
+                },
+                {
+                    "question": "可以根据类型选择职业吗？",
+                    "answer": "可以用类型提出环境和协作问题，不能据此筛掉职业。还要结合兴趣、技能、价值观、机会和真实岗位信息。"
+                },
+                {
+                    "question": "MBTI 可以用于招聘吗？",
+                    "answer": "不应将类型作为录用、晋升或人员筛选依据。类型偏好不等于能力，也不足以预测工作绩效。"
+                }
+            ],
+            "v1_intent_supported_by_visible_body": true
+        },
+        "primary_cta": {
+            "status": "KEEP",
+            "current_public_api": [
+                {
+                    "key": "articles_index",
+                    "title": "继续浏览文章",
+                    "body": "回到文章目录，继续扩展公开内容阅读链路。",
+                    "href": "/zh/articles",
+                    "kind": "content_continue"
+                },
+                {
+                    "key": "topic_hub",
+                    "title": "进入主题聚合",
+                    "body": "把文章阅读继续到更结构化的主题入口。",
+                    "href": "/zh/topics",
+                    "kind": "discover"
+                },
+                {
+                    "key": "start_test",
+                    "title": "开始测试",
+                    "body": "如果你想把阅读转成自我测量，可以从测试入口开始。",
+                    "href": "/zh/tests/mbti-personality-test-16-personality-types",
+                    "kind": "start_test"
+                }
+            ],
+            "proposed": [
+                {
+                    "key": "articles_index",
+                    "title": "继续浏览文章",
+                    "body": "回到文章目录，继续扩展公开内容阅读链路。",
+                    "href": "/zh/articles",
+                    "kind": "content_continue"
+                },
+                {
+                    "key": "topic_hub",
+                    "title": "进入主题聚合",
+                    "body": "把文章阅读继续到更结构化的主题入口。",
+                    "href": "/zh/topics",
+                    "kind": "discover"
+                },
+                {
+                    "key": "start_test",
+                    "title": "开始测试",
+                    "body": "如果你想把阅读转成自我测量，可以从测试入口开始。",
+                    "href": "/zh/tests/mbti-personality-test-16-personality-types",
+                    "kind": "start_test"
+                }
+            ],
+            "effective_primary": [
+                {
+                    "key": "start_test",
+                    "title": "开始测试",
+                    "body": "如果你想把阅读转成自我测量，可以从测试入口开始。",
+                    "href": "/zh/tests/mbti-personality-test-16-personality-types",
+                    "kind": "start_test"
+                }
+            ]
+        },
+        "reading_minutes": {
+            "status": "CHANGE",
+            "current": null,
+            "proposed": 5,
+            "formula_result": 5
+        },
+        "related_test_slug": {
+            "status": "KEEP",
+            "current": null,
+            "proposed": null
+        }
+    },
+    "editorial_rebase": {
+        "source": "latest_locked_production_revision_bytes",
+        "v1_proposed_full_body_reused": false,
+        "allowed_change_summary": [
+            "preserve_current_raw_revision_bytes"
+        ],
+        "planned_removed_top_level_blocks": [],
+        "unplanned_removed_top_level_blocks": []
+    },
+    "internal_links": [
+        {
+            "label": "MBTI 性格测试是什么：能告诉你什么、不能告诉你什么",
+            "href": "/zh/articles/mbti-basics",
+            "role": "context"
+        },
+        {
+            "label": "MBTI 四周行为实验指南",
+            "href": "/zh/articles/mbti-growth-guide",
+            "role": "context"
+        }
+    ],
+    "claim_boundary": "只拥有结果如何用真实场景验证；MBTI 定义归 mbti-basics，人格目录和测试意图不抢占；不把四个字母用于诊断、能力、招聘、职业或关系预测。",
+    "forbidden_claims": [
+        "hidden_query_inference",
+        "diagnosis",
+        "ability_prediction",
+        "career_determination",
+        "admission_prediction",
+        "relationship_prediction",
+        "hiring_screening",
+        "official_endorsement"
+    ],
+    "operational_measurement": {
+        "seven_day": "Unknown",
+        "fourteen_day": "Unknown"
+    },
+    "package_sha256": "cafac82948b9a4a7dcc20ad4d7c423c5ab3592b7c5cf4f4514f2958812c3a4ad"
+}

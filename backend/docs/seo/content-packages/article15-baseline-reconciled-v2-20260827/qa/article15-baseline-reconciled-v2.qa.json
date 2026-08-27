@@ -1,0 +1,405 @@
+{
+    "schema_version": "fermatmind.article15_baseline_reconciled_qa.v2",
+    "package_set_id": "ARTICLE15-BASELINE-RECONCILED-V2-20260827",
+    "sanitized": true,
+    "bindings": {
+        "production_active_sha": "64c386fa0e0fa5167c08c207befe33be75bb447d",
+        "production_state_sha256": "2ef8def16b4806fb8db5c4351edbf3a4a360171f1915f7d191ec098effa99b6e",
+        "production_revision_set_sha256": "f42e1db146ec104d657dff77d147a8dc17164e899850f4c2dbd059eb346a50a9",
+        "article15_target_set_sha256": "9ccd8cab8b44f10409e0ef3ced944ba663376c84a5032bd74ddba143d88cd35a",
+        "v1_execution_manifest_sha256": "eb9a0254600991e2b4d7967b7c4d46c27d604719d8c40ba63353a20cd50a96e7"
+    },
+    "acceptance": {
+        "target": 15,
+        "v1_package_mutations": 0,
+        "revision_body_matches": 15,
+        "public_body_matches": 15,
+        "unresolved_body_authority": 0,
+        "unplanned_live_block_deletions": 0,
+        "keep_body_write_plan_zero": 6,
+        "change_body_write_plan_one": 9,
+        "id16_exactly_one_added_paragraph": true,
+        "json_markdown_sha": "PASS",
+        "faq_cta": "PASS",
+        "private_url": "PASS",
+        "claim_boundary": "PASS",
+        "canonical_link": "PASS",
+        "reading_minutes": "PASS",
+        "operational_7d_14d": "Unknown"
+    },
+    "package_evidence": [
+        {
+            "order": 1,
+            "article_id": 58,
+            "locale": "zh-CN",
+            "slug": "gaokao-major-adjustment-unacceptable-major-checklist",
+            "decision": "CHANGE",
+            "package_directory": "packages/01-gaokao-major-adjustment-unacceptable-major-checklist",
+            "package_sha256": "d876c3eee3cc85efc276ab6dd4d120d1a89c454ed9d6f99bdc8f96ae6046e74b",
+            "current_public_body_sha256": "1f8b7ec9bf5fedc67c289b9ad1f4a370a430d9ba1a4ea57c8d14ecd882f6506f",
+            "proposed_cms_body_sha256": "5bcf5c0b113a0a726fc56a216d1ac351b9e7e647e44a9d90926897e669a2fd87"
+        },
+        {
+            "order": 2,
+            "article_id": 3,
+            "locale": "zh-CN",
+            "slug": "big-five-tool-guide",
+            "decision": "CHANGE",
+            "package_directory": "packages/02-big-five-tool-guide",
+            "package_sha256": "4ddc140f416c060c7654fecfaf04f73bda6e24f6724d573621d076d7c3a8343f",
+            "current_public_body_sha256": "30d2c0c00d7d373c5dbad02856c67f9f238ff2f058a90726cd9663e60c884ef6",
+            "proposed_cms_body_sha256": "3006dcab9b82819a582455569dc5adb703a55918859a3c486f8f3f4ee0ad6981"
+        },
+        {
+            "order": 3,
+            "article_id": 8,
+            "locale": "zh-CN",
+            "slug": "mbti-basics",
+            "decision": "CHANGE",
+            "package_directory": "packages/03-mbti-basics",
+            "package_sha256": "33bbfdf7810030d6ecb9af529b92195e87bcf112487f82fe6f997636fa7b0fdf",
+            "current_public_body_sha256": "c43a3c9301574b2e755c5487e8d0b5baf13bdbe8c1f9a2521ca263c81cf5f698",
+            "proposed_cms_body_sha256": "ff2aad22029fb079d9ff8a7d359cb12ff083b52e0f5aeb8c7872fe6ac6e862c0"
+        },
+        {
+            "order": 4,
+            "article_id": 51,
+            "locale": "zh-CN",
+            "slug": "enneagram-personality-test-explained",
+            "decision": "CHANGE",
+            "package_directory": "packages/04-enneagram-personality-test-explained",
+            "package_sha256": "4d7634187f54790edd21b57d155c5a0abf9e3d97b49b850ebb261a7f51269deb",
+            "current_public_body_sha256": "c68fd79fa9838367c56006a78442a40324dfe3aae366ebc01b6ea704c9434db9",
+            "proposed_cms_body_sha256": "ba0d9ef8b000f9c0ef2990fa4d54565549c104e692d1708f505dcfaf51ca123f"
+        },
+        {
+            "order": 5,
+            "article_id": 40,
+            "locale": "zh-CN",
+            "slug": "riasec-holland-career-interest-test-explained",
+            "decision": "CHANGE",
+            "package_directory": "packages/05-riasec-holland-career-interest-test-explained",
+            "package_sha256": "fcdb61c7a19403f269655bc7776f92cb01fe8c6ac2800424b222b0fb8fa4b42b",
+            "current_public_body_sha256": "cb798b138747bdf0a00e9b786045b8354492b3df18824b0419b1d4b7cc2c61e8",
+            "proposed_cms_body_sha256": "210efc668bbc8bcc412721da10a0f9d9ce733122047c6465c2f5bb80cd028239"
+        },
+        {
+            "order": 6,
+            "article_id": 11,
+            "locale": "zh-CN",
+            "slug": "are-infj-men-rare-or-socially-silenced",
+            "decision": "KEEP",
+            "package_directory": "packages/06-are-infj-men-rare-or-socially-silenced",
+            "package_sha256": "315c96afc70dff6697c994045229d22aa1683b7489fa86546641a7c50fc1ee02",
+            "current_public_body_sha256": "758ab4875f557856b4f581a04612fe1cca279fb1c40194006b106ba55c63af1e",
+            "proposed_cms_body_sha256": null
+        },
+        {
+            "order": 7,
+            "article_id": 50,
+            "locale": "zh-CN",
+            "slug": "iq-test-score-and-limits-explained",
+            "decision": "CHANGE",
+            "package_directory": "packages/07-iq-test-score-and-limits-explained",
+            "package_sha256": "612429382af1e4a6945ee60c6bfa605ec60ef45a38e13dbd625231be01dae529",
+            "current_public_body_sha256": "ac2c537fc14236f0dd2f867bb6b9ee3d818df4b66a0fa953244c2af79448c728",
+            "proposed_cms_body_sha256": "108170e97c5917dfe2ebc0cf349a56b2dd6a39ac9344c1779f715cae1b19691b"
+        },
+        {
+            "order": 8,
+            "article_id": 16,
+            "locale": "zh-CN",
+            "slug": "which-love-script-fits-you-best",
+            "decision": "CHANGE",
+            "package_directory": "packages/08-which-love-script-fits-you-best",
+            "package_sha256": "de7a74412a15c3e760ebe18b254bdb1324e882ff57f32e0ac9f5fd547ecf7d44",
+            "current_public_body_sha256": "8e69c469c40a1de115776d82e00394dcde1771da2be6ffa7b26d0ce03d04202e",
+            "proposed_cms_body_sha256": "dfebab6e697ead50094d5f1cc917ebdaa2881184ba9bffc03ebcc645205fa7b9"
+        },
+        {
+            "order": 9,
+            "article_id": 74,
+            "locale": "zh-CN",
+            "slug": "unwanted-major-repeat-or-stay-riasec-decision-checklist",
+            "decision": "CHANGE",
+            "package_directory": "packages/09-unwanted-major-repeat-or-stay-riasec-decision-checklist",
+            "package_sha256": "7a3df1cab6e08316d18e406d522917f706d5ac71d3e3ff4d12a4975519b512d7",
+            "current_public_body_sha256": "b3be587429a5034ebfaecda57a6651d84e97a6754019652d557ae972b6faf551",
+            "proposed_cms_body_sha256": "5a6b64342899c93866b2891c360144e279ecce3e1e6332192d09074dbd2a58e4"
+        },
+        {
+            "order": 10,
+            "article_id": 10,
+            "locale": "zh-CN",
+            "slug": "mbti-narrative-portrait",
+            "decision": "KEEP",
+            "package_directory": "packages/10-mbti-narrative-portrait",
+            "package_sha256": "cafac82948b9a4a7dcc20ad4d7c423c5ab3592b7c5cf4f4514f2958812c3a4ad",
+            "current_public_body_sha256": "d1c57876ff64a99acb80aa8605f1c950087087c3f814aefd8256ac54d699dd77",
+            "proposed_cms_body_sha256": null
+        },
+        {
+            "order": 11,
+            "article_id": 31,
+            "locale": "zh-CN",
+            "slug": "holland-career-interest-test-can-and-cannot-tell-you",
+            "decision": "CHANGE",
+            "package_directory": "packages/11-holland-career-interest-test-can-and-cannot-tell-you",
+            "package_sha256": "3bf4dd6668500e2cdc7f01c7c4fce0c3c4dbcd84050700d841abe245590b31b9",
+            "current_public_body_sha256": "123e2f54cefd4591279e72680c8de6015202eaf1da20c45c04555c4d941155d7",
+            "proposed_cms_body_sha256": "21daa354e1a832a8f480c8e309de4738d3891ab51885c571192f03f28d7db58c"
+        },
+        {
+            "order": 12,
+            "article_id": 4,
+            "locale": "zh-CN",
+            "slug": "eq-test-tool-guide",
+            "decision": "KEEP",
+            "package_directory": "packages/12-eq-test-tool-guide",
+            "package_sha256": "d13cdb3baab11526d8cc8c6a0ffd3a74b86ea43bfe7e897b1f474d00c2ffcb35",
+            "current_public_body_sha256": "0c09892a846736e018f2f52bed4f685ca139ef854d02d39086885058a18c8602",
+            "proposed_cms_body_sha256": null
+        },
+        {
+            "order": 13,
+            "article_id": 79,
+            "locale": "en",
+            "slug": "big-five-emotional-stability-stress-recovery-communication",
+            "decision": "KEEP",
+            "package_directory": "packages/13-big-five-emotional-stability-stress-recovery-communication",
+            "package_sha256": "f5905df8b8038654a8e28b3535d6d0521585cf236e3ccb9c25a80dcbaa8ad847",
+            "current_public_body_sha256": "0038ff486e8de6bec03319a23926711b0265d98f7d2ee4bc154182c890952c17",
+            "proposed_cms_body_sha256": null
+        },
+        {
+            "order": 14,
+            "article_id": 39,
+            "locale": "en",
+            "slug": "mbti-vs-holland-code-career-choice",
+            "decision": "KEEP",
+            "package_directory": "packages/14-mbti-vs-holland-code-career-choice",
+            "package_sha256": "b6b280d89c4883a8a97ca9234961b91f3458c5ea66b0799516d522bfc9817e55",
+            "current_public_body_sha256": "202709dc269c766ec7887f15309c1e1d9fcbc8e09e24b7e24945fe6d1f237447",
+            "proposed_cms_body_sha256": null
+        },
+        {
+            "order": 15,
+            "article_id": 61,
+            "locale": "en",
+            "slug": "mbti-full-report-career-relationship-communication",
+            "decision": "KEEP",
+            "package_directory": "packages/15-mbti-full-report-career-relationship-communication",
+            "package_sha256": "767f2d7c222880ceb65c7a0e466b5392e104c044705cd11a680a1e2d590b701a",
+            "current_public_body_sha256": "e258cb31c88d60183df10eaa3f8fd90a08ad7d5c29d15eac9f83fd15268aadd1",
+            "proposed_cms_body_sha256": null
+        }
+    ],
+    "page_evidence": [
+        {
+            "order": 1,
+            "article_id": 58,
+            "decision": "CHANGE",
+            "revision_body_matches": true,
+            "public_body_matches": true,
+            "visible_faq_count": 4,
+            "primary_cta_count": 1,
+            "body_write_count": 1,
+            "planned_removed_top_level_blocks": [
+                "快速答案：先别急着点“服从”，先把最坏结果写出来",
+                "什么时候用霍兰德职业兴趣测试？"
+            ],
+            "unplanned_removed_top_level_blocks": []
+        },
+        {
+            "order": 2,
+            "article_id": 3,
+            "decision": "CHANGE",
+            "revision_body_matches": true,
+            "public_body_matches": true,
+            "visible_faq_count": 5,
+            "primary_cta_count": 1,
+            "body_write_count": 1,
+            "planned_removed_top_level_blocks": [
+                "大五人格测试工具使用与边界指南"
+            ],
+            "unplanned_removed_top_level_blocks": []
+        },
+        {
+            "order": 3,
+            "article_id": 8,
+            "decision": "CHANGE",
+            "revision_body_matches": true,
+            "public_body_matches": true,
+            "visible_faq_count": 5,
+            "primary_cta_count": 1,
+            "body_write_count": 1,
+            "planned_removed_top_level_blocks": [
+                "Quick answer：MBTI 性格测试主要帮你看什么？",
+                "下一步怎么做"
+            ],
+            "unplanned_removed_top_level_blocks": []
+        },
+        {
+            "order": 4,
+            "article_id": 51,
+            "decision": "CHANGE",
+            "revision_body_matches": true,
+            "public_body_matches": true,
+            "visible_faq_count": 6,
+            "primary_cta_count": 1,
+            "body_write_count": 1,
+            "planned_removed_top_level_blocks": [
+                "Quick answer：九型人格测试准吗？",
+                "下一步怎么做",
+                "相关阅读 / internal links"
+            ],
+            "unplanned_removed_top_level_blocks": []
+        },
+        {
+            "order": 5,
+            "article_id": 40,
+            "decision": "CHANGE",
+            "revision_body_matches": true,
+            "public_body_matches": true,
+            "visible_faq_count": 6,
+            "primary_cta_count": 1,
+            "body_write_count": 1,
+            "planned_removed_top_level_blocks": [
+                "Quick answer：霍兰德职业兴趣测试主要帮你看什么？",
+                "下一步怎么做"
+            ],
+            "unplanned_removed_top_level_blocks": []
+        },
+        {
+            "order": 6,
+            "article_id": 11,
+            "decision": "KEEP",
+            "revision_body_matches": true,
+            "public_body_matches": true,
+            "visible_faq_count": 5,
+            "primary_cta_count": 1,
+            "body_write_count": 0,
+            "planned_removed_top_level_blocks": [],
+            "unplanned_removed_top_level_blocks": []
+        },
+        {
+            "order": 7,
+            "article_id": 50,
+            "decision": "CHANGE",
+            "revision_body_matches": true,
+            "public_body_matches": true,
+            "visible_faq_count": 7,
+            "primary_cta_count": 1,
+            "body_write_count": 1,
+            "planned_removed_top_level_blocks": [
+                "Quick answer：在线 IQ 测试准吗？"
+            ],
+            "unplanned_removed_top_level_blocks": []
+        },
+        {
+            "order": 8,
+            "article_id": 16,
+            "decision": "CHANGE",
+            "revision_body_matches": true,
+            "public_body_matches": true,
+            "visible_faq_count": 4,
+            "primary_cta_count": 1,
+            "body_write_count": 1,
+            "planned_removed_top_level_blocks": [],
+            "unplanned_removed_top_level_blocks": []
+        },
+        {
+            "order": 9,
+            "article_id": 74,
+            "decision": "CHANGE",
+            "revision_body_matches": true,
+            "public_body_matches": true,
+            "visible_faq_count": 7,
+            "primary_cta_count": 1,
+            "body_write_count": 1,
+            "planned_removed_top_level_blocks": [],
+            "unplanned_removed_top_level_blocks": []
+        },
+        {
+            "order": 10,
+            "article_id": 10,
+            "decision": "KEEP",
+            "revision_body_matches": true,
+            "public_body_matches": true,
+            "visible_faq_count": 5,
+            "primary_cta_count": 1,
+            "body_write_count": 0,
+            "planned_removed_top_level_blocks": [],
+            "unplanned_removed_top_level_blocks": []
+        },
+        {
+            "order": 11,
+            "article_id": 31,
+            "decision": "CHANGE",
+            "revision_body_matches": true,
+            "public_body_matches": true,
+            "visible_faq_count": 4,
+            "primary_cta_count": 1,
+            "body_write_count": 1,
+            "planned_removed_top_level_blocks": [],
+            "unplanned_removed_top_level_blocks": []
+        },
+        {
+            "order": 12,
+            "article_id": 4,
+            "decision": "KEEP",
+            "revision_body_matches": true,
+            "public_body_matches": true,
+            "visible_faq_count": 7,
+            "primary_cta_count": 1,
+            "body_write_count": 0,
+            "planned_removed_top_level_blocks": [],
+            "unplanned_removed_top_level_blocks": []
+        },
+        {
+            "order": 13,
+            "article_id": 79,
+            "decision": "KEEP",
+            "revision_body_matches": true,
+            "public_body_matches": true,
+            "visible_faq_count": 6,
+            "primary_cta_count": 1,
+            "body_write_count": 0,
+            "planned_removed_top_level_blocks": [],
+            "unplanned_removed_top_level_blocks": []
+        },
+        {
+            "order": 14,
+            "article_id": 39,
+            "decision": "KEEP",
+            "revision_body_matches": true,
+            "public_body_matches": true,
+            "visible_faq_count": 5,
+            "primary_cta_count": 1,
+            "body_write_count": 0,
+            "planned_removed_top_level_blocks": [],
+            "unplanned_removed_top_level_blocks": []
+        },
+        {
+            "order": 15,
+            "article_id": 61,
+            "decision": "KEEP",
+            "revision_body_matches": true,
+            "public_body_matches": true,
+            "visible_faq_count": 8,
+            "primary_cta_count": 1,
+            "body_write_count": 0,
+            "planned_removed_top_level_blocks": [],
+            "unplanned_removed_top_level_blocks": []
+        }
+    ],
+    "zero_write_boundaries": {
+        "cms": 0,
+        "database": 0,
+        "publication": 0,
+        "cache": 0,
+        "sitemap": 0,
+        "llms": 0,
+        "search_channel": 0
+    }
+}
