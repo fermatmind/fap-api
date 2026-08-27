@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-27T02:33:36Z",
+  "updated_at": "2026-08-27T02:35:43Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-PLATFORM-08-D": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/seo-platform-08-d-readonly-ledger",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "b2c81bd38c0ec674c6277e01b521bab06618f858",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3810",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -44,6 +44,11 @@
           "at": "2026-08-27T02:33:36Z",
           "status": "local_checks_passed",
           "summary": "Connected the authoritative ledger to the existing protected SEO Intel API and Experiment Ledger workspace using a paginated allowlist read model. Empty storage remains a real zero-row state; private URLs, raw evidence, actors, hashes, topology and all write controls are excluded."
+        },
+        {
+          "at": "2026-08-27T02:35:43Z",
+          "status": "pr_open",
+          "summary": "Opened the single scoped PR #3810 from validated implementation commit b2c81bd38c0ec674c6277e01b521bab06618f858. No manual deploy, ledger write, experiment, scheduler, CMS, GSC or search action was triggered."
         }
       ]
     },
