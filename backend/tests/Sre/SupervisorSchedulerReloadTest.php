@@ -17,35 +17,16 @@ final class SupervisorSchedulerReloadTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-
         $this->temporaryDirectory = sys_get_temp_dir().'/fap-scheduler-reload-'.bin2hex(random_bytes(8));
-        mkdir($this->temporaryDirectory.'/deploy/releases/'.$this->revision.'/backend', 0700, true);
-        mkdir($this->temporaryDirectory.'/deploy/releases/old/backend', 0700, true);
-        mkdir($this->temporaryDirectory.'/proc/101', 0700, true);
-        mkdir($this->temporaryDirectory.'/proc/202', 0700, true);
-        mkdir($this->temporaryDirectory.'/proc/301', 0700, true);
-        mkdir($this->temporaryDirectory.'/proc/302', 0700, true);
-        mkdir($this->temporaryDirectory.'/proc/401', 0700, true);
-        mkdir($this->temporaryDirectory.'/proc/402', 0700, true);
+        $backend = $this->temporaryDirectory.'/deploy/releases/'.$this->revision.'/backend';
+        mkdir($backend.'/scripts/deploy', 0700, true);
+        mkdir($backend.'/storage/app/ops', 0700, true);
+        mkdir($this->temporaryDirectory.'/proc', 0700, true);
         symlink('releases/'.$this->revision, $this->temporaryDirectory.'/deploy/current');
-        symlink($this->temporaryDirectory.'/deploy/releases/old/backend', $this->temporaryDirectory.'/proc/101/cwd');
-        symlink($this->temporaryDirectory.'/deploy/releases/'.$this->revision.'/backend', $this->temporaryDirectory.'/proc/202/cwd');
-        symlink($this->temporaryDirectory.'/deploy/releases/old/backend', $this->temporaryDirectory.'/proc/401/cwd');
-        symlink($this->temporaryDirectory.'/deploy/releases/'.$this->revision.'/backend', $this->temporaryDirectory.'/proc/402/cwd');
-        file_put_contents(
-            $this->temporaryDirectory.'/deploy/releases/'.$this->revision.'/REVISION',
-            $this->revision."\n",
-        );
-        file_put_contents($this->temporaryDirectory.'/deploy/releases/'.$this->revision.'/backend/artisan', "#!/usr/bin/env php\n");
-        file_put_contents($this->temporaryDirectory.'/proc/101/cmdline', "/usr/bin/php\0/old/backend/artisan\0schedule:work\0");
-        file_put_contents($this->temporaryDirectory.'/proc/202/cmdline', "/usr/bin/php\0/current/backend/artisan\0schedule:work\0");
-        file_put_contents($this->temporaryDirectory.'/proc/301/cmdline', "/usr/local/bin/run-scheduler\0");
-        file_put_contents($this->temporaryDirectory.'/proc/302/cmdline', "/usr/local/bin/run-scheduler\0");
-        file_put_contents($this->temporaryDirectory.'/proc/401/cmdline', "/usr/bin/php\0artisan\0schedule:work\0");
-        file_put_contents($this->temporaryDirectory.'/proc/402/cmdline', "/usr/bin/php\0artisan\0schedule:work\0");
-        file_put_contents($this->temporaryDirectory.'/proc/401/stat', "401 (php) S 301 0 0 0\n");
-        file_put_contents($this->temporaryDirectory.'/proc/402/stat', "402 (php) S 302 0 0 0\n");
-        file_put_contents($this->temporaryDirectory.'/state', 'old');
+        file_put_contents(dirname($backend).'/REVISION', $this->revision."\n");
+        file_put_contents($backend.'/artisan', "#!/usr/bin/env php\n");
+        copy(dirname(__DIR__, 2).'/scripts/deploy/run_scheduler_tick.sh', $backend.'/scripts/deploy/run_scheduler_tick.sh');
+        chmod($backend.'/scripts/deploy/run_scheduler_tick.sh', 0700);
 
         $this->writeExecutable('sudo', <<<'BASH'
 #!/usr/bin/env bash
@@ -65,14 +46,8 @@ BASH);
 #!/usr/bin/env bash
 set -euo pipefail
 if [[ "${1:-}" == -l ]]; then
-  if [[ "${FAKE_CRONTAB_READ_ERROR:-false}" == true ]]; then
-    printf 'permission denied\n' >&2
-    exit 1
-  fi
-  if [[ ! -f "$FAKE_CRONTAB_FILE" ]]; then
-    printf 'no crontab for test\n' >&2
-    exit 1
-  fi
+  if [[ "${FAKE_CRONTAB_READ_ERROR:-false}" == true ]]; then printf 'permission denied\n' >&2; exit 1; fi
+  if [[ ! -f "$FAKE_CRONTAB_FILE" ]]; then printf 'no crontab for test\n' >&2; exit 1; fi
   cat "$FAKE_CRONTAB_FILE"
   exit 0
 fi
@@ -90,250 +65,161 @@ BASH);
 set -euo pipefail
 command="${1:-}"
 target="${2:-}"
-state="$(cat "$FAKE_STATE_FILE")"
-pid=101
-[[ "$state" == new ]] && pid=202
-if [[ "${FAKE_WRAPPER:-false}" == true ]]; then
-  pid=301
-  [[ "$state" == new ]] && pid=302
-fi
-
 case "$command" in
   status)
-    if [[ -n "${FAKE_SECOND_PROGRAM:-}" ]]; then
-      printf 'other-scheduler RUNNING pid 202, uptime 0:01:00\n'
-    fi
-    if [[ "${FAKE_MISSING:-false}" != true ]]; then
-      if [[ -z "$target" || "$target" == fap-scheduler ]]; then
-        printf 'fap-scheduler RUNNING pid %s, uptime 0:01:00\n' "$pid"
-        exit 0
+    if [[ "${FAKE_SUPERVISOR_SCHEDULER:-false}" == true ]]; then
+      if [[ -f "$FAKE_STOP_LOG" ]]; then
+        printf 'fap-scheduler STOPPED Not started\n'
+      else
+        printf 'fap-scheduler RUNNING pid 301, uptime 0:01:00\n'
       fi
-    fi
-    if [[ -z "$target" ]]; then
+    else
       printf 'fap-queue RUNNING pid 999, uptime 0:01:00\n'
-      exit 0
     fi
-    printf '%s: ERROR (no such process)\n' "$target" >&2
-    exit 4
     ;;
-  restart)
+  stop)
     [[ "$target" == fap-scheduler ]]
-    if [[ "${FAKE_STALE_AFTER_RESTART:-false}" != true ]]; then
-      printf new > "$FAKE_STATE_FILE"
-    fi
+    printf '%s\n' "$target" >> "$FAKE_STOP_LOG"
     ;;
+  *) exit 2 ;;
 esac
 BASH);
     }
 
     protected function tearDown(): void
     {
-        $process = new Process(['find', $this->temporaryDirectory, '-depth', '-delete']);
-        $process->mustRun();
-
+        (new Process(['find', $this->temporaryDirectory, '-depth', '-delete']))->mustRun();
         parent::tearDown();
     }
 
     #[Test]
-    public function it_discovers_the_real_scheduler_and_verifies_the_current_release_after_restart(): void
+    public function production_installs_one_managed_foreground_tick(): void
     {
         $process = $this->runScript();
-        $output = $process->getOutput().$process->getErrorOutput();
-
-        $this->assertTrue($process->isSuccessful(), $output);
-        $this->assertSame('new', file_get_contents($this->temporaryDirectory.'/state'));
-        $this->assertStringContainsString('scheduler_refresh_pass revision='.$this->revision, $output);
-        $this->assertStringNotContainsString($this->temporaryDirectory, $output);
-        $this->assertStringNotContainsString('pid ', $output);
-    }
-
-    #[Test]
-    public function it_discovers_a_relative_artisan_scheduler_below_a_supervisor_wrapper(): void
-    {
-        $process = $this->runScript(['FAKE_WRAPPER' => 'true']);
-        $output = $process->getOutput().$process->getErrorOutput();
-
-        $this->assertTrue($process->isSuccessful(), $output);
-        $this->assertSame('new', file_get_contents($this->temporaryDirectory.'/state'));
-        $this->assertStringContainsString('scheduler_refresh_pass revision='.$this->revision, $output);
-        $this->assertStringNotContainsString($this->temporaryDirectory, $output);
-    }
-
-    #[Test]
-    public function it_uses_a_unique_scheduler_program_name_when_process_metadata_is_unreadable(): void
-    {
-        foreach (glob($this->temporaryDirectory.'/proc/*/cmdline') ?: [] as $cmdline) {
-            unlink($cmdline);
-        }
-
-        $process = $this->runScript();
-        $output = $process->getOutput().$process->getErrorOutput();
-
-        $this->assertTrue($process->isSuccessful(), $output);
-        $this->assertSame('new', file_get_contents($this->temporaryDirectory.'/state'));
-        $this->assertStringContainsString('members=0 verification=supervisor_restart', $output);
-        $this->assertStringNotContainsString($this->temporaryDirectory, $output);
-    }
-
-    #[Test]
-    public function it_fails_closed_when_more_than_one_supervisor_program_owns_schedule_work(): void
-    {
-        $process = $this->runScript(['FAKE_SECOND_PROGRAM' => 'true']);
-
-        $this->assertFalse($process->isSuccessful());
-        $this->assertStringContainsString('reason=scheduler_identity_count', $process->getErrorOutput());
-        $this->assertSame('old', file_get_contents($this->temporaryDirectory.'/state'));
-    }
-
-    #[Test]
-    public function production_mode_installs_a_single_current_release_cron_when_supervisor_has_no_scheduler(): void
-    {
-        $process = $this->runScript(['FAKE_MISSING' => 'true']);
-        $output = $process->getOutput().$process->getErrorOutput();
-        $crontab = file_get_contents($this->temporaryDirectory.'/crontab-state');
-
-        $this->assertTrue($process->isSuccessful(), $output);
-        $this->assertIsString($crontab);
-        $this->assertStringContainsString('mode=cron_current', $output);
-        $this->assertStringContainsString($this->temporaryDirectory.'/deploy/current/backend', $crontab);
-        $this->assertSame(1, substr_count($crontab, 'artisan schedule:run'));
-        $this->assertStringNotContainsString($this->temporaryDirectory, $output);
-    }
-
-    #[Test]
-    public function cron_fallback_replaces_one_legacy_schedule_runner_and_preserves_unrelated_entries(): void
-    {
-        file_put_contents(
-            $this->temporaryDirectory.'/crontab-state',
-            "MAILTO=ops@example.test\n* * * * * cd /stale/backend && /usr/bin/php artisan schedule:run\n",
-        );
-
-        $process = $this->runScript(['FAKE_MISSING' => 'true']);
-        $crontab = file_get_contents($this->temporaryDirectory.'/crontab-state');
+        $crontab = (string) file_get_contents($this->temporaryDirectory.'/crontab-state');
 
         $this->assertTrue($process->isSuccessful(), $process->getErrorOutput());
-        $this->assertIsString($crontab);
-        $this->assertStringContainsString('MAILTO=ops@example.test', $crontab);
-        $this->assertStringNotContainsString('/stale/backend', $crontab);
-        $this->assertSame(1, substr_count($crontab, 'artisan schedule:run'));
-    }
-
-    #[Test]
-    public function cron_fallback_is_idempotent(): void
-    {
-        $first = $this->runScript(['FAKE_MISSING' => 'true']);
-        $second = $this->runScript(['FAKE_MISSING' => 'true']);
-        $crontab = file_get_contents($this->temporaryDirectory.'/crontab-state');
-
-        $this->assertTrue($first->isSuccessful(), $first->getErrorOutput());
-        $this->assertTrue($second->isSuccessful(), $second->getErrorOutput());
-        $this->assertIsString($crontab);
         $this->assertSame(1, substr_count($crontab, '# BEGIN fap-api managed scheduler'));
-        $this->assertSame(1, substr_count($crontab, 'artisan schedule:run'));
+        $this->assertSame(1, substr_count($crontab, 'run_scheduler_tick.sh'));
+        $this->assertStringNotContainsString('artisan schedule:run', $crontab);
+        $this->assertStringNotContainsString('artisan schedule:work', $crontab);
+        $this->assertStringContainsString('mode=cron_schedule_run', $process->getOutput());
     }
 
     #[Test]
-    public function cron_fallback_fails_closed_on_ambiguous_existing_schedule_runners(): void
+    public function exact_repository_supervisor_schedule_work_is_stopped_before_cron_install(): void
+    {
+        $this->addSupervisorScheduleWork(true);
+        $process = $this->runScript(['FAKE_SUPERVISOR_SCHEDULER' => 'true']);
+
+        $this->assertTrue($process->isSuccessful(), $process->getErrorOutput());
+        $this->assertSame("fap-scheduler\n", file_get_contents($this->temporaryDirectory.'/stop-log'));
+        $this->assertFileExists($this->temporaryDirectory.'/crontab-state');
+    }
+
+    #[Test]
+    public function unknown_schedule_work_and_unknown_supervisor_scheduler_fail_closed(): void
+    {
+        $this->addSupervisorScheduleWork(false);
+        $unknownProcess = $this->runScript(['FAKE_SUPERVISOR_SCHEDULER' => 'true']);
+        $this->assertFalse($unknownProcess->isSuccessful());
+        $this->assertStringContainsString('reason=unknown_schedule_work', $unknownProcess->getErrorOutput());
+        $this->assertFileDoesNotExist($this->temporaryDirectory.'/crontab-state');
+
+        $this->removeProc();
+        $unknownSupervisor = $this->runScript(['FAKE_SUPERVISOR_SCHEDULER' => 'true']);
+        $this->assertFalse($unknownSupervisor->isSuccessful());
+        $this->assertStringContainsString('reason=unknown_scheduler', $unknownSupervisor->getErrorOutput());
+    }
+
+    #[Test]
+    public function duplicate_or_foreign_cron_scheduler_fails_before_mutation(): void
     {
         $original = "* * * * * cd /one && php artisan schedule:run\n* * * * * cd /two && php artisan schedule:run\n";
         file_put_contents($this->temporaryDirectory.'/crontab-state', $original);
-
-        $process = $this->runScript(['FAKE_MISSING' => 'true']);
+        $process = $this->runScript();
 
         $this->assertFalse($process->isSuccessful());
-        $this->assertStringContainsString('reason=cron_scheduler_identity_count', $process->getErrorOutput());
+        $this->assertStringContainsString('reason=unknown_cron_scheduler', $process->getErrorOutput());
         $this->assertSame($original, file_get_contents($this->temporaryDirectory.'/crontab-state'));
     }
 
     #[Test]
-    public function cron_fallback_fails_before_mutation_when_the_runtime_probe_is_not_registered(): void
+    public function one_exact_legacy_cron_is_replaced_and_unrelated_entries_are_preserved(): void
     {
-        $process = $this->runScript([
-            'FAKE_MISSING' => 'true',
-            'FAKE_SCHEDULE_REGISTRATION_MISSING' => 'true',
-        ]);
+        file_put_contents(
+            $this->temporaryDirectory.'/crontab-state',
+            "MAILTO=ops@example.test\n* * * * * cd {$this->temporaryDirectory}/deploy/current/backend && php artisan schedule:run\n",
+        );
+        $process = $this->runScript();
+        $crontab = (string) file_get_contents($this->temporaryDirectory.'/crontab-state');
 
-        $this->assertFalse($process->isSuccessful());
-        $this->assertStringContainsString('reason=scheduler_registration_missing', $process->getErrorOutput());
-        $this->assertFileDoesNotExist($this->temporaryDirectory.'/crontab-state');
+        $this->assertTrue($process->isSuccessful(), $process->getErrorOutput());
+        $this->assertStringContainsString('MAILTO=ops@example.test', $crontab);
+        $this->assertSame(1, substr_count($crontab, 'run_scheduler_tick.sh'));
+        $this->assertStringNotContainsString('artisan schedule:run', $crontab);
     }
 
     #[Test]
-    public function scheduler_refresh_rejects_a_relative_php_binary_before_cron_mutation(): void
-    {
-        $process = $this->runScript(['FAKE_MISSING' => 'true'], phpBin: 'php');
-
-        $this->assertFalse($process->isSuccessful());
-        $this->assertStringContainsString('reason=invalid_path', $process->getErrorOutput());
-        $this->assertFileDoesNotExist($this->temporaryDirectory.'/crontab-state');
-    }
-
-    #[Test]
-    public function cron_fallback_fails_closed_when_the_existing_crontab_cannot_be_read(): void
-    {
-        $process = $this->runScript([
-            'FAKE_MISSING' => 'true',
-            'FAKE_CRONTAB_READ_ERROR' => 'true',
-        ]);
-
-        $this->assertFalse($process->isSuccessful());
-        $this->assertStringContainsString('reason=crontab_read_failed', $process->getErrorOutput());
-        $this->assertFileDoesNotExist($this->temporaryDirectory.'/crontab-state');
-    }
-
-    #[Test]
-    public function cron_fallback_fails_closed_on_a_malformed_managed_block(): void
+    public function malformed_managed_block_and_unreadable_crontab_fail_closed(): void
     {
         $original = "# END fap-api managed scheduler\n# BEGIN fap-api managed scheduler\n";
         file_put_contents($this->temporaryDirectory.'/crontab-state', $original);
-
-        $process = $this->runScript(['FAKE_MISSING' => 'true']);
-
-        $this->assertFalse($process->isSuccessful());
-        $this->assertStringContainsString('reason=cron_managed_block_invalid', $process->getErrorOutput());
+        $malformed = $this->runScript();
+        $this->assertFalse($malformed->isSuccessful());
+        $this->assertStringContainsString('reason=cron_managed_block_invalid', $malformed->getErrorOutput());
         $this->assertSame($original, file_get_contents($this->temporaryDirectory.'/crontab-state'));
+
+        unlink($this->temporaryDirectory.'/crontab-state');
+        $unreadable = $this->runScript(['FAKE_CRONTAB_READ_ERROR' => 'true']);
+        $this->assertFalse($unreadable->isSuccessful());
+        $this->assertStringContainsString('reason=crontab_read_failed', $unreadable->getErrorOutput());
     }
 
     #[Test]
-    public function staging_mode_can_skip_a_missing_scheduler_without_touching_supervisor(): void
+    public function staging_does_not_install_a_competing_runner(): void
     {
-        $process = $this->runScript(['FAKE_MISSING' => 'true'], required: false);
+        $process = $this->runScript(required: false);
 
         $this->assertTrue($process->isSuccessful(), $process->getErrorOutput());
-        $this->assertStringContainsString('scheduler_refresh_optional_skip reason=not_managed', $process->getOutput());
-        $this->assertSame('old', file_get_contents($this->temporaryDirectory.'/state'));
+        $this->assertStringContainsString('reason=cron_not_required', $process->getOutput());
+        $this->assertFileDoesNotExist($this->temporaryDirectory.'/crontab-state');
     }
 
     #[Test]
-    public function it_rejects_a_restart_that_remains_bound_to_the_old_release(): void
+    public function deploy_bounds_queue_reload_and_chains_scheduler_heartbeat(): void
     {
-        $process = $this->runScript(['FAKE_STALE_AFTER_RESTART' => 'true']);
+        $deploy = (string) file_get_contents(dirname(__DIR__, 3).'/deploy.php');
 
-        $this->assertFalse($process->isSuccessful());
-        $this->assertStringContainsString('reason=scheduler_release_drift', $process->getErrorOutput());
+        $this->assertStringContainsString("' --attempts=1'", $deploy);
+        $this->assertStringContainsString("' --restart-timeout-seconds=45'", $deploy);
+        $this->assertStringContainsString('timeout: 60', $deploy);
+        $this->assertStringContainsString('timeout --signal=TERM --kill-after=5s 90s bash', $deploy);
+        $this->assertStringContainsString("after('queue:reload-workers', 'scheduler:install-managed-cron')", $deploy);
+        $this->assertStringContainsString("after('scheduler:install-managed-cron', 'scheduler:wait-natural-heartbeat')", $deploy);
     }
 
-    #[Test]
-    public function deploy_refreshes_the_scheduler_after_queue_programs(): void
+    private function addSupervisorScheduleWork(bool $owned): void
     {
-        $deploy = file_get_contents(dirname(__DIR__, 3).'/deploy.php');
-
-        $this->assertIsString($deploy);
-        $this->assertStringContainsString('restart_supervisor_scheduler.sh', $deploy);
-        $this->assertStringContainsString("currentHost()->getAlias() === 'production'", $deploy);
-        $this->assertStringContainsString('php_bin="$(command -v {{bin/php}})"', $deploy);
-        $this->assertStringContainsString('--php-bin="$php_bin"', $deploy);
-        $this->assertStringNotContainsString("--php-bin='.deployPlaceholderPathArg('{{bin/php}}')", $deploy);
-        $queueRestart = strpos($deploy, 'foreach ($optionalPrograms as $program)');
-        $schedulerRestart = strpos($deploy, 'restart_supervisor_scheduler.sh');
-
-        $this->assertIsInt($queueRestart);
-        $this->assertIsInt($schedulerRestart);
-        $this->assertGreaterThan($queueRestart, $schedulerRestart);
+        mkdir($this->temporaryDirectory.'/proc/301', 0700, true);
+        mkdir($this->temporaryDirectory.'/proc/401', 0700, true);
+        file_put_contents($this->temporaryDirectory.'/proc/301/cmdline', "/usr/local/bin/run-scheduler\0");
+        file_put_contents($this->temporaryDirectory.'/proc/301/stat', "301 (runner) S 1 0 0 0\n");
+        file_put_contents($this->temporaryDirectory.'/proc/401/cmdline', "/usr/bin/php\0artisan\0schedule:work\0");
+        file_put_contents($this->temporaryDirectory.'/proc/401/stat', "401 (php) S 301 0 0 0\n");
+        $cwd = $owned
+            ? $this->temporaryDirectory.'/deploy/releases/'.$this->revision.'/backend'
+            : $this->temporaryDirectory;
+        symlink($cwd, $this->temporaryDirectory.'/proc/401/cwd');
     }
 
-    /** @param array<string,string> $environment */
-    private function runScript(array $environment = [], bool $required = true, ?string $phpBin = null): Process
+    private function removeProc(): void
+    {
+        (new Process(['find', $this->temporaryDirectory.'/proc', '-mindepth', '1', '-depth', '-delete']))->mustRun();
+    }
+
+    /** @param array<string, string> $environment */
+    private function runScript(array $environment = [], bool $required = true): Process
     {
         $backendRoot = dirname(__DIR__, 2);
         $process = new Process([
@@ -343,14 +229,13 @@ BASH);
             '--sudo='.$this->temporaryDirectory.'/sudo',
             '--timeout-bin='.$this->temporaryDirectory.'/timeout',
             '--crontab='.$this->temporaryDirectory.'/crontab',
-            '--php-bin='.($phpBin ?? $this->temporaryDirectory.'/php'),
-            '--restart-script='.$backendRoot.'/scripts/deploy/restart_supervisor_program_group.sh',
+            '--php-bin='.$this->temporaryDirectory.'/php',
             '--deploy-path='.$this->temporaryDirectory.'/deploy',
             '--proc-root='.$this->temporaryDirectory.'/proc',
             '--required='.($required ? 'true' : 'false'),
         ], $backendRoot, $environment + [
-            'FAKE_STATE_FILE' => $this->temporaryDirectory.'/state',
             'FAKE_CRONTAB_FILE' => $this->temporaryDirectory.'/crontab-state',
+            'FAKE_STOP_LOG' => $this->temporaryDirectory.'/stop-log',
         ]);
         $process->setTimeout(20);
         $process->run();

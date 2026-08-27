@@ -21,6 +21,8 @@ final class SeoWeeklyDecisionReceiptService
 
     public const NATURAL_SLOT_TIME = '13:45';
 
+    public const TRANSACTION_DEADLINE_SECONDS = 50;
+
     public function __construct(
         private readonly SeoWeeklyDecisionSelector $selector,
         private readonly string $connection = 'seo_intel',
@@ -67,13 +69,18 @@ final class SeoWeeklyDecisionReceiptService
 
         $capabilityRevision = self::capabilityRevision();
 
-        return $this->db()->transaction(function () use ($selection, $slot, $releaseSha, $capabilityRevision): array {
+        $deadline = hrtime(true) + (self::TRANSACTION_DEADLINE_SECONDS * 1_000_000_000);
+
+        return $this->db()->transaction(function () use ($selection, $slot, $releaseSha, $capabilityRevision, $deadline): array {
+            $this->assertWithinDeadline($deadline);
             $existing = $this->db()->table('seo_weekly_decision_capability_receipts')
                 ->where('selection_revision', $selection['selection_revision'])
                 ->where('capability_revision', $capabilityRevision)
                 ->lockForUpdate()
                 ->first();
             if ($existing !== null) {
+                $this->assertWithinDeadline($deadline);
+
                 return $this->presentCapability($existing, true);
             }
 
@@ -92,6 +99,7 @@ final class SeoWeeklyDecisionReceiptService
                 $revisionIds = array_values($selectionPayload['decision_revision_ids']);
                 $createdRevisionCount = 0;
             }
+            $this->assertWithinDeadline($deadline);
 
             $payload = [
                 'schema_version' => self::CONTRACT_VERSION,
@@ -131,6 +139,7 @@ final class SeoWeeklyDecisionReceiptService
                 'created_at' => $slot,
             ];
             $this->db()->table('seo_weekly_decision_capability_receipts')->insert($row);
+            $this->assertWithinDeadline($deadline);
 
             return array_merge($payload, [
                 'receipt_id' => $row['receipt_id'],
@@ -139,6 +148,13 @@ final class SeoWeeklyDecisionReceiptService
                 'idempotent_replay' => false,
             ]);
         }, 3);
+    }
+
+    private function assertWithinDeadline(int $deadline): void
+    {
+        if (hrtime(true) > $deadline) {
+            throw new RuntimeException('Weekly decision transaction exceeded its 50 second deadline.');
+        }
     }
 
     /** @return array<string, mixed> */

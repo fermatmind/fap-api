@@ -1827,9 +1827,9 @@ task('queue:reload-workers', function () {
                 ." --sudo={$quotedSudo}"
                 ." --timeout-bin={$quotedTimeout}"
                 ." --program={$quotedProgram}"
-                .' --attempts=3'
+                .' --attempts=1'
                 .' --delay-seconds=2'
-                .' --restart-timeout-seconds=390'
+                .' --restart-timeout-seconds=45'
                 .' --heartbeat-seconds=20'
                 ." --required={$quotedRequired}";
         };
@@ -1838,31 +1838,12 @@ task('queue:reload-workers', function () {
         run("sudo -n {$quotedSupervisorctl} update");
 
         foreach ($requiredPrograms as $program) {
-            run($restartSupervisorProgram($program, true), timeout: 1200);
+            run($restartSupervisorProgram($program, true), timeout: 60);
         }
 
         foreach ($optionalPrograms as $program) {
-            run($restartSupervisorProgram($program, false), timeout: 1200);
+            run($restartSupervisorProgram($program, false), timeout: 60);
         }
-
-        $schedulerRestartScript = deployPlaceholderPathArg(
-            '{{release_path}}',
-            'backend/scripts/deploy/restart_supervisor_scheduler.sh',
-        );
-        $schedulerRequired = currentHost()->getAlias() === 'production' ? 'true' : 'false';
-        run(
-            'php_bin="$(command -v {{bin/php}})"; test -n "$php_bin"; bash '.$schedulerRestartScript
-                .' --supervisorctl='.$quotedSupervisorctl
-                .' --sudo='.$quotedSudo
-                .' --timeout-bin='.$quotedTimeout
-                .' --crontab='.deployPlaceholderPathArg('/usr/bin/crontab')
-                .' --php-bin="$php_bin"'
-                .' --restart-script='.$supervisorRestartScript
-                .' --deploy-path='.deployPlaceholderPathArg('{{deploy_path}}')
-                .' --proc-root=/proc'
-                .' --required='.escapeshellarg($schedulerRequired),
-            timeout: 1200,
-        );
 
         if ($legacySystemdService !== '') {
             $quotedService = deploySystemdServiceArg($legacySystemdService, 'legacy_queue_systemd_service');
@@ -1900,6 +1881,67 @@ task('queue:reload-workers', function () {
     }
 
     throw new \RuntimeException('unsupported queue_manager ['.$manager.']');
+});
+
+task('scheduler:install-managed-cron', function () {
+    $supervisorctl = trim((string) get('queue_supervisorctl', '/usr/bin/supervisorctl'));
+    $resolvedSupervisorctl = trim((string) run(
+        'if [ -x '.escapeshellarg($supervisorctl).' ]; then echo '.escapeshellarg($supervisorctl).'; else command -v supervisorctl; fi'
+    ));
+    if ($resolvedSupervisorctl === '') {
+        throw new \RuntimeException('scheduler cron installation requires supervisor status capability');
+    }
+
+    $schedulerScript = deployPlaceholderPathArg(
+        '{{release_path}}',
+        'backend/scripts/deploy/restart_supervisor_scheduler.sh',
+    );
+    $schedulerRequired = currentHost()->getAlias() === 'production' ? 'true' : 'false';
+    run(
+        'php_bin="$(command -v {{bin/php}})"; test -n "$php_bin"; /usr/bin/timeout --signal=TERM --kill-after=5s 90s bash '.$schedulerScript
+            .' --supervisorctl='.escapeshellarg($resolvedSupervisorctl)
+            .' --sudo=/usr/bin/sudo'
+            .' --timeout-bin=/usr/bin/timeout'
+            .' --crontab=/usr/bin/crontab'
+            .' --php-bin="$php_bin"'
+            .' --deploy-path='.deployPlaceholderPathArg('{{deploy_path}}')
+            .' --proc-root=/proc'
+            .' --required='.escapeshellarg($schedulerRequired),
+        timeout: 90,
+    );
+});
+
+task('scheduler:wait-natural-heartbeat', function () {
+    if (currentHost()->getAlias() !== 'production') {
+        writeln('<comment>Skip scheduler heartbeat gate outside production</comment>');
+
+        return;
+    }
+
+    within('{{current_path}}/backend', function (): void {
+        run(<<<'BASH'
+set -euo pipefail
+started_epoch="$(date -u +%s)"
+deadline_epoch="$((started_epoch + 90))"
+while [[ "$(date -u +%s)" -le "$deadline_epoch" ]]; do
+  set +e
+  heartbeat="$({{bin/php}} artisan ops:scheduler-heartbeat-check --max-age-seconds=180 --json --no-interaction --no-ansi 2>/dev/null)"
+  heartbeat_rc=$?
+  set -e
+  if [[ "$heartbeat_rc" -eq 0 ]] && printf '%s' "$heartbeat" | STARTED_EPOCH="$started_epoch" {{bin/php}} -r '
+    $payload = json_decode(stream_get_contents(STDIN), true);
+    $observed = is_array($payload) ? strtotime((string) ($payload["observed_at"] ?? "")) : false;
+    exit(($payload["ok"] ?? false) === true && is_int($observed) && $observed >= (int) getenv("STARTED_EPOCH") ? 0 : 1);
+  '; then
+    printf 'scheduler_heartbeat_gate_pass\n'
+    exit 0
+  fi
+  sleep 3
+done
+printf 'scheduler_heartbeat_gate_failed reason=natural_tick_timeout\n' >&2
+exit 1
+BASH, timeout: 95);
+    });
 });
 
 task('guard:shared-permissions', function () {
@@ -2468,7 +2510,7 @@ task('seo:weekly-decision-production-closeout', function () {
     $resolveArg = deployCurlResolveArg($host, true);
     $url = deployHttpsUrlArg($host, '/api/v0.5/ops/seo-intel/weekly-decisions');
     $expectedShaArg = deployShellArg($expectedSha);
-    $closeoutOptions = $target === 'production' ? '--wait-seconds=1800' : '--allow-unproven';
+    $closeoutOptions = '--allow-unproven';
 
     within('{{current_path}}/backend', function () use ($resolveArg, $url, $expectedShaArg, $closeoutOptions): void {
         run(<<<BASH
@@ -2478,7 +2520,7 @@ test "\$permission_status" = 401
 {{bin/php}} artisan seo:weekly-decision-closeout \
   --expected-sha={$expectedShaArg} \
   {$closeoutOptions} --json --no-interaction --no-ansi
-BASH, timeout: 2100);
+BASH, timeout: 60);
     });
 });
 
@@ -2905,15 +2947,14 @@ after('deploy:symlink', 'healthcheck:public');
 after('healthcheck:public', 'healthcheck:sitemap-source');
 after('healthcheck:sitemap-source', 'healthcheck:public-dns');
 after('healthcheck:public-dns', 'seo:url-truth-reconciliation-receipt');
-after('seo:url-truth-reconciliation-receipt', 'seo:url-truth-controlled-reconcile');
-after('seo:url-truth-controlled-reconcile', 'seo:url-truth-incremental-cms-canary');
 after('deploy:symlink', 'healthcheck:auth-guest-contract');
 after('deploy:symlink', 'healthcheck:public-static-media-assets');
 after('deploy:symlink', 'healthcheck:scale-lookup');
 after('deploy:symlink', 'healthcheck:ops-entry-contract');
 after('healthcheck:ops-entry-contract', 'seo:ledger-production-closeout');
-after('seo:ledger-production-closeout', 'seo:weekly-decision-production-closeout');
 after('deploy:symlink', 'healthcheck:queue-smoke');
+after('queue:reload-workers', 'scheduler:install-managed-cron');
+after('scheduler:install-managed-cron', 'scheduler:wait-natural-heartbeat');
 
 /**
  * A code-only release deliberately omits every task that can mutate application

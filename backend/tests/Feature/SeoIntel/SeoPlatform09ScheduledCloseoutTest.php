@@ -124,7 +124,7 @@ final class SeoPlatform09ScheduledCloseoutTest extends TestCase
     }
 
     #[Test]
-    public function migration_schedule_and_automatic_closeout_are_bounded_and_expand_only(): void
+    public function migration_and_foreground_natural_schedule_are_bounded_and_deploy_is_decoupled(): void
     {
         $schema = Schema::connection('seo_intel');
         $this->assertTrue($schema->hasTable('seo_weekly_decision_receipts'));
@@ -137,21 +137,27 @@ final class SeoPlatform09ScheduledCloseoutTest extends TestCase
         $this->assertTrue($schema->hasTable('seo_weekly_decision_receipts'));
 
         $bootstrap = (string) file_get_contents(base_path('bootstrap/app.php'));
-        $this->assertMatchesRegularExpression('/withSchedule[\s\S]+seo:weekly-decisions --trigger=scheduled --json[\s\S]+weeklyOn\(4, \'13:45\'\)[\s\S]+withoutOverlapping\(120\)[\s\S]+name\(\'seo-weekly-decisions:v2:\'[\s\S]+onOneServer\(\)[\s\S]+runInBackground\(\)/', $bootstrap);
+        $this->assertMatchesRegularExpression('/withSchedule[\s\S]+seo:weekly-decisions --trigger=scheduled --json[\s\S]+weeklyOn\(4, \'13:45\'\)[\s\S]+withoutOverlapping\(120\)[\s\S]+name\(\'seo-weekly-decisions:v2:\'[\s\S]+onOneServer\(\)/', $bootstrap);
+        $this->assertStringNotContainsString('runInBackground()', $bootstrap);
         $this->assertSame(1, substr_count($bootstrap, 'seo:weekly-decisions --trigger=scheduled --json'));
         $this->assertLessThan(
             strpos($bootstrap, 'email:outbox-send --limit=50'),
             strpos($bootstrap, 'seo:weekly-decisions --trigger=scheduled --json'),
         );
         $deploy = (string) file_get_contents(base_path('../deploy.php'));
-        $this->assertStringContainsString('seo:weekly-decision-production-closeout', $deploy);
-        $this->assertStringContainsString('--wait-seconds=1800', $deploy);
-        $this->assertStringContainsString('BASH, timeout: 2100);', $deploy);
+        $this->assertStringContainsString("task('seo:weekly-decision-production-closeout'", $deploy);
+        $this->assertStringNotContainsString("after('seo:ledger-production-closeout', 'seo:weekly-decision-production-closeout')", $deploy);
+        $this->assertStringNotContainsString('--wait-seconds=1800', $deploy);
+        $this->assertStringNotContainsString('timeout: 2100', $deploy);
+        $this->assertStringContainsString("task('scheduler:wait-natural-heartbeat'", $deploy);
+        $this->assertStringContainsString('started_epoch + 90', $deploy);
         $this->assertStringNotContainsString('artisan schedule:work --no-interaction --no-ansi', $deploy);
         $this->assertStringContainsString('/api/v0.5/ops/seo-intel/weekly-decisions', $deploy);
         $this->assertStringNotContainsString('seo:weekly-decisions --trigger=scheduled', $deploy);
         $workflow = (string) file_get_contents(base_path('../.github/workflows/deploy.yml'));
-        $this->assertMatchesRegularExpression('/production:[\s\S]+timeout-minutes: 80[\s\S]+environment: production/', $workflow);
+        $this->assertMatchesRegularExpression('/staging:[\s\S]+timeout-minutes: 20[\s\S]+environment: staging/', $workflow);
+        $this->assertMatchesRegularExpression('/production:[\s\S]+timeout-minutes: 20[\s\S]+environment: production/', $workflow);
+        $this->assertSame(2, substr_count($workflow, 'kill-after=30s 15m php /tmp/dep.phar deploy'));
         $this->assertMatchesRegularExpression('/concurrency:\s+group: trunk-deploy-\$\{\{ github\.repository \}\}\s+cancel-in-progress: false/', $workflow);
         $this->assertStringContainsString('TRUNK_DEPLOY_SERIALIZED: "true"', $workflow);
         $this->assertStringContainsString('DEPLOY_LOCK_RUN_ID: ${{ github.run_id }}', $workflow);
@@ -164,6 +170,9 @@ final class SeoPlatform09ScheduledCloseoutTest extends TestCase
         $this->assertStringContainsString('$nextHeartbeat = time() + 30', $closeoutCommand);
         $this->assertStringContainsString('min(1800', $closeoutCommand);
         $this->assertStringContainsString('naturalSlotForWeek($now)->addMinutes(2)', $closeoutCommand);
+        $this->assertSame(50, SeoWeeklyDecisionReceiptService::TRANSACTION_DEADLINE_SECONDS);
+        $scheduledCommand = (string) file_get_contents(app_path('Console/Commands/SeoWeeklyDecisionScheduled.php'));
+        $this->assertStringContainsString('pcntl_alarm(SeoWeeklyDecisionReceiptService::TRANSACTION_DEADLINE_SECONDS)', $scheduledCommand);
     }
 
     private function migrateAuthority(): void

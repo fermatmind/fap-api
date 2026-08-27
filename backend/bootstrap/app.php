@@ -59,8 +59,7 @@ return Application::configure(basePath: dirname(__DIR__))
             ->weeklyOn(4, '13:45')
             ->withoutOverlapping(120)
             ->name('seo-weekly-decisions:v2:'.substr(hash('sha256', (string) config('app.url')), 0, 16))
-            ->onOneServer()
-            ->runInBackground();
+            ->onOneServer();
         $schedule->command('storage:prune --execute --scope=reports_backups --strategy=strict')->dailyAt('03:10')->withoutOverlapping();
         $schedule->command('storage:prune --execute --scope=content_releases_retention')->dailyAt('03:20')->withoutOverlapping();
         $schedule->command('storage:prune --execute --scope=legacy_private_private_cleanup')->dailyAt('03:30')->withoutOverlapping();

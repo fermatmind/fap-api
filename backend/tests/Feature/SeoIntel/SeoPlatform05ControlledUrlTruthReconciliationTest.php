@@ -163,7 +163,7 @@ final class SeoPlatform05ControlledUrlTruthReconciliationTest extends TestCase
         $deploy = (string) file_get_contents(dirname(__DIR__, 4).'/deploy.php');
 
         $this->assertStringContainsString("task('seo:url-truth-controlled-reconcile'", $deploy);
-        $this->assertStringContainsString("after('seo:url-truth-reconciliation-receipt', 'seo:url-truth-controlled-reconcile');", $deploy);
+        $this->assertStringNotContainsString("after('seo:url-truth-reconciliation-receipt', 'seo:url-truth-controlled-reconcile');", $deploy);
         $this->assertStringContainsString('seo-intel:url-truth-controlled-reconcile', $deploy);
         $this->assertStringContainsString('$rerun["private_leakage"] ?? null', $deploy);
         $this->assertStringContainsString('$detector["sitemap_without_authority_count"] ?? null', $deploy);
