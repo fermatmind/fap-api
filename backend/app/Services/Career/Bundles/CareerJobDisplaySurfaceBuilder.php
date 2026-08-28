@@ -174,6 +174,7 @@ final class CareerJobDisplaySurfaceBuilder
             $presentationV2 = $this->stripForbiddenKeys($presentationV2);
         }
         try {
+            // Bind v3 to the exact reader-visible page so cache and package hashes share one authority.
             $contentV3 = $this->contentV3Projector->project(
                 $canonicalSlug,
                 $this->publicLocale($normalizedLocale),
