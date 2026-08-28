@@ -1316,6 +1316,13 @@
             ]
           },
           "id": "ai-impact-table-31",
+          "source_refs": [
+            "source-8",
+            "source-22",
+            "source-9",
+            "source-23",
+            "source-24"
+          ],
           "type": "prose"
         },
         {
@@ -1417,6 +1424,9 @@
             ]
           },
           "id": "ai-impact-table-39",
+          "source_refs": [
+            "source-22"
+          ],
           "type": "prose"
         },
         {
@@ -1461,6 +1471,9 @@
             ]
           },
           "id": "ai-impact-table-43",
+          "source_refs": [
+            "source-9"
+          ],
           "type": "prose"
         },
         {
@@ -1505,6 +1518,9 @@
             ]
           },
           "id": "ai-impact-table-47",
+          "source_refs": [
+            "source-23"
+          ],
           "type": "prose"
         },
         {
@@ -1549,6 +1565,9 @@
             ]
           },
           "id": "ai-impact-table-51",
+          "source_refs": [
+            "source-24"
+          ],
           "type": "prose"
         },
         {
@@ -1582,6 +1601,13 @@
             ]
           },
           "id": "ai-impact-table-54",
+          "source_refs": [
+            "source-8",
+            "source-22",
+            "source-9",
+            "source-23",
+            "source-24"
+          ],
           "type": "prose"
         },
         {
@@ -1593,6 +1619,10 @@
             ]
           },
           "id": "ai-impact-table-55",
+          "source_refs": [
+            "source-8",
+            "source-9"
+          ],
           "type": "prose"
         },
         {
@@ -1615,6 +1645,10 @@
             ]
           },
           "id": "ai-impact-table-57",
+          "source_refs": [
+            "source-25",
+            "source-26"
+          ],
           "type": "prose"
         },
         {
@@ -1637,6 +1671,9 @@
             ]
           },
           "id": "ai-impact-table-59",
+          "source_refs": [
+            "source-9"
+          ],
           "type": "prose"
         },
         {
@@ -1663,7 +1700,9 @@
           ],
           "id": "ai-impact-table-61",
           "source_refs": [
-            "source-8"
+            "source-8",
+            "source-23",
+            "source-24"
           ],
           "type": "prose"
         },
@@ -1687,6 +1726,10 @@
             ]
           },
           "id": "ai-impact-table-63",
+          "source_refs": [
+            "source-25",
+            "source-26"
+          ],
           "type": "prose"
         },
         {
@@ -1709,6 +1752,11 @@
             ]
           },
           "id": "ai-impact-table-65",
+          "source_refs": [
+            "source-22",
+            "source-8",
+            "source-9"
+          ],
           "type": "prose"
         },
         {
@@ -1731,6 +1779,10 @@
             ]
           },
           "id": "ai-impact-table-67",
+          "source_refs": [
+            "source-25",
+            "source-26"
+          ],
           "type": "prose"
         },
         {
@@ -1753,6 +1805,10 @@
             ]
           },
           "id": "ai-impact-table-69",
+          "source_refs": [
+            "source-25",
+            "source-26"
+          ],
           "type": "prose"
         },
         {
@@ -2376,15 +2432,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "{{fact:bls-us-accountants-wage-p10-2025}}"
+              "{{fact:mohrss-cn-economic-financial-wage-median-2024}}"
             ]
           },
           "fact_refs": [
-            "bls-us-accountants-wage-p10-2025"
+            "mohrss-cn-economic-financial-wage-median-2024"
           ],
           "id": "career-snapshot-primary-locale-1",
           "source_refs": [
-            "source-7"
+            "source-2"
           ],
           "type": "prose"
         },
@@ -2393,10 +2449,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "税前月均等值约 $4,668；O*NET 2025 工资分位｜https://www.onetonline.org/link/localwages/13-2011.00?zip=75001"
+              "人社部｜中国大陆｜2024 年｜经济和金融专业人员年工资中位数"
             ]
           },
           "id": "career-snapshot-primary-locale-2",
+          "source_refs": [
+            "source-2"
+          ],
           "type": "prose"
         },
         {
@@ -2404,15 +2463,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "{{fact:bls-us-accountants-wage-p25-2025}}"
+              "{{fact:editorial-cn-economic-financial-monthly-median-2024}}"
             ]
           },
           "fact_refs": [
-            "bls-us-accountants-wage-p25-2025"
+            "editorial-cn-economic-financial-monthly-median-2024"
           ],
           "id": "career-snapshot-primary-locale-3",
           "source_refs": [
-            "source-7"
+            "source-2"
           ],
           "type": "prose"
         },
@@ -2421,10 +2480,17 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "税前月均等值约 $5,585；O*NET 2025 工资分位｜https://www.onetonline.org/link/localwages/13-2011.00?zip=75001"
+              "编辑换算：{{fact:mohrss-cn-economic-financial-wage-median-2024}} ÷ 12，按十元四舍五入为 {{fact:editorial-cn-economic-financial-monthly-median-2024}}。"
             ]
           },
+          "fact_refs": [
+            "mohrss-cn-economic-financial-wage-median-2024",
+            "editorial-cn-economic-financial-monthly-median-2024"
+          ],
           "id": "career-snapshot-primary-locale-4",
+          "source_refs": [
+            "source-2"
+          ],
           "type": "prose"
         },
         {
@@ -2432,15 +2498,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "{{fact:bls-us-accountants-wage-median-2025}}"
+              "{{fact:randstad-cn-first-tier-finance-monthly-range-2026}}"
             ]
           },
           "fact_refs": [
-            "bls-us-accountants-wage-median-2025"
+            "randstad-cn-first-tier-finance-monthly-range-2026"
           ],
           "id": "career-snapshot-primary-locale-5",
           "source_refs": [
-            "source-6"
+            "source-5"
           ],
           "type": "prose"
         },
@@ -2449,16 +2515,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑换算：{{fact:bls-us-accountants-wage-median-2025}} ÷ 12，四舍五入约为 {{fact:editorial-us-accountants-monthly-median-2025}}；BLS OEWS 2025 年 5 月年薪中位数｜https://www.bls.gov/news.release/ocwage.t01.htm"
+              "编辑汇总：任仕达 2026 中国大陆市场指南中的一线城市相关财务岗位基本月薪范围。"
             ]
           },
           "fact_refs": [
-            "bls-us-accountants-wage-median-2025",
-            "editorial-us-accountants-monthly-median-2025"
+            "randstad-cn-first-tier-finance-monthly-range-2026"
           ],
           "id": "career-snapshot-primary-locale-6",
           "source_refs": [
-            "source-6"
+            "source-5"
           ],
           "type": "prose"
         },
@@ -2467,15 +2532,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "{{fact:bls-us-accountants-wage-p75-2025}}"
+              "{{fact:randstad-cn-core-city-finance-monthly-range-2026}}"
             ]
           },
           "fact_refs": [
-            "bls-us-accountants-wage-p75-2025"
+            "randstad-cn-core-city-finance-monthly-range-2026"
           ],
           "id": "career-snapshot-primary-locale-7",
           "source_refs": [
-            "source-7"
+            "source-5"
           ],
           "type": "prose"
         },
@@ -2484,10 +2549,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "税前月均等值约 $9,151；O*NET 2025 工资分位｜https://www.onetonline.org/link/localwages/13-2011.00?zip=75001"
+              "编辑汇总：任仕达 2026 中国大陆市场指南中的核心城市相关财务岗位基本月薪范围。"
             ]
           },
           "id": "career-snapshot-primary-locale-8",
+          "source_refs": [
+            "source-5"
+          ],
           "type": "prose"
         },
         {
@@ -2495,15 +2563,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "{{fact:bls-us-accountants-wage-p90-2025}}"
+              "官方工资基准"
             ]
           },
-          "fact_refs": [
-            "bls-us-accountants-wage-p90-2025"
-          ],
           "id": "career-snapshot-primary-locale-9",
           "source_refs": [
-            "source-7"
+            "source-2"
           ],
           "type": "prose"
         },
@@ -2512,10 +2577,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "税前月均等值约 $12,008；O*NET 2025 工资分位｜https://www.onetonline.org/link/localwages/13-2011.00?zip=75001"
+              "经济和金融专业人员的全国宽口径企业薪酬调查，不是会计师和审计师单一职业工资。"
             ]
           },
           "id": "career-snapshot-primary-locale-10",
+          "source_refs": [
+            "source-2"
+          ],
           "type": "prose"
         },
         {
@@ -2523,16 +2591,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "{{fact:bls-us-accountants-employment-2025}} → {{fact:bls-us-accountants-employment-2035}} 人"
+              "招聘市场一线城市"
             ]
           },
-          "fact_refs": [
-            "bls-us-accountants-employment-2025",
-            "bls-us-accountants-employment-2035"
-          ],
           "id": "career-snapshot-primary-locale-11",
           "source_refs": [
-            "source-8"
+            "source-5"
           ],
           "type": "prose"
         },
@@ -2541,15 +2605,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "净增加 {{fact:bls-us-accountants-employment-net-change-2025-2035}} 人；BLS 2025—2035 年就业预测｜https://www.bls.gov/ooh/business-and-financial/accountants-and-auditors.htm"
+              "跨岗位编辑汇总，只用于理解相关岗位基本月薪量级。"
             ]
           },
-          "fact_refs": [
-            "bls-us-accountants-employment-net-change-2025-2035"
-          ],
           "id": "career-snapshot-primary-locale-12",
           "source_refs": [
-            "source-8"
+            "source-5"
           ],
           "type": "prose"
         },
@@ -2558,15 +2619,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "{{fact:bls-us-accountants-employment-growth-2025-2035}}"
+              "招聘市场核心城市"
             ]
           },
-          "fact_refs": [
-            "bls-us-accountants-employment-growth-2025-2035"
-          ],
           "id": "career-snapshot-primary-locale-13",
           "source_refs": [
-            "source-8"
+            "source-5"
           ],
           "type": "prose"
         },
@@ -2575,10 +2633,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "高于或接近全职业平均；BLS 职业展望｜https://www.bls.gov/ooh/business-and-financial/accountants-and-auditors.htm"
+              "跨岗位编辑汇总会受城市、雇主、行业和职责范围影响。"
             ]
           },
           "id": "career-snapshot-primary-locale-14",
+          "source_refs": [
+            "source-5"
+          ],
           "type": "prose"
         },
         {
@@ -2586,15 +2647,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "{{fact:bls-us-accountants-openings-2025-2035}} 个"
+              "口径边界"
             ]
           },
-          "fact_refs": [
-            "bls-us-accountants-openings-2025-2035"
-          ],
           "id": "career-snapshot-primary-locale-15",
           "source_refs": [
-            "source-8"
+            "source-2",
+            "source-5"
           ],
           "type": "prose"
         },
@@ -2603,10 +2662,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "包含退休、离职与职业转换产生的替代需求，不等于净新增；BLS 职业展望｜https://www.bls.gov/ooh/business-and-financial/accountants-and-auditors.htm"
+              "官方年工资、招聘顾问基本月薪和单个职位报价口径不同，不能互相替代，也不能与美国工资直接比较。"
             ]
           },
           "id": "career-snapshot-primary-locale-16",
+          "source_refs": [
+            "source-2",
+            "source-5"
+          ],
           "type": "prose"
         },
         {
@@ -2647,10 +2710,16 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "基本月薪约 ¥8,000–20,000，具体随岗位变化"
+              "编辑汇总：基本月薪约 {{fact:randstad-cn-first-tier-finance-monthly-range-2026}}，具体随岗位变化"
             ]
           },
+          "fact_refs": [
+            "randstad-cn-first-tier-finance-monthly-range-2026"
+          ],
           "id": "career-snapshot-primary-locale-20",
+          "source_refs": [
+            "source-5"
+          ],
           "type": "prose"
         },
         {
@@ -2680,10 +2749,16 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "基本月薪约 ¥6,000–15,000，具体随岗位变化"
+              "编辑汇总：基本月薪约 {{fact:randstad-cn-core-city-finance-monthly-range-2026}}，具体随岗位变化"
             ]
           },
+          "fact_refs": [
+            "randstad-cn-core-city-finance-monthly-range-2026"
+          ],
           "id": "career-snapshot-primary-locale-23",
+          "source_refs": [
+            "source-5"
+          ],
           "type": "prose"
         },
         {
@@ -2911,10 +2986,17 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2024 年工资中位数为 7.85 万元／年，除以 12 约 ¥6,540／月；这是包含奖金、津贴和加班工资的宽口径税前年工资，不是个人到手月薪。"
+              "2024 年工资中位数为 {{fact:mohrss-cn-economic-financial-wage-median-2024}}／年；编辑换算的月均等值为 {{fact:editorial-cn-economic-financial-monthly-median-2024}}。这是包含奖金、津贴和加班工资的宽口径税前年工资，不是个人到手月薪。"
             ]
           },
+          "fact_refs": [
+            "mohrss-cn-economic-financial-wage-median-2024",
+            "editorial-cn-economic-financial-monthly-median-2024"
+          ],
           "id": "career-snapshot-primary-locale-44",
+          "source_refs": [
+            "source-2"
+          ],
           "type": "prose"
         },
         {
@@ -2933,10 +3015,16 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "应收应付、总账和财务分析等专业岗位的基本月薪大致为 ¥8,000–20,000；这是招聘市场参考区间，不是官方工资中位数。"
+              "编辑汇总：应收应付、总账和财务分析等相关岗位的基本月薪大致为 {{fact:randstad-cn-first-tier-finance-monthly-range-2026}}；这是招聘市场参考区间，不是官方工资中位数。"
             ]
           },
+          "fact_refs": [
+            "randstad-cn-first-tier-finance-monthly-range-2026"
+          ],
           "id": "career-snapshot-primary-locale-46",
+          "source_refs": [
+            "source-5"
+          ],
           "type": "prose"
         },
         {
@@ -2955,10 +3043,16 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "应收应付、总账和财务分析等专业岗位的基本月薪大致为 ¥6,000–15,000；企业规模、行业和实际职责会显著改变工资。"
+              "编辑汇总：应收应付、总账和财务分析等相关岗位的基本月薪大致为 {{fact:randstad-cn-core-city-finance-monthly-range-2026}}；企业规模、行业和实际职责会显著改变工资。"
             ]
           },
+          "fact_refs": [
+            "randstad-cn-core-city-finance-monthly-range-2026"
+          ],
           "id": "career-snapshot-primary-locale-48",
+          "source_refs": [
+            "source-5"
+          ],
           "type": "prose"
         },
         {
@@ -2966,10 +3060,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国没有一个适用于所有城市、企业和岗位的统一月薪。全国企业薪酬调查可提供宽口径基准，地方职业工资分位和招聘市场区间则帮助判断具体岗位；三者必须分开阅读。"
+              "中国没有一个适用于所有城市、企业和岗位的统一月薪。本页将全国宽口径企业薪酬调查与招聘市场区间分开呈现；两类数据不能互相替代。"
             ]
           },
           "id": "career-snapshot-primary-locale-49",
+          "source_refs": [
+            "source-2",
+            "source-5"
+          ],
           "type": "prose"
         },
         {
@@ -2977,10 +3075,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国 O*NET 2025 工资分位｜https://www.onetonline.org/link/localwages/13-2011.00?zip=75001"
+              "人社部 2024 年企业薪酬调查｜https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html"
             ]
           },
           "id": "career-snapshot-primary-locale-50",
+          "source_refs": [
+            "source-2"
+          ],
           "type": "prose"
         },
         {
@@ -2988,10 +3089,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "ILO 生成式 AI 与工作研究｜https://www.ilo.org/resource/article/generative-ai-work-what-it-means-jobs-europe-and-beyond"
+              "任仕达 2026 中国大陆市场展望与薪酬指南｜https://www.randstad.cn/s3fs-media/cn/public/2026-01/full_report-cn-_2026_market_outlook_salary_guide._1.pdf?VersionId=U3OTHrqNC4P5y8OSSUqJNe03m5xla54s"
             ]
           },
           "id": "career-snapshot-primary-locale-51",
+          "source_refs": [
+            "source-5"
+          ],
           "type": "prose"
         },
         {
@@ -2999,15 +3103,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "{{fact:bls-us-accountants-employment-growth-2025-2035}}"
+              "{{fact:mohrss-cn-economic-financial-wage-median-2024}}"
             ]
           },
           "fact_refs": [
-            "bls-us-accountants-employment-growth-2025-2035"
+            "mohrss-cn-economic-financial-wage-median-2024"
           ],
           "id": "career-snapshot-primary-locale-52",
           "source_refs": [
-            "source-8"
+            "source-2"
           ],
           "type": "prose"
         },
@@ -3016,15 +3120,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "{{fact:bls-us-accountants-wage-median-2025}}"
+              "{{fact:randstad-cn-first-tier-finance-monthly-range-2026}}"
             ]
           },
           "fact_refs": [
-            "bls-us-accountants-wage-median-2025"
+            "randstad-cn-first-tier-finance-monthly-range-2026"
           ],
           "id": "career-snapshot-primary-locale-53",
           "source_refs": [
-            "source-6"
+            "source-5"
           ],
           "type": "prose"
         }
@@ -7668,12 +7772,19 @@
               {
                 "answer": "会计师每天把业务交易转成可追溯的财务记录：核对原始单据、编制或复核凭证、对账、处理差异，并在月结、季报或年报周期形成财务和管理报告；税务、成本、预算岗位还会申报、分析和解释经营结果。审计师则先了解业务与内控、评估风险，再抽取或分析交易、访谈人员、检查合同和凭证、记录审计证据并报告发现。具体节奏随企业会计、事务所审计、税务或内审而变，但共同底层是“取得信息—验证准确与合规—形成可复核结论—向相关人员解释”。",
                 "id": "faq-1",
-                "question_key": "career.faq.accounting.daily-work"
+                "question_key": "career.faq.accounting.daily-work",
+                "source_refs": [
+                  "source-10"
+                ]
               },
               {
                 "answer": "核心区别在目的和责任。会计依据适用准则确认、计量、记录并报告交易，主要产出账簿、财务报表、税务或管理信息；审计从相对独立的立场评价这些信息及相关控制是否存在重大错报风险，并以充分、适当的证据支持审计结论。两者都会分析数据和理解业务，但会计更强调持续建立信息，审计更强调验证可信度、职业怀疑和证据链。想选方向，可比较你更喜欢搭建月结流程，还是追查异常并对他人资料提出质疑。",
                 "id": "faq-2",
-                "question_key": "career.faq.accounting.comparison"
+                "question_key": "career.faq.accounting.comparison",
+                "source_refs": [
+                  "source-10",
+                  "source-21"
+                ]
               },
               {
                 "answer": "更可能发生的是任务重组和岗位分化，而不是整个职业同时消失。结构化、规则明确、可重复验证的录入、匹配和初筛会更快自动化；但政策选择、重大性判断、异常追问、相互矛盾证据的评价、独立性与伦理处理、责任签署和困难沟通仍需要专业人员。美国 BLS 目前预计 2025–2035 年该职业就业增长 {{fact:bls-us-accountants-employment-growth-2025-2035}}、年均约 {{fact:bls-us-accountants-openings-2025-2035}} 个职位空缺，但这是美国预测，不等于全球保证。个人应把能力从“手工处理”升级为“设计控制、复核系统输出并解释结论”。",
@@ -7684,18 +7795,27 @@
                 "id": "faq-3",
                 "question_key": "career.faq.accounting.ai-replacement",
                 "source_refs": [
-                  "source-8"
+                  "source-8",
+                  "source-22",
+                  "source-9"
                 ]
               },
               {
                 "answer": "优先被自动化的是输入结构化、规则稳定、结果可批量校验的任务，例如发票与凭证识别、分类编码、银行对账、三单匹配、费用审核、标准报表生成、底稿整理和初步异常筛查。自动化并不表示结果可直接采用：数据质量、系统接口、权限控制、会计政策、异常阈值和人工复核都会改变可靠性。岗位通常会从逐笔处理转向规则配置、异常队列复核、证据追踪和输出解释。判断自己的风险时，应拆解日常任务比例，而不是只看职位名称。",
                 "id": "faq-4",
-                "question_key": "career.faq.accounting.automatable-tasks"
+                "question_key": "career.faq.accounting.automatable-tasks",
+                "source_refs": [
+                  "source-9"
+                ]
               },
               {
                 "answer": "目前更难替代的是把专业责任、情境和证据结合起来的能力：解释准则并选择政策，判断重大性和风险，保持职业怀疑，识别管理层偏差，处理不完整或相互矛盾的证据，以及在独立性、伦理和商业压力之间作可辩护判断。专业人员还要向客户、管理层、审计委员会或监管方解释结论并承担相应责任。AI 能检索、归纳和提示异常，但其输出仍需验证；真正的优势是知道何时不能接受系统答案，以及如何留下可复核的判断记录。",
                 "id": "faq-5",
-                "question_key": "career.faq.accounting.human-skills"
+                "question_key": "career.faq.accounting.human-skills",
+                "source_refs": [
+                  "source-25",
+                  "source-26"
+                ]
               },
               {
                 "answer": "没有一个数字能代表所有会计与审计岗位，工资应按国家、城市、岗位方向、经验、资质、行业和责任范围比较。美国 BLS 的 2025 年 5 月全国年薪中位数为 {{fact:bls-us-accountants-wage-median-2025}}，这表示一半从业者高于该值、一半低于该值，并不是入门工资或个人报价。中国大陆没有与这一美国合并职业分类完全对应的统一单职业官方中位数，因此本页把官方口径与招聘市场代理数据分开呈现。比较机会时，还应同时看加班季节、奖金、证书要求、晋升路径和生活成本。",
@@ -7705,23 +7825,48 @@
                 "id": "faq-6",
                 "question_key": "career.faq.accounting.salary",
                 "source_refs": [
-                  "source-6"
+                  "source-6",
+                  "source-2",
+                  "source-5"
                 ]
               },
               {
                 "answer": "要求取决于司法辖区、岗位和雇主。美国 BLS 将会计师和审计师的典型入门学历列为会计或相关专业学士学位；中国大陆的企业会计、事务所审计、税务、内审和管理会计并没有完全相同的门槛。非会计专业可以转入，但通常要系统补齐会计循环、财务报告、税法、审计与内控，并证明 Excel、ERP、数据核对和书面表达能力。涉及法定审计、执业或签字权限时，还必须另外满足当地注册、经验、继续教育和独立性规定。",
                 "id": "faq-7",
-                "question_key": "career.faq.accounting.education"
+                "question_key": "career.faq.accounting.education",
+                "source_refs": [
+                  "source-10",
+                  "source-11",
+                  "source-12",
+                  "source-13",
+                  "source-14",
+                  "source-15"
+                ]
               },
               {
                 "answer": "不是所有岗位都必须。企业核算、成本会计、管理会计和 FP&A 通常没有统一的法定 CPA 门槛，证书更多是知识与竞争力信号；但法定审计、公开执业或签字权限往往受当地法律和监管要求约束，考试通过也不一定等同于取得执业资格。中国、美国及其他地区的 CPA 名称、考试、经验和权限并不完全互认。决定是否报考前，应先锁定目标国家与岗位，核对监管机构、专业协会和招聘要求，再评估时间成本与实际回报。",
                 "id": "faq-8",
-                "question_key": "career.faq.accounting.credentials"
+                "question_key": "career.faq.accounting.credentials",
+                "source_refs": [
+                  "source-18",
+                  "source-19",
+                  "source-20",
+                  "source-21"
+                ]
               },
               {
                 "answer": "先建立完整工作链，而不是零散背分录：理解会计恒等式、借贷记账和三张核心报表的勾稽关系，再练原始单据、凭证、总账、试算平衡、对账、月结和基础税务。随后掌握 Excel、常见 ERP、数据导入与校验，并练习把差异原因写成可复核说明。一个有效的转行样本应从一组交易出发，最终产出试算平衡、报表、异常清单和结论。之后再按企业会计、审计、税务或 FP&A 补充专门知识与证书。",
                 "id": "faq-9",
-                "question_key": "career.faq.accounting.career-change"
+                "question_key": "career.faq.accounting.career-change",
+                "source_refs": [
+                  "source-11",
+                  "source-12",
+                  "source-13",
+                  "source-14",
+                  "source-15",
+                  "source-16",
+                  "source-17"
+                ]
               },
               {
                 "answer": "是否值得取决于你是否接受持续学习、截止日期和责任约束，而不是只看“稳定”或“会不会被 AI 取代”。美国 BLS 仍预测 2025–2035 年就业增长 {{fact:bls-us-accountants-employment-growth-2025-2035}}，但基础录入和标准化复核的任务占比可能下降，地区与岗位差异也很大。长期更有价值的是会计与审计基础、数据与 AI 工具、内控与系统理解、异常调查、职业判断、沟通和伦理责任。选择前应体验真实工作样本，并比较企业会计、审计、税务和 FP&A 的工作结构。",
@@ -7731,7 +7876,9 @@
                 "id": "faq-10",
                 "question_key": "career.faq.accounting.career-worth",
                 "source_refs": [
-                  "source-8"
+                  "source-8",
+                  "source-22",
+                  "source-9"
                 ]
               }
             ]
@@ -7755,7 +7902,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本文事实来自 FermatMind 职业查表、BLS/O*NET 公开数据，以及 AI 影响板块列明的 BLS、WEF、ILO、PCAOB、中注协和同行评审研究；中国大陆薪资数据为代理样本，非官方、非实时，季度刷新（来源，2026-08）。"
+              "下方来源注册表按结论展示发布机构、市场、数据期、证据类型、适用范围、局限和原始链接；正文近场来源与此注册表使用同一 source_ref。"
             ]
           },
           "id": "source-card-2",
@@ -7777,7 +7924,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本文事实来自 FermatMind 职业查表、BLS/O*NET 公开数据，以及 AI 影响板块列明的 BLS、WEF、ILO、PCAOB、中注协和同行评审研究；中国大陆薪资数据为代理样本，非官方、非实时，季度刷新（来源，2026-08）。"
+              "招聘观察为 40 条公开职位的编辑样本，仅用于识别入门岗位和能力信号，不能估计全国占比；编辑换算与跨岗位编辑汇总均已明确标记。"
             ]
           },
           "id": "source-card-4",
@@ -7863,50 +8010,35 @@
           "data": {
             "entries": [
               {
+                "accessed_at": "2026-08-29",
                 "details": [
-                  "Official occupation identity and English occupational facts."
+                  "2024 年企业薪酬调查中，经济和金融专业人员年工资中位数为 78,500 元。",
+                  "年工资包含基本工资、奖金、津贴、加班工资等工资项目；不是个人到手月薪。"
                 ],
-                "id": "source-1",
-                "name": "Accountants and Auditors (13-2011.00)",
-                "url": "https://www.onetonline.org/link/details/13-2011.00"
-              },
-              {
-                "details": [
-                  "2024 enterprise salary survey methodology",
-                  "Economic and financial professionals annual wage percentiles: P10 41,400; P25 54,000; P50 78,500; P75 125,000; P90 200,000 yuan",
-                  "Annual wage includes base pay, bonuses, allowances, overtime and other wage items; not take-home monthly pay"
-                ],
+                "evidence_type": "政府企业薪酬调查",
                 "id": "source-2",
+                "limitation": "该统计是经济和金融专业人员的宽口径全国企业样本，不是会计师和审计师单一职业、具体城市或应届生工资。",
+                "market": "中国大陆",
                 "name": "mohrss_enterprise_salary_2024",
+                "period": "2024 年；访问 2026-08-29",
+                "publisher": "中华人民共和国人力资源和社会保障部",
+                "scope": "经济和金融专业人员年工资分位；本页使用中位数",
                 "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html"
               },
               {
+                "accessed_at": "2026-08-29",
                 "details": [
-                  "Guangdong 2024 accounting professionals annual wage percentiles: P10 54,300; P25 74,100; P50 102,600; P75 165,700; P90 283,700 yuan",
-                  "Monthly equivalents are annual published wages divided by 12, not base or take-home monthly salary"
+                  "2026 中国大陆一线和二线城市基本月薪参考区间。",
+                  "本页编辑汇总应收应付、总账和财务分析等相关岗位；区间不含奖金、提成、津贴和福利。"
                 ],
-                "id": "source-3",
-                "name": "guangdong_salary_percentiles_2024",
-                "url": "https://hrss.gd.gov.cn/attachment/0/565/565456/4522123.pdf"
-              },
-              {
-                "details": [
-                  "Leshan 2024 accounting annual median wage: 60,000 yuan",
-                  "Leshan 2024 audit annual median wage: 77,900 yuan",
-                  "Local reference demonstrates regional and occupation differences"
-                ],
-                "id": "source-4",
-                "name": "leshan_salary_percentiles_2024",
-                "url": "https://www.leshan.gov.cn/lsswszf/bmdt/92337841/0a88cedecb884be19294611ef3da1766.html"
-              },
-              {
-                "details": [
-                  "2026 mainland China first- and second-tier city base monthly salary ranges",
-                  "Financial analyst, AP/AR specialist, GL, audit manager and related finance roles",
-                  "Salary ranges exclude bonus, commission, allowances and benefits"
-                ],
+                "evidence_type": "招聘顾问薪酬指南",
                 "id": "source-5",
+                "limitation": "相关岗位的跨职位编辑汇总，不是官方工资中位数，也不能替代具体城市、企业和职责的岗位报价。",
+                "market": "中国大陆｜一线及核心城市",
                 "name": "randstad_china_salary_guide_2026",
+                "period": "2026 年市场指南；访问 2026-08-29",
+                "publisher": "任仕达中国",
+                "scope": "应收应付、总账、财务分析等相关财务岗位基本月薪区间",
                 "url": "https://www.randstad.cn/s3fs-media/cn/public/2026-01/full_report-cn-_2026_market_outlook_salary_guide._1.pdf?VersionId=U3OTHrqNC4P5y8OSSUqJNe03m5xla54s"
               },
               {
@@ -7960,21 +8092,34 @@
                 "url": "https://www.bls.gov/ooh/business-and-financial/accountants-and-auditors.htm"
               },
               {
+                "accessed_at": "2026-08-29",
                 "details": [
-                  "Task exposure does not equal actual automation or job loss",
-                  "Organizational adoption affects employment and job-quality outcomes"
+                  "近 30,000 项任务的生成式 AI 职业暴露评估。",
+                  "任务暴露不等于实际采用、自动化率或岗位消失概率；多数暴露岗位更可能发生任务重组。"
                 ],
+                "evidence_type": "国际组织任务暴露研究",
                 "id": "source-9",
+                "limitation": "理论任务暴露不能直接预测某一企业的采用速度、生产率、裁员或工资变化。",
+                "market": "全球",
                 "name": "ilo_generative_ai_jobs",
-                "url": "https://www.ilo.org/resource/article/generative-ai-work-what-it-means-jobs-europe-and-beyond"
+                "period": "2025 年；访问 2026-08-29",
+                "publisher": "ILO—NASK",
+                "scope": "生成式 AI 对职业任务的暴露程度与转型潜力",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
+                "accessed_at": "2026-08-29",
                 "details": [
-                  "Examine, analyze, and interpret accounting records",
-                  "Prepare financial statements, provide advice, audit and evaluate systems"
+                  "职业任务包括检查、分析和解释会计记录，编制财务报表、提供建议、审计和评价系统。"
                 ],
+                "evidence_type": "官方职业信息数据库",
                 "id": "source-10",
+                "limitation": "美国职业任务定义用于理解工作内容，不能直接作为中国招聘门槛、资格或就业结论。",
+                "market": "美国",
                 "name": "onet_accountants",
+                "period": "当前职业档案；访问 2026-08-29",
+                "publisher": "O*NET",
+                "scope": "Accountants and Auditors (13-2011.00) 职业任务与工作活动",
                 "url": "https://www.onetonline.org/link/details/13-2011.00"
               },
               {
@@ -8182,6 +8327,81 @@
                 "publisher": "全国人民代表大会常务委员会／中华人民共和国财政部",
                 "scope": "注册会计师定义、注册条件、加入事务所及法定审计业务范围",
                 "url": "https://kjs.mof.gov.cn/zhengcefabu/202608/t20260810_3995181.htm"
+              },
+              {
+                "accessed_at": "2026-08-29",
+                "details": [
+                  "全球受访雇主对 2025—2030 年岗位变化的预期中，会计师和审计师被列入下降较快的岗位类别。"
+                ],
+                "evidence_type": "全球雇主预期调查",
+                "id": "source-22",
+                "limitation": "反映满足报告阈值的受访雇主预期，不是全球完整官方就业统计，不能与一国职业增长率直接合并。",
+                "market": "全球",
+                "name": "wef_future_of_jobs_2025",
+                "period": "2025—2030 年预期；访问 2026-08-29",
+                "publisher": "世界经济论坛（WEF）",
+                "scope": "受访雇主对岗位增长和下降方向的预期",
+                "url": "https://www.weforum.org/publications/the-future-of-jobs-report-2025/in-full/2-jobs-outlook/"
+              },
+              {
+                "accessed_at": "2026-08-29",
+                "details": [
+                  "研究观察 2011—2019 年美国审计事务所办公室的 AI 招聘、人员和审计质量变化。"
+                ],
+                "evidence_type": "同行评审实证研究",
+                "id": "source-23",
+                "limitation": "办公室层级、较早期 AI 采用样本，相关估计不能外推所有地区、组织或当前生成式 AI 采用。",
+                "market": "美国｜审计事务所办公室",
+                "name": "law_shen_audit_ai_management_science",
+                "period": "样本期 2011—2019 年；访问 2026-08-29",
+                "publisher": "Management Science",
+                "scope": "AI 招聘与审计岗位、技能需求及审计质量的关联",
+                "url": "https://pubsonline.informs.org/doi/10.1287/mnsc.2022.04040"
+              },
+              {
+                "accessed_at": "2026-08-29",
+                "details": [
+                  "研究观察 2010—2019 年美国 36 家大型事务所的 AI 投资、人员结构和审计质量变化。"
+                ],
+                "evidence_type": "同行评审实证研究",
+                "id": "source-24",
+                "limitation": "大型事务所公司层级样本与特定 AI 代理指标不能证明所有 AI 采用都会造成相同人员变化。",
+                "market": "美国｜36 家大型审计事务所",
+                "name": "fedyk_audit_ai_review_accounting_studies",
+                "period": "样本期 2010—2019 年；访问 2026-08-29",
+                "publisher": "Review of Accounting Studies",
+                "scope": "AI 投资与会计人员变化及审计质量的关联",
+                "url": "https://link.springer.com/article/10.1007/s11142-022-09697-x"
+              },
+              {
+                "accessed_at": "2026-08-29",
+                "details": [
+                  "PCAOB 更新准则，明确审计人员使用技术辅助分析时仍需满足审计证据与责任要求。"
+                ],
+                "evidence_type": "审计监管准则更新",
+                "id": "source-25",
+                "limitation": "适用于 PCAOB 管辖的审计，不直接替代中国执业准则或企业会计岗位要求。",
+                "market": "美国｜PCAOB 管辖审计",
+                "name": "pcaob_technology_assisted_analysis",
+                "period": "准则更新；访问 2026-08-29",
+                "publisher": "PCAOB",
+                "scope": "技术辅助分析、审计证据和审计人员责任",
+                "url": "https://pcaobus.org/news-events/news-releases/news-release-detail/pcaob-updates-its-standards-to-clarify-auditor-responsibilities-when-using-technology-assisted-analysis"
+              },
+              {
+                "accessed_at": "2026-08-29",
+                "details": [
+                  "中注协说明注册会计师使用人工智能时的证据核验、工作记录和最终责任边界。"
+                ],
+                "evidence_type": "行业执业提示",
+                "id": "source-26",
+                "limitation": "用于注册会计师专业流程的责任边界，不代表 AI 产品本身的效果或所有企业会计岗位规则。",
+                "market": "中国大陆｜注册会计师行业",
+                "name": "cicpa_ai_professional_responsibility_2026",
+                "period": "2026 年 3 月；访问 2026-08-29",
+                "publisher": "中国注册会计师协会",
+                "scope": "注册会计师使用 AI 时的核验、留痕与责任",
+                "url": "https://www.cicpa.org.cn/xxfb/news/202603/t20260305_65842.html"
               }
             ]
           },
@@ -8374,11 +8594,59 @@
         "source_refs": [
           "source-6"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "¥78,500",
+        "fact_id": "mohrss-cn-economic-financial-wage-median-2024",
+        "market": "中国大陆",
+        "measure": "经济和金融专业人员年工资中位数",
+        "occupation_scope": "经济和金融专业人员（宽口径企业薪酬调查）",
+        "period": "2024 年",
+        "source_refs": [
+          "source-2"
+        ]
+      },
+      {
+        "derivation": "{{fact:mohrss-cn-economic-financial-wage-median-2024}} ÷ 12，按十元四舍五入",
+        "display_value": "约 ¥6,540",
+        "fact_id": "editorial-cn-economic-financial-monthly-median-2024",
+        "market": "中国大陆",
+        "measure": "年工资中位数的月均编辑换算",
+        "occupation_scope": "经济和金融专业人员（宽口径企业薪酬调查）",
+        "period": "2024 年",
+        "source_refs": [
+          "source-2"
+        ]
+      },
+      {
+        "derivation": "编辑汇总：应收应付、总账和财务分析等相关岗位",
+        "display_value": "¥8,000–20,000",
+        "fact_id": "randstad-cn-first-tier-finance-monthly-range-2026",
+        "market": "中国大陆｜一线城市",
+        "measure": "相关财务岗位基本月薪编辑汇总",
+        "occupation_scope": "应收应付、总账和财务分析等相关岗位",
+        "period": "2026 年市场指南",
+        "source_refs": [
+          "source-5"
+        ]
+      },
+      {
+        "derivation": "编辑汇总：应收应付、总账和财务分析等相关岗位",
+        "display_value": "¥6,000–15,000",
+        "fact_id": "randstad-cn-core-city-finance-monthly-range-2026",
+        "market": "中国大陆｜核心城市",
+        "measure": "相关财务岗位基本月薪编辑汇总",
+        "occupation_scope": "应收应付、总账和财务分析等相关岗位",
+        "period": "2026 年市场指南",
+        "source_refs": [
+          "source-5"
+        ]
       }
     ]
   },
   "locale": "zh-CN",
-  "source_content_sha256": "6b323e66f8a2cb921651468a20107aebf3be80e0010721deaba996aa75059012",
+  "source_content_sha256": "b383b3dc74f97c24f04c6edfc58a6ead93565bdf643fd6ee20ccf0adccd8ecb6",
   "subject": {
     "canonical_slug": "accountants-and-auditors",
     "name": "会计师和审计师",

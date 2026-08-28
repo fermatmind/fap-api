@@ -24,6 +24,10 @@ final class CareerContentV3CompatibilityProjector
         'bls-us-accountants-industry-government-2025',
         'bls-us-accountants-industry-accounting-services-2025',
         'editorial-us-accountants-monthly-median-2025',
+        'mohrss-cn-economic-financial-wage-median-2024',
+        'editorial-cn-economic-financial-monthly-median-2024',
+        'randstad-cn-first-tier-finance-monthly-range-2026',
+        'randstad-cn-core-city-finance-monthly-range-2026',
     ];
 
     /** @param array<string,mixed> $surface @param array<string,mixed> $content @return array<string,mixed> */
@@ -41,11 +45,31 @@ final class CareerContentV3CompatibilityProjector
         }
 
         $surface = $this->projectHero($surface, $content, $facts);
+        $surface = $this->projectChinaSalary($surface, $facts);
         $surface = $this->projectSalary($surface, $facts);
         $surface = $this->projectAi($surface, $facts);
         $surface = $this->projectOutlook($surface, $facts);
 
         return $this->projectFaq($surface, $content);
+    }
+
+    /** @param array<string,mixed> $surface @param array<string,array<string,mixed>> $facts @return array<string,mixed> */
+    private function projectChinaSalary(array $surface, array $facts): array
+    {
+        $path = 'page.content.career_snapshot_primary_locale.salary';
+        $salary = data_get($surface, $path);
+        if (! is_array($salary)) {
+            return $surface;
+        }
+        $salary['fact_refs'] = [
+            'mohrss-cn-economic-financial-wage-median-2024',
+            'editorial-cn-economic-financial-monthly-median-2024',
+            'randstad-cn-first-tier-finance-monthly-range-2026',
+            'randstad-cn-core-city-finance-monthly-range-2026',
+        ];
+        data_set($surface, $path, $salary);
+
+        return $surface;
     }
 
     /** @param array<string,mixed> $surface @param array<string,mixed> $content @param array<string,array<string,mixed>> $facts @return array<string,mixed> */
@@ -200,21 +224,33 @@ final class CareerContentV3CompatibilityProjector
         $growth = (string) $facts['bls-us-accountants-employment-growth-2025-2035']['display_value'];
         $openings = (string) $facts['bls-us-accountants-openings-2025-2035']['display_value'];
         foreach ((array) ($ai['evidence_rows'] ?? []) as $index => $row) {
-            if (! is_array($row) || ! str_contains((string) ($row['来源'] ?? ''), 'BLS')) {
+            if (! is_array($row)) {
                 continue;
             }
-            $ai['evidence_rows'][$index]['研究对象'] = '美国 SOC 13-2011，2025—2035 年官方职业预测';
-            $ai['evidence_rows'][$index]['结论'] = "就业预计增长 {$growth}，年均约 {$openings} 个职位空缺；预测不等于岗位安全保证。";
-            $ai['evidence_rows'][$index]['fact_ref'] = 'bls-us-accountants-openings-2025-2035';
+            $sourceRef = $this->aiSourceRef($row);
+            if ($sourceRef !== null) {
+                $ai['evidence_rows'][$index]['source_ref'] = $sourceRef;
+            }
+            if (str_contains((string) ($row['来源'] ?? ''), 'BLS')) {
+                $ai['evidence_rows'][$index]['研究对象'] = '美国 SOC 13-2011，2025—2035 年官方职业预测';
+                $ai['evidence_rows'][$index]['结论'] = "就业预计增长 {$growth}，年均约 {$openings} 个职位空缺；预测不等于岗位安全保证。";
+                $ai['evidence_rows'][$index]['fact_ref'] = 'bls-us-accountants-openings-2025-2035';
+            }
         }
         foreach ((array) ($ai['questions'] ?? []) as $index => $row) {
-            if (! is_array($row) || ! str_contains((string) ($row['回答'] ?? ''), 'BLS')) {
+            if (! is_array($row)) {
                 continue;
             }
-            $answer = (string) $row['回答'];
-            $answer = str_replace(['2024—2034', '2024–2034', '124,200'], ['2025—2035', '2025–2035', '115,300'], $answer);
-            $ai['questions'][$index]['回答'] = $answer;
-            $ai['questions'][$index]['fact_ref'] = 'bls-us-accountants-employment-growth-2025-2035';
+            $sourceRef = $this->aiSourceRef($row);
+            if ($sourceRef !== null) {
+                $ai['questions'][$index]['source_ref'] = $sourceRef;
+            }
+            if (str_contains((string) ($row['回答'] ?? ''), 'BLS')) {
+                $answer = (string) $row['回答'];
+                $answer = str_replace(['2024—2034', '2024–2034', '124,200'], ['2025—2035', '2025–2035', '115,300'], $answer);
+                $ai['questions'][$index]['回答'] = $answer;
+                $ai['questions'][$index]['fact_ref'] = 'bls-us-accountants-employment-growth-2025-2035';
+            }
         }
         data_set($surface, $path, $ai);
 
@@ -230,20 +266,56 @@ final class CareerContentV3CompatibilityProjector
             return $surface;
         }
         foreach ($outlook['outlook_evidence'] as $index => $row) {
-            if (! is_array($row) || ($row['geography'] ?? null) !== '美国') {
+            if (! is_array($row)) {
                 continue;
             }
-            $outlook['outlook_evidence'][$index]['horizon'] = '2025—2035';
-            $outlook['outlook_evidence'][$index]['value'] = sprintf(
-                '%s；约 %s 个/年',
-                $facts['bls-us-accountants-employment-growth-2025-2035']['display_value'],
-                $facts['bls-us-accountants-openings-2025-2035']['display_value'],
-            );
-            $outlook['outlook_evidence'][$index]['fact_ref'] = 'bls-us-accountants-openings-2025-2035';
+            $sourceRef = $this->outlookSourceRef($row);
+            if ($sourceRef !== null) {
+                $outlook['outlook_evidence'][$index]['source_ref'] = $sourceRef;
+            }
+            if (($row['geography'] ?? null) === '美国') {
+                $outlook['outlook_evidence'][$index]['horizon'] = '2025—2035';
+                $outlook['outlook_evidence'][$index]['value'] = sprintf(
+                    '%s；约 %s 个/年',
+                    $facts['bls-us-accountants-employment-growth-2025-2035']['display_value'],
+                    $facts['bls-us-accountants-openings-2025-2035']['display_value'],
+                );
+                $outlook['outlook_evidence'][$index]['fact_ref'] = 'bls-us-accountants-openings-2025-2035';
+            }
         }
         data_set($surface, $path, $outlook);
 
         return $surface;
+    }
+
+    /** @param array<string,mixed> $row */
+    private function aiSourceRef(array $row): ?string
+    {
+        $haystack = implode(' ', array_map(static fn (mixed $value): string => is_scalar($value) ? (string) $value : '', $row));
+
+        return match (true) {
+            str_contains($haystack, 'BLS'), str_contains($haystack, 'bls.gov') => 'source-8',
+            str_contains($haystack, 'WEF'), str_contains($haystack, 'weforum.org') => 'source-22',
+            str_contains($haystack, 'ILO'), str_contains($haystack, 'ilo.org') => 'source-9',
+            str_contains($haystack, 'Law'), str_contains($haystack, 'Management Science'), str_contains($haystack, 'pubsonline.informs.org') => 'source-23',
+            str_contains($haystack, 'Fedyk'), str_contains($haystack, 'Review of Accounting Studies'), str_contains($haystack, 'link.springer.com') => 'source-24',
+            str_contains($haystack, 'PCAOB'), str_contains($haystack, 'pcaobus.org') => 'source-25',
+            str_contains($haystack, '中注协'), str_contains($haystack, 'cicpa.org.cn') => 'source-26',
+            default => null,
+        };
+    }
+
+    /** @param array<string,mixed> $row */
+    private function outlookSourceRef(array $row): ?string
+    {
+        $haystack = implode(' ', array_map(static fn (mixed $value): string => is_scalar($value) ? (string) $value : '', $row));
+
+        return match (true) {
+            ($row['geography'] ?? null) === '美国' => 'source-8',
+            str_contains($haystack, '雇主'), str_contains($haystack, 'WEF') => 'source-22',
+            str_contains($haystack, '全球研究'), str_contains($haystack, 'ILO'), str_contains($haystack, '任务暴露') => 'source-9',
+            default => null,
+        };
     }
 
     /** @param array<string,mixed> $surface @param array<string,mixed> $content @return array<string,mixed> */

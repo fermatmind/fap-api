@@ -38,14 +38,25 @@ final class CareerContentV3CompatibilityProjectorTest extends TestCase
         self::assertCount(4, $salary['industry_rows']);
         self::assertStringContainsString('编辑换算', $salary['direct_answer']);
 
+        self::assertSame([
+            'mohrss-cn-economic-financial-wage-median-2024',
+            'editorial-cn-economic-financial-monthly-median-2024',
+            'randstad-cn-first-tier-finance-monthly-range-2026',
+            'randstad-cn-core-city-finance-monthly-range-2026',
+        ], data_get($projected, 'page.content.career_snapshot_primary_locale.salary.fact_refs'));
+
         self::assertSame(
             '美国 SOC 13-2011，2025—2035 年官方职业预测',
             data_get($projected, 'page.content.ai_impact_table.evidence_rows.0.研究对象'),
         );
+        self::assertSame('source-8', data_get($projected, 'page.content.ai_impact_table.evidence_rows.0.source_ref'));
+        self::assertSame('source-22', data_get($projected, 'page.content.ai_impact_table.evidence_rows.1.source_ref'));
         self::assertSame(
             '5%；约 115,300 个/年',
             data_get($projected, 'page.content.market_signal_card.outlook_evidence.0.value'),
         );
+        self::assertSame('source-22', data_get($projected, 'page.content.market_signal_card.outlook_evidence.1.source_ref'));
+        self::assertSame('source-9', data_get($projected, 'page.content.market_signal_card.outlook_evidence.2.source_ref'));
         self::assertSame(
             '美国就业预计增长 5%，年均约 115,300 个岗位空缺。',
             data_get($projected, 'page.content.faq_block.items.0.answer'),
@@ -66,6 +77,9 @@ final class CareerContentV3CompatibilityProjectorTest extends TestCase
             'presentation_v1' => ['hero' => ['stats' => $stats]],
             'presentation_v2' => ['hero' => ['stats' => $stats]],
             'page' => ['content' => [
+                'career_snapshot_primary_locale' => [
+                    'salary' => ['fact_refs' => []],
+                ],
                 'career_snapshot_secondary_locale' => [
                     'median' => '$81,680',
                     'growth' => '5%',
@@ -86,17 +100,33 @@ final class CareerContentV3CompatibilityProjectorTest extends TestCase
                         '来源' => '美国劳工统计局（BLS）',
                         '研究对象' => '2024—2034 年预测',
                         '结论' => '124,200 个',
+                    ], [
+                        '来源' => '世界经济论坛（WEF）2025',
+                        '研究对象' => '全球受访雇主预期',
+                        '结论' => '部分岗位下降',
                     ]],
                     'questions' => [[
                         '问题' => '现在学会计还有前途吗？',
                         '回答' => 'BLS 2024—2034 年预计增长 5%，年均 124,200 个。',
                     ]],
                 ],
-                'market_signal_card' => ['outlook_evidence' => [[
-                    'geography' => '美国',
-                    'horizon' => '2024—2034',
-                    'value' => '5%；约 124,200 个/年',
-                ]]],
+                'market_signal_card' => ['outlook_evidence' => [
+                    [
+                        'geography' => '美国',
+                        'horizon' => '2024—2034',
+                        'value' => '5%；约 124,200 个/年',
+                    ],
+                    [
+                        'geography' => '全球雇主调查',
+                        'horizon' => '至 2030 年',
+                        'value' => 'WEF 雇主预期',
+                    ],
+                    [
+                        'geography' => '全球研究',
+                        'horizon' => '2025 更新',
+                        'value' => 'ILO 任务暴露',
+                    ],
+                ]],
                 'faq_block' => ['items' => [[
                     'question' => '职业前景如何？',
                     'answer' => '旧答案。',
@@ -123,6 +153,10 @@ final class CareerContentV3CompatibilityProjectorTest extends TestCase
             ['bls-us-accountants-industry-management-2025', '$91,940', '美国', '2025 年 5 月', '行业年薪中位数', 'source-bls-ooh-2025'],
             ['bls-us-accountants-industry-government-2025', '$83,350', '美国', '2025 年 5 月', '行业年薪中位数', 'source-bls-ooh-2025'],
             ['bls-us-accountants-industry-accounting-services-2025', '$81,490', '美国', '2025 年 5 月', '行业年薪中位数', 'source-bls-ooh-2025'],
+            ['mohrss-cn-economic-financial-wage-median-2024', '¥78,500', '中国大陆', '2024 年', '年工资中位数', 'source-2'],
+            ['editorial-cn-economic-financial-monthly-median-2024', '约 ¥6,540', '中国大陆', '2024 年', '月均编辑换算', 'source-2'],
+            ['randstad-cn-first-tier-finance-monthly-range-2026', '¥8,000–20,000', '中国大陆｜一线城市', '2026 年', '基本月薪编辑汇总', 'source-5'],
+            ['randstad-cn-core-city-finance-monthly-range-2026', '¥6,000–15,000', '中国大陆｜核心城市', '2026 年', '基本月薪编辑汇总', 'source-5'],
         ];
         $facts = array_map(static fn (array $definition): array => [
             'fact_id' => $definition[0],

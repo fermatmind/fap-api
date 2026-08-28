@@ -63,6 +63,22 @@ final class CareerContentV3FactResolverTest extends TestCase
         }
     }
 
+    public function test_it_validates_a_monthly_derivation_rounded_to_tens(): void
+    {
+        $content = $this->content();
+        $content['fact_register']['facts'][0]['display_value'] = '¥78,500';
+        $content['fact_register']['facts'][1]['display_value'] = '约 ¥6,540';
+        $content['fact_register']['facts'][1]['derivation'] =
+            '{{fact:bls-us-accountants-wage-median-2025}} ÷ 12，按十元四舍五入';
+
+        $resolved = (new CareerContentV3FactResolver)->resolve($content);
+
+        self::assertSame(
+            '年薪中位数为 ¥78,500；编辑换算月均为 约 ¥6,540。',
+            $resolved['blocks'][0]['items'][0]['data']['paragraphs'][0],
+        );
+    }
+
     /** @return array<string,mixed> */
     private function content(): array
     {
