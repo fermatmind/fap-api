@@ -2,36 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\SEO\SitemapCache;
-use App\Services\SEO\SitemapGenerator;
+use App\Services\SeoIntel\UrlTruth\PublicCanonicalConsumerSnapshot;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class SitemapController extends Controller
 {
     private const CACHE_CONTROL = 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800';
 
-    public function index(Request $request, SitemapCache $cache, SitemapGenerator $generator)
+    public function index(Request $request, PublicCanonicalConsumerSnapshot $snapshot): Response
     {
         $authority = strtolower(trim((string) config('services.seo.public_sitemap_authority', 'frontend')));
         if ($authority !== 'backend') {
             abort(404);
         }
 
-        $identity = $generator->careerDiscoverabilityCacheIdentity();
-        $cached = $cache->get($identity);
-        if ($cached) {
-            $xml = $cached['xml'];
-            $etag = $cached['etag'];
-        } else {
-            $payload = $generator->generate();
-            $etag = $cache->buildEtag(
-                (string) ($payload['max_updated_at'] ?? ''),
-                (int) ($payload['slug_count'] ?? 0),
-                (array) ($payload['slug_list'] ?? [])
-            );
-            $xml = (string) ($payload['xml'] ?? '');
-            $cache->put($xml, $etag, $identity);
-        }
+        $payload = $snapshot->read();
+        $xml = $snapshot->renderSitemapXml();
+        $etag = '"'.$payload['fingerprint'].'"';
 
         $ifNoneMatch = trim((string) $request->header('If-None-Match', ''));
         if ($ifNoneMatch !== '' && $ifNoneMatch === $etag) {

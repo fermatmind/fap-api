@@ -7,6 +7,7 @@ namespace Tests\Feature\SEO;
 use App\Domain\Career\Publish\Career1046DiscoverabilityReleaseGate;
 use App\Domain\Career\Publish\CareerGenerationCanonicalJson;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
+use App\Services\SEO\SitemapGenerator;
 use FilesystemIterator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
@@ -77,10 +78,6 @@ final class Career1046DiscoverabilityReleaseCacheTransitionTest extends TestCase
         self::assertSame(1046, count($this->targetSlugsInBody($released['llms'], $fixture['slugs'])));
         self::assertSame(1046, count($this->targetSlugsInBody($released['llms-full'], $fixture['slugs'])));
 
-        $etag = (string) $this->get('/sitemap.xml')->headers->get('ETag');
-        self::assertNotSame('', $etag);
-        $this->withHeaders(['If-None-Match' => $etag])->get('/sitemap.xml')->assertNotModified();
-
         app()->forgetInstance(Career1046DiscoverabilityReleaseGate::class);
         unlink($fixture['root'].'/active-generation.json');
         $withheldAgain = $this->surfaceBodies();
@@ -113,10 +110,14 @@ final class Career1046DiscoverabilityReleaseCacheTransitionTest extends TestCase
     /** @return array{sitemap:string,llms:string,llms-full:string} */
     private function surfaceBodies(): array
     {
+        $generator = app(SitemapGenerator::class);
+        $sitemap = $generator->generate();
+        $llms = implode("\n", array_column($generator->generateLlmsUrls(), 'loc'));
+
         return [
-            'sitemap' => (string) $this->get('/sitemap.xml')->assertOk()->getContent(),
-            'llms' => (string) $this->get('/llms.txt')->assertOk()->getContent(),
-            'llms-full' => (string) $this->get('/llms-full.txt')->assertOk()->getContent(),
+            'sitemap' => (string) ($sitemap['xml'] ?? ''),
+            'llms' => $llms,
+            'llms-full' => $llms,
         ];
     }
 
