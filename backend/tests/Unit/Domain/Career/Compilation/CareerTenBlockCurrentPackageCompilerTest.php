@@ -110,14 +110,14 @@ final class CareerTenBlockCurrentPackageCompilerTest extends TestCase
         }
     }
 
-    public function test_accountants_boundary_notice_is_not_published(): void
+    public function test_accountants_boundary_notice_is_published_for_both_locales(): void
     {
         $package = app(CareerCurrentAuthorityPackage::class)->load(base_path());
         $row = $package['rows']['accountants-and-auditors'];
 
-        self::assertNotContains('boundary_notice', $row['component_order_json']);
+        self::assertContains('boundary_notice', $row['component_order_json']);
         foreach (['en', 'zh'] as $locale) {
-            self::assertArrayNotHasKey('boundary_notice', $row['page_payload_json']['page'][$locale]);
+            self::assertNotEmpty($row['page_payload_json']['page'][$locale]['boundary_notice']);
         }
     }
 

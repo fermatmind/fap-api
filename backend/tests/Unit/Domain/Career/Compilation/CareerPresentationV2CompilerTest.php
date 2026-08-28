@@ -40,13 +40,14 @@ final class CareerPresentationV2CompilerTest extends TestCase
                 }
                 if ($slug === 'accountants-and-auditors') {
                     self::assertSame(
-                        ['faq_block', 'source_card'],
+                        ['faq_block', 'source_card', 'boundary_notice'],
                         collect($presentation['groups'])->firstWhere('id', 'sources')['component_ids'] ?? null,
                     );
-                    foreach (['contract_project_risk_block', 'next_steps_block', 'related_next_pages', 'review_validity_card', 'boundary_notice', 'final_cta'] as $omittedComponent) {
+                    foreach (['contract_project_risk_block', 'next_steps_block', 'related_next_pages', 'review_validity_card', 'final_cta'] as $omittedComponent) {
                         self::assertNotContains($omittedComponent, $row['component_order_json']);
                         self::assertArrayNotHasKey($omittedComponent, $projection['page']['content']);
                     }
+                    self::assertNotEmpty($projection['page']['content']['boundary_notice'] ?? []);
                     self::assertSame(
                         $locale === 'zh-CN' ? 'AI影响程度' : 'AI impact level',
                         $presentation['hero']['ai_exposure']['label'] ?? null,

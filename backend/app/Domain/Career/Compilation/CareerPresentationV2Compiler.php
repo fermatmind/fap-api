@@ -20,7 +20,6 @@ final class CareerPresentationV2Compiler
         'next_steps_block',
         'related_next_pages',
         'review_validity_card',
-        'boundary_notice',
         'final_cta',
     ];
 
@@ -72,11 +71,13 @@ final class CareerPresentationV2Compiler
             $beforePagesHash = CareerCurrentAuthorityPackage::hashValue($row['page_payload_json']);
             $beforeOrder = $row['component_order_json'];
             if ($slug === 'accountants-and-auditors') {
+                $componentContentChanges += $this->restoreAccountantsBoundaryNotice($row);
                 $componentContentChanges += $this->removeAccountantsOmittedComponents($row);
             }
             $componentOrder = array_values(array_filter(
                 CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS,
-                static fn (string $componentId): bool => in_array($componentId, $beforeOrder, true),
+                static fn (string $componentId): bool => in_array($componentId, $beforeOrder, true)
+                    || ($slug === 'accountants-and-auditors' && $componentId === 'boundary_notice'),
             ));
             if ($slug === 'accountants-and-auditors') {
                 $componentOrder = array_values(array_filter(
@@ -260,6 +261,50 @@ final class CareerPresentationV2Compiler
                     unset($pages[$locale][$componentId]);
                     $changes++;
                 }
+            }
+        }
+
+        return $changes;
+    }
+
+    /** @param array<string,mixed> $row */
+    private function restoreAccountantsBoundaryNotice(array &$row): int
+    {
+        $pages = &$row['page_payload_json'];
+        if (is_array($pages['page'] ?? null)) {
+            $pages = &$pages['page'];
+        }
+        if (! is_array($pages)) {
+            throw new CareerTenBlockCompileFailure('PRESENTATION_V2_ACCOUNTANTS_BOUNDARY_SOURCE_MISSING');
+        }
+
+        $changes = 0;
+        foreach (['en', 'zh'] as $locale) {
+            $page = $pages[$locale] ?? null;
+            $caveat = is_array($page) ? ($page['fermat_decision_card']['caveat'] ?? null) : null;
+            $boundaries = [];
+            foreach ($pages as $candidatePage) {
+                $boundary = is_array($candidatePage)
+                    ? ($candidatePage['ai_impact_table']['explanation'][$locale]['boundary'] ?? null)
+                    : null;
+                if (is_string($boundary) && trim($boundary) !== '') {
+                    $boundaries[trim($boundary)] = true;
+                }
+            }
+            $boundary = count($boundaries) === 1 ? array_key_first($boundaries) : null;
+            if ($boundary === null && is_array($page)) {
+                $fallback = $page['fit_decision_checklist']['boundary']
+                    ?? $page['personality_fit_block']['boundary']
+                    ?? null;
+                $boundary = is_string($fallback) && trim($fallback) !== '' ? trim($fallback) : null;
+            }
+            if (! is_string($caveat) || trim($caveat) === '' || ! is_string($boundary)) {
+                throw new CareerTenBlockCompileFailure('PRESENTATION_V2_ACCOUNTANTS_BOUNDARY_SOURCE_MISSING');
+            }
+            $notices = array_values(array_unique([trim($caveat), trim($boundary)]));
+            if (($pages[$locale]['boundary_notice'] ?? null) !== $notices) {
+                $pages[$locale]['boundary_notice'] = $notices;
+                $changes++;
             }
         }
 
