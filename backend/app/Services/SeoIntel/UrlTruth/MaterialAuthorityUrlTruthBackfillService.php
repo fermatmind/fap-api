@@ -325,6 +325,7 @@ final class MaterialAuthorityUrlTruthBackfillService
             'writes_committed' => $executed,
             'readback' => $readback,
             'idempotent_rerun' => $rerun,
+            'projection_state' => $this->projectionState($maxRecords),
             'bounds' => ['max_records' => $maxRecords, 'canary_size' => $canarySize],
             'boundaries' => [
                 'material_decisions_only' => true,
@@ -338,6 +339,44 @@ final class MaterialAuthorityUrlTruthBackfillService
                 'raw_urls_emitted' => false,
             ],
         ];
+    }
+
+    /** @return array<string, mixed> */
+    private function projectionState(int $maxRecords): array
+    {
+        $urls = $this->eligibleUrls($maxRecords);
+        if ($urls === null) {
+            return ['status' => 'blocked', 'reason' => 'legacy_url_bound_exceeded'];
+        }
+
+        $rows = array_map(fn (object $url): array => [
+            'canonical_hash' => (string) $url->canonical_url_hash,
+            'material_fingerprint' => $this->validHash($url->material_fingerprint ?? null),
+            'material_lastmod_at' => $this->timestamp($url->material_lastmod_at ?? null),
+            'material_authority_state' => (string) ($url->material_authority_state ?? 'hold'),
+        ], $urls);
+        $states = ['trusted' => 0, 'hold' => 0, 'retired' => 0, 'other' => 0];
+        foreach ($rows as $row) {
+            $state = array_key_exists($row['material_authority_state'], $states)
+                ? $row['material_authority_state']
+                : 'other';
+            $states[$state]++;
+        }
+
+        return [
+            'status' => 'available',
+            'record_count' => count($rows),
+            'state_counts' => $states,
+            'projection_digest' => hash('sha256', json_encode($rows, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES)),
+            'raw_urls_emitted' => false,
+        ];
+    }
+
+    private function validHash(mixed $value): ?string
+    {
+        $value = strtolower(trim((string) $value));
+
+        return preg_match('/\A[a-f0-9]{64}\z/', $value) === 1 ? $value : null;
     }
 
     /** @param array<string,mixed> $artifact @param array<string,int> $counts @return array<string,mixed> */

@@ -107,6 +107,67 @@ final class PublicCanonicalConsumerSnapshot
         return implode("\n", $lines)."\n";
     }
 
+    /** @return array<string, mixed> */
+    public function closeoutReceipt(): array
+    {
+        $receipt = Cache::lock(self::LOCK_CACHE_KEY, 30)->block(10, function (): array {
+            $previous = $this->readActiveSnapshot();
+            if ($previous === null) {
+                $this->publish($this->buildCandidate());
+                $previous = $this->readActiveSnapshot();
+            }
+            if ($previous === null) {
+                throw new RuntimeException('A readable closeout baseline snapshot is required.');
+            }
+
+            $candidate = $this->buildCandidate();
+            $this->publish($candidate);
+            $first = $this->readActiveSnapshot();
+            $pointer = Cache::get(self::POINTER_CACHE_KEY);
+            $second = $this->readActiveSnapshot();
+            $previousStored = Cache::get(self::SNAPSHOT_CACHE_PREFIX.$previous['fingerprint']);
+            $previousReadable = is_array($previousStored) && $this->isValidSnapshot($previousStored);
+            if ($first === null || $second === null) {
+                throw new RuntimeException('The activated public-consumer snapshot is unreadable.');
+            }
+
+            return compact('first', 'second', 'pointer', 'previousReadable');
+        });
+        $first = $receipt['first'];
+        $second = $receipt['second'];
+        $pointer = $receipt['pointer'];
+        $previousReadable = $receipt['previousReadable'];
+        $locales = array_count_values(array_column($first['items'], 'locale'));
+        ksort($locales, SORT_STRING);
+        $withLastmod = count(array_filter($first['items'], static fn (array $item): bool => $item['lastmod'] !== null));
+        $pointerBound = is_string($pointer)
+            && preg_match('/\A[a-f0-9]{64}\z/', $pointer) === 1
+            && hash_equals($first['fingerprint'], $pointer)
+            && hash_equals($first['fingerprint'], $second['fingerprint']);
+
+        return [
+            'schema_version' => 'seo-platform-10-consumer-closeout.v1',
+            'status' => $pointerBound && $previousReadable ? 'success' : 'blocked',
+            'snapshot_fingerprint' => $first['fingerprint'],
+            'repeat_fingerprint' => $second['fingerprint'],
+            'url_count' => count($first['items']),
+            'locale_counts' => $locales,
+            'with_material_lastmod' => $withLastmod,
+            'without_material_lastmod' => count($first['items']) - $withLastmod,
+            'lkg' => [
+                'active_pointer_bound' => $pointerBound,
+                'immutable_snapshot_readable' => $previousReadable,
+                'recovery_ready_without_destructive_probe' => $previousReadable,
+            ],
+            'boundaries' => [
+                'raw_urls_emitted' => false,
+                'private_content_emitted' => false,
+                'search_submission_allowed' => false,
+                'destructive_probe_performed' => false,
+            ],
+        ];
+    }
+
     /**
      * @return array{schema_version:string,fingerprint:string,items:list<array{loc:string,locale:string,page_family:string,page_entity_type:string,lastmod:?string}>}
      */

@@ -85,6 +85,9 @@ final class SeoPlatform10MaterialUrlTruthBackfillTest extends TestCase
         self::assertSame($projected->material_fingerprint, $projectedAfterRerun->material_fingerprint);
         self::assertSame($projected->material_lastmod_at, $projectedAfterRerun->material_lastmod_at);
         self::assertSame($projected->updated_at, $projectedAfterRerun->updated_at);
+        self::assertSame(data_get($execute, 'projection_state.projection_digest'), data_get($rerun, 'projection_state.projection_digest'));
+        self::assertSame(1, data_get($rerun, 'projection_state.state_counts.hold'));
+        self::assertFalse((bool) data_get($rerun, 'projection_state.raw_urls_emitted', true));
     }
 
     #[Test]

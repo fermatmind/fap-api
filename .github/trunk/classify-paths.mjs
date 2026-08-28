@@ -28,6 +28,7 @@ export function classifyPaths(inputPaths) {
     mbti_zh_result_authority_release: paths.includes(
       "backend/content_assets/personality_public/mbti_zh_result_authority_release.v1.json",
     ),
+    seo_platform_10_closeout: paths.includes("backend/config/seo_platform_10.php"),
   };
   let testsChanged = false;
 

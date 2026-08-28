@@ -16,6 +16,7 @@ set('git_tty', false);
 set('keep_releases', 5);
 set('default_timeout', 900);
 set('deploy_mode', 'standard');
+set('seo_platform_10_closeout', false);
 
 set('sentry_release', function () {
     return get('release_name');
@@ -864,6 +865,112 @@ if printf '%s\n' "$status_output" | grep -Eq '(^|[[:space:]])Pending($|[[:space:
 fi
 BASH);
     });
+});
+
+task('seo:platform-10-material-backfill', function () {
+    if (! deployBooleanOption('seo_platform_10_closeout', false)) {
+        writeln('<comment>Skip SEO Platform 10 bounded material backfill.</comment>');
+
+        return;
+    }
+
+    within('{{release_path}}/backend', function (): void {
+        run(<<<'BASH'
+set -euo pipefail
+max_records="$({{bin/php}} -r 'require "vendor/autoload.php"; $app = require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); echo (int) config("seo_platform_10.max_records");')"
+canary_size="$({{bin/php}} -r 'require "vendor/autoload.php"; $app = require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); echo (int) config("seo_platform_10.canary_size");')"
+test "$max_records" = 5000
+test "$canary_size" = 10
+
+dry_run="$({{bin/php}} artisan seo-intel:url-truth-material-backfill --max-records="$max_records" --canary-size="$canary_size" --json --no-interaction --no-ansi)"
+printf '%s\n' "$dry_run"
+printf '%s' "$dry_run" | {{bin/php}} -r '
+$receipt = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
+$ok = ($receipt["status"] ?? null) === "success"
+    && ($receipt["mode"] ?? null) === "dry_run"
+    && ($receipt["writes_committed"] ?? null) === false
+    && ($receipt["artifact"]["record_count"] ?? 0) > 0
+    && ($receipt["bounds"]["max_records"] ?? null) === 5000
+    && ($receipt["bounds"]["canary_size"] ?? null) === 10
+    && ($receipt["boundaries"]["unknown_legacy_action"] ?? null) === "hold"
+    && ($receipt["boundaries"]["search_submission_allowed"] ?? null) === false;
+exit($ok ? 0 : 1);
+'
+
+first="$({{bin/php}} artisan seo-intel:url-truth-material-backfill --execute --max-records="$max_records" --canary-size="$canary_size" --json --no-interaction --no-ansi)"
+printf '%s\n' "$first"
+printf '%s' "$first" | {{bin/php}} -r '
+$receipt = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
+$readback = $receipt["readback"] ?? [];
+$ok = ($receipt["status"] ?? null) === "success"
+    && ($receipt["mode"] ?? null) === "controlled_write"
+    && ($receipt["writes_committed"] ?? null) === true
+    && ($receipt["idempotent_rerun"]["passed"] ?? null) === true
+    && ($receipt["idempotent_rerun"]["pending_writes"] ?? null) === 0
+    && ($receipt["projection_state"]["status"] ?? null) === "available"
+    && preg_match("/^[a-f0-9]{64}$/", (string) ($receipt["projection_state"]["projection_digest"] ?? "")) === 1
+    && count(array_filter($readback, static fn (array $row): bool => ($row["passed"] ?? null) !== true)) === 0;
+exit($ok ? 0 : 1);
+'
+first_digest="$(printf '%s' "$first" | {{bin/php}} -r '$r=json_decode(stream_get_contents(STDIN),true,flags:JSON_THROW_ON_ERROR); echo $r["projection_state"]["projection_digest"] ?? "";')"
+
+repeat="$({{bin/php}} artisan seo-intel:url-truth-material-backfill --execute --max-records="$max_records" --canary-size="$canary_size" --json --no-interaction --no-ansi)"
+printf '%s\n' "$repeat"
+printf '%s' "$repeat" | EXPECTED_DIGEST="$first_digest" {{bin/php}} -r '
+$receipt = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
+$counts = $receipt["plan"]["counts"] ?? [];
+$ok = ($receipt["status"] ?? null) === "success"
+    && ($counts["apply"] ?? null) === 0
+    && ($counts["retire"] ?? null) === 0
+    && ($receipt["idempotent_rerun"]["pending_writes"] ?? null) === 0
+    && hash_equals((string) getenv("EXPECTED_DIGEST"), (string) ($receipt["projection_state"]["projection_digest"] ?? ""))
+    && ($receipt["boundaries"]["unknown_legacy_action"] ?? null) === "hold";
+exit($ok ? 0 : 1);
+'
+BASH, timeout: 600);
+    });
+});
+
+task('seo:platform-10-public-closeout', function () {
+    if (! deployBooleanOption('seo_platform_10_closeout', false)) {
+        writeln('<comment>Skip SEO Platform 10 public closeout.</comment>');
+
+        return;
+    }
+
+    within('{{release_path}}/backend', function (): void {
+        run(<<<'BASH'
+set -euo pipefail
+receipt="$({{bin/php}} artisan seo-intel:platform-10-closeout --json --no-interaction --no-ansi)"
+printf '%s\n' "$receipt"
+printf '%s' "$receipt" | {{bin/php}} -r '
+$receipt = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
+$locales = $receipt["locale_counts"] ?? [];
+$ok = ($receipt["status"] ?? null) === "success"
+    && ($receipt["url_count"] ?? 0) > 0
+    && ($locales["en"] ?? 0) > 0
+    && ($locales["zh-CN"] ?? 0) > 0
+    && ($receipt["lkg"]["active_pointer_bound"] ?? null) === true
+    && ($receipt["lkg"]["immutable_snapshot_readable"] ?? null) === true
+    && ($receipt["lkg"]["recovery_ready_without_destructive_probe"] ?? null) === true
+    && ($receipt["boundaries"]["destructive_probe_performed"] ?? null) === false
+    && ($receipt["boundaries"]["search_submission_allowed"] ?? null) === false;
+exit($ok ? 0 : 1);
+'
+BASH);
+    });
+
+    $host = deploySafeHost((string) get('healthcheck_host'), 'healthcheck_host');
+    $baseUrl = deployHttpsUrlArg($host, '/');
+    $baseUrl = rtrim(trim($baseUrl, "'"), '/');
+    $resolve = (bool) get('healthcheck_use_resolve', true) ? $host.':443:127.0.0.1' : '';
+    $command = sprintf(
+        'SEO_PLATFORM_10_BASE_URL=%s SEO_PLATFORM_10_RESOLVE_TARGET=%s bash %s',
+        deployShellArg($baseUrl),
+        deployShellArg($resolve),
+        deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/verify_seo_platform_10_public_closeout.sh'),
+    );
+    run($command);
 });
 
 task('seo:detector-foundation-receipt', function () {
@@ -2928,7 +3035,8 @@ after('artisan:config:cache', 'guard:sitemap-authority');
 after('artisan:migrate', 'guard:no-pending-migrations');
 after('guard:no-pending-migrations', 'artisan:migrate-seo-intel');
 after('artisan:migrate-seo-intel', 'guard:no-pending-seo-intel-migrations');
-after('guard:no-pending-seo-intel-migrations', 'seo:detector-foundation-receipt');
+after('guard:no-pending-seo-intel-migrations', 'seo:platform-10-material-backfill');
+after('seo:platform-10-material-backfill', 'seo:detector-foundation-receipt');
 after('seo:detector-foundation-receipt', 'artisan:scales:seed-default');
 after('artisan:scales:seed-default', 'big5:publish-private-result-authority');
 after('big5:publish-private-result-authority', 'riasec:publish-private-result-authority');
@@ -2952,6 +3060,7 @@ after('deploy:symlink', 'healthcheck:public');
 after('healthcheck:public', 'healthcheck:sitemap-source');
 after('healthcheck:sitemap-source', 'healthcheck:public-dns');
 after('healthcheck:public-dns', 'seo:url-truth-reconciliation-receipt');
+after('seo:url-truth-reconciliation-receipt', 'seo:platform-10-public-closeout');
 after('deploy:symlink', 'healthcheck:auth-guest-contract');
 after('deploy:symlink', 'healthcheck:public-static-media-assets');
 after('deploy:symlink', 'healthcheck:scale-lookup');

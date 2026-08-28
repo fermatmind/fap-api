@@ -31,6 +31,7 @@ jobs:
       infrastructure: ${{ steps.classify.outputs.infrastructure }}
       tests_changed: ${{ steps.classify.outputs.tests_changed }}
       career_current_authority_release: ${{ steps.classify.outputs.career_current_authority_release }}
+      seo_platform_10_closeout: ${{ steps.classify.outputs.seo_platform_10_closeout }}
       classification: ${{ steps.classify.outputs.classification }}
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
@@ -70,6 +71,7 @@ jobs:
             echo "infrastructure=$(jq -r .flags.infrastructure_deployment "$RUNNER_TEMP/classification.json")"
             echo "tests_changed=$(jq -r .tests_changed "$RUNNER_TEMP/classification.json")"
             echo "career_current_authority_release=$(jq -r .operations.career_current_authority_release "$RUNNER_TEMP/classification.json")"
+            echo "seo_platform_10_closeout=$(jq -r .operations.seo_platform_10_closeout "$RUNNER_TEMP/classification.json")"
             echo "classification=$compact"
           } >> "$GITHUB_OUTPUT"
           cp "$RUNNER_TEMP/classification.json" trunk-path-classification.json

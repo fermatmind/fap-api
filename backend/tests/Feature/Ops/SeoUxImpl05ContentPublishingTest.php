@@ -38,7 +38,10 @@ final class SeoUxImpl05ContentPublishingTest extends TestCase
         $this->assertStringContainsString('$authorityUrls = $canReadAuthority', $workspace);
         $this->assertStringContainsString('@if ($canReadAuthority)', $workspace);
         $this->assertStringContainsString('data-authority-access', $workspace);
-        $this->assertStringContainsString('data-write-state="unavailable"', $workspace);
+        $this->assertStringContainsString('ContentLifecycleReadService::class', $workspace);
+        $this->assertStringContainsString('data-write-state="read_only"', $workspace);
+        $this->assertStringContainsString('material_lastmod', $workspace);
+        $this->assertStringContainsString('candidate.status', $workspace);
         $this->assertStringNotContainsString("getUrl('create')", $workspace);
         $this->assertStringNotContainsString("getUrl('edit'", $workspace);
         $this->assertStringNotContainsString('<form', $workspace);
@@ -46,6 +49,31 @@ final class SeoUxImpl05ContentPublishingTest extends TestCase
         $this->assertStringNotContainsString('wire:click', $workspace);
         $this->assertStringNotContainsString('wire:model', $workspace);
         $this->assertStringNotContainsString('canonical_path', $workspace);
+        $this->assertStringNotContainsString('backfill', $workspace);
+        $this->assertStringNotContainsString('noindex', $workspace);
+    }
+
+    public function test_available_snapshot_projects_revision_review_fingerprint_lastmod_and_candidate(): void
+    {
+        $snapshot = SeoContentPublishingUiContract::snapshot([
+            'state' => SeoOperationsUiState::PRODUCTION_PROVEN,
+            'rows' => [[
+                'revision' => ['value' => 'article-r1'],
+                'recorded_at' => '2026-08-28T01:00:00+00:00',
+                'review' => ['state' => 'evidence_bound'],
+                'material_lastmod' => '2026-08-27T01:00:00+00:00',
+                'candidate' => ['status' => 'candidate'],
+            ]],
+            'pagination' => ['page' => 1, 'last_page' => 1],
+            'boundaries' => ['read_only' => true],
+        ]);
+
+        $this->assertSame(SeoOperationsUiState::PRODUCTION_PROVEN, $snapshot['state']);
+        $this->assertSame('article-r1', $snapshot['selected_revision']);
+        $this->assertSame('evidence_bound', $snapshot['review_state']);
+        $this->assertSame('2026-08-27T01:00:00+00:00', $snapshot['material_lastmod']);
+        $this->assertSame('candidate', $snapshot['candidate_state']);
+        $this->assertTrue($snapshot['boundaries']['read_only']);
     }
 
     public function test_existing_resources_keep_backend_read_and_write_permission_gates(): void

@@ -1669,15 +1669,25 @@ return [
                     'devices' => ['desktop' => 'Desktop', 'tablet' => 'Tablet', 'mobile' => 'Mobile'],
                     'hold' => '#10 has not supplied a revision-bound public preview contract, so no target or private record is resolved.',
                 ],
+                'read_model' => [
+                    'title' => 'Content lifecycle read model',
+                    'description' => 'Latest public authority decisions joined to URL Truth material state and sanitized lifecycle candidates. This table is read-only.',
+                    'empty' => 'No lifecycle rows are available for this page.',
+                    'columns' => [
+                        'authority' => 'Authority / family', 'locale' => 'Locale', 'revision' => 'Revision',
+                        'review' => 'Review', 'fingerprint' => 'Material fingerprint',
+                        'lastmod' => 'Material lastmod', 'candidate' => 'Candidate status',
+                    ],
+                ],
                 'release' => [
                     'eyebrow' => 'Release gate', 'title' => 'Controlled lifecycle',
                     'description' => 'Backend permission, Policy Gateway, version lock, Canary, and public readback remain mandatory.',
                     'stages' => ['draft' => 'Draft', 'review' => 'Review', 'canary' => 'Canary', 'publish' => 'Publish'],
-                    'fields' => ['saved_at' => 'Saved at', 'review_state' => 'Review state', 'material_lastmod' => 'Material lastmod'],
+                    'fields' => ['saved_at' => 'Saved at', 'review_state' => 'Review state', 'material_lastmod' => 'Material lastmod', 'candidate_state' => 'Candidate state'],
                     'lastmod_rule' => 'Material lastmod changes only after a substantive public-content change is published. Notes, spelling-only edits, private fields, and workflow state do not refresh it.',
                 ],
-                'hold_title' => 'Content lifecycle is not production-proven',
-                'hold_description' => '#10 has not published a unified revision, preview, Canary, readback, and material-lastmod contract. No review or publish action is exposed.',
+                'hold_title' => 'Content lifecycle is read-only',
+                'hold_description' => 'Revision, review, material fingerprint, lastmod, and candidate status are visible. Review, publish, noindex, delete, merge, backfill, and search-submission actions are not exposed here.',
             ],
             'technical_health' => [
                 'trust_label' => 'Technical health trust status',

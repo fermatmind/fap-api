@@ -30,6 +30,8 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
 
         config([
             'admin.totp.enabled' => false,
+            'ops.access_control.allowed_host' => '',
+            'ops.access_control.ip_allowlist' => [],
             'database.connections.seo_intel' => [
                 'driver' => 'sqlite',
                 'database' => ':memory:',
@@ -123,6 +125,7 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
                 '/api/v0.5/ops/seo-intel/page-performance',
                 '/api/v0.5/ops/seo-intel/opportunity-queue',
                 '/api/v0.5/ops/seo-intel/production-closeout',
+                '/api/v0.5/ops/seo-intel/content-lifecycle',
                 '/api/v0.5/ops/seo-intel/technical-health',
             ] as $path) {
                 $response = $this->actingAs($admin, (string) config('admin.guard', 'admin'))
