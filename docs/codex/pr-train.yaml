@@ -50515,7 +50515,10 @@ prs:
     base: main
     branch: codex/seo-platform-10-g-lifecycle-candidates
     title: "feat(seo): evaluate content lifecycle candidates"
-    status: in_progress
+    status: merged
+    pr: 3833
+    head_sha: 18e148365516933973f4d783b35ee33a9aba955c
+    merge_commit_sha: 54c3fbcdf1f615418f130c426e3f4b6ce8757a42
     depends_on: [SEO-PLATFORM-10-F]
     train_scope: seo_platform_10_lifecycle_review_decay_candidates
     risk_level: read_only_content_lifecycle_policy
@@ -50536,6 +50539,58 @@ prs:
     validation:
       - focused lifecycle policy, stable candidate, overdue, decay, stale GSC, insufficient sample, runtime incident, allowed-action, and read-only boundary tests
       - existing detector registry and search/content detector compatibility tests; scoped Pint and PHP syntax; train JSON/YAML parsing; exact-scope validation; git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false
+
+  - id: SEO-PLATFORM-10-H
+    repo: fap-api
+    base: main
+    branch: codex/seo-platform-10-h-read-model-closeout
+    title: "feat(seo): close content lifecycle platform loop"
+    status: ready_to_merge
+    pr: 3834
+    depends_on: [SEO-PLATFORM-10-G]
+    train_scope: seo_platform_10_unified_read_model_and_production_closeout
+    risk_level: controlled_read_model_and_exact_sha_production_closeout
+    scope:
+      - Add one paginated, bilingual, permission-bound, sanitized content lifecycle read model to the existing Content and Publishing workspace.
+      - Display source revision, review state, material fingerprint, material lastmod, and lifecycle candidate status without adding a parallel CMS or mutation control.
+      - Execute the existing bounded URL Truth projection through the classifier-governed exact-SHA deploy lane and prove idempotent readback, public consumer parity, bilingual coverage, and readable immutable LKG.
+    do_not:
+      - Add publish, noindex, delete, merge, refresh, retire, backfill, Search, IndexNow, or workflow dispatch controls to the UI or API.
+      - Expose raw reviewer identity, evidence payloads, private content, topology, secrets, or database paths.
+      - Perform a destructive probe, manual production write, manual deploy, manual rollback, or search submission.
+    allowed_paths:
+      - .github/trunk/classify-paths.mjs
+      - .github/trunk/classify-paths.test.mjs
+      - .github/workflows/ci.yml
+      - .github/workflows/deploy.yml
+      - backend/app/Console/Commands/SeoPlatform10ProductionCloseoutCommand.php
+      - backend/app/Filament/Ops/Support/SeoContentPublishingUiContract.php
+      - backend/app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php
+      - backend/app/Services/SeoIntel/OpsDashboard/ContentLifecycleReadService.php
+      - backend/app/Services/SeoIntel/UrlTruth/MaterialAuthorityUrlTruthBackfillService.php
+      - backend/app/Services/SeoIntel/UrlTruth/PublicCanonicalConsumerSnapshot.php
+      - backend/config/seo_platform_10.php
+      - backend/lang/en/ops.php
+      - backend/lang/zh_CN/ops.php
+      - backend/resources/views/filament/ops/components/ops-content-publishing-workspace.blade.php
+      - backend/routes/api.php
+      - backend/scripts/deploy/verify_seo_platform_10_public_closeout.sh
+      - backend/tests/Feature/Ops/SeoUxImpl05ContentPublishingTest.php
+      - backend/tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php
+      - backend/tests/Feature/SeoIntel/SeoPlatform10ContentLifecycleReadModelTest.php
+      - backend/tests/Feature/SeoIntel/SeoPlatform10MaterialUrlTruthBackfillTest.php
+      - backend/tests/Feature/SeoIntel/SeoPlatform10ProductionCloseoutContractTest.php
+      - backend/tests/Feature/SeoIntel/SeoPlatform10PublicConsumerConvergenceTest.php
+      - deploy.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - focused lifecycle read model, Content and Publishing UI, read-only API, bounded backfill, public convergence, and production closeout tests
+      - scoped Pint; classifier tests; actionlint; PHP and shell syntax; route and command registration; JSON/YAML parsing; exact-scope validation; git diff --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     production_write_execution: false
     production_workflow_dispatched: false

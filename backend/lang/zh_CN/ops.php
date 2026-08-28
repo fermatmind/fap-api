@@ -1669,15 +1669,25 @@ return [
                     'devices' => ['desktop' => '桌面', 'tablet' => '平板', 'mobile' => '移动'],
                     'hold' => '#10 尚未提供绑定 revision 的公开预览合同，因此不会解析目标或私人记录。',
                 ],
+                'read_model' => [
+                    'title' => '内容生命周期只读模型',
+                    'description' => '将最新公开 authority decision、URL Truth material 状态和脱敏生命周期候选联表展示；本表只读。',
+                    'empty' => '当前页没有可用的生命周期记录。',
+                    'columns' => [
+                        'authority' => 'Authority / Family', 'locale' => 'Locale', 'revision' => 'Revision',
+                        'review' => '审核', 'fingerprint' => 'Material fingerprint',
+                        'lastmod' => 'Material lastmod', 'candidate' => '候选状态',
+                    ],
+                ],
                 'release' => [
                     'eyebrow' => '发布门禁', 'title' => '受控生命周期',
                     'description' => '后端权限、Policy Gateway、版本锁、Canary 与公开 readback 始终是必需条件。',
                     'stages' => ['draft' => '草稿', 'review' => '审核', 'canary' => 'Canary', 'publish' => '发布'],
-                    'fields' => ['saved_at' => '保存时间', 'review_state' => '审核状态', 'material_lastmod' => 'Material lastmod'],
+                    'fields' => ['saved_at' => '保存时间', 'review_state' => '审核状态', 'material_lastmod' => 'Material lastmod', 'candidate_state' => '候选状态'],
                     'lastmod_rule' => 'Material lastmod 只在实质性公开内容变更发布后更新；后台备注、仅拼写修改、私人字段与流程状态不得刷新。',
                 ],
-                'hold_title' => '内容生命周期尚未得到生产证明',
-                'hold_description' => '#10 尚未发布统一 revision、预览、Canary、readback 与 material-lastmod 合同，因此不显示审核或发布动作。',
+                'hold_title' => '内容生命周期只读',
+                'hold_description' => '可查看 revision、审核、material fingerprint、lastmod 与候选状态；不提供审核、发布、noindex、删除、合并、backfill 或搜索提交操作。',
             ],
             'technical_health' => [
                 'trust_label' => '技术健康信任状态',

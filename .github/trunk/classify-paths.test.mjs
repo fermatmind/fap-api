@@ -72,6 +72,13 @@ test("binds only the exact MBTI zh authority release manifest to its operation",
   assert.equal(exact.operations.mbti_zh_result_authority_release, true);
   assert.equal(adjacent.operations.mbti_zh_result_authority_release, false);
 });
+test("binds SEO Platform 10 closeout only to its exact controlled operation config", () => {
+  const exact = classifyPaths(["backend/config/seo_platform_10.php"]);
+  const adjacent = classifyPaths(["backend/config/seo_platform_10_notes.php"]);
+  assert.equal(exact.flags.application_code, true);
+  assert.equal(exact.operations.seo_platform_10_closeout, true);
+  assert.equal(adjacent.operations.seo_platform_10_closeout, false);
+});
 test("classifies migrations", () => assert.equal(has(["backend/database/migrations/2026_01_01_add_flag.php"], "backward_compatible_migration"), true));
 test("keeps the Ops SEO execution migration out of discoverability", () => {
   const result = classifyPaths([

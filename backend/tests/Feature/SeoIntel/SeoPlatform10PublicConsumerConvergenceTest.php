@@ -68,6 +68,54 @@ final class SeoPlatform10PublicConsumerConvergenceTest extends TestCase
     }
 
     #[Test]
+    public function closeout_receipt_proves_bilingual_snapshot_and_lkg_without_a_destructive_probe(): void
+    {
+        $this->prepareSchema();
+        $this->insertUrl('/en/articles/closeout', 'en', 'article', 'trusted', '2026-08-01 00:00:00');
+        $service = app(PublicCanonicalConsumerSnapshot::class);
+        $previous = $service->read();
+
+        $this->insertUrl('/zh/career/jobs/closeout', 'zh-CN', 'career_job', 'hold', null);
+        $receipt = $service->closeoutReceipt();
+
+        self::assertSame('success', $receipt['status']);
+        self::assertSame(2, $receipt['url_count']);
+        self::assertNotSame($previous['fingerprint'], $receipt['snapshot_fingerprint']);
+        self::assertSame(
+            $previous,
+            Cache::get('seo:url-truth-consumers:v1:snapshot:'.$previous['fingerprint']),
+        );
+        self::assertSame(['en' => 1, 'zh-CN' => 1], $receipt['locale_counts']);
+        self::assertSame(1, $receipt['with_material_lastmod']);
+        self::assertSame(1, $receipt['without_material_lastmod']);
+        self::assertSame($receipt['snapshot_fingerprint'], $receipt['repeat_fingerprint']);
+        self::assertTrue((bool) data_get($receipt, 'lkg.active_pointer_bound'));
+        self::assertTrue((bool) data_get($receipt, 'lkg.immutable_snapshot_readable'));
+        self::assertTrue((bool) data_get($receipt, 'lkg.recovery_ready_without_destructive_probe'));
+        self::assertFalse((bool) data_get($receipt, 'boundaries.destructive_probe_performed', true));
+        self::assertFalse((bool) data_get($receipt, 'boundaries.raw_urls_emitted', true));
+    }
+
+    #[Test]
+    public function failed_closeout_keeps_the_previous_pointer_and_readable_lkg(): void
+    {
+        $this->prepareSchema();
+        $this->insertUrl('/en/articles/closeout-lkg', 'en', 'article', 'trusted', '2026-08-01 00:00:00');
+        $service = app(PublicCanonicalConsumerSnapshot::class);
+        $previous = $service->read();
+        $pointer = Cache::get(PublicCanonicalConsumerSnapshot::POINTER_CACHE_KEY);
+        Schema::connection('seo_intel')->drop('seo_url_entities');
+
+        try {
+            $service->closeoutReceipt();
+            self::fail('Closeout must fail when the candidate source is unavailable.');
+        } catch (\RuntimeException) {
+            self::assertSame($pointer, Cache::get(PublicCanonicalConsumerSnapshot::POINTER_CACHE_KEY));
+            self::assertSame($previous, $service->read());
+        }
+    }
+
+    #[Test]
     public function consumer_path_contains_no_clock_based_lastmod_fallback(): void
     {
         foreach ([

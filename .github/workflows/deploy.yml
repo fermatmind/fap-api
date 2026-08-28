@@ -50,6 +50,7 @@ jobs:
       mbti_zh_result_package_hash: ${{ steps.mbti-zh-result.outputs.package_hash }}
       mbti_zh_result_actor: ${{ steps.mbti-zh-result.outputs.actor }}
       mbti_zh_result_operation_key: ${{ steps.mbti-zh-result.outputs.operation_key }}
+      seo_platform_10_closeout: ${{ steps.receipt.outputs.seo_platform_10_closeout }}
     steps:
       - name: Refuse non-main, PR, failed, or ambiguous CI runs
         shell: bash
@@ -106,6 +107,7 @@ jobs:
           career_current="$(jq -r '(([.classification.paths[] | select(startswith("backend/content_assets/career/current/") or . == "backend/app/Domain/Career/Display/CareerCurrentAuthorityPackage.php" or . == "backend/app/Domain/Career/Display/CareerCurrentAuthorityPublisher.php" or . == "backend/scripts/operations/career_current_authority_publish.php")] | length) > 0) or .classification.operations.career_current_authority_release == true' "$receipt")"
           career_current_full_scan="$career_current"
           mbti_zh_result_release="$(jq -r '.classification.operations.mbti_zh_result_authority_release == true' "$receipt")"
+          seo_platform_10_closeout="$(jq -r '.classification.operations.seo_platform_10_closeout == true' "$receipt")"
           {
             echo "deploy=$(jq -r .classification.deploy "$receipt")"
             echo "classification=$classification"
@@ -114,6 +116,7 @@ jobs:
             echo "career_current_release=$career_current_release"
             echo "career_current_full_scan=$career_current_full_scan"
             echo "mbti_zh_result_release=$mbti_zh_result_release"
+            echo "seo_platform_10_closeout=$seo_platform_10_closeout"
           } >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         if: steps.receipt.outputs.career_current == 'true'
@@ -244,7 +247,8 @@ jobs:
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$DEPLOY_SHA"
           timeout --signal=TERM --kill-after=30s 15m php /tmp/dep.phar deploy staging -f deploy.php --revision "$DEPLOY_SHA" \
-            -o release_name="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode=standard --no-interaction
+            -o release_name="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode=standard \
+            -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' --no-interaction
       - name: Record staging timing
         if: always()
         run: |
@@ -334,7 +338,8 @@ jobs:
           release="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}"
           set +e
           timeout --signal=TERM --kill-after=30s 15m php /tmp/dep.phar deploy production -f deploy.php --revision "$DEPLOY_SHA" \
-            -o release_name="$release" -o deploy_mode=standard -vvv --no-interaction
+            -o release_name="$release" -o deploy_mode=standard \
+            -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' -vvv --no-interaction
           deploy_rc=$?
           set -e
           if [ "$deploy_rc" -eq 0 ]; then exit 0; fi

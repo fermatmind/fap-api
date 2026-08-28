@@ -6,6 +6,7 @@ namespace App\Http\Controllers\API\V0_5\Ops\SeoIntel;
 
 use App\Services\SeoIntel\Decision\SeoWeeklyDecisionSelector;
 use App\Services\SeoIntel\Ledger\SeoLedgerSnapshotReadService;
+use App\Services\SeoIntel\OpsDashboard\ContentLifecycleReadService;
 use App\Services\SeoIntel\OpsDashboard\SeoDashboardApiReadService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -51,6 +52,18 @@ final class SeoIntelDashboardController
     public function productionCloseout(): JsonResponse
     {
         return $this->respond($this->readService->productionCloseout());
+    }
+
+    public function contentLifecycle(Request $request, ContentLifecycleReadService $readService): JsonResponse
+    {
+        $page = max(1, (int) $request->query('page', 1));
+        $locale = $request->query('locale');
+
+        return $this->respond($readService->read(
+            $page,
+            $this->limit($request),
+            is_string($locale) ? $locale : null,
+        ));
     }
 
     public function technicalHealth(): JsonResponse

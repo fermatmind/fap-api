@@ -5,10 +5,13 @@
     use App\Filament\Ops\Support\ContentAccess;
     use App\Filament\Ops\Support\SeoContentPublishingUiContract;
     use App\Filament\Ops\Support\SeoOperationsUiState;
+    use App\Services\SeoIntel\OpsDashboard\ContentLifecycleReadService;
 
-    $snapshot = SeoContentPublishingUiContract::unavailableSnapshot();
     $copy = 'ops.custom_pages.seo_operations.content_publishing';
     $canReadAuthority = ContentAccess::canRead();
+    $snapshot = $canReadAuthority
+        ? SeoContentPublishingUiContract::snapshot(app(ContentLifecycleReadService::class)->read(1, 25))
+        : SeoContentPublishingUiContract::unavailableSnapshot();
     $authorityUrls = $canReadAuthority
         ? [
             'article' => ArticleResource::getUrl(),
@@ -24,14 +27,14 @@
             <span class="ops-shell-eyebrow">{{ __($copy.'.eyebrow') }}</span>
             <h2>{{ __($copy.'.title') }}</h2>
         </div>
-        <span class="ops-tag">#10 · {{ __('ops.custom_pages.seo_operations.states.production_unproven.label') }}</span>
+        <span class="ops-tag">#10 · {{ __('ops.custom_pages.seo_operations.states.'.$snapshot['state'].'.label') }}</span>
     </header>
 
     <div
         class="ops-content-publishing__authority"
         aria-label="{{ __($copy.'.authority.label') }}"
         data-authority-access="{{ $canReadAuthority ? 'granted' : 'denied' }}"
-        data-write-state="unavailable"
+        data-write-state="read_only"
     >
         <div>
             <strong>{{ __($copy.'.authority.title') }}</strong>
@@ -48,13 +51,69 @@
     </div>
 
     <div class="ops-content-publishing__context" aria-label="{{ __($copy.'.context_label') }}">
-        @foreach (['content_type', 'page_family', 'locale', 'revision', 'version_diff', 'public_preview', 'submit_review'] as $field)
+        @php
+            $selected = $snapshot['rows'][0] ?? [];
+            $contextValues = [
+                'content_type' => $selected['authority_type'] ?? null,
+                'page_family' => $selected['page_family'] ?? null,
+                'locale' => $selected['locale'] ?? null,
+                'revision' => data_get($selected, 'revision.value'),
+                'version_diff' => null,
+                'public_preview' => null,
+                'submit_review' => null,
+            ];
+        @endphp
+        @foreach ($contextValues as $field => $value)
             <div>
                 <span>{{ __($copy.'.context.'.$field) }}</span>
-                <strong>{{ SeoOperationsUiState::metricValue(null, SeoOperationsUiState::UNAVAILABLE) }}</strong>
+                <strong>{{ SeoOperationsUiState::metricValue($value, $snapshot['state']) }}</strong>
             </div>
         @endforeach
     </div>
+
+    <section class="ops-inline-data-section" aria-labelledby="content-lifecycle-read-model-title">
+        <div class="ops-inline-data-section__header">
+            <h3 id="content-lifecycle-read-model-title">{{ __($copy.'.read_model.title') }}</h3>
+            <p>{{ __($copy.'.read_model.description') }}</p>
+        </div>
+        @if ($snapshot['rows'] === [])
+            <x-filament-ops::ops-state-message
+                :state="$snapshot['state']"
+                :title="__($copy.'.read_model.empty')"
+                :description="''"
+            />
+        @else
+            <div class="ops-table-shell">
+                <table class="ops-table">
+                    <thead>
+                        <tr>
+                            @foreach (['authority', 'locale', 'revision', 'review', 'fingerprint', 'lastmod', 'candidate'] as $column)
+                                <th>{{ __($copy.'.read_model.columns.'.$column) }}</th>
+                            @endforeach
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($snapshot['rows'] as $row)
+                            <tr>
+                                <td>{{ $row['authority_type'] }} · {{ $row['page_family'] }}</td>
+                                <td>{{ $row['locale'] }}</td>
+                                <td>{{ data_get($row, 'revision.kind') }}<br><code>{{ data_get($row, 'revision.value') }}</code></td>
+                                <td>{{ data_get($row, 'review.state') }}<br><small>{{ data_get($row, 'review.reviewed_at') ?? '—' }}</small></td>
+                                <td><code>{{ $row['fingerprint'] ?? '—' }}</code></td>
+                                <td>{{ $row['material_lastmod'] ?? '—' }}<br><small>{{ $row['material_authority_state'] }}</small></td>
+                                <td>{{ data_get($row, 'candidate.status') }}<br><small>{{ data_get($row, 'candidate.recommended_action') ?? '—' }}</small></td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="ops-server-pagination" data-pagination-state="read-only">
+                <span>{{ __('pagination.previous') }}</span>
+                <strong>{{ data_get($snapshot, 'pagination.page', 1) }} / {{ data_get($snapshot, 'pagination.last_page', 1) }}</strong>
+                <span>{{ __('pagination.next') }}</span>
+            </div>
+        @endif
+    </section>
 
     <div class="ops-content-publishing__layout">
         <section class="ops-content-publishing__editor" aria-labelledby="content-structure-title">
@@ -117,7 +176,7 @@
             @endforeach
         </ol>
         <dl>
-            @foreach (['saved_at', 'review_state', 'material_lastmod'] as $field)
+            @foreach (['saved_at', 'review_state', 'material_lastmod', 'candidate_state'] as $field)
                 <div>
                     <dt>{{ __($copy.'.release.fields.'.$field) }}</dt>
                     <dd>{{ SeoOperationsUiState::metricValue($snapshot[$field], $snapshot['state']) }}</dd>
