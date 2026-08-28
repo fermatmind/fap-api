@@ -109,10 +109,20 @@ final class CareerShardedCurrentContractTest extends TestCase
             foreach (['en' => 'en', 'zh' => 'zh-CN'] as $sourceLocale => $locale) {
                 $localePageCount++;
                 $page = $pages[$sourceLocale];
-                self::assertCount($slug === 'accountants-and-auditors' ? 27 : 28, $row['component_order_json']);
+                self::assertCount($slug === 'accountants-and-auditors' ? 21 : 28, $row['component_order_json']);
                 if ($slug === 'accountants-and-auditors') {
-                    self::assertNotContains('career_ai_description_block', $row['component_order_json']);
-                    self::assertArrayNotHasKey('career_ai_description_block', $page);
+                    foreach ([
+                        'career_ai_description_block',
+                        'contract_project_risk_block',
+                        'next_steps_block',
+                        'related_next_pages',
+                        'review_validity_card',
+                        'boundary_notice',
+                        'final_cta',
+                    ] as $omittedComponent) {
+                        self::assertNotContains($omittedComponent, $row['component_order_json']);
+                        self::assertArrayNotHasKey($omittedComponent, $page);
+                    }
                 }
                 foreach ($row['component_order_json'] as $component) {
                     self::assertArrayHasKey($component, $page);

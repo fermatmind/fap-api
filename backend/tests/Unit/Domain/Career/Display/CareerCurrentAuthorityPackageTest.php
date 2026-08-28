@@ -74,6 +74,8 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
             self::assertSame(['en', 'zh'], array_keys($row['metadata_json']['presentation_v2']));
             self::assertArrayHasKey('presentation_v2', $legacyContract->publicProjection($row, 'en'));
             self::assertArrayHasKey('presentation_v2', $legacyContract->publicProjection($row, 'zh-CN'));
+            self::assertSame('career.detail.content.v3', $legacyContract->publicProjection($row, 'en')['content_v3']['contract_version']);
+            self::assertSame('career.detail.content.v3', $legacyContract->publicProjection($row, 'zh-CN')['content_v3']['contract_version']);
         }
         self::assertArrayNotHasKey('software-developers', $package['rows']);
     }

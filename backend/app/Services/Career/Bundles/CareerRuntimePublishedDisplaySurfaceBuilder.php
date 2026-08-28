@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Domain\Career\Compilation\CareerContentV3Projector;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\DTO\Career\CareerJobDetailBundle;
 
 final class CareerRuntimePublishedDisplaySurfaceBuilder
 {
+    public function __construct(private readonly CareerContentV3Projector $contentV3Projector) {}
+
     /**
      * @param  array<string, mixed>  $projectionItem
      * @return array<string, mixed>
@@ -26,6 +29,8 @@ final class CareerRuntimePublishedDisplaySurfaceBuilder
         $pathPrefix = $isZh ? '/zh' : '/en';
         $path = $pathPrefix.'/career/jobs/'.$slug;
         $testPath = $pathPrefix.'/tests/holland-career-interest-test-riasec';
+
+        $pageContent = $this->pageContent($slug, $title, $path, $testPath, $isZh);
 
         return [
             'surface_version' => 'display.surface.v1',
@@ -55,7 +60,7 @@ final class CareerRuntimePublishedDisplaySurfaceBuilder
             ],
             'page' => [
                 'locale' => $publicLocale,
-                'content' => $this->pageContent($slug, $title, $path, $testPath, $isZh),
+                'content' => $pageContent,
             ],
             'component_order' => CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS,
             'sources' => [
@@ -72,6 +77,15 @@ final class CareerRuntimePublishedDisplaySurfaceBuilder
                 'release_gate_pass' => (bool) ($projectionItem['release_gate_pass'] ?? false),
                 'surface_policy' => 'restricted_runtime_published_navigation_shell',
             ],
+            'content_v3' => $this->contentV3Projector->project(
+                $slug,
+                $publicLocale,
+                $pageContent,
+                null,
+                [[
+                    'label' => 'Career runtime publish projection',
+                ]],
+            ),
         ];
     }
 

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Career\Compilation;
 
-use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
+use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Display\CareerPresentationV2Contract;
 
 final class CareerPresentationV2Compiler
@@ -13,6 +13,24 @@ final class CareerPresentationV2Compiler
     public const VERSION = 'career.presentation_v2.compiler.v1';
 
     private const ENHANCED_SLUGS = ['accountants-and-auditors'];
+
+    /** @var list<string> */
+    private const ACCOUNTANTS_OMITTED_COMPONENTS = [
+        'contract_project_risk_block',
+        'next_steps_block',
+        'related_next_pages',
+        'review_validity_card',
+        'boundary_notice',
+        'final_cta',
+    ];
+
+    /** @var array<string,array{en:string,zh-CN:string}> */
+    private const ENHANCED_GROUP_LABELS = [
+        'fit' => ['en' => 'Career fit guide', 'zh-CN' => '职业适配指南'],
+        'risk' => ['en' => 'Work pressure, risks and boundaries', 'zh-CN' => '工作压力、风险与职业边界'],
+        'path' => ['en' => 'Entry, credentials and career development', 'zh-CN' => '入行、证书与职业发展'],
+        'market-signals' => ['en' => 'Career outlook and related transitions', 'zh-CN' => '职业前景与相关职业转向'],
+    ];
 
     /** @var list<array{id:string,components:list<string>,en:string,zh-CN:string}> */
     private const GROUPS = [
@@ -45,6 +63,7 @@ final class CareerPresentationV2Compiler
         $assetsBytes = '';
         $presentationChanges = 0;
         $componentOrderChanges = 0;
+        $componentContentChanges = 0;
         $enhancedLocalePages = 0;
         $legacyLocalePages = 0;
         foreach (array_keys($authority['rows']) as $slug) {
@@ -52,10 +71,23 @@ final class CareerPresentationV2Compiler
             unset($authority['rows'][$slug]);
             $beforePagesHash = CareerCurrentAuthorityPackage::hashValue($row['page_payload_json']);
             $beforeOrder = $row['component_order_json'];
+            if ($slug === 'accountants-and-auditors') {
+                $componentContentChanges += $this->removeAccountantsOmittedComponents($row);
+            }
             $componentOrder = array_values(array_filter(
                 CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS,
                 static fn (string $componentId): bool => in_array($componentId, $beforeOrder, true),
             ));
+            if ($slug === 'accountants-and-auditors') {
+                $componentOrder = array_values(array_filter(
+                    $componentOrder,
+                    static fn (string $componentId): bool => ! in_array(
+                        $componentId,
+                        self::ACCOUNTANTS_OMITTED_COMPONENTS,
+                        true,
+                    ),
+                ));
+            }
             if ($beforeOrder !== $componentOrder) {
                 $componentOrderChanges++;
                 $row['component_order_json'] = $componentOrder;
@@ -91,7 +123,8 @@ final class CareerPresentationV2Compiler
                 $presentationChanges++;
             }
             $row['metadata_json']['presentation_v2'] = $presentations;
-            if (! hash_equals($beforePagesHash, CareerCurrentAuthorityPackage::hashValue($row['page_payload_json']))) {
+            if ($slug !== 'accountants-and-auditors'
+                && ! hash_equals($beforePagesHash, CareerCurrentAuthorityPackage::hashValue($row['page_payload_json']))) {
                 throw new CareerTenBlockCompileFailure('PRESENTATION_V2_CONTENT_DRIFT');
             }
             $assetsBytes .= CareerCurrentAuthorityPackage::encodeCanonical($row)."\n";
@@ -120,7 +153,7 @@ final class CareerPresentationV2Compiler
                 'contract_version' => 'career.presentation_v2.package_diff.v1',
                 'presentation_changes' => $presentationChanges,
                 'component_order_changes' => $componentOrderChanges,
-                'existing_component_content_changes' => 0,
+                'existing_component_content_changes' => $componentContentChanges,
                 'canonical_route_inventory_changed' => false,
                 'discoverability_surface_changed' => false,
             ],
@@ -128,9 +161,9 @@ final class CareerPresentationV2Compiler
     }
 
     /**
-     * @param array<string,mixed> $page
-     * @param list<string> $componentOrder
-     * @param array<string,mixed>|null $presentationV1
+     * @param  array<string,mixed>  $page
+     * @param  list<string>  $componentOrder
+     * @param  array<string,mixed>|null  $presentationV1
      * @return array<string,mixed>
      */
     public function project(string $slug, string $locale, array $page, array $componentOrder, ?array $presentationV1): array
@@ -165,8 +198,8 @@ final class CareerPresentationV2Compiler
                 'title' => $title,
                 'lead' => $this->string($hero['quick_answer'] ?? null),
                 'badges' => $this->badges($presentationV1, $locale),
-                'stats' => $this->stats($presentationV1, $locale),
-                'ai_exposure' => $this->aiExposure($presentationV1, $locale),
+                'stats' => $this->stats($presentationV1, $locale, $slug, $page),
+                'ai_exposure' => $this->aiExposure($presentationV1, $locale, $slug),
                 'cta' => $this->cta($cta, $locale),
             ],
             'groups' => $this->groups($slug, $locale, $componentOrder),
@@ -191,7 +224,9 @@ final class CareerPresentationV2Compiler
             }
             $group = [
                 'id' => $definition['id'],
-                'label' => $definition[$locale],
+                'label' => $enhanced && isset(self::ENHANCED_GROUP_LABELS[$definition['id']])
+                    ? self::ENHANCED_GROUP_LABELS[$definition['id']][$locale]
+                    : $definition[$locale],
                 'component_ids' => $components,
                 'content_state' => $enhanced ? 'enhanced' : 'legacy',
             ];
@@ -202,6 +237,33 @@ final class CareerPresentationV2Compiler
         }
 
         return $groups;
+    }
+
+    /** @param array<string,mixed> $row */
+    private function removeAccountantsOmittedComponents(array &$row): int
+    {
+        $pages = &$row['page_payload_json'];
+        if (is_array($pages['page'] ?? null)) {
+            $pages = &$pages['page'];
+        }
+        if (! is_array($pages)) {
+            return 0;
+        }
+
+        $changes = 0;
+        foreach (['en', 'zh'] as $locale) {
+            if (! is_array($pages[$locale] ?? null)) {
+                continue;
+            }
+            foreach (self::ACCOUNTANTS_OMITTED_COMPONENTS as $componentId) {
+                if (array_key_exists($componentId, $pages[$locale])) {
+                    unset($pages[$locale][$componentId]);
+                    $changes++;
+                }
+            }
+        }
+
+        return $changes;
     }
 
     /** @param array<string,mixed>|null $presentationV1 @return list<array{key:string,text:string}> */
@@ -224,8 +286,12 @@ final class CareerPresentationV2Compiler
         return $result;
     }
 
-    /** @param array<string,mixed>|null $presentationV1 @return list<array{key:string,label:string,value:string,source_label:?string}> */
-    private function stats(?array $presentationV1, string $locale): array
+    /**
+     * @param  array<string,mixed>|null  $presentationV1
+     * @param  array<string,mixed>  $page
+     * @return list<array{key:string,label:string,value:string,source_label:?string}>
+     */
+    private function stats(?array $presentationV1, string $locale, string $slug, array $page): array
     {
         $labels = [
             'en' => [
@@ -251,6 +317,9 @@ final class CareerPresentationV2Compiler
         foreach ($stats as $stat) {
             $key = is_array($stat) ? $this->string($stat['key'] ?? null) : null;
             $value = is_array($stat) ? $this->string($stat['value'] ?? null) : null;
+            if ($slug === 'accountants-and-auditors' && $key === 'ai_exposure') {
+                continue;
+            }
             if ($key === null || $value === null || ! isset($labels[$locale][$key])) {
                 continue;
             }
@@ -265,11 +334,44 @@ final class CareerPresentationV2Compiler
             ];
         }
 
+        if ($slug === 'accountants-and-auditors') {
+            $chinaWage = $this->accountantsChinaWageStat($page, $locale);
+            if ($chinaWage !== null) {
+                $result[] = $chinaWage;
+            }
+        }
+
         return $result;
     }
 
+    /**
+     * @param  array<string,mixed>  $page
+     * @return array{key:string,label:string,value:string,source_label:string}|null
+     */
+    private function accountantsChinaWageStat(array $page, string $locale): ?array
+    {
+        $rows = data_get($page, 'career_snapshot_primary_locale.salary.china_salary_table');
+        $national = is_array($rows) ? ($rows[0] ?? null) : null;
+        $description = is_array($national) ? $this->string($national['月薪参考'] ?? null) : null;
+        if ($description === null
+            || (! str_contains($description, '7.85 万元') && ! str_contains($description, '¥78,500'))) {
+            return null;
+        }
+
+        return [
+            'key' => 'china_median_pay',
+            'label' => $locale === 'en'
+                ? 'China related-field median annual wage'
+                : '中国相关职业年工资中位数',
+            'value' => '¥78,500',
+            'source_label' => $locale === 'en'
+                ? 'MOHRSS 2024 enterprise wage survey'
+                : '人社部 2024 企业薪酬调查',
+        ];
+    }
+
     /** @param array<string,mixed>|null $presentationV1 @return array<string,mixed>|null */
-    private function aiExposure(?array $presentationV1, string $locale): ?array
+    private function aiExposure(?array $presentationV1, string $locale, string $slug): ?array
     {
         $source = data_get($presentationV1, 'hero.ai_exposure');
         $value = is_array($source) ? ($source['value'] ?? null) : null;
@@ -281,7 +383,9 @@ final class CareerPresentationV2Compiler
             'value' => $value,
             'scale' => 10,
             'display_value' => $value.'/10',
-            'label' => $locale === 'en' ? 'AI task exposure' : 'AI 任务暴露',
+            'label' => $slug === 'accountants-and-auditors'
+                ? ($locale === 'en' ? 'AI impact level' : 'AI影响程度')
+                : ($locale === 'en' ? 'AI task exposure' : 'AI 任务暴露'),
             'note' => $locale === 'en'
                 ? 'Task exposure describes the range of activities AI may affect; it is not an automation rate or job-loss probability.'
                 : '任务暴露表示 AI 可能影响的工作活动范围，不等于实际自动化率或岗位消失概率。',

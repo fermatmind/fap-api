@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Domain\Career\Compilation\CareerContentV3Projector;
+use App\Domain\Career\Display\CareerContentV3Contract;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Display\CareerPresentationV1Contract;
 use App\Domain\Career\Display\CareerPresentationV2Contract;
@@ -70,6 +72,7 @@ final class CareerJobDisplaySurfaceBuilder
 
     public function __construct(
         private readonly CareerLocaleIntegrityGate $localeIntegrityGate,
+        private readonly CareerContentV3Projector $contentV3Projector,
     ) {}
 
     /**
@@ -170,8 +173,20 @@ final class CareerJobDisplaySurfaceBuilder
             }
             $presentationV2 = $this->stripForbiddenKeys($presentationV2);
         }
+        try {
+            $contentV3 = $this->contentV3Projector->project(
+                $canonicalSlug,
+                $this->publicLocale($normalizedLocale),
+                $pageContent,
+                is_array($presentationV2) ? $presentationV2 : null,
+                is_array($sources) ? $sources : [],
+            );
+            CareerContentV3Contract::assert($contentV3);
+        } catch (\Throwable) {
+            $contentV3 = null;
+        }
 
-        if ($this->containsForbiddenPublicKey([$page, $componentOrder, $sources, $structuredData, $implementationContract, $claimPermissions, $presentation, $presentationV2])) {
+        if ($this->containsForbiddenPublicKey([$page, $componentOrder, $sources, $structuredData, $implementationContract, $claimPermissions, $presentation, $presentationV2, $contentV3])) {
             return null;
         }
 
@@ -194,6 +209,9 @@ final class CareerJobDisplaySurfaceBuilder
         }
         if (is_array($presentationV2)) {
             $surface['presentation_v2'] = $presentationV2;
+        }
+        if (is_array($contentV3)) {
+            $surface['content_v3'] = $contentV3;
         }
 
         return $surface;

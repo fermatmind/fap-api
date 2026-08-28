@@ -52,7 +52,7 @@ final class CareerTenBlockCurrentPackageCompilerTest extends TestCase
 
             $this->artisan('career:ten-block-current-package-compile', [
                 '--output-root' => $output,
-                '--accountants-boundary-notice' => true,
+                '--presentation-v2' => true,
             ])->assertSuccessful();
 
             self::assertFileExists($output.'/assets.jsonl');
@@ -110,45 +110,14 @@ final class CareerTenBlockCurrentPackageCompilerTest extends TestCase
         }
     }
 
-    public function test_it_derives_accountants_boundary_notices_from_same_locale_published_authority_only(): void
+    public function test_accountants_boundary_notice_is_not_published(): void
     {
         $package = app(CareerCurrentAuthorityPackage::class)->load(base_path());
-        $compiler = app(CareerTenBlockCurrentPackageCompiler::class);
-        $pages = $package['rows']['accountants-and-auditors']['page_payload_json']['page'];
-        $controlHashes = [];
-        foreach ([
-            'health-educators',
-            'dancers',
-            'forging-machine-setters-operators-and-tenders-metal-and-plastic',
-            'veterinarians',
-            'preventive-medicine-physicians',
-        ] as $slug) {
-            $controlHashes[$slug] = CareerCurrentAuthorityPackage::hashValue($package['rows'][$slug]);
-        }
-        unset($package);
+        $row = $package['rows']['accountants-and-auditors'];
 
-        $notices = $compiler->deriveAccountantsBoundaryNotices($pages);
-        $first = $compiler->compileAccountantsBoundaryNoticeProjection(base_path());
-        $firstAssetsSha256 = hash('sha256', $first['assets_bytes']);
-        $firstReceipt = $first['receipt'];
-        $firstPackageDiff = $first['package_diff'];
-        [$accountants, $rowHashes] = $this->accountantsAndRowHashes($first['assets_bytes']);
-        unset($first);
-        $second = $compiler->compileAccountantsBoundaryNoticeProjection(base_path());
-
-        self::assertSame($pages['en']['fermat_decision_card']['caveat'], $notices['en'][0]);
-        self::assertSame($pages['en']['boundary_notice'][0], $notices['en'][1]);
-        self::assertSame($pages['zh']['fermat_decision_card']['caveat'], $notices['zh'][0]);
-        self::assertSame($pages['zh']['boundary_notice'][0], $notices['zh'][1]);
-        self::assertCount(2, $accountants['page_payload_json']['page']['en']['boundary_notice']);
-        self::assertCount(2, $accountants['page_payload_json']['page']['zh']['boundary_notice']);
-        self::assertContains($firstPackageDiff['changed_slugs'], [[], ['accountants-and-auditors']]);
-        self::assertContains($firstPackageDiff['changed_row_count'], [0, 1]);
-        self::assertContains($firstPackageDiff['public_changed_locale_page_count'], [0, 1, 2]);
-        self::assertSame($firstAssetsSha256, hash('sha256', $second['assets_bytes']));
-        self::assertSame($firstReceipt, $second['receipt']);
-        foreach ($controlHashes as $slug => $hash) {
-            self::assertSame($hash, $rowHashes[$slug]);
+        self::assertNotContains('boundary_notice', $row['component_order_json']);
+        foreach (['en', 'zh'] as $locale) {
+            self::assertArrayNotHasKey('boundary_notice', $row['page_payload_json']['page'][$locale]);
         }
     }
 

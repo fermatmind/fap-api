@@ -132,7 +132,10 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             ->assertJsonPath('display_surface_v1.page.content.onet_structured_fields_block.availability', 'published')
             ->assertJsonPath('display_surface_v1.presentation_v2.contract_version', 'career.detail.presentation.v2')
             ->assertJsonPath('display_surface_v1.presentation_v2.locale', 'zh-CN')
-            ->assertJsonPath('display_surface_v1.presentation_v2.groups.0.content_state', 'enhanced');
+            ->assertJsonPath('display_surface_v1.presentation_v2.groups.0.content_state', 'enhanced')
+            ->assertJsonPath('display_surface_v1.content_v3.contract_version', 'career.detail.content.v3')
+            ->assertJsonPath('display_surface_v1.content_v3.locale', 'zh-CN')
+            ->assertJsonPath('display_surface_v1.content_v3.content_state', 'enhanced');
 
         $this->assertSame(
             $row['component_order_json'],
@@ -142,7 +145,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             ['qa3', 'qa2', 'qa1'],
             array_column($response->json('display_surface_v1.page.content.career_quick_answers_block.items'), 'key'),
         );
-        $this->assertCount(9, $response->json('display_surface_v1.structured_data_from_visible_content.faq_page.zh.mainEntity'));
+        $this->assertCount(10, $response->json('display_surface_v1.structured_data_from_visible_content.faq_page.zh.mainEntity'));
         $this->assertFalse(
             $response->json('display_surface_v1.structured_data_from_visible_content.schema_rules.occupation_schema_generated_locally'),
         );
@@ -155,7 +158,10 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             ->assertOk()
             ->assertJsonPath('display_surface_v1.presentation_v2.contract_version', 'career.detail.presentation.v2')
             ->assertJsonPath('display_surface_v1.presentation_v2.locale', 'en')
-            ->assertJsonPath('display_surface_v1.presentation_v2.groups.0.content_state', 'enhanced');
+            ->assertJsonPath('display_surface_v1.presentation_v2.groups.0.content_state', 'enhanced')
+            ->assertJsonPath('display_surface_v1.content_v3.contract_version', 'career.detail.content.v3')
+            ->assertJsonPath('display_surface_v1.content_v3.locale', 'en')
+            ->assertJsonPath('display_surface_v1.content_v3.content_state', 'enhanced');
     }
 
     public function test_it_adds_display_surface_for_selected_second_pilot_assets(): void

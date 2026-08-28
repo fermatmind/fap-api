@@ -88,6 +88,9 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $this->assertTrue($surface['claim_permissions']['allow_ai_strategy']);
         $this->assertTrue($surface['claim_permissions']['allow_salary_comparison']);
         $this->assertTrue($surface['claim_permissions']['allow_market_signal']);
+        $this->assertSame('career.detail.content.v3', $surface['content_v3']['contract_version']);
+        $this->assertSame('zh-CN', $surface['content_v3']['locale']);
+        $this->assertSame('legacy', $surface['content_v3']['content_state']);
         $this->assertFalse($surface['claim_permissions']['allow_local_proxy_wage']);
         $this->assertSame('official', $surface['claim_permissions']['evidence_basis']['salary']);
         $this->assertSame('central_score', $surface['claim_permissions']['evidence_basis']['ai_exposure']);

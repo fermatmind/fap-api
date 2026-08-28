@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Career\Display;
 
+use App\Domain\Career\Compilation\CareerContentV3Projector;
 use App\Services\Career\Review\CareerJobDetailReaderSafeReviewProjector;
 use JsonException;
 use RuntimeException;
@@ -91,6 +92,7 @@ final class CareerCurrentAuthorityPackage
     private const OPTIONAL_DISPLAY_OWNED_PUBLIC_FIELDS = [
         'presentation_v1',
         'presentation_v2',
+        'content_v3',
     ];
 
     private const FORBIDDEN_PUBLIC_KEYS = [
@@ -716,6 +718,13 @@ final class CareerCurrentAuthorityPackage
         }
         CareerPresentationV2Contract::assert($presentationV2, (array) $row['component_order_json']);
         $projection['presentation_v2'] = $this->stripForbiddenKeys($presentationV2);
+        $projection['content_v3'] = (new CareerContentV3Projector)->project(
+            (string) $row['canonical_slug'],
+            $normalizedLocale === 'en' ? 'en' : 'zh-CN',
+            $projection['page']['content'],
+            $projection['presentation_v2'],
+            $projection['sources'],
+        );
 
         return $projection;
     }
