@@ -50373,7 +50373,10 @@ prs:
     base: main
     branch: codex/seo-platform-10-c-career-adapter
     title: "feat(seo): record Career Current material decisions"
-    status: in_progress
+    status: merged
+    pr: 3829
+    head_sha: 3596e96fd84f8d2447369886351cb375fd10f6c8
+    merge_commit_sha: 09dccf442068923e2f9cf4373671face436dbbfe
     depends_on: [SEO-PLATFORM-10-B]
     train_scope: seo_platform_10_career_current_material_adapter
     risk_level: controlled_career_content_authority_projection
@@ -50394,6 +50397,42 @@ prs:
     validation:
       - focused Career Current publisher transaction, locale isolation, non-material context, compensation, LKG boundary, and idempotent replay tests
       - scoped Pint and PHP syntax; Career Current package contract checks; train JSON/YAML parsing; exact-scope validation; git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false
+
+  - id: SEO-PLATFORM-10-D
+    repo: fap-api
+    base: main
+    branch: codex/seo-platform-10-d-personality-adapter
+    title: "feat(seo): record Personality material decisions"
+    status: in_progress
+    pr: 3830
+    head_sha: 32adb412a2e2d4f04610a2b8725b6e5d64dd2424
+    depends_on: [SEO-PLATFORM-10-C]
+    train_scope: seo_platform_10_personality_material_adapter
+    risk_level: controlled_personality_public_authority_projection
+    scope:
+      - Derive deterministic material fingerprints from reviewed published MBTI profile revisions and Big Five or Enneagram public asset revisions.
+      - Record append-only decisions only after the existing exact-package transaction has finalized the complete public projection, with rollback and unknown-legacy HOLD traceability.
+      - Keep source hashes as lineage only and preserve locale, canonical identity, slug, alias, public authority, and private-result boundaries.
+    do_not:
+      - Change public Personality content, identity, locale, slug, aliases, indexability, sitemap, llms, cache authority, or discoverability behavior.
+      - Read or persist private results, reports, attempts, scores, orders, users, tokens, raw public payloads, or reviewer identity.
+      - Backfill legacy Personality rows, publish CMS content, mutate production, or trigger Search or deployment workflows.
+    allowed_paths:
+      - backend/app/Services/Cms/PersonalityMaterialDecisionService.php
+      - backend/app/Services/ContentPromotion/Adapters/PersonalityCmsPromotionAdapter.php
+      - backend/app/Services/ContentPromotion/PersonalityCmsPromotionAuthority.php
+      - backend/app/Services/ContentPromotion/Top100FrozenCmsBatchAuthority.php
+      - backend/tests/Feature/SEO/PersonalityMaterialDecisionTest.php
+      - backend/tests/Unit/ContentPromotion/PersonalityCmsPromotionAdapterTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - focused reviewed revision, source-hash non-material, locale-safe MBTI, public-asset, private-result rejection, rollback, HOLD, and idempotency tests
+      - scoped Pint and PHP syntax; exact-package and TOP100 contract tests; train JSON/YAML parsing; exact-scope validation; git diff --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     production_write_execution: false
     production_workflow_dispatched: false

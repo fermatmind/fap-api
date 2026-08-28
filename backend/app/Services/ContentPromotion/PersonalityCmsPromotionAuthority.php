@@ -7,6 +7,7 @@ namespace App\Services\ContentPromotion;
 use App\Http\Controllers\API\V0_5\Cms\PersonalityPublicContentAssetController;
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
+use App\Services\Cms\PersonalityMaterialDecisionService;
 use App\Services\Cms\PersonalityPublicAssetReadModelCache;
 use DomainException;
 use Illuminate\Support\Facades\DB;
@@ -32,6 +33,7 @@ final class PersonalityCmsPromotionAuthority
         private readonly PersonalityPublicAssetReadModelCache $cache,
         private readonly PersonalityCmsPromotionReviewBinder $reviews,
         private readonly PersonalityPublicContentAssetController $payloads,
+        private readonly PersonalityMaterialDecisionService $materialDecisions,
     ) {}
 
     /** @return array{framework:string,targets:list<array<string,mixed>>,package_sha256:string} */
@@ -210,6 +212,11 @@ final class PersonalityCmsPromotionAuthority
                     throw new DomainException('personality_promotion_public_projection_parity_invalid');
                 }
                 $revision->forceFill(['workflow_state' => 'published'])->save();
+                $review = $revision->reviewEvidence()->first();
+                if (! $review instanceof \App\Models\PersonalityPublicContentAssetRevisionReview) {
+                    throw new DomainException('personality_promotion_review_evidence_invalid');
+                }
+                $this->materialDecisions->recordPublicAsset($asset, $revision, $review, now());
                 $changed++;
             }
 
@@ -329,6 +336,19 @@ final class PersonalityCmsPromotionAuthority
                 throw new DomainException('personality_promotion_cache_invalidation_failed');
             }
         }
+    }
+
+    public function recordCurrentMaterialDecision(PersonalityPublicContentAsset $asset, string $operation): void
+    {
+        $revision = PersonalityPublicContentAssetRevision::query()->lockForUpdate()->find($asset->published_revision_id);
+        $review = $revision?->reviewEvidence()->first();
+        if (! $revision instanceof PersonalityPublicContentAssetRevision
+            || ! $review instanceof \App\Models\PersonalityPublicContentAssetRevisionReview) {
+            $this->materialDecisions->recordLegacyRollbackHold($asset, now());
+
+            return;
+        }
+        $this->materialDecisions->recordPublicAsset($asset, $revision, $review, now(), $operation);
     }
 
     /** @return array<string,mixed> */

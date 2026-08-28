@@ -121,6 +121,8 @@ final class PersonalityCmsPromotionAdapter implements ExactPackagePromotionAdapt
                 $promotedRevision->forceFill([
                     'workflow_state' => (string) ($row['working_revision_workflow_state_before'] ?? PersonalityPublicContentAssetRevision::STATE_DRAFT),
                 ])->save();
+                $asset->refresh();
+                $this->authority->recordCurrentMaterialDecision($asset, 'rollback');
             }
         });
         $this->authority->invalidateTargets($package['targets']);
