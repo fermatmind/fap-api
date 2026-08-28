@@ -5356,6 +5356,306 @@
       "items": [
         {
           "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "应届生／转行者如何验证并入门：先选一个具体入口，再用可复核的工作样本证明能力。以下招聘观察来自 2026 年 1—6 月公开职位，共 40 条去重样本；财务／会计助理、应收应付或费用会计、外部审计助理、内审／稽核、税务助理各 8 条，覆盖北京、上海、广州、深圳、杭州和成都，并包含会计师事务所、企业、共享服务及专业服务雇主。",
+              "招聘样本事实：样本限定实习、校招、无需经验或 0—2 年经验岗位。只有某项要求在同类岗位样本中达到 30%，且覆盖至少三类雇主时，本页才称为“常见”；未达到时仅写“部分岗位可能要求”。列表页未披露的任务、技能或证书不计入频次。",
+              "使用边界：40 条样本用于识别入门岗位与招聘信号，不代表全国岗位占比，也不能替代目标城市、行业和雇主的最新职位说明。"
+            ]
+          },
+          "id": "accountant-entry-recruitment-sample",
+          "source_refs": [
+            "source-11",
+            "source-12",
+            "source-13",
+            "source-14",
+            "source-15"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-role-comparison",
+          "data": {
+            "column_keys": [
+              "role",
+              "initial_tasks",
+              "employer_evidence",
+              "no_experience_proof",
+              "distinction"
+            ],
+            "rows": [
+              [
+                "财务／会计助理",
+                "整理凭证与附件，协助录入、费用审核、基础对账和月结资料准备；具体授权范围由单位决定。",
+                "能把交易、凭证和记录对应起来，发现缺失资料时会标记并追问，工作文件可由他人复核。",
+                "提交 20 笔虚构交易分录、凭证索引和一份银行余额调节表。",
+                "最接近日常核算入口，先建立记录；不像审计助理那样以独立验证证据为核心。"
+              ],
+              [
+                "应收、应付或费用会计",
+                "核对发票、收付款、往来余额和费用单据，跟进未清项并协助关账。",
+                "能用 Excel 整理明细、定位差异、说明账龄或未清项，并保留处理依据。",
+                "提交一份往来对账表、差异原因清单和更正建议。",
+                "范围更聚焦于特定循环与高频核对，是进入总账或共享服务的常见起点之一。"
+              ],
+              [
+                "审计助理",
+                "在项目组指导下执行抽样或测试程序，索取并整理证据，编制底稿并跟进复核意见。",
+                "程序与风险能对应，证据有索引，异常会升级，底稿结论与附件一致。",
+                "提交一张简化审计底稿：目的、程序、样本、异常、证据索引和结论。",
+                "重点是独立验证与证据充分性，项目制、客户沟通和集中截止压力通常更强。"
+              ],
+              [
+                "内审助理／稽核助理",
+                "了解业务流程，协助控制测试、资料核验、问题记录和整改跟踪。",
+                "能把流程、风险、控制、证据和发现连接起来，并区分事实、判断与建议。",
+                "提交一个采购到付款流程图、三项控制测试和问题跟踪表。",
+                "面向组织内部治理和流程改进，覆盖运营与合规，不只检查财务报表。"
+              ],
+              [
+                "税务助理",
+                "整理申报资料和交易信息，协助基础税务计算、表单准备、政策检索与截止日期管理。",
+                "能定位适用规则、核对申报数据与账务记录，并清楚记录假设和待确认事项。",
+                "提交一份虚构申报资料核对清单、法规检索记录和差异说明。",
+                "更依赖税法、申报规则和时点；复杂交易与最终申报责任需要有经验人员复核。"
+              ]
+            ]
+          },
+          "id": "accountant-entry-role-comparison",
+          "source_refs": [
+            "source-11",
+            "source-12",
+            "source-13",
+            "source-14",
+            "source-15"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.employer-evidence",
+          "data": {
+            "column_keys": [
+              "capability",
+              "work_evidence",
+              "proof_method"
+            ],
+            "rows": [
+              [
+                "Excel 数据整理",
+                "字段与格式一致，查找和透视结果可复算，原始数据与输出分开保存。",
+                "用虚构明细完成清洗、XLOOKUP／INDEX-MATCH、透视汇总和抽样核对，并附操作说明。"
+              ],
+              [
+                "分录与分类",
+                "借贷方向、科目、金额、期间和依据一致，遇到不确定事项会记录假设。",
+                "完成 20 笔交易分录，并让复核者从编号追溯到合同、发票或付款证据。"
+              ],
+              [
+                "对账",
+                "能区分时间性差异、记录错误和证据缺口，不以强行调平代替调查。",
+                "制作银行余额调节表或往来对账表，逐项写明差异原因与处理状态。"
+              ],
+              [
+                "结账逻辑",
+                "理解截止、应计、摊销、重分类和复核顺序，知道哪些异常需要升级。",
+                "画出简化月结清单，标明输入、负责人、截止点、复核点和未决事项。"
+              ],
+              [
+                "底稿与证据索引",
+                "工作目的、执行程序、证据、异常与结论相互一致，第三人可以复核。",
+                "提交一张简化底稿，并用唯一编号连接样本、附件和结论。"
+              ],
+              [
+                "ERP／财务系统理解",
+                "知道主数据、凭证流、审批、权限、总账与子模块如何衔接，不声称未实际使用过的软件经验。",
+                "用流程图说明采购到付款或销售到收款如何进入总账，并标出控制点。"
+              ],
+              [
+                "异常分析",
+                "先确认事实和数据质量，再提出可能原因、影响与追加证据，而不是只报一个异常数字。",
+                "从样本中找出金额、期间、科目、授权或附件异常，形成异常清单。"
+              ],
+              [
+                "沟通与复核",
+                "追问资料时说明缺口和期限；收到复核意见后能定位修改，并保留版本差异。",
+                "写一封不超过 200 字的资料追问邮件，再根据复核意见提交第二版并列出改动。"
+              ]
+            ]
+          },
+          "id": "accountant-entry-employer-evidence",
+          "source_refs": [
+            "source-10",
+            "source-16",
+            "source-17"
+          ],
+          "type": "matrix"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-portfolio",
+          "data": {
+            "entries": [
+              {
+                "id": "portfolio-materials",
+                "values": [
+                  "准备一组完全虚构的材料",
+                  "20 笔交易、对应的合同摘要／发票／付款记录、银行流水和一页规则说明。不要使用真实公司、客户或个人数据。"
+                ]
+              },
+              {
+                "id": "portfolio-deliverables",
+                "values": [
+                  "完成五项交付物",
+                  "交易分录；银行余额调节或往来对账表；异常清单；简化审计底稿；200—300 字书面结论。"
+                ]
+              },
+              {
+                "id": "portfolio-conclusion",
+                "values": [
+                  "结论必须能回答四件事",
+                  "发现了什么事实；使用了什么证据；可能造成什么影响；建议如何处理或追加什么资料。"
+                ]
+              },
+              {
+                "id": "portfolio-review",
+                "values": [
+                  "用复核结果评价作品",
+                  "检查准确性、证据可追溯性、假设记录、判断解释和第二次修改是否减少错误。课程结业证书不能代替这些工作证据。"
+                ]
+              }
+            ]
+          },
+          "id": "accountant-entry-portfolio",
+          "source_refs": [
+            "source-10"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.interview-probation",
+          "data": {
+            "column_keys": [
+              "stage",
+              "possible_check",
+              "observed_evidence",
+              "boundary"
+            ],
+            "rows": [
+              [
+                "招聘流程",
+                "部分事务所公开流程包含在线测试、群面、评估面试或合伙人面试。",
+                "是否能在限定时间理解材料、表达依据、协作并回应追问。",
+                "这是雇主公开流程示例，不代表所有企业或岗位。"
+              ],
+              [
+                "岗位作业／笔试",
+                "Excel 整理、基础分录、对账差异、截止情景或审计证据判断可能被用于岗位相关考察。",
+                "答案是否准确、步骤是否可复核、异常是否被解释、错误是否会主动更正。",
+                "属于基于核心任务的编辑准备建议；企业是否采用及题目难度以通知为准。"
+              ],
+              [
+                "情景沟通",
+                "如何向业务人员追问缺失资料、如何升级重大异常、发现自己做错后如何处理。",
+                "是否区分事实与判断，说明影响和期限，并能接受复核与修改。",
+                "不能用背诵的“标准答案”替代真实行为证据。"
+              ],
+              [
+                "试用期",
+                "准确率、按时交付、工作记录可复核、修改速度、沟通、保密和权限遵守。",
+                "同类错误是否减少，能否按优先级完成任务，并在证据不足时及时求助。",
+                "观察重点会随岗位和单位而变；忙季可能增加截止压力，但没有统一加班时数。"
+              ]
+            ]
+          },
+          "id": "accountant-entry-interview-probation",
+          "source_refs": [
+            "source-16",
+            "source-17"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "entry-trial-day-1",
+                "values": [
+                  "第 1 天｜选择入口",
+                  "比较企业会计、外部审计和内部审计，选一个方向；写下你想验证的两项疑问。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-2",
+                "values": [
+                  "第 2 天｜准备材料",
+                  "准备 20 笔虚构交易、模拟银行流水、附件和规则说明；不要使用真实敏感数据。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-3",
+                "values": [
+                  "第 3 天｜完成记录",
+                  "做分录与分类，给每笔交易和证据设置可追溯编号。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-4",
+                "values": [
+                  "第 4 天｜对账查异",
+                  "完成余额调节或往来对账，找出金额、期间、科目、授权或附件异常。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-5",
+                "values": [
+                  "第 5 天｜形成底稿",
+                  "写清目的、程序、证据、异常、影响、建议和结论。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-6",
+                "values": [
+                  "第 6 天｜接受复核",
+                  "请从业者、教师或有经验同学检查准确性、证据和表达；记录每条意见。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-7",
+                "values": [
+                  "第 7 天｜修改并决定",
+                  "提交第二版，比较错误、耗时和精力感受，再决定继续验证哪个方向或暂时排除。"
+                ]
+              }
+            ]
+          },
+          "id": "accountant-entry-seven-day-trial",
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "第二次完成时，同类错误是否减少？",
+              "你是否愿意反复核对并记录证据，而不是只追求尽快做完？",
+              "你能否清楚解释自己的判断、假设和仍不确定的地方？",
+              "面对规则和截止日期时，你是否能够保持稳定并及时升级问题？",
+              "这种任务带来的是可接受的疲劳，还是持续而强烈的排斥？",
+              "你更愿意继续验证企业会计、外部审计、内部审计，还是转向财务分析等方向？",
+              "一次体验不能诊断职业适合度。只有多次任务表现、真实岗位信息和从业者反馈相互一致时，才把它视为较强信号。"
+            ]
+          },
+          "id": "accountant-entry-seven-day-decision",
+          "type": "list"
+        },
+        {
+          "availability": "available",
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
@@ -7576,6 +7876,148 @@
                 "id": "source-10",
                 "name": "onet_accountants",
                 "url": "https://www.onetonline.org/link/details/13-2011.00"
+              },
+              {
+                "accessed_at": "2026-08-29",
+                "details": [
+                  "FA01｜北京｜中国国际人才开发中心｜国企财务专员（2026 应届毕业生）｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing-cyq/173398432.html",
+                  "FA02｜北京｜北京产权交易所｜财务实习生｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing-xcq/130528052.html",
+                  "FA03｜北京｜北京便宜坊烤鸭集团｜应届毕业生招聘－财务助理｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing/173234029.html",
+                  "FA04｜北京｜北京金风科创风电设备｜财务实习生｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing/173206136.html",
+                  "FA05｜北京｜民航快递｜财务实习岗｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing-syq/173169238.html",
+                  "FA06｜北京｜中外运空运｜财务部实习生｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing-syq/173113072.html",
+                  "FA07｜北京｜光明网传媒｜财务实习生｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing/172940797.html",
+                  "FA08｜北京｜北京佳之兴商业｜财务方向管理培训生｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing-cyq/133620934.html"
+                ],
+                "evidence_type": "招聘平台公开职位样本",
+                "id": "source-11",
+                "limitation": "样本只覆盖公开可访问的 2026 年 2 月列表及所选职位；职位可能下线，不能估计全国岗位占比。列表页未披露字段不计入频次。",
+                "market": "中国大陆｜北京",
+                "name": "recruitment_sample_finance_assistant_2026",
+                "period": "职位列表 2026 年 2 月；访问 2026-08-29",
+                "publisher": "前程无忧",
+                "scope": "财务／会计助理类 8 条；实习或校招；大型企业、国有企业及专业服务雇主",
+                "url": "https://mwenku.51job.com/beijing_jobs/202602/caiwuzhuanyuan/"
+              },
+              {
+                "accessed_at": "2026-08-29",
+                "details": [
+                  "AR01｜上海｜上海中翊日化｜往来会计｜1 年及以上｜本科｜https://msearch.51job.com/jobs/shanghai-fxq/168355190.html",
+                  "AR02｜上海｜上海格思信息技术｜应收会计｜无需经验｜硕士｜https://msearch.51job.com/jobs/shanghai-pdxq/173001282.html",
+                  "AR03｜上海｜上海格思信息技术｜应付会计｜无需经验｜硕士｜https://msearch.51job.com/jobs/shanghai-pdxq/173001241.html",
+                  "AR04｜上海｜上海臻臣化妆品｜费用会计｜1—2 年｜本科｜https://msearch.51job.com/jobs/shanghai-fxq/172937911.html",
+                  "AR05｜上海｜辉门（中国）｜会计｜无需经验｜本科｜https://msearch.51job.com/jobs/shanghai-pdxq/172927815.html",
+                  "AR06｜上海｜上海惠弘进出口｜财务助理／结算专员｜1 年及以上｜大专｜https://msearch.51job.com/jobs/shanghai-ypq/153028707.html",
+                  "AR07｜上海｜华福证券｜托管部估值核算岗｜2 年｜硕士｜https://msearch.51job.com/jobs/shanghai-pdxq/138651922.html",
+                  "AR08｜上海｜东方海外货柜航运（中国）｜财务控制中心实习生｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/shanghai-hkq/172607703.html"
+                ],
+                "evidence_type": "招聘平台公开职位样本",
+                "id": "source-12",
+                "limitation": "样本只覆盖公开可访问的 2026 年 4 月列表及所选职位；包含应收、应付、费用、结算和估值核算入口，不能视为单一岗位的市场分布。",
+                "market": "中国大陆｜上海",
+                "name": "recruitment_sample_ar_ap_expense_2026",
+                "period": "职位列表 2026 年 4 月；访问 2026-08-29",
+                "publisher": "前程无忧",
+                "scope": "应收、应付、费用或结算类 8 条；实习、无需经验或 1—2 年经验；企业、证券及共享服务场景",
+                "url": "https://mwenku.51job.com/shanghai_jobs/202604/jisuankuaiji/"
+              },
+              {
+                "accessed_at": "2026-08-29",
+                "details": [
+                  "EA01｜北京｜中准会计师事务所｜审计助理｜无需经验｜本科｜https://msearch.51job.com/jobs/beijing-hdq/140167901.html",
+                  "EA02｜北京｜上海中新石林会计师事务所｜审计助理｜无需经验｜本科｜https://msearch.51job.com/jobs/beijing-cyq/167299721.html",
+                  "EA03｜北京｜北京国富会计师事务所｜审计实习生｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing-hdq/173337696.html",
+                  "EA04｜北京｜天职国际会计师事务所｜财务审计助理｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing/172681824.html",
+                  "EA05｜北京｜中逸会计师事务所｜审计实习生｜在校生／应届生｜大专｜https://msearch.51job.com/jobs/beijing-dcq/171865779.html",
+                  "EA06｜北京｜立信会计师事务所北京分所｜审计实习生｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing-sjsq/119684787.html",
+                  "EA07｜北京｜信永中和北京总部｜审计助理｜无需经验｜本科｜https://msearch.51job.com/jobs/beijing-dcq/169114941.html",
+                  "EA08｜北京｜普华永道中天北京分所｜数字化审计及鉴证服务顾问｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing-cyq/173421429.html"
+                ],
+                "evidence_type": "招聘平台公开职位样本",
+                "id": "source-13",
+                "limitation": "样本集中于北京事务所公开岗位，不能外推事务所规模、业务线或其他地区的招聘门槛。",
+                "market": "中国大陆｜北京",
+                "name": "recruitment_sample_external_audit_assistant_2026",
+                "period": "职位列表 2026 年 5 月；访问 2026-08-29",
+                "publisher": "前程无忧",
+                "scope": "外部审计助理／实习类 8 条；实习、校招或无需经验；大中型及本地会计师事务所",
+                "url": "https://mwenku.51job.com/beijing_jobs/202605/shenjizhuli/p1/"
+              },
+              {
+                "accessed_at": "2026-08-29",
+                "details": [
+                  "IA01｜广州｜广州资源环保科技｜工程审计实习生｜无需经验｜本科｜https://msearch.51job.com/jobs/guangzhou-yxq/172900436.html",
+                  "IA02｜广州｜广州越秀企业集团｜IT 审计实习生｜在校生／应届生｜硕士｜https://msearch.51job.com/jobs/guangzhou/173290930.html",
+                  "IA03｜广州｜中电科普天科技｜审计专员（校园招聘）｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/guangzhou-hdq/173254150.html",
+                  "IA04｜广州｜大参林医药集团｜集团管培生（审计类）｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/guangzhou-lwq/173245344.html",
+                  "IA05｜广州｜广州工业投资控股集团｜审计岗｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/guangzhou-lwq/172930948.html",
+                  "IA06｜广州｜广州华科环保工程｜审计法务岗｜无需经验｜本科｜https://msearch.51job.com/jobs/guangzhou-yxq/171483989.html",
+                  "IA07｜广州｜欧派家居集团｜内部审计｜1 年及以上｜本科｜https://msearch.51job.com/jobs/guangzhou/171173519.html",
+                  "IA08｜杭州｜万向集团｜内控审计校招岗位｜在校生／应届生｜学历以职位页为准｜https://msearch.51job.com/jobs/hangzhou/173150454.html"
+                ],
+                "evidence_type": "招聘平台公开职位样本",
+                "id": "source-14",
+                "limitation": "“内审／稽核”样本包含内部审计、工程审计、稽核与审计法务等相邻入口，职责并不完全相同；未披露字段不作推断。",
+                "market": "中国大陆｜广州、杭州",
+                "name": "recruitment_sample_internal_audit_assistant_2026",
+                "period": "职位列表 2026 年 3 月和 6 月；访问 2026-08-29",
+                "publisher": "前程无忧",
+                "scope": "内审、稽核或控制类 8 条；校招、无需经验或 1—2 年经验；企业与金融机构",
+                "url": "https://mwenku.51job.com/guangzhou_jobs/202603/shenjizhuli/"
+              },
+              {
+                "accessed_at": "2026-08-29",
+                "details": [
+                  "TA01｜成都｜毕马威｜转让定价服务助理｜无需经验｜学历以职位页为准｜https://jobs.51job.com/all/151279496.html",
+                  "TA02｜成都｜毕马威｜美国税务合规服务助理｜无需经验｜学历以职位页为准｜https://jobs.51job.com/all/168680422.html",
+                  "TA03｜成都｜普华永道｜美国税务专员｜无需经验｜学历以职位页为准｜https://jobs.51job.com/all/169934091.html",
+                  "TA04｜成都｜立信四川分所｜税务审计校招岗位｜在校生／应届生｜学历以职位页为准｜https://jobs.51job.com/all/167684494.html",
+                  "TA05｜上海｜安永｜税务方向初级岗位｜无需经验｜学历以职位页为准｜https://msearch.51job.com/jobs/shanghai-pdxq/173036619.html",
+                  "TA06｜上海｜Votalent｜税务咨询实习生｜在校生／应届生｜学历以职位页为准｜https://msearch.51job.com/jobs/shanghai-hkq/139284351.html",
+                  "TA07｜深圳｜立信深圳分所｜税务审计校招岗位｜在校生／应届生｜学历以职位页为准｜https://jobs.51job.com/all/167684493.html",
+                  "TA08｜深圳｜安永｜个人税务顾问初级岗位｜无需经验｜学历以职位页为准｜https://msearch.51job.com/jobs/shenzhen-luohuqu/172579068.html"
+                ],
+                "evidence_type": "招聘平台公开职位样本",
+                "id": "source-15",
+                "limitation": "税务样本包含合规、转让定价、个人税务与税务审计等不同方向；具体任务和专业要求必须回到职位原文核验。",
+                "market": "中国大陆｜成都、上海、深圳",
+                "name": "recruitment_sample_tax_assistant_2026",
+                "period": "职位列表 2026 年 1 月；访问 2026-08-29",
+                "publisher": "前程无忧",
+                "scope": "税务助理／实习类 8 条；实习、校招或无需经验；国际事务所、本地事务所及专业服务雇主",
+                "url": "https://mwenku.51job.com/chengdu_jobs/202601/shuiwuzhuanyuan/"
+              },
+              {
+                "accessed_at": "2026-08-29",
+                "details": [
+                  "中国大陆 2027 校园招聘流程包括在线申请、笔试、群面和合伙人面试。",
+                  "页面把已通过部分或全部 CPA 科目、英语能力和相关事务所实习列为加分项，而非所有入门岗位的法定条件。"
+                ],
+                "evidence_type": "雇主官方校园招聘说明",
+                "id": "source-16",
+                "limitation": "只代表致同当前校园招聘流程与偏好，不能外推所有会计师事务所。",
+                "market": "中国大陆",
+                "name": "grant_thornton_campus_recruitment_2027",
+                "period": "2027 届校园招聘；访问 2026-08-29",
+                "publisher": "致同中国",
+                "scope": "校园招聘流程、学历和加分项",
+                "url": "https://www.grantthornton.cn/campus-recruitment"
+              },
+              {
+                "accessed_at": "2026-08-29",
+                "details": [
+                  "毕业生岗位覆盖审计、税务和咨询；公开流程包含在线申请、在线测试和评估面试。",
+                  "不同业务线和批次要求可能变化，应以具体岗位通知为准。"
+                ],
+                "evidence_type": "雇主官方毕业生招聘说明",
+                "id": "source-17",
+                "limitation": "只代表毕马威中国当前毕业生项目，不代表其他雇主或所有岗位。",
+                "market": "中国大陆",
+                "name": "kpmg_china_graduate_applications",
+                "period": "2026 招聘周期；访问 2026-08-29",
+                "publisher": "毕马威中国",
+                "scope": "毕业生岗位范围与招聘流程",
+                "url": "https://kpmg.com/cn/zh/careers/campus/graduate-applications.html"
               }
             ]
           },
@@ -7772,7 +8214,7 @@
     ]
   },
   "locale": "zh-CN",
-  "source_content_sha256": "ad37a953ebd44bdff092409303d98f818df759cdeda8133ec4e9081b36acc7c5",
+  "source_content_sha256": "a0ab0706fd513871f34421547af7cfe10d16e66ac8c66d36b5ac0e9ba9e39c6a",
   "subject": {
     "canonical_slug": "accountants-and-auditors",
     "name": "会计师和审计师",
