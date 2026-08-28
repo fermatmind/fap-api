@@ -2547,8 +2547,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
 
     private function isEncodedJobDetailPayload(mixed $stored): bool
     {
-        return is_array($stored)
-            && ($stored['codec'] ?? null) === CareerJobDetailCanonicalCacheReader::CODEC_VERSION;
+        return $this->canonicalJobDetailReader->isSupportedEnvelope($stored);
     }
 
     private function jobDetailExposureProjectionVersionKey(string $slug, string $publicLocale, string $version): string

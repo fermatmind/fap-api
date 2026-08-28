@@ -22,6 +22,8 @@ final class CareerJobDetailCanonicalCacheReaderTest extends TestCase
         $gzip = $reader->read($reader->encode($compact), 'accountants-and-auditors', 'en');
         $legacy = $reader->read($compact, 'accountants-and-auditors', 'en');
 
+        self::assertTrue($reader->isSupportedEnvelope($reader->encode($compact)));
+        self::assertFalse($reader->isSupportedEnvelope($compact));
         self::assertSame($payload, $gzip);
         self::assertSame($gzip, $legacy);
         self::assertSame('enhanced', data_get($gzip, 'display_surface_v1.content_v3.content_state'));

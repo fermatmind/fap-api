@@ -94,6 +94,19 @@ test("requires publisher parity for every centralized Career publisher boundary"
   }
 });
 
+test("routes Career publisher cache boundaries through parity instead of the generic cache suite", () => {
+  for (const path of [
+    "backend/app/Domain/Career/Display/CareerCurrentAuthorityCacheGateway.php",
+    "backend/app/Domain/Career/Display/CareerJobDetailCanonicalCacheReader.php",
+    "backend/app/Services/Career/PublicCareerAuthorityResponseCache.php",
+  ]) {
+    const result = classifyPaths([path]);
+    assert.equal(result.operations.publisher_required, true, path);
+    assert.equal(result.flags.cache_runtime_projection, false, path);
+    assert.equal(result.flags.seo_discoverability, false, path);
+  }
+});
+
 test("does not require publisher parity for adjacent unrelated Career paths", () => {
   for (const path of [
     "backend/app/Services/Career/CareerRecommendationCompiler.php",

@@ -84,6 +84,12 @@ final class CareerJobDetailCanonicalCacheReader
         return is_array($payload) && ! array_is_list($payload) ? $payload : null;
     }
 
+    public function isSupportedEnvelope(mixed $stored): bool
+    {
+        return is_array($stored)
+            && ($stored['codec'] ?? null) === self::CODEC_VERSION;
+    }
+
     /** @return array<string,mixed>|null */
     public function read(mixed $stored, string $slug, string $locale): ?array
     {

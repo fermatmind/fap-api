@@ -78,10 +78,7 @@ export function classifyPaths(inputPaths) {
       /(^|\/)(?:Commerce|Payments?|Billing|Entitlement)(\/|\.)/i,
       /(^|\/)(?:payments?|commerce|billing|entitlements?)(?:\.php|\.json|\/)/i,
     ]);
-    const careerCurrentManagedCache = [
-      "backend/app/Domain/Career/Display/CareerCurrentAuthorityCacheGateway.php",
-      "backend/app/Services/Career/PublicCareerAuthorityResponseCache.php",
-    ].includes(path);
+    const careerCurrentManagedCache = isCareerPublisherBoundary(path);
     const cache = !careerCurrentManagedCache && matches(path, [
       /(^|\/)(?:Cache|Redis|Projection)(\/|\.)/,
       /(?:cache|redis|projection|materiali[sz]ed|active_pointer|lkg)/i,
@@ -102,7 +99,7 @@ export function classifyPaths(inputPaths) {
       /^backend\/scripts\/seo\/gsc_restricted_connect_proxy\.mjs$/,
       /^backend\/database\/migrations\/seo_intel\/\d{4}_\d{2}_\d{2}_\d+_expand_gsc_read_models\.php$/,
     ]);
-    const seo = !retiredEqMirror && !opsUi && !opsExecutionMigration && !opsReadonlyGsc && matches(path, [
+    const seo = !careerCurrentManagedCache && !retiredEqMirror && !opsUi && !opsExecutionMigration && !opsReadonlyGsc && matches(path, [
       /(?:^|\/)(?:seo|search|discoverability|sitemap|robots|llms)(?:\/|\.|-|_)/i,
       /(?:canonical|hreflang|indexnow|indexability|gsc)/i,
       /(?:Seo|Search|Discoverability|Sitemap|Robots|Llms)/,
