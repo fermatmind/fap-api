@@ -312,7 +312,7 @@ final class CareerContentV3Projector
         return $result;
     }
 
-    /** @param array<mixed> $value @return array<mixed> */
+    /** Keep projection identity independent of PHP, JSON, and MySQL object-key iteration order. @param array<mixed> $value @return array<mixed> */
     private function orderedMap(array $value): array
     {
         if (! array_is_list($value)) {

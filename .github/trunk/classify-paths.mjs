@@ -22,8 +22,13 @@ export function classifyPaths(inputPaths) {
   const result = Object.fromEntries(CATEGORIES.map((category) => [category, false]));
   const reasons = Object.fromEntries(CATEGORIES.map((category) => [category, []]));
   const operations = {
-    career_current_authority_release: paths.includes(
-      "backend/content_assets/career/career_current_authority_release.v1.json",
+    career_current_authority_release: paths.some((path) =>
+      [
+        "backend/content_assets/career/career_current_authority_release.v1.json",
+        "backend/app/Domain/Career/Compilation/CareerContentV3Projector.php",
+        "backend/app/Domain/Career/Display/CareerContentV3Contract.php",
+        "backend/app/Services/Career/CareerJobDisplaySurfaceBuilder.php",
+      ].includes(path),
     ),
     mbti_zh_result_authority_release: paths.includes(
       "backend/content_assets/personality_public/mbti_zh_result_authority_release.v1.json",

@@ -50,15 +50,27 @@ test("classifies Career Current legacy and sharded assets", () => {
   assert.equal(has(["backend/content_assets/career/current/assets.jsonl"], "content_assets"), true);
   assert.equal(has(["backend/content_assets/career/current/identity/shard-00.jsonl"], "content_assets"), true);
 });
-test("binds only the exact Career Current release intent to its operation", () => {
+test("binds Career Current release and runtime projection dependencies to its operation", () => {
   const exact = classifyPaths([
     "backend/content_assets/career/career_current_authority_release.v1.json",
+  ]);
+  const projector = classifyPaths([
+    "backend/app/Domain/Career/Compilation/CareerContentV3Projector.php",
+  ]);
+  const contract = classifyPaths([
+    "backend/app/Domain/Career/Display/CareerContentV3Contract.php",
+  ]);
+  const builder = classifyPaths([
+    "backend/app/Services/Career/CareerJobDisplaySurfaceBuilder.php",
   ]);
   const adjacent = classifyPaths([
     "backend/content_assets/career/career_current_authority_review.json",
   ]);
   assert.equal(exact.flags.content_assets, true);
   assert.equal(exact.operations.career_current_authority_release, true);
+  assert.equal(projector.operations.career_current_authority_release, true);
+  assert.equal(contract.operations.career_current_authority_release, true);
+  assert.equal(builder.operations.career_current_authority_release, true);
   assert.equal(adjacent.operations.career_current_authority_release, false);
 });
 test("binds only the exact MBTI zh authority release manifest to its operation", () => {
