@@ -106365,7 +106365,10 @@
     "base": "main",
     "branch": "codex/seo-platform-10-a-material-fingerprint",
     "title": "feat(seo): add deterministic material fingerprint core",
-    "status": "local_validation_passed",
+    "status": "pr_open",
+    "commit_sha": "380085698d6df1da4a228b2c65951e2f78186931",
+    "pr_number": 3827,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3827",
     "depends_on": [],
     "allowed_paths": [
       "backend/app/Services/SeoIntel/MaterialFingerprint/MaterialChangeContract.php",
@@ -106392,7 +106395,7 @@
         "status": "passed",
         "evidence": "Changed paths are limited to the versioned fingerprint core, explicit material classification, golden vectors, and the minimum accurate train registration; no authority adapter or runtime integration is present."
       },
-      "github_ci": {"status": "pending", "evidence": "PR not opened yet."},
+      "github_ci": {"status": "pending", "evidence": "PR #3827 is open from the exact validated implementation SHA; GitHub checks are pending."},
       "deployment": {"status": "not_applicable", "evidence": "This task has no runtime integration or production execution."}
     },
     "production_write_execution": false,
@@ -106412,6 +106415,11 @@
         "at": "2026-08-28T08:48:24+08:00",
         "status": "local_validation_passed",
         "note": "Golden vectors, semantic object-order stability, locale and business-order boundaries, null and empty inputs, non-material invariance, fail-closed validation, scoped formatting and syntax, manifest parsing, and diff checks passed."
+      },
+      {
+        "at": "2026-08-28T08:49:50+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #3827 from the exact validated implementation SHA 380085698d6df1da4a228b2c65951e2f78186931. Changed-file scope is exact and mergeability is clean; GitHub checks are pending."
       }
     ]
   }

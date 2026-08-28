@@ -49798,7 +49798,7 @@ prs:
     base: main
     branch: codex/career-1046-immutable-candidate-artifact-producer
     title: "CAREER-1046-IMMUTABLE-CANDIDATE-ARTIFACT-PRODUCER-07B: produce Task 5 immutable candidate artifact"
-    status: local_validation_passed
+    status: implementation_in_progress
     depends_on:
       - CAREER-PUBLICATION-INDEX-RECONCILIATION-APPLY-06B
       - CAREER-1046-IMMUTABLE-CANDIDATE-07
@@ -50295,7 +50295,9 @@ prs:
     base: main
     branch: codex/seo-platform-10-a-material-fingerprint
     title: "feat(seo): add deterministic material fingerprint core"
-    status: implementation_in_progress
+    status: pr_open
+    pr: 3827
+    head_sha: 380085698d6df1da4a228b2c65951e2f78186931
     depends_on: []
     train_scope: seo_platform_10_material_fingerprint_core
     risk_level: controlled_content_authority_contract
