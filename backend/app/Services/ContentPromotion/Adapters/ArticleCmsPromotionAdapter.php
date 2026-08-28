@@ -8,6 +8,7 @@ use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Models\ContentReleaseSnapshot;
+use App\Services\Cms\ArticleMaterialDecisionService;
 use App\Services\ContentPromotion\ArticleCmsPromotionAuthority;
 use App\Services\ContentPromotion\Contracts\ExactPackagePromotionAdapter;
 use App\Services\ContentPromotion\PromotionAdapterResultFactory;
@@ -25,6 +26,7 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
     public function __construct(
         private readonly ArticleCmsPromotionAuthority $authority,
         private readonly PromotionRollbackSnapshotService $snapshots,
+        private readonly ArticleMaterialDecisionService $materialDecisions,
     ) {}
 
     public function id(): string
@@ -90,7 +92,7 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
         $candidate = ContentReleaseSnapshot::query()->find((int) $match[1]);
         $identities = $candidate instanceof ContentReleaseSnapshot ? (array) data_get($candidate->meta_json, 'target_identities', []) : [];
         $snapshot = $this->snapshots->resolve($context, PromotionTargetSet::fromIdentities($identities), 'article-cms', 'before_publication', $rollbackReference);
-        DB::transaction(function () use ($snapshot, $context): void {
+        DB::transaction(function () use ($snapshot, $context, $rollbackReference): void {
             foreach ((array) data_get($snapshot->meta_json, 'rows', []) as $row) {
                 if (! is_array($row) || (string) ($row['package_sha256'] ?? '') !== $context->packageSha256) {
                     throw new DomainException('article_promotion_rollback_row_invalid');
@@ -137,6 +139,30 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
                     'revision_status' => (string) ($row['package_revision_status_before'] ?? ArticleTranslationRevision::STATUS_APPROVED),
                     'published_at' => $row['package_revision_published_at_before'] ?? null,
                 ])->saveQuietly();
+
+                if ((string) $article->status === 'published' && (bool) $article->is_public) {
+                    $restoredRevision = ArticleTranslationRevision::query()
+                        ->withoutGlobalScopes()
+                        ->where('article_id', $article->id)
+                        ->lockForUpdate()
+                        ->find((int) $article->published_revision_id);
+                    if (! $restoredRevision instanceof ArticleTranslationRevision) {
+                        throw new DomainException('article_promotion_rollback_revision_missing');
+                    }
+                    $this->materialDecisions->recordPublished(
+                        $article,
+                        $restoredRevision,
+                        now(),
+                        'rollback',
+                        $rollbackReference,
+                    );
+                } else {
+                    $this->materialDecisions->recordUnpublished(
+                        $article,
+                        now(),
+                        $rollbackReference,
+                    );
+                }
             }
         }, 3);
         // A failed live-QA rollback must never retain a generation that exposed
