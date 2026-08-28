@@ -79,6 +79,18 @@ final class CareerContentV3CompatibilityProjectorTest extends TestCase
             '美国就业预计增长 5%，年均约 115,300 个岗位空缺。',
             data_get($projected, 'page.content.faq_block.items.0.answer'),
         );
+        self::assertSame(
+            data_get($projected, 'page.content.faq_block.items.0.question'),
+            data_get($projected, 'structured_data_from_visible_content.faq_page.zh.mainEntity.0.name'),
+        );
+        self::assertSame(
+            data_get($projected, 'page.content.faq_block.items.0.answer'),
+            data_get($projected, 'structured_data_from_visible_content.faq_page.zh.mainEntity.0.acceptedAnswer.text'),
+        );
+        self::assertSame(
+            'English schema remains unchanged.',
+            data_get($projected, 'structured_data_from_visible_content.faq_page.en.mainEntity.0.acceptedAnswer.text'),
+        );
 
         $encoded = json_encode($projected, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
         foreach (['1,579,800', '124,200', '2024–2034', '2024—2034', '1,652,600', '72,800', '157.98 万 → 165.26 万'] as $stale) {
@@ -106,6 +118,26 @@ final class CareerContentV3CompatibilityProjectorTest extends TestCase
                 'url' => 'https://www.bls.gov/ooh/business-and-financial/accountants-and-auditors.htm',
                 'usage' => ['2024 jobs: 1,579,800', '2034 jobs: 1,652,600', '72,800 net', '124,200 openings'],
             ]]],
+            'structured_data_from_visible_content' => ['faq_page' => [
+                'zh' => [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'FAQPage',
+                    'mainEntity' => [[
+                        '@type' => 'Question',
+                        'name' => '美国就业会增长吗？',
+                        'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Stale Chinese schema answer.'],
+                    ]],
+                ],
+                'en' => [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'FAQPage',
+                    'mainEntity' => [[
+                        '@type' => 'Question',
+                        'name' => 'Does employment grow?',
+                        'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'English schema remains unchanged.'],
+                    ]],
+                ],
+            ]],
             'page' => ['content' => [
                 'career_snapshot_primary_locale' => [
                     'salary' => ['fact_refs' => []],

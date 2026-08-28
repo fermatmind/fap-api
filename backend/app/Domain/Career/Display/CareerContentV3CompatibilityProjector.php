@@ -391,6 +391,29 @@ final class CareerContentV3CompatibilityProjector
         }
         data_set($surface, 'page.content.faq_block.items', $legacy);
 
+        $faqPage = data_get($surface, 'structured_data_from_visible_content.faq_page.zh');
+        if (is_array($faqPage)) {
+            $mainEntity = [];
+            foreach ($legacy as $item) {
+                if (! is_array($item) || ! is_string($item['question'] ?? null) || ! is_string($item['answer'] ?? null)) {
+                    $mainEntity = [];
+                    break;
+                }
+                $mainEntity[] = [
+                    '@type' => 'Question',
+                    'name' => $item['question'],
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => $item['answer'],
+                    ],
+                ];
+            }
+            if (count($mainEntity) === count($legacy)) {
+                $faqPage['mainEntity'] = $mainEntity;
+                data_set($surface, 'structured_data_from_visible_content.faq_page.zh', $faqPage);
+            }
+        }
+
         return $surface;
     }
 
