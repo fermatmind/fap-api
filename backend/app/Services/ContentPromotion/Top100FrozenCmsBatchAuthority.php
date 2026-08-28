@@ -1416,6 +1416,8 @@ final class Top100FrozenCmsBatchAuthority
                     $this->materialDecisions->recordPublicAsset($asset, $revision, $review, now(), $operation);
                 } elseif ($operation === 'publish') {
                     throw new DomainException('top100_frozen_personality_review_evidence_missing');
+                } else {
+                    $this->materialDecisions->recordLegacyRollbackHold($asset, now());
                 }
 
                 continue;
