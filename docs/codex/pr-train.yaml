@@ -50330,7 +50330,9 @@ prs:
     base: main
     branch: codex/seo-platform-10-b-article-adapter
     title: "feat(seo): record Article material decisions"
-    status: local_validation_passed
+    status: pr_open
+    pr: 3828
+    head_sha: fe21ece3ddac80e178f73a54734ed012a3ef5955
     depends_on: [SEO-PLATFORM-10-A]
     train_scope: seo_platform_10_article_material_adapter
     risk_level: controlled_content_authority_schema

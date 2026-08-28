@@ -106441,7 +106441,10 @@
     "base": "main",
     "branch": "codex/seo-platform-10-b-article-adapter",
     "title": "feat(seo): record Article material decisions",
-    "status": "local_validation_passed",
+    "status": "pr_open",
+    "commit_sha": "fe21ece3ddac80e178f73a54734ed012a3ef5955",
+    "pr_number": 3828,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3828",
     "depends_on": ["SEO-PLATFORM-10-A"],
     "allowed_paths": [
       "backend/app/Models/ContentMaterialDecision.php",
@@ -106474,7 +106477,7 @@
         "status": "passed",
         "evidence": "The change is limited to the Article authority adapter, shared append-only decision schema, Article publication and rollback writers, focused tests, and the minimum train reconciliation. URL Truth consumers, other families, CMS UI, and production content are untouched."
       },
-      "github_ci": {"status": "pending", "evidence": "PR has not been opened."},
+      "github_ci": {"status": "pending", "evidence": "PR #3828 is open from the exact validated implementation commit; required checks are pending."},
       "deployment": {"status": "pending", "evidence": "Automatic exact-SHA deployment has not started."}
     },
     "production_write_execution": false,
@@ -106494,6 +106497,11 @@
         "at": "2026-08-28T09:23:00+08:00",
         "status": "local_validation_passed",
         "note": "All Article-scoped acceptance passed. The broader CMS chain's five sitemap fixture failures were reproduced on untouched origin/main and were not pulled into this PR; no content or production write occurred."
+      },
+      {
+        "at": "2026-08-28T09:29:00+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #3828 from validated implementation commit fe21ece3ddac80e178f73a54734ed012a3ef5955. Exact scope is clean and required checks are pending."
       }
     ]
   }
