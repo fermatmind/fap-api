@@ -2164,7 +2164,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         return $payload;
     }
 
-    /** @param array<string, mixed> $payload @return array<string, mixed> */
+    /** Keep the reader-equivalent v3 projection out of immutable cache bytes. @param array<string, mixed> $payload @return array<string, mixed> */
     private function withoutDerivedContentV3(array $payload, string $slug, string $locale): array
     {
         $contentV3 = data_get($payload, 'display_surface_v1.content_v3');
