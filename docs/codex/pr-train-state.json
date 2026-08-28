@@ -106655,10 +106655,10 @@
     "base": "main",
     "branch": "codex/seo-platform-10-e-url-truth-backfill",
     "title": "feat(seo): project material authority into URL Truth",
-    "status": "implementation_in_progress",
-    "commit_sha": null,
-    "pr_number": null,
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "e72e07b2a3f62077df4fd441f5a62d3660621c3a",
+    "pr_number": 3831,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3831",
     "depends_on": ["SEO-PLATFORM-10-D"],
     "allowed_paths": [
       "backend/app/Console/Commands/SeoPlatformUrlTruthMaterialBackfillCommand.php",
@@ -106673,7 +106673,7 @@
       "dependency": {"status": "passed", "evidence": "SEO-PLATFORM-10-D merged as f4f1e211fdf33c7cca721d0b9eee631345a6c070 and its exact-SHA main CI passed before 10-E implementation began."},
       "local_validation": {"status": "passed", "evidence": "Bounded material backfill and existing URL Truth compatibility suites passed 11 tests / 142 assertions. Dry-run, canary, exact readback, stable artifact hash, HOLD, known unpublish retirement, disabled-lane and bound failures, repeat no-op, unchanged ordinary lastmod/updated_at, scoped Pint, PHP syntax, command registration, train parsing, and diff checks passed."},
       "scope": {"status": "passed", "evidence": "Scope is limited to the URL Truth material-decision projection, forward-only nullable schema expansion, bounded backfill command, focused tests, and minimum train reconciliation."},
-      "github_ci": {"status": "pending", "evidence": "No 10-E PR exists yet."},
+      "github_ci": {"status": "pending", "evidence": "PR #3831 is open from validated implementation commit e72e07b2a3f62077df4fd441f5a62d3660621c3a; required checks are pending."},
       "deployment": {"status": "pending", "evidence": "No 10-E automatic exact-SHA deployment exists yet; production backfill execution is deferred to 10-H."}
     },
     "production_write_execution": false,
@@ -106693,6 +106693,11 @@
         "at": "2026-08-28T10:38:01+08:00",
         "status": "local_validation_passed",
         "note": "The bounded artifact accepts only latest append-only material decisions, maps only Article, Career job, and public Personality adapter surfaces, preserves unknown legacy and prior trusted values on HOLD, and proves canary/readback/idempotent rerun without production execution."
+      },
+      {
+        "at": "2026-08-28T10:39:21+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #3831 from validated implementation commit e72e07b2a3f62077df4fd441f5a62d3660621c3a. The six-path scope is clean; required checks are pending."
       }
     ]
   }
