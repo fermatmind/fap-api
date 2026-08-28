@@ -50,9 +50,9 @@ final class CareerJobDetailCanonicalCacheReaderTest extends TestCase
         self::assertSame('legacy title', data_get($gzip, 'display_surface_v1.page.content.hero.title'));
     }
 
-    public function test_it_fails_closed_for_projection_drift_corrupt_checksum_or_unknown_envelope(): void
+    public function test_it_replaces_legacy_body_drift_but_fails_closed_for_identity_or_envelope_corruption(): void
     {
-        [$reader, $payload] = $this->fixtureReader();
+        [$reader, $payload, $pages] = $this->fixtureReader();
         $stored = $reader->encode($payload);
         $stored['sha256'] = str_repeat('0', 64);
 
@@ -64,6 +64,18 @@ final class CareerJobDetailCanonicalCacheReaderTest extends TestCase
         ], 'actors', 'en'));
 
         data_set($payload, 'display_surface_v1.page.content.hero.title', 'drifted');
+        $hydrated = $reader->read($payload, 'actors', 'en');
+        self::assertSame('drifted', data_get($hydrated, 'display_surface_v1.page.content.hero.title'));
+        self::assertSame(
+            CareerCurrentAuthorityPackage::hashValue($pages['en']),
+            CareerCurrentAuthorityPackage::hashValue(data_get($hydrated, 'display_surface_v1.content_v3')),
+        );
+
+        data_set($payload, 'display_surface_v1.page.locale', 'zh-CN');
+        self::assertNull($reader->read($payload, 'actors', 'en'));
+
+        data_set($payload, 'display_surface_v1.page.locale', 'en');
+        data_set($payload, 'display_surface_v1.subject.canonical_slug', 'accountants-and-auditors');
         self::assertNull($reader->read($payload, 'actors', 'en'));
     }
 

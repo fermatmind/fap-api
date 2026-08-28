@@ -62,7 +62,11 @@ class CareerContentV3CanonicalReader
 
     /**
      * Replace any cached/DB-derived v3 body with the installed per-page authority.
-     * The legacy surface is accepted only when it matches the manifest-bound compatibility projection.
+     * The legacy v1/v2 surface is a compatibility transport, not Current body
+     * authority. Publisher parity binds that transport to the frozen projection
+     * hashes before writes; runtime hydration validates only its shape and
+     * identity so an already-published compatibility envelope cannot shadow or
+     * invalidate the manifest-bound v3 page.
      *
      * @param  array<string,mixed>  $surface
      * @return array<string,mixed>|null
@@ -71,14 +75,13 @@ class CareerContentV3CanonicalReader
     {
         try {
             $page = $this->page($slug, $locale, $backendRoot);
-            $entry = $this->fileEntry($slug, $locale, $backendRoot);
             $legacy = $surface;
             unset($legacy['content_v3']);
             $projection = $this->compatibilityProjection($legacy);
-            $sourcePage = data_get($projection, 'page.content');
-            if (! is_array($sourcePage)
-                || ! hash_equals((string) $page['source_content_sha256'], CareerCurrentAuthorityPackage::hashValue($sourcePage))
-                || ! hash_equals((string) $entry['legacy_projection_sha256'], CareerCurrentAuthorityPackage::hashValue($projection))) {
+            $requestedLocale = $this->locale($locale);
+            $surfaceLocale = $this->locale((string) data_get($projection, 'page.locale', ''));
+            $surfaceSlug = strtolower(trim((string) data_get($surface, 'subject.canonical_slug', '')));
+            if ($surfaceLocale !== $requestedLocale || ($surfaceSlug !== '' && $surfaceSlug !== strtolower(trim($slug)))) {
                 return null;
             }
             $surface['content_v3'] = $page;
