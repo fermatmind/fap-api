@@ -25,6 +25,7 @@ final class CareerCurrentAuthorityParity
         private readonly CareerCurrentAuthorityPackageLoader $loader,
         private readonly CareerCurrentAuthorityStateMachine $stateMachine,
         private readonly CareerJobDetailCanonicalCacheReader $reader,
+        private readonly CareerCurrentAuthorityPackage $legacyProjection,
     ) {}
 
     /** @return array<string,mixed> */
@@ -44,23 +45,28 @@ final class CareerCurrentAuthorityParity
             }
         });
 
-        $authority = $this->loader->loadShardedForPublish($backendRoot);
-        $rows = $authority['rows'];
+        $authority = $this->loader->loadForPublish($backendRoot);
         $slugs = $authority['slugs'];
         $this->assertAuthorityShape($authority);
+        $rows = null;
         if ($requireDatabaseCompatibility) {
             $this->assertDatabaseCompatibility($slugs);
+            $rows = $this->compatibilityRows($authority);
         }
 
         $redis = $this->redisContract($redisMode);
-        $slice = $this->scan(array_intersect_key($rows, array_flip(self::SLICE_SLUGS)), false, 'none');
+        $slice = is_array($rows)
+            ? $this->scan(array_intersect_key($rows, array_flip(self::SLICE_SLUGS)), false, 'none')
+            : $this->scanPages(array_intersect_key($authority['pages'], array_flip(self::SLICE_SLUGS)), false, 'none');
         if (($slice['content_states']['enhanced'] ?? null) !== 2
             || ($slice['content_states']['legacy'] ?? null) !== 2
             || ($slice['counts']['locale_pages'] ?? null) !== 4) {
             throw new RuntimeException('CAREER_PARITY_ARCHITECTURE_SLICE_FAILED');
         }
 
-        $full = $this->scan($rows, true, $redisMode);
+        $full = is_array($rows)
+            ? $this->scan($rows, true, $redisMode)
+            : $this->scanPages($authority['pages'], true, $redisMode);
         if ($databaseMutationCount !== 0) {
             throw new RuntimeException('CAREER_PARITY_DATABASE_WRITE_DETECTED');
         }
@@ -77,7 +83,7 @@ final class CareerCurrentAuthorityParity
             'safe_error_code' => null,
             'release_sha' => $releaseSha,
             'package' => [
-                'digest' => $authority['summary']['sharded_aggregate_sha256'],
+                'digest' => $authority['summary']['aggregate_sha256'],
                 'projection_digest' => $authority['summary']['versionless_projection_sha256'],
                 'compiler_version' => CareerJobDetailCanonicalCacheReader::COMPILER_VERSION,
                 'compiler_digest' => CareerJobDetailCanonicalCacheReader::compilerDigest(),
@@ -228,6 +234,96 @@ final class CareerCurrentAuthorityParity
         ];
     }
 
+    /** @param array<string,array<string,array<string,mixed>>> $pages @return array<string,mixed> */
+    private function scanPages(array $pages, bool $includeCapacity, string $redisMode): array
+    {
+        ksort($pages, SORT_STRING);
+        $hashes = array_fill_keys(['candidate', 'active', 'lkg', 'legacy', 'api', 'snapshot'], []);
+        $counts = [
+            'slugs' => count($pages), 'locales' => count(CareerCurrentAuthorityPackage::LOCALES),
+            'locale_pages' => 0, 'candidate' => 0, 'active' => 0, 'lkg' => 0,
+            'legacy' => 0, 'api' => 0, 'snapshot' => 0,
+        ];
+        $states = ['enhanced' => 0, 'legacy' => 0];
+        $bytes = [
+            'serialized_total' => 0, 'max_single_key' => 0, 'gzip_before_total' => 0,
+            'gzip_after_total' => 0, 'candidate_total' => 0, 'active_total' => 0,
+            'lkg_total' => 0, 'worst_state_amplification' => 0,
+        ];
+        $redisMemory = ['memory_usage_total' => 0, 'memory_usage_max_key' => 0];
+        foreach ($pages as $slug => $localized) {
+            foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
+                $content = $localized[$locale] ?? null;
+                if (! is_array($content)) {
+                    throw new RuntimeException('CAREER_PARITY_AUTHORITY_INCOMPLETE');
+                }
+                CareerContentV3Contract::assert($content);
+                $payload = ['display_surface_v1' => ['content_v3' => $content]];
+                $stored = $this->reader->encode($payload);
+                if ($this->reader->decode($stored) !== $payload) {
+                    throw new RuntimeException('CAREER_PARITY_CODEC_MISMATCH');
+                }
+                $state = $content['content_state'];
+                if (! isset($states[$state])) {
+                    throw new RuntimeException('CAREER_PARITY_CONTENT_STATE_INVALID');
+                }
+                $states[$state]++;
+                $counts['locale_pages']++;
+                foreach (array_keys($hashes) as $name) {
+                    $hashes[$name][] = CareerCurrentAuthorityPackage::hashValue($payload);
+                    $counts[$name]++;
+                }
+                $json = json_encode($payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+                $serialized = strlen(serialize($stored));
+                $gzip = strlen(base64_decode((string) $stored['payload'], true) ?: '');
+                $bytes['serialized_total'] += $serialized;
+                $bytes['max_single_key'] = max($bytes['max_single_key'], $serialized);
+                $bytes['gzip_before_total'] += strlen($json);
+                $bytes['gzip_after_total'] += $gzip;
+                foreach (['candidate_total', 'active_total', 'lkg_total'] as $name) {
+                    $bytes[$name] += $serialized;
+                }
+                if ($includeCapacity && $redisMode === 'disposable') {
+                    foreach (['candidate', 'active', 'lkg'] as $version) {
+                        $key = $this->payloadKey($slug, $locale, $version);
+                        Cache::forever($key, $stored);
+                        $usage = $this->memoryUsage($key);
+                        $redisMemory['memory_usage_total'] += $usage;
+                        $redisMemory['memory_usage_max_key'] = max($redisMemory['memory_usage_max_key'], $usage);
+                    }
+                } elseif ($includeCapacity && $redisMode === 'readonly') {
+                    foreach (['active', 'lkg'] as $pointer) {
+                        $version = Cache::get($this->pointerKey($slug, $locale, $pointer));
+                        if (! is_string($version) || $version === '') {
+                            throw new RuntimeException('CAREER_PARITY_REDIS_STATE_INCOMPLETE');
+                        }
+                        $usage = $this->memoryUsage($this->payloadKey($slug, $locale, $version));
+                        if ($usage <= 0) {
+                            throw new RuntimeException('CAREER_PARITY_REDIS_MEMORY_USAGE_MISSING');
+                        }
+                        $redisMemory['memory_usage_total'] += $usage;
+                        $redisMemory['memory_usage_max_key'] = max($redisMemory['memory_usage_max_key'], $usage);
+                    }
+                }
+            }
+        }
+        foreach ($hashes as &$values) {
+            sort($values, SORT_STRING);
+            $values = CareerCurrentAuthorityPackage::hashValue($values);
+        }
+        unset($values);
+        $bytes['worst_state_amplification'] = $bytes['candidate_total'] + $bytes['active_total'] + $bytes['lkg_total'];
+        $budget = (int) config('career_current_authority_parity.career_budget_bytes', self::LOCKED_CAREER_BUDGET_BYTES);
+        if ($includeCapacity) {
+            self::assertCapacityWithinBudget($bytes['worst_state_amplification'], $redisMemory['memory_usage_total'], $budget);
+        }
+
+        return [
+            'status' => 'pass', 'counts' => $counts, 'content_states' => $states,
+            'aggregate_hashes' => $hashes, 'bytes' => $bytes, 'redis' => $redisMemory,
+        ];
+    }
+
     public static function assertCapacityWithinBudget(
         int $worstStateBytes,
         int $redisMemoryUsageBytes,
@@ -243,7 +339,7 @@ final class CareerCurrentAuthorityParity
     {
         if (($authority['summary']['career_count'] ?? null) !== CareerCurrentAuthorityPackage::EXPECTED_CAREERS
             || ($authority['summary']['locale_page_count'] ?? null) !== CareerCurrentAuthorityPackage::EXPECTED_LOCALE_PAGES
-            || count((array) ($authority['rows'] ?? [])) !== CareerCurrentAuthorityPackage::EXPECTED_CAREERS
+            || count((array) ($authority['pages'] ?? [])) !== CareerCurrentAuthorityPackage::EXPECTED_CAREERS
             || array_diff(self::SLICE_SLUGS, (array) ($authority['slugs'] ?? [])) !== []) {
             throw new RuntimeException('CAREER_PARITY_AUTHORITY_INCOMPLETE');
         }
@@ -265,6 +361,43 @@ final class CareerCurrentAuthorityParity
                 || $row->status !== CareerCurrentAuthorityPackage::READY_STATUS)) {
             throw new RuntimeException('CAREER_PARITY_COMPATIBILITY_ROWS_INCOMPLETE');
         }
+    }
+
+    /** @param array<string,mixed> $authority @return array<string,array<string,mixed>> */
+    private function compatibilityRows(array $authority): array
+    {
+        $entries = [];
+        foreach ((array) data_get($authority, 'manifest.files', []) as $entry) {
+            if (is_array($entry)) {
+                $entries[$entry['canonical_slug']][$entry['locale']] = $entry;
+            }
+        }
+        $rows = [];
+        foreach (CareerJobDisplayAsset::query()->runtimeColumns()->orderBy('canonical_slug')->get() as $asset) {
+            $slug = strtolower(trim((string) $asset->canonical_slug));
+            $row = ['canonical_slug' => $slug];
+            foreach ([
+                'surface_version', 'asset_type', 'asset_role', 'status', 'component_order_json',
+                'page_payload_json', 'seo_payload_json', 'sources_json', 'structured_data_json',
+                'implementation_contract_json', 'metadata_json',
+            ] as $field) {
+                $row[$field] = $asset->getAttribute($field);
+            }
+            foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
+                $entry = $entries[$slug][$locale] ?? null;
+                $surface = $this->legacyProjection->publicProjection($row, $locale);
+                unset($surface['content_v3']);
+                if (! is_array($entry)
+                    || ! hash_equals((string) $entry['legacy_row_sha256'], CareerCurrentAuthorityPackage::hashValue($row))
+                    || ! hash_equals((string) $entry['legacy_projection_sha256'], CareerCurrentAuthorityPackage::hashValue($surface))) {
+                    throw new RuntimeException('CAREER_PARITY_COMPATIBILITY_MISMATCH');
+                }
+            }
+            $rows[$slug] = $row;
+        }
+        ksort($rows, SORT_STRING);
+
+        return $rows;
     }
 
     /** @return array<string,mixed> */

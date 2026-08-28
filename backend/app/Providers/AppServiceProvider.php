@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Contracts\Cms\ArticleMachineTranslationProvider;
 use App\Contracts\Cms\CmsMachineTranslationProvider;
 use App\Contracts\Security\PiiEnvelopeAdapter;
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Publish\CareerJobDetailExposureReadiness;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionLookup;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
@@ -100,6 +101,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(CmsMachineTranslationProviderRegistry::class);
         $this->app->bind(CmsMachineTranslationProvider::class, static fn ($app): CmsMachineTranslationProvider => $app->make(DisabledCmsMachineTranslationProvider::class));
         $this->app->singleton(CareerRuntimePublishProjectionVisibility::class, CareerRuntimePublishProjectionLookup::class);
+        $this->app->singleton(CareerContentV3CanonicalReader::class);
         $this->app->bind(CareerJobDetailExposureReadiness::class, PublicCareerAuthorityResponseCache::class);
 
         $this->app->singleton(PiiEnvelopeAdapter::class, function ($app) {

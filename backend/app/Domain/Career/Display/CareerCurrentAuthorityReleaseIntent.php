@@ -14,9 +14,9 @@ final class CareerCurrentAuthorityReleaseIntent
 
     public const SOURCE_MERGE_SHA = '2c956887ad9460849fd29cbfacb145e1397993cd';
 
-    public const MANIFEST_SHA256 = '037cb125edf893a619fc133915a6ec162c79531aac4e3be17c5db592bfaaf07d';
+    public const MANIFEST_SHA256 = 'fdd4d73eb0b07effdab2222c454dc35a734eeccd379f7f2359de904300118800';
 
-    public const AGGREGATE_SHA256 = '2471627267cee87711c89cdba7f3ba188a6af887041935cb9c7dd3e0a5c2e7fa';
+    public const AGGREGATE_SHA256 = '42112294f1e3b8f6939d36f25a2d29b6feb4db8009034d7b90c04802fa3af5f7';
 
     public const VERSIONLESS_PROJECTION_SHA256 = 'b7fed8007d505b45e2707ef11e3b1b4196d13985e0e8e1b146c4710fcbcdc616';
 
@@ -24,15 +24,15 @@ final class CareerCurrentAuthorityReleaseIntent
         'aggregate_sha256',
         'contract_version',
         'discoverability',
+        'file_count',
         'locale_page_count',
         'locales',
         'manifest_sha256',
         'manual_hold_slugs',
-        'module_count',
         'search_submission',
-        'shards_per_module',
         'slug_count',
         'source_merge_sha',
+        'source_registry_sha256',
         'versionless_projection_sha256',
     ];
 
@@ -62,11 +62,11 @@ final class CareerCurrentAuthorityReleaseIntent
             || ($intent['manifest_sha256'] ?? null) !== self::MANIFEST_SHA256
             || ($intent['aggregate_sha256'] ?? null) !== self::AGGREGATE_SHA256
             || ($intent['versionless_projection_sha256'] ?? null) !== self::VERSIONLESS_PROJECTION_SHA256
-            || ($intent['locales'] ?? null) !== ['zh-CN', 'en']
+            || ($intent['locales'] ?? null) !== CareerCurrentAuthorityPackage::LOCALES
             || ($intent['slug_count'] ?? null) !== 1046
             || ($intent['locale_page_count'] ?? null) !== 2092
-            || ($intent['module_count'] ?? null) !== 10
-            || ($intent['shards_per_module'] ?? null) !== 64
+            || ($intent['file_count'] ?? null) !== 2092
+            || ($intent['source_registry_sha256'] ?? null) !== '775d33d6f2516801bd4ca91899e9393bb644a12f02ce667c1b7d6989633b4cb5'
             || ($intent['manual_hold_slugs'] ?? null) !== ['software-developers']
             || ($intent['discoverability'] ?? null) !== false
             || ($intent['search_submission'] ?? null) !== false) {
@@ -77,28 +77,14 @@ final class CareerCurrentAuthorityReleaseIntent
         $authority = $this->loader->load($backendRoot);
         $manifest = $authority['manifest'];
         $summary = $authority['summary'];
-        $modules = $manifest['modules'] ?? null;
-        $shards = $manifest['shards'] ?? null;
         if (! hash_equals((string) $intent['manifest_sha256'], (string) hash_file('sha256', $manifestPath))
-            || ! hash_equals((string) $intent['aggregate_sha256'], (string) ($summary['sharded_aggregate_sha256'] ?? ''))
+            || ! hash_equals((string) $intent['aggregate_sha256'], (string) ($summary['aggregate_sha256'] ?? ''))
             || ! hash_equals((string) $intent['versionless_projection_sha256'], (string) ($summary['versionless_projection_sha256'] ?? ''))
+            || ! hash_equals((string) $intent['source_registry_sha256'], (string) ($manifest['source_registry_sha256'] ?? ''))
             || ($summary['career_count'] ?? null) !== $intent['slug_count']
             || ($summary['locale_page_count'] ?? null) !== $intent['locale_page_count']
-            || ! is_array($modules)
-            || count($modules) !== $intent['module_count']
-            || ! is_array($shards)
-            || count($shards) !== $intent['module_count'] * $intent['shards_per_module']) {
+            || count((array) ($manifest['files'] ?? [])) !== $intent['file_count']) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_RELEASE_INTENT_PACKAGE_MISMATCH');
-        }
-        foreach ($modules as $module) {
-            $moduleShards = array_values(array_filter(
-                $shards,
-                static fn (mixed $shard): bool => is_array($shard) && ($shard['module'] ?? null) === $module,
-            ));
-            if (count($moduleShards) !== $intent['shards_per_module']
-                || array_column($moduleShards, 'shard_index') !== range(0, $intent['shards_per_module'] - 1)) {
-                throw new CareerCurrentAuthorityPackageFailure('CURRENT_RELEASE_INTENT_PACKAGE_MISMATCH');
-            }
         }
 
         return [
@@ -106,8 +92,7 @@ final class CareerCurrentAuthorityReleaseIntent
             'package' => [
                 'slug_count' => $summary['career_count'],
                 'locale_page_count' => $summary['locale_page_count'],
-                'module_count' => count($modules),
-                'shard_count' => count($shards),
+                'file_count' => count($manifest['files']),
             ],
             'operation_key' => $this->operationKey($intent),
         ];

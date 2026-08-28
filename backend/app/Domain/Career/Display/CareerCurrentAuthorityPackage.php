@@ -130,8 +130,20 @@ final class CareerCurrentAuthorityPackage
     {
         $manifestPath = rtrim($backendRoot, '/').'/'.self::RELATIVE_PATH.'/manifest.json';
         $manifest = $this->readManifest($manifestPath);
+        if (($manifest['contract_version'] ?? null) !== CareerContentV3AuthorityPackage::CONTRACT_VERSION) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_AUTHORITY_REQUIRED');
+        }
+
+        return (new CareerContentV3AuthorityPackage)->load($backendRoot);
+    }
+
+    /** @return array{manifest:array<string,mixed>,rows:array<string,array<string,mixed>>,slugs:list<string>,summary:array<string,mixed>} */
+    public function loadMigrationSource(string $backendRoot): array
+    {
+        $manifestPath = rtrim($backendRoot, '/').'/'.self::RELATIVE_PATH.'/manifest.json';
+        $manifest = $this->readManifest($manifestPath);
         if (($manifest['contract_version'] ?? null) !== CareerShardedCurrentAuthorityPackage::CONTRACT_VERSION) {
-            throw new CareerCurrentAuthorityPackageFailure('CURRENT_SHARDED_AUTHORITY_REQUIRED');
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_MIGRATION_SOURCE_SHARDED_REQUIRED');
         }
 
         return (new CareerShardedCurrentAuthorityPackage($this))->load($backendRoot, $manifest);
@@ -163,13 +175,11 @@ final class CareerCurrentAuthorityPackage
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_MANIFEST_INVALID');
         }
         $contractVersion = is_array($manifest) ? ($manifest['contract_version'] ?? null) : null;
-        if ($contractVersion === CareerShardedCurrentAuthorityPackage::CONTRACT_VERSION
-            && ($manifest['authority_path'] ?? null) !== 'backend/'.self::RELATIVE_PATH) {
+        if ($contractVersion !== CareerContentV3AuthorityPackage::CONTRACT_VERSION
+            || ($manifest['authority_path'] ?? null) !== 'backend/'.self::RELATIVE_PATH) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_MANIFEST_INVALID');
         }
-        $sha256 = $contractVersion === CareerShardedCurrentAuthorityPackage::CONTRACT_VERSION
-            ? ($manifest['aggregate_sha256'] ?? null)
-            : (is_array($manifest) ? self::value($manifest, 'files.0.sha256') : null);
+        $sha256 = $manifest['aggregate_sha256'] ?? null;
         if (! is_string($sha256) || preg_match('/\A[0-9a-f]{64}\z/', $sha256) !== 1) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_MANIFEST_INVALID');
         }

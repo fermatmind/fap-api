@@ -17,8 +17,8 @@ Do not use it to publish, deploy, write CMS/database/cache state, render fronten
 
 ## Authority and boundaries
 
-- `backend/content_assets/career/current/manifest.json` and its bound 640 shards are the repository Current content authority.
-- No committed flat projection exists. When a compiler needs whole-row evidence, it must synthesize a versionless projection from the manifest-bound shards into a system temporary directory.
+- `backend/content_assets/career/current/manifest.json` and its bound 2092 per-page files are the repository Current content authority.
+- No committed flat or sharded projection exists. Legacy presentation rows are compatibility materializations and must match the per-page manifest hashes before use.
 - The compiler and package contracts under `backend/app/Domain/Career/{Compilation,Display}` define accepted input, output, locale, component, and hash behavior.
 - Source assets, lookup files, evidence files, Desktop directories, dry-run output, and a PASS receipt are candidates or evidence only.
 - Never change input copy during compilation. Report a blocker when normalization would require an editorial decision.
@@ -50,7 +50,7 @@ php artisan career:ten-block-current-package-compile \
 
 ## Historical sharding recovery
 
-`scripts/split_legacy_current.php` is preserved temporarily as inert historical transition evidence. It has no valid default input after the flat projection was removed and must not be used for Current compilation. Current compilation starts from the installed manifest-bound shards.
+`scripts/split_legacy_current.php` is preserved as inert historical transition evidence. It has no valid Current input and must not be used for active compilation.
 
 ## Sharded candidate assembly
 
@@ -62,7 +62,7 @@ php .agents/skills/fap-api-career-canonical-builder/scripts/assemble_sharded_cur
   --output-root=<existing-assembly-temp-dir>
 ```
 
-The assembler is historical equivalence tooling. Active Current compilation validates and assembles only the manifest-bound shards; any whole-row projection is temporary, versionless, and derived. Output and receipts remain candidate evidence with zero Current/runtime/publication writes.
+The assembler is historical migration evidence only. Active compilation and runtime reads consume only manifest-bound per-page files. Output and receipts remain candidate evidence with zero Current/runtime/publication writes.
 
 ## Acceptance
 

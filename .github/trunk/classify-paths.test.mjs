@@ -49,6 +49,17 @@ test("classifies content assets", () => assert.equal(has(["backend/content_packs
 test("classifies Career Current legacy and sharded assets", () => {
   assert.equal(has(["backend/content_assets/career/current/assets.jsonl"], "content_assets"), true);
   assert.equal(has(["backend/content_assets/career/current/identity/shard-00.jsonl"], "content_assets"), true);
+  assert.equal(has(["backend/content_assets/career/current/careers/actors/en.json"], "content_assets"), true);
+});
+test("requires the Career publisher for per-page canonical reader changes", () => {
+  for (const path of [
+    "backend/app/Domain/Career/Display/CareerContentV3AuthorityPackage.php",
+    "backend/app/Domain/Career/Display/CareerContentV3CanonicalReader.php",
+    "backend/app/Providers/AppServiceProvider.php",
+    "backend/app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php",
+  ]) {
+    assert.equal(classifyPaths([path]).operations.publisher_required, true, path);
+  }
 });
 test("binds Career Current release and runtime projection dependencies to its operation", () => {
   const exact = classifyPaths([

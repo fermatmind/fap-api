@@ -69,7 +69,8 @@ final class CareerCurrentAuthorityPublisher
         $cacheCompactionWrites = 0;
 
         try {
-            $authority = $this->loader->loadShardedForPublish($backendRoot);
+            $authority = $this->loader->loadForPublish($backendRoot);
+            $authority['rows'] = $this->compatibilityRows($authority);
             $this->assertAccountantsBoundaryNotice($authority['rows']);
             $cacheCompactionWrites = $this->cache->compactDerivedContentV3(
                 $authority['slugs'],
@@ -77,7 +78,7 @@ final class CareerCurrentAuthorityPublisher
             );
             $plan = DB::transaction(fn (): array => $this->applyDatabasePlan(
                 $authority['rows'],
-                (string) $authority['summary']['sharded_aggregate_sha256'],
+                (string) $authority['summary']['aggregate_sha256'],
             ), 1);
             $databaseCommitted = ($plan['write_counts']['database_update_count']
                 + $plan['write_counts']['database_insert_count']
@@ -236,6 +237,64 @@ final class CareerCurrentAuthorityPublisher
         }
 
         return 'CURRENT_CACHE_PREPARATION_RUNTIME_FAILED';
+    }
+
+    /**
+     * The database retains the frozen v1/v2 compatibility materialization. It is accepted only when
+     * every full row and localized public projection matches the hashes captured during conversion.
+     *
+     * @param  array<string,mixed>  $authority
+     * @return array<string,array<string,mixed>>
+     */
+    private function compatibilityRows(array $authority): array
+    {
+        $entries = [];
+        foreach ((array) data_get($authority, 'manifest.files', []) as $entry) {
+            if (is_array($entry)) {
+                $entries[$entry['canonical_slug']][$entry['locale']] = $entry;
+            }
+        }
+        $assets = CareerJobDisplayAsset::query()->runtimeColumns()->orderBy('canonical_slug')->get();
+        if ($assets->count() !== count((array) ($authority['slugs'] ?? []))) {
+            throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPATIBILITY_ROW_MISSING');
+        }
+        $rows = [];
+        foreach ($assets as $asset) {
+            $slug = strtolower(trim((string) $asset->canonical_slug));
+            if (isset($rows[$slug]) || ! isset($entries[$slug])) {
+                throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPATIBILITY_ROW_UNEXPECTED');
+            }
+            $row = ['canonical_slug' => $slug];
+            foreach ([
+                'surface_version', 'asset_type', 'asset_role', 'status', 'component_order_json',
+                'page_payload_json', 'seo_payload_json', 'sources_json', 'structured_data_json',
+                'implementation_contract_json', 'metadata_json',
+            ] as $field) {
+                $row[$field] = $asset->getAttribute($field);
+            }
+            foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
+                $entry = $entries[$slug][$locale] ?? null;
+                if (! is_array($entry)
+                    || ! hash_equals((string) $entry['legacy_row_sha256'], CareerCurrentAuthorityPackage::hashValue($row))) {
+                    throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPATIBILITY_ROW_HASH_MISMATCH');
+                }
+                $surface = $this->package->publicProjection($row, $locale);
+                unset($surface['content_v3']);
+                if (! hash_equals(
+                    (string) $entry['legacy_projection_sha256'],
+                    CareerCurrentAuthorityPackage::hashValue($surface),
+                )) {
+                    throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPATIBILITY_PROJECTION_HASH_MISMATCH');
+                }
+            }
+            $rows[$slug] = $row;
+        }
+        ksort($rows, SORT_STRING);
+        if (array_keys($rows) !== ($authority['slugs'] ?? [])) {
+            throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPATIBILITY_SLUG_SET_MISMATCH');
+        }
+
+        return $rows;
     }
 
     /**

@@ -1,0 +1,24 @@
+{
+  "authority_path": "backend/content_assets/career/current",
+  "compatibility": {
+    "database_schema_changed": false,
+    "legacy_projection_hashes_required": true,
+    "presentation_v1_v2_materialization": "database_derived_and_manifest_hash_bound"
+  },
+  "contract_version": "career.content_v3_current.v1",
+  "current_inventory": {
+    "career_directories": 1046,
+    "files": 2092,
+    "locales": ["en", "zh-CN"],
+    "manifest": "manifest.json",
+    "path_template": "careers/{canonical_slug}/{locale}.json"
+  },
+  "fail_closed": [
+    "invalid_root_manifest", "missing_or_undeclared_file", "duplicate_slug_locale",
+    "unknown_or_noncanonical_slug", "path_traversal_or_symlink", "invalid_json_or_contract",
+    "locale_or_subject_mismatch", "file_or_manifest_hash_drift", "duplicate_block_or_item_id",
+    "unknown_primitive", "invalid_source_or_link"
+  ],
+  "rollback": "previous_git_release_and_runtime_lkg_only",
+  "schema_version": "career.detail.content.v3"
+}

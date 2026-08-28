@@ -11,8 +11,7 @@ jq -e '
   and .status == "PASS_CAREER_CURRENT_RELEASE_INTENT"
   and .slug_count == 1046
   and .locale_page_count == 2092
-  and .module_count == 10
-  and .shard_count == 640
+  and .file_count == 2092
   and .database_writes == 0
   and .cache_writes == 0
   and .discoverability_writes == 0

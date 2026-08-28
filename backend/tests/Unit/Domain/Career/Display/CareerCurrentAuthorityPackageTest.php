@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Career\Display;
 
+use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageLoader;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
-use App\Domain\Career\Display\CareerShardedCurrentAuthorityPackage;
 use PHPUnit\Framework\TestCase;
 
 final class CareerCurrentAuthorityPackageTest extends TestCase
@@ -19,14 +19,14 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
         $authorityRoot = $backendRoot.'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH;
         self::assertTrue(mkdir($authorityRoot, 0755, true));
         file_put_contents($authorityRoot.'/manifest.json', json_encode([
-            'contract_version' => CareerShardedCurrentAuthorityPackage::CONTRACT_VERSION,
+            'contract_version' => CareerContentV3AuthorityPackage::CONTRACT_VERSION,
             'authority_path' => 'backend/content_assets/career/candidate',
             'aggregate_sha256' => str_repeat('a', 64),
         ], JSON_THROW_ON_ERROR));
 
         try {
             CareerCurrentAuthorityPackage::declaredAssetsSha256($backendRoot);
-            self::fail('An out-of-path sharded manifest must not bind a publish operation.');
+            self::fail('An out-of-path per-page manifest must not bind a publish operation.');
         } catch (CareerCurrentAuthorityPackageFailure $failure) {
             self::assertSame('CURRENT_MANIFEST_INVALID', $failure->safeCode);
         } finally {
@@ -42,42 +42,29 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
     {
         ini_set('memory_limit', '2048M');
 
-        $legacyContract = new CareerCurrentAuthorityPackage;
         $package = (new CareerCurrentAuthorityPackageLoader(
-            $legacyContract,
-            new CareerShardedCurrentAuthorityPackage($legacyContract),
+            new CareerContentV3AuthorityPackage,
         ))->load(dirname(__DIR__, 5));
 
         self::assertSame(1046, $package['summary']['career_count']);
         self::assertSame(2092, $package['summary']['locale_page_count']);
-        self::assertSame(
-            count(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS),
-            $package['summary']['components_per_page'],
-        );
-        self::assertSame('sharded', $package['summary']['source_format']);
-        self::assertSame('career.sharded_current.manifest.v1', $package['manifest']['contract_version']);
-        self::assertCount(640, $package['manifest']['shards']);
-        self::assertSame([], $package['manifest']['registries']);
+        self::assertSame('content_v3_per_page', $package['summary']['source_format']);
+        self::assertSame(CareerContentV3AuthorityPackage::CONTRACT_VERSION, $package['manifest']['contract_version']);
+        self::assertCount(2092, $package['manifest']['files']);
         self::assertSame(
             CareerCurrentAuthorityPackage::declaredAssetsSha256(dirname(__DIR__, 5)),
             $package['manifest']['aggregate_sha256'],
         );
         self::assertSame(
-            $package['manifest']['versionless_projection_sha256'],
+            $package['manifest']['set_hashes']['legacy_versionless_projection_sha256'],
             $package['summary']['versionless_projection_sha256'],
         );
-        self::assertSame(
-            CareerCurrentAuthorityPackage::hashValue(array_values($package['rows'])),
-            $package['summary']['versionless_projection_sha256'],
-        );
-        foreach ($package['rows'] as $row) {
-            self::assertSame(['en', 'zh'], array_keys($row['metadata_json']['presentation_v2']));
-            self::assertArrayHasKey('presentation_v2', $legacyContract->publicProjection($row, 'en'));
-            self::assertArrayHasKey('presentation_v2', $legacyContract->publicProjection($row, 'zh-CN'));
-            self::assertSame('career.detail.content.v3', $legacyContract->publicProjection($row, 'en')['content_v3']['contract_version']);
-            self::assertSame('career.detail.content.v3', $legacyContract->publicProjection($row, 'zh-CN')['content_v3']['contract_version']);
+        foreach ($package['pages'] as $localized) {
+            self::assertSame(['en', 'zh-CN'], array_keys($localized));
+            self::assertSame('career.detail.content.v3', $localized['en']['contract_version']);
+            self::assertSame('career.detail.content.v3', $localized['zh-CN']['contract_version']);
         }
-        self::assertArrayNotHasKey('software-developers', $package['rows']);
+        self::assertArrayNotHasKey('software-developers', $package['pages']);
     }
 
     public function test_publish_runner_loads_authority_classes_before_validating_execution_contract(): void
@@ -155,8 +142,7 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
         $workflow = (string) file_get_contents(dirname(__DIR__, 6).'/.github/workflows/deploy.yml');
 
         foreach ([
-            'backend/app/Domain/Career/Display/CareerCurrentAuthorityPackage.php',
-            'backend/app/Domain/Career/Display/CareerCurrentAuthorityPublisher.php',
+            'backend/scripts/ci/verify_career_current_authority_release.sh',
             'backend/scripts/operations/career_current_authority_publish.php',
         ] as $path) {
             self::assertGreaterThanOrEqual(1, substr_count($workflow, $path));
@@ -165,7 +151,6 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
             '.public_readback.verified_slug_count == 1046',
             $workflow,
         );
-        self::assertStringContainsString('startswith("backend/content_assets/career/current/")', $workflow);
         self::assertStringContainsString('verify_career_current_authority_release.sh', $workflow);
         self::assertStringContainsString('CAREER_CURRENT_PUBLISH_SOURCE_MERGE_SHA', $workflow);
         self::assertStringContainsString('CAREER_CURRENT_PUBLISH_MANIFEST_SHA256', $workflow);

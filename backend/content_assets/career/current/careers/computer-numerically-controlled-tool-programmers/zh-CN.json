@@ -1,0 +1,3456 @@
+{
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "legacy",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "不适合只想敲代码、不下车间的人。CNC 编程必须懂现场：不亲眼看看刀怎么磨损、件怎么变形，写出来的程序就是空中楼阁。"
+            ]
+          },
+          "id": "fermat-decision-card-1",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "一句话区分：操作员「开机床」，程序员「写剧本」——机床跑什么动作、怎么跑，全在程序员的程序里。"
+            ]
+          },
+          "id": "fermat-decision-card-2",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "不适合只想敲代码、不下车间的人。CNC 编程必须懂现场：不亲眼看看刀怎么磨损、件怎么变形，写出来的程序就是空中楼阁。"
+            ]
+          },
+          "id": "fit-decision-checklist-1",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "常见路径：机械/数控专业 → 先做数控操作员熟悉机床 → 学 CAD/CAM 编程软件 → 转编程岗 → 积累工艺经验升高级程序员/工艺工程师。"
+            ]
+          },
+          "id": "fit-decision-checklist-2",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "适合爱钻研软件、又懂点机械加工的人。你要是建模快、对刀路有直觉、愿意跟车间打交道，这行是数字与实体的完美结合。"
+            ]
+          },
+          "id": "fit-decision-checklist-3",
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "legacy",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "计算机数控（CNC）程序员（Computer Numerically Controlled Tool Programmers）负责编写和调试数控机床的加工程序：依据零件图纸建立三维模型、设计刀路、设定加工参数、进行仿真验证，并配合试切优化，将设计意图转化为可执行的加工指令。"
+            ]
+          },
+          "id": "definition-block-1",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-ai-description-block",
+          "data": {
+            "entries": [
+              "计算机数控程序员负责编写和调试数控机床的加工程序：依据零件图纸建立三维模型、设计刀路、设定加工参数、进行仿真验证，并配合试切优化。"
+            ]
+          },
+          "id": "career-ai-description-block-1",
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "依据零件图纸建立三维模型与工艺方案。",
+              "设计粗精加工刀路并设置加工参数。",
+              "使用 CAM 软件生成并仿真验证程序。",
+              "配合试切，根据测量结果调整程序参数。",
+              "优化现有程序，提升效率与质量。",
+              "与操作员、工艺员协作处理现场问题。"
+            ]
+          },
+          "id": "responsibilities-block-1",
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "一天的核心是「建模—写刀路—仿真—试切」的循环：上午对着图纸建模型、定装夹方案，下午写粗精加工刀路、设转速进给，仿真跑通后传给机床试切；试出来的件有超差，就下车间量尺寸、找原因、改参数，反复到合格为止。"
+            ]
+          },
+          "id": "work-context-block-1",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "published"
+            ]
+          },
+          "id": "career-quick-answers-block-1",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "一句话：把图纸变成机床能跑的程序。具体包括建三维模型、定工艺方案、设计刀路、设置转速进给、仿真验证、配合试切调参、优化现有程序、处理车间现场问题。"
+            ]
+          },
+          "id": "career-quick-answers-block-2",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "qa3"
+            ]
+          },
+          "id": "career-quick-answers-block-3",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "CAD/CAM 软件、数控机床、零件图纸"
+            ]
+          },
+          "id": "career-quick-answers-block-4",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "高效稳定的加工程序 + 合格零件"
+            ]
+          },
+          "id": "career-quick-answers-block-5",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "复杂件刀路的工艺取舍"
+            ]
+          },
+          "id": "career-quick-answers-block-6",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "BLS 预计 2024–2034 年就业增长 13%（BLS OOH，2026）。方向上分化明显：入门级编程正被 AI 自动生成吞掉，但高端制造（航空、医疗、模具）对疑难件工艺编程的需求在涨。会多轴编程、懂工艺、能解决现场问题的资深程序员依然稀缺，只会套模板的新手空间在收窄。"
+            ]
+          },
+          "id": "career-quick-answers-block-7",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "qa2"
+            ]
+          },
+          "id": "career-quick-answers-block-8",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "BLS 预计 2024–2034 年就业增长 13%（BLS OOH，2026）。"
+            ]
+          },
+          "id": "career-quick-answers-block-9",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "入门编程 → 高端工艺编程"
+            ]
+          },
+          "id": "career-quick-answers-block-10",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "月薪约 ¥8,000–15,000/月（爱企查等公开渠道，采样 10 条，2026-08）"
+            ]
+          },
+          "id": "career-quick-answers-block-11",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "美国中位数年薪约 $65,670（BLS OOH，2026）。国内薪资非官方、非实时，季度刷新（来源，2026-08）。收入明显高于一线操作工：会五轴、多轴联动与航空航天/医疗件编程的稀缺人才溢价高，加班与项目提成也是常见构成。"
+            ]
+          },
+          "id": "career-quick-answers-block-12",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "qa1"
+            ]
+          },
+          "id": "career-quick-answers-block-13",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "$65,670"
+            ]
+          },
+          "id": "career-quick-answers-block-14",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "月薪约 ¥8,000–15,000/月（爱企查等公开渠道，采样 10 条，2026-08）"
+            ]
+          },
+          "id": "career-quick-answers-block-15",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "技能稀缺度定薪，五轴编程溢价高"
+            ]
+          },
+          "id": "career-quick-answers-block-16",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "career.quick_answers.v1"
+            ]
+          },
+          "id": "career-quick-answers-block-17",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "published"
+            ]
+          },
+          "id": "onet-structured-fields-block-1",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "办公室编程 + 车间试切，办公室与现场各半"
+            ]
+          },
+          "id": "onet-structured-fields-block-2",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "机械/数控大专以上，CAM 软件熟练"
+            ]
+          },
+          "id": "onet-structured-fields-block-3",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "建模、刀路设计、工艺知识、仿真验证"
+            ]
+          },
+          "id": "onet-structured-fields-block-4",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "建模、编程、仿真、试切、优化、协作"
+            ]
+          },
+          "id": "onet-structured-fields-block-5",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "航空航天、汽车、模具、医疗与通用制造"
+            ]
+          },
+          "id": "onet-structured-fields-block-6",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "数字化制造的关键技术岗"
+            ]
+          },
+          "id": "onet-structured-fields-block-7",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "career.onet_structured_fields.v1"
+            ]
+          },
+          "id": "onet-structured-fields-block-8",
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "legacy",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "操作员自动化程度更高，程序员更吃工艺"
+            ]
+          },
+          "id": "adjacent-career-comparison-table-1",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "开机床跑程序，程序员写程序"
+            ]
+          },
+          "id": "adjacent-career-comparison-table-2",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "数控机床操作员"
+            ]
+          },
+          "id": "adjacent-career-comparison-table-3",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "模具修模难替代，编程端受 AI 挤压"
+            ]
+          },
+          "id": "adjacent-career-comparison-table-4",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "做模具实体，程序员写加工指令"
+            ]
+          },
+          "id": "adjacent-career-comparison-table-5",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "工具模具制造工"
+            ]
+          },
+          "id": "adjacent-career-comparison-table-6",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "手工划线萎缩快，编程需要工艺转型"
+            ]
+          },
+          "id": "adjacent-career-comparison-table-7",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "在工件上画线，程序员在软件里编刀路"
+            ]
+          },
+          "id": "adjacent-career-comparison-table-8",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "金属划线工"
+            ]
+          },
+          "id": "adjacent-career-comparison-table-9",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "设计端 AI 辅助，编程端偏工艺"
+            ]
+          },
+          "id": "adjacent-career-comparison-table-10",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "设计产品结构，程序员设计加工方式"
+            ]
+          },
+          "id": "adjacent-career-comparison-table-11",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "机械工程师"
+            ]
+          },
+          "id": "adjacent-career-comparison-table-12",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "两者都在向智能编程演进"
+            ]
+          },
+          "id": "adjacent-career-comparison-table-13",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "编机器人动作，CNC 编机床刀路"
+            ]
+          },
+          "id": "adjacent-career-comparison-table-14",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "工业机器人程序员"
+            ]
+          },
+          "id": "adjacent-career-comparison-table-15",
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "legacy",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "AI 能自动生成刀路了，CNC 程序员还有价值吗？有，但只留给懂工艺的人。"
+            ]
+          },
+          "id": "ai-impact-table-1",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "美国劳工统计局（BLS） 的数据显示，2024 年计算机在岗约 2.83 万人，到 2034 年预计升至 3.19 万人，净增约 0.36 万个岗位，年均产生约 0.31 万个职位空缺，2026 年中位数年薪约 6.57 万美元（BLS OOH，2026）。"
+            ]
+          },
+          "id": "ai-impact-table-2",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "AI 不会取代 CNC 程序员，但会清理掉「只会套模板」的那一批：现在的 CAM 软件加 AI 辅助，几秒钟就能生成常规件的刀路，过去靠背参数混饭的新手空间被大幅压缩。真正留下来的是懂工艺的人——复杂件怎么装夹、用什么刀具策略、怎么控制变形、怎么在质量和效率之间取舍，这些判断 AI 给不了，需要现场经验支撑。"
+            ]
+          },
+          "id": "ai-impact-table-3",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "entries": [
+              "AI 依据历史数据优化刀路策略",
+              "切削参数自适应调整",
+              "加工特征自动识别与工艺匹配",
+              "在线测量数据反哺程序优化"
+            ]
+          },
+          "id": "ai-impact-table-4",
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "entries": [
+              "常规零件刀路的自动生成",
+              "加工参数的智能推荐",
+              "仿真碰撞检查自动化",
+              "后处理程序自动生成"
+            ]
+          },
+          "id": "ai-impact-table-5",
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "entries": [
+              "工艺方案设计：装夹、刀具、工序、余量的通盘规划。",
+              "疑难件判断：薄壁、深腔、异形件的特殊工艺处理。",
+              "现场问题处置：崩刀、振纹、变形背后的真实原因。",
+              "与操作员协作：程序再好，也要现场人机配合。",
+              "成本与效率意识：程序不只要对，还要省时省料。"
+            ]
+          },
+          "id": "ai-impact-table-6",
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "6/10 说明编程生成环节的 AI 接触面大，常规工作正在被自动化和 AI 大量代劳，属于中高曝光。"
+            ]
+          },
+          "id": "ai-impact-table-7",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "中高曝光不等于岗位消失：被替代的是「生成程序」的动作，被加码的是「设计工艺」的判断。会 AI 编程工具、又懂现场工艺的程序员，一个人能顶过去几个人，稀缺性反而上升。"
+            ]
+          },
+          "id": "ai-impact-table-8",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "考生 / 家长"
+            ]
+          },
+          "id": "ai-impact-table-9",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "读机械、数控或智能制造专业，把 CAD/CAM 练熟的同时一定学加工工艺。编程会被 AI 替代，工艺不会——两手都硬的学生是制造企业的抢手货。"
+            ]
+          },
+          "id": "ai-impact-table-10",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "在职从业者"
+            ]
+          },
+          "id": "ai-impact-table-11",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "别满足于「会出程序」，往多轴编程、疑难件工艺、智能刀具管理方向走。把 AI 编程工具用起来当助手，你的价值在判断不在生成。"
+            ]
+          },
+          "id": "ai-impact-table-12",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "转行 / 求职者"
+            ]
+          },
+          "id": "ai-impact-table-13",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "有数控操作经验再转编程最顺。求职时带上自己做过的程序案例和试切改进记录，比证书更有说服力，高端行业更看重作品。"
+            ]
+          },
+          "id": "ai-impact-table-14",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "招聘方"
+            ]
+          },
+          "id": "ai-impact-table-15",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "别把程序员当「刀路生成器」用，AI 已能代劳。招懂工艺、能下车间、会优化方案的复合程序员，配合 AI 工具，交付质量与效率都会上一个台阶。"
+            ]
+          },
+          "id": "ai-impact-table-16",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "零件模型构建"
+            ]
+          },
+          "id": "ai-impact-table-17",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "三维建模"
+            ]
+          },
+          "id": "ai-impact-table-18",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "CAD 建模软件"
+            ]
+          },
+          "id": "ai-impact-table-19",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "自动刀路与后处理"
+            ]
+          },
+          "id": "ai-impact-table-20",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "刀路生成"
+            ]
+          },
+          "id": "ai-impact-table-21",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "CAM 编程软件"
+            ]
+          },
+          "id": "ai-impact-table-22",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "特征识别与参数推荐"
+            ]
+          },
+          "id": "ai-impact-table-23",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "智能编程"
+            ]
+          },
+          "id": "ai-impact-table-24",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "AI 编程助手"
+            ]
+          },
+          "id": "ai-impact-table-25",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "装夹刀具干涉模拟"
+            ]
+          },
+          "id": "ai-impact-table-26",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "碰撞检查"
+            ]
+          },
+          "id": "ai-impact-table-27",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "仿真验证软件"
+            ]
+          },
+          "id": "ai-impact-table-28",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "实测数据自动回传"
+            ]
+          },
+          "id": "ai-impact-table-29",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "尺寸反馈"
+            ]
+          },
+          "id": "ai-impact-table-30",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "在线测量系统"
+            ]
+          },
+          "id": "ai-impact-table-31",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "寿命追踪与选型"
+            ]
+          },
+          "id": "ai-impact-table-32",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "刀具管理"
+            ]
+          },
+          "id": "ai-impact-table-33",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "刀具管理系统"
+            ]
+          },
+          "id": "ai-impact-table-34",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "全工序虚拟验证"
+            ]
+          },
+          "id": "ai-impact-table-35",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "工艺预演"
+            ]
+          },
+          "id": "ai-impact-table-36",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数字孪生平台"
+            ]
+          },
+          "id": "ai-impact-table-37",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "工艺参数沉淀复用"
+            ]
+          },
+          "id": "ai-impact-table-38",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数据沉淀"
+            ]
+          },
+          "id": "ai-impact-table-39",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "车间数据中台"
+            ]
+          },
+          "id": "ai-impact-table-40",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "entries": [
+              "AI 自动编程成为标配，程序员重心全面转向工艺设计与疑难件。",
+              "五轴与多轴编程需求随高端制造扩张，稀缺人才溢价持续。",
+              "数字孪生与在线测量闭环，程序优化从经验驱动转向数据驱动。"
+            ]
+          },
+          "id": "ai-impact-table-41",
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "legacy",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "一句话画像：在电脑上写出「机床听得懂的语言」，指挥钢铁按你的剧本成形的人。"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-1",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "$65,670"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-2",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "美国劳工统计局"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-3",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "13%"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-4",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "美国劳工统计局"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-5",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "28,300 人"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-6",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "美国劳工统计局"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-7",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "3,100 个"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-8",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "含转岗与流动补充"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-9",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "见「入门路径」"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-10",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "非 BLS 单一指标"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-11",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "$47,530"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-12",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "美国劳工统计局"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-13",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "$100,320"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-14",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "美国劳工统计局"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-15",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "BLS OOH / OES"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-16",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数与就业预测来自 BLS OOH，薪资分布来自 BLS OES 2025（2026 采集）"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-17",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "国内 CAM 与自动编程普及度高，AI 辅助编程在头部企业试点，航空航天与模具行业工艺编程需求旺盛。"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-18",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "国内就业主体：航空航天、汽车零部件、模具、医疗与高端装备制造企业。"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-19",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中专/大专"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-20",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "数控操作员（转岗前）"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-21",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "常见起点"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-22",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "本科"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-23",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "CNC 程序员、工艺编程员"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-24",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "机械/数控大专以上"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-25",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "研究生"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-26",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "高级工艺工程师、编程主管"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-27",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "多轴经验 + 工艺背景"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-28",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "航空航天"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-29",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "五轴编程需求旺，门槛高"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-30",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "汽车零部件"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-31",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "批量件程序优化需求稳"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-32",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "模具制造"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-33",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "复杂型腔编程吃经验"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-34",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "医疗器械"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-35",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "精密件编程需求增长"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-36",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "国外 CAM 软件与 AI 编程应用领先，工艺工程师与程序员分工成熟；国内编程岗更「多面手」，同时承担工艺与现场协调。"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-37",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国大陆对应职位名称：数控编程员、CNC 编程工程师、工艺编程员（非官方、非实时，季度刷新，2026-08）"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-38",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "在招职位数以招聘平台当日数据为准（2026-08）"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-39",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "爱企查/BOSS直聘/猎聘等公开渠道，采样 10 条，2026-08；非官方、非实时，季度刷新"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-40",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "以上为中国大陆薪资代理数据（爱企查等公开渠道，采样 10 条，2026-08），非官方、非实时，季度刷新，请勿据此做薪酬决策。"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-41",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "一线城市（北上广深）"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-42",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "月薪约 ¥8,000–15,000/月（爱企查等公开渠道，采样 10 条，2026-08）"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-43",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "新一线城市"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-44",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "月薪约 ¥8,000–15,000/月（爱企查等公开渠道，采样 10 条，2026-08）"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-45",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "资深/管理层"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-46",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "月薪约 ¥8,000–15,000/月（爱企查等公开渠道，采样 10 条，2026-08）"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-47",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国大陆归入「机械制造工程技术人员」类目，按工程技术人员职称体系发展（来源，2026-08）。"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-48",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "13%"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-49",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "$65,670"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-50",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "CNC 程序员身处办公室与车间交界：建模编程在中控电脑上，试切验证要下车间盯机床，复杂件加工常需跟操作员现场对方案。"
+            ]
+          },
+          "id": "career-snapshot-primary-locale-51",
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "legacy",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "$65,670"
+            ]
+          },
+          "id": "career-snapshot-secondary-locale-1",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国劳工统计局"
+            ]
+          },
+          "id": "career-snapshot-secondary-locale-2",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "13%"
+            ]
+          },
+          "id": "career-snapshot-secondary-locale-3",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国劳工统计局"
+            ]
+          },
+          "id": "career-snapshot-secondary-locale-4",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "28,300 人"
+            ]
+          },
+          "id": "career-snapshot-secondary-locale-5",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国劳工统计局"
+            ]
+          },
+          "id": "career-snapshot-secondary-locale-6",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "3,100 个"
+            ]
+          },
+          "id": "career-snapshot-secondary-locale-7",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "含转岗与流动补充"
+            ]
+          },
+          "id": "career-snapshot-secondary-locale-8",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "见「入门路径」"
+            ]
+          },
+          "id": "career-snapshot-secondary-locale-9",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "非 BLS 单一指标"
+            ]
+          },
+          "id": "career-snapshot-secondary-locale-10",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "$47,530"
+            ]
+          },
+          "id": "career-snapshot-secondary-locale-11",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国劳工统计局"
+            ]
+          },
+          "id": "career-snapshot-secondary-locale-12",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "$100,320"
+            ]
+          },
+          "id": "career-snapshot-secondary-locale-13",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国劳工统计局"
+            ]
+          },
+          "id": "career-snapshot-secondary-locale-14",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "BLS OOH / OES"
+            ]
+          },
+          "id": "career-snapshot-secondary-locale-15",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数与就业预测来自 BLS OOH，薪资分布来自 BLS OES 2025（2026 采集）"
+            ]
+          },
+          "id": "career-snapshot-secondary-locale-16",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "13%"
+            ]
+          },
+          "id": "career-snapshot-secondary-locale-17",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "$65,670"
+            ]
+          },
+          "id": "career-snapshot-secondary-locale-18",
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "legacy",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "这行适合「喜欢让机器听话」的人——你写的每一行刀路，机床都会忠实地跑给你看。"
+            ]
+          },
+          "id": "riasec-fit-block-1",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "这行的成就感在「程序落地的那一刻」——你写的刀路在机床上跑起来，一件件合格零件下线，你的设计变成了实打实的产品。适合喜欢电脑、又不想纯坐办公室，想贴着车间干的人。"
+            ]
+          },
+          "id": "riasec-fit-block-2",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "RIC"
+            ]
+          },
+          "id": "riasec-fit-block-3",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "实际型 R + 研究型 I + 事务型 C"
+            ]
+          },
+          "id": "riasec-fit-block-4",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "如果你享受「程序在机床上跑通」的成就感，又愿意一直学新工艺，CNC 编程会是数字化制造里很硬气的一门手艺。"
+            ]
+          },
+          "id": "personality-fit-block-1",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "该匹配为理论性、概率性参考，非决定论判断，个体差异显著，仅作自我评估辅助"
+            ]
+          },
+          "id": "personality-fit-block-2",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "entries": [
+              "空间感：刀路在脑子里走得起来",
+              "钻研：工艺问题愿意反复试",
+              "软件能力：CAD/CAM 越用越熟",
+              "沟通：与操作员现场配合",
+              "细心：一个参数错就是一批废品"
+            ]
+          },
+          "id": "personality-fit-block-3",
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "legacy",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "最大的职业风险不是 AI，而是「停在入门层」——程序生成在变免费，工艺判断才是你的护城河。"
+            ]
+          },
+          "id": "career-risk-cards-1",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "最大风险是「自动编程替代」——CAM 软件越来越智能，AI 辅助编程让入门级刀路生成近乎免费，只会套模板写简单程序的人最先被挤压；工艺扎实、能解决疑难件的人才反而更值钱。"
+            ]
+          },
+          "id": "career-risk-cards-2",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "entries": [
+              "AI 自动编程压缩入门编程岗位",
+              "纯模板式编程被软件替代",
+              "行业景气度随制造业波动",
+              "车间环境与加班强度不小",
+              "不学多轴与新工艺会被边缘化"
+            ]
+          },
+          "id": "career-risk-cards-3",
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "legacy",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "先懂机床再编程"
+            ]
+          },
+          "id": "career-path-block-1",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "数控操作员（转岗）"
+            ]
+          },
+          "id": "career-path-block-2",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "被 AI 自动编程替代"
+            ]
+          },
+          "id": "career-path-block-3",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "入门 CNC 程序员"
+            ]
+          },
+          "id": "career-path-block-4",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "工艺判断是硬壁垒"
+            ]
+          },
+          "id": "career-path-block-5",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "工艺编程工程师"
+            ]
+          },
+          "id": "career-path-block-6",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "稀缺人才，溢价高"
+            ]
+          },
+          "id": "career-path-block-7",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "多轴/疑难件专家"
+            ]
+          },
+          "id": "career-path-block-8",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "走向工艺体系管理"
+            ]
+          },
+          "id": "career-path-block-9",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "工艺管理岗"
+            ]
+          },
+          "id": "career-path-block-10",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.contract-project-risk-block",
+          "data": {
+            "paragraphs": [
+              "编程岗多为劳动合同制，入职确认是否配车间劳保、试切加班计算与工艺保密条款；高端行业要留意竞业限制与培训服务期约定。"
+            ]
+          },
+          "id": "contract-project-risk-block-1",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.next-steps-block",
+          "data": {
+            "entries": [
+              "多轴编程",
+              "CAM 软件",
+              "工艺设计",
+              "仿真验证",
+              "AI 辅助编程"
+            ]
+          },
+          "id": "next-steps-block-1",
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.next-steps-block",
+          "data": {
+            "entries": [
+              "编写并验证数控加工程序",
+              "设计工艺与装夹方案",
+              "配合试切优化参数",
+              "持续改进加工效率质量"
+            ]
+          },
+          "id": "next-steps-block-2",
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.next-steps-block",
+          "data": {
+            "entries": [
+              "CAD/CAM 建模与编程",
+              "刀路设计与参数优化",
+              "加工工艺与装夹方案",
+              "仿真验证与碰撞检查",
+              "试切分析与程序调优",
+              "与现场协作解决问题"
+            ]
+          },
+          "id": "next-steps-block-3",
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "legacy",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "一句话：未来缺的不是「会写刀路的人」，是「懂工艺、能解决疑难件、会用 AI」的编程工程师。"
+            ]
+          },
+          "id": "market-signal-card-1",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "entries": [
+              "以上信号来自招聘平台公开信息整理，非官方、非实时，季度刷新（来源，2026-08）。",
+              "信号为方向性参考，不作为就业决策依据。",
+              "如需实时数据，请以招聘平台与官方发布为准。"
+            ]
+          },
+          "id": "market-signal-card-2",
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "从招聘与行业信号看，CNC 编程正从「会出程序」转向「会做工艺」。"
+            ]
+          },
+          "id": "market-signal-card-3",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "entries": [
+              "航空航天与医疗件五轴编程岗增多",
+              "AI 编程工具在制造企业加速落地",
+              "招聘普遍要求工艺经验而非纯编程",
+              "入门编程岗位数量在收缩"
+            ]
+          },
+          "id": "market-signal-card-4",
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "legacy",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "美国中位数年薪约 $65,670（BLS OOH，2026）。国内薪资非官方、非实时，季度刷新（来源，2026-08）。收入明显高于一线操作工：会五轴、多轴联动与航空航天/医疗件编程的稀缺人才溢价高，加班与项目提成也是常见构成。",
+                "id": "faq-1",
+                "question_key": "career.faq.salary"
+              },
+              {
+                "answer": "BLS 预计 2024–2034 年就业增长 13%（BLS OOH，2026）。方向上分化明显：入门级编程正被 AI 自动生成吞掉，但高端制造（航空、医疗、模具）对疑难件工艺编程的需求在涨。会多轴编程、懂工艺、能解决现场问题的资深程序员依然稀缺，只会套模板的新手空间在收窄。",
+                "id": "faq-2",
+                "question_key": "career.faq.outlook"
+              },
+              {
+                "answer": "一句话：把图纸变成机床能跑的程序。具体包括建三维模型、定工艺方案、设计刀路、设置转速进给、仿真验证、配合试切调参、优化现有程序、处理车间现场问题。",
+                "id": "faq-3",
+                "question_key": "career.faq.daily-work"
+              },
+              {
+                "answer": "操作员「开机床」——装夹、启动、监控、测量；程序员「写剧本」——建模型、设计刀路、设参数、仿真验证，机床跑什么动作、怎么跑，全在程序员的程序里。",
+                "id": "faq-4",
+                "question_key": "career.faq.comparison"
+              },
+              {
+                "answer": "会清理掉「只会套模板」的那一批：AI 辅助编程几秒钟就能生成常规件刀路。但复杂件怎么装夹、用什么刀具策略、怎么控制变形，这些工艺判断 AI 给不了，懂工艺的程序员反而更稀缺。",
+                "id": "faq-5",
+                "question_key": "career.faq.ai-replacement"
+              },
+              {
+                "answer": "工艺方案设计——装夹、刀具、工序、余量的通盘规划；疑难件判断——薄壁、深腔、异形件的特殊处理；现场问题处置——崩刀、振纹、变形背后的原因；还有成本效率意识。",
+                "id": "faq-6",
+                "question_key": "career.faq.human-skills"
+              },
+              {
+                "answer": "爱钻研软件、又懂点机械加工的人。建模快、对刀路有直觉、愿意跟车间打交道。只想敲代码不下车间的人不适合——不亲眼看看刀怎么磨损，写出来的程序是空中楼阁。",
+                "id": "faq-7",
+                "question_key": "career.faq.personality-fit"
+              },
+              {
+                "answer": "长三角、珠三角和高端制造集聚区——航空航天、汽车零部件、模具、医疗器械企业；五轴和多轴编程岗位随高端制造扩张，稀缺人才溢价高。",
+                "id": "faq-8",
+                "question_key": "career.faq.work-setting"
+              },
+              {
+                "answer": "值得，但要往深处走。入门编程正被 AI 吞掉，可高端制造对疑难件工艺编程的需求在涨；把多轴编程、智能刀具管理、数字孪生学起来，从「出程序」升级成「做工艺」。",
+                "id": "faq-9",
+                "question_key": "career.faq.career-worth"
+              }
+            ]
+          },
+          "id": "faq-block-1",
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "机加工数字化链条上岗位相连，CNC 程序员、操作员、模具工、划线工分工不同，下面这些页面帮你理清。"
+            ]
+          },
+          "id": "related-next-pages-1",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "textile-cutting-machine-setters-operators-and-tenders"
+            ]
+          },
+          "id": "related-next-pages-2",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "lookup"
+            ]
+          },
+          "id": "related-next-pages-3",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Textile Cutting Machine Setters, Operators, And Tenders"
+            ]
+          },
+          "id": "related-next-pages-4",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "cutting-punching-and-press-machine-setters-operators-and-tenders-metal-and-plastic"
+            ]
+          },
+          "id": "related-next-pages-5",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "lookup"
+            ]
+          },
+          "id": "related-next-pages-6",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Cutting, Punching, And Press Machine Setters, Operators, And Tenders, Metal And Plastic"
+            ]
+          },
+          "id": "related-next-pages-7",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "cabinetmakers-and-bench-carpenters"
+            ]
+          },
+          "id": "related-next-pages-8",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "lookup"
+            ]
+          },
+          "id": "related-next-pages-9",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Cabinetmakers And Bench Carpenters"
+            ]
+          },
+          "id": "related-next-pages-10",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "woodworkers"
+            ]
+          },
+          "id": "related-next-pages-11",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "lookup"
+            ]
+          },
+          "id": "related-next-pages-12",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Cabinetmakers And Bench Carpenters"
+            ]
+          },
+          "id": "related-next-pages-13",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "computer-numerically-controlled-tool-operators"
+            ]
+          },
+          "id": "related-next-pages-14",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "lookup"
+            ]
+          },
+          "id": "related-next-pages-15",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Computer Numerically Controlled Tool Operators"
+            ]
+          },
+          "id": "related-next-pages-16",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "nuclear-power-reactor-operators"
+            ]
+          },
+          "id": "related-next-pages-17",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "self_pick"
+            ]
+          },
+          "id": "related-next-pages-18",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Nuclear Power Reactor Operators"
+            ]
+          },
+          "id": "related-next-pages-19",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "separating-filtering-clarifying-precipitating-and-still-machine-setters-operators-and-tenders"
+            ]
+          },
+          "id": "related-next-pages-20",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "self_pick"
+            ]
+          },
+          "id": "related-next-pages-21",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Separating, Filtering, Clarifying, Precipitating, And Still Machine Setters, Operators, And Tenders"
+            ]
+          },
+          "id": "related-next-pages-22",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "chemical-equipment-operators-and-tenders"
+            ]
+          },
+          "id": "related-next-pages-23",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "self_pick"
+            ]
+          },
+          "id": "related-next-pages-24",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Chemical Equipment Operators And Tenders"
+            ]
+          },
+          "id": "related-next-pages-25",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "prepress-technicians-and-workers"
+            ]
+          },
+          "id": "related-next-pages-26",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "self_pick"
+            ]
+          },
+          "id": "related-next-pages-27",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Prepress Technicians And Workers"
+            ]
+          },
+          "id": "related-next-pages-28",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "jewelers-and-precious-stone-and-metal-workers"
+            ]
+          },
+          "id": "related-next-pages-29",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "self_pick"
+            ]
+          },
+          "id": "related-next-pages-30",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Jewelers And Precious Stone And Metal Workers"
+            ]
+          },
+          "id": "related-next-pages-31",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "power-plant-operators"
+            ]
+          },
+          "id": "related-next-pages-32",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "self_pick"
+            ]
+          },
+          "id": "related-next-pages-33",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Power Plant Operators"
+            ]
+          },
+          "id": "related-next-pages-34",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "electrical-and-electronic-equipment-assemblers"
+            ]
+          },
+          "id": "related-next-pages-35",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "self_pick"
+            ]
+          },
+          "id": "related-next-pages-36",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Electrical And Electronic Equipment Assemblers"
+            ]
+          },
+          "id": "related-next-pages-37",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "rolling-machine-setters-operators-and-tenders-metal-and-plastic"
+            ]
+          },
+          "id": "related-next-pages-38",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "self_pick"
+            ]
+          },
+          "id": "related-next-pages-39",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Rolling Machine Setters, Operators, And Tenders, Metal And Plastic"
+            ]
+          },
+          "id": "related-next-pages-40",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "computer-programmers"
+            ]
+          },
+          "id": "related-next-pages-41",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "lookup"
+            ]
+          },
+          "id": "related-next-pages-42",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Computer programmers"
+            ]
+          },
+          "id": "related-next-pages-43",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "fabric-and-apparel-patternmakers"
+            ]
+          },
+          "id": "related-next-pages-44",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "lookup"
+            ]
+          },
+          "id": "related-next-pages-45",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Fabric And Apparel Patternmakers"
+            ]
+          },
+          "id": "related-next-pages-46",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "geodetic-surveyors"
+            ]
+          },
+          "id": "related-next-pages-47",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "lookup"
+            ]
+          },
+          "id": "related-next-pages-48",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Geodetic Surveyors"
+            ]
+          },
+          "id": "related-next-pages-49",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "magnetic-resonance-imaging-technologists"
+            ]
+          },
+          "id": "related-next-pages-50",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "lookup"
+            ]
+          },
+          "id": "related-next-pages-51",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Magnetic Resonance Imaging Technologists"
+            ]
+          },
+          "id": "related-next-pages-52",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "medical-appliance-technicians"
+            ]
+          },
+          "id": "related-next-pages-53",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "self_pick"
+            ]
+          },
+          "id": "related-next-pages-54",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Medical Appliance Technicians"
+            ]
+          },
+          "id": "related-next-pages-55",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "medical-dosimetrists"
+            ]
+          },
+          "id": "related-next-pages-56",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "lookup"
+            ]
+          },
+          "id": "related-next-pages-57",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Medical Dosimetrists"
+            ]
+          },
+          "id": "related-next-pages-58",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "medical-scientists"
+            ]
+          },
+          "id": "related-next-pages-59",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "lookup"
+            ]
+          },
+          "id": "related-next-pages-60",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Medical Scientists"
+            ]
+          },
+          "id": "related-next-pages-61",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "office-machine-operators-except-computer"
+            ]
+          },
+          "id": "related-next-pages-62",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "lookup"
+            ]
+          },
+          "id": "related-next-pages-63",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Office Machine Operators, Except Computer"
+            ]
+          },
+          "id": "related-next-pages-64",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "photographic-process-workers-and-processing-machine-operators"
+            ]
+          },
+          "id": "related-next-pages-65",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "self_pick"
+            ]
+          },
+          "id": "related-next-pages-66",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Photographic Process Workers And Processing Machine Operators"
+            ]
+          },
+          "id": "related-next-pages-67",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "power-distributors-and-dispatchers"
+            ]
+          },
+          "id": "related-next-pages-68",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "self_pick"
+            ]
+          },
+          "id": "related-next-pages-69",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Power Distributors And Dispatchers"
+            ]
+          },
+          "id": "related-next-pages-70",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "power-plant-operators-distributors-and-dispatchers"
+            ]
+          },
+          "id": "related-next-pages-71",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "self_pick"
+            ]
+          },
+          "id": "related-next-pages-72",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Power Plant Operators, Distributors, And Dispatchers"
+            ]
+          },
+          "id": "related-next-pages-73",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "sawing-machine-setters-operators-and-tenders-wood"
+            ]
+          },
+          "id": "related-next-pages-74",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "self_pick"
+            ]
+          },
+          "id": "related-next-pages-75",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Sawing Machine Setters, Operators, And Tenders, Wood"
+            ]
+          },
+          "id": "related-next-pages-76",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "semiconductor-processing-technicians"
+            ]
+          },
+          "id": "related-next-pages-77",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "self_pick"
+            ]
+          },
+          "id": "related-next-pages-78",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Semiconductor Processing Technicians"
+            ]
+          },
+          "id": "related-next-pages-79",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "shoe-and-leather-workers-and-repairers"
+            ]
+          },
+          "id": "related-next-pages-80",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "lookup"
+            ]
+          },
+          "id": "related-next-pages-81",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Shoe And Leather Workers And Repairers"
+            ]
+          },
+          "id": "related-next-pages-82",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "travel-agents"
+            ]
+          },
+          "id": "related-next-pages-83",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "lookup"
+            ]
+          },
+          "id": "related-next-pages-84",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Travel Agents"
+            ]
+          },
+          "id": "related-next-pages-85",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "water-and-wastewater-treatment-plant-and-system-operators"
+            ]
+          },
+          "id": "related-next-pages-86",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "self_pick"
+            ]
+          },
+          "id": "related-next-pages-87",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.related-next-pages",
+          "data": {
+            "paragraphs": [
+              "Water And Wastewater Treatment Plant And System Operators"
+            ]
+          },
+          "id": "related-next-pages-88",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.source-card",
+          "data": {
+            "paragraphs": [
+              "FermatMind 职业内容团队"
+            ]
+          },
+          "id": "source-card-1",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.source-card",
+          "data": {
+            "paragraphs": [
+              "本文事实（O*NET/SOC 码、中英文标题、AI 曝光分、内链、BLS 数据）来自 FermatMind 职业查表与 BLS/O*NET 公开数据；中国大陆数据为代理占位，非官方、非实时，季度刷新（来源，2026-08）；BLS 数据见上表（BLS OOH/OES，2026）。"
+            ]
+          },
+          "id": "source-card-2",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.source-card",
+          "data": {
+            "paragraphs": [
+              "2026-08"
+            ]
+          },
+          "id": "source-card-3",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.source-card",
+          "data": {
+            "paragraphs": [
+              "本文事实（O*NET/SOC 码、中英文标题、AI 曝光分、内链、BLS 数据）来自 FermatMind 职业查表与 BLS/O*NET 公开数据；中国大陆数据为代理占位，非官方、非实时，季度刷新（来源，2026-08）；BLS 数据见上表（BLS OOH/OES，2026）。"
+            ]
+          },
+          "id": "source-card-4",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.review-validity-card",
+          "data": {
+            "paragraphs": [
+              "2026-08"
+            ]
+          },
+          "id": "review-validity-card-1",
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "最大的职业风险不是 AI，而是「停在入门层」——程序生成在变免费，工艺判断才是你的护城河。",
+              "该匹配为理论性、概率性参考，非决定论判断，个体差异显著，仅作自我评估辅助"
+            ]
+          },
+          "id": "boundary-notice-1",
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "legacy",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "primary_cta",
+                "id": "navigation-1",
+                "relation": "related-evidence",
+                "url": "/zh/tests/holland-career-interest-test-riasec"
+              },
+              {
+                "entity": "secondary_cta",
+                "id": "navigation-2",
+                "relation": "related-evidence",
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
+              },
+              {
+                "entity": "secondary_cta",
+                "id": "navigation-3",
+                "relation": "related-evidence",
+                "url": "/en/tests/big-five-personality-test-ocean-model"
+              },
+              {
+                "entity": "secondary_cta",
+                "id": "navigation-4",
+                "relation": "related-evidence",
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+              },
+              {
+                "entity": "secondary_cta",
+                "id": "navigation-5",
+                "relation": "related-evidence",
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
+              },
+              {
+                "entity": "final_cta",
+                "id": "navigation-6",
+                "relation": "related-evidence",
+                "url": "/zh/tests/holland-career-interest-test-riasec"
+              },
+              {
+                "entity": "path",
+                "id": "navigation-7",
+                "relation": "related-evidence",
+                "url": "/zh/career/jobs/computer-numerically-controlled-tool-programmers"
+              }
+            ]
+          },
+          "id": "navigation-links",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "legacy",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "details": [
+                  "SOC identity and occupational classification boundary."
+                ],
+                "id": "source-1",
+                "name": "U.S. Bureau of Labor Statistics: Standard Occupational Classification",
+                "url": "https://www.bls.gov/soc/"
+              },
+              {
+                "details": [
+                  "Occupation definition, tasks, work activities, interests, skills and work context."
+                ],
+                "id": "source-2",
+                "name": "O*NET OnLine: Computer Numerically Controlled Tool Programmers 51-9162.00",
+                "url": "https://www.onetonline.org/link/details/51-9162.00"
+              },
+              {
+                "details": [
+                  "U.S. employment and wage source when available; do not use market-signal sources for official salary."
+                ],
+                "id": "source-3",
+                "name": "BLS Occupational Employment and Wage Statistics current profile",
+                "url": "https://www.bls.gov/oes/current/oes519162.htm"
+              },
+              {
+                "details": [
+                  "U.S. outlook, openings, education, work experience, and training source when the SOC title is present."
+                ],
+                "id": "source-4",
+                "name": "BLS Employment Projections Table 1.2: 2024–2034 projections and worker characteristics",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "details": [
+                  "Market-signal reference only; not an official wage, employment, or growth source."
+                ],
+                "id": "source-5",
+                "name": "LinkedIn job/profile market signal",
+                "url": "https://www.linkedin.com/jobs/search/?keywords=Computer+Numerically+Controlled+Tool+Programmers"
+              },
+              {
+                "details": [
+                  "Recruiting market-signal reference only; not an official occupational fact source."
+                ],
+                "id": "source-6",
+                "name": "Robert Half job-search / hiring guide reference",
+                "url": "https://www.roberthalf.com/us/en/jobs"
+              },
+              {
+                "details": [
+                  "Recruiting market-signal reference only; not an official occupational fact source."
+                ],
+                "id": "source-7",
+                "name": "Hays job-search / hiring guide reference",
+                "url": "https://www.hays.com/job-search"
+              },
+              {
+                "details": [
+                  "China industry-level reference only unless a single-occupation official statistic is available."
+                ],
+                "id": "source-8",
+                "name": "National Bureau of Statistics of China: wage and industry data",
+                "url": "https://www.stats.gov.cn/"
+              },
+              {
+                "details": [
+                  "Chinese occupational-title and classification context when applicable."
+                ],
+                "id": "source-9",
+                "name": "China occupational classification public references",
+                "url": "https://www.mohrss.gov.cn/"
+              },
+              {
+                "details": [
+                  "Recruiting sample only; not official salary or employment statistics."
+                ],
+                "id": "source-10",
+                "name": "Zhaopin job-posting sample reference",
+                "url": "https://sou.zhaopin.com/?kw=%E8%AE%A1%E7%AE%97%E6%9C%BA"
+              },
+              {
+                "details": [
+                  "2024 信息传输、软件和信息技术服务业 industry proxy: urban non-private 238966; urban private 123193. Not an occupation or individual wage."
+                ],
+                "id": "source-11",
+                "name": "nbs_2024_wage",
+                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202505/t20250516_1959826.html"
+              }
+            ]
+          },
+          "id": "published-sources",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "legacy",
+  "contract_version": "career.detail.content.v3",
+  "locale": "zh-CN",
+  "source_content_sha256": "7c16fd5a94a670bef5b1e24811adf92083b1d8f4513515390d98e0ff10bd4828",
+  "subject": {
+    "canonical_slug": "computer-numerically-controlled-tool-programmers",
+    "name": "数控机床程序员",
+    "summary": "CNC 程序员是「给机床写剧本的人」——数控机床怎么走刀、怎么切、怎么换刀，全靠他们写的程序指挥，是数字化制造的「翻译官」。"
+  }
+}

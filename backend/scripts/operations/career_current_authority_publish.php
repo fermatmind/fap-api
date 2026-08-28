@@ -177,14 +177,14 @@ try {
         $receipt[$key] = $result[$key];
     }
     $receipt['authority']['component_28_count'] = $result['authority']['valid_component_order_count'] ?? null;
-    if (($result['package']['source_format'] ?? null) !== 'sharded'
+    if (($result['package']['source_format'] ?? null) !== 'content_v3_per_page'
         || ! hash_equals(
             $assetsSha256,
-            (string) ($result['package']['sharded_aggregate_sha256'] ?? ''),
+            (string) ($result['package']['aggregate_sha256'] ?? ''),
         )
         || ($result['package']['career_count'] ?? null) !== 1046
         || ($result['package']['locale_page_count'] ?? null) !== 2092
-        || ($result['package']['components_per_page'] ?? null) !== 28
+        || ($result['package']['file_count'] ?? null) !== 2092
         || preg_match('/\A[0-9a-f]{64}\z/', (string) ($result['package']['versionless_projection_sha256'] ?? '')) !== 1
         || ! hash_equals($versionlessProjectionSha256, (string) ($result['package']['versionless_projection_sha256'] ?? ''))
         || ($result['authority']['target_count'] ?? null) !== 1046

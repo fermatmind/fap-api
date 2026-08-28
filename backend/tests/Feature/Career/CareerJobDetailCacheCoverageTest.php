@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Career;
 
 use App\Domain\Career\Compilation\CareerContentV3Projector;
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Jobs\Career\WarmCareerJobDetailProjection;
 use App\Models\Occupation;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Queue;
 use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
+use Tests\Support\DynamicCareerContentV3CanonicalReader;
 use Tests\TestCase;
 
 final class CareerJobDetailCacheCoverageTest extends TestCase
@@ -25,6 +27,10 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $this->app->instance(
+            CareerContentV3CanonicalReader::class,
+            new DynamicCareerContentV3CanonicalReader(app(CareerContentV3Projector::class)),
+        );
         Cache::flush();
         config()->set('queue.default', 'database');
     }

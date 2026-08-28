@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Domain\Career\Display\CareerCurrentAuthorityManifestRefresher;
+use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure;
-use App\Domain\Career\Display\CareerCurrentAuthorityPackageLoader;
-use App\Domain\Career\Display\CareerShardedCurrentAuthorityPackage;
 use Illuminate\Console\Command;
 use Throwable;
 
@@ -19,46 +17,38 @@ final class CareerCurrentManifest extends Command
 
     protected $description = 'Validate or deterministically refresh the Career Current authority manifest without runtime writes';
 
-    public function handle(
-        CareerCurrentAuthorityManifestRefresher $refresher,
-        CareerCurrentAuthorityPackageLoader $loader,
-    ): int {
-        ini_set('memory_limit', '1024M');
-
+    public function handle(CareerContentV3AuthorityPackage $contentV3Package): int
+    {
         try {
             $backendRoot = base_path();
             $write = (bool) $this->option('write');
             $manifestPath = $backendRoot.'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH.'/manifest.json';
             $manifest = json_decode((string) file_get_contents($manifestPath), true);
-            if (is_array($manifest)
-                && ($manifest['contract_version'] ?? null) === CareerShardedCurrentAuthorityPackage::CONTRACT_VERSION) {
-                if ($write) {
-                    throw new CareerCurrentAuthorityPackageFailure('CURRENT_SHARDED_MANIFEST_COMPILER_OWNED');
-                }
-                $authority = $loader->load($backendRoot);
-                $result = [
-                    'status' => 'PASS_CAREER_CURRENT_MANIFEST',
-                    'stale' => false,
-                    'changed' => false,
-                    'assets_sha256' => $authority['summary']['assets_sha256'],
-                    'manifest_sha256' => $authority['summary']['manifest_sha256'],
-                    'sharded_aggregate_sha256' => $authority['summary']['sharded_aggregate_sha256'],
-                    'versionless_projection_sha256' => $authority['summary']['versionless_projection_sha256'],
-                    'career_count' => $authority['summary']['career_count'],
-                    'locale_page_count' => $authority['summary']['locale_page_count'],
-                    'components_per_page' => $authority['summary']['components_per_page'],
-                    'database_writes' => 0,
-                    'cache_writes' => 0,
-                    'pointer_writes' => 0,
-                    'discoverability_writes' => 0,
-                    'search_submissions' => 0,
-                ];
-            } else {
-                if ($write && (! app()->environment(['local', 'testing']) || ! $this->isGitWorktree(dirname($backendRoot)))) {
-                    throw new CareerCurrentAuthorityPackageFailure('CURRENT_MANIFEST_WRITE_NOT_ALLOWED');
-                }
-                $result = $write ? $refresher->write($backendRoot) : $refresher->check($backendRoot);
+            if (! is_array($manifest)
+                || ($manifest['contract_version'] ?? null) !== CareerContentV3AuthorityPackage::CONTRACT_VERSION) {
+                throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_AUTHORITY_REQUIRED');
             }
+            if ($write) {
+                throw new CareerCurrentAuthorityPackageFailure('CURRENT_MANIFEST_COMPILER_OWNED');
+            }
+            $index = $contentV3Package->manifestIndex($backendRoot);
+            $result = [
+                'status' => 'PASS_CAREER_CURRENT_MANIFEST',
+                'stale' => false,
+                'changed' => false,
+                'assets_sha256' => $manifest['aggregate_sha256'],
+                'manifest_sha256' => hash_file('sha256', $manifestPath),
+                'aggregate_sha256' => $manifest['aggregate_sha256'],
+                'versionless_projection_sha256' => $manifest['set_hashes']['legacy_versionless_projection_sha256'],
+                'career_count' => count($index['slugs']),
+                'locale_page_count' => count($manifest['files']),
+                'source_format' => 'content_v3_per_page',
+                'database_writes' => 0,
+                'cache_writes' => 0,
+                'pointer_writes' => 0,
+                'discoverability_writes' => 0,
+                'search_submissions' => 0,
+            ];
             $this->line((string) json_encode(
                 $result,
                 JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR,
@@ -80,12 +70,5 @@ final class CareerCurrentManifest extends Command
 
             return self::FAILURE;
         }
-    }
-
-    private function isGitWorktree(string $repositoryRoot): bool
-    {
-        $gitEntry = rtrim($repositoryRoot, '/').'/.git';
-
-        return is_file($gitEntry) || is_dir($gitEntry);
     }
 }

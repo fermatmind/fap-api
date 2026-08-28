@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
-use App\Domain\Career\Compilation\CareerContentV3Projector;
-use App\Domain\Career\Display\CareerContentV3Contract;
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Display\CareerPresentationV1Contract;
 use App\Domain\Career\Display\CareerPresentationV2Contract;
@@ -72,7 +71,7 @@ final class CareerJobDisplaySurfaceBuilder
 
     public function __construct(
         private readonly CareerLocaleIntegrityGate $localeIntegrityGate,
-        private readonly CareerContentV3Projector $contentV3Projector,
+        private readonly CareerContentV3CanonicalReader $canonicalContent,
     ) {}
 
     /**
@@ -173,21 +172,7 @@ final class CareerJobDisplaySurfaceBuilder
             }
             $presentationV2 = $this->stripForbiddenKeys($presentationV2);
         }
-        try {
-            // Bind v3 to the exact reader-visible page so cache and package hashes share one authority.
-            $contentV3 = $this->contentV3Projector->project(
-                $canonicalSlug,
-                $this->publicLocale($normalizedLocale),
-                $page['content'],
-                is_array($presentationV2) ? $presentationV2 : null,
-                is_array($sources) ? $sources : [],
-            );
-            CareerContentV3Contract::assert($contentV3);
-        } catch (\Throwable) {
-            $contentV3 = null;
-        }
-
-        if ($this->containsForbiddenPublicKey([$page, $componentOrder, $sources, $structuredData, $implementationContract, $claimPermissions, $presentation, $presentationV2, $contentV3])) {
+        if ($this->containsForbiddenPublicKey([$page, $componentOrder, $sources, $structuredData, $implementationContract, $claimPermissions, $presentation, $presentationV2])) {
             return null;
         }
 
@@ -211,11 +196,16 @@ final class CareerJobDisplaySurfaceBuilder
         if (is_array($presentationV2)) {
             $surface['presentation_v2'] = $presentationV2;
         }
-        if (is_array($contentV3)) {
-            $surface['content_v3'] = $contentV3;
+        $hydrated = $this->canonicalContent->hydrate(
+            $surface,
+            $canonicalSlug,
+            $this->publicLocale($normalizedLocale),
+        );
+        if (! is_array($hydrated)) {
+            return null;
         }
 
-        return $surface;
+        return $hydrated;
     }
 
     public function diagnosticFailureCodeForSlug(string $slug, string $locale): ?string

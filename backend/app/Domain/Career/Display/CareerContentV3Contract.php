@@ -50,7 +50,7 @@ final class CareerContentV3Contract
     }
 
     /** @param array<string,true> $seenBlocks @param array<string,true> $seenItems */
-    private static function assertBlock(mixed $block, array &$seenBlocks, array &$seenItems): void
+    public static function assertBlock(mixed $block, array &$seenBlocks, array &$seenItems): void
     {
         if (! is_array($block)) {
             self::fail();
@@ -136,28 +136,40 @@ final class CareerContentV3Contract
         } elseif ($type === 'links') {
             self::exactKeys($data, ['entries']);
             self::entryList($data['entries'] ?? null);
+            $seenEntries = [];
             foreach ($data['entries'] as $entry) {
                 if (! is_array($entry)) {
                     self::fail();
                 }
                 self::exactKeys($entry, ['id', 'entity', 'relation', 'url']);
-                if (! self::key($entry['id'] ?? null) || ! self::nonEmpty($entry['entity'] ?? null)
+                if (! self::key($entry['id'] ?? null) || isset($seenEntries[$entry['id']])
+                    || ! self::nonEmpty($entry['entity'] ?? null)
                     || ! self::key($entry['relation'] ?? null) || ! self::safeUrl($entry['url'] ?? null)) {
                     self::fail();
                 }
+                $seenEntries[$entry['id']] = true;
             }
         } elseif ($type === 'sources') {
             self::exactKeys($data, ['entries']);
             self::entryList($data['entries'] ?? null);
+            $seenEntries = [];
             foreach ($data['entries'] as $entry) {
                 if (! is_array($entry)) {
                     self::fail();
                 }
-                self::exactKeys($entry, ['id', 'name', 'url']);
-                if (! self::key($entry['id'] ?? null) || ! self::nonEmpty($entry['name'] ?? null)
+                self::exactKeys($entry, ['details', 'id', 'name', 'url']);
+                if (! self::key($entry['id'] ?? null) || isset($seenEntries[$entry['id']])
+                    || ! self::nonEmpty($entry['name'] ?? null)
+                    || ! is_array($entry['details'] ?? null) || ! array_is_list($entry['details'])
                     || (($entry['url'] ?? null) !== null && ! self::safeUrl($entry['url']))) {
                     self::fail();
                 }
+                foreach ($entry['details'] as $detail) {
+                    if (! self::nonEmpty($detail)) {
+                        self::fail();
+                    }
+                }
+                $seenEntries[$entry['id']] = true;
             }
         } elseif ($type === 'metrics') {
             self::exactKeys($data, ['entries']);
@@ -234,8 +246,8 @@ final class CareerContentV3Contract
 
     private static function safeUrl(mixed $value): bool
     {
-        return is_string($value) && (preg_match('/\Ahttps:\/\//', $value) === 1
-            || preg_match('/\A\/(?:en|zh)\//', $value) === 1
+        return is_string($value) && (preg_match('/\Ahttps:\/\/[^\s|]+\z/', $value) === 1
+            || preg_match('/\A\/(?:en|zh)\/[^\s|]+\z/', $value) === 1
             || preg_match('/\A#[a-z0-9][a-z0-9_-]*\z/', $value) === 1);
     }
 

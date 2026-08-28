@@ -8,40 +8,37 @@ use JsonException;
 
 class CareerCurrentAuthorityPackageLoader
 {
-    public function __construct(
-        private readonly CareerCurrentAuthorityPackage $package,
-        private readonly CareerShardedCurrentAuthorityPackage $shardedPackage,
-    ) {}
+    public function __construct(private readonly CareerContentV3AuthorityPackage $contentV3Package) {}
 
     /** @return array<string,mixed> */
     public function load(string $backendRoot): array
     {
         $manifest = $this->readManifest($backendRoot);
 
-        if (($manifest['contract_version'] ?? null) !== CareerShardedCurrentAuthorityPackage::CONTRACT_VERSION) {
-            throw new CareerCurrentAuthorityPackageFailure('CURRENT_SHARDED_AUTHORITY_REQUIRED');
+        if (($manifest['contract_version'] ?? null) !== CareerContentV3AuthorityPackage::CONTRACT_VERSION) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_AUTHORITY_REQUIRED');
         }
 
-        return $this->shardedPackage->load($backendRoot, $manifest);
+        return $this->contentV3Package->load($backendRoot);
     }
 
     /** @return array<string,mixed> */
-    public function loadShardedForPublish(string $backendRoot): array
+    public function loadForPublish(string $backendRoot): array
     {
         $manifest = $this->readManifest($backendRoot);
-        if (($manifest['contract_version'] ?? null) !== CareerShardedCurrentAuthorityPackage::CONTRACT_VERSION) {
-            throw new CareerCurrentAuthorityPackageFailure('CURRENT_PUBLISH_SHARDED_AUTHORITY_REQUIRED');
-        }
-        $authority = $this->shardedPackage->load($backendRoot, $manifest);
-        if (($authority['summary']['source_format'] ?? null) !== 'sharded'
-            || ! hash_equals(
-                (string) ($manifest['aggregate_sha256'] ?? ''),
-                (string) ($authority['summary']['sharded_aggregate_sha256'] ?? ''),
-            )) {
-            throw new CareerCurrentAuthorityPackageFailure('CURRENT_PUBLISH_SHARDED_AUTHORITY_INVALID');
-        }
+        if (($manifest['contract_version'] ?? null) === CareerContentV3AuthorityPackage::CONTRACT_VERSION) {
+            $authority = $this->contentV3Package->load($backendRoot);
+            if (($authority['summary']['source_format'] ?? null) !== 'content_v3_per_page'
+                || ! hash_equals(
+                    (string) ($manifest['aggregate_sha256'] ?? ''),
+                    (string) ($authority['summary']['aggregate_sha256'] ?? ''),
+                )) {
+                throw new CareerCurrentAuthorityPackageFailure('CURRENT_PUBLISH_CONTENT_V3_AUTHORITY_INVALID');
+            }
 
-        return $authority;
+            return $authority;
+        }
+        throw new CareerCurrentAuthorityPackageFailure('CURRENT_PUBLISH_CONTENT_V3_AUTHORITY_REQUIRED');
     }
 
     /** @return array<string,mixed> */

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "career-content-v3-current-manifest.v1.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "aggregate_sha256": { "$ref": "#/$defs/hash" },
+    "authority_path": { "const": "backend/content_assets/career/current" },
+    "compiler_version": { "const": "career.content_v3.per_page.compiler.v1" },
+    "contract_version": { "const": "career.content_v3_current.manifest.v1" },
+    "coverage": {
+      "additionalProperties": false,
+      "properties": {
+        "enhanced_locale_pages": { "const": 2 }, "files": { "const": 2092 },
+        "legacy_locale_pages": { "const": 2090 }, "locale_pages": { "const": 2092 },
+        "locales": { "const": 2 }, "slugs": { "const": 1046 }
+      },
+      "required": ["slugs", "locales", "locale_pages", "files", "enhanced_locale_pages", "legacy_locale_pages"],
+      "type": "object"
+    },
+    "files": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "bytes": { "minimum": 1, "type": "integer" },
+          "canonical_slug": { "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$", "type": "string" },
+          "legacy_projection_sha256": { "$ref": "#/$defs/hash" },
+          "legacy_row_sha256": { "$ref": "#/$defs/hash" },
+          "locale": { "enum": ["en", "zh-CN"] },
+          "path": { "pattern": "^careers/[a-z0-9]+(?:-[a-z0-9]+)*/(?:en|zh-CN)\\.json$", "type": "string" },
+          "sha256": { "$ref": "#/$defs/hash" },
+          "source_content_sha256": { "$ref": "#/$defs/hash" }
+        },
+        "required": ["bytes", "canonical_slug", "legacy_projection_sha256", "legacy_row_sha256", "locale", "path", "sha256", "source_content_sha256"],
+        "type": "object"
+      },
+      "maxItems": 2092, "minItems": 2092, "type": "array"
+    },
+    "locales": { "const": ["en", "zh-CN"] },
+    "schema_version": { "const": "career.detail.content.v3" },
+    "set_hashes": {
+      "additionalProperties": false,
+      "properties": {
+        "legacy_projection_aggregate_sha256": { "$ref": "#/$defs/hash" },
+        "legacy_versionless_projection_sha256": { "$ref": "#/$defs/hash" },
+        "locale_page_set_sha256": { "$ref": "#/$defs/hash" },
+        "slug_set_sha256": { "$ref": "#/$defs/hash" },
+        "source_semantic_aggregate_sha256": { "$ref": "#/$defs/hash" }
+      },
+      "required": ["legacy_projection_aggregate_sha256", "legacy_versionless_projection_sha256", "locale_page_set_sha256", "slug_set_sha256", "source_semantic_aggregate_sha256"],
+      "type": "object"
+    },
+    "source_registry_sha256": { "$ref": "#/$defs/hash" }
+  },
+  "required": ["aggregate_sha256", "authority_path", "compiler_version", "contract_version", "coverage", "files", "locales", "schema_version", "set_hashes", "source_registry_sha256"],
+  "type": "object",
+  "$defs": { "hash": { "pattern": "^[a-f0-9]{64}$", "type": "string" } }
+}

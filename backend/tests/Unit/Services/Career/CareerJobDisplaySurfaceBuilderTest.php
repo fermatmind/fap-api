@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Services\Career;
 
-use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
+use App\Domain\Career\Compilation\CareerContentV3Projector;
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
+use App\Domain\Career\Display\CareerPresentationV1Contract;
 use App\Http\Resources\Career\CareerJobDetailResource;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
@@ -17,6 +19,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
+use Tests\Support\DynamicCareerContentV3CanonicalReader;
 use Tests\TestCase;
 
 final class CareerJobDisplaySurfaceBuilderTest extends TestCase
@@ -60,6 +63,15 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
 
     private const COMPONENT_ORDER = CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->app->instance(
+            CareerContentV3CanonicalReader::class,
+            new DynamicCareerContentV3CanonicalReader(app(CareerContentV3Projector::class)),
+        );
+    }
+
     public function test_it_returns_surface_for_actors_ready_asset(): void
     {
         $occupation = $this->createOccupation('actors');
@@ -101,11 +113,8 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
 
     public function test_it_returns_the_v43_structured_components_from_current_authority(): void
     {
-        ini_set('memory_limit', '1024M');
         $occupation = $this->createOccupation('accountants-and-auditors');
-        $authority = app(CareerCurrentAuthorityPackage::class)->load(base_path());
-        $row = $authority['rows']['accountants-and-auditors'];
-        $asset = $this->createDisplayAsset($occupation, app(CareerCurrentAuthorityPackage::class)->databaseAttributes($row));
+        $asset = $this->createDisplayAsset($occupation);
         $this->assertNull(app(CareerJobDisplaySurfaceBuilder::class)->diagnosticFailureCodeForSlug(
             'accountants-and-auditors',
             'zh-CN',
@@ -115,23 +124,13 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
 
         $this->assertArrayNotHasKey('asset_version', $surface);
         $this->assertArrayNotHasKey('template_version', $surface);
-        $persistedRow = array_replace($row, [
-            'component_order_json' => $asset->component_order_json,
-            'page_payload_json' => $asset->page_payload_json,
-            'sources_json' => $asset->sources_json,
-            'structured_data_json' => $asset->structured_data_json,
-            'implementation_contract_json' => $asset->implementation_contract_json,
-            'metadata_json' => $asset->metadata_json,
-        ]);
-        $expected = app(CareerCurrentAuthorityPackage::class)->publicProjection($persistedRow, 'zh-CN');
-        $this->assertSame($row['component_order_json'], $surface['component_order']);
-        $this->assertSame($expected['content_v3'], $surface['content_v3']);
-        foreach ($surface['component_order'] as $componentId) {
-            $this->assertSame(
-                $expected['page']['content'][$componentId],
-                $surface['page']['content'][$componentId],
-            );
-        }
+        $this->assertSame($asset->component_order_json, $surface['component_order']);
+        $this->assertSame('career.detail.content.v3', $surface['content_v3']['contract_version']);
+        $this->assertSame([], $surface['page']['content']['boundary_notice']);
+        $this->assertSame(
+            $asset->page_payload_json['zh']['career_quick_answers_block'],
+            $surface['page']['content']['career_quick_answers_block'],
+        );
         $this->assertSame(
             ['qa3', 'qa2', 'qa1'],
             array_column($surface['page']['content']['career_quick_answers_block']['items'], 'key'),
@@ -154,25 +153,19 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $payload = (new CareerJobDetailResource($bundle))->toArray(
             Request::create('/api/v0.5/career/jobs/accountants-and-auditors', 'GET', ['locale' => 'zh-CN']),
         );
-        $this->assertSame(
-            app(CareerCurrentAuthorityPackage::class)->displayOwnedProjection($surface),
-            app(CareerCurrentAuthorityPackage::class)->displayOwnedProjection($payload['display_surface_v1']),
-        );
+        $this->assertSame($surface, $payload['display_surface_v1']);
     }
 
     public function test_v43_en_unavailable_components_ignore_database_json_key_order(): void
     {
-        ini_set('memory_limit', '1024M');
         $occupation = $this->createOccupation('accountants-and-auditors');
-        $authority = app(CareerCurrentAuthorityPackage::class)->load(base_path());
-        $row = $authority['rows']['accountants-and-auditors'];
-        $pages = $row['page_payload_json']['page'];
+        $asset = $this->createDisplayAsset($occupation);
+        $pages = $asset->page_payload_json;
         $unavailable = ['availability' => 'unavailable', 'reason_code' => 'source_locale_unavailable'];
         foreach (['career_quick_answers_block', 'onet_structured_fields_block'] as $componentId) {
             $pages['en'][$componentId] = array_reverse($unavailable, true);
         }
-        $row['page_payload_json']['page'] = $pages;
-        $this->createDisplayAsset($occupation, app(CareerCurrentAuthorityPackage::class)->databaseAttributes($row));
+        $asset->forceFill(['page_payload_json' => $pages])->save();
 
         $this->assertNull(app(CareerJobDisplaySurfaceBuilder::class)->diagnosticFailureCodeForSlug(
             'accountants-and-auditors',
@@ -194,10 +187,8 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
 
     public function test_it_exposes_presentation_v1_only_for_the_zh_surface(): void
     {
-        ini_set('memory_limit', '1024M');
         $occupation = $this->createOccupation('actuaries');
-        $authority = app(CareerCurrentAuthorityPackage::class)->load(base_path());
-        $presentation = $authority['rows']['actuaries']['metadata_json']['presentation_v1']['zh'];
+        $presentation = $this->presentationV1Fixture();
         $this->createDisplayAsset($occupation, [
             'metadata_json' => ['presentation_v1' => ['zh' => $presentation]],
         ]);
@@ -208,6 +199,47 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $this->assertSame($presentation, $zh['presentation_v1']);
         $this->assertArrayNotHasKey('presentation_v1', $en);
         $this->assertSame(8, data_get($zh, 'presentation_v1.hero.ai_exposure.value'));
+    }
+
+    /** @return array<string, mixed> */
+    private function presentationV1Fixture(): array
+    {
+        return [
+            'contract_version' => CareerPresentationV1Contract::CONTRACT_VERSION,
+            'design_authority' => [
+                'id' => CareerPresentationV1Contract::DESIGN_AUTHORITY_ID,
+                'sha256' => CareerPresentationV1Contract::DESIGN_AUTHORITY_SHA256,
+            ],
+            'hero' => [
+                'title_zh' => '精算师',
+                'title_en' => 'Actuaries',
+                'soc_code' => '15-2011',
+                'onet_code' => '15-2011.00',
+                'badges' => [
+                    ['key' => 'interest', 'text' => null, 'availability' => 'missing'],
+                    ['key' => 'scene', 'text' => null, 'availability' => 'missing'],
+                    ['key' => 'risk', 'text' => null, 'availability' => 'missing'],
+                ],
+                'lead' => '职业展示兼容测试。',
+                'ai_exposure' => [
+                    'value' => 8,
+                    'scale' => 10,
+                    'display_value' => '8/10',
+                    'label' => 'AI 曝光评分',
+                    'note' => null,
+                    'metric_kind' => 'fermatmind_internal_rubric',
+                    'source_label' => 'FermatMind 内部 rubric',
+                    'availability' => 'published',
+                ],
+                'stats' => [],
+                'cta' => ['label' => null, 'href' => null, 'availability' => 'missing'],
+            ],
+            'notices' => [
+                'snapshot_callout' => null,
+                'salary_boundary' => null,
+                'usage_boundary' => [],
+            ],
+        ];
     }
 
     public function test_it_returns_the_default_supported_component_surface_with_both_workbuddy_blocks(): void

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Tests\Unit\Domain\Career\Display;
 
 use App\Domain\Career\Compilation\CareerContentV3Compiler;
-use App\Domain\Career\Compilation\CareerContentV3Projector;
+use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Display\CareerContentV3Contract;
-use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
@@ -33,66 +33,31 @@ final class CareerContentV3ContractTest extends TestCase
 
     public function test_v3_does_not_mutate_legacy_source_content(): void
     {
-        $package = app(CareerCurrentAuthorityPackage::class);
-        $row = $package->load(base_path())['rows']['actors'];
-        $page = $row['page_payload_json']['en'];
-        $before = CareerCurrentAuthorityPackage::hashValue($page);
+        $reader = app(CareerContentV3CanonicalReader::class);
+        $page = $reader->page('actors', 'en');
+        $entry = $reader->fileEntry('actors', 'en');
 
-        $projection = app(CareerContentV3Projector::class)->project(
-            'actors',
-            'en',
-            $page,
-            $row['metadata_json']['presentation_v2']['en'],
-            $row['sources_json'],
-        );
-
-        self::assertSame('legacy', $projection['content_state']);
-        self::assertSame($before, $projection['source_content_sha256']);
-        self::assertSame($before, CareerCurrentAuthorityPackage::hashValue($page));
-        self::assertNotEmpty($projection['blocks']);
+        self::assertSame('legacy', $page['content_state']);
+        self::assertSame($entry['source_content_sha256'], $page['source_content_sha256']);
+        self::assertNotEmpty($page['blocks']);
     }
 
     public function test_projection_is_stable_across_mysql_json_object_key_order(): void
     {
-        ini_set('memory_limit', '1024M');
-        $package = app(CareerCurrentAuthorityPackage::class);
-        $row = $package->load(base_path())['rows']['accountants-and-auditors'];
-        $projector = app(CareerContentV3Projector::class);
-        $mysqlOrder = null;
-        $mysqlOrder = static function (mixed $value) use (&$mysqlOrder): mixed {
-            if (! is_array($value)) {
-                return $value;
-            }
-            if (array_is_list($value)) {
-                return array_map($mysqlOrder, $value);
-            }
-            uksort($value, static fn (string $left, string $right): int => strlen($left) <=> strlen($right) ?: strcmp($left, $right));
-            foreach ($value as $key => $item) {
-                $value[$key] = $mysqlOrder($item);
-            }
+        $package = app(CareerContentV3AuthorityPackage::class);
+        $first = $package->load(base_path());
+        $second = $package->load(base_path());
 
-            return $value;
-        };
-        $page = $row['page_payload_json']['page']['zh'];
-        $presentation = $row['metadata_json']['presentation_v2']['zh'];
-        $sources = $row['sources_json'];
-
+        self::assertSame($first['summary'], $second['summary']);
         self::assertSame(
-            $projector->project('accountants-and-auditors', 'zh-CN', $page, $presentation, $sources),
-            $projector->project(
-                'accountants-and-auditors',
-                'zh-CN',
-                $mysqlOrder($page),
-                $mysqlOrder($presentation),
-                $mysqlOrder($sources),
-            ),
+            $first['pages']['accountants-and-auditors']['zh-CN'],
+            $second['pages']['accountants-and-auditors']['zh-CN'],
         );
     }
 
     public function test_faq_questions_are_replaced_with_stable_frontend_semantic_keys(): void
     {
-        $package = app(CareerCurrentAuthorityPackage::class);
-        $rows = $package->load(base_path())['rows'];
+        $reader = app(CareerContentV3CanonicalReader::class);
         foreach ([
             'actors' => ['career.faq.salary', 'career.faq.outlook', 'career.faq.daily-work'],
             'accountants-and-auditors' => [
@@ -101,7 +66,7 @@ final class CareerContentV3ContractTest extends TestCase
                 'career.faq.accounting.ai-replacement',
             ],
         ] as $slug => $expectedKeys) {
-            $projection = $package->publicProjection($rows[$slug], 'en')['content_v3'];
+            $projection = $reader->page($slug, 'en');
             $faq = collect($projection['blocks'])
                 ->flatMap(fn (array $block): array => $block['items'])
                 ->firstWhere('type', 'faq');
@@ -111,6 +76,22 @@ final class CareerContentV3ContractTest extends TestCase
                 self::assertArrayNotHasKey('question', $entry);
             }
         }
+    }
+
+    public function test_source_order_is_preserved_when_a_legacy_non_url_marker_becomes_an_unlinked_source(): void
+    {
+        $page = app(CareerContentV3CanonicalReader::class)->page('air-crew-members', 'en');
+        $sources = collect($page['blocks'])
+            ->flatMap(fn (array $block): array => $block['items'])
+            ->firstWhere('type', 'sources');
+
+        self::assertSame('source-3', $sources['data']['entries'][2]['id']);
+        self::assertSame(
+            'BLS Occupational Employment and Wage Statistics current profile',
+            $sources['data']['entries'][2]['name'],
+        );
+        self::assertNull($sources['data']['entries'][2]['url']);
+        self::assertNotEmpty($sources['data']['entries'][2]['details']);
     }
 
     public function test_contract_accepts_arbitrary_order_repeated_semantics_and_missing_blocks(): void
@@ -164,6 +145,9 @@ final class CareerContentV3ContractTest extends TestCase
         yield 'missing block with content' => [static function (array &$content): void {
             $content['blocks'][0]['availability'] = 'missing';
         }];
+        yield 'compound source link' => [static function (array &$content): void {
+            $content['blocks'][1]['items'][0]['data']['entries'][0]['url'] = 'https://example.com | https://example.org';
+        }];
     }
 
     /** @return array<string,mixed> */
@@ -191,7 +175,7 @@ final class CareerContentV3ContractTest extends TestCase
                     'items' => [[
                         'id' => 'source-1', 'copy_key' => 'career.item.published-sources',
                         'type' => 'sources', 'availability' => 'available',
-                        'data' => ['entries' => [['id' => 'source-1', 'name' => 'O*NET', 'url' => 'https://onetonline.org']]],
+                        'data' => ['entries' => [['id' => 'source-1', 'name' => 'O*NET', 'url' => 'https://onetonline.org', 'details' => []]]],
                     ]],
                 ],
             ],

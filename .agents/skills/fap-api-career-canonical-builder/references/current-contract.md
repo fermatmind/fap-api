@@ -6,7 +6,8 @@ Use source at the exact candidate SHA; these paths are the maintained contract:
 - `backend/app/Domain/Career/Compilation/CareerTenBlockCompiler.php`: single-source normalization, lookup/evidence binding, omissions, and public-key guards.
 - `backend/app/Domain/Career/Compilation/CareerTenBlockCurrentPackageCompiler.php`: full-cohort baseline retention, deterministic candidate assembly, receipts, and package diff.
 - `backend/app/Domain/Career/Display/CareerDisplayAssetComponentContract.php`: exact current v4.3/28-component order, v4.2/26 read compatibility, and page-shape validation.
-- `backend/app/Domain/Career/Display/CareerCurrentAuthorityPackage.php`: 1046-row/2092-locale package, canonical encoding, hashes, and public projection.
+- `backend/app/Domain/Career/Display/CareerContentV3AuthorityPackage.php`: 1046-directory/2092-file package, canonical encoding, hashes, and fail-closed inventory validation.
+- `backend/app/Domain/Career/Display/CareerContentV3CanonicalReader.php`: shared API, publisher, cache, and snapshot hydration boundary.
 - `backend/tests/Unit/Domain/Career/Compilation/CareerTenBlockCurrentPackageCompilerTest.php` and `backend/tests/Unit/Domain/Career/Display/CareerDisplayAssetComponentContractTest.php`: focused executable coverage.
 - `.agents/skills/fap-api-career-canonical-builder/scripts/split_legacy_current.php`: deterministic read-only legacy-to-module sharder.
 - `.agents/skills/fap-api-career-canonical-builder/scripts/assemble_sharded_current.php`: full module-only assembler and legacy equivalence oracle boundary.
@@ -33,15 +34,14 @@ The candidate must preserve:
 
 Do not duplicate the component list or package schema in this Skill. Read the classes above so future contract changes have one code authority.
 
-## Sharded transition contract
+## Per-page Current contract
 
-The future Current shape is frozen by:
+The installed Current shape is frozen by:
 
-- `backend/docs/career/contracts/career-sharded-current.v1.json`
-- `backend/docs/career/contracts/career-sharded-current-manifest.v1.schema.json`
-- `backend/docs/career/contracts/career-sharded-current-record.v1.schema.json`
-- `backend/docs/career/contracts/career-sharded-current-field-ownership.v1.json`
+- `backend/docs/career/contracts/career-content-v3-current.v1.json`
+- `backend/docs/career/contracts/career-content-v3-current-manifest.v1.schema.json`
+- `backend/docs/career/contracts/career-content-v3-current-field-ownership.v1.json`
 
-The sharded package is the only installed Current authority: `current/manifest.json` binds the fixed 640 shards, coverage, module completeness, registries, aggregate hash, and versionless whole-row projection hash. There is no committed flat projection. A compiler may synthesize one only under a system temporary directory from validated shards. `scripts/split_legacy_current.php` is historical transition/recovery code and is not an active Current input.
+The per-page package is the only installed Current authority: `current/manifest.json` binds exactly 1046 canonical slug directories and 2092 locale files, their bytes and hashes, coverage, source registry, semantic set, compatibility projections, and aggregate hash. There is no committed flat or sharded projection. Historical split/assembly scripts are transition evidence and are not active Current inputs.
 
-Active assembly consumes only a validated shard package. Assembly fails on manifest/shard/line drift, missing or unknown module fields, incomplete locale/module/component coverage, duplicate bindings, cross-module claim conflicts, unresolved source ordering, FAQ derivation conflict, component-order drift, or any mismatch across the 2092 locale projections. Temporary versionless assembly output grants no publication, runtime, deploy, or search authority.
+Active reading consumes only a fully validated per-page package. It fails closed on root manifest drift, missing or undeclared files, incomplete locale pairing, duplicate identities, traversal, symlinks, JSON/locale/hash drift, duplicate block/item IDs, unknown primitives, or invalid sources and links. A database presentation_v1/v2 materialization is usable only when the same canonical reader verifies its manifest-bound compatibility hash.

@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Career\Display;
 
-use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
+use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageLoader;
 use App\Domain\Career\Display\CareerCurrentAuthorityReleaseIntent;
-use App\Domain\Career\Display\CareerShardedCurrentAuthorityPackage;
 use PHPUnit\Framework\TestCase;
 
 final class CareerCurrentAuthorityReleaseIntentTest extends TestCase
@@ -19,19 +18,18 @@ final class CareerCurrentAuthorityReleaseIntentTest extends TestCase
 
         self::assertSame('career.current_authority_release_intent.v1', $result['intent']['contract_version']);
         self::assertSame('2c956887ad9460849fd29cbfacb145e1397993cd', $result['intent']['source_merge_sha']);
-        self::assertSame('037cb125edf893a619fc133915a6ec162c79531aac4e3be17c5db592bfaaf07d', $result['intent']['manifest_sha256']);
-        self::assertSame('2471627267cee87711c89cdba7f3ba188a6af887041935cb9c7dd3e0a5c2e7fa', $result['intent']['aggregate_sha256']);
+        self::assertSame('fdd4d73eb0b07effdab2222c454dc35a734eeccd379f7f2359de904300118800', $result['intent']['manifest_sha256']);
+        self::assertSame('42112294f1e3b8f6939d36f25a2d29b6feb4db8009034d7b90c04802fa3af5f7', $result['intent']['aggregate_sha256']);
         self::assertSame('b7fed8007d505b45e2707ef11e3b1b4196d13985e0e8e1b146c4710fcbcdc616', $result['intent']['versionless_projection_sha256']);
-        self::assertSame(['zh-CN', 'en'], $result['intent']['locales']);
+        self::assertSame(['en', 'zh-CN'], $result['intent']['locales']);
         self::assertSame(['software-developers'], $result['intent']['manual_hold_slugs']);
         self::assertFalse($result['intent']['discoverability']);
         self::assertFalse($result['intent']['search_submission']);
         self::assertSame(1046, $result['package']['slug_count']);
         self::assertSame(2092, $result['package']['locale_page_count']);
-        self::assertSame(10, $result['package']['module_count']);
-        self::assertSame(640, $result['package']['shard_count']);
+        self::assertSame(2092, $result['package']['file_count']);
         self::assertSame(
-            hash('sha256', 'career-current-authority|2c956887ad9460849fd29cbfacb145e1397993cd|2471627267cee87711c89cdba7f3ba188a6af887041935cb9c7dd3e0a5c2e7fa|b7fed8007d505b45e2707ef11e3b1b4196d13985e0e8e1b146c4710fcbcdc616'),
+            hash('sha256', 'career-current-authority|2c956887ad9460849fd29cbfacb145e1397993cd|42112294f1e3b8f6939d36f25a2d29b6feb4db8009034d7b90c04802fa3af5f7|b7fed8007d505b45e2707ef11e3b1b4196d13985e0e8e1b146c4710fcbcdc616'),
             $result['operation_key'],
         );
     }
@@ -66,6 +64,9 @@ final class CareerCurrentAuthorityReleaseIntentTest extends TestCase
         self::assertStringContainsString("needs.production.result == 'success'", $workflow);
         self::assertStringContainsString('.classification.operations.career_current_authority_release == true', $workflow);
         self::assertStringContainsString('verify_career_current_authority_release.sh', $workflow);
+        self::assertStringContainsString('and .file_count == 2092', (string) file_get_contents(
+            $root.'/backend/scripts/ci/verify_career_current_authority_release.sh',
+        ));
         self::assertStringContainsString('source_merge_sha == $source', $workflow);
         self::assertStringContainsString('.authority.component_28_count == 1046', $workflow);
         self::assertStringContainsString('automatic_retry_allowed == false', $workflow);
@@ -86,11 +87,8 @@ final class CareerCurrentAuthorityReleaseIntentTest extends TestCase
 
     private function verifier(): CareerCurrentAuthorityReleaseIntent
     {
-        $package = new CareerCurrentAuthorityPackage;
-
         return new CareerCurrentAuthorityReleaseIntent(new CareerCurrentAuthorityPackageLoader(
-            $package,
-            new CareerShardedCurrentAuthorityPackage($package),
+            new CareerContentV3AuthorityPackage,
         ));
     }
 

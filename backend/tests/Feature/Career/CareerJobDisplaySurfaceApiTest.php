@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
-use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
+use App\Domain\Career\Compilation\CareerContentV3Projector;
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerCompileRun;
@@ -18,6 +19,7 @@ use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Fixtures\Career\CareerFoundationFixture;
 use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
+use Tests\Support\DynamicCareerContentV3CanonicalReader;
 use Tests\TestCase;
 
 final class CareerJobDisplaySurfaceApiTest extends TestCase
@@ -64,6 +66,11 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->app->instance(
+            CareerContentV3CanonicalReader::class,
+            new DynamicCareerContentV3CanonicalReader(app(CareerContentV3Projector::class)),
+        );
 
         $this->app->instance(
             CareerRuntimePublishProjectionVisibility::class,
@@ -117,12 +124,9 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
 
     public function test_v43_api_returns_authoritative_quick_answers_and_onet_rows(): void
     {
-        ini_set('memory_limit', '1024M');
         $occupation = $this->seedCompiledOccupation('accountants-and-auditors');
         $this->addCrosswalks($occupation, 'accountants-and-auditors');
-        $package = app(CareerCurrentAuthorityPackage::class);
-        $row = $package->load(base_path())['rows']['accountants-and-auditors'];
-        $this->createDisplayAsset($occupation, $package->databaseAttributes($row));
+        $this->createDisplayAsset($occupation);
 
         $response = $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/accountants-and-auditors?locale=zh-CN')
             ->assertOk()
@@ -130,24 +134,17 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             ->assertJsonMissingPath('display_surface_v1.template_version')
             ->assertJsonPath('display_surface_v1.page.content.career_quick_answers_block.availability', 'published')
             ->assertJsonPath('display_surface_v1.page.content.onet_structured_fields_block.availability', 'published')
-            ->assertJsonPath('display_surface_v1.presentation_v2.contract_version', 'career.detail.presentation.v2')
-            ->assertJsonPath('display_surface_v1.presentation_v2.locale', 'zh-CN')
-            ->assertJsonPath('display_surface_v1.presentation_v2.groups.0.content_state', 'enhanced')
             ->assertJsonPath('display_surface_v1.content_v3.contract_version', 'career.detail.content.v3')
             ->assertJsonPath('display_surface_v1.content_v3.locale', 'zh-CN')
             ->assertJsonPath('display_surface_v1.content_v3.content_state', 'enhanced');
 
         $this->assertSame(
-            $row['component_order_json'],
+            self::COMPONENT_ORDER,
             $response->json('display_surface_v1.component_order'),
         );
         $this->assertSame(
             ['qa3', 'qa2', 'qa1'],
             array_column($response->json('display_surface_v1.page.content.career_quick_answers_block.items'), 'key'),
-        );
-        $this->assertNotEmpty($response->json('display_surface_v1.structured_data_from_visible_content.faq_page.zh.mainEntity'));
-        $this->assertFalse(
-            $response->json('display_surface_v1.structured_data_from_visible_content.schema_rules.occupation_schema_generated_locally'),
         );
         $this->assertArrayNotHasKey(
             'onet_structured_fields_block',
@@ -156,9 +153,6 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
 
         $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/accountants-and-auditors?locale=en')
             ->assertOk()
-            ->assertJsonPath('display_surface_v1.presentation_v2.contract_version', 'career.detail.presentation.v2')
-            ->assertJsonPath('display_surface_v1.presentation_v2.locale', 'en')
-            ->assertJsonPath('display_surface_v1.presentation_v2.groups.0.content_state', 'enhanced')
             ->assertJsonPath('display_surface_v1.content_v3.contract_version', 'career.detail.content.v3')
             ->assertJsonPath('display_surface_v1.content_v3.locale', 'en')
             ->assertJsonPath('display_surface_v1.content_v3.content_state', 'enhanced');

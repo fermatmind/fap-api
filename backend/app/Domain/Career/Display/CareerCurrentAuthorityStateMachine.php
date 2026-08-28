@@ -14,13 +14,14 @@ final class CareerCurrentAuthorityStateMachine
         private readonly CareerCurrentAuthorityPackage $package,
         private readonly CareerJobDetailCanonicalCacheReader $reader,
         private readonly CareerJobDetailReaderSafeReviewProjector $readerSafeProjector,
+        private readonly CareerContentV3CanonicalReader $canonicalContent,
     ) {}
 
     /** @param array<string,mixed> $row @return array<string,mixed> */
     public function assembleCandidate(array $row, string $locale): array
     {
         $slug = strtolower(trim((string) ($row['canonical_slug'] ?? '')));
-        $payload = ['display_surface_v1' => $this->package->publicProjection($row, $locale)];
+        $payload = ['display_surface_v1' => $this->canonicalSurface($row, $locale)];
         $compact = $this->reader->withoutDerivedContentV3($payload, $slug, $locale);
         $stored = $this->reader->encode($compact);
         $canonical = $this->reader->read($stored, $slug, $locale);
@@ -85,7 +86,7 @@ final class CareerCurrentAuthorityStateMachine
         }
 
         try {
-            $expected = $this->readerSafeProjector->project($this->package->publicProjection($row, $locale));
+            $expected = $this->readerSafeProjector->project($this->canonicalSurface($row, $locale));
             $actual = $this->readerSafeProjector->project($this->package->displayOwnedProjection($surface));
             if (hash_equals(
                 CareerCurrentAuthorityPackage::hashValue($expected),
@@ -220,5 +221,22 @@ final class CareerCurrentAuthorityStateMachine
         }
 
         return false;
+    }
+
+    /** @param array<string,mixed> $row @return array<string,mixed> */
+    private function canonicalSurface(array $row, string $locale): array
+    {
+        $surface = $this->package->publicProjection($row, $locale);
+        unset($surface['content_v3']);
+        $hydrated = $this->canonicalContent->hydrate(
+            $surface,
+            (string) ($row['canonical_slug'] ?? ''),
+            $locale,
+        );
+        if (! is_array($hydrated)) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_COMPATIBILITY_INVALID');
+        }
+
+        return $hydrated;
     }
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Domain\Career\Display;
 
-use App\Domain\Career\Compilation\CareerContentV3Projector;
 use App\Services\ReviewGovernance\PublicReviewContract;
 use Throwable;
 
@@ -12,13 +11,13 @@ final class CareerJobDetailCanonicalCacheReader
 {
     public const CODEC_VERSION = 'career.job-detail.gzip-json.v1';
 
-    public const COMPILER_VERSION = 'career.content-v3.projector.v1';
+    public const COMPILER_VERSION = 'career.content-v3.per-page-reader.v1';
 
     private const ENVELOPE_KEYS = ['codec', 'payload', 'sha256'];
 
     public function __construct(
-        private readonly CareerContentV3Projector $contentV3Projector,
         private readonly PublicReviewContract $publicReviewContract,
+        private readonly ?CareerContentV3CanonicalReader $canonicalContent = null,
     ) {}
 
     /** @param array<string,mixed> $payload @return array{codec:string,payload:string,sha256:string} */
@@ -111,17 +110,12 @@ final class CareerJobDetailCanonicalCacheReader
         }
 
         try {
-            $presentation = $surface['presentation_v2'] ?? null;
-            $sources = $surface['sources'] ?? [];
-            $contentV3 = $this->contentV3Projector->project(
-                strtolower(trim($slug)),
-                $this->normalizeLocale($locale),
-                $page,
-                is_array($presentation) ? $presentation : null,
-                is_array($sources) ? $sources : [],
-            );
-            CareerContentV3Contract::assert($contentV3);
-            $payload['display_surface_v1']['content_v3'] = $contentV3;
+            $reader = $this->canonicalContent ?? app(CareerContentV3CanonicalReader::class);
+            $hydrated = $reader->hydrate($surface, $slug, $locale);
+            if (! is_array($hydrated)) {
+                return null;
+            }
+            $payload['display_surface_v1'] = $hydrated;
         } catch (Throwable) {
             return null;
         }
@@ -175,7 +169,7 @@ final class CareerJobDetailCanonicalCacheReader
 
     public static function compilerDigest(): string
     {
-        return hash('sha256', self::COMPILER_VERSION.'|'.CareerContentV3Contract::CONTRACT_VERSION);
+        return hash('sha256', self::COMPILER_VERSION.'|'.CareerContentV3AuthorityPackage::COMPILER_VERSION.'|'.CareerContentV3Contract::CONTRACT_VERSION);
     }
 
     private function normalizeLocale(string $locale): string

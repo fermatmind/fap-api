@@ -4,121 +4,53 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Career\Display;
 
+use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageLoader;
 use App\Domain\Career\Display\CareerShardedCurrentAuthorityPackage;
 use PHPUnit\Framework\TestCase;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
 
 final class CareerCurrentAuthorityPackageLoaderTest extends TestCase
 {
-    private string $repoRoot;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->repoRoot = dirname(__DIR__, 6);
-    }
-
-    public function test_installed_manifest_explicitly_selects_sharded_read_without_legacy_fallback(): void
+    public function test_installed_manifest_selects_only_the_per_page_authority(): void
     {
         ini_set('memory_limit', '2048M');
-        $legacyPackage = new CareerCurrentAuthorityPackage;
+        $backendRoot = dirname(__DIR__, 5);
         $loader = new CareerCurrentAuthorityPackageLoader(
-            $legacyPackage,
-            new CareerShardedCurrentAuthorityPackage($legacyPackage),
+            new CareerContentV3AuthorityPackage,
         );
-        $installed = $loader->loadShardedForPublish($this->repoRoot.'/backend');
-        self::assertSame('sharded', $installed['summary']['source_format']);
 
-        $fixtureBackend = $this->temporaryDirectory('career-loader-backend-');
+        $installed = $loader->loadForPublish($backendRoot);
+
+        self::assertSame('content_v3_per_page', $installed['summary']['source_format']);
+        self::assertSame(1046, $installed['summary']['career_count']);
+        self::assertSame(2092, $installed['summary']['locale_page_count']);
+        self::assertCount(1046, $installed['pages']);
+        self::assertCount(2092, $installed['manifest']['files']);
+        self::assertDirectoryDoesNotExist($backendRoot.'/content_assets/career/current/identity');
+    }
+
+    public function test_runtime_loader_rejects_the_historical_sharded_contract(): void
+    {
+        $root = sys_get_temp_dir().'/career-v3-loader-'.bin2hex(random_bytes(8));
+        $current = $root.'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH;
+        self::assertTrue(mkdir($current, 0700, true));
+        file_put_contents($current.'/manifest.json', json_encode([
+            'contract_version' => CareerShardedCurrentAuthorityPackage::CONTRACT_VERSION,
+        ], JSON_THROW_ON_ERROR));
+
         try {
-            $currentRoot = $fixtureBackend.'/content_assets/career/current';
-            self::assertTrue(mkdir($currentRoot, 0700, true));
-            $installedRoot = $this->repoRoot.'/backend/content_assets/career/current';
-            $iterator = new RecursiveIteratorIterator(
-                new RecursiveDirectoryIterator($installedRoot, \FilesystemIterator::SKIP_DOTS),
-                RecursiveIteratorIterator::SELF_FIRST,
-            );
-            foreach ($iterator as $entry) {
-                $relative = substr($entry->getPathname(), strlen($installedRoot) + 1);
-                $target = $currentRoot.'/'.$relative;
-                if ($entry->isDir()) {
-                    self::assertTrue(mkdir($target, 0700));
-                } else {
-                    self::assertTrue(copy($entry->getPathname(), $target));
-                }
-            }
-            file_put_contents($currentRoot.'/assets.jsonl', "legacy fallback must not be read\n");
-
-            $sharded = $loader->loadShardedForPublish($fixtureBackend);
-            self::assertSame('sharded', $sharded['summary']['source_format']);
-            self::assertSame(1046, $sharded['summary']['career_count']);
-            self::assertSame(2092, $sharded['summary']['locale_page_count']);
-            self::assertSame($installed['slugs'], $sharded['slugs']);
-            self::assertSame(
-                CareerCurrentAuthorityPackage::hashValue($installed['rows']),
-                CareerCurrentAuthorityPackage::hashValue($sharded['rows']),
-            );
-            self::assertSame($installed['summary']['assets_sha256'], $sharded['summary']['assets_sha256']);
-            self::assertSame($installed['summary']['full_asset_set_sha256'], $sharded['summary']['full_asset_set_sha256']);
-
-            $firstShard = $currentRoot.'/identity/shard-00.jsonl';
-            $original = (string) file_get_contents($firstShard);
-            file_put_contents($firstShard, '['.substr($original, 1));
-            $this->assertFailure('CURRENT_SHARDED_HASH_MISMATCH', fn () => $loader->load($fixtureBackend));
-            file_put_contents($firstShard, $original);
-
-            $manifestPath = $currentRoot.'/manifest.json';
-            $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
-            $manifest['contract_version'] = 'career.unknown.v1';
-            file_put_contents($manifestPath, CareerCurrentAuthorityPackage::encodePrettyCanonical($manifest));
-            $this->assertFailure('CURRENT_SHARDED_AUTHORITY_REQUIRED', fn () => $loader->load($fixtureBackend));
-            $this->assertFailure(
-                'CURRENT_PUBLISH_SHARDED_AUTHORITY_REQUIRED',
-                fn () => $loader->loadShardedForPublish($fixtureBackend),
-            );
-        } finally {
-            $this->deleteTemporaryDirectory($fixtureBackend);
-        }
-    }
-
-    private function temporaryDirectory(string $prefix): string
-    {
-        $path = tempnam(sys_get_temp_dir(), $prefix);
-        self::assertIsString($path);
-        unlink($path);
-        self::assertTrue(mkdir($path, 0700));
-
-        return $path;
-    }
-
-    private function deleteTemporaryDirectory(string $root): void
-    {
-        $real = realpath($root);
-        $temporaryRoot = realpath(sys_get_temp_dir());
-        if (! is_string($real) || ! is_string($temporaryRoot) || ! str_starts_with($real, $temporaryRoot.'/')) {
-            return;
-        }
-        $iterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($real, \FilesystemIterator::SKIP_DOTS),
-            RecursiveIteratorIterator::CHILD_FIRST,
-        );
-        foreach ($iterator as $entry) {
-            $entry->isDir() ? rmdir($entry->getPathname()) : unlink($entry->getPathname());
-        }
-        rmdir($real);
-    }
-
-    private function assertFailure(string $safeCode, callable $callback): void
-    {
-        try {
-            $callback();
-            self::fail('Expected '.$safeCode);
+            (new CareerCurrentAuthorityPackageLoader(new CareerContentV3AuthorityPackage))->load($root);
+            self::fail('Historical shards must not be accepted as Current runtime authority.');
         } catch (CareerCurrentAuthorityPackageFailure $failure) {
-            self::assertSame($safeCode, $failure->safeCode);
+            self::assertSame('CURRENT_CONTENT_V3_AUTHORITY_REQUIRED', $failure->safeCode);
+        } finally {
+            unlink($current.'/manifest.json');
+            rmdir($current);
+            rmdir(dirname($current));
+            rmdir(dirname($current, 2));
+            rmdir($root);
         }
     }
 }

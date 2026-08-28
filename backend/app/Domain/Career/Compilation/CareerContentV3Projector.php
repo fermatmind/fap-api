@@ -82,6 +82,30 @@ final class CareerContentV3Projector
                 'items' => $items,
             ];
         }
+        $navigation = [];
+        foreach ([...self::FRONTEND_STRUCTURAL_COMPONENTS, 'path'] as $componentId) {
+            if (! array_key_exists($componentId, $page)) {
+                continue;
+            }
+            foreach ($this->links($page[$componentId], $componentId) as $entry) {
+                $entry['id'] = 'navigation-'.(count($navigation) + 1);
+                $entry['entity'] = $componentId;
+                $navigation[] = $entry;
+            }
+        }
+        if ($navigation !== []) {
+            $blocks[] = [
+                'id' => 'navigation',
+                'copy_key' => 'career.block.navigation',
+                'content_state' => $state,
+                'availability' => 'available',
+                'items' => [[
+                    'id' => 'navigation-links', 'copy_key' => 'career.item.navigation-links',
+                    'type' => 'links', 'availability' => 'available',
+                    'data' => ['entries' => $navigation],
+                ]],
+            ];
+        }
         $sourceItems = $this->sourceItems($sources);
         if ($sourceItems !== []) {
             $blocks[] = [
@@ -226,7 +250,7 @@ final class CareerContentV3Projector
             $result = array_merge($result, $this->leafValues($child, (string) $key));
         }
 
-        return array_values(array_unique($result));
+        return $result;
     }
 
     /** @return list<array{id:string,question_key:string,answer:string}> */
@@ -286,23 +310,32 @@ final class CareerContentV3Projector
     {
         $found = [];
         $walk = function (mixed $node) use (&$walk, &$found, $componentId): void {
+            if (is_string($node) && $this->safeUrl($node)) {
+                $found[] = ['entity' => $componentId, 'url' => $node];
+
+                return;
+            }
             if (! is_array($node)) {
                 return;
             }
             $url = $this->string($node['href'] ?? null) ?? $this->string($node['url'] ?? null) ?? $this->string($node['链接'] ?? null);
-            if ($url !== null && $this->safeUrl($url)) {
+            $capturedUrl = $url !== null && $this->safeUrl($url);
+            if ($capturedUrl) {
                 $entity = $this->string($node['entity'] ?? null) ?? $this->string($node['name'] ?? null)
                     ?? $this->string($node['label'] ?? null) ?? $this->string($node['title'] ?? null)
                     ?? $this->string($node['来源'] ?? null) ?? parse_url($url, PHP_URL_HOST) ?? $componentId;
-                $found[$url] = ['entity' => $entity, 'url' => $url];
+                $found[] = ['entity' => $entity, 'url' => $url];
             }
-            foreach ($this->orderedMap($node) as $child) {
+            foreach ($this->orderedMap($node) as $key => $child) {
+                if ($capturedUrl && $this->urlKey((string) $key)) {
+                    continue;
+                }
                 $walk($child);
             }
         };
         $walk($value);
         $result = [];
-        foreach (array_values($found) as $index => $entry) {
+        foreach ($found as $index => $entry) {
             $result[] = [
                 'id' => 'link-'.($index + 1), 'entity' => $entry['entity'],
                 'relation' => 'related-evidence', 'url' => $entry['url'],
@@ -322,7 +355,7 @@ final class CareerContentV3Projector
         return $value;
     }
 
-    /** @param array<string,mixed>|list<mixed> $sources @return list<array{id:string,name:string,url:?string}> */
+    /** @param array<string,mixed>|list<mixed> $sources @return list<array{id:string,name:string,url:?string,details:list<string>}> */
     private function sourceItems(array $sources): array
     {
         $entries = array_is_list($sources)
@@ -338,8 +371,20 @@ final class CareerContentV3Projector
             }
             $name = $this->string($entry['label'] ?? null) ?? $this->string($entry['name'] ?? null) ?? $this->string($entry['来源'] ?? null);
             $url = $this->string($entry['url'] ?? null) ?? $this->string($entry['href'] ?? null) ?? $this->string($entry['链接'] ?? null);
-            if ($name !== null && ($url === null || $this->safeUrl($url))) {
-                $result[] = ['id' => 'source-'.($index + 1), 'name' => $name, 'url' => $url];
+            if ($name !== null) {
+                if ($url !== null && ! $this->safeUrl($url)) {
+                    if (preg_match('/\Anot_applicable_[a-z0-9_]+\z/', $url) !== 1) {
+                        throw new CareerTenBlockCompileFailure('CONTENT_V3_SOURCE_URL_INVALID');
+                    }
+                    $url = null;
+                }
+                $details = [];
+                foreach ((array) ($entry['usage'] ?? []) as $detail) {
+                    if (is_string($detail) && trim($detail) !== '') {
+                        $details[] = trim($detail);
+                    }
+                }
+                $result[] = ['id' => 'source-'.($index + 1), 'name' => $name, 'url' => $url, 'details' => $details];
             }
         }
 
@@ -372,7 +417,7 @@ final class CareerContentV3Projector
 
     private function safeUrl(string $value): bool
     {
-        return preg_match('/\Ahttps:\/\//', $value) === 1 || preg_match('/\A\/(?:en|zh)\//', $value) === 1
+        return preg_match('/\Ahttps:\/\/[^\s|]+\z/', $value) === 1 || preg_match('/\A\/(?:en|zh)\/[^\s|]+\z/', $value) === 1
             || preg_match('/\A#[a-z0-9][a-z0-9_-]*\z/', $value) === 1;
     }
 
