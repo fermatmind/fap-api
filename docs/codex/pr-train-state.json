@@ -106815,7 +106815,9 @@
     "base": "main",
     "branch": "codex/seo-platform-10-h-read-model-closeout",
     "title": "feat(seo): close content lifecycle platform loop",
-    "status": "in_progress",
+    "status": "ready_to_merge",
+    "pr_number": 3834,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3834",
     "depends_on": ["SEO-PLATFORM-10-G"],
     "allowed_paths": [
       ".github/trunk/classify-paths.mjs",
@@ -106849,7 +106851,7 @@
       "dependency": {"status": "passed", "evidence": "SEO-PLATFORM-10-G merged as 54c3fbcdf1f615418f130c426e3f4b6ce8757a42 and exact-SHA CI run 33138426275 passed before 10-H implementation began."},
       "local_validation": {"status": "passed", "evidence": "Lifecycle read model, existing Content and Publishing UI integration, read-only API permissions, bounded backfill, forced post-backfill consumer convergence, and pointer-preserving closeout contracts passed 29 tests / 470 assertions. Scoped Pint, classifier tests, actionlint, PHP and shell syntax passed."},
       "scope": {"status": "passed", "evidence": "Scope is limited to the unified read model, existing UI/API integration, exact controlled operation classifier, automatic deployment closeout, sanitized receipts, focused tests, and train reconciliation."},
-      "github_ci": {"status": "pending", "evidence": "10-H has not been pushed."},
+      "github_ci": {"status": "ready", "evidence": "PR #3834 is mergeable and clean; this repository runs authoritative exact-SHA checks on main pushes."},
       "deployment": {"status": "pending", "evidence": "10-H has not entered the automatic exact-SHA deployment lane."}
     },
     "production_write_execution": false,
@@ -106864,6 +106866,11 @@
         "at": "2026-08-28T11:30:00+08:00",
         "status": "local_validation_passed",
         "note": "Added a permission-bound bilingual read model to the existing workspace and bound the one-time material projection plus public consumer/LKG proof to the exact controlled deployment lane. No UI mutation control, manual workflow, destructive probe, content publication, or search action was added."
+      },
+      {
+        "at": "2026-08-28T12:00:00+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #3834 with the exact 25-path validated scope. GitHub reports it mergeable and clean; authoritative checks will bind the squash result on main."
       }
     ]
   }
