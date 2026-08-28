@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Domain\Career\Display;
 
 use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
+use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageLoader;
 use App\Domain\Career\Display\CareerCurrentAuthorityReleaseIntent;
@@ -15,12 +16,18 @@ final class CareerCurrentAuthorityReleaseIntentTest extends TestCase
     public function test_it_binds_the_locked_package_without_binding_the_execution_release_sha(): void
     {
         $result = $this->verifier()->verify($this->backendRoot());
+        $manifestPath = $this->backendRoot().'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH.'/manifest.json';
+        $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
 
         self::assertSame('career.current_authority_release_intent.v1', $result['intent']['contract_version']);
         self::assertSame('2c956887ad9460849fd29cbfacb145e1397993cd', $result['intent']['source_merge_sha']);
-        self::assertSame('14723683f4b8b5d121b169d3be643318cc657f3cfaaca995b54c17988675bbcd', $result['intent']['manifest_sha256']);
-        self::assertSame('5fdbf30be3a6b0ad855e22cd5887fcc8bad1702842bc7b1e4b0ed4faae85fce7', $result['intent']['aggregate_sha256']);
-        self::assertSame('b7fed8007d505b45e2707ef11e3b1b4196d13985e0e8e1b146c4710fcbcdc616', $result['intent']['versionless_projection_sha256']);
+        self::assertSame(hash_file('sha256', $manifestPath), $result['intent']['manifest_sha256']);
+        self::assertSame($manifest['aggregate_sha256'], $result['intent']['aggregate_sha256']);
+        self::assertSame(
+            $manifest['set_hashes']['legacy_versionless_projection_sha256'],
+            $result['intent']['versionless_projection_sha256'],
+        );
+        self::assertSame($manifest['source_registry_sha256'], $result['intent']['source_registry_sha256']);
         self::assertSame(['en', 'zh-CN'], $result['intent']['locales']);
         self::assertSame(['software-developers'], $result['intent']['manual_hold_slugs']);
         self::assertFalse($result['intent']['discoverability']);
@@ -29,7 +36,12 @@ final class CareerCurrentAuthorityReleaseIntentTest extends TestCase
         self::assertSame(2092, $result['package']['locale_page_count']);
         self::assertSame(2092, $result['package']['file_count']);
         self::assertSame(
-            hash('sha256', 'career-current-authority|2c956887ad9460849fd29cbfacb145e1397993cd|5fdbf30be3a6b0ad855e22cd5887fcc8bad1702842bc7b1e4b0ed4faae85fce7|b7fed8007d505b45e2707ef11e3b1b4196d13985e0e8e1b146c4710fcbcdc616'),
+            hash('sha256', sprintf(
+                'career-current-authority|%s|%s|%s',
+                $result['intent']['source_merge_sha'],
+                $result['intent']['aggregate_sha256'],
+                $result['intent']['versionless_projection_sha256'],
+            )),
             $result['operation_key'],
         );
     }

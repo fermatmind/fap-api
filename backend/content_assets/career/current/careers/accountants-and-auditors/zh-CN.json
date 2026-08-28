@@ -1345,10 +1345,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国 SOC 13-2011，2024—2034 年官方职业预测"
+              "美国 SOC 13-2011，2025—2035 年官方职业预测"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-employment-growth-2025-2035"
+          ],
           "id": "ai-impact-table-34",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -1356,10 +1362,17 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "就业预计增长 5%，年均约 124,200 个职位空缺；例行任务会自动化，但总体需求预计不会因此下降。"
+              "就业预计增长 {{fact:bls-us-accountants-employment-growth-2025-2035}}，年均约 {{fact:bls-us-accountants-openings-2025-2035}} 个职位空缺；例行任务会自动化，但总体需求预计不会因此下降。"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-employment-growth-2025-2035",
+            "bls-us-accountants-openings-2025-2035"
+          ],
           "id": "ai-impact-table-35",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -1642,10 +1655,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仍有职业需求，但学习重点需要从机械做账转向会计基础、数据能力、内控、法规、分析和沟通。BLS 仍预测美国会计师和审计师 2024—2034 年就业增长 5%，同时研究也提示初级任务组合将更快变化。"
+              "仍有职业需求，但学习重点需要从机械做账转向会计基础、数据能力、内控、法规、分析和沟通。BLS 仍预测美国会计师和审计师 2025—2035 年就业增长 {{fact:bls-us-accountants-employment-growth-2025-2035}}，同时研究也提示初级任务组合将更快变化。"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-employment-growth-2025-2035"
+          ],
           "id": "ai-impact-table-61",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -2357,10 +2376,16 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "$56,020"
+              "{{fact:bls-us-accountants-wage-p10-2025}}"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-wage-p10-2025"
+          ],
           "id": "career-snapshot-primary-locale-1",
+          "source_refs": [
+            "source-7"
+          ],
           "type": "prose"
         },
         {
@@ -2379,10 +2404,16 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "$67,020"
+              "{{fact:bls-us-accountants-wage-p25-2025}}"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-wage-p25-2025"
+          ],
           "id": "career-snapshot-primary-locale-3",
+          "source_refs": [
+            "source-7"
+          ],
           "type": "prose"
         },
         {
@@ -2401,10 +2432,16 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "$83,680"
+              "{{fact:bls-us-accountants-wage-median-2025}}"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-wage-median-2025"
+          ],
           "id": "career-snapshot-primary-locale-5",
+          "source_refs": [
+            "source-6"
+          ],
           "type": "prose"
         },
         {
@@ -2412,10 +2449,17 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "税前月均等值约 $6,973；BLS 2025 工资数据｜https://www.bls.gov/news.release/ocwage.t01.htm"
+              "编辑换算：{{fact:bls-us-accountants-wage-median-2025}} ÷ 12，四舍五入约为 {{fact:editorial-us-accountants-monthly-median-2025}}；BLS OEWS 2025 年 5 月年薪中位数｜https://www.bls.gov/news.release/ocwage.t01.htm"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-wage-median-2025",
+            "editorial-us-accountants-monthly-median-2025"
+          ],
           "id": "career-snapshot-primary-locale-6",
+          "source_refs": [
+            "source-6"
+          ],
           "type": "prose"
         },
         {
@@ -2423,10 +2467,16 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "$109,810"
+              "{{fact:bls-us-accountants-wage-p75-2025}}"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-wage-p75-2025"
+          ],
           "id": "career-snapshot-primary-locale-7",
+          "source_refs": [
+            "source-7"
+          ],
           "type": "prose"
         },
         {
@@ -2445,10 +2495,16 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "$144,090"
+              "{{fact:bls-us-accountants-wage-p90-2025}}"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-wage-p90-2025"
+          ],
           "id": "career-snapshot-primary-locale-9",
+          "source_refs": [
+            "source-7"
+          ],
           "type": "prose"
         },
         {
@@ -2467,10 +2523,17 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "157.98 万 → 165.26 万人"
+              "{{fact:bls-us-accountants-employment-2025}} → {{fact:bls-us-accountants-employment-2035}} 人"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-employment-2025",
+            "bls-us-accountants-employment-2035"
+          ],
           "id": "career-snapshot-primary-locale-11",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -2478,10 +2541,16 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "净增加约 7.28 万人；BLS 职业展望｜https://www.bls.gov/ooh/business-and-financial/accountants-and-auditors.htm"
+              "净增加 {{fact:bls-us-accountants-employment-net-change-2025-2035}} 人；BLS 2025—2035 年就业预测｜https://www.bls.gov/ooh/business-and-financial/accountants-and-auditors.htm"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-employment-net-change-2025-2035"
+          ],
           "id": "career-snapshot-primary-locale-12",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -2489,10 +2558,16 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "约 5%"
+              "{{fact:bls-us-accountants-employment-growth-2025-2035}}"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-employment-growth-2025-2035"
+          ],
           "id": "career-snapshot-primary-locale-13",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -2511,10 +2586,16 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "124,200 个"
+              "{{fact:bls-us-accountants-openings-2025-2035}} 个"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-openings-2025-2035"
+          ],
           "id": "career-snapshot-primary-locale-15",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -2918,10 +2999,16 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "5%"
+              "{{fact:bls-us-accountants-employment-growth-2025-2035}}"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-employment-growth-2025-2035"
+          ],
           "id": "career-snapshot-primary-locale-52",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -2929,10 +3016,16 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "$83,680"
+              "{{fact:bls-us-accountants-wage-median-2025}}"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-wage-median-2025"
+          ],
           "id": "career-snapshot-primary-locale-53",
+          "source_refs": [
+            "source-6"
+          ],
           "type": "prose"
         }
       ]
@@ -2959,10 +3052,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "$56,020"
+              "{{fact:bls-us-accountants-wage-p10-2025}}"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-wage-p10-2025"
+          ],
           "id": "career-snapshot-secondary-locale-2",
+          "source_refs": [
+            "source-7"
+          ],
           "type": "prose"
         },
         {
@@ -2981,10 +3080,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "$67,020"
+              "{{fact:bls-us-accountants-wage-p25-2025}}"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-wage-p25-2025"
+          ],
           "id": "career-snapshot-secondary-locale-4",
+          "source_refs": [
+            "source-7"
+          ],
           "type": "prose"
         },
         {
@@ -3003,10 +3108,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "$83,680"
+              "{{fact:bls-us-accountants-wage-median-2025}}"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-wage-median-2025"
+          ],
           "id": "career-snapshot-secondary-locale-6",
+          "source_refs": [
+            "source-6"
+          ],
           "type": "prose"
         },
         {
@@ -3014,10 +3125,17 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "税前月均等值约 $6,973；BLS 2025 工资数据｜https://www.bls.gov/news.release/ocwage.t01.htm"
+              "编辑换算：{{fact:bls-us-accountants-wage-median-2025}} ÷ 12，四舍五入约为 {{fact:editorial-us-accountants-monthly-median-2025}}；BLS OEWS 2025 年 5 月年薪中位数｜https://www.bls.gov/news.release/ocwage.t01.htm"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-wage-median-2025",
+            "editorial-us-accountants-monthly-median-2025"
+          ],
           "id": "career-snapshot-secondary-locale-7",
+          "source_refs": [
+            "source-6"
+          ],
           "type": "prose"
         },
         {
@@ -3025,10 +3143,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "$109,810"
+              "{{fact:bls-us-accountants-wage-p75-2025}}"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-wage-p75-2025"
+          ],
           "id": "career-snapshot-secondary-locale-8",
+          "source_refs": [
+            "source-7"
+          ],
           "type": "prose"
         },
         {
@@ -3047,10 +3171,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "$144,090"
+              "{{fact:bls-us-accountants-wage-p90-2025}}"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-wage-p90-2025"
+          ],
           "id": "career-snapshot-secondary-locale-10",
+          "source_refs": [
+            "source-7"
+          ],
           "type": "prose"
         },
         {
@@ -3069,10 +3199,17 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "157.98 万 → 165.26 万人"
+              "{{fact:bls-us-accountants-employment-2025}} → {{fact:bls-us-accountants-employment-2035}} 人"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-employment-2025",
+            "bls-us-accountants-employment-2035"
+          ],
           "id": "career-snapshot-secondary-locale-12",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -3080,10 +3217,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "净增加约 7.28 万人；BLS 职业展望｜https://www.bls.gov/ooh/business-and-financial/accountants-and-auditors.htm"
+              "净增加 {{fact:bls-us-accountants-employment-net-change-2025-2035}} 人；BLS 2025—2035 年就业预测｜https://www.bls.gov/ooh/business-and-financial/accountants-and-auditors.htm"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-employment-net-change-2025-2035"
+          ],
           "id": "career-snapshot-secondary-locale-13",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -3091,10 +3234,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "约 5%"
+              "{{fact:bls-us-accountants-employment-growth-2025-2035}}"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-employment-growth-2025-2035"
+          ],
           "id": "career-snapshot-secondary-locale-14",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -3113,10 +3262,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "124,200 个"
+              "{{fact:bls-us-accountants-openings-2025-2035}} 个"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-openings-2025-2035"
+          ],
           "id": "career-snapshot-secondary-locale-16",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -3135,7 +3290,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 工资分位来自 BLS OEWS／O*NET；2024 行业中位数和 2024–2034 就业预测使用不同统计时期，不能拼成同一组趋势。OEWS 不覆盖自雇者，也不提供个人税后月薪或具体公司的岗位报价。"
+              "2025 年 5 月工资分位来自 BLS OEWS／O*NET；2025 年行业中位数和 2025–2035 年就业预测来自不同统计产品，不能拼成同一条工资趋势。OEWS 不覆盖自雇者，也不提供个人税后月薪或具体公司的岗位报价。"
             ]
           },
           "id": "career-snapshot-secondary-locale-18",
@@ -3146,10 +3301,20 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "按 BLS 2025 全国工资数据，会计师和审计师年薪中位数为 $83,680，折合税前月均约 $6,973；10% 的从业者年薪不高于 $56,020，10% 的从业者年薪不低于 $144,090。这里的全国数据合并统计会计师与审计师，不是入门工资、到手月薪或某个城市的岗位报价。"
+              "按 BLS 2025 年 5 月全国工资数据，会计师和审计师年薪中位数为 {{fact:bls-us-accountants-wage-median-2025}}；编辑换算：{{fact:bls-us-accountants-wage-median-2025}} ÷ 12，四舍五入约为 {{fact:editorial-us-accountants-monthly-median-2025}}。10% 的从业者年薪不高于 {{fact:bls-us-accountants-wage-p10-2025}}，10% 的从业者年薪不低于 {{fact:bls-us-accountants-wage-p90-2025}}。这里的全国数据合并统计会计师与审计师，不是入门工资、到手月薪或某个城市的岗位报价。"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-wage-median-2025",
+            "editorial-us-accountants-monthly-median-2025",
+            "bls-us-accountants-wage-p10-2025",
+            "bls-us-accountants-wage-p90-2025"
+          ],
           "id": "career-snapshot-secondary-locale-19",
+          "source_refs": [
+            "source-6",
+            "source-7"
+          ],
           "type": "prose"
         },
         {
@@ -3223,10 +3388,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "5%"
+              "{{fact:bls-us-accountants-employment-growth-2025-2035}}"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-employment-growth-2025-2035"
+          ],
           "id": "career-snapshot-secondary-locale-26",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -3245,10 +3416,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "$87,980"
+              "{{fact:bls-us-accountants-industry-finance-2025}}"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-industry-finance-2025"
+          ],
           "id": "career-snapshot-secondary-locale-28",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -3256,7 +3433,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "高于 2024 年全职业合并中位数；行业数据反映雇主结构，不代表个人报价。"
+              "高于 2025 年全职业合并中位数；行业数据反映雇主结构，不代表个人报价。"
             ]
           },
           "id": "career-snapshot-secondary-locale-29",
@@ -3278,10 +3455,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "$86,010"
+              "{{fact:bls-us-accountants-industry-management-2025}}"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-industry-management-2025"
+          ],
           "id": "career-snapshot-secondary-locale-31",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -3311,10 +3494,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "$81,120"
+              "{{fact:bls-us-accountants-industry-government-2025}}"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-industry-government-2025"
+          ],
           "id": "career-snapshot-secondary-locale-34",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -3322,7 +3511,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "接近 2024 年全国职业中位数，不能直接与私人部门福利结构互换比较。"
+              "接近 2025 年全国职业中位数，不能直接与私人部门福利结构互换比较。"
             ]
           },
           "id": "career-snapshot-secondary-locale-35",
@@ -3344,10 +3533,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "$80,510"
+              "{{fact:bls-us-accountants-industry-accounting-services-2025}}"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-industry-accounting-services-2025"
+          ],
           "id": "career-snapshot-secondary-locale-37",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -3377,10 +3572,17 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不是。它只是把 $83,680 年薪除以 12 得到的税前月均等值，不能代替实际工资单；联邦与州税、福利扣款、奖金和发薪周期都会改变每月到账金额。"
+              "不是。编辑换算：{{fact:bls-us-accountants-wage-median-2025}} ÷ 12，四舍五入约为 {{fact:editorial-us-accountants-monthly-median-2025}}；这不是 BLS 发布的月薪，也不能代替实际工资单。联邦与州税、福利扣款、奖金和发薪周期都会改变每月到账金额。"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-wage-median-2025",
+            "editorial-us-accountants-monthly-median-2025"
+          ],
           "id": "career-snapshot-secondary-locale-40",
+          "source_refs": [
+            "source-6"
+          ],
           "type": "prose"
         },
         {
@@ -3410,10 +3612,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "$83,680"
+              "{{fact:bls-us-accountants-wage-median-2025}}"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-wage-median-2025"
+          ],
           "id": "career-snapshot-secondary-locale-43",
+          "source_refs": [
+            "source-6"
+          ],
           "type": "prose"
         }
       ]
@@ -6150,10 +6358,16 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024–2034"
+              "2025–2035"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-employment-growth-2025-2035"
+          ],
           "id": "market-signal-card-3",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -6216,10 +6430,17 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "约 5%；约 124,200 个/年"
+              "{{fact:bls-us-accountants-employment-growth-2025-2035}}；约 {{fact:bls-us-accountants-openings-2025-2035}} 个/年"
             ]
           },
+          "fact_refs": [
+            "bls-us-accountants-employment-growth-2025-2035",
+            "bls-us-accountants-openings-2025-2035"
+          ],
           "id": "market-signal-card-9",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -7055,9 +7276,16 @@
                 "question_key": "career.faq.accounting.comparison"
               },
               {
-                "answer": "更可能发生的是任务重组和岗位分化，而不是整个职业同时消失。结构化、规则明确、可重复验证的录入、匹配和初筛会更快自动化；但政策选择、重大性判断、异常追问、相互矛盾证据的评价、独立性与伦理处理、责任签署和困难沟通仍需要专业人员。美国 BLS 目前预计 2025–2035 年该职业就业增长 5%、年均约 115,300 个职位空缺，但这是美国预测，不等于全球保证。个人应把能力从“手工处理”升级为“设计控制、复核系统输出并解释结论”。",
+                "answer": "更可能发生的是任务重组和岗位分化，而不是整个职业同时消失。结构化、规则明确、可重复验证的录入、匹配和初筛会更快自动化；但政策选择、重大性判断、异常追问、相互矛盾证据的评价、独立性与伦理处理、责任签署和困难沟通仍需要专业人员。美国 BLS 目前预计 2025–2035 年该职业就业增长 {{fact:bls-us-accountants-employment-growth-2025-2035}}、年均约 {{fact:bls-us-accountants-openings-2025-2035}} 个职位空缺，但这是美国预测，不等于全球保证。个人应把能力从“手工处理”升级为“设计控制、复核系统输出并解释结论”。",
+                "fact_refs": [
+                  "bls-us-accountants-employment-growth-2025-2035",
+                  "bls-us-accountants-openings-2025-2035"
+                ],
                 "id": "faq-3",
-                "question_key": "career.faq.accounting.ai-replacement"
+                "question_key": "career.faq.accounting.ai-replacement",
+                "source_refs": [
+                  "source-8"
+                ]
               },
               {
                 "answer": "优先被自动化的是输入结构化、规则稳定、结果可批量校验的任务，例如发票与凭证识别、分类编码、银行对账、三单匹配、费用审核、标准报表生成、底稿整理和初步异常筛查。自动化并不表示结果可直接采用：数据质量、系统接口、权限控制、会计政策、异常阈值和人工复核都会改变可靠性。岗位通常会从逐笔处理转向规则配置、异常队列复核、证据追踪和输出解释。判断自己的风险时，应拆解日常任务比例，而不是只看职位名称。",
@@ -7070,9 +7298,15 @@
                 "question_key": "career.faq.accounting.human-skills"
               },
               {
-                "answer": "没有一个数字能代表所有会计与审计岗位，工资应按国家、城市、岗位方向、经验、资质、行业和责任范围比较。美国 BLS 的 2025 年全国年薪中位数为 83,680 美元，这表示一半从业者高于该值、一半低于该值，并不是入门工资或个人报价。中国大陆没有与这一美国合并职业分类完全对应的统一单职业官方中位数，因此本页把官方口径与招聘市场代理数据分开呈现。比较机会时，还应同时看加班季节、奖金、证书要求、晋升路径和生活成本。",
+                "answer": "没有一个数字能代表所有会计与审计岗位，工资应按国家、城市、岗位方向、经验、资质、行业和责任范围比较。美国 BLS 的 2025 年 5 月全国年薪中位数为 {{fact:bls-us-accountants-wage-median-2025}}，这表示一半从业者高于该值、一半低于该值，并不是入门工资或个人报价。中国大陆没有与这一美国合并职业分类完全对应的统一单职业官方中位数，因此本页把官方口径与招聘市场代理数据分开呈现。比较机会时，还应同时看加班季节、奖金、证书要求、晋升路径和生活成本。",
+                "fact_refs": [
+                  "bls-us-accountants-wage-median-2025"
+                ],
                 "id": "faq-6",
-                "question_key": "career.faq.accounting.salary"
+                "question_key": "career.faq.accounting.salary",
+                "source_refs": [
+                  "source-6"
+                ]
               },
               {
                 "answer": "要求取决于司法辖区、岗位和雇主。美国 BLS 将会计师和审计师的典型入门学历列为会计或相关专业学士学位；中国大陆的企业会计、事务所审计、税务、内审和管理会计并没有完全相同的门槛。非会计专业可以转入，但通常要系统补齐会计循环、财务报告、税法、审计与内控，并证明 Excel、ERP、数据核对和书面表达能力。涉及法定审计、执业或签字权限时，还必须另外满足当地注册、经验、继续教育和独立性规定。",
@@ -7090,9 +7324,15 @@
                 "question_key": "career.faq.accounting.career-change"
               },
               {
-                "answer": "是否值得取决于你是否接受持续学习、截止日期和责任约束，而不是只看“稳定”或“会不会被 AI 取代”。美国 BLS 仍预测 2025–2035 年就业增长 5%，但基础录入和标准化复核的任务占比可能下降，地区与岗位差异也很大。长期更有价值的是会计与审计基础、数据与 AI 工具、内控与系统理解、异常调查、职业判断、沟通和伦理责任。选择前应体验真实工作样本，并比较企业会计、审计、税务和 FP&A 的工作结构。",
+                "answer": "是否值得取决于你是否接受持续学习、截止日期和责任约束，而不是只看“稳定”或“会不会被 AI 取代”。美国 BLS 仍预测 2025–2035 年就业增长 {{fact:bls-us-accountants-employment-growth-2025-2035}}，但基础录入和标准化复核的任务占比可能下降，地区与岗位差异也很大。长期更有价值的是会计与审计基础、数据与 AI 工具、内控与系统理解、异常调查、职业判断、沟通和伦理责任。选择前应体验真实工作样本，并比较企业会计、审计、税务和 FP&A 的工作结构。",
+                "fact_refs": [
+                  "bls-us-accountants-employment-growth-2025-2035"
+                ],
                 "id": "faq-10",
-                "question_key": "career.faq.accounting.career-worth"
+                "question_key": "career.faq.accounting.career-worth",
+                "source_refs": [
+                  "source-8"
+                ]
               }
             ]
           },
@@ -7270,31 +7510,53 @@
                 "url": "https://www.randstad.cn/s3fs-media/cn/public/2026-01/full_report-cn-_2026_market_outlook_salary_guide._1.pdf?VersionId=U3OTHrqNC4P5y8OSSUqJNe03m5xla54s"
               },
               {
+                "accessed_at": "2026-08-29",
                 "details": [
                   "May 2025 U.S. accountants and auditors median annual wage: $83,680",
-                  "2025 wage snapshot is kept separate from 2024–2034 employment projections"
+                  "This OEWS wage snapshot is kept separate from the 2025–2035 Employment Projections dataset"
                 ],
+                "evidence_type": "官方工资统计",
                 "id": "source-6",
+                "limitation": "OEWS 不覆盖自雇者；全国职业中位数不是起薪、个人报价或税后收入。",
+                "market": "美国",
                 "name": "bls_oes_2025_accountants_wages",
+                "period": "2025 年 5 月",
+                "publisher": "BLS OEWS",
+                "scope": "Accountants and Auditors (SOC 13-2011) 全国年薪中位数",
                 "url": "https://www.bls.gov/news.release/ocwage.t01.htm"
               },
               {
+                "accessed_at": "2026-08-29",
                 "details": [
                   "2025 national wage percentiles for accountants and auditors: $56,020, $67,020, $83,680, $109,810, $144,090"
                 ],
+                "evidence_type": "官方职业工资分位投影",
                 "id": "source-7",
+                "limitation": "全国工资分位不能替代具体州、城市、雇主或入门岗位报价。",
+                "market": "美国",
                 "name": "onet_2025_accountants_wages",
+                "period": "2025 年 5 月",
+                "publisher": "O*NET / BLS OEWS",
+                "scope": "Accountants and Auditors (SOC 13-2011) 全国工资分位",
                 "url": "https://www.onetonline.org/link/localwages/13-2011.00?zip=75001"
               },
               {
+                "accessed_at": "2026-08-29",
                 "details": [
-                  "2024 jobs: 1,579,800",
-                  "2034 projected jobs: 1,652,600",
-                  "2024–2034 outlook: about 5%, 72,800 net change",
-                  "124,200 annual openings include replacement demand"
+                  "2025 jobs: 1,595,200",
+                  "2035 projected jobs: 1,674,600",
+                  "2025–2035 outlook: 5%, 79,400 net change",
+                  "115,300 annual openings include replacement demand",
+                  "May 2025 industry median wages: finance $93,290; management of companies $91,940; government $83,350; accounting services $81,490"
                 ],
+                "evidence_type": "官方就业预测与行业工资摘要",
                 "id": "source-8",
+                "limitation": "美国国家级预测不能外推为中国或全球结论；年均空缺包含替代需求，不等于净新增。",
+                "market": "美国",
                 "name": "bls_accountants_ooh",
+                "period": "2025 年基准；预测期 2025—2035 年",
+                "publisher": "BLS OOH",
+                "scope": "Accountants and Auditors (SOC 13-2011) 就业规模、增长、空缺与主要行业工资",
                 "url": "https://www.bls.gov/ooh/business-and-financial/accountants-and-auditors.htm"
               },
               {
@@ -7325,8 +7587,192 @@
   ],
   "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "$56,020",
+        "fact_id": "bls-us-accountants-wage-p10-2025",
+        "market": "美国",
+        "measure": "年薪第 10 分位数",
+        "occupation_scope": "Accountants and Auditors (SOC 13-2011)",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "source-7"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$67,020",
+        "fact_id": "bls-us-accountants-wage-p25-2025",
+        "market": "美国",
+        "measure": "年薪第 25 分位数",
+        "occupation_scope": "Accountants and Auditors (SOC 13-2011)",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "source-7"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$83,680",
+        "fact_id": "bls-us-accountants-wage-median-2025",
+        "market": "美国",
+        "measure": "年薪中位数",
+        "occupation_scope": "Accountants and Auditors (SOC 13-2011)",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "source-6"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$109,810",
+        "fact_id": "bls-us-accountants-wage-p75-2025",
+        "market": "美国",
+        "measure": "年薪第 75 分位数",
+        "occupation_scope": "Accountants and Auditors (SOC 13-2011)",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "source-7"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$144,090",
+        "fact_id": "bls-us-accountants-wage-p90-2025",
+        "market": "美国",
+        "measure": "年薪第 90 分位数",
+        "occupation_scope": "Accountants and Auditors (SOC 13-2011)",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "source-7"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "1,595,200",
+        "fact_id": "bls-us-accountants-employment-2025",
+        "market": "美国",
+        "measure": "就业人数",
+        "occupation_scope": "Accountants and Auditors (SOC 13-2011)",
+        "period": "2025 年",
+        "source_refs": [
+          "source-8"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "1,674,600",
+        "fact_id": "bls-us-accountants-employment-2035",
+        "market": "美国",
+        "measure": "预测就业人数",
+        "occupation_scope": "Accountants and Auditors (SOC 13-2011)",
+        "period": "2035 年",
+        "source_refs": [
+          "source-8"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "79,400",
+        "fact_id": "bls-us-accountants-employment-net-change-2025-2035",
+        "market": "美国",
+        "measure": "预测净增加就业人数",
+        "occupation_scope": "Accountants and Auditors (SOC 13-2011)",
+        "period": "2025—2035 年",
+        "source_refs": [
+          "source-8"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "5%",
+        "fact_id": "bls-us-accountants-employment-growth-2025-2035",
+        "market": "美国",
+        "measure": "就业增长率预测",
+        "occupation_scope": "Accountants and Auditors (SOC 13-2011)",
+        "period": "2025—2035 年",
+        "source_refs": [
+          "source-8"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "115,300",
+        "fact_id": "bls-us-accountants-openings-2025-2035",
+        "market": "美国",
+        "measure": "年均职位空缺预测",
+        "occupation_scope": "Accountants and Auditors (SOC 13-2011)",
+        "period": "2025—2035 年",
+        "source_refs": [
+          "source-8"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$93,290",
+        "fact_id": "bls-us-accountants-industry-finance-2025",
+        "market": "美国",
+        "measure": "金融与保险行业年薪中位数",
+        "occupation_scope": "Accountants and Auditors (SOC 13-2011)",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "source-8"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$91,940",
+        "fact_id": "bls-us-accountants-industry-management-2025",
+        "market": "美国",
+        "measure": "公司与企业管理行业年薪中位数",
+        "occupation_scope": "Accountants and Auditors (SOC 13-2011)",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "source-8"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$83,350",
+        "fact_id": "bls-us-accountants-industry-government-2025",
+        "market": "美国",
+        "measure": "政府行业年薪中位数",
+        "occupation_scope": "Accountants and Auditors (SOC 13-2011)",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "source-8"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$81,490",
+        "fact_id": "bls-us-accountants-industry-accounting-services-2025",
+        "market": "美国",
+        "measure": "会计、税务、簿记与薪酬服务行业年薪中位数",
+        "occupation_scope": "Accountants and Auditors (SOC 13-2011)",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "source-8"
+        ]
+      },
+      {
+        "derivation": "{{fact:bls-us-accountants-wage-median-2025}} ÷ 12，四舍五入",
+        "display_value": "$6,973",
+        "fact_id": "editorial-us-accountants-monthly-median-2025",
+        "market": "美国",
+        "measure": "税前年薪中位数的月均编辑换算",
+        "occupation_scope": "Accountants and Auditors (SOC 13-2011)",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "source-6"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "440c315e0645966ec5935865dd546af3b6a1c8f0f45f4c581f81cf1c36294c16",
+  "source_content_sha256": "ad37a953ebd44bdff092409303d98f818df759cdeda8133ec4e9081b36acc7c5",
   "subject": {
     "canonical_slug": "accountants-and-auditors",
     "name": "会计师和审计师",
