@@ -17,6 +17,7 @@ set('keep_releases', 5);
 set('default_timeout', 900);
 set('deploy_mode', 'standard');
 set('seo_platform_10_closeout', false);
+set('career_current_parity_required', false);
 
 set('sentry_release', function () {
     return get('release_name');
@@ -3090,7 +3091,46 @@ after('artisan:filament:assets', 'guard:ops-theme-asset');
 after('artisan:filament:assets', 'guard:filament-assets');
 after('artisan:filament:assets', 'guard:required-public-static-media-assets');
 after('guard:required-public-static-media-assets', 'ensure:release-public-static-compat');
-after('artisan:config:cache', 'guard:sitemap-authority');
+
+/**
+ * Career authority changes receive one real 1046 x 2 production parity scan.
+ * It runs against candidate code and the current production DB/cache before
+ * migrations, shared cache warming, publisher execution, or symlink activation.
+ */
+task('career:current-authority-production-preactivation-parity', function () {
+    if (currentHost()->getAlias() !== 'production'
+        || filter_var(get('career_current_parity_required', false), FILTER_VALIDATE_BOOLEAN) !== true) {
+        return;
+    }
+    if (! deployCanSudoWwwData()) {
+        throw new \RuntimeException('Career production preactivation parity requires the application runtime identity.');
+    }
+
+    run(<<<'BASH'
+set -euo pipefail
+candidate_sha="$(tr -d '\r\n' < '{{release_path}}/REVISION')"
+active_sha="$(tr -d '\r\n' < '{{deploy_path}}/current/REVISION')"
+case "$candidate_sha" in (*[!0-9a-f]*|'') exit 1 ;; esac
+case "$active_sha" in (*[!0-9a-f]*|'') exit 1 ;; esac
+test "${#candidate_sha}" -eq 40
+test "${#active_sha}" -eq 40
+receipt_dir='{{deploy_path}}/shared/backend/storage/app/release-receipts/career-current-authority-preactivation'
+receipt_path="$receipt_dir/$candidate_sha.json"
+sudo -n -u www-data -- mkdir -p "$receipt_dir"
+sudo -n -u www-data -- env \
+  CAREER_PARITY_BACKEND_ROOT='{{release_path}}/backend' \
+  CAREER_PARITY_RELEASE_SHA="$candidate_sha" \
+  CAREER_PARITY_ACTIVE_SHA="$active_sha" \
+  CAREER_PARITY_MODE=production-preactivation \
+  CAREER_PARITY_REDIS_MODE=readonly \
+  CAREER_PARITY_RECEIPT_PATH="$receipt_path" \
+  {{bin/php}} -d memory_limit=1024M '{{release_path}}/backend/scripts/ci/career_current_authority_parity.php' >/dev/null
+test -f "$receipt_path"
+BASH);
+});
+
+after('artisan:config:cache', 'career:current-authority-production-preactivation-parity');
+after('career:current-authority-production-preactivation-parity', 'guard:sitemap-authority');
 after('artisan:migrate', 'guard:no-pending-migrations');
 after('guard:no-pending-migrations', 'artisan:migrate-seo-intel');
 after('artisan:migrate-seo-intel', 'guard:no-pending-seo-intel-migrations');

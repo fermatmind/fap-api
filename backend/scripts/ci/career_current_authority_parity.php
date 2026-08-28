@@ -11,14 +11,38 @@ $env = static fn (string $name, string $default = ''): string => is_string(geten
 
 $backendRoot = $env('CAREER_PARITY_BACKEND_ROOT', dirname(__DIR__, 2));
 $releaseSha = $env('CAREER_PARITY_RELEASE_SHA');
+$activeSha = $env('CAREER_PARITY_ACTIVE_SHA');
+$mode = $env('CAREER_PARITY_MODE', 'package');
 $redisMode = $env('CAREER_PARITY_REDIS_MODE', 'none');
-$requireDatabase = $env('CAREER_PARITY_REQUIRE_DATABASE') === '1';
+$receiptPath = $env('CAREER_PARITY_RECEIPT_PATH');
 
-$failure = static function (string $code, string $releaseSha): never {
-    echo json_encode([
-        'contract_version' => CareerCurrentAuthorityParity::CONTRACT_VERSION,
+$emit = static function (array $receipt, string $receiptPath): never {
+    $json = json_encode($receipt, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)."\n";
+    if ($receiptPath !== '') {
+        $directory = dirname($receiptPath);
+        $temporary = $receiptPath.'.tmp';
+        if (! is_dir($directory)
+            || is_link($directory)
+            || is_link($receiptPath)
+            || file_put_contents($temporary, $json, LOCK_EX) !== strlen($json)
+            || ! rename($temporary, $receiptPath)) {
+            @unlink($temporary);
+            throw new RuntimeException('CAREER_PARITY_RECEIPT_WRITE_FAILED');
+        }
+        chmod($receiptPath, 0600);
+    }
+    echo $json;
+    exit(($receipt['status'] ?? null) === 'pass' ? 0 : 1);
+};
+
+$failure = static function (string $code, string $releaseSha) use ($emit, $mode, $receiptPath): never {
+    $emit([
+        'contract_version' => $mode === 'package'
+            ? 'career.current_authority_package_scan.v1'
+            : 'career.current_authority_parity.v2',
         'status' => 'fail',
         'safe_error_code' => preg_match('/\A[A-Z0-9_]+\z/', $code) === 1 ? $code : 'CAREER_PARITY_FAILED',
+        'mode' => $mode,
         'release_sha' => $releaseSha,
         'write_counts' => [
             'database_write_count' => 0,
@@ -26,8 +50,7 @@ $failure = static function (string $code, string $releaseSha): never {
             'discoverability_write_count' => 0,
             'search_write_count' => 0,
         ],
-    ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES)."\n";
-    exit(1);
+    ], $receiptPath);
 };
 
 if (! is_file($backendRoot.'/vendor/autoload.php')) {
@@ -40,10 +63,7 @@ try {
     $app->make(Kernel::class)->bootstrap();
     /** @var CareerCurrentAuthorityParity $parity */
     $parity = $app->make(CareerCurrentAuthorityParity::class);
-    echo json_encode(
-        $parity->run($backendRoot, $requireDatabase, $redisMode, $releaseSha),
-        JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE,
-    )."\n";
+    $emit($parity->run($backendRoot, $mode, $redisMode, $releaseSha, $activeSha), $receiptPath);
 } catch (Throwable $throwable) {
     $code = preg_match('/\A[A-Z0-9_]+\z/', $throwable->getMessage()) === 1
         ? $throwable->getMessage()

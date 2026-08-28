@@ -20,5 +20,11 @@
     "unknown_primitive", "invalid_source_or_link"
   ],
   "rollback": "previous_git_release_and_runtime_lkg_only",
-  "schema_version": "career.detail.content.v3"
+  "schema_version": "career.detail.content.v3",
+  "validation_responsibilities": {
+    "ci": "2092-page package, manifest, codec, deterministic and disposable Redis capacity scan",
+    "production_preactivation": "candidate-code 1046-row and 2092-page database, canonical reader, publisher snapshot, API, active and LKG parity; read-only and before symlink",
+    "publisher_binding": "CI package receipt digest plus production preactivation parity receipt digest",
+    "staging": "existing 30-slug x 2-locale public cohort smoke and readback only"
+  }
 }

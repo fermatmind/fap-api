@@ -8,7 +8,9 @@ use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageLoader;
+use App\Domain\Career\Display\CareerCurrentAuthorityReleaseIntent;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
+use App\Domain\Career\Display\CareerJobDetailCanonicalCacheReader;
 use PHPUnit\Framework\TestCase;
 
 final class CareerCurrentAuthorityPackageTest extends TestCase
@@ -133,6 +135,60 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
         self::assertSame('', $stderr);
         $receipt = json_decode($stdout, true, 512, JSON_THROW_ON_ERROR);
         self::assertSame('CURRENT_PUBLISH_EXECUTION_CONTRACT_INVALID', $receipt['safe_error_code'] ?? null);
+        self::assertSame('confirmed_zero_write', $receipt['write_commit_state'] ?? null);
+        self::assertSame(0, array_sum($receipt['write_counts'] ?? []));
+    }
+
+    public function test_publish_runner_rejects_a_missing_production_preactivation_receipt(): void
+    {
+        $backendRoot = dirname(__DIR__, 5);
+        $releaseSha = str_repeat('a', 40);
+        $verified = (new CareerCurrentAuthorityReleaseIntent(
+            new CareerCurrentAuthorityPackageLoader(new CareerContentV3AuthorityPackage),
+        ))->verify($backendRoot);
+        $intent = $verified['intent'];
+        $pipes = [];
+        $process = proc_open(
+            [PHP_BINARY, '-d', 'display_errors=0', $backendRoot.'/scripts/operations/career_current_authority_publish.php'],
+            [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']],
+            $pipes,
+            $backendRoot,
+            [
+                'CAREER_CURRENT_PUBLISH_EXECUTE' => '1',
+                'CAREER_CURRENT_PUBLISH_BACKEND_ROOT' => $backendRoot,
+                'CAREER_CURRENT_PUBLISH_RELEASE_SHA' => $releaseSha,
+                'CAREER_CURRENT_PUBLISH_RELEASE_NAME' => 'release-test',
+                'CAREER_CURRENT_PUBLISH_SOURCE_MERGE_SHA' => $intent['source_merge_sha'],
+                'CAREER_CURRENT_PUBLISH_MANIFEST_SHA256' => $intent['manifest_sha256'],
+                'CAREER_CURRENT_PUBLISH_ASSETS_SHA256' => $intent['aggregate_sha256'],
+                'CAREER_CURRENT_PUBLISH_VERSIONLESS_PROJECTION_SHA256' => $intent['versionless_projection_sha256'],
+                'CAREER_CURRENT_PUBLISH_OPERATION_KEY' => $verified['operation_key'],
+                'CAREER_CURRENT_PUBLISH_CI_PACKAGE_SCAN_RECEIPT_DIGEST' => str_repeat('b', 64),
+                'CAREER_CURRENT_PUBLISH_PRODUCTION_PARITY_RECEIPT_DIGEST' => str_repeat('c', 64),
+                'CAREER_CURRENT_PUBLISH_PARITY_COMPILER_DIGEST' => CareerJobDetailCanonicalCacheReader::compilerDigest(),
+                'CAREER_CURRENT_PUBLISH_PARITY_CODEC_DIGEST' => CareerJobDetailCanonicalCacheReader::codecDigest(),
+                'CAREER_CURRENT_PUBLISH_FULL_SCAN' => '1',
+                'CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ID' => '1',
+                'CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ATTEMPT' => '1',
+                'CAREER_CURRENT_PUBLISH_RESOURCE_GUARD_SCHEMA' => 'career.current_authority_publish.resource_guard.v1',
+                'CAREER_CURRENT_PUBLISH_TIMEOUT_SECONDS' => '900',
+                'CAREER_CURRENT_PUBLISH_NICE_ADJUSTMENT' => '15',
+                'CAREER_CURRENT_PUBLISH_IONICE_CLASS' => '2',
+                'CAREER_CURRENT_PUBLISH_IONICE_PRIORITY' => '7',
+                'CAREER_CURRENT_PUBLISH_MEMORY_LIMIT_MB' => '1024',
+            ],
+        );
+        self::assertIsResource($process);
+        fclose($pipes[0]);
+        $stdout = stream_get_contents($pipes[1]);
+        $stderr = stream_get_contents($pipes[2]);
+        fclose($pipes[1]);
+        fclose($pipes[2]);
+
+        self::assertSame(1, proc_close($process));
+        self::assertSame('', $stderr);
+        $receipt = json_decode($stdout, true, 512, JSON_THROW_ON_ERROR);
+        self::assertSame('CURRENT_PUBLISH_PRODUCTION_PARITY_INVALID', $receipt['safe_error_code'] ?? null);
         self::assertSame('confirmed_zero_write', $receipt['write_commit_state'] ?? null);
         self::assertSame(0, array_sum($receipt['write_counts'] ?? []));
     }

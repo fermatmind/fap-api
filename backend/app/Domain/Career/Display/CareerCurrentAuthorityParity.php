@@ -5,15 +5,25 @@ declare(strict_types=1);
 namespace App\Domain\Career\Display;
 
 use App\Models\CareerJobDisplayAsset;
+use Illuminate\Cache\Events\CacheFlushed;
+use Illuminate\Cache\Events\KeyForgotten;
+use Illuminate\Cache\Events\KeyWritten;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Redis;
 use RuntimeException;
 
 final class CareerCurrentAuthorityParity
 {
-    public const CONTRACT_VERSION = 'career.current_authority_parity.v1';
+    public const PACKAGE_SCAN_CONTRACT_VERSION = 'career.current_authority_package_scan.v1';
+
+    public const CONTRACT_VERSION = 'career.current_authority_parity.v2';
+
+    public const MODE_PACKAGE = 'package';
+
+    public const MODE_PRODUCTION_PREACTIVATION = 'production-preactivation';
 
     public const LOCKED_REDIS_MAXMEMORY_BYTES = 2_147_483_648;
 
@@ -26,30 +36,51 @@ final class CareerCurrentAuthorityParity
         private readonly CareerCurrentAuthorityStateMachine $stateMachine,
         private readonly CareerJobDetailCanonicalCacheReader $reader,
         private readonly CareerCurrentAuthorityPackage $legacyProjection,
+        private readonly CareerCurrentAuthorityCacheGateway $cache,
     ) {}
 
     /** @return array<string,mixed> */
     public function run(
         string $backendRoot,
-        bool $requireDatabaseCompatibility = false,
+        string $mode = self::MODE_PACKAGE,
         string $redisMode = 'none',
         string $releaseSha = '',
+        string $activeSha = '',
     ): array {
         if (preg_match('/\A[0-9a-f]{40}\z/', $releaseSha) !== 1) {
             throw new RuntimeException('CAREER_PARITY_RELEASE_SHA_INVALID');
         }
+        if (! in_array($mode, [self::MODE_PACKAGE, self::MODE_PRODUCTION_PREACTIVATION], true)) {
+            throw new RuntimeException('CAREER_PARITY_MODE_INVALID');
+        }
+        if ($mode === self::MODE_PRODUCTION_PREACTIVATION
+            && preg_match('/\A[0-9a-f]{40}\z/', $activeSha) !== 1) {
+            throw new RuntimeException('CAREER_PARITY_ACTIVE_SHA_INVALID');
+        }
+        if (($mode === self::MODE_PRODUCTION_PREACTIVATION && $redisMode !== 'readonly')
+            || ($mode === self::MODE_PACKAGE && ! in_array($redisMode, ['none', 'disposable'], true))) {
+            throw new RuntimeException('CAREER_PARITY_MODE_REDIS_MISMATCH');
+        }
         $databaseMutationCount = 0;
+        $cacheMutationCount = 0;
         DB::listen(static function (QueryExecuted $query) use (&$databaseMutationCount): void {
             if (preg_match('/\A(?:insert|update|delete|replace|alter|create|drop|truncate|rename)\b/i', ltrim($query->sql)) === 1) {
                 $databaseMutationCount++;
             }
         });
+        if ($mode === self::MODE_PRODUCTION_PREACTIVATION) {
+            foreach ([KeyWritten::class, KeyForgotten::class, CacheFlushed::class] as $event) {
+                Event::listen($event, static function () use (&$cacheMutationCount): void {
+                    $cacheMutationCount++;
+                });
+            }
+        }
 
         $authority = $this->loader->loadForPublish($backendRoot);
         $slugs = $authority['slugs'];
         $this->assertAuthorityShape($authority);
         $rows = null;
-        if ($requireDatabaseCompatibility) {
+        if ($mode === self::MODE_PRODUCTION_PREACTIVATION) {
             $this->assertDatabaseCompatibility($slugs);
             $rows = $this->compatibilityRows($authority);
         }
@@ -70,6 +101,9 @@ final class CareerCurrentAuthorityParity
         if ($databaseMutationCount !== 0) {
             throw new RuntimeException('CAREER_PARITY_DATABASE_WRITE_DETECTED');
         }
+        if ($cacheMutationCount !== 0) {
+            throw new RuntimeException('CAREER_PARITY_CACHE_WRITE_DETECTED');
+        }
 
         $zeroWrites = [
             'database_write_count' => 0,
@@ -78,9 +112,12 @@ final class CareerCurrentAuthorityParity
             'search_write_count' => 0,
         ];
         $receipt = [
-            'contract_version' => self::CONTRACT_VERSION,
+            'contract_version' => $mode === self::MODE_PACKAGE
+                ? self::PACKAGE_SCAN_CONTRACT_VERSION
+                : self::CONTRACT_VERSION,
             'status' => 'pass',
             'safe_error_code' => null,
+            'mode' => $mode,
             'release_sha' => $releaseSha,
             'package' => [
                 'digest' => $authority['summary']['aggregate_sha256'],
@@ -96,6 +133,14 @@ final class CareerCurrentAuthorityParity
             'redis' => $redis + $full['redis'],
             'write_counts' => $zeroWrites,
         ];
+        if (is_array($rows)) {
+            $receipt['active_sha'] = $activeSha;
+            $receipt['database'] = [
+                'compatibility_row_count' => count($rows),
+                'slug_set_sha256' => CareerCurrentAuthorityPackage::hashValue(array_keys($rows)),
+                'row_set_sha256' => CareerCurrentAuthorityPackage::hashValue(array_values($rows)),
+            ];
+        }
         $receipt['receipt_digest'] = CareerCurrentAuthorityPackage::hashValue($receipt);
 
         return $receipt;
@@ -128,7 +173,18 @@ final class CareerCurrentAuthorityParity
             'lkg_total' => 0,
             'worst_state_amplification' => 0,
         ];
-        $redisMemory = ['memory_usage_total' => 0, 'memory_usage_max_key' => 0];
+        $redisMemory = [
+            'memory_usage_total' => 0,
+            'memory_usage_max_key' => 0,
+            'disposable_probe_write_count' => 0,
+        ];
+
+        $publication = [];
+        if ($includeCapacity && $redisMode === 'readonly') {
+            foreach (array_chunk(array_keys($rows), 50) as $chunk) {
+                $publication += $this->cache->publicationSnapshot($chunk, CareerCurrentAuthorityPackage::LOCALES);
+            }
+        }
 
         foreach ($rows as $slug => $row) {
             foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
@@ -151,8 +207,38 @@ final class CareerCurrentAuthorityParity
                 $lkg = $this->reader->read($stored, $slug, $locale);
                 $api = $this->reader->read($stored, $slug, $locale);
                 $snapshot = $this->reader->read($stored, $slug, $locale);
-                foreach ([$legacy, $active, $lkg, $api, $snapshot] as $statePayload) {
+                if ($includeCapacity && $redisMode === 'readonly') {
+                    $snapshotEntry = $publication[$slug][$locale] ?? null;
+                    $published = is_array($snapshotEntry) && ($snapshotEntry['published'] ?? null) === true;
+                    if (! is_array($snapshotEntry)
+                        || ($snapshotEntry['classification'] ?? null) !== 'ready_active'
+                        || ! is_array($snapshotEntry['payload'] ?? null)) {
+                        throw new RuntimeException('CAREER_PARITY_SNAPSHOT_READBACK_FAILED');
+                    }
+                    $snapshot = $snapshotEntry['payload'];
+                    $active = $snapshot;
+                    $apiRead = $this->cache->verifyOnlyRead($slug, $locale);
+                    if ($published
+                        ? (($apiRead['state'] ?? null) !== 'fresh' || ! is_array($apiRead['payload'] ?? null))
+                        : (($apiRead['state'] ?? null) !== 'not_found' || ($apiRead['payload'] ?? null) !== null)) {
+                        throw new RuntimeException('CAREER_PARITY_API_READBACK_FAILED');
+                    }
+                    $api = $published ? $apiRead['payload'] : null;
+                    $lkgVersion = Cache::get($this->pointerKey($slug, $locale, 'lkg'));
+                    if (! is_string($lkgVersion) || trim($lkgVersion) === '') {
+                        throw new RuntimeException('CAREER_PARITY_REDIS_STATE_INCOMPLETE');
+                    }
+                    $lkg = $this->reader->read(
+                        Cache::get($this->payloadKey($slug, $locale, $lkgVersion)),
+                        $slug,
+                        $locale,
+                    );
+                }
+                foreach ([$legacy, $active, $lkg, $snapshot] as $statePayload) {
                     $this->stateMachine->assertPayload($statePayload, $row, $locale);
+                }
+                if ($api !== null) {
+                    $this->stateMachine->assertPayload($api, $row, $locale);
                 }
 
                 $contentState = data_get($payload, 'display_surface_v1.content_v3.content_state');
@@ -163,7 +249,11 @@ final class CareerCurrentAuthorityParity
                 $counts['locale_pages']++;
                 foreach (array_keys($hashes) as $state) {
                     $statePayload = match ($state) {
-                        'candidate', 'active', 'lkg', 'api', 'snapshot' => $payload,
+                        'candidate' => $payload,
+                        'active' => $active,
+                        'lkg' => $lkg,
+                        'api' => $api ?? ['state' => 'not_found', 'payload' => null],
+                        'snapshot' => $snapshot,
                         'legacy' => $legacy,
                     };
                     $hashes[$state][] = CareerCurrentAuthorityPackage::hashValue($statePayload);
@@ -185,6 +275,7 @@ final class CareerCurrentAuthorityParity
                     foreach (['candidate', 'active', 'lkg'] as $version) {
                         $key = $this->payloadKey($slug, $locale, $version);
                         Cache::forever($key, $stored);
+                        $redisMemory['disposable_probe_write_count']++;
                         $usage = $this->memoryUsage($key);
                         $redisMemory['memory_usage_total'] += $usage;
                         $redisMemory['memory_usage_max_key'] = max($redisMemory['memory_usage_max_key'], $usage);
@@ -202,6 +293,19 @@ final class CareerCurrentAuthorityParity
                         }
                         $redisMemory['memory_usage_total'] += $usage;
                         $redisMemory['memory_usage_max_key'] = max($redisMemory['memory_usage_max_key'], $usage);
+                    }
+                }
+
+                if ($includeCapacity && $redisMode === 'readonly') {
+                    $canonicalHash = CareerCurrentAuthorityPackage::hashValue($payload);
+                    $hydratedStates = [$active, $lkg, $snapshot];
+                    if ($api !== null) {
+                        $hydratedStates[] = $api;
+                    }
+                    foreach ($hydratedStates as $statePayload) {
+                        if (! hash_equals($canonicalHash, CareerCurrentAuthorityPackage::hashValue($statePayload))) {
+                            throw new RuntimeException('CAREER_PARITY_HYDRATION_MISMATCH');
+                        }
                     }
                 }
             }
@@ -238,11 +342,10 @@ final class CareerCurrentAuthorityParity
     private function scanPages(array $pages, bool $includeCapacity, string $redisMode): array
     {
         ksort($pages, SORT_STRING);
-        $hashes = array_fill_keys(['candidate', 'active', 'lkg', 'legacy', 'api', 'snapshot'], []);
+        $hashes = array_fill_keys(['content_v3', 'codec_roundtrip'], []);
         $counts = [
             'slugs' => count($pages), 'locales' => count(CareerCurrentAuthorityPackage::LOCALES),
-            'locale_pages' => 0, 'candidate' => 0, 'active' => 0, 'lkg' => 0,
-            'legacy' => 0, 'api' => 0, 'snapshot' => 0,
+            'locale_pages' => 0, 'encoded' => 0, 'decoded' => 0,
         ];
         $states = ['enhanced' => 0, 'legacy' => 0];
         $bytes = [
@@ -250,7 +353,11 @@ final class CareerCurrentAuthorityParity
             'gzip_after_total' => 0, 'candidate_total' => 0, 'active_total' => 0,
             'lkg_total' => 0, 'worst_state_amplification' => 0,
         ];
-        $redisMemory = ['memory_usage_total' => 0, 'memory_usage_max_key' => 0];
+        $redisMemory = [
+            'memory_usage_total' => 0,
+            'memory_usage_max_key' => 0,
+            'disposable_probe_write_count' => 0,
+        ];
         foreach ($pages as $slug => $localized) {
             foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
                 $content = $localized[$locale] ?? null;
@@ -269,10 +376,10 @@ final class CareerCurrentAuthorityParity
                 }
                 $states[$state]++;
                 $counts['locale_pages']++;
-                foreach (array_keys($hashes) as $name) {
-                    $hashes[$name][] = CareerCurrentAuthorityPackage::hashValue($payload);
-                    $counts[$name]++;
-                }
+                $hashes['content_v3'][] = CareerCurrentAuthorityPackage::hashValue($content);
+                $hashes['codec_roundtrip'][] = CareerCurrentAuthorityPackage::hashValue($payload);
+                $counts['encoded']++;
+                $counts['decoded']++;
                 $json = json_encode($payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
                 $serialized = strlen(serialize($stored));
                 $gzip = strlen(base64_decode((string) $stored['payload'], true) ?: '');
@@ -287,6 +394,7 @@ final class CareerCurrentAuthorityParity
                     foreach (['candidate', 'active', 'lkg'] as $version) {
                         $key = $this->payloadKey($slug, $locale, $version);
                         Cache::forever($key, $stored);
+                        $redisMemory['disposable_probe_write_count']++;
                         $usage = $this->memoryUsage($key);
                         $redisMemory['memory_usage_total'] += $usage;
                         $redisMemory['memory_usage_max_key'] = max($redisMemory['memory_usage_max_key'], $usage);

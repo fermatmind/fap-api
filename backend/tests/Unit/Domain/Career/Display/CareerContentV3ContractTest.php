@@ -4,31 +4,40 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Career\Display;
 
-use App\Domain\Career\Compilation\CareerContentV3Compiler;
+use App\Domain\Career\Compilation\CareerContentV3Projector;
 use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
 use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Display\CareerContentV3Contract;
+use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 final class CareerContentV3ContractTest extends TestCase
 {
-    public function test_all_current_locale_pages_have_deterministic_v3_content(): void
+    public function test_small_legacy_page_is_converted_twice_to_identical_v3_bytes(): void
     {
-        ini_set('memory_limit', '2048M');
-        $compiler = app(CareerContentV3Compiler::class);
-        $first = $compiler->compile(base_path());
-        $second = $compiler->compile(base_path());
+        $projector = app(CareerContentV3Projector::class);
+        $page = [
+            'hero' => ['h1' => 'Actors', 'quick_answer' => 'A concise factual summary.'],
+            'overview' => ['body' => ['First paragraph.', 'Second paragraph.']],
+            'faq_block' => ['items' => [[
+                'question' => 'What do actors do?',
+                'answer' => 'They portray characters for audiences.',
+            ]]],
+        ];
+        $sources = [['name' => 'O*NET', 'url' => 'https://www.onetonline.org/']];
+
+        $first = $projector->project('actors', 'en', $page, null, $sources);
+        $second = $projector->project('actors', 'en', $page, null, $sources);
+        $firstBytes = CareerCurrentAuthorityPackage::encodePrettyCanonical($first);
+        $secondBytes = CareerCurrentAuthorityPackage::encodePrettyCanonical($second);
 
         self::assertSame($first, $second);
-        self::assertSame(1046, $first['career_count']);
-        self::assertSame(2092, $first['locale_page_count']);
-        self::assertSame(2, $first['enhanced_locale_page_count']);
-        self::assertSame(2090, $first['legacy_locale_page_count']);
-        self::assertSame(0, $first['database_writes']);
-        self::assertSame(0, $first['cache_writes']);
-        self::assertSame(0, $first['discoverability_writes']);
+        self::assertSame($firstBytes, $secondBytes);
+        self::assertSame(hash('sha256', $firstBytes), hash('sha256', $secondBytes));
+        self::assertSame('career.detail.content.v3', $first['contract_version']);
+        self::assertSame('legacy', $first['content_state']);
     }
 
     public function test_v3_does_not_mutate_legacy_source_content(): void
@@ -44,6 +53,7 @@ final class CareerContentV3ContractTest extends TestCase
 
     public function test_projection_is_stable_across_mysql_json_object_key_order(): void
     {
+        ini_set('memory_limit', '2048M');
         $package = app(CareerContentV3AuthorityPackage::class);
         $first = $package->load(base_path());
         $second = $package->load(base_path());

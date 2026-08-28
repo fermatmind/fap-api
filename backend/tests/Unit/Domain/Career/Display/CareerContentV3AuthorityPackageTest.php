@@ -147,7 +147,11 @@ final class CareerContentV3AuthorityPackageTest extends TestCase
             'id' => 'bad', 'copy_key' => 'career.block.bad', 'content_state' => 'legacy',
             'availability' => 'available', 'items' => [[
                 'id' => 'bad-1', 'copy_key' => 'career.item.bad', 'type' => 'raw-html',
-                'availability' => 'available', 'data' => ['html' => '<script>bad</script>'],
+                'availability' => 'available', 'data' => [
+                    'html' => '<script>poison-downstream</script>',
+                    'question' => 'poison-downstream',
+                    'answer' => 'poison-downstream',
+                ],
             ]],
         ];
         $reader = new CareerContentV3CanonicalReader($this->package());
@@ -155,7 +159,19 @@ final class CareerContentV3AuthorityPackageTest extends TestCase
 
         self::assertSame(['bad'], $result['isolated_block_ids']);
         self::assertCount(1, $result['content']['blocks']);
-        self::assertStringNotContainsString('script', CareerCurrentAuthorityPackage::encodeCanonical($result['content']));
+        $canonical = CareerCurrentAuthorityPackage::encodeCanonical($result['content']);
+        $downstream = CareerCurrentAuthorityPackage::encodeCanonical([
+            'metadata' => $result['content']['subject']['summary'] ?? null,
+            'faq_json_ld' => collect($result['content']['blocks'])
+                ->flatMap(static fn (array $block): array => $block['items'])
+                ->where('type', 'faq')->values()->all(),
+            'search_summary' => $result['content']['subject']['summary'] ?? null,
+            'quotable_answers' => collect($result['content']['blocks'])
+                ->flatMap(static fn (array $block): array => $block['items'])
+                ->where('type', 'faq')->pluck('data.entries')->flatten(1)->values()->all(),
+        ]);
+        self::assertStringNotContainsString('poison-downstream', $canonical);
+        self::assertStringNotContainsString('poison-downstream', $downstream);
     }
 
     private function fixture(): string

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
+use App\Domain\Career\Display\CareerCurrentAuthorityParity;
 use App\Domain\Career\Display\CareerCurrentAuthorityPublisher;
 use App\Domain\Career\Display\CareerCurrentAuthorityPublisherFailure;
 use App\Domain\Career\Display\CareerCurrentAuthorityReleaseIntent;
@@ -29,8 +30,8 @@ $versionlessProjectionSha256 = $env('CAREER_CURRENT_PUBLISH_VERSIONLESS_PROJECTI
 $operationKey = $env('CAREER_CURRENT_PUBLISH_OPERATION_KEY');
 $workflowRunId = $env('CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ID');
 $workflowRunAttempt = $env('CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ATTEMPT');
-$ciParityReceiptDigest = $env('CAREER_CURRENT_PUBLISH_CI_PARITY_RECEIPT_DIGEST');
-$stagingParityReceiptDigest = $env('CAREER_CURRENT_PUBLISH_STAGING_PARITY_RECEIPT_DIGEST');
+$ciPackageScanReceiptDigest = $env('CAREER_CURRENT_PUBLISH_CI_PACKAGE_SCAN_RECEIPT_DIGEST');
+$productionParityReceiptDigest = $env('CAREER_CURRENT_PUBLISH_PRODUCTION_PARITY_RECEIPT_DIGEST');
 $parityCompilerDigest = $env('CAREER_CURRENT_PUBLISH_PARITY_COMPILER_DIGEST');
 $parityCodecDigest = $env('CAREER_CURRENT_PUBLISH_PARITY_CODEC_DIGEST');
 $fullScan = $env('CAREER_CURRENT_PUBLISH_FULL_SCAN') === '1';
@@ -72,8 +73,8 @@ $receipt = [
         'release_sha' => $releaseSha,
         'package_digest' => $assetsSha256,
         'projection_digest' => $versionlessProjectionSha256,
-        'ci_receipt_digest' => $ciParityReceiptDigest,
-        'staging_receipt_digest' => $stagingParityReceiptDigest,
+        'ci_package_scan_receipt_digest' => $ciPackageScanReceiptDigest,
+        'production_preactivation_receipt_digest' => $productionParityReceiptDigest,
         'compiler_digest' => $parityCompilerDigest,
         'codec_digest' => $parityCodecDigest,
     ],
@@ -132,8 +133,8 @@ try {
         || ! hash_equals($expectedOperationKey, $operationKey)
         || ! ctype_digit($workflowRunId)
         || ! ctype_digit($workflowRunAttempt)
-        || preg_match('/\A[0-9a-f]{64}\z/', $ciParityReceiptDigest) !== 1
-        || preg_match('/\A[0-9a-f]{64}\z/', $stagingParityReceiptDigest) !== 1
+        || preg_match('/\A[0-9a-f]{64}\z/', $ciPackageScanReceiptDigest) !== 1
+        || preg_match('/\A[0-9a-f]{64}\z/', $productionParityReceiptDigest) !== 1
         || ! hash_equals(CareerJobDetailCanonicalCacheReader::compilerDigest(), $parityCompilerDigest)
         || ! hash_equals(CareerJobDetailCanonicalCacheReader::codecDigest(), $parityCodecDigest)
         || $resourceGuard !== [
@@ -145,6 +146,50 @@ try {
             'memory_limit_mb' => 1024,
         ]) {
         $receipt['safe_error_code'] = 'CURRENT_PUBLISH_EXECUTION_CONTRACT_INVALID';
+        $receipt['write_commit_state'] = 'confirmed_zero_write';
+        $emit($receipt);
+    }
+
+    $productionParityPath = $backendRoot.'/storage/app/release-receipts/career-current-authority-preactivation/'.$releaseSha.'.json';
+    $productionParity = is_file($productionParityPath) && ! is_link($productionParityPath)
+        ? json_decode((string) file_get_contents($productionParityPath), true, 512, JSON_THROW_ON_ERROR)
+        : null;
+    $productionParityProjection = is_array($productionParity) ? $productionParity : [];
+    unset($productionParityProjection['receipt_digest']);
+    $expectedParityWriteCounts = [
+        'database_write_count' => 0,
+        'cache_write_count' => 0,
+        'discoverability_write_count' => 0,
+        'search_write_count' => 0,
+    ];
+    if (! is_array($productionParity)
+        || ($productionParity['contract_version'] ?? null) !== CareerCurrentAuthorityParity::CONTRACT_VERSION
+        || ($productionParity['status'] ?? null) !== 'pass'
+        || ($productionParity['mode'] ?? null) !== CareerCurrentAuthorityParity::MODE_PRODUCTION_PREACTIVATION
+        || ! hash_equals($releaseSha, (string) ($productionParity['release_sha'] ?? ''))
+        || ! hash_equals($assetsSha256, (string) data_get($productionParity, 'package.digest', ''))
+        || ! hash_equals($versionlessProjectionSha256, (string) data_get($productionParity, 'package.projection_digest', ''))
+        || ! hash_equals($parityCompilerDigest, (string) data_get($productionParity, 'package.compiler_digest', ''))
+        || ! hash_equals($parityCodecDigest, (string) data_get($productionParity, 'package.codec_digest', ''))
+        || data_get($productionParity, 'database.compatibility_row_count') !== 1046
+        || data_get($productionParity, 'full_scan.counts.locale_pages') !== 2092
+        || data_get($productionParity, 'full_scan.counts.candidate') !== 2092
+        || data_get($productionParity, 'full_scan.counts.active') !== 2092
+        || data_get($productionParity, 'full_scan.counts.lkg') !== 2092
+        || data_get($productionParity, 'full_scan.counts.legacy') !== 2092
+        || data_get($productionParity, 'full_scan.counts.api') !== 2092
+        || data_get($productionParity, 'full_scan.counts.snapshot') !== 2092
+        || data_get($productionParity, 'redis.mode') !== 'readonly'
+        || ($productionParity['write_counts'] ?? null) !== $expectedParityWriteCounts
+        || ! hash_equals(
+            $productionParityReceiptDigest,
+            (string) ($productionParity['receipt_digest'] ?? ''),
+        )
+        || ! hash_equals(
+            $productionParityReceiptDigest,
+            CareerCurrentAuthorityPackage::hashValue($productionParityProjection),
+        )) {
+        $receipt['safe_error_code'] = 'CURRENT_PUBLISH_PRODUCTION_PARITY_INVALID';
         $receipt['write_commit_state'] = 'confirmed_zero_write';
         $emit($receipt);
     }

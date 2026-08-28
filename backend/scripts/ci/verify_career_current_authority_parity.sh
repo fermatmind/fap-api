@@ -18,6 +18,7 @@ trap cleanup EXIT
 
 export CAREER_PARITY_BACKEND_ROOT="$backend_root"
 export CAREER_PARITY_RELEASE_SHA="${CAREER_PARITY_RELEASE_SHA:-$(git -C "$repo_root" rev-parse HEAD)}"
+export CAREER_PARITY_MODE="${CAREER_PARITY_MODE:-package}"
 export CAREER_PARITY_REDIS_MODE="$redis_mode"
 
 if [[ "$redis_mode" == "disposable" ]]; then
