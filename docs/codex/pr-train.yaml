@@ -50289,3 +50289,37 @@ prs:
     production_write_execution: false
     production_workflow_dispatched: false
     staging_workflow_dispatched: false
+
+  - id: SEO-PLATFORM-10-A
+    repo: fap-api
+    base: main
+    branch: codex/seo-platform-10-a-material-fingerprint
+    title: "feat(seo): add deterministic material fingerprint core"
+    status: pr_open
+    pr: 3827
+    head_sha: 380085698d6df1da4a228b2c65951e2f78186931
+    depends_on: []
+    train_scope: seo_platform_10_material_fingerprint_core
+    risk_level: controlled_content_authority_contract
+    scope:
+      - Implement seo.material_fingerprint.v1 from the approved canonical JSON contract.
+      - Define the approved material and non-material change classes with unknown changes held fail closed.
+      - Add golden vectors for semantic equivalence, object field order, locale isolation, nulls, and boundary inputs.
+    do_not:
+      - Integrate Article, Career, Personality, URL Truth, sitemap, llms, CMS UI, backfill, or production writes.
+      - Treat cache, deploy, compile, format, analytics, or runtime envelope fields as material authority.
+    allowed_paths:
+      - backend/app/Services/SeoIntel/MaterialFingerprint/MaterialChangeContract.php
+      - backend/app/Services/SeoIntel/MaterialFingerprint/MaterialFingerprintV1.php
+      - backend/tests/Fixtures/SeoIntel/material-fingerprint-v1-golden-vectors.json
+      - backend/tests/Unit/Services/SeoIntel/MaterialFingerprintV1Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && php artisan test tests/Unit/Services/SeoIntel/MaterialFingerprintV1Test.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/SeoIntel/MaterialFingerprint tests/Unit/Services/SeoIntel/MaterialFingerprintV1Test.php
+      - parse pr-train JSON and YAML; exact-scope validation; git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false

@@ -106358,5 +106358,69 @@
         "note": "Exact-SHA CI run 32915376202 and automatic Deploy run 32915703861 passed. Staging and production smoke succeeded for d80ac79119d54358c2a613be8e82c917cf823fde; LKG fallback remained available and was not used."
       }
     ]
+  },
+  "SEO-PLATFORM-10-A": {
+    "id": "SEO-PLATFORM-10-A",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/seo-platform-10-a-material-fingerprint",
+    "title": "feat(seo): add deterministic material fingerprint core",
+    "status": "pr_open",
+    "commit_sha": "380085698d6df1da4a228b2c65951e2f78186931",
+    "pr_number": 3827,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3827",
+    "depends_on": [],
+    "allowed_paths": [
+      "backend/app/Services/SeoIntel/MaterialFingerprint/MaterialChangeContract.php",
+      "backend/app/Services/SeoIntel/MaterialFingerprint/MaterialFingerprintV1.php",
+      "backend/tests/Fixtures/SeoIntel/material-fingerprint-v1-golden-vectors.json",
+      "backend/tests/Unit/Services/SeoIntel/MaterialFingerprintV1Test.php",
+      "docs/codex/pr-train.yaml",
+      "docs/codex/pr-train-state.json"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The operator explicitly authorized SEO-PLATFORM-10-A as the first item in the ordered eight-PR train."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "SEO-PLATFORM-10-A has no train dependency and started from origin/main c9baa578c477ce471832c620aca23c811642060e."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "MaterialFingerprintV1Test passed 7 tests / 26 assertions. Scoped Pint, PHP syntax, golden-vector JSON, train JSON/YAML parsing, and git diff checks passed."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "Changed paths are limited to the versioned fingerprint core, explicit material classification, golden vectors, and the minimum accurate train registration; no authority adapter or runtime integration is present."
+      },
+      "github_ci": {"status": "pending", "evidence": "PR #3827 is open from the exact validated implementation SHA; GitHub checks are pending."},
+      "deployment": {"status": "not_applicable", "evidence": "This task has no runtime integration or production execution."}
+    },
+    "production_write_execution": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "search_channel_action": false,
+    "transitions": [
+      {
+        "at": "2026-08-28T08:40:00+08:00",
+        "status": "implementation_in_progress",
+        "note": "Registered and started SEO-PLATFORM-10-A after current repository and GitHub evidence confirmed no existing task entry, branch, or open PR. No authority adapter, runtime consumer, external, or production mutation was performed."
+      },
+      {
+        "at": "2026-08-28T08:48:24+08:00",
+        "status": "local_validation_passed",
+        "note": "Golden vectors, semantic object-order stability, locale and business-order boundaries, null and empty inputs, non-material invariance, fail-closed validation, scoped formatting and syntax, manifest parsing, and diff checks passed."
+      },
+      {
+        "at": "2026-08-28T08:49:50+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #3827 from the exact validated implementation SHA 380085698d6df1da4a228b2c65951e2f78186931. Changed-file scope is exact and mergeability is clean; GitHub checks are pending."
+      }
+    ]
   }
 }

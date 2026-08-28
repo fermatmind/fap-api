@@ -1,0 +1,50 @@
+{
+  "schema_version": "seo.material_fingerprint.golden_vectors.v1",
+  "vectors": [
+    {
+      "id": "article_zh_semantic_baseline",
+      "input": {
+        "family": "article",
+        "locale": "zh-CN",
+        "public_identity": "/zh-CN/articles/material-lastmod",
+        "authority_revision_kind": "article_translation_revision",
+        "visible_content": {
+          "title": "为什么 material lastmod 重要",
+          "sections": [
+            {"id": "answer", "body": "只在公开语义改变时更新。"},
+            {"id": "boundary", "body": "缓存重建不是内容发布。"}
+          ]
+        },
+        "claims_and_sources": [
+          {"claim": "更新时间应可追溯", "source": "https://example.test/source/1"}
+        ],
+        "search_surface": {
+          "canonical": "https://www.fermatmind.com/zh-CN/articles/material-lastmod",
+          "description": "确定性的内容更新时间",
+          "indexable": true,
+          "title": "Material lastmod"
+        },
+        "locale_linkage": {"counterparts": ["en"]},
+        "public_structure": {"modules": ["answer", "boundary"]}
+      },
+      "expected_canonical_json": "{\"authority_revision_kind\":\"article_translation_revision\",\"claims_and_sources\":[{\"claim\":\"更新时间应可追溯\",\"source\":\"https://example.test/source/1\"}],\"family\":\"article\",\"locale\":\"zh-CN\",\"locale_linkage\":{\"counterparts\":[\"en\"]},\"public_identity\":\"/zh-CN/articles/material-lastmod\",\"public_structure\":{\"modules\":[\"answer\",\"boundary\"]},\"schema_version\":\"seo.material_fingerprint.v1\",\"search_surface\":{\"canonical\":\"https://www.fermatmind.com/zh-CN/articles/material-lastmod\",\"description\":\"确定性的内容更新时间\",\"indexable\":true,\"title\":\"Material lastmod\"},\"visible_content\":{\"sections\":[{\"body\":\"只在公开语义改变时更新。\",\"id\":\"answer\"},{\"body\":\"缓存重建不是内容发布。\",\"id\":\"boundary\"}],\"title\":\"为什么 material lastmod 重要\"}}",
+      "expected_fingerprint": "61e509a9543cfdd9645588b37ee92276ce44132f98b26d1938d2276d4ef079af"
+    },
+    {
+      "id": "empty_and_null_boundaries",
+      "input": {
+        "family": "career",
+        "locale": "en",
+        "public_identity": "career:software-engineer",
+        "authority_revision_kind": "career_current",
+        "visible_content": [],
+        "claims_and_sources": null,
+        "search_surface": {"indexable": false, "score": 0, "optional": null},
+        "locale_linkage": [],
+        "public_structure": {"empty": "", "enabled": false}
+      },
+      "expected_canonical_json": "{\"authority_revision_kind\":\"career_current\",\"claims_and_sources\":null,\"family\":\"career\",\"locale\":\"en\",\"locale_linkage\":[],\"public_identity\":\"career:software-engineer\",\"public_structure\":{\"empty\":\"\",\"enabled\":false},\"schema_version\":\"seo.material_fingerprint.v1\",\"search_surface\":{\"indexable\":false,\"optional\":null,\"score\":0},\"visible_content\":[]}",
+      "expected_fingerprint": "7ea136eb89f034671899e6c56cc9843b30de19a6d1c5e4aca20f46ed8271f5c9"
+    }
+  ]
+}
