@@ -5,242 +5,26 @@ declare(strict_types=1);
 namespace App\Http\Controllers\API\V0_5\SEO;
 
 use App\Http\Controllers\Controller;
-use App\Services\SEO\SitemapGenerator;
+use App\Services\SeoIntel\UrlTruth\PublicCanonicalConsumerSnapshot;
 use Illuminate\Http\Response;
 
 class LlmsController extends Controller
 {
-    private const LLMS_TXT_CACHE_KEY = 'seo:llms-txt:v1:body';
-
-    private const LLMS_FULL_TXT_CACHE_KEY = 'seo:llms-full-txt:v1:body';
-
-    private const CACHE_TTL_SECONDS = 600;
-
-    public function llmsTxt(SitemapGenerator $generator): Response
+    public function llmsTxt(PublicCanonicalConsumerSnapshot $snapshot): Response
     {
-        return $this->cachedTextResponse(
-            self::LLMS_TXT_CACHE_KEY,
-            $generator->careerDiscoverabilityCacheIdentity(),
-            fn () => $this->buildLlmsTxt($generator)
-        );
+        return $this->textResponse($snapshot->renderLlmsText(false));
     }
 
-    public function llmsFullTxt(SitemapGenerator $generator): Response
+    public function llmsFullTxt(PublicCanonicalConsumerSnapshot $snapshot): Response
     {
-        return $this->cachedTextResponse(
-            self::LLMS_FULL_TXT_CACHE_KEY,
-            $generator->careerDiscoverabilityCacheIdentity(),
-            fn () => $this->buildLlmsFullTxt($generator)
-        );
+        return $this->textResponse($snapshot->renderLlmsText(true));
     }
 
-    private function cachedTextResponse(string $cacheKey, string $identity, callable $builder): Response
+    private function textResponse(string $body): Response
     {
-        $body = cache()->lock($cacheKey.':career-authority-lock', 30)->block(10, function () use ($cacheKey, $identity, $builder): string {
-            $body = cache()->get($cacheKey);
-            $cachedIdentity = cache()->get($cacheKey.':career-authority-identity');
-            if (! is_string($body) || ! is_string($cachedIdentity) || ! hash_equals($identity, $cachedIdentity)) {
-                $body = (string) $builder();
-                cache()->put($cacheKey, $body, self::CACHE_TTL_SECONDS);
-                cache()->put($cacheKey.':career-authority-identity', $identity, self::CACHE_TTL_SECONDS);
-            }
-
-            return $body;
-        });
-
         return response($body, 200, [
             'Content-Type' => 'text/plain; charset=utf-8',
             'Cache-Control' => 'public, max-age=300, s-maxage=600',
         ]);
-    }
-
-    private function buildLlmsTxt(SitemapGenerator $generator): string
-    {
-        $urls = $generator->generateLlmsUrls();
-        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
-        $siteName = 'FermatMind';
-
-        $primary = $this->primaryPaths();
-        $personality = $this->personalityPaths($urls, $baseUrl);
-        $topics = $this->topicPaths($urls, $baseUrl);
-        $career = $this->careerJobPaths($urls, $baseUrl);
-        $help = $this->helpPagePaths($urls, $baseUrl);
-
-        $lines = [
-            "# {$siteName} llms.txt",
-            "Site: {$baseUrl}",
-            'Languages: en, zh',
-            '',
-            'Primary Entries:',
-            ...array_map(fn (string $url): string => "- {$url}", $primary),
-            '',
-            'Indexable Personality:',
-            ...array_map(fn (string $url): string => "- {$url}", $personality),
-            '',
-            'Indexable Topics:',
-            ...array_map(fn (string $url): string => "- {$url}", $topics),
-            '',
-            'Indexable Career:',
-            ...array_map(fn (string $url): string => "- {$url}", $career),
-            '',
-            'Indexable Articles & Help:',
-            ...array_map(fn (string $url): string => "- {$url}", $help),
-            '',
-        ];
-
-        return implode("\n", $lines);
-    }
-
-    private function buildLlmsFullTxt(SitemapGenerator $generator): string
-    {
-        $urls = $generator->generateLlmsUrls();
-        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
-        $siteName = 'FermatMind';
-
-        $primary = $this->primaryPaths();
-        $personality = $this->personalityPaths($urls, $baseUrl);
-        $topics = $this->topicPaths($urls, $baseUrl);
-        $career = $this->careerJobPaths($urls, $baseUrl);
-        $help = $this->helpPagePaths($urls, $baseUrl);
-
-        $count = count($primary) + count($personality) + count($topics) + count($career) + count($help);
-
-        $lines = [
-            "# {$siteName} llms-full.txt",
-            "Site: {$baseUrl}",
-            'Languages: en, zh',
-            "Total indexable entries: {$count}",
-            '',
-            '## Primary',
-            ...array_map(fn (string $url): string => "- {$url}", $primary),
-            '',
-            '## Personality (Big Five, MBTI, Enneagram)',
-            ...array_map(fn (string $url): string => "- {$url}", $personality),
-            '',
-            '## Topics',
-            ...array_map(fn (string $url): string => "- {$url}", $topics),
-            '',
-            '## Career Jobs',
-            ...array_map(fn (string $url): string => "- {$url}", $career),
-            '',
-            '## Help & Content Pages',
-            ...array_map(fn (string $url): string => "- {$url}", $help),
-            '',
-        ];
-
-        return implode("\n", $lines);
-    }
-
-    /** @return list<string> */
-    private function primaryPaths(): array
-    {
-        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
-
-        return [
-            "{$baseUrl}/",
-            "{$baseUrl}/en",
-            "{$baseUrl}/zh",
-            "{$baseUrl}/en/personality",
-            "{$baseUrl}/zh/personality",
-            "{$baseUrl}/en/topics",
-            "{$baseUrl}/zh/topics",
-            "{$baseUrl}/en/career",
-            "{$baseUrl}/zh/career",
-            "{$baseUrl}/en/career/guides",
-            "{$baseUrl}/zh/career/guides",
-        ];
-    }
-
-    /**
-     * @param  list<array{loc: string, slug?: string}>  $urls
-     * @return list<string>
-     */
-    private function personalityPaths(array $urls, string $baseUrl): array
-    {
-        return $this->filterAndSort($urls, static function (string $path): bool {
-            if (preg_match('#^/(?:en|zh)/personality/[a-z]{4}$#', $path) === 1) {
-                return false;
-            }
-
-            return str_starts_with($path, '/en/personality/')
-                || str_starts_with($path, '/zh/personality/')
-                || $path === '/en/personality'
-                || $path === '/zh/personality';
-        });
-    }
-
-    /**
-     * @param  list<array{loc: string, slug?: string}>  $urls
-     * @return list<string>
-     */
-    private function topicPaths(array $urls, string $baseUrl): array
-    {
-        return $this->filterAndSort($urls, static function (string $path): bool {
-            return str_starts_with($path, '/en/topics/')
-                || str_starts_with($path, '/zh/topics/');
-        });
-    }
-
-    /**
-     * @param  list<array{loc: string, slug?: string}>  $urls
-     * @return list<string>
-     */
-    private function careerJobPaths(array $urls, string $baseUrl): array
-    {
-        return $this->filterAndSort($urls, static function (string $path): bool {
-            return str_starts_with($path, '/en/career/jobs/')
-                || str_starts_with($path, '/zh/career/jobs/');
-        });
-    }
-
-    /**
-     * @param  list<array{loc: string, slug?: string}>  $urls
-     * @return list<string>
-     */
-    private function helpPagePaths(array $urls, string $baseUrl): array
-    {
-        return $this->filterAndSort($urls, static function (string $path): bool {
-            $isHelp = str_starts_with($path, '/en/help/') || str_starts_with($path, '/zh/help/');
-            $isArticle = $path === '/en/articles' || $path === '/zh/articles'
-                || str_starts_with($path, '/en/articles/')
-                || str_starts_with($path, '/zh/articles/');
-            $isStatic = in_array($path, [
-                '/en/method-boundaries', '/zh/method-boundaries',
-                '/en/reliability-validity', '/zh/reliability-validity',
-                '/en/privacy', '/zh/privacy',
-            ], true);
-
-            return $isHelp || $isArticle || $isStatic;
-        });
-    }
-
-    /**
-     * @param  list<array{loc: string, slug?: string}>  $urls
-     * @param  callable(string):bool  $keep
-     * @return list<string>
-     */
-    private function filterAndSort(array $urls, callable $keep): array
-    {
-        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '');
-        $prefixLength = strlen($baseUrl);
-
-        $paths = [];
-        foreach ($urls as $entry) {
-            $loc = (string) ($entry['loc'] ?? '');
-            if ($loc === '' || ! str_starts_with($loc, $baseUrl)) {
-                continue;
-            }
-            $path = substr($loc, $prefixLength);
-            if ($path === '') {
-                $path = '/';
-            }
-            if ($keep($path)) {
-                $paths[$path] = $loc;
-            }
-        }
-
-        ksort($paths, SORT_STRING);
-
-        return array_values($paths);
     }
 }

@@ -106655,10 +106655,12 @@
     "base": "main",
     "branch": "codex/seo-platform-10-e-url-truth-backfill",
     "title": "feat(seo): project material authority into URL Truth",
-    "status": "pr_open",
-    "commit_sha": "e72e07b2a3f62077df4fd441f5a62d3660621c3a",
+    "status": "merged",
+    "commit_sha": "9651b8ff01098c4083146c53f30cf10a16aee948",
     "pr_number": 3831,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3831",
+    "merge_commit_sha": "6384bc0430fe38d9f30ab556b41e1c146b139e54",
+    "merged_at": "2026-08-28T10:42:36+08:00",
     "depends_on": ["SEO-PLATFORM-10-D"],
     "allowed_paths": [
       "backend/app/Console/Commands/SeoPlatformUrlTruthMaterialBackfillCommand.php",
@@ -106673,8 +106675,8 @@
       "dependency": {"status": "passed", "evidence": "SEO-PLATFORM-10-D merged as f4f1e211fdf33c7cca721d0b9eee631345a6c070 and its exact-SHA main CI passed before 10-E implementation began."},
       "local_validation": {"status": "passed", "evidence": "Bounded material backfill and existing URL Truth compatibility suites passed 12 tests / 140 assertions. Dry-run, canary, exact readback, stable artifact hash, durable HOLD with trusted-value retention, known unpublish retirement, disabled-lane and bound failures, repeat no-op, unchanged ordinary lastmod/updated_at, scoped Pint, PHP syntax, command registration, train parsing, and diff checks passed."},
       "scope": {"status": "passed", "evidence": "Scope is limited to the URL Truth material-decision projection, forward-only nullable schema expansion, bounded backfill command, focused tests, and minimum train reconciliation."},
-      "github_ci": {"status": "pending", "evidence": "PR #3831 is open from validated implementation commit e72e07b2a3f62077df4fd441f5a62d3660621c3a; required checks are pending."},
-      "deployment": {"status": "pending", "evidence": "No 10-E automatic exact-SHA deployment exists yet; production backfill execution is deferred to 10-H."}
+      "github_ci": {"status": "passed", "evidence": "PR #3831 merged as 6384bc0430fe38d9f30ab556b41e1c146b139e54 and exact-SHA main CI run 33136724956 passed every classifier-selected job."},
+      "deployment": {"status": "not_started", "evidence": "No exact-SHA Deploy run was emitted for 10-E before 10-F began. Production backfill execution remains deferred to 10-H."}
     },
     "production_write_execution": false,
     "production_workflow_dispatched": false,
@@ -106698,6 +106700,56 @@
         "at": "2026-08-28T10:39:21+08:00",
         "status": "pr_open",
         "note": "Opened PR #3831 from validated implementation commit e72e07b2a3f62077df4fd441f5a62d3660621c3a. The six-path scope is clean; required checks are pending."
+      },
+      {
+        "at": "2026-08-28T10:47:41+08:00",
+        "status": "merged",
+        "note": "PR #3831 squash-merged as 6384bc0430fe38d9f30ab556b41e1c146b139e54 and exact-SHA CI run 33136724956 passed. No production backfill or manual workflow was executed."
+      }
+    ]
+  },
+  "SEO-PLATFORM-10-F": {
+    "id": "SEO-PLATFORM-10-F",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/seo-platform-10-f-consumer-convergence",
+    "title": "feat(seo): converge public URL Truth consumers",
+    "status": "in_progress",
+    "depends_on": ["SEO-PLATFORM-10-E"],
+    "allowed_paths": [
+      "backend/app/Http/Controllers/SitemapController.php",
+      "backend/app/Http/Controllers/API/V0_5/SEO/LlmsController.php",
+      "backend/app/Services/SeoIntel/UrlTruth/PublicCanonicalConsumerSnapshot.php",
+      "backend/tests/Feature/SeoIntel/SeoPlatform10PublicConsumerConvergenceTest.php",
+      "backend/tests/Feature/SEO/Career1046DiscoverabilityReleaseCacheTransitionTest.php",
+      "docs/codex/pr-train.yaml",
+      "docs/codex/pr-train-state.json"
+    ],
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "The operator explicitly authorized SEO-PLATFORM-10-F as the sixth item in the ordered eight-PR train."},
+      "dependency": {"status": "passed", "evidence": "SEO-PLATFORM-10-E merged as 6384bc0430fe38d9f30ab556b41e1c146b139e54 and exact-SHA CI run 33136724956 passed before 10-F implementation began."},
+      "local_validation": {"status": "passed", "evidence": "Public consumer parity, material lastmod, HOLD-without-time, private/noindex/redirect/noncanonical exclusion, clock-fallback absence, and pointer-preserving LKG coverage passed with the existing Career generator compatibility suite: 5 tests / 69 assertions. Scoped Pint, PHP syntax, train parsing, and diff checks passed."},
+      "scope": {"status": "passed", "evidence": "Scope is limited to the three declared public consumers, their shared URL Truth snapshot/LKG reader, focused tests, and minimum train reconciliation."},
+      "github_ci": {"status": "pending", "evidence": "10-F has not been pushed."},
+      "deployment": {"status": "pending", "evidence": "10-F has not entered the automatic exact-SHA lane."}
+    },
+    "production_write_execution": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "search_channel_action": false,
+    "transitions": [
+      {
+        "at": "2026-08-28T10:51:00+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started from latest origin/main 02d00f19a4701605e247b15c4cca872640f42616 after confirming 10-E merge and exact-SHA CI. The three public consumers now share URL Truth; sitemap-source and search channels remain untouched."
+      },
+      {
+        "at": "2026-08-28T11:02:00+08:00",
+        "status": "local_validation_passed",
+        "note": "Sitemap, llms, and llms-full now render the exact same validated URL Truth set and optional material lastmod. Unknown HOLD rows remain visible without invented time; invalid rows are excluded; generation failure preserves the active readable LKG."
       }
     ]
   }

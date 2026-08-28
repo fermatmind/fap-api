@@ -50444,9 +50444,10 @@ prs:
     base: main
     branch: codex/seo-platform-10-e-url-truth-backfill
     title: "feat(seo): project material authority into URL Truth"
-    status: in_progress
+    status: merged
     pr: 3831
     head_sha: e72e07b2a3f62077df4fd441f5a62d3660621c3a
+    merge_commit_sha: 6384bc0430fe38d9f30ab556b41e1c146b139e54
     depends_on: [SEO-PLATFORM-10-D]
     train_scope: seo_platform_10_url_truth_material_event_backfill
     risk_level: controlled_url_truth_expand_and_bounded_projection
@@ -50468,6 +50469,39 @@ prs:
     validation:
       - focused bounded dry-run, canary, exact readback, HOLD, retire, rerun idempotency, and existing URL Truth compatibility tests
       - fresh SQLite expand migration; scoped Pint and PHP syntax; train JSON/YAML parsing; exact-scope validation; git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false
+
+  - id: SEO-PLATFORM-10-F
+    repo: fap-api
+    base: main
+    branch: codex/seo-platform-10-f-consumer-convergence
+    title: "feat(seo): converge public URL Truth consumers"
+    status: in_progress
+    depends_on: [SEO-PLATFORM-10-E]
+    train_scope: seo_platform_10_public_consumer_convergence
+    risk_level: controlled_discoverability_consumer_projection
+    scope:
+      - Make sitemap, llms, and llms-full consume one validated URL Truth public canonical snapshot and material lastmod projection.
+      - Exclude private, noindex, redirect-only, non-current binding, and malformed or non-owned canonical URLs.
+      - Publish validated snapshots through one atomic active pointer and retain the prior readable snapshot as LKG on generation or validation failure.
+    do_not:
+      - Change sitemap-source, Search, IndexNow, GSC submission, content authority, URL Truth writers, lifecycle policy, CMS UI, or production data.
+      - Invent lastmod from now, ordinary updated_at, cache, build, import, deploy, or runtime time.
+      - Dispatch workflows or perform manual production, database, cache, CMS, or discoverability writes.
+    allowed_paths:
+      - backend/app/Http/Controllers/SitemapController.php
+      - backend/app/Http/Controllers/API/V0_5/SEO/LlmsController.php
+      - backend/app/Services/SeoIntel/UrlTruth/PublicCanonicalConsumerSnapshot.php
+      - backend/tests/Feature/SeoIntel/SeoPlatform10PublicConsumerConvergenceTest.php
+      - backend/tests/Feature/SEO/Career1046DiscoverabilityReleaseCacheTransitionTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - focused sitemap, llms, llms-full parity, exclusion, material-lastmod, no-clock-fallback, and LKG tests
+      - existing Career generator release-transition compatibility test; scoped Pint and PHP syntax; train JSON/YAML parsing; exact-scope validation; git diff --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     production_write_execution: false
     production_workflow_dispatched: false
