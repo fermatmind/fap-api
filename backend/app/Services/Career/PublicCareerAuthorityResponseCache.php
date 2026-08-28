@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Career;
 
+use App\Domain\Career\Compilation\CareerContentV3Projector;
+use App\Domain\Career\Display\CareerContentV3Contract;
 use App\Domain\Career\Publish\CareerJobDetailExposureReadiness;
 use App\Domain\Career\Publish\CareerLaunchGovernanceClosureService;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionCoverageSnapshot;
@@ -78,6 +80,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         private readonly CareerRuntimePublishProjectionVisibility $runtimePublishProjection,
         private readonly CareerDirectoryReadModelBuilder $careerDirectoryReadModelBuilder,
         private readonly PublicReviewContract $publicReviewContract,
+        private readonly CareerContentV3Projector $contentV3Projector,
     ) {}
 
     /** @return array<string, mixed> */
@@ -236,7 +239,11 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             $this->logJobDetailCacheState($normalizedSlug, $normalizedLocale, 'fresh', $readiness['version']);
 
             return [
-                'payload' => $this->normalizeJobDetailReviewContract((array) $readiness['payload']),
+                'payload' => $this->normalizeJobDetailReviewContract($this->hydrateDerivedContentV3(
+                    (array) $readiness['payload'],
+                    $normalizedSlug,
+                    $normalizedLocale,
+                )),
                 'state' => 'fresh',
             ];
         }
@@ -244,12 +251,20 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             $this->logJobDetailCacheState($normalizedSlug, $normalizedLocale, 'stale', $readiness['version']);
 
             return [
-                'payload' => $this->normalizeJobDetailReviewContract((array) $readiness['payload']),
+                'payload' => $this->normalizeJobDetailReviewContract($this->hydrateDerivedContentV3(
+                    (array) $readiness['payload'],
+                    $normalizedSlug,
+                    $normalizedLocale,
+                )),
                 'state' => 'stale',
             ];
         }
         if ($readiness['classification'] === 'legacy_migratable') {
-            $payload = $this->normalizeJobDetailReviewContract((array) $readiness['payload']);
+            $payload = $this->normalizeJobDetailReviewContract($this->hydrateDerivedContentV3(
+                (array) $readiness['payload'],
+                $normalizedSlug,
+                $normalizedLocale,
+            ));
             $this->publishJobDetailReadModel($normalizedSlug, $normalizedLocale, $payload);
             $this->logJobDetailCacheState($normalizedSlug, $normalizedLocale, 'stale', 'legacy-v1');
 
@@ -297,7 +312,11 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         }
 
         return [
-            'payload' => $this->normalizeJobDetailReviewContract($payload),
+            'payload' => $this->normalizeJobDetailReviewContract($this->hydrateDerivedContentV3(
+                $payload,
+                $normalizedSlug,
+                $normalizedLocale,
+            )),
             'state' => $classification === 'ready_active' ? 'fresh' : 'stale',
         ];
     }
@@ -774,7 +793,10 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             $normalizedLocale,
             $version,
         );
-        Cache::forever($payloadKey, $payload);
+        Cache::forever(
+            $payloadKey,
+            $this->withoutDerivedContentV3($payload, $normalizedSlug, $normalizedLocale),
+        );
         $exposureProjectionKey = $this->jobDetailExposureProjectionVersionKey(
             $normalizedSlug,
             $normalizedLocale,
@@ -850,7 +872,9 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             $version,
         ));
 
-        return is_array($payload) ? $payload : null;
+        return is_array($payload)
+            ? $this->hydrateDerivedContentV3($payload, $slug, $this->normalizePublicLocale($rawLocale))
+            : null;
     }
 
     /**
@@ -1081,7 +1105,10 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         $activeKey = $this->jobDetailActiveVersionKey($normalizedSlug, $normalizedLocale);
         $previousVersion = Cache::get($activeKey);
 
-        Cache::forever($this->jobDetailVersionPayloadKey($normalizedSlug, $normalizedLocale, $version), $payload);
+        Cache::forever(
+            $this->jobDetailVersionPayloadKey($normalizedSlug, $normalizedLocale, $version),
+            $this->withoutDerivedContentV3($payload, $normalizedSlug, $normalizedLocale),
+        );
         if ($exposureProjectionItem !== null) {
             $exposureProjectionKey = $this->jobDetailExposureProjectionVersionKey(
                 $normalizedSlug,
@@ -2132,6 +2159,48 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     {
         if (is_array($payload['trust_manifest'] ?? null)) {
             $payload['trust_manifest'] = $this->normalizeReviewContainer($payload['trust_manifest']);
+        }
+
+        return $payload;
+    }
+
+    /** @param array<string, mixed> $payload @return array<string, mixed> */
+    private function withoutDerivedContentV3(array $payload, string $slug, string $locale): array
+    {
+        $contentV3 = data_get($payload, 'display_surface_v1.content_v3');
+        $hydrated = is_array($contentV3)
+            ? $this->hydrateDerivedContentV3($payload, $slug, $locale)
+            : $payload;
+        if (is_array($contentV3) && data_get($hydrated, 'display_surface_v1.content_v3') === $contentV3) {
+            unset($payload['display_surface_v1']['content_v3']);
+        }
+
+        return $payload;
+    }
+
+    /** @param array<string, mixed> $payload @return array<string, mixed> */
+    private function hydrateDerivedContentV3(array $payload, string $slug, string $locale): array
+    {
+        $surface = $payload['display_surface_v1'] ?? null;
+        $page = is_array($surface) ? data_get($surface, 'page.content') : null;
+        if (! is_array($surface) || ! is_array($page)) {
+            return $payload;
+        }
+
+        try {
+            $presentation = $surface['presentation_v2'] ?? null;
+            $sources = $surface['sources'] ?? [];
+            $contentV3 = $this->contentV3Projector->project(
+                strtolower(trim($slug)),
+                $this->normalizePublicLocale($locale),
+                $page,
+                is_array($presentation) ? $presentation : null,
+                is_array($sources) ? $sources : [],
+            );
+            CareerContentV3Contract::assert($contentV3);
+            $payload['display_surface_v1']['content_v3'] = $contentV3;
+        } catch (Throwable) {
+            unset($payload['display_surface_v1']['content_v3']);
         }
 
         return $payload;

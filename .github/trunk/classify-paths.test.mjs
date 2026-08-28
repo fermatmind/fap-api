@@ -63,6 +63,12 @@ test("binds Career Current release and runtime projection dependencies to its op
   const builder = classifyPaths([
     "backend/app/Services/Career/CareerJobDisplaySurfaceBuilder.php",
   ]);
+  const cacheGateway = classifyPaths([
+    "backend/app/Domain/Career/Display/CareerCurrentAuthorityCacheGateway.php",
+  ]);
+  const responseCache = classifyPaths([
+    "backend/app/Services/Career/PublicCareerAuthorityResponseCache.php",
+  ]);
   const adjacent = classifyPaths([
     "backend/content_assets/career/career_current_authority_review.json",
   ]);
@@ -71,6 +77,8 @@ test("binds Career Current release and runtime projection dependencies to its op
   assert.equal(projector.operations.career_current_authority_release, true);
   assert.equal(contract.operations.career_current_authority_release, true);
   assert.equal(builder.operations.career_current_authority_release, true);
+  assert.equal(cacheGateway.operations.career_current_authority_release, true);
+  assert.equal(responseCache.operations.career_current_authority_release, true);
   assert.equal(adjacent.operations.career_current_authority_release, false);
 });
 test("binds only the exact MBTI zh authority release manifest to its operation", () => {

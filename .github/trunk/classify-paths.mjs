@@ -27,7 +27,9 @@ export function classifyPaths(inputPaths) {
         "backend/content_assets/career/career_current_authority_release.v1.json",
         "backend/app/Domain/Career/Compilation/CareerContentV3Projector.php",
         "backend/app/Domain/Career/Display/CareerContentV3Contract.php",
+        "backend/app/Domain/Career/Display/CareerCurrentAuthorityCacheGateway.php",
         "backend/app/Services/Career/CareerJobDisplaySurfaceBuilder.php",
+        "backend/app/Services/Career/PublicCareerAuthorityResponseCache.php",
       ].includes(path),
     ),
     mbti_zh_result_authority_release: paths.includes(

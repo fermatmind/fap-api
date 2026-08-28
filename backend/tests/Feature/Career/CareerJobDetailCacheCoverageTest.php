@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Domain\Career\Compilation\CareerContentV3Projector;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Jobs\Career\WarmCareerJobDetailProjection;
 use App\Models\Occupation;
@@ -129,6 +130,43 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         $this->assertSame(0, $report['broken_count']);
         $this->assertSame(1, $report['coverage_ratio']);
         $this->assertTrue($report['minimum_target_count_met']);
+    }
+
+    public function test_content_v3_is_derived_on_read_without_doubling_the_cached_authority_body(): void
+    {
+        $this->bindProjection(['one']);
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $page = [
+            'hero' => ['h1' => 'One'],
+            'definition_block' => ['body' => 'Authoritative body.'],
+        ];
+        $version = $cache->publishJobDetailReadModel('one', 'en', [
+            'display_surface_v1' => [
+                'page' => [
+                    'locale' => 'en',
+                    'content' => $page,
+                ],
+                'sources' => [],
+                'content_v3' => app(CareerContentV3Projector::class)->project('one', 'en', $page, null),
+            ],
+        ]);
+
+        $stored = Cache::get($this->versionPayloadKey('one', 'en', $version));
+        $read = $cache->jobDetailRead('one', 'en');
+
+        $this->assertIsArray($stored);
+        $this->assertArrayNotHasKey('content_v3', $stored['display_surface_v1']);
+        $this->assertSame('fresh', $read['state']);
+        $this->assertSame(
+            'career.detail.content.v3',
+            data_get($read, 'payload.display_surface_v1.content_v3.contract_version'),
+        );
+        $this->assertSame('one', data_get($read, 'payload.display_surface_v1.content_v3.subject.canonical_slug'));
+        $this->assertSame('One', data_get($read, 'payload.display_surface_v1.content_v3.subject.name'));
+        $this->assertSame('Authoritative body.', data_get(
+            $read,
+            'payload.display_surface_v1.content_v3.blocks.0.items.0.data.paragraphs.0',
+        ));
     }
 
     public function test_verify_only_rejects_an_empty_dynamic_cohort(): void
