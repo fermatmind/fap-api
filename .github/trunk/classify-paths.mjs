@@ -17,6 +17,8 @@ const normalize = (path) => path.replace(/^\.\//, "").replaceAll("\\", "/");
 const matches = (path, expressions) => expressions.some((expression) => expression.test(path));
 
 export const CAREER_PUBLISHER_BOUNDARY_MATRIX = [
+  ".github/workflows/ci.yml",
+  ".github/workflows/deploy.yml",
   "backend/content_assets/career/career_current_authority_release.v1.json",
   "backend/content_assets/career/current/",
   "backend/app/Domain/Career/Compilation/CareerContentV3Projector.php",

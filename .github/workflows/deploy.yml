@@ -286,7 +286,8 @@ jobs:
           printf -v q_path '%q' "$DEPLOY_PATH"
           printf -v q_sha '%q' "$DEPLOY_SHA"
           remote="set -euo pipefail; current=\$(readlink -f $q_path/current); test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_sha; sudo -n -u www-data -- env CAREER_PARITY_BACKEND_ROOT=\"\$current/backend\" CAREER_PARITY_RELEASE_SHA=$q_sha CAREER_PARITY_REDIS_MODE=readonly CAREER_PARITY_REQUIRE_DATABASE=1 php -d memory_limit=1024M \"\$current/backend/scripts/ci/career_current_authority_parity.php\""
-          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o IdentitiesOnly=yes \
+            -i "$DEPLOY_IDENTITY_FILE_STG" -o ConnectTimeout=10 \
             -o ServerAliveInterval=15 -o ServerAliveCountMax=4 -p "$DEPLOY_PORT" \
             "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$receipt"
           jq -e --arg sha "$DEPLOY_SHA" \

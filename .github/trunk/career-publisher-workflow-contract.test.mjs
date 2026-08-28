@@ -20,6 +20,7 @@ test("CI cannot emit a green exact-SHA receipt when required Career parity is ab
 test("deploy consumes the CI publisher decision and runs staging parity before production", () => {
   assert.match(deploy, /career_current="\$\(jq -r '\.publisher\.required == true'/);
   assert.doesNotMatch(deploy, /startsWith\("backend\/content_assets\/career\/current\/"\)/);
+  assert.match(deploy, /-o IdentitiesOnly=yes \\\n\s+-i "\$DEPLOY_IDENTITY_FILE_STG"/);
   const stagingParity = deploy.indexOf("Run staging zero-write 2092-page Career parity");
   const production = deploy.indexOf("production:\n");
   assert.ok(stagingParity > 0 && production > stagingParity);
