@@ -352,7 +352,7 @@ final class PerPagePublisherCacheGateway extends CareerCurrentAuthorityCacheGate
 
     public function preparedPayload(array $entry): ?array
     {
-        return ['display_surface_v1' => $this->package->publicProjection($this->rows[$entry['slug']], $entry['locale'])];
+        return $this->envelopedPayload($entry['slug'], $entry['locale']);
     }
 
     public function activate(array $entries): array
@@ -388,9 +388,9 @@ final class PerPagePublisherCacheGateway extends CareerCurrentAuthorityCacheGate
                     'published' => true,
                     'classification' => $this->mode === 'readback_failure' ? 'missing_pointer' : 'ready_active',
                     'version' => 'active-'.$locale,
-                    'payload' => ['display_surface_v1' => $this->serveStaleActive
-                        ? ['surface_version' => 'drifted']
-                        : $this->package->publicProjection($this->rows[$slug], $locale)],
+                    'payload' => $this->serveStaleActive
+                        ? ['display_surface_v1' => ['surface_version' => 'drifted']]
+                        : $this->envelopedPayload($slug, $locale),
                 ];
             }
         }
@@ -406,7 +406,22 @@ final class PerPagePublisherCacheGateway extends CareerCurrentAuthorityCacheGate
 
         return [
             'state' => 'fresh',
-            'payload' => ['display_surface_v1' => $this->package->publicProjection($this->rows[$slug], $locale)],
+            'payload' => $this->envelopedPayload($slug, $locale),
+        ];
+    }
+
+    /** @return array<string,mixed> */
+    private function envelopedPayload(string $slug, string $locale): array
+    {
+        $surface = $this->package->publicProjection($this->rows[$slug], $locale);
+        $surface['subject'] = ['canonical_slug' => $slug];
+        $surface['claim_permissions'] = ['public' => true];
+
+        return [
+            'display_surface_v1' => $surface,
+            'identity' => ['canonical_slug' => $slug],
+            'seo_contract' => ['indexable' => true],
+            'trust_manifest' => ['status' => 'verified'],
         ];
     }
 }

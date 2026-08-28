@@ -172,13 +172,17 @@ try {
         || ! hash_equals($parityCompilerDigest, (string) data_get($productionParity, 'package.compiler_digest', ''))
         || ! hash_equals($parityCodecDigest, (string) data_get($productionParity, 'package.codec_digest', ''))
         || data_get($productionParity, 'database.compatibility_row_count') !== 1046
-        || data_get($productionParity, 'full_scan.counts.locale_pages') !== 2092
-        || data_get($productionParity, 'full_scan.counts.candidate') !== 2092
-        || data_get($productionParity, 'full_scan.counts.active') !== 2092
-        || data_get($productionParity, 'full_scan.counts.lkg') !== 2092
-        || data_get($productionParity, 'full_scan.counts.legacy') !== 2092
-        || data_get($productionParity, 'full_scan.counts.api') !== 2092
-        || data_get($productionParity, 'full_scan.counts.snapshot') !== 2092
+        || data_get($productionParity, 'database.validated_compatibility_row_count') !== 1
+        || data_get($productionParity, 'validation_scope.canonical_slugs') !== ['accountants-and-auditors']
+        || data_get($productionParity, 'validation_scope.locales') !== ['en', 'zh-CN']
+        || data_get($productionParity, 'validation_scope.locale_page_count') !== 2
+        || data_get($productionParity, 'full_scan.counts.locale_pages') !== 2
+        || data_get($productionParity, 'full_scan.counts.candidate') !== 2
+        || data_get($productionParity, 'full_scan.counts.active') !== 2
+        || data_get($productionParity, 'full_scan.counts.lkg') !== 2
+        || data_get($productionParity, 'full_scan.counts.legacy') !== 2
+        || data_get($productionParity, 'full_scan.counts.api') !== 2
+        || data_get($productionParity, 'full_scan.counts.snapshot') !== 2
         || data_get($productionParity, 'redis.mode') !== 'readonly'
         || ($productionParity['write_counts'] ?? null) !== $expectedParityWriteCounts
         || ! hash_equals(

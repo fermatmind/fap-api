@@ -60,7 +60,7 @@ final class CareerCurrentAuthorityParityTest extends TestCase
         self::assertSame($first['full_scan']['bytes'], $second['full_scan']['bytes']);
     }
 
-    public function test_deploy_runs_real_production_parity_before_mutations_and_symlink_without_staging_scan(): void
+    public function test_deploy_runs_accountant_bilingual_production_parity_before_mutations_and_symlink(): void
     {
         $root = dirname(__DIR__, 6);
         $deploy = (string) file_get_contents($root.'/deploy.php');
@@ -69,6 +69,7 @@ final class CareerCurrentAuthorityParityTest extends TestCase
 
         self::assertStringContainsString("after('artisan:config:cache', '".$task."')", $deploy);
         self::assertStringContainsString("after('".$task."', 'guard:sitemap-authority')", $deploy);
+        self::assertStringContainsString('Career production parity failed: $safe_error_code', $deploy);
         self::assertLessThan(
             strpos($deploy, "after('guard:no-pending-migrations', 'artisan:migrate-seo-intel')"),
             strpos($deploy, "after('artisan:config:cache', '".$task."')"),
@@ -76,6 +77,8 @@ final class CareerCurrentAuthorityParityTest extends TestCase
         self::assertStringContainsString("-o career_current_parity_required='", $workflow);
         self::assertStringNotContainsString('Run staging zero-write 2092-page Career parity', $workflow);
         self::assertStringContainsString('career.current_authority_parity.v2', $workflow);
+        self::assertStringContainsString('.validation_scope.canonical_slugs == ["accountants-and-auditors"]', $workflow);
+        self::assertStringContainsString('.validation_scope.locale_page_count == 2', $workflow);
         self::assertStringContainsString('CAREER_CURRENT_PUBLISH_PRODUCTION_PARITY_RECEIPT_DIGEST', $workflow);
         self::assertStringNotContainsString('CAREER_CURRENT_PUBLISH_STAGING_PARITY_RECEIPT_DIGEST', $workflow);
     }

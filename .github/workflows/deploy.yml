@@ -409,12 +409,16 @@ jobs:
               and .package.compiler_digest == $compiler
               and .package.codec_digest == $codec
               and .database.compatibility_row_count == 1046
-              and .full_scan.counts.locale_pages == 2092
-              and .full_scan.counts.candidate == 2092
-              and .full_scan.counts.active == 2092
-              and .full_scan.counts.lkg == 2092
-              and .full_scan.counts.api == 2092
-              and .full_scan.counts.snapshot == 2092
+              and .database.validated_compatibility_row_count == 1
+              and .validation_scope.canonical_slugs == ["accountants-and-auditors"]
+              and .validation_scope.locales == ["en", "zh-CN"]
+              and .validation_scope.locale_page_count == 2
+              and .full_scan.counts.locale_pages == 2
+              and .full_scan.counts.candidate == 2
+              and .full_scan.counts.active == 2
+              and .full_scan.counts.lkg == 2
+              and .full_scan.counts.api == 2
+              and .full_scan.counts.snapshot == 2
               and .redis.mode == "readonly"
               and ([.write_counts[]] | all(. == 0))
               and (.receipt_digest | test("^[0-9a-f]{64}$"))

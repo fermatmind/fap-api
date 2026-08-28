@@ -80,6 +80,19 @@ final class CareerCurrentAuthorityStateMachine
     }
 
     /** @param array<string,mixed>|null $payload @param array<string,mixed> $row */
+    public function canonicalPayloadHash(?array $payload, array $row, string $locale): string
+    {
+        $this->assertPayload($payload, $row, $locale);
+        $surface = data_get($payload, 'display_surface_v1');
+
+        return CareerCurrentAuthorityPackage::hashValue(
+            $this->readerSafeProjector->project(
+                $this->package->displayOwnedProjection((array) $surface),
+            ),
+        );
+    }
+
+    /** @param array<string,mixed>|null $payload @param array<string,mixed> $row */
     public function payloadMismatchCode(?array $payload, array $row, string $locale): ?string
     {
         if (is_array($payload) && $this->containsVersionDiscriminator($payload)) {

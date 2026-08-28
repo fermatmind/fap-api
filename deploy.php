@@ -3093,8 +3093,8 @@ after('artisan:filament:assets', 'guard:required-public-static-media-assets');
 after('guard:required-public-static-media-assets', 'ensure:release-public-static-compat');
 
 /**
- * Career authority changes receive one real 1046 x 2 production parity scan.
- * It runs against candidate code and the current production DB/cache before
+ * CI owns the complete 1046 x 2 package scan. Production validates the
+ * accountant bilingual reference page against the real DB/cache before
  * migrations, shared cache warming, publisher execution, or symlink activation.
  */
 task('career:current-authority-production-preactivation-parity', function () {
@@ -3117,14 +3117,19 @@ test "${#active_sha}" -eq 40
 receipt_dir='{{deploy_path}}/shared/backend/storage/app/release-receipts/career-current-authority-preactivation'
 receipt_path="$receipt_dir/$candidate_sha.json"
 sudo -n -u www-data -- mkdir -p "$receipt_dir"
-sudo -n -u www-data -- env \
+if ! sudo -n -u www-data -- env \
   CAREER_PARITY_BACKEND_ROOT='{{release_path}}/backend' \
   CAREER_PARITY_RELEASE_SHA="$candidate_sha" \
   CAREER_PARITY_ACTIVE_SHA="$active_sha" \
   CAREER_PARITY_MODE=production-preactivation \
   CAREER_PARITY_REDIS_MODE=readonly \
   CAREER_PARITY_RECEIPT_PATH="$receipt_path" \
-  {{bin/php}} -d memory_limit=1024M '{{release_path}}/backend/scripts/ci/career_current_authority_parity.php' >/dev/null
+  {{bin/php}} -d memory_limit=1024M '{{release_path}}/backend/scripts/ci/career_current_authority_parity.php' >/dev/null; then
+  safe_error_code="$(sudo -n -u www-data -- jq -r '.safe_error_code // "CAREER_PARITY_FAILED"' "$receipt_path" 2>/dev/null || true)"
+  case "$safe_error_code" in (*[!A-Z0-9_]*|'') safe_error_code=CAREER_PARITY_FAILED ;; esac
+  echo "Career production parity failed: $safe_error_code" >&2
+  exit 1
+fi
 test -f "$receipt_path"
 BASH);
 });

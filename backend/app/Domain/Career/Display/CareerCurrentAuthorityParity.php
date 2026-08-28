@@ -28,7 +28,9 @@ final class CareerCurrentAuthorityParity
 
     public const LOCKED_CAREER_BUDGET_BYTES = 1_717_986_918;
 
-    private const SLICE_SLUGS = ['accountants-and-auditors', 'actors'];
+    private const PACKAGE_SLICE_SLUGS = ['accountants-and-auditors', 'actors'];
+
+    private const PRODUCTION_VALIDATION_SLUGS = ['accountants-and-auditors'];
 
     public function __construct(
         private readonly CareerCurrentAuthorityPackageLoader $loader,
@@ -83,19 +85,21 @@ final class CareerCurrentAuthorityParity
         }
 
         $redis = $this->redisContract($redisMode);
+        $full = $mode === self::MODE_PRODUCTION_PREACTIVATION
+            ? $this->scan($authority, self::PRODUCTION_VALIDATION_SLUGS, true, $redisMode)
+            : $this->scanPages($authority, $slugs, true, $redisMode);
         $slice = $mode === self::MODE_PRODUCTION_PREACTIVATION
-            ? $this->scan($authority, self::SLICE_SLUGS, false, 'none')
-            : $this->scanPages($authority, self::SLICE_SLUGS, false, 'none');
+            ? $full
+            : $this->scanPages($authority, self::PACKAGE_SLICE_SLUGS, false, 'none');
         unset($slice['database_row_set_sha256']);
-        if (($slice['content_states']['enhanced'] ?? null) !== 2
-            || ($slice['content_states']['legacy'] ?? null) !== 2
-            || ($slice['counts']['locale_pages'] ?? null) !== 4) {
+        $expectedSlice = $mode === self::MODE_PRODUCTION_PREACTIVATION
+            ? ['enhanced' => 2, 'legacy' => 0, 'locale_pages' => 2]
+            : ['enhanced' => 2, 'legacy' => 2, 'locale_pages' => 4];
+        if (($slice['content_states']['enhanced'] ?? null) !== $expectedSlice['enhanced']
+            || ($slice['content_states']['legacy'] ?? null) !== $expectedSlice['legacy']
+            || ($slice['counts']['locale_pages'] ?? null) !== $expectedSlice['locale_pages']) {
             throw new RuntimeException('CAREER_PARITY_ARCHITECTURE_SLICE_FAILED');
         }
-
-        $full = $mode === self::MODE_PRODUCTION_PREACTIVATION
-            ? $this->scan($authority, $slugs, true, $redisMode)
-            : $this->scanPages($authority, $slugs, true, $redisMode);
         if ($databaseMutationCount !== 0) {
             throw new RuntimeException('CAREER_PARITY_DATABASE_WRITE_DETECTED');
         }
@@ -135,8 +139,15 @@ final class CareerCurrentAuthorityParity
             $rowSetSha256 = $full['database_row_set_sha256'];
             unset($full['database_row_set_sha256'], $receipt['full_scan']['database_row_set_sha256']);
             $receipt['active_sha'] = $activeSha;
+            $receipt['validation_scope'] = [
+                'canonical_slugs' => self::PRODUCTION_VALIDATION_SLUGS,
+                'slug_count' => 1,
+                'locales' => CareerCurrentAuthorityPackage::LOCALES,
+                'locale_page_count' => 2,
+            ];
             $receipt['database'] = [
                 'compatibility_row_count' => count($slugs),
+                'validated_compatibility_row_count' => 1,
                 'slug_set_sha256' => CareerCurrentAuthorityPackage::hashValue($slugs),
                 'row_set_sha256' => $rowSetSha256,
             ];
@@ -309,13 +320,16 @@ final class CareerCurrentAuthorityParity
                     }
 
                     if ($includeCapacity && $redisMode === 'readonly') {
-                        $canonicalHash = CareerCurrentAuthorityPackage::hashValue($payload);
+                        $canonicalHash = $this->stateMachine->canonicalPayloadHash($payload, $row, $locale);
                         $hydratedStates = [$active, $snapshot];
                         if ($api !== null) {
                             $hydratedStates[] = $api;
                         }
                         foreach ($hydratedStates as $statePayload) {
-                            if (! hash_equals($canonicalHash, CareerCurrentAuthorityPackage::hashValue($statePayload))) {
+                            if (! hash_equals(
+                                $canonicalHash,
+                                $this->stateMachine->canonicalPayloadHash($statePayload, $row, $locale),
+                            )) {
                                 throw new RuntimeException('CAREER_PARITY_HYDRATION_MISMATCH');
                             }
                         }
@@ -483,7 +497,7 @@ final class CareerCurrentAuthorityParity
         if (($authority['summary']['career_count'] ?? null) !== CareerCurrentAuthorityPackage::EXPECTED_CAREERS
             || ($authority['summary']['locale_page_count'] ?? null) !== CareerCurrentAuthorityPackage::EXPECTED_LOCALE_PAGES
             || count((array) ($authority['entries'] ?? [])) !== CareerCurrentAuthorityPackage::EXPECTED_CAREERS
-            || array_diff(self::SLICE_SLUGS, (array) ($authority['slugs'] ?? [])) !== []) {
+            || array_diff(self::PACKAGE_SLICE_SLUGS, (array) ($authority['slugs'] ?? [])) !== []) {
             throw new RuntimeException('CAREER_PARITY_AUTHORITY_INCOMPLETE');
         }
     }

@@ -108,8 +108,16 @@ final class CareerCurrentAuthorityPublisher
                         $this->assertCachedPayload($entry, $rows[$slug], $locale, true);
                         $actualCandidate = $this->cache->preparedPayload($entry);
                         if (! is_array($actualCandidate) || ! hash_equals(
-                            CareerCurrentAuthorityPackage::hashValue($expectedCandidate['payload']),
-                            CareerCurrentAuthorityPackage::hashValue($actualCandidate),
+                            $this->stateMachine->canonicalPayloadHash(
+                                $expectedCandidate['payload'],
+                                $rows[$slug],
+                                $locale,
+                            ),
+                            $this->stateMachine->canonicalPayloadHash(
+                                $actualCandidate,
+                                $rows[$slug],
+                                $locale,
+                            ),
                         )) {
                             throw new CareerCurrentAuthorityPublisherFailure('CURRENT_CACHE_CANDIDATE_ASSEMBLY_MISMATCH');
                         }

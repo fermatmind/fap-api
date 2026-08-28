@@ -31,8 +31,11 @@ test("deploy consumes the CI decision and leaves staging on its public cohort", 
 
 test("production publisher is bound to the preactivation receipt digest", () => {
   assert.match(deploy, /CAREER_CURRENT_PUBLISH_PRODUCTION_PARITY_RECEIPT_DIGEST/);
+  assert.match(deploy, /\.validation_scope\.canonical_slugs == \["accountants-and-auditors"\]/);
+  assert.match(deploy, /\.validation_scope\.locale_page_count == 2/);
   assert.match(deploy, /\.parity\.production_preactivation_receipt_digest == env\.PRODUCTION_PARITY_RECEIPT_DIGEST/);
   assert.match(publisher, /CAREER_CURRENT_PUBLISH_PRODUCTION_PARITY_RECEIPT_DIGEST/);
+  assert.match(publisher, /validation_scope\.canonical_slugs/);
   assert.doesNotMatch(publisher, /CAREER_CURRENT_PUBLISH_STAGING_PARITY_RECEIPT_DIGEST/);
   assert.match(publisher, /CareerCurrentAuthorityParity::CONTRACT_VERSION/);
   assert.match(publisher, /CareerJobDetailCanonicalCacheReader::compilerDigest\(\)/);
