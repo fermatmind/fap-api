@@ -106596,7 +106596,10 @@
     "base": "main",
     "branch": "codex/seo-platform-10-d-personality-adapter",
     "title": "feat(seo): record Personality material decisions",
-    "status": "implementation_in_progress",
+    "status": "pr_open",
+    "commit_sha": "32adb412a2e2d4f04610a2b8725b6e5d64dd2424",
+    "pr_number": 3830,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3830",
     "depends_on": ["SEO-PLATFORM-10-C"],
     "allowed_paths": [
       "backend/app/Services/Cms/PersonalityMaterialDecisionService.php",
@@ -106613,7 +106616,7 @@
       "dependency": {"status": "passed", "evidence": "SEO-PLATFORM-10-C merged as 09dccf442068923e2f9cf4373671face436dbbfe and its exact-SHA main CI passed before 10-D implementation began."},
       "local_validation": {"status": "passed", "evidence": "Focused Personality material, exact-package public asset, TOP100 contract, and adapter suites passed 19 tests / 188 assertions. Reviewed revision binding, source-hash and review-time non-material behavior, real SEO change, bilingual locale identity, rollback/HOLD, Big Five/Enneagram isolation, and private-result rejection passed; scoped Pint, PHP syntax, train JSON/YAML parsing, and diff checks passed. The complete MBTI verifier was not duplicated because the repository heavy-process guard found another active FermatMind PHPUnit process; required GitHub checks remain authoritative."},
       "scope": {"status": "passed", "evidence": "The declared scope is limited to the Personality material-decision adapter, existing exact-package publication and rollback transaction integration, focused tests, and minimum train reconciliation."},
-      "github_ci": {"status": "pending", "evidence": "No 10-D PR exists yet."},
+      "github_ci": {"status": "pending", "evidence": "PR #3830 is open from validated implementation commit 32adb412a2e2d4f04610a2b8725b6e5d64dd2424; required checks are pending."},
       "deployment": {"status": "pending", "evidence": "No 10-D automatic exact-SHA deployment exists yet."}
     },
     "production_write_execution": false,
@@ -106633,6 +106636,11 @@
         "at": "2026-08-28T10:16:00+08:00",
         "status": "local_validation_passed",
         "note": "The unified adapter records only metadata after the complete exact-package public projection is finalized, preserves semantic material time across lineage-only changes, traces rollback or unknown legacy HOLD, and rejects private result authority. Focused tests passed 19 / 188; formatting, syntax, ledger parsing, scope, and diff checks passed."
+      },
+      {
+        "at": "2026-08-28T10:20:00+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #3830 from exact validated implementation commit 32adb412a2e2d4f04610a2b8725b6e5d64dd2424. The eight-path scope is clean; required checks are pending."
       }
     ]
   }
