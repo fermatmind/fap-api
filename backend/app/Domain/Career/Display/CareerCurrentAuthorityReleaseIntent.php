@@ -14,11 +14,11 @@ final class CareerCurrentAuthorityReleaseIntent
 
     public const SOURCE_MERGE_SHA = '2c956887ad9460849fd29cbfacb145e1397993cd';
 
-    public const MANIFEST_SHA256 = '129fa491a531399625ea74fe384c38711f428387c874aa191de699c57aecdfdf';
+    public const MANIFEST_SHA256 = '1dc96c10d79cde77b0172278166beeb9437b88a641d3899fa0b224dc8a7c072e';
 
-    public const AGGREGATE_SHA256 = 'dff327cece2f65b780865a1aeccb168a3ddca7f82e4d073a6609c67b74147799';
+    public const AGGREGATE_SHA256 = '674ccf9264e256a602c1535b2923856ad282edea9c73c50cdcceb3d00ac65f13';
 
-    public const VERSIONLESS_PROJECTION_SHA256 = 'd04253c3dc3685469bb431211bdeb3e898242a468c143ca8da0fda7798354d80';
+    public const VERSIONLESS_PROJECTION_SHA256 = '55f9425593f5f1361bcbcc828cc3dcd0c3410fd3b53c57131b4686130cd04a79';
 
     private const EXPECTED_KEYS = [
         'aggregate_sha256',

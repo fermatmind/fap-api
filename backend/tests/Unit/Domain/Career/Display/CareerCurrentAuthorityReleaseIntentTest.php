@@ -19,9 +19,9 @@ final class CareerCurrentAuthorityReleaseIntentTest extends TestCase
 
         self::assertSame('career.current_authority_release_intent.v1', $result['intent']['contract_version']);
         self::assertSame('2c956887ad9460849fd29cbfacb145e1397993cd', $result['intent']['source_merge_sha']);
-        self::assertSame('129fa491a531399625ea74fe384c38711f428387c874aa191de699c57aecdfdf', $result['intent']['manifest_sha256']);
-        self::assertSame('dff327cece2f65b780865a1aeccb168a3ddca7f82e4d073a6609c67b74147799', $result['intent']['aggregate_sha256']);
-        self::assertSame('d04253c3dc3685469bb431211bdeb3e898242a468c143ca8da0fda7798354d80', $result['intent']['versionless_projection_sha256']);
+        self::assertSame('1dc96c10d79cde77b0172278166beeb9437b88a641d3899fa0b224dc8a7c072e', $result['intent']['manifest_sha256']);
+        self::assertSame('674ccf9264e256a602c1535b2923856ad282edea9c73c50cdcceb3d00ac65f13', $result['intent']['aggregate_sha256']);
+        self::assertSame('55f9425593f5f1361bcbcc828cc3dcd0c3410fd3b53c57131b4686130cd04a79', $result['intent']['versionless_projection_sha256']);
         self::assertSame(['zh-CN', 'en'], $result['intent']['locales']);
         self::assertSame(['software-developers'], $result['intent']['manual_hold_slugs']);
         self::assertFalse($result['intent']['discoverability']);
@@ -31,7 +31,7 @@ final class CareerCurrentAuthorityReleaseIntentTest extends TestCase
         self::assertSame(10, $result['package']['module_count']);
         self::assertSame(640, $result['package']['shard_count']);
         self::assertSame(
-            hash('sha256', 'career-current-authority|2c956887ad9460849fd29cbfacb145e1397993cd|dff327cece2f65b780865a1aeccb168a3ddca7f82e4d073a6609c67b74147799|d04253c3dc3685469bb431211bdeb3e898242a468c143ca8da0fda7798354d80'),
+            hash('sha256', 'career-current-authority|2c956887ad9460849fd29cbfacb145e1397993cd|674ccf9264e256a602c1535b2923856ad282edea9c73c50cdcceb3d00ac65f13|55f9425593f5f1361bcbcc828cc3dcd0c3410fd3b53c57131b4686130cd04a79'),
             $result['operation_key'],
         );
     }
