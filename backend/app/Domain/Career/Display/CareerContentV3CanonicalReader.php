@@ -17,6 +17,8 @@ class CareerContentV3CanonicalReader
     public function __construct(
         private readonly CareerContentV3AuthorityPackage $package,
         private readonly ?string $backendRoot = null,
+        private readonly ?CareerContentV3FactResolver $factResolver = null,
+        private readonly ?CareerContentV3CompatibilityProjector $compatibilityProjector = null,
     ) {}
 
     /** @return array<string,mixed> */
@@ -41,7 +43,8 @@ class CareerContentV3CanonicalReader
 
         if (! isset($this->pages[$key])) {
             $raw = $this->package->pageFromIndexForRuntime($index, $slug, $locale);
-            $this->pages[$key] = $this->isolateInvalidBlocks($raw)['content'];
+            $isolated = $this->isolateInvalidBlocks($raw)['content'];
+            $this->pages[$key] = ($this->factResolver ?? new CareerContentV3FactResolver)->resolve($isolated);
         }
 
         return $this->pages[$key];
@@ -89,7 +92,7 @@ class CareerContentV3CanonicalReader
             }
             $surface['content_v3'] = $page;
 
-            return $surface;
+            return ($this->compatibilityProjector ?? new CareerContentV3CompatibilityProjector)->project($surface, $page);
         } catch (Throwable) {
             return null;
         }
@@ -132,7 +135,7 @@ class CareerContentV3CanonicalReader
         }
         $blocks = $content['blocks'];
         $content['blocks'] = [];
-        CareerContentV3Contract::assert($content);
+        CareerContentV3Contract::assertEnvelope($content);
         $seenBlocks = [];
         $seenItems = [];
         $isolated = [];

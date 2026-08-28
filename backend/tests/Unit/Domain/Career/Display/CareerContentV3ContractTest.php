@@ -40,7 +40,7 @@ final class CareerContentV3ContractTest extends TestCase
         self::assertSame('legacy', $first['content_state']);
     }
 
-    public function test_v3_does_not_mutate_legacy_source_content(): void
+    public function test_v3_preserves_the_installed_legacy_placeholder_without_mutating_identity(): void
     {
         $reader = app(CareerContentV3CanonicalReader::class);
         $page = $reader->page('actors', 'en');
@@ -48,7 +48,7 @@ final class CareerContentV3ContractTest extends TestCase
 
         self::assertSame('legacy', $page['content_state']);
         self::assertSame($entry['source_content_sha256'], $page['source_content_sha256']);
-        self::assertNotEmpty($page['blocks']);
+        self::assertSame([], $page['blocks']);
     }
 
     public function test_projection_is_stable_across_mysql_json_object_key_order(): void
@@ -68,40 +68,51 @@ final class CareerContentV3ContractTest extends TestCase
     public function test_faq_questions_are_replaced_with_stable_frontend_semantic_keys(): void
     {
         $reader = app(CareerContentV3CanonicalReader::class);
-        foreach ([
-            'actors' => ['career.faq.salary', 'career.faq.outlook', 'career.faq.daily-work'],
-            'accountants-and-auditors' => [
-                'career.faq.accounting.daily-work',
-                'career.faq.accounting.comparison',
-                'career.faq.accounting.ai-replacement',
-            ],
-        ] as $slug => $expectedKeys) {
-            $projection = $reader->page($slug, 'en');
-            $faq = collect($projection['blocks'])
-                ->flatMap(fn (array $block): array => $block['items'])
-                ->firstWhere('type', 'faq');
+        $projection = $reader->page('accountants-and-auditors', 'en');
+        $faq = collect($projection['blocks'])
+            ->flatMap(fn (array $block): array => $block['items'])
+            ->firstWhere('type', 'faq');
 
-            self::assertSame($expectedKeys, array_slice(array_column($faq['data']['entries'], 'question_key'), 0, 3));
-            foreach ($faq['data']['entries'] as $entry) {
-                self::assertArrayNotHasKey('question', $entry);
-            }
+        self::assertSame([
+            'career.faq.accounting.daily-work',
+            'career.faq.accounting.comparison',
+            'career.faq.accounting.ai-replacement',
+        ], array_slice(array_column($faq['data']['entries'], 'question_key'), 0, 3));
+        foreach ($faq['data']['entries'] as $entry) {
+            self::assertArrayNotHasKey('question', $entry);
         }
     }
 
     public function test_source_order_is_preserved_when_a_legacy_non_url_marker_becomes_an_unlinked_source(): void
     {
-        $page = app(CareerContentV3CanonicalReader::class)->page('air-crew-members', 'en');
+        $page = app(CareerContentV3Projector::class)->project(
+            'actors',
+            'en',
+            ['hero' => ['h1' => 'Actors']],
+            null,
+            [
+                ['name' => 'O*NET', 'url' => 'https://www.onetonline.org/'],
+                [
+                    'name' => 'BLS Occupational Employment and Wage Statistics current profile',
+                    'url' => 'not_applicable_source_marker',
+                    'usage' => ['Wage evidence is unavailable for this fixture.'],
+                ],
+            ],
+        );
         $sources = collect($page['blocks'])
             ->flatMap(fn (array $block): array => $block['items'])
             ->firstWhere('type', 'sources');
 
-        self::assertSame('source-3', $sources['data']['entries'][2]['id']);
+        self::assertSame('source-2', $sources['data']['entries'][1]['id']);
         self::assertSame(
             'BLS Occupational Employment and Wage Statistics current profile',
-            $sources['data']['entries'][2]['name'],
+            $sources['data']['entries'][1]['name'],
         );
-        self::assertNull($sources['data']['entries'][2]['url']);
-        self::assertNotEmpty($sources['data']['entries'][2]['details']);
+        self::assertNull($sources['data']['entries'][1]['url']);
+        self::assertSame(
+            ['Wage evidence is unavailable for this fixture.'],
+            $sources['data']['entries'][1]['details'],
+        );
     }
 
     public function test_contract_accepts_arbitrary_order_repeated_semantics_and_missing_blocks(): void

@@ -48,7 +48,7 @@ final class CareerCurrentAuthorityReleaseIntentTest extends TestCase
             $this->verifier()->verify($this->backendRoot(), $temporary);
             self::fail('Digest drift must fail closed.');
         } catch (CareerCurrentAuthorityPackageFailure $failure) {
-            self::assertSame('CURRENT_RELEASE_INTENT_INVALID', $failure->safeCode);
+            self::assertSame('CURRENT_RELEASE_INTENT_PACKAGE_MISMATCH', $failure->safeCode);
             self::assertSame($before, hash_file('sha256', $temporary));
         } finally {
             unlink($temporary);

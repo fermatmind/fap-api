@@ -117,6 +117,7 @@ final class CareerContentV3AuthorityPackage
     {
         $page = $this->pageFromIndexForRuntime($index, $slug, $locale);
         CareerContentV3Contract::assert($page);
+        (new CareerContentV3FactResolver)->resolve($page);
 
         return $page;
     }
@@ -211,6 +212,7 @@ final class CareerContentV3AuthorityPackage
             }
             $page = $this->decodeCanonicalPretty($bytes);
             CareerContentV3Contract::assert($page);
+            (new CareerContentV3FactResolver)->resolve($page);
             if (($page['locale'] ?? null) !== $locale
                 || data_get($page, 'subject.canonical_slug') !== $slug
                 || ! hash_equals((string) $entry['source_content_sha256'], (string) $page['source_content_sha256'])) {
