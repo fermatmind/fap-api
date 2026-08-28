@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\ContentPromotion;
 
+use App\Services\Cms\ArticleMaterialDecisionService;
 use App\Services\ContentPromotion\Adapters\ArticleCmsPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\CareerGuideCmsPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\CareerJobCmsPromotionAdapter;
@@ -32,12 +33,13 @@ final class PromotionAdapterRegistry
         Eq60CompiledPromotionAuthority $eq60Authority,
         Top100FrozenCmsBatchAuthority $top100Authority,
         PromotionRollbackSnapshotService $snapshots,
+        ArticleMaterialDecisionService $articleMaterialDecisions,
     ) {
         $adapters = [
             $mbtiComparison,
             $mbtiResults,
             new PersonalityCmsPromotionAdapter('W2', 'big-five', $personalityAuthority, $snapshots),
-            new ArticleCmsPromotionAdapter($articleAuthority, $snapshots),
+            new ArticleCmsPromotionAdapter($articleAuthority, $snapshots, $articleMaterialDecisions),
             new CareerGuideCmsPromotionAdapter($careerAuthority, $snapshots),
             new RiasecContentPromotionAdapter($riasecAuthority, $snapshots),
             new PersonalityCmsPromotionAdapter('W5', 'enneagram', $personalityAuthority, $snapshots),

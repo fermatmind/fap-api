@@ -11,6 +11,7 @@ use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ArticleBodyHeadingGuard;
+use App\Services\Cms\ArticleMaterialDecisionService;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
 use App\Services\SEO\SeoDiscoverabilityCacheInvalidator;
 use App\Support\OrgContext;
@@ -38,6 +39,7 @@ final class ArticleCmsPromotionAuthority
         private readonly SeoDiscoverabilityCacheInvalidator $discoverabilityCache,
         private readonly ArticleBodyHeadingGuard $articleBodyHeadingGuard,
         private readonly ArticleTranslationRevisionWorkspace $revisionWorkspace,
+        private readonly ArticleMaterialDecisionService $materialDecisions,
     ) {}
 
     /** @return array{targets:list<array<string,mixed>>,package_sha256:string} */
@@ -387,6 +389,11 @@ final class ArticleCmsPromotionAuthority
                 }
                 $article->forceFill($projection)->save();
                 $this->syncExistingSeoMeta($revision, $seo);
+                $this->materialDecisions->recordPublished(
+                    $article,
+                    $revision,
+                    $publishedAt,
+                );
                 $this->logPublication($article);
                 $changed++;
             }

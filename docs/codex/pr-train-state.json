@@ -106365,10 +106365,12 @@
     "base": "main",
     "branch": "codex/seo-platform-10-a-material-fingerprint",
     "title": "feat(seo): add deterministic material fingerprint core",
-    "status": "pr_open",
+    "status": "merged",
     "commit_sha": "380085698d6df1da4a228b2c65951e2f78186931",
     "pr_number": 3827,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3827",
+    "merge_commit_sha": "ddbc89f1a8420e7cecd43bf5d8b6307f8118303f",
+    "merged_at": "2026-08-28T08:55:00+08:00",
     "depends_on": [],
     "allowed_paths": [
       "backend/app/Services/SeoIntel/MaterialFingerprint/MaterialChangeContract.php",
@@ -106395,8 +106397,8 @@
         "status": "passed",
         "evidence": "Changed paths are limited to the versioned fingerprint core, explicit material classification, golden vectors, and the minimum accurate train registration; no authority adapter or runtime integration is present."
       },
-      "github_ci": {"status": "pending", "evidence": "PR #3827 is open from the exact validated implementation SHA; GitHub checks are pending."},
-      "deployment": {"status": "not_applicable", "evidence": "This task has no runtime integration or production execution."}
+      "github_ci": {"status": "passed", "evidence": "Exact-SHA CI run 33131058063 passed every classifier-selected job and emitted the immutable validation receipt for merge SHA ddbc89f1a8420e7cecd43bf5d8b6307f8118303f."},
+      "deployment": {"status": "passed", "evidence": "Automatic Deploy run 33131328799 passed staging deploy/smoke and production activation/smoke for ddbc89f1a8420e7cecd43bf5d8b6307f8118303f. No workflow was manually dispatched and no fallback was required."}
     },
     "production_write_execution": false,
     "production_workflow_dispatched": false,
@@ -106420,6 +106422,78 @@
         "at": "2026-08-28T08:49:50+08:00",
         "status": "pr_open",
         "note": "Opened PR #3827 from the exact validated implementation SHA 380085698d6df1da4a228b2c65951e2f78186931. Changed-file scope is exact and mergeability is clean; GitHub checks are pending."
+      },
+      {
+        "at": "2026-08-28T08:55:00+08:00",
+        "status": "merged",
+        "note": "PR #3827 was squash-merged as ddbc89f1a8420e7cecd43bf5d8b6307f8118303f after the exact scoped diff and clean mergeability were verified."
+      },
+      {
+        "at": "2026-08-28T09:08:49+08:00",
+        "status": "production_validated",
+        "note": "Exact-SHA CI run 33131058063 and automatic Deploy run 33131328799 passed. Staging and production smoke succeeded; no manual workflow or LKG fallback was used."
+      }
+    ]
+  },
+  "SEO-PLATFORM-10-B": {
+    "id": "SEO-PLATFORM-10-B",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/seo-platform-10-b-article-adapter",
+    "title": "feat(seo): record Article material decisions",
+    "status": "local_validation_passed",
+    "depends_on": ["SEO-PLATFORM-10-A"],
+    "allowed_paths": [
+      "backend/app/Models/ContentMaterialDecision.php",
+      "backend/app/Services/Cms/ArticleMaterialDecisionService.php",
+      "backend/app/Services/Cms/ArticlePublishService.php",
+      "backend/app/Services/Cms/ArticleTranslationWorkflowService.php",
+      "backend/app/Services/ContentPromotion/Adapters/ArticleCmsPromotionAdapter.php",
+      "backend/app/Services/ContentPromotion/ArticleCmsPromotionAuthority.php",
+      "backend/app/Services/ContentPromotion/PromotionAdapterRegistry.php",
+      "backend/database/migrations/2026_08_28_010000_create_content_material_decisions_table.php",
+      "backend/tests/Feature/SEO/ArticleMaterialDecisionTest.php",
+      "backend/tests/Unit/ContentPromotion/ArticleCmsPromotionAdapterTest.php",
+      "docs/codex/pr-train.yaml",
+      "docs/codex/pr-train-state.json"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The operator explicitly authorized SEO-PLATFORM-10-B as the second item in the ordered eight-PR train."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "SEO-PLATFORM-10-A merged as ddbc89f1a8420e7cecd43bf5d8b6307f8118303f and passed exact-SHA CI, staging, production activation, and smoke before SEO-PLATFORM-10-B delivery."
+      },
+      "local_validation": {
+        "status": "passed_with_baseline_exception",
+        "evidence": "Article material, publication, unpublish, republish, slug-lineage, locale, discoverability invalidation, controlled publish, translation publish, exact-package promotion, and rollback coverage passed 31 tests / 214 assertions. Fresh SQLite migration, scoped Pint, PHP syntax, route wiring, JSON/YAML parsing, and diff checks passed. The full CMS chain passed MBTI, Big Five, Enneagram, and API acceptance before five sitemap fixture failures; the same failure reproduces on untouched origin/main ddbc89f1a8420e7cecd43bf5d8b6307f8118303f and is outside this Article-only scope."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "The change is limited to the Article authority adapter, shared append-only decision schema, Article publication and rollback writers, focused tests, and the minimum train reconciliation. URL Truth consumers, other families, CMS UI, and production content are untouched."
+      },
+      "github_ci": {"status": "pending", "evidence": "PR has not been opened."},
+      "deployment": {"status": "pending", "evidence": "Automatic exact-SHA deployment has not started."}
+    },
+    "production_write_execution": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "search_channel_action": false,
+    "transitions": [
+      {
+        "at": "2026-08-28T09:13:17+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started only after SEO-PLATFORM-10-A merged and its exact-SHA production smoke passed. No backfill, CMS publication, search submission, or manual production action was performed."
+      },
+      {
+        "at": "2026-08-28T09:23:00+08:00",
+        "status": "local_validation_passed",
+        "note": "All Article-scoped acceptance passed. The broader CMS chain's five sitemap fixture failures were reproduced on untouched origin/main and were not pulled into this PR; no content or production write occurred."
       }
     ]
   }

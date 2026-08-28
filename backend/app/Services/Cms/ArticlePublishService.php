@@ -25,6 +25,7 @@ final class ArticlePublishService
     public function __construct(
         private readonly SeoDiscoverabilityCacheInvalidator $seoDiscoverabilityCacheInvalidator,
         private readonly ArticleBodyHeadingGuard $articleBodyHeadingGuard,
+        private readonly ArticleMaterialDecisionService $materialDecisions,
     ) {}
 
     public function publishArticle(int $articleId, string $source = 'article_publish_service'): Article
@@ -47,9 +48,10 @@ final class ArticlePublishService
             $this->assertPublishable($article);
             $publishedRevision = $this->resolvePublishableRevision($article);
 
+            $publishedAt = now();
             $article->status = 'published';
             $article->is_public = true;
-            $article->published_at = now();
+            $article->published_at = $publishedAt;
             $article->published_revision_id = $publishedRevision->id;
             $article->save();
 
@@ -57,6 +59,12 @@ final class ArticlePublishService
                 'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
                 'published_at' => $publishedRevision->published_at ?? $article->published_at,
             ])->save();
+
+            $this->materialDecisions->recordPublished(
+                $article,
+                $publishedRevision,
+                $publishedAt,
+            );
 
             return $article->fresh(['publishedRevision']) ?? $article;
         });
@@ -85,9 +93,12 @@ final class ArticlePublishService
                 throw new RuntimeException('article not found.');
             }
 
+            $unpublishedAt = now();
             $article->status = 'draft';
             $article->is_public = false;
             $article->save();
+
+            $this->materialDecisions->recordUnpublished($article, $unpublishedAt);
 
             return $article->fresh() ?? $article;
         });
@@ -249,6 +260,12 @@ final class ArticlePublishService
                     ->where('article_id', $articleId)
                     ->update($seoUpdates);
             }
+
+            $this->materialDecisions->recordPublished(
+                $article,
+                $workingRevision,
+                $publishedAt,
+            );
 
             return $article->fresh(['publishedRevision', 'workingRevision', 'seoMeta']) ?? $article;
         });
@@ -438,6 +455,11 @@ final class ArticlePublishService
                     $published = ArticleTranslationRevision::query()->withoutGlobalScopes()
                         ->findOrFail((int) $target['current_published_revision_id']);
                     $prepareTarget($article, $published);
+                    $this->materialDecisions->recordPublished(
+                        $article,
+                        $published,
+                        now(),
+                    );
 
                     continue;
                 }

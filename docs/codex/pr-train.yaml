@@ -50295,9 +50295,10 @@ prs:
     base: main
     branch: codex/seo-platform-10-a-material-fingerprint
     title: "feat(seo): add deterministic material fingerprint core"
-    status: pr_open
+    status: merged
     pr: 3827
     head_sha: 380085698d6df1da4a228b2c65951e2f78186931
+    merge_commit_sha: ddbc89f1a8420e7cecd43bf5d8b6307f8118303f
     depends_on: []
     train_scope: seo_platform_10_material_fingerprint_core
     risk_level: controlled_content_authority_contract
@@ -50319,6 +50320,44 @@ prs:
       - cd backend && php artisan test tests/Unit/Services/SeoIntel/MaterialFingerprintV1Test.php --no-ansi
       - cd backend && vendor/bin/pint --test app/Services/SeoIntel/MaterialFingerprint tests/Unit/Services/SeoIntel/MaterialFingerprintV1Test.php
       - parse pr-train JSON and YAML; exact-scope validation; git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false
+
+  - id: SEO-PLATFORM-10-B
+    repo: fap-api
+    base: main
+    branch: codex/seo-platform-10-b-article-adapter
+    title: "feat(seo): record Article material decisions"
+    status: local_validation_passed
+    depends_on: [SEO-PLATFORM-10-A]
+    train_scope: seo_platform_10_article_material_adapter
+    risk_level: controlled_content_authority_schema
+    scope:
+      - Add an append-only material-decision projection for published Article authority revisions.
+      - Record deterministic material, non-material, locale-isolated, unpublish, republish, and rollback decisions inside existing Article publication transactions.
+      - Preserve prior material time for semantic no-op republishes and hold unknown legacy fingerprints fail closed.
+    do_not:
+      - Change Career, Personality, URL Truth consumers, sitemap, llms, lifecycle review policy, CMS UI, or production content.
+      - Persist raw content payloads or treat internal database identities, actors, timestamps, cache, deploy, or analytics fields as fingerprint inputs.
+      - Backfill existing Article rows or perform any manual production write.
+    allowed_paths:
+      - backend/app/Models/ContentMaterialDecision.php
+      - backend/app/Services/Cms/ArticleMaterialDecisionService.php
+      - backend/app/Services/Cms/ArticlePublishService.php
+      - backend/app/Services/Cms/ArticleTranslationWorkflowService.php
+      - backend/app/Services/ContentPromotion/Adapters/ArticleCmsPromotionAdapter.php
+      - backend/app/Services/ContentPromotion/ArticleCmsPromotionAuthority.php
+      - backend/app/Services/ContentPromotion/PromotionAdapterRegistry.php
+      - backend/database/migrations/2026_08_28_010000_create_content_material_decisions_table.php
+      - backend/tests/Feature/SEO/ArticleMaterialDecisionTest.php
+      - backend/tests/Unit/ContentPromotion/ArticleCmsPromotionAdapterTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - focused Article publication, discoverability invalidation, controlled command, translation publish, exact-package promotion, rollback, locale, and idempotency tests
+      - fresh SQLite migration; scoped Pint and PHP syntax; route wiring; CMS verification chain; exact-scope validation; git diff --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     production_write_execution: false
     production_workflow_dispatched: false

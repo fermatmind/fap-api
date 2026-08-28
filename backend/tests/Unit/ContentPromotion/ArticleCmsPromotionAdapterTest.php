@@ -8,6 +8,7 @@ use App\Models\Article;
 use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Models\ContentMaterialDecision;
 use App\Services\Cms\ArticlePublicListReadCache;
 use App\Services\ContentPromotion\ArticleCmsPromotionAuthority;
 use App\Services\ContentPromotion\PromotionAdapterRegistry;
@@ -60,6 +61,7 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
         Cache::put(ArticlePublicListReadCache::CACHE_KEY_PREFIX.':generation', 'before-publish', 600);
         $published = $adapter->publish($context);
         self::assertSame(2, $published['published_count']);
+        self::assertSame(2, ContentMaterialDecision::query()->where('decision_code', 'initial_publish')->count());
         Cache::put(ArticlePublicListReadCache::CACHE_KEY_PREFIX.':generation', 'before-replay', 600);
         $replayed = $adapter->publish($context);
         self::assertSame(0, $replayed['written_count']);
@@ -77,6 +79,7 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
         self::assertFalse((bool) $first->sitemap_eligible);
         self::assertFalse((bool) $first->llms_eligible);
         $adapter->rollback($context, (string) $published['rollback_reference']);
+        self::assertSame(2, ContentMaterialDecision::query()->where('decision_code', 'rollback_material_change')->count());
         self::assertSame('Original first-article', $first->refresh()->title);
         self::assertSame('<p>Original body</p>', $first->content_html);
         self::assertSame('Original second-article', $second->refresh()->title);

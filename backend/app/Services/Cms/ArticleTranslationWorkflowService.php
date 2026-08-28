@@ -32,6 +32,7 @@ final class ArticleTranslationWorkflowService
         private readonly AuditLogger $auditLogger,
         private readonly CmsEditorialReviewAttestationService $reviewAttestations,
         private readonly SeoDiscoverabilityCacheInvalidator $seoDiscoverabilityCacheInvalidator,
+        private readonly ArticleMaterialDecisionService $materialDecisions,
     ) {}
 
     public function canGenerateMachineDraft(): bool
@@ -444,6 +445,12 @@ final class ArticleTranslationWorkflowService
                 'published_revision_id' => (int) $revision->id,
                 'translation_status' => Article::TRANSLATION_STATUS_PUBLISHED,
             ])->saveQuietly();
+
+            $this->materialDecisions->recordPublished(
+                $locked,
+                $revision,
+                $locked->published_at ?? now(),
+            );
 
             ContentReleaseAudit::log('article', $locked->fresh(), $source);
             $this->log('article_translation_published', $locked, [
