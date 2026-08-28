@@ -44,6 +44,24 @@ final class CareerContentV3CompatibilityProjectorTest extends TestCase
             'randstad-cn-first-tier-finance-monthly-range-2026',
             'randstad-cn-core-city-finance-monthly-range-2026',
         ], data_get($projected, 'page.content.career_snapshot_primary_locale.salary.fact_refs'));
+        self::assertSame(
+            '1,595,200 → 1,674,600 人',
+            data_get($projected, 'page.content.career_snapshot_primary_locale.salary.bls_table.5.数值'),
+        );
+        self::assertSame(
+            '115,300 个',
+            data_get($projected, 'page.content.career_snapshot_primary_locale.salary.bls_table.7.数值'),
+        );
+
+        $legacySources = collect(data_get($projected, 'sources.references'))->keyBy('source_ref');
+        self::assertSame(
+            '2025 年工资快照与 2025—2035 年就业预测分开解释',
+            $legacySources['source-6']['usage'][1],
+        );
+        self::assertSame(
+            '2025—2035 年就业增长：5%，净增加 79,400 人',
+            $legacySources['source-8']['usage'][2],
+        );
 
         self::assertSame(
             '美国 SOC 13-2011，2025—2035 年官方职业预测',
@@ -61,6 +79,11 @@ final class CareerContentV3CompatibilityProjectorTest extends TestCase
             '美国就业预计增长 5%，年均约 115,300 个岗位空缺。',
             data_get($projected, 'page.content.faq_block.items.0.answer'),
         );
+
+        $encoded = json_encode($projected, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
+        foreach (['1,579,800', '124,200', '2024–2034', '2024—2034', '1,652,600', '72,800', '157.98 万 → 165.26 万'] as $stale) {
+            self::assertStringNotContainsString($stale, $encoded);
+        }
     }
 
     /** @return array<string,mixed> */
@@ -76,6 +99,13 @@ final class CareerContentV3CompatibilityProjectorTest extends TestCase
         return [
             'presentation_v1' => ['hero' => ['stats' => $stats]],
             'presentation_v2' => ['hero' => ['stats' => $stats]],
+            'sources' => ['references' => [[
+                'url' => 'https://www.bls.gov/news.release/ocwage.t01.htm',
+                'usage' => ['2025 wages', '2024–2034 projection'],
+            ], [
+                'url' => 'https://www.bls.gov/ooh/business-and-financial/accountants-and-auditors.htm',
+                'usage' => ['2024 jobs: 1,579,800', '2034 jobs: 1,652,600', '72,800 net', '124,200 openings'],
+            ]]],
             'page' => ['content' => [
                 'career_snapshot_primary_locale' => [
                     'salary' => ['fact_refs' => []],

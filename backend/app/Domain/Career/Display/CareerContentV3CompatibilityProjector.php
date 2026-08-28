@@ -47,6 +47,7 @@ final class CareerContentV3CompatibilityProjector
         $surface = $this->projectHero($surface, $content, $facts);
         $surface = $this->projectChinaSalary($surface, $facts);
         $surface = $this->projectSalary($surface, $facts);
+        $surface = $this->projectLegacySources($surface, $facts);
         $surface = $this->projectAi($surface, $facts);
         $surface = $this->projectOutlook($surface, $facts);
 
@@ -61,6 +62,14 @@ final class CareerContentV3CompatibilityProjector
         if (! is_array($salary)) {
             return $surface;
         }
+        $employment = (string) $facts['bls-us-accountants-employment-2025']['display_value'];
+        $projected = (string) $facts['bls-us-accountants-employment-2035']['display_value'];
+        $net = (string) $facts['bls-us-accountants-employment-net-change-2025-2035']['display_value'];
+        $growth = (string) $facts['bls-us-accountants-employment-growth-2025-2035']['display_value'];
+        $openings = (string) $facts['bls-us-accountants-openings-2025-2035']['display_value'];
+        $salary['us_median'] = $facts['bls-us-accountants-wage-median-2025']['display_value'];
+        $salary['us_growth'] = $growth;
+        $salary['bls_table'] = $this->salaryRows($facts, $employment, $projected, $net, $growth, $openings);
         $salary['fact_refs'] = [
             'mohrss-cn-economic-financial-wage-median-2024',
             'editorial-cn-economic-financial-monthly-median-2024',
@@ -68,6 +77,49 @@ final class CareerContentV3CompatibilityProjector
             'randstad-cn-core-city-finance-monthly-range-2026',
         ];
         data_set($surface, $path, $salary);
+
+        return $surface;
+    }
+
+    /** @param array<string,mixed> $surface @param array<string,array<string,mixed>> $facts @return array<string,mixed> */
+    private function projectLegacySources(array $surface, array $facts): array
+    {
+        $references = data_get($surface, 'sources.references');
+        if (! is_array($references)) {
+            return $surface;
+        }
+        foreach ($references as $index => $reference) {
+            if (! is_array($reference)) {
+                continue;
+            }
+            $url = (string) ($reference['url'] ?? '');
+            if (str_contains($url, 'bls.gov/news.release/ocwage.t01.htm')) {
+                $references[$index]['usage'] = [
+                    sprintf(
+                        '美国会计师和审计师 2025 年 5 月年薪中位数：%s',
+                        $facts['bls-us-accountants-wage-median-2025']['display_value'],
+                    ),
+                    '2025 年工资快照与 2025—2035 年就业预测分开解释',
+                ];
+                $references[$index]['source_ref'] = 'source-6';
+            } elseif (str_contains($url, 'bls.gov/ooh/business-and-financial/accountants-and-auditors.htm')) {
+                $references[$index]['usage'] = [
+                    sprintf('2025 年就业人数：%s', $facts['bls-us-accountants-employment-2025']['display_value']),
+                    sprintf('2035 年预测就业人数：%s', $facts['bls-us-accountants-employment-2035']['display_value']),
+                    sprintf(
+                        '2025—2035 年就业增长：%s，净增加 %s 人',
+                        $facts['bls-us-accountants-employment-growth-2025-2035']['display_value'],
+                        $facts['bls-us-accountants-employment-net-change-2025-2035']['display_value'],
+                    ),
+                    sprintf(
+                        '2025—2035 年年均岗位空缺：%s 个，包含替代需求',
+                        $facts['bls-us-accountants-openings-2025-2035']['display_value'],
+                    ),
+                ];
+                $references[$index]['source_ref'] = 'source-8';
+            }
+        }
+        data_set($surface, 'sources.references', $references);
 
         return $surface;
     }
@@ -169,8 +221,8 @@ final class CareerContentV3CompatibilityProjector
         }
         $rows[] = [
             '指标' => '2025—2035 就业 · 就业规模',
-            '数值' => "{$employment} → {$projected}",
-            '说明' => "净增加 {$net}；BLS Employment Projections",
+            '数值' => "{$employment} → {$projected} 人",
+            '说明' => "净增加 {$net} 人；BLS Employment Projections",
             'fact_ref' => 'bls-us-accountants-employment-2025',
         ];
         $rows[] = [
@@ -181,7 +233,7 @@ final class CareerContentV3CompatibilityProjector
         ];
         $rows[] = [
             '指标' => '2025—2035 就业 · 年均职位空缺',
-            '数值' => $openings,
+            '数值' => $openings.' 个',
             '说明' => '包含退休、离职和职业转换产生的替代需求，不等于净新增。',
             'fact_ref' => 'bls-us-accountants-openings-2025-2035',
         ];

@@ -11,7 +11,7 @@ final class CareerJobDetailCanonicalCacheReader
 {
     public const CODEC_VERSION = 'career.job-detail.gzip-json.v1';
 
-    public const COMPILER_VERSION = 'career.content-v3.per-page-reader.v2';
+    public const COMPILER_VERSION = 'career.content-v3.per-page-reader.v3';
 
     private const ENVELOPE_KEYS = ['codec', 'payload', 'sha256'];
 
