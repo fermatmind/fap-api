@@ -106441,10 +106441,12 @@
     "base": "main",
     "branch": "codex/seo-platform-10-b-article-adapter",
     "title": "feat(seo): record Article material decisions",
-    "status": "pr_open",
+    "status": "merged",
     "commit_sha": "fe21ece3ddac80e178f73a54734ed012a3ef5955",
     "pr_number": 3828,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3828",
+    "merge_commit_sha": "291fdd942a6e1dc912664a6f494d84327ad28b39",
+    "merged_at": "2026-08-28T09:28:56+08:00",
     "depends_on": ["SEO-PLATFORM-10-A"],
     "allowed_paths": [
       "backend/app/Models/ContentMaterialDecision.php",
@@ -106477,8 +106479,8 @@
         "status": "passed",
         "evidence": "The change is limited to the Article authority adapter, shared append-only decision schema, Article publication and rollback writers, focused tests, and the minimum train reconciliation. URL Truth consumers, other families, CMS UI, and production content are untouched."
       },
-      "github_ci": {"status": "pending", "evidence": "PR #3828 is open from the exact validated implementation commit; required checks are pending."},
-      "deployment": {"status": "pending", "evidence": "Automatic exact-SHA deployment has not started."}
+      "github_ci": {"status": "passed", "evidence": "Exact-SHA main CI run 33132987269 passed every classifier-selected job and emitted the immutable receipt for merge SHA 291fdd942a6e1dc912664a6f494d84327ad28b39."},
+      "deployment": {"status": "failed_external_staging", "evidence": "Automatic Deploy run 33133266587 failed in staging deploy:vendors when the host Composer 2.7.1 process exited -1 after dependency installation warnings. The failure occurred before migration, activation, or smoke; production remained unchanged. No workflow was manually dispatched or retried, and the failure is outside the Article-only diff."}
     },
     "production_write_execution": false,
     "production_workflow_dispatched": false,
@@ -106502,6 +106504,71 @@
         "at": "2026-08-28T09:29:00+08:00",
         "status": "pr_open",
         "note": "Opened PR #3828 from validated implementation commit fe21ece3ddac80e178f73a54734ed012a3ef5955. Exact scope is clean and required checks are pending."
+      },
+      {
+        "at": "2026-08-28T09:28:56+08:00",
+        "status": "merged",
+        "note": "PR #3828 was squash-merged as 291fdd942a6e1dc912664a6f494d84327ad28b39 after exact scope and mergeability checks passed. Exact-SHA main CI subsequently passed."
+      },
+      {
+        "at": "2026-08-28T09:44:11+08:00",
+        "status": "deployment_failed_external_staging",
+        "note": "Automatic staging stopped at deploy:vendors because the staging host Composer process exited -1. Production activation was skipped and production remained unchanged; no manual dispatch or retry was performed."
+      }
+    ]
+  },
+  "SEO-PLATFORM-10-C": {
+    "id": "SEO-PLATFORM-10-C",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/seo-platform-10-c-career-adapter",
+    "title": "feat(seo): record Career Current material decisions",
+    "status": "in_progress",
+    "depends_on": ["SEO-PLATFORM-10-B"],
+    "allowed_paths": [
+      "backend/app/Domain/Career/Display/CareerMaterialDecisionService.php",
+      "backend/app/Domain/Career/Display/CareerCurrentAuthorityPublisher.php",
+      "backend/tests/Feature/Domain/Career/Display/CareerCurrentAuthorityPublisherTest.php",
+      "docs/codex/pr-train.yaml",
+      "docs/codex/pr-train-state.json"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The operator explicitly authorized SEO-PLATFORM-10-C as the third item in the ordered eight-PR train."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "SEO-PLATFORM-10-B merged as 291fdd942a6e1dc912664a6f494d84327ad28b39 and its exact-SHA main CI passed before SEO-PLATFORM-10-C implementation. The later non-required staging vendor-install failure left production unchanged and does not affect the code dependency."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Career Current publisher, fixed sharded package, loader, and machine-contract coverage passed 32 tests / 73555 assertions. Locale-isolated change times, unchanged legacy HOLD time, compile/import/build non-material context, idempotent replay, existing-decision compensation, manual hold, cache failure, LKG restoration boundary, scoped Pint, PHP syntax, train JSON/YAML parsing, and diff checks passed."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "The declared scope is limited to the Career Current material-decision adapter, its existing publish and compensation transaction integration, focused tests, and minimum train reconciliation."
+      },
+      "github_ci": {"status": "pending", "evidence": "PR has not been opened."},
+      "deployment": {"status": "pending", "evidence": "No 10-C automatic exact-SHA deployment exists yet."}
+    },
+    "production_write_execution": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "search_channel_action": false,
+    "transitions": [
+      {
+        "at": "2026-08-28T09:45:22+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started from exact merged SEO-PLATFORM-10-B main after confirming the Career sharded Current authority, fixed module ownership, reader-safe review projection, existing publisher compensation boundary, and no existing 10-C PR. No Career content, production, cache, discoverability, or backfill write was performed."
+      },
+      {
+        "at": "2026-08-28T09:49:00+08:00",
+        "status": "local_validation_passed",
+        "note": "The adapter writes only deterministic decision metadata inside the existing Current publish transaction, appends restoration state in the existing compensation transaction, independently preserves each locale's material time, and excludes compile/import/build context. Full installed 10-module Current contract coverage passed; no content or external write occurred."
       }
     ]
   }

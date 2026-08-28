@@ -10,7 +10,9 @@ use App\Domain\Career\Display\CareerCurrentAuthorityPackageLoader;
 use App\Domain\Career\Display\CareerCurrentAuthorityPublisher;
 use App\Domain\Career\Display\CareerCurrentAuthorityPublisherFailure;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
+use App\Domain\Career\Display\CareerMaterialDecisionService;
 use App\Models\CareerJobDisplayAsset;
+use App\Models\ContentMaterialDecision;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
 use App\Services\Career\Bundles\CareerJobDisplaySurfaceBuilder;
@@ -37,6 +39,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         self::assertSame(1, $result['write_counts']['database_update_count']);
         self::assertSame(0, $result['write_counts']['database_insert_count']);
         self::assertSame(0, $result['write_counts']['database_delete_count']);
+        self::assertSame(2, $result['write_counts']['material_decision_write_count']);
         self::assertSame(4, $result['write_counts']['cache_candidate_write_count']);
         self::assertSame(2, $result['write_counts']['cache_pointer_activation_count']);
         self::assertSame(2, $result['public_readback']['verified_locale_page_count']);
@@ -45,11 +48,66 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         self::assertSame($target['id'], (string) $row->id);
         self::assertSame('new title', data_get($row->page_payload_json, 'en.hero.title'));
         self::assertNotSame('old title', data_get($row->page_payload_json, 'en.hero.title'));
+        $decisions = ContentMaterialDecision::query()->where('family', 'career')->orderBy('locale')->get();
+        self::assertCount(2, $decisions);
+        self::assertSame(['en', 'zh-CN'], $decisions->pluck('locale')->all());
+        self::assertTrue($decisions->every(static fn (ContentMaterialDecision $decision): bool => preg_match('/\A[a-f0-9]{64}\z/', (string) $decision->authority_subject_key) === 1));
+        self::assertTrue($decisions->every->material_changed);
+        self::assertTrue($decisions->every(static fn (ContentMaterialDecision $decision): bool => $decision->material_changed_at !== null
+            && preg_match('/\A[a-f0-9]{64}\z/', (string) $decision->material_fingerprint) === 1));
 
         $replay = $publisher->execute(base_path());
         self::assertTrue($replay['idempotent_noop']);
         self::assertSame(0, array_sum($replay['write_counts']));
+        self::assertDatabaseCount('content_material_decisions', 2);
         self::assertSame($old['id'], $target['id']);
+    }
+
+    public function test_it_evaluates_locale_material_changes_independently(): void
+    {
+        [$authority, , $old] = $this->fixture();
+        $authority['rows']['actors'] = $old;
+        data_set($authority['rows']['actors'], 'page_payload_json.en.hero.title', 'new English title');
+        $publisher = $this->publisher(
+            $authority,
+            new FakeCareerCurrentAuthorityCacheGateway(new CareerCurrentAuthorityPackage, $authority['rows']),
+        );
+
+        $publisher->execute(base_path(), true);
+
+        $en = ContentMaterialDecision::query()->where('family', 'career')->where('locale', 'en')->sole();
+        $zh = ContentMaterialDecision::query()->where('family', 'career')->where('locale', 'zh-CN')->sole();
+        self::assertTrue($en->material_changed);
+        self::assertNotNull($en->material_changed_at);
+        self::assertSame('initial_material_change', $en->decision_code);
+        self::assertFalse($zh->material_changed);
+        self::assertNull($zh->material_changed_at);
+        self::assertSame('unchanged_legacy_baseline', $zh->decision_code);
+        self::assertSame($zh->previous_material_fingerprint, $zh->material_fingerprint);
+        self::assertNotSame($en->material_fingerprint, $zh->material_fingerprint);
+    }
+
+    public function test_it_excludes_compile_import_and_build_context_from_material_change(): void
+    {
+        [$authority, , $old] = $this->fixture();
+        $authority['rows']['actors'] = $old;
+        data_set($authority['rows']['actors'], 'metadata_json.compile_run_id', 'compile-2026-08-28');
+        data_set($authority['rows']['actors'], 'metadata_json.build.generated_at', '2026-08-28T02:00:00Z');
+        $publisher = $this->publisher(
+            $authority,
+            new FakeCareerCurrentAuthorityCacheGateway(new CareerCurrentAuthorityPackage, $authority['rows']),
+        );
+
+        $result = $publisher->execute(base_path(), true);
+
+        self::assertSame(1, $result['write_counts']['database_update_count']);
+        self::assertSame(2, $result['write_counts']['material_decision_write_count']);
+        $decisions = ContentMaterialDecision::query()->where('family', 'career')->get();
+        self::assertCount(2, $decisions);
+        self::assertTrue($decisions->every(static fn (ContentMaterialDecision $decision): bool => ! $decision->material_changed
+            && $decision->material_changed_at === null
+            && $decision->decision_code === 'unchanged_legacy_baseline'
+            && $decision->previous_material_fingerprint === $decision->material_fingerprint));
     }
 
     public function test_it_rejects_a_non_sharded_authority_before_database_or_cache_writes(): void
@@ -220,6 +278,56 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
             'en.hero.title',
         ));
         self::assertTrue($cache->forgotten);
+        $latest = ContentMaterialDecision::query()->where('family', 'career')->latest('id')->firstOrFail();
+        self::assertSame('rollback', $latest->operation);
+        self::assertSame('publish_compensated_to_legacy_baseline', $latest->decision_code);
+        self::assertFalse($latest->material_changed);
+        self::assertNull($latest->material_changed_at);
+    }
+
+    public function test_compensation_restores_the_prior_locale_fingerprint_and_material_time(): void
+    {
+        [$authority] = $this->fixture();
+        $this->publisher(
+            $authority,
+            new FakeCareerCurrentAuthorityCacheGateway(new CareerCurrentAuthorityPackage, $authority['rows']),
+        )->execute(base_path(), true);
+        $before = ContentMaterialDecision::query()
+            ->where('family', 'career')
+            ->get()
+            ->keyBy('locale');
+
+        data_set($authority['rows']['actors'], 'page_payload_json.en.hero.title', 'next English title');
+        data_set($authority['rows']['actors'], 'page_payload_json.zh.hero.title', 'next Chinese title');
+        try {
+            $this->publisher(
+                $authority,
+                new FakeCareerCurrentAuthorityCacheGateway(
+                    new CareerCurrentAuthorityPackage,
+                    $authority['rows'],
+                    'prepare_exception',
+                ),
+            )->execute(base_path(), true);
+            self::fail('Expected the second publication to be compensated.');
+        } catch (CareerCurrentAuthorityPublisherFailure $failure) {
+            self::assertSame('rolled_back', $failure->writeCommitState);
+        }
+
+        foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
+            $restored = ContentMaterialDecision::query()
+                ->where('family', 'career')
+                ->where('locale', $locale)
+                ->latest('id')
+                ->firstOrFail();
+            self::assertSame('rollback', $restored->operation);
+            self::assertSame('publish_compensated', $restored->decision_code);
+            self::assertSame($before[$locale]->material_fingerprint, $restored->material_fingerprint);
+            self::assertSame(
+                $before[$locale]->material_changed_at?->toISOString(),
+                $restored->material_changed_at?->toISOString(),
+            );
+            self::assertFalse($restored->material_changed);
+        }
     }
 
     public function test_it_classifies_cache_capacity_exhaustion_and_restores_database(): void
@@ -493,6 +601,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
             $cache,
             new CareerJobDetailReaderSafeReviewProjector,
             app(CareerJobDisplaySurfaceBuilder::class),
+            app(CareerMaterialDecisionService::class),
         );
     }
 }

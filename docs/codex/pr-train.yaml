@@ -50330,9 +50330,10 @@ prs:
     base: main
     branch: codex/seo-platform-10-b-article-adapter
     title: "feat(seo): record Article material decisions"
-    status: pr_open
+    status: merged
     pr: 3828
     head_sha: fe21ece3ddac80e178f73a54734ed012a3ef5955
+    merge_commit_sha: 291fdd942a6e1dc912664a6f494d84327ad28b39
     depends_on: [SEO-PLATFORM-10-A]
     train_scope: seo_platform_10_article_material_adapter
     risk_level: controlled_content_authority_schema
@@ -50360,6 +50361,37 @@ prs:
     validation:
       - focused Article publication, discoverability invalidation, controlled command, translation publish, exact-package promotion, rollback, locale, and idempotency tests
       - fresh SQLite migration; scoped Pint and PHP syntax; route wiring; CMS verification chain; exact-scope validation; git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false
+
+  - id: SEO-PLATFORM-10-C
+    repo: fap-api
+    base: main
+    branch: codex/seo-platform-10-c-career-adapter
+    title: "feat(seo): record Career Current material decisions"
+    status: in_progress
+    depends_on: [SEO-PLATFORM-10-B]
+    train_scope: seo_platform_10_career_current_material_adapter
+    risk_level: controlled_career_content_authority_projection
+    scope:
+      - Derive locale-isolated material fingerprints from the fixed ten-module Career sharded Current authority, reader-safe review evidence, and localized search surface.
+      - Record append-only decisions inside the existing Current database publish transaction and append restoration decisions inside its existing compensation transaction.
+      - Preserve material time for unchanged locale projections and leave an unchanged legacy baseline without a fabricated material timestamp.
+    do_not:
+      - Change Career Current content authority, package installation, publisher permission, cache activation, database projection, or discoverability authority boundaries.
+      - Backfill the 2092 legacy locale pages, publish Current content, mutate production, or trigger Search, sitemap, llms, or cache actions.
+      - Treat compile, import, cache, build, deploy, analytics, or runtime timestamps as material authority.
+    allowed_paths:
+      - backend/app/Domain/Career/Display/CareerMaterialDecisionService.php
+      - backend/app/Domain/Career/Display/CareerCurrentAuthorityPublisher.php
+      - backend/tests/Feature/Domain/Career/Display/CareerCurrentAuthorityPublisherTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - focused Career Current publisher transaction, locale isolation, non-material context, compensation, LKG boundary, and idempotent replay tests
+      - scoped Pint and PHP syntax; Career Current package contract checks; train JSON/YAML parsing; exact-scope validation; git diff --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     production_write_execution: false
     production_workflow_dispatched: false

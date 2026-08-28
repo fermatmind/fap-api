@@ -52,6 +52,7 @@ final class CareerCurrentAuthorityPublisher
         private readonly CareerCurrentAuthorityCacheGateway $cache,
         private readonly CareerJobDetailReaderSafeReviewProjector $readerSafeProjector,
         private readonly CareerJobDisplaySurfaceBuilder $displaySurfaceBuilder,
+        private readonly CareerMaterialDecisionService $materialDecisions,
     ) {}
 
     /** @return array<string,mixed> */
@@ -66,7 +67,10 @@ final class CareerCurrentAuthorityPublisher
         try {
             $authority = $this->loader->loadShardedForPublish($backendRoot);
             $this->assertAccountantsBoundaryNotice($authority['rows']);
-            $plan = DB::transaction(fn (): array => $this->applyDatabasePlan($authority['rows']), 1);
+            $plan = DB::transaction(fn (): array => $this->applyDatabasePlan(
+                $authority['rows'],
+                (string) $authority['summary']['sharded_aggregate_sha256'],
+            ), 1);
             $databaseCommitted = ($plan['write_counts']['database_update_count']
                 + $plan['write_counts']['database_insert_count']
                 + $plan['write_counts']['database_delete_count']) > 0;
@@ -227,7 +231,7 @@ final class CareerCurrentAuthorityPublisher
      * @param  array<string,array<string,mixed>>  $targetRows
      * @return array<string,mixed>
      */
-    private function applyDatabasePlan(array $targetRows): array
+    private function applyDatabasePlan(array $targetRows, string $authorityRevision): array
     {
         $assets = CareerJobDisplayAsset::query()->runtimeColumns()->orderBy('id')->lockForUpdate()->get();
         $beforeStateSha256 = $this->snapshotModelsHash($assets);
@@ -288,6 +292,31 @@ final class CareerCurrentAuthorityPublisher
                 throw new CareerCurrentAuthorityPublisherFailure('CURRENT_DATABASE_UPDATE_FAILED');
             }
         }
+        $materialDecisionWrites = [];
+        $effectiveAt = now();
+        foreach ($updates as $update) {
+            if ($this->isManualHoldSlug($update['slug'])) {
+                continue;
+            }
+            foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
+                $recorded = $this->materialDecisions->recordPublished(
+                    $update['slug'],
+                    $locale,
+                    $targetRows[$update['slug']],
+                    $update['before'],
+                    $authorityRevision,
+                    $effectiveAt,
+                    'career-current:'.$authorityRevision.':'.$update['slug'].':'.$locale,
+                );
+                if (! $recorded['created']) {
+                    continue;
+                }
+                $materialDecisionWrites[] = [
+                    'decision_id' => (int) $recorded['decision']->id,
+                    'previous_decision_id' => $recorded['previous_decision_id'],
+                ];
+            }
+        }
         $afterStateSha256 = $this->assertDatabaseReadback($targetRows, true);
         sort($changedSlugs, SORT_STRING);
 
@@ -296,12 +325,14 @@ final class CareerCurrentAuthorityPublisher
             'updates' => $updates,
             'inserts' => [],
             'deletes' => $deletes,
+            'material_decisions' => $materialDecisionWrites,
             'before_state_sha256' => $beforeStateSha256,
             'after_state_sha256' => $afterStateSha256,
             'write_counts' => [
                 'database_update_count' => count($updates),
                 'database_insert_count' => 0,
                 'database_delete_count' => 0,
+                'material_decision_write_count' => count($materialDecisionWrites),
             ],
         ];
     }
@@ -683,6 +714,13 @@ final class CareerCurrentAuthorityPublisher
                 if (DB::table('career_job_display_assets')->where('id', $id)->update($this->databaseValues($before)) !== 1) {
                     throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPENSATION_UPDATE_FAILED');
                 }
+            }
+            foreach ($plan['material_decisions'] as $decision) {
+                $this->materialDecisions->recordCompensated(
+                    (int) $decision['decision_id'],
+                    $decision['previous_decision_id'] === null ? null : (int) $decision['previous_decision_id'],
+                    now(),
+                );
             }
             $restored = CareerJobDisplayAsset::query()->runtimeColumns()->orderBy('id')->lockForUpdate()->get();
             if (! hash_equals($plan['before_state_sha256'], $this->snapshotModelsHash($restored))) {
