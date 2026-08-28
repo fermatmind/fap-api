@@ -106714,7 +106714,11 @@
     "base": "main",
     "branch": "codex/seo-platform-10-f-consumer-convergence",
     "title": "feat(seo): converge public URL Truth consumers",
-    "status": "in_progress",
+    "status": "merged",
+    "commit_sha": "19ab8a7eb5da21032ee93b84150c4e8856d3510b",
+    "pr_number": 3832,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3832",
+    "merge_commit_sha": "cfc5e23484a3e0e55f5cbfbabf0f17e899797e0f",
     "depends_on": ["SEO-PLATFORM-10-E"],
     "allowed_paths": [
       "backend/app/Http/Controllers/SitemapController.php",
@@ -106730,8 +106734,8 @@
       "dependency": {"status": "passed", "evidence": "SEO-PLATFORM-10-E merged as 6384bc0430fe38d9f30ab556b41e1c146b139e54 and exact-SHA CI run 33136724956 passed before 10-F implementation began."},
       "local_validation": {"status": "passed", "evidence": "Public consumer parity, material lastmod, HOLD-without-time, private/noindex/redirect/noncanonical exclusion, clock-fallback absence, and pointer-preserving LKG coverage passed with the existing Career generator compatibility suite: 5 tests / 69 assertions. Scoped Pint, PHP syntax, train parsing, and diff checks passed."},
       "scope": {"status": "passed", "evidence": "Scope is limited to the three declared public consumers, their shared URL Truth snapshot/LKG reader, focused tests, and minimum train reconciliation."},
-      "github_ci": {"status": "pending", "evidence": "10-F has not been pushed."},
-      "deployment": {"status": "pending", "evidence": "10-F has not entered the automatic exact-SHA lane."}
+      "github_ci": {"status": "passed", "evidence": "PR #3832 merged as cfc5e23484a3e0e55f5cbfbabf0f17e899797e0f and exact-SHA main CI run 33137716778 passed every classifier-selected job."},
+      "deployment": {"status": "in_progress", "evidence": "Automatic deployment is non-required before 10-G and was not manually dispatched or retried."}
     },
     "production_write_execution": false,
     "production_workflow_dispatched": false,
@@ -106750,6 +106754,49 @@
         "at": "2026-08-28T11:02:00+08:00",
         "status": "local_validation_passed",
         "note": "Sitemap, llms, and llms-full now render the exact same validated URL Truth set and optional material lastmod. Unknown HOLD rows remain visible without invented time; invalid rows are excluded; generation failure preserves the active readable LKG."
+      },
+      {
+        "at": "2026-08-28T11:10:00+08:00",
+        "status": "merged",
+        "note": "PR #3832 squash-merged as cfc5e23484a3e0e55f5cbfbabf0f17e899797e0f and exact-SHA CI run 33137716778 passed. No manual deployment, cache, database, CMS, or search-channel action was performed."
+      }
+    ]
+  },
+  "SEO-PLATFORM-10-G": {
+    "id": "SEO-PLATFORM-10-G",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/seo-platform-10-g-lifecycle-candidates",
+    "title": "feat(seo): evaluate content lifecycle candidates",
+    "status": "in_progress",
+    "depends_on": ["SEO-PLATFORM-10-F"],
+    "allowed_paths": [
+      "backend/app/Services/SeoIntel/Lifecycle/ContentLifecycleReviewPolicy.php",
+      "backend/app/Services/SeoIntel/Lifecycle/ContentLifecycleCandidateEvaluator.php",
+      "backend/tests/Feature/SeoIntel/SeoPlatform10ContentLifecycleCandidateTest.php",
+      "docs/codex/pr-train.yaml",
+      "docs/codex/pr-train-state.json"
+    ],
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "The operator explicitly authorized SEO-PLATFORM-10-G as the seventh item in the ordered eight-PR train."},
+      "dependency": {"status": "passed", "evidence": "SEO-PLATFORM-10-F merged as cfc5e23484a3e0e55f5cbfbabf0f17e899797e0f and exact-SHA CI run 33137716778 passed before 10-G implementation began."},
+      "local_validation": {"status": "passed", "evidence": "Lifecycle policy, stable candidate identity, overdue, missing-review HOLD, confirmed decay, stale GSC, insufficient sample, runtime incident, allowlisted actions, and read-only boundaries passed with existing detector compatibility: 23 tests / 1206 assertions. Scoped Pint and PHP syntax passed."},
+      "scope": {"status": "passed", "evidence": "Scope is limited to a pure read-only lifecycle review policy and candidate evaluator, focused tests, and minimum train reconciliation."},
+      "github_ci": {"status": "pending", "evidence": "10-G has not been pushed."},
+      "deployment": {"status": "pending", "evidence": "10-G has not entered the automatic exact-SHA lane."}
+    },
+    "production_write_execution": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "search_channel_action": false,
+    "transitions": [
+      {
+        "at": "2026-08-28T11:14:09+08:00",
+        "status": "local_validation_passed",
+        "note": "Established the Page Family × independent locale × claim-risk review matrix and reused the existing GSC quality and content-decay detector contracts. Outputs are deterministic read-only candidates or HOLD records and authorize no lifecycle action."
       }
     ]
   }

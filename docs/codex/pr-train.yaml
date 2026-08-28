@@ -50479,7 +50479,10 @@ prs:
     base: main
     branch: codex/seo-platform-10-f-consumer-convergence
     title: "feat(seo): converge public URL Truth consumers"
-    status: in_progress
+    status: merged
+    pr: 3832
+    head_sha: 19ab8a7eb5da21032ee93b84150c4e8856d3510b
+    merge_commit_sha: cfc5e23484a3e0e55f5cbfbabf0f17e899797e0f
     depends_on: [SEO-PLATFORM-10-E]
     train_scope: seo_platform_10_public_consumer_convergence
     risk_level: controlled_discoverability_consumer_projection
@@ -50502,6 +50505,37 @@ prs:
     validation:
       - focused sitemap, llms, llms-full parity, exclusion, material-lastmod, no-clock-fallback, and LKG tests
       - existing Career generator release-transition compatibility test; scoped Pint and PHP syntax; train JSON/YAML parsing; exact-scope validation; git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false
+
+  - id: SEO-PLATFORM-10-G
+    repo: fap-api
+    base: main
+    branch: codex/seo-platform-10-g-lifecycle-candidates
+    title: "feat(seo): evaluate content lifecycle candidates"
+    status: in_progress
+    depends_on: [SEO-PLATFORM-10-F]
+    train_scope: seo_platform_10_lifecycle_review_decay_candidates
+    risk_level: read_only_content_lifecycle_policy
+    scope:
+      - Resolve an explicit review cycle for every public Page Family, independently supported locale, and low, medium, or high claim-risk combination.
+      - Generate deterministic review-overdue and confirmed content-decay candidates with evidence revision, material fingerprint, calculation time, and stable candidate identity.
+      - Hold candidates when runtime incidents are active or GSC evidence is stale, invalid, or sample-insufficient; allow only refresh, merge, or retire recommendations.
+    do_not:
+      - Mutate content authority, URL Truth, CMS, public content, indexability, sitemap, llms, Search, GSC, cache, or production data.
+      - Automatically publish, noindex, delete, merge, refresh, retire, or otherwise execute a lifecycle recommendation.
+      - Infer decay without the existing complete-window, repeated-detection, baseline, incident, seasonality, and GSC quality evidence contract.
+    allowed_paths:
+      - backend/app/Services/SeoIntel/Lifecycle/ContentLifecycleReviewPolicy.php
+      - backend/app/Services/SeoIntel/Lifecycle/ContentLifecycleCandidateEvaluator.php
+      - backend/tests/Feature/SeoIntel/SeoPlatform10ContentLifecycleCandidateTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - focused lifecycle policy, stable candidate, overdue, decay, stale GSC, insufficient sample, runtime incident, allowed-action, and read-only boundary tests
+      - existing detector registry and search/content detector compatibility tests; scoped Pint and PHP syntax; train JSON/YAML parsing; exact-scope validation; git diff --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     production_write_execution: false
     production_workflow_dispatched: false
