@@ -878,6 +878,77 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     }
 
     /**
+     * Remove only reader-equivalent v3 copies from already-addressable active/LKG payloads.
+     * Pointers and version identities stay unchanged; every write is verified by rehydrating
+     * the compact bytes back to the exact public v3 projection before continuing.
+     *
+     * @param  list<string>  $slugs
+     * @param  list<string>  $locales
+     */
+    public function compactDerivedJobDetailContentV3(array $slugs, array $locales): int
+    {
+        $writes = 0;
+        foreach ($slugs as $slug) {
+            $normalizedSlug = strtolower(trim($slug));
+            if ($normalizedSlug === '') {
+                continue;
+            }
+            foreach ($locales as $locale) {
+                $normalizedLocale = $this->normalizePublicLocale($locale);
+                $versions = [];
+                foreach ([
+                    $this->jobDetailActiveVersionKey($normalizedSlug, $normalizedLocale),
+                    $this->jobDetailLkgVersionKey($normalizedSlug, $normalizedLocale),
+                ] as $pointerKey) {
+                    $version = Cache::get($pointerKey);
+                    if (is_string($version) && trim($version) !== '') {
+                        $versions[$version] = true;
+                    }
+                }
+                foreach (array_keys($versions) as $version) {
+                    $payloadKey = $this->jobDetailVersionPayloadKey(
+                        $normalizedSlug,
+                        $normalizedLocale,
+                        $version,
+                    );
+                    $payload = Cache::get($payloadKey);
+                    $storedContentV3 = is_array($payload)
+                        ? data_get($payload, 'display_surface_v1.content_v3')
+                        : null;
+                    if (! is_array($payload) || ! is_array($storedContentV3)) {
+                        continue;
+                    }
+                    $readerPayload = $this->hydrateDerivedContentV3(
+                        $payload,
+                        $normalizedSlug,
+                        $normalizedLocale,
+                    );
+                    $readerContentV3 = data_get($readerPayload, 'display_surface_v1.content_v3');
+                    if (! is_array($readerContentV3)) {
+                        continue;
+                    }
+                    $compact = $payload;
+                    unset($compact['display_surface_v1']['content_v3']);
+                    Cache::forever($payloadKey, $compact);
+                    $stored = Cache::get($payloadKey);
+                    if (! is_array($stored)
+                        || data_get($stored, 'display_surface_v1.content_v3') !== null
+                        || data_get(
+                            $this->hydrateDerivedContentV3($stored, $normalizedSlug, $normalizedLocale),
+                            'display_surface_v1.content_v3',
+                        ) !== $readerContentV3) {
+                        Cache::forever($payloadKey, $payload);
+                        throw new \RuntimeException('Career detail v3 cache compaction verification failed.');
+                    }
+                    $writes++;
+                }
+            }
+        }
+
+        return $writes;
+    }
+
+    /**
      * Atomically activate an already verified batch of immutable detail payloads
      * after database exposure commits. Pointer snapshots are restored if any
      * target cannot be verified or switched.

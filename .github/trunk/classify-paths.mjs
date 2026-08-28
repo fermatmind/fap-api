@@ -59,8 +59,10 @@ export function classifyPaths(inputPaths) {
       /(^|\/)(?:Commerce|Payments?|Billing|Entitlement)(\/|\.)/i,
       /(^|\/)(?:payments?|commerce|billing|entitlements?)(?:\.php|\.json|\/)/i,
     ]);
-    const careerCurrentManagedCache = path ===
-      "backend/app/Services/Career/PublicCareerAuthorityResponseCache.php";
+    const careerCurrentManagedCache = [
+      "backend/app/Domain/Career/Display/CareerCurrentAuthorityCacheGateway.php",
+      "backend/app/Services/Career/PublicCareerAuthorityResponseCache.php",
+    ].includes(path);
     const cache = !careerCurrentManagedCache && matches(path, [
       /(^|\/)(?:Cache|Redis|Projection)(\/|\.)/,
       /(?:cache|redis|projection|materiali[sz]ed|active_pointer|lkg)/i,

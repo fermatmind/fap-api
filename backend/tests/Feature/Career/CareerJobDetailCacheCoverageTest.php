@@ -140,7 +140,7 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
             'hero' => ['h1' => 'One'],
             'definition_block' => ['body' => 'Authoritative body.'],
         ];
-        $version = $cache->publishJobDetailReadModel('one', 'en', [
+        $payload = [
             'display_surface_v1' => [
                 'page' => [
                     'locale' => 'en',
@@ -149,11 +149,18 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
                 'sources' => [],
                 'content_v3' => app(CareerContentV3Projector::class)->project('one', 'en', $page, null),
             ],
-        ]);
+        ];
+        $version = $cache->publishJobDetailReadModel('one', 'en', $payload);
+        $historicalPayload = $payload;
+        $historicalPayload['display_surface_v1']['content_v3'] = ['historical_projection' => true];
+        Cache::forever($this->versionPayloadKey('one', 'en', $version), $historicalPayload);
+
+        $compactionWrites = $cache->compactDerivedJobDetailContentV3(['one'], ['en']);
 
         $stored = Cache::get($this->versionPayloadKey('one', 'en', $version));
         $read = $cache->jobDetailRead('one', 'en');
 
+        $this->assertSame(1, $compactionWrites);
         $this->assertIsArray($stored);
         $this->assertArrayNotHasKey('content_v3', $stored['display_surface_v1']);
         $this->assertSame('fresh', $read['state']);

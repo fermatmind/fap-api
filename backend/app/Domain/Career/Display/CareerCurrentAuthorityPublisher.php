@@ -63,10 +63,15 @@ final class CareerCurrentAuthorityPublisher
         $prepared = [];
         $rollbackSnapshots = [];
         $plan = null;
+        $cacheCompactionWrites = 0;
 
         try {
             $authority = $this->loader->loadShardedForPublish($backendRoot);
             $this->assertAccountantsBoundaryNotice($authority['rows']);
+            $cacheCompactionWrites = $this->cache->compactDerivedContentV3(
+                $authority['slugs'],
+                CareerCurrentAuthorityPackage::LOCALES,
+            );
             $plan = DB::transaction(fn (): array => $this->applyDatabasePlan(
                 $authority['rows'],
                 (string) $authority['summary']['sharded_aggregate_sha256'],
@@ -125,6 +130,7 @@ final class CareerCurrentAuthorityPublisher
             $this->assertManualHold();
 
             $writeCounts = $plan['write_counts'] + [
+                'cache_derived_compaction_write_count' => $cacheCompactionWrites,
                 'cache_candidate_write_count' => count($prepared) * 2,
                 'cache_pointer_activation_count' => count($prepared),
                 'occupation_write_count' => 0,

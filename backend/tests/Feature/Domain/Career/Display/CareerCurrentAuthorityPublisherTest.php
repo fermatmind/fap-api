@@ -640,6 +640,11 @@ final class FakeCareerCurrentAuthorityCacheGateway extends CareerCurrentAuthorit
         return ['slug' => $slug, 'locale' => $locale, 'version' => 'candidate-'.$locale, 'status' => 'ready', 'classification' => 'ready_staged'];
     }
 
+    public function compactDerivedContentV3(array $slugs, array $locales): int
+    {
+        return 0;
+    }
+
     public function preparedPayload(array $entry): ?array
     {
         if ($this->mode === 'prepared_version_field') {

@@ -24,6 +24,12 @@ class CareerCurrentAuthorityCacheGateway
         return $this->cache->preparedJobDetailReplacementPayload($entry);
     }
 
+    /** @param list<string> $slugs @param list<string> $locales */
+    public function compactDerivedContentV3(array $slugs, array $locales): int
+    {
+        return $this->cache->compactDerivedJobDetailContentV3($slugs, $locales);
+    }
+
     /** @param list<array<string,mixed>> $entries @return array<string,mixed> */
     public function activate(array $entries): array
     {

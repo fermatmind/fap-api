@@ -79,6 +79,7 @@ test("binds Career Current release and runtime projection dependencies to its op
   assert.equal(builder.operations.career_current_authority_release, true);
   assert.equal(cacheGateway.operations.career_current_authority_release, true);
   assert.equal(responseCache.operations.career_current_authority_release, true);
+  assert.equal(cacheGateway.flags.cache_runtime_projection, false);
   assert.equal(responseCache.flags.application_code, true);
   assert.equal(responseCache.flags.cache_runtime_projection, false);
   assert.equal(adjacent.operations.career_current_authority_release, false);
