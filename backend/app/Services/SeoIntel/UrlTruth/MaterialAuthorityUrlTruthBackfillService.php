@@ -49,7 +49,7 @@ final class MaterialAuthorityUrlTruthBackfillService
             [$readback, $rerun] = $this->connection()->transaction(function () use ($items, $canarySize): array {
                 $applicable = array_values(array_filter(
                     $items,
-                    static fn (array $item): bool => in_array($item['action'], ['apply', 'retire'], true),
+                    static fn (array $item): bool => $item['write_required'],
                 ));
                 $batches = array_filter([
                     ['stage' => 'canary', 'items' => array_slice($applicable, 0, $canarySize)],
@@ -68,13 +68,15 @@ final class MaterialAuthorityUrlTruthBackfillService
 
                 $freshUrls = $this->eligibleUrls(10000) ?? [];
                 $freshDecisions = $this->latestDecisions(10000) ?? [];
-                [, $rerunCounts] = $this->plan($freshUrls, $freshDecisions);
+                [$rerunItems, $rerunCounts] = $this->plan($freshUrls, $freshDecisions);
+                $pendingWrites = count(array_filter($rerunItems, static fn (array $item): bool => $item['write_required']));
                 $rerun = [
                     'apply' => $rerunCounts['apply'],
                     'retire' => $rerunCounts['retire'],
                     'hold' => $rerunCounts['hold'],
                     'no_change' => $rerunCounts['no_change'],
-                    'passed' => $rerunCounts['apply'] === 0 && $rerunCounts['retire'] === 0,
+                    'pending_writes' => $pendingWrites,
+                    'passed' => $pendingWrites === 0,
                 ];
                 if (! $rerun['passed']) {
                     throw new RuntimeException('material_authority_drift');
@@ -154,7 +156,7 @@ final class MaterialAuthorityUrlTruthBackfillService
             $path = $this->canonicalPath((string) $url->canonical_url);
             $family = $this->decisionFamily((string) $url->page_family);
             $decision = $decisions[$this->identityKey($family, (string) $url->locale, $path)] ?? null;
-            $action = $this->action($url, $decision, $path);
+            [$action, $holdReason, $writeRequired] = $this->classification($url, $decision, $path);
             $counts[$action]++;
             $items[] = [
                 'url_id' => (int) $url->id,
@@ -162,6 +164,8 @@ final class MaterialAuthorityUrlTruthBackfillService
                 'family' => $family,
                 'locale' => (string) $url->locale,
                 'action' => $action,
+                'hold_reason' => $holdReason,
+                'write_required' => $writeRequired,
                 'decision' => $decision,
             ];
         }
@@ -169,10 +173,13 @@ final class MaterialAuthorityUrlTruthBackfillService
         return [$items, $counts];
     }
 
-    private function action(object $url, ?ContentMaterialDecision $decision, string $path): string
+    /** @return array{0:string,1:string|null,2:bool} */
+    private function classification(object $url, ?ContentMaterialDecision $decision, string $path): array
     {
-        if (! $decision instanceof ContentMaterialDecision
-            || ! hash_equals($path, (string) $decision->public_identity)
+        if (! $decision instanceof ContentMaterialDecision) {
+            return ['hold', 'material_decision_missing', (string) $url->material_authority_state !== 'hold'];
+        }
+        if (! hash_equals($path, (string) $decision->public_identity)
             || preg_match('/\A[a-f0-9]{64}\z/', (string) $decision->material_fingerprint) !== 1
             || preg_match('/\A[a-f0-9]{64}\z/', (string) $decision->decision_key) !== 1
             || trim((string) $decision->authority_revision_kind) === ''
@@ -180,7 +187,7 @@ final class MaterialAuthorityUrlTruthBackfillService
             || trim((string) $decision->evidence_ref) === ''
             || ! in_array((string) $decision->publication_state, ['published', 'unpublished'], true)
             || $decision->material_changed_at === null) {
-            return 'hold';
+            return ['hold', 'material_decision_incomplete', (string) $url->material_authority_state !== 'hold'];
         }
         $state = (string) $decision->publication_state === 'published' ? 'trusted' : 'retired';
         $same = (string) $url->material_authority_state === $state
@@ -190,7 +197,9 @@ final class MaterialAuthorityUrlTruthBackfillService
             && (string) $url->material_lastmod_source === 'material_fingerprint.v1:'.(string) $decision->authority_revision_kind
             && $this->timestamp($url->material_lastmod_at) === $this->timestamp($decision->material_changed_at);
 
-        return $same ? 'no_change' : ($state === 'trusted' ? 'apply' : 'retire');
+        $action = $same ? 'no_change' : ($state === 'trusted' ? 'apply' : 'retire');
+
+        return [$action, null, ! $same];
     }
 
     /** @param list<array<string,mixed>> $items */
@@ -199,6 +208,13 @@ final class MaterialAuthorityUrlTruthBackfillService
         foreach ($items as $item) {
             /** @var ContentMaterialDecision $decision */
             $decision = $item['decision'];
+            if ($item['action'] === 'hold') {
+                $this->connection()->table('seo_urls')->where('id', $item['url_id'])->update([
+                    'material_authority_state' => 'hold',
+                ]);
+
+                continue;
+            }
             $state = $item['action'] === 'retire' ? 'retired' : 'trusted';
             $values = [
                 'material_fingerprint' => (string) $decision->material_fingerprint,
@@ -226,6 +242,13 @@ final class MaterialAuthorityUrlTruthBackfillService
             /** @var ContentMaterialDecision $decision */
             $decision = $item['decision'];
             $row = $rows->get($item['url_id']);
+            if ($item['action'] === 'hold') {
+                if ($row !== null && (string) $row->material_authority_state === 'hold') {
+                    $actual++;
+                }
+
+                continue;
+            }
             $state = $item['action'] === 'retire' ? 'retired' : 'trusted';
             if ($row !== null
                 && (string) $row->material_authority_state === $state
@@ -255,6 +278,7 @@ final class MaterialAuthorityUrlTruthBackfillService
                 'canonical_hash' => $item['canonical_hash'],
                 'family' => $item['family'],
                 'locale' => $item['locale'],
+                'hold_reason' => $item['hold_reason'],
                 'public_identity_hash' => $decision instanceof ContentMaterialDecision
                     ? hash('sha256', (string) $decision->public_identity)
                     : null,

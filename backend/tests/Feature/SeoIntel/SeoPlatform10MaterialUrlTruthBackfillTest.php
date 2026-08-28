@@ -63,6 +63,7 @@ final class SeoPlatform10MaterialUrlTruthBackfillTest extends TestCase
         self::assertTrue((bool) data_get($execute, 'idempotent_rerun.passed'));
         self::assertSame(0, data_get($execute, 'idempotent_rerun.apply'));
         self::assertSame(1, data_get($execute, 'idempotent_rerun.hold'));
+        self::assertSame(0, data_get($execute, 'idempotent_rerun.pending_writes'));
 
         $projected = DB::connection('seo_intel')->table('seo_urls')->where('id', 1)->first();
         self::assertSame((string) $decision->material_fingerprint, $projected->material_fingerprint);
@@ -123,7 +124,7 @@ final class SeoPlatform10MaterialUrlTruthBackfillTest extends TestCase
         self::assertSame(1, data_get($hold, 'plan.counts.hold'));
         self::assertSame($trusted->material_fingerprint, $retained->material_fingerprint);
         self::assertSame($trusted->material_lastmod_at, $retained->material_lastmod_at);
-        self::assertSame('trusted', $retained->material_authority_state);
+        self::assertSame('hold', $retained->material_authority_state);
 
         ContentMaterialDecision::query()->create([
             'org_id' => 0,
