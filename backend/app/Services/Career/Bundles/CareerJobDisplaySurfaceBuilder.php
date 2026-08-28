@@ -177,7 +177,7 @@ final class CareerJobDisplaySurfaceBuilder
             $contentV3 = $this->contentV3Projector->project(
                 $canonicalSlug,
                 $this->publicLocale($normalizedLocale),
-                $pageContent,
+                $page['content'],
                 is_array($presentationV2) ? $presentationV2 : null,
                 is_array($sources) ? $sources : [],
             );

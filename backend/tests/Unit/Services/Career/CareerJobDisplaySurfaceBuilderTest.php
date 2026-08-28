@@ -105,7 +105,7 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $occupation = $this->createOccupation('accountants-and-auditors');
         $authority = app(CareerCurrentAuthorityPackage::class)->load(base_path());
         $row = $authority['rows']['accountants-and-auditors'];
-        $this->createDisplayAsset($occupation, app(CareerCurrentAuthorityPackage::class)->databaseAttributes($row));
+        $asset = $this->createDisplayAsset($occupation, app(CareerCurrentAuthorityPackage::class)->databaseAttributes($row));
         $this->assertNull(app(CareerJobDisplaySurfaceBuilder::class)->diagnosticFailureCodeForSlug(
             'accountants-and-auditors',
             'zh-CN',
@@ -115,8 +115,17 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
 
         $this->assertArrayNotHasKey('asset_version', $surface);
         $this->assertArrayNotHasKey('template_version', $surface);
-        $expected = app(CareerCurrentAuthorityPackage::class)->publicProjection($row, 'zh-CN');
+        $persistedRow = array_replace($row, [
+            'component_order_json' => $asset->component_order_json,
+            'page_payload_json' => $asset->page_payload_json,
+            'sources_json' => $asset->sources_json,
+            'structured_data_json' => $asset->structured_data_json,
+            'implementation_contract_json' => $asset->implementation_contract_json,
+            'metadata_json' => $asset->metadata_json,
+        ]);
+        $expected = app(CareerCurrentAuthorityPackage::class)->publicProjection($persistedRow, 'zh-CN');
         $this->assertSame($row['component_order_json'], $surface['component_order']);
+        $this->assertSame($expected['content_v3'], $surface['content_v3']);
         foreach ($surface['component_order'] as $componentId) {
             $this->assertSame(
                 $expected['page']['content'][$componentId],
