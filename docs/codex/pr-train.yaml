@@ -50407,9 +50407,10 @@ prs:
     base: main
     branch: codex/seo-platform-10-d-personality-adapter
     title: "feat(seo): record Personality material decisions"
-    status: in_progress
+    status: merged
     pr: 3830
     head_sha: 32adb412a2e2d4f04610a2b8725b6e5d64dd2424
+    merge_commit_sha: f4f1e211fdf33c7cca721d0b9eee631345a6c070
     depends_on: [SEO-PLATFORM-10-C]
     train_scope: seo_platform_10_personality_material_adapter
     risk_level: controlled_personality_public_authority_projection
@@ -50433,6 +50434,40 @@ prs:
     validation:
       - focused reviewed revision, source-hash non-material, locale-safe MBTI, public-asset, private-result rejection, rollback, HOLD, and idempotency tests
       - scoped Pint and PHP syntax; exact-package and TOP100 contract tests; train JSON/YAML parsing; exact-scope validation; git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false
+
+  - id: SEO-PLATFORM-10-E
+    repo: fap-api
+    base: main
+    branch: codex/seo-platform-10-e-url-truth-backfill
+    title: "feat(seo): project material authority into URL Truth"
+    status: in_progress
+    pr: 3831
+    head_sha: e72e07b2a3f62077df4fd441f5a62d3660621c3a
+    depends_on: [SEO-PLATFORM-10-D]
+    train_scope: seo_platform_10_url_truth_material_event_backfill
+    risk_level: controlled_url_truth_expand_and_bounded_projection
+    scope:
+      - Expand URL Truth with nullable material fingerprint, material lastmod, decision lineage, and fail-closed authority state fields.
+      - Build a bounded deterministic artifact that projects only latest append-only material decisions through dry-run, canary, exact readback, and idempotent rerun stages.
+      - Preserve trusted values on unknown legacy decisions, keep unknown legacy rows on HOLD, and trace known unpublish events as retired URL Truth without rewriting ordinary timestamps.
+    do_not:
+      - Change sitemap, llms, llms-full, cache, public runtime, lifecycle policy, CMS UI, Search, IndexNow, or GSC behavior.
+      - Derive authority from sitemap, llms, cache, runtime HTTP, ordinary updated_at, compile, import, build, or deploy timestamps.
+      - Execute production backfill, perform direct production database writes, dispatch workflows, publish content, or mutate CMS authority.
+    allowed_paths:
+      - backend/app/Console/Commands/SeoPlatformUrlTruthMaterialBackfillCommand.php
+      - backend/app/Services/SeoIntel/UrlTruth/MaterialAuthorityUrlTruthBackfillService.php
+      - backend/database/migrations/seo_intel/2026_08_28_030000_expand_url_truth_material_authority.php
+      - backend/tests/Feature/SeoIntel/SeoPlatform10MaterialUrlTruthBackfillTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - focused bounded dry-run, canary, exact readback, HOLD, retire, rerun idempotency, and existing URL Truth compatibility tests
+      - fresh SQLite expand migration; scoped Pint and PHP syntax; train JSON/YAML parsing; exact-scope validation; git diff --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     production_write_execution: false
     production_workflow_dispatched: false

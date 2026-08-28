@@ -106596,7 +106596,7 @@
     "base": "main",
     "branch": "codex/seo-platform-10-d-personality-adapter",
     "title": "feat(seo): record Personality material decisions",
-    "status": "pr_open",
+    "status": "merged",
     "commit_sha": "32adb412a2e2d4f04610a2b8725b6e5d64dd2424",
     "pr_number": 3830,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3830",
@@ -106616,8 +106616,8 @@
       "dependency": {"status": "passed", "evidence": "SEO-PLATFORM-10-C merged as 09dccf442068923e2f9cf4373671face436dbbfe and its exact-SHA main CI passed before 10-D implementation began."},
       "local_validation": {"status": "passed", "evidence": "Focused Personality material, exact-package public asset, TOP100 contract, and adapter suites passed 19 tests / 188 assertions. Reviewed revision binding, source-hash and review-time non-material behavior, real SEO change, bilingual locale identity, rollback/HOLD, Big Five/Enneagram isolation, and private-result rejection passed; scoped Pint, PHP syntax, train JSON/YAML parsing, and diff checks passed. The complete MBTI verifier was not duplicated because the repository heavy-process guard found another active FermatMind PHPUnit process; required GitHub checks remain authoritative."},
       "scope": {"status": "passed", "evidence": "The declared scope is limited to the Personality material-decision adapter, existing exact-package publication and rollback transaction integration, focused tests, and minimum train reconciliation."},
-      "github_ci": {"status": "pending", "evidence": "PR #3830 is open from validated implementation commit 32adb412a2e2d4f04610a2b8725b6e5d64dd2424; required checks are pending."},
-      "deployment": {"status": "pending", "evidence": "No 10-D automatic exact-SHA deployment exists yet."}
+      "github_ci": {"status": "passed", "evidence": "PR #3830 merged as f4f1e211fdf33c7cca721d0b9eee631345a6c070 and exact-SHA main CI run 33135555412 passed every classifier-selected job."},
+      "deployment": {"status": "in_progress", "evidence": "Automatic exact-SHA deployment runs 33135820594 and 33135900111 are non-required and still pending or in progress; no workflow was manually dispatched or retried."}
     },
     "production_write_execution": false,
     "production_workflow_dispatched": false,
@@ -106641,6 +106641,63 @@
         "at": "2026-08-28T10:20:00+08:00",
         "status": "pr_open",
         "note": "Opened PR #3830 from exact validated implementation commit 32adb412a2e2d4f04610a2b8725b6e5d64dd2424. The eight-path scope is clean; required checks are pending."
+      },
+      {
+        "at": "2026-08-28T10:24:31+08:00",
+        "status": "merged",
+        "note": "PR #3830 was squash-merged as f4f1e211fdf33c7cca721d0b9eee631345a6c070; exact-SHA main CI run 33135555412 passed. Its automatic deployments are non-required and were not manually dispatched."
+      }
+    ]
+  },
+  "SEO-PLATFORM-10-E": {
+    "id": "SEO-PLATFORM-10-E",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/seo-platform-10-e-url-truth-backfill",
+    "title": "feat(seo): project material authority into URL Truth",
+    "status": "pr_open",
+    "commit_sha": "e72e07b2a3f62077df4fd441f5a62d3660621c3a",
+    "pr_number": 3831,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3831",
+    "depends_on": ["SEO-PLATFORM-10-D"],
+    "allowed_paths": [
+      "backend/app/Console/Commands/SeoPlatformUrlTruthMaterialBackfillCommand.php",
+      "backend/app/Services/SeoIntel/UrlTruth/MaterialAuthorityUrlTruthBackfillService.php",
+      "backend/database/migrations/seo_intel/2026_08_28_030000_expand_url_truth_material_authority.php",
+      "backend/tests/Feature/SeoIntel/SeoPlatform10MaterialUrlTruthBackfillTest.php",
+      "docs/codex/pr-train.yaml",
+      "docs/codex/pr-train-state.json"
+    ],
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "The operator explicitly authorized SEO-PLATFORM-10-E as the fifth item in the ordered eight-PR train."},
+      "dependency": {"status": "passed", "evidence": "SEO-PLATFORM-10-D merged as f4f1e211fdf33c7cca721d0b9eee631345a6c070 and its exact-SHA main CI passed before 10-E implementation began."},
+      "local_validation": {"status": "passed", "evidence": "Bounded material backfill and existing URL Truth compatibility suites passed 12 tests / 140 assertions. Dry-run, canary, exact readback, stable artifact hash, durable HOLD with trusted-value retention, known unpublish retirement, disabled-lane and bound failures, repeat no-op, unchanged ordinary lastmod/updated_at, scoped Pint, PHP syntax, command registration, train parsing, and diff checks passed."},
+      "scope": {"status": "passed", "evidence": "Scope is limited to the URL Truth material-decision projection, forward-only nullable schema expansion, bounded backfill command, focused tests, and minimum train reconciliation."},
+      "github_ci": {"status": "pending", "evidence": "PR #3831 is open from validated implementation commit e72e07b2a3f62077df4fd441f5a62d3660621c3a; required checks are pending."},
+      "deployment": {"status": "pending", "evidence": "No 10-E automatic exact-SHA deployment exists yet; production backfill execution is deferred to 10-H."}
+    },
+    "production_write_execution": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "search_channel_action": false,
+    "transitions": [
+      {
+        "at": "2026-08-28T10:34:11+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started from merged 10-D after confirming the existing URL Truth reconciliation, append-only material-decision authority, and missing material projection fields. No production backfill, CMS, cache, consumer, Search, or workflow action was performed."
+      },
+      {
+        "at": "2026-08-28T10:38:01+08:00",
+        "status": "local_validation_passed",
+        "note": "The bounded artifact accepts only latest append-only material decisions, maps only Article, Career job, and public Personality adapter surfaces, preserves unknown legacy and prior trusted values on HOLD, and proves canary/readback/idempotent rerun without production execution."
+      },
+      {
+        "at": "2026-08-28T10:39:21+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #3831 from validated implementation commit e72e07b2a3f62077df4fd441f5a62d3660621c3a. The six-path scope is clean; required checks are pending."
       }
     ]
   }
