@@ -476,7 +476,11 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                     ? $readiness['version']
                     : null;
                 $payload = is_array($readiness['payload'] ?? null)
-                    ? $readiness['payload']
+                    ? $this->hydrateDerivedContentV3(
+                        $readiness['payload'],
+                        $slug,
+                        $locale,
+                    )
                     : null;
                 $published = $payload !== null && in_array(
                     $classification,

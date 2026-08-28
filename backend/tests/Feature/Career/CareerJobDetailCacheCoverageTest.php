@@ -164,6 +164,7 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
 
         $stored = Cache::get($this->versionPayloadKey('one', 'en', $version));
         $read = $cache->jobDetailRead('one', 'en');
+        $publication = $cache->jobDetailPublicationSnapshot(['one'], ['en']);
 
         $this->assertSame(1, $compactionWrites);
         $this->assertIsArray($stored);
@@ -179,6 +180,10 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         $this->assertSame('Authoritative body.', data_get(
             $read,
             'payload.display_surface_v1.content_v3.blocks.0.items.0.data.paragraphs.0',
+        ));
+        $this->assertSame('career.detail.content.v3', data_get(
+            $publication,
+            'one.en.payload.display_surface_v1.content_v3.contract_version',
         ));
     }
 
