@@ -295,8 +295,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     environment: production
-    outputs:
-      career_parity_digest: ${{ steps.career-parity.outputs.receipt_digest }}
     env:
       TARGET: production
       DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
@@ -423,7 +421,6 @@ jobs:
               and ([.write_counts[]] | all(. == 0))
               and (.receipt_digest | test("^[0-9a-f]{64}$"))
             ' "$receipt" >/dev/null
-          echo "receipt_digest=$(jq -r .receipt_digest "$receipt")" >> "$GITHUB_OUTPUT"
       - name: Persist push-to-production timing receipt
         if: always()
         env:
@@ -656,7 +653,7 @@ jobs:
   career-current-publish:
     name: Publish Career Current authority
     needs: [policy, staging, production]
-    if: needs.production.result == 'success' && needs.policy.outputs.career_current == 'true' && needs.production.outputs.career_parity_digest != ''
+    if: needs.production.result == 'success' && needs.policy.outputs.career_current == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 120
     environment: production
@@ -668,7 +665,6 @@ jobs:
       VERSIONLESS_PROJECTION_SHA256: ${{ needs.policy.outputs.career_current_projection_sha256 }}
       OPERATION_KEY: ${{ needs.policy.outputs.career_current_operation_key }}
       CI_PACKAGE_SCAN_RECEIPT_DIGEST: ${{ needs.policy.outputs.career_parity_receipt_digest }}
-      PRODUCTION_PARITY_RECEIPT_DIGEST: ${{ needs.production.outputs.career_parity_digest }}
       PARITY_COMPILER_DIGEST: ${{ needs.policy.outputs.career_parity_compiler_digest }}
       PARITY_CODEC_DIGEST: ${{ needs.policy.outputs.career_parity_codec_digest }}
       FULL_SCAN: ${{ needs.policy.outputs.career_current_full_scan == 'true' && '1' || '0' }}
@@ -682,6 +678,11 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
           persist-credentials: false
+      - name: Download exact production Career parity receipt
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          name: trunk-production-${{ github.event.workflow_run.head_sha }}
+          path: artifacts/career-current-production-parity
       - name: Start SSH agent without key metadata output
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -707,6 +708,7 @@ jobs:
           dir=artifacts/career-current-authority-publish
           receipt="$dir/receipt.json"
           remote_stderr="$RUNNER_TEMP/career-current-authority-publish.stderr"
+          production_parity_receipt="artifacts/career-current-production-parity/career-current-authority-production-preactivation-parity.json"
           mkdir -p "$dir"
           [[ "$DEPLOY_SHA" =~ ^[0-9a-f]{40}$ ]]
           [[ "$SOURCE_MERGE_SHA" =~ ^[0-9a-f]{40}$ ]]
@@ -715,6 +717,25 @@ jobs:
           [[ "$VERSIONLESS_PROJECTION_SHA256" =~ ^[0-9a-f]{64}$ ]]
           [[ "$OPERATION_KEY" =~ ^[0-9a-f]{64}$ ]]
           [[ "$CI_PACKAGE_SCAN_RECEIPT_DIGEST" =~ ^[0-9a-f]{64}$ ]]
+          test -f "$production_parity_receipt"
+          test ! -L "$production_parity_receipt"
+          jq -e --arg sha "$DEPLOY_SHA" --arg projection "$VERSIONLESS_PROJECTION_SHA256" \
+            --arg compiler "$PARITY_COMPILER_DIGEST" --arg codec "$PARITY_CODEC_DIGEST" '
+              .contract_version == "career.current_authority_parity.v2"
+              and .status == "pass"
+              and .mode == "production-preactivation"
+              and .release_sha == $sha
+              and .package.projection_digest == $projection
+              and .package.compiler_digest == $compiler
+              and .package.codec_digest == $codec
+              and .validation_scope.canonical_slugs == ["accountants-and-auditors"]
+              and .validation_scope.locales == ["en", "zh-CN"]
+              and .validation_scope.locale_page_count == 2
+              and ([.write_counts[]] | all(. == 0))
+              and (.receipt_digest | test("^[0-9a-f]{64}$"))
+            ' "$production_parity_receipt" >/dev/null
+          PRODUCTION_PARITY_RECEIPT_DIGEST="$(jq -r .receipt_digest "$production_parity_receipt")"
+          export PRODUCTION_PARITY_RECEIPT_DIGEST
           [[ "$PRODUCTION_PARITY_RECEIPT_DIGEST" =~ ^[0-9a-f]{64}$ ]]
           [[ "$PARITY_COMPILER_DIGEST" =~ ^[0-9a-f]{64}$ ]]
           [[ "$PARITY_CODEC_DIGEST" =~ ^[0-9a-f]{64}$ ]]
