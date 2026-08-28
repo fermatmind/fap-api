@@ -2814,7 +2814,9 @@ prs:
     branch: codex/enneagram-search-url-truth-repair-01
     title: "ENNEAGRAM-SEARCH-URL-TRUTH-REPAIR-01: add 116-asset Enneagram URL Truth handoff"
     train_scope: enneagram_search_url_truth_repair
-    status: in_progress
+    status: pr_open
+    pr: 3829
+    head_sha: 4c40be30521681bd19733c6072617d2e08d16e1c
     scope:
       - Add a fail-closed URL Truth source and artifact policy for exactly 116 published bilingual Enneagram CMS assets across hub, center, core_type, wing, and instinctual_subtype entities.
       - Require exact count, unique canonical paths, indexability/publicity, source-hash provenance, safe routes, artifact SHA confirmation, and authoritative readback before a bounded URL Truth write may occur.

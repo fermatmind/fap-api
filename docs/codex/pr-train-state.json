@@ -106523,7 +106523,10 @@
     "base": "main",
     "branch": "codex/seo-platform-10-c-career-adapter",
     "title": "feat(seo): record Career Current material decisions",
-    "status": "in_progress",
+    "status": "pr_open",
+    "commit_sha": "4c40be30521681bd19733c6072617d2e08d16e1c",
+    "pr_number": 3829,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3829",
     "depends_on": ["SEO-PLATFORM-10-B"],
     "allowed_paths": [
       "backend/app/Domain/Career/Display/CareerMaterialDecisionService.php",
@@ -106549,7 +106552,7 @@
         "status": "passed",
         "evidence": "The declared scope is limited to the Career Current material-decision adapter, its existing publish and compensation transaction integration, focused tests, and minimum train reconciliation."
       },
-      "github_ci": {"status": "pending", "evidence": "PR has not been opened."},
+      "github_ci": {"status": "pending", "evidence": "PR #3829 is open from the exact validated implementation commit; required checks are pending."},
       "deployment": {"status": "pending", "evidence": "No 10-C automatic exact-SHA deployment exists yet."}
     },
     "production_write_execution": false,
@@ -106569,6 +106572,11 @@
         "at": "2026-08-28T09:49:00+08:00",
         "status": "local_validation_passed",
         "note": "The adapter writes only deterministic decision metadata inside the existing Current publish transaction, appends restoration state in the existing compensation transaction, independently preserves each locale's material time, and excludes compile/import/build context. Full installed 10-module Current contract coverage passed; no content or external write occurred."
+      },
+      {
+        "at": "2026-08-28T09:49:52+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #3829 from exact validated implementation commit 4c40be30521681bd19733c6072617d2e08d16e1c. GitHub reports the five-path scoped diff mergeable; required checks are pending."
       }
     ]
   }
