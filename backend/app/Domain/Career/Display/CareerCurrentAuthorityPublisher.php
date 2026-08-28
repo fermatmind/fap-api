@@ -439,7 +439,10 @@ final class CareerCurrentAuthorityPublisher
                         'structured_data_from_visible_content' => 'CURRENT_CACHE_STRUCTURED_DATA_MISMATCH',
                         'implementation_contract' => 'CURRENT_CACHE_IMPLEMENTATION_CONTRACT_MISMATCH',
                         'presentation_v1' => 'CURRENT_CACHE_PRESENTATION_MISMATCH',
-                        'content_v3' => 'CURRENT_CACHE_CONTENT_V3_MISMATCH',
+                        'content_v3' => $this->contentV3MismatchCode(
+                            (array) $expected[$field],
+                            (array) ($actual[$field] ?? []),
+                        ),
                         default => 'CURRENT_CACHE_CONTENT_MISMATCH',
                     };
                 }
@@ -449,6 +452,62 @@ final class CareerCurrentAuthorityPublisher
         } catch (CareerCurrentAuthorityPackageFailure) {
             return 'CURRENT_CACHE_CONTENT_MISMATCH';
         }
+    }
+
+    /** @param array<string,mixed> $expected @param array<string,mixed> $actual */
+    private function contentV3MismatchCode(array $expected, array $actual): string
+    {
+        foreach (['contract_version', 'locale', 'subject', 'content_state', 'source_content_sha256'] as $field) {
+            if (CareerCurrentAuthorityPackage::hashValue($expected[$field] ?? null)
+                !== CareerCurrentAuthorityPackage::hashValue($actual[$field] ?? null)) {
+                return 'CURRENT_CACHE_CONTENT_V3_'.strtoupper($field).'_MISMATCH';
+            }
+        }
+
+        $expectedBlocks = is_array($expected['blocks'] ?? null) ? $expected['blocks'] : [];
+        $actualBlocks = is_array($actual['blocks'] ?? null) ? $actual['blocks'] : [];
+        if (count($expectedBlocks) !== count($actualBlocks)) {
+            return 'CURRENT_CACHE_CONTENT_V3_BLOCK_COUNT_MISMATCH';
+        }
+        if (array_column($expectedBlocks, 'id') !== array_column($actualBlocks, 'id')) {
+            return 'CURRENT_CACHE_CONTENT_V3_BLOCK_ORDER_MISMATCH';
+        }
+        foreach ($expectedBlocks as $index => $expectedBlock) {
+            $actualBlock = $actualBlocks[$index] ?? null;
+            if (! is_array($expectedBlock) || ! is_array($actualBlock)) {
+                return 'CURRENT_CACHE_CONTENT_V3_BLOCK_SHAPE_MISMATCH';
+            }
+            foreach (['copy_key', 'content_state', 'availability'] as $field) {
+                if (($expectedBlock[$field] ?? null) !== ($actualBlock[$field] ?? null)) {
+                    return 'CURRENT_CACHE_CONTENT_V3_BLOCK_FIELD_MISMATCH';
+                }
+            }
+            $expectedItems = is_array($expectedBlock['items'] ?? null) ? $expectedBlock['items'] : [];
+            $actualItems = is_array($actualBlock['items'] ?? null) ? $actualBlock['items'] : [];
+            if (count($expectedItems) !== count($actualItems)) {
+                return 'CURRENT_CACHE_CONTENT_V3_ITEM_COUNT_MISMATCH';
+            }
+            if (array_column($expectedItems, 'id') !== array_column($actualItems, 'id')) {
+                return 'CURRENT_CACHE_CONTENT_V3_ITEM_ORDER_MISMATCH';
+            }
+            foreach ($expectedItems as $itemIndex => $expectedItem) {
+                $actualItem = $actualItems[$itemIndex] ?? null;
+                if (! is_array($expectedItem) || ! is_array($actualItem)) {
+                    return 'CURRENT_CACHE_CONTENT_V3_ITEM_SHAPE_MISMATCH';
+                }
+                foreach (['copy_key', 'type', 'availability'] as $field) {
+                    if (($expectedItem[$field] ?? null) !== ($actualItem[$field] ?? null)) {
+                        return 'CURRENT_CACHE_CONTENT_V3_ITEM_FIELD_MISMATCH';
+                    }
+                }
+                if (CareerCurrentAuthorityPackage::hashValue($expectedItem['data'] ?? null)
+                    !== CareerCurrentAuthorityPackage::hashValue($actualItem['data'] ?? null)) {
+                    return 'CURRENT_CACHE_CONTENT_V3_ITEM_DATA_MISMATCH';
+                }
+            }
+        }
+
+        return 'CURRENT_CACHE_CONTENT_V3_MISMATCH';
     }
 
     /** @param array<mixed> $value */
