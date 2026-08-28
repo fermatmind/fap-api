@@ -439,6 +439,7 @@ final class CareerCurrentAuthorityPublisher
                         'structured_data_from_visible_content' => 'CURRENT_CACHE_STRUCTURED_DATA_MISMATCH',
                         'implementation_contract' => 'CURRENT_CACHE_IMPLEMENTATION_CONTRACT_MISMATCH',
                         'presentation_v1' => 'CURRENT_CACHE_PRESENTATION_MISMATCH',
+                        'content_v3' => 'CURRENT_CACHE_CONTENT_V3_MISMATCH',
                         default => 'CURRENT_CACHE_CONTENT_MISMATCH',
                     };
                 }
