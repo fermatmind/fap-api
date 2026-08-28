@@ -55,6 +55,7 @@ test("requires the Career publisher for per-page canonical reader changes", () =
   for (const path of [
     "backend/app/Domain/Career/Display/CareerContentV3AuthorityPackage.php",
     "backend/app/Domain/Career/Display/CareerContentV3CanonicalReader.php",
+    "backend/app/Domain/Career/Display/CareerCurrentAuthorityCompatibilityReader.php",
     "backend/app/Providers/AppServiceProvider.php",
     "backend/app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php",
   ]) {

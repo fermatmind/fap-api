@@ -74,7 +74,7 @@ final class CareerCurrentAuthorityReleaseIntent
         }
 
         $manifestPath = rtrim($backendRoot, '/').'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH.'/manifest.json';
-        $authority = $this->loader->load($backendRoot);
+        $authority = $this->loader->indexForPublish($backendRoot);
         $manifest = $authority['manifest'];
         $summary = $authority['summary'];
         if (! hash_equals((string) $intent['manifest_sha256'], (string) hash_file('sha256', $manifestPath))

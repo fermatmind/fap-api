@@ -7,6 +7,7 @@ namespace Tests\Feature\Domain\Career\Display;
 use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
 use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Display\CareerCurrentAuthorityCacheGateway;
+use App\Domain\Career\Display\CareerCurrentAuthorityCompatibilityReader;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageLoader;
 use App\Domain\Career\Display\CareerCurrentAuthorityPublisher;
@@ -14,7 +15,6 @@ use App\Domain\Career\Display\CareerCurrentAuthorityPublisherFailure;
 use App\Domain\Career\Display\CareerCurrentAuthorityStateMachine;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Display\CareerJobDetailCanonicalCacheReader;
-use App\Domain\Career\Display\CareerMaterialDecisionService;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
@@ -63,6 +63,14 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         self::assertSame(4, $result['write_counts']['cache_candidate_write_count']);
         self::assertSame(2, $result['write_counts']['cache_pointer_activation_count']);
         self::assertSame(2, $result['public_readback']['verified_locale_page_count']);
+        self::assertSame(
+            CareerCurrentAuthorityPackage::hashValue([$row]),
+            $result['authority']['before_state_sha256'],
+        );
+        self::assertSame(
+            $result['authority']['before_state_sha256'],
+            $result['authority']['after_state_sha256'],
+        );
         self::assertFalse($result['idempotent_noop']);
         self::assertSame('legacy title', data_get(
             CareerJobDisplayAsset::query()->sole()->page_payload_json,
@@ -217,7 +225,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         file_put_contents($current.'/manifest.json', CareerCurrentAuthorityPackage::encodePrettyCanonical($manifest));
 
         $contentPackage = new CareerContentV3AuthorityPackage(1, 2, 0, CareerCurrentAuthorityPackage::hashValue(['actors']));
-        $authority = $contentPackage->load($root);
+        $authority = (new CareerCurrentAuthorityPackageLoader($contentPackage))->indexForPublish($root);
         $canonicalReader = new CareerContentV3CanonicalReader($contentPackage, $root);
         $cacheReader = new CareerJobDetailCanonicalCacheReader(
             app(PublicReviewContract::class), $canonicalReader,
@@ -292,7 +300,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
             /** @param array<string,mixed> $authority */
             public function __construct(private readonly array $authority) {}
 
-            public function loadForPublish(string $backendRoot): array
+            public function indexForPublish(string $backendRoot): array
             {
                 return $this->authority;
             }
@@ -303,7 +311,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
             $loader,
             $cache,
             app(CareerJobDisplaySurfaceBuilder::class),
-            app(CareerMaterialDecisionService::class),
+            new CareerCurrentAuthorityCompatibilityReader(new CareerCurrentAuthorityPackage),
             $stateMachine,
         );
     }

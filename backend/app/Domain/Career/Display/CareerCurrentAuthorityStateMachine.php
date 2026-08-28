@@ -38,6 +38,11 @@ final class CareerCurrentAuthorityStateMachine
         ];
     }
 
+    public function releaseLoadedContentPages(): void
+    {
+        $this->canonicalContent->forgetLoadedPages();
+    }
+
     /** @param array<string,mixed>|null $payload @param array<string,mixed> $row */
     public function assertPayload(?array $payload, array $row, string $locale): void
     {

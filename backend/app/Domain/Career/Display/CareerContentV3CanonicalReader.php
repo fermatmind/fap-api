@@ -158,6 +158,11 @@ class CareerContentV3CanonicalReader
         $this->pages = [];
     }
 
+    public function forgetLoadedPages(): void
+    {
+        $this->pages = [];
+    }
+
     private function locale(string $locale): string
     {
         $normalized = strtolower(trim($locale));

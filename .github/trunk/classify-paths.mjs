@@ -28,6 +28,7 @@ export const CAREER_PUBLISHER_BOUNDARY_MATRIX = [
   "backend/app/Domain/Career/Display/CareerContentV3Contract.php",
   "backend/app/Domain/Career/Display/CareerCurrentAuthorityPackage.php",
   "backend/app/Domain/Career/Display/CareerCurrentAuthorityPackageLoader.php",
+  "backend/app/Domain/Career/Display/CareerCurrentAuthorityCompatibilityReader.php",
   "backend/app/Domain/Career/Display/CareerShardedCurrentAuthorityPackage.php",
   "backend/app/Domain/Career/Display/CareerCurrentAuthorityPublisher.php",
   "backend/app/Domain/Career/Display/CareerCurrentAuthorityStateMachine.php",

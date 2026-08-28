@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Career\Display;
 
-use App\Models\CareerJobDisplayAsset;
 use App\Services\Career\Bundles\CareerJobDisplaySurfaceBuilder;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 use RuntimeException;
 use Throwable;
 
@@ -35,16 +32,6 @@ final class CareerCurrentAuthorityPublisher
         'writers-and-authors',
     ];
 
-    private const JSON_FIELDS = [
-        'component_order_json',
-        'page_payload_json',
-        'seo_payload_json',
-        'sources_json',
-        'structured_data_json',
-        'implementation_contract_json',
-        'metadata_json',
-    ];
-
     private readonly CareerCurrentAuthorityStateMachine $stateMachine;
 
     public function __construct(
@@ -52,7 +39,7 @@ final class CareerCurrentAuthorityPublisher
         private readonly CareerCurrentAuthorityPackageLoader $loader,
         private readonly CareerCurrentAuthorityCacheGateway $cache,
         private readonly CareerJobDisplaySurfaceBuilder $displaySurfaceBuilder,
-        private readonly CareerMaterialDecisionService $materialDecisions,
+        private readonly CareerCurrentAuthorityCompatibilityReader $compatibility,
         ?CareerCurrentAuthorityStateMachine $stateMachine = null,
     ) {
         $this->stateMachine = $stateMachine ?? app(CareerCurrentAuthorityStateMachine::class);
@@ -61,65 +48,77 @@ final class CareerCurrentAuthorityPublisher
     /** @return array<string,mixed> */
     public function execute(string $backendRoot, bool $fullScan = false): array
     {
-        $databaseCommitted = false;
         $pointersActivated = false;
         $prepared = [];
         $rollbackSnapshots = [];
-        $plan = null;
         $cacheCompactionWrites = 0;
 
         try {
-            $authority = $this->loader->loadForPublish($backendRoot);
-            $authority['rows'] = $this->compatibilityRows($authority);
-            $this->assertAccountantsBoundaryNotice($authority['rows']);
-            $cacheCompactionWrites = $this->cache->compactDerivedContentV3(
-                $authority['slugs'],
-                CareerCurrentAuthorityPackage::LOCALES,
-            );
-            $plan = DB::transaction(fn (): array => $this->applyDatabasePlan(
-                $authority['rows'],
-                (string) $authority['summary']['aggregate_sha256'],
-            ), 1);
-            $databaseCommitted = ($plan['write_counts']['database_update_count']
-                + $plan['write_counts']['database_insert_count']
-                + $plan['write_counts']['database_delete_count']) > 0;
-            DB::connection()->useWriteConnectionWhenReading();
+            $authority = $this->loader->indexForPublish($backendRoot);
+            $slugs = $authority['slugs'];
+            $this->compatibility->assertInventory($slugs);
+            $beforeStateSha256 = $this->databaseRowSetHash($authority, $slugs, true);
+            foreach ($this->compatibility->batches($slugs) as $chunk) {
+                $cacheCompactionWrites += $this->cache->compactDerivedContentV3(
+                    $chunk,
+                    CareerCurrentAuthorityPackage::LOCALES,
+                );
+                $this->stateMachine->releaseLoadedContentPages();
+                gc_collect_cycles();
+            }
 
-            $candidatePairs = [];
-            foreach ($plan['changed_slugs'] as $slug) {
-                if ($this->isManualHoldSlug($slug)) {
+            $candidatePairs = $fullScan
+                ? $this->staleCachePairs($authority, $slugs)
+                : [];
+            $candidatePairKeys = [];
+            foreach ($candidatePairs as [$slug, $locale]) {
+                $candidatePairKeys[$slug.'|'.$locale] = true;
+            }
+
+            foreach ($this->compatibility->batches($slugs) as $chunk) {
+                $batchPairCount = 0;
+                foreach ($chunk as $slug) {
+                    foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
+                        if (isset($candidatePairKeys[$slug.'|'.$locale])) {
+                            $batchPairCount++;
+                        }
+                    }
+                }
+                if ($batchPairCount === 0) {
                     continue;
                 }
-                foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
-                    $candidatePairs[$slug.'|'.$locale] = [$slug, $locale];
-                }
-            }
-            if ($fullScan) {
-                foreach ($this->staleCachePairs($authority['slugs'], $authority['rows']) as [$slug, $locale]) {
-                    $candidatePairs[$slug.'|'.$locale] = [$slug, $locale];
-                }
-            }
 
-            foreach ($candidatePairs as [$slug, $locale]) {
-                $expectedCandidate = $this->stateMachine->assembleCandidate($authority['rows'][$slug], $locale);
-                try {
-                    $entry = $this->cache->prepare($slug, $locale);
-                } catch (Throwable $throwable) {
-                    throw new CareerCurrentAuthorityPublisherFailure(
-                        $this->cacheCandidatePreparationFailureCode($throwable),
-                        $throwable,
-                    );
+                $rows = $this->compatibility->rowsForSlugs($authority, $chunk);
+                foreach ($chunk as $slug) {
+                    foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
+                        if (! isset($candidatePairKeys[$slug.'|'.$locale])) {
+                            continue;
+                        }
+                        $expectedCandidate = $this->stateMachine->assembleCandidate($rows[$slug], $locale);
+                        try {
+                            $entry = $this->cache->prepare($slug, $locale);
+                        } catch (Throwable $throwable) {
+                            throw new CareerCurrentAuthorityPublisherFailure(
+                                $this->cacheCandidatePreparationFailureCode($throwable),
+                                $throwable,
+                            );
+                        }
+                        $this->stateMachine->assertPreparedTransition($entry);
+                        $prepared[] = $entry;
+                        $this->assertCachedPayload($entry, $rows[$slug], $locale, true);
+                        $actualCandidate = $this->cache->preparedPayload($entry);
+                        if (! is_array($actualCandidate) || ! hash_equals(
+                            CareerCurrentAuthorityPackage::hashValue($expectedCandidate['payload']),
+                            CareerCurrentAuthorityPackage::hashValue($actualCandidate),
+                        )) {
+                            throw new CareerCurrentAuthorityPublisherFailure('CURRENT_CACHE_CANDIDATE_ASSEMBLY_MISMATCH');
+                        }
+                        unset($expectedCandidate, $actualCandidate);
+                    }
                 }
-                $this->stateMachine->assertPreparedTransition($entry);
-                $prepared[] = $entry;
-                $this->assertCachedPayload($entry, $authority['rows'][$slug], $locale, true);
-                $actualCandidate = $this->cache->preparedPayload($entry);
-                if (! is_array($actualCandidate) || ! hash_equals(
-                    CareerCurrentAuthorityPackage::hashValue($expectedCandidate['payload']),
-                    CareerCurrentAuthorityPackage::hashValue($actualCandidate),
-                )) {
-                    throw new CareerCurrentAuthorityPublisherFailure('CURRENT_CACHE_CANDIDATE_ASSEMBLY_MISMATCH');
-                }
+                unset($rows);
+                $this->stateMachine->releaseLoadedContentPages();
+                gc_collect_cycles();
             }
 
             if ($prepared !== []) {
@@ -129,13 +128,22 @@ final class CareerCurrentAuthorityPublisher
                 $rollbackSnapshots = (array) ($activation['rollback_snapshots'] ?? []);
             }
 
+            $changedSlugs = [];
             $verificationSlugs = $fullScan
-                ? $this->publicSlugs($authority['slugs'])
-                : $this->verificationSlugs($plan['changed_slugs'], $authority['slugs']);
-            $readback = $this->assertPublicReadback($verificationSlugs, $authority['rows']);
+                ? $this->publicSlugs($slugs)
+                : $this->verificationSlugs($changedSlugs, $slugs);
+            $readback = $this->assertPublicReadback($authority, $verificationSlugs);
             $this->assertManualHold();
+            $afterStateSha256 = $this->databaseRowSetHash($authority, $slugs);
+            if (! hash_equals($beforeStateSha256, $afterStateSha256)) {
+                throw new CareerCurrentAuthorityPublisherFailure('CURRENT_DATABASE_READBACK_STATE_MISMATCH');
+            }
 
-            $writeCounts = $plan['write_counts'] + [
+            $writeCounts = [
+                'database_update_count' => 0,
+                'database_insert_count' => 0,
+                'database_delete_count' => 0,
+                'material_decision_write_count' => 0,
                 'cache_derived_compaction_write_count' => $cacheCompactionWrites,
                 'cache_candidate_write_count' => count($prepared) * 2,
                 'cache_pointer_activation_count' => count($prepared),
@@ -152,14 +160,14 @@ final class CareerCurrentAuthorityPublisher
             return [
                 'package' => $authority['summary'],
                 'authority' => [
-                    'target_count' => count($authority['rows']),
-                    'unique_slug_count' => count($authority['rows']),
-                    'valid_component_order_count' => count($authority['rows']),
-                    'changed_slug_count' => count($plan['changed_slugs']),
-                    'changed_slug_set_sha256' => CareerCurrentAuthorityPackage::hashValue($plan['changed_slugs']),
+                    'target_count' => count($slugs),
+                    'unique_slug_count' => count($slugs),
+                    'valid_component_order_count' => count($slugs),
+                    'changed_slug_count' => 0,
+                    'changed_slug_set_sha256' => CareerCurrentAuthorityPackage::hashValue($changedSlugs),
                     'first_governance_cleanup' => $fullScan,
-                    'before_state_sha256' => $plan['before_state_sha256'],
-                    'after_state_sha256' => $plan['after_state_sha256'],
+                    'before_state_sha256' => $beforeStateSha256,
+                    'after_state_sha256' => $afterStateSha256,
                 ],
                 'public_readback' => $readback,
                 'manual_hold_verified' => true,
@@ -167,7 +175,7 @@ final class CareerCurrentAuthorityPublisher
                 'write_counts' => $writeCounts,
                 'state_sha256' => CareerCurrentAuthorityPackage::hashValue([
                     'versionless_projection_sha256' => $authority['summary']['versionless_projection_sha256'],
-                    'database_sha256' => $plan['after_state_sha256'],
+                    'database_sha256' => $afterStateSha256,
                     'public_readback_sha256' => $readback['aggregate_sha256'],
                 ]),
             ];
@@ -188,13 +196,6 @@ final class CareerCurrentAuthorityPublisher
                 } catch (Throwable $failure) {
                     $compensationFailure ??= $failure;
                 }
-                if ($databaseCommitted && is_array($plan)) {
-                    try {
-                        $this->restoreDatabase($plan);
-                    } catch (Throwable $failure) {
-                        $compensationFailure ??= $failure;
-                    }
-                }
             }
 
             if ($compensationFailure instanceof Throwable) {
@@ -212,7 +213,7 @@ final class CareerCurrentAuthorityPublisher
                         ? $throwable->safeCode
                         : 'CURRENT_PUBLISH_FAILED'),
                 $throwable,
-                ($databaseCommitted || $prepared !== []) ? 'rolled_back' : 'confirmed_zero_write',
+                $prepared !== [] ? 'rolled_back' : 'confirmed_zero_write',
             );
         }
     }
@@ -240,208 +241,32 @@ final class CareerCurrentAuthorityPublisher
     }
 
     /**
-     * The database retains the frozen v1/v2 compatibility materialization. It is accepted only when
-     * every full row and localized public projection matches the hashes captured during conversion.
-     *
-     * @param  array<string,mixed>  $authority
-     * @return array<string,array<string,mixed>>
+     * @param  array{entries:array<string,array<string,array<string,mixed>>>}  $authority
+     * @param  list<string>  $slugs
      */
-    private function compatibilityRows(array $authority): array
+    private function databaseRowSetHash(array $authority, array $slugs, bool $verifyAccountants = false): string
     {
-        $entries = [];
-        foreach ((array) data_get($authority, 'manifest.files', []) as $entry) {
-            if (is_array($entry)) {
-                $entries[$entry['canonical_slug']][$entry['locale']] = $entry;
-            }
-        }
-        $assets = CareerJobDisplayAsset::query()->runtimeColumns()->orderBy('canonical_slug')->get();
-        if ($assets->count() !== count((array) ($authority['slugs'] ?? []))) {
-            throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPATIBILITY_ROW_MISSING');
-        }
-        $rows = [];
-        foreach ($assets as $asset) {
-            $slug = strtolower(trim((string) $asset->canonical_slug));
-            if (isset($rows[$slug]) || ! isset($entries[$slug])) {
-                throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPATIBILITY_ROW_UNEXPECTED');
-            }
-            $row = ['canonical_slug' => $slug];
-            foreach ([
-                'surface_version', 'asset_type', 'asset_role', 'status', 'component_order_json',
-                'page_payload_json', 'seo_payload_json', 'sources_json', 'structured_data_json',
-                'implementation_contract_json', 'metadata_json',
-            ] as $field) {
-                $row[$field] = $asset->getAttribute($field);
-            }
-            foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
-                $entry = $entries[$slug][$locale] ?? null;
-                if (! is_array($entry)
-                    || ! hash_equals((string) $entry['legacy_row_sha256'], CareerCurrentAuthorityPackage::hashValue($row))) {
-                    throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPATIBILITY_ROW_HASH_MISMATCH');
-                }
-                $surface = $this->package->publicProjection($row, $locale);
-                unset($surface['content_v3']);
-                if (! hash_equals(
-                    (string) $entry['legacy_projection_sha256'],
-                    CareerCurrentAuthorityPackage::hashValue($surface),
-                )) {
-                    throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPATIBILITY_PROJECTION_HASH_MISMATCH');
-                }
-            }
-            $rows[$slug] = $row;
-        }
-        ksort($rows, SORT_STRING);
-        if (array_keys($rows) !== ($authority['slugs'] ?? [])) {
-            throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPATIBILITY_SLUG_SET_MISMATCH');
-        }
-
-        return $rows;
-    }
-
-    /**
-     * @param  array<string,array<string,mixed>>  $targetRows
-     * @return array<string,mixed>
-     */
-    private function applyDatabasePlan(array $targetRows, string $authorityRevision): array
-    {
-        $assets = CareerJobDisplayAsset::query()->runtimeColumns()->orderBy('id')->lockForUpdate()->get();
-        $beforeStateSha256 = $this->snapshotModelsHash($assets);
-        $bySlug = $assets->groupBy(static fn (CareerJobDisplayAsset $asset): string => strtolower(trim((string) $asset->canonical_slug)));
-        if ($bySlug->contains(static fn (Collection $rows): bool => $rows->count() > 1)) {
-            throw new CareerCurrentAuthorityPublisherFailure('CURRENT_DISPLAY_SLUG_NOT_UNIQUE');
-        }
-        $selectedIds = [];
-        $updates = [];
-        $changedSlugs = [];
-
-        foreach ($targetRows as $slug => $row) {
-            /** @var Collection<int,CareerJobDisplayAsset> $slugRows */
-            $slugRows = $bySlug->get($slug, collect());
-            $formalRows = $slugRows->filter(static fn (CareerJobDisplayAsset $asset): bool => (string) $asset->asset_type === CareerCurrentAuthorityPackage::ASSET_TYPE
-                && (string) $asset->asset_role === CareerCurrentAuthorityPackage::ASSET_ROLE
-                && (string) $asset->status === CareerCurrentAuthorityPackage::READY_STATUS
-            )->values();
-            if ($formalRows->count() > 1) {
-                throw new CareerCurrentAuthorityPublisherFailure('CURRENT_FORMAL_DISPLAY_ROW_NOT_UNIQUE');
-            }
-
-            $desired = $this->package->databaseAttributes($row);
-            $asset = $formalRows->first();
-            if ($asset instanceof CareerJobDisplayAsset) {
-                $selectedIds[(string) $asset->id] = true;
-                if (! $this->matchesTarget($asset, $desired)) {
-                    $updates[] = [
-                        'id' => (string) $asset->id,
-                        'slug' => $slug,
-                        'before' => $this->snapshot($asset),
-                        'attributes' => $desired,
-                    ];
-                    $changedSlugs[] = $slug;
-                }
-
-                continue;
-            }
-
-            throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPATIBILITY_ROW_MISSING');
-        }
-
-        $deletes = $assets
-            ->reject(static fn (CareerJobDisplayAsset $asset): bool => isset($selectedIds[(string) $asset->id]))
-            ->map(fn (CareerJobDisplayAsset $asset): array => $this->snapshot($asset))
-            ->values()
-            ->all();
-
-        if ($deletes !== []) {
-            throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPATIBILITY_ROW_UNEXPECTED');
-        }
-        unset($bySlug, $assets);
-        foreach ($updates as $update) {
-            $affected = DB::table('career_job_display_assets')->where('id', $update['id'])->update(
-                $this->databaseValues($update['attributes']) + ['import_run_id' => null, 'updated_at' => now()],
-            );
-            if ($affected !== 1) {
-                throw new CareerCurrentAuthorityPublisherFailure('CURRENT_DATABASE_UPDATE_FAILED');
-            }
-        }
-        $materialDecisionWrites = [];
-        $effectiveAt = now();
-        foreach ($updates as $update) {
-            if ($this->isManualHoldSlug($update['slug'])) {
-                continue;
-            }
-            foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
-                $recorded = $this->materialDecisions->recordPublished(
-                    $update['slug'],
-                    $locale,
-                    $targetRows[$update['slug']],
-                    $update['before'],
-                    $authorityRevision,
-                    $effectiveAt,
-                    'career-current:'.$authorityRevision.':'.$update['slug'].':'.$locale,
-                );
-                if (! $recorded['created']) {
-                    continue;
-                }
-                $materialDecisionWrites[] = [
-                    'decision_id' => (int) $recorded['decision']->id,
-                    'previous_decision_id' => $recorded['previous_decision_id'],
-                ];
-            }
-        }
-        $afterStateSha256 = $this->assertDatabaseReadback($targetRows, true);
-        sort($changedSlugs, SORT_STRING);
-
-        return [
-            'changed_slugs' => array_values(array_unique($changedSlugs)),
-            'updates' => $updates,
-            'inserts' => [],
-            'deletes' => $deletes,
-            'material_decisions' => $materialDecisionWrites,
-            'before_state_sha256' => $beforeStateSha256,
-            'after_state_sha256' => $afterStateSha256,
-            'write_counts' => [
-                'database_update_count' => count($updates),
-                'database_insert_count' => 0,
-                'database_delete_count' => 0,
-                'material_decision_write_count' => count($materialDecisionWrites),
-            ],
-        ];
-    }
-
-    /** @param array<string,array<string,mixed>> $targetRows */
-    private function assertDatabaseReadback(array $targetRows, bool $lockForUpdate = false): string
-    {
-        $query = CareerJobDisplayAsset::query()->runtimeColumns()->orderBy('id');
-        if ($lockForUpdate) {
-            $query->lockForUpdate();
-        }
-        $assets = $query->get();
-        if ($assets->count() !== count($targetRows)) {
-            throw new CareerCurrentAuthorityPublisherFailure('CURRENT_DATABASE_READBACK_COUNT_MISMATCH');
-        }
-        $seen = [];
-        $hashContext = hash_init('sha256');
-        hash_update($hashContext, '[');
+        $context = hash_init('sha256');
+        hash_update($context, '[');
         $index = 0;
-        foreach ($assets as $asset) {
-            $slug = strtolower(trim((string) $asset->canonical_slug));
-            if (isset($seen[$slug]) || ! isset($targetRows[$slug])
-                || ! $this->matchesTarget($asset, $this->package->databaseAttributes($targetRows[$slug]))) {
-                throw new CareerCurrentAuthorityPublisherFailure('CURRENT_DATABASE_READBACK_STATE_MISMATCH');
+        foreach ($this->compatibility->batches($slugs) as $chunk) {
+            $rows = $this->compatibility->rowsForSlugs($authority, $chunk);
+            if ($verifyAccountants && isset($rows['accountants-and-auditors'])) {
+                $this->assertAccountantsBoundaryNotice($rows['accountants-and-auditors']);
             }
-            $seen[$slug] = true;
-            hash_update(
-                $hashContext,
-                ($index === 0 ? '' : ',').CareerCurrentAuthorityPackage::encodeCanonical($this->snapshot($asset)),
-            );
-            $index++;
+            foreach ($rows as $row) {
+                hash_update(
+                    $context,
+                    ($index === 0 ? '' : ',').CareerCurrentAuthorityPackage::encodeCanonical($row),
+                );
+                $index++;
+            }
+            unset($rows);
+            gc_collect_cycles();
         }
-        if (count($seen) !== count($targetRows)) {
-            throw new CareerCurrentAuthorityPublisherFailure('CURRENT_DATABASE_READBACK_SLUG_MISMATCH');
-        }
+        hash_update($context, ']');
 
-        hash_update($hashContext, ']');
-
-        return hash_final($hashContext);
+        return hash_final($context);
     }
 
     /** @param array<string,mixed> $entry @param array<string,mixed> $row */
@@ -455,9 +280,6 @@ final class CareerCurrentAuthorityPublisher
         }
         $mismatchCode = $this->stateMachine->payloadMismatchCode($payload, $row, $locale);
         if ($mismatchCode !== null) {
-            // Resolve only a content-free, field-specific eligibility code before compensation.
-            // Unavailable component fields are storage-order independent at this boundary;
-            // public copy and raw payload values never enter the publish receipt.
             $displayFailureCode = $this->displaySurfaceBuilder->diagnosticFailureCodeForSlug(
                 (string) ($row['canonical_slug'] ?? ''),
                 $locale,
@@ -476,14 +298,15 @@ final class CareerCurrentAuthorityPublisher
     }
 
     /**
+     * @param  array{entries:array<string,array<string,array<string,mixed>>>}  $authority
      * @param  list<string>  $slugs
-     * @param  array<string,array<string,mixed>>  $targetRows
      * @return list<array{string,string}>
      */
-    private function staleCachePairs(array $slugs, array $targetRows): array
+    private function staleCachePairs(array $authority, array $slugs): array
     {
         $pairs = [];
-        foreach (array_chunk($slugs, 50) as $chunk) {
+        foreach ($this->compatibility->batches($slugs) as $chunk) {
+            $rows = $this->compatibility->rowsForSlugs($authority, $chunk);
             $cache = $this->cache->publicationSnapshot($chunk, CareerCurrentAuthorityPackage::LOCALES);
             foreach ($chunk as $slug) {
                 if ($this->isManualHoldSlug($slug)) {
@@ -496,23 +319,31 @@ final class CareerCurrentAuthorityPublisher
                         || ($entry['classification'] ?? null) !== 'ready_active'
                         || ! $this->cachedPayloadMatches(
                             is_array($entry['payload'] ?? null) ? $entry['payload'] : null,
-                            $targetRows[$slug],
+                            $rows[$slug],
                             $locale,
                         )) {
                         $pairs[] = [$slug, $locale];
                     }
                 }
             }
+            unset($cache, $rows);
+            $this->stateMachine->releaseLoadedContentPages();
+            gc_collect_cycles();
         }
 
         return $pairs;
     }
 
-    /** @param list<string> $slugs @param array<string,array<string,mixed>> $targetRows @return array<string,mixed> */
-    private function assertPublicReadback(array $slugs, array $targetRows): array
+    /**
+     * @param  array{entries:array<string,array<string,array<string,mixed>>>}  $authority
+     * @param  list<string>  $slugs
+     * @return array<string,mixed>
+     */
+    private function assertPublicReadback(array $authority, array $slugs): array
     {
         $hashes = [];
-        foreach (array_chunk($slugs, 50) as $chunk) {
+        foreach ($this->compatibility->batches($slugs) as $chunk) {
+            $rows = $this->compatibility->rowsForSlugs($authority, $chunk);
             $cache = $this->cache->publicationSnapshot($chunk, CareerCurrentAuthorityPackage::LOCALES);
             foreach ($chunk as $slug) {
                 foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
@@ -522,15 +353,18 @@ final class CareerCurrentAuthorityPublisher
                         || ($entry['classification'] ?? null) !== 'ready_active') {
                         throw new CareerCurrentAuthorityPublisherFailure('CURRENT_ACTIVE_CACHE_READBACK_FAILED');
                     }
-                    $this->assertCachedPayload($entry, $targetRows[$slug], $locale, false);
+                    $this->assertCachedPayload($entry, $rows[$slug], $locale, false);
                     $api = $this->cache->verifyOnlyRead($slug, $locale);
                     if (($api['state'] ?? null) !== 'fresh' || ! is_array($api['payload'] ?? null)) {
                         throw new CareerCurrentAuthorityPublisherFailure('CURRENT_API_READBACK_FAILED');
                     }
-                    $this->assertCachedPayload(['payload' => $api['payload']], $targetRows[$slug], $locale, false);
-                    $hashes[] = $this->package->publicContentHash($targetRows[$slug], $locale);
+                    $this->assertCachedPayload(['payload' => $api['payload']], $rows[$slug], $locale, false);
+                    $hashes[] = $this->package->publicContentHash($rows[$slug], $locale);
                 }
             }
+            unset($cache, $rows);
+            $this->stateMachine->releaseLoadedContentPages();
+            gc_collect_cycles();
         }
         sort($hashes, SORT_STRING);
 
@@ -555,13 +389,9 @@ final class CareerCurrentAuthorityPublisher
         }
     }
 
-    /** @param array<string,array<string,mixed>> $rows */
-    private function assertAccountantsBoundaryNotice(array $rows): void
+    /** @param array<string,mixed> $row */
+    private function assertAccountantsBoundaryNotice(array $row): void
     {
-        $row = $rows['accountants-and-auditors'] ?? null;
-        if (! is_array($row)) {
-            return;
-        }
         $pages = $row['page_payload_json']['page'] ?? $row['page_payload_json'] ?? null;
         foreach (['en', 'zh'] as $locale) {
             $notices = is_array($pages) && is_array($pages[$locale] ?? null)
@@ -604,113 +434,5 @@ final class CareerCurrentAuthorityPublisher
     private function isManualHoldSlug(string $slug): bool
     {
         return in_array(strtolower(trim($slug)), self::MANUAL_HOLD_SLUGS, true);
-    }
-
-    /** @param array<string,mixed> $desired */
-    private function matchesTarget(CareerJobDisplayAsset $asset, array $desired): bool
-    {
-        if ($asset->import_run_id !== null) {
-            return false;
-        }
-        foreach ($desired as $field => $value) {
-            $actual = $asset->{$field};
-            if (in_array($field, self::JSON_FIELDS, true)) {
-                if (! hash_equals(
-                    CareerCurrentAuthorityPackage::hashValue($value),
-                    CareerCurrentAuthorityPackage::hashValue($actual),
-                )) {
-                    return false;
-                }
-            } elseif ((string) $actual !== (string) $value) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /** @return array<string,mixed> */
-    private function snapshot(CareerJobDisplayAsset $asset): array
-    {
-        return [
-            'id' => (string) $asset->id,
-            'occupation_id' => (string) $asset->occupation_id,
-            'canonical_slug' => (string) $asset->canonical_slug,
-            'surface_version' => (string) $asset->surface_version,
-            'asset_type' => (string) $asset->asset_type,
-            'asset_role' => (string) $asset->asset_role,
-            'status' => (string) $asset->status,
-            'component_order_json' => $asset->component_order_json,
-            'page_payload_json' => $asset->page_payload_json,
-            'seo_payload_json' => $asset->seo_payload_json,
-            'sources_json' => $asset->sources_json,
-            'structured_data_json' => $asset->structured_data_json,
-            'implementation_contract_json' => $asset->implementation_contract_json,
-            'metadata_json' => $asset->metadata_json,
-            'import_run_id' => $asset->import_run_id,
-            'created_at' => $asset->getRawOriginal('created_at'),
-            'updated_at' => $asset->getRawOriginal('updated_at'),
-        ];
-    }
-
-    /** @param Collection<int,CareerJobDisplayAsset> $assets */
-    private function snapshotModelsHash(Collection $assets): string
-    {
-        // Stream deterministic compensation hashes without retaining a second copy of every JSON payload.
-        $context = hash_init('sha256');
-        hash_update($context, '[');
-        foreach ($assets->values() as $index => $asset) {
-            hash_update(
-                $context,
-                ($index === 0 ? '' : ',').CareerCurrentAuthorityPackage::encodeCanonical($this->snapshot($asset)),
-            );
-        }
-        hash_update($context, ']');
-
-        return hash_final($context);
-    }
-
-    /** @param array<string,mixed> $values @return array<string,mixed> */
-    private function databaseValues(array $values): array
-    {
-        foreach (self::JSON_FIELDS as $field) {
-            if (array_key_exists($field, $values)) {
-                $values[$field] = $values[$field] === null
-                    ? null
-                    : CareerCurrentAuthorityPackage::encodeCanonical($values[$field]);
-            }
-        }
-
-        return $values;
-    }
-
-    /** @param array<string,mixed> $plan */
-    private function restoreDatabase(array $plan): void
-    {
-        DB::transaction(function () use ($plan): void {
-            $current = CareerJobDisplayAsset::query()->runtimeColumns()->orderBy('id')->lockForUpdate()->get();
-            if (! hash_equals($plan['after_state_sha256'], $this->snapshotModelsHash($current))) {
-                throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPENSATION_STATE_DRIFT');
-            }
-            foreach ($plan['updates'] as $update) {
-                $before = $update['before'];
-                $id = $before['id'];
-                unset($before['id']);
-                if (DB::table('career_job_display_assets')->where('id', $id)->update($this->databaseValues($before)) !== 1) {
-                    throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPENSATION_UPDATE_FAILED');
-                }
-            }
-            foreach ($plan['material_decisions'] as $decision) {
-                $this->materialDecisions->recordCompensated(
-                    (int) $decision['decision_id'],
-                    $decision['previous_decision_id'] === null ? null : (int) $decision['previous_decision_id'],
-                    now(),
-                );
-            }
-            $restored = CareerJobDisplayAsset::query()->runtimeColumns()->orderBy('id')->lockForUpdate()->get();
-            if (! hash_equals($plan['before_state_sha256'], $this->snapshotModelsHash($restored))) {
-                throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPENSATION_READBACK_FAILED');
-            }
-        }, 1);
     }
 }
