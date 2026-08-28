@@ -36,9 +36,9 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         $cache = app(PublicCareerAuthorityResponseCache::class);
 
         foreach (['en', 'zh-CN'] as $locale) {
-            $cache->publishJobDetailReadModel('active', $locale, ['slug' => 'active']);
+            $cache->publishJobDetailReadModel('active', $locale, $this->detailPayload('active', $locale));
             $this->seedLkgOnly($cache, 'lkg', $locale);
-            Cache::forever($cache->jobDetailCacheKey('legacy', $locale), ['slug' => 'legacy']);
+            Cache::forever($cache->jobDetailCacheKey('legacy', $locale), $this->detailPayload('legacy', $locale));
             $this->assertTrue($cache->jobDetailCacheIsReady('lkg', $locale));
             $this->assertTrue($cache->jobDetailCacheIsReady('legacy', $locale));
             Cache::forever($cache->jobDetailActiveVersionKey('missing-payload', $locale), 'ghost');
@@ -112,7 +112,7 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         $this->bindProjection(['one']);
         $cache = app(PublicCareerAuthorityResponseCache::class);
         foreach (['en', 'zh-CN'] as $locale) {
-            $cache->publishJobDetailReadModel('one', $locale, ['slug' => 'one']);
+            $cache->publishJobDetailReadModel('one', $locale, $this->detailPayload('one', $locale));
         }
 
         $exit = Artisan::call('career:verify-job-detail-cache-coverage', [
@@ -228,7 +228,7 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         $this->bindProjection(['one']);
         $cache = app(PublicCareerAuthorityResponseCache::class);
         foreach (['en', 'zh-CN'] as $locale) {
-            $cache->publishJobDetailReadModel('one', $locale, ['slug' => 'one']);
+            $cache->publishJobDetailReadModel('one', $locale, $this->detailPayload('one', $locale));
         }
         Queue::fake();
 
@@ -278,9 +278,9 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         $this->bindProjection(['active', 'legacy', 'lkg', 'missing']);
         $cache = app(PublicCareerAuthorityResponseCache::class);
         foreach (['en', 'zh-CN'] as $locale) {
-            $cache->publishJobDetailReadModel('active', $locale, ['slug' => 'active']);
+            $cache->publishJobDetailReadModel('active', $locale, $this->detailPayload('active', $locale));
             $this->seedLkgOnly($cache, 'lkg', $locale);
-            Cache::forever($cache->jobDetailCacheKey('legacy', $locale), ['slug' => 'legacy']);
+            Cache::forever($cache->jobDetailCacheKey('legacy', $locale), $this->detailPayload('legacy', $locale));
         }
         $activeVersions = array_map(
             static fn (string $locale): mixed => Cache::get($cache->jobDetailActiveVersionKey('active', $locale)),
@@ -332,7 +332,7 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
 
         foreach (['one', 'three', 'two'] as $slug) {
             foreach (['en', 'zh-CN'] as $locale) {
-                $cache->publishJobDetailReadModel($slug, $locale, ['slug' => $slug]);
+                $cache->publishJobDetailReadModel($slug, $locale, $this->detailPayload($slug, $locale));
             }
         }
         $this->travel(301)->seconds();
@@ -519,8 +519,8 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         $this->bindProjection(['active', 'legacy', 'missing']);
         $cache = app(PublicCareerAuthorityResponseCache::class);
         foreach (['en', 'zh-CN'] as $locale) {
-            $cache->publishJobDetailReadModel('active', $locale, ['slug' => 'active']);
-            Cache::forever($cache->jobDetailCacheKey('legacy', $locale), ['slug' => 'legacy']);
+            $cache->publishJobDetailReadModel('active', $locale, $this->detailPayload('active', $locale));
+            Cache::forever($cache->jobDetailCacheKey('legacy', $locale), $this->detailPayload('legacy', $locale));
         }
         $activeVersions = array_map(
             static fn (string $locale): mixed => Cache::get($cache->jobDetailActiveVersionKey('active', $locale)),
@@ -728,9 +728,27 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
 
     private function seedLkgOnly(PublicCareerAuthorityResponseCache $cache, string $slug, string $locale): void
     {
-        $cache->publishJobDetailReadModel($slug, $locale, ['slug' => $slug, 'revision' => 1]);
-        $activeVersion = $cache->publishJobDetailReadModel($slug, $locale, ['slug' => $slug, 'revision' => 2]);
+        $cache->publishJobDetailReadModel($slug, $locale, $this->detailPayload($slug, $locale, 1));
+        $activeVersion = $cache->publishJobDetailReadModel($slug, $locale, $this->detailPayload($slug, $locale, 2));
         Cache::forget($this->versionPayloadKey($slug, $locale, $activeVersion));
+    }
+
+    /** @return array<string, mixed> */
+    private function detailPayload(string $slug, string $locale, int $revision = 1): array
+    {
+        return [
+            'slug' => $slug,
+            'revision' => $revision,
+            'display_surface_v1' => [
+                'page' => [
+                    'locale' => $locale,
+                    'content' => [
+                        'hero' => ['h1' => ucfirst(str_replace('-', ' ', $slug))],
+                    ],
+                ],
+                'sources' => [],
+            ],
+        ];
     }
 
     private function createOccupation(string $slug): void

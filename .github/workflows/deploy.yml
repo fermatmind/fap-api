@@ -46,6 +46,9 @@ jobs:
       career_current_manifest_sha256: ${{ steps.career-current.outputs.manifest_sha256 }}
       career_current_projection_sha256: ${{ steps.career-current.outputs.versionless_projection_sha256 }}
       career_current_operation_key: ${{ steps.career-current.outputs.operation_key }}
+      career_parity_receipt_digest: ${{ steps.receipt.outputs.career_parity_receipt_digest }}
+      career_parity_compiler_digest: ${{ steps.receipt.outputs.career_parity_compiler_digest }}
+      career_parity_codec_digest: ${{ steps.receipt.outputs.career_parity_codec_digest }}
       mbti_zh_result_release: ${{ steps.receipt.outputs.mbti_zh_result_release }}
       mbti_zh_result_package_hash: ${{ steps.mbti-zh-result.outputs.package_hash }}
       mbti_zh_result_actor: ${{ steps.mbti-zh-result.outputs.actor }}
@@ -99,12 +102,22 @@ jobs:
           test "sha256:$(sha256sum "$zip" | awk '{print $1}')" = "$EXPECTED_DIGEST"
           unzip -q "$zip" -d "$RUNNER_TEMP/validation"
           receipt="$RUNNER_TEMP/validation/trunk-validation.json"
-          jq -e --arg sha "$DEPLOY_SHA" --arg run "$CI_RUN_ID" \
-            '.schema_version == "fermatmind.trunk-validation.v1" and .sha == $sha and .ci_run_id == $run and .result == "success"' \
+          jq -e --arg sha "$DEPLOY_SHA" --arg run "$CI_RUN_ID" '
+            .schema_version == "fermatmind.trunk-validation.v1"
+            and .sha == $sha
+            and .ci_run_id == $run
+            and .result == "success"
+            and .publisher.required == .classification.operations.publisher_required
+            and ((.publisher.required == true
+                and .publisher.parity.status == "pass"
+                and .publisher.parity.release_sha == $sha
+                and (.publisher.parity.receipt_digest | test("^[0-9a-f]{64}$")))
+              or (.publisher.required == false and .publisher.parity.status == "skipped"))
+          ' \
             "$receipt" >/dev/null
           classification="$(jq -c .classification "$receipt")"
           career_current_release="$(jq -r '.classification.operations.career_current_authority_release == true' "$receipt")"
-          career_current="$(jq -r '(([.classification.paths[] | select(startswith("backend/content_assets/career/current/") or . == "backend/app/Domain/Career/Display/CareerCurrentAuthorityPackage.php" or . == "backend/app/Domain/Career/Display/CareerCurrentAuthorityPublisher.php" or . == "backend/scripts/operations/career_current_authority_publish.php")] | length) > 0) or .classification.operations.career_current_authority_release == true' "$receipt")"
+          career_current="$(jq -r '.publisher.required == true' "$receipt")"
           career_current_full_scan="$career_current"
           mbti_zh_result_release="$(jq -r '.classification.operations.mbti_zh_result_authority_release == true' "$receipt")"
           seo_platform_10_closeout="$(jq -r '.classification.operations.seo_platform_10_closeout == true' "$receipt")"
@@ -115,6 +128,9 @@ jobs:
             echo "career_current=$career_current"
             echo "career_current_release=$career_current_release"
             echo "career_current_full_scan=$career_current_full_scan"
+            echo "career_parity_receipt_digest=$(jq -r '.publisher.parity.receipt_digest // ""' "$receipt")"
+            echo "career_parity_compiler_digest=$(jq -r '.publisher.parity.package.compiler_digest // ""' "$receipt")"
+            echo "career_parity_codec_digest=$(jq -r '.publisher.parity.package.codec_digest // ""' "$receipt")"
             echo "mbti_zh_result_release=$mbti_zh_result_release"
             echo "seo_platform_10_closeout=$seo_platform_10_closeout"
           } >> "$GITHUB_OUTPUT"
@@ -142,6 +158,15 @@ jobs:
           set -euo pipefail
           receipt="$(backend/scripts/ci/verify_career_current_authority_release.sh)"
           jq -e '.status == "PASS_CAREER_CURRENT_RELEASE_INTENT" and (.source_merge_sha | length == 40) and (.operation_key | length == 64)' <<<"$receipt" >/dev/null
+          jq -e --arg assets "$(jq -r .aggregate_sha256 <<<"$receipt")" \
+            --arg projection "$(jq -r .versionless_projection_sha256 <<<"$receipt")" '
+              .publisher.required == true
+              and .publisher.parity.status == "pass"
+              and .publisher.parity.package.digest == $assets
+              and .publisher.parity.package.projection_digest == $projection
+              and (.publisher.parity.package.compiler_digest | test("^[0-9a-f]{64}$"))
+              and (.publisher.parity.package.codec_digest | test("^[0-9a-f]{64}$"))
+            ' "$RUNNER_TEMP/validation/trunk-validation.json" >/dev/null
           {
             echo "assets_sha256=$(jq -r .aggregate_sha256 <<<"$receipt")"
             echo "source_merge_sha=$(jq -r .source_merge_sha <<<"$receipt")"
@@ -186,8 +211,10 @@ jobs:
     needs: policy
     if: needs.policy.outputs.deploy == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 120
     environment: staging
+    outputs:
+      career_parity_digest: ${{ steps.career-parity.outputs.receipt_digest }}
     env:
       TARGET: staging
       DEPLOY_USER: ${{ secrets.STAGING_DEPLOY_USER }}
@@ -249,6 +276,35 @@ jobs:
           timeout --signal=TERM --kill-after=30s 15m php /tmp/dep.phar deploy staging -f deploy.php --revision "$DEPLOY_SHA" \
             -o release_name="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode=standard \
             -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' --no-interaction
+      - id: career-parity
+        name: Run staging zero-write 2092-page Career parity
+        if: needs.policy.outputs.career_current == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt=career-current-authority-staging-parity.json
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_sha '%q' "$DEPLOY_SHA"
+          remote="set -euo pipefail; current=\$(readlink -f $q_path/current); test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_sha; sudo -n -u www-data -- env CAREER_PARITY_BACKEND_ROOT=\"\$current/backend\" CAREER_PARITY_RELEASE_SHA=$q_sha CAREER_PARITY_REDIS_MODE=readonly CAREER_PARITY_REQUIRE_DATABASE=1 php -d memory_limit=1024M \"\$current/backend/scripts/ci/career_current_authority_parity.php\""
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o ServerAliveInterval=15 -o ServerAliveCountMax=4 -p "$DEPLOY_PORT" \
+            "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$receipt"
+          jq -e --arg sha "$DEPLOY_SHA" \
+            --arg package '${{ needs.policy.outputs.career_current_assets_sha256 }}' \
+            --arg projection '${{ needs.policy.outputs.career_current_projection_sha256 }}' \
+            --arg compiler '${{ needs.policy.outputs.career_parity_compiler_digest }}' \
+            --arg codec '${{ needs.policy.outputs.career_parity_codec_digest }}' '
+              .status == "pass"
+              and .release_sha == $sha
+              and .package.digest == $package
+              and .package.projection_digest == $projection
+              and .package.compiler_digest == $compiler
+              and .package.codec_digest == $codec
+              and .full_scan.counts.locale_pages == 2092
+              and ([.write_counts[]] | all(. == 0))
+              and (.receipt_digest | test("^[0-9a-f]{64}$"))
+            ' "$receipt" >/dev/null
+          echo "receipt_digest=$(jq -r .receipt_digest "$receipt")" >> "$GITHUB_OUTPUT"
       - name: Record staging timing
         if: always()
         run: |
@@ -258,7 +314,9 @@ jobs:
         if: always()
         with:
           name: trunk-staging-${{ github.event.workflow_run.head_sha }}
-          path: staging-timing.json
+          path: |
+            staging-timing.json
+            career-current-authority-staging-parity.json
           if-no-files-found: error
           retention-days: 90
 
@@ -581,7 +639,7 @@ jobs:
 
   career-current-publish:
     name: Publish Career Current authority
-    needs: [policy, production]
+    needs: [policy, staging, production]
     if: needs.production.result == 'success' && needs.policy.outputs.career_current == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 120
@@ -593,6 +651,10 @@ jobs:
       MANIFEST_SHA256: ${{ needs.policy.outputs.career_current_manifest_sha256 }}
       VERSIONLESS_PROJECTION_SHA256: ${{ needs.policy.outputs.career_current_projection_sha256 }}
       OPERATION_KEY: ${{ needs.policy.outputs.career_current_operation_key }}
+      CI_PARITY_RECEIPT_DIGEST: ${{ needs.policy.outputs.career_parity_receipt_digest }}
+      STAGING_PARITY_RECEIPT_DIGEST: ${{ needs.staging.outputs.career_parity_digest }}
+      PARITY_COMPILER_DIGEST: ${{ needs.policy.outputs.career_parity_compiler_digest }}
+      PARITY_CODEC_DIGEST: ${{ needs.policy.outputs.career_parity_codec_digest }}
       FULL_SCAN: ${{ needs.policy.outputs.career_current_full_scan == 'true' && '1' || '0' }}
       DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
       DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
@@ -636,6 +698,10 @@ jobs:
           [[ "$MANIFEST_SHA256" =~ ^[0-9a-f]{64}$ ]]
           [[ "$VERSIONLESS_PROJECTION_SHA256" =~ ^[0-9a-f]{64}$ ]]
           [[ "$OPERATION_KEY" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$CI_PARITY_RECEIPT_DIGEST" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$STAGING_PARITY_RECEIPT_DIGEST" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$PARITY_COMPILER_DIGEST" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$PARITY_CODEC_DIGEST" =~ ^[0-9a-f]{64}$ ]]
           [[ "$FULL_SCAN" =~ ^[01]$ ]]
           printf -v q_path '%q' "$DEPLOY_PATH"
           printf -v q_release '%q' "$DEPLOY_SHA"
@@ -644,10 +710,14 @@ jobs:
           printf -v q_manifest '%q' "$MANIFEST_SHA256"
           printf -v q_projection '%q' "$VERSIONLESS_PROJECTION_SHA256"
           printf -v q_operation '%q' "$OPERATION_KEY"
+          printf -v q_ci_parity '%q' "$CI_PARITY_RECEIPT_DIGEST"
+          printf -v q_staging_parity '%q' "$STAGING_PARITY_RECEIPT_DIGEST"
+          printf -v q_compiler '%q' "$PARITY_COMPILER_DIGEST"
+          printf -v q_codec '%q' "$PARITY_CODEC_DIGEST"
           printf -v q_full_scan '%q' "$FULL_SCAN"
           printf -v q_run '%q' "$GITHUB_RUN_ID"
           printf -v q_attempt '%q' "$GITHUB_RUN_ATTEMPT"
-          remote="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_release; test ! -e $q_path/.dep/deploy.lock; release_name=\$(basename \"\$current\"); sudo -n -u www-data -- env CAREER_CURRENT_PUBLISH_EXECUTE=1 CAREER_CURRENT_PUBLISH_BACKEND_ROOT=\"\$current/backend\" CAREER_CURRENT_PUBLISH_RELEASE_SHA=$q_release CAREER_CURRENT_PUBLISH_RELEASE_NAME=\"\$release_name\" CAREER_CURRENT_PUBLISH_SOURCE_MERGE_SHA=$q_source CAREER_CURRENT_PUBLISH_MANIFEST_SHA256=$q_manifest CAREER_CURRENT_PUBLISH_ASSETS_SHA256=$q_assets CAREER_CURRENT_PUBLISH_VERSIONLESS_PROJECTION_SHA256=$q_projection CAREER_CURRENT_PUBLISH_OPERATION_KEY=$q_operation CAREER_CURRENT_PUBLISH_FULL_SCAN=$q_full_scan CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ID=$q_run CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ATTEMPT=$q_attempt \"\$current/backend/scripts/deploy/run_career_current_authority_publisher.sh\""
+          remote="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_release; test ! -e $q_path/.dep/deploy.lock; release_name=\$(basename \"\$current\"); sudo -n -u www-data -- env CAREER_CURRENT_PUBLISH_EXECUTE=1 CAREER_CURRENT_PUBLISH_BACKEND_ROOT=\"\$current/backend\" CAREER_CURRENT_PUBLISH_RELEASE_SHA=$q_release CAREER_CURRENT_PUBLISH_RELEASE_NAME=\"\$release_name\" CAREER_CURRENT_PUBLISH_SOURCE_MERGE_SHA=$q_source CAREER_CURRENT_PUBLISH_MANIFEST_SHA256=$q_manifest CAREER_CURRENT_PUBLISH_ASSETS_SHA256=$q_assets CAREER_CURRENT_PUBLISH_VERSIONLESS_PROJECTION_SHA256=$q_projection CAREER_CURRENT_PUBLISH_OPERATION_KEY=$q_operation CAREER_CURRENT_PUBLISH_CI_PARITY_RECEIPT_DIGEST=$q_ci_parity CAREER_CURRENT_PUBLISH_STAGING_PARITY_RECEIPT_DIGEST=$q_staging_parity CAREER_CURRENT_PUBLISH_PARITY_COMPILER_DIGEST=$q_compiler CAREER_CURRENT_PUBLISH_PARITY_CODEC_DIGEST=$q_codec CAREER_CURRENT_PUBLISH_FULL_SCAN=$q_full_scan CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ID=$q_run CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ATTEMPT=$q_attempt \"\$current/backend/scripts/deploy/run_career_current_authority_publisher.sh\""
           set +e
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -o ServerAliveInterval=15 -o ServerAliveCountMax=4 -p "$DEPLOY_PORT" \
@@ -670,6 +740,10 @@ jobs:
               and .versionless_projection_sha256 == $projection
               and .versionless_projection_sha256 == .package.versionless_projection_sha256
               and .operation_key == $operation
+              and .parity.ci_receipt_digest == env.CI_PARITY_RECEIPT_DIGEST
+              and .parity.staging_receipt_digest == env.STAGING_PARITY_RECEIPT_DIGEST
+              and .parity.compiler_digest == env.PARITY_COMPILER_DIGEST
+              and .parity.codec_digest == env.PARITY_CODEC_DIGEST
               and .full_scan == ($full_scan == 1)
               and .resource_guard == {
                 "schema_version": "career.current_authority_publish.resource_guard.v1",

@@ -6,6 +6,7 @@ use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPublisher;
 use App\Domain\Career\Display\CareerCurrentAuthorityPublisherFailure;
 use App\Domain\Career\Display\CareerCurrentAuthorityReleaseIntent;
+use App\Domain\Career\Display\CareerJobDetailCanonicalCacheReader;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\DB;
@@ -28,6 +29,10 @@ $versionlessProjectionSha256 = $env('CAREER_CURRENT_PUBLISH_VERSIONLESS_PROJECTI
 $operationKey = $env('CAREER_CURRENT_PUBLISH_OPERATION_KEY');
 $workflowRunId = $env('CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ID');
 $workflowRunAttempt = $env('CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ATTEMPT');
+$ciParityReceiptDigest = $env('CAREER_CURRENT_PUBLISH_CI_PARITY_RECEIPT_DIGEST');
+$stagingParityReceiptDigest = $env('CAREER_CURRENT_PUBLISH_STAGING_PARITY_RECEIPT_DIGEST');
+$parityCompilerDigest = $env('CAREER_CURRENT_PUBLISH_PARITY_COMPILER_DIGEST');
+$parityCodecDigest = $env('CAREER_CURRENT_PUBLISH_PARITY_CODEC_DIGEST');
 $fullScan = $env('CAREER_CURRENT_PUBLISH_FULL_SCAN') === '1';
 $resourceGuard = [
     'schema_version' => $env('CAREER_CURRENT_PUBLISH_RESOURCE_GUARD_SCHEMA'),
@@ -63,6 +68,15 @@ $receipt = [
     'manifest_sha256' => $manifestSha256,
     'versionless_projection_sha256' => $versionlessProjectionSha256,
     'operation_key' => $operationKey,
+    'parity' => [
+        'release_sha' => $releaseSha,
+        'package_digest' => $assetsSha256,
+        'projection_digest' => $versionlessProjectionSha256,
+        'ci_receipt_digest' => $ciParityReceiptDigest,
+        'staging_receipt_digest' => $stagingParityReceiptDigest,
+        'compiler_digest' => $parityCompilerDigest,
+        'codec_digest' => $parityCodecDigest,
+    ],
     'workflow_run_id' => ctype_digit($workflowRunId) ? (int) $workflowRunId : null,
     'workflow_run_attempt' => ctype_digit($workflowRunAttempt) ? (int) $workflowRunAttempt : null,
     'full_scan' => $fullScan,
@@ -118,6 +132,10 @@ try {
         || ! hash_equals($expectedOperationKey, $operationKey)
         || ! ctype_digit($workflowRunId)
         || ! ctype_digit($workflowRunAttempt)
+        || preg_match('/\A[0-9a-f]{64}\z/', $ciParityReceiptDigest) !== 1
+        || preg_match('/\A[0-9a-f]{64}\z/', $stagingParityReceiptDigest) !== 1
+        || ! hash_equals(CareerJobDetailCanonicalCacheReader::compilerDigest(), $parityCompilerDigest)
+        || ! hash_equals(CareerJobDetailCanonicalCacheReader::codecDigest(), $parityCodecDigest)
         || $resourceGuard !== [
             'schema_version' => 'career.current_authority_publish.resource_guard.v1',
             'timeout_seconds' => 900,

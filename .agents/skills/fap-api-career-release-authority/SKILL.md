@@ -45,6 +45,12 @@ Keep fap-api as the authority for career content, release state, and public care
 7. Validate routes, migrations, focused publication/revision behavior, and MBTI compatibility checks.
 8. Document repository rule impact when authority, revision selection, or publishing behavior changes.
 
+## Publisher parity recurrence stop
+- After two failures on the same Career publisher boundary, stop pushing new commits.
+- Download the sanitized CI/staging receipt, reproduce the complete candidate → active/LKG → API/snapshot state machine locally, and identify one root cause.
+- Make one root-cause fix only, rerun the full 1046 slug × two-locale parity and Redis capacity command, and push again only after that complete parity passes.
+- Never respond to repeated parity failures by adding a bypass, weakening receipt binding, retrying the failed SHA, or stacking speculative guards.
+
 ## Big Five × Career release checklist
 - Confirm the Big Five source is a backend public API projection of a published revision.
 - Confirm no imported Authority V2 working/draft revision is selected implicitly.

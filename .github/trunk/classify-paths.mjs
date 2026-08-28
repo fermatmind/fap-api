@@ -15,23 +15,42 @@ export const CATEGORIES = [
 
 const normalize = (path) => path.replace(/^\.\//, "").replaceAll("\\", "/");
 const matches = (path, expressions) => expressions.some((expression) => expression.test(path));
+
+export const CAREER_PUBLISHER_BOUNDARY_MATRIX = [
+  "backend/content_assets/career/career_current_authority_release.v1.json",
+  "backend/content_assets/career/current/",
+  "backend/app/Domain/Career/Compilation/CareerContentV3Projector.php",
+  "backend/app/Domain/Career/Display/CareerContentV3Contract.php",
+  "backend/app/Domain/Career/Display/CareerCurrentAuthorityPackage.php",
+  "backend/app/Domain/Career/Display/CareerCurrentAuthorityPackageLoader.php",
+  "backend/app/Domain/Career/Display/CareerShardedCurrentAuthorityPackage.php",
+  "backend/app/Domain/Career/Display/CareerCurrentAuthorityPublisher.php",
+  "backend/app/Domain/Career/Display/CareerCurrentAuthorityStateMachine.php",
+  "backend/app/Domain/Career/Display/CareerCurrentAuthorityCacheGateway.php",
+  "backend/app/Domain/Career/Display/CareerJobDetailCanonicalCacheReader.php",
+  "backend/app/Services/Career/CareerJobDisplaySurfaceBuilder.php",
+  "backend/app/Services/Career/PublicCareerAuthorityResponseCache.php",
+  "backend/config/career_current_authority_parity.php",
+  "backend/scripts/ci/career_current_authority_parity.php",
+  "backend/scripts/ci/verify_career_current_authority_parity.sh",
+  "backend/scripts/deploy/run_career_current_authority_publisher.sh",
+  "backend/scripts/operations/career_current_authority_publish.php",
+];
+
+const isCareerPublisherBoundary = (path) => CAREER_PUBLISHER_BOUNDARY_MATRIX.some(
+  (boundary) => boundary.endsWith("/") ? path.startsWith(boundary) : path === boundary,
+);
+
 export function classifyPaths(inputPaths) {
   const paths = [...new Set(inputPaths.map(normalize).filter(Boolean))].sort();
   if (paths.length === 0) throw new Error("changed path set must not be empty");
 
   const result = Object.fromEntries(CATEGORIES.map((category) => [category, false]));
   const reasons = Object.fromEntries(CATEGORIES.map((category) => [category, []]));
+  const publisherRequired = paths.some(isCareerPublisherBoundary);
   const operations = {
-    career_current_authority_release: paths.some((path) =>
-      [
-        "backend/content_assets/career/career_current_authority_release.v1.json",
-        "backend/app/Domain/Career/Compilation/CareerContentV3Projector.php",
-        "backend/app/Domain/Career/Display/CareerContentV3Contract.php",
-        "backend/app/Domain/Career/Display/CareerCurrentAuthorityCacheGateway.php",
-        "backend/app/Services/Career/CareerJobDisplaySurfaceBuilder.php",
-        "backend/app/Services/Career/PublicCareerAuthorityResponseCache.php",
-      ].includes(path),
-    ),
+    publisher_required: publisherRequired,
+    career_current_authority_release: publisherRequired,
     mbti_zh_result_authority_release: paths.includes(
       "backend/content_assets/personality_public/mbti_zh_result_authority_release.v1.json",
     ),

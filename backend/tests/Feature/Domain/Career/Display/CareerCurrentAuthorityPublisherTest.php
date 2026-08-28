@@ -16,7 +16,6 @@ use App\Models\ContentMaterialDecision;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
 use App\Services\Career\Bundles\CareerJobDisplaySurfaceBuilder;
-use App\Services\Career\Review\CareerJobDetailReaderSafeReviewProjector;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -27,6 +26,14 @@ use Tests\TestCase;
 final class CareerCurrentAuthorityPublisherTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        if (! Schema::hasTable('content_material_decisions')) {
+            (require dirname(__DIR__, 5).'/database/migrations/2026_08_28_010000_create_content_material_decisions_table.php')->up();
+        }
+    }
 
     public function test_it_rebuilds_the_existing_current_row_switches_cache_and_replays_as_zero_write(): void
     {
@@ -599,7 +606,6 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
             new CareerCurrentAuthorityPackage,
             $loader,
             $cache,
-            new CareerJobDetailReaderSafeReviewProjector,
             app(CareerJobDisplaySurfaceBuilder::class),
             app(CareerMaterialDecisionService::class),
         );

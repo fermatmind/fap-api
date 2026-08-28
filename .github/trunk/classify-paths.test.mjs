@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { classifyPaths } from "./classify-paths.mjs";
+import { CAREER_PUBLISHER_BOUNDARY_MATRIX, classifyPaths } from "./classify-paths.mjs";
 
 const has = (paths, flag) => classifyPaths(paths).flags[flag];
 
@@ -83,6 +83,25 @@ test("binds Career Current release and runtime projection dependencies to its op
   assert.equal(responseCache.flags.application_code, true);
   assert.equal(responseCache.flags.cache_runtime_projection, false);
   assert.equal(adjacent.operations.career_current_authority_release, false);
+});
+
+test("requires publisher parity for every centralized Career publisher boundary", () => {
+  for (const boundary of CAREER_PUBLISHER_BOUNDARY_MATRIX) {
+    const path = boundary.endsWith("/") ? `${boundary}identity/shard-00.jsonl` : boundary;
+    const result = classifyPaths([path]);
+    assert.equal(result.operations.publisher_required, true, path);
+    assert.equal(result.operations.career_current_authority_release, true, path);
+  }
+});
+
+test("does not require publisher parity for adjacent unrelated Career paths", () => {
+  for (const path of [
+    "backend/app/Services/Career/CareerRecommendationCompiler.php",
+    "backend/content_assets/career/career_current_authority_review.json",
+    "backend/tests/Feature/Career/CareerRecommendationCompilerTest.php",
+  ]) {
+    assert.equal(classifyPaths([path]).operations.publisher_required, false, path);
+  }
 });
 test("binds only the exact MBTI zh authority release manifest to its operation", () => {
   const exact = classifyPaths([

@@ -30,6 +30,7 @@ jobs:
       seo: ${{ steps.classify.outputs.seo }}
       infrastructure: ${{ steps.classify.outputs.infrastructure }}
       tests_changed: ${{ steps.classify.outputs.tests_changed }}
+      publisher_required: ${{ steps.classify.outputs.publisher_required }}
       career_current_authority_release: ${{ steps.classify.outputs.career_current_authority_release }}
       seo_platform_10_closeout: ${{ steps.classify.outputs.seo_platform_10_closeout }}
       classification: ${{ steps.classify.outputs.classification }}
@@ -70,6 +71,7 @@ jobs:
             echo "seo=$(jq -r .flags.seo_discoverability "$RUNNER_TEMP/classification.json")"
             echo "infrastructure=$(jq -r .flags.infrastructure_deployment "$RUNNER_TEMP/classification.json")"
             echo "tests_changed=$(jq -r .tests_changed "$RUNNER_TEMP/classification.json")"
+            echo "publisher_required=$(jq -r .operations.publisher_required "$RUNNER_TEMP/classification.json")"
             echo "career_current_authority_release=$(jq -r .operations.career_current_authority_release "$RUNNER_TEMP/classification.json")"
             echo "seo_platform_10_closeout=$(jq -r .operations.seo_platform_10_closeout "$RUNNER_TEMP/classification.json")"
             echo "classification=$compact"
@@ -273,9 +275,65 @@ jobs:
       - if: needs.classify.outputs.content != 'true' && needs.classify.outputs.application != 'true'
         run: echo "Big Five runtime boundary unchanged."
 
+  career-publisher-parity:
+    name: Career publisher zero-write parity
+    needs: [classify, hygiene]
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          fetch-depth: 0
+      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+        if: needs.classify.outputs.publisher_required == 'true'
+        with:
+          php-version: '8.4'
+          coverage: none
+          tools: composer:v2
+          extensions: mbstring, intl, pdo_sqlite, sqlite3, redis
+      - name: Run fixed slice, deterministic 2092-page scan, and Redis 6 capacity gate
+        if: needs.classify.outputs.publisher_required == 'true'
+        working-directory: backend
+        env:
+          CAREER_PARITY_RELEASE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          composer install --no-interaction --prefer-dist --no-progress
+          cp -n .env.example .env || true
+          php artisan key:generate --force
+          bash scripts/ci/verify_career_current_authority_parity.sh > career-current-authority-parity.json
+          jq -e --arg sha "$GITHUB_SHA" '
+            .contract_version == "career.current_authority_parity.v1"
+            and .status == "pass"
+            and .release_sha == $sha
+            and .architecture_slice.status == "pass"
+            and .architecture_slice.counts.locale_pages == 4
+            and .full_scan.counts.slugs == 1046
+            and .full_scan.counts.locale_pages == 2092
+            and .full_scan.counts.candidate == 2092
+            and .full_scan.counts.active == 2092
+            and .full_scan.counts.lkg == 2092
+            and .full_scan.counts.api == 2092
+            and .full_scan.counts.snapshot == 2092
+            and ([.write_counts[]] | all(. == 0))
+            and (.receipt_digest | test("^[0-9a-f]{64}$"))
+          ' career-current-authority-parity.json >/dev/null
+      - name: Record non-required publisher receipt
+        if: needs.classify.outputs.publisher_required != 'true'
+        run: >-
+          jq -n --arg sha "$GITHUB_SHA"
+          '{contract_version:"career.current_authority_parity.v1",status:"skipped",release_sha:$sha,receipt_digest:null}'
+          > backend/career-current-authority-parity.json
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: career-current-authority-parity-${{ github.sha }}
+          path: backend/career-current-authority-parity.json
+          if-no-files-found: error
+          retention-days: 90
+
   validation-receipt:
     name: exact-SHA validation receipt
-    needs: [classify, hygiene, supply-chain, content-pack-build-validate, verify-mbti, verify-bigfive]
+    needs: [classify, hygiene, supply-chain, content-pack-build-validate, verify-mbti, verify-bigfive, career-publisher-parity]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -283,6 +341,10 @@ jobs:
       - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
         with:
           name: trunk-classification-${{ github.sha }}
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          name: career-current-authority-parity-${{ github.sha }}
+          path: career-parity
       - name: Require every selected validation to pass
         env:
           CLASSIFY_RESULT: ${{ needs.classify.result }}
@@ -291,13 +353,21 @@ jobs:
           CONTENT_PACK_RESULT: ${{ needs.content-pack-build-validate.result }}
           VERIFY_MBTI_RESULT: ${{ needs.verify-mbti.result }}
           VERIFY_BIGFIVE_RESULT: ${{ needs.verify-bigfive.result }}
+          CAREER_PARITY_RESULT: ${{ needs.career-publisher-parity.result }}
         run: |
           set -euo pipefail
-          for result in "$CLASSIFY_RESULT" "$HYGIENE_RESULT" "$SUPPLY_CHAIN_RESULT" "$CONTENT_PACK_RESULT" "$VERIFY_MBTI_RESULT" "$VERIFY_BIGFIVE_RESULT"; do
+          for result in "$CLASSIFY_RESULT" "$HYGIENE_RESULT" "$SUPPLY_CHAIN_RESULT" "$CONTENT_PACK_RESULT" "$VERIFY_MBTI_RESULT" "$VERIFY_BIGFIVE_RESULT" "$CAREER_PARITY_RESULT"; do
             test "$result" = success
           done
+          required="$(jq -r .operations.publisher_required trunk-path-classification.json)"
+          jq -e --arg sha "$GITHUB_SHA" --argjson required "$required" '
+            .release_sha == $sha
+            and (($required and .status == "pass" and (.receipt_digest | test("^[0-9a-f]{64}$")))
+              or (($required | not) and .status == "skipped"))
+          ' career-parity/career-current-authority-parity.json >/dev/null
           jq -n --arg sha "$GITHUB_SHA" --arg run_id "$GITHUB_RUN_ID" --slurpfile classification trunk-path-classification.json \
-            '{schema_version:"fermatmind.trunk-validation.v1",sha:$sha,ci_run_id:$run_id,result:"success",classification:$classification[0]}' \
+            --slurpfile parity career-parity/career-current-authority-parity.json \
+            '{schema_version:"fermatmind.trunk-validation.v1",sha:$sha,ci_run_id:$run_id,result:"success",classification:$classification[0],publisher:{required:$classification[0].operations.publisher_required,parity:$parity[0]}}' \
             > trunk-validation.json
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:

@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career;
 
-use App\Domain\Career\Compilation\CareerContentV3Projector;
-use App\Domain\Career\Display\CareerContentV3Contract;
+use App\Domain\Career\Display\CareerJobDetailCanonicalCacheReader;
 use App\Domain\Career\Publish\CareerJobDetailExposureReadiness;
 use App\Domain\Career\Publish\CareerLaunchGovernanceClosureService;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionCoverageSnapshot;
@@ -21,7 +20,6 @@ use App\Services\Career\Bundles\CareerJobDetailBundleBuilder;
 use App\Services\Career\Bundles\CareerJobDetailDegradedShellBuilder;
 use App\Services\Career\Bundles\CareerJobListBundleBuilder;
 use App\Services\Career\Dataset\CareerPublicDatasetContractBuilder;
-use App\Services\ReviewGovernance\PublicReviewContract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
@@ -46,8 +44,6 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     public const JOB_DETAIL_CACHE_KEY_PREFIX = 'career:public-authority:job-detail:v1';
 
     public const JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX = 'career:public-authority:job-detail:v3';
-
-    private const JOB_DETAIL_PAYLOAD_CODEC = 'career.job-detail.gzip-json.v1';
 
     public const JOB_DETAIL_NEGATIVE_CACHE_TTL_SECONDS = 300;
 
@@ -81,8 +77,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         private readonly CareerAiImpactPreviewDetailShellBuilder $aiImpactPreviewDetailShellBuilder,
         private readonly CareerRuntimePublishProjectionVisibility $runtimePublishProjection,
         private readonly CareerDirectoryReadModelBuilder $careerDirectoryReadModelBuilder,
-        private readonly PublicReviewContract $publicReviewContract,
-        private readonly CareerContentV3Projector $contentV3Projector,
+        private readonly CareerJobDetailCanonicalCacheReader $canonicalJobDetailReader,
     ) {}
 
     /** @return array<string, mixed> */
@@ -361,7 +356,11 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
 
                 continue;
             }
-            $payload = $this->decodeStoredJobDetailPayload($storedPayload);
+            $payload = $this->canonicalJobDetailReader->read(
+                $storedPayload,
+                $normalizedSlug,
+                $normalizedLocale,
+            );
             if ($payload === null) {
                 $issues[] = 'invalid_payload';
 
@@ -376,10 +375,11 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         }
 
         $legacy = Cache::get($this->jobDetailCacheKey($normalizedSlug, $normalizedLocale));
-        if (is_array($legacy)) {
+        $legacyPayload = $this->canonicalJobDetailReader->read($legacy, $normalizedSlug, $normalizedLocale);
+        if (is_array($legacyPayload)) {
             return [
                 'classification' => 'legacy_migratable',
-                'payload' => $legacy,
+                'payload' => $legacyPayload,
                 'version' => 'legacy-v1',
             ];
         }
@@ -882,7 +882,11 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         ));
 
         return is_array($payload)
-            ? $this->hydrateDerivedContentV3($payload, $slug, $this->normalizePublicLocale($rawLocale))
+            ? $this->canonicalJobDetailReader->normalizeAndHydrate(
+                $payload,
+                $slug,
+                $this->normalizePublicLocale($rawLocale),
+            )
             : null;
     }
 
@@ -2238,7 +2242,9 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     private function normalizeJobDetailReviewContract(array $payload): array
     {
         if (is_array($payload['trust_manifest'] ?? null)) {
-            $payload['trust_manifest'] = $this->normalizeReviewContainer($payload['trust_manifest']);
+            $payload['trust_manifest'] = $this->canonicalJobDetailReader->normalizeReviewContainer(
+                $payload['trust_manifest'],
+            );
         }
 
         return $payload;
@@ -2247,43 +2253,13 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     /** Keep the reader-equivalent v3 projection out of immutable cache bytes. @param array<string, mixed> $payload @return array<string, mixed> */
     private function withoutDerivedContentV3(array $payload, string $slug, string $locale): array
     {
-        $contentV3 = data_get($payload, 'display_surface_v1.content_v3');
-        $hydrated = is_array($contentV3)
-            ? $this->hydrateDerivedContentV3($payload, $slug, $locale)
-            : $payload;
-        if (is_array($contentV3) && data_get($hydrated, 'display_surface_v1.content_v3') === $contentV3) {
-            unset($payload['display_surface_v1']['content_v3']);
-        }
-
-        return $payload;
+        return $this->canonicalJobDetailReader->withoutDerivedContentV3($payload, $slug, $locale);
     }
 
     /** @param array<string, mixed> $payload @return array<string, mixed> */
     private function hydrateDerivedContentV3(array $payload, string $slug, string $locale): array
     {
-        $surface = $payload['display_surface_v1'] ?? null;
-        $page = is_array($surface) ? data_get($surface, 'page.content') : null;
-        if (! is_array($surface) || ! is_array($page)) {
-            return $payload;
-        }
-
-        try {
-            $presentation = $surface['presentation_v2'] ?? null;
-            $sources = $surface['sources'] ?? [];
-            $contentV3 = $this->contentV3Projector->project(
-                strtolower(trim($slug)),
-                $this->normalizePublicLocale($locale),
-                $page,
-                is_array($presentation) ? $presentation : null,
-                is_array($sources) ? $sources : [],
-            );
-            CareerContentV3Contract::assert($contentV3);
-            $payload['display_surface_v1']['content_v3'] = $contentV3;
-        } catch (Throwable) {
-            unset($payload['display_surface_v1']['content_v3']);
-        }
-
-        return $payload;
+        return $this->canonicalJobDetailReader->normalizeAndHydrate($payload, $slug, $locale) ?? [];
     }
 
     /** @param array<string, mixed> $item @return array<string, mixed> */
@@ -2299,19 +2275,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     /** @param array<string, mixed> $review @return array<string, mixed> */
     private function normalizeReviewContainer(array $review): array
     {
-        $hasCanonicalReviewState = array_key_exists('review_state', $review);
-
-        return array_merge(
-            $review,
-            $this->publicReviewContract->project(
-                $hasCanonicalReviewState
-                    ? $review['review_state']
-                    : ($review['reviewer_status'] ?? null),
-                $hasCanonicalReviewState
-                    ? ($review['last_reviewed_at'] ?? null)
-                    : ($review['reviewed_at'] ?? null),
-            ),
-        );
+        return $this->canonicalJobDetailReader->normalizeReviewContainer($review);
     }
 
     private function detailReadIsPublishedForLocale(string $slug, string $publicLocale): bool
@@ -2402,13 +2366,12 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         string $slug,
         string $publicLocale,
     ): bool {
-        $normalizedSlug = strtolower(trim($slug));
-        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
-
-        return is_array($exposureProjection)
-            && strtolower(trim((string) ($exposureProjection['slug'] ?? ''))) === $normalizedSlug
-            && $this->normalizePublicLocale((string) ($exposureProjection['locale'] ?? '')) === $normalizedLocale
-            && $this->jobDetailProjectionItemIsPublished($exposureProjection);
+        return $this->canonicalJobDetailReader->snapshotIsValid(
+            $exposureProjection,
+            $slug,
+            $publicLocale,
+            fn (array $snapshot): bool => $this->jobDetailProjectionItemIsPublished($snapshot),
+        );
     }
 
     /** @param array<string, mixed>|null $item */
@@ -2567,17 +2530,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     /** @param array<string, mixed> $payload */
     private function writeStoredJobDetailPayload(string $key, array $payload): void
     {
-        $json = json_encode($payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-        $compressed = gzencode($json, 6);
-        if ($compressed === false) {
-            throw new \RuntimeException('Career detail cache payload compression failed.');
-        }
-
-        Cache::forever($key, [
-            'codec' => self::JOB_DETAIL_PAYLOAD_CODEC,
-            'sha256' => hash('sha256', $json),
-            'payload' => base64_encode($compressed),
-        ]);
+        Cache::forever($key, $this->canonicalJobDetailReader->encode($payload));
     }
 
     /** @return array<string, mixed>|null */
@@ -2589,35 +2542,13 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     /** @return array<string, mixed>|null */
     private function decodeStoredJobDetailPayload(mixed $stored): ?array
     {
-        if (! is_array($stored)) {
-            return null;
-        }
-        if (! $this->isEncodedJobDetailPayload($stored)) {
-            return $stored;
-        }
-
-        $compressed = base64_decode((string) ($stored['payload'] ?? ''), true);
-        if ($compressed === false) {
-            return null;
-        }
-        $json = gzdecode($compressed);
-        if (! is_string($json)
-            || ! hash_equals((string) ($stored['sha256'] ?? ''), hash('sha256', $json))) {
-            return null;
-        }
-
-        try {
-            $payload = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
-        } catch (\JsonException) {
-            return null;
-        }
-
-        return is_array($payload) ? $payload : null;
+        return $this->canonicalJobDetailReader->decode($stored);
     }
 
     private function isEncodedJobDetailPayload(mixed $stored): bool
     {
-        return is_array($stored) && ($stored['codec'] ?? null) === self::JOB_DETAIL_PAYLOAD_CODEC;
+        return is_array($stored)
+            && ($stored['codec'] ?? null) === CareerJobDetailCanonicalCacheReader::CODEC_VERSION;
     }
 
     private function jobDetailExposureProjectionVersionKey(string $slug, string $publicLocale, string $version): string

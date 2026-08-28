@@ -6,7 +6,6 @@ namespace App\Domain\Career\Display;
 
 use App\Models\CareerJobDisplayAsset;
 use App\Services\Career\Bundles\CareerJobDisplaySurfaceBuilder;
-use App\Services\Career\Review\CareerJobDetailReaderSafeReviewProjector;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
@@ -46,14 +45,18 @@ final class CareerCurrentAuthorityPublisher
         'metadata_json',
     ];
 
+    private readonly CareerCurrentAuthorityStateMachine $stateMachine;
+
     public function __construct(
         private readonly CareerCurrentAuthorityPackage $package,
         private readonly CareerCurrentAuthorityPackageLoader $loader,
         private readonly CareerCurrentAuthorityCacheGateway $cache,
-        private readonly CareerJobDetailReaderSafeReviewProjector $readerSafeProjector,
         private readonly CareerJobDisplaySurfaceBuilder $displaySurfaceBuilder,
         private readonly CareerMaterialDecisionService $materialDecisions,
-    ) {}
+        ?CareerCurrentAuthorityStateMachine $stateMachine = null,
+    ) {
+        $this->stateMachine = $stateMachine ?? app(CareerCurrentAuthorityStateMachine::class);
+    }
 
     /** @return array<string,mixed> */
     public function execute(string $backendRoot, bool $fullScan = false): array
@@ -97,6 +100,7 @@ final class CareerCurrentAuthorityPublisher
             }
 
             foreach ($candidatePairs as [$slug, $locale]) {
+                $expectedCandidate = $this->stateMachine->assembleCandidate($authority['rows'][$slug], $locale);
                 try {
                     $entry = $this->cache->prepare($slug, $locale);
                 } catch (Throwable $throwable) {
@@ -105,20 +109,21 @@ final class CareerCurrentAuthorityPublisher
                         $throwable,
                     );
                 }
-                if (($entry['status'] ?? null) !== 'ready' || ($entry['classification'] ?? null) !== 'ready_staged') {
-                    throw new CareerCurrentAuthorityPublisherFailure('CURRENT_CACHE_CANDIDATE_PREPARATION_FAILED');
-                }
+                $this->stateMachine->assertPreparedTransition($entry);
                 $prepared[] = $entry;
                 $this->assertCachedPayload($entry, $authority['rows'][$slug], $locale, true);
+                $actualCandidate = $this->cache->preparedPayload($entry);
+                if (! is_array($actualCandidate) || ! hash_equals(
+                    CareerCurrentAuthorityPackage::hashValue($expectedCandidate['payload']),
+                    CareerCurrentAuthorityPackage::hashValue($actualCandidate),
+                )) {
+                    throw new CareerCurrentAuthorityPublisherFailure('CURRENT_CACHE_CANDIDATE_ASSEMBLY_MISMATCH');
+                }
             }
 
             if ($prepared !== []) {
                 $activation = $this->cache->activate($prepared);
-                if (($activation['status'] ?? null) !== 'pass'
-                    || count((array) ($activation['entries'] ?? [])) !== count($prepared)
-                    || ($activation['failures'] ?? []) !== []) {
-                    throw new CareerCurrentAuthorityPublisherFailure('CURRENT_CACHE_POINTER_ACTIVATION_FAILED');
-                }
+                $this->stateMachine->assertActivationTransition($activation, count($prepared));
                 $pointersActivated = true;
                 $rollbackSnapshots = (array) ($activation['rollback_snapshots'] ?? []);
             }
@@ -389,7 +394,7 @@ final class CareerCurrentAuthorityPublisher
         if (! is_array($payload) || ! is_array(data_get($payload, 'display_surface_v1'))) {
             throw new CareerCurrentAuthorityPublisherFailure('CURRENT_CACHE_PAYLOAD_MISSING');
         }
-        $mismatchCode = $this->cachedPayloadMismatchCode($payload, $row, $locale);
+        $mismatchCode = $this->stateMachine->payloadMismatchCode($payload, $row, $locale);
         if ($mismatchCode !== null) {
             // Resolve only a content-free, field-specific eligibility code before compensation.
             // Unavailable component fields are storage-order independent at this boundary;
@@ -408,152 +413,7 @@ final class CareerCurrentAuthorityPublisher
     /** @param array<string,mixed>|null $payload @param array<string,mixed> $row */
     private function cachedPayloadMatches(?array $payload, array $row, string $locale): bool
     {
-        return $this->cachedPayloadMismatchCode($payload, $row, $locale) === null;
-    }
-
-    /** @param array<string,mixed>|null $payload @param array<string,mixed> $row */
-    private function cachedPayloadMismatchCode(?array $payload, array $row, string $locale): ?string
-    {
-        if (is_array($payload) && $this->containsVersionDiscriminator($payload)) {
-            return 'CURRENT_CACHE_VERSION_FIELD_FORBIDDEN';
-        }
-        $surface = is_array($payload) ? data_get($payload, 'display_surface_v1') : null;
-        if (! is_array($surface)) {
-            return 'CURRENT_CACHE_CONTENT_MISMATCH';
-        }
-        try {
-            $expected = $this->readerSafeProjector->project($this->package->publicProjection($row, $locale));
-            $actual = $this->readerSafeProjector->project($this->package->displayOwnedProjection($surface));
-            if (hash_equals(
-                CareerCurrentAuthorityPackage::hashValue($expected),
-                CareerCurrentAuthorityPackage::hashValue($actual),
-            )) {
-                return null;
-            }
-            foreach (array_keys($expected) as $field) {
-                if (! array_key_exists($field, $actual)
-                    || ! hash_equals(
-                        CareerCurrentAuthorityPackage::hashValue($expected[$field]),
-                        CareerCurrentAuthorityPackage::hashValue($actual[$field]),
-                    )) {
-                    return match ($field) {
-                        'surface_version' => 'CURRENT_CACHE_SURFACE_VERSION_MISMATCH',
-                        'available_locales' => 'CURRENT_CACHE_AVAILABLE_LOCALES_MISMATCH',
-                        'page' => $this->pageMismatchCode((array) $expected[$field], (array) ($actual[$field] ?? [])),
-                        'component_order' => 'CURRENT_CACHE_COMPONENT_ORDER_MISMATCH',
-                        'sources' => 'CURRENT_CACHE_SOURCES_MISMATCH',
-                        'structured_data_from_visible_content' => 'CURRENT_CACHE_STRUCTURED_DATA_MISMATCH',
-                        'implementation_contract' => 'CURRENT_CACHE_IMPLEMENTATION_CONTRACT_MISMATCH',
-                        'presentation_v1' => 'CURRENT_CACHE_PRESENTATION_MISMATCH',
-                        'content_v3' => $this->contentV3MismatchCode(
-                            (array) $expected[$field],
-                            (array) ($actual[$field] ?? []),
-                        ),
-                        default => 'CURRENT_CACHE_CONTENT_MISMATCH',
-                    };
-                }
-            }
-
-            return 'CURRENT_CACHE_CONTENT_MISMATCH';
-        } catch (CareerCurrentAuthorityPackageFailure) {
-            return 'CURRENT_CACHE_CONTENT_MISMATCH';
-        }
-    }
-
-    /** @param array<string,mixed> $expected @param array<string,mixed> $actual */
-    private function contentV3MismatchCode(array $expected, array $actual): string
-    {
-        foreach (['contract_version', 'locale', 'subject', 'content_state', 'source_content_sha256'] as $field) {
-            if (CareerCurrentAuthorityPackage::hashValue($expected[$field] ?? null)
-                !== CareerCurrentAuthorityPackage::hashValue($actual[$field] ?? null)) {
-                return 'CURRENT_CACHE_CONTENT_V3_'.strtoupper($field).'_MISMATCH';
-            }
-        }
-
-        $expectedBlocks = is_array($expected['blocks'] ?? null) ? $expected['blocks'] : [];
-        $actualBlocks = is_array($actual['blocks'] ?? null) ? $actual['blocks'] : [];
-        if (count($expectedBlocks) !== count($actualBlocks)) {
-            return 'CURRENT_CACHE_CONTENT_V3_BLOCK_COUNT_MISMATCH';
-        }
-        if (array_column($expectedBlocks, 'id') !== array_column($actualBlocks, 'id')) {
-            return 'CURRENT_CACHE_CONTENT_V3_BLOCK_ORDER_MISMATCH';
-        }
-        foreach ($expectedBlocks as $index => $expectedBlock) {
-            $actualBlock = $actualBlocks[$index] ?? null;
-            if (! is_array($expectedBlock) || ! is_array($actualBlock)) {
-                return 'CURRENT_CACHE_CONTENT_V3_BLOCK_SHAPE_MISMATCH';
-            }
-            foreach (['copy_key', 'content_state', 'availability'] as $field) {
-                if (($expectedBlock[$field] ?? null) !== ($actualBlock[$field] ?? null)) {
-                    return 'CURRENT_CACHE_CONTENT_V3_BLOCK_FIELD_MISMATCH';
-                }
-            }
-            $expectedItems = is_array($expectedBlock['items'] ?? null) ? $expectedBlock['items'] : [];
-            $actualItems = is_array($actualBlock['items'] ?? null) ? $actualBlock['items'] : [];
-            if (count($expectedItems) !== count($actualItems)) {
-                return 'CURRENT_CACHE_CONTENT_V3_ITEM_COUNT_MISMATCH';
-            }
-            if (array_column($expectedItems, 'id') !== array_column($actualItems, 'id')) {
-                return 'CURRENT_CACHE_CONTENT_V3_ITEM_ORDER_MISMATCH';
-            }
-            foreach ($expectedItems as $itemIndex => $expectedItem) {
-                $actualItem = $actualItems[$itemIndex] ?? null;
-                if (! is_array($expectedItem) || ! is_array($actualItem)) {
-                    return 'CURRENT_CACHE_CONTENT_V3_ITEM_SHAPE_MISMATCH';
-                }
-                foreach (['copy_key', 'type', 'availability'] as $field) {
-                    if (($expectedItem[$field] ?? null) !== ($actualItem[$field] ?? null)) {
-                        return 'CURRENT_CACHE_CONTENT_V3_ITEM_FIELD_MISMATCH';
-                    }
-                }
-                if (CareerCurrentAuthorityPackage::hashValue($expectedItem['data'] ?? null)
-                    !== CareerCurrentAuthorityPackage::hashValue($actualItem['data'] ?? null)) {
-                    return 'CURRENT_CACHE_CONTENT_V3_ITEM_DATA_MISMATCH';
-                }
-            }
-        }
-
-        return 'CURRENT_CACHE_CONTENT_V3_MISMATCH';
-    }
-
-    /** @param array<mixed> $value */
-    private function containsVersionDiscriminator(array $value): bool
-    {
-        foreach ($value as $key => $item) {
-            if ($key === 'asset_version' || $key === 'template_version') {
-                return true;
-            }
-            if (is_array($item) && $this->containsVersionDiscriminator($item)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /** @param array<string,mixed> $expected @param array<string,mixed> $actual */
-    private function pageMismatchCode(array $expected, array $actual): string
-    {
-        if (($expected['locale'] ?? null) !== ($actual['locale'] ?? null)) {
-            return 'CURRENT_CACHE_PAGE_LOCALE_MISMATCH';
-        }
-        $expectedContent = is_array($expected['content'] ?? null) ? $expected['content'] : [];
-        $actualContent = is_array($actual['content'] ?? null) ? $actual['content'] : [];
-        foreach ($expectedContent as $componentId => $component) {
-            if (! array_key_exists($componentId, $actualContent)
-                || ! hash_equals(
-                    CareerCurrentAuthorityPackage::hashValue($component),
-                    CareerCurrentAuthorityPackage::hashValue($actualContent[$componentId]),
-                )) {
-                return match ($componentId) {
-                    'career_quick_answers_block' => 'CURRENT_CACHE_QUICK_ANSWERS_MISMATCH',
-                    'onet_structured_fields_block' => 'CURRENT_CACHE_ONET_STRUCTURED_FIELDS_MISMATCH',
-                    default => 'CURRENT_CACHE_PAGE_CONTENT_MISMATCH',
-                };
-            }
-        }
-
-        return 'CURRENT_CACHE_PAGE_CONTENT_MISMATCH';
+        return $this->stateMachine->payloadMatches($payload, $row, $locale);
     }
 
     /**
