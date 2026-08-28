@@ -879,18 +879,22 @@ task('seo:platform-10-material-backfill', function () {
 set -euo pipefail
 max_records="$({{bin/php}} -r 'require "vendor/autoload.php"; $app = require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); echo (int) config("seo_platform_10.max_records");')"
 canary_size="$({{bin/php}} -r 'require "vendor/autoload.php"; $app = require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); echo (int) config("seo_platform_10.canary_size");')"
-test "$max_records" = 5000
+test "$max_records" = 10000
 test "$canary_size" = 10
 
+set +e
 dry_run="$({{bin/php}} artisan seo-intel:url-truth-material-backfill --max-records="$max_records" --canary-size="$canary_size" --json --no-interaction --no-ansi)"
+dry_run_rc=$?
+set -e
 printf '%s\n' "$dry_run"
+test "$dry_run_rc" = 0
 printf '%s' "$dry_run" | {{bin/php}} -r '
 $receipt = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
 $ok = ($receipt["status"] ?? null) === "success"
     && ($receipt["mode"] ?? null) === "dry_run"
     && ($receipt["writes_committed"] ?? null) === false
     && ($receipt["artifact"]["record_count"] ?? 0) > 0
-    && ($receipt["bounds"]["max_records"] ?? null) === 5000
+    && ($receipt["bounds"]["max_records"] ?? null) === 10000
     && ($receipt["bounds"]["canary_size"] ?? null) === 10
     && ($receipt["boundaries"]["unknown_legacy_action"] ?? null) === "hold"
     && ($receipt["boundaries"]["search_submission_allowed"] ?? null) === false;

@@ -14,6 +14,7 @@ final class SeoPlatform10ProductionCloseoutContractTest extends TestCase
         $ci = (string) file_get_contents(base_path('../.github/workflows/ci.yml'));
         $deployWorkflow = (string) file_get_contents(base_path('../.github/workflows/deploy.yml'));
         $deployer = (string) file_get_contents(base_path('../deploy.php'));
+        $operation = require config_path('seo_platform_10.php');
 
         $this->assertStringContainsString('seo_platform_10_closeout: paths.includes("backend/config/seo_platform_10.php")', $classifier);
         $this->assertStringContainsString('seo_platform_10_closeout:', $ci);
@@ -27,6 +28,9 @@ final class SeoPlatform10ProductionCloseoutContractTest extends TestCase
         $this->assertStringContainsString('projection_digest', $deployer);
         $this->assertStringContainsString('unknown_legacy_action', $deployer);
         $this->assertStringContainsString('recovery_ready_without_destructive_probe', $deployer);
+        $this->assertSame(10000, $operation['max_records']);
+        $this->assertStringContainsString('dry_run_rc=$?', $deployer);
+        $this->assertStringContainsString('test "$dry_run_rc" = 0', $deployer);
     }
 
     public function test_closeout_scripts_expose_no_manual_or_search_mutation_control(): void
