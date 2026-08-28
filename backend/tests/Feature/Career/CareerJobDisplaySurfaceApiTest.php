@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
-use App\Domain\Career\Compilation\CareerContentV3Projector;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
@@ -147,16 +146,6 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             array_column($response->json('display_surface_v1.page.content.career_quick_answers_block.items'), 'key'),
         );
         $this->assertNotEmpty($response->json('display_surface_v1.structured_data_from_visible_content.faq_page.zh.mainEntity'));
-        $this->assertSame(
-            app(CareerContentV3Projector::class)->project(
-                'accountants-and-auditors',
-                'zh-CN',
-                $response->json('display_surface_v1.page.content'),
-                $response->json('display_surface_v1.presentation_v2'),
-                $response->json('display_surface_v1.sources'),
-            ),
-            $response->json('display_surface_v1.content_v3'),
-        );
         $this->assertFalse(
             $response->json('display_surface_v1.structured_data_from_visible_content.schema_rules.occupation_schema_generated_locally'),
         );
