@@ -106523,7 +106523,7 @@
     "base": "main",
     "branch": "codex/seo-platform-10-c-career-adapter",
     "title": "feat(seo): record Career Current material decisions",
-    "status": "pr_open",
+    "status": "merged",
     "commit_sha": "4c40be30521681bd19733c6072617d2e08d16e1c",
     "pr_number": 3829,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3829",
@@ -106552,8 +106552,8 @@
         "status": "passed",
         "evidence": "The declared scope is limited to the Career Current material-decision adapter, its existing publish and compensation transaction integration, focused tests, and minimum train reconciliation."
       },
-      "github_ci": {"status": "pending", "evidence": "PR #3829 is open from the exact validated implementation commit; required checks are pending."},
-      "deployment": {"status": "pending", "evidence": "No 10-C automatic exact-SHA deployment exists yet."}
+      "github_ci": {"status": "passed", "evidence": "PR #3829 merged as 09dccf442068923e2f9cf4373671face436dbbfe and exact-SHA main CI run 33134113270 passed every classifier-selected job."},
+      "deployment": {"status": "failed_external_staging", "evidence": "Automatic exact-SHA Deploy run 33134387868 timed out with exit 124 in staging deploy:vendors after the release was prepared but before migration, activation, or smoke. Production was skipped and remained unchanged; no workflow was manually dispatched or retried. This host-side vendor-install timeout is outside the Career-only diff."}
     },
     "production_write_execution": false,
     "production_workflow_dispatched": false,
@@ -106577,6 +106577,62 @@
         "at": "2026-08-28T09:49:52+08:00",
         "status": "pr_open",
         "note": "Opened PR #3829 from exact validated implementation commit 4c40be30521681bd19733c6072617d2e08d16e1c. GitHub reports the five-path scoped diff mergeable; required checks are pending."
+      },
+      {
+        "at": "2026-08-28T09:56:34+08:00",
+        "status": "merged",
+        "note": "PR #3829 was squash-merged as 09dccf442068923e2f9cf4373671face436dbbfe; exact-SHA main CI run 33134113270 passed. Its automatic deployment remains non-required staging work and was not manually dispatched."
+      },
+      {
+        "at": "2026-08-28T10:12:51+08:00",
+        "status": "deployment_failed_external_staging",
+        "note": "Automatic staging timed out with exit 124 at deploy:vendors. No migration, activation, production job, or smoke ran; production remained unchanged and no manual retry was performed."
+      }
+    ]
+  },
+  "SEO-PLATFORM-10-D": {
+    "id": "SEO-PLATFORM-10-D",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/seo-platform-10-d-personality-adapter",
+    "title": "feat(seo): record Personality material decisions",
+    "status": "implementation_in_progress",
+    "depends_on": ["SEO-PLATFORM-10-C"],
+    "allowed_paths": [
+      "backend/app/Services/Cms/PersonalityMaterialDecisionService.php",
+      "backend/app/Services/ContentPromotion/Adapters/PersonalityCmsPromotionAdapter.php",
+      "backend/app/Services/ContentPromotion/PersonalityCmsPromotionAuthority.php",
+      "backend/app/Services/ContentPromotion/Top100FrozenCmsBatchAuthority.php",
+      "backend/tests/Feature/SEO/PersonalityMaterialDecisionTest.php",
+      "backend/tests/Unit/ContentPromotion/PersonalityCmsPromotionAdapterTest.php",
+      "docs/codex/pr-train.yaml",
+      "docs/codex/pr-train-state.json"
+    ],
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "The operator explicitly authorized SEO-PLATFORM-10-D as the fourth item in the ordered eight-PR train."},
+      "dependency": {"status": "passed", "evidence": "SEO-PLATFORM-10-C merged as 09dccf442068923e2f9cf4373671face436dbbfe and its exact-SHA main CI passed before 10-D implementation began."},
+      "local_validation": {"status": "passed", "evidence": "Focused Personality material, exact-package public asset, TOP100 contract, and adapter suites passed 19 tests / 188 assertions. Reviewed revision binding, source-hash and review-time non-material behavior, real SEO change, bilingual locale identity, rollback/HOLD, Big Five/Enneagram isolation, and private-result rejection passed; scoped Pint, PHP syntax, train JSON/YAML parsing, and diff checks passed. The complete MBTI verifier was not duplicated because the repository heavy-process guard found another active FermatMind PHPUnit process; required GitHub checks remain authoritative."},
+      "scope": {"status": "passed", "evidence": "The declared scope is limited to the Personality material-decision adapter, existing exact-package publication and rollback transaction integration, focused tests, and minimum train reconciliation."},
+      "github_ci": {"status": "pending", "evidence": "No 10-D PR exists yet."},
+      "deployment": {"status": "pending", "evidence": "No 10-D automatic exact-SHA deployment exists yet."}
+    },
+    "production_write_execution": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "search_channel_action": false,
+    "transitions": [
+      {
+        "at": "2026-08-28T10:11:38+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started from merged 10-C after resolving the current public Personality authority: exact-package published revision pointers plus immutable review evidence for Big Five/Enneagram, and TOP100 reviewed public revisions for MBTI. Private result/report and non-public stores remain excluded; no content, production, cache, or discoverability write was performed."
+      },
+      {
+        "at": "2026-08-28T10:16:00+08:00",
+        "status": "local_validation_passed",
+        "note": "The unified adapter records only metadata after the complete exact-package public projection is finalized, preserves semantic material time across lineage-only changes, traces rollback or unknown legacy HOLD, and rejects private result authority. Focused tests passed 19 / 188; formatting, syntax, ledger parsing, scope, and diff checks passed."
       }
     ]
   }

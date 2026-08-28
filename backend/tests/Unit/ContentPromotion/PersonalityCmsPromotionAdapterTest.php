@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\ContentPromotion;
 
+use App\Models\ContentMaterialDecision;
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
 use App\Services\Cms\PersonalityPublicAssetReadModelCache;
@@ -171,6 +172,37 @@ final class PersonalityCmsPromotionAdapterTest extends TestCase
         } catch (\DomainException $exception) {
             self::assertSame('personality_promotion_review_evidence_invalid', $exception->getMessage());
         }
+    }
+
+    public function test_material_decision_uses_reviewed_public_snapshot_not_source_hash_or_private_state(): void
+    {
+        $asset = $this->asset('big_five', 'domain', 'openness', 'big-five-openness');
+        $adapter = app(PromotionAdapterRegistry::class)->resolve('W2', 'big-five');
+        $firstContext = $this->context($this->package('W2', 'big-five', $asset), 'W2', 'big-five');
+        $adapter->draftImport($firstContext);
+        $this->bindReview($firstContext);
+        $adapter->publish($firstContext);
+        $initial = ContentMaterialDecision::query()->sole();
+
+        $secondContext = $this->context($this->package('W2', 'big-five', $asset, [
+            'source_package' => 'lineage-only-change',
+            'source_hash' => str_repeat('b', 64),
+        ]), 'W2', 'big-five');
+        $adapter->draftImport($secondContext);
+        $this->bindReview($secondContext);
+        $adapter->publish($secondContext);
+
+        $latest = ContentMaterialDecision::query()->latest('id')->firstOrFail();
+        self::assertSame('unchanged_republish', $latest->decision_code);
+        self::assertFalse((bool) $latest->material_changed);
+        self::assertSame($initial->material_fingerprint, $latest->material_fingerprint);
+        self::assertSame($initial->material_changed_at?->toISOString(), $latest->material_changed_at?->toISOString());
+        self::assertSame('personality_public_asset_revision', $latest->authority_revision_kind);
+        self::assertStringStartsWith('personality_asset_review:', (string) $latest->evidence_ref);
+        $stored = json_encode($latest->getAttributes(), JSON_THROW_ON_ERROR);
+        self::assertStringNotContainsString('lineage-only-change', $stored);
+        self::assertStringNotContainsString(str_repeat('b', 64), $stored);
+        self::assertArrayNotHasKey('payload', $latest->getAttributes());
     }
 
     private function asset(string $framework, string $entityType, string $entityKey, string $slug): PersonalityPublicContentAsset

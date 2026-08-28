@@ -19,8 +19,10 @@ use App\Models\PersonalityProfileVariantSeoMeta;
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
 use App\Models\PersonalityPublicContentAssetRevisionReview;
+use App\Models\ReviewAttestation;
 use App\Services\Cms\ArticleBodyHeadingGuard;
 use App\Services\Cms\ArticlePublishService;
+use App\Services\Cms\PersonalityMaterialDecisionService;
 use App\Services\Cms\PersonalityPublicAssetReadModelCache;
 use App\Services\Cms\PersonalityPublicReadModelCache;
 use App\Services\Cms\PersonalityReviewAttestationService;
@@ -49,6 +51,7 @@ final class Top100FrozenCmsBatchAuthority
         private readonly PersonalityPublicAssetReadModelCache $personalityAssetCache,
         private readonly PersonalityPublicReadModelCache $mbtiCache,
         private readonly PersonalityReviewAttestationService $reviews,
+        private readonly PersonalityMaterialDecisionService $materialDecisions,
         private readonly PersonalityCmsPromotionReviewBinder $personalityReviewBinder,
         private readonly ArticleBodyHeadingGuard $articleBodyHeadingGuard,
         private readonly ArticlePublishService $articlePublisher,
@@ -157,6 +160,11 @@ final class Top100FrozenCmsBatchAuthority
                 $this->apply($context, $target, $resolved);
                 $changed++;
             }
+            $this->recordMaterialDecisions(
+                $context,
+                array_values(array_filter($package['targets'], static fn (array $target): bool => (bool) $target['changed'])),
+                'publish',
+            );
             $this->assertReadback($context);
 
             return ['changed_count' => $changed, 'unchanged_count' => 30 - $changed, 'readback_count' => 30];
@@ -207,9 +215,20 @@ final class Top100FrozenCmsBatchAuthority
                     throw new DomainException('top100_frozen_rollback_concurrent_mutation');
                 }
             }
+            $restoredMaterialTargets = [];
             foreach (array_reverse($rows) as $row) {
                 $this->restore($row);
+                $key = ((int) ($row['priority'] ?? 0)).':'.((string) ($row['url_sha256'] ?? ''));
+                $target = $targets->get($key);
+                if (is_array($target)
+                    && ! hash_equals(
+                        PromotionContextFactory::canonicalJson($this->rollbackComparable((array) data_get($row, 'before.mutable', []))),
+                        PromotionContextFactory::canonicalJson($this->rollbackComparable((array) ($row['desired'] ?? []))),
+                    )) {
+                    $restoredMaterialTargets[] = $target;
+                }
             }
+            $this->recordMaterialDecisions($context, $restoredMaterialTargets, 'rollback');
         }, 3);
         $this->invalidate($context, true);
     }
@@ -874,47 +893,92 @@ final class Top100FrozenCmsBatchAuthority
     {
         $key = 'seo_top100_frozen_20260812_v1';
         $snapshot = $this->mbtiRevisionSnapshot($context, $target);
+        $created = 0;
         if ($resolved['kind'] === 'mbti_variant') {
             $model = $resolved['model'];
             $existing = PersonalityProfileVariantRevision::query()->where('personality_profile_variant_id', $model->id)
                 ->get()->first(static fn (PersonalityProfileVariantRevision $revision): bool => data_get($revision->snapshot_json, $key.'.package_sha256') === $context->packageSha256);
             if ($existing instanceof PersonalityProfileVariantRevision) {
-                if (hash_equals(PromotionContextFactory::canonicalJson((array) $existing->snapshot_json), PromotionContextFactory::canonicalJson($snapshot))) {
-                    return 0;
+                if (! hash_equals(PromotionContextFactory::canonicalJson((array) $existing->snapshot_json), PromotionContextFactory::canonicalJson($snapshot))) {
+                    $existing->delete();
+                    $existing = null;
                 }
-                $existing->delete();
             }
-            PersonalityProfileVariantRevision::query()->create([
-                'personality_profile_variant_id' => $model->id,
-                'revision_no' => ((int) PersonalityProfileVariantRevision::query()->where('personality_profile_variant_id', $model->id)->max('revision_no')) + 1,
-                'snapshot_json' => $snapshot,
-                'note' => Top100FrozenPackage::BATCH_ID,
-                'created_by_admin_user_id' => $this->ownerActor(),
-                'created_at' => now(),
-            ]);
+            if (! $existing instanceof PersonalityProfileVariantRevision) {
+                $existing = PersonalityProfileVariantRevision::query()->create([
+                    'personality_profile_variant_id' => $model->id,
+                    'revision_no' => ((int) PersonalityProfileVariantRevision::query()->where('personality_profile_variant_id', $model->id)->max('revision_no')) + 1,
+                    'snapshot_json' => $snapshot,
+                    'note' => Top100FrozenPackage::BATCH_ID,
+                    'created_by_admin_user_id' => $this->ownerActor(),
+                    'created_at' => now(),
+                ]);
+                $created = 1;
+            }
+            $this->bindMbtiReview($context, $target);
 
-            return 1;
+            return $created;
         }
         $model = $resolved['model'];
         $existing = PersonalityProfileRevision::query()->where('profile_id', $model->id)
             ->get()->first(static fn (PersonalityProfileRevision $revision): bool => data_get($revision->snapshot_json, $key.'.package_sha256') === $context->packageSha256
                 && data_get($revision->snapshot_json, $key.'.priority') === $target['priority']);
         if ($existing instanceof PersonalityProfileRevision) {
-            if (hash_equals(PromotionContextFactory::canonicalJson((array) $existing->snapshot_json), PromotionContextFactory::canonicalJson($snapshot))) {
-                return 0;
+            if (! hash_equals(PromotionContextFactory::canonicalJson((array) $existing->snapshot_json), PromotionContextFactory::canonicalJson($snapshot))) {
+                $existing->delete();
+                $existing = null;
             }
-            $existing->delete();
         }
-        PersonalityProfileRevision::query()->create([
-            'profile_id' => $model->id,
-            'revision_no' => ((int) PersonalityProfileRevision::query()->where('profile_id', $model->id)->max('revision_no')) + 1,
-            'snapshot_json' => $snapshot,
-            'note' => Top100FrozenPackage::BATCH_ID,
-            'created_by_admin_user_id' => $this->ownerActor(),
-            'created_at' => now(),
-        ]);
+        if (! $existing instanceof PersonalityProfileRevision) {
+            PersonalityProfileRevision::query()->create([
+                'profile_id' => $model->id,
+                'revision_no' => ((int) PersonalityProfileRevision::query()->where('profile_id', $model->id)->max('revision_no')) + 1,
+                'snapshot_json' => $snapshot,
+                'note' => Top100FrozenPackage::BATCH_ID,
+                'created_by_admin_user_id' => $this->ownerActor(),
+                'created_at' => now(),
+            ]);
+            $created = 1;
+        }
+        $this->bindMbtiReview($context, $target);
 
-        return 1;
+        return $created;
+    }
+
+    private function bindMbtiReview(PromotionContext $context, array $target): void
+    {
+        $this->reviews->bindOrCreateApproved(
+            null,
+            'mbti_approval_batch',
+            'exact_package_target',
+            Top100FrozenPackage::BATCH_ID.':'.$target['priority'],
+            [$this->mbtiReviewTarget($target)],
+            $this->ownerActor(),
+            $context->packageSha256,
+        );
+    }
+
+    /** @return array{identity:string,sha256:string} */
+    private function mbtiReviewTarget(array $target): array
+    {
+        return [
+            'identity' => 'content-promotion:TOP100/'.Top100FrozenPackage::SUBSCOPE.':'.$this->assetKey($target),
+            'sha256' => (string) $target['source_row_sha256'],
+        ];
+    }
+
+    private function mbtiReview(PromotionContext $context, array $target): ReviewAttestation
+    {
+        $review = $this->reviews->approvedAllEvidence(
+            'mbti_approval_batch',
+            [$this->mbtiReviewTarget($target)],
+            $context->packageSha256,
+        );
+        if (! $review instanceof ReviewAttestation) {
+            throw new DomainException('top100_frozen_mbti_review_evidence_invalid');
+        }
+
+        return $review;
     }
 
     /** @param array<string,mixed> $target @return array<string,mixed> */
@@ -1109,7 +1173,7 @@ final class Top100FrozenCmsBatchAuthority
     }
 
     /** @param array{kind:string,model:Model,seo?:Model,section?:Model} $resolved */
-    private function assertMbtiRevisionMatchesTarget(PromotionContext $context, array $target, array $resolved): void
+    private function assertMbtiRevisionMatchesTarget(PromotionContext $context, array $target, array $resolved): Model
     {
         $expected = $this->mbtiRevisionSnapshot($context, $target);
         $query = $resolved['kind'] === 'mbti_variant'
@@ -1128,6 +1192,8 @@ final class Top100FrozenCmsBatchAuthority
             )) {
             throw new DomainException('top100_frozen_mbti_revision_invalid');
         }
+
+        return $revision;
     }
 
     private function publishArticle(PromotionContext $context, array $target, array $resolved): void
@@ -1334,6 +1400,50 @@ final class Top100FrozenCmsBatchAuthority
             throw new DomainException('top100_frozen_rollback_target_missing');
         }
         $record->forceFill($mutable)->saveQuietly();
+    }
+
+    /** @param list<array<string,mixed>> $targets */
+    private function recordMaterialDecisions(PromotionContext $context, array $targets, string $operation): void
+    {
+        foreach ($targets as $target) {
+            $resolved = $this->resolve($target, true);
+            if ($resolved['kind'] === 'personality_asset') {
+                $asset = $resolved['model'];
+                $revision = PersonalityPublicContentAssetRevision::query()->lockForUpdate()->find($asset->published_revision_id);
+                $review = $revision?->reviewEvidence()->first();
+                if ($revision instanceof PersonalityPublicContentAssetRevision
+                    && $review instanceof PersonalityPublicContentAssetRevisionReview) {
+                    $this->materialDecisions->recordPublicAsset($asset, $revision, $review, now(), $operation);
+                } elseif ($operation === 'publish') {
+                    throw new DomainException('top100_frozen_personality_review_evidence_missing');
+                }
+
+                continue;
+            }
+            if (! in_array($resolved['kind'], ['mbti_profile', 'mbti_variant', 'mbti_comparison'], true)) {
+                continue;
+            }
+            $revision = $this->assertMbtiRevisionMatchesTarget($context, $target, $resolved);
+            $review = $this->mbtiReview($context, $target);
+            if ($resolved['kind'] === 'mbti_comparison') {
+                $seo = PersonalityProfileSeoMeta::query()->withoutGlobalScopes()
+                    ->where('profile_id', $resolved['model']->getKey())->lockForUpdate()->first();
+                if (! $seo instanceof PersonalityProfileSeoMeta) {
+                    throw new DomainException('top100_frozen_mbti_profile_seo_missing');
+                }
+                $resolved = ['kind' => 'mbti_profile', 'model' => $resolved['model'], 'seo' => $seo];
+            }
+            $reviewTarget = $this->mbtiReviewTarget($target);
+            $this->materialDecisions->recordMbti(
+                $resolved,
+                $revision,
+                $review,
+                'mbti_approval_batch:'.$reviewTarget['identity'],
+                $reviewTarget['sha256'],
+                now(),
+                $operation,
+            );
+        }
     }
 
     /** @param list<string> $fields @return array<string,mixed> */
