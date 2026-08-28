@@ -47,6 +47,8 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
 
     public const JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX = 'career:public-authority:job-detail:v3';
 
+    private const JOB_DETAIL_PAYLOAD_CODEC = 'career.job-detail.gzip-json.v1';
+
     public const JOB_DETAIL_NEGATIVE_CACHE_TTL_SECONDS = 300;
 
     public const JOB_DETAIL_WARM_DISPATCH_TTL_SECONDS = 300;
@@ -351,13 +353,16 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                 continue;
             }
 
-            $payload = Cache::get($this->jobDetailVersionPayloadKey($normalizedSlug, $normalizedLocale, $version));
-            if ($payload === null) {
+            $storedPayload = Cache::get(
+                $this->jobDetailVersionPayloadKey($normalizedSlug, $normalizedLocale, $version),
+            );
+            if ($storedPayload === null) {
                 $issues[] = 'missing_payload';
 
                 continue;
             }
-            if (! is_array($payload)) {
+            $payload = $this->decodeStoredJobDetailPayload($storedPayload);
+            if ($payload === null) {
                 $issues[] = 'invalid_payload';
 
                 continue;
@@ -793,7 +798,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             $normalizedLocale,
             $version,
         );
-        Cache::forever(
+        $this->writeStoredJobDetailPayload(
             $payloadKey,
             $this->withoutDerivedContentV3($payload, $normalizedSlug, $normalizedLocale),
         );
@@ -803,7 +808,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             $version,
         );
         Cache::forever($exposureProjectionKey, $projectionItem);
-        $stagedPayload = Cache::get($payloadKey);
+        $stagedPayload = $this->readStoredJobDetailPayload($payloadKey);
         $stagedExposureProjection = Cache::get($exposureProjectionKey);
         $ready = is_array($stagedPayload)
             && $this->jobDetailExposureProjectionSnapshotIsValid(
@@ -866,7 +871,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             return null;
         }
 
-        $payload = Cache::get($this->jobDetailVersionPayloadKey(
+        $payload = $this->readStoredJobDetailPayload($this->jobDetailVersionPayloadKey(
             $slug,
             $this->normalizePublicLocale($rawLocale),
             $version,
@@ -878,9 +883,9 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     }
 
     /**
-     * Remove only reader-equivalent v3 copies from already-addressable active/LKG payloads.
-     * Pointers and version identities stay unchanged; every write is verified by rehydrating
-     * the compact bytes back to the exact public v3 projection before continuing.
+     * Compact already-addressable active/LKG payloads into the versioned compressed envelope.
+     * Pointers and version identities stay unchanged; every write is verified by decoding and
+     * rehydrating the compact bytes back to the exact public v3 projection before continuing.
      *
      * @param  list<string>  $slugs
      * @param  list<string>  $locales
@@ -911,11 +916,9 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                         $normalizedLocale,
                         $version,
                     );
-                    $payload = Cache::get($payloadKey);
-                    $storedContentV3 = is_array($payload)
-                        ? data_get($payload, 'display_surface_v1.content_v3')
-                        : null;
-                    if (! is_array($payload) || ! is_array($storedContentV3)) {
+                    $storedValue = Cache::get($payloadKey);
+                    $payload = $this->decodeStoredJobDetailPayload($storedValue);
+                    if (! is_array($payload) || $this->isEncodedJobDetailPayload($storedValue)) {
                         continue;
                     }
                     $readerPayload = $this->hydrateDerivedContentV3(
@@ -929,8 +932,8 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                     }
                     $compact = $payload;
                     unset($compact['display_surface_v1']['content_v3']);
-                    Cache::forever($payloadKey, $compact);
-                    $stored = Cache::get($payloadKey);
+                    $this->writeStoredJobDetailPayload($payloadKey, $compact);
+                    $stored = $this->readStoredJobDetailPayload($payloadKey);
                     if (! is_array($stored)
                         || data_get($stored, 'display_surface_v1.content_v3') !== null
                         || data_get(
@@ -938,7 +941,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                             'display_surface_v1.content_v3',
                         ) !== $readerContentV3) {
                         Cache::forever($payloadKey, $payload);
-                        throw new \RuntimeException('Career detail v3 cache compaction verification failed.');
+                        throw new \RuntimeException('Career detail cache compression verification failed.');
                     }
                     $writes++;
                 }
@@ -1176,7 +1179,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         $activeKey = $this->jobDetailActiveVersionKey($normalizedSlug, $normalizedLocale);
         $previousVersion = Cache::get($activeKey);
 
-        Cache::forever(
+        $this->writeStoredJobDetailPayload(
             $this->jobDetailVersionPayloadKey($normalizedSlug, $normalizedLocale, $version),
             $this->withoutDerivedContentV3($payload, $normalizedSlug, $normalizedLocale),
         );
@@ -1220,7 +1223,9 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             $slug = $entry['slug'];
             $locale = $entry['locale'];
             $version = $entry['version'];
-            $payload = Cache::get($this->jobDetailVersionPayloadKey($slug, $locale, $version));
+            $payload = $this->readStoredJobDetailPayload(
+                $this->jobDetailVersionPayloadKey($slug, $locale, $version),
+            );
             if (! is_array($payload)) {
                 throw new \RuntimeException(sprintf(
                     'Career detail staged payload verification failed for %s (%s).',
@@ -1728,7 +1733,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                 continue;
             }
 
-            $detailPayload = Cache::get($this->jobDetailVersionPayloadKey(
+            $detailPayload = $this->readStoredJobDetailPayload($this->jobDetailVersionPayloadKey(
                 $slug,
                 $normalizedLocale,
                 $detailVersion,
@@ -2343,7 +2348,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             return $materializedItem;
         }
 
-        $activePayload = Cache::get($this->jobDetailVersionPayloadKey(
+        $activePayload = $this->readStoredJobDetailPayload($this->jobDetailVersionPayloadKey(
             $normalizedSlug,
             $normalizedLocale,
             $activeVersion,
@@ -2553,6 +2558,62 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     private function jobDetailVersionPayloadKey(string $slug, string $publicLocale, string $version): string
     {
         return sprintf('%s:%s:%s:versions:%s', self::JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX, strtolower(trim($slug)), $this->normalizePublicLocale($publicLocale), $version);
+    }
+
+    /** @param array<string, mixed> $payload */
+    private function writeStoredJobDetailPayload(string $key, array $payload): void
+    {
+        $json = json_encode($payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        $compressed = gzencode($json, 6);
+        if ($compressed === false) {
+            throw new \RuntimeException('Career detail cache payload compression failed.');
+        }
+
+        Cache::forever($key, [
+            'codec' => self::JOB_DETAIL_PAYLOAD_CODEC,
+            'sha256' => hash('sha256', $json),
+            'payload' => base64_encode($compressed),
+        ]);
+    }
+
+    /** @return array<string, mixed>|null */
+    private function readStoredJobDetailPayload(string $key): ?array
+    {
+        return $this->decodeStoredJobDetailPayload(Cache::get($key));
+    }
+
+    /** @return array<string, mixed>|null */
+    private function decodeStoredJobDetailPayload(mixed $stored): ?array
+    {
+        if (! is_array($stored)) {
+            return null;
+        }
+        if (! $this->isEncodedJobDetailPayload($stored)) {
+            return $stored;
+        }
+
+        $compressed = base64_decode((string) ($stored['payload'] ?? ''), true);
+        if ($compressed === false) {
+            return null;
+        }
+        $json = gzdecode($compressed);
+        if (! is_string($json)
+            || ! hash_equals((string) ($stored['sha256'] ?? ''), hash('sha256', $json))) {
+            return null;
+        }
+
+        try {
+            $payload = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
+        } catch (\JsonException) {
+            return null;
+        }
+
+        return is_array($payload) ? $payload : null;
+    }
+
+    private function isEncodedJobDetailPayload(mixed $stored): bool
+    {
+        return is_array($stored) && ($stored['codec'] ?? null) === self::JOB_DETAIL_PAYLOAD_CODEC;
     }
 
     private function jobDetailExposureProjectionVersionKey(string $slug, string $publicLocale, string $version): string

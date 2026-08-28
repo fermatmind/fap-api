@@ -151,8 +151,13 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
             ],
         ];
         $version = $cache->publishJobDetailReadModel('one', 'en', $payload);
+        $encoded = Cache::get($this->versionPayloadKey('one', 'en', $version));
+        $this->assertSame('career.job-detail.gzip-json.v1', $encoded['codec'] ?? null);
+        $this->assertMatchesRegularExpression('/^[0-9a-f]{64}$/', (string) ($encoded['sha256'] ?? ''));
+        $this->assertIsString($encoded['payload'] ?? null);
+
         $historicalPayload = $payload;
-        $historicalPayload['display_surface_v1']['content_v3'] = ['historical_projection' => true];
+        unset($historicalPayload['display_surface_v1']['content_v3']);
         Cache::forever($this->versionPayloadKey('one', 'en', $version), $historicalPayload);
 
         $compactionWrites = $cache->compactDerivedJobDetailContentV3(['one'], ['en']);
@@ -162,7 +167,8 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
 
         $this->assertSame(1, $compactionWrites);
         $this->assertIsArray($stored);
-        $this->assertArrayNotHasKey('content_v3', $stored['display_surface_v1']);
+        $this->assertSame('career.job-detail.gzip-json.v1', $stored['codec'] ?? null);
+        $this->assertIsString($stored['payload'] ?? null);
         $this->assertSame('fresh', $read['state']);
         $this->assertSame(
             'career.detail.content.v3',
