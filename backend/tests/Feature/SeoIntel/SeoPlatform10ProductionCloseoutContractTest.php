@@ -29,8 +29,15 @@ final class SeoPlatform10ProductionCloseoutContractTest extends TestCase
         $this->assertStringContainsString('unknown_legacy_action', $deployer);
         $this->assertStringContainsString('recovery_ready_without_destructive_probe', $deployer);
         $this->assertSame(10000, $operation['max_records']);
+        $this->assertSame('measurement_hold_no_write', $operation['staging_disabled_policy']);
         $this->assertStringContainsString('dry_run_rc=$?', $deployer);
         $this->assertStringContainsString('test "$dry_run_rc" = 0', $deployer);
+        $this->assertSame(2, substr_count($deployer, 'deploySeoPlatform10SkipsDisabledStaging(') - 1);
+        $this->assertStringContainsString("currentHost()->getAlias() !== 'staging'", $deployer);
+        $this->assertStringContainsString('seo-platform-10-staging-measurement-hold.v1', $deployer);
+        $this->assertStringContainsString("'writes_committed' => false", $deployer);
+        $this->assertStringContainsString("'search_submission_allowed' => false", $deployer);
+        $this->assertStringContainsString('requires SEO Intel in production', $deployer);
     }
 
     public function test_closeout_scripts_expose_no_manual_or_search_mutation_control(): void

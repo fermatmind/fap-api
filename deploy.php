@@ -211,6 +211,53 @@ function deployBooleanOption(string $name, bool $default): bool
     throw new \RuntimeException("{$name} must be an explicit boolean");
 }
 
+function deploySeoPlatform10RuntimeEnabled(): bool
+{
+    $bootstrap = <<<'PHP'
+require "vendor/autoload.php";
+$app = require "bootstrap/app.php";
+$app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+echo config("seo_intel.enabled") ? "enabled" : "disabled";
+PHP;
+    $status = trim(run(sprintf(
+        'cd %s && {{bin/php}} -r %s',
+        deployPlaceholderPathArg('{{release_path}}', 'backend'),
+        deployShellArg($bootstrap),
+    )));
+
+    if ($status === 'enabled') {
+        return true;
+    }
+    if ($status === 'disabled') {
+        return false;
+    }
+
+    throw new \RuntimeException('Unable to resolve the SEO Intel runtime state for Platform 10 closeout.');
+}
+
+function deploySeoPlatform10SkipsDisabledStaging(string $task): bool
+{
+    if (deploySeoPlatform10RuntimeEnabled()) {
+        return false;
+    }
+
+    if (currentHost()->getAlias() !== 'staging') {
+        throw new \RuntimeException("SEO Platform 10 {$task} requires SEO Intel in production.");
+    }
+
+    $receipt = json_encode([
+        'schema_version' => 'seo-platform-10-staging-measurement-hold.v1',
+        'status' => 'skipped',
+        'reason' => 'seo_intel_disabled',
+        'task' => $task,
+        'writes_committed' => false,
+        'search_submission_allowed' => false,
+    ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
+    writeln("<comment>{$receipt}</comment>");
+
+    return true;
+}
+
 function deployCareerDetailMinimumTargets(string $hostAlias): int
 {
     if (! in_array($hostAlias, ['staging', 'production'], true)) {
@@ -874,6 +921,10 @@ task('seo:platform-10-material-backfill', function () {
         return;
     }
 
+    if (deploySeoPlatform10SkipsDisabledStaging('material_backfill')) {
+        return;
+    }
+
     within('{{release_path}}/backend', function (): void {
         run(<<<'BASH'
 set -euo pipefail
@@ -939,6 +990,10 @@ task('seo:platform-10-public-closeout', function () {
     if (! deployBooleanOption('seo_platform_10_closeout', false)) {
         writeln('<comment>Skip SEO Platform 10 public closeout.</comment>');
 
+        return;
+    }
+
+    if (deploySeoPlatform10SkipsDisabledStaging('public_closeout')) {
         return;
     }
 
