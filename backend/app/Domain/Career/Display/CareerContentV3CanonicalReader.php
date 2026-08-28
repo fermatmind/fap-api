@@ -84,6 +84,9 @@ class CareerContentV3CanonicalReader
             if ($surfaceLocale !== $requestedLocale || ($surfaceSlug !== '' && $surfaceSlug !== strtolower(trim($slug)))) {
                 return null;
             }
+            if ($this->isPlaceholder($page)) {
+                $surface = $this->blankCompatibilityBody($surface, $requestedLocale);
+            }
             $surface['content_v3'] = $page;
 
             return $surface;
@@ -174,5 +177,25 @@ class CareerContentV3CanonicalReader
         }
 
         throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_LOCALE_INVALID');
+    }
+
+    /** @param array<string,mixed> $page */
+    private function isPlaceholder(array $page): bool
+    {
+        return ($page['content_state'] ?? null) === 'legacy'
+            && ($page['blocks'] ?? null) === [];
+    }
+
+    /** @param array<string,mixed> $surface @return array<string,mixed> */
+    private function blankCompatibilityBody(array $surface, string $locale): array
+    {
+        $surface['page'] = ['locale' => $locale, 'content' => []];
+        $surface['component_order'] = [];
+        $surface['sources'] = [];
+        $surface['structured_data_from_visible_content'] = [];
+        $surface['implementation_contract'] = [];
+        unset($surface['presentation_v1'], $surface['presentation_v2']);
+
+        return $surface;
     }
 }

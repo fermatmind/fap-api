@@ -66,6 +66,18 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
             self::assertSame('career.detail.content.v3', $localized['en']['contract_version']);
             self::assertSame('career.detail.content.v3', $localized['zh-CN']['contract_version']);
         }
+        self::assertNotEmpty($package['pages']['accountants-and-auditors']['en']['blocks']);
+        self::assertNotEmpty($package['pages']['accountants-and-auditors']['zh-CN']['blocks']);
+        foreach ($package['pages'] as $slug => $localized) {
+            if ($slug === 'accountants-and-auditors') {
+                continue;
+            }
+            foreach ($localized as $page) {
+                self::assertSame('legacy', $page['content_state']);
+                self::assertSame([], $page['blocks']);
+                self::assertNull($page['subject']['summary']);
+            }
+        }
         self::assertArrayNotHasKey('software-developers', $package['pages']);
     }
 

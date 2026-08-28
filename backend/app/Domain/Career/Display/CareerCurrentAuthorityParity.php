@@ -243,8 +243,11 @@ final class CareerCurrentAuthorityParity
                             $locale,
                         );
                     }
-                    foreach ([$legacy, $active, $lkg, $snapshot] as $statePayload) {
+                    foreach ([$legacy, $active, $snapshot] as $statePayload) {
                         $this->stateMachine->assertPayload($statePayload, $row, $locale);
+                    }
+                    if (! is_array($lkg)) {
+                        throw new RuntimeException('CAREER_PARITY_REDIS_STATE_INCOMPLETE');
                     }
                     if ($api !== null) {
                         $this->stateMachine->assertPayload($api, $row, $locale);
@@ -307,7 +310,7 @@ final class CareerCurrentAuthorityParity
 
                     if ($includeCapacity && $redisMode === 'readonly') {
                         $canonicalHash = CareerCurrentAuthorityPackage::hashValue($payload);
-                        $hydratedStates = [$active, $lkg, $snapshot];
+                        $hydratedStates = [$active, $snapshot];
                         if ($api !== null) {
                             $hydratedStates[] = $api;
                         }

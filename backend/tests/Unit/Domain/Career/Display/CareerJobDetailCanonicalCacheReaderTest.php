@@ -79,6 +79,22 @@ final class CareerJobDetailCanonicalCacheReaderTest extends TestCase
         self::assertNull($reader->read($payload, 'actors', 'en'));
     }
 
+    public function test_placeholder_authority_removes_every_legacy_visible_body(): void
+    {
+        [$reader, $payload] = $this->fixtureReader(true);
+
+        $hydrated = $reader->read($payload, 'actors', 'en');
+
+        self::assertSame([], data_get($hydrated, 'display_surface_v1.page.content'));
+        self::assertSame([], data_get($hydrated, 'display_surface_v1.component_order'));
+        self::assertSame([], data_get($hydrated, 'display_surface_v1.sources'));
+        self::assertSame([], data_get($hydrated, 'display_surface_v1.structured_data_from_visible_content'));
+        self::assertSame([], data_get($hydrated, 'display_surface_v1.implementation_contract'));
+        self::assertArrayNotHasKey('presentation_v1', (array) data_get($hydrated, 'display_surface_v1'));
+        self::assertArrayNotHasKey('presentation_v2', (array) data_get($hydrated, 'display_surface_v1'));
+        self::assertSame([], data_get($hydrated, 'display_surface_v1.content_v3.blocks'));
+    }
+
     public function test_it_normalizes_reviews_and_validates_snapshot_identity(): void
     {
         [$reader] = $this->fixtureReader();
@@ -104,7 +120,7 @@ final class CareerJobDetailCanonicalCacheReaderTest extends TestCase
     }
 
     /** @return array{CareerJobDetailCanonicalCacheReader,array<string,mixed>,array<string,array<string,mixed>>} */
-    private function fixtureReader(): array
+    private function fixtureReader(bool $placeholder = false): array
     {
         $root = tempnam(sys_get_temp_dir(), 'career-cache-v3-');
         self::assertIsString($root);
@@ -139,7 +155,7 @@ final class CareerJobDetailCanonicalCacheReaderTest extends TestCase
                 'subject' => ['canonical_slug' => 'actors', 'name' => $locale === 'en' ? 'Actors' : '演员', 'summary' => null],
                 'content_state' => 'legacy',
                 'source_content_sha256' => $sourceHash,
-                'blocks' => [[
+                'blocks' => $placeholder ? [] : [[
                     'id' => 'profile', 'copy_key' => 'career.block.profile', 'content_state' => 'legacy',
                     'availability' => 'available', 'items' => [[
                         'id' => 'profile-1', 'copy_key' => 'career.item.definition', 'type' => 'prose',

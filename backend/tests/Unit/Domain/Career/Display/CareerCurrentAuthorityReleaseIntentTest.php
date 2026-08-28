@@ -18,8 +18,8 @@ final class CareerCurrentAuthorityReleaseIntentTest extends TestCase
 
         self::assertSame('career.current_authority_release_intent.v1', $result['intent']['contract_version']);
         self::assertSame('2c956887ad9460849fd29cbfacb145e1397993cd', $result['intent']['source_merge_sha']);
-        self::assertSame('fdd4d73eb0b07effdab2222c454dc35a734eeccd379f7f2359de904300118800', $result['intent']['manifest_sha256']);
-        self::assertSame('42112294f1e3b8f6939d36f25a2d29b6feb4db8009034d7b90c04802fa3af5f7', $result['intent']['aggregate_sha256']);
+        self::assertSame('14723683f4b8b5d121b169d3be643318cc657f3cfaaca995b54c17988675bbcd', $result['intent']['manifest_sha256']);
+        self::assertSame('5fdbf30be3a6b0ad855e22cd5887fcc8bad1702842bc7b1e4b0ed4faae85fce7', $result['intent']['aggregate_sha256']);
         self::assertSame('b7fed8007d505b45e2707ef11e3b1b4196d13985e0e8e1b146c4710fcbcdc616', $result['intent']['versionless_projection_sha256']);
         self::assertSame(['en', 'zh-CN'], $result['intent']['locales']);
         self::assertSame(['software-developers'], $result['intent']['manual_hold_slugs']);
@@ -29,7 +29,7 @@ final class CareerCurrentAuthorityReleaseIntentTest extends TestCase
         self::assertSame(2092, $result['package']['locale_page_count']);
         self::assertSame(2092, $result['package']['file_count']);
         self::assertSame(
-            hash('sha256', 'career-current-authority|2c956887ad9460849fd29cbfacb145e1397993cd|42112294f1e3b8f6939d36f25a2d29b6feb4db8009034d7b90c04802fa3af5f7|b7fed8007d505b45e2707ef11e3b1b4196d13985e0e8e1b146c4710fcbcdc616'),
+            hash('sha256', 'career-current-authority|2c956887ad9460849fd29cbfacb145e1397993cd|5fdbf30be3a6b0ad855e22cd5887fcc8bad1702842bc7b1e4b0ed4faae85fce7|b7fed8007d505b45e2707ef11e3b1b4196d13985e0e8e1b146c4710fcbcdc616'),
             $result['operation_key'],
         );
     }
