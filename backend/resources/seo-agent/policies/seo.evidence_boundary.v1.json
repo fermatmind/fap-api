@@ -1,0 +1,17 @@
+{
+  "policy_id": "seo.evidence_boundary",
+  "policy_version": "1.0.0",
+  "classification": "contract_only",
+  "allowed_evidence_states": [
+    "verified",
+    "observed",
+    "inferred",
+    "unknown",
+    "blocked"
+  ],
+  "private_excluded": true,
+  "unclassified_excluded": true,
+  "raw_private_payloads_allowed": false,
+  "read_only_gsc": true,
+  "direct_search_provider_access": false
+}

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SeoIntel;
 
-use App\Console\Commands\PersonalityAgentPostPromotionSearchGateCommand;
+use App\Console\Commands\PersonalityPostPromotionSearchGateCommand;
 use App\Models\PersonalityProfile;
 use Illuminate\Contracts\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Artisan;
@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Schema;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-final class PersonalityAgentPostPromotionSearchGateCommandTest extends TestCase
+final class PersonalityPostPromotionSearchGateCommandTest extends TestCase
 {
     private const V8_5_V5_BILINGUAL_64_PACKAGE_PATH = 'docs/seo/personality/mbti64-zh32-en32-v8-5-v5-bilingual-package-2026-07-01.json';
 
@@ -24,7 +24,7 @@ final class PersonalityAgentPostPromotionSearchGateCommandTest extends TestCase
         parent::setUp();
 
         $this->app->make(ConsoleKernel::class)->registerCommand(
-            $this->app->make(PersonalityAgentPostPromotionSearchGateCommand::class)
+            $this->app->make(PersonalityPostPromotionSearchGateCommand::class)
         );
 
         config([
@@ -191,7 +191,7 @@ final class PersonalityAgentPostPromotionSearchGateCommandTest extends TestCase
     {
         Http::fake();
 
-        $exitCode = Artisan::call('personality:agent-post-promotion-search-gate', [
+        $exitCode = Artisan::call('personality:post-promotion-search-gate-review', [
             '--json' => true,
             '--urls' => 'https://fermatmind.com/en/personality/enfj-a',
         ]);
@@ -255,7 +255,7 @@ final class PersonalityAgentPostPromotionSearchGateCommandTest extends TestCase
         $tempPath = sys_get_temp_dir().'/mbti64-v85-v5-bilingual-63-for-search-gate.json';
         File::put($tempPath, json_encode($package, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
 
-        $exitCode = Artisan::call('personality:agent-post-promotion-search-gate', [
+        $exitCode = Artisan::call('personality:post-promotion-search-gate-review', [
             '--dry-run' => true,
             '--json' => true,
             '--package' => $tempPath,
@@ -278,7 +278,7 @@ final class PersonalityAgentPostPromotionSearchGateCommandTest extends TestCase
      */
     private function runGate(array $arguments, int $expectedExitCode = 0): array
     {
-        $exitCode = Artisan::call('personality:agent-post-promotion-search-gate', $arguments);
+        $exitCode = Artisan::call('personality:post-promotion-search-gate-review', $arguments);
         $output = json_decode(trim(Artisan::output()), true);
 
         $this->assertSame($expectedExitCode, $exitCode, Artisan::output());

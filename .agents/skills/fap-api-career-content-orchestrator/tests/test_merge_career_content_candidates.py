@@ -13,7 +13,7 @@ from pathlib import Path
 
 
 SKILL_ROOT = Path(__file__).resolve().parents[1]
-MERGER = SKILL_ROOT / "scripts/merge_career_content_candidates.php"
+MERGER = SKILL_ROOT.parent / "fap-api-career-release-authority/scripts/merge_career_content_candidates.php"
 EXPORTER = SKILL_ROOT / "scripts/export_versionless_current.php"
 VALIDATOR = SKILL_ROOT / "scripts/validate_content_agent_contract.py"
 SPEC = importlib.util.spec_from_file_location("career_content_agent_validator_for_merge", VALIDATOR)

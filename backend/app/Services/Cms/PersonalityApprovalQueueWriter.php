@@ -8,8 +8,10 @@ use App\Services\ReviewGovernance\ReviewAttestationValidationException;
 use Illuminate\Support\Facades\DB;
 
 /** @review-surface mbti_approval_batch */
-final class PersonalityAgentApprovalQueueWriter
+final class PersonalityApprovalQueueWriter
 {
+    public const AGENT_INVOCABLE = false;
+
     private const ALLOWED_FRAMEWORKS = ['mbti64', 'big_five', 'enneagram'];
 
     private const MBTI64_V85_V5_ARTIFACT = 'MBTI64-ZH32-EN32-V8_5-V5-BILINGUAL-PACKAGE-QA-01';

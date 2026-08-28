@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Console;
 
-use App\Console\Commands\PersonalityBigFivePublicProfileAgentPromote;
+use App\Console\Commands\PersonalityBigFivePublicProfilePromoteCommand;
 use App\Models\PersonalityPublicContentAsset;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
-final class PersonalityBigFivePublicProfileAgentPromoteCommandTest extends TestCase
+final class PersonalityBigFivePublicProfilePromoteCommandTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -160,9 +160,9 @@ final class PersonalityBigFivePublicProfileAgentPromoteCommandTest extends TestC
      */
     private function callPromote(array $options): int
     {
-        Artisan::registerCommand($this->app->make(PersonalityBigFivePublicProfileAgentPromote::class));
+        Artisan::registerCommand($this->app->make(PersonalityBigFivePublicProfilePromoteCommand::class));
 
-        return Artisan::call('personality:big-five-public-profile-agent-promote', $options);
+        return Artisan::call('personality:big-five-public-profile-promote', $options);
     }
 
     private function seedDrafts(string $packagePath, bool $onlyFirst = false): void

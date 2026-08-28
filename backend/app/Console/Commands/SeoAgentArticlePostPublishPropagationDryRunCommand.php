@@ -11,10 +11,9 @@ use App\Models\ArticleTranslationRevision;
 use App\Models\Scopes\TenantScope;
 use App\Services\SeoIntel\UrlTruthHandoffArtifact;
 use Carbon\Carbon;
-use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
-final class SeoAgentArticlePostPublishPropagationDryRunCommand extends Command
+final class SeoAgentArticlePostPublishPropagationDryRunCommand extends RetiredSeoAgentCommand
 {
     private const SCHEMA_VERSION = 'seo-agent-article-post-publish-propagation-dry-run.v1';
 

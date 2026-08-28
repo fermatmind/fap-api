@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use RuntimeException;
 
-final class SeoAgentCmsDraftPackageDryRunCommand extends Command
+final class SeoAgentCmsDraftPackageDryRunCommand extends RetiredSeoAgentCommand
 {
     private const SCHEMA_VERSION = 'seo-agent-cms-draft-package-dry-run.v1';
 

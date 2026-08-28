@@ -1,0 +1,33 @@
+{
+    "schema_version": "seo.prompt_manifest.v1",
+    "manifest_version": "1.0.0",
+    "status": "frozen",
+    "owner_repository": "fap-api",
+    "prompts": {
+        "seo.orchestrator.prompt": {
+            "id": "seo.orchestrator.prompt",
+            "version": "1.0.0",
+            "hash": "397f5df2bc10925aaf80f729a3a55a1711da44355fef17373f7bb0f554cfde6a",
+            "path": "backend/resources/seo-agent/prompts/seo-orchestrator.v1.md"
+        },
+        "seo.expert.review.prompt": {
+            "id": "seo.expert.review.prompt",
+            "version": "1.0.0",
+            "hash": "7b68cec6c8a1a7d33dd2dc1d922f1c670128ce6c961a5eaba5451d039e15370c",
+            "path": "backend/resources/seo-agent/prompts/seo-expert-review.v1.md"
+        },
+        "seo.independent_reviewer.prompt": {
+            "id": "seo.independent_reviewer.prompt",
+            "version": "1.0.0",
+            "hash": "84ffa12aaa80d597c0104bdeabf05ed2aa0c0d015a7ef585e71e5c51926743f0",
+            "path": "backend/resources/seo-agent/prompts/seo-independent-reviewer.v1.md"
+        },
+        "career.content_agent.prompt": {
+            "id": "career.content_agent.prompt",
+            "version": "1.0.0",
+            "hash": "20ae9e99fc251639dbbfaf34209dbdd03504e13b7d66470850615c2e7a2a14ad",
+            "path": "backend/resources/seo-agent/prompts/career-content-agent.v1.md"
+        }
+    },
+    "manifest_hash": "81de250dc7f309039cbf256831b68ad02477fa688531d36eda1a3a63baeaba4c"
+}

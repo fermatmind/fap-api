@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use RuntimeException;
 
-final class SeoAgentGscRemainingCandidateBatchPlanCommand extends Command
+final class SeoAgentGscRemainingCandidateBatchPlanCommand extends RetiredSeoAgentCommand
 {
     private const SCHEMA_VERSION = 'seo-agent-gsc-remaining-candidate-batch-plan.v1';
 

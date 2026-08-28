@@ -12,6 +12,8 @@ use Throwable;
 
 final class SearchChannelQueueBoundedLiveExecutor
 {
+    public const AGENT_INVOCABLE = false;
+
     private const ENNEAGRAM_ARTIFACT_PATTERN = '/^[0-9a-f]{64}$/';
 
     private const ENNEAGRAM_PAGE_TYPE = 'personality_public_content_asset';

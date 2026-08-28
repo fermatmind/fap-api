@@ -158,13 +158,12 @@ use App\Console\Commands\Packs2Rollback;
 use App\Console\Commands\PacksPublish;
 use App\Console\Commands\PacksRollback;
 use App\Console\Commands\PaymentsPruneEvents;
-use App\Console\Commands\PersonalityAgentApprovalQueueCommand;
-use App\Console\Commands\PersonalityAgentApprovalQueueReviewCommand;
-use App\Console\Commands\PersonalityAgentPostPromotionSearchGateCommand;
+use App\Console\Commands\PersonalityApprovalQueueCommand;
+use App\Console\Commands\PersonalityApprovalQueueReviewCommand;
 use App\Console\Commands\PersonalityBigFiveCmsImportDraftDryRun;
 use App\Console\Commands\PersonalityBigFiveCmsPreviewRenderQa;
 use App\Console\Commands\PersonalityBigFiveCmsStagingWriteImport;
-use App\Console\Commands\PersonalityBigFivePublicProfileAgentDraft;
+use App\Console\Commands\PersonalityBigFivePublicProfileDraftCommand;
 use App\Console\Commands\PersonalityBigFiveSeoDiscoverabilityRelease;
 use App\Console\Commands\PersonalityEnneagramCmsDraft;
 use App\Console\Commands\PersonalityEnneagramCmsPromote;
@@ -179,6 +178,7 @@ use App\Console\Commands\PersonalityMbti64GscQueryReadonlyExport;
 use App\Console\Commands\PersonalityMbtiContent15MixedImportPreflight;
 use App\Console\Commands\PersonalityMbtiFullCmsImport;
 use App\Console\Commands\PersonalityMbtiFullCmsPromote;
+use App\Console\Commands\PersonalityPostPromotionSearchGateCommand;
 use App\Console\Commands\PersonalityTdkNextBatchApprovalDraftGateCommand;
 use App\Console\Commands\PersonalityTdkRuntimePromotionSearchGateReadinessCommand;
 use App\Console\Commands\PersonalityWarmPublicReadModels;
@@ -186,38 +186,6 @@ use App\Console\Commands\QualityDailySummary;
 use App\Console\Commands\RefreshCareerAttributionDailyCommand;
 use App\Console\Commands\SdsPsychometricsReport;
 use App\Console\Commands\SeedScaleRegistry;
-use App\Console\Commands\SeoAgentArticleCmsPublishCanaryCommand;
-use App\Console\Commands\SeoAgentArticleDraftClaimRiskQaCommand;
-use App\Console\Commands\SeoAgentArticleDraftPreviewRuntimeQaCommand;
-use App\Console\Commands\SeoAgentArticlePostPublishPropagationDryRunCommand;
-use App\Console\Commands\SeoAgentArticleReleaseCommand;
-use App\Console\Commands\SeoAgentAutoRollbackGuardCommand;
-use App\Console\Commands\SeoAgentCmsDraftPackageDryRunCommand;
-use App\Console\Commands\SeoAgentCmsDraftPayloadRepairCanaryCommand;
-use App\Console\Commands\SeoAgentCmsDraftReadbackQaCommand;
-use App\Console\Commands\SeoAgentCmsDraftWriteCommand;
-use App\Console\Commands\SeoAgentCmsFaqGapScanCommand;
-use App\Console\Commands\SeoAgentCmsPublishAutoCanaryCommand;
-use App\Console\Commands\SeoAgentCmsPublishCanaryCommand;
-use App\Console\Commands\SeoAgentCmsTdkGapScanCommand;
-use App\Console\Commands\SeoAgentCodexReviewRunnerCommand;
-use App\Console\Commands\SeoAgentCompileModeCPackageCommand;
-use App\Console\Commands\SeoAgentGscBatchDraftQaSupportCommand;
-use App\Console\Commands\SeoAgentGscCohortHandoffCommand;
-use App\Console\Commands\SeoAgentGscDraftPublishGateReadinessCommand;
-use App\Console\Commands\SeoAgentGscOpportunityAutoDraftCommand;
-use App\Console\Commands\SeoAgentGscPostPublishFeedbackCommand;
-use App\Console\Commands\SeoAgentGscRemainingCandidateBatchPlanCommand;
-use App\Console\Commands\SeoAgentL5aContentPagePublishCanaryCommand;
-use App\Console\Commands\SeoAgentL5aIndexnowSubmitCanaryCommand;
-use App\Console\Commands\SeoAgentOpportunityAggregateCommand;
-use App\Console\Commands\SeoAgentPostPublishIndexnowAutoCommand;
-use App\Console\Commands\SeoAgentPostPublishSearchSubmitCommand;
-use App\Console\Commands\SeoAgentPriorityQueueSchedulerCommand;
-use App\Console\Commands\SeoAgentRunCommand;
-use App\Console\Commands\SeoAgentRuntimeSeoQaScanCommand;
-use App\Console\Commands\SeoAgentWeeklyDraftWriteAutoCommand;
-use App\Console\Commands\SeoAgentWeeklyReadonlyRunnerCommand;
 use App\Console\Commands\SeoIntelSearchChannelQueueCommand;
 use App\Console\Commands\SeoIntelUrlTruthHandoffCommand;
 use App\Console\Commands\SeoOpsGaokaoV5CmsDraftGateCommand;
@@ -255,14 +223,14 @@ class Kernel extends ConsoleKernel
         FapSelfCheck::class,
         FapValidateReport::class,
         FapWeeklyReport::class,
-        PersonalityAgentApprovalQueueCommand::class,
-        PersonalityAgentApprovalQueueReviewCommand::class,
-        PersonalityAgentPostPromotionSearchGateCommand::class,
+        PersonalityApprovalQueueCommand::class,
+        PersonalityApprovalQueueReviewCommand::class,
+        PersonalityPostPromotionSearchGateCommand::class,
         PersonalityBigFiveCmsImportDraftDryRun::class,
         PersonalityBigFiveCmsPreviewRenderQa::class,
         PersonalityBigFiveSeoDiscoverabilityRelease::class,
         PersonalityBigFiveCmsStagingWriteImport::class,
-        PersonalityBigFivePublicProfileAgentDraft::class,
+        PersonalityBigFivePublicProfileDraftCommand::class,
         PersonalityEnneagramCmsPromote::class,
         PersonalityEnneagramCmsPublishGate::class,
         PersonalityWarmPublicReadModels::class,
@@ -420,7 +388,6 @@ class Kernel extends ConsoleKernel
         ExperimentGuardrailsEvaluate::class,
         ArticleImportEditorialPackage::class,
         ArticleImportSeoContentPackageDraft::class,
-        SeoAgentCompileModeCPackageCommand::class,
         ArticleEnsureSeoMetaBaseline::class,
         ArticleUpdateExistingSeoContentPackage::class,
         ArticleCoverPropagationSmoke::class,
@@ -436,37 +403,6 @@ class Kernel extends ConsoleKernel
         MediaAssetsImportSeoImageBundle::class,
         MediaAssetsSeoReleaseCleanup::class,
         MediaAssetsSeoReleasePreflight::class,
-        SeoAgentCmsFaqGapScanCommand::class,
-        SeoAgentAutoRollbackGuardCommand::class,
-        SeoAgentArticleCmsPublishCanaryCommand::class,
-        SeoAgentArticlePostPublishPropagationDryRunCommand::class,
-        SeoAgentArticleDraftClaimRiskQaCommand::class,
-        SeoAgentArticleDraftPreviewRuntimeQaCommand::class,
-        SeoAgentArticleReleaseCommand::class,
-        SeoAgentCmsTdkGapScanCommand::class,
-        SeoAgentCodexReviewRunnerCommand::class,
-        SeoAgentCmsDraftPackageDryRunCommand::class,
-        SeoAgentCmsDraftPayloadRepairCanaryCommand::class,
-        SeoAgentCmsDraftReadbackQaCommand::class,
-        SeoAgentCmsDraftWriteCommand::class,
-        SeoAgentCmsPublishAutoCanaryCommand::class,
-        SeoAgentCmsPublishCanaryCommand::class,
-        SeoAgentL5aContentPagePublishCanaryCommand::class,
-        SeoAgentL5aIndexnowSubmitCanaryCommand::class,
-        SeoAgentGscCohortHandoffCommand::class,
-        SeoAgentGscBatchDraftQaSupportCommand::class,
-        SeoAgentGscOpportunityAutoDraftCommand::class,
-        SeoAgentGscPostPublishFeedbackCommand::class,
-        SeoAgentGscDraftPublishGateReadinessCommand::class,
-        SeoAgentGscRemainingCandidateBatchPlanCommand::class,
-        SeoAgentPostPublishIndexnowAutoCommand::class,
-        SeoAgentPostPublishSearchSubmitCommand::class,
-        SeoAgentPriorityQueueSchedulerCommand::class,
-        SeoAgentRuntimeSeoQaScanCommand::class,
-        SeoAgentOpportunityAggregateCommand::class,
-        SeoAgentRunCommand::class,
-        SeoAgentWeeklyDraftWriteAutoCommand::class,
-        SeoAgentWeeklyReadonlyRunnerCommand::class,
         SeoOpsP0CtrArticleCmsUpdateWriterCommand::class,
         SeoOpsGaokaoV5CmsDraftGateCommand::class,
         SeoOpsGaokaoV5PublishGateRepairCommand::class,

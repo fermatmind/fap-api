@@ -45,6 +45,13 @@ Keep fap-api as the authority for career content, release state, and public care
 7. Validate routes, migrations, focused publication/revision behavior, and MBTI compatibility checks.
 8. Document repository rule impact when authority, revision selection, or publishing behavior changes.
 
+## Career Content candidate merger
+
+- `scripts/merge_career_content_candidates.php` is the sole deterministic Current merger for a bound `career.content_agent.release_handoff.v1`.
+- It is release-authority tooling, not part of the Career Content Agent profile or tool allowlist.
+- It must recheck receipt, row, and shard optimistic locks; update only authorized module shards; and update the manifest last and atomically.
+- Its receipt must keep DB, CMS, cache, publisher, deploy, sitemap, discoverability, and search writes at zero.
+
 ## Publisher parity recurrence stop
 - After two failures on the same Career publisher boundary, stop pushing new commits.
 - Download the sanitized CI/staging receipt, reproduce the complete candidate → active/LKG → API/snapshot state machine locally, and identify one root cause.

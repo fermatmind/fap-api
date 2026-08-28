@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Services\Cms\PersonalityAgentApprovalQueueReadModel;
+use App\Services\Cms\PersonalityApprovalQueueReadModel;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use InvalidArgumentException;
 use Throwable;
 
-final class PersonalityAgentApprovalQueueReviewCommand extends Command
+final class PersonalityApprovalQueueReviewCommand extends Command
 {
-    protected $signature = 'personality:agent-approval-queue-review
+    protected $signature = 'personality:approval-queue-review
         {--framework= : Optional framework filter: mbti64, big_five, or enneagram}
         {--approval-state=pending : Approval state filter: pending, approved, rejected, or all}
         {--limit=50 : Maximum rows to return, from 1 to 200}
         {--json : Emit the full JSON read model}
         {--output= : Optional path to write the JSON read model}';
 
-    protected $description = 'Read pending personality agent recommendation approvals and QA risk state without writing CMS or approval records.';
+    protected $description = 'Read pending personality recommendation approvals and QA risk state without writing CMS or approval records.';
 
-    public function handle(PersonalityAgentApprovalQueueReadModel $readModel): int
+    public function handle(PersonalityApprovalQueueReadModel $readModel): int
     {
         try {
             $payload = $readModel->read(

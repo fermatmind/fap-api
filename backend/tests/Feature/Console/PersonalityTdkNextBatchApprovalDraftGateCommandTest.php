@@ -44,7 +44,7 @@ final class PersonalityTdkNextBatchApprovalDraftGateCommandTest extends TestCase
         $artifact = $this->readJson((string) data_get($summary, 'artifact.path'));
         $this->assertSame('personality-tdk-next-batch-approval-draft-gate.v1', $artifact['schema_version'] ?? null);
         $this->assertSame(['/zh/personality/intp-a', '/zh/personality/esfp-a', '/en/personality/enfj-a'], array_column($artifact['targets'] ?? [], 'path'));
-        $this->assertStringContainsString('personality:agent-approval-queue', implode(' ', data_get($artifact, 'future_command_templates.approval_queue_dry_run', [])));
+        $this->assertStringContainsString('personality:approval-queue-write', implode(' ', data_get($artifact, 'future_command_templates.approval_queue_dry_run', [])));
     }
 
     #[Test]

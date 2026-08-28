@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
-final class PersonalityBigFivePublicProfileAgentDraftCommandTest extends TestCase
+final class PersonalityBigFivePublicProfileDraftCommandTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -19,7 +19,7 @@ final class PersonalityBigFivePublicProfileAgentDraftCommandTest extends TestCas
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
 
-        $exitCode = Artisan::call('personality:big-five-public-profile-agent-draft', [
+        $exitCode = Artisan::call('personality:big-five-public-profile-draft', [
             '--package' => $packagePath,
             '--qa' => $qaPath,
             '--dry-run' => true,
@@ -52,7 +52,7 @@ final class PersonalityBigFivePublicProfileAgentDraftCommandTest extends TestCas
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
 
-        $exitCode = Artisan::call('personality:big-five-public-profile-agent-draft', $this->writeOptions($packagePath, $qaPath));
+        $exitCode = Artisan::call('personality:big-five-public-profile-draft', $this->writeOptions($packagePath, $qaPath));
 
         $payload = $this->jsonOutput();
         $this->assertSame(1, $exitCode);
@@ -84,7 +84,7 @@ final class PersonalityBigFivePublicProfileAgentDraftCommandTest extends TestCas
         ];
         [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
 
-        $exitCode = Artisan::call('personality:big-five-public-profile-agent-draft', [
+        $exitCode = Artisan::call('personality:big-five-public-profile-draft', [
             '--package' => $packagePath,
             '--qa' => $qaPath,
             '--dry-run' => true,
@@ -111,7 +111,7 @@ final class PersonalityBigFivePublicProfileAgentDraftCommandTest extends TestCas
         [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
         $this->approvePackageRows($packagePath, $qaPath, $package, $qa);
 
-        $exitCode = Artisan::call('personality:big-five-public-profile-agent-draft', $this->writeOptions($packagePath, $qaPath));
+        $exitCode = Artisan::call('personality:big-five-public-profile-draft', $this->writeOptions($packagePath, $qaPath));
 
         $payload = $this->jsonOutput();
         $this->assertSame(0, $exitCode);
@@ -145,10 +145,10 @@ final class PersonalityBigFivePublicProfileAgentDraftCommandTest extends TestCas
         $this->approvePackageRows($packagePath, $qaPath, $package, $qa);
         $options = $this->writeOptions($packagePath, $qaPath);
 
-        $firstExitCode = Artisan::call('personality:big-five-public-profile-agent-draft', $options);
+        $firstExitCode = Artisan::call('personality:big-five-public-profile-draft', $options);
         $this->assertSame(0, $firstExitCode);
 
-        $secondExitCode = Artisan::call('personality:big-five-public-profile-agent-draft', $options);
+        $secondExitCode = Artisan::call('personality:big-five-public-profile-draft', $options);
 
         $payload = $this->jsonOutput();
         $this->assertSame(0, $secondExitCode);
@@ -166,13 +166,13 @@ final class PersonalityBigFivePublicProfileAgentDraftCommandTest extends TestCas
         $qa = $this->validQa();
         [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
         $this->approvePackageRows($packagePath, $qaPath, $package, $qa);
-        $this->assertSame(0, Artisan::call('personality:big-five-public-profile-agent-draft', $this->writeOptions($packagePath, $qaPath)));
+        $this->assertSame(0, Artisan::call('personality:big-five-public-profile-draft', $this->writeOptions($packagePath, $qaPath)));
 
         $updatedPackage = $this->validPackage('Updated Big Five SEO description');
         [$updatedPackagePath, $updatedQaPath] = $this->writeArtifacts($updatedPackage, $qa, 'updated-package.json', 'updated-qa.json');
         $this->approvePackageRows($updatedPackagePath, $updatedQaPath, $updatedPackage, $qa);
 
-        $exitCode = Artisan::call('personality:big-five-public-profile-agent-draft', $this->writeOptions($updatedPackagePath, $updatedQaPath));
+        $exitCode = Artisan::call('personality:big-five-public-profile-draft', $this->writeOptions($updatedPackagePath, $updatedQaPath));
 
         $payload = $this->jsonOutput();
         $this->assertSame(0, $exitCode);
@@ -189,7 +189,7 @@ final class PersonalityBigFivePublicProfileAgentDraftCommandTest extends TestCas
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
 
-        $exitCode = Artisan::call('personality:big-five-public-profile-agent-draft', [
+        $exitCode = Artisan::call('personality:big-five-public-profile-draft', [
             '--package' => $packagePath,
             '--qa' => $qaPath,
             '--write' => true,
@@ -226,7 +226,7 @@ final class PersonalityBigFivePublicProfileAgentDraftCommandTest extends TestCas
         [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
         $this->approvePackageRows($packagePath, $qaPath, $package, $qa);
 
-        $exitCode = Artisan::call('personality:big-five-public-profile-agent-draft', $this->writeOptions($packagePath, $qaPath));
+        $exitCode = Artisan::call('personality:big-five-public-profile-draft', $this->writeOptions($packagePath, $qaPath));
 
         $payload = $this->jsonOutput();
         $this->assertSame(1, $exitCode);
@@ -275,7 +275,7 @@ final class PersonalityBigFivePublicProfileAgentDraftCommandTest extends TestCas
         [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
         $this->approvePackageRows($packagePath, $qaPath, $package, $qa);
 
-        $exitCode = Artisan::call('personality:big-five-public-profile-agent-draft', $this->writeOptions($packagePath, $qaPath));
+        $exitCode = Artisan::call('personality:big-five-public-profile-draft', $this->writeOptions($packagePath, $qaPath));
 
         $payload = $this->jsonOutput();
         $this->assertSame(1, $exitCode);

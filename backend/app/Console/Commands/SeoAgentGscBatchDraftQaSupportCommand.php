@@ -6,11 +6,10 @@ namespace App\Console\Commands;
 
 use App\Models\Article;
 use App\Models\ArticleRevision;
-use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use RuntimeException;
 
-final class SeoAgentGscBatchDraftQaSupportCommand extends Command
+final class SeoAgentGscBatchDraftQaSupportCommand extends RetiredSeoAgentCommand
 {
     private const SCHEMA_VERSION = 'seo-agent-gsc-batch-draft-qa-support.v1';
 

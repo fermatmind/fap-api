@@ -1,0 +1,1261 @@
+{
+    "schema_version": "seo.role_capability_registry.v1",
+    "registry_id": "fermatmind.seo.role_capability_registry",
+    "registry_version": "1.0.0",
+    "registry_status": "frozen",
+    "owner_repository": "fap-api",
+    "source_repository_snapshots": [
+        {
+            "repository": "fap-api",
+            "sha": "c80612517e2c6f83586d46b579c1c8353205514d",
+            "evidence_state": "verified"
+        },
+        {
+            "repository": "fap-web",
+            "sha": "16b5e655b4ae3e2c74bb265b90568676bbcd55dc",
+            "evidence_state": "verified"
+        }
+    ],
+    "architecture_decisions": {
+        "runtime_framework": "laravel_native",
+        "orchestration_pattern": "flow_first",
+        "crewai_runtime_dependency": false,
+        "shared_agent_memory": false,
+        "delegation_default": false,
+        "external_trace_export": false
+    },
+    "global_guards": {
+        "read_only_gsc": true,
+        "search_submission_allowed": false,
+        "post12_agent_write_enabled": false,
+        "l4_state": "dormant_not_authorized",
+        "agent_default_write_permission": false,
+        "deterministic_system_final_veto": true,
+        "model_invocation_enabled": false,
+        "runtime_model_invocation_enabled": false,
+        "fap_web_agent_authority": false
+    },
+    "roles": [
+        {
+            "role_id": "seo.orchestrator",
+            "role_version": "1.0.0",
+            "classification": "active_agent",
+            "execution_kind": "orchestrator",
+            "runtime_state": "dormant_not_authorized",
+            "goal": "Coordinate fixed Laravel flows and emit recommendations without executing tools.",
+            "allowed_missions": [
+                "global_portfolio",
+                "weekly_opportunity",
+                "monthly_portfolio",
+                "breakthrough_sprint"
+            ],
+            "input_schema": {
+                "id": "seo.role_input",
+                "version": "1.0.0",
+                "hash": "1032a03bbbb65b57d42705f9889acf25139516cb726d985a042686b9461d008c"
+            },
+            "output_schema": {
+                "id": "seo.role_output",
+                "version": "1.0.0",
+                "hash": "cc1005a996e5f7d5a8e5fe9bfc7ca37285999d9f4868ade85f176c3eec0f6b5c"
+            },
+            "prompt_ref": {
+                "id": "seo.orchestrator.prompt",
+                "version": "1.0.0",
+                "hash": "397f5df2bc10925aaf80f729a3a55a1711da44355fef17373f7bb0f554cfde6a"
+            },
+            "policy_refs": [
+                {
+                    "id": "seo.execution_hold",
+                    "version": "1.0.0",
+                    "hash": "4fd0b6be393b68e1e2082d968a630e67f10c18d2e66bbf4684094f1e45d793e9"
+                },
+                {
+                    "id": "seo.evidence_boundary",
+                    "version": "1.0.0",
+                    "hash": "7eac260be6949e1161220ae30564e3b4f46cd806cd30af7c0e6afb187c0ecab9"
+                },
+                {
+                    "id": "seo.release_separation",
+                    "version": "1.0.0",
+                    "hash": "6c1cf25f70ffc475a0c19f8c7cdf3451c9c35cb49482298e9d4485d365327be6"
+                }
+            ],
+            "tool_allowlist": [],
+            "egress_allowlist": [],
+            "page_family_scope": [
+                "tests",
+                "articles_topics",
+                "career",
+                "personality",
+                "trust_method_help",
+                "other_public"
+            ],
+            "locale_scope": [
+                "en",
+                "zh-CN"
+            ],
+            "authority_ceiling": "recommendation_only",
+            "max_model_calls": 0,
+            "max_tool_calls": 0,
+            "max_execution_seconds": 0,
+            "max_retry_count": 0,
+            "max_cost": {
+                "amount": 0,
+                "currency": "USD"
+            },
+            "allow_delegation": false,
+            "write_permissions": [],
+            "stop_conditions": [
+                "execution_not_authorized",
+                "authority_unknown_or_private_excluded",
+                "evidence_missing_stale_or_blocked",
+                "write_or_external_egress_requested"
+            ],
+            "evidence_requirements": [
+                "current_authority_source",
+                "sanitized_evidence_refs",
+                "explicit_evidence_state",
+                "deterministic_negative_guarantees"
+            ],
+            "owner_repository": "fap-api",
+            "role_hash": "0f01bb84e36dac7d41700440c64a14d4f8b66153b6d9924ebbbd748112848b05"
+        },
+        {
+            "role_id": "seo.expert.technical_search_authority",
+            "role_version": "1.0.0",
+            "classification": "review_mode",
+            "execution_kind": "expert_mode",
+            "runtime_state": "dormant_not_authorized",
+            "goal": "Review backend/frontend/live search authority parity.",
+            "allowed_missions": [
+                "bounded_review"
+            ],
+            "input_schema": {
+                "id": "seo.role_input",
+                "version": "1.0.0",
+                "hash": "1032a03bbbb65b57d42705f9889acf25139516cb726d985a042686b9461d008c"
+            },
+            "output_schema": {
+                "id": "seo.role_output",
+                "version": "1.0.0",
+                "hash": "cc1005a996e5f7d5a8e5fe9bfc7ca37285999d9f4868ade85f176c3eec0f6b5c"
+            },
+            "prompt_ref": {
+                "id": "seo.expert.review.prompt",
+                "version": "1.0.0",
+                "hash": "7b68cec6c8a1a7d33dd2dc1d922f1c670128ce6c961a5eaba5451d039e15370c"
+            },
+            "policy_refs": [
+                {
+                    "id": "seo.execution_hold",
+                    "version": "1.0.0",
+                    "hash": "4fd0b6be393b68e1e2082d968a630e67f10c18d2e66bbf4684094f1e45d793e9"
+                },
+                {
+                    "id": "seo.evidence_boundary",
+                    "version": "1.0.0",
+                    "hash": "7eac260be6949e1161220ae30564e3b4f46cd806cd30af7c0e6afb187c0ecab9"
+                }
+            ],
+            "tool_allowlist": [],
+            "egress_allowlist": [],
+            "page_family_scope": [
+                "tests",
+                "articles_topics",
+                "career",
+                "personality",
+                "trust_method_help",
+                "other_public"
+            ],
+            "locale_scope": [
+                "en",
+                "zh-CN"
+            ],
+            "authority_ceiling": "review_verdict",
+            "max_model_calls": 0,
+            "max_tool_calls": 0,
+            "max_execution_seconds": 0,
+            "max_retry_count": 0,
+            "max_cost": {
+                "amount": 0,
+                "currency": "USD"
+            },
+            "allow_delegation": false,
+            "write_permissions": [],
+            "stop_conditions": [
+                "execution_not_authorized",
+                "authority_unknown_or_private_excluded",
+                "evidence_missing_stale_or_blocked",
+                "write_or_external_egress_requested"
+            ],
+            "evidence_requirements": [
+                "current_authority_source",
+                "sanitized_evidence_refs",
+                "explicit_evidence_state",
+                "deterministic_negative_guarantees"
+            ],
+            "owner_repository": "fap-api",
+            "role_hash": "5d4ec9013d8a51afd6332394b2a4df5960bbbe8e54b1de5d184252f2abc39de7"
+        },
+        {
+            "role_id": "seo.expert.search_analytics_measurement",
+            "role_version": "1.0.0",
+            "classification": "review_mode",
+            "execution_kind": "expert_mode",
+            "runtime_state": "dormant_not_authorized",
+            "goal": "Review sanitized read-only search measurement evidence.",
+            "allowed_missions": [
+                "bounded_review"
+            ],
+            "input_schema": {
+                "id": "seo.role_input",
+                "version": "1.0.0",
+                "hash": "1032a03bbbb65b57d42705f9889acf25139516cb726d985a042686b9461d008c"
+            },
+            "output_schema": {
+                "id": "seo.role_output",
+                "version": "1.0.0",
+                "hash": "cc1005a996e5f7d5a8e5fe9bfc7ca37285999d9f4868ade85f176c3eec0f6b5c"
+            },
+            "prompt_ref": {
+                "id": "seo.expert.review.prompt",
+                "version": "1.0.0",
+                "hash": "7b68cec6c8a1a7d33dd2dc1d922f1c670128ce6c961a5eaba5451d039e15370c"
+            },
+            "policy_refs": [
+                {
+                    "id": "seo.execution_hold",
+                    "version": "1.0.0",
+                    "hash": "4fd0b6be393b68e1e2082d968a630e67f10c18d2e66bbf4684094f1e45d793e9"
+                },
+                {
+                    "id": "seo.evidence_boundary",
+                    "version": "1.0.0",
+                    "hash": "7eac260be6949e1161220ae30564e3b4f46cd806cd30af7c0e6afb187c0ecab9"
+                }
+            ],
+            "tool_allowlist": [],
+            "egress_allowlist": [],
+            "page_family_scope": [
+                "tests",
+                "articles_topics",
+                "career",
+                "personality",
+                "trust_method_help",
+                "other_public"
+            ],
+            "locale_scope": [
+                "en",
+                "zh-CN"
+            ],
+            "authority_ceiling": "review_verdict",
+            "max_model_calls": 0,
+            "max_tool_calls": 0,
+            "max_execution_seconds": 0,
+            "max_retry_count": 0,
+            "max_cost": {
+                "amount": 0,
+                "currency": "USD"
+            },
+            "allow_delegation": false,
+            "write_permissions": [],
+            "stop_conditions": [
+                "execution_not_authorized",
+                "authority_unknown_or_private_excluded",
+                "evidence_missing_stale_or_blocked",
+                "write_or_external_egress_requested"
+            ],
+            "evidence_requirements": [
+                "current_authority_source",
+                "sanitized_evidence_refs",
+                "explicit_evidence_state",
+                "deterministic_negative_guarantees"
+            ],
+            "owner_repository": "fap-api",
+            "role_hash": "bba3b4821e577c1c2a9967efa43b3ffc121cb7cff6e36b7008f645d5dbfa276d"
+        },
+        {
+            "role_id": "seo.expert.content_entity_quality",
+            "role_version": "1.0.0",
+            "classification": "review_mode",
+            "execution_kind": "expert_mode",
+            "runtime_state": "dormant_not_authorized",
+            "goal": "Review content, entity, claim, and duplication evidence.",
+            "allowed_missions": [
+                "bounded_review"
+            ],
+            "input_schema": {
+                "id": "seo.role_input",
+                "version": "1.0.0",
+                "hash": "1032a03bbbb65b57d42705f9889acf25139516cb726d985a042686b9461d008c"
+            },
+            "output_schema": {
+                "id": "seo.role_output",
+                "version": "1.0.0",
+                "hash": "cc1005a996e5f7d5a8e5fe9bfc7ca37285999d9f4868ade85f176c3eec0f6b5c"
+            },
+            "prompt_ref": {
+                "id": "seo.expert.review.prompt",
+                "version": "1.0.0",
+                "hash": "7b68cec6c8a1a7d33dd2dc1d922f1c670128ce6c961a5eaba5451d039e15370c"
+            },
+            "policy_refs": [
+                {
+                    "id": "seo.execution_hold",
+                    "version": "1.0.0",
+                    "hash": "4fd0b6be393b68e1e2082d968a630e67f10c18d2e66bbf4684094f1e45d793e9"
+                },
+                {
+                    "id": "seo.evidence_boundary",
+                    "version": "1.0.0",
+                    "hash": "7eac260be6949e1161220ae30564e3b4f46cd806cd30af7c0e6afb187c0ecab9"
+                }
+            ],
+            "tool_allowlist": [],
+            "egress_allowlist": [],
+            "page_family_scope": [
+                "tests",
+                "articles_topics",
+                "career",
+                "personality",
+                "trust_method_help",
+                "other_public"
+            ],
+            "locale_scope": [
+                "en",
+                "zh-CN"
+            ],
+            "authority_ceiling": "review_verdict",
+            "max_model_calls": 0,
+            "max_tool_calls": 0,
+            "max_execution_seconds": 0,
+            "max_retry_count": 0,
+            "max_cost": {
+                "amount": 0,
+                "currency": "USD"
+            },
+            "allow_delegation": false,
+            "write_permissions": [],
+            "stop_conditions": [
+                "execution_not_authorized",
+                "authority_unknown_or_private_excluded",
+                "evidence_missing_stale_or_blocked",
+                "write_or_external_egress_requested"
+            ],
+            "evidence_requirements": [
+                "current_authority_source",
+                "sanitized_evidence_refs",
+                "explicit_evidence_state",
+                "deterministic_negative_guarantees"
+            ],
+            "owner_repository": "fap-api",
+            "role_hash": "ed4c9435e67fa45d6fc8d9ea12647d911cfe58a56d2b667a03cc0d8af3187123"
+        },
+        {
+            "role_id": "seo.expert.competitor_research",
+            "role_version": "1.0.0",
+            "classification": "review_mode",
+            "execution_kind": "expert_mode",
+            "runtime_state": "dormant_not_authorized",
+            "goal": "Review public competitor structure without copying content.",
+            "allowed_missions": [
+                "bounded_review"
+            ],
+            "input_schema": {
+                "id": "seo.role_input",
+                "version": "1.0.0",
+                "hash": "1032a03bbbb65b57d42705f9889acf25139516cb726d985a042686b9461d008c"
+            },
+            "output_schema": {
+                "id": "seo.role_output",
+                "version": "1.0.0",
+                "hash": "cc1005a996e5f7d5a8e5fe9bfc7ca37285999d9f4868ade85f176c3eec0f6b5c"
+            },
+            "prompt_ref": {
+                "id": "seo.expert.review.prompt",
+                "version": "1.0.0",
+                "hash": "7b68cec6c8a1a7d33dd2dc1d922f1c670128ce6c961a5eaba5451d039e15370c"
+            },
+            "policy_refs": [
+                {
+                    "id": "seo.execution_hold",
+                    "version": "1.0.0",
+                    "hash": "4fd0b6be393b68e1e2082d968a630e67f10c18d2e66bbf4684094f1e45d793e9"
+                },
+                {
+                    "id": "seo.evidence_boundary",
+                    "version": "1.0.0",
+                    "hash": "7eac260be6949e1161220ae30564e3b4f46cd806cd30af7c0e6afb187c0ecab9"
+                }
+            ],
+            "tool_allowlist": [],
+            "egress_allowlist": [],
+            "page_family_scope": [
+                "tests",
+                "articles_topics",
+                "career",
+                "personality",
+                "trust_method_help",
+                "other_public"
+            ],
+            "locale_scope": [
+                "en",
+                "zh-CN"
+            ],
+            "authority_ceiling": "review_verdict",
+            "max_model_calls": 0,
+            "max_tool_calls": 0,
+            "max_execution_seconds": 0,
+            "max_retry_count": 0,
+            "max_cost": {
+                "amount": 0,
+                "currency": "USD"
+            },
+            "allow_delegation": false,
+            "write_permissions": [],
+            "stop_conditions": [
+                "execution_not_authorized",
+                "authority_unknown_or_private_excluded",
+                "evidence_missing_stale_or_blocked",
+                "write_or_external_egress_requested"
+            ],
+            "evidence_requirements": [
+                "current_authority_source",
+                "sanitized_evidence_refs",
+                "explicit_evidence_state",
+                "deterministic_negative_guarantees"
+            ],
+            "owner_repository": "fap-api",
+            "role_hash": "c4d98a0164c667a385b0070ee36d2b7f0037280057c84ea278f5d667f212c7ee"
+        },
+        {
+            "role_id": "seo.expert.public_content_stability",
+            "role_version": "1.0.0",
+            "classification": "review_mode",
+            "execution_kind": "expert_mode",
+            "runtime_state": "dormant_not_authorized",
+            "goal": "Review public runtime, cache, and projection stability evidence.",
+            "allowed_missions": [
+                "bounded_review"
+            ],
+            "input_schema": {
+                "id": "seo.role_input",
+                "version": "1.0.0",
+                "hash": "1032a03bbbb65b57d42705f9889acf25139516cb726d985a042686b9461d008c"
+            },
+            "output_schema": {
+                "id": "seo.role_output",
+                "version": "1.0.0",
+                "hash": "cc1005a996e5f7d5a8e5fe9bfc7ca37285999d9f4868ade85f176c3eec0f6b5c"
+            },
+            "prompt_ref": {
+                "id": "seo.expert.review.prompt",
+                "version": "1.0.0",
+                "hash": "7b68cec6c8a1a7d33dd2dc1d922f1c670128ce6c961a5eaba5451d039e15370c"
+            },
+            "policy_refs": [
+                {
+                    "id": "seo.execution_hold",
+                    "version": "1.0.0",
+                    "hash": "4fd0b6be393b68e1e2082d968a630e67f10c18d2e66bbf4684094f1e45d793e9"
+                },
+                {
+                    "id": "seo.evidence_boundary",
+                    "version": "1.0.0",
+                    "hash": "7eac260be6949e1161220ae30564e3b4f46cd806cd30af7c0e6afb187c0ecab9"
+                }
+            ],
+            "tool_allowlist": [],
+            "egress_allowlist": [],
+            "page_family_scope": [
+                "tests",
+                "articles_topics",
+                "career",
+                "personality",
+                "trust_method_help",
+                "other_public"
+            ],
+            "locale_scope": [
+                "en",
+                "zh-CN"
+            ],
+            "authority_ceiling": "review_verdict",
+            "max_model_calls": 0,
+            "max_tool_calls": 0,
+            "max_execution_seconds": 0,
+            "max_retry_count": 0,
+            "max_cost": {
+                "amount": 0,
+                "currency": "USD"
+            },
+            "allow_delegation": false,
+            "write_permissions": [],
+            "stop_conditions": [
+                "execution_not_authorized",
+                "authority_unknown_or_private_excluded",
+                "evidence_missing_stale_or_blocked",
+                "write_or_external_egress_requested"
+            ],
+            "evidence_requirements": [
+                "current_authority_source",
+                "sanitized_evidence_refs",
+                "explicit_evidence_state",
+                "deterministic_negative_guarantees"
+            ],
+            "owner_repository": "fap-api",
+            "role_hash": "be285fb11d088659c810e5e7c268e9e51f4c226ebe9b80586093716f540d3ca1"
+        },
+        {
+            "role_id": "seo.expert.commercial_funnel_cro",
+            "role_version": "1.0.0",
+            "classification": "review_mode",
+            "execution_kind": "expert_mode",
+            "runtime_state": "dormant_not_authorized",
+            "goal": "Review aggregate public-to-product funnel evidence.",
+            "allowed_missions": [
+                "bounded_review"
+            ],
+            "input_schema": {
+                "id": "seo.role_input",
+                "version": "1.0.0",
+                "hash": "1032a03bbbb65b57d42705f9889acf25139516cb726d985a042686b9461d008c"
+            },
+            "output_schema": {
+                "id": "seo.role_output",
+                "version": "1.0.0",
+                "hash": "cc1005a996e5f7d5a8e5fe9bfc7ca37285999d9f4868ade85f176c3eec0f6b5c"
+            },
+            "prompt_ref": {
+                "id": "seo.expert.review.prompt",
+                "version": "1.0.0",
+                "hash": "7b68cec6c8a1a7d33dd2dc1d922f1c670128ce6c961a5eaba5451d039e15370c"
+            },
+            "policy_refs": [
+                {
+                    "id": "seo.execution_hold",
+                    "version": "1.0.0",
+                    "hash": "4fd0b6be393b68e1e2082d968a630e67f10c18d2e66bbf4684094f1e45d793e9"
+                },
+                {
+                    "id": "seo.evidence_boundary",
+                    "version": "1.0.0",
+                    "hash": "7eac260be6949e1161220ae30564e3b4f46cd806cd30af7c0e6afb187c0ecab9"
+                }
+            ],
+            "tool_allowlist": [],
+            "egress_allowlist": [],
+            "page_family_scope": [
+                "tests",
+                "articles_topics",
+                "career",
+                "personality",
+                "trust_method_help",
+                "other_public"
+            ],
+            "locale_scope": [
+                "en",
+                "zh-CN"
+            ],
+            "authority_ceiling": "review_verdict",
+            "max_model_calls": 0,
+            "max_tool_calls": 0,
+            "max_execution_seconds": 0,
+            "max_retry_count": 0,
+            "max_cost": {
+                "amount": 0,
+                "currency": "USD"
+            },
+            "allow_delegation": false,
+            "write_permissions": [],
+            "stop_conditions": [
+                "execution_not_authorized",
+                "authority_unknown_or_private_excluded",
+                "evidence_missing_stale_or_blocked",
+                "write_or_external_egress_requested"
+            ],
+            "evidence_requirements": [
+                "current_authority_source",
+                "sanitized_evidence_refs",
+                "explicit_evidence_state",
+                "deterministic_negative_guarantees"
+            ],
+            "owner_repository": "fap-api",
+            "role_hash": "0fdbbd960cbda1576ee900253b3f1d0bd702038c418366e89c44f8a7efb939fc"
+        },
+        {
+            "role_id": "seo.independent_reviewer",
+            "role_version": "1.0.0",
+            "classification": "review_mode",
+            "execution_kind": "independent_reviewer",
+            "runtime_state": "dormant_not_authorized",
+            "goal": "Independently verify evidence, policy, authority, and negative guarantees.",
+            "allowed_missions": [
+                "independent_registry_review"
+            ],
+            "input_schema": {
+                "id": "seo.role_input",
+                "version": "1.0.0",
+                "hash": "1032a03bbbb65b57d42705f9889acf25139516cb726d985a042686b9461d008c"
+            },
+            "output_schema": {
+                "id": "seo.role_output",
+                "version": "1.0.0",
+                "hash": "cc1005a996e5f7d5a8e5fe9bfc7ca37285999d9f4868ade85f176c3eec0f6b5c"
+            },
+            "prompt_ref": {
+                "id": "seo.independent_reviewer.prompt",
+                "version": "1.0.0",
+                "hash": "84ffa12aaa80d597c0104bdeabf05ed2aa0c0d015a7ef585e71e5c51926743f0"
+            },
+            "policy_refs": [
+                {
+                    "id": "seo.execution_hold",
+                    "version": "1.0.0",
+                    "hash": "4fd0b6be393b68e1e2082d968a630e67f10c18d2e66bbf4684094f1e45d793e9"
+                },
+                {
+                    "id": "seo.evidence_boundary",
+                    "version": "1.0.0",
+                    "hash": "7eac260be6949e1161220ae30564e3b4f46cd806cd30af7c0e6afb187c0ecab9"
+                },
+                {
+                    "id": "seo.release_separation",
+                    "version": "1.0.0",
+                    "hash": "6c1cf25f70ffc475a0c19f8c7cdf3451c9c35cb49482298e9d4485d365327be6"
+                }
+            ],
+            "tool_allowlist": [],
+            "egress_allowlist": [],
+            "page_family_scope": [
+                "tests",
+                "articles_topics",
+                "career",
+                "personality",
+                "trust_method_help",
+                "other_public"
+            ],
+            "locale_scope": [
+                "en",
+                "zh-CN"
+            ],
+            "authority_ceiling": "review_verdict",
+            "max_model_calls": 0,
+            "max_tool_calls": 0,
+            "max_execution_seconds": 0,
+            "max_retry_count": 0,
+            "max_cost": {
+                "amount": 0,
+                "currency": "USD"
+            },
+            "allow_delegation": false,
+            "write_permissions": [],
+            "stop_conditions": [
+                "execution_not_authorized",
+                "authority_unknown_or_private_excluded",
+                "evidence_missing_stale_or_blocked",
+                "write_or_external_egress_requested"
+            ],
+            "evidence_requirements": [
+                "current_authority_source",
+                "sanitized_evidence_refs",
+                "explicit_evidence_state",
+                "deterministic_negative_guarantees"
+            ],
+            "owner_repository": "fap-api",
+            "role_hash": "4c6cf3c79ec9dca2874f29ee3d6ada69fe64c606ad70e24eabd95483fe3762c0"
+        },
+        {
+            "role_id": "career.content_agent",
+            "role_version": "1.0.0",
+            "classification": "bounded_capability",
+            "execution_kind": "candidate_producer",
+            "runtime_state": "dormant_not_authorized",
+            "goal": "Produce bounded Career candidates, receipts, and a release-authority handoff only.",
+            "allowed_missions": [
+                "career_candidate_generation"
+            ],
+            "input_schema": {
+                "id": "seo.role_input",
+                "version": "1.0.0",
+                "hash": "1032a03bbbb65b57d42705f9889acf25139516cb726d985a042686b9461d008c"
+            },
+            "output_schema": {
+                "id": "seo.role_output",
+                "version": "1.0.0",
+                "hash": "cc1005a996e5f7d5a8e5fe9bfc7ca37285999d9f4868ade85f176c3eec0f6b5c"
+            },
+            "prompt_ref": {
+                "id": "career.content_agent.prompt",
+                "version": "1.0.0",
+                "hash": "20ae9e99fc251639dbbfaf34209dbdd03504e13b7d66470850615c2e7a2a14ad"
+            },
+            "policy_refs": [
+                {
+                    "id": "seo.execution_hold",
+                    "version": "1.0.0",
+                    "hash": "4fd0b6be393b68e1e2082d968a630e67f10c18d2e66bbf4684094f1e45d793e9"
+                },
+                {
+                    "id": "seo.evidence_boundary",
+                    "version": "1.0.0",
+                    "hash": "7eac260be6949e1161220ae30564e3b4f46cd806cd30af7c0e6afb187c0ecab9"
+                },
+                {
+                    "id": "seo.release_separation",
+                    "version": "1.0.0",
+                    "hash": "6c1cf25f70ffc475a0c19f8c7cdf3451c9c35cb49482298e9d4485d365327be6"
+                }
+            ],
+            "tool_allowlist": [],
+            "egress_allowlist": [],
+            "page_family_scope": [
+                "career"
+            ],
+            "locale_scope": [
+                "en",
+                "zh-CN"
+            ],
+            "authority_ceiling": "candidate_only",
+            "max_model_calls": 0,
+            "max_tool_calls": 0,
+            "max_execution_seconds": 0,
+            "max_retry_count": 0,
+            "max_cost": {
+                "amount": 0,
+                "currency": "USD"
+            },
+            "allow_delegation": false,
+            "write_permissions": [],
+            "stop_conditions": [
+                "execution_not_authorized",
+                "authority_unknown_or_private_excluded",
+                "evidence_missing_stale_or_blocked",
+                "write_or_external_egress_requested"
+            ],
+            "evidence_requirements": [
+                "current_authority_source",
+                "sanitized_evidence_refs",
+                "explicit_evidence_state",
+                "deterministic_negative_guarantees"
+            ],
+            "owner_repository": "fap-api",
+            "role_hash": "60c249036f93b1488cd92607977707fb3e5c5f5afe29e101776a2cf70cfe0b79"
+        }
+    ],
+    "capabilities": [
+        {
+            "capability_id": "seo.runtime_health_review",
+            "capability_version": "1.0.0",
+            "classification": "review_mode",
+            "authority_source": "SeoIntel runtime read models",
+            "runtime_state": "dormant_not_authorized",
+            "agent_invocable": false,
+            "write_boundaries": [],
+            "model_invocation": false,
+            "external_egress": false,
+            "owner_repository": "fap-api",
+            "capability_hash": "792ad063c5fa38016a873423876034f1b0e98de2cd647713cf77a6020054cca4"
+        },
+        {
+            "capability_id": "seo.search_measurement_review",
+            "capability_version": "1.0.0",
+            "classification": "review_mode",
+            "authority_source": "read-only GSC materialized evidence",
+            "runtime_state": "dormant_not_authorized",
+            "agent_invocable": false,
+            "write_boundaries": [],
+            "model_invocation": false,
+            "external_egress": false,
+            "owner_repository": "fap-api",
+            "capability_hash": "eb67c1decb8978278e289a99c31a43b32154d5ae6658f6da18439dc49a76c416"
+        },
+        {
+            "capability_id": "seo.content_claim_review",
+            "capability_version": "1.0.0",
+            "classification": "review_mode",
+            "authority_source": "deterministic claim and content reviewers",
+            "runtime_state": "dormant_not_authorized",
+            "agent_invocable": false,
+            "write_boundaries": [],
+            "model_invocation": false,
+            "external_egress": false,
+            "owner_repository": "fap-api",
+            "capability_hash": "bb9fea28f62ba67e7bdc96a4c81134a12dbf78a5430c9f9e1de8f67ba55b8058"
+        },
+        {
+            "capability_id": "seo.cms_gap_scan",
+            "capability_version": "1.0.0",
+            "classification": "deterministic_tool",
+            "authority_source": "CMS FAQ/TDK scanners",
+            "runtime_state": "dormant_not_authorized",
+            "agent_invocable": false,
+            "write_boundaries": [],
+            "model_invocation": false,
+            "external_egress": false,
+            "owner_repository": "fap-api",
+            "capability_hash": "27264554499debe0eac22b3184e11b1c25ef1cd32fc58d4d5946d3e2ee97da4c"
+        },
+        {
+            "capability_id": "seo.decision_authority",
+            "capability_version": "1.0.0",
+            "classification": "deterministic_tool",
+            "authority_source": "SEO-PLATFORM-09 Decision authority",
+            "runtime_state": "dormant_not_authorized",
+            "agent_invocable": false,
+            "write_boundaries": [],
+            "model_invocation": false,
+            "external_egress": false,
+            "owner_repository": "fap-api",
+            "capability_hash": "bab61e6028e1e65126ed0019c6a7c82e490bc5ae9d38331be2e7127b1f8e6a0c"
+        },
+        {
+            "capability_id": "seo.material_lifecycle_review",
+            "capability_version": "1.0.0",
+            "classification": "review_mode",
+            "authority_source": "SEO-PLATFORM-10 lifecycle read model",
+            "runtime_state": "dormant_not_authorized",
+            "agent_invocable": false,
+            "write_boundaries": [],
+            "model_invocation": false,
+            "external_egress": false,
+            "owner_repository": "fap-api",
+            "capability_hash": "bd213c0965b805c383a59d1d49244e575207f556e534868926decb040186c62a"
+        },
+        {
+            "capability_id": "seo.rollback_guard",
+            "capability_version": "1.0.0",
+            "classification": "bounded_capability",
+            "authority_source": "deterministic rollback guard",
+            "runtime_state": "dormant_not_authorized",
+            "agent_invocable": false,
+            "write_boundaries": [],
+            "model_invocation": false,
+            "external_egress": false,
+            "owner_repository": "fap-api",
+            "capability_hash": "ec0bc24fd93f03b12a45f5f52cc61244cc67b2d60d9751941c254026de04f296"
+        },
+        {
+            "capability_id": "seo.cms_writer",
+            "capability_version": "1.0.0",
+            "classification": "bounded_capability",
+            "authority_source": "CMS draft/publish services",
+            "runtime_state": "dormant_not_authorized",
+            "agent_invocable": false,
+            "write_boundaries": [
+                "cms"
+            ],
+            "model_invocation": false,
+            "external_egress": false,
+            "owner_repository": "fap-api",
+            "capability_hash": "9747e9ef6e3e94f66de604167d18c38f65f2c2cef1e1ac363cd8419b45bafda6"
+        },
+        {
+            "capability_id": "seo.search_submission",
+            "capability_version": "1.0.0",
+            "classification": "bounded_capability",
+            "authority_source": "Search Channel live executor",
+            "runtime_state": "dormant_not_authorized",
+            "agent_invocable": false,
+            "write_boundaries": [
+                "search_provider"
+            ],
+            "model_invocation": false,
+            "external_egress": false,
+            "owner_repository": "fap-api",
+            "capability_hash": "aea54ea86b0ca0d83fe243142232c0193d2b77e47ad09b7285a19893fe9a7ea9"
+        },
+        {
+            "capability_id": "seo.url_truth_writer",
+            "capability_version": "1.0.0",
+            "classification": "bounded_capability",
+            "authority_source": "URL Truth write services",
+            "runtime_state": "dormant_not_authorized",
+            "agent_invocable": false,
+            "write_boundaries": [
+                "database"
+            ],
+            "model_invocation": false,
+            "external_egress": false,
+            "owner_repository": "fap-api",
+            "capability_hash": "41374d1f90b7f5c098eafe12ad96482d62a7f5e10a7aaedc2843e59ab26a854c"
+        },
+        {
+            "capability_id": "career.content_candidate",
+            "capability_version": "1.0.0",
+            "classification": "bounded_capability",
+            "authority_source": "Career Content candidate harness",
+            "runtime_state": "dormant_not_authorized",
+            "agent_invocable": false,
+            "write_boundaries": [
+                "temporary_filesystem"
+            ],
+            "model_invocation": false,
+            "external_egress": false,
+            "owner_repository": "fap-api",
+            "capability_hash": "e801d0a0daf091c7957d0bca229f8cbdc7490c4527982cb46bb90add1800eca8"
+        },
+        {
+            "capability_id": "career.current_merger",
+            "capability_version": "1.0.0",
+            "classification": "deterministic_tool",
+            "authority_source": "Career release authority merger",
+            "runtime_state": "dormant_not_authorized",
+            "agent_invocable": false,
+            "write_boundaries": [
+                "repository_current"
+            ],
+            "model_invocation": false,
+            "external_egress": false,
+            "owner_repository": "fap-api",
+            "capability_hash": "30f65926ca1d27ae2a01d01e3ca8e9be043699484251000b202e54b14c5cd4ee"
+        },
+        {
+            "capability_id": "career.page_assembly_preview",
+            "capability_version": "1.0.0",
+            "classification": "deterministic_tool",
+            "authority_source": "Page Assembly preview reader",
+            "runtime_state": "dormant_not_authorized",
+            "agent_invocable": false,
+            "write_boundaries": [],
+            "model_invocation": false,
+            "external_egress": false,
+            "owner_repository": "fap-api",
+            "capability_hash": "f1a3ab4a76bbcbb53e438fc1d57c27cd10b05b05dd07f1feae0e3227a2dbd500"
+        },
+        {
+            "capability_id": "career.page_assembly_import",
+            "capability_version": "1.0.0",
+            "classification": "deterministic_tool",
+            "authority_source": "controlled staging/approval/production importer",
+            "runtime_state": "dormant_not_authorized",
+            "agent_invocable": false,
+            "write_boundaries": [
+                "database"
+            ],
+            "model_invocation": false,
+            "external_egress": false,
+            "owner_repository": "fap-api",
+            "capability_hash": "333e660620113b308aad28fd114002128f393c07e5a99d444d90c8713c355004"
+        },
+        {
+            "capability_id": "personality.approval_queue_write",
+            "capability_version": "1.0.0",
+            "classification": "bounded_capability",
+            "authority_source": "Personality approval queue writer",
+            "runtime_state": "dormant_not_authorized",
+            "agent_invocable": false,
+            "write_boundaries": [
+                "database"
+            ],
+            "model_invocation": false,
+            "external_egress": false,
+            "owner_repository": "fap-api",
+            "capability_hash": "72b8662610606f0b0c5e9ab032b84ccc0aefda6eaeb53b8f8ce5d2b2ea2967f6"
+        },
+        {
+            "capability_id": "personality.approval_queue_review",
+            "capability_version": "1.0.0",
+            "classification": "review_mode",
+            "authority_source": "Personality approval queue read model",
+            "runtime_state": "dormant_not_authorized",
+            "agent_invocable": false,
+            "write_boundaries": [],
+            "model_invocation": false,
+            "external_egress": false,
+            "owner_repository": "fap-api",
+            "capability_hash": "6b090cb796eb204fc2f9c67b6f44b136ab6070cb293ba6fa2b6e97242e0b9373"
+        },
+        {
+            "capability_id": "personality.big_five_draft",
+            "capability_version": "1.0.0",
+            "classification": "bounded_capability",
+            "authority_source": "Big Five draft writer",
+            "runtime_state": "dormant_not_authorized",
+            "agent_invocable": false,
+            "write_boundaries": [
+                "cms_draft"
+            ],
+            "model_invocation": false,
+            "external_egress": false,
+            "owner_repository": "fap-api",
+            "capability_hash": "b31bddedfa11be80f4fe08956cd4bf31c0ecb354f16391b7a51b8acbe1ac699f"
+        },
+        {
+            "capability_id": "personality.big_five_promote",
+            "capability_version": "1.0.0",
+            "classification": "bounded_capability",
+            "authority_source": "Big Five promotion service",
+            "runtime_state": "dormant_not_authorized",
+            "agent_invocable": false,
+            "write_boundaries": [
+                "cms_publish"
+            ],
+            "model_invocation": false,
+            "external_egress": false,
+            "owner_repository": "fap-api",
+            "capability_hash": "10bac34d84c42c42cc2c78cf9b04b140124bde0992915177cb0d191de2de7ea0"
+        },
+        {
+            "capability_id": "personality.post_promotion_search_review",
+            "capability_version": "1.0.0",
+            "classification": "review_mode",
+            "authority_source": "post-promotion search readiness review",
+            "runtime_state": "dormant_not_authorized",
+            "agent_invocable": false,
+            "write_boundaries": [],
+            "model_invocation": false,
+            "external_egress": false,
+            "owner_repository": "fap-api",
+            "capability_hash": "761b821707f741787e37b53431fcf807c4b3e65e2c2cbdf366620a81e3552384"
+        },
+        {
+            "capability_id": "seo.release_separation_policy",
+            "capability_version": "1.0.0",
+            "classification": "contract_only",
+            "authority_source": "release separation policy",
+            "runtime_state": "dormant_not_authorized",
+            "agent_invocable": false,
+            "write_boundaries": [],
+            "model_invocation": false,
+            "external_egress": false,
+            "owner_repository": "fap-api",
+            "capability_hash": "d6bd0ee3d5290f131a03d26bd71957ebc6080d51be06b2281dec15a880044a97"
+        }
+    ],
+    "entrypoint_bindings": [
+        {
+            "entrypoint_type": "local_skill",
+            "backend_id": "fap_api.seo_agent_backend.v1",
+            "binding_state": "frozen_contract_only",
+            "execution_authorized": false
+        },
+        {
+            "entrypoint_type": "cli",
+            "backend_id": "fap_api.seo_agent_backend.v1",
+            "binding_state": "frozen_contract_only",
+            "execution_authorized": false
+        },
+        {
+            "entrypoint_type": "scheduler",
+            "backend_id": "fap_api.seo_agent_backend.v1",
+            "binding_state": "frozen_contract_only",
+            "execution_authorized": false
+        },
+        {
+            "entrypoint_type": "api",
+            "backend_id": "fap_api.seo_agent_backend.v1",
+            "binding_state": "frozen_contract_only",
+            "execution_authorized": false
+        },
+        {
+            "entrypoint_type": "seo_operations_ui",
+            "backend_id": "fap_api.seo_agent_backend.v1",
+            "binding_state": "frozen_contract_only",
+            "execution_authorized": false
+        }
+    ],
+    "superseded_assets": [
+        {
+            "asset_id": "fap-api.cli.seo-agent.article-cms-publish-canary",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.article-draft-claim-risk-qa",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.article-draft-preview-runtime-qa",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.article-post-publish-propagation-dry-run",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.article-release",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.auto-rollback-guard",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.cms-draft-package-dry-run",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.cms-draft-payload-repair-canary",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.cms-draft-readback-qa",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.cms-draft-write",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.cms-faq-gap-scan",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.cms-publish-auto-canary",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.cms-publish-canary",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.cms-tdk-gap-scan",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.codex-review-runner",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.compile-mode-c-package",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.gsc-batch-draft-qa-support",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.gsc-cohort-handoff",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.gsc-draft-publish-gate-readiness",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.gsc-opportunity-auto-draft",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.gsc-post-publish-feedback",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.gsc-remaining-candidate-batch-plan",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.l5a-candidate-review",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.l5a-cms-draft-write-canary",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.l5a-contentpage-publish-canary",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.l5a-indexnow-submit-canary",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.opportunity-aggregate",
+            "classification": "historical_superseded",
+            "replacement": "seo.decision_authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.post-publish-indexnow-auto",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.post-publish-search-submit",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.priority-queue-scheduler",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.replace-article-covers",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.run",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.runtime-seo-qa-scan",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.weekly-draft-write-auto",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.weekly-readonly-runner",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-web.legacy.agent_os_release_coordination",
+            "classification": "historical_superseded",
+            "replacement": "fap-api canonical registry"
+        },
+        {
+            "asset_id": "fap-web.legacy.seo_geo_control",
+            "classification": "historical_superseded",
+            "replacement": "fap-api canonical registry"
+        },
+        {
+            "asset_id": "fap-web.legacy.career_content_graph",
+            "classification": "historical_superseded",
+            "replacement": "fap-api canonical registry"
+        },
+        {
+            "asset_id": "fap-web.legacy.release_guard_agent",
+            "classification": "historical_superseded",
+            "replacement": "seo.release_separation"
+        },
+        {
+            "asset_id": "fap-web.legacy.fapweb_code_pr_writer",
+            "classification": "historical_superseded",
+            "replacement": "fap-api canonical registry"
+        }
+    ],
+    "registry_hash": "b02b6edd816b75b42582468e5bc3aa2c9cd0060149825d1fdc6131cf71d73791"
+}

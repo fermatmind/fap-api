@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -12,7 +11,7 @@ use RuntimeException;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 
-final class SeoAgentPriorityQueueSchedulerCommand extends Command
+final class SeoAgentPriorityQueueSchedulerCommand extends RetiredSeoAgentCommand
 {
     private const SCHEMA_VERSION = 'seo-agent-priority-queue-scheduler.v1';
 

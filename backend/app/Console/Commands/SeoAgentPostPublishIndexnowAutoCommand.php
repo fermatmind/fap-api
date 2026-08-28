@@ -9,12 +9,11 @@ use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueApprovalExecutor;
 use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueBoundedLiveExecutor;
 use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueuePlanner;
 use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueWriteService;
-use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
-final class SeoAgentPostPublishIndexnowAutoCommand extends Command
+final class SeoAgentPostPublishIndexnowAutoCommand extends RetiredSeoAgentCommand
 {
     private const SCHEMA_VERSION = 'seo-agent-post-publish-indexnow-auto.v1';
 

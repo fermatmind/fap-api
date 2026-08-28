@@ -13,6 +13,8 @@
     data-access-level="{{ $snapshot['access_level'] }}"
     data-read-only-gsc="{{ $snapshot['read_only_gsc'] ? 'true' : 'false' }}"
     data-search-submission-allowed="{{ $snapshot['search_submission_allowed'] ? 'true' : 'false' }}"
+    data-registry-status="{{ $snapshot['registry_metadata']['registry_status'] }}"
+    data-registry-version="{{ $snapshot['registry_metadata']['registry_version'] }}"
 >
     <div class="ops-seo-section-heading">
         <div>
@@ -28,6 +30,7 @@
         <span class="ops-tag">search_submission_allowed=false</span>
         <span class="ops-tag">{{ __($copy.'.boundaries.evidence_bundle') }}</span>
         <span class="ops-tag">{{ __($copy.'.boundaries.no_authority') }}</span>
+        <span class="ops-tag">registry={{ $snapshot['registry_metadata']['registry_status'] }} · v{{ $snapshot['registry_metadata']['registry_version'] }}</span>
     </div>
 
     <div class="ops-agent-council__layout">

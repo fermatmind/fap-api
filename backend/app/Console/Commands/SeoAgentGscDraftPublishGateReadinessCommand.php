@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use RuntimeException;
 
-final class SeoAgentGscDraftPublishGateReadinessCommand extends Command
+final class SeoAgentGscDraftPublishGateReadinessCommand extends RetiredSeoAgentCommand
 {
     private const SCHEMA_VERSION = 'seo-agent-gsc-draft-publish-gate-readiness.v1';
 

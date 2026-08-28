@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fermatmind.com/schemas/seo-role-output.v1.schema.json",
+  "schema_id": "seo.role_output",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "verdict",
+    "evidence_state",
+    "recommendations",
+    "stop_conditions",
+    "execution_authorized"
+  ],
+  "properties": {
+    "verdict": {"type": "string", "minLength": 1},
+    "evidence_state": {"enum": ["verified", "observed", "inferred", "unknown", "blocked"]},
+    "recommendations": {"type": "array", "items": {"type": "string"}},
+    "stop_conditions": {"type": "array", "items": {"type": "string"}},
+    "execution_authorized": {"const": false}
+  }
+}

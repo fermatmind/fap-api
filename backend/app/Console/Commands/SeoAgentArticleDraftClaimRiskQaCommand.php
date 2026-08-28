@@ -6,11 +6,10 @@ namespace App\Console\Commands;
 
 use App\Models\Article;
 use App\Models\ArticleRevision;
-use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use RuntimeException;
 
-final class SeoAgentArticleDraftClaimRiskQaCommand extends Command
+final class SeoAgentArticleDraftClaimRiskQaCommand extends RetiredSeoAgentCommand
 {
     private const SCHEMA_VERSION = 'seo-agent-article-draft-claim-risk-qa.v1';
 

@@ -12,6 +12,8 @@ use Throwable;
 
 final class SearchChannelQueueLiveSubmissionExecutor
 {
+    public const AGENT_INVOCABLE = false;
+
     public function __construct(
         private readonly SearchChannelQueueAuditLogger $events,
         private readonly SearchChannelSubmissionStatusNormalizer $statusNormalizer,

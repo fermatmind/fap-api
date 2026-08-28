@@ -6,11 +6,10 @@ namespace App\Console\Commands;
 
 use App\Models\Article;
 use App\Models\ArticleRevision;
-use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use RuntimeException;
 
-final class SeoAgentCmsDraftReadbackQaCommand extends Command
+final class SeoAgentCmsDraftReadbackQaCommand extends RetiredSeoAgentCommand
 {
     private const SCHEMA_VERSION = 'seo-agent-cms-draft-readback-qa.v1';
 

@@ -19,8 +19,8 @@ Do not treat a local state file, candidate PASS, package generation, database re
 2. Follow the non-skippable five-gate state machine in [references/gates-risk-lifecycle.md](references/gates-risk-lifecycle.md). Only a gate PASS advances; WARN, BLOCKED, manual review, or budget exhaustion stops the chain.
 3. Use the existing research producer, editorial QA, C3.6A-R evidence adapter, and canonical-builder dry compile. Never repair or rewrite a failed candidate automatically.
 4. Validate the final receipt against its schema and the original request. A receipt remains evidence and cannot itself grant release, publisher, deploy, CMS, database/cache, or discoverability authority.
-5. After an explicit `career.content_agent.release_handoff.v1` from `fap-api-career-release-authority`, the same harness may invoke its single deterministic merger. The merger rechecks row/shard optimistic locks, rewrites only affected module shards, validates expanded dependencies, and updates the manifest last and atomically. It never writes runtime systems.
-6. Execute the locked state machine and merger with `scripts/run_career_content_agent.py`; read [references/agent-harness.md](references/agent-harness.md) for its command and checkpoint contract.
+5. Produce a `career.content_agent.release_handoff.v1` for the independent `fap-api-career-release-authority`. The Agent harness has no Current merger tool and cannot invoke the release authority.
+6. Execute only the locked five-gate state machine with `scripts/run_career_content_agent.py`; read [references/agent-harness.md](references/agent-harness.md) for its command and checkpoint contract.
 7. If this contract itself changes in the repository, use `fap-api-deploy-sre` only to follow the pushed exact SHA and classifier-selected deploy-skip receipt. This is delivery observation, never an Agent gate or deploy authorization.
 
 Module authoring Skills are expert roles inside this one controlled Agent profile. They may improve a bounded candidate but may not create another Agent profile, gate, Current module, or authority. The research producer routes the `quick-decision` visual group through `fap-api-career-quick-decision-authoring`.
@@ -35,7 +35,7 @@ Module authoring Skills are expert roles inside this one controlled Agent profil
 
 ## Prohibited behavior
 
-- AI workers and the five Gate executor must never write CMS, database, cache, Current, publisher, or production state. Only the single deterministic merger may write Current, and only after the explicit release-authority handoff.
+- AI workers and the five Gate executor must never write CMS, database, cache, Current, publisher, or production state. The independent release-authority merger is not an Agent tool.
 - Do not invoke a publisher, SSH deployment, or manual workflow.
 - Do not use local desktop task-runner paths as runtime authority.
 - Do not require legacy readiness labels, chat acknowledgements, recurring schedules, or automatic rewrite loops.

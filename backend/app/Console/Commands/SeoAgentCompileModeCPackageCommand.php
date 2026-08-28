@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\Cms\SeoContentPackage\SeoContentPackageCompiler;
-use Illuminate\Console\Command;
 use Throwable;
 
-final class SeoAgentCompileModeCPackageCommand extends Command
+final class SeoAgentCompileModeCPackageCommand extends RetiredSeoAgentCommand
 {
     protected $signature = 'seo-agent:compile-mode-c-package
         {--package= : Source Mode C package directory}

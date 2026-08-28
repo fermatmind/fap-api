@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Services\Cms\PersonalityAgentApprovalQueueWriter;
+use App\Services\Cms\PersonalityApprovalQueueWriter;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use RuntimeException;
 use Throwable;
 
 /** @review-surface mbti_approval_batch */
-final class PersonalityAgentApprovalQueueCommand extends Command
+final class PersonalityApprovalQueueCommand extends Command
 {
     private const OPERATOR_APPROVAL = 'PERSONALITY-AGENT-HUMAN-APPROVAL-QUEUE-01';
 
     private const APPROVE_OPERATOR_APPROVAL = 'PERSONALITY-AGENT-APPROVAL-QUEUE-APPROVE-CONTRACT-01';
 
-    protected $signature = 'personality:agent-approval-queue
-        {--package= : Path to a personality agent recommendation package JSON artifact}
-        {--qa= : Path to a personality agent QA JSON artifact}
+    protected $signature = 'personality:approval-queue-write
+        {--package= : Path to a personality recommendation package JSON artifact}
+        {--qa= : Path to a personality QA JSON artifact}
         {--dry-run : Validate and plan approval queue rows without database writes}
         {--write : Create pending human approval queue rows}
         {--approve : Approve existing pending human approval queue item IDs without CMS writes}
@@ -32,9 +32,9 @@ final class PersonalityAgentApprovalQueueCommand extends Command
         {--output= : Optional path to write the JSON summary}
         {--operator-approved= : Required exact approval token for --write or --approve}';
 
-    protected $description = 'Queue QA-passed personality agent recommendations for human approval without CMS, publish, index, or search side effects.';
+    protected $description = 'Queue QA-passed personality recommendations for human approval without CMS, publish, index, or search side effects.';
 
-    public function handle(PersonalityAgentApprovalQueueWriter $writer): int
+    public function handle(PersonalityApprovalQueueWriter $writer): int
     {
         try {
             $summary = $this->buildCommandSummary($writer);
@@ -53,7 +53,7 @@ final class PersonalityAgentApprovalQueueCommand extends Command
     /**
      * @return array<string,mixed>
      */
-    private function buildCommandSummary(PersonalityAgentApprovalQueueWriter $writer): array
+    private function buildCommandSummary(PersonalityApprovalQueueWriter $writer): array
     {
         $write = (bool) $this->option('write');
         $dryRun = (bool) $this->option('dry-run');
@@ -79,7 +79,7 @@ final class PersonalityAgentApprovalQueueCommand extends Command
                 $this->optionalJsonFile((string) $this->option('attestation')),
                 (int) config('review_governance.solo_owner_admin_user_id'),
             ), [
-                'command' => 'personality:agent-approval-queue',
+                'command' => 'personality:approval-queue-write',
             ]);
         }
 
@@ -110,7 +110,7 @@ final class PersonalityAgentApprovalQueueCommand extends Command
             : $writer->plan($package, $qa, hash('sha256', $packageRaw), hash('sha256', $qaRaw), $metadata);
 
         return array_merge($summary, [
-            'command' => 'personality:agent-approval-queue',
+            'command' => 'personality:approval-queue-write',
         ]);
     }
 

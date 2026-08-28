@@ -8,7 +8,7 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 
-final class PersonalityAgentApprovalQueueReadModel
+final class PersonalityApprovalQueueReadModel
 {
     private const ALLOWED_FRAMEWORKS = ['mbti64', 'big_five', 'enneagram'];
 

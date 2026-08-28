@@ -8,12 +8,11 @@ use App\Models\Article;
 use App\Models\ArticleRevision;
 use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
-use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
-final class SeoAgentCmsDraftWriteCommand extends Command
+final class SeoAgentCmsDraftWriteCommand extends RetiredSeoAgentCommand
 {
     private const SCHEMA_VERSION = 'seo-agent-controlled-cms-draft-write.v1';
 

@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\Cms\SeoContentPackage\SeoContentPackageDraftImporter;
-use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
 use Throwable;
 
-final class SeoAgentArticleReleaseCommand extends Command
+final class SeoAgentArticleReleaseCommand extends RetiredSeoAgentCommand
 {
     private const SCHEMA_VERSION = 'seo-agent-article-release-gate-report.v1';
 

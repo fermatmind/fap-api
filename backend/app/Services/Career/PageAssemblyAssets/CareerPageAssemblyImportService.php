@@ -15,6 +15,8 @@ use Throwable;
 
 final class CareerPageAssemblyImportService
 {
+    public const AGENT_INVOCABLE = false;
+
     public const IMPORTER_VERSION = 'career_page_assembly_v1_staging_preview_importer_v0.1';
 
     public function __construct(

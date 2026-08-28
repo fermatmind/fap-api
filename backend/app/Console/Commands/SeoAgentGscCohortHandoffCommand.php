@@ -6,13 +6,12 @@ namespace App\Console\Commands;
 
 use App\Models\Article;
 use App\Services\SeoAgent\OpportunityAggregator;
-use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use RuntimeException;
 use Symfony\Component\Console\Output\BufferedOutput;
 
-final class SeoAgentGscCohortHandoffCommand extends Command
+final class SeoAgentGscCohortHandoffCommand extends RetiredSeoAgentCommand
 {
     private const SCHEMA_VERSION = 'seo-agent-gsc-cohort-handoff.v1';
 

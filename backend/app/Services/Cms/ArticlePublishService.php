@@ -18,6 +18,8 @@ use RuntimeException;
 
 final class ArticlePublishService
 {
+    public const AGENT_INVOCABLE = false;
+
     private const SEO13_ATOMIC_PROMOTION_SOURCE = 'seo13_atomic_existing_article_working_revision_promotion';
 
     private const ARTICLE15_ATOMIC_PROMOTION_SOURCE = 'article15_exact_package_revision_bound_promotion';

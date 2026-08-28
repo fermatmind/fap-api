@@ -7,11 +7,10 @@ namespace App\Console\Commands;
 use App\Models\Article;
 use App\Models\ArticleRevision;
 use App\Models\ArticleTranslationRevision;
-use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use RuntimeException;
 
-final class SeoAgentArticleDraftPreviewRuntimeQaCommand extends Command
+final class SeoAgentArticleDraftPreviewRuntimeQaCommand extends RetiredSeoAgentCommand
 {
     private const SCHEMA_VERSION = 'seo-agent-article-draft-preview-runtime-qa.v1';
 

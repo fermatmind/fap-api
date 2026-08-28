@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\SeoAgent\AutoApprovalPolicy;
-use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use RuntimeException;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 
-final class SeoAgentWeeklyDraftWriteAutoCommand extends Command
+final class SeoAgentWeeklyDraftWriteAutoCommand extends RetiredSeoAgentCommand
 {
     private const SCHEMA_VERSION = 'seo-agent-weekly-draft-write-auto.v1';
 

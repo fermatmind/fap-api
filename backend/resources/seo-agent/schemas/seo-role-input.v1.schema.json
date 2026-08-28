@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fermatmind.com/schemas/seo-role-input.v1.schema.json",
+  "schema_id": "seo.role_input",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mission",
+    "evidence_refs",
+    "page_family_scope",
+    "locale_scope"
+  ],
+  "properties": {
+    "mission": {"type": "string", "minLength": 1},
+    "evidence_refs": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "page_family_scope": {"type": "array", "items": {"enum": ["tests", "articles_topics", "career", "personality", "trust_method_help", "other_public"]}},
+    "locale_scope": {"type": "array", "items": {"enum": ["en", "zh-CN"]}}
+  }
+}

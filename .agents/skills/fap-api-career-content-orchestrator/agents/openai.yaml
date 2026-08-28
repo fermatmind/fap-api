@@ -16,6 +16,6 @@ interface:
     sitemap/discoverability, submit search, or create schedules/automations. The
     final career.content_agent.receipt.v1 must keep every publication, Current,
     deploy, and search permission false and every non-target write count zero.
-    Only after a separately bound fap-api-career-release-authority handoff may
-    the same harness invoke its single deterministic Current merger; workers
-    never write Current and no second or publishing Agent may be created.
+    The Current merger is not an Agent tool; only the independent
+    fap-api-career-release-authority may consume the handoff. Workers never
+    write Current and no second or publishing Agent may be created.

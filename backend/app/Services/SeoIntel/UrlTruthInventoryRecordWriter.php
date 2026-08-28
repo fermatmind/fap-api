@@ -12,6 +12,8 @@ use InvalidArgumentException;
 
 final class UrlTruthInventoryRecordWriter
 {
+    public const AGENT_INVOCABLE = false;
+
     /**
      * @param  list<UrlTruthInventoryRecord>  $records
      */

@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\Cms\ArticleCoverBatchReplacer;
-use Illuminate\Console\Command;
 use RuntimeException;
 use Throwable;
 
-final class SeoAgentReplaceArticleCovers extends Command
+final class SeoAgentReplaceArticleCovers extends RetiredSeoAgentCommand
 {
     protected $signature = 'seo-agent:replace-article-covers
         {--manifest= : Absolute path to article-cover-replacement.v1 JSON manifest}

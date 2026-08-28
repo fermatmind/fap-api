@@ -7,8 +7,10 @@ namespace App\Services\Cms;
 use App\Models\PersonalityPublicContentAsset;
 use Illuminate\Support\Facades\DB;
 
-final class BigFivePublicProfileAgentDraftWriter
+final class BigFivePublicProfileDraftWriter
 {
+    public const AGENT_INVOCABLE = false;
+
     private const SNAPSHOT_SOURCE = 'big_five_agent_public_profile_draft_v1';
 
     private const FORBIDDEN_ROUTE_PATTERNS = [

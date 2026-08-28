@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
-final class PersonalityAgentApprovalQueueReviewCommandTest extends TestCase
+final class PersonalityApprovalQueueReviewCommandTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -55,7 +55,7 @@ final class PersonalityAgentApprovalQueueReviewCommandTest extends TestCase
         $beforeItems = DB::table('personality_agent_approval_items')->count();
         $beforeBatches = DB::table('personality_agent_approval_batches')->count();
 
-        $exitCode = Artisan::call('personality:agent-approval-queue-review', [
+        $exitCode = Artisan::call('personality:approval-queue-review', [
             '--json' => true,
         ]);
 
@@ -119,7 +119,7 @@ final class PersonalityAgentApprovalQueueReviewCommandTest extends TestCase
             ],
         ]);
 
-        $exitCode = Artisan::call('personality:agent-approval-queue-review', [
+        $exitCode = Artisan::call('personality:approval-queue-review', [
             '--framework' => 'big_five',
             '--approval-state' => 'rejected',
             '--json' => true,
@@ -166,7 +166,7 @@ final class PersonalityAgentApprovalQueueReviewCommandTest extends TestCase
             }
         });
 
-        $exitCode = Artisan::call('personality:agent-approval-queue-review', [
+        $exitCode = Artisan::call('personality:approval-queue-review', [
             '--framework' => 'mbti64',
             '--approval-state' => 'pending',
             '--json' => true,
@@ -193,7 +193,7 @@ final class PersonalityAgentApprovalQueueReviewCommandTest extends TestCase
         $beforeItems = DB::table('personality_agent_approval_items')->count();
         $beforeBatches = DB::table('personality_agent_approval_batches')->count();
 
-        $exitCode = Artisan::call('personality:agent-approval-queue-review', [
+        $exitCode = Artisan::call('personality:approval-queue-review', [
             '--framework' => 'unsupported',
             '--json' => true,
         ]);

@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Services\Cms\BigFivePublicProfileAgentDraftWriter;
+use App\Services\Cms\BigFivePublicProfilePromotionService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use RuntimeException;
 use Throwable;
 
-final class PersonalityBigFivePublicProfileAgentDraft extends Command
+final class PersonalityBigFivePublicProfilePromoteCommand extends Command
 {
-    private const OPERATOR_APPROVAL = 'BIG-FIVE-CMS-DRAFT-WRITER-CONTRACT-01';
+    private const OPERATOR_APPROVAL = 'BIG-FIVE-CMS-PROMOTION-CONTRACT-01';
 
     private const WRITE_SAFETY_FLAGS = [
-        'draft-only',
+        'promote-live-content',
         'no-publish',
         'no-index',
         'no-sitemap',
@@ -23,27 +23,26 @@ final class PersonalityBigFivePublicProfileAgentDraft extends Command
         'no-search-release',
     ];
 
-    protected $signature = 'personality:big-five-public-profile-agent-draft
-        {--package= : Path to the Big Five agent recommendation JSON package}
-        {--qa= : Path to the Big Five agent QA JSON artifact}
-        {--dry-run : Validate and plan without database writes}
-        {--write : Create Big Five public content asset draft rows}
+    protected $signature = 'personality:big-five-public-profile-promote
+        {--package= : Path to the Big Five recommendation JSON package}
+        {--dry-run : Plan promotion without database writes}
+        {--write : Promote matching Big Five public content draft assets to live content-ready state}
         {--json : Emit the full JSON summary}
         {--output= : Optional path to write the JSON summary}
-        {--draft-only : Required for --write; confirms draft-only content asset write}
-        {--no-publish : Required for --write; confirms no publish action}
+        {--promote-live-content : Required for --write; confirms live content promotion intent}
+        {--no-publish : Required for --write; confirms no published/index release state}
         {--no-index : Required for --write; confirms no indexability action}
         {--no-sitemap : Required for --write; confirms no sitemap action}
         {--no-llms : Required for --write; confirms no llms action}
         {--no-search-release : Required for --write; confirms no search release action}
         {--operator-approved= : Required exact approval token for --write}';
 
-    protected $description = 'Create Big Five public profile CMS draft assets with explicit no-publish/no-index guards.';
+    protected $description = 'Promote Big Five public profile CMS draft assets into live content-ready state with no index/search side effects.';
 
-    public function handle(BigFivePublicProfileAgentDraftWriter $writer): int
+    public function handle(BigFivePublicProfilePromotionService $service): int
     {
         try {
-            $summary = $this->buildCommandSummary($writer);
+            $summary = $this->buildCommandSummary($service);
         } catch (RuntimeException $exception) {
             $summary = $this->failureSummary('runtime_error', $exception->getMessage());
         } catch (Throwable $exception) {
@@ -59,7 +58,7 @@ final class PersonalityBigFivePublicProfileAgentDraft extends Command
     /**
      * @return array<string,mixed>
      */
-    private function buildCommandSummary(BigFivePublicProfileAgentDraftWriter $writer): array
+    private function buildCommandSummary(BigFivePublicProfilePromotionService $service): array
     {
         $write = (bool) $this->option('write');
         $dryRun = (bool) $this->option('dry-run');
@@ -76,27 +75,21 @@ final class PersonalityBigFivePublicProfileAgentDraft extends Command
             $this->assertWriteGuards();
         }
 
-        $packagePath = $this->resolvePath(trim((string) $this->option('package')), 'Package');
-        $qaPath = $this->resolvePath(trim((string) $this->option('qa')), 'QA artifact');
-        $packageRaw = (string) File::get($packagePath);
-        $qaRaw = (string) File::get($qaPath);
-        $package = json_decode($packageRaw, true);
-        $qa = json_decode($qaRaw, true);
+        $packagePath = $this->resolvePath(trim((string) $this->option('package')));
+        $raw = (string) File::get($packagePath);
+        $package = json_decode($raw, true);
         if (! is_array($package)) {
             throw new RuntimeException('Package must be a JSON object.');
         }
-        if (! is_array($qa)) {
-            throw new RuntimeException('QA artifact must be a JSON object.');
-        }
 
+        $sourceSha256 = hash('sha256', $raw);
         $summary = $write
-            ? $writer->write($package, $qa, hash('sha256', $packageRaw), hash('sha256', $qaRaw))
-            : $writer->plan($package, $qa, hash('sha256', $packageRaw), hash('sha256', $qaRaw));
+            ? $service->promote($package, $sourceSha256)
+            : $service->plan($package, $sourceSha256);
 
         return array_merge($summary, [
             'package_path' => $packagePath,
-            'qa_path' => $qaPath,
-            'command' => 'personality:big-five-public-profile-agent-draft',
+            'command' => 'personality:big-five-public-profile-promote',
         ]);
     }
 
@@ -113,10 +106,10 @@ final class PersonalityBigFivePublicProfileAgentDraft extends Command
         }
     }
 
-    private function resolvePath(string $path, string $label): string
+    private function resolvePath(string $path): string
     {
         if ($path === '') {
-            throw new RuntimeException('--'.strtolower(str_replace(' artifact', '', $label)).' is required.');
+            throw new RuntimeException('--package is required.');
         }
 
         $resolved = str_starts_with($path, '/')
@@ -124,7 +117,7 @@ final class PersonalityBigFivePublicProfileAgentDraft extends Command
             : base_path($path);
 
         if (! File::isFile($resolved)) {
-            throw new RuntimeException($label.' file not found: '.$resolved);
+            throw new RuntimeException('Package file not found: '.$resolved);
         }
 
         return $resolved;
@@ -149,8 +142,8 @@ final class PersonalityBigFivePublicProfileAgentDraft extends Command
         $this->line('dry_run='.(($summary['dry_run'] ?? false) ? '1' : '0'));
         $this->line('write='.(($summary['write'] ?? false) ? '1' : '0'));
         $this->line('writes_committed='.(($summary['writes_committed'] ?? false) ? '1' : '0'));
-        $this->line('row_count='.(string) ($summary['row_count'] ?? 0));
-        $this->line('created_revision_count='.(string) ($summary['created_revision_count'] ?? 0));
+        $this->line('would_promote_count='.(string) ($summary['would_promote_count'] ?? 0));
+        $this->line('promoted_count='.(string) ($summary['promoted_count'] ?? 0));
         $this->line('skipped_existing_count='.(string) ($summary['skipped_existing_count'] ?? 0));
     }
 
@@ -180,26 +173,30 @@ final class PersonalityBigFivePublicProfileAgentDraft extends Command
     private function failureSummary(string $code, string $message): array
     {
         return [
-            'artifact' => 'BIG-FIVE-CMS-DRAFT-WRITER-CONTRACT-01',
-            'status' => 'fail',
+            'artifact' => 'BIG-FIVE-CMS-PROMOTION-CONTRACT-01',
+            'command' => 'personality:big-five-public-profile-promote',
             'ok' => false,
+            'status' => 'fail',
             'dry_run' => (bool) $this->option('dry-run'),
             'write' => (bool) $this->option('write'),
-            'writes_attempted' => false,
+            'writes_attempted' => (bool) $this->option('write'),
             'writes_committed' => false,
-            'cms_write_attempted' => false,
-            'cms_mutation_attempted' => false,
+            'content_promotion_attempted' => false,
             'publish_attempted' => false,
             'index_attempted' => false,
             'sitemap_llms_release_attempted' => false,
             'search_release_attempted' => false,
             'enqueue_attempted' => false,
             'external_calls_attempted' => false,
-            'errors' => [[
-                'field' => 'command',
-                'code' => $code,
-                'message' => $message,
-            ]],
+            'row_count' => 0,
+            'would_promote_count' => 0,
+            'promoted_count' => 0,
+            'errors' => [
+                [
+                    'code' => $code,
+                    'message' => $message,
+                ],
+            ],
             'warnings' => [],
         ];
     }

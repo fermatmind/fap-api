@@ -7,12 +7,11 @@ namespace App\Console\Commands;
 use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
 use App\Services\Cms\RowBackedRevisionWorkspace;
-use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
-final class SeoAgentAutoRollbackGuardCommand extends Command
+final class SeoAgentAutoRollbackGuardCommand extends RetiredSeoAgentCommand
 {
     private const SCHEMA_VERSION = 'seo-agent-auto-rollback-guard.v1';
 

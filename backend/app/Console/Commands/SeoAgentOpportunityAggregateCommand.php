@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\SeoAgent\OpportunityAggregator;
-use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use RuntimeException;
 
-final class SeoAgentOpportunityAggregateCommand extends Command
+final class SeoAgentOpportunityAggregateCommand extends RetiredSeoAgentCommand
 {
     private const FORBIDDEN_STRINGS = [
         'raw_url',

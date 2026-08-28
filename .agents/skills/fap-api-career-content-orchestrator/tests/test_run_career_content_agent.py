@@ -356,26 +356,6 @@ class CareerContentAgentHarnessTest(unittest.TestCase):
         receipt = json.loads((self.output / "career-content-agent-receipt.json").read_text())
         self.assertTrue(runner.CONTRACT.validate_receipt(receipt, self.request)["ok"])
 
-    def test_current_merger_requires_separate_bound_release_authority_handoff(self) -> None:
-        self.reach_compile(); self.compile(); runner.finalize(self.output)
-        receipt_path = self.output / "career-content-agent-receipt.json"
-        receipt = json.loads(receipt_path.read_text())
-        handoff = self.output / "release-handoff.json"
-        write_json(handoff, {
-            "contract_version": "career.content_agent.release_handoff.v1",
-            "release_authority": "fap-api-career-release-authority",
-            "request_hash": receipt["request_hash"],
-            "content_agent_receipt_sha256": hashlib.sha256(receipt_path.read_bytes()).hexdigest(),
-            "module": self.request["module"],
-            "publication_slugs": receipt["publishable_slugs"],
-        })
-        expected = {"status": "PASS_CURRENT_MERGE_DRY_RUN", "current_write_count": 0}
-        with mock.patch.object(runner, "run_json", return_value=expected) as command:
-            self.assertEqual(expected, runner.merge_current(self.output, handoff, write=False))
-        invoked = command.call_args.args[0]
-        self.assertEqual(["php", str(runner.CURRENT_MERGER)], invoked[:2])
-        self.assertNotIn("--write", invoked)
-
     def test_editorial_warn_stops(self) -> None:
         self.reach_editorial(); self.assertEqual("WARN_EDITORIAL", self.editorial("WARN")["state"])
 

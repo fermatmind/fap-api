@@ -8,6 +8,8 @@ use App\Models\CareerJobPageAssemblyAsset;
 
 final class CareerPageAssemblyPreviewService
 {
+    public const AGENT_INVOCABLE = false;
+
     private const FORBIDDEN_READER_KEYS = [
         'audit_fields',
         'block_refs',

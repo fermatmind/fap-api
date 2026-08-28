@@ -9,9 +9,8 @@ use App\Models\ArticleTranslationRevision;
 use App\Models\ContentPage;
 use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueuePlanner;
 use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueWriteService;
-use Illuminate\Console\Command;
 
-final class SeoAgentPostPublishSearchSubmitCommand extends Command
+final class SeoAgentPostPublishSearchSubmitCommand extends RetiredSeoAgentCommand
 {
     private const SCHEMA_VERSION = 'seo-agent-post-publish-search-submit.v1';
 

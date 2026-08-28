@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\SeoAgent\CmsFaqGapReadonlyScanner;
-use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use RuntimeException;
 
-final class SeoAgentCmsFaqGapScanCommand extends Command
+final class SeoAgentCmsFaqGapScanCommand extends RetiredSeoAgentCommand
 {
     protected $signature = 'seo-agent:cms-faq-gap-scan
         {--surface=all : Surface to scan: articles, content-pages, or all}

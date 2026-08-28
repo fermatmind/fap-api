@@ -19,6 +19,11 @@ final class SeoUxImpl06AgentCouncilTest extends TestCase
         $this->assertSame('l0_read_only', $snapshot['access_level']);
         $this->assertTrue($snapshot['read_only_gsc']);
         $this->assertFalse($snapshot['search_submission_allowed']);
+        $this->assertSame('frozen', $snapshot['registry_metadata']['registry_status']);
+        $this->assertSame('fap-api', $snapshot['registry_metadata']['owner_repository']);
+        $this->assertSame(9, $snapshot['registry_metadata']['role_count']);
+        $this->assertSame(20, $snapshot['registry_metadata']['capability_count']);
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $snapshot['registry_metadata']['registry_hash']);
         $this->assertSame([], $snapshot['capabilities']);
         $this->assertNull($snapshot['policy_decision']);
         $this->assertNull($snapshot['trace']);
@@ -36,6 +41,7 @@ final class SeoUxImpl06AgentCouncilTest extends TestCase
         $this->assertStringContainsString('ops-agent-council-workspace', $page);
         $this->assertStringContainsString('data-read-only-gsc', $workspace);
         $this->assertStringContainsString('data-search-submission-allowed', $workspace);
+        $this->assertStringContainsString('data-registry-status', $workspace);
         $this->assertStringContainsString("['orchestrator', 'policy_gateway', 'safety_review', 'canary', 'circuit_breaker', 'rollback']", (string) file_get_contents(app_path('Filament/Ops/Support/SeoAgentCouncilUiContract.php')));
         $this->assertStringNotContainsString('<form', $workspace);
         $this->assertStringNotContainsString('<input', $workspace);

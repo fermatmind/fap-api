@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Domain\Career\Display\CareerJobDetailCanonicalCacheReader;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerJobPageAssemblyAsset;
 use App\Models\Occupation;
@@ -473,20 +474,39 @@ final class CareerPageAssemblyAssetPreviewImportTest extends TestCase
         }
 
         $authorityCache = app(PublicCareerAuthorityResponseCache::class);
-        Cache::forever($authorityCache->jobDetailCacheKey($slug, 'zh-CN'), [
-            'slug' => $slug,
-            'locale' => 'zh-CN',
-            'sections' => [['key' => 'identity']],
-        ]);
-        Cache::forever($authorityCache->jobDetailCacheKey($slug, 'en'), [
-            'slug' => $slug,
-            'locale' => 'en',
-            'sections' => [['key' => 'identity']],
-        ]);
+        $cacheReader = app(CareerJobDetailCanonicalCacheReader::class);
+        Cache::forever(
+            $authorityCache->jobDetailCacheKey($slug, 'zh-CN'),
+            $cacheReader->encode($this->careerJobDetailPayload($slug, 'zh-CN')),
+        );
+        Cache::forever(
+            $authorityCache->jobDetailCacheKey($slug, 'en'),
+            $cacheReader->encode($this->careerJobDetailPayload($slug, 'en')),
+        );
 
         $this->app->forgetInstance(CareerPageAssemblyImportService::class);
         $this->app->forgetInstance(CareerPageAssemblyPreviewService::class);
         $this->app->forgetInstance('App\\Console\\Commands\\CareerImportPageAssemblyAssetsPreview');
+    }
+
+    /** @return array<string, mixed> */
+    private function careerJobDetailPayload(string $slug, string $locale): array
+    {
+        return [
+            'display_surface_v1' => [
+                'surface_version' => 'display.surface.v1',
+                'asset_type' => 'career_job_public_display',
+                'asset_role' => 'formal_pilot_master',
+                'status' => 'ready_for_pilot',
+                'available_locales' => ['en', 'zh-CN'],
+                'subject' => ['canonical_slug' => $slug],
+                'page' => ['locale' => $locale, 'content' => ['hero' => ['title' => 'Fixture']]],
+                'component_order' => ['hero'],
+                'sources' => ['references' => []],
+                'structured_data_from_visible_content' => ['@type' => 'Occupation'],
+                'implementation_contract' => ['version' => 'v1'],
+            ],
+        ];
     }
 
     /**

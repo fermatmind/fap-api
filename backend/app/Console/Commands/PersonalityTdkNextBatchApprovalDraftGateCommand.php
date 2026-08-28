@@ -187,7 +187,7 @@ final class PersonalityTdkNextBatchApprovalDraftGateCommand extends Command
             ],
             'future_command_templates' => [
                 'approval_queue_dry_run' => [
-                    'php artisan personality:agent-approval-queue',
+                    'php artisan personality:approval-queue-write',
                     '--package='.escapeshellarg($recommendationsPath),
                     '--qa='.escapeshellarg($qaPath),
                     '--dry-run',

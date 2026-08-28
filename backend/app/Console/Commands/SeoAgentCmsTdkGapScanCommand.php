@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\SeoAgent\CmsTdkGapReadonlyScanner;
-use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use RuntimeException;
 
-final class SeoAgentCmsTdkGapScanCommand extends Command
+final class SeoAgentCmsTdkGapScanCommand extends RetiredSeoAgentCommand
 {
     protected $signature = 'seo-agent:cms-tdk-gap-scan
         {--surface=all : Surface to scan: articles, content-pages, or all}

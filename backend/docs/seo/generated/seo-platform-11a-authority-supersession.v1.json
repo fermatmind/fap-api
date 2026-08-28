@@ -1,0 +1,208 @@
+{
+    "schema_version": "seo.authority_supersession.v1",
+    "manifest_version": "1.0.0",
+    "status": "frozen",
+    "owner_repository": "fap-api",
+    "canonical_registry": {
+        "registry_id": "fermatmind.seo.role_capability_registry",
+        "registry_version": "1.0.0",
+        "registry_hash": "b02b6edd816b75b42582468e5bc3aa2c9cd0060149825d1fdc6131cf71d73791"
+    },
+    "fixed_boundaries": {
+        "read_only_gsc": true,
+        "search_submission_allowed": false,
+        "post12_agent_write_enabled": false,
+        "l4_state": "dormant_not_authorized",
+        "agent_default_write_permission": false,
+        "deterministic_system_final_veto": true,
+        "model_invocation_enabled": false,
+        "runtime_model_invocation_enabled": false,
+        "fap_web_agent_authority": false
+    },
+    "legacy_seo_agent_cli_dispositions": [
+        {
+            "asset_id": "fap-api.cli.seo-agent.article-cms-publish-canary",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.article-draft-claim-risk-qa",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.article-draft-preview-runtime-qa",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.article-post-publish-propagation-dry-run",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.article-release",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.auto-rollback-guard",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.cms-draft-package-dry-run",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.cms-draft-payload-repair-canary",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.cms-draft-readback-qa",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.cms-draft-write",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.cms-faq-gap-scan",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.cms-publish-auto-canary",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.cms-publish-canary",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.cms-tdk-gap-scan",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.codex-review-runner",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.compile-mode-c-package",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.gsc-batch-draft-qa-support",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.gsc-cohort-handoff",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.gsc-draft-publish-gate-readiness",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.gsc-opportunity-auto-draft",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.gsc-post-publish-feedback",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.gsc-remaining-candidate-batch-plan",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.l5a-candidate-review",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.l5a-cms-draft-write-canary",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.l5a-contentpage-publish-canary",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.l5a-indexnow-submit-canary",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.opportunity-aggregate",
+            "classification": "historical_superseded",
+            "replacement": "seo.decision_authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.post-publish-indexnow-auto",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.post-publish-search-submit",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.priority-queue-scheduler",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.replace-article-covers",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.run",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.runtime-seo-qa-scan",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.weekly-draft-write-auto",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        },
+        {
+            "asset_id": "fap-api.cli.seo-agent.weekly-readonly-runner",
+            "classification": "historical_superseded",
+            "replacement": "registry capability or deterministic domain authority"
+        }
+    ],
+    "legacy_seo_agent_cli_count": 35,
+    "fap_web_agent_authority": false,
+    "runtime_created": false,
+    "model_calls_performed": 0,
+    "cms_writes": 0,
+    "seo_data_writes": 0,
+    "search_submissions": 0,
+    "production_data_writes": 0,
+    "manifest_hash": "a5f512876b1762653a7cb35c79b4c04028c1fc363db56c2daf5da37737bb535e"
+}

@@ -10,13 +10,12 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Audit\AuditLogger;
 use App\Services\Cms\ArticlePublishService;
-use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
-final class SeoAgentArticleCmsPublishCanaryCommand extends Command
+final class SeoAgentArticleCmsPublishCanaryCommand extends RetiredSeoAgentCommand
 {
     private const SCHEMA_VERSION = 'seo-agent-article-cms-publish-canary.v1';
 

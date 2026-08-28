@@ -25,7 +25,6 @@ VALIDATOR_PATH = SKILL_ROOT / "scripts" / "validate_content_agent_contract.py"
 RESEARCH_SKILL = REPO_ROOT / ".agents/skills/fap-api-career-content-research-producer"
 RESEARCH_VALIDATOR = RESEARCH_SKILL / "scripts/validate_research_package.py"
 ADAPTER = RESEARCH_SKILL / "scripts/adapt_research_package_to_compiler_evidence.php"
-CURRENT_MERGER = SKILL_ROOT / "scripts/merge_career_content_candidates.php"
 SOURCE_POLICY = RESEARCH_SKILL / "references/source-policy.md"
 VERSIONLESS_CURRENT_EXPORTER = SKILL_ROOT / "scripts/export_versionless_current.php"
 BACKEND = REPO_ROOT / "backend"
@@ -987,31 +986,6 @@ def finalize(root: Path) -> dict[str, Any]:
         return public_status(state)
 
 
-def merge_current(root: Path, handoff_path: Path, *, write: bool) -> dict[str, Any]:
-    with output_lock(root):
-        state = load_state(root)
-        if state["state"] != "ORCHESTRATED":
-            raise AgentError("merge_requires_orchestrated_receipt")
-        request = request_for(state, root)
-        receipt_path = root / "career-content-agent-receipt.json"
-        receipt = read_json(receipt_path)
-        validation = CONTRACT.validate_receipt(receipt, request)
-        if not validation["ok"]:
-            raise AgentError("merge_receipt_validation_failed:" + ",".join(validation["errors"]))
-        handoff = locked_file(handoff_path)
-        if not Path(handoff["canonical_path"]).is_relative_to(root.resolve(strict=True)):
-            raise AgentError("release_handoff_outside_locked_root")
-        command = [
-            "php", str(CURRENT_MERGER), f"--request={root / 'request.locked.json'}",
-            f"--receipt={receipt_path}", f"--handoff={handoff['canonical_path']}",
-        ]
-        if write:
-            command.append("--write")
-        result = run_json(command, REPO_ROOT)
-        atomic_json(root / ("current-merge-receipt.json" if write else "current-merge-dry-run.json"), result)
-        return result
-
-
 def next_command(state: dict[str, Any]) -> str | None:
     return {
         "REQUEST_LOCKED": "record-research", "RESEARCH_PASS": "record-editorial",
@@ -1045,8 +1019,6 @@ def parser() -> argparse.ArgumentParser:
     evidence.add_argument("--output-root", required=True); evidence.add_argument("--research-package", required=True, type=Path); evidence.add_argument("--source-root", required=True, type=Path); evidence.add_argument("--lookup", required=True, type=Path); evidence.add_argument("--control-slug", required=True)
     compile_parser = commands.add_parser("run-dry-compile")
     compile_parser.add_argument("--output-root", required=True); compile_parser.add_argument("--source-root", required=True, type=Path); compile_parser.add_argument("--lookup", required=True, type=Path)
-    merge = commands.add_parser("merge-current")
-    merge.add_argument("--output-root", required=True); merge.add_argument("--handoff", required=True, type=Path); merge.add_argument("--write", action="store_true")
     return root
 
 
@@ -1062,7 +1034,6 @@ def main() -> int:
             elif args.command == "run-evidence-adapter": result = run_evidence(root, args.research_package, args.source_root, args.lookup, args.control_slug)
             elif args.command == "run-dry-compile": result = run_compile(root, args.source_root, args.lookup)
             elif args.command == "finalize": result = finalize(root)
-            elif args.command == "merge-current": result = merge_current(root, args.handoff, write=args.write)
             else: raise AgentError("unknown_command")
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))
         return 0

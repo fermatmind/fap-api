@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Models\ContentPage;
-use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
-final class SeoAgentGscPostPublishFeedbackCommand extends Command
+final class SeoAgentGscPostPublishFeedbackCommand extends RetiredSeoAgentCommand
 {
     private const SCHEMA_VERSION = 'seo-agent-gsc-post-publish-feedback.v1';
 

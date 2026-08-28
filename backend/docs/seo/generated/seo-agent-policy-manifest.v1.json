@@ -1,0 +1,27 @@
+{
+    "schema_version": "seo.policy_manifest.v1",
+    "manifest_version": "1.0.0",
+    "status": "frozen",
+    "owner_repository": "fap-api",
+    "policies": {
+        "seo.execution_hold": {
+            "id": "seo.execution_hold",
+            "version": "1.0.0",
+            "hash": "4fd0b6be393b68e1e2082d968a630e67f10c18d2e66bbf4684094f1e45d793e9",
+            "path": "backend/resources/seo-agent/policies/seo.execution_hold.v1.json"
+        },
+        "seo.evidence_boundary": {
+            "id": "seo.evidence_boundary",
+            "version": "1.0.0",
+            "hash": "7eac260be6949e1161220ae30564e3b4f46cd806cd30af7c0e6afb187c0ecab9",
+            "path": "backend/resources/seo-agent/policies/seo.evidence_boundary.v1.json"
+        },
+        "seo.release_separation": {
+            "id": "seo.release_separation",
+            "version": "1.0.0",
+            "hash": "6c1cf25f70ffc475a0c19f8c7cdf3451c9c35cb49482298e9d4485d365327be6",
+            "path": "backend/resources/seo-agent/policies/seo.release_separation.v1.json"
+        }
+    },
+    "manifest_hash": "2fd98a35ddab25c5bb4da9556fe39ee136c9a9bc8a40ff19664b886f0c44ccf1"
+}

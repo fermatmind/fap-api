@@ -6,7 +6,7 @@ namespace Tests\Feature\Console;
 
 use App\Models\ReviewAttestation;
 use App\Models\ReviewAttestationTargetEvidence;
-use App\Services\Cms\PersonalityAgentApprovalQueueWriter;
+use App\Services\Cms\PersonalityApprovalQueueWriter;
 use App\Services\ReviewGovernance\ReviewAttestationValidationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
-final class PersonalityAgentApprovalQueueCommandTest extends TestCase
+final class PersonalityApprovalQueueCommandTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -22,7 +22,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', [
+        $exitCode = Artisan::call('personality:approval-queue-write', [
             '--package' => $packagePath,
             '--qa' => $qaPath,
             '--dry-run' => true,
@@ -48,7 +48,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->nextBatchThreePackage(), $this->nextBatchThreeQa());
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', [
+        $exitCode = Artisan::call('personality:approval-queue-write', [
             '--package' => $packagePath,
             '--qa' => $qaPath,
             '--dry-run' => true,
@@ -113,7 +113,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         $qa['page_results'][] = $this->qaDecisionRow($extraUrl, 'PASS_READY_FOR_APPROVAL_REVIEW');
         [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', [
+        $exitCode = Artisan::call('personality:approval-queue-write', [
             '--package' => $packagePath,
             '--qa' => $qaPath,
             '--dry-run' => true,
@@ -142,7 +142,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
             $this->competitorGapExpansionQa()
         );
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', [
+        $exitCode = Artisan::call('personality:approval-queue-write', [
             '--package' => $packagePath,
             '--qa' => $qaPath,
             '--dry-run' => true,
@@ -201,7 +201,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->autoApprovalHandoffPackage(), $this->autoApprovalHandoffQa());
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', [
+        $exitCode = Artisan::call('personality:approval-queue-write', [
             '--package' => $packagePath,
             '--qa' => $qaPath,
             '--dry-run' => true,
@@ -256,7 +256,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->autoApprovalHandoffPackage(), $this->autoApprovalHandoffQa());
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath));
+        $exitCode = Artisan::call('personality:approval-queue-write', $this->writeOptions($packagePath, $qaPath));
 
         $payload = $this->jsonOutput();
         $this->assertSame(1, $exitCode);
@@ -276,7 +276,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         $qa['page_results'][0]['target_url'] = $deceptiveUrl;
         [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath));
+        $exitCode = Artisan::call('personality:approval-queue-write', $this->writeOptions($packagePath, $qaPath));
 
         $payload = $this->jsonOutput();
         $this->assertSame(0, $exitCode);
@@ -289,7 +289,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
 
     public function test_mbti64_v85_v5_bilingual_package_can_enter_human_approval_queue_dry_run_only(): void
     {
-        $exitCode = Artisan::call('personality:agent-approval-queue', [
+        $exitCode = Artisan::call('personality:approval-queue-write', [
             '--package' => $this->mbti64V85V5PackagePath(),
             '--qa' => $this->mbti64V85V5QaPath(),
             '--dry-run' => true,
@@ -352,7 +352,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
 
     public function test_mbti64_v85_v5_bilingual_write_creates_pending_items_only(): void
     {
-        $exitCode = Artisan::call('personality:agent-approval-queue', $this->writeOptions(
+        $exitCode = Artisan::call('personality:approval-queue-write', $this->writeOptions(
             $this->mbti64V85V5PackagePath(),
             $this->mbti64V85V5QaPath()
         ));
@@ -380,13 +380,13 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
 
     public function test_mbti64_bilingual_batch_binds_one_bounded_scope_attestation_for_all_64_targets(): void
     {
-        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->writeOptions(
+        $this->assertSame(0, Artisan::call('personality:approval-queue-write', $this->writeOptions(
             $this->mbti64V85V5PackagePath(),
             $this->mbti64V85V5QaPath(),
         )));
         $ids = DB::table('personality_agent_approval_items')->orderBy('id')->pluck('id')->map(fn ($id): int => (int) $id)->all();
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', $this->approveOptions($ids, $this->approvalHashes()));
+        $exitCode = Artisan::call('personality:approval-queue-write', $this->approveOptions($ids, $this->approvalHashes()));
 
         $this->assertSame(0, $exitCode);
         $this->assertSame(64, DB::table('personality_agent_approval_items')->where('approval_state', 'approved')->count());
@@ -402,7 +402,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
             $this->mbti64V85V5Qa()
         );
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', [
+        $exitCode = Artisan::call('personality:approval-queue-write', [
             '--package' => $packagePath,
             '--qa' => $qaPath,
             '--dry-run' => true,
@@ -435,7 +435,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         $package['target_count'] = 63;
         [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', [
+        $exitCode = Artisan::call('personality:approval-queue-write', [
             '--package' => $packagePath,
             '--qa' => $qaPath,
             '--dry-run' => true,
@@ -469,7 +469,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         unset($row);
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $qa);
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', [
+        $exitCode = Artisan::call('personality:approval-queue-write', [
             '--package' => $packagePath,
             '--qa' => $qaPath,
             '--dry-run' => true,
@@ -493,7 +493,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath));
+        $exitCode = Artisan::call('personality:approval-queue-write', $this->writeOptions($packagePath, $qaPath));
 
         $payload = $this->jsonOutput();
         $this->assertSame(0, $exitCode);
@@ -526,12 +526,12 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
     public function test_approve_action_approves_explicit_pending_items_only_without_cms_side_effects(): void
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
-        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath)));
+        $this->assertSame(0, Artisan::call('personality:approval-queue-write', $this->writeOptions($packagePath, $qaPath)));
 
         $ids = DB::table('personality_agent_approval_items')->orderBy('id')->pluck('id')->map(fn ($id): int => (int) $id)->all();
         $hashes = $this->approvalHashes();
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', $this->approveOptions($ids, $hashes));
+        $exitCode = Artisan::call('personality:approval-queue-write', $this->approveOptions($ids, $hashes));
 
         $payload = $this->jsonOutput();
         $this->assertSame(0, $exitCode);
@@ -569,12 +569,12 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
     public function test_approve_action_rejects_non_owner_before_state_or_attestation_writes(): void
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
-        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath)));
+        $this->assertSame(0, Artisan::call('personality:approval-queue-write', $this->writeOptions($packagePath, $qaPath)));
         $ids = DB::table('personality_agent_approval_items')->orderBy('id')->pluck('id')->map(fn ($id): int => (int) $id)->all();
         $hashes = $this->approvalHashes();
 
         try {
-            app(PersonalityAgentApprovalQueueWriter::class)->approveItems(
+            app(PersonalityApprovalQueueWriter::class)->approveItems(
                 $ids,
                 'mbti64',
                 $hashes['source_package_sha256'],
@@ -594,12 +594,12 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
     public function test_solo_owner_approval_service_rejects_missing_actor_before_writes(): void
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
-        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath)));
+        $this->assertSame(0, Artisan::call('personality:approval-queue-write', $this->writeOptions($packagePath, $qaPath)));
         $ids = DB::table('personality_agent_approval_items')->orderBy('id')->pluck('id')->map(fn ($id): int => (int) $id)->all();
         $hashes = $this->approvalHashes();
 
         try {
-            app(PersonalityAgentApprovalQueueWriter::class)->approveItems(
+            app(PersonalityApprovalQueueWriter::class)->approveItems(
                 $ids,
                 'mbti64',
                 $hashes['source_package_sha256'],
@@ -616,11 +616,11 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
     public function test_solo_owner_approval_rejects_pending_item_with_stale_approved_timestamp_before_attestation_bind(): void
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
-        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath)));
+        $this->assertSame(0, Artisan::call('personality:approval-queue-write', $this->writeOptions($packagePath, $qaPath)));
         $ids = DB::table('personality_agent_approval_items')->orderBy('id')->pluck('id')->map(fn ($id): int => (int) $id)->all();
         DB::table('personality_agent_approval_items')->where('id', $ids[0])->update(['approved_at' => now()]);
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', $this->approveOptions($ids, $this->approvalHashes()));
+        $exitCode = Artisan::call('personality:approval-queue-write', $this->approveOptions($ids, $this->approvalHashes()));
 
         $payload = $this->jsonOutput();
         $this->assertSame(1, $exitCode);
@@ -636,11 +636,11 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
     {
         config()->set('review_governance.mode', 'team_separated');
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
-        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath)));
+        $this->assertSame(0, Artisan::call('personality:approval-queue-write', $this->writeOptions($packagePath, $qaPath)));
         $ids = DB::table('personality_agent_approval_items')->orderBy('id')->pluck('id')->map(fn ($id): int => (int) $id)->all();
         $hashes = $this->approvalHashes();
 
-        $summary = app(PersonalityAgentApprovalQueueWriter::class)->approveItems(
+        $summary = app(PersonalityApprovalQueueWriter::class)->approveItems(
             $ids,
             'mbti64',
             $hashes['source_package_sha256'],
@@ -657,14 +657,14 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
     public function test_approve_action_is_idempotent_when_all_requested_items_are_already_approved(): void
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
-        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath)));
+        $this->assertSame(0, Artisan::call('personality:approval-queue-write', $this->writeOptions($packagePath, $qaPath)));
 
         $ids = DB::table('personality_agent_approval_items')->orderBy('id')->pluck('id')->map(fn ($id): int => (int) $id)->all();
         $hashes = $this->approvalHashes();
 
-        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->approveOptions($ids, $hashes)));
+        $this->assertSame(0, Artisan::call('personality:approval-queue-write', $this->approveOptions($ids, $hashes)));
         $this->travel(2)->seconds();
-        $secondExit = Artisan::call('personality:agent-approval-queue', $this->approveOptions($ids, $hashes));
+        $secondExit = Artisan::call('personality:approval-queue-write', $this->approveOptions($ids, $hashes));
 
         $payload = $this->jsonOutput();
         $this->assertSame(0, $secondExit);
@@ -680,14 +680,14 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
     public function test_approved_items_bind_fresh_evidence_after_solo_owner_rotation(): void
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
-        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath)));
+        $this->assertSame(0, Artisan::call('personality:approval-queue-write', $this->writeOptions($packagePath, $qaPath)));
         $ids = DB::table('personality_agent_approval_items')->orderBy('id')->pluck('id')->map(fn ($id): int => (int) $id)->all();
         $hashes = $this->approvalHashes();
         $originalOwnerAdminUserId = (int) config('review_governance.solo_owner_admin_user_id');
 
-        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->approveOptions($ids, $hashes)));
+        $this->assertSame(0, Artisan::call('personality:approval-queue-write', $this->approveOptions($ids, $hashes)));
         config()->set('review_governance.solo_owner_admin_user_id', $originalOwnerAdminUserId + 1);
-        $secondExit = Artisan::call('personality:agent-approval-queue', $this->approveOptions($ids, $hashes));
+        $secondExit = Artisan::call('personality:approval-queue-write', $this->approveOptions($ids, $hashes));
 
         $payload = $this->jsonOutput();
         $this->assertSame(0, $secondExit);
@@ -705,12 +705,12 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
     public function test_approve_action_fails_closed_for_missing_items_without_partial_updates(): void
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
-        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath)));
+        $this->assertSame(0, Artisan::call('personality:approval-queue-write', $this->writeOptions($packagePath, $qaPath)));
 
         $ids = DB::table('personality_agent_approval_items')->orderBy('id')->pluck('id')->map(fn ($id): int => (int) $id)->all();
         $ids[] = 999999;
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', $this->approveOptions($ids, $this->approvalHashes()));
+        $exitCode = Artisan::call('personality:approval-queue-write', $this->approveOptions($ids, $this->approvalHashes()));
 
         $payload = $this->jsonOutput();
         $this->assertSame(1, $exitCode);
@@ -724,7 +724,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
     public function test_approve_action_fails_closed_for_rejected_items_without_partial_updates(): void
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
-        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath)));
+        $this->assertSame(0, Artisan::call('personality:approval-queue-write', $this->writeOptions($packagePath, $qaPath)));
 
         $ids = DB::table('personality_agent_approval_items')->orderBy('id')->pluck('id')->map(fn ($id): int => (int) $id)->all();
         DB::table('personality_agent_approval_items')->where('id', $ids[0])->update([
@@ -732,7 +732,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
             'rejected_at' => now(),
         ]);
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', $this->approveOptions($ids, $this->approvalHashes()));
+        $exitCode = Artisan::call('personality:approval-queue-write', $this->approveOptions($ids, $this->approvalHashes()));
 
         $payload = $this->jsonOutput();
         $this->assertSame(1, $exitCode);
@@ -746,13 +746,13 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
     public function test_approve_action_fails_closed_for_hash_or_framework_mismatch(): void
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
-        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath)));
+        $this->assertSame(0, Artisan::call('personality:approval-queue-write', $this->writeOptions($packagePath, $qaPath)));
 
         $ids = DB::table('personality_agent_approval_items')->orderBy('id')->pluck('id')->map(fn ($id): int => (int) $id)->all();
         $hashes = $this->approvalHashes();
         $hashes['source_package_sha256'] = str_repeat('a', 64);
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', $this->approveOptions($ids, $hashes));
+        $exitCode = Artisan::call('personality:approval-queue-write', $this->approveOptions($ids, $hashes));
 
         $payload = $this->jsonOutput();
         $this->assertSame(1, $exitCode);
@@ -763,7 +763,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
 
         $hashes = $this->approvalHashes();
         $hashes['framework'] = 'big_five';
-        $exitCode = Artisan::call('personality:agent-approval-queue', $this->approveOptions($ids, $hashes));
+        $exitCode = Artisan::call('personality:approval-queue-write', $this->approveOptions($ids, $hashes));
         $payload = $this->jsonOutput();
         $this->assertSame(1, $exitCode);
         $this->assertFalse($payload['ok']);
@@ -774,7 +774,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
     public function test_approve_action_fails_closed_for_mixed_pending_and_approved_items(): void
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
-        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath)));
+        $this->assertSame(0, Artisan::call('personality:approval-queue-write', $this->writeOptions($packagePath, $qaPath)));
 
         $ids = DB::table('personality_agent_approval_items')->orderBy('id')->pluck('id')->map(fn ($id): int => (int) $id)->all();
         DB::table('personality_agent_approval_items')->where('id', $ids[0])->update([
@@ -782,7 +782,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
             'approved_at' => now(),
         ]);
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', $this->approveOptions($ids, $this->approvalHashes()));
+        $exitCode = Artisan::call('personality:approval-queue-write', $this->approveOptions($ids, $this->approvalHashes()));
 
         $payload = $this->jsonOutput();
         $this->assertSame(1, $exitCode);
@@ -796,13 +796,13 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
     public function test_approve_action_requires_exact_operator_token(): void
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
-        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath)));
+        $this->assertSame(0, Artisan::call('personality:approval-queue-write', $this->writeOptions($packagePath, $qaPath)));
 
         $ids = DB::table('personality_agent_approval_items')->orderBy('id')->pluck('id')->map(fn ($id): int => (int) $id)->all();
         $options = $this->approveOptions($ids, $this->approvalHashes());
         $options['--operator-approved'] = 'WRONG';
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', $options);
+        $exitCode = Artisan::call('personality:approval-queue-write', $options);
 
         $payload = $this->jsonOutput();
         $this->assertSame(1, $exitCode);
@@ -818,10 +818,10 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
         $options = $this->writeOptions($packagePath, $qaPath);
 
-        $firstExit = Artisan::call('personality:agent-approval-queue', $options);
+        $firstExit = Artisan::call('personality:approval-queue-write', $options);
         $this->assertSame(0, $firstExit);
 
-        $secondExit = Artisan::call('personality:agent-approval-queue', $options);
+        $secondExit = Artisan::call('personality:approval-queue-write', $options);
 
         $payload = $this->jsonOutput();
         $this->assertSame(0, $secondExit);
@@ -839,7 +839,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         $options = $this->writeOptions($packagePath, $qaPath);
         $options['--operator-approved'] = 'WRONG';
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', $options);
+        $exitCode = Artisan::call('personality:approval-queue-write', $options);
 
         $payload = $this->jsonOutput();
         $this->assertSame(1, $exitCode);
@@ -871,7 +871,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
             ],
         ]);
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath));
+        $exitCode = Artisan::call('personality:approval-queue-write', $this->writeOptions($packagePath, $qaPath));
 
         $payload = $this->jsonOutput();
         $this->assertSame(0, $exitCode);
@@ -890,7 +890,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validEnneagramPackage(), $this->validEnneagramQa());
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', [
+        $exitCode = Artisan::call('personality:approval-queue-write', [
             '--package' => $packagePath,
             '--qa' => $qaPath,
             '--dry-run' => true,
@@ -923,7 +923,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validEnneagramPackage(), $this->validEnneagramQa());
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath));
+        $exitCode = Artisan::call('personality:approval-queue-write', $this->writeOptions($packagePath, $qaPath));
 
         $payload = $this->jsonOutput();
         $this->assertSame(0, $exitCode);
@@ -990,7 +990,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
             ],
         ]);
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', [
+        $exitCode = Artisan::call('personality:approval-queue-write', [
             '--package' => $packagePath,
             '--qa' => $qaPath,
             '--dry-run' => true,
@@ -1011,7 +1011,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validBigFivePackage(), $this->validBigFiveQa());
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', [
+        $exitCode = Artisan::call('personality:approval-queue-write', [
             '--package' => $packagePath,
             '--qa' => $qaPath,
             '--dry-run' => true,
@@ -1052,7 +1052,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validBigFivePackage(), $this->validBigFiveQa());
         $options = $this->writeOptions($packagePath, $qaPath);
 
-        $firstExit = Artisan::call('personality:agent-approval-queue', $options);
+        $firstExit = Artisan::call('personality:approval-queue-write', $options);
         $firstPayload = $this->jsonOutput();
 
         $this->assertSame(0, $firstExit);
@@ -1092,7 +1092,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         $this->assertStringStartsWith('https://fermatmind.com/', (string) $firstItem->target_url);
         $this->assertSame('pass', (string) $firstItem->qa_decision);
 
-        $secondExit = Artisan::call('personality:agent-approval-queue', $options);
+        $secondExit = Artisan::call('personality:approval-queue-write', $options);
         $secondPayload = $this->jsonOutput();
         $this->assertSame(0, $secondExit);
         $this->assertTrue($secondPayload['ok']);
@@ -1120,7 +1120,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         }
         [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath));
+        $exitCode = Artisan::call('personality:approval-queue-write', $this->writeOptions($packagePath, $qaPath));
 
         $payload = $this->jsonOutput();
         $this->assertSame(0, $exitCode);
@@ -1156,7 +1156,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         }
         [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
 
-        $exitCode = Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath));
+        $exitCode = Artisan::call('personality:approval-queue-write', $this->writeOptions($packagePath, $qaPath));
 
         $payload = $this->jsonOutput();
         $this->assertSame(0, $exitCode);

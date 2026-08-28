@@ -8,11 +8,10 @@ use App\Services\SeoAgent\CmsFaqGapReadonlyScanner;
 use App\Services\SeoAgent\CmsTdkGapReadonlyScanner;
 use App\Services\SeoAgent\OpportunityAggregator;
 use App\Services\SeoAgent\RuntimeSeoQaReadonlyScanner;
-use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use RuntimeException;
 
-final class SeoAgentRunCommand extends Command
+final class SeoAgentRunCommand extends RetiredSeoAgentCommand
 {
     private const EVIDENCE_SCHEMA_VERSION = 'seo-agent-run-evidence.v1';
 

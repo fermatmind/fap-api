@@ -7,12 +7,11 @@ namespace App\Console\Commands;
 use App\Models\Article;
 use App\Models\ArticleRevision;
 use Carbon\Carbon;
-use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use RuntimeException;
 
-final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
+final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends RetiredSeoAgentCommand
 {
     private const SCHEMA_VERSION = 'seo-agent-cms-draft-payload-repair-canary.v1';
 

@@ -6,12 +6,11 @@ namespace App\Console\Commands;
 
 use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
-use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
-final class SeoAgentCmsPublishCanaryCommand extends Command
+final class SeoAgentCmsPublishCanaryCommand extends RetiredSeoAgentCommand
 {
     private const SCHEMA_VERSION = 'seo-agent-cms-publish-canary.v1';
 

@@ -8,14 +8,13 @@ use App\Models\Article;
 use App\Models\ContentPage;
 use App\Services\SeoAgent\OpportunityAggregator;
 use App\Services\SeoIntel\GscDataQualityGate;
-use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 use Symfony\Component\Console\Output\BufferedOutput;
 
-final class SeoAgentGscOpportunityAutoDraftCommand extends Command
+final class SeoAgentGscOpportunityAutoDraftCommand extends RetiredSeoAgentCommand
 {
     private const SCHEMA_VERSION = 'seo-agent-gsc-opportunity-auto-draft.v1';
 

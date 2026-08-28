@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Schema;
 
-final class PersonalityAgentPostPromotionSearchGateCommand extends Command
+final class PersonalityPostPromotionSearchGateCommand extends Command
 {
-    private const SCHEMA_VERSION = 'personality-agent-post-promotion-search-gate.v1';
+    private const SCHEMA_VERSION = 'personality-post-promotion-search-gate.v1';
 
     private const V8_5_V5_BILINGUAL_64_ARTIFACT = 'MBTI64-ZH32-EN32-V8_5-V5-BILINGUAL-PACKAGE-QA-01';
 
@@ -50,18 +50,18 @@ final class PersonalityAgentPostPromotionSearchGateCommand extends Command
         'order_no',
     ];
 
-    protected $signature = 'personality:agent-post-promotion-search-gate
+    protected $signature = 'personality:post-promotion-search-gate-review
         {--dry-run : Required. Run read-only planning only}
         {--json : Emit JSON summary}
         {--output= : Optional output JSON path}
         {--channel=indexnow : Search Channel to dry-run; v1 supports indexnow}
         {--urls= : Comma-separated canonical URLs/paths or path to JSON list}
-        {--package= : Optional agent/promotion package JSON containing target URLs}
+        {--package= : Optional promotion package JSON containing target URLs}
         {--v8-5-v5-bilingual-64 : Require the fixed 64 MBTI64 V8.5/V5 bilingual package and URL set}
         {--base-url= : Public site base URL; defaults to seo_intel.public_canonical_host}
         {--timeout=10 : Public HTTP timeout seconds}';
 
-    protected $description = 'Read-only post-promotion search gate for personality agent batches; no enqueue, approve, submit, CMS, sitemap, or llms mutation.';
+    protected $description = 'Read-only post-promotion search gate for personality batches; no enqueue, approve, submit, CMS, sitemap, or llms mutation.';
 
     public function handle(SearchChannelQueuePlanner $planner): int
     {

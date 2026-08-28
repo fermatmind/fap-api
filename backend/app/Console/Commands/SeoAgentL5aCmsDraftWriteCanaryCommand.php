@@ -7,7 +7,6 @@ namespace App\Console\Commands;
 use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
 use FilesystemIterator;
-use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -15,7 +14,7 @@ use RuntimeException;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 
-final class SeoAgentL5aCmsDraftWriteCanaryCommand extends Command
+final class SeoAgentL5aCmsDraftWriteCanaryCommand extends RetiredSeoAgentCommand
 {
     private const SCHEMA_VERSION = 'seo-agent-l5a-cms-draft-write-canary.v1';
 

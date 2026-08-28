@@ -1,0 +1,45 @@
+{
+  "policy_id": "seo.release_separation",
+  "policy_version": "1.0.0",
+  "classification": "contract_only",
+  "execution_authorized": false,
+  "future_consumer": "seo.policy_gateway",
+  "source_asset": "fap-web/.agents/skills/public-profile-seo-asset-factory/agents/release-guard-agent.md",
+  "gate_order": [
+    "content_candidate",
+    "backend_dry_run",
+    "controlled_draft_import",
+    "post_import_readback",
+    "promotion_dry_run",
+    "controlled_publish",
+    "runtime_readback",
+    "index_surface_readiness",
+    "url_truth_dry_run",
+    "url_truth_controlled_write",
+    "search_queue_dry_run",
+    "search_queue_enqueue",
+    "search_queue_approval",
+    "search_live_submit",
+    "post_submit_observation"
+  ],
+  "hard_stops": [
+    "candidate_does_not_imply_import_or_publish",
+    "import_does_not_imply_publish",
+    "publish_does_not_imply_index_or_search",
+    "search_queue_dry_run_does_not_imply_enqueue",
+    "enqueue_does_not_imply_approval",
+    "approval_does_not_imply_live_submit",
+    "legacy_approval_is_not_current_policy_authority"
+  ],
+  "negative_guarantees": {
+    "cms_write": false,
+    "database_write": false,
+    "url_truth_write": false,
+    "sitemap_or_llms_mutation": false,
+    "search_queue_write": false,
+    "search_submission": false,
+    "deployment": false,
+    "migration": false,
+    "secret_or_permission_change": false
+  }
+}

@@ -16,6 +16,8 @@ final class CareerContentMergeFailure extends RuntimeException
 
 final class CareerContentCurrentMerger
 {
+    public const AGENT_INVOCABLE = false;
+
     /** @var list<string> */
     private const FORBIDDEN_PUBLIC_KEYS = [
         'private_answers', 'score_vector', 'percentile', 'selector_trace', 'attempt_url',

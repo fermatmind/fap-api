@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\SeoAgent\RuntimeSeoQaReadonlyScanner;
-use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use RuntimeException;
 
-final class SeoAgentRuntimeSeoQaScanCommand extends Command
+final class SeoAgentRuntimeSeoQaScanCommand extends RetiredSeoAgentCommand
 {
     protected $signature = 'seo-agent:runtime-seo-qa-scan
         {--source=cms-indexable : Source to scan. Only cms-indexable is supported}
