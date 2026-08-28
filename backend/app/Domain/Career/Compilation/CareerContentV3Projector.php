@@ -64,7 +64,7 @@ final class CareerContentV3Projector
                 'items' => $items,
             ];
         }
-        foreach ($page as $componentId => $value) {
+        foreach ($this->orderedMap($page) as $componentId => $value) {
             if (! is_string($componentId) || isset($consumedComponents[$componentId])
                 || in_array($componentId, [...self::FRONTEND_STRUCTURAL_COMPONENTS, 'path'], true)) {
                 continue;
@@ -174,7 +174,7 @@ final class CareerContentV3Projector
             return [['type' => 'list', 'values' => $entries, 'data' => ['entries' => $entries]]];
         }
         $result = [];
-        foreach ($value as $key => $child) {
+        foreach ($this->orderedMap($value) as $key => $child) {
             if ($this->structural((string) $key) || $this->urlKey((string) $key)) {
                 continue;
             }
@@ -222,7 +222,7 @@ final class CareerContentV3Projector
             return [];
         }
         $result = [];
-        foreach ($value as $key => $child) {
+        foreach ($this->orderedMap($value) as $key => $child) {
             $result = array_merge($result, $this->leafValues($child, (string) $key));
         }
 
@@ -296,7 +296,7 @@ final class CareerContentV3Projector
                     ?? $this->string($node['来源'] ?? null) ?? parse_url($url, PHP_URL_HOST) ?? $componentId;
                 $found[$url] = ['entity' => $entity, 'url' => $url];
             }
-            foreach ($node as $child) {
+            foreach ($this->orderedMap($node) as $child) {
                 $walk($child);
             }
         };
@@ -312,10 +312,22 @@ final class CareerContentV3Projector
         return $result;
     }
 
+    /** @param array<mixed> $value @return array<mixed> */
+    private function orderedMap(array $value): array
+    {
+        if (! array_is_list($value)) {
+            ksort($value, SORT_STRING);
+        }
+
+        return $value;
+    }
+
     /** @param array<string,mixed>|list<mixed> $sources @return list<array{id:string,name:string,url:?string}> */
     private function sourceItems(array $sources): array
     {
-        $entries = array_is_list($sources) ? $sources : ($sources['references'] ?? array_values($sources));
+        $entries = array_is_list($sources)
+            ? $sources
+            : ($sources['references'] ?? array_values($this->orderedMap($sources)));
         if (! is_array($entries)) {
             return [];
         }

@@ -52,6 +52,43 @@ final class CareerContentV3ContractTest extends TestCase
         self::assertNotEmpty($projection['blocks']);
     }
 
+    public function test_projection_is_stable_across_mysql_json_object_key_order(): void
+    {
+        ini_set('memory_limit', '1024M');
+        $package = app(CareerCurrentAuthorityPackage::class);
+        $row = $package->load(base_path())['rows']['accountants-and-auditors'];
+        $projector = app(CareerContentV3Projector::class);
+        $mysqlOrder = null;
+        $mysqlOrder = static function (mixed $value) use (&$mysqlOrder): mixed {
+            if (! is_array($value)) {
+                return $value;
+            }
+            if (array_is_list($value)) {
+                return array_map($mysqlOrder, $value);
+            }
+            uksort($value, static fn (string $left, string $right): int => strlen($left) <=> strlen($right) ?: strcmp($left, $right));
+            foreach ($value as $key => $item) {
+                $value[$key] = $mysqlOrder($item);
+            }
+
+            return $value;
+        };
+        $page = $row['page_payload_json']['page']['zh'];
+        $presentation = $row['metadata_json']['presentation_v2']['zh'];
+        $sources = $row['sources_json'];
+
+        self::assertSame(
+            $projector->project('accountants-and-auditors', 'zh-CN', $page, $presentation, $sources),
+            $projector->project(
+                'accountants-and-auditors',
+                'zh-CN',
+                $mysqlOrder($page),
+                $mysqlOrder($presentation),
+                $mysqlOrder($sources),
+            ),
+        );
+    }
+
     public function test_faq_questions_are_replaced_with_stable_frontend_semantic_keys(): void
     {
         $package = app(CareerCurrentAuthorityPackage::class);
