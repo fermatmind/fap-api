@@ -78,7 +78,7 @@ final class SeoPlatform11DPersistenceApiTest extends TestCase
         $this->assertSame(14, DB::connection('seo_intel')->table('seo_council_run_steps')->count());
     }
 
-    public function test_terminal_hold_receipt_cannot_be_resumed_and_requires_a_new_mission_request(): void
+    public function test_policy_hold_is_not_overwritten_by_a_later_resume_reference(): void
     {
         $first = app(ApiMissionAdapter::class)->submit($this->request());
         $resume = $this->request();
@@ -91,8 +91,10 @@ final class SeoPlatform11DPersistenceApiTest extends TestCase
 
         $receipt = app(ApiMissionAdapter::class)->submit($resume);
 
-        $this->assertSame('STALE_RESUME_HOLD', $receipt['status']);
-        $this->assertSame('resume_hash_verification_failed', $receipt['stop_reason']);
+        $this->assertSame('POLICY_HOLD', $receipt['status']);
+        $this->assertSame('ROLE_CAPABILITY_BINDING_UNAVAILABLE', $receipt['stop_reason']);
+        $this->assertSame('HOLD', $receipt['steps'][3]['status']);
+        $this->assertSame('NOT_RUN', $receipt['steps'][4]['status']);
         $this->assertFalse($receipt['execution_allowed']);
     }
 
@@ -160,6 +162,65 @@ final class SeoPlatform11DPersistenceApiTest extends TestCase
             ->assertJsonPath('meta.execution_allowed', false);
     }
 
+    public function test_ui_mission_route_enforces_session_csrf_owner_and_totp_without_changing_machine_api(): void
+    {
+        $route = Route::getRoutes()->getByName('ops.seo_intel.council.ui_missions.store');
+        $this->assertNotNull($route);
+        $this->assertContains('web', $route->gatherMiddleware());
+        $this->assertStringContainsString('@csrf', (string) file_get_contents(resource_path('views/filament/ops/components/ops-agent-council-workspace.blade.php')));
+        $this->assertNotContains('web', Route::getRoutes()->getByName('api.v0_5.ops.seo_intel.council.missions.store')->gatherMiddleware());
+
+        $this->app->detectEnvironment(static fn (): string => 'local');
+        $token = 'csrf-token-for-seo-council';
+        $payload = ['_token' => $token, ...$this->uiRequest()];
+
+        $this->withSession(['_token' => $token])
+            ->post('/api/v0.5/ops/seo-intel/council/ui-missions', $payload)
+            ->assertUnauthorized();
+
+        $owner = $this->createAdminWithPermissions([PermissionNames::ADMIN_OWNER]);
+        config()->set('review_governance.solo_owner_admin_user_id', (int) $owner->id);
+        config()->set('admin.totp.enabled', true);
+        $owner->forceFill(['totp_enabled_at' => now()])->save();
+        $this->actingAs($owner, (string) config('admin.guard', 'admin'))
+            ->withSession(['_token' => $token, 'ops_org_id' => 0, 'ops_admin_totp_verified_user_id' => (int) $owner->id])
+            ->post('/api/v0.5/ops/seo-intel/council/ui-missions', $this->uiRequest())
+            ->assertStatus(419);
+        $this->actingAs($owner, (string) config('admin.guard', 'admin'))
+            ->withSession(['_token' => $token, 'ops_org_id' => 0, 'ops_admin_totp_verified_user_id' => (int) $owner->id])
+            ->post('/api/v0.5/ops/seo-intel/council/ui-missions', ['_token' => 'mismatch', ...$this->uiRequest()])
+            ->assertStatus(419);
+
+        $nonOwner = $this->createAdminWithPermissions([PermissionNames::ADMIN_SEO_INTEL_READ]);
+        $nonOwner->forceFill(['totp_enabled_at' => now()])->save();
+        $this->withHeader('Accept', 'application/json')
+            ->actingAs($nonOwner, (string) config('admin.guard', 'admin'))
+            ->withSession(['_token' => $token, 'ops_org_id' => 0, 'ops_admin_totp_verified_user_id' => (int) $nonOwner->id])
+            ->post('/api/v0.5/ops/seo-intel/council/ui-missions', $payload)
+            ->assertForbidden();
+
+        $this->withHeader('Accept', 'application/json')
+            ->actingAs($owner, (string) config('admin.guard', 'admin'))
+            ->withSession(['_token' => $token, 'ops_org_id' => 0])
+            ->post('/api/v0.5/ops/seo-intel/council/ui-missions', $payload)
+            ->assertRedirect();
+
+        $this->actingAs($owner, (string) config('admin.guard', 'admin'))
+            ->withSession(['_token' => $token, 'ops_org_id' => 0, 'ops_admin_totp_verified_user_id' => (int) $owner->id])
+            ->post('/api/v0.5/ops/seo-intel/council/ui-missions', $payload)
+            ->assertAccepted()
+            ->assertJsonPath('data.status', 'POLICY_HOLD')
+            ->assertJsonPath('data.stop_reason', 'EVIDENCE_HOLD')
+            ->assertJsonPath('data.execution_allowed', false)
+            ->assertJsonPath('data.caller_provenance.caller_type', 'seo_operations_ui');
+
+        $this->app->detectEnvironment(static fn (): string => 'testing');
+        $this->postJson('/api/v0.5/ops/seo-intel/council/missions', $this->request())
+            ->assertAccepted()
+            ->assertJsonPath('data.status', 'POLICY_HOLD')
+            ->assertJsonPath('data.execution_allowed', false);
+    }
+
     /** @param list<string> $permissions */
     private function createAdminWithPermissions(array $permissions): AdminUser
     {
@@ -203,6 +264,19 @@ final class SeoPlatform11DPersistenceApiTest extends TestCase
             'tool_scope' => [],
             'egress_scope' => [],
             'resume_from' => null,
+        ];
+    }
+
+    /** @return array<string, string> */
+    private function uiRequest(): array
+    {
+        return [
+            'mission_id' => 'mission:ui:csrf',
+            'idempotency_key' => 'idempotency:ui:csrf',
+            'mission_type' => 'weekly_opportunity',
+            'family' => 'tests',
+            'locale' => 'zh-CN',
+            'review_domain' => '',
         ];
     }
 }

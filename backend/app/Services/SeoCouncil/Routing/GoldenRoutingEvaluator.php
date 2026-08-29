@@ -7,6 +7,8 @@ namespace App\Services\SeoCouncil\Routing;
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use App\Services\SeoCouncil\Contracts\CouncilContractValidator;
 use App\Services\SeoCouncil\Contracts\MissionRequestData;
+use App\Services\SeoCouncil\Governance\RoleCapabilityBindingRegistry;
+use RuntimeException;
 
 final class GoldenRoutingEvaluator
 {
@@ -14,12 +16,16 @@ final class GoldenRoutingEvaluator
         private readonly DeterministicMissionRouter $router,
         private readonly CouncilContractValidator $validator,
         private readonly SeoRegistryHasher $hasher,
+        private readonly RoleCapabilityBindingRegistry $binding,
     ) {}
 
     /** @return array<string, mixed> */
     public function evaluate(): array
     {
         $corpus = json_decode((string) file_get_contents(resource_path('seo-agent/council/routing/seo.council_golden_routing.v1.json')), true, 512, JSON_THROW_ON_ERROR);
+        if (($corpus['binding_ref'] ?? null) !== $this->binding->reference()) {
+            throw new RuntimeException('GOLDEN_BINDING_DRIFT');
+        }
         $tp = $fp = $fn = $allTeam = $unauthorizedAllTeam = $totalModes = 0;
         $fixtures = (array) ($corpus['fixtures'] ?? []);
         foreach ($fixtures as $fixture) {
@@ -45,6 +51,7 @@ final class GoldenRoutingEvaluator
             'corpus_version' => $corpus['corpus_version'],
             'corpus_hash' => $this->hasher->hash($corpus),
             'fixture_count' => count($fixtures),
+            'binding_ref' => $this->binding->reference(),
             'routing_precision' => $this->metric($tp, $precisionDenominator),
             'routing_recall' => $this->metric($tp, $recallDenominator),
             'missed_required_mode_rate' => $this->metric($fn, $recallDenominator),

@@ -1,8 +1,9 @@
 {
   "corpus_id": "seo.council_golden_routing",
   "corpus_version": "1.0.0",
+  "binding_ref": {"id":"fermatmind.seo.role_capability_binding","version":"2.0.0","hash":"42f19a00a9ac60beef182765cad8c795ff068e36b77ae7e15306f26998890159"},
   "fixtures": [
-    {"id":"global-tests-en","mission_type":"global_portfolio","family":"tests","locale":"en","review_domain":null,"evidence_types":[],"expected_roles":["seo.expert.technical_search_authority","seo.expert.search_analytics_measurement","seo.expert.content_entity_quality","seo.expert.competitor_research","seo.expert.public_content_stability","seo.expert.commercial_funnel_cro"],"expected_status":"SOURCE_CAPABILITY_UNAVAILABLE"},
+    {"id":"global-tests-en","mission_type":"global_portfolio","family":"tests","locale":"en","review_domain":null,"evidence_types":["runtime_health","search_measurement","content_claim","gateway_competitor_public","stability","funnel_aggregate"],"expected_roles":["seo.expert.technical_search_authority","seo.expert.search_analytics_measurement","seo.expert.content_entity_quality","seo.expert.competitor_research","seo.expert.public_content_stability","seo.expert.commercial_funnel_cro"],"expected_status":"SOURCE_CAPABILITY_UNAVAILABLE"},
     {"id":"weekly-tests-zh","mission_type":"weekly_opportunity","family":"tests","locale":"zh-CN","review_domain":null,"evidence_types":["search_measurement","runtime_health","authority_parity","release_separation"],"expected_roles":["seo.expert.search_analytics_measurement","seo.expert.technical_search_authority"],"expected_status":"SOURCE_CAPABILITY_UNAVAILABLE"},
     {"id":"weekly-career-en","mission_type":"weekly_opportunity","family":"career","locale":"en","review_domain":null,"evidence_types":["search_measurement","content_claim","entity","duplicate","lifecycle"],"expected_roles":["seo.expert.search_analytics_measurement","seo.expert.content_entity_quality"],"expected_status":"SOURCE_CAPABILITY_UNAVAILABLE"},
     {"id":"weekly-competitor-compliant","mission_type":"weekly_opportunity","family":"articles_topics","locale":"en","review_domain":null,"evidence_types":["search_measurement","gateway_competitor_public"],"expected_roles":["seo.expert.search_analytics_measurement","seo.expert.competitor_research"],"expected_status":"SOURCE_CAPABILITY_UNAVAILABLE"},
@@ -18,7 +19,6 @@
     {"id":"bounded-cro","mission_type":"bounded_review","family":"trust_method_help","locale":"zh-CN","review_domain":"cro","evidence_types":["funnel_aggregate"],"expected_roles":["seo.expert.commercial_funnel_cro"],"expected_status":"SOURCE_CAPABILITY_UNAVAILABLE"},
     {"id":"independent-review","mission_type":"independent_registry_review","family":"tests","locale":"en","review_domain":null,"evidence_types":["content_claim"],"expected_roles":["seo.independent_reviewer"],"expected_status":"SOURCE_CAPABILITY_UNAVAILABLE"},
     {"id":"career-chain","mission_type":"career_candidate_generation","family":"career","locale":"zh-CN","review_domain":null,"evidence_types":["career_candidate","content_claim","career_manifest_validation"],"expected_roles":["career.content_agent","seo.expert.content_entity_quality","seo.independent_reviewer"],"expected_status":"SOURCE_CAPABILITY_UNAVAILABLE"},
-    {"id":"career-family-denied","mission_type":"career_candidate_generation","family":"tests","locale":"en","review_domain":null,"evidence_types":["career_candidate"],"expected_roles":[],"expected_status":"MISSION_SCOPE_HOLD"},
     {"id":"competitor-without-gateway","mission_type":"weekly_opportunity","family":"articles_topics","locale":"zh-CN","review_domain":null,"evidence_types":["search_measurement","competitor_public"],"expected_roles":["seo.expert.search_analytics_measurement"],"expected_status":"SOURCE_CAPABILITY_UNAVAILABLE"}
   ]
 }

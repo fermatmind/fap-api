@@ -49,7 +49,8 @@ final class SeoUxImpl06AgentCouncilTest extends TestCase
         $this->assertStringContainsString('data-policy-mode', $workspace);
         $this->assertStringContainsString("['orchestrator', 'policy_gateway', 'binding', 'route_plan', 'independent_review', 'receipt']", (string) file_get_contents(app_path('Filament/Ops/Support/SeoAgentCouncilUiContract.php')));
         $this->assertStringContainsString('<form', $workspace);
-        $this->assertStringContainsString('/api/v0.5/ops/seo-intel/council/ui-missions', $workspace);
+        $this->assertStringContainsString("route('ops.seo_intel.council.ui_missions.store')", $workspace);
+        $this->assertStringContainsString('@csrf', $workspace);
         $this->assertStringContainsString('zero-budget MissionRequest', $workspace);
         $this->assertStringNotContainsString('wire:click', $workspace);
         $this->assertStringNotContainsString('wire:model', $workspace);

@@ -6,6 +6,7 @@ namespace App\Services\SeoCouncil\Contracts;
 
 use App\Services\SeoAgentGovernance\SeoRoleCapabilityRegistry;
 use App\Services\SeoAgentPolicyGateway\PolicyGatewayPrivacyGuard;
+use App\Services\SeoCouncil\Governance\RoleCapabilityBindingRegistry;
 use InvalidArgumentException;
 
 final class CouncilContractValidator
@@ -16,26 +17,10 @@ final class CouncilContractValidator
         'budget', 'tool_scope', 'egress_scope', 'resume_from',
     ];
 
-    private const MISSIONS = [
-        'global_portfolio', 'weekly_opportunity', 'monthly_portfolio',
-        'breakthrough_sprint', 'bounded_review', 'independent_registry_review',
-        'career_candidate_generation',
-    ];
-
-    private const FAMILIES = ['tests', 'articles_topics', 'career', 'personality', 'trust_method_help', 'other_public'];
-
-    private const REVIEW_DOMAINS = ['technical', 'analytics', 'content', 'competitor', 'stability', 'cro'];
-
-    private const EVIDENCE_TYPES = [
-        'runtime_health', 'authority_parity', 'release_separation', 'search_measurement',
-        'content_claim', 'entity', 'duplicate', 'lifecycle', 'competitor_public',
-        'gateway_competitor_public', 'stability', 'cache_projection', 'funnel_aggregate',
-        'career_candidate', 'career_manifest_validation',
-    ];
-
     public function __construct(
         private readonly PolicyGatewayPrivacyGuard $privacy,
         private readonly SeoRoleCapabilityRegistry $roles,
+        private readonly RoleCapabilityBindingRegistry $binding,
     ) {}
 
     /** @param array<string, mixed> $input @return array<string, mixed> */
@@ -50,14 +35,18 @@ final class CouncilContractValidator
                 throw new InvalidArgumentException('MISSION_REQUEST_IDENTIFIER_INVALID');
             }
         }
-        if (! in_array($input['mission_type'], self::MISSIONS, true)
-            || ! in_array($input['family'], self::FAMILIES, true)
-            || ! in_array($input['locale'], ['en', 'zh-CN'], true)) {
+        try {
+            $mission = $this->binding->mission((string) $input['mission_type']);
+        } catch (InvalidArgumentException) {
+            throw new InvalidArgumentException('MISSION_REQUEST_SCOPE_INVALID');
+        }
+        if (! in_array($input['family'], (array) $mission['allowed_page_families'], true)
+            || ! in_array($input['locale'], (array) $mission['allowed_locales'], true)) {
             throw new InvalidArgumentException('MISSION_REQUEST_SCOPE_INVALID');
         }
         $reviewDomain = $input['review_domain'];
-        if (($input['mission_type'] === 'bounded_review' && ! in_array($reviewDomain, self::REVIEW_DOMAINS, true))
-            || ($input['mission_type'] !== 'bounded_review' && $reviewDomain !== null)) {
+        if ((isset($mission['selector']) && $this->binding->selectorVariant($mission, is_string($reviewDomain) ? $reviewDomain : null) === null)
+            || (! isset($mission['selector']) && $reviewDomain !== null)) {
             throw new InvalidArgumentException('MISSION_REVIEW_DOMAIN_INVALID');
         }
         $requestedRole = $input['requested_role'];
@@ -142,7 +131,7 @@ final class CouncilContractValidator
             if (! is_string($ref['bundle_id']) || preg_match('/^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,127}$/D', $ref['bundle_id']) !== 1
                 || ! is_int($ref['bundle_version']) || $ref['bundle_version'] < 1
                 || preg_match('/^[a-f0-9]{64}$/D', (string) $ref['bundle_hash']) !== 1
-                || ! in_array($ref['evidence_type'], self::EVIDENCE_TYPES, true)
+                || ! in_array($ref['evidence_type'], $this->binding->evidenceTypes(), true)
                 || ! in_array($ref['status'], ['READY', 'EVIDENCE_HOLD', 'SOURCE_CAPABILITY_UNAVAILABLE', 'MEASUREMENT_HOLD'], true)
                 || preg_match('/^[a-f0-9]{64}$/D', (string) $ref['authority_revision']) !== 1) {
                 throw new InvalidArgumentException('EVIDENCE_REF_INVALID');

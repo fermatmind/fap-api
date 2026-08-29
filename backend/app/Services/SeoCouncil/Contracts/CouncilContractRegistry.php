@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace App\Services\SeoCouncil\Contracts;
 
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
+use App\Services\SeoCouncil\Governance\RoleCapabilityBindingRegistry;
 use JsonException;
 use RuntimeException;
 
 final class CouncilContractRegistry
 {
-    public const MANIFEST_ID = 'seo.council_contract_manifest.v1';
+    public const MANIFEST_ID = 'seo.council_contract_manifest.v2';
 
-    public const MANIFEST_VERSION = '1.0.0';
+    public const MANIFEST_VERSION = '2.0.0';
 
     private const SCHEMAS = [
         'seo.mission_request.v1.schema.json',
@@ -25,9 +26,13 @@ final class CouncilContractRegistry
         'seo.operator_time_entry.v1.schema.json',
         'seo.decision_history_projection.v1.schema.json',
         'seo.runtime_capability_snapshot.v1.schema.json',
+        'seo.role_capability_binding.v2.schema.json',
     ];
 
-    public function __construct(private readonly SeoRegistryHasher $hasher) {}
+    public function __construct(
+        private readonly SeoRegistryHasher $hasher,
+        private readonly RoleCapabilityBindingRegistry $binding,
+    ) {}
 
     /** @return array<string, mixed> */
     public function manifest(): array
@@ -53,6 +58,10 @@ final class CouncilContractRegistry
                 'version' => $actionManifest['schema_version'],
                 'path' => 'backend/resources/seo-agent/policy-gateway/schemas/seo.action_scoped_manifest.v1.schema.json',
                 'hash' => $this->hasher->hash($actionManifest),
+            ],
+            'role_capability_binding' => [
+                ...$this->binding->reference(),
+                'path' => 'backend/resources/seo-agent/council/bindings/seo.role_capability_binding.v2.json',
             ],
             'negative_guarantees' => [
                 'second_action_manifest' => false,

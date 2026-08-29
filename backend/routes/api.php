@@ -98,8 +98,8 @@ use App\Http\Middleware\AdminAuth;
 use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\EnsureAdminTotpVerified;
 use App\Http\Middleware\EnsureCmsAdminAuthorized;
-use App\Http\Middleware\EnsureSeoIntelReadAuthorized;
 use App\Http\Middleware\EnsureSeoCouncilMissionAuthorized;
+use App\Http\Middleware\EnsureSeoIntelReadAuthorized;
 use App\Http\Middleware\ForcePublicAttemptRealm;
 use App\Http\Middleware\HealthzAccessControl;
 use App\Http\Middleware\LimitWebhookPayloadSize;
@@ -703,9 +703,6 @@ Route::prefix('v0.5')->group(function () {
             Route::post('/council/missions', [SeoCouncilMissionController::class, 'storeApi'])
                 ->middleware(EnsureSeoCouncilMissionAuthorized::class)
                 ->name('api.v0_5.ops.seo_intel.council.missions.store');
-            Route::post('/council/ui-missions', [SeoCouncilMissionController::class, 'storeUi'])
-                ->middleware(EnsureSeoCouncilMissionAuthorized::class)
-                ->name('api.v0_5.ops.seo_intel.council.ui_missions.store');
         });
 
     Route::prefix('ops/public-content-health')

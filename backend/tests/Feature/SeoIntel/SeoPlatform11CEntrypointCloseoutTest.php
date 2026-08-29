@@ -50,7 +50,8 @@ final class SeoPlatform11CEntrypointCloseoutTest extends TestCase
         $this->assertNull($council['circuit_breaker']);
         $this->assertNull($council['rollback']);
         $this->assertStringContainsString('<form', $workspace);
-        $this->assertStringContainsString('/api/v0.5/ops/seo-intel/council/ui-missions', $workspace);
+        $this->assertStringContainsString("route('ops.seo_intel.council.ui_missions.store')", $workspace);
+        $this->assertStringContainsString('@csrf', $workspace);
         foreach (['name="caller_type"', 'name="requested_role"', 'name="tool_scope"', 'name="egress_scope"', 'name="budget"', 'wire:click', 'wire:model'] as $control) {
             $this->assertStringNotContainsString($control, $workspace);
         }

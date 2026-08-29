@@ -9,6 +9,7 @@ use App\Services\SeoCouncil\Entrypoints\CliMissionAdapter;
 use App\Services\SeoCouncil\Entrypoints\LocalSkillMissionAdapter;
 use App\Services\SeoCouncil\Entrypoints\ScheduledMissionAdapter;
 use App\Services\SeoCouncil\Entrypoints\SeoOperationsUiMissionAdapter;
+use App\Services\SeoCouncil\Policy\CouncilAdmissionGateway;
 use App\Services\SeoCouncil\SeoCouncilOrchestrator;
 use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -16,7 +17,7 @@ use Tests\TestCase;
 
 final class SeoPlatform11DOrchestratorTest extends TestCase
 {
-    public function test_all_five_entrypoints_have_the_same_request_binding_and_route_with_only_caller_provenance_different(): void
+    public function test_all_five_entrypoints_propagate_the_same_policy_hold_with_only_caller_provenance_different(): void
     {
         $input = $this->request('weekly_opportunity', 'tests', ['search_measurement', 'content_claim']);
         $receipts = [
@@ -32,13 +33,13 @@ final class SeoPlatform11DOrchestratorTest extends TestCase
         $this->assertCount(1, array_unique(array_map(static fn (array $receipt): string => hash('sha256', json_encode($receipt['route_plan'], JSON_THROW_ON_ERROR)), $receipts)));
         $this->assertSame(['local_skill', 'cli', 'scheduler', 'api', 'seo_operations_ui'], array_column(array_column($receipts, 'caller_provenance'), 'caller_type'));
         foreach ($receipts as $receipt) {
-            $this->assertSame('SOURCE_CAPABILITY_UNAVAILABLE', $receipt['status']);
+            $this->assertSame('POLICY_HOLD', $receipt['status']);
+            $this->assertSame('ROLE_CAPABILITY_BINDING_UNAVAILABLE', $receipt['stop_reason']);
+            $this->assertSame([], $receipt['route_plan']);
+            $this->assertSame('HOLD', $receipt['steps'][3]['status']);
+            $this->assertSame('NOT_RUN', $receipt['steps'][4]['status']);
             $this->assertFalse($receipt['execution_allowed']);
             $this->assertSame(0, $receipt['negative_guarantees']['model_calls']);
-            foreach ($receipt['route_plan'] as $handoff) {
-                $this->assertSame($receipt['run_id'], $handoff['run_id']);
-                $this->assertFalse($handoff['budget']['model_calls'] > 0);
-            }
         }
     }
 
@@ -46,10 +47,22 @@ final class SeoPlatform11DOrchestratorTest extends TestCase
     {
         $input = $this->request('bounded_review', 'tests', ['search_measurement'], 'analytics');
         $input['requested_role'] = 'seo.cms_writer';
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('REQUESTED_ROLE_EXPANSION_DENIED');
+        app(ApiMissionAdapter::class)->submit($input);
+    }
+
+    public function test_requested_role_can_only_narrow_optional_modes_without_removing_required_modes(): void
+    {
+        $this->bindAdmission('ALLOW');
+        $input = $this->request('weekly_opportunity', 'tests', ['search_measurement', 'content_claim', 'runtime_health']);
+        $input['requested_role'] = 'seo.expert.content_entity_quality';
         $receipt = app(ApiMissionAdapter::class)->submit($input);
 
-        $this->assertSame(['seo.expert.search_analytics_measurement'], array_column($receipt['route_plan'], 'target_role_id'));
-        $this->assertStringNotContainsString('seo.cms_writer', json_encode($receipt, JSON_THROW_ON_ERROR));
+        $this->assertSame([
+            'seo.expert.search_analytics_measurement',
+            'seo.expert.content_entity_quality',
+        ], array_column($receipt['route_plan'], 'target_role_id'));
         $this->assertFalse($receipt['execution_allowed']);
     }
 
@@ -104,6 +117,7 @@ final class SeoPlatform11DOrchestratorTest extends TestCase
 
     public function test_stale_resume_and_mutually_exclusive_authority_revisions_fail_closed(): void
     {
+        $this->bindAdmission('ALLOW');
         $stale = $this->request('weekly_opportunity', 'tests', ['search_measurement']);
         $stale['resume_from'] = ['receipt_hash' => str_repeat('a', 64), 'step_hash' => str_repeat('b', 64)];
         $staleReceipt = app(ApiMissionAdapter::class)->submit($stale);
@@ -138,7 +152,7 @@ final class SeoPlatform11DOrchestratorTest extends TestCase
         ];
 
         $this->assertTrue($orchestrator->acceptModeOutput($safe, str_repeat('a', 64), 'seo.independent_reviewer'));
-        foreach (['peer_handoff', 'delegate_to', 'flow_override', 'additional_roles', 'tool_scope', 'egress_scope'] as $field) {
+        foreach (['peer_handoff', 'delegate_to', 'flow_override', 'additional_roles', 'tool_scope', 'egress_scope', 'allow', 'manifest', 'requested_role', 'tool'] as $field) {
             $malicious = $safe;
             $malicious[$field] = ['seo.cms_writer'];
             $this->assertFalse($orchestrator->acceptModeOutput($malicious, str_repeat('a', 64), 'seo.independent_reviewer'), $field);
@@ -149,7 +163,8 @@ final class SeoPlatform11DOrchestratorTest extends TestCase
 
     public function test_career_chain_is_fixed_hash_bound_and_stops_before_dry_compile_or_writes(): void
     {
-        $receipt = app(ApiMissionAdapter::class)->submit($this->request('career_candidate_generation', 'career', ['career_candidate', 'content_claim']));
+        $this->bindAdmission('ALLOW');
+        $receipt = app(ApiMissionAdapter::class)->submit($this->request('career_candidate_generation', 'career', ['career_candidate', 'content_claim', 'career_manifest_validation']));
         $handoffs = array_values(array_filter($receipt['route_plan'], static fn (array $item): bool => $item['kind'] === 'role_handoff'));
         $compile = $receipt['route_plan'][3];
 
@@ -169,9 +184,72 @@ final class SeoPlatform11DOrchestratorTest extends TestCase
         $this->assertSame(['claim', 'locale', 'seo', 'duplicate', 'material'], $compile['gates']);
         $this->assertSame('SOURCE_CAPABILITY_UNAVAILABLE', $receipt['status']);
         $this->assertSame('career_manifest_validator_risk_open', $receipt['stop_reason']);
-        foreach (['--write-current', 'current_merger', 'page_assembly_import', 'publisher', 'search_submission'] as $forbidden) {
+        foreach (['--write-current', 'current_merger', 'page_assembly_import', 'search_submission'] as $forbidden) {
             $this->assertStringNotContainsString($forbidden, strtolower(json_encode($receipt['route_plan'], JSON_THROW_ON_ERROR)));
         }
+    }
+
+    public function test_career_runtime_unavailable_cannot_bypass_the_real_policy_hold(): void
+    {
+        $receipt = app(ApiMissionAdapter::class)->submit($this->request(
+            'career_candidate_generation',
+            'career',
+            ['career_candidate', 'content_claim', 'career_manifest_validation'],
+        ));
+
+        $this->assertSame('POLICY_HOLD', $receipt['status']);
+        $this->assertSame('ROLE_CAPABILITY_BINDING_UNAVAILABLE', $receipt['stop_reason']);
+        $this->assertSame([], $receipt['route_plan']);
+        $this->assertSame('HOLD', $receipt['steps'][3]['status']);
+        $this->assertSame('NOT_RUN', $receipt['steps'][4]['status']);
+        $this->assertFalse($receipt['execution_allowed']);
+    }
+
+    #[DataProvider('entrypointProvider')]
+    public function test_deny_is_terminal_and_cannot_be_overwritten(string $adapterClass): void
+    {
+        $this->bindAdmission('DENY', ['CALLER_TYPE_DENIED']);
+        $receipt = app($adapterClass)->submit($this->request('weekly_opportunity', 'tests', ['search_measurement']));
+
+        $this->assertSame('POLICY_HOLD', $receipt['status']);
+        $this->assertSame('CALLER_TYPE_DENIED', $receipt['stop_reason']);
+        $this->assertSame('DENY', $receipt['steps'][3]['status']);
+        $this->assertSame([], $receipt['route_plan']);
+        $this->assertSame(0, array_sum(array_intersect_key($receipt['negative_guarantees'], array_flip([
+            'model_calls', 'tool_calls', 'external_calls', 'business_writes', 'cms_writes', 'url_truth_writes', 'search_submissions',
+        ]))));
+        $this->assertFalse($receipt['execution_allowed']);
+    }
+
+    public static function entrypointProvider(): array
+    {
+        return [
+            'local skill' => [LocalSkillMissionAdapter::class],
+            'cli' => [CliMissionAdapter::class],
+            'scheduler' => [ScheduledMissionAdapter::class],
+            'api' => [ApiMissionAdapter::class],
+            'ui' => [SeoOperationsUiMissionAdapter::class],
+        ];
+    }
+
+    /** @param list<string> $reasonCodes */
+    private function bindAdmission(string $decision, array $reasonCodes = []): void
+    {
+        $this->app->instance(CouncilAdmissionGateway::class, new class($decision, $reasonCodes) implements CouncilAdmissionGateway
+        {
+            /** @param list<string> $reasonCodes */
+            public function __construct(private readonly string $decision, private readonly array $reasonCodes) {}
+
+            public function admission(string $callerType, array $request): array
+            {
+                return [
+                    'decision' => $this->decision,
+                    'reason_codes' => $this->reasonCodes,
+                    'execution_allowed' => false,
+                    'human_decision_required' => $this->decision === 'HOLD',
+                ];
+            }
+        });
     }
 
     /** @param list<string> $evidenceTypes @return array<string, mixed> */

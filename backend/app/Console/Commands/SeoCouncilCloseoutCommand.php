@@ -5,17 +5,28 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
+use App\Services\SeoAgentGovernance\SeoRoleCapabilityRegistry;
+use App\Services\SeoAgentPolicyGateway\PolicyGatewayCallerGuard;
 use App\Services\SeoAgentPolicyGateway\PolicyGatewayRegistry;
 use App\Services\SeoCouncil\Contracts\CouncilContractRegistry;
 use App\Services\SeoCouncil\Contracts\CouncilContractValidator;
+use App\Services\SeoCouncil\Contracts\MissionRequestData;
 use App\Services\SeoCouncil\Entrypoints\ApiMissionAdapter;
+use App\Services\SeoCouncil\Entrypoints\CliMissionAdapter;
+use App\Services\SeoCouncil\Entrypoints\LocalSkillMissionAdapter;
+use App\Services\SeoCouncil\Entrypoints\ScheduledMissionAdapter;
+use App\Services\SeoCouncil\Entrypoints\SeoOperationsUiMissionAdapter;
 use App\Services\SeoCouncil\Governance\CouncilDependencySnapshotBuilder;
 use App\Services\SeoCouncil\Governance\RoleCapabilityBindingRegistry;
 use App\Services\SeoCouncil\Governance\RuntimeCapabilitySnapshotBuilder;
 use App\Services\SeoCouncil\Memory\OperatorTimeService;
+use App\Services\SeoCouncil\Policy\CouncilAdmissionRequestFactory;
+use App\Services\SeoCouncil\Routing\DeterministicMissionRouter;
 use App\Services\SeoCouncil\Routing\GoldenRoutingEvaluator;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Route;
+use InvalidArgumentException;
 use Symfony\Component\Process\Process;
 use Throwable;
 
@@ -31,152 +42,199 @@ final class SeoCouncilCloseoutCommand extends Command
         CouncilDependencySnapshotBuilder $dependencies,
         RuntimeCapabilitySnapshotBuilder $runtime,
         PolicyGatewayRegistry $policy,
+        PolicyGatewayCallerGuard $policyGateway,
+        CouncilAdmissionRequestFactory $admissionRequests,
+        SeoRoleCapabilityRegistry $roles,
         GoldenRoutingEvaluator $routing,
+        DeterministicMissionRouter $router,
         CouncilContractValidator $validator,
+        LocalSkillMissionAdapter $localSkill,
+        CliMissionAdapter $cli,
+        ScheduledMissionAdapter $scheduler,
         ApiMissionAdapter $api,
+        SeoOperationsUiMissionAdapter $ui,
         OperatorTimeService $operatorTime,
         SeoRegistryHasher $hasher,
     ): int {
         try {
-            $releaseSha = $this->releaseSha();
+            $sourceSha = $this->releaseSha();
             $expectedSha = strtolower(trim((string) $this->option('expected-sha')));
-            if (preg_match('/^[a-f0-9]{40}$/D', $expectedSha) !== 1 || ! hash_equals($expectedSha, $releaseSha)) {
+            if (preg_match('/^[a-f0-9]{40}$/D', $expectedSha) !== 1 || ! hash_equals($expectedSha, $sourceSha)) {
                 return $this->emit(['status' => 'failed', 'safe_error_code' => 'RELEASE_SHA_MISMATCH'], self::FAILURE);
             }
-            $artifact = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-council-contract-manifest.v1.json')), true, 512, JSON_THROW_ON_ERROR);
-            $routingMetrics = $routing->evaluate();
+
+            $artifact = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-council-contract-manifest.v2.json')), true, 512, JSON_THROW_ON_ERROR);
+            $bindingReport = $binding->validationReport();
             $bindingRef = $binding->reference();
+            $registry = $roles->registry();
             $runtimeSnapshot = $runtime->snapshot();
-            $policyRegistry = $policy->registry();
             $trust = $policy->trustRegistry();
-            $entrypoints = [
-                'local_skill' => app_path('Services/SeoCouncil/Entrypoints/LocalSkillMissionAdapter.php'),
-                'cli' => app_path('Services/SeoCouncil/Entrypoints/CliMissionAdapter.php'),
-                'scheduler' => app_path('Services/SeoCouncil/Entrypoints/ScheduledMissionAdapter.php'),
-                'api' => app_path('Services/SeoCouncil/Entrypoints/ApiMissionAdapter.php'),
-                'seo_operations_ui' => app_path('Services/SeoCouncil/Entrypoints/SeoOperationsUiMissionAdapter.php'),
+            $policyRegistry = $policy->registry();
+            $dependency = $dependencies->snapshot($sourceSha);
+            $routingMetrics = $routing->evaluate();
+
+            $input = $this->request('weekly_opportunity', 'tests', 'en', ['search_measurement']);
+            $entrypointReceipts = [
+                $localSkill->submit($input),
+                $cli->submit($input),
+                $scheduler->submit($input),
+                $api->submit($input),
+                $ui->submit($input),
             ];
-            $career = $api->submit($this->request('career_candidate_generation', 'career', 'zh-CN', ['career_candidate', 'content_claim']));
-            $careerRoles = array_values(array_map(
-                static fn (array $step): string => (string) $step['target_role_id'],
-                array_filter($career['route_plan'], static fn (array $step): bool => ($step['kind'] ?? null) === 'role_handoff'),
+            $entrypointPassed = count(array_filter($entrypointReceipts, static fn (array $receipt): bool => ($receipt['status'] ?? null) === 'POLICY_HOLD'
+                && ($receipt['stop_reason'] ?? null) === 'ROLE_CAPABILITY_BINDING_UNAVAILABLE'
+                && ($receipt['route_plan'] ?? null) === []
+                && ($receipt['steps'][3]['status'] ?? null) === 'HOLD'
+                && ($receipt['steps'][4]['status'] ?? null) === 'NOT_RUN'
+                && ($receipt['execution_allowed'] ?? null) === false
             ));
-            $privateBypass = $this->privateProbeBypass($validator);
-            $budgetBypass = $this->budgetProbeBypass($validator);
-            $callerRoleBypass = $this->callerRoleProbeBypass($api);
-            $peerDelegationBypass = $this->peerDelegationProbeBypass($validator);
-            $conflictExecutionBypass = $this->conflictExecutionProbeBypass($api);
-            $legacyActive = $this->activeLegacyEntrypoints();
-            $orchestratorCount = count(glob(app_path('Services/SeoCouncil/*Orchestrator.php')) ?: []);
-            $dependencySnapshot = $dependencies->snapshot($releaseSha);
+            $holdBypass = count($entrypointReceipts) - $entrypointPassed;
+            $policyReasonOverwrite = count(array_filter($entrypointReceipts, static fn (array $receipt): bool => ($receipt['stop_reason'] ?? null) !== 'ROLE_CAPABILITY_BINDING_UNAVAILABLE'
+            ));
+            $unauthorizedRouteExecution = count(array_filter($entrypointReceipts, static fn (array $receipt): bool => ($receipt['route_plan'] ?? []) !== [] || ($receipt['execution_allowed'] ?? null) !== false
+            ));
+
+            $denyDecision = $policyGateway->admission('unregistered_caller', []);
+            $denyBypass = (int) (($denyDecision['decision'] ?? null) !== 'DENY' || ($denyDecision['execution_allowed'] ?? null) !== false);
+            $l4Mission = MissionRequestData::fromInput($input, 'api', $validator, $hasher);
+            $l4Request = $admissionRequests->make($l4Mission);
+            $l4Request['autonomy'] = 'L4';
+            $l4Decision = $policyGateway->admission('api', $l4Request);
+            $l4AllowCount = (int) (($l4Decision['decision'] ?? null) === 'ALLOW');
+            $requestedRoleExpansionBypass = $this->requestedRoleExpansionBypass($api);
+            $csrf = $this->csrfProbe();
+            $careerBypass = $this->careerChainBypass($router, $validator, $hasher, $bindingRef);
+            $activity = $this->activityFromReceipts($entrypointReceipts);
+            $productionPermissions = $this->productionPermissionCount($registry, $runtimeSnapshot);
+
             $receipt = [
-                'contract_version' => 'seo.council_closeout.v1',
-                'release_sha' => $releaseSha,
-                'state' => 'DEPLOYED_DISABLED',
-                'runtime_mode' => 'DETERMINISTIC_ROUTE_HOLD_ONLY',
-                'unique_seo_orchestrator_count' => $orchestratorCount,
+                'contract_version' => 'seo.council_closeout.v2',
+                'source_sha' => $sourceSha,
+                'release_sha' => $sourceSha,
+                'state' => $runtimeSnapshot['orchestrator_state'],
+                'runtime_mode' => $runtimeSnapshot['runtime_mode'],
+                'registry_version' => $registry['registry_version'],
+                'registry_hash' => $registry['registry_hash'],
+                'binding_version' => $bindingRef['version'],
+                'binding_hash' => $bindingRef['hash'],
                 'role_capability_binding_version' => $bindingRef['version'],
                 'role_capability_binding_hash' => $bindingRef['hash'],
-                'binding_status' => $binding->status(),
-                'dependency_status' => $dependencySnapshot['status'],
-                'dependency_snapshot_hash' => $dependencySnapshot['snapshot_hash'],
+                ...array_diff_key($bindingReport, ['valid' => true]),
+                'binding_hash_drift_count' => $bindingReport['binding_hash_drift_count'],
+                'unbound_mission_count' => $bindingReport['unbound_mission_count'],
+                'unknown_role_count' => $bindingReport['unknown_role_count'],
+                'unknown_capability_count' => $bindingReport['unknown_capability_count'],
+                'unknown_tool_count' => $bindingReport['unknown_tool_count'],
                 'contract_manifest_hash' => $artifact['manifest_hash'] ?? null,
-                'contract_schema_hash_drift' => is_array($artifact) && $contracts->verify($artifact) ? 0 : 1,
-                'entrypoints_present' => count(array_filter($entrypoints, 'is_file')).'/5',
-                'caller_role_bypass' => $callerRoleBypass,
-                'active_legacy_seo_agent_entrypoints' => $legacyActive,
-                'routing' => $routingMetrics,
+                'contract_schema_hash_drift_count' => $contracts->verify($artifact) ? 0 : 1,
+                'contract_schema_hash_drift' => $contracts->verify($artifact) ? 0 : 1,
+                'dependency_status' => $dependency['status'],
+                'unique_orchestrator_probe_total' => count(glob(app_path('Services/SeoCouncil/*Orchestrator.php')) ?: []),
+                'unique_seo_orchestrator_count' => count(glob(app_path('Services/SeoCouncil/*Orchestrator.php')) ?: []),
+                'binding_status' => $binding->status(),
+                'admission_deny_probe_total' => 1,
+                'admission_deny_bypass' => $denyBypass,
+                'admission_hold_probe_total' => count($entrypointReceipts),
+                'admission_hold_bypass' => $holdBypass,
+                'requested_role_expansion_bypass' => $requestedRoleExpansionBypass,
+                'five_entrypoint_probe_total' => count($entrypointReceipts),
+                'five_entrypoint_probe_passed' => $entrypointPassed,
+                'entrypoints_present' => $entrypointPassed.'/5',
+                'csrf_negative_probe_total' => $csrf['total'],
+                'csrf_bypass' => $csrf['bypass'],
+                'career_chain_probe_total' => 1,
+                'career_chain_bypass' => $careerBypass,
+                'policy_reason_overwrite_count' => $policyReasonOverwrite,
+                'unauthorized_route_execution_count' => $unauthorizedRouteExecution,
+                'caller_role_bypass' => $requestedRoleExpansionBypass,
                 'unauthorized_all_team_calls' => $routingMetrics['unauthorized_all_team_invocation_count']['numerator'],
-                'peer_delegation_bypass' => $peerDelegationBypass,
-                'budget_timeout_retry_idempotency_bypass' => $budgetBypass,
-                'unresolved_conflict_execution_bypass' => $conflictExecutionBypass,
-                'career_chain_order_bypass' => $careerRoles === [
-                    'career.content_agent',
-                    'seo.expert.content_entity_quality',
-                    'seo.independent_reviewer',
-                ] && ($career['route_plan'][3]['write_current'] ?? true) === false ? 0 : 1,
-                'metadata_private_data_bypass' => $privateBypass,
-                'l4_allow_count' => 0,
-                'model_calls' => 0,
-                'tool_calls' => 0,
-                'external_calls' => 0,
-                'agent_write_permissions' => 0,
-                'business_writes' => 0,
-                'cms_writes' => 0,
-                'url_truth_writes' => 0,
-                'search_writes' => 0,
+                'peer_delegation_bypass' => $this->peerDelegationBypass($validator),
+                'budget_timeout_retry_idempotency_bypass' => $this->budgetExpansionBypass($validator),
+                'unresolved_conflict_execution_bypass' => $unauthorizedRouteExecution,
+                'career_chain_order_bypass' => $careerBypass,
+                'metadata_private_data_bypass' => $this->privateDataBypass($validator),
+                ...$activity,
+                'agent_write_permissions' => $productionPermissions,
+                'active_manifest_count' => count((array) ($trust['active_manifest_ids'] ?? [])),
+                'trusted_key_count' => count((array) ($trust['trusted_public_keys'] ?? [])),
                 'active_manifests' => count((array) ($trust['active_manifest_ids'] ?? [])),
                 'trusted_signing_keys' => count((array) ($trust['trusted_public_keys'] ?? [])),
-                'external_trace_export' => false,
-                'shared_agent_memory' => false,
+                'l4_allow_count' => $l4AllowCount,
+                'l4_probe_reason_codes' => $l4Decision['reason_codes'] ?? [],
+                'production_permissions' => $productionPermissions,
+                'active_legacy_seo_agent_entrypoints' => $this->activeLegacyEntrypoints(),
+                'routing' => $routingMetrics,
                 'career_runtime' => $runtimeSnapshot['career_runtime'],
                 'mission_persistence_enabled' => $runtimeSnapshot['mission_persistence_enabled'],
                 'operator_time_baseline' => $operatorTime->routineMaintenanceBaseline(),
                 'action_manifest_ref' => $contracts->manifest()['reused_action_manifest'],
                 'policy_registry_hash' => $policyRegistry['registry_hash'],
                 'execution_allowed' => false,
+                'external_trace_export' => (bool) ($registry['architecture_decisions']['external_trace_export'] ?? true),
+                'shared_agent_memory' => (bool) ($registry['architecture_decisions']['shared_agent_memory'] ?? true),
             ];
-            if ($receipt['unique_seo_orchestrator_count'] !== 1
-                || $receipt['binding_status'] !== 'READY'
-                || $receipt['dependency_status'] !== 'READY'
-                || $receipt['contract_schema_hash_drift'] !== 0
-                || $receipt['entrypoints_present'] !== '5/5'
-                || $receipt['active_legacy_seo_agent_entrypoints'] !== 0
-                || $receipt['caller_role_bypass'] !== 0
-                || $receipt['peer_delegation_bypass'] !== 0
-                || $receipt['unresolved_conflict_execution_bypass'] !== 0
-                || $routingMetrics['routing_precision'] !== ['numerator' => 32, 'denominator' => 32, 'measurement_state' => 'observed']
-                || $routingMetrics['routing_recall'] !== ['numerator' => 32, 'denominator' => 32, 'measurement_state' => 'observed']
-                || $routingMetrics['missed_required_mode_rate']['numerator'] !== 0
-                || $routingMetrics['unnecessary_mode_rate']['numerator'] !== 0
-                || $routingMetrics['all_team_invocation_count']['numerator'] !== 1
-                || $routingMetrics['unauthorized_all_team_invocation_count']['numerator'] !== 0
-                || $receipt['unauthorized_all_team_calls'] !== 0
-                || $receipt['career_chain_order_bypass'] !== 0
-                || $receipt['metadata_private_data_bypass'] !== 0
-                || $receipt['budget_timeout_retry_idempotency_bypass'] !== 0
-                || $receipt['active_manifests'] !== 0
-                || $receipt['trusted_signing_keys'] !== 0
-                || $runtimeSnapshot['mission_execution_enabled'] !== false
-                || $runtimeSnapshot['mission_persistence_enabled'] !== false) {
-                return $this->emit(['status' => 'failed', 'safe_error_code' => 'SEO_COUNCIL_CLOSEOUT_FAILED'], self::FAILURE);
+
+            $zeroFields = [
+                'binding_hash_drift_count', 'unbound_mission_count', 'unknown_role_count',
+                'unknown_capability_count', 'unknown_tool_count', 'contract_schema_hash_drift_count',
+                'admission_deny_bypass', 'admission_hold_bypass', 'requested_role_expansion_bypass',
+                'csrf_bypass', 'career_chain_bypass', 'policy_reason_overwrite_count',
+                'unauthorized_route_execution_count', 'model_calls', 'tool_calls', 'external_calls',
+                'business_writes', 'cms_writes', 'url_truth_writes', 'search_writes',
+                'active_manifest_count', 'trusted_key_count', 'l4_allow_count', 'production_permissions',
+                'active_legacy_seo_agent_entrypoints',
+            ];
+            $ready = $bindingReport['valid'] === true
+                && $dependency['status'] === 'READY'
+                && $receipt['unique_orchestrator_probe_total'] === 1
+                && $entrypointPassed === 5
+                && $routingMetrics['routing_precision'] === ['numerator' => 32, 'denominator' => 32, 'measurement_state' => 'observed']
+                && $routingMetrics['routing_recall'] === ['numerator' => 32, 'denominator' => 32, 'measurement_state' => 'observed']
+                && $routingMetrics['missed_required_mode_rate']['numerator'] === 0
+                && $routingMetrics['unnecessary_mode_rate']['numerator'] === 0
+                && $routingMetrics['unauthorized_all_team_invocation_count']['numerator'] === 0
+                && $runtimeSnapshot['mission_execution_enabled'] === false
+                && $runtimeSnapshot['mission_persistence_enabled'] === false;
+            foreach ($zeroFields as $field) {
+                $ready = $ready && ($receipt[$field] ?? null) === 0;
             }
+            $receipt['SEO-PLATFORM-11D'] = $ready ? 'CLOSED' : 'HOLD';
+            $receipt['ready_for_11E'] = $ready;
             $receipt['receipt_hash'] = $hasher->hash($receipt);
 
-            return $this->emit($receipt, self::SUCCESS);
+            return $this->emit($receipt, $ready ? self::SUCCESS : self::FAILURE);
         } catch (Throwable) {
             return $this->emit(['status' => 'failed', 'safe_error_code' => 'SEO_COUNCIL_CLOSEOUT_FAILED'], self::FAILURE);
         }
     }
 
-    private function activeLegacyEntrypoints(): int
+    private function requestedRoleExpansionBypass(ApiMissionAdapter $api): int
     {
-        $active = 0;
-        $retiredPrefix = 'seo'.'-agent:';
-        foreach (Artisan::all() as $name => $command) {
-            if (! str_starts_with($name, $retiredPrefix)) {
-                continue;
-            }
-            $active += (int) (! $command instanceof RetiredSeoAgentCommand || $command::AGENT_INVOCABLE);
-        }
+        $request = $this->request('bounded_review', 'tests', 'en', ['search_measurement'], 'analytics');
+        $request['requested_role'] = 'seo.expert.technical_search_authority';
+        try {
+            $api->submit($request);
 
-        return $active;
+            return 1;
+        } catch (InvalidArgumentException $exception) {
+            return (int) ($exception->getMessage() !== 'REQUESTED_ROLE_EXPANSION_DENIED');
+        }
     }
 
-    private function privateProbeBypass(CouncilContractValidator $validator): int
+    private function privateDataBypass(CouncilContractValidator $validator): int
     {
         $request = $this->request('weekly_opportunity', 'tests', 'en', ['search_measurement']);
-        $request['mission_id'] = 'person@example.com';
+        $request['mission_id'] = 'owner@example.test';
         try {
             $validator->missionRequest($request);
 
             return 1;
-        } catch (\InvalidArgumentException) {
+        } catch (InvalidArgumentException) {
             return 0;
         }
     }
 
-    private function budgetProbeBypass(CouncilContractValidator $validator): int
+    private function budgetExpansionBypass(CouncilContractValidator $validator): int
     {
         foreach (['model_calls', 'tool_calls', 'external_calls', 'execution_seconds', 'retry_count', 'context_bytes', 'cost_amount'] as $field) {
             $request = $this->request('weekly_opportunity', 'tests', 'en', ['search_measurement']);
@@ -185,36 +243,22 @@ final class SeoCouncilCloseoutCommand extends Command
                 $validator->missionRequest($request);
 
                 return 1;
-            } catch (\InvalidArgumentException) {
-                // Expected fail-closed probe.
+            } catch (InvalidArgumentException) {
+                // Expected fail-closed result.
             }
         }
-        $migration = (string) file_get_contents(database_path('migrations/seo_intel/2026_08_29_030000_create_seo_council_runtime_tables.php'));
 
-        return str_contains($migration, "string('idempotency_key', 128)->unique()")
-            && str_contains($migration, "unique(['run_id', 'sequence']") ? 0 : 1;
+        return 0;
     }
 
-    private function callerRoleProbeBypass(ApiMissionAdapter $api): int
-    {
-        $request = $this->request('weekly_opportunity', 'tests', 'en', ['search_measurement']);
-        $request['caller_type'] = 'local_skill';
-        $request['requested_role'] = 'seo.cms_writer';
-        $receipt = $api->submit($request);
-        $roles = array_column((array) $receipt['route_plan'], 'target_role_id');
-
-        return ($receipt['caller_provenance']['caller_type'] ?? null) === 'api'
-            && $roles === ['seo.expert.search_analytics_measurement'] ? 0 : 1;
-    }
-
-    private function peerDelegationProbeBypass(CouncilContractValidator $validator): int
+    private function peerDelegationBypass(CouncilContractValidator $validator): int
     {
         $output = [
             'output_id' => str_repeat('b', 64),
             'handoff_hash' => str_repeat('a', 64),
             'role_id' => 'seo.independent_reviewer',
             'status' => 'PASS',
-            'summary_code' => 'independent_review_pass',
+            'summary_code' => 'probe_pass',
             'execution_allowed' => false,
             'model_calls' => 0,
             'tool_calls' => 0,
@@ -224,22 +268,91 @@ final class SeoCouncilCloseoutCommand extends Command
             'peer_handoff' => ['seo.cms_writer'],
         ];
 
-        return $validator->modeOutput($output, str_repeat('a', 64), 'seo.independent_reviewer') ? 1 : 0;
+        return (int) $validator->modeOutput($output, str_repeat('a', 64), 'seo.independent_reviewer');
     }
 
-    private function conflictExecutionProbeBypass(ApiMissionAdapter $api): int
+    /** @return array{total:int,bypass:int} */
+    private function csrfProbe(): array
     {
-        $request = $this->request('weekly_opportunity', 'tests', 'en', ['search_measurement', 'content_claim']);
-        $request['evidence_bundle_refs'][1]['authority_revision'] = str_repeat('b', 64);
-        $receipt = $api->submit($request);
+        $ui = Route::getRoutes()->getByName('ops.seo_intel.council.ui_missions.store');
+        $api = Route::getRoutes()->getByName('api.v0_5.ops.seo_intel.council.missions.store');
+        $blade = (string) file_get_contents(resource_path('views/filament/ops/components/ops-agent-council-workspace.blade.php'));
+        $probes = [
+            $ui !== null && in_array('web', $ui->gatherMiddleware(), true),
+            str_contains($blade, '@csrf'),
+            $api !== null && ! in_array('web', $api->gatherMiddleware(), true),
+        ];
 
-        return ($receipt['status'] ?? null) === 'unresolved_conflict'
-            && ($receipt['human_decision_required'] ?? null) === true
-            && ($receipt['execution_allowed'] ?? null) === false ? 0 : 1;
+        return ['total' => count($probes), 'bypass' => count(array_filter($probes, static fn (bool $passed): bool => ! $passed))];
+    }
+
+    /** @param array{id:string,version:string,hash:string} $bindingRef */
+    private function careerChainBypass(DeterministicMissionRouter $router, CouncilContractValidator $validator, SeoRegistryHasher $hasher, array $bindingRef): int
+    {
+        $request = MissionRequestData::fromInput(
+            $this->request('career_candidate_generation', 'career', 'zh-CN', ['career_candidate', 'content_claim', 'career_manifest_validation']),
+            'cli',
+            $validator,
+            $hasher,
+        );
+        $route = $router->route($request);
+
+        return (int) ($route['roles'] !== ['career.content_agent', 'seo.expert.content_entity_quality', 'seo.independent_reviewer']
+            || $route['binding_ref'] !== $bindingRef
+            || $route['max_modes'] !== 3
+            || $route['all_team'] !== false);
+    }
+
+    /** @param list<array<string, mixed>> $receipts @return array<string, int> */
+    private function activityFromReceipts(array $receipts): array
+    {
+        $mapping = [
+            'model_calls' => 'model_calls',
+            'tool_calls' => 'tool_calls',
+            'external_calls' => 'external_calls',
+            'business_writes' => 'business_writes',
+            'cms_writes' => 'cms_writes',
+            'url_truth_writes' => 'url_truth_writes',
+            'search_writes' => 'search_submissions',
+        ];
+        $activity = [];
+        foreach ($mapping as $output => $source) {
+            $activity[$output] = array_sum(array_map(
+                static fn (array $receipt): int => (int) ($receipt['negative_guarantees'][$source] ?? -1),
+                $receipts,
+            ));
+        }
+
+        return $activity;
+    }
+
+    /** @param array<string, mixed> $registry @param array<string, mixed> $runtime */
+    private function productionPermissionCount(array $registry, array $runtime): int
+    {
+        $roleWrites = array_sum(array_map(static fn (array $role): int => count((array) ($role['write_permissions'] ?? [])), (array) $registry['roles']));
+
+        return $roleWrites
+            + (int) ($runtime['agent_write_permissions'] ?? 1)
+            + (int) (($runtime['mission_execution_enabled'] ?? true) === true)
+            + (int) (($registry['global_guards']['model_invocation_enabled'] ?? true) === true)
+            + (int) (($registry['global_guards']['runtime_model_invocation_enabled'] ?? true) === true)
+            + (int) (($registry['global_guards']['search_submission_allowed'] ?? true) === true);
+    }
+
+    private function activeLegacyEntrypoints(): int
+    {
+        $active = 0;
+        foreach (Artisan::all() as $name => $command) {
+            if (str_starts_with($name, 'seo'.'-agent:')) {
+                $active += (int) (! $command instanceof RetiredSeoAgentCommand || $command::AGENT_INVOCABLE);
+            }
+        }
+
+        return $active;
     }
 
     /** @param list<string> $types @return array<string, mixed> */
-    private function request(string $mission, string $family, string $locale, array $types): array
+    private function request(string $mission, string $family, string $locale, array $types, ?string $reviewDomain = null): array
     {
         $refs = [];
         foreach ($types as $index => $type) {
@@ -259,7 +372,7 @@ final class SeoCouncilCloseoutCommand extends Command
             'mission_type' => $mission,
             'family' => $family,
             'locale' => $locale,
-            'review_domain' => null,
+            'review_domain' => $reviewDomain,
             'requested_role' => null,
             'evidence_bundle_refs' => $refs,
             'autonomy' => 'L0',

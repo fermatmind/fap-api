@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\SeoCouncil;
 
-use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher;
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use App\Services\SeoAgentGovernance\SeoRoleCapabilityRegistry;
-use App\Services\SeoAgentPolicyGateway\PolicyGatewayCallerGuard;
 use App\Services\SeoAgentPolicyGateway\PolicyGatewayRegistry;
 use App\Services\SeoCouncil\Contracts\CouncilContractValidator;
 use App\Services\SeoCouncil\Contracts\MissionRequestData;
@@ -15,9 +13,10 @@ use App\Services\SeoCouncil\Governance\CouncilDependencySnapshotBuilder;
 use App\Services\SeoCouncil\Governance\RoleCapabilityBindingRegistry;
 use App\Services\SeoCouncil\Governance\RuntimeCapabilitySnapshotBuilder;
 use App\Services\SeoCouncil\Persistence\CouncilRunRepository;
+use App\Services\SeoCouncil\Policy\CouncilAdmissionGateway;
+use App\Services\SeoCouncil\Policy\CouncilAdmissionRequestFactory;
 use App\Services\SeoCouncil\Routing\CouncilConflictResolver;
 use App\Services\SeoCouncil\Routing\DeterministicMissionRouter;
-use Carbon\CarbonImmutable;
 
 final class SeoCouncilOrchestrator
 {
@@ -40,13 +39,13 @@ final class SeoCouncilOrchestrator
 
     public function __construct(
         private readonly SeoRegistryHasher $hasher,
-        private readonly SeoEvidenceCanonicalHasher $evidenceHasher,
         private readonly SeoRoleCapabilityRegistry $roles,
         private readonly RoleCapabilityBindingRegistry $binding,
         private readonly CouncilDependencySnapshotBuilder $dependencies,
         private readonly RuntimeCapabilitySnapshotBuilder $runtime,
         private readonly PolicyGatewayRegistry $policy,
-        private readonly PolicyGatewayCallerGuard $callers,
+        private readonly CouncilAdmissionGateway $admissionGateway,
+        private readonly CouncilAdmissionRequestFactory $admissionRequests,
         private readonly DeterministicMissionRouter $router,
         private readonly CouncilConflictResolver $conflicts,
         private readonly CouncilContractValidator $contracts,
@@ -63,38 +62,63 @@ final class SeoCouncilOrchestrator
                 : $this->idempotencyConflict($request, $existing);
         }
 
-        $resume = $request->payload['resume_from'];
-        if (is_array($resume) && ! $this->repository->resumeValid((string) $resume['receipt_hash'], (string) $resume['step_hash'])) {
-            return $this->terminalReceipt($request, 'STALE_RESUME_HOLD', 'resume_hash_verification_failed', [], [], null);
-        }
-
         $registry = $this->roles->registry();
         $binding = $this->binding->reference();
         $runId = $this->runId($request, $registry, $binding);
         $releaseSha = $this->releaseSha();
         $dependency = $this->dependencies->snapshot($releaseSha);
         $runtime = $this->runtime->snapshot();
-        $route = $this->router->route($request);
-        $admission = $this->callers->admission(
+        $baseContext = [
+            'registry' => $registry,
+            'binding' => $binding,
+            'dependency' => $dependency,
+            'runtime' => $runtime,
+        ];
+        if ($dependency['status'] !== 'READY') {
+            return $this->terminalReceipt($request, 'DEPENDENCY_HOLD', 'dependency_hash_or_version_hold', [], [], $baseContext);
+        }
+
+        $admission = $this->admissionGateway->admission(
             $request->callerType,
-            $this->admissionRequest($request),
+            $this->admissionRequests->make($request),
         );
+        $baseContext['admission'] = $admission;
+        $decision = (string) ($admission['decision'] ?? 'DENY');
+        if ($decision === 'DENY' || $decision === 'HOLD') {
+            $reasonCodes = array_values(array_filter((array) ($admission['reason_codes'] ?? []), 'is_string'));
+
+            return $this->terminalReceipt(
+                $request,
+                'POLICY_HOLD',
+                $reasonCodes[0] ?? 'POLICY_DECISION_INVALID',
+                [],
+                [],
+                $baseContext,
+            );
+        }
+        if ($decision !== 'ALLOW' || ($admission['execution_allowed'] ?? null) !== false) {
+            return $this->terminalReceipt($request, 'POLICY_HOLD', 'POLICY_DECISION_INVALID', [], [], $baseContext);
+        }
+
+        $resume = $request->payload['resume_from'];
+        if (is_array($resume) && ! $this->repository->resumeValid((string) $resume['receipt_hash'], (string) $resume['step_hash'])) {
+            return $this->terminalReceipt($request, 'STALE_RESUME_HOLD', 'resume_hash_verification_failed', [], [], $baseContext);
+        }
+
+        $route = $this->router->route($request);
         $routePlan = $this->routePlan($request, $route['roles'], $runId);
         $conflicts = $this->evidenceConflicts($request, $runId);
 
         $status = 'SOURCE_CAPABILITY_UNAVAILABLE';
         $stopReason = '11e_to_11j_modes_unavailable';
-        if (($admission['decision'] ?? null) === 'DENY') {
-            $status = 'POLICY_HOLD';
-            $stopReason = '11c_admission_denied';
-        } elseif ($dependency['status'] !== 'READY') {
-            $status = 'DEPENDENCY_HOLD';
-            $stopReason = 'dependency_hash_or_version_hold';
-        } elseif (in_array($route['status'], ['ROUTING_SCOPE_HOLD', 'MISSION_SCOPE_HOLD'], true)) {
+        if (in_array($route['status'], ['ROUTING_SCOPE_HOLD', 'MISSION_SCOPE_HOLD', 'REQUESTED_ROLE_EXPANSION_HOLD'], true)) {
             $status = $route['status'];
             $stopReason = 'deterministic_route_scope_hold';
-        } elseif ($this->evidenceStatus($request) !== 'READY') {
-            $status = $this->evidenceStatus($request);
+        } elseif ($route['status'] === 'EVIDENCE_HOLD') {
+            $status = 'EVIDENCE_HOLD';
+            $stopReason = 'required_binding_evidence_missing';
+        } elseif ($this->admissionRequests->evidenceStatus($request) !== 'READY') {
+            $status = $this->admissionRequests->evidenceStatus($request);
             $stopReason = 'evidence_context_not_ready';
         } elseif ($conflicts !== []) {
             $status = 'unresolved_conflict';
@@ -112,11 +136,7 @@ final class SeoCouncilOrchestrator
             $routePlan,
             $conflicts,
             [
-                'registry' => $registry,
-                'binding' => $binding,
-                'dependency' => $dependency,
-                'runtime' => $runtime,
-                'admission' => $admission,
+                ...$baseContext,
                 'route' => $route,
             ],
         );
@@ -193,7 +213,10 @@ final class SeoCouncilOrchestrator
                 'active_manifests' => 0,
                 'trusted_signing_keys' => 0,
             ],
-            'human_decision_required' => $status === 'unresolved_conflict',
+            'human_decision_required' => $status === 'unresolved_conflict'
+                || ($status === 'POLICY_HOLD'
+                    && (($context['admission']['human_decision_required'] ?? null)
+                        ?? (($context['admission']['decision'] ?? null) === 'HOLD'))),
             'execution_allowed' => false,
             'supersedes_receipt_hash' => is_array($resume) ? $resume['receipt_hash'] : null,
         ];
@@ -214,7 +237,7 @@ final class SeoCouncilOrchestrator
         $stopStep = match ($status) {
             'DEPENDENCY_HOLD' => 'dependency_snapshot',
             'POLICY_HOLD' => '11c_admission',
-            'ROUTING_SCOPE_HOLD', 'MISSION_SCOPE_HOLD' => 'deterministic_mission_classification',
+            'ROUTING_SCOPE_HOLD', 'MISSION_SCOPE_HOLD', 'REQUESTED_ROLE_EXPANSION_HOLD' => 'deterministic_mission_classification',
             'EVIDENCE_HOLD', 'MEASUREMENT_HOLD' => 'evidence_context_verification',
             'unresolved_conflict' => 'conflict_resolution',
             'STALE_RESUME_HOLD' => 'validate_privacy_scan',
@@ -234,7 +257,7 @@ final class SeoCouncilOrchestrator
                 'binding_hash' => $bindingHash,
                 'evidence_hash' => $request->evidenceHash,
                 'policy_revision' => ['version' => $policy['registry_version'], 'hash' => $policy['registry_hash']],
-                'status' => $stopped ? 'NOT_RUN' : ($isStop ? $status : 'PASS'),
+                'status' => $stopped ? 'NOT_RUN' : ($isStop ? $this->stopStepStatus($status, $context) : 'PASS'),
                 'stop_reason' => $isStop ? $stopReason : null,
                 'summary_code' => $stopped ? 'terminal_stop' : ($isStop ? $stopReason : 'deterministic_pass'),
                 'count' => 0,
@@ -247,9 +270,22 @@ final class SeoCouncilOrchestrator
         return $steps;
     }
 
+    /** @param array<string, mixed>|null $context */
+    private function stopStepStatus(string $status, ?array $context): string
+    {
+        if ($status === 'POLICY_HOLD') {
+            $decision = (string) ($context['admission']['decision'] ?? 'HOLD');
+
+            return in_array($decision, ['DENY', 'HOLD'], true) ? $decision : 'HOLD';
+        }
+
+        return $status;
+    }
+
     /** @param list<string> $roles @return list<array<string, mixed>> */
     private function routePlan(MissionRequestData $request, array $roles, string $runId): array
     {
+        $mission = $this->binding->mission((string) $request->payload['mission_type']);
         $plan = [];
         $previousHandoff = null;
         foreach ($roles as $index => $roleId) {
@@ -267,7 +303,7 @@ final class SeoCouncilOrchestrator
                 ],
                 'evidence_context_hash' => $request->evidenceHash,
                 'budget' => $request->payload['budget'],
-                'stop_conditions' => ['WARN', 'BLOCKED', 'HOLD', 'EVIDENCE_MISSING', 'AUTHORITY_DRIFT'],
+                'stop_conditions' => $mission['stop_conditions'],
                 'previous_handoff_hash' => $previousHandoff,
                 'previous_output_hash' => null,
                 'previous_output_required' => $previousHandoff !== null,
@@ -276,14 +312,15 @@ final class SeoCouncilOrchestrator
             $plan[] = ['kind' => 'role_handoff', ...$handoff];
             $previousHandoff = $handoff['handoff_hash'];
         }
-        if ($request->payload['mission_type'] === 'career_candidate_generation' && $roles !== []) {
+        if (is_array($mission['deterministic_compile'] ?? null) && $roles !== []) {
+            $compile = $mission['deterministic_compile'];
             $plan[] = [
                 'kind' => 'deterministic_dry_compile',
-                'operation' => 'career_ten_block_current_package_dry_compile',
+                'operation' => $compile['operation'],
                 'previous_handoff_hash' => $previousHandoff,
-                'consumes_previous_output_hash' => true,
-                'write_current' => false,
-                'gates' => ['claim', 'locale', 'seo', 'duplicate', 'material'],
+                'consumes_previous_output_hash' => $compile['consumes_previous_output_hash'],
+                'write_current' => $compile['write_current'],
+                'gates' => $compile['gates'],
                 'execution_allowed' => false,
             ];
         }
@@ -300,94 +337,6 @@ final class SeoCouncilOrchestrator
         }
 
         return [$this->conflicts->resolve($runId, 'claim_evidence', 'claim_evidence', false, true)];
-    }
-
-    private function evidenceStatus(MissionRequestData $request): string
-    {
-        $refs = (array) $request->payload['evidence_bundle_refs'];
-        if ($refs === []) {
-            return 'EVIDENCE_HOLD';
-        }
-        foreach ($refs as $ref) {
-            if (($ref['status'] ?? null) !== 'READY') {
-                return (string) $ref['status'];
-            }
-        }
-
-        return 'READY';
-    }
-
-    /** @return array<string, mixed> */
-    private function admissionRequest(MissionRequestData $request): array
-    {
-        $now = CarbonImmutable::now('UTC');
-        $roleId = $this->policyAdmissionRole($request);
-        $status = $this->evidenceStatus($request);
-        $refs = array_map(static fn (array $ref): array => [
-            'bundle_id' => $ref['bundle_id'],
-            'bundle_version' => $ref['bundle_version'],
-            'bundle_hash' => $ref['bundle_hash'],
-        ], (array) $request->payload['evidence_bundle_refs']);
-        $revisions = array_values(array_unique(array_column((array) $request->payload['evidence_bundle_refs'], 'authority_revision')));
-        $context = [
-            'schema_version' => 'seo.evidence_context.v1',
-            'context_id' => $this->evidenceHasher->hash([$request->requestHash, $roleId]),
-            'context_version' => 1,
-            'mission_id' => $request->missionId(),
-            'mission_type' => $request->payload['mission_type'],
-            'role_id' => $roleId,
-            'page_family' => $request->payload['family'],
-            'locale' => $request->payload['locale'],
-            'built_at' => $now->format('Y-m-d\TH:i:s\Z'),
-            'expires_at' => $now->addHour()->format('Y-m-d\TH:i:s\Z'),
-            'bundle_refs' => $refs,
-            'source_capability_states' => $refs === [] ? ['unavailable'] : ['available'],
-            'evidence_summary' => ['bundle_count' => count($refs), 'private_data_present' => false],
-            'payload' => ['revision_hash' => $revisions[0] ?? str_repeat('0', 64)],
-            'status' => in_array($status, ['READY', 'EVIDENCE_HOLD', 'SOURCE_CAPABILITY_UNAVAILABLE', 'MEASUREMENT_HOLD'], true) ? $status : 'EVIDENCE_HOLD',
-            'execution_allowed' => false,
-            'model_invocation' => false,
-            'tool_invocation' => false,
-            'write_permissions' => [],
-            'tool_allowlist' => [],
-            'egress_allowlist' => [],
-        ];
-        $context['context_hash'] = $this->evidenceHasher->hash($context);
-
-        return [
-            'schema_version' => 'seo.policy_admission_request.v1',
-            'caller_type' => $request->callerType,
-            'mission_id' => $request->missionId(),
-            'mission_type' => $request->payload['mission_type'],
-            'requested_role_id' => $roleId,
-            'family' => $request->payload['family'],
-            'locale' => $request->payload['locale'],
-            'claim_risk' => 'R1',
-            'autonomy' => 'L0',
-            'budget' => ['model_calls' => 0, 'tool_calls' => 0, 'execution_seconds' => 0, 'cost_amount' => 0, 'currency' => 'USD'],
-            'deadline_seconds' => 0,
-            'tool_scope' => [],
-            'egress_scope' => [],
-            'evidence_context' => $context,
-            'request_metadata' => ['source_label' => 'seo-council', 'correlation_hash' => $request->requestHash],
-        ];
-    }
-
-    private function policyAdmissionRole(MissionRequestData $request): string
-    {
-        return match ($request->payload['mission_type']) {
-            'bounded_review' => match ($request->payload['review_domain']) {
-                'technical' => 'seo.expert.technical_search_authority',
-                'analytics' => 'seo.expert.search_analytics_measurement',
-                'content' => 'seo.expert.content_entity_quality',
-                'competitor' => 'seo.expert.competitor_research',
-                'stability' => 'seo.expert.public_content_stability',
-                'cro' => 'seo.expert.commercial_funnel_cro',
-            },
-            'independent_registry_review' => 'seo.independent_reviewer',
-            'career_candidate_generation' => 'career.content_agent',
-            default => 'seo.orchestrator',
-        };
     }
 
     /** @param array<string, mixed> $existing @return array<string, mixed> */

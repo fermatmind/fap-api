@@ -4625,7 +4625,7 @@
         },
         "/api/v0.5/ops/seo-intel/council/ui-missions": {
             "post": {
-                "operationId": "api.v0_5.ops.seo_intel.council.ui_missions.store",
+                "operationId": "ops.seo_intel.council.ui_missions.store",
                 "tags": [
                     "api:v0.5"
                 ],
@@ -4636,10 +4636,7 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Ops\\SeoIntel\\SeoCouncilMissionController@storeUi",
                 "x-laravel-middleware": [
-                    "api",
-                    "App\\Http\\Middleware\\EncryptCookies",
-                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "web",
                     "App\\Http\\Middleware\\SetOpsRequestContext",
                     "App\\Http\\Middleware\\AdminAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
@@ -4648,7 +4645,7 @@
                     "App\\Http\\Middleware\\EnsureSeoIntelReadAuthorized",
                     "App\\Http\\Middleware\\EnsureSeoCouncilMissionAuthorized"
                 ],
-                "x-laravel-name": "api.v0_5.ops.seo_intel.council.ui_missions.store"
+                "x-laravel-name": "ops.seo_intel.council.ui_missions.store"
             }
         },
         "/api/v0.5/ops/seo-intel/experiment-ledger": {

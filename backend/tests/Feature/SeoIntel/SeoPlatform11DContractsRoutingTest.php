@@ -17,9 +17,9 @@ final class SeoPlatform11DContractsRoutingTest extends TestCase
     {
         $registry = app(CouncilContractRegistry::class);
         $manifest = $registry->manifest();
-        $artifact = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-council-contract-manifest.v1.json')), true, 512, JSON_THROW_ON_ERROR);
+        $artifact = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-council-contract-manifest.v2.json')), true, 512, JSON_THROW_ON_ERROR);
 
-        $this->assertCount(10, $manifest['contracts']);
+        $this->assertCount(11, $manifest['contracts']);
         $this->assertTrue($registry->verify($artifact));
         $this->assertSame('seo.action_scoped_manifest.v1', $manifest['reused_action_manifest']['id']);
         $this->assertSame('backend/resources/seo-agent/policy-gateway/schemas/seo.action_scoped_manifest.v1.schema.json', $manifest['reused_action_manifest']['path']);
@@ -31,12 +31,13 @@ final class SeoPlatform11DContractsRoutingTest extends TestCase
     {
         $registry = app(RoleCapabilityBindingRegistry::class);
         $binding = $registry->binding();
-        $bound = array_merge(...array_values($binding['roles']));
+        $bound = array_merge(...array_values($binding['role_bindings']));
 
         $this->assertSame('READY', $registry->status());
-        $this->assertCount(9, $binding['roles']);
+        $this->assertCount(9, $binding['role_bindings']);
+        $this->assertCount(7, $binding['missions']);
         $this->assertSame([], array_values(array_intersect($bound, $binding['prohibited_capabilities'])));
-        $this->assertSame('1.0.0', $registry->reference()['version']);
+        $this->assertSame('2.0.0', $registry->reference()['version']);
         $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $registry->reference()['hash']);
         foreach (['seo.cms_writer', 'seo.search_submission', 'seo.url_truth_writer', 'career.current_merger', 'career.page_assembly_import'] as $writeCapability) {
             $this->assertNotContains($writeCapability, $bound);

@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:fermatmind:seo:role-capability-binding:v2",
+  "schema_id": "seo.role_capability_binding.v2",
+  "schema_version": "2.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "binding_id", "binding_version", "supersedes", "registry_ref", "runtime_state", "requested_role_policy", "evidence_type_registry", "role_bindings", "deterministic_tool_registry", "missions", "prohibited_capabilities", "negative_guarantees", "binding_hash"],
+  "properties": {
+    "schema_version": {"const": "seo.role_capability_binding.v2"},
+    "binding_id": {"const": "fermatmind.seo.role_capability_binding"},
+    "binding_version": {"const": "2.0.0"},
+    "supersedes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "path", "canonical_hash", "file_sha256"],
+      "properties": {
+        "version": {"const": "1.0.0"},
+        "path": {"type": "string"},
+        "canonical_hash": {"$ref": "#/$defs/sha256"},
+        "file_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "registry_ref": {"$ref": "#/$defs/reference"},
+    "runtime_state": {"const": "dormant_not_authorized"},
+    "requested_role_policy": {"const": "non_authoritative_selected_role_hint_only"},
+    "evidence_type_registry": {"$ref": "#/$defs/stringSet"},
+    "role_bindings": {
+      "type": "object",
+      "minProperties": 9,
+      "maxProperties": 9,
+      "additionalProperties": {"$ref": "#/$defs/stringSet"}
+    },
+    "deterministic_tool_registry": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/tool"}
+    },
+    "missions": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/mission"}
+    },
+    "prohibited_capabilities": {"$ref": "#/$defs/stringSet"},
+    "negative_guarantees": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model_invocation", "agent_tool_invocation", "external_egress", "agent_write_permissions", "peer_delegation", "shared_agent_memory", "execution_allowed"],
+      "properties": {
+        "model_invocation": {"const": false},
+        "agent_tool_invocation": {"const": false},
+        "external_egress": {"const": false},
+        "agent_write_permissions": {"const": 0},
+        "peer_delegation": {"const": false},
+        "shared_agent_memory": {"const": false},
+        "execution_allowed": {"const": false}
+      }
+    },
+    "binding_hash": {"$ref": "#/$defs/sha256"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "stringSet": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "hash"],
+      "properties": {"id": {"type": "string"}, "version": {"type": "string"}, "hash": {"$ref": "#/$defs/sha256"}}
+    },
+    "tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tool_id", "service_class", "execution_kind", "agent_tool_invocation", "model_invocation", "external_egress", "write_permissions", "execution_allowed"],
+      "properties": {
+        "tool_id": {"type": "string"},
+        "service_class": {"type": "string"},
+        "execution_kind": {"const": "deterministic_internal_service"},
+        "agent_tool_invocation": {"const": false},
+        "model_invocation": {"const": false},
+        "external_egress": {"const": false},
+        "write_permissions": {"type": "array", "maxItems": 0},
+        "execution_allowed": {"const": false}
+      }
+    },
+    "routeRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["base_roles", "conditional_roles", "all_team"],
+      "properties": {
+        "base_roles": {"$ref": "#/$defs/stringSet"},
+        "conditional_roles": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["role_id", "evidence_types"],
+            "properties": {"role_id": {"type": "string"}, "evidence_types": {"$ref": "#/$defs/stringSet"}}
+          }
+        },
+        "all_team": {"type": "boolean"}
+      }
+    },
+    "selectorVariant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "required_capabilities", "eligible_roles", "deterministic_tools", "required_evidence", "reviewer_requirement"],
+      "properties": {
+        "value": {"enum": ["technical", "analytics", "content", "competitor", "stability", "cro"]},
+        "required_capabilities": {"$ref": "#/$defs/stringSet"},
+        "eligible_roles": {"$ref": "#/$defs/stringSet"},
+        "deterministic_tools": {"$ref": "#/$defs/stringSet"},
+        "required_evidence": {"$ref": "#/$defs/stringSet"},
+        "reviewer_requirement": {"type": "string", "minLength": 1}
+      }
+    },
+    "mission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mission_id", "mission_version", "admission_role", "required_capabilities", "eligible_roles", "deterministic_tools", "required_evidence", "reviewer_requirement", "max_modes", "allowed_page_families", "allowed_locales", "authority_ceiling", "stop_conditions", "execution_allowed", "allow_delegation", "route_rule"],
+      "properties": {
+        "mission_id": {"type": "string"},
+        "mission_version": {"const": "2.0.0"},
+        "admission_role": {"type": "string"},
+        "required_capabilities": {"$ref": "#/$defs/stringSet"},
+        "eligible_roles": {"$ref": "#/$defs/stringSet"},
+        "deterministic_tools": {"$ref": "#/$defs/stringSet"},
+        "required_evidence": {"$ref": "#/$defs/stringSet"},
+        "reviewer_requirement": {"type": "string", "minLength": 1},
+        "max_modes": {"type": "integer", "minimum": 1, "maximum": 6},
+        "allowed_page_families": {"$ref": "#/$defs/stringSet"},
+        "allowed_locales": {"type": "array", "items": {"enum": ["en", "zh-CN"]}, "uniqueItems": true, "minItems": 1},
+        "authority_ceiling": {"enum": ["recommendation_only", "review_verdict", "candidate_only"]},
+        "stop_conditions": {"$ref": "#/$defs/stringSet"},
+        "execution_allowed": {"const": false},
+        "allow_delegation": {"const": false},
+        "route_rule": {"$ref": "#/$defs/routeRule"},
+        "selector": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["field", "variants"],
+          "properties": {"field": {"const": "review_domain"}, "variants": {"type": "array", "minItems": 6, "maxItems": 6, "uniqueItems": true, "items": {"$ref": "#/$defs/selectorVariant"}}}
+        },
+        "deterministic_compile": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["operation", "write_current", "consumes_previous_output_hash", "gates"],
+          "properties": {"operation": {"type": "string"}, "write_current": {"const": false}, "consumes_previous_output_hash": {"const": true}, "gates": {"$ref": "#/$defs/stringSet"}}
+        }
+      }
+    }
+  }
+}

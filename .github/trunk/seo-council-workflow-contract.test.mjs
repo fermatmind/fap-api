@@ -11,10 +11,12 @@ test("11D extends only the permanent CI and deploy control plane", () => {
   assert.deepEqual(workflows, ["ci.yml", "deploy.yml", "nightly.yml", "recovery.yml"]);
   assert.match(ci, /seo-council-orchestration:/);
   assert.match(ci, /seo:council-closeout --expected-sha="\$GITHUB_SHA"/);
+  assert.match(ci, /seo\.council_closeout\.v2/);
   assert.match(ci, /seo_council_orchestration:\$council/);
   assert.match(deploy, /\.seo_council_orchestration\.required == \.classification\.operations\.seo_council_orchestration/);
   assert.match(deploy, /seo-council-orchestration-staging\.json/);
   assert.match(deploy, /seo-council-orchestration-production\.json/);
+  assert.match(deploy, /seo\.council_closeout\.v2/);
 });
 
 test("11D deployment stays disabled and writes immutable exact-SHA closeout receipts only", () => {

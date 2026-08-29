@@ -9,7 +9,7 @@ require dirname(__DIR__, 2).'/vendor/autoload.php';
 $app = require dirname(__DIR__, 2).'/bootstrap/app.php';
 $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
-$path = dirname(__DIR__, 2).'/docs/seo/generated/seo-council-contract-manifest.v1.json';
+$path = dirname(__DIR__, 2).'/docs/seo/generated/seo-council-contract-manifest.v2.json';
 $bytes = json_encode(
     $app->make(CouncilContractRegistry::class)->manifest(),
     JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE,

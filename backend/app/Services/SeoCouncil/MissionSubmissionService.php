@@ -7,6 +7,7 @@ namespace App\Services\SeoCouncil;
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use App\Services\SeoCouncil\Contracts\CouncilContractValidator;
 use App\Services\SeoCouncil\Contracts\MissionRequestData;
+use App\Services\SeoCouncil\Governance\RoleCapabilityBindingRegistry;
 use InvalidArgumentException;
 
 final class MissionSubmissionService
@@ -16,6 +17,7 @@ final class MissionSubmissionService
     public function __construct(
         private readonly CouncilContractValidator $validator,
         private readonly SeoRegistryHasher $hasher,
+        private readonly RoleCapabilityBindingRegistry $binding,
         private readonly SeoCouncilOrchestrator $orchestrator,
     ) {}
 
@@ -27,6 +29,7 @@ final class MissionSubmissionService
         }
         unset($input['caller_type']);
         $request = MissionRequestData::fromInput($input, $boundCallerType, $this->validator, $this->hasher);
+        $this->binding->validateRequestScope($request);
 
         return $this->orchestrator->run($request);
     }

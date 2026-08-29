@@ -65,7 +65,8 @@
                 :description="__($copy.'.hold_description')"
             />
 
-            <form method="POST" action="/api/v0.5/ops/seo-intel/council/ui-missions" class="ops-agent-council__mission-form">
+            <form method="POST" action="{{ route('ops.seo_intel.council.ui_missions.store') }}" class="ops-agent-council__mission-form">
+                @csrf
                 <input type="hidden" name="mission_id" value="mission:seo-operations-ui" />
                 <label><span>Idempotency key</span><input name="idempotency_key" required pattern="[A-Za-z0-9._:-]{1,128}" value="seo-operations-ui:route-plan" /></label>
                 <label><span>Mission</span><select name="mission_type"><option value="weekly_opportunity">weekly_opportunity</option><option value="monthly_portfolio">monthly_portfolio</option><option value="breakthrough_sprint">breakthrough_sprint</option><option value="global_portfolio">global_portfolio</option><option value="bounded_review">bounded_review</option><option value="independent_registry_review">independent_registry_review</option><option value="career_candidate_generation">career_candidate_generation</option></select></label>

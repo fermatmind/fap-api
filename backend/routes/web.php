@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\API\V0_5\Ops\SeoIntel\SeoCouncilMissionController;
 use App\Http\Controllers\API\V0_5\SEO\LlmsController;
 use App\Http\Controllers\Ops\ArticleDraftPreviewController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\AdminAuth;
 use App\Http\Middleware\EnsureAdminTotpVerified;
 use App\Http\Middleware\EnsureCmsAdminAuthorized;
+use App\Http\Middleware\EnsureSeoCouncilMissionAuthorized;
+use App\Http\Middleware\EnsureSeoIntelReadAuthorized;
 use App\Http\Middleware\OpsAccessControl;
 use App\Http\Middleware\RequireOpsOrgSelected;
 use App\Http\Middleware\ResolveOrgContext;
@@ -72,6 +75,18 @@ Route::get('/llms-full.txt', [LlmsController::class, 'llmsFullTxt'])
         \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
         \App\Http\Middleware\VerifyCsrfToken::class,
     ]);
+
+Route::post('/api/v0.5/ops/seo-intel/council/ui-missions', [SeoCouncilMissionController::class, 'storeUi'])
+    ->middleware([
+        SetOpsRequestContext::class,
+        AdminAuth::class,
+        ResolveOrgContext::class,
+        EnsureAdminTotpVerified::class,
+        OpsAccessControl::class,
+        EnsureSeoIntelReadAuthorized::class,
+        EnsureSeoCouncilMissionAuthorized::class,
+    ])
+    ->name('ops.seo_intel.council.ui_missions.store');
 
 if (config('admin.panel_enabled')) {
     Route::permanentRedirect('/admin', '/ops');
