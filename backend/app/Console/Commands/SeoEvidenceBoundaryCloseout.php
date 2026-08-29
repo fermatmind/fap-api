@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Services\SeoAgentEvidence\Context\SeoEvidenceContextBuilder;
 use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher;
 use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceContractRegistry;
 use App\Services\SeoAgentEvidence\Dependency\SeoEvidenceDependencySnapshotBuilder;
 use App\Services\SeoAgentEvidence\Dependency\SeoEvidenceDependencySnapshotVerifier;
+use App\Services\SeoAgentEvidence\External\ExternalContentGateway;
+use App\Services\SeoAgentEvidence\Privacy\SeoPrivateDataScanner;
+use App\Services\SeoAgentEvidence\Privacy\SeoPrivateRouteNegativeSet;
 use App\Services\SeoAgentEvidence\Sources\SeoPlatformDependencyEvidenceAdapter;
 use App\Services\SeoAgentGovernance\SeoRoleCapabilityRegistry;
+use App\Services\SeoIntel\PageFamily\PageFamilyPolicyRegistry;
 use Illuminate\Console\Command;
 use Symfony\Component\Process\Process;
 use Throwable;
@@ -27,6 +32,10 @@ final class SeoEvidenceBoundaryCloseout extends Command
         SeoEvidenceCanonicalHasher $hasher,
         SeoRoleCapabilityRegistry $registry,
         SeoPlatformDependencyEvidenceAdapter $dependencyEvidence,
+        PageFamilyPolicyRegistry $pageFamilies,
+        SeoPrivateRouteNegativeSet $negativeSet,
+        SeoPrivateDataScanner $privateScanner,
+        SeoEvidenceContextBuilder $contextBuilder,
     ): int {
         try {
             $expectedSha = strtolower(trim((string) $this->option('expected-sha')));
@@ -35,7 +44,7 @@ final class SeoEvidenceBoundaryCloseout extends Command
                 return $this->emit(['status' => 'failed', 'safe_error_code' => 'RELEASE_SHA_MISMATCH'], self::FAILURE);
             }
             $manifest = $contracts->manifest();
-            $artifact = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-agent-evidence-contract-manifest.v1.json')), true, 512, JSON_THROW_ON_ERROR);
+            $artifact = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-agent-evidence-contract-manifest.v2.json')), true, 512, JSON_THROW_ON_ERROR);
             if (! is_array($artifact) || ! $contracts->verify($artifact)) {
                 return $this->emit(['status' => 'failed', 'safe_error_code' => 'CONTRACT_MANIFEST_INVALID'], self::FAILURE);
             }
@@ -43,6 +52,16 @@ final class SeoEvidenceBoundaryCloseout extends Command
             if (($roleRegistry['registry_hash'] ?? null) !== 'b02b6edd816b75b42582468e5bc3aa2c9cd0060149825d1fdc6131cf71d73791'
                 || count((array) ($roleRegistry['roles'] ?? [])) !== 9 || count((array) ($roleRegistry['capabilities'] ?? [])) !== 20) {
                 return $this->emit(['status' => 'failed', 'safe_error_code' => 'REGISTRY_FREEZE_INVALID'], self::FAILURE);
+            }
+            $privateRouteProbes = $this->privateRouteProbes($pageFamilies, $negativeSet);
+            $piiEvasionProbes = $this->piiEvasionProbes($privateScanner);
+            $invalidContextScope = $this->invalidContextScope($roleRegistry, $contextBuilder);
+            $gatewayChecks = ExternalContentGateway::privacySelfCheck();
+            if ($privateRouteProbes !== ['total' => 36, 'rejected' => 36, 'bypass' => 0]
+                || ($piiEvasionProbes['bypass'] ?? null) !== 0
+                || ($invalidContextScope['ready'] ?? null) !== 0
+                || in_array('fail', $gatewayChecks, true)) {
+                return $this->emit(['status' => 'failed', 'safe_error_code' => 'PRIVACY_GATEWAY_SELF_CHECK_FAILED'], self::FAILURE);
             }
             $dependencies = $dependencyEvidence->snapshot($releaseSha);
             $snapshot = $builder->build($releaseSha, $dependencies, [
@@ -54,7 +73,7 @@ final class SeoEvidenceBoundaryCloseout extends Command
                 return $this->emit(['status' => 'failed', 'safe_error_code' => 'DEPENDENCY_SNAPSHOT_INVALID'], self::FAILURE);
             }
             $receipt = [
-                'contract_version' => 'seo.evidence_boundary_closeout.v1',
+                'contract_version' => 'seo.evidence_boundary_closeout.v2',
                 'release_sha' => $releaseSha,
                 'registry_hash' => $roleRegistry['registry_hash'],
                 'inventory_v3_hash' => $snapshot['inventory_v3_hash'],
@@ -66,10 +85,23 @@ final class SeoEvidenceBoundaryCloseout extends Command
                 'context_build_enabled' => (bool) config('seo_agent_evidence.context_build_enabled', false),
                 'external_fetch_enabled' => (bool) config('seo_agent_evidence.external_fetch_enabled', false),
                 'retention_delete_enabled' => (bool) config('seo_agent_evidence.retention_delete_enabled', false),
+                'query_hmac_dual_write_enabled' => (bool) config('seo_agent_evidence.query_hmac_dual_write_enabled', false),
+                'agent_external_egress' => (bool) config('seo_agent_evidence.agent_external_egress', false),
+                'allowed_sources_count' => count((array) config('seo_agent_evidence.allowed_sources', [])),
+                'read_only_gsc' => (bool) ($roleRegistry['global_guards']['read_only_gsc'] ?? false),
+                'search_submission_allowed' => (bool) ($roleRegistry['global_guards']['search_submission_allowed'] ?? true),
+                'post12_agent_write_enabled' => (bool) ($roleRegistry['global_guards']['post12_agent_write_enabled'] ?? true),
+                'l4_state' => (string) ($roleRegistry['global_guards']['l4_state'] ?? 'unknown'),
                 'model_calls' => 0,
                 'tool_calls' => 0,
                 'external_calls' => 0,
                 'business_writes' => 0,
+                'self_checks' => [
+                    'private_route_probes' => $privateRouteProbes,
+                    'pii_evasion_probes' => $piiEvasionProbes,
+                    'invalid_context_scope' => $invalidContextScope,
+                    'gateway' => $gatewayChecks,
+                ],
                 'negative_guarantees' => [
                     'raw_query_exposed' => false,
                     'private_data_exposed' => false,
@@ -84,7 +116,11 @@ final class SeoEvidenceBoundaryCloseout extends Command
                     'fap_web_agent_authority' => false,
                 ],
             ];
-            if ($receipt['bundle_write_enabled'] || $receipt['context_build_enabled'] || $receipt['external_fetch_enabled'] || $receipt['retention_delete_enabled']) {
+            if ($receipt['bundle_write_enabled'] || $receipt['context_build_enabled'] || $receipt['external_fetch_enabled']
+                || $receipt['retention_delete_enabled'] || $receipt['query_hmac_dual_write_enabled']
+                || $receipt['agent_external_egress'] || $receipt['allowed_sources_count'] !== 0
+                || ! $receipt['read_only_gsc'] || $receipt['search_submission_allowed']
+                || $receipt['post12_agent_write_enabled'] || $receipt['l4_state'] !== 'dormant_not_authorized') {
                 return $this->emit(['status' => 'failed', 'safe_error_code' => 'PRODUCTION_GATE_ENABLED'], self::FAILURE);
             }
             $receipt['receipt_hash'] = $hasher->hash($receipt);
@@ -93,6 +129,69 @@ final class SeoEvidenceBoundaryCloseout extends Command
         } catch (Throwable) {
             return $this->emit(['status' => 'failed', 'safe_error_code' => 'SEO_EVIDENCE_CLOSEOUT_FAILED'], self::FAILURE);
         }
+    }
+
+    /** @return array{total:int,rejected:int,bypass:int} */
+    private function privateRouteProbes(PageFamilyPolicyRegistry $pageFamilies, SeoPrivateRouteNegativeSet $negativeSet): array
+    {
+        $probes = $pageFamilies->negativeSetProbes();
+        $rejected = 0;
+        foreach ($probes as $probe) {
+            if ($negativeSet->classify(
+                (string) ($probe['canonical_path'] ?? ''),
+                null,
+                (string) ($probe['page_entity_type'] ?? ''),
+            )['private']) {
+                $rejected++;
+            }
+        }
+
+        return ['total' => count($probes), 'rejected' => $rejected, 'bypass' => count($probes) - $rejected];
+    }
+
+    /** @return array{total:int,rejected:int,bypass:int} */
+    private function piiEvasionProbes(SeoPrivateDataScanner $scanner): array
+    {
+        $probes = [
+            ['userId' => 42],
+            ['accessToken' => 'opaque-secret-value'],
+            ['emailAddress' => 'person@example.com'],
+            ['payment-id' => 4111111111111111],
+            ['profile.user.id' => 42],
+            ['nested' => ['accountRecovery' => 'value']],
+            ['nested' => [['phone' => 13800138000]]],
+            ['ｕｓｅｒ＿ｉｄ' => 42],
+            ['reportPrivate' => true],
+            ['history_ref' => 'history_12345'],
+            (object) ['public' => true],
+        ];
+        $rejected = count(array_filter($probes, static fn (mixed $probe): bool => $scanner->scan($probe)['private_data_present']));
+
+        return ['total' => count($probes), 'rejected' => $rejected, 'bypass' => count($probes) - $rejected];
+    }
+
+    /** @param array<string, mixed> $registry @return array{total:int,ready:int} */
+    private function invalidContextScope(array $registry, SeoEvidenceContextBuilder $builder): array
+    {
+        $total = 0;
+        $ready = 0;
+        foreach ((array) ($registry['roles'] ?? []) as $role) {
+            $mission = (string) (($role['allowed_missions'][0] ?? 'invalid'));
+            $family = (string) (($role['page_family_scope'][0] ?? 'other_public'));
+            $locale = (string) (($role['locale_scope'][0] ?? 'en'));
+            foreach ([
+                ['invalid_mission', $family, $locale],
+                [$mission, 'private_excluded', $locale],
+                [$mission, $family, 'fr'],
+            ] as [$invalidMission, $invalidFamily, $invalidLocale]) {
+                $total++;
+                if ($builder->scopeDecision((string) $invalidMission, (string) ($role['role_id'] ?? ''), (string) $invalidFamily, (string) $invalidLocale) === 'READY') {
+                    $ready++;
+                }
+            }
+        }
+
+        return ['total' => $total, 'ready' => $ready];
     }
 
     private function releaseSha(): string

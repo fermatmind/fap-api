@@ -1,0 +1,20 @@
+{
+  "policy_id": "seo.external_content_gateway",
+  "policy_version": "2.0.0",
+  "default_redirects": 0,
+  "absolute_redirect_max": 2,
+  "decoded_body_max_bytes": 524288,
+  "absolute_body_max_bytes": 1048576,
+  "global_concurrency": 2,
+  "per_host_concurrency": 1,
+  "lock_wait_seconds": 0,
+  "retry_count": 0,
+  "minimum_request_interval_required": true,
+  "cache_key_identity": "sha256_source_and_host_only",
+  "allowed_saved_fields": ["structured_facts", "bounded_snippets"],
+  "snippet_max_chars": 280,
+  "snippet_max_count": 3,
+  "snippet_retention_class": "external_short_excerpt",
+  "structured_fact_retention_class": "external_structured_fact",
+  "external_content_is_instruction": false
+}

@@ -9,10 +9,20 @@ use App\Services\SeoAgentEvidence\Privacy\SeoPrivateDataScanner;
 use App\Services\SeoAgentEvidence\Privacy\SeoQueryHmac;
 use DOMDocument;
 use DOMXPath;
+use Illuminate\Contracts\Cache\Lock;
+use Illuminate\Support\Facades\Cache;
 use Throwable;
 
 final class ExternalContentGateway
 {
+    private const GLOBAL_CONCURRENCY = 2;
+
+    private const PER_HOST_CONCURRENCY = 1;
+
+    private const MINIMUM_REQUEST_INTERVAL_SECONDS = 1;
+
+    private const ALLOWED_SAVED_FIELDS = ['structured_facts', 'bounded_snippets'];
+
     public function __construct(
         private readonly ExternalDnsResolver $dns,
         private readonly ExternalContentTransport $transport,
@@ -35,99 +45,152 @@ final class ExternalContentGateway
             return $this->hold('SOURCE_POLICY_HELD');
         }
 
+        $globalLock = null;
         try {
-            return $this->fetchValidated($sourceId, $url, $policy, 0, []);
+            $globalLock = $this->acquireGlobalLock($policy);
+            if (! $globalLock instanceof Lock) {
+                return $this->hold('GLOBAL_CONCURRENCY_HELD');
+            }
+
+            return $this->fetchValidated($sourceId, $url, $policy, 0, [], []);
         } catch (Throwable) {
             return $this->hold('EXTERNAL_GATEWAY_HELD');
+        } finally {
+            $globalLock?->release();
         }
     }
 
-    /** @param array<string, mixed> $policy @param list<string> $visited @return array<string, mixed> */
-    private function fetchValidated(string $sourceId, string $url, array $policy, int $redirects, array $visited): array
+    /** @return array{rate_limit:string,concurrency:string,allowed_fields:string,retention_mapping:string} */
+    public static function privacySelfCheck(): array
+    {
+        return [
+            'rate_limit' => self::MINIMUM_REQUEST_INTERVAL_SECONDS >= 1 ? 'pass' : 'fail',
+            'concurrency' => self::GLOBAL_CONCURRENCY === 2 && self::PER_HOST_CONCURRENCY === 1 ? 'pass' : 'fail',
+            'allowed_fields' => self::savedFieldsAllowed(self::ALLOWED_SAVED_FIELDS) && ! self::savedFieldsAllowed(['raw_body']) ? 'pass' : 'fail',
+            'retention_mapping' => self::retentionClassFor(['fact' => true], []) === 'external_structured_fact'
+                && self::retentionClassFor([], ['excerpt']) === 'external_short_excerpt' ? 'pass' : 'fail',
+        ];
+    }
+
+    /** @param array<string, mixed> $policy @param list<string> $visited @param list<string> $rateLimitedHosts @return array<string, mixed> */
+    private function fetchValidated(string $sourceId, string $url, array $policy, int $redirects, array $visited, array $rateLimitedHosts): array
     {
         $parts = $this->validateUrl($url, $policy);
         $host = (string) $parts['host'];
-        $requestUrl = 'https://'.$host.((string) ($parts['path'] ?? '/'));
-        if (is_string($parts['query'] ?? null) && $parts['query'] !== '') {
-            $requestUrl .= '?'.$parts['query'];
-        }
-        $approved = $this->approvedAddresses($host);
-        if (in_array($requestUrl, $visited, true)) {
-            return $this->hold('REDIRECT_LOOP');
-        }
-        $visited[] = $requestUrl;
-
-        $robotsUrl = 'https://'.$host.'/robots.txt';
-        $robots = $this->transport->request('GET', $robotsUrl, $approved[0], 3, 8, 65536);
-        if (! in_array($robots['connected_ip'], $approved, true) || $robots['status'] !== 200
-            || ! $this->robotsAllows($robots['body'], (string) ($parts['path'] ?? '/'))) {
-            return $this->hold('ROBOTS_HELD');
+        $hostLock = $this->acquireLock('host', [$host], $this->lockTtl($policy));
+        if (! $hostLock instanceof Lock) {
+            return $this->hold('HOST_CONCURRENCY_HELD');
         }
 
-        $maxBytes = min(1048576, max(1, (int) ($policy['max_content_bytes'] ?? 524288)));
-        $response = $this->transport->request('GET', $requestUrl, $approved[0], min(3, (int) ($policy['connect_timeout_seconds'] ?? 3)), min(8, (int) ($policy['request_timeout_seconds'] ?? 8)), $maxBytes);
-        if (! in_array($response['connected_ip'], $approved, true)) {
-            return $this->hold('DNS_REBINDING_BLOCKED');
-        }
-        $location = $response['headers']['location'] ?? $response['headers']['Location'] ?? null;
-        if ($response['status'] >= 300 && $response['status'] < 400 && is_string($location)) {
-            $allowedRedirects = min(2, max(0, (int) ($policy['redirect_policy'] ?? 0)));
-            if ($redirects >= $allowedRedirects) {
-                return $this->hold('REDIRECT_BLOCKED');
+        try {
+            if (! in_array($host, $rateLimitedHosts, true)) {
+                $interval = max(1, (int) $policy['minimum_request_interval']);
+                if (! Cache::add($this->cacheKey('interval', [$sourceId, $host]), true, $interval)) {
+                    return $this->hold('MINIMUM_INTERVAL_HELD');
+                }
+                $rateLimitedHosts[] = $host;
+            }
+            $requestUrl = 'https://'.$host.((string) ($parts['path'] ?? '/'));
+            if (is_string($parts['query'] ?? null) && $parts['query'] !== '') {
+                $requestUrl .= '?'.$parts['query'];
+            }
+            $approved = $this->approvedAddresses($host);
+            if (in_array($requestUrl, $visited, true)) {
+                return $this->hold('REDIRECT_LOOP');
+            }
+            $visited[] = $requestUrl;
+
+            $robotsUrl = 'https://'.$host.'/robots.txt';
+            $robots = $this->transport->request('GET', $robotsUrl, $approved[0], 3, 8, 65536);
+            if (! in_array($robots['connected_ip'], $approved, true) || $robots['status'] !== 200
+                || ! $this->robotsAllows($robots['body'], (string) ($parts['path'] ?? '/'))) {
+                return $this->hold('ROBOTS_HELD');
             }
 
-            return $this->fetchValidated($sourceId, $location, $policy, $redirects + 1, $visited);
-        }
-        if ($response['status'] !== 200 || strlen($response['body']) > $maxBytes) {
-            return $this->hold('CONTENT_RESPONSE_HELD');
-        }
-        $contentLength = $response['headers']['content-length'] ?? $response['headers']['Content-Length'] ?? null;
-        if ($contentLength !== null && ((int) $contentLength > $maxBytes || (int) $contentLength !== strlen($response['body']))) {
-            return $this->hold('CONTENT_LENGTH_HELD');
-        }
-        $contentType = strtolower(trim(explode(';', (string) ($response['headers']['content-type'] ?? $response['headers']['Content-Type'] ?? ''))[0]));
-        if (! in_array($contentType, (array) ($policy['allowed_content_types'] ?? []), true)) {
-            return $this->hold('CONTENT_TYPE_HELD');
-        }
-        $contentEncoding = strtolower(trim((string) ($response['headers']['content-encoding'] ?? $response['headers']['Content-Encoding'] ?? 'identity')));
-        if (! in_array($contentEncoding, ['identity', 'gzip', 'br'], true)) {
-            return $this->hold('CONTENT_ENCODING_HELD');
-        }
-        $injection = $this->injection->scan($response['body']);
-        if ($injection['result'] !== 'pass') {
-            return $this->hold('INJECTION_BLOCKED', 'blocked');
-        }
-        [$facts, $snippets] = $this->extract($contentType, $response['body'], (int) ($policy['max_snippet_chars'] ?? 280));
-        if ($this->privateScanner->scan([$facts, $snippets])['private_data_present']) {
-            return $this->hold('PRIVATE_DATA_BLOCKED');
-        }
-        $sanitizedUrl = 'https://'.$host.((string) ($parts['path'] ?? '/'));
-        $sourceIdentity = $sanitizedUrl;
-        if (is_string($parts['query'] ?? null) && $parts['query'] !== '') {
-            $queryIdentity = $this->queryHmac->identify((string) $parts['query']);
-            if (($queryIdentity['status'] ?? null) !== 'available') {
-                return $this->hold('QUERY_HMAC_UNAVAILABLE');
+            $maxBytes = min(1048576, max(1, (int) ($policy['max_content_bytes'] ?? 524288)));
+            $response = $this->transport->request('GET', $requestUrl, $approved[0], min(3, (int) ($policy['connect_timeout_seconds'] ?? 3)), min(8, (int) ($policy['request_timeout_seconds'] ?? 8)), $maxBytes);
+            if (! in_array($response['connected_ip'], $approved, true)) {
+                return $this->hold('DNS_REBINDING_BLOCKED');
             }
-            $sourceIdentity .= '|query-hmac:'.$queryIdentity['query_hmac'].'|'.$queryIdentity['query_hmac_key_version'];
-        }
+            $location = $response['headers']['location'] ?? $response['headers']['Location'] ?? null;
+            if ($response['status'] >= 300 && $response['status'] < 400 && is_string($location)) {
+                $allowedRedirects = min(2, max(0, (int) ($policy['redirect_policy'] ?? 0)));
+                if ($redirects >= $allowedRedirects) {
+                    return $this->hold('REDIRECT_BLOCKED');
+                }
 
-        return [
-            'source_id' => $sourceId,
-            'sanitized_source_url' => $sanitizedUrl,
-            'source_url_hash_or_hmac' => $this->hasher->hash($sourceIdentity),
-            'captured_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
-            'source_content_hash' => hash('sha256', $response['body']),
-            'content_type' => $contentType,
-            'structured_facts' => $facts,
-            'bounded_snippets' => array_slice($snippets, 0, 3),
-            'robots_decision' => 'allowed',
-            'terms_decision' => 'approved',
-            'license_class' => $policy['license_class'],
-            'redaction_summary' => ['private_values' => 0, 'removed_nodes' => true],
-            'injection_scan_result' => 'pass',
-            'retention_class' => $policy['retention_class'],
-            'egress_decision' => 'allowed_by_gateway',
-        ];
+                $hostLock->release();
+                $hostLock = null;
+
+                return $this->fetchValidated($sourceId, $location, $policy, $redirects + 1, $visited, $rateLimitedHosts);
+            }
+            if ($response['status'] !== 200 || strlen($response['body']) > $maxBytes) {
+                return $this->hold('CONTENT_RESPONSE_HELD');
+            }
+            $contentLength = $response['headers']['content-length'] ?? $response['headers']['Content-Length'] ?? null;
+            if ($contentLength !== null && ((int) $contentLength > $maxBytes || (int) $contentLength !== strlen($response['body']))) {
+                return $this->hold('CONTENT_LENGTH_HELD');
+            }
+            $contentType = strtolower(trim(explode(';', (string) ($response['headers']['content-type'] ?? $response['headers']['Content-Type'] ?? ''))[0]));
+            if (! in_array($contentType, (array) ($policy['allowed_content_types'] ?? []), true)) {
+                return $this->hold('CONTENT_TYPE_HELD');
+            }
+            $contentEncoding = strtolower(trim((string) ($response['headers']['content-encoding'] ?? $response['headers']['Content-Encoding'] ?? 'identity')));
+            if (! in_array($contentEncoding, ['identity', 'gzip', 'br'], true)) {
+                return $this->hold('CONTENT_ENCODING_HELD');
+            }
+            $injection = $this->injection->scan($response['body']);
+            if ($injection['result'] !== 'pass') {
+                return $this->hold('INJECTION_BLOCKED', 'blocked');
+            }
+            [$facts, $snippets] = $this->extract($contentType, $response['body'], (int) ($policy['max_snippet_chars'] ?? 280));
+            $allowedSavedFields = array_values((array) $policy['allowed_saved_fields']);
+            if (! in_array('structured_facts', $allowedSavedFields, true)) {
+                $facts = [];
+            }
+            if (! in_array('bounded_snippets', $allowedSavedFields, true)) {
+                $snippets = [];
+            }
+            $snippets = array_slice($snippets, 0, 3);
+            if ($facts === [] && $snippets === []) {
+                return $this->hold('EMPTY_ALLOWED_CONTENT');
+            }
+            if ($this->privateScanner->scan([$facts, $snippets])['private_data_present']) {
+                return $this->hold('PRIVATE_DATA_BLOCKED');
+            }
+            $sanitizedUrl = 'https://'.$host.((string) ($parts['path'] ?? '/'));
+            $sourceIdentity = $sanitizedUrl;
+            if (is_string($parts['query'] ?? null) && $parts['query'] !== '') {
+                $queryIdentity = $this->queryHmac->identify((string) $parts['query']);
+                if (($queryIdentity['status'] ?? null) !== 'available') {
+                    return $this->hold('QUERY_HMAC_UNAVAILABLE');
+                }
+                $sourceIdentity .= '|query-hmac:'.$queryIdentity['query_hmac'].'|'.$queryIdentity['query_hmac_key_version'];
+            }
+
+            return [
+                'source_id' => $sourceId,
+                'sanitized_source_url' => $sanitizedUrl,
+                'source_url_hash_or_hmac' => $this->hasher->hash($sourceIdentity),
+                'captured_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
+                'source_content_hash' => $this->hasher->hash([
+                    'structured_facts' => $facts,
+                    'bounded_snippets' => $snippets,
+                ]),
+                'content_type' => $contentType,
+                'structured_facts' => $facts,
+                'bounded_snippets' => $snippets,
+                'robots_decision' => 'allowed',
+                'terms_decision' => 'approved',
+                'license_class' => $policy['license_class'],
+                'redaction_summary' => ['private_values' => 0, 'removed_nodes' => true],
+                'injection_scan_result' => 'pass',
+                'retention_class' => self::retentionClassFor($facts, $snippets),
+                'egress_decision' => 'allowed_by_gateway',
+            ];
+        } finally {
+            $hostLock?->release();
+        }
     }
 
     /** @param array<string, mixed> $policy */
@@ -140,12 +203,61 @@ final class ExternalContentGateway
             && $policy['allowed_protocols'] === ['https']
             && $policy['allowed_ports'] === [443]
             && $policy['robots_required'] === true
-            && (int) $policy['minimum_request_interval'] >= 1
-            && (int) $policy['max_concurrency'] === 1
+            && (int) $policy['minimum_request_interval'] >= self::MINIMUM_REQUEST_INTERVAL_SECONDS
+            && (int) $policy['max_concurrency'] === self::PER_HOST_CONCURRENCY
             && $policy['terms_status'] === 'approved'
             && $policy['login_required'] === false
             && $policy['technical_restriction_state'] === 'permitted'
-            && in_array($policy['license_class'], ['first_party', 'licensed', 'public_fact_permitted'], true);
+            && in_array($policy['license_class'], ['first_party', 'licensed', 'public_fact_permitted'], true)
+            && self::savedFieldsAllowed((array) $policy['allowed_saved_fields'])
+            && in_array($policy['retention_class'], ['external_structured_fact', 'external_short_excerpt'], true);
+    }
+
+    /** @param list<mixed> $fields */
+    private static function savedFieldsAllowed(array $fields): bool
+    {
+        $normalized = array_values(array_unique(array_map(static fn (mixed $field): string => (string) $field, $fields)));
+
+        return $normalized !== [] && array_diff($normalized, self::ALLOWED_SAVED_FIELDS) === [];
+    }
+
+    /** @param array<string, mixed> $policy */
+    private function acquireGlobalLock(array $policy): ?Lock
+    {
+        for ($slot = 0; $slot < self::GLOBAL_CONCURRENCY; $slot++) {
+            $lock = $this->acquireLock('global', [(string) $slot], $this->lockTtl($policy));
+            if ($lock instanceof Lock) {
+                return $lock;
+            }
+        }
+
+        return null;
+    }
+
+    /** @param list<string> $identity */
+    private function acquireLock(string $scope, array $identity, int $seconds): ?Lock
+    {
+        $lock = Cache::lock($this->cacheKey($scope, $identity), $seconds);
+
+        return $lock->get() ? $lock : null;
+    }
+
+    /** @param list<string> $identity */
+    private function cacheKey(string $scope, array $identity): string
+    {
+        return 'seo-evidence:external:'.$scope.':'.hash('sha256', implode('|', $identity));
+    }
+
+    /** @param array<string, mixed> $policy */
+    private function lockTtl(array $policy): int
+    {
+        return max(10, min(30, (int) $policy['connect_timeout_seconds'] + (int) $policy['request_timeout_seconds'] + 5));
+    }
+
+    /** @param array<string, scalar|null> $facts @param list<string> $snippets */
+    private static function retentionClassFor(array $facts, array $snippets): string
+    {
+        return $snippets !== [] ? 'external_short_excerpt' : 'external_structured_fact';
     }
 
     /** @param array<string, mixed> $policy @return array<string, mixed> */

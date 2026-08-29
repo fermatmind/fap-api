@@ -67,7 +67,7 @@ export function classifyPaths(inputPaths) {
       "backend/docs/seo/generated/seo-platform-11a-inventory.v3.json",
     ),
     seo_agent_evidence_boundary: paths.some((path) =>
-      /^backend\/(?:app\/Services\/SeoAgentEvidence\/|app\/Console\/Commands\/SeoEvidenceBoundaryCloseout\.php$|config\/seo_agent_evidence\.php$|resources\/seo-agent\/evidence\/|docs\/seo\/generated\/seo-agent-evidence-contract-manifest\.v1\.json$|scripts\/seo\/export_seo_agent_evidence_contracts\.php$|database\/migrations\/seo_intel\/2026_08_29_0[12]0000_|tests\/Feature\/SeoIntel\/SeoPlatform11B)/.test(path)
+      /^backend\/(?:app\/Services\/SeoAgentEvidence\/|app\/Console\/Commands\/SeoEvidenceBoundaryCloseout\.php$|config\/seo_agent_evidence\.php$|resources\/seo-agent\/evidence\/|docs\/seo\/generated\/seo-agent-evidence-contract-manifest\.v[12]\.json$|scripts\/seo\/export_seo_agent_evidence_contracts\.php$|database\/migrations\/seo_intel\/2026_08_29_0[12]0000_|tests\/Feature\/SeoIntel\/SeoPlatform11B)/.test(path)
       || path === "backend/app/Services/SeoIntel/GscSearchAnalyticsRowNormalizer.php"
       || path === "backend/app/Services/SeoIntel/GscReadModelSyncService.php",
     ),

@@ -16,12 +16,17 @@ final class SeoPlatform11BProductionCloseoutTest extends TestCase
         $this->assertSame(0, Artisan::call('seo:evidence-boundary-closeout', ['--expected-sha' => $sha, '--json' => true]));
         $output = Artisan::output();
         $receipt = json_decode(trim($output), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('seo.evidence_boundary_closeout.v2', $receipt['contract_version']);
         $this->assertSame('DEPENDENCY_HOLD', $receipt['dependency_status']);
         $this->assertFalse($receipt['execution_allowed']);
         $this->assertFalse($receipt['external_fetch_enabled']);
         $this->assertSame(0, $receipt['model_calls']);
         $this->assertSame(0, $receipt['negative_guarantees']['production_evidence_rows_created']);
         $this->assertSame(0, $receipt['negative_guarantees']['agent_write_permissions']);
+        $this->assertSame(['total' => 36, 'rejected' => 36, 'bypass' => 0], $receipt['self_checks']['private_route_probes']);
+        $this->assertSame(0, $receipt['self_checks']['pii_evasion_probes']['bypass']);
+        $this->assertSame(0, $receipt['self_checks']['invalid_context_scope']['ready']);
+        $this->assertNotContains('fail', $receipt['self_checks']['gateway']);
         $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $receipt['receipt_hash']);
         $firstHash = $receipt['receipt_hash'];
         $this->assertSame(0, Artisan::call('seo:evidence-boundary-closeout', ['--expected-sha' => $sha, '--json' => true]));
@@ -34,6 +39,7 @@ final class SeoPlatform11BProductionCloseoutTest extends TestCase
         $deploy = (string) file_get_contents(base_path('../.github/workflows/deploy.yml'));
         $deployer = (string) file_get_contents(base_path('../deploy.php'));
         $this->assertStringContainsString('seo-agent-evidence-boundary:', $ci);
+        $this->assertStringContainsString('seo-agent-evidence-contract-manifest.v2.json', $ci);
         $this->assertStringContainsString('seo:evidence-boundary-closeout --expected-sha="$GITHUB_SHA"', $ci);
         $this->assertStringContainsString("-o seo_agent_evidence_boundary='", $deploy);
         $this->assertStringContainsString('seo-agent-evidence-boundary-staging.json', $deploy);

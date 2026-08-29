@@ -1,0 +1,14 @@
+{
+  "policy_id": "seo.private_negative_set",
+  "policy_version": "2.0.0",
+  "route_authority": "page_family_policy_registry",
+  "canonical_private_path_count": 22,
+  "canonical_private_entity_count": 14,
+  "permanent_additional_route_roots": ["user", "users", "auth", "authorization", "invite", "invites", "private_report", "report_private"],
+  "permanent_additional_entity_types": ["user_identity", "auth", "invite"],
+  "path_matching": "fully_decoded_exact_segment",
+  "maximum_decode_passes": 5,
+  "safe_aggregate_fields": ["aggregate_result_count", "counts", "status_counts", "public_visits", "public_cta_events", "test_starts"],
+  "private_value_categories": ["attempt", "result", "report", "history", "order", "payment", "token", "user_identity", "account", "auth", "invite", "recovery"],
+  "diagnostics_expose_values": false
+}

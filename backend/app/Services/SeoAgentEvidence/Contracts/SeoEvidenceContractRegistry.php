@@ -8,13 +8,21 @@ use RuntimeException;
 
 final class SeoEvidenceContractRegistry
 {
-    public const CONTRACT_VERSION = 'seo.evidence_contract_manifest.v1';
+    public const CONTRACT_VERSION = 'seo.evidence_contract_manifest.v2';
 
     private const FILES = [
         'schemas/seo-evidence-bundle.v1.schema.json',
         'schemas/seo-evidence-dependency-snapshot.v1.schema.json',
         'schemas/seo-evidence-context.v1.schema.json',
         'schemas/seo-external-content-result.v1.schema.json',
+        'policies/seo-query-privacy.v2.json',
+        'policies/seo-private-negative-set.v2.json',
+        'policies/seo-external-content-gateway.v2.json',
+        'policies/seo-context-minimization.v2.json',
+        'policies/seo-evidence-retention.v2.json',
+    ];
+
+    private const HISTORICAL_FILES = [
         'policies/seo-query-privacy.v1.json',
         'policies/seo-private-negative-set.v1.json',
         'policies/seo-external-content-gateway.v1.json',
@@ -61,7 +69,7 @@ final class SeoEvidenceContractRegistry
             }
         }
         sort($actual, SORT_STRING);
-        $expected = self::FILES;
+        $expected = [...self::FILES, ...self::HISTORICAL_FILES];
         sort($expected, SORT_STRING);
         if ($actual !== $expected) {
             throw new RuntimeException('Unknown or missing evidence contract file.');
@@ -69,7 +77,7 @@ final class SeoEvidenceContractRegistry
 
         $manifest = [
             'schema_version' => self::CONTRACT_VERSION,
-            'manifest_version' => '1.0.0',
+            'manifest_version' => '2.0.0',
             'contracts' => $entries,
             'negative_guarantees' => [
                 'changes_11a_registry' => false,
@@ -77,6 +85,7 @@ final class SeoEvidenceContractRegistry
                 'tool_invocation' => false,
                 'agent_write_authority' => false,
                 'search_submission' => false,
+                'v1_contract_bytes_changed' => false,
             ],
         ];
         $manifest['manifest_hash'] = $this->hasher->hash($manifest);

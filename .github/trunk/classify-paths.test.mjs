@@ -162,6 +162,7 @@ test("binds the persistent SEO agent evidence boundary to every 11B layer", () =
   for (const path of [
     "backend/app/Services/SeoAgentEvidence/Bundle/SeoEvidenceBundleFactory.php",
     "backend/resources/seo-agent/evidence/schemas/seo-evidence-bundle.v1.schema.json",
+    "backend/docs/seo/generated/seo-agent-evidence-contract-manifest.v2.json",
     "backend/config/seo_agent_evidence.php",
     "backend/database/migrations/seo_intel/2026_08_29_010000_create_seo_evidence_tables.php",
     "backend/app/Services/SeoIntel/GscSearchAnalyticsRowNormalizer.php",

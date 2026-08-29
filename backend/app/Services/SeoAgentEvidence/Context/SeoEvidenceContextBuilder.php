@@ -7,10 +7,13 @@ namespace App\Services\SeoAgentEvidence\Context;
 use App\Services\SeoAgentEvidence\Bundle\SeoEvidenceBundleVerifier;
 use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher;
 use App\Services\SeoAgentEvidence\Privacy\SeoPrivateDataScanner;
+use App\Services\SeoAgentGovernance\SeoRoleCapabilityRegistry;
 use Carbon\CarbonImmutable;
 
 final class SeoEvidenceContextBuilder
 {
+    private const FROZEN_ROLE_REGISTRY_HASH = 'b02b6edd816b75b42582468e5bc3aa2c9cd0060149825d1fdc6131cf71d73791';
+
     /** @var array<string, list<string>> */
     private const ROLE_FIELDS = [
         'seo.orchestrator' => ['status', 'summary', 'hold_reason', 'counts'],
@@ -39,7 +42,24 @@ final class SeoEvidenceContextBuilder
         private readonly SeoEvidenceBundleVerifier $verifier,
         private readonly SeoPrivateDataScanner $scanner,
         private readonly SeoEvidenceCanonicalHasher $hasher,
+        private readonly SeoRoleCapabilityRegistry $roles,
     ) {}
+
+    public function scopeDecision(string $missionType, string $roleId, string $pageFamily, string $locale): string
+    {
+        $registry = $this->roles->registry();
+        $role = collect((array) ($registry['roles'] ?? []))->firstWhere('role_id', $roleId);
+        if (($registry['registry_status'] ?? null) !== 'frozen'
+            || ($registry['registry_hash'] ?? null) !== self::FROZEN_ROLE_REGISTRY_HASH
+            || ! is_array($role)
+            || ! in_array($missionType, (array) ($role['allowed_missions'] ?? []), true)
+            || ! in_array($pageFamily, (array) ($role['page_family_scope'] ?? []), true)
+            || ! in_array($locale, (array) ($role['locale_scope'] ?? []), true)) {
+            return 'EVIDENCE_HOLD';
+        }
+
+        return $roleId === 'career.content_agent' ? 'SOURCE_CAPABILITY_UNAVAILABLE' : 'READY';
+    }
 
     /** @param list<array<string, mixed>> $bundles @return array<string, mixed> */
     public function build(string $missionId, string $missionType, string $roleId, string $pageFamily, string $locale, array $bundles): array
@@ -51,11 +71,23 @@ final class SeoEvidenceContextBuilder
         $capabilities = [];
         $revisions = [];
         $hashes = array_column($bundles, 'bundle_hash');
-        if ($bundles === []) {
-            $status = $roleId === 'career.content_agent' ? 'SOURCE_CAPABILITY_UNAVAILABLE' : 'EVIDENCE_HOLD';
+        $scopeStatus = $this->scopeDecision($missionType, $roleId, $pageFamily, $locale);
+        $metadataScan = $this->scanner->scan([
+            'mission_reference' => $missionId,
+            'role_reference' => $roleId,
+            'page_family_reference' => $pageFamily,
+            'locale_reference' => $locale,
+        ]);
+        if ($scopeStatus !== 'READY' || $metadataScan['private_data_present']) {
+            $status = $scopeStatus === 'SOURCE_CAPABILITY_UNAVAILABLE' && ! $metadataScan['private_data_present']
+                ? 'SOURCE_CAPABILITY_UNAVAILABLE'
+                : 'EVIDENCE_HOLD';
         }
-        if (! (bool) config('seo_agent_evidence.context_build_enabled', false) || ! isset(self::ROLE_FIELDS[$roleId]) || $roleId === 'career.content_agent') {
-            $status = $roleId === 'career.content_agent' ? 'SOURCE_CAPABILITY_UNAVAILABLE' : 'EVIDENCE_HOLD';
+        if ($bundles === [] && $status === 'READY') {
+            $status = 'EVIDENCE_HOLD';
+        }
+        if (! (bool) config('seo_agent_evidence.context_build_enabled', false) || (! isset(self::ROLE_FIELDS[$roleId]) && $roleId !== 'career.content_agent')) {
+            $status = $scopeStatus === 'SOURCE_CAPABILITY_UNAVAILABLE' ? 'SOURCE_CAPABILITY_UNAVAILABLE' : 'EVIDENCE_HOLD';
         }
         foreach ($bundles as $bundle) {
             $verification = $this->verifier->verify($bundle);
@@ -99,12 +131,17 @@ final class SeoEvidenceContextBuilder
             $status = 'EVIDENCE_HOLD';
             $payload = [];
         }
+        if ($status === 'EVIDENCE_HOLD') {
+            $payload = [];
+        }
+
+        $safeMissionId = $metadataScan['private_data_present'] ? 'mission:held' : $missionId;
 
         $context = [
             'schema_version' => 'seo.evidence_context.v1',
-            'context_id' => hash('sha256', implode('|', [$missionId, $roleId, $pageFamily, $locale, $now->format('c')])),
+            'context_id' => hash('sha256', implode('|', [$safeMissionId, $roleId, $pageFamily, $locale, $now->format('c')])),
             'context_version' => 1,
-            'mission_id' => $missionId,
+            'mission_id' => $safeMissionId,
             'mission_type' => $missionType,
             'role_id' => $roleId,
             'page_family' => $pageFamily,

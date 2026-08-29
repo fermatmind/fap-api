@@ -1050,13 +1050,25 @@ test "${#expected_sha}" -eq 40
 receipt="$({{bin/php}} artisan seo:evidence-boundary-closeout --expected-sha="$expected_sha" --json --no-interaction --no-ansi)"
 printf '%s' "$receipt" | {{bin/php}} -r '
 $payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
-$ok = ($payload["release_sha"] ?? null) === ($argv[1] ?? null)
+$ok = ($payload["contract_version"] ?? null) === "seo.evidence_boundary_closeout.v2"
+    && ($payload["release_sha"] ?? null) === ($argv[1] ?? null)
     && in_array(($payload["dependency_status"] ?? null), ["READY", "DEPENDENCY_HOLD"], true)
     && ($payload["execution_allowed"] ?? null) === false
     && ($payload["bundle_write_enabled"] ?? null) === false
     && ($payload["context_build_enabled"] ?? null) === false
     && ($payload["external_fetch_enabled"] ?? null) === false
     && ($payload["retention_delete_enabled"] ?? null) === false
+    && ($payload["query_hmac_dual_write_enabled"] ?? null) === false
+    && ($payload["agent_external_egress"] ?? null) === false
+    && ($payload["allowed_sources_count"] ?? null) === 0
+    && ($payload["read_only_gsc"] ?? null) === true
+    && ($payload["search_submission_allowed"] ?? null) === false
+    && ($payload["post12_agent_write_enabled"] ?? null) === false
+    && ($payload["l4_state"] ?? null) === "dormant_not_authorized"
+    && ($payload["self_checks"]["private_route_probes"] ?? null) === ["total" => 36, "rejected" => 36, "bypass" => 0]
+    && ($payload["self_checks"]["pii_evasion_probes"]["bypass"] ?? null) === 0
+    && ($payload["self_checks"]["invalid_context_scope"]["ready"] ?? null) === 0
+    && !in_array("fail", (array) ($payload["self_checks"]["gateway"] ?? []), true)
     && ($payload["model_calls"] ?? null) === 0
     && ($payload["tool_calls"] ?? null) === 0
     && ($payload["external_calls"] ?? null) === 0

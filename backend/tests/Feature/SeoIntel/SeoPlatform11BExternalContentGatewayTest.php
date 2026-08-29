@@ -11,10 +11,17 @@ use App\Services\SeoAgentEvidence\External\ExternalDnsResolver;
 use App\Services\SeoAgentEvidence\External\ExternalInjectionScanner;
 use App\Services\SeoAgentEvidence\Privacy\SeoPrivateDataScanner;
 use App\Services\SeoAgentEvidence\Privacy\SeoQueryHmac;
+use Illuminate\Support\Facades\Cache;
 use Tests\TestCase;
 
 final class SeoPlatform11BExternalContentGatewayTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        Cache::flush();
+    }
+
     public function test_gateway_pins_public_dns_strips_query_and_rejects_private_resolution(): void
     {
         config()->set('seo_agent_evidence.external_fetch_enabled', true);
@@ -43,6 +50,9 @@ final class SeoPlatform11BExternalContentGatewayTest extends TestCase
         $this->assertSame('allowed_by_gateway', $result['egress_decision']);
         $this->assertSame('https://example.com/facts', $result['sanitized_source_url']);
         $this->assertStringNotContainsString('never-persist', json_encode($result));
+        $this->assertSame('external_short_excerpt', $result['retention_class']);
+        $this->assertSame('MINIMUM_INTERVAL_HELD', $gateway->fetch('public', 'https://example.com/facts')['safe_error_code']);
+        Cache::flush();
 
         $privateDns = new class implements ExternalDnsResolver
         {
@@ -56,6 +66,7 @@ final class SeoPlatform11BExternalContentGatewayTest extends TestCase
         $this->assertFalse($blocked['context_eligible']);
 
         foreach (['0.0.0.0', '::1', '10.0.0.1', '172.16.0.1', '192.168.1.1', '100.64.0.1', '169.254.169.254', '::ffff:127.0.0.1'] as $address) {
+            Cache::flush();
             $dns = new class($address) implements ExternalDnsResolver
             {
                 public function __construct(private readonly string $address) {}
@@ -68,8 +79,10 @@ final class SeoPlatform11BExternalContentGatewayTest extends TestCase
             $this->assertSame('held', (new ExternalContentGateway($dns, $transport, new ExternalInjectionScanner, new SeoPrivateDataScanner, new SeoEvidenceCanonicalHasher, new SeoQueryHmac))->fetch('public', 'https://example.com/facts')['status'], $address);
         }
         foreach (['http://example.com', 'file:///etc/passwd', 'gopher://example.com', 'https://user:pass@example.com', 'https://example.com:8443', 'https://localhost', 'https://service.internal'] as $invalidUrl) {
+            Cache::flush();
             $this->assertSame('held', $gateway->fetch('public', $invalidUrl)['status'], $invalidUrl);
         }
+        Cache::flush();
         $mixedDns = new class implements ExternalDnsResolver
         {
             public function resolveAll(string $host): array
@@ -78,6 +91,7 @@ final class SeoPlatform11BExternalContentGatewayTest extends TestCase
             }
         };
         $this->assertSame('held', (new ExternalContentGateway($mixedDns, $transport, new ExternalInjectionScanner, new SeoPrivateDataScanner, new SeoEvidenceCanonicalHasher, new SeoQueryHmac))->fetch('public', 'https://example.com/facts')['status']);
+        Cache::flush();
         config()->set('seo_agent_evidence.allowed_sources.public.terms_status', 'unknown');
         $this->assertSame('held', $gateway->fetch('public', 'https://example.com/facts')['status']);
     }
@@ -106,6 +120,62 @@ final class SeoPlatform11BExternalContentGatewayTest extends TestCase
             config()->set('seo_agent_evidence.allowed_sources.public.'.$field, $value);
             $this->assertSame('held', $gateway->fetch('public', 'https://example.com/facts')['status'], $field);
         }
+    }
+
+    public function test_gateway_enforces_global_and_host_atomic_concurrency_without_waiting(): void
+    {
+        $globalLocks = [];
+        foreach (['0', '1'] as $slot) {
+            $lock = Cache::lock('seo-evidence:external:global:'.hash('sha256', $slot), 30);
+            $this->assertTrue($lock->get());
+            $globalLocks[] = $lock;
+        }
+        $this->assertSame('GLOBAL_CONCURRENCY_HELD', $this->gatewayFor('safe')->fetch('public', 'https://example.com/facts')['safe_error_code']);
+        foreach ($globalLocks as $lock) {
+            $lock->release();
+        }
+
+        $hostLock = Cache::lock('seo-evidence:external:host:'.hash('sha256', 'example.com'), 30);
+        $this->assertTrue($hostLock->get());
+        $this->assertSame('HOST_CONCURRENCY_HELD', $this->gatewayFor('safe')->fetch('public', 'https://example.com/facts')['safe_error_code']);
+        $hostLock->release();
+    }
+
+    public function test_gateway_filters_saved_fields_before_hashing_and_maps_retention(): void
+    {
+        $gateway = $this->gatewayFor('json_safe');
+        config()->set('seo_agent_evidence.allowed_sources.public.allowed_saved_fields', ['structured_facts']);
+        $facts = $gateway->fetch('public', 'https://example.com/facts');
+        $this->assertSame(['public_fact' => 'stable'], $facts['structured_facts']);
+        $this->assertSame([], $facts['bounded_snippets']);
+        $this->assertSame('external_structured_fact', $facts['retention_class']);
+
+        Cache::flush();
+        config()->set('seo_agent_evidence.allowed_sources.public.allowed_saved_fields', ['bounded_snippets']);
+        $first = $this->gatewayFor('hidden_a', false)->fetch('public', 'https://example.com/facts');
+        Cache::flush();
+        $second = $this->gatewayFor('hidden_b', false)->fetch('public', 'https://example.com/facts');
+        $this->assertSame([], $first['structured_facts']);
+        $this->assertSame('external_short_excerpt', $first['retention_class']);
+        $this->assertSame($first['bounded_snippets'], $second['bounded_snippets']);
+        $this->assertSame($first['source_content_hash'], $second['source_content_hash']);
+
+        Cache::flush();
+        config()->set('seo_agent_evidence.allowed_sources.public.allowed_saved_fields', ['raw_body']);
+        $this->assertSame('SOURCE_POLICY_HELD', $this->gatewayFor('safe', false)->fetch('public', 'https://example.com/facts')['safe_error_code']);
+    }
+
+    public function test_gateway_releases_locks_when_transport_throws(): void
+    {
+        $this->assertSame('EXTERNAL_GATEWAY_HELD', $this->gatewayFor('timeout')->fetch('public', 'https://example.com/facts')['safe_error_code']);
+        foreach (['0', '1'] as $slot) {
+            $lock = Cache::lock('seo-evidence:external:global:'.hash('sha256', $slot), 30);
+            $this->assertTrue($lock->get());
+            $lock->release();
+        }
+        $hostLock = Cache::lock('seo-evidence:external:host:'.hash('sha256', 'example.com'), 30);
+        $this->assertTrue($hostLock->get());
+        $hostLock->release();
     }
 
     private function gatewayFor(string $scenario, bool $resetPolicy = true): ExternalContentGateway
@@ -137,9 +207,19 @@ final class SeoPlatform11BExternalContentGatewayTest extends TestCase
                 if ($this->scenario === 'redirect_loop') {
                     return ['status' => 302, 'headers' => ['location' => $url], 'body' => '', 'connected_ip' => $approvedIp];
                 }
-                $body = $this->scenario === 'oversized' ? str_repeat('x', 524289) : '<p>Public fact.</p>';
+                $body = match ($this->scenario) {
+                    'oversized' => str_repeat('x', 524289),
+                    'json_safe' => json_encode(['public_fact' => 'stable'], JSON_THROW_ON_ERROR),
+                    'hidden_a' => '<script>alpha transient</script><p>Public fact.</p>',
+                    'hidden_b' => '<script>beta transient</script><p>Public fact.</p>',
+                    default => '<p>Public fact.</p>',
+                };
                 $headers = [
-                    'content-type' => $this->scenario === 'wrong_mime' ? 'application/octet-stream' : 'text/html',
+                    'content-type' => match ($this->scenario) {
+                        'wrong_mime' => 'application/octet-stream',
+                        'json_safe' => 'application/json',
+                        default => 'text/html',
+                    },
                     'content-length' => (string) strlen($body),
                 ];
                 if ($this->scenario === 'bad_encoding') {

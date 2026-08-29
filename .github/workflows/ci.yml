@@ -418,11 +418,11 @@ jobs:
         run: |
           set -euo pipefail
           php scripts/seo/export_seo_agent_evidence_contracts.php > "$RUNNER_TEMP/manifest-hash"
-          git diff --exit-code -- docs/seo/generated/seo-agent-evidence-contract-manifest.v1.json
+          git diff --exit-code -- docs/seo/generated/seo-agent-evidence-contract-manifest.v2.json
           php artisan test --compact tests/Feature/SeoIntel/SeoPlatform11B*.php
           php artisan seo:evidence-boundary-closeout --expected-sha="$GITHUB_SHA" --json > ../seo-agent-evidence-boundary-closeout.json
           jq -e --arg sha "$GITHUB_SHA" '
-            .contract_version == "seo.evidence_boundary_closeout.v1"
+            .contract_version == "seo.evidence_boundary_closeout.v2"
             and .release_sha == $sha
             and (.dependency_status == "READY" or .dependency_status == "DEPENDENCY_HOLD")
             and .execution_allowed == false
@@ -430,6 +430,20 @@ jobs:
             and .context_build_enabled == false
             and .external_fetch_enabled == false
             and .retention_delete_enabled == false
+            and .query_hmac_dual_write_enabled == false
+            and .agent_external_egress == false
+            and .allowed_sources_count == 0
+            and .read_only_gsc == true
+            and .search_submission_allowed == false
+            and .post12_agent_write_enabled == false
+            and .l4_state == "dormant_not_authorized"
+            and .self_checks.private_route_probes == {total:36,rejected:36,bypass:0}
+            and .self_checks.pii_evasion_probes.bypass == 0
+            and .self_checks.invalid_context_scope.ready == 0
+            and .self_checks.gateway.rate_limit == "pass"
+            and .self_checks.gateway.concurrency == "pass"
+            and .self_checks.gateway.allowed_fields == "pass"
+            and .self_checks.gateway.retention_mapping == "pass"
             and .model_calls == 0 and .tool_calls == 0 and .external_calls == 0 and .business_writes == 0
             and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' ../seo-agent-evidence-boundary-closeout.json >/dev/null

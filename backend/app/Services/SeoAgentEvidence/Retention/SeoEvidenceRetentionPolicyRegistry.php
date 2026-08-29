@@ -10,7 +10,7 @@ use InvalidArgumentException;
 
 final class SeoEvidenceRetentionPolicyRegistry
 {
-    public const VERSION = '1.0.0';
+    public const VERSION = '2.0.0';
 
     private const DAYS = [
         'dependency_contract' => 400,

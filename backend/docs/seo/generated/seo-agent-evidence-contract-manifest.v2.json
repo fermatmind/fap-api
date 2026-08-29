@@ -1,0 +1,69 @@
+{
+    "schema_version": "seo.evidence_contract_manifest.v2",
+    "manifest_version": "2.0.0",
+    "contracts": [
+        {
+            "id": "seo.evidence_bundle",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/evidence/schemas/seo-evidence-bundle.v1.schema.json",
+            "hash": "1fc459defda27599e1a825f778b54379a96fb60c3278bc5d1c7274cbfd239d01"
+        },
+        {
+            "id": "seo.evidence_dependency_snapshot",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/evidence/schemas/seo-evidence-dependency-snapshot.v1.schema.json",
+            "hash": "31c107db869ba82010991d7a2fb37d57d00c128baf8690b5b69fbfebb47d9704"
+        },
+        {
+            "id": "seo.evidence_context",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/evidence/schemas/seo-evidence-context.v1.schema.json",
+            "hash": "9a6cc17ab546c6e38f3cf7be75d38cbfa3a525eb210a1ca175617921c14d1266"
+        },
+        {
+            "id": "seo.external_content_result",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/evidence/schemas/seo-external-content-result.v1.schema.json",
+            "hash": "3d10245c226d252be8a796aebe38a6f356c3a881d6755b011a0b93d69d970a55"
+        },
+        {
+            "id": "seo.query_privacy",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/evidence/policies/seo-query-privacy.v2.json",
+            "hash": "e6f93c33ab19ceb287418d6444c405a06b980a7cc0fc2b8a9e47e9fa60dfd21b"
+        },
+        {
+            "id": "seo.private_negative_set",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/evidence/policies/seo-private-negative-set.v2.json",
+            "hash": "405949708ee4b7383ac72b34baa8a17ac5e976f284739634d7053c9942f416c0"
+        },
+        {
+            "id": "seo.external_content_gateway",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/evidence/policies/seo-external-content-gateway.v2.json",
+            "hash": "d089daae6794e3a6f0719b70776ce7a838adb6fd314d249b81bdfec2bd997567"
+        },
+        {
+            "id": "seo.context_minimization",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/evidence/policies/seo-context-minimization.v2.json",
+            "hash": "dc84285f894aa9d0b0eefd91032c9919e47ef9feb2172bb5ec65c3ce38e527b5"
+        },
+        {
+            "id": "seo.evidence_retention",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/evidence/policies/seo-evidence-retention.v2.json",
+            "hash": "f8eed53748cb62dfcf207e9c35f1967ec0c03f2c25bbd6bb2b869b73195db7b9"
+        }
+    ],
+    "negative_guarantees": {
+        "changes_11a_registry": false,
+        "model_invocation": false,
+        "tool_invocation": false,
+        "agent_write_authority": false,
+        "search_submission": false,
+        "v1_contract_bytes_changed": false
+    },
+    "manifest_hash": "c7b6d23cd70b789f8dad80fe4c187679211a1485dab47cb23ed2cb51980c59ab"
+}

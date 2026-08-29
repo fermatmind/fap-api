@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SeoIntel;
 
+use App\Services\SeoAgentEvidence\Privacy\SeoEvidenceDiagnosticSanitizer;
 use App\Services\SeoAgentEvidence\Privacy\SeoPrivateDataScanner;
 use App\Services\SeoAgentEvidence\Privacy\SeoQueryHmac;
 use App\Services\SeoAgentEvidence\Sources\GscAggregateEvidenceAdapter;
@@ -66,5 +67,31 @@ final class SeoPlatform11BQueryPrivacyTest extends TestCase
         $safe = $adapter->adapt(['source_origin' => 'live_gsc_api', 'query_level' => true, 'query_hmac' => $row['query_hmac'], 'query_hmac_key_version' => 'gsc-k1', 'clicks' => 2, 'impressions' => 20]);
         $this->assertSame('available', $safe['source_capability_state']);
         $this->assertSame(['query_hmac', 'query_hmac_key_version', 'clicks', 'impressions'], array_keys($safe['payload']));
+    }
+
+    public function test_unicode_camel_numeric_nested_and_object_pii_evasions_fail_closed(): void
+    {
+        $scanner = app(SeoPrivateDataScanner::class);
+        foreach ([
+            ['userId' => 42],
+            ['accessToken' => 'opaque'],
+            ['emailAddress' => 'person@example.com'],
+            ['payment-id' => 4111111111111111],
+            ['profile.user.id' => 42],
+            ['nested' => ['accountRecovery' => 'opaque']],
+            ['nested' => [['phone' => 13800138000]]],
+            ['ｕｓｅｒ＿ｉｄ' => 42],
+            (object) ['public' => true],
+        ] as $probe) {
+            $scan = $scanner->scan($probe);
+            $this->assertTrue($scan['private_data_present']);
+            $this->assertArrayNotHasKey('matches', $scan);
+        }
+
+        $this->assertFalse($scanner->scan(['aggregate_result_count' => 12, 'status_counts' => ['ready' => 2]])['private_data_present']);
+        $diagnostic = app(SeoEvidenceDiagnosticSanitizer::class)->diagnostic('SEO_EVIDENCE_PRIVATE_DATA', [], 'attempt_12345', 1, str_repeat('a', 64));
+        $this->assertSame(['safe_error_code', 'category_counts'], array_keys($diagnostic));
+        $this->assertGreaterThan(0, array_sum($diagnostic['category_counts']));
+        $this->assertStringNotContainsString('attempt_12345', json_encode($diagnostic, JSON_THROW_ON_ERROR));
     }
 }
