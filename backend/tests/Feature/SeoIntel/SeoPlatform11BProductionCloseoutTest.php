@@ -40,7 +40,12 @@ final class SeoPlatform11BProductionCloseoutTest extends TestCase
         $this->assertStringContainsString('seo-agent-evidence-boundary-production.json', $deploy);
         $this->assertStringContainsString('-o IdentitiesOnly=yes -i "$DEPLOY_IDENTITY_FILE_STG"', $deploy);
         $this->assertStringContainsString("task('seo:agent-evidence-boundary-closeout'", $deployer);
-        $this->assertStringContainsString('ln "$tmp" "$receipt_path"', $deployer);
+        $this->assertStringContainsString('sudo -n -u www-data -- mkdir -p "$receipt_dir"', $deployer);
+        $this->assertStringContainsString('as_receipt_owner ln "$tmp" "$receipt_path"', $deployer);
+        $this->assertStringContainsString(
+            'file=$q_path/shared/backend/storage/app/release-receipts/seo-agent-evidence-boundary/$q_sha.json; sudo -n -u www-data -- test -f \"\$file\"; sudo -n -u www-data -- test ! -L \"\$file\"; sudo -n -u www-data -- cat \"\$file\"',
+            $deploy,
+        );
         $this->assertCount(4, glob(base_path('../.github/workflows/*.yml')) ?: []);
     }
 }

@@ -406,7 +406,7 @@ jobs:
           receipt=seo-agent-evidence-boundary-production.json
           printf -v q_path '%q' "$DEPLOY_PATH"
           printf -v q_sha '%q' "$DEPLOY_SHA"
-          remote="set -euo pipefail; file=$q_path/shared/backend/storage/app/release-receipts/seo-agent-evidence-boundary/$q_sha.json; test -f \"\$file\"; test ! -L \"\$file\"; cat \"\$file\""
+          remote="set -euo pipefail; file=$q_path/shared/backend/storage/app/release-receipts/seo-agent-evidence-boundary/$q_sha.json; sudo -n -u www-data -- test -f \"\$file\"; sudo -n -u www-data -- test ! -L \"\$file\"; sudo -n -u www-data -- cat \"\$file\""
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$receipt"
           jq -e --arg sha "$DEPLOY_SHA" '.release_sha == $sha and .execution_allowed == false and (.receipt_hash | test("^[a-f0-9]{64}$"))' "$receipt" >/dev/null
       - id: career-parity

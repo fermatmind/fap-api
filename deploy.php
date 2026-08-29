@@ -1066,17 +1066,29 @@ exit($ok ? 0 : 1);
 ' "$expected_sha"
 receipt_dir='{{deploy_path}}/shared/backend/storage/app/release-receipts/seo-agent-evidence-boundary'
 receipt_path="$receipt_dir/$expected_sha.json"
-mkdir -p "$receipt_dir"
-tmp="$(mktemp "$receipt_dir/.${expected_sha}.XXXXXX")"
-trap 'rm -f "$tmp"' EXIT
-printf '%s\n' "$receipt" > "$tmp"
-chmod 0640 "$tmp"
-if ln "$tmp" "$receipt_path" 2>/dev/null; then
+receipt_owner=deploy
+mkdir -p "$receipt_dir" 2>/dev/null || true
+as_receipt_owner() {
+  if [ "$receipt_owner" = www-data ]; then
+    sudo -n -u www-data -- "$@"
+  else
+    "$@"
+  fi
+}
+if ! tmp="$(mktemp "$receipt_dir/.${expected_sha}.XXXXXX" 2>/dev/null)"; then
+  sudo -n -u www-data -- mkdir -p "$receipt_dir"
+  receipt_owner=www-data
+  tmp="$(as_receipt_owner mktemp "$receipt_dir/.${expected_sha}.XXXXXX")"
+fi
+trap 'as_receipt_owner rm -f "$tmp"' EXIT
+printf '%s\n' "$receipt" | as_receipt_owner tee "$tmp" >/dev/null
+as_receipt_owner chmod 0640 "$tmp"
+if as_receipt_owner ln "$tmp" "$receipt_path" 2>/dev/null; then
   :
 else
-  test -f "$receipt_path"
-  test ! -L "$receipt_path"
-  cmp -s "$tmp" "$receipt_path"
+  as_receipt_owner test -f "$receipt_path"
+  as_receipt_owner test ! -L "$receipt_path"
+  as_receipt_owner cmp -s "$tmp" "$receipt_path"
 fi
 BASH);
     });
