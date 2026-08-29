@@ -29,7 +29,11 @@ final class SeoEvidenceDiagnosticSanitizer
                 && is_int($value) && $value >= 0,
             ARRAY_FILTER_USE_BOTH,
         );
-        foreach ($this->scanner->scan([$bundleId, $bundleVersion, $bundleHash])['category_counts'] as $category => $count) {
+        foreach ($this->scanner->scan([
+            'bundle_id' => $bundleId,
+            'bundle_version' => $bundleVersion,
+            'bundle_hash' => $bundleHash,
+        ], ['bundle_hash'])['category_counts'] as $category => $count) {
             $categoryCounts[$category] = ($categoryCounts[$category] ?? 0) + $count;
         }
         ksort($categoryCounts, SORT_STRING);

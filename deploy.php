@@ -1056,7 +1056,7 @@ test "${#expected_sha}" -eq 40
 receipt="$({{bin/php}} artisan seo:evidence-boundary-closeout --expected-sha="$expected_sha" --json --no-interaction --no-ansi)"
 printf '%s' "$receipt" | {{bin/php}} -r '
 $payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
-$ok = ($payload["contract_version"] ?? null) === "seo.evidence_boundary_closeout.v3"
+$ok = ($payload["contract_version"] ?? null) === "seo.evidence_boundary_closeout.v4"
     && ($payload["release_sha"] ?? null) === ($argv[1] ?? null)
     && in_array(($payload["dependency_status"] ?? null), ["READY", "DEPENDENCY_HOLD"], true)
     && ($payload["execution_allowed"] ?? null) === false
@@ -1079,6 +1079,16 @@ $ok = ($payload["contract_version"] ?? null) === "seo.evidence_boundary_closeout
         "factory" => ["total" => 19, "rejected" => 19, "bypass" => 0],
         "verifier" => ["total" => 27, "rejected" => 27, "bypass" => 0],
         "context_builder" => ["total" => 6, "held" => 6, "fully_sanitized" => 6, "bypass" => 0],
+    ]
+    && ($payload["self_checks"]["payment_identifier_evasion_probes"] ?? null) === [
+        "malicious_total" => 9,
+        "rejected" => 9,
+        "bypass" => 0,
+        "scanner" => ["total" => 3, "rejected" => 3, "bypass" => 0],
+        "factory" => ["total" => 3, "rejected" => 3, "bypass" => 0],
+        "verifier" => ["total" => 3, "rejected" => 3, "bypass" => 0],
+        "valid_hash_chain" => ["total" => 3, "passed" => 3],
+        "valid_hash_false_positive" => 0,
     ]
     && !in_array("fail", (array) ($payload["self_checks"]["gateway"] ?? []), true)
     && ($payload["model_calls"] ?? null) === 0

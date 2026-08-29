@@ -62,6 +62,12 @@ final class SeoEvidenceBoundaryCloseout extends Command
             $piiEvasionProbes = $this->piiEvasionProbes($privateScanner);
             $invalidContextScope = $this->invalidContextScope($roleRegistry, $contextBuilder);
             $metadataPrivacyProbes = $this->metadataPrivacyProbes($bundleFactory, $bundleVerifier, $contextBuilder, $hasher);
+            $paymentIdentifierEvasionProbes = $this->paymentIdentifierEvasionProbes(
+                $privateScanner,
+                $bundleFactory,
+                $bundleVerifier,
+                $hasher,
+            );
             $gatewayChecks = ExternalContentGateway::privacySelfCheck();
             if ($privateRouteProbes !== ['total' => 36, 'rejected' => 36, 'bypass' => 0]
                 || ($piiEvasionProbes['bypass'] ?? null) !== 0
@@ -71,6 +77,16 @@ final class SeoEvidenceBoundaryCloseout extends Command
                     'factory' => ['total' => 19, 'rejected' => 19, 'bypass' => 0],
                     'verifier' => ['total' => 27, 'rejected' => 27, 'bypass' => 0],
                     'context_builder' => ['total' => 6, 'held' => 6, 'fully_sanitized' => 6, 'bypass' => 0],
+                ]
+                || $paymentIdentifierEvasionProbes !== [
+                    'malicious_total' => 9,
+                    'rejected' => 9,
+                    'bypass' => 0,
+                    'scanner' => ['total' => 3, 'rejected' => 3, 'bypass' => 0],
+                    'factory' => ['total' => 3, 'rejected' => 3, 'bypass' => 0],
+                    'verifier' => ['total' => 3, 'rejected' => 3, 'bypass' => 0],
+                    'valid_hash_chain' => ['total' => 3, 'passed' => 3],
+                    'valid_hash_false_positive' => 0,
                 ]
                 || in_array('fail', $gatewayChecks, true)) {
                 return $this->emit(['status' => 'failed', 'safe_error_code' => 'PRIVACY_GATEWAY_SELF_CHECK_FAILED'], self::FAILURE);
@@ -85,7 +101,7 @@ final class SeoEvidenceBoundaryCloseout extends Command
                 return $this->emit(['status' => 'failed', 'safe_error_code' => 'DEPENDENCY_SNAPSHOT_INVALID'], self::FAILURE);
             }
             $receipt = [
-                'contract_version' => 'seo.evidence_boundary_closeout.v3',
+                'contract_version' => 'seo.evidence_boundary_closeout.v4',
                 'release_sha' => $releaseSha,
                 'registry_hash' => $roleRegistry['registry_hash'],
                 'inventory_v3_hash' => $snapshot['inventory_v3_hash'],
@@ -113,6 +129,7 @@ final class SeoEvidenceBoundaryCloseout extends Command
                     'pii_evasion_probes' => $piiEvasionProbes,
                     'invalid_context_scope' => $invalidContextScope,
                     'metadata_privacy_probes' => $metadataPrivacyProbes,
+                    'payment_identifier_evasion_probes' => $paymentIdentifierEvasionProbes,
                     'gateway' => $gatewayChecks,
                 ],
                 'negative_guarantees' => [
@@ -280,6 +297,89 @@ final class SeoEvidenceBoundaryCloseout extends Command
                 'fully_sanitized' => $contextSanitized,
                 'bypass' => $contextTotal - $contextPassed,
             ],
+        ];
+    }
+
+    /**
+     * @return array{
+     *     malicious_total:int,
+     *     rejected:int,
+     *     bypass:int,
+     *     scanner:array{total:int,rejected:int,bypass:int},
+     *     factory:array{total:int,rejected:int,bypass:int},
+     *     verifier:array{total:int,rejected:int,bypass:int},
+     *     valid_hash_chain:array{total:int,passed:int},
+     *     valid_hash_false_positive:int
+     * }
+     */
+    private function paymentIdentifierEvasionProbes(
+        SeoPrivateDataScanner $scanner,
+        SeoEvidenceBundleFactory $factory,
+        SeoEvidenceBundleVerifier $verifier,
+        SeoEvidenceCanonicalHasher $hasher,
+    ): array {
+        $probes = [
+            '4111111111111111x',
+            'x4111111111111111',
+            'x4111111111111111y',
+        ];
+        $scannerRejected = count(array_filter(
+            $probes,
+            static fn (string $probe): bool => $scanner->scan($probe)['private_data_present'],
+        ));
+
+        $factoryRejected = 0;
+        foreach ($probes as $probe) {
+            $input = $this->safeBundleInput();
+            $input['payload'] = ['summary' => $probe];
+            try {
+                $factory->create($input);
+            } catch (InvalidArgumentException $exception) {
+                $factoryRejected += (int) ($exception->getMessage() === 'SEO_EVIDENCE_PRIVATE_DATA');
+            }
+        }
+
+        $verifierRejected = 0;
+        foreach ($probes as $probe) {
+            $mutated = $factory->create($this->safeBundleInput());
+            $mutated['payload'] = ['summary' => $probe];
+            $mutated['content_hash'] = $hasher->hash($mutated['payload']);
+            $mutated['bundle_hash'] = $hasher->hashWithout($mutated, 'bundle_hash');
+            $verifierRejected += (int) ($verifier->verify($mutated) === [
+                'valid' => false,
+                'code' => 'PRIVATE_DATA_PRESENT',
+            ]);
+        }
+
+        $validHash = str_repeat('a', 16).'4111111111111111'.str_repeat('b', 32);
+        $scannerPassed = ! $scanner->scan(['query_hmac' => $validHash], ['query_hmac'])['private_data_present'];
+        $factoryPassed = false;
+        $verifierPassed = false;
+        try {
+            $validInput = $this->safeBundleInput();
+            $validInput['payload']['query_hmac'] = $validHash;
+            $validBundle = $factory->create($validInput);
+            $factoryPassed = true;
+            $verifierPassed = $verifier->verify($validBundle)['valid'];
+        } catch (Throwable) {
+            // The counters below fail closed without exposing probe or bundle values.
+        }
+        $validPassed = (int) $scannerPassed + (int) $factoryPassed + (int) $verifierPassed;
+        $maliciousTotal = count($probes) * 3;
+        $rejected = $scannerRejected + $factoryRejected + $verifierRejected;
+
+        return [
+            'malicious_total' => $maliciousTotal,
+            'rejected' => $rejected,
+            'bypass' => $maliciousTotal - $rejected,
+            'scanner' => ['total' => 3, 'rejected' => $scannerRejected, 'bypass' => 3 - $scannerRejected],
+            'factory' => ['total' => 3, 'rejected' => $factoryRejected, 'bypass' => 3 - $factoryRejected],
+            'verifier' => ['total' => 3, 'rejected' => $verifierRejected, 'bypass' => 3 - $verifierRejected],
+            'valid_hash_chain' => [
+                'total' => 3,
+                'passed' => $validPassed,
+            ],
+            'valid_hash_false_positive' => 3 - $validPassed,
         ];
     }
 

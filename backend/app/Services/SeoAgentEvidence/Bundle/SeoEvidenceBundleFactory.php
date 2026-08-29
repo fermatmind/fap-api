@@ -25,7 +25,7 @@ final class SeoEvidenceBundleFactory
     /** @param array<string, mixed> $input @return array<string, mixed> */
     public function create(array $input): array
     {
-        $scan = $this->scanner->scan(array_values($input));
+        $scan = $this->scanner->scan($input, SeoPrivateDataScanner::BUNDLE_INPUT_HASH_PATHS);
         if ($scan['private_data_present']) {
             throw new InvalidArgumentException('SEO_EVIDENCE_PRIVATE_DATA');
         }

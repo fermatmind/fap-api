@@ -11,6 +11,44 @@ final class SeoPrivateDataScanner
     public const VERSION = 'seo.private_data_scanner.v2';
 
     /** @var list<string> */
+    public const BUNDLE_INPUT_HASH_PATHS = [
+        'source_ref', 'authority_revision', 'content_hash', 'retention_policy_hash',
+        'lineage_refs.*', 'bundle_hash',
+        'payload.query_hmac', 'payload.authority_hash', 'payload.runtime_hash',
+        'payload.cache_hash', 'payload.public_entity_hash', 'payload.claim_digest',
+        'payload.source_hash', 'payload.public_projection_hash',
+        'payload.material_fingerprint', 'payload.revision_hash',
+        'payload.context_hash', 'payload.receipt_hash', 'payload.bundle_hash',
+    ];
+
+    /** @var list<string> */
+    public const BUNDLE_METADATA_HASH_PATHS = [
+        'source_ref', 'authority_revision', 'content_hash', 'retention_policy_hash',
+        'lineage_refs.*', 'bundle_hash',
+    ];
+
+    /** @var list<string> */
+    public const MINIMIZED_PAYLOAD_HASH_PATHS = [
+        'query_hmac', 'authority_hash', 'runtime_hash', 'cache_hash',
+        'public_entity_hash', 'claim_digest', 'source_hash',
+        'public_projection_hash', 'material_fingerprint', 'revision_hash',
+        'context_hash', 'receipt_hash', 'bundle_hash',
+    ];
+
+    /** @var list<string> */
+    private const AUTHORIZED_HASH_PATHS = [
+        ...self::BUNDLE_INPUT_HASH_PATHS,
+        ...self::BUNDLE_METADATA_HASH_PATHS,
+        ...self::MINIMIZED_PAYLOAD_HASH_PATHS,
+    ];
+
+    /** @var list<string> */
+    private const CONTRACT_VALUE_ONLY_FIELDS = [
+        'private_data_present',
+        'injection_scan_result',
+    ];
+
+    /** @var list<string> */
     private const PRIVATE_FLOW_TERMS = [
         'attempt', 'result', 'report', 'history', 'order', 'payment', 'token',
         'user', 'identity', 'account', 'auth', 'authorization', 'invite', 'recovery',
@@ -32,8 +70,8 @@ final class SeoPrivateDataScanner
         'test_starts' => true,
     ];
 
-    /** @return array<string, mixed> */
-    public function scan(mixed $value): array
+    /** @param list<string> $exactHashPaths @return array<string, mixed> */
+    public function scan(mixed $value, array $exactHashPaths = []): array
     {
         $counts = [];
         if (! class_exists(Normalizer::class)) {
@@ -44,7 +82,15 @@ final class SeoPrivateDataScanner
                 'decision' => 'deny',
             ];
         }
-        $this->walk($value, $counts, null);
+        $authorizedHashPaths = array_map(
+            static fn (string $path): array => explode('.', $path),
+            array_values(array_unique(array_filter(
+                $exactHashPaths,
+                static fn (mixed $path): bool => is_string($path)
+                    && in_array($path, self::AUTHORIZED_HASH_PATHS, true),
+            ))),
+        );
+        $this->walk($value, $counts, null, [], $authorizedHashPaths);
         ksort($counts, SORT_STRING);
         $present = array_sum($counts) > 0;
 
@@ -56,10 +102,14 @@ final class SeoPrivateDataScanner
         ];
     }
 
-    /** @param array<string, int> $counts */
-    private function walk(mixed $value, array &$counts, ?string $key): void
+    /**
+     * @param  array<string, int>  $counts
+     * @param  list<string>  $path
+     * @param  list<list<string>>  $authorizedHashPaths
+     */
+    private function walk(mixed $value, array &$counts, ?string $key, array $path, array $authorizedHashPaths): void
     {
-        if ($key !== null) {
+        if ($key !== null && ! $this->contractValueOnlyField($path)) {
             if (! mb_check_encoding($key, 'UTF-8')) {
                 $counts['invalid_encoding'] = ($counts['invalid_encoding'] ?? 0) + 1;
 
@@ -78,7 +128,8 @@ final class SeoPrivateDataScanner
         }
         if (is_array($value)) {
             foreach ($value as $childKey => $child) {
-                $this->walk($child, $counts, is_string($childKey) ? $childKey : null);
+                $childKey = (string) $childKey;
+                $this->walk($child, $counts, $childKey, [...$path, $childKey], $authorizedHashPaths);
             }
 
             return;
@@ -101,6 +152,11 @@ final class SeoPrivateDataScanner
 
             return;
         }
+        if (is_string($value)
+            && preg_match('/^[a-f0-9]{64}$/', $value) === 1
+            && $this->pathIsAuthorized($path, $authorizedHashPaths)) {
+            return;
+        }
         $value = $this->normalizeValue((string) $value);
         if ($value === '') {
             return;
@@ -109,7 +165,7 @@ final class SeoPrivateDataScanner
             'email' => '/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i',
             'phone' => '/(?<!\d)(?:\+?86[- ]?)?1[3-9]\d{9}(?!\d)|(?<!\d)\+?1[- .]?(?:\d{3})[- .]?\d{3}[- .]?\d{4}(?!\d)/',
             'credential' => '/\b(?:bearer\s+[A-Za-z0-9._~+\/-]+=*|eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+|(?:sk|rk|pk)-(?:live|test)-[A-Za-z0-9_-]{8,}|api[_-]?key\s*[:=]|authorization\s*[:=]|cookie\s*[:=])/i',
-            'payment_identifier' => '/(?<![A-Za-z0-9])(?:\d[ -]?){13,19}(?![A-Za-z0-9])/',
+            'payment_identifier' => '/(?<!\d)(?:\d[ -]?){13,19}(?!\d)/',
             'identity_identifier' => '/(?<!\d)\d{17}[\dXx](?!\d)|\b\d{3}-\d{2}-\d{4}\b/',
             'opaque_identifier' => '/\b[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\b|\b[0-7][0-9A-HJKMNP-TV-Z]{25}\b/i',
             'ip_address' => '/(?<![\w:])(?:\d{1,3}\.){3}\d{1,3}(?![\w:])|(?<![\w:])(?:[a-f0-9]{1,4}:){2,7}[a-f0-9]{0,4}(?![\w:])/i',
@@ -121,6 +177,31 @@ final class SeoPrivateDataScanner
                 $counts[$category] = ($counts[$category] ?? 0) + $matches;
             }
         }
+    }
+
+    /** @param list<string> $path */
+    private function contractValueOnlyField(array $path): bool
+    {
+        return count($path) === 1 && in_array($path[0], self::CONTRACT_VALUE_ONLY_FIELDS, true);
+    }
+
+    /** @param list<string> $path @param list<list<string>> $authorizedHashPaths */
+    private function pathIsAuthorized(array $path, array $authorizedHashPaths): bool
+    {
+        foreach ($authorizedHashPaths as $candidate) {
+            if (count($candidate) !== count($path)) {
+                continue;
+            }
+            foreach ($candidate as $index => $segment) {
+                if ($segment !== '*' && $segment !== $path[$index]) {
+                    continue 2;
+                }
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     private function normalizeKey(string $key): string

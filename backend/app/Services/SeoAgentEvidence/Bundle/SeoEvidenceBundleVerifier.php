@@ -27,13 +27,13 @@ final class SeoEvidenceBundleVerifier
     /** @param array<string, mixed> $bundle @return array{valid:bool,code:string} */
     public function verify(array $bundle): array
     {
-        $metadataValues = [];
+        $metadata = [];
         foreach ($bundle as $field => $value) {
             if ($field !== 'payload') {
-                $metadataValues[] = $value;
+                $metadata[$field] = $value;
             }
         }
-        if ($this->scanner->scan($metadataValues)['private_data_present']) {
+        if ($this->scanner->scan($metadata, SeoPrivateDataScanner::BUNDLE_METADATA_HASH_PATHS)['private_data_present']) {
             return ['valid' => false, 'code' => 'PRIVATE_DATA_PRESENT'];
         }
 
@@ -74,7 +74,8 @@ final class SeoEvidenceBundleVerifier
         if (! is_string($bundle['content_hash']) || ! hash_equals($this->hasher->hash($bundle['payload']), $bundle['content_hash'])) {
             return ['valid' => false, 'code' => 'CONTENT_HASH_INVALID'];
         }
-        if ($bundle['private_data_present'] !== false || $this->scanner->scan($bundle['payload'])['private_data_present']) {
+        if ($bundle['private_data_present'] !== false
+            || $this->scanner->scan($bundle['payload'], SeoPrivateDataScanner::MINIMIZED_PAYLOAD_HASH_PATHS)['private_data_present']) {
             return ['valid' => false, 'code' => 'PRIVATE_DATA_PRESENT'];
         }
         if ($bundle['injection_scan_result'] !== 'pass' || $this->injection->scan($bundle['payload'])['result'] !== 'pass') {

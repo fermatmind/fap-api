@@ -80,6 +80,59 @@ final class SeoPlatform11BEvidenceBundleTest extends TestCase
         }
     }
 
+    public function test_payment_identifier_evasions_are_rejected_and_valid_hash_chain_is_preserved(): void
+    {
+        $factory = app(SeoEvidenceBundleFactory::class);
+        $verifier = app(SeoEvidenceBundleVerifier::class);
+        $hasher = app(SeoEvidenceCanonicalHasher::class);
+
+        foreach ([
+            '4111111111111111x',
+            'x4111111111111111',
+            'x4111111111111111y',
+        ] as $probe) {
+            $input = $this->safeBundleInput();
+            $input['payload'] = ['summary' => $probe];
+            try {
+                $factory->create($input);
+                $this->fail("Factory accepted payment identifier evasion {$probe}");
+            } catch (InvalidArgumentException $exception) {
+                $this->assertSame('SEO_EVIDENCE_PRIVATE_DATA', $exception->getMessage());
+            }
+
+            $mutated = $factory->create($this->safeBundleInput());
+            $mutated['payload'] = ['summary' => $probe];
+            $mutated['content_hash'] = $hasher->hash($mutated['payload']);
+            $mutated['bundle_hash'] = $hasher->hashWithout($mutated, 'bundle_hash');
+            $this->assertSame(
+                ['valid' => false, 'code' => 'PRIVATE_DATA_PRESENT'],
+                $verifier->verify($mutated),
+            );
+        }
+
+        $validHash = str_repeat('a', 16).'4111111111111111'.str_repeat('b', 32);
+        $validInput = $this->safeBundleInput();
+        $validInput['payload']['query_hmac'] = $validHash;
+        $validBundle = $factory->create($validInput);
+        $this->assertTrue($verifier->verify($validBundle)['valid']);
+
+        foreach ([
+            ['summary' => $validHash],
+            ['query_hmac' => substr($validHash, 0, 63)],
+            ['query_hmac' => $validHash.'b'],
+            ['query_hmac' => strtoupper($validHash)],
+        ] as $payload) {
+            $invalidInput = $this->safeBundleInput();
+            $invalidInput['payload'] = $payload;
+            try {
+                $factory->create($invalidInput);
+                $this->fail('Factory accepted a non-exempt payment-like hash value');
+            } catch (InvalidArgumentException $exception) {
+                $this->assertSame('SEO_EVIDENCE_PRIVATE_DATA', $exception->getMessage());
+            }
+        }
+    }
+
     /** @return array<string, mixed> */
     private function safeBundleInput(): array
     {

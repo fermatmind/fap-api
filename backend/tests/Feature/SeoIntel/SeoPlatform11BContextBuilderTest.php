@@ -26,6 +26,18 @@ final class SeoPlatform11BContextBuilderTest extends TestCase
         $this->assertSame([], $ready['tool_allowlist']);
         $this->assertArrayNotHasKey('query_display_masked', $ready['payload']);
 
+        $validHash = str_repeat('a', 16).'4111111111111111'.str_repeat('b', 32);
+        $hashReady = $builder->build(
+            'mission:test',
+            'bounded_review',
+            'seo.expert.search_analytics_measurement',
+            'tests',
+            'zh-CN',
+            [$this->evidenceBundle(['payload' => ['query_hmac' => $validHash, 'query_hmac_key_version' => 'k1']])],
+        );
+        $this->assertSame('READY', $hashReady['status']);
+        $this->assertSame($validHash, $hashReady['payload']['query_hmac']);
+
         $private = $this->evidenceBundle(['payload' => ['query_hmac' => str_repeat('b', 64), 'raw_query' => 'personality test']]);
         $this->assertSame('EVIDENCE_HOLD', $builder->build('mission:test', 'bounded_review', 'seo.expert.search_analytics_measurement', 'tests', 'zh-CN', [$private])['status']);
         $held = $this->evidenceBundle(['source_capability_state' => 'unavailable']);
@@ -91,6 +103,14 @@ final class SeoPlatform11BContextBuilderTest extends TestCase
         $maliciousBundle['bundle_hash'] = $hasher->hashWithout($maliciousBundle, 'bundle_hash');
         $buildArguments = [...array_values($arguments), [$maliciousBundle]];
         $this->assertFullySanitized($builder->build(...$buildArguments), $bundleProbe, $hasher, 'bundle');
+
+        $paymentProbe = 'x4111111111111111y';
+        $paymentBundle = $safeBundle;
+        $paymentBundle['payload'] = ['summary' => $paymentProbe];
+        $paymentBundle['content_hash'] = $hasher->hash($paymentBundle['payload']);
+        $paymentBundle['bundle_hash'] = $hasher->hashWithout($paymentBundle, 'bundle_hash');
+        $paymentBuildArguments = [...array_values($arguments), [$paymentBundle]];
+        $this->assertFullySanitized($builder->build(...$paymentBuildArguments), $paymentProbe, $hasher, 'payment_bundle');
     }
 
     /** @param array<string, mixed> $context */

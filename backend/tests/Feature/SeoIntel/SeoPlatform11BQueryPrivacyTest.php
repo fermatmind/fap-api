@@ -94,4 +94,46 @@ final class SeoPlatform11BQueryPrivacyTest extends TestCase
         $this->assertGreaterThan(0, array_sum($diagnostic['category_counts']));
         $this->assertStringNotContainsString('attempt_12345', json_encode($diagnostic, JSON_THROW_ON_ERROR));
     }
+
+    public function test_payment_identifiers_fail_closed_and_only_exact_declared_hash_paths_are_exempt(): void
+    {
+        $scanner = app(SeoPrivateDataScanner::class);
+        $paymentProbes = [
+            '4111111111111111x',
+            'x4111111111111111',
+            'x4111111111111111y',
+        ];
+
+        foreach ($paymentProbes as $probe) {
+            $this->assertTrue($scanner->scan($probe)['private_data_present'], $probe);
+        }
+
+        $validHash = str_repeat('a', 16).'4111111111111111'.str_repeat('b', 32);
+        $this->assertFalse($scanner->scan(['query_hmac' => $validHash], ['query_hmac'])['private_data_present']);
+        $adapted = app(GscAggregateEvidenceAdapter::class)->adapt([
+            'source_origin' => 'live_gsc_api',
+            'query_level' => true,
+            'query_hmac' => $validHash,
+            'query_hmac_key_version' => 'gsc-k1',
+            'clicks' => 2,
+            'impressions' => 20,
+        ]);
+        $this->assertSame('available', $adapted['source_capability_state']);
+        $diagnostic = app(SeoEvidenceDiagnosticSanitizer::class)->diagnostic('SAFE_CODE', [], null, 1, $validHash);
+        $this->assertArrayNotHasKey('payment_identifier', $diagnostic['category_counts']);
+
+        foreach ([
+            [$validHash, ['query_hmac']],
+            [['summary' => $validHash], ['summary']],
+            [['summary' => $validHash], SeoPrivateDataScanner::MINIMIZED_PAYLOAD_HASH_PATHS],
+            [['query_hmac' => substr($validHash, 0, 63)], ['query_hmac']],
+            [['query_hmac' => $validHash.'b'], ['query_hmac']],
+            [['query_hmac' => strtoupper($validHash)], ['query_hmac']],
+            [['nested' => ['query_hmac' => $validHash]], ['query_hmac']],
+            [['private_data_present' => 'x4111111111111111y'], []],
+            [['injection_scan_result' => 'x4111111111111111y'], []],
+        ] as [$value, $paths]) {
+            $this->assertTrue($scanner->scan($value, $paths)['private_data_present']);
+        }
+    }
 }

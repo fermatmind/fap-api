@@ -16,7 +16,7 @@ final class SeoPlatform11BProductionCloseoutTest extends TestCase
         $this->assertSame(0, Artisan::call('seo:evidence-boundary-closeout', ['--expected-sha' => $sha, '--json' => true]));
         $output = Artisan::output();
         $receipt = json_decode(trim($output), true, 512, JSON_THROW_ON_ERROR);
-        $this->assertSame('seo.evidence_boundary_closeout.v3', $receipt['contract_version']);
+        $this->assertSame('seo.evidence_boundary_closeout.v4', $receipt['contract_version']);
         $this->assertSame('DEPENDENCY_HOLD', $receipt['dependency_status']);
         $this->assertFalse($receipt['execution_allowed']);
         $this->assertFalse($receipt['external_fetch_enabled']);
@@ -36,10 +36,21 @@ final class SeoPlatform11BProductionCloseoutTest extends TestCase
             'verifier' => ['total' => 27, 'rejected' => 27, 'bypass' => 0],
             'context_builder' => ['total' => 6, 'held' => 6, 'fully_sanitized' => 6, 'bypass' => 0],
         ], $receipt['self_checks']['metadata_privacy_probes']);
+        $this->assertSame([
+            'malicious_total' => 9,
+            'rejected' => 9,
+            'bypass' => 0,
+            'scanner' => ['total' => 3, 'rejected' => 3, 'bypass' => 0],
+            'factory' => ['total' => 3, 'rejected' => 3, 'bypass' => 0],
+            'verifier' => ['total' => 3, 'rejected' => 3, 'bypass' => 0],
+            'valid_hash_chain' => ['total' => 3, 'passed' => 3],
+            'valid_hash_false_positive' => 0,
+        ], $receipt['self_checks']['payment_identifier_evasion_probes']);
         $this->assertNotContains('fail', $receipt['self_checks']['gateway']);
         $this->assertStringNotContainsString('privacy-probe@example.com', $output);
         $this->assertStringNotContainsString('sk-live-privacyprobe12345678', $output);
         $this->assertStringNotContainsString('attempt_id_privacyprobe1234', $output);
+        $this->assertStringNotContainsString('4111111111111111', $output);
         $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $receipt['receipt_hash']);
         $firstHash = $receipt['receipt_hash'];
         $this->assertSame(0, Artisan::call('seo:evidence-boundary-closeout', ['--expected-sha' => $sha, '--json' => true]));
@@ -54,14 +65,18 @@ final class SeoPlatform11BProductionCloseoutTest extends TestCase
         $this->assertStringContainsString('seo-agent-evidence-boundary:', $ci);
         $this->assertStringContainsString('seo-agent-evidence-contract-manifest.v2.json', $ci);
         $this->assertStringContainsString('seo:evidence-boundary-closeout --expected-sha="$GITHUB_SHA"', $ci);
-        $this->assertStringContainsString('seo.evidence_boundary_closeout.v3', $ci);
+        $this->assertSame(2, substr_count($ci, 'seo.evidence_boundary_closeout.v4'));
+        $this->assertSame(2, substr_count($ci, 'payment_identifier_evasion_probes'));
         $this->assertStringContainsString("-o seo_agent_evidence_boundary='", $deploy);
         $this->assertStringContainsString("needs.policy.outputs.career_current_release == 'true'", $deploy);
         $this->assertStringContainsString('seo-agent-evidence-boundary-staging.json', $deploy);
         $this->assertStringContainsString('seo-agent-evidence-boundary-production.json', $deploy);
+        $this->assertSame(2, substr_count($deploy, 'seo.evidence_boundary_closeout.v4'));
+        $this->assertSame(2, substr_count($deploy, 'payment_identifier_evasion_probes'));
         $this->assertStringContainsString('-o IdentitiesOnly=yes -i "$DEPLOY_IDENTITY_FILE_STG"', $deploy);
         $this->assertStringContainsString("task('seo:agent-evidence-boundary-closeout'", $deployer);
-        $this->assertStringContainsString('seo.evidence_boundary_closeout.v3', $deployer);
+        $this->assertSame(1, substr_count($deployer, 'seo.evidence_boundary_closeout.v4'));
+        $this->assertSame(1, substr_count($deployer, 'payment_identifier_evasion_probes'));
         $this->assertStringContainsString('sudo -n -u www-data -- mkdir -p "$receipt_dir"', $deployer);
         $this->assertStringContainsString('as_receipt_owner ln "$tmp" "$receipt_path"', $deployer);
         $this->assertStringContainsString(

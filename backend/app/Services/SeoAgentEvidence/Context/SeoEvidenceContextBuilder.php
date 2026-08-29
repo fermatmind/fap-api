@@ -99,7 +99,10 @@ final class SeoEvidenceContextBuilder
                 || $this->containsForbiddenField($bundle['payload'] ?? null)) {
                 $status = 'EVIDENCE_HOLD';
             }
-            if ($this->scanner->scan($bundle['payload'] ?? null)['private_data_present']) {
+            if ($this->scanner->scan(
+                $bundle['payload'] ?? null,
+                SeoPrivateDataScanner::MINIMIZED_PAYLOAD_HASH_PATHS,
+            )['private_data_present']) {
                 $status = 'EVIDENCE_HOLD';
             }
             $revisionKey = (string) ($bundle['authority_type'] ?? 'unknown');
@@ -128,7 +131,7 @@ final class SeoEvidenceContextBuilder
                 $status = 'EVIDENCE_HOLD';
             }
         }
-        if ($this->scanner->scan($payload)['private_data_present']) {
+        if ($this->scanner->scan($payload, SeoPrivateDataScanner::MINIMIZED_PAYLOAD_HASH_PATHS)['private_data_present']) {
             $status = 'EVIDENCE_HOLD';
             $payload = [];
         }

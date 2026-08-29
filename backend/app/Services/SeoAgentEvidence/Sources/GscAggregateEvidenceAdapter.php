@@ -29,7 +29,7 @@ final class GscAggregateEvidenceAdapter
             return $this->unavailable('GSC_QUERY_HMAC_UNAVAILABLE');
         }
         $payload = array_intersect_key($input, array_flip(self::SAFE_FIELDS));
-        if ($this->scanner->scan($payload)['private_data_present']) {
+        if ($this->scanner->scan($payload, ['query_hmac'])['private_data_present']) {
             return $this->unavailable('GSC_PRIVATE_DATA_BLOCKED');
         }
 

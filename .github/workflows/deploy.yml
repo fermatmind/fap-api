@@ -291,7 +291,7 @@ jobs:
             -o IdentitiesOnly=yes -i "$DEPLOY_IDENTITY_FILE_STG" -p "$DEPLOY_PORT" \
             "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$receipt"
           jq -e --arg sha "$DEPLOY_SHA" '
-            .contract_version == "seo.evidence_boundary_closeout.v3"
+            .contract_version == "seo.evidence_boundary_closeout.v4"
             and .release_sha == $sha
             and .execution_allowed == false
             and .bundle_write_enabled == false
@@ -312,6 +312,13 @@ jobs:
               factory:{total:19,rejected:19,bypass:0},
               verifier:{total:27,rejected:27,bypass:0},
               context_builder:{total:6,held:6,fully_sanitized:6,bypass:0}
+            }
+            and .self_checks.payment_identifier_evasion_probes == {
+              malicious_total:9,rejected:9,bypass:0,
+              scanner:{total:3,rejected:3,bypass:0},
+              factory:{total:3,rejected:3,bypass:0},
+              verifier:{total:3,rejected:3,bypass:0},
+              valid_hash_chain:{total:3,passed:3},valid_hash_false_positive:0
             }
             and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
@@ -485,7 +492,7 @@ jobs:
           remote="set -euo pipefail; file=$q_path/shared/backend/storage/app/release-receipts/seo-agent-evidence-boundary/$q_sha.json; sudo -n -u www-data -- test -f \"\$file\"; sudo -n -u www-data -- test ! -L \"\$file\"; sudo -n -u www-data -- cat \"\$file\""
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$receipt"
           jq -e --arg sha "$DEPLOY_SHA" '
-            .contract_version == "seo.evidence_boundary_closeout.v3"
+            .contract_version == "seo.evidence_boundary_closeout.v4"
             and .release_sha == $sha
             and .execution_allowed == false
             and .bundle_write_enabled == false
@@ -506,6 +513,13 @@ jobs:
               factory:{total:19,rejected:19,bypass:0},
               verifier:{total:27,rejected:27,bypass:0},
               context_builder:{total:6,held:6,fully_sanitized:6,bypass:0}
+            }
+            and .self_checks.payment_identifier_evasion_probes == {
+              malicious_total:9,rejected:9,bypass:0,
+              scanner:{total:3,rejected:3,bypass:0},
+              factory:{total:3,rejected:3,bypass:0},
+              verifier:{total:3,rejected:3,bypass:0},
+              valid_hash_chain:{total:3,passed:3},valid_hash_false_positive:0
             }
             and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
