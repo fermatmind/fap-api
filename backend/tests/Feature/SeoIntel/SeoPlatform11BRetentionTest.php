@@ -26,6 +26,14 @@ final class SeoPlatform11BRetentionTest extends TestCase
         (require database_path('migrations/seo_intel/2026_08_29_010000_create_seo_evidence_tables.php'))->up();
     }
 
+    public function test_expand_migration_avoids_mysql_implicit_timestamp_defaults(): void
+    {
+        $migration = (string) file_get_contents(database_path('migrations/seo_intel/2026_08_29_010000_create_seo_evidence_tables.php'));
+
+        $this->assertStringNotContainsString("->timestamp('", $migration);
+        $this->assertSame(5, substr_count($migration, '->dateTime('));
+    }
+
     public function test_expiry_plan_delete_receipt_and_rerun_are_deterministic(): void
     {
         config()->set('seo_agent_evidence.bundle_write_enabled', true);
