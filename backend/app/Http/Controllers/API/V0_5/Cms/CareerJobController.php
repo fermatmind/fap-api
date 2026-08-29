@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API\V0_5\Cms;
 
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\DTO\Career\CareerJobDetailBundle;
 use App\Http\Controllers\Concerns\RespondsWithNotFound;
 use App\Http\Controllers\Controller;
@@ -33,6 +34,7 @@ final class CareerJobController extends Controller
         private readonly AnswerSurfaceContractService $answerSurfaceContractService,
         private readonly LandingSurfaceContractService $landingSurfaceContractService,
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
+        private readonly CareerContentV3CanonicalReader $careerContentV3CanonicalReader,
     ) {}
 
     public function index(Request $request): JsonResponse
@@ -143,7 +145,7 @@ final class CareerJobController extends Controller
         $seoContract = $bundle->seoContract;
         $canonical = $this->canonicalFromSeoContract($seoContract, $bundle, $locale);
         $title = $this->bundleTitle($bundle, $locale);
-        $description = $this->bundleDescription($bundle, $title);
+        $description = $this->bundleDescription($bundle, $title, $locale);
         $robots = $this->seoContractRobots($seoContract);
         $publicIndexable = ! $this->containsNoindex($robots)
             && (bool) ($seoContract['index_eligible'] ?? false);
@@ -205,8 +207,16 @@ final class CareerJobController extends Controller
         return trim((string) ($title ?: ($bundle->identity['canonical_slug'] ?? 'Career job')));
     }
 
-    private function bundleDescription(CareerJobDetailBundle $bundle, string $title): string
+    private function bundleDescription(CareerJobDetailBundle $bundle, string $title, string $locale): string
     {
+        $slug = strtolower(trim((string) ($bundle->identity['canonical_slug'] ?? '')));
+        if ($locale === 'zh-CN' && $slug === 'accountants-and-auditors') {
+            $summary = data_get($this->careerContentV3CanonicalReader->page($slug, $locale), 'subject.summary');
+            if (is_string($summary) && trim($summary) !== '') {
+                return trim($summary);
+            }
+        }
+
         $summary = $bundle->truthLayer['summary'] ?? null;
         if (is_string($summary) && trim($summary) !== '') {
             return trim($summary);

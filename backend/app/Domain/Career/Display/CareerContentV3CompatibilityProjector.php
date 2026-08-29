@@ -132,6 +132,7 @@ final class CareerContentV3CompatibilityProjector
             'us_growth' => 'bls-us-accountants-employment-growth-2025-2035',
             'employment' => 'bls-us-accountants-employment-2025',
             'annual_openings' => 'bls-us-accountants-openings-2025-2035',
+            'china_median_pay' => 'mohrss-cn-economic-financial-wage-median-2024',
         ];
         foreach (['presentation_v1', 'presentation_v2'] as $presentationKey) {
             $stats = data_get($surface, $presentationKey.'.hero.stats');
@@ -145,7 +146,12 @@ final class CareerContentV3CompatibilityProjector
                 }
                 $fact = $facts[$factId];
                 $stats[$index]['value'] = $this->heroValue($factId, (string) $fact['display_value']);
-                $stats[$index]['source_label'] = $this->evidenceLabel($content, $fact);
+                if ($factId === 'mohrss-cn-economic-financial-wage-median-2024') {
+                    $stats[$index]['label'] = '中国经济和金融专业人员年工资中位数';
+                    $stats[$index]['source_label'] = '中国大陆｜2024 年｜宽口径企业薪酬调查';
+                } else {
+                    $stats[$index]['source_label'] = $this->evidenceLabel($content, $fact);
+                }
                 $stats[$index]['fact_ref'] = $factId;
             }
             data_set($surface, $presentationKey.'.hero.stats', $stats);

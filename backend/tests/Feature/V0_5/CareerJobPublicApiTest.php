@@ -637,6 +637,39 @@ final class CareerJobPublicApiTest extends TestCase
             ->assertJsonPath('jsonld.fragments.occupation.mainEntityOfPage', '/zh/career/jobs/product-manager');
     }
 
+    public function test_accountants_zh_seo_descriptions_use_the_current_v3_authoritative_summary_only(): void
+    {
+        $summary = '把交易、凭证、报表和内控证据，转化为可核验的财务信息。它更适合重视准确性、规则、截止日期和跨部门沟通的人——而不是只会"算数"的人。';
+
+        $job = $this->createJob([
+            'job_code' => 'accountants-and-auditors',
+            'slug' => 'accountants-and-auditors',
+            'locale' => 'zh-CN',
+            'title' => '会计师和审计师',
+            'subtitle' => 'Accountants and Auditors',
+            'excerpt' => '旧中文 SEO 摘要。',
+            'status' => CareerJob::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subMinute(),
+            'market_demand_json' => [
+                'source_refs' => [
+                    ['url' => 'https://www.bls.gov/ooh/business-and-financial/accountants-and-auditors.htm'],
+                ],
+            ],
+        ]);
+        $this->createSeoMeta($job, [
+            'jsonld_overrides_json' => ['source_docx' => '01_会计师和审计师_accountants-and-auditors.docx'],
+        ]);
+        app(PublicCareerAuthorityResponseCache::class)->warmJobDetailPayload('accountants-and-auditors', 'zh-CN', true);
+
+        $zh = $this->getJson('/api/v0.5/career-jobs/accountants-and-auditors/seo?locale=zh-CN')
+            ->assertOk();
+        self::assertSame($summary, $zh->json('meta.description'));
+        self::assertSame($summary, $zh->json('meta.og.description'));
+        self::assertSame($summary, $zh->json('meta.twitter.description'));
+    }
+
     public function test_seo_endpoint_returns_not_found_for_missing_or_hidden_jobs(): void
     {
         $this->createJob([

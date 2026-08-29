@@ -5463,9 +5463,9 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "应届生／转行者如何验证并入门：先选一个具体入口，再用可复核的工作样本证明能力。以下招聘观察来自 2026 年 1—6 月公开职位，共 40 条去重样本；财务／会计助理、应收应付或费用会计、外部审计助理、内审／稽核、税务助理各 8 条，覆盖北京、上海、广州、深圳、杭州和成都，并包含会计师事务所、企业、共享服务及专业服务雇主。",
-              "招聘样本事实：样本限定实习、校招、无需经验或 0—2 年经验岗位。只有某项要求在同类岗位样本中达到 30%，且覆盖至少三类雇主时，本页才称为“常见”；未达到时仅写“部分岗位可能要求”。列表页未披露的任务、技能或证书不计入频次。",
-              "使用边界：40 条样本用于识别入门岗位与招聘信号，不代表全国岗位占比，也不能替代目标城市、行业和雇主的最新职位说明。"
+              "应届生/转行者如何验证并入门：先选一个具体入口，再用可复核的工作样本证明能力。以下招聘观察来自 40 条去重且原始全文可打开的公开职位；财务/会计助理、应收应付或费用会计、外部审计助理、内审/稽核助理、税务助理各 8 条。每条统一记录样本 ID、城市、雇主、固定雇主类型、岗位类别、经验、学历、明确信号代码、采集日期和原始链接。",
+              "固定雇主类型仅使用：会计师事务所、大型企业/公共机构、中小型企业、共享服务/专业服务、金融机构。计数分母是原始职位全文可访问且能力字段可判定的相关样本；分子是明确提及该信号的样本。达到 30% 且覆盖至少三类雇主才标记“常见”，否则只写“部分岗位可能要求”。",
+              "使用边界：这是为入门决策构建的定向样本，不代表全国岗位占比、城市分布或雇主普遍门槛；职位可能下线，后续复核若遇登录、验证码或正文不可读，必须先替换，不能继续留在分母。"
             ]
           },
           "id": "accountant-entry-recruitment-sample",
@@ -5477,6 +5477,297 @@
             "source-15"
           ],
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-signals",
+          "data": {
+            "column_keys": [
+              "signal",
+              "count",
+              "employer_type_count",
+              "prevalence",
+              "sample_ids",
+              "limitation"
+            ],
+            "rows": [
+              [
+                "Excel",
+                "13/40",
+                "3",
+                "常见",
+                "FA02、FA05、FA06、AR07、AR08、EA01、EA08、IA02、IA05、TA04、TA05、TA07、TA08",
+                "定向样本，不代表全国占比；未在全文明确披露的信号按未提及处理。"
+              ],
+              [
+                "分录分类",
+                "12/40",
+                "4",
+                "常见",
+                "FA01、FA02、FA03、FA07、FA08、AR01、AR03、AR04、AR05、AR07、AR08、EA01",
+                "定向样本，不代表全国占比；未在全文明确披露的信号按未提及处理。"
+              ],
+              [
+                "对账",
+                "9/40",
+                "4",
+                "部分岗位可能要求",
+                "FA01、FA02、FA05、FA07、AR02、AR04、AR06、AR07、EA05",
+                "定向样本，不代表全国占比；未在全文明确披露的信号按未提及处理。"
+              ],
+              [
+                "结账逻辑",
+                "8/40",
+                "3",
+                "部分岗位可能要求",
+                "FA02、FA08、AR01、AR02、AR05、AR06、AR07、AR08",
+                "定向样本，不代表全国占比；未在全文明确披露的信号按未提及处理。"
+              ],
+              [
+                "底稿证据",
+                "30/40",
+                "4",
+                "常见",
+                "FA01、FA02、FA03、FA04、FA05、FA06、FA07、AR01、AR03、AR04、AR07、EA01、EA02、EA03、EA04、EA05、EA06、EA07、EA08、IA01、IA02、IA04、IA06、IA07、IA08、TA01、TA02、TA04、TA05、TA08",
+                "定向样本，不代表全国占比；未在全文明确披露的信号按未提及处理。"
+              ],
+              [
+                "ERP",
+                "7/40",
+                "4",
+                "部分岗位可能要求",
+                "FA02、FA03、AR07、AR08、EA01、IA01、IA03",
+                "定向样本，不代表全国占比；未在全文明确披露的信号按未提及处理。"
+              ],
+              [
+                "异常分析",
+                "23/40",
+                "5",
+                "常见",
+                "FA02、FA05、FA08、AR02、AR04、AR06、AR07、AR08、EA01、EA03、IA01、IA03、IA04、IA05、IA07、IA08、TA01、TA02、TA03、TA04、TA06、TA07、TA08",
+                "定向样本，不代表全国占比；未在全文明确披露的信号按未提及处理。"
+              ],
+              [
+                "沟通复核",
+                "39/40",
+                "5",
+                "常见",
+                "FA01、FA02、FA03、FA04、FA05、FA07、FA08、AR01、AR02、AR03、AR04、AR05、AR06、AR07、AR08、EA01、EA02、EA03、EA04、EA05、EA06、EA07、EA08、IA01、IA02、IA03、IA04、IA05、IA06、IA07、IA08、TA01、TA02、TA03、TA04、TA05、TA06、TA07、TA08",
+                "定向样本，不代表全国占比；未在全文明确披露的信号按未提及处理。"
+              ]
+            ]
+          },
+          "fact_refs": [
+            "recruitment-signal-excel-2026",
+            "recruitment-signal-je-2026",
+            "recruitment-signal-recon-2026",
+            "recruitment-signal-close-2026",
+            "recruitment-signal-evidence-2026",
+            "recruitment-signal-erp-2026",
+            "recruitment-signal-anomaly-2026",
+            "recruitment-signal-comm-2026"
+          ],
+          "id": "accountant-entry-recruitment-signals",
+          "source_refs": [
+            "source-11",
+            "source-12",
+            "source-13",
+            "source-14",
+            "source-15"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "案例规则（编辑虚构练习，不是真实企业数据）：澄明运营咨询（虚构）是一家小型服务企业，记账本位币为人民币，期间为 2026 年 6 月，采用权责发生制。忽略增值税和企业所得税计算，不把本练习当作税务教学；只处理给定材料，不自行补造审批、发票或回款。先登记原始分录，再做银行对账和截止测试，最后只对证据充分的事项入账；金额冲突、重复付款、缺失审批和科目不明时应列异常并说明待补证据。",
+              "证据索引：E01 出资回单；E02 租赁合同及付款回单；E03 设备发票、验收单；E04 耗材发票；E05 客户甲合同及验收；E06 客户甲回款回单；E07 软件合同；E08 差旅报销单及发票；E09 供应商发票；E10 首次付款审批及回单；E11 员工借款申请（缺审批）；E12 客户乙合同、验收及业务标注；E13 水电网络账单；E14 客户丙合同及验收；E15 客户丙回款回单；E16 第二次供应商付款回单；E17 培训申请及 7 月凭证；E18 6 月工资表；E19 固定资产卡片；E20 6 月银行月结单。E01—E20 唯一且只用于本练习。",
+              "模拟银行流水：B01 +¥200,000；B02 -¥36,000；B03 -¥48,000；B04 -¥3,600；B05 +¥28,000；B06 -¥12,000；B07 -¥5,200；B08 -¥9,000；B09 -¥6,000；B10 +¥15,000；B11 -¥2,400；B12 +¥20,000；B13 -¥9,000；B14 -¥3,100；B15 -¥120；B16 +¥65。期末银行余额应由以上流水连续推导；T05、T09、T14、T18、T19 不应有当期银行记录。",
+              "一页交付规则：保留现有五项交付物——分录与试算平衡、三张基础报表、证据索引、银行余额调节表、异常与更正建议；七天体验节奏不变。所有结论标明证据编号、处理依据、是否需复核及对报表的影响；不提供下载按钮，也不得替换为真实敏感数据。"
+            ]
+          },
+          "id": "accountant-entry-work-sample-rules",
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "column_keys": [
+              "transaction_id",
+              "date",
+              "amount",
+              "description",
+              "evidence_id",
+              "bank_status"
+            ],
+            "rows": [
+              [
+                "T01",
+                "2026-06-01",
+                "¥200,000",
+                "股东投入启动资金；正常事项。",
+                "E01",
+                "B01 已入账且金额一致"
+              ],
+              [
+                "T02",
+                "2026-06-01",
+                "¥36,000",
+                "预付 6—8 月办公室租金；需按三个月摊销。",
+                "E02",
+                "B02 已入账且金额一致"
+              ],
+              [
+                "T03",
+                "2026-06-02",
+                "¥48,000",
+                "购入电脑及办公设备并立即投入使用；预计使用 48 个月、残值为零。",
+                "E03",
+                "B03 已入账且金额一致"
+              ],
+              [
+                "T04",
+                "2026-06-03",
+                "¥3,600",
+                "购买当月办公耗材并银行支付；正常事项。",
+                "E04",
+                "B04 已入账且金额一致"
+              ],
+              [
+                "T05",
+                "2026-06-05",
+                "¥28,000",
+                "向客户甲完成咨询服务并赊销；合同与验收记录齐全。",
+                "E05",
+                "本日不应出现银行记录"
+              ],
+              [
+                "T06",
+                "2026-06-07",
+                "¥28,000",
+                "收到客户甲全额回款。",
+                "E06",
+                "B05 已入账且金额一致"
+              ],
+              [
+                "T07",
+                "2026-06-08",
+                "¥12,000",
+                "预付 12 个月业务软件订阅费，自 6 月起服务。",
+                "E07",
+                "B06 已入账且金额一致"
+              ],
+              [
+                "T08",
+                "2026-06-10",
+                "¥5,200",
+                "报销差旅；报销单为 ¥5,200，但发票合计仅 ¥4,800，存在金额不一致。",
+                "E08",
+                "B07 支出 ¥5,200；需挂起差额并追证"
+              ],
+              [
+                "T09",
+                "2026-06-12",
+                "¥9,000",
+                "收到供应商设计服务发票，款项未付。",
+                "E09",
+                "本日不应出现银行记录"
+              ],
+              [
+                "T10",
+                "2026-06-15",
+                "¥9,000",
+                "结清 T09 供应商款。",
+                "E10",
+                "B08 已入账且金额一致"
+              ],
+              [
+                "T11",
+                "2026-06-16",
+                "¥6,000",
+                "向员工发放短期借款；申请单缺少规定审批。",
+                "E11",
+                "B09 已入账；缺失审批，不得直接列费用"
+              ],
+              [
+                "T12",
+                "2026-06-18",
+                "¥15,000",
+                "收到客户乙服务款；业务人员误标为股东追加投入，存在科目错误。",
+                "E12",
+                "B10 已入账；需按合同与验收记录更正分类"
+              ],
+              [
+                "T13",
+                "2026-06-20",
+                "¥2,400",
+                "支付 6 月水电及网络费用。",
+                "E13",
+                "B11 已入账且金额一致"
+              ],
+              [
+                "T14",
+                "2026-06-22",
+                "¥32,000",
+                "向客户丙完成服务并赊销；合同与验收记录齐全。",
+                "E14",
+                "本日不应出现银行记录"
+              ],
+              [
+                "T15",
+                "2026-06-24",
+                "¥20,000",
+                "收到客户丙部分回款，余额仍未收。",
+                "E15",
+                "B12 已入账；需与应收余额勾稽"
+              ],
+              [
+                "T16",
+                "2026-06-25",
+                "¥9,000",
+                "供应商款被再次支付；与 T10 收款方、金额及发票相同，疑似重复付款。",
+                "E16",
+                "B13 已入账；列异常并向供应商追款"
+              ],
+              [
+                "T17",
+                "2026-06-27",
+                "¥3,100",
+                "员工提交 7 月 2 日才发生的培训费用，却申请计入 6 月，存在跨期。",
+                "E17",
+                "B14 已入账；应列员工往来/预付款并待实际发生"
+              ],
+              [
+                "T18",
+                "2026-06-30",
+                "¥18,000",
+                "6 月工资已发生、7 月支付；需计提。",
+                "E18",
+                "6 月无银行记录，属于期末应计"
+              ],
+              [
+                "T19",
+                "2026-06-30",
+                "¥1,000",
+                "计提 T03 设备 6 月折旧。",
+                "E19",
+                "无银行记录，属于期末调整"
+              ],
+              [
+                "T20",
+                "2026-06-30",
+                "手续费 ¥120；利息 ¥65",
+                "银行流水出现未入账手续费与存款利息；需分别确认费用和收入。",
+                "E20",
+                "B15 扣费 ¥120、B16 入息 ¥65，账簿均未记录"
+              ]
+            ]
+          },
+          "id": "accountant-entry-work-sample-transactions",
+          "type": "table"
         },
         {
           "availability": "available",
@@ -5843,6 +6134,7 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
+              "责任链：审计助理是岗位；CPA 全国统一考试全科合格是考试结果；中注协非执业会员与执业注册会计师是不同身份路径；具体项目签字还须同时满足现行法律、执业准则、会计师事务所授权和具体业务安排。四层不得混用。",
               "先分清岗位、考试、会员与执业：审计助理是岗位，不是执业身份；CPA 全科合格是考试结果，不等于已经入会或注册执业；非执业会员不等于执业注册会计师。",
               "企业招聘偏好与法律必须是两类证据。本页只有在雇主招聘资料中出现时才写“加分项”或“可能偏好”；只有财政部、中注协和现行法律支持时才使用“必须”“须”或“执业”。",
               "证书不能替代工作样本，也不保证录用、加薪或晋升。现在是否报考，应同时看目标岗位是否使用该知识、自己是否满足条件，以及考试投入是否会挤占更直接的实习和作品准备。"
@@ -8125,112 +8417,112 @@
               {
                 "accessed_at": "2026-08-29",
                 "details": [
-                  "FA01｜北京｜中国国际人才开发中心｜国企财务专员（2026 应届毕业生）｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing-cyq/173398432.html",
-                  "FA02｜北京｜北京产权交易所｜财务实习生｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing-xcq/130528052.html",
-                  "FA03｜北京｜北京便宜坊烤鸭集团｜应届毕业生招聘－财务助理｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing/173234029.html",
-                  "FA04｜北京｜北京金风科创风电设备｜财务实习生｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing/173206136.html",
-                  "FA05｜北京｜民航快递｜财务实习岗｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing-syq/173169238.html",
-                  "FA06｜北京｜中外运空运｜财务部实习生｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing-syq/173113072.html",
-                  "FA07｜北京｜光明网传媒｜财务实习生｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing/172940797.html",
-                  "FA08｜北京｜北京佳之兴商业｜财务方向管理培训生｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing-cyq/133620934.html"
+                  "FA01｜天津｜天津数字经济产业集团｜大型企业/公共机构｜财务/会计助理｜2027 届实习生｜本科或硕士在读｜JE,RECON,EVIDENCE,COMM｜2026-08-29｜https://career.tjcu.edu.cn/correcruit/content/id/14166.html",
+                  "FA02｜天津｜鹏辉力赫（天津）能源科技｜中小型企业｜财务/会计助理｜初级岗位｜本科及以上｜EXCEL,JE,RECON,CLOSE,EVIDENCE,ERP,ANOMALY,COMM｜2026-08-29｜https://career.tjcu.edu.cn/correcruit/content/id/14135.html",
+                  "FA03｜天津｜天津市尚骐达科技发展｜中小型企业｜财务/会计助理｜实习或初级岗位｜本科｜JE,EVIDENCE,ERP,COMM｜2026-08-29｜https://career.tjcu.edu.cn/correcruit/content/id/13848.html",
+                  "FA04｜天津｜天津云海企业孵化器｜中小型企业｜财务/会计助理｜可接受大学生｜本科｜EVIDENCE,COMM｜2026-08-29｜https://career.tjcu.edu.cn/correcruit/content/id/13857.html",
+                  "FA05｜北京｜中经城投建设集团空轨设计研究｜大型企业/公共机构｜财务/会计助理｜毕业生或在校生｜硕士及以上｜EXCEL,RECON,EVIDENCE,ANOMALY,COMM｜2026-08-29｜https://career.nankai.edu.cn/correcruit/content/id/111939.html",
+                  "FA06｜上海｜Jellycat｜大型企业/公共机构｜财务/会计助理｜2026 届实习｜本科及以上｜EXCEL,EVIDENCE｜2026-08-29｜https://ejob.dhu.edu.cn/pros_wjdc/s/cms/DongHua/single/2025/12/01/25120108393722435767",
+                  "FA07｜东莞｜广东某制造企业（校招发布页）｜大型企业/公共机构｜财务/会计助理｜2026 届管培生｜本科及以上｜JE,RECON,EVIDENCE,COMM｜2026-08-29｜https://job.hust.edu.cn/zpinfo1/2358303.htm",
+                  "FA08｜福州等｜福耀集团｜大型企业/公共机构｜财务/会计助理｜2026 届校招｜本科或硕士｜JE,CLOSE,ANOMALY,COMM｜2026-08-29｜https://gdjy.hfut.edu.cn/detail/career?id=646871"
                 ],
-                "evidence_type": "招聘平台公开职位样本",
+                "evidence_type": "可打开全文的公开招聘职位样本",
                 "id": "source-11",
-                "limitation": "样本只覆盖公开可访问的 2026 年 2 月列表及所选职位；职位可能下线，不能估计全国岗位占比。列表页未披露字段不计入频次。",
-                "market": "中国大陆｜北京",
+                "limitation": "定向样本只用于识别入门任务与能力信号，不代表全国岗位占比；只有原始全文可打开且字段可判定的样本进入分母。",
+                "market": "中国大陆｜多城市",
                 "name": "recruitment_sample_finance_assistant_2026",
-                "period": "职位列表 2026 年 2 月；访问 2026-08-29",
-                "publisher": "前程无忧",
-                "scope": "财务／会计助理类 8 条；实习或校招；大型企业、国有企业及专业服务雇主",
-                "url": "https://mwenku.51job.com/beijing_jobs/202602/caiwuzhuanyuan/"
+                "period": "2026 年公开职位；采集 2026-08-29",
+                "publisher": "雇主官网、高校就业网及无需登录的公开招聘页面",
+                "scope": "财务/会计助理类 8 条；实习、校招或初级岗位；雇主类型按固定五类编码",
+                "url": "https://career.tjcu.edu.cn/correcruit/content/id/14166.html"
               },
               {
                 "accessed_at": "2026-08-29",
                 "details": [
-                  "AR01｜上海｜上海中翊日化｜往来会计｜1 年及以上｜本科｜https://msearch.51job.com/jobs/shanghai-fxq/168355190.html",
-                  "AR02｜上海｜上海格思信息技术｜应收会计｜无需经验｜硕士｜https://msearch.51job.com/jobs/shanghai-pdxq/173001282.html",
-                  "AR03｜上海｜上海格思信息技术｜应付会计｜无需经验｜硕士｜https://msearch.51job.com/jobs/shanghai-pdxq/173001241.html",
-                  "AR04｜上海｜上海臻臣化妆品｜费用会计｜1—2 年｜本科｜https://msearch.51job.com/jobs/shanghai-fxq/172937911.html",
-                  "AR05｜上海｜辉门（中国）｜会计｜无需经验｜本科｜https://msearch.51job.com/jobs/shanghai-pdxq/172927815.html",
-                  "AR06｜上海｜上海惠弘进出口｜财务助理／结算专员｜1 年及以上｜大专｜https://msearch.51job.com/jobs/shanghai-ypq/153028707.html",
-                  "AR07｜上海｜华福证券｜托管部估值核算岗｜2 年｜硕士｜https://msearch.51job.com/jobs/shanghai-pdxq/138651922.html",
-                  "AR08｜上海｜东方海外货柜航运（中国）｜财务控制中心实习生｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/shanghai-hkq/172607703.html"
+                  "AR01｜天津｜正大集团（天津）实业｜共享服务/专业服务｜应收应付/费用会计｜初级岗位｜本科及以上｜JE,CLOSE,EVIDENCE,COMM｜2026-08-29｜https://career.tjcu.edu.cn/correcruit/content/id/13687.html",
+                  "AR02｜天津｜正大集团（天津）实业｜共享服务/专业服务｜应收应付/费用会计｜初级岗位｜本科及以上｜RECON,CLOSE,ANOMALY,COMM｜2026-08-29｜https://career.tjcu.edu.cn/correcruit/content/id/13685.html",
+                  "AR03｜上海｜上海飞机制造｜大型企业/公共机构｜应收应付/费用会计｜2026 届校招｜硕士研究生及以上｜JE,EVIDENCE,COMM｜2026-08-29｜https://jdjyw.jlu.edu.cn/portal/jyzp/recruit/details?id=aadc04459fc6416babbf4c038b314a85",
+                  "AR04｜宜春｜江西天孚科技｜大型企业/公共机构｜应收应付/费用会计｜2026 届校招｜本科及以上｜JE,RECON,EVIDENCE,ANOMALY,COMM｜2026-08-29｜https://career.scnu.edu.cn/detail/online?id=3443002",
+                  "AR05｜广州｜广汽集团｜大型企业/公共机构｜应收应付/费用会计｜2026 届校招补录｜本科及以上｜JE,CLOSE,COMM｜2026-08-29｜https://jyzx.scau.edu.cn/detail/news?id=1799371&type_id=720",
+                  "AR06｜天津｜身边云（北京）信息服务｜共享服务/专业服务｜应收应付/费用会计｜初级岗位｜本科｜RECON,CLOSE,ANOMALY,COMM｜2026-08-29｜https://career.tjcu.edu.cn/correcruit/content/id/13950.html",
+                  "AR07｜天津及项目地｜中国电建市政建设集团｜大型企业/公共机构｜应收应付/费用会计｜校招/初级岗位｜本科及以上｜EXCEL,JE,RECON,CLOSE,EVIDENCE,ERP,ANOMALY,COMM｜2026-08-29｜https://career.tjcu.edu.cn/correcruit/content/id/3542.html",
+                  "AR08｜天津｜天津市新材房地产开发｜中小型企业｜应收应付/费用会计｜初级岗位｜本科及以上｜EXCEL,JE,CLOSE,ERP,ANOMALY,COMM｜2026-08-29｜https://career.tjcu.edu.cn/correcruit/content/id/14157.html"
                 ],
-                "evidence_type": "招聘平台公开职位样本",
+                "evidence_type": "可打开全文的公开招聘职位样本",
                 "id": "source-12",
-                "limitation": "样本只覆盖公开可访问的 2026 年 4 月列表及所选职位；包含应收、应付、费用、结算和估值核算入口，不能视为单一岗位的市场分布。",
-                "market": "中国大陆｜上海",
+                "limitation": "定向样本只用于识别入门任务与能力信号，不代表全国岗位占比；只有原始全文可打开且字段可判定的样本进入分母。",
+                "market": "中国大陆｜多城市",
                 "name": "recruitment_sample_ar_ap_expense_2026",
-                "period": "职位列表 2026 年 4 月；访问 2026-08-29",
-                "publisher": "前程无忧",
-                "scope": "应收、应付、费用或结算类 8 条；实习、无需经验或 1—2 年经验；企业、证券及共享服务场景",
-                "url": "https://mwenku.51job.com/shanghai_jobs/202604/jisuankuaiji/"
+                "period": "2026 年公开职位；采集 2026-08-29",
+                "publisher": "雇主官网、高校就业网及无需登录的公开招聘页面",
+                "scope": "应收应付、费用、结算或总账入口 8 条；雇主类型按固定五类编码",
+                "url": "https://career.tjcu.edu.cn/correcruit/content/id/13687.html"
               },
               {
                 "accessed_at": "2026-08-29",
                 "details": [
-                  "EA01｜北京｜中准会计师事务所｜审计助理｜无需经验｜本科｜https://msearch.51job.com/jobs/beijing-hdq/140167901.html",
-                  "EA02｜北京｜上海中新石林会计师事务所｜审计助理｜无需经验｜本科｜https://msearch.51job.com/jobs/beijing-cyq/167299721.html",
-                  "EA03｜北京｜北京国富会计师事务所｜审计实习生｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing-hdq/173337696.html",
-                  "EA04｜北京｜天职国际会计师事务所｜财务审计助理｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing/172681824.html",
-                  "EA05｜北京｜中逸会计师事务所｜审计实习生｜在校生／应届生｜大专｜https://msearch.51job.com/jobs/beijing-dcq/171865779.html",
-                  "EA06｜北京｜立信会计师事务所北京分所｜审计实习生｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing-sjsq/119684787.html",
-                  "EA07｜北京｜信永中和北京总部｜审计助理｜无需经验｜本科｜https://msearch.51job.com/jobs/beijing-dcq/169114941.html",
-                  "EA08｜北京｜普华永道中天北京分所｜数字化审计及鉴证服务顾问｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/beijing-cyq/173421429.html"
+                  "EA01｜合肥｜容诚会计师事务所安徽分所｜会计师事务所｜外部审计助理｜初级岗位｜本科及以上｜EXCEL,JE,EVIDENCE,ERP,ANOMALY,COMM｜2026-08-29｜https://career.tjcu.edu.cn/correcruit/content/id/14292.html",
+                  "EA02｜北京｜立信会计师事务所北京分所｜会计师事务所｜外部审计助理｜2026 届校招｜本科｜EVIDENCE,COMM｜2026-08-29｜https://career.tjcu.edu.cn/correcruit/content/id/12099.html",
+                  "EA03｜杭州等｜中汇会计师事务所｜会计师事务所｜外部审计助理｜2026 届校招｜本科及以上｜EVIDENCE,ANOMALY,COMM｜2026-08-29｜https://career.tjcu.edu.cn/correcruit/content/id/13603.html",
+                  "EA04｜无锡｜江苏公勤会计师事务所｜会计师事务所｜外部审计助理｜有相关经历优先｜本科及以上｜EVIDENCE,COMM｜2026-08-29｜https://www.gqcpa.com/config/toRecruit",
+                  "EA05｜郑州｜立信会计师事务所河南分所｜会计师事务所｜外部审计助理｜实习/兼职｜本科及以上｜RECON,EVIDENCE,COMM｜2026-08-29｜https://zhjyb.zua.edu.cn/module/position_details/id-453277/nid-5128",
+                  "EA06｜成都｜四川经卫会计师事务所｜会计师事务所｜外部审计助理｜审计实习助理｜本科｜EVIDENCE,COMM｜2026-08-29｜https://www.scpcfe.cn/emp/info/1116/3072.htm",
+                  "EA07｜天津｜大信会计师事务所天津分所｜会计师事务所｜外部审计助理｜有相关经历优先｜本科｜EVIDENCE,COMM｜2026-08-29｜https://jy.tust.edu.cn/correcruit/content/id/45651.html",
+                  "EA08｜福州｜华兴会计师事务所｜会计师事务所｜外部审计助理｜在校生实习｜本科或硕士｜EXCEL,EVIDENCE,COMM｜2026-08-29｜https://www.fjhxcpa.com/?p=6005"
                 ],
-                "evidence_type": "招聘平台公开职位样本",
+                "evidence_type": "可打开全文的公开招聘职位样本",
                 "id": "source-13",
-                "limitation": "样本集中于北京事务所公开岗位，不能外推事务所规模、业务线或其他地区的招聘门槛。",
-                "market": "中国大陆｜北京",
+                "limitation": "定向样本只用于识别入门任务与能力信号，不代表全国岗位占比；只有原始全文可打开且字段可判定的样本进入分母。",
+                "market": "中国大陆｜多城市",
                 "name": "recruitment_sample_external_audit_assistant_2026",
-                "period": "职位列表 2026 年 5 月；访问 2026-08-29",
-                "publisher": "前程无忧",
-                "scope": "外部审计助理／实习类 8 条；实习、校招或无需经验；大中型及本地会计师事务所",
-                "url": "https://mwenku.51job.com/beijing_jobs/202605/shenjizhuli/p1/"
+                "period": "2026 年公开职位；采集 2026-08-29",
+                "publisher": "雇主官网、高校就业网及无需登录的公开招聘页面",
+                "scope": "外部审计助理/实习类 8 条；雇主类型按固定五类编码",
+                "url": "https://career.tjcu.edu.cn/correcruit/content/id/14292.html"
               },
               {
                 "accessed_at": "2026-08-29",
                 "details": [
-                  "IA01｜广州｜广州资源环保科技｜工程审计实习生｜无需经验｜本科｜https://msearch.51job.com/jobs/guangzhou-yxq/172900436.html",
-                  "IA02｜广州｜广州越秀企业集团｜IT 审计实习生｜在校生／应届生｜硕士｜https://msearch.51job.com/jobs/guangzhou/173290930.html",
-                  "IA03｜广州｜中电科普天科技｜审计专员（校园招聘）｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/guangzhou-hdq/173254150.html",
-                  "IA04｜广州｜大参林医药集团｜集团管培生（审计类）｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/guangzhou-lwq/173245344.html",
-                  "IA05｜广州｜广州工业投资控股集团｜审计岗｜在校生／应届生｜本科｜https://msearch.51job.com/jobs/guangzhou-lwq/172930948.html",
-                  "IA06｜广州｜广州华科环保工程｜审计法务岗｜无需经验｜本科｜https://msearch.51job.com/jobs/guangzhou-yxq/171483989.html",
-                  "IA07｜广州｜欧派家居集团｜内部审计｜1 年及以上｜本科｜https://msearch.51job.com/jobs/guangzhou/171173519.html",
-                  "IA08｜杭州｜万向集团｜内控审计校招岗位｜在校生／应届生｜学历以职位页为准｜https://msearch.51job.com/jobs/hangzhou/173150454.html"
+                  "IA01｜武汉｜汉口学院｜大型企业/公共机构｜内审/稽核助理｜2 年及以上｜硕士及以上｜EVIDENCE,ERP,ANOMALY,COMM｜2026-08-29｜https://hr.hkxy.edu.cn/2026_07/30_16/content-70628.html",
+                  "IA02｜上海｜国网英大碳资产管理｜大型企业/公共机构｜内审/稽核助理｜在校生实习｜本科或硕士｜EXCEL,EVIDENCE,COMM｜2026-08-29｜https://cob.sufe.edu.cn/en/Home/Detail/27792",
+                  "IA03｜深圳｜证券公司（2026 届春招）｜金融机构｜内审/稽核助理｜2026 届校招｜硕士及以上｜ERP,ANOMALY,COMM｜2026-08-29｜https://aeo.uibe.edu.cn/front/zpxx.jspa?tid=1907626288433074178",
+                  "IA04｜珠海｜华发集团｜大型企业/公共机构｜内审/稽核助理｜2026 届校招｜本科及以上｜EVIDENCE,ANOMALY,COMM｜2026-08-29｜https://aeo.uibe.edu.cn/front/zpxx.jspa?tid=2003662257115971586",
+                  "IA05｜东莞｜东莞市达瑞电子｜大型企业/公共机构｜内审/稽核助理｜经验未限定｜本科及以上｜EXCEL,ANOMALY,COMM｜2026-08-29｜https://jy.ncu.edu.cn/detail/job?id=2652176",
+                  "IA06｜宜宾｜四川省宜宾普什集团｜大型企业/公共机构｜内审/稽核助理｜在校生实习｜本科｜EVIDENCE,COMM｜2026-08-29｜https://bebee.com/cn/jobs/job--techmap_cn_CC133997640J40899630113",
+                  "IA07｜广州｜广东诚安信会计师事务所｜共享服务/专业服务｜内审/稽核助理｜在校生实习｜本科及以上｜EVIDENCE,ANOMALY,COMM｜2026-08-29｜https://job.gzus.edu.cn/detail/jobfair_apply?apply_id=1287350&company_id=236210",
+                  "IA08｜上海｜德勤中国控制鉴证团队｜共享服务/专业服务｜内审/稽核助理｜寒假实习生｜本科及以上｜EVIDENCE,ANOMALY,COMM｜2026-08-29｜https://watchjobs.net/zh/explore/job/c42-75cbbde35984e1bc/%E5%AF%92%E5%81%87%E5%AE%9E%E4%B9%A0%E7%94%9F-%E6%8E%A7%E5%88%B6%E9%89%B4%E8%AF%81-%E5%AE%A1%E8%AE%A1%E4%B8%8E%E9%89%B4%E8%AF%81-%E4%B8%8A%E6%B5%B7-%E5%BE%B7%E5%8B%A4"
                 ],
-                "evidence_type": "招聘平台公开职位样本",
+                "evidence_type": "可打开全文的公开招聘职位样本",
                 "id": "source-14",
-                "limitation": "“内审／稽核”样本包含内部审计、工程审计、稽核与审计法务等相邻入口，职责并不完全相同；未披露字段不作推断。",
-                "market": "中国大陆｜广州、杭州",
+                "limitation": "定向样本只用于识别入门任务与能力信号，不代表全国岗位占比；只有原始全文可打开且字段可判定的样本进入分母。",
+                "market": "中国大陆｜多城市",
                 "name": "recruitment_sample_internal_audit_assistant_2026",
-                "period": "职位列表 2026 年 3 月和 6 月；访问 2026-08-29",
-                "publisher": "前程无忧",
-                "scope": "内审、稽核或控制类 8 条；校招、无需经验或 1—2 年经验；企业与金融机构",
-                "url": "https://mwenku.51job.com/guangzhou_jobs/202603/shenjizhuli/"
+                "period": "2026 年公开职位；采集 2026-08-29",
+                "publisher": "雇主官网、高校就业网及无需登录的公开招聘页面",
+                "scope": "内审、稽核或控制测试类 8 条；雇主类型按固定五类编码",
+                "url": "https://hr.hkxy.edu.cn/2026_07/30_16/content-70628.html"
               },
               {
                 "accessed_at": "2026-08-29",
                 "details": [
-                  "TA01｜成都｜毕马威｜转让定价服务助理｜无需经验｜学历以职位页为准｜https://jobs.51job.com/all/151279496.html",
-                  "TA02｜成都｜毕马威｜美国税务合规服务助理｜无需经验｜学历以职位页为准｜https://jobs.51job.com/all/168680422.html",
-                  "TA03｜成都｜普华永道｜美国税务专员｜无需经验｜学历以职位页为准｜https://jobs.51job.com/all/169934091.html",
-                  "TA04｜成都｜立信四川分所｜税务审计校招岗位｜在校生／应届生｜学历以职位页为准｜https://jobs.51job.com/all/167684494.html",
-                  "TA05｜上海｜安永｜税务方向初级岗位｜无需经验｜学历以职位页为准｜https://msearch.51job.com/jobs/shanghai-pdxq/173036619.html",
-                  "TA06｜上海｜Votalent｜税务咨询实习生｜在校生／应届生｜学历以职位页为准｜https://msearch.51job.com/jobs/shanghai-hkq/139284351.html",
-                  "TA07｜深圳｜立信深圳分所｜税务审计校招岗位｜在校生／应届生｜学历以职位页为准｜https://jobs.51job.com/all/167684493.html",
-                  "TA08｜深圳｜安永｜个人税务顾问初级岗位｜无需经验｜学历以职位页为准｜https://msearch.51job.com/jobs/shenzhen-luohuqu/172579068.html"
+                  "TA01｜天津｜华税税务师事务所（天津）｜会计师事务所｜税务助理｜试用期初级岗位｜本科｜EVIDENCE,ANOMALY,COMM｜2026-08-29｜https://jy.tust.edu.cn/correcruit/content/id/44955.html",
+                  "TA02｜上海｜立信会计师事务所上海总所｜会计师事务所｜税务助理｜2026 暑期实习｜本科及以上｜EVIDENCE,ANOMALY,COMM｜2026-08-29｜https://www.deizao.net/m/index/shixixq/jobid/178694",
+                  "TA03｜天津｜中汇（天津）税务师事务所｜会计师事务所｜税务助理｜1 年及以上｜本科及以上｜ANOMALY,COMM｜2026-08-29｜https://career.tjcu.edu.cn/correcruit/content/id/14319.html",
+                  "TA04｜深圳｜深圳深商税务师事务所｜会计师事务所｜税务助理｜应届生/初级岗位｜本科及以上｜EXCEL,EVIDENCE,ANOMALY,COMM｜2026-08-29｜https://shenshangcpa.com/campus-recruitment/",
+                  "TA05｜海口｜海南大信骏成税务师事务所｜会计师事务所｜税务助理｜在校生实习｜本科及以上｜EXCEL,EVIDENCE,COMM｜2026-08-29｜https://jy.hainnu.edu.cn/index.php/web/index/job-detail?id=4284",
+                  "TA06｜济南｜山东百丞税务服务｜共享服务/专业服务｜税务助理｜2026 届应届生｜本科｜ANOMALY,COMM｜2026-08-29｜https://jobcareer.sdu.edu.cn/eweb/jygl/index.so?id=3eFKtsxMqws72YcukwPRMM&modcode=jygl_zpxxck&subsyscode=zpfw&type=ssoViewZpxx",
+                  "TA07｜海口｜中瑞岳华骏成税务师事务所｜会计师事务所｜税务助理｜在校生实习｜本科及以上｜EXCEL,ANOMALY,COMM｜2026-08-29｜https://bebee.com/cn/jobs/job--techmap_cn_CC689041620J40764450301",
+                  "TA08｜深圳｜ZURU｜大型企业/公共机构｜税务助理｜2025/2026 届校招｜本科及以上｜EXCEL,EVIDENCE,ANOMALY,COMM｜2026-08-29｜https://career.cuhk.edu.cn/attachment/careercuhk/ueditor/file/20260424/8920_20260424%20ZURU-%E6%B7%B1%E5%9C%B3%E5%B8%82%E9%9B%A8%E7%A6%BE%E4%BC%9F%E4%B8%9A%E5%AE%9E%E4%B8%9A%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8.pdf"
                 ],
-                "evidence_type": "招聘平台公开职位样本",
+                "evidence_type": "可打开全文的公开招聘职位样本",
                 "id": "source-15",
-                "limitation": "税务样本包含合规、转让定价、个人税务与税务审计等不同方向；具体任务和专业要求必须回到职位原文核验。",
-                "market": "中国大陆｜成都、上海、深圳",
+                "limitation": "定向样本只用于识别入门任务与能力信号，不代表全国岗位占比；只有原始全文可打开且字段可判定的样本进入分母。",
+                "market": "中国大陆｜多城市",
                 "name": "recruitment_sample_tax_assistant_2026",
-                "period": "职位列表 2026 年 1 月；访问 2026-08-29",
-                "publisher": "前程无忧",
-                "scope": "税务助理／实习类 8 条；实习、校招或无需经验；国际事务所、本地事务所及专业服务雇主",
-                "url": "https://mwenku.51job.com/chengdu_jobs/202601/shuiwuzhuanyuan/"
+                "period": "2026 年公开职位；采集 2026-08-29",
+                "publisher": "雇主官网、高校就业网及无需登录的公开招聘页面",
+                "scope": "税务助理/实习类 8 条；雇主类型按固定五类编码",
+                "url": "https://jy.tust.edu.cn/correcruit/content/id/44955.html"
               },
               {
                 "accessed_at": "2026-08-29",
@@ -8642,11 +8934,139 @@
         "source_refs": [
           "source-5"
         ]
+      },
+      {
+        "derivation": "分母=40 条原始职位全文可访问且能力字段可判定的样本；分子=明确提及该信号的样本；达到 30% 且覆盖至少三类雇主才标记“常见”。匹配样本：FA02,FA05,FA06,AR07,AR08,EA01,EA08,IA02,IA05,TA04,TA05,TA07,TA08；雇主类型：会计师事务所、大型企业/公共机构、中小型企业",
+        "display_value": "13/40",
+        "fact_id": "recruitment-signal-excel-2026",
+        "market": "中国大陆｜定向公开招聘样本",
+        "measure": "招聘信号计数：Excel",
+        "occupation_scope": "财务/会计助理、应收应付/费用会计、外部审计助理、内审/稽核助理、税务助理各 8 条",
+        "period": "采集 2026-08-29",
+        "source_refs": [
+          "source-11",
+          "source-12",
+          "source-13",
+          "source-14",
+          "source-15"
+        ]
+      },
+      {
+        "derivation": "分母=40 条原始职位全文可访问且能力字段可判定的样本；分子=明确提及该信号的样本；达到 30% 且覆盖至少三类雇主才标记“常见”。匹配样本：FA01,FA02,FA03,FA07,FA08,AR01,AR03,AR04,AR05,AR07,AR08,EA01；雇主类型：会计师事务所、大型企业/公共机构、中小型企业、共享服务/专业服务",
+        "display_value": "12/40",
+        "fact_id": "recruitment-signal-je-2026",
+        "market": "中国大陆｜定向公开招聘样本",
+        "measure": "招聘信号计数：分录分类",
+        "occupation_scope": "财务/会计助理、应收应付/费用会计、外部审计助理、内审/稽核助理、税务助理各 8 条",
+        "period": "采集 2026-08-29",
+        "source_refs": [
+          "source-11",
+          "source-12",
+          "source-13",
+          "source-14",
+          "source-15"
+        ]
+      },
+      {
+        "derivation": "分母=40 条原始职位全文可访问且能力字段可判定的样本；分子=明确提及该信号的样本；达到 30% 且覆盖至少三类雇主才标记“常见”。匹配样本：FA01,FA02,FA05,FA07,AR02,AR04,AR06,AR07,EA05；雇主类型：会计师事务所、大型企业/公共机构、中小型企业、共享服务/专业服务",
+        "display_value": "9/40",
+        "fact_id": "recruitment-signal-recon-2026",
+        "market": "中国大陆｜定向公开招聘样本",
+        "measure": "招聘信号计数：对账",
+        "occupation_scope": "财务/会计助理、应收应付/费用会计、外部审计助理、内审/稽核助理、税务助理各 8 条",
+        "period": "采集 2026-08-29",
+        "source_refs": [
+          "source-11",
+          "source-12",
+          "source-13",
+          "source-14",
+          "source-15"
+        ]
+      },
+      {
+        "derivation": "分母=40 条原始职位全文可访问且能力字段可判定的样本；分子=明确提及该信号的样本；达到 30% 且覆盖至少三类雇主才标记“常见”。匹配样本：FA02,FA08,AR01,AR02,AR05,AR06,AR07,AR08；雇主类型：大型企业/公共机构、中小型企业、共享服务/专业服务",
+        "display_value": "8/40",
+        "fact_id": "recruitment-signal-close-2026",
+        "market": "中国大陆｜定向公开招聘样本",
+        "measure": "招聘信号计数：结账逻辑",
+        "occupation_scope": "财务/会计助理、应收应付/费用会计、外部审计助理、内审/稽核助理、税务助理各 8 条",
+        "period": "采集 2026-08-29",
+        "source_refs": [
+          "source-11",
+          "source-12",
+          "source-13",
+          "source-14",
+          "source-15"
+        ]
+      },
+      {
+        "derivation": "分母=40 条原始职位全文可访问且能力字段可判定的样本；分子=明确提及该信号的样本；达到 30% 且覆盖至少三类雇主才标记“常见”。匹配样本：FA01,FA02,FA03,FA04,FA05,FA06,FA07,AR01,AR03,AR04,AR07,EA01,EA02,EA03,EA04,EA05,EA06,EA07,EA08,IA01,IA02,IA04,IA06,IA07,IA08,TA01,TA02,TA04,TA05,TA08；雇主类型：会计师事务所、大型企业/公共机构、中小型企业、共享服务/专业服务",
+        "display_value": "30/40",
+        "fact_id": "recruitment-signal-evidence-2026",
+        "market": "中国大陆｜定向公开招聘样本",
+        "measure": "招聘信号计数：底稿证据",
+        "occupation_scope": "财务/会计助理、应收应付/费用会计、外部审计助理、内审/稽核助理、税务助理各 8 条",
+        "period": "采集 2026-08-29",
+        "source_refs": [
+          "source-11",
+          "source-12",
+          "source-13",
+          "source-14",
+          "source-15"
+        ]
+      },
+      {
+        "derivation": "分母=40 条原始职位全文可访问且能力字段可判定的样本；分子=明确提及该信号的样本；达到 30% 且覆盖至少三类雇主才标记“常见”。匹配样本：FA02,FA03,AR07,AR08,EA01,IA01,IA03；雇主类型：会计师事务所、大型企业/公共机构、中小型企业、金融机构",
+        "display_value": "7/40",
+        "fact_id": "recruitment-signal-erp-2026",
+        "market": "中国大陆｜定向公开招聘样本",
+        "measure": "招聘信号计数：ERP",
+        "occupation_scope": "财务/会计助理、应收应付/费用会计、外部审计助理、内审/稽核助理、税务助理各 8 条",
+        "period": "采集 2026-08-29",
+        "source_refs": [
+          "source-11",
+          "source-12",
+          "source-13",
+          "source-14",
+          "source-15"
+        ]
+      },
+      {
+        "derivation": "分母=40 条原始职位全文可访问且能力字段可判定的样本；分子=明确提及该信号的样本；达到 30% 且覆盖至少三类雇主才标记“常见”。匹配样本：FA02,FA05,FA08,AR02,AR04,AR06,AR07,AR08,EA01,EA03,IA01,IA03,IA04,IA05,IA07,IA08,TA01,TA02,TA03,TA04,TA06,TA07,TA08；雇主类型：会计师事务所、大型企业/公共机构、中小型企业、共享服务/专业服务、金融机构",
+        "display_value": "23/40",
+        "fact_id": "recruitment-signal-anomaly-2026",
+        "market": "中国大陆｜定向公开招聘样本",
+        "measure": "招聘信号计数：异常分析",
+        "occupation_scope": "财务/会计助理、应收应付/费用会计、外部审计助理、内审/稽核助理、税务助理各 8 条",
+        "period": "采集 2026-08-29",
+        "source_refs": [
+          "source-11",
+          "source-12",
+          "source-13",
+          "source-14",
+          "source-15"
+        ]
+      },
+      {
+        "derivation": "分母=40 条原始职位全文可访问且能力字段可判定的样本；分子=明确提及该信号的样本；达到 30% 且覆盖至少三类雇主才标记“常见”。匹配样本：FA01,FA02,FA03,FA04,FA05,FA07,FA08,AR01,AR02,AR03,AR04,AR05,AR06,AR07,AR08,EA01,EA02,EA03,EA04,EA05,EA06,EA07,EA08,IA01,IA02,IA03,IA04,IA05,IA06,IA07,IA08,TA01,TA02,TA03,TA04,TA05,TA06,TA07,TA08；雇主类型：会计师事务所、大型企业/公共机构、中小型企业、共享服务/专业服务、金融机构",
+        "display_value": "39/40",
+        "fact_id": "recruitment-signal-comm-2026",
+        "market": "中国大陆｜定向公开招聘样本",
+        "measure": "招聘信号计数：沟通复核",
+        "occupation_scope": "财务/会计助理、应收应付/费用会计、外部审计助理、内审/稽核助理、税务助理各 8 条",
+        "period": "采集 2026-08-29",
+        "source_refs": [
+          "source-11",
+          "source-12",
+          "source-13",
+          "source-14",
+          "source-15"
+        ]
       }
     ]
   },
   "locale": "zh-CN",
-  "source_content_sha256": "f960f4998400c20396b943346aa556314375cb0eb9470beea869aa7b969db2c0",
+  "source_content_sha256": "88f01cd2b68411e3301e5ef578cafa56730d4ed4d20e2f9f53b8aa183a7e9692",
   "subject": {
     "canonical_slug": "accountants-and-auditors",
     "name": "会计师和审计师",

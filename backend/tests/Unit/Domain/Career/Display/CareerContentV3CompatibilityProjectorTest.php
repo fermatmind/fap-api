@@ -29,6 +29,10 @@ final class CareerContentV3CompatibilityProjectorTest extends TestCase
             self::assertSame('115,300 个', $stats['annual_openings']['value']);
             self::assertSame('bls-us-accountants-openings-2025-2035', $stats['annual_openings']['fact_ref']);
             self::assertSame('BLS OOH｜美国｜2025—2035 年｜年均岗位空缺', $stats['annual_openings']['source_label']);
+            self::assertSame('¥78,500', $stats['china_median_pay']['value']);
+            self::assertSame('中国经济和金融专业人员年工资中位数', $stats['china_median_pay']['label']);
+            self::assertSame('中国大陆｜2024 年｜宽口径企业薪酬调查', $stats['china_median_pay']['source_label']);
+            self::assertSame('mohrss-cn-economic-financial-wage-median-2024', $stats['china_median_pay']['fact_ref']);
         }
 
         $salary = data_get($projected, 'page.content.career_snapshot_secondary_locale');
@@ -106,6 +110,7 @@ final class CareerContentV3CompatibilityProjectorTest extends TestCase
             ['key' => 'us_growth', 'value' => '5%', 'source_label' => 'BLS'],
             ['key' => 'employment', 'value' => '1,579,800 人', 'source_label' => 'BLS'],
             ['key' => 'annual_openings', 'value' => '124,200 个', 'source_label' => 'BLS'],
+            ['key' => 'china_median_pay', 'label' => '旧中国工资标签', 'value' => '¥78,500', 'source_label' => '旧来源'],
         ];
 
         return [

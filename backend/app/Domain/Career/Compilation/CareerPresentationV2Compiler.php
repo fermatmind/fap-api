@@ -391,7 +391,7 @@ final class CareerPresentationV2Compiler
 
     /**
      * @param  array<string,mixed>  $page
-     * @return array{key:string,label:string,value:string,source_label:string}|null
+     * @return array{key:string,label:string,value:string,source_label:string,fact_ref:string}|null
      */
     private function accountantsChinaWageStat(array $page, string $locale): ?array
     {
@@ -407,11 +407,12 @@ final class CareerPresentationV2Compiler
             'key' => 'china_median_pay',
             'label' => $locale === 'en'
                 ? 'China related-field median annual wage'
-                : '中国相关职业年工资中位数',
+                : '中国经济和金融专业人员年工资中位数',
             'value' => '¥78,500',
             'source_label' => $locale === 'en'
                 ? 'MOHRSS 2024 enterprise wage survey'
-                : '人社部 2024 企业薪酬调查',
+                : '中国大陆｜2024 年｜宽口径企业薪酬调查',
+            'fact_ref' => 'mohrss-cn-economic-financial-wage-median-2024',
         ];
     }
 
