@@ -361,10 +361,14 @@ function deployHttpsUrlArg(string $host, string $path): string
     return deployShellArg("https://{$host}{$path}");
 }
 
-function runProductionPublicDnsBusinessEvidence(): void
+function runProductionPublicDnsBusinessEvidence(string $runtimeRoot): void
 {
     if (currentHost()->getAlias() !== 'production') {
         return;
+    }
+
+    if (! in_array($runtimeRoot, ['{{release_path}}', '{{current_path}}'], true)) {
+        throw new \RuntimeException('public DNS business evidence runtime root is invalid');
     }
 
     $host = deploySafeHost((string) get('healthcheck_host'), 'healthcheck_host');
@@ -384,7 +388,7 @@ function runProductionPublicDnsBusinessEvidence(): void
     run(sprintf(
         '%s bash %s',
         implode(' ', $assignments),
-        deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/verify_public_dns_business_evidence.sh'),
+        deployPlaceholderPathArg($runtimeRoot, 'backend/scripts/deploy/verify_public_dns_business_evidence.sh'),
     ));
 }
 
@@ -784,10 +788,12 @@ BASH);
 task('rollback:healthcheck', [
     'reload:php-fpm',
     'reload:nginx',
-    'healthcheck:public',
-    'healthcheck:auth-guest-contract',
-    'healthcheck:public-static-media-assets',
-    'healthcheck:ops-entry-contract',
+    'rollback:healthcheck:public',
+    'rollback:healthcheck:sitemap-source',
+    'rollback:healthcheck:public-dns',
+    'rollback:healthcheck:auth-guest-contract',
+    'rollback:healthcheck:public-static-media-assets',
+    'rollback:healthcheck:ops-entry-contract',
 ]);
 
 /**
@@ -2548,10 +2554,32 @@ task('healthcheck:sitemap-source', function () {
 });
 
 task('healthcheck:public-dns', function () {
-    runProductionPublicDnsBusinessEvidence();
+    runProductionPublicDnsBusinessEvidence('{{release_path}}');
 });
 
-task('healthcheck:auth-guest-contract', function () {
+task('rollback:healthcheck:public', function () {
+    $host = deploySafeHost((string) get('healthcheck_host'), 'healthcheck_host');
+    $resolveArg = deployCurlResolveArg($host, (bool) get('healthcheck_use_resolve', true));
+    $url = deployHttpsUrlArg($host, '/api/healthz');
+    $jq = deployShellArg('.ok==true');
+    run("curl -fsS {$resolveArg}{$url} | jq -e {$jq}");
+});
+
+task('rollback:healthcheck:sitemap-source', function () {
+    $host = deploySafeHost((string) get('healthcheck_host'), 'healthcheck_host');
+    $resolveArg = deployCurlResolveArg($host, (bool) get('healthcheck_use_resolve', true));
+    $url = deployHttpsUrlArg($host, '/api/v0.5/seo/sitemap-source');
+    $jq = deployShellArg(
+        '.ok==true and .count >= 1 and (.source=="backend_sitemap_generator" or .source=="backend_sitemap_generator_fallback")'
+    );
+    run("curl -fsS {$resolveArg}{$url} | jq -e {$jq}");
+});
+
+task('rollback:healthcheck:public-dns', function () {
+    runProductionPublicDnsBusinessEvidence('{{current_path}}');
+});
+
+$authGuestContractHealthcheck = function () {
     if (deploySkipsAuthorityMutations()) {
         writeln('<comment>Skip auth guest POST contract probe in authority-mutation-free deploy mode</comment>');
 
@@ -2569,9 +2597,11 @@ task('healthcheck:auth-guest-contract', function () {
 
     $cmd = "curl -fsS {$resolveArg}-H {$contentType} -X POST {$url} --data {$payload} | jq -e {$jq}";
     run($cmd);
-});
+};
+task('healthcheck:auth-guest-contract', $authGuestContractHealthcheck);
+task('rollback:healthcheck:auth-guest-contract', $authGuestContractHealthcheck);
 
-task('healthcheck:public-static-media-assets', function () {
+$publicStaticMediaAssetsHealthcheck = function () {
     $host = deploySafeHost((string) (get('static_media_healthcheck_host') ?: get('healthcheck_host')), 'static_media_healthcheck_host');
     $resolveArg = deployCurlResolveArg($host, (bool) get('static_media_healthcheck_use_resolve', false));
     $assets = (array) get('required_public_static_media_assets', []);
@@ -2594,7 +2624,9 @@ task('healthcheck:public-static-media-assets', function () {
         $url = deployHttpsUrlArg($host, $path);
         run("curl -fsSI {$resolveArg}{$url} | grep -Ei {$contentTypePattern} >/dev/null");
     }
-});
+};
+task('healthcheck:public-static-media-assets', $publicStaticMediaAssetsHealthcheck);
+task('rollback:healthcheck:public-static-media-assets', $publicStaticMediaAssetsHealthcheck);
 
 task('healthcheck:scale-lookup', function () {
     $host = deploySafeHost((string) (get('scale_lookup_healthcheck_host') ?: get('healthcheck_host')), 'scale_lookup_healthcheck_host');
@@ -2630,7 +2662,7 @@ task('healthcheck:scale-lookup', function () {
     });
 });
 
-task('healthcheck:ops-entry-contract', function () {
+$opsEntryContractHealthcheck = function () {
     $configuredHost = trim((string) get('ops_entry_host', ''));
 
     if ($configuredHost === '') {
@@ -2695,7 +2727,9 @@ task('healthcheck:ops-entry-contract', function () {
         200,
         'ops login page'
     );
-});
+};
+task('healthcheck:ops-entry-contract', $opsEntryContractHealthcheck);
+task('rollback:healthcheck:ops-entry-contract', $opsEntryContractHealthcheck);
 
 task('seo:ledger-production-closeout', function () {
     $target = currentHost()->getAlias();

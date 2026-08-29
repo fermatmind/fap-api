@@ -380,6 +380,8 @@ jobs:
         run: |
           set -euo pipefail
           release="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}"
+          candidate_sha="$DEPLOY_SHA"
+          lkg_sha='${{ steps.baseline.outputs.active }}'
           set +e
           timeout --signal=TERM --kill-after=30s 30m php /tmp/dep.phar deploy production -f deploy.php --revision "$DEPLOY_SHA" \
             -o release_name="$release" -o deploy_mode=standard \
@@ -392,10 +394,60 @@ jobs:
           current="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'" || true)"
           if [ "$current" = "$DEPLOY_SHA" ]; then
             echo "Production activation committed but smoke failed; restoring previous LKG once."
-            export DEPLOY_SHA='${{ steps.baseline.outputs.active }}'
+            export DEPLOY_SHA="$lkg_sha"
+            set +e
             php /tmp/dep.phar rollback production -f deploy.php --no-interaction
-            restored="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'")"
-            test "$restored" = '${{ steps.baseline.outputs.active }}'
+            rollback_rc=$?
+            set -e
+
+            restored="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'" || true)"
+            safe_restored=""
+            if [[ "$restored" =~ ^[0-9a-f]{40}$ ]]; then safe_restored="$restored"; fi
+
+            rollback_command_succeeded=false
+            rollback_healthchecks_succeeded=false
+            restoration_completed=false
+            restoration_mismatch=true
+            status=restoration_mismatch
+            if [ "$rollback_rc" -eq 0 ]; then
+              rollback_command_succeeded=true
+              rollback_healthchecks_succeeded=true
+            fi
+            if [ "$safe_restored" = "$lkg_sha" ]; then
+              restoration_completed=true
+              restoration_mismatch=false
+              status=restored
+              if [ "$rollback_rc" -ne 0 ]; then status=restored_smoke_failed; fi
+            fi
+
+            jq -n \
+              --arg candidate_sha "$candidate_sha" \
+              --arg lkg_sha "$lkg_sha" \
+              --arg restored_sha "$safe_restored" \
+              --arg status "$status" \
+              --arg run_id "$GITHUB_RUN_ID" \
+              --arg run_attempt "$GITHUB_RUN_ATTEMPT" \
+              --argjson rollback_command_succeeded "$rollback_command_succeeded" \
+              --argjson rollback_healthchecks_succeeded "$rollback_healthchecks_succeeded" \
+              --argjson restoration_completed "$restoration_completed" \
+              --argjson restoration_mismatch "$restoration_mismatch" \
+              '{schema_version:"fermatmind.deploy_lkg_rollback.v1",status:$status,
+                workflow:{run_id:$run_id,run_attempt:$run_attempt},
+                candidate_sha:$candidate_sha,lkg_sha:$lkg_sha,
+                restored_sha:(if $restored_sha == "" then null else $restored_sha end),
+                rollback:{command_succeeded:$rollback_command_succeeded,
+                  healthchecks_succeeded:$rollback_healthchecks_succeeded,
+                  restoration_completed:$restoration_completed},
+                incident:{restoration_mismatch:$restoration_mismatch},sanitized:true}' \
+              > lkg-rollback-receipt.json
+
+            if [ "$restoration_completed" != true ]; then
+              echo "Production incident: rollback did not restore the exact LKG revision." >&2
+              exit 1
+            fi
+            if [ "$rollback_rc" -ne 0 ]; then
+              echo "LKG restoration completed, but rollback healthchecks failed." >&2
+            fi
           fi
           exit "$deploy_rc"
       - name: Read production SEO Evidence closeout receipt
@@ -469,6 +521,7 @@ jobs:
             trunk-delivery-timing.json
             career-current-authority-production-preactivation-parity.json
             seo-agent-evidence-boundary-production.json
+            lkg-rollback-receipt.json
           if-no-files-found: error
           retention-days: 90
 
