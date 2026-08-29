@@ -819,37 +819,43 @@ jobs:
           if [ "$council_required" = true ]; then
             test "$SEO_COUNCIL_ORCHESTRATION_RESULT" = success
             jq -e --arg sha "$GITHUB_SHA" '
-              .contract_version == "seo.council_closeout.v1"
-              and .release_sha == $sha
-              and .state == "DEPLOYED_DISABLED"
-              and .runtime_mode == "DETERMINISTIC_ROUTE_HOLD_ONLY"
-              and .unique_seo_orchestrator_count == 1
-              and .binding_status == "READY"
+              .contract_version == "seo.council_closeout.v2"
+              and .source_sha == $sha
+              and .unique_orchestrator_probe_total == 1
               and .dependency_status == "READY"
-              and .contract_schema_hash_drift == 0
-              and .entrypoints_present == "5/5"
-              and .caller_role_bypass == 0
+              and .contract_schema_hash_drift_count == 0
+              and .binding_schema_probe_total == 1 and .binding_schema_probe_passed == 1 and .binding_schema_probe_failed == 0
+              and .binding_hash_drift_count == 0 and .unbound_mission_count == 0
+              and .unknown_role_count == 0 and .unknown_capability_count == 0 and .unknown_tool_count == 0
+              and .admission_deny_probe_total == 1 and .admission_deny_bypass == 0
+              and .admission_hold_probe_total == 5 and .admission_hold_bypass == 0
+              and .requested_role_expansion_bypass == 0
+              and .five_entrypoint_probe_total == 5 and .five_entrypoint_probe_passed == 5
+              and .csrf_negative_probe_total == 3 and .csrf_bypass == 0
+              and .career_chain_probe_total == 1 and .career_chain_bypass == 0
+              and .policy_reason_overwrite_count == 0 and .unauthorized_route_execution_count == 0
               and .active_legacy_seo_agent_entrypoints == 0
-              and .routing.routing_precision.numerator == .routing.routing_precision.denominator
-              and .routing.routing_recall.numerator == .routing.routing_recall.denominator
+              and .routing.routing_precision == {numerator:32,denominator:32,measurement_state:"observed"}
+              and (.routing.corpus_hash | test("^[a-f0-9]{64}$"))
+              and .routing.routing_recall == {numerator:32,denominator:32,measurement_state:"observed"}
               and .routing.missed_required_mode_rate.numerator == 0
               and .routing.unnecessary_mode_rate.numerator == 0
               and .routing.all_team_invocation_count.numerator == 1
               and .routing.unauthorized_all_team_invocation_count.numerator == 0
-              and .unauthorized_all_team_calls == 0
-              and .peer_delegation_bypass == 0
-              and .budget_timeout_retry_idempotency_bypass == 0
-              and .unresolved_conflict_execution_bypass == 0
-              and .career_chain_order_bypass == 0
-              and .metadata_private_data_bypass == 0
+              and .routing.human_route_correction_rate.measurement_state == "not_observed"
               and .l4_allow_count == 0
               and .model_calls == 0 and .tool_calls == 0 and .external_calls == 0
-              and .agent_write_permissions == 0 and .business_writes == 0
+              and .production_permissions == 0 and .business_writes == 0
               and .cms_writes == 0 and .url_truth_writes == 0 and .search_writes == 0
-              and .active_manifests == 0 and .trusted_signing_keys == 0
-              and .external_trace_export == false and .shared_agent_memory == false
+              and .active_manifest_count == 0 and .trusted_key_count == 0
+              and .career_runtime == "unavailable_manifest_validator_risk_open"
               and .mission_persistence_enabled == false
+              and .operator_time_baseline == {state:"NO_OBSERVATIONS",total_minutes:null,observation_count:0}
+              and .action_manifest_ref.id == "seo.action_scoped_manifest.v1"
               and .execution_allowed == false
+              and ."SEO-PLATFORM-11D" == "CLOSED" and .ready_for_11E == true
+              and (.binding_hash | test("^[a-f0-9]{64}$"))
+              and (.contract_manifest_hash | test("^[a-f0-9]{64}$"))
               and (.receipt_hash | test("^[a-f0-9]{64}$"))
             ' seo-council-orchestration/seo-council-orchestration-closeout.json >/dev/null
             council="$(jq -c '. + {required:true}' seo-council-orchestration/seo-council-orchestration-closeout.json)"
