@@ -271,6 +271,9 @@ final class GscReadModelSyncService
      */
     private function persistRows(ConnectionInterface $connection, string $runUid, array $rows): array
     {
+        $schema = $connection->getSchemaBuilder();
+        $hmacColumnsAvailable = $schema->hasColumn('seo_gsc_daily', 'query_hmac')
+            && $schema->hasColumn('seo_gsc_daily', 'query_hmac_key_version');
         $hashes = array_values(array_unique(array_filter(array_map(
             static fn (array $row): ?string => is_string($row['canonical_url_hash'] ?? null) ? $row['canonical_url_hash'] : null,
             $rows,
@@ -296,6 +299,9 @@ final class GscReadModelSyncService
         $qualityRows = [];
 
         foreach ($rows as $row) {
+            if (! $hmacColumnsAvailable) {
+                unset($row['query_hmac'], $row['query_hmac_key_version']);
+            }
             $hash = (string) ($row['canonical_url_hash'] ?? '');
             $truthRow = $truth->get($hash);
             $mapped = $truthRow !== null;
@@ -327,15 +333,19 @@ final class GscReadModelSyncService
             }
         }
 
-        $connection->transaction(function () use ($connection, $payloads, $qualityRows): void {
+        $connection->transaction(function () use ($connection, $payloads, $qualityRows, $hmacColumnsAvailable): void {
+            $updateColumns = [
+                'url_truth_id', 'canonical_url', 'mapping_state', 'sync_run_uid', 'locale', 'clicks', 'impressions',
+                'ctr_ppm', 'average_position_milli', 'data_state', 'collected_at', 'metadata_json', 'updated_at',
+            ];
+            if ($hmacColumnsAvailable) {
+                array_splice($updateColumns, 5, 0, ['query_hmac', 'query_hmac_key_version']);
+            }
             foreach (array_chunk($payloads, 500) as $chunk) {
                 $connection->table('seo_gsc_daily')->upsert(
                     $chunk,
                     ['idempotency_key'],
-                    [
-                        'url_truth_id', 'canonical_url', 'mapping_state', 'sync_run_uid', 'locale', 'clicks', 'impressions',
-                        'ctr_ppm', 'average_position_milli', 'data_state', 'collected_at', 'metadata_json', 'updated_at',
-                    ],
+                    $updateColumns,
                 );
             }
             foreach (array_chunk($qualityRows, 500) as $chunk) {

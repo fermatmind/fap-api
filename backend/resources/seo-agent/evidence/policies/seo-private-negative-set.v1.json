@@ -1,0 +1,7 @@
+{
+  "policy_id": "seo.private_negative_set",
+  "policy_version": "1.0.0",
+  "route_roots": ["attempt", "attempts", "result", "results", "report", "reports", "history", "order", "orders", "payment", "payments", "token", "tokens", "user", "users", "account", "accounts", "auth", "authorization", "invite", "invites", "recovery", "recover", "checkout", "pay", "share", "private_report"],
+  "entity_types": ["attempt", "result", "report", "history", "order", "payment", "token", "user_identity", "account", "auth", "invite", "recovery"],
+  "private_id_fields": ["attempt_id", "result_id", "report_id", "order_id", "payment_id", "user_id", "account_id", "token"]
+}

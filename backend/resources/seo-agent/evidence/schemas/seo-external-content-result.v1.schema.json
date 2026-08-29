@@ -1,0 +1,24 @@
+{
+  "schema_id": "seo.external_content_result",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "source_id": { "type": "string", "minLength": 1 },
+    "sanitized_source_url": { "type": "string", "pattern": "^https://" },
+    "source_url_hash_or_hmac": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "captured_at": { "type": "string", "format": "date-time" },
+    "source_content_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "content_type": { "enum": ["text/html", "application/json", "text/plain"] },
+    "structured_facts": { "type": "object", "maxProperties": 20 },
+    "bounded_snippets": { "type": "array", "maxItems": 3, "items": { "type": "string", "maxLength": 280 } },
+    "robots_decision": { "const": "allowed" },
+    "terms_decision": { "const": "approved" },
+    "license_class": { "enum": ["first_party", "licensed", "public_fact_permitted"] },
+    "redaction_summary": { "type": "object" },
+    "injection_scan_result": { "const": "pass" },
+    "retention_class": { "type": "string", "minLength": 1 },
+    "egress_decision": { "const": "allowed_by_gateway" }
+  },
+  "required": ["source_id", "sanitized_source_url", "source_url_hash_or_hmac", "captured_at", "source_content_hash", "content_type", "structured_facts", "bounded_snippets", "robots_decision", "terms_decision", "license_class", "redaction_summary", "injection_scan_result", "retention_class", "egress_decision"]
+}

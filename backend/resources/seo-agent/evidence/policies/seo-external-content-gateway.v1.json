@@ -1,0 +1,13 @@
+{
+  "policy_id": "seo.external_content_gateway",
+  "policy_version": "1.0.0",
+  "default_redirects": 0,
+  "absolute_redirect_max": 2,
+  "decoded_body_max_bytes": 524288,
+  "absolute_body_max_bytes": 1048576,
+  "global_concurrency": 2,
+  "per_host_concurrency": 1,
+  "snippet_max_chars": 280,
+  "snippet_max_count": 3,
+  "external_content_is_instruction": false
+}

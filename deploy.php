@@ -17,6 +17,7 @@ set('keep_releases', 5);
 set('default_timeout', 900);
 set('deploy_mode', 'standard');
 set('seo_platform_10_closeout', false);
+set('seo_agent_evidence_boundary', false);
 set('career_current_parity_required', false);
 
 set('sentry_release', function () {
@@ -1031,6 +1032,54 @@ BASH);
         deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/verify_seo_platform_10_public_closeout.sh'),
     );
     run($command);
+});
+
+task('seo:agent-evidence-boundary-closeout', function () {
+    if (! deployBooleanOption('seo_agent_evidence_boundary', false)) {
+        writeln('<comment>Skip SEO agent evidence boundary closeout.</comment>');
+
+        return;
+    }
+
+    within('{{current_path}}/backend', function (): void {
+        run(<<<'BASH'
+set -euo pipefail
+expected_sha="$(tr -d '\r\n' < ../REVISION)"
+case "$expected_sha" in (*[!0-9a-f]*|'') exit 1 ;; esac
+test "${#expected_sha}" -eq 40
+receipt="$({{bin/php}} artisan seo:evidence-boundary-closeout --expected-sha="$expected_sha" --json --no-interaction --no-ansi)"
+printf '%s' "$receipt" | {{bin/php}} -r '
+$payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
+$ok = ($payload["release_sha"] ?? null) === ($argv[1] ?? null)
+    && in_array(($payload["dependency_status"] ?? null), ["READY", "DEPENDENCY_HOLD"], true)
+    && ($payload["execution_allowed"] ?? null) === false
+    && ($payload["bundle_write_enabled"] ?? null) === false
+    && ($payload["context_build_enabled"] ?? null) === false
+    && ($payload["external_fetch_enabled"] ?? null) === false
+    && ($payload["retention_delete_enabled"] ?? null) === false
+    && ($payload["model_calls"] ?? null) === 0
+    && ($payload["tool_calls"] ?? null) === 0
+    && ($payload["external_calls"] ?? null) === 0
+    && ($payload["business_writes"] ?? null) === 0
+    && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["receipt_hash"] ?? "")) === 1;
+exit($ok ? 0 : 1);
+' "$expected_sha"
+receipt_dir='{{deploy_path}}/shared/backend/storage/app/release-receipts/seo-agent-evidence-boundary'
+receipt_path="$receipt_dir/$expected_sha.json"
+mkdir -p "$receipt_dir"
+tmp="$(mktemp "$receipt_dir/.${expected_sha}.XXXXXX")"
+trap 'rm -f "$tmp"' EXIT
+printf '%s\n' "$receipt" > "$tmp"
+chmod 0640 "$tmp"
+if ln "$tmp" "$receipt_path" 2>/dev/null; then
+  :
+else
+  test -f "$receipt_path"
+  test ! -L "$receipt_path"
+  cmp -s "$tmp" "$receipt_path"
+fi
+BASH);
+    });
 });
 
 task('seo:detector-foundation-receipt', function () {
@@ -3170,6 +3219,7 @@ after('deploy:symlink', 'healthcheck:public-static-media-assets');
 after('deploy:symlink', 'healthcheck:scale-lookup');
 after('deploy:symlink', 'healthcheck:ops-entry-contract');
 after('healthcheck:ops-entry-contract', 'seo:ledger-production-closeout');
+after('healthcheck:ops-entry-contract', 'seo:agent-evidence-boundary-closeout');
 after('deploy:symlink', 'healthcheck:queue-smoke');
 after('queue:reload-workers', 'scheduler:install-managed-cron');
 after('scheduler:install-managed-cron', 'scheduler:wait-natural-heartbeat');

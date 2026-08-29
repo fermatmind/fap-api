@@ -1,0 +1,31 @@
+{
+  "schema_id": "seo.evidence_dependency_snapshot",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": "seo.evidence_dependency_snapshot.v1" },
+    "snapshot_id": { "type": "string", "minLength": 1 },
+    "snapshot_version": { "type": "integer", "minimum": 1 },
+    "captured_at": { "type": "string", "format": "date-time" },
+    "release_sha": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+    "registry_id": { "type": "string", "minLength": 1 },
+    "registry_version": { "type": "string", "minLength": 1 },
+    "registry_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "inventory_v3_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "contract_manifest_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "dependencies": { "type": "array", "items": { "type": "object" } },
+    "page_family_policy_version": { "type": "string", "minLength": 1 },
+    "page_family_policy_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "url_truth_revision": { "type": "string", "minLength": 1 },
+    "url_truth_projection_hash": { "anyOf": [{ "type": "string", "pattern": "^[a-f0-9]{64}$" }, { "const": "unavailable" }] },
+    "detector_registry_version": { "type": "string", "minLength": 1 },
+    "detector_registry_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "status": { "enum": ["READY", "DEPENDENCY_HOLD"] },
+    "execution_allowed": { "const": false },
+    "blockers": { "type": "array", "items": { "type": "string" } },
+    "negative_guarantees": { "type": "object" },
+    "snapshot_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+  },
+  "required": ["schema_version", "snapshot_id", "snapshot_version", "captured_at", "release_sha", "registry_id", "registry_version", "registry_hash", "inventory_v3_hash", "contract_manifest_hash", "dependencies", "page_family_policy_version", "page_family_policy_hash", "url_truth_revision", "url_truth_projection_hash", "detector_registry_version", "detector_registry_hash", "status", "execution_allowed", "blockers", "negative_guarantees", "snapshot_hash"]
+}

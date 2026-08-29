@@ -1,0 +1,70 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Feature\SeoIntel;
+
+use App\Services\SeoAgentEvidence\Privacy\SeoPrivateDataScanner;
+use App\Services\SeoAgentEvidence\Privacy\SeoQueryHmac;
+use App\Services\SeoAgentEvidence\Sources\GscAggregateEvidenceAdapter;
+use App\Services\SeoIntel\GscQueryClassifier;
+use App\Services\SeoIntel\GscSearchAnalyticsRowNormalizer;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Tests\TestCase;
+
+final class SeoPlatform11BQueryPrivacyTest extends TestCase
+{
+    public function test_query_identity_is_versioned_hmac_and_private_values_are_never_returned(): void
+    {
+        config()->set('seo_agent_evidence.query_hmac_key', str_repeat('k', 32));
+        config()->set('seo_agent_evidence.query_hmac_key_version', 'k1');
+        $first = app(SeoQueryHmac::class)->identify("  ＭＢＴＩ\tTest  ");
+        $this->assertSame('available', $first['status']);
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $first['query_hmac']);
+        $this->assertArrayNotHasKey('query', $first);
+        config()->set('seo_agent_evidence.query_hmac_key', str_repeat('z', 32));
+        config()->set('seo_agent_evidence.query_hmac_key_version', 'k2');
+        $rotated = app(SeoQueryHmac::class)->identify('mbti test');
+        $this->assertNotSame($first['query_hmac'], $rotated['query_hmac']);
+        config()->set('seo_agent_evidence.query_hmac_key', null);
+        $this->assertSame('SOURCE_CAPABILITY_UNAVAILABLE', app(SeoQueryHmac::class)->identify('secret query')['status']);
+
+        $scan = app(SeoPrivateDataScanner::class)->scan(['attempt_id' => 'attempt_12345', 'email' => 'person@example.com', 'authorization' => 'Bearer abc.def.ghi']);
+        $this->assertTrue($scan['private_data_present']);
+        $this->assertArrayNotHasKey('matches', $scan);
+        $this->assertFalse(app(SeoPrivateDataScanner::class)->scan(['aggregate_result_count' => 12])['private_data_present']);
+        $this->assertTrue(app(SeoPrivateDataScanner::class)->scan('sk-live-abcdefgh12345678')['private_data_present']);
+    }
+
+    public function test_live_gsc_dual_write_is_nullable_versioned_and_never_backfills_legacy_hashes(): void
+    {
+        config()->set('database.connections.seo_intel', ['driver' => 'sqlite', 'database' => ':memory:', 'prefix' => '']);
+        DB::purge('seo_intel');
+        Schema::connection('seo_intel')->create('seo_gsc_daily', function (Blueprint $table): void {
+            $table->id();
+            $table->char('query_hash', 64)->nullable();
+        });
+        DB::connection('seo_intel')->table('seo_gsc_daily')->insert(['query_hash' => str_repeat('a', 64)]);
+        (require database_path('migrations/seo_intel/2026_08_29_020000_add_query_hmac_columns.php'))->up();
+        $legacy = (array) DB::connection('seo_intel')->table('seo_gsc_daily')->first();
+        $this->assertNull($legacy['query_hmac']);
+        $this->assertNull($legacy['query_hmac_key_version']);
+
+        config()->set('seo_agent_evidence.query_hmac_key', str_repeat('q', 32));
+        config()->set('seo_agent_evidence.query_hmac_key_version', 'gsc-k1');
+        config()->set('seo_agent_evidence.query_hmac_dual_write_enabled', true);
+        $row = (new GscSearchAnalyticsRowNormalizer(new GscQueryClassifier, new SeoQueryHmac))->normalize(['query' => 'MBTI test']);
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $row['query_hmac']);
+        $this->assertSame('gsc-k1', $row['query_hmac_key_version']);
+        $this->assertNotSame($row['query_hash'], $row['query_hmac']);
+
+        $adapter = app(GscAggregateEvidenceAdapter::class);
+        $this->assertSame('unavailable', $adapter->adapt(['source_origin' => 'fixture', 'query_level' => true])['source_capability_state']);
+        $this->assertSame('unavailable', $adapter->adapt(['source_origin' => 'live_gsc_api', 'query_level' => true, 'query_hash' => str_repeat('a', 64)])['source_capability_state']);
+        $safe = $adapter->adapt(['source_origin' => 'live_gsc_api', 'query_level' => true, 'query_hmac' => $row['query_hmac'], 'query_hmac_key_version' => 'gsc-k1', 'clicks' => 2, 'impressions' => 20]);
+        $this->assertSame('available', $safe['source_capability_state']);
+        $this->assertSame(['query_hmac', 'query_hmac_key_version', 'clicks', 'impressions'], array_keys($safe['payload']));
+    }
+}

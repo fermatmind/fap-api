@@ -157,6 +157,21 @@ test("binds SEO Platform 11A closeout only to the canonical v3 reconciliation", 
   assert.equal(exact.operations.seo_platform_11a_closeout, true);
   assert.equal(adjacent.operations.seo_platform_11a_closeout, false);
 });
+
+test("binds the persistent SEO agent evidence boundary to every 11B layer", () => {
+  for (const path of [
+    "backend/app/Services/SeoAgentEvidence/Bundle/SeoEvidenceBundleFactory.php",
+    "backend/resources/seo-agent/evidence/schemas/seo-evidence-bundle.v1.schema.json",
+    "backend/config/seo_agent_evidence.php",
+    "backend/database/migrations/seo_intel/2026_08_29_010000_create_seo_evidence_tables.php",
+    "backend/app/Services/SeoIntel/GscSearchAnalyticsRowNormalizer.php",
+    "backend/app/Console/Commands/SeoEvidenceBoundaryCloseout.php",
+    "backend/tests/Feature/SeoIntel/SeoPlatform11BProductionCloseoutTest.php",
+  ]) {
+    assert.equal(classifyPaths([path]).operations.seo_agent_evidence_boundary, true, path);
+  }
+  assert.equal(classifyPaths(["backend/docs/seo/seo-platform-10-closeout.md"]).operations.seo_agent_evidence_boundary, false);
+});
 test("classifies migrations", () => assert.equal(has(["backend/database/migrations/2026_01_01_add_flag.php"], "backward_compatible_migration"), true));
 test("keeps the Ops SEO execution migration out of discoverability", () => {
   const result = classifyPaths([

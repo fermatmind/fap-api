@@ -1,0 +1,31 @@
+{
+  "schema_id": "seo.evidence_context",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": "seo.evidence_context.v1" },
+    "context_id": { "type": "string", "minLength": 1 },
+    "context_version": { "type": "integer", "minimum": 1 },
+    "context_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "mission_id": { "type": "string", "minLength": 1 },
+    "mission_type": { "type": "string", "minLength": 1 },
+    "role_id": { "type": "string", "minLength": 1 },
+    "page_family": { "type": "string", "minLength": 1 },
+    "locale": { "type": "string", "minLength": 2 },
+    "built_at": { "type": "string", "format": "date-time" },
+    "expires_at": { "type": "string", "format": "date-time" },
+    "bundle_refs": { "type": "array", "items": { "type": "object", "required": ["bundle_id", "bundle_version", "bundle_hash"] } },
+    "source_capability_states": { "type": "array", "items": { "enum": ["available", "degraded", "unavailable", "held"] }, "uniqueItems": true },
+    "evidence_summary": { "type": "object" },
+    "payload": { "type": "object" },
+    "status": { "enum": ["READY", "EVIDENCE_HOLD", "SOURCE_CAPABILITY_UNAVAILABLE", "MEASUREMENT_HOLD"] },
+    "execution_allowed": { "const": false },
+    "model_invocation": { "const": false },
+    "tool_invocation": { "const": false },
+    "write_permissions": { "type": "array", "maxItems": 0 },
+    "tool_allowlist": { "type": "array", "maxItems": 0 },
+    "egress_allowlist": { "type": "array", "maxItems": 0 }
+  },
+  "required": ["schema_version", "context_id", "context_version", "context_hash", "mission_id", "mission_type", "role_id", "page_family", "locale", "built_at", "expires_at", "bundle_refs", "source_capability_states", "evidence_summary", "payload", "status", "execution_allowed", "model_invocation", "tool_invocation", "write_permissions", "tool_allowlist", "egress_allowlist"]
+}

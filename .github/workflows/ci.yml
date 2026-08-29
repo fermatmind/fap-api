@@ -34,6 +34,7 @@ jobs:
       career_current_authority_release: ${{ steps.classify.outputs.career_current_authority_release }}
       seo_platform_10_closeout: ${{ steps.classify.outputs.seo_platform_10_closeout }}
       seo_platform_11a_closeout: ${{ steps.classify.outputs.seo_platform_11a_closeout }}
+      seo_agent_evidence_boundary: ${{ steps.classify.outputs.seo_agent_evidence_boundary }}
       classification: ${{ steps.classify.outputs.classification }}
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
@@ -76,6 +77,7 @@ jobs:
             echo "career_current_authority_release=$(jq -r .operations.career_current_authority_release "$RUNNER_TEMP/classification.json")"
             echo "seo_platform_10_closeout=$(jq -r .operations.seo_platform_10_closeout "$RUNNER_TEMP/classification.json")"
             echo "seo_platform_11a_closeout=$(jq -r .operations.seo_platform_11a_closeout "$RUNNER_TEMP/classification.json")"
+            echo "seo_agent_evidence_boundary=$(jq -r .operations.seo_agent_evidence_boundary "$RUNNER_TEMP/classification.json")"
             echo "classification=$compact"
           } >> "$GITHUB_OUTPUT"
           cp "$RUNNER_TEMP/classification.json" trunk-path-classification.json
@@ -393,9 +395,54 @@ jobs:
           if-no-files-found: error
           retention-days: 90
 
+  seo-agent-evidence-boundary:
+    name: SEO Platform 11B evidence privacy boundary
+    needs: classify
+    if: needs.classify.outputs.seo_agent_evidence_boundary == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          fetch-depth: 0
+      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+        with:
+          php-version: '8.4'
+          coverage: none
+          tools: composer:v2
+      - name: Install backend dependencies
+        working-directory: backend
+        run: composer install --no-interaction --prefer-dist --no-progress
+      - name: Verify contracts and focused 11B boundaries
+        working-directory: backend
+        run: |
+          set -euo pipefail
+          php scripts/seo/export_seo_agent_evidence_contracts.php > "$RUNNER_TEMP/manifest-hash"
+          git diff --exit-code -- docs/seo/generated/seo-agent-evidence-contract-manifest.v1.json
+          php artisan test --compact tests/Feature/SeoIntel/SeoPlatform11B*.php
+          php artisan seo:evidence-boundary-closeout --expected-sha="$GITHUB_SHA" --json > ../seo-agent-evidence-boundary-closeout.json
+          jq -e --arg sha "$GITHUB_SHA" '
+            .contract_version == "seo.evidence_boundary_closeout.v1"
+            and .release_sha == $sha
+            and (.dependency_status == "READY" or .dependency_status == "DEPENDENCY_HOLD")
+            and .execution_allowed == false
+            and .bundle_write_enabled == false
+            and .context_build_enabled == false
+            and .external_fetch_enabled == false
+            and .retention_delete_enabled == false
+            and .model_calls == 0 and .tool_calls == 0 and .external_calls == 0 and .business_writes == 0
+            and (.receipt_hash | test("^[a-f0-9]{64}$"))
+          ' ../seo-agent-evidence-boundary-closeout.json >/dev/null
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: seo-agent-evidence-boundary-${{ github.sha }}
+          path: seo-agent-evidence-boundary-closeout.json
+          if-no-files-found: error
+          retention-days: 90
+
   validation-receipt:
     name: exact-SHA validation receipt
-    needs: [classify, hygiene, supply-chain, content-pack-build-validate, verify-mbti, verify-bigfive, career-publisher-parity, seo-platform-11a-closeout]
+    needs: [classify, hygiene, supply-chain, content-pack-build-validate, verify-mbti, verify-bigfive, career-publisher-parity, seo-platform-11a-closeout, seo-agent-evidence-boundary]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -412,6 +459,11 @@ jobs:
         with:
           name: seo-platform-11a-closeout-${{ github.sha }}
           path: seo-platform-11a-closeout
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        if: needs.classify.outputs.seo_agent_evidence_boundary == 'true'
+        with:
+          name: seo-agent-evidence-boundary-${{ github.sha }}
+          path: seo-agent-evidence-boundary
       - name: Require every selected validation to pass
         env:
           CLASSIFY_RESULT: ${{ needs.classify.result }}
@@ -422,6 +474,7 @@ jobs:
           VERIFY_BIGFIVE_RESULT: ${{ needs.verify-bigfive.result }}
           CAREER_PARITY_RESULT: ${{ needs.career-publisher-parity.result }}
           SEO_PLATFORM_11A_CLOSEOUT_RESULT: ${{ needs.seo-platform-11a-closeout.result }}
+          SEO_AGENT_EVIDENCE_BOUNDARY_RESULT: ${{ needs.seo-agent-evidence-boundary.result }}
         run: |
           set -euo pipefail
           for result in "$CLASSIFY_RESULT" "$HYGIENE_RESULT" "$SUPPLY_CHAIN_RESULT" "$CONTENT_PACK_RESULT" "$VERIFY_MBTI_RESULT" "$VERIFY_BIGFIVE_RESULT" "$CAREER_PARITY_RESULT"; do
@@ -443,9 +496,19 @@ jobs:
             test "$SEO_PLATFORM_11A_CLOSEOUT_RESULT" = skipped
             closeout='{"required":false,"result":"skipped"}'
           fi
+          evidence_required="$(jq -r .operations.seo_agent_evidence_boundary trunk-path-classification.json)"
+          if [ "$evidence_required" = true ]; then
+            test "$SEO_AGENT_EVIDENCE_BOUNDARY_RESULT" = success
+            jq -e --arg sha "$GITHUB_SHA" '.release_sha == $sha and .execution_allowed == false and (.receipt_hash | test("^[a-f0-9]{64}$"))' \
+              seo-agent-evidence-boundary/seo-agent-evidence-boundary-closeout.json >/dev/null
+            evidence="$(jq -c '. + {required:true}' seo-agent-evidence-boundary/seo-agent-evidence-boundary-closeout.json)"
+          else
+            test "$SEO_AGENT_EVIDENCE_BOUNDARY_RESULT" = skipped
+            evidence='{"required":false,"result":"skipped"}'
+          fi
           jq -n --arg sha "$GITHUB_SHA" --arg run_id "$GITHUB_RUN_ID" --slurpfile classification trunk-path-classification.json \
-            --slurpfile parity career-parity/career-current-authority-parity.json --argjson closeout "$closeout" \
-            '{schema_version:"fermatmind.trunk-validation.v1",sha:$sha,ci_run_id:$run_id,result:"success",classification:$classification[0],publisher:{required:$classification[0].operations.publisher_required,parity:$parity[0]},seo_platform_11a_closeout:$closeout}' \
+            --slurpfile parity career-parity/career-current-authority-parity.json --argjson closeout "$closeout" --argjson evidence "$evidence" \
+            '{schema_version:"fermatmind.trunk-validation.v1",sha:$sha,ci_run_id:$run_id,result:"success",classification:$classification[0],publisher:{required:$classification[0].operations.publisher_required,parity:$parity[0]},seo_platform_11a_closeout:$closeout,seo_agent_evidence_boundary:$evidence}' \
             > trunk-validation.json
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:

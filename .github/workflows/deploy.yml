@@ -54,6 +54,7 @@ jobs:
       mbti_zh_result_actor: ${{ steps.mbti-zh-result.outputs.actor }}
       mbti_zh_result_operation_key: ${{ steps.mbti-zh-result.outputs.operation_key }}
       seo_platform_10_closeout: ${{ steps.receipt.outputs.seo_platform_10_closeout }}
+      seo_agent_evidence_boundary: ${{ steps.receipt.outputs.seo_agent_evidence_boundary }}
     steps:
       - name: Refuse non-main, PR, failed, or ambiguous CI runs
         shell: bash
@@ -121,6 +122,7 @@ jobs:
           career_current_full_scan="$career_current"
           mbti_zh_result_release="$(jq -r '.classification.operations.mbti_zh_result_authority_release == true' "$receipt")"
           seo_platform_10_closeout="$(jq -r '.classification.operations.seo_platform_10_closeout == true' "$receipt")"
+          seo_agent_evidence_boundary="$(jq -r '.classification.operations.seo_agent_evidence_boundary == true' "$receipt")"
           {
             echo "deploy=$(jq -r .classification.deploy "$receipt")"
             echo "classification=$classification"
@@ -133,6 +135,7 @@ jobs:
             echo "career_parity_codec_digest=$(jq -r '.publisher.parity.package.codec_digest // ""' "$receipt")"
             echo "mbti_zh_result_release=$mbti_zh_result_release"
             echo "seo_platform_10_closeout=$seo_platform_10_closeout"
+            echo "seo_agent_evidence_boundary=$seo_agent_evidence_boundary"
           } >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         if: steps.receipt.outputs.career_current == 'true'
@@ -273,7 +276,19 @@ jobs:
           test "$(git rev-parse HEAD)" = "$DEPLOY_SHA"
           timeout --signal=TERM --kill-after=30s 30m php /tmp/dep.phar deploy staging -f deploy.php --revision "$DEPLOY_SHA" \
             -o release_name="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode=standard \
-            -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' --no-interaction
+            -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' \
+            -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' --no-interaction
+      - name: Read staging SEO Evidence closeout receipt
+        if: needs.policy.outputs.seo_agent_evidence_boundary == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt=seo-agent-evidence-boundary-staging.json
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_sha '%q' "$DEPLOY_SHA"
+          remote="set -euo pipefail; file=$q_path/shared/backend/storage/app/release-receipts/seo-agent-evidence-boundary/$q_sha.json; test -f \"\$file\"; test ! -L \"\$file\"; cat \"\$file\""
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$receipt"
+          jq -e --arg sha "$DEPLOY_SHA" '.release_sha == $sha and .execution_allowed == false and (.receipt_hash | test("^[a-f0-9]{64}$"))' "$receipt" >/dev/null
       - name: Record staging timing
         if: always()
         run: |
@@ -285,6 +300,7 @@ jobs:
           name: trunk-staging-${{ github.event.workflow_run.head_sha }}
           path: |
             staging-timing.json
+            seo-agent-evidence-boundary-staging.json
           if-no-files-found: error
           retention-days: 90
 
@@ -366,7 +382,8 @@ jobs:
           timeout --signal=TERM --kill-after=30s 30m php /tmp/dep.phar deploy production -f deploy.php --revision "$DEPLOY_SHA" \
             -o release_name="$release" -o deploy_mode=standard \
             -o career_current_parity_required='${{ needs.policy.outputs.career_current }}' \
-            -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' -vvv --no-interaction
+            -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' \
+            -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' -vvv --no-interaction
           deploy_rc=$?
           set -e
           if [ "$deploy_rc" -eq 0 ]; then exit 0; fi
@@ -379,6 +396,17 @@ jobs:
             test "$restored" = '${{ steps.baseline.outputs.active }}'
           fi
           exit "$deploy_rc"
+      - name: Read production SEO Evidence closeout receipt
+        if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.seo_agent_evidence_boundary == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt=seo-agent-evidence-boundary-production.json
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_sha '%q' "$DEPLOY_SHA"
+          remote="set -euo pipefail; file=$q_path/shared/backend/storage/app/release-receipts/seo-agent-evidence-boundary/$q_sha.json; test -f \"\$file\"; test ! -L \"\$file\"; cat \"\$file\""
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$receipt"
+          jq -e --arg sha "$DEPLOY_SHA" '.release_sha == $sha and .execution_allowed == false and (.receipt_hash | test("^[a-f0-9]{64}$"))' "$receipt" >/dev/null
       - id: career-parity
         name: Read production preactivation Career parity receipt
         if: needs.policy.outputs.career_current == 'true' && steps.baseline.outputs.skip != 'true'
@@ -438,6 +466,7 @@ jobs:
           path: |
             trunk-delivery-timing.json
             career-current-authority-production-preactivation-parity.json
+            seo-agent-evidence-boundary-production.json
           if-no-files-found: error
           retention-days: 90
 

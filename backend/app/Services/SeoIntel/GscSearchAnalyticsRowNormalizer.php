@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel;
 
+use App\Services\SeoAgentEvidence\Privacy\SeoQueryHmac;
+
 final class GscSearchAnalyticsRowNormalizer
 {
     public function __construct(
         private readonly GscQueryClassifier $queryClassifier,
+        private readonly ?SeoQueryHmac $queryHmac = null,
     ) {}
 
     /**
@@ -23,12 +26,17 @@ final class GscSearchAnalyticsRowNormalizer
         $clicks = max(0, (int) ($row['clicks'] ?? 0));
         $ctr = $row['ctr'] ?? null;
         $position = $row['position'] ?? $row['average_position'] ?? null;
+        $hmac = $query !== null && (bool) config('seo_agent_evidence.query_hmac_dual_write_enabled', false)
+            ? ($this->queryHmac ?? new SeoQueryHmac)->identify($query)
+            : ['query_hmac' => null, 'query_hmac_key_version' => null];
 
         return [
             'report_date' => substr((string) ($row['date'] ?? now()->subDays(3)->toDateString()), 0, 10),
             'canonical_url_hash' => $canonicalUrl === null ? null : hash('sha256', $canonicalUrl),
             'canonical_url' => $canonicalUrl,
             'query_hash' => $query === null ? null : hash('sha256', $query),
+            'query_hmac' => $hmac['query_hmac'],
+            'query_hmac_key_version' => $hmac['query_hmac_key_version'],
             'query_display_masked' => $this->maskQuery($query),
             'locale' => $this->stringOrNull($row['locale'] ?? null),
             'source_engine' => 'google',

@@ -1,0 +1,7 @@
+{
+  "policy_id": "seo.evidence_retention",
+  "policy_version": "1.0.0",
+  "classes_days": {"dependency_contract": 400, "first_party_aggregate": 90, "public_runtime_observation": 30, "external_structured_fact": 30, "external_short_excerpt": 7, "security_rejection_metadata": 30, "deletion_receipt": 400},
+  "never_persist": ["raw_query_transient", "raw_external_body_transient", "private_data"],
+  "batch_hard_cap": 100
+}
