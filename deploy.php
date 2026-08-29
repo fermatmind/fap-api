@@ -1242,32 +1242,43 @@ receipt="$({{bin/php}} artisan seo:council-closeout --expected-sha="$expected_sh
 printf '%s' "$receipt" | {{bin/php}} -r '
 $payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
 $zero = [
-    "caller_role_bypass", "active_legacy_seo_agent_entrypoints", "peer_delegation_bypass", "unauthorized_all_team_calls",
-    "budget_timeout_retry_idempotency_bypass", "unresolved_conflict_execution_bypass",
-    "career_chain_order_bypass", "metadata_private_data_bypass", "l4_allow_count",
-    "model_calls", "tool_calls", "external_calls", "agent_write_permissions", "business_writes",
-    "cms_writes", "url_truth_writes", "search_writes", "active_manifests", "trusted_signing_keys",
+    "binding_schema_probe_failed", "binding_hash_drift_count", "unbound_mission_count",
+    "unknown_role_count", "unknown_capability_count", "unknown_tool_count",
+    "admission_deny_bypass", "admission_hold_bypass", "requested_role_expansion_bypass",
+    "csrf_bypass", "career_chain_bypass", "policy_reason_overwrite_count",
+    "unauthorized_route_execution_count", "receipt_projection_bypass",
+    "model_calls", "tool_calls", "external_calls", "business_writes",
+    "cms_writes", "url_truth_writes", "search_writes", "active_manifest_count", "trusted_key_count",
+    "l4_allow_count", "production_permissions", "active_legacy_seo_agent_entrypoints",
 ];
-$ok = ($payload["contract_version"] ?? null) === "seo.council_closeout.v1"
-    && ($payload["release_sha"] ?? null) === ($argv[1] ?? null)
+$ok = ($payload["contract_version"] ?? null) === "seo.council_closeout.v2"
+    && ($payload["source_sha"] ?? null) === ($argv[1] ?? null)
     && ($payload["state"] ?? null) === "DEPLOYED_DISABLED"
     && ($payload["runtime_mode"] ?? null) === "DETERMINISTIC_ROUTE_HOLD_ONLY"
-    && ($payload["unique_seo_orchestrator_count"] ?? null) === 1
-    && ($payload["binding_status"] ?? null) === "READY"
+    && ($payload["unique_orchestrator_probe_total"] ?? null) === 1
     && ($payload["dependency_status"] ?? null) === "READY"
-    && ($payload["contract_schema_hash_drift"] ?? null) === 0
-    && ($payload["entrypoints_present"] ?? null) === "5/5"
-    && ($payload["routing"]["routing_precision"]["numerator"] ?? null) === ($payload["routing"]["routing_precision"]["denominator"] ?? null)
-    && ($payload["routing"]["routing_recall"]["numerator"] ?? null) === ($payload["routing"]["routing_recall"]["denominator"] ?? null)
+    && ($payload["contract_schema_hash_drift_count"] ?? null) === 0
+    && ($payload["binding_schema_probe_total"] ?? null) === 1
+    && ($payload["binding_schema_probe_passed"] ?? null) === 1
+    && ($payload["admission_deny_probe_total"] ?? null) === 1
+    && ($payload["admission_hold_probe_total"] ?? null) === 5
+    && ($payload["five_entrypoint_probe_total"] ?? null) === 5
+    && ($payload["five_entrypoint_probe_passed"] ?? null) === 5
+    && ($payload["csrf_negative_probe_total"] ?? null) === 3
+    && ($payload["career_chain_probe_total"] ?? null) === 1
+    && ($payload["receipt_projection_probe_total"] ?? null) === 1
+    && ($payload["routing"]["routing_precision"] ?? null) === ["numerator" => 32, "denominator" => 32, "measurement_state" => "observed"]
+    && ($payload["routing"]["routing_recall"] ?? null) === ["numerator" => 32, "denominator" => 32, "measurement_state" => "observed"]
     && ($payload["routing"]["missed_required_mode_rate"]["numerator"] ?? null) === 0
     && ($payload["routing"]["unnecessary_mode_rate"]["numerator"] ?? null) === 0
     && ($payload["routing"]["all_team_invocation_count"]["numerator"] ?? null) === 1
     && ($payload["routing"]["unauthorized_all_team_invocation_count"]["numerator"] ?? null) === 0
-    && ($payload["external_trace_export"] ?? null) === false
-    && ($payload["shared_agent_memory"] ?? null) === false
+    && ($payload["career_runtime"] ?? null) === "unavailable_manifest_validator_risk_open"
     && ($payload["mission_persistence_enabled"] ?? null) === false
     && ($payload["execution_allowed"] ?? null) === false
-    && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["role_capability_binding_hash"] ?? "")) === 1
+    && ($payload["SEO-PLATFORM-11D"] ?? null) === "CLOSED"
+    && ($payload["ready_for_11E"] ?? null) === true
+    && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["binding_hash"] ?? "")) === 1
     && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["contract_manifest_hash"] ?? "")) === 1
     && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["receipt_hash"] ?? "")) === 1;
 foreach ($zero as $field) {

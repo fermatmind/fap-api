@@ -25,6 +25,8 @@ test("11D deployment stays disabled and writes immutable exact-SHA closeout rece
   assert.equal((deployer.match(/task\('seo:council-orchestration-closeout'/g) || []).length, 1);
   assert.match(deployer, /set\('seo_council_orchestration', false\)/);
   assert.match(deployer, /artisan seo:council-closeout --expected-sha="\$expected_sha"/);
+  assert.match(deployer, /seo\.council_closeout\.v2/);
+  assert.doesNotMatch(deployer, /seo\.council_closeout\.v1/);
   assert.match(deployer, /release-receipts\/seo-council-orchestration/);
   assert.match(deployer, /task\('healthcheck:seo-council-anonymous'/);
   assert.doesNotMatch(`${ci}\n${deploy}`, /seo-agent:/);
