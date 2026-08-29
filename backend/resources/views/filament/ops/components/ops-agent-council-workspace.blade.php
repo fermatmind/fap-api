@@ -15,6 +15,8 @@
     data-search-submission-allowed="{{ $snapshot['search_submission_allowed'] ? 'true' : 'false' }}"
     data-registry-status="{{ $snapshot['registry_metadata']['registry_status'] }}"
     data-registry-version="{{ $snapshot['registry_metadata']['registry_version'] }}"
+    data-policy-decision="{{ $snapshot['policy_decision'] }}"
+    data-active-manifest-count="{{ $snapshot['active_manifest_count'] }}"
 >
     <div class="ops-seo-section-heading">
         <div>
@@ -31,6 +33,13 @@
         <span class="ops-tag">{{ __($copy.'.boundaries.evidence_bundle') }}</span>
         <span class="ops-tag">{{ __($copy.'.boundaries.no_authority') }}</span>
         <span class="ops-tag">registry={{ $snapshot['registry_metadata']['registry_status'] }} · v{{ $snapshot['registry_metadata']['registry_version'] }}</span>
+        <span class="ops-tag">state=DEPLOYED_DISABLED</span>
+        <span class="ops-tag">decision={{ $snapshot['policy_decision'] }}</span>
+        @foreach ($snapshot['global_guards'] as $guard => $value)
+            <span class="ops-tag">{{ $guard }}={{ $value ? 'true' : 'false' }}</span>
+        @endforeach
+        <span class="ops-tag">registry_hash={{ $snapshot['registry_metadata']['registry_hash'] }}</span>
+        <span class="ops-tag">active_manifest={{ $snapshot['active_manifest_count'] }}</span>
     </div>
 
     <div class="ops-agent-council__layout">

@@ -55,6 +55,7 @@ jobs:
       mbti_zh_result_operation_key: ${{ steps.mbti-zh-result.outputs.operation_key }}
       seo_platform_10_closeout: ${{ steps.receipt.outputs.seo_platform_10_closeout }}
       seo_agent_evidence_boundary: ${{ steps.receipt.outputs.seo_agent_evidence_boundary }}
+      seo_agent_policy_gateway: ${{ steps.receipt.outputs.seo_agent_policy_gateway }}
     steps:
       - name: Refuse non-main, PR, failed, or ambiguous CI runs
         shell: bash
@@ -109,11 +110,31 @@ jobs:
             and .ci_run_id == $run
             and .result == "success"
             and .publisher.required == .classification.operations.publisher_required
+            and .seo_agent_policy_gateway.required == .classification.operations.seo_agent_policy_gateway
             and ((.publisher.required == true
                 and .publisher.parity.status == "pass"
                 and .publisher.parity.release_sha == $sha
                 and (.publisher.parity.receipt_digest | test("^[0-9a-f]{64}$")))
               or (.publisher.required == false and .publisher.parity.status == "skipped"))
+            and ((.seo_agent_policy_gateway.required == true
+                and .seo_agent_policy_gateway.state == "DEPLOYED_DISABLED"
+                and .seo_agent_policy_gateway.decision_allow_count == 0
+                and .seo_agent_policy_gateway.admission_bypass == 0
+                and .seo_agent_policy_gateway.execution_bypass == 0
+                and .seo_agent_policy_gateway.manifest_bypass == 0
+                and .seo_agent_policy_gateway.entrypoint_bypass == 0
+                and .seo_agent_policy_gateway.l4_allow_count == 0
+                and .seo_agent_policy_gateway.active_manifest_count == 0
+                and .seo_agent_policy_gateway.trusted_signing_key_count == 0
+                and .seo_agent_policy_gateway.model_calls == 0
+                and .seo_agent_policy_gateway.tool_calls == 0
+                and .seo_agent_policy_gateway.external_calls == 0
+                and .seo_agent_policy_gateway.business_writes == 0
+                and .seo_agent_policy_gateway.cms_writes == 0
+                and .seo_agent_policy_gateway.url_truth_writes == 0
+                and .seo_agent_policy_gateway.search_submissions == 0)
+              or (.seo_agent_policy_gateway.required == false
+                and .seo_agent_policy_gateway.result == "skipped"))
           ' \
             "$receipt" >/dev/null
           classification="$(jq -c .classification "$receipt")"
@@ -123,6 +144,7 @@ jobs:
           mbti_zh_result_release="$(jq -r '.classification.operations.mbti_zh_result_authority_release == true' "$receipt")"
           seo_platform_10_closeout="$(jq -r '.classification.operations.seo_platform_10_closeout == true' "$receipt")"
           seo_agent_evidence_boundary="$(jq -r '.classification.operations.seo_agent_evidence_boundary == true' "$receipt")"
+          seo_agent_policy_gateway="$(jq -r '.classification.operations.seo_agent_policy_gateway == true' "$receipt")"
           {
             echo "deploy=$(jq -r .classification.deploy "$receipt")"
             echo "classification=$classification"
@@ -136,6 +158,7 @@ jobs:
             echo "mbti_zh_result_release=$mbti_zh_result_release"
             echo "seo_platform_10_closeout=$seo_platform_10_closeout"
             echo "seo_agent_evidence_boundary=$seo_agent_evidence_boundary"
+            echo "seo_agent_policy_gateway=$seo_agent_policy_gateway"
           } >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         if: steps.receipt.outputs.career_current == 'true'
@@ -277,7 +300,8 @@ jobs:
           timeout --signal=TERM --kill-after=30s 30m php /tmp/dep.phar deploy staging -f deploy.php --revision "$DEPLOY_SHA" \
             -o release_name="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode=standard \
             -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' \
-            -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' --no-interaction
+            -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' \
+            -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' --no-interaction
       - name: Read staging SEO Evidence closeout receipt
         if: needs.policy.outputs.seo_agent_evidence_boundary == 'true'
         shell: bash
@@ -322,6 +346,31 @@ jobs:
             }
             and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
+      - name: Read staging Policy Gateway closeout receipt
+        if: needs.policy.outputs.seo_agent_policy_gateway == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt=seo-agent-policy-gateway-staging.json
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_sha '%q' "$DEPLOY_SHA"
+          remote="set -euo pipefail; file=$q_path/shared/backend/storage/app/release-receipts/seo-agent-policy-gateway/$q_sha.json; test -f \"\$file\"; test ! -L \"\$file\"; cat \"\$file\""
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o IdentitiesOnly=yes -i "$DEPLOY_IDENTITY_FILE_STG" -p "$DEPLOY_PORT" \
+            "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$receipt"
+          jq -e --arg sha "$DEPLOY_SHA" '
+            .contract_version == "seo.policy_gateway_closeout.v1"
+            and .release_sha == $sha and .state == "DEPLOYED_DISABLED"
+            and .decision_allow_count == 0
+            and .admission_bypass == 0 and .execution_bypass == 0
+            and .manifest_bypass == 0 and .entrypoint_bypass == 0
+            and .l4_allow_count == 0
+            and .active_manifest_count == 0 and .trusted_signing_key_count == 0
+            and .model_calls == 0 and .tool_calls == 0 and .external_calls == 0
+            and .business_writes == 0 and .cms_writes == 0
+            and .url_truth_writes == 0 and .search_submissions == 0
+            and (.receipt_hash | test("^[a-f0-9]{64}$"))
+          ' "$receipt" >/dev/null
       - name: Record staging timing
         if: always()
         run: |
@@ -334,6 +383,7 @@ jobs:
           path: |
             staging-timing.json
             seo-agent-evidence-boundary-staging.json
+            seo-agent-policy-gateway-staging.json
           if-no-files-found: error
           retention-days: 90
 
@@ -418,7 +468,8 @@ jobs:
             -o release_name="$release" -o deploy_mode=standard \
             -o career_current_parity_required='${{ needs.policy.outputs.career_current }}' \
             -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' \
-            -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' -vvv --no-interaction
+            -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' \
+            -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' -vvv --no-interaction
           deploy_rc=$?
           set -e
           if [ "$deploy_rc" -eq 0 ]; then exit 0; fi
@@ -523,6 +574,30 @@ jobs:
             }
             and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
+      - name: Read production Policy Gateway closeout receipt
+        if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.seo_agent_policy_gateway == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt=seo-agent-policy-gateway-production.json
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_sha '%q' "$DEPLOY_SHA"
+          remote="set -euo pipefail; file=$q_path/shared/backend/storage/app/release-receipts/seo-agent-policy-gateway/$q_sha.json; sudo -n -u www-data -- test -f \"\$file\"; sudo -n -u www-data -- test ! -L \"\$file\"; sudo -n -u www-data -- cat \"\$file\""
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" \
+            "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$receipt"
+          jq -e --arg sha "$DEPLOY_SHA" '
+            .contract_version == "seo.policy_gateway_closeout.v1"
+            and .release_sha == $sha and .state == "DEPLOYED_DISABLED"
+            and .decision_allow_count == 0
+            and .admission_bypass == 0 and .execution_bypass == 0
+            and .manifest_bypass == 0 and .entrypoint_bypass == 0
+            and .l4_allow_count == 0
+            and .active_manifest_count == 0 and .trusted_signing_key_count == 0
+            and .model_calls == 0 and .tool_calls == 0 and .external_calls == 0
+            and .business_writes == 0 and .cms_writes == 0
+            and .url_truth_writes == 0 and .search_submissions == 0
+            and (.receipt_hash | test("^[a-f0-9]{64}$"))
+          ' "$receipt" >/dev/null
       - id: career-parity
         name: Read production preactivation Career parity receipt
         if: needs.policy.outputs.career_current == 'true' && steps.baseline.outputs.skip != 'true'
@@ -583,6 +658,7 @@ jobs:
             trunk-delivery-timing.json
             career-current-authority-production-preactivation-parity.json
             seo-agent-evidence-boundary-production.json
+            seo-agent-policy-gateway-production.json
             lkg-rollback-receipt.json
           if-no-files-found: error
           retention-days: 90

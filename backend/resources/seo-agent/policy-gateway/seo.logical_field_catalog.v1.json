@@ -1,0 +1,26 @@
+{
+  "catalog_id": "seo.logical_field_catalog",
+  "catalog_version": "1.0.0",
+  "actions": {
+    "content_candidate": ["title", "description", "body", "faq"],
+    "backend_dry_run": ["title", "meta_title", "meta_description", "description", "body", "faq"],
+    "controlled_draft_import": ["title", "meta_title", "meta_description", "description", "body", "faq", "status"],
+    "post_import_readback": ["title", "meta_title", "meta_description", "description", "body", "faq", "status"],
+    "promotion_dry_run": ["title", "meta_title", "meta_description", "description", "body", "faq", "status", "published_at"],
+    "controlled_publish": ["title", "meta_title", "meta_description", "description", "body", "faq", "status", "published_at"],
+    "runtime_readback": ["canonical_path", "indexable", "hreflang", "status", "published_at"],
+    "index_surface_readiness": ["canonical_path", "indexable", "hreflang", "sitemap_entry", "llms_entry"],
+    "url_truth_dry_run": ["canonical_path", "url_truth_state"],
+    "url_truth_controlled_write": ["canonical_path", "url_truth_state"],
+    "search_queue_dry_run": ["canonical_path", "search_queue_state"],
+    "search_queue_enqueue": ["canonical_path", "search_queue_state"],
+    "search_queue_approval": ["canonical_path", "search_queue_state", "approval_state"],
+    "search_live_submit": ["canonical_path", "provider_submission"],
+    "post_submit_observation": ["canonical_path", "provider_submission"]
+  },
+  "global_forbidden_fields": [
+    "account_id", "answer", "answers", "attempt_id", "auth", "authorization", "cookie",
+    "credential", "email", "order_id", "password", "payment_id", "phone", "private",
+    "query", "raw_query", "report_id", "result_id", "secret", "token", "user_id"
+  ]
+}

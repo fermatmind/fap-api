@@ -188,6 +188,24 @@ test("binds the persistent SEO agent evidence boundary to every 11B layer", () =
   }
   assert.equal(classifyPaths(["backend/docs/seo/seo-platform-10-closeout.md"]).operations.seo_agent_evidence_boundary, false);
 });
+test("binds the deny-only SEO agent Policy Gateway to every 11C layer", () => {
+  for (const path of [
+    "backend/app/Services/SeoAgentPolicyGateway/AdmissionPolicy.php",
+    "backend/app/Console/Commands/SeoPolicyGatewayCloseout.php",
+    "backend/resources/seo-agent/policy-gateway/schemas/seo.policy_decision.v1.schema.json",
+    "backend/docs/seo/generated/seo-policy-gateway-contract-manifest.v1.json",
+    "backend/docs/contracts/openapi.snapshot.json",
+    "backend/scripts/seo/export_seo_policy_gateway_contracts.php",
+    "backend/app/Filament/Ops/Support/SeoAgentCouncilUiContract.php",
+    "backend/resources/views/filament/ops/components/ops-agent-council-workspace.blade.php",
+    "backend/app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php",
+    "backend/routes/api.php",
+    "backend/tests/Feature/SeoIntel/SeoPlatform11CAdmissionPolicyTest.php",
+  ]) {
+    assert.equal(classifyPaths([path]).operations.seo_agent_policy_gateway, true, path);
+  }
+  assert.equal(classifyPaths(["backend/docs/seo/seo-platform-11a-inventory-preflight.md"]).operations.seo_agent_policy_gateway, false);
+});
 test("classifies migrations", () => assert.equal(has(["backend/database/migrations/2026_01_01_add_flag.php"], "backward_compatible_migration"), true));
 test("keeps the Ops SEO execution migration out of discoverability", () => {
   const result = classifyPaths([

@@ -18,6 +18,7 @@ set('default_timeout', 900);
 set('deploy_mode', 'standard');
 set('seo_platform_10_closeout', false);
 set('seo_agent_evidence_boundary', false);
+set('seo_agent_policy_gateway', false);
 set('career_current_parity_required', false);
 
 set('sentry_release', function () {
@@ -1129,6 +1130,66 @@ else
   as_receipt_owner test ! -L "$receipt_path"
   as_receipt_owner cmp -s "$tmp" "$receipt_path"
 fi
+BASH);
+    });
+});
+
+task('seo:agent-policy-gateway-closeout', function () {
+    if (! deployBooleanOption('seo_agent_policy_gateway', false)) {
+        writeln('<comment>Skip SEO agent Policy Gateway closeout.</comment>');
+
+        return;
+    }
+
+    within('{{current_path}}/backend', function (): void {
+        run(<<<'BASH'
+set -euo pipefail
+expected_sha="$(tr -d '\r\n' < ../REVISION)"
+case "$expected_sha" in (*[!0-9a-f]*|'') exit 1 ;; esac
+test "${#expected_sha}" -eq 40
+receipt="$({{bin/php}} artisan seo:policy-gateway-closeout --expected-sha="$expected_sha" --json --no-interaction --no-ansi)"
+printf '%s' "$receipt" | {{bin/php}} -r '
+$payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
+$zero = ["decision_allow_count", "admission_bypass", "execution_bypass", "manifest_bypass", "entrypoint_bypass", "l4_allow_count", "active_manifest_count", "trusted_signing_key_count", "model_calls", "tool_calls", "external_calls", "business_writes", "cms_writes", "url_truth_writes", "search_submissions"];
+$ok = ($payload["contract_version"] ?? null) === "seo.policy_gateway_closeout.v1"
+    && ($payload["release_sha"] ?? null) === ($argv[1] ?? null)
+    && ($payload["policy_registry_id"] ?? null) === "fermatmind.seo.policy_gateway_registry"
+    && ($payload["policy_registry_version"] ?? null) === "1.0.0"
+    && ($payload["state"] ?? null) === "DEPLOYED_DISABLED"
+    && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["policy_registry_hash"] ?? "")) === 1
+    && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["receipt_hash"] ?? "")) === 1;
+foreach ($zero as $field) {
+    $ok = $ok && ($payload[$field] ?? null) === 0;
+}
+exit($ok ? 0 : 1);
+' "$expected_sha"
+receipt_dir='{{deploy_path}}/shared/backend/storage/app/release-receipts/seo-agent-policy-gateway'
+receipt_path="$receipt_dir/$expected_sha.json"
+receipt_owner=deploy
+mkdir -p "$receipt_dir" 2>/dev/null || true
+as_receipt_owner() {
+  if [ "$receipt_owner" = www-data ]; then
+    sudo -n -u www-data -- "$@"
+  else
+    "$@"
+  fi
+}
+if ! tmp="$(mktemp "$receipt_dir/.${expected_sha}.XXXXXX" 2>/dev/null)"; then
+  sudo -n -u www-data -- mkdir -p "$receipt_dir"
+  receipt_owner=www-data
+  tmp="$(as_receipt_owner mktemp "$receipt_dir/.${expected_sha}.XXXXXX")"
+fi
+trap 'as_receipt_owner rm -f "$tmp"' EXIT
+printf '%s\n' "$receipt" | as_receipt_owner tee "$tmp" >/dev/null
+as_receipt_owner chmod 0640 "$tmp"
+if as_receipt_owner ln "$tmp" "$receipt_path" 2>/dev/null; then
+  :
+else
+  as_receipt_owner test -f "$receipt_path"
+  as_receipt_owner test ! -L "$receipt_path"
+  as_receipt_owner cmp -s "$tmp" "$receipt_path"
+fi
+test -f "$receipt_path"
 BASH);
     });
 });
@@ -3299,6 +3360,7 @@ after('deploy:symlink', 'healthcheck:scale-lookup');
 after('deploy:symlink', 'healthcheck:ops-entry-contract');
 after('healthcheck:ops-entry-contract', 'seo:ledger-production-closeout');
 after('healthcheck:ops-entry-contract', 'seo:agent-evidence-boundary-closeout');
+after('healthcheck:ops-entry-contract', 'seo:agent-policy-gateway-closeout');
 after('deploy:symlink', 'healthcheck:queue-smoke');
 after('queue:reload-workers', 'scheduler:install-managed-cron');
 after('scheduler:install-managed-cron', 'scheduler:wait-natural-heartbeat');

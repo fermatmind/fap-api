@@ -35,6 +35,7 @@ jobs:
       seo_platform_10_closeout: ${{ steps.classify.outputs.seo_platform_10_closeout }}
       seo_platform_11a_closeout: ${{ steps.classify.outputs.seo_platform_11a_closeout }}
       seo_agent_evidence_boundary: ${{ steps.classify.outputs.seo_agent_evidence_boundary }}
+      seo_agent_policy_gateway: ${{ steps.classify.outputs.seo_agent_policy_gateway }}
       classification: ${{ steps.classify.outputs.classification }}
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
@@ -78,6 +79,7 @@ jobs:
             echo "seo_platform_10_closeout=$(jq -r .operations.seo_platform_10_closeout "$RUNNER_TEMP/classification.json")"
             echo "seo_platform_11a_closeout=$(jq -r .operations.seo_platform_11a_closeout "$RUNNER_TEMP/classification.json")"
             echo "seo_agent_evidence_boundary=$(jq -r .operations.seo_agent_evidence_boundary "$RUNNER_TEMP/classification.json")"
+            echo "seo_agent_policy_gateway=$(jq -r .operations.seo_agent_policy_gateway "$RUNNER_TEMP/classification.json")"
             echo "classification=$compact"
           } >> "$GITHUB_OUTPUT"
           cp "$RUNNER_TEMP/classification.json" trunk-path-classification.json
@@ -472,9 +474,69 @@ jobs:
           if-no-files-found: error
           retention-days: 90
 
+  seo-agent-policy-gateway:
+    name: SEO Platform 11C deterministic Policy Gateway
+    needs: classify
+    if: needs.classify.outputs.seo_agent_policy_gateway == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          fetch-depth: 0
+      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+        with:
+          php-version: '8.4'
+          coverage: none
+          tools: composer:v2
+          extensions: sodium
+      - name: Install backend dependencies
+        working-directory: backend
+        run: composer install --no-interaction --prefer-dist --no-progress
+      - name: Verify 11C contracts, boundaries, and closeout
+        working-directory: backend
+        run: |
+          set -euo pipefail
+          php scripts/seo/export_seo_policy_gateway_contracts.php > "$RUNNER_TEMP/policy-gateway-manifest-hash"
+          git diff --exit-code -- docs/seo/generated/seo-policy-gateway-contract-manifest.v1.json
+          bash scripts/export_openapi.sh --check
+          php artisan test --compact \
+            tests/Feature/SeoIntel/SeoPlatform11C*.php \
+            tests/Feature/SeoIntel/SeoPlatform11AAuthorityBoundaryTest.php \
+            tests/Feature/SeoIntel/SeoPlatform11BAuthorityBoundaryTest.php \
+            tests/Feature/SeoIntel/SeoPlatform02PageFamilyPolicyTest.php \
+            tests/Architecture/ReviewPolicyRegistryTest.php \
+            tests/Feature/OpenApiDiffTest.php \
+            tests/Feature/Ops/SeoUxImpl06AgentCouncilTest.php \
+            tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php
+          php artisan seo:policy-gateway-closeout --expected-sha="$GITHUB_SHA" --json > ../seo-agent-policy-gateway-closeout.json
+          jq -e --arg sha "$GITHUB_SHA" '
+            .contract_version == "seo.policy_gateway_closeout.v1"
+            and .release_sha == $sha
+            and .policy_registry_id == "fermatmind.seo.policy_gateway_registry"
+            and .policy_registry_version == "1.0.0"
+            and .state == "DEPLOYED_DISABLED"
+            and .decision_allow_count == 0
+            and .admission_bypass == 0 and .execution_bypass == 0
+            and .manifest_bypass == 0 and .entrypoint_bypass == 0
+            and .l4_allow_count == 0
+            and .active_manifest_count == 0 and .trusted_signing_key_count == 0
+            and .model_calls == 0 and .tool_calls == 0 and .external_calls == 0
+            and .business_writes == 0 and .cms_writes == 0
+            and .url_truth_writes == 0 and .search_submissions == 0
+            and (.policy_registry_hash | test("^[a-f0-9]{64}$"))
+            and (.receipt_hash | test("^[a-f0-9]{64}$"))
+          ' ../seo-agent-policy-gateway-closeout.json >/dev/null
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: seo-agent-policy-gateway-${{ github.sha }}
+          path: seo-agent-policy-gateway-closeout.json
+          if-no-files-found: error
+          retention-days: 90
+
   validation-receipt:
     name: exact-SHA validation receipt
-    needs: [classify, hygiene, supply-chain, content-pack-build-validate, verify-mbti, verify-bigfive, career-publisher-parity, seo-platform-11a-closeout, seo-agent-evidence-boundary]
+    needs: [classify, hygiene, supply-chain, content-pack-build-validate, verify-mbti, verify-bigfive, career-publisher-parity, seo-platform-11a-closeout, seo-agent-evidence-boundary, seo-agent-policy-gateway]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -496,6 +558,11 @@ jobs:
         with:
           name: seo-agent-evidence-boundary-${{ github.sha }}
           path: seo-agent-evidence-boundary
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        if: needs.classify.outputs.seo_agent_policy_gateway == 'true'
+        with:
+          name: seo-agent-policy-gateway-${{ github.sha }}
+          path: seo-agent-policy-gateway
       - name: Require every selected validation to pass
         env:
           CLASSIFY_RESULT: ${{ needs.classify.result }}
@@ -507,6 +574,7 @@ jobs:
           CAREER_PARITY_RESULT: ${{ needs.career-publisher-parity.result }}
           SEO_PLATFORM_11A_CLOSEOUT_RESULT: ${{ needs.seo-platform-11a-closeout.result }}
           SEO_AGENT_EVIDENCE_BOUNDARY_RESULT: ${{ needs.seo-agent-evidence-boundary.result }}
+          SEO_AGENT_POLICY_GATEWAY_RESULT: ${{ needs.seo-agent-policy-gateway.result }}
         run: |
           set -euo pipefail
           for result in "$CLASSIFY_RESULT" "$HYGIENE_RESULT" "$SUPPLY_CHAIN_RESULT" "$CONTENT_PACK_RESULT" "$VERIFY_MBTI_RESULT" "$VERIFY_BIGFIVE_RESULT" "$CAREER_PARITY_RESULT"; do
@@ -562,9 +630,31 @@ jobs:
             test "$SEO_AGENT_EVIDENCE_BOUNDARY_RESULT" = skipped
             evidence='{"required":false,"result":"skipped"}'
           fi
+          gateway_required="$(jq -r .operations.seo_agent_policy_gateway trunk-path-classification.json)"
+          if [ "$gateway_required" = true ]; then
+            test "$SEO_AGENT_POLICY_GATEWAY_RESULT" = success
+            jq -e --arg sha "$GITHUB_SHA" '
+              .contract_version == "seo.policy_gateway_closeout.v1"
+              and .release_sha == $sha
+              and .state == "DEPLOYED_DISABLED"
+              and .decision_allow_count == 0
+              and .admission_bypass == 0 and .execution_bypass == 0
+              and .manifest_bypass == 0 and .entrypoint_bypass == 0
+              and .l4_allow_count == 0
+              and .active_manifest_count == 0 and .trusted_signing_key_count == 0
+              and .model_calls == 0 and .tool_calls == 0 and .external_calls == 0
+              and .business_writes == 0 and .cms_writes == 0
+              and .url_truth_writes == 0 and .search_submissions == 0
+              and (.receipt_hash | test("^[a-f0-9]{64}$"))
+            ' seo-agent-policy-gateway/seo-agent-policy-gateway-closeout.json >/dev/null
+            gateway="$(jq -c '. + {required:true}' seo-agent-policy-gateway/seo-agent-policy-gateway-closeout.json)"
+          else
+            test "$SEO_AGENT_POLICY_GATEWAY_RESULT" = skipped
+            gateway='{"required":false,"result":"skipped"}'
+          fi
           jq -n --arg sha "$GITHUB_SHA" --arg run_id "$GITHUB_RUN_ID" --slurpfile classification trunk-path-classification.json \
-            --slurpfile parity career-parity/career-current-authority-parity.json --argjson closeout "$closeout" --argjson evidence "$evidence" \
-            '{schema_version:"fermatmind.trunk-validation.v1",sha:$sha,ci_run_id:$run_id,result:"success",classification:$classification[0],publisher:{required:$classification[0].operations.publisher_required,parity:$parity[0]},seo_platform_11a_closeout:$closeout,seo_agent_evidence_boundary:$evidence}' \
+            --slurpfile parity career-parity/career-current-authority-parity.json --argjson closeout "$closeout" --argjson evidence "$evidence" --argjson gateway "$gateway" \
+            '{schema_version:"fermatmind.trunk-validation.v1",sha:$sha,ci_run_id:$run_id,result:"success",classification:$classification[0],publisher:{required:$classification[0].operations.publisher_required,parity:$parity[0]},seo_platform_11a_closeout:$closeout,seo_agent_evidence_boundary:$evidence,seo_agent_policy_gateway:$gateway}' \
             > trunk-validation.json
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:

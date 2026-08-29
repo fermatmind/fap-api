@@ -1,0 +1,55 @@
+{
+  "registry_id": "fermatmind.seo.policy_gateway_registry",
+  "registry_version": "1.0.0",
+  "registry_state": "frozen_deny_only",
+  "runtime_state": "dormant_not_authorized",
+  "contract_manifest": "seo.policy_gateway_contract_manifest.v1",
+  "owner_repository": "fap-api",
+  "guards": {
+    "read_only_gsc": true,
+    "search_submission_allowed": false,
+    "post12_agent_write_enabled": false,
+    "l4_state": "dormant_not_authorized",
+    "agent_default_write_permission": false,
+    "deterministic_system_final_veto": true,
+    "global_write_gate": false,
+    "active_manifest_count": 0,
+    "trusted_signing_key_count": 0,
+    "model_invocation_enabled": false,
+    "tool_invocation_enabled": false,
+    "external_egress_enabled": false
+  },
+  "caller_types": ["local_skill", "cli", "scheduler", "api", "seo_operations_ui"],
+  "dependencies": {
+    "role_capability_registry": {
+      "id": "fermatmind.seo.role_capability_registry",
+      "version": "1.0.0",
+      "hash": "b02b6edd816b75b42582468e5bc3aa2c9cd0060149825d1fdc6131cf71d73791"
+    },
+    "evidence_contract_manifest": {
+      "id": "seo.evidence_contract_manifest.v2",
+      "version": "2.0.0",
+      "hash": "c7b6d23cd70b789f8dad80fe4c187679211a1485dab47cb23ed2cb51980c59ab"
+    },
+    "page_family_policy": {
+      "id": "seo-page-family-policy.v1",
+      "version": "1.0.0",
+      "hash": "2e69428e1f4f589ceb392a6ee4d39e062b94e72101df0399cbed8e4140ef42dc"
+    },
+    "release_separation_policy": {
+      "id": "seo.release_separation",
+      "version": "1.0.0",
+      "hash": "6c1cf25f70ffc475a0c19f8c7cdf3451c9c35cb49482298e9d4485d365327be6"
+    },
+    "review_policy_registry": {
+      "id": "review-policy-registry.v1",
+      "version": "1.0.0",
+      "hash": "1abc4f3b7a25aecf3b32662b340d337588b477bfa6393d4380b1d36bb1d6107d"
+    }
+  },
+  "legacy_advisory": {
+    "service": "App\\Services\\SeoAgent\\AutoApprovalPolicy",
+    "classification": "legacy_advisory_candidate_classification",
+    "authoritative_inputs": []
+  }
+}

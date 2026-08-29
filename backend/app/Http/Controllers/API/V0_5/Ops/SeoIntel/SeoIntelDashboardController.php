@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API\V0_5\Ops\SeoIntel;
 
+use App\Services\SeoAgentPolicyGateway\PolicyGatewayStatusProjection;
 use App\Services\SeoIntel\Decision\SeoWeeklyDecisionSelector;
 use App\Services\SeoIntel\Ledger\SeoLedgerSnapshotReadService;
 use App\Services\SeoIntel\OpsDashboard\ContentLifecycleReadService;
@@ -107,6 +108,19 @@ final class SeoIntelDashboardController
                 'contract_version' => SeoWeeklyDecisionSelector::CONTRACT_VERSION,
                 'read_only' => true,
                 'authority' => 'fap-api seo decision cards',
+            ],
+        ]);
+    }
+
+    public function policyGateway(PolicyGatewayStatusProjection $projection): JsonResponse
+    {
+        return response()->json([
+            'ok' => true,
+            'data' => $projection->snapshot(),
+            'meta' => [
+                'contract_version' => 'seo.policy_gateway_status.v1',
+                'read_only' => true,
+                'authority' => 'fap-api deterministic Policy Gateway',
             ],
         ]);
     }

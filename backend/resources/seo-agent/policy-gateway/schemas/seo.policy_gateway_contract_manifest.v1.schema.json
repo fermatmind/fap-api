@@ -1,0 +1,16 @@
+{
+  "schema_id": "seo.policy_gateway_contract_manifest.v1",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "seo.policy_gateway_contract_manifest.v1"},
+    "manifest_version": {"const": "1.0.0"},
+    "registry_ref": {"type": "object", "additionalProperties": false, "properties": {"id": {"type": "string"}, "version": {"type": "string"}, "hash": {"type": "string"}}, "required": ["id", "version", "hash"]},
+    "contracts": {"type": "array", "items": {"type": "object", "additionalProperties": false, "properties": {"id": {"type": "string"}, "version": {"type": "string"}, "path": {"type": "string"}, "hash": {"type": "string"}}, "required": ["id", "version", "path", "hash"]}},
+    "policies": {"type": "array", "items": {"type": "object", "additionalProperties": false, "properties": {"id": {"type": "string"}, "version": {"type": "string"}, "path": {"type": "string"}, "hash": {"type": "string"}}, "required": ["id", "version", "path", "hash"]}},
+    "negative_guarantees": {"type": "object", "additionalProperties": false, "properties": {"allow_enum_present": {"const": false}, "trusted_signing_key_count": {"const": 0}, "active_manifest_count": {"const": 0}, "model_invocation": {"const": false}, "tool_invocation": {"const": false}, "external_egress": {"const": false}, "business_write": {"const": false}}, "required": ["allow_enum_present", "trusted_signing_key_count", "active_manifest_count", "model_invocation", "tool_invocation", "external_egress", "business_write"]},
+    "manifest_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  },
+  "required": ["schema_version", "manifest_version", "registry_ref", "contracts", "policies", "negative_guarantees", "manifest_hash"]
+}

@@ -11,21 +11,24 @@ use Tests\TestCase;
 
 final class SeoUxImpl06AgentCouncilTest extends TestCase
 {
-    public function test_missing_platform_11_contract_is_read_only_and_withholds_capabilities_and_run_evidence(): void
+    public function test_platform_11c_gateway_is_deployed_disabled_and_withholds_capabilities_and_run_evidence(): void
     {
         $snapshot = SeoAgentCouncilUiContract::unavailableSnapshot();
 
-        $this->assertSame(SeoOperationsUiState::PRODUCTION_UNPROVEN, $snapshot['state']);
+        $this->assertSame(SeoOperationsUiState::DEPLOYED_DISABLED, $snapshot['state']);
         $this->assertSame('l0_read_only', $snapshot['access_level']);
         $this->assertTrue($snapshot['read_only_gsc']);
         $this->assertFalse($snapshot['search_submission_allowed']);
-        $this->assertSame('frozen', $snapshot['registry_metadata']['registry_status']);
+        $this->assertSame('frozen_deny_only', $snapshot['registry_metadata']['registry_status']);
         $this->assertSame('fap-api', $snapshot['registry_metadata']['owner_repository']);
-        $this->assertSame(9, $snapshot['registry_metadata']['role_count']);
-        $this->assertSame(20, $snapshot['registry_metadata']['capability_count']);
+        $this->assertSame(0, $snapshot['registry_metadata']['role_count']);
+        $this->assertSame(0, $snapshot['registry_metadata']['capability_count']);
         $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $snapshot['registry_metadata']['registry_hash']);
         $this->assertSame([], $snapshot['capabilities']);
-        $this->assertNull($snapshot['policy_decision']);
+        $this->assertSame('DENY', $snapshot['policy_decision']);
+        $this->assertCount(6, $snapshot['global_guards']);
+        $this->assertSame(0, $snapshot['active_manifest_count']);
+        $this->assertSame(0, $snapshot['trusted_signing_key_count']);
         $this->assertNull($snapshot['trace']);
         $this->assertNull($snapshot['canary']);
         $this->assertNull($snapshot['circuit_breaker']);

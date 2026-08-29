@@ -1,0 +1,33 @@
+{
+  "schema_id": "seo.policy_execution_request.v1",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "seo.policy_execution_request.v1"},
+    "caller_type": {"enum": ["local_skill", "cli", "scheduler", "api", "seo_operations_ui"]},
+    "admission_request": {"type": "object"},
+    "manifest": {"type": "object"},
+    "action_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "family": {"type": "string"},
+        "locale": {"type": "string"},
+        "action": {"type": "string"},
+        "fields": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "url_count": {"type": "integer"},
+        "claim_risk": {"enum": ["R1", "R2", "R3", "R4"]},
+        "blast_radius": {"enum": ["single_url", "bounded_cohort", "shared_layer"]},
+        "shared_layer": {"type": "boolean"},
+        "rollback_ready": {"type": "boolean"},
+        "rollback_unit": {"type": "string"},
+        "authority_revision": {"type": "string"},
+        "measurement_state": {"enum": ["READY", "EVIDENCE_HOLD", "SOURCE_CAPABILITY_UNAVAILABLE", "MEASUREMENT_HOLD"]},
+        "canary_stage": {"type": "string"}
+      },
+      "required": ["family", "locale", "action", "fields", "url_count", "claim_risk", "blast_radius", "shared_layer", "rollback_ready", "rollback_unit", "authority_revision", "measurement_state", "canary_stage"]
+    }
+  },
+  "required": ["schema_version", "caller_type", "admission_request", "manifest", "action_scope"]
+}

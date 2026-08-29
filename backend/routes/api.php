@@ -696,6 +696,8 @@ Route::prefix('v0.5')->group(function () {
                 ->name('api.v0_5.ops.seo_intel.experiment_ledger');
             Route::get('/weekly-decisions', [SeoIntelDashboardController::class, 'weeklyDecisions'])
                 ->name('api.v0_5.ops.seo_intel.weekly_decisions');
+            Route::get('/policy-gateway', [SeoIntelDashboardController::class, 'policyGateway'])
+                ->name('api.v0_5.ops.seo_intel.policy_gateway');
         });
 
     Route::prefix('ops/public-content-health')

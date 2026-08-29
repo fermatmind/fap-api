@@ -1,0 +1,83 @@
+{
+    "schema_version": "seo.policy_gateway_contract_manifest.v1",
+    "manifest_version": "1.0.0",
+    "registry_ref": {
+        "id": "fermatmind.seo.policy_gateway_registry",
+        "version": "1.0.0",
+        "hash": "d838a5aae9a7d7ba25568a2fe96273d0ab927f970022eed85cb9431c6d8d3f87"
+    },
+    "contracts": [
+        {
+            "id": "seo.policy_admission_request.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/policy-gateway/schemas/seo.policy_admission_request.v1.schema.json",
+            "hash": "1320750dc02fff70aff16e8a9c53e58c05557c8926eff33a045519234d0d404a"
+        },
+        {
+            "id": "seo.policy_execution_request.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/policy-gateway/schemas/seo.policy_execution_request.v1.schema.json",
+            "hash": "c07f104857d4cb5333743cc1caea5bb043594f4a383fafa3ddb82208bd3a57da"
+        },
+        {
+            "id": "seo.action_scoped_manifest.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/policy-gateway/schemas/seo.action_scoped_manifest.v1.schema.json",
+            "hash": "17f090a40623479d2eea2c4ab9734079cdd43d9cf4fe7b175fee09018440a537"
+        },
+        {
+            "id": "seo.policy_decision.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/policy-gateway/schemas/seo.policy_decision.v1.schema.json",
+            "hash": "0fb7229fb17d07459b1daba60bedd92a91d632fb0c347fdff6f4dab31dbf633a"
+        },
+        {
+            "id": "seo.policy_gateway_contract_manifest.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/policy-gateway/schemas/seo.policy_gateway_contract_manifest.v1.schema.json",
+            "hash": "8ec0e2496f423fa3f0d68616d570cd04d8fba8d10a031f5b520c930b831a742e"
+        }
+    ],
+    "policies": [
+        {
+            "id": "fermatmind.seo.policy_gateway_registry",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/policy-gateway/seo.policy_gateway_registry.v1.json",
+            "hash": "d838a5aae9a7d7ba25568a2fe96273d0ab927f970022eed85cb9431c6d8d3f87"
+        },
+        {
+            "id": "seo.logical_field_catalog",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/policy-gateway/seo.logical_field_catalog.v1.json",
+            "hash": "ffeaef25c91afd05ff4aaf5e2441d0a0ae06d1be52b6f9abbf13ad2bdda77820"
+        },
+        {
+            "id": "seo.manifest_trust_registry",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/policy-gateway/seo.manifest_trust_registry.v1.json",
+            "hash": "eb070ac0505c2096dfdcffe65c9b1555976cacb4f15eebc1f1110a3c5df6b028"
+        },
+        {
+            "id": "seo.manifest_revocation_registry",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/policy-gateway/seo.manifest_revocation_registry.v1.json",
+            "hash": "e88d22dae8fd541b3e314302d6b8accd393e4cbf252d3780d954562ac51b4f4f"
+        },
+        {
+            "id": "seo.policy_runtime_controls",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/policy-gateway/seo.policy_runtime_controls.v1.json",
+            "hash": "2eaa29338ba612524fdb626787b247d8881ceb0af858c6c9df9cb0cfb775cf44"
+        }
+    ],
+    "negative_guarantees": {
+        "allow_enum_present": false,
+        "trusted_signing_key_count": 0,
+        "active_manifest_count": 0,
+        "model_invocation": false,
+        "tool_invocation": false,
+        "external_egress": false,
+        "business_write": false
+    },
+    "manifest_hash": "884ab75a9be3a218f868219246191577aba6c54b799f3d5cfbb76d87b6aebb09"
+}

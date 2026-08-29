@@ -4541,6 +4541,33 @@
                 "x-laravel-name": "api.v0_5.ops.public_content_health.runtime"
             }
         },
+        "/api/v0.5/ops/seo-intel/content-lifecycle": {
+            "get": {
+                "operationId": "api.v0_5.ops.seo_intel.content_lifecycle",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Ops\\SeoIntel\\SeoIntelDashboardController@contentLifecycle",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureAdminTotpVerified",
+                    "App\\Http\\Middleware\\OpsAccessControl",
+                    "App\\Http\\Middleware\\EnsureSeoIntelReadAuthorized"
+                ],
+                "x-laravel-name": "api.v0_5.ops.seo_intel.content_lifecycle"
+            }
+        },
         "/api/v0.5/ops/seo-intel/conversion-funnel": {
             "get": {
                 "operationId": "api.v0_5.ops.seo_intel.conversion_funnel",
@@ -4566,6 +4593,33 @@
                     "App\\Http\\Middleware\\EnsureSeoIntelReadAuthorized"
                 ],
                 "x-laravel-name": "api.v0_5.ops.seo_intel.conversion_funnel"
+            }
+        },
+        "/api/v0.5/ops/seo-intel/experiment-ledger": {
+            "get": {
+                "operationId": "api.v0_5.ops.seo_intel.experiment_ledger",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Ops\\SeoIntel\\SeoIntelDashboardController@experimentLedger",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureAdminTotpVerified",
+                    "App\\Http\\Middleware\\OpsAccessControl",
+                    "App\\Http\\Middleware\\EnsureSeoIntelReadAuthorized"
+                ],
+                "x-laravel-name": "api.v0_5.ops.seo_intel.experiment_ledger"
             }
         },
         "/api/v0.5/ops/seo-intel/issues": {
@@ -4676,6 +4730,33 @@
                 "x-laravel-name": "api.v0_5.ops.seo_intel.page_performance"
             }
         },
+        "/api/v0.5/ops/seo-intel/policy-gateway": {
+            "get": {
+                "operationId": "api.v0_5.ops.seo_intel.policy_gateway",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Ops\\SeoIntel\\SeoIntelDashboardController@policyGateway",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureAdminTotpVerified",
+                    "App\\Http\\Middleware\\OpsAccessControl",
+                    "App\\Http\\Middleware\\EnsureSeoIntelReadAuthorized"
+                ],
+                "x-laravel-name": "api.v0_5.ops.seo_intel.policy_gateway"
+            }
+        },
         "/api/v0.5/ops/seo-intel/production-closeout": {
             "get": {
                 "operationId": "api.v0_5.ops.seo_intel.production_closeout",
@@ -4701,6 +4782,33 @@
                     "App\\Http\\Middleware\\EnsureSeoIntelReadAuthorized"
                 ],
                 "x-laravel-name": "api.v0_5.ops.seo_intel.production_closeout"
+            }
+        },
+        "/api/v0.5/ops/seo-intel/technical-health": {
+            "get": {
+                "operationId": "api.v0_5.ops.seo_intel.technical_health",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Ops\\SeoIntel\\SeoIntelDashboardController@technicalHealth",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureAdminTotpVerified",
+                    "App\\Http\\Middleware\\OpsAccessControl",
+                    "App\\Http\\Middleware\\EnsureSeoIntelReadAuthorized"
+                ],
+                "x-laravel-name": "api.v0_5.ops.seo_intel.technical_health"
             }
         },
         "/api/v0.5/ops/seo-intel/trends": {
@@ -4755,6 +4863,33 @@
                     "App\\Http\\Middleware\\EnsureSeoIntelReadAuthorized"
                 ],
                 "x-laravel-name": "api.v0_5.ops.seo_intel.url_truth"
+            }
+        },
+        "/api/v0.5/ops/seo-intel/weekly-decisions": {
+            "get": {
+                "operationId": "api.v0_5.ops.seo_intel.weekly_decisions",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Ops\\SeoIntel\\SeoIntelDashboardController@weeklyDecisions",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureAdminTotpVerified",
+                    "App\\Http\\Middleware\\OpsAccessControl",
+                    "App\\Http\\Middleware\\EnsureSeoIntelReadAuthorized"
+                ],
+                "x-laravel-name": "api.v0_5.ops.seo_intel.weekly_decisions"
             }
         },
         "/api/v0.5/personality": {

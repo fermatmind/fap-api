@@ -1,0 +1,43 @@
+{
+  "schema_id": "seo.policy_admission_request.v1",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "seo.policy_admission_request.v1"},
+    "caller_type": {"enum": ["local_skill", "cli", "scheduler", "api", "seo_operations_ui"]},
+    "mission_id": {"type": "string", "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,127}$"},
+    "mission_type": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "requested_role_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "family": {"enum": ["tests", "articles_topics", "career", "personality", "trust_method_help", "other_public"]},
+    "locale": {"enum": ["en", "zh-CN"]},
+    "claim_risk": {"enum": ["R1", "R2", "R3", "R4"]},
+    "autonomy": {"enum": ["L0", "L1", "L2", "L3", "L4"]},
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "model_calls": {"type": "integer", "minimum": 0},
+        "tool_calls": {"type": "integer", "minimum": 0},
+        "execution_seconds": {"type": "integer", "minimum": 0},
+        "cost_amount": {"type": "number", "minimum": 0},
+        "currency": {"const": "USD"}
+      },
+      "required": ["model_calls", "tool_calls", "execution_seconds", "cost_amount", "currency"]
+    },
+    "deadline_seconds": {"type": "integer", "minimum": 0},
+    "tool_scope": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "egress_scope": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "evidence_context": {"type": "object"},
+    "request_metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source_label": {"type": "string", "maxLength": 64},
+        "correlation_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      },
+      "required": ["source_label", "correlation_hash"]
+    }
+  },
+  "required": ["schema_version", "caller_type", "mission_id", "mission_type", "requested_role_id", "family", "locale", "claim_risk", "autonomy", "budget", "deadline_seconds", "tool_scope", "egress_scope", "evidence_context", "request_metadata"]
+}
