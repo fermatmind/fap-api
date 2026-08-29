@@ -19,6 +19,7 @@ set('deploy_mode', 'standard');
 set('seo_platform_10_closeout', false);
 set('seo_agent_evidence_boundary', false);
 set('seo_agent_policy_gateway', false);
+set('seo_council_orchestration', false);
 set('career_current_parity_required', false);
 
 set('sentry_release', function () {
@@ -793,6 +794,7 @@ task('rollback:healthcheck', [
     'rollback:healthcheck:sitemap-source',
     'rollback:healthcheck:public-dns',
     'rollback:healthcheck:auth-guest-contract',
+    'rollback:healthcheck:seo-council-anonymous',
     'rollback:healthcheck:public-static-media-assets',
     'rollback:healthcheck:ops-entry-contract',
 ]);
@@ -1193,6 +1195,87 @@ $ok = $ok && ($payload["execution_scope_binding"] ?? null) === [
 exit($ok ? 0 : 1);
 ' "$expected_sha"
 receipt_dir='{{deploy_path}}/shared/backend/storage/app/release-receipts/seo-agent-policy-gateway'
+receipt_path="$receipt_dir/$expected_sha.json"
+receipt_owner=deploy
+mkdir -p "$receipt_dir" 2>/dev/null || true
+as_receipt_owner() {
+  if [ "$receipt_owner" = www-data ]; then
+    sudo -n -u www-data -- "$@"
+  else
+    "$@"
+  fi
+}
+if ! tmp="$(mktemp "$receipt_dir/.${expected_sha}.XXXXXX" 2>/dev/null)"; then
+  sudo -n -u www-data -- mkdir -p "$receipt_dir"
+  receipt_owner=www-data
+  tmp="$(as_receipt_owner mktemp "$receipt_dir/.${expected_sha}.XXXXXX")"
+fi
+trap 'as_receipt_owner rm -f "$tmp"' EXIT
+printf '%s\n' "$receipt" | as_receipt_owner tee "$tmp" >/dev/null
+as_receipt_owner chmod 0640 "$tmp"
+if as_receipt_owner ln "$tmp" "$receipt_path" 2>/dev/null; then
+  :
+else
+  as_receipt_owner test -f "$receipt_path"
+  as_receipt_owner test ! -L "$receipt_path"
+  as_receipt_owner cmp -s "$tmp" "$receipt_path"
+fi
+test -f "$receipt_path"
+BASH);
+    });
+});
+
+task('seo:council-orchestration-closeout', function () {
+    if (! deployBooleanOption('seo_council_orchestration', false)) {
+        writeln('<comment>Skip SEO Council orchestration closeout.</comment>');
+
+        return;
+    }
+
+    within('{{current_path}}/backend', function (): void {
+        run(<<<'BASH'
+set -euo pipefail
+expected_sha="$(tr -d '\r\n' < ../REVISION)"
+case "$expected_sha" in (*[!0-9a-f]*|'') exit 1 ;; esac
+test "${#expected_sha}" -eq 40
+receipt="$({{bin/php}} artisan seo:council-closeout --expected-sha="$expected_sha" --json --no-interaction --no-ansi)"
+printf '%s' "$receipt" | {{bin/php}} -r '
+$payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
+$zero = [
+    "caller_role_bypass", "active_legacy_seo_agent_entrypoints", "peer_delegation_bypass", "unauthorized_all_team_calls",
+    "budget_timeout_retry_idempotency_bypass", "unresolved_conflict_execution_bypass",
+    "career_chain_order_bypass", "metadata_private_data_bypass", "l4_allow_count",
+    "model_calls", "tool_calls", "external_calls", "agent_write_permissions", "business_writes",
+    "cms_writes", "url_truth_writes", "search_writes", "active_manifests", "trusted_signing_keys",
+];
+$ok = ($payload["contract_version"] ?? null) === "seo.council_closeout.v1"
+    && ($payload["release_sha"] ?? null) === ($argv[1] ?? null)
+    && ($payload["state"] ?? null) === "DEPLOYED_DISABLED"
+    && ($payload["runtime_mode"] ?? null) === "DETERMINISTIC_ROUTE_HOLD_ONLY"
+    && ($payload["unique_seo_orchestrator_count"] ?? null) === 1
+    && ($payload["binding_status"] ?? null) === "READY"
+    && ($payload["dependency_status"] ?? null) === "READY"
+    && ($payload["contract_schema_hash_drift"] ?? null) === 0
+    && ($payload["entrypoints_present"] ?? null) === "5/5"
+    && ($payload["routing"]["routing_precision"]["numerator"] ?? null) === ($payload["routing"]["routing_precision"]["denominator"] ?? null)
+    && ($payload["routing"]["routing_recall"]["numerator"] ?? null) === ($payload["routing"]["routing_recall"]["denominator"] ?? null)
+    && ($payload["routing"]["missed_required_mode_rate"]["numerator"] ?? null) === 0
+    && ($payload["routing"]["unnecessary_mode_rate"]["numerator"] ?? null) === 0
+    && ($payload["routing"]["all_team_invocation_count"]["numerator"] ?? null) === 1
+    && ($payload["routing"]["unauthorized_all_team_invocation_count"]["numerator"] ?? null) === 0
+    && ($payload["external_trace_export"] ?? null) === false
+    && ($payload["shared_agent_memory"] ?? null) === false
+    && ($payload["mission_persistence_enabled"] ?? null) === false
+    && ($payload["execution_allowed"] ?? null) === false
+    && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["role_capability_binding_hash"] ?? "")) === 1
+    && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["contract_manifest_hash"] ?? "")) === 1
+    && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["receipt_hash"] ?? "")) === 1;
+foreach ($zero as $field) {
+    $ok = $ok && ($payload[$field] ?? null) === 0;
+}
+exit($ok ? 0 : 1);
+' "$expected_sha"
+receipt_dir='{{deploy_path}}/shared/backend/storage/app/release-receipts/seo-council-orchestration'
 receipt_path="$receipt_dir/$expected_sha.json"
 receipt_owner=deploy
 mkdir -p "$receipt_dir" 2>/dev/null || true
@@ -2712,6 +2795,19 @@ $authGuestContractHealthcheck = function () {
 task('healthcheck:auth-guest-contract', $authGuestContractHealthcheck);
 task('rollback:healthcheck:auth-guest-contract', $authGuestContractHealthcheck);
 
+$seoCouncilAnonymousHealthcheck = function () {
+    $host = deploySafeHost((string) get('healthcheck_host'), 'healthcheck_host');
+    $resolveArg = deployCurlResolveArg($host, (bool) get('healthcheck_use_resolve', true));
+    $url = deployHttpsUrlArg($host, '/api/v0.5/ops/seo-intel/council/missions');
+    $contentType = deployShellArg('Content-Type: application/json');
+    $payload = deployShellArg('{}');
+    $jq = deployShellArg('.ok==false and .error_code=="UNAUTHORIZED"');
+
+    run("set -euo pipefail; body=\$(mktemp); trap 'rm -f \"\$body\"' EXIT; status=\$(curl -sS {$resolveArg}-o \"\$body\" -w '%{http_code}' -H {$contentType} -X POST {$url} --data {$payload}); test \"\$status\" = 401; jq -e {$jq} \"\$body\" >/dev/null");
+};
+task('healthcheck:seo-council-anonymous', $seoCouncilAnonymousHealthcheck);
+task('rollback:healthcheck:seo-council-anonymous', $seoCouncilAnonymousHealthcheck);
+
 $publicStaticMediaAssetsHealthcheck = function () {
     $host = deploySafeHost((string) (get('static_media_healthcheck_host') ?: get('healthcheck_host')), 'static_media_healthcheck_host');
     $resolveArg = deployCurlResolveArg($host, (bool) get('static_media_healthcheck_use_resolve', false));
@@ -3387,9 +3483,11 @@ after('deploy:symlink', 'healthcheck:auth-guest-contract');
 after('deploy:symlink', 'healthcheck:public-static-media-assets');
 after('deploy:symlink', 'healthcheck:scale-lookup');
 after('deploy:symlink', 'healthcheck:ops-entry-contract');
+after('deploy:symlink', 'healthcheck:seo-council-anonymous');
 after('healthcheck:ops-entry-contract', 'seo:ledger-production-closeout');
 after('healthcheck:ops-entry-contract', 'seo:agent-evidence-boundary-closeout');
 after('healthcheck:ops-entry-contract', 'seo:agent-policy-gateway-closeout');
+after('healthcheck:ops-entry-contract', 'seo:council-orchestration-closeout');
 after('deploy:symlink', 'healthcheck:queue-smoke');
 after('queue:reload-workers', 'scheduler:install-managed-cron');
 after('scheduler:install-managed-cron', 'scheduler:wait-natural-heartbeat');

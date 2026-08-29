@@ -90,6 +90,7 @@ use App\Http\Controllers\API\V0_5\Internal\Career\CareerCrosswalkOverrideControl
 use App\Http\Controllers\API\V0_5\Internal\Career\CareerCrosswalkPatchController;
 use App\Http\Controllers\API\V0_5\Internal\Career\CareerCrosswalkReviewQueueController;
 use App\Http\Controllers\API\V0_5\Ops\PublicContentRuntimeMetricsController;
+use App\Http\Controllers\API\V0_5\Ops\SeoIntel\SeoCouncilMissionController;
 use App\Http\Controllers\API\V0_5\Ops\SeoIntel\SeoIntelDashboardController;
 use App\Http\Controllers\API\V0_5\SEO\SitemapSourceController;
 use App\Http\Controllers\HealthzController;
@@ -98,6 +99,7 @@ use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\EnsureAdminTotpVerified;
 use App\Http\Middleware\EnsureCmsAdminAuthorized;
 use App\Http\Middleware\EnsureSeoIntelReadAuthorized;
+use App\Http\Middleware\EnsureSeoCouncilMissionAuthorized;
 use App\Http\Middleware\ForcePublicAttemptRealm;
 use App\Http\Middleware\HealthzAccessControl;
 use App\Http\Middleware\LimitWebhookPayloadSize;
@@ -698,6 +700,12 @@ Route::prefix('v0.5')->group(function () {
                 ->name('api.v0_5.ops.seo_intel.weekly_decisions');
             Route::get('/policy-gateway', [SeoIntelDashboardController::class, 'policyGateway'])
                 ->name('api.v0_5.ops.seo_intel.policy_gateway');
+            Route::post('/council/missions', [SeoCouncilMissionController::class, 'storeApi'])
+                ->middleware(EnsureSeoCouncilMissionAuthorized::class)
+                ->name('api.v0_5.ops.seo_intel.council.missions.store');
+            Route::post('/council/ui-missions', [SeoCouncilMissionController::class, 'storeUi'])
+                ->middleware(EnsureSeoCouncilMissionAuthorized::class)
+                ->name('api.v0_5.ops.seo_intel.council.ui_missions.store');
         });
 
     Route::prefix('ops/public-content-health')

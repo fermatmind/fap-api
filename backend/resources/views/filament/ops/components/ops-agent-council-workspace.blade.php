@@ -17,6 +17,7 @@
     data-registry-version="{{ $snapshot['registry_metadata']['registry_version'] }}"
     data-policy-decision="{{ $snapshot['policy_decision'] }}"
     data-policy-mode="{{ $snapshot['policy_mode'] }}"
+    data-runtime-mode="{{ $snapshot['runtime_mode'] }}"
     data-active-manifest-count="{{ $snapshot['active_manifest_count'] }}"
 >
     <div class="ops-seo-section-heading">
@@ -36,12 +37,14 @@
         <span class="ops-tag">registry={{ $snapshot['registry_metadata']['registry_status'] }} · v{{ $snapshot['registry_metadata']['registry_version'] }}</span>
         <span class="ops-tag">state=DEPLOYED_DISABLED</span>
         <span class="ops-tag">mode={{ $snapshot['policy_mode'] }}</span>
+        <span class="ops-tag">runtime_mode={{ $snapshot['runtime_mode'] }}</span>
         <span class="ops-tag">decision={{ $snapshot['policy_decision'] }}</span>
         @foreach ($snapshot['global_guards'] as $guard => $value)
             <span class="ops-tag">{{ $guard }}={{ $value ? 'true' : 'false' }}</span>
         @endforeach
         <span class="ops-tag">registry_hash={{ $snapshot['registry_metadata']['registry_hash'] }}</span>
         <span class="ops-tag">active_manifest={{ $snapshot['active_manifest_count'] }}</span>
+        <span class="ops-tag">binding=v{{ $snapshot['binding_metadata']['version'] }} · {{ $snapshot['binding_metadata']['hash'] }}</span>
     </div>
 
     <div class="ops-agent-council__layout">
@@ -61,6 +64,17 @@
                 :title="__($copy.'.hold_title')"
                 :description="__($copy.'.hold_description')"
             />
+
+            <form method="POST" action="/api/v0.5/ops/seo-intel/council/ui-missions" class="ops-agent-council__mission-form">
+                <input type="hidden" name="mission_id" value="mission:seo-operations-ui" />
+                <label><span>Idempotency key</span><input name="idempotency_key" required pattern="[A-Za-z0-9._:-]{1,128}" value="seo-operations-ui:route-plan" /></label>
+                <label><span>Mission</span><select name="mission_type"><option value="weekly_opportunity">weekly_opportunity</option><option value="monthly_portfolio">monthly_portfolio</option><option value="breakthrough_sprint">breakthrough_sprint</option><option value="global_portfolio">global_portfolio</option><option value="bounded_review">bounded_review</option><option value="independent_registry_review">independent_registry_review</option><option value="career_candidate_generation">career_candidate_generation</option></select></label>
+                <label><span>Family</span><select name="family"><option value="tests">tests</option><option value="articles_topics">articles_topics</option><option value="career">career</option><option value="personality">personality</option><option value="trust_method_help">trust_method_help</option><option value="other_public">other_public</option></select></label>
+                <label><span>Locale</span><select name="locale"><option value="zh-CN">zh-CN</option><option value="en">en</option></select></label>
+                <label><span>Review domain (bounded only)</span><select name="review_domain"><option value="">none</option><option value="technical">technical</option><option value="analytics">analytics</option><option value="content">content</option><option value="competitor">competitor</option><option value="stability">stability</option><option value="cro">cro</option></select></label>
+                <button type="submit">Generate deterministic RunReceipt / HOLD</button>
+            </form>
+            <p class="ops-control-hint">The UI submits only a zero-budget MissionRequest. It cannot select roles, tools, writers, manifests, or production execution.</p>
         </section>
 
         <aside class="ops-agent-council__trace" aria-labelledby="agent-trace-title">

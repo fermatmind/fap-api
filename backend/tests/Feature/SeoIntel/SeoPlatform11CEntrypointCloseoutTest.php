@@ -33,7 +33,7 @@ final class SeoPlatform11CEntrypointCloseoutTest extends TestCase
         $this->assertSame(['GET', 'HEAD'], $matching->first()->methods());
     }
 
-    public function test_api_and_agent_council_use_the_same_disabled_snapshot_without_controls(): void
+    public function test_api_and_agent_council_keep_the_same_disabled_policy_while_11d_adds_a_zero_budget_submission_form(): void
     {
         $gateway = app(PolicyGatewayStatusProjection::class)->snapshot();
         $council = SeoAgentCouncilUiContract::unavailableSnapshot();
@@ -49,7 +49,9 @@ final class SeoPlatform11CEntrypointCloseoutTest extends TestCase
         $this->assertNull($council['canary']);
         $this->assertNull($council['circuit_breaker']);
         $this->assertNull($council['rollback']);
-        foreach (['<form', '<input', 'wire:click', 'wire:model', '<button'] as $control) {
+        $this->assertStringContainsString('<form', $workspace);
+        $this->assertStringContainsString('/api/v0.5/ops/seo-intel/council/ui-missions', $workspace);
+        foreach (['name="caller_type"', 'name="requested_role"', 'name="tool_scope"', 'name="egress_scope"', 'name="budget"', 'wire:click', 'wire:model'] as $control) {
             $this->assertStringNotContainsString($control, $workspace);
         }
     }

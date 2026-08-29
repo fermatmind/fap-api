@@ -210,6 +210,27 @@ test("binds the deny-only SEO agent Policy Gateway to every 11C layer", () => {
     false,
   );
 });
+test("binds deterministic SEO Council orchestration to every 11D layer", () => {
+  for (const path of [
+    "backend/app/Services/SeoCouncil/SeoCouncilOrchestrator.php",
+    "backend/app/Console/Commands/SeoCouncilCloseoutCommand.php",
+    "backend/app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoCouncilMissionController.php",
+    "backend/app/Http/Middleware/EnsureSeoCouncilMissionAuthorized.php",
+    "backend/config/seo_council.php",
+    "backend/resources/seo-agent/council/schemas/seo.mission_request.v1.schema.json",
+    "backend/docs/seo/generated/seo-council-contract-manifest.v1.json",
+    "backend/scripts/seo/export_seo_council_contracts.php",
+    "backend/database/migrations/seo_intel/2026_08_29_030000_create_seo_council_runtime_tables.php",
+    "backend/tests/Feature/SeoIntel/SeoPlatform11DOrchestratorTest.php",
+    ".agents/skills/fermatmind-global-seo-geo-growth-scan/SKILL.md",
+  ]) {
+    const result = classifyPaths([path]);
+    assert.equal(result.operations.seo_council_orchestration, true, path);
+    assert.equal(result.flags.seo_discoverability, false, path);
+    assert.equal(result.flags.cache_runtime_projection, false, path);
+  }
+  assert.equal(classifyPaths(["backend/docs/seo/seo-platform-11c-closeout.md"]).operations.seo_council_orchestration, false);
+});
 test("classifies migrations", () => assert.equal(has(["backend/database/migrations/2026_01_01_add_flag.php"], "backward_compatible_migration"), true));
 test("keeps the Ops SEO execution migration out of discoverability", () => {
   const result = classifyPaths([

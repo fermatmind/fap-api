@@ -61,6 +61,13 @@ return Application::configure(basePath: dirname(__DIR__))
             ->withoutOverlapping(120)
             ->name('seo-weekly-decisions:v2:'.substr(hash('sha256', (string) config('app.url')), 0, 16))
             ->onOneServer();
+        if (! app()->environment('production') && (bool) config('seo_council.scheduler_enabled', false)) {
+            $schedule->command('seo:council-scheduled --json')
+                ->weeklyOn(4, '14:15')
+                ->withoutOverlapping(120)
+                ->name('seo-council-scheduled:v1')
+                ->onOneServer();
+        }
         $schedule->command('storage:prune --execute --scope=reports_backups --strategy=strict')->dailyAt('03:10')->withoutOverlapping();
         $schedule->command('storage:prune --execute --scope=content_releases_retention')->dailyAt('03:20')->withoutOverlapping();
         $schedule->command('storage:prune --execute --scope=legacy_private_private_cleanup')->dailyAt('03:30')->withoutOverlapping();

@@ -1792,12 +1792,12 @@ return [
                     'description' => 'A capability cannot skip a step or turn a recommendation into an authorized write.',
                     'steps' => [
                         'orchestrator' => 'Orchestrator routing', 'policy_gateway' => 'Policy Gateway decision',
-                        'safety_review' => 'Independent Safety Review', 'canary' => 'Canary',
-                        'circuit_breaker' => 'Circuit breaker', 'rollback' => 'Rollback readiness',
+                        'binding' => 'Role–Capability Binding', 'route_plan' => 'Deterministic route plan',
+                        'independent_review' => 'Independent review requirement', 'receipt' => 'Immutable RunReceipt',
                     ],
                 ],
-                'hold_title' => 'Agent Council is not production-proven',
-                'hold_description' => 'The #11 unified capability, Policy Gateway, safety-review, and trace contract is unavailable. Partial agent commands and risk caps are not promoted into capability rows or run evidence.',
+                'hold_title' => 'Agent Council execution remains disabled',
+                'hold_description' => 'The deterministic route-and-HOLD control plane can emit sanitized RunReceipts. Expert modes, tools, models, manifests, and production writes remain unavailable.',
                 'privacy_note' => 'Raw URI, User-Agent, queries, hashes, private paths, identities, secrets, and unsanitized tool output are excluded from this surface and its Livewire state.',
             ],
             'experiment_ledger' => [

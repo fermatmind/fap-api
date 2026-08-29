@@ -53,6 +53,10 @@ const isCareerAuthorityReleaseBoundary = (path) => isCareerPublisherBoundary(pat
   && path !== ".github/workflows/ci.yml"
   && path !== ".github/workflows/deploy.yml";
 
+const isSeoCouncilOrchestrationBoundary = (path) =>
+  /^backend\/(?:app\/Services\/SeoCouncil\/|app\/Console\/Commands\/SeoCouncil[^/]+\.php$|app\/Http\/Controllers\/API\/V0_5\/Ops\/SeoIntel\/SeoCouncilMissionController\.php$|app\/Http\/Middleware\/EnsureSeoCouncilMissionAuthorized\.php$|app\/Http\/Middleware\/OpsAccessControl\.php$|app\/Filament\/Ops\/Support\/SeoAgentCouncilUiContract\.php$|bootstrap\/app\.php$|config\/seo_council\.php$|resources\/seo-agent\/council\/|resources\/views\/filament\/ops\/components\/ops-agent-council-workspace\.blade\.php$|lang\/(?:en|zh_CN)\/ops\.php$|docs\/(?:seo\/generated\/seo-council-contract-manifest\.v1\.json$|contracts\/openapi\.snapshot\.json$)|scripts\/seo\/(?:export_seo_council_contracts|submit_seo_council_mission)\.php$|database\/migrations\/seo_intel\/2026_08_29_030000_create_seo_council_runtime_tables\.php$|tests\/Feature\/(?:SeoIntel\/SeoPlatform11D|Ops\/SeoUxImpl06AgentCouncilTest\.php$)|routes\/api\.php$)/.test(path)
+  || path === ".agents/skills/fermatmind-global-seo-geo-growth-scan/SKILL.md";
+
 export function classifyPaths(inputPaths) {
   const paths = [...new Set(inputPaths.map(normalize).filter(Boolean))].sort();
   if (paths.length === 0) throw new Error("changed path set must not be empty");
@@ -78,6 +82,7 @@ export function classifyPaths(inputPaths) {
     seo_agent_policy_gateway: paths.some((path) =>
       /^backend\/(?:app\/Services\/SeoAgentPolicyGateway\/|app\/Console\/Commands\/SeoPolicyGatewayCloseout\.php$|resources\/seo-agent\/policy-gateway\/|docs\/(?:seo\/generated\/seo-policy-gateway-contract-manifest\.v1\.json$|contracts\/openapi\.snapshot\.json$)|scripts\/seo\/export_seo_policy_gateway_contracts\.php$|tests\/Feature\/SeoIntel\/SeoPlatform11C|tests\/Feature\/Ops\/SeoUxImpl06AgentCouncilTest\.php$|app\/Filament\/Ops\/Support\/SeoAgentCouncilUiContract\.php$|resources\/views\/filament\/ops\/components\/ops-agent-council-workspace\.blade\.php$|app\/Http\/Controllers\/API\/V0_5\/Ops\/SeoIntel\/SeoIntelDashboardController\.php$|routes\/api\.php$)/.test(path)
     ),
+    seo_council_orchestration: paths.some(isSeoCouncilOrchestrationBoundary),
   };
   let testsChanged = false;
 
@@ -103,7 +108,8 @@ export function classifyPaths(inputPaths) {
     ]);
     const careerCurrentManagedCache = isCareerPublisherBoundary(path);
     const seoAgentPolicyGatewayBoundary = path.startsWith("backend/app/Services/SeoAgentPolicyGateway/");
-    const cache = !careerCurrentManagedCache && !seoAgentPolicyGatewayBoundary && matches(path, [
+    const seoCouncilOrchestrationBoundary = isSeoCouncilOrchestrationBoundary(path);
+    const cache = !careerCurrentManagedCache && !seoAgentPolicyGatewayBoundary && !seoCouncilOrchestrationBoundary && matches(path, [
       /(^|\/)(?:Cache|Redis|Projection)(\/|\.)/,
       /(?:cache|redis|projection|materiali[sz]ed|active_pointer|lkg)/i,
     ]);
@@ -123,7 +129,7 @@ export function classifyPaths(inputPaths) {
       /^backend\/scripts\/seo\/gsc_restricted_connect_proxy\.mjs$/,
       /^backend\/database\/migrations\/seo_intel\/\d{4}_\d{2}_\d{2}_\d+_expand_gsc_read_models\.php$/,
     ]);
-    const seo = !careerCurrentManagedCache && !retiredEqMirror && !opsUi && !opsExecutionMigration && !opsReadonlyGsc && matches(path, [
+    const seo = !careerCurrentManagedCache && !retiredEqMirror && !opsUi && !opsExecutionMigration && !opsReadonlyGsc && !seoCouncilOrchestrationBoundary && matches(path, [
       /(?:^|\/)(?:seo|search|discoverability|sitemap|robots|llms)(?:\/|\.|-|_)/i,
       /(?:canonical|hreflang|indexnow|indexability|gsc)/i,
       /(?:Seo|Search|Discoverability|Sitemap|Robots|Llms)/,

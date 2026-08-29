@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Support;
 
 use App\Services\SeoAgentPolicyGateway\PolicyGatewayStatusProjection;
+use App\Services\SeoCouncil\Governance\RoleCapabilityBindingRegistry;
+use App\Services\SeoCouncil\Governance\RuntimeCapabilitySnapshotBuilder;
 
 final class SeoAgentCouncilUiContract
 {
@@ -31,14 +33,17 @@ final class SeoAgentCouncilUiContract
     public static function unavailableSnapshot(): array
     {
         $gateway = app(PolicyGatewayStatusProjection::class)->snapshot();
+        $runtime = app(RuntimeCapabilitySnapshotBuilder::class)->snapshot();
+        $binding = app(RoleCapabilityBindingRegistry::class)->reference();
 
         return [
             'state' => SeoOperationsUiState::DEPLOYED_DISABLED,
             'policy_mode' => $gateway['mode'],
+            'runtime_mode' => $runtime['runtime_mode'],
             'access_level' => 'l0_read_only',
             'capability_fields' => ['capability', 'inputs', 'outputs', 'tools', 'permissions', 'cost', 'stop_condition', 'current_state'],
             'capabilities' => [],
-            'governance_steps' => ['orchestrator', 'policy_gateway', 'safety_review', 'canary', 'circuit_breaker', 'rollback'],
+            'governance_steps' => ['orchestrator', 'policy_gateway', 'binding', 'route_plan', 'independent_review', 'receipt'],
             'policy_decision' => $gateway['decision'],
             'trace' => null,
             'canary' => null,
@@ -49,14 +54,17 @@ final class SeoAgentCouncilUiContract
             'global_guards' => $gateway['global_guards'],
             'active_manifest_count' => $gateway['active_manifest_count'],
             'trusted_signing_key_count' => $gateway['trusted_signing_key_count'],
+            'binding_metadata' => $binding,
+            'mission_submission_enabled' => true,
+            'mission_execution_enabled' => false,
             'registry_metadata' => [
                 'registry_id' => $gateway['registry']['id'],
                 'registry_version' => $gateway['registry']['version'],
                 'registry_status' => $gateway['registry']['state'],
                 'registry_hash' => $gateway['registry']['hash'],
                 'owner_repository' => 'fap-api',
-                'role_count' => 0,
-                'capability_count' => 0,
+                'role_count' => 9,
+                'capability_count' => 20,
             ],
         ];
     }

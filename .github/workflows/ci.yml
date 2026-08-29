@@ -36,6 +36,7 @@ jobs:
       seo_platform_11a_closeout: ${{ steps.classify.outputs.seo_platform_11a_closeout }}
       seo_agent_evidence_boundary: ${{ steps.classify.outputs.seo_agent_evidence_boundary }}
       seo_agent_policy_gateway: ${{ steps.classify.outputs.seo_agent_policy_gateway }}
+      seo_council_orchestration: ${{ steps.classify.outputs.seo_council_orchestration }}
       classification: ${{ steps.classify.outputs.classification }}
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
@@ -80,6 +81,7 @@ jobs:
             echo "seo_platform_11a_closeout=$(jq -r .operations.seo_platform_11a_closeout "$RUNNER_TEMP/classification.json")"
             echo "seo_agent_evidence_boundary=$(jq -r .operations.seo_agent_evidence_boundary "$RUNNER_TEMP/classification.json")"
             echo "seo_agent_policy_gateway=$(jq -r .operations.seo_agent_policy_gateway "$RUNNER_TEMP/classification.json")"
+            echo "seo_council_orchestration=$(jq -r .operations.seo_council_orchestration "$RUNNER_TEMP/classification.json")"
             echo "classification=$compact"
           } >> "$GITHUB_OUTPUT"
           cp "$RUNNER_TEMP/classification.json" trunk-path-classification.json
@@ -555,9 +557,121 @@ jobs:
           if-no-files-found: error
           retention-days: 90
 
+  seo-council-orchestration:
+    name: SEO Platform 11D deterministic Council orchestration
+    needs: classify
+    if: needs.classify.outputs.seo_council_orchestration == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          fetch-depth: 0
+      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+        with:
+          php-version: '8.4'
+          coverage: none
+          tools: composer:v2
+          extensions: sodium, pdo_sqlite, sqlite3
+      - name: Install backend dependencies
+        working-directory: backend
+        run: composer install --no-interaction --prefer-dist --no-progress
+      - name: Verify contracts, fresh SQLite schema, boundaries, and closeout
+        working-directory: backend
+        run: |
+          set -euo pipefail
+          php scripts/seo/export_seo_council_contracts.php --check
+          bash scripts/export_openapi.sh --check
+          export APP_CONFIG_CACHE="$RUNNER_TEMP/seo-council-config.php"
+          cp -n .env.example .env || true
+          php artisan key:generate --force
+          php artisan config:cache --no-ansi
+          # shellcheck disable=SC2016
+          SEO_COUNCIL_CI_DATABASE="$RUNNER_TEMP/seo-council.sqlite" php -r '
+            $path = getenv("APP_CONFIG_CACHE");
+            $config = require $path;
+            $config["database"]["connections"]["seo_intel"] = [
+              "driver" => "sqlite", "database" => getenv("SEO_COUNCIL_CI_DATABASE"),
+              "prefix" => "", "foreign_key_constraints" => false,
+            ];
+            file_put_contents($path, "<?php return ".var_export($config, true).";\n");
+          '
+          touch "$RUNNER_TEMP/seo-council.sqlite"
+          php artisan migrate --database=seo_intel --path=database/migrations/seo_intel --force --no-interaction --ansi
+          rm -f "$APP_CONFIG_CACHE"
+          php artisan test --compact \
+            tests/Feature/SeoIntel/SeoPlatform11D*.php \
+            tests/Feature/SeoIntel/SeoPlatform11A*.php \
+            tests/Feature/SeoIntel/SeoPlatform11B*.php \
+            tests/Feature/SeoIntel/SeoPlatform11C*.php \
+            tests/Feature/OpenApiDiffTest.php \
+            tests/Feature/Ops/SeoUxImpl06AgentCouncilTest.php
+          find app/Services/SeoCouncil app/Console/Commands/SeoCouncil*.php app/Http/Middleware/EnsureSeoCouncilMissionAuthorized.php app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoCouncilMissionController.php scripts/seo/*seo_council* database/migrations/seo_intel/2026_08_29_030000_create_seo_council_runtime_tables.php -type f -name '*.php' -print0 | xargs -0 -n1 php -l >/dev/null
+          ./vendor/bin/pint --test \
+            app/Services/SeoCouncil \
+            app/Console/Commands/SeoCouncilCloseoutCommand.php \
+            app/Console/Commands/SeoCouncilScheduledCommand.php \
+            app/Console/Commands/SeoCouncilSubmitCommand.php \
+            app/Http/Middleware/EnsureSeoCouncilMissionAuthorized.php \
+            app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoCouncilMissionController.php \
+            config/seo_council.php \
+            database/migrations/seo_intel/2026_08_29_030000_create_seo_council_runtime_tables.php \
+            tests/Feature/SeoIntel/SeoPlatform11DContractsRoutingTest.php \
+            tests/Feature/SeoIntel/SeoPlatform11DOrchestratorTest.php \
+            tests/Feature/SeoIntel/SeoPlatform11DPersistenceApiTest.php \
+            tests/Feature/SeoIntel/SeoPlatform11DCloseoutTest.php
+          php artisan seo:council-closeout --expected-sha="$GITHUB_SHA" --json > ../seo-council-orchestration-closeout.json
+          jq -e --arg sha "$GITHUB_SHA" '
+            .contract_version == "seo.council_closeout.v1"
+            and .release_sha == $sha
+            and .state == "DEPLOYED_DISABLED"
+            and .runtime_mode == "DETERMINISTIC_ROUTE_HOLD_ONLY"
+            and .unique_seo_orchestrator_count == 1
+            and .binding_status == "READY"
+            and .dependency_status == "READY"
+            and .contract_schema_hash_drift == 0
+            and .entrypoints_present == "5/5"
+            and .caller_role_bypass == 0
+            and .active_legacy_seo_agent_entrypoints == 0
+            and .routing.routing_precision == {numerator:32,denominator:32,measurement_state:"observed"}
+            and (.routing.corpus_hash | test("^[a-f0-9]{64}$"))
+            and .routing.routing_recall == {numerator:32,denominator:32,measurement_state:"observed"}
+            and .routing.missed_required_mode_rate.numerator == 0
+            and .routing.unnecessary_mode_rate.numerator == 0
+            and .routing.all_team_invocation_count.numerator == 1
+            and .routing.unauthorized_all_team_invocation_count.numerator == 0
+            and .unauthorized_all_team_calls == 0
+            and .routing.human_route_correction_rate.measurement_state == "not_observed"
+            and .peer_delegation_bypass == 0
+            and .budget_timeout_retry_idempotency_bypass == 0
+            and .unresolved_conflict_execution_bypass == 0
+            and .career_chain_order_bypass == 0
+            and .metadata_private_data_bypass == 0
+            and .l4_allow_count == 0
+            and .model_calls == 0 and .tool_calls == 0 and .external_calls == 0
+            and .agent_write_permissions == 0 and .business_writes == 0
+            and .cms_writes == 0 and .url_truth_writes == 0 and .search_writes == 0
+            and .active_manifests == 0 and .trusted_signing_keys == 0
+            and .external_trace_export == false and .shared_agent_memory == false
+            and .career_runtime == "unavailable_manifest_validator_risk_open"
+            and .mission_persistence_enabled == false
+            and .operator_time_baseline == {state:"NO_OBSERVATIONS",total_minutes:null,observation_count:0}
+            and .action_manifest_ref.id == "seo.action_scoped_manifest.v1"
+            and .execution_allowed == false
+            and (.role_capability_binding_hash | test("^[a-f0-9]{64}$"))
+            and (.contract_manifest_hash | test("^[a-f0-9]{64}$"))
+            and (.receipt_hash | test("^[a-f0-9]{64}$"))
+          ' ../seo-council-orchestration-closeout.json >/dev/null
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: seo-council-orchestration-${{ github.sha }}
+          path: seo-council-orchestration-closeout.json
+          if-no-files-found: error
+          retention-days: 90
+
   validation-receipt:
     name: exact-SHA validation receipt
-    needs: [classify, hygiene, supply-chain, content-pack-build-validate, verify-mbti, verify-bigfive, career-publisher-parity, seo-platform-11a-closeout, seo-agent-evidence-boundary, seo-agent-policy-gateway]
+    needs: [classify, hygiene, supply-chain, content-pack-build-validate, verify-mbti, verify-bigfive, career-publisher-parity, seo-platform-11a-closeout, seo-agent-evidence-boundary, seo-agent-policy-gateway, seo-council-orchestration]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -584,6 +698,11 @@ jobs:
         with:
           name: seo-agent-policy-gateway-${{ github.sha }}
           path: seo-agent-policy-gateway
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        if: needs.classify.outputs.seo_council_orchestration == 'true'
+        with:
+          name: seo-council-orchestration-${{ github.sha }}
+          path: seo-council-orchestration
       - name: Require every selected validation to pass
         env:
           CLASSIFY_RESULT: ${{ needs.classify.result }}
@@ -596,6 +715,7 @@ jobs:
           SEO_PLATFORM_11A_CLOSEOUT_RESULT: ${{ needs.seo-platform-11a-closeout.result }}
           SEO_AGENT_EVIDENCE_BOUNDARY_RESULT: ${{ needs.seo-agent-evidence-boundary.result }}
           SEO_AGENT_POLICY_GATEWAY_RESULT: ${{ needs.seo-agent-policy-gateway.result }}
+          SEO_COUNCIL_ORCHESTRATION_RESULT: ${{ needs.seo-council-orchestration.result }}
         run: |
           set -euo pipefail
           for result in "$CLASSIFY_RESULT" "$HYGIENE_RESULT" "$SUPPLY_CHAIN_RESULT" "$CONTENT_PACK_RESULT" "$VERIFY_MBTI_RESULT" "$VERIFY_BIGFIVE_RESULT" "$CAREER_PARITY_RESULT"; do
@@ -694,9 +814,51 @@ jobs:
             test "$SEO_AGENT_POLICY_GATEWAY_RESULT" = skipped
             gateway='{"required":false,"result":"skipped"}'
           fi
+          council_required="$(jq -r .operations.seo_council_orchestration trunk-path-classification.json)"
+          if [ "$council_required" = true ]; then
+            test "$SEO_COUNCIL_ORCHESTRATION_RESULT" = success
+            jq -e --arg sha "$GITHUB_SHA" '
+              .contract_version == "seo.council_closeout.v1"
+              and .release_sha == $sha
+              and .state == "DEPLOYED_DISABLED"
+              and .runtime_mode == "DETERMINISTIC_ROUTE_HOLD_ONLY"
+              and .unique_seo_orchestrator_count == 1
+              and .binding_status == "READY"
+              and .dependency_status == "READY"
+              and .contract_schema_hash_drift == 0
+              and .entrypoints_present == "5/5"
+              and .caller_role_bypass == 0
+              and .active_legacy_seo_agent_entrypoints == 0
+              and .routing.routing_precision.numerator == .routing.routing_precision.denominator
+              and .routing.routing_recall.numerator == .routing.routing_recall.denominator
+              and .routing.missed_required_mode_rate.numerator == 0
+              and .routing.unnecessary_mode_rate.numerator == 0
+              and .routing.all_team_invocation_count.numerator == 1
+              and .routing.unauthorized_all_team_invocation_count.numerator == 0
+              and .unauthorized_all_team_calls == 0
+              and .peer_delegation_bypass == 0
+              and .budget_timeout_retry_idempotency_bypass == 0
+              and .unresolved_conflict_execution_bypass == 0
+              and .career_chain_order_bypass == 0
+              and .metadata_private_data_bypass == 0
+              and .l4_allow_count == 0
+              and .model_calls == 0 and .tool_calls == 0 and .external_calls == 0
+              and .agent_write_permissions == 0 and .business_writes == 0
+              and .cms_writes == 0 and .url_truth_writes == 0 and .search_writes == 0
+              and .active_manifests == 0 and .trusted_signing_keys == 0
+              and .external_trace_export == false and .shared_agent_memory == false
+              and .mission_persistence_enabled == false
+              and .execution_allowed == false
+              and (.receipt_hash | test("^[a-f0-9]{64}$"))
+            ' seo-council-orchestration/seo-council-orchestration-closeout.json >/dev/null
+            council="$(jq -c '. + {required:true}' seo-council-orchestration/seo-council-orchestration-closeout.json)"
+          else
+            test "$SEO_COUNCIL_ORCHESTRATION_RESULT" = skipped
+            council='{"required":false,"result":"skipped"}'
+          fi
           jq -n --arg sha "$GITHUB_SHA" --arg run_id "$GITHUB_RUN_ID" --slurpfile classification trunk-path-classification.json \
-            --slurpfile parity career-parity/career-current-authority-parity.json --argjson closeout "$closeout" --argjson evidence "$evidence" --argjson gateway "$gateway" \
-            '{schema_version:"fermatmind.trunk-validation.v1",sha:$sha,ci_run_id:$run_id,result:"success",classification:$classification[0],publisher:{required:$classification[0].operations.publisher_required,parity:$parity[0]},seo_platform_11a_closeout:$closeout,seo_agent_evidence_boundary:$evidence,seo_agent_policy_gateway:$gateway}' \
+            --slurpfile parity career-parity/career-current-authority-parity.json --argjson closeout "$closeout" --argjson evidence "$evidence" --argjson gateway "$gateway" --argjson council "$council" \
+            '{schema_version:"fermatmind.trunk-validation.v1",sha:$sha,ci_run_id:$run_id,result:"success",classification:$classification[0],publisher:{required:$classification[0].operations.publisher_required,parity:$parity[0]},seo_platform_11a_closeout:$closeout,seo_agent_evidence_boundary:$evidence,seo_agent_policy_gateway:$gateway,seo_council_orchestration:$council}' \
             > trunk-validation.json
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:

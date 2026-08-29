@@ -370,7 +370,7 @@ class OpsAccessControl
     private function isSensitiveRoute(string $routeName, string $path): bool
     {
         $haystack = strtolower($routeName.' '.$path);
-        foreach (['delivery-tools', 'secure-link', 'refund', 'grant', 'reprocess'] as $keyword) {
+        foreach (['delivery-tools', 'secure-link', 'refund', 'grant', 'reprocess', 'council/missions', 'council.missions', 'council/ui-missions', 'council.ui_missions'] as $keyword) {
             if (str_contains($haystack, $keyword)) {
                 return true;
             }

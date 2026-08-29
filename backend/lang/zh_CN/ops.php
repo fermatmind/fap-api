@@ -1792,12 +1792,12 @@ return [
                     'description' => '任何能力都不能跳过步骤，也不能把建议直接转换为已授权写入。',
                     'steps' => [
                         'orchestrator' => 'Orchestrator 路由', 'policy_gateway' => 'Policy Gateway 判断',
-                        'safety_review' => 'Independent Safety Review', 'canary' => 'Canary',
-                        'circuit_breaker' => '熔断', 'rollback' => 'Rollback 就绪',
+                        'binding' => 'Role–Capability Binding', 'route_plan' => '确定性 route plan',
+                        'independent_review' => 'Independent Review 要求', 'receipt' => '不可变 RunReceipt',
                     ],
                 ],
-                'hold_title' => 'Agent Council 尚未得到生产证明',
-                'hold_description' => '#11 统一能力、Policy Gateway、安全审核与 trace 合同尚不可用。现有 partial Agent 命令和 risk cap 不会被提升为能力行或运行证据。',
+                'hold_title' => 'Agent Council 执行保持关闭',
+                'hold_description' => '确定性 route-and-HOLD 控制面可生成脱敏 RunReceipt；专家模式、工具、模型、Manifest 与生产写入仍不可用。',
                 'privacy_note' => '本页面及其 Livewire state 排除 raw URI、User-Agent、query 原文、hash、私人路径、身份、secret 和未清洗工具输出。',
             ],
             'experiment_ledger' => [

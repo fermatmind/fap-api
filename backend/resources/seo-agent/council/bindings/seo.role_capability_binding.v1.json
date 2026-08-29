@@ -1,0 +1,62 @@
+{
+  "binding_id": "fermatmind.seo.role_capability_binding",
+  "binding_version": "1.0.0",
+  "registry_ref": {
+    "id": "fermatmind.seo.role_capability_registry",
+    "version": "1.0.0",
+    "hash": "b02b6edd816b75b42582468e5bc3aa2c9cd0060149825d1fdc6131cf71d73791"
+  },
+  "runtime_state": "dormant_not_authorized",
+  "roles": {
+    "seo.orchestrator": [],
+    "seo.expert.technical_search_authority": [
+      "seo.runtime_health_review",
+      "seo.release_separation_policy"
+    ],
+    "seo.expert.search_analytics_measurement": [
+      "seo.search_measurement_review"
+    ],
+    "seo.expert.content_entity_quality": [
+      "seo.content_claim_review",
+      "seo.material_lifecycle_review"
+    ],
+    "seo.expert.competitor_research": [
+      "seo.content_claim_review"
+    ],
+    "seo.expert.public_content_stability": [
+      "seo.runtime_health_review",
+      "seo.material_lifecycle_review",
+      "seo.rollback_guard"
+    ],
+    "seo.expert.commercial_funnel_cro": [
+      "seo.decision_authority"
+    ],
+    "seo.independent_reviewer": [
+      "seo.content_claim_review",
+      "seo.decision_authority",
+      "seo.material_lifecycle_review",
+      "seo.release_separation_policy"
+    ],
+    "career.content_agent": [
+      "career.content_candidate"
+    ]
+  },
+  "prohibited_capabilities": [
+    "seo.cms_writer",
+    "seo.search_submission",
+    "seo.url_truth_writer",
+    "career.current_merger",
+    "career.page_assembly_import",
+    "personality.approval_queue_write",
+    "personality.big_five_draft",
+    "personality.big_five_promote"
+  ],
+  "negative_guarantees": {
+    "model_invocation": false,
+    "tool_invocation": false,
+    "external_egress": false,
+    "agent_write_permissions": 0,
+    "peer_delegation": false,
+    "shared_agent_memory": false
+  }
+}
