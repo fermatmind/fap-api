@@ -173,6 +173,9 @@ final class SeoCouncilCloseoutCommand extends Command
                 'external_trace_export' => (bool) ($registry['architecture_decisions']['external_trace_export'] ?? true),
                 'shared_agent_memory' => (bool) ($registry['architecture_decisions']['shared_agent_memory'] ?? true),
             ];
+            $receiptProjection = $this->receiptProjectionProbe($receipt);
+            $receipt['receipt_projection_probe_total'] = $receiptProjection['total'];
+            $receipt['receipt_projection_bypass'] = $receiptProjection['bypass'];
 
             $zeroFields = [
                 'binding_hash_drift_count', 'unbound_mission_count', 'unknown_role_count',
@@ -182,7 +185,7 @@ final class SeoCouncilCloseoutCommand extends Command
                 'unauthorized_route_execution_count', 'model_calls', 'tool_calls', 'external_calls',
                 'business_writes', 'cms_writes', 'url_truth_writes', 'search_writes',
                 'active_manifest_count', 'trusted_key_count', 'l4_allow_count', 'production_permissions',
-                'active_legacy_seo_agent_entrypoints',
+                'active_legacy_seo_agent_entrypoints', 'receipt_projection_bypass',
             ];
             $ready = $bindingReport['valid'] === true
                 && $dependency['status'] === 'READY'
@@ -232,6 +235,30 @@ final class SeoCouncilCloseoutCommand extends Command
         } catch (InvalidArgumentException) {
             return 0;
         }
+    }
+
+    /** @param array<string, mixed> $receipt @return array{total:int,bypass:int} */
+    private function receiptProjectionProbe(array $receipt): array
+    {
+        $required = [
+            'source_sha', 'registry_version', 'registry_hash', 'binding_version', 'binding_hash',
+            'binding_schema_probe_total', 'binding_schema_probe_passed', 'binding_schema_probe_failed',
+            'binding_hash_drift_count', 'unbound_mission_count', 'unknown_role_count',
+            'unknown_capability_count', 'unknown_tool_count', 'admission_deny_probe_total',
+            'admission_deny_bypass', 'admission_hold_probe_total', 'admission_hold_bypass',
+            'requested_role_expansion_bypass', 'five_entrypoint_probe_total',
+            'five_entrypoint_probe_passed', 'csrf_negative_probe_total', 'csrf_bypass',
+            'career_chain_probe_total', 'career_chain_bypass', 'policy_reason_overwrite_count',
+            'unauthorized_route_execution_count', 'model_calls', 'tool_calls', 'external_calls',
+            'business_writes', 'cms_writes', 'url_truth_writes', 'search_writes',
+            'active_manifest_count', 'trusted_key_count', 'l4_allow_count', 'production_permissions',
+        ];
+        $passed = ($receipt['contract_version'] ?? null) === 'seo.council_closeout.v2'
+            && preg_match('/^[a-f0-9]{40}$/D', (string) ($receipt['source_sha'] ?? '')) === 1
+            && preg_match('/^[a-f0-9]{64}$/D', (string) ($receipt['binding_hash'] ?? '')) === 1
+            && array_diff($required, array_keys($receipt)) === [];
+
+        return ['total' => 1, 'bypass' => (int) (! $passed)];
     }
 
     private function budgetExpansionBypass(CouncilContractValidator $validator): int

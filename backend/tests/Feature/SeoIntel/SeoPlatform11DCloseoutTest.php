@@ -30,6 +30,7 @@ final class SeoPlatform11DCloseoutTest extends TestCase
         $this->assertSame(5, $receipt['five_entrypoint_probe_total']);
         $this->assertSame(5, $receipt['five_entrypoint_probe_passed']);
         $this->assertSame(3, $receipt['csrf_negative_probe_total']);
+        $this->assertSame(1, $receipt['receipt_projection_probe_total']);
         $this->assertSame('CLOSED', $receipt['SEO-PLATFORM-11D']);
         $this->assertTrue($receipt['ready_for_11E']);
         $this->assertSame(1, $receipt['routing']['all_team_invocation_count']['numerator']);
@@ -43,7 +44,7 @@ final class SeoPlatform11DCloseoutTest extends TestCase
             'unauthorized_route_execution_count', 'model_calls', 'tool_calls', 'external_calls',
             'business_writes', 'cms_writes', 'url_truth_writes', 'search_writes',
             'active_manifest_count', 'trusted_key_count', 'l4_allow_count', 'production_permissions',
-            'active_legacy_seo_agent_entrypoints',
+            'active_legacy_seo_agent_entrypoints', 'receipt_projection_bypass',
         ] as $field) {
             $this->assertSame(0, $receipt[$field], $field);
         }
