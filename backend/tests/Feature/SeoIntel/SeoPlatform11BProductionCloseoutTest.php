@@ -56,6 +56,7 @@ final class SeoPlatform11BProductionCloseoutTest extends TestCase
         $this->assertStringContainsString('seo:evidence-boundary-closeout --expected-sha="$GITHUB_SHA"', $ci);
         $this->assertStringContainsString('seo.evidence_boundary_closeout.v3', $ci);
         $this->assertStringContainsString("-o seo_agent_evidence_boundary='", $deploy);
+        $this->assertStringContainsString("needs.policy.outputs.career_current_release == 'true'", $deploy);
         $this->assertStringContainsString('seo-agent-evidence-boundary-staging.json', $deploy);
         $this->assertStringContainsString('seo-agent-evidence-boundary-production.json', $deploy);
         $this->assertStringContainsString('-o IdentitiesOnly=yes -i "$DEPLOY_IDENTITY_FILE_STG"', $deploy);

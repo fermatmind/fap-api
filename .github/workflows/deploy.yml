@@ -785,7 +785,7 @@ jobs:
   career-current-publish:
     name: Publish Career Current authority
     needs: [policy, staging, production]
-    if: needs.production.result == 'success' && needs.policy.outputs.career_current == 'true'
+    if: needs.production.result == 'success' && needs.policy.outputs.career_current_release == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 120
     environment: production

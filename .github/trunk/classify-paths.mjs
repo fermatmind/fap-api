@@ -49,6 +49,10 @@ const isCareerPublisherBoundary = (path) => CAREER_PUBLISHER_BOUNDARY_MATRIX.som
   (boundary) => boundary.endsWith("/") ? path.startsWith(boundary) : path === boundary,
 );
 
+const isCareerAuthorityReleaseBoundary = (path) => isCareerPublisherBoundary(path)
+  && path !== ".github/workflows/ci.yml"
+  && path !== ".github/workflows/deploy.yml";
+
 export function classifyPaths(inputPaths) {
   const paths = [...new Set(inputPaths.map(normalize).filter(Boolean))].sort();
   if (paths.length === 0) throw new Error("changed path set must not be empty");
@@ -58,7 +62,7 @@ export function classifyPaths(inputPaths) {
   const publisherRequired = paths.some(isCareerPublisherBoundary);
   const operations = {
     publisher_required: publisherRequired,
-    career_current_authority_release: publisherRequired,
+    career_current_authority_release: paths.some(isCareerAuthorityReleaseBoundary),
     mbti_zh_result_authority_release: paths.includes(
       "backend/content_assets/personality_public/mbti_zh_result_authority_release.v1.json",
     ),

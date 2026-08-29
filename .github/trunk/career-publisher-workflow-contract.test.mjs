@@ -30,6 +30,7 @@ test("deploy consumes the CI decision and leaves staging on its public cohort", 
 });
 
 test("production publisher is bound to the preactivation receipt digest", () => {
+  assert.match(deploy, /needs\.policy\.outputs\.career_current_release == 'true'/);
   assert.match(deploy, /CAREER_CURRENT_PUBLISH_PRODUCTION_PARITY_RECEIPT_DIGEST/);
   assert.doesNotMatch(deploy, /needs\.production\.outputs\.career_parity_digest/);
   assert.match(deploy, /Download exact production Career parity receipt/);

@@ -102,8 +102,23 @@ test("requires publisher parity for every centralized Career publisher boundary"
     const path = boundary.endsWith("/") ? `${boundary}identity/shard-00.jsonl` : boundary;
     const result = classifyPaths([path]);
     assert.equal(result.operations.publisher_required, true, path);
-    assert.equal(result.operations.career_current_authority_release, true, path);
+    assert.equal(
+      result.operations.career_current_authority_release,
+      ![".github/workflows/ci.yml", ".github/workflows/deploy.yml"].includes(path),
+      path,
+    );
   }
+});
+
+test("keeps 11B workflow assertions on zero-write Career parity without authorizing publication", () => {
+  const result = classifyPaths([
+    ".github/workflows/ci.yml",
+    ".github/workflows/deploy.yml",
+    "backend/tests/Feature/SeoIntel/SeoPlatform11BProductionCloseoutTest.php",
+  ]);
+  assert.equal(result.operations.publisher_required, true);
+  assert.equal(result.operations.career_current_authority_release, false);
+  assert.equal(result.operations.seo_agent_evidence_boundary, true);
 });
 
 test("routes Career publisher cache boundaries through parity instead of the generic cache suite", () => {
