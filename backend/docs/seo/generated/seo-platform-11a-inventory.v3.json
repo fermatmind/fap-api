@@ -21,7 +21,7 @@
   "source_repository_snapshots": [
     {
       "repository": "fap-api",
-      "enumerated_parent_sha": "fdfe66e1653874b51f4cb0647a6f64988bc1a9f6",
+      "enumerated_parent_sha": "cc57220f0165b143d1ddcf2152b194cdf75dd9e0",
       "delivery_sha_binding": "exact_sha_ci_receipt",
       "path_set_hash": "8b37eef39fde711ea681c1d281ba73b2f5d8b28a01ab60304f37d47057d57b45"
     },
@@ -194,7 +194,7 @@
         "repository": "fap-api",
         "path": ".github/workflows/deploy.yml",
         "historical_sha256": "d67a424f0e7e9fed782a8985bee2c5840479a56fe0760ee51a3479d8ea767261",
-        "reconciled_sha256": "8228e59231b8363be4b3fcdb61c02e1fc8b242ad1861686e6bf50397329bbfd8"
+        "reconciled_sha256": "971addaec15fb01f110b9674d49d16aa7f8e76f9582427e4730db08b269c05ae"
       },
       {
         "repository": "fap-web",
@@ -296,7 +296,7 @@
   "path_set_hashes": {
     "fap-api": "8b37eef39fde711ea681c1d281ba73b2f5d8b28a01ab60304f37d47057d57b45",
     "fap-web": "923816b2b625784d47a8f41e6152c0abf555282b70bbb7c99167a9892fa28fb6",
-    "combined_manifest": "07d419de2bbf0fcd4a051d9f6636f72d689703cef36573f9eee12660662ad586"
+    "combined_manifest": "b526883f6e3ce4726a2f9388655d48b6bad6191c41580f9e1e53c21ca5fbf764"
   },
   "self_excluded_path": "backend/docs/seo/generated/seo-platform-11a-inventory.v3.json",
   "records": [
@@ -2168,7 +2168,7 @@
       "members": [
         ".github/workflows/deploy.yml"
       ],
-      "members_hash": "a1b0ac8c885b14c8d0a055820b47891babe3d723370cba85b8fef774faef431d",
+      "members_hash": "a4f3862a0b0d2a1cc51ce331eaa95459ba805a7ccb0570ae3d0554366695d2b7",
       "asset_type": "yml",
       "entrypoints": [],
       "callers": [
@@ -27425,7 +27425,7 @@
     {
       "repository": "fap-api",
       "path": ".github/workflows/deploy.yml",
-      "sha256": "8228e59231b8363be4b3fcdb61c02e1fc8b242ad1861686e6bf50397329bbfd8",
+      "sha256": "971addaec15fb01f110b9674d49d16aa7f8e76f9582427e4730db08b269c05ae",
       "byte_size": 48247
     },
     {
@@ -32163,5 +32163,5 @@
       "byte_size": 10654
     }
   ],
-  "inventory_self_hash": "79c048f10b20ded252e20c21928d4834eef533e68b3c1f71f58d1d02adc0935f"
+  "inventory_self_hash": "bdee60893485cdc4980af4468d43afd82d6b4f662a5f1a689562745120464b8c"
 }
