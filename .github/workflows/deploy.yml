@@ -271,7 +271,7 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$DEPLOY_SHA"
-          timeout --signal=TERM --kill-after=30s 20m php /tmp/dep.phar deploy staging -f deploy.php --revision "$DEPLOY_SHA" \
+          timeout --signal=TERM --kill-after=30s 30m php /tmp/dep.phar deploy staging -f deploy.php --revision "$DEPLOY_SHA" \
             -o release_name="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode=standard \
             -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' --no-interaction
       - name: Record staging timing
@@ -293,7 +293,7 @@ jobs:
     needs: [policy, staging]
     if: needs.staging.result == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     environment: production
     env:
       TARGET: production
@@ -363,7 +363,7 @@ jobs:
           set -euo pipefail
           release="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}"
           set +e
-          timeout --signal=TERM --kill-after=30s 20m php /tmp/dep.phar deploy production -f deploy.php --revision "$DEPLOY_SHA" \
+          timeout --signal=TERM --kill-after=30s 30m php /tmp/dep.phar deploy production -f deploy.php --revision "$DEPLOY_SHA" \
             -o release_name="$release" -o deploy_mode=standard \
             -o career_current_parity_required='${{ needs.policy.outputs.career_current }}' \
             -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' -vvv --no-interaction
