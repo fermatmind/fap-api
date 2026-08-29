@@ -146,6 +146,17 @@ test("binds SEO Platform 10 closeout only to its exact controlled operation conf
   assert.equal(exact.operations.seo_platform_10_closeout, true);
   assert.equal(adjacent.operations.seo_platform_10_closeout, false);
 });
+test("binds SEO Platform 11A closeout only to the canonical v3 reconciliation", () => {
+  const exact = classifyPaths([
+    "backend/docs/seo/generated/seo-platform-11a-inventory.v3.json",
+  ]);
+  const adjacent = classifyPaths([
+    "backend/docs/seo/generated/seo-platform-11a-inventory.v3.notes.json",
+  ]);
+  assert.equal(exact.flags.docs_rules_tests_only, true);
+  assert.equal(exact.operations.seo_platform_11a_closeout, true);
+  assert.equal(adjacent.operations.seo_platform_11a_closeout, false);
+});
 test("classifies migrations", () => assert.equal(has(["backend/database/migrations/2026_01_01_add_flag.php"], "backward_compatible_migration"), true));
 test("keeps the Ops SEO execution migration out of discoverability", () => {
   const result = classifyPaths([

@@ -10,6 +10,10 @@ use Tests\TestCase;
 
 final class SeoPlatform11ALegacyConvergenceTest extends TestCase
 {
+    private const V2_FILE_SHA256 = '34c0f0df4e541a23c6de0a1758b190af53cd0ab0e0e8e5396b1a1678c39cf3d3';
+
+    private const REGISTRY_HASH = 'b02b6edd816b75b42582468e5bc3aa2c9cd0060149825d1fdc6131cf71d73791';
+
     public function test_legacy_cli_scheduler_and_workflow_entrypoints_are_absent(): void
     {
         $artisanList = $this->runProcess(['php', 'artisan', 'list', '--raw', '--no-ansi']);
@@ -59,9 +63,11 @@ final class SeoPlatform11ALegacyConvergenceTest extends TestCase
 
     public function test_inventory_v2_has_full_classification_and_required_cross_repository_counts(): void
     {
-        $inventory = $this->jsonFile(base_path('docs/seo/generated/seo-platform-11a-inventory.v2.json'));
+        $path = base_path('docs/seo/generated/seo-platform-11a-inventory.v2.json');
+        $inventory = $this->jsonFile($path);
         $summary = $inventory['summary'];
 
+        $this->assertSame(self::V2_FILE_SHA256, hash_file('sha256', $path));
         $this->assertSame('frozen', $inventory['status']);
         $this->assertSame(app(SeoRegistryHasher::class)->hashWithout($inventory, 'inventory_hash'), $inventory['inventory_hash']);
         $this->assertSame(100, $summary['inventory_coverage_percent']);
@@ -98,6 +104,74 @@ final class SeoPlatform11ALegacyConvergenceTest extends TestCase
             $record = $recordsById['fap-web.legacy-agent-os-role.'.$roleId];
             $this->assertSame('product_domain_out_of_seo_scope', $record['classification']);
         }
+    }
+
+    public function test_inventory_v3_recomputes_the_current_frozen_reconciliation_without_hardcoded_totals(): void
+    {
+        $hasher = app(SeoRegistryHasher::class);
+        $inventory = $this->jsonFile(base_path('docs/seo/generated/seo-platform-11a-inventory.v3.json'));
+        $summary = $inventory['summary'];
+
+        $this->assertSame('seo-platform-11a-inventory.v3', $inventory['schema_version']);
+        $this->assertSame('3.0.0', $inventory['inventory_version']);
+        $this->assertSame('frozen', $inventory['status']);
+        $this->assertSame($hasher->hashWithout($inventory, 'inventory_self_hash'), $inventory['inventory_self_hash']);
+        $this->assertSame(self::V2_FILE_SHA256, $inventory['historical_baseline']['file_sha256']);
+        $this->assertSame('seo-platform-11a-inventory.v2', $inventory['historical_baseline']['schema_version']);
+        $this->assertSame('historical_snapshot_generator', $inventory['historical_baseline']['generator']['classification']);
+
+        $this->assertSame(count($inventory['records']), $summary['inventory_record_count']);
+        $this->assertSame(count($inventory['paths_manifest']), $summary['path_manifest_count']);
+        $this->assertGreaterThan(652, $summary['inventory_record_count']);
+        $this->assertGreaterThan(831, $summary['path_manifest_count']);
+        $this->assertSame(0, $summary['unclassified_count']);
+        $this->assertSame(0, $summary['missing_disposition_count']);
+        $this->assertSame(0, $summary['duplicate_asset_id_count']);
+        $this->assertSame(0, $summary['missing_paths']);
+        $this->assertSame(0, $summary['unexpected_paths']);
+        $this->assertSame(0, $summary['hash_drift']);
+        $this->assertSame(139, $inventory['observed_counts']['web_seo_scripts']);
+
+        foreach (['fap-api', 'fap-web'] as $repository) {
+            $paths = array_values(array_map(
+                static fn (array $row): string => $row['path'],
+                array_filter($inventory['paths_manifest'], static fn (array $row): bool => $row['repository'] === $repository),
+            ));
+            sort($paths, SORT_STRING);
+            $this->assertSame(count($paths), count(array_unique($paths)));
+            $this->assertSame($hasher->hash($paths), $inventory['path_set_hashes'][$repository]);
+        }
+
+        $assetIds = array_column($inventory['records'], 'asset_id');
+        $this->assertSame(count($assetIds), count(array_unique($assetIds)));
+        foreach ($inventory['records'] as $record) {
+            $this->assertNotSame('', $record['disposition']);
+        }
+
+        $requiredSix = array_column($inventory['reconciliation']['required_six_omitted_paths'], 'path');
+        $this->assertSame([
+            '.agents/skills/public-profile-seo-asset-factory/authority-supersession.v1.json',
+            'docs/result-page-agents/seo-authority-supersession.v1.json',
+            'docs/seo/SEO_CODE_CHANGE_ARTIFACT.md',
+            'docs/seo/seo-platform-11a-authority-supersession.v1.json',
+            'scripts/seo/generate-seo-code-change-artifact.mjs',
+            'tests/contracts/seo-platform-11a-authority-convergence.contract.test.ts',
+        ], $requiredSix);
+        $this->assertCount(9, $inventory['reconciliation']['required_nine_refreshed_paths']);
+        $this->assertGreaterThanOrEqual(9, $inventory['reconciliation']['refreshed_v2_path_count']);
+
+        $this->assertSame(self::REGISTRY_HASH, $inventory['registry_freeze']['registry_hash']);
+        $this->assertSame(9, $inventory['registry_freeze']['role_count']);
+        $this->assertSame(20, $inventory['registry_freeze']['capability_count']);
+        $this->assertSame(1, $inventory['registry_freeze']['unique_orchestrator_count']);
+        $this->assertSame(1, $inventory['registry_freeze']['unique_career_agent_count']);
+
+        $this->assertFalse($inventory['fixed_boundaries']['runtime_created']);
+        $this->assertFalse($inventory['fixed_boundaries']['runtime_model_invocation_enabled']);
+        foreach (['model_calls_performed', 'cms_writes', 'seo_data_writes', 'search_submissions', 'production_data_writes', 'delegated_executions'] as $field) {
+            $this->assertSame(0, $inventory['fixed_boundaries'][$field]);
+        }
+        $this->assertSame('dormant_not_authorized', $inventory['fixed_boundaries']['l4_state']);
     }
 
     public function test_no_agent_framework_dependency_was_added(): void

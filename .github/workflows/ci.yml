@@ -33,6 +33,7 @@ jobs:
       publisher_required: ${{ steps.classify.outputs.publisher_required }}
       career_current_authority_release: ${{ steps.classify.outputs.career_current_authority_release }}
       seo_platform_10_closeout: ${{ steps.classify.outputs.seo_platform_10_closeout }}
+      seo_platform_11a_closeout: ${{ steps.classify.outputs.seo_platform_11a_closeout }}
       classification: ${{ steps.classify.outputs.classification }}
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
@@ -74,6 +75,7 @@ jobs:
             echo "publisher_required=$(jq -r .operations.publisher_required "$RUNNER_TEMP/classification.json")"
             echo "career_current_authority_release=$(jq -r .operations.career_current_authority_release "$RUNNER_TEMP/classification.json")"
             echo "seo_platform_10_closeout=$(jq -r .operations.seo_platform_10_closeout "$RUNNER_TEMP/classification.json")"
+            echo "seo_platform_11a_closeout=$(jq -r .operations.seo_platform_11a_closeout "$RUNNER_TEMP/classification.json")"
             echo "classification=$compact"
           } >> "$GITHUB_OUTPUT"
           cp "$RUNNER_TEMP/classification.json" trunk-path-classification.json
@@ -330,9 +332,70 @@ jobs:
           if-no-files-found: error
           retention-days: 90
 
+  seo-platform-11a-closeout:
+    name: SEO Platform 11A exact-tree reconciliation
+    needs: classify
+    if: needs.classify.outputs.seo_platform_11a_closeout == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: 24
+      - id: web
+        name: Resolve frozen fap-web commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          web_sha="$(jq -er '.source_repository_snapshots[] | select(.repository == "fap-web") | .sha' backend/docs/seo/generated/seo-platform-11a-inventory.v3.json)"
+          [[ "$web_sha" =~ ^[0-9a-f]{40}$ ]]
+          echo "web_sha=$web_sha" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          repository: fermatmind/fap-web
+          ref: ${{ steps.web.outputs.web_sha }}
+          path: _fap-web-exact
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Verify current API tree against exact frozen web tree
+        shell: bash
+        env:
+          WEB_SHA: ${{ steps.web.outputs.web_sha }}
+        run: |
+          set -euo pipefail
+          test "$(git -C _fap-web-exact rev-parse HEAD)" = "$WEB_SHA"
+          gate="$(node backend/scripts/seo/reconcile_seo_platform_11a_inventory.mjs \
+            --verify-reconciliation --api-root=. --web-root=_fap-web-exact)"
+          jq --arg sha "$GITHUB_SHA" --arg web_sha "$WEB_SHA" \
+            '. + {delivery_sha:$sha,fap_web_sha:$web_sha}' <<< "$gate" > seo-platform-11a-closeout.json
+          jq -e --arg sha "$GITHUB_SHA" --arg web_sha "$WEB_SHA" '
+            .ok == true
+            and .delivery_sha == $sha
+            and .fap_web_sha == $web_sha
+            and .missing_paths == 0
+            and .unexpected_paths == 0
+            and .hash_drift == 0
+            and .unclassified == 0
+            and .missing_disposition == 0
+            and .duplicate_paths == 0
+            and .duplicate_asset_id == 0
+            and .web_seo_scripts == 139
+            and (.api_path_set_hash | test("^[0-9a-f]{64}$"))
+            and (.inventory_self_hash | test("^[0-9a-f]{64}$"))
+          ' seo-platform-11a-closeout.json >/dev/null
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: seo-platform-11a-closeout-${{ github.sha }}
+          path: seo-platform-11a-closeout.json
+          if-no-files-found: error
+          retention-days: 90
+
   validation-receipt:
     name: exact-SHA validation receipt
-    needs: [classify, hygiene, supply-chain, content-pack-build-validate, verify-mbti, verify-bigfive, career-publisher-parity]
+    needs: [classify, hygiene, supply-chain, content-pack-build-validate, verify-mbti, verify-bigfive, career-publisher-parity, seo-platform-11a-closeout]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -344,6 +407,11 @@ jobs:
         with:
           name: career-current-authority-parity-${{ github.sha }}
           path: career-parity
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        if: needs.classify.outputs.seo_platform_11a_closeout == 'true'
+        with:
+          name: seo-platform-11a-closeout-${{ github.sha }}
+          path: seo-platform-11a-closeout
       - name: Require every selected validation to pass
         env:
           CLASSIFY_RESULT: ${{ needs.classify.result }}
@@ -353,6 +421,7 @@ jobs:
           VERIFY_MBTI_RESULT: ${{ needs.verify-mbti.result }}
           VERIFY_BIGFIVE_RESULT: ${{ needs.verify-bigfive.result }}
           CAREER_PARITY_RESULT: ${{ needs.career-publisher-parity.result }}
+          SEO_PLATFORM_11A_CLOSEOUT_RESULT: ${{ needs.seo-platform-11a-closeout.result }}
         run: |
           set -euo pipefail
           for result in "$CLASSIFY_RESULT" "$HYGIENE_RESULT" "$SUPPLY_CHAIN_RESULT" "$CONTENT_PACK_RESULT" "$VERIFY_MBTI_RESULT" "$VERIFY_BIGFIVE_RESULT" "$CAREER_PARITY_RESULT"; do
@@ -364,9 +433,19 @@ jobs:
             and (($required and .status == "pass" and (.receipt_digest | test("^[0-9a-f]{64}$")))
               or (($required | not) and .status == "skipped"))
           ' career-parity/career-current-authority-parity.json >/dev/null
+          closeout_required="$(jq -r .operations.seo_platform_11a_closeout trunk-path-classification.json)"
+          if [ "$closeout_required" = true ]; then
+            test "$SEO_PLATFORM_11A_CLOSEOUT_RESULT" = success
+            jq -e --arg sha "$GITHUB_SHA" '.ok == true and .delivery_sha == $sha' \
+              seo-platform-11a-closeout/seo-platform-11a-closeout.json >/dev/null
+            closeout="$(jq -c '. + {required:true}' seo-platform-11a-closeout/seo-platform-11a-closeout.json)"
+          else
+            test "$SEO_PLATFORM_11A_CLOSEOUT_RESULT" = skipped
+            closeout='{"required":false,"result":"skipped"}'
+          fi
           jq -n --arg sha "$GITHUB_SHA" --arg run_id "$GITHUB_RUN_ID" --slurpfile classification trunk-path-classification.json \
-            --slurpfile parity career-parity/career-current-authority-parity.json \
-            '{schema_version:"fermatmind.trunk-validation.v1",sha:$sha,ci_run_id:$run_id,result:"success",classification:$classification[0],publisher:{required:$classification[0].operations.publisher_required,parity:$parity[0]}}' \
+            --slurpfile parity career-parity/career-current-authority-parity.json --argjson closeout "$closeout" \
+            '{schema_version:"fermatmind.trunk-validation.v1",sha:$sha,ci_run_id:$run_id,result:"success",classification:$classification[0],publisher:{required:$classification[0].operations.publisher_required,parity:$parity[0]},seo_platform_11a_closeout:$closeout}' \
             > trunk-validation.json
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
