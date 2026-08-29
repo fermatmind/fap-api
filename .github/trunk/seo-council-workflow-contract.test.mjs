@@ -12,6 +12,8 @@ test("11D extends only the permanent CI and deploy control plane", () => {
   assert.match(ci, /seo-council-orchestration:/);
   assert.match(ci, /seo:council-closeout --expected-sha="\$GITHUB_SHA"/);
   assert.match(ci, /seo\.council_closeout\.v2/);
+  assert.equal((ci.match(/seo\.council_closeout\.v2/g) || []).length, 2);
+  assert.doesNotMatch(ci, /seo\.council_closeout\.v1/);
   assert.match(ci, /seo_council_orchestration:\$council/);
   assert.match(deploy, /\.seo_council_orchestration\.required == \.classification\.operations\.seo_council_orchestration/);
   assert.match(deploy, /seo-council-orchestration-staging\.json/);

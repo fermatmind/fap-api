@@ -227,6 +227,7 @@ test("binds deterministic SEO Council orchestration to every 11D layer", () => {
     "backend/database/migrations/seo_intel/2026_08_29_030000_create_seo_council_runtime_tables.php",
     "backend/tests/Feature/SeoIntel/SeoPlatform11DOrchestratorTest.php",
     ".agents/skills/fermatmind-global-seo-geo-growth-scan/SKILL.md",
+    ".github/trunk/seo-council-workflow-contract.test.mjs",
   ]) {
     const result = classifyPaths([path]);
     assert.equal(result.operations.seo_council_orchestration, true, path);
