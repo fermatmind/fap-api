@@ -75,6 +75,11 @@ test("normal deploy keeps release-bound public health ordering", () => {
     /runProductionPublicDnsBusinessEvidence\('\{\{release_path\}\}'\)/,
   );
   assert.match(
+    taskBlock("guard:public-dns-health"),
+    /runProductionPublicDnsBusinessEvidence\('\{\{release_path\}\}'\)/,
+  );
+  assert.doesNotMatch(deployer, /runProductionPublicDnsBusinessEvidence\(\)/);
+  assert.match(
     taskBlock("rollback:healthcheck:public-dns"),
     /runProductionPublicDnsBusinessEvidence\('\{\{current_path\}\}'\)/,
   );

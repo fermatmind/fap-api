@@ -562,7 +562,7 @@ before('deploy:prepare', 'guard:ci-parity-receipt');
  * cannot prove that the public edge and origin routing reach this service.
  */
 task('guard:public-dns-health', function () {
-    runProductionPublicDnsBusinessEvidence();
+    runProductionPublicDnsBusinessEvidence('{{release_path}}');
 });
 
 before('deploy:symlink', 'guard:public-dns-health');
