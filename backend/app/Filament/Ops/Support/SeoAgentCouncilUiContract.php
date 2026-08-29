@@ -17,6 +17,7 @@ final class SeoAgentCouncilUiContract
      *     capability_fields:list<string>,
      *     capabilities:list<never>,
      *     governance_steps:list<string>,
+     *     policy_mode:string,
      *     policy_decision:null,
      *     trace:null,
      *     canary:null,
@@ -33,6 +34,7 @@ final class SeoAgentCouncilUiContract
 
         return [
             'state' => SeoOperationsUiState::DEPLOYED_DISABLED,
+            'policy_mode' => $gateway['mode'],
             'access_level' => 'l0_read_only',
             'capability_fields' => ['capability', 'inputs', 'outputs', 'tools', 'permissions', 'cost', 'stop_condition', 'current_state'],
             'capabilities' => [],

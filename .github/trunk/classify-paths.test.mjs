@@ -205,6 +205,10 @@ test("binds the deny-only SEO agent Policy Gateway to every 11C layer", () => {
     assert.equal(classifyPaths([path]).operations.seo_agent_policy_gateway, true, path);
   }
   assert.equal(classifyPaths(["backend/docs/seo/seo-platform-11a-inventory-preflight.md"]).operations.seo_agent_policy_gateway, false);
+  assert.equal(
+    classifyPaths(["backend/app/Services/SeoAgentPolicyGateway/PolicyGatewayStatusProjection.php"]).categories.includes("cache_runtime_projection"),
+    false,
+  );
 });
 test("classifies migrations", () => assert.equal(has(["backend/database/migrations/2026_01_01_add_flag.php"], "backward_compatible_migration"), true));
 test("keeps the Ops SEO execution migration out of discoverability", () => {

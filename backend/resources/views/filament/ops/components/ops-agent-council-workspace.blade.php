@@ -16,6 +16,7 @@
     data-registry-status="{{ $snapshot['registry_metadata']['registry_status'] }}"
     data-registry-version="{{ $snapshot['registry_metadata']['registry_version'] }}"
     data-policy-decision="{{ $snapshot['policy_decision'] }}"
+    data-policy-mode="{{ $snapshot['policy_mode'] }}"
     data-active-manifest-count="{{ $snapshot['active_manifest_count'] }}"
 >
     <div class="ops-seo-section-heading">
@@ -34,6 +35,7 @@
         <span class="ops-tag">{{ __($copy.'.boundaries.no_authority') }}</span>
         <span class="ops-tag">registry={{ $snapshot['registry_metadata']['registry_status'] }} · v{{ $snapshot['registry_metadata']['registry_version'] }}</span>
         <span class="ops-tag">state=DEPLOYED_DISABLED</span>
+        <span class="ops-tag">mode={{ $snapshot['policy_mode'] }}</span>
         <span class="ops-tag">decision={{ $snapshot['policy_decision'] }}</span>
         @foreach ($snapshot['global_guards'] as $guard => $value)
             <span class="ops-tag">{{ $guard }}={{ $value ? 'true' : 'false' }}</span>

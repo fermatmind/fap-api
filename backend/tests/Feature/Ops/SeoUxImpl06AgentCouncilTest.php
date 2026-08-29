@@ -16,6 +16,7 @@ final class SeoUxImpl06AgentCouncilTest extends TestCase
         $snapshot = SeoAgentCouncilUiContract::unavailableSnapshot();
 
         $this->assertSame(SeoOperationsUiState::DEPLOYED_DISABLED, $snapshot['state']);
+        $this->assertSame('DETERMINISTIC_DENY_ONLY', $snapshot['policy_mode']);
         $this->assertSame('l0_read_only', $snapshot['access_level']);
         $this->assertTrue($snapshot['read_only_gsc']);
         $this->assertFalse($snapshot['search_submission_allowed']);
@@ -45,6 +46,7 @@ final class SeoUxImpl06AgentCouncilTest extends TestCase
         $this->assertStringContainsString('data-read-only-gsc', $workspace);
         $this->assertStringContainsString('data-search-submission-allowed', $workspace);
         $this->assertStringContainsString('data-registry-status', $workspace);
+        $this->assertStringContainsString('data-policy-mode', $workspace);
         $this->assertStringContainsString("['orchestrator', 'policy_gateway', 'safety_review', 'canary', 'circuit_breaker', 'rollback']", (string) file_get_contents(app_path('Filament/Ops/Support/SeoAgentCouncilUiContract.php')));
         $this->assertStringNotContainsString('<form', $workspace);
         $this->assertStringNotContainsString('<input', $workspace);

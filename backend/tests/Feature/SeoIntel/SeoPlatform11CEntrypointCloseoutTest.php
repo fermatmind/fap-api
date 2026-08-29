@@ -40,6 +40,7 @@ final class SeoPlatform11CEntrypointCloseoutTest extends TestCase
         $workspace = strtolower((string) file_get_contents(resource_path('views/filament/ops/components/ops-agent-council-workspace.blade.php')));
 
         $this->assertSame('DEPLOYED_DISABLED', $gateway['state']);
+        $this->assertSame('DETERMINISTIC_DENY_ONLY', $gateway['mode']);
         $this->assertSame('DENY', $gateway['decision']);
         $this->assertSame($gateway['decision'], $council['policy_decision']);
         $this->assertSame($gateway['global_guards'], $council['global_guards']);
@@ -83,6 +84,7 @@ final class SeoPlatform11CEntrypointCloseoutTest extends TestCase
 
         $this->assertSame($sha, $receipt['release_sha']);
         $this->assertSame('DEPLOYED_DISABLED', $receipt['state']);
+        $this->assertSame('DETERMINISTIC_DENY_ONLY', $receipt['mode']);
         foreach (['decision_allow_count', 'admission_bypass', 'execution_bypass', 'manifest_bypass', 'entrypoint_bypass', 'l4_allow_count', 'active_manifest_count', 'trusted_signing_key_count', 'model_calls', 'tool_calls', 'external_calls', 'business_writes', 'cms_writes', 'url_truth_writes', 'search_submissions'] as $field) {
             $this->assertSame(0, $receipt[$field], $field);
         }

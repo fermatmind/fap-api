@@ -1156,6 +1156,7 @@ $ok = ($payload["contract_version"] ?? null) === "seo.policy_gateway_closeout.v1
     && ($payload["policy_registry_id"] ?? null) === "fermatmind.seo.policy_gateway_registry"
     && ($payload["policy_registry_version"] ?? null) === "1.0.0"
     && ($payload["state"] ?? null) === "DEPLOYED_DISABLED"
+    && ($payload["mode"] ?? null) === "DETERMINISTIC_DENY_ONLY"
     && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["policy_registry_hash"] ?? "")) === 1
     && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["receipt_hash"] ?? "")) === 1;
 foreach ($zero as $field) {

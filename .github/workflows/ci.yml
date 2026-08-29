@@ -516,6 +516,7 @@ jobs:
             and .policy_registry_id == "fermatmind.seo.policy_gateway_registry"
             and .policy_registry_version == "1.0.0"
             and .state == "DEPLOYED_DISABLED"
+            and .mode == "DETERMINISTIC_DENY_ONLY"
             and .decision_allow_count == 0
             and .admission_bypass == 0 and .execution_bypass == 0
             and .manifest_bypass == 0 and .entrypoint_bypass == 0
@@ -637,6 +638,7 @@ jobs:
               .contract_version == "seo.policy_gateway_closeout.v1"
               and .release_sha == $sha
               and .state == "DEPLOYED_DISABLED"
+              and .mode == "DETERMINISTIC_DENY_ONLY"
               and .decision_allow_count == 0
               and .admission_bypass == 0 and .execution_bypass == 0
               and .manifest_bypass == 0 and .entrypoint_bypass == 0

@@ -9,6 +9,7 @@ use App\Services\SeoAgentPolicyGateway\ActionManifestVerifier;
 use App\Services\SeoAgentPolicyGateway\PolicyGatewayCallerGuard;
 use App\Services\SeoAgentPolicyGateway\PolicyGatewayContractRegistry;
 use App\Services\SeoAgentPolicyGateway\PolicyGatewayRegistry;
+use App\Services\SeoAgentPolicyGateway\PolicyGatewayStatusProjection;
 use Carbon\CarbonImmutable;
 use Illuminate\Console\Command;
 use Symfony\Component\Process\Process;
@@ -96,6 +97,7 @@ final class SeoPolicyGatewayCloseout extends Command
                 'page_family_policy_hash' => PolicyGatewayRegistry::PAGE_FAMILY_POLICY_HASH,
                 'release_separation_policy_hash' => PolicyGatewayRegistry::RELEASE_SEPARATION_POLICY_HASH,
                 'state' => 'DEPLOYED_DISABLED',
+                'mode' => PolicyGatewayStatusProjection::MODE,
                 'decision_allow_count' => 0,
                 'admission_bypass' => $admissionBypass,
                 'execution_bypass' => $executionBypass,

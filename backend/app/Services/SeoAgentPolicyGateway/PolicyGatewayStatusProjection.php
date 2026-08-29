@@ -6,6 +6,8 @@ namespace App\Services\SeoAgentPolicyGateway;
 
 final class PolicyGatewayStatusProjection
 {
+    public const MODE = 'DETERMINISTIC_DENY_ONLY';
+
     public function __construct(private readonly PolicyGatewayRegistry $registry) {}
 
     /** @return array<string, mixed> */
@@ -16,6 +18,7 @@ final class PolicyGatewayStatusProjection
 
         return [
             'state' => 'DEPLOYED_DISABLED',
+            'mode' => self::MODE,
             'decision' => 'DENY',
             'read_only_gsc' => true,
             'search_submission_allowed' => false,

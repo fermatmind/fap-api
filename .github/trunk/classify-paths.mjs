@@ -102,7 +102,8 @@ export function classifyPaths(inputPaths) {
       /(^|\/)(?:payments?|commerce|billing|entitlements?)(?:\.php|\.json|\/)/i,
     ]);
     const careerCurrentManagedCache = isCareerPublisherBoundary(path);
-    const cache = !careerCurrentManagedCache && matches(path, [
+    const seoAgentPolicyGatewayBoundary = path.startsWith("backend/app/Services/SeoAgentPolicyGateway/");
+    const cache = !careerCurrentManagedCache && !seoAgentPolicyGatewayBoundary && matches(path, [
       /(^|\/)(?:Cache|Redis|Projection)(\/|\.)/,
       /(?:cache|redis|projection|materiali[sz]ed|active_pointer|lkg)/i,
     ]);
