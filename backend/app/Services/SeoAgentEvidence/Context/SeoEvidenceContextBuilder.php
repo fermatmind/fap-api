@@ -74,6 +74,7 @@ final class SeoEvidenceContextBuilder
         $scopeStatus = $this->scopeDecision($missionType, $roleId, $pageFamily, $locale);
         $metadataScan = $this->scanner->scan([
             'mission_reference' => $missionId,
+            'mission_type_reference' => $missionType,
             'role_reference' => $roleId,
             'page_family_reference' => $pageFamily,
             'locale_reference' => $locale,
@@ -133,19 +134,25 @@ final class SeoEvidenceContextBuilder
         }
         if ($status === 'EVIDENCE_HOLD') {
             $payload = [];
+            $refs = [];
+            $capabilities = [];
         }
 
-        $safeMissionId = $metadataScan['private_data_present'] ? 'mission:held' : $missionId;
+        $safeMissionId = $status === 'EVIDENCE_HOLD' ? 'mission:held' : $missionId;
+        $safeMissionType = $status === 'EVIDENCE_HOLD' ? 'mission:held' : $missionType;
+        $safeRoleId = $status === 'EVIDENCE_HOLD' ? 'role:held' : $roleId;
+        $safePageFamily = $status === 'EVIDENCE_HOLD' ? 'page_family:held' : $pageFamily;
+        $safeLocale = $status === 'EVIDENCE_HOLD' ? 'und' : $locale;
 
         $context = [
             'schema_version' => 'seo.evidence_context.v1',
-            'context_id' => hash('sha256', implode('|', [$safeMissionId, $roleId, $pageFamily, $locale, $now->format('c')])),
+            'context_id' => hash('sha256', implode('|', [$safeMissionId, $safeRoleId, $safePageFamily, $safeLocale, $now->format('c')])),
             'context_version' => 1,
             'mission_id' => $safeMissionId,
-            'mission_type' => $missionType,
-            'role_id' => $roleId,
-            'page_family' => $pageFamily,
-            'locale' => $locale,
+            'mission_type' => $safeMissionType,
+            'role_id' => $safeRoleId,
+            'page_family' => $safePageFamily,
+            'locale' => $safeLocale,
             'built_at' => $now->format('Y-m-d\TH:i:s\Z'),
             'expires_at' => $now->addHour()->format('Y-m-d\TH:i:s\Z'),
             'bundle_refs' => $refs,

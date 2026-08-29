@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Services\SeoAgentEvidence\Bundle\SeoEvidenceBundleFactory;
+use App\Services\SeoAgentEvidence\Bundle\SeoEvidenceBundleVerifier;
 use App\Services\SeoAgentEvidence\Context\SeoEvidenceContextBuilder;
 use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher;
 use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceContractRegistry;
@@ -16,6 +18,7 @@ use App\Services\SeoAgentEvidence\Sources\SeoPlatformDependencyEvidenceAdapter;
 use App\Services\SeoAgentGovernance\SeoRoleCapabilityRegistry;
 use App\Services\SeoIntel\PageFamily\PageFamilyPolicyRegistry;
 use Illuminate\Console\Command;
+use InvalidArgumentException;
 use Symfony\Component\Process\Process;
 use Throwable;
 
@@ -35,6 +38,8 @@ final class SeoEvidenceBoundaryCloseout extends Command
         PageFamilyPolicyRegistry $pageFamilies,
         SeoPrivateRouteNegativeSet $negativeSet,
         SeoPrivateDataScanner $privateScanner,
+        SeoEvidenceBundleFactory $bundleFactory,
+        SeoEvidenceBundleVerifier $bundleVerifier,
         SeoEvidenceContextBuilder $contextBuilder,
     ): int {
         try {
@@ -56,10 +61,17 @@ final class SeoEvidenceBoundaryCloseout extends Command
             $privateRouteProbes = $this->privateRouteProbes($pageFamilies, $negativeSet);
             $piiEvasionProbes = $this->piiEvasionProbes($privateScanner);
             $invalidContextScope = $this->invalidContextScope($roleRegistry, $contextBuilder);
+            $metadataPrivacyProbes = $this->metadataPrivacyProbes($bundleFactory, $bundleVerifier, $contextBuilder, $hasher);
             $gatewayChecks = ExternalContentGateway::privacySelfCheck();
             if ($privateRouteProbes !== ['total' => 36, 'rejected' => 36, 'bypass' => 0]
                 || ($piiEvasionProbes['bypass'] ?? null) !== 0
                 || ($invalidContextScope['ready'] ?? null) !== 0
+                || $metadataPrivacyProbes !== [
+                    'total' => 52,
+                    'factory' => ['total' => 19, 'rejected' => 19, 'bypass' => 0],
+                    'verifier' => ['total' => 27, 'rejected' => 27, 'bypass' => 0],
+                    'context_builder' => ['total' => 6, 'held' => 6, 'fully_sanitized' => 6, 'bypass' => 0],
+                ]
                 || in_array('fail', $gatewayChecks, true)) {
                 return $this->emit(['status' => 'failed', 'safe_error_code' => 'PRIVACY_GATEWAY_SELF_CHECK_FAILED'], self::FAILURE);
             }
@@ -73,7 +85,7 @@ final class SeoEvidenceBoundaryCloseout extends Command
                 return $this->emit(['status' => 'failed', 'safe_error_code' => 'DEPENDENCY_SNAPSHOT_INVALID'], self::FAILURE);
             }
             $receipt = [
-                'contract_version' => 'seo.evidence_boundary_closeout.v2',
+                'contract_version' => 'seo.evidence_boundary_closeout.v3',
                 'release_sha' => $releaseSha,
                 'registry_hash' => $roleRegistry['registry_hash'],
                 'inventory_v3_hash' => $snapshot['inventory_v3_hash'],
@@ -100,6 +112,7 @@ final class SeoEvidenceBoundaryCloseout extends Command
                     'private_route_probes' => $privateRouteProbes,
                     'pii_evasion_probes' => $piiEvasionProbes,
                     'invalid_context_scope' => $invalidContextScope,
+                    'metadata_privacy_probes' => $metadataPrivacyProbes,
                     'gateway' => $gatewayChecks,
                 ],
                 'negative_guarantees' => [
@@ -168,6 +181,165 @@ final class SeoEvidenceBoundaryCloseout extends Command
         $rejected = count(array_filter($probes, static fn (mixed $probe): bool => $scanner->scan($probe)['private_data_present']));
 
         return ['total' => count($probes), 'rejected' => $rejected, 'bypass' => count($probes) - $rejected];
+    }
+
+    /**
+     * @return array{
+     *     total:int,
+     *     factory:array{total:int,rejected:int,bypass:int},
+     *     verifier:array{total:int,rejected:int,bypass:int},
+     *     context_builder:array{total:int,held:int,fully_sanitized:int,bypass:int}
+     * }
+     */
+    private function metadataPrivacyProbes(
+        SeoEvidenceBundleFactory $factory,
+        SeoEvidenceBundleVerifier $verifier,
+        SeoEvidenceContextBuilder $contextBuilder,
+        SeoEvidenceCanonicalHasher $hasher,
+    ): array {
+        $factoryInput = $this->safeBundleInput();
+        $factoryFields = array_values(array_diff(array_keys($factoryInput), ['payload']));
+        $factoryRejected = 0;
+        foreach ($factoryFields as $index => $field) {
+            $mutated = $factoryInput;
+            $probe = $this->privateProbe($index);
+            $mutated[$field] = $field === 'lineage_refs' ? ['nested' => ['value' => $probe]] : $probe;
+            try {
+                $factory->create($mutated);
+            } catch (InvalidArgumentException $exception) {
+                if ($exception->getMessage() === 'SEO_EVIDENCE_PRIVATE_DATA') {
+                    $factoryRejected++;
+                }
+            }
+        }
+
+        $safeBundle = $factory->create($factoryInput);
+        $verifierFields = array_values(array_diff(array_keys($safeBundle), ['payload']));
+        $verifierRejected = 0;
+        foreach ($verifierFields as $index => $field) {
+            $mutated = $safeBundle;
+            $probe = $this->privateProbe($index);
+            $mutated[$field] = in_array($field, ['redaction_summary', 'lineage_refs'], true)
+                ? ['nested' => ['value' => $probe]]
+                : $probe;
+            if ($field !== 'bundle_hash') {
+                $mutated['bundle_hash'] = $hasher->hashWithout($mutated, 'bundle_hash');
+            }
+            if ($verifier->verify($mutated) === ['valid' => false, 'code' => 'PRIVATE_DATA_PRESENT']) {
+                $verifierRejected++;
+            }
+        }
+
+        $contextArguments = [
+            'mission_id' => 'mission:closeout',
+            'mission_type' => 'bounded_review',
+            'role_id' => 'seo.expert.search_analytics_measurement',
+            'page_family' => 'tests',
+            'locale' => 'zh-CN',
+        ];
+        $contextHeld = 0;
+        $contextSanitized = 0;
+        $contextPassed = 0;
+        foreach (array_keys($contextArguments) as $index => $field) {
+            $probe = $this->privateProbe($index);
+            $mutated = $contextArguments;
+            $mutated[$field] = $probe;
+            $buildArguments = [...array_values($mutated), [$safeBundle]];
+            $context = $contextBuilder->build(...$buildArguments);
+            $held = ($context['status'] ?? null) === 'EVIDENCE_HOLD';
+            $sanitized = $this->isFullySanitizedContext($context, $probe);
+            $contextHeld += (int) $held;
+            $contextSanitized += (int) $sanitized;
+            $contextPassed += (int) ($held && $sanitized);
+        }
+
+        $bundleProbe = $this->privateProbe(count($contextArguments));
+        $maliciousBundle = $safeBundle;
+        $maliciousBundle['payload']['query_hmac'] = $bundleProbe;
+        $maliciousBundle['content_hash'] = $hasher->hash($maliciousBundle['payload']);
+        $maliciousBundle['bundle_hash'] = $hasher->hashWithout($maliciousBundle, 'bundle_hash');
+        $bundleBuildArguments = [...array_values($contextArguments), [$maliciousBundle]];
+        $bundleContext = $contextBuilder->build(...$bundleBuildArguments);
+        $bundleHeld = ($bundleContext['status'] ?? null) === 'EVIDENCE_HOLD';
+        $bundleSanitized = $this->isFullySanitizedContext($bundleContext, $bundleProbe);
+        $contextHeld += (int) $bundleHeld;
+        $contextSanitized += (int) $bundleSanitized;
+        $contextPassed += (int) ($bundleHeld && $bundleSanitized);
+
+        $factoryTotal = count($factoryFields);
+        $verifierTotal = count($verifierFields);
+        $contextTotal = count($contextArguments) + 1;
+
+        return [
+            'total' => $factoryTotal + $verifierTotal + $contextTotal,
+            'factory' => ['total' => $factoryTotal, 'rejected' => $factoryRejected, 'bypass' => $factoryTotal - $factoryRejected],
+            'verifier' => ['total' => $verifierTotal, 'rejected' => $verifierRejected, 'bypass' => $verifierTotal - $verifierRejected],
+            'context_builder' => [
+                'total' => $contextTotal,
+                'held' => $contextHeld,
+                'fully_sanitized' => $contextSanitized,
+                'bypass' => $contextTotal - $contextPassed,
+            ],
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    private function safeBundleInput(): array
+    {
+        return [
+            'bundle_id' => 'bundle:closeout',
+            'bundle_version' => 1,
+            'mission_id' => 'mission:closeout',
+            'source_type' => 'gsc_aggregate',
+            'source_ref' => str_repeat('d', 64),
+            'authority_type' => 'gsc_measurement',
+            'captured_at' => '2026-08-29T00:00:00Z',
+            'evidence_state' => 'verified',
+            'freshness_state' => 'fresh',
+            'source_capability_state' => 'available',
+            'retention_class' => 'first_party_aggregate',
+            'page_family' => 'tests',
+            'locale' => 'zh-CN',
+            'authority_revision' => 'revision:closeout',
+            'injection_scan_result' => 'pass',
+            'source_license_class' => 'first_party',
+            'data_usage_purpose' => 'search_measurement',
+            'egress_decision' => 'not_required',
+            'lineage_refs' => [],
+            'payload' => [
+                'query_hmac' => str_repeat('e', 64),
+                'query_hmac_key_version' => 'k1',
+                'clicks' => 10,
+                'impressions' => 100,
+            ],
+        ];
+    }
+
+    private function privateProbe(int $index): string
+    {
+        return match ($index % 3) {
+            0 => 'privacy-probe@example.com',
+            1 => 'sk-live-privacyprobe12345678',
+            default => 'attempt_id_privacyprobe1234',
+        };
+    }
+
+    /** @param array<string, mixed> $context */
+    private function isFullySanitizedContext(array $context, string $probe): bool
+    {
+        $serialized = json_encode($context, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+
+        return ($context['mission_id'] ?? null) === 'mission:held'
+            && ($context['mission_type'] ?? null) === 'mission:held'
+            && ($context['role_id'] ?? null) === 'role:held'
+            && ($context['page_family'] ?? null) === 'page_family:held'
+            && ($context['locale'] ?? null) === 'und'
+            && ($context['payload'] ?? null) === []
+            && ($context['bundle_refs'] ?? null) === []
+            && ($context['source_capability_states'] ?? null) === []
+            && preg_match('/^[a-f0-9]{64}$/', (string) ($context['context_id'] ?? '')) === 1
+            && preg_match('/^[a-f0-9]{64}$/', (string) ($context['context_hash'] ?? '')) === 1
+            && ! str_contains($serialized, $probe);
     }
 
     /** @param array<string, mixed> $registry @return array{total:int,ready:int} */

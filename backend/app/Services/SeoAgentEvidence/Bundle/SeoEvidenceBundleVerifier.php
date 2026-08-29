@@ -27,6 +27,16 @@ final class SeoEvidenceBundleVerifier
     /** @param array<string, mixed> $bundle @return array{valid:bool,code:string} */
     public function verify(array $bundle): array
     {
+        $metadataValues = [];
+        foreach ($bundle as $field => $value) {
+            if ($field !== 'payload') {
+                $metadataValues[] = $value;
+            }
+        }
+        if ($this->scanner->scan($metadataValues)['private_data_present']) {
+            return ['valid' => false, 'code' => 'PRIVATE_DATA_PRESENT'];
+        }
+
         $keys = array_keys($bundle);
         sort($keys, SORT_STRING);
         $expected = self::FIELDS;

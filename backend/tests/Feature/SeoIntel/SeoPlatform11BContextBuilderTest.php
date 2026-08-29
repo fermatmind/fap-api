@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Tests\Feature\SeoIntel;
 
 use App\Services\SeoAgentEvidence\Context\SeoEvidenceContextBuilder;
+use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher;
 use App\Services\SeoAgentGovernance\SeoRoleCapabilityRegistry;
+use Carbon\CarbonImmutable;
 use Tests\Feature\SeoIntel\Concerns\BuildsSeoEvidenceBundle;
 use Tests\TestCase;
 
@@ -58,5 +60,77 @@ final class SeoPlatform11BContextBuilderTest extends TestCase
                 $this->assertFalse($context['execution_allowed']);
             }
         }
+    }
+
+    public function test_private_entry_metadata_and_resigned_bundle_are_held_and_fully_sanitized(): void
+    {
+        config()->set('seo_agent_evidence.context_build_enabled', true);
+        $builder = app(SeoEvidenceContextBuilder::class);
+        $hasher = app(SeoEvidenceCanonicalHasher::class);
+        $arguments = [
+            'mission_id' => 'mission:test',
+            'mission_type' => 'bounded_review',
+            'role_id' => 'seo.expert.search_analytics_measurement',
+            'page_family' => 'tests',
+            'locale' => 'zh-CN',
+        ];
+        $safeBundle = $this->evidenceBundle();
+
+        foreach (array_keys($arguments) as $index => $field) {
+            $probe = $this->privateProbe($index);
+            $mutated = $arguments;
+            $mutated[$field] = $probe;
+            $buildArguments = [...array_values($mutated), [$safeBundle]];
+            $this->assertFullySanitized($builder->build(...$buildArguments), $probe, $hasher, $field);
+        }
+
+        $bundleProbe = $this->privateProbe(count($arguments));
+        $maliciousBundle = $safeBundle;
+        $maliciousBundle['payload']['query_hmac'] = $bundleProbe;
+        $maliciousBundle['content_hash'] = $hasher->hash($maliciousBundle['payload']);
+        $maliciousBundle['bundle_hash'] = $hasher->hashWithout($maliciousBundle, 'bundle_hash');
+        $buildArguments = [...array_values($arguments), [$maliciousBundle]];
+        $this->assertFullySanitized($builder->build(...$buildArguments), $bundleProbe, $hasher, 'bundle');
+    }
+
+    /** @param array<string, mixed> $context */
+    private function assertFullySanitized(
+        array $context,
+        string $probe,
+        SeoEvidenceCanonicalHasher $hasher,
+        string $source,
+    ): void {
+        $this->assertSame('EVIDENCE_HOLD', $context['status'], $source);
+        $this->assertSame('mission:held', $context['mission_id'], $source);
+        $this->assertSame('mission:held', $context['mission_type'], $source);
+        $this->assertSame('role:held', $context['role_id'], $source);
+        $this->assertSame('page_family:held', $context['page_family'], $source);
+        $this->assertSame('und', $context['locale'], $source);
+        $this->assertSame([], $context['payload'], $source);
+        $this->assertSame([], $context['bundle_refs'], $source);
+        $this->assertSame([], $context['source_capability_states'], $source);
+        $this->assertSame(
+            hash('sha256', implode('|', [
+                'mission:held',
+                'role:held',
+                'page_family:held',
+                'und',
+                CarbonImmutable::parse($context['built_at'])->format('c'),
+            ])),
+            $context['context_id'],
+            $source,
+        );
+        $this->assertSame($hasher->hashWithout($context, 'context_hash'), $context['context_hash'], $source);
+        $serialized = json_encode($context, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        $this->assertStringNotContainsString($probe, $serialized, $source);
+    }
+
+    private function privateProbe(int $index): string
+    {
+        return match ($index % 3) {
+            0 => 'context-probe@example.com',
+            1 => 'sk-live-contextprobe12345678',
+            default => 'attempt_id_contextprobe1234',
+        };
     }
 }

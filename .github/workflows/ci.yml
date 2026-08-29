@@ -422,7 +422,7 @@ jobs:
           php artisan test --compact tests/Feature/SeoIntel/SeoPlatform11B*.php
           php artisan seo:evidence-boundary-closeout --expected-sha="$GITHUB_SHA" --json > ../seo-agent-evidence-boundary-closeout.json
           jq -e --arg sha "$GITHUB_SHA" '
-            .contract_version == "seo.evidence_boundary_closeout.v2"
+            .contract_version == "seo.evidence_boundary_closeout.v3"
             and .release_sha == $sha
             and (.dependency_status == "READY" or .dependency_status == "DEPENDENCY_HOLD")
             and .execution_allowed == false
@@ -440,11 +440,22 @@ jobs:
             and .self_checks.private_route_probes == {total:36,rejected:36,bypass:0}
             and .self_checks.pii_evasion_probes.bypass == 0
             and .self_checks.invalid_context_scope.ready == 0
+            and .self_checks.metadata_privacy_probes == {
+              total:52,
+              factory:{total:19,rejected:19,bypass:0},
+              verifier:{total:27,rejected:27,bypass:0},
+              context_builder:{total:6,held:6,fully_sanitized:6,bypass:0}
+            }
             and .self_checks.gateway.rate_limit == "pass"
             and .self_checks.gateway.concurrency == "pass"
             and .self_checks.gateway.allowed_fields == "pass"
             and .self_checks.gateway.retention_mapping == "pass"
             and .model_calls == 0 and .tool_calls == 0 and .external_calls == 0 and .business_writes == 0
+            and .negative_guarantees.agent_runtime_created == false
+            and .negative_guarantees.agent_write_permissions == 0
+            and .negative_guarantees.cms_write == 0
+            and .negative_guarantees.search_submission == 0
+            and .negative_guarantees.url_truth_write == 0
             and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' ../seo-agent-evidence-boundary-closeout.json >/dev/null
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
@@ -513,7 +524,24 @@ jobs:
           evidence_required="$(jq -r .operations.seo_agent_evidence_boundary trunk-path-classification.json)"
           if [ "$evidence_required" = true ]; then
             test "$SEO_AGENT_EVIDENCE_BOUNDARY_RESULT" = success
-            jq -e --arg sha "$GITHUB_SHA" '.release_sha == $sha and .execution_allowed == false and (.receipt_hash | test("^[a-f0-9]{64}$"))' \
+            jq -e --arg sha "$GITHUB_SHA" '
+              .contract_version == "seo.evidence_boundary_closeout.v3"
+              and .release_sha == $sha
+              and .execution_allowed == false
+              and .model_calls == 0 and .tool_calls == 0 and .external_calls == 0 and .business_writes == 0
+              and .negative_guarantees.agent_runtime_created == false
+              and .negative_guarantees.agent_write_permissions == 0
+              and .negative_guarantees.cms_write == 0
+              and .negative_guarantees.search_submission == 0
+              and .negative_guarantees.url_truth_write == 0
+              and .self_checks.metadata_privacy_probes == {
+                total:52,
+                factory:{total:19,rejected:19,bypass:0},
+                verifier:{total:27,rejected:27,bypass:0},
+                context_builder:{total:6,held:6,fully_sanitized:6,bypass:0}
+              }
+              and (.receipt_hash | test("^[a-f0-9]{64}$"))
+            ' \
               seo-agent-evidence-boundary/seo-agent-evidence-boundary-closeout.json >/dev/null
             evidence="$(jq -c '. + {required:true}' seo-agent-evidence-boundary/seo-agent-evidence-boundary-closeout.json)"
           else

@@ -109,7 +109,7 @@ final class SeoPrivateDataScanner
             'email' => '/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i',
             'phone' => '/(?<!\d)(?:\+?86[- ]?)?1[3-9]\d{9}(?!\d)|(?<!\d)\+?1[- .]?(?:\d{3})[- .]?\d{3}[- .]?\d{4}(?!\d)/',
             'credential' => '/\b(?:bearer\s+[A-Za-z0-9._~+\/-]+=*|eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+|(?:sk|rk|pk)-(?:live|test)-[A-Za-z0-9_-]{8,}|api[_-]?key\s*[:=]|authorization\s*[:=]|cookie\s*[:=])/i',
-            'payment_identifier' => '/(?<!\d)(?:\d[ -]?){13,19}(?!\d)/',
+            'payment_identifier' => '/(?<![A-Za-z0-9])(?:\d[ -]?){13,19}(?![A-Za-z0-9])/',
             'identity_identifier' => '/(?<!\d)\d{17}[\dXx](?!\d)|\b\d{3}-\d{2}-\d{4}\b/',
             'opaque_identifier' => '/\b[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\b|\b[0-7][0-9A-HJKMNP-TV-Z]{25}\b/i',
             'ip_address' => '/(?<![\w:])(?:\d{1,3}\.){3}\d{1,3}(?![\w:])|(?<![\w:])(?:[a-f0-9]{1,4}:){2,7}[a-f0-9]{0,4}(?![\w:])/i',

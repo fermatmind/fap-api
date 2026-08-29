@@ -1056,7 +1056,7 @@ test "${#expected_sha}" -eq 40
 receipt="$({{bin/php}} artisan seo:evidence-boundary-closeout --expected-sha="$expected_sha" --json --no-interaction --no-ansi)"
 printf '%s' "$receipt" | {{bin/php}} -r '
 $payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
-$ok = ($payload["contract_version"] ?? null) === "seo.evidence_boundary_closeout.v2"
+$ok = ($payload["contract_version"] ?? null) === "seo.evidence_boundary_closeout.v3"
     && ($payload["release_sha"] ?? null) === ($argv[1] ?? null)
     && in_array(($payload["dependency_status"] ?? null), ["READY", "DEPENDENCY_HOLD"], true)
     && ($payload["execution_allowed"] ?? null) === false
@@ -1074,11 +1074,22 @@ $ok = ($payload["contract_version"] ?? null) === "seo.evidence_boundary_closeout
     && ($payload["self_checks"]["private_route_probes"] ?? null) === ["total" => 36, "rejected" => 36, "bypass" => 0]
     && ($payload["self_checks"]["pii_evasion_probes"]["bypass"] ?? null) === 0
     && ($payload["self_checks"]["invalid_context_scope"]["ready"] ?? null) === 0
+    && ($payload["self_checks"]["metadata_privacy_probes"] ?? null) === [
+        "total" => 52,
+        "factory" => ["total" => 19, "rejected" => 19, "bypass" => 0],
+        "verifier" => ["total" => 27, "rejected" => 27, "bypass" => 0],
+        "context_builder" => ["total" => 6, "held" => 6, "fully_sanitized" => 6, "bypass" => 0],
+    ]
     && !in_array("fail", (array) ($payload["self_checks"]["gateway"] ?? []), true)
     && ($payload["model_calls"] ?? null) === 0
     && ($payload["tool_calls"] ?? null) === 0
     && ($payload["external_calls"] ?? null) === 0
     && ($payload["business_writes"] ?? null) === 0
+    && ($payload["negative_guarantees"]["agent_runtime_created"] ?? null) === false
+    && ($payload["negative_guarantees"]["agent_write_permissions"] ?? null) === 0
+    && ($payload["negative_guarantees"]["cms_write"] ?? null) === 0
+    && ($payload["negative_guarantees"]["search_submission"] ?? null) === 0
+    && ($payload["negative_guarantees"]["url_truth_write"] ?? null) === 0
     && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["receipt_hash"] ?? "")) === 1;
 exit($ok ? 0 : 1);
 ' "$expected_sha"

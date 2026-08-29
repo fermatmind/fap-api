@@ -25,11 +25,15 @@ final class SeoEvidenceBundleFactory
     /** @param array<string, mixed> $input @return array<string, mixed> */
     public function create(array $input): array
     {
+        $scan = $this->scanner->scan(array_values($input));
+        if ($scan['private_data_present']) {
+            throw new InvalidArgumentException('SEO_EVIDENCE_PRIVATE_DATA');
+        }
+
         $capturedAt = CarbonImmutable::parse((string) ($input['captured_at'] ?? 'now'))->utc();
         $payload = $input['payload'] ?? [];
         $sourceRef = $this->safeRef($input['source_ref'] ?? null);
-        $scan = $this->scanner->scan(['payload' => $payload, 'source_ref' => $sourceRef]);
-        if ($scan['private_data_present'] || $this->negativeSet->classify($sourceRef)['private']) {
+        if ($this->negativeSet->classify($sourceRef)['private']) {
             throw new InvalidArgumentException('SEO_EVIDENCE_PRIVATE_DATA');
         }
         if ($this->injection->scan($payload)['result'] !== 'pass') {
