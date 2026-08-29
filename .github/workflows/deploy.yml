@@ -133,7 +133,15 @@ jobs:
                 and .seo_agent_policy_gateway.business_writes == 0
                 and .seo_agent_policy_gateway.cms_writes == 0
                 and .seo_agent_policy_gateway.url_truth_writes == 0
-                and .seo_agent_policy_gateway.search_submissions == 0)
+                and .seo_agent_policy_gateway.search_submissions == 0
+                and .seo_agent_policy_gateway.contract_version == "seo.policy_gateway_closeout.v2"
+                and .seo_agent_policy_gateway.manifest_contract.total == 3
+                and .seo_agent_policy_gateway.manifest_contract.rejected == 3
+                and .seo_agent_policy_gateway.manifest_contract.bypass == 0
+                and .seo_agent_policy_gateway.execution_scope_binding.total == 10
+                and .seo_agent_policy_gateway.execution_scope_binding.denied == 8
+                and .seo_agent_policy_gateway.execution_scope_binding.held == 2
+                and .seo_agent_policy_gateway.execution_scope_binding.bypass == 0)
               or (.seo_agent_policy_gateway.required == false
                 and .seo_agent_policy_gateway.result == "skipped"))
           ' \
@@ -360,7 +368,7 @@ jobs:
             -o IdentitiesOnly=yes -i "$DEPLOY_IDENTITY_FILE_STG" -p "$DEPLOY_PORT" \
             "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$receipt"
           jq -e --arg sha "$DEPLOY_SHA" '
-            .contract_version == "seo.policy_gateway_closeout.v1"
+            .contract_version == "seo.policy_gateway_closeout.v2"
             and .release_sha == $sha and .state == "DEPLOYED_DISABLED"
             and .mode == "DETERMINISTIC_DENY_ONLY"
             and .decision_allow_count == 0
@@ -371,6 +379,26 @@ jobs:
             and .model_calls == 0 and .tool_calls == 0 and .external_calls == 0
             and .business_writes == 0 and .cms_writes == 0
             and .url_truth_writes == 0 and .search_submissions == 0
+            and .manifest_contract.total == 3 and .manifest_contract.rejected == 3 and .manifest_contract.bypass == 0
+            and (.manifest_contract.probes | map("\(.probe_id):\(.outcome):\(.reason_code)")) == [
+              "review_state_invalid:REJECTED:MANIFEST_CONTRACT_INVALID",
+              "authority_revision_empty:REJECTED:MANIFEST_CONTRACT_INVALID",
+              "canary_stage_empty:REJECTED:MANIFEST_CONTRACT_INVALID"
+            ]
+            and .execution_scope_binding.total == 10 and .execution_scope_binding.denied == 8
+            and .execution_scope_binding.held == 2 and .execution_scope_binding.bypass == 0
+            and (.execution_scope_binding.probes | map("\(.probe_id):\(.outcome):\(.reason_code)")) == [
+              "role_binding_mismatch:DENIED:MANIFEST_ROLE_BINDING_MISMATCH",
+              "mission_binding_mismatch:DENIED:MANIFEST_MISSION_BINDING_MISMATCH",
+              "autonomy_binding_expansion:DENIED:MANIFEST_AUTONOMY_BINDING_MISMATCH",
+              "target_environment_mismatch:DENIED:MANIFEST_TARGET_ENVIRONMENT_MISMATCH",
+              "evidence_threshold_unmet:HELD:EVIDENCE_THRESHOLD_UNMET",
+              "canary_stage_mismatch:DENIED:CANARY_STAGE_MISMATCH",
+              "approval_pending:HELD:APPROVAL_PENDING",
+              "approval_rejected:DENIED:APPROVAL_REJECTED",
+              "approval_unknown:DENIED:APPROVAL_UNKNOWN",
+              "blast_radius_scope_mismatch:DENIED:BLAST_RADIUS_SCOPE_MISMATCH"
+            ]
             and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
       - name: Record staging timing
@@ -588,7 +616,7 @@ jobs:
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" \
             "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$receipt"
           jq -e --arg sha "$DEPLOY_SHA" '
-            .contract_version == "seo.policy_gateway_closeout.v1"
+            .contract_version == "seo.policy_gateway_closeout.v2"
             and .release_sha == $sha and .state == "DEPLOYED_DISABLED"
             and .mode == "DETERMINISTIC_DENY_ONLY"
             and .decision_allow_count == 0
@@ -599,6 +627,26 @@ jobs:
             and .model_calls == 0 and .tool_calls == 0 and .external_calls == 0
             and .business_writes == 0 and .cms_writes == 0
             and .url_truth_writes == 0 and .search_submissions == 0
+            and .manifest_contract.total == 3 and .manifest_contract.rejected == 3 and .manifest_contract.bypass == 0
+            and (.manifest_contract.probes | map("\(.probe_id):\(.outcome):\(.reason_code)")) == [
+              "review_state_invalid:REJECTED:MANIFEST_CONTRACT_INVALID",
+              "authority_revision_empty:REJECTED:MANIFEST_CONTRACT_INVALID",
+              "canary_stage_empty:REJECTED:MANIFEST_CONTRACT_INVALID"
+            ]
+            and .execution_scope_binding.total == 10 and .execution_scope_binding.denied == 8
+            and .execution_scope_binding.held == 2 and .execution_scope_binding.bypass == 0
+            and (.execution_scope_binding.probes | map("\(.probe_id):\(.outcome):\(.reason_code)")) == [
+              "role_binding_mismatch:DENIED:MANIFEST_ROLE_BINDING_MISMATCH",
+              "mission_binding_mismatch:DENIED:MANIFEST_MISSION_BINDING_MISMATCH",
+              "autonomy_binding_expansion:DENIED:MANIFEST_AUTONOMY_BINDING_MISMATCH",
+              "target_environment_mismatch:DENIED:MANIFEST_TARGET_ENVIRONMENT_MISMATCH",
+              "evidence_threshold_unmet:HELD:EVIDENCE_THRESHOLD_UNMET",
+              "canary_stage_mismatch:DENIED:CANARY_STAGE_MISMATCH",
+              "approval_pending:HELD:APPROVAL_PENDING",
+              "approval_rejected:DENIED:APPROVAL_REJECTED",
+              "approval_unknown:DENIED:APPROVAL_UNKNOWN",
+              "blast_radius_scope_mismatch:DENIED:BLAST_RADIUS_SCOPE_MISMATCH"
+            ]
             and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
       - id: career-parity

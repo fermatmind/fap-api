@@ -7,6 +7,7 @@ namespace App\Console\Commands;
 use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher;
 use App\Services\SeoAgentPolicyGateway\ActionManifestVerifier;
 use App\Services\SeoAgentPolicyGateway\PolicyGatewayCallerGuard;
+use App\Services\SeoAgentPolicyGateway\PolicyGatewayCloseoutProbeRunner;
 use App\Services\SeoAgentPolicyGateway\PolicyGatewayContractRegistry;
 use App\Services\SeoAgentPolicyGateway\PolicyGatewayRegistry;
 use App\Services\SeoAgentPolicyGateway\PolicyGatewayStatusProjection;
@@ -26,6 +27,7 @@ final class SeoPolicyGatewayCloseout extends Command
         PolicyGatewayContractRegistry $contracts,
         PolicyGatewayCallerGuard $callers,
         ActionManifestVerifier $manifests,
+        PolicyGatewayCloseoutProbeRunner $probeRunner,
         SeoEvidenceCanonicalHasher $hasher,
     ): int {
         try {
@@ -41,6 +43,7 @@ final class SeoPolicyGatewayCloseout extends Command
             if (! is_array($artifact) || ! $contracts->verify($artifact)) {
                 return $this->emit(['status' => 'failed', 'safe_error_code' => 'CONTRACT_MANIFEST_INVALID'], self::FAILURE);
             }
+            $probes = $probeRunner->run();
 
             $admissionBypass = 0;
             $executionBypass = 0;
@@ -87,7 +90,7 @@ final class SeoPolicyGatewayCloseout extends Command
             $manifestProbe = $manifests->verify($this->unsignedManifest($registry, $hasher));
             $manifestBypass = (int) $manifestProbe['valid'];
             $receipt = [
-                'contract_version' => 'seo.policy_gateway_closeout.v1',
+                'contract_version' => 'seo.policy_gateway_closeout.v2',
                 'release_sha' => $releaseSha,
                 'policy_registry_id' => $gateway['registry_id'],
                 'policy_registry_version' => $gateway['registry_version'],
@@ -113,12 +116,21 @@ final class SeoPolicyGatewayCloseout extends Command
                 'cms_writes' => 0,
                 'url_truth_writes' => 0,
                 'search_submissions' => 0,
+                'manifest_contract' => $probes['manifest_contract'],
+                'execution_scope_binding' => $probes['execution_scope_binding'],
             ];
             if ($receipt['admission_bypass'] !== 0 || $receipt['execution_bypass'] !== 0
                 || $receipt['manifest_bypass'] !== 0 || $receipt['entrypoint_bypass'] !== 0
                 || $receipt['l4_allow_count'] !== 0 || $receipt['active_manifest_count'] !== 0
                 || $receipt['trusted_signing_key_count'] !== 0 || $guards['global_write_gate'] !== false
-                || $guards['post12_agent_write_enabled'] !== false) {
+                || $guards['post12_agent_write_enabled'] !== false
+                || $receipt['manifest_contract']['total'] !== 3
+                || $receipt['manifest_contract']['rejected'] !== 3
+                || $receipt['manifest_contract']['bypass'] !== 0
+                || $receipt['execution_scope_binding']['total'] !== 10
+                || $receipt['execution_scope_binding']['denied'] !== 8
+                || $receipt['execution_scope_binding']['held'] !== 2
+                || $receipt['execution_scope_binding']['bypass'] !== 0) {
                 return $this->emit(['status' => 'failed', 'safe_error_code' => 'POLICY_GATEWAY_BYPASS_DETECTED'], self::FAILURE);
             }
             $receipt['receipt_hash'] = $hasher->hash($receipt);
@@ -190,7 +202,7 @@ final class SeoPolicyGatewayCloseout extends Command
             'role_id' => 'seo.expert.technical_search_authority',
             'mission_type' => 'bounded_review',
             'capability_id' => 'seo.runtime_health_review',
-            'target_environment' => 'testing',
+            'target_environment' => app()->environment(),
             'family' => 'tests',
             'locale' => 'en',
             'action' => 'backend_dry_run',

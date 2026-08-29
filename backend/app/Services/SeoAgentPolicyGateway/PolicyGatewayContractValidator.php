@@ -116,7 +116,10 @@ final class PolicyGatewayContractValidator
             && ($manifest['evidence_threshold']['required_status'] ?? null) === 'READY'
             && in_array($manifest['rollback_unit'] ?? null, ['exact_url', 'exact_family_locale_revision'], true)
             && $this->exactObject($manifest['approval'] ?? null, ['surface_id', 'review_state', 'production_execution_separate'])
+            && in_array($manifest['approval']['review_state'] ?? null, ['approved', 'pending', 'rejected', 'unknown'], true)
             && ($manifest['approval']['production_execution_separate'] ?? null) === true
+            && is_string($manifest['authority_revision'] ?? null) && $manifest['authority_revision'] !== ''
+            && is_string($manifest['canary_stage'] ?? null) && $manifest['canary_stage'] !== ''
             && $this->exactObject($manifest['expiry'] ?? null, ['not_before', 'expires_at'])
             && $this->exactObject($manifest['revocation'] ?? null, ['registry_id', 'registry_version'])
             && $this->exactObject($manifest['signature'] ?? null, ['algorithm', 'key_id', 'value'])

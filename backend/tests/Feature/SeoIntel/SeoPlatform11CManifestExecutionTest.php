@@ -45,6 +45,37 @@ final class SeoPlatform11CManifestExecutionTest extends TestCase
         $this->assertSame('MANIFEST_CONTRACT_INVALID', $verifier->verify($wildcard)['code']);
         $unknownField = $this->manifest($verifier, $secretKey, ['allowed_fields' => ['unknown_field']]);
         $this->assertSame('MANIFEST_FIELD_SCOPE_INVALID', $verifier->verify($unknownField)['code']);
+
+        foreach ([
+            'review_state' => ['approval' => ['review_state' => 'in_review']],
+            'authority_revision' => ['authority_revision' => ''],
+            'canary_stage' => ['canary_stage' => ''],
+        ] as $name => $overrides) {
+            $invalidContract = $this->manifest($verifier, $secretKey, $overrides);
+            $this->assertSame('MANIFEST_CONTRACT_INVALID', $verifier->verify($invalidContract)['code'], $name);
+        }
+    }
+
+    public function test_manifest_target_environment_is_bound_in_testing_staging_and_production(): void
+    {
+        CarbonImmutable::setTestNow('2026-08-29T10:00:00Z');
+        $previousEnvironment = $this->app->environment();
+
+        try {
+            foreach ([
+                'testing' => 'staging',
+                'staging' => 'production',
+                'production' => 'testing',
+            ] as $environment => $mismatch) {
+                $this->app->detectEnvironment(static fn (): string => $environment);
+                [$verifier, $secretKey] = $this->createVerifier();
+                $this->assertSame('PASS', $verifier->verify($this->manifest($verifier, $secretKey))['code'], $environment);
+                $manifest = $this->manifest($verifier, $secretKey, ['target_environment' => $mismatch]);
+                $this->assertSame('MANIFEST_TARGET_ENVIRONMENT_MISMATCH', $verifier->verify($manifest)['code'], $environment);
+            }
+        } finally {
+            $this->app->detectEnvironment(static fn (): string => $previousEnvironment);
+        }
     }
 
     public function test_execution_rechecks_admission_and_valid_manifest_but_global_and_canary_gates_hold(): void
@@ -82,6 +113,16 @@ final class SeoPlatform11CManifestExecutionTest extends TestCase
         $fakeDecision = $request;
         $fakeDecision['admission_decision'] = ['decision' => 'ALLOW'];
         $this->assertSame('DENY', $policy->decide($fakeDecision, 'api')['decision']);
+
+        $denyOverHoldManifest = $this->manifest($verifier, $secretKey, [
+            'role_id' => 'seo.expert.search_analytics_measurement',
+            'evidence_threshold' => ['minimum_bundle_count' => 2],
+        ]);
+        $denyOverHold = $policy->decide($this->executionRequest($denyOverHoldManifest), 'api');
+        $this->assertSame('DENY', $denyOverHold['decision']);
+        $this->assertContains('MANIFEST_ROLE_BINDING_MISMATCH', $denyOverHold['reason_codes']);
+        $this->assertNotContains('EVIDENCE_THRESHOLD_UNMET', $denyOverHold['reason_codes']);
+        $this->assertFalse($denyOverHold['execution_allowed']);
     }
 
     /** @return array{ActionManifestVerifier,string} */
@@ -95,6 +136,7 @@ final class SeoPlatform11CManifestExecutionTest extends TestCase
             app(PolicyGatewayRegistry::class),
             app(SeoRoleCapabilityRegistry::class),
             app(SeoEvidenceCanonicalHasher::class),
+            $this->app,
             ['test-key' => base64_encode($publicKey)],
         );
 
@@ -113,7 +155,7 @@ final class SeoPlatform11CManifestExecutionTest extends TestCase
             'role_id' => 'seo.expert.technical_search_authority',
             'mission_type' => 'bounded_review',
             'capability_id' => 'seo.runtime_health_review',
-            'target_environment' => 'testing',
+            'target_environment' => $this->app->environment(),
             'family' => 'tests',
             'locale' => 'en',
             'action' => 'backend_dry_run',

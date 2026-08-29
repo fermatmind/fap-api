@@ -1151,7 +1151,7 @@ receipt="$({{bin/php}} artisan seo:policy-gateway-closeout --expected-sha="$expe
 printf '%s' "$receipt" | {{bin/php}} -r '
 $payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
 $zero = ["decision_allow_count", "admission_bypass", "execution_bypass", "manifest_bypass", "entrypoint_bypass", "l4_allow_count", "active_manifest_count", "trusted_signing_key_count", "model_calls", "tool_calls", "external_calls", "business_writes", "cms_writes", "url_truth_writes", "search_submissions"];
-$ok = ($payload["contract_version"] ?? null) === "seo.policy_gateway_closeout.v1"
+$ok = ($payload["contract_version"] ?? null) === "seo.policy_gateway_closeout.v2"
     && ($payload["release_sha"] ?? null) === ($argv[1] ?? null)
     && ($payload["policy_registry_id"] ?? null) === "fermatmind.seo.policy_gateway_registry"
     && ($payload["policy_registry_version"] ?? null) === "1.0.0"
@@ -1162,6 +1162,34 @@ $ok = ($payload["contract_version"] ?? null) === "seo.policy_gateway_closeout.v1
 foreach ($zero as $field) {
     $ok = $ok && ($payload[$field] ?? null) === 0;
 }
+$ok = $ok && ($payload["manifest_contract"] ?? null) === [
+    "total" => 3,
+    "rejected" => 3,
+    "bypass" => 0,
+    "probes" => [
+        ["probe_id" => "review_state_invalid", "outcome" => "REJECTED", "reason_code" => "MANIFEST_CONTRACT_INVALID"],
+        ["probe_id" => "authority_revision_empty", "outcome" => "REJECTED", "reason_code" => "MANIFEST_CONTRACT_INVALID"],
+        ["probe_id" => "canary_stage_empty", "outcome" => "REJECTED", "reason_code" => "MANIFEST_CONTRACT_INVALID"],
+    ],
+];
+$ok = $ok && ($payload["execution_scope_binding"] ?? null) === [
+    "total" => 10,
+    "denied" => 8,
+    "held" => 2,
+    "bypass" => 0,
+    "probes" => [
+        ["probe_id" => "role_binding_mismatch", "outcome" => "DENIED", "reason_code" => "MANIFEST_ROLE_BINDING_MISMATCH"],
+        ["probe_id" => "mission_binding_mismatch", "outcome" => "DENIED", "reason_code" => "MANIFEST_MISSION_BINDING_MISMATCH"],
+        ["probe_id" => "autonomy_binding_expansion", "outcome" => "DENIED", "reason_code" => "MANIFEST_AUTONOMY_BINDING_MISMATCH"],
+        ["probe_id" => "target_environment_mismatch", "outcome" => "DENIED", "reason_code" => "MANIFEST_TARGET_ENVIRONMENT_MISMATCH"],
+        ["probe_id" => "evidence_threshold_unmet", "outcome" => "HELD", "reason_code" => "EVIDENCE_THRESHOLD_UNMET"],
+        ["probe_id" => "canary_stage_mismatch", "outcome" => "DENIED", "reason_code" => "CANARY_STAGE_MISMATCH"],
+        ["probe_id" => "approval_pending", "outcome" => "HELD", "reason_code" => "APPROVAL_PENDING"],
+        ["probe_id" => "approval_rejected", "outcome" => "DENIED", "reason_code" => "APPROVAL_REJECTED"],
+        ["probe_id" => "approval_unknown", "outcome" => "DENIED", "reason_code" => "APPROVAL_UNKNOWN"],
+        ["probe_id" => "blast_radius_scope_mismatch", "outcome" => "DENIED", "reason_code" => "BLAST_RADIUS_SCOPE_MISMATCH"],
+    ],
+];
 exit($ok ? 0 : 1);
 ' "$expected_sha"
 receipt_dir='{{deploy_path}}/shared/backend/storage/app/release-receipts/seo-agent-policy-gateway'

@@ -82,12 +82,41 @@ final class SeoPlatform11CEntrypointCloseoutTest extends TestCase
         $this->assertSame(0, $tester->execute(['--expected-sha' => $sha, '--json' => true]));
         $receipt = json_decode(trim($tester->getDisplay()), true, 512, JSON_THROW_ON_ERROR);
 
+        $this->assertSame('seo.policy_gateway_closeout.v2', $receipt['contract_version']);
         $this->assertSame($sha, $receipt['release_sha']);
         $this->assertSame('DEPLOYED_DISABLED', $receipt['state']);
         $this->assertSame('DETERMINISTIC_DENY_ONLY', $receipt['mode']);
         foreach (['decision_allow_count', 'admission_bypass', 'execution_bypass', 'manifest_bypass', 'entrypoint_bypass', 'l4_allow_count', 'active_manifest_count', 'trusted_signing_key_count', 'model_calls', 'tool_calls', 'external_calls', 'business_writes', 'cms_writes', 'url_truth_writes', 'search_submissions'] as $field) {
             $this->assertSame(0, $receipt[$field], $field);
         }
+        $this->assertSame([
+            'total' => 3,
+            'rejected' => 3,
+            'bypass' => 0,
+            'probes' => [
+                ['probe_id' => 'review_state_invalid', 'outcome' => 'REJECTED', 'reason_code' => 'MANIFEST_CONTRACT_INVALID'],
+                ['probe_id' => 'authority_revision_empty', 'outcome' => 'REJECTED', 'reason_code' => 'MANIFEST_CONTRACT_INVALID'],
+                ['probe_id' => 'canary_stage_empty', 'outcome' => 'REJECTED', 'reason_code' => 'MANIFEST_CONTRACT_INVALID'],
+            ],
+        ], $receipt['manifest_contract']);
+        $this->assertSame([
+            'total' => 10,
+            'denied' => 8,
+            'held' => 2,
+            'bypass' => 0,
+            'probes' => [
+                ['probe_id' => 'role_binding_mismatch', 'outcome' => 'DENIED', 'reason_code' => 'MANIFEST_ROLE_BINDING_MISMATCH'],
+                ['probe_id' => 'mission_binding_mismatch', 'outcome' => 'DENIED', 'reason_code' => 'MANIFEST_MISSION_BINDING_MISMATCH'],
+                ['probe_id' => 'autonomy_binding_expansion', 'outcome' => 'DENIED', 'reason_code' => 'MANIFEST_AUTONOMY_BINDING_MISMATCH'],
+                ['probe_id' => 'target_environment_mismatch', 'outcome' => 'DENIED', 'reason_code' => 'MANIFEST_TARGET_ENVIRONMENT_MISMATCH'],
+                ['probe_id' => 'evidence_threshold_unmet', 'outcome' => 'HELD', 'reason_code' => 'EVIDENCE_THRESHOLD_UNMET'],
+                ['probe_id' => 'canary_stage_mismatch', 'outcome' => 'DENIED', 'reason_code' => 'CANARY_STAGE_MISMATCH'],
+                ['probe_id' => 'approval_pending', 'outcome' => 'HELD', 'reason_code' => 'APPROVAL_PENDING'],
+                ['probe_id' => 'approval_rejected', 'outcome' => 'DENIED', 'reason_code' => 'APPROVAL_REJECTED'],
+                ['probe_id' => 'approval_unknown', 'outcome' => 'DENIED', 'reason_code' => 'APPROVAL_UNKNOWN'],
+                ['probe_id' => 'blast_radius_scope_mismatch', 'outcome' => 'DENIED', 'reason_code' => 'BLAST_RADIUS_SCOPE_MISMATCH'],
+            ],
+        ], $receipt['execution_scope_binding']);
         $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $receipt['receipt_hash']);
         foreach (['email', 'phone', 'token', 'account', 'payment', 'user_id', 'raw_query'] as $forbidden) {
             $this->assertStringNotContainsString($forbidden, strtolower(json_encode($receipt, JSON_THROW_ON_ERROR)));

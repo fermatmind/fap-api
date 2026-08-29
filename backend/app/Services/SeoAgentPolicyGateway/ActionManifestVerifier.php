@@ -8,18 +8,20 @@ use App\Services\ReviewGovernance\ReviewPolicyRegistry;
 use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher;
 use App\Services\SeoAgentGovernance\SeoRoleCapabilityRegistry;
 use Carbon\CarbonImmutable;
+use Illuminate\Contracts\Foundation\Application;
 use Throwable;
 
 final class ActionManifestVerifier
 {
     private const SIGNATURE_DOMAIN = 'fermatmind.seo.action_scoped_manifest.v1';
 
-    /** @param null|array<string, string> $inMemoryTrustedKeys Test-only in-memory public keys; production DI uses null. */
+    /** @param null|array<string, string> $inMemoryTrustedKeys Closeout/test-only process-memory keys; production DI uses null. */
     public function __construct(
         private readonly PolicyGatewayContractValidator $contracts,
         private readonly PolicyGatewayRegistry $gatewayRegistry,
         private readonly SeoRoleCapabilityRegistry $roleRegistry,
         private readonly SeoEvidenceCanonicalHasher $hasher,
+        private readonly Application $application,
         private readonly ?array $inMemoryTrustedKeys = null,
     ) {}
 
@@ -31,6 +33,9 @@ final class ActionManifestVerifier
         }
         if (! $this->contracts->manifest($manifest)) {
             return ['valid' => false, 'code' => 'MANIFEST_CONTRACT_INVALID'];
+        }
+        if ($manifest['target_environment'] !== $this->application->environment()) {
+            return ['valid' => false, 'code' => 'MANIFEST_TARGET_ENVIRONMENT_MISMATCH'];
         }
         if ($this->gatewayRegistry->dependencyStatus() !== 'READY') {
             return ['valid' => false, 'code' => 'DEPENDENCY_HOLD'];

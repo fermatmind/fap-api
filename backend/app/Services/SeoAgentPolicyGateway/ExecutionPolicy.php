@@ -56,6 +56,15 @@ final class ExecutionPolicy
 
         $denials = [];
         $holds = array_values((array) ($admission['reason_codes'] ?? []));
+        if ($manifest['role_id'] !== ($request['admission_request']['requested_role_id'] ?? null)) {
+            $denials[] = 'MANIFEST_ROLE_BINDING_MISMATCH';
+        }
+        if ($manifest['mission_type'] !== ($request['admission_request']['mission_type'] ?? null)) {
+            $denials[] = 'MANIFEST_MISSION_BINDING_MISMATCH';
+        }
+        if ($manifest['autonomy'] !== ($request['admission_request']['autonomy'] ?? null)) {
+            $denials[] = 'MANIFEST_AUTONOMY_BINDING_MISMATCH';
+        }
         if ($manifest['family'] !== $scopeInput['family']
             || $manifest['locale'] !== $scopeInput['locale']
             || $manifest['action'] !== $scopeInput['action']) {
@@ -86,6 +95,28 @@ final class ExecutionPolicy
             || ($request['admission_request']['evidence_context']['status'] ?? null) !== 'READY') {
             $holds[] = 'MEASUREMENT_HOLD';
         }
+        $minimumBundles = (int) $manifest['evidence_threshold']['minimum_bundle_count'];
+        $context = (array) $request['admission_request']['evidence_context'];
+        if (count((array) ($context['bundle_refs'] ?? [])) < $minimumBundles
+            || (int) ($context['evidence_summary']['bundle_count'] ?? 0) < $minimumBundles) {
+            $holds[] = 'EVIDENCE_THRESHOLD_UNMET';
+        }
+        if ($manifest['canary_stage'] !== $scopeInput['canary_stage']) {
+            $denials[] = 'CANARY_STAGE_MISMATCH';
+        }
+        if (! $this->blastRadiusMatches(
+            (string) $scopeInput['blast_radius'],
+            (bool) $scopeInput['shared_layer'],
+            $urlCount,
+        )) {
+            $denials[] = 'BLAST_RADIUS_SCOPE_MISMATCH';
+        }
+        match ($manifest['approval']['review_state']) {
+            'pending' => $holds[] = 'APPROVAL_PENDING',
+            'rejected' => $denials[] = 'APPROVAL_REJECTED',
+            'unknown' => $denials[] = 'APPROVAL_UNKNOWN',
+            default => null,
+        };
         if ($scopeInput['shared_layer']) {
             $controls = $this->registry->runtimeControls();
             if (! $manifest['shared_layer_allowed']
@@ -125,6 +156,16 @@ final class ExecutionPolicy
         $explicit = $policy['initial_canary']['maximum_urls'] ?? null;
 
         return is_int($explicit) && $explicit > 0 ? $explicit : 1;
+    }
+
+    private function blastRadiusMatches(string $blastRadius, bool $sharedLayer, int $urlCount): bool
+    {
+        return match ($blastRadius) {
+            'single_url' => ! $sharedLayer && $urlCount === 1,
+            'bounded_cohort' => ! $sharedLayer && $urlCount > 1,
+            'shared_layer' => $sharedLayer,
+            default => false,
+        };
     }
 
     /** @param list<string> $reasons @param array{family:string,locale:string,action:?string} $scope @return array<string, mixed> */
