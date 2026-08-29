@@ -287,7 +287,9 @@ jobs:
           printf -v q_path '%q' "$DEPLOY_PATH"
           printf -v q_sha '%q' "$DEPLOY_SHA"
           remote="set -euo pipefail; file=$q_path/shared/backend/storage/app/release-receipts/seo-agent-evidence-boundary/$q_sha.json; test -f \"\$file\"; test ! -L \"\$file\"; cat \"\$file\""
-          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$receipt"
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o IdentitiesOnly=yes -i "$DEPLOY_IDENTITY_FILE_STG" -p "$DEPLOY_PORT" \
+            "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$receipt"
           jq -e --arg sha "$DEPLOY_SHA" '.release_sha == $sha and .execution_allowed == false and (.receipt_hash | test("^[a-f0-9]{64}$"))' "$receipt" >/dev/null
       - name: Record staging timing
         if: always()
