@@ -2767,7 +2767,7 @@ task('queue:reload-workers', function () {
                 ." --program={$quotedProgram}"
                 .' --attempts=1'
                 .' --delay-seconds=2'
-                .' --restart-timeout-seconds=45'
+                .' --restart-timeout-seconds=390'
                 .' --heartbeat-seconds=20'
                 ." --required={$quotedRequired}";
         };
@@ -2776,11 +2776,11 @@ task('queue:reload-workers', function () {
         run("sudo -n {$quotedSupervisorctl} update");
 
         foreach ($requiredPrograms as $program) {
-            run($restartSupervisorProgram($program, true), timeout: 60);
+            run($restartSupervisorProgram($program, true), timeout: 420);
         }
 
         foreach ($optionalPrograms as $program) {
-            run($restartSupervisorProgram($program, false), timeout: 60);
+            run($restartSupervisorProgram($program, false), timeout: 420);
         }
 
         if ($legacySystemdService !== '') {

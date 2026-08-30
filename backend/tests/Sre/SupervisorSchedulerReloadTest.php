@@ -192,8 +192,8 @@ BASH);
         $deploy = (string) file_get_contents(dirname(__DIR__, 3).'/deploy.php');
 
         $this->assertStringContainsString("' --attempts=1'", $deploy);
-        $this->assertStringContainsString("' --restart-timeout-seconds=45'", $deploy);
-        $this->assertStringContainsString('timeout: 60', $deploy);
+        $this->assertStringContainsString("' --restart-timeout-seconds=390'", $deploy);
+        $this->assertStringContainsString('timeout: 420', $deploy);
         $this->assertStringContainsString('timeout --signal=TERM --kill-after=5s 90s bash', $deploy);
         $this->assertStringContainsString("after('queue:reload-workers', 'scheduler:install-managed-cron')", $deploy);
         $this->assertStringContainsString("after('scheduler:install-managed-cron', 'scheduler:wait-natural-heartbeat')", $deploy);
