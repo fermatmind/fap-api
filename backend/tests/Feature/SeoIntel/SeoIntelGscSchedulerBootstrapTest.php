@@ -16,7 +16,7 @@ final class SeoIntelGscSchedulerBootstrapTest extends TestCase
         $this->assertSame(0, Artisan::call('schedule:list', ['--no-ansi' => true]));
         $schedule = Artisan::output();
 
-        $this->assertMatchesRegularExpression('/20\s+5 \* \* \*/', $schedule);
+        $this->assertMatchesRegularExpression('/20\s+5\s+\*\s+\*\s+\*/', $schedule);
         $this->assertStringContainsString('seo-intel:gsc-sync', $schedule);
         $this->assertStringContainsString('--window=28', $schedule);
         $this->assertStringContainsString('--search-types=web', $schedule);

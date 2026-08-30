@@ -443,6 +443,227 @@ jobs:
           echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
           echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
           printf '%s\n' "$STAGING_REPO_READ_SSH_KEY" | ssh-add - >/dev/null 2>&1
+      - name: Verify staging measurement source readiness
+        if: needs.policy.outputs.seo_council_orchestration == 'true'
+        shell: bash
+        env:
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON }}
+          GSC_PROPERTY_URL: ${{ secrets.SEO_INTEL_GSC_PROPERTY_URL }}
+          GSC_ENABLED: ${{ vars.SEO_INTEL_GSC_ENABLED }}
+          GSC_LIVE_API_ENABLED: ${{ vars.SEO_INTEL_GSC_LIVE_API_ENABLED }}
+          GSC_SYNC_ENABLED: ${{ vars.SEO_INTEL_GSC_SYNC_ENABLED }}
+          GSC_AUTH_MODE: ${{ vars.SEO_INTEL_GSC_AUTH_MODE }}
+          GSC_SCOPE: ${{ vars.SEO_INTEL_GSC_SCOPE }}
+          GSC_SYNC_WINDOW_DAYS: ${{ vars.SEO_INTEL_GSC_SYNC_WINDOW_DAYS }}
+          GSC_SYNC_SEARCH_TYPES: ${{ vars.SEO_INTEL_GSC_SYNC_SEARCH_TYPES }}
+          PROXY_PORT: "18444"
+        run: |
+          set -euo pipefail
+          fail() {
+            printf 'measurement_source_readiness=HOLD reason=%s\n' "$1" >&2
+            exit 1
+          }
+          test -n "$GSC_SERVICE_ACCOUNT_JSON" || fail GSC_SECRET_MISSING
+          [[ "$GSC_PROPERTY_URL" =~ ^sc-domain:[A-Za-z0-9.-]+$ ]] || fail GSC_PROPERTY_INVALID
+          test "$GSC_ENABLED" = true || fail GSC_DISABLED
+          test "$GSC_LIVE_API_ENABLED" = true || fail GSC_LIVE_API_DISABLED
+          test "$GSC_SYNC_ENABLED" = true || fail GSC_SYNC_DISABLED
+          test "$GSC_AUTH_MODE" = service_account || fail GSC_AUTH_MODE_INVALID
+          test "$GSC_SCOPE" = https://www.googleapis.com/auth/webmasters.readonly || fail GSC_SCOPE_NOT_READONLY
+          test "$GSC_SYNC_WINDOW_DAYS" = 90 || fail GSC_WINDOW_INVALID
+          test "$GSC_SYNC_SEARCH_TYPES" = web || fail GSC_SEARCH_TYPE_INVALID
+
+          local_key="$RUNNER_TEMP/staging-gsc-service-account.json"
+          local_env="$RUNNER_TEMP/staging-gsc-readiness.env"
+          remote_tmp="/tmp/fermatmind-11f-source-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          remote_key="$remote_tmp/service-account.json"
+          remote_env="$remote_tmp/readiness.env"
+          proxy_pid=""
+          tunnel_pid=""
+          ssh_base=(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o ServerAliveInterval=15 -o ServerAliveCountMax=8 -o IdentitiesOnly=yes \
+            -i "$DEPLOY_IDENTITY_FILE_STG" -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST")
+          cleanup() {
+            if [ -n "$tunnel_pid" ]; then kill "$tunnel_pid" 2>/dev/null || true; fi
+            if [ -n "$proxy_pid" ]; then kill "$proxy_pid" 2>/dev/null || true; fi
+            "${ssh_base[@]}" "rm -f '$remote_key' '$remote_env'; rmdir '$remote_tmp' 2>/dev/null || true" \
+              >/dev/null 2>&1 || true
+            rm -f "$local_key" "$local_env"
+          }
+          trap cleanup EXIT HUP INT TERM
+
+          umask 077
+          printf '%s' "$GSC_SERVICE_ACCOUNT_JSON" > "$local_key"
+          jq -e '
+            .type == "service_account"
+            and (.client_email | type == "string" and length > 0)
+            and (.private_key | type == "string" and length > 0)
+            and .token_uri == "https://oauth2.googleapis.com/token"
+          ' "$local_key" >/dev/null || fail GSC_CREDENTIAL_INVALID
+          {
+            printf 'SEO_INTEL_GSC_ENABLED=%q\n' "$GSC_ENABLED"
+            printf 'SEO_INTEL_GSC_LIVE_API_ENABLED=%q\n' "$GSC_LIVE_API_ENABLED"
+            printf 'SEO_INTEL_GSC_SYNC_ENABLED=%q\n' "$GSC_SYNC_ENABLED"
+            printf 'SEO_INTEL_GSC_PROPERTY_URL=%q\n' "$GSC_PROPERTY_URL"
+            printf 'SEO_INTEL_GSC_AUTH_MODE=%q\n' "$GSC_AUTH_MODE"
+            printf 'SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON_PATH=%q\n' "$remote_key"
+            printf 'SEO_INTEL_GSC_SCOPE=%q\n' "$GSC_SCOPE"
+            printf 'SEO_INTEL_GSC_SYNC_WINDOW_DAYS=%q\n' "$GSC_SYNC_WINDOW_DAYS"
+            printf 'SEO_INTEL_GSC_SYNC_SEARCH_TYPES=%q\n' "$GSC_SYNC_SEARCH_TYPES"
+            printf 'SEO_INTEL_ALLOW_EXTERNAL_API_CALLS=true\n'
+            printf 'SEO_INTEL_WRITE_ENABLED=false\n'
+          } > "$local_env"
+
+          "${ssh_base[@]}" "umask 077; mkdir '$remote_tmp'"
+          scp -q -o BatchMode=yes -o StrictHostKeyChecking=yes -o IdentitiesOnly=yes \
+            -i "$DEPLOY_IDENTITY_FILE_STG" -P "$DEPLOY_PORT" \
+            "$local_key" "$local_env" "$DEPLOY_USER@$DEPLOY_HOST:$remote_tmp/"
+
+          node backend/scripts/seo/gsc_restricted_connect_proxy.mjs --port="$PROXY_PORT" \
+            >"$RUNNER_TEMP/staging-gsc-proxy.log" 2>&1 &
+          proxy_pid=$!
+          for _ in {1..20}; do
+            nc -z 127.0.0.1 "$PROXY_PORT" && break
+            sleep 1
+          done
+          nc -z 127.0.0.1 "$PROXY_PORT"
+
+          ssh -N -o BatchMode=yes -o StrictHostKeyChecking=yes -o ExitOnForwardFailure=yes \
+            -o ServerAliveInterval=15 -o ServerAliveCountMax=8 -o IdentitiesOnly=yes \
+            -i "$DEPLOY_IDENTITY_FILE_STG" -p "$DEPLOY_PORT" \
+            -R "127.0.0.1:$PROXY_PORT:127.0.0.1:$PROXY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            >"$RUNNER_TEMP/staging-gsc-tunnel.log" 2>&1 &
+          tunnel_pid=$!
+          sleep 2
+          kill -0 "$tunnel_pid"
+
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_env '%q' "$remote_env"
+          printf -v q_proxy '%q' "http://127.0.0.1:$PROXY_PORT"
+          cache_path="/tmp/fermatmind-11f-config-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.php"
+          printf -v q_cache '%q' "$cache_path"
+          remote_prefix="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; cd \"\$current/backend\"; set -a; . $q_env; set +a; export HTTPS_PROXY=$q_proxy HTTP_PROXY=$q_proxy NO_PROXY=127.0.0.1,localhost APP_CONFIG_CACHE=$q_cache;"
+
+          preflight_json="$RUNNER_TEMP/staging-gsc-preflight.json"
+          "${ssh_base[@]}" "$remote_prefix php artisan seo-intel:collect --collector=gsc_foundation --gsc-live-preflight --dry-run --no-write --json --no-interaction --no-ansi" > "$preflight_json" \
+            || fail GSC_PREFLIGHT_COMMAND_FAILED
+          jq -e '
+            .status == "success"
+            and .dry_run == true
+            and .writes_attempted == false
+            and .writes_committed == false
+            and .external_calls_attempted == false
+            and .metadata.live_readiness.status == "ready"
+            and .metadata.live_readiness.read_only == true
+            and .metadata.live_readiness.credential_valid == true
+            and .metadata.live_readiness.readonly_scope_valid == true
+            and .metadata.live_readiness.restricted_egress.status == "restricted"
+            and .metadata.live_readiness.search_provider_submission_allowed == false
+          ' "$preflight_json" >/dev/null || fail GSC_PREFLIGHT_HOLD
+
+          sync_json="$RUNNER_TEMP/staging-gsc-sync.json"
+          "${ssh_base[@]}" "$remote_prefix export SEO_INTEL_WRITE_ENABLED=true; php artisan seo-intel:gsc-sync --window=90 --search-types=web --full-window --trigger=manual --json --no-interaction --no-ansi" > "$sync_json" \
+            || fail GSC_SYNC_COMMAND_FAILED
+          jq -e '
+            .status == "success"
+            and .window_days == 90
+            and .fetch_mode == "full_window"
+            and .search_types == ["web"]
+            and .pages_fetched > 0
+            and .rows_seen > 0
+            and .rows_upserted > 0
+            and .mapped_rows > 0
+            and .unmapped_rows == 0
+            and .duplicate_natural_keys == 0
+            and .quality_gate.status == "pass"
+            and (.data_max_date | type == "string" and length == 10)
+            and (.data_lag_days | type == "number" and . <= 10)
+            and .read_only_gsc == true
+            and .search_submission_allowed == false
+            and .restricted_egress.status == "restricted"
+          ' "$sync_json" >/dev/null || fail GSC_SYNC_QUALITY_HOLD
+
+          from_date="$(date -u -d '89 days ago' +%F)"
+          to_date="$(date -u +%F)"
+          cro_dry_run_json="$RUNNER_TEMP/staging-cro-dry-run.json"
+          "${ssh_base[@]}" "$remote_prefix export SEO_INTEL_ALLOW_EXTERNAL_API_CALLS=false SEO_INTEL_WRITE_ENABLED=false; php artisan analytics:refresh-seo-conversion-daily --from=$from_date --to=$to_date --org=0 --dry-run --trigger=manual --json --no-interaction --no-ansi" > "$cro_dry_run_json" \
+            || fail CRO_DRY_RUN_COMMAND_FAILED
+          jq -e '
+            .schema_version == "analytics-seo-conversion-refresh-dry-run.v1"
+            and .status == "not_executed"
+            and .org_scope_mode == "bounded"
+            and .org_scope_count == 1
+            and .attempted_rows > 0
+            and .raw_session_or_business_identifiers_exposed == false
+          ' "$cro_dry_run_json" >/dev/null || fail CRO_NO_REAL_AGGREGATE_SOURCE
+
+          cro_refresh_json="$RUNNER_TEMP/staging-cro-refresh.json"
+          "${ssh_base[@]}" "$remote_prefix export SEO_INTEL_ALLOW_EXTERNAL_API_CALLS=false SEO_INTEL_WRITE_ENABLED=false; php artisan analytics:refresh-seo-conversion-daily --from=$from_date --to=$to_date --org=0 --trigger=manual --json --no-interaction --no-ansi" > "$cro_refresh_json" \
+            || fail CRO_REFRESH_COMMAND_FAILED
+          jq -e '
+            .schema_version == "analytics-seo-conversion-refresh-receipt.v1"
+            and .status == "success"
+            and .org_scope_mode == "bounded"
+            and .org_scope_count == 1
+            and .attempted_rows > 0
+            and .upserted_rows > 0
+            and .readback_receipt.status == "pass"
+            and ((.readback_receipt.expected_metrics | to_entries) | all(.value > 0))
+            and ((.readback_receipt.persisted_metrics | to_entries) | all(.value > 0))
+            and .readback_receipt.raw_session_or_business_identifiers_exposed == false
+            and .raw_query_exposed == false
+            and .raw_session_or_business_identifiers_exposed == false
+            and .private_paths_allowed == false
+            and .search_submission_allowed == false
+          ' "$cro_refresh_json" >/dev/null || fail CRO_READMODEL_UNHEALTHY
+
+          mkdir -p artifacts/measurement-source-readiness
+          jq -n --arg sha "$DEPLOY_SHA" --slurpfile gsc "$sync_json" --slurpfile cro "$cro_refresh_json" '
+            {
+              schema_version: "seo.measurement_source_readiness.v1",
+              environment: "staging",
+              candidate_sha: $sha,
+              status: "pass",
+              dependency_ingestion: {
+                gsc_external_read_performed: true,
+                read_only_gsc: true,
+                search_submission_allowed: false,
+                restricted_egress: "restricted",
+                pages_fetched: $gsc[0].pages_fetched,
+                rows_seen: $gsc[0].rows_seen,
+                mapped_rows: $gsc[0].mapped_rows,
+                unmapped_rows: $gsc[0].unmapped_rows,
+                duplicate_natural_keys: $gsc[0].duplicate_natural_keys,
+                data_lag_days: $gsc[0].data_lag_days
+              },
+              cro_refresh: {
+                status: $cro[0].status,
+                attempted_rows: $cro[0].attempted_rows,
+                upserted_rows: $cro[0].upserted_rows,
+                readback_status: $cro[0].readback_receipt.status,
+                private_data_present: false
+              },
+              council_runtime: {
+                model_calls: 0,
+                tool_calls: 0,
+                external_calls: 0,
+                cms_writes: 0,
+                url_truth_writes: 0,
+                search_writes: 0,
+                business_writes: 0,
+                production_permissions: 0,
+                execution_allowed: false
+              }
+            }
+          ' > artifacts/measurement-source-readiness/receipt.json
+      - name: Upload sanitized staging measurement source receipt
+        if: needs.policy.outputs.seo_council_orchestration == 'true'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: measurement-source-readiness-${{ github.event.workflow_run.head_sha }}
+          path: artifacts/measurement-source-readiness/receipt.json
+          if-no-files-found: error
+          retention-days: 90
       - name: Deploy staging and run repository smoke chain
         env:
           SEO_INTEL_DB_HOST: ${{ secrets.SEO_INTEL_DB_HOST }}
