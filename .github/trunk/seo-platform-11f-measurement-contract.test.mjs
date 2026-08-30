@@ -71,6 +71,9 @@ test("staging source readiness precedes Council closeout and production never ba
   assert.match(staging, /GSC_AUTHENTICATION_FAILED/);
   assert.match(staging, /GSC_EMPTY_RESPONSE/);
   assert.match(staging, /GSC_SYNC_INTERNAL_FAILURE/);
+  assert.match(staging, /GSC_SYNC_OUTPUT_INVALID/);
+  assert.match(staging, /GSC_SEARCH_ANALYTICS_REQUEST_FAILED/);
+  assert.match(staging, /GSC_PAGINATION_LIMIT_EXCEEDED/);
   assert.match(staging, /sync_issue="\$\(jq -r '\.issue \/\/ ""'/);
   assert.doesNotMatch(staging, /printf[^\n]+\$sync_issue/);
   assert.match(staging, /CRO_NO_REAL_AGGREGATE_SOURCE/);

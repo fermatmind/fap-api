@@ -567,16 +567,26 @@ jobs:
           sync_exit=$?
           set -e
           if [ "$sync_exit" -ne 0 ]; then
-            sync_issue="$(jq -r '.issue // ""' "$sync_json" 2>/dev/null || true)"
+            jq -e 'type == "object"' "$sync_json" >/dev/null 2>&1 || fail GSC_SYNC_OUTPUT_INVALID
+            sync_issue="$(jq -r '.issue // ""' "$sync_json")"
             case "$sync_issue" in
               gsc_authentication_failed|gsc_authentication_request_failed|gsc_access_token_resolution_failed)
                 fail GSC_AUTHENTICATION_FAILED
                 ;;
+              gsc_disconnected)
+                fail GSC_SYNC_PREFLIGHT_CHANGED
+                ;;
               gsc_searchanalytics_timeout_or_transport_failure)
                 fail GSC_RESTRICTED_EGRESS_TRANSPORT_FAILED
                 ;;
+              gsc_searchanalytics_request_failed)
+                fail GSC_SEARCH_ANALYTICS_REQUEST_FAILED
+                ;;
               gsc_rate_limited)
                 fail GSC_RATE_LIMITED
+                ;;
+              gsc_pagination_limit_exceeded)
+                fail GSC_PAGINATION_LIMIT_EXCEEDED
                 ;;
               gsc_empty_response)
                 fail GSC_EMPTY_RESPONSE
