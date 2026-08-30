@@ -2611,12 +2611,12 @@ task('guard:queue-reload-capability', function () {
                     throw new \RuntimeException('queue capability preflight found an invalid supervisor program name');
                 }
 
-                $programPattern = '^'.preg_quote($program, '/').'(:|$)';
+                $programPattern = '^'.str_replace('\\-', '-', preg_quote($program, '/')).'(:|$)';
                 $statusCommand = "{ sudo -n {$quotedSupervisorctl} status 2>/dev/null || true; }"
                     .' | awk -v pattern='.escapeshellarg($programPattern)
-                    ." '\$1 ~ pattern { found=1; if (\$2 != \"RUNNING\") bad=1 } END { exit !(found && !bad) }'";
+                    ." '\$1 ~ pattern { found=1; if (\$2 != \"RUNNING\" && \$2 != \"STOPPED\") bad=1 } END { exit !(found && !bad) }'";
                 if (! test($statusCommand)) {
-                    throw new \RuntimeException("queue capability preflight requires running supervisor program [{$program}] before release activation");
+                    throw new \RuntimeException("queue capability preflight requires a recoverable supervisor program [{$program}] before release activation");
                 }
             }
 

@@ -194,6 +194,8 @@ BASH);
         $this->assertStringContainsString("' --attempts=1'", $deploy);
         $this->assertStringContainsString("' --restart-timeout-seconds=390'", $deploy);
         $this->assertStringContainsString('timeout: 420', $deploy);
+        $this->assertStringContainsString('\\$2 != \\"RUNNING\\" && \\$2 != \\"STOPPED\\"', $deploy);
+        $this->assertStringContainsString('requires a recoverable supervisor program', $deploy);
         $this->assertStringContainsString('timeout --signal=TERM --kill-after=5s 90s bash', $deploy);
         $this->assertStringContainsString("after('queue:reload-workers', 'scheduler:install-managed-cron')", $deploy);
         $this->assertStringContainsString("after('scheduler:install-managed-cron', 'scheduler:wait-natural-heartbeat')", $deploy);
