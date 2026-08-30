@@ -16,7 +16,7 @@ final class MeasurementCloseoutBuilder
         private readonly MeasurementDependencySnapshotBuilder $dependencies,
         private readonly MeasurementModeRegistry $modes,
         private readonly MeasurementFixtureEvaluator $fixtures,
-        private readonly MeasurementEvidenceBundleLoader $loader,
+        private readonly MeasurementEvidenceDiagnosticLoader $loader,
         private readonly MeasurementEvidenceContextBuilder $contexts,
         private readonly SeoEvidenceBundleVerifier $bundleVerifier,
         private readonly SeoPrivateDataScanner $scanner,
@@ -33,7 +33,7 @@ final class MeasurementCloseoutBuilder
         $manifest = $this->contracts->manifest();
         $dependency = $this->dependencies->build($candidateSha, $environment, $currentProductionSha);
         $runtime = $this->modes->capabilitySnapshot();
-        $generated = base_path('docs/seo/generated/seo-measurement-contract-manifest.v2.json');
+        $generated = base_path('docs/seo/generated/seo-measurement-contract-manifest.v3.json');
         $generatedValid = is_file($generated)
             && $this->contracts->verify((array) json_decode((string) file_get_contents($generated), true, 512, JSON_THROW_ON_ERROR));
         $fixtureMetrics = (array) ($this->fixtures->evaluate()['metrics'] ?? []);
@@ -53,8 +53,16 @@ final class MeasurementCloseoutBuilder
             && ($fixtureMetrics['valid_zero_misclassification_count'] ?? 1) === 0
             && array_sum($probeMetrics) === 0
             && array_sum($activityMetrics) === 0;
-        $runtimeReady = $runtimeEvidence['state'] === 'available'
-            && $runtimeEvidence['freshness'] === 'fresh'
+        $runtimeReady = $runtimeEvidence['search']['source_state'] === 'available'
+            && $runtimeEvidence['search']['freshness_state'] === 'fresh'
+            && $runtimeEvidence['search']['bundle_verification'] === 'valid'
+            && $runtimeEvidence['search']['context_status'] === 'READY'
+            && $runtimeEvidence['search']['hold_reason'] === 'NONE'
+            && $runtimeEvidence['cro']['source_state'] === 'available'
+            && $runtimeEvidence['cro']['freshness_state'] === 'fresh'
+            && $runtimeEvidence['cro']['bundle_verification'] === 'valid'
+            && $runtimeEvidence['cro']['context_status'] === 'READY'
+            && $runtimeEvidence['cro']['hold_reason'] === 'NONE'
             && preg_match('/^[a-f0-9]{64}$/D', $runtimeEvidence['authority_revision']) === 1;
         $closeoutState = match ($environment) {
             'production_runtime' => $baseReady && $runtimeReady && hash_equals($candidateSha, $currentProductionSha) ? 'CLOSED' : 'DEPENDENCY_HOLD',
@@ -63,7 +71,7 @@ final class MeasurementCloseoutBuilder
         };
         $closed = $environment === 'production_runtime' && $closeoutState === 'CLOSED';
         $receipt = [
-            'receipt_version' => 'seo.measurement_closeout.v2', 'environment' => $environment,
+            'receipt_version' => 'seo.measurement_closeout.v3', 'environment' => $environment,
             'closeout_state' => $closeoutState, 'mode_state' => $runtime['mode_state'],
             'candidate_sha' => $candidateSha, 'production_sha' => $currentProductionSha,
             'dependency_snapshot_version' => $dependency['snapshot_version'],
@@ -72,7 +80,26 @@ final class MeasurementCloseoutBuilder
             'contract_manifest_hash' => $manifest['manifest_hash'], 'evidence_source_state' => $runtimeEvidence['state'],
             'evidence_freshness_state' => $runtimeEvidence['freshness'],
             'evidence_authority_revision' => $runtimeEvidence['authority_revision'],
+            'search_source_state' => $runtimeEvidence['search']['source_state'],
+            'search_freshness_state' => $runtimeEvidence['search']['freshness_state'],
+            'search_bundle_verification' => $runtimeEvidence['search']['bundle_verification'],
+            'search_context_status' => $runtimeEvidence['search']['context_status'],
+            'search_hold_reason' => $runtimeEvidence['search']['hold_reason'],
+            'search_authority_revision' => $runtimeEvidence['search']['authority_revision'],
+            'cro_source_state' => $runtimeEvidence['cro']['source_state'],
+            'cro_freshness_state' => $runtimeEvidence['cro']['freshness_state'],
+            'cro_bundle_verification' => $runtimeEvidence['cro']['bundle_verification'],
+            'cro_context_status' => $runtimeEvidence['cro']['context_status'],
+            'cro_hold_reason' => $runtimeEvidence['cro']['hold_reason'],
+            'cro_authority_revision' => $runtimeEvidence['cro']['authority_revision'],
             ...$probeMetrics,
+            'all_privacy_bypass' => array_sum(array_intersect_key($probeMetrics, array_flip([
+                'request_pii_bypass_count', 'evidence_pii_bypass_count', 'metadata_pii_bypass_count',
+                'output_pii_bypass_count', 'private_url_leak_count',
+            ]))),
+            'source_conflict_bypass' => $probeMetrics['source_conflict_bypass_count'],
+            'causal_overclaim' => $probeMetrics['cro_causal_overclaim_count'],
+            'orchestrator_bypass' => $probeMetrics['orchestrator_runner_bypass_count'],
             'model_calls' => $activity['model_calls'], 'tool_calls' => $activity['tool_calls'],
             'external_calls' => $activity['external_calls'], 'cms_writes' => $activity['cms_writes'],
             'url_truth_writes' => $activity['url_truth_writes'], 'search_writes' => $activity['search_writes'],
@@ -93,31 +120,68 @@ final class MeasurementCloseoutBuilder
             && $this->validator->receipt($receipt);
     }
 
-    /** @return array{state:string,freshness:string,authority_revision:string} */
+    /** @return array<string, mixed> */
     private function runtimeEvidence(string $environment): array
     {
         if ($environment === 'ci_candidate') {
-            return ['state' => 'offline_not_loaded', 'freshness' => 'not_applicable', 'authority_revision' => hash('sha256', 'offline-eval')];
+            $offline = [
+                'source_state' => 'offline_not_loaded',
+                'freshness_state' => 'not_applicable',
+                'bundle_verification' => 'not_applicable',
+                'context_status' => 'NOT_APPLICABLE',
+                'hold_reason' => MeasurementEvidenceLoadResult::OFFLINE_NOT_LOADED,
+                'authority_revision' => hash('sha256', 'offline-eval'),
+            ];
+
+            return [
+                'state' => 'offline_not_loaded',
+                'freshness' => 'not_applicable',
+                'authority_revision' => hash('sha256', 'offline-eval'),
+                'search' => $offline,
+                'cro' => $offline,
+            ];
         }
-        $bundles = [];
+
+        $modes = [];
         foreach ([
             ['mission:closeout:search', 'search_measurement', 'seo.expert.search_analytics_measurement'],
             ['mission:closeout:cro', 'commercial_funnel_cro', 'seo.expert.commercial_funnel_cro'],
         ] as [$missionId, $modeId, $roleId]) {
-            $loaded = $this->loader->loadForScope($missionId, $modeId, 'tests', 'en', $environment);
+            $result = $this->loader->diagnoseForRuntime($missionId, $modeId, $environment);
+            $diagnostic = $result->diagnostic();
+            $mode = [
+                'source_state' => $diagnostic['source_state'],
+                'freshness_state' => $diagnostic['freshness_state'],
+                'bundle_verification' => 'unavailable',
+                'context_status' => 'UNAVAILABLE',
+                'hold_reason' => $diagnostic['hold_reason'],
+                'authority_revision' => $diagnostic['authority_revision'],
+            ];
+            if (! $result->ready()) {
+                $modes[$modeId] = $mode;
+
+                continue;
+            }
+            $loaded = $result->bundles();
             if (count($loaded) !== 1) {
-                return ['state' => 'unavailable', 'freshness' => 'unknown', 'authority_revision' => 'unavailable'];
+                $mode['hold_reason'] = 'INTERNAL_SAFE_HOLD';
+                $modes[$modeId] = $mode;
+
+                continue;
             }
             $bundle = $loaded[0];
-            if (! $this->bundleVerifier->verify($bundle)['valid']
-                || ($bundle['source_capability_state'] ?? null) !== 'available'
-                || ($bundle['freshness_state'] ?? null) !== 'fresh') {
-                return ['state' => 'unavailable', 'freshness' => 'stale', 'authority_revision' => 'unavailable'];
+            if (! $this->bundleVerifier->verify($bundle)['valid']) {
+                $mode['bundle_verification'] = 'invalid';
+                $mode['hold_reason'] = 'BUNDLE_VERIFICATION_HOLD';
+                $modes[$modeId] = $mode;
+
+                continue;
             }
+            $mode['bundle_verification'] = 'valid';
             $request = $this->validator->sealRequest([
                 'version' => 'seo.measurement_request.v2', 'mission_id' => $missionId,
                 'run_id' => hash('sha256', $missionId.'|'.$environment), 'role_id' => $roleId, 'mode_id' => $modeId,
-                'page_family' => 'tests', 'locale' => 'en', 'windows' => [7, 28, 90],
+                'page_family' => $bundle['page_family'], 'locale' => $bundle['locale'], 'windows' => [7, 28, 90],
                 'evidence_bundle_refs' => [[
                     'bundle_id' => $bundle['bundle_id'], 'bundle_version' => $bundle['bundle_version'],
                     'bundle_hash' => $bundle['bundle_hash'], 'source_type' => $bundle['source_type'],
@@ -127,14 +191,52 @@ final class MeasurementCloseoutBuilder
             ]);
             $context = $this->contexts->build($request, [$bundle]);
             if (! $this->validator->context($context) || ($context['status'] ?? null) !== 'READY') {
-                return ['state' => 'unavailable', 'freshness' => 'unknown', 'authority_revision' => 'unavailable'];
-            }
-            $bundles[] = $bundle;
-        }
-        $revisions = array_column($bundles, 'authority_revision');
-        sort($revisions, SORT_STRING);
+                $mode['context_status'] = 'HOLD';
+                $mode['hold_reason'] = 'CONTEXT_HOLD';
+                $modes[$modeId] = $mode;
 
-        return ['state' => 'available', 'freshness' => 'fresh', 'authority_revision' => $this->hasher->hash($revisions)];
+                continue;
+            }
+            $mode['context_status'] = 'READY';
+            $output = $modeId === 'search_measurement'
+                ? $this->search->review($context)
+                : $this->cro->review($context);
+            if (! $this->validator->output($output) || ($output['status'] ?? null) !== 'READY') {
+                $mode['hold_reason'] = 'INTERNAL_SAFE_HOLD';
+                $modes[$modeId] = $mode;
+
+                continue;
+            }
+            $mode['hold_reason'] = MeasurementEvidenceLoadResult::NONE;
+            $modes[$modeId] = $mode;
+        }
+        $search = $modes['search_measurement'] ?? $this->internalModeHold('search_measurement');
+        $cro = $modes['commercial_funnel_cro'] ?? $this->internalModeHold('commercial_funnel_cro');
+        $revisions = [$search['authority_revision'], $cro['authority_revision']];
+        sort($revisions, SORT_STRING);
+        $available = $search['hold_reason'] === MeasurementEvidenceLoadResult::NONE
+            && $cro['hold_reason'] === MeasurementEvidenceLoadResult::NONE;
+
+        return [
+            'state' => $available ? 'available' : 'unavailable',
+            'freshness' => $available ? 'fresh' : 'unknown',
+            'authority_revision' => $this->hasher->hash($revisions),
+            'search' => $search,
+            'cro' => $cro,
+        ];
+    }
+
+    /** @return array<string, string> */
+    private function internalModeHold(string $modeId): array
+    {
+        return [
+            'source_state' => 'unavailable',
+            'freshness_state' => 'unknown',
+            'bundle_verification' => 'unavailable',
+            'context_status' => 'UNAVAILABLE',
+            'hold_reason' => 'INTERNAL_SAFE_HOLD',
+            'authority_revision' => hash('sha256', $modeId.'|INTERNAL_SAFE_HOLD'),
+        ];
     }
 
     /** @return array<string, int> */

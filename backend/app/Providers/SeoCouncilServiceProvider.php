@@ -9,6 +9,7 @@ use App\Services\SeoCouncil\Measurement\DenyOnlyMeasurementRuntimeGate;
 use App\Services\SeoCouncil\Measurement\MeasurementActivityLedger;
 use App\Services\SeoCouncil\Measurement\MeasurementCoordinator;
 use App\Services\SeoCouncil\Measurement\MeasurementEvidenceBundleLoader;
+use App\Services\SeoCouncil\Measurement\MeasurementEvidenceDiagnosticLoader;
 use App\Services\SeoCouncil\Measurement\MeasurementRunner;
 use App\Services\SeoCouncil\Measurement\MeasurementRuntimeGate;
 use App\Services\SeoCouncil\Measurement\ReadOnlyMeasurementEvidenceBundleLoader;
@@ -31,7 +32,15 @@ final class SeoCouncilServiceProvider extends ServiceProvider
         $this->app->bind(CouncilAdmissionGateway::class, PolicyGatewayCouncilAdmissionGateway::class);
         $this->app->bind(MeasurementRunner::class, MeasurementCoordinator::class);
         $this->app->bind(MeasurementRuntimeGate::class, DenyOnlyMeasurementRuntimeGate::class);
-        $this->app->bind(MeasurementEvidenceBundleLoader::class, ReadOnlyMeasurementEvidenceBundleLoader::class);
+        $this->app->singleton(ReadOnlyMeasurementEvidenceBundleLoader::class);
+        $this->app->bind(
+            MeasurementEvidenceBundleLoader::class,
+            fn ($app) => $app->make(ReadOnlyMeasurementEvidenceBundleLoader::class),
+        );
+        $this->app->bind(
+            MeasurementEvidenceDiagnosticLoader::class,
+            fn ($app) => $app->make(ReadOnlyMeasurementEvidenceBundleLoader::class),
+        );
         $this->app->singleton(MeasurementActivityLedger::class);
         $this->app->bind(TechnicalDiagnosisRunner::class, TechnicalDiagnosisCoordinator::class);
         $this->app->bind(TechnicalDiagnosisRuntimeGate::class, DenyOnlyTechnicalDiagnosisRuntimeGate::class);

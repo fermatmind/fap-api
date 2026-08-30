@@ -1638,6 +1638,34 @@ $diagnostic = [
     "non_zero_metrics" => $nonZero,
 ];
 fwrite(STDERR, "SEO Council safe closeout diagnostic: ".json_encode($diagnostic, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES).PHP_EOL);
+$measurement = is_array($payload["measurement_review"] ?? null) ? $payload["measurement_review"] : [];
+$enum = static function (mixed $value, array $allowed, string $fallback): string {
+    return is_string($value) && in_array($value, $allowed, true) ? $value : $fallback;
+};
+$hash = static function (mixed $value, string $fallback): string {
+    return is_string($value) && preg_match("/^[a-f0-9]{64}$/D", $value) === 1
+        ? $value
+        : hash("sha256", $fallback);
+};
+$measurementDiagnostic = [
+    "search_source_state" => $enum($measurement["search_source_state"] ?? null, ["available", "held", "unavailable", "offline_not_loaded"], "unavailable"),
+    "search_freshness_state" => $enum($measurement["search_freshness_state"] ?? null, ["fresh", "stale", "unknown", "not_applicable"], "unknown"),
+    "search_bundle_verification" => $enum($measurement["search_bundle_verification"] ?? null, ["valid", "invalid", "unavailable", "not_applicable"], "unavailable"),
+    "search_context_status" => $enum($measurement["search_context_status"] ?? null, ["READY", "HOLD", "UNAVAILABLE", "NOT_APPLICABLE"], "UNAVAILABLE"),
+    "search_hold_reason" => $enum($measurement["search_hold_reason"] ?? null, ["NONE", "OFFLINE_NOT_LOADED", "GSC_SCHEMA_UNAVAILABLE", "GSC_NO_ELIGIBLE_ROWS", "GSC_QUALITY_HOLD", "GSC_WINDOW_INCOMPLETE", "GSC_STALE", "GSC_MAPPING_FAILED", "GSC_AUTHORITY_CONFLICT", "GSC_READMODEL_UNHEALTHY", "BUNDLE_PRIVACY_HOLD", "BUNDLE_VERIFICATION_HOLD", "CONTEXT_HOLD", "INTERNAL_SAFE_HOLD"], "INTERNAL_SAFE_HOLD"),
+    "search_authority_revision" => $hash($measurement["search_authority_revision"] ?? null, "search-unavailable"),
+    "cro_source_state" => $enum($measurement["cro_source_state"] ?? null, ["available", "held", "unavailable", "offline_not_loaded"], "unavailable"),
+    "cro_freshness_state" => $enum($measurement["cro_freshness_state"] ?? null, ["fresh", "stale", "unknown", "not_applicable"], "unknown"),
+    "cro_bundle_verification" => $enum($measurement["cro_bundle_verification"] ?? null, ["valid", "invalid", "unavailable", "not_applicable"], "unavailable"),
+    "cro_context_status" => $enum($measurement["cro_context_status"] ?? null, ["READY", "HOLD", "UNAVAILABLE", "NOT_APPLICABLE"], "UNAVAILABLE"),
+    "cro_hold_reason" => $enum($measurement["cro_hold_reason"] ?? null, ["NONE", "OFFLINE_NOT_LOADED", "CRO_SCHEMA_UNAVAILABLE", "CRO_READMODEL_UNHEALTHY", "CRO_WINDOW_INCOMPLETE", "CRO_STALE", "CRO_MAPPING_FAILED", "CRO_STAGE_COVERAGE_INCOMPLETE", "BUNDLE_PRIVACY_HOLD", "BUNDLE_VERIFICATION_HOLD", "CONTEXT_HOLD", "INTERNAL_SAFE_HOLD"], "INTERNAL_SAFE_HOLD"),
+    "cro_authority_revision" => $hash($measurement["cro_authority_revision"] ?? null, "cro-unavailable"),
+    "execution_allowed" => is_bool($measurement["execution_allowed"] ?? null)
+        ? $measurement["execution_allowed"]
+        : true,
+    "production_permissions_zero" => ($measurement["production_permissions"] ?? null) === 0,
+];
+fwrite(STDERR, "SEO Council safe measurement diagnostic: ".json_encode($measurementDiagnostic, JSON_THROW_ON_ERROR).PHP_EOL);
 ' || true
   {{bin/php}} -r '
 require "vendor/autoload.php";
@@ -1731,7 +1759,7 @@ $ok = ($payload["contract_version"] ?? null) === "seo.council_closeout.v2"
     && ($payload["ready_for_11F"] ?? null) === $production
     && ($payload["SEO-PLATFORM-11F"] ?? null) === ($production ? "CLOSED" : "HOLD")
     && ($payload["ready_for_11G"] ?? null) === $production
-    && ($payload["measurement_review"]["receipt_version"] ?? null) === "seo.measurement_closeout.v2"
+    && ($payload["measurement_review"]["receipt_version"] ?? null) === "seo.measurement_closeout.v3"
     && ($payload["measurement_review"]["environment"] ?? null) === $environment
     && ($payload["measurement_review"]["closeout_state"] ?? null) === $expectedMeasurementState
     && ($payload["measurement_review"]["mode_state"] ?? null) === "OFFLINE_EVAL_READY"
@@ -1741,6 +1769,18 @@ $ok = ($payload["contract_version"] ?? null) === "seo.council_closeout.v2"
     && ($payload["measurement_review"]["evidence_source_state"] ?? null) === "available"
     && ($payload["measurement_review"]["evidence_freshness_state"] ?? null) === "fresh"
     && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["measurement_review"]["evidence_authority_revision"] ?? "")) === 1
+    && ($payload["measurement_review"]["search_source_state"] ?? null) === "available"
+    && ($payload["measurement_review"]["search_freshness_state"] ?? null) === "fresh"
+    && ($payload["measurement_review"]["search_bundle_verification"] ?? null) === "valid"
+    && ($payload["measurement_review"]["search_context_status"] ?? null) === "READY"
+    && ($payload["measurement_review"]["search_hold_reason"] ?? null) === "NONE"
+    && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["measurement_review"]["search_authority_revision"] ?? "")) === 1
+    && ($payload["measurement_review"]["cro_source_state"] ?? null) === "available"
+    && ($payload["measurement_review"]["cro_freshness_state"] ?? null) === "fresh"
+    && ($payload["measurement_review"]["cro_bundle_verification"] ?? null) === "valid"
+    && ($payload["measurement_review"]["cro_context_status"] ?? null) === "READY"
+    && ($payload["measurement_review"]["cro_hold_reason"] ?? null) === "NONE"
+    && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["measurement_review"]["cro_authority_revision"] ?? "")) === 1
     && ($payload["measurement_review"]["model_calls"] ?? null) === 0
     && ($payload["measurement_review"]["tool_calls"] ?? null) === 0
     && ($payload["measurement_review"]["external_calls"] ?? null) === 0
@@ -1809,7 +1849,8 @@ foreach ([
     "output_pii_bypass_count", "private_url_leak_count", "cro_causal_overclaim_count",
     "source_conflict_bypass_count", "schema_validation_bypass_count", "orchestrator_runner_bypass_count",
     "direct_mode_entry_bypass_count", "policy_bypass_count", "role_expansion_bypass_count",
-    "write_attempt_count", "model_calls", "tool_calls", "external_calls", "cms_writes",
+    "write_attempt_count", "all_privacy_bypass", "source_conflict_bypass", "causal_overclaim", "orchestrator_bypass",
+    "model_calls", "tool_calls", "external_calls", "cms_writes",
     "url_truth_writes", "search_writes", "business_writes", "production_permissions",
 ] as $field) {
     $ok = $ok && ($payload["measurement_review"][$field] ?? null) === 0;

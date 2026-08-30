@@ -36,6 +36,7 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
         $this->assertSame('fresh', $search[0]['freshness_state']);
         $this->assertSame([7, 28, 90], array_column($search[0]['payload']['windows'], 'window_days'));
         $this->assertTrue(app(SeoEvidenceBundleVerifier::class)->verify($search[0])['valid']);
+        $this->assertSame('NONE', $loader->diagnoseForScope('mission:source', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
 
         $cro = $loader->loadForScope('mission:source', 'commercial_funnel_cro', 'tests', 'en', 'staging_runtime');
         $this->assertCount(1, $cro);
@@ -43,6 +44,7 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
         $this->assertSame('available', $cro[0]['source_capability_state']);
         $this->assertSame('fresh', $cro[0]['freshness_state']);
         $this->assertTrue(app(SeoEvidenceBundleVerifier::class)->verify($cro[0])['valid']);
+        $this->assertSame('NONE', $loader->diagnoseForScope('mission:source', 'commercial_funnel_cro', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
 
         $encoded = json_encode([$search, $cro], JSON_THROW_ON_ERROR);
         foreach (['canonical_url', 'raw_query', 'query_display_masked', 'user_id', 'database'] as $forbidden) {
@@ -69,6 +71,69 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
 
         DB::table('seo_gsc_daily')->delete();
         $this->assertSame([], $loader->loadForScope('mission:missing', 'search_measurement', 'tests', 'en', 'production_runtime'));
+    }
+
+    public function test_search_diagnostics_distinguish_schema_data_quality_window_mapping_authority_and_readmodel_failures(): void
+    {
+        $loader = app(ReadOnlyMeasurementEvidenceBundleLoader::class);
+
+        Schema::table('seo_gsc_daily', static function (Blueprint $table): void {
+            $table->dropColumn('mapping_state');
+        });
+        $this->assertSame('GSC_SCHEMA_UNAVAILABLE', $loader->diagnoseForScope('mission:schema', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
+
+        $this->setUpReadModels();
+        DB::table('seo_gsc_daily')->delete();
+        $this->assertSame('GSC_NO_ELIGIBLE_ROWS', app(ReadOnlyMeasurementEvidenceBundleLoader::class)->diagnoseForScope('mission:rows', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
+
+        $this->setUpReadModels();
+        DB::table('seo_gsc_daily')->update(['metadata_json' => json_encode(['data_origin' => 'fixture'], JSON_THROW_ON_ERROR)]);
+        $this->assertSame('GSC_QUALITY_HOLD', app(ReadOnlyMeasurementEvidenceBundleLoader::class)->diagnoseForScope('mission:quality', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
+
+        $this->setUpReadModels();
+        DB::table('seo_gsc_daily')->where('report_date', now('UTC')->subDays(50)->toDateString())->delete();
+        $this->assertSame('GSC_WINDOW_INCOMPLETE', app(ReadOnlyMeasurementEvidenceBundleLoader::class)->diagnoseForScope('mission:window', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
+
+        $this->setUpReadModels();
+        DB::table('seo_gsc_daily')->update(['mapping_state' => 'failed']);
+        $this->assertSame('GSC_MAPPING_FAILED', app(ReadOnlyMeasurementEvidenceBundleLoader::class)->diagnoseForScope('mission:mapping', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
+
+        $this->setUpReadModels();
+        DB::table('seo_urls')->update(['authority_revision' => 'invalid']);
+        $this->assertSame('GSC_AUTHORITY_CONFLICT', app(ReadOnlyMeasurementEvidenceBundleLoader::class)->diagnoseForScope('mission:authority', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
+
+        $this->setUpReadModels();
+        DB::table('seo_gsc_daily')->update(['canonical_url' => 'https://www.fermatmind.com/en/other/public']);
+        $this->assertSame('GSC_READMODEL_UNHEALTHY', app(ReadOnlyMeasurementEvidenceBundleLoader::class)->diagnoseForScope('mission:readmodel', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
+    }
+
+    public function test_cro_diagnostics_distinguish_schema_readmodel_stale_and_mapping_failures(): void
+    {
+        Schema::drop('analytics_seo_conversion_daily');
+        $this->assertSame('CRO_SCHEMA_UNAVAILABLE', app(ReadOnlyMeasurementEvidenceBundleLoader::class)->diagnoseForScope('mission:cro-schema', 'commercial_funnel_cro', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
+
+        $this->setUpReadModels();
+        DB::table('seo_gsc_daily')->delete();
+        $this->assertSame('CRO_READMODEL_UNHEALTHY', app(ReadOnlyMeasurementEvidenceBundleLoader::class)->diagnoseForScope('mission:cro-readmodel', 'commercial_funnel_cro', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
+
+        $this->setUpReadModels();
+        DB::table('analytics_seo_conversion_refresh_runs')->update(['completed_at' => now('UTC')->subDays(5)]);
+        DB::table('analytics_seo_conversion_daily')->update(['last_refreshed_at' => now('UTC')->subDays(5)]);
+        $this->assertSame('CRO_STALE', app(ReadOnlyMeasurementEvidenceBundleLoader::class)->diagnoseForScope('mission:cro-stale', 'commercial_funnel_cro', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
+
+        $this->setUpReadModels();
+        DB::table('seo_urls')->delete();
+        $this->assertSame('CRO_MAPPING_FAILED', app(ReadOnlyMeasurementEvidenceBundleLoader::class)->diagnoseForScope('mission:cro-mapping', 'commercial_funnel_cro', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
+    }
+
+    private function setUpReadModels(): void
+    {
+        foreach (['analytics_seo_conversion_refresh_runs', 'analytics_seo_conversion_daily', 'seo_event_funnel_daily', 'seo_gsc_daily', 'seo_urls'] as $table) {
+            Schema::dropIfExists($table);
+        }
+        $this->createReadModels();
+        $this->seedReadModels();
+        $this->app->forgetInstance(ReadOnlyMeasurementEvidenceBundleLoader::class);
     }
 
     private function createReadModels(): void
@@ -150,7 +215,7 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
         $revision = str_repeat('a', 64);
         DB::table('seo_urls')->insert([
             'canonical_url_hash' => $canonicalHash, 'canonical_url' => $canonical, 'locale' => 'en',
-            'page_entity_type' => 'tests', 'page_family' => 'tests', 'source_authority' => 'backend_registry',
+            'page_entity_type' => 'test_detail', 'page_family' => 'tests', 'source_authority' => 'backend_registry',
             'indexability_state' => 'indexable', 'is_private_flow' => false, 'authority_revision' => $revision,
         ]);
         for ($days = 92; $days >= 3; $days--) {

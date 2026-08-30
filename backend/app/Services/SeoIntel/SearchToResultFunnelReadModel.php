@@ -395,6 +395,9 @@ final class SearchToResultFunnelReadModel
     private function urlTruthByHash(string $connection, array $hashes): array
     {
         $truth = [];
+        $familyColumn = Schema::connection($connection)->hasColumn(self::URL_TRUTH_TABLE, 'page_family')
+            ? 'page_family'
+            : 'page_entity_type';
 
         foreach (array_chunk($hashes, 500) as $chunk) {
             $rows = DB::connection($connection)
@@ -405,6 +408,7 @@ final class SearchToResultFunnelReadModel
                     'canonical_url',
                     'locale',
                     'page_entity_type',
+                    $familyColumn,
                     'source_authority',
                     'indexability_state',
                     'is_private_flow',
@@ -425,7 +429,7 @@ final class SearchToResultFunnelReadModel
 
                 $private = (bool) ($row->is_private_flow ?? false)
                     || $this->isPrivateUrl($canonicalUrl);
-                $pageFamily = $this->dimension($row->page_entity_type ?? null, 64);
+                $pageFamily = $this->dimension($row->{$familyColumn} ?? null, 64);
                 $locale = $this->locale($row->locale ?? null);
                 $sourceAuthority = $this->dimension($row->source_authority ?? null, 64);
                 $authorityOwned = is_string($sourceAuthority)

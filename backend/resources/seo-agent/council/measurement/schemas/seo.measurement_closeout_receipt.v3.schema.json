@@ -1,0 +1,30 @@
+{
+  "schema_id": "seo.measurement_closeout_receipt.v3", "schema_version": "3.0.0", "type": "object", "additionalProperties": false,
+  "required": ["receipt_version", "environment", "closeout_state", "mode_state", "candidate_sha", "production_sha", "dependency_snapshot_version", "dependency_snapshot_hash", "dependency_status", "dependency_blockers", "contract_manifest_version", "contract_manifest_hash", "evidence_source_state", "evidence_freshness_state", "evidence_authority_revision", "search_source_state", "search_freshness_state", "search_bundle_verification", "search_context_status", "search_hold_reason", "search_authority_revision", "cro_source_state", "cro_freshness_state", "cro_bundle_verification", "cro_context_status", "cro_hold_reason", "cro_authority_revision", "real_evidence_bundle_bypass_count", "bundle_verifier_bypass_count", "context_builder_bypass_count", "request_pii_bypass_count", "evidence_pii_bypass_count", "metadata_pii_bypass_count", "output_pii_bypass_count", "private_url_leak_count", "cro_causal_overclaim_count", "source_conflict_bypass_count", "schema_validation_bypass_count", "orchestrator_runner_bypass_count", "direct_mode_entry_bypass_count", "policy_bypass_count", "role_expansion_bypass_count", "write_attempt_count", "all_privacy_bypass", "source_conflict_bypass", "causal_overclaim", "orchestrator_bypass", "model_calls", "tool_calls", "external_calls", "cms_writes", "url_truth_writes", "search_writes", "business_writes", "production_permissions", "production_execution_enabled", "execution_allowed", "SEO-PLATFORM-11F", "ready_for_11G", "receipt_hash"],
+  "properties": {
+    "receipt_version": {"const": "seo.measurement_closeout.v3"}, "environment": {"enum": ["ci_candidate", "staging_runtime", "production_runtime"]},
+    "closeout_state": {"enum": ["OFFLINE_EVAL_READY", "STAGING_READY", "CLOSED", "DEPENDENCY_HOLD"]}, "mode_state": {"const": "OFFLINE_EVAL_READY"},
+    "candidate_sha": {"type": "string"}, "production_sha": {"type": "string"}, "dependency_snapshot_version": {"type": "string"},
+    "dependency_snapshot_hash": {"type": "string"}, "dependency_status": {"type": "string"}, "dependency_blockers": {"type": "array"},
+    "contract_manifest_version": {"const": "3.0.0"}, "contract_manifest_hash": {"type": "string"},
+    "evidence_source_state": {"enum": ["available", "unavailable", "offline_not_loaded"]}, "evidence_freshness_state": {"enum": ["fresh", "unknown", "not_applicable"]}, "evidence_authority_revision": {"type": "string"},
+    "search_source_state": {"enum": ["available", "held", "unavailable", "offline_not_loaded"]}, "search_freshness_state": {"enum": ["fresh", "stale", "unknown", "not_applicable"]},
+    "search_bundle_verification": {"enum": ["valid", "invalid", "unavailable", "not_applicable"]}, "search_context_status": {"enum": ["READY", "HOLD", "UNAVAILABLE", "NOT_APPLICABLE"]},
+    "search_hold_reason": {"enum": ["NONE", "OFFLINE_NOT_LOADED", "GSC_SCHEMA_UNAVAILABLE", "GSC_NO_ELIGIBLE_ROWS", "GSC_QUALITY_HOLD", "GSC_WINDOW_INCOMPLETE", "GSC_STALE", "GSC_MAPPING_FAILED", "GSC_AUTHORITY_CONFLICT", "GSC_READMODEL_UNHEALTHY", "BUNDLE_PRIVACY_HOLD", "BUNDLE_VERIFICATION_HOLD", "CONTEXT_HOLD", "INTERNAL_SAFE_HOLD"]},
+    "search_authority_revision": {"type": "string"},
+    "cro_source_state": {"enum": ["available", "held", "unavailable", "offline_not_loaded"]}, "cro_freshness_state": {"enum": ["fresh", "stale", "unknown", "not_applicable"]},
+    "cro_bundle_verification": {"enum": ["valid", "invalid", "unavailable", "not_applicable"]}, "cro_context_status": {"enum": ["READY", "HOLD", "UNAVAILABLE", "NOT_APPLICABLE"]},
+    "cro_hold_reason": {"enum": ["NONE", "OFFLINE_NOT_LOADED", "CRO_SCHEMA_UNAVAILABLE", "CRO_READMODEL_UNHEALTHY", "CRO_WINDOW_INCOMPLETE", "CRO_STALE", "CRO_MAPPING_FAILED", "CRO_STAGE_COVERAGE_INCOMPLETE", "BUNDLE_PRIVACY_HOLD", "BUNDLE_VERIFICATION_HOLD", "CONTEXT_HOLD", "INTERNAL_SAFE_HOLD"]},
+    "cro_authority_revision": {"type": "string"},
+    "real_evidence_bundle_bypass_count": {"type": "integer"}, "bundle_verifier_bypass_count": {"type": "integer"}, "context_builder_bypass_count": {"type": "integer"},
+    "request_pii_bypass_count": {"type": "integer"}, "evidence_pii_bypass_count": {"type": "integer"}, "metadata_pii_bypass_count": {"type": "integer"},
+    "output_pii_bypass_count": {"type": "integer"}, "private_url_leak_count": {"type": "integer"}, "cro_causal_overclaim_count": {"type": "integer"},
+    "source_conflict_bypass_count": {"type": "integer"}, "schema_validation_bypass_count": {"type": "integer"}, "orchestrator_runner_bypass_count": {"type": "integer"},
+    "direct_mode_entry_bypass_count": {"type": "integer"}, "policy_bypass_count": {"type": "integer"}, "role_expansion_bypass_count": {"type": "integer"},
+    "write_attempt_count": {"type": "integer"}, "all_privacy_bypass": {"type": "integer"}, "source_conflict_bypass": {"type": "integer"}, "causal_overclaim": {"type": "integer"}, "orchestrator_bypass": {"type": "integer"},
+    "model_calls": {"type": "integer"}, "tool_calls": {"type": "integer"}, "external_calls": {"type": "integer"},
+    "cms_writes": {"type": "integer"}, "url_truth_writes": {"type": "integer"}, "search_writes": {"type": "integer"}, "business_writes": {"type": "integer"},
+    "production_permissions": {"type": "integer"}, "production_execution_enabled": {"const": false}, "execution_allowed": {"const": false},
+    "SEO-PLATFORM-11F": {"enum": ["CLOSED", "HOLD"]}, "ready_for_11G": {"type": "boolean"}, "receipt_hash": {"type": "string"}
+  }
+}

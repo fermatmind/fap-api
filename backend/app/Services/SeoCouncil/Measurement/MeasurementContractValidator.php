@@ -196,8 +196,14 @@ final class MeasurementContractValidator
     /** @param array<string, mixed> $receipt */
     public function receipt(array $receipt): bool
     {
-        if (! $this->exactSchemaKeys($receipt, 'seo.measurement_closeout_receipt.v2')
-            || ($receipt['receipt_version'] ?? null) !== 'seo.measurement_closeout.v2'
+        $version = $receipt['receipt_version'] ?? null;
+        $schemaId = match ($version) {
+            'seo.measurement_closeout.v2' => 'seo.measurement_closeout_receipt.v2',
+            'seo.measurement_closeout.v3' => 'seo.measurement_closeout_receipt.v3',
+            default => null,
+        };
+        if ($schemaId === null
+            || ! $this->exactSchemaKeys($receipt, $schemaId)
             || ! in_array($receipt['environment'] ?? null, ['ci_candidate', 'staging_runtime', 'production_runtime'], true)
             || preg_match(self::SHA, (string) ($receipt['candidate_sha'] ?? '')) !== 1
             || preg_match(self::SHA, (string) ($receipt['production_sha'] ?? '')) !== 1
@@ -206,10 +212,14 @@ final class MeasurementContractValidator
             || ($receipt['execution_allowed'] ?? null) !== false
             || ($receipt['production_execution_enabled'] ?? null) !== false
             || preg_match(self::HASH, (string) ($receipt['receipt_hash'] ?? '')) !== 1
-            || ! hash_equals($this->hasher->hashWithout($receipt, 'receipt_hash'), (string) $receipt['receipt_hash'])) {
+            || ! hash_equals($this->hasher->hashWithout($receipt, 'receipt_hash'), (string) $receipt['receipt_hash'])
+            || ($version === 'seo.measurement_closeout.v3' && ! $this->v3Diagnostics($receipt))) {
             return false;
         }
-        foreach (self::zeroMetricFields() as $field) {
+        $zeroFields = $version === 'seo.measurement_closeout.v3'
+            ? self::zeroMetricFields()
+            : self::zeroMetricFieldsV2();
+        foreach ($zeroFields as $field) {
             if (! is_int($receipt[$field] ?? null) || $receipt[$field] < 0) {
                 return false;
             }
@@ -219,7 +229,22 @@ final class MeasurementContractValidator
             && $receipt['evidence_source_state'] === 'available'
             && $receipt['evidence_freshness_state'] === 'fresh'
             && preg_match(self::HASH, (string) $receipt['evidence_authority_revision']) === 1
-            && array_sum(array_map(static fn (string $field): int => $receipt[$field], self::zeroMetricFields())) === 0;
+            && array_sum(array_map(static fn (string $field): int => $receipt[$field], $zeroFields)) === 0;
+        if ($version === 'seo.measurement_closeout.v3') {
+            $closed = $closed
+                && ($receipt['search_source_state'] ?? null) === 'available'
+                && ($receipt['search_freshness_state'] ?? null) === 'fresh'
+                && ($receipt['search_bundle_verification'] ?? null) === 'valid'
+                && ($receipt['search_context_status'] ?? null) === 'READY'
+                && ($receipt['search_hold_reason'] ?? null) === 'NONE'
+                && preg_match(self::HASH, (string) ($receipt['search_authority_revision'] ?? '')) === 1
+                && ($receipt['cro_source_state'] ?? null) === 'available'
+                && ($receipt['cro_freshness_state'] ?? null) === 'fresh'
+                && ($receipt['cro_bundle_verification'] ?? null) === 'valid'
+                && ($receipt['cro_context_status'] ?? null) === 'READY'
+                && ($receipt['cro_hold_reason'] ?? null) === 'NONE'
+                && preg_match(self::HASH, (string) ($receipt['cro_authority_revision'] ?? '')) === 1;
+        }
 
         return (($receipt['SEO-PLATFORM-11F'] ?? null) === 'CLOSED') === $closed
             && (($receipt['ready_for_11G'] ?? null) === true) === $closed;
@@ -234,9 +259,51 @@ final class MeasurementContractValidator
             'output_pii_bypass_count', 'private_url_leak_count', 'cro_causal_overclaim_count',
             'source_conflict_bypass_count', 'schema_validation_bypass_count', 'orchestrator_runner_bypass_count',
             'direct_mode_entry_bypass_count', 'policy_bypass_count', 'role_expansion_bypass_count',
-            'write_attempt_count', 'model_calls', 'tool_calls', 'external_calls', 'cms_writes',
+            'write_attempt_count', 'all_privacy_bypass', 'source_conflict_bypass', 'causal_overclaim', 'orchestrator_bypass',
+            'model_calls', 'tool_calls', 'external_calls', 'cms_writes',
             'url_truth_writes', 'search_writes', 'business_writes', 'production_permissions',
         ];
+    }
+
+    /** @return list<string> */
+    private static function zeroMetricFieldsV2(): array
+    {
+        return array_values(array_diff(self::zeroMetricFields(), [
+            'all_privacy_bypass', 'source_conflict_bypass', 'causal_overclaim', 'orchestrator_bypass',
+        ]));
+    }
+
+    /** @param array<string, mixed> $receipt */
+    private function v3Diagnostics(array $receipt): bool
+    {
+        foreach (['search', 'cro'] as $mode) {
+            $reason = $receipt[$mode.'_hold_reason'] ?? null;
+            $allowedReasons = [
+                MeasurementEvidenceLoadResult::NONE,
+                MeasurementEvidenceLoadResult::OFFLINE_NOT_LOADED,
+                ...MeasurementEvidenceLoadResult::COMMON_HOLDS,
+                ...($mode === 'search'
+                    ? MeasurementEvidenceLoadResult::SEARCH_HOLDS
+                    : MeasurementEvidenceLoadResult::CRO_HOLDS),
+            ];
+            if (! in_array($receipt[$mode.'_source_state'] ?? null, ['available', 'held', 'unavailable', 'offline_not_loaded'], true)
+                || ! in_array($receipt[$mode.'_freshness_state'] ?? null, ['fresh', 'stale', 'unknown', 'not_applicable'], true)
+                || ! in_array($receipt[$mode.'_bundle_verification'] ?? null, ['valid', 'invalid', 'unavailable', 'not_applicable'], true)
+                || ! in_array($receipt[$mode.'_context_status'] ?? null, ['READY', 'HOLD', 'UNAVAILABLE', 'NOT_APPLICABLE'], true)
+                || ! in_array($reason, $allowedReasons, true)
+                || preg_match(self::HASH, (string) ($receipt[$mode.'_authority_revision'] ?? '')) !== 1) {
+                return false;
+            }
+            $ready = ($receipt[$mode.'_source_state'] ?? null) === 'available'
+                && ($receipt[$mode.'_freshness_state'] ?? null) === 'fresh'
+                && ($receipt[$mode.'_bundle_verification'] ?? null) === 'valid'
+                && ($receipt[$mode.'_context_status'] ?? null) === 'READY';
+            if (($reason === MeasurementEvidenceLoadResult::NONE) !== $ready) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /** @param array<string, mixed> $decision @param list<string> $states */

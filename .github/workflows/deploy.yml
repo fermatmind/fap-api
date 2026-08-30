@@ -183,7 +183,7 @@ jobs:
                 and .seo_council_orchestration.technical_diagnosis.execution_allowed == false
                 and .seo_council_orchestration."SEO-PLATFORM-11F" == "HOLD"
                 and .seo_council_orchestration.ready_for_11G == false
-                and .seo_council_orchestration.measurement_review.receipt_version == "seo.measurement_closeout.v2"
+                and .seo_council_orchestration.measurement_review.receipt_version == "seo.measurement_closeout.v3"
                 and .seo_council_orchestration.measurement_review.environment == "ci_candidate"
                 and .seo_council_orchestration.measurement_review.closeout_state == "OFFLINE_EVAL_READY"
                 and .seo_council_orchestration.measurement_review.mode_state == "OFFLINE_EVAL_READY"
@@ -191,13 +191,24 @@ jobs:
                 and .seo_council_orchestration.measurement_review.dependency_status == "READY"
                 and .seo_council_orchestration.measurement_review.evidence_source_state == "offline_not_loaded"
                 and .seo_council_orchestration.measurement_review.evidence_freshness_state == "not_applicable"
+                and .seo_council_orchestration.measurement_review.search_source_state == "offline_not_loaded"
+                and .seo_council_orchestration.measurement_review.search_freshness_state == "not_applicable"
+                and .seo_council_orchestration.measurement_review.search_bundle_verification == "not_applicable"
+                and .seo_council_orchestration.measurement_review.search_context_status == "NOT_APPLICABLE"
+                and .seo_council_orchestration.measurement_review.search_hold_reason == "OFFLINE_NOT_LOADED"
+                and .seo_council_orchestration.measurement_review.cro_source_state == "offline_not_loaded"
+                and .seo_council_orchestration.measurement_review.cro_freshness_state == "not_applicable"
+                and .seo_council_orchestration.measurement_review.cro_bundle_verification == "not_applicable"
+                and .seo_council_orchestration.measurement_review.cro_context_status == "NOT_APPLICABLE"
+                and .seo_council_orchestration.measurement_review.cro_hold_reason == "OFFLINE_NOT_LOADED"
                 and ((.seo_council_orchestration.measurement_review | [
                   .real_evidence_bundle_bypass_count, .bundle_verifier_bypass_count, .context_builder_bypass_count,
                   .request_pii_bypass_count, .evidence_pii_bypass_count, .metadata_pii_bypass_count,
                   .output_pii_bypass_count, .private_url_leak_count, .cro_causal_overclaim_count,
                   .source_conflict_bypass_count, .schema_validation_bypass_count, .orchestrator_runner_bypass_count,
                   .direct_mode_entry_bypass_count, .policy_bypass_count, .role_expansion_bypass_count,
-                  .write_attempt_count, .model_calls, .tool_calls, .external_calls, .cms_writes,
+                  .write_attempt_count, .all_privacy_bypass, .source_conflict_bypass, .causal_overclaim, .orchestrator_bypass,
+                  .model_calls, .tool_calls, .external_calls, .cms_writes,
                   .url_truth_writes, .search_writes, .business_writes, .production_permissions
                 ]) | all(. == 0))
                 and .seo_council_orchestration.measurement_review.model_calls == 0
@@ -588,7 +599,7 @@ jobs:
             and .technical_diagnosis.trusted_key_count == 0 and .technical_diagnosis.l4_allow_count == 0
             and .technical_diagnosis.execution_allowed == false
             and ."SEO-PLATFORM-11F" == "HOLD" and .ready_for_11G == false
-            and .measurement_review.receipt_version == "seo.measurement_closeout.v2"
+            and .measurement_review.receipt_version == "seo.measurement_closeout.v3"
             and .measurement_review.environment == "staging_runtime"
             and .measurement_review.closeout_state == "STAGING_READY"
             and .measurement_review.mode_state == "OFFLINE_EVAL_READY"
@@ -597,13 +608,26 @@ jobs:
             and .measurement_review.evidence_source_state == "available"
             and .measurement_review.evidence_freshness_state == "fresh"
             and (.measurement_review.evidence_authority_revision | test("^[a-f0-9]{64}$"))
+            and .measurement_review.search_source_state == "available"
+            and .measurement_review.search_freshness_state == "fresh"
+            and .measurement_review.search_bundle_verification == "valid"
+            and .measurement_review.search_context_status == "READY"
+            and .measurement_review.search_hold_reason == "NONE"
+            and (.measurement_review.search_authority_revision | test("^[a-f0-9]{64}$"))
+            and .measurement_review.cro_source_state == "available"
+            and .measurement_review.cro_freshness_state == "fresh"
+            and .measurement_review.cro_bundle_verification == "valid"
+            and .measurement_review.cro_context_status == "READY"
+            and .measurement_review.cro_hold_reason == "NONE"
+            and (.measurement_review.cro_authority_revision | test("^[a-f0-9]{64}$"))
             and ((.measurement_review | [
               .real_evidence_bundle_bypass_count, .bundle_verifier_bypass_count, .context_builder_bypass_count,
               .request_pii_bypass_count, .evidence_pii_bypass_count, .metadata_pii_bypass_count,
               .output_pii_bypass_count, .private_url_leak_count, .cro_causal_overclaim_count,
               .source_conflict_bypass_count, .schema_validation_bypass_count, .orchestrator_runner_bypass_count,
               .direct_mode_entry_bypass_count, .policy_bypass_count, .role_expansion_bypass_count,
-              .write_attempt_count, .model_calls, .tool_calls, .external_calls, .cms_writes,
+              .write_attempt_count, .all_privacy_bypass, .source_conflict_bypass, .causal_overclaim, .orchestrator_bypass,
+              .model_calls, .tool_calls, .external_calls, .cms_writes,
               .url_truth_writes, .search_writes, .business_writes, .production_permissions
             ]) | all(. == 0))
             and .measurement_review.model_calls == 0 and .measurement_review.tool_calls == 0
@@ -951,7 +975,7 @@ jobs:
             and .technical_diagnosis.trusted_key_count == 0 and .technical_diagnosis.l4_allow_count == 0
             and .technical_diagnosis.execution_allowed == false
             and ."SEO-PLATFORM-11F" == "CLOSED" and .ready_for_11G == true
-            and .measurement_review.receipt_version == "seo.measurement_closeout.v2"
+            and .measurement_review.receipt_version == "seo.measurement_closeout.v3"
             and .measurement_review.environment == "production_runtime"
             and .measurement_review.closeout_state == "CLOSED"
             and .measurement_review.mode_state == "OFFLINE_EVAL_READY"
@@ -960,13 +984,26 @@ jobs:
             and .measurement_review.evidence_source_state == "available"
             and .measurement_review.evidence_freshness_state == "fresh"
             and (.measurement_review.evidence_authority_revision | test("^[a-f0-9]{64}$"))
+            and .measurement_review.search_source_state == "available"
+            and .measurement_review.search_freshness_state == "fresh"
+            and .measurement_review.search_bundle_verification == "valid"
+            and .measurement_review.search_context_status == "READY"
+            and .measurement_review.search_hold_reason == "NONE"
+            and (.measurement_review.search_authority_revision | test("^[a-f0-9]{64}$"))
+            and .measurement_review.cro_source_state == "available"
+            and .measurement_review.cro_freshness_state == "fresh"
+            and .measurement_review.cro_bundle_verification == "valid"
+            and .measurement_review.cro_context_status == "READY"
+            and .measurement_review.cro_hold_reason == "NONE"
+            and (.measurement_review.cro_authority_revision | test("^[a-f0-9]{64}$"))
             and ((.measurement_review | [
               .real_evidence_bundle_bypass_count, .bundle_verifier_bypass_count, .context_builder_bypass_count,
               .request_pii_bypass_count, .evidence_pii_bypass_count, .metadata_pii_bypass_count,
               .output_pii_bypass_count, .private_url_leak_count, .cro_causal_overclaim_count,
               .source_conflict_bypass_count, .schema_validation_bypass_count, .orchestrator_runner_bypass_count,
               .direct_mode_entry_bypass_count, .policy_bypass_count, .role_expansion_bypass_count,
-              .write_attempt_count, .model_calls, .tool_calls, .external_calls, .cms_writes,
+              .write_attempt_count, .all_privacy_bypass, .source_conflict_bypass, .causal_overclaim, .orchestrator_bypass,
+              .model_calls, .tool_calls, .external_calls, .cms_writes,
               .url_truth_writes, .search_writes, .business_writes, .production_permissions
             ]) | all(. == 0))
             and .measurement_review.model_calls == 0 and .measurement_review.tool_calls == 0

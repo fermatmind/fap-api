@@ -9,9 +9,9 @@ use RuntimeException;
 
 final class MeasurementContractRegistry
 {
-    public const MANIFEST_ID = 'seo.measurement_contract_manifest.v2';
+    public const MANIFEST_ID = 'seo.measurement_contract_manifest.v3';
 
-    public const MANIFEST_VERSION = '2.0.0';
+    public const MANIFEST_VERSION = '3.0.0';
 
     /** @var list<string> */
     private const SCHEMAS = [
@@ -23,6 +23,7 @@ final class MeasurementContractRegistry
         'seo.measurement_candidate.v2.schema.json',
         'seo.measurement_output.v2.schema.json',
         'seo.measurement_closeout_receipt.v2.schema.json',
+        'seo.measurement_closeout_receipt.v3.schema.json',
     ];
 
     public function __construct(private readonly SeoRegistryHasher $hasher) {}
@@ -72,10 +73,17 @@ final class MeasurementContractRegistry
         $manifest = [
             'manifest_id' => self::MANIFEST_ID, 'manifest_version' => self::MANIFEST_VERSION,
             'contracts' => $contracts, ...$assets,
-            'historical_manifest' => [
-                'id' => 'seo.measurement_contract_manifest.v1',
-                'path' => 'backend/docs/seo/generated/seo-measurement-contract-manifest.v1.json',
-                'current_authority' => false,
+            'historical_manifests' => [
+                [
+                    'id' => 'seo.measurement_contract_manifest.v1',
+                    'path' => 'backend/docs/seo/generated/seo-measurement-contract-manifest.v1.json',
+                    'current_authority' => false,
+                ],
+                [
+                    'id' => 'seo.measurement_contract_manifest.v2',
+                    'path' => 'backend/docs/seo/generated/seo-measurement-contract-manifest.v2.json',
+                    'current_authority' => false,
+                ],
             ],
             'negative_guarantees' => [
                 'new_role' => false, 'role_registry_changed' => false, 'binding_v2_changed' => false,

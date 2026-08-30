@@ -9,13 +9,15 @@ use App\Services\SeoAgentEvidence\Privacy\SeoPrivateDataScanner;
 use App\Services\SeoIntel\GscDataQualityGate;
 use App\Services\SeoIntel\OpsDashboard\SeoConversionFunnelReadService;
 use App\Services\SeoIntel\OpsDashboard\SeoDashboardApiReadService;
+use App\Services\SeoIntel\PageFamily\PageFamilyPolicyRegistry;
 use App\Services\SeoIntel\SearchToResultFunnelReadModel;
 use Carbon\CarbonImmutable;
+use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Throwable;
 
-final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEvidenceBundleLoader
+final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEvidenceBundleLoader, MeasurementEvidenceDiagnosticLoader
 {
     private const WINDOWS = [7, 28, 90];
 
@@ -26,6 +28,7 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
         private readonly SeoDashboardApiReadService $dashboard,
         private readonly SeoConversionFunnelReadService $conversion,
         private readonly SearchToResultFunnelReadModel $searchToResult,
+        private readonly MeasurementEvidenceHoldReasonResolver $reasons,
     ) {}
 
     public function loadForScope(
@@ -35,78 +38,171 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
         string $locale,
         string $environment,
     ): array {
+        return $this->diagnoseForScope($missionId, $modeId, $pageFamily, $locale, $environment)->bundles();
+    }
+
+    public function diagnoseForScope(
+        string $missionId,
+        string $modeId,
+        string $pageFamily,
+        string $locale,
+        string $environment,
+    ): MeasurementEvidenceLoadResult {
         if (! in_array($environment, ['staging_runtime', 'production_runtime'], true)) {
-            return [];
+            return MeasurementEvidenceLoadResult::make(
+                $modeId,
+                [],
+                'offline_not_loaded',
+                'not_applicable',
+                MeasurementEvidenceLoadResult::OFFLINE_NOT_LOADED,
+            );
         }
 
         try {
-            $bundle = match ($modeId) {
-                'search_measurement' => $this->searchBundle($missionId, $pageFamily, $locale, $environment),
-                'commercial_funnel_cro' => $this->croBundle($missionId, $pageFamily, $locale, $environment),
-                default => null,
+            return match ($modeId) {
+                'search_measurement' => $this->searchResult($missionId, $pageFamily, $locale, $environment),
+                'commercial_funnel_cro' => $this->croResult($missionId, $pageFamily, $locale, $environment),
+                default => MeasurementEvidenceLoadResult::make(
+                    'search_measurement', [], 'unavailable', 'unknown', 'INTERNAL_SAFE_HOLD'
+                ),
             };
         } catch (Throwable) {
-            return [];
+            return MeasurementEvidenceLoadResult::make(
+                $modeId, [], 'unavailable', 'unknown', 'INTERNAL_SAFE_HOLD'
+            );
         }
-
-        return is_array($bundle) ? [$bundle] : [];
     }
 
-    /** @return array<string, mixed>|null */
-    private function searchBundle(string $missionId, string $pageFamily, string $locale, string $environment): ?array
-    {
-        $connection = (string) config('seo_intel.connection', 'seo_intel');
-        $schema = Schema::connection($connection);
-        foreach (['seo_gsc_daily', 'seo_urls'] as $table) {
-            if (! $schema->hasTable($table)) {
-                return null;
-            }
-        }
-        foreach (['mapping_state', 'is_brand_query', 'metadata_json'] as $column) {
-            if (! $schema->hasColumn('seo_gsc_daily', $column)) {
-                return null;
-            }
-        }
-        foreach (['page_family', 'authority_revision', 'is_private_flow'] as $column) {
-            if (! $schema->hasColumn('seo_urls', $column)) {
-                return null;
-            }
+    public function diagnoseForRuntime(
+        string $missionId,
+        string $modeId,
+        string $environment,
+    ): MeasurementEvidenceLoadResult {
+        if (! in_array($environment, ['staging_runtime', 'production_runtime'], true)) {
+            return $this->diagnoseForScope($missionId, $modeId, 'tests', 'en', $environment);
         }
 
-        $rows = DB::connection($connection)->table('seo_gsc_daily as g')
-            ->join('seo_urls as u', 'u.canonical_url_hash', '=', 'g.canonical_url_hash')
-            ->where('u.page_family', $pageFamily)->where('u.locale', $locale)->where('u.is_private_flow', false)
-            ->where('g.source_engine', 'google')->where('g.data_state', 'final')
-            ->where('g.report_date', '>=', now('UTC')->subDays(96)->toDateString())
-            ->get([
-                'g.report_date', 'g.canonical_url_hash', 'g.query_hash', 'g.source_engine',
-                'g.clicks', 'g.impressions', 'g.ctr_ppm', 'g.average_position_milli',
-                'g.is_brand_query', 'g.mapping_state', 'g.metadata_json', 'u.authority_revision',
-            ])->map(fn (object $row): array => $this->normalizeGscRow((array) $row))->all();
+        try {
+            if ($modeId === 'search_measurement' && ! $this->searchSchemaAvailable()) {
+                return MeasurementEvidenceLoadResult::make(
+                    $modeId, [], 'unavailable', 'unknown', 'GSC_SCHEMA_UNAVAILABLE'
+                );
+            }
+            if ($modeId === 'commercial_funnel_cro' && ! $this->croSchemaAvailable()) {
+                return MeasurementEvidenceLoadResult::make(
+                    $modeId, [], 'unavailable', 'unknown', 'CRO_SCHEMA_UNAVAILABLE'
+                );
+            }
+            $scope = $this->runtimeScope();
+            if ($scope === null) {
+                return MeasurementEvidenceLoadResult::make(
+                    $modeId,
+                    [],
+                    'unavailable',
+                    'unknown',
+                    $modeId === 'search_measurement' ? 'GSC_NO_ELIGIBLE_ROWS' : 'CRO_READMODEL_UNHEALTHY',
+                );
+            }
+
+            return $this->diagnoseForScope(
+                $missionId,
+                $modeId,
+                $scope['page_family'],
+                $scope['locale'],
+                $environment,
+            );
+        } catch (Throwable) {
+            return MeasurementEvidenceLoadResult::make(
+                $modeId,
+                [],
+                'unavailable',
+                'unknown',
+                $modeId === 'search_measurement' ? 'GSC_READMODEL_UNHEALTHY' : 'CRO_READMODEL_UNHEALTHY',
+            );
+        }
+    }
+
+    private function searchResult(
+        string $missionId,
+        string $pageFamily,
+        string $locale,
+        string $environment,
+    ): MeasurementEvidenceLoadResult {
+        if (! $this->searchSchemaAvailable()) {
+            return MeasurementEvidenceLoadResult::make(
+                'search_measurement', [], 'unavailable', 'unknown', 'GSC_SCHEMA_UNAVAILABLE'
+            );
+        }
+
+        $connection = (string) config('seo_intel.connection', 'seo_intel');
+        try {
+            $rows = DB::connection($connection)->table('seo_gsc_daily as g')
+                ->join('seo_urls as u', 'u.canonical_url_hash', '=', 'g.canonical_url_hash')
+                ->where('u.page_family', $pageFamily)
+                ->where('u.locale', $locale)
+                ->where('u.is_private_flow', false)
+                ->where('g.source_engine', 'google')
+                ->where('g.data_state', 'final')
+                ->where('g.report_date', '>=', now('UTC')->subDays(96)->toDateString())
+                ->get([
+                    'g.report_date', 'g.canonical_url_hash', 'g.query_hash', 'g.source_engine',
+                    'g.clicks', 'g.impressions', 'g.ctr_ppm', 'g.average_position_milli',
+                    'g.is_brand_query', 'g.mapping_state', 'g.metadata_json', 'u.authority_revision',
+                ])->map(fn (object $row): array => $this->normalizeGscRow((array) $row))->all();
+        } catch (Throwable) {
+            return MeasurementEvidenceLoadResult::make(
+                'search_measurement', [], 'unavailable', 'unknown', 'GSC_READMODEL_UNHEALTHY'
+            );
+        }
         if ($rows === []) {
-            return null;
+            return MeasurementEvidenceLoadResult::make(
+                'search_measurement', [], 'unavailable', 'unknown', 'GSC_NO_ELIGIBLE_ROWS'
+            );
         }
 
         $quality = $this->quality->evaluate($rows);
         $latest = (string) data_get($quality, 'freshness.max_report_date', '');
-        $revisions = array_values(array_unique(array_filter(array_column($rows, 'authority_revision'), static fn (mixed $value): bool => is_string($value) && preg_match('/^[a-f0-9]{64}$/D', $value) === 1)));
-        $mappingFailed = array_filter($rows, static fn (array $row): bool => ($row['mapping_state'] ?? null) !== 'mapped') !== [];
+        $revisions = array_values(array_unique(array_filter(
+            array_column($rows, 'authority_revision'),
+            static fn (mixed $value): bool => is_string($value) && preg_match('/^[a-f0-9]{64}$/D', $value) === 1,
+        )));
+        $mappingFailed = array_filter(
+            $rows,
+            static fn (array $row): bool => ($row['mapping_state'] ?? null) !== 'mapped'
+        ) !== [];
+        try {
+            $latestDate = $latest === '' ? null : CarbonImmutable::parse($latest, 'UTC')->startOfDay();
+        } catch (Throwable) {
+            $latestDate = null;
+        }
+        $windowComplete = $latestDate !== null;
+        $readmodelHealthy = true;
         $windowMetrics = [];
         $computedReadmodels = [];
-        $complete = $latest !== '';
-        $latestDate = $complete ? CarbonImmutable::parse($latest, 'UTC')->startOfDay() : null;
         foreach (self::WINDOWS as $days) {
-            $windowRows = $latestDate === null ? [] : array_values(array_filter($rows, static function (array $row) use ($latestDate, $days): bool {
-                $date = CarbonImmutable::parse((string) $row['report_date'], 'UTC')->startOfDay();
+            $windowRows = $latestDate === null ? [] : array_values(array_filter(
+                $rows,
+                static function (array $row) use ($latestDate, $days): bool {
+                    try {
+                        $date = CarbonImmutable::parse((string) $row['report_date'], 'UTC')->startOfDay();
+                    } catch (Throwable) {
+                        return false;
+                    }
 
-                return $date->betweenIncluded($latestDate->subDays($days - 1), $latestDate);
-            }));
-            $complete = $complete && count(array_unique(array_column($windowRows, 'report_date'))) === $days;
-            $computed = $this->dashboard->searchPerformance(['days' => $days, 'locale' => $locale]);
+                    return $date->betweenIncluded($latestDate->subDays($days - 1), $latestDate);
+                }
+            ));
+            $windowComplete = $windowComplete
+                && count(array_unique(array_column($windowRows, 'report_date'))) === $days;
+            try {
+                $computed = $this->dashboard->searchPerformance(['days' => $days, 'locale' => $locale]);
+            } catch (Throwable) {
+                $computed = [];
+            }
             $familyMetrics = collect((array) data_get($computed, 'breakdowns.page_family', []))
                 ->firstWhere('dimension', $pageFamily);
             if (($computed['measurement_state'] ?? null) !== 'production_healthy' || ! is_array($familyMetrics)) {
-                $complete = false;
+                $readmodelHealthy = false;
             }
             $computedReadmodels[$days] = $computed;
             $windowMetrics[] = [
@@ -114,17 +210,31 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
                 'metrics' => $this->computedGscMetrics(is_array($familyMetrics) ? $familyMetrics : []),
             ];
         }
+
         $lagDays = max(0, (int) data_get($quality, 'freshness.lag_days_required', 3));
         $maxAgeDays = max($lagDays, (int) data_get($quality, 'freshness.max_report_age_days', 10));
-        $fresh = $latestDate !== null
-            && ! $latestDate->greaterThan(now('UTC')->subDays($lagDays)->startOfDay())
-            && ! $latestDate->lessThan(now('UTC')->subDays($maxAgeDays)->startOfDay());
+        $stale = $latestDate === null || $latestDate->lessThan(now('UTC')->subDays($maxAgeDays)->startOfDay());
+        $fresh = ! $stale
+            && ! $latestDate?->greaterThan(now('UTC')->subDays($lagDays)->startOfDay());
         $qualityPassed = ($quality['status'] ?? null) === 'pass';
-        $available = $qualityPassed && $fresh && $complete && ! $mappingFailed && count($revisions) === 1;
+        $reason = $this->reasons->search([
+            'schema_available' => true,
+            'eligible_rows' => true,
+            'stale' => $stale,
+            'quality_passed' => $qualityPassed,
+            'mapping_valid' => ! $mappingFailed,
+            'authority_valid' => count($revisions) === 1,
+            'readmodel_healthy' => $readmodelHealthy,
+            'window_complete' => $windowComplete,
+        ]);
+        $available = $reason === MeasurementEvidenceLoadResult::NONE;
         $authorityRevision = count($revisions) === 1
             ? $revisions[0]
             : hash('sha256', 'measurement:revision-conflict');
-        $allZero = array_sum(array_map(static fn (array $window): int => (int) $window['metrics']['clicks'] + (int) $window['metrics']['impressions'], $windowMetrics)) === 0;
+        $allZero = array_sum(array_map(
+            static fn (array $window): int => (int) $window['metrics']['clicks'] + (int) $window['metrics']['impressions'],
+            $windowMetrics,
+        )) === 0;
         $payload = [
             'windows' => $windowMetrics,
             'branded_non_branded' => $this->computedBrandMetrics((array) data_get($computedReadmodels, '90.breakdowns.brand', [])),
@@ -137,43 +247,78 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
             ],
             'mapping_state' => $mappingFailed ? 'failed' : 'mapped',
             'quality_gate_status' => $qualityPassed ? 'pass' : 'blocked',
-            'window_complete' => $complete,
-            'current_window_readable' => $rows !== [],
+            'window_complete' => $windowComplete,
+            'current_window_readable' => true,
             'valid_measurement_present' => ! $allZero,
             'explicit_zero_proof' => $available && $allZero,
             'all_relevant_values_zero' => $allZero,
         ];
-
         $input = [
             'bundle_id' => 'measurement:gsc:aggregate:v2',
-            'bundle_version' => 2, 'mission_id' => $missionId, 'source_type' => 'gsc_aggregate',
+            'bundle_version' => 2,
+            'mission_id' => $missionId,
+            'source_type' => 'gsc_aggregate',
             'source_ref' => hash('sha256', $environment.'|'.$pageFamily.'|'.$locale.'|'.$latest),
-            'authority_type' => 'measurement_readmodel', 'captured_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
-            'evidence_state' => $available ? 'verified' : 'blocked', 'freshness_state' => $fresh ? 'fresh' : 'stale',
-            'source_capability_state' => $available ? 'available' : 'held', 'retention_class' => 'first_party_aggregate',
-            'page_family' => $pageFamily, 'locale' => $locale,
+            'authority_type' => 'measurement_readmodel',
+            'captured_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
+            'evidence_state' => $available ? 'verified' : 'blocked',
+            'freshness_state' => $fresh ? 'fresh' : 'stale',
+            'source_capability_state' => $available ? 'available' : 'held',
+            'retention_class' => 'first_party_aggregate',
+            'page_family' => $pageFamily,
+            'locale' => $locale,
             'authority_revision' => $authorityRevision,
-            'source_license_class' => 'first_party', 'data_usage_purpose' => 'measurement_review',
-            'egress_decision' => 'not_required', 'lineage_refs' => [], 'payload' => $payload,
+            'source_license_class' => 'first_party',
+            'data_usage_purpose' => 'measurement_review',
+            'egress_decision' => 'not_required',
+            'lineage_refs' => [],
+            'payload' => $payload,
         ];
-        $scan = $this->privacy->scan($input, SeoPrivateDataScanner::BUNDLE_INPUT_HASH_PATHS);
-        if ($scan['private_data_present']) {
-            throw new \InvalidArgumentException('MEASUREMENT_EVIDENCE_PRIVACY_HOLD:'.implode(',', array_keys($scan['category_counts'])));
+        if ($this->privacy->scan($input, SeoPrivateDataScanner::BUNDLE_INPUT_HASH_PATHS)['private_data_present']) {
+            return MeasurementEvidenceLoadResult::make(
+                'search_measurement', [], 'held', $fresh ? 'fresh' : 'stale', 'BUNDLE_PRIVACY_HOLD', $authorityRevision
+            );
+        }
+        try {
+            $bundle = $this->bundles->create($input);
+        } catch (Throwable) {
+            return MeasurementEvidenceLoadResult::make(
+                'search_measurement', [], 'unavailable', 'unknown', 'INTERNAL_SAFE_HOLD', $authorityRevision
+            );
         }
 
-        return $this->bundles->create($input);
+        return MeasurementEvidenceLoadResult::make(
+            'search_measurement',
+            [$bundle],
+            $available ? 'available' : 'held',
+            $fresh ? 'fresh' : 'stale',
+            $reason,
+            $authorityRevision,
+        );
     }
 
-    /** @return array<string, mixed>|null */
-    private function croBundle(string $missionId, string $pageFamily, string $locale, string $environment): ?array
-    {
-        $read = $this->conversion->read(0, ['group_by' => 'url', 'window_days' => 90, 'lang' => $locale], 100);
-        $to = now('UTC')->subDays(3)->toDateString();
-        $from = now('UTC')->subDays(92)->toDateString();
-        $chain = $this->searchToResult->report($from, $to, $pageFamily, 'google');
-        $healthy = ($read['measurement_state'] ?? null) === 'production_healthy'
-            && ($chain['status'] ?? null) === 'pass'
-            && ($chain['read_only'] ?? null) === true;
+    private function croResult(
+        string $missionId,
+        string $pageFamily,
+        string $locale,
+        string $environment,
+    ): MeasurementEvidenceLoadResult {
+        if (! $this->croSchemaAvailable()) {
+            return MeasurementEvidenceLoadResult::make(
+                'commercial_funnel_cro', [], 'unavailable', 'unknown', 'CRO_SCHEMA_UNAVAILABLE'
+            );
+        }
+        try {
+            $read = $this->conversion->read(0, ['group_by' => 'url', 'window_days' => 90, 'lang' => $locale], 100);
+            $to = now('UTC')->subDays(3)->toDateString();
+            $from = now('UTC')->subDays(92)->toDateString();
+            $chain = $this->searchToResult->report($from, $to, $pageFamily, 'google');
+        } catch (Throwable) {
+            return MeasurementEvidenceLoadResult::make(
+                'commercial_funnel_cro', [], 'unavailable', 'unknown', 'CRO_READMODEL_UNHEALTHY'
+            );
+        }
+
         $windowTotals = [];
         foreach (self::WINDOWS as $days) {
             $metrics = data_get($read, 'window_totals.'.(string) $days);
@@ -186,71 +331,188 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
         $mapping = (array) ($chain['product_event_mapping'] ?? []);
         $mappingOk = array_keys($mapping) === ['start_test', 'complete_test', 'view_result'];
         $freshness = (array) ($read['freshness'] ?? []);
-        $fresh = $healthy && is_numeric($freshness['age_hours'] ?? null)
-            && (float) $freshness['age_hours'] <= (float) ($freshness['max_age_hours'] ?? 48);
+        $freshnessKnown = is_numeric($freshness['age_hours'] ?? null);
+        $stale = $freshnessKnown
+            && (float) $freshness['age_hours'] > (float) ($freshness['max_age_hours'] ?? 48);
+        $fresh = $freshnessKnown && ! $stale;
+        $stageCoverage = [
+            'landing' => data_get($read, 'stage_status.search_landing.status') === 'pass',
+            'start' => data_get($read, 'stage_status.test_start.status') === 'pass',
+            'completion' => data_get($read, 'stage_status.test_complete.status') === 'pass',
+            'aggregate_outcome_view' => data_get($read, 'stage_status.result_view.status') === 'pass',
+            'return_public_content' => data_get($read, 'stage_status.return_public_content.status') === 'pass',
+            'cta' => array_key_exists('article_to_test_click_count', (array) ($read['totals'] ?? [])),
+        ];
+        $readHealthy = ($read['measurement_state'] ?? null) === 'production_healthy';
+        $chainIssues = array_values(array_filter((array) ($chain['issues'] ?? []), 'is_string'));
+        $chainMappingFailed = array_intersect($chainIssues, [
+            'url_truth_missing_for_gsc_hash',
+            'page_family_invalid',
+        ]) !== [];
+        $chainHealthy = ($chain['status'] ?? null) === 'pass' && ($chain['read_only'] ?? null) === true;
+        $reason = $this->reasons->cro([
+            'schema_available' => true,
+            'stale' => $stale,
+            'readmodel_healthy' => $readHealthy && ($chainHealthy || $chainMappingFailed),
+            'window_complete' => $complete,
+            'mapping_valid' => $mappingOk && ! $chainMappingFailed,
+            'stage_coverage_complete' => ! in_array(false, $stageCoverage, true),
+        ]);
+        $available = $reason === MeasurementEvidenceLoadResult::NONE;
         $authorityRevision = hash('sha256', json_encode([
-            'mapping' => $mapping, 'refresh' => $freshness['last_successful_refresh_at'] ?? null,
-            'page_family' => $pageFamily, 'locale' => $locale, 'environment' => $environment,
+            'mapping' => $mapping,
+            'refresh' => $freshness['last_successful_refresh_at'] ?? null,
+            'page_family' => $pageFamily,
+            'locale' => $locale,
+            'environment' => $environment,
         ], JSON_THROW_ON_ERROR));
-        $allZero = $complete && array_sum(array_map(static fn (array $window): int => array_sum(array_map('intval', $window['metrics'])), $windowTotals)) === 0;
+        $allZero = $complete && array_sum(array_map(
+            static fn (array $window): int => array_sum(array_map('intval', $window['metrics'])),
+            $windowTotals,
+        )) === 0;
         $payload = [
             'windows' => $windowTotals,
-            'stage_coverage' => [
-                'landing' => isset($read['stage_status']['search_landing']),
-                'start' => isset($read['stage_status']['test_start']),
-                'completion' => isset($read['stage_status']['test_complete']),
-                'aggregate_outcome_view' => isset($read['stage_status']['result_view']),
-                'return_public_content' => isset($read['stage_status']['return_public_content']),
-                'cta' => array_key_exists('article_to_test_click_count', (array) ($read['totals'] ?? [])),
-            ],
+            'stage_coverage' => $stageCoverage,
             'freshness' => [
                 'age_hours' => is_numeric($freshness['age_hours'] ?? null) ? (int) ceil((float) $freshness['age_hours']) : null,
                 'max_age_hours' => max(1, (int) ($freshness['max_age_hours'] ?? 48)),
                 'latest_refresh_status' => $freshness['latest_attempt_status'] ?? null,
             ],
             'revision_hash' => hash('sha256', json_encode($mapping, JSON_THROW_ON_ERROR)),
-            'mapping_state' => $mappingOk ? 'mapped' : 'failed',
-            'quality_gate_status' => $healthy ? 'pass' : 'blocked',
+            'mapping_state' => $mappingOk && ! $chainMappingFailed ? 'mapped' : 'failed',
+            'quality_gate_status' => $readHealthy && $chainHealthy ? 'pass' : 'blocked',
             'window_complete' => $complete,
             'current_window_readable' => $windowTotals !== [],
             'valid_measurement_present' => ! $allZero,
-            'explicit_zero_proof' => $healthy && $complete && $allZero,
+            'explicit_zero_proof' => $available && $allZero,
             'all_relevant_values_zero' => $allZero,
         ];
-        $available = $healthy && $fresh && $complete && $mappingOk
-            && ! in_array(false, $payload['stage_coverage'], true);
-
         $input = [
-            'bundle_id' => 'measurement:funnel:aggregate:v2', 'bundle_version' => 2,
-            'mission_id' => $missionId, 'source_type' => 'public_funnel_aggregate',
+            'bundle_id' => 'measurement:funnel:aggregate:v2',
+            'bundle_version' => 2,
+            'mission_id' => $missionId,
+            'source_type' => 'public_funnel_aggregate',
             'source_ref' => $authorityRevision,
-            'authority_type' => 'measurement_readmodel', 'captured_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
-            'evidence_state' => $available ? 'verified' : 'blocked', 'freshness_state' => $fresh ? 'fresh' : 'stale',
-            'source_capability_state' => $available ? 'available' : 'held', 'retention_class' => 'first_party_aggregate',
-            'page_family' => $pageFamily, 'locale' => $locale, 'authority_revision' => $authorityRevision,
-            'source_license_class' => 'first_party', 'data_usage_purpose' => 'measurement_review',
-            'egress_decision' => 'not_required', 'lineage_refs' => [], 'payload' => $payload,
+            'authority_type' => 'measurement_readmodel',
+            'captured_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
+            'evidence_state' => $available ? 'verified' : 'blocked',
+            'freshness_state' => $fresh ? 'fresh' : 'stale',
+            'source_capability_state' => $available ? 'available' : 'held',
+            'retention_class' => 'first_party_aggregate',
+            'page_family' => $pageFamily,
+            'locale' => $locale,
+            'authority_revision' => $authorityRevision,
+            'source_license_class' => 'first_party',
+            'data_usage_purpose' => 'measurement_review',
+            'egress_decision' => 'not_required',
+            'lineage_refs' => [],
+            'payload' => $payload,
         ];
-        $scan = $this->privacy->scan($input, SeoPrivateDataScanner::BUNDLE_INPUT_HASH_PATHS);
-        if ($scan['private_data_present']) {
-            $unsafeFields = [];
-            foreach ($input as $field => $value) {
-                if ($this->privacy->scan([$field => $value], SeoPrivateDataScanner::BUNDLE_INPUT_HASH_PATHS)['private_data_present']) {
-                    if ($field === 'payload' && is_array($value)) {
-                        foreach ($value as $payloadField => $payloadValue) {
-                            if ($this->privacy->scan(['payload' => [$payloadField => $payloadValue]], SeoPrivateDataScanner::BUNDLE_INPUT_HASH_PATHS)['private_data_present']) {
-                                $unsafeFields[] = 'payload.'.$payloadField;
-                            }
-                        }
-                    } else {
-                        $unsafeFields[] = $field;
-                    }
-                }
-            }
-            throw new \InvalidArgumentException('MEASUREMENT_EVIDENCE_PRIVACY_HOLD:'.implode(',', $unsafeFields));
+        if ($this->privacy->scan($input, SeoPrivateDataScanner::BUNDLE_INPUT_HASH_PATHS)['private_data_present']) {
+            return MeasurementEvidenceLoadResult::make(
+                'commercial_funnel_cro', [], 'held', $fresh ? 'fresh' : 'stale', 'BUNDLE_PRIVACY_HOLD', $authorityRevision
+            );
+        }
+        try {
+            $bundle = $this->bundles->create($input);
+        } catch (Throwable) {
+            return MeasurementEvidenceLoadResult::make(
+                'commercial_funnel_cro', [], 'unavailable', 'unknown', 'INTERNAL_SAFE_HOLD', $authorityRevision
+            );
         }
 
-        return $this->bundles->create($input);
+        return MeasurementEvidenceLoadResult::make(
+            'commercial_funnel_cro',
+            [$bundle],
+            $available ? 'available' : 'held',
+            $fresh ? 'fresh' : 'stale',
+            $reason,
+            $authorityRevision,
+        );
+    }
+
+    /** @return array{page_family:string,locale:string}|null */
+    private function runtimeScope(): ?array
+    {
+        $connection = (string) config('seo_intel.connection', 'seo_intel');
+        $row = DB::connection($connection)->table('seo_gsc_daily as g')
+            ->join('seo_urls as u', 'u.canonical_url_hash', '=', 'g.canonical_url_hash')
+            ->whereIn('u.page_family', PageFamilyPolicyRegistry::PUBLIC_FAMILY_IDS)
+            ->whereIn('u.locale', ['en', 'zh-CN'])
+            ->where('u.is_private_flow', false)
+            ->where('g.source_engine', 'google')
+            ->where('g.data_state', 'final')
+            ->where('g.report_date', '>=', now('UTC')->subDays(96)->toDateString())
+            ->groupBy('u.page_family', 'u.locale')
+            ->orderByDesc(DB::raw('COUNT(DISTINCT g.report_date)'))
+            ->orderBy('u.page_family')
+            ->orderBy('u.locale')
+            ->first(['u.page_family', 'u.locale']);
+        if ($row === null
+            || ! in_array($row->page_family ?? null, PageFamilyPolicyRegistry::PUBLIC_FAMILY_IDS, true)
+            || ! in_array($row->locale ?? null, ['en', 'zh-CN'], true)) {
+            return null;
+        }
+
+        return ['page_family' => (string) $row->page_family, 'locale' => (string) $row->locale];
+    }
+
+    private function searchSchemaAvailable(): bool
+    {
+        try {
+            $schema = Schema::connection((string) config('seo_intel.connection', 'seo_intel'));
+
+            return $this->schemaHas($schema, 'seo_gsc_daily', [
+                'report_date', 'canonical_url_hash', 'query_hash', 'source_engine', 'data_state',
+                'clicks', 'impressions', 'ctr_ppm', 'average_position_milli', 'is_brand_query',
+                'mapping_state', 'metadata_json', 'locale', 'query_type', 'collected_at',
+            ]) && $this->schemaHas($schema, 'seo_urls', [
+                'canonical_url_hash', 'canonical_url', 'locale', 'page_family', 'page_entity_type',
+                'source_authority', 'indexability_state', 'is_private_flow', 'authority_revision',
+            ]);
+        } catch (Throwable) {
+            return false;
+        }
+    }
+
+    private function croSchemaAvailable(): bool
+    {
+        try {
+            $seo = Schema::connection((string) config('seo_intel.connection', 'seo_intel'));
+            $main = Schema::connection((string) config('database.default'));
+
+            return $this->searchSchemaAvailable()
+                && $this->schemaHas($seo, 'seo_event_funnel_daily', [
+                    'report_date', 'canonical_url_hash', 'source_engine', 'traffic_quality', 'environment',
+                    'start_attempt_count', 'submit_attempt_count', 'view_result_count',
+                ])
+                && $this->schemaHas($main, 'analytics_seo_conversion_daily', [
+                    'day', 'org_id', 'url', 'lang', 'page_type', 'source_article', 'target_test',
+                    'scale_id', 'form_id', 'source_url', 'landing_pv_count', 'article_to_test_click_count',
+                    'start_test_count', 'complete_test_count', 'view_result_count',
+                    'return_public_content_count', 'last_refreshed_at',
+                ])
+                && $this->schemaHas($main, 'analytics_seo_conversion_refresh_runs', [
+                    'org_scope_count', 'status', 'trigger_mode', 'completed_at',
+                ]);
+        } catch (Throwable) {
+            return false;
+        }
+    }
+
+    /** @param list<string> $columns */
+    private function schemaHas(Builder $schema, string $table, array $columns): bool
+    {
+        if (! $schema->hasTable($table)) {
+            return false;
+        }
+        foreach ($columns as $column) {
+            if (! $schema->hasColumn($table, $column)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /** @param array<string, mixed> $metrics @return array<string, int> */
@@ -287,7 +549,7 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
             $query->where('authority_revision', $authorityRevision);
         }
 
-        return $query->distinct()->pluck('issue_type')->filter(static fn (mixed $value): bool => is_string($value))->sort()->values()->all();
+        return $query->distinct()->pluck('issue_type')->filter('is_string')->sort()->values()->all();
     }
 
     /** @param array<string, mixed> $metrics @return array<string, int> */

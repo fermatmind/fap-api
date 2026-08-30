@@ -620,6 +620,7 @@ jobs:
             app/Http/Middleware/EnsureSeoCouncilMissionAuthorized.php \
             app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoCouncilMissionController.php \
             app/Providers/SeoCouncilServiceProvider.php \
+            app/Services/SeoIntel/SearchToResultFunnelReadModel.php \
             config/seo_council.php \
             database/migrations/seo_intel/2026_08_29_030000_create_seo_council_runtime_tables.php \
             tests/Feature/SeoIntel/SeoPlatform11DContractsRoutingTest.php \
@@ -631,10 +632,7 @@ jobs:
             tests/Feature/SeoIntel/SeoPlatform11EDependencyContextTest.php \
             tests/Feature/SeoIntel/SeoPlatform11EDiagnosisEvaluationTest.php \
             tests/Feature/SeoIntel/SeoPlatform11ERoutingCloseoutTest.php \
-            tests/Feature/SeoIntel/SeoPlatform11FStateContractsTest.php \
-            tests/Feature/SeoIntel/SeoPlatform11FSearchMeasurementTest.php \
-            tests/Feature/SeoIntel/SeoPlatform11FCommercialFunnelCROTest.php \
-            tests/Feature/SeoIntel/SeoPlatform11FRoutingCloseoutTest.php
+            tests/Feature/SeoIntel/SeoPlatform11F*.php
           php artisan seo:council-closeout --expected-sha="$GITHUB_SHA" --closeout-environment=ci_candidate --json > ../seo-council-orchestration-closeout.json
           jq -e --arg sha "$GITHUB_SHA" '
             .contract_version == "seo.council_closeout.v2"
@@ -699,7 +697,7 @@ jobs:
             and .technical_diagnosis.external_calls == 0 and .technical_diagnosis.production_permissions == 0
             and .technical_diagnosis.execution_allowed == false
             and ."SEO-PLATFORM-11F" == "HOLD" and .ready_for_11G == false
-            and .measurement_review.receipt_version == "seo.measurement_closeout.v2"
+            and .measurement_review.receipt_version == "seo.measurement_closeout.v3"
             and .measurement_review.environment == "ci_candidate"
             and .measurement_review.closeout_state == "OFFLINE_EVAL_READY"
             and .measurement_review.mode_state == "OFFLINE_EVAL_READY"
@@ -709,13 +707,24 @@ jobs:
             and .measurement_review.evidence_source_state == "offline_not_loaded"
             and .measurement_review.evidence_freshness_state == "not_applicable"
             and (.measurement_review.evidence_authority_revision | test("^[a-f0-9]{64}$"))
+            and .measurement_review.search_source_state == "offline_not_loaded"
+            and .measurement_review.search_freshness_state == "not_applicable"
+            and .measurement_review.search_bundle_verification == "not_applicable"
+            and .measurement_review.search_context_status == "NOT_APPLICABLE"
+            and .measurement_review.search_hold_reason == "OFFLINE_NOT_LOADED"
+            and .measurement_review.cro_source_state == "offline_not_loaded"
+            and .measurement_review.cro_freshness_state == "not_applicable"
+            and .measurement_review.cro_bundle_verification == "not_applicable"
+            and .measurement_review.cro_context_status == "NOT_APPLICABLE"
+            and .measurement_review.cro_hold_reason == "OFFLINE_NOT_LOADED"
             and ((.measurement_review | [
               .real_evidence_bundle_bypass_count, .bundle_verifier_bypass_count, .context_builder_bypass_count,
               .request_pii_bypass_count, .evidence_pii_bypass_count, .metadata_pii_bypass_count,
               .output_pii_bypass_count, .private_url_leak_count, .cro_causal_overclaim_count,
               .source_conflict_bypass_count, .schema_validation_bypass_count, .orchestrator_runner_bypass_count,
               .direct_mode_entry_bypass_count, .policy_bypass_count, .role_expansion_bypass_count,
-              .write_attempt_count, .model_calls, .tool_calls, .external_calls, .cms_writes,
+              .write_attempt_count, .all_privacy_bypass, .source_conflict_bypass, .causal_overclaim, .orchestrator_bypass,
+              .model_calls, .tool_calls, .external_calls, .cms_writes,
               .url_truth_writes, .search_writes, .business_writes, .production_permissions
             ]) | all(. == 0))
             and .measurement_review.model_calls == 0 and .measurement_review.tool_calls == 0
@@ -952,7 +961,7 @@ jobs:
               and .technical_diagnosis.external_calls == 0 and .technical_diagnosis.production_permissions == 0
               and .technical_diagnosis.execution_allowed == false
               and ."SEO-PLATFORM-11F" == "HOLD" and .ready_for_11G == false
-              and .measurement_review.receipt_version == "seo.measurement_closeout.v2"
+              and .measurement_review.receipt_version == "seo.measurement_closeout.v3"
               and .measurement_review.environment == "ci_candidate"
               and .measurement_review.closeout_state == "OFFLINE_EVAL_READY"
               and .measurement_review.mode_state == "OFFLINE_EVAL_READY"
@@ -962,13 +971,24 @@ jobs:
               and .measurement_review.evidence_source_state == "offline_not_loaded"
               and .measurement_review.evidence_freshness_state == "not_applicable"
               and (.measurement_review.evidence_authority_revision | test("^[a-f0-9]{64}$"))
+              and .measurement_review.search_source_state == "offline_not_loaded"
+              and .measurement_review.search_freshness_state == "not_applicable"
+              and .measurement_review.search_bundle_verification == "not_applicable"
+              and .measurement_review.search_context_status == "NOT_APPLICABLE"
+              and .measurement_review.search_hold_reason == "OFFLINE_NOT_LOADED"
+              and .measurement_review.cro_source_state == "offline_not_loaded"
+              and .measurement_review.cro_freshness_state == "not_applicable"
+              and .measurement_review.cro_bundle_verification == "not_applicable"
+              and .measurement_review.cro_context_status == "NOT_APPLICABLE"
+              and .measurement_review.cro_hold_reason == "OFFLINE_NOT_LOADED"
               and ((.measurement_review | [
                 .real_evidence_bundle_bypass_count, .bundle_verifier_bypass_count, .context_builder_bypass_count,
                 .request_pii_bypass_count, .evidence_pii_bypass_count, .metadata_pii_bypass_count,
                 .output_pii_bypass_count, .private_url_leak_count, .cro_causal_overclaim_count,
                 .source_conflict_bypass_count, .schema_validation_bypass_count, .orchestrator_runner_bypass_count,
                 .direct_mode_entry_bypass_count, .policy_bypass_count, .role_expansion_bypass_count,
-                .write_attempt_count, .model_calls, .tool_calls, .external_calls, .cms_writes,
+                .write_attempt_count, .all_privacy_bypass, .source_conflict_bypass, .causal_overclaim, .orchestrator_bypass,
+                .model_calls, .tool_calls, .external_calls, .cms_writes,
                 .url_truth_writes, .search_writes, .business_writes, .production_permissions
               ]) | all(. == 0))
               and .measurement_review.model_calls == 0 and .measurement_review.tool_calls == 0

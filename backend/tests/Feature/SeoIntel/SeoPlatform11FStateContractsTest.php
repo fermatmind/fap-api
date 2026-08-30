@@ -12,15 +12,15 @@ use Tests\TestCase;
 
 final class SeoPlatform11FStateContractsTest extends TestCase
 {
-    public function test_v2_is_current_authority_and_v1_assets_remain_byte_stable(): void
+    public function test_v3_is_current_authority_and_v1_v2_assets_remain_byte_stable(): void
     {
         $registry = app(MeasurementContractRegistry::class);
         $manifest = $registry->manifest();
-        $generated = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-measurement-contract-manifest.v2.json')), true, 512, JSON_THROW_ON_ERROR);
+        $generated = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-measurement-contract-manifest.v3.json')), true, 512, JSON_THROW_ON_ERROR);
 
-        $this->assertSame('seo.measurement_contract_manifest.v2', $manifest['manifest_id']);
-        $this->assertSame('2.0.0', $manifest['manifest_version']);
-        $this->assertCount(8, $manifest['contracts']);
+        $this->assertSame('seo.measurement_contract_manifest.v3', $manifest['manifest_id']);
+        $this->assertSame('3.0.0', $manifest['manifest_version']);
+        $this->assertCount(9, $manifest['contracts']);
         $this->assertTrue($registry->verify($generated));
         foreach ($manifest['contracts'] as $contract) {
             $schema = $registry->schema($contract['id']);
@@ -28,6 +28,8 @@ final class SeoPlatform11FStateContractsTest extends TestCase
             $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $contract['hash']);
         }
         $this->assertSame('4d9629ba11917597d5400c14d206a8996fcb1af389186e41d5cd9d38c65da037', hash_file('sha256', base_path('docs/seo/generated/seo-measurement-contract-manifest.v1.json')));
+        $this->assertSame('bcacaf18906553010e91dde49292759b447f1507741a1b5d39e0fbe4cdd6eeb7', hash_file('sha256', base_path('docs/seo/generated/seo-measurement-contract-manifest.v2.json')));
+        $this->assertSame('2882f83d0631dca4df8a0f11fc2cfeb7fa3405bbedfc615ed71950c0f2356c2a', hash_file('sha256', resource_path('seo-agent/council/measurement/schemas/seo.measurement_closeout_receipt.v2.schema.json')));
         $this->assertSame('8093dcddc683716d0fd57ccd494c364909da2e565a83fe37b844b0801171bd3b', hash_file('sha256', resource_path('seo-agent/council/measurement/seo.search_measurement_mode.v1.json')));
         $runtime = app(MeasurementModeRegistry::class)->capabilitySnapshot();
         $this->assertSame('OFFLINE_EVAL_READY', $runtime['mode_state']);

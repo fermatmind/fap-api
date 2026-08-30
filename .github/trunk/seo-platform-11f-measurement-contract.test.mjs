@@ -15,9 +15,12 @@ test("11F extends the permanent exact-SHA control plane with offline-eval and ru
     assert.match(source, /execution_allowed/);
   }
   assert.match(ci, /SeoPlatform11F\*\.php/);
-  assert.match(exporter, /seo-measurement-contract-manifest\.v2\.json/);
-  assert.match(ci, /seo\.measurement_closeout\.v2/);
-  assert.match(deploy, /evidence_source_state/);
+  assert.match(exporter, /seo-measurement-contract-manifest\.v3\.json/);
+  assert.match(ci, /seo\.measurement_closeout\.v3/);
+  assert.match(deploy, /search_source_state/);
+  assert.match(deploy, /cro_source_state/);
+  assert.match(deploy, /search_hold_reason/);
+  assert.match(deploy, /cro_hold_reason/);
   assert.match(deploy, /OFFLINE_EVAL_READY/);
   assert.match(deploy, /STAGING_READY/);
   assert.match(deploy, /CLOSED/);
@@ -32,4 +35,20 @@ test("11F receipts remain zero-call zero-write and never add a workflow", () => 
     assert.match(source, /cms_writes/);
     assert.match(source, /search_writes/);
   }
+  for (const field of ["all_privacy_bypass", "source_conflict_bypass", "causal_overclaim", "orchestrator_bypass"]) {
+    assert.match(ci, new RegExp(field));
+    assert.match(deploy, new RegExp(field));
+    assert.match(deployer, new RegExp(field));
+  }
+});
+
+test("11F deployment diagnostics expose only reason enums, booleans, and hashes", () => {
+  const start = deployer.indexOf('$measurementDiagnostic = [');
+  const end = deployer.indexOf('fwrite(STDERR, "SEO Council safe measurement diagnostic:', start);
+  assert.ok(start > 0 && end > start);
+  const diagnostic = deployer.slice(start, end);
+  assert.match(diagnostic, /GSC_SCHEMA_UNAVAILABLE/);
+  assert.match(diagnostic, /CRO_STAGE_COVERAGE_INCOMPLETE/);
+  assert.match(diagnostic, /INTERNAL_SAFE_HOLD/);
+  assert.doesNotMatch(diagnostic, /getMessage|DB_HOST|DB_PORT|DB_DATABASE|canonical_url|query_hash|source_ref|payload|token|credential/i);
 });

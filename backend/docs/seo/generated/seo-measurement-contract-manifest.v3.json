@@ -1,0 +1,125 @@
+{
+    "manifest_id": "seo.measurement_contract_manifest.v3",
+    "manifest_version": "3.0.0",
+    "contracts": [
+        {
+            "id": "seo.measurement_request.v2",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/council/measurement/schemas/seo.measurement_request.v2.schema.json",
+            "hash": "0074b2fd117a818eb50f1a0fe552fdfbb26fc414f0fb5cba1c0f8c07d3d4dc1d"
+        },
+        {
+            "id": "seo.measurement_evidence_context.v2",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/council/measurement/schemas/seo.measurement_evidence_context.v2.schema.json",
+            "hash": "e107597eca0deffecb4a56636279fa6d2dc1d0999c540021eb1c09255dcdffb3"
+        },
+        {
+            "id": "seo.source_capability_decision.v2",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/council/measurement/schemas/seo.source_capability_decision.v2.schema.json",
+            "hash": "8baebf2a3dd48dca832a3a75412af1db54a76cfb448013fc788749d863db2533"
+        },
+        {
+            "id": "seo.measurement_state_decision.v2",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/council/measurement/schemas/seo.measurement_state_decision.v2.schema.json",
+            "hash": "c49c5fddbe008733f449f7ea039acfe8d7f01fbda0f562cbe9132015e31bd532"
+        },
+        {
+            "id": "seo.measurement_finding.v2",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/council/measurement/schemas/seo.measurement_finding.v2.schema.json",
+            "hash": "c9fb83fe91f4805ed8959c4bd50b2ee4a4a7327debf45232ef4c0704c234f030"
+        },
+        {
+            "id": "seo.measurement_candidate.v2",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/council/measurement/schemas/seo.measurement_candidate.v2.schema.json",
+            "hash": "4925e04757d4c946869272f36f65ff8f3e5357e9d1f78ae67ed7b9c218d866e5"
+        },
+        {
+            "id": "seo.measurement_output.v2",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/council/measurement/schemas/seo.measurement_output.v2.schema.json",
+            "hash": "37f4c4f3fb3698a3b9041cbb4edcc8172aadb2c8d8445482a780852bb2de8bd5"
+        },
+        {
+            "id": "seo.measurement_closeout_receipt.v2",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/council/measurement/schemas/seo.measurement_closeout_receipt.v2.schema.json",
+            "hash": "9f106a0c50cbcf1059984b79cbacc8b6d521d30cfede142a7b9eac122c940580"
+        },
+        {
+            "id": "seo.measurement_closeout_receipt.v3",
+            "version": "3.0.0",
+            "path": "backend/resources/seo-agent/council/measurement/schemas/seo.measurement_closeout_receipt.v3.schema.json",
+            "hash": "174a534eb2a6bcd9a0fcc6d50c260556c0f186902f523f5738f69a983c12303f"
+        }
+    ],
+    "search_mode": {
+        "id": "search_measurement",
+        "version": "2.0.0",
+        "path": "backend/resources/seo-agent/council/measurement/seo.search_measurement_mode.v2.json",
+        "hash": "cd484460e33abf7fdd40331865ff73617b34af95c8b5f0f59ad818c141c96dfb"
+    },
+    "search_policy": {
+        "id": "seo.search_measurement_policy.v2",
+        "version": "2.0.0",
+        "path": "backend/resources/seo-agent/council/measurement/seo.search_measurement_policy.v2.json",
+        "hash": "bf878c2dc436d9a41aeb0b7257fa9edda64d5de8035beb81d4f88c7d0cae2c4d"
+    },
+    "cro_mode": {
+        "id": "commercial_funnel_cro",
+        "version": "2.0.0",
+        "path": "backend/resources/seo-agent/council/measurement/seo.commercial_funnel_cro_mode.v2.json",
+        "hash": "e66ae650ceb9d3cb2bd5f0822a15d8f43d35c553b984026f9cf2e63f4ec4ad89"
+    },
+    "cro_policy": {
+        "id": "seo.commercial_funnel_cro_policy.v2",
+        "version": "2.0.0",
+        "path": "backend/resources/seo-agent/council/measurement/seo.commercial_funnel_cro_policy.v2.json",
+        "hash": "459ae9309caaec9b8979e303fa9e8cc5a23e5b37832fbbd07bfc08738214ca6a"
+    },
+    "fixtures": {
+        "id": "seo.measurement_fixtures.v2",
+        "version": "2.0.0",
+        "path": "backend/resources/seo-agent/council/measurement/fixtures/seo.measurement_fixtures.v2.json",
+        "hash": "dbecb0b8f1037c7189e96b1078e7abbc30ab229bc6a9bc2d35675af6f8b89ceb"
+    },
+    "search_prompt": {
+        "id": "seo.search_measurement.prompt.v2",
+        "version": "2.0.0",
+        "path": "backend/resources/seo-agent/council/measurement/seo.search_measurement.prompt.v2.md",
+        "hash": "a14c89c08b0ae27bd9c8d04f6ba39d61b9ba8a5edc3a5ba3312ada31c351e6d0"
+    },
+    "cro_prompt": {
+        "id": "seo.commercial_funnel_cro.prompt.v2",
+        "version": "2.0.0",
+        "path": "backend/resources/seo-agent/council/measurement/seo.commercial_funnel_cro.prompt.v2.md",
+        "hash": "900bc5305e28dee77945c83099cd37d4081b322ee57eb9d4492d6a0dbbe5ebbd"
+    },
+    "historical_manifests": [
+        {
+            "id": "seo.measurement_contract_manifest.v1",
+            "path": "backend/docs/seo/generated/seo-measurement-contract-manifest.v1.json",
+            "current_authority": false
+        },
+        {
+            "id": "seo.measurement_contract_manifest.v2",
+            "path": "backend/docs/seo/generated/seo-measurement-contract-manifest.v2.json",
+            "current_authority": false
+        }
+    ],
+    "negative_guarantees": {
+        "new_role": false,
+        "role_registry_changed": false,
+        "binding_v2_changed": false,
+        "new_orchestrator": false,
+        "model_calls": 0,
+        "tool_calls": 0,
+        "external_calls": 0,
+        "execution_allowed": false
+    },
+    "manifest_hash": "38d4276a8f3d064b01e3e3371309a5e1e5f6760af38ba870547208fde57a72ec"
+}

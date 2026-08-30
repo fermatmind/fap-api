@@ -9,24 +9,28 @@ use App\Services\SeoCouncil\Measurement\MeasurementActivityLedger;
 use App\Services\SeoCouncil\Measurement\MeasurementCloseoutBuilder;
 use App\Services\SeoCouncil\Measurement\MeasurementContractValidator;
 use App\Services\SeoCouncil\Measurement\MeasurementEvidenceBundleLoader;
+use App\Services\SeoCouncil\Measurement\MeasurementEvidenceDiagnosticLoader;
+use App\Services\SeoCouncil\Measurement\MeasurementEvidenceLoadResult;
 use App\Services\SeoCouncil\TechnicalDiagnosis\TechnicalDiagnosisDependencyBindingSource;
 use Tests\TestCase;
 
 final class SeoPlatform11FRoutingCloseoutTest extends TestCase
 {
-    public function test_v2_candidate_receipt_is_hash_bound_zero_permission_and_not_a_production_close(): void
+    public function test_v3_candidate_receipt_is_hash_bound_zero_permission_and_not_a_production_close(): void
     {
         $sha = str_repeat('a', 40);
         $builder = app(MeasurementCloseoutBuilder::class);
         $receipt = $builder->build($sha, 'ci_candidate', $sha);
 
-        $this->assertSame('seo.measurement_closeout.v2', $receipt['receipt_version']);
+        $this->assertSame('seo.measurement_closeout.v3', $receipt['receipt_version']);
         $this->assertSame('OFFLINE_EVAL_READY', $receipt['closeout_state']);
         $this->assertSame('OFFLINE_EVAL_READY', $receipt['mode_state']);
         $this->assertSame('HOLD', $receipt['SEO-PLATFORM-11F']);
         $this->assertFalse($receipt['ready_for_11G']);
         $this->assertFalse($receipt['production_execution_enabled']);
         $this->assertFalse($receipt['execution_allowed']);
+        $this->assertSame('OFFLINE_NOT_LOADED', $receipt['search_hold_reason']);
+        $this->assertSame('OFFLINE_NOT_LOADED', $receipt['cro_hold_reason']);
         foreach (MeasurementContractValidator::zeroMetricFields() as $field) {
             $this->assertSame(0, $receipt[$field], $field);
         }
@@ -52,9 +56,19 @@ final class SeoPlatform11FRoutingCloseoutTest extends TestCase
     {
         $sha = str_repeat('a', 40);
         $this->bindRuntimeDependencies();
-        $this->app->instance(MeasurementEvidenceBundleLoader::class, new class implements MeasurementEvidenceBundleLoader
+        $loader = new class implements MeasurementEvidenceBundleLoader, MeasurementEvidenceDiagnosticLoader
         {
             public function loadForScope(string $missionId, string $modeId, string $pageFamily, string $locale, string $environment): array
+            {
+                return $this->diagnoseForScope($missionId, $modeId, $pageFamily, $locale, $environment)->bundles();
+            }
+
+            public function diagnoseForRuntime(string $missionId, string $modeId, string $environment): MeasurementEvidenceLoadResult
+            {
+                return $this->diagnoseForScope($missionId, $modeId, 'tests', 'en', $environment);
+            }
+
+            public function diagnoseForScope(string $missionId, string $modeId, string $pageFamily, string $locale, string $environment): MeasurementEvidenceLoadResult
             {
                 $sourceType = $modeId === 'search_measurement' ? 'gsc_aggregate' : 'public_funnel_aggregate';
                 $revision = hash('sha256', $modeId.'|'.$environment);
@@ -91,7 +105,7 @@ final class SeoPlatform11FRoutingCloseoutTest extends TestCase
                     'verified_facts' => [], 'associations' => [], 'hypotheses' => [], 'unknowns' => [],
                 ];
 
-                return [app(SeoEvidenceBundleFactory::class)->create([
+                $bundle = app(SeoEvidenceBundleFactory::class)->create([
                     'bundle_id' => 'bundle:11f:'.$modeId, 'bundle_version' => 2, 'mission_id' => $missionId,
                     'source_type' => $sourceType, 'source_ref' => $revision, 'authority_type' => 'measurement_readmodel',
                     'captured_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'), 'evidence_state' => 'verified',
@@ -100,9 +114,15 @@ final class SeoPlatform11FRoutingCloseoutTest extends TestCase
                     'authority_revision' => $revision, 'source_license_class' => 'first_party',
                     'data_usage_purpose' => 'measurement_review', 'egress_decision' => 'not_required',
                     'lineage_refs' => [], 'payload' => $payload,
-                ])];
+                ]);
+
+                return MeasurementEvidenceLoadResult::make(
+                    $modeId, [$bundle], 'available', 'fresh', MeasurementEvidenceLoadResult::NONE, $revision
+                );
             }
-        });
+        };
+        $this->app->instance(MeasurementEvidenceBundleLoader::class, $loader);
+        $this->app->instance(MeasurementEvidenceDiagnosticLoader::class, $loader);
         $builder = app(MeasurementCloseoutBuilder::class);
         $staging = $builder->build($sha, 'staging_runtime', $sha);
         $production = $builder->build($sha, 'production_runtime', $sha);
@@ -114,6 +134,10 @@ final class SeoPlatform11FRoutingCloseoutTest extends TestCase
         $this->assertTrue($production['ready_for_11G']);
         $this->assertSame('available', $production['evidence_source_state']);
         $this->assertSame('fresh', $production['evidence_freshness_state']);
+        $this->assertSame('NONE', $production['search_hold_reason']);
+        $this->assertSame('NONE', $production['cro_hold_reason']);
+        $this->assertSame('valid', $production['search_bundle_verification']);
+        $this->assertSame('valid', $production['cro_bundle_verification']);
         $this->assertTrue($builder->verify($production, $sha, 'production_runtime'));
 
         $wrongActive = $builder->build($sha, 'production_runtime', str_repeat('b', 40));
@@ -133,6 +157,33 @@ final class SeoPlatform11FRoutingCloseoutTest extends TestCase
             $this->assertSame('DEPENDENCY_HOLD', $receipt['closeout_state'], $activity);
             $this->assertSame('HOLD', $receipt['SEO-PLATFORM-11F'], $activity);
         }
+    }
+
+    public function test_search_and_cro_holds_are_recorded_independently_without_masking(): void
+    {
+        $this->bindRuntimeDependencies();
+        $this->app->instance(MeasurementEvidenceDiagnosticLoader::class, new class implements MeasurementEvidenceDiagnosticLoader
+        {
+            public function diagnoseForRuntime(string $missionId, string $modeId, string $environment): MeasurementEvidenceLoadResult
+            {
+                return $modeId === 'search_measurement'
+                    ? MeasurementEvidenceLoadResult::make($modeId, [], 'held', 'stale', 'GSC_STALE')
+                    : MeasurementEvidenceLoadResult::make($modeId, [], 'unavailable', 'unknown', 'CRO_SCHEMA_UNAVAILABLE');
+            }
+
+            public function diagnoseForScope(string $missionId, string $modeId, string $pageFamily, string $locale, string $environment): MeasurementEvidenceLoadResult
+            {
+                return $this->diagnoseForRuntime($missionId, $modeId, $environment);
+            }
+        });
+
+        $receipt = app(MeasurementCloseoutBuilder::class)->build(str_repeat('a', 40), 'staging_runtime', str_repeat('a', 40));
+
+        $this->assertSame('GSC_STALE', $receipt['search_hold_reason']);
+        $this->assertSame('CRO_SCHEMA_UNAVAILABLE', $receipt['cro_hold_reason']);
+        $this->assertSame('stale', $receipt['search_freshness_state']);
+        $this->assertSame('unknown', $receipt['cro_freshness_state']);
+        $this->assertSame('DEPENDENCY_HOLD', $receipt['closeout_state']);
     }
 
     private function bindRuntimeDependencies(): void
