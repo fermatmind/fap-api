@@ -1,0 +1,335 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-5/instincts/one-to-one",
+    "entity_key": "type-5/one-to-one",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-5/instincts/one-to-one"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-5/instincts/one-to-one"
+      },
+      "canonical_path": "/en/personality/enneagram/type-5/instincts/one-to-one",
+      "code": "type-5/one-to-one",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-5/one-to-one",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Confidentiality, mentorship, shared expertise, crisis, therapy, safety, or a rare opportunity may explain a deep conversation. Compare repeated choices with consent and power matched.",
+          "question": "Does one intense conversation prove one-to-one Type Five?"
+        },
+        {
+          "answer": "A supervisor, therapist, mentor, partner, or gatekeeper changes what can safely be disclosed. Consent and the ability to leave determine whether selectivity reflects choice or constraint.",
+          "question": "Why must power and consent be part of the comparison?"
+        },
+        {
+          "answer": "Comparable depth across several safe relationships, transparent group support, easy changes of confidant, and comfortable refusal of intensity should reduce confidence in the subtype account.",
+          "question": "What counterexample weakens the focused-trust hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-5/instincts/one-to-one",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-5/one-to-one",
+        "x-default": "/en/personality/enneagram/type-5/instincts/one-to-one",
+        "zh-CN": "/zh/personality/enneagram/type-5/instincts/one-to-one"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-5",
+          "label": "core_type:type-5",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-5"
+        },
+        {
+          "href": "/en/personality/enneagram/type-5/instincts/self-preservation",
+          "label": "instinctual_subtype:type-5/self-preservation",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-5/self-preservation"
+        },
+        {
+          "href": "/en/personality/enneagram/type-5/instincts/social",
+          "label": "instinctual_subtype:type-5/social",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-5/social"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "Within a Type Five hypothesis, one-to-one may emphasize opening substantial thought or feeling through a carefully chosen relationship. Selectivity is an observation to compare, not proof of hidden intensity or a fixed bond style.",
+          "key": "traditional_hypothesis",
+          "title": "Describe focused trust as a secondary hypothesis"
+        },
+        {
+          "body_md": "Use two similarly private topics and compare a trusted peer with another safe person after matching confidentiality, consent, power, and time known. Ask what changes when the same person controls pace and can decline.",
+          "key": "matched_comparison",
+          "title": "Compare disclosure with equal consent and power"
+        },
+        {
+          "body_md": "The one-to-one label organizes observations about focused trust and disclosure; it is not evidence about bodily mechanisms, neurological wiring, attraction biology, or an innate pairing system.",
+          "key": "instinct_boundary",
+          "title": "Reject biological or neurological explanations"
+        },
+        {
+          "body_md": "A person may be socially warm, maintain several close relationships, or share little in an intense conversation. Breadth and depth can coexist, so neither exclusivity nor visible intensity is required.",
+          "key": "countertype_variation",
+          "title": "Allow broad warmth and ordinary boundaries"
+        },
+        {
+          "body_md": "Therapy, supervision, mentorship, research collaboration, minority safety, trauma history, family privacy, cultural etiquette, and unequal power can all narrow disclosure to one person. Consent must remain revocable.",
+          "key": "alternative_environment",
+          "title": "Audit confidentiality, mentorship, and safety"
+        },
+        {
+          "body_md": "Confidence should fall when the person shares comparable depth across several safe relationships, uses transparent group support, changes confidants without identity threat, or declines intensity while preserving trust.",
+          "key": "counterexample",
+          "title": "Use safe plural relationships as a challenge"
+        },
+        {
+          "body_md": "A single instrument and sample cannot establish universal subtype ontology or cross-cultural equivalence. This hypothesis cannot predict compatibility, loyalty, intimacy, or relationship outcomes.",
+          "key": "evidence_boundary",
+          "title": "Keep trust language local and non-predictive"
+        },
+        {
+          "body_md": "Duration: 5\n\nContext: Across five days, select two private conversations and one group-support event with different relationship roles.\n\nObservable signal: Record confidentiality, invitation, consent, power difference, time known, topic depth, pace control, and ability to stop.\n\nPage-specific signal: Compare similarly private topics only after safety, consent, and power are matched as closely as possible.\n\nAlternative explanation: Check mentorship, therapy, shared expertise, attachment norms, family privacy, culture, trauma safety, and role duty.\n\nReflection prompt: Identify one plural or group relationship that supports depth and use it to test the focused-trust hypothesis.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Check mentorship, therapy, shared expertise, attachment norms, family privacy, culture, trauma safety, and role duty.",
+            "context": "Across five days, select two private conversations and one group-support event with different relationship roles.",
+            "duration_days": 5,
+            "observable_signal": "Record confidentiality, invitation, consent, power difference, time known, topic depth, pace control, and ability to stop.",
+            "page_specific_signal": "Compare similarly private topics only after safety, consent, and power are matched as closely as possible.",
+            "reflection_prompt": "Identify one plural or group relationship that supports depth and use it to test the focused-trust hypothesis."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "Type Five one-to-one is a traditional subtype hypothesis about selective deep disclosure, focused trust, and exchanging an inner world with a particular person. Intense conversation, mentorship, confidentiality, or a small circle does not establish subtype because safety, attachment norms, role boundaries, consent, power, and shared expertise may shape the same pattern.",
+        "title": "Type Five one-to-one: a selective depth and trusted disclosure hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-5/instincts/one-to-one",
+      "source_hash": "6104956a6179702e3952e03ffa6f3b115c8c54db7c08ef4f5ab33d5ed5c8246f",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "Type Five one-to-one is a traditional subtype hypothesis about selective deep disclosure, focused trust, and exchanging an inner world with a particular person. Intense conversation, mentorship, confidentiality, or a small circle does not establish subtype because safety, attachment norms, role boundaries, consent, power, and shared expertise may shape the same pattern.",
+      "title": "Type Five one-to-one: a selective depth and trusted disclosure hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "0c8cc591e3fe03dd4442e3bc601c7a8234502bbbde08dcc44d55ac76a2c19b86"
+}

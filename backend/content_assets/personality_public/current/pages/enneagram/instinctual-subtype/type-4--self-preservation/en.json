@@ -1,0 +1,335 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-4/instincts/self-preservation",
+    "entity_key": "type-4/self-preservation",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-4/instincts/self-preservation"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-4/instincts/self-preservation"
+      },
+      "canonical_path": "/en/personality/enneagram/type-4/instincts/self-preservation",
+      "code": "type-4/self-preservation",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-4/self-preservation",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Duty, money, safety, discrimination, or limited support may require endurance. Compare meaning attention under matched strain and safer conditions.",
+          "question": "Does enduring hardship establish self-preservation Type Four?"
+        },
+        {
+          "answer": "A person cannot be interpreted as choosing restraint when asking for help carries punishment, cost, or no realistic response. Power and resources belong in the comparison.",
+          "question": "Why record whether help is genuinely available?"
+        },
+        {
+          "answer": "Restraint that vanishes in safety, effort with no recurring personal meaning, or easy acceptance of support without identity concern should weaken it.",
+          "question": "What weakens the contained-meaning hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-4/instincts/self-preservation",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-4/self-preservation",
+        "x-default": "/en/personality/enneagram/type-4/instincts/self-preservation",
+        "zh-CN": "/zh/personality/enneagram/type-4/instincts/self-preservation"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-4",
+          "label": "core_type:type-4",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-4"
+        },
+        {
+          "href": "/en/personality/enneagram/type-4/instincts/social",
+          "label": "instinctual_subtype:type-4/social",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-4/social"
+        },
+        {
+          "href": "/en/personality/enneagram/type-4/instincts/one-to-one",
+          "label": "instinctual_subtype:type-4/one-to-one",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-4/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "The traditional description proposes that Type Four meaning may be carried through effort and restraint rather than overt expression. It is a prompt, not an explanation of why someone endures.",
+          "key": "traditional_hypothesis",
+          "title": "Treat contained effort as a traditional hypothesis"
+        },
+        {
+          "body_md": "Compare similar difficult tasks in a safe voluntary setting and a setting where disclosure has costs. Record effort, meaning, help-seeking, available choice, and what changes when strain eases.",
+          "key": "matched_comparison",
+          "title": "Match strain while changing disclosure safety"
+        },
+        {
+          "body_md": "The label organizes observations about practical strain, continuity, and expression. It is not evidence about bodily mechanisms, a biological category, or fixed tolerance.",
+          "key": "instinct_boundary",
+          "title": "Keep self-preservation language non-mechanistic"
+        },
+        {
+          "body_md": "Personally significant struggle may be kept private or converted into dependable action. That variation must be tested against necessity, learned restraint, and cultural expectations.",
+          "key": "countertype_variation",
+          "title": "Allow restrained expression to differ from the stereotype"
+        },
+        {
+          "body_md": "Caregiving, poverty, discrimination, unsafe workplaces, migration, and lack of support can make endurance necessary. Record whether refusal and help are genuinely available.",
+          "key": "alternative_environment",
+          "title": "Test duty, money, and safety"
+        },
+        {
+          "body_md": "The hypothesis weakens when contained expression disappears as soon as safety improves, effort has no recurring personal meaning, or support is readily accepted without identity concern.",
+          "key": "counterexample",
+          "title": "Use safer conditions and accepted help as tests"
+        },
+        {
+          "body_md": "Evidence tied to one instrument cannot establish a universal subtype. This page cannot predict resilience, health, hardship, work capacity, or coping outcomes.",
+          "key": "evidence_boundary",
+          "title": "Keep endurance observations non-predictive"
+        },
+        {
+          "body_md": "Duration: 5\n\nContext: Choose two difficult tasks with similar stakes but different disclosure safety, plus one period when strain eases.\n\nObservable signal: Record effort, practical consequence, personal meaning, help available, refusal cost, disclosure, and change after conditions improve.\n\nPage-specific signal: Compare the exact expression and help-seeking change when safety improves while task difficulty stays similar.\n\nAlternative explanation: Compare caregiving, money, discrimination, migration, culture, role duty, and available support.\n\nReflection prompt: Identify whether necessity explains contained effort better than subtype and cite one disconfirming observation.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Compare caregiving, money, discrimination, migration, culture, role duty, and available support.",
+            "context": "Choose two difficult tasks with similar stakes but different disclosure safety, plus one period when strain eases.",
+            "duration_days": 5,
+            "observable_signal": "Record effort, practical consequence, personal meaning, help available, refusal cost, disclosure, and change after conditions improve.",
+            "page_specific_signal": "Compare the exact expression and help-seeking change when safety improves while task difficulty stays similar.",
+            "reflection_prompt": "Identify whether necessity explains contained effort better than subtype and cite one disconfirming observation."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "Self-preservation Type Four is a traditional, evidence-limited hypothesis that identity-and-meaning attention may appear through contained expression, endurance, and personally significant effort under practical strain. Endurance cannot establish subtype because caregiving, unsafe settings, financial limits, and role duty can require the same restraint.",
+        "title": "Self-preservation Type Four: contained meaning under strain as a matched-comparison hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-4/instincts/self-preservation",
+      "source_hash": "9267f7152d7363c6d516645bf5a6bb71303c05e794b06d89e7bbe75e0fc6691d",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "Self-preservation Type Four is a traditional, evidence-limited hypothesis that identity-and-meaning attention may appear through contained expression, endurance, and personally significant effort under practical strain. Endurance cannot establish subtype because caregiving, unsafe settings, financial limits, and role duty can require the same restraint.",
+      "title": "Self-preservation Type Four: contained meaning under strain as a matched-comparison hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "35848fa74b1bfc6579f10ba4b975b62e4604e1e432cc0642d590e45dc6a80b25"
+}

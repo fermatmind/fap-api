@@ -1,0 +1,73 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality",
+    "entity_key": "index",
+    "entity_type": "hub",
+    "framework": "mbti",
+    "page_kind": "hub",
+    "slug": "personality"
+  },
+  "locale": "en",
+  "payload": {
+    "landing_surface_v1": {
+      "attribution_scope": "public_personality_landing",
+      "content_continue_target": "/en/topics/mbti",
+      "continue_reading_keys": [
+        "topic_cluster",
+        "personality_detail"
+      ],
+      "cta_bundle": [
+        {
+          "href": "/en/tests/mbti-personality-test-16-personality-types",
+          "key": "start_test",
+          "kind": "start_test",
+          "label": "Take the test"
+        },
+        {
+          "href": "/en/topics/mbti",
+          "key": "topic_cluster",
+          "kind": "discover",
+          "label": "Browse topic hub"
+        }
+      ],
+      "discoverability_items": [],
+      "discoverability_keys": [
+        "personality_index",
+        "topic_cluster",
+        "career_recommendation",
+        "start_test"
+      ],
+      "entry_surface": "personality_index",
+      "entry_type": "personality_family_index",
+      "indexability_state": "indexable",
+      "landing_contract_version": "landing.surface.v1",
+      "landing_fingerprint": "00c48cf6e25ae0bbca03cf3f1dc10a285c0baf3e",
+      "landing_scope": "public_indexable_index",
+      "primary_content_ref": "personality:index",
+      "public_surface_ref": null,
+      "related_surface_keys": [
+        "personality_detail",
+        "topic_cluster"
+      ],
+      "result_resume_target": null,
+      "runtime_artifact_ref": null,
+      "seo_surface_ref": null,
+      "share_safety_state": null,
+      "start_test_target": "/en/tests/mbti-personality-test-16-personality-types",
+      "summary_blocks": [
+        {
+          "body": "Browse public personality profiles, career guidance, and next reading paths across all 16 types.",
+          "key": "hero",
+          "kind": "hero",
+          "title": "Personality types"
+        }
+      ],
+      "surface_family": "personality",
+      "version": "landing.surface.v1"
+    }
+  },
+  "payload_contract": "personality.mbti.hub.current.v1",
+  "source_content_sha256": "d7f2523b6ea337221492006f4e0eb3e4329017dd2d3333bce185916b22b94ddc"
+}

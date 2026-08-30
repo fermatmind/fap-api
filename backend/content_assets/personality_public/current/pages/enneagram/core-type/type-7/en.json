@@ -1,0 +1,373 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-7",
+    "entity_key": "type-7",
+    "entity_type": "core_type",
+    "framework": "enneagram",
+    "page_kind": "core_type",
+    "slug": "enneagram/type-7"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-7"
+      },
+      "canonical_path": "/en/personality/enneagram/type-7",
+      "code": "type-7",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-7",
+      "entity_type": "core_type",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.application.exploratory_not_predictive",
+            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
+            "source_ids": [
+              "sutton_2013_work_outcomes",
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.application.exploratory_not_predictive",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
+            "claim_ids": [
+              "claim.application.exploratory_not_predictive"
+            ],
+            "doi": "10.1016/j.emj.2012.12.004",
+            "id": "sutton_2013_work_outcomes",
+            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
+            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
+            "source_type": "peer_reviewed_research",
+            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
+            "year": 2013
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Education, portfolio work, curiosity, attention differences, cultural opportunity, or economic necessity can require many interests. The hypothesis needs repeated option-keeping patterns and must weaken when sustained focus is common.",
+          "question": "Does having many interests establish Type Seven?"
+        },
+        {
+          "answer": "Treat optimism as behavior in context. Compare accurate hope after reviewing costs with a frame change that bypasses stated harm, unfinished work, or another person’s request for repair.",
+          "question": "How should optimism be evaluated in this model?"
+        },
+        {
+          "answer": "A strong challenge is willingly closing attractive alternatives, remaining present with disappointment, and completing a tedious obligation without replacing it with a more stimulating plan.",
+          "question": "Which observation challenges future-focused planning?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-7",
+        "reciprocal": true,
+        "translation_group": "enneagram:core_type:type-7",
+        "x-default": "/en/personality/enneagram/type-7",
+        "zh-CN": "/zh/personality/enneagram/type-7"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/centers/head",
+          "label": "center:head",
+          "relationship": "center_membership",
+          "target_identity_key": "center:head"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/7w6",
+          "label": "wing:7w6",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:7w6"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/7w8",
+          "label": "wing:7w8",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:7w8"
+        },
+        {
+          "href": "/en/personality/enneagram/type-7/instincts/self-preservation",
+          "label": "instinctual_subtype:type-7/self-preservation",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-7/self-preservation"
+        },
+        {
+          "href": "/en/personality/enneagram/type-7/instincts/social",
+          "label": "instinctual_subtype:type-7/social",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-7/social"
+        },
+        {
+          "href": "/en/personality/enneagram/type-7/instincts/one-to-one",
+          "label": "instinctual_subtype:type-7/one-to-one",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-7/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.application.exploratory_not_predictive",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "Track when new routes are generated, which limitation becomes hardest to hold, and whether planning creates useful choice or distance from the present task. Record the sequence before inferring a stable motive.",
+          "key": "motivation_attention",
+          "title": "Observe where possibility enters attention"
+        },
+        {
+          "body_md": "Starting several projects may reflect a creative role, a changing brief, attention regulation, financial necessity, or genuine curiosity. Ask what the alternatives accomplish and what happens once one route must be chosen.",
+          "key": "behavior_motive",
+          "title": "Separate energetic behavior from an option-keeping purpose"
+        },
+        {
+          "body_md": "During decisions, note the criteria used to close options and the cost assigned to missing out. Under feedback or conflict, observe whether the person stays with the specific impact, negotiates a repair, changes the frame, or moves quickly toward a more attractive future.",
+          "key": "decision_feedback_conflict",
+          "title": "Compare selection, feedback, and disappointment"
+        },
+        {
+          "body_md": "Possibility attention may support inventive combinations, morale, improvisation, and recovery after setbacks. Tradeoffs appear when novelty replaces follow-through, optimism discounts a named risk, or other people inherit the closure work.",
+          "key": "strengths_tradeoffs",
+          "title": "Hold generative range beside completion costs"
+        },
+        {
+          "body_md": "At work, compare a strategist paid to produce alternatives with an owner who repeatedly changes scope after delivery starts. In a relationship, compare mutual spontaneity with changing an agreement whenever disappointment or boredom appears.",
+          "key": "work_relationship_examples",
+          "title": "Read enthusiasm in its actual contract"
+        },
+        {
+          "body_md": "The 7w6 hypothesis adds consultation, contingency, and social reassurance; 7w8 adds direct agency, leverage, and forceful pursuit. Also compare Type Three pace, Type Five curiosity, ADHD, hypomanic symptoms requiring qualified care, sales incentives, travel access, and unstable living conditions.",
+          "key": "wings_mistypes",
+          "title": "Compare wings and ordinary lookalikes without shortcuts"
+        },
+        {
+          "body_md": "The hypothesis weakens when the person sustains a repetitive commitment, names grief or frustration without immediate reframing, declines an exciting option to protect an agreement, or finishes an unglamorous repair before seeking novelty.",
+          "key": "counterexample",
+          "title": "Look for patient contact with limits"
+        },
+        {
+          "body_md": "Use this page to test observations about possibility, freedom, discomfort, and commitment. It cannot determine mental health, attention status, employability, relationship quality, ability, or future results, and it must yield to concrete obligations and safety facts.",
+          "key": "use_boundary",
+          "title": "Keep the model exploratory and non-predictive"
+        },
+        {
+          "body_md": "Duration: 6\n\nContext: Across six days, choose one planning meeting, one personal commitment, and one disappointing outcome where several alternatives are available.\n\nObservable signal: Record the options named, selection criterion, promised owner, closure date, emotion acknowledged, and any new plan introduced before the first action finishes.\n\nPage-specific signal: Compare whether adding a route improves the decision or mainly postpones the loss involved in choosing one course.\n\nAlternative explanation: Check creative duties, attention access, financial pressure, migration, caregiving, changing requirements, and actual safety before using a type hypothesis.\n\nReflection prompt: Identify the strongest event where staying with a limit produced useful action, then lower or revise the hypothesis.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Check creative duties, attention access, financial pressure, migration, caregiving, changing requirements, and actual safety before using a type hypothesis.",
+            "context": "Across six days, choose one planning meeting, one personal commitment, and one disappointing outcome where several alternatives are available.",
+            "duration_days": 6,
+            "observable_signal": "Record the options named, selection criterion, promised owner, closure date, emotion acknowledged, and any new plan introduced before the first action finishes.",
+            "page_specific_signal": "Compare whether adding a route improves the decision or mainly postpones the loss involved in choosing one course.",
+            "reflection_prompt": "Identify the strongest event where staying with a limit produced useful action, then lower or revise the hypothesis."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "Type Seven is a traditional Enneagram hypothesis about attention returning to possibility, freedom, and open options, sometimes through reframing discomfort and future planning. Rapid ideas, travel, optimism, or varied interests do not establish motive because creativity, attention differences, entrepreneurship, migration, workload, privilege, and real constraints can produce similar behavior.",
+        "title": "Type Seven: possibility, freedom, and a revisable option-keeping hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-7",
+      "source_hash": "47455832e72ff49418f9229300756337b95ce72959885596a1468968994cc5b4",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "Type Seven is a traditional Enneagram hypothesis about attention returning to possibility, freedom, and open options, sometimes through reframing discomfort and future planning. Rapid ideas, travel, optimism, or varied interests do not establish motive because creativity, attention differences, entrepreneurship, migration, workload, privilege, and real constraints can produce similar behavior.",
+      "title": "Type Seven: possibility, freedom, and a revisable option-keeping hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.application.exploratory_not_predictive",
+            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
+            "source_ids": [
+              "sutton_2013_work_outcomes",
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.application.exploratory_not_predictive",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
+            "claim_ids": [
+              "claim.application.exploratory_not_predictive"
+            ],
+            "doi": "10.1016/j.emj.2012.12.004",
+            "id": "sutton_2013_work_outcomes",
+            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
+            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
+            "source_type": "peer_reviewed_research",
+            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
+            "year": 2013
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "402732ca219752b504491b1b0a7185a395bfe80e121bdde11ada8a0e34ef3a14"
+}

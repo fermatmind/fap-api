@@ -1,0 +1,300 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/wings/6w7",
+    "entity_key": "6w7",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/6w7"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/wings/6w7"
+      },
+      "canonical_path": "/en/personality/enneagram/wings/6w7",
+      "code": "6w7",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "6w7",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Facilitation, sales work, community organizing, caregiving logistics, and short deadlines may require those strategies. Recheck the pattern after coordination duties and time pressure change instead of typing from one task.",
+          "question": "Do multiple options, social coordination, and active experiments prove 6w7?"
+        },
+        {
+          "answer": "Hold the information gap and deadline steady while removing any duty to coordinate a group. Compare 6w7 option generation and ally contact with 6w5 source validation and quiet analysis, then record whether the voluntary strategy changes.",
+          "question": "How should 6w7 be compared with 6w5?"
+        },
+        {
+          "answer": "Comfortably using one supported route, sustaining solitary review, and declining unnecessary coordination, followed by stopping at a reasonable threshold, should lower confidence in the 6w7 modifier.",
+          "question": "What evidence weakens the 6w7 modifier?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/6w7",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:6w7",
+        "x-default": "/en/personality/enneagram/wings/6w7",
+        "zh-CN": "/zh/personality/enneagram/wings/6w7"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-6",
+          "label": "core_type:type-6",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-6"
+        },
+        {
+          "href": "/en/personality/enneagram/type-7",
+          "label": "core_type:type-7",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-7"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/6w5",
+          "label": "wing:6w5",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:6w5"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "Confirm that repeated contingency planning and trust checking support a Type Six account before interpreting the person's option generation or ally contact. Consider those coordination patterns only as a secondary 6w7 modifier after facilitation, sales work, community organizing, caregiving logistics, and short deadlines no longer explain the behavior.",
+          "key": "core_first_modifier",
+          "title": "Keep Type Six primary before adding a modifier"
+        },
+        {
+          "body_md": "Give 6w7 and 6w5 the same incomplete task with matched consequence, deadline, and decision rights. Compare how option generation, ally contact, and reversible experiments differ from 6w5 source validation and quiet analysis in moving the work forward.",
+          "key": "sibling_core_comparison",
+          "title": "Compare 6w7 with 6w5 on one uncertain task"
+        },
+        {
+          "body_md": "Across an incident response, social plan, and individual choice, record requested information, consulted people, option narrowing, action time, and stopping rule. Distinguish coordination chosen under uncertainty from coordination required by the role.",
+          "key": "observable_situations",
+          "title": "Observe choices, handoffs, and stopping rules"
+        },
+        {
+          "body_md": "Reduce confidence when the person comfortably uses one supported route, sustains solitary review, or declines unnecessary coordination. Treat those choices as counterexamples rather than exceptions to 6w7.",
+          "key": "counterexample",
+          "title": "Use flexible low-stakes action as a challenge"
+        },
+        {
+          "body_md": "Facilitation, sales work, community organizing, caregiving logistics, and short deadlines can all require rapid option generation and ally contact. Audit these demands before retaining a 6w7 explanation.",
+          "key": "alternative_explanations",
+          "title": "Audit learned work and environmental demands"
+        },
+        {
+          "body_md": "Treat 6w7 only as an evidence-limited comparison beside the Type Six core. It neither measures extraversion or optimism nor forecasts social ability, loyalty, or conduct.",
+          "key": "wing_boundary",
+          "title": "Keep the modifier secondary and evidence-limited"
+        },
+        {
+          "body_md": "Duration: 5\n\nContext: Across five days, observe one incident response, one collaborative plan, and one individual decision where several routes are available.\n\nObservable signal: Record who is contacted, options proposed, route selected, experiment size, deadline, decision owner, and what evidence closes the option search.\n\nPage-specific signal: Compare whether coordination produces a decision update or merely keeps more possibilities active after one reversible route is ready.\n\nAlternative explanation: Check facilitation duty, sales work, community organizing, caregiving logistics, emergency response, and time pressure.\n\nReflection prompt: Find one event where a single written route or solitary review was sufficient, and use it to lower confidence in the 6w7 modifier.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Check facilitation duty, sales work, community organizing, caregiving logistics, emergency response, and time pressure.",
+            "context": "Across five days, observe one incident response, one collaborative plan, and one individual decision where several routes are available.",
+            "duration_days": 5,
+            "observable_signal": "Record who is contacted, options proposed, route selected, experiment size, deadline, decision owner, and what evidence closes the option search.",
+            "page_specific_signal": "Compare whether coordination produces a decision update or merely keeps more possibilities active after one reversible route is ready.",
+            "reflection_prompt": "Find one event where a single written route or solitary review was sufficient, and use it to lower confidence in the 6w7 modifier."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "6w7 is an evidence-limited wing hypothesis: Type Six uncertainty, support, trust, and contingency concerns remain primary, while the adjacent type may modify attention toward options, social coordination, and active experiments. The pattern does not establish 6w7 because facilitation duties, incident response, sales work, community organizing, and time pressure can require the same behavior.",
+        "title": "6w7: a core-first hypothesis about options, social coordination, and active experiments"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/6w7",
+      "source_hash": "64813b5d219ac8e5124b6e7f8d5c1314eb23b789fd056217ef1fdb9ba20df568",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "6w7 is an evidence-limited wing hypothesis: Type Six uncertainty, support, trust, and contingency concerns remain primary, while the adjacent type may modify attention toward options, social coordination, and active experiments. The pattern does not establish 6w7 because facilitation duties, incident response, sales work, community organizing, and time pressure can require the same behavior.",
+      "title": "6w7: a core-first hypothesis about options, social coordination, and active experiments"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "e4f42743da9446ad9066aa9d7ff17e0905d08458556a3897955469cf8167d92c"
+}

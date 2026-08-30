@@ -1,0 +1,373 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-6",
+    "entity_key": "type-6",
+    "entity_type": "core_type",
+    "framework": "enneagram",
+    "page_kind": "core_type",
+    "slug": "enneagram/type-6"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-6"
+      },
+      "canonical_path": "/en/personality/enneagram/type-6",
+      "code": "type-6",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-6",
+      "entity_type": "core_type",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.application.exploratory_not_predictive",
+            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
+            "source_ids": [
+              "sutton_2013_work_outcomes",
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.application.exploratory_not_predictive",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
+            "claim_ids": [
+              "claim.application.exploratory_not_predictive"
+            ],
+            "doi": "10.1016/j.emj.2012.12.004",
+            "id": "sutton_2013_work_outcomes",
+            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
+            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
+            "source_type": "peer_reviewed_research",
+            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
+            "year": 2013
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Legal duties, unsafe conditions, prior failures, unequal accountability, discrimination, or an unclear brief can require careful questions. Compare whether checking updates when evidence and responsibility change.",
+          "question": "Does cautious questioning establish Type Six?"
+        },
+        {
+          "answer": "Loyalty can reflect love, ethics, livelihood, reciprocity, community survival, or a freely renewed promise. Observe consent, alternatives, and power before using a personality explanation.",
+          "question": "Why separate loyalty from a type hypothesis?"
+        },
+        {
+          "answer": "Checking that ends with sufficient evidence, comfortable reversible action, support accepted without repeated tests, and reason-based responses to authority should all reduce confidence.",
+          "question": "What evidence should weaken the uncertainty hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-6",
+        "reciprocal": true,
+        "translation_group": "enneagram:core_type:type-6",
+        "x-default": "/en/personality/enneagram/type-6",
+        "zh-CN": "/zh/personality/enneagram/type-6"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/centers/head",
+          "label": "center:head",
+          "relationship": "center_membership",
+          "target_identity_key": "center:head"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/6w5",
+          "label": "wing:6w5",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:6w5"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/6w7",
+          "label": "wing:6w7",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:6w7"
+        },
+        {
+          "href": "/en/personality/enneagram/type-6/instincts/self-preservation",
+          "label": "instinctual_subtype:type-6/self-preservation",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-6/self-preservation"
+        },
+        {
+          "href": "/en/personality/enneagram/type-6/instincts/social",
+          "label": "instinctual_subtype:type-6/social",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-6/social"
+        },
+        {
+          "href": "/en/personality/enneagram/type-6/instincts/one-to-one",
+          "label": "instinctual_subtype:type-6/one-to-one",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-6/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.application.exploratory_not_predictive",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "Track which unknown receives attention, what evidence permits action, whose support is consulted, and whether a contingency plan closes the question. Record changes across stakes rather than assuming a permanent vigilance style.",
+          "key": "motivation_attention",
+          "title": "Observe uncertainty without turning caution into identity"
+        },
+        {
+          "body_md": "A colleague may ask for detail because the contract is unclear, the system failed before, or responsibility is unequal. Loyalty may reflect affection, ethics, livelihood, mutual aid, or a freely renewed commitment rather than type.",
+          "key": "behavior_motive",
+          "title": "Separate questions and loyalty from inferred motive"
+        },
+        {
+          "body_md": "In decisions, note whether alternatives clarify action or keep reopening it. During feedback, record how authority and evidence are weighed; in conflict, observe whether concerns are named, support is requested, and agreements are tested fairly.",
+          "key": "decision_feedback_conflict",
+          "title": "Compare checking, commitment, and repair"
+        },
+        {
+          "body_md": "Uncertainty attention may support risk detection, accountable planning, solidarity, and noticing weak assumptions. Tradeoffs appear when low-probability threats dominate, reassurance expires immediately, or every disagreement becomes a test of trust.",
+          "key": "strengths_tradeoffs",
+          "title": "Hold preparedness beside its coordination costs"
+        },
+        {
+          "body_md": "At work, compare a safety officer escalating a required hazard with a teammate rechecking a reversible choice. In a relationship, compare clarifying an agreement with repeatedly testing commitment. Actual duties and consent change the meaning.",
+          "key": "work_relationship_examples",
+          "title": "Use stakes and power to interpret behavior"
+        },
+        {
+          "body_md": "The 6w5 hypothesis adds evidence, analysis, and private preparation; 6w7 adds options, social coordination, and active experimentation. Also compare Five research, Seven option seeking, anxiety, legal duty, unsafe environments, discrimination, and institutional mistrust.",
+          "key": "wings_mistypes",
+          "title": "Compare modifiers and contextual alternatives"
+        },
+        {
+          "body_md": "The hypothesis weakens when adequate evidence ends checking, support is accepted without repeated tests, uncertainty is carried through a reversible action, and authority is questioned or followed according to transparent reasons rather than reflex.",
+          "key": "counterexample",
+          "title": "Look for trust that updates with evidence"
+        },
+        {
+          "body_md": "Use this page to examine uncertainty, support, checking, and contingency planning. It cannot diagnose anxiety or trauma, certify loyalty, assess security clearance, screen applicants, predict conduct, or fix a person's identity.",
+          "key": "use_boundary",
+          "title": "Keep trust language non-diagnostic and voluntary"
+        },
+        {
+          "body_md": "Duration: 5\n\nContext: Across five days, choose one low-stakes choice, one governed decision, and one trust conversation.\n\nObservable signal: Record actual consequence, missing evidence, consulted support, authority role, contingency plan, decision time, and later update.\n\nPage-specific signal: Compare whether checking stops when a named evidence threshold is met and the next step remains reversible.\n\nAlternative explanation: Check legal duty, resource precarity, discrimination, recent failure, trauma safety, power, and unclear ownership.\n\nReflection prompt: Name the event where transparent reasons best explain action and revise the Type Six hypothesis downward.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Check legal duty, resource precarity, discrimination, recent failure, trauma safety, power, and unclear ownership.",
+            "context": "Across five days, choose one low-stakes choice, one governed decision, and one trust conversation.",
+            "duration_days": 5,
+            "observable_signal": "Record actual consequence, missing evidence, consulted support, authority role, contingency plan, decision time, and later update.",
+            "page_specific_signal": "Compare whether checking stops when a named evidence threshold is met and the next step remains reversible.",
+            "reflection_prompt": "Name the event where transparent reasons best explain action and revise the Type Six hypothesis downward."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "Type Six is a traditional Enneagram hypothesis about attention returning to uncertainty, trusted support, possible problems, and workable contingency plans. Questions, caution, loyalty, or doubt cannot establish motive because real risk, governance duties, discrimination, trauma-related safety, resource precarity, and recent failures can create the same behavior.",
+        "title": "Type Six: uncertainty, support, and a revisable trust hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-6",
+      "source_hash": "e9b6ab25780022b4a5638784374e79d71f1f82f3d7f5e3f762313bebee67abfb",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "Type Six is a traditional Enneagram hypothesis about attention returning to uncertainty, trusted support, possible problems, and workable contingency plans. Questions, caution, loyalty, or doubt cannot establish motive because real risk, governance duties, discrimination, trauma-related safety, resource precarity, and recent failures can create the same behavior.",
+      "title": "Type Six: uncertainty, support, and a revisable trust hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.application.exploratory_not_predictive",
+            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
+            "source_ids": [
+              "sutton_2013_work_outcomes",
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.application.exploratory_not_predictive",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
+            "claim_ids": [
+              "claim.application.exploratory_not_predictive"
+            ],
+            "doi": "10.1016/j.emj.2012.12.004",
+            "id": "sutton_2013_work_outcomes",
+            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
+            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
+            "source_type": "peer_reviewed_research",
+            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
+            "year": 2013
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "1010dcb181b5470688a10c168b46569bc231f48212df0c5753a7daa25305c17a"
+}

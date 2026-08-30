@@ -1,0 +1,300 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/wings/2w1",
+    "entity_key": "2w1",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/2w1"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/wings/2w1"
+      },
+      "canonical_path": "/en/personality/enneagram/wings/2w1",
+      "code": "2w1",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "2w1",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Professional codes, family values, community expectations, or religious commitments may explain principled care. The wing hypothesis needs Type Two connection attention plus repeated standards-shaped delivery and meaningful counterexamples.",
+          "question": "Does principled caregiving establish 2w1?"
+        },
+        {
+          "answer": "Hold the service task constant and observe what remains central. A 2w1 hypothesis keeps another person's need and connection in view; a One hypothesis may focus more directly on correctness, responsibility, and fixing the process.",
+          "question": "How does 2w1 differ from a One hypothesis?"
+        },
+        {
+          "answer": "Standards that vanish around authority, help driven mainly by public approval, or service that continues without any recurring connection attention would weaken it. Formal duty and ethics training should be compared first.",
+          "question": "What weakens the responsible service hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/2w1",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:2w1",
+        "x-default": "/en/personality/enneagram/wings/2w1",
+        "zh-CN": "/zh/personality/enneagram/wings/2w1"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-2",
+          "label": "core_type:type-2",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-2"
+        },
+        {
+          "href": "/en/personality/enneagram/type-1",
+          "label": "core_type:type-1",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-1"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/2w3",
+          "label": "wing:2w3",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:2w3"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "A 2w1 interpretation begins with Type Two attention to needs, then asks whether One-adjacent standards shape how help is delivered. Responsible conduct without recurring connection attention may be explained by ethics, profession, family rules, religious service, or learned discipline.",
+          "key": "core_first_modifier",
+          "title": "Keep needs and connection at the core"
+        },
+        {
+          "body_md": "A sibling comparison contrasts 2w1 measured, principled service with 2w3 visible effectiveness and adaptation. Compared with One, the proposed core remains attention to another person's need and the relationship, rather than correction of the standard itself.",
+          "key": "sibling_core_comparison",
+          "title": "Contrast 2w1 with 2w3 and One"
+        },
+        {
+          "body_md": "Useful situations include a recipient requesting another method, a volunteer role with explicit limits, and help that receives no thanks. Record whether the standard protects consent and quality or becomes a reason to override the person receiving help.",
+          "key": "observable_situations",
+          "title": "Observe standards after a different preference"
+        },
+        {
+          "body_md": "A 2w1 counterexample weakens a responsible service hypothesis when standards disappear around status, help changes mainly to gain approval, or duty remains while connection attention does not recur. Those cases invite role, One, Three, or reputation explanations.",
+          "key": "counterexample",
+          "title": "Use flexible, recognition-driven help as a test"
+        },
+        {
+          "body_md": "Nurses, teachers, caseworkers, volunteers, and family caregivers may follow service standards because the role requires them. Compare behavior outside the role and after authority, risk, and accountability change before retaining the wing hypothesis.",
+          "key": "alternative_explanations",
+          "title": "Test training and institutional duty"
+        },
+        {
+          "body_md": "Wing research is sparse, so 2w1 remains a secondary observation hypothesis rather than an independent category or measure of goodness. It assigns no moral rank, health status, fixed ability, or outcome conclusion.",
+          "key": "wing_boundary",
+          "title": "Keep responsible service evidence limited"
+        },
+        {
+          "body_md": "Duration: 4\n\nContext: Choose one formal service task, one informal offer, and one declined suggestion where a quality standard and consent are visible.\n\nObservable signal: Record the need noticed, standard named, permission requested, method chosen, and response when the recipient asks for another approach.\n\nPage-specific signal: Distinguish a standard that protects care quality from a standard used to override preference or secure appreciation.\n\nAlternative explanation: Compare professional codes, family rules, religious or civic duty, risk management, authority, and reputation with the 2w1 hypothesis.\n\nReflection prompt: Identify the event where duty explains the behavior without connection attention and state how much the wing hypothesis should weaken.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Compare professional codes, family rules, religious or civic duty, risk management, authority, and reputation with the 2w1 hypothesis.",
+            "context": "Choose one formal service task, one informal offer, and one declined suggestion where a quality standard and consent are visible.",
+            "duration_days": 4,
+            "observable_signal": "Record the need noticed, standard named, permission requested, method chosen, and response when the recipient asks for another approach.",
+            "page_specific_signal": "Distinguish a standard that protects care quality from a standard used to override preference or secure appreciation.",
+            "reflection_prompt": "Identify the event where duty explains the behavior without connection attention and state how much the wing hypothesis should weaken."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "The 2w1 wing is a core-first, evidence-limited hypothesis: Type Two attention to needs and connection may be modified by One-adjacent standards, restraint, and responsible service. Responsible service is observable, but duty, ethics training, or formal care roles can produce the same pattern.",
+        "title": "2w1: responsible service as a core-first wing hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/2w1",
+      "source_hash": "cc068d74da322b0f4f853081f8a8abd2a9dc0f90ba171804c727ef651e8a9eca",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "The 2w1 wing is a core-first, evidence-limited hypothesis: Type Two attention to needs and connection may be modified by One-adjacent standards, restraint, and responsible service. Responsible service is observable, but duty, ethics training, or formal care roles can produce the same pattern.",
+      "title": "2w1: responsible service as a core-first wing hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "4fb88f1ee1c2e33f59045bbe16878e75ba202c1d909fce0e8e507ae1107de4d8"
+}

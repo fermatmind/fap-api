@@ -1,0 +1,300 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/wings/7w6",
+    "entity_key": "7w6",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/7w6"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/wings/7w6"
+      },
+      "canonical_path": "/en/personality/enneagram/wings/7w6",
+      "code": "7w6",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "7w6",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. A facilitator, host, organizer, or salesperson may generate group energy as part of the role. Look instead at how consultation changes option closure when no audience is required.",
+          "question": "Does group enthusiasm demonstrate a 7w6 pattern?"
+        },
+        {
+          "answer": "Useful contingency names a trigger, owner, and stopping rule. Option avoidance keeps adding fallback routes after the relevant risks are covered and responsibility can reasonably begin.",
+          "question": "What distinguishes useful contingency from option avoidance?"
+        },
+        {
+          "answer": "Confidence should decrease when reassurance is rarely sought, new evidence matters more than social agreement, and the person readily closes a decision despite uncertain group support.",
+          "question": "When should reassurance reduce confidence in 7w6?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/7w6",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:7w6",
+        "x-default": "/en/personality/enneagram/wings/7w6",
+        "zh-CN": "/zh/personality/enneagram/wings/7w6"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-7",
+          "label": "core_type:type-7",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-7"
+        },
+        {
+          "href": "/en/personality/enneagram/type-6",
+          "label": "core_type:type-6",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-6"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/7w8",
+          "label": "wing:7w8",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:7w8"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "First examine how possibilities are generated and commitments are closed. Only then consider whether seeking allies, checking support, or keeping a fallback acts as a secondary modifier rather than a role requirement.",
+          "key": "core_first_modifier",
+          "title": "Establish option attention before adding consultation"
+        },
+        {
+          "body_md": "With the same incomplete plan, 7w6 may gather perspectives and retain a backup route, while 7w8 may secure authority or act directly. Change who bears the risk and either response may reverse.",
+          "key": "sibling_core_comparison",
+          "title": "Compare 7w6 with 7w8 under one deadline"
+        },
+        {
+          "body_md": "Record who is contacted, what question is asked, whether reassurance adds information, which alternative remains available, and how the group confirms ownership. Mere friendliness offers little evidence.",
+          "key": "observable_situations",
+          "title": "Observe consultation that changes a decision"
+        },
+        {
+          "body_md": "Confidence should fall when the person chooses alone with adequate information, releases unnecessary backup plans, tolerates uncertain support, and completes the selected route without recruiting extra agreement.",
+          "key": "counterexample",
+          "title": "Use independent closure as a disconfirming case"
+        },
+        {
+          "body_md": "Facilitation, emergency response, community organizing, shared caregiving, insecure funding, probation, or distributed teams may require consultation and contingency. These conditions deserve priority over a wing inference.",
+          "key": "alternative_explanations",
+          "title": "Keep coordination duties and scarcity visible"
+        },
+        {
+          "body_md": "7w6 is not a measure of loyalty, teamwork, anxiety, or decision quality. Wing support in research remains limited, so this comparison stays secondary, contextual, and open to contrary cases.",
+          "key": "wing_boundary",
+          "title": "Do not turn sociability into wing evidence"
+        },
+        {
+          "body_md": "Duration: 4\n\nContext: Select one reversible team decision and one personal choice over four days, with the same deadline and clearly named consequences.\n\nObservable signal: Log each consulted person, the new information received, reassurance sought, fallback retained, decision owner, and moment the chosen route becomes closed.\n\nPage-specific signal: Compare whether consultation improves the option set or simply postpones committing without unanimous support.\n\nAlternative explanation: Review coordination duties, funding insecurity, distributed authority, care obligations, probation, and prior incidents that make backup planning reasonable.\n\nReflection prompt: Use the solo choice to test whether adequate evidence permits closure without additional allies or contingencies.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Review coordination duties, funding insecurity, distributed authority, care obligations, probation, and prior incidents that make backup planning reasonable.",
+            "context": "Select one reversible team decision and one personal choice over four days, with the same deadline and clearly named consequences.",
+            "duration_days": 4,
+            "observable_signal": "Log each consulted person, the new information received, reassurance sought, fallback retained, decision owner, and moment the chosen route becomes closed.",
+            "page_specific_signal": "Compare whether consultation improves the option set or simply postpones committing without unanimous support.",
+            "reflection_prompt": "Use the solo choice to test whether adequate evidence permits closure without additional allies or contingencies."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "7w6 is an evidence-limited wing hypothesis in which Type Seven options and possibility remain primary while Six may add consultation, contingency, reassurance, and shared planning. Sociability or backup plans do not establish 7w6 because facilitation, incident response, team norms, precarious resources, and accountable coordination can require the same behavior.",
+        "title": "7w6: a core-first hypothesis about options, consultation, and contingency"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/7w6",
+      "source_hash": "e27768d0da2cc06db8c92ef94eaf93620dd462b51c1283e2686f6655bb0ea912",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "7w6 is an evidence-limited wing hypothesis in which Type Seven options and possibility remain primary while Six may add consultation, contingency, reassurance, and shared planning. Sociability or backup plans do not establish 7w6 because facilitation, incident response, team norms, precarious resources, and accountable coordination can require the same behavior.",
+      "title": "7w6: a core-first hypothesis about options, consultation, and contingency"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "f46f0bdd0164a73fc9d2d4953eaa31243f5e1b8601b7291797f9896730d07098"
+}

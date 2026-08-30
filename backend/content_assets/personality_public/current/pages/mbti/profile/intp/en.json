@@ -1,0 +1,1320 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/intp",
+    "entity_key": "intp",
+    "entity_type": "profile",
+    "framework": "mbti",
+    "page_kind": "profile",
+    "slug": "intp"
+  },
+  "locale": "en",
+  "payload": {
+    "answer_surface_v1": {
+      "answer_bundle": [
+        {
+          "count": 1,
+          "key": "summary",
+          "title": "summary"
+        },
+        {
+          "count": 0,
+          "key": "compare",
+          "title": "compare"
+        }
+      ],
+      "answer_contract_version": "answer.surface.v1",
+      "answer_fingerprint": "9dafd4bfe1d7643e2e0745348da652eb4fae45e7",
+      "answer_scope": "public_indexable_detail",
+      "attribution_scope": "public_personality_answer",
+      "compare_blocks": [],
+      "evidence_refs": [
+        "f8a9e6cb7958ff675a471fad7508bae0b2db1491",
+        "9084c3157eaa518260f1cb579d5ab50be8bba09d",
+        "personality_public_projection_v1",
+        "mbti_public_projection_v1",
+        "personality_sections",
+        "scene_summary_blocks"
+      ],
+      "faq_blocks": [],
+      "indexability_state": "indexable",
+      "landing_surface_ref": "9084c3157eaa518260f1cb579d5ab50be8bba09d",
+      "next_step_blocks": [
+        {
+          "body": null,
+          "href": "/en/tests/mbti-personality-test-16-personality-types",
+          "key": "start_test",
+          "kind": "start_test",
+          "title": "Take the test"
+        },
+        {
+          "body": null,
+          "href": "/en/career/recommendations/mbti/intp",
+          "key": "career_recommendation",
+          "kind": "content_continue",
+          "title": "View career recommendations"
+        },
+        {
+          "body": null,
+          "href": "/en/topics/mbti",
+          "key": "topic_cluster",
+          "kind": "discover",
+          "title": "Browse topic hub"
+        }
+      ],
+      "primary_content_ref": "INTP",
+      "public_safety_state": "public_indexable",
+      "public_surface_ref": null,
+      "related_surface_keys": [
+        "career_recommendation",
+        "topic_cluster",
+        "start_test"
+      ],
+      "runtime_artifact_ref": null,
+      "scene_summary_blocks": [
+        {
+          "body": "Review career recommendations first, then validate from the type page.",
+          "href": "/en/career/recommendations",
+          "key": "career_direction",
+          "kind": "scene_entry",
+          "title": "Career direction"
+        },
+        {
+          "body": "Use the MBTI topic hub as the decision frame before choosing a major path.",
+          "href": "/en/topics/mbti",
+          "key": "major_selection",
+          "kind": "scene_entry",
+          "title": "Major selection"
+        },
+        {
+          "body": "Keep this type page as reference when comparing collaboration patterns.",
+          "href": "/en/personality/intp",
+          "key": "team_collaboration",
+          "kind": "scene_entry",
+          "title": "Team collaboration"
+        },
+        {
+          "body": "Jump from type detail back to topic context for relationship cues.",
+          "href": "/en/topics/mbti",
+          "key": "relationship_patterns",
+          "kind": "scene_entry",
+          "title": "Relationship patterns"
+        },
+        {
+          "body": "Start the test directly to generate structured growth suggestions.",
+          "href": "/en/tests/mbti-personality-test-16-personality-types",
+          "key": "growth_planning",
+          "kind": "scene_entry",
+          "title": "Growth planning"
+        }
+      ],
+      "seo_surface_ref": "f8a9e6cb7958ff675a471fad7508bae0b2db1491",
+      "summary_blocks": [
+        {
+          "body": "Role recommendations and work-environment guidance for INTP profiles.",
+          "href": null,
+          "key": "type_summary",
+          "kind": "answer_first",
+          "title": "INTP - Logician"
+        }
+      ],
+      "surface_type": "personality_public_detail",
+      "version": "answer.surface.v1"
+    },
+    "internal_links": [],
+    "landing_surface_v1": {
+      "attribution_scope": "public_personality_landing",
+      "content_continue_target": "/en/career/recommendations/mbti/intp",
+      "continue_reading_keys": [
+        "career_recommendation",
+        "topic_cluster",
+        "related_content"
+      ],
+      "cta_bundle": [
+        {
+          "href": "/en/tests/mbti-personality-test-16-personality-types",
+          "key": "start_test",
+          "kind": "start_test",
+          "label": "Take the test"
+        },
+        {
+          "href": "/en/career/recommendations/mbti/intp",
+          "key": "career_recommendation",
+          "kind": "content_continue",
+          "label": "View career recommendations"
+        },
+        {
+          "href": "/en/topics/mbti",
+          "key": "topic_cluster",
+          "kind": "discover",
+          "label": "Browse topic hub"
+        }
+      ],
+      "discoverability_items": [],
+      "discoverability_keys": [
+        "personality_detail",
+        "topic_cluster",
+        "career_recommendation",
+        "start_test"
+      ],
+      "entry_surface": "personality_detail",
+      "entry_type": "personality_profile",
+      "indexability_state": "indexable",
+      "landing_contract_version": "landing.surface.v1",
+      "landing_fingerprint": "9084c3157eaa518260f1cb579d5ab50be8bba09d",
+      "landing_scope": "public_indexable_detail",
+      "primary_content_ref": "INTP",
+      "public_surface_ref": null,
+      "related_surface_keys": [
+        "career_recommendation",
+        "topic_cluster"
+      ],
+      "result_resume_target": null,
+      "runtime_artifact_ref": null,
+      "seo_surface_ref": "intp",
+      "share_safety_state": null,
+      "start_test_target": "/en/tests/mbti-personality-test-16-personality-types",
+      "summary_blocks": [
+        {
+          "body": "Role recommendations and work-environment guidance for INTP profiles.",
+          "key": "hero",
+          "kind": "answer_first",
+          "title": "INTP - Logician"
+        }
+      ],
+      "surface_family": "personality",
+      "version": "landing.surface.v1"
+    },
+    "mbti_public_projection_v1": {
+      "_meta": {
+        "authority_source": "personality_cms_v2",
+        "public_route_type": "16-type",
+        "route_mode": "base",
+        "schema_version": "v2"
+      },
+      "canonical_type_code": "INTP",
+      "dimensions": [],
+      "display_type": "INTP",
+      "offer_set": [],
+      "profile": {
+        "hero_summary": "Role recommendations and work-environment guidance for INTP profiles.",
+        "keywords": [],
+        "nickname": "Logician",
+        "rarity": null,
+        "type_name": "Logician"
+      },
+      "runtime_type_code": null,
+      "sections": [
+        {
+          "body_md": "Role recommendations and work-environment guidance for INTP profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
+          "is_enabled": true,
+          "key": "overview",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "Overview"
+        },
+        {
+          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Data Analyst, Psychological Counselor, Investment Analyst.",
+          "is_enabled": true,
+          "key": "career.summary",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "Career summary"
+        },
+        {
+          "body_md": null,
+          "is_enabled": true,
+          "key": "career.preferred_roles",
+          "payload": {
+            "avoid_jobs": [
+              {
+                "slug": "data-scientist",
+                "title": "Data Scientist"
+              },
+              {
+                "slug": "frontend-engineer",
+                "title": "Frontend Engineer"
+              },
+              {
+                "slug": "fullstack-engineer",
+                "title": "Fullstack Engineer"
+              }
+            ],
+            "recommended_jobs": [
+              {
+                "slug": "data-analyst",
+                "title": "Data Analyst"
+              },
+              {
+                "slug": "psychological-counselor",
+                "title": "Psychological Counselor"
+              },
+              {
+                "slug": "investment-analyst",
+                "title": "Investment Analyst"
+              },
+              {
+                "slug": "physician",
+                "title": "Physician"
+              },
+              {
+                "slug": "data-scientist",
+                "title": "Data Scientist"
+              },
+              {
+                "slug": "frontend-engineer",
+                "title": "Frontend Engineer"
+              }
+            ],
+            "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
+          },
+          "render": "preferred_role_list",
+          "source": "base",
+          "title": "Preferred roles"
+        },
+        {
+          "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+          "is_enabled": true,
+          "key": "growth.summary",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "Growth summary"
+        },
+        {
+          "body_md": null,
+          "is_enabled": true,
+          "key": "growth.strengths",
+          "payload": {
+            "items": [
+              {
+                "body": null,
+                "title": "Strategic pattern recognition"
+              },
+              {
+                "body": null,
+                "title": "Stable execution under constraints"
+              },
+              {
+                "body": null,
+                "title": "Strong ownership on meaningful goals"
+              }
+            ]
+          },
+          "render": "bullets",
+          "source": "base",
+          "title": "Growth strengths"
+        },
+        {
+          "body_md": null,
+          "is_enabled": true,
+          "key": "growth.weaknesses",
+          "payload": {
+            "items": [
+              {
+                "body": null,
+                "title": "Over-specialization without cross-functional exposure"
+              },
+              {
+                "body": null,
+                "title": "Delayed feedback loops causing slower iteration"
+              }
+            ]
+          },
+          "render": "bullets",
+          "source": "base",
+          "title": "Growth weaknesses"
+        },
+        {
+          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
+          "is_enabled": true,
+          "key": "relationships.summary",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "Relationships summary"
+        }
+      ],
+      "seo": {
+        "canonical_url": "https://fermatmind.com/en/personality/intp",
+        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INTP personality type.",
+        "jsonld": [],
+        "og_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INTP personality type.",
+        "og_image_url": null,
+        "og_title": "INTP Personality Guide",
+        "robots": "index,follow",
+        "title": "INTP Personality Guide",
+        "twitter_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INTP personality type.",
+        "twitter_image_url": null,
+        "twitter_title": "INTP Personality Guide"
+      },
+      "summary_card": {
+        "public_tags": [],
+        "subtitle": null,
+        "summary": "Role recommendations and work-environment guidance for INTP profiles.",
+        "tagline": "Logician",
+        "title": "INTP - Logician"
+      },
+      "variant_code": null
+    },
+    "personality_public_projection_v1": {
+      "_meta": {
+        "authority_source": "personality_cms_v2",
+        "public_route_type": "16-type",
+        "route_mode": "base",
+        "schema_version": "v2"
+      },
+      "canonical_type_code": "INTP",
+      "dimensions": [],
+      "display_type": "INTP",
+      "offer_set": [],
+      "profile": {
+        "hero_summary": "Role recommendations and work-environment guidance for INTP profiles.",
+        "keywords": [],
+        "nickname": "Logician",
+        "rarity": null,
+        "type_name": "Logician"
+      },
+      "runtime_type_code": null,
+      "sections": [
+        {
+          "body_md": "Role recommendations and work-environment guidance for INTP profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
+          "is_enabled": true,
+          "key": "overview",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "Overview"
+        },
+        {
+          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Data Analyst, Psychological Counselor, Investment Analyst.",
+          "is_enabled": true,
+          "key": "career.summary",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "Career summary"
+        },
+        {
+          "body_md": null,
+          "is_enabled": true,
+          "key": "career.preferred_roles",
+          "payload": {
+            "avoid_jobs": [
+              {
+                "slug": "data-scientist",
+                "title": "Data Scientist"
+              },
+              {
+                "slug": "frontend-engineer",
+                "title": "Frontend Engineer"
+              },
+              {
+                "slug": "fullstack-engineer",
+                "title": "Fullstack Engineer"
+              }
+            ],
+            "recommended_jobs": [
+              {
+                "slug": "data-analyst",
+                "title": "Data Analyst"
+              },
+              {
+                "slug": "psychological-counselor",
+                "title": "Psychological Counselor"
+              },
+              {
+                "slug": "investment-analyst",
+                "title": "Investment Analyst"
+              },
+              {
+                "slug": "physician",
+                "title": "Physician"
+              },
+              {
+                "slug": "data-scientist",
+                "title": "Data Scientist"
+              },
+              {
+                "slug": "frontend-engineer",
+                "title": "Frontend Engineer"
+              }
+            ],
+            "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
+          },
+          "render": "preferred_role_list",
+          "source": "base",
+          "title": "Preferred roles"
+        },
+        {
+          "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+          "is_enabled": true,
+          "key": "growth.summary",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "Growth summary"
+        },
+        {
+          "body_md": null,
+          "is_enabled": true,
+          "key": "growth.strengths",
+          "payload": {
+            "items": [
+              {
+                "body": null,
+                "title": "Strategic pattern recognition"
+              },
+              {
+                "body": null,
+                "title": "Stable execution under constraints"
+              },
+              {
+                "body": null,
+                "title": "Strong ownership on meaningful goals"
+              }
+            ]
+          },
+          "render": "bullets",
+          "source": "base",
+          "title": "Growth strengths"
+        },
+        {
+          "body_md": null,
+          "is_enabled": true,
+          "key": "growth.weaknesses",
+          "payload": {
+            "items": [
+              {
+                "body": null,
+                "title": "Over-specialization without cross-functional exposure"
+              },
+              {
+                "body": null,
+                "title": "Delayed feedback loops causing slower iteration"
+              }
+            ]
+          },
+          "render": "bullets",
+          "source": "base",
+          "title": "Growth weaknesses"
+        },
+        {
+          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
+          "is_enabled": true,
+          "key": "relationships.summary",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "Relationships summary"
+        }
+      ],
+      "seo": {
+        "canonical_url": "https://fermatmind.com/en/personality/intp",
+        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INTP personality type.",
+        "jsonld": [],
+        "og_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INTP personality type.",
+        "og_image_url": null,
+        "og_title": "INTP Personality Guide",
+        "robots": "index,follow",
+        "title": "INTP Personality Guide",
+        "twitter_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INTP personality type.",
+        "twitter_image_url": null,
+        "twitter_title": "INTP Personality Guide"
+      },
+      "summary_card": {
+        "public_tags": [],
+        "subtitle": null,
+        "summary": "Role recommendations and work-environment guidance for INTP profiles.",
+        "tagline": "Logician",
+        "title": "INTP - Logician"
+      },
+      "variant_code": null
+    },
+    "profile": {
+      "canonical_type_code": "INTP",
+      "excerpt": "Role recommendations and work-environment guidance for INTP profiles.",
+      "hero_image_url": null,
+      "hero_kicker": "Logician",
+      "hero_quote": null,
+      "hero_summary": "Role recommendations and work-environment guidance for INTP profiles.",
+      "is_indexable": true,
+      "is_public": true,
+      "keywords": [],
+      "locale": "en",
+      "nickname": "Logician",
+      "rarity": null,
+      "scale_code": "MBTI",
+      "schema_version": "v2",
+      "slug": "intp",
+      "status": "published",
+      "subtitle": null,
+      "title": "INTP - Logician",
+      "type_code": "INTP",
+      "type_name": "Logician"
+    },
+    "sections": [
+      {
+        "body_html": null,
+        "body_md": "Role recommendations and work-environment guidance for INTP profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "overview",
+        "sort_order": 20,
+        "title": "Overview"
+      },
+      {
+        "body_html": null,
+        "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Data Analyst, Psychological Counselor, Investment Analyst.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "career.summary",
+        "sort_order": 40,
+        "title": "Career summary"
+      },
+      {
+        "body_html": null,
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "avoid_jobs": [
+            {
+              "slug": "data-scientist",
+              "title": "Data Scientist"
+            },
+            {
+              "slug": "frontend-engineer",
+              "title": "Frontend Engineer"
+            },
+            {
+              "slug": "fullstack-engineer",
+              "title": "Fullstack Engineer"
+            }
+          ],
+          "recommended_jobs": [
+            {
+              "slug": "data-analyst",
+              "title": "Data Analyst"
+            },
+            {
+              "slug": "psychological-counselor",
+              "title": "Psychological Counselor"
+            },
+            {
+              "slug": "investment-analyst",
+              "title": "Investment Analyst"
+            },
+            {
+              "slug": "physician",
+              "title": "Physician"
+            },
+            {
+              "slug": "data-scientist",
+              "title": "Data Scientist"
+            },
+            {
+              "slug": "frontend-engineer",
+              "title": "Frontend Engineer"
+            }
+          ],
+          "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
+        },
+        "render_variant": "preferred_role_list",
+        "section_key": "career.preferred_roles",
+        "sort_order": 70,
+        "title": "Preferred roles"
+      },
+      {
+        "body_html": null,
+        "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "growth.summary",
+        "sort_order": 90,
+        "title": "Growth summary"
+      },
+      {
+        "body_html": null,
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "body": null,
+              "title": "Strategic pattern recognition"
+            },
+            {
+              "body": null,
+              "title": "Stable execution under constraints"
+            },
+            {
+              "body": null,
+              "title": "Strong ownership on meaningful goals"
+            }
+          ]
+        },
+        "render_variant": "bullets",
+        "section_key": "growth.strengths",
+        "sort_order": 100,
+        "title": "Growth strengths"
+      },
+      {
+        "body_html": null,
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "body": null,
+              "title": "Over-specialization without cross-functional exposure"
+            },
+            {
+              "body": null,
+              "title": "Delayed feedback loops causing slower iteration"
+            }
+          ]
+        },
+        "render_variant": "bullets",
+        "section_key": "growth.weaknesses",
+        "sort_order": 110,
+        "title": "Growth weaknesses"
+      },
+      {
+        "body_html": null,
+        "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "relationships.summary",
+        "sort_order": 140,
+        "title": "Relationships summary"
+      },
+      {
+        "body_html": null,
+        "body_md": "INTP-A and INTP-T share the Logician core; A/T mainly changes confidence, uncertainty tolerance, revision pressure and how doubt is used.",
+        "is_enabled": true,
+        "payload_json": {
+          "content": {
+            "career_work_style": {
+              "a_work_style": "INTP-A often works well where prototypes, exploration, and fast conceptual testing are valued. They may prefer being judged by the usefulness of the idea rather than by rigid process visibility.",
+              "body": "Both INTP-A and INTP-T can do well in analytical, technical, research, product, writing, design, data, or systems roles. The useful distinction is how the environment handles ambiguity and output expectations. For career pathing, INTP-A often fits exploratory roles where prototypes and independent reasoning are rewarded, while INTP-T often fits research, debugging or quality-heavy work where careful revision improves the final model.",
+              "h2": "Career and work style differences",
+              "shared_strengths": [
+                "conceptual analysis",
+                "model building",
+                "independent research",
+                "problem decomposition",
+                "creative hypothesis generation"
+              ],
+              "t_work_style": "INTP-T often works well where revision, peer review, rigor, and error correction are valued. They may bring unusually strong sensitivity to weak assumptions, but need deadlines that prevent endless refinement."
+            },
+            "core_traits_comparison": {
+              "body": "Both INTP-A and INTP-T are still Logician patterns. They usually enjoy conceptual puzzles, independent thinking, precision, and unconventional angles. The A/T distinction does not decide intelligence, creativity, or competence. It describes how the same analytical core tends to behave around confidence, criticism, and unresolved complexity. The strongest information gain on this page is separating analytical depth from emotional cost: both variants can be abstract and original, but they pay different attention to doubt, review and confidence.",
+              "h2": "What both INTP-A and INTP-T have in common",
+              "items": [
+                "Both tend to ask whether an idea is logically coherent before asking whether it is popular.",
+                "Both often enjoy systems, theories, tools, languages, puzzles, or abstract models.",
+                "Both may struggle when expected to perform enthusiasm instead of solve the actual problem.",
+                "Both can under-communicate progress because they are still refining the idea internally.",
+                "Both need some freedom to follow questions that are not immediately obvious to others."
+              ]
+            },
+            "quick_answer": "The INTP-A vs INTP-T difference is mainly about how the Logician pattern handles uncertainty, confidence, and pressure. Both are analytical, concept-driven, and curious. INTP-A usually feels more comfortable treating an idea as good enough to test or explain. INTP-T usually notices unresolved flaws more sharply and may revise longer before feeling satisfied.",
+            "relationships_love": {
+              "a_relationship_pattern": "INTP-A may use humor, ideas, and practical curiosity to connect. The risk is underestimating when another person needs seriousness or reassurance.",
+              "body": "In relationships, both INTP patterns may need time to translate internal thought into emotional language. INTP-A may appear more relaxed and playful with uncertainty. INTP-T may be more affected by perceived mistakes, awkward moments, or signs of disapproval. In relationships, the difference is often visible when ideas meet emotion: INTP-A may under-explain their certainty, while INTP-T may over-explain because they are still testing the meaning of the interaction.",
+              "h2": "Relationships and emotional interpretation",
+              "t_relationship_pattern": "INTP-T may care deeply but process concerns privately, sometimes replaying conversations or analyzing small signals. The risk is over-interpreting ambiguity instead of asking directly."
+            },
+            "side_by_side_summary": {
+              "h2": "INTP-A vs INTP-T at a glance",
+              "rows": [
+                {
+                  "a_variant": "Can often move forward with an incomplete but usable model.",
+                  "dimension": "Uncertainty tolerance",
+                  "t_variant": "Often keeps searching for the missing variable, contradiction, or hidden exception."
+                },
+                {
+                  "a_variant": "More likely to explore broadly, then simplify the model for use.",
+                  "dimension": "Analysis rhythm",
+                  "t_variant": "More likely to iterate repeatedly until the model feels internally tight."
+                },
+                {
+                  "a_variant": "May detach from criticism and return to curiosity relatively quickly.",
+                  "dimension": "Stress response",
+                  "t_variant": "May internalize critique and turn it into deeper revision or self-questioning."
+                },
+                {
+                  "a_variant": "May explain ideas with more casual confidence.",
+                  "dimension": "Communication",
+                  "t_variant": "May hedge, qualify, and add caveats to avoid overclaiming."
+                },
+                {
+                  "a_variant": "Often benefits from experimental autonomy and low micromanagement.",
+                  "dimension": "Work environment",
+                  "t_variant": "Often benefits from research, review, and iterative improvement cycles."
+                },
+                {
+                  "a_variant": "Needs to avoid skipping too quickly from possibility to conclusion.",
+                  "dimension": "Growth edge",
+                  "t_variant": "Needs to avoid letting perfect clarity block useful output."
+                }
+              ]
+            },
+            "stress_confidence": {
+              "a_pattern": "INTP-A may share rough models earlier, test assumptions in conversation, and recover from being wrong without losing the thread. The risk is sounding too certain about a half-finished idea.",
+              "body": "The A/T split becomes visible when an idea is incomplete or criticized. INTP-A is more likely to treat uncertainty as normal background noise. INTP-T is more likely to treat uncertainty as a signal that the model deserves another pass.",
+              "h2": "Stress, self-critique, and confidence",
+              "t_pattern": "INTP-T may catch subtle contradictions, refine definitions, and improve quality through repeated review. The risk is delaying useful output because the idea still has imperfections."
+            },
+            "which_one_fits": {
+              "body": "Use the comparison as a working mirror. A/T can feel sensitive to stress load, confidence, and environment, so the best indicator is not a single mood but your repeated pattern around uncertainty and self-critique.",
+              "h2": "Which description fits you better?",
+              "self_check_prompts": [
+                "Do you share early models easily, or keep refining until they feel defensible?",
+                "When criticized, do you detach and keep exploring, or replay the weakness repeatedly?",
+                "Do you lose more output from moving too fast, or from never feeling finished?",
+                "Do you communicate with clean claims, or many caveats and qualifiers?",
+                "Under pressure, do you become more experimental, or more self-critical and exacting?"
+              ]
+            }
+          },
+          "faq": [
+            {
+              "answer": "The main difference is how the Logician pattern handles uncertainty and self-critique. INTP-A tends to move forward with more ease, while INTP-T tends to revise and question more intensely.",
+              "question": "What is the main INTP-A vs INTP-T difference?"
+            },
+            {
+              "answer": "Not necessarily. Both can be highly analytical. INTP-T may show analysis through repeated refinement, while INTP-A may show it through broad exploration and faster testing.",
+              "question": "Is INTP-T more analytical than INTP-A?"
+            },
+            {
+              "answer": "Often, yes, in the limited sense that INTP-A may feel less personally shaken by an unfinished idea or external criticism. That does not make every INTP-A correct or every INTP-T insecure.",
+              "question": "Is INTP-A more confident?"
+            },
+            {
+              "answer": "Neither is automatically better. INTP-A may be strong in exploratory prototyping, while INTP-T may be strong in review-heavy or precision-oriented work.",
+              "question": "Which INTP type is better at work?"
+            },
+            {
+              "answer": "Yes. Many people recognize parts of both descriptions. Stress, confidence, age, and work context can shift which A/T pattern feels more visible.",
+              "question": "Can I be between INTP-A and INTP-T?"
+            },
+            {
+              "answer": "Often, yes in behavior, but not in capability. INTP-T may question an idea longer, while INTP-A may move faster once the logic seems strong enough.",
+              "question": "Is INTP-T less confident than INTP-A?"
+            },
+            {
+              "answer": "Neither variant owns creativity. INTP-A may generate and test ideas faster; INTP-T may refine ideas more deeply before showing them.",
+              "question": "Which INTP variant is more creative?"
+            }
+          ],
+          "identity": {
+            "canonical_type_code": "INTP",
+            "variant_pair": [
+              "INTP-A",
+              "INTP-T"
+            ]
+          },
+          "internal_links": [
+            {
+              "anchor_text": "Explore all 16 personality types",
+              "href": "/en/personality",
+              "role": "hub",
+              "safe_public_route": true
+            },
+            {
+              "anchor_text": "Read the INTP-A profile",
+              "href": "/en/personality/intp-a",
+              "role": "sibling_variant",
+              "safe_public_route": true
+            },
+            {
+              "anchor_text": "Read the INTP-T profile",
+              "href": "/en/personality/intp-t",
+              "role": "sibling_variant",
+              "safe_public_route": true
+            },
+            {
+              "anchor_text": "Take the 16 personality test",
+              "href": "/en/tests/mbti-personality-test-16-personality-types",
+              "role": "test",
+              "safe_public_route": true
+            },
+            {
+              "anchor_text": "Compare your type with the Big Five model",
+              "href": "/en/tests/big-five-personality-test-ocean-model",
+              "role": "related_test",
+              "safe_public_route": true
+            },
+            {
+              "anchor_text": "Explore career interests with the Holland/RIASEC test",
+              "href": "/en/tests/holland-career-interest-test-riasec",
+              "role": "related_test",
+              "safe_public_route": true
+            },
+            {
+              "anchor_text": "Method and limits",
+              "href": "/en/personality/intp-a-vs-intp-t#method-boundary",
+              "role": "method",
+              "safe_public_route": true
+            }
+          ],
+          "raw_row": {
+            "above_the_fold_module": {
+              "answer_card_points": [
+                "Same core: analytical, conceptual, independent, possibility-driven Logician thinking.",
+                "INTP-A more often treats an unfinished idea as usable enough to test.",
+                "INTP-T more often keeps interrogating the model until hidden flaws feel addressed.",
+                "The useful distinction is not intelligence; it is how doubt shapes action."
+              ],
+              "answer_card_title": "INTP-A vs INTP-T in one minute",
+              "best_next_step": "Use the comparison table to identify your default uncertainty pattern, then confirm your broader type through the public 16 personality test."
+            },
+            "canonical_target": "/en/personality/intp-a-vs-intp-t",
+            "claim_risk_notes": [
+              "No superiority claim between A and T variants.",
+              "No deterministic hiring, career, relationship, medical, or admissions claim.",
+              "A/T is framed as an identity-style interpretation layer, not as the core four-letter type itself."
+            ],
+            "content": {
+              "career_work_style": {
+                "a_work_style": "INTP-A often works well where prototypes, exploration, and fast conceptual testing are valued. They may prefer being judged by the usefulness of the idea rather than by rigid process visibility.",
+                "body": "Both INTP-A and INTP-T can do well in analytical, technical, research, product, writing, design, data, or systems roles. The useful distinction is how the environment handles ambiguity and output expectations. For career pathing, INTP-A often fits exploratory roles where prototypes and independent reasoning are rewarded, while INTP-T often fits research, debugging or quality-heavy work where careful revision improves the final model.",
+                "h2": "Career and work style differences",
+                "shared_strengths": [
+                  "conceptual analysis",
+                  "model building",
+                  "independent research",
+                  "problem decomposition",
+                  "creative hypothesis generation"
+                ],
+                "t_work_style": "INTP-T often works well where revision, peer review, rigor, and error correction are valued. They may bring unusually strong sensitivity to weak assumptions, but need deadlines that prevent endless refinement."
+              },
+              "core_traits_comparison": {
+                "body": "Both INTP-A and INTP-T are still Logician patterns. They usually enjoy conceptual puzzles, independent thinking, precision, and unconventional angles. The A/T distinction does not decide intelligence, creativity, or competence. It describes how the same analytical core tends to behave around confidence, criticism, and unresolved complexity. The strongest information gain on this page is separating analytical depth from emotional cost: both variants can be abstract and original, but they pay different attention to doubt, review and confidence.",
+                "h2": "What both INTP-A and INTP-T have in common",
+                "items": [
+                  "Both tend to ask whether an idea is logically coherent before asking whether it is popular.",
+                  "Both often enjoy systems, theories, tools, languages, puzzles, or abstract models.",
+                  "Both may struggle when expected to perform enthusiasm instead of solve the actual problem.",
+                  "Both can under-communicate progress because they are still refining the idea internally.",
+                  "Both need some freedom to follow questions that are not immediately obvious to others."
+                ]
+              },
+              "quick_answer": "The INTP-A vs INTP-T difference is mainly about how the Logician pattern handles uncertainty, confidence, and pressure. Both are analytical, concept-driven, and curious. INTP-A usually feels more comfortable treating an idea as good enough to test or explain. INTP-T usually notices unresolved flaws more sharply and may revise longer before feeling satisfied.",
+              "relationships_love": {
+                "a_relationship_pattern": "INTP-A may use humor, ideas, and practical curiosity to connect. The risk is underestimating when another person needs seriousness or reassurance.",
+                "body": "In relationships, both INTP patterns may need time to translate internal thought into emotional language. INTP-A may appear more relaxed and playful with uncertainty. INTP-T may be more affected by perceived mistakes, awkward moments, or signs of disapproval. In relationships, the difference is often visible when ideas meet emotion: INTP-A may under-explain their certainty, while INTP-T may over-explain because they are still testing the meaning of the interaction.",
+                "h2": "Relationships and emotional interpretation",
+                "t_relationship_pattern": "INTP-T may care deeply but process concerns privately, sometimes replaying conversations or analyzing small signals. The risk is over-interpreting ambiguity instead of asking directly."
+              },
+              "side_by_side_summary": {
+                "h2": "INTP-A vs INTP-T at a glance",
+                "rows": [
+                  {
+                    "a_variant": "Can often move forward with an incomplete but usable model.",
+                    "dimension": "Uncertainty tolerance",
+                    "t_variant": "Often keeps searching for the missing variable, contradiction, or hidden exception."
+                  },
+                  {
+                    "a_variant": "More likely to explore broadly, then simplify the model for use.",
+                    "dimension": "Analysis rhythm",
+                    "t_variant": "More likely to iterate repeatedly until the model feels internally tight."
+                  },
+                  {
+                    "a_variant": "May detach from criticism and return to curiosity relatively quickly.",
+                    "dimension": "Stress response",
+                    "t_variant": "May internalize critique and turn it into deeper revision or self-questioning."
+                  },
+                  {
+                    "a_variant": "May explain ideas with more casual confidence.",
+                    "dimension": "Communication",
+                    "t_variant": "May hedge, qualify, and add caveats to avoid overclaiming."
+                  },
+                  {
+                    "a_variant": "Often benefits from experimental autonomy and low micromanagement.",
+                    "dimension": "Work environment",
+                    "t_variant": "Often benefits from research, review, and iterative improvement cycles."
+                  },
+                  {
+                    "a_variant": "Needs to avoid skipping too quickly from possibility to conclusion.",
+                    "dimension": "Growth edge",
+                    "t_variant": "Needs to avoid letting perfect clarity block useful output."
+                  }
+                ]
+              },
+              "stress_confidence": {
+                "a_pattern": "INTP-A may share rough models earlier, test assumptions in conversation, and recover from being wrong without losing the thread. The risk is sounding too certain about a half-finished idea.",
+                "body": "The A/T split becomes visible when an idea is incomplete or criticized. INTP-A is more likely to treat uncertainty as normal background noise. INTP-T is more likely to treat uncertainty as a signal that the model deserves another pass.",
+                "h2": "Stress, self-critique, and confidence",
+                "t_pattern": "INTP-T may catch subtle contradictions, refine definitions, and improve quality through repeated review. The risk is delaying useful output because the idea still has imperfections."
+              },
+              "which_one_fits": {
+                "body": "Use the comparison as a working mirror. A/T can feel sensitive to stress load, confidence, and environment, so the best indicator is not a single mood but your repeated pattern around uncertainty and self-critique.",
+                "h2": "Which description fits you better?",
+                "self_check_prompts": [
+                  "Do you share early models easily, or keep refining until they feel defensible?",
+                  "When criticized, do you detach and keep exploring, or replay the weakness repeatedly?",
+                  "Do you lose more output from moving too fast, or from never feeling finished?",
+                  "Do you communicate with clean claims, or many caveats and qualifiers?",
+                  "Under pressure, do you become more experimental, or more self-critical and exacting?"
+                ]
+              }
+            },
+            "excluded_queries": [
+              "intp-a meaning",
+              "intp-t meaning",
+              "intp personality type",
+              "intp logician personality",
+              "mbti test"
+            ],
+            "faq": [
+              {
+                "answer": "The main difference is how the Logician pattern handles uncertainty and self-critique. INTP-A tends to move forward with more ease, while INTP-T tends to revise and question more intensely.",
+                "question": "What is the main INTP-A vs INTP-T difference?"
+              },
+              {
+                "answer": "Not necessarily. Both can be highly analytical. INTP-T may show analysis through repeated refinement, while INTP-A may show it through broad exploration and faster testing.",
+                "question": "Is INTP-T more analytical than INTP-A?"
+              },
+              {
+                "answer": "Often, yes, in the limited sense that INTP-A may feel less personally shaken by an unfinished idea or external criticism. That does not make every INTP-A correct or every INTP-T insecure.",
+                "question": "Is INTP-A more confident?"
+              },
+              {
+                "answer": "Neither is automatically better. INTP-A may be strong in exploratory prototyping, while INTP-T may be strong in review-heavy or precision-oriented work.",
+                "question": "Which INTP type is better at work?"
+              },
+              {
+                "answer": "Yes. Many people recognize parts of both descriptions. Stress, confidence, age, and work context can shift which A/T pattern feels more visible.",
+                "question": "Can I be between INTP-A and INTP-T?"
+              },
+              {
+                "answer": "Often, yes in behavior, but not in capability. INTP-T may question an idea longer, while INTP-A may move faster once the logic seems strong enough.",
+                "question": "Is INTP-T less confident than INTP-A?"
+              },
+              {
+                "answer": "Neither variant owns creativity. INTP-A may generate and test ideas faster; INTP-T may refine ideas more deeply before showing them.",
+                "question": "Which INTP variant is more creative?"
+              }
+            ],
+            "information_gain": {
+              "fermatmind_specific_path": "The page connects comparison intent to public testing and sibling type navigation without using result or account routes.",
+              "unique_user_value": "It helps users identify whether their bottleneck is premature simplification or endless refinement, which is more actionable than a generic A/T contrast.",
+              "why_this_page_is_not_template_content": "The page focuses on INTP-specific uncertainty tolerance, model revision, caveat-heavy communication, and prototype-versus-refinement work patterns."
+            },
+            "internal_links": [
+              {
+                "anchor_text": "Explore all 16 personality types",
+                "href": "/en/personality",
+                "role": "hub",
+                "safe_public_route": true
+              },
+              {
+                "anchor_text": "Read the INTP-A profile",
+                "href": "/en/personality/intp-a",
+                "role": "sibling_variant",
+                "safe_public_route": true
+              },
+              {
+                "anchor_text": "Read the INTP-T profile",
+                "href": "/en/personality/intp-t",
+                "role": "sibling_variant",
+                "safe_public_route": true
+              },
+              {
+                "anchor_text": "Take the 16 personality test",
+                "href": "/en/tests/mbti-personality-test-16-personality-types",
+                "role": "test",
+                "safe_public_route": true
+              },
+              {
+                "anchor_text": "Compare your type with the Big Five model",
+                "href": "/en/tests/big-five-personality-test-ocean-model",
+                "role": "related_test",
+                "safe_public_route": true
+              },
+              {
+                "anchor_text": "Explore career interests with the Holland/RIASEC test",
+                "href": "/en/tests/holland-career-interest-test-riasec",
+                "role": "related_test",
+                "safe_public_route": true
+              },
+              {
+                "anchor_text": "Method and limits",
+                "href": "/en/personality/intp-a-vs-intp-t#method-boundary",
+                "role": "method",
+                "safe_public_route": true
+              }
+            ],
+            "locale": "en",
+            "method_boundary": "Use this page as a structured self-reflection guide, not as a medical, hiring, admissions, financial, or relationship decision tool. The safest use is to compare the patterns here with your own repeated behavior, then confirm your broader type through a public 16 personality test.",
+            "page_type": "comparison",
+            "primary_query": "intp-a vs intp-t difference",
+            "qa_flags_for_codex": [
+              "Do not publish or search-release until the audited lookup-route classification is resolved."
+            ],
+            "route_safety": {
+              "forbidden_route_patterns_absent_from_internal_links": true,
+              "lookup_route_classification_required_before_publish_or_search_release": true,
+              "related_big_five_riasec_routes": {
+                "routes": [
+                  "/en/tests/big-five-personality-test-ocean-model",
+                  "/en/tests/holland-career-interest-test-riasec"
+                ],
+                "source": "related-test-route-scope-decision-2026-06-18",
+                "status": "verified_and_added"
+              },
+              "target_test_route_verified_from_intent_map": true,
+              "v2_1_related_test_links_added": true
+            },
+            "secondary_queries": [
+              "intp-a vs intp-t",
+              "intp a and t difference",
+              "assertive logician vs turbulent logician",
+              "intp-a or intp-t",
+              "intp turbulent vs assertive"
+            ],
+            "seo": {
+              "breadcrumb_title": "INTP-A vs INTP-T",
+              "h1": "INTP-A vs INTP-T: Key Differences",
+              "quick_answer_summary": "INTP-A and INTP-T share the Logician core; A/T mainly changes confidence, uncertainty tolerance, revision pressure and how doubt is used.",
+              "seo_description": "Compare INTP-A and INTP-T by analysis style, uncertainty tolerance, stress response, relationships, work rhythm and self-check prompts.",
+              "seo_title": "INTP-A vs INTP-T: Doubt, Stress and Analysis Style | FermatMind"
+            },
+            "serp_ctr_package_v2": {
+              "avoid_in_snippet": [
+                "provider-claim implication",
+                "32-type framing",
+                "rarity bait",
+                "career outcome certainty"
+              ],
+              "breadcrumb_title": "INTP-A vs INTP-T",
+              "ctr_angle": "Query-direct answer + non-official boundary + work/stress scenario framing",
+              "h1": "INTP-A vs INTP-T: Key Differences",
+              "quick_answer_summary": "INTP-A and INTP-T share the Logician core; A/T mainly changes confidence, uncertainty tolerance, revision pressure and how doubt is used.",
+              "seo_description": "Compare INTP-A and INTP-T by analysis style, uncertainty tolerance, stress response, relationships, work rhythm and self-check prompts.",
+              "seo_title": "INTP-A vs INTP-T: Doubt, Stress and Analysis Style | FermatMind"
+            },
+            "status": "draft_for_codex_qa",
+            "target_intent": "Comparison intent for users distinguishing INTP-A and INTP-T in analysis style, uncertainty tolerance, stress, iteration, relationships, and work settings.",
+            "target_test_route": "/en/tests/mbti-personality-test-16-personality-types",
+            "trademark_boundary": "FermatMind publishes independent 16-type educational content. A/T is treated as an identity-style layer for interpretation; it is not part of the four-letter core type code.",
+            "url": "/en/personality/intp-a-vs-intp-t",
+            "v2_optimization": {
+              "conversion_design": {
+                "cta_rule": "Use only public canonical routes; no lookup, account, payment, history, or personalized-report paths.",
+                "primary_cta_href": "/en/tests/mbti-personality-test-16-personality-types",
+                "primary_cta_label": "Take the 16 personality test"
+              },
+              "duplicate_defense": {
+                "faq_reuse_allowed": false,
+                "page_specific_examples_required": true,
+                "variant_vs_comparison_boundary": "Variant pages answer standalone meaning/profile intent; comparison pages answer difference/decision intent."
+              },
+              "primary_improvement": "Strengthened answer usefulness, career/environment fit, self-check utility, and intent boundaries while preserving the original importable schema.",
+              "related_test_link_patch": {
+                "routes_added": [
+                  "/en/tests/big-five-personality-test-ocean-model",
+                  "/en/tests/holland-career-interest-test-riasec"
+                ],
+                "scope": "Added verified locale-specific Big Five and Holland/RIASEC related_test links only; no SEO, body, FAQ, query, or canonical changes.",
+                "source": "related-test-route-scope-decision-2026-06-18",
+                "version": "pilot-v2.1"
+              },
+              "serp_intent_guard": {
+                "above_fold_answer_required": true,
+                "do_not_rank_for": [
+                  "intp-a meaning",
+                  "intp-t meaning",
+                  "intp personality type",
+                  "intp logician personality",
+                  "mbti test"
+                ],
+                "rank_for": "intp-a vs intp-t difference"
+              }
+            }
+          },
+          "seo": {
+            "breadcrumb_title": "INTP-A vs INTP-T",
+            "h1": "INTP-A vs INTP-T: Key Differences",
+            "quick_answer_summary": "INTP-A and INTP-T share the Logician core; A/T mainly changes confidence, uncertainty tolerance, revision pressure and how doubt is used.",
+            "seo_description": "Compare INTP-A and INTP-T by analysis style, uncertainty tolerance, stress response, relationships, work rhythm and self-check prompts.",
+            "seo_title": "INTP-A vs INTP-T: Doubt, Stress and Analysis Style | FermatMind"
+          },
+          "snapshot_key": "mbti64_comparison_draft_v2_1",
+          "source": "mbti64_v2_1_comparison_revision_promotion",
+          "structured_metadata": {
+            "above_the_fold_module": {
+              "answer_card_points": [
+                "Same core: analytical, conceptual, independent, possibility-driven Logician thinking.",
+                "INTP-A more often treats an unfinished idea as usable enough to test.",
+                "INTP-T more often keeps interrogating the model until hidden flaws feel addressed.",
+                "The useful distinction is not intelligence; it is how doubt shapes action."
+              ],
+              "answer_card_title": "INTP-A vs INTP-T in one minute",
+              "best_next_step": "Use the comparison table to identify your default uncertainty pattern, then confirm your broader type through the public 16 personality test."
+            },
+            "claim_risk_notes": [
+              "No superiority claim between A and T variants.",
+              "No deterministic hiring, career, relationship, medical, or admissions claim.",
+              "A/T is framed as an identity-style interpretation layer, not as the core four-letter type itself."
+            ],
+            "excluded_queries": [
+              "intp-a meaning",
+              "intp-t meaning",
+              "intp personality type",
+              "intp logician personality",
+              "mbti test"
+            ],
+            "information_gain": {
+              "fermatmind_specific_path": "The page connects comparison intent to public testing and sibling type navigation without using result or account routes.",
+              "unique_user_value": "It helps users identify whether their bottleneck is premature simplification or endless refinement, which is more actionable than a generic A/T contrast.",
+              "why_this_page_is_not_template_content": "The page focuses on INTP-specific uncertainty tolerance, model revision, caveat-heavy communication, and prototype-versus-refinement work patterns."
+            },
+            "method_boundary": "Use this page as a structured self-reflection guide, not as a medical, hiring, admissions, financial, or relationship decision tool. The safest use is to compare the patterns here with your own repeated behavior, then confirm your broader type through a public 16 personality test.",
+            "primary_query": "intp-a vs intp-t difference",
+            "qa_flags_for_codex": [
+              "Do not publish or search-release until the audited lookup-route classification is resolved."
+            ],
+            "route_safety": {
+              "forbidden_route_patterns_absent_from_internal_links": true,
+              "lookup_route_classification_required_before_publish_or_search_release": true,
+              "related_big_five_riasec_routes": {
+                "routes": [
+                  "/en/tests/big-five-personality-test-ocean-model",
+                  "/en/tests/holland-career-interest-test-riasec"
+                ],
+                "source": "related-test-route-scope-decision-2026-06-18",
+                "status": "verified_and_added"
+              },
+              "target_test_route_verified_from_intent_map": true,
+              "v2_1_related_test_links_added": true
+            },
+            "secondary_queries": [
+              "intp-a vs intp-t",
+              "intp a and t difference",
+              "assertive logician vs turbulent logician",
+              "intp-a or intp-t",
+              "intp turbulent vs assertive"
+            ],
+            "serp_ctr_package_v2": {
+              "avoid_in_snippet": [
+                "provider-claim implication",
+                "32-type framing",
+                "rarity bait",
+                "career outcome certainty"
+              ],
+              "breadcrumb_title": "INTP-A vs INTP-T",
+              "ctr_angle": "Query-direct answer + non-official boundary + work/stress scenario framing",
+              "h1": "INTP-A vs INTP-T: Key Differences",
+              "quick_answer_summary": "INTP-A and INTP-T share the Logician core; A/T mainly changes confidence, uncertainty tolerance, revision pressure and how doubt is used.",
+              "seo_description": "Compare INTP-A and INTP-T by analysis style, uncertainty tolerance, stress response, relationships, work rhythm and self-check prompts.",
+              "seo_title": "INTP-A vs INTP-T: Doubt, Stress and Analysis Style | FermatMind"
+            },
+            "status": "draft_for_codex_qa",
+            "target_intent": "Comparison intent for users distinguishing INTP-A and INTP-T in analysis style, uncertainty tolerance, stress, iteration, relationships, and work settings.",
+            "target_test_route": "/en/tests/mbti-personality-test-16-personality-types",
+            "trademark_boundary": "FermatMind publishes independent 16-type educational content. A/T is treated as an identity-style layer for interpretation; it is not part of the four-letter core type code.",
+            "v2_optimization": {
+              "conversion_design": {
+                "cta_rule": "Use only public canonical routes; no lookup, account, payment, history, or personalized-report paths.",
+                "primary_cta_href": "/en/tests/mbti-personality-test-16-personality-types",
+                "primary_cta_label": "Take the 16 personality test"
+              },
+              "duplicate_defense": {
+                "faq_reuse_allowed": false,
+                "page_specific_examples_required": true,
+                "variant_vs_comparison_boundary": "Variant pages answer standalone meaning/profile intent; comparison pages answer difference/decision intent."
+              },
+              "primary_improvement": "Strengthened answer usefulness, career/environment fit, self-check utility, and intent boundaries while preserving the original importable schema.",
+              "related_test_link_patch": {
+                "routes_added": [
+                  "/en/tests/big-five-personality-test-ocean-model",
+                  "/en/tests/holland-career-interest-test-riasec"
+                ],
+                "scope": "Added verified locale-specific Big Five and Holland/RIASEC related_test links only; no SEO, body, FAQ, query, or canonical changes.",
+                "source": "related-test-route-scope-decision-2026-06-18",
+                "version": "pilot-v2.1"
+              },
+              "serp_intent_guard": {
+                "above_fold_answer_required": true,
+                "do_not_rank_for": [
+                  "intp-a meaning",
+                  "intp-t meaning",
+                  "intp personality type",
+                  "intp logician personality",
+                  "mbti test"
+                ],
+                "rank_for": "intp-a vs intp-t difference"
+              }
+            }
+          },
+          "url": "/en/personality/intp-a-vs-intp-t"
+        },
+        "render_variant": "rich_text",
+        "section_key": "mbti64_comparison_a_vs_t",
+        "sort_order": 920,
+        "title": "INTP-A vs INTP-T: Key Differences"
+      }
+    ],
+    "seo_meta": {
+      "canonical_url": "https://fermatmind.com/en/personality/intp",
+      "jsonld_overrides_json": null,
+      "og_description": null,
+      "og_image_url": null,
+      "og_title": null,
+      "robots": null,
+      "seo_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INTP personality type.",
+      "seo_title": "INTP Personality Guide",
+      "twitter_description": null,
+      "twitter_image_url": null,
+      "twitter_title": null
+    },
+    "seo_surface_v1": {
+      "alternates": {
+        "en": "https://fermatmind.com/en/personality/intp-a",
+        "zh-CN": "https://fermatmind.com/zh/personality/intp-a"
+      },
+      "canonical_url": "https://fermatmind.com/en/personality/intp-a",
+      "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INTP personality type.",
+      "indexability_state": "indexable",
+      "llms_exposure_state": "allow",
+      "metadata_contract_version": "seo.surface.v1",
+      "metadata_fingerprint": "f8a9e6cb7958ff675a471fad7508bae0b2db1491",
+      "metadata_scope": "public_indexable_detail",
+      "og_payload": {
+        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INTP personality type.",
+        "title": "INTP Personality Guide",
+        "type": "article",
+        "url": "https://fermatmind.com/en/personality/intp-a"
+      },
+      "public_summary_fingerprint": null,
+      "robots_policy": "index,follow",
+      "runtime_artifact_ref": null,
+      "share_safety_state": null,
+      "sitemap_state": "included",
+      "structured_data_keys": [
+        "AboutPage",
+        "DefinedTerm"
+      ],
+      "surface_type": "mbti_personality_public_detail",
+      "title": "INTP Personality Guide",
+      "twitter_payload": {
+        "card": "summary_large_image",
+        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INTP personality type.",
+        "title": "INTP Personality Guide"
+      },
+      "version": "seo.surface.v1"
+    }
+  },
+  "payload_contract": "mbti.public.detail.v1",
+  "source_content_sha256": "12a98869c9b2e3b4207e263a64f874f33ffa89e82c3616c25e86171333487d4f"
+}

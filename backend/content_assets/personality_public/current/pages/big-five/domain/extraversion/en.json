@@ -1,0 +1,364 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/big-five/extraversion",
+    "entity_key": "extraversion",
+    "entity_type": "domain",
+    "framework": "big_five",
+    "page_kind": "domain",
+    "slug": "big-five/extraversion"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "path": "/en/personality/big-five/extraversion"
+      },
+      "canonical_path": "/en/personality/big-five/extraversion",
+      "code": "extraversion",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "extraversion",
+      "entity_type": "domain",
+      "evidence_notes": [
+        {
+          "citation_label": "An alternative 'description of personality': The Big-Five factor structure",
+          "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
+          "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
+          "source_id": "S1"
+        },
+        {
+          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
+          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
+          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
+          "source_id": "S11"
+        },
+        {
+          "citation_label": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+          "limitation": "PMID and DOI metadata agree. The BFI-2 15-facet hierarchy demonstrates that lower-order structures differ across instruments.",
+          "public_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+          "source_id": "S2"
+        },
+        {
+          "citation_label": "Patterns of mean-level change in personality traits across the life course: A meta-analysis of longitudinal studies",
+          "limitation": "PMID, DOI, title, and authors agree. Supports group mean-level change only, not individual prediction or a fixed retest interval.",
+          "public_url": "https://pubmed.ncbi.nlm.nih.gov/16435954/",
+          "source_id": "S4"
+        }
+      ],
+      "faq": [
+        {
+          "answer": "No. Lower Extraversion can reflect preference for lower stimulation or selective interaction. Shyness and social anxiety are different concepts and cannot be established by this score.",
+          "question": "Does low Extraversion mean shyness or social anxiety?"
+        },
+        {
+          "answer": "Yes. Roles depend on skill, preparation, motivation, support, and job design. A person may perform frequent interaction effectively while still preferring quiet recovery.",
+          "question": "Can an introverted person succeed in a highly social job?"
+        },
+        {
+          "answer": "On this page it is a practical metaphor for how stimulating or effortful interaction may feel. It should not be treated as a directly measured biological quantity.",
+          "question": "Is “social energy” scientific or just a metaphor?"
+        },
+        {
+          "answer": "Group-average longitudinal findings cannot predict an individual timetable or direction ([S4](https://pubmed.ncbi.nlm.nih.gov/16435954/)). Roles and practiced behaviors may change even when broad preferences remain recognizable.",
+          "question": "Can Extraversion change?"
+        },
+        {
+          "answer": "No. Leadership requires context-specific judgment, skill, trust, and results. Visibility or assertiveness may affect how leadership looks, but a domain score cannot establish capacity or outcome.",
+          "question": "Does Extraversion determine leadership?"
+        },
+        {
+          "answer": "Possible costs include insufficient reflection, too much stimulation, overcommitment, or limiting quieter voices. The relevant cost depends on facets and context, not the label alone.",
+          "question": "What should highly extraverted people watch for?"
+        },
+        {
+          "answer": "Agreeableness may shape interpersonal tone, Conscientiousness may shape follow-through, and Openness may shape the content of exploration. Interpret combinations through examples rather than stereotypes.",
+          "question": "How does Extraversion interact with other domains?"
+        }
+      ],
+      "framework": "big_five",
+      "hreflang": {
+        "en": "/en/personality/big-five/extraversion",
+        "zh-CN": "/zh/personality/big-five/extraversion"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/big-five/facets/warmth",
+          "intent": "facet_detail",
+          "label": "Warmth"
+        },
+        {
+          "href": "/en/personality/big-five/facets/gregariousness",
+          "intent": "facet_detail",
+          "label": "Gregariousness"
+        },
+        {
+          "href": "/en/personality/big-five/facets/assertiveness",
+          "intent": "facet_detail",
+          "label": "Assertiveness"
+        },
+        {
+          "href": "/en/personality/big-five/facets/activity",
+          "intent": "facet_detail",
+          "label": "Activity"
+        },
+        {
+          "href": "/en/personality/big-five/facets/excitement-seeking",
+          "intent": "facet_detail",
+          "label": "Excitement Seeking"
+        },
+        {
+          "href": "/en/personality/big-five/facets/positive-emotions",
+          "intent": "facet_detail",
+          "label": "Positive Emotions"
+        },
+        {
+          "href": "/en/personality/big-five/extraversion-high",
+          "intent": "range",
+          "label": "high"
+        },
+        {
+          "href": "/en/personality/big-five/extraversion-mid",
+          "intent": "range",
+          "label": "mid-range"
+        },
+        {
+          "href": "/en/personality/big-five/extraversion-low",
+          "intent": "range",
+          "label": "low"
+        },
+        {
+          "href": "/en/personality/big-five",
+          "intent": "model_hub",
+          "label": "Big Five guide"
+        },
+        {
+          "href": "/en/personality/big-five/facets",
+          "intent": "facet_hub",
+          "label": "facet map"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "clinical_reviewed": false,
+        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
+        "expert_endorsement": false,
+        "limitations": [
+          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
+          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body": "Extraversion is the E in the Big Five OCEAN model. It describes tendencies involving social engagement, outward expression, assertiveness, activity, stimulation seeking, and positive emotion. It is a continuum. Lower Extraversion is often called introversion in everyday language, but it does not by itself mean shyness, loneliness, social anxiety, poor communication, or dislike of people.\n\nThis page places Extraversion—social engagement, active expression, and positive emotion—within the Big Five continuous-domain framework ([S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)). The six facets below use NEO/IPIP-NEO vocabulary. The official IPIP resource says its scales measure constructs similar to NEO facets, while the BFI-2 uses a different 15-facet architecture ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm); [S2](https://pubmed.ncbi.nlm.nih.gov/27055049/)). These labels must not be treated as fully equivalent across instruments.\n\nA meta-analysis of longitudinal research reported group-average change in some personality traits across the life course, but it cannot predict how one person, one specific facet, or a fixed age point will change ([S4](https://pubmed.ncbi.nlm.nih.gov/16435954/)).\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the scores discussed by this package. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
+          "heading": "Evidence and Interpretation Boundaries",
+          "key": "section-01-9cd44b471a",
+          "kind": "rich_text"
+        },
+        {
+          "body": "Extraversion asks how readily a person approaches social and stimulating environments, expresses presence, takes the floor, maintains a fast pace, and experiences or displays positive affect. Some people think aloud and gain momentum through interaction. Others prefer to prepare privately, contribute selectively, and recover in lower-stimulation settings. Both can care deeply about relationships and perform demanding social work.\n\nThe everyday metaphor of “social energy” can be useful if treated as a description, not a biological measurement. It may summarize how effortful or restorative a setting feels, but it is not a quantity directly established by this page. Observe actual behavior: initiation, participation, pace, stimulation choice, and recovery needs.",
+          "heading": "What Extraversion Observes",
+          "key": "section-02-5e9d4f85c6",
+          "kind": "rich_text"
+        },
+        {
+          "body": "Extraversion is not social skill, confidence, leadership ability, popularity, empathy, or mental health. A highly extraverted person can interrupt, miss cues, or feel anxious. A less extraverted person can facilitate a room, negotiate, teach, sell, or lead through preparation and focused attention. Skill is learned and situation-specific.\n\nLow Extraversion is not a defect. Shyness involves inhibition or concern about evaluation; social anxiety is a clinical concept requiring appropriate assessment. Neither can be inferred from a Big Five score. High Extraversion also does not mean superficiality or an inability to be alone.",
+          "heading": "What Extraversion Is Not",
+          "key": "section-03-04d10e8daf",
+          "kind": "rich_text"
+        },
+        {
+          "body": "Toward the higher end, people may initiate conversation, speak readily, enjoy group activity, act at a brisk pace, seek stimulation, and express enthusiasm visibly. This can help mobilize a group or widen a network. It can also create costs such as crowding quieter contributors, acting before reflection, or overbooking social commitments.\n\nToward the lower end, people may prefer smaller groups, longer preparation, quieter environments, independent work, and fewer simultaneous interactions. This can support concentration, listening, and deliberate contribution. Costs may appear when useful visibility, rapid outreach, or spontaneous coordination is repeatedly avoided. Mid-range scores often reflect flexibility across audience, role, familiarity, and fatigue.",
+          "heading": "Behavioral Tendencies Across the Continuum",
+          "key": "section-04-f749cf4eba",
+          "kind": "rich_text"
+        },
+        {
+          "body": "This package uses [Warmth](/en/personality/big-five/facets/warmth) for affectionate and friendly engagement, [Gregariousness](/en/personality/big-five/facets/gregariousness) for preference for company, and [Assertiveness](/en/personality/big-five/facets/assertiveness) for taking initiative or influence in social settings. A person may be warm without enjoying crowds, or assertive without being highly sociable.\n\n[Activity](/en/personality/big-five/facets/activity) concerns pace and busyness, [Excitement Seeking](/en/personality/big-five/facets/excitement-seeking) concerns appetite for stimulation, and [Positive Emotions](/en/personality/big-five/facets/positive-emotions) concerns the tendency to experience or express positive affect. These labels are not diagnoses or independent types.",
+          "heading": "The Six Facets of Extraversion",
+          "key": "section-05-2483e28228",
+          "kind": "rich_text"
+        },
+        {
+          "body": "Higher Extraversion may support discussion-based learning, rapid questions, public rehearsal, and momentum from peers. The risk is mistaking participation volume for understanding or leaving too little quiet time for synthesis. Lower Extraversion may support sustained reading, private practice, and thoughtful written contribution. The risk is that uncertainty remains hidden when asking for help feels disruptive.\n\nDesign can reduce both costs: provide an agenda before discussion, alternate individual thinking with group exchange, and accept written as well as spoken input. The aim is access to the task, not changing someone’s social style.",
+          "heading": "Learning and Task Settings",
+          "key": "section-06-5e2fd8c6ca",
+          "kind": "rich_text"
+        },
+        {
+          "body": "At work, higher Extraversion can help with outreach, visible coordination, real-time facilitation, and maintaining social momentum. Lower Extraversion can help with deep work, careful listening, one-to-one conversations, and preparation before high-stakes interaction. Neither predicts leadership or job performance on its own.\n\nTeams work better when airtime and influence are not treated as identical. Round-robin input, written pre-reads, explicit decision rights, and protected focus time let different styles contribute. A role that requires many interactions may be performed through practiced routines rather than trait preference.",
+          "heading": "Work and Collaboration Settings",
+          "key": "section-07-7c45a7c12a",
+          "kind": "rich_text"
+        },
+        {
+          "body": "Differences can create mistaken stories. A quiet response may be read as disinterest, while frequent contact may be read as pressure. One person may process through conversation; another may need time before answering. Neither interpretation should be assumed without asking.\n\nMake expectations concrete: how quickly a reply is needed, whether silence means reflection, how often social plans feel sustainable, and when a private conversation is preferable to a group exchange. Warmth and care can be expressed through many channels.",
+          "heading": "Communication and Relationship Settings",
+          "key": "section-08-21f5d83c28",
+          "kind": "rich_text"
+        },
+        {
+          "body": "Under stress, some people increase contact and seek stimulation; others withdraw to reduce input. A usually talkative person may become quiet from overload, and a usually reserved person may become highly active during an emergency because the role is clear. Temporary coping patterns are not a reliable reclassification of personality.\n\nCheck sleep, workload, conflict, familiarity, and perceived safety before using a trait explanation. If distress or impairment is the concern, a personality page is not a substitute for appropriate support.",
+          "heading": "Under Stress",
+          "key": "section-09-e2e7381df2",
+          "kind": "rich_text"
+        },
+        {
+          "body": "Potential strengths toward the higher end include initiation, social momentum, visible enthusiasm, rapid outreach, and comfort acting in active environments. Accompanying costs may include overstimulation, insufficient reflection, conversational dominance, or dependence on external activity to maintain focus.\n\nPotential strengths toward the lower end include concentration, selective relationships, listening, preparation, and comfort working independently. Costs may include undercommunicating progress or missing opportunities that require early visibility. The same tendency can help or hinder depending on the task and environment.",
+          "heading": "Potential Strengths and Accompanying Costs",
+          "key": "section-10-c1a9021079",
+          "kind": "rich_text"
+        },
+        {
+          "body": "Extraversion may look different with close friends, strangers, authority figures, remote teams, or a familiar audience. Expertise can make public speaking easier without changing general social preference. Language, culture, sensory environment, and role power also affect expression.\n\nSearch for counterexamples: a time you initiated despite preferring quiet, or a time you withdrew despite enjoying people. Identify what made the behavior easier or harder. This prevents a broad score from erasing learned skill and situational choice.",
+          "heading": "Context Changes and Counterexamples",
+          "key": "section-11-9d7637bb7e",
+          "kind": "rich_text"
+        },
+        {
+          "body": "Track several interactions for one week. Note whether you initiated, how much preparation you had, the group size, stimulation level, how you contributed, and what recovery you wanted afterward. Separate preference, skill, anxiety, and fatigue rather than labeling all four as introversion or extraversion.\n\nTry one small adjustment. If you tend to dominate, pause and invite a specific person before adding another point. If you tend to disappear, prepare one question or contribution in advance. Evaluate whether coordination improved; do not treat discomfort alone as failure.",
+          "heading": "How to Observe Your Own Extraversion",
+          "key": "section-12-82a913a7f8",
+          "kind": "rich_text"
+        },
+        {
+          "body": "Start with the six facets. A domain result can combine high Assertiveness with low Gregariousness, or high Warmth with a slower Activity pace. Compare the [high](/en/personality/big-five/extraversion-high), [mid-range](/en/personality/big-five/extraversion-mid), and [low](/en/personality/big-five/extraversion-low) guides as contextual hypotheses, not social grades.\n\nUse the [Big Five guide](/en/personality/big-five) and [facet map](/en/personality/big-five/facets) to interpret combinations. Focus on environments, communication agreements, and skills. Do not infer anxiety, leadership capacity, or relationship quality from this domain alone.",
+          "heading": "How to Read an Extraversion Report",
+          "key": "section-13-5546da27eb",
+          "kind": "rich_text"
+        },
+        {
+          "body": "Continue with [high Extraversion](/en/personality/big-five/extraversion-high), [mid-range Extraversion](/en/personality/big-five/extraversion-mid), or [low Extraversion](/en/personality/big-five/extraversion-low), then use the [30-facet guide](/en/personality/big-five/facets) to inspect the narrower pattern.",
+          "heading": "Continue Reading",
+          "key": "section-14-f30ce2a967",
+          "kind": "rich_text"
+        }
+      ],
+      "seo": [],
+      "sitemap_eligible": true,
+      "slug": "big-five/extraversion",
+      "source_hash": "aa99679cb79fca912d2e222b8c61d0c94db74552e1ab30477b761997d8fb75db",
+      "source_package": "big-five-en52-52-page-release-20260719",
+      "summary": "Extraversion describes tendencies around social engagement, assertiveness, activity, stimulation, and positive emotion. Lower Extraversion is not a social defect or diagnosis.",
+      "title": "Extraversion: Social Engagement, Assertiveness, and Positive Emotion"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": {
+          "name": "FermatMind Editorial",
+          "organization": "FermatMind",
+          "role": "Editorial"
+        }
+      },
+      "schema_eligible": false,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "extraversion-measurement_method-1",
+            "limitation": "Supports the continuous domain and facet vocabulary, not social skill, diagnosis, scale equivalence, or product validity.",
+            "source_ids": [
+              "S1",
+              "S11",
+              "S2"
+            ],
+            "support_level": "direct"
+          },
+          {
+            "claim_id": "extraversion-longitudinal_change-2",
+            "limitation": "Group-average longitudinal findings do not provide an individual trajectory or fixed timetable.",
+            "source_ids": [
+              "S4"
+            ],
+            "support_level": "direct"
+          },
+          {
+            "claim_id": "extraversion-product-boundary",
+            "limitation": "Public product and method boundary; not an empirical research claim.",
+            "source_ids": [],
+            "support_level": "not_required"
+          },
+          {
+            "claim_id": "extraversion-content-method",
+            "limitation": "Editorial provenance; no clinical review, expert endorsement, or product validation is claimed.",
+            "source_ids": [],
+            "support_level": "not_required"
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "General Big Five research does not establish FermatMind product validation.",
+          "Not for diagnosis, screening, admission, or individual-outcome prediction."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Goldberg, L. R.",
+            "claim_ids": [
+              "extraversion-measurement_method-1"
+            ],
+            "doi": "10.1037/0022-3514.59.6.1216",
+            "id": "S1",
+            "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
+            "source_type": "peer_reviewed_research",
+            "title": "An alternative 'description of personality': The Big-Five factor structure",
+            "year": 1990
+          },
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Oregon Research Institute IPIP project",
+            "claim_ids": [
+              "extraversion-measurement_method-1"
+            ],
+            "doi": null,
+            "id": "S11",
+            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
+            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
+            "source_type": "official_documentation",
+            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
+            "year": 2026
+          },
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Soto, C. J.; John, O. P.",
+            "claim_ids": [
+              "extraversion-measurement_method-1"
+            ],
+            "doi": "10.1037/pspp0000096",
+            "id": "S2",
+            "limitation": "PMID and DOI metadata agree. The BFI-2 15-facet hierarchy demonstrates that lower-order structures differ across instruments.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+            "source_type": "peer_reviewed_research",
+            "title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+            "year": 2017
+          },
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Roberts, B. W.; Walton, K. E.; Viechtbauer, W.",
+            "claim_ids": [
+              "extraversion-longitudinal_change-2"
+            ],
+            "doi": "10.1037/0033-2909.132.1.1",
+            "id": "S4",
+            "limitation": "PMID, DOI, title, and authors agree. Supports group mean-level change only, not individual prediction or a fixed retest interval.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/16435954/",
+            "source_type": "peer_reviewed_research",
+            "title": "Patterns of mean-level change in personality traits across the life course: A meta-analysis of longitudinal studies",
+            "year": 2006
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "08ddbc57b734e08dc499dcea7f9a33692a92718db3dc76755be5df51f60acbde"
+}

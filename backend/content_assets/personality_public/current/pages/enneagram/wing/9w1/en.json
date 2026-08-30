@@ -1,0 +1,300 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/wings/9w1",
+    "entity_key": "9w1",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/9w1"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/wings/9w1"
+      },
+      "canonical_path": "/en/personality/enneagram/wings/9w1",
+      "code": "9w1",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "9w1",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "Orderly mediation does not prove 9w1. Professional facilitation, compliance duties, cultural courtesy, or junior status can produce the same restraint; examine whether stability remains primary and when standards are voiced.",
+          "question": "Does orderly mediation prove 9w1?"
+        },
+        {
+          "answer": "9w1 should be compared with core One through decision timing: a Nine-centered pattern may delay correction to preserve continuity, while a One-centered pattern may act sooner because an error violates an internal standard.",
+          "question": "How should 9w1 be compared with core One?"
+        },
+        {
+          "answer": "Evidence weakens a quiet-correction hypothesis when the person states unpopular standards promptly, tolerates open procedural friction, revises a rule after new facts, and does not require calm before acting.",
+          "question": "Which evidence weakens a quiet-correction hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/9w1",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:9w1",
+        "x-default": "/en/personality/enneagram/wings/9w1",
+        "zh-CN": "/zh/personality/enneagram/wings/9w1"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-9",
+          "label": "core_type:type-9",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-9"
+        },
+        {
+          "href": "/en/personality/enneagram/type-1",
+          "label": "core_type:type-1",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-1"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/9w8",
+          "label": "wing:9w8",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:9w8"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "Ask whether the person uses standards to keep participation workable and conflict contained, or whether correctness itself organizes attention. A core-Nine interpretation requires more than tidy behavior.",
+          "key": "core_first_modifier",
+          "title": "Start with continuity before evaluating standards"
+        },
+        {
+          "body_md": "A Nine-centered reading may postpone correction until tension threatens stability; a One-centered reading may correct earlier because error violates an internal standard. Test repeated sequences across equal-power contexts.",
+          "key": "sibling_core_comparison",
+          "title": "Compare Nine with One using decision timing"
+        },
+        {
+          "body_md": "Use a planning review, household routine, or fairness dispute. Record the rule cited, when concern was voiced, what compromise was accepted, and whether unspoken resentment later changes participation.",
+          "key": "observable_situations",
+          "title": "Observe process objections and hidden irritation"
+        },
+        {
+          "body_md": "Confidence should fall when the person routinely names an unpopular standard early, tolerates procedural friction, revises their own rule after evidence, and preserves connection without muting the objection.",
+          "key": "counterexample",
+          "title": "Seek visible disagreement without self-erasure"
+        },
+        {
+          "body_md": "Regulated work, religious practice, quality assurance, junior status, language norms, disability accommodation, and retaliation risk may produce orderly restraint without a wing explanation.",
+          "key": "alternative_explanations",
+          "title": "Check compliance, training, and cultural restraint"
+        },
+        {
+          "body_md": "Wing research is sparse, so 9w1 remains a secondary observation hypothesis. It cannot certify morality, fairness, conscientiousness, self-control, or suitability for any role.",
+          "key": "wing_boundary",
+          "title": "Keep 9w1 provisional and core first"
+        },
+        {
+          "body_md": "Duration: 6\n\nContext: Across six days, choose one procedural disagreement, one fairness concern, and one routine where your preferred standard differs from the group’s.\n\nObservable signal: Record the standard, first moment of concern, exact objection, authority level, accepted compromise, later irritation, and any correction or repair.\n\nPage-specific signal: Compare an orderly silence that protects timing with a silence that leaves a preventable error or hidden resentment.\n\nAlternative explanation: Check compliance duty, professional training, cultural courtesy, junior status, language access, fatigue, and realistic retaliation risk.\n\nReflection prompt: Describe one occasion when voicing a standard earlier improved both accuracy and connection, then revise the 9w1 hypothesis.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Check compliance duty, professional training, cultural courtesy, junior status, language access, fatigue, and realistic retaliation risk.",
+            "context": "Across six days, choose one procedural disagreement, one fairness concern, and one routine where your preferred standard differs from the group’s.",
+            "duration_days": 6,
+            "observable_signal": "Record the standard, first moment of concern, exact objection, authority level, accepted compromise, later irritation, and any correction or repair.",
+            "page_specific_signal": "Compare an orderly silence that protects timing with a silence that leaves a preventable error or hidden resentment.",
+            "reflection_prompt": "Describe one occasion when voicing a standard earlier improved both accuracy and connection, then revise the 9w1 hypothesis."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "9w1 is an evidence-limited wing hypothesis that keeps Type Nine’s stability and connection pattern primary while using One-like order, fairness standards, restraint, and quiet correction as possible modifiers. Courtesy, conscientiousness, or procedural care does not establish 9w1 because role expectations, culture, perfectionism, compliance risk, or fear of retaliation may look similar.",
+        "title": "9w1: a core-Nine hypothesis modified by orderly standards"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/9w1",
+      "source_hash": "2047509d25289f3168230735ff88a0456b378572114968dc3397e69f5611bfcc",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "9w1 is an evidence-limited wing hypothesis that keeps Type Nine’s stability and connection pattern primary while using One-like order, fairness standards, restraint, and quiet correction as possible modifiers. Courtesy, conscientiousness, or procedural care does not establish 9w1 because role expectations, culture, perfectionism, compliance risk, or fear of retaliation may look similar.",
+      "title": "9w1: a core-Nine hypothesis modified by orderly standards"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "d56b5cd518ff448d84cbe78640476fe783d4fc6b94cc72f0f15cc9755614aa49"
+}

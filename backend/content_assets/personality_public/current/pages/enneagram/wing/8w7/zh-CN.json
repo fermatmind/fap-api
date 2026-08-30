@@ -1,0 +1,300 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh/personality/enneagram/wings/8w7",
+    "entity_key": "8w7",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/8w7"
+  },
+  "locale": "zh-CN",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh/personality/enneagram/wings/8w7"
+      },
+      "canonical_path": "/zh/personality/enneagram/wings/8w7",
+      "code": "8w7",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "8w7",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不能。所有权、市场窗口、投资压力、销售奖励或人手限制都可能要求快速扩张。应比较增长没有额外回报时如何处理选项，以及是否愿意先完成不起眼的维护责任。",
+          "question": "创业者精力旺盛是否就能证明 8w7？"
+        },
+        {
+          "answer": "危机处置有明确事故、授权、停止条件和可追责交接；事故已经控制后仍持续打开路线，才更接近需要检验的扩张模式，并应记录新增路线由谁承担资源和收尾。",
+          "question": "怎样区分扩张行动与必要危机处置？"
+        },
+        {
+          "answer": "选择一个有边界的计划、放弃额外规模、尊重拒绝，并先完成日常维护再追求新鲜感，都会削弱选项扩张解释；在高收益诱惑仍存在时，这类反例更有信息量。",
+          "question": "哪种收窄选择会削弱第七型修饰？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/8w7",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:8w7",
+        "x-default": "/en/personality/enneagram/wings/8w7",
+        "zh-CN": "/zh/personality/enneagram/wings/8w7"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh/personality/enneagram/type-8",
+          "label": "core_type:type-8",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-8"
+        },
+        {
+          "href": "/zh/personality/enneagram/type-7",
+          "label": "core_type:type-7",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-7"
+        },
+        {
+          "href": "/zh/personality/enneagram/wings/8w9",
+          "label": "wing:8w9",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:8w9"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-CN",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "写清受阻路线、新增选项、追加资源、截止时间变化、被招募人员和既有承诺是否完成。只有动量而没有责任归属，不能支持翼型判断。",
+          "key": "observable_situations",
+          "title": "在真实阻力后记录扩张动作"
+        },
+        {
+          "body_md": "先观察直接影响、控制、保护和受限反应；只有在岗位不要求扩张时，持续开新路线与加速追求仍反复修饰自主模式，才考虑第七型次级影响。",
+          "key": "core_first_modifier",
+          "title": "先检验自主核心再讨论动量修饰"
+        },
+        {
+          "body_md": "若能选择一个规模适中的路线、拒绝刺激性扩张、尊重他人拒绝，并先完成维护再追求增长，就应降低选项与欲求修饰假设。",
+          "key": "counterexample",
+          "title": "用主动收窄规模作为反证"
+        },
+        {
+          "body_md": "面对相同限制，8w7 可能打开新路线并提高速度，8w9 可能稳住领地等待持久杠杆。比较前必须让授权、时限与风险承担尽量接近。",
+          "key": "sibling_core_comparison",
+          "title": "在同一资源上限比较 8w7 与 8w9"
+        },
+        {
+          "body_md": "8w7 不能预测商业成功、体力、勇气或风险承受。翼型研究支持有限，法律、财务、同意与安全约束始终高于类型解释。",
+          "key": "wing_boundary",
+          "title": "扩张欲求不等于能力与成功"
+        },
+        {
+          "body_md": "创业、销售提成、竞选、应急响应、竞技项目、人手缺口或市场震荡都可能奖励动量和选项创造，应先判断这些因素是否已足够。",
+          "key": "alternative_explanations",
+          "title": "把市场和岗位激励留在解释中"
+        },
+        {
+          "body_md": "持续天数: 4\n\n情境: 四天内选择一个受阻启动和一项常规维护任务，提前写明预算、授权与双方可以接受的停止条件。\n\n可观察信号: 记录每个新选项、追加资源、速度变化、负责人、同意结果、被挤出的既有任务与最终交付状态。\n\n本页特定信号: 比较遇阻后的扩张冲动，与新路线虽刺激但无必要时主动收窄范围的能力。\n\n替代解释: 检查创业激励、销售目标、危机时限、人手缺口、市场波动、竞赛规则和正式授权。\n\n复盘问题: 找出一次维持单一路线比扩张创造更多价值的事件，并据此修正翼型假设。",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "检查创业激励、销售目标、危机时限、人手缺口、市场波动、竞赛规则和正式授权。",
+            "context": "四天内选择一个受阻启动和一项常规维护任务，提前写明预算、授权与双方可以接受的停止条件。",
+            "duration_days": 4,
+            "observable_signal": "记录每个新选项、追加资源、速度变化、负责人、同意结果、被挤出的既有任务与最终交付状态。",
+            "page_specific_signal": "比较遇阻后的扩张冲动，与新路线虽刺激但无必要时主动收窄范围的能力。",
+            "reflection_prompt": "找出一次维持单一路线比扩张创造更多价值的事件，并据此修正翼型假设。"
+          },
+          "title": "观察练习"
+        }
+      ],
+      "seo": {
+        "description": "8w7 是证据有限的翼型假设：第八型自主与行动动量仍以直接影响为主，第七型可能增加选项、欲求与扩张行动。高速增长或精力旺盛不能证明 8w7；创业激励、危机节奏与销售目标、资源充足、市场波动和岗位授权都可能形成相同表现。",
+        "title": "8w7：以第八型为主、关注动量、选项与扩张行动的翼型假设"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/8w7",
+      "source_hash": "1b0cb25f9f1a69cbc7bd5af1bf417fa905673c8f67d1cf945650447f202ebdba",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "8w7 是证据有限的翼型假设：第八型自主与行动动量仍以直接影响为主，第七型可能增加选项、欲求与扩张行动。高速增长或精力旺盛不能证明 8w7；创业激励、危机节奏与销售目标、资源充足、市场波动和岗位授权都可能形成相同表现。",
+      "title": "8w7：以第八型为主、关注动量、选项与扩张行动的翼型假设"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "b5683a010c34816d795cd2a9d5c9a03809c39767980d61b7a6ae13f588b0341b"
+}

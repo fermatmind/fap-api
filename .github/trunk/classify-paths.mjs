@@ -53,6 +53,17 @@ const isCareerAuthorityReleaseBoundary = (path) => isCareerPublisherBoundary(pat
   && path !== ".github/workflows/ci.yml"
   && path !== ".github/workflows/deploy.yml";
 
+export const PERSONALITY_CURRENT_BOUNDARY_MATRIX = [
+  "backend/content_assets/personality_public/current/",
+  "backend/app/Domain/Personality/Current/",
+  "backend/app/Console/Commands/PersonalityCurrentManifest.php",
+  "backend/scripts/personality/export_current_baseline.mjs",
+];
+
+const isPersonalityCurrentBoundary = (path) => PERSONALITY_CURRENT_BOUNDARY_MATRIX.some(
+  (boundary) => boundary.endsWith("/") ? path.startsWith(boundary) : path === boundary,
+);
+
 const SEO_COUNCIL_CONTROL_PLANE_PATHS = new Set([
   ".github/trunk/classify-paths.mjs",
   ".github/trunk/classify-paths.test.mjs",
@@ -80,6 +91,7 @@ export function classifyPaths(inputPaths) {
   const operations = {
     publisher_required: publisherRequired,
     career_current_authority_release: paths.some(isCareerAuthorityReleaseBoundary),
+    personality_current_authority_release: paths.some(isPersonalityCurrentBoundary),
     mbti_zh_result_authority_release: paths.includes(
       "backend/content_assets/personality_public/mbti_zh_result_authority_release.v1.json",
     ),

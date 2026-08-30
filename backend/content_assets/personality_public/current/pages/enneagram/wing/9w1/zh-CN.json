@@ -1,0 +1,300 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh/personality/enneagram/wings/9w1",
+    "entity_key": "9w1",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/9w1"
+  },
+  "locale": "zh-CN",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh/personality/enneagram/wings/9w1"
+      },
+      "canonical_path": "/zh/personality/enneagram/wings/9w1",
+      "code": "9w1",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "9w1",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "有序调停行为能够单独证明9w1翼型吗？不能。专业主持、合规职责、文化礼貌或低职位都可能带来克制；要检查稳定是否始终优先、标准在方案形成前还是之后说出、沉默造成什么错误，以及当事人是否完成后续纠正。",
+          "question": "有序调停行为能够单独证明9w1翼型吗"
+        },
+        {
+          "answer": "9w1如何与一号核心比较？可以看纠正时点：九号核心可能为维持连续性而延后，一号核心可能因错误触犯内在标准而较早行动；需要跨事件复核。",
+          "question": "9w1如何与一号核心比较"
+        },
+        {
+          "answer": "哪些证据削弱安静纠正假设？若当事人及时提出不受欢迎的标准、承受公开程序摩擦、依据新事实修改规则，并在不先恢复平静时继续行动，就应降低该解释。",
+          "question": "哪些证据削弱安静纠正假设"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/9w1",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:9w1",
+        "x-default": "/en/personality/enneagram/wings/9w1",
+        "zh-CN": "/zh/personality/enneagram/wings/9w1"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh/personality/enneagram/type-9",
+          "label": "core_type:type-9",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-9"
+        },
+        {
+          "href": "/zh/personality/enneagram/type-1",
+          "label": "core_type:type-1",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-1"
+        },
+        {
+          "href": "/zh/personality/enneagram/wings/9w8",
+          "label": "wing:9w8",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:9w8"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-CN",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "受监管工作、质量控制、宗教实践、文化礼仪、语言条件、低职位和现实报复风险，都可能产生有序克制而无需翼型解释。",
+          "key": "alternative_explanations",
+          "title": "先核对合规训练与权力位置"
+        },
+        {
+          "body_md": "选择流程评审、家庭惯例或公平争议，记录引用的规则、提出担忧的时点、接受的折中，以及未说出的不满是否改变后续参与。",
+          "key": "observable_situations",
+          "title": "观察规则何时进入共同讨论"
+        },
+        {
+          "body_md": "询问当事人是用规则维持共同参与，还是由正确本身持续组织注意；只有整洁或克制行为，无法支持九号核心判断。",
+          "key": "core_first_modifier",
+          "title": "确认秩序是否服务于稳定"
+        },
+        {
+          "body_md": "若当事人能及早提出不受欢迎的标准、容纳程序摩擦、根据新证据修改自己的规则，并保持连接，安静纠正假设会减弱。",
+          "key": "counterexample",
+          "title": "寻找公开异议与规则修订"
+        },
+        {
+          "body_md": "九号核心可能把纠正推迟到稳定受威胁之后，一号核心可能因错误违背内在标准而更早行动；需要在平等权力情境中重复比较。",
+          "key": "sibling_core_comparison",
+          "title": "用纠正时点比较九号与一号"
+        },
+        {
+          "body_md": "翼型研究支持很少，因此9w1不能证明道德、公平、尽责或自控水平，也不能用于岗位筛选或任何结果判断。",
+          "key": "wing_boundary",
+          "title": "只把9w1当作次级观察"
+        },
+        {
+          "body_md": "持续天数: 6\n\n情境: 六天内选择一次程序分歧、一次公平担忧和一次个人标准与群体安排不同的日常事件。\n\n可观察信号: 记录标准内容、最早发现时点、提出异议的原话、权限、接受折中、后续不满以及完成的纠正。\n\n本页特定信号: 比较一次为了选择时机而有序沉默，与一次沉默导致可预防错误或隐藏怨气的事件。\n\n替代解释: 核对合规职责、专业训练、文化礼貌、职位高低、语言条件、疲劳和真实报复风险。\n\n复盘问题: 说明一次更早提出标准同时改善准确性与连接的经历，并重新评估9w1假设。",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "核对合规职责、专业训练、文化礼貌、职位高低、语言条件、疲劳和真实报复风险。",
+            "context": "六天内选择一次程序分歧、一次公平担忧和一次个人标准与群体安排不同的日常事件。",
+            "duration_days": 6,
+            "observable_signal": "记录标准内容、最早发现时点、提出异议的原话、权限、接受折中、后续不满以及完成的纠正。",
+            "page_specific_signal": "比较一次为了选择时机而有序沉默，与一次沉默导致可预防错误或隐藏怨气的事件。",
+            "reflection_prompt": "说明一次更早提出标准同时改善准确性与连接的经历，并重新评估9w1假设。"
+          },
+          "title": "观察练习"
+        }
+      ],
+      "seo": {
+        "description": "9w1是证据有限的翼型观察假设，以九号的稳定连接倾向为核心，把一号式秩序、公平标准、克制和安静纠正作为可能修饰。礼貌、尽责或重视流程不能证明9w1；合规要求、专业训练、文化表达、完美主义、低职位或报复风险也会造成类似表现。",
+        "title": "9w1：稳定连接下的原则与秩序修饰假设"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/9w1",
+      "source_hash": "eecd2ec508319f60555b5a7583042eafc55a37169bc25c5d33f60074f41e1063",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "9w1是证据有限的翼型观察假设，以九号的稳定连接倾向为核心，把一号式秩序、公平标准、克制和安静纠正作为可能修饰。礼貌、尽责或重视流程不能证明9w1；合规要求、专业训练、文化表达、完美主义、低职位或报复风险也会造成类似表现。",
+      "title": "9w1：稳定连接下的原则与秩序修饰假设"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "e906b02f6f29677bb75107c016e410b73519db999d4641804acf15fc38fe304f"
+}

@@ -1,0 +1,373 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-9",
+    "entity_key": "type-9",
+    "entity_type": "core_type",
+    "framework": "enneagram",
+    "page_kind": "core_type",
+    "slug": "enneagram/type-9"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-9"
+      },
+      "canonical_path": "/en/personality/enneagram/type-9",
+      "code": "type-9",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-9",
+      "entity_type": "core_type",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.application.exploratory_not_predictive",
+            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
+            "source_ids": [
+              "sutton_2013_work_outcomes",
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.application.exploratory_not_predictive",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
+            "claim_ids": [
+              "claim.application.exploratory_not_predictive"
+            ],
+            "doi": "10.1016/j.emj.2012.12.004",
+            "id": "sutton_2013_work_outcomes",
+            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
+            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
+            "source_type": "peer_reviewed_research",
+            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
+            "year": 2013
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "Calm mediation does not prove Type Nine. A designated facilitator, a person with less power, or someone managing real danger may use the same behavior; compare private preference, available refusal, and follow-through after the meeting.",
+          "question": "Does calm mediation prove Type Nine?"
+        },
+        {
+          "answer": "Delayed conflict should be distinguished from consent by checking whether a clear preference was stated, whether refusal was safe, and whether later resentment or task drift reveals an agreement that was never freely chosen.",
+          "question": "How should delayed conflict be distinguished from consent?"
+        },
+        {
+          "answer": "Evidence should reduce a priority-blurring hypothesis when the person schedules their own agenda, states disagreement before pressure builds, accepts another person’s disappointment, and completes the selected next step.",
+          "question": "Which evidence should reduce a priority-blurring hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-9",
+        "reciprocal": true,
+        "translation_group": "enneagram:core_type:type-9",
+        "x-default": "/en/personality/enneagram/type-9",
+        "zh-CN": "/zh/personality/enneagram/type-9"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/centers/gut",
+          "label": "center:gut",
+          "relationship": "center_membership",
+          "target_identity_key": "center:gut"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/9w8",
+          "label": "wing:9w8",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:9w8"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/9w1",
+          "label": "wing:9w1",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:9w1"
+        },
+        {
+          "href": "/en/personality/enneagram/type-9/instincts/self-preservation",
+          "label": "instinctual_subtype:type-9/self-preservation",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-9/self-preservation"
+        },
+        {
+          "href": "/en/personality/enneagram/type-9/instincts/social",
+          "label": "instinctual_subtype:type-9/social",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-9/social"
+        },
+        {
+          "href": "/en/personality/enneagram/type-9/instincts/one-to-one",
+          "label": "instinctual_subtype:type-9/one-to-one",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-9/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.application.exploratory_not_predictive",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "When a request arrives, record the person’s first preference, the competing agenda that becomes louder, and the moment their own priority is postponed. The sequence matters more than a peaceful tone.",
+          "key": "motivation_attention",
+          "title": "Locate the priority before interpreting calm"
+        },
+        {
+          "body_md": "Agreement can reflect consent, professional mediation, scarce bargaining power, language access, or a realistic safety calculation. Ask what options and consequences were actually available before inferring conflict avoidance.",
+          "key": "behavior_motive",
+          "title": "Separate accommodation from inferred motive"
+        },
+        {
+          "body_md": "Compare the private decision with the statement made to others, then track whether a deadline, refusal, or counterproposal follows. If resentment appears later, record the missed decision point and any repair.",
+          "key": "decision_feedback_conflict",
+          "title": "Follow decisions through disagreement and repair"
+        },
+        {
+          "body_md": "Stability attention may support patience, broad perspective, de-escalation, and durable cooperation. Costs arise when urgent differences are blurred, commitments drift, or other people must guess what consent really means.",
+          "key": "strengths_tradeoffs",
+          "title": "Hold steadiness beside eroded agency"
+        },
+        {
+          "body_md": "At work, distinguish a facilitator pausing debate from an employee staying silent under retaliation risk. In a relationship, distinguish a chosen compromise from repeatedly surrendering plans without discussion.",
+          "key": "work_relationship_examples",
+          "title": "Use role and power as comparison controls"
+        },
+        {
+          "body_md": "The 9w8 hypothesis adds grounded resistance, territorial steadiness, and delayed force; 9w1 adds orderly restraint, fairness standards, and quiet correction. Also compare Type Two helpfulness, Type Six caution, burnout, and learned diplomacy.",
+          "key": "wings_mistypes",
+          "title": "Compare 9w8 and 9w1 without fixing identity"
+        },
+        {
+          "body_md": "Confidence should fall when the person names a priority early, tolerates another person’s disappointment, gives a bounded no, and completes the chosen task without needing conflict to disappear first.",
+          "key": "counterexample",
+          "title": "Search for timely preference and clean refusal"
+        },
+        {
+          "body_md": "Use this page to examine stability, connection, priority, and conflict-delay patterns. It cannot rank virtue, passivity, leadership, employability, relationship quality, health, or future outcomes.",
+          "key": "use_boundary",
+          "title": "Keep the hypothesis limited to observation"
+        },
+        {
+          "body_md": "Duration: 5\n\nContext: Across five days, choose one shared schedule decision, one low-stakes disagreement, and one request that competes with an existing commitment.\n\nObservable signal: Record the first private preference, exact words communicated, available refusal, calendar placement, later irritation, and the next completed action.\n\nPage-specific signal: Compare how quickly a personal priority receives time when another person is disappointed versus when everyone readily agrees.\n\nAlternative explanation: Check formal role, retaliation risk, cultural communication, language access, fatigue, disability, caregiving load, and actual danger.\n\nReflection prompt: Identify one event where stating a preference promptly improved coordination, then revise the conflict-delay hypothesis upward or downward.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Check formal role, retaliation risk, cultural communication, language access, fatigue, disability, caregiving load, and actual danger.",
+            "context": "Across five days, choose one shared schedule decision, one low-stakes disagreement, and one request that competes with an existing commitment.",
+            "duration_days": 5,
+            "observable_signal": "Record the first private preference, exact words communicated, available refusal, calendar placement, later irritation, and the next completed action.",
+            "page_specific_signal": "Compare how quickly a personal priority receives time when another person is disappointed versus when everyone readily agrees.",
+            "reflection_prompt": "Identify one event where stating a preference promptly improved coordination, then revise the conflict-delay hypothesis upward or downward."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "Type Nine is a traditional Enneagram hypothesis about attention returning to stability, connection, competing priorities, conflict delay, and the cost of losing contact with one’s own agenda. Calm behavior alone does not establish motive: mediation duty, low authority, cultural restraint, fatigue, disability, trauma safety, or actual danger can produce similar choices, so alternative explanations need explicit checking.",
+        "title": "Type Nine: stability, priority, and a revisable conflict-delay hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-9",
+      "source_hash": "d4ee4d233e05220154208cb1b414490c756d1dd82796b169a949461ae8d35591",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "Type Nine is a traditional Enneagram hypothesis about attention returning to stability, connection, competing priorities, conflict delay, and the cost of losing contact with one’s own agenda. Calm behavior alone does not establish motive: mediation duty, low authority, cultural restraint, fatigue, disability, trauma safety, or actual danger can produce similar choices, so alternative explanations need explicit checking.",
+      "title": "Type Nine: stability, priority, and a revisable conflict-delay hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.application.exploratory_not_predictive",
+            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
+            "source_ids": [
+              "sutton_2013_work_outcomes",
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.application.exploratory_not_predictive",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
+            "claim_ids": [
+              "claim.application.exploratory_not_predictive"
+            ],
+            "doi": "10.1016/j.emj.2012.12.004",
+            "id": "sutton_2013_work_outcomes",
+            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
+            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
+            "source_type": "peer_reviewed_research",
+            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
+            "year": 2013
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "fc052657301212433f7989cf06973f0069b45a2e321b38ab5f546c79799ec022"
+}

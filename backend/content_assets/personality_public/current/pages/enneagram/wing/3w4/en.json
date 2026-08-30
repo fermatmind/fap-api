@@ -1,0 +1,300 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/wings/3w4",
+    "entity_key": "3w4",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/3w4"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/wings/3w4"
+      },
+      "canonical_path": "/en/personality/enneagram/wings/3w4",
+      "code": "3w4",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "3w4",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Training, specialization, branding requirements, or a client brief may create a signature style. The hypothesis needs Type Three result attention plus repeated distinctiveness and counterexamples.",
+          "question": "Does a signature style establish 3w4?"
+        },
+        {
+          "answer": "Hold the expressive work constant. A 3w4 hypothesis keeps credible delivery and demonstrated value central; a Four hypothesis may emphasize identity, meaning, and emotional congruence more directly.",
+          "question": "How does 3w4 differ from a Four hypothesis?"
+        },
+        {
+          "answer": "Standardized work preferred across settings, private exploration with no conversion to a valued outcome, or distinctiveness appearing only under portfolio rules would weaken it.",
+          "question": "What weakens the distinctive-craft hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/3w4",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:3w4",
+        "x-default": "/en/personality/enneagram/wings/3w4",
+        "zh-CN": "/zh/personality/enneagram/wings/3w4"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-3",
+          "label": "core_type:type-3",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-3"
+        },
+        {
+          "href": "/en/personality/enneagram/type-4",
+          "label": "core_type:type-4",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-4"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/3w2",
+          "label": "wing:3w2",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:3w2"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "Begin with Type Three result attention, then ask whether distinctiveness and personal expression repeatedly shape what counts as a credible result. Originality without result tracking may reflect craft interest, Four themes, expertise, or a field that rewards novelty.",
+          "key": "core_first_modifier",
+          "title": "Keep valued delivery at the core"
+        },
+        {
+          "body_md": "Compared with 3w2 relational reach, 3w4 may emphasize a recognizable body of work. Compared with Four, the proposed core remains delivering and demonstrating value rather than preserving identity or emotional meaning as the central concern.",
+          "key": "sibling_core_comparison",
+          "title": "Contrast 3w4 with 3w2 and Four"
+        },
+        {
+          "body_md": "Compare the same work under anonymous review, public attribution, and a restrictive brief. Record which revisions improve evidence, which preserve a signature, and which respond mainly to anticipated recognition.",
+          "key": "observable_situations",
+          "title": "Observe revision under anonymous and named review"
+        },
+        {
+          "body_md": "The hypothesis weakens when the person prefers standardized excellence without distinctiveness, explores privately with no need to convert work into a valued result, or adopts a signature only because a portfolio brief requires it.",
+          "key": "counterexample",
+          "title": "Use generic excellence and unmarketed exploration as tests"
+        },
+        {
+          "body_md": "Design, research, writing, product, and performance fields may reward novelty and a recognizable portfolio. Compare other settings, access to resources, client constraints, training, and career stage before retaining a wing explanation.",
+          "key": "alternative_explanations",
+          "title": "Test field norms and specialization"
+        },
+        {
+          "body_md": "Wing evidence is sparse. The 3w4 hypothesis assigns no creativity score, artistic identity, employability, superiority, mental-health meaning, or prediction about achievement.",
+          "key": "wing_boundary",
+          "title": "Keep distinctive craft evidence limited"
+        },
+        {
+          "body_md": "Duration: 4\n\nContext: Choose one anonymous review, one named portfolio item, and one restrictive client brief involving comparable work.\n\nObservable signal: Record the success criterion, revision reason, evidence improved, signature retained, audience known, and attribution available.\n\nPage-specific signal: Separate revisions that improve the result from revisions mainly preserving recognizability.\n\nAlternative explanation: Compare professional training, portfolio rules, client demand, field novelty, resources, and career stage.\n\nReflection prompt: Name where specialization explains distinctiveness without a 3w4 modifier.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Compare professional training, portfolio rules, client demand, field novelty, resources, and career stage.",
+            "context": "Choose one anonymous review, one named portfolio item, and one restrictive client brief involving comparable work.",
+            "duration_days": 4,
+            "observable_signal": "Record the success criterion, revision reason, evidence improved, signature retained, audience known, and attribution available.",
+            "page_specific_signal": "Separate revisions that improve the result from revisions mainly preserving recognizability.",
+            "reflection_prompt": "Name where specialization explains distinctiveness without a 3w4 modifier."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "The 3w4 wing is a core-first, evidence-limited hypothesis: Type Three attention to valued results may be modified by Four-adjacent distinctiveness, personal expression, and comparison with an ideal. A polished signature style cannot establish a wing because specialization, portfolio demands, and aesthetic training can produce it.",
+        "title": "3w4: distinctive craft as a core-first wing hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/3w4",
+      "source_hash": "e1fde4f38c742da6f8d7720a8b359b7aabdda18dc5b67a2f3713a7a8a5985679",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "The 3w4 wing is a core-first, evidence-limited hypothesis: Type Three attention to valued results may be modified by Four-adjacent distinctiveness, personal expression, and comparison with an ideal. A polished signature style cannot establish a wing because specialization, portfolio demands, and aesthetic training can produce it.",
+      "title": "3w4: distinctive craft as a core-first wing hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "1d6d9e7620fa329c87883e3d4da8d3b67c4b65fe5bb49d51d79092e09a743c5a"
+}

@@ -1,0 +1,335 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-8/instincts/social",
+    "entity_key": "type-8/social",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-8/instincts/social"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-8/instincts/social"
+      },
+      "canonical_path": "/en/personality/enneagram/type-8/instincts/social",
+      "code": "type-8/social",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-8/social",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Legal duty, discrimination, union work, community survival, family responsibility, or an explicit request may require advocacy. Examine authorization and power distribution.",
+          "question": "Does advocacy prove a social Eight subtype?"
+        },
+        {
+          "answer": "Requested protection begins with affected people’s stated needs and preserves their decision power. Self-appointed action may impose risk or silence the people it claims to defend.",
+          "question": "Why distinguish requested from self-appointed protection?"
+        },
+        {
+          "answer": "Following a less powerful member’s plan, accepting correction, and returning authority after the threat ends weaken an account centered on retaining protective group power.",
+          "question": "What leadership handoff weakens the social hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-8/instincts/social",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-8/social",
+        "x-default": "/en/personality/enneagram/type-8/instincts/social",
+        "zh-CN": "/zh/personality/enneagram/type-8/instincts/social"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-8",
+          "label": "core_type:type-8",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-8"
+        },
+        {
+          "href": "/en/personality/enneagram/type-8/instincts/self-preservation",
+          "label": "instinctual_subtype:type-8/self-preservation",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-8/self-preservation"
+        },
+        {
+          "href": "/en/personality/enneagram/type-8/instincts/one-to-one",
+          "label": "instinctual_subtype:type-8/one-to-one",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-8/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "The tradition suggests that direct force may be organized around allies, vulnerable members, or a collective cause. Observe authorization, benefit, accountability, and whether power returns to the group.",
+          "key": "traditional_hypothesis",
+          "title": "Frame group protection as a proposed autonomy route"
+        },
+        {
+          "body_md": "Social instinct is a traditional observation label, not evidence about bodily mechanisms. Law, discrimination, governance, collective bargaining, and public safety require their own evidence.",
+          "key": "instinct_boundary",
+          "title": "Keep social language at the role-and-attention level"
+        },
+        {
+          "body_md": "Hold the threat constant and compare an intervention requested by affected members with one initiated without consultation. Record voice gained, resources transferred, risk imposed, and recourse.",
+          "key": "matched_comparison",
+          "title": "Compare requested and self-appointed protection"
+        },
+        {
+          "body_md": "Protection may appear as direct challenge, legal organizing, resource distribution, mentoring, or building durable group procedures. Loud advocacy is only one possible surface.",
+          "key": "countertype_variation",
+          "title": "Allow visible confrontation or quiet infrastructure"
+        },
+        {
+          "body_md": "Union office, safeguarding responsibility, emergency command, civil-rights work, family role, persecution, and absent public services may require collective protection independent of subtype.",
+          "key": "alternative_environment",
+          "title": "Audit duty, discrimination, and institutional failure"
+        },
+        {
+          "body_md": "Confidence falls when the person declines spokesperson status, follows the group’s chosen strategy, accepts correction from less powerful members, and releases control after the threat is contained.",
+          "key": "counterexample",
+          "title": "Look for power returned to affected members"
+        },
+        {
+          "body_md": "The subtype cannot establish fairness, loyalty, political correctness, or leadership legitimacy. Instrument-specific findings do not prove a universal ontology, and outcomes must be evaluated directly.",
+          "key": "evidence_boundary",
+          "title": "Do not infer justice or moral authority"
+        },
+        {
+          "body_md": "Duration: 4\n\nContext: Across four days, examine one protective group action and one routine governance decision involving the same affected members.\n\nObservable signal: Record who requested action, who spoke, who bore risk, resources transferred, dissent allowed, decision power gained, and when leadership was released.\n\nPage-specific signal: Compare protection that increases affected members’ agency with intervention that centralizes authority in the protector.\n\nAlternative explanation: Check formal safeguarding duty, union role, discrimination, institutional failure, persecution, emergency command, and family expectations.\n\nReflection prompt: Identify the event where following the group’s strategy worked best and revise any self-appointed-protection interpretation.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Check formal safeguarding duty, union role, discrimination, institutional failure, persecution, emergency command, and family expectations.",
+            "context": "Across four days, examine one protective group action and one routine governance decision involving the same affected members.",
+            "duration_days": 4,
+            "observable_signal": "Record who requested action, who spoke, who bore risk, resources transferred, dissent allowed, decision power gained, and when leadership was released.",
+            "page_specific_signal": "Compare protection that increases affected members’ agency with intervention that centralizes authority in the protector.",
+            "reflection_prompt": "Identify the event where following the group’s strategy worked best and revise any self-appointed-protection interpretation."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "Type Eight social is a traditional, evidence-limited hypothesis combining Type Eight autonomy with solidarity, protection, group power, justice, loyalty, and collective action. Advocacy does not establish subtype because professional duty, discrimination, union roles, community defense, institutional failure, political conditions, and direct requests from affected people can produce similar behavior.",
+        "title": "Type Eight social: a solidarity, protection, and group-power hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-8/instincts/social",
+      "source_hash": "49e9c335101fb552ae711587377dc1934548f373a727912290ba0bd66a44b399",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "Type Eight social is a traditional, evidence-limited hypothesis combining Type Eight autonomy with solidarity, protection, group power, justice, loyalty, and collective action. Advocacy does not establish subtype because professional duty, discrimination, union roles, community defense, institutional failure, political conditions, and direct requests from affected people can produce similar behavior.",
+      "title": "Type Eight social: a solidarity, protection, and group-power hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "9c279ba1c365a61138b5670ad1184757cfcaf04777c395341988f146707fc07b"
+}

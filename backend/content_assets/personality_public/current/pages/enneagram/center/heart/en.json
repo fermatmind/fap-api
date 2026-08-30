@@ -1,0 +1,287 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/centers/heart",
+    "entity_key": "heart",
+    "entity_type": "center",
+    "framework": "enneagram",
+    "page_kind": "center",
+    "slug": "enneagram/centers/heart"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/centers/heart"
+      },
+      "canonical_path": "/en/personality/enneagram/centers/heart",
+      "code": "heart",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "heart",
+      "entity_type": "center",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Visible emotion can reflect temperament, culture, stress, relationship safety, or communication norms. A stronger observation compares what attention and presentation changed across similar social events.",
+          "question": "Does visible emotion prove a heart-center pattern?"
+        },
+        {
+          "answer": "Helping may express care, duty, reciprocity, expertise, conflict avoidance, or a wish to be needed. The action becomes informative only when its context, explanation, alternatives, and counterexamples are recorded.",
+          "question": "Why can the same helpful act support different interpretations?"
+        },
+        {
+          "answer": "Track visible changes after praise, comparison, or exclusion, then ask what the person actually reported. Keep recognition as one hypothesis alongside goals, norms, mood, safety, habit, and relationship expectations.",
+          "question": "How should recognition be observed without mind-reading?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/centers/heart",
+        "reciprocal": true,
+        "translation_group": "enneagram:center:heart",
+        "x-default": "/en/personality/enneagram/centers/heart",
+        "zh-CN": "/zh/personality/enneagram/centers/heart"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-2",
+          "label": "core_type:type-2",
+          "relationship": "center_member",
+          "target_identity_key": "core_type:type-2"
+        },
+        {
+          "href": "/en/personality/enneagram/type-3",
+          "label": "core_type:type-3",
+          "relationship": "center_member",
+          "target_identity_key": "core_type:type-3"
+        },
+        {
+          "href": "/en/personality/enneagram/type-4",
+          "label": "core_type:type-4",
+          "relationship": "center_member",
+          "target_identity_key": "core_type:type-4"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "For a heart-center observation, select a moment of praise, criticism, inclusion, or comparison. Record what changed in tone, self-description, helping behavior, goal emphasis, or withdrawal, and separate the visible adjustment from any inferred need for recognition.",
+          "key": "observable_pattern",
+          "title": "Start with one feedback event"
+        },
+        {
+          "body_md": "Two, Three, and Four differ in the traditional model: Two may orient toward being useful to another person, Three toward demonstrating valued effectiveness, and Four toward expressing a personally distinctive meaning. The same generous or polished action can still have another explanation.",
+          "key": "within_center_difference",
+          "title": "Two, Three, and Four organize connection differently"
+        },
+        {
+          "body_md": "Use a counterexample from a private or low-visibility task where recognition was unlikely. If the behavior remains unchanged, revise the heart-center hypothesis and consider care obligations, professional standards, habit, aesthetic preference, current mood, or the demands of the relationship.",
+          "key": "counterexample",
+          "title": "Compare a setting without recognition"
+        },
+        {
+          "body_md": "The center label does not mean that a person only feels while others think or act. It is not a medical or neurological classification, and emotional expression alone cannot establish motive, identity, interpersonal capacity, or later outcomes.",
+          "key": "boundary",
+          "title": "Emotion is not an exclusive channel"
+        },
+        {
+          "body_md": "Duration: 6\n\nContext: Select three feedback events and one private task, noting who was present, what kind of recognition was available, and what outcome the situation required.\n\nObservable signal: Record changes in tone, helping, pace, self-description, goal emphasis, or withdrawal before interpreting what connection or recognition meant.\n\nPage-specific signal: Contrast response to interpersonal need, valued performance, and personal distinctiveness instead of labeling every emotional reaction as one heart-center pattern.\n\nAlternative explanation: List a care obligation, professional norm, cultural display rule, safety concern, mood, habit, or relationship expectation that could produce the same presentation.\n\nReflection prompt: Use the private-task counterexample to decide which heart-center interpretation became weaker and what evidence would justify revising it again.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "List a care obligation, professional norm, cultural display rule, safety concern, mood, habit, or relationship expectation that could produce the same presentation.",
+            "context": "Select three feedback events and one private task, noting who was present, what kind of recognition was available, and what outcome the situation required.",
+            "duration_days": 6,
+            "observable_signal": "Record changes in tone, helping, pace, self-description, goal emphasis, or withdrawal before interpreting what connection or recognition meant.",
+            "page_specific_signal": "Contrast response to interpersonal need, valued performance, and personal distinctiveness instead of labeling every emotional reaction as one heart-center pattern.",
+            "reflection_prompt": "Use the private-task counterexample to decide which heart-center interpretation became weaker and what evidence would justify revising it again."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "The heart center traditionally groups Types Two, Three, and Four. A heart-center observation compares how connection, recognition, and self-presentation become relevant in a social moment; it does not imply that emotion overrides thinking or action, and Two, Three, and Four may organize the same interaction in distinct ways.",
+        "title": "Heart center: examine connection and self-presentation"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/centers/heart",
+      "source_hash": "73a500009574139e6aabb09fb600853e8fa732340995c062eedd5caa686e4bd0",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "The heart center traditionally groups Types Two, Three, and Four. A heart-center observation compares how connection, recognition, and self-presentation become relevant in a social moment; it does not imply that emotion overrides thinking or action, and Two, Three, and Four may organize the same interaction in distinct ways.",
+      "title": "Heart center: examine connection and self-presentation"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "19f91a4f66b09d749606d29643089576f0e6fefd374610f8f8604850e39b6fb0"
+}

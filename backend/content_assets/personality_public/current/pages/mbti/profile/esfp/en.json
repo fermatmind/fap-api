@@ -1,0 +1,1025 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/esfp",
+    "entity_key": "esfp",
+    "entity_type": "profile",
+    "framework": "mbti",
+    "page_kind": "profile",
+    "slug": "esfp"
+  },
+  "locale": "en",
+  "payload": {
+    "answer_surface_v1": {
+      "answer_bundle": [
+        {
+          "count": 1,
+          "key": "summary",
+          "title": "summary"
+        },
+        {
+          "count": 0,
+          "key": "compare",
+          "title": "compare"
+        }
+      ],
+      "answer_contract_version": "answer.surface.v1",
+      "answer_fingerprint": "3190a978b0eea02d231b6ad15c59af3ffa0bb81e",
+      "answer_scope": "public_indexable_detail",
+      "attribution_scope": "public_personality_answer",
+      "compare_blocks": [],
+      "evidence_refs": [
+        "838864bb7bbd6c767162678f8757858f4958f61a",
+        "59a2da8daf2663bc5757c1cfc1246aef900ba026",
+        "personality_public_projection_v1",
+        "mbti_public_projection_v1",
+        "personality_sections",
+        "scene_summary_blocks"
+      ],
+      "faq_blocks": [],
+      "indexability_state": "indexable",
+      "landing_surface_ref": "59a2da8daf2663bc5757c1cfc1246aef900ba026",
+      "next_step_blocks": [
+        {
+          "body": null,
+          "href": "/en/tests/mbti-personality-test-16-personality-types",
+          "key": "start_test",
+          "kind": "start_test",
+          "title": "Take the test"
+        },
+        {
+          "body": null,
+          "href": "/en/career/recommendations/mbti/esfp",
+          "key": "career_recommendation",
+          "kind": "content_continue",
+          "title": "View career recommendations"
+        },
+        {
+          "body": null,
+          "href": "/en/topics/mbti",
+          "key": "topic_cluster",
+          "kind": "discover",
+          "title": "Browse topic hub"
+        }
+      ],
+      "primary_content_ref": "ESFP",
+      "public_safety_state": "public_indexable",
+      "public_surface_ref": null,
+      "related_surface_keys": [
+        "career_recommendation",
+        "topic_cluster",
+        "start_test"
+      ],
+      "runtime_artifact_ref": null,
+      "scene_summary_blocks": [
+        {
+          "body": "Review career recommendations first, then validate from the type page.",
+          "href": "/en/career/recommendations",
+          "key": "career_direction",
+          "kind": "scene_entry",
+          "title": "Career direction"
+        },
+        {
+          "body": "Use the MBTI topic hub as the decision frame before choosing a major path.",
+          "href": "/en/topics/mbti",
+          "key": "major_selection",
+          "kind": "scene_entry",
+          "title": "Major selection"
+        },
+        {
+          "body": "Keep this type page as reference when comparing collaboration patterns.",
+          "href": "/en/personality/esfp",
+          "key": "team_collaboration",
+          "kind": "scene_entry",
+          "title": "Team collaboration"
+        },
+        {
+          "body": "Jump from type detail back to topic context for relationship cues.",
+          "href": "/en/topics/mbti",
+          "key": "relationship_patterns",
+          "kind": "scene_entry",
+          "title": "Relationship patterns"
+        },
+        {
+          "body": "Start the test directly to generate structured growth suggestions.",
+          "href": "/en/tests/mbti-personality-test-16-personality-types",
+          "key": "growth_planning",
+          "kind": "scene_entry",
+          "title": "Growth planning"
+        }
+      ],
+      "seo_surface_ref": "838864bb7bbd6c767162678f8757858f4958f61a",
+      "summary_blocks": [
+        {
+          "body": "Role recommendations and work-environment guidance for ESFP profiles.",
+          "href": null,
+          "key": "type_summary",
+          "kind": "answer_first",
+          "title": "ESFP - Entertainer"
+        }
+      ],
+      "surface_type": "personality_public_detail",
+      "version": "answer.surface.v1"
+    },
+    "internal_links": [],
+    "landing_surface_v1": {
+      "attribution_scope": "public_personality_landing",
+      "content_continue_target": "/en/career/recommendations/mbti/esfp",
+      "continue_reading_keys": [
+        "career_recommendation",
+        "topic_cluster",
+        "related_content"
+      ],
+      "cta_bundle": [
+        {
+          "href": "/en/tests/mbti-personality-test-16-personality-types",
+          "key": "start_test",
+          "kind": "start_test",
+          "label": "Take the test"
+        },
+        {
+          "href": "/en/career/recommendations/mbti/esfp",
+          "key": "career_recommendation",
+          "kind": "content_continue",
+          "label": "View career recommendations"
+        },
+        {
+          "href": "/en/topics/mbti",
+          "key": "topic_cluster",
+          "kind": "discover",
+          "label": "Browse topic hub"
+        }
+      ],
+      "discoverability_items": [],
+      "discoverability_keys": [
+        "personality_detail",
+        "topic_cluster",
+        "career_recommendation",
+        "start_test"
+      ],
+      "entry_surface": "personality_detail",
+      "entry_type": "personality_profile",
+      "indexability_state": "indexable",
+      "landing_contract_version": "landing.surface.v1",
+      "landing_fingerprint": "59a2da8daf2663bc5757c1cfc1246aef900ba026",
+      "landing_scope": "public_indexable_detail",
+      "primary_content_ref": "ESFP",
+      "public_surface_ref": null,
+      "related_surface_keys": [
+        "career_recommendation",
+        "topic_cluster"
+      ],
+      "result_resume_target": null,
+      "runtime_artifact_ref": null,
+      "seo_surface_ref": "esfp",
+      "share_safety_state": null,
+      "start_test_target": "/en/tests/mbti-personality-test-16-personality-types",
+      "summary_blocks": [
+        {
+          "body": "Role recommendations and work-environment guidance for ESFP profiles.",
+          "key": "hero",
+          "kind": "answer_first",
+          "title": "ESFP - Entertainer"
+        }
+      ],
+      "surface_family": "personality",
+      "version": "landing.surface.v1"
+    },
+    "mbti_public_projection_v1": {
+      "_meta": {
+        "authority_source": "personality_cms_v2",
+        "public_route_type": "16-type",
+        "route_mode": "base",
+        "schema_version": "v2"
+      },
+      "canonical_type_code": "ESFP",
+      "dimensions": [],
+      "display_type": "ESFP",
+      "offer_set": [],
+      "profile": {
+        "hero_summary": "Role recommendations and work-environment guidance for ESFP profiles.",
+        "keywords": [],
+        "nickname": "Entertainer",
+        "rarity": null,
+        "type_name": "Entertainer"
+      },
+      "runtime_type_code": null,
+      "sections": [
+        {
+          "body_md": "Role recommendations and work-environment guidance for ESFP profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
+          "is_enabled": true,
+          "key": "overview",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "Overview"
+        },
+        {
+          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Cloud Architect, HR Business Partner, Management Consultant.",
+          "is_enabled": true,
+          "key": "career.summary",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "Career summary"
+        },
+        {
+          "body_md": null,
+          "is_enabled": true,
+          "key": "career.preferred_roles",
+          "payload": {
+            "avoid_jobs": [
+              {
+                "slug": "brand-manager",
+                "title": "Brand Manager"
+              },
+              {
+                "slug": "nurse",
+                "title": "Nurse"
+              },
+              {
+                "slug": "supply-chain-manager",
+                "title": "Supply Chain Manager"
+              }
+            ],
+            "recommended_jobs": [
+              {
+                "slug": "cloud-architect",
+                "title": "Cloud Architect"
+              },
+              {
+                "slug": "hr-business-partner",
+                "title": "HR Business Partner"
+              },
+              {
+                "slug": "management-consultant",
+                "title": "Management Consultant"
+              },
+              {
+                "slug": "business-analyst",
+                "title": "Business Analyst"
+              },
+              {
+                "slug": "brand-manager",
+                "title": "Brand Manager"
+              },
+              {
+                "slug": "nurse",
+                "title": "Nurse"
+              }
+            ],
+            "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
+          },
+          "render": "preferred_role_list",
+          "source": "base",
+          "title": "Preferred roles"
+        },
+        {
+          "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+          "is_enabled": true,
+          "key": "growth.summary",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "Growth summary"
+        },
+        {
+          "body_md": null,
+          "is_enabled": true,
+          "key": "growth.strengths",
+          "payload": {
+            "items": [
+              {
+                "body": null,
+                "title": "Strategic pattern recognition"
+              },
+              {
+                "body": null,
+                "title": "Stable execution under constraints"
+              },
+              {
+                "body": null,
+                "title": "Strong ownership on meaningful goals"
+              }
+            ]
+          },
+          "render": "bullets",
+          "source": "base",
+          "title": "Growth strengths"
+        },
+        {
+          "body_md": null,
+          "is_enabled": true,
+          "key": "growth.weaknesses",
+          "payload": {
+            "items": [
+              {
+                "body": null,
+                "title": "Over-specialization without cross-functional exposure"
+              },
+              {
+                "body": null,
+                "title": "Delayed feedback loops causing slower iteration"
+              }
+            ]
+          },
+          "render": "bullets",
+          "source": "base",
+          "title": "Growth weaknesses"
+        },
+        {
+          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
+          "is_enabled": true,
+          "key": "relationships.summary",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "Relationships summary"
+        }
+      ],
+      "seo": {
+        "canonical_url": "https://fermatmind.com/en/personality/esfp",
+        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESFP personality type.",
+        "jsonld": [],
+        "og_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESFP personality type.",
+        "og_image_url": null,
+        "og_title": "ESFP Personality Guide",
+        "robots": "index,follow",
+        "title": "ESFP Personality Guide",
+        "twitter_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESFP personality type.",
+        "twitter_image_url": null,
+        "twitter_title": "ESFP Personality Guide"
+      },
+      "summary_card": {
+        "public_tags": [],
+        "subtitle": null,
+        "summary": "Role recommendations and work-environment guidance for ESFP profiles.",
+        "tagline": "Entertainer",
+        "title": "ESFP - Entertainer"
+      },
+      "variant_code": null
+    },
+    "personality_public_projection_v1": {
+      "_meta": {
+        "authority_source": "personality_cms_v2",
+        "public_route_type": "16-type",
+        "route_mode": "base",
+        "schema_version": "v2"
+      },
+      "canonical_type_code": "ESFP",
+      "dimensions": [],
+      "display_type": "ESFP",
+      "offer_set": [],
+      "profile": {
+        "hero_summary": "Role recommendations and work-environment guidance for ESFP profiles.",
+        "keywords": [],
+        "nickname": "Entertainer",
+        "rarity": null,
+        "type_name": "Entertainer"
+      },
+      "runtime_type_code": null,
+      "sections": [
+        {
+          "body_md": "Role recommendations and work-environment guidance for ESFP profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
+          "is_enabled": true,
+          "key": "overview",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "Overview"
+        },
+        {
+          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Cloud Architect, HR Business Partner, Management Consultant.",
+          "is_enabled": true,
+          "key": "career.summary",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "Career summary"
+        },
+        {
+          "body_md": null,
+          "is_enabled": true,
+          "key": "career.preferred_roles",
+          "payload": {
+            "avoid_jobs": [
+              {
+                "slug": "brand-manager",
+                "title": "Brand Manager"
+              },
+              {
+                "slug": "nurse",
+                "title": "Nurse"
+              },
+              {
+                "slug": "supply-chain-manager",
+                "title": "Supply Chain Manager"
+              }
+            ],
+            "recommended_jobs": [
+              {
+                "slug": "cloud-architect",
+                "title": "Cloud Architect"
+              },
+              {
+                "slug": "hr-business-partner",
+                "title": "HR Business Partner"
+              },
+              {
+                "slug": "management-consultant",
+                "title": "Management Consultant"
+              },
+              {
+                "slug": "business-analyst",
+                "title": "Business Analyst"
+              },
+              {
+                "slug": "brand-manager",
+                "title": "Brand Manager"
+              },
+              {
+                "slug": "nurse",
+                "title": "Nurse"
+              }
+            ],
+            "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
+          },
+          "render": "preferred_role_list",
+          "source": "base",
+          "title": "Preferred roles"
+        },
+        {
+          "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+          "is_enabled": true,
+          "key": "growth.summary",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "Growth summary"
+        },
+        {
+          "body_md": null,
+          "is_enabled": true,
+          "key": "growth.strengths",
+          "payload": {
+            "items": [
+              {
+                "body": null,
+                "title": "Strategic pattern recognition"
+              },
+              {
+                "body": null,
+                "title": "Stable execution under constraints"
+              },
+              {
+                "body": null,
+                "title": "Strong ownership on meaningful goals"
+              }
+            ]
+          },
+          "render": "bullets",
+          "source": "base",
+          "title": "Growth strengths"
+        },
+        {
+          "body_md": null,
+          "is_enabled": true,
+          "key": "growth.weaknesses",
+          "payload": {
+            "items": [
+              {
+                "body": null,
+                "title": "Over-specialization without cross-functional exposure"
+              },
+              {
+                "body": null,
+                "title": "Delayed feedback loops causing slower iteration"
+              }
+            ]
+          },
+          "render": "bullets",
+          "source": "base",
+          "title": "Growth weaknesses"
+        },
+        {
+          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
+          "is_enabled": true,
+          "key": "relationships.summary",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "Relationships summary"
+        }
+      ],
+      "seo": {
+        "canonical_url": "https://fermatmind.com/en/personality/esfp",
+        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESFP personality type.",
+        "jsonld": [],
+        "og_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESFP personality type.",
+        "og_image_url": null,
+        "og_title": "ESFP Personality Guide",
+        "robots": "index,follow",
+        "title": "ESFP Personality Guide",
+        "twitter_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESFP personality type.",
+        "twitter_image_url": null,
+        "twitter_title": "ESFP Personality Guide"
+      },
+      "summary_card": {
+        "public_tags": [],
+        "subtitle": null,
+        "summary": "Role recommendations and work-environment guidance for ESFP profiles.",
+        "tagline": "Entertainer",
+        "title": "ESFP - Entertainer"
+      },
+      "variant_code": null
+    },
+    "profile": {
+      "canonical_type_code": "ESFP",
+      "excerpt": "Role recommendations and work-environment guidance for ESFP profiles.",
+      "hero_image_url": null,
+      "hero_kicker": "Entertainer",
+      "hero_quote": null,
+      "hero_summary": "Role recommendations and work-environment guidance for ESFP profiles.",
+      "is_indexable": true,
+      "is_public": true,
+      "keywords": [],
+      "locale": "en",
+      "nickname": "Entertainer",
+      "rarity": null,
+      "scale_code": "MBTI",
+      "schema_version": "v2",
+      "slug": "esfp",
+      "status": "published",
+      "subtitle": null,
+      "title": "ESFP - Entertainer",
+      "type_code": "ESFP",
+      "type_name": "Entertainer"
+    },
+    "sections": [
+      {
+        "body_html": null,
+        "body_md": "Role recommendations and work-environment guidance for ESFP profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "overview",
+        "sort_order": 20,
+        "title": "Overview"
+      },
+      {
+        "body_html": null,
+        "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Cloud Architect, HR Business Partner, Management Consultant.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "career.summary",
+        "sort_order": 40,
+        "title": "Career summary"
+      },
+      {
+        "body_html": null,
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "avoid_jobs": [
+            {
+              "slug": "brand-manager",
+              "title": "Brand Manager"
+            },
+            {
+              "slug": "nurse",
+              "title": "Nurse"
+            },
+            {
+              "slug": "supply-chain-manager",
+              "title": "Supply Chain Manager"
+            }
+          ],
+          "recommended_jobs": [
+            {
+              "slug": "cloud-architect",
+              "title": "Cloud Architect"
+            },
+            {
+              "slug": "hr-business-partner",
+              "title": "HR Business Partner"
+            },
+            {
+              "slug": "management-consultant",
+              "title": "Management Consultant"
+            },
+            {
+              "slug": "business-analyst",
+              "title": "Business Analyst"
+            },
+            {
+              "slug": "brand-manager",
+              "title": "Brand Manager"
+            },
+            {
+              "slug": "nurse",
+              "title": "Nurse"
+            }
+          ],
+          "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
+        },
+        "render_variant": "preferred_role_list",
+        "section_key": "career.preferred_roles",
+        "sort_order": 70,
+        "title": "Preferred roles"
+      },
+      {
+        "body_html": null,
+        "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "growth.summary",
+        "sort_order": 90,
+        "title": "Growth summary"
+      },
+      {
+        "body_html": null,
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "body": null,
+              "title": "Strategic pattern recognition"
+            },
+            {
+              "body": null,
+              "title": "Stable execution under constraints"
+            },
+            {
+              "body": null,
+              "title": "Strong ownership on meaningful goals"
+            }
+          ]
+        },
+        "render_variant": "bullets",
+        "section_key": "growth.strengths",
+        "sort_order": 100,
+        "title": "Growth strengths"
+      },
+      {
+        "body_html": null,
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "body": null,
+              "title": "Over-specialization without cross-functional exposure"
+            },
+            {
+              "body": null,
+              "title": "Delayed feedback loops causing slower iteration"
+            }
+          ]
+        },
+        "render_variant": "bullets",
+        "section_key": "growth.weaknesses",
+        "sort_order": 110,
+        "title": "Growth weaknesses"
+      },
+      {
+        "body_html": null,
+        "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "relationships.summary",
+        "sort_order": 140,
+        "title": "Relationships summary"
+      },
+      {
+        "body_html": null,
+        "body_md": "ESFP-A and ESFP-T share the same ESFP core. Within energy, presence and shared experience, the useful difference is how the two A/T styles handle confidence, pressure, feedback and self-correction, not which one is better.",
+        "is_enabled": true,
+        "payload_json": {
+          "content": {
+            "quick_answer": "ESFP-A and ESFP-T share the same ESFP core. Within energy, presence and shared experience, the useful difference is how the two A/T styles handle confidence, pressure, feedback and self-correction, not which one is better."
+          },
+          "faq": [
+            {
+              "answer": "Around energy, presence and shared experience, the main difference is usually confidence style, stress response, feedback processing and self-correction, not a change in the ESFP core.",
+              "question": "What is the main ESFP-A vs ESFP-T difference?",
+              "reason": "Covers comparison intent and claim boundary."
+            },
+            {
+              "answer": "No. A/T describes style differences, not a ranking. ESFP situations can reward steadiness, caution or revision in different ways.",
+              "question": "Is ESFP-A better than ESFP-T?",
+              "reason": "Covers comparison intent and claim boundary."
+            },
+            {
+              "answer": "Look at your response to energy, presence and shared experience-related pressure, criticism, uncertainty and post-decision review rather than treating the label as a verdict.",
+              "question": "How can I tell whether I am ESFP-A or ESFP-T?",
+              "reason": "Covers comparison intent and claim boundary."
+            },
+            {
+              "answer": "No. It can support ESFP work-style reflection, but it should not replace skills, experience, values or context.",
+              "question": "Can this comparison decide my career path?",
+              "reason": "Covers comparison intent and claim boundary."
+            },
+            {
+              "answer": "This page treats A/T as an identity-style layer in FermatMind public profiles, not as an official native MBTI dimension.",
+              "question": "Is A/T an official MBTI dimension?",
+              "reason": "Covers comparison intent and claim boundary."
+            }
+          ],
+          "identity": {
+            "canonical_type_code": "ESFP",
+            "locale": "en",
+            "page_type": "comparison",
+            "path": "/en/personality/esfp-a-vs-esfp-t",
+            "url": "https://fermatmind.com/en/personality/esfp-a-vs-esfp-t"
+          },
+          "internal_links": [
+            {
+              "anchor_text": "ESFP-A profile",
+              "href": "/en/personality/esfp-a",
+              "reason": "Return comparison readers to the underlying A/T variant profile pages.",
+              "safe_public_route": true
+            },
+            {
+              "anchor_text": "ESFP-T profile",
+              "href": "/en/personality/esfp-t",
+              "reason": "Return comparison readers to the underlying A/T variant profile pages.",
+              "safe_public_route": true
+            },
+            {
+              "anchor_text": "MBTI personality test",
+              "href": "/en/tests/mbti-personality-test-16-personality-types",
+              "reason": "Connect organic readers to the safe public MBTI test route.",
+              "safe_public_route": true
+            },
+            {
+              "anchor_text": "Big Five personality test",
+              "href": "/en/tests/big-five-personality-test-ocean-model",
+              "reason": "Offer a dimensional-model cross-check without private result routes.",
+              "safe_public_route": true
+            }
+          ],
+          "raw_row": {
+            "blocked_reason": null,
+            "current_surface": {
+              "description": "Compare ESFP-A and ESFP-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.",
+              "faq_count": 13,
+              "h1": "ESFP-A vs ESFP-T: Traits, Careers, Love & Rarity",
+              "internal_link_count": 38,
+              "quick_answer": "",
+              "title": "ESFP-A vs ESFP-T: Traits, Careers, Love & Rarity | FermatMind"
+            },
+            "framework": "mbti64",
+            "locale": "en",
+            "observed_signal": {
+              "average_position": null,
+              "clicks": null,
+              "ctr": null,
+              "evidence_state": "gsc_pending",
+              "impressions": null,
+              "notes": [
+                "GSC page/query evidence was not available in repo artifacts for the 88-page expansion at generation time."
+              ]
+            },
+            "qa_required": [
+              "schema_validation",
+              "trademark_claim_gate",
+              "claim_risk_gate",
+              "duplicate_template_gate",
+              "private_route_gate",
+              "result_page_leakage_gate",
+              "seo_projection_gate",
+              "bilingual_consistency_gate"
+            ],
+            "recommendation_id": "mbti64-agent-expansion-88:/en/personality/esfp-a-vs-esfp-t",
+            "recommendations": {
+              "description": {
+                "current": "Compare ESFP-A and ESFP-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.",
+                "reason": "Make the SERP description answer the page intent while preserving method boundaries.",
+                "recommended": "Compare ESFP-A and ESFP-T through energy, presence and shared experience, confidence, stress recovery, feedback style, work rhythm and relationships."
+              },
+              "differentiation_notes": [
+                "Differentiate /en/personality/esfp-a-vs-esfp-t with energy, presence and shared experience rather than generic MBTI copy.",
+                "Comparison copy must compare A and T directly; do not paste two variant profiles together.",
+                "Keep A/T as a public identity-style layer; do not state that it is official MBTI."
+              ],
+              "faq": [
+                {
+                  "answer": "Around energy, presence and shared experience, the main difference is usually confidence style, stress response, feedback processing and self-correction, not a change in the ESFP core.",
+                  "question": "What is the main ESFP-A vs ESFP-T difference?",
+                  "reason": "Covers comparison intent and claim boundary."
+                },
+                {
+                  "answer": "No. A/T describes style differences, not a ranking. ESFP situations can reward steadiness, caution or revision in different ways.",
+                  "question": "Is ESFP-A better than ESFP-T?",
+                  "reason": "Covers comparison intent and claim boundary."
+                },
+                {
+                  "answer": "Look at your response to energy, presence and shared experience-related pressure, criticism, uncertainty and post-decision review rather than treating the label as a verdict.",
+                  "question": "How can I tell whether I am ESFP-A or ESFP-T?",
+                  "reason": "Covers comparison intent and claim boundary."
+                },
+                {
+                  "answer": "No. It can support ESFP work-style reflection, but it should not replace skills, experience, values or context.",
+                  "question": "Can this comparison decide my career path?",
+                  "reason": "Covers comparison intent and claim boundary."
+                },
+                {
+                  "answer": "This page treats A/T as an identity-style layer in FermatMind public profiles, not as an official native MBTI dimension.",
+                  "question": "Is A/T an official MBTI dimension?",
+                  "reason": "Covers comparison intent and claim boundary."
+                }
+              ],
+              "h1": {
+                "current": "ESFP-A vs ESFP-T: Traits, Careers, Love & Rarity",
+                "reason": "Keep H1 concise and aligned with the canonical page query.",
+                "recommended": "ESFP-A vs ESFP-T: Key Differences"
+              },
+              "internal_links": [
+                {
+                  "anchor_text": "ESFP-A profile",
+                  "href": "/en/personality/esfp-a",
+                  "reason": "Return comparison readers to the underlying A/T variant profile pages.",
+                  "safe_public_route": true
+                },
+                {
+                  "anchor_text": "ESFP-T profile",
+                  "href": "/en/personality/esfp-t",
+                  "reason": "Return comparison readers to the underlying A/T variant profile pages.",
+                  "safe_public_route": true
+                },
+                {
+                  "anchor_text": "MBTI personality test",
+                  "href": "/en/tests/mbti-personality-test-16-personality-types",
+                  "reason": "Connect organic readers to the safe public MBTI test route.",
+                  "safe_public_route": true
+                },
+                {
+                  "anchor_text": "Big Five personality test",
+                  "href": "/en/tests/big-five-personality-test-ocean-model",
+                  "reason": "Offer a dimensional-model cross-check without private result routes.",
+                  "safe_public_route": true
+                }
+              ],
+              "quick_answer": {
+                "current": "",
+                "reason": "Add an answer-first summary that distinguishes this page without deterministic claims.",
+                "recommended": "ESFP-A and ESFP-T share the same ESFP core. Within energy, presence and shared experience, the useful difference is how the two A/T styles handle confidence, pressure, feedback and self-correction, not which one is better."
+              },
+              "title": {
+                "current": "ESFP-A vs ESFP-T: Traits, Careers, Love & Rarity | FermatMind",
+                "reason": "Align title with type, A/T intent and single-brand suffix pattern from the optimized pilot.",
+                "recommended": "ESFP-A vs ESFP-T: Confidence, Stress and Work Style | FermatMind"
+              }
+            },
+            "reference_patterns_used": [
+              {
+                "how_used": "Used for section purpose, QA boundary and internal-link pattern only; wording must not be copied verbatim.",
+                "pattern_id": "a_vs_t_comparison_structure",
+                "source_url": "https://fermatmind.com/en/personality/intj-a-vs-intj-t"
+              }
+            ],
+            "source_inputs": {
+              "cms_or_api_snapshot": "live_html_surface_fetch",
+              "reference_pack": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json",
+              "seo_signal": "GSC_EVIDENCE_PENDING",
+              "source_ledger": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json"
+            },
+            "status": "draft_recommendation",
+            "target_url": "https://fermatmind.com/en/personality/esfp-a-vs-esfp-t"
+          },
+          "seo": {
+            "description": "Compare ESFP-A and ESFP-T through energy, presence and shared experience, confidence, stress recovery, feedback style, work rhythm and relationships.",
+            "h1": "ESFP-A vs ESFP-T: Key Differences",
+            "title": "ESFP-A vs ESFP-T: Confidence, Stress and Work Style | FermatMind"
+          },
+          "snapshot_key": "mbti64_agent_projection_draft_v1",
+          "source": "mbti64_v2_1_comparison_revision_promotion",
+          "structured_metadata": {
+            "current_surface": {
+              "description": "Compare ESFP-A and ESFP-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.",
+              "faq_count": 13,
+              "h1": "ESFP-A vs ESFP-T: Traits, Careers, Love & Rarity",
+              "internal_link_count": 38,
+              "quick_answer": "",
+              "title": "ESFP-A vs ESFP-T: Traits, Careers, Love & Rarity | FermatMind"
+            },
+            "observed_signal": {
+              "average_position": null,
+              "clicks": null,
+              "ctr": null,
+              "evidence_state": "gsc_pending",
+              "impressions": null,
+              "notes": [
+                "GSC page/query evidence was not available in repo artifacts for the 88-page expansion at generation time."
+              ]
+            },
+            "qa_result": {
+              "blockers": [],
+              "decision": "PASS_READY_FOR_CMS_DRAFT",
+              "gates": {
+                "bilingual_consistency_gate": "pass",
+                "claim_risk_gate": "pass",
+                "duplicate_template_gate": "pass",
+                "private_route_gate": "pass",
+                "result_page_leakage_gate": "pass",
+                "schema_validation": "pass",
+                "seo_projection_gate": "pass",
+                "trademark_claim_gate": "pass"
+              },
+              "locale": "en",
+              "page_type": "comparison",
+              "target_url": "https://fermatmind.com/en/personality/esfp-a-vs-esfp-t",
+              "warnings": [
+                "GSC_EVIDENCE_PENDING"
+              ]
+            },
+            "qa_summary": {
+              "bilingual_asymmetric_type_count": 0,
+              "blocked_count": 0,
+              "checked_recommendation_count": 88,
+              "duplicate_signature_group_count": 0,
+              "gsc_evidence_state": "GSC_EVIDENCE_PENDING",
+              "normalized_editorial_duplicate_signature_group_count": 0,
+              "pass_ready_for_cms_draft_count": 88,
+              "warning_count": 1
+            },
+            "reference_patterns_used": [
+              {
+                "how_used": "Used for section purpose, QA boundary and internal-link pattern only; wording must not be copied verbatim.",
+                "pattern_id": "a_vs_t_comparison_structure",
+                "source_url": "https://fermatmind.com/en/personality/intj-a-vs-intj-t"
+              }
+            ],
+            "source_inputs": {
+              "cms_or_api_snapshot": "live_html_surface_fetch",
+              "reference_pack": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json",
+              "seo_signal": "GSC_EVIDENCE_PENDING",
+              "source_ledger": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json"
+            }
+          },
+          "url": "/en/personality/esfp-a-vs-esfp-t"
+        },
+        "render_variant": "rich_text",
+        "section_key": "mbti64_comparison_a_vs_t",
+        "sort_order": 920,
+        "title": "ESFP-A vs ESFP-T: Key Differences"
+      }
+    ],
+    "seo_meta": {
+      "canonical_url": "https://fermatmind.com/en/personality/esfp",
+      "jsonld_overrides_json": null,
+      "og_description": null,
+      "og_image_url": null,
+      "og_title": null,
+      "robots": null,
+      "seo_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESFP personality type.",
+      "seo_title": "ESFP Personality Guide",
+      "twitter_description": null,
+      "twitter_image_url": null,
+      "twitter_title": null
+    },
+    "seo_surface_v1": {
+      "alternates": {
+        "en": "https://fermatmind.com/en/personality/esfp-a",
+        "zh-CN": "https://fermatmind.com/zh/personality/esfp-a"
+      },
+      "canonical_url": "https://fermatmind.com/en/personality/esfp-a",
+      "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESFP personality type.",
+      "indexability_state": "indexable",
+      "llms_exposure_state": "allow",
+      "metadata_contract_version": "seo.surface.v1",
+      "metadata_fingerprint": "838864bb7bbd6c767162678f8757858f4958f61a",
+      "metadata_scope": "public_indexable_detail",
+      "og_payload": {
+        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESFP personality type.",
+        "title": "ESFP Personality Guide",
+        "type": "article",
+        "url": "https://fermatmind.com/en/personality/esfp-a"
+      },
+      "public_summary_fingerprint": null,
+      "robots_policy": "index,follow",
+      "runtime_artifact_ref": null,
+      "share_safety_state": null,
+      "sitemap_state": "included",
+      "structured_data_keys": [
+        "AboutPage",
+        "DefinedTerm"
+      ],
+      "surface_type": "mbti_personality_public_detail",
+      "title": "ESFP Personality Guide",
+      "twitter_payload": {
+        "card": "summary_large_image",
+        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESFP personality type.",
+        "title": "ESFP Personality Guide"
+      },
+      "version": "seo.surface.v1"
+    }
+  },
+  "payload_contract": "mbti.public.detail.v1",
+  "source_content_sha256": "06556f742b9a1627a7db5b5cd977507cf6c0507e860da4b437aa20364ccd2537"
+}

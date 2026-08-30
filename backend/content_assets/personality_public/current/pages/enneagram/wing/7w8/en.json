@@ -1,0 +1,300 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/wings/7w8",
+    "entity_key": "7w8",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/7w8"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/wings/7w8"
+      },
+      "canonical_path": "/en/personality/enneagram/wings/7w8",
+      "code": "7w8",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "7w8",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Market timing, ownership, investor pressure, staffing limits, or crisis conditions may reward fast decisions. Compare how power and refusal are handled when speed offers no special advantage.",
+          "question": "Does entrepreneurial speed prove a 7w8 wing?"
+        },
+        {
+          "answer": "Name the actual resource, authority, relationship, or information controlled, then record whether it is used transparently and whether affected people retain meaningful refusal and recourse.",
+          "question": "How can leverage be observed without praising dominance?"
+        },
+        {
+          "answer": "Choosing consent, shared control, or a slower negotiated route while possessing enough authority to act unilaterally is a strong counterexample to the proposed Eight modifier.",
+          "question": "What is a strong counterexample to direct pursuit?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/7w8",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:7w8",
+        "x-default": "/en/personality/enneagram/wings/7w8",
+        "zh-CN": "/zh/personality/enneagram/wings/7w8"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-7",
+          "label": "core_type:type-7",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-7"
+        },
+        {
+          "href": "/en/personality/enneagram/type-8",
+          "label": "core_type:type-8",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-8"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/7w6",
+          "label": "wing:7w6",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:7w6"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "Begin with repeated option generation and resistance to premature closure. Consider an Eight modifier only when direct pursuit or leverage changes how a preferred possibility is secured, not merely when the role grants authority.",
+          "key": "core_first_modifier",
+          "title": "Keep possibility primary and force secondary"
+        },
+        {
+          "body_md": "Observe what happens when budget, policy, or another person blocks a desired route. Record requests, negotiation, use of authority, acceptance of refusal, and who absorbs the consequences of continued pursuit.",
+          "key": "observable_situations",
+          "title": "Track leverage under a real boundary"
+        },
+        {
+          "body_md": "Facing the same obstacle, 7w8 may seek control of resources and move directly, while 7w6 may consult allies and preserve contingencies. Equalize formal power before treating the difference as personal.",
+          "key": "sibling_core_comparison",
+          "title": "Contrast 7w8 with 7w6 on shared stakes"
+        },
+        {
+          "body_md": "Founders, executives, advocates, emergency leads, litigators, or caregivers may need decisive action. Wealth, seniority, citizenship, gender norms, and organizational backing also change whose assertiveness is possible or tolerated.",
+          "key": "alternative_explanations",
+          "title": "Audit ownership and structural power first"
+        },
+        {
+          "body_md": "The modifier weakens when the person accepts a firm limit, shares control without preserving hidden leverage, waits for consent, or chooses a slower collaborative route despite having enough power to push ahead.",
+          "key": "counterexample",
+          "title": "Look for restraint when force would work"
+        },
+        {
+          "body_md": "7w8 cannot establish courage, leadership potential, aggression, ethics, or competence. Research support for wings is sparse, and concrete consent, policy, and accountability always outrank the typology.",
+          "key": "wing_boundary",
+          "title": "Separate directness from entitlement or capacity"
+        },
+        {
+          "body_md": "Duration: 5\n\nContext: Over five days, examine one blocked proposal, one resource negotiation, and one interaction where another person can freely refuse.\n\nObservable signal: Record the desired option, formal authority, resources controlled, exact boundary stated, negotiation move, consent response, and distribution of downstream cost.\n\nPage-specific signal: Compare direct pursuit when leverage is available with behavior when control is equal and refusal has no penalty.\n\nAlternative explanation: Check job authority, ownership, advocacy duty, crisis conditions, negotiation training, privilege, and unequal exposure to consequences.\n\nReflection prompt: Identify a moment when honoring a limit protected the relationship or project, and use it to revise the modifier hypothesis.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Check job authority, ownership, advocacy duty, crisis conditions, negotiation training, privilege, and unequal exposure to consequences.",
+            "context": "Over five days, examine one blocked proposal, one resource negotiation, and one interaction where another person can freely refuse.",
+            "duration_days": 5,
+            "observable_signal": "Record the desired option, formal authority, resources controlled, exact boundary stated, negotiation move, consent response, and distribution of downstream cost.",
+            "page_specific_signal": "Compare direct pursuit when leverage is available with behavior when control is equal and refusal has no penalty.",
+            "reflection_prompt": "Identify a moment when honoring a limit protected the relationship or project, and use it to revise the modifier hypothesis."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "7w8 is an evidence-limited wing hypothesis in which Type Seven possibility stays primary while Eight may add leverage, autonomy, direct pursuit, and decisive action. Speed or assertiveness does not establish 7w8 because leadership, ownership, crisis authority, negotiation training, privilege, and unequal power can produce the same surface pattern.",
+        "title": "7w8: a core-first hypothesis about options, leverage, and direct pursuit"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/7w8",
+      "source_hash": "e505fe94a3667841079aa653e77b33bd41097d59efae6b2ecb97b6c609cf64d8",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "7w8 is an evidence-limited wing hypothesis in which Type Seven possibility stays primary while Eight may add leverage, autonomy, direct pursuit, and decisive action. Speed or assertiveness does not establish 7w8 because leadership, ownership, crisis authority, negotiation training, privilege, and unequal power can produce the same surface pattern.",
+      "title": "7w8: a core-first hypothesis about options, leverage, and direct pursuit"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "a0b1ca67adfd58ba9e964cd481278a1291ba4ef9d22e3680689bb7ce3aebab03"
+}

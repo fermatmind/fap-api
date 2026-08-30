@@ -1,0 +1,335 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-2/instincts/one-to-one",
+    "entity_key": "type-2/one-to-one",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-2/instincts/one-to-one"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-2/instincts/one-to-one"
+      },
+      "canonical_path": "/en/personality/enneagram/type-2/instincts/one-to-one",
+      "code": "type-2/one-to-one",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-2/one-to-one",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Intensity may come from new closeness, unresolved conflict, caregiving, power, crisis, or attraction. The hypothesis needs repeated Type Two connection attention, matched comparisons, consent, and counterexamples.",
+          "question": "Does intense attention to one person establish this subtype?"
+        },
+        {
+          "answer": "Reciprocity shows whether standards apply when the helper needs support or when the other person says no. It makes hidden expectations observable without assuming that equal exchange is always required.",
+          "question": "Why test reciprocity in focused care?"
+        },
+        {
+          "answer": "Easy acceptance of limits, availability explained by explicit agreements, or stronger repeated attention to resources and group roles would weaken it. Attachment history and immediate safety should be checked first.",
+          "question": "What weakens the focused attunement hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-2/instincts/one-to-one",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-2/one-to-one",
+        "x-default": "/en/personality/enneagram/type-2/instincts/one-to-one",
+        "zh-CN": "/zh/personality/enneagram/type-2/instincts/one-to-one"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-2",
+          "label": "core_type:type-2",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-2"
+        },
+        {
+          "href": "/en/personality/enneagram/type-2/instincts/self-preservation",
+          "label": "instinctual_subtype:type-2/self-preservation",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-2/self-preservation"
+        },
+        {
+          "href": "/en/personality/enneagram/type-2/instincts/social",
+          "label": "instinctual_subtype:type-2/social",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-2/social"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "The hypothesis combines Type Two needs-and-connection attention with a one-to-one label for concentration in one bond. Intense availability may instead reflect attachment, attraction, caregiving, conflict history, crisis, unequal labor, or a direct promise.",
+          "key": "traditional_hypothesis",
+          "title": "Frame focused attunement provisionally"
+        },
+        {
+          "body_md": "This matched comparison asks about one bond and practical comfort by observing whether attention first moves toward focused connection, receiving care, or a useful role in the group. Keep the request, resources, and relationship risk comparable.",
+          "key": "matched_comparison",
+          "title": "Match one request across three priorities"
+        },
+        {
+          "body_md": "One-to-one is traditional organizing vocabulary, not evidence about bodily mechanisms, nervous-system categories, fixed intensity, or compatibility. A label never establishes consent, safety, attraction, or who should remain in a relationship.",
+          "key": "instinct_boundary",
+          "title": "Protect consent and avoid mechanism claims"
+        },
+        {
+          "body_md": "Subtype traditions vary in how they describe attraction, pursuit, selectivity, and countertypical presentations. Test the specific focused-attunement proposition and let refusal, reciprocity, or calmer events revise it.",
+          "key": "countertype_variation",
+          "title": "Expect intensity descriptions to differ"
+        },
+        {
+          "body_md": "New intimacy, old conflict, caregiving duty, unequal responsibility, authority, boundary breaches, or immediate risk can concentrate attention on one person. Compare other bonds and safer periods before retaining the subtype.",
+          "key": "alternative_environment",
+          "title": "Test attachment, power, and crisis"
+        },
+        {
+          "body_md": "A one-to-one Type Two counterexample weakens focused attunement when limits are accepted easily, availability tracks explicit agreements, or matched situations repeatedly prioritize practical comfort and group contribution over one bond.",
+          "key": "counterexample",
+          "title": "Use reciprocal limits as a challenge"
+        },
+        {
+          "body_md": "Instrument-specific subtype evidence does not justify conclusions about compatibility, attraction, consent, or relationship quality. Direct communication, autonomy, safety, and environmental explanations take priority.",
+          "key": "evidence_boundary",
+          "title": "Keep relationship inference narrow"
+        },
+        {
+          "body_md": "Duration: 4\n\nContext: Choose one close bond with consent to reflect, plus comparable practical and group requests that involve similar time and responsibility.\n\nObservable signal: Record whose need receives urgency, how availability is negotiated, whether limits are accepted, and what reciprocity is requested directly.\n\nPage-specific signal: Compare focused attunement with practical comfort and group usefulness while keeping the underlying request similar.\n\nAlternative explanation: Test attachment, attraction, caregiving duty, unequal labor, conflict history, power, boundary breaches, and crisis against the subtype.\n\nReflection prompt: Identify the event where explicit agreement explains availability better than focused attunement and state how the hypothesis changes.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Test attachment, attraction, caregiving duty, unequal labor, conflict history, power, boundary breaches, and crisis against the subtype.",
+            "context": "Choose one close bond with consent to reflect, plus comparable practical and group requests that involve similar time and responsibility.",
+            "duration_days": 4,
+            "observable_signal": "Record whose need receives urgency, how availability is negotiated, whether limits are accepted, and what reciprocity is requested directly.",
+            "page_specific_signal": "Compare focused attunement with practical comfort and group usefulness while keeping the underlying request similar.",
+            "reflection_prompt": "Identify the event where explicit agreement explains availability better than focused attunement and state how the hypothesis changes."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "One-to-one Type Two is a traditional type-by-instinct hypothesis in which Two attention to needs and connection may become concentrated in one bond through focused attunement, availability, and involvement. Two focused attunement is observable, but it does not establish attraction, consent, compatibility, or a universal subtype.",
+        "title": "One-to-one Type Two: focused attunement as a traditional hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-2/instincts/one-to-one",
+      "source_hash": "20d98f83a260801661f36548ad57152bb5768100042f26267f2b2d1c882b0412",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "One-to-one Type Two is a traditional type-by-instinct hypothesis in which Two attention to needs and connection may become concentrated in one bond through focused attunement, availability, and involvement. Two focused attunement is observable, but it does not establish attraction, consent, compatibility, or a universal subtype.",
+      "title": "One-to-one Type Two: focused attunement as a traditional hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "60b7a4275abf86fc49fdd60cef94baebbcbaf8802d2dc3523f2a0399672eb924"
+}

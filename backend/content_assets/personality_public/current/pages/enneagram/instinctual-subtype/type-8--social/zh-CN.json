@@ -1,0 +1,335 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh/personality/enneagram/type-8/instincts/social",
+    "entity_key": "type-8/social",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-8/instincts/social"
+  },
+  "locale": "zh-CN",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh/personality/enneagram/type-8/instincts/social"
+      },
+      "canonical_path": "/zh/personality/enneagram/type-8/instincts/social",
+      "code": "type-8/social",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-8/social",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "法律职责、歧视、工会工作、社群生存、家庭责任或当事人明确请求都可能要求倡导。应继续核对授权和权力分配，并确认行动后的资源是否真正到达受影响成员。",
+          "question": "积极倡导为什么不能证明社群第八型？"
+        },
+        {
+          "answer": "请求式保护从当事人表达的需要出发并保留其决定权；自行介入可能增加风险，甚至让被声称保护的人失去声音，因此必须保留异议、退出和更换代表的渠道。",
+          "question": "为什么必须区分请求式保护与自行保护？"
+        },
+        {
+          "answer": "遵循较弱势成员方案、接受纠正，并在威胁结束后归还权限，会削弱以持续掌握保护性群体力量为中心的解释；归还后不再暗中控制资源，反证才完整。",
+          "question": "哪种领导交接最能削弱社群副型假设？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-8/instincts/social",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-8/social",
+        "x-default": "/en/personality/enneagram/type-8/instincts/social",
+        "zh-CN": "/zh/personality/enneagram/type-8/instincts/social"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh/personality/enneagram/type-8",
+          "label": "core_type:type-8",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-8"
+        },
+        {
+          "href": "/zh/personality/enneagram/type-8/instincts/self-preservation",
+          "label": "instinctual_subtype:type-8/self-preservation",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-8/self-preservation"
+        },
+        {
+          "href": "/zh/personality/enneagram/type-8/instincts/one-to-one",
+          "label": "instinctual_subtype:type-8/one-to-one",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-8/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-CN",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "这里的社群本能只是传统观察标签，不描述身体机制。法律、歧视、治理、集体协商和公共安全都需要独立证据与责任流程。",
+          "key": "instinct_boundary",
+          "title": "把社群语言限制在角色与注意层面"
+        },
+        {
+          "body_md": "传统假设认为，直接力量可能围绕同伴、弱势成员或共同事业组织。观察时必须核对授权、真实受益、问责和权力是否归还。",
+          "key": "traditional_hypothesis",
+          "title": "把群体保护视为暂定自主路线"
+        },
+        {
+          "body_md": "工会职务、保护责任、应急指挥、公民权利工作、家庭角色、迫害经历和公共服务缺位，都可能要求集体防卫而无需副型解释。",
+          "key": "alternative_environment",
+          "title": "先审计职责、歧视与制度缺位"
+        },
+        {
+          "body_md": "保持威胁相近，比较当事成员请求的介入与未协商的介入，记录谁获得发言、资源如何转移、谁承担风险以及是否有申诉。",
+          "key": "matched_comparison",
+          "title": "比较被请求保护与自行介入"
+        },
+        {
+          "body_md": "该副型不能证明公平、忠诚、政治正确或领导合法性。量表特定发现不构成普遍本体，行动后果仍需直接评估。",
+          "key": "evidence_boundary",
+          "title": "不从保护推断公正或道德授权"
+        },
+        {
+          "body_md": "保护可能表现为直接挑战、法律组织、资源分配、辅导或建立持久程序。声音大小不是关键，成员是否获得更大自主才有信息量。",
+          "key": "countertype_variation",
+          "title": "允许公开对抗与安静建设并存"
+        },
+        {
+          "body_md": "若能拒绝长期代言地位、遵循群体自选策略、接受较弱势成员纠正，并在威胁解除后放下控制，就应降低保护性群体力量解释。",
+          "key": "counterexample",
+          "title": "寻找把力量归还成员的反例"
+        },
+        {
+          "body_md": "持续天数: 4\n\n情境: 四天内选择一次群体保护行动和一次日常治理决定，确保涉及同一批受影响成员并可核对授权。\n\n可观察信号: 记录谁请求行动、谁发言、谁承担风险、转移何种资源、是否允许异议、成员获得何种决定权以及领导何时归还。\n\n本页特定信号: 比较提升当事成员自主的保护，与把权力集中到保护者手中的介入。\n\n替代解释: 核对正式保护职责、工会角色、歧视、制度失灵、迫害、应急指挥和家庭期待。\n\n复盘问题: 找出遵循群体策略效果最好的一次事件，并据此修正自行介入的保护解释。",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "核对正式保护职责、工会角色、歧视、制度失灵、迫害、应急指挥和家庭期待。",
+            "context": "四天内选择一次群体保护行动和一次日常治理决定，确保涉及同一批受影响成员并可核对授权。",
+            "duration_days": 4,
+            "observable_signal": "记录谁请求行动、谁发言、谁承担风险、转移何种资源、是否允许异议、成员获得何种决定权以及领导何时归还。",
+            "page_specific_signal": "比较提升当事成员自主的保护，与把权力集中到保护者手中的介入。",
+            "reflection_prompt": "找出遵循群体策略效果最好的一次事件，并据此修正自行介入的保护解释。"
+          },
+          "title": "观察练习"
+        }
+      ],
+      "seo": {
+        "description": "第八型社群副型是传统且证据有限的假设，把第八型自主与团结、保护、群体力量，以及公正、忠诚与集体行动结合。倡导不能证明副型；倡导职责、歧视与制度失灵、工会角色、社群防卫、政治条件和当事人直接请求都可能形成相似行为。",
+        "title": "第八型社群副型：团结、保护与群体力量的观察假设"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-8/instincts/social",
+      "source_hash": "97b15f38f8d147d2123125b6b986a4e548c60e47721d0339885388d8af0cbbbd",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "第八型社群副型是传统且证据有限的假设，把第八型自主与团结、保护、群体力量，以及公正、忠诚与集体行动结合。倡导不能证明副型；倡导职责、歧视与制度失灵、工会角色、社群防卫、政治条件和当事人直接请求都可能形成相似行为。",
+      "title": "第八型社群副型：团结、保护与群体力量的观察假设"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "f7232f490c6f045b0faaf6f8573667e02b9dfa2e48ede8a4f8b7585c5c3666fe"
+}

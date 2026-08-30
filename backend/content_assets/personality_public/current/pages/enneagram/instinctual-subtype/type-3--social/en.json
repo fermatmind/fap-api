@@ -1,0 +1,335 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-3/instincts/social",
+    "entity_key": "type-3/social",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-3/instincts/social"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-3/instincts/social"
+      },
+      "canonical_path": "/en/personality/enneagram/type-3/instincts/social",
+      "code": "type-3/social",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-3/social",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Pay, authority, safety, recognition of existing work, or limited career options may explain promotion seeking. Compare equal contributions under different titles and audiences.",
+          "question": "Does seeking promotion establish Social Type Three?"
+        },
+        {
+          "answer": "Changing title while holding contribution closer helps reveal whether rank itself changes attention. Sponsorship, power, and real compensation differences must still be recorded.",
+          "question": "Why rotate title in the comparison?"
+        },
+        {
+          "answer": "Stable private contribution without credit, challenging a group standard despite status loss, or rank concern confined to a promotion window would weaken it.",
+          "question": "What weakens the social-subtype hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-3/instincts/social",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-3/social",
+        "x-default": "/en/personality/enneagram/type-3/instincts/social",
+        "zh-CN": "/zh/personality/enneagram/type-3/instincts/social"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-3",
+          "label": "core_type:type-3",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-3"
+        },
+        {
+          "href": "/en/personality/enneagram/type-3/instincts/self-preservation",
+          "label": "instinctual_subtype:type-3/self-preservation",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-3/self-preservation"
+        },
+        {
+          "href": "/en/personality/enneagram/type-3/instincts/one-to-one",
+          "label": "instinctual_subtype:type-3/one-to-one",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-3/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "The traditional description proposes that Type Three result attention may track position, contribution, and what a group recognizes. It does not establish a social cause or make hierarchy a permanent trait.",
+          "key": "traditional_hypothesis",
+          "title": "Treat rank attention as a traditional hypothesis"
+        },
+        {
+          "body_md": "Compare equal contributions under a named leadership title, anonymous collaboration, and public representation. Record effort, credit claims, standard-setting, and response when the title rotates to another person.",
+          "key": "matched_comparison",
+          "title": "Match contribution while changing title and audience"
+        },
+        {
+          "body_md": "Social subtype language organizes observations about audience, rank, and group standards. It is not evidence about bodily mechanisms, a universal hierarchy drive, or a category that determines conduct.",
+          "key": "instinct_boundary",
+          "title": "Keep social language observational"
+        },
+        {
+          "body_md": "A person may frame ambition as protecting the team's reputation or meeting a shared standard. That less self-advertising variation still requires comparison with genuine duty, solidarity, and institutional accountability.",
+          "key": "countertype_variation",
+          "title": "Allow service to the group to mask visibility"
+        },
+        {
+          "body_md": "Formal hierarchy, representation duty, sponsorship, discrimination, scarce promotion slots, and public accountability change how rank is handled. Record who can refuse visibility and who bears the cost of being overlooked.",
+          "key": "alternative_environment",
+          "title": "Test promotion rules and unequal power"
+        },
+        {
+          "body_md": "The hypothesis weakens when contribution remains unchanged after title and credit disappear, group standards are challenged despite status cost, or rank concern appears only during a formal promotion cycle.",
+          "key": "counterexample",
+          "title": "Use rotating status and private contribution as tests"
+        },
+        {
+          "body_md": "Instrument-specific findings do not establish universal subtypes. This page cannot predict leadership, promotion, influence, group loyalty, employability, or social value.",
+          "key": "evidence_boundary",
+          "title": "Keep rank observations non-predictive"
+        },
+        {
+          "body_md": "Duration: 5\n\nContext: Choose one named leadership task, one anonymous group contribution, and one situation where a title rotates.\n\nObservable signal: Record contribution, decision authority, audience, credit, compensation, group standard, refusal cost, and behavior after rotation.\n\nPage-specific signal: Compare whether the same work changes meaning when rank and public recognition change.\n\nAlternative explanation: Compare promotion rules, representation duty, sponsorship, discrimination, solidarity, and unequal power.\n\nReflection prompt: Identify the event where institutional incentives explain rank attention better than subtype.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Compare promotion rules, representation duty, sponsorship, discrimination, solidarity, and unequal power.",
+            "context": "Choose one named leadership task, one anonymous group contribution, and one situation where a title rotates.",
+            "duration_days": 5,
+            "observable_signal": "Record contribution, decision authority, audience, credit, compensation, group standard, refusal cost, and behavior after rotation.",
+            "page_specific_signal": "Compare whether the same work changes meaning when rank and public recognition change.",
+            "reflection_prompt": "Identify the event where institutional incentives explain rank attention better than subtype."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "Social Type Three is a traditional, evidence-limited hypothesis that achievement attention may be expressed through rank, recognized contribution, and the standards of a valued group. Public leadership cannot establish subtype because hierarchy, promotion rules, representation duties, and unequal power can produce the same behavior.",
+        "title": "Social Type Three: rank and group standards as a matched-comparison hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-3/instincts/social",
+      "source_hash": "91b0afe7ea941a93c46f12399d7c7fdf0300ab23c85b1590658a4585dc6bca28",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "Social Type Three is a traditional, evidence-limited hypothesis that achievement attention may be expressed through rank, recognized contribution, and the standards of a valued group. Public leadership cannot establish subtype because hierarchy, promotion rules, representation duties, and unequal power can produce the same behavior.",
+      "title": "Social Type Three: rank and group standards as a matched-comparison hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "dbc3906a843a99c9e2da1d5d2d12277f2a927b1cc1305fd0362cf00060f0bad6"
+}

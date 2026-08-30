@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "personality-page-content-current-manifest.v1.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "aggregate_sha256": { "$ref": "#/$defs/hash" },
+    "authority_path": { "const": "backend/content_assets/personality_public/current" },
+    "compiler_version": { "const": "personality.page.per_page.compiler.v1" },
+    "contract_version": { "const": "personality.page.content.current.manifest.v1" },
+    "coverage": {
+      "additionalProperties": false,
+      "properties": {
+        "baseline_locale_pages": { "minimum": 0, "type": "integer" },
+        "by_framework": { "const": { "big_five": 104, "enneagram": 116, "mbti": 144 } },
+        "by_page_kind": { "type": "object" },
+        "enhanced_locale_pages": { "minimum": 0, "type": "integer" },
+        "files": { "const": 364 },
+        "locale_pages": { "const": 364 },
+        "locales": { "const": 2 },
+        "pages_per_locale": { "const": 182 }
+      },
+      "required": ["baseline_locale_pages", "by_framework", "by_page_kind", "enhanced_locale_pages", "files", "locale_pages", "locales", "pages_per_locale"],
+      "type": "object"
+    },
+    "files": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "bytes": { "minimum": 1, "type": "integer" },
+          "canonical_path": { "pattern": "^/(en|zh)/personality(?:/.*)?$", "type": "string" },
+          "compatibility_projection_sha256": { "$ref": "#/$defs/hash" },
+          "content_state": { "enum": ["baseline", "enhanced"] },
+          "entity_key": { "type": "string" },
+          "entity_type": { "type": "string" },
+          "framework": { "enum": ["mbti", "big_five", "enneagram"] },
+          "identity_key": { "type": "string" },
+          "locale": { "enum": ["en", "zh-CN"] },
+          "page_kind": { "type": "string" },
+          "path": { "pattern": "^pages/(mbti|big-five|enneagram)/[a-z0-9-]+/[a-z0-9-]+/(en|zh-CN)\\.json$", "type": "string" },
+          "sha256": { "$ref": "#/$defs/hash" },
+          "slug": { "type": "string" },
+          "source_content_sha256": { "$ref": "#/$defs/hash" }
+        },
+        "required": ["bytes", "canonical_path", "compatibility_projection_sha256", "content_state", "entity_key", "entity_type", "framework", "identity_key", "locale", "page_kind", "path", "sha256", "slug", "source_content_sha256"],
+        "type": "object"
+      },
+      "maxItems": 364,
+      "minItems": 364,
+      "type": "array"
+    },
+    "locales": { "const": ["en", "zh-CN"] },
+    "schema_version": { "const": "personality.page.content.v1" },
+    "set_hashes": {
+      "additionalProperties": false,
+      "properties": {
+        "compatibility_projection_aggregate_sha256": { "$ref": "#/$defs/hash" },
+        "locale_page_identity_set_sha256": { "$ref": "#/$defs/hash" },
+        "route_set_sha256": { "$ref": "#/$defs/hash" },
+        "source_semantic_aggregate_sha256": { "$ref": "#/$defs/hash" }
+      },
+      "required": ["compatibility_projection_aggregate_sha256", "locale_page_identity_set_sha256", "route_set_sha256", "source_semantic_aggregate_sha256"],
+      "type": "object"
+    }
+  },
+  "required": ["aggregate_sha256", "authority_path", "compiler_version", "contract_version", "coverage", "files", "locales", "schema_version", "set_hashes"],
+  "type": "object",
+  "$defs": { "hash": { "pattern": "^[a-f0-9]{64}$", "type": "string" } }
+}

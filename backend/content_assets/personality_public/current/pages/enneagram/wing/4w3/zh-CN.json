@@ -1,0 +1,300 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh/personality/enneagram/wings/4w3",
+    "entity_key": "4w3",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/4w3"
+  },
+  "locale": "zh-CN",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh/personality/enneagram/wings/4w3"
+      },
+      "canonical_path": "/zh/personality/enneagram/wings/4w3",
+      "code": "4w3",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "4w3",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不一定。作品集要求、晋升、平台机制和表达训练都可能要求个人品牌。还要比较第四型意义核心、岗位外行为和明确反例，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。",
+          "question": "经营个人品牌就一定是 4w3 吗？"
+        },
+        {
+          "answer": "保持同一项精致交付不变，比较注意力中心。4w3 假设仍围绕个人意义与署名；第三型假设更可能围绕被认可的结果与可信表现，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。",
+          "question": "怎样区分 4w3 与第三型？"
+        },
+        {
+          "answer": "私人表达持续带来满足、包装只在付费岗位出现，或受众不回应也不改变署名关注，都会削弱该修饰解释，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。",
+          "question": "哪些记录会削弱可见表达假设？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/4w3",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:4w3",
+        "x-default": "/en/personality/enneagram/wings/4w3",
+        "zh-CN": "/zh/personality/enneagram/wings/4w3"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh/personality/enneagram/type-4",
+          "label": "core_type:type-4",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-4"
+        },
+        {
+          "href": "/zh/personality/enneagram/type-3",
+          "label": "core_type:type-3",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-3"
+        },
+        {
+          "href": "/zh/personality/enneagram/wings/4w5",
+          "label": "wing:4w5",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:4w5"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-CN",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "先观察个人意义是否持续重要，再看公开交付如何修饰表达。只有舞台感而没有意义关注时，应优先比较第三型主题、岗位训练或平台规则。",
+          "key": "core_first_modifier",
+          "title": "先保留身份意义核心"
+        },
+        {
+          "body_md": "4w3 可能把表达带向受众，4w5 更重私人深度。与第三型相比，4w3 假设仍把个人意义和署名放在核心，而不是把结果价值本身放在核心。",
+          "key": "sibling_core_comparison",
+          "title": "对照 4w3、4w5 与第三型"
+        },
+        {
+          "body_md": "选择一件公开署名作品、一项匿名贡献和一次回应不佳后的修改。记录保护了什么意义、改变了什么呈现，以及署名是否影响投入。",
+          "key": "observable_situations",
+          "title": "比较署名、匿名与修改"
+        },
+        {
+          "body_md": "若表达长期保持私人且满足，可见包装只在岗位内出现，或受众回应不改变呈现和署名关注，4w3 假设应减弱。",
+          "key": "counterexample",
+          "title": "用私人持续与岗位可见度反证"
+        },
+        {
+          "body_md": "创意行业、教学、筹款和内容平台会奖励个人可见度。比较岗位外行为，以及署名、报酬和受众入口变化后的选择。",
+          "key": "alternative_explanations",
+          "title": "检验作品集与晋升制度"
+        },
+        {
+          "body_md": "翼型研究有限。4w3 不能证明魅力、创造力、真实程度、录用价值、影响力或未来认可。",
+          "key": "wing_boundary",
+          "title": "把可见表达限制为次级假设"
+        },
+        {
+          "body_md": "持续天数: 5\n\n情境: 选择一件公开署名作品、一项匿名贡献和一次回应不佳后的修改，尽量匹配投入与难度。\n\n可观察信号: 记录被保护的意义、署名、受众、修改、奖励、责任和没有认可后的投入变化。\n\n本页特定信号: 比较作品相近时，公开署名与匿名条件下哪一处呈现具体改变，并保留原始版本。\n\n替代解释: 对照作品集规则、晋升激励、平台机制、表达训练、报酬、资源和受众入口。\n\n复盘问题: 指出职业可见度更能解释行为的一项记录，并说明如何下调 4w3 假设。",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "对照作品集规则、晋升激励、平台机制、表达训练、报酬、资源和受众入口。",
+            "context": "选择一件公开署名作品、一项匿名贡献和一次回应不佳后的修改，尽量匹配投入与难度。",
+            "duration_days": 5,
+            "observable_signal": "记录被保护的意义、署名、受众、修改、奖励、责任和没有认可后的投入变化。",
+            "page_specific_signal": "比较作品相近时，公开署名与匿名条件下哪一处呈现具体改变，并保留原始版本。",
+            "reflection_prompt": "指出职业可见度更能解释行为的一项记录，并说明如何下调 4w3 假设。"
+          },
+          "title": "观察练习"
+        }
+      ],
+      "seo": {
+        "description": "4w3 是证据有限、以第四型为核心的传统翼型假设：对身份和意义的关注，可能受到第三型相邻主题中的可见交付、受众认可与适配所修饰。个人品牌不能证明翼型，作品集规则、晋升激励和表达训练都可能形成相似表现。",
+        "title": "4w3：以意义为核心、以可见表达为修饰的翼型假设"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/4w3",
+      "source_hash": "4b3934152240ec86a832f9299802dfe1c4dbbce241e8330b4adc526fd8e24bce",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "4w3 是证据有限、以第四型为核心的传统翼型假设：对身份和意义的关注，可能受到第三型相邻主题中的可见交付、受众认可与适配所修饰。个人品牌不能证明翼型，作品集规则、晋升激励和表达训练都可能形成相似表现。",
+      "title": "4w3：以意义为核心、以可见表达为修饰的翼型假设"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "abceee6605dc0091284a5f7b632118839bb36ac7bc5a238b30f23a8b6846f35f"
+}

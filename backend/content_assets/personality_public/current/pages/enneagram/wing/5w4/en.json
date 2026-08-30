@@ -1,0 +1,300 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/wings/5w4",
+    "entity_key": "5w4",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/5w4"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/wings/5w4"
+      },
+      "canonical_path": "/en/personality/enneagram/wings/5w4",
+      "code": "5w4",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "5w4",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Specialist training, an unusual dataset, intellectual property, client needs, or creative practice may require original analysis. Compare how authorship is handled when a standard method works better.",
+          "question": "Does original analysis prove a 5w4 wing?"
+        },
+        {
+          "answer": "Keep the same Type Five core and the same task. Then compare personal synthesis and meaning with verification, repeatability, and risk coverage while checking whether job requirements explain the difference.",
+          "question": "How is 5w4 compared with 5w6?"
+        },
+        {
+          "answer": "Comfort with conventional methods, anonymous contribution, and replacing a signature idea when evidence changes should all reduce confidence in the personal-synthesis modifier hypothesis.",
+          "question": "What counterexample matters for 5w4?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/5w4",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:5w4",
+        "x-default": "/en/personality/enneagram/wings/5w4",
+        "zh-CN": "/zh/personality/enneagram/wings/5w4"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-5",
+          "label": "core_type:type-5",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-5"
+        },
+        {
+          "href": "/en/personality/enneagram/type-4",
+          "label": "core_type:type-4",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-4"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/5w6",
+          "label": "wing:5w6",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:5w6"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "First test recurring preparation, knowledge, privacy, and capacity observations. Consider Four only as a possible secondary emphasis on personally coherent synthesis; an expressive surface cannot replace the core-first comparison.",
+          "key": "core_first_modifier",
+          "title": "Start with Type Five before considering the modifier"
+        },
+        {
+          "body_md": "Given one uncertain problem, 5w4 may test whether the account feels original and personally meaningful, while 5w6 may emphasize verification, reliable procedure, and risk coverage. Either pattern can reverse with role demands.",
+          "key": "sibling_core_comparison",
+          "title": "Compare 5w4 with 5w6 on the same task"
+        },
+        {
+          "body_md": "Compare how a person names sources, integrates an unusual perspective, responds when a signature idea is removed, and hands work to a standard process. Record behavior across research, critique, and delivery rather than inferring motive from aesthetics.",
+          "key": "observable_situations",
+          "title": "Observe authorship under revision and handoff"
+        },
+        {
+          "body_md": "Confidence should fall when the person readily adopts a conventional method, accepts anonymous contribution, prioritizes reliability over personal signature, or treats an original idea as replaceable when evidence changes.",
+          "key": "counterexample",
+          "title": "Use conventional and impersonal work as a challenge"
+        },
+        {
+          "body_md": "Creative education, disciplinary niche, minority culture, portfolio incentives, intellectual property, grief, or a client brief may produce unusual synthesis. Compare these explanations before adding a wing label.",
+          "key": "alternative_explanations",
+          "title": "Keep craft and specialization visible"
+        },
+        {
+          "body_md": "5w4 is not a separate type, diagnosis, ability measure, or creativity score. The systematic review found little research supporting wings, so this page offers only a revisable observation hypothesis.",
+          "key": "wing_boundary",
+          "title": "Keep the wing secondary and evidence-limited"
+        },
+        {
+          "body_md": "Duration: 5\n\nContext: Across five days, select one research draft, one critique, and one handoff where authorship is visible.\n\nObservable signal: Record source use, unusual synthesis, requested revisions, emotional meaning stated, and willingness to use a standard method.\n\nPage-specific signal: Compare personal coherence with verification and reliability while holding the Type Five core constant.\n\nAlternative explanation: Check creative training, specialization, culture, portfolio incentives, ownership rules, and the client brief.\n\nReflection prompt: Identify the strongest conventional-work counterexample and revise the 5w4 hypothesis accordingly.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Check creative training, specialization, culture, portfolio incentives, ownership rules, and the client brief.",
+            "context": "Across five days, select one research draft, one critique, and one handoff where authorship is visible.",
+            "duration_days": 5,
+            "observable_signal": "Record source use, unusual synthesis, requested revisions, emotional meaning stated, and willingness to use a standard method.",
+            "page_specific_signal": "Compare personal coherence with verification and reliability while holding the Type Five core constant.",
+            "reflection_prompt": "Identify the strongest conventional-work counterexample and revise the 5w4 hypothesis accordingly."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "5w4 is an evidence-limited wing hypothesis: Type Five knowledge, competence, privacy, and capacity concerns remain primary, while Four may modify how ideas receive personal synthesis, meaning, and originality. Distinctive work does not establish 5w4 because creative training, specialization, culture, audience, and project ownership can look similar.",
+        "title": "5w4: a core-first hypothesis about personal synthesis and meaning"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/5w4",
+      "source_hash": "15f06c5ad4bdef747b3784452e656f12e3fcd884ed08694c2716385da69a2bf6",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "5w4 is an evidence-limited wing hypothesis: Type Five knowledge, competence, privacy, and capacity concerns remain primary, while Four may modify how ideas receive personal synthesis, meaning, and originality. Distinctive work does not establish 5w4 because creative training, specialization, culture, audience, and project ownership can look similar.",
+      "title": "5w4: a core-first hypothesis about personal synthesis and meaning"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "504a0873890adbb5a24c1cc391fa3087a9662309cada7a386fb66ab5641fc33f"
+}

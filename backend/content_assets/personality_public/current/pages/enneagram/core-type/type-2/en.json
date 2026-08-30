@@ -1,0 +1,373 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-2",
+    "entity_key": "type-2",
+    "entity_type": "core_type",
+    "framework": "enneagram",
+    "page_kind": "core_type",
+    "slug": "enneagram/type-2"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-2"
+      },
+      "canonical_path": "/en/personality/enneagram/type-2",
+      "code": "type-2",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-2",
+      "entity_type": "core_type",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.application.exploratory_not_predictive",
+            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
+            "source_ids": [
+              "sutton_2013_work_outcomes",
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.application.exploratory_not_predictive",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
+            "claim_ids": [
+              "claim.application.exploratory_not_predictive"
+            ],
+            "doi": "10.1016/j.emj.2012.12.004",
+            "id": "sutton_2013_work_outcomes",
+            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
+            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
+            "source_type": "peer_reviewed_research",
+            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
+            "year": 2013
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Helping can come from work, family duty, community norms, emergency conditions, reciprocal agreements, or practiced kindness. A useful hypothesis requires repeated attention patterns, explicit counterexamples, and comparison with the recipient's actual request.",
+          "question": "Does frequent helping establish Type Two?"
+        },
+        {
+          "answer": "The distinction reveals whether help responds to evidence or to an assumption. Recording the request, consent, alternative preference, and response to refusal makes the observation more specific and protects the other person's ownership of their decision.",
+          "question": "Why distinguish an offered need from a stated request?"
+        },
+        {
+          "answer": "Before offering help, ask one concrete question, name the time or energy available, and accept the answer without persuasion. Later record whether connection changed, whether disappointment appeared, and which unstated expectation needs a direct conversation.",
+          "question": "What is a useful Type Two boundary experiment?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-2",
+        "reciprocal": true,
+        "translation_group": "enneagram:core_type:type-2",
+        "x-default": "/en/personality/enneagram/type-2",
+        "zh-CN": "/zh/personality/enneagram/type-2"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/centers/heart",
+          "label": "center:heart",
+          "relationship": "center_membership",
+          "target_identity_key": "center:heart"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/2w1",
+          "label": "wing:2w1",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:2w1"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/2w3",
+          "label": "wing:2w3",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:2w3"
+        },
+        {
+          "href": "/en/personality/enneagram/type-2/instincts/self-preservation",
+          "label": "instinctual_subtype:type-2/self-preservation",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-2/self-preservation"
+        },
+        {
+          "href": "/en/personality/enneagram/type-2/instincts/social",
+          "label": "instinctual_subtype:type-2/social",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-2/social"
+        },
+        {
+          "href": "/en/personality/enneagram/type-2/instincts/one-to-one",
+          "label": "instinctual_subtype:type-2/one-to-one",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-2/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.application.exploratory_not_predictive",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "A Type Two motivation hypothesis asks whether attention repeatedly scans for needs, connection, and a useful role. The same meal, introduction, reminder, or emotional check-in may instead reflect friendship, paid duty, family custom, crisis response, or a clearly stated request.",
+          "key": "motivation_attention",
+          "title": "Observe needs before inferring motive"
+        },
+        {
+          "body_md": "Record what the recipient asked for, what was offered, and what the helper later said they wanted. Generous behavior does not reveal whether the organizing concern was care, belonging, competence, reciprocity, reputation, avoiding conflict, or completing an assigned responsibility.",
+          "key": "behavior_motive",
+          "title": "Separate visible help from inferred need"
+        },
+        {
+          "body_md": "In decisions, note whose need is noticed first; in feedback, note whether appreciation affects willingness to continue; in conflict, note whether an unspoken contribution becomes part of the complaint. Compare Type Two feedback with role duty so ordinary caregiving or service work is not mistaken for motive.",
+          "key": "decision_feedback_conflict",
+          "title": "Compare choice, feedback, and conflict"
+        },
+        {
+          "body_md": "Attention to people can support timely help, social coordination, warmth, and noticing what others overlook. Tradeoffs may emerge when needs are assumed without asking, refusal feels personal, personal limits remain unstated, or giving creates an obligation the recipient never accepted.",
+          "key": "strengths_tradeoffs",
+          "title": "Hold attunement beside its tradeoffs"
+        },
+        {
+          "body_md": "At work, the hypothesis may organize questions about someone who connects a new colleague with resources before being asked. In a close relationship, it may help examine repeated offers followed by disappointment. These examples provide no basis for conclusions about performance, compatibility, or future results.",
+          "key": "work_relationship_examples",
+          "title": "Use examples without outcome claims"
+        },
+        {
+          "body_md": "The 2w1 hypothesis adds principled service, restraint, and standards; 2w3 adds visible effectiveness, adaptability, and attention to response. Common mistypes include role-based caregiving, Nine conflict avoidance, Six loyalty, Three impression management, cultural hospitality, and learned people-pleasing.",
+          "key": "wings_mistypes",
+          "title": "Compare wings and common mistypes"
+        },
+        {
+          "body_md": "A counterexample weakens a Type Two helping hypothesis when the person readily accepts refusal, states their own needs directly, helps only under formal duty, or shows no recurring attention to connection across comparable situations. Culture, role, safety, reciprocity, and current stress may fit better.",
+          "key": "counterexample",
+          "title": "Use refusal and non-recognition as tests"
+        },
+        {
+          "body_md": "Use this page to test questions about requests, consent, reciprocity, and limits. It is not a basis for moral ranking, health or personality conclusions, applicant screening, relationship verdicts, ability judgments, or permanent labels.",
+          "key": "use_boundary",
+          "title": "Keep observation voluntary and bounded"
+        },
+        {
+          "body_md": "Duration: 5\n\nContext: Choose three interactions with a visible request, a real option to decline, and enough time to observe what happens after the offer.\n\nObservable signal: Record the need first inferred, the request actually stated, the help offered, the response to refusal, and any expectation expressed later.\n\nPage-specific signal: Mark whether usefulness is pursued before consent, adjusted after new information, or replaced by a direct statement of the helper's own need.\n\nAlternative explanation: Compare friendship norms, assigned duty, reciprocity, crisis urgency, hospitality, fear of conflict, and reputation with the Type Two hypothesis.\n\nReflection prompt: Identify the strongest event where helping followed role rather than connection, then state what evidence would lower or discard the hypothesis.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Compare friendship norms, assigned duty, reciprocity, crisis urgency, hospitality, fear of conflict, and reputation with the Type Two hypothesis.",
+            "context": "Choose three interactions with a visible request, a real option to decline, and enough time to observe what happens after the offer.",
+            "duration_days": 5,
+            "observable_signal": "Record the need first inferred, the request actually stated, the help offered, the response to refusal, and any expectation expressed later.",
+            "page_specific_signal": "Mark whether usefulness is pursued before consent, adjusted after new information, or replaced by a direct statement of the helper's own need.",
+            "reflection_prompt": "Identify the strongest event where helping followed role rather than connection, then state what evidence would lower or discard the hypothesis."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "Type Two is a traditional Enneagram hypothesis about attention returning to other people's needs, connection, and opportunities to be useful. Type Two needs attention appears in what is noticed, offered, and expected in return; helpful behavior alone cannot establish motive or a fixed identity.",
+        "title": "Type Two: needs, connection, and a revisable helping hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-2",
+      "source_hash": "471d1f736f7f6cc39244f654e8c707e71f2e026bd12f2195900c7aba91063e8f",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "Type Two is a traditional Enneagram hypothesis about attention returning to other people's needs, connection, and opportunities to be useful. Type Two needs attention appears in what is noticed, offered, and expected in return; helpful behavior alone cannot establish motive or a fixed identity.",
+      "title": "Type Two: needs, connection, and a revisable helping hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.application.exploratory_not_predictive",
+            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
+            "source_ids": [
+              "sutton_2013_work_outcomes",
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.application.exploratory_not_predictive",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
+            "claim_ids": [
+              "claim.application.exploratory_not_predictive"
+            ],
+            "doi": "10.1016/j.emj.2012.12.004",
+            "id": "sutton_2013_work_outcomes",
+            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
+            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
+            "source_type": "peer_reviewed_research",
+            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
+            "year": 2013
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "90bef303e35d38facaa3d2a04b8253dab500fae92cacefaa6e9f810bdb77ab89"
+}

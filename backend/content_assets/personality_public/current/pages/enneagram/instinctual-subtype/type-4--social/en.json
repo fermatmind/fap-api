@@ -1,0 +1,335 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-4/instincts/social",
+    "entity_key": "type-4/social",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-4/instincts/social"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-4/instincts/social"
+      },
+      "canonical_path": "/en/personality/enneagram/type-4/instincts/social",
+      "code": "type-4/social",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-4/social",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Exclusion may be real and produced by discrimination, access, language, status, or informal networks. Verify the environment before considering subtype.",
+          "question": "Does feeling excluded establish Social Type Four?"
+        },
+        {
+          "answer": "A title or invitation may not provide information, credit, safety, or decision power. Concrete access evidence prevents a real barrier from becoming a personality claim.",
+          "question": "Why compare formal inclusion with actual access?"
+        },
+        {
+          "answer": "Comparison resolved by real inclusion, no recurrence across groups, or concern limited to demonstrably unequal settings should weaken the subtype explanation.",
+          "question": "What weakens the belonging-comparison hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-4/instincts/social",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-4/social",
+        "x-default": "/en/personality/enneagram/type-4/instincts/social",
+        "zh-CN": "/zh/personality/enneagram/type-4/instincts/social"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-4",
+          "label": "core_type:type-4",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-4"
+        },
+        {
+          "href": "/en/personality/enneagram/type-4/instincts/self-preservation",
+          "label": "instinctual_subtype:type-4/self-preservation",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-4/self-preservation"
+        },
+        {
+          "href": "/en/personality/enneagram/type-4/instincts/one-to-one",
+          "label": "instinctual_subtype:type-4/one-to-one",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-4/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "The description proposes that Type Four difference attention may become visible around groups and shared standards. It does not prove a stable social deficit or motive.",
+          "key": "traditional_hypothesis",
+          "title": "Treat belonging comparison as a traditional hypothesis"
+        },
+        {
+          "body_md": "Compare the same contribution when the person is invited, overlooked, and formally included. Record access, credit, interpretation of difference, and whether belonging changes after evidence of inclusion.",
+          "key": "matched_comparison",
+          "title": "Match contribution while changing inclusion"
+        },
+        {
+          "body_md": "The label organizes audience, belonging, and comparison observations. It is not evidence about bodily mechanisms, a universal social drive, or fixed group capacity.",
+          "key": "instinct_boundary",
+          "title": "Keep social language observational"
+        },
+        {
+          "body_md": "Personal difference may be expressed through naming what a group excludes rather than seeking individual distinction. Compare evidence-based critique with identity comparison.",
+          "key": "countertype_variation",
+          "title": "Allow difference to be voiced as group critique"
+        },
+        {
+          "body_md": "Discrimination, class, language, disability, relocation, informal networks, and status rules shape belonging. Do not psychologize a documented barrier.",
+          "key": "alternative_environment",
+          "title": "Test exclusion and unequal access"
+        },
+        {
+          "body_md": "The hypothesis weakens when documented inclusion resolves the comparison, difference attention does not recur across groups, or concern appears only where access is actually unequal.",
+          "key": "counterexample",
+          "title": "Use real inclusion and cross-group stability as tests"
+        },
+        {
+          "body_md": "Evidence from one subtype instrument cannot make belonging patterns universal across groups or cultures. This page cannot predict popularity, inclusion, loyalty, social skill, or group fit.",
+          "key": "evidence_boundary",
+          "title": "Keep belonging observations non-predictive"
+        },
+        {
+          "body_md": "Duration: 5\n\nContext: Choose one equal contribution across an invited, overlooked, and formally included group condition.\n\nObservable signal: Record access, information, credit, decision power, audience, stated meaning, barrier evidence, and response after inclusion changes.\n\nPage-specific signal: Compare whether difference attention persists after information, credit, and decision access become genuinely equal.\n\nAlternative explanation: Compare discrimination, class, language, disability, relocation, networks, and status rules.\n\nReflection prompt: Identify the strongest documented barrier and state whether subtype language adds anything after that barrier is considered.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Compare discrimination, class, language, disability, relocation, networks, and status rules.",
+            "context": "Choose one equal contribution across an invited, overlooked, and formally included group condition.",
+            "duration_days": 5,
+            "observable_signal": "Record access, information, credit, decision power, audience, stated meaning, barrier evidence, and response after inclusion changes.",
+            "page_specific_signal": "Compare whether difference attention persists after information, credit, and decision access become genuinely equal.",
+            "reflection_prompt": "Identify the strongest documented barrier and state whether subtype language adds anything after that barrier is considered."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "Social Type Four is a traditional, evidence-limited hypothesis that identity-and-meaning attention may appear through comparison, belonging, and sensitivity to what a valued group seems to possess. Group discomfort cannot establish subtype because exclusion, discrimination, status rules, relocation, and unequal access can create the same experience.",
+        "title": "Social Type Four: belonging comparison as a matched-comparison hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-4/instincts/social",
+      "source_hash": "854afe6c6de5ffd72643013ad032c2104076a721def982d2814ae26dc1afdb84",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "Social Type Four is a traditional, evidence-limited hypothesis that identity-and-meaning attention may appear through comparison, belonging, and sensitivity to what a valued group seems to possess. Group discomfort cannot establish subtype because exclusion, discrimination, status rules, relocation, and unequal access can create the same experience.",
+      "title": "Social Type Four: belonging comparison as a matched-comparison hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "691b5d32a49d10806f21f02a59da39418fe75448ac7e57a20aee8a56670f500d"
+}

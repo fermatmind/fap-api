@@ -1,0 +1,419 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh/personality/big-five/facets",
+    "entity_key": "facets",
+    "entity_type": "facet_hub",
+    "framework": "big_five",
+    "page_kind": "facet_hub",
+    "slug": "big-five/facets"
+  },
+  "locale": "zh-CN",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "path": "/zh/personality/big-five/facets"
+      },
+      "canonical_path": "/zh/personality/big-five/facets",
+      "code": "facets",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "facets",
+      "entity_type": "facet_hub",
+      "evidence_notes": [
+        {
+          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
+          "limitation": "IPIP 官方说明明确区分 lexical Big Five、FFM、BFI 与 NEO/IPIP 体系，并使用 ‘similar constructs’ 而非量表等同。具体条目映射见 https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm。 该官方网页未标注出版年；year 记录本次公开核验的访问快照年，不代表出版年份。",
+          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
+          "source_id": "S11"
+        },
+        {
+          "citation_label": "Between facets and domains: 10 aspects of the Big Five",
+          "limitation": "PMID 和 DOI 核验一致；用于说明 Big Five 存在多种层级化方案，不用于证明本包 30 个侧面。",
+          "public_url": "https://pubmed.ncbi.nlm.nih.gov/17983306/",
+          "source_id": "S5"
+        }
+      ],
+      "faq": [
+        {
+          "answer": "从你最关心的具体问题出发。如果问题与工作执行有关，先看尽责性下的六个侧面。如果问题与人际互动有关，先看外向性或宜人性下的侧面。然后逐步扩展到其他维度。",
+          "question": "我应该先看哪个侧面？"
+        },
+        {
+          "answer": "这很常见，不是错误。维度分数是侧面的汇总，汇总过程中高侧面和低侧面相互抵消，得到的总分可能接近中间值。这意味着你在某些具体倾向上的确很高，但被同维度内其他较低倾向拉平了。这恰恰说明看侧面的必要性。",
+          "question": "侧面分数和维度分数不一致怎么办？"
+        },
+        {
+          "answer": "侧面分析适合用于自我观察和反思，而不是作为一种\"介绍自己\"的标签系统。当你试图向他人解释自己的侧面组合时，一个更有效的方法是描述具体情境——例如\"在需要快速做决定时我倾向于反复权衡（审慎较高），但在执行已经确定的任务时我很少需要外部督促（自律较高）\"。具体例子比标签更能帮助他人理解你。",
+          "question": "我该如何向他人解释我的侧面组合？"
+        },
+        {
+          "answer": "三十个侧面都在很低区间是概率上极少出现的情况。如果确实如此，可能表示你对问卷的回答倾向于\"不太符合\"或你处于一种暂时的低自我评价状态。建议过几周在不同心境下重新测试一次，对比结果。",
+          "question": "30个侧面都低是不是有问题？"
+        },
+        {
+          "answer": "本包不提供每个侧面的纵向稳定性、年龄变化速度或干预效果。维度层面的群体研究不能直接外推到本包使用的每个侧面；个体变化需要具体量表、重复测量和相应研究设计支持。",
+          "question": "侧面会变化吗？"
+        },
+        {
+          "answer": "不可以。不同测试可能使用不同的侧面定义、题量和计分方式。费马测试的 NEO-PI-R 30-facet 体系不能与 BFI-2 的 15-facet 体系直接对应。",
+          "question": "不同测试的侧面结果可以直接比较吗？"
+        },
+        {
+          "answer": "侧面描述的是日常倾向，不是职业能力。将侧面分析用于职业探索时，它可以帮你问更好的问题——例如\"这个工作需要大量即兴应对还是严格流程\"——但它不能代替对具体职业的了解、技能评估和实际体验。侧面是你的\"偏好线索\"，不是\"职业导航仪\"。\n\n---\n\n---\n\n---",
+          "question": "侧面可以用来做职业规划吗？"
+        }
+      ],
+      "framework": "big_five",
+      "hreflang": {
+        "en": "/en/personality/big-five/facets",
+        "zh-CN": "/zh/personality/big-five/facets"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh/personality/big-five/openness",
+          "intent": "domain",
+          "label": "开放性"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/imagination",
+          "intent": "facet_detail",
+          "label": "想象力"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/aesthetics",
+          "intent": "facet_detail",
+          "label": "审美"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/feelings",
+          "intent": "facet_detail",
+          "label": "情感体验"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/actions",
+          "intent": "facet_detail",
+          "label": "行动尝试"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/ideas",
+          "intent": "facet_detail",
+          "label": "想法探索"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/values",
+          "intent": "facet_detail",
+          "label": "价值观开放"
+        },
+        {
+          "href": "/zh/personality/big-five/conscientiousness",
+          "intent": "domain",
+          "label": "尽责性"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/competence",
+          "intent": "facet_detail",
+          "label": "胜任感"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/order",
+          "intent": "facet_detail",
+          "label": "秩序"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/dutifulness",
+          "intent": "facet_detail",
+          "label": "责任感"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/achievement-striving",
+          "intent": "facet_detail",
+          "label": "成就追求"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/self-discipline",
+          "intent": "facet_detail",
+          "label": "自律"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/deliberation",
+          "intent": "facet_detail",
+          "label": "审慎"
+        },
+        {
+          "href": "/zh/personality/big-five/extraversion",
+          "intent": "domain",
+          "label": "外向性"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/warmth",
+          "intent": "facet_detail",
+          "label": "热情"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/gregariousness",
+          "intent": "facet_detail",
+          "label": "合群性"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/assertiveness",
+          "intent": "facet_detail",
+          "label": "果断性"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/activity",
+          "intent": "facet_detail",
+          "label": "活跃度"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/excitement-seeking",
+          "intent": "facet_detail",
+          "label": "刺激寻求"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/positive-emotions",
+          "intent": "facet_detail",
+          "label": "积极情绪"
+        },
+        {
+          "href": "/zh/personality/big-five/agreeableness",
+          "intent": "domain",
+          "label": "宜人性"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/trust",
+          "intent": "facet_detail",
+          "label": "信任"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/straightforwardness",
+          "intent": "facet_detail",
+          "label": "坦率"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/altruism",
+          "intent": "facet_detail",
+          "label": "利他"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/compliance",
+          "intent": "facet_detail",
+          "label": "冲突让步"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/modesty",
+          "intent": "facet_detail",
+          "label": "谦逊"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/tender-mindedness",
+          "intent": "facet_detail",
+          "label": "同情关怀"
+        },
+        {
+          "href": "/zh/personality/big-five/neuroticism",
+          "intent": "domain",
+          "label": "神经质"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/anxiety",
+          "intent": "facet_detail",
+          "label": "焦虑"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/anger",
+          "intent": "facet_detail",
+          "label": "愤怒"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/depression",
+          "intent": "facet_detail",
+          "label": "抑郁"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/self-consciousness",
+          "intent": "facet_detail",
+          "label": "自我意识"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/impulsiveness",
+          "intent": "facet_detail",
+          "label": "冲动性"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/vulnerability",
+          "intent": "facet_detail",
+          "label": "脆弱性"
+        },
+        {
+          "href": "/zh/personality/big-five",
+          "intent": "model_hub",
+          "label": "大五人格总览"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-CN",
+      "method_boundary": {
+        "clinical_reviewed": false,
+        "content_method": "AI-assisted draft; terminology, boundary and evidence review by FermatMind Editorial",
+        "expert_endorsement": false,
+        "limitations": [
+          "用于自我认知与教育说明，不构成临床诊断、招聘筛选或个体结果预测。",
+          "本内容包不提供费马测试的产品级信度、效度、中文常模或个体预测证据。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body": "五个维度（开放性、尽责性、外向性、宜人性和神经质）给了你一个宽泛的人格地图。但当你觉得\"尽责性高\"这个描述太笼统时——比如你发现自己确实重视秩序但自律并不突出，或者有强烈成就动机但执行细节时常出错——你需要进入更细一层：侧面（Facet）。\n\n本页的 30 个侧面采用 NEO/IPIP-NEO 解释框架。IPIP 官方列出三种测量与 NEO 30 个侧面相似构念的量表，并明确 Big Five、FFM、BFI 与 NEO/IPIP 属于不同历史与测量体系（[S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)）；另有研究提出 10 aspects 等不同层级方案（[S5](https://pubmed.ncbi.nlm.nih.gov/17983306/)）。所以“30 个”不是所有 Big Five 工具通用的唯一标准。\n\n费马测试尚未在本包中公开该页面对应分数的产品级信度、效度、中文常模或个体预测证据。正文只用于自我观察与教育说明，不用于临床诊断、招聘筛选、升学录取或替代职业决定。\n\n> **内容方法与更新时间**：本内容由 FermatMind Editorial 在 AI 辅助起草基础上，根据公开人格心理学来源进行术语、边界与证据核验。内容用于自我认知与教育说明，不构成临床诊断、招聘筛选或个体结果预测。实质更新：2026-07-18；审阅方式：solo_operator；未经过临床专家审阅。\n\n---",
+          "heading": "证据与解释边界",
+          "key": "section-01-a9e061cfbf",
+          "kind": "rich_text"
+        },
+        {
+          "body": "侧面是维度之下的子倾向，比维度更具体、更接近日常可观察的行为。每个维度下包含六个侧面，五个维度共三十个侧面。\n\n维度与侧面的关系可以类比为\"大类别\"和\"子类别\"。维度告诉你\"这个人大概在哪一端\"；侧面告诉你\"在这端内部，究竟是哪一种更具体的模式\"。\n\n**举例**：两个人的尽责性得分都在较高区间。第一个人习惯于把桌面整理得井井有条、文件按日期归档（高秩序），但在没有外部监督时容易拖延（中等自律）。第二个人桌面经常杂乱，但一旦开始做一件事就能连续投入数小时不受干扰（高自律）。两个人都是\"高尽责性\"，但他们展现尽责性的方式完全不同。\n\n这就是侧面分析的价值：**它把\"你属于哪一类\"变成\"你在哪些具体方面有怎样的倾向\"。**\n\n---",
+          "heading": "什么是侧面",
+          "key": "section-02-220945d48e",
+          "kind": "rich_text"
+        },
+        {
+          "body": "费马测试采用的是 NEO-PI-R 30-facet 体系（基于 IPIP NEO-equivalent 开源项目）。这意味着：\n\n- 每个维度有六个侧面，共三十个\n- 侧面名称和结构遵循 NEO-PI-R 的技术传统\n- 这不是 BFI-2 的 15-facet 体系（BFI-2 每个维度只有三个侧面）\n- 不同测量模型的侧面数量和命名不能默认互换\n\n重要的是：维度层面的研究证据不能直接套用在侧面层面。例如，Soto & John (2017) 的 BFI-2 在 domain 层面的信效度证据支持大五人格的维度结构，但 BFI-2 的 facet 体系（15 个）与 NEO-PI-R 的体系（30 个）不同，因此 BFI-2 的 facet 层面结论不能直接迁移。\n\n---",
+          "heading": "费马测试使用的侧面体系",
+          "key": "section-03-ed8578ddc5",
+          "kind": "rich_text"
+        },
+        {
+          "body": "### 开放性（Openness）\n\n| 侧面 | 英文 | 一句话说明 |\n|------|------|----------|\n| 想象力 | Imagination | 内心世界的丰富程度，构建场景和可能性的倾向 |\n| 审美 | Aesthetics | 对艺术、音乐、自然和形式美的敏感度 |\n| 情感体验 | Feelings | 对自己内心情绪的关注深度和区分能力 |\n| 行动尝试 | Actions | 愿意尝试新活动、去新地方、做不一样的事 |\n| 想法探索 | Ideas | 对抽象概念、理论问题和新知识的兴趣 |\n| 价值观开放 | Values | 审视和重新评估既有价值观和规范的倾向 |\n\n### 尽责性（Conscientiousness）\n\n| 侧面 | 英文 | 一句话说明 |\n|------|------|----------|\n| 胜任感 | Competence | 对自己完成任务能力的信心 |\n| 秩序 | Order | 对整洁、条理和有序环境的需求 |\n| 责任感 | Dutifulness | 履行承诺、遵守规则和道德标准的倾向 |\n| 成就追求 | Achievement Striving | 设定高目标并为之努力的驱动力 |\n| 自律 | Self-Discipline | 开始任务并坚持完成、抵抗分心的能力 |\n| 审慎 | Deliberation | 行动前仔细考虑后果和备选方案的倾向 |\n\n### 外向性（Extraversion）\n\n| 侧面 | 英文 | 一句话说明 |\n|------|------|----------|\n| 热情 | Warmth | 与他人建立情感连接和表达友善的倾向 |\n| 合群性 | Gregariousness | 享受与他人共处、偏好群体活动的程度 |\n| 果断性 | Assertiveness | 主动表达意见、主导局面和维护立场的倾向 |\n| 活跃度 | Activity | 保持忙碌、快节奏和充沛精力的倾向 |\n| 刺激寻求 | Excitement Seeking | 追求兴奋、刺激和高强度体验的倾向 |\n| 积极情绪 | Positive Emotions | 体验快乐、热情和乐观等正向情绪的频率 |\n\n### 宜人性（Agreeableness）\n\n| 侧面 | 英文 | 一句话说明 |\n|------|------|----------|\n| 信任 | Trust | 倾向于相信他人意图是善意的 |\n| 坦率 | Straightforwardness | 清楚、非操纵地表达的倾向；不等于说出一切 |\n| 利他 | Altruism | 关心他人福祉并愿意提供帮助 |\n| 冲突让步 | Compliance | 争执中倾向退让、妥协或降低对抗 |\n| 谦逊 | Modesty | 不过分突出自己、承认局限的倾向 |\n| 同情关怀 | Tender-Mindedness | 在判断中纳入痛苦、脆弱处境和人道关切 |\n\n### 神经质（Neuroticism / 情绪敏感性）\n\n以下侧面名称仅作人格特质描述，**不作为临床诊断用语**。\n\n| 侧面 | 英文 | 一句话说明 |\n|------|------|----------|\n| 焦虑 | Anxiety | 感受到紧张、忧虑和恐惧的倾向 |\n| 愤怒 | Anger | 体验到挫折、恼怒和敌意的倾向 |\n| 抑郁 | Depression | 感受到悲伤、无助和丧失兴趣的倾向 |\n| 自我意识 | Self-Consciousness | 在社交场合中感到不自在或被审视的倾向 |\n| 冲动性 | Impulsiveness | 受到强烈欲望驱使而难以延迟满足的倾向 |\n| 脆弱性 | Vulnerability | 在压力下感到不知所措和难以应对的倾向 |\n\n---",
+          "heading": "五个维度与30个侧面的完整映射",
+          "key": "section-04-e66b9192dd",
+          "kind": "rich_text"
+        },
+        {
+          "body": "在能同时报告维度与侧面的量表中，维度分数和侧面分数的关系取决于具体题目与计分规则；不能假定所有工具都按同一方式把六个侧面加权成维度总分。即使两个报告给出相近的维度分数，较窄倾向的分布也可能不同。\n\n理解这一点对自我认知至关重要。当你看到\"尽责性高\"时，你实际上看到的是一组可能分布完全不同的侧面得分的总和。直接看侧面，比只看维度能更准确地回答\"我究竟是哪一种尽责\"。\n\n**阅读顺序建议**：先看维度总分建立整体印象，然后在最让你困惑或最让你好奇的维度上深入看侧面。不需要一次看完所有三十个——那会让信息过载而没有方向感。\n\n---",
+          "heading": "为什么同样的维度分数可能来自不同的侧面组合",
+          "key": "section-05-943b2005dc",
+          "kind": "rich_text"
+        },
+        {
+          "body": "单独看一个侧面只能告诉你\"这一点上我大概在什么位置\"，但一组侧面的组合能告诉你更多。\n\n**第一步：找出最突出的差异。** 在一个维度内，找出得分最高和最低的侧面。这两个侧面的差值通常比维度总分更能解释你在该领域的体验矛盾。例如，尽责性维度中\"秩序\"很高但\"自律\"中等，可能解释了你为什么桌面整洁却总在截止日期前赶工。\n\n**第二步：跨维度寻找互补或冲突。** 高开放性的人在想法探索上得分很高，但如果尽责性中的自律得分偏低，可能表现为\"兴趣广泛但难以深入\"。高神经质的人如果同时在外向性的积极情绪上得分较高，可能表现为\"容易紧张但恢复较快，且对积极事件仍能由衷感到快乐\"。\n\n**第三步：情境匹配。** 同一个侧面组合在不同生活场景中的适应性不同。高\"果断性\"配合低\"冲突让步\"在工作谈判中可能是优势，但在亲密关系中可能需要有意识地调整。侧面告诉你\"自然倾向于什么\"，不告诉你\"在所有情况下都该这么做什么\"。\n\n**第四步：去掉极端化解读。** 一个侧面的\"较高\"或\"较低\"倾向不是非黑即白的开关。倾向只是概率——你在大多数情况下更可能怎么做，但在特定情境中完全可能做相反的事。侧面分析的目标是帮你建立更精确的自我认知，不是给你一个新的刻板印象。\n\n---",
+          "heading": "如何阅读侧面组合：一个四步方法",
+          "key": "section-06-3da4ffcd4e",
+          "kind": "rich_text"
+        },
+        {
+          "body": "当前内容包采用 NEO/IPIP-NEO 的 30-facet 词汇。NEO-PI-R 手册描述了每个维度下六个侧面的结构；IPIP 官方提供的是测量与这些侧面“相似构念”的公开条目量表，而不是与专有量表完全等同的版本（[S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)）。\n\n这个体系在本包中的用途是：\n- 提供比五个宽泛维度更细的观察词汇\n- 允许读者区分同一维度内不同的行为倾向\n- 使用 IPIP 官方可公开核查的构念与条目映射作为术语边界\n\n这个体系的限制在于：\n- 不应假定侧面彼此独立，也不应从一个侧面机械推断另一个侧面\n- 不同文化背景下，某些侧面的行为表现可能有差异，但中文版内容根据基本理论框架编写，未声称经过独立的跨文化效度验证\n- 三十个侧面不能穷尽人格的所有重要方面——但它们是理解日常行为差异的有用入口\n\n---",
+          "heading": "30-facet 体系的历史与边界",
+          "key": "section-07-013ca3155e",
+          "kind": "rich_text"
+        },
+        {
+          "body": "侧面提供了更细颗粒度的自我观察线索，但它需要配合更审慎的解释。\n\n- **侧面不能替代临床评估。** 神经质各侧面的名称（焦虑、抑郁、愤怒等）是人格术语，不是诊断标签。如果你的情绪困扰严重影响了日常生活，请寻求专业心理帮助。\n- **侧面不能用来做职业筛选。** 单个侧面与特定职业的关联通常很弱且缺乏因果证据。\n- **侧面之间不能做简单加减。** \"高秩序 + 低自律\"不直接等于\"有条理但拖延\"，这种组合可能有更复杂的互动——比如高秩序低自律的人可能善于建立外部结构（日历、提醒、清单）来补偿自律的不足。\n- **侧面分数不等于能力。** \"低果断性\"不意味着你没有说服力，\"低想法探索\"不意味着你缺乏知识。侧面描述倾向，不是才能。\n\n在实际自我观察中，最有价值的不是单看某个高或低的侧面，而是注意那些让你感到矛盾的侧面组合。例如，高成就追求配合高焦虑（神经质维度）可能导致\"我既要做到最好又害怕做不到\"的长期紧张；高利他（宜人性）配合低自律可能导致\"总想帮人但自己的事一再拖延\"；高想法探索（开放性）配合低审慎（尽责性）可能导致\"对各种话题都有见解但在做重要决定时缺乏系统评估\"。\n\n识别这些矛盾模式，比简单地确认\"我某方面高或低\"更能指导实际的行为调整。当你发现了矛盾模式，下一步通常不是\"改变倾向\"，而是找到补偿策略——比如为低审慎建立决策清单，为低自律建立外部问责机制，为高焦虑建立定期的\"担忧时间\"来防止它扩散到全天。侧面分析不是终点，而是更精确地定位\"我可以在哪里做调整\"的起点。\n\n---",
+          "heading": "侧面不能被怎样使用",
+          "key": "section-08-35a590418a",
+          "kind": "rich_text"
+        },
+        {
+          "body": "- [开放性](/zh/personality/big-five/openness)：[想象力](/zh/personality/big-five/facets/imagination) · [审美](/zh/personality/big-five/facets/aesthetics) · [情感体验](/zh/personality/big-five/facets/feelings) · [行动尝试](/zh/personality/big-five/facets/actions) · [想法探索](/zh/personality/big-five/facets/ideas) · [价值观开放](/zh/personality/big-five/facets/values)\n- [尽责性](/zh/personality/big-five/conscientiousness)：[胜任感](/zh/personality/big-five/facets/competence) · [秩序](/zh/personality/big-five/facets/order) · [责任感](/zh/personality/big-five/facets/dutifulness) · [成就追求](/zh/personality/big-five/facets/achievement-striving) · [自律](/zh/personality/big-five/facets/self-discipline) · [审慎](/zh/personality/big-five/facets/deliberation)\n- [外向性](/zh/personality/big-five/extraversion)：[热情](/zh/personality/big-five/facets/warmth) · [合群性](/zh/personality/big-five/facets/gregariousness) · [果断性](/zh/personality/big-five/facets/assertiveness) · [活跃度](/zh/personality/big-five/facets/activity) · [刺激寻求](/zh/personality/big-five/facets/excitement-seeking) · [积极情绪](/zh/personality/big-five/facets/positive-emotions)\n- [宜人性](/zh/personality/big-five/agreeableness)：[信任](/zh/personality/big-five/facets/trust) · [坦率](/zh/personality/big-five/facets/straightforwardness) · [利他](/zh/personality/big-five/facets/altruism) · [冲突让步](/zh/personality/big-five/facets/compliance) · [谦逊](/zh/personality/big-five/facets/modesty) · [同情关怀](/zh/personality/big-five/facets/tender-mindedness)\n- [神经质](/zh/personality/big-five/neuroticism)：[焦虑](/zh/personality/big-five/facets/anxiety) · [愤怒](/zh/personality/big-five/facets/anger) · [抑郁](/zh/personality/big-five/facets/depression) · [自我意识](/zh/personality/big-five/facets/self-consciousness) · [冲动性](/zh/personality/big-five/facets/impulsiveness) · [脆弱性](/zh/personality/big-five/facets/vulnerability)\n- 返回：[大五人格总览](/zh/personality/big-five)",
+          "heading": "继续阅读",
+          "key": "section-09-ac4c7e9e89",
+          "kind": "rich_text"
+        }
+      ],
+      "seo": [],
+      "sitemap_eligible": true,
+      "slug": "big-five/facets",
+      "source_hash": "8bea4315f563020839e7792f34941ceafdc3cbd3845c6fba0601b4ac9065ed18",
+      "source_package": "big5-zh-v3-52-page-release",
+      "summary": "侧面（Facet）是大五人格五个宽泛维度之下的更具体倾向。两个尽责性总分相同的人，可能一个高在秩序、一个高在自律——侧面分析帮你分辨\"究竟是哪一种\"。",
+      "title": "大五人格30个侧面：从宽泛维度到具体倾向"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": {
+          "name": "FermatMind Editorial",
+          "organization": "FermatMind",
+          "role": "Editorial"
+        }
+      },
+      "schema_eligible": false,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "facets-measurement_method-1",
+            "limitation": "不同 Big Five/FFM 工具的层级与计分不能视为相同。",
+            "source_ids": [
+              "S11",
+              "S5"
+            ],
+            "support_level": "contextual"
+          },
+          {
+            "claim_id": "facets-measurement_method-2",
+            "limitation": "不同 Big Five/FFM 工具的层级与计分不能视为相同。",
+            "source_ids": [
+              "S11"
+            ],
+            "support_level": "contextual"
+          },
+          {
+            "claim_id": "facets-product-boundary",
+            "limitation": "这是公开的产品/方法边界声明，不是经验性研究结论。",
+            "source_ids": [],
+            "support_level": "not_required"
+          },
+          {
+            "claim_id": "facets-content-method",
+            "limitation": "这是公开的产品/方法边界声明，不是经验性研究结论。",
+            "source_ids": [],
+            "support_level": "not_required"
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "模型研究不等于费马测试产品验证。",
+          "不用于临床诊断、招聘筛选、升学录取或个体结果预测。"
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Oregon Research Institute IPIP project",
+            "claim_ids": [
+              "facets-measurement_method-1",
+              "facets-measurement_method-2"
+            ],
+            "doi": null,
+            "id": "S11",
+            "limitation": "IPIP 官方说明明确区分 lexical Big Five、FFM、BFI 与 NEO/IPIP 体系，并使用 ‘similar constructs’ 而非量表等同。具体条目映射见 https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm。 该官方网页未标注出版年；year 记录本次公开核验的访问快照年，不代表出版年份。",
+            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
+            "source_type": "official_documentation",
+            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
+            "year": 2026
+          },
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "DeYoung, C. G.; Quilty, L. C.; Peterson, J. B.",
+            "claim_ids": [
+              "facets-measurement_method-1"
+            ],
+            "doi": "10.1037/0022-3514.93.5.880",
+            "id": "S5",
+            "limitation": "PMID 和 DOI 核验一致；用于说明 Big Five 存在多种层级化方案，不用于证明本包 30 个侧面。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/17983306/",
+            "source_type": "peer_reviewed_research",
+            "title": "Between facets and domains: 10 aspects of the Big Five",
+            "year": 2007
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "0ee4b4e532408bc9780fd7a46e210240b12c646e9219bceb1dbd00170cf767d7"
+}

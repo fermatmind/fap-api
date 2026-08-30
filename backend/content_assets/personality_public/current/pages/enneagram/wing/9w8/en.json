@@ -1,0 +1,300 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/wings/9w8",
+    "entity_key": "9w8",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/9w8"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/wings/9w8"
+      },
+      "canonical_path": "/en/personality/enneagram/wings/9w8",
+      "code": "9w8",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "9w8",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "Grounded boundary force does not prove 9w8. Property duty, safety responsibility, advocacy, or a repeated breach may require firmness; test whether stability seeking reliably precedes force and whether repair restores shared ground.",
+          "question": "Does grounded boundary force prove 9w8?"
+        },
+        {
+          "answer": "9w8 can be compared with core Eight by tracking timing: the Nine-centered hypothesis often delays mobilization to preserve continuity, while an Eight-centered hypothesis may address autonomy and power sooner; neither pattern is established by volume.",
+          "question": "How can 9w8 be compared with core Eight?"
+        },
+        {
+          "answer": "A counterexample weakens a delayed-force reading when the person states boundaries early, negotiates territory without entrenchment, or repeatedly seeks control before any accommodation attempt; record authority and consequences as controls.",
+          "question": "Which counterexample weakens a delayed-force reading?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/9w8",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:9w8",
+        "x-default": "/en/personality/enneagram/wings/9w8",
+        "zh-CN": "/zh/personality/enneagram/wings/9w8"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-9",
+          "label": "core_type:type-9",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-9"
+        },
+        {
+          "href": "/en/personality/enneagram/type-8",
+          "label": "core_type:type-8",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-8"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/9w1",
+          "label": "wing:9w1",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:9w1"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "Test whether the person first tries to preserve continuity or shared ground, then becomes direct when a boundary is repeatedly crossed. Immediate dominance without a stability pattern weakens a core-Nine reading.",
+          "key": "core_first_modifier",
+          "title": "Keep stability primary and force secondary"
+        },
+        {
+          "body_md": "A Nine-centered hypothesis expects delayed mobilization and a wish to restore workable calm; an Eight-centered hypothesis may test autonomy and power earlier. Observe timing and repair, not surface volume.",
+          "key": "sibling_core_comparison",
+          "title": "Compare Nine with Eight rather than blending labels"
+        },
+        {
+          "body_md": "Use a workspace boundary, household agreement, or project ownership dispute. Record the prior agreement, number of indirect signals, exact refusal, force used, and whether cooperation resumes afterward.",
+          "key": "observable_situations",
+          "title": "Track territory, refusal, and re-entry"
+        },
+        {
+          "body_md": "Confidence should fall when the person consistently seeks control before shared ground is tested, treats compromise as surrender, or expands authority beyond the agreed boundary without later correction.",
+          "key": "counterexample",
+          "title": "Look for early escalation without accommodation"
+        },
+        {
+          "body_md": "Security work, union representation, caregiving responsibility, prior violations, discrimination, physical risk, and lack of formal recourse can require grounded resistance without indicating a wing pattern.",
+          "key": "alternative_explanations",
+          "title": "Control for duty, threat, and access to recourse"
+        },
+        {
+          "body_md": "The wing label is a traditional comparison and does not establish an enduring identity or verified capacity. Use it only after a core-Nine pattern is independently plausible and retain ordinary situational explanations.",
+          "key": "wing_boundary",
+          "title": "Treat 9w8 as secondary and evidence limited"
+        },
+        {
+          "body_md": "Duration: 4\n\nContext: Over four days, select one boundary request, one shared-space dispute, and one protective action involving an explicit prior agreement.\n\nObservable signal: Record when the boundary was noticed, indirect cues, exact direct statement, legitimate authority, force level, other party’s response, and completed repair.\n\nPage-specific signal: Compare delayed grounded resistance with an event where the same person states a limit before irritation accumulates.\n\nAlternative explanation: Check assigned duty, ownership, safety risk, discrimination, prior breach, communication training, and access to neutral review.\n\nReflection prompt: Name one incident where earlier low-force clarity protected both stability and consent, and adjust the 9w8 modifier hypothesis.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Check assigned duty, ownership, safety risk, discrimination, prior breach, communication training, and access to neutral review.",
+            "context": "Over four days, select one boundary request, one shared-space dispute, and one protective action involving an explicit prior agreement.",
+            "duration_days": 4,
+            "observable_signal": "Record when the boundary was noticed, indirect cues, exact direct statement, legitimate authority, force level, other party’s response, and completed repair.",
+            "page_specific_signal": "Compare delayed grounded resistance with an event where the same person states a limit before irritation accumulates.",
+            "reflection_prompt": "Name one incident where earlier low-force clarity protected both stability and consent, and adjust the 9w8 modifier hypothesis."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "9w8 is an evidence-limited wing hypothesis that keeps Type Nine’s attention to stability and connection primary while using Eight-like grounded resistance, boundary force, and protection as possible modifiers. A quiet person who becomes firm is not therefore 9w8; role authority, property responsibility, danger, training, or unequal power may explain the same sequence.",
+        "title": "9w8: a core-Nine hypothesis modified by grounded boundary force"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/9w8",
+      "source_hash": "b7199293d60cbbf06e4d5606e2ea178a9d8812901b8fea29c72dc5ff627eaf6c",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "9w8 is an evidence-limited wing hypothesis that keeps Type Nine’s attention to stability and connection primary while using Eight-like grounded resistance, boundary force, and protection as possible modifiers. A quiet person who becomes firm is not therefore 9w8; role authority, property responsibility, danger, training, or unequal power may explain the same sequence.",
+      "title": "9w8: a core-Nine hypothesis modified by grounded boundary force"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "f80300537d8de2a1c05472ad6727655fed235e1d9881cf76617ef6b05437e559"
+}

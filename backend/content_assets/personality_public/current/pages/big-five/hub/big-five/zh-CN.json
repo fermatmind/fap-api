@@ -1,0 +1,427 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh/personality/big-five",
+    "entity_key": "big-five",
+    "entity_type": "hub",
+    "framework": "big_five",
+    "page_kind": "hub",
+    "slug": "big-five"
+  },
+  "locale": "zh-CN",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "path": "/zh/personality/big-five"
+      },
+      "canonical_path": "/zh/personality/big-five",
+      "code": "big-five",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "big-five",
+      "entity_type": "hub",
+      "evidence_notes": [
+        {
+          "citation_label": "An alternative 'description of personality': The Big-Five factor structure",
+          "limitation": "PMID、题名、作者、年份和 DOI 一致；用于五维结构与词汇研究背景，不用于产品级效度。",
+          "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
+          "source_id": "S1"
+        },
+        {
+          "citation_label": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+          "limitation": "PMID 与 DOI 核验一致；BFI-2 的 15-facet 架构只用于说明不同量表的下位结构并不相同。",
+          "public_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+          "source_id": "S2"
+        },
+        {
+          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
+          "limitation": "IPIP 官方说明明确区分 lexical Big Five、FFM、BFI 与 NEO/IPIP 体系，并使用 ‘similar constructs’ 而非量表等同。具体条目映射见 https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm。 该官方网页未标注出版年；year 记录本次公开核验的访问快照年，不代表出版年份。",
+          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
+          "source_id": "S11"
+        },
+        {
+          "citation_label": "Big five personality traits and performance: A quantitative synthesis of 50+ meta-analyses",
+          "limitation": "期刊页核验 54 个元分析、题名、作者、DOI 和出版信息；只支持群体层面关联及情境差异。",
+          "public_url": "https://onlinelibrary.wiley.com/doi/10.1111/jopy.12683",
+          "source_id": "S9"
+        },
+        {
+          "citation_label": "Patterns of mean-level change in personality traits across the life course: A meta-analysis of longitudinal studies",
+          "limitation": "PMID、DOI、题名和作者一致；仅支持群体平均变化，不支持个体预测或固定复测周期。",
+          "public_url": "https://pubmed.ncbi.nlm.nih.gov/16435954/",
+          "source_id": "S4"
+        }
+      ],
+      "faq": [
+        {
+          "answer": "大五人格在本页按连续维度解释；MBTI 页面使用类型化输出。两套结果不能直接换算，也不应互相充当效度证据。若要比较，应分别查看具体工具的题目、计分和公开证据，而不是只比较标签。\n\n这段只能用于比较工作环境的任务要求，不能据此判断职业适配、工作表现或任用结果。职业探索还需结合技能、兴趣、经验、机会、工作样本和现实约束。\n\n不能直接预测职业结果。大五可以帮助你分析自己的工作节奏偏好、协作方式和压力来源，但这些必须结合你的技能、经验、兴趣和现实机会来综合考虑。人格测试提供的是线索，不是答案。",
+          "question": "大五人格和 MBTI 有什么不同？"
+        },
+        {
+          "answer": "不是。大五中的神经质（Neuroticism）是人格维度的技术性术语，描述对负面情绪的敏感程度。它既不是精神疾病的诊断标准，也不能替代临床评估。如果情绪困扰严重影响日常生活，请寻求专业心理帮助。",
+          "question": "神经质是不是心理疾病？"
+        },
+        {
+          "answer": "纵向研究的元分析报告了部分人格特质在生命历程中的群体平均变化，但不能据此预测某个个体、某个具体侧面或固定年龄点会怎样变化（[S4](https://pubmed.ncbi.nlm.nih.gov/16435954/)）。",
+          "question": "大五分数会变化吗？"
+        },
+        {
+          "answer": "不是。低分代表连续谱的另一端倾向，在某些情境中可能更有效。例如，低外向性可能有更好的独立深度工作能力；低宜人性在需要坚持标准或面对竞争时可能有优势。关键在于倾向是否匹配具体任务和情境。",
+          "question": "低分是不是不好？"
+        },
+        {
+          "answer": "从你最关心的具体问题出发。如果问题是\"为什么我总是在新环境中紧张\"，先看神经质。如果是\"为什么我很难坚持完成长期项目\"，先看尽责性。如果是\"为什么我在团队中总是避免冲突\"，先看宜人性。然后逐步扩展到其他维度。",
+          "question": "我应该先看哪个维度？"
+        },
+        {
+          "answer": "大五人格的词汇研究传统使用人格描述词和因子分析识别出五个宽泛因素（[S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)）。不同量表会采用不同题目和层级结构，因此模型研究不能自动证明某个具体测试产品、翻译、常模或分数解释有效。",
+          "question": "大五人格的科学依据是什么？"
+        },
+        {
+          "answer": "不需要一次性全部了解。建议先从五个维度入手，当你发现某个维度的描述过于宽泛时——比如\"尽责性高\"但不确定是哪一种尽责——再进入该维度的六个侧面做更细致的了解。侧面是维度理解的深化工具，不是必读清单。\n\n---\n\n---\n\n---",
+          "question": "大五人格有 30 个侧面，我需要全部了解吗？"
+        }
+      ],
+      "framework": "big_five",
+      "hreflang": {
+        "en": "/en/personality/big-five",
+        "zh-CN": "/zh/personality/big-five"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh/personality/big-five/openness",
+          "intent": "domain",
+          "label": "开放性"
+        },
+        {
+          "href": "/zh/personality/big-five/conscientiousness",
+          "intent": "domain",
+          "label": "尽责性"
+        },
+        {
+          "href": "/zh/personality/big-five/extraversion",
+          "intent": "domain",
+          "label": "外向性"
+        },
+        {
+          "href": "/zh/personality/big-five/agreeableness",
+          "intent": "domain",
+          "label": "宜人性"
+        },
+        {
+          "href": "/zh/personality/big-five/neuroticism",
+          "intent": "domain",
+          "label": "神经质"
+        },
+        {
+          "href": "/zh/personality/big-five/facets",
+          "intent": "facet_hub",
+          "label": "30 个侧面总览"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-CN",
+      "method_boundary": {
+        "clinical_reviewed": false,
+        "content_method": "AI-assisted draft; terminology, boundary and evidence review by FermatMind Editorial",
+        "expert_endorsement": false,
+        "limitations": [
+          "用于自我认知与教育说明，不构成临床诊断、招聘筛选或个体结果预测。",
+          "本内容包不提供费马测试的产品级信度、效度、中文常模或个体预测证据。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body": "大五人格（Big Five）是人格心理学中被广泛研究的维度模型之一。它把人格描述组织为五个宽泛范围——开放性（Openness）、尽责性（Conscientiousness）、外向性（Extraversion）、宜人性（Agreeableness）和神经质（Neuroticism），合称 OCEAN（[S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)）。每个维度是连续的：你得到的不是一个“你是 X 型人”的标签，而是一组描述某种倾向出现程度的分数。\n\n本页对五个宽泛维度的说明以词汇研究中的五因素结构为依据（[S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)）；层级测量并非只有一种方案，例如 BFI-2 使用 15 个侧面（[S2](https://pubmed.ncbi.nlm.nih.gov/27055049/)），IPIP 官方则列出测量与 NEO 30 个侧面相似构念的不同量表（[S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)）。因此，本包采用的 30 个侧面是一套明确标注的 NEO/IPIP-NEO 解释框架，不是所有 Big Five 工具共享的唯一标准。\n\n费马测试尚未在本包中公开该页面对应分数的产品级信度、效度、中文常模或个体预测证据。正文只用于自我观察与教育说明，不用于临床诊断、招聘筛选、升学录取或替代职业决定。\n\n> **内容方法与更新时间**：本内容由 FermatMind Editorial 在 AI 辅助起草基础上，根据公开人格心理学来源进行术语、边界与证据核验。内容用于自我认知与教育说明，不构成临床诊断、招聘筛选或个体结果预测。实质更新：2026-07-18；审阅方式：solo_operator；未经过临床专家审阅。\n\n---\n\n本文的目标是让你不需要任何心理学背景，就能理解这五个维度在观察什么、怎么阅读结果、以及如何把描述当作可以验证和修正的工作假设。\n\n---",
+          "heading": "证据与解释边界",
+          "key": "section-01-2e2f659254",
+          "kind": "rich_text"
+        },
+        {
+          "body": "大五人格回答的核心问题是：**在思考、感受和行动上，某些倾向在多大程度上稳定地出现。**\n\n它不回答\"你是什么样的人\"，也不回答\"你比别人好还是差\"。它只回答：当你面对新主意时倾向于靠近还是保持；当你需要坚持完成一件事时倾向于自我驱动还是需要外部结构；当你进入社交场合时倾向于从中获得能量还是消耗能量；当你与他人意见不同时倾向于先寻求理解还是先表明立场；当你遇到压力时倾向于较长时间保持紧张还是较快恢复。\n\n五个维度在模型中彼此可区分，但并不意味着统计上完全独立；一个维度不能单独决定另一个维度，也不能只凭一项分数推断完整人格。一个人可能开放性和尽责性都高，也可能开放性高而尽责性中等，还可能五项都接近中间——每一种组合都是正常的，不能简化为好或不好。\n\n---",
+          "heading": "先给结论：大五人格在回答什么问题",
+          "key": "section-02-b058daa09d",
+          "kind": "rich_text"
+        },
+        {
+          "body": "**开放性（Openness to Experience）** 关注你接触新观念、新体验和新审美的方式。这是一个关于探索的维度——倾向较高的人容易被陌生想法吸引，喜欢在行动前先想象多种可能；倾向较低的人更看重可预测、可操作和已经验证过的路径。\n\n**尽责性（Conscientiousness）** 关注安排、坚持和执行。倾向较高的人倾向于提前规划、注意细节、在完成任务前保持投入；倾向较低的人可能更灵活、更能适应临时变化，但有时面临跟进和收尾的挑战。\n\n**外向性（Extraversion）** 关注社交投入、能量来源和积极情绪的倾向。倾向较高的人通常在社交互动中获得能量，喜欢活跃的表达方式；倾向较低的人可能更偏好独处或小范围深度交流，但这不等于害羞或社交能力不足。\n\n**宜人性（Agreeableness）** 关注合作、信任和对他人的体谅。倾向较高的人在冲突中更可能先寻求理解和妥协；倾向较低的人更可能优先坚持自己的立场或标准。两个方向在特定情境中各有其功能。\n\n**神经质（Neuroticism）** 关注对压力与负面情绪的敏感程度。这里的“神经质”是人格心理学术语，不是临床诊断。倾向较高的一端描述较强的担忧、烦躁或受挫反应；倾向较低的一端描述相对平稳的反应。任何分数都不能判断一个人是否患有心理疾病。\n\n---",
+          "heading": "OCEAN 五维度各在观察什么",
+          "key": "section-03-02598e31fd",
+          "kind": "rich_text"
+        },
+        {
+          "body": "类型系统（如 MBTI）把人分入互斥的类别——你是内向还是外向、是思考型还是情感型。维度模型不这么做。它承认一个人可以同时拥有\"偏外向的能量需求\"和\"偏内向的思考习惯\"；可以在工作场景中表现得尽责而在周末表现出更多随性。\n\n连续维度的核心优势是允许\"多一点、少一点、接近中间\"同时成立。中间分数（mid range）不等于没有特点——它可能意味着两端的行为都可能出现，也可能意味着这一倾向上确实没有特别突出的模式。阅读时应关注相对组合，而不是把高或低改写成固定身份。\n\n---",
+          "heading": "为什么按连续维度理解，而不是固定类型",
+          "key": "section-04-c96f92b465",
+          "kind": "rich_text"
+        },
+        {
+          "body": "阅读大五结果时，单看一个维度远不如看组合有用。以下方法可以帮你从数字进入理解：\n\n1. **先找出真正影响当前问题的差异**。如果你关心的是\"为什么我总是在截止日期前赶工\"，先看尽责性；如果你关心的是\"为什么我在新环境中比别人更紧张\"，先看神经质。\n2. **回到具体情境验证**。拿报告中的描述，回忆至少两个不同的场景——一次工作中、一次生活中——看看描述是否反复出现。\n3. **再看相关侧面（facet）**。如果尽责性得分让你困惑，可能是因为它的六个侧面中某几个高而某几个低——比如秩序感高但自律感中等。相同的总分可能由完全不同的侧面组合形成。\n4. **保留不一致**。如果文字描述与你的经验不一致，保留这个不一致本身，不要为了\"让报告更准\"而倒推故事。不一致本身可能意味着测量误差，也可能意味着你需要在更多情境中观察这一倾向。\n\n---",
+          "heading": "如何阅读五维组合",
+          "key": "section-05-0597145010",
+          "kind": "rich_text"
+        },
+        {
+          "body": "这是大五人格阅读中最常见的误读，也是最重要的纠正。\n\n**高分不等于优秀。** 高尽责性带来可靠和有序，也可能伴随过度准备、对变化的抗拒和高压力下的自我苛责。高开放性带来好奇和学习动力，也可能带来收尾困难和在不该探索时继续发散。\n\n**低分不等于缺陷。** 低外向性的人可能在需要独立深度工作的任务中表现更好。低宜人性的人在需要坚持标准、提出反对意见或面对竞争时可能更有效。\n\n**中间分数不等于平庸。** 中间分数可能意味着你能根据情境灵活调节，也可能意味着该倾向对你目前的生活并不是一个关键变量。\n\n更有用的复盘不是判断\"高还是低更好\"，而是判断：当前的目标、时间压力、可逆性和出错成本，需要哪一种行为强度？\n\n---",
+          "heading": "高、中、低不等于好、普通、坏",
+          "key": "section-06-e2703eefff",
+          "kind": "rich_text"
+        },
+        {
+          "body": "大五人格不是只有五个宽泛维度。在五个维度之下，每个维度还可以进一步分解为六个更具体的侧面（facet），共 30 个侧面。\n\n三层结构如下：\n\n- **维度（Domain）**：最宽泛的范围，如\"开放性\"\n- **侧面（Facet）**：维度内的具体倾向，如开放性下的\"想象力\"\"审美\"\"情感体验\"\"行动尝试\"\"想法探索\"\"价值观开放\"\n- **具体行为（Behavior）**：在特定情境中的可观察行动\n\n例如，两个尽责性总分相同的人可能有完全不同的行为表现：一个人的高分主要来自秩序和审慎（桌面整洁、决策前反复比较），另一个人的高分主要来自成就追求和自律（主动设目标、不需要外部监督就能持续投入）。同样是一个\"高尽责性\"的标签，背后的行为路径完全不同。\n\n进入侧面分析是理解自己\"究竟是哪一种做法\"的关键步骤，但这需要建立在维度理解的基础上。建议先读完五个维度的详细说明，再进入侧面总览。\n\n---",
+          "heading": "从维度到侧面：大五人格的三层结构",
+          "key": "section-07-5231a34b29",
+          "kind": "rich_text"
+        },
+        {
+          "body": "同一个人在不同情境中可能表现得完全不同。一个在团队中积极发言的人，可能在陌生的大型会议中保持沉默。一个平时计划周密的人，可能在旅行中完全放弃计划。\n\n这并不意味着人格测试不准确。它意味着人格倾向是一种\"基线概率\"，不是\"所有情境的固定行为\"。情境的强度——比如是否有明确的规则、是否有时间压力、是否有权力差距——会影响某种倾向是否被激活或被抑制。\n\n因此，阅读大五结果时的一条关键原则是：**不要把单次测试的分数当成跨情境的绝对真相。** 把它当作一个需要对照至少两个以上情境来验证的工作假设。\n\n---",
+          "heading": "人格倾向与情境之间的关系",
+          "key": "section-08-c1c24c126d",
+          "kind": "rich_text"
+        },
+        {
+          "body": "大五人格的测量通常通过自评问卷完成。受测者阅读一系列描述日常想法、感受和行为的陈述（如\"我经常尝试新食物\"\"我喜欢把东西整理得井井有条\"），并评估这些陈述在多大程度上符合自己的情况。\n\n每个维度的得分是通过汇总相关题目的回答计算出来的。计分输出取决于具体工具：可能是原始分、标准分、百分位或高/中/低区间。只有在工具公开参考样本、换算方法和适用人群时，百分位才可解释为相对于该参考样本的位置；本内容包不提供或推断费马测试的中文常模。\n\n**这不是比赛，也不是排名。** 本包不提供费马测试的百分位常模；任何相对位置都必须以具体工具公开的参考样本和换算规则为前提。\n\n---",
+          "heading": "Big Five 测量的一般原理",
+          "key": "section-09-732ae3f5f4",
+          "kind": "rich_text"
+        },
+        {
+          "body": "任何人格测试都有误差来源：\n\n- **状态影响**：你在疲劳、情绪低落或压力大时回答可能与平时不同。\n- **社会期望**：你可能无意中选择了\"更被社会接受的\"答案而非\"更符合自己的\"答案。\n- **理解偏差**：不同人对同一道题的理解可能不同。\n- **参照偏差**：你评估自己\"是否经常感到焦虑\"时，参照的是自己认识的人，而这种参照群体因人而异。\n\n因此，单次自评分数应被视为需要结合情境复核的信号，而不是跨情境的精确结论。本包不对百分位精度作产品级声明。\n\n---",
+          "heading": "测量误差、状态影响和结果边界",
+          "key": "section-10-a7fcfcc930",
+          "kind": "rich_text"
+        },
+        {
+          "body": "大五人格适合用于自我认知和反思，而非做决定。以下是几种适合的使用场景：\n\n- **自我观察**：用五维框架检查自己的学习节奏、任务安排方式、社交能量模式和压力反应模式。\n- **沟通改善**：了解自己和他人可能存在的不同沟通节奏和冲突处理方式。\n- **团队协作**：在自愿的前提下，帮助团队成员理解彼此的偏好差异，找到更合适的协作条件。\n- **职业探索**：用它分析自己的偏好（如喜欢独立工作还是频繁协作），但必须结合技能、经验、机会和现实约束来做职业选择。\n\n---",
+          "heading": "大五人格适合在哪些场景中使用",
+          "key": "section-11-4039752d82",
+          "kind": "rich_text"
+        },
+        {
+          "body": "以下场景**不能**使用大五人格：\n\n- **招聘筛选**：元分析综合显示，Big Five 与表现指标的群体关联会随特质和结果类别变化；这不能转化为对某个人的成功、岗位适配或工作表现预测，也不构成费马测试用于招聘的效度证据（[S9](https://onlinelibrary.wiley.com/doi/10.1111/jopy.12683)）。\n- **临床诊断**：大五人格不是诊断工具。高神经质不等于焦虑障碍，低尽责性也不等于 ADHD。\n- **升学录取**：人格倾向不能替代学业能力、学习成果和具体环境证据。\n- **关系决策**：人格分数不能决定是否应该与某人交往、结婚或分手。\n- **能力评估**：大五人格不直接测量智力、技能或潜力。\n\n---",
+          "heading": "大五人格不适合在哪些场景中使用",
+          "key": "section-12-395470a9b0",
+          "kind": "rich_text"
+        },
+        {
+          "body": "关于人格变化，群体纵向证据与个人解释需要分开处理（[S4](https://pubmed.ncbi.nlm.nih.gov/16435954/)）。\n\n纵向研究的元分析报告了部分人格特质在生命历程中的群体平均变化，但这类结果描述的是样本平均，不是对某个个体的时间表（[S4](https://pubmed.ncbi.nlm.nih.gov/16435954/)）。\n\n这类结论有三点重要限制：\n\n1. **群体平均不是个人预测。** 个人可能与平均趋势不同。\n2. **维度结论不能直接外推到每个侧面。** 不同量表的侧面体系也不相同。\n3. **自然变化不等于干预效果。** 本页不承诺某种练习会改变人格，也不提供固定变化速度。\n\n对读者的实用建议：把当前结果当作可复核的工作假设；是否重测应取决于使用目的、生活情境和具体工具说明，而不是固定的一两年周期。\n\n---",
+          "heading": "稳定性与变化应该怎样理解",
+          "key": "section-13-5615c40017",
+          "kind": "rich_text"
+        },
+        {
+          "body": "从报告中选一个你最想验证的倾向。然后：\n\n1. **每天记录一次**：当这个倾向出现时，写下情境、具体行为、直接后果和一个可能的替代解释。\n2. **收集至少两个不同场合**：一次工作中、一次生活中或一次社交中。\n3. **主动寻找一个反例**：有意识地在某个场合做与平时相反的事（在安全范围内），观察结果。\n4. **七天后复盘**：保留这个假设、缩小它的适用范围，还是暂时放弃？\n\n这个实验的目的不是改变你，而是帮你判断：这个描述在多大程度上符合你跨情境的真实模式。\n\n---",
+          "heading": "一个完整的自我观察方法：七天低风险实验",
+          "key": "section-14-58da965d71",
+          "kind": "rich_text"
+        },
+        {
+          "body": "林岚是一家科技公司的产品经理。她在准备季度汇报时，提前两周就开始拆分材料、逐项确认负责人、预留缓冲时间——这是典型的尽责性高的表现。但到了用户访谈环节，她却主动放下准备好的提纲，顺着用户的意外线索追问了四十多分钟。\n\n如果只看季度汇报，你会觉得她\"很有计划\"。如果只看用户访谈，你会觉得她\"很灵活\"。把两次行为放在一起看，才更接近真实模式：她是在交付风险高的任务中选择结构，在探索空间大的任务中选择松散。**人格倾向不是固定剧本，而是根据任务特征变化的选择范围。**\n\n---",
+          "heading": "场景：计划周密的人也会临场调整",
+          "key": "section-15-1590f304f5",
+          "kind": "rich_text"
+        },
+        {
+          "body": "有人在跨部门汇报会上几乎不发言，但在熟悉的项目组内却能清楚主持争论、分配任务。如果我们只看跨部门那一场，可能会得出\"这个人内向\"或\"不善于表达\"的结论。但实际上，沉默可能与信息不足、角色权力、准备时间、语言习惯或当天状态有关——而不是一个稳定的人格倾向。\n\n**只有当相似行为在不同情境中反复出现时，才值得把它暂时连接到更宽泛的特质假设。** 一个情境的一个表现，不足以成为人格判断的依据。\n\n---",
+          "heading": "反例：一次沉默不等于稳定倾向",
+          "key": "section-16-775457b0f5",
+          "kind": "rich_text"
+        },
+        {
+          "body": "这段只能用于比较工作环境的任务要求，不能据此判断职业适配、工作表现或任用结果。职业探索还需结合技能、兴趣、经验、机会、工作样本和现实约束。\n\n---",
+          "heading": "常见误读",
+          "key": "section-17-56105e2863",
+          "kind": "rich_text"
+        },
+        {
+          "body": "- 五个维度：[开放性](/zh/personality/big-five/openness) · [尽责性](/zh/personality/big-five/conscientiousness) · [外向性](/zh/personality/big-five/extraversion) · [宜人性](/zh/personality/big-five/agreeableness) · [神经质](/zh/personality/big-five/neuroticism)\n- 侧面体系：[30 个侧面总览](/zh/personality/big-five/facets)",
+          "heading": "继续阅读",
+          "key": "section-18-6b78aadd5d",
+          "kind": "rich_text"
+        }
+      ],
+      "seo": [],
+      "sitemap_eligible": true,
+      "slug": "big-five",
+      "source_hash": "42a8197ef3aadcde56cf79749bfb1e590485dd1959df1decd771e9e64d07e4c8",
+      "source_package": "big5-zh-v3-52-page-release",
+      "summary": "大五人格是一种维度模型，用五个连续范围描述个体差异。它不把人分入固定类型，而是回答\"某种倾向在多大程度上出现\"。",
+      "title": "大五人格完整指南：用 OCEAN 五维度理解行为倾向"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": {
+          "name": "FermatMind Editorial",
+          "organization": "FermatMind",
+          "role": "Editorial"
+        }
+      },
+      "schema_eligible": false,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "big-five-hub-model_structure-1",
+            "limitation": "支持一般模型或层级背景，不支持费马测试具体分数、常模或个体预测。",
+            "source_ids": [
+              "S1"
+            ],
+            "support_level": "direct"
+          },
+          {
+            "claim_id": "big-five-hub-measurement_method-2",
+            "limitation": "不同 Big Five/FFM 工具的层级与计分不能视为相同。",
+            "source_ids": [
+              "S1",
+              "S2",
+              "S11"
+            ],
+            "support_level": "contextual"
+          },
+          {
+            "claim_id": "big-five-hub-meta_analysis-3",
+            "limitation": "群体层面综合关联，不能外推为个体成功、岗位适配或招聘效度。",
+            "source_ids": [
+              "S9"
+            ],
+            "support_level": "direct"
+          },
+          {
+            "claim_id": "big-five-hub-longitudinal_change-4",
+            "limitation": "只支持群体平均变化，不能预测个人、单一侧面、固定年龄点或复测周期。",
+            "source_ids": [
+              "S4"
+            ],
+            "support_level": "direct"
+          },
+          {
+            "claim_id": "big-five-hub-longitudinal_change-5",
+            "limitation": "只支持群体平均变化，不能预测个人、单一侧面、固定年龄点或复测周期。",
+            "source_ids": [
+              "S4"
+            ],
+            "support_level": "direct"
+          },
+          {
+            "claim_id": "big-five-hub-longitudinal_change-6",
+            "limitation": "只支持群体平均变化，不能预测个人、单一侧面、固定年龄点或复测周期。",
+            "source_ids": [
+              "S4"
+            ],
+            "support_level": "direct"
+          },
+          {
+            "claim_id": "big-five-hub-model_structure-7",
+            "limitation": "支持一般模型或层级背景，不支持费马测试具体分数、常模或个体预测。",
+            "source_ids": [
+              "S1"
+            ],
+            "support_level": "direct"
+          },
+          {
+            "claim_id": "big-five-hub-product-boundary",
+            "limitation": "这是公开的产品/方法边界声明，不是经验性研究结论。",
+            "source_ids": [],
+            "support_level": "not_required"
+          },
+          {
+            "claim_id": "big-five-hub-content-method",
+            "limitation": "这是公开的产品/方法边界声明，不是经验性研究结论。",
+            "source_ids": [],
+            "support_level": "not_required"
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "模型研究不等于费马测试产品验证。",
+          "不用于临床诊断、招聘筛选、升学录取或个体结果预测。"
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Goldberg, L. R.",
+            "claim_ids": [
+              "big-five-hub-model_structure-1",
+              "big-five-hub-measurement_method-2",
+              "big-five-hub-model_structure-7"
+            ],
+            "doi": "10.1037/0022-3514.59.6.1216",
+            "id": "S1",
+            "limitation": "PMID、题名、作者、年份和 DOI 一致；用于五维结构与词汇研究背景，不用于产品级效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
+            "source_type": "peer_reviewed_research",
+            "title": "An alternative 'description of personality': The Big-Five factor structure",
+            "year": 1990
+          },
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Soto, C. J.; John, O. P.",
+            "claim_ids": [
+              "big-five-hub-measurement_method-2"
+            ],
+            "doi": "10.1037/pspp0000096",
+            "id": "S2",
+            "limitation": "PMID 与 DOI 核验一致；BFI-2 的 15-facet 架构只用于说明不同量表的下位结构并不相同。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+            "source_type": "peer_reviewed_research",
+            "title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+            "year": 2017
+          },
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Oregon Research Institute IPIP project",
+            "claim_ids": [
+              "big-five-hub-measurement_method-2"
+            ],
+            "doi": null,
+            "id": "S11",
+            "limitation": "IPIP 官方说明明确区分 lexical Big Five、FFM、BFI 与 NEO/IPIP 体系，并使用 ‘similar constructs’ 而非量表等同。具体条目映射见 https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm。 该官方网页未标注出版年；year 记录本次公开核验的访问快照年，不代表出版年份。",
+            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
+            "source_type": "official_documentation",
+            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
+            "year": 2026
+          },
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Zell, E.; Lesick, T. L.",
+            "claim_ids": [
+              "big-five-hub-meta_analysis-3"
+            ],
+            "doi": "10.1111/jopy.12683",
+            "id": "S9",
+            "limitation": "期刊页核验 54 个元分析、题名、作者、DOI 和出版信息；只支持群体层面关联及情境差异。",
+            "public_url": "https://onlinelibrary.wiley.com/doi/10.1111/jopy.12683",
+            "source_type": "peer_reviewed_research",
+            "title": "Big five personality traits and performance: A quantitative synthesis of 50+ meta-analyses",
+            "year": 2022
+          },
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Roberts, B. W.; Walton, K. E.; Viechtbauer, W.",
+            "claim_ids": [
+              "big-five-hub-longitudinal_change-4",
+              "big-five-hub-longitudinal_change-5",
+              "big-five-hub-longitudinal_change-6"
+            ],
+            "doi": "10.1037/0033-2909.132.1.1",
+            "id": "S4",
+            "limitation": "PMID、DOI、题名和作者一致；仅支持群体平均变化，不支持个体预测或固定复测周期。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/16435954/",
+            "source_type": "peer_reviewed_research",
+            "title": "Patterns of mean-level change in personality traits across the life course: A meta-analysis of longitudinal studies",
+            "year": 2006
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "4dc4173a1af06084695d053d2f5af522526781cfddbb8a7c76cabb6930489153"
+}

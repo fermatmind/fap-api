@@ -1,0 +1,373 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-5",
+    "entity_key": "type-5",
+    "entity_type": "core_type",
+    "framework": "enneagram",
+    "page_kind": "core_type",
+    "slug": "enneagram/type-5"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-5"
+      },
+      "canonical_path": "/en/personality/enneagram/type-5",
+      "code": "type-5",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-5",
+      "entity_type": "core_type",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.application.exploratory_not_predictive",
+            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
+            "source_ids": [
+              "sutton_2013_work_outcomes",
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.application.exploratory_not_predictive",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
+            "claim_ids": [
+              "claim.application.exploratory_not_predictive"
+            ],
+            "doi": "10.1016/j.emj.2012.12.004",
+            "id": "sutton_2013_work_outcomes",
+            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
+            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
+            "source_type": "peer_reviewed_research",
+            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
+            "year": 2013
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Professional standards, curiosity, study requirements, uncertainty, or language access can explain extensive research. Compare the repeated purpose of gathering information and whether contrary examples reduce the hypothesis.",
+          "question": "Does extensive research establish Type Five?"
+        },
+        {
+          "answer": "Privacy may be required by confidentiality, culture, safety, disability access, remote work, or simple preference. Capacity also changes with health, workload, care duties, resources, and the demands of a specific setting.",
+          "question": "Why treat privacy and capacity as contextual?"
+        },
+        {
+          "answer": "Prompt action with incomplete information, comfortable help-seeking, flexible disclosure, and reliable re-entry after a pause should reduce confidence that preparation or capacity protection is the best explanation.",
+          "question": "What evidence should weaken the preparation hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-5",
+        "reciprocal": true,
+        "translation_group": "enneagram:core_type:type-5",
+        "x-default": "/en/personality/enneagram/type-5",
+        "zh-CN": "/zh/personality/enneagram/type-5"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/centers/head",
+          "label": "center:head",
+          "relationship": "center_membership",
+          "target_identity_key": "center:head"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/5w4",
+          "label": "wing:5w4",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:5w4"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/5w6",
+          "label": "wing:5w6",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:5w6"
+        },
+        {
+          "href": "/en/personality/enneagram/type-5/instincts/self-preservation",
+          "label": "instinctual_subtype:type-5/self-preservation",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-5/self-preservation"
+        },
+        {
+          "href": "/en/personality/enneagram/type-5/instincts/social",
+          "label": "instinctual_subtype:type-5/social",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-5/social"
+        },
+        {
+          "href": "/en/personality/enneagram/type-5/instincts/one-to-one",
+          "label": "instinctual_subtype:type-5/one-to-one",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-5/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.application.exploratory_not_predictive",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "Track when more information is requested, what threshold makes participation feel sufficiently prepared, and how time, privacy, or energy is budgeted. Treat these as situational observations rather than proof of an inner type.",
+          "key": "motivation_attention",
+          "title": "Observe preparation and capacity without declaring an essence"
+        },
+        {
+          "body_md": "Reading before a meeting may serve accuracy, language access, a regulated role, anxiety reduction, or ordinary preparation. Working alone may reflect concentration, remote arrangements, sensory access, confidentiality, or a temporary deadline.",
+          "key": "behavior_motive",
+          "title": "Separate research and solitude from inferred motive"
+        },
+        {
+          "body_md": "In decisions, note when gathering becomes a useful check and when action remains indefinitely deferred. During feedback or conflict, record whether the person asks for definitions, pauses to process, shares a partial view, or returns with a bounded proposal.",
+          "key": "decision_feedback_conflict",
+          "title": "Compare decisions, feedback, and re-entry"
+        },
+        {
+          "body_md": "Knowledge attention may support precise models, independent learning, careful questions, and respect for complexity. Tradeoffs can appear when preparation consumes the decision window, privacy blocks needed coordination, or conserving capacity becomes an untested assumption.",
+          "key": "strengths_tradeoffs",
+          "title": "Hold careful understanding beside its costs"
+        },
+        {
+          "body_md": "At work, compare an analyst protecting confidential data with a contributor withholding an unfinished idea. In a relationship, compare requesting processing time with avoiding an agreed conversation. The surrounding obligation and later follow-through matter more than the surface pause.",
+          "key": "work_relationship_examples",
+          "title": "Use contextual examples without forecasting outcomes"
+        },
+        {
+          "body_md": "The 5w4 hypothesis adds personal synthesis, meaning, and originality; 5w6 adds verification, reliability, and risk checking. Also compare Four expression, Six vigilance, introversion, specialist training, fatigue, neurodivergent access needs, trauma-related safety, and role constraints.",
+          "key": "wings_mistypes",
+          "title": "Compare modifiers and ordinary alternatives"
+        },
+        {
+          "body_md": "The hypothesis weakens when the person acts with incomplete information, asks for help without treating it as lost competence, adjusts privacy to relationship needs, or spends capacity generously when the context is safe and responsibilities are clear.",
+          "key": "counterexample",
+          "title": "Look for informed action and flexible availability"
+        },
+        {
+          "body_md": "Use this page to test observations about preparation, knowledge, privacy, and capacity. It cannot diagnose anxiety or neurodivergence, measure intelligence, rank expertise, screen applicants, predict performance, or assign a permanent identity.",
+          "key": "use_boundary",
+          "title": "Keep competence language exploratory"
+        },
+        {
+          "body_md": "Duration: 5\n\nContext: Choose one research task, one collaborative decision, and one relationship conversation across five days.\n\nObservable signal: Record the decision deadline, information already available, questions asked, stated capacity, privacy need, and time of re-entry.\n\nPage-specific signal: Compare whether additional knowledge changes the decision or only delays exposure to an uncertain next step.\n\nAlternative explanation: Check workload, confidentiality, access needs, training, remote arrangements, cultural norms, and current safety.\n\nReflection prompt: Name one event where an ordinary constraint explains the behavior better and revise the hypothesis downward.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Check workload, confidentiality, access needs, training, remote arrangements, cultural norms, and current safety.",
+            "context": "Choose one research task, one collaborative decision, and one relationship conversation across five days.",
+            "duration_days": 5,
+            "observable_signal": "Record the decision deadline, information already available, questions asked, stated capacity, privacy need, and time of re-entry.",
+            "page_specific_signal": "Compare whether additional knowledge changes the decision or only delays exposure to an uncertain next step.",
+            "reflection_prompt": "Name one event where an ordinary constraint explains the behavior better and revise the hypothesis downward."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "Type Five is a traditional Enneagram hypothesis about attention returning to knowledge, competence, preparation, privacy, and available capacity. Research, quiet work, or limited disclosure cannot establish motive because expertise, workload, disability access, confidentiality, remote work, culture, and safety may produce the same behavior.",
+        "title": "Type Five: knowledge, capacity, and a revisable preparation hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-5",
+      "source_hash": "22222cd12cf832456e6336c41800de70c8d3458f8adad3dbaf59f36ca18595e0",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "Type Five is a traditional Enneagram hypothesis about attention returning to knowledge, competence, preparation, privacy, and available capacity. Research, quiet work, or limited disclosure cannot establish motive because expertise, workload, disability access, confidentiality, remote work, culture, and safety may produce the same behavior.",
+      "title": "Type Five: knowledge, capacity, and a revisable preparation hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.application.exploratory_not_predictive",
+            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
+            "source_ids": [
+              "sutton_2013_work_outcomes",
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.application.exploratory_not_predictive",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
+            "claim_ids": [
+              "claim.application.exploratory_not_predictive"
+            ],
+            "doi": "10.1016/j.emj.2012.12.004",
+            "id": "sutton_2013_work_outcomes",
+            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
+            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
+            "source_type": "peer_reviewed_research",
+            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
+            "year": 2013
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "37dccd93ba384d8b127a4c9c1af0f75f2d383a5ef107eb1d7ae6825a912f46ea"
+}

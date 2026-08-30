@@ -1,0 +1,300 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh/personality/enneagram/wings/6w7",
+    "entity_key": "6w7",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/6w7"
+  },
+  "locale": "zh-CN",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh/personality/enneagram/wings/6w7"
+      },
+      "canonical_path": "/zh/personality/enneagram/wings/6w7",
+      "code": "6w7",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "6w7",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不能。主持协调、销售工作、社群组织、照护安排与短截止时间都可能要求扩展选项、联系盟友与可逆试验；应在职责与后果改变后再次比较，而不是从一次处理动作直接定型。",
+          "question": "选项、社交协调与主动试验能够直接证明 6w7 吗？"
+        },
+        {
+          "answer": "固定第六型核心、信息缺口、后果和截止时间，再比较扩展选项、联系盟友与可逆试验与6w5 的来源核验和安静分析，同时记录岗位制度是否决定差异。",
+          "question": "怎样公平比较 6w7 与 6w5 的差异？"
+        },
+        {
+          "answer": "能够接受一条有支持的路线、持续独立评审并拒绝不必要协调，并在合理门槛后停止核对，都会削弱 6w7 修饰假设。还要记录独立评审与拒绝额外协调的具体情境，避免把所有灵活行动都归入翼型。",
+          "question": "哪些证据会削弱 6w7 的修饰假设？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/6w7",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:6w7",
+        "x-default": "/en/personality/enneagram/wings/6w7",
+        "zh-CN": "/zh/personality/enneagram/wings/6w7"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh/personality/enneagram/type-6",
+          "label": "core_type:type-6",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-6"
+        },
+        {
+          "href": "/zh/personality/enneagram/type-7",
+          "label": "core_type:type-7",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-7"
+        },
+        {
+          "href": "/zh/personality/enneagram/wings/6w5",
+          "label": "wing:6w5",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:6w5"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-CN",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "先确认不确定性、支持、信任与预案构成第六型核心，再观察扩展选项、联系盟友与可逆试验是否为次要修饰；主持协调、销售工作、社群组织、照护安排与短截止时间已经解释行为时，不增加翼型标签。",
+          "key": "core_first_modifier",
+          "title": "先保持第六型核心再讨论修饰"
+        },
+        {
+          "body_md": "让 6w7 与 6w5 面对同一个信息不全任务并匹配后果、截止时间与决定权，比较扩展选项、联系盟友与可逆试验和6w5 的来源核验和安静分析分别怎样推动行动。",
+          "key": "sibling_core_comparison",
+          "title": "在同一任务中比较 6w7 与 6w5"
+        },
+        {
+          "body_md": "在事故响应、社群计划与个人选择中记录请求的信息、咨询对象、选项收窄方式、开始行动的时点和停止条件，并区分自发选择与制度流程。",
+          "key": "observable_situations",
+          "title": "记录选择、交接与停止条件"
+        },
+        {
+          "body_md": "若当事人能接受一条有支持的路线、持续独立评审并拒绝不必要协调，就应把这些事件作为正式反例并降低 6w7 修饰假设的置信度。",
+          "key": "counterexample",
+          "title": "用低风险灵活行动主动检验"
+        },
+        {
+          "body_md": "主持协调、销售工作、社群组织、照护安排与短截止时间都会训练相似处理方式；核对问责、资源、安全、文化与近期事件以后，才考虑保留翼型解释。",
+          "key": "alternative_explanations",
+          "title": "先审计训练与环境要求"
+        },
+        {
+          "body_md": "6w7 不是独立类型、能力评级、忠诚测量或行为推断。翼型研究支持有限，选项协调与可逆试验只能作为次要修饰，并且必须接受反证。",
+          "key": "wing_boundary",
+          "title": "翼型始终是次要且证据有限的语言"
+        },
+        {
+          "body_md": "持续天数: 5\n\n情境: 连续五天观察一次事故响应、一次协作计划和一个存在多条路线的个人决定。\n\n可观察信号: 记录联系对象、提出的选项、最终路线、试验规模、截止时间、决定负责人和关闭搜索的证据。\n\n本页特定信号: 比较一条可逆路线已经就绪以后，协调是带来决定更新，还是只让更多可能继续保持开放。\n\n替代解释: 核对主持职责、销售工作、社群组织、照护安排、应急响应与时间压力。\n\n复盘问题: 找出一次单一书面路线或独立评审已经足够的事件，并用它下调 6w7 修饰假设。",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "核对主持职责、销售工作、社群组织、照护安排、应急响应与时间压力。",
+            "context": "连续五天观察一次事故响应、一次协作计划和一个存在多条路线的个人决定。",
+            "duration_days": 5,
+            "observable_signal": "记录联系对象、提出的选项、最终路线、试验规模、截止时间、决定负责人和关闭搜索的证据。",
+            "page_specific_signal": "比较一条可逆路线已经就绪以后，协调是带来决定更新，还是只让更多可能继续保持开放。",
+            "reflection_prompt": "找出一次单一书面路线或独立评审已经足够的事件，并用它下调 6w7 修饰假设。"
+          },
+          "title": "观察练习"
+        }
+      ],
+      "seo": {
+        "description": "6w7 是证据有限的翼型假设：第六型的不确定性、支持、信任与预案仍是核心，相邻类型只可能修饰为选项、社交协调与主动试验。这种表现不能证明 6w7，因为协调职责、事故响应、销售工作、社群组织与时间压力都会要求相似行为。本页直接说明第六型不确定支持如何保持核心、选项、社交协调与主动试验如何作为修饰，以及协调职责、事故响应、销售工作、社群组织与时间压力如何形成替代解释。",
+        "title": "6w7：以第六型为主、关注选项、社交协调与主动试验的翼型假设"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/6w7",
+      "source_hash": "9698864bb8a0a603ab21f01544219bc4609af0d80fa6e2131f9ab95ddabdcee1",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "6w7 是证据有限的翼型假设：第六型的不确定性、支持、信任与预案仍是核心，相邻类型只可能修饰为选项、社交协调与主动试验。这种表现不能证明 6w7，因为协调职责、事故响应、销售工作、社群组织与时间压力都会要求相似行为。本页直接说明第六型不确定支持如何保持核心、选项、社交协调与主动试验如何作为修饰，以及协调职责、事故响应、销售工作、社群组织与时间压力如何形成替代解释。",
+      "title": "6w7：以第六型为主、关注选项、社交协调与主动试验的翼型假设"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "ffc0f953f13c0a6fcdaea82606ba7f3a23283171115ae14cc27bd7f1a4f72000"
+}

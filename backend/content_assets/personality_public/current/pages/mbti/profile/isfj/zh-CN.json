@@ -1,0 +1,988 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh/personality/isfj",
+    "entity_key": "isfj",
+    "entity_type": "profile",
+    "framework": "mbti",
+    "page_kind": "profile",
+    "slug": "isfj"
+  },
+  "locale": "zh-CN",
+  "payload": {
+    "answer_surface_v1": {
+      "answer_bundle": [
+        {
+          "count": 1,
+          "key": "summary",
+          "title": "summary"
+        },
+        {
+          "count": 0,
+          "key": "compare",
+          "title": "compare"
+        }
+      ],
+      "answer_contract_version": "answer.surface.v1",
+      "answer_fingerprint": "a4d1d490ff124401da2f2ae3f9f2138bc4f27106",
+      "answer_scope": "public_indexable_detail",
+      "attribution_scope": "public_personality_answer",
+      "compare_blocks": [],
+      "evidence_refs": [
+        "504d31e00ef9f88d3d3f07382b3941822ee8c790",
+        "8618284f7a937a92dc4ee9c43cc00280301be9ea",
+        "personality_public_projection_v1",
+        "mbti_public_projection_v1",
+        "personality_sections",
+        "scene_summary_blocks"
+      ],
+      "faq_blocks": [],
+      "indexability_state": "indexable",
+      "landing_surface_ref": "8618284f7a937a92dc4ee9c43cc00280301be9ea",
+      "next_step_blocks": [
+        {
+          "body": null,
+          "href": "/zh/tests/mbti-personality-test-16-personality-types",
+          "key": "start_test",
+          "kind": "start_test",
+          "title": "开始测试"
+        },
+        {
+          "body": null,
+          "href": "/zh/career/recommendations/mbti/isfj",
+          "key": "career_recommendation",
+          "kind": "content_continue",
+          "title": "查看职业推荐"
+        },
+        {
+          "body": null,
+          "href": "/zh/topics/mbti",
+          "key": "topic_cluster",
+          "kind": "discover",
+          "title": "查看主题聚合"
+        }
+      ],
+      "primary_content_ref": "ISFJ",
+      "public_safety_state": "public_indexable",
+      "public_surface_ref": null,
+      "related_surface_keys": [
+        "career_recommendation",
+        "topic_cluster",
+        "start_test"
+      ],
+      "runtime_artifact_ref": null,
+      "scene_summary_blocks": [
+        {
+          "body": "先看职业推荐入口，再回到类型页做验证。",
+          "href": "/zh/career/recommendations",
+          "key": "career_direction",
+          "kind": "scene_entry",
+          "title": "职业方向"
+        },
+        {
+          "body": "先回 MBTI 主题页整理判断框架，再做路径选择。",
+          "href": "/zh/topics/mbti",
+          "key": "major_selection",
+          "kind": "scene_entry",
+          "title": "专业选择"
+        },
+        {
+          "body": "保留当前类型页，继续对照团队协作特征。",
+          "href": "/zh/personality/isfj",
+          "key": "team_collaboration",
+          "kind": "scene_entry",
+          "title": "团队协作"
+        },
+        {
+          "body": "从类型页回到主题页，补齐关系场景解释。",
+          "href": "/zh/topics/mbti",
+          "key": "relationship_patterns",
+          "kind": "scene_entry",
+          "title": "关系相处"
+        },
+        {
+          "body": "直接开始测试，拿到结构化成长建议。",
+          "href": "/zh/tests/mbti-personality-test-16-personality-types",
+          "key": "growth_planning",
+          "kind": "scene_entry",
+          "title": "成长建议"
+        }
+      ],
+      "seo_surface_ref": "504d31e00ef9f88d3d3f07382b3941822ee8c790",
+      "summary_blocks": [
+        {
+          "body": "基于 ISFJ 人格画像的职业建议与工作环境匹配策略。",
+          "href": null,
+          "key": "type_summary",
+          "kind": "answer_first",
+          "title": "ISFJ - 守卫者"
+        }
+      ],
+      "surface_type": "personality_public_detail",
+      "version": "answer.surface.v1"
+    },
+    "internal_links": [],
+    "landing_surface_v1": {
+      "attribution_scope": "public_personality_landing",
+      "content_continue_target": "/zh/career/recommendations/mbti/isfj",
+      "continue_reading_keys": [
+        "career_recommendation",
+        "topic_cluster",
+        "related_content"
+      ],
+      "cta_bundle": [
+        {
+          "href": "/zh/tests/mbti-personality-test-16-personality-types",
+          "key": "start_test",
+          "kind": "start_test",
+          "label": "开始测试"
+        },
+        {
+          "href": "/zh/career/recommendations/mbti/isfj",
+          "key": "career_recommendation",
+          "kind": "content_continue",
+          "label": "查看职业推荐"
+        },
+        {
+          "href": "/zh/topics/mbti",
+          "key": "topic_cluster",
+          "kind": "discover",
+          "label": "查看主题聚合"
+        }
+      ],
+      "discoverability_items": [],
+      "discoverability_keys": [
+        "personality_detail",
+        "topic_cluster",
+        "career_recommendation",
+        "start_test"
+      ],
+      "entry_surface": "personality_detail",
+      "entry_type": "personality_profile",
+      "indexability_state": "indexable",
+      "landing_contract_version": "landing.surface.v1",
+      "landing_fingerprint": "8618284f7a937a92dc4ee9c43cc00280301be9ea",
+      "landing_scope": "public_indexable_detail",
+      "primary_content_ref": "ISFJ",
+      "public_surface_ref": null,
+      "related_surface_keys": [
+        "career_recommendation",
+        "topic_cluster"
+      ],
+      "result_resume_target": null,
+      "runtime_artifact_ref": null,
+      "seo_surface_ref": "isfj",
+      "share_safety_state": null,
+      "start_test_target": "/zh/tests/mbti-personality-test-16-personality-types",
+      "summary_blocks": [
+        {
+          "body": "基于 ISFJ 人格画像的职业建议与工作环境匹配策略。",
+          "key": "hero",
+          "kind": "answer_first",
+          "title": "ISFJ - 守卫者"
+        }
+      ],
+      "surface_family": "personality",
+      "version": "landing.surface.v1"
+    },
+    "mbti_public_projection_v1": {
+      "_meta": {
+        "authority_source": "personality_cms_v2",
+        "public_route_type": "16-type",
+        "route_mode": "base",
+        "schema_version": "v2"
+      },
+      "canonical_type_code": "ISFJ",
+      "dimensions": [],
+      "display_type": "ISFJ",
+      "offer_set": [],
+      "profile": {
+        "hero_summary": "基于 ISFJ 人格画像的职业建议与工作环境匹配策略。",
+        "keywords": [],
+        "nickname": "守卫者",
+        "rarity": null,
+        "type_name": "守卫者"
+      },
+      "runtime_type_code": null,
+      "scientific_context": {
+        "at_dimension": {
+          "calculation": "A/T 百分比由 93Q 中标记到 A/T 维度的回答按题目权重归一化计算，页面展示被归类一侧的方向比例。",
+          "label": "压力与反馈风格（FermatMind 扩展）",
+          "scope": "适合用于自我观察和比较不同情境下的反应倾向，不用于临床诊断，也不能直接推出抗压能力、心理健康或工作能力。",
+          "status": "A/T 不是官方 MBTI 的第五个偏好轴，而是 FermatMind 用于描述压力反应、反馈敏感度与自我确认方式的扩展维度。",
+          "theoretical_source": "四字母部分沿用 Myers-Briggs 类型偏好的四组二分框架；A/T 仅作为一般人格特质与压力/反馈反应的产品化扩展，不宣称获得 MBTI 官方体系验证。"
+        },
+        "close_call_rule": "50% 表示两侧计分相同，51%–55% 表示当前仅有轻微偏向；这两种结果都不应解释为稳定人格事实。",
+        "metric_definition": "百分比是 93Q 中归属于该轴的回答按题目权重换算后的方向得分；页面展示结果代码所采用一侧的比例。它不是回答一致性、测量信度、能力水平或人群百分位。",
+        "type_code_rule": "为保持四字母结果格式，平分时沿用该计分版本预先配置的归类规则；页面必须同时提示平分并展示相邻类型。",
+        "use_limits": [
+          "本结果不用于临床或心理诊断。",
+          "本结果不应作为招聘、淘汰或岗位胜任力的单一依据。",
+          "职业、成长和关系内容是待验证的探索假设，不构成能力或职业结果保证。"
+        ]
+      },
+      "sections": [
+        {
+          "body_md": "基于 ISFJ 人格画像的职业建议与工作环境匹配策略。 这类人格通常在目标清晰、反馈可获得、能够持续迭代的环境里更容易稳定发挥。",
+          "is_enabled": true,
+          "key": "overview",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "人格概览"
+        },
+        {
+          "body_md": "你通常更适合在高自主度、目标清晰、反馈节奏稳定的工作环境中发挥优势。优先探索这些方向：数据科学家, 前端工程师, 全栈工程师。",
+          "is_enabled": true,
+          "key": "career.summary",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "职业概览"
+        },
+        {
+          "body_md": null,
+          "is_enabled": true,
+          "key": "career.preferred_roles",
+          "payload": {
+            "avoid_jobs": [
+              {
+                "slug": "hr-business-partner",
+                "title": "HRBP"
+              },
+              {
+                "slug": "management-consultant",
+                "title": "管理咨询顾问"
+              },
+              {
+                "slug": "business-analyst",
+                "title": "商业分析师"
+              }
+            ],
+            "recommended_jobs": [
+              {
+                "slug": "data-scientist",
+                "title": "数据科学家"
+              },
+              {
+                "slug": "frontend-engineer",
+                "title": "前端工程师"
+              },
+              {
+                "slug": "fullstack-engineer",
+                "title": "全栈工程师"
+              },
+              {
+                "slug": "cloud-architect",
+                "title": "云架构师"
+              },
+              {
+                "slug": "hr-business-partner",
+                "title": "HRBP"
+              },
+              {
+                "slug": "management-consultant",
+                "title": "管理咨询顾问"
+              }
+            ],
+            "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
+          },
+          "render": "preferred_role_list",
+          "source": "base",
+          "title": "推荐职业方向"
+        },
+        {
+          "body_md": "高自主度、目标清晰、反馈节奏稳定的工作环境。",
+          "is_enabled": true,
+          "key": "growth.summary",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "成长概览"
+        },
+        {
+          "body_md": null,
+          "is_enabled": true,
+          "key": "growth.strengths",
+          "payload": {
+            "items": [
+              {
+                "body": null,
+                "title": "战略性模式识别"
+              },
+              {
+                "body": null,
+                "title": "在约束下保持执行稳定"
+              },
+              {
+                "body": null,
+                "title": "对关键目标具备持续投入能力"
+              }
+            ]
+          },
+          "render": "bullets",
+          "source": "base",
+          "title": "成长优势"
+        },
+        {
+          "body_md": null,
+          "is_enabled": true,
+          "key": "growth.weaknesses",
+          "payload": {
+            "items": [
+              {
+                "body": null,
+                "title": "过度单一专精导致横向能力不足"
+              },
+              {
+                "body": null,
+                "title": "反馈周期过长影响迭代速度"
+              }
+            ]
+          },
+          "render": "bullets",
+          "source": "base",
+          "title": "成长盲点"
+        },
+        {
+          "body_md": "你更容易通过稳定的一对一沟通、留白和安静空间来建立信任。你更看重现实可靠、说到做到和细节可落地的人际互动。在冲突里你通常优先照顾感受和氛围，因此需要主动讲清原则和底线。亲密关系与协作关系里，你通常更喜欢明确承诺、稳定节奏和可预期安排。",
+          "is_enabled": true,
+          "key": "relationships.summary",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "关系模式"
+        }
+      ],
+      "seo": {
+        "canonical_url": "https://fermatmind.com/zh/personality/isfj",
+        "description": "了解 ISFJ 的优势、弱项、人际模式和职业方向。",
+        "jsonld": [],
+        "og_description": "了解 ISFJ 的优势、弱项、人际模式和职业方向。",
+        "og_image_url": null,
+        "og_title": "ISFJ 人格指南",
+        "robots": "index,follow",
+        "title": "ISFJ 人格指南",
+        "twitter_description": "了解 ISFJ 的优势、弱项、人际模式和职业方向。",
+        "twitter_image_url": null,
+        "twitter_title": "ISFJ 人格指南"
+      },
+      "summary_card": {
+        "public_tags": [],
+        "subtitle": null,
+        "summary": "基于 ISFJ 人格画像的职业建议与工作环境匹配策略。",
+        "tagline": "守卫者",
+        "title": "ISFJ - 守卫者"
+      },
+      "variant_code": null
+    },
+    "personality_public_projection_v1": {
+      "_meta": {
+        "authority_source": "personality_cms_v2",
+        "public_route_type": "16-type",
+        "route_mode": "base",
+        "schema_version": "v2"
+      },
+      "canonical_type_code": "ISFJ",
+      "dimensions": [],
+      "display_type": "ISFJ",
+      "offer_set": [],
+      "profile": {
+        "hero_summary": "基于 ISFJ 人格画像的职业建议与工作环境匹配策略。",
+        "keywords": [],
+        "nickname": "守卫者",
+        "rarity": null,
+        "type_name": "守卫者"
+      },
+      "runtime_type_code": null,
+      "scientific_context": {
+        "at_dimension": {
+          "calculation": "A/T 百分比由 93Q 中标记到 A/T 维度的回答按题目权重归一化计算，页面展示被归类一侧的方向比例。",
+          "label": "压力与反馈风格（FermatMind 扩展）",
+          "scope": "适合用于自我观察和比较不同情境下的反应倾向，不用于临床诊断，也不能直接推出抗压能力、心理健康或工作能力。",
+          "status": "A/T 不是官方 MBTI 的第五个偏好轴，而是 FermatMind 用于描述压力反应、反馈敏感度与自我确认方式的扩展维度。",
+          "theoretical_source": "四字母部分沿用 Myers-Briggs 类型偏好的四组二分框架；A/T 仅作为一般人格特质与压力/反馈反应的产品化扩展，不宣称获得 MBTI 官方体系验证。"
+        },
+        "close_call_rule": "50% 表示两侧计分相同，51%–55% 表示当前仅有轻微偏向；这两种结果都不应解释为稳定人格事实。",
+        "metric_definition": "百分比是 93Q 中归属于该轴的回答按题目权重换算后的方向得分；页面展示结果代码所采用一侧的比例。它不是回答一致性、测量信度、能力水平或人群百分位。",
+        "type_code_rule": "为保持四字母结果格式，平分时沿用该计分版本预先配置的归类规则；页面必须同时提示平分并展示相邻类型。",
+        "use_limits": [
+          "本结果不用于临床或心理诊断。",
+          "本结果不应作为招聘、淘汰或岗位胜任力的单一依据。",
+          "职业、成长和关系内容是待验证的探索假设，不构成能力或职业结果保证。"
+        ]
+      },
+      "sections": [
+        {
+          "body_md": "基于 ISFJ 人格画像的职业建议与工作环境匹配策略。 这类人格通常在目标清晰、反馈可获得、能够持续迭代的环境里更容易稳定发挥。",
+          "is_enabled": true,
+          "key": "overview",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "人格概览"
+        },
+        {
+          "body_md": "你通常更适合在高自主度、目标清晰、反馈节奏稳定的工作环境中发挥优势。优先探索这些方向：数据科学家, 前端工程师, 全栈工程师。",
+          "is_enabled": true,
+          "key": "career.summary",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "职业概览"
+        },
+        {
+          "body_md": null,
+          "is_enabled": true,
+          "key": "career.preferred_roles",
+          "payload": {
+            "avoid_jobs": [
+              {
+                "slug": "hr-business-partner",
+                "title": "HRBP"
+              },
+              {
+                "slug": "management-consultant",
+                "title": "管理咨询顾问"
+              },
+              {
+                "slug": "business-analyst",
+                "title": "商业分析师"
+              }
+            ],
+            "recommended_jobs": [
+              {
+                "slug": "data-scientist",
+                "title": "数据科学家"
+              },
+              {
+                "slug": "frontend-engineer",
+                "title": "前端工程师"
+              },
+              {
+                "slug": "fullstack-engineer",
+                "title": "全栈工程师"
+              },
+              {
+                "slug": "cloud-architect",
+                "title": "云架构师"
+              },
+              {
+                "slug": "hr-business-partner",
+                "title": "HRBP"
+              },
+              {
+                "slug": "management-consultant",
+                "title": "管理咨询顾问"
+              }
+            ],
+            "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
+          },
+          "render": "preferred_role_list",
+          "source": "base",
+          "title": "推荐职业方向"
+        },
+        {
+          "body_md": "高自主度、目标清晰、反馈节奏稳定的工作环境。",
+          "is_enabled": true,
+          "key": "growth.summary",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "成长概览"
+        },
+        {
+          "body_md": null,
+          "is_enabled": true,
+          "key": "growth.strengths",
+          "payload": {
+            "items": [
+              {
+                "body": null,
+                "title": "战略性模式识别"
+              },
+              {
+                "body": null,
+                "title": "在约束下保持执行稳定"
+              },
+              {
+                "body": null,
+                "title": "对关键目标具备持续投入能力"
+              }
+            ]
+          },
+          "render": "bullets",
+          "source": "base",
+          "title": "成长优势"
+        },
+        {
+          "body_md": null,
+          "is_enabled": true,
+          "key": "growth.weaknesses",
+          "payload": {
+            "items": [
+              {
+                "body": null,
+                "title": "过度单一专精导致横向能力不足"
+              },
+              {
+                "body": null,
+                "title": "反馈周期过长影响迭代速度"
+              }
+            ]
+          },
+          "render": "bullets",
+          "source": "base",
+          "title": "成长盲点"
+        },
+        {
+          "body_md": "你更容易通过稳定的一对一沟通、留白和安静空间来建立信任。你更看重现实可靠、说到做到和细节可落地的人际互动。在冲突里你通常优先照顾感受和氛围，因此需要主动讲清原则和底线。亲密关系与协作关系里，你通常更喜欢明确承诺、稳定节奏和可预期安排。",
+          "is_enabled": true,
+          "key": "relationships.summary",
+          "payload": [],
+          "render": "rich_text",
+          "source": "base",
+          "title": "关系模式"
+        }
+      ],
+      "seo": {
+        "canonical_url": "https://fermatmind.com/zh/personality/isfj",
+        "description": "了解 ISFJ 的优势、弱项、人际模式和职业方向。",
+        "jsonld": [],
+        "og_description": "了解 ISFJ 的优势、弱项、人际模式和职业方向。",
+        "og_image_url": null,
+        "og_title": "ISFJ 人格指南",
+        "robots": "index,follow",
+        "title": "ISFJ 人格指南",
+        "twitter_description": "了解 ISFJ 的优势、弱项、人际模式和职业方向。",
+        "twitter_image_url": null,
+        "twitter_title": "ISFJ 人格指南"
+      },
+      "summary_card": {
+        "public_tags": [],
+        "subtitle": null,
+        "summary": "基于 ISFJ 人格画像的职业建议与工作环境匹配策略。",
+        "tagline": "守卫者",
+        "title": "ISFJ - 守卫者"
+      },
+      "variant_code": null
+    },
+    "profile": {
+      "canonical_type_code": "ISFJ",
+      "excerpt": "基于 ISFJ 人格画像的职业建议与工作环境匹配策略。",
+      "hero_image_url": null,
+      "hero_kicker": "守卫者",
+      "hero_quote": null,
+      "hero_summary": "基于 ISFJ 人格画像的职业建议与工作环境匹配策略。",
+      "is_indexable": true,
+      "is_public": true,
+      "keywords": [],
+      "locale": "zh-CN",
+      "nickname": "守卫者",
+      "rarity": null,
+      "scale_code": "MBTI",
+      "schema_version": "v2",
+      "slug": "isfj",
+      "status": "published",
+      "subtitle": null,
+      "title": "ISFJ - 守卫者",
+      "type_code": "ISFJ",
+      "type_name": "守卫者"
+    },
+    "sections": [
+      {
+        "body_html": null,
+        "body_md": "基于 ISFJ 人格画像的职业建议与工作环境匹配策略。 这类人格通常在目标清晰、反馈可获得、能够持续迭代的环境里更容易稳定发挥。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "overview",
+        "sort_order": 20,
+        "title": "人格概览"
+      },
+      {
+        "body_html": null,
+        "body_md": "你通常更适合在高自主度、目标清晰、反馈节奏稳定的工作环境中发挥优势。优先探索这些方向：数据科学家, 前端工程师, 全栈工程师。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "career.summary",
+        "sort_order": 40,
+        "title": "职业概览"
+      },
+      {
+        "body_html": null,
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "avoid_jobs": [
+            {
+              "slug": "hr-business-partner",
+              "title": "HRBP"
+            },
+            {
+              "slug": "management-consultant",
+              "title": "管理咨询顾问"
+            },
+            {
+              "slug": "business-analyst",
+              "title": "商业分析师"
+            }
+          ],
+          "recommended_jobs": [
+            {
+              "slug": "data-scientist",
+              "title": "数据科学家"
+            },
+            {
+              "slug": "frontend-engineer",
+              "title": "前端工程师"
+            },
+            {
+              "slug": "fullstack-engineer",
+              "title": "全栈工程师"
+            },
+            {
+              "slug": "cloud-architect",
+              "title": "云架构师"
+            },
+            {
+              "slug": "hr-business-partner",
+              "title": "HRBP"
+            },
+            {
+              "slug": "management-consultant",
+              "title": "管理咨询顾问"
+            }
+          ],
+          "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
+        },
+        "render_variant": "preferred_role_list",
+        "section_key": "career.preferred_roles",
+        "sort_order": 70,
+        "title": "推荐职业方向"
+      },
+      {
+        "body_html": null,
+        "body_md": "高自主度、目标清晰、反馈节奏稳定的工作环境。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "growth.summary",
+        "sort_order": 90,
+        "title": "成长概览"
+      },
+      {
+        "body_html": null,
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "body": null,
+              "title": "战略性模式识别"
+            },
+            {
+              "body": null,
+              "title": "在约束下保持执行稳定"
+            },
+            {
+              "body": null,
+              "title": "对关键目标具备持续投入能力"
+            }
+          ]
+        },
+        "render_variant": "bullets",
+        "section_key": "growth.strengths",
+        "sort_order": 100,
+        "title": "成长优势"
+      },
+      {
+        "body_html": null,
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "body": null,
+              "title": "过度单一专精导致横向能力不足"
+            },
+            {
+              "body": null,
+              "title": "反馈周期过长影响迭代速度"
+            }
+          ]
+        },
+        "render_variant": "bullets",
+        "section_key": "growth.weaknesses",
+        "sort_order": 110,
+        "title": "成长盲点"
+      },
+      {
+        "body_html": null,
+        "body_md": "你更容易通过稳定的一对一沟通、留白和安静空间来建立信任。你更看重现实可靠、说到做到和细节可落地的人际互动。在冲突里你通常优先照顾感受和氛围，因此需要主动讲清原则和底线。亲密关系与协作关系里，你通常更喜欢明确承诺、稳定节奏和可预期安排。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "relationships.summary",
+        "sort_order": 140,
+        "title": "关系模式"
+      },
+      {
+        "body_html": null,
+        "body_md": "ISFJ-A 与 ISFJ-T 的最大区别，是在相同守卫者核心偏好下处理反馈、压力与自我确认的节奏不同。A 型通常更快恢复判断并继续推进；T 型通常更愿意复盘风险、标准和外部反馈。两者都可能表现出经验照顾、现实支持和可靠维护，不应用于诊断、招聘、能力排名或关系裁决。",
+        "is_enabled": true,
+        "payload_json": {
+          "canonical": "https://fermatmind.com/zh/personality/isfj-a-vs-isfj-t",
+          "claim_boundary": "本文不是医学诊断、心理治疗建议、职业录取建议、雇佣筛选工具或关系决策依据。ISFJ-A 与 ISFJ-T 的对比只用于帮助用户理解行为倾向、压力反应、照顾方式、反馈处理和沟通偏好。人格类型不是身份限制，也不能证明一个人的智力、能力、价值、职业结果或关系质量。更合适的使用方式，是把测评结果当作复盘工具，再结合真实经历、长期反馈、能力证据、职业兴趣、工作环境和关系互动来判断。",
+          "content": {
+            "confusion_reason": "ISFJ-A 与 ISFJ-T 的字母核心相同，日常行为也可能相似。只看一次自信、一次焦虑或一个标签会造成误判；更可靠的是观察反馈后如何复盘、压力下如何恢复，以及是否愿意根据证据调整。",
+            "max_difference": "ISFJ-A 与 ISFJ-T 的最大区别，是在相同守卫者核心偏好下处理反馈、压力与自我确认的节奏不同。A 型通常更快恢复判断并继续推进；T 型通常更愿意复盘风险、标准和外部反馈。两者都可能表现出经验照顾、现实支持和可靠维护，不应用于诊断、招聘、能力排名或关系裁决。",
+            "misjudgment_warning": "不要把 ISFJ-A 写成更好、更强或必然更自信，也不要把 ISFJ-T 写成更弱或必然焦虑。A/T 只是观察语言；任何结论都应回到真实行为、情境、经验和反馈。",
+            "quick_answer": "ISFJ-A 与 ISFJ-T 的最大区别，是在相同守卫者核心偏好下处理反馈、压力与自我确认的节奏不同。A 型通常更快恢复判断并继续推进；T 型通常更愿意复盘风险、标准和外部反馈。两者都可能表现出经验照顾、现实支持和可靠维护，不应用于诊断、招聘、能力排名或关系裁决。",
+            "quick_judgment_table": [
+              {
+                "a": "更快回到自己的判断并保持行动节奏",
+                "dimension": "最大区别",
+                "t": "更频繁检查评价、风险与可改进处"
+              },
+              {
+                "a": "ISFJ 的经验照顾、现实支持和可靠维护更容易先保持稳定推进",
+                "dimension": "压力反应",
+                "t": "ISFJ 的经验照顾、现实支持和可靠维护更容易先复盘遗漏与外部反馈"
+              },
+              {
+                "a": "先看具体需要与承诺，再安排持续支持，再用最小证据修正",
+                "dimension": "工作场景",
+                "t": "先看具体需要与承诺，再安排持续支持，并先补足风险检查与反馈窗口"
+              },
+              {
+                "a": "可能被误读为把体贴支持误作没有个人边界",
+                "dimension": "容易误判",
+                "t": "可能被误读为犹豫或不够坚定"
+              }
+            ],
+            "real_scene_differences": [
+              "在工作中，ISFJ-A 往往在先看具体需要与承诺，再安排持续支持后较快进入执行与迭代；ISFJ-T 往往会增加对标准、遗漏和风险的核对。两种方式都需要清楚的责任、证据和复盘节点，不能替代岗位技能判断。",
+              "在关系中，ISFJ-A 可能较快确认自己的理解并提出下一步；ISFJ-T 可能更在意是否遗漏对方感受或误解。有效沟通不是选出更好的一方，而是说清期待、边界、事实和需要复盘的地方。",
+              "压力下，ISFJ-A 的优势是维持节奏，风险是过早把稳定感当成结论；ISFJ-T 的优势是发现风险，风险是让复盘无限延长。两者都可用可逆下一步、反馈时间和休息边界恢复校准。"
+            ]
+          },
+          "faq": [
+            {
+              "answer": "ISFJ-A 与 ISFJ-T 共享同一基础类型和守卫者偏好；差异主要体现在面对评价、压力和自我确认时的节奏，不是能力或价值高低。",
+              "question": "ISFJ-A 和 ISFJ-T 最大区别是什么？"
+            },
+            {
+              "answer": "回看最近的决定、反馈和压力场景：你是更快恢复判断后推进，还是更常追加复盘和风险检查。再结合长期行为与完整测试结果理解。",
+              "question": "怎么快速判断自己更像 ISFJ-A 还是 ISFJ-T？"
+            },
+            {
+              "answer": "不一定。A/T 只能描述自我确认和反馈处理的倾向，不能替代对具体能力、成熟度、训练或环境支持的判断。",
+              "question": "ISFJ-A 一定比 ISFJ-T 更自信吗？"
+            },
+            {
+              "answer": "不能。职业与关系需要结合技能、兴趣、经验、现实约束、沟通和双方边界；页面只提供自我观察与沟通线索。",
+              "question": "这个 A/T 对比能决定职业或关系吗？"
+            },
+            {
+              "answer": "不能。该内容不是医学诊断、招聘筛选、能力证明或关系裁决工具，也不应据此为自己或他人贴确定性标签。",
+              "question": "这个页面可以用于诊断或招聘筛选吗？"
+            }
+          ],
+          "identity": {
+            "base_type_code": "ISFJ",
+            "comparison_kind": "at",
+            "comparison_slug": "isfj-a-vs-isfj-t",
+            "left_type_code": "ISFJ-A",
+            "right_type_code": "ISFJ-T"
+          },
+          "indexability_held": false,
+          "internal_links": [
+            {
+              "anchor_text": "ISFJ-A",
+              "href": "/zh/personality/isfj-a",
+              "role": "left_profile",
+              "safe_public_route": true
+            },
+            {
+              "anchor_text": "ISFJ-T",
+              "href": "/zh/personality/isfj-t",
+              "role": "right_profile",
+              "safe_public_route": true
+            },
+            {
+              "anchor_text": "ISTJ A/T 对比",
+              "href": "/zh/personality/istj-a-vs-istj-t",
+              "role": "related_at_comparison",
+              "safe_public_route": true
+            },
+            {
+              "anchor_text": "MBTI 人格",
+              "href": "/zh/personality",
+              "role": "personality_hub",
+              "safe_public_route": true
+            },
+            {
+              "anchor_text": "免费 MBTI 测试",
+              "href": "/zh/tests/mbti-personality-test-16-personality-types",
+              "role": "test_loop",
+              "safe_public_route": true
+            }
+          ],
+          "payload_sha256": "51d8bae63c391c7f8337d0d8e2bc4e25b1c29a229e3a983b73e2fafa8813b636",
+          "robots": "index,follow",
+          "sections": [
+            {
+              "body": "ISFJ-A 与 ISFJ-T 的最大区别，是在相同守卫者核心偏好下处理反馈、压力与自我确认的节奏不同。A 型通常更快恢复判断并继续推进；T 型通常更愿意复盘风险、标准和外部反馈。两者都可能表现出经验照顾、现实支持和可靠维护，不应用于诊断、招聘、能力排名或关系裁决。",
+              "key": "biggest_difference",
+              "title": "最大区别"
+            },
+            {
+              "body": "最大区别：ISFJ-A=更快回到自己的判断并保持行动节奏；ISFJ-T=更频繁检查评价、风险与可改进处；压力反应：ISFJ-A=ISFJ 的经验照顾、现实支持和可靠维护更容易先保持稳定推进；ISFJ-T=ISFJ 的经验照顾、现实支持和可靠维护更容易先复盘遗漏与外部反馈；工作场景：ISFJ-A=先看具体需要与承诺，再安排持续支持，再用最小证据修正；ISFJ-T=先看具体需要与承诺，再安排持续支持，并先补足风险检查与反馈窗口；容易误判：ISFJ-A=可能被误读为把体贴支持误作没有个人边界；ISFJ-T=可能被误读为犹豫或不够坚定",
+              "key": "quick_judgment_table",
+              "rows": [
+                {
+                  "a": "更快回到自己的判断并保持行动节奏",
+                  "dimension": "最大区别",
+                  "t": "更频繁检查评价、风险与可改进处"
+                },
+                {
+                  "a": "ISFJ 的经验照顾、现实支持和可靠维护更容易先保持稳定推进",
+                  "dimension": "压力反应",
+                  "t": "ISFJ 的经验照顾、现实支持和可靠维护更容易先复盘遗漏与外部反馈"
+                },
+                {
+                  "a": "先看具体需要与承诺，再安排持续支持，再用最小证据修正",
+                  "dimension": "工作场景",
+                  "t": "先看具体需要与承诺，再安排持续支持，并先补足风险检查与反馈窗口"
+                },
+                {
+                  "a": "可能被误读为把体贴支持误作没有个人边界",
+                  "dimension": "容易误判",
+                  "t": "可能被误读为犹豫或不够坚定"
+                }
+              ],
+              "title": "快速判断表"
+            },
+            {
+              "body": "ISFJ-A 与 ISFJ-T 的字母核心相同，日常行为也可能相似。只看一次自信、一次焦虑或一个标签会造成误判；更可靠的是观察反馈后如何复盘、压力下如何恢复，以及是否愿意根据证据调整。",
+              "key": "easy_misread",
+              "title": "为什么容易混淆"
+            },
+            {
+              "body": "在工作中，ISFJ-A 往往在先看具体需要与承诺，再安排持续支持后较快进入执行与迭代；ISFJ-T 往往会增加对标准、遗漏和风险的核对。两种方式都需要清楚的责任、证据和复盘节点，不能替代岗位技能判断。",
+              "key": "work_scenarios",
+              "title": "真实工作场景"
+            },
+            {
+              "body": "在关系中，ISFJ-A 可能较快确认自己的理解并提出下一步；ISFJ-T 可能更在意是否遗漏对方感受或误解。有效沟通不是选出更好的一方，而是说清期待、边界、事实和需要复盘的地方。",
+              "key": "relationship_scenarios",
+              "title": "真实关系场景"
+            },
+            {
+              "body": "压力下，ISFJ-A 的优势是维持节奏，风险是过早把稳定感当成结论；ISFJ-T 的优势是发现风险，风险是让复盘无限延长。两者都可用可逆下一步、反馈时间和休息边界恢复校准。",
+              "key": "stress_scenarios",
+              "title": "压力场景差异"
+            },
+            {
+              "body": "不要把 ISFJ-A 写成更好、更强或必然更自信，也不要把 ISFJ-T 写成更弱或必然焦虑。A/T 只是观察语言；任何结论都应回到真实行为、情境、经验和反馈。",
+              "key": "do_not_misjudge",
+              "title": "不要如何误判"
+            },
+            {
+              "body": "ISFJ-A 与 ISFJ-T 都共享守卫者的经验照顾、现实支持和可靠维护。它们共同面对的不是谁更优，而是怎样把偏好转成更清楚的决定、协作和复盘。",
+              "key": "common_ground",
+              "title": "共同点"
+            },
+            {
+              "body": "该对比仅用于自我理解、沟通与成长复盘，不构成医学诊断、招聘筛选、智力或能力证明、职业保证、伴侣匹配或未来预测。",
+              "key": "usage_boundary",
+              "title": "使用边界"
+            }
+          ],
+          "seo": {
+            "breadcrumb_title": "ISFJ-A 和 ISFJ-T 的区别",
+            "h1": "ISFJ-A 和 ISFJ-T 的区别",
+            "quick_answer_summary": "ISFJ-A 与 ISFJ-T 的最大区别，是在相同守卫者核心偏好下处理反馈、压力与自我确认的节奏不同。A 型通常更快恢复判断并继续推进；T 型通常更愿意复盘风险、标准和外部反馈。两者都可能表现出经验照顾、现实支持和可靠维护，不应用于诊断、招聘、能力排名或关系裁决。",
+            "robots": "index,follow",
+            "seo_description": "对比 ISFJ-A 与 ISFJ-T 的最大区别、快速判断表、容易误判、工作、关系、压力场景、共同点、使用边界和 FAQ。",
+            "seo_title": "ISFJ-A 和 ISFJ-T 的区别：守卫者 A/T 对比 | FermatMind"
+          },
+          "source": "mbti_cms_import_40_at_comparison_draft_v1",
+          "structured_metadata": {
+            "primary_query": "ISFJ-A 和 ISFJ-T 的区别",
+            "route_safety": "public_routes_only",
+            "secondary_queries": [
+              "ISFJ-A",
+              "ISFJ-T",
+              "ISFJ A/T 区别"
+            ],
+            "source_document": [
+              "MBTI-FULL-AUDIT-30",
+              "public_profile_seo_asset_factory",
+              "mbti64_remaining_58_v2"
+            ]
+          },
+          "url": "/zh/personality/isfj-a-vs-isfj-t"
+        },
+        "render_variant": "rich_text",
+        "section_key": "mbti64_comparison_a_vs_t",
+        "sort_order": 920,
+        "title": "ISFJ-A 和 ISFJ-T 的区别"
+      }
+    ],
+    "seo_meta": {
+      "canonical_url": "https://fermatmind.com/zh/personality/isfj",
+      "jsonld_overrides_json": null,
+      "og_description": null,
+      "og_image_url": null,
+      "og_title": null,
+      "robots": null,
+      "seo_description": "了解 ISFJ 的优势、弱项、人际模式和职业方向。",
+      "seo_title": "ISFJ 人格指南",
+      "twitter_description": null,
+      "twitter_image_url": null,
+      "twitter_title": null
+    },
+    "seo_surface_v1": {
+      "alternates": {
+        "en": "https://fermatmind.com/en/personality/isfj-a",
+        "zh-CN": "https://fermatmind.com/zh/personality/isfj-a"
+      },
+      "canonical_url": "https://fermatmind.com/zh/personality/isfj-a",
+      "description": "了解 ISFJ 的优势、弱项、人际模式和职业方向。",
+      "indexability_state": "indexable",
+      "llms_exposure_state": "allow",
+      "metadata_contract_version": "seo.surface.v1",
+      "metadata_fingerprint": "504d31e00ef9f88d3d3f07382b3941822ee8c790",
+      "metadata_scope": "public_indexable_detail",
+      "og_payload": {
+        "description": "了解 ISFJ 的优势、弱项、人际模式和职业方向。",
+        "title": "ISFJ 人格指南",
+        "type": "article",
+        "url": "https://fermatmind.com/zh/personality/isfj-a"
+      },
+      "public_summary_fingerprint": null,
+      "robots_policy": "index,follow",
+      "runtime_artifact_ref": null,
+      "share_safety_state": null,
+      "sitemap_state": "included",
+      "structured_data_keys": [
+        "AboutPage",
+        "DefinedTerm"
+      ],
+      "surface_type": "mbti_personality_public_detail",
+      "title": "ISFJ 人格指南",
+      "twitter_payload": {
+        "card": "summary_large_image",
+        "description": "了解 ISFJ 的优势、弱项、人际模式和职业方向。",
+        "title": "ISFJ 人格指南"
+      },
+      "version": "seo.surface.v1"
+    }
+  },
+  "payload_contract": "mbti.public.detail.v1",
+  "source_content_sha256": "998a464955a6256efb14e942a35e6f383bfdccf80ce64bf393d3e1fc75f447f3"
+}

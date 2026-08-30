@@ -165,6 +165,7 @@ use App\Console\Commands\PersonalityBigFiveCmsPreviewRenderQa;
 use App\Console\Commands\PersonalityBigFiveCmsStagingWriteImport;
 use App\Console\Commands\PersonalityBigFivePublicProfileDraftCommand;
 use App\Console\Commands\PersonalityBigFiveSeoDiscoverabilityRelease;
+use App\Console\Commands\PersonalityCurrentManifest;
 use App\Console\Commands\PersonalityEnneagramCmsDraft;
 use App\Console\Commands\PersonalityEnneagramCmsPromote;
 use App\Console\Commands\PersonalityEnneagramCmsPublishGate;
@@ -231,6 +232,7 @@ class Kernel extends ConsoleKernel
         PersonalityBigFiveSeoDiscoverabilityRelease::class,
         PersonalityBigFiveCmsStagingWriteImport::class,
         PersonalityBigFivePublicProfileDraftCommand::class,
+        PersonalityCurrentManifest::class,
         PersonalityEnneagramCmsPromote::class,
         PersonalityEnneagramCmsPublishGate::class,
         PersonalityWarmPublicReadModels::class,

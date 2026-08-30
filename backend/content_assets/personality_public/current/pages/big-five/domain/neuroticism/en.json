@@ -1,0 +1,360 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/big-five/neuroticism",
+    "entity_key": "neuroticism",
+    "entity_type": "domain",
+    "framework": "big_five",
+    "page_kind": "domain",
+    "slug": "big-five/neuroticism"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "path": "/en/personality/big-five/neuroticism"
+      },
+      "canonical_path": "/en/personality/big-five/neuroticism",
+      "code": "neuroticism",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "neuroticism",
+      "entity_type": "domain",
+      "evidence_notes": [
+        {
+          "citation_label": "An alternative 'description of personality': The Big-Five factor structure",
+          "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
+          "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
+          "source_id": "S1"
+        },
+        {
+          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
+          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
+          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
+          "source_id": "S11"
+        },
+        {
+          "citation_label": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+          "limitation": "PMID and DOI metadata agree. The BFI-2 15-facet hierarchy demonstrates that lower-order structures differ across instruments.",
+          "public_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+          "source_id": "S2"
+        },
+        {
+          "citation_label": "Patterns of mean-level change in personality traits across the life course: A meta-analysis of longitudinal studies",
+          "limitation": "PMID, DOI, title, and authors agree. Supports group mean-level change only, not individual prediction or a fixed retest interval.",
+          "public_url": "https://pubmed.ncbi.nlm.nih.gov/16435954/",
+          "source_id": "S4"
+        }
+      ],
+      "faq": [
+        {
+          "answer": "It is a historical domain label retained for consistency with Big Five literature. On this page it means emotional sensitivity and stress response on a continuum; it is not a description of someone as “neurotic.”",
+          "question": "Why use the word “Neuroticism” when it sounds negative?"
+        },
+        {
+          "answer": "No. It is a personality dimension, not a diagnosis. The domain and its facet labels cannot establish any disorder or replace clinical assessment.",
+          "question": "Is Neuroticism a mental illness?"
+        },
+        {
+          "answer": "No. A higher score may suggest more frequent or intense stress-related emotion, but it does not determine behavior, coping skill, functioning, or a fixed identity.",
+          "question": "Does high Neuroticism mean I am emotionally unstable?"
+        },
+        {
+          "answer": "Behavior and stress response can vary with roles, skills, health, and environment. Group-average longitudinal findings cannot provide an individual timetable or guarantee ([S4](https://pubmed.ncbi.nlm.nih.gov/16435954/)).",
+          "question": "Can Neuroticism change in daily life?"
+        },
+        {
+          "answer": "No conclusion like that follows from a low score. Lower reactivity is not absence of emotion. Consider whether important signals are noticed and acted on rather than judging emotional quantity.",
+          "question": "Should people with low Neuroticism worry that they do not feel enough emotion?"
+        },
+        {
+          "answer": "This page does not provide evidence for an individual health prediction. Health outcomes have many causes, and a personality score must not be used for medical inference or advice.",
+          "question": "Is Neuroticism related to physical health?"
+        }
+      ],
+      "framework": "big_five",
+      "hreflang": {
+        "en": "/en/personality/big-five/neuroticism",
+        "zh-CN": "/zh/personality/big-five/neuroticism"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/big-five/facets/anxiety",
+          "intent": "facet_detail",
+          "label": "Anxiety"
+        },
+        {
+          "href": "/en/personality/big-five/facets/anger",
+          "intent": "facet_detail",
+          "label": "Anger"
+        },
+        {
+          "href": "/en/personality/big-five/facets/depression",
+          "intent": "facet_detail",
+          "label": "Depression"
+        },
+        {
+          "href": "/en/personality/big-five/facets/self-consciousness",
+          "intent": "facet_detail",
+          "label": "Self-Consciousness"
+        },
+        {
+          "href": "/en/personality/big-five/facets/impulsiveness",
+          "intent": "facet_detail",
+          "label": "Impulsiveness"
+        },
+        {
+          "href": "/en/personality/big-five/facets/vulnerability",
+          "intent": "facet_detail",
+          "label": "Vulnerability"
+        },
+        {
+          "href": "/en/personality/big-five/neuroticism-high",
+          "intent": "range",
+          "label": "high"
+        },
+        {
+          "href": "/en/personality/big-five/neuroticism-mid",
+          "intent": "range",
+          "label": "mid-range"
+        },
+        {
+          "href": "/en/personality/big-five/neuroticism-low",
+          "intent": "range",
+          "label": "low"
+        },
+        {
+          "href": "/en/personality/big-five",
+          "intent": "model_hub",
+          "label": "Big Five guide"
+        },
+        {
+          "href": "/en/personality/big-five/facets",
+          "intent": "facet_hub",
+          "label": "facet map"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "clinical_reviewed": false,
+        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
+        "expert_endorsement": false,
+        "limitations": [
+          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
+          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body": "Neuroticism is the N in the Big Five OCEAN model. It describes tendencies in emotional sensitivity, attention to possible threat, and response to stress. The term is historical and can sound stigmatizing in everyday English, but here it names a continuous personality domain. It does not mean that someone is “neurotic,” mentally ill, irrational, weak, or incapable of emotional regulation.\n\nThis page places Neuroticism—emotional sensitivity and stress response—within the Big Five continuous-domain framework ([S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)). The six facets below use NEO/IPIP-NEO vocabulary. The official IPIP resource says its scales measure constructs similar to NEO facets, while the BFI-2 uses a different 15-facet architecture ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm); [S2](https://pubmed.ncbi.nlm.nih.gov/27055049/)). These labels must not be treated as fully equivalent across instruments.\n\nA meta-analysis of longitudinal research reported group-average change in some personality traits across the life course, but it cannot predict how one person, one specific facet, or a fixed age point will change ([S4](https://pubmed.ncbi.nlm.nih.gov/16435954/)).\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the scores discussed by this package. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
+          "heading": "Evidence and Interpretation Boundaries",
+          "key": "section-01-b808591989",
+          "kind": "rich_text"
+        },
+        {
+          "body": "Neuroticism asks how readily unpleasant emotion and stress responses tend to activate, how strongly possible problems capture attention, and how difficult it may be to return to baseline after strain. Observable patterns can include worry, irritation, discouragement, sensitivity to evaluation, difficulty resisting an immediate urge, or feeling overwhelmed when demands exceed available coping resources.\n\nThese experiences are part of ordinary human variation. A higher tendency may make risks or interpersonal signals noticeable early. A lower tendency may make it easier to remain calm amid uncertainty. The domain does not explain why a feeling occurred, whether it is proportionate, or how skillfully the person responds.",
+          "heading": "What Neuroticism Observes",
+          "key": "section-02-03ce73ac9d",
+          "kind": "rich_text"
+        },
+        {
+          "body": "Neuroticism is not a mental-health diagnosis, emotional instability verdict, trauma history, or measure of resilience. The facet labels Anxiety and Depression are non-diagnostic personality labels in this framework; they do not establish an anxiety disorder or depressive disorder. Clinical questions require appropriate assessment of symptoms, duration, impairment, context, and safety.\n\nHigher Neuroticism does not mean a person is always distressed. Lower Neuroticism does not mean a person lacks emotion, empathy, or awareness. A calm response can be useful or can miss a warning; a sensitive response can be informative or can consume attention. Meaning depends on accuracy, intensity, duration, behavior, and context.",
+          "heading": "What Neuroticism Is Not",
+          "key": "section-03-1134b13282",
+          "kind": "rich_text"
+        },
+        {
+          "body": "Toward the higher end, people may anticipate problems, notice subtle signs of rejection or risk, experience stronger negative emotion, and need more time or support to recover after stress. This may encourage preparation and early detection. Costs can include rumination, avoidance, self-criticism, or a threat signal that remains active after the situation changes.\n\nToward the lower end, people may remain even-tempered, recover more quickly, and feel less disrupted by uncertainty or criticism. This can support calm decision-making. Costs may appear if urgency, emotional impact, or another person’s concern is underestimated. Mid-range results may reflect sensitivity in some situations and steadiness in others.",
+          "heading": "Behavioral Tendencies Across the Continuum",
+          "key": "section-04-64f523ce2a",
+          "kind": "rich_text"
+        },
+        {
+          "body": "This package uses [Anxiety](/en/personality/big-five/facets/anxiety) for a non-diagnostic tendency toward apprehension or threat sensitivity, [Anger](/en/personality/big-five/facets/anger) for proneness to frustration or irritation, and [Depression](/en/personality/big-five/facets/depression) for a non-diagnostic tendency toward discouragement or low mood. The names do not establish clinical conditions.\n\n[Self-Consciousness](/en/personality/big-five/facets/self-consciousness) concerns sensitivity to scrutiny or embarrassment. [Impulsiveness](/en/personality/big-five/facets/impulsiveness) concerns difficulty resisting urges under emotion; it is narrower than all forms of impulsive action. [Vulnerability](/en/personality/big-five/facets/vulnerability) concerns feeling less able to cope when stress becomes intense. An uneven facet profile is often more useful than the total.",
+          "heading": "The Six Facets of Neuroticism",
+          "key": "section-05-351d4119d9",
+          "kind": "rich_text"
+        },
+        {
+          "body": "Higher Neuroticism may appear as checking for mistakes, worrying before evaluation, replaying feedback, or having concentration disrupted by uncertainty. Early concern can prompt preparation, but excessive threat monitoring can consume the attention needed for the task. Lower Neuroticism may support calm performance, while also reducing the felt urgency to prepare for a low-probability risk.\n\nHelpful task design includes clear criteria, staged feedback, realistic contingency plans, and a defined point at which checking stops. These tools respond to behavior without treating emotional sensitivity as failure.",
+          "heading": "Learning and Task Settings",
+          "key": "section-06-cca8360861",
+          "kind": "rich_text"
+        },
+        {
+          "body": "At work, a more sensitive threat system may notice interpersonal strain, weak assumptions, or operational risk before others do. It may also make ambiguous messages feel more consequential than intended. A steadier style can help a team remain composed, but can frustrate colleagues if legitimate concerns are dismissed too quickly.\n\nNo Neuroticism score determines competence, leadership, reliability, or job fit. Teams can use explicit escalation thresholds, written decisions, and predictable feedback to reduce avoidable ambiguity for everyone. Hiring or performance decisions require direct, role-relevant evidence.",
+          "heading": "Work and Collaboration Settings",
+          "key": "section-07-4c09325e5f",
+          "kind": "rich_text"
+        },
+        {
+          "body": "Differences may appear in reassurance needs, response to delayed messages, sensitivity to tone, or how long conflict remains emotionally active. One person may seek immediate repair; another may assume the relationship is intact and need time before discussing it. Both can misread the other.\n\nName the signal and request without diagnosis: “When the plan changed without notice, I started anticipating more changes; can we confirm the next checkpoint?” is more useful than calling someone unstable or insensitive. Reassurance works best alongside clear information and boundaries.",
+          "heading": "Communication and Relationship Settings",
+          "key": "section-08-532fabd45e",
+          "kind": "rich_text"
+        },
+        {
+          "body": "Stress is precisely where this domain may become more visible, but that does not make every stressed behavior a trait. Acute loss, unsafe conditions, sleep deprivation, illness, overload, or conflict can change emotion and coping for anyone. A questionnaire result cannot determine whether a current response is normal, clinically significant, or caused by personality.\n\nIf distress is persistent, severe, or creates safety concerns, use appropriate professional or emergency support rather than relying on personality content. This page provides interpretation boundaries, not medical advice.",
+          "heading": "Under Stress",
+          "key": "section-09-b117606a3b",
+          "kind": "rich_text"
+        },
+        {
+          "body": "Potential strengths toward the higher end include vigilance, anticipation of difficulty, sensitivity to consequences, and awareness of emotional signals. Accompanying costs may include rumination, avoidance, prolonged recovery, or treating uncertain possibilities as immediate threats. Potential strengths toward the lower end include calm, rapid recovery, and tolerance of uncertainty. Costs may include underreacting or missing another person’s level of concern.\n\nThese trade-offs are probabilistic. The useful question is whether the signal is accurate and whether the response expands or narrows effective action—not whether the feeling is good or bad.",
+          "heading": "Potential Strengths and Accompanying Costs",
+          "key": "section-10-2599718407",
+          "kind": "rich_text"
+        },
+        {
+          "body": "A person may be calm in technical emergencies and highly sensitive in close relationships, or worried before a presentation yet composed once it begins. Familiarity, control, prior experience, social evaluation, physical state, and available support can all change expression.\n\nLook for counterexamples to a global identity. When did you feel concern and still act effectively? When did calm help, and when did it delay attention? Contextual evidence keeps the score from becoming a fixed story.",
+          "heading": "Context Changes and Counterexamples",
+          "key": "section-11-a815877d49",
+          "kind": "rich_text"
+        },
+        {
+          "body": "Track several stress episodes without judging them. Record the trigger, first interpretation, emotion intensity, body sensations, action urge, behavior, recovery time, and what information later became available. Separate detection from response: noticing a risk early is different from remaining stuck on it.\n\nChoose a small experiment suited to the pattern. Define one check instead of repeated checking, write a contingency plan, delay an impulsive response, or ask for clarification before assuming intent. The aim is more choice and accurate calibration, not suppressing emotion.",
+          "heading": "How to Observe Your Own Neuroticism",
+          "key": "section-12-6e62e23337",
+          "kind": "rich_text"
+        },
+        {
+          "body": "Start with the six facets. A domain result may combine high Anxiety with low Anger, or strong Self-Consciousness with low Vulnerability. Compare [high](/en/personality/big-five/neuroticism-high), [mid-range](/en/personality/big-five/neuroticism-mid), and [low](/en/personality/big-five/neuroticism-low) descriptions as hypotheses, not clinical bands.\n\nUse the [Big Five guide](/en/personality/big-five) and [facet map](/en/personality/big-five/facets) for context. Focus on triggers, recovery, support, and observable choices. Do not use the score to self-diagnose, label another person, or avoid appropriate care.",
+          "heading": "How to Read a Neuroticism Report",
+          "key": "section-13-53355bd228",
+          "kind": "rich_text"
+        },
+        {
+          "body": "Continue with [high Neuroticism](/en/personality/big-five/neuroticism-high), [mid-range Neuroticism](/en/personality/big-five/neuroticism-mid), or [low Neuroticism](/en/personality/big-five/neuroticism-low), then use the [30-facet guide](/en/personality/big-five/facets) for the narrower profile.",
+          "heading": "Continue Reading",
+          "key": "section-14-a860800ac9",
+          "kind": "rich_text"
+        }
+      ],
+      "seo": [],
+      "sitemap_eligible": true,
+      "slug": "big-five/neuroticism",
+      "source_hash": "ba291559ad4611286ef1b5b6fc4bb7230d49409e438e4fe8e6148d56ac2f8b91",
+      "source_package": "big-five-en52-52-page-release-20260719",
+      "summary": "Neuroticism describes tendencies in emotional sensitivity, threat attention, and stress response. It is a historical personality label, not a diagnosis or a verdict about stability.",
+      "title": "Neuroticism: Emotional Sensitivity and Stress Response"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": {
+          "name": "FermatMind Editorial",
+          "organization": "FermatMind",
+          "role": "Editorial"
+        }
+      },
+      "schema_eligible": false,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "neuroticism-measurement_method-1",
+            "limitation": "Supports a non-diagnostic continuous domain and labeled facets, not illness, scale equivalence, or product validity.",
+            "source_ids": [
+              "S1",
+              "S11",
+              "S2"
+            ],
+            "support_level": "direct"
+          },
+          {
+            "claim_id": "neuroticism-longitudinal_change-2",
+            "limitation": "Group-average longitudinal findings do not provide an individual trajectory or fixed timetable.",
+            "source_ids": [
+              "S4"
+            ],
+            "support_level": "direct"
+          },
+          {
+            "claim_id": "neuroticism-product-boundary",
+            "limitation": "Public product and method boundary; not an empirical research claim.",
+            "source_ids": [],
+            "support_level": "not_required"
+          },
+          {
+            "claim_id": "neuroticism-content-method",
+            "limitation": "Editorial provenance; no clinical review, expert endorsement, or product validation is claimed.",
+            "source_ids": [],
+            "support_level": "not_required"
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "General Big Five research does not establish FermatMind product validation.",
+          "Not for diagnosis, screening, admission, or individual-outcome prediction."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Goldberg, L. R.",
+            "claim_ids": [
+              "neuroticism-measurement_method-1"
+            ],
+            "doi": "10.1037/0022-3514.59.6.1216",
+            "id": "S1",
+            "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
+            "source_type": "peer_reviewed_research",
+            "title": "An alternative 'description of personality': The Big-Five factor structure",
+            "year": 1990
+          },
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Oregon Research Institute IPIP project",
+            "claim_ids": [
+              "neuroticism-measurement_method-1"
+            ],
+            "doi": null,
+            "id": "S11",
+            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
+            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
+            "source_type": "official_documentation",
+            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
+            "year": 2026
+          },
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Soto, C. J.; John, O. P.",
+            "claim_ids": [
+              "neuroticism-measurement_method-1"
+            ],
+            "doi": "10.1037/pspp0000096",
+            "id": "S2",
+            "limitation": "PMID and DOI metadata agree. The BFI-2 15-facet hierarchy demonstrates that lower-order structures differ across instruments.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+            "source_type": "peer_reviewed_research",
+            "title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+            "year": 2017
+          },
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Roberts, B. W.; Walton, K. E.; Viechtbauer, W.",
+            "claim_ids": [
+              "neuroticism-longitudinal_change-2"
+            ],
+            "doi": "10.1037/0033-2909.132.1.1",
+            "id": "S4",
+            "limitation": "PMID, DOI, title, and authors agree. Supports group mean-level change only, not individual prediction or a fixed retest interval.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/16435954/",
+            "source_type": "peer_reviewed_research",
+            "title": "Patterns of mean-level change in personality traits across the life course: A meta-analysis of longitudinal studies",
+            "year": 2006
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "158ccba8dd97ffb96065a036a3c75dafbbf0c06397ae04898b67c9488cbe12b0"
+}

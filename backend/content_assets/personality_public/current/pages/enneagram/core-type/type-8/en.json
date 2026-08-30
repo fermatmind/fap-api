@@ -1,0 +1,373 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-8",
+    "entity_key": "type-8",
+    "entity_type": "core_type",
+    "framework": "enneagram",
+    "page_kind": "core_type",
+    "slug": "enneagram/type-8"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-8"
+      },
+      "canonical_path": "/en/personality/enneagram/type-8",
+      "code": "type-8",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-8",
+      "entity_type": "core_type",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.application.exploratory_not_predictive",
+            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
+            "source_ids": [
+              "sutton_2013_work_outcomes",
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.application.exploratory_not_predictive",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
+            "claim_ids": [
+              "claim.application.exploratory_not_predictive"
+            ],
+            "doi": "10.1016/j.emj.2012.12.004",
+            "id": "sutton_2013_work_outcomes",
+            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
+            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
+            "source_type": "peer_reviewed_research",
+            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
+            "year": 2013
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Role authority, emergency duty, negotiation training, advocacy, culture, or actual danger may require assertiveness. Compare behavior when power is equal and no urgent intervention is needed.",
+          "question": "Does assertive leadership establish Type Eight?"
+        },
+        {
+          "answer": "Protection starts with the affected person’s stated preference, preserves meaningful choice, and stops when the danger or request ends. Control substitutes the protector’s judgment and restricts refusal.",
+          "question": "How can protection be distinguished from control?"
+        },
+        {
+          "answer": "Asking for help, naming fear or uncertainty, accepting accountability, and completing a repair without counterattack all reduce confidence that avoiding vulnerability best explains the event.",
+          "question": "Which repair most challenges an invulnerability hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-8",
+        "reciprocal": true,
+        "translation_group": "enneagram:core_type:type-8",
+        "x-default": "/en/personality/enneagram/type-8",
+        "zh-CN": "/zh/personality/enneagram/type-8"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/centers/gut",
+          "label": "center:gut",
+          "relationship": "center_membership",
+          "target_identity_key": "center:gut"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/8w7",
+          "label": "wing:8w7",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:8w7"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/8w9",
+          "label": "wing:8w9",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:8w9"
+        },
+        {
+          "href": "/en/personality/enneagram/type-8/instincts/self-preservation",
+          "label": "instinctual_subtype:type-8/self-preservation",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-8/self-preservation"
+        },
+        {
+          "href": "/en/personality/enneagram/type-8/instincts/social",
+          "label": "instinctual_subtype:type-8/social",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-8/social"
+        },
+        {
+          "href": "/en/personality/enneagram/type-8/instincts/one-to-one",
+          "label": "instinctual_subtype:type-8/one-to-one",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-8/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.application.exploratory_not_predictive",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "Track which situations trigger direct intervention, what loss of autonomy is anticipated, and whether strength is used to protect choice or to avoid relying on others. Keep the observations tied to events and consequences.",
+          "key": "motivation_attention",
+          "title": "Observe where control and vulnerability enter attention"
+        },
+        {
+          "body_md": "A firm voice may reflect emergency command, legal responsibility, cultural style, accessibility, or practiced negotiation. Ask what authority exists, whose boundary is at stake, and whether a less forceful option was available.",
+          "key": "behavior_motive",
+          "title": "Separate forceful behavior from inferred motive"
+        },
+        {
+          "body_md": "In decisions, record who has authority and who bears the risk. During conflict, note whether the person asks for direct facts, escalates, accepts a legitimate limit, acknowledges unintended impact, and completes a specific repair.",
+          "key": "decision_feedback_conflict",
+          "title": "Compare decisions, feedback, and repair"
+        },
+        {
+          "body_md": "Autonomy attention may support candor, rapid response, boundary defense, and willingness to confront neglected problems. Costs appear when speed erases consent, confidence narrows evidence, or protection becomes control over the person being protected.",
+          "key": "strengths_tradeoffs",
+          "title": "Hold decisive protection beside possible overreach"
+        },
+        {
+          "body_md": "At work, compare an incident lead using assigned authority with a manager bypassing review because challenge feels inefficient. In a relationship, compare defending a stated boundary with deciding what another adult should want.",
+          "key": "work_relationship_examples",
+          "title": "Read directness through the governing agreement"
+        },
+        {
+          "body_md": "The 8w7 hypothesis adds momentum, options, appetite, and entrepreneurial action; 8w9 adds steadiness, endurance, territory, and delayed force. Also compare Type One conviction, Type Three drive, trauma safety strategies, military or legal training, seniority, privilege, and actual threat.",
+          "key": "wings_mistypes",
+          "title": "Compare modifiers and ordinary sources of power"
+        },
+        {
+          "body_md": "Confidence should fall when the person requests help before a crisis, shares authority without covert override, follows another person’s plan, accepts a firm refusal, and repairs harm without treating accountability as surrender.",
+          "key": "counterexample",
+          "title": "Look for chosen dependence and shared control"
+        },
+        {
+          "body_md": "Use this page to test autonomy, impact, protection, control, and vulnerability observations. It cannot rank courage, leadership, ethics, aggression, employability, relationship quality, health, or future outcomes; consent and law remain primary.",
+          "key": "use_boundary",
+          "title": "Keep strength language exploratory and accountable"
+        },
+        {
+          "body_md": "Duration: 5\n\nContext: Across five days, select one authority decision, one protective intervention, and one conflict where another person states a clear boundary.\n\nObservable signal: Record formal authority, requested action, protected person’s preference, available alternatives, exact refusal, downstream cost, and any repair completed.\n\nPage-specific signal: Compare direct impact when authority is assigned with behavior when control must be genuinely shared.\n\nAlternative explanation: Check crisis duty, professional training, discrimination, actual danger, cultural communication, seniority, and unequal access to recourse.\n\nReflection prompt: Name one event where accepting help or a limit improved the outcome, and revise the autonomy hypothesis downward.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Check crisis duty, professional training, discrimination, actual danger, cultural communication, seniority, and unequal access to recourse.",
+            "context": "Across five days, select one authority decision, one protective intervention, and one conflict where another person states a clear boundary.",
+            "duration_days": 5,
+            "observable_signal": "Record formal authority, requested action, protected person’s preference, available alternatives, exact refusal, downstream cost, and any repair completed.",
+            "page_specific_signal": "Compare direct impact when authority is assigned with behavior when control must be genuinely shared.",
+            "reflection_prompt": "Name one event where accepting help or a limit improved the outcome, and revise the autonomy hypothesis downward."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "Type Eight is a traditional Enneagram hypothesis about attention returning to autonomy, direct impact, protection, control, vulnerability, and clear boundaries. Assertiveness or leadership does not establish motive because authority, crisis duty, advocacy, real danger, discrimination, culture, training, and unequal access to power may require similar behavior.",
+        "title": "Type Eight: autonomy, direct impact, and a revisable protection hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-8",
+      "source_hash": "58f58838915538a83f874289339db5efb0e6e2243a67d268c44e3f5ba60810f2",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "Type Eight is a traditional Enneagram hypothesis about attention returning to autonomy, direct impact, protection, control, vulnerability, and clear boundaries. Assertiveness or leadership does not establish motive because authority, crisis duty, advocacy, real danger, discrimination, culture, training, and unequal access to power may require similar behavior.",
+      "title": "Type Eight: autonomy, direct impact, and a revisable protection hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.application.exploratory_not_predictive",
+            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
+            "source_ids": [
+              "sutton_2013_work_outcomes",
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.application.exploratory_not_predictive",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
+            "claim_ids": [
+              "claim.application.exploratory_not_predictive"
+            ],
+            "doi": "10.1016/j.emj.2012.12.004",
+            "id": "sutton_2013_work_outcomes",
+            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
+            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
+            "source_type": "peer_reviewed_research",
+            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
+            "year": 2013
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "2564ab07a7ae7cacd0777fe6e786fa51502130f718ad665802adaa28c1469b3b"
+}

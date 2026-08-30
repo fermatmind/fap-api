@@ -32,6 +32,7 @@ jobs:
       tests_changed: ${{ steps.classify.outputs.tests_changed }}
       publisher_required: ${{ steps.classify.outputs.publisher_required }}
       career_current_authority_release: ${{ steps.classify.outputs.career_current_authority_release }}
+      personality_current_authority_release: ${{ steps.classify.outputs.personality_current_authority_release }}
       seo_platform_10_closeout: ${{ steps.classify.outputs.seo_platform_10_closeout }}
       seo_platform_11a_closeout: ${{ steps.classify.outputs.seo_platform_11a_closeout }}
       seo_agent_evidence_boundary: ${{ steps.classify.outputs.seo_agent_evidence_boundary }}
@@ -77,6 +78,7 @@ jobs:
             echo "tests_changed=$(jq -r .tests_changed "$RUNNER_TEMP/classification.json")"
             echo "publisher_required=$(jq -r .operations.publisher_required "$RUNNER_TEMP/classification.json")"
             echo "career_current_authority_release=$(jq -r .operations.career_current_authority_release "$RUNNER_TEMP/classification.json")"
+            echo "personality_current_authority_release=$(jq -r .operations.personality_current_authority_release "$RUNNER_TEMP/classification.json")"
             echo "seo_platform_10_closeout=$(jq -r .operations.seo_platform_10_closeout "$RUNNER_TEMP/classification.json")"
             echo "seo_platform_11a_closeout=$(jq -r .operations.seo_platform_11a_closeout "$RUNNER_TEMP/classification.json")"
             echo "seo_agent_evidence_boundary=$(jq -r .operations.seo_agent_evidence_boundary "$RUNNER_TEMP/classification.json")"
@@ -144,26 +146,27 @@ jobs:
         with:
           fetch-depth: 0
       - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
-        if: needs.classify.outputs.content == 'true'
+        if: needs.classify.outputs.content == 'true' || needs.classify.outputs.personality_current_authority_release == 'true'
         with:
           php-version: '8.4'
           coverage: none
           tools: composer:v2
       - name: Validate the current authority pack only
-        if: needs.classify.outputs.content == 'true'
+        if: needs.classify.outputs.content == 'true' || needs.classify.outputs.personality_current_authority_release == 'true'
         working-directory: backend
         run: |
           composer install --no-interaction --prefer-dist --no-progress
           cp -n .env.example .env || true
           php artisan key:generate --force
           php artisan career:current-manifest
+          php artisan personality:current-manifest
           if [ '${{ needs.classify.outputs.career_current_authority_release }}' = 'true' ]; then
             bash scripts/ci/verify_career_current_authority_release.sh
           fi
           mkdir -p storage/app/private/content_packs_index
           php artisan content-packs:index:build --output=storage/app/private/content_packs_index/content-packs-index.json --json
           php artisan test --filter='(ContentPacksIndexArtifact|ContentLint|ContentCompile)' --no-ansi
-      - if: needs.classify.outputs.content != 'true'
+      - if: needs.classify.outputs.content != 'true' && needs.classify.outputs.personality_current_authority_release != 'true'
         run: echo "No content authority path changed."
 
   verify-mbti:

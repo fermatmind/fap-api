@@ -1,0 +1,287 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh/personality/enneagram/centers/head",
+    "entity_key": "head",
+    "entity_type": "center",
+    "framework": "enneagram",
+    "page_kind": "center",
+    "slug": "enneagram/centers/head"
+  },
+  "locale": "zh-CN",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh/personality/enneagram/centers/head"
+      },
+      "canonical_path": "/zh/personality/enneagram/centers/head",
+      "code": "head",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "head",
+      "entity_type": "center",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不一定。查资料可能是任务要求、职业标准、过往错误、问责压力或普通好奇。需要继续观察信息怎样改变行动，以及不确定较低时相同流程是否仍然出现。",
+          "question": "查很多资料一定属于脑中心模式吗？"
+        },
+        {
+          "answer": "可以。一个人可能先确认风险，再寻找替代方案。不要强迫只保留一个标签，而应记录先后顺序、每一步保护了什么，以及哪一步在相近反例中消失。",
+          "question": "谨慎核对和打开选项能同时出现吗？"
+        },
+        {
+          "answer": "不确定会带来可记录的提问、信息来源、支持、等待时间和选项变化。本练习不测量智力，只比较同一个决定过程如何随情境改变，并检查熟悉任务是否给出不同的反例。",
+          "question": "为什么观察不确定比评价智力更合适？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/centers/head",
+        "reciprocal": true,
+        "translation_group": "enneagram:center:head",
+        "x-default": "/en/personality/enneagram/centers/head",
+        "zh-CN": "/zh/personality/enneagram/centers/head"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh/personality/enneagram/type-5",
+          "label": "core_type:type-5",
+          "relationship": "center_member",
+          "target_identity_key": "core_type:type-5"
+        },
+        {
+          "href": "/zh/personality/enneagram/type-6",
+          "label": "core_type:type-6",
+          "relationship": "center_member",
+          "target_identity_key": "core_type:type-6"
+        },
+        {
+          "href": "/zh/personality/enneagram/type-7",
+          "label": "core_type:type-7",
+          "relationship": "center_member",
+          "target_identity_key": "core_type:type-7"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-CN",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "比较五号六号七号时，传统描述提示不同路径：五号可能保存注意力并建立理解，六号可能核对可靠性与可用支持，七号可能生成多个选项以保持行动空间。这些路径可以重叠，也不是排他的思考风格。",
+          "key": "within_center_difference",
+          "title": "先比较五号六号七号"
+        },
+        {
+          "body_md": "观察脑中心线索时，选择一项信息不完整的陌生决定。记录最先提出的问题、查询了哪个来源、说出了什么风险或可能、行动被延迟多久，以及新证据让可选方案收窄还是增加。",
+          "key": "observable_pattern",
+          "title": "追踪一次不确定决定"
+        },
+        {
+          "body_md": "用反例修正脑中心假设时，可以选择后果相近但不确定程度较低的熟悉任务。若专业经验、工作量、问责要求、过去失败、信息权限或期限更能说明查证与扩展选项的行为，就应降低原判断的可信度。",
+          "key": "counterexample",
+          "title": "用熟悉任务检验原判断"
+        },
+        {
+          "body_md": "脑中心标签不能测量智力，也不能识别固定心理能力。它不能说明某个神经系统或医学类别；分析、谨慎或想象丰富的表现本身，也不足以确认类型或推断结果。",
+          "key": "boundary",
+          "title": "思考线索不是固定能力"
+        },
+        {
+          "body_md": "持续天数: 3\n\n情境: 选择一项陌生决定和一项后果相近的熟悉任务，记录期限、信息权限以及由谁共同承担责任。\n\n可观察信号: 列出最先提出的问题、查询来源、被说出的风险或可能、行动前等待时间，以及改变选项范围的那条证据。\n\n本页特定信号: 分别比较保存注意力、核对可靠性与支持、生成替代选项，不要把所有思考或计划都视为同一种线索。\n\n替代解释: 检查专业经验、工作量、问责、过去失败、信息权限、好奇或期限是否能够解释同一信息处理顺序。\n\n复盘问题: 把熟悉任务作为反例，说明关于五号、六号或七号的哪项初步解释在比较后变得较不可信。",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "检查专业经验、工作量、问责、过去失败、信息权限、好奇或期限是否能够解释同一信息处理顺序。",
+            "context": "选择一项陌生决定和一项后果相近的熟悉任务，记录期限、信息权限以及由谁共同承担责任。",
+            "duration_days": 3,
+            "observable_signal": "列出最先提出的问题、查询来源、被说出的风险或可能、行动前等待时间，以及改变选项范围的那条证据。",
+            "page_specific_signal": "分别比较保存注意力、核对可靠性与支持、生成替代选项，不要把所有思考或计划都视为同一种线索。",
+            "reflection_prompt": "把熟悉任务作为反例，说明关于五号、六号或七号的哪项初步解释在比较后变得较不可信。"
+          },
+          "title": "观察练习"
+        }
+      ],
+      "seo": {
+        "description": "脑中心是传统九型框架中对五号、六号和七号的归组。观察脑中心线索，可以追踪不确定变重要时，人怎样收集信息、核对支持或打开选项；这不表示思考会取代情绪与行动，五号、六号、七号也可能用相反路径处理同一个未知问题。",
+        "title": "脑中心：记录面对不确定时的信息选择"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/centers/head",
+      "source_hash": "5a2cfdd2fe98ad217d93db74662279928698c4b608486645952fea8d55fa27cc",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "脑中心是传统九型框架中对五号、六号和七号的归组。观察脑中心线索，可以追踪不确定变重要时，人怎样收集信息、核对支持或打开选项；这不表示思考会取代情绪与行动，五号、六号、七号也可能用相反路径处理同一个未知问题。",
+      "title": "脑中心：记录面对不确定时的信息选择"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "e3b98a8e11c224d1fc804b3f64bb3b08db511a8887854d371aa1e55d060c2472"
+}

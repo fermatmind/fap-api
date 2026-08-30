@@ -1,0 +1,335 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-4/instincts/one-to-one",
+    "entity_key": "type-4/one-to-one",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-4/instincts/one-to-one"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-4/instincts/one-to-one"
+      },
+      "canonical_path": "/en/personality/enneagram/type-4/instincts/one-to-one",
+      "code": "type-4/one-to-one",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-4/one-to-one",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Conflict, competition, attraction norms, trauma history, or unequal power may intensify expression. Use matched topics and consent-aware comparisons.",
+          "question": "Does intense expression establish One-to-one Type Four?"
+        },
+        {
+          "answer": "A close person may welcome, tolerate, or fear intensity, and power can limit refusal. Recording limits prevents coercion from becoming a subtype example.",
+          "question": "Why must consent be recorded in a focal comparison?"
+        },
+        {
+          "answer": "Intensity explained by objective stakes, stable expression across audiences, or reliable de-escalation after a clear limit should weaken it.",
+          "question": "What weakens the focal-intensity hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-4/instincts/one-to-one",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-4/one-to-one",
+        "x-default": "/en/personality/enneagram/type-4/instincts/one-to-one",
+        "zh-CN": "/zh/personality/enneagram/type-4/instincts/one-to-one"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-4",
+          "label": "core_type:type-4",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-4"
+        },
+        {
+          "href": "/en/personality/enneagram/type-4/instincts/self-preservation",
+          "label": "instinctual_subtype:type-4/self-preservation",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-4/self-preservation"
+        },
+        {
+          "href": "/en/personality/enneagram/type-4/instincts/social",
+          "label": "instinctual_subtype:type-4/social",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-4/social"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "The description proposes that Type Four difference attention may concentrate around a specific person or rivalry. It is not a claim that intensity causes attachment.",
+          "key": "traditional_hypothesis",
+          "title": "Treat focal intensity as a traditional hypothesis"
+        },
+        {
+          "body_md": "Compare the same disagreement or creative challenge with a close person, neutral collaborator, and anonymous evaluator. Record intensity, evidence, consent, repair, and stakes.",
+          "key": "matched_comparison",
+          "title": "Match the topic while changing the focal person"
+        },
+        {
+          "body_md": "The label organizes focal attention, comparison, and intensity. It is not evidence about bodily mechanisms, chemistry, sexuality, or a force determining attraction.",
+          "key": "instinct_boundary",
+          "title": "Keep one-to-one language non-mechanistic"
+        },
+        {
+          "body_md": "Difference may appear as challenging another person, outperforming a rival, or demanding unmistakable engagement. Compare this with real competition and unsafe conflict.",
+          "key": "countertype_variation",
+          "title": "Allow competition to carry difference concerns"
+        },
+        {
+          "body_md": "Relationship conflict, competitive fields, trauma history, cultural scripts, harassment, and evaluation power can intensify expression. Consent and safety are mandatory context.",
+          "key": "alternative_environment",
+          "title": "Test conflict, power, and attraction norms"
+        },
+        {
+          "body_md": "The hypothesis weakens when intensity follows objective stakes rather than focal identity, remains stable across audiences, or reliably decreases when another person sets a limit.",
+          "key": "counterexample",
+          "title": "Use neutral response and respected limits as tests"
+        },
+        {
+          "body_md": "Results from one measure remain context-bound. This page cannot predict attraction, conflict, compatibility, creativity, or relationship quality.",
+          "key": "evidence_boundary",
+          "title": "Keep focal observations non-predictive"
+        },
+        {
+          "body_md": "Duration: 5\n\nContext: Use the same disagreement or creative challenge with a close person, neutral collaborator, and anonymous evaluator.\n\nObservable signal: Record topic, stakes, evidence, intensity, consent, limit, evaluation power, repair, and change after refusal.\n\nPage-specific signal: Compare whether the same evidence produces different intensity only when a particular relationship or rivalry is present.\n\nAlternative explanation: Compare conflict, competition, trauma history, cultural scripts, harassment, attraction norms, and power.\n\nReflection prompt: Identify the condition where stakes or safety explain intensity better than subtype and cite one respected limit.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Compare conflict, competition, trauma history, cultural scripts, harassment, attraction norms, and power.",
+            "context": "Use the same disagreement or creative challenge with a close person, neutral collaborator, and anonymous evaluator.",
+            "duration_days": 5,
+            "observable_signal": "Record topic, stakes, evidence, intensity, consent, limit, evaluation power, repair, and change after refusal.",
+            "page_specific_signal": "Compare whether the same evidence produces different intensity only when a particular relationship or rivalry is present.",
+            "reflection_prompt": "Identify the condition where stakes or safety explain intensity better than subtype and cite one respected limit."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "One-to-one Type Four is a traditional, evidence-limited hypothesis that identity-and-meaning attention may appear through focal comparison, intensity, and testing whether a specific relationship can hold difference. Intense expression cannot establish subtype because conflict, attraction norms, trauma history, competition, and unequal power can look similar.",
+        "title": "One-to-one Type Four: focal intensity as a matched-comparison hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-4/instincts/one-to-one",
+      "source_hash": "1dbfc6fb3eb73b6db69c98365aaf7dabc52d79dbb6d1ab5dd70aeba6b3baf142",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "One-to-one Type Four is a traditional, evidence-limited hypothesis that identity-and-meaning attention may appear through focal comparison, intensity, and testing whether a specific relationship can hold difference. Intense expression cannot establish subtype because conflict, attraction norms, trauma history, competition, and unequal power can look similar.",
+      "title": "One-to-one Type Four: focal intensity as a matched-comparison hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "42a1063bb8f76d515ae472f73ceadf19002eb179ec369827cc06f3df9dd309d0"
+}

@@ -1,0 +1,356 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh/personality/big-five/openness",
+    "entity_key": "openness",
+    "entity_type": "domain",
+    "framework": "big_five",
+    "page_kind": "domain",
+    "slug": "big-five/openness"
+  },
+  "locale": "zh-CN",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "path": "/zh/personality/big-five/openness"
+      },
+      "canonical_path": "/zh/personality/big-five/openness",
+      "code": "openness",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "openness",
+      "entity_type": "domain",
+      "evidence_notes": [
+        {
+          "citation_label": "An alternative 'description of personality': The Big-Five factor structure",
+          "limitation": "PMID、题名、作者、年份和 DOI 一致；用于五维结构与词汇研究背景，不用于产品级效度。",
+          "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
+          "source_id": "S1"
+        },
+        {
+          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
+          "limitation": "IPIP 官方说明明确区分 lexical Big Five、FFM、BFI 与 NEO/IPIP 体系，并使用 ‘similar constructs’ 而非量表等同。具体条目映射见 https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm。 该官方网页未标注出版年；year 记录本次公开核验的访问快照年，不代表出版年份。",
+          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
+          "source_id": "S11"
+        },
+        {
+          "citation_label": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+          "limitation": "PMID 与 DOI 核验一致；BFI-2 的 15-facet 架构只用于说明不同量表的下位结构并不相同。",
+          "public_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+          "source_id": "S2"
+        },
+        {
+          "citation_label": "Meta-analytic relations between personality and cognitive ability",
+          "limitation": "PNAS 正式页面核验题名、作者、DOI 和出版信息；用于否定把开放性等同于智力的简化推断。",
+          "public_url": "https://www.pnas.org/doi/10.1073/pnas.2212794120",
+          "source_id": "S10"
+        }
+      ],
+      "faq": [
+        {
+          "answer": "开放性与认知能力是不同构念。大规模元分析显示，关系会因人格层级（维度、aspect、侧面）和认知能力类型而变化，不能压缩成“开放性等于智力”或用开放性预测个人智商（[S10](https://www.pnas.org/doi/10.1073/pnas.2212794120)）。",
+          "question": "开放性和智商有关吗？"
+        },
+        {
+          "answer": "不是。开放性高的人也可以很踏实——这取决于尽责性的水平。高开放性配合高尽责性，可能表现为\"有探索精神的执行者\"。高开放性配合低尽责性，才更可能出现\"想法多但落实少\"的模式。",
+          "question": "开放性高是不是代表不踏实？"
+        },
+        {
+          "answer": "不一定。低开放性的人可能在自己熟悉的领域中有非常精深的思维。他们的优势在于专注和深度，而不是广度。思维僵化更多与认知习惯（如是否愿意在证据面前调整观点）有关，不完全等同于开放性。",
+          "question": "低开放性是不是意味着思维僵化？"
+        },
+        {
+          "answer": "人格倾向可以在不同阶段呈现变化，但本页不把低风险行为练习描述为已验证的特质改变干预。你可以把小范围尝试用于观察情境和习惯，不据此承诺分数会改变。",
+          "question": "开放性可以改变吗？"
+        },
+        {
+          "answer": "这是一个可用于自我观察的组合问题。高开放性带来探索和发散，高尽责性带来收尾和执行——两者结合可以形成\"有纪律的创造力\"。关键在于根据任务阶段切换主导倾向：探索阶段让开放性主导，执行阶段让尽责性主导。如果两者都高但仍然频繁出现半途而废的情况，可能需要在具体策略层面做调整（如设定明确的项目边界、用外部截止日期倒逼收尾）而不是改变倾向本身。\n\n---\n\n---\n\n---",
+          "question": "开放性和尽责性冲突怎么办？"
+        }
+      ],
+      "framework": "big_five",
+      "hreflang": {
+        "en": "/en/personality/big-five/openness",
+        "zh-CN": "/zh/personality/big-five/openness"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh/personality/big-five/openness-high",
+          "intent": "range",
+          "label": "高开放性"
+        },
+        {
+          "href": "/zh/personality/big-five/openness-mid",
+          "intent": "range",
+          "label": "中等开放性"
+        },
+        {
+          "href": "/zh/personality/big-five/openness-low",
+          "intent": "range",
+          "label": "低开放性"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/imagination",
+          "intent": "facet_detail",
+          "label": "想象力"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/aesthetics",
+          "intent": "facet_detail",
+          "label": "审美"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/feelings",
+          "intent": "facet_detail",
+          "label": "情感体验"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/actions",
+          "intent": "facet_detail",
+          "label": "行动尝试"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/ideas",
+          "intent": "facet_detail",
+          "label": "想法探索"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/values",
+          "intent": "facet_detail",
+          "label": "价值观开放"
+        },
+        {
+          "href": "/zh/personality/big-five",
+          "intent": "model_hub",
+          "label": "大五人格总览"
+        },
+        {
+          "href": "/zh/personality/big-five/facets",
+          "intent": "facet_hub",
+          "label": "30 个侧面总览"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-CN",
+      "method_boundary": {
+        "clinical_reviewed": false,
+        "content_method": "AI-assisted draft; terminology, boundary and evidence review by FermatMind Editorial",
+        "expert_endorsement": false,
+        "limitations": [
+          "用于自我认知与教育说明，不构成临床诊断、招聘筛选或个体结果预测。",
+          "本内容包不提供费马测试的产品级信度、效度、中文常模或个体预测证据。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body": "开放性是大五人格中关于探索与接近的维度。它描述的是一个人对新观念、新体验、审美感受和想象世界的投入程度——不是这个人聪不聪明、有没有文化，也不是这个人思想是否\"开放\"或\"保守\"的政治立场。\n\n本页把“开放性（Openness to Experience）：好奇心、想象力与对新体验的接纳”放在 Big Five 的连续维度框架中解释（[S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)）。下文六个侧面使用 NEO/IPIP-NEO 词汇；IPIP 官方说明这些量表测量的是与 NEO 侧面相似的构念，而 BFI-2 采用不同的 15 侧面架构（[S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)；[S2](https://pubmed.ncbi.nlm.nih.gov/27055049/)）。这些命名不能跨量表视为完全等同。\n\n费马测试尚未在本包中公开该页面对应分数的产品级信度、效度、中文常模或个体预测证据。正文只用于自我观察与教育说明，不用于临床诊断、招聘筛选、升学录取或替代职业决定。\n\n> **内容方法与更新时间**：本内容由 FermatMind Editorial 在 AI 辅助起草基础上，根据公开人格心理学来源进行术语、边界与证据核验。内容用于自我认知与教育说明，不构成临床诊断、招聘筛选或个体结果预测。实质更新：2026-07-18；审阅方式：solo_operator；未经过临床专家审阅。\n\n---",
+          "heading": "证据与解释边界",
+          "key": "section-01-11bfe64c6b",
+          "kind": "rich_text"
+        },
+        {
+          "body": "开放性关注的核心问题是：**当你遇到不熟悉的观念、体验或表达方式时，你倾向于靠近、观察和尝试，还是倾向于保持、验证和锁定？**\n\n倾向较高的人通常对陌生事物抱有主动的好奇，愿意在行动前先想象多种可能，享受抽象思考，对艺术、哲学和科学话题有自然的亲近感。倾向较低的人更看重可预测、可操作和已经验证过的路径，倾向于在熟悉的框架中高效工作，而不是不断引入新变量。\n\n两个方向在不同任务和情境中各有功能。开放性较高的优势在于探索、创意和适应变化；开放性较低的优势在于稳定、专注和深度执行。\n\n---",
+          "heading": "开放性在观察什么",
+          "key": "section-02-cf8efa22e5",
+          "kind": "rich_text"
+        },
+        {
+          "body": "- **不是智力或智商**。开放性高的人不一定更聪明，开放性低的人不一定更迟钝。开放性描述的是对新事物\"要不要靠近\"，不是大脑的运算速度。\n- **不是受教育程度**。开放性不能由学历推断；教育经历与人格特质可能共同受到许多背景因素影响，本页不提供具体相关程度或因果解释。\n- **不是政治或文化立场**。这里的\"开放\"不是指某种政治倾向，也不是指对社会规范的遵守程度。它是关于认知和行为层面的接近倾向，不是意识形态。\n- **不是创造力本身**。开放性不等于创造力。创造表现还涉及领域知识、技能、任务条件和动机；本页不把某个开放性分数解释为创造能力。\n\n---",
+          "heading": "开放性不是什么",
+          "key": "section-03-db40d8c469",
+          "kind": "rich_text"
+        },
+        {
+          "body": "**倾向较高时（高开放性）**：容易被新观念吸引；享受抽象和理论性的讨论；愿意尝试没做过的事；对艺术、音乐和自然美敏感；可能同时启动多个项目但难以收尾；有时在需要遵循既定流程的场合感到束缚。\n\n**倾向较低时（低开放性）**：偏好熟悉和可预测的环境；更重视实用性和效率而非新鲜感；倾向于用已知方法解决问题而非寻找新方法；在执行重复性任务时更稳定；可能对新变化持谨慎甚至怀疑态度；有时在需要快速适应的环境中感到压力。\n\n**中间分数**：可能在不同领域表现出不同的开放性倾向。例如，在知识领域好奇但在行动上保守，或者在工作中有探索精神但在日常生活中偏爱惯例。\n\n---",
+          "heading": "连续谱两端的行为倾向",
+          "key": "section-04-6bc93e76d0",
+          "kind": "rich_text"
+        },
+        {
+          "body": "开放性不是单一倾向，它由六个更具体的侧面组成：\n\n| 侧面 | 含义 |\n|------|------|\n| 想象力（Imagination） | 内心世界的丰富程度，是否经常做白日梦、构思场景或想象可能性 |\n| 审美（Aesthetics） | 对艺术、音乐、自然美和形式美感的敏感度和兴趣 |\n| 情感体验（Feelings） | 对自己内心情绪体验的关注程度和区分能力 |\n| 行动尝试（Actions） | 愿意尝试新活动、去新地方、做不一样的事 |\n| 想法探索（Ideas） | 对抽象概念、理论问题和知识探索的兴趣 |\n| 价值观开放（Values） | 愿意审视和重新评估自己的价值观、社会规范和传统 |\n\n两个开放性总分相同的人，可能在完全不同的侧面上得分很高——一个人高在想象力、审美和情感体验，另一个人高在想法探索和行动尝试。这就是为什么进入侧面分析有助于理解\"究竟是哪一种开放性\"。\n\n---",
+          "heading": "开放性的六个侧面",
+          "key": "section-05-9a35c820be",
+          "kind": "rich_text"
+        },
+        {
+          "body": "高开放性的人在学习中倾向于跨领域探索——他们对一门学科的兴趣可能很快延伸到相邻领域，阅读范围宽泛，喜欢把不同来源的信息联系起来。优势是知识面广、能看到跨领域的联系；代价是可能\"贪多嚼不烂\"，在需要深入一门学科时容易分心。\n\n低开放性的人在学习中倾向于深度而非广度——他们偏好结构清晰的课程、可操作的方法和明确的评估标准。优势是知识扎实、不易被潮流带着走；代价是可能错过跨领域的洞见或新方法。\n\n实用建议：高开放性的人可以刻意安排\"收尾时间\"——每学完一个主题后用半小时整理笔记和输出，而不是直接跳到下一个。低开放性的人可以定期安排\"探索时间\"——每周花一小时接触一个不熟悉的领域，不做要求，只是接触。\n\n---",
+          "heading": "学习与任务场景",
+          "key": "section-06-04b458c3fd",
+          "kind": "rich_text"
+        },
+        {
+          "body": "这段只能用于比较工作环境的任务要求，不能据此判断职业适配、工作表现或任用结果。职业探索还需结合技能、兴趣、经验、机会、工作样本和现实约束。\n\n在团队协作中，开放性高的人可能更快接受新工具和新流程，但也可能因为频繁提出改变而让偏好稳定的同事感到疲惫。开放性低的人可能是团队中\"守住底线\"的力量，但也可能在需要创新时成为阻力。有效的协作不是评判谁对谁错，而是根据任务阶段分配不同的角色权重。\n\n---",
+          "heading": "工作与协作场景",
+          "key": "section-07-0ded043485",
+          "kind": "rich_text"
+        },
+        {
+          "body": "开放性高的人在沟通中喜欢用比喻、假设和\"如果……会怎样\"的句式。他们可能从一个话题跳到另一个话题，对抽象讨论有耐心，对细节叙述可能不耐烦。\n\n开放性低的人在沟通中更直接、更务实。他们倾向于\"先说结论，再说过程\"，对漫无边际的讨论容易失去耐心。这不是\"不会聊天\"，而是沟通偏好不同。\n\n在亲密关系中，开放性差异可能导致兴趣重叠范围较小——一方想尝试新餐厅、新活动、新话题，另一方更愿意待在熟悉的舒适区。这不一定是问题，前提是双方都理解这是偏好而不是拒绝——并且在某些事情上主动跨出舒适区，在另一些事情上尊重对方的边界。\n\n---",
+          "heading": "沟通和关系场景",
+          "key": "section-08-44cba4fb6f",
+          "kind": "rich_text"
+        },
+        {
+          "body": "高开放性的人在压力下可能表现为\"过度发散\"——面对问题时想出太多方案却难以选择，或者在焦虑时通过不断寻找新信息来回避行动。低开放性的人在压力下可能表现为\"过度固着\"——死死抓住已知方案不放，拒绝考虑任何新方法，即使现有方案明显无效。\n\n了解自己的默认压力反应有助于提前准备：高开放性的人可以给自己设一个\"截止探索、开始执行\"的时间点；低开放性的人可以在压力小的时候建立\"备用方案库\"，这样在压力大时有备选可以调用而不需要当场想新办法。\n\n---",
+          "heading": "压力情境",
+          "key": "section-09-79e51e433b",
+          "kind": "rich_text"
+        },
+        {
+          "body": "| 倾向 | 潜在优势 | 伴随代价 |\n|------|---------|---------|\n| 较高 | 好奇心强、学习面广、适应变化快、有创造性思维 | 可能难以收尾、容易分心、对日常惯例不耐烦、可能高估新事物的价值 |\n| 较低 | 稳定可靠、深度专注、务实高效、不容易被潮流带走 | 可能错过新机会、面对变化适应较慢、可能过早否定新方法 |\n\n优势与代价不是固定的，取决于具体情境。同一个特质在创业初期是资产，在公司进入稳定运营阶段可能变成负担。\n\n---",
+          "heading": "潜在优势与伴随代价",
+          "key": "section-10-f802db4f05",
+          "kind": "rich_text"
+        },
+        {
+          "body": "开放性是最受情境影响的维度之一。一个在旅行中高度开放的人，可能在工作流程中极度保守。一个在技术选型上不断尝新的人，可能在饮食上几十年不变。\n\n**场景**：张老师教了二十年物理，课堂结构和教学方法几乎没有变过。但他在业余时间自学了三门外语、参加过天文观测营、把家里的书房改成了小型电子工坊。他的\"低开放性\"只出现在教学场景中——不是因为缺乏好奇，而是因为他对\"什么需要稳、什么可以变\"有自己清晰的判断标准。\n\n这说明：不要把某一领域的表现推广到整个人格判断。跨情境观察是理解开放性的关键。\n\n---",
+          "heading": "情境变化与反例",
+          "key": "section-11-4ab694c5ce",
+          "kind": "rich_text"
+        },
+        {
+          "body": "1. 回忆最近三次遇到新事物（一个新工具、一个新话题、一个新地方）时的第一反应——是兴奋多于谨慎，还是谨慎多于兴奋？\n2. 检查你的浏览记录或书架——你最近接触的内容是集中在熟悉的领域，还是分散在不同领域？\n3. 问一个了解你的人：你觉得我在什么时候最有好奇心？在什么时候最固执？\n\n观察时注意区分\"感兴趣\"和\"去做了\"：你可能对很多事都感到好奇（高想象力、高想法探索），但很少真的去尝试（低行动尝试）。这本身就是有价值的自我认知。也值得留意开放性的方向性——有人在智识上高度开放但在身体体验上保守，有人在审美上敏感但在价值观上传统。开放性不是一个单一开关，而是一组在不同方向上不同强度的倾向。\n\n---",
+          "heading": "如何观察自己的开放性",
+          "key": "section-12-40834428be",
+          "kind": "rich_text"
+        },
+        {
+          "body": "如果你的开放性得分较高，阅读重点不是确认\"我喜欢新事物\"，而是问：这种倾向在什么时候帮到了你，在什么时候让你付出了代价？如果你总是被新项目吸引而难以完成现有的，你可能需要的不是更高的开放性，而是从尽责性中借一些收尾策略。\n\n如果你的开放性得分较低，阅读重点不是\"我是不是太保守了\"，而是问：我的务实和专注在什么时候是优势？在什么时候可能让我错过了有用的信息或机会？如果你的答案显示在某些领域确实需要更多灵活性，可以从侧面中的某一个（比如行动尝试）开始做小范围尝试。\n\n---",
+          "heading": "如何阅读开放性报告",
+          "key": "section-13-9ed501d377",
+          "kind": "rich_text"
+        },
+        {
+          "body": "- 分数区间：[高开放性](/zh/personality/big-five/openness-high) · [中等开放性](/zh/personality/big-five/openness-mid) · [低开放性](/zh/personality/big-five/openness-low)\n- 六个侧面：[想象力](/zh/personality/big-five/facets/imagination) · [审美](/zh/personality/big-five/facets/aesthetics) · [情感体验](/zh/personality/big-five/facets/feelings) · [行动尝试](/zh/personality/big-five/facets/actions) · [想法探索](/zh/personality/big-five/facets/ideas) · [价值观开放](/zh/personality/big-five/facets/values)\n- 返回：[大五人格总览](/zh/personality/big-five) · [30 个侧面总览](/zh/personality/big-five/facets)",
+          "heading": "继续阅读",
+          "key": "section-14-0455f40b14",
+          "kind": "rich_text"
+        }
+      ],
+      "seo": [],
+      "sitemap_eligible": true,
+      "slug": "big-five/openness",
+      "source_hash": "9bb21991471a9811deeed81bb612fc34006de82866f5d95bba4886f72b308b37",
+      "source_package": "big5-zh-v3-52-page-release",
+      "summary": "开放性关注你接触新观念、新体验和新审美的方式。高开放性不意味着聪明，低开放性不意味着保守——它们描述的是倾向，不是能力。",
+      "title": "开放性（Openness to Experience）：好奇心、想象力与对新体验的接纳"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": {
+          "name": "FermatMind Editorial",
+          "organization": "FermatMind",
+          "role": "Editorial"
+        }
+      },
+      "schema_eligible": false,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "openness-measurement_method-1",
+            "limitation": "不同 Big Five/FFM 工具的层级与计分不能视为相同。",
+            "source_ids": [
+              "S1",
+              "S11",
+              "S2"
+            ],
+            "support_level": "contextual"
+          },
+          {
+            "claim_id": "openness-cognitive_association-2",
+            "limitation": "不同人格层级与认知能力类型的关系不相同，不能用人格分数预测个人智力。",
+            "source_ids": [
+              "S10"
+            ],
+            "support_level": "direct"
+          },
+          {
+            "claim_id": "openness-product-boundary",
+            "limitation": "这是公开的产品/方法边界声明，不是经验性研究结论。",
+            "source_ids": [],
+            "support_level": "not_required"
+          },
+          {
+            "claim_id": "openness-content-method",
+            "limitation": "这是公开的产品/方法边界声明，不是经验性研究结论。",
+            "source_ids": [],
+            "support_level": "not_required"
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "模型研究不等于费马测试产品验证。",
+          "不用于临床诊断、招聘筛选、升学录取或个体结果预测。"
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Goldberg, L. R.",
+            "claim_ids": [
+              "openness-measurement_method-1"
+            ],
+            "doi": "10.1037/0022-3514.59.6.1216",
+            "id": "S1",
+            "limitation": "PMID、题名、作者、年份和 DOI 一致；用于五维结构与词汇研究背景，不用于产品级效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
+            "source_type": "peer_reviewed_research",
+            "title": "An alternative 'description of personality': The Big-Five factor structure",
+            "year": 1990
+          },
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Oregon Research Institute IPIP project",
+            "claim_ids": [
+              "openness-measurement_method-1"
+            ],
+            "doi": null,
+            "id": "S11",
+            "limitation": "IPIP 官方说明明确区分 lexical Big Five、FFM、BFI 与 NEO/IPIP 体系，并使用 ‘similar constructs’ 而非量表等同。具体条目映射见 https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm。 该官方网页未标注出版年；year 记录本次公开核验的访问快照年，不代表出版年份。",
+            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
+            "source_type": "official_documentation",
+            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
+            "year": 2026
+          },
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Soto, C. J.; John, O. P.",
+            "claim_ids": [
+              "openness-measurement_method-1"
+            ],
+            "doi": "10.1037/pspp0000096",
+            "id": "S2",
+            "limitation": "PMID 与 DOI 核验一致；BFI-2 的 15-facet 架构只用于说明不同量表的下位结构并不相同。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+            "source_type": "peer_reviewed_research",
+            "title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+            "year": 2017
+          },
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Stanek, K. C.; Ones, D. S.",
+            "claim_ids": [
+              "openness-cognitive_association-2"
+            ],
+            "doi": "10.1073/pnas.2212794120",
+            "id": "S10",
+            "limitation": "PNAS 正式页面核验题名、作者、DOI 和出版信息；用于否定把开放性等同于智力的简化推断。",
+            "public_url": "https://www.pnas.org/doi/10.1073/pnas.2212794120",
+            "source_type": "peer_reviewed_research",
+            "title": "Meta-analytic relations between personality and cognitive ability",
+            "year": 2023
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "56f957c6cad980243aeb41083aac1db842a35f632a519722a33515a0f1dfd3fe"
+}

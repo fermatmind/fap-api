@@ -1,0 +1,373 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-1",
+    "entity_key": "type-1",
+    "entity_type": "core_type",
+    "framework": "enneagram",
+    "page_kind": "core_type",
+    "slug": "enneagram/type-1"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-1"
+      },
+      "canonical_path": "/en/personality/enneagram/type-1",
+      "code": "type-1",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-1",
+      "entity_type": "core_type",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.application.exploratory_not_predictive",
+            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
+            "source_ids": [
+              "sutton_2013_work_outcomes",
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.application.exploratory_not_predictive",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
+            "claim_ids": [
+              "claim.application.exploratory_not_predictive"
+            ],
+            "doi": "10.1016/j.emj.2012.12.004",
+            "id": "sutton_2013_work_outcomes",
+            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
+            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
+            "source_type": "peer_reviewed_research",
+            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
+            "year": 2013
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Proofreading may come from job design, language learning, fear of criticism, client requirements, or practiced skill. A Type One hypothesis becomes more useful only when attention to standards recurs across comparable choices and meaningful counterexamples are actively considered.",
+          "question": "Is frequent proofreading enough to identify Type One?"
+        },
+        {
+          "answer": "Compare situations with and without external evaluation. Record the discrepancy noticed, the repair proposed, the cost accepted, and what happens when another person offers a credible alternative standard. The hypothesis should weaken if correction disappears when role pressure changes.",
+          "question": "How can someone test whether correction is the organizing concern?"
+        },
+        {
+          "answer": "Choose one reversible decision and define a sufficient stopping rule before work begins. After delivery, compare the feared consequence with the observed result, invite one specific piece of feedback, and decide whether another revision would create measurable value or merely relieve internal tension.",
+          "question": "What is a useful Type One growth experiment?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-1",
+        "reciprocal": true,
+        "translation_group": "enneagram:core_type:type-1",
+        "x-default": "/en/personality/enneagram/type-1",
+        "zh-CN": "/zh/personality/enneagram/type-1"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/centers/gut",
+          "label": "center:gut",
+          "relationship": "center_membership",
+          "target_identity_key": "center:gut"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/1w9",
+          "label": "wing:1w9",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:1w9"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/1w2",
+          "label": "wing:1w2",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:1w2"
+        },
+        {
+          "href": "/en/personality/enneagram/type-1/instincts/self-preservation",
+          "label": "instinctual_subtype:type-1/self-preservation",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-1/self-preservation"
+        },
+        {
+          "href": "/en/personality/enneagram/type-1/instincts/social",
+          "label": "instinctual_subtype:type-1/social",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-1/social"
+        },
+        {
+          "href": "/en/personality/enneagram/type-1/instincts/one-to-one",
+          "label": "instinctual_subtype:type-1/one-to-one",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-1/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.application.exploratory_not_predictive",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "A Type One motivation hypothesis asks whether attention repeatedly returns to what should be corrected, made consistent, or completed responsibly. The visible behavior alone cannot reveal motive: the same careful edit may reflect fear of penalties, professional training, kindness to a reader, or a temporary deadline.",
+          "key": "motivation_attention",
+          "title": "Track attention before inferring motive"
+        },
+        {
+          "body_md": "To distinguish behavior from motive, compare the stated standard, the edit that was actually made, and the cost the person accepted. A neat document or firm rule is not enough; test whether improvement remains the organizing concern when praise, authority, and external monitoring are removed.",
+          "key": "behavior_motive",
+          "title": "Separate correction behavior from motive"
+        },
+        {
+          "body_md": "In decisions, note whether error prevention outranks speed; in feedback, note whether specific corrections arrive before appreciation; in conflict, note whether the disagreement centers on method, responsibility, or fairness. Compare Type One feedback with role expectations because editors, auditors, caregivers, and new managers may all sound corrective for different reasons.",
+          "key": "decision_feedback_conflict",
+          "title": "Compare decisions, feedback, and conflict"
+        },
+        {
+          "body_md": "Careful standards can support dependable follow-through, error detection, and principled restraint. The tradeoff may appear when revision continues beyond the decision's value, when frustration leaks into tone, or when a workable alternative is rejected before its actual consequences are tested.",
+          "key": "strengths_tradeoffs",
+          "title": "Hold strengths beside tradeoffs"
+        },
+        {
+          "body_md": "At work, the hypothesis might fit a teammate who documents a defect and proposes a repair before assigning blame. In a close relationship, it might fit someone who renegotiates an agreement after noticing inconsistency. These examples offer no basis for conclusions about job performance, compatibility, income, or relationship outcomes.",
+          "key": "work_relationship_examples",
+          "title": "Use examples without forecasting outcomes"
+        },
+        {
+          "body_md": "The 1w9 wing hypothesis adds measured pacing and distance from open friction, while 1w2 adds direct involvement in helping or improving with others. Common mistypes include role-based conscientiousness, anxiety-driven checking, achievement discipline, learned compliance, and anger managed through professional etiquette.",
+          "key": "wings_mistypes",
+          "title": "Compare both wings and common mistypes"
+        },
+        {
+          "body_md": "A Type One counterexample weakens a correction hypothesis when the person repeatedly ignores known defects, changes standards to protect status, or chooses experimentation over consistency in comparable decisions. Ask whether fatigue, incentives, safety, culture, expertise, or another Enneagram hypothesis explains the observed pattern better.",
+          "key": "counterexample",
+          "title": "Use disconfirming cases"
+        },
+        {
+          "body_md": "Use this page to form questions for self-observation and conversation, then revise them against evidence. Do not use it to diagnose health or personality, screen applicants, settle relationship disputes, assign ability, or make a permanent identity claim.",
+          "key": "use_boundary",
+          "title": "Keep the page useful and bounded"
+        },
+        {
+          "body_md": "Duration: 6\n\nContext: Choose three recurring decisions that involve a shared standard, a visible deadline, and another person who can describe what happened.\n\nObservable signal: Record the first discrepancy named, the correction proposed, the time spent revising, and the other person's observable response.\n\nPage-specific signal: Mark when a sufficient stopping rule is accepted, renegotiated with evidence, or ignored in favor of another round of correction.\n\nAlternative explanation: For each event, compare professional training, role accountability, fear of criticism, fatigue, incentives, and situational risk with the Type One hypothesis.\n\nReflection prompt: Identify the strongest counterexample, then state which future observation would support revising or discarding the standards-and-correction interpretation.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "For each event, compare professional training, role accountability, fear of criticism, fatigue, incentives, and situational risk with the Type One hypothesis.",
+            "context": "Choose three recurring decisions that involve a shared standard, a visible deadline, and another person who can describe what happened.",
+            "duration_days": 6,
+            "observable_signal": "Record the first discrepancy named, the correction proposed, the time spent revising, and the other person's observable response.",
+            "page_specific_signal": "Mark when a sufficient stopping rule is accepted, renegotiated with evidence, or ignored in favor of another round of correction.",
+            "reflection_prompt": "Identify the strongest counterexample, then state which future observation would support revising or discarding the standards-and-correction interpretation."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "Type One is a traditional Enneagram hypothesis about attention returning to standards, discrepancies, and responsible correction. Observing Type One attention means comparing what a person notices, what they actually revise, and whether the same pattern survives different roles; it does not turn conscientious behavior into proof of a fixed type.",
+        "title": "Type One: standards, correction, and a revisable attention hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-1",
+      "source_hash": "0a1117425efe7ae94c36ab2ca81a160d754a7d1b095012b6a16361e02e1162e1",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "Type One is a traditional Enneagram hypothesis about attention returning to standards, discrepancies, and responsible correction. Observing Type One attention means comparing what a person notices, what they actually revise, and whether the same pattern survives different roles; it does not turn conscientious behavior into proof of a fixed type.",
+      "title": "Type One: standards, correction, and a revisable attention hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.application.exploratory_not_predictive",
+            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
+            "source_ids": [
+              "sutton_2013_work_outcomes",
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.application.exploratory_not_predictive",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
+            "claim_ids": [
+              "claim.application.exploratory_not_predictive"
+            ],
+            "doi": "10.1016/j.emj.2012.12.004",
+            "id": "sutton_2013_work_outcomes",
+            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
+            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
+            "source_type": "peer_reviewed_research",
+            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
+            "year": 2013
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "4ac015336e75ba851c10caf8cece77461e30e6d7e54a913440c6dfe67548b405"
+}

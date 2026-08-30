@@ -1,0 +1,335 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-5/instincts/social",
+    "entity_key": "type-5/social",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-5/instincts/social"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-5/instincts/social"
+      },
+      "canonical_path": "/en/personality/enneagram/type-5/instincts/social",
+      "code": "type-5/social",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-5/social",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Employment duties, academic rank, licensure, community need, and unequal access may determine who teaches or holds credentials. Compare participation where formal status is removed.",
+          "question": "Do credentials or teaching establish social Type Five?"
+        },
+        {
+          "answer": "Use the same topic and person, then match invitation, audience familiarity, and decision authority. Differences that track hierarchy or access support an environmental explanation.",
+          "question": "How should knowledge roles be compared across groups?"
+        },
+        {
+          "answer": "Comfortable role-free participation, sharing incomplete ideas, accepting correction, and finding belonging outside expertise should all reduce confidence in this subtype account.",
+          "question": "What counterexample weakens the knowledge-role hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-5/instincts/social",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-5/social",
+        "x-default": "/en/personality/enneagram/type-5/instincts/social",
+        "zh-CN": "/zh/personality/enneagram/type-5/instincts/social"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-5",
+          "label": "core_type:type-5",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-5"
+        },
+        {
+          "href": "/en/personality/enneagram/type-5/instincts/self-preservation",
+          "label": "instinctual_subtype:type-5/self-preservation",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-5/self-preservation"
+        },
+        {
+          "href": "/en/personality/enneagram/type-5/instincts/one-to-one",
+          "label": "instinctual_subtype:type-5/one-to-one",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-5/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "Within a Type Five hypothesis, the social subtype may emphasize contributing through a recognized field of knowledge or locating one's role through shared standards. This does not make expertise a personality essence.",
+          "key": "traditional_hypothesis",
+          "title": "Frame expertise as a secondary relational observation"
+        },
+        {
+          "body_md": "Observe the same person sharing one topic with peers who have equal access and with a group structured by credentials or status. Compare participation after authority, invitation, and audience familiarity are matched.",
+          "key": "matched_comparison",
+          "title": "Compare the same knowledge across equal and unequal groups"
+        },
+        {
+          "body_md": "The social label organizes observations about roles and knowledge exchange rather than evidence about bodily mechanisms, neural organization, or an inborn social system.",
+          "key": "instinct_boundary",
+          "title": "Keep group language non-mechanistic"
+        },
+        {
+          "body_md": "A person may enjoy gatherings, ask beginner questions, or contribute outside formal expertise while still using knowledge as one route into a group. Sociability level alone is not the construct.",
+          "key": "countertype_variation",
+          "title": "Allow ordinary sociability and broad participation"
+        },
+        {
+          "body_md": "Academic and professional hierarchies decide who may speak, whose knowledge counts, and which vocabulary signals membership. Education cost, language, disability access, discrimination, and seniority can shape participation.",
+          "key": "alternative_environment",
+          "title": "Examine credentialing and access before subtype"
+        },
+        {
+          "body_md": "Confidence should fall when the person participates comfortably without expertise, shares unfinished knowledge among peers, accepts correction without role threat, and builds belonging through activities unrelated to credentials.",
+          "key": "counterexample",
+          "title": "Challenge the hypothesis with role-free contribution"
+        },
+        {
+          "body_md": "Instrument-specific evidence cannot establish universal subtype ontology or cross-cultural equivalence. Record who grants authority and who bears exclusion before using this reversible hypothesis.",
+          "key": "evidence_boundary",
+          "title": "Limit inference to the observed group context"
+        },
+        {
+          "body_md": "Duration: 5\n\nContext: Across five days, observe one peer group, one credentialed setting, and one informal community activity.\n\nObservable signal: Record invitation, formal role, topic familiarity, vocabulary, who may correct whom, access barriers, and contribution made.\n\nPage-specific signal: Compare the same knowledge exchange after authority and audience familiarity are held as constant as possible.\n\nAlternative explanation: Check credentialing, academic hierarchy, professional duty, language, seniority, discrimination, and unequal access.\n\nReflection prompt: Find one role-free contribution that created belonging and use it to challenge the subtype hypothesis.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Check credentialing, academic hierarchy, professional duty, language, seniority, discrimination, and unequal access.",
+            "context": "Across five days, observe one peer group, one credentialed setting, and one informal community activity.",
+            "duration_days": 5,
+            "observable_signal": "Record invitation, formal role, topic familiarity, vocabulary, who may correct whom, access barriers, and contribution made.",
+            "page_specific_signal": "Compare the same knowledge exchange after authority and audience familiarity are held as constant as possible.",
+            "reflection_prompt": "Find one role-free contribution that created belonging and use it to challenge the subtype hypothesis."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "Type Five social is a traditional subtype hypothesis about attention to a knowledge role, valued expertise, and how understanding is exchanged within a group. Teaching, credentials, specialized language, or selective participation does not establish subtype because academic hierarchy, professional duties, credentialing, unequal access, status rules, and community norms may produce the same pattern.",
+        "title": "Type Five social: a knowledge-role and group expertise hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-5/instincts/social",
+      "source_hash": "15bf5b9ad13396f5e48c31f9e32ecad286b9dd61908d123ea3c0a42ee62f791d",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "Type Five social is a traditional subtype hypothesis about attention to a knowledge role, valued expertise, and how understanding is exchanged within a group. Teaching, credentials, specialized language, or selective participation does not establish subtype because academic hierarchy, professional duties, credentialing, unequal access, status rules, and community norms may produce the same pattern.",
+      "title": "Type Five social: a knowledge-role and group expertise hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "1ecc0ed5a1cf08feb3940a8ebfccb659017505f5e2327c6a0b563402855353d2"
+}

@@ -1,0 +1,287 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/centers/gut",
+    "entity_key": "gut",
+    "entity_type": "center",
+    "framework": "enneagram",
+    "page_kind": "center",
+    "slug": "enneagram/centers/gut"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/centers/gut"
+      },
+      "canonical_path": "/en/personality/enneagram/centers/gut",
+      "code": "gut",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "gut",
+      "entity_type": "center",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Quick action can reflect urgency, training, authority, habit, or safety demands. Compare the stated concern, the visible sequence, and at least one event in which similar pressure produced a different response.",
+          "question": "Is quick action enough to identify a gut-center pattern?"
+        },
+        {
+          "answer": "Yes. A quiet response may involve deliberate restraint, postponed conflict, uncertainty, or situational caution. The useful question is how pressure was handled, not whether the person looked forceful.",
+          "question": "Can a quiet response still belong in a gut-center comparison?"
+        },
+        {
+          "answer": "Correction usually refers to bringing action closer to a standard, while direct resistance focuses on contesting control or intrusion. In practice the same behavior can serve either motive, so the distinction needs examples and counterexamples.",
+          "question": "What distinguishes correction from direct resistance?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/centers/gut",
+        "reciprocal": true,
+        "translation_group": "enneagram:center:gut",
+        "x-default": "/en/personality/enneagram/centers/gut",
+        "zh-CN": "/zh/personality/enneagram/centers/gut"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-8",
+          "label": "core_type:type-8",
+          "relationship": "center_member",
+          "target_identity_key": "core_type:type-8"
+        },
+        {
+          "href": "/en/personality/enneagram/type-9",
+          "label": "core_type:type-9",
+          "relationship": "center_member",
+          "target_identity_key": "core_type:type-9"
+        },
+        {
+          "href": "/en/personality/enneagram/type-1",
+          "label": "core_type:type-1",
+          "relationship": "center_member",
+          "target_identity_key": "core_type:type-1"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "To observe gut center clues, choose a moment when a boundary, deadline, or unfair demand became salient. Note the first visible move, the words used to justify it, whether energy moved toward confrontation, delay, or correction, and what happened after the pressure changed.",
+          "key": "observable_pattern",
+          "title": "Notice the pressure-to-action sequence"
+        },
+        {
+          "body_md": "Eight, Nine, and One differ in the traditional account: Eight may test power through direct engagement, Nine may preserve steadiness by postponing friction, and One may compare action with an internal standard. These are prompts for observation, not rules, and any person may show another response.",
+          "key": "within_center_difference",
+          "title": "Eight, Nine, and One differ within the center"
+        },
+        {
+          "body_md": "A counterexample should match the original event in stakes and authority while showing a different response. Let the counterexample change the gut hypothesis if role permission, fatigue, safety, practiced negotiation, cultural expectations, or the specific relationship better accounts for the action.",
+          "key": "counterexample",
+          "title": "Use a calm counterexample"
+        },
+        {
+          "body_md": "The center label does not define a medical category. It does not identify a neurological system or a fixed bodily capacity. Bodily sensations may be useful observations, but they do not prove motive, type, competence, or a future result.",
+          "key": "boundary",
+          "title": "Do not turn instinct into anatomy"
+        },
+        {
+          "body_md": "Duration: 4\n\nContext: Track four boundary or deadline moments with comparable stakes, including who had authority and whether direct disagreement was safe.\n\nObservable signal: Record the first visible action, the exact boundary or standard named, the time before responding, and whether the person confronted, deferred, corrected, or changed course.\n\nPage-specific signal: Compare direct pushback, delayed engagement, and standards-based correction rather than treating all decisive behavior as the same gut-center clue.\n\nAlternative explanation: For each event, note whether urgency, job role, fatigue, safety, culture, learned negotiation, or relationship history could explain the response without a center hypothesis.\n\nReflection prompt: Identify one calm or low-pressure counterexample and explain whether it weakens the proposed Eight, Nine, or One comparison.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "For each event, note whether urgency, job role, fatigue, safety, culture, learned negotiation, or relationship history could explain the response without a center hypothesis.",
+            "context": "Track four boundary or deadline moments with comparable stakes, including who had authority and whether direct disagreement was safe.",
+            "duration_days": 4,
+            "observable_signal": "Record the first visible action, the exact boundary or standard named, the time before responding, and whether the person confronted, deferred, corrected, or changed course.",
+            "page_specific_signal": "Compare direct pushback, delayed engagement, and standards-based correction rather than treating all decisive behavior as the same gut-center clue.",
+            "reflection_prompt": "Identify one calm or low-pressure counterexample and explain whether it weakens the proposed Eight, Nine, or One comparison."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "The gut center is a traditional Enneagram grouping for Types Eight, Nine, and One. A gut-center observation asks what happens when pressure calls for action, resistance, restraint, or correction; it does not mean that bodily instinct controls every choice, and the three types can respond quite differently.",
+        "title": "Gut center: observe how action meets pressure"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/centers/gut",
+      "source_hash": "fceffd48a4077dcbbd574e0f29161c964a66130960c3155712396b073fd5fdae",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "The gut center is a traditional Enneagram grouping for Types Eight, Nine, and One. A gut-center observation asks what happens when pressure calls for action, resistance, restraint, or correction; it does not mean that bodily instinct controls every choice, and the three types can respond quite differently.",
+      "title": "Gut center: observe how action meets pressure"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "b8085c8b1fe946337d6b600033f335b069167b341c2ed1553efc71e5d01bd52d"
+}

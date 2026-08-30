@@ -1,0 +1,373 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh/personality/enneagram/type-7",
+    "entity_key": "type-7",
+    "entity_type": "core_type",
+    "framework": "enneagram",
+    "page_kind": "core_type",
+    "slug": "enneagram/type-7"
+  },
+  "locale": "zh-CN",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh/personality/enneagram/type-7"
+      },
+      "canonical_path": "/zh/personality/enneagram/type-7",
+      "code": "type-7",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-7",
+      "entity_type": "core_type",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.application.exploratory_not_predictive",
+            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
+            "source_ids": [
+              "sutton_2013_work_outcomes",
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.application.exploratory_not_predictive",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
+            "claim_ids": [
+              "claim.application.exploratory_not_predictive"
+            ],
+            "doi": "10.1016/j.emj.2012.12.004",
+            "id": "sutton_2013_work_outcomes",
+            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
+            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
+            "source_type": "peer_reviewed_research",
+            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
+            "year": 2013
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "兴趣广可能来自教育路径、组合职业、真实好奇、注意力差异或经济需要。还要观察保留选项的具体功能，并让长期专注和稳定收尾成为有效反例。",
+          "question": "兴趣很多为什么不能直接判为第七型？"
+        },
+        {
+          "answer": "现实乐观会先核对成本、承认受影响的人和未完成事项，再提出可执行路线；如果积极解释让具体修复消失，就更像需要继续检验的重构行为。",
+          "question": "怎样区分现实乐观与回避具体影响？"
+        },
+        {
+          "answer": "在诱人机会出现时仍按约完成乏味任务，明确承认失望，并且不靠启动新项目缓解选择损失，是削弱该假设的重要观察；还应核对这种选择是否在不同场景重复出现。",
+          "question": "哪种承诺行为最能削弱未来规划假设？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-7",
+        "reciprocal": true,
+        "translation_group": "enneagram:core_type:type-7",
+        "x-default": "/en/personality/enneagram/type-7",
+        "zh-CN": "/zh/personality/enneagram/type-7"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh/personality/enneagram/centers/head",
+          "label": "center:head",
+          "relationship": "center_membership",
+          "target_identity_key": "center:head"
+        },
+        {
+          "href": "/zh/personality/enneagram/wings/7w6",
+          "label": "wing:7w6",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:7w6"
+        },
+        {
+          "href": "/zh/personality/enneagram/wings/7w8",
+          "label": "wing:7w8",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:7w8"
+        },
+        {
+          "href": "/zh/personality/enneagram/type-7/instincts/self-preservation",
+          "label": "instinctual_subtype:type-7/self-preservation",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-7/self-preservation"
+        },
+        {
+          "href": "/zh/personality/enneagram/type-7/instincts/social",
+          "label": "instinctual_subtype:type-7/social",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-7/social"
+        },
+        {
+          "href": "/zh/personality/enneagram/type-7/instincts/one-to-one",
+          "label": "instinctual_subtype:type-7/one-to-one",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-7/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-CN",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.application.exploratory_not_predictive",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "同时推进多件事可能来自岗位要求、收入组合、需求频繁变化或真实好奇。应记录新增选项解决了什么问题，以及已经选定的责任是否因此失去负责人和截止时间。",
+          "key": "behavior_motive",
+          "title": "先区分活跃表现与保留选项的功能"
+        },
+        {
+          "body_md": "记录限制出现后最先被看见的内容：现实成本、当下感受、他人反馈，还是新的路线。只有跨场景反复出现的顺序，才值得形成暂时假设。",
+          "key": "motivation_attention",
+          "title": "观察注意力何时转向下一种可能"
+        },
+        {
+          "body_md": "可能性注意可以支持创意连接、即兴应变、鼓舞士气与挫折后的重新组织；若新鲜感取代兑现、风险被过早乐观化，或收尾长期转给别人，就出现可观察代价。",
+          "key": "strengths_tradeoffs",
+          "title": "把生成能力与收尾成本同时计入"
+        },
+        {
+          "body_md": "在选择时记录关闭选项的标准；在反馈或冲突中，观察是否停留在具体影响、提出修复并按时返回，还是迅速换框架、解释积极面并开始更吸引人的未来计划。",
+          "key": "decision_feedback_conflict",
+          "title": "用决定、反馈和失望检验假设"
+        },
+        {
+          "body_md": "7w6 假设更关注协商、后备方案与同伴支持，7w8 假设更关注自主、资源杠杆与直接推进。还应比较第三型节奏、第五型好奇、注意力差异、需要专业帮助的情绪高涨症状、销售激励和居住不稳。",
+          "key": "wings_mistypes",
+          "title": "比较翼型与常见相似来源"
+        },
+        {
+          "body_md": "工作中要区分负责提出备选方案的策略岗位，与交付开始后反复改变范围的责任人；关系中要区分双方同意的即兴安排，与每逢无聊或失望就单方面改写约定。",
+          "key": "work_relationship_examples",
+          "title": "把热情放回具体契约中判断"
+        },
+        {
+          "body_md": "如果一个人能持续完成重复任务，承认悲伤或挫折而不立即积极重构，为保护承诺放弃诱人选项，并先修好乏味问题再追求新鲜感，就应降低第七型解释权重。",
+          "key": "counterexample",
+          "title": "主动寻找能承受限制的反例"
+        },
+        {
+          "body_md": "本页只能帮助观察可能性、自由、不适与承诺，不能判断心理健康、注意力状况、能力、录用价值、关系质量或未来结果。真实义务、安全事实与专业评估始终优先。",
+          "key": "use_boundary",
+          "title": "只把类型当作可撤回的工作假设"
+        },
+        {
+          "body_md": "持续天数: 6\n\n情境: 六天内选择一次方案会议、一项个人承诺和一次令人失望的结果，三个情境都要存在至少两个真实可行选项。\n\n可观察信号: 记录提出的选项、关闭标准、责任人、完成日期、被承认的感受，以及首项行动未完成前是否又启动新计划。\n\n本页特定信号: 比较新增路线究竟改善了决定，还是主要推迟了承受选择损失与完成现有责任。\n\n替代解释: 核对创意职责、注意力无障碍、收入压力、迁移、照护、需求变更和实际安全，不要先用类型覆盖环境。\n\n复盘问题: 找出一次接受限制反而带来有效行动的事件，并据此降低或重写原来的类型假设。",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "核对创意职责、注意力无障碍、收入压力、迁移、照护、需求变更和实际安全，不要先用类型覆盖环境。",
+            "context": "六天内选择一次方案会议、一项个人承诺和一次令人失望的结果，三个情境都要存在至少两个真实可行选项。",
+            "duration_days": 6,
+            "observable_signal": "记录提出的选项、关闭标准、责任人、完成日期、被承认的感受，以及首项行动未完成前是否又启动新计划。",
+            "page_specific_signal": "比较新增路线究竟改善了决定，还是主要推迟了承受选择损失与完成现有责任。",
+            "reflection_prompt": "找出一次接受限制反而带来有效行动的事件，并据此降低或重写原来的类型假设。"
+          },
+          "title": "观察练习"
+        }
+      ],
+      "seo": {
+        "description": "第七型是一种传统九型人格观察假设，关注注意力是否反复回到可能性、自由与保留选项，并可能借助重构不适与未来规划维持行动感。点子多、乐观、旅行或兴趣广不能证明动机；创意岗位、注意力差异、迁移经历、承诺负荷与现实限制都可能造成相似表现。",
+        "title": "第七型：可能性、自由与保留选项的可修正观察假设"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-7",
+      "source_hash": "2b9240cb066e71054b02122e446f959f546c901456484443dc057485a986afdf",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "第七型是一种传统九型人格观察假设，关注注意力是否反复回到可能性、自由与保留选项，并可能借助重构不适与未来规划维持行动感。点子多、乐观、旅行或兴趣广不能证明动机；创意岗位、注意力差异、迁移经历、承诺负荷与现实限制都可能造成相似表现。",
+      "title": "第七型：可能性、自由与保留选项的可修正观察假设"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.application.exploratory_not_predictive",
+            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
+            "source_ids": [
+              "sutton_2013_work_outcomes",
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.application.exploratory_not_predictive",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
+            "claim_ids": [
+              "claim.application.exploratory_not_predictive"
+            ],
+            "doi": "10.1016/j.emj.2012.12.004",
+            "id": "sutton_2013_work_outcomes",
+            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
+            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
+            "source_type": "peer_reviewed_research",
+            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
+            "year": 2013
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "ef8f4649eae4734b4e0729e6c939dc07019f984df0c744b0d1e68e089ae1886d"
+}

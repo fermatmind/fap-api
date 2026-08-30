@@ -1,0 +1,28 @@
+{
+  "authority_path": "backend/content_assets/personality_public/current",
+  "compatibility": {
+    "database_schema_changed": false,
+    "existing_public_api_shapes_preserved": true,
+    "runtime_activation": "page_family_adapter_after_exact_projection_parity"
+  },
+  "contract_version": "personality.page.content.current.v1",
+  "current_inventory": {
+    "files": 364,
+    "locales": ["en", "zh-CN"],
+    "manifest": "manifest.json",
+    "pages_per_locale": 182,
+    "path_template": "pages/{framework}/{page_kind}/{entity_key}/{locale}.json"
+  },
+  "fail_closed": [
+    "invalid_root_or_manifest",
+    "missing_or_undeclared_file",
+    "duplicate_identity_or_canonical_path",
+    "path_traversal_or_symlink",
+    "invalid_json_or_contract",
+    "locale_or_identity_mismatch",
+    "file_or_manifest_hash_drift",
+    "redirect_alias_declared_as_canonical"
+  ],
+  "rollback": "previous_git_release_and_runtime_lkg_only",
+  "schema_version": "personality.page.content.v1"
+}

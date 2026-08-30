@@ -1,0 +1,373 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-3",
+    "entity_key": "type-3",
+    "entity_type": "core_type",
+    "framework": "enneagram",
+    "page_kind": "core_type",
+    "slug": "enneagram/type-3"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-3"
+      },
+      "canonical_path": "/en/personality/enneagram/type-3",
+      "code": "type-3",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-3",
+      "entity_type": "core_type",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.application.exploratory_not_predictive",
+            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
+            "source_ids": [
+              "sutton_2013_work_outcomes",
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.application.exploratory_not_predictive",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
+            "claim_ids": [
+              "claim.application.exploratory_not_predictive"
+            ],
+            "doi": "10.1016/j.emj.2012.12.004",
+            "id": "sutton_2013_work_outcomes",
+            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
+            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
+            "source_type": "peer_reviewed_research",
+            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
+            "year": 2013
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Skill, practice, role accountability, financial need, competition, or a clear rubric may explain strong performance. Retain the hypothesis only after repeated attention patterns and disconfirming cases are compared.",
+          "question": "Does strong performance establish Type Three?"
+        },
+        {
+          "answer": "A target set by a manager, client, family, market, or the person themselves creates different explanations. The source of the standard helps separate compliance and resource pressure from an inferred value-and-achievement concern.",
+          "question": "Why record who defines success?"
+        },
+        {
+          "answer": "Observe the account given, the data retained, the help requested, and whether presentation changes across audiences. A single recovery style is not diagnostic; compare it with risk, authority, fatigue, and real consequences.",
+          "question": "What should happen after a missed target?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-3",
+        "reciprocal": true,
+        "translation_group": "enneagram:core_type:type-3",
+        "x-default": "/en/personality/enneagram/type-3",
+        "zh-CN": "/zh/personality/enneagram/type-3"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/centers/heart",
+          "label": "center:heart",
+          "relationship": "center_membership",
+          "target_identity_key": "center:heart"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/3w2",
+          "label": "wing:3w2",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:3w2"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/3w4",
+          "label": "wing:3w4",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:3w4"
+        },
+        {
+          "href": "/en/personality/enneagram/type-3/instincts/self-preservation",
+          "label": "instinctual_subtype:type-3/self-preservation",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-3/self-preservation"
+        },
+        {
+          "href": "/en/personality/enneagram/type-3/instincts/social",
+          "label": "instinctual_subtype:type-3/social",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-3/social"
+        },
+        {
+          "href": "/en/personality/enneagram/type-3/instincts/one-to-one",
+          "label": "instinctual_subtype:type-3/one-to-one",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-3/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.application.exploratory_not_predictive",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "A Type Three hypothesis asks whether attention repeatedly moves toward the result, image, or standard that appears valuable in the current setting. Record who defines success and what changes when the audience changes; do not infer motive from speed, polish, ambition, or a job title alone.",
+          "key": "motivation_attention",
+          "title": "Observe what counts as a valued result"
+        },
+        {
+          "body_md": "List the task, formal incentive, private aim, and explanation given by the person. The same high-quality presentation may reflect craft, duty, financial pressure, competition, care for users, fear of penalties, or an achievement-and-value concern.",
+          "key": "behavior_motive",
+          "title": "Separate delivered performance from inferred worth"
+        },
+        {
+          "body_md": "In decisions, note which result becomes decisive; in feedback, note whether usefulness or recognition changes the response; after a setback, note whether the person revises the plan, hides the miss, seeks learning, or disengages. One event does not establish a stable pattern.",
+          "key": "decision_feedback_conflict",
+          "title": "Compare choice, feedback, and setbacks"
+        },
+        {
+          "body_md": "Result attention can support prioritization, momentum, clear communication, and translating goals into action. Tradeoffs may appear when inconvenient data is minimized, rest is treated as wasted time, presentation outruns substance, or self-evaluation narrows to the latest score.",
+          "key": "strengths_tradeoffs",
+          "title": "Hold execution strengths beside tradeoffs"
+        },
+        {
+          "body_md": "At work, compare a team lead who adjusts a proposal to the decision criteria with a colleague following an explicit rubric. In a relationship, compare sharing an accomplishment for connection with managing an impression. These examples predict neither performance nor compatibility.",
+          "key": "work_relationship_examples",
+          "title": "Use work and relationship examples without prediction"
+        },
+        {
+          "body_md": "The 3w2 hypothesis adds relational visibility and useful connection; 3w4 adds distinctive craft and individual expression. Common mistypes include One standards, Two approval-seeking, Six duty, Seven opportunity scanning, status-conditioned behavior, and ordinary adaptation to competitive environments.",
+          "key": "wings_mistypes",
+          "title": "Compare wings and common mistypes"
+        },
+        {
+          "body_md": "A counterexample weakens the Type Three hypothesis when effort remains steady without an audience, the person reports failure plainly despite reputational cost, or metrics matter only because a role requires them. Craft, survival, values, accountability, or learning may explain more.",
+          "key": "counterexample",
+          "title": "Use private effort and unrewarded truth as tests"
+        },
+        {
+          "body_md": "Use this page to compare attention, incentives, feedback, and counterexamples. It is not a basis for applicant screening, performance ratings, income forecasts, moral rank, health conclusions, relationship verdicts, ability judgments, or a permanent identity.",
+          "key": "use_boundary",
+          "title": "Keep the hypothesis voluntary and non-predictive"
+        },
+        {
+          "body_md": "Duration: 5\n\nContext: Select one public deliverable, one private task, and one missed target with different audiences.\n\nObservable signal: Record the stated goal, success owner, incentive, evidence kept, presentation choice, and response after feedback.\n\nPage-specific signal: Compare whether effort and candor change when recognition is absent but the underlying task remains.\n\nAlternative explanation: Compare role accountability, income pressure, competition, craft standards, fatigue, and power with the Type Three hypothesis.\n\nReflection prompt: Name the event that most weakens an achievement-and-value explanation and state what alternative currently fits better.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Compare role accountability, income pressure, competition, craft standards, fatigue, and power with the Type Three hypothesis.",
+            "context": "Select one public deliverable, one private task, and one missed target with different audiences.",
+            "duration_days": 5,
+            "observable_signal": "Record the stated goal, success owner, incentive, evidence kept, presentation choice, and response after feedback.",
+            "page_specific_signal": "Compare whether effort and candor change when recognition is absent but the underlying task remains.",
+            "reflection_prompt": "Name the event that most weakens an achievement-and-value explanation and state what alternative currently fits better."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "Type Three is a traditional Enneagram hypothesis about attention returning to valued results, credible performance, and adapting presentation to what a setting rewards. Visible achievement cannot establish motive: targets, livelihood, competition, training, and assigned accountability can produce the same behavior.",
+        "title": "Type Three: achievement, value, and a revisable adaptation hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-3",
+      "source_hash": "7b3b15aa6de600f6794d69e9989edc06604f5812abb511c8246061ac58e5fa8d",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "Type Three is a traditional Enneagram hypothesis about attention returning to valued results, credible performance, and adapting presentation to what a setting rewards. Visible achievement cannot establish motive: targets, livelihood, competition, training, and assigned accountability can produce the same behavior.",
+      "title": "Type Three: achievement, value, and a revisable adaptation hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.application.exploratory_not_predictive",
+            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
+            "source_ids": [
+              "sutton_2013_work_outcomes",
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.application.exploratory_not_predictive",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
+            "claim_ids": [
+              "claim.application.exploratory_not_predictive"
+            ],
+            "doi": "10.1016/j.emj.2012.12.004",
+            "id": "sutton_2013_work_outcomes",
+            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
+            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
+            "source_type": "peer_reviewed_research",
+            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
+            "year": 2013
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "4bfd9353d3d86a864dce254837f2d7a437039dd7224d37e3212d3acd808bd36a"
+}

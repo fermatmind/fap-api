@@ -1,0 +1,335 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-1/instincts/social",
+    "entity_key": "type-1/social",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-1/instincts/social"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-1/instincts/social"
+      },
+      "canonical_path": "/en/personality/enneagram/type-1/instincts/social",
+      "code": "type-1/social",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-1/social",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Enforcement may be a formal duty, a response to risk, a legal obligation, or a temporary leadership role. Test whether the same standard applies to the person enforcing it and whether fair exceptions remain possible.",
+          "question": "Does enforcing team rules establish social Type One?"
+        },
+        {
+          "answer": "Record the rule stated, the action taken when compliance costs something, and how exceptions are explained. Describe consistency and impact without declaring the person more ethical, mature, fit to lead, or valuable than others.",
+          "question": "How can exemplary conduct be observed without moral ranking?"
+        },
+        {
+          "answer": "Selective enforcement, image-protecting exceptions, weak concern outside public view, or stronger recurring attention to private maintenance or one relationship would weaken it. Role authority and institutional incentives should be compared first.",
+          "question": "What weakens a shared standards subtype hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-1/instincts/social",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-1/social",
+        "x-default": "/en/personality/enneagram/type-1/instincts/social",
+        "zh-CN": "/zh/personality/enneagram/type-1/instincts/social"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-1",
+          "label": "core_type:type-1",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-1"
+        },
+        {
+          "href": "/en/personality/enneagram/type-1/instincts/self-preservation",
+          "label": "instinctual_subtype:type-1/self-preservation",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-1/self-preservation"
+        },
+        {
+          "href": "/en/personality/enneagram/type-1/instincts/one-to-one",
+          "label": "instinctual_subtype:type-1/one-to-one",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-1/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "The hypothesis combines Type One correction attention with a social label for group norms, example-setting, and collective responsibility. Public rule language is not enough: governance roles, teaching duties, reputation, legal requirements, or organizational crisis can create similar conduct.",
+          "key": "traditional_hypothesis",
+          "title": "Describe shared standards provisionally"
+        },
+        {
+          "body_md": "This matched comparison asks about shared rules and maintenance by observing whether attention first moves toward exemplary conduct, self-preservation resources, or one-to-one pressure for a particular person to change. Hold the task, authority, and consequence as constant as possible.",
+          "key": "matched_comparison",
+          "title": "Compare three priorities in one group task"
+        },
+        {
+          "body_md": "Social is traditional organizing vocabulary, not a biological drive, neurological capacity, or fixed group orientation. It does not establish that a person naturally represents collective morality, and it cannot certify leadership, fairness, or civic value.",
+          "key": "instinct_boundary",
+          "title": "Keep social instinct metaphorical"
+        },
+        {
+          "body_md": "Descriptions of social One and countertypical presentations vary across schools. State which observable claim is being tested and retain discordant cases; a tradition-specific narrative should not override stronger evidence from role, culture, or local incentives.",
+          "key": "countertype_variation",
+          "title": "Allow competing subtype traditions"
+        },
+        {
+          "body_md": "Teachers, compliance staff, moderators, union representatives, and team leads may emphasize shared rules because others depend on consistency. Compare behavior in private, after authority changes, and when a fair exception costs reputation before using a subtype account.",
+          "key": "alternative_environment",
+          "title": "Test institutions and public accountability"
+        },
+        {
+          "body_md": "A social Type One counterexample weakens a shared standards hypothesis when rules apply mainly to lower-status people, exceptions protect the speaker's image, or private resource control consistently outranks collective consistency in matched decisions.",
+          "key": "counterexample",
+          "title": "Use private exceptions as disconfirming evidence"
+        },
+        {
+          "body_md": "Instrument-specific findings cannot establish universal subtype ontology or cross-cultural equivalence. This page cannot diagnose, rank moral worth, predict leadership or group outcomes, complete human review, or authorize publication and indexing.",
+          "key": "evidence_boundary",
+          "title": "Avoid universal or predictive conclusions"
+        },
+        {
+          "body_md": "Duration: 5\n\nContext: Choose one committee decision, one teaching or mentoring moment, and one exception request where a shared rule and authority are visible.\n\nObservable signal: Record the stated rule, who bears its cost, how the speaker behaves under the same rule, and the reason given for any exception.\n\nPage-specific signal: Compare whether the first priority is collective consistency, material upkeep, or reform of a particular person while the group task remains similar.\n\nAlternative explanation: Test formal authority, legal duty, reputation, crisis management, teaching role, organizational incentives, and cultural expectations against the subtype.\n\nReflection prompt: Identify the event where shared standards became most selective and state whether role power, image management, or another subtype priority fits better.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Test formal authority, legal duty, reputation, crisis management, teaching role, organizational incentives, and cultural expectations against the subtype.",
+            "context": "Choose one committee decision, one teaching or mentoring moment, and one exception request where a shared rule and authority are visible.",
+            "duration_days": 5,
+            "observable_signal": "Record the stated rule, who bears its cost, how the speaker behaves under the same rule, and the reason given for any exception.",
+            "page_specific_signal": "Compare whether the first priority is collective consistency, material upkeep, or reform of a particular person while the group task remains similar.",
+            "reflection_prompt": "Identify the event where shared standards became most selective and state whether role power, image management, or another subtype priority fits better."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "Social Type One is a traditional type-by-instinct hypothesis in which One attention to correction may be especially visible through shared standards, exemplary conduct, teaching, and responsibility to a group. One shared standards behavior is not proof of a biological social drive or a universal subtype.",
+        "title": "Social Type One: shared standards as a provisional subtype hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-1/instincts/social",
+      "source_hash": "305263b1ddf1cf9b3e1d996c48948ee41834ee1794a02c042b3061ba12fa3b5c",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "Social Type One is a traditional type-by-instinct hypothesis in which One attention to correction may be especially visible through shared standards, exemplary conduct, teaching, and responsibility to a group. One shared standards behavior is not proof of a biological social drive or a universal subtype.",
+      "title": "Social Type One: shared standards as a provisional subtype hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "0856eb89038d45545b9b8eb0a1fa32899e2fd99c12e52ea5f40d7c446a482de0"
+}

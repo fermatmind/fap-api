@@ -1,0 +1,335 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-7/instincts/one-to-one",
+    "entity_key": "type-7/one-to-one",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-7/instincts/one-to-one"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-7/instincts/one-to-one"
+      },
+      "canonical_path": "/en/personality/enneagram/type-7/instincts/one-to-one",
+      "code": "type-7/one-to-one",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-7/one-to-one",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Early-stage novelty, loneliness, chemistry, persuasion, scarce opportunity, or unequal power can intensify attraction. The comparison must include consent, facts, and later ordinary contact.",
+          "question": "Does intense attraction establish one-to-one Seven?"
+        },
+        {
+          "answer": "Separate direct statements and observed actions from imagined traits, predicted futures, and preferred interpretations. Ask the other person rather than treating a compelling story as shared reality.",
+          "question": "How can projection be recorded without mind reading?"
+        },
+        {
+          "answer": "Respecting a clear refusal, keeping prior obligations, and allowing the imagined future to shrink without renewed pressure strongly challenge an intensity-preserving interpretation.",
+          "question": "Which consent response challenges idealized possibility?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-7/instincts/one-to-one",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-7/one-to-one",
+        "x-default": "/en/personality/enneagram/type-7/instincts/one-to-one",
+        "zh-CN": "/zh/personality/enneagram/type-7/instincts/one-to-one"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-7",
+          "label": "core_type:type-7",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-7"
+        },
+        {
+          "href": "/en/personality/enneagram/type-7/instincts/self-preservation",
+          "label": "instinctual_subtype:type-7/self-preservation",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-7/self-preservation"
+        },
+        {
+          "href": "/en/personality/enneagram/type-7/instincts/social",
+          "label": "instinctual_subtype:type-7/social",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-7/social"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "The tradition proposes that possibility may become vivid through an idealized person, project, encounter, or future. Observe what is known, what is imagined, and how the picture changes when ordinary details arrive.",
+          "key": "traditional_hypothesis",
+          "title": "Frame fascination as a tentative attention pattern"
+        },
+        {
+          "body_md": "Track the same relationship or project at initial excitement and after routine interaction. Compare promises, curiosity about disconfirming facts, consent checks, and completion once novelty no longer supplies momentum.",
+          "key": "matched_comparison",
+          "title": "Compare first intensity with later reciprocal contact"
+        },
+        {
+          "body_md": "Fascination may appear as animated pursuit, private fantasy, artistic immersion, or unusually positive interpretation. Surface volume is less useful than the gap between projected possibility and confirmed reality.",
+          "key": "countertype_variation",
+          "title": "Allow quiet absorption as well as visible excitement"
+        },
+        {
+          "body_md": "One-to-one instinct here is a traditional attention convention, not evidence about bodily mechanisms. Attraction, trauma response, attachment concerns, mood symptoms, and coercion need separate qualified assessment.",
+          "key": "instinct_boundary",
+          "title": "Use intensity as an observation label only"
+        },
+        {
+          "body_md": "A new relationship, creative commission, charismatic leader, marketing funnel, love-bombing, relocation, or scarce opportunity may amplify idealization. Verify consent, incentives, authority, and access to exit.",
+          "key": "alternative_environment",
+          "title": "Check novelty, persuasion, and power conditions"
+        },
+        {
+          "body_md": "The hypothesis weakens when the person asks for inconvenient facts, accepts an unglamorous pace, respects a firm refusal, keeps prior commitments, and remains engaged after the imagined future becomes more limited.",
+          "key": "counterexample",
+          "title": "Look for ordinary reality that remains welcome"
+        },
+        {
+          "body_md": "This subtype cannot establish compatibility, intimacy capacity, creativity, or relationship outcomes. Instrument-specific findings do not prove universal subtype structure, and safety or consent facts must never be reframed as typology.",
+          "key": "evidence_boundary",
+          "title": "Keep attraction and compatibility claims out"
+        },
+        {
+          "body_md": "Duration: 4\n\nContext: Over four days, choose one compelling person or project and compare the first narrative with two later ordinary interactions.\n\nObservable signal: Write separately what was directly confirmed, what was inferred, what refusal or constraint appeared, which prior promise remained, and what action followed after novelty declined.\n\nPage-specific signal: Measure the gap between idealized potential and reciprocal facts rather than rating the strength of excitement.\n\nAlternative explanation: Check early attraction, creative flow, persuasive tactics, unequal authority, scarce opportunity, loneliness, relocation, and access to a safe exit.\n\nReflection prompt: Name one inconvenient fact that changed the picture and show whether behavior adjusted without pressuring anyone to preserve intensity.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Check early attraction, creative flow, persuasive tactics, unequal authority, scarce opportunity, loneliness, relocation, and access to a safe exit.",
+            "context": "Over four days, choose one compelling person or project and compare the first narrative with two later ordinary interactions.",
+            "duration_days": 4,
+            "observable_signal": "Write separately what was directly confirmed, what was inferred, what refusal or constraint appeared, which prior promise remained, and what action followed after novelty declined.",
+            "page_specific_signal": "Measure the gap between idealized potential and reciprocal facts rather than rating the strength of excitement.",
+            "reflection_prompt": "Name one inconvenient fact that changed the picture and show whether behavior adjusted without pressuring anyone to preserve intensity."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "Type Seven one-to-one is a traditional, evidence-limited hypothesis combining Type Seven possibility with fascination, idealized possibility, intensity, and projection toward a person or experience. Excitement does not establish subtype because novelty, attraction, creative immersion, manipulation, unequal power, unmet needs, and ordinary early-stage enthusiasm can look similar.",
+        "title": "Type Seven one-to-one: a fascination, idealized possibility, and intensity hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-7/instincts/one-to-one",
+      "source_hash": "4c1fc2b62243a78fa2b8f5bce543f8290abd4488dec9ad738620c3b5e64e14a5",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "Type Seven one-to-one is a traditional, evidence-limited hypothesis combining Type Seven possibility with fascination, idealized possibility, intensity, and projection toward a person or experience. Excitement does not establish subtype because novelty, attraction, creative immersion, manipulation, unequal power, unmet needs, and ordinary early-stage enthusiasm can look similar.",
+      "title": "Type Seven one-to-one: a fascination, idealized possibility, and intensity hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "4c7286010bb799bd39ebec7d33ec35aa8051859aa95b3c46805c466b4ecd920a"
+}

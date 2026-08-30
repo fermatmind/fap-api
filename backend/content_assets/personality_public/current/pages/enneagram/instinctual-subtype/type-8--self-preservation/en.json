@@ -1,0 +1,335 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-8/instincts/self-preservation",
+    "entity_key": "type-8/self-preservation",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-8/instincts/self-preservation"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-8/instincts/self-preservation"
+      },
+      "canonical_path": "/en/personality/enneagram/type-8/instincts/self-preservation",
+      "code": "type-8/self-preservation",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-8/self-preservation",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Caregiving, poverty, property duty, disability access, hazardous work, or disaster preparation may require provisioning. Compare who controls access after conditions stabilize.",
+          "question": "Does practical provisioning establish self-preservation Eight?"
+        },
+        {
+          "answer": "Record the physical or digital boundary, legal responsibility, stated risk, people excluded, conditions for access, and whether control relaxes once the risk is addressed.",
+          "question": "How can territory be observed without assuming motive?"
+        },
+        {
+          "answer": "Transparent budgets, shared keys, delegated purchasing, and reliance on another competent person after scarcity resolves all weaken a persistent material-control interpretation.",
+          "question": "Which shared-resource change weakens this subtype?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-8/instincts/self-preservation",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-8/self-preservation",
+        "x-default": "/en/personality/enneagram/type-8/instincts/self-preservation",
+        "zh-CN": "/zh/personality/enneagram/type-8/instincts/self-preservation"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-8",
+          "label": "core_type:type-8",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-8"
+        },
+        {
+          "href": "/en/personality/enneagram/type-8/instincts/social",
+          "label": "instinctual_subtype:type-8/social",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-8/social"
+        },
+        {
+          "href": "/en/personality/enneagram/type-8/instincts/one-to-one",
+          "label": "instinctual_subtype:type-8/one-to-one",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-8/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "The tradition proposes that autonomy attention may focus on securing supplies, access, space, and direct satisfaction of practical needs. Observe who benefits and what happens after material stability returns.",
+          "key": "traditional_hypothesis",
+          "title": "Treat material control as a tentative observation"
+        },
+        {
+          "body_md": "Hold household duties similar across a scarce period and a stable period. Record keys, money, food, transport, storage, permissions, and whether shared governance expands when real risk decreases.",
+          "key": "matched_comparison",
+          "title": "Compare control before and after reliable access"
+        },
+        {
+          "body_md": "Self-preservation here is a traditional label for resource and continuity attention, not evidence about bodily mechanisms. Health, nutrition, disability, violence, and housing danger need direct factual assessment.",
+          "key": "instinct_boundary",
+          "title": "Use self-preservation as an attention convention"
+        },
+        {
+          "body_md": "A person may provide abundantly while retaining final control, or live simply while defending a small territory intensely. Neither spending level nor visible toughness establishes the proposed function.",
+          "key": "countertype_variation",
+          "title": "Allow generous provision and guarded possession"
+        },
+        {
+          "body_md": "Poverty, eviction risk, theft, dependent care, disability access, hazardous employment, disaster recovery, and unequal legal protection can make resource control adaptive and necessary.",
+          "key": "alternative_environment",
+          "title": "Put scarcity and safety ahead of subtype"
+        },
+        {
+          "body_md": "The hypothesis weakens when stable access leads to shared keys, transparent budgets, delegated purchasing, flexible space, and willingness to rely on another competent person without retaining override.",
+          "key": "counterexample",
+          "title": "Test shared access after danger passes"
+        },
+        {
+          "body_md": "This subtype cannot rank resilience, financial ability, health, toughness, or property rights. Instrument-specific evidence does not establish universal subtype structure or cross-cultural equivalence.",
+          "key": "evidence_boundary",
+          "title": "Do not infer survival skill or universal ontology"
+        },
+        {
+          "body_md": "Duration: 5\n\nContext: Over five days, compare one constrained-resource decision with one adequately supplied decision under similar household responsibility.\n\nObservable signal: List who controls keys, money, food, transport, storage, permissions, risk evidence, shared requests, and any authority released after access improves.\n\nPage-specific signal: Measure whether practical control persists when scarcity and immediate danger are demonstrably reduced.\n\nAlternative explanation: Review eviction risk, theft, disability access, caregiving, hazardous work, disaster recovery, and unequal legal protection.\n\nReflection prompt: Name the resource change that best explains control, then reduce the subtype hypothesis if shared access follows stability.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Review eviction risk, theft, disability access, caregiving, hazardous work, disaster recovery, and unequal legal protection.",
+            "context": "Over five days, compare one constrained-resource decision with one adequately supplied decision under similar household responsibility.",
+            "duration_days": 5,
+            "observable_signal": "List who controls keys, money, food, transport, storage, permissions, risk evidence, shared requests, and any authority released after access improves.",
+            "page_specific_signal": "Measure whether practical control persists when scarcity and immediate danger are demonstrably reduced.",
+            "reflection_prompt": "Name the resource change that best explains control, then reduce the subtype hypothesis if shared access follows stability."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "Type Eight self-preservation is a traditional, evidence-limited hypothesis combining Type Eight autonomy with material control, territory, direct needs, resource access, survival, and practical autonomy. Provisioning or guarding does not establish subtype because scarcity, housing risk, disability access, caregiving, dangerous work, property duty, and prior theft may require the same behavior.",
+        "title": "Type Eight self-preservation: a material control, territory, and direct-needs hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-8/instincts/self-preservation",
+      "source_hash": "30c721322ced387d789760be0cf8bb0ed65c88ec4e0c4e976dfdeb7aaf341887",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "Type Eight self-preservation is a traditional, evidence-limited hypothesis combining Type Eight autonomy with material control, territory, direct needs, resource access, survival, and practical autonomy. Provisioning or guarding does not establish subtype because scarcity, housing risk, disability access, caregiving, dangerous work, property duty, and prior theft may require the same behavior.",
+      "title": "Type Eight self-preservation: a material control, territory, and direct-needs hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "d97853a5ab134f04c57ca26ed5e95bca05e2f2fe0dbf0cfd4fbe3f02c8db59fb"
+}

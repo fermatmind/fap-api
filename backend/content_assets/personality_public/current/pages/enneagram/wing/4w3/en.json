@@ -1,0 +1,300 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/wings/4w3",
+    "entity_key": "4w3",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/4w3"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/wings/4w3"
+      },
+      "canonical_path": "/en/personality/enneagram/wings/4w3",
+      "code": "4w3",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "4w3",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Portfolio expectations, promotion, platform design, or communication training may require a personal brand. Compare core meaning attention and counterexamples.",
+          "question": "Does a personal brand establish 4w3?"
+        },
+        {
+          "answer": "Hold the polished delivery constant. A 4w3 hypothesis keeps personal meaning and authorship central; a Three hypothesis may center the valued result and credible performance.",
+          "question": "How does 4w3 differ from a Three hypothesis?"
+        },
+        {
+          "answer": "Private expression that remains satisfying, polish limited to paid duty, or stable authorship concerns despite no audience response should weaken the modifier.",
+          "question": "What weakens visible-expression as a wing hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/4w3",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:4w3",
+        "x-default": "/en/personality/enneagram/wings/4w3",
+        "zh-CN": "/zh/personality/enneagram/wings/4w3"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-4",
+          "label": "core_type:type-4",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-4"
+        },
+        {
+          "href": "/en/personality/enneagram/type-3",
+          "label": "core_type:type-3",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-3"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/4w5",
+          "label": "wing:4w5",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:4w5"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "Begin with Type Four meaning attention, then ask whether visible delivery repeatedly modifies how expression is shaped. Public fluency without identity concern may reflect Three themes, profession, training, or platform rules.",
+          "key": "core_first_modifier",
+          "title": "Keep identity and meaning at the core"
+        },
+        {
+          "body_md": "Compared with 4w5 private depth, 4w3 may move expression toward an audience. Compared with Three, the proposed core remains personal meaning and authorship rather than the valued result itself.",
+          "key": "sibling_core_comparison",
+          "title": "Contrast 4w3 with 4w5 and Three"
+        },
+        {
+          "body_md": "Use one credited work, one anonymous contribution, and one revision after weak audience response. Record which meaning is protected, which presentation changes, and how credit affects effort.",
+          "key": "observable_situations",
+          "title": "Compare credited, anonymous, and revised work"
+        },
+        {
+          "body_md": "The hypothesis weakens when expression stays private by preference, visible polish appears only for a job, or audience response does not alter presentation or authorship concerns.",
+          "key": "counterexample",
+          "title": "Use private continuity and role-only visibility as tests"
+        },
+        {
+          "body_md": "Creative industries, fundraising, teaching, and online platforms can reward personal visibility. Compare behavior outside rewarded settings and when credit, pay, and audience access change.",
+          "key": "alternative_explanations",
+          "title": "Test portfolio and promotion requirements"
+        },
+        {
+          "body_md": "Wing research is sparse. The hypothesis cannot establish charisma, creativity, authenticity, employability, influence, or future recognition.",
+          "key": "wing_boundary",
+          "title": "Keep visible expression evidence limited"
+        },
+        {
+          "body_md": "Duration: 5\n\nContext: Choose a credited work, an anonymous contribution, and one revision after weak response with comparable effort.\n\nObservable signal: Record meaning protected, credit available, audience, revision, reward, authorship claim, and effort after no recognition.\n\nPage-specific signal: Compare the exact presentation change when authorship is visible versus anonymous while the underlying work stays similar.\n\nAlternative explanation: Compare portfolio rules, promotion incentives, platform design, communication training, pay, and access.\n\nReflection prompt: Identify where professional visibility explains the pattern without a 4w3 modifier.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Compare portfolio rules, promotion incentives, platform design, communication training, pay, and access.",
+            "context": "Choose a credited work, an anonymous contribution, and one revision after weak response with comparable effort.",
+            "duration_days": 5,
+            "observable_signal": "Record meaning protected, credit available, audience, revision, reward, authorship claim, and effort after no recognition.",
+            "page_specific_signal": "Compare the exact presentation change when authorship is visible versus anonymous while the underlying work stays similar.",
+            "reflection_prompt": "Identify where professional visibility explains the pattern without a 4w3 modifier."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "The 4w3 wing is a core-first, evidence-limited hypothesis: Type Four attention to identity and meaning may be modified by Three-adjacent visible delivery, audience recognition, and adaptation. A polished personal brand cannot establish a wing because portfolio rules, promotion incentives, and communication training can look the same.",
+        "title": "4w3: visible expression as a core-first wing hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/4w3",
+      "source_hash": "abb947edac69148bbfbe28daca9b9a92a4b990be8292717a6cd8ac06ac300c54",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "The 4w3 wing is a core-first, evidence-limited hypothesis: Type Four attention to identity and meaning may be modified by Three-adjacent visible delivery, audience recognition, and adaptation. A polished personal brand cannot establish a wing because portfolio rules, promotion incentives, and communication training can look the same.",
+      "title": "4w3: visible expression as a core-first wing hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "9dde1b0b6e05a3434502151a81d13b1172970d3c05ac8cf52b78ac466ab96597"
+}

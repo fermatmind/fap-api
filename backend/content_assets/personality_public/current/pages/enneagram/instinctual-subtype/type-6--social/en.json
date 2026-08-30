@@ -1,0 +1,335 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-6/instincts/social",
+    "entity_key": "type-6/social",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-6/instincts/social"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-6/instincts/social"
+      },
+      "canonical_path": "/en/personality/enneagram/type-6/instincts/social",
+      "code": "type-6/social",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-6/social",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Law, licensure, professional hierarchy, public responsibility, discrimination, whistleblower risk, and unequal accountability can create the same pattern. Compare responses under transparent peer governance and opaque rank before retaining a social subtype hypothesis.",
+          "question": "Do duty, rules, authority, and role clarity prove this subtype?"
+        },
+        {
+          "answer": "Use the same rule under transparent peer governance and opaque rank with similar consequences, and record whether observable behavior changes when the matched condition changes.",
+          "question": "What makes the social Type Six comparison fair?"
+        },
+        {
+          "answer": "working without a formal role, changing rules for published reasons, and sharing authority are formal counterexamples that should reduce confidence rather than be dismissed as exceptions.",
+          "question": "Which role-free counterexample weakens the authority-duty hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-6/instincts/social",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-6/social",
+        "x-default": "/en/personality/enneagram/type-6/instincts/social",
+        "zh-CN": "/zh/personality/enneagram/type-6/instincts/social"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-6",
+          "label": "core_type:type-6",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-6"
+        },
+        {
+          "href": "/en/personality/enneagram/type-6/instincts/self-preservation",
+          "label": "instinctual_subtype:type-6/self-preservation",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-6/self-preservation"
+        },
+        {
+          "href": "/en/personality/enneagram/type-6/instincts/one-to-one",
+          "label": "instinctual_subtype:type-6/one-to-one",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-6/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "Within a Type Six core hypothesis, the social subtype may emphasize clear duty, legitimate rules, and accountable authority. Check governance, rank, and unequal consequences first, then keep the subtype idea secondary and revisable.",
+          "key": "traditional_hypothesis",
+          "title": "State the tradition as a secondary testable idea"
+        },
+        {
+          "body_md": "Present the same rule under transparent peer governance and opaque rank while holding consequences as similar as possible. Record whether compliance, clarification, or challenge changes with the authority structure.",
+          "key": "matched_comparison",
+          "title": "Use matched situations before interpreting the pattern"
+        },
+        {
+          "body_md": "The social label organizes rule-and-authority observations; it is not evidence about bodily mechanisms, neural hierarchy, fixed obedience, or an innate institutional system.",
+          "key": "instinct_boundary",
+          "title": "Reject bodily and neurological mechanism claims"
+        },
+        {
+          "body_md": "A person may publicly challenge leaders, improvise, or enjoy informal groups while still tracking duty and legitimacy. Those visible choices alone cannot prove or disprove a social subtype hypothesis.",
+          "key": "countertype_variation",
+          "title": "Allow behavior that looks unlike the stereotype"
+        },
+        {
+          "body_md": "Law, licensure, professional hierarchy, public responsibility, discrimination, whistleblower risk, and unequal accountability can shape rule responses. Address those governance realities directly rather than translating them into personality essence.",
+          "key": "alternative_environment",
+          "title": "Audit material, institutional, and relational conditions"
+        },
+        {
+          "body_md": "Lower confidence when the record shows working without a formal role, changing rules for published reasons, and sharing authority, and preserve the environmental account as a live alternative.",
+          "key": "counterexample",
+          "title": "Use changed conditions as a disconfirmation test"
+        },
+        {
+          "body_md": "Instrument-specific evidence cannot establish universal subtype ontology or cross-cultural equivalence, and this page cannot forecast obedience, leadership, civic conduct, or institutional fit.",
+          "key": "evidence_boundary",
+          "title": "Keep subtype inference local and non-predictive"
+        },
+        {
+          "body_md": "Duration: 5\n\nContext: Use the same rule in a transparent peer group and a rank-based group with comparable consequences, then observe one responsibility handoff.\n\nObservable signal: Record who authored the rule, how reasons are published, who may question it, the sanction for refusal, and who carries the final consequence.\n\nPage-specific signal: Compare whether compliance, challenge, and responsibility follow publicly stated reasons or the status of the authority giving the instruction.\n\nAlternative explanation: Check legal requirements, professional hierarchy, institutional risk, unequal accountability, discrimination, and public duty.\n\nReflection prompt: Name the event where transparent reasons or rank best explained the response, and revise the social-subtype hypothesis accordingly.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Check legal requirements, professional hierarchy, institutional risk, unequal accountability, discrimination, and public duty.",
+            "context": "Use the same rule in a transparent peer group and a rank-based group with comparable consequences, then observe one responsibility handoff.",
+            "duration_days": 5,
+            "observable_signal": "Record who authored the rule, how reasons are published, who may question it, the sanction for refusal, and who carries the final consequence.",
+            "page_specific_signal": "Compare whether compliance, challenge, and responsibility follow publicly stated reasons or the status of the authority giving the instruction.",
+            "reflection_prompt": "Name the event where transparent reasons or rank best explained the response, and revise the social-subtype hypothesis accordingly."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "Type Six social is a traditional subtype hypothesis about attention to duty, rules, authority, and role clarity. This pattern does not establish subtype because legal requirements, professional hierarchy, institutional risk, unequal accountability, discrimination, and public responsibility may shape the same behavior. Matched institutional stakes, speaking access, consent, and decision power guide this comparison.",
+        "title": "Type Six social: a duty, rules, authority, and role clarity hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-6/instincts/social",
+      "source_hash": "2e483b348c4ee4c3e6a77ff53c497a9d4610b11557ddaa404766d84f4dcda6c9",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "Type Six social is a traditional subtype hypothesis about attention to duty, rules, authority, and role clarity. This pattern does not establish subtype because legal requirements, professional hierarchy, institutional risk, unequal accountability, discrimination, and public responsibility may shape the same behavior. Matched institutional stakes, speaking access, consent, and decision power guide this comparison.",
+      "title": "Type Six social: a duty, rules, authority, and role clarity hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "94fcfaa4d804b28a16882fb73a41aa99c768d29c2788dcbbda0e5e7104b5374b"
+}

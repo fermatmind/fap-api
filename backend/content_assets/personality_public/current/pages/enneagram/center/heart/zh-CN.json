@@ -1,0 +1,287 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh/personality/enneagram/centers/heart",
+    "entity_key": "heart",
+    "entity_type": "center",
+    "framework": "enneagram",
+    "page_kind": "center",
+    "slug": "enneagram/centers/heart"
+  },
+  "locale": "zh-CN",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh/personality/enneagram/centers/heart"
+      },
+      "canonical_path": "/zh/personality/enneagram/centers/heart",
+      "code": "heart",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "heart",
+      "entity_type": "center",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不能。明显情绪也可能来自气质、文化、压力、关系安全感或沟通习惯。更稳妥的做法是比较相似互动中注意重点和自我呈现如何变化。",
+          "question": "情绪表达明显就能证明心中心模式吗？"
+        },
+        {
+          "answer": "帮助可能来自关心、责任、互惠、专业能力、避免冲突或希望被需要。只有把行动放回具体背景，并记录原话、替代原因和反例，才适合暂时形成解释。",
+          "question": "为什么同一项帮助行为会有多种解释？"
+        },
+        {
+          "answer": "记录表扬、比较或排斥之后实际出现的变化，再询问当事人如何描述。把认可保留为一个假设，同时考虑目标、规范、情绪、安全、习惯和关系期待。",
+          "question": "怎样观察认可而不替别人猜测内心？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/centers/heart",
+        "reciprocal": true,
+        "translation_group": "enneagram:center:heart",
+        "x-default": "/en/personality/enneagram/centers/heart",
+        "zh-CN": "/zh/personality/enneagram/centers/heart"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh/personality/enneagram/type-2",
+          "label": "core_type:type-2",
+          "relationship": "center_member",
+          "target_identity_key": "core_type:type-2"
+        },
+        {
+          "href": "/zh/personality/enneagram/type-3",
+          "label": "core_type:type-3",
+          "relationship": "center_member",
+          "target_identity_key": "core_type:type-3"
+        },
+        {
+          "href": "/zh/personality/enneagram/type-4",
+          "label": "core_type:type-4",
+          "relationship": "center_member",
+          "target_identity_key": "core_type:type-4"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-CN",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "观察心中心线索时，选择一次表扬、批评、被接纳或被比较的事件。记录语气、自我描述、帮助行为、目标强调或退开方式发生了什么变化，再把这些可见调整与推测的认可需要分开。",
+          "key": "observable_pattern",
+          "title": "从一次明确反馈开始"
+        },
+        {
+          "body_md": "用无认可反例修正假设时，可以选择一项不容易被别人看到的私下任务。若相同行为仍然稳定出现，就要降低原有心中心解释的可信度，并考虑照顾责任、职业标准、习惯、审美偏好、当下情绪或关系要求。",
+          "key": "counterexample",
+          "title": "加入没有认可条件的反例"
+        },
+        {
+          "body_md": "比较二号三号四号时，传统描述分别提示：二号可能关注自己是否对他人有用，三号可能关注能否呈现被重视的成效，四号可能关注是否表达了个人独特意义。同一项帮助或精致呈现仍可能有其他原因。",
+          "key": "within_center_difference",
+          "title": "再比较二号三号四号"
+        },
+        {
+          "body_md": "心中心标签并不表示一个人只会感受而不会思考或行动。它不是医学或神经分类，情绪表达本身也不能确认动机、身份、人际能力或之后的结果。",
+          "key": "boundary",
+          "title": "情绪不是排他的处理通道"
+        },
+        {
+          "body_md": "持续天数: 6\n\n情境: 选择三次反馈事件和一项私下任务，标明当时有哪些人在场、可能获得什么认可，以及情境真正要求的结果。\n\n可观察信号: 在解释连接或认可之前，记录语气、帮助、速度、自我描述、目标强调或退开方式的具体变化。\n\n本页特定信号: 分别比较回应他人需要、呈现被重视的成效和表达个人独特意义，不把所有情绪反应都归为同一模式。\n\n替代解释: 写下一项照顾责任、职业规范、文化表达规则、安全顾虑、当下情绪、习惯或关系期待，说明它如何产生相同行为。\n\n复盘问题: 使用私下任务这个反例，判断哪一种心中心解释变弱，并说明以后什么证据会让你再次修改判断。",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "写下一项照顾责任、职业规范、文化表达规则、安全顾虑、当下情绪、习惯或关系期待，说明它如何产生相同行为。",
+            "context": "选择三次反馈事件和一项私下任务，标明当时有哪些人在场、可能获得什么认可，以及情境真正要求的结果。",
+            "duration_days": 6,
+            "observable_signal": "在解释连接或认可之前，记录语气、帮助、速度、自我描述、目标强调或退开方式的具体变化。",
+            "page_specific_signal": "分别比较回应他人需要、呈现被重视的成效和表达个人独特意义，不把所有情绪反应都归为同一模式。",
+            "reflection_prompt": "使用私下任务这个反例，判断哪一种心中心解释变弱，并说明以后什么证据会让你再次修改判断。"
+          },
+          "title": "观察练习"
+        }
+      ],
+      "seo": {
+        "description": "心中心在传统九型框架中归组二号、三号和四号。观察心中心线索，可以比较人在互动中如何回应连接、认可和自我呈现的问题；它并不表示情绪会排除思考或行动，而且二号、三号、四号可能用不同方式组织同一场互动。",
+        "title": "心中心：比较连接、认可与自我呈现"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/centers/heart",
+      "source_hash": "f5bd57950a9e6ef07efbfc7fafc54535cfb98c46ce24ce4bb103098ba315ae58",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "心中心在传统九型框架中归组二号、三号和四号。观察心中心线索，可以比较人在互动中如何回应连接、认可和自我呈现的问题；它并不表示情绪会排除思考或行动，而且二号、三号、四号可能用不同方式组织同一场互动。",
+      "title": "心中心：比较连接、认可与自我呈现"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.center.traditional_model",
+            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
+            "source_ids": [
+              "riso_hudson_1999_wisdom",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.center.traditional_model"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.center.traditional_model"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "c6632876d4e28ca477ee491f8072f220f2d7927de786846a987d3a9f3f263db9"
+}

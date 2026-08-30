@@ -1,0 +1,401 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh/personality/big-five/conscientiousness",
+    "entity_key": "conscientiousness",
+    "entity_type": "domain",
+    "framework": "big_five",
+    "page_kind": "domain",
+    "slug": "big-five/conscientiousness"
+  },
+  "locale": "zh-CN",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "path": "/zh/personality/big-five/conscientiousness"
+      },
+      "canonical_path": "/zh/personality/big-five/conscientiousness",
+      "code": "conscientiousness",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "conscientiousness",
+      "entity_type": "domain",
+      "evidence_notes": [
+        {
+          "citation_label": "An alternative 'description of personality': The Big-Five factor structure",
+          "limitation": "PMID、题名、作者、年份和 DOI 一致；用于五维结构与词汇研究背景，不用于产品级效度。",
+          "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
+          "source_id": "S1"
+        },
+        {
+          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
+          "limitation": "IPIP 官方说明明确区分 lexical Big Five、FFM、BFI 与 NEO/IPIP 体系，并使用 ‘similar constructs’ 而非量表等同。具体条目映射见 https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm。 该官方网页未标注出版年；year 记录本次公开核验的访问快照年，不代表出版年份。",
+          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
+          "source_id": "S11"
+        },
+        {
+          "citation_label": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+          "limitation": "PMID 与 DOI 核验一致；BFI-2 的 15-facet 架构只用于说明不同量表的下位结构并不相同。",
+          "public_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+          "source_id": "S2"
+        },
+        {
+          "citation_label": "Big five personality traits and performance: A quantitative synthesis of 50+ meta-analyses",
+          "limitation": "期刊页核验 54 个元分析、题名、作者、DOI 和出版信息；只支持群体层面关联及情境差异。",
+          "public_url": "https://onlinelibrary.wiley.com/doi/10.1111/jopy.12683",
+          "source_id": "S9"
+        },
+        {
+          "citation_label": "Patterns of mean-level change in personality traits across the life course: A meta-analysis of longitudinal studies",
+          "limitation": "PMID、DOI、题名和作者一致；仅支持群体平均变化，不支持个体预测或固定复测周期。",
+          "public_url": "https://pubmed.ncbi.nlm.nih.gov/16435954/",
+          "source_id": "S4"
+        }
+      ],
+      "faq": [
+        {
+          "answer": "元分析综合显示，Big Five 与表现指标的群体关联会随特质和结果类别变化；这不能转化为对某个人的成功、岗位适配或工作表现预测，也不构成费马测试用于招聘的效度证据（[S9](https://onlinelibrary.wiley.com/doi/10.1111/jopy.12683)）。",
+          "question": "尽责性高就一定能成功吗？"
+        },
+        {
+          "answer": "不是。懒惰是一个带有道德评价的词汇，而尽责性较低的倾向描述的是对规划、秩序和坚持的自然偏好。许多尽责性较低的人在感兴趣的领域可以高度投入，在需要快速应变的环境中表现出色。只是他们投入和产出的路径与高尽责性的人不同。",
+          "question": "尽责性低是不是懒惰？"
+        },
+        {
+          "answer": "纵向研究的元分析报告了部分人格特质在生命历程中的群体平均变化，但不能据此预测某个个体、某个具体侧面或固定年龄点会怎样变化（[S4](https://pubmed.ncbi.nlm.nih.gov/16435954/)）。",
+          "question": "尽责性能改变吗？"
+        },
+        {
+          "answer": "在不可控的情境中，高尽责性的控制倾向可能转化为焦虑。在需要灵活和创新的情境中，过度依赖计划可能降低效率。高尽责性的人也更容易经历职业倦怠，因为他们倾向于超额承诺和对自己的\"不够好\"持续不满。学会\"有选择地不负责\"是高尽责性者需要练习的能力。",
+          "question": "高尽责性有什么坏处？"
+        },
+        {
+          "answer": "尽责性与情绪稳定性（低神经质）的配合很重要。高尽责性加上高神经质可能导致\"焦虑型完美主义\"——拼了命地做，同时拼了命地担心做得不好。高尽责性加上低开放性可能在习惯性领域深度耕耘，但不适应行业变革。高尽责性加上低宜人性可能表现为\"我说了算\"的强硬执行者。没有任何一个维度是单独运作的。",
+          "question": "尽责性和其他维度怎么配合？"
+        },
+        {
+          "answer": "不是。情境特异化的尽责性表达非常普遍。在必须保持秩序的环境中表现稳定，在可以放松的环境中愿意放下，这是一种适应性配置，不是人格不稳定。了解自己的\"尽责性分布图\"——哪些领域由你主动管理，哪些领域你选择顺其自然——比追求全面均衡更有意义。",
+          "question": "我如果在工作和生活中尽责性差异很大，是不是不稳定？"
+        },
+        {
+          "answer": "拖延不完全等于低尽责性。有些人拖延是因为自律确实不高；有些人拖延恰恰是因为对自己要求太高——觉得现在做出来的东西不够好，所以迟迟不动手。后者更接近高成就追求配合低自律或高审慎的组合。识别自己拖延的原因比贴一个\"低尽责\"的标签更有用。\n\n---\n\n---\n\n---",
+          "question": "尽责性和拖延是什么关系？"
+        }
+      ],
+      "framework": "big_five",
+      "hreflang": {
+        "en": "/en/personality/big-five/conscientiousness",
+        "zh-CN": "/zh/personality/big-five/conscientiousness"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh/personality/big-five/conscientiousness-high",
+          "intent": "range",
+          "label": "高尽责性"
+        },
+        {
+          "href": "/zh/personality/big-five/conscientiousness-mid",
+          "intent": "range",
+          "label": "中等尽责性"
+        },
+        {
+          "href": "/zh/personality/big-five/conscientiousness-low",
+          "intent": "range",
+          "label": "低尽责性"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/competence",
+          "intent": "facet_detail",
+          "label": "胜任感"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/order",
+          "intent": "facet_detail",
+          "label": "秩序"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/dutifulness",
+          "intent": "facet_detail",
+          "label": "责任感"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/achievement-striving",
+          "intent": "facet_detail",
+          "label": "成就追求"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/self-discipline",
+          "intent": "facet_detail",
+          "label": "自律"
+        },
+        {
+          "href": "/zh/personality/big-five/facets/deliberation",
+          "intent": "facet_detail",
+          "label": "审慎"
+        },
+        {
+          "href": "/zh/personality/big-five",
+          "intent": "model_hub",
+          "label": "大五人格总览"
+        },
+        {
+          "href": "/zh/personality/big-five/facets",
+          "intent": "facet_hub",
+          "label": "30 个侧面总览"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-CN",
+      "method_boundary": {
+        "clinical_reviewed": false,
+        "content_method": "AI-assisted draft; terminology, boundary and evidence review by FermatMind Editorial",
+        "expert_endorsement": false,
+        "limitations": [
+          "用于自我认知与教育说明，不构成临床诊断、招聘筛选或个体结果预测。",
+          "本内容包不提供费马测试的产品级信度、效度、中文常模或个体预测证据。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body": "尽责性是大五人格中关于调控与完成的维度。它描述的是一个人在组织任务、抑制冲动、坚持目标和遵守承诺方面的投入程度——不是这个人有没有责任感、是不是好人，也不是这个人能不能成功。\n\n本页把“尽责性（Conscientiousness）：组织、坚持与执行的人格维度”放在 Big Five 的连续维度框架中解释（[S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)）。下文六个侧面使用 NEO/IPIP-NEO 词汇；IPIP 官方说明这些量表测量的是与 NEO 侧面相似的构念，而 BFI-2 采用不同的 15 侧面架构（[S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)；[S2](https://pubmed.ncbi.nlm.nih.gov/27055049/)）。这些命名不能跨量表视为完全等同。\n\n费马测试尚未在本包中公开该页面对应分数的产品级信度、效度、中文常模或个体预测证据。正文只用于自我观察与教育说明，不用于临床诊断、招聘筛选、升学录取或替代职业决定。\n\n> **内容方法与更新时间**：本内容由 FermatMind Editorial 在 AI 辅助起草基础上，根据公开人格心理学来源进行术语、边界与证据核验。内容用于自我认知与教育说明，不构成临床诊断、招聘筛选或个体结果预测。实质更新：2026-07-18；审阅方式：solo_operator；未经过临床专家审阅。\n\n---",
+          "heading": "证据与解释边界",
+          "key": "section-01-f56ddb9095",
+          "kind": "rich_text"
+        },
+        {
+          "body": "尽责性关注的核心问题是：**当你有事情要做时，你是倾向于先规划再行动，还是倾向于先动起来再看情况？在遇到障碍时，你更自然地继续坚持，还是更自然地转向其他事情？**\n\n倾向较高的人通常对计划和秩序有内在的需要，能够为了远期目标忍受当下的不便，在做决定前会收集信息、权衡后果。倾向较低的人更依赖当下的状态和直觉，在灵活多变的环境中感到自如，对严格的时间表和流程规范可能感到约束。\n\n两个方向各有功能。尽责性较高的优势在于可靠、有条理和坚韧；尽责性较低的优势在于灵活、随机应变和免受过度计划的压力。\n\n---",
+          "heading": "尽责性在观察什么",
+          "key": "section-02-27c24391d0",
+          "kind": "rich_text"
+        },
+        {
+          "body": "- **不是道德判断**。尽责性描述的是组织和执行的倾向，不是人品好坏。一个尽责性较低的人完全可以是善良、正直、值得信任的。用尽责性高低来评判一个人的品格价值，是对这个维度的误用。\n- **不是能力或天赋**。尽责性关注的是\"怎么做\"的问题，而不是\"能不能做\"。一个尽责性很高的人可能仍然需要较长时间来掌握一项复杂技能，但他会持续投入；一个尽责性较低的人可能在短时间内展现出惊人的直觉判断力。\n- **不是完美主义**。努力把事情做好（高成就追求）和不能容忍任何不完美（完美主义）是不同的。许多尽责性较高的人可以在\"够好了\"的时候停下来；而有些完美主义者尽责性并不高，他们的停滞恰恰来自对完美的过度思虑而非有序执行。\n- **不是僵化或缺乏创造力**。高尽责性的人同样可以有丰富的内心世界和创造力。组织性和想象力不是对立的——把创意落实为作品需要的恰恰是尽责性。\n\n---",
+          "heading": "尽责性不是什么",
+          "key": "section-03-476db4bab0",
+          "kind": "rich_text"
+        },
+        {
+          "body": "**倾向较高时**：倾向于制定计划并遵守；对时间敏感，不喜欢迟到或他人迟到；做事有条理，物品归位；能够为了长远目标放弃短期诱惑；做重要决定前会多方考量；承诺的事情通常会兑现；可能在不熟悉或失控的环境中感到焦虑。\n\n**倾向较低时**：倾向于随机应变而非预先规划；对时间的感知比较松弛；可能在工作环境杂乱但能从中找到所需；更容易被当下的兴趣或刺激吸引，不执着于完成既定任务；做决定更快，更依赖直觉；可能高估自己能完成的事情但最后忘掉；在高度结构化、流程严格的环境中可能感到受束缚。\n\n**中间倾向**：可能在某些生活领域表现出较高的尽责性，在另一些领域则更随性。例如，工作上严格自律但在家里随意散漫，或者对重要承诺认真对待但对日常琐事不太在意。中间倾向也可能意味着情境灵活性——需要时有条理，不需要时放得下。这不等于\"中等\"或\"平庸\"，而是一种在不同需求之间切换的能力。\n\n---",
+          "heading": "连续谱两端的行为倾向",
+          "key": "section-04-00ba60b8c3",
+          "kind": "rich_text"
+        },
+        {
+          "body": "尽责性不是单一倾向，它由六个更具体的侧面组成：\n\n| 侧面 | 含义 |\n|------|------|\n| 胜任感（Competence） | 对自己完成任务能力的信心，以及主动承担任务的倾向 |\n| 秩序（Order） | 对条理、整洁和结构化的需求，喜欢东西有固定的位置和流程 |\n| 责任感（Dutifulness） | 对承诺、规则和道德义务的重视程度，倾向于遵守约定 |\n| 成就追求（Achievement-Striving） | 设立高目标并为之努力的驱动力，对进步和成就的内在需要 |\n| 自律（Self-Discipline） | 开始任务并坚持到底的能力，即使任务枯燥或有诱惑干扰 |\n| 审慎（Deliberation） | 行动前思考和权衡后果的倾向，不冲动做决定 |\n\n两个尽责性总分相同的人，可能在完全不同的侧面上得分很高。一个人高在秩序和责任，每样东西都有位置，每个约定都不会忘，但他并不追求成就——安于现状对他来说已经够了。另一个人高在成就追求和自律，立了目标就往死里磕，但他的桌面可能乱成一团，每次找东西都要翻半天。进入侧面分析才能看清\"究竟是哪一种尽责性\"。\n\n---",
+          "heading": "尽责性的六个侧面",
+          "key": "section-05-eab16a864d",
+          "kind": "rich_text"
+        },
+        {
+          "body": "尽责性较高的人在学习中倾向于做计划：整理笔记、制定复习时间表、按时完成作业。优势是进度稳定、基础知识扎实、不容易在考前突击；代价是可能过于依赖计划，遇到突发的考试改革或题型变化时适应较慢，也可能在不需要严格计划的学习领域（如需要放松和发散思维的艺术创作）中感到别扭。\n\n尽责性较低的人在学习中倾向于按兴趣驱动：感兴趣的科目可能废寝忘食，不感兴趣的科目拖到最后一刻。优势是灵活、在开放性问题或项目式学习中可能表现出色；代价是容易被外界干扰打断，在面对需要长期积累的科目（如语言学习、乐器训练）时可能中途放弃。\n\n实用切入点：对倾向较高的人，可以刻意练习\"无计划学习\"——挑一个周末，不设目标地接触一个新领域，看它带你去哪里。对倾向较低的人，可以用\"微习惯\"策略——每天只做五分钟，不求质量，只求不中断。五分钟的持续远比一个雄心勃勃但从未开始的计划更有价值。\n\n---",
+          "heading": "学习与任务场景",
+          "key": "section-06-38f3f91acf",
+          "kind": "rich_text"
+        },
+        {
+          "body": "元分析综合显示，Big Five 与表现指标的群体关联会随特质和结果类别变化；这不能转化为对某个人的成功、岗位适配或工作表现预测，也不构成费马测试用于招聘的效度证据（[S9](https://onlinelibrary.wiley.com/doi/10.1111/jopy.12683)）。\n\n在需要流程合规、细节把控和长期跟进的工作中（如会计、质量控制、项目管理），较高的尽责性是直接资产。在需要快速响应、临场判断和高灵活性的工作中（如紧急救援、创意策划、销售谈判），较低的尽责性加上较高的灵活应变能力可能是更优的组合。\n\n在团队协作中，尽责性较高的人可能是团队中\"靠得住\"的那一个——在其他人被新想法带跑的时候，他会问\"谁能做？什么时候做完？\"。但同一特征也可能让他显得不够灵活，在需要快速转向时成为阻力。尽责性较低的人在头脑风暴阶段贡献更多自由联想，在应对突发状况时更能随机应变，但他们的承诺可能需要跟踪确认。\n\n高效的团队不需要每个人都高尽责——需要的是在正确的时间把正确的倾向放在正确的角色上。\n\n---",
+          "heading": "工作与协作场景",
+          "key": "section-07-ebfb926522",
+          "kind": "rich_text"
+        },
+        {
+          "body": "尽责性较高的人在沟通中倾向于直接、有条理、有议程。他们喜欢\"说好的事情就是说了\"，对含糊不清的表达可能不耐受。他们的承诺分量很重——一旦答应，大概率会做到。这在关系中建立了可靠感，但有时也可能因为过于较真而让关系显得有压力。\n\n尽责性较低的人在沟通中更随性、更开放。他们可能临时改变计划而不觉得有什么问题，约会迟到时感到抱歉但不认为这严重到影响关系。他们的优势是关系中有松弛感和幽默感；代价是身边较亲近的人可能需要反复确认约定，或者自己承担更多的计划和跟踪工作。\n\n在亲密关系中，尽责性差异是常见的摩擦来源。一方需要一个明确的计划才能安心，另一方觉得\"到了再说\"才是生活的意义。这不一定是关系不匹配，前提是双方都理解这不是在乎与不在乎的问题，而是默认模式不同。高尽责一方可以学习在低风险的事情上放手，低尽责一方可以识别出对对方特别重要的承诺并认真对待。\n\n---",
+          "heading": "沟通和关系场景",
+          "key": "section-08-e7c5e0a7c3",
+          "kind": "rich_text"
+        },
+        {
+          "body": "尽责性较高的人在压力下容易表现为\"过度补偿\"——面临不确定性时加倍控制，制定更详细的计划，更严格地执行。这在部分情境中是有效的，但如果事件本身无法通过更多控制来解决（如等待体检结果、面对他人评价），这种加倍控制会变成额外的压力源，导致焦虑和过度疲劳。\n\n尽责性较低的人在压力下容易表现为\"回避\"或\"分散\"——面对压力任务时可能先做其他事情，或者干脆离开压力情境。这种策略在短期可能保护情绪，但长期可能导致需要持续应对的压力积聚。\n\n了解自己的默认压力模式是有用的。倾向于过度补偿的人可以练习区分\"可控的\"和\"不可控的\"事件——为前者做计划，为后者做心理准备的练习而不是行动计划。倾向于回避的人可以建立一个\"最小响应\"原则——面对不想做的事情，做一点点就算成功，不要求做完。从零到一远比从一到一百更难，所以只要求自己做到\"一\"。\n\n---",
+          "heading": "压力情境",
+          "key": "section-09-90c43fd00e",
+          "kind": "rich_text"
+        },
+        {
+          "body": "| 倾向 | 潜在优势 | 伴随代价 |\n|------|---------|---------|\n| 较高 | 可靠、有条理、坚持目标、延迟满足、兑现承诺 | 可能过度控制、难以放松、对不可控事件焦虑、在需要即兴发挥时僵硬 |\n| 较低 | 灵活、随机应变、轻松自在、即时反应快、压力下不会过度紧张 | 可能拖延、承诺兑现不稳定、长期目标难以持续推进、需要外部结构 |\n\n优势和代价不是固定的标签，而是同一枚硬币的两面。在需要严格纪律的情境（如备考、康复训练）中，高尽责是资产；在需要放松和即兴的情境（如假期、家庭聚会）中，同一倾向可能让自己和他人都感到紧绷。\n\n---",
+          "heading": "潜在优势与伴随代价",
+          "key": "section-10-833b1b1a4f",
+          "kind": "rich_text"
+        },
+        {
+          "body": "尽责性在很大程度上受情境驱动。一个人可能在工作上极其尽责——文件整齐、会议准时、项目节点从不延误——但回到家却堆着三天没洗的碗、打开快递盒子随手扔在地上。另一个人可能社区活动从不缺席、答应朋友的事记得比谁都清楚，但在个人事务上却总是拖延。\n\n**场景**：在银行做了八年信审的老陈，桌面永远整洁，报表从不出错，同事都觉得他\"高尽责\"。但同一批同事如果看到他周末的样子会怀疑认错了人——他家厨房的灶台上放着上周买回来还没拆的快递，阳台上堆着说要整理的旧书，他的跑步计划从去年秋天开始就没有执行过一天。不是他\"变懒了\"，而是他的尽责性高度集中在\"别人看得到的事情\"上，私域里他更倾向于自由和松弛。\n\n这说明：尽责性不是弥漫到一切的稳定标签。了解自己在哪些领域倾向较高、在哪些领域倾向较低，比一个笼统的\"尽责性得分\"更有实际价值。如果你的尽责性在工作领域已经很高，你可能更需要给私人领域留出放松的空间，而不是觉得\"这里也该管起来\"。能量是有限的，在所有领域都维持高尽责性是不可持续的。\n\n---",
+          "heading": "情境变化与反例",
+          "key": "section-11-74c89fad12",
+          "kind": "rich_text"
+        },
+        {
+          "body": "1. 回忆过去一个月里三次放弃或推迟的事情——是因为外部不可抗力，还是因为你选择了做别的事？你怎么看这三件事？\n2. 检查你如何处理约定：你是那种答应了就自动记住的人，还是需要对方在约定的前一天再提醒你？\n3. 观察你的空间：你的工作台或房间是\"每样东西都有自己的位置\"，还是\"大概知道在哪就行\"？你不是在评价它好不好，只是在观察它是什么样子。\n4. 问自己一个问题：当你在做一件事的途中遇到一个更有趣的事情，你通常先把正在做的事做完，还是先跳到新的？\n\n观察时注意区分不同情境——你在不同的人面前、不同的任务类型、不同的时间段中，尽责性的表达可能非常不同。\n\n---",
+          "heading": "如何观察自己的尽责性",
+          "key": "section-12-c2b9578725",
+          "kind": "rich_text"
+        },
+        {
+          "body": "如果你的尽责性倾向较高，阅读重点不是确认\"我很可靠\"，而是问：这种倾向在什么时候让你高效、踏实、有成就感？在什么时候让你紧绷、过度劳累、难以享受当下？在哪些领域你可以适度放下控制而不影响重要结果？\n\n如果你的尽责性倾向较低，阅读重点不是\"我是不是不够努力\"，而是问：你在什么条件下可以进入持续投入的状态？哪些外部支持（如截止日期、搭班的人、环境转换）帮你把想做的事落到实处？在哪些领域你的灵活性是优势，在哪些领域你可能需要建立一些\"最小程度的秩序\"来保护你的长远利益？\n\n尽责性是最容易观察也最容易误读的维度之一——因为它和我们对\"好习惯\"的文化预期高度重叠。阅读时请把社会评价放下，只把它看作你的一种行为倾向模式。\n\n---",
+          "heading": "如何阅读尽责性报告",
+          "key": "section-13-4ea79a7315",
+          "kind": "rich_text"
+        },
+        {
+          "body": "- 分数区间：[高尽责性](/zh/personality/big-five/conscientiousness-high) · [中等尽责性](/zh/personality/big-five/conscientiousness-mid) · [低尽责性](/zh/personality/big-five/conscientiousness-low)\n- 六个侧面：[胜任感](/zh/personality/big-five/facets/competence) · [秩序](/zh/personality/big-five/facets/order) · [责任感](/zh/personality/big-five/facets/dutifulness) · [成就追求](/zh/personality/big-five/facets/achievement-striving) · [自律](/zh/personality/big-five/facets/self-discipline) · [审慎](/zh/personality/big-five/facets/deliberation)\n- 返回：[大五人格总览](/zh/personality/big-five) · [30 个侧面总览](/zh/personality/big-five/facets)",
+          "heading": "继续阅读",
+          "key": "section-14-6758958b30",
+          "kind": "rich_text"
+        }
+      ],
+      "seo": [],
+      "sitemap_eligible": true,
+      "slug": "big-five/conscientiousness",
+      "source_hash": "a8699d7f393f6924590221e69301baa75bcee0971d1935fb3bc0478b132e552e",
+      "source_package": "big5-zh-v3-52-page-release",
+      "summary": "尽责性关注你安排任务、坚持执行和自我约束的倾向。高尽责性不意味着完美主义，低尽责性不意味着懒惰——它们描述的是倾向，不是品格判断。",
+      "title": "尽责性（Conscientiousness）：组织、坚持与执行的人格维度"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": {
+          "name": "FermatMind Editorial",
+          "organization": "FermatMind",
+          "role": "Editorial"
+        }
+      },
+      "schema_eligible": false,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "conscientiousness-measurement_method-1",
+            "limitation": "不同 Big Five/FFM 工具的层级与计分不能视为相同。",
+            "source_ids": [
+              "S1",
+              "S11",
+              "S2"
+            ],
+            "support_level": "contextual"
+          },
+          {
+            "claim_id": "conscientiousness-meta_analysis-2",
+            "limitation": "群体层面综合关联，不能外推为个体成功、岗位适配或招聘效度。",
+            "source_ids": [
+              "S9"
+            ],
+            "support_level": "direct"
+          },
+          {
+            "claim_id": "conscientiousness-meta_analysis-3",
+            "limitation": "群体层面综合关联，不能外推为个体成功、岗位适配或招聘效度。",
+            "source_ids": [
+              "S9"
+            ],
+            "support_level": "direct"
+          },
+          {
+            "claim_id": "conscientiousness-longitudinal_change-4",
+            "limitation": "只支持群体平均变化，不能预测个人、单一侧面、固定年龄点或复测周期。",
+            "source_ids": [
+              "S4"
+            ],
+            "support_level": "direct"
+          },
+          {
+            "claim_id": "conscientiousness-product-boundary",
+            "limitation": "这是公开的产品/方法边界声明，不是经验性研究结论。",
+            "source_ids": [],
+            "support_level": "not_required"
+          },
+          {
+            "claim_id": "conscientiousness-content-method",
+            "limitation": "这是公开的产品/方法边界声明，不是经验性研究结论。",
+            "source_ids": [],
+            "support_level": "not_required"
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "模型研究不等于费马测试产品验证。",
+          "不用于临床诊断、招聘筛选、升学录取或个体结果预测。"
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Goldberg, L. R.",
+            "claim_ids": [
+              "conscientiousness-measurement_method-1"
+            ],
+            "doi": "10.1037/0022-3514.59.6.1216",
+            "id": "S1",
+            "limitation": "PMID、题名、作者、年份和 DOI 一致；用于五维结构与词汇研究背景，不用于产品级效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
+            "source_type": "peer_reviewed_research",
+            "title": "An alternative 'description of personality': The Big-Five factor structure",
+            "year": 1990
+          },
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Oregon Research Institute IPIP project",
+            "claim_ids": [
+              "conscientiousness-measurement_method-1"
+            ],
+            "doi": null,
+            "id": "S11",
+            "limitation": "IPIP 官方说明明确区分 lexical Big Five、FFM、BFI 与 NEO/IPIP 体系，并使用 ‘similar constructs’ 而非量表等同。具体条目映射见 https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm。 该官方网页未标注出版年；year 记录本次公开核验的访问快照年，不代表出版年份。",
+            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
+            "source_type": "official_documentation",
+            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
+            "year": 2026
+          },
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Soto, C. J.; John, O. P.",
+            "claim_ids": [
+              "conscientiousness-measurement_method-1"
+            ],
+            "doi": "10.1037/pspp0000096",
+            "id": "S2",
+            "limitation": "PMID 与 DOI 核验一致；BFI-2 的 15-facet 架构只用于说明不同量表的下位结构并不相同。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+            "source_type": "peer_reviewed_research",
+            "title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+            "year": 2017
+          },
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Zell, E.; Lesick, T. L.",
+            "claim_ids": [
+              "conscientiousness-meta_analysis-2",
+              "conscientiousness-meta_analysis-3"
+            ],
+            "doi": "10.1111/jopy.12683",
+            "id": "S9",
+            "limitation": "期刊页核验 54 个元分析、题名、作者、DOI 和出版信息；只支持群体层面关联及情境差异。",
+            "public_url": "https://onlinelibrary.wiley.com/doi/10.1111/jopy.12683",
+            "source_type": "peer_reviewed_research",
+            "title": "Big five personality traits and performance: A quantitative synthesis of 50+ meta-analyses",
+            "year": 2022
+          },
+          {
+            "accessed_at": "2026-07-18T00:00:00+00:00",
+            "author_or_organization": "Roberts, B. W.; Walton, K. E.; Viechtbauer, W.",
+            "claim_ids": [
+              "conscientiousness-longitudinal_change-4"
+            ],
+            "doi": "10.1037/0033-2909.132.1.1",
+            "id": "S4",
+            "limitation": "PMID、DOI、题名和作者一致；仅支持群体平均变化，不支持个体预测或固定复测周期。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/16435954/",
+            "source_type": "peer_reviewed_research",
+            "title": "Patterns of mean-level change in personality traits across the life course: A meta-analysis of longitudinal studies",
+            "year": 2006
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "b8710451be0958185dace6b25e42eb5f9c799c726729c49bc4093cd5b5aa7a62"
+}

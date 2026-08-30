@@ -1,0 +1,73 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh/personality",
+    "entity_key": "index",
+    "entity_type": "hub",
+    "framework": "mbti",
+    "page_kind": "hub",
+    "slug": "personality"
+  },
+  "locale": "zh-CN",
+  "payload": {
+    "landing_surface_v1": {
+      "attribution_scope": "public_personality_landing",
+      "content_continue_target": "/zh/topics/mbti",
+      "continue_reading_keys": [
+        "topic_cluster",
+        "personality_detail"
+      ],
+      "cta_bundle": [
+        {
+          "href": "/zh/tests/mbti-personality-test-16-personality-types",
+          "key": "start_test",
+          "kind": "start_test",
+          "label": "开始测试"
+        },
+        {
+          "href": "/zh/topics/mbti",
+          "key": "topic_cluster",
+          "kind": "discover",
+          "label": "查看主题聚合"
+        }
+      ],
+      "discoverability_items": [],
+      "discoverability_keys": [
+        "personality_index",
+        "topic_cluster",
+        "career_recommendation",
+        "start_test"
+      ],
+      "entry_surface": "personality_index",
+      "entry_type": "personality_family_index",
+      "indexability_state": "indexable",
+      "landing_contract_version": "landing.surface.v1",
+      "landing_fingerprint": "a47d86c0821e2647df6a73694697e964e3808a3f",
+      "landing_scope": "public_indexable_index",
+      "primary_content_ref": "personality:index",
+      "public_surface_ref": null,
+      "related_surface_keys": [
+        "personality_detail",
+        "topic_cluster"
+      ],
+      "result_resume_target": null,
+      "runtime_artifact_ref": null,
+      "seo_surface_ref": null,
+      "share_safety_state": null,
+      "start_test_target": "/zh/tests/mbti-personality-test-16-personality-types",
+      "summary_blocks": [
+        {
+          "body": "浏览 16 型人格的公开画像、职业建议与延伸阅读。",
+          "key": "hero",
+          "kind": "hero",
+          "title": "人格类型"
+        }
+      ],
+      "surface_family": "personality",
+      "version": "landing.surface.v1"
+    }
+  },
+  "payload_contract": "personality.mbti.hub.current.v1",
+  "source_content_sha256": "f364ae938b4fc33dd6cac12961ccd1deea1fd93777b33f4ab634e19442c03dfc"
+}

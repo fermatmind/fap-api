@@ -1,0 +1,335 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-9/instincts/social",
+    "entity_key": "type-9/social",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-9/instincts/social"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-9/instincts/social"
+      },
+      "canonical_path": "/en/personality/enneagram/type-9/instincts/social",
+      "code": "type-9/social",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-9/social",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "Heavy group contribution does not prove social Nine. Paid duties, mutual aid, family obligation, or exclusion risk may require service; compare whether personal priorities disappear even when membership and voice are secure.",
+          "question": "Does heavy group contribution prove social Nine?"
+        },
+        {
+          "answer": "Belonging can be tested without blaming accommodation by recording power, duty, and consequences of refusal. Silence under credible exclusion is a safety response, while safe dissent provides a cleaner comparison.",
+          "question": "How can belonging be tested without blaming accommodation?"
+        },
+        {
+          "answer": "A counterexample weakens the participation hypothesis when the person declines optional labor, protects a personal commitment, states disagreement, and stays connected without later compensating through invisible work.",
+          "question": "Which counterexample weakens the participation hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-9/instincts/social",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-9/social",
+        "x-default": "/en/personality/enneagram/type-9/instincts/social",
+        "zh-CN": "/zh/personality/enneagram/type-9/instincts/social"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-9",
+          "label": "core_type:type-9",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-9"
+        },
+        {
+          "href": "/en/personality/enneagram/type-9/instincts/self-preservation",
+          "label": "instinctual_subtype:type-9/self-preservation",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-9/self-preservation"
+        },
+        {
+          "href": "/en/personality/enneagram/type-9/instincts/one-to-one",
+          "label": "instinctual_subtype:type-9/one-to-one",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-9/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "Test whether participation protects connection while personal priorities repeatedly become less visible. High contribution alone is not evidence because groups often depend on legitimate shared labor.",
+          "key": "traditional_hypothesis",
+          "title": "Observe belonging through contribution"
+        },
+        {
+          "body_md": "Observe the same person in one group where dissent is safe and another where membership, income, or support may be lost. If silence follows risk, power explains more than subtype language.",
+          "key": "matched_comparison",
+          "title": "Compare secure membership with exclusion risk"
+        },
+        {
+          "body_md": "Social instinct here is a traditional attention comparison and does not describe bodily mechanisms or a fixed group-response system. Belonging needs and institutional consequences remain concrete.",
+          "key": "instinct_boundary",
+          "title": "Keep social attention conceptual"
+        },
+        {
+          "body_md": "A socially active organizer may still postpone their own agenda by carrying collective needs. Visibility, competence, and enthusiasm do not rule the hypothesis in or out.",
+          "key": "countertype_variation",
+          "title": "Allow public energy and leadership"
+        },
+        {
+          "body_md": "Employment duties, family obligation, mutual-aid norms, migration, discrimination, language status, accessibility, and dependency can make participation necessary rather than identity-driven.",
+          "key": "alternative_environment",
+          "title": "Check role, culture, and unequal voice"
+        },
+        {
+          "body_md": "Confidence should fall when the person declines nonessential group work, keeps a personal commitment, states dissent, and remains connected without compensating through hidden extra labor.",
+          "key": "counterexample",
+          "title": "Test belonging after a bounded refusal"
+        },
+        {
+          "body_md": "Instrument-specific evidence does not prove universal subtype structure or cross-cultural equivalence. Use contribution, voice, and membership records only as tentative comparisons.",
+          "key": "evidence_boundary",
+          "title": "Limit claims to revisable observations"
+        },
+        {
+          "body_md": "Duration: 6\n\nContext: Across six days, select one group task, one meeting dissent, and one request that conflicts with a protected personal commitment.\n\nObservable signal: Record role duty, volunteered labor, speaking time, stated preference, exclusion risk, response to refusal, and whether personal time remains protected.\n\nPage-specific signal: Compare contribution and dissent in a secure group with behavior where income, care, status, or community access depends on compliance.\n\nAlternative explanation: Check job description, collective norms, minority stress, migration, language access, disability, family duty, and credible exclusion.\n\nReflection prompt: Name one refusal that preserved belonging and one silence shaped by real power, then adjust the social hypothesis without blaming the person.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Check job description, collective norms, minority stress, migration, language access, disability, family duty, and credible exclusion.",
+            "context": "Across six days, select one group task, one meeting dissent, and one request that conflicts with a protected personal commitment.",
+            "duration_days": 6,
+            "observable_signal": "Record role duty, volunteered labor, speaking time, stated preference, exclusion risk, response to refusal, and whether personal time remains protected.",
+            "page_specific_signal": "Compare contribution and dissent in a secure group with behavior where income, care, status, or community access depends on compliance.",
+            "reflection_prompt": "Name one refusal that preserved belonging and one silence shaped by real power, then adjust the social hypothesis without blaming the person."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "Type Nine social is a traditional secondary hypothesis linking a core-Nine stability pattern with participation, shared workload, group rhythm, belonging, and the risk of muting a personal agenda. It does not describe bodily mechanisms. Service may instead reflect job duty, collective culture, mutual aid, exclusion risk, minority stress, or unequal access to voice.",
+        "title": "Type Nine social: belonging through participation as a secondary hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-9/instincts/social",
+      "source_hash": "6346532b09b538f2edee6bdfa632c9f5c07a7b60e4956c710a584fb9c6153ee5",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "Type Nine social is a traditional secondary hypothesis linking a core-Nine stability pattern with participation, shared workload, group rhythm, belonging, and the risk of muting a personal agenda. It does not describe bodily mechanisms. Service may instead reflect job duty, collective culture, mutual aid, exclusion risk, minority stress, or unequal access to voice.",
+      "title": "Type Nine social: belonging through participation as a secondary hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "5b7fb69060755102bb061b3360dc90dffd514669f57ef559668268d3dbc201dc"
+}

@@ -1,0 +1,335 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-7/instincts/social",
+    "entity_key": "type-7/social",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-7/instincts/social"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-7/instincts/social"
+      },
+      "canonical_path": "/en/personality/enneagram/type-7/instincts/social",
+      "code": "type-7/social",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-7/social",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Values, faith, school requirements, professional development, mutual aid, or community necessity may explain volunteering. Compare free choice, follow-through, and recognition effects.",
+          "question": "Does volunteering prove a social Seven subtype?"
+        },
+        {
+          "answer": "A stated sacrifice may benefit others, protect status, meet an imposed role, or express a chosen value. Recognition conditions help separate these explanations without assigning moral worth.",
+          "question": "Why examine sacrifice and recognition together?"
+        },
+        {
+          "answer": "Steady participation in uncredited maintenance, without resentment or a need to reopen more stimulating roles, weakens a recognition-centered account of shared possibility.",
+          "question": "What anonymous task weakens the social hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-7/instincts/social",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-7/social",
+        "x-default": "/en/personality/enneagram/type-7/instincts/social",
+        "zh-CN": "/zh/personality/enneagram/type-7/instincts/social"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-7",
+          "label": "core_type:type-7",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-7"
+        },
+        {
+          "href": "/en/personality/enneagram/type-7/instincts/self-preservation",
+          "label": "instinctual_subtype:type-7/self-preservation",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-7/self-preservation"
+        },
+        {
+          "href": "/en/personality/enneagram/type-7/instincts/one-to-one",
+          "label": "instinctual_subtype:type-7/one-to-one",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-7/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "The tradition suggests that attention may move toward inspiring a group, postponing an immediate preference, or becoming the person who opens a better collective future. Observe who benefits and what choice remains available.",
+          "key": "traditional_hypothesis",
+          "title": "Treat contribution as a proposed route to possibility"
+        },
+        {
+          "body_md": "Social instinct is used here as a traditional observation label, not evidence about bodily mechanisms. Belonging, exclusion, status, law, and organizational design require direct contextual analysis.",
+          "key": "instinct_boundary",
+          "title": "Keep social language at the level of attention and roles"
+        },
+        {
+          "body_md": "Hold the task and group benefit constant, then compare participation when credit is public versus absent. Record whether energy, promise completion, resentment, and option seeking change with recognition.",
+          "key": "matched_comparison",
+          "title": "Compare recognized and anonymous contribution"
+        },
+        {
+          "body_md": "This hypothesis can include delaying pleasure for a cause as well as energizing others around a shared possibility. Neither self-denial nor charisma is sufficient without repeated context and counterexamples.",
+          "key": "countertype_variation",
+          "title": "Expect both restraint and visible enthusiasm"
+        },
+        {
+          "body_md": "Care work, activism, teaching, religious duty, citizenship demands, marginalized-group survival, performance metrics, and promotion systems may reward sacrifice or public contribution. These forces can be more explanatory than subtype.",
+          "key": "alternative_environment",
+          "title": "Audit unpaid labor and institutional incentives"
+        },
+        {
+          "body_md": "Confidence should decline when the person comfortably chooses a private preference, contributes anonymously without tracking recognition, refuses unfair service expectations, or stays with routine group maintenance after inspiration fades.",
+          "key": "counterexample",
+          "title": "Look for private enjoyment without moral accounting"
+        },
+        {
+          "body_md": "The subtype hypothesis does not measure generosity, selfishness, citizenship, leadership, or ethics. Instrument-specific evidence cannot establish universal ontology or cultural equivalence, and group consequences remain factual questions.",
+          "key": "evidence_boundary",
+          "title": "Do not infer virtue or universal structure"
+        },
+        {
+          "body_md": "Duration: 5\n\nContext: Across five days, select one visible contribution and one anonymous maintenance task that offer comparable benefit to the same group.\n\nObservable signal: Record promised work, actual beneficiary, personal preference deferred, recognition available, resentment stated, completion quality, and freedom to decline.\n\nPage-specific signal: Compare engagement when status is removed but the collective benefit and workload remain similar.\n\nAlternative explanation: Check unpaid role expectations, care duties, faith practice, activism, promotion incentives, exclusion risk, and community survival needs.\n\nReflection prompt: Identify whether recognition, free choice, or concrete group benefit best explains the difference and revise the subtype claim accordingly.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Check unpaid role expectations, care duties, faith practice, activism, promotion incentives, exclusion risk, and community survival needs.",
+            "context": "Across five days, select one visible contribution and one anonymous maintenance task that offer comparable benefit to the same group.",
+            "duration_days": 5,
+            "observable_signal": "Record promised work, actual beneficiary, personal preference deferred, recognition available, resentment stated, completion quality, and freedom to decline.",
+            "page_specific_signal": "Compare engagement when status is removed but the collective benefit and workload remain similar.",
+            "reflection_prompt": "Identify whether recognition, free choice, or concrete group benefit best explains the difference and revise the subtype claim accordingly."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "Type Seven social is a traditional, evidence-limited hypothesis combining Type Seven possibility with contribution, shared possibility, group ideals, and tension around recognition. Service or sacrifice does not establish subtype because unpaid labor, professional duty, community survival, status incentives, discrimination, and role expectations can create similar behavior.",
+        "title": "Type Seven social: a contribution, shared possibility, and recognition tension hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-7/instincts/social",
+      "source_hash": "acc0603b201d8fb43284bfc0c274ba4375beb11ad4f899879ef35a57a214d621",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "Type Seven social is a traditional, evidence-limited hypothesis combining Type Seven possibility with contribution, shared possibility, group ideals, and tension around recognition. Service or sacrifice does not establish subtype because unpaid labor, professional duty, community survival, status incentives, discrimination, and role expectations can create similar behavior.",
+      "title": "Type Seven social: a contribution, shared possibility, and recognition tension hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "ab3032ecb596e1edf7b8aac379dc7438badc066d8094f636256f5149393e0c55"
+}

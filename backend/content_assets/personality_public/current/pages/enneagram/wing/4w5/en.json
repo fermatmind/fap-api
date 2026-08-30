@@ -1,0 +1,300 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/wings/4w5",
+    "entity_key": "4w5",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/4w5"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/wings/4w5"
+      },
+      "canonical_path": "/en/personality/enneagram/wings/4w5",
+      "code": "4w5",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "4w5",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Expertise, confidentiality, concentration, safety, or work design may require solitary research. Look for Type Four meaning attention and disconfirming cases.",
+          "question": "Does solitary research establish 4w5?"
+        },
+        {
+          "answer": "Hold privacy constant. A 4w5 hypothesis keeps personal meaning and authorship central; a Five hypothesis may focus more directly on knowledge, energy, and sufficient preparation.",
+          "question": "How does 4w5 differ from a Five hypothesis?"
+        },
+        {
+          "answer": "Easy sharing across audiences, privacy limited to formal rules, or analysis with no recurring authorship concern should reduce confidence in 4w5.",
+          "question": "What weakens private depth as a wing hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/4w5",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:4w5",
+        "x-default": "/en/personality/enneagram/wings/4w5",
+        "zh-CN": "/zh/personality/enneagram/wings/4w5"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-4",
+          "label": "core_type:type-4",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-4"
+        },
+        {
+          "href": "/en/personality/enneagram/type-5",
+          "label": "core_type:type-5",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-5"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/4w3",
+          "label": "wing:4w3",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:4w3"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "Start with Type Four authorship and meaning, then ask whether privacy and conceptual distance shape expression. Solitude without recurring identity concern may reflect Five themes, concentration, fatigue, safety, or job design.",
+          "key": "core_first_modifier",
+          "title": "Keep meaning before privacy"
+        },
+        {
+          "body_md": "Compared with 4w3 visible delivery, 4w5 may protect incubation and selective disclosure. Compared with Five, personal meaning remains central rather than information sufficiency or resource conservation alone.",
+          "key": "sibling_core_comparison",
+          "title": "Contrast 4w5 with 4w3 and Five"
+        },
+        {
+          "body_md": "Track the same idea in a private notebook, a trusted expert review, and a public version. Record what is withheld for meaning, what is withheld for evidence, and what changes with safety.",
+          "key": "observable_situations",
+          "title": "Compare private draft, expert review, and public release"
+        },
+        {
+          "body_md": "The hypothesis weakens when sharing is easy across audiences, privacy appears only under confidentiality rules, or analysis continues without any authorship or identity concern.",
+          "key": "counterexample",
+          "title": "Use ordinary sharing and deadline-only privacy as tests"
+        },
+        {
+          "body_md": "Research, therapy confidentiality, intellectual property, disability access, harassment risk, and remote work can require privacy. Compare safe voluntary settings before retaining wing language.",
+          "key": "alternative_explanations",
+          "title": "Test expertise, safety, and access"
+        },
+        {
+          "body_md": "Sparse wing evidence supports only a tentative observation. It cannot prove intelligence, originality, introversion, health, expertise, or relational capacity.",
+          "key": "wing_boundary",
+          "title": "Keep private depth evidence limited"
+        },
+        {
+          "body_md": "Duration: 5\n\nContext: Follow one idea through a private draft, trusted expert review, and public version over five days.\n\nObservable signal: Record content withheld, reason given, evidence standard, safety condition, authorship concern, and change after feedback.\n\nPage-specific signal: Separate a detail withheld to protect personal meaning from one withheld for accuracy, law, or safety.\n\nAlternative explanation: Compare expertise, confidentiality, intellectual property, access needs, harassment risk, and work design.\n\nReflection prompt: Name the stage where ordinary professional constraints fully explain privacy and adjust the wing hypothesis.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Compare expertise, confidentiality, intellectual property, access needs, harassment risk, and work design.",
+            "context": "Follow one idea through a private draft, trusted expert review, and public version over five days.",
+            "duration_days": 5,
+            "observable_signal": "Record content withheld, reason given, evidence standard, safety condition, authorship concern, and change after feedback.",
+            "page_specific_signal": "Separate a detail withheld to protect personal meaning from one withheld for accuracy, law, or safety.",
+            "reflection_prompt": "Name the stage where ordinary professional constraints fully explain privacy and adjust the wing hypothesis."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "The 4w5 wing is a core-first, evidence-limited hypothesis: Type Four attention to identity and meaning may be modified by Five-adjacent privacy, conceptual depth, and selective disclosure. Solitary research or restrained expression cannot establish a wing because expertise, confidentiality, access needs, and work design can look the same.",
+        "title": "4w5: private depth as a core-first wing hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/4w5",
+      "source_hash": "edf265da57d2176108b09360d31882d9786ea3a4c321498d81e39724b2211d83",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "The 4w5 wing is a core-first, evidence-limited hypothesis: Type Four attention to identity and meaning may be modified by Five-adjacent privacy, conceptual depth, and selective disclosure. Solitary research or restrained expression cannot establish a wing because expertise, confidentiality, access needs, and work design can look the same.",
+      "title": "4w5: private depth as a core-first wing hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "1d9af3ef5f4acc6b62ad5c4513b58c4757eaaf9cb6bcdf201d12f62f3b6ba46b"
+}

@@ -1,0 +1,300 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/wings/3w2",
+    "entity_key": "3w2",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/3w2"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/wings/3w2"
+      },
+      "canonical_path": "/en/personality/enneagram/wings/3w2",
+      "code": "3w2",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "3w2",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Sales targets, fundraising duties, industry norms, or genuine sociability can explain networking. Look for Type Three result attention plus a recurring relational modifier and explicit counterexamples.",
+          "question": "Does persuasive networking establish 3w2?"
+        },
+        {
+          "answer": "Hold the helpful act constant. A 3w2 hypothesis keeps the valued result and credible delivery central; a Two hypothesis may organize attention more directly around need, connection, and being useful.",
+          "question": "How does 3w2 differ from a Two hypothesis?"
+        },
+        {
+          "answer": "Warmth that continues without strategic value, networking limited to a job requirement, or a stable preference for private craft over audience reach would weaken it.",
+          "question": "What weakens the relational visibility hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/3w2",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:3w2",
+        "x-default": "/en/personality/enneagram/wings/3w2",
+        "zh-CN": "/zh/personality/enneagram/wings/3w2"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-3",
+          "label": "core_type:type-3",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-3"
+        },
+        {
+          "href": "/en/personality/enneagram/type-2",
+          "label": "core_type:type-2",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-2"
+        },
+        {
+          "href": "/en/personality/enneagram/wings/3w4",
+          "label": "wing:3w4",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:3w4"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "Begin with Type Three attention to credible results, then ask whether connection and usefulness consistently shape how those results are pursued. Sociability without recurring result attention may reflect temperament, team norms, customer duty, or learned communication.",
+          "key": "core_first_modifier",
+          "title": "Keep valued results at the core"
+        },
+        {
+          "body_md": "Compared with 3w4 distinctive craft, 3w2 may emphasize accessible presentation and relational reach. Compared with Two, the proposed core remains the result and its recognized value rather than another person's need or connection itself.",
+          "key": "sibling_core_comparison",
+          "title": "Contrast 3w2 with 3w4 and Two"
+        },
+        {
+          "body_md": "Compare a shared win, an introduction that creates no return, and a deliverable whose audience gives no response. Record whether relationship effort supports the task, becomes the success measure, or disappears when it carries no visible value.",
+          "key": "observable_situations",
+          "title": "Observe credit, introductions, and no-response work"
+        },
+        {
+          "body_md": "The hypothesis weakens when the person consistently chooses quiet craft over relational reach, offers warmth without tracking usefulness or response, or networks only because the role requires it. A Two, role, or ordinary affiliation explanation may fit better.",
+          "key": "counterexample",
+          "title": "Use quiet delivery and non-strategic warmth as tests"
+        },
+        {
+          "body_md": "Account management, fundraising, leadership, hospitality, and team-based rewards can require visible connection. Hold task and audience constant while comparing behavior outside the rewarded role and where credit allocation changes.",
+          "key": "alternative_explanations",
+          "title": "Test incentives and collaboration design"
+        },
+        {
+          "body_md": "Wing research is sparse, so 3w2 remains a secondary observation hypothesis. It cannot establish charisma, leadership ability, employability, moral worth, compatibility, or future success.",
+          "key": "wing_boundary",
+          "title": "Keep relational visibility evidence limited"
+        },
+        {
+          "body_md": "Duration: 4\n\nContext: Choose one shared achievement, one useful introduction, and one contribution that receives no recognition.\n\nObservable signal: Record the success criterion, relationship action, credit distribution, audience response, and behavior after no return appears.\n\nPage-specific signal: Distinguish connection used to improve the result from connection pursued without performance value.\n\nAlternative explanation: Compare sales incentives, leadership duty, team rewards, hospitality norms, affiliation, and power differences.\n\nReflection prompt: Identify where role design explains relational visibility better than a 3w2 modifier.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Compare sales incentives, leadership duty, team rewards, hospitality norms, affiliation, and power differences.",
+            "context": "Choose one shared achievement, one useful introduction, and one contribution that receives no recognition.",
+            "duration_days": 4,
+            "observable_signal": "Record the success criterion, relationship action, credit distribution, audience response, and behavior after no return appears.",
+            "page_specific_signal": "Distinguish connection used to improve the result from connection pursued without performance value.",
+            "reflection_prompt": "Identify where role design explains relational visibility better than a 3w2 modifier."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "The 3w2 wing is a core-first, evidence-limited hypothesis: Type Three attention to valued results may be modified by Two-adjacent connection, usefulness, and audience response. Warm presentation or networking cannot establish a wing because service roles, sales incentives, and collaboration norms can look the same.",
+        "title": "3w2: relational visibility as a core-first wing hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/3w2",
+      "source_hash": "07dc93e1be586628a7d978805f5fe268b23de9df6828ea9f0a3dd08a35d78495",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "The 3w2 wing is a core-first, evidence-limited hypothesis: Type Three attention to valued results may be modified by Two-adjacent connection, usefulness, and audience response. Warm presentation or networking cannot establish a wing because service roles, sales incentives, and collaboration norms can look the same.",
+      "title": "3w2: relational visibility as a core-first wing hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.wing.traditional_secondary_hypothesis",
+            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
+            "source_ids": [
+              "hook_2021_systematic_review",
+              "riso_hudson_1999_wisdom"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Don Richard Riso; Russ Hudson",
+            "claim_ids": [
+              "claim.wing.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "riso_hudson_1999_wisdom",
+            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+            "source_type": "book",
+            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+            "year": 1999
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "0e222b4a842c32c27d4580301216a8406d93b4e448cedd3941335520c64e1fd6"
+}

@@ -1,0 +1,335 @@
+{
+  "content_state": "baseline",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/en/personality/enneagram/type-8/instincts/one-to-one",
+    "entity_key": "type-8/one-to-one",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-8/instincts/one-to-one"
+  },
+  "locale": "en",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/en/personality/enneagram/type-8/instincts/one-to-one"
+      },
+      "canonical_path": "/en/personality/enneagram/type-8/instincts/one-to-one",
+      "code": "type-8/one-to-one",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-8/one-to-one",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "No. Conflict style, harassment, actual danger, cultural norms, trauma safety, or an unequal relationship can produce confrontation. Consent and access conditions must be examined.",
+          "question": "Does confrontation establish one-to-one Eight?"
+        },
+        {
+          "answer": "Use decisions where both people can refuse safely, retain resources, propose changes, and seek support. Influence is mutual only when neither person faces retaliation or essential loss.",
+          "question": "How should mutual influence be tested?"
+        },
+        {
+          "answer": "Accepting a clear no, preserving the other person’s access, allowing them to set the pace, and repairing prior pressure strongly weaken a possession-centered interpretation.",
+          "question": "Which consent event weakens a possession hypothesis?"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-8/instincts/one-to-one",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-8/one-to-one",
+        "x-default": "/en/personality/enneagram/type-8/instincts/one-to-one",
+        "zh-CN": "/zh/personality/enneagram/type-8/instincts/one-to-one"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/en/personality/enneagram",
+          "label": "hub:enneagram",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/en/personality/enneagram/type-8",
+          "label": "core_type:type-8",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-8"
+        },
+        {
+          "href": "/en/personality/enneagram/type-8/instincts/self-preservation",
+          "label": "instinctual_subtype:type-8/self-preservation",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-8/self-preservation"
+        },
+        {
+          "href": "/en/personality/enneagram/type-8/instincts/social",
+          "label": "instinctual_subtype:type-8/social",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-8/social"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "en",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "The tradition proposes that autonomy may be tested through direct impact on a close other and resistance to being shaped in return. Observe explicit agreements and actual freedom, not chemistry alone.",
+          "key": "traditional_hypothesis",
+          "title": "Treat intense mutual influence as a tentative pattern"
+        },
+        {
+          "body_md": "Use similar decisions where resources are balanced versus concentrated. Record requests, refusals, access loss, retaliation, concessions, and whether both people can revise the agreement safely.",
+          "key": "matched_comparison",
+          "title": "Compare influence under equal and unequal power"
+        },
+        {
+          "body_md": "One-to-one instinct is used here as a traditional attention convention, not evidence about bodily mechanisms. Attraction, trauma, coercion, attachment concerns, and violence need separate qualified support.",
+          "key": "instinct_boundary",
+          "title": "Keep intensity separate from physiology"
+        },
+        {
+          "body_md": "The proposed pattern may appear as overt confrontation, intense loyalty, testing, possessive access rules, or quiet negotiation over who influences whom. Volume does not determine the function.",
+          "key": "countertype_variation",
+          "title": "Allow challenge, devotion, or private control"
+        },
+        {
+          "body_md": "Financial dependence, immigration status, workplace hierarchy, disability care, harassment, abuse, custody conflict, or unsafe housing can constrain refusal. These are safety and power facts.",
+          "key": "alternative_environment",
+          "title": "Check coercion and dependence before typology"
+        },
+        {
+          "body_md": "Confidence should drop when a clear no is accepted without pressure, access remains intact, decisions are shared, the person allows themselves to be influenced, and repair follows excess impact.",
+          "key": "counterexample",
+          "title": "Look for unpunished refusal and flexible influence"
+        },
+        {
+          "body_md": "This subtype cannot establish intimacy capacity, compatibility, loyalty, or relationship outcomes. Instrument-specific evidence cannot prove universal subtype ontology, and consent can be withdrawn.",
+          "key": "evidence_boundary",
+          "title": "Do not infer compatibility or safe intensity"
+        },
+        {
+          "body_md": "Duration: 5\n\nContext: Over five days, examine one emotionally intense decision and one ordinary shared choice with the same close person.\n\nObservable signal: Record resources held by each person, exact request, refusal, consequence, access retained, influence accepted, agreement changed, and repair completed.\n\nPage-specific signal: Compare mutual influence when refusal is cost-free with behavior when one person controls essential access.\n\nAlternative explanation: Check financial dependence, immigration status, care needs, workplace hierarchy, harassment, trauma safety, custody, and housing risk.\n\nReflection prompt: Identify the clearest unpunished refusal and use it to revise any possession or control hypothesis.",
+          "key": "observation_exercise",
+          "observation_exercise": {
+            "alternative_explanation": "Check financial dependence, immigration status, care needs, workplace hierarchy, harassment, trauma safety, custody, and housing risk.",
+            "context": "Over five days, examine one emotionally intense decision and one ordinary shared choice with the same close person.",
+            "duration_days": 5,
+            "observable_signal": "Record resources held by each person, exact request, refusal, consequence, access retained, influence accepted, agreement changed, and repair completed.",
+            "page_specific_signal": "Compare mutual influence when refusal is cost-free with behavior when one person controls essential access.",
+            "reflection_prompt": "Identify the clearest unpunished refusal and use it to revise any possession or control hypothesis."
+          },
+          "title": "Observation exercise"
+        }
+      ],
+      "seo": {
+        "description": "Type Eight one-to-one is a traditional, evidence-limited hypothesis combining Type Eight autonomy with intensity, possession, mutual influence, consent, refusal, and equal power. Confrontation or strong bonding does not establish subtype because coercion, trauma safety, unequal dependence, cultural norms, relationship agreements, harassment, and real danger can produce similar behavior.",
+        "title": "Type Eight one-to-one: an intensity, possession, and mutual-influence hypothesis"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-8/instincts/one-to-one",
+      "source_hash": "3a89b39132872ee56d200f94a65fef5adf2651880cf4e3f942d3a4aa963b29f7",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "Type Eight one-to-one is a traditional, evidence-limited hypothesis combining Type Eight autonomy with intensity, possession, mutual influence, consent, refusal, and equal power. Confrontation or strong bonding does not establish subtype because coercion, trauma safety, unequal dependence, cultural norms, relationship agreements, harassment, and real danger can produce similar behavior.",
+      "title": "Type Eight one-to-one: an intensity, possession, and mutual-influence hypothesis"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [
+          {
+            "claim_id": "claim.framework.nine_type_observation",
+            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.evidence.mixed_and_instrument_specific",
+            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
+            "source_ids": [
+              "hook_2021_systematic_review"
+            ]
+          },
+          {
+            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
+            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
+            "source_ids": [
+              "naranjo_1994_character_neurosis",
+              "yanartas_2022_types_subtypes",
+              "hook_2021_systematic_review"
+            ]
+          }
+        ],
+        "eligible": true,
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ],
+        "sources": [
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [
+              "claim.framework.nine_type_observation",
+              "claim.evidence.mixed_and_instrument_specific",
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Claudio Naranjo",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": null,
+            "id": "naranjo_1994_character_neurosis",
+            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+            "source_type": "book",
+            "title": "Character and Neurosis: An Integrative View",
+            "year": 1994
+          },
+          {
+            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+            "claim_ids": [
+              "claim.subtype.traditional_secondary_hypothesis"
+            ],
+            "doi": "10.21673/anadoluklin.1104082",
+            "id": "yanartas_2022_types_subtypes",
+            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+            "source_type": "peer_reviewed_research",
+            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+            "year": 2022
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "2b5682bcb8184647e023fd3a15f7de8c0928cb5875d12bd0397504e62b61177c"
+}

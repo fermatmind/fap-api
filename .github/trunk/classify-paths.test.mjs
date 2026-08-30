@@ -1,7 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { CAREER_PUBLISHER_BOUNDARY_MATRIX, classifyPaths } from "./classify-paths.mjs";
+import {
+  CAREER_PUBLISHER_BOUNDARY_MATRIX,
+  PERSONALITY_CURRENT_BOUNDARY_MATRIX,
+  classifyPaths,
+} from "./classify-paths.mjs";
 
 const has = (paths, flag) => classifyPaths(paths).flags[flag];
 
@@ -51,6 +55,17 @@ test("classifies Career Current legacy and sharded assets", () => {
   assert.equal(has(["backend/content_assets/career/current/assets.jsonl"], "content_assets"), true);
   assert.equal(has(["backend/content_assets/career/current/identity/shard-00.jsonl"], "content_assets"), true);
   assert.equal(has(["backend/content_assets/career/current/careers/actors/en.json"], "content_assets"), true);
+});
+test("binds every Personality Current package and reader boundary to package validation", () => {
+  for (const boundary of PERSONALITY_CURRENT_BOUNDARY_MATRIX) {
+    const path = boundary.endsWith("/") ? `${boundary}pages/mbti/profile/intj/en.json` : boundary;
+    assert.equal(classifyPaths([path]).operations.personality_current_authority_release, true, path);
+  }
+  assert.equal(
+    classifyPaths(["backend/content_assets/personality_public/big_five_v1_seed.json"])
+      .operations.personality_current_authority_release,
+    false,
+  );
 });
 test("requires the Career publisher for per-page canonical reader changes", () => {
   for (const path of [
