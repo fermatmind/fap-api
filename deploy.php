@@ -21,6 +21,7 @@ set('seo_agent_evidence_boundary', false);
 set('seo_agent_policy_gateway', false);
 set('seo_council_orchestration', false);
 set('career_current_parity_required', false);
+set('private_result_authority_publish_required', true);
 
 set('sentry_release', function () {
     return get('release_name');
@@ -1716,6 +1717,11 @@ task('artisan:scales:seed-default', function () {
 });
 
 task('big5:publish-private-result-authority', function () {
+    if (filter_var(get('private_result_authority_publish_required', true), FILTER_VALIDATE_BOOLEAN) !== true) {
+        writeln('Skipping unchanged Big Five private result authority publication.');
+
+        return;
+    }
     within('{{release_path}}/backend', function (): void {
         run(sprintf(<<<'BASH'
 set -euo pipefail
@@ -1753,6 +1759,11 @@ BASH);
 });
 
 task('riasec:publish-private-result-authority', function () {
+    if (filter_var(get('private_result_authority_publish_required', true), FILTER_VALIDATE_BOOLEAN) !== true) {
+        writeln('Skipping unchanged RIASEC private result authority publication.');
+
+        return;
+    }
     within('{{release_path}}/backend', function (): void {
         run(sprintf(<<<'BASH'
 set -euo pipefail
@@ -1790,6 +1801,11 @@ BASH);
 });
 
 task('enneagram:publish-private-result-authority', function () {
+    if (filter_var(get('private_result_authority_publish_required', true), FILTER_VALIDATE_BOOLEAN) !== true) {
+        writeln('Skipping unchanged Enneagram private result authority publication.');
+
+        return;
+    }
     within('{{release_path}}/backend', function (): void {
         run(sprintf(<<<'BASH'
 set -euo pipefail
@@ -1827,6 +1843,11 @@ BASH);
 });
 
 task('eq60:publish-private-result-authority', function () {
+    if (filter_var(get('private_result_authority_publish_required', true), FILTER_VALIDATE_BOOLEAN) !== true) {
+        writeln('Skipping unchanged EQ60 private result authority publication.');
+
+        return;
+    }
     within('{{release_path}}/backend', function (): void {
         run(sprintf(<<<'BASH'
 set -euo pipefail

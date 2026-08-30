@@ -28,6 +28,8 @@ test("11D and 11E extend only the permanent CI and deploy control plane", () => 
   assert.match(deploy, /seo\.technical_diagnosis_closeout\.v2/);
   assert.match(deploy, /staging_runtime/);
   assert.match(deploy, /production_runtime/);
+  assert.match(deploy, /private_result_authority_publish_required/);
+  assert.match(deploy, /\.classification\.categories == \["infrastructure_deployment"\]/);
 });
 
 test("11D and 11E deployment stay disabled and write immutable exact-SHA closeout receipts only", () => {
@@ -40,6 +42,8 @@ test("11D and 11E deployment stay disabled and write immutable exact-SHA closeou
   assert.match(deployer, /seo\.technical_diagnosis_closeout\.v2/);
   assert.match(deployer, /closeout-environment=\{\{technical_closeout_environment\}\}/);
   assert.match(deployer, /after\('scheduler:wait-natural-heartbeat', 'seo:council-orchestration-closeout'\)/);
+  assert.match(deployer, /set\('private_result_authority_publish_required', true\)/);
+  assert.equal((deployer.match(/get\('private_result_authority_publish_required', true\)/g) || []).length, 4);
   assert.doesNotMatch(deployer, /seo\.council_closeout\.v1/);
   assert.match(deployer, /release-receipts\/seo-council-orchestration/);
   assert.match(deployer, /task\('healthcheck:seo-council-anonymous'/);

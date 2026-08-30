@@ -57,6 +57,7 @@ jobs:
       seo_agent_evidence_boundary: ${{ steps.receipt.outputs.seo_agent_evidence_boundary }}
       seo_agent_policy_gateway: ${{ steps.receipt.outputs.seo_agent_policy_gateway }}
       seo_council_orchestration: ${{ steps.receipt.outputs.seo_council_orchestration }}
+      private_result_authority_publish_required: ${{ steps.receipt.outputs.private_result_authority_publish_required }}
     steps:
       - name: Refuse non-main, PR, failed, or ambiguous CI runs
         shell: bash
@@ -235,6 +236,11 @@ jobs:
           seo_agent_evidence_boundary="$(jq -r '.classification.operations.seo_agent_evidence_boundary == true' "$receipt")"
           seo_agent_policy_gateway="$(jq -r '.classification.operations.seo_agent_policy_gateway == true' "$receipt")"
           seo_council_orchestration="$(jq -r '.classification.operations.seo_council_orchestration == true' "$receipt")"
+          private_result_authority_publish_required="$(jq -r '
+            if (.classification.categories == ["infrastructure_deployment"]
+              and .classification.operations.seo_council_orchestration == true)
+            then false else true end
+          ' "$receipt")"
           {
             echo "deploy=$(jq -r .classification.deploy "$receipt")"
             echo "classification=$classification"
@@ -250,6 +256,7 @@ jobs:
             echo "seo_agent_evidence_boundary=$seo_agent_evidence_boundary"
             echo "seo_agent_policy_gateway=$seo_agent_policy_gateway"
             echo "seo_council_orchestration=$seo_council_orchestration"
+            echo "private_result_authority_publish_required=$private_result_authority_publish_required"
           } >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         if: steps.receipt.outputs.career_current == 'true'
@@ -393,6 +400,7 @@ jobs:
             -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' \
             -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' \
             -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' \
+            -o private_result_authority_publish_required='${{ needs.policy.outputs.private_result_authority_publish_required }}' \
             -o seo_council_orchestration='${{ needs.policy.outputs.seo_council_orchestration }}' --no-interaction
       - name: Read staging SEO Evidence closeout receipt
         if: needs.policy.outputs.seo_agent_evidence_boundary == 'true'
@@ -656,6 +664,7 @@ jobs:
             -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' \
             -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' \
             -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' \
+            -o private_result_authority_publish_required='${{ needs.policy.outputs.private_result_authority_publish_required }}' \
             -o seo_council_orchestration='${{ needs.policy.outputs.seo_council_orchestration }}' -vvv --no-interaction
           deploy_rc=$?
           set -e
