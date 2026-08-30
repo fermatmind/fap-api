@@ -1239,7 +1239,42 @@ set -euo pipefail
 expected_sha="$(tr -d '\r\n' < ../REVISION)"
 case "$expected_sha" in (*[!0-9a-f]*|'') exit 1 ;; esac
 test "${#expected_sha}" -eq 40
-receipt="$({{bin/php}} artisan seo:council-closeout --expected-sha="$expected_sha" --closeout-environment={{technical_closeout_environment}} --json --no-interaction --no-ansi)"
+if receipt="$({{bin/php}} artisan seo:council-closeout --expected-sha="$expected_sha" --closeout-environment={{technical_closeout_environment}} --json --no-interaction --no-ansi)"; then
+  :
+else
+  printf '%s' "$receipt" | {{bin/php}} -r '
+$payload = json_decode(stream_get_contents(STDIN), true);
+$technical = is_array($payload["technical_diagnosis"] ?? null) ? $payload["technical_diagnosis"] : [];
+$nonZero = [];
+foreach ([
+    "real_dependency_binding_bypass", "dependency_ref_mismatch_bypass", "detector_ref_mismatch_bypass",
+    "cross_source_field_bypass", "cross_source_overwrite_bypass", "bundle_order_variance_count",
+    "unsupported_p0_p1_count", "authority_invention_count", "hardcoded_negative_guarantee_count",
+    "orchestrator_runner_bypass", "private_url_leak_count", "policy_bypass_count", "write_attempt_count",
+    "shared_root_misclassification_count", "model_calls", "tool_calls", "external_calls", "business_writes",
+    "cms_writes", "url_truth_writes", "canonical_writes", "robots_writes", "feed_writes", "search_writes",
+    "active_manifest_count", "trusted_key_count", "l4_allow_count", "production_permissions",
+] as $field) {
+    if (is_int($technical[$field] ?? null) && $technical[$field] !== 0) {
+        $nonZero[] = $field;
+    }
+}
+$diagnostic = [
+    "safe_error_code" => $payload["safe_error_code"] ?? "SEO_COUNCIL_CLOSEOUT_HELD",
+    "council_state" => $payload["SEO-PLATFORM-11D"] ?? "UNAVAILABLE",
+    "technical_state" => $technical["closeout_state"] ?? "UNAVAILABLE",
+    "dependency_mode" => $technical["dependency_mode"] ?? "UNAVAILABLE",
+    "dependency_hold_count" => $technical["authority_metrics"]["dependency_hold_count"] ?? null,
+    "contract_hash_drift_count" => $technical["authority_metrics"]["contract_hash_drift_count"] ?? null,
+    "historical_authority_drift_count" => $technical["authority_metrics"]["historical_authority_drift_count"] ?? null,
+    "active_sha_match" => isset($technical["candidate_sha"], $technical["observed_active_sha"])
+        && hash_equals((string) $technical["candidate_sha"], (string) $technical["observed_active_sha"]),
+    "non_zero_metrics" => $nonZero,
+];
+fwrite(STDERR, "SEO Council safe closeout diagnostic: ".json_encode($diagnostic, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES).PHP_EOL);
+' || true
+  exit 1
+fi
 printf '%s' "$receipt" | {{bin/php}} -r '
 $payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
 $environment = (string) ($argv[2] ?? '');
