@@ -1097,8 +1097,20 @@ try {
         throw new RuntimeException("probe");
     }
     echo "SEO Intel isolated read-only runtime guard passed.\n";
-} catch (Throwable) {
-    fwrite(STDERR, "SEO Intel isolated read-only runtime guard failed.\n");
+} catch (Throwable $throwable) {
+    $databaseFailure = $throwable instanceof Illuminate\Database\QueryException
+        ? $throwable->getPrevious()
+        : $throwable;
+    $driverCode = $databaseFailure instanceof PDOException && is_array($databaseFailure->errorInfo)
+        ? (int) ($databaseFailure->errorInfo[1] ?? 0)
+        : 0;
+    $category = match (true) {
+        in_array($driverCode, [1044, 1045], true) => "credentials",
+        $driverCode === 1049 => "database",
+        in_array($driverCode, [2002, 2003, 2005, 2006], true) => "transport",
+        default => "configuration",
+    };
+    fwrite(STDERR, "SEO Intel isolated read-only runtime guard failed (".$category.").\n");
     exit(1);
 }
 '

@@ -47,6 +47,9 @@ test("11E atomically injects only the approved keys before config cache and fail
   assert.match(deployer, /after\('crawler:configure-aggregate-runtime', 'runtime:configure-seo-intel'\)/);
   assert.match(deployer, /before\('artisan:config:cache', 'guard:seo-intel-runtime-config'\)/);
   assert.match(deployer, /DB::connection\("seo_intel"\)->selectOne\("SELECT 1 AS probe"\)/);
+  assert.match(deployer, /in_array\(\$driverCode, \[1044, 1045\], true\) => "credentials"/);
+  assert.match(deployer, /in_array\(\$driverCode, \[2002, 2003, 2005, 2006\], true\) => "transport"/);
+  assert.doesNotMatch(deployer, /fwrite\(STDERR, \$throwable->getMessage\(\)\)/);
   assert.match(deployer, /\$seo\["database"\].+\$business\["database"\]/s);
   assert.match(deployer, /config\("seo_intel\.write_enabled"\) === false/);
   assert.match(deployer, /config\("seo_intel\.collectors_enabled"\) === false/);
