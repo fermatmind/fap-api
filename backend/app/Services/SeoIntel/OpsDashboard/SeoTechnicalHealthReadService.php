@@ -78,32 +78,39 @@ final class SeoTechnicalHealthReadService extends AbstractSeoDashboardReadServic
     /** @return list<array<string,mixed>> */
     private function clusters(): array
     {
-        $schema = Schema::connection($this->connection()->getName());
-        if (! $schema->hasTable('seo_issue_queue')
-            || ! $schema->hasColumn('seo_issue_queue', 'cluster_uid')
-            || ! $schema->hasColumn('seo_issue_queue', 'detector_id')) {
+        try {
+            $schema = Schema::connection($this->connection()->getName());
+            foreach ([
+                'cluster_uid', 'detector_id', 'severity', 'page_entity_type', 'locale', 'status',
+                'detected_at', 'last_evidence_at', 'affected_url_count',
+            ] as $column) {
+                if (! $schema->hasColumn('seo_issue_queue', $column)) {
+                    return [];
+                }
+            }
+
+            return $this->table('seo_issue_queue')
+                ->whereNotNull('cluster_uid')
+                ->selectRaw('cluster_uid, detector_id, severity, page_entity_type, locale, status, MIN(detected_at) AS first_observed_at, MAX(last_evidence_at) AS last_observed_at, SUM(affected_url_count) AS affected_count, COUNT(*) AS evidence_count')
+                ->groupBy(['cluster_uid', 'detector_id', 'severity', 'page_entity_type', 'locale', 'status'])
+                ->orderByDesc('last_observed_at')
+                ->limit(50)
+                ->get()
+                ->map(static fn (object $row): array => [
+                    'cluster_uid' => (string) $row->cluster_uid,
+                    'detector' => (string) $row->detector_id,
+                    'severity' => (string) $row->severity,
+                    'page_family' => (string) $row->page_entity_type,
+                    'locale' => (string) $row->locale,
+                    'status' => (string) $row->status,
+                    'affected_count' => (int) $row->affected_count,
+                    'evidence_count' => (int) $row->evidence_count,
+                    'first_observed_at' => $row->first_observed_at === null ? null : (string) $row->first_observed_at,
+                    'last_observed_at' => $row->last_observed_at === null ? null : (string) $row->last_observed_at,
+                ])
+                ->all();
+        } catch (Throwable) {
             return [];
         }
-
-        return $this->table('seo_issue_queue')
-            ->whereNotNull('cluster_uid')
-            ->selectRaw('cluster_uid, detector_id, severity, page_entity_type, locale, status, MIN(detected_at) AS first_observed_at, MAX(last_evidence_at) AS last_observed_at, SUM(affected_url_count) AS affected_count, COUNT(*) AS evidence_count')
-            ->groupBy(['cluster_uid', 'detector_id', 'severity', 'page_entity_type', 'locale', 'status'])
-            ->orderByDesc('last_observed_at')
-            ->limit(50)
-            ->get()
-            ->map(static fn (object $row): array => [
-                'cluster_uid' => (string) $row->cluster_uid,
-                'detector' => (string) $row->detector_id,
-                'severity' => (string) $row->severity,
-                'page_family' => (string) $row->page_entity_type,
-                'locale' => (string) $row->locale,
-                'status' => (string) $row->status,
-                'affected_count' => (int) $row->affected_count,
-                'evidence_count' => (int) $row->evidence_count,
-                'first_observed_at' => $row->first_observed_at === null ? null : (string) $row->first_observed_at,
-                'last_observed_at' => $row->last_observed_at === null ? null : (string) $row->last_observed_at,
-            ])
-            ->all();
     }
 }

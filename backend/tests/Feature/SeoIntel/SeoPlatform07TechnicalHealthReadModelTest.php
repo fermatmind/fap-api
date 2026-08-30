@@ -80,4 +80,24 @@ final class SeoPlatform07TechnicalHealthReadModelTest extends TestCase
             $this->assertStringNotContainsString($forbidden, $encoded);
         }
     }
+
+    #[Test]
+    public function incomplete_optional_cluster_projection_does_not_hide_runtime_health(): void
+    {
+        $connection = self::CONNECTION.'_incomplete';
+        config(['database.connections.'.$connection => ['driver' => 'sqlite', 'database' => ':memory:', 'prefix' => '']]);
+        DB::purge($connection);
+        Schema::connection($connection)->create('seo_issue_queue', function (Blueprint $table): void {
+            $table->id();
+            $table->string('cluster_uid')->nullable();
+            $table->string('detector_id')->nullable();
+        });
+
+        $result = (new SeoTechnicalHealthReadService($connection))->read();
+
+        $this->assertSame('seo-platform-07-technical-health.v1', $result['schema_version']);
+        $this->assertSame([], $result['clusters']);
+        $this->assertTrue(data_get($result, 'boundaries.read_only'));
+        $this->assertFalse(data_get($result, 'boundaries.write_authorization_granted'));
+    }
 }

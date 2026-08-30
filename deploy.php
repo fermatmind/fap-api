@@ -1285,6 +1285,49 @@ $diagnostic = [
 ];
 fwrite(STDERR, "SEO Council safe closeout diagnostic: ".json_encode($diagnostic, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES).PHP_EOL);
 ' || true
+  {{bin/php}} -r '
+require "vendor/autoload.php";
+$app = require "bootstrap/app.php";
+$app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+$connection = (string) config("seo_intel.connection", "seo_intel");
+$database = config("database.connections.".$connection.".database");
+$diagnostic = [
+    "seo_intel_enabled" => config("seo_intel.enabled") === true,
+    "connection_name_configured" => $connection !== "",
+    "connection_database_configured" => is_string($database) && trim($database) !== "",
+    "url_truth_table_available" => false,
+    "url_truth_columns_available" => false,
+    "url_truth_query_available" => false,
+    "technical_health_read_available" => false,
+];
+try {
+    $schema = Illuminate\Support\Facades\Schema::connection($connection);
+    $diagnostic["url_truth_table_available"] = $schema->hasTable("seo_urls");
+    $diagnostic["url_truth_columns_available"] = $diagnostic["url_truth_table_available"];
+    foreach (["indexability_state", "is_private_flow", "updated_at"] as $column) {
+        $diagnostic["url_truth_columns_available"] = $diagnostic["url_truth_columns_available"]
+            && $schema->hasColumn("seo_urls", $column);
+    }
+    if ($diagnostic["url_truth_columns_available"]) {
+        Illuminate\Support\Facades\DB::connection($connection)->table("seo_urls")
+            ->where("indexability_state", "indexable")
+            ->where("is_private_flow", false)
+            ->selectRaw("COUNT(*) AS current_public_count")
+            ->selectRaw("MAX(updated_at) AS revision_at")
+            ->first();
+        $diagnostic["url_truth_query_available"] = true;
+    }
+} catch (Throwable) {
+}
+try {
+    $runtime = $app->make(App\Services\SeoIntel\OpsDashboard\SeoTechnicalHealthReadService::class)->read();
+    $diagnostic["technical_health_read_available"] = ($runtime["schema_version"] ?? null) === "seo-platform-07-technical-health.v1"
+        && data_get($runtime, "boundaries.read_only") === true
+        && data_get($runtime, "boundaries.write_authorization_granted") === false;
+} catch (Throwable) {
+}
+fwrite(STDERR, "SEO Council safe source diagnostic: ".json_encode($diagnostic, JSON_THROW_ON_ERROR).PHP_EOL);
+' || true
   exit 1
 fi
 printf '%s' "$receipt" | {{bin/php}} -r '
