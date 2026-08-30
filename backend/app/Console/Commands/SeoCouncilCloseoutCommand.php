@@ -23,6 +23,7 @@ use App\Services\SeoCouncil\Memory\OperatorTimeService;
 use App\Services\SeoCouncil\Policy\CouncilAdmissionRequestFactory;
 use App\Services\SeoCouncil\Routing\DeterministicMissionRouter;
 use App\Services\SeoCouncil\Routing\GoldenRoutingEvaluator;
+use App\Services\SeoCouncil\TechnicalDiagnosis\TechnicalDiagnosisCloseoutBuilder;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -54,6 +55,7 @@ final class SeoCouncilCloseoutCommand extends Command
         ApiMissionAdapter $api,
         SeoOperationsUiMissionAdapter $ui,
         OperatorTimeService $operatorTime,
+        TechnicalDiagnosisCloseoutBuilder $technicalDiagnosis,
         SeoRegistryHasher $hasher,
     ): int {
         try {
@@ -106,6 +108,7 @@ final class SeoCouncilCloseoutCommand extends Command
             $careerBypass = $this->careerChainBypass($router, $validator, $hasher, $bindingRef);
             $activity = $this->activityFromReceipts($entrypointReceipts);
             $productionPermissions = $this->productionPermissionCount($registry, $runtimeSnapshot);
+            $technicalReceipt = $technicalDiagnosis->build($sourceSha);
 
             $receipt = [
                 'contract_version' => 'seo.council_closeout.v2',
@@ -172,6 +175,7 @@ final class SeoCouncilCloseoutCommand extends Command
                 'execution_allowed' => false,
                 'external_trace_export' => (bool) ($registry['architecture_decisions']['external_trace_export'] ?? true),
                 'shared_agent_memory' => (bool) ($registry['architecture_decisions']['shared_agent_memory'] ?? true),
+                'technical_diagnosis' => $technicalReceipt,
             ];
             $receiptProjection = $this->receiptProjectionProbe($receipt);
             $receipt['receipt_projection_probe_total'] = $receiptProjection['total'];
@@ -197,12 +201,16 @@ final class SeoCouncilCloseoutCommand extends Command
                 && $routingMetrics['unnecessary_mode_rate']['numerator'] === 0
                 && $routingMetrics['unauthorized_all_team_invocation_count']['numerator'] === 0
                 && $runtimeSnapshot['mission_execution_enabled'] === false
-                && $runtimeSnapshot['mission_persistence_enabled'] === false;
+                && $runtimeSnapshot['mission_persistence_enabled'] === false
+                && ($technicalReceipt['SEO-PLATFORM-11E'] ?? null) === 'CLOSED'
+                && ($technicalReceipt['ready_for_11F'] ?? null) === true;
             foreach ($zeroFields as $field) {
                 $ready = $ready && ($receipt[$field] ?? null) === 0;
             }
             $receipt['SEO-PLATFORM-11D'] = $ready ? 'CLOSED' : 'HOLD';
             $receipt['ready_for_11E'] = $ready;
+            $receipt['SEO-PLATFORM-11E'] = $ready ? 'CLOSED' : 'HOLD';
+            $receipt['ready_for_11F'] = $ready;
             $receipt['receipt_hash'] = $hasher->hash($receipt);
 
             return $this->emit($receipt, $ready ? self::SUCCESS : self::FAILURE);

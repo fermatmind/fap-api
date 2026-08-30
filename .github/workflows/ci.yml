@@ -601,6 +601,7 @@ jobs:
           rm -f "$APP_CONFIG_CACHE"
           php artisan test --compact \
             tests/Feature/SeoIntel/SeoPlatform11D*.php \
+            tests/Feature/SeoIntel/SeoPlatform11E*.php \
             tests/Feature/SeoIntel/SeoPlatform11A*.php \
             tests/Feature/SeoIntel/SeoPlatform11B*.php \
             tests/Feature/SeoIntel/SeoPlatform11C*.php \
@@ -621,7 +622,11 @@ jobs:
             tests/Feature/SeoIntel/SeoPlatform11DBindingV2Test.php \
             tests/Feature/SeoIntel/SeoPlatform11DOrchestratorTest.php \
             tests/Feature/SeoIntel/SeoPlatform11DPersistenceApiTest.php \
-            tests/Feature/SeoIntel/SeoPlatform11DCloseoutTest.php
+            tests/Feature/SeoIntel/SeoPlatform11DCloseoutTest.php \
+            tests/Feature/SeoIntel/SeoPlatform11EContractsTest.php \
+            tests/Feature/SeoIntel/SeoPlatform11EDependencyContextTest.php \
+            tests/Feature/SeoIntel/SeoPlatform11EDiagnosisEvaluationTest.php \
+            tests/Feature/SeoIntel/SeoPlatform11ERoutingCloseoutTest.php
           php artisan seo:council-closeout --expected-sha="$GITHUB_SHA" --json > ../seo-council-orchestration-closeout.json
           jq -e --arg sha "$GITHUB_SHA" '
             .contract_version == "seo.council_closeout.v2"
@@ -659,6 +664,22 @@ jobs:
             and .action_manifest_ref.id == "seo.action_scoped_manifest.v1"
             and .execution_allowed == false
             and ."SEO-PLATFORM-11D" == "CLOSED" and .ready_for_11E == true
+            and ."SEO-PLATFORM-11E" == "CLOSED" and .ready_for_11F == true
+            and .technical_diagnosis.receipt_version == "seo.technical_diagnosis_closeout.v1"
+            and .technical_diagnosis.source_sha == $sha and .technical_diagnosis.production_sha == $sha
+            and .technical_diagnosis."SEO-PLATFORM-11E" == "CLOSED" and .technical_diagnosis.ready_for_11F == true
+            and .technical_diagnosis.fixture_metrics.false_positive == 0
+            and .technical_diagnosis.fixture_metrics.false_negative == 0
+            and .technical_diagnosis.private_url_leak_count == 0
+            and .technical_diagnosis.unsupported_p0_p1_count == 0
+            and .technical_diagnosis.authority_invention_count == 0
+            and .technical_diagnosis.policy_bypass_count == 0
+            and .technical_diagnosis.write_attempt_count == 0
+            and .technical_diagnosis.shared_root_misclassification_count == 0
+            and .technical_diagnosis.model_calls == 0 and .technical_diagnosis.tool_calls == 0
+            and .technical_diagnosis.external_calls == 0 and .technical_diagnosis.production_permissions == 0
+            and .technical_diagnosis.execution_allowed == false
+            and (.technical_diagnosis.receipt_hash | test("^[a-f0-9]{64}$"))
             and (.binding_hash | test("^[a-f0-9]{64}$"))
             and (.contract_manifest_hash | test("^[a-f0-9]{64}$"))
             and (.receipt_hash | test("^[a-f0-9]{64}$"))
@@ -854,6 +875,22 @@ jobs:
               and .action_manifest_ref.id == "seo.action_scoped_manifest.v1"
               and .execution_allowed == false
               and ."SEO-PLATFORM-11D" == "CLOSED" and .ready_for_11E == true
+              and ."SEO-PLATFORM-11E" == "CLOSED" and .ready_for_11F == true
+              and .technical_diagnosis.receipt_version == "seo.technical_diagnosis_closeout.v1"
+              and .technical_diagnosis.source_sha == $sha and .technical_diagnosis.production_sha == $sha
+              and .technical_diagnosis."SEO-PLATFORM-11E" == "CLOSED" and .technical_diagnosis.ready_for_11F == true
+              and .technical_diagnosis.fixture_metrics.false_positive == 0
+              and .technical_diagnosis.fixture_metrics.false_negative == 0
+              and .technical_diagnosis.private_url_leak_count == 0
+              and .technical_diagnosis.unsupported_p0_p1_count == 0
+              and .technical_diagnosis.authority_invention_count == 0
+              and .technical_diagnosis.policy_bypass_count == 0
+              and .technical_diagnosis.write_attempt_count == 0
+              and .technical_diagnosis.shared_root_misclassification_count == 0
+              and .technical_diagnosis.model_calls == 0 and .technical_diagnosis.tool_calls == 0
+              and .technical_diagnosis.external_calls == 0 and .technical_diagnosis.production_permissions == 0
+              and .technical_diagnosis.execution_allowed == false
+              and (.technical_diagnosis.receipt_hash | test("^[a-f0-9]{64}$"))
               and (.binding_hash | test("^[a-f0-9]{64}$"))
               and (.contract_manifest_hash | test("^[a-f0-9]{64}$"))
               and (.receipt_hash | test("^[a-f0-9]{64}$"))

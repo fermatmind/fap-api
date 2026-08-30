@@ -210,7 +210,7 @@ test("binds the deny-only SEO agent Policy Gateway to every 11C layer", () => {
     false,
   );
 });
-test("binds deterministic SEO Council orchestration to every 11D layer", () => {
+test("binds deterministic SEO Council orchestration to every 11D and 11E layer", () => {
   for (const path of [
     "backend/app/Services/SeoCouncil/SeoCouncilOrchestrator.php",
     "backend/app/Console/Commands/SeoCouncilCloseoutCommand.php",
@@ -222,10 +222,12 @@ test("binds deterministic SEO Council orchestration to every 11D layer", () => {
     "backend/resources/seo-agent/council/schemas/seo.mission_request.v1.schema.json",
     "backend/docs/seo/generated/seo-council-contract-manifest.v1.json",
     "backend/docs/seo/generated/seo-council-contract-manifest.v2.json",
+    "backend/docs/seo/generated/seo-technical-diagnosis-contract-manifest.v1.json",
     "backend/routes/web.php",
     "backend/scripts/seo/export_seo_council_contracts.php",
     "backend/database/migrations/seo_intel/2026_08_29_030000_create_seo_council_runtime_tables.php",
     "backend/tests/Feature/SeoIntel/SeoPlatform11DOrchestratorTest.php",
+    "backend/tests/Feature/SeoIntel/SeoPlatform11EDiagnosisEvaluationTest.php",
     ".agents/skills/fermatmind-global-seo-geo-growth-scan/SKILL.md",
     ".github/trunk/seo-council-workflow-contract.test.mjs",
   ]) {

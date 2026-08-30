@@ -1,0 +1,14 @@
+{
+  "schema_id": "seo.technical_root_cause_hypothesis.v1",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["hypothesis_id", "label", "evidence_state", "supporting_evidence_refs", "falsification_checks"],
+  "properties": {
+    "hypothesis_id": {"type": "string"},
+    "label": {"type": "string"},
+    "evidence_state": {"enum": ["supported_hypothesis", "unverified_hypothesis", "unknown", "blocked"]},
+    "supporting_evidence_refs": {"type": "array"},
+    "falsification_checks": {"type": "array", "minItems": 1}
+  }
+}

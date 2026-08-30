@@ -1,0 +1,14 @@
+{
+  "schema_id": "seo.technical_evidence_gap.v1",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["gap_code", "missing_evidence", "blocked_decision", "required_owner", "acceptance_check"],
+  "properties": {
+    "gap_code": {"type": "string"},
+    "missing_evidence": {"type": "array", "minItems": 1},
+    "blocked_decision": {"type": "string"},
+    "required_owner": {"type": "string"},
+    "acceptance_check": {"type": "string"}
+  }
+}

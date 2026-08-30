@@ -1,0 +1,29 @@
+{
+  "schema_id": "seo.technical_diagnosis_request.v1",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["diagnosis_id", "diagnosis_version", "mission_id", "run_id", "role_id", "mode_id", "page_family", "locale", "evidence_bundle_refs", "dependency_snapshot_ref", "detector_registry_ref", "url_truth_revision", "runtime_revision", "deployment_revision", "authority_revision", "requested_scope", "requested_at", "execution_allowed", "allow_delegation", "request_hash"],
+  "properties": {
+    "diagnosis_id": {"type": "string"},
+    "diagnosis_version": {"const": 1},
+    "mission_id": {"type": "string"},
+    "run_id": {"type": "string"},
+    "role_id": {"const": "seo.expert.technical_search_authority"},
+    "mode_id": {"const": "technical_search_diagnosis"},
+    "page_family": {"enum": ["tests", "articles_topics", "career", "personality", "trust_method_help", "other_public"]},
+    "locale": {"enum": ["zh-CN", "en"]},
+    "evidence_bundle_refs": {"type": "array", "minItems": 1},
+    "dependency_snapshot_ref": {"type": "object"},
+    "detector_registry_ref": {"type": "object"},
+    "url_truth_revision": {"type": "string"},
+    "runtime_revision": {"type": "string"},
+    "deployment_revision": {"type": "string"},
+    "authority_revision": {"type": "string"},
+    "requested_scope": {"type": "object"},
+    "requested_at": {"type": "string"},
+    "execution_allowed": {"const": false},
+    "allow_delegation": {"const": false},
+    "request_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

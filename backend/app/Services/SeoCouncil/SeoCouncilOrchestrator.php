@@ -17,21 +17,22 @@ use App\Services\SeoCouncil\Policy\CouncilAdmissionGateway;
 use App\Services\SeoCouncil\Policy\CouncilAdmissionRequestFactory;
 use App\Services\SeoCouncil\Routing\CouncilConflictResolver;
 use App\Services\SeoCouncil\Routing\DeterministicMissionRouter;
+use App\Services\SeoCouncil\TechnicalDiagnosis\TechnicalDiagnosisModeRegistry;
 
 final class SeoCouncilOrchestrator
 {
     private const FLOW = [
         'validate_privacy_scan',
+        'mission_request_validation',
+        'admission_request_binding',
+        '11c_admission',
         'dependency_snapshot',
         'runtime_capability_snapshot',
-        '11c_admission',
-        'deterministic_mission_classification',
         'role_capability_binding',
         'evidence_context_verification',
-        'fixed_flow_planning',
+        'technical_mode_selection',
         'handoff_generation',
-        'mode_availability_check',
-        'conflict_resolution',
+        'deterministic_diagnosis',
         'independent_review_requirement',
         'final_policy_veto',
         'run_receipt',
@@ -43,6 +44,7 @@ final class SeoCouncilOrchestrator
         private readonly RoleCapabilityBindingRegistry $binding,
         private readonly CouncilDependencySnapshotBuilder $dependencies,
         private readonly RuntimeCapabilitySnapshotBuilder $runtime,
+        private readonly TechnicalDiagnosisModeRegistry $technicalMode,
         private readonly PolicyGatewayRegistry $policy,
         private readonly CouncilAdmissionGateway $admissionGateway,
         private readonly CouncilAdmissionRequestFactory $admissionRequests,
@@ -66,17 +68,13 @@ final class SeoCouncilOrchestrator
         $binding = $this->binding->reference();
         $runId = $this->runId($request, $registry, $binding);
         $releaseSha = $this->releaseSha();
-        $dependency = $this->dependencies->snapshot($releaseSha);
         $runtime = $this->runtime->snapshot();
         $baseContext = [
             'registry' => $registry,
             'binding' => $binding,
-            'dependency' => $dependency,
             'runtime' => $runtime,
+            'technical_runtime' => $this->technicalMode->capabilitySnapshot(),
         ];
-        if ($dependency['status'] !== 'READY') {
-            return $this->terminalReceipt($request, 'DEPENDENCY_HOLD', 'dependency_hash_or_version_hold', [], [], $baseContext);
-        }
 
         $admission = $this->admissionGateway->admission(
             $request->callerType,
@@ -100,6 +98,12 @@ final class SeoCouncilOrchestrator
             return $this->terminalReceipt($request, 'POLICY_HOLD', 'POLICY_DECISION_INVALID', [], [], $baseContext);
         }
 
+        $dependency = $this->dependencies->snapshot($releaseSha);
+        $baseContext['dependency'] = $dependency;
+        if ($dependency['status'] !== 'READY') {
+            return $this->terminalReceipt($request, 'DEPENDENCY_HOLD', 'dependency_hash_or_version_hold', [], [], $baseContext);
+        }
+
         $resume = $request->payload['resume_from'];
         if (is_array($resume) && ! $this->repository->resumeValid((string) $resume['receipt_hash'], (string) $resume['step_hash'])) {
             return $this->terminalReceipt($request, 'STALE_RESUME_HOLD', 'resume_hash_verification_failed', [], [], $baseContext);
@@ -110,7 +114,10 @@ final class SeoCouncilOrchestrator
         $conflicts = $this->evidenceConflicts($request, $runId);
 
         $status = 'SOURCE_CAPABILITY_UNAVAILABLE';
-        $stopReason = '11e_to_11j_modes_unavailable';
+        $stopReason = $request->payload['mission_type'] === 'bounded_review'
+            && $request->payload['review_domain'] === 'technical'
+            ? 'technical_diagnosis_production_disabled'
+            : '11f_to_11j_modes_unavailable';
         if (in_array($route['status'], ['ROUTING_SCOPE_HOLD', 'MISSION_SCOPE_HOLD', 'REQUESTED_ROLE_EXPANSION_HOLD'], true)) {
             $status = $route['status'];
             $stopReason = 'deterministic_route_scope_hold';
@@ -237,11 +244,11 @@ final class SeoCouncilOrchestrator
         $stopStep = match ($status) {
             'DEPENDENCY_HOLD' => 'dependency_snapshot',
             'POLICY_HOLD' => '11c_admission',
-            'ROUTING_SCOPE_HOLD', 'MISSION_SCOPE_HOLD', 'REQUESTED_ROLE_EXPANSION_HOLD' => 'deterministic_mission_classification',
+            'ROUTING_SCOPE_HOLD', 'MISSION_SCOPE_HOLD', 'REQUESTED_ROLE_EXPANSION_HOLD' => 'role_capability_binding',
             'EVIDENCE_HOLD', 'MEASUREMENT_HOLD' => 'evidence_context_verification',
-            'unresolved_conflict' => 'conflict_resolution',
+            'unresolved_conflict' => 'evidence_context_verification',
             'STALE_RESUME_HOLD' => 'validate_privacy_scan',
-            default => 'mode_availability_check',
+            default => 'technical_mode_selection',
         };
         $stopped = false;
         $steps = [];

@@ -1278,6 +1278,25 @@ $ok = ($payload["contract_version"] ?? null) === "seo.council_closeout.v2"
     && ($payload["execution_allowed"] ?? null) === false
     && ($payload["SEO-PLATFORM-11D"] ?? null) === "CLOSED"
     && ($payload["ready_for_11E"] ?? null) === true
+    && ($payload["SEO-PLATFORM-11E"] ?? null) === "CLOSED"
+    && ($payload["ready_for_11F"] ?? null) === true
+    && ($payload["technical_diagnosis"]["receipt_version"] ?? null) === "seo.technical_diagnosis_closeout.v1"
+    && ($payload["technical_diagnosis"]["source_sha"] ?? null) === ($argv[1] ?? null)
+    && ($payload["technical_diagnosis"]["production_sha"] ?? null) === ($argv[1] ?? null)
+    && ($payload["technical_diagnosis"]["SEO-PLATFORM-11E"] ?? null) === "CLOSED"
+    && ($payload["technical_diagnosis"]["ready_for_11F"] ?? null) === true
+    && ($payload["technical_diagnosis"]["private_url_leak_count"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["unsupported_p0_p1_count"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["authority_invention_count"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["policy_bypass_count"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["write_attempt_count"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["shared_root_misclassification_count"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["model_calls"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["tool_calls"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["external_calls"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["production_permissions"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["execution_allowed"] ?? null) === false
+    && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["technical_diagnosis"]["receipt_hash"] ?? "")) === 1
     && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["binding_hash"] ?? "")) === 1
     && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["contract_manifest_hash"] ?? "")) === 1
     && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["receipt_hash"] ?? "")) === 1;

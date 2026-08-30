@@ -1,0 +1,16 @@
+{
+  "schema_id": "seo.technical_affected_scope.v1",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["scope_kind", "page_family", "locale", "sanitized_public_refs", "affected_url_count", "affected_family_count", "shared_component"],
+  "properties": {
+    "scope_kind": {"enum": ["single_url", "url_cohort", "shared_layer", "unknown"]},
+    "page_family": {"type": "string"},
+    "locale": {"type": "string"},
+    "sanitized_public_refs": {"type": "array"},
+    "affected_url_count": {"type": "integer", "minimum": 0},
+    "affected_family_count": {"type": "integer", "minimum": 0},
+    "shared_component": {"type": ["string", "null"]}
+  }
+}
