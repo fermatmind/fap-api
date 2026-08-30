@@ -472,6 +472,8 @@ jobs:
           GSC_SCOPE: ${{ vars.SEO_INTEL_GSC_SCOPE }}
           GSC_SYNC_WINDOW_DAYS: ${{ vars.SEO_INTEL_GSC_SYNC_WINDOW_DAYS }}
           GSC_SYNC_SEARCH_TYPES: ${{ vars.SEO_INTEL_GSC_SYNC_SEARCH_TYPES }}
+          GSC_SYNC_DB_USERNAME: ${{ secrets.SEO_INTEL_MIGRATION_DB_USERNAME }}
+          GSC_SYNC_DB_PASSWORD: ${{ secrets.SEO_INTEL_MIGRATION_DB_PASSWORD }}
           PROXY_PORT: "18444"
         run: |
           set -euo pipefail
@@ -488,12 +490,16 @@ jobs:
           test "$GSC_SCOPE" = https://www.googleapis.com/auth/webmasters.readonly || fail GSC_SCOPE_NOT_READONLY
           test "$GSC_SYNC_WINDOW_DAYS" = 90 || fail GSC_WINDOW_INVALID
           test "$GSC_SYNC_SEARCH_TYPES" = web || fail GSC_SEARCH_TYPE_INVALID
+          test -n "$GSC_SYNC_DB_USERNAME" || fail GSC_SYNC_DB_CREDENTIAL_MISSING
+          test -n "$GSC_SYNC_DB_PASSWORD" || fail GSC_SYNC_DB_CREDENTIAL_MISSING
 
           local_key="$RUNNER_TEMP/service-account.json"
           local_env="$RUNNER_TEMP/readiness.env"
+          local_sync_env="$RUNNER_TEMP/sync-db.env"
           remote_tmp="/tmp/fermatmind-11f-source-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
           remote_key="$remote_tmp/service-account.json"
           remote_env="$remote_tmp/readiness.env"
+          remote_sync_env="$remote_tmp/sync-db.env"
           proxy_pid=""
           tunnel_pid=""
           ssh_base=(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
@@ -502,9 +508,9 @@ jobs:
           cleanup() {
             if [ -n "$tunnel_pid" ]; then kill "$tunnel_pid" 2>/dev/null || true; fi
             if [ -n "$proxy_pid" ]; then kill "$proxy_pid" 2>/dev/null || true; fi
-            "${ssh_base[@]}" "rm -f '$remote_key' '$remote_env'; rmdir '$remote_tmp' 2>/dev/null || true" \
+            "${ssh_base[@]}" "rm -f '$remote_key' '$remote_env' '$remote_sync_env'; rmdir '$remote_tmp' 2>/dev/null || true" \
               >/dev/null 2>&1 || true
-            rm -f "$local_key" "$local_env"
+            rm -f "$local_key" "$local_env" "$local_sync_env"
           }
           trap cleanup EXIT HUP INT TERM
 
@@ -529,11 +535,15 @@ jobs:
             printf 'SEO_INTEL_ALLOW_EXTERNAL_API_CALLS=true\n'
             printf 'SEO_INTEL_WRITE_ENABLED=false\n'
           } > "$local_env"
+          {
+            printf 'SEO_INTEL_DB_USERNAME=%q\n' "$GSC_SYNC_DB_USERNAME"
+            printf 'SEO_INTEL_DB_PASSWORD=%q\n' "$GSC_SYNC_DB_PASSWORD"
+          } > "$local_sync_env"
 
           "${ssh_base[@]}" "umask 077; mkdir '$remote_tmp'"
           scp -q -o BatchMode=yes -o StrictHostKeyChecking=yes -o IdentitiesOnly=yes \
             -i "$DEPLOY_IDENTITY_FILE_STG" -P "$DEPLOY_PORT" \
-            "$local_key" "$local_env" "$DEPLOY_USER@$DEPLOY_HOST:$remote_tmp/"
+            "$local_key" "$local_env" "$local_sync_env" "$DEPLOY_USER@$DEPLOY_HOST:$remote_tmp/"
 
           node backend/scripts/seo/gsc_restricted_connect_proxy.mjs --port="$PROXY_PORT" \
             >"$RUNNER_TEMP/staging-gsc-proxy.log" 2>&1 &
@@ -555,6 +565,7 @@ jobs:
 
           printf -v q_path '%q' "$DEPLOY_PATH"
           printf -v q_env '%q' "$remote_env"
+          printf -v q_sync_env '%q' "$remote_sync_env"
           printf -v q_proxy '%q' "http://127.0.0.1:$PROXY_PORT"
           candidate_name="source-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}"
           printf -v q_candidate '%q' "$candidate_name"
@@ -583,7 +594,7 @@ jobs:
           sync_raw="$RUNNER_TEMP/staging-gsc-sync.raw"
           sync_json="$RUNNER_TEMP/staging-gsc-sync.json"
           set +e
-          "${ssh_base[@]}" "$remote_prefix export SEO_INTEL_WRITE_ENABLED=true; php artisan seo-intel:gsc-sync --window=90 --search-types=web --full-window --trigger=manual --json --no-interaction --no-ansi" > "$sync_raw"
+          "${ssh_base[@]}" "$remote_prefix set -a; . $q_sync_env; set +a; export SEO_INTEL_WRITE_ENABLED=true; php artisan seo-intel:gsc-sync --window=90 --search-types=web --full-window --trigger=manual --json --no-interaction --no-ansi" > "$sync_raw"
           sync_exit=$?
           set -e
           awk 'started || /^[[:space:]]*\{/ { started=1; print }' "$sync_raw" > "$sync_json"

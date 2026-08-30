@@ -82,6 +82,10 @@ test("staging source readiness precedes Council closeout and production never ba
   assert.match(staging, /awk 'started \|\| \/\^\[\[:space:\]\]\*\\\{\//);
   assert.match(staging, /GSC_SEARCH_ANALYTICS_REQUEST_FAILED/);
   assert.match(staging, /GSC_PAGINATION_LIMIT_EXCEEDED/);
+  assert.match(staging, /GSC_SYNC_DB_CREDENTIAL_MISSING/);
+  assert.match(staging, /GSC_SYNC_DB_USERNAME: \$\{\{ secrets\.SEO_INTEL_MIGRATION_DB_USERNAME \}\}/);
+  assert.match(staging, /GSC_SYNC_DB_PASSWORD: \$\{\{ secrets\.SEO_INTEL_MIGRATION_DB_PASSWORD \}\}/);
+  assert.match(staging, /\. \$q_sync_env; set \+a; export SEO_INTEL_WRITE_ENABLED=true; php artisan seo-intel:gsc-sync/);
   assert.match(staging, /sync_issue="\$\(jq -r '\.issue \/\/ ""'/);
   assert.doesNotMatch(staging, /printf[^\n]+\$sync_issue/);
   assert.match(staging, /CRO_NO_REAL_AGGREGATE_SOURCE/);
@@ -108,6 +112,7 @@ test("staging source readiness precedes Council closeout and production never ba
   assert.match(staging, /execution_allowed: false/);
 
   assert.doesNotMatch(production, /SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON/);
+  assert.doesNotMatch(production, /GSC_SYNC_DB_(USERNAME|PASSWORD)/);
   assert.doesNotMatch(production, /seo-intel:gsc-sync/);
   assert.doesNotMatch(production, /analytics:refresh-seo-conversion-daily/);
 });
