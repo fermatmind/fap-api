@@ -1,5 +1,15 @@
 <?php
 
+$frontendOrigin = rtrim((string) env('FRONTEND_URL', 'https://fermatmind.com'), '/');
+$allowedFrontendOrigins = [
+    'https://fermatmind.com',
+    'https://www.fermatmind.com',
+    'https://staging.fermatmind.com',
+];
+$runtimeFrontendOrigin = in_array($frontendOrigin, $allowedFrontendOrigins, true)
+    ? $frontendOrigin
+    : null;
+
 return [
     'paths' => ['api/*'],
 
@@ -8,6 +18,7 @@ return [
     'allowed_origins' => [
         'https://www.fermatmind.com',
         'https://fermatmind.com',
+        ...($runtimeFrontendOrigin !== null ? [$runtimeFrontendOrigin] : []),
     ],
 
     'allowed_origins_patterns' => [],

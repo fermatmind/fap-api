@@ -52,6 +52,43 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
         }
     }
 
+    public function test_loader_uses_read_only_current_authority_metadata_when_url_truth_is_empty(): void
+    {
+        DB::table('seo_urls')->delete();
+        DB::table('seo_gsc_daily')->update([
+            'metadata_json' => json_encode([
+                'data_origin' => 'live_gsc_api',
+                'row_source' => 'live_gsc_api',
+                'page_family' => 'tests',
+                'authority_revision' => str_repeat('b', 64),
+                'mapping_authority' => 'current_public_authority_read_only',
+                'source_authority' => 'backend_registry',
+            ], JSON_THROW_ON_ERROR),
+        ]);
+
+        $loader = app(ReadOnlyMeasurementEvidenceBundleLoader::class);
+        $search = $loader->loadForScope(
+            'mission:read-only-authority',
+            'search_measurement',
+            'tests',
+            'en',
+            'staging_runtime'
+        );
+
+        $this->assertCount(1, $search);
+        $this->assertSame('available', $search[0]['source_capability_state']);
+        $this->assertSame(str_repeat('b', 64), $search[0]['authority_revision']);
+        $this->assertSame(
+            'NONE',
+            $loader->diagnoseForRuntime(
+                'mission:read-only-authority-runtime',
+                'search_measurement',
+                'staging_runtime'
+            )->diagnostic()['hold_reason']
+        );
+        $this->assertDatabaseCount('seo_urls', 0, 'sqlite');
+    }
+
     public function test_missing_mapping_and_stale_sources_return_hold_or_no_bundle_never_defaults(): void
     {
         DB::table('seo_gsc_daily')->update(['mapping_state' => 'failed']);

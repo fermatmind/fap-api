@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel\Sources;
 
+use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
 use App\Services\Career\CareerDirectoryAuthorityService;
 use App\Services\SeoIntel\PageFamily\PageFamilyPolicyRegistry;
 use App\Services\SeoIntel\UrlTruthInventoryRecord;
@@ -14,6 +15,7 @@ final class CurrentPublicUrlAuthoritySource implements UrlTruthInventorySource
         private readonly BackendAuthorityUrlTruthSource $backendAuthority,
         private readonly CareerDirectoryAuthorityService $careerAuthority,
         private readonly PageFamilyPolicyRegistry $policyRegistry,
+        private readonly CareerContentV3AuthorityPackage $careerCurrentAuthority,
     ) {}
 
     /** @return list<UrlTruthInventoryRecord> */
@@ -22,6 +24,7 @@ final class CurrentPublicUrlAuthoritySource implements UrlTruthInventorySource
         $records = [
             ...$this->backendAuthority->candidates(),
             ...$this->careerRecords(),
+            ...$this->careerCurrentManifestRecords(),
             ...$this->staticRecords(),
         ];
         $unique = [];
@@ -40,6 +43,7 @@ final class CurrentPublicUrlAuthoritySource implements UrlTruthInventorySource
             'source' => 'current_backend_cms_public_url_authority',
             'backend_authority' => $this->backendAuthority->metadata(),
             'career_authority_revision' => CareerDirectoryAuthorityService::AUTHORITY_VERSION,
+            'career_current_manifest_authority' => CareerContentV3AuthorityPackage::CONTRACT_VERSION,
             'page_family_policy_hash' => $this->policyRegistry->policyHash(),
             'sitemap_is_authority' => false,
             'llms_is_authority' => false,
@@ -52,7 +56,12 @@ final class CurrentPublicUrlAuthoritySource implements UrlTruthInventorySource
     {
         $records = [];
         foreach (['zh-CN', 'en'] as $locale) {
-            foreach ($this->careerAuthority->indexableItems($locale, false) as $item) {
+            try {
+                $items = $this->careerAuthority->indexableItems($locale, false);
+            } catch (\Throwable) {
+                $items = [];
+            }
+            foreach ($items as $item) {
                 $path = trim((string) ($item['canonical_path'] ?? ''));
                 $slug = trim((string) ($item['slug'] ?? ''));
                 if ($path === '' || $slug === '') {
@@ -78,6 +87,41 @@ final class CurrentPublicUrlAuthoritySource implements UrlTruthInventorySource
                         'authority_revision' => CareerDirectoryAuthorityService::AUTHORITY_VERSION,
                     ],
                     attributes: ['authority_revision' => CareerDirectoryAuthorityService::AUTHORITY_VERSION],
+                );
+            }
+        }
+
+        return $records;
+    }
+
+    /** @return list<UrlTruthInventoryRecord> */
+    private function careerCurrentManifestRecords(): array
+    {
+        $index = $this->careerCurrentAuthority->manifestIndex(base_path());
+        $revision = (string) data_get($index, 'manifest.aggregate_sha256');
+        $records = [];
+
+        foreach ($index['slugs'] as $slug) {
+            foreach (['zh-CN' => 'zh', 'en' => 'en'] as $locale => $segment) {
+                $path = '/'.$segment.'/career/jobs/'.$slug;
+                $records[] = new UrlTruthInventoryRecord(
+                    canonicalUrl: $this->canonicalUrl($path),
+                    locale: $locale,
+                    pageEntityType: 'career_job',
+                    entityIdOrSlug: $slug,
+                    sourceAuthority: 'career_current_manifest',
+                    indexabilityState: 'indexable',
+                    lastmodSource: 'career_current_manifest_revision',
+                    cluster: 'career',
+                    entitySource: 'career_current_manifest',
+                    authorityStatus: 'canonical_identity_current',
+                    metadata: [
+                        'publication_state' => 'current',
+                        'robots' => 'index,follow',
+                        'canonical_self' => true,
+                        'authority_revision' => $revision,
+                    ],
+                    attributes: ['authority_revision' => $revision],
                 );
             }
         }

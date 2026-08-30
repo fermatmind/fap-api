@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel;
 
+use App\Services\SeoIntel\PageFamily\PageFamilyClassifier;
+use App\Services\SeoIntel\Sources\CurrentPublicUrlAuthoritySource;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +27,8 @@ final class GscReadModelSyncService
         private readonly GscSearchAnalyticsRowNormalizer $normalizer,
         private readonly GscDataQualityGate $qualityGate,
         private readonly GscRunCloseoutSummarizer $closeoutSummarizer,
+        private readonly CurrentPublicUrlAuthoritySource $currentPublicAuthority,
+        private readonly PageFamilyClassifier $pageFamilyClassifier,
     ) {}
 
     /**
@@ -126,7 +130,7 @@ final class GscReadModelSyncService
                 );
             }
 
-            [$upserted, $unmapped] = $this->persistRows($connection, $runUid, $rows);
+            [$upserted, $excluded] = $this->persistRows($connection, $runUid, $rows);
             $closeout = $this->closeoutSummarizer->summarize(
                 $connection,
                 $rows,
@@ -141,7 +145,7 @@ final class GscReadModelSyncService
                 'pages_fetched' => $pages,
                 'rows_seen' => count($rows),
                 'rows_upserted' => $upserted,
-                'unmapped_rows' => $unmapped,
+                'unmapped_rows' => 0,
                 'quality_gate_json' => json_encode($quality, JSON_THROW_ON_ERROR),
                 'finished_at' => $finished->toDateTimeString(),
                 'updated_at' => $finished->toDateTimeString(),
@@ -161,8 +165,9 @@ final class GscReadModelSyncService
                 'pages_fetched' => $pages,
                 'rows_seen' => count($rows),
                 'rows_upserted' => $upserted,
-                'unmapped_rows' => $unmapped,
-                'mapped_rows' => max(0, count($rows) - $unmapped),
+                'unmapped_rows' => 0,
+                'mapped_rows' => $upserted,
+                'excluded_non_authority_rows' => $excluded,
                 'quality_gate' => $quality,
                 ...$closeout,
                 'duplicate_natural_keys' => (int) data_get(
@@ -294,6 +299,7 @@ final class GscReadModelSyncService
             ->orderBy('id')
             ->get(['id', 'canonical_url_hash', 'canonical_url', 'locale'])
             ->keyBy('canonical_url_hash');
+        $authority = $this->currentAuthorityIndex();
         $now = CarbonImmutable::now('UTC')->toDateTimeString();
         $payloads = [];
         $qualityRows = [];
@@ -302,16 +308,60 @@ final class GscReadModelSyncService
             if (! $hmacColumnsAvailable) {
                 unset($row['query_hmac'], $row['query_hmac_key_version']);
             }
-            $hash = (string) ($row['canonical_url_hash'] ?? '');
-            $truthRow = $truth->get($hash);
-            $mapped = $truthRow !== null;
+            $sourceHash = (string) ($row['canonical_url_hash'] ?? '');
+            $truthRow = $truth->get($sourceHash);
+            $authorityRow = $truthRow === null ? ($authority['variants'][$sourceHash] ?? null) : null;
+            $mapped = $truthRow !== null || is_array($authorityRow);
+            if (! $mapped) {
+                if ($sourceHash !== '') {
+                    $qualityRows[] = [
+                        'sync_run_uid' => $runUid,
+                        'report_date' => (string) $row['report_date'],
+                        'canonical_url_hash' => $sourceHash,
+                        'issue_code' => 'canonical_url_not_in_current_public_authority',
+                        'status' => 'open',
+                        'details_json' => json_encode([
+                            'source' => 'gsc',
+                            'search_type' => $row['search_type'] ?? null,
+                            'disposition' => 'excluded_from_primary_readmodel',
+                        ], JSON_THROW_ON_ERROR),
+                        'created_at' => $now,
+                        'updated_at' => $now,
+                    ];
+                }
+
+                continue;
+            }
+
+            $canonicalUrl = $truthRow !== null
+                ? (string) $truthRow->canonical_url
+                : (string) $authorityRow['canonical_url'];
+            $canonicalHash = hash('sha256', $canonicalUrl);
+            $locale = $truthRow !== null
+                ? (string) ($truthRow->locale ?? '')
+                : (string) $authorityRow['locale'];
+            $pageFamily = $truthRow !== null
+                ? $this->pageFamily($canonicalUrl, $locale)
+                : (string) $authorityRow['page_family'];
+            $sourceAuthority = $truthRow !== null
+                ? 'persisted_url_truth'
+                : (string) $authorityRow['source_authority'];
+            $metadata = is_array($row['metadata_json'] ?? null) ? $row['metadata_json'] : [];
+            $metadata['mapping_authority'] = $truthRow !== null
+                ? 'persisted_url_truth_current_binding'
+                : 'current_public_url_authority_read_only';
+            $metadata['authority_revision'] = $authority['revision'];
+            $metadata['page_family'] = $pageFamily;
+            $metadata['source_authority'] = $sourceAuthority;
+            $row['canonical_url_hash'] = $canonicalHash;
+            $row['canonical_url'] = $canonicalUrl;
+            $row['locale'] = $locale;
+            $row['metadata_json'] = $metadata;
             $payloads[] = [
                 ...$row,
-                'url_truth_id' => $mapped ? (int) $truthRow->id : null,
-                'canonical_url' => $mapped ? (string) $truthRow->canonical_url : null,
-                'mapping_state' => $mapped ? 'mapped' : 'unmapped',
+                'url_truth_id' => $truthRow !== null ? (int) $truthRow->id : null,
+                'mapping_state' => 'mapped',
                 'sync_run_uid' => $runUid,
-                'locale' => $row['locale'] ?? ($mapped ? (string) ($truthRow->locale ?? '') : null),
                 'idempotency_key' => $this->idempotencyKey($row),
                 'collected_at' => $now,
                 'metadata_json' => json_encode($row['metadata_json'] ?? [], JSON_THROW_ON_ERROR),
@@ -319,18 +369,6 @@ final class GscReadModelSyncService
                 'updated_at' => $now,
             ];
 
-            if (! $mapped && $hash !== '') {
-                $qualityRows[] = [
-                    'sync_run_uid' => $runUid,
-                    'report_date' => (string) $row['report_date'],
-                    'canonical_url_hash' => $hash,
-                    'issue_code' => 'canonical_url_not_in_url_truth',
-                    'status' => 'open',
-                    'details_json' => json_encode(['source' => 'gsc', 'search_type' => $row['search_type'] ?? null], JSON_THROW_ON_ERROR),
-                    'created_at' => $now,
-                    'updated_at' => $now,
-                ];
-            }
         }
 
         $connection->transaction(function () use ($connection, $payloads, $qualityRows, $hmacColumnsAvailable): void {
@@ -354,6 +392,104 @@ final class GscReadModelSyncService
         });
 
         return [count($payloads), count($qualityRows)];
+    }
+
+    /** @return array{variants:array<string,array<string,string>>,revision:string} */
+    private function currentAuthorityIndex(): array
+    {
+        $variants = [];
+        $canonicalHashes = [];
+
+        foreach ($this->currentPublicAuthority->candidates() as $record) {
+            if ($record->isPrivateFlow || $record->indexabilityState !== 'indexable') {
+                continue;
+            }
+            $pageFamily = $this->pageFamily(
+                $record->canonicalUrl,
+                $record->locale,
+                $record->pageEntityType,
+                $record->sourceAuthority,
+                $record->entitySource,
+                $record->authorityStatus,
+            );
+            if ($pageFamily === '') {
+                continue;
+            }
+            $canonicalHash = $record->canonicalUrlHash();
+            $canonicalHashes[$canonicalHash] = true;
+            $mapped = [
+                'canonical_url' => $record->canonicalUrl,
+                'locale' => $record->locale,
+                'page_family' => $pageFamily,
+                'source_authority' => $record->sourceAuthority,
+            ];
+            foreach ($this->canonicalVariants($record->canonicalUrl) as $variant) {
+                $variants[hash('sha256', $variant)] ??= $mapped;
+            }
+        }
+
+        $revisionParts = array_keys($canonicalHashes);
+        sort($revisionParts, SORT_STRING);
+
+        return [
+            'variants' => $variants,
+            'revision' => hash('sha256', json_encode($revisionParts, JSON_THROW_ON_ERROR)),
+        ];
+    }
+
+    /** @return list<string> */
+    private function canonicalVariants(string $canonicalUrl): array
+    {
+        $parts = parse_url($canonicalUrl);
+        if (! is_array($parts) || ! is_string($parts['path'] ?? null)) {
+            return [];
+        }
+        $path = rtrim((string) $parts['path'], '/');
+        $path = $path === '' ? '/' : $path;
+        $paths = [$path];
+        if (str_starts_with($path, '/zh/')) {
+            $paths[] = preg_replace('#^/zh/#', '/zh-cn/', $path) ?: $path;
+            $paths[] = preg_replace('#^/zh/#', '/zh_CN/', $path) ?: $path;
+        } elseif (str_starts_with($path, '/en/')) {
+            $paths[] = preg_replace('#^/en/#', '/en-us/', $path) ?: $path;
+            $paths[] = preg_replace('#^/en/#', '/en_US/', $path) ?: $path;
+        }
+
+        $variants = [];
+        foreach (array_unique($paths) as $variantPath) {
+            foreach (['https://fermatmind.com', 'https://www.fermatmind.com', 'http://fermatmind.com', 'http://www.fermatmind.com'] as $host) {
+                $variants[] = $host.$variantPath;
+                if ($variantPath !== '/') {
+                    $variants[] = $host.$variantPath.'/';
+                }
+            }
+        }
+
+        return array_values(array_unique($variants));
+    }
+
+    private function pageFamily(
+        string $canonicalUrl,
+        string $locale,
+        string $pageEntityType = '',
+        string $sourceAuthority = 'current_public_url_authority',
+        string $entitySource = 'backend_authority',
+        string $authorityStatus = 'published_approved',
+    ): string {
+        $classification = $this->pageFamilyClassifier->classify([
+            'canonical_url' => $canonicalUrl,
+            'locale' => $locale,
+            'page_entity_type' => $pageEntityType,
+            'source_authority' => $sourceAuthority,
+            'entity_source' => $entitySource,
+            'authority_status' => $authorityStatus,
+            'indexability_state' => 'indexable',
+            'is_private_flow' => false,
+        ]);
+
+        return ($classification['classification_status'] ?? null) === 'classified'
+            ? (string) ($classification['family_id'] ?? '')
+            : '';
     }
 
     private function incrementalStartDate(

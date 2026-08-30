@@ -136,36 +136,7 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
 
         $connection = (string) config('seo_intel.connection', 'seo_intel');
         try {
-            $latestAvailable = DB::connection($connection)->table('seo_gsc_daily as g')
-                ->join('seo_urls as u', 'u.canonical_url_hash', '=', 'g.canonical_url_hash')
-                ->where('u.page_family', $pageFamily)
-                ->where('u.locale', $locale)
-                ->where('u.is_private_flow', false)
-                ->where('g.source_engine', 'google')
-                ->where('g.data_state', 'final')
-                ->max('g.report_date');
-            if (! is_string($latestAvailable) || trim($latestAvailable) === '') {
-                return MeasurementEvidenceLoadResult::make(
-                    'search_measurement', [], 'unavailable', 'unknown', 'GSC_NO_ELIGIBLE_ROWS'
-                );
-            }
-            $latestAvailableDate = CarbonImmutable::parse($latestAvailable, 'UTC')->startOfDay();
-            $rows = DB::connection($connection)->table('seo_gsc_daily as g')
-                ->join('seo_urls as u', 'u.canonical_url_hash', '=', 'g.canonical_url_hash')
-                ->where('u.page_family', $pageFamily)
-                ->where('u.locale', $locale)
-                ->where('u.is_private_flow', false)
-                ->where('g.source_engine', 'google')
-                ->where('g.data_state', 'final')
-                ->whereBetween('g.report_date', [
-                    $latestAvailableDate->subDays(96)->toDateString(),
-                    $latestAvailableDate->toDateString(),
-                ])
-                ->get([
-                    'g.report_date', 'g.canonical_url_hash', 'g.query_hash', 'g.source_engine',
-                    'g.clicks', 'g.impressions', 'g.ctr_ppm', 'g.average_position_milli',
-                    'g.is_brand_query', 'g.mapping_state', 'g.metadata_json', 'u.authority_revision',
-                ])->map(fn (object $row): array => $this->normalizeGscRow((array) $row))->all();
+            $rows = $this->searchRowsForScope($connection, $pageFamily, $locale);
         } catch (Throwable) {
             return MeasurementEvidenceLoadResult::make(
                 'search_measurement', [], 'unavailable', 'unknown', 'GSC_READMODEL_UNHEALTHY'
@@ -452,26 +423,46 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
     private function searchRuntimeScope(): ?array
     {
         $connection = (string) config('seo_intel.connection', 'seo_intel');
-        $row = DB::connection($connection)->table('seo_gsc_daily as g')
-            ->join('seo_urls as u', 'u.canonical_url_hash', '=', 'g.canonical_url_hash')
-            ->whereIn('u.page_family', PageFamilyPolicyRegistry::PUBLIC_FAMILY_IDS)
-            ->whereIn('u.locale', ['en', 'zh-CN'])
-            ->where('u.is_private_flow', false)
-            ->where('g.source_engine', 'google')
-            ->where('g.data_state', 'final')
-            ->groupBy('u.page_family', 'u.locale')
-            ->orderByDesc(DB::raw('MAX(g.report_date)'))
-            ->orderByDesc(DB::raw('COUNT(DISTINCT g.report_date)'))
-            ->orderBy('u.page_family')
-            ->orderBy('u.locale')
-            ->first(['u.page_family', 'u.locale']);
-        if ($row === null
-            || ! in_array($row->page_family ?? null, PageFamilyPolicyRegistry::PUBLIC_FAMILY_IDS, true)
-            || ! in_array($row->locale ?? null, ['en', 'zh-CN'], true)) {
-            return null;
+        if ($this->urlTruthSchemaAvailable($connection)) {
+            $row = DB::connection($connection)->table('seo_gsc_daily as g')
+                ->join('seo_urls as u', 'u.canonical_url_hash', '=', 'g.canonical_url_hash')
+                ->whereIn('u.page_family', PageFamilyPolicyRegistry::PUBLIC_FAMILY_IDS)
+                ->whereIn('u.locale', ['en', 'zh-CN'])
+                ->where('u.is_private_flow', false)
+                ->where('g.source_engine', 'google')
+                ->where('g.data_state', 'final')
+                ->groupBy('u.page_family', 'u.locale')
+                ->orderByDesc(DB::raw('MAX(g.report_date)'))
+                ->orderByDesc(DB::raw('COUNT(DISTINCT g.report_date)'))
+                ->orderBy('u.page_family')
+                ->orderBy('u.locale')
+                ->first(['u.page_family', 'u.locale']);
+            if ($row !== null) {
+                return ['page_family' => (string) $row->page_family, 'locale' => (string) $row->locale];
+            }
         }
 
-        return ['page_family' => (string) $row->page_family, 'locale' => (string) $row->locale];
+        $rows = DB::connection($connection)->table('seo_gsc_daily')
+            ->where('source_engine', 'google')
+            ->where('data_state', 'final')
+            ->where('mapping_state', 'mapped')
+            ->whereIn('locale', ['en', 'zh-CN'])
+            ->orderByDesc('report_date')
+            ->limit(5000)
+            ->get(['locale', 'metadata_json']);
+        foreach ($rows as $row) {
+            $normalized = $this->normalizeGscRow((array) $row);
+            if (in_array($normalized['page_family'] ?? null, PageFamilyPolicyRegistry::PUBLIC_FAMILY_IDS, true)
+                && in_array($normalized['locale'] ?? null, ['en', 'zh-CN'], true)
+                && preg_match('/^[a-f0-9]{64}$/D', (string) ($normalized['authority_revision'] ?? '')) === 1) {
+                return [
+                    'page_family' => (string) $normalized['page_family'],
+                    'locale' => (string) $normalized['locale'],
+                ];
+            }
+        }
+
+        return null;
     }
 
     /** @return array{page_family:string,locale:string}|null */
@@ -522,9 +513,6 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
                 'report_date', 'canonical_url_hash', 'query_hash', 'source_engine', 'data_state',
                 'clicks', 'impressions', 'ctr_ppm', 'average_position_milli', 'is_brand_query',
                 'mapping_state', 'metadata_json', 'locale', 'query_type', 'collected_at',
-            ]) && $this->schemaHas($schema, 'seo_urls', [
-                'canonical_url_hash', 'canonical_url', 'locale', 'page_family', 'page_entity_type',
-                'source_authority', 'indexability_state', 'is_private_flow', 'authority_revision',
             ]);
         } catch (Throwable) {
             return false;
@@ -626,7 +614,85 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
                 $row['metadata_json'] = [];
             }
         }
+        $metadata = is_array($row['metadata_json'] ?? null) ? $row['metadata_json'] : [];
+        $row['authority_revision'] ??= $metadata['authority_revision'] ?? null;
+        $row['page_family'] ??= $metadata['page_family'] ?? null;
 
         return $row;
+    }
+
+    /** @return list<array<string,mixed>> */
+    private function searchRowsForScope(string $connection, string $pageFamily, string $locale): array
+    {
+        if ($this->urlTruthSchemaAvailable($connection)) {
+            $latest = DB::connection($connection)->table('seo_gsc_daily as g')
+                ->join('seo_urls as u', 'u.canonical_url_hash', '=', 'g.canonical_url_hash')
+                ->where('u.page_family', $pageFamily)
+                ->where('u.locale', $locale)
+                ->where('u.is_private_flow', false)
+                ->where('g.source_engine', 'google')
+                ->where('g.data_state', 'final')
+                ->max('g.report_date');
+            if (is_string($latest) && $latest !== '') {
+                $latestDate = CarbonImmutable::parse($latest, 'UTC')->startOfDay();
+
+                return DB::connection($connection)->table('seo_gsc_daily as g')
+                    ->join('seo_urls as u', 'u.canonical_url_hash', '=', 'g.canonical_url_hash')
+                    ->where('u.page_family', $pageFamily)
+                    ->where('u.locale', $locale)
+                    ->where('u.is_private_flow', false)
+                    ->where('g.source_engine', 'google')
+                    ->where('g.data_state', 'final')
+                    ->whereBetween('g.report_date', [
+                        $latestDate->subDays(96)->toDateString(),
+                        $latestDate->toDateString(),
+                    ])
+                    ->get([
+                        'g.report_date', 'g.canonical_url_hash', 'g.query_hash', 'g.source_engine',
+                        'g.clicks', 'g.impressions', 'g.ctr_ppm', 'g.average_position_milli',
+                        'g.is_brand_query', 'g.mapping_state', 'g.metadata_json', 'u.authority_revision',
+                    ])->map(fn (object $row): array => $this->normalizeGscRow((array) $row))->all();
+            }
+        }
+
+        $latest = DB::connection($connection)->table('seo_gsc_daily')
+            ->where('locale', $locale)
+            ->where('source_engine', 'google')
+            ->where('data_state', 'final')
+            ->where('mapping_state', 'mapped')
+            ->max('report_date');
+        if (! is_string($latest) || $latest === '') {
+            return [];
+        }
+        $latestDate = CarbonImmutable::parse($latest, 'UTC')->startOfDay();
+
+        return DB::connection($connection)->table('seo_gsc_daily')
+            ->where('locale', $locale)
+            ->where('source_engine', 'google')
+            ->where('data_state', 'final')
+            ->where('mapping_state', 'mapped')
+            ->whereBetween('report_date', [
+                $latestDate->subDays(96)->toDateString(),
+                $latestDate->toDateString(),
+            ])
+            ->get([
+                'report_date', 'canonical_url_hash', 'query_hash', 'source_engine',
+                'clicks', 'impressions', 'ctr_ppm', 'average_position_milli',
+                'is_brand_query', 'mapping_state', 'metadata_json', 'locale',
+            ])->map(fn (object $row): array => $this->normalizeGscRow((array) $row))
+            ->filter(fn (array $row): bool => ($row['page_family'] ?? null) === $pageFamily
+                && preg_match('/^[a-f0-9]{64}$/D', (string) ($row['authority_revision'] ?? '')) === 1)
+            ->values()
+            ->all();
+    }
+
+    private function urlTruthSchemaAvailable(string $connection): bool
+    {
+        $schema = Schema::connection($connection);
+
+        return $this->schemaHas($schema, 'seo_urls', [
+            'canonical_url_hash', 'canonical_url', 'locale', 'page_family', 'page_entity_type',
+            'source_authority', 'indexability_state', 'is_private_flow', 'authority_revision',
+        ]);
     }
 }

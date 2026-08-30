@@ -109,7 +109,7 @@ final class SeoIntelGscReadModelSyncTest extends TestCase
     }
 
     #[Test]
-    public function unmapped_urls_enter_quality_queue_without_becoming_fake_zeroes(): void
+    public function non_authority_urls_enter_quality_queue_without_entering_primary_readmodel(): void
     {
         $this->seedPreviousSuccess();
         Http::fake(static fn (Request $request) => (int) $request['startRow'] === 0
@@ -127,12 +127,14 @@ final class SeoIntelGscReadModelSyncTest extends TestCase
 
         $this->assertSame('success', $result['status']);
         $this->assertSame('success', $repeat['status']);
-        $this->assertSame(1, $result['unmapped_rows']);
+        $this->assertSame(0, $result['unmapped_rows']);
+        $this->assertSame(0, $result['mapped_rows']);
+        $this->assertSame(1, $result['excluded_non_authority_rows']);
         $this->assertDatabaseHas('seo_gsc_data_quality_queue', [
-            'issue_code' => 'canonical_url_not_in_url_truth',
+            'issue_code' => 'canonical_url_not_in_current_public_authority',
             'status' => 'open',
         ], 'seo_intel_gsc_sync_test');
-        $this->assertSame('unmapped', DB::connection('seo_intel_gsc_sync_test')->table('seo_gsc_daily')->value('mapping_state'));
+        $this->assertSame(0, DB::connection('seo_intel_gsc_sync_test')->table('seo_gsc_daily')->count());
         $this->assertSame(1, DB::connection('seo_intel_gsc_sync_test')->table('seo_gsc_data_quality_queue')->count());
     }
 
@@ -189,6 +191,9 @@ final class SeoIntelGscReadModelSyncTest extends TestCase
         $this->assertSame('restricted', data_get($result, 'restricted_egress.status'));
         $this->assertTrue(data_get($result, 'read_only_gsc'));
         $this->assertSame(0, $result['duplicate_natural_keys']);
+        $this->assertSame(7, $result['mapped_rows']);
+        $this->assertSame(0, $result['unmapped_rows']);
+        $this->assertSame(0, $result['excluded_non_authority_rows']);
         $this->assertSame('2026-08-20', $result['data_max_date']);
         $this->assertEquals(3, $result['data_lag_days']);
         $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', (string) $result['property_hash']);
@@ -207,6 +212,13 @@ final class SeoIntelGscReadModelSyncTest extends TestCase
         $this->assertSame('backend_cms_and_persisted_url_truth_only', data_get($result, 'unmapped_classification.classification_authority'));
         $this->assertFalse(data_get($result, 'unmapped_classification.raw_url_retained_or_emitted'));
         $this->assertStringNotContainsString('full-window', json_encode($result['unmapped_classification'], JSON_THROW_ON_ERROR));
+        $persisted = DB::connection('seo_intel_gsc_sync_test')->table('seo_gsc_daily')->first();
+        $metadata = json_decode((string) $persisted->metadata_json, true, 32, JSON_THROW_ON_ERROR);
+        $this->assertSame('mapped', $persisted->mapping_state);
+        $this->assertNull($persisted->url_truth_id);
+        $this->assertSame('articles_topics', $metadata['page_family']);
+        $this->assertSame('current_public_url_authority_read_only', $metadata['mapping_authority']);
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $metadata['authority_revision']);
     }
 
     #[Test]
