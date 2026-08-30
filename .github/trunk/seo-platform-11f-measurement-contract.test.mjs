@@ -63,6 +63,13 @@ test("staging source readiness precedes Council closeout and production never ba
   const candidate = staging.indexOf("Materialize inactive staging measurement candidate");
   const deployment = staging.indexOf("Deploy staging and run repository smoke chain");
   assert.ok(candidate > 0 && readiness > candidate && deployment > readiness);
+  assert.match(staging, /id: measurement_source_readiness/);
+  assert.match(staging, /continue-on-error: true/);
+  assert.match(staging, /steps\.measurement_source_readiness\.outcome \}\}' = failure/);
+  assert.match(staging, /release_prefix=readiness-hold/);
+  assert.match(staging, /council_orchestration=false/);
+  assert.match(staging, /staging_closeout=HOLD reason=MEASUREMENT_SOURCE_READINESS_HOLD/);
+  assert.match(staging, /steps\.measurement_source_readiness\.outcome == 'success'/);
   assert.match(staging, /deploy:candidate-only staging/);
   assert.match(staging, /deploy_mode=candidate_only/);
   assert.match(staging, /source-\$\{DEPLOY_SHA:0:12\}-\$\{GITHUB_RUN_ID\}/);

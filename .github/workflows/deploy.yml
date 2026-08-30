@@ -460,7 +460,9 @@ jobs:
             -o release_name="source-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode=candidate_only \
             -o private_result_authority_publish_required=false --no-interaction
       - name: Verify staging measurement source readiness
+        id: measurement_source_readiness
         if: needs.policy.outputs.seo_council_orchestration == 'true'
+        continue-on-error: true
         shell: bash
         env:
           GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON }}
@@ -736,7 +738,7 @@ jobs:
             }
           ' > artifacts/measurement-source-readiness/receipt.json
       - name: Upload sanitized staging measurement source receipt
-        if: needs.policy.outputs.seo_council_orchestration == 'true'
+        if: needs.policy.outputs.seo_council_orchestration == 'true' && steps.measurement_source_readiness.outcome == 'success'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: measurement-source-readiness-${{ github.event.workflow_run.head_sha }}
@@ -755,13 +757,25 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$DEPLOY_SHA"
+          release_prefix=trunk
+          council_orchestration='${{ needs.policy.outputs.seo_council_orchestration }}'
+          source_readiness_hold=false
+          if test "$council_orchestration" = true && test '${{ steps.measurement_source_readiness.outcome }}' = failure; then
+            release_prefix=readiness-hold
+            council_orchestration=false
+            source_readiness_hold=true
+          fi
           timeout --signal=TERM --kill-after=30s 30m php /tmp/dep.phar deploy staging -f deploy.php --revision "$DEPLOY_SHA" \
-            -o release_name="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode=standard \
+            -o release_name="${release_prefix}-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode=standard \
             -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' \
             -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' \
             -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' \
             -o private_result_authority_publish_required='${{ needs.policy.outputs.private_result_authority_publish_required }}' \
-            -o seo_council_orchestration='${{ needs.policy.outputs.seo_council_orchestration }}' --no-interaction
+            -o seo_council_orchestration="$council_orchestration" --no-interaction
+          if test "$source_readiness_hold" = true; then
+            printf 'staging_closeout=HOLD reason=MEASUREMENT_SOURCE_READINESS_HOLD\n' >&2
+            exit 1
+          fi
       - name: Read staging SEO Evidence closeout receipt
         if: needs.policy.outputs.seo_agent_evidence_boundary == 'true'
         shell: bash
