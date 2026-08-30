@@ -46,4 +46,20 @@ final class SeoPlatform11BDependencySnapshotTest extends TestCase
         $this->assertSame('held', $ledger['status']);
         $this->assertFalse($malformed['execution_allowed']);
     }
+
+    public function test_technical_binding_preserves_independently_available_runtime_evidence(): void
+    {
+        config(['seo_intel.connection' => 'sqlite']);
+        $binding = app(SeoPlatformDependencyEvidenceAdapter::class)->technicalDiagnosisBinding(str_repeat('d', 40));
+
+        $this->assertSame('unavailable', $binding['url_truth_revision']);
+        $this->assertSame('unavailable', $binding['url_truth_projection_hash']);
+        $this->assertSame('unavailable', $binding['authority_revision']);
+        $this->assertMatchesRegularExpression(
+            '/^seo-platform-07-technical-health\.v1:[a-f0-9]{32}$/D',
+            $binding['runtime_evidence_revision'],
+        );
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/D', $binding['runtime_evidence_hash']);
+        $this->assertSame('unavailable', $binding['source_capability_state']);
+    }
 }

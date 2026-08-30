@@ -77,40 +77,75 @@ final class SeoPlatformDependencyEvidenceAdapter implements TechnicalDiagnosisDe
     /** @return array<string, mixed> */
     public function technicalDiagnosisBinding(string $releaseSha): array
     {
+        $urlTruth = $this->technicalUrlTruthBinding();
+        $runtime = $this->technicalRuntimeBinding();
+        $valid = preg_match('/^[a-f0-9]{40}$/D', $releaseSha) === 1
+            && $urlTruth['available']
+            && $runtime['available'];
+
+        return [
+            'url_truth_revision' => $urlTruth['url_truth_revision'],
+            'url_truth_projection_hash' => $urlTruth['url_truth_projection_hash'],
+            'runtime_evidence_revision' => $runtime['runtime_evidence_revision'],
+            'runtime_evidence_hash' => $runtime['runtime_evidence_hash'],
+            'authority_revision' => $urlTruth['authority_revision'],
+            'deployment_revision' => $releaseSha,
+            'source_capability_state' => $valid ? 'available' : 'unavailable',
+        ];
+    }
+
+    /** @return array{available:bool,url_truth_revision:string,url_truth_projection_hash:string,authority_revision:string} */
+    private function technicalUrlTruthBinding(): array
+    {
         try {
             $foundation = $this->detectorFoundation->snapshot(CarbonImmutable::now('UTC'));
             $urlTruthRevision = (string) data_get($foundation, 'jobs.0.evidence.url_truth_revision', '');
             $authorityRevision = (string) data_get($foundation, 'jobs.0.evidence.authority_revision', '');
             $publicCount = data_get($foundation, 'metadata.url_truth.current_public_count');
-            $runtime = $this->technicalHealth->read();
-            $runtimeHash = hash('sha256', json_encode($this->canonicalize($runtime), JSON_THROW_ON_ERROR));
-            $runtimeVersion = (string) ($runtime['schema_version'] ?? '');
-            $valid = preg_match('/^[a-f0-9]{40}$/D', $releaseSha) === 1
-                && preg_match('/^url-truth-set-v1:[a-f0-9]{32}$/D', $urlTruthRevision) === 1
-                && preg_match('/^authority-set-v1:[a-f0-9]{32}$/D', $authorityRevision) === 1
-                && is_int($publicCount)
-                && $runtimeVersion === 'seo-platform-07-technical-health.v1'
-                && data_get($runtime, 'boundaries.read_only') === true
-                && data_get($runtime, 'boundaries.write_authorization_granted') === false;
+            $urlTruthValid = preg_match('/^url-truth-set-v1:[a-f0-9]{32}$/D', $urlTruthRevision) === 1
+                && is_int($publicCount);
+            $authorityValid = preg_match('/^authority-set-v1:[a-f0-9]{32}$/D', $authorityRevision) === 1;
 
             return [
-                'url_truth_revision' => $valid ? $urlTruthRevision : 'unavailable',
-                'url_truth_projection_hash' => $valid ? hash('sha256', $urlTruthRevision.'|'.$publicCount) : 'unavailable',
-                'runtime_evidence_revision' => $valid ? $runtimeVersion.':'.substr($runtimeHash, 0, 32) : 'unavailable',
-                'runtime_evidence_hash' => $valid ? $runtimeHash : 'unavailable',
-                'authority_revision' => $valid ? $authorityRevision : 'unavailable',
-                'deployment_revision' => $releaseSha,
-                'source_capability_state' => $valid ? 'available' : 'unavailable',
+                'available' => $urlTruthValid && $authorityValid,
+                'url_truth_revision' => $urlTruthValid ? $urlTruthRevision : 'unavailable',
+                'url_truth_projection_hash' => $urlTruthValid ? hash('sha256', $urlTruthRevision.'|'.$publicCount) : 'unavailable',
+                'authority_revision' => $authorityValid ? $authorityRevision : 'unavailable',
             ];
         } catch (Throwable) {
             return [
+                'available' => false,
                 'url_truth_revision' => 'unavailable',
                 'url_truth_projection_hash' => 'unavailable',
+                'authority_revision' => 'unavailable',
+            ];
+        }
+    }
+
+    /** @return array{available:bool,runtime_evidence_revision:string,runtime_evidence_hash:string} */
+    private function technicalRuntimeBinding(): array
+    {
+        try {
+            $runtime = $this->technicalHealth->read();
+            $runtimeVersion = (string) ($runtime['schema_version'] ?? '');
+            $valid = $runtimeVersion === 'seo-platform-07-technical-health.v1'
+                && data_get($runtime, 'boundaries.read_only') === true
+                && data_get($runtime, 'boundaries.write_authorization_granted') === false;
+            if (! $valid) {
+                throw new \RuntimeException('RUNTIME_EVIDENCE_UNAVAILABLE');
+            }
+            $runtimeHash = hash('sha256', json_encode($this->canonicalize($runtime), JSON_THROW_ON_ERROR));
+
+            return [
+                'available' => true,
+                'runtime_evidence_revision' => $runtimeVersion.':'.substr($runtimeHash, 0, 32),
+                'runtime_evidence_hash' => $runtimeHash,
+            ];
+        } catch (Throwable) {
+            return [
+                'available' => false,
                 'runtime_evidence_revision' => 'unavailable',
                 'runtime_evidence_hash' => 'unavailable',
-                'authority_revision' => 'unavailable',
-                'deployment_revision' => $releaseSha,
-                'source_capability_state' => 'unavailable',
             ];
         }
     }
