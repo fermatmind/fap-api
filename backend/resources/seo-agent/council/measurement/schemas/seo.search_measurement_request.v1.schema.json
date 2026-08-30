@@ -1,0 +1,1 @@
+{"schema_id":"seo.search_measurement_request.v1","schema_version":"1.0.0","type":"object","required":["version","role_id","page_family","locale","windows","comparison_window","execution_allowed"],"properties":{"role_id":{"const":"seo.expert.search_analytics_measurement"},"windows":{"const":[7,28,90]},"execution_allowed":{"const":false}}}

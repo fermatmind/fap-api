@@ -19,6 +19,7 @@ use App\Services\SeoCouncil\Entrypoints\SeoOperationsUiMissionAdapter;
 use App\Services\SeoCouncil\Governance\CouncilDependencySnapshotBuilder;
 use App\Services\SeoCouncil\Governance\RoleCapabilityBindingRegistry;
 use App\Services\SeoCouncil\Governance\RuntimeCapabilitySnapshotBuilder;
+use App\Services\SeoCouncil\Measurement\MeasurementCloseoutBuilder;
 use App\Services\SeoCouncil\Memory\OperatorTimeService;
 use App\Services\SeoCouncil\Policy\CouncilAdmissionRequestFactory;
 use App\Services\SeoCouncil\Routing\DeterministicMissionRouter;
@@ -56,6 +57,7 @@ final class SeoCouncilCloseoutCommand extends Command
         SeoOperationsUiMissionAdapter $ui,
         OperatorTimeService $operatorTime,
         TechnicalDiagnosisCloseoutBuilder $technicalDiagnosis,
+        MeasurementCloseoutBuilder $measurement,
         SeoRegistryHasher $hasher,
     ): int {
         try {
@@ -114,6 +116,11 @@ final class SeoCouncilCloseoutCommand extends Command
             $activity = $this->activityFromReceipts($entrypointReceipts);
             $productionPermissions = $this->productionPermissionCount($registry, $runtimeSnapshot);
             $technicalReceipt = $technicalDiagnosis->build($sourceSha, $closeoutEnvironment);
+            $measurementReceipt = $measurement->build(
+                $sourceSha,
+                $closeoutEnvironment,
+                $closeoutEnvironment === 'ci_candidate' ? $this->parentSha() : $sourceSha,
+            );
 
             $receipt = [
                 'contract_version' => 'seo.council_closeout.v2',
@@ -181,6 +188,7 @@ final class SeoCouncilCloseoutCommand extends Command
                 'external_trace_export' => (bool) ($registry['architecture_decisions']['external_trace_export'] ?? true),
                 'shared_agent_memory' => (bool) ($registry['architecture_decisions']['shared_agent_memory'] ?? true),
                 'technical_diagnosis' => $technicalReceipt,
+                'measurement_review' => $measurementReceipt,
             ];
             $receiptProjection = $this->receiptProjectionProbe($receipt);
             $receipt['receipt_projection_probe_total'] = $receiptProjection['total'];
@@ -214,6 +222,8 @@ final class SeoCouncilCloseoutCommand extends Command
             $receipt['ready_for_11E'] = $ready;
             $receipt['SEO-PLATFORM-11E'] = $technicalReceipt['SEO-PLATFORM-11E'];
             $receipt['ready_for_11F'] = $technicalReceipt['ready_for_11F'];
+            $receipt['SEO-PLATFORM-11F'] = $measurementReceipt['SEO-PLATFORM-11F'];
+            $receipt['ready_for_11G'] = $measurementReceipt['ready_for_11G'];
             $receipt['receipt_hash'] = $hasher->hash($receipt);
 
             $expectedTechnicalState = match ($closeoutEnvironment) {
@@ -221,16 +231,30 @@ final class SeoCouncilCloseoutCommand extends Command
                 'staging_runtime' => 'STAGING_READY',
                 default => 'CANDIDATE_READY',
             };
+            $expectedMeasurementState = match ($closeoutEnvironment) {
+                'production_runtime' => 'CLOSED',
+                'staging_runtime' => 'STAGING_READY',
+                default => 'OFFLINE_EVAL_READY',
+            };
 
             return $this->emit(
                 $receipt,
                 $ready && ($technicalReceipt['closeout_state'] ?? null) === $expectedTechnicalState
+                    && ($measurementReceipt['closeout_state'] ?? null) === $expectedMeasurementState
                     ? self::SUCCESS
                     : self::FAILURE,
             );
         } catch (Throwable) {
             return $this->emit(['status' => 'failed', 'safe_error_code' => 'SEO_COUNCIL_CLOSEOUT_FAILED'], self::FAILURE);
         }
+    }
+
+    private function parentSha(): string
+    {
+        $process = new Process(['git', 'rev-parse', 'HEAD^'], dirname(base_path()));
+        $process->mustRun();
+
+        return strtolower(trim($process->getOutput()));
     }
 
     private function requestedRoleExpansionBypass(

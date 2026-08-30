@@ -211,7 +211,7 @@ test("binds the deny-only SEO agent Policy Gateway to every 11C layer", () => {
     false,
   );
 });
-test("binds deterministic SEO Council orchestration to every 11D and 11E layer", () => {
+test("binds deterministic SEO Council orchestration to every 11D through 11F layer", () => {
   for (const path of [
     "backend/app/Services/SeoCouncil/SeoCouncilOrchestrator.php",
     "backend/app/Services/SeoAgentEvidence/Sources/SeoPlatformDependencyEvidenceAdapter.php",
@@ -226,16 +226,19 @@ test("binds deterministic SEO Council orchestration to every 11D and 11E layer",
     "backend/docs/seo/generated/seo-council-contract-manifest.v2.json",
     "backend/docs/seo/generated/seo-technical-diagnosis-contract-manifest.v1.json",
     "backend/docs/seo/generated/seo-technical-diagnosis-contract-manifest.v2.json",
+    "backend/docs/seo/generated/seo-measurement-contract-manifest.v1.json",
     "backend/routes/web.php",
     "backend/scripts/seo/export_seo_council_contracts.php",
     "backend/database/migrations/seo_intel/2026_08_29_030000_create_seo_council_runtime_tables.php",
     "backend/tests/Feature/SeoIntel/SeoPlatform11DOrchestratorTest.php",
     "backend/tests/Feature/SeoIntel/SeoPlatform11EDiagnosisEvaluationTest.php",
+    "backend/tests/Feature/SeoIntel/SeoPlatform11FRoutingCloseoutTest.php",
     ".agents/skills/fermatmind-global-seo-geo-growth-scan/SKILL.md",
     ".github/trunk/classify-paths.mjs",
     ".github/trunk/classify-paths.test.mjs",
     ".github/trunk/seo-council-workflow-contract.test.mjs",
     ".github/trunk/seo-platform-11e-runtime-dependency-contract.test.mjs",
+    ".github/trunk/seo-platform-11f-measurement-contract.test.mjs",
     ".github/workflows/ci.yml",
     ".github/workflows/deploy.yml",
     "deploy.php",

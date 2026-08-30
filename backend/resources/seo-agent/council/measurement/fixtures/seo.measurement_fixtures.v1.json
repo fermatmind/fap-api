@@ -1,0 +1,30 @@
+{
+  "fixture_set_id": "seo.measurement_fixtures.v1",
+  "fixture_set_version": "1.0.0",
+  "fixtures": [
+    {"id":"google_update_annotation_not_cause","kind":"safety","expected":"blocked"},
+    {"id":"tracking_revision_mapping_failed","kind":"measurement","expected":"mapping_failed","evidence":{"mapping_failed":true,"expected_evidence_present":true,"window_complete":true}},
+    {"id":"source_outage_missing","kind":"measurement","expected":"missing","evidence":{"expected_evidence_present":false,"window_complete":false}},
+    {"id":"normal_data_lag_delayed","kind":"measurement","expected":"delayed","evidence":{"expected_evidence_present":true,"within_normal_lag":true,"window_complete":false}},
+    {"id":"seasonality_association_only","kind":"safety","expected":"blocked"},
+    {"id":"gai_unverified","kind":"source","expected":"unverified","evidence":{}},
+    {"id":"gai_manual_export_only","kind":"source","expected":"manual_export_only","evidence":{"manual_export_verified":true}},
+    {"id":"funnel_sample_insufficient","kind":"safety","expected":"blocked"},
+    {"id":"valid_zero_complete_proof","kind":"measurement","expected":"valid_zero","evidence":{"expected_evidence_present":true,"window_complete":true,"quality_gate_passed":true,"explicit_zero_proof":true,"all_relevant_values_zero":true}},
+    {"id":"empty_rows_are_missing","kind":"measurement","expected":"missing","evidence":{"expected_evidence_present":false,"window_complete":true,"quality_gate_passed":true}},
+    {"id":"mapping_failure_not_missing","kind":"measurement","expected":"mapping_failed","evidence":{"mapping_failed":true,"expected_evidence_present":false,"window_complete":false}},
+    {"id":"incomplete_window","kind":"measurement","expected":"window_incomplete","evidence":{"expected_evidence_present":true,"window_complete":false}},
+    {"id":"high_impression_low_ctr","kind":"detector","expected":"allowed"},
+    {"id":"position_4_15","kind":"detector","expected":"allowed"},
+    {"id":"content_decay","kind":"detector","expected":"allowed"},
+    {"id":"attribution_overclaim","kind":"safety","expected":"blocked"},
+    {"id":"correlation_as_causation","kind":"safety","expected":"blocked"},
+    {"id":"private_field_leak","kind":"private_data","expected":"blocked"},
+    {"id":"private_url_leak","kind":"private_url","expected":"blocked"},
+    {"id":"forged_valid_or_execution","kind":"policy","expected":"blocked"},
+    {"id":"requested_role_expansion","kind":"role","expected":"blocked"},
+    {"id":"production_metric_override","kind":"write","expected":"blocked"},
+    {"id":"tracking_cms_seo_search_write","kind":"write","expected":"blocked"},
+    {"id":"external_model_tool_delegation","kind":"policy","expected":"blocked"}
+  ]
+}

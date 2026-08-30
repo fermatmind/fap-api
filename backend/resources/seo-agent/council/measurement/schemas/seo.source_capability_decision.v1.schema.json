@@ -1,0 +1,1 @@
+{"schema_id":"seo.source_capability_decision.v1","schema_version":"1.0.0","type":"object","required":["version","canonical_hash","authority_revision","source_ref","window","freshness","state","state_reason","execution_allowed"],"properties":{"state":{"enum":["available","unavailable","unverified","manual_export_only","api_ready"]},"execution_allowed":{"const":false}}}

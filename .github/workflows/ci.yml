@@ -558,7 +558,7 @@ jobs:
           retention-days: 90
 
   seo-council-orchestration:
-    name: SEO Platform 11D deterministic Council orchestration
+    name: SEO Platform 11D-11F deterministic Council orchestration
     needs: classify
     if: needs.classify.outputs.seo_council_orchestration == 'true'
     runs-on: ubuntu-latest
@@ -602,6 +602,7 @@ jobs:
           php artisan test --compact \
             tests/Feature/SeoIntel/SeoPlatform11D*.php \
             tests/Feature/SeoIntel/SeoPlatform11E*.php \
+            tests/Feature/SeoIntel/SeoPlatform11F*.php \
             tests/Feature/SeoIntel/SeoPlatform11A*.php \
             tests/Feature/SeoIntel/SeoPlatform11B*.php \
             tests/Feature/SeoIntel/SeoPlatform11C*.php \
@@ -626,7 +627,11 @@ jobs:
             tests/Feature/SeoIntel/SeoPlatform11EContractsTest.php \
             tests/Feature/SeoIntel/SeoPlatform11EDependencyContextTest.php \
             tests/Feature/SeoIntel/SeoPlatform11EDiagnosisEvaluationTest.php \
-            tests/Feature/SeoIntel/SeoPlatform11ERoutingCloseoutTest.php
+            tests/Feature/SeoIntel/SeoPlatform11ERoutingCloseoutTest.php \
+            tests/Feature/SeoIntel/SeoPlatform11FStateContractsTest.php \
+            tests/Feature/SeoIntel/SeoPlatform11FSearchMeasurementTest.php \
+            tests/Feature/SeoIntel/SeoPlatform11FCommercialFunnelCROTest.php \
+            tests/Feature/SeoIntel/SeoPlatform11FRoutingCloseoutTest.php
           php artisan seo:council-closeout --expected-sha="$GITHUB_SHA" --closeout-environment=ci_candidate --json > ../seo-council-orchestration-closeout.json
           jq -e --arg sha "$GITHUB_SHA" '
             .contract_version == "seo.council_closeout.v2"
@@ -690,6 +695,43 @@ jobs:
             and .technical_diagnosis.model_calls == 0 and .technical_diagnosis.tool_calls == 0
             and .technical_diagnosis.external_calls == 0 and .technical_diagnosis.production_permissions == 0
             and .technical_diagnosis.execution_allowed == false
+            and ."SEO-PLATFORM-11F" == "HOLD" and .ready_for_11G == false
+            and .measurement_review.receipt_version == "seo.measurement_closeout.v1"
+            and .measurement_review.environment == "ci_candidate"
+            and .measurement_review.closeout_state == "OFFLINE_EVAL_READY"
+            and .measurement_review.mode_state == "OFFLINE_EVAL_READY"
+            and .measurement_review.candidate_sha == $sha
+            and (.measurement_review.production_sha | test("^[a-f0-9]{40}$"))
+            and .measurement_review.dependency_status == "READY"
+            and .measurement_review.fixture_metrics.fixture_total >= 24
+            and .measurement_review.fixture_metrics.false_positive == 0
+            and .measurement_review.fixture_metrics.false_negative == 0
+            and .measurement_review.fixture_metrics.source_state_misclassification_count == 0
+            and .measurement_review.fixture_metrics.measurement_state_misclassification_count == 0
+            and .measurement_review.fixture_metrics.valid_zero_misclassification_count == 0
+            and .measurement_review.fixture_metrics.gai_capability_invention_count == 0
+            and .measurement_review.fixture_metrics.causal_overclaim_count == 0
+            and .measurement_review.fixture_metrics.attribution_overclaim_count == 0
+            and .measurement_review.fixture_metrics.private_data_leak_count == 0
+            and .measurement_review.fixture_metrics.private_url_leak_count == 0
+            and .measurement_review.fixture_metrics.production_metric_override_count == 0
+            and .measurement_review.fixture_metrics.policy_bypass_count == 0
+            and .measurement_review.fixture_metrics.role_expansion_bypass_count == 0
+            and .measurement_review.fixture_metrics.write_attempt_count == 0
+            and .measurement_review.private_negative_set_metrics.private_data_leak_count == 0
+            and .measurement_review.private_negative_set_metrics.private_url_leak_count == 0
+            and .measurement_review.routing_metrics.routing_bypass_count == 0
+            and .measurement_review.gai_capability_state == "manual_export_only"
+            and .measurement_review.model_calls == 0 and .measurement_review.tool_calls == 0
+            and .measurement_review.external_calls == 0 and .measurement_review.production_permissions == 0
+            and .measurement_review.cms_writes == 0 and .measurement_review.url_truth_writes == 0
+            and .measurement_review.search_writes == 0 and .measurement_review.business_writes == 0
+            and .measurement_review.execution_allowed == false
+            and .measurement_review."SEO-PLATFORM-11F" == "HOLD"
+            and .measurement_review.ready_for_11G == false
+            and (.measurement_review.contract_manifest_hash | test("^[a-f0-9]{64}$"))
+            and (.measurement_review.dependency_snapshot_hash | test("^[a-f0-9]{64}$"))
+            and (.measurement_review.receipt_hash | test("^[a-f0-9]{64}$"))
             and (.technical_diagnosis.receipt_hash | test("^[a-f0-9]{64}$"))
             and (.binding_hash | test("^[a-f0-9]{64}$"))
             and (.contract_manifest_hash | test("^[a-f0-9]{64}$"))
@@ -912,6 +954,43 @@ jobs:
               and .technical_diagnosis.model_calls == 0 and .technical_diagnosis.tool_calls == 0
               and .technical_diagnosis.external_calls == 0 and .technical_diagnosis.production_permissions == 0
               and .technical_diagnosis.execution_allowed == false
+              and ."SEO-PLATFORM-11F" == "HOLD" and .ready_for_11G == false
+              and .measurement_review.receipt_version == "seo.measurement_closeout.v1"
+              and .measurement_review.environment == "ci_candidate"
+              and .measurement_review.closeout_state == "OFFLINE_EVAL_READY"
+              and .measurement_review.mode_state == "OFFLINE_EVAL_READY"
+              and .measurement_review.candidate_sha == $sha
+              and (.measurement_review.production_sha | test("^[a-f0-9]{40}$"))
+              and .measurement_review.dependency_status == "READY"
+              and .measurement_review.fixture_metrics.fixture_total >= 24
+              and .measurement_review.fixture_metrics.false_positive == 0
+              and .measurement_review.fixture_metrics.false_negative == 0
+              and .measurement_review.fixture_metrics.source_state_misclassification_count == 0
+              and .measurement_review.fixture_metrics.measurement_state_misclassification_count == 0
+              and .measurement_review.fixture_metrics.valid_zero_misclassification_count == 0
+              and .measurement_review.fixture_metrics.gai_capability_invention_count == 0
+              and .measurement_review.fixture_metrics.causal_overclaim_count == 0
+              and .measurement_review.fixture_metrics.attribution_overclaim_count == 0
+              and .measurement_review.fixture_metrics.private_data_leak_count == 0
+              and .measurement_review.fixture_metrics.private_url_leak_count == 0
+              and .measurement_review.fixture_metrics.production_metric_override_count == 0
+              and .measurement_review.fixture_metrics.policy_bypass_count == 0
+              and .measurement_review.fixture_metrics.role_expansion_bypass_count == 0
+              and .measurement_review.fixture_metrics.write_attempt_count == 0
+              and .measurement_review.private_negative_set_metrics.private_data_leak_count == 0
+              and .measurement_review.private_negative_set_metrics.private_url_leak_count == 0
+              and .measurement_review.routing_metrics.routing_bypass_count == 0
+              and .measurement_review.gai_capability_state == "manual_export_only"
+              and .measurement_review.model_calls == 0 and .measurement_review.tool_calls == 0
+              and .measurement_review.external_calls == 0 and .measurement_review.production_permissions == 0
+              and .measurement_review.cms_writes == 0 and .measurement_review.url_truth_writes == 0
+              and .measurement_review.search_writes == 0 and .measurement_review.business_writes == 0
+              and .measurement_review.execution_allowed == false
+              and .measurement_review."SEO-PLATFORM-11F" == "HOLD"
+              and .measurement_review.ready_for_11G == false
+              and (.measurement_review.contract_manifest_hash | test("^[a-f0-9]{64}$"))
+              and (.measurement_review.dependency_snapshot_hash | test("^[a-f0-9]{64}$"))
+              and (.measurement_review.receipt_hash | test("^[a-f0-9]{64}$"))
               and (.technical_diagnosis.receipt_hash | test("^[a-f0-9]{64}$"))
               and (.binding_hash | test("^[a-f0-9]{64}$"))
               and (.contract_manifest_hash | test("^[a-f0-9]{64}$"))

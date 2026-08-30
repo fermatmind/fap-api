@@ -1,0 +1,131 @@
+{
+    "manifest_id": "seo.measurement_contract_manifest.v1",
+    "manifest_version": "1.0.0",
+    "contracts": [
+        {
+            "id": "seo.measurement_evidence_context.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/measurement/schemas/seo.measurement_evidence_context.v1.schema.json",
+            "hash": "a5b52d86ea7daa4cc180ac2d583401565e568ef337c795cb5e637d65791c31ed"
+        },
+        {
+            "id": "seo.source_capability_decision.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/measurement/schemas/seo.source_capability_decision.v1.schema.json",
+            "hash": "2ddecc22afba5c6b4977c6b0b238a47c465dc99ff473732711807d84e6439e9d"
+        },
+        {
+            "id": "seo.measurement_state_decision.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/measurement/schemas/seo.measurement_state_decision.v1.schema.json",
+            "hash": "be398b60bb5997861c7e96b8346a68cc56518fab260d26d066a627ae9a83e580"
+        },
+        {
+            "id": "seo.measurement_evidence_gap.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/measurement/schemas/seo.measurement_evidence_gap.v1.schema.json",
+            "hash": "a37f046b0a7a245b4e0e415065621d5d35a447ea854c6c25d416a8748e9462e4"
+        },
+        {
+            "id": "seo.search_measurement_request.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/measurement/schemas/seo.search_measurement_request.v1.schema.json",
+            "hash": "a85bd5c263b388b40dc9e5ed947280a7c1311f21e6ec327cd58231dd69cb1a39"
+        },
+        {
+            "id": "seo.search_measurement_finding.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/measurement/schemas/seo.search_measurement_finding.v1.schema.json",
+            "hash": "de7011cc54d6d2eef02bfe053d18e9eb33881c110880274461872f1b60e54340"
+        },
+        {
+            "id": "seo.search_measurement_output.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/measurement/schemas/seo.search_measurement_output.v1.schema.json",
+            "hash": "0aa38dfda5b7488615be1d88c35b2e7d865c98e79812a8b2478ca5390ec3555a"
+        },
+        {
+            "id": "seo.commercial_funnel_cro_request.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/measurement/schemas/seo.commercial_funnel_cro_request.v1.schema.json",
+            "hash": "209d03347ffe41b2488c32c2828ebf4b581da74c44cfba22dd03f2e190a9cb06"
+        },
+        {
+            "id": "seo.commercial_funnel_cro_finding.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/measurement/schemas/seo.commercial_funnel_cro_finding.v1.schema.json",
+            "hash": "64d7e6ef4ed14d8b22fefb8ce3756a0abba689e0db92213c0ffd490310edd37f"
+        },
+        {
+            "id": "seo.cro_experiment_candidate.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/measurement/schemas/seo.cro_experiment_candidate.v1.schema.json",
+            "hash": "b1edf2ad7931c46341fb859fef94f73fc1d733cdc8dee21bf0644a4aae6612a4"
+        },
+        {
+            "id": "seo.commercial_funnel_cro_output.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/measurement/schemas/seo.commercial_funnel_cro_output.v1.schema.json",
+            "hash": "15a9d3cc89f1f71b5ea397c3d3437c2fff3799b635f6fcc26d44e68eda5dc78d"
+        },
+        {
+            "id": "seo.measurement_closeout_receipt.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/measurement/schemas/seo.measurement_closeout_receipt.v1.schema.json",
+            "hash": "03e80d0831c4fcf0d62bc31fd56d167613b5b90342b9a6324e55aa52c5fa8fa1"
+        }
+    ],
+    "search_mode": {
+        "id": "search_measurement",
+        "version": "1.0.0",
+        "path": "backend/resources/seo-agent/council/measurement/seo.search_measurement_mode.v1.json",
+        "hash": "175bbc398270270519851334c08e29d2f0277a4f1a67dc39b3423584b54c10ae"
+    },
+    "search_policy": {
+        "id": "seo.search_measurement_policy.v1",
+        "version": "1.0.0",
+        "path": "backend/resources/seo-agent/council/measurement/seo.search_measurement_policy.v1.json",
+        "hash": "ac41cb6220060af1607758390e4bc65b1535f6945195cd30e2969f75687a2d38"
+    },
+    "cro_mode": {
+        "id": "commercial_funnel_cro",
+        "version": "1.0.0",
+        "path": "backend/resources/seo-agent/council/measurement/seo.commercial_funnel_cro_mode.v1.json",
+        "hash": "050650409d347570bf78242bea916b9638388333ab272b688a215a79b8790e32"
+    },
+    "cro_policy": {
+        "id": "seo.commercial_funnel_cro_policy.v1",
+        "version": "1.0.0",
+        "path": "backend/resources/seo-agent/council/measurement/seo.commercial_funnel_cro_policy.v1.json",
+        "hash": "b20cc4fd9589b88424d035fe62fe838a33baee3a48d60cce78bc46d23c82d3b8"
+    },
+    "fixtures": {
+        "id": "seo.measurement_fixtures.v1",
+        "version": "1.0.0",
+        "path": "backend/resources/seo-agent/council/measurement/fixtures/seo.measurement_fixtures.v1.json",
+        "hash": "c60b5938f9d078fa816142acf7184992038874545a240f583a4b81dcb6cd3605"
+    },
+    "search_prompt": {
+        "id": "seo.search_measurement.prompt.v1",
+        "version": "1.0.0",
+        "path": "backend/resources/seo-agent/council/measurement/seo.search_measurement.prompt.v1.md",
+        "hash": "c9b133f61262d9dfbb70d2cd2d9875144c932ad412812ac1825f4924ab115c31"
+    },
+    "cro_prompt": {
+        "id": "seo.commercial_funnel_cro.prompt.v1",
+        "version": "1.0.0",
+        "path": "backend/resources/seo-agent/council/measurement/seo.commercial_funnel_cro.prompt.v1.md",
+        "hash": "a98eaeeed2fa77153d5cb2c5ee7f1d852a2b5fd6682421be3e12cafc8493a31a"
+    },
+    "negative_guarantees": {
+        "new_role": false,
+        "registry_changed": false,
+        "binding_v2_changed": false,
+        "new_orchestrator": false,
+        "model_calls": 0,
+        "tool_calls": 0,
+        "external_calls": 0,
+        "execution_allowed": false
+    },
+    "manifest_hash": "34d12601edbc1173d52c47aa7c2194a66448389eb18fa0ee672cf66aad8d1d1f"
+}

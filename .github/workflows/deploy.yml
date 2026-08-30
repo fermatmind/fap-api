@@ -181,6 +181,38 @@ jobs:
                 and .seo_council_orchestration.technical_diagnosis.external_calls == 0
                 and .seo_council_orchestration.technical_diagnosis.production_permissions == 0
                 and .seo_council_orchestration.technical_diagnosis.execution_allowed == false
+                and .seo_council_orchestration."SEO-PLATFORM-11F" == "HOLD"
+                and .seo_council_orchestration.ready_for_11G == false
+                and .seo_council_orchestration.measurement_review.receipt_version == "seo.measurement_closeout.v1"
+                and .seo_council_orchestration.measurement_review.environment == "ci_candidate"
+                and .seo_council_orchestration.measurement_review.closeout_state == "OFFLINE_EVAL_READY"
+                and .seo_council_orchestration.measurement_review.mode_state == "OFFLINE_EVAL_READY"
+                and .seo_council_orchestration.measurement_review.candidate_sha == $sha
+                and .seo_council_orchestration.measurement_review.dependency_status == "READY"
+                and .seo_council_orchestration.measurement_review.fixture_metrics.false_positive == 0
+                and .seo_council_orchestration.measurement_review.fixture_metrics.false_negative == 0
+                and .seo_council_orchestration.measurement_review.fixture_metrics.source_state_misclassification_count == 0
+                and .seo_council_orchestration.measurement_review.fixture_metrics.measurement_state_misclassification_count == 0
+                and .seo_council_orchestration.measurement_review.fixture_metrics.valid_zero_misclassification_count == 0
+                and .seo_council_orchestration.measurement_review.fixture_metrics.gai_capability_invention_count == 0
+                and .seo_council_orchestration.measurement_review.fixture_metrics.causal_overclaim_count == 0
+                and .seo_council_orchestration.measurement_review.fixture_metrics.attribution_overclaim_count == 0
+                and .seo_council_orchestration.measurement_review.fixture_metrics.private_data_leak_count == 0
+                and .seo_council_orchestration.measurement_review.fixture_metrics.private_url_leak_count == 0
+                and .seo_council_orchestration.measurement_review.fixture_metrics.production_metric_override_count == 0
+                and .seo_council_orchestration.measurement_review.fixture_metrics.policy_bypass_count == 0
+                and .seo_council_orchestration.measurement_review.fixture_metrics.role_expansion_bypass_count == 0
+                and .seo_council_orchestration.measurement_review.fixture_metrics.write_attempt_count == 0
+                and .seo_council_orchestration.measurement_review.routing_metrics.routing_bypass_count == 0
+                and .seo_council_orchestration.measurement_review.model_calls == 0
+                and .seo_council_orchestration.measurement_review.tool_calls == 0
+                and .seo_council_orchestration.measurement_review.external_calls == 0
+                and .seo_council_orchestration.measurement_review.production_permissions == 0
+                and .seo_council_orchestration.measurement_review.cms_writes == 0
+                and .seo_council_orchestration.measurement_review.url_truth_writes == 0
+                and .seo_council_orchestration.measurement_review.search_writes == 0
+                and .seo_council_orchestration.measurement_review.business_writes == 0
+                and .seo_council_orchestration.measurement_review.execution_allowed == false
                 and .seo_council_orchestration.binding_hash_drift_count == 0
                 and .seo_council_orchestration.admission_deny_bypass == 0
                 and .seo_council_orchestration.admission_hold_bypass == 0
@@ -558,6 +590,33 @@ jobs:
             and .technical_diagnosis.search_writes == 0 and .technical_diagnosis.active_manifest_count == 0
             and .technical_diagnosis.trusted_key_count == 0 and .technical_diagnosis.l4_allow_count == 0
             and .technical_diagnosis.execution_allowed == false
+            and ."SEO-PLATFORM-11F" == "HOLD" and .ready_for_11G == false
+            and .measurement_review.receipt_version == "seo.measurement_closeout.v1"
+            and .measurement_review.environment == "staging_runtime"
+            and .measurement_review.closeout_state == "STAGING_READY"
+            and .measurement_review.mode_state == "OFFLINE_EVAL_READY"
+            and .measurement_review.candidate_sha == $sha and .measurement_review.production_sha == $sha
+            and .measurement_review.dependency_status == "READY"
+            and .measurement_review.fixture_metrics.false_positive == 0
+            and .measurement_review.fixture_metrics.false_negative == 0
+            and .measurement_review.fixture_metrics.source_state_misclassification_count == 0
+            and .measurement_review.fixture_metrics.measurement_state_misclassification_count == 0
+            and .measurement_review.fixture_metrics.valid_zero_misclassification_count == 0
+            and .measurement_review.fixture_metrics.gai_capability_invention_count == 0
+            and .measurement_review.fixture_metrics.causal_overclaim_count == 0
+            and .measurement_review.fixture_metrics.attribution_overclaim_count == 0
+            and .measurement_review.fixture_metrics.private_data_leak_count == 0
+            and .measurement_review.fixture_metrics.private_url_leak_count == 0
+            and .measurement_review.fixture_metrics.production_metric_override_count == 0
+            and .measurement_review.fixture_metrics.policy_bypass_count == 0
+            and .measurement_review.fixture_metrics.role_expansion_bypass_count == 0
+            and .measurement_review.fixture_metrics.write_attempt_count == 0
+            and .measurement_review.routing_metrics.routing_bypass_count == 0
+            and .measurement_review.model_calls == 0 and .measurement_review.tool_calls == 0
+            and .measurement_review.external_calls == 0 and .measurement_review.production_permissions == 0
+            and .measurement_review.cms_writes == 0 and .measurement_review.url_truth_writes == 0
+            and .measurement_review.search_writes == 0 and .measurement_review.business_writes == 0
+            and .measurement_review.execution_allowed == false
             and .binding_hash_drift_count == 0 and .admission_deny_bypass == 0
             and .admission_hold_bypass == 0 and .csrf_bypass == 0
             and .policy_reason_overwrite_count == 0 and .unauthorized_route_execution_count == 0
@@ -896,6 +955,33 @@ jobs:
             and .technical_diagnosis.search_writes == 0 and .technical_diagnosis.active_manifest_count == 0
             and .technical_diagnosis.trusted_key_count == 0 and .technical_diagnosis.l4_allow_count == 0
             and .technical_diagnosis.execution_allowed == false
+            and ."SEO-PLATFORM-11F" == "CLOSED" and .ready_for_11G == true
+            and .measurement_review.receipt_version == "seo.measurement_closeout.v1"
+            and .measurement_review.environment == "production_runtime"
+            and .measurement_review.closeout_state == "CLOSED"
+            and .measurement_review.mode_state == "OFFLINE_EVAL_READY"
+            and .measurement_review.candidate_sha == $sha and .measurement_review.production_sha == $sha
+            and .measurement_review.dependency_status == "READY"
+            and .measurement_review.fixture_metrics.false_positive == 0
+            and .measurement_review.fixture_metrics.false_negative == 0
+            and .measurement_review.fixture_metrics.source_state_misclassification_count == 0
+            and .measurement_review.fixture_metrics.measurement_state_misclassification_count == 0
+            and .measurement_review.fixture_metrics.valid_zero_misclassification_count == 0
+            and .measurement_review.fixture_metrics.gai_capability_invention_count == 0
+            and .measurement_review.fixture_metrics.causal_overclaim_count == 0
+            and .measurement_review.fixture_metrics.attribution_overclaim_count == 0
+            and .measurement_review.fixture_metrics.private_data_leak_count == 0
+            and .measurement_review.fixture_metrics.private_url_leak_count == 0
+            and .measurement_review.fixture_metrics.production_metric_override_count == 0
+            and .measurement_review.fixture_metrics.policy_bypass_count == 0
+            and .measurement_review.fixture_metrics.role_expansion_bypass_count == 0
+            and .measurement_review.fixture_metrics.write_attempt_count == 0
+            and .measurement_review.routing_metrics.routing_bypass_count == 0
+            and .measurement_review.model_calls == 0 and .measurement_review.tool_calls == 0
+            and .measurement_review.external_calls == 0 and .measurement_review.production_permissions == 0
+            and .measurement_review.cms_writes == 0 and .measurement_review.url_truth_writes == 0
+            and .measurement_review.search_writes == 0 and .measurement_review.business_writes == 0
+            and .measurement_review.execution_allowed == false
             and .binding_hash_drift_count == 0 and .admission_deny_bypass == 0
             and .admission_hold_bypass == 0 and .csrf_bypass == 0
             and .policy_reason_overwrite_count == 0 and .unauthorized_route_execution_count == 0

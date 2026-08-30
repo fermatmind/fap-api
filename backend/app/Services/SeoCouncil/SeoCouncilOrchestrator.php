@@ -12,6 +12,7 @@ use App\Services\SeoCouncil\Contracts\MissionRequestData;
 use App\Services\SeoCouncil\Governance\CouncilDependencySnapshotBuilder;
 use App\Services\SeoCouncil\Governance\RoleCapabilityBindingRegistry;
 use App\Services\SeoCouncil\Governance\RuntimeCapabilitySnapshotBuilder;
+use App\Services\SeoCouncil\Measurement\MeasurementModeRegistry;
 use App\Services\SeoCouncil\Persistence\CouncilRunRepository;
 use App\Services\SeoCouncil\Policy\CouncilAdmissionGateway;
 use App\Services\SeoCouncil\Policy\CouncilAdmissionRequestFactory;
@@ -46,6 +47,7 @@ final class SeoCouncilOrchestrator
         private readonly RoleCapabilityBindingRegistry $binding,
         private readonly CouncilDependencySnapshotBuilder $dependencies,
         private readonly RuntimeCapabilitySnapshotBuilder $runtime,
+        private readonly MeasurementModeRegistry $measurementMode,
         private readonly TechnicalDiagnosisModeRegistry $technicalMode,
         private readonly TechnicalDiagnosisRunner $technicalRunner,
         private readonly TechnicalDiagnosisRuntimeGate $technicalGate,
@@ -74,11 +76,13 @@ final class SeoCouncilOrchestrator
         $releaseSha = $this->releaseSha();
         $runtime = $this->runtime->snapshot();
         $technicalRuntime = $this->technicalMode->capabilitySnapshot();
+        $measurementRuntime = $this->measurementMode->capabilitySnapshot();
         $baseContext = [
             'registry' => $registry,
             'binding' => $binding,
             'runtime' => $runtime,
             'technical_runtime' => $technicalRuntime,
+            'measurement_runtime' => $measurementRuntime,
         ];
 
         $admission = $this->admissionGateway->admission(
@@ -120,10 +124,14 @@ final class SeoCouncilOrchestrator
 
         $technicalMission = $request->payload['mission_type'] === 'bounded_review'
             && $request->payload['review_domain'] === 'technical';
-        $status = 'SOURCE_CAPABILITY_UNAVAILABLE';
-        $stopReason = $technicalMission
-            ? 'technical_diagnosis_production_disabled'
-            : '11f_to_11j_modes_unavailable';
+        $measurementMission = $request->payload['mission_type'] === 'bounded_review'
+            && in_array($request->payload['review_domain'], ['analytics', 'cro'], true);
+        $status = $measurementMission ? 'MEASUREMENT_HOLD' : 'SOURCE_CAPABILITY_UNAVAILABLE';
+        $stopReason = match (true) {
+            $technicalMission => 'technical_diagnosis_production_disabled',
+            $measurementMission => 'measurement_mode_offline_eval_only',
+            default => '11g_to_11j_modes_unavailable',
+        };
         if (in_array($route['status'], ['ROUTING_SCOPE_HOLD', 'MISSION_SCOPE_HOLD', 'REQUESTED_ROLE_EXPANSION_HOLD'], true)) {
             $status = $route['status'];
             $stopReason = 'deterministic_route_scope_hold';
