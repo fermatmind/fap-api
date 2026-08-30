@@ -242,6 +242,7 @@ final class SeoPlatform04DetectorFoundationCollectorTest extends TestCase
         $this->assertStringContainsString('--collector=detector_foundation --materialize-detector-queues --canary --limit=10', $deploy);
         $this->assertStringContainsString('config("seo_intel.write_enabled") ? 0 : 43', $deploy);
         $this->assertStringContainsString('if [ "$detector_config_status" -eq 43 ]; then', $deploy);
+        $this->assertStringContainsString('in_array($sourceState, ["available", "measurement_hold"], true)', $deploy);
         $this->assertStringContainsString('($payload["writes_attempted"] ?? null) === false', $deploy);
         $this->assertStringContainsString('"duplicate_rows"', $deploy);
         $this->assertStringContainsString('"search_submission_allowed"', $deploy);

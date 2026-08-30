@@ -62,5 +62,5 @@ test("11E atomically injects only the approved keys before config cache and fail
 
 test("11E read-only detector receipt never enters the materialization branch", () => {
   assert.match(deployer, /config\("seo_intel\.write_enabled"\) \? 0 : 43/);
-  assert.match(deployer, /if \[ "\$detector_config_status" -eq 43 \]; then[\s\S]+?writes_attempted[\s\S]+?exit 0[\s\S]+?--materialize-detector-queues/);
+  assert.match(deployer, /if \[ "\$detector_config_status" -eq 43 \]; then[\s\S]+?\["available", "measurement_hold"\][\s\S]+?detector_source_measurement_hold[\s\S]+?writes_attempted[\s\S]+?exit 0[\s\S]+?--materialize-detector-queues/);
 });

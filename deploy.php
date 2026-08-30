@@ -1817,7 +1817,10 @@ fi
 if [ "$detector_config_status" -eq 43 ]; then
   printf '%s' "$dry_run" | {{bin/php}} -r '
 $payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
-$ok = ($payload["metadata"]["source"]["source_state"] ?? null) === "available"
+$sourceState = $payload["metadata"]["source"]["source_state"] ?? null;
+$ok = in_array($sourceState, ["available", "measurement_hold"], true)
+    && ($sourceState !== "measurement_hold"
+        || in_array("detector_source_measurement_hold", $payload["issues"] ?? [], true))
     && ($payload["writes_attempted"] ?? null) === false
     && ($payload["external_calls_attempted"] ?? null) === false
     && ($payload["metadata"]["readback"]["performed"] ?? null) === false
