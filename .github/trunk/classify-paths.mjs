@@ -53,10 +53,19 @@ const isCareerAuthorityReleaseBoundary = (path) => isCareerPublisherBoundary(pat
   && path !== ".github/workflows/ci.yml"
   && path !== ".github/workflows/deploy.yml";
 
+const SEO_COUNCIL_CONTROL_PLANE_PATHS = new Set([
+  ".github/trunk/classify-paths.mjs",
+  ".github/trunk/classify-paths.test.mjs",
+  ".github/trunk/seo-council-workflow-contract.test.mjs",
+  ".github/workflows/ci.yml",
+  ".github/workflows/deploy.yml",
+  "deploy.php",
+]);
+
 const isSeoCouncilOrchestrationBoundary = (path) =>
-  /^backend\/(?:app\/Services\/SeoCouncil\/|app\/Console\/Commands\/SeoCouncil[^/]+\.php$|app\/Http\/Controllers\/API\/V0_5\/Ops\/SeoIntel\/SeoCouncilMissionController\.php$|app\/Http\/Middleware\/EnsureSeoCouncilMissionAuthorized\.php$|app\/Http\/Middleware\/OpsAccessControl\.php$|app\/Filament\/Ops\/Support\/SeoAgentCouncilUiContract\.php$|app\/Providers\/SeoCouncilServiceProvider\.php$|bootstrap\/(?:app|providers)\.php$|config\/seo_council\.php$|resources\/seo-agent\/council\/|resources\/views\/filament\/ops\/components\/ops-agent-council-workspace\.blade\.php$|lang\/(?:en|zh_CN)\/ops\.php$|docs\/(?:seo\/generated\/(?:seo-council-contract-manifest\.v[12]|seo-technical-diagnosis-contract-manifest\.v1)\.json$|contracts\/openapi\.snapshot\.json$)|scripts\/seo\/(?:export_seo_council_contracts|submit_seo_council_mission)\.php$|database\/migrations\/seo_intel\/2026_08_29_030000_create_seo_council_runtime_tables\.php$|tests\/Feature\/(?:SeoIntel\/SeoPlatform11[DE]|Ops\/SeoUxImpl06AgentCouncilTest\.php$)|routes\/(?:api|web)\.php$)/.test(path)
+  /^backend\/(?:app\/Services\/SeoCouncil\/|app\/Console\/Commands\/SeoCouncil[^/]+\.php$|app\/Http\/Controllers\/API\/V0_5\/Ops\/SeoIntel\/SeoCouncilMissionController\.php$|app\/Http\/Middleware\/EnsureSeoCouncilMissionAuthorized\.php$|app\/Http\/Middleware\/OpsAccessControl\.php$|app\/Filament\/Ops\/Support\/SeoAgentCouncilUiContract\.php$|app\/Providers\/SeoCouncilServiceProvider\.php$|bootstrap\/(?:app|providers)\.php$|config\/seo_council\.php$|resources\/seo-agent\/council\/|resources\/views\/filament\/ops\/components\/ops-agent-council-workspace\.blade\.php$|lang\/(?:en|zh_CN)\/ops\.php$|docs\/(?:seo\/generated\/(?:seo-council-contract-manifest\.v[12]|seo-technical-diagnosis-contract-manifest\.v[12])\.json$|contracts\/openapi\.snapshot\.json$)|scripts\/seo\/(?:export_seo_council_contracts|submit_seo_council_mission)\.php$|database\/migrations\/seo_intel\/2026_08_29_030000_create_seo_council_runtime_tables\.php$|tests\/Feature\/(?:SeoIntel\/SeoPlatform11[DE]|Ops\/SeoUxImpl06AgentCouncilTest\.php$)|routes\/(?:api|web)\.php$)/.test(path)
   || path === ".agents/skills/fermatmind-global-seo-geo-growth-scan/SKILL.md"
-  || path === ".github/trunk/seo-council-workflow-contract.test.mjs";
+  || SEO_COUNCIL_CONTROL_PLANE_PATHS.has(path);
 
 export function classifyPaths(inputPaths) {
   const paths = [...new Set(inputPaths.map(normalize).filter(Boolean))].sort();
