@@ -60,8 +60,14 @@ test("staging source readiness precedes Council closeout and production never ba
   const production = deploy.slice(productionStart);
 
   const readiness = staging.indexOf("Verify staging measurement source readiness");
+  const candidate = staging.indexOf("Materialize inactive staging measurement candidate");
   const deployment = staging.indexOf("Deploy staging and run repository smoke chain");
-  assert.ok(readiness > 0 && deployment > readiness);
+  assert.ok(candidate > 0 && readiness > candidate && deployment > readiness);
+  assert.match(staging, /deploy:candidate-only staging/);
+  assert.match(staging, /deploy_mode=candidate_only/);
+  assert.match(staging, /source-\$\{DEPLOY_SHA:0:12\}-\$\{GITHUB_RUN_ID\}/);
+  assert.match(staging, /candidate\/REVISION/);
+  assert.match(staging, /q_sha/);
   assert.match(staging, /SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON/);
   assert.match(staging, /test -n "\$GSC_SERVICE_ACCOUNT_JSON"/);
   assert.match(staging, /GSC_SECRET_MISSING/);

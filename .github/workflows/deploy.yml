@@ -443,6 +443,22 @@ jobs:
           echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
           echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
           printf '%s\n' "$STAGING_REPO_READ_SSH_KEY" | ssh-add - >/dev/null 2>&1
+      - name: Materialize inactive staging measurement candidate
+        if: needs.policy.outputs.seo_council_orchestration == 'true'
+        env:
+          SEO_INTEL_DB_HOST: ${{ secrets.SEO_INTEL_DB_HOST }}
+          SEO_INTEL_DB_PORT: ${{ secrets.SEO_INTEL_DB_PORT }}
+          SEO_INTEL_DB_DATABASE: ${{ secrets.SEO_INTEL_DB_DATABASE }}
+          SEO_INTEL_DB_USERNAME: ${{ secrets.SEO_INTEL_DB_USERNAME }}
+          SEO_INTEL_DB_PASSWORD: ${{ secrets.SEO_INTEL_DB_PASSWORD }}
+          SEO_INTEL_MIGRATION_DB_USERNAME: ${{ secrets.SEO_INTEL_MIGRATION_DB_USERNAME }}
+          SEO_INTEL_MIGRATION_DB_PASSWORD: ${{ secrets.SEO_INTEL_MIGRATION_DB_PASSWORD }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$DEPLOY_SHA"
+          timeout --signal=TERM --kill-after=30s 20m php /tmp/dep.phar deploy:candidate-only staging -f deploy.php --revision "$DEPLOY_SHA" \
+            -o release_name="source-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode=candidate_only \
+            -o private_result_authority_publish_required=false --no-interaction
       - name: Verify staging measurement source readiness
         if: needs.policy.outputs.seo_council_orchestration == 'true'
         shell: bash
@@ -540,9 +556,12 @@ jobs:
           printf -v q_path '%q' "$DEPLOY_PATH"
           printf -v q_env '%q' "$remote_env"
           printf -v q_proxy '%q' "http://127.0.0.1:$PROXY_PORT"
+          candidate_name="source-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}"
+          printf -v q_candidate '%q' "$candidate_name"
+          printf -v q_sha '%q' "$DEPLOY_SHA"
           cache_path="/tmp/fermatmind-11f-config-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.php"
           printf -v q_cache '%q' "$cache_path"
-          remote_prefix="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; cd \"\$current/backend\"; set -a; . $q_env; set +a; export HTTPS_PROXY=$q_proxy HTTP_PROXY=$q_proxy NO_PROXY=127.0.0.1,localhost APP_CONFIG_CACHE=$q_cache;"
+          remote_prefix="set -euo pipefail; releases=\$(readlink -f $q_path/releases); candidate=\$(readlink -f \"\$releases/$q_candidate\"); test -n \"\$candidate\"; case \"\$candidate\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; test \"\$(cat \"\$candidate/REVISION\")\" = $q_sha; cd \"\$candidate/backend\"; set -a; . $q_env; set +a; export HTTPS_PROXY=$q_proxy HTTP_PROXY=$q_proxy NO_PROXY=127.0.0.1,localhost APP_CONFIG_CACHE=$q_cache;"
 
           preflight_json="$RUNNER_TEMP/staging-gsc-preflight.json"
           "${ssh_base[@]}" "$remote_prefix php artisan seo-intel:collect --collector=gsc_foundation --gsc-live-preflight --dry-run --no-write --json --no-interaction --no-ansi" > "$preflight_json" \
