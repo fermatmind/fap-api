@@ -27,6 +27,12 @@ final class PersonalityPublicApiTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        config(['fap.personality_current_authority_enabled' => false]);
+    }
+
     public function test_list_returns_published_public_only(): void
     {
         $visible = $this->createProfile([

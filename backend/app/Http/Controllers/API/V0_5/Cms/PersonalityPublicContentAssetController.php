@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API\V0_5\Cms;
 
+use App\Domain\Personality\Current\PersonalityCurrentPageReader;
 use App\Http\Controllers\Controller;
 use App\Models\PersonalityPublicContentAsset;
 use App\Services\Cms\PersonalityPublicAssetReadModelCache;
@@ -33,6 +34,7 @@ final class PersonalityPublicContentAssetController extends Controller
     public function __construct(
         private readonly PersonalityPublicAssetReadModelCache $readModelCache,
         private readonly PublicReviewContract $publicReviewContract,
+        private readonly PersonalityCurrentPageReader $personalityCurrentPageReader,
     ) {}
 
     public function index(Request $request): JsonResponse
@@ -53,6 +55,29 @@ final class PersonalityPublicContentAssetController extends Controller
 
         $framework = (string) ($validated['framework'] ?? '');
         $entityType = (string) ($validated['entity_type'] ?? 'all');
+        if ($this->usesCurrentAuthority($validated['org_id']) && in_array($framework, ['big_five', 'enneagram'], true)) {
+            $payloads = $this->personalityCurrentPageReader->payloads(
+                $framework,
+                $validated['entity_type'],
+                $validated['locale'],
+            );
+            $items = array_values(array_filter(array_map(
+                static fn (array $payload): mixed => $payload['personality_public_content_asset_v1'] ?? null,
+                $payloads,
+            ), 'is_array'));
+            $total = count($items);
+            $offset = ($validated['page'] - 1) * $validated['per_page'];
+
+            return $this->currentAuthorityResponse([
+                'items' => array_slice($items, $offset, $validated['per_page']),
+                'pagination' => [
+                    'current_page' => $validated['page'],
+                    'per_page' => $validated['per_page'],
+                    'total' => $total,
+                    'last_page' => max(1, (int) ceil($total / $validated['per_page'])),
+                ],
+            ]);
+        }
         $selector = $this->indexSelector($validated['page'], $validated['per_page']);
         $cachedRead = $this->readModelCache->readActiveCollection(
             $framework,
@@ -156,6 +181,17 @@ final class PersonalityPublicContentAssetController extends Controller
 
         $normalizedFramework = PersonalityPublicContentAsset::normalizeToken($framework);
         $normalizedSlug = PersonalityPublicContentAsset::normalizeSlug($slug);
+        if ($this->usesCurrentAuthority($validated['org_id']) && in_array($normalizedFramework, ['big_five', 'enneagram'], true)) {
+            $payload = $this->personalityCurrentPageReader->payloadBySlugOrNull(
+                $normalizedFramework,
+                $normalizedSlug,
+                $validated['locale'],
+            );
+
+            return $payload === null
+                ? $this->currentAuthorityNotFoundResponse()
+                : $this->currentAuthorityResponse($payload);
+        }
         $fenceToken = $this->readModelCache->captureFence(
             'detail-slug',
             $normalizedFramework,
@@ -227,6 +263,20 @@ final class PersonalityPublicContentAssetController extends Controller
 
         if (! in_array($normalizedEntityType, PersonalityPublicContentAsset::ENTITY_TYPES, true)) {
             return $this->notFoundResponse();
+        }
+
+        if ($this->usesCurrentAuthority($validated['org_id']) && in_array($normalizedFramework, ['big_five', 'enneagram'], true)) {
+            $payload = $this->personalityCurrentPageReader->payloadOrNull(
+                $normalizedFramework,
+                $normalizedEntityType,
+                $normalizedCode,
+                $validated['locale'],
+            );
+            if ($payload !== null) {
+                return $this->currentAuthorityResponse($payload);
+            }
+
+            return $this->currentAuthorityNotFoundResponse();
         }
 
         $fenceToken = $this->readModelCache->captureFence(
@@ -322,6 +372,26 @@ final class PersonalityPublicContentAssetController extends Controller
             'page' => max(1, (int) ($validated['page'] ?? 1)),
             'per_page' => max(1, min(100, (int) ($validated['per_page'] ?? 50))),
         ];
+    }
+
+    /** @param array<string,mixed> $payload */
+    private function currentAuthorityResponse(array $payload): JsonResponse
+    {
+        return response()->json(['ok' => true, ...$payload])
+            ->header('X-Fermat-Content-Authority', 'personality.page.content.v1')
+            ->header('X-Fermat-Content-Aggregate', $this->personalityCurrentPageReader->aggregateSha256());
+    }
+
+    private function currentAuthorityNotFoundResponse(): JsonResponse
+    {
+        return $this->notFoundResponse()
+            ->header('X-Fermat-Content-Authority', 'personality.page.content.v1')
+            ->header('X-Fermat-Content-Aggregate', $this->personalityCurrentPageReader->aggregateSha256());
+    }
+
+    private function usesCurrentAuthority(int $orgId): bool
+    {
+        return $orgId === 0 && (bool) config('fap.personality_current_authority_enabled', true);
     }
 
     /**

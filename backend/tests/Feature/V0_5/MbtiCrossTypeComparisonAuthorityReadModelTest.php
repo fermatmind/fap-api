@@ -14,6 +14,12 @@ final class MbtiCrossTypeComparisonAuthorityReadModelTest extends TestCase
 
     private const ENGLISH_W1_PACKAGE_ID = 'EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-07-2026-07-31';
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        config(['fap.personality_current_authority_enabled' => false]);
+    }
+
     public function test_cross_type_comparison_index_returns_the_existing_four_published_database_authorities(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);

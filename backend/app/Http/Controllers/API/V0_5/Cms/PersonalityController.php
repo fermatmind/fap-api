@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API\V0_5\Cms;
 
+use App\Domain\Personality\Current\PersonalityCurrentIndexProjector;
 use App\Domain\Personality\Current\PersonalityCurrentPageReader;
 use App\Http\Controllers\Concerns\RespondsWithNotFound;
 use App\Http\Controllers\Controller;
@@ -64,6 +65,7 @@ class PersonalityController extends Controller
         private readonly LandingSurfaceContractService $landingSurfaceContractService,
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
         private readonly PersonalityCurrentPageReader $personalityCurrentPageReader,
+        private readonly PersonalityCurrentIndexProjector $personalityCurrentIndexProjector,
     ) {}
 
     public function index(Request $request): JsonResponse
@@ -74,6 +76,27 @@ class PersonalityController extends Controller
         }
 
         $items = [];
+
+        if ($this->usesCurrentAuthority($validated['org_id'])) {
+            $allItems = $this->personalityCurrentIndexProjector->profileItems(
+                $validated['locale'],
+                $validated['include_variants'],
+            );
+            $total = count($allItems);
+            $offset = ($validated['page'] - 1) * $validated['per_page'];
+            $hub = $this->personalityCurrentPageReader->payload('mbti', 'hub', 'index', $validated['locale']);
+
+            return $this->currentAuthorityResponse([
+                'items' => array_slice($allItems, $offset, $validated['per_page']),
+                'pagination' => [
+                    'current_page' => $validated['page'],
+                    'per_page' => $validated['per_page'],
+                    'total' => $total,
+                    'last_page' => max(1, (int) ceil($total / $validated['per_page'])),
+                ],
+                'landing_surface_v1' => $hub['landing_surface_v1'] ?? null,
+            ]);
+        }
 
         if ($validated['include_variants']) {
             $paginator = $this->personalityProfileService->listPublicProfileVariants(
@@ -119,7 +142,7 @@ class PersonalityController extends Controller
                 'last_page' => (int) $paginator->lastPage(),
             ],
             'landing_surface_v1' => $this->buildIndexLandingSurface($validated['locale']),
-        ]);
+        ])->header('X-Fermat-Content-Authority', 'cms-database');
     }
 
     public function show(Request $request, string $type): JsonResponse
@@ -127,6 +150,22 @@ class PersonalityController extends Controller
         $validated = $this->validateReadQuery($request);
         if ($validated instanceof JsonResponse) {
             return $validated;
+        }
+
+        if ($this->usesCurrentAuthority($validated['org_id'])) {
+            $slug = strtolower(trim($type));
+            $pageKind = preg_match('/-[at]$/', $slug) === 1 ? 'variant' : 'profile';
+            $payload = $this->personalityCurrentPageReader->payloadOrNull(
+                'mbti',
+                $pageKind,
+                $slug,
+                $validated['locale'],
+            );
+            if ($payload !== null) {
+                return $this->currentAuthorityResponse($payload);
+            }
+
+            return $this->currentAuthorityNotFoundResponse('personality profile not found.');
         }
 
         try {
@@ -311,6 +350,16 @@ class PersonalityController extends Controller
             return $validated;
         }
 
+        if ($this->usesCurrentAuthority($validated['org_id'])) {
+            $currentItems = $this->personalityCurrentIndexProjector->comparisonItems($validated['locale']);
+
+            return $this->currentComparisonIndexResponse(
+                $validated['locale'],
+                $currentItems['at'],
+                $currentItems['cross'],
+            );
+        }
+
         $paginator = $this->personalityProfileService->listPublicProfileVariants(
             $validated['org_id'],
             $validated['scale_code'],
@@ -359,16 +408,23 @@ class PersonalityController extends Controller
         }
 
         $crossTypeItems = $this->crossTypeComparisonReadModel->list($validated['locale']);
+
+        return $this->comparisonIndexResponse($validated['locale'], $items, $crossTypeItems);
+    }
+
+    /** @param list<array<string,mixed>> $items @param list<array<string,mixed>> $crossTypeItems */
+    private function comparisonIndexResponse(string $locale, array $items, array $crossTypeItems): JsonResponse
+    {
         $projection = [
             'comparison_list_contract_version' => 'mbti.comparison_list.v1',
-            'locale' => $validated['locale'],
+            'locale' => $locale,
             'scale_code' => PersonalityProfile::SCALE_CODE_MBTI,
             'groups' => [
                 [
                     'key' => 'at_comparisons',
                     'comparison_type' => 'mbti_at_comparison',
-                    'title' => $validated['locale'] === 'zh-CN' ? 'A/T 人格差异' : 'A/T personality differences',
-                    'description' => $validated['locale'] === 'zh-CN'
+                    'title' => $locale === 'zh-CN' ? 'A/T 人格差异' : 'A/T personality differences',
+                    'description' => $locale === 'zh-CN'
                         ? '同一 16 型人格核心下，比较 A 与 T 在压力反馈、自我确认和行动节奏上的差异。'
                         : 'Compare A and T variants within the same 16-type personality core across stress feedback, self-confirmation, and action rhythm.',
                     'items' => $items,
@@ -376,8 +432,8 @@ class PersonalityController extends Controller
                 [
                     'key' => 'cross_type_comparisons',
                     'comparison_type' => 'mbti_cross_type',
-                    'title' => $validated['locale'] === 'zh-CN' ? '易混淆人格对比' : 'Commonly confused personality types',
-                    'description' => $validated['locale'] === 'zh-CN'
+                    'title' => $locale === 'zh-CN' ? '易混淆人格对比' : 'Commonly confused personality types',
+                    'description' => $locale === 'zh-CN'
                         ? '比较容易混淆的 16 型人格组合，帮助用户从思维入口、行动节奏和协作方式上做区分。'
                         : 'Compare commonly confused 16-type personality pairs through thinking patterns, action rhythm, and collaboration style.',
                     'items' => $crossTypeItems,
@@ -393,6 +449,16 @@ class PersonalityController extends Controller
         ]);
     }
 
+    /** @param list<array<string,mixed>> $items @param list<array<string,mixed>> $crossTypeItems */
+    private function currentComparisonIndexResponse(string $locale, array $items, array $crossTypeItems): JsonResponse
+    {
+        $response = $this->comparisonIndexResponse($locale, $items, $crossTypeItems);
+
+        return $response
+            ->header('X-Fermat-Content-Authority', 'personality.page.content.v1')
+            ->header('X-Fermat-Content-Aggregate', $this->personalityCurrentPageReader->aggregateSha256());
+    }
+
     public function comparison(Request $request, string $comparison): JsonResponse
     {
         $validated = $this->validateReadQuery($request);
@@ -401,7 +467,7 @@ class PersonalityController extends Controller
         }
 
         $baseTypeCode = $this->comparisonBaseTypeCode($comparison);
-        if ($validated['org_id'] === 0 && $baseTypeCode !== null) {
+        if ($this->usesCurrentAuthority($validated['org_id']) && $baseTypeCode !== null) {
             $slug = $this->comparisonSlug($baseTypeCode);
             $payload = $this->personalityCurrentPageReader->payload(
                 'mbti',
@@ -410,9 +476,21 @@ class PersonalityController extends Controller
                 $validated['locale'],
             );
 
-            return response()->json(['ok' => true, ...$payload])
-                ->header('X-Fermat-Content-Authority', 'personality.page.content.v1')
-                ->header('X-Fermat-Content-Aggregate', $this->personalityCurrentPageReader->aggregateSha256());
+            return $this->currentAuthorityResponse($payload);
+        }
+
+        if ($this->usesCurrentAuthority($validated['org_id'])) {
+            $payload = $this->personalityCurrentPageReader->payloadOrNull(
+                'mbti',
+                'comparison_cross',
+                strtolower(trim($comparison)),
+                $validated['locale'],
+            );
+            if ($payload !== null) {
+                return $this->currentAuthorityResponse($payload);
+            }
+
+            return $this->currentAuthorityNotFoundResponse('personality comparison not found.');
         }
 
         $crossTypeComparison = $this->crossTypeComparisonReadModel->find($comparison, $validated['locale']);
@@ -2555,5 +2633,25 @@ class PersonalityController extends Controller
             'error_code' => 'INVALID_ARGUMENT',
             'message' => $message,
         ], 422);
+    }
+
+    /** @param array<string,mixed> $payload */
+    private function currentAuthorityResponse(array $payload): JsonResponse
+    {
+        return response()->json(['ok' => true, ...$payload])
+            ->header('X-Fermat-Content-Authority', 'personality.page.content.v1')
+            ->header('X-Fermat-Content-Aggregate', $this->personalityCurrentPageReader->aggregateSha256());
+    }
+
+    private function currentAuthorityNotFoundResponse(string $message): JsonResponse
+    {
+        return $this->notFoundResponse($message)
+            ->header('X-Fermat-Content-Authority', 'personality.page.content.v1')
+            ->header('X-Fermat-Content-Aggregate', $this->personalityCurrentPageReader->aggregateSha256());
+    }
+
+    private function usesCurrentAuthority(int $orgId): bool
+    {
+        return $orgId === 0 && (bool) config('fap.personality_current_authority_enabled', true);
     }
 }

@@ -24,6 +24,7 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        config(['fap.personality_current_authority_enabled' => false]);
         app(PublicCareerAuthorityResponseCache::class)->warm();
     }
 
