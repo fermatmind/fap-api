@@ -56,6 +56,8 @@ const isCareerAuthorityReleaseBoundary = (path) => isCareerPublisherBoundary(pat
 export const PERSONALITY_CURRENT_BOUNDARY_MATRIX = [
   "backend/content_assets/personality_public/current/",
   "backend/app/Domain/Personality/Current/",
+  "backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php",
+  "backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php",
   "backend/app/Console/Commands/PersonalityCurrentManifest.php",
   "backend/scripts/personality/export_current_baseline.mjs",
 ];

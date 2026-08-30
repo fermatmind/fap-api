@@ -116,6 +116,43 @@ final class PersonalityCurrentAuthorityPackage
         return ['root' => $resolvedRoot, 'manifest' => $manifest, 'entries' => $entries];
     }
 
+    /**
+     * Build the request-path index without rescanning every page body.
+     *
+     * The complete package is verified by CI and the release command. Runtime
+     * reads still bind the manifest aggregate and the selected page bytes.
+     *
+     * @return array{root:string,manifest:array<string,mixed>,entries:array<string,array<string,mixed>>}
+     */
+    public function runtimeIndex(string $backendRoot): array
+    {
+        $root = rtrim($backendRoot, '/').'/'.self::RELATIVE_PATH;
+        $resolvedRoot = realpath($root);
+        if (! is_string($resolvedRoot) || ! is_dir($resolvedRoot) || is_link($root)) {
+            self::fail('PERSONALITY_CURRENT_ROOT_INVALID');
+        }
+
+        $manifest = $this->readObject($resolvedRoot.'/manifest.json', 'PERSONALITY_CURRENT_MANIFEST_INVALID');
+        $this->assertManifestEnvelope($manifest);
+        $aggregate = $manifest;
+        unset($aggregate['aggregate_sha256']);
+        if (! hash_equals($manifest['aggregate_sha256'], self::hashValue($aggregate))) {
+            self::fail('PERSONALITY_CURRENT_AGGREGATE_MISMATCH');
+        }
+
+        $entries = [];
+        foreach ($manifest['files'] as $entry) {
+            $this->assertFileEntry($entry);
+            if (isset($entries[$entry['identity_key']])) {
+                self::fail('PERSONALITY_CURRENT_DUPLICATE_BINDING');
+            }
+            $entries[$entry['identity_key']] = $entry;
+        }
+        ksort($entries, SORT_STRING);
+
+        return ['root' => $resolvedRoot, 'manifest' => $manifest, 'entries' => $entries];
+    }
+
     /** @param array{root:string,entries:array<string,array<string,mixed>>} $index @return array<string,mixed> */
     public function pageFromIndex(array $index, string $framework, string $pageKind, string $entityKey, string $locale): array
     {

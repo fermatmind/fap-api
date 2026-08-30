@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API\V0_5\Cms;
 
+use App\Domain\Personality\Current\PersonalityCurrentPageReader;
 use App\Http\Controllers\Concerns\RespondsWithNotFound;
 use App\Http\Controllers\Controller;
 use App\Models\PersonalityProfile;
@@ -62,6 +63,7 @@ class PersonalityController extends Controller
         private readonly AnswerSurfaceContractService $answerSurfaceContractService,
         private readonly LandingSurfaceContractService $landingSurfaceContractService,
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
+        private readonly PersonalityCurrentPageReader $personalityCurrentPageReader,
     ) {}
 
     public function index(Request $request): JsonResponse
@@ -398,6 +400,21 @@ class PersonalityController extends Controller
             return $validated;
         }
 
+        $baseTypeCode = $this->comparisonBaseTypeCode($comparison);
+        if ($validated['org_id'] === 0 && $baseTypeCode !== null) {
+            $slug = $this->comparisonSlug($baseTypeCode);
+            $payload = $this->personalityCurrentPageReader->payload(
+                'mbti',
+                'comparison_at',
+                $slug,
+                $validated['locale'],
+            );
+
+            return response()->json(['ok' => true, ...$payload])
+                ->header('X-Fermat-Content-Authority', 'personality.page.content.v1')
+                ->header('X-Fermat-Content-Aggregate', $this->personalityCurrentPageReader->aggregateSha256());
+        }
+
         $crossTypeComparison = $this->crossTypeComparisonReadModel->find($comparison, $validated['locale']);
         if ($crossTypeComparison !== null) {
             $meta = $this->crossTypeComparisonMeta($crossTypeComparison);
@@ -417,7 +434,6 @@ class PersonalityController extends Controller
             ]);
         }
 
-        $baseTypeCode = $this->comparisonBaseTypeCode($comparison);
         if ($baseTypeCode === null) {
             return $this->notFoundResponse('personality comparison not found.');
         }
