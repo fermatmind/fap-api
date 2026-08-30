@@ -561,13 +561,18 @@ jobs:
             and .metadata.live_readiness.search_provider_submission_allowed == false
           ' "$preflight_json" >/dev/null || fail GSC_PREFLIGHT_HOLD
 
+          sync_raw="$RUNNER_TEMP/staging-gsc-sync.raw"
           sync_json="$RUNNER_TEMP/staging-gsc-sync.json"
           set +e
-          "${ssh_base[@]}" "$remote_prefix export SEO_INTEL_WRITE_ENABLED=true; php artisan seo-intel:gsc-sync --window=90 --search-types=web --full-window --trigger=manual --json --no-interaction --no-ansi" > "$sync_json"
+          "${ssh_base[@]}" "$remote_prefix export SEO_INTEL_WRITE_ENABLED=true; php artisan seo-intel:gsc-sync --window=90 --search-types=web --full-window --trigger=manual --json --no-interaction --no-ansi" > "$sync_raw"
           sync_exit=$?
           set -e
+          awk 'started || /^[[:space:]]*\{/ { started=1; print }' "$sync_raw" > "$sync_json"
+          if ! jq -e 'type == "object"' "$sync_json" >/dev/null 2>&1; then
+            test -s "$sync_raw" || fail GSC_SYNC_OUTPUT_EMPTY
+            fail GSC_SYNC_OUTPUT_INVALID
+          fi
           if [ "$sync_exit" -ne 0 ]; then
-            jq -e 'type == "object"' "$sync_json" >/dev/null 2>&1 || fail GSC_SYNC_OUTPUT_INVALID
             sync_issue="$(jq -r '.issue // ""' "$sync_json")"
             case "$sync_issue" in
               gsc_authentication_failed|gsc_authentication_request_failed|gsc_access_token_resolution_failed)

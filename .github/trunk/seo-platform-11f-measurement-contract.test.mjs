@@ -72,6 +72,8 @@ test("staging source readiness precedes Council closeout and production never ba
   assert.match(staging, /GSC_EMPTY_RESPONSE/);
   assert.match(staging, /GSC_SYNC_INTERNAL_FAILURE/);
   assert.match(staging, /GSC_SYNC_OUTPUT_INVALID/);
+  assert.match(staging, /GSC_SYNC_OUTPUT_EMPTY/);
+  assert.match(staging, /awk 'started \|\| \/\^\[\[:space:\]\]\*\\\{\//);
   assert.match(staging, /GSC_SEARCH_ANALYTICS_REQUEST_FAILED/);
   assert.match(staging, /GSC_PAGINATION_LIMIT_EXCEEDED/);
   assert.match(staging, /sync_issue="\$\(jq -r '\.issue \/\/ ""'/);
