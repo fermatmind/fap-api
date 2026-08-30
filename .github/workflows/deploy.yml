@@ -366,13 +366,6 @@ jobs:
       SEO_INTEL_RUNTIME_ENVIRONMENT: staging
       SEO_INTEL_ENABLED: ${{ vars.SEO_INTEL_ENABLED }}
       SEO_INTEL_DB_CONNECTION: ${{ vars.SEO_INTEL_DB_CONNECTION }}
-      SEO_INTEL_DB_HOST: ${{ vars.SEO_INTEL_DB_HOST }}
-      SEO_INTEL_DB_PORT: ${{ vars.SEO_INTEL_DB_PORT }}
-      SEO_INTEL_DB_DATABASE: ${{ vars.SEO_INTEL_DB_DATABASE }}
-      SEO_INTEL_DB_USERNAME: ${{ secrets.SEO_INTEL_DB_USERNAME }}
-      SEO_INTEL_DB_PASSWORD: ${{ secrets.SEO_INTEL_DB_PASSWORD }}
-      SEO_INTEL_MIGRATION_DB_USERNAME: ${{ secrets.SEO_INTEL_MIGRATION_DB_USERNAME }}
-      SEO_INTEL_MIGRATION_DB_PASSWORD: ${{ secrets.SEO_INTEL_MIGRATION_DB_PASSWORD }}
       SEO_INTEL_WRITE_ENABLED: ${{ vars.SEO_INTEL_WRITE_ENABLED }}
       SEO_INTEL_COLLECTORS_ENABLED: ${{ vars.SEO_INTEL_COLLECTORS_ENABLED }}
       SEO_INTEL_DRY_RUN_DEFAULT: ${{ vars.SEO_INTEL_DRY_RUN_DEFAULT }}
@@ -411,6 +404,14 @@ jobs:
           echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
           printf '%s\n' "$STAGING_REPO_READ_SSH_KEY" | ssh-add - >/dev/null 2>&1
       - name: Deploy staging and run repository smoke chain
+        env:
+          SEO_INTEL_DB_HOST: ${{ secrets.SEO_INTEL_DB_HOST }}
+          SEO_INTEL_DB_PORT: ${{ secrets.SEO_INTEL_DB_PORT }}
+          SEO_INTEL_DB_DATABASE: ${{ secrets.SEO_INTEL_DB_DATABASE }}
+          SEO_INTEL_DB_USERNAME: ${{ secrets.SEO_INTEL_DB_USERNAME }}
+          SEO_INTEL_DB_PASSWORD: ${{ secrets.SEO_INTEL_DB_PASSWORD }}
+          SEO_INTEL_MIGRATION_DB_USERNAME: ${{ secrets.SEO_INTEL_MIGRATION_DB_USERNAME }}
+          SEO_INTEL_MIGRATION_DB_PASSWORD: ${{ secrets.SEO_INTEL_MIGRATION_DB_PASSWORD }}
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$DEPLOY_SHA"
@@ -618,7 +619,6 @@ jobs:
       DEPLOY_PORT_PROD: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
       DEPLOY_HOST_PROD: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
       DEPLOY_PATH_PROD: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
-      SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY: ${{ secrets.SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY }}
       HEALTHCHECK_URL: ${{ vars.PRODUCTION_HEALTHCHECK_URL }}
       AUTH_GUEST_CHECK_URL: ${{ vars.PRODUCTION_AUTH_GUEST_CHECK_URL }}
       OPS_HOST: ${{ vars.PRODUCTION_OPS_HOST }}
@@ -627,13 +627,6 @@ jobs:
       SEO_INTEL_RUNTIME_ENVIRONMENT: production
       SEO_INTEL_ENABLED: ${{ vars.SEO_INTEL_ENABLED }}
       SEO_INTEL_DB_CONNECTION: ${{ vars.SEO_INTEL_DB_CONNECTION }}
-      SEO_INTEL_DB_HOST: ${{ vars.SEO_INTEL_DB_HOST }}
-      SEO_INTEL_DB_PORT: ${{ vars.SEO_INTEL_DB_PORT }}
-      SEO_INTEL_DB_DATABASE: ${{ vars.SEO_INTEL_DB_DATABASE }}
-      SEO_INTEL_DB_USERNAME: ${{ secrets.SEO_INTEL_DB_USERNAME }}
-      SEO_INTEL_DB_PASSWORD: ${{ secrets.SEO_INTEL_DB_PASSWORD }}
-      SEO_INTEL_MIGRATION_DB_USERNAME: ${{ secrets.SEO_INTEL_MIGRATION_DB_USERNAME }}
-      SEO_INTEL_MIGRATION_DB_PASSWORD: ${{ secrets.SEO_INTEL_MIGRATION_DB_PASSWORD }}
       SEO_INTEL_WRITE_ENABLED: ${{ vars.SEO_INTEL_WRITE_ENABLED }}
       SEO_INTEL_COLLECTORS_ENABLED: ${{ vars.SEO_INTEL_COLLECTORS_ENABLED }}
       SEO_INTEL_DRY_RUN_DEFAULT: ${{ vars.SEO_INTEL_DRY_RUN_DEFAULT }}
@@ -685,6 +678,15 @@ jobs:
           echo "active=$active" >> "$GITHUB_OUTPUT"
       - name: Deploy once and automatically restore LKG after committed smoke failure
         if: steps.baseline.outputs.skip != 'true'
+        env:
+          SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY: ${{ secrets.SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY }}
+          SEO_INTEL_DB_HOST: ${{ secrets.SEO_INTEL_DB_HOST }}
+          SEO_INTEL_DB_PORT: ${{ secrets.SEO_INTEL_DB_PORT }}
+          SEO_INTEL_DB_DATABASE: ${{ secrets.SEO_INTEL_DB_DATABASE }}
+          SEO_INTEL_DB_USERNAME: ${{ secrets.SEO_INTEL_DB_USERNAME }}
+          SEO_INTEL_DB_PASSWORD: ${{ secrets.SEO_INTEL_DB_PASSWORD }}
+          SEO_INTEL_MIGRATION_DB_USERNAME: ${{ secrets.SEO_INTEL_MIGRATION_DB_USERNAME }}
+          SEO_INTEL_MIGRATION_DB_PASSWORD: ${{ secrets.SEO_INTEL_MIGRATION_DB_PASSWORD }}
         run: |
           set -euo pipefail
           release="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}"
@@ -698,7 +700,7 @@ jobs:
             -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' \
             -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' \
             -o private_result_authority_publish_required='${{ needs.policy.outputs.private_result_authority_publish_required }}' \
-            -o seo_council_orchestration='${{ needs.policy.outputs.seo_council_orchestration }}' -vvv --no-interaction
+            -o seo_council_orchestration='${{ needs.policy.outputs.seo_council_orchestration }}' --no-interaction
           deploy_rc=$?
           set -e
           if [ "$deploy_rc" -eq 0 ]; then exit 0; fi

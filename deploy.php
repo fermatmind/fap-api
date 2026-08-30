@@ -193,31 +193,35 @@ function deploySeoIntelRuntimeEnvironment(): array
 function deploySeoIntelMigrationEnvironment(): array
 {
     $runtime = deploySeoIntelRuntimeEnvironment();
-    $migration = [];
-    foreach ([
-        'SEO_INTEL_MIGRATION_DB_USERNAME',
-        'SEO_INTEL_MIGRATION_DB_PASSWORD',
-    ] as $key) {
-        $value = getenv($key);
-        if (! is_string($value) || $value === '' || preg_match('/[\x00\r\n]/', $value)) {
-            if (currentHost()->getAlias() === 'production') {
-                return [
-                    'SEO_INTEL_MIGRATION_DB_USERNAME' => $runtime['SEO_INTEL_DB_USERNAME'],
-                    'SEO_INTEL_MIGRATION_DB_PASSWORD' => $runtime['SEO_INTEL_DB_PASSWORD'],
-                ];
-            }
+    $username = getenv('SEO_INTEL_MIGRATION_DB_USERNAME');
+    $password = getenv('SEO_INTEL_MIGRATION_DB_PASSWORD');
+    $usernamePresent = is_string($username) && $username !== '';
+    $passwordPresent = is_string($password) && $password !== '';
 
-            throw new \RuntimeException("{$key} is missing or contains unsupported control characters.");
+    if ($usernamePresent !== $passwordPresent) {
+        throw new \RuntimeException('SEO_INTEL_MIGRATION_AUTHORITY_PARTIAL');
+    }
+
+    if (! $usernamePresent) {
+        if (currentHost()->getAlias() === 'production') {
+            return [];
         }
-        $migration[$key] = $value;
+
+        throw new \RuntimeException('SEO_INTEL_MIGRATION_AUTHORITY_UNAVAILABLE');
     }
 
-    if (currentHost()->getAlias() === 'staging'
-        && hash_equals($runtime['SEO_INTEL_DB_USERNAME'], $migration['SEO_INTEL_MIGRATION_DB_USERNAME'])) {
-        throw new \RuntimeException('Staging SEO Intel migration and runtime accounts must be distinct.');
+    if (preg_match('/[\x00\r\n]/', $username) || preg_match('/[\x00\r\n]/', $password)) {
+        throw new \RuntimeException('SEO_INTEL_MIGRATION_AUTHORITY_INVALID');
     }
 
-    return $migration;
+    if (hash_equals($runtime['SEO_INTEL_DB_USERNAME'], $username)) {
+        throw new \RuntimeException('SEO_INTEL_MIGRATION_RUNTIME_ACCOUNT_COLLISION');
+    }
+
+    return [
+        'SEO_INTEL_MIGRATION_DB_USERNAME' => $username,
+        'SEO_INTEL_MIGRATION_DB_PASSWORD' => $password,
+    ];
 }
 
 function deployIsTransientGitTransportFailure(\Throwable $failure): bool
@@ -1173,6 +1177,7 @@ task('artisan:migrate', function () {
 
 task('artisan:migrate-seo-intel', function () {
     $migration = deploySeoIntelMigrationEnvironment();
+    $migration['SEO_INTEL_MIGRATION_AUTHORITY_AVAILABLE'] = $migration === [] ? 'false' : 'true';
     within('{{release_path}}/backend', function () use ($migration): void {
         $script = <<<'PHP'
 try {
@@ -1185,10 +1190,29 @@ try {
         exit(0);
     }
 
+    $authorityAvailable = getenv('SEO_INTEL_MIGRATION_AUTHORITY_AVAILABLE') === 'true';
+    if (! $authorityAvailable) {
+        $status = $kernel->call('migrate:status', [
+            '--database' => 'seo_intel',
+            '--path' => 'database/migrations/seo_intel',
+            '--no-interaction' => true,
+            '--no-ansi' => true,
+        ]);
+        $statusOutput = $kernel->output();
+        if ($status !== 0) {
+            throw new RuntimeException('SEO_INTEL_MIGRATION_STATUS_UNAVAILABLE');
+        }
+        if (preg_match('/(^|\s)Pending($|\s)/m', $statusOutput) === 1) {
+            throw new RuntimeException('SEO_INTEL_MIGRATION_AUTHORITY_UNAVAILABLE');
+        }
+        echo "SEO Intel migrations current; migration authority absent, skip.\n";
+        exit(0);
+    }
+
     $username = getenv('SEO_INTEL_MIGRATION_DB_USERNAME');
     $password = getenv('SEO_INTEL_MIGRATION_DB_PASSWORD');
     if (! is_string($username) || $username === '' || ! is_string($password) || $password === '') {
-        throw new RuntimeException('migration authority unavailable');
+        throw new RuntimeException('SEO_INTEL_MIGRATION_AUTHORITY_UNAVAILABLE');
     }
 
     config([
@@ -1203,10 +1227,18 @@ try {
         '--no-interaction' => true,
         '--ansi' => true,
     ]);
-    echo $kernel->output();
-    exit($status);
-} catch (Throwable) {
-    fwrite(STDERR, "SEO Intel dedicated migration failed.\n");
+    if ($status !== 0) {
+        throw new RuntimeException('SEO_INTEL_MIGRATION_FAILED');
+    }
+    echo "SEO Intel dedicated migrations complete.\n";
+    exit(0);
+} catch (Throwable $failure) {
+    $reason = in_array($failure->getMessage(), [
+        'SEO_INTEL_MIGRATION_AUTHORITY_UNAVAILABLE',
+        'SEO_INTEL_MIGRATION_STATUS_UNAVAILABLE',
+        'SEO_INTEL_MIGRATION_FAILED',
+    ], true) ? $failure->getMessage() : 'SEO_INTEL_MIGRATION_FAILED';
+    fwrite(STDERR, $reason."\n");
     exit(1);
 }
 PHP;
@@ -1231,12 +1263,19 @@ if [ "$seo_intel_status" -ne 0 ]; then
   echo "unable to resolve SEO Intel runtime configuration" >&2
   exit "$seo_intel_status"
 fi
-status_output="$({{bin/php}} artisan migrate:status --database=seo_intel --path=database/migrations/seo_intel --no-interaction --no-ansi)"
-printf '%s\n' "$status_output"
-if printf '%s\n' "$status_output" | grep -Eq '(^|[[:space:]])Pending($|[[:space:]])'; then
-  echo "pending seo_intel migrations remain after deploy migrate" >&2
+set +e
+status_output="$({{bin/php}} artisan migrate:status --database=seo_intel --path=database/migrations/seo_intel --no-interaction --no-ansi 2>/dev/null)"
+status_rc="$?"
+set -e
+if [ "$status_rc" -ne 0 ]; then
+  echo "SEO_INTEL_MIGRATION_STATUS_UNAVAILABLE" >&2
   exit 1
 fi
+if printf '%s\n' "$status_output" | grep -Eq '(^|[[:space:]])Pending($|[[:space:]])'; then
+  echo "SEO_INTEL_MIGRATION_AUTHORITY_UNAVAILABLE" >&2
+  exit 1
+fi
+echo "SEO Intel migration status verified."
 BASH);
     });
 });

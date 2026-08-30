@@ -24,19 +24,54 @@ const migrationKeys = [
   "SEO_INTEL_MIGRATION_DB_PASSWORD",
 ];
 
+const privateRuntimeKeys = [
+  "SEO_INTEL_DB_HOST",
+  "SEO_INTEL_DB_PORT",
+  "SEO_INTEL_DB_DATABASE",
+  "SEO_INTEL_DB_USERNAME",
+  "SEO_INTEL_DB_PASSWORD",
+];
+
+const safeVariableKeys = runtimeKeys.filter((key) => !privateRuntimeKeys.includes(key));
+
+function jobHeader(name) {
+  const start = deploy.indexOf(`  ${name}:`);
+  const steps = deploy.indexOf("\n    steps:", start);
+  assert.notEqual(start, -1, name);
+  assert.notEqual(steps, -1, name);
+  return deploy.slice(start, steps);
+}
+
 test("11E binds isolated GitHub Environment runtime values to both deployment jobs", () => {
   for (const environment of ["staging", "production"]) {
     assert.match(deploy, new RegExp(`SEO_INTEL_RUNTIME_ENVIRONMENT: ${environment}`));
   }
-  for (const key of runtimeKeys) {
-    const source = ["SEO_INTEL_DB_USERNAME", "SEO_INTEL_DB_PASSWORD"].includes(key) ? "secrets" : "vars";
+  for (const key of safeVariableKeys) {
+    const source = "vars";
     const pattern = new RegExp(`${key}: \\$\\{\\{ ${source}\\.${key} \\}\\}`, "g");
     assert.equal((deploy.match(pattern) || []).length, 2, key);
+  }
+  for (const key of privateRuntimeKeys) {
+    const pattern = new RegExp(`${key}: \\$\\{\\{ secrets\\.${key} \\}\\}`, "g");
+    assert.equal((deploy.match(pattern) || []).length, 2, key);
+    assert.doesNotMatch(deploy, new RegExp(`${key}: \\$\\{\\{ vars\\.`));
   }
   for (const key of migrationKeys) {
     const pattern = new RegExp(`${key}: \\$\\{\\{ secrets\\.${key} \\}\\}`, "g");
     assert.equal((deploy.match(pattern) || []).length, 2, key);
   }
+  for (const job of ["staging", "production"]) {
+    const header = jobHeader(job);
+    for (const key of [...privateRuntimeKeys, ...migrationKeys]) {
+      assert.doesNotMatch(header, new RegExp(`\\n      ${key}:`), `${job}:${key}`);
+    }
+  }
+  assert.doesNotMatch(jobHeader("production"), /SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY/);
+  assert.equal((deploy.match(/SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY: \$\{\{ secrets\.SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY \}\}/g) || []).length, 1);
+  assert.match(deploy, /- name: Deploy staging and run repository smoke chain\n        env:\n(?:          SEO_INTEL_[^\n]+\n){7}        run:/);
+  assert.match(deploy, /- name: Deploy once and automatically restore LKG after committed smoke failure[\s\S]+?        env:\n(?:          SEO_INTEL_[^\n]+\n){8}        run:/);
+  assert.doesNotMatch(deploy, /SEO_INTEL_DB_(HOST|PORT|DATABASE): \\$\\{\\{ vars\./);
+  assert.doesNotMatch(deploy, /seo_council_orchestration[^\n]+ -vvv /);
 });
 
 test("11E atomically injects only the approved keys before config cache and fails closed", () => {
@@ -54,12 +89,23 @@ test("11E atomically injects only the approved keys before config cache and fail
   assert.match(deployer, /config\("seo_intel\.write_enabled"\) === false/);
   assert.match(deployer, /config\("seo_intel\.collectors_enabled"\) === false/);
   assert.match(deployer, /config\("seo_intel\.allow_external_api_calls"\) === false/);
-  assert.match(deployer, /Staging SEO Intel migration and runtime accounts must be distinct/);
+  assert.match(deployer, /SEO_INTEL_MIGRATION_AUTHORITY_PARTIAL/);
+  assert.match(deployer, /SEO_INTEL_MIGRATION_AUTHORITY_UNAVAILABLE/);
+  assert.match(deployer, /SEO_INTEL_MIGRATION_AUTHORITY_INVALID/);
+  assert.match(deployer, /SEO_INTEL_MIGRATION_RUNTIME_ACCOUNT_COLLISION/);
+  assert.match(deployer, /SEO_INTEL_MIGRATION_STATUS_UNAVAILABLE/);
+  assert.match(deployer, /currentHost\(\)->getAlias\(\) === 'production'[\s\S]+?return \[\];/);
+  assert.match(deployer, /--path' => 'database\/migrations\/seo_intel'/);
+  assert.match(deployer, /migration authority absent, skip/);
+  assert.doesNotMatch(deployer, /SEO_INTEL_MIGRATION_DB_USERNAME' => \\$runtime\['SEO_INTEL_DB_USERNAME'\]/);
+  assert.doesNotMatch(deployer, /SEO_INTEL_MIGRATION_DB_PASSWORD' => \\$runtime\['SEO_INTEL_DB_PASSWORD'\]/);
   assert.match(deployer, /database\.connections\.seo_intel\.username/);
   assert.match(deployer, /DB::purge\('seo_intel'\)/);
   assert.match(deployer, /\['env' => \$migration\]/);
   assert.doesNotMatch(deployer, /\$environment === 'production_runtime'/);
   assert.doesNotMatch(deployer, /technical_diagnosis[^\n]+\?\? ''/);
+  assert.doesNotMatch(deployer, /echo \\$kernel->output\(\)/);
+  assert.match(deployer, /if \(! is_string\(\$value\) \|\| \$value === ''[\s\S]+?throw new \\RuntimeException\("\{\$key\} is missing/);
 });
 
 test("11E read-only detector receipt never enters the materialization branch", () => {

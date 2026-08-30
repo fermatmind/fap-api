@@ -107,7 +107,19 @@ final class SeoIntelMigrationIsolationTest extends TestCase
         $this->assertStringContainsString("config('seo_intel.enabled') !== true", $deploy);
         $this->assertStringContainsString('SEO Intel is disabled; skip dedicated migrations.', $deploy);
         $this->assertStringContainsString('deploySeoIntelMigrationEnvironment()', $deploy);
-        $this->assertStringContainsString('Staging SEO Intel migration and runtime accounts must be distinct.', $deploy);
+        $this->assertStringContainsString('SEO_INTEL_MIGRATION_AUTHORITY_PARTIAL', $deploy);
+        $this->assertStringContainsString('SEO_INTEL_MIGRATION_AUTHORITY_UNAVAILABLE', $deploy);
+        $this->assertStringContainsString('SEO_INTEL_MIGRATION_RUNTIME_ACCOUNT_COLLISION', $deploy);
+        $this->assertStringContainsString('SEO_INTEL_MIGRATION_STATUS_UNAVAILABLE', $deploy);
+        $this->assertStringContainsString('migration authority absent, skip', $deploy);
+        $this->assertStringNotContainsString(
+            "'SEO_INTEL_MIGRATION_DB_USERNAME' => \$runtime['SEO_INTEL_DB_USERNAME']",
+            $deploy
+        );
+        $this->assertStringNotContainsString(
+            "'SEO_INTEL_MIGRATION_DB_PASSWORD' => \$runtime['SEO_INTEL_DB_PASSWORD']",
+            $deploy
+        );
         $this->assertStringContainsString("DB::purge('seo_intel')", $deploy);
         $this->assertStringContainsString("['env' => \$migration]", $deploy);
         $this->assertStringContainsString("after('artisan:migrate-seo-intel', 'guard:no-pending-seo-intel-migrations')", $deploy);
