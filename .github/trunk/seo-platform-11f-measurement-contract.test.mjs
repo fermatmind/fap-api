@@ -67,6 +67,12 @@ test("staging source readiness precedes Council closeout and production never ba
   assert.match(staging, /GSC_SECRET_MISSING/);
   assert.match(staging, /GSC_SCOPE_NOT_READONLY/);
   assert.match(staging, /GSC_SYNC_QUALITY_HOLD/);
+  assert.match(staging, /GSC_RESTRICTED_EGRESS_TRANSPORT_FAILED/);
+  assert.match(staging, /GSC_AUTHENTICATION_FAILED/);
+  assert.match(staging, /GSC_EMPTY_RESPONSE/);
+  assert.match(staging, /GSC_SYNC_INTERNAL_FAILURE/);
+  assert.match(staging, /sync_issue="\$\(jq -r '\.issue \/\/ ""'/);
+  assert.doesNotMatch(staging, /printf[^\n]+\$sync_issue/);
   assert.match(staging, /CRO_NO_REAL_AGGREGATE_SOURCE/);
   assert.match(staging, /CRO_READMODEL_UNHEALTHY/);
   assert.match(staging, /test "\$GSC_AUTH_MODE" = service_account/);
