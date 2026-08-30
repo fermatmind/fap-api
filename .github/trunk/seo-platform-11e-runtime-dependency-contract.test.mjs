@@ -58,6 +58,8 @@ test("11E atomically injects only the approved keys before config cache and fail
   assert.match(deployer, /database\.connections\.seo_intel\.username/);
   assert.match(deployer, /DB::purge\('seo_intel'\)/);
   assert.match(deployer, /\['env' => \$migration\]/);
+  assert.doesNotMatch(deployer, /\$environment === 'production_runtime'/);
+  assert.doesNotMatch(deployer, /technical_diagnosis[^\n]+\?\? ''/);
 });
 
 test("11E read-only detector receipt never enters the materialization branch", () => {

@@ -1647,9 +1647,9 @@ fwrite(STDERR, "SEO Council safe source diagnostic: ".json_encode($diagnostic, J
 fi
 printf '%s' "$receipt" | {{bin/php}} -r '
 $payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
-$environment = (string) ($argv[2] ?? '');
-$production = $environment === 'production_runtime';
-$expectedState = $production ? 'CLOSED' : 'STAGING_READY';
+$environment = (string) ($argv[2] ?? "");
+$production = $environment === "production_runtime";
+$expectedState = $production ? "CLOSED" : "STAGING_READY";
 $zero = [
     "binding_schema_probe_failed", "binding_hash_drift_count", "unbound_mission_count",
     "unknown_role_count", "unknown_capability_count", "unknown_tool_count",
@@ -1697,9 +1697,9 @@ $ok = ($payload["contract_version"] ?? null) === "seo.council_closeout.v2"
     && ($payload["technical_diagnosis"]["observed_active_sha"] ?? null) === ($argv[1] ?? null)
     && ($payload["technical_diagnosis"]["SEO-PLATFORM-11E"] ?? null) === ($production ? "CLOSED" : "HOLD")
     && ($payload["technical_diagnosis"]["ready_for_11F"] ?? null) === $production
-    && ! str_contains((string) ($payload["technical_diagnosis"]["url_truth_revision"] ?? ''), "offline-eval")
-    && ! str_contains((string) ($payload["technical_diagnosis"]["runtime_evidence_revision"] ?? ''), "offline-eval")
-    && ! str_contains((string) ($payload["technical_diagnosis"]["authority_revision"] ?? ''), "offline-eval")
+    && ! str_contains((string) ($payload["technical_diagnosis"]["url_truth_revision"] ?? ""), "offline-eval")
+    && ! str_contains((string) ($payload["technical_diagnosis"]["runtime_evidence_revision"] ?? ""), "offline-eval")
+    && ! str_contains((string) ($payload["technical_diagnosis"]["authority_revision"] ?? ""), "offline-eval")
     && ($payload["technical_diagnosis"]["private_url_leak_count"] ?? null) === 0
     && ($payload["technical_diagnosis"]["unsupported_p0_p1_count"] ?? null) === 0
     && ($payload["technical_diagnosis"]["authority_invention_count"] ?? null) === 0
