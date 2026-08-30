@@ -22,14 +22,15 @@ test("keeps repository Skills rules-only when their names contain domain keyword
   assert.equal(result.flags.seo_discoverability, false);
 });
 
-test("classifies the executable path rule with its tests without application deployment", () => {
+test("deploys SEO Council classifier changes for exact-SHA runtime closeout", () => {
   const result = classifyPaths([
     ".github/trunk/classify-paths.mjs",
     ".github/trunk/classify-paths.test.mjs",
   ]);
-  assert.deepEqual(result.categories, ["docs_rules_tests_only"]);
-  assert.equal(result.deploy, false);
+  assert.deepEqual(result.categories, ["infrastructure_deployment"]);
+  assert.equal(result.deploy, true);
   assert.equal(result.tests_changed, true);
+  assert.equal(result.operations.seo_council_orchestration, true);
 });
 
 test("keeps all SEO platform closeout evidence docs-only", () => {

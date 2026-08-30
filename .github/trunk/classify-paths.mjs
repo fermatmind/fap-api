@@ -110,7 +110,7 @@ export function classifyPaths(inputPaths) {
       /(^|\/)(?:tests?|__tests__)\//,
       /(?:Test\.php|\.test\.[cm]?[jt]sx?)$/,
     ]);
-    const executableRulePath = path === ".github/trunk/classify-paths.mjs";
+    const seoCouncilControlPlane = SEO_COUNCIL_CONTROL_PLANE_PATHS.has(path);
     testsChanged ||= testPath;
     const payment = matches(path, [
       /(^|\/)(?:Commerce|Payments?|Billing|Entitlement)(\/|\.)/i,
@@ -162,18 +162,17 @@ export function classifyPaths(inputPaths) {
     ]);
 
     const selected = [];
-    if (path.startsWith(".agents/") || executableRulePath || docsOnly) {
+    if (path.startsWith(".agents/") || (docsOnly && !seoCouncilControlPlane)) {
       // Repository Skills are instructions and static helpers. Domain words in
       // their names or prose must not promote a rules-only change to runtime.
-      // The classifier itself is an executable delivery rule whose tests run
-      // unconditionally; changing it does not change deployed application bits.
       // Documentation paths remain evidence even when their filenames contain
       // SEO, content, authority, cache, or other runtime-domain keywords.
       selected.push("docs_rules_tests_only");
-    } else if (infrastructure) {
+    } else if (infrastructure || seoCouncilControlPlane) {
       // Control-plane filenames often contain domain words such as cache or SEO.
       // They remain infrastructure changes; domain checks are selected only by
-      // actual runtime/content paths in the same push.
+      // actual runtime/content paths in the same push. SEO Council control-plane
+      // changes deploy so their exact SHA receives runtime closeout evidence.
       selected.push("infrastructure_deployment");
     } else {
       if (payment) selected.push("payment");
