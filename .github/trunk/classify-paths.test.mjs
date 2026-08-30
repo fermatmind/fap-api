@@ -214,6 +214,7 @@ test("binds the deny-only SEO agent Policy Gateway to every 11C layer", () => {
 test("binds deterministic SEO Council orchestration to every 11D and 11E layer", () => {
   for (const path of [
     "backend/app/Services/SeoCouncil/SeoCouncilOrchestrator.php",
+    "backend/app/Services/SeoAgentEvidence/Sources/SeoPlatformDependencyEvidenceAdapter.php",
     "backend/app/Console/Commands/SeoCouncilCloseoutCommand.php",
     "backend/app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoCouncilMissionController.php",
     "backend/app/Http/Middleware/EnsureSeoCouncilMissionAuthorized.php",

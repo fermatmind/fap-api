@@ -64,6 +64,7 @@ const SEO_COUNCIL_CONTROL_PLANE_PATHS = new Set([
 
 const isSeoCouncilOrchestrationBoundary = (path) =>
   /^backend\/(?:app\/Services\/SeoCouncil\/|app\/Console\/Commands\/SeoCouncil[^/]+\.php$|app\/Http\/Controllers\/API\/V0_5\/Ops\/SeoIntel\/SeoCouncilMissionController\.php$|app\/Http\/Middleware\/EnsureSeoCouncilMissionAuthorized\.php$|app\/Http\/Middleware\/OpsAccessControl\.php$|app\/Filament\/Ops\/Support\/SeoAgentCouncilUiContract\.php$|app\/Providers\/SeoCouncilServiceProvider\.php$|bootstrap\/(?:app|providers)\.php$|config\/seo_council\.php$|resources\/seo-agent\/council\/|resources\/views\/filament\/ops\/components\/ops-agent-council-workspace\.blade\.php$|lang\/(?:en|zh_CN)\/ops\.php$|docs\/(?:seo\/generated\/(?:seo-council-contract-manifest\.v[12]|seo-technical-diagnosis-contract-manifest\.v[12])\.json$|contracts\/openapi\.snapshot\.json$)|scripts\/seo\/(?:export_seo_council_contracts|submit_seo_council_mission)\.php$|database\/migrations\/seo_intel\/2026_08_29_030000_create_seo_council_runtime_tables\.php$|tests\/Feature\/(?:SeoIntel\/SeoPlatform11[DE]|Ops\/SeoUxImpl06AgentCouncilTest\.php$)|routes\/(?:api|web)\.php$)/.test(path)
+  || path === "backend/app/Services/SeoAgentEvidence/Sources/SeoPlatformDependencyEvidenceAdapter.php"
   || path === ".agents/skills/fermatmind-global-seo-geo-growth-scan/SKILL.md"
   || SEO_COUNCIL_CONTROL_PLANE_PATHS.has(path);
 

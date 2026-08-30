@@ -237,8 +237,7 @@ jobs:
           seo_agent_policy_gateway="$(jq -r '.classification.operations.seo_agent_policy_gateway == true' "$receipt")"
           seo_council_orchestration="$(jq -r '.classification.operations.seo_council_orchestration == true' "$receipt")"
           private_result_authority_publish_required="$(jq -r '
-            if (.classification.categories == ["infrastructure_deployment"]
-              and .classification.operations.seo_council_orchestration == true)
+            if .classification.operations.seo_council_orchestration == true
             then false else true end
           ' "$receipt")"
           if [ "$private_result_authority_publish_required" = false ]; then

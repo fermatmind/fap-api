@@ -29,7 +29,7 @@ test("11D and 11E extend only the permanent CI and deploy control plane", () => 
   assert.match(deploy, /staging_runtime/);
   assert.match(deploy, /production_runtime/);
   assert.match(deploy, /private_result_authority_publish_required/);
-  assert.match(deploy, /\.classification\.categories == \["infrastructure_deployment"\]/);
+  assert.match(deploy, /if \.classification\.operations\.seo_council_orchestration == true/);
   assert.match(deploy, /if \[ "\$private_result_authority_publish_required" = false \]; then\s+#[^\n]*\n\s+#[^\n]*\n\s+career_current=false\s+career_current_full_scan=false/);
 });
 
