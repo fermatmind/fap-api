@@ -1,0 +1,17 @@
+{
+  "schema_version": "seo.technical_diagnosis_policy.v2",
+  "policy_id": "seo.technical_diagnosis_policy",
+  "policy_version": "2.0.0",
+  "evidence_states": ["verified_fact", "supported_hypothesis", "unverified_hypothesis", "unknown", "blocked"],
+  "confidence_levels": ["high", "medium", "low", "insufficient"],
+  "severity_levels": ["P0", "P1", "P2", "P3", "HOLD"],
+  "discovery_decisions": ["ALLOW_DISCOVERY_REVIEW", "HOLD_DISCOVERY"],
+  "context_namespaces": ["authority.backend", "authority.url_truth", "authority.page_family_policy", "runtime", "detector", "publication", "public_api", "feeds", "cache", "release"],
+  "p0_p1_requires": ["verified_fact", "high_confidence", "direct_reproducible_observation", "current_revision_consistent", "required_authority_sources_present"],
+  "single_transient_max_severity": "P2",
+  "hypothesis_max_severity": "P2",
+  "conflict_outcome": "HOLD_DISCOVERY",
+  "recommended_path_kind": "repair_candidate_only",
+  "forbidden_actions": ["execution_command", "action_manifest", "write_permission", "cms_publish", "url_truth_write", "canonical_write", "robots_write", "feed_write", "search_submission", "external_tool", "peer_delegation", "l4"],
+  "negative_guarantees": {"execution_allowed": false, "write_permission": false, "search_submission_allowed": false}
+}

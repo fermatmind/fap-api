@@ -1,0 +1,8 @@
+{
+  "schema_id": "seo.technical_diagnosis_output.v2",
+  "schema_version": "2.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["output_id", "output_version", "diagnosis_id", "status", "verified_facts", "root_cause_hypotheses", "confidence", "affected_scope", "recommended_path", "evidence_gap", "hold_reason", "findings", "discovery_decision", "execution_allowed", "write_permission", "search_submission_allowed", "model_calls", "tool_calls", "external_calls", "output_hash"],
+  "properties": {"output_id": {"type": "string"}, "output_version": {"const": 2}, "diagnosis_id": {"type": "string"}, "status": {"enum": ["READY", "HOLD"]}, "verified_facts": {"type": "array"}, "root_cause_hypotheses": {"type": "array"}, "confidence": {"enum": ["high", "medium", "low", "insufficient"]}, "affected_scope": {"type": "object"}, "recommended_path": {"type": "object"}, "evidence_gap": {"type": ["object", "null"]}, "hold_reason": {"type": ["string", "null"]}, "findings": {"type": "array"}, "discovery_decision": {"enum": ["ALLOW_DISCOVERY_REVIEW", "HOLD_DISCOVERY"]}, "execution_allowed": {"const": false}, "write_permission": {"const": false}, "search_submission_allowed": {"const": false}, "model_calls": {"const": 0}, "tool_calls": {"const": 0}, "external_calls": {"const": 0}, "output_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}
+}

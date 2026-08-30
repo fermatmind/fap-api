@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Services\SeoAgentEvidence\Sources;
 
+use App\Services\SeoCouncil\TechnicalDiagnosis\TechnicalDiagnosisDependencyBindingSource;
 use App\Services\SeoIntel\Decision\SeoDecisionCardReadService;
 use App\Services\SeoIntel\Decision\SeoWeeklyDecisionCloseoutService;
 use App\Services\SeoIntel\Ledger\SeoLedgerProductionCloseoutService;
 use App\Services\SeoIntel\OpsDashboard\ContentLifecycleReadService;
 use App\Services\SeoIntel\OpsDashboard\GscProductionCloseoutReadService;
+use App\Services\SeoIntel\OpsDashboard\SeoTechnicalHealthReadService;
 use App\Services\SeoIntel\Runtime\ProductionCalibrationCloseoutService;
 use App\Services\SeoIntel\Runtime\ScheduledRuntimeProbeReceiptService;
 use App\Services\SeoIntel\Sources\ProductionDetectorFoundationEvidenceSource;
@@ -16,7 +18,7 @@ use Carbon\CarbonImmutable;
 use Throwable;
 
 /** Converts existing production closeouts into metadata-only dependency states. */
-final class SeoPlatformDependencyEvidenceAdapter
+final class SeoPlatformDependencyEvidenceAdapter implements TechnicalDiagnosisDependencyBindingSource
 {
     public function __construct(
         private readonly GscProductionCloseoutReadService $gsc,
@@ -27,6 +29,7 @@ final class SeoPlatformDependencyEvidenceAdapter
         private readonly SeoDecisionCardReadService $decisionRead,
         private readonly ContentLifecycleReadService $lifecycleRead,
         private readonly ProductionDetectorFoundationEvidenceSource $detectorFoundation,
+        private readonly SeoTechnicalHealthReadService $technicalHealth,
     ) {}
 
     /** @return list<array<string, mixed>> */
@@ -69,6 +72,60 @@ final class SeoPlatformDependencyEvidenceAdapter
                 'url_truth_projection_hash' => 'unavailable',
             ];
         }
+    }
+
+    /** @return array<string, mixed> */
+    public function technicalDiagnosisBinding(string $releaseSha): array
+    {
+        try {
+            $foundation = $this->detectorFoundation->snapshot(CarbonImmutable::now('UTC'));
+            $urlTruthRevision = (string) data_get($foundation, 'jobs.0.evidence.url_truth_revision', '');
+            $authorityRevision = (string) data_get($foundation, 'jobs.0.evidence.authority_revision', '');
+            $publicCount = data_get($foundation, 'metadata.url_truth.current_public_count');
+            $runtime = $this->technicalHealth->read();
+            $runtimeHash = hash('sha256', json_encode($this->canonicalize($runtime), JSON_THROW_ON_ERROR));
+            $runtimeVersion = (string) ($runtime['schema_version'] ?? '');
+            $valid = preg_match('/^[a-f0-9]{40}$/D', $releaseSha) === 1
+                && preg_match('/^url-truth-set-v1:[a-f0-9]{32}$/D', $urlTruthRevision) === 1
+                && preg_match('/^authority-set-v1:[a-f0-9]{32}$/D', $authorityRevision) === 1
+                && is_int($publicCount)
+                && $runtimeVersion === 'seo-platform-07-technical-health.v1'
+                && data_get($runtime, 'boundaries.read_only') === true
+                && data_get($runtime, 'boundaries.write_authorization_granted') === false;
+
+            return [
+                'url_truth_revision' => $valid ? $urlTruthRevision : 'unavailable',
+                'url_truth_projection_hash' => $valid ? hash('sha256', $urlTruthRevision.'|'.$publicCount) : 'unavailable',
+                'runtime_evidence_revision' => $valid ? $runtimeVersion.':'.substr($runtimeHash, 0, 32) : 'unavailable',
+                'runtime_evidence_hash' => $valid ? $runtimeHash : 'unavailable',
+                'authority_revision' => $valid ? $authorityRevision : 'unavailable',
+                'deployment_revision' => $releaseSha,
+                'source_capability_state' => $valid ? 'available' : 'unavailable',
+            ];
+        } catch (Throwable) {
+            return [
+                'url_truth_revision' => 'unavailable',
+                'url_truth_projection_hash' => 'unavailable',
+                'runtime_evidence_revision' => 'unavailable',
+                'runtime_evidence_hash' => 'unavailable',
+                'authority_revision' => 'unavailable',
+                'deployment_revision' => $releaseSha,
+                'source_capability_state' => 'unavailable',
+            ];
+        }
+    }
+
+    private function canonicalize(mixed $value): mixed
+    {
+        if (! is_array($value)) {
+            return $value;
+        }
+        if (array_is_list($value)) {
+            return array_map($this->canonicalize(...), $value);
+        }
+        ksort($value, SORT_STRING);
+
+        return array_map($this->canonicalize(...), $value);
     }
 
     /** @return array<string, mixed> */

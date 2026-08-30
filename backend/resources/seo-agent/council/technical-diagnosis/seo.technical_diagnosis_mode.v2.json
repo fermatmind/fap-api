@@ -1,0 +1,23 @@
+{
+  "schema_version": "seo.technical_diagnosis_mode.v2",
+  "mode_id": "technical_search_diagnosis",
+  "mode_version": "2.0.0",
+  "mode_state": "OFFLINE_EVAL_READY",
+  "role_id": "seo.expert.technical_search_authority",
+  "mission_type": "bounded_review",
+  "review_domain": "technical",
+  "max_modes": 1,
+  "prompt_namespace": "seo.technical_search_diagnosis.prompt.v1",
+  "output_schema": "seo.technical_diagnosis_output.v2",
+  "context_schema": "seo.technical_diagnosis_evidence_context.v2",
+  "evidence_requirements": ["verified_11b_bundle", "source_field_ownership", "fresh_evidence", "current_authority_revision", "current_url_truth_projection", "current_runtime_evidence", "current_deployment_revision", "available_source_capability"],
+  "negative_guarantees": {
+    "production_model_enabled": false,
+    "production_tool_enabled": false,
+    "production_execution_enabled": false,
+    "production_write_enabled": false,
+    "allow_delegation": false,
+    "external_egress": false,
+    "search_submission_allowed": false
+  }
+}

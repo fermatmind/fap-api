@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SeoIntel;
 
+use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use App\Services\SeoCouncil\Entrypoints\ApiMissionAdapter;
 use App\Services\SeoCouncil\Entrypoints\CliMissionAdapter;
 use App\Services\SeoCouncil\Entrypoints\LocalSkillMissionAdapter;
@@ -148,8 +149,8 @@ final class SeoPlatform11DOrchestratorTest extends TestCase
             'tool_calls' => 0,
             'external_calls' => 0,
             'write_count' => 0,
-            'output_hash' => str_repeat('c', 64),
         ];
+        $safe['output_hash'] = app(SeoRegistryHasher::class)->hash($safe);
 
         $this->assertTrue($orchestrator->acceptModeOutput($safe, str_repeat('a', 64), 'seo.independent_reviewer'));
         foreach (['peer_handoff', 'delegate_to', 'flow_override', 'additional_roles', 'tool_scope', 'egress_scope', 'allow', 'manifest', 'requested_role', 'tool'] as $field) {

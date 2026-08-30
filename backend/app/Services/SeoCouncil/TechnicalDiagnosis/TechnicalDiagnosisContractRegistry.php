@@ -9,19 +9,21 @@ use RuntimeException;
 
 final class TechnicalDiagnosisContractRegistry
 {
-    public const MANIFEST_ID = 'seo.technical_diagnosis_contract_manifest.v1';
+    public const MANIFEST_ID = 'seo.technical_diagnosis_contract_manifest.v2';
 
-    public const MANIFEST_VERSION = '1.0.0';
+    public const MANIFEST_VERSION = '2.0.0';
 
     /** @var list<string> */
     private const SCHEMAS = [
-        'seo.technical_diagnosis_request.v1.schema.json',
+        'seo.technical_diagnosis_request.v2.schema.json',
         'seo.technical_affected_scope.v1.schema.json',
         'seo.technical_root_cause_hypothesis.v1.schema.json',
         'seo.technical_evidence_gap.v1.schema.json',
-        'seo.technical_diagnosis_finding.v1.schema.json',
-        'seo.technical_diagnosis_output.v1.schema.json',
-        'seo.technical_diagnosis_receipt.v1.schema.json',
+        'seo.technical_diagnosis_finding.v2.schema.json',
+        'seo.technical_diagnosis_output.v2.schema.json',
+        'seo.technical_diagnosis_evidence_context.v2.schema.json',
+        'seo.technical_source_field_ownership.v2.schema.json',
+        'seo.technical_diagnosis_receipt.v2.schema.json',
     ];
 
     public function __construct(private readonly SeoRegistryHasher $hasher) {}
@@ -40,8 +42,9 @@ final class TechnicalDiagnosisContractRegistry
             ];
         }
 
-        $mode = $this->jsonAsset('seo.technical_diagnosis_mode.v1.json');
-        $policy = $this->jsonAsset('seo.technical_diagnosis_policy.v1.json');
+        $mode = $this->jsonAsset('seo.technical_diagnosis_mode.v2.json');
+        $policy = $this->jsonAsset('seo.technical_diagnosis_policy.v2.json');
+        $ownership = $this->ownership();
         $prompt = $this->prompt();
         $fixtures = $this->decode($this->root().'/fixtures/seo.technical_diagnosis_fixtures.v1.json');
         $manifest = [
@@ -52,7 +55,7 @@ final class TechnicalDiagnosisContractRegistry
                 'id' => $mode['mode_id'],
                 'version' => $mode['mode_version'],
                 'hash' => $this->hasher->hash($mode),
-                'path' => 'backend/resources/seo-agent/council/technical-diagnosis/seo.technical_diagnosis_mode.v1.json',
+                'path' => 'backend/resources/seo-agent/council/technical-diagnosis/seo.technical_diagnosis_mode.v2.json',
             ],
             'prompt' => [
                 'id' => 'seo.technical_search_diagnosis.prompt.v1',
@@ -64,7 +67,13 @@ final class TechnicalDiagnosisContractRegistry
                 'id' => $policy['policy_id'],
                 'version' => $policy['policy_version'],
                 'hash' => $this->hasher->hash($policy),
-                'path' => 'backend/resources/seo-agent/council/technical-diagnosis/seo.technical_diagnosis_policy.v1.json',
+                'path' => 'backend/resources/seo-agent/council/technical-diagnosis/seo.technical_diagnosis_policy.v2.json',
+            ],
+            'source_field_ownership' => [
+                'id' => $ownership['schema_version'],
+                'version' => $ownership['ownership_version'],
+                'hash' => $this->hasher->hash($ownership),
+                'path' => 'backend/resources/seo-agent/council/technical-diagnosis/seo.technical_source_field_ownership.v2.json',
             ],
             'fixtures' => [
                 'id' => $fixtures['fixture_set_id'],
@@ -76,10 +85,7 @@ final class TechnicalDiagnosisContractRegistry
                 'binding_v1_or_v2_changed' => false,
                 'new_role' => false,
                 'new_orchestrator' => false,
-                'production_model_calls' => 0,
-                'agent_tool_calls' => 0,
-                'external_egress' => 0,
-                'write_permissions' => 0,
+                'activity_is_probe_derived' => true,
             ],
         ];
         $manifest['manifest_hash'] = $this->hasher->hash($manifest);
@@ -103,13 +109,19 @@ final class TechnicalDiagnosisContractRegistry
     /** @return array<string, mixed> */
     public function mode(): array
     {
-        return $this->jsonAsset('seo.technical_diagnosis_mode.v1.json');
+        return $this->jsonAsset('seo.technical_diagnosis_mode.v2.json');
     }
 
     /** @return array<string, mixed> */
     public function policy(): array
     {
-        return $this->jsonAsset('seo.technical_diagnosis_policy.v1.json');
+        return $this->jsonAsset('seo.technical_diagnosis_policy.v2.json');
+    }
+
+    /** @return array<string, mixed> */
+    public function ownership(): array
+    {
+        return $this->jsonAsset('seo.technical_source_field_ownership.v2.json');
     }
 
     public function prompt(): string

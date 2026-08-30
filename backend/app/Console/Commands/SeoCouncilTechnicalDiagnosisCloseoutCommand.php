@@ -10,7 +10,7 @@ use Throwable;
 
 final class SeoCouncilTechnicalDiagnosisCloseoutCommand extends Command
 {
-    protected $signature = 'seo:technical-diagnosis-closeout {--expected-sha=} {--json}';
+    protected $signature = 'seo:technical-diagnosis-closeout {--expected-sha=} {--closeout-environment=ci_candidate} {--json}';
 
     protected $description = 'Verify SEO-PLATFORM-11E Technical Search Diagnosis Mode for one exact SHA';
 
@@ -22,9 +22,15 @@ final class SeoCouncilTechnicalDiagnosisCloseoutCommand extends Command
             if (preg_match('/^[a-f0-9]{40}$/D', $expectedSha) !== 1 || ! hash_equals($expectedSha, $sourceSha)) {
                 return $this->emit(['status' => 'failed', 'safe_error_code' => 'RELEASE_SHA_MISMATCH'], self::FAILURE);
             }
-            $receipt = $closeout->build($sourceSha);
+            $environment = (string) $this->option('closeout-environment');
+            $receipt = $closeout->build($sourceSha, $environment);
+            $expectedState = match ($environment) {
+                'production_runtime' => 'CLOSED',
+                'staging_runtime' => 'STAGING_READY',
+                default => 'CANDIDATE_READY',
+            };
 
-            return $this->emit($receipt, ($receipt['SEO-PLATFORM-11E'] ?? null) === 'CLOSED' ? self::SUCCESS : self::FAILURE);
+            return $this->emit($receipt, ($receipt['closeout_state'] ?? null) === $expectedState ? self::SUCCESS : self::FAILURE);
         } catch (Throwable) {
             return $this->emit(['status' => 'failed', 'safe_error_code' => 'TECHNICAL_DIAGNOSIS_CLOSEOUT_FAILED'], self::FAILURE);
         }

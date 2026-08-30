@@ -1,0 +1,8 @@
+{
+  "schema_id": "seo.technical_diagnosis_evidence_context.v2",
+  "schema_version": "2.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["context_id", "context_version", "request_hash", "bundle_refs", "namespaces", "computed_evidence", "lineage_refs", "redaction_summary", "status", "diagnosis_allowed", "execution_allowed", "context_hash"],
+  "properties": {"context_id": {"type": "string"}, "context_version": {"const": "seo.technical_diagnosis_evidence_context.v2"}, "request_hash": {"type": "string"}, "bundle_refs": {"type": "array"}, "namespaces": {"type": "object", "additionalProperties": false, "required": ["authority", "runtime", "detector", "publication", "public_api", "feeds", "cache", "release"], "properties": {"authority": {"type": "object", "additionalProperties": false, "required": ["backend", "url_truth", "page_family_policy"], "properties": {"backend": {"type": "object"}, "url_truth": {"type": "object"}, "page_family_policy": {"type": "object"}}}, "runtime": {"type": "object"}, "detector": {"type": "object"}, "publication": {"type": "object"}, "public_api": {"type": "object"}, "feeds": {"type": "object"}, "cache": {"type": "object"}, "release": {"type": "object"}}}, "computed_evidence": {"type": "object"}, "lineage_refs": {"type": "array"}, "redaction_summary": {"type": "object"}, "status": {"type": "string"}, "diagnosis_allowed": {"type": "boolean"}, "execution_allowed": {"const": false}, "context_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}
+}

@@ -18,6 +18,8 @@ use App\Services\SeoCouncil\Policy\CouncilAdmissionRequestFactory;
 use App\Services\SeoCouncil\Routing\CouncilConflictResolver;
 use App\Services\SeoCouncil\Routing\DeterministicMissionRouter;
 use App\Services\SeoCouncil\TechnicalDiagnosis\TechnicalDiagnosisModeRegistry;
+use App\Services\SeoCouncil\TechnicalDiagnosis\TechnicalDiagnosisRunner;
+use App\Services\SeoCouncil\TechnicalDiagnosis\TechnicalDiagnosisRuntimeGate;
 
 final class SeoCouncilOrchestrator
 {
@@ -45,6 +47,8 @@ final class SeoCouncilOrchestrator
         private readonly CouncilDependencySnapshotBuilder $dependencies,
         private readonly RuntimeCapabilitySnapshotBuilder $runtime,
         private readonly TechnicalDiagnosisModeRegistry $technicalMode,
+        private readonly TechnicalDiagnosisRunner $technicalRunner,
+        private readonly TechnicalDiagnosisRuntimeGate $technicalGate,
         private readonly PolicyGatewayRegistry $policy,
         private readonly CouncilAdmissionGateway $admissionGateway,
         private readonly CouncilAdmissionRequestFactory $admissionRequests,
@@ -69,11 +73,12 @@ final class SeoCouncilOrchestrator
         $runId = $this->runId($request, $registry, $binding);
         $releaseSha = $this->releaseSha();
         $runtime = $this->runtime->snapshot();
+        $technicalRuntime = $this->technicalMode->capabilitySnapshot();
         $baseContext = [
             'registry' => $registry,
             'binding' => $binding,
             'runtime' => $runtime,
-            'technical_runtime' => $this->technicalMode->capabilitySnapshot(),
+            'technical_runtime' => $technicalRuntime,
         ];
 
         $admission = $this->admissionGateway->admission(
@@ -113,9 +118,10 @@ final class SeoCouncilOrchestrator
         $routePlan = $this->routePlan($request, $route['roles'], $runId);
         $conflicts = $this->evidenceConflicts($request, $runId);
 
+        $technicalMission = $request->payload['mission_type'] === 'bounded_review'
+            && $request->payload['review_domain'] === 'technical';
         $status = 'SOURCE_CAPABILITY_UNAVAILABLE';
-        $stopReason = $request->payload['mission_type'] === 'bounded_review'
-            && $request->payload['review_domain'] === 'technical'
+        $stopReason = $technicalMission
             ? 'technical_diagnosis_production_disabled'
             : '11f_to_11j_modes_unavailable';
         if (in_array($route['status'], ['ROUTING_SCOPE_HOLD', 'MISSION_SCOPE_HOLD', 'REQUESTED_ROLE_EXPANSION_HOLD'], true)) {
@@ -134,6 +140,28 @@ final class SeoCouncilOrchestrator
             && $runtime['career_runtime'] !== 'available') {
             $status = 'SOURCE_CAPABILITY_UNAVAILABLE';
             $stopReason = 'career_manifest_validator_risk_open';
+        } elseif ($technicalMission && $this->technicalGate->allows($technicalRuntime)) {
+            $handoff = $routePlan[0] ?? null;
+            if (! is_array($handoff) || ($handoff['kind'] ?? null) !== 'role_handoff') {
+                $status = 'EVIDENCE_HOLD';
+                $stopReason = 'technical_handoff_missing';
+            } else {
+                $output = $this->technicalRunner->run($request, $handoff, $releaseSha, 'production_runtime');
+                if (! $this->acceptModeOutput(
+                    $output,
+                    (string) ($handoff['handoff_hash'] ?? ''),
+                    (string) ($handoff['target_role_id'] ?? ''),
+                )) {
+                    $status = 'EVIDENCE_HOLD';
+                    $stopReason = 'technical_mode_output_contract_hold';
+                } else {
+                    $routePlan[] = ['kind' => 'mode_output', ...$output];
+                    $status = ($output['status'] ?? null) === 'PASS' ? 'TECHNICAL_DIAGNOSIS_READY' : 'EVIDENCE_HOLD';
+                    $stopReason = ($output['status'] ?? null) === 'PASS'
+                        ? 'technical_diagnosis_completed'
+                        : (string) ($output['summary_code'] ?? 'technical_diagnosis_hold');
+                }
+            }
         }
 
         return $this->terminalReceipt(
@@ -248,6 +276,7 @@ final class SeoCouncilOrchestrator
             'EVIDENCE_HOLD', 'MEASUREMENT_HOLD' => 'evidence_context_verification',
             'unresolved_conflict' => 'evidence_context_verification',
             'STALE_RESUME_HOLD' => 'validate_privacy_scan',
+            'TECHNICAL_DIAGNOSIS_READY' => 'run_receipt',
             default => 'technical_mode_selection',
         };
         $stopped = false;
@@ -284,6 +313,10 @@ final class SeoCouncilOrchestrator
             $decision = (string) ($context['admission']['decision'] ?? 'HOLD');
 
             return in_array($decision, ['DENY', 'HOLD'], true) ? $decision : 'HOLD';
+        }
+
+        if ($status === 'TECHNICAL_DIAGNOSIS_READY') {
+            return 'PASS';
         }
 
         return $status;

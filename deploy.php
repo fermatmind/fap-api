@@ -1232,15 +1232,19 @@ task('seo:council-orchestration-closeout', function () {
         return;
     }
 
+    set('technical_closeout_environment', currentHost()->getAlias() === 'production' ? 'production_runtime' : 'staging_runtime');
     within('{{current_path}}/backend', function (): void {
         run(<<<'BASH'
 set -euo pipefail
 expected_sha="$(tr -d '\r\n' < ../REVISION)"
 case "$expected_sha" in (*[!0-9a-f]*|'') exit 1 ;; esac
 test "${#expected_sha}" -eq 40
-receipt="$({{bin/php}} artisan seo:council-closeout --expected-sha="$expected_sha" --json --no-interaction --no-ansi)"
+receipt="$({{bin/php}} artisan seo:council-closeout --expected-sha="$expected_sha" --closeout-environment={{technical_closeout_environment}} --json --no-interaction --no-ansi)"
 printf '%s' "$receipt" | {{bin/php}} -r '
 $payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
+$environment = (string) ($argv[2] ?? '');
+$production = $environment === 'production_runtime';
+$expectedState = $production ? 'CLOSED' : 'STAGING_READY';
 $zero = [
     "binding_schema_probe_failed", "binding_hash_drift_count", "unbound_mission_count",
     "unknown_role_count", "unknown_capability_count", "unknown_tool_count",
@@ -1278,22 +1282,46 @@ $ok = ($payload["contract_version"] ?? null) === "seo.council_closeout.v2"
     && ($payload["execution_allowed"] ?? null) === false
     && ($payload["SEO-PLATFORM-11D"] ?? null) === "CLOSED"
     && ($payload["ready_for_11E"] ?? null) === true
-    && ($payload["SEO-PLATFORM-11E"] ?? null) === "CLOSED"
-    && ($payload["ready_for_11F"] ?? null) === true
-    && ($payload["technical_diagnosis"]["receipt_version"] ?? null) === "seo.technical_diagnosis_closeout.v1"
-    && ($payload["technical_diagnosis"]["source_sha"] ?? null) === ($argv[1] ?? null)
-    && ($payload["technical_diagnosis"]["production_sha"] ?? null) === ($argv[1] ?? null)
-    && ($payload["technical_diagnosis"]["SEO-PLATFORM-11E"] ?? null) === "CLOSED"
-    && ($payload["technical_diagnosis"]["ready_for_11F"] ?? null) === true
+    && ($payload["SEO-PLATFORM-11E"] ?? null) === ($production ? "CLOSED" : "HOLD")
+    && ($payload["ready_for_11F"] ?? null) === $production
+    && ($payload["technical_diagnosis"]["receipt_version"] ?? null) === "seo.technical_diagnosis_closeout.v2"
+    && ($payload["technical_diagnosis"]["environment"] ?? null) === $environment
+    && ($payload["technical_diagnosis"]["dependency_mode"] ?? null) === "RUNTIME_READ_ONLY"
+    && ($payload["technical_diagnosis"]["closeout_state"] ?? null) === $expectedState
+    && ($payload["technical_diagnosis"]["candidate_sha"] ?? null) === ($argv[1] ?? null)
+    && ($payload["technical_diagnosis"]["observed_active_sha"] ?? null) === ($argv[1] ?? null)
+    && ($payload["technical_diagnosis"]["SEO-PLATFORM-11E"] ?? null) === ($production ? "CLOSED" : "HOLD")
+    && ($payload["technical_diagnosis"]["ready_for_11F"] ?? null) === $production
+    && ! str_contains((string) ($payload["technical_diagnosis"]["url_truth_revision"] ?? ''), "offline-eval")
+    && ! str_contains((string) ($payload["technical_diagnosis"]["runtime_evidence_revision"] ?? ''), "offline-eval")
+    && ! str_contains((string) ($payload["technical_diagnosis"]["authority_revision"] ?? ''), "offline-eval")
     && ($payload["technical_diagnosis"]["private_url_leak_count"] ?? null) === 0
     && ($payload["technical_diagnosis"]["unsupported_p0_p1_count"] ?? null) === 0
     && ($payload["technical_diagnosis"]["authority_invention_count"] ?? null) === 0
     && ($payload["technical_diagnosis"]["policy_bypass_count"] ?? null) === 0
     && ($payload["technical_diagnosis"]["write_attempt_count"] ?? null) === 0
     && ($payload["technical_diagnosis"]["shared_root_misclassification_count"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["real_dependency_binding_bypass"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["dependency_ref_mismatch_bypass"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["detector_ref_mismatch_bypass"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["cross_source_field_bypass"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["cross_source_overwrite_bypass"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["bundle_order_variance_count"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["hardcoded_negative_guarantee_count"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["orchestrator_runner_bypass"] ?? null) === 0
     && ($payload["technical_diagnosis"]["model_calls"] ?? null) === 0
     && ($payload["technical_diagnosis"]["tool_calls"] ?? null) === 0
     && ($payload["technical_diagnosis"]["external_calls"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["business_writes"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["cms_writes"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["url_truth_writes"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["canonical_writes"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["robots_writes"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["feed_writes"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["search_writes"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["active_manifest_count"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["trusted_key_count"] ?? null) === 0
+    && ($payload["technical_diagnosis"]["l4_allow_count"] ?? null) === 0
     && ($payload["technical_diagnosis"]["production_permissions"] ?? null) === 0
     && ($payload["technical_diagnosis"]["execution_allowed"] ?? null) === false
     && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["technical_diagnosis"]["receipt_hash"] ?? "")) === 1
@@ -1304,7 +1332,7 @@ foreach ($zero as $field) {
     $ok = $ok && ($payload[$field] ?? null) === 0;
 }
 exit($ok ? 0 : 1);
-' "$expected_sha"
+' "$expected_sha" "{{technical_closeout_environment}}"
 receipt_dir='{{deploy_path}}/shared/backend/storage/app/release-receipts/seo-council-orchestration'
 receipt_path="$receipt_dir/$expected_sha.json"
 receipt_owner=deploy
@@ -3517,10 +3545,10 @@ after('deploy:symlink', 'healthcheck:seo-council-anonymous');
 after('healthcheck:ops-entry-contract', 'seo:ledger-production-closeout');
 after('healthcheck:ops-entry-contract', 'seo:agent-evidence-boundary-closeout');
 after('healthcheck:ops-entry-contract', 'seo:agent-policy-gateway-closeout');
-after('healthcheck:ops-entry-contract', 'seo:council-orchestration-closeout');
 after('deploy:symlink', 'healthcheck:queue-smoke');
 after('queue:reload-workers', 'scheduler:install-managed-cron');
 after('scheduler:install-managed-cron', 'scheduler:wait-natural-heartbeat');
+after('scheduler:wait-natural-heartbeat', 'seo:council-orchestration-closeout');
 
 /**
  * A code-only release deliberately omits every task that can mutate application

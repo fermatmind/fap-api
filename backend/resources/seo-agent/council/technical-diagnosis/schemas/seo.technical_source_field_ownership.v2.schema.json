@@ -1,0 +1,8 @@
+{
+  "schema_id": "seo.technical_source_field_ownership.v2",
+  "schema_version": "2.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "ownership_version", "conflict_policy", "unknown_pair_policy", "sources"],
+  "properties": {"schema_version": {"const": "seo.technical_source_field_ownership.v2"}, "ownership_version": {"const": "2.0.0"}, "conflict_policy": {"const": "AUTHORITY_CONFLICT_HOLD"}, "unknown_pair_policy": {"const": "EVIDENCE_HOLD"}, "sources": {"type": "array", "minItems": 10}}
+}

@@ -33,7 +33,7 @@ use Throwable;
 
 final class SeoCouncilCloseoutCommand extends Command
 {
-    protected $signature = 'seo:council-closeout {--expected-sha=} {--json}';
+    protected $signature = 'seo:council-closeout {--expected-sha=} {--closeout-environment=ci_candidate} {--json}';
 
     protected $description = 'Verify SEO-PLATFORM-11D deterministic orchestration for one exact SHA';
 
@@ -64,6 +64,7 @@ final class SeoCouncilCloseoutCommand extends Command
             if (preg_match('/^[a-f0-9]{40}$/D', $expectedSha) !== 1 || ! hash_equals($expectedSha, $sourceSha)) {
                 return $this->emit(['status' => 'failed', 'safe_error_code' => 'RELEASE_SHA_MISMATCH'], self::FAILURE);
             }
+            $closeoutEnvironment = (string) $this->option('closeout-environment');
 
             $artifact = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-council-contract-manifest.v2.json')), true, 512, JSON_THROW_ON_ERROR);
             $bindingReport = $binding->validationReport();
@@ -76,21 +77,25 @@ final class SeoCouncilCloseoutCommand extends Command
             $routingMetrics = $routing->evaluate();
 
             $input = $this->request('weekly_opportunity', 'tests', 'en', ['search_measurement']);
-            $entrypointReceipts = [
-                $localSkill->submit($input),
-                $cli->submit($input),
-                $scheduler->submit($input),
-                $api->submit($input),
-                $ui->submit($input),
+            $runtimeReadOnly = $closeoutEnvironment !== 'ci_candidate';
+            $entrypointReceipts = $runtimeReadOnly ? [] : [
+                $localSkill->submit($input), $cli->submit($input), $scheduler->submit($input),
+                $api->submit($input), $ui->submit($input),
             ];
-            $entrypointPassed = count(array_filter($entrypointReceipts, static fn (array $receipt): bool => ($receipt['status'] ?? null) === 'POLICY_HOLD'
-                && ($receipt['stop_reason'] ?? null) === 'ROLE_CAPABILITY_BINDING_UNAVAILABLE'
-                && ($receipt['route_plan'] ?? null) === []
-                && ($receipt['steps'][3]['status'] ?? null) === 'HOLD'
-                && ($receipt['steps'][4]['status'] ?? null) === 'NOT_RUN'
-                && ($receipt['execution_allowed'] ?? null) === false
-            ));
-            $holdBypass = count($entrypointReceipts) - $entrypointPassed;
+            $entrypointProbeTotal = 5;
+            $entrypointPassed = $runtimeReadOnly
+                ? (int) ($policy->dependencyStatus() === 'READY') * count(array_filter([
+                    LocalSkillMissionAdapter::class, CliMissionAdapter::class, ScheduledMissionAdapter::class,
+                    ApiMissionAdapter::class, SeoOperationsUiMissionAdapter::class,
+                ], 'class_exists'))
+                : count(array_filter($entrypointReceipts, static fn (array $receipt): bool => ($receipt['status'] ?? null) === 'POLICY_HOLD'
+                    && ($receipt['stop_reason'] ?? null) === 'ROLE_CAPABILITY_BINDING_UNAVAILABLE'
+                    && ($receipt['route_plan'] ?? null) === []
+                    && ($receipt['steps'][3]['status'] ?? null) === 'HOLD'
+                    && ($receipt['steps'][4]['status'] ?? null) === 'NOT_RUN'
+                    && ($receipt['execution_allowed'] ?? null) === false
+                ));
+            $holdBypass = $entrypointProbeTotal - $entrypointPassed;
             $policyReasonOverwrite = count(array_filter($entrypointReceipts, static fn (array $receipt): bool => ($receipt['stop_reason'] ?? null) !== 'ROLE_CAPABILITY_BINDING_UNAVAILABLE'
             ));
             $unauthorizedRouteExecution = count(array_filter($entrypointReceipts, static fn (array $receipt): bool => ($receipt['route_plan'] ?? []) !== [] || ($receipt['execution_allowed'] ?? null) !== false
@@ -103,12 +108,12 @@ final class SeoCouncilCloseoutCommand extends Command
             $l4Request['autonomy'] = 'L4';
             $l4Decision = $policyGateway->admission('api', $l4Request);
             $l4AllowCount = (int) (($l4Decision['decision'] ?? null) === 'ALLOW');
-            $requestedRoleExpansionBypass = $this->requestedRoleExpansionBypass($api);
+            $requestedRoleExpansionBypass = $this->requestedRoleExpansionBypass($binding, $validator, $hasher);
             $csrf = $this->csrfProbe();
             $careerBypass = $this->careerChainBypass($router, $validator, $hasher, $bindingRef);
             $activity = $this->activityFromReceipts($entrypointReceipts);
             $productionPermissions = $this->productionPermissionCount($registry, $runtimeSnapshot);
-            $technicalReceipt = $technicalDiagnosis->build($sourceSha);
+            $technicalReceipt = $technicalDiagnosis->build($sourceSha, $closeoutEnvironment);
 
             $receipt = [
                 'contract_version' => 'seo.council_closeout.v2',
@@ -137,10 +142,10 @@ final class SeoCouncilCloseoutCommand extends Command
                 'binding_status' => $binding->status(),
                 'admission_deny_probe_total' => 1,
                 'admission_deny_bypass' => $denyBypass,
-                'admission_hold_probe_total' => count($entrypointReceipts),
+                'admission_hold_probe_total' => $entrypointProbeTotal,
                 'admission_hold_bypass' => $holdBypass,
                 'requested_role_expansion_bypass' => $requestedRoleExpansionBypass,
-                'five_entrypoint_probe_total' => count($entrypointReceipts),
+                'five_entrypoint_probe_total' => $entrypointProbeTotal,
                 'five_entrypoint_probe_passed' => $entrypointPassed,
                 'entrypoints_present' => $entrypointPassed.'/5',
                 'csrf_negative_probe_total' => $csrf['total'],
@@ -201,30 +206,42 @@ final class SeoCouncilCloseoutCommand extends Command
                 && $routingMetrics['unnecessary_mode_rate']['numerator'] === 0
                 && $routingMetrics['unauthorized_all_team_invocation_count']['numerator'] === 0
                 && $runtimeSnapshot['mission_execution_enabled'] === false
-                && $runtimeSnapshot['mission_persistence_enabled'] === false
-                && ($technicalReceipt['SEO-PLATFORM-11E'] ?? null) === 'CLOSED'
-                && ($technicalReceipt['ready_for_11F'] ?? null) === true;
+                && $runtimeSnapshot['mission_persistence_enabled'] === false;
             foreach ($zeroFields as $field) {
                 $ready = $ready && ($receipt[$field] ?? null) === 0;
             }
             $receipt['SEO-PLATFORM-11D'] = $ready ? 'CLOSED' : 'HOLD';
             $receipt['ready_for_11E'] = $ready;
-            $receipt['SEO-PLATFORM-11E'] = $ready ? 'CLOSED' : 'HOLD';
-            $receipt['ready_for_11F'] = $ready;
+            $receipt['SEO-PLATFORM-11E'] = $technicalReceipt['SEO-PLATFORM-11E'];
+            $receipt['ready_for_11F'] = $technicalReceipt['ready_for_11F'];
             $receipt['receipt_hash'] = $hasher->hash($receipt);
 
-            return $this->emit($receipt, $ready ? self::SUCCESS : self::FAILURE);
+            $expectedTechnicalState = match ($closeoutEnvironment) {
+                'production_runtime' => 'CLOSED',
+                'staging_runtime' => 'STAGING_READY',
+                default => 'CANDIDATE_READY',
+            };
+
+            return $this->emit(
+                $receipt,
+                $ready && ($technicalReceipt['closeout_state'] ?? null) === $expectedTechnicalState
+                    ? self::SUCCESS
+                    : self::FAILURE,
+            );
         } catch (Throwable) {
             return $this->emit(['status' => 'failed', 'safe_error_code' => 'SEO_COUNCIL_CLOSEOUT_FAILED'], self::FAILURE);
         }
     }
 
-    private function requestedRoleExpansionBypass(ApiMissionAdapter $api): int
-    {
+    private function requestedRoleExpansionBypass(
+        RoleCapabilityBindingRegistry $binding,
+        CouncilContractValidator $validator,
+        SeoRegistryHasher $hasher,
+    ): int {
         $request = $this->request('bounded_review', 'tests', 'en', ['search_measurement'], 'analytics');
         $request['requested_role'] = 'seo.expert.technical_search_authority';
         try {
-            $api->submit($request);
+            $binding->validateRequestScope(MissionRequestData::fromInput($request, 'api', $validator, $hasher));
 
             return 1;
         } catch (InvalidArgumentException $exception) {

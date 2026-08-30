@@ -1,0 +1,18 @@
+{
+  "schema_version": "seo.technical_source_field_ownership.v2",
+  "ownership_version": "2.0.0",
+  "conflict_policy": "AUTHORITY_CONFLICT_HOLD",
+  "unknown_pair_policy": "EVIDENCE_HOLD",
+  "sources": [
+    {"source_type": "backend_authority", "authority_type": "backend_publication_authority", "namespace": "authority.backend", "precedence": 100, "required_for_verified_fact": true, "allowed_fields": ["backend_exists", "authority_public", "backend_canonical", "counterpart_authority_exists", "required_modules_complete", "authority_revision"]},
+    {"source_type": "url_truth_projection", "authority_type": "url_truth_authority", "namespace": "authority.url_truth", "precedence": 95, "required_for_verified_fact": true, "allowed_fields": ["authority_public", "url_truth_canonical", "policy_indexable", "retired", "indexability_state", "url_truth_revision", "sanitized_public_url_reference"]},
+    {"source_type": "page_family_policy", "authority_type": "page_family_policy_authority", "namespace": "authority.page_family_policy", "precedence": 90, "required_for_verified_fact": true, "allowed_fields": ["page_family", "policy_indexable", "counterpart_indexable", "policy_version"]},
+    {"source_type": "runtime_observation", "authority_type": "public_runtime_observation", "namespace": "runtime", "precedence": 60, "required_for_verified_fact": true, "allowed_fields": ["runtime_status", "observed_noindex", "frontend_canonical", "final_url", "meta_robots", "x_robots_tag", "visible_content_present", "skeleton_only", "jsonld_has_content", "self_reference", "reciprocal", "canonical_consistent", "historical_alias_as_canonical", "invented_locale", "frontend_release", "partial_deployment", "node_id", "observation_id", "shared_component", "sanitized_public_url_reference", "requested_actions", "requested_execution", "requested_allow"]},
+    {"source_type": "detector_result", "authority_type": "detector_observation", "namespace": "detector", "precedence": 55, "required_for_verified_fact": true, "allowed_fields": ["detector_code", "root_cause_code"]},
+    {"source_type": "publication_projection", "authority_type": "publication_projection_authority", "namespace": "publication", "precedence": 85, "required_for_verified_fact": true, "allowed_fields": ["publication_indexable", "publication_eligible", "authority_public", "published_revision"]},
+    {"source_type": "public_api_projection", "authority_type": "public_api_observation", "namespace": "public_api", "precedence": 65, "required_for_verified_fact": false, "allowed_fields": ["api_payload_complete", "public_api_source_hash", "render_revision"]},
+    {"source_type": "feed_observation", "authority_type": "feed_observation", "namespace": "feeds", "precedence": 50, "required_for_verified_fact": true, "allowed_fields": ["feed_canonical", "sitemap_matches_authority", "llms_matches_authority", "llms_full_matches_authority", "private_feed_url", "sanitized_public_url_reference"]},
+    {"source_type": "cache_projection", "authority_type": "cache_observation", "namespace": "cache", "precedence": 45, "required_for_verified_fact": false, "allowed_fields": ["cache_revision", "active_pointer", "cached_noindex", "lkg_used_as_authority"]},
+    {"source_type": "release_evidence", "authority_type": "release_authority", "namespace": "release", "precedence": 80, "required_for_verified_fact": true, "allowed_fields": ["deployment_sha", "deployment_revision", "production_sha"]}
+  ]
+}

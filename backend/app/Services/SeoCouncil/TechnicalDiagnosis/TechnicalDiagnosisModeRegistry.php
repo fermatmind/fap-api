@@ -17,7 +17,8 @@ final class TechnicalDiagnosisModeRegistry
     public function references(): array
     {
         $manifest = $this->contracts->manifest();
-        $output = collect((array) $manifest['contracts'])->firstWhere('id', 'seo.technical_diagnosis_output.v1');
+        $output = collect((array) $manifest['contracts'])->firstWhere('id', 'seo.technical_diagnosis_output.v2');
+        $context = collect((array) $manifest['contracts'])->firstWhere('id', 'seo.technical_diagnosis_evidence_context.v2');
 
         return [
             'technical_diagnosis_mode_version' => $manifest['mode']['version'],
@@ -28,6 +29,10 @@ final class TechnicalDiagnosisModeRegistry
             'technical_diagnosis_policy_hash' => $manifest['policy']['hash'],
             'output_schema_version' => $output['version'] ?? null,
             'output_schema_hash' => $output['hash'] ?? null,
+            'context_schema_version' => $context['version'] ?? null,
+            'context_schema_hash' => $context['hash'] ?? null,
+            'source_field_ownership_version' => $manifest['source_field_ownership']['version'],
+            'source_field_ownership_hash' => $manifest['source_field_ownership']['hash'],
         ];
     }
 
@@ -35,7 +40,7 @@ final class TechnicalDiagnosisModeRegistry
     public function capabilitySnapshot(): array
     {
         $snapshot = [
-            'snapshot_id' => 'seo.technical_diagnosis_runtime_capability_snapshot.v1',
+            'snapshot_id' => 'seo.technical_diagnosis_runtime_capability_snapshot.v2',
             'mode_id' => 'technical_search_diagnosis',
             'mode_state' => 'OFFLINE_EVAL_READY',
             'production_model_enabled' => false,

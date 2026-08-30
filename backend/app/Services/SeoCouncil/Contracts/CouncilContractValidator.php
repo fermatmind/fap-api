@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\SeoCouncil\Contracts;
 
+use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use App\Services\SeoAgentGovernance\SeoRoleCapabilityRegistry;
 use App\Services\SeoAgentPolicyGateway\PolicyGatewayPrivacyGuard;
 use App\Services\SeoCouncil\Governance\RoleCapabilityBindingRegistry;
@@ -21,6 +22,7 @@ final class CouncilContractValidator
         private readonly PolicyGatewayPrivacyGuard $privacy,
         private readonly SeoRoleCapabilityRegistry $roles,
         private readonly RoleCapabilityBindingRegistry $binding,
+        private readonly SeoRegistryHasher $hasher,
     ) {}
 
     /** @param array<string, mixed> $input @return array<string, mixed> */
@@ -85,7 +87,8 @@ final class CouncilContractValidator
             && ($output['model_calls'] ?? null) === 0
             && ($output['tool_calls'] ?? null) === 0
             && ($output['external_calls'] ?? null) === 0
-            && ($output['write_count'] ?? null) === 0;
+            && ($output['write_count'] ?? null) === 0
+            && hash_equals($this->hasher->hashWithout($output, 'output_hash'), (string) ($output['output_hash'] ?? ''));
     }
 
     /** @return list<string> */

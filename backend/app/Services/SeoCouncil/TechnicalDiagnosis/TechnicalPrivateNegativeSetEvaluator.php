@@ -62,16 +62,25 @@ final class TechnicalPrivateNegativeSetEvaluator
     private function request(int $index, string $publicRef): array
     {
         $request = [
-            'diagnosis_id' => 'diagnosis:private-probe:'.$index, 'diagnosis_version' => 1,
+            'diagnosis_id' => 'diagnosis:private-probe:'.$index, 'diagnosis_version' => 2,
             'mission_id' => 'mission:private-probe:'.$index, 'run_id' => 'run:private-probe:'.$index,
             'role_id' => 'seo.expert.technical_search_authority', 'mode_id' => 'technical_search_diagnosis',
             'page_family' => 'tests', 'locale' => 'en',
-            'evidence_bundle_refs' => [['bundle_id' => 'bundle:private-probe:'.$index, 'bundle_version' => 1, 'bundle_hash' => hash('sha256', 'private-probe:'.$index)]],
-            'dependency_snapshot_ref' => ['snapshot_hash' => str_repeat('d', 64)],
-            'detector_registry_ref' => ['version' => 'fixture', 'hash' => str_repeat('e', 64)],
+            'evidence_bundle_refs' => [[
+                'bundle_id' => 'bundle:private-probe:'.$index, 'bundle_version' => 1,
+                'bundle_hash' => hash('sha256', 'private-probe:'.$index),
+                'source_type' => 'detector_result', 'authority_type' => 'detector_observation',
+            ]],
+            'dependency_snapshot_ref' => [
+                'snapshot_id' => 'snapshot:private-probe:'.$index,
+                'snapshot_version' => 'seo.technical_dependency_snapshot.v2',
+                'snapshot_hash' => str_repeat('d', 64), 'production_sha' => str_repeat('a', 40),
+                'environment' => 'ci_candidate',
+            ],
+            'detector_registry_ref' => ['registry_version' => 'fixture', 'registry_hash' => str_repeat('e', 64)],
             'url_truth_revision' => 'url-truth:fixture:v1', 'runtime_revision' => 'runtime:fixture:v1',
             'deployment_revision' => str_repeat('a', 40), 'authority_revision' => 'authority:fixture:v1',
-            'requested_scope' => ['sanitized_public_refs' => [$publicRef]],
+            'requested_scope' => ['sanitized_public_refs' => [$publicRef], 'max_urls' => 1, 'page_family' => 'tests', 'locale' => 'en'],
             'requested_at' => '2026-08-30T00:00:00Z', 'execution_allowed' => false, 'allow_delegation' => false,
         ];
 
@@ -83,10 +92,22 @@ final class TechnicalPrivateNegativeSetEvaluator
     {
         $context = [
             'context_id' => hash('sha256', 'private-context:'.$index),
-            'context_version' => 'seo.technical_diagnosis_evidence_context.v1',
+            'context_version' => 'seo.technical_diagnosis_evidence_context.v2',
             'request_hash' => $request['request_hash'],
-            'bundle_refs' => [['bundle_id' => 'bundle:private-probe:'.$index, 'bundle_version' => 1, 'bundle_hash' => hash('sha256', 'private-probe:'.$index)]],
-            'payload' => ['detector_code' => 'false_404', 'observations' => ['authority_public' => false, 'runtime_status' => 200], 'source_count' => 2, 'repeat_observation' => true, 'revision_consistent' => true, 'affected_url_count' => 1, 'affected_family_count' => 1],
+            'bundle_refs' => $request['evidence_bundle_refs'],
+            'namespaces' => [
+                'authority' => ['backend' => ['backend_exists' => true], 'url_truth' => ['authority_public' => true], 'page_family_policy' => []],
+                'runtime' => ['runtime_status' => 404], 'detector' => ['detector_code' => 'false_404'],
+                'publication' => [], 'public_api' => [], 'feeds' => [], 'cache' => [],
+                'release' => ['deployment_sha' => str_repeat('a', 40), 'deployment_revision' => str_repeat('a', 40)],
+            ],
+            'computed_evidence' => [
+                'source_count' => 4, 'runtime_observation_count' => 2, 'node_count' => 2,
+                'affected_url_count' => 1, 'affected_family_count' => 1, 'repeat_observation' => true,
+                'current_revision_consistent' => true, 'direct_reproducible_observation' => true,
+                'required_authority_sources_present' => true,
+                'source_types' => ['backend_authority', 'release_evidence', 'runtime_observation', 'url_truth_projection'],
+            ],
             'lineage_refs' => [], 'redaction_summary' => ['redacted_field_count' => 0, 'redacted_fields' => []],
             'status' => 'READY', 'diagnosis_allowed' => true, 'execution_allowed' => false,
         ];

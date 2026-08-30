@@ -1,0 +1,97 @@
+{
+    "manifest_id": "seo.technical_diagnosis_contract_manifest.v2",
+    "manifest_version": "2.0.0",
+    "contracts": [
+        {
+            "id": "seo.technical_diagnosis_request.v2",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/council/technical-diagnosis/schemas/seo.technical_diagnosis_request.v2.schema.json",
+            "hash": "dd0966af6bd1c11ec5caeb32be0895a1ca87e604bbf28b9085bc6ee2863813e8"
+        },
+        {
+            "id": "seo.technical_affected_scope.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/technical-diagnosis/schemas/seo.technical_affected_scope.v1.schema.json",
+            "hash": "2dc84891613c43ef47eb6b13c63b4c763e417b8a6ce774e470e001dd4a9f25f5"
+        },
+        {
+            "id": "seo.technical_root_cause_hypothesis.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/technical-diagnosis/schemas/seo.technical_root_cause_hypothesis.v1.schema.json",
+            "hash": "9b1fa237f6bc439f6626798d8c25543f882f3c6af20ecc72af688b4d6b16d21c"
+        },
+        {
+            "id": "seo.technical_evidence_gap.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/technical-diagnosis/schemas/seo.technical_evidence_gap.v1.schema.json",
+            "hash": "e72796bb7277c7bbb20a0386c3b80375c7a0120ff4de90e8a877ccad32077ce2"
+        },
+        {
+            "id": "seo.technical_diagnosis_finding.v2",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/council/technical-diagnosis/schemas/seo.technical_diagnosis_finding.v2.schema.json",
+            "hash": "c573f6240c92b485d875a5536b0ece7782ea9653748aa14911a0847714f7fad0"
+        },
+        {
+            "id": "seo.technical_diagnosis_output.v2",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/council/technical-diagnosis/schemas/seo.technical_diagnosis_output.v2.schema.json",
+            "hash": "0016083556fa521c2394d338e1cc1b884d4e864be658b96ed824ccbc5ecd535d"
+        },
+        {
+            "id": "seo.technical_diagnosis_evidence_context.v2",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/council/technical-diagnosis/schemas/seo.technical_diagnosis_evidence_context.v2.schema.json",
+            "hash": "1ebf50048e76d1eb503d5596cfd5b12ab9b2d60c9b0f8b2a23b9be66c14ebcd9"
+        },
+        {
+            "id": "seo.technical_source_field_ownership.v2",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/council/technical-diagnosis/schemas/seo.technical_source_field_ownership.v2.schema.json",
+            "hash": "4f210d507817d17fd72a8c9d27b9169ea9fba4e81d900983811440e67b05fe43"
+        },
+        {
+            "id": "seo.technical_diagnosis_receipt.v2",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/council/technical-diagnosis/schemas/seo.technical_diagnosis_receipt.v2.schema.json",
+            "hash": "997af56aa3bd03f77a4c967158380e5c41f00a0a9d350d0fb7e634f0e9eb609b"
+        }
+    ],
+    "mode": {
+        "id": "technical_search_diagnosis",
+        "version": "2.0.0",
+        "hash": "6b486ad5d1c88d72f636f9985de72634606328a82cbf1b7e1d8fa1b3c9789380",
+        "path": "backend/resources/seo-agent/council/technical-diagnosis/seo.technical_diagnosis_mode.v2.json"
+    },
+    "prompt": {
+        "id": "seo.technical_search_diagnosis.prompt.v1",
+        "version": "1.0.0",
+        "hash": "516d910fc2d2b1eb9be2a450168a07a546245e59f47d359bfb85597273127d04",
+        "path": "backend/resources/seo-agent/council/technical-diagnosis/seo.technical_search_diagnosis.prompt.v1.md"
+    },
+    "policy": {
+        "id": "seo.technical_diagnosis_policy",
+        "version": "2.0.0",
+        "hash": "763cb155417b9da19fd53355993549df9f88a4d8b340e8e3e2027270f076250d",
+        "path": "backend/resources/seo-agent/council/technical-diagnosis/seo.technical_diagnosis_policy.v2.json"
+    },
+    "source_field_ownership": {
+        "id": "seo.technical_source_field_ownership.v2",
+        "version": "2.0.0",
+        "hash": "49585652df42e72eee5cc8e3e87a0042f4179666b824aa3d0215ed8e65585069",
+        "path": "backend/resources/seo-agent/council/technical-diagnosis/seo.technical_source_field_ownership.v2.json"
+    },
+    "fixtures": {
+        "id": "seo.technical_diagnosis_fixtures.v1",
+        "version": "1.0.0",
+        "hash": "47df44c4c48696455e2b6a0dd947fbec28db0a8cf76bd82d1dfc258d6d1c711f",
+        "path": "backend/resources/seo-agent/council/technical-diagnosis/fixtures/seo.technical_diagnosis_fixtures.v1.json"
+    },
+    "negative_guarantees": {
+        "binding_v1_or_v2_changed": false,
+        "new_role": false,
+        "new_orchestrator": false,
+        "activity_is_probe_derived": true
+    },
+    "manifest_hash": "3834426b74e9a2f3dbff38d0093ec014530bc7f318b24858ebd973e776622b91"
+}

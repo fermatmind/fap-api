@@ -627,7 +627,7 @@ jobs:
             tests/Feature/SeoIntel/SeoPlatform11EDependencyContextTest.php \
             tests/Feature/SeoIntel/SeoPlatform11EDiagnosisEvaluationTest.php \
             tests/Feature/SeoIntel/SeoPlatform11ERoutingCloseoutTest.php
-          php artisan seo:council-closeout --expected-sha="$GITHUB_SHA" --json > ../seo-council-orchestration-closeout.json
+          php artisan seo:council-closeout --expected-sha="$GITHUB_SHA" --closeout-environment=ci_candidate --json > ../seo-council-orchestration-closeout.json
           jq -e --arg sha "$GITHUB_SHA" '
             .contract_version == "seo.council_closeout.v2"
             and .source_sha == $sha
@@ -664,10 +664,13 @@ jobs:
             and .action_manifest_ref.id == "seo.action_scoped_manifest.v1"
             and .execution_allowed == false
             and ."SEO-PLATFORM-11D" == "CLOSED" and .ready_for_11E == true
-            and ."SEO-PLATFORM-11E" == "CLOSED" and .ready_for_11F == true
-            and .technical_diagnosis.receipt_version == "seo.technical_diagnosis_closeout.v1"
-            and .technical_diagnosis.source_sha == $sha and .technical_diagnosis.production_sha == $sha
-            and .technical_diagnosis."SEO-PLATFORM-11E" == "CLOSED" and .technical_diagnosis.ready_for_11F == true
+            and ."SEO-PLATFORM-11E" == "HOLD" and .ready_for_11F == false
+            and .technical_diagnosis.receipt_version == "seo.technical_diagnosis_closeout.v2"
+            and .technical_diagnosis.environment == "ci_candidate"
+            and .technical_diagnosis.dependency_mode == "OFFLINE_FIXTURE"
+            and .technical_diagnosis.closeout_state == "CANDIDATE_READY"
+            and .technical_diagnosis.candidate_sha == $sha and .technical_diagnosis.observed_active_sha == null
+            and .technical_diagnosis."SEO-PLATFORM-11E" == "HOLD" and .technical_diagnosis.ready_for_11F == false
             and .technical_diagnosis.fixture_metrics.false_positive == 0
             and .technical_diagnosis.fixture_metrics.false_negative == 0
             and .technical_diagnosis.private_url_leak_count == 0
@@ -676,6 +679,14 @@ jobs:
             and .technical_diagnosis.policy_bypass_count == 0
             and .technical_diagnosis.write_attempt_count == 0
             and .technical_diagnosis.shared_root_misclassification_count == 0
+            and .technical_diagnosis.real_dependency_binding_bypass == 0
+            and .technical_diagnosis.dependency_ref_mismatch_bypass == 0
+            and .technical_diagnosis.detector_ref_mismatch_bypass == 0
+            and .technical_diagnosis.cross_source_field_bypass == 0
+            and .technical_diagnosis.cross_source_overwrite_bypass == 0
+            and .technical_diagnosis.bundle_order_variance_count == 0
+            and .technical_diagnosis.hardcoded_negative_guarantee_count == 0
+            and .technical_diagnosis.orchestrator_runner_bypass == 0
             and .technical_diagnosis.model_calls == 0 and .technical_diagnosis.tool_calls == 0
             and .technical_diagnosis.external_calls == 0 and .technical_diagnosis.production_permissions == 0
             and .technical_diagnosis.execution_allowed == false
@@ -875,10 +886,13 @@ jobs:
               and .action_manifest_ref.id == "seo.action_scoped_manifest.v1"
               and .execution_allowed == false
               and ."SEO-PLATFORM-11D" == "CLOSED" and .ready_for_11E == true
-              and ."SEO-PLATFORM-11E" == "CLOSED" and .ready_for_11F == true
-              and .technical_diagnosis.receipt_version == "seo.technical_diagnosis_closeout.v1"
-              and .technical_diagnosis.source_sha == $sha and .technical_diagnosis.production_sha == $sha
-              and .technical_diagnosis."SEO-PLATFORM-11E" == "CLOSED" and .technical_diagnosis.ready_for_11F == true
+              and ."SEO-PLATFORM-11E" == "HOLD" and .ready_for_11F == false
+              and .technical_diagnosis.receipt_version == "seo.technical_diagnosis_closeout.v2"
+              and .technical_diagnosis.environment == "ci_candidate"
+              and .technical_diagnosis.dependency_mode == "OFFLINE_FIXTURE"
+              and .technical_diagnosis.closeout_state == "CANDIDATE_READY"
+              and .technical_diagnosis.candidate_sha == $sha and .technical_diagnosis.observed_active_sha == null
+              and .technical_diagnosis."SEO-PLATFORM-11E" == "HOLD" and .technical_diagnosis.ready_for_11F == false
               and .technical_diagnosis.fixture_metrics.false_positive == 0
               and .technical_diagnosis.fixture_metrics.false_negative == 0
               and .technical_diagnosis.private_url_leak_count == 0
@@ -887,6 +901,14 @@ jobs:
               and .technical_diagnosis.policy_bypass_count == 0
               and .technical_diagnosis.write_attempt_count == 0
               and .technical_diagnosis.shared_root_misclassification_count == 0
+              and .technical_diagnosis.real_dependency_binding_bypass == 0
+              and .technical_diagnosis.dependency_ref_mismatch_bypass == 0
+              and .technical_diagnosis.detector_ref_mismatch_bypass == 0
+              and .technical_diagnosis.cross_source_field_bypass == 0
+              and .technical_diagnosis.cross_source_overwrite_bypass == 0
+              and .technical_diagnosis.bundle_order_variance_count == 0
+              and .technical_diagnosis.hardcoded_negative_guarantee_count == 0
+              and .technical_diagnosis.orchestrator_runner_bypass == 0
               and .technical_diagnosis.model_calls == 0 and .technical_diagnosis.tool_calls == 0
               and .technical_diagnosis.external_calls == 0 and .technical_diagnosis.production_permissions == 0
               and .technical_diagnosis.execution_allowed == false

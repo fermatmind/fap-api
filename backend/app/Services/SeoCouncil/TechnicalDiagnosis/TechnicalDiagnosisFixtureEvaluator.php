@@ -109,22 +109,33 @@ final class TechnicalDiagnosisFixtureEvaluator
         $hash = hash('sha256', 'fixture-bundle:'.$fixture['id']);
         $request = [
             'diagnosis_id' => 'diagnosis:fixture:'.$fixture['id'],
-            'diagnosis_version' => 1,
+            'diagnosis_version' => 2,
             'mission_id' => 'mission:fixture:'.$fixture['id'],
             'run_id' => 'run:fixture:'.$fixture['id'],
             'role_id' => 'seo.expert.technical_search_authority',
             'mode_id' => 'technical_search_diagnosis',
             'page_family' => 'tests',
             'locale' => 'en',
-            'evidence_bundle_refs' => [['bundle_id' => 'bundle:fixture:'.$fixture['id'], 'bundle_version' => 1, 'bundle_hash' => $hash]],
-            'dependency_snapshot_ref' => ['snapshot_hash' => str_repeat('d', 64)],
-            'detector_registry_ref' => ['version' => 'fixture', 'hash' => str_repeat('e', 64)],
+            'evidence_bundle_refs' => [[
+                'bundle_id' => 'bundle:fixture:'.$fixture['id'], 'bundle_version' => 1,
+                'bundle_hash' => $hash, 'source_type' => 'detector_result',
+                'authority_type' => 'detector_observation',
+            ]],
+            'dependency_snapshot_ref' => [
+                'snapshot_id' => 'snapshot:fixture:'.$fixture['id'],
+                'snapshot_version' => 'seo.technical_dependency_snapshot.v2',
+                'snapshot_hash' => str_repeat('d', 64),
+                'production_sha' => str_repeat('a', 40),
+                'environment' => 'ci_candidate',
+            ],
+            'detector_registry_ref' => ['registry_version' => 'fixture', 'registry_hash' => str_repeat('e', 64)],
             'url_truth_revision' => 'url-truth:fixture:v1',
             'runtime_revision' => 'runtime:fixture:v1',
             'deployment_revision' => str_repeat('a', 40),
             'authority_revision' => 'authority:fixture:v1',
             'requested_scope' => [
                 'sanitized_public_refs' => [(string) ($fixture['public_ref'] ?? 'https://example.test/en/tests/public-page')],
+                'max_urls' => 32, 'page_family' => 'tests', 'locale' => 'en',
             ],
             'requested_at' => '2026-08-30T00:00:00Z',
             'execution_allowed' => false,
@@ -133,6 +144,8 @@ final class TechnicalDiagnosisFixtureEvaluator
         foreach ((array) ($fixture['request_overrides'] ?? []) as $key => $value) {
             $request[(string) $key] = $value;
         }
+        $request['requested_scope']['page_family'] = $request['page_family'];
+        $request['requested_scope']['locale'] = $request['locale'];
 
         return $this->contracts->sealRequest($request);
     }
@@ -140,25 +153,58 @@ final class TechnicalDiagnosisFixtureEvaluator
     /** @param array<string, mixed> $request @param array<string, mixed> $fixture @return array<string, mixed> */
     private function context(array $request, array $fixture): array
     {
-        $payload = [
-            'detector_code' => $fixture['detector'],
-            'observations' => $fixture['observations'],
-            'source_count' => 3,
-            'repeat_observation' => true,
-            'revision_consistent' => true,
-            'affected_url_count' => (int) ($fixture['affected_url_count'] ?? data_get($fixture, 'observations.affected_url_count', 1)),
-            'affected_family_count' => (int) ($fixture['affected_family_count'] ?? data_get($fixture, 'observations.affected_family_count', 1)),
+        $observations = (array) $fixture['observations'];
+        $runtimeFields = [
+            'runtime_status', 'observed_noindex', 'frontend_canonical', 'final_url',
+            'visible_content_present', 'skeleton_only', 'self_reference', 'reciprocal',
+            'canonical_consistent', 'historical_alias_as_canonical', 'frontend_release',
+            'shared_component', 'requested_actions', 'requested_allow',
+        ];
+        $namespaces = [
+            'authority' => [
+                'backend' => $this->select($observations, ['backend_exists', 'backend_canonical', 'counterpart_authority_exists', 'required_modules_complete']),
+                'url_truth' => $this->select($observations, ['authority_public', 'retired', 'url_truth_canonical']),
+                'page_family_policy' => $this->select($observations, ['policy_indexable', 'counterpart_indexable']),
+            ],
+            'runtime' => $this->select($observations, $runtimeFields),
+            'detector' => ['detector_code' => $fixture['detector']],
+            'publication' => [],
+            'public_api' => [],
+            'feeds' => $this->select($observations, ['feed_canonical', 'sitemap_matches_authority', 'llms_matches_authority', 'llms_full_matches_authority', 'private_feed_url']),
+            'cache' => $this->select($observations, ['cache_revision', 'active_pointer', 'cached_noindex']),
+            'release' => [
+                'deployment_revision' => $observations['deployment_revision'] ?? str_repeat('a', 40),
+                'deployment_sha' => $observations['production_sha'] ?? str_repeat('a', 40),
+                'production_sha' => $observations['production_sha'] ?? str_repeat('a', 40),
+            ],
         ];
         if (isset($fixture['shared_component'])) {
-            $payload['shared_component'] = $fixture['shared_component'];
+            $namespaces['runtime']['shared_component'] = $fixture['shared_component'];
         }
         $status = (string) ($fixture['context_status'] ?? 'READY');
+        $runtimeCount = (int) ($observations['observation_count'] ?? 2);
+        $nodeCount = (int) ($observations['node_count'] ?? 2);
+        $computed = [
+            'source_count' => 5,
+            'runtime_observation_count' => $runtimeCount,
+            'node_count' => $nodeCount,
+            'affected_url_count' => (int) ($fixture['affected_url_count'] ?? ($observations['affected_url_count'] ?? 1)),
+            'affected_family_count' => (int) ($fixture['affected_family_count'] ?? ($observations['affected_family_count'] ?? 1)),
+            'repeat_observation' => $runtimeCount >= 2,
+            'current_revision_consistent' => ($observations['revision_consistent'] ?? true) === true,
+            'direct_reproducible_observation' => $runtimeCount >= 2 && $nodeCount >= 2,
+            'required_authority_sources_present' => true,
+            'source_types' => ['backend_authority', 'detector_result', 'release_evidence', 'runtime_observation', 'url_truth_projection'],
+            'authority_conflict' => ($observations['authority_conflict'] ?? false) === true,
+            'authority_invention' => isset($observations['authority_created_by']),
+        ];
         $context = [
             'context_id' => hash('sha256', 'context:'.$fixture['id']),
-            'context_version' => 'seo.technical_diagnosis_evidence_context.v1',
+            'context_version' => 'seo.technical_diagnosis_evidence_context.v2',
             'request_hash' => $request['request_hash'],
-            'bundle_refs' => [['bundle_id' => 'bundle:fixture:'.$fixture['id'], 'bundle_version' => 1, 'bundle_hash' => hash('sha256', 'fixture-bundle:'.$fixture['id'])]],
-            'payload' => $payload,
+            'bundle_refs' => $request['evidence_bundle_refs'],
+            'namespaces' => $status === 'READY' ? $namespaces : [],
+            'computed_evidence' => $computed,
             'lineage_refs' => [],
             'redaction_summary' => ['redacted_field_count' => 0, 'redacted_fields' => []],
             'status' => $status,
@@ -168,5 +214,11 @@ final class TechnicalDiagnosisFixtureEvaluator
         $context['context_hash'] = $this->hasher->hash($context);
 
         return $context;
+    }
+
+    /** @param array<string, mixed> $source @param list<string> $fields @return array<string, mixed> */
+    private function select(array $source, array $fields): array
+    {
+        return array_intersect_key($source, array_flip($fields));
     }
 }
