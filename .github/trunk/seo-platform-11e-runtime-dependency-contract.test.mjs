@@ -53,12 +53,12 @@ test("11E binds isolated GitHub Environment runtime values to both deployment jo
   }
   for (const key of privateRuntimeKeys) {
     const pattern = new RegExp(`${key}: \\$\\{\\{ secrets\\.${key} \\}\\}`, "g");
-    assert.equal((deploy.match(pattern) || []).length, 2, key);
+    assert.equal((deploy.match(pattern) || []).length, 3, key);
     assert.doesNotMatch(deploy, new RegExp(`${key}: \\$\\{\\{ vars\\.`));
   }
   for (const key of migrationKeys) {
     const pattern = new RegExp(`${key}: \\$\\{\\{ secrets\\.${key} \\}\\}`, "g");
-    assert.equal((deploy.match(pattern) || []).length, 2, key);
+    assert.equal((deploy.match(pattern) || []).length, 3, key);
   }
   for (const job of ["staging", "production"]) {
     const header = jobHeader(job);
@@ -68,6 +68,7 @@ test("11E binds isolated GitHub Environment runtime values to both deployment jo
   }
   assert.doesNotMatch(jobHeader("production"), /SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY/);
   assert.equal((deploy.match(/SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY: \$\{\{ secrets\.SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY \}\}/g) || []).length, 1);
+  assert.match(deploy, /- name: Materialize inactive staging measurement candidate\n        if:[^\n]+\n        env:\n(?:          SEO_INTEL_[^\n]+\n){7}        run:/);
   assert.match(deploy, /- name: Deploy staging and run repository smoke chain\n        env:\n(?:          SEO_INTEL_[^\n]+\n){7}        run:/);
   assert.match(deploy, /- name: Deploy once and automatically restore LKG after committed smoke failure[\s\S]+?        env:\n(?:          SEO_INTEL_[^\n]+\n){8}        run:/);
   assert.doesNotMatch(deploy, /SEO_INTEL_DB_(HOST|PORT|DATABASE): \\$\\{\\{ vars\./);
