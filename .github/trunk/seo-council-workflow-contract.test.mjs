@@ -45,6 +45,7 @@ test("11D and 11E deployment stay disabled and write immutable exact-SHA closeou
   assert.match(deployer, /after\('scheduler:wait-natural-heartbeat', 'seo:council-orchestration-closeout'\)/);
   assert.match(deployer, /set\('private_result_authority_publish_required', true\)/);
   assert.equal((deployer.match(/get\('private_result_authority_publish_required', true\)/g) || []).length, 4);
+  assert.match(deployer, /"unavailable_dependency_refs" => \$unavailableRefs/);
   assert.doesNotMatch(deployer, /seo\.council_closeout\.v1/);
   assert.match(deployer, /release-receipts\/seo-council-orchestration/);
   assert.match(deployer, /task\('healthcheck:seo-council-anonymous'/);

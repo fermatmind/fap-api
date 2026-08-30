@@ -1247,6 +1247,16 @@ else
 $payload = json_decode(stream_get_contents(STDIN), true);
 $technical = is_array($payload["technical_diagnosis"] ?? null) ? $payload["technical_diagnosis"] : [];
 $nonZero = [];
+$unavailableRefs = [];
+foreach ([
+    "url_truth_revision", "url_truth_projection_hash", "runtime_evidence_revision",
+    "runtime_evidence_hash", "authority_revision", "deployment_revision",
+] as $field) {
+    $value = $technical[$field] ?? null;
+    if (!is_string($value) || $value === "" || $value === "unavailable") {
+        $unavailableRefs[] = $field;
+    }
+}
 foreach ([
     "real_dependency_binding_bypass", "dependency_ref_mismatch_bypass", "detector_ref_mismatch_bypass",
     "cross_source_field_bypass", "cross_source_overwrite_bypass", "bundle_order_variance_count",
@@ -1270,6 +1280,7 @@ $diagnostic = [
     "historical_authority_drift_count" => $technical["authority_metrics"]["historical_authority_drift_count"] ?? null,
     "active_sha_match" => isset($technical["candidate_sha"], $technical["observed_active_sha"])
         && hash_equals((string) $technical["candidate_sha"], (string) $technical["observed_active_sha"]),
+    "unavailable_dependency_refs" => $unavailableRefs,
     "non_zero_metrics" => $nonZero,
 ];
 fwrite(STDERR, "SEO Council safe closeout diagnostic: ".json_encode($diagnostic, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES).PHP_EOL);
