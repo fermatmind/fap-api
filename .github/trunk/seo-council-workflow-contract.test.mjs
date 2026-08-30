@@ -30,6 +30,7 @@ test("11D and 11E extend only the permanent CI and deploy control plane", () => 
   assert.match(deploy, /production_runtime/);
   assert.match(deploy, /private_result_authority_publish_required/);
   assert.match(deploy, /\.classification\.categories == \["infrastructure_deployment"\]/);
+  assert.match(deploy, /if \[ "\$private_result_authority_publish_required" = false \]; then\s+#[^\n]*\n\s+#[^\n]*\n\s+career_current=false\s+career_current_full_scan=false/);
 });
 
 test("11D and 11E deployment stay disabled and write immutable exact-SHA closeout receipts only", () => {
