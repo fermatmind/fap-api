@@ -1,0 +1,12 @@
+{
+  "schema_id": "seo.measurement_finding.v2", "schema_version": "2.0.0", "type": "object", "additionalProperties": false,
+  "required": ["version", "role_id", "mode_id", "page_family", "locale", "source_capability", "measurement_state", "aggregate_metrics", "verified_facts", "associations", "hypotheses", "unknowns", "holds", "evidence_refs", "execution_allowed", "finding_hash"],
+  "properties": {
+    "version": {"const": "seo.measurement_finding.v2"}, "role_id": {"type": "string"}, "mode_id": {"type": "string"},
+    "page_family": {"type": "string"}, "locale": {"enum": ["en", "zh-CN", "und"]},
+    "source_capability": {"type": "object"}, "measurement_state": {"type": "object"}, "aggregate_metrics": {"type": "object"},
+    "verified_facts": {"type": "array"}, "associations": {"type": "array"}, "hypotheses": {"type": "array"},
+    "unknowns": {"type": "array"}, "holds": {"type": "array"}, "evidence_refs": {"type": "array"},
+    "execution_allowed": {"const": false}, "finding_hash": {"type": "string"}
+  }
+}

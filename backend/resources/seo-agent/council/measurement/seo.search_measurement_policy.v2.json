@@ -1,0 +1,12 @@
+{
+  "policy_id": "seo.search_measurement_policy.v2",
+  "policy_version": "2.0.0",
+  "aggregate_only": true,
+  "forbidden_fields": ["query", "raw_query", "query_display_masked", "canonical_url", "user_id", "attempt_id", "token"],
+  "required_windows": [7, 28, 90],
+  "source_conflict_decision": "HOLD",
+  "source_capability_authority": "runtime_readmodel",
+  "fixture_or_cross_environment_fallback_allowed": false,
+  "production_execution_enabled": false,
+  "execution_allowed": false
+}

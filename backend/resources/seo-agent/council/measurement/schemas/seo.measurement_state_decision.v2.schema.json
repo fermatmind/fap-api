@@ -1,0 +1,10 @@
+{
+  "schema_id": "seo.measurement_state_decision.v2", "schema_version": "2.0.0", "type": "object", "additionalProperties": false,
+  "required": ["version", "state", "conflict_detected", "authority_revision", "source_ref", "window", "freshness", "state_reason", "execution_allowed", "canonical_hash"],
+  "properties": {
+    "version": {"const": "seo.measurement_state_decision.v2"}, "state": {"enum": ["valid", "valid_zero", "missing", "delayed", "window_incomplete", "mapping_failed", "hold"]},
+    "conflict_detected": {"type": "boolean"}, "authority_revision": {"type": "string"}, "source_ref": {"type": "string"},
+    "window": {"type": "array"}, "freshness": {"type": "object"}, "state_reason": {"type": "string"},
+    "execution_allowed": {"const": false}, "canonical_hash": {"type": "string"}
+  }
+}

@@ -242,6 +242,7 @@ test("binds deterministic SEO Council orchestration to every 11D through 11F lay
     "backend/docs/seo/generated/seo-technical-diagnosis-contract-manifest.v1.json",
     "backend/docs/seo/generated/seo-technical-diagnosis-contract-manifest.v2.json",
     "backend/docs/seo/generated/seo-measurement-contract-manifest.v1.json",
+    "backend/docs/seo/generated/seo-measurement-contract-manifest.v2.json",
     "backend/routes/web.php",
     "backend/scripts/seo/export_seo_council_contracts.php",
     "backend/database/migrations/seo_intel/2026_08_29_030000_create_seo_council_runtime_tables.php",

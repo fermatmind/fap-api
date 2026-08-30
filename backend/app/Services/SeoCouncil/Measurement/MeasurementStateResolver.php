@@ -8,32 +8,43 @@ use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 
 final class MeasurementStateResolver
 {
-    public const VERSION = 'seo.measurement_state_resolver.v1';
+    public const VERSION = 'seo.measurement_state_resolver.v2';
 
     public function __construct(private readonly SeoRegistryHasher $hasher) {}
 
     /** @param array<string, mixed> $evidence @return array<string, mixed> */
     public function sourceCapability(array $evidence): array
     {
+        $positive = ($evidence['api_ready'] ?? false) === true
+            || ($evidence['property_verified'] ?? false) === true
+            || ($evidence['adapter_ready'] ?? false) === true
+            || ($evidence['quality_gate_passed'] ?? false) === true
+            || ($evidence['current_window_readable'] ?? false) === true
+            || ($evidence['manual_export_verified'] ?? false) === true;
+        $conflict = ($evidence['unavailable_proven'] ?? false) === true && $positive;
         $state = match (true) {
-            ($evidence['quality_gate_passed'] ?? false) === true
-                && ($evidence['current_window_readable'] ?? false) === true => 'available',
-            ($evidence['manual_export_verified'] ?? false) === true => 'manual_export_only',
+            $conflict => 'unverified',
             ($evidence['api_ready'] ?? false) === true
                 && ($evidence['property_verified'] ?? false) === true
                 && ($evidence['adapter_ready'] ?? false) === true => 'api_ready',
+            ($evidence['quality_gate_passed'] ?? false) === true
+                && ($evidence['current_window_readable'] ?? false) === true => 'available',
+            ($evidence['manual_export_verified'] ?? false) === true => 'manual_export_only',
             ($evidence['unavailable_proven'] ?? false) === true => 'unavailable',
             default => 'unverified',
         };
 
-        return $this->decision('seo.source_capability_decision.v1', $state, $evidence);
+        return $this->decision('seo.source_capability_decision.v2', $state, $evidence, $conflict);
     }
 
     /** @param array<string, mixed> $evidence @return array<string, mixed> */
     public function measurementState(array $evidence): array
     {
+        $source = $this->sourceCapability($evidence);
+        $conflict = ($source['conflict_detected'] ?? false) === true
+            || ($evidence['authority_conflict'] ?? false) === true;
         $state = match (true) {
-            ($evidence['authority_conflict'] ?? false) === true,
+            $conflict,
             ($evidence['privacy_failed'] ?? false) === true,
             ($evidence['policy_hold'] ?? false) === true => 'hold',
             ($evidence['mapping_failed'] ?? false) === true => 'mapping_failed',
@@ -41,25 +52,32 @@ final class MeasurementStateResolver
             ($evidence['within_normal_lag'] ?? false) === true => 'delayed',
             ($evidence['window_complete'] ?? false) === false => 'window_incomplete',
             ($evidence['quality_gate_passed'] ?? false) === true
+                && ($evidence['freshness_state'] ?? null) === 'fresh'
+                && ($evidence['window_complete'] ?? false) === true
+                && ($evidence['expected_evidence_present'] ?? false) === true
                 && ($evidence['explicit_zero_proof'] ?? false) === true
                 && ($evidence['all_relevant_values_zero'] ?? false) === true => 'valid_zero',
             ($evidence['quality_gate_passed'] ?? false) === true
+                && ($evidence['freshness_state'] ?? null) === 'fresh'
+                && ($evidence['window_complete'] ?? false) === true
+                && ($evidence['expected_evidence_present'] ?? false) === true
                 && ($evidence['valid_measurement_present'] ?? false) === true => 'valid',
             default => 'hold',
         };
 
-        return $this->decision('seo.measurement_state_decision.v1', $state, $evidence);
+        return $this->decision('seo.measurement_state_decision.v2', $state, $evidence, $conflict);
     }
 
     /** @param array<string, mixed> $evidence @return array<string, mixed> */
-    private function decision(string $version, string $state, array $evidence): array
+    private function decision(string $version, string $state, array $evidence, bool $conflict): array
     {
         $decision = [
             'version' => $version,
             'state' => $state,
+            'conflict_detected' => $conflict,
             'authority_revision' => (string) ($evidence['authority_revision'] ?? 'unavailable'),
             'source_ref' => (string) ($evidence['source_ref'] ?? 'unavailable'),
-            'window' => (array) ($evidence['window'] ?? []),
+            'window' => (array) ($evidence['window'] ?? $evidence['windows'] ?? []),
             'freshness' => (array) ($evidence['freshness'] ?? []),
             'state_reason' => (string) ($evidence['state_reason'] ?? $state),
             'execution_allowed' => false,

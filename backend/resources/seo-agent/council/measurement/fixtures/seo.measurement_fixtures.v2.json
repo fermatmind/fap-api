@@ -1,0 +1,21 @@
+{
+  "fixture_set_id": "seo.measurement_fixtures.v2",
+  "fixture_set_version": "2.0.0",
+  "fixtures": [
+    {"id":"source_conflict","kind":"source","expected":"unverified","evidence":{"unavailable_proven":true,"quality_gate_passed":true,"current_window_readable":true}},
+    {"id":"api_proof_priority","kind":"source","expected":"api_ready","evidence":{"api_ready":true,"property_verified":true,"adapter_ready":true}},
+    {"id":"available_quality_window","kind":"source","expected":"available","evidence":{"quality_gate_passed":true,"current_window_readable":true}},
+    {"id":"manual_only","kind":"source","expected":"manual_export_only","evidence":{"manual_export_verified":true}},
+    {"id":"unavailable","kind":"source","expected":"unavailable","evidence":{"unavailable_proven":true}},
+    {"id":"unverified","kind":"source","expected":"unverified","evidence":{}},
+    {"id":"authority_conflict","kind":"measurement","expected":"hold","evidence":{"authority_conflict":true}},
+    {"id":"mapping_failed","kind":"measurement","expected":"mapping_failed","evidence":{"mapping_failed":true,"expected_evidence_present":true}},
+    {"id":"missing","kind":"measurement","expected":"missing","evidence":{"expected_evidence_present":false}},
+    {"id":"delayed","kind":"measurement","expected":"delayed","evidence":{"expected_evidence_present":true,"within_normal_lag":true}},
+    {"id":"window_incomplete","kind":"measurement","expected":"window_incomplete","evidence":{"expected_evidence_present":true,"window_complete":false}},
+    {"id":"valid","kind":"measurement","expected":"valid","evidence":{"expected_evidence_present":true,"window_complete":true,"quality_gate_passed":true,"freshness_state":"fresh","valid_measurement_present":true}},
+    {"id":"valid_zero","kind":"measurement","expected":"valid_zero","evidence":{"expected_evidence_present":true,"window_complete":true,"quality_gate_passed":true,"freshness_state":"fresh","explicit_zero_proof":true,"all_relevant_values_zero":true}},
+    {"id":"zero_missing","kind":"measurement","expected":"missing","evidence":{"expected_evidence_present":false,"window_complete":true,"quality_gate_passed":true,"explicit_zero_proof":true,"all_relevant_values_zero":true}},
+    {"id":"stale","kind":"measurement","expected":"hold","evidence":{"expected_evidence_present":true,"window_complete":true,"quality_gate_passed":true,"freshness_state":"stale","valid_measurement_present":true}}
+  ]
+}

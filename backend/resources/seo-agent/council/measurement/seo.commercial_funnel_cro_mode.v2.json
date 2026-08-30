@@ -1,0 +1,12 @@
+{
+  "mode_id": "commercial_funnel_cro",
+  "mode_version": "2.0.0",
+  "role_id": "seo.expert.commercial_funnel_cro",
+  "context_contract": "seo.measurement_evidence_context.v2",
+  "source_types": ["public_funnel_aggregate"],
+  "windows_days": [7, 28, 90],
+  "output_kind": "falsifiable_hypothesis_only",
+  "causal_claims_allowed": false,
+  "execution_allowed": false,
+  "allow_delegation": false
+}

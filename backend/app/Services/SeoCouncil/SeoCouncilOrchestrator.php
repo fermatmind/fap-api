@@ -13,6 +13,8 @@ use App\Services\SeoCouncil\Governance\CouncilDependencySnapshotBuilder;
 use App\Services\SeoCouncil\Governance\RoleCapabilityBindingRegistry;
 use App\Services\SeoCouncil\Governance\RuntimeCapabilitySnapshotBuilder;
 use App\Services\SeoCouncil\Measurement\MeasurementModeRegistry;
+use App\Services\SeoCouncil\Measurement\MeasurementRunner;
+use App\Services\SeoCouncil\Measurement\MeasurementRuntimeGate;
 use App\Services\SeoCouncil\Persistence\CouncilRunRepository;
 use App\Services\SeoCouncil\Policy\CouncilAdmissionGateway;
 use App\Services\SeoCouncil\Policy\CouncilAdmissionRequestFactory;
@@ -48,6 +50,8 @@ final class SeoCouncilOrchestrator
         private readonly CouncilDependencySnapshotBuilder $dependencies,
         private readonly RuntimeCapabilitySnapshotBuilder $runtime,
         private readonly MeasurementModeRegistry $measurementMode,
+        private readonly MeasurementRunner $measurementRunner,
+        private readonly MeasurementRuntimeGate $measurementGate,
         private readonly TechnicalDiagnosisModeRegistry $technicalMode,
         private readonly TechnicalDiagnosisRunner $technicalRunner,
         private readonly TechnicalDiagnosisRuntimeGate $technicalGate,
@@ -170,6 +174,28 @@ final class SeoCouncilOrchestrator
                         : (string) ($output['summary_code'] ?? 'technical_diagnosis_hold');
                 }
             }
+        } elseif ($measurementMission && $this->measurementGate->allows($measurementRuntime)) {
+            $handoff = $routePlan[0] ?? null;
+            if (! is_array($handoff) || ($handoff['kind'] ?? null) !== 'role_handoff') {
+                $status = 'MEASUREMENT_HOLD';
+                $stopReason = 'measurement_handoff_missing';
+            } else {
+                $output = $this->measurementRunner->run($request, $handoff, $releaseSha, 'production_runtime');
+                if (! $this->acceptModeOutput(
+                    $output,
+                    (string) ($handoff['handoff_hash'] ?? ''),
+                    (string) ($handoff['target_role_id'] ?? ''),
+                )) {
+                    $status = 'MEASUREMENT_HOLD';
+                    $stopReason = 'measurement_mode_output_contract_hold';
+                } else {
+                    $routePlan[] = ['kind' => 'mode_output', ...$output];
+                    $status = ($output['status'] ?? null) === 'PASS' ? 'MEASUREMENT_READY' : 'MEASUREMENT_HOLD';
+                    $stopReason = ($output['status'] ?? null) === 'PASS'
+                        ? 'measurement_completed'
+                        : (string) ($output['summary_code'] ?? 'measurement_hold');
+                }
+            }
         }
 
         return $this->terminalReceipt(
@@ -284,7 +310,7 @@ final class SeoCouncilOrchestrator
             'EVIDENCE_HOLD', 'MEASUREMENT_HOLD' => 'evidence_context_verification',
             'unresolved_conflict' => 'evidence_context_verification',
             'STALE_RESUME_HOLD' => 'validate_privacy_scan',
-            'TECHNICAL_DIAGNOSIS_READY' => 'run_receipt',
+            'TECHNICAL_DIAGNOSIS_READY', 'MEASUREMENT_READY' => 'run_receipt',
             default => 'technical_mode_selection',
         };
         $stopped = false;
@@ -323,7 +349,7 @@ final class SeoCouncilOrchestrator
             return in_array($decision, ['DENY', 'HOLD'], true) ? $decision : 'HOLD';
         }
 
-        if ($status === 'TECHNICAL_DIAGNOSIS_READY') {
+        if (in_array($status, ['TECHNICAL_DIAGNOSIS_READY', 'MEASUREMENT_READY'], true)) {
             return 'PASS';
         }
 

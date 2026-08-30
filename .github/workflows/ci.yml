@@ -699,37 +699,31 @@ jobs:
             and .technical_diagnosis.external_calls == 0 and .technical_diagnosis.production_permissions == 0
             and .technical_diagnosis.execution_allowed == false
             and ."SEO-PLATFORM-11F" == "HOLD" and .ready_for_11G == false
-            and .measurement_review.receipt_version == "seo.measurement_closeout.v1"
+            and .measurement_review.receipt_version == "seo.measurement_closeout.v2"
             and .measurement_review.environment == "ci_candidate"
             and .measurement_review.closeout_state == "OFFLINE_EVAL_READY"
             and .measurement_review.mode_state == "OFFLINE_EVAL_READY"
             and .measurement_review.candidate_sha == $sha
             and (.measurement_review.production_sha | test("^[a-f0-9]{40}$"))
             and .measurement_review.dependency_status == "READY"
-            and .measurement_review.fixture_metrics.fixture_total >= 24
-            and .measurement_review.fixture_metrics.false_positive == 0
-            and .measurement_review.fixture_metrics.false_negative == 0
-            and .measurement_review.fixture_metrics.source_state_misclassification_count == 0
-            and .measurement_review.fixture_metrics.measurement_state_misclassification_count == 0
-            and .measurement_review.fixture_metrics.valid_zero_misclassification_count == 0
-            and .measurement_review.fixture_metrics.gai_capability_invention_count == 0
-            and .measurement_review.fixture_metrics.causal_overclaim_count == 0
-            and .measurement_review.fixture_metrics.attribution_overclaim_count == 0
-            and .measurement_review.fixture_metrics.private_data_leak_count == 0
-            and .measurement_review.fixture_metrics.private_url_leak_count == 0
-            and .measurement_review.fixture_metrics.production_metric_override_count == 0
-            and .measurement_review.fixture_metrics.policy_bypass_count == 0
-            and .measurement_review.fixture_metrics.role_expansion_bypass_count == 0
-            and .measurement_review.fixture_metrics.write_attempt_count == 0
-            and .measurement_review.private_negative_set_metrics.private_data_leak_count == 0
-            and .measurement_review.private_negative_set_metrics.private_url_leak_count == 0
-            and .measurement_review.routing_metrics.routing_bypass_count == 0
-            and .measurement_review.gai_capability_state == "manual_export_only"
+            and .measurement_review.evidence_source_state == "offline_not_loaded"
+            and .measurement_review.evidence_freshness_state == "not_applicable"
+            and (.measurement_review.evidence_authority_revision | test("^[a-f0-9]{64}$"))
+            and ((.measurement_review | [
+              .real_evidence_bundle_bypass_count, .bundle_verifier_bypass_count, .context_builder_bypass_count,
+              .request_pii_bypass_count, .evidence_pii_bypass_count, .metadata_pii_bypass_count,
+              .output_pii_bypass_count, .private_url_leak_count, .cro_causal_overclaim_count,
+              .source_conflict_bypass_count, .schema_validation_bypass_count, .orchestrator_runner_bypass_count,
+              .direct_mode_entry_bypass_count, .policy_bypass_count, .role_expansion_bypass_count,
+              .write_attempt_count, .model_calls, .tool_calls, .external_calls, .cms_writes,
+              .url_truth_writes, .search_writes, .business_writes, .production_permissions
+            ]) | all(. == 0))
             and .measurement_review.model_calls == 0 and .measurement_review.tool_calls == 0
             and .measurement_review.external_calls == 0 and .measurement_review.production_permissions == 0
             and .measurement_review.cms_writes == 0 and .measurement_review.url_truth_writes == 0
             and .measurement_review.search_writes == 0 and .measurement_review.business_writes == 0
             and .measurement_review.execution_allowed == false
+            and .measurement_review.production_execution_enabled == false
             and .measurement_review."SEO-PLATFORM-11F" == "HOLD"
             and .measurement_review.ready_for_11G == false
             and (.measurement_review.contract_manifest_hash | test("^[a-f0-9]{64}$"))
@@ -958,37 +952,31 @@ jobs:
               and .technical_diagnosis.external_calls == 0 and .technical_diagnosis.production_permissions == 0
               and .technical_diagnosis.execution_allowed == false
               and ."SEO-PLATFORM-11F" == "HOLD" and .ready_for_11G == false
-              and .measurement_review.receipt_version == "seo.measurement_closeout.v1"
+              and .measurement_review.receipt_version == "seo.measurement_closeout.v2"
               and .measurement_review.environment == "ci_candidate"
               and .measurement_review.closeout_state == "OFFLINE_EVAL_READY"
               and .measurement_review.mode_state == "OFFLINE_EVAL_READY"
               and .measurement_review.candidate_sha == $sha
               and (.measurement_review.production_sha | test("^[a-f0-9]{40}$"))
               and .measurement_review.dependency_status == "READY"
-              and .measurement_review.fixture_metrics.fixture_total >= 24
-              and .measurement_review.fixture_metrics.false_positive == 0
-              and .measurement_review.fixture_metrics.false_negative == 0
-              and .measurement_review.fixture_metrics.source_state_misclassification_count == 0
-              and .measurement_review.fixture_metrics.measurement_state_misclassification_count == 0
-              and .measurement_review.fixture_metrics.valid_zero_misclassification_count == 0
-              and .measurement_review.fixture_metrics.gai_capability_invention_count == 0
-              and .measurement_review.fixture_metrics.causal_overclaim_count == 0
-              and .measurement_review.fixture_metrics.attribution_overclaim_count == 0
-              and .measurement_review.fixture_metrics.private_data_leak_count == 0
-              and .measurement_review.fixture_metrics.private_url_leak_count == 0
-              and .measurement_review.fixture_metrics.production_metric_override_count == 0
-              and .measurement_review.fixture_metrics.policy_bypass_count == 0
-              and .measurement_review.fixture_metrics.role_expansion_bypass_count == 0
-              and .measurement_review.fixture_metrics.write_attempt_count == 0
-              and .measurement_review.private_negative_set_metrics.private_data_leak_count == 0
-              and .measurement_review.private_negative_set_metrics.private_url_leak_count == 0
-              and .measurement_review.routing_metrics.routing_bypass_count == 0
-              and .measurement_review.gai_capability_state == "manual_export_only"
+              and .measurement_review.evidence_source_state == "offline_not_loaded"
+              and .measurement_review.evidence_freshness_state == "not_applicable"
+              and (.measurement_review.evidence_authority_revision | test("^[a-f0-9]{64}$"))
+              and ((.measurement_review | [
+                .real_evidence_bundle_bypass_count, .bundle_verifier_bypass_count, .context_builder_bypass_count,
+                .request_pii_bypass_count, .evidence_pii_bypass_count, .metadata_pii_bypass_count,
+                .output_pii_bypass_count, .private_url_leak_count, .cro_causal_overclaim_count,
+                .source_conflict_bypass_count, .schema_validation_bypass_count, .orchestrator_runner_bypass_count,
+                .direct_mode_entry_bypass_count, .policy_bypass_count, .role_expansion_bypass_count,
+                .write_attempt_count, .model_calls, .tool_calls, .external_calls, .cms_writes,
+                .url_truth_writes, .search_writes, .business_writes, .production_permissions
+              ]) | all(. == 0))
               and .measurement_review.model_calls == 0 and .measurement_review.tool_calls == 0
               and .measurement_review.external_calls == 0 and .measurement_review.production_permissions == 0
               and .measurement_review.cms_writes == 0 and .measurement_review.url_truth_writes == 0
               and .measurement_review.search_writes == 0 and .measurement_review.business_writes == 0
               and .measurement_review.execution_allowed == false
+              and .measurement_review.production_execution_enabled == false
               and .measurement_review."SEO-PLATFORM-11F" == "HOLD"
               and .measurement_review.ready_for_11G == false
               and (.measurement_review.contract_manifest_hash | test("^[a-f0-9]{64}$"))

@@ -1,0 +1,12 @@
+{
+  "mode_id": "search_measurement",
+  "mode_version": "2.0.0",
+  "role_id": "seo.expert.search_analytics_measurement",
+  "context_contract": "seo.measurement_evidence_context.v2",
+  "source_types": ["gsc_aggregate"],
+  "windows_days": [7, 28, 90],
+  "comparison_window": "immediately_preceding_equal_length_window",
+  "causal_claims_allowed": false,
+  "execution_allowed": false,
+  "allow_delegation": false
+}

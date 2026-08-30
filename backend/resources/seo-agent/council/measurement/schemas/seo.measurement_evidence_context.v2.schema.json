@@ -1,0 +1,16 @@
+{
+  "schema_id": "seo.measurement_evidence_context.v2",
+  "schema_version": "2.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "request_hash", "role_id", "mode_id", "page_family", "locale", "windows", "bundle_refs", "source_capability", "measurement_state", "metrics", "facts", "status", "measurement_allowed", "execution_allowed", "context_hash"],
+  "properties": {
+    "version": {"const": "seo.measurement_evidence_context.v2"}, "request_hash": {"type": "string"},
+    "role_id": {"type": "string"}, "mode_id": {"type": "string"}, "page_family": {"type": "string"},
+    "locale": {"enum": ["en", "zh-CN", "und"]}, "windows": {"type": "array"}, "bundle_refs": {"type": "array"},
+    "source_capability": {"type": "object"}, "measurement_state": {"type": "object"},
+    "metrics": {"type": "object"}, "facts": {"type": "object"},
+    "status": {"enum": ["READY", "HOLD"]}, "measurement_allowed": {"type": "boolean"},
+    "execution_allowed": {"const": false}, "context_hash": {"type": "string"}
+  }
+}

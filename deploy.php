@@ -1731,27 +1731,25 @@ $ok = ($payload["contract_version"] ?? null) === "seo.council_closeout.v2"
     && ($payload["ready_for_11F"] ?? null) === $production
     && ($payload["SEO-PLATFORM-11F"] ?? null) === ($production ? "CLOSED" : "HOLD")
     && ($payload["ready_for_11G"] ?? null) === $production
-    && ($payload["measurement_review"]["receipt_version"] ?? null) === "seo.measurement_closeout.v1"
+    && ($payload["measurement_review"]["receipt_version"] ?? null) === "seo.measurement_closeout.v2"
     && ($payload["measurement_review"]["environment"] ?? null) === $environment
     && ($payload["measurement_review"]["closeout_state"] ?? null) === $expectedMeasurementState
     && ($payload["measurement_review"]["mode_state"] ?? null) === "OFFLINE_EVAL_READY"
     && ($payload["measurement_review"]["candidate_sha"] ?? null) === ($argv[1] ?? null)
     && ($payload["measurement_review"]["production_sha"] ?? null) === ($argv[1] ?? null)
     && ($payload["measurement_review"]["dependency_status"] ?? null) === "READY"
-    && ($payload["measurement_review"]["fixture_metrics"]["fixture_total"] ?? 0) >= 24
-    && ($payload["measurement_review"]["private_negative_set_metrics"]["private_data_leak_count"] ?? null) === 0
-    && ($payload["measurement_review"]["private_negative_set_metrics"]["private_url_leak_count"] ?? null) === 0
-    && ($payload["measurement_review"]["routing_metrics"]["routing_bypass_count"] ?? null) === 0
-    && ($payload["measurement_review"]["gai_capability_state"] ?? null) === "manual_export_only"
+    && ($payload["measurement_review"]["evidence_source_state"] ?? null) === "available"
+    && ($payload["measurement_review"]["evidence_freshness_state"] ?? null) === "fresh"
+    && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["measurement_review"]["evidence_authority_revision"] ?? "")) === 1
     && ($payload["measurement_review"]["model_calls"] ?? null) === 0
     && ($payload["measurement_review"]["tool_calls"] ?? null) === 0
     && ($payload["measurement_review"]["external_calls"] ?? null) === 0
-    && ($payload["measurement_review"]["production_metric_override_count"] ?? null) === 0
     && ($payload["measurement_review"]["cms_writes"] ?? null) === 0
     && ($payload["measurement_review"]["url_truth_writes"] ?? null) === 0
     && ($payload["measurement_review"]["search_writes"] ?? null) === 0
     && ($payload["measurement_review"]["business_writes"] ?? null) === 0
     && ($payload["measurement_review"]["production_permissions"] ?? null) === 0
+    && ($payload["measurement_review"]["production_execution_enabled"] ?? null) === false
     && ($payload["measurement_review"]["execution_allowed"] ?? null) === false
     && ($payload["measurement_review"]["SEO-PLATFORM-11F"] ?? null) === ($production ? "CLOSED" : "HOLD")
     && ($payload["measurement_review"]["ready_for_11G"] ?? null) === $production
@@ -1806,13 +1804,15 @@ foreach ($zero as $field) {
     $ok = $ok && ($payload[$field] ?? null) === 0;
 }
 foreach ([
-    "false_positive", "false_negative", "source_state_misclassification_count",
-    "measurement_state_misclassification_count", "valid_zero_misclassification_count",
-    "gai_capability_invention_count", "causal_overclaim_count", "attribution_overclaim_count",
-    "private_data_leak_count", "private_url_leak_count", "production_metric_override_count",
-    "policy_bypass_count", "role_expansion_bypass_count", "write_attempt_count",
+    "real_evidence_bundle_bypass_count", "bundle_verifier_bypass_count", "context_builder_bypass_count",
+    "request_pii_bypass_count", "evidence_pii_bypass_count", "metadata_pii_bypass_count",
+    "output_pii_bypass_count", "private_url_leak_count", "cro_causal_overclaim_count",
+    "source_conflict_bypass_count", "schema_validation_bypass_count", "orchestrator_runner_bypass_count",
+    "direct_mode_entry_bypass_count", "policy_bypass_count", "role_expansion_bypass_count",
+    "write_attempt_count", "model_calls", "tool_calls", "external_calls", "cms_writes",
+    "url_truth_writes", "search_writes", "business_writes", "production_permissions",
 ] as $field) {
-    $ok = $ok && ($payload["measurement_review"]["fixture_metrics"][$field] ?? null) === 0;
+    $ok = $ok && ($payload["measurement_review"][$field] ?? null) === 0;
 }
 exit($ok ? 0 : 1);
 ' "$expected_sha" "{{technical_closeout_environment}}"

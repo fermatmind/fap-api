@@ -5,87 +5,50 @@ declare(strict_types=1);
 namespace Tests\Feature\SeoIntel;
 
 use App\Services\SeoCouncil\Measurement\CommercialFunnelCROMode;
+use Tests\Feature\SeoIntel\Concerns\BuildsMeasurementV2Context;
 use Tests\TestCase;
 
 final class SeoPlatform11FCommercialFunnelCROTest extends TestCase
 {
-    public function test_valid_aggregate_evidence_emits_candidate_without_starting_experiment(): void
+    use BuildsMeasurementV2Context;
+
+    public function test_public_chain_emits_only_falsifiable_non_executing_candidate(): void
     {
-        $output = app(CommercialFunnelCROMode::class)->review($this->request(), [
-            'quality_gate_passed' => true, 'current_window_readable' => true,
-            'expected_evidence_present' => true, 'window_complete' => true,
-            'valid_measurement_present' => true, 'mapping_revision' => 'taxonomy:v1',
-            'aggregate_metrics' => [
-                'landing_pv_count' => 1500, 'start_test_count' => 100,
-                'complete_test_count' => 75, 'view_result_count' => 74,
-                'return_public_content_count' => 12, 'cta_exposure_count' => 500,
-                'cta_click_count' => 80, 'order_count' => 9,
-            ],
-            'experiment_hypothesis' => 'promise parity increases qualified starts',
-            'primary_metric' => 'start_test_count',
-            'guardrail_metrics' => ['complete_test_count', 'view_result_count'],
-            'minimum_sample_requirement' => 1200,
-        ]);
+        $context = $this->measurementContext('commercial_funnel_cro');
+        $output = app(CommercialFunnelCROMode::class)->review($context);
 
         $this->assertSame('READY', $output['status']);
-        $this->assertArrayNotHasKey('order_count', $output['findings'][0]['aggregate_metrics']);
-        $this->assertCount(1, $output['experiment_candidates']);
-        $candidate = $output['experiment_candidates'][0];
-        $this->assertSame(1200, $candidate['minimum_sample_requirement']);
+        $this->assertCount(1, $output['candidates']);
+        $candidate = $output['candidates'][0];
+        foreach (['falsification_rule', 'uncertainty', 'primary_metric', 'guardrail_metrics', 'stop_conditions'] as $field) {
+            $this->assertArrayHasKey($field, $candidate);
+        }
         $this->assertFalse($candidate['execution_allowed']);
+        $this->assertSame([], $output['findings'][0]['verified_facts']);
         $this->assertSame(0, $output['write_count']);
     }
 
-    public function test_insufficient_sample_and_private_url_value_fail_closed(): void
+    public function test_incomplete_chain_insufficient_sample_and_causal_claims_hold(): void
     {
-        $insufficient = app(CommercialFunnelCROMode::class)->review($this->request(), [
-            'quality_gate_passed' => true, 'current_window_readable' => true,
-            'expected_evidence_present' => true, 'window_complete' => true,
-            'valid_measurement_present' => true,
-            'aggregate_metrics' => ['landing_pv_count' => 99],
-            'minimum_sample_requirement' => 100,
+        $incomplete = $this->measurementContext('commercial_funnel_cro', [
+            'stage_coverage' => [
+                'landing' => true, 'start' => true, 'completion' => true,
+                'aggregate_outcome_view' => true, 'return_public_content' => true, 'cta' => false,
+            ],
         ]);
-        $this->assertSame('HOLD', $insufficient['status']);
-        $this->assertSame([], $insufficient['experiment_candidates']);
+        $this->assertSame('HOLD', app(CommercialFunnelCROMode::class)->review($incomplete)['status']);
 
-        $url = app(CommercialFunnelCROMode::class)->review($this->request(), [
-            'quality_gate_passed' => true, 'current_window_readable' => true,
-            'expected_evidence_present' => true, 'window_complete' => true,
-            'valid_measurement_present' => true,
-            'aggregate_metrics' => ['landing_pv_count' => 200],
-            'evidence_refs' => ['/en/results/private-id'],
-        ]);
-        $this->assertSame('HOLD', $url['status']);
-        $this->assertSame([], $url['experiment_candidates']);
-    }
-
-    public function test_private_identity_session_content_and_url_fail_closed(): void
-    {
-        foreach ([
-            ['user_id' => 7], ['raw_session' => 'session'], ['result_content' => 'private'],
-            ['private_url' => '/en/results/secret'], ['payment_id' => 9],
-        ] as $private) {
-            $output = app(CommercialFunnelCROMode::class)->review($this->request(), [
-                'quality_gate_passed' => true, 'current_window_readable' => true,
-                'expected_evidence_present' => true, 'window_complete' => true,
-                'valid_measurement_present' => true,
-                ...$private,
-            ]);
-            $this->assertSame('HOLD', $output['status']);
-            $this->assertSame('hold', $output['findings'][0]['measurement_state']['state']);
-            $this->assertTrue($output['findings'][0]['privacy_violation']);
-            $this->assertSame([], $output['experiment_candidates']);
+        $small = $this->croPayload();
+        foreach ($small['windows'] as &$window) {
+            $window['metrics'] = array_map(static fn (int $value): int => min($value, 20), $window['metrics']);
         }
-    }
+        unset($window);
+        $this->assertSame('HOLD', app(CommercialFunnelCROMode::class)->review($this->measurementContext('commercial_funnel_cro', $small))['status']);
 
-    /** @return array<string, mixed> */
-    private function request(): array
-    {
-        return [
-            'version' => 'seo.commercial_funnel_cro_request.v1',
-            'role_id' => 'seo.expert.commercial_funnel_cro',
-            'page_family' => 'tests', 'locale' => 'en', 'window' => ['days' => 28],
-            'execution_allowed' => false,
-        ];
+        $causal = $this->measurementContext('commercial_funnel_cro', ['associations' => ['The CTA caused completion growth.']]);
+        $output = app(CommercialFunnelCROMode::class)->review($causal);
+        $this->assertSame('HOLD', $output['status']);
+        $this->assertSame([], $output['candidates']);
+        $this->assertSame([], $output['findings'][0]['associations']);
     }
 }

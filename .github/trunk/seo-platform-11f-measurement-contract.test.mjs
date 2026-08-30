@@ -15,7 +15,9 @@ test("11F extends the permanent exact-SHA control plane with offline-eval and ru
     assert.match(source, /execution_allowed/);
   }
   assert.match(ci, /SeoPlatform11F\*\.php/);
-  assert.match(exporter, /seo-measurement-contract-manifest\.v1\.json/);
+  assert.match(exporter, /seo-measurement-contract-manifest\.v2\.json/);
+  assert.match(ci, /seo\.measurement_closeout\.v2/);
+  assert.match(deploy, /evidence_source_state/);
   assert.match(deploy, /OFFLINE_EVAL_READY/);
   assert.match(deploy, /STAGING_READY/);
   assert.match(deploy, /CLOSED/);

@@ -1,0 +1,11 @@
+{
+  "schema_id": "seo.measurement_output.v2", "schema_version": "2.0.0", "type": "object", "additionalProperties": false,
+  "required": ["version", "status", "findings", "candidates", "hold_reason", "model_calls", "tool_calls", "external_calls", "write_count", "execution_allowed", "output_hash"],
+  "properties": {
+    "version": {"const": "seo.measurement_output.v2"}, "status": {"enum": ["READY", "HOLD"]},
+    "findings": {"type": "array", "items": {"$ref": "seo.measurement_finding.v2"}},
+    "candidates": {"type": "array", "items": {"$ref": "seo.measurement_candidate.v2"}}, "hold_reason": {"type": ["string", "null"]},
+    "model_calls": {"const": 0}, "tool_calls": {"const": 0}, "external_calls": {"const": 0}, "write_count": {"const": 0},
+    "execution_allowed": {"const": false}, "output_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "policy_id": "seo.commercial_funnel_cro_policy.v2",
+  "policy_version": "2.0.0",
+  "aggregate_only": true,
+  "required_chain": ["landing", "start", "completion", "aggregate_result_view", "return_public_content", "cta"],
+  "required_hypothesis_fields": ["falsification_rule", "uncertainty", "primary_metric", "guardrail_metrics", "stop_conditions"],
+  "absolute_causal_wording_allowed": false,
+  "production_execution_enabled": false,
+  "execution_allowed": false
+}

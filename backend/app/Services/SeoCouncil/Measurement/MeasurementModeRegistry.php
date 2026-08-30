@@ -27,7 +27,7 @@ final class MeasurementModeRegistry
     public function capabilitySnapshot(): array
     {
         $snapshot = [
-            'snapshot_id' => 'seo.measurement_runtime_capability_snapshot.v1',
+            'snapshot_id' => 'seo.measurement_runtime_capability_snapshot.v2',
             'mode_state' => 'OFFLINE_EVAL_READY',
             'available_modes' => ['search_measurement', 'commercial_funnel_cro'],
             'production_model_enabled' => false,
