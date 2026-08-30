@@ -132,6 +132,94 @@ function deployShellArg(string $value): string
     return escapeshellarg($value);
 }
 
+/**
+ * @return array<string, string>
+ */
+function deploySeoIntelRuntimeEnvironment(): array
+{
+    $hostAlias = currentHost()->getAlias();
+    $runtimeEnvironment = trim((string) (getenv('SEO_INTEL_RUNTIME_ENVIRONMENT') ?: ''));
+
+    if (! in_array($hostAlias, ['staging', 'production'], true) || $runtimeEnvironment !== $hostAlias) {
+        throw new \RuntimeException('SEO Intel runtime configuration is not bound to the current deployment environment.');
+    }
+
+    $values = [];
+    foreach ([
+        'SEO_INTEL_ENABLED',
+        'SEO_INTEL_DB_CONNECTION',
+        'SEO_INTEL_DB_HOST',
+        'SEO_INTEL_DB_PORT',
+        'SEO_INTEL_DB_DATABASE',
+        'SEO_INTEL_DB_USERNAME',
+        'SEO_INTEL_DB_PASSWORD',
+        'SEO_INTEL_WRITE_ENABLED',
+        'SEO_INTEL_COLLECTORS_ENABLED',
+        'SEO_INTEL_DRY_RUN_DEFAULT',
+        'SEO_INTEL_ALLOW_EXTERNAL_API_CALLS',
+    ] as $key) {
+        $value = getenv($key);
+        if (! is_string($value) || $value === '' || preg_match('/[\x00\r\n]/', $value)) {
+            throw new \RuntimeException("{$key} is missing or contains unsupported control characters.");
+        }
+        $values[$key] = $value;
+    }
+
+    $fixed = [
+        'SEO_INTEL_ENABLED' => 'true',
+        'SEO_INTEL_DB_CONNECTION' => 'seo_intel',
+        'SEO_INTEL_WRITE_ENABLED' => 'false',
+        'SEO_INTEL_COLLECTORS_ENABLED' => 'false',
+        'SEO_INTEL_DRY_RUN_DEFAULT' => 'true',
+        'SEO_INTEL_ALLOW_EXTERNAL_API_CALLS' => 'false',
+    ];
+    foreach ($fixed as $key => $expected) {
+        if ($values[$key] !== $expected) {
+            throw new \RuntimeException("{$key} does not match the approved SEO Intel runtime value.");
+        }
+    }
+
+    if (preg_match('/\A[1-9][0-9]{0,4}\z/', $values['SEO_INTEL_DB_PORT']) !== 1
+        || (int) $values['SEO_INTEL_DB_PORT'] > 65535) {
+        throw new \RuntimeException('SEO_INTEL_DB_PORT is invalid.');
+    }
+
+    return $values;
+}
+
+/**
+ * @return array<string, string>
+ */
+function deploySeoIntelMigrationEnvironment(): array
+{
+    $runtime = deploySeoIntelRuntimeEnvironment();
+    $migration = [];
+    foreach ([
+        'SEO_INTEL_MIGRATION_DB_USERNAME',
+        'SEO_INTEL_MIGRATION_DB_PASSWORD',
+    ] as $key) {
+        $value = getenv($key);
+        if (! is_string($value) || $value === '' || preg_match('/[\x00\r\n]/', $value)) {
+            if (currentHost()->getAlias() === 'production') {
+                return [
+                    'SEO_INTEL_MIGRATION_DB_USERNAME' => $runtime['SEO_INTEL_DB_USERNAME'],
+                    'SEO_INTEL_MIGRATION_DB_PASSWORD' => $runtime['SEO_INTEL_DB_PASSWORD'],
+                ];
+            }
+
+            throw new \RuntimeException("{$key} is missing or contains unsupported control characters.");
+        }
+        $migration[$key] = $value;
+    }
+
+    if (currentHost()->getAlias() === 'staging'
+        && hash_equals($runtime['SEO_INTEL_DB_USERNAME'], $migration['SEO_INTEL_MIGRATION_DB_USERNAME'])) {
+        throw new \RuntimeException('Staging SEO Intel migration and runtime accounts must be distinct.');
+    }
+
+    return $migration;
+}
+
 function deployIsTransientGitTransportFailure(\Throwable $failure): bool
 {
     $message = $failure->getMessage();
@@ -826,6 +914,198 @@ task('artisan:config:cache', function () {
     run('{{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' config:cache --ansi');
 });
 
+task('runtime:configure-seo-intel', function (): void {
+    $runtime = deploySeoIntelRuntimeEnvironment();
+    $localPatch = tempnam(sys_get_temp_dir(), 'seo-intel-runtime-');
+    if (! is_string($localPatch)) {
+        throw new \RuntimeException('Unable to allocate the SEO Intel runtime patch.');
+    }
+
+    $remotePatch = '{{release_path}}/.seo-intel-runtime.json';
+    try {
+        if (file_put_contents($localPatch, json_encode($runtime, JSON_THROW_ON_ERROR)) === false
+            || ! chmod($localPatch, 0600)) {
+            throw new \RuntimeException('Unable to stage the SEO Intel runtime patch.');
+        }
+        upload($localPatch, $remotePatch);
+    } finally {
+        @unlink($localPatch);
+    }
+
+    $script = <<<'PHP'
+$environmentPath = $argv[1] ?? '';
+$patchPath = $argv[2] ?? '';
+$allowed = [
+    'SEO_INTEL_ENABLED',
+    'SEO_INTEL_DB_CONNECTION',
+    'SEO_INTEL_DB_HOST',
+    'SEO_INTEL_DB_PORT',
+    'SEO_INTEL_DB_DATABASE',
+    'SEO_INTEL_DB_USERNAME',
+    'SEO_INTEL_DB_PASSWORD',
+    'SEO_INTEL_WRITE_ENABLED',
+    'SEO_INTEL_COLLECTORS_ENABLED',
+    'SEO_INTEL_DRY_RUN_DEFAULT',
+    'SEO_INTEL_ALLOW_EXTERNAL_API_CALLS',
+];
+
+if ($environmentPath === '' || $patchPath === '' || is_link($environmentPath) || ! is_file($environmentPath)) {
+    throw new RuntimeException('SEO_INTEL_ENVIRONMENT_PATH_INVALID');
+}
+$patch = json_decode((string) file_get_contents($patchPath), true, flags: JSON_THROW_ON_ERROR);
+if (! is_array($patch) || array_keys($patch) !== $allowed) {
+    throw new RuntimeException('SEO_INTEL_PATCH_SCOPE_INVALID');
+}
+foreach ($patch as $value) {
+    if (! is_string($value) || $value === '' || preg_match('/[\x00\r\n]/', $value)) {
+        throw new RuntimeException('SEO_INTEL_PATCH_VALUE_INVALID');
+    }
+}
+
+$quote = static fn (string $value): string => '"'.strtr($value, [
+    '\\' => '\\\\',
+    '"' => '\\"',
+    '$' => '\\$',
+]).'"';
+$expectedLines = [];
+foreach ($patch as $key => $value) {
+    $expectedLines[$key] = $key.'='.$quote($value);
+}
+
+$handle = fopen($environmentPath, 'c+b');
+if ($handle === false || ! flock($handle, LOCK_EX)) {
+    throw new RuntimeException('SEO_INTEL_ENVIRONMENT_LOCK_FAILED');
+}
+$stat = fstat($handle);
+$pathStat = lstat($environmentPath);
+if (! is_array($stat) || ! is_array($pathStat) || $stat['ino'] !== $pathStat['ino'] || $stat['dev'] !== $pathStat['dev']) {
+    throw new RuntimeException('SEO_INTEL_ENVIRONMENT_CHANGED_BEFORE_WRITE');
+}
+rewind($handle);
+$original = stream_get_contents($handle);
+if (! is_string($original)) {
+    throw new RuntimeException('SEO_INTEL_ENVIRONMENT_READ_FAILED');
+}
+
+$seen = [];
+$segments = preg_split('/(?<=\n)/', $original, -1, PREG_SPLIT_NO_EMPTY) ?: [];
+$updated = '';
+foreach ($segments as $segment) {
+    $body = preg_replace('/\r?\n\z/', '', $segment);
+    $eol = substr($segment, strlen((string) $body));
+    if (preg_match('/\A\s*([A-Z0-9_]+)\s*=/', (string) $body, $matches) === 1
+        && array_key_exists($matches[1], $expectedLines)) {
+        $key = $matches[1];
+        if (! isset($seen[$key])) {
+            $updated .= $expectedLines[$key].$eol;
+            $seen[$key] = true;
+        }
+        continue;
+    }
+    $updated .= $segment;
+}
+foreach ($expectedLines as $key => $line) {
+    if (isset($seen[$key])) {
+        continue;
+    }
+    if ($updated !== '' && ! str_ends_with($updated, "\n")) {
+        $updated .= "\n";
+    }
+    $updated .= $line."\n";
+}
+
+$atomicWrite = static function (string $bytes) use ($environmentPath, $stat): void {
+    $temporary = tempnam(dirname($environmentPath), '.seo-intel-env-');
+    if (! is_string($temporary)) {
+        throw new RuntimeException('SEO_INTEL_ENVIRONMENT_TEMP_FAILED');
+    }
+    try {
+        if (file_put_contents($temporary, $bytes, LOCK_EX) === false) {
+            throw new RuntimeException('SEO_INTEL_ENVIRONMENT_TEMP_WRITE_FAILED');
+        }
+        chmod($temporary, $stat['mode'] & 0777);
+        $temporaryHandle = fopen($temporary, 'rb');
+        if ($temporaryHandle === false || ! fsync($temporaryHandle)) {
+            throw new RuntimeException('SEO_INTEL_ENVIRONMENT_FSYNC_FAILED');
+        }
+        fclose($temporaryHandle);
+        if (! rename($temporary, $environmentPath)) {
+            throw new RuntimeException('SEO_INTEL_ENVIRONMENT_RENAME_FAILED');
+        }
+    } finally {
+        if (is_file($temporary)) {
+            @unlink($temporary);
+        }
+    }
+};
+
+$atomicWrite($updated);
+clearstatcache(true, $environmentPath);
+$readback = (string) file_get_contents($environmentPath);
+$valid = ! is_link($environmentPath) && is_file($environmentPath);
+foreach ($expectedLines as $line) {
+    $valid = $valid && preg_match('/^'.preg_quote($line, '/').'$/m', $readback) === 1;
+}
+if (! $valid) {
+    $atomicWrite($original);
+    throw new RuntimeException('SEO_INTEL_ENVIRONMENT_READBACK_FAILED');
+}
+flock($handle, LOCK_UN);
+fclose($handle);
+echo "SEO Intel runtime environment configured atomically.\n";
+PHP;
+
+    run(sprintf(
+        'set -euo pipefail; patch=%s; trap \'rm -f "$patch"\' EXIT; chmod 600 "$patch"; {{bin/php}} -d display_errors=0 -r %s %s "$patch"',
+        deployPlaceholderPathArg($remotePatch),
+        deployShellArg($script),
+        deployPlaceholderPathArg('{{deploy_path}}', 'shared/backend/.env'),
+    ));
+});
+
+task('guard:seo-intel-runtime-config', function (): void {
+    within('{{release_path}}/backend', function (): void {
+        run(<<<'BASH'
+set -euo pipefail
+{{bin/php}} -d display_errors=0 -r '
+try {
+    require "vendor/autoload.php";
+    $app = require "bootstrap/app.php";
+    $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+    $connectionName = (string) config("seo_intel.connection");
+    $seo = (array) config("database.connections.".$connectionName, []);
+    $defaultName = (string) config("database.default");
+    $business = (array) config("database.connections.".$defaultName, []);
+    $valid = config("seo_intel.enabled") === true
+        && $connectionName === "seo_intel"
+        && ($seo["driver"] ?? null) === "mysql"
+        && trim((string) ($seo["host"] ?? "")) !== ""
+        && preg_match("/\\A[1-9][0-9]{0,4}\\z/", (string) ($seo["port"] ?? "")) === 1
+        && trim((string) ($seo["database"] ?? "")) !== ""
+        && trim((string) ($seo["username"] ?? "")) !== ""
+        && (string) ($seo["password"] ?? "") !== ""
+        && (string) ($seo["database"] ?? "") !== (string) ($business["database"] ?? "")
+        && config("seo_intel.write_enabled") === false
+        && config("seo_intel.collectors_enabled") === false
+        && config("seo_intel.dry_run_default") === true
+        && config("seo_intel.allow_external_api_calls") === false;
+    if (! $valid) {
+        throw new RuntimeException("invalid");
+    }
+    $probe = Illuminate\Support\Facades\DB::connection("seo_intel")->selectOne("SELECT 1 AS probe");
+    if ((int) ($probe->probe ?? 0) !== 1) {
+        throw new RuntimeException("probe");
+    }
+    echo "SEO Intel isolated read-only runtime guard passed.\n";
+} catch (Throwable) {
+    fwrite(STDERR, "SEO Intel isolated read-only runtime guard failed.\n");
+    exit(1);
+}
+'
+BASH);
+    });
+});
+
 task('crawler:configure-aggregate-runtime', function () {
     if (currentHost()->getAlias() !== 'production') {
         writeln('<comment>Skipping crawler aggregate runtime configuration outside production.</comment>');
@@ -880,23 +1160,46 @@ task('artisan:migrate', function () {
 });
 
 task('artisan:migrate-seo-intel', function () {
-    within('{{release_path}}/backend', function (): void {
-        run(<<<'BASH'
-set -euo pipefail
-set +e
-{{bin/php}} -r 'require "vendor/autoload.php"; $app = require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); exit(config("seo_intel.enabled") ? 0 : 42);'
-seo_intel_status="$?"
-set -e
-if [ "$seo_intel_status" -eq 42 ]; then
-  echo "SEO Intel is disabled; skip dedicated migrations."
-  exit 0
-fi
-if [ "$seo_intel_status" -ne 0 ]; then
-  echo "unable to resolve SEO Intel runtime configuration" >&2
-  exit "$seo_intel_status"
-fi
-{{bin/php}} artisan migrate --database=seo_intel --path=database/migrations/seo_intel --force --no-interaction --ansi
-BASH);
+    $migration = deploySeoIntelMigrationEnvironment();
+    within('{{release_path}}/backend', function () use ($migration): void {
+        $script = <<<'PHP'
+try {
+    require 'vendor/autoload.php';
+    $app = require 'bootstrap/app.php';
+    $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+    $kernel->bootstrap();
+    if (config('seo_intel.enabled') !== true) {
+        echo "SEO Intel is disabled; skip dedicated migrations.\n";
+        exit(0);
+    }
+
+    $username = getenv('SEO_INTEL_MIGRATION_DB_USERNAME');
+    $password = getenv('SEO_INTEL_MIGRATION_DB_PASSWORD');
+    if (! is_string($username) || $username === '' || ! is_string($password) || $password === '') {
+        throw new RuntimeException('migration authority unavailable');
+    }
+
+    config([
+        'database.connections.seo_intel.username' => $username,
+        'database.connections.seo_intel.password' => $password,
+    ]);
+    Illuminate\Support\Facades\DB::purge('seo_intel');
+    $status = $kernel->call('migrate', [
+        '--database' => 'seo_intel',
+        '--path' => 'database/migrations/seo_intel',
+        '--force' => true,
+        '--no-interaction' => true,
+        '--ansi' => true,
+    ]);
+    echo $kernel->output();
+    exit($status);
+} catch (Throwable) {
+    fwrite(STDERR, "SEO Intel dedicated migration failed.\n");
+    exit(1);
+}
+PHP;
+
+        run('{{bin/php}} -d display_errors=0 -r '.deployShellArg($script), ['env' => $migration]);
     });
 });
 
@@ -1459,10 +1762,10 @@ task('seo:detector-foundation-receipt', function () {
         run(<<<'BASH'
 set -euo pipefail
 set +e
-{{bin/php}} -r 'require "vendor/autoload.php"; $app = require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); exit(config("seo_intel.enabled") ? 0 : 42);'
+{{bin/php}} -r 'require "vendor/autoload.php"; $app = require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); exit(! config("seo_intel.enabled") ? 42 : (config("seo_intel.write_enabled") ? 0 : 43));'
 detector_config_status="$?"
 set -e
-if [ "$detector_config_status" -ne 0 ] && [ "$detector_config_status" -ne 42 ]; then
+if [ "$detector_config_status" -ne 0 ] && [ "$detector_config_status" -ne 42 ] && [ "$detector_config_status" -ne 43 ]; then
   exit 19
 fi
 set +e
@@ -1497,6 +1800,18 @@ $ok = ($payload["metadata"]["source"]["source_state"] ?? null) === "measurement_
     && $payload["metadata"]["readback"]["duplicate_rows"] === null;
 exit($ok ? 0 : 1);
 ' || exit 23
+  exit 0
+fi
+if [ "$detector_config_status" -eq 43 ]; then
+  printf '%s' "$dry_run" | {{bin/php}} -r '
+$payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
+$ok = ($payload["metadata"]["source"]["source_state"] ?? null) === "available"
+    && ($payload["writes_attempted"] ?? null) === false
+    && ($payload["external_calls_attempted"] ?? null) === false
+    && ($payload["metadata"]["readback"]["performed"] ?? null) === false
+    && ($payload["metadata"]["search_submission_allowed"] ?? null) === false;
+exit($ok ? 0 : 1);
+' || exit 24
   exit 0
 fi
 
@@ -3562,6 +3877,8 @@ after('deploy:vendors', 'bootstrap-cache:clear-release');
 
 after('deploy:shared', 'guard:shared-permissions');
 after('guard:shared-permissions', 'crawler:configure-aggregate-runtime');
+after('crawler:configure-aggregate-runtime', 'runtime:configure-seo-intel');
+before('artisan:config:cache', 'guard:seo-intel-runtime-config');
 
 /**
  * vendor 必须先安装完成：

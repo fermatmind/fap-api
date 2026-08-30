@@ -102,10 +102,14 @@ final class SeoIntelMigrationIsolationTest extends TestCase
         $this->assertStringContainsString("'backend/database/migrations/**/*.php'", $ci);
         $this->assertStringContainsString('database/migrations/seo_intel', $ci);
         $this->assertStringContainsString("task('artisan:migrate-seo-intel'", $deploy);
-        $this->assertStringContainsString('migrate --database=seo_intel --path=database/migrations/seo_intel', $deploy);
-        $this->assertStringContainsString('config("seo_intel.enabled") ? 0 : 42', $deploy);
+        $this->assertStringContainsString("'--database' => 'seo_intel'", $deploy);
+        $this->assertStringContainsString("'--path' => 'database/migrations/seo_intel'", $deploy);
+        $this->assertStringContainsString("config('seo_intel.enabled') !== true", $deploy);
         $this->assertStringContainsString('SEO Intel is disabled; skip dedicated migrations.', $deploy);
-        $this->assertStringContainsString('unable to resolve SEO Intel runtime configuration', $deploy);
+        $this->assertStringContainsString('deploySeoIntelMigrationEnvironment()', $deploy);
+        $this->assertStringContainsString('Staging SEO Intel migration and runtime accounts must be distinct.', $deploy);
+        $this->assertStringContainsString("DB::purge('seo_intel')", $deploy);
+        $this->assertStringContainsString("['env' => \$migration]", $deploy);
         $this->assertStringContainsString("after('artisan:migrate-seo-intel', 'guard:no-pending-seo-intel-migrations')", $deploy);
 
         $migration = (string) file_get_contents(base_path('database/migrations/seo_intel/2026_08_23_120000_expand_seo_execution_workflow.php'));

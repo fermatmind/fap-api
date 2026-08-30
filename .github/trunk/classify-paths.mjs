@@ -57,6 +57,7 @@ const SEO_COUNCIL_CONTROL_PLANE_PATHS = new Set([
   ".github/trunk/classify-paths.mjs",
   ".github/trunk/classify-paths.test.mjs",
   ".github/trunk/seo-council-workflow-contract.test.mjs",
+  ".github/trunk/seo-platform-11e-runtime-dependency-contract.test.mjs",
   ".github/workflows/ci.yml",
   ".github/workflows/deploy.yml",
   "deploy.php",

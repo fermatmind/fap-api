@@ -240,6 +240,9 @@ final class SeoPlatform04DetectorFoundationCollectorTest extends TestCase
         $this->assertStringContainsString('seo:detector-foundation-receipt', $deploy);
         $this->assertStringContainsString('--collector=detector_foundation --dry-run --canary --limit=10', $deploy);
         $this->assertStringContainsString('--collector=detector_foundation --materialize-detector-queues --canary --limit=10', $deploy);
+        $this->assertStringContainsString('config("seo_intel.write_enabled") ? 0 : 43', $deploy);
+        $this->assertStringContainsString('if [ "$detector_config_status" -eq 43 ]; then', $deploy);
+        $this->assertStringContainsString('($payload["writes_attempted"] ?? null) === false', $deploy);
         $this->assertStringContainsString('"duplicate_rows"', $deploy);
         $this->assertStringContainsString('"search_submission_allowed"', $deploy);
         $this->assertStringNotContainsString('test "$dry_fingerprint" = "$controlled_fingerprint"', $deploy);
