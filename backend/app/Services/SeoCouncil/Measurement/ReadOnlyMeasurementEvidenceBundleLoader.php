@@ -10,7 +10,6 @@ use App\Services\SeoIntel\GscDataQualityGate;
 use App\Services\SeoIntel\OpsDashboard\SeoConversionFunnelReadService;
 use App\Services\SeoIntel\OpsDashboard\SeoDashboardApiReadService;
 use App\Services\SeoIntel\PageFamily\PageFamilyPolicyRegistry;
-use App\Services\SeoIntel\SearchToResultFunnelReadModel;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\Facades\DB;
@@ -27,7 +26,6 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
         private readonly GscDataQualityGate $quality,
         private readonly SeoDashboardApiReadService $dashboard,
         private readonly SeoConversionFunnelReadService $conversion,
-        private readonly SearchToResultFunnelReadModel $searchToResult,
         private readonly MeasurementEvidenceHoldReasonResolver $reasons,
     ) {}
 
@@ -93,7 +91,9 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
                     $modeId, [], 'unavailable', 'unknown', 'CRO_SCHEMA_UNAVAILABLE'
                 );
             }
-            $scope = $this->runtimeScope();
+            $scope = $modeId === 'search_measurement'
+                ? $this->searchRuntimeScope()
+                : $this->croRuntimeScope();
             if ($scope === null) {
                 return MeasurementEvidenceLoadResult::make(
                     $modeId,
@@ -136,6 +136,20 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
 
         $connection = (string) config('seo_intel.connection', 'seo_intel');
         try {
+            $latestAvailable = DB::connection($connection)->table('seo_gsc_daily as g')
+                ->join('seo_urls as u', 'u.canonical_url_hash', '=', 'g.canonical_url_hash')
+                ->where('u.page_family', $pageFamily)
+                ->where('u.locale', $locale)
+                ->where('u.is_private_flow', false)
+                ->where('g.source_engine', 'google')
+                ->where('g.data_state', 'final')
+                ->max('g.report_date');
+            if (! is_string($latestAvailable) || trim($latestAvailable) === '') {
+                return MeasurementEvidenceLoadResult::make(
+                    'search_measurement', [], 'unavailable', 'unknown', 'GSC_NO_ELIGIBLE_ROWS'
+                );
+            }
+            $latestAvailableDate = CarbonImmutable::parse($latestAvailable, 'UTC')->startOfDay();
             $rows = DB::connection($connection)->table('seo_gsc_daily as g')
                 ->join('seo_urls as u', 'u.canonical_url_hash', '=', 'g.canonical_url_hash')
                 ->where('u.page_family', $pageFamily)
@@ -143,7 +157,10 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
                 ->where('u.is_private_flow', false)
                 ->where('g.source_engine', 'google')
                 ->where('g.data_state', 'final')
-                ->where('g.report_date', '>=', now('UTC')->subDays(96)->toDateString())
+                ->whereBetween('g.report_date', [
+                    $latestAvailableDate->subDays(96)->toDateString(),
+                    $latestAvailableDate->toDateString(),
+                ])
                 ->get([
                     'g.report_date', 'g.canonical_url_hash', 'g.query_hash', 'g.source_engine',
                     'g.clicks', 'g.impressions', 'g.ctr_ppm', 'g.average_position_milli',
@@ -309,10 +326,12 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
             );
         }
         try {
-            $read = $this->conversion->read(0, ['group_by' => 'url', 'window_days' => 90, 'lang' => $locale], 100);
-            $to = now('UTC')->subDays(3)->toDateString();
-            $from = now('UTC')->subDays(92)->toDateString();
-            $chain = $this->searchToResult->report($from, $to, $pageFamily, 'google');
+            $storageLocale = $locale === 'zh-CN' ? 'zh-cn' : $locale;
+            $read = $this->conversion->read(0, [
+                'group_by' => 'url',
+                'window_days' => 90,
+                'lang' => $storageLocale,
+            ], 100);
         } catch (Throwable) {
             return MeasurementEvidenceLoadResult::make(
                 'commercial_funnel_cro', [], 'unavailable', 'unknown', 'CRO_READMODEL_UNHEALTHY'
@@ -328,8 +347,12 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
             $windowTotals[] = ['window_days' => $days, 'metrics' => $this->safeFunnelMetrics($metrics)];
         }
         $complete = array_column($windowTotals, 'window_days') === self::WINDOWS;
-        $mapping = (array) ($chain['product_event_mapping'] ?? []);
-        $mappingOk = array_keys($mapping) === ['start_test', 'complete_test', 'view_result'];
+        $mapping = (array) ($read['product_event_mapping'] ?? []);
+        $mappingOk = $mapping === [
+            'start_test' => 'analytics_seo_conversion_daily.start_test_count',
+            'complete_test' => 'analytics_seo_conversion_daily.complete_test_count',
+            'view_result' => 'analytics_seo_conversion_daily.view_result_count',
+        ];
         $freshness = (array) ($read['freshness'] ?? []);
         $freshnessKnown = is_numeric($freshness['age_hours'] ?? null);
         $stale = $freshnessKnown
@@ -344,18 +367,12 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
             'cta' => array_key_exists('article_to_test_click_count', (array) ($read['totals'] ?? [])),
         ];
         $readHealthy = ($read['measurement_state'] ?? null) === 'production_healthy';
-        $chainIssues = array_values(array_filter((array) ($chain['issues'] ?? []), 'is_string'));
-        $chainMappingFailed = array_intersect($chainIssues, [
-            'url_truth_missing_for_gsc_hash',
-            'page_family_invalid',
-        ]) !== [];
-        $chainHealthy = ($chain['status'] ?? null) === 'pass' && ($chain['read_only'] ?? null) === true;
         $reason = $this->reasons->cro([
             'schema_available' => true,
             'stale' => $stale,
-            'readmodel_healthy' => $readHealthy && ($chainHealthy || $chainMappingFailed),
+            'readmodel_healthy' => $readHealthy,
             'window_complete' => $complete,
-            'mapping_valid' => $mappingOk && ! $chainMappingFailed,
+            'mapping_valid' => $mappingOk,
             'stage_coverage_complete' => ! in_array(false, $stageCoverage, true),
         ]);
         $available = $reason === MeasurementEvidenceLoadResult::NONE;
@@ -379,8 +396,8 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
                 'latest_refresh_status' => $freshness['latest_attempt_status'] ?? null,
             ],
             'revision_hash' => hash('sha256', json_encode($mapping, JSON_THROW_ON_ERROR)),
-            'mapping_state' => $mappingOk && ! $chainMappingFailed ? 'mapped' : 'failed',
-            'quality_gate_status' => $readHealthy && $chainHealthy ? 'pass' : 'blocked',
+            'mapping_state' => $mappingOk ? 'mapped' : 'failed',
+            'quality_gate_status' => $readHealthy ? 'pass' : 'blocked',
             'window_complete' => $complete,
             'current_window_readable' => $windowTotals !== [],
             'valid_measurement_present' => ! $allZero,
@@ -432,7 +449,7 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
     }
 
     /** @return array{page_family:string,locale:string}|null */
-    private function runtimeScope(): ?array
+    private function searchRuntimeScope(): ?array
     {
         $connection = (string) config('seo_intel.connection', 'seo_intel');
         $row = DB::connection($connection)->table('seo_gsc_daily as g')
@@ -442,8 +459,8 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
             ->where('u.is_private_flow', false)
             ->where('g.source_engine', 'google')
             ->where('g.data_state', 'final')
-            ->where('g.report_date', '>=', now('UTC')->subDays(96)->toDateString())
             ->groupBy('u.page_family', 'u.locale')
+            ->orderByDesc(DB::raw('MAX(g.report_date)'))
             ->orderByDesc(DB::raw('COUNT(DISTINCT g.report_date)'))
             ->orderBy('u.page_family')
             ->orderBy('u.locale')
@@ -455,6 +472,45 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
         }
 
         return ['page_family' => (string) $row->page_family, 'locale' => (string) $row->locale];
+    }
+
+    /** @return array{page_family:string,locale:string}|null */
+    private function croRuntimeScope(): ?array
+    {
+        $rows = DB::connection((string) config('database.default'))
+            ->table('analytics_seo_conversion_daily')
+            ->where('org_id', 0)
+            ->whereIn('lang', ['en', 'zh-cn'])
+            ->groupBy('page_type', 'lang')
+            ->orderByDesc(DB::raw('MAX(day)'))
+            ->orderByDesc(DB::raw('COUNT(DISTINCT day)'))
+            ->get(['page_type', 'lang']);
+        foreach ($rows as $row) {
+            $family = $this->croPageFamily((string) ($row->page_type ?? ''));
+            $locale = match ($row->lang ?? null) {
+                'en' => 'en',
+                'zh-cn' => 'zh-CN',
+                default => null,
+            };
+            if ($family !== null && $locale !== null) {
+                return ['page_family' => $family, 'locale' => $locale];
+            }
+        }
+
+        return null;
+    }
+
+    private function croPageFamily(string $pageType): ?string
+    {
+        return match (strtolower(trim($pageType))) {
+            'tests', 'test', 'test_detail', 'test_hub' => 'tests',
+            'articles_topics', 'article', 'article_hub', 'topic', 'topic_hub' => 'articles_topics',
+            'career', 'career_job', 'career_guide', 'career_hub' => 'career',
+            'personality', 'personality_hub', 'personality_profile' => 'personality',
+            'trust_method_help', 'methodology', 'support_article', 'support_hub' => 'trust_method_help',
+            'other_public', 'home', 'landing_page' => 'other_public',
+            default => null,
+        };
     }
 
     private function searchSchemaAvailable(): bool
@@ -478,20 +534,14 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
     private function croSchemaAvailable(): bool
     {
         try {
-            $seo = Schema::connection((string) config('seo_intel.connection', 'seo_intel'));
             $main = Schema::connection((string) config('database.default'));
 
-            return $this->searchSchemaAvailable()
-                && $this->schemaHas($seo, 'seo_event_funnel_daily', [
-                    'report_date', 'canonical_url_hash', 'source_engine', 'traffic_quality', 'environment',
-                    'start_attempt_count', 'submit_attempt_count', 'view_result_count',
-                ])
-                && $this->schemaHas($main, 'analytics_seo_conversion_daily', [
-                    'day', 'org_id', 'url', 'lang', 'page_type', 'source_article', 'target_test',
-                    'scale_id', 'form_id', 'source_url', 'landing_pv_count', 'article_to_test_click_count',
-                    'start_test_count', 'complete_test_count', 'view_result_count',
-                    'return_public_content_count', 'last_refreshed_at',
-                ])
+            return $this->schemaHas($main, 'analytics_seo_conversion_daily', [
+                'day', 'org_id', 'url', 'lang', 'page_type', 'source_article', 'target_test',
+                'scale_id', 'form_id', 'source_url', 'landing_pv_count', 'article_to_test_click_count',
+                'start_test_count', 'complete_test_count', 'view_result_count',
+                'return_public_content_count', 'last_refreshed_at',
+            ])
                 && $this->schemaHas($main, 'analytics_seo_conversion_refresh_runs', [
                     'org_scope_count', 'status', 'trigger_mode', 'completed_at',
                 ]);

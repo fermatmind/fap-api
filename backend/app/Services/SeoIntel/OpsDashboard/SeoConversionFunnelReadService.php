@@ -88,6 +88,7 @@ final class SeoConversionFunnelReadService
             'available_windows' => [7, 28, 90],
             'filters' => $this->safeFilters($filters),
             'privacy' => $this->privacyStatus(),
+            'product_event_mapping' => $this->productEventMapping(),
             'measurement_state' => $measurementHold ? 'MEASUREMENT_HOLD' : 'production_healthy',
             'freshness' => [
                 'last_successful_refresh_at' => $lastRefreshedAt,
@@ -181,6 +182,7 @@ final class SeoConversionFunnelReadService
             'group_by' => $groupBy,
             'filters' => [],
             'privacy' => $this->privacyStatus(),
+            'product_event_mapping' => $this->productEventMapping(),
             'totals' => [
                 ...$this->nullMetrics(),
             ],
@@ -202,6 +204,16 @@ final class SeoConversionFunnelReadService
             'query_policy' => 'query_and_fragment_stripped_before_daily_storage',
             'private_path_policy' => 'result_order_share_pay_history_excluded',
             'raw_business_identifier_policy' => 'business_identifiers_rejected_before_daily_storage',
+        ];
+    }
+
+    /** @return array<string, string> */
+    private function productEventMapping(): array
+    {
+        return [
+            'start_test' => self::TABLE.'.start_test_count',
+            'complete_test' => self::TABLE.'.complete_test_count',
+            'view_result' => self::TABLE.'.view_result_count',
         ];
     }
 

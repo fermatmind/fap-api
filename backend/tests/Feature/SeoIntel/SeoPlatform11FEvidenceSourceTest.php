@@ -114,7 +114,7 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
 
         $this->setUpReadModels();
         DB::table('seo_gsc_daily')->delete();
-        $this->assertSame('CRO_READMODEL_UNHEALTHY', app(ReadOnlyMeasurementEvidenceBundleLoader::class)->diagnoseForScope('mission:cro-readmodel', 'commercial_funnel_cro', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
+        $this->assertSame('NONE', app(ReadOnlyMeasurementEvidenceBundleLoader::class)->diagnoseForScope('mission:cro-independent', 'commercial_funnel_cro', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
 
         $this->setUpReadModels();
         DB::table('analytics_seo_conversion_refresh_runs')->update(['completed_at' => now('UTC')->subDays(5)]);
@@ -122,8 +122,18 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
         $this->assertSame('CRO_STALE', app(ReadOnlyMeasurementEvidenceBundleLoader::class)->diagnoseForScope('mission:cro-stale', 'commercial_funnel_cro', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
 
         $this->setUpReadModels();
-        DB::table('seo_urls')->delete();
-        $this->assertSame('CRO_MAPPING_FAILED', app(ReadOnlyMeasurementEvidenceBundleLoader::class)->diagnoseForScope('mission:cro-mapping', 'commercial_funnel_cro', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
+        DB::table('analytics_seo_conversion_refresh_runs')->delete();
+        DB::table('analytics_seo_conversion_daily')->update(['last_refreshed_at' => null]);
+        $this->assertSame('CRO_READMODEL_UNHEALTHY', app(ReadOnlyMeasurementEvidenceBundleLoader::class)->diagnoseForScope('mission:cro-readmodel', 'commercial_funnel_cro', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
+    }
+
+    public function test_runtime_scope_diagnoses_search_and_cro_from_independent_readmodels(): void
+    {
+        DB::table('seo_gsc_daily')->delete();
+        $loader = app(ReadOnlyMeasurementEvidenceBundleLoader::class);
+
+        $this->assertSame('GSC_NO_ELIGIBLE_ROWS', $loader->diagnoseForRuntime('mission:runtime-search', 'search_measurement', 'staging_runtime')->diagnostic()['hold_reason']);
+        $this->assertSame('NONE', $loader->diagnoseForRuntime('mission:runtime-cro', 'commercial_funnel_cro', 'staging_runtime')->diagnostic()['hold_reason']);
     }
 
     private function setUpReadModels(): void
