@@ -6,6 +6,10 @@ const ci = readFileSync(new URL("../workflows/ci.yml", import.meta.url), "utf8")
 const deploy = readFileSync(new URL("../workflows/deploy.yml", import.meta.url), "utf8");
 const deployer = readFileSync(new URL("../../deploy.php", import.meta.url), "utf8");
 const exporter = readFileSync(new URL("../../backend/scripts/seo/export_seo_council_contracts.php", import.meta.url), "utf8");
+const bigFiveDeliverySmoke = readFileSync(
+  new URL("../../backend/scripts/deploy/verify_staging_big_five_report_delivery.sh", import.meta.url),
+  "utf8",
+);
 
 test("11F extends the permanent exact-SHA control plane with offline-eval and runtime receipts", () => {
   for (const source of [ci, deploy, deployer]) {
@@ -146,4 +150,15 @@ test("staging deployment and smoke precede source readiness while production nev
   assert.doesNotMatch(production, /measurement-source-readiness/);
   assert.match(production, /ConnectionAttempts=3/);
   assert.match(production, /if test '\$\{\{ needs\.policy\.outputs\.seo_council_orchestration \}\}' = true; then deploy_timeout=60m; fi/);
+});
+
+test("11F readiness remains downstream of queue-backed Big Five delivery", () => {
+  assert.match(deployer, /after\('queue:reload-workers', 'healthcheck:queue-smoke'\);/);
+  assert.match(
+    deployer,
+    /after\('healthcheck:queue-smoke', 'healthcheck:staging-big-five-report-delivery'\);/,
+  );
+  assert.match(bigFiveDeliverySmoke, /snapshot_status" == ready/);
+  assert.match(bigFiveDeliverySmoke, /Illuminate\\Support\\Facades\\DB::table\("report_snapshots"\)/);
+  assert.match(bigFiveDeliverySmoke, /public_result=200/);
 });
