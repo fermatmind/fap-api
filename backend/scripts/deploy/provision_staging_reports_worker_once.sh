@@ -16,8 +16,19 @@ fail() {
 [[ "$deploy_path" =~ ^/[A-Za-z0-9._/-]+$ ]] || fail INVALID_DEPLOY_PATH
 [[ "$deploy_path" != *'..'* ]] || fail INVALID_DEPLOY_PATH
 [[ -x /usr/bin/php ]] || fail PHP_UNAVAILABLE
-[[ -x "$supervisorctl_path" ]] || fail SUPERVISORCTL_UNAVAILABLE
 sudo -n true >/dev/null 2>&1 || fail SUDO_UNAVAILABLE
+
+supervisor_installed=false
+if [[ ! -x "$supervisorctl_path" ]]; then
+  [[ -x /usr/bin/apt-get ]] || fail SUPERVISOR_INSTALL_UNAVAILABLE
+  sudo -n /usr/bin/apt-get update -qq || fail SUPERVISOR_APT_UPDATE
+  sudo -n env DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get install -y -qq --no-install-recommends supervisor \
+    >/dev/null || fail SUPERVISOR_APT_INSTALL
+  supervisor_installed=true
+fi
+[[ -x "$supervisorctl_path" ]] || fail SUPERVISORCTL_UNAVAILABLE
+[[ -x /usr/bin/systemctl ]] || fail SYSTEMCTL_UNAVAILABLE
+sudo -n /usr/bin/systemctl enable --now supervisor >/dev/null || fail SUPERVISOR_SERVICE_START
 
 deploy_root="$(readlink -f "$deploy_path")"
 current_backend="$(readlink -f "$deploy_root/current/backend")"
@@ -157,5 +168,5 @@ while (( SECONDS <= deadline )); do
 done
 
 [[ "$converged" == true ]] || fail BACKLOG_DID_NOT_CONVERGE
-printf 'staging_reports_provision=pass installed=%s workers_running=1 pending_before=%s pending_after=0 ready_transitions=%s reports_depth_before=%s reports_depth_after=%s\n' \
-  "$installed" "$pending_before" "$ready_since" "$reports_before" "$reports_after"
+printf 'staging_reports_provision=pass supervisor_installed=%s program_installed=%s workers_running=1 pending_before=%s pending_after=0 ready_transitions=%s reports_depth_before=%s reports_depth_after=%s\n' \
+  "$supervisor_installed" "$installed" "$pending_before" "$ready_since" "$reports_before" "$reports_after"

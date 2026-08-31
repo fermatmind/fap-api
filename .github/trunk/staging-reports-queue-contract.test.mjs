@@ -42,6 +42,8 @@ test("one-time provision installs the exact one-process reports topology", () =>
   assert.match(provision, /numprocs=1/);
   assert.match(provision, /user=www-data/);
   assert.match(provision, /stdout_logfile=\$\{shared_log_dir\}\/fap-queue-reports\.log/);
+  assert.match(provision, /apt-get install -y -qq --no-install-recommends supervisor/);
+  assert.match(provision, /systemctl enable --now supervisor/);
   assert.match(provision, /where\('status', 'ready'\)/);
   assert.match(provision, /ready_since >= pending_before/);
   assert.doesNotMatch(provision, /queue:work database_reports --queue=reports --once/);
