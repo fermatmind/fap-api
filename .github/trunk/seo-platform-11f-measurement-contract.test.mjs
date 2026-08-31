@@ -53,7 +53,7 @@ test("11F deployment diagnostics expose only reason enums, booleans, and hashes"
   assert.doesNotMatch(diagnostic, /getMessage|DB_HOST|DB_PORT|DB_DATABASE|canonical_url|query_hash|source_ref|payload|token|credential/i);
 });
 
-test("staging source readiness precedes Council closeout and production never backfills", () => {
+test("staging deployment and smoke precede source readiness while production never backfills", () => {
   const stagingStart = deploy.indexOf("  staging:");
   const productionStart = deploy.indexOf("  production:");
   const staging = deploy.slice(stagingStart, productionStart);
@@ -63,7 +63,7 @@ test("staging source readiness precedes Council closeout and production never ba
   const enforcement = staging.indexOf("Enforce staging measurement source readiness");
   const candidate = staging.indexOf("Materialize inactive staging measurement candidate");
   const deployment = staging.indexOf("Deploy staging and run repository smoke chain");
-  assert.ok(candidate > 0 && readiness > candidate && enforcement > readiness && deployment > enforcement);
+  assert.ok(deployment > 0 && candidate > deployment && readiness > candidate && enforcement > readiness);
   assert.match(staging, /id: measurement_source_readiness/);
   assert.match(staging, /continue-on-error: true/);
   assert.match(staging, /steps\.measurement_source_readiness\.outcome != 'success'/);

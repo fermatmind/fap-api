@@ -443,23 +443,28 @@ jobs:
           echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
           echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
           printf '%s\n' "$STAGING_REPO_READ_SSH_KEY" | ssh-add - >/dev/null 2>&1
-      - name: Provision staging reports worker once
-        shell: bash
+      - name: Deploy staging and run repository smoke chain
+        env:
+          SEO_INTEL_DB_HOST: ${{ secrets.SEO_INTEL_DB_HOST }}
+          SEO_INTEL_DB_PORT: ${{ secrets.SEO_INTEL_DB_PORT }}
+          SEO_INTEL_DB_DATABASE: ${{ secrets.SEO_INTEL_DB_DATABASE }}
+          SEO_INTEL_DB_USERNAME: ${{ secrets.SEO_INTEL_DB_USERNAME }}
+          SEO_INTEL_DB_PASSWORD: ${{ secrets.SEO_INTEL_DB_PASSWORD }}
+          SEO_INTEL_MIGRATION_DB_USERNAME: ${{ secrets.SEO_INTEL_MIGRATION_DB_USERNAME }}
+          SEO_INTEL_MIGRATION_DB_PASSWORD: ${{ secrets.SEO_INTEL_MIGRATION_DB_PASSWORD }}
         run: |
           set -euo pipefail
-          remote_script="/tmp/fermatmind-staging-reports-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.sh"
-          scp -q -o BatchMode=yes -o StrictHostKeyChecking=yes -o IdentitiesOnly=yes \
-            -o ConnectTimeout=10 -o ConnectionAttempts=3 \
-            -i "$DEPLOY_IDENTITY_FILE_STG" -P "$DEPLOY_PORT" \
-            backend/scripts/deploy/provision_staging_reports_worker_once.sh \
-            "$DEPLOY_USER@$DEPLOY_HOST:$remote_script"
-          printf -v q_script '%q' "$remote_script"
-          printf -v q_path '%q' "$DEPLOY_PATH"
-          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o IdentitiesOnly=yes \
-            -o ConnectTimeout=10 -o ConnectionAttempts=3 \
-            -i "$DEPLOY_IDENTITY_FILE_STG" -p "$DEPLOY_PORT" \
-            "$DEPLOY_USER@$DEPLOY_HOST" \
-            "set -euo pipefail; trap 'rm -f -- $q_script' EXIT; chmod 700 $q_script; DEPLOY_PATH=$q_path bash $q_script"
+          test "$(git rev-parse HEAD)" = "$DEPLOY_SHA"
+          council_orchestration='${{ needs.policy.outputs.seo_council_orchestration }}'
+          deploy_timeout=30m
+          if test "$council_orchestration" = true; then deploy_timeout=60m; fi
+          timeout --signal=TERM --kill-after=30s "$deploy_timeout" php /tmp/dep.phar deploy staging -f deploy.php --revision "$DEPLOY_SHA" \
+            -o release_name="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode=standard \
+            -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' \
+            -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' \
+            -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' \
+            -o private_result_authority_publish_required='${{ needs.policy.outputs.private_result_authority_publish_required }}' \
+            -o seo_council_orchestration="$council_orchestration" --no-interaction
       - name: Materialize inactive staging measurement candidate
         if: needs.policy.outputs.seo_council_orchestration == 'true'
         env:
@@ -788,28 +793,6 @@ jobs:
         run: |
           printf 'staging_closeout=HOLD reason=MEASUREMENT_SOURCE_READINESS_HOLD\n' >&2
           exit 1
-      - name: Deploy staging and run repository smoke chain
-        env:
-          SEO_INTEL_DB_HOST: ${{ secrets.SEO_INTEL_DB_HOST }}
-          SEO_INTEL_DB_PORT: ${{ secrets.SEO_INTEL_DB_PORT }}
-          SEO_INTEL_DB_DATABASE: ${{ secrets.SEO_INTEL_DB_DATABASE }}
-          SEO_INTEL_DB_USERNAME: ${{ secrets.SEO_INTEL_DB_USERNAME }}
-          SEO_INTEL_DB_PASSWORD: ${{ secrets.SEO_INTEL_DB_PASSWORD }}
-          SEO_INTEL_MIGRATION_DB_USERNAME: ${{ secrets.SEO_INTEL_MIGRATION_DB_USERNAME }}
-          SEO_INTEL_MIGRATION_DB_PASSWORD: ${{ secrets.SEO_INTEL_MIGRATION_DB_PASSWORD }}
-        run: |
-          set -euo pipefail
-          test "$(git rev-parse HEAD)" = "$DEPLOY_SHA"
-          council_orchestration='${{ needs.policy.outputs.seo_council_orchestration }}'
-          deploy_timeout=30m
-          if test "$council_orchestration" = true; then deploy_timeout=60m; fi
-          timeout --signal=TERM --kill-after=30s "$deploy_timeout" php /tmp/dep.phar deploy staging -f deploy.php --revision "$DEPLOY_SHA" \
-            -o release_name="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode=standard \
-            -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' \
-            -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' \
-            -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' \
-            -o private_result_authority_publish_required='${{ needs.policy.outputs.private_result_authority_publish_required }}' \
-            -o seo_council_orchestration="$council_orchestration" --no-interaction
       - name: Read staging SEO Evidence closeout receipt
         if: needs.policy.outputs.seo_agent_evidence_boundary == 'true'
         shell: bash

@@ -36,7 +36,7 @@ test("staging requires only the database reports worker before activation", () =
   assert.match(deployer, /queue capability preflight requires a recoverable supervisor program/);
 });
 
-test("one-time provision installs the exact one-process reports topology", () => {
+test("completed one-time provision remains as the exact one-process reports topology", () => {
   assert.match(provision, /\[program:fap-queue-reports\]/);
   assert.match(provision, /directory=\$\{deploy_root\}\/current\/backend/);
   assert.match(
@@ -55,10 +55,8 @@ test("one-time provision installs the exact one-process reports topology", () =>
   assert.match(provision, /ready_since >= pending_before/);
   assert.doesNotMatch(provision, /queue:work database_reports --queue=reports --once/);
 
-  const provisionIndex = workflow.indexOf("name: Provision staging reports worker once");
-  const deployIndex = workflow.indexOf("name: Deploy staging and run repository smoke chain");
-  assert.ok(provisionIndex > 0 && deployIndex > provisionIndex);
-  assert.match(workflow, /provision_staging_reports_worker_once\.sh/);
+  assert.doesNotMatch(workflow, /name: Provision staging reports worker once/);
+  assert.doesNotMatch(workflow, /provision_staging_reports_worker_once\.sh/);
 });
 
 test("sync skips only the default queue while reports remain fail closed", () => {
