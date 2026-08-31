@@ -655,6 +655,7 @@ jobs:
             and .rows_upserted > 0
             and .mapped_rows > 0
             and .unmapped_rows == 0
+            and (.excluded_non_authority_rows | type == "number" and . >= 0)
             and .duplicate_natural_keys == 0
             and .quality_gate.status == "pass"
             and (.data_max_date | type == "string" and length == 10)
@@ -714,6 +715,7 @@ jobs:
                 rows_seen: $gsc[0].rows_seen,
                 mapped_rows: $gsc[0].mapped_rows,
                 unmapped_rows: $gsc[0].unmapped_rows,
+                excluded_non_authority_rows: $gsc[0].excluded_non_authority_rows,
                 duplicate_natural_keys: $gsc[0].duplicate_natural_keys,
                 data_lag_days: $gsc[0].data_lag_days
               },
