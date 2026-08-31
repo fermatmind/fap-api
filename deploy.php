@@ -103,6 +103,7 @@ set('required_public_scale_lookup_slugs', [
 ]);
 set('scale_lookup_healthcheck_host', 'api.fermatmind.com');
 set('scale_lookup_healthcheck_use_resolve', false);
+set('public_web_base_url', 'https://fermatmind.com');
 set('deploy_lock_metadata_path', '.dep/deploy.lock.meta.json');
 
 /**
@@ -569,7 +570,10 @@ $stagingHost = host('staging')
     ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api-staging')
     ->set('php_fpm_service', getenv('PHP_FPM_SERVICE_STG') ?: 'php8.4-fpm')
     ->set('keep_releases', 3)
-    ->set('queue_reload_required', false)
+    ->set('queue_supervisor_required_programs', [
+        'fap-queue-reports',
+    ])
+    ->set('public_web_base_url', getenv('PUBLIC_WEB_BASE_URL_STG') ?: 'https://fermatmind.com')
     ->set('env', [
         'SEO_PUBLIC_SITEMAP_AUTHORITY' => getenv('SEO_PUBLIC_SITEMAP_AUTHORITY_STG') ?: 'backend',
     ]);
@@ -3629,75 +3633,31 @@ BASH, timeout: 60);
 
 task('healthcheck:queue-smoke', function () {
     within('{{current_path}}/backend', function () {
-        run(<<<'BASH'
-{{bin/php}} -r '
-require "vendor/autoload.php";
-$app = require "bootstrap/app.php";
-$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
-$kernel->bootstrap();
+        run('bash scripts/deploy/verify_queue_smoke.sh', timeout: 60);
+    });
+});
 
-$queue = (string) config("ops.deploy_queue_smoke.queue", "default");
-$maxDepth = max(0, (int) config("ops.deploy_queue_smoke.max_depth", 5));
-$waitSeconds = max(1, (int) config("ops.deploy_queue_smoke.stability_wait_seconds", 15));
-$maxGrowth = max(0, (int) config("ops.deploy_queue_smoke.max_growth", 1));
-$pendingWindowMinutes = max(1, (int) config("ops.deploy_queue_smoke.pending_window_minutes", 30));
-$maxRecentPending = max(0, (int) config("ops.deploy_queue_smoke.max_recent_pending", 3));
+task('healthcheck:staging-big-five-report-delivery', function () {
+    if (currentHost()->getAlias() !== 'staging') {
+        writeln('<comment>Skip staging Big Five report delivery smoke outside staging</comment>');
 
-$queueConnectionName = (string) config("queue.default", "redis");
-$queueConnection = (array) config("queue.connections." . $queueConnectionName, []);
-$queueDriver = (string) ($queueConnection["driver"] ?? "");
-if ($queueDriver !== "redis") {
-    echo json_encode([
-        "queue" => $queue,
-        "queue_connection" => $queueConnectionName,
-        "queue_driver" => $queueDriver === "" ? "unknown" : $queueDriver,
-        "skipped" => true,
-        "reason" => "non_redis_queue_driver",
-    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . PHP_EOL;
-    exit(0);
-}
+        return;
+    }
 
-$redisConnection = (string) ($queueConnection["connection"] ?? "default");
-$redis = Illuminate\Support\Facades\Redis::connection($redisConnection);
-$queueKey = "queues:" . $queue;
-$before = (int) $redis->llen($queueKey);
-sleep($waitSeconds);
-$after = (int) $redis->llen($queueKey);
-$recentPending = (int) Illuminate\Support\Facades\DB::table("attempt_submissions")
-    ->whereIn("state", ["pending", "running"])
-    ->where("updated_at", ">=", now()->subMinutes($pendingWindowMinutes))
-    ->count();
+    $healthcheckHost = deploySafeHost((string) get('healthcheck_host'), 'healthcheck_host');
+    $publicWebBaseUrl = rtrim(trim((string) get('public_web_base_url', 'https://fermatmind.com')), '/');
+    if (preg_match('#\Ahttps://[A-Za-z0-9.-]+(?::[0-9]+)?\z#D', $publicWebBaseUrl) !== 1) {
+        throw new \RuntimeException('public_web_base_url must be an HTTPS origin');
+    }
 
-$payload = [
-    "queue" => $queue,
-    "before" => $before,
-    "after" => $after,
-    "max_depth" => $maxDepth,
-    "wait_seconds" => $waitSeconds,
-    "max_growth" => $maxGrowth,
-    "recent_pending_window_minutes" => $pendingWindowMinutes,
-    "recent_pending" => $recentPending,
-    "max_recent_pending" => $maxRecentPending,
-];
-
-if ($after > $maxDepth) {
-    fwrite(STDERR, "deploy queue smoke failed: queue depth exceeds threshold: " . json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n");
-    exit(1);
-}
-
-if (($after - $before) > $maxGrowth) {
-    fwrite(STDERR, "deploy queue smoke failed: queue depth still growing: " . json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n");
-    exit(1);
-}
-
-if ($recentPending > $maxRecentPending) {
-    fwrite(STDERR, "deploy queue smoke failed: recent pending submissions exceed threshold: " . json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n");
-    exit(1);
-}
-
-echo json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . PHP_EOL;
-'
-BASH);
+    within('{{current_path}}/backend', function () use ($healthcheckHost, $publicWebBaseUrl): void {
+        run(
+            'HEALTHCHECK_HOST='.deployShellArg($healthcheckHost)
+                .' PUBLIC_WEB_BASE_URL='.deployShellArg($publicWebBaseUrl)
+                .' DEPLOY_REVISION='.deployShellArg((string) (getenv('DEPLOY_REVISION') ?: ''))
+                .' bash scripts/deploy/verify_staging_big_five_report_delivery.sh',
+            timeout: 120,
+        );
     });
 });
 
@@ -4106,8 +4066,9 @@ after('deploy:symlink', 'healthcheck:seo-council-anonymous');
 after('healthcheck:ops-entry-contract', 'seo:ledger-production-closeout');
 after('healthcheck:ops-entry-contract', 'seo:agent-evidence-boundary-closeout');
 after('healthcheck:ops-entry-contract', 'seo:agent-policy-gateway-closeout');
-after('deploy:symlink', 'healthcheck:queue-smoke');
 after('queue:reload-workers', 'scheduler:install-managed-cron');
+after('queue:reload-workers', 'healthcheck:queue-smoke');
+after('healthcheck:queue-smoke', 'healthcheck:staging-big-five-report-delivery');
 after('scheduler:install-managed-cron', 'scheduler:wait-natural-heartbeat');
 after('scheduler:wait-natural-heartbeat', 'seo:council-orchestration-closeout');
 

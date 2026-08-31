@@ -147,6 +147,50 @@ final class Big5RetakeCooldownTest extends TestCase
         $this->assertDatabaseMissing('attempts', ['anon_id' => 'codex_probe_body_only_spoof']);
     }
 
+    public function test_staging_loopback_report_smoke_can_use_reserved_probe_identity_only_with_internal_header(): void
+    {
+        (new ScaleRegistrySeeder)->run();
+        config()->set('analytics.smoke_attempt_exclusion.anon_id_prefixes', ['codex_probe_']);
+        $this->app->detectEnvironment(static fn (): string => 'staging');
+
+        $trustedAnonId = 'codex_probe_staging_report_delivery';
+        $trusted = $this->withServerVariables([
+            'REMOTE_ADDR' => '127.0.0.1',
+        ])->withHeaders([
+            'X-Anon-Id' => $trustedAnonId,
+            'X-FermatMind-Internal-Probe' => 'report-delivery-v1',
+        ])->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'BIG5_OCEAN',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'anon_id' => $trustedAnonId,
+            'form_code' => 'big5_90',
+        ]);
+
+        $trusted->assertStatus(200);
+        $trusted->assertJsonPath('anon_id', $trustedAnonId);
+        $trusted->assertJsonPath('form_code', 'big5_90');
+        $this->assertDatabaseHas('attempts', ['anon_id' => $trustedAnonId]);
+
+        $remoteSpoof = 'codex_probe_remote_spoof';
+        $remote = $this->withServerVariables([
+            'REMOTE_ADDR' => '203.0.113.10',
+        ])->withHeaders([
+            'X-Anon-Id' => $remoteSpoof,
+            'X-FermatMind-Internal-Probe' => 'report-delivery-v1',
+        ])->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'BIG5_OCEAN',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'anon_id' => $remoteSpoof,
+            'form_code' => 'big5_90',
+        ]);
+
+        $remote->assertStatus(200);
+        $this->assertFalse(str_starts_with((string) $remote->json('anon_id'), 'codex_probe_'));
+        $this->assertDatabaseMissing('attempts', ['anon_id' => $remoteSpoof]);
+    }
+
     public function test_big5_retake_cooldown_can_be_restored_from_pack_policy(): void
     {
         (new ScaleRegistrySeeder)->run();

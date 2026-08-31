@@ -139,9 +139,15 @@ return [
     'deploy_queue_smoke' => [
         'queue' => env('OPS_DEPLOY_QUEUE_SMOKE_QUEUE', 'default'),
         'max_depth' => (int) env('OPS_DEPLOY_QUEUE_SMOKE_MAX_DEPTH', 5),
-        'stability_wait_seconds' => (int) env('OPS_DEPLOY_QUEUE_SMOKE_WAIT_SECONDS', 15),
+        'stability_wait_seconds' => (int) env('OPS_DEPLOY_QUEUE_SMOKE_WAIT_SECONDS', 10),
         'max_growth' => (int) env('OPS_DEPLOY_QUEUE_SMOKE_MAX_GROWTH', 1),
         'pending_window_minutes' => (int) env('OPS_DEPLOY_QUEUE_SMOKE_PENDING_WINDOW_MINUTES', 30),
         'max_recent_pending' => (int) env('OPS_DEPLOY_QUEUE_SMOKE_MAX_RECENT_PENDING', 3),
+        'reports_connection' => env('OPS_DEPLOY_REPORTS_QUEUE_CONNECTION', 'database_reports'),
+        'reports_queue' => env('OPS_DEPLOY_REPORTS_QUEUE', 'reports'),
+        'reports_max_depth' => (int) env('OPS_DEPLOY_REPORTS_QUEUE_MAX_DEPTH', 3),
+        'reports_max_growth' => (int) env('OPS_DEPLOY_REPORTS_QUEUE_MAX_GROWTH', 1),
+        'reports_max_oldest_seconds' => (int) env('OPS_DEPLOY_REPORTS_QUEUE_MAX_OLDEST_SECONDS', 180),
+        'reports_snapshot_max_pending_seconds' => (int) env('OPS_DEPLOY_REPORT_SNAPSHOT_MAX_PENDING_SECONDS', 180),
     ],
 ];

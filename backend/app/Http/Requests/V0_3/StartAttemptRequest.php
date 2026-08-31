@@ -167,7 +167,9 @@ class StartAttemptRequest extends FormRequest
             return null;
         }
 
-        if (app(AnalyticsTrafficExclusionPolicy::class)->hasExcludedProbePrefix($normalized)) {
+        $exclusionPolicy = app(AnalyticsTrafficExclusionPolicy::class);
+        if ($exclusionPolicy->hasExcludedProbePrefix($normalized)
+            && ! $exclusionPolicy->allowsTrustedStagingProbe($this, $normalized)) {
             return null;
         }
 

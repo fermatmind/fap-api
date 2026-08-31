@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Analytics;
 
+use Illuminate\Http\Request;
+
 final class AnalyticsTrafficExclusionPolicy
 {
     /**
@@ -90,6 +92,19 @@ final class AnalyticsTrafficExclusionPolicy
         }
 
         return false;
+    }
+
+    public function allowsTrustedStagingProbe(Request $request, mixed $value): bool
+    {
+        if (! $this->hasExcludedProbePrefix($value)
+            || ! app()->environment('staging')
+            || trim((string) $request->header('X-FermatMind-Internal-Probe')) !== 'report-delivery-v1') {
+            return false;
+        }
+
+        $remoteAddress = trim((string) $request->server('REMOTE_ADDR', ''));
+
+        return in_array($remoteAddress, ['127.0.0.1', '::1'], true);
     }
 
     /**

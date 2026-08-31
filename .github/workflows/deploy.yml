@@ -443,6 +443,23 @@ jobs:
           echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
           echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
           printf '%s\n' "$STAGING_REPO_READ_SSH_KEY" | ssh-add - >/dev/null 2>&1
+      - name: Provision staging reports worker once
+        shell: bash
+        run: |
+          set -euo pipefail
+          remote_script="/tmp/fermatmind-staging-reports-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.sh"
+          scp -q -o BatchMode=yes -o StrictHostKeyChecking=yes -o IdentitiesOnly=yes \
+            -o ConnectTimeout=10 -o ConnectionAttempts=3 \
+            -i "$DEPLOY_IDENTITY_FILE_STG" -P "$DEPLOY_PORT" \
+            backend/scripts/deploy/provision_staging_reports_worker_once.sh \
+            "$DEPLOY_USER@$DEPLOY_HOST:$remote_script"
+          printf -v q_script '%q' "$remote_script"
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o IdentitiesOnly=yes \
+            -o ConnectTimeout=10 -o ConnectionAttempts=3 \
+            -i "$DEPLOY_IDENTITY_FILE_STG" -p "$DEPLOY_PORT" \
+            "$DEPLOY_USER@$DEPLOY_HOST" \
+            "set -euo pipefail; trap 'rm -f -- $q_script' EXIT; chmod 700 $q_script; DEPLOY_PATH=$q_path bash $q_script"
       - name: Materialize inactive staging measurement candidate
         if: needs.policy.outputs.seo_council_orchestration == 'true'
         env:

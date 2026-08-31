@@ -13,8 +13,8 @@ class ResolveAnonId
 {
     public function handle(Request $request, Closure $next): Response
     {
-        $headerAnonId = $this->normalize($request->header('X-Anon-Id'));
-        $cookieAnonId = $this->normalize($request->cookie('fap_anonymous_id_v1'));
+        $headerAnonId = $this->normalize($request->header('X-Anon-Id'), $request);
+        $cookieAnonId = $this->normalize($request->cookie('fap_anonymous_id_v1'), $request);
 
         $resolved = $headerAnonId ?? $cookieAnonId;
         if ($resolved !== null) {
@@ -25,7 +25,7 @@ class ResolveAnonId
         return $next($request);
     }
 
-    private function normalize(mixed $value): ?string
+    private function normalize(mixed $value, Request $request): ?string
     {
         if (! is_string($value) && ! is_numeric($value)) {
             return null;
@@ -43,7 +43,9 @@ class ResolveAnonId
             }
         }
 
-        if (app(AnalyticsTrafficExclusionPolicy::class)->hasExcludedProbePrefix($trimmed)) {
+        $exclusionPolicy = app(AnalyticsTrafficExclusionPolicy::class);
+        if ($exclusionPolicy->hasExcludedProbePrefix($trimmed)
+            && ! $exclusionPolicy->allowsTrustedStagingProbe($request, $trimmed)) {
             return null;
         }
 
