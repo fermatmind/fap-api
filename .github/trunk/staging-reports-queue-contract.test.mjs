@@ -90,6 +90,14 @@ test("worker reload precedes queue and Big Five delivery smoke", () => {
     deployer,
     /after\('healthcheck:queue-smoke', 'healthcheck:staging-big-five-report-delivery'\);/,
   );
+  assert.match(
+    queueSmoke,
+    /exec \/usr\/bin\/sudo -n -u www-data -- \/usr\/bin\/bash "\$0"/,
+  );
+  assert.match(
+    deliverySmoke,
+    /exec \/usr\/bin\/sudo -n -u www-data -- \/usr\/bin\/env/,
+  );
 });
 
 test("staging Big Five delivery smoke is bounded and redacts private identity", () => {

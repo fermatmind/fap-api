@@ -18,6 +18,14 @@ command -v curl >/dev/null 2>&1 || fail CURL_UNAVAILABLE
 command -v jq >/dev/null 2>&1 || fail JQ_UNAVAILABLE
 command -v php >/dev/null 2>&1 || fail PHP_UNAVAILABLE
 
+if [[ "$(id -un)" != www-data ]]; then
+  exec /usr/bin/sudo -n -u www-data -- /usr/bin/env \
+    HEALTHCHECK_HOST="$healthcheck_host" \
+    PUBLIC_WEB_BASE_URL="$public_web_base_url" \
+    DEPLOY_REVISION="$deploy_revision" \
+    /usr/bin/bash "$0"
+fi
+
 tmp_dir="$(mktemp -d "${TMPDIR:-/tmp}/fermatmind-big5-report-smoke.XXXXXX")"
 trap 'rm -rf -- "$tmp_dir"' EXIT
 chmod 700 "$tmp_dir"

@@ -5,6 +5,10 @@ set -Eeuo pipefail
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 backend_root="$(cd -- "$script_dir/../.." && pwd)"
 
+if [[ "$(id -un)" != www-data ]]; then
+  exec /usr/bin/sudo -n -u www-data -- /usr/bin/bash "$0"
+fi
+
 exec php -d display_errors=0 -- "$backend_root" <<'PHP'
 <?php
 
