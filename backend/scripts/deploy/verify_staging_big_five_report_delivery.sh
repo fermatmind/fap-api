@@ -158,7 +158,33 @@ while (( SECONDS <= deadline )); do
   sleep 3
 done
 
-[[ "$delivery_ready" == true ]] || fail DELIVERY_TIMEOUT
+if [[ "$delivery_ready" != true ]]; then
+  submission_state="$(jq -r '.submission.state // "unknown"' "$submission_body" 2>/dev/null || printf unknown)"
+  submission_generating="$(jq -r 'if (.generating | type) == "boolean" then .generating else "unknown" end' "$submission_body" 2>/dev/null || printf unknown)"
+  result_ok="$(jq -r 'if (.ok | type) == "boolean" then .ok else "unknown" end' "$result_body" 2>/dev/null || printf unknown)"
+  result_question_count="$(jq -r '.big5_form_v1.question_count // 0' "$result_body" 2>/dev/null || printf 0)"
+  report_ok="$(jq -r 'if (.ok | type) == "boolean" then .ok else "unknown" end' "$report_body" 2>/dev/null || printf unknown)"
+  report_generating="$(jq -r 'if (.generating | type) == "boolean" then .generating else "unknown" end' "$report_body" 2>/dev/null || printf unknown)"
+  report_type="$(jq -r 'if has("report") then (.report | type) else "missing" end' "$report_body" 2>/dev/null || printf unknown)"
+
+  [[ "$submission_code" =~ ^[0-9]{3}$ ]] || submission_code=000
+  [[ "$result_code" =~ ^[0-9]{3}$ ]] || result_code=000
+  [[ "$report_code" =~ ^[0-9]{3}$ ]] || report_code=000
+  [[ "$submission_state" =~ ^(pending|running|succeeded|failed|unknown)$ ]] || submission_state=other
+  [[ "$submission_generating" =~ ^(true|false|unknown)$ ]] || submission_generating=unknown
+  [[ "$result_ok" =~ ^(true|false|unknown)$ ]] || result_ok=unknown
+  [[ "$result_question_count" =~ ^[0-9]+$ ]] || result_question_count=0
+  [[ "$report_ok" =~ ^(true|false|unknown)$ ]] || report_ok=unknown
+  [[ "$report_generating" =~ ^(true|false|unknown)$ ]] || report_generating=unknown
+  [[ "$report_type" =~ ^(object|array|null|string|number|boolean|missing|unknown)$ ]] || report_type=other
+  [[ "$snapshot_status" =~ ^(pending|ready|failed)$ ]] || snapshot_status=missing_or_other
+
+  printf 'staging_big_five_report_smoke=timeout submission_http=%s submission_state=%s submission_generating=%s snapshot=%s result_http=%s result_ok=%s result_question_count=%s report_http=%s report_ok=%s report_generating=%s report_type=%s\n' \
+    "$submission_code" "$submission_state" "$submission_generating" "$snapshot_status" \
+    "$result_code" "$result_ok" "$result_question_count" \
+    "$report_code" "$report_ok" "$report_generating" "$report_type" >&2
+  fail DELIVERY_TIMEOUT
+fi
 
 public_result_code="$(curl --silent --show-error --connect-timeout 5 --max-time 15 \
   -o /dev/null -w '%{http_code}' \

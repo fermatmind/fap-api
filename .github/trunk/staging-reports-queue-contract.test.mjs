@@ -117,8 +117,10 @@ test("staging Big Five delivery smoke is bounded and redacts private identity", 
   assert.match(deliverySmoke, /deadline=\$\(\(SECONDS \+ 90\)\)/);
   assert.match(deliverySmoke, /snapshot_status" == ready/);
   assert.match(deliverySmoke, /public_result=200/);
+  assert.match(deliverySmoke, /staging_big_five_report_smoke=timeout submission_http=/);
   assert.doesNotMatch(deliverySmoke, /echo .*fm_token/);
   assert.doesNotMatch(deliverySmoke, /printf 'attempt_id=/);
   assert.doesNotMatch(deliverySmoke, /printf 'anon_id=/);
+  assert.doesNotMatch(deliverySmoke, /printf\s+['"][^'"\n]*(attempt_id|anon_id|fm_token)/);
   assert.doesNotMatch(deliverySmoke, /set -x/);
 });
