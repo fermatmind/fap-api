@@ -136,9 +136,9 @@ while (( SECONDS <= deadline )); do
         if (preg_match("/\\A[0-9a-fA-F-]{36}\\z/D", $attemptId) !== 1) { exit(1); }
         require "vendor/autoload.php";
         $app = require "bootstrap/app.php";
-        $kernel = $app->make(Illuminate\\Contracts\\Console\\Kernel::class);
+        $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
         $kernel->bootstrap();
-        $status = Illuminate\\Support\\Facades\\DB::table("report_snapshots")
+        $status = Illuminate\Support\Facades\DB::table("report_snapshots")
             ->where("attempt_id", $attemptId)->value("status");
         echo strtolower(trim((string) $status));
     } catch (Throwable) { exit(1); }
