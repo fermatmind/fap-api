@@ -43,10 +43,10 @@ return [
     ))),
 
     'big5_retake' => [
-        'enforce_pack_policy' => (bool) env('FAP_BIG5_RETAKE_ENFORCE_PACK_POLICY', true),
-        // Retakes may start immediately; the rolling-window abuse limit remains enforced.
+        // Big Five retakes are unlimited. Keep both pack and runtime limits disabled.
+        'enforce_pack_policy' => false,
         'cooldown_hours' => 0,
-        'max_attempts_per_30_days' => env('FAP_BIG5_RETAKE_MAX_ATTEMPTS_PER_30_DAYS', null),
+        'max_attempts_per_30_days' => 0,
     ],
 
     'result_email_gate' => [
