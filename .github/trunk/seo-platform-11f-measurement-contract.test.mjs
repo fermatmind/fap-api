@@ -60,16 +60,17 @@ test("staging source readiness precedes Council closeout and production never ba
   const production = deploy.slice(productionStart);
 
   const readiness = staging.indexOf("Verify staging measurement source readiness");
+  const enforcement = staging.indexOf("Enforce staging measurement source readiness");
   const candidate = staging.indexOf("Materialize inactive staging measurement candidate");
   const deployment = staging.indexOf("Deploy staging and run repository smoke chain");
-  assert.ok(candidate > 0 && readiness > candidate && deployment > readiness);
+  assert.ok(candidate > 0 && readiness > candidate && enforcement > readiness && deployment > enforcement);
   assert.match(staging, /id: measurement_source_readiness/);
   assert.match(staging, /continue-on-error: true/);
-  assert.match(staging, /steps\.measurement_source_readiness\.outcome \}\}' = failure/);
-  assert.match(staging, /release_prefix=readiness-hold/);
-  assert.match(staging, /council_orchestration=false/);
-  assert.match(staging, /staging_closeout=HOLD reason=MEASUREMENT_SOURCE_READINESS_HOLD/);
+  assert.match(staging, /steps\.measurement_source_readiness\.outcome != 'success'/);
   assert.match(staging, /steps\.measurement_source_readiness\.outcome == 'success'/);
+  assert.match(staging, /staging_closeout=HOLD reason=MEASUREMENT_SOURCE_READINESS_HOLD/);
+  assert.doesNotMatch(staging, /release_prefix=readiness-hold/);
+  assert.doesNotMatch(staging, /council_orchestration=false/);
   assert.match(staging, /deploy:candidate-only staging/);
   assert.match(staging, /deploy_mode=candidate_only/);
   assert.match(staging, /source-\$\{DEPLOY_SHA:0:12\}-\$\{GITHUB_RUN_ID\}/);
@@ -81,6 +82,7 @@ test("staging source readiness precedes Council closeout and production never ba
   assert.match(staging, /GSC_SCOPE_NOT_READONLY/);
   assert.match(staging, /GSC_SYNC_QUALITY_HOLD/);
   assert.match(staging, /GSC_RESTRICTED_EGRESS_TRANSPORT_FAILED/);
+  assert.match(staging, /GSC_PREFLIGHT_TRANSPORT_FAILED/);
   assert.match(staging, /GSC_AUTHENTICATION_FAILED/);
   assert.match(staging, /GSC_EMPTY_RESPONSE/);
   assert.match(staging, /GSC_SYNC_INTERNAL_FAILURE/);
@@ -101,6 +103,12 @@ test("staging source readiness precedes Council closeout and production never ba
   assert.match(staging, /https:\/\/www\.googleapis\.com\/auth\/webmasters\.readonly/);
   assert.match(staging, /\.token_uri == "https:\/\/oauth2\.googleapis\.com\/token"/);
   assert.match(staging, /gsc_restricted_connect_proxy\.mjs/);
+  assert.match(staging, /ConnectionAttempts=3/);
+  assert.match(staging, /staging-gsc-preflight\.stderr/);
+  assert.match(staging, /> "\$sync_raw" 2> "\$sync_stderr"/);
+  assert.match(staging, /> "\$cro_dry_run_json" 2> "\$cro_dry_run_stderr"/);
+  assert.match(staging, /> "\$cro_refresh_json" 2> "\$cro_refresh_stderr"/);
+  assert.match(staging, /if test "\$council_orchestration" = true; then deploy_timeout=60m; fi/);
   assert.match(staging, /--gsc-live-preflight --dry-run --no-write/);
   assert.match(staging, /seo-intel:gsc-sync --window=90 --search-types=web --full-window/);
   assert.match(staging, /analytics:refresh-seo-conversion-daily[^\n]+--dry-run/);
@@ -123,4 +131,7 @@ test("staging source readiness precedes Council closeout and production never ba
   assert.doesNotMatch(production, /GSC_SYNC_DB_(USERNAME|PASSWORD)/);
   assert.doesNotMatch(production, /seo-intel:gsc-sync/);
   assert.doesNotMatch(production, /analytics:refresh-seo-conversion-daily/);
+  assert.doesNotMatch(production, /measurement-source-readiness/);
+  assert.match(production, /ConnectionAttempts=3/);
+  assert.match(production, /if test '\$\{\{ needs\.policy\.outputs\.seo_council_orchestration \}\}' = true; then deploy_timeout=60m; fi/);
 });

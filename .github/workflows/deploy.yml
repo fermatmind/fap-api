@@ -505,6 +505,7 @@ jobs:
           proxy_pid=""
           tunnel_pid=""
           ssh_base=(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o ConnectionAttempts=3 \
             -o ServerAliveInterval=15 -o ServerAliveCountMax=8 -o IdentitiesOnly=yes \
             -i "$DEPLOY_IDENTITY_FILE_STG" -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST")
           cleanup() {
@@ -544,6 +545,7 @@ jobs:
 
           "${ssh_base[@]}" "umask 077; mkdir '$remote_tmp'"
           scp -q -o BatchMode=yes -o StrictHostKeyChecking=yes -o IdentitiesOnly=yes \
+            -o ConnectTimeout=10 -o ConnectionAttempts=3 \
             -i "$DEPLOY_IDENTITY_FILE_STG" -P "$DEPLOY_PORT" \
             "$local_key" "$local_env" "$local_sync_env" "$DEPLOY_USER@$DEPLOY_HOST:$remote_tmp/"
 
@@ -557,6 +559,7 @@ jobs:
           nc -z 127.0.0.1 "$PROXY_PORT"
 
           ssh -N -o BatchMode=yes -o StrictHostKeyChecking=yes -o ExitOnForwardFailure=yes \
+            -o ConnectTimeout=10 -o ConnectionAttempts=3 \
             -o ServerAliveInterval=15 -o ServerAliveCountMax=8 -o IdentitiesOnly=yes \
             -i "$DEPLOY_IDENTITY_FILE_STG" -p "$DEPLOY_PORT" \
             -R "127.0.0.1:$PROXY_PORT:127.0.0.1:$PROXY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
@@ -577,8 +580,18 @@ jobs:
           remote_prefix="set -euo pipefail; releases=\$(readlink -f $q_path/releases); candidate=\$(readlink -f \"\$releases/$q_candidate\"); test -n \"\$candidate\"; case \"\$candidate\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; test \"\$(cat \"\$candidate/REVISION\")\" = $q_sha; cd \"\$candidate/backend\"; set -a; . $q_env; set +a; export HTTPS_PROXY=$q_proxy HTTP_PROXY=$q_proxy NO_PROXY=127.0.0.1,localhost APP_CONFIG_CACHE=$q_cache;"
 
           preflight_json="$RUNNER_TEMP/staging-gsc-preflight.json"
-          "${ssh_base[@]}" "$remote_prefix php artisan seo-intel:collect --collector=gsc_foundation --gsc-live-preflight --dry-run --no-write --json --no-interaction --no-ansi" > "$preflight_json" \
-            || fail GSC_PREFLIGHT_COMMAND_FAILED
+          preflight_stderr="$RUNNER_TEMP/staging-gsc-preflight.stderr"
+          set +e
+          "${ssh_base[@]}" "$remote_prefix php artisan seo-intel:collect --collector=gsc_foundation --gsc-live-preflight --dry-run --no-write --json --no-interaction --no-ansi" \
+            > "$preflight_json" 2> "$preflight_stderr"
+          preflight_exit=$?
+          set -e
+          if [ "$preflight_exit" -ne 0 ]; then
+            if grep -Eiq 'banner exchange|connection (timed out|reset|closed)|broken pipe|kex_exchange_identification' "$preflight_stderr"; then
+              fail GSC_PREFLIGHT_TRANSPORT_FAILED
+            fi
+            fail GSC_PREFLIGHT_COMMAND_FAILED
+          fi
           jq -e '
             .status == "success"
             and .dry_run == true
@@ -595,8 +608,10 @@ jobs:
 
           sync_raw="$RUNNER_TEMP/staging-gsc-sync.raw"
           sync_json="$RUNNER_TEMP/staging-gsc-sync.json"
+          sync_stderr="$RUNNER_TEMP/staging-gsc-sync.stderr"
           set +e
-          "${ssh_base[@]}" "$remote_prefix set -a; . $q_sync_env; set +a; export SEO_INTEL_WRITE_ENABLED=true; php artisan seo-intel:gsc-sync --window=90 --search-types=web --full-window --trigger=manual --json --no-interaction --no-ansi" > "$sync_raw"
+          "${ssh_base[@]}" "$remote_prefix set -a; . $q_sync_env; set +a; export SEO_INTEL_WRITE_ENABLED=true; php artisan seo-intel:gsc-sync --window=90 --search-types=web --full-window --trigger=manual --json --no-interaction --no-ansi" \
+            > "$sync_raw" 2> "$sync_stderr"
           sync_exit=$?
           set -e
           awk 'started || /^[[:space:]]*\{/ { started=1; print }' "$sync_raw" > "$sync_json"
@@ -668,7 +683,9 @@ jobs:
           from_date="$(date -u -d '89 days ago' +%F)"
           to_date="$(date -u +%F)"
           cro_dry_run_json="$RUNNER_TEMP/staging-cro-dry-run.json"
-          "${ssh_base[@]}" "$remote_prefix export SEO_INTEL_ALLOW_EXTERNAL_API_CALLS=false SEO_INTEL_WRITE_ENABLED=false; php artisan analytics:refresh-seo-conversion-daily --from=$from_date --to=$to_date --org=0 --dry-run --trigger=manual --json --no-interaction --no-ansi" > "$cro_dry_run_json" \
+          cro_dry_run_stderr="$RUNNER_TEMP/staging-cro-dry-run.stderr"
+          "${ssh_base[@]}" "$remote_prefix export SEO_INTEL_ALLOW_EXTERNAL_API_CALLS=false SEO_INTEL_WRITE_ENABLED=false; php artisan analytics:refresh-seo-conversion-daily --from=$from_date --to=$to_date --org=0 --dry-run --trigger=manual --json --no-interaction --no-ansi" \
+            > "$cro_dry_run_json" 2> "$cro_dry_run_stderr" \
             || fail CRO_DRY_RUN_COMMAND_FAILED
           jq -e '
             .schema_version == "analytics-seo-conversion-refresh-dry-run.v1"
@@ -680,7 +697,9 @@ jobs:
           ' "$cro_dry_run_json" >/dev/null || fail CRO_NO_REAL_AGGREGATE_SOURCE
 
           cro_refresh_json="$RUNNER_TEMP/staging-cro-refresh.json"
-          "${ssh_base[@]}" "$remote_prefix export SEO_INTEL_ALLOW_EXTERNAL_API_CALLS=false SEO_INTEL_WRITE_ENABLED=false; php artisan analytics:refresh-seo-conversion-daily --from=$from_date --to=$to_date --org=0 --trigger=manual --json --no-interaction --no-ansi" > "$cro_refresh_json" \
+          cro_refresh_stderr="$RUNNER_TEMP/staging-cro-refresh.stderr"
+          "${ssh_base[@]}" "$remote_prefix export SEO_INTEL_ALLOW_EXTERNAL_API_CALLS=false SEO_INTEL_WRITE_ENABLED=false; php artisan analytics:refresh-seo-conversion-daily --from=$from_date --to=$to_date --org=0 --trigger=manual --json --no-interaction --no-ansi" \
+            > "$cro_refresh_json" 2> "$cro_refresh_stderr" \
             || fail CRO_REFRESH_COMMAND_FAILED
           jq -e '
             .schema_version == "analytics-seo-conversion-refresh-receipt.v1"
@@ -747,6 +766,11 @@ jobs:
           path: artifacts/measurement-source-readiness/receipt.json
           if-no-files-found: error
           retention-days: 90
+      - name: Enforce staging measurement source readiness
+        if: needs.policy.outputs.seo_council_orchestration == 'true' && steps.measurement_source_readiness.outcome != 'success'
+        run: |
+          printf 'staging_closeout=HOLD reason=MEASUREMENT_SOURCE_READINESS_HOLD\n' >&2
+          exit 1
       - name: Deploy staging and run repository smoke chain
         env:
           SEO_INTEL_DB_HOST: ${{ secrets.SEO_INTEL_DB_HOST }}
@@ -759,25 +783,16 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$DEPLOY_SHA"
-          release_prefix=trunk
           council_orchestration='${{ needs.policy.outputs.seo_council_orchestration }}'
-          source_readiness_hold=false
-          if test "$council_orchestration" = true && test '${{ steps.measurement_source_readiness.outcome }}' = failure; then
-            release_prefix=readiness-hold
-            council_orchestration=false
-            source_readiness_hold=true
-          fi
-          timeout --signal=TERM --kill-after=30s 30m php /tmp/dep.phar deploy staging -f deploy.php --revision "$DEPLOY_SHA" \
-            -o release_name="${release_prefix}-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode=standard \
+          deploy_timeout=30m
+          if test "$council_orchestration" = true; then deploy_timeout=60m; fi
+          timeout --signal=TERM --kill-after=30s "$deploy_timeout" php /tmp/dep.phar deploy staging -f deploy.php --revision "$DEPLOY_SHA" \
+            -o release_name="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode=standard \
             -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' \
             -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' \
             -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' \
             -o private_result_authority_publish_required='${{ needs.policy.outputs.private_result_authority_publish_required }}' \
             -o seo_council_orchestration="$council_orchestration" --no-interaction
-          if test "$source_readiness_hold" = true; then
-            printf 'staging_closeout=HOLD reason=MEASUREMENT_SOURCE_READINESS_HOLD\n' >&2
-            exit 1
-          fi
       - name: Read staging SEO Evidence closeout receipt
         if: needs.policy.outputs.seo_agent_evidence_boundary == 'true'
         shell: bash
@@ -788,6 +803,7 @@ jobs:
           printf -v q_sha '%q' "$DEPLOY_SHA"
           remote="set -euo pipefail; file=$q_path/shared/backend/storage/app/release-receipts/seo-agent-evidence-boundary/$q_sha.json; test -f \"\$file\"; test ! -L \"\$file\"; cat \"\$file\""
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o ConnectionAttempts=3 \
             -o IdentitiesOnly=yes -i "$DEPLOY_IDENTITY_FILE_STG" -p "$DEPLOY_PORT" \
             "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$receipt"
           jq -e --arg sha "$DEPLOY_SHA" '
@@ -832,6 +848,7 @@ jobs:
           printf -v q_sha '%q' "$DEPLOY_SHA"
           remote="set -euo pipefail; file=$q_path/shared/backend/storage/app/release-receipts/seo-agent-policy-gateway/$q_sha.json; test -f \"\$file\"; test ! -L \"\$file\"; cat \"\$file\""
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o ConnectionAttempts=3 \
             -o IdentitiesOnly=yes -i "$DEPLOY_IDENTITY_FILE_STG" -p "$DEPLOY_PORT" \
             "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$receipt"
           jq -e --arg sha "$DEPLOY_SHA" '
@@ -878,6 +895,7 @@ jobs:
           printf -v q_sha '%q' "$DEPLOY_SHA"
           remote="set -euo pipefail; file=$q_path/shared/backend/storage/app/release-receipts/seo-council-orchestration/$q_sha.json; test -f \"\$file\"; test ! -L \"\$file\"; cat \"\$file\""
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o ConnectionAttempts=3 \
             -o IdentitiesOnly=yes -i "$DEPLOY_IDENTITY_FILE_STG" -p "$DEPLOY_PORT" \
             "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$receipt"
           jq -e --arg sha "$DEPLOY_SHA" '
@@ -1000,7 +1018,7 @@ jobs:
     needs: [policy, staging]
     if: needs.staging.result == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
     environment: production
     env:
       TARGET: production
@@ -1059,7 +1077,8 @@ jobs:
         run: |
           set -euo pipefail
           test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
-          active="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'")"
+          active="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o ConnectionAttempts=3 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'")"
           [[ "$active" =~ ^[0-9a-f]{40}$ ]]
           git fetch --no-tags origin "$active"
           if ! git merge-base --is-ancestor "$active" "$DEPLOY_SHA"; then
@@ -1086,8 +1105,10 @@ jobs:
           release="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}"
           candidate_sha="$DEPLOY_SHA"
           lkg_sha='${{ steps.baseline.outputs.active }}'
+          deploy_timeout=30m
+          if test '${{ needs.policy.outputs.seo_council_orchestration }}' = true; then deploy_timeout=60m; fi
           set +e
-          timeout --signal=TERM --kill-after=30s 30m php /tmp/dep.phar deploy production -f deploy.php --revision "$DEPLOY_SHA" \
+          timeout --signal=TERM --kill-after=30s "$deploy_timeout" php /tmp/dep.phar deploy production -f deploy.php --revision "$DEPLOY_SHA" \
             -o release_name="$release" -o deploy_mode=standard \
             -o career_current_parity_required='${{ needs.policy.outputs.career_current }}' \
             -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' \
@@ -1098,7 +1119,8 @@ jobs:
           deploy_rc=$?
           set -e
           if [ "$deploy_rc" -eq 0 ]; then exit 0; fi
-          current="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'" || true)"
+          current="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o ConnectionAttempts=3 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'" || true)"
           if [ "$current" = "$DEPLOY_SHA" ]; then
             echo "Production activation committed but smoke failed; restoring previous LKG once."
             export DEPLOY_SHA="$lkg_sha"
@@ -1107,7 +1129,7 @@ jobs:
             rollback_rc=$?
             set -e
 
-            restored="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'" || true)"
+            restored="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o ConnectionAttempts=3 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'" || true)"
             safe_restored=""
             if [[ "$restored" =~ ^[0-9a-f]{40}$ ]]; then safe_restored="$restored"; fi
 
@@ -1166,7 +1188,8 @@ jobs:
           printf -v q_path '%q' "$DEPLOY_PATH"
           printf -v q_sha '%q' "$DEPLOY_SHA"
           remote="set -euo pipefail; file=$q_path/shared/backend/storage/app/release-receipts/seo-agent-evidence-boundary/$q_sha.json; sudo -n -u www-data -- test -f \"\$file\"; sudo -n -u www-data -- test ! -L \"\$file\"; sudo -n -u www-data -- cat \"\$file\""
-          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$receipt"
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o ConnectionAttempts=3 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$receipt"
           jq -e --arg sha "$DEPLOY_SHA" '
             .contract_version == "seo.evidence_boundary_closeout.v4"
             and .release_sha == $sha
@@ -1208,7 +1231,7 @@ jobs:
           printf -v q_path '%q' "$DEPLOY_PATH"
           printf -v q_sha '%q' "$DEPLOY_SHA"
           remote="set -euo pipefail; file=$q_path/shared/backend/storage/app/release-receipts/seo-agent-policy-gateway/$q_sha.json; sudo -n -u www-data -- test -f \"\$file\"; sudo -n -u www-data -- test ! -L \"\$file\"; sudo -n -u www-data -- cat \"\$file\""
-          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" \
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o ConnectionAttempts=3 -p "$DEPLOY_PORT" \
             "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$receipt"
           jq -e --arg sha "$DEPLOY_SHA" '
             .contract_version == "seo.policy_gateway_closeout.v2"
@@ -1253,7 +1276,7 @@ jobs:
           printf -v q_path '%q' "$DEPLOY_PATH"
           printf -v q_sha '%q' "$DEPLOY_SHA"
           remote="set -euo pipefail; file=$q_path/shared/backend/storage/app/release-receipts/seo-council-orchestration/$q_sha.json; sudo -n -u www-data -- test -f \"\$file\"; sudo -n -u www-data -- test ! -L \"\$file\"; sudo -n -u www-data -- cat \"\$file\""
-          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" \
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o ConnectionAttempts=3 -p "$DEPLOY_PORT" \
             "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$receipt"
           jq -e --arg sha "$DEPLOY_SHA" '
             .contract_version == "seo.council_closeout.v2" and .source_sha == $sha
