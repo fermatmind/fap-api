@@ -37,6 +37,15 @@ current_backend="$(readlink -f "$deploy_root/current/backend")"
 shared_log_dir="$deploy_root/shared/backend/storage/logs"
 [[ -d "$shared_log_dir" ]] || fail SHARED_LOG_MISSING
 sudo -n -u www-data -- test -w "$shared_log_dir" || fail SHARED_LOG_UNWRITABLE
+shared_cache_data_dir="$deploy_root/shared/backend/storage/framework/cache/data"
+shared_owner="$(stat -c '%U' "$deploy_root/shared")" || fail SHARED_OWNER_UNAVAILABLE
+shared_group="$(stat -c '%G' "$deploy_root/shared")" || fail SHARED_GROUP_UNAVAILABLE
+[[ "$shared_owner" =~ ^[A-Za-z0-9_.-]+$ ]] || fail SHARED_OWNER_INVALID
+[[ "$shared_group" =~ ^[A-Za-z0-9_.-]+$ ]] || fail SHARED_GROUP_INVALID
+sudo -n /usr/bin/install -d -o "$shared_owner" -g "$shared_group" -m 2770 \
+  "$shared_cache_data_dir" || fail SHARED_CACHE_PROVISION
+test -w "$shared_cache_data_dir" || fail SHARED_CACHE_DEPLOY_UNWRITABLE
+sudo -n -u www-data -- test -w "$shared_cache_data_dir" || fail SHARED_CACHE_RUNTIME_UNWRITABLE
 [[ -d "$config_dir" ]] || fail SUPERVISOR_CONFIG_DIR_MISSING
 
 candidate="$(mktemp "${TMPDIR:-/tmp}/fap-queue-reports.XXXXXX")"

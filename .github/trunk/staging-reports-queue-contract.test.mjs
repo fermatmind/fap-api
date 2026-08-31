@@ -17,6 +17,10 @@ const provision = readFileSync(
   new URL("../../backend/scripts/deploy/provision_staging_reports_worker_once.sh", import.meta.url),
   "utf8",
 );
+const sharedPermissionPaths = readFileSync(
+  new URL("../../backend/scripts/deploy/shared_permissions_paths.txt", import.meta.url),
+  "utf8",
+);
 
 test("staging requires only the database reports worker before activation", () => {
   const start = deployer.indexOf("$stagingHost = host('staging')");
@@ -44,6 +48,9 @@ test("one-time provision installs the exact one-process reports topology", () =>
   assert.match(provision, /stdout_logfile=\$\{shared_log_dir\}\/fap-queue-reports\.log/);
   assert.match(provision, /apt-get install -y -qq --no-install-recommends supervisor/);
   assert.match(provision, /systemctl enable --now supervisor/);
+  assert.match(provision, /shared\/backend\/storage\/framework\/cache\/data/);
+  assert.match(provision, /sudo -n -u www-data -- test -w "\$shared_cache_data_dir"/);
+  assert.match(sharedPermissionPaths, /^backend\/storage\/framework\/cache\/data$/m);
   assert.match(provision, /where\('status', 'ready'\)/);
   assert.match(provision, /ready_since >= pending_before/);
   assert.doesNotMatch(provision, /queue:work database_reports --queue=reports --once/);
