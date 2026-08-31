@@ -7,6 +7,7 @@ namespace Tests\Feature;
 use App\Models\Attempt;
 use App\Models\AttemptEmailBinding;
 use App\Models\Result;
+use App\Services\Email\EmailOutboxService;
 use App\Support\PiiCipher;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
@@ -24,6 +25,11 @@ final class ResultEmailLookupTest extends TestCase
         parent::setUp();
 
         config(['fap.rate_limits.bypass_in_test_env' => true]);
+
+        foreach (['owner@example.test', 'missing@example.test'] as $email) {
+            $emailHash = app(PiiCipher::class)->emailHash($email);
+            RateLimiter::clear('result_email_recovery|org:0|email:'.$emailHash);
+        }
     }
 
     public function test_lookup_by_email_lists_only_results_bound_to_current_anonymous_actor(): void
@@ -68,6 +74,10 @@ final class ResultEmailLookupTest extends TestCase
         $this->seedBinding($firstAttemptId, $email, 'anon_lookup_a');
         $this->seedBinding($secondAttemptId, $email, 'anon_lookup_b');
         $token = $this->seedFmToken('anon_lookup_other');
+        $this->mock(EmailOutboxService::class)
+            ->shouldReceive('queueResultAccessLink')
+            ->twice()
+            ->andReturn(['ok' => true, 'queued' => true]);
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$token,
@@ -79,7 +89,8 @@ final class ResultEmailLookupTest extends TestCase
 
         $response->assertOk();
         $response->assertJsonPath('ok', true);
-        $response->assertJsonPath('email_verification_required', false);
+        $response->assertJsonPath('email_verification_required', true);
+        $response->assertJsonPath('recovery_email_requested', true);
         $response->assertJsonCount(0, 'items');
         $response->assertJsonMissingPath('items.0.result_access_token');
         $this->assertStringNotContainsString($firstAttemptId, $response->getContent());
@@ -99,7 +110,8 @@ final class ResultEmailLookupTest extends TestCase
 
         $response->assertOk();
         $response->assertJsonPath('ok', true);
-        $response->assertJsonPath('email_verification_required', false);
+        $response->assertJsonPath('email_verification_required', true);
+        $response->assertJsonPath('recovery_email_requested', true);
         $response->assertJsonCount(0, 'items');
     }
 

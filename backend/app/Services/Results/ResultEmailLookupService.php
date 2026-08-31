@@ -7,8 +7,10 @@ namespace App\Services\Results;
 use App\Models\Attempt;
 use App\Models\AttemptEmailBinding;
 use App\Models\Result;
+use App\Services\Email\EmailOutboxService;
 use App\Services\Scale\ScaleCodeResponseProjector;
 use App\Support\PiiCipher;
+use Illuminate\Support\Facades\RateLimiter;
 
 final class ResultEmailLookupService
 {
@@ -30,10 +32,11 @@ final class ResultEmailLookupService
         private readonly PiiCipher $piiCipher,
         private readonly ResultAccessTokenService $resultAccessTokens,
         private readonly ScaleCodeResponseProjector $scaleCodeProjector,
+        private readonly EmailOutboxService $emailOutbox,
     ) {}
 
     /**
-     * @return array{ok:bool,items:list<array<string,mixed>>,email_verification_required:bool,message:string}
+     * @return array{ok:bool,items:list<array<string,mixed>>,email_verification_required:bool,recovery_email_requested?:bool,message:string}
      */
     public function lookup(
         string $email,
@@ -42,11 +45,18 @@ final class ResultEmailLookupService
         ?int $userId = null,
         mixed $tokenAnonId = null
     ): array {
-        $emailHash = $this->emailHash($email);
+        $normalizedEmail = $this->piiCipher->normalizeEmail($email);
+        $emailHash = $normalizedEmail !== '' ? $this->piiCipher->emailHash($normalizedEmail) : null;
         $ownerUserId = $userId !== null && $userId > 0 ? (string) $userId : null;
         $ownerAnonIds = $this->ownerAnonIds($tokenAnonId);
 
-        if ($emailHash === null || ($ownerUserId === null && $ownerAnonIds === [])) {
+        if ($emailHash === null) {
+            return $this->verificationRequiredResponse();
+        }
+
+        if ($ownerUserId === null && $ownerAnonIds === []) {
+            $this->queueRecoveryEmails($normalizedEmail, $emailHash, $orgId, $locale);
+
             return $this->verificationRequiredResponse();
         }
 
@@ -85,16 +95,22 @@ final class ResultEmailLookupService
             }
         }
 
-        return [
-            'ok' => true,
-            'items' => $items,
-            'email_verification_required' => false,
-            'message' => 'Saved results are listed only when the email and current session match an active binding.',
-        ];
+        if ($items !== []) {
+            return [
+                'ok' => true,
+                'items' => $items,
+                'email_verification_required' => false,
+                'message' => 'Saved results are listed only when the email and current session match an active binding.',
+            ];
+        }
+
+        $this->queueRecoveryEmails($normalizedEmail, $emailHash, $orgId, $locale);
+
+        return $this->verificationRequiredResponse();
     }
 
     /**
-     * @return array{ok:bool,items:list<array<string,mixed>>,email_verification_required:bool,message:string}
+     * @return array{ok:bool,items:list<array<string,mixed>>,email_verification_required:bool,recovery_email_requested:bool,message:string}
      */
     private function verificationRequiredResponse(): array
     {
@@ -102,8 +118,57 @@ final class ResultEmailLookupService
             'ok' => true,
             'items' => [],
             'email_verification_required' => true,
-            'message' => 'Email verification is required before saved results can be listed.',
+            'recovery_email_requested' => true,
+            'message' => 'If matching saved results exist, access links will be sent to the supplied email address.',
         ];
+    }
+
+    private function queueRecoveryEmails(string $email, string $emailHash, int $orgId, ?string $locale): void
+    {
+        $rateLimitKey = 'result_email_recovery|org:'.max(0, $orgId).'|email:'.$emailHash;
+
+        RateLimiter::attempt($rateLimitKey, 1, function () use ($email, $emailHash, $orgId, $locale): void {
+            $bindings = AttemptEmailBinding::query()
+                ->where('org_id', max(0, $orgId))
+                ->where('email_hash', $emailHash)
+                ->where('status', AttemptEmailBinding::STATUS_ACTIVE)
+                ->orderByDesc('updated_at')
+                ->orderByDesc('created_at')
+                ->limit(10)
+                ->get();
+
+            foreach ($bindings as $binding) {
+                if (! $binding instanceof AttemptEmailBinding) {
+                    continue;
+                }
+
+                $item = $this->lookupItemForBinding($binding, $locale);
+                if ($item === null) {
+                    continue;
+                }
+
+                $token = trim((string) ($item['result_access_token'] ?? ''));
+                $expiresAt = trim((string) ($item['result_access_token_expires_at'] ?? ''));
+                $resultUrl = trim((string) ($item['result_url'] ?? ''));
+                if ($token === '' || $expiresAt === '' || $resultUrl === '') {
+                    continue;
+                }
+
+                $this->emailOutbox->queueResultAccessLink(
+                    $binding,
+                    $email,
+                    [
+                        'token' => $token,
+                        'expires_at' => $expiresAt,
+                    ],
+                    $resultUrl,
+                    $locale,
+                    [
+                        'surface' => 'result_email_lookup',
+                    ],
+                );
+            }
+        }, 300);
     }
 
     /**
@@ -209,16 +274,6 @@ final class ResultEmailLookupService
         $separator = str_contains($base, '?') ? '&' : '?';
 
         return $base.$separator.'access_token='.rawurlencode($token).$fragment;
-    }
-
-    private function emailHash(string $email): ?string
-    {
-        $normalized = $this->piiCipher->normalizeEmail($email);
-        if ($normalized === '') {
-            return null;
-        }
-
-        return $this->piiCipher->emailHash($normalized);
     }
 
     /**
