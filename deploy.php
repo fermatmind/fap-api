@@ -20,6 +20,7 @@ set('seo_platform_10_closeout', false);
 set('seo_agent_evidence_boundary', false);
 set('seo_agent_policy_gateway', false);
 set('seo_council_orchestration', false);
+set('seo_council_closeout_deferred', false);
 set('career_current_parity_required', false);
 set('private_result_authority_publish_required', true);
 
@@ -1587,6 +1588,11 @@ BASH);
 task('seo:council-orchestration-closeout', function () {
     if (! deployBooleanOption('seo_council_orchestration', false)) {
         writeln('<comment>Skip SEO Council orchestration closeout.</comment>');
+
+        return;
+    }
+    if (deployBooleanOption('seo_council_closeout_deferred', false)) {
+        writeln('<comment>Defer SEO Council orchestration closeout to the owning workflow.</comment>');
 
         return;
     }

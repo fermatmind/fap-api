@@ -63,7 +63,16 @@ test("staging deployment and smoke precede source readiness while production nev
   const enforcement = staging.indexOf("Enforce staging measurement source readiness");
   const candidate = staging.indexOf("Materialize inactive staging measurement candidate");
   const deployment = staging.indexOf("Deploy staging and run repository smoke chain");
-  assert.ok(deployment > 0 && candidate > deployment && readiness > candidate && enforcement > readiness);
+  const closeout = staging.indexOf("Finalize staging SEO Council closeout");
+  const receipt = staging.indexOf("Read staging SEO Council closeout receipt");
+  assert.ok(
+    deployment > 0
+      && candidate > deployment
+      && readiness > candidate
+      && enforcement > readiness
+      && closeout > enforcement
+      && receipt > closeout,
+  );
   assert.match(staging, /id: measurement_source_readiness/);
   assert.match(staging, /continue-on-error: true/);
   assert.match(staging, /steps\.measurement_source_readiness\.outcome != 'success'/);
@@ -71,6 +80,9 @@ test("staging deployment and smoke precede source readiness while production nev
   assert.match(staging, /staging_closeout=HOLD reason=MEASUREMENT_SOURCE_READINESS_HOLD/);
   assert.doesNotMatch(staging, /release_prefix=readiness-hold/);
   assert.doesNotMatch(staging, /council_orchestration=false/);
+  assert.match(staging, /seo_council_closeout_deferred="\$council_orchestration"/);
+  assert.match(staging, /seo:council-orchestration-closeout staging/);
+  assert.match(staging, /test "\$active" = "\$DEPLOY_SHA"/);
   assert.match(staging, /deploy:candidate-only staging/);
   assert.match(staging, /deploy_mode=candidate_only/);
   assert.match(staging, /source-\$\{DEPLOY_SHA:0:12\}-\$\{GITHUB_RUN_ID\}/);

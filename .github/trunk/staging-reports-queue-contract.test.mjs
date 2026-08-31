@@ -96,6 +96,8 @@ test("worker reload precedes queue and Big Five delivery smoke", () => {
     deliverySmoke,
     /exec \/usr\/bin\/sudo -n -u www-data -- \/usr\/bin\/env/,
   );
+  assert.match(deployer, /seo_council_closeout_deferred/);
+  assert.match(deployer, /Defer SEO Council orchestration closeout to the owning workflow/);
 });
 
 test("remote Composer scripts have a bounded deployment timeout", () => {

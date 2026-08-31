@@ -464,7 +464,8 @@ jobs:
             -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' \
             -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' \
             -o private_result_authority_publish_required='${{ needs.policy.outputs.private_result_authority_publish_required }}' \
-            -o seo_council_orchestration="$council_orchestration" --no-interaction
+            -o seo_council_orchestration="$council_orchestration" \
+            -o seo_council_closeout_deferred="$council_orchestration" --no-interaction
       - name: Materialize inactive staging measurement candidate
         if: needs.policy.outputs.seo_council_orchestration == 'true'
         env:
@@ -793,6 +794,18 @@ jobs:
         run: |
           printf 'staging_closeout=HOLD reason=MEASUREMENT_SOURCE_READINESS_HOLD\n' >&2
           exit 1
+      - name: Finalize staging SEO Council closeout
+        if: needs.policy.outputs.seo_council_orchestration == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          active="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o ConnectionAttempts=3 -o IdentitiesOnly=yes -i "$DEPLOY_IDENTITY_FILE_STG" -p "$DEPLOY_PORT" \
+            "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < $q_path/current/REVISION")"
+          test "$active" = "$DEPLOY_SHA"
+          timeout --signal=TERM --kill-after=30s 15m php /tmp/dep.phar seo:council-orchestration-closeout staging \
+            -f deploy.php -o seo_council_orchestration=true --no-interaction
       - name: Read staging SEO Evidence closeout receipt
         if: needs.policy.outputs.seo_agent_evidence_boundary == 'true'
         shell: bash
