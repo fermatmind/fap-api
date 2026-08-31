@@ -139,7 +139,7 @@ while (( SECONDS <= deadline )); do
         $kernel = $app->make(Illuminate\\Contracts\\Console\\Kernel::class);
         $kernel->bootstrap();
         $status = Illuminate\\Support\\Facades\\DB::table("report_snapshots")
-            ->where("org_id", 0)->where("attempt_id", $attemptId)->value("status");
+            ->where("attempt_id", $attemptId)->value("status");
         echo strtolower(trim((string) $status));
     } catch (Throwable) { exit(1); }
   ' 2>/dev/null || true)"
