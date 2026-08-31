@@ -98,6 +98,13 @@ test("worker reload precedes queue and Big Five delivery smoke", () => {
   );
 });
 
+test("remote Composer scripts have a bounded deployment timeout", () => {
+  assert.match(
+    deployer,
+    /task\('deploy:vendors',[\s\S]+COMPOSER_PROCESS_TIMEOUT=900 \{\{bin\/composer\}\} install/,
+  );
+});
+
 test("staging Big Five delivery smoke is bounded and redacts private identity", () => {
   for (const endpoint of [
     "/api/v0.3/auth/guest",
