@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Services\SeoAgentEvidence\Competitive\CompetitiveEvidenceIngestionService;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveSourceRegistry;
+use App\Services\SeoCouncil\Competitive\CompetitiveCloseoutBuilder;
 use Illuminate\Console\Command;
 use Throwable;
 
@@ -19,8 +21,11 @@ final class SeoCompetitiveEvidenceIngest extends Command
 
     protected $description = 'Acquire registered public competitive evidence through the External Content Gateway';
 
-    public function handle(CompetitiveSourceRegistry $registry): int
-    {
+    public function handle(
+        CompetitiveSourceRegistry $registry,
+        CompetitiveEvidenceIngestionService $ingestion,
+        CompetitiveCloseoutBuilder $closeout,
+    ): int {
         $dryRun = (bool) $this->option('dry-run');
         $noWrite = (bool) $this->option('no-write');
         $write = (bool) $this->option('write-evidence');
@@ -37,27 +42,27 @@ final class SeoCompetitiveEvidenceIngest extends Command
 
         try {
             $cohort = $registry->cohort($cohortId);
-            if (($cohort['collection_state'] ?? null) !== 'approved') {
-                return $this->emit([
-                    'status' => 'HOLD',
-                    'cohort_id' => $cohortId,
-                    'hold_reason' => (string) ($cohort['hold_reason'] ?? 'SOURCE_POLICY_HOLD'),
-                    'context_eligible' => false,
-                    'write_performed' => false,
-                    'dependency_ingestion' => ['external_reads' => 0],
-                    'execution_allowed' => false,
-                ], self::SUCCESS);
+            $environment = app()->environment();
+            $releaseSha = $write ? (string) env('SEO_RELEASE_SHA') : str_repeat('0', 40);
+            if ($write) {
+                config()->set('seo_agent_evidence.external_fetch_enabled', true);
+                config()->set('seo_agent_evidence.bundle_write_enabled', true);
             }
+            $result = $ingestion->ingest(
+                $cohort,
+                $registry->sourcesFor($cohort),
+                in_array($environment, ['staging', 'production'], true) ? $environment : 'staging',
+                $releaseSha,
+                $write,
+            );
+            $receipt = $closeout->buildRuntime(
+                $result,
+                $releaseSha,
+                in_array($environment, ['staging', 'production'], true) ? $environment : 'staging',
+                $environment === 'production' ? $releaseSha : null,
+            );
 
-            return $this->emit([
-                'status' => 'HOLD',
-                'cohort_id' => $cohortId,
-                'hold_reason' => 'COMPETITIVE_LIVE_INGESTION_DORMANT',
-                'context_eligible' => false,
-                'write_performed' => false,
-                'dependency_ingestion' => ['external_reads' => 0],
-                'execution_allowed' => false,
-            ], self::SUCCESS);
+            return $this->emit($receipt, self::SUCCESS);
         } catch (Throwable) {
             return $this->emit(['status' => 'HOLD', 'hold_reason' => 'COMPETITIVE_REGISTRY_INVALID', 'dependency_ingestion' => ['external_reads' => 0]], self::FAILURE);
         }
@@ -66,8 +71,8 @@ final class SeoCompetitiveEvidenceIngest extends Command
     private function writeBoundaryAllowed(): bool
     {
         return in_array(app()->environment(), ['staging', 'production'], true)
-            && (bool) config('seo_agent_evidence.external_fetch_enabled', false)
-            && (bool) config('seo_agent_evidence.bundle_write_enabled', false)
+            && env('SEO_COMPETITIVE_EXTERNAL_READ_ENABLED') === true
+            && env('SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED') === true
             && preg_match('/^[a-f0-9]{40}$/', (string) env('SEO_RELEASE_SHA')) === 1;
     }
 

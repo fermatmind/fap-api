@@ -72,6 +72,7 @@ const SEO_COUNCIL_CONTROL_PLANE_PATHS = new Set([
   ".github/trunk/seo-council-workflow-contract.test.mjs",
   ".github/trunk/seo-platform-11e-runtime-dependency-contract.test.mjs",
   ".github/trunk/seo-platform-11f-measurement-contract.test.mjs",
+  ".github/trunk/seo-platform-11g-competitive-evidence-contract.test.mjs",
   ".github/workflows/ci.yml",
   ".github/workflows/deploy.yml",
   "deploy.php",
@@ -82,6 +83,18 @@ const isSeoCouncilOrchestrationBoundary = (path) =>
   || path === "backend/app/Services/SeoAgentEvidence/Sources/SeoPlatformDependencyEvidenceAdapter.php"
   || path === ".agents/skills/fermatmind-global-seo-geo-growth-scan/SKILL.md"
   || SEO_COUNCIL_CONTROL_PLANE_PATHS.has(path);
+
+const isSeoCompetitiveEvidenceBoundary = (path) =>
+  /^backend\/(?:app\/Services\/SeoAgentEvidence\/(?:Competitive|External)\/|app\/Services\/SeoCouncil\/Competitive\/|app\/Console\/Commands\/SeoCompetitiveEvidence[^/]+\.php$|app\/Providers\/(?:SeoAgentEvidence|SeoCouncil)ServiceProvider\.php$|resources\/seo-agent\/evidence\/competitive\/|docs\/seo\/generated\/seo-(?:agent-evidence|council)-contract-manifest\.v[34]\.json$|tests\/Feature\/SeoIntel\/SeoPlatform11G)/.test(path)
+  || path === "backend/config/seo_agent_evidence.php"
+  || path === "backend/scripts/seo/export_seo_agent_evidence_contracts.php"
+  || path === "backend/scripts/seo/export_seo_council_contracts.php"
+  || path === "deploy.php"
+  || path === ".github/workflows/ci.yml"
+  || path === ".github/workflows/deploy.yml"
+  || path === ".github/trunk/classify-paths.mjs"
+  || path === ".github/trunk/classify-paths.test.mjs"
+  || path === ".github/trunk/seo-platform-11g-competitive-evidence-contract.test.mjs";
 
 export function classifyPaths(inputPaths) {
   const paths = [...new Set(inputPaths.map(normalize).filter(Boolean))].sort();
@@ -110,6 +123,7 @@ export function classifyPaths(inputPaths) {
       /^backend\/(?:app\/Services\/SeoAgentPolicyGateway\/|app\/Console\/Commands\/SeoPolicyGatewayCloseout\.php$|resources\/seo-agent\/policy-gateway\/|docs\/(?:seo\/generated\/seo-policy-gateway-contract-manifest\.v1\.json$|contracts\/openapi\.snapshot\.json$)|scripts\/seo\/export_seo_policy_gateway_contracts\.php$|tests\/Feature\/SeoIntel\/SeoPlatform11C|tests\/Feature\/Ops\/SeoUxImpl06AgentCouncilTest\.php$|app\/Filament\/Ops\/Support\/SeoAgentCouncilUiContract\.php$|resources\/views\/filament\/ops\/components\/ops-agent-council-workspace\.blade\.php$|app\/Http\/Controllers\/API\/V0_5\/Ops\/SeoIntel\/SeoIntelDashboardController\.php$|routes\/api\.php$)/.test(path)
     ),
     seo_council_orchestration: paths.some(isSeoCouncilOrchestrationBoundary),
+    seo_competitive_evidence: paths.some(isSeoCompetitiveEvidenceBoundary),
   };
   let testsChanged = false;
 

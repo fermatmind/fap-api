@@ -38,6 +38,7 @@ jobs:
       seo_agent_evidence_boundary: ${{ steps.classify.outputs.seo_agent_evidence_boundary }}
       seo_agent_policy_gateway: ${{ steps.classify.outputs.seo_agent_policy_gateway }}
       seo_council_orchestration: ${{ steps.classify.outputs.seo_council_orchestration }}
+      seo_competitive_evidence: ${{ steps.classify.outputs.seo_competitive_evidence }}
       classification: ${{ steps.classify.outputs.classification }}
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
@@ -84,6 +85,7 @@ jobs:
             echo "seo_agent_evidence_boundary=$(jq -r .operations.seo_agent_evidence_boundary "$RUNNER_TEMP/classification.json")"
             echo "seo_agent_policy_gateway=$(jq -r .operations.seo_agent_policy_gateway "$RUNNER_TEMP/classification.json")"
             echo "seo_council_orchestration=$(jq -r .operations.seo_council_orchestration "$RUNNER_TEMP/classification.json")"
+            echo "seo_competitive_evidence=$(jq -r .operations.seo_competitive_evidence "$RUNNER_TEMP/classification.json")"
             echo "classification=$compact"
           } >> "$GITHUB_OUTPUT"
           cp "$RUNNER_TEMP/classification.json" trunk-path-classification.json
@@ -561,7 +563,7 @@ jobs:
           retention-days: 90
 
   seo-council-orchestration:
-    name: SEO Platform 11D-11F deterministic Council orchestration
+    name: SEO Platform 11D-11G deterministic Council orchestration
     needs: classify
     if: needs.classify.outputs.seo_council_orchestration == 'true'
     runs-on: ubuntu-latest
@@ -606,12 +608,13 @@ jobs:
             tests/Feature/SeoIntel/SeoPlatform11D*.php \
             tests/Feature/SeoIntel/SeoPlatform11E*.php \
             tests/Feature/SeoIntel/SeoPlatform11F*.php \
+            tests/Feature/SeoIntel/SeoPlatform11G*.php \
             tests/Feature/SeoIntel/SeoPlatform11A*.php \
             tests/Feature/SeoIntel/SeoPlatform11B*.php \
             tests/Feature/SeoIntel/SeoPlatform11C*.php \
             tests/Feature/OpenApiDiffTest.php \
             tests/Feature/Ops/SeoUxImpl06AgentCouncilTest.php
-          find app/Services/SeoCouncil app/Console/Commands/SeoCouncil*.php app/Http/Middleware/EnsureSeoCouncilMissionAuthorized.php app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoCouncilMissionController.php scripts/seo/*seo_council* database/migrations/seo_intel/2026_08_29_030000_create_seo_council_runtime_tables.php -type f -name '*.php' -print0 | xargs -0 -n1 php -l >/dev/null
+          find app/Services/SeoCouncil app/Console/Commands/SeoCouncil*.php app/Console/Commands/SeoCompetitiveEvidence*.php app/Http/Middleware/EnsureSeoCouncilMissionAuthorized.php app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoCouncilMissionController.php scripts/seo/*seo_council* database/migrations/seo_intel/2026_08_29_030000_create_seo_council_runtime_tables.php -type f -name '*.php' -print0 | xargs -0 -n1 php -l >/dev/null
           ./vendor/bin/pint --test \
             app/Services/SeoCouncil \
             app/Console/Commands/SeoCouncilCloseoutCommand.php \
@@ -633,7 +636,8 @@ jobs:
             tests/Feature/SeoIntel/SeoPlatform11EDependencyContextTest.php \
             tests/Feature/SeoIntel/SeoPlatform11EDiagnosisEvaluationTest.php \
             tests/Feature/SeoIntel/SeoPlatform11ERoutingCloseoutTest.php \
-            tests/Feature/SeoIntel/SeoPlatform11F*.php
+            tests/Feature/SeoIntel/SeoPlatform11F*.php \
+            tests/Feature/SeoIntel/SeoPlatform11G*.php
           php artisan seo:council-closeout --expected-sha="$GITHUB_SHA" --closeout-environment=ci_candidate --json > ../seo-council-orchestration-closeout.json
           jq -e --arg sha "$GITHUB_SHA" '
             .contract_version == "seo.council_closeout.v2"
@@ -751,9 +755,52 @@ jobs:
           if-no-files-found: error
           retention-days: 90
 
+  seo-competitive-evidence:
+    name: SEO Platform 11G competitive evidence offline evaluation
+    needs: classify
+    if: needs.classify.outputs.seo_competitive_evidence == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+        with:
+          php-version: '8.4'
+          coverage: none
+          tools: composer:v2
+          extensions: curl, sodium, pdo_sqlite, sqlite3
+      - name: Verify 11B gateway safety and 11G deterministic contracts
+        working-directory: backend
+        run: |
+          set -euo pipefail
+          composer install --no-interaction --prefer-dist --no-progress
+          php scripts/seo/export_seo_agent_evidence_contracts.php --check
+          php scripts/seo/export_seo_council_contracts.php --check
+          php artisan test --compact tests/Feature/SeoIntel/SeoPlatform11B*.php tests/Feature/SeoIntel/SeoPlatform11G*.php
+          php artisan seo:competitive-evidence-closeout --expected-sha="$GITHUB_SHA" --environment=ci_candidate --json > ../seo-competitive-evidence-closeout.json
+          jq -e --arg sha "$GITHUB_SHA" '
+            .receipt_version == "seo.competitive_evidence_closeout.v2"
+            and .environment == "ci_candidate"
+            and .candidate_sha == $sha
+            and ."SEO-PLATFORM-11G" == "OFFLINE_EVAL_READY"
+            and .ready_for_11H == false
+            and ."11i_handoff_ready" == false
+            and .dependency_ingestion.external_reads == 0
+            and .model_calls == 0 and .tool_calls == 0 and .external_calls == 0
+            and .cms_writes == 0 and .url_truth_writes == 0 and .search_writes == 0 and .business_writes == 0
+            and .production_permissions == 0 and .execution_allowed == false
+            and (.receipt_hash | test("^[a-f0-9]{64}$"))
+          ' ../seo-competitive-evidence-closeout.json >/dev/null
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: seo-competitive-evidence-${{ github.sha }}
+          path: seo-competitive-evidence-closeout.json
+          if-no-files-found: error
+          retention-days: 90
+
   validation-receipt:
     name: exact-SHA validation receipt
-    needs: [classify, hygiene, supply-chain, content-pack-build-validate, verify-mbti, verify-bigfive, career-publisher-parity, seo-platform-11a-closeout, seo-agent-evidence-boundary, seo-agent-policy-gateway, seo-council-orchestration]
+    needs: [classify, hygiene, supply-chain, content-pack-build-validate, verify-mbti, verify-bigfive, career-publisher-parity, seo-platform-11a-closeout, seo-agent-evidence-boundary, seo-agent-policy-gateway, seo-council-orchestration, seo-competitive-evidence]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -785,6 +832,11 @@ jobs:
         with:
           name: seo-council-orchestration-${{ github.sha }}
           path: seo-council-orchestration
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        if: needs.classify.outputs.seo_competitive_evidence == 'true'
+        with:
+          name: seo-competitive-evidence-${{ github.sha }}
+          path: seo-competitive-evidence
       - name: Require every selected validation to pass
         env:
           CLASSIFY_RESULT: ${{ needs.classify.result }}
@@ -798,6 +850,7 @@ jobs:
           SEO_AGENT_EVIDENCE_BOUNDARY_RESULT: ${{ needs.seo-agent-evidence-boundary.result }}
           SEO_AGENT_POLICY_GATEWAY_RESULT: ${{ needs.seo-agent-policy-gateway.result }}
           SEO_COUNCIL_ORCHESTRATION_RESULT: ${{ needs.seo-council-orchestration.result }}
+          SEO_COMPETITIVE_EVIDENCE_RESULT: ${{ needs.seo-competitive-evidence.result }}
         run: |
           set -euo pipefail
           for result in "$CLASSIFY_RESULT" "$HYGIENE_RESULT" "$SUPPLY_CHAIN_RESULT" "$CONTENT_PACK_RESULT" "$VERIFY_MBTI_RESULT" "$VERIFY_BIGFIVE_RESULT" "$CAREER_PARITY_RESULT"; do
@@ -1013,9 +1066,27 @@ jobs:
             test "$SEO_COUNCIL_ORCHESTRATION_RESULT" = skipped
             council='{"required":false,"result":"skipped"}'
           fi
+          competitive_required="$(jq -r .operations.seo_competitive_evidence trunk-path-classification.json)"
+          if [ "$competitive_required" = true ]; then
+            test "$SEO_COMPETITIVE_EVIDENCE_RESULT" = success
+            jq -e --arg sha "$GITHUB_SHA" '
+              .receipt_version == "seo.competitive_evidence_closeout.v2"
+              and .candidate_sha == $sha
+              and .environment == "ci_candidate"
+              and ."SEO-PLATFORM-11G" == "OFFLINE_EVAL_READY"
+              and .ready_for_11H == false and ."11i_handoff_ready" == false
+              and .dependency_ingestion.external_reads == 0
+              and .external_calls == 0 and .production_permissions == 0
+              and .execution_allowed == false
+            ' seo-competitive-evidence/seo-competitive-evidence-closeout.json >/dev/null
+            competitive="$(jq -c '. + {required:true}' seo-competitive-evidence/seo-competitive-evidence-closeout.json)"
+          else
+            test "$SEO_COMPETITIVE_EVIDENCE_RESULT" = skipped
+            competitive='{"required":false,"result":"skipped"}'
+          fi
           jq -n --arg sha "$GITHUB_SHA" --arg run_id "$GITHUB_RUN_ID" --slurpfile classification trunk-path-classification.json \
-            --slurpfile parity career-parity/career-current-authority-parity.json --argjson closeout "$closeout" --argjson evidence "$evidence" --argjson gateway "$gateway" --argjson council "$council" \
-            '{schema_version:"fermatmind.trunk-validation.v1",sha:$sha,ci_run_id:$run_id,result:"success",classification:$classification[0],publisher:{required:$classification[0].operations.publisher_required,parity:$parity[0]},seo_platform_11a_closeout:$closeout,seo_agent_evidence_boundary:$evidence,seo_agent_policy_gateway:$gateway,seo_council_orchestration:$council}' \
+            --slurpfile parity career-parity/career-current-authority-parity.json --argjson closeout "$closeout" --argjson evidence "$evidence" --argjson gateway "$gateway" --argjson council "$council" --argjson competitive "$competitive" \
+            '{schema_version:"fermatmind.trunk-validation.v1",sha:$sha,ci_run_id:$run_id,result:"success",classification:$classification[0],publisher:{required:$classification[0].operations.publisher_required,parity:$parity[0]},seo_platform_11a_closeout:$closeout,seo_agent_evidence_boundary:$evidence,seo_agent_policy_gateway:$gateway,seo_council_orchestration:$council,seo_competitive_evidence:$competitive}' \
             > trunk-validation.json
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:

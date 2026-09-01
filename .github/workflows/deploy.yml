@@ -57,6 +57,7 @@ jobs:
       seo_agent_evidence_boundary: ${{ steps.receipt.outputs.seo_agent_evidence_boundary }}
       seo_agent_policy_gateway: ${{ steps.receipt.outputs.seo_agent_policy_gateway }}
       seo_council_orchestration: ${{ steps.receipt.outputs.seo_council_orchestration }}
+      seo_competitive_evidence: ${{ steps.receipt.outputs.seo_competitive_evidence }}
       private_result_authority_publish_required: ${{ steps.receipt.outputs.private_result_authority_publish_required }}
     steps:
       - name: Refuse non-main, PR, failed, or ambiguous CI runs
@@ -114,6 +115,7 @@ jobs:
             and .publisher.required == .classification.operations.publisher_required
             and .seo_agent_policy_gateway.required == .classification.operations.seo_agent_policy_gateway
             and .seo_council_orchestration.required == .classification.operations.seo_council_orchestration
+            and .seo_competitive_evidence.required == .classification.operations.seo_competitive_evidence
             and ((.publisher.required == true
                 and .publisher.parity.status == "pass"
                 and .publisher.parity.release_sha == $sha
@@ -265,6 +267,17 @@ jobs:
                 and .seo_council_orchestration.execution_allowed == false)
               or (.seo_council_orchestration.required == false
                 and .seo_council_orchestration.result == "skipped"))
+            and ((.seo_competitive_evidence.required == true
+                and .seo_competitive_evidence.receipt_version == "seo.competitive_evidence_closeout.v2"
+                and .seo_competitive_evidence.candidate_sha == $sha
+                and .seo_competitive_evidence.environment == "ci_candidate"
+                and .seo_competitive_evidence."SEO-PLATFORM-11G" == "OFFLINE_EVAL_READY"
+                and .seo_competitive_evidence.dependency_ingestion.external_reads == 0
+                and .seo_competitive_evidence.external_calls == 0
+                and .seo_competitive_evidence.production_permissions == 0
+                and .seo_competitive_evidence.execution_allowed == false)
+              or (.seo_competitive_evidence.required == false
+                and .seo_competitive_evidence.result == "skipped"))
           ' \
             "$receipt" >/dev/null
           classification="$(jq -c .classification "$receipt")"
@@ -276,6 +289,7 @@ jobs:
           seo_agent_evidence_boundary="$(jq -r '.classification.operations.seo_agent_evidence_boundary == true' "$receipt")"
           seo_agent_policy_gateway="$(jq -r '.classification.operations.seo_agent_policy_gateway == true' "$receipt")"
           seo_council_orchestration="$(jq -r '.classification.operations.seo_council_orchestration == true' "$receipt")"
+          seo_competitive_evidence="$(jq -r '.classification.operations.seo_competitive_evidence == true' "$receipt")"
           private_result_authority_publish_required="$(jq -r '
             if .classification.operations.seo_council_orchestration == true
             then false else true end
@@ -301,6 +315,7 @@ jobs:
             echo "seo_agent_evidence_boundary=$seo_agent_evidence_boundary"
             echo "seo_agent_policy_gateway=$seo_agent_policy_gateway"
             echo "seo_council_orchestration=$seo_council_orchestration"
+            echo "seo_competitive_evidence=$seo_competitive_evidence"
             echo "private_result_authority_publish_required=$private_result_authority_publish_required"
           } >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
@@ -465,7 +480,32 @@ jobs:
             -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' \
             -o private_result_authority_publish_required='${{ needs.policy.outputs.private_result_authority_publish_required }}' \
             -o seo_council_orchestration="$council_orchestration" \
+            -o seo_competitive_evidence='${{ needs.policy.outputs.seo_competitive_evidence }}' \
             -o seo_council_closeout_deferred="$council_orchestration" --no-interaction
+      - name: Read sanitized staging competitive evidence receipt
+        if: always() && needs.policy.outputs.seo_competitive_evidence == 'true'
+        run: |
+          set -euo pipefail
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_sha '%q' "$DEPLOY_SHA"
+          remote="set -euo pipefail; file=$q_path/shared/backend/storage/app/release-receipts/seo-competitive-evidence/$q_sha.json; test -f \"\$file\"; test ! -L \"\$file\"; cat \"\$file\""
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o ConnectionAttempts=3 -o IdentitiesOnly=yes -i "$DEPLOY_IDENTITY_FILE_STG" -p "$DEPLOY_PORT" \
+            "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > seo-competitive-evidence-staging.json
+          jq -e --arg sha "$DEPLOY_SHA" '
+            .candidate_sha == $sha and .environment == "staging"
+            and .execution_allowed == false and .external_calls == 0 and .production_permissions == 0
+            and ((.competitive_context_status == "READY" and .competitive_hold_reason == "STAGING_VALIDATED")
+              or (."SEO-PLATFORM-11G" == "HOLD" and .competitive_hold_reason == "SOURCE_POLICY_HOLD"
+                and .ready_for_11H == false and ."11i_handoff_ready" == false))
+          ' seo-competitive-evidence-staging.json >/dev/null
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: always() && needs.policy.outputs.seo_competitive_evidence == 'true'
+        with:
+          name: seo-competitive-evidence-staging-${{ env.DEPLOY_SHA }}
+          path: seo-competitive-evidence-staging.json
+          if-no-files-found: error
+          retention-days: 90
       - name: Materialize inactive staging measurement candidate
         if: needs.policy.outputs.seo_council_orchestration == 'true'
         env:
@@ -1129,7 +1169,8 @@ jobs:
             -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' \
             -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' \
             -o private_result_authority_publish_required='${{ needs.policy.outputs.private_result_authority_publish_required }}' \
-            -o seo_council_orchestration='${{ needs.policy.outputs.seo_council_orchestration }}' --no-interaction
+            -o seo_council_orchestration='${{ needs.policy.outputs.seo_council_orchestration }}' \
+            -o seo_competitive_evidence='${{ needs.policy.outputs.seo_competitive_evidence }}' --no-interaction
           deploy_rc=$?
           set -e
           if [ "$deploy_rc" -eq 0 ]; then exit 0; fi
@@ -1193,6 +1234,25 @@ jobs:
             fi
           fi
           exit "$deploy_rc"
+      - name: Read production competitive evidence receipt
+        if: always() && steps.baseline.outputs.skip != 'true' && needs.policy.outputs.seo_competitive_evidence == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt=seo-competitive-evidence-production.json
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_sha '%q' "$DEPLOY_SHA"
+          remote="set -euo pipefail; file=$q_path/shared/backend/storage/app/release-receipts/seo-competitive-evidence/$q_sha.json; test -f \"\$file\"; test ! -L \"\$file\"; cat \"\$file\""
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o ConnectionAttempts=3 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$receipt"
+          jq -e --arg sha "$DEPLOY_SHA" '
+            .candidate_sha == $sha and .production_sha == $sha and .environment == "production"
+            and ."SEO-PLATFORM-11G" == "CLOSED" and .ready_for_11H == true and ."11i_handoff_ready" == true
+            and .competitive_source_state == "available" and .competitive_freshness_state == "fresh"
+            and .competitive_bundle_verification == "valid" and .competitive_context_status == "READY"
+            and .competitive_hold_reason == "NONE" and .execution_allowed == false
+            and .external_calls == 0 and .production_permissions == 0
+          ' "$receipt" >/dev/null
       - name: Read production SEO Evidence closeout receipt
         if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.seo_agent_evidence_boundary == 'true'
         shell: bash

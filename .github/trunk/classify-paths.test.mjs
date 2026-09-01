@@ -314,6 +314,17 @@ test("keeps adjacent GSC discoverability behavior in the SEO lane", () => {
 });
 test("classifies deployment infrastructure", () => assert.equal(has([".github/workflows/ci.yml"], "infrastructure_deployment"), true));
 
+test("11G competitive evidence changes select the controlled ingestion operation", () => {
+  const result = classifyPaths([
+    "backend/app/Services/SeoAgentEvidence/Competitive/CompetitiveEvidenceIngestionService.php",
+  ]);
+  assert.equal(result.operations.seo_competitive_evidence, true);
+  assert.equal(result.flags.application_code, true);
+  assert.equal(classifyPaths([
+    "backend/app/Services/SeoAgentEvidence/External/ExternalContentGateway.php",
+  ]).operations.seo_competitive_evidence, true);
+});
+
 test("retired EQ mirror cleanup is content-only and cannot trigger search submission", () => {
   const result = classifyPaths([
     "backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/seo_geo_authority.json",

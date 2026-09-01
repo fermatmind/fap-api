@@ -103,7 +103,7 @@ HTML;
     {
         $this->artisan('seo:competitive-evidence-ingest', [
             '--cohort' => 'competitive.big-five.live.v1', '--dry-run' => true, '--no-write' => true, '--json' => true,
-        ])->expectsOutputToContain('"hold_reason":"SOURCE_POLICY_HOLD"')
+        ])->expectsOutputToContain('"competitive_hold_reason":"SOURCE_POLICY_HOLD"')
             ->assertSuccessful();
 
         $this->artisan('seo:competitive-evidence-ingest', ['--cohort' => 'not-registered', '--dry-run' => true, '--json' => true])

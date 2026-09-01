@@ -260,33 +260,33 @@ final class ExternalContentGateway
                 $policyUrl = $policy[$kind.'_url'] ?? null;
                 $expectedHash = $policy[$kind.'_evidence_hash'] ?? null;
                 if (! is_string($policyUrl) || ! is_string($expectedHash)) {
-                    return $this->hold(strtoupper($kind).'_POLICY_HELD');
+                    return $this->hold(strtoupper($kind).'_POLICY_HELD', 'not_scanned', $externalReads);
                 }
                 $policyParts = $this->validateUrl($policyUrl, $policy);
                 $robotsDecision = $this->robotsDecision((string) $policyParts['host'], (string) ($policyParts['path'] ?? '/'), $policy, $externalReads);
                 if (! $robotsDecision) {
-                    return $this->hold('ROBOTS_HELD');
+                    return $this->hold('ROBOTS_HELD', 'not_scanned', $externalReads);
                 }
                 $policyResponse = $this->requestPinned('GET', $policyUrl, $policy, 262144, $externalReads);
                 if ($policyResponse['status'] !== 200 || $this->responseRedirected($policyResponse)) {
-                    return $this->hold(strtoupper($kind).'_POLICY_HELD');
+                    return $this->hold(strtoupper($kind).'_POLICY_HELD', 'not_scanned', $externalReads);
                 }
                 $normalized = mb_strtolower(preg_replace('/\s+/u', ' ', trim(strip_tags($policyResponse['body']))) ?: '', 'UTF-8');
                 if (! hash_equals($expectedHash, $this->hasher->hash($normalized))) {
-                    return $this->hold(strtoupper($kind).'_POLICY_DRIFT');
+                    return $this->hold(strtoupper($kind).'_POLICY_DRIFT', 'not_scanned', $externalReads);
                 }
             }
             if (! $this->robotsDecision($host, (string) ($parts['path'] ?? '/'), $policy, $externalReads)) {
-                return $this->hold('ROBOTS_HELD');
+                return $this->hold('ROBOTS_HELD', 'not_scanned', $externalReads);
             }
             $maxBytes = min(1048576, max(1, (int) ($policy['max_content_bytes'] ?? 524288)));
             $response = $this->requestPinned('GET', $url, $policy, $maxBytes, $externalReads);
             if ($response['status'] !== 200 || $this->responseRedirected($response)) {
-                return $this->hold($this->responseRedirected($response) ? 'REDIRECT_BLOCKED' : 'CONTENT_RESPONSE_HELD');
+                return $this->hold($this->responseRedirected($response) ? 'REDIRECT_BLOCKED' : 'CONTENT_RESPONSE_HELD', 'not_scanned', $externalReads);
             }
             $contentType = strtolower(trim(explode(';', (string) ($response['headers']['content-type'] ?? ''))[0]));
             if ($contentType !== 'text/html' || strtolower((string) ($response['headers']['content-encoding'] ?? 'identity')) !== 'identity') {
-                return $this->hold('CONTENT_TYPE_HELD');
+                return $this->hold('CONTENT_TYPE_HELD', 'not_scanned', $externalReads);
             }
             $projectionInput = array_merge($context, [
                 'source_id' => $sourceId,
@@ -310,6 +310,8 @@ final class ExternalContentGateway
                 'egress_decision' => 'allowed_by_gateway',
                 'context_eligible' => true,
             ];
+        } catch (Throwable) {
+            return $this->hold('EXTERNAL_GATEWAY_HELD', 'not_scanned', $externalReads);
         } finally {
             $hostLock->release();
         }
@@ -333,6 +335,7 @@ final class ExternalContentGateway
     {
         $host = strtolower((string) parse_url($url, PHP_URL_HOST));
         $approved = $this->approvedAddresses($host);
+        $externalReads++;
         $response = $this->transport->request(
             $method,
             $url,
@@ -341,7 +344,6 @@ final class ExternalContentGateway
             min(8, (int) ($policy['request_timeout_seconds'] ?? 8)),
             $maxBytes,
         );
-        $externalReads++;
         if (! in_array(strtolower($response['connected_ip']), array_map('strtolower', $approved), true)) {
             throw new \RuntimeException('DNS_REBINDING_BLOCKED');
         }
@@ -505,7 +507,7 @@ final class ExternalContentGateway
     }
 
     /** @return array<string, mixed> */
-    private function hold(string $code, string $injection = 'not_scanned'): array
+    private function hold(string $code, string $injection = 'not_scanned', int $externalReads = 0): array
     {
         return [
             'status' => 'held',
@@ -513,6 +515,7 @@ final class ExternalContentGateway
             'injection_scan_result' => $injection,
             'egress_decision' => 'held',
             'context_eligible' => false,
+            'dependency_ingestion' => ['external_reads' => max(0, min(64, $externalReads))],
         ];
     }
 }

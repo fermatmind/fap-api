@@ -25,7 +25,8 @@ test("deploy consumes the CI decision and leaves staging on its public cohort", 
   assert.doesNotMatch(deploy, /Run staging zero-write 2092-page Career parity/);
   assert.match(deploy, /career_current_parity_required/);
   assert.match(deployer, /career:current-authority-production-preactivation-parity/);
-  assert.match(deployer, /after\('artisan:config:cache', 'career:current-authority-production-preactivation-parity'\)/);
+  assert.match(deployer, /after\('artisan:config:cache', 'seo:competitive-evidence-preactivation'\)/);
+  assert.match(deployer, /after\('seo:competitive-evidence-preactivation', 'career:current-authority-production-preactivation-parity'\)/);
   assert.match(deployer, /after\('career:current-authority-production-preactivation-parity', 'guard:sitemap-authority'\)/);
 });
 

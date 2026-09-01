@@ -20,6 +20,7 @@ set('seo_platform_10_closeout', false);
 set('seo_agent_evidence_boundary', false);
 set('seo_agent_policy_gateway', false);
 set('seo_council_orchestration', false);
+set('seo_competitive_evidence', false);
 set('seo_council_closeout_deferred', false);
 set('career_current_parity_required', false);
 set('private_result_authority_publish_required', true);
@@ -1491,6 +1492,81 @@ else
   as_receipt_owner test -f "$receipt_path"
   as_receipt_owner test ! -L "$receipt_path"
   as_receipt_owner cmp -s "$tmp" "$receipt_path"
+fi
+BASH);
+    });
+});
+
+task('seo:competitive-evidence-preactivation', function () {
+    if (! deployBooleanOption('seo_competitive_evidence', false)) {
+        writeln('<comment>Skip SEO competitive evidence ingestion.</comment>');
+
+        return;
+    }
+
+    set('competitive_environment', currentHost()->getAlias() === 'production' ? 'production' : 'staging');
+    within('{{release_path}}/backend', function (): void {
+        run(<<<'BASH'
+set -euo pipefail
+candidate_sha="$(tr -d '\r\n' < ../REVISION)"
+case "$candidate_sha" in (*[!0-9a-f]*|'') exit 1 ;; esac
+test "${#candidate_sha}" -eq 40
+environment={{competitive_environment}}
+receipt="$(SEO_RELEASE_SHA="$candidate_sha" \
+  SEO_COMPETITIVE_EXTERNAL_READ_ENABLED=true \
+  SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED=true \
+  {{bin/php}} artisan seo:competitive-evidence-ingest \
+    --cohort=competitive.big-five.live.v1 --write-evidence --json --no-interaction --no-ansi)"
+printf '%s' "$receipt" | {{bin/php}} -r '
+$payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
+$zero = ["model_calls", "tool_calls", "external_calls", "cms_writes", "url_truth_writes", "search_writes", "business_writes", "production_permissions", "outreach_actions"];
+$ok = ($payload["receipt_version"] ?? null) === "seo.competitive_evidence_closeout.v2"
+    && ($payload["candidate_sha"] ?? null) === ($argv[1] ?? null)
+    && ($payload["environment"] ?? null) === ($argv[2] ?? null)
+    && ($payload["execution_allowed"] ?? null) === false
+    && ($payload["digital_pr_scope"] ?? null) === "deferred_p2_manual"
+    && is_int($payload["dependency_ingestion"]["external_reads"] ?? null)
+    && ($payload["dependency_ingestion"]["external_reads"] ?? -1) >= 0
+    && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["receipt_hash"] ?? "")) === 1;
+foreach ($zero as $field) {
+    $ok = $ok && ($payload[$field] ?? null) === 0;
+}
+exit($ok ? 0 : 1);
+' "$candidate_sha" "$environment"
+receipt_dir='{{deploy_path}}/shared/backend/storage/app/release-receipts/seo-competitive-evidence'
+receipt_path="$receipt_dir/$candidate_sha.json"
+mkdir -p "$receipt_dir"
+tmp="$(mktemp "$receipt_dir/.${candidate_sha}.XXXXXX")"
+trap 'rm -f "$tmp"' EXIT
+printf '%s\n' "$receipt" > "$tmp"
+chmod 0640 "$tmp"
+if ln "$tmp" "$receipt_path" 2>/dev/null; then
+  :
+else
+  test -f "$receipt_path"
+  test ! -L "$receipt_path"
+  cmp -s "$tmp" "$receipt_path"
+fi
+if [ "$environment" = production ]; then
+  printf '%s' "$receipt" | jq -e --arg sha "$candidate_sha" '
+    ."SEO-PLATFORM-11G" == "CLOSED"
+    and .production_sha == $sha
+    and .ready_for_11H == true
+    and ."11i_handoff_ready" == true
+    and .competitive_source_state == "available"
+    and .competitive_freshness_state == "fresh"
+    and .competitive_bundle_verification == "valid"
+    and .competitive_context_status == "READY"
+    and .competitive_hold_reason == "NONE"
+  ' >/dev/null
+else
+  printf '%s' "$receipt" | jq -e '
+    .competitive_source_state == "available"
+    and .competitive_freshness_state == "fresh"
+    and .competitive_bundle_verification == "valid"
+    and .competitive_context_status == "READY"
+    and .competitive_hold_reason == "STAGING_VALIDATED"
+  ' >/dev/null
 fi
 BASH);
     });
@@ -4033,7 +4109,8 @@ test -f "$receipt_path"
 BASH);
 });
 
-after('artisan:config:cache', 'career:current-authority-production-preactivation-parity');
+after('artisan:config:cache', 'seo:competitive-evidence-preactivation');
+after('seo:competitive-evidence-preactivation', 'career:current-authority-production-preactivation-parity');
 after('career:current-authority-production-preactivation-parity', 'guard:sitemap-authority');
 after('artisan:migrate', 'guard:no-pending-migrations');
 after('guard:no-pending-migrations', 'artisan:migrate-seo-intel');

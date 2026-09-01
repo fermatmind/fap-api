@@ -69,6 +69,51 @@ final class CompetitiveCloseoutBuilder
         return $receipt;
     }
 
+    /** @param array<string, mixed> $ingestion @return array<string, mixed> */
+    public function buildRuntime(array $ingestion, string $candidateSha, string $environment, ?string $productionSha = null): array
+    {
+        $manifest = $this->contracts->manifest();
+        $reads = max(0, min(64, (int) data_get($ingestion, 'dependency_ingestion.external_reads', 0)));
+        $output = (array) ($ingestion['competitive_output'] ?? []);
+        $ready = ($ingestion['status'] ?? null) === 'READY'
+            && ($ingestion['bundle_verification'] ?? null) === 'valid'
+            && ($output['status'] ?? null) === 'READY'
+            && data_get($output, '11i_handoff.source_freshness') === 'fresh'
+            && (int) data_get($output, '11i_handoff.source_count', 0) >= 2;
+        $closed = $ready && $environment === 'production' && $productionSha === $candidateSha;
+        $receipt = [
+            'receipt_version' => 'seo.competitive_evidence_closeout.v2',
+            'environment' => $environment,
+            'candidate_sha' => $candidateSha,
+            'production_sha' => $productionSha,
+            'contract_manifest_version' => $manifest['manifest_version'],
+            'contract_manifest_hash' => $manifest['manifest_hash'],
+            'dependency_ingestion' => ['external_reads' => $reads],
+            'model_calls' => 0,
+            'tool_calls' => 0,
+            'external_calls' => 0,
+            'cms_writes' => 0,
+            'url_truth_writes' => 0,
+            'search_writes' => 0,
+            'business_writes' => 0,
+            'production_permissions' => 0,
+            'SEO-PLATFORM-11G' => $closed ? 'CLOSED' : 'HOLD',
+            'ready_for_11H' => $closed,
+            '11i_handoff_ready' => $closed,
+            'competitive_source_state' => $ready ? 'available' : 'hold',
+            'competitive_freshness_state' => $ready ? 'fresh' : 'unknown',
+            'competitive_bundle_verification' => $ready ? 'valid' : 'missing',
+            'competitive_context_status' => $ready ? 'READY' : 'HOLD',
+            'competitive_hold_reason' => $ready ? ($closed ? 'NONE' : 'STAGING_VALIDATED') : $this->safeReason($ingestion['hold_reason'] ?? null),
+            'execution_allowed' => false,
+            'digital_pr_scope' => 'deferred_p2_manual',
+            'outreach_actions' => 0,
+        ];
+        $receipt['receipt_hash'] = $this->hasher->hash($receipt);
+
+        return $receipt;
+    }
+
     /** @param array<string, mixed> $receipt */
     public function verify(array $receipt, string $candidateSha): bool
     {
@@ -90,5 +135,12 @@ final class CompetitiveCloseoutBuilder
             ])))) === 0
             && is_string($receipt['receipt_hash'] ?? null)
             && hash_equals($this->hasher->hashWithout($receipt, 'receipt_hash'), (string) $receipt['receipt_hash']);
+    }
+
+    private function safeReason(mixed $reason): string
+    {
+        $reason = (string) $reason;
+
+        return preg_match('/^[A-Z0-9_]{3,64}$/D', $reason) === 1 ? $reason : 'SOURCE_POLICY_HOLD';
     }
 }
