@@ -9,6 +9,7 @@ use App\Http\Controllers\API\V0_5\SEO\LlmsController;
 use App\Http\Controllers\API\V0_5\SEO\SitemapSourceController;
 use App\Services\SEO\SitemapCache;
 use App\Services\SEO\SitemapGenerator;
+use App\Services\SeoIntel\UrlTruth\PublicCanonicalConsumerSnapshot;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use RuntimeException;
@@ -47,6 +48,7 @@ final class Seo13ArticleDiscoverabilityCacheRefreshService
         private readonly CareerRuntimePublishProjectionLookup $careerProjection,
         private readonly SitemapCache $sitemapCache,
         private readonly LlmsController $llmsController,
+        private readonly PublicCanonicalConsumerSnapshot $publicCanonicalSnapshot,
     ) {}
 
     /**
@@ -191,8 +193,8 @@ final class Seo13ArticleDiscoverabilityCacheRefreshService
             $this->sitemapGenerator->careerDiscoverabilityCacheIdentity(),
         );
 
-        $llms = (string) $this->llmsController->llmsTxt($this->sitemapGenerator)->getContent();
-        $llmsFull = (string) $this->llmsController->llmsFullTxt($this->sitemapGenerator)->getContent();
+        $llms = (string) $this->llmsController->llmsTxt($this->publicCanonicalSnapshot)->getContent();
+        $llmsFull = (string) $this->llmsController->llmsFullTxt($this->publicCanonicalSnapshot)->getContent();
 
         foreach ((array) $before['rows'] as $row) {
             $canonical = (string) ($row['canonical_url'] ?? '');

@@ -10,6 +10,7 @@ use App\Models\ArticleTranslationRevision;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\Cms\Seo13ArticleSchemaReleaseService;
 use App\Services\SEO\SitemapCache;
+use App\Services\SeoIntel\UrlTruth\PublicCanonicalConsumerSnapshot;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
@@ -82,6 +83,7 @@ final class Seo13ArticleDiscoverabilityCacheRefreshCommandTest extends TestCase
         $this->createCohort();
         $this->releaseSchema();
         $this->publishEmptyCareerDirectories();
+        $this->publishPublicCanonicalSnapshot();
         $beforeAuthority = $this->authorityState();
 
         foreach ($this->cacheKeys() as $key) {
@@ -150,10 +152,10 @@ final class Seo13ArticleDiscoverabilityCacheRefreshCommandTest extends TestCase
         $this->assertIsString(Cache::get(SitemapCache::XML_CACHE_KEY));
         $this->assertIsString(Cache::get(SitemapCache::ETAG_CACHE_KEY));
         $this->assertIsString(Cache::get(SitemapCache::IDENTITY_CACHE_KEY));
-        $this->assertIsString(Cache::get('seo:llms-txt:v1:body'));
-        $this->assertIsString(Cache::get('seo:llms-txt:v1:body:career-authority-identity'));
-        $this->assertIsString(Cache::get('seo:llms-full-txt:v1:body'));
-        $this->assertIsString(Cache::get('seo:llms-full-txt:v1:body:career-authority-identity'));
+        $this->assertIsString(Cache::get(PublicCanonicalConsumerSnapshot::POINTER_CACHE_KEY));
+        $this->assertIsString(Cache::get(PublicCanonicalConsumerSnapshot::FRESH_CACHE_KEY));
+        $this->assertNull(Cache::get('seo:llms-txt:v1:body'));
+        $this->assertNull(Cache::get('seo:llms-full-txt:v1:body'));
     }
 
     public function test_execute_fails_before_cache_writes_when_authority_hash_drifts(): void
@@ -271,6 +273,31 @@ final class Seo13ArticleDiscoverabilityCacheRefreshCommandTest extends TestCase
         $cache = app(PublicCareerAuthorityResponseCache::class);
         $cache->publishDirectoryReadModel('en', ['items' => []]);
         $cache->publishDirectoryReadModel('zh-CN', ['items' => []]);
+    }
+
+    private function publishPublicCanonicalSnapshot(): void
+    {
+        $items = array_map(
+            static fn (array $target): array => [
+                'loc' => 'https://fermatmind.com/zh/articles/'.$target[1],
+                'locale' => 'zh-CN',
+                'page_family' => 'article',
+                'page_entity_type' => 'article',
+                'lastmod' => null,
+            ],
+            self::TARGETS,
+        );
+        usort($items, static fn (array $left, array $right): int => $left['loc'] <=> $right['loc']);
+        $fingerprint = hash('sha256', json_encode($items, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
+        $snapshot = [
+            'schema_version' => PublicCanonicalConsumerSnapshot::SCHEMA_VERSION,
+            'fingerprint' => $fingerprint,
+            'items' => $items,
+        ];
+
+        Cache::forever('seo:url-truth-consumers:v1:snapshot:'.$fingerprint, $snapshot);
+        Cache::forever(PublicCanonicalConsumerSnapshot::POINTER_CACHE_KEY, $fingerprint);
+        Cache::put(PublicCanonicalConsumerSnapshot::FRESH_CACHE_KEY, $fingerprint);
     }
 
     /**
