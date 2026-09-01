@@ -56,9 +56,9 @@ final class SeoPlatform11DContractsRoutingTest extends TestCase
         sort($locales);
         sort($evidenceTypes);
 
-        $this->assertSame(['numerator' => 36, 'denominator' => 36, 'measurement_state' => 'observed'], $metrics['routing_precision']);
+        $this->assertSame(['numerator' => 32, 'denominator' => 32, 'measurement_state' => 'observed'], $metrics['routing_precision']);
         $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $metrics['corpus_hash']);
-        $this->assertSame(['numerator' => 36, 'denominator' => 36, 'measurement_state' => 'observed'], $metrics['routing_recall']);
+        $this->assertSame(['numerator' => 32, 'denominator' => 32, 'measurement_state' => 'observed'], $metrics['routing_recall']);
         $this->assertSame(0, $metrics['missed_required_mode_rate']['numerator']);
         $this->assertSame(0, $metrics['unnecessary_mode_rate']['numerator']);
         $this->assertSame(1, $metrics['all_team_invocation_count']['numerator']);

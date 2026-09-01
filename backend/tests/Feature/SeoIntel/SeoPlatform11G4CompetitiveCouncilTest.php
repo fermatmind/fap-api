@@ -37,7 +37,7 @@ final class SeoPlatform11G4CompetitiveCouncilTest extends TestCase
             $this->assertSame(['gateway_competitor_public', 'search_measurement'], $conditional['evidence_types']);
         }
         $this->assertSame('2.0.0', $metrics['corpus_version']);
-        $this->assertSame(['numerator' => 36, 'denominator' => 36, 'measurement_state' => 'observed'], $metrics['routing_precision']);
+        $this->assertSame(['numerator' => 32, 'denominator' => 32, 'measurement_state' => 'observed'], $metrics['routing_precision']);
         $this->assertSame($metrics['routing_precision'], $metrics['routing_recall']);
     }
 

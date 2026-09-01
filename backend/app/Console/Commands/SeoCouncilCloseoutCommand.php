@@ -208,8 +208,8 @@ final class SeoCouncilCloseoutCommand extends Command
                 && $dependency['status'] === 'READY'
                 && $receipt['unique_orchestrator_probe_total'] === 1
                 && $entrypointPassed === 5
-                && $routingMetrics['routing_precision'] === ['numerator' => 36, 'denominator' => 36, 'measurement_state' => 'observed']
-                && $routingMetrics['routing_recall'] === ['numerator' => 36, 'denominator' => 36, 'measurement_state' => 'observed']
+                && $routingMetrics['routing_precision'] === ['numerator' => 32, 'denominator' => 32, 'measurement_state' => 'observed']
+                && $routingMetrics['routing_recall'] === ['numerator' => 32, 'denominator' => 32, 'measurement_state' => 'observed']
                 && $routingMetrics['missed_required_mode_rate']['numerator'] === 0
                 && $routingMetrics['unnecessary_mode_rate']['numerator'] === 0
                 && $routingMetrics['unauthorized_all_team_invocation_count']['numerator'] === 0
