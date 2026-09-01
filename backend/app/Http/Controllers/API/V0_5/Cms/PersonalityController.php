@@ -6,6 +6,7 @@ namespace App\Http\Controllers\API\V0_5\Cms;
 
 use App\Domain\Personality\Current\PersonalityCurrentIndexProjector;
 use App\Domain\Personality\Current\PersonalityCurrentPageReader;
+use App\Domain\Personality\Current\PersonalityCurrentSeoProjector;
 use App\Http\Controllers\Concerns\RespondsWithNotFound;
 use App\Http\Controllers\Controller;
 use App\Models\PersonalityProfile;
@@ -66,6 +67,7 @@ class PersonalityController extends Controller
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
         private readonly PersonalityCurrentPageReader $personalityCurrentPageReader,
         private readonly PersonalityCurrentIndexProjector $personalityCurrentIndexProjector,
+        private readonly PersonalityCurrentSeoProjector $personalityCurrentSeoProjector,
     ) {}
 
     public function index(Request $request): JsonResponse
@@ -276,6 +278,24 @@ class PersonalityController extends Controller
         $validated = $this->validateReadQuery($request);
         if ($validated instanceof JsonResponse) {
             return $validated;
+        }
+
+        if ($this->usesCurrentAuthority($validated['org_id'])) {
+            $slug = strtolower(trim($type));
+            $pageKind = preg_match('/-[at]$/', $slug) === 1 ? 'variant' : 'profile';
+            $payload = $this->personalityCurrentPageReader->payloadOrNull(
+                'mbti',
+                $pageKind,
+                $slug,
+                $validated['locale'],
+            );
+            if ($payload === null) {
+                return $this->currentAuthorityNotFoundResponse('personality profile not found.');
+            }
+
+            return response()->json($this->personalityCurrentSeoProjector->project($payload))
+                ->header('X-Fermat-Content-Authority', 'personality.page.content.v1')
+                ->header('X-Fermat-Content-Aggregate', $this->personalityCurrentPageReader->aggregateSha256());
         }
 
         try {
