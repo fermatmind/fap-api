@@ -27,13 +27,16 @@ final class PublicArticleAttributionResolver
         $articleId = $this->positiveInteger($meta['content_id'] ?? null);
         $sourceSlug = strtolower(trim((string) ($meta['source_slug'] ?? '')));
         $landingPath = $this->publicPath($meta['landing_path'] ?? null);
-        if ($articleId === null || ! $this->validSlug($sourceSlug) || $landingPath === null) {
+        if ($landingPath === null) {
             return null;
         }
 
-        $article = $this->publicArticle($articleId);
+        $pathSlug = basename($landingPath);
+        $article = $articleId === null
+            ? $this->publicArticleBySlug($pathSlug, $row['locale'] ?? null)
+            : $this->publicArticle($articleId);
         if ($article === null
-            || $article['slug'] !== $sourceSlug
+            || ($sourceSlug !== '' && (! $this->validSlug($sourceSlug) || $article['slug'] !== $sourceSlug))
             || $article['canonical_path'] !== $landingPath
             || $article['locale'] !== $this->normalizeLocale($row['locale'] ?? null)) {
             return null;
@@ -86,6 +89,41 @@ final class PublicArticleAttributionResolver
             'slug' => $slug,
             'locale' => $locale,
             'canonical_path' => ($locale === 'zh-CN' ? '/zh/articles/' : '/en/articles/').$slug,
+        ];
+    }
+
+    /**
+     * @return array{article_id:int,slug:string,locale:string,canonical_path:string}|null
+     */
+    private function publicArticleBySlug(string $slug, mixed $locale): ?array
+    {
+        $normalizedLocale = $this->normalizeLocale($locale);
+        if (! $this->validSlug($slug) || ! in_array($normalizedLocale, ['en', 'zh-CN'], true)) {
+            return null;
+        }
+
+        /** @var Article|null $article */
+        $article = Article::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('slug', $slug)
+            ->where('locale', $normalizedLocale)
+            ->where('status', 'published')
+            ->where('is_public', true)
+            ->where(static function ($query): void {
+                $query->whereNull('lifecycle_state')
+                    ->orWhereNotIn('lifecycle_state', [
+                        Article::LIFECYCLE_ARCHIVED,
+                        Article::LIFECYCLE_SOFT_DELETED,
+                    ]);
+            })
+            ->first(['id', 'slug', 'locale']);
+
+        return $article === null ? null : [
+            'article_id' => (int) $article->id,
+            'slug' => $slug,
+            'locale' => $normalizedLocale,
+            'canonical_path' => ($normalizedLocale === 'zh-CN' ? '/zh/articles/' : '/en/articles/').$slug,
         ];
     }
 

@@ -89,4 +89,31 @@ final class AttemptStartPersistenceTest extends TestCase
         $this->assertSame('mbti-personality-test-16-personality-types', $meta['test_slug'] ?? null);
         $this->assertSame('/zh/topics/mbti', $meta['landing_path'] ?? null);
     }
+
+    public function test_attempt_start_persists_public_article_authority_identity(): void
+    {
+        $this->seedScales();
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => 'test_anon_article_attr',
+        ])->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'MBTI',
+            'anon_id' => 'test_anon_article_attr',
+            'source_page_type' => 'article_detail',
+            'source_slug' => 'personality-types',
+            'content_id' => 53,
+            'landing_path' => '/en/articles/personality-types',
+        ]);
+
+        $response->assertOk();
+        $summary = DB::table('attempts')
+            ->where('id', (string) $response->json('attempt_id'))
+            ->value('answers_summary_json');
+        $summary = is_array($summary) ? $summary : json_decode((string) $summary, true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame('article_detail', data_get($summary, 'meta.source_page_type'));
+        $this->assertSame('personality-types', data_get($summary, 'meta.source_slug'));
+        $this->assertSame(53, data_get($summary, 'meta.content_id'));
+        $this->assertSame('/en/articles/personality-types', data_get($summary, 'meta.landing_path'));
+    }
 }

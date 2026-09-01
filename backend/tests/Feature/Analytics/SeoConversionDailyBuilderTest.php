@@ -212,6 +212,51 @@ final class SeoConversionDailyBuilderTest extends TestCase
         $this->assertSame(1, (int) $row->result_ready_count);
     }
 
+    public function test_refresh_backfills_article_attribution_from_legacy_canonical_landing_path(): void
+    {
+        $day = CarbonImmutable::parse('2026-08-31 09:00:00');
+        $attemptId = (string) Str::uuid();
+        DB::table('articles')->insert([
+            'id' => 55,
+            'org_id' => 0,
+            'slug' => 'big-five-growth-guide',
+            'locale' => 'zh-CN',
+            'title' => 'Big Five growth guide',
+            'content_md' => '# Big Five growth guide',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => false,
+            'published_at' => $day->subDay(),
+            'created_at' => $day->subDay(),
+            'updated_at' => $day->subDay(),
+        ]);
+        $this->insertAttempt($attemptId, 0, 'zh-CN', $day, $day->addMinutes(5));
+        DB::table('attempts')->where('id', $attemptId)->update([
+            'scale_code' => 'BIG5_OCEAN',
+            'answers_summary_json' => json_encode([
+                'meta' => [
+                    'source_page_type' => 'article_detail',
+                    'landing_path' => '/zh/articles/big-five-growth-guide',
+                    'form_code' => 'big5_90',
+                ],
+            ], JSON_THROW_ON_ERROR),
+        ]);
+        foreach (['test_start', 'test_submit', 'result_ready', 'result_view'] as $offset => $eventCode) {
+            $this->insertAttemptBoundEvent($attemptId, $eventCode, $day->addMinutes($offset), 'BIG5_OCEAN', 'big5_90');
+        }
+
+        $result = app(SeoConversionDailyBuilder::class)->refresh($day, $day, [0], false);
+
+        $this->assertSame(1, (int) ($result['upserted_rows'] ?? 0));
+        $row = DB::table('analytics_seo_conversion_daily')->sole();
+        $this->assertSame(55, (int) $row->source_article_id);
+        $this->assertSame('/zh/articles/big-five-growth-guide', (string) $row->url);
+        $this->assertSame(1, (int) $row->start_test_count);
+        $this->assertSame(1, (int) $row->complete_test_count);
+        $this->assertSame(1, (int) $row->result_ready_count);
+        $this->assertSame(1, (int) $row->view_result_count);
+    }
+
     public function test_refresh_uses_backend_attempt_events_as_the_real_cro_stage_source(): void
     {
         $day = CarbonImmutable::parse('2026-08-31 10:00:00');

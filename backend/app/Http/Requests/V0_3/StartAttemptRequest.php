@@ -37,6 +37,7 @@ class StartAttemptRequest extends FormRequest
             'entrypoint' => 128,
             'entry_surface' => 128,
             'source_page_type' => 64,
+            'source_slug' => 128,
             'target_action' => 128,
             'test_slug' => 128,
             'landing_path' => 2048,
@@ -45,6 +46,11 @@ class StartAttemptRequest extends FormRequest
             if ($value !== null) {
                 $meta[$field] = $value;
             }
+        }
+
+        $contentId = filter_var($this->input('content_id'), FILTER_VALIDATE_INT);
+        if (is_int($contentId) && $contentId > 0) {
+            $meta['content_id'] = $contentId;
         }
 
         $referrer = $this->normalizeString($this->input('referrer'), 255);
@@ -89,6 +95,8 @@ class StartAttemptRequest extends FormRequest
             'entrypoint' => ['nullable', 'string', 'max:128'],
             'entry_surface' => ['nullable', 'string', 'max:128'],
             'source_page_type' => ['nullable', 'string', 'max:64'],
+            'source_slug' => ['nullable', 'string', 'max:128', 'regex:/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/'],
+            'content_id' => ['nullable', 'integer', 'min:1'],
             'target_action' => ['nullable', 'string', 'max:128'],
             'test_slug' => ['nullable', 'string', 'max:128'],
             'landing_path' => ['nullable', 'string', 'max:2048'],
