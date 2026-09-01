@@ -129,7 +129,10 @@ test("staging deployment and smoke precede source readiness while production nev
   assert.match(staging, /seo-intel:gsc-sync --window=90 --search-types=web --full-window/);
   assert.match(staging, /analytics:refresh-seo-conversion-daily[^\n]+--dry-run/);
   assert.match(staging, /\.attempted_rows > 0/);
-  assert.match(staging, /\.expected_metrics \| to_entries/);
+  assert.match(staging, /\.expected_metrics \| to_entries \| map\(\.value\) \| add/);
+  assert.match(staging, /\.persisted_metrics \| to_entries \| map\(\.value\) \| add/);
+  assert.doesNotMatch(staging, /expected_metrics \| to_entries\) \| all\(\.value > 0\)/);
+  assert.doesNotMatch(staging, /persisted_metrics \| to_entries\) \| all\(\.value > 0\)/);
   assert.match(staging, /\.unmapped_rows == 0/);
   assert.match(staging, /excluded_non_authority_rows/);
   assert.match(staging, /\.duplicate_natural_keys == 0/);

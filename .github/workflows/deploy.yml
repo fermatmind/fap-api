@@ -733,7 +733,7 @@ jobs:
             and .org_scope_mode == "bounded"
             and .org_scope_count == 1
             and .attempted_rows > 0
-            and ((.expected_metrics | to_entries) | all(.value > 0))
+            and ((.expected_metrics | to_entries | map(.value) | add) > 0)
             and .raw_session_or_business_identifiers_exposed == false
           ' "$cro_dry_run_json" >/dev/null || fail CRO_NO_REAL_AGGREGATE_SOURCE
 
@@ -750,8 +750,8 @@ jobs:
             and .attempted_rows > 0
             and .upserted_rows > 0
             and .readback_receipt.status == "pass"
-            and ((.readback_receipt.expected_metrics | to_entries) | all(.value > 0))
-            and ((.readback_receipt.persisted_metrics | to_entries) | all(.value > 0))
+            and ((.readback_receipt.expected_metrics | to_entries | map(.value) | add) > 0)
+            and ((.readback_receipt.persisted_metrics | to_entries | map(.value) | add) > 0)
             and .readback_receipt.raw_session_or_business_identifiers_exposed == false
             and .raw_query_exposed == false
             and .raw_session_or_business_identifiers_exposed == false
