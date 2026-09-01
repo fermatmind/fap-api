@@ -25,7 +25,7 @@ final class ExternalInjectionScanner
             '/```(?:system|prompt|tool|shell|sql)/',
             '/"(?:tool_call|function_call|tool_allowlist|egress_allowlist|authority_ceiling|write_permissions|execution_allowed|policy_hash|prompt_hash)"\s*:/',
             '/(?:tool_allowlist|egress_allowlist|authority_ceiling|write_permissions|execution_allowed|policy_hash|prompt_hash)\s*[:=]/',
-            '/(?:curl|wget|bash|sh|powershell|drop\s+table|union\s+select)\s+[^\n]{0,120}/',
+            '/(?:\b(?:curl|wget|bash|powershell)\b\s+(?:-|https?:\/\/)|\bsh\b\s+-[a-z]|\bdrop\s+table\b|\bunion\s+select\b)[^\n]{0,120}/',
             '/(?:display\s*:\s*none|visibility\s*:\s*hidden)[^\n]{0,120}(?:instruction|prompt|tool|execute)/',
         ];
         $signals = 0;

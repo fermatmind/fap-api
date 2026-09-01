@@ -7,6 +7,7 @@ namespace Tests\Feature\SeoIntel;
 use App\Services\SeoAgentEvidence\Bundle\SeoEvidenceBundleFactory;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveEvidenceIngestionService;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveGatewayReader;
+use App\Services\SeoAgentEvidence\Competitive\CompetitiveSourcePolicyRegistry;
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use App\Services\SeoCouncil\Competitive\CompetitiveCloseoutBuilder;
 use App\Services\SeoCouncil\Competitive\CompetitiveEvidenceBundleLoader;
@@ -28,7 +29,7 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
     public function test_live_cohort_holds_before_external_read_or_write(): void
     {
         $this->artisan('seo:competitive-evidence-ingest', [
-            '--cohort' => 'competitive.big-five.live.v1',
+            '--cohort' => 'competitive.big-five.live.v2',
             '--dry-run' => true,
             '--no-write' => true,
             '--json' => true,
@@ -36,17 +37,43 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
             ->assertSuccessful();
 
         $this->artisan('seo:competitive-evidence-ingest', [
-            '--cohort' => 'competitive.big-five.live.v1',
+            '--cohort' => 'competitive.big-five.live.v2',
             '--write-evidence' => true,
             '--json' => true,
         ])->expectsOutputToContain('COMPETITIVE_WRITE_BOUNDARY_HELD')
             ->assertFailed();
     }
 
+    public function test_v3_policy_registry_is_current_hash_bound_and_domain_independent(): void
+    {
+        $registry = app(CompetitiveSourcePolicyRegistry::class);
+        $snapshot = $registry->snapshot('competitive.big-five.live.v2');
+        $this->assertSame('seo.competitive_source_policy.v3', $snapshot['source_policy_version']);
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $snapshot['source_policy_set_hash']);
+        $this->assertSame([], config('seo_agent_evidence.allowed_sources'));
+
+        $competitorDomains = [];
+        foreach ($registry->sourcesFor((array) app(\App\Services\SeoAgentEvidence\Competitive\CompetitiveSourceRegistry::class)->cohort('competitive.big-five.live.v2')) as $source) {
+            if ($source['source_class'] === 'competitor_public') {
+                $host = (string) parse_url($source['url'], PHP_URL_HOST);
+                $competitorDomains[] = implode('.', array_slice(explode('.', $host), -2));
+            }
+        }
+        $this->assertCount(2, array_unique($competitorDomains));
+        foreach ($registry->policies() as $policy) {
+            $this->assertLessThanOrEqual(2592000, strtotime($policy['expires_at']) - strtotime($policy['reviewed_at']));
+            $this->assertGreaterThan(time(), strtotime($policy['expires_at']));
+            $this->assertSame(['url_hash', 'content_hash', 'structural_projection', 'review_decision'], $policy['retention_scope']);
+            $this->assertTrue($policy['prohibitions']['raw_html_retention']);
+            $this->assertTrue($policy['prohibitions']['competitor_text_retention']);
+        }
+    }
+
     public function test_runtime_closeout_closes_only_for_independent_production_bundle(): void
     {
         $sha = str_repeat('a', 40);
         $builder = app(CompetitiveCloseoutBuilder::class);
+        config()->set('seo_agent_evidence.allowed_sources', ['a' => [], 'b' => [], 'c' => [], 'd' => []]);
         $ingestion = [
             'status' => 'READY',
             'hold_reason' => 'NONE',
@@ -56,11 +83,14 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
                 '11i_handoff' => ['source_freshness' => 'fresh', 'source_count' => 2],
             ],
             'dependency_ingestion' => ['external_reads' => 12],
+            'policy_snapshot' => app(CompetitiveSourcePolicyRegistry::class)->snapshot('competitive.big-five.live.v2'),
+            'measurement' => $this->readyMeasurement(),
         ];
 
         $staging = $builder->buildRuntime($ingestion, $sha, 'staging');
         $this->assertSame('HOLD', $staging['SEO-PLATFORM-11G']);
-        $this->assertSame('STAGING_VALIDATED', $staging['competitive_hold_reason']);
+        $this->assertSame('STAGING_VALIDATED', $staging['closeout_state']);
+        $this->assertSame('NONE', $staging['competitive_hold_reason']);
         $this->assertSame(12, $staging['dependency_ingestion']['external_reads']);
 
         $production = $builder->buildRuntime($ingestion, $sha, 'production', $sha);
@@ -73,7 +103,7 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
         $this->assertSame(0, $production['production_permissions']);
     }
 
-    public function test_gateway_hold_preserves_actual_external_read_count(): void
+    public function test_measurement_hold_prevents_all_external_reads(): void
     {
         $this->app->bind(CompetitiveGatewayReader::class, static fn (): CompetitiveGatewayReader => new class implements CompetitiveGatewayReader
         {
@@ -96,9 +126,31 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
         );
 
         $this->assertSame('HOLD', $result['status']);
-        $this->assertSame('TERMS_POLICY_DRIFT', $result['hold_reason']);
-        $this->assertSame(2, $result['dependency_ingestion']['external_reads']);
+        $this->assertNotSame('TERMS_POLICY_DRIFT', $result['hold_reason']);
+        $this->assertSame(0, $result['dependency_ingestion']['external_reads']);
         $this->assertFalse($result['write_performed']);
+    }
+
+    /** @return array<string, mixed> */
+    private function readyMeasurement(): array
+    {
+        $mode = [
+            'source_state' => 'available',
+            'freshness_state' => 'fresh',
+            'bundle_verification' => 'valid',
+            'context_status' => 'READY',
+            'hold_reason' => 'NONE',
+            'bundle_hash' => str_repeat('e', 64),
+        ];
+
+        return [
+            'status' => 'READY',
+            'hold_reason' => 'NONE',
+            'measurement_bundle_set_hash' => str_repeat('f', 64),
+            'search_measurement' => $mode,
+            'cro_measurement' => $mode,
+            'bundles' => [],
+        ];
     }
 
     public function test_council_loader_rejects_staging_bundle_in_production(): void

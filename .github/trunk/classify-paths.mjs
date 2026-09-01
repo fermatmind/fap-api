@@ -85,7 +85,7 @@ const isSeoCouncilOrchestrationBoundary = (path) =>
   || SEO_COUNCIL_CONTROL_PLANE_PATHS.has(path);
 
 const isSeoCompetitiveEvidenceBoundary = (path) =>
-  /^backend\/(?:app\/Services\/SeoAgentEvidence\/(?:Competitive|External)\/|app\/Services\/SeoCouncil\/Competitive\/|app\/Console\/Commands\/SeoCompetitiveEvidence[^/]+\.php$|app\/Providers\/(?:SeoAgentEvidence|SeoCouncil)ServiceProvider\.php$|resources\/seo-agent\/evidence\/competitive\/|docs\/seo\/generated\/seo-(?:agent-evidence|council)-contract-manifest\.v[34]\.json$|tests\/Feature\/SeoIntel\/SeoPlatform11G)/.test(path)
+  /^backend\/(?:app\/Services\/SeoAgentEvidence\/(?:Competitive|External)\/|app\/Services\/SeoCouncil\/Competitive\/|app\/Console\/Commands\/SeoCompetitiveEvidence[^/]+\.php$|app\/Providers\/(?:SeoAgentEvidence|SeoCouncil)ServiceProvider\.php$|resources\/seo-agent\/evidence\/competitive\/|docs\/seo\/generated\/seo-(?:agent-evidence|council)-contract-manifest\.v[345]\.json$|tests\/Feature\/SeoIntel\/SeoPlatform11G)/.test(path)
   || path === "backend/config/seo_agent_evidence.php"
   || path === "backend/scripts/seo/export_seo_agent_evidence_contracts.php"
   || path === "backend/scripts/seo/export_seo_council_contracts.php"

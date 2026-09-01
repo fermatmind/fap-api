@@ -779,8 +779,9 @@ jobs:
           php artisan test --compact tests/Feature/SeoIntel/SeoPlatform11B*.php tests/Feature/SeoIntel/SeoPlatform11G*.php
           php artisan seo:competitive-evidence-closeout --expected-sha="$GITHUB_SHA" --environment=ci_candidate --json > ../seo-competitive-evidence-closeout.json
           jq -e --arg sha "$GITHUB_SHA" '
-            .receipt_version == "seo.competitive_evidence_closeout.v2"
+            .receipt_version == "seo.competitive_evidence_closeout.v3"
             and .environment == "ci_candidate"
+            and .closeout_state == "OFFLINE_EVAL_READY"
             and .candidate_sha == $sha
             and ."SEO-PLATFORM-11G" == "OFFLINE_EVAL_READY"
             and .ready_for_11H == false
@@ -1070,9 +1071,10 @@ jobs:
           if [ "$competitive_required" = true ]; then
             test "$SEO_COMPETITIVE_EVIDENCE_RESULT" = success
             jq -e --arg sha "$GITHUB_SHA" '
-              .receipt_version == "seo.competitive_evidence_closeout.v2"
+              .receipt_version == "seo.competitive_evidence_closeout.v3"
               and .candidate_sha == $sha
               and .environment == "ci_candidate"
+              and .closeout_state == "OFFLINE_EVAL_READY"
               and ."SEO-PLATFORM-11G" == "OFFLINE_EVAL_READY"
               and .ready_for_11H == false and ."11i_handoff_ready" == false
               and .dependency_ingestion.external_reads == 0

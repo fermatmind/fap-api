@@ -30,6 +30,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withCommands([
         __DIR__.'/../app/Console/Commands',
+        \App\Console\Commands\SeoCompetitiveEvidenceCloseoutCommand::class,
         \App\Console\Commands\CareerContentV3Compile::class,
         \App\Console\Commands\SeoAgentReplaceArticleCovers::class,
         \App\Console\Commands\ArticleImportIqMethodPagesDraft::class,

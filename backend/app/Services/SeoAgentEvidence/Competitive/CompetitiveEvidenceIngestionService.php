@@ -8,7 +8,6 @@ use App\Services\SeoAgentEvidence\Bundle\SeoEvidenceBundleFactory;
 use App\Services\SeoAgentEvidence\Bundle\SeoEvidenceBundleStore;
 use App\Services\SeoAgentEvidence\Bundle\SeoEvidenceBundleVerifier;
 use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher;
-use App\Services\SeoCouncil\Measurement\MeasurementEvidenceDiagnosticLoader;
 use Throwable;
 
 final class CompetitiveEvidenceIngestionService
@@ -16,8 +15,9 @@ final class CompetitiveEvidenceIngestionService
     public function __construct(
         private readonly CompetitiveGatewayReader $gateway,
         private readonly CompetitiveSourceRegistry $registry,
+        private readonly CompetitiveSourcePolicyRegistry $policies,
+        private readonly CompetitiveMeasurementReadiness $measurement,
         private readonly CompetitiveEvidenceAnalyzer $analyzer,
-        private readonly MeasurementEvidenceDiagnosticLoader $measurement,
         private readonly SeoEvidenceBundleFactory $bundles,
         private readonly SeoEvidenceBundleVerifier $verifier,
         private readonly SeoEvidenceBundleStore $store,
@@ -40,7 +40,21 @@ final class CompetitiveEvidenceIngestionService
             return $this->hold('SOURCE_POLICY_HOLD', 0);
         }
 
+        try {
+            $measurement = $this->measurement->assess($releaseSha, (string) $cohort['page_family'], $environment);
+            $policySnapshot = $this->policies->snapshot((string) $cohort['cohort_id']);
+            if (($measurement['status'] ?? null) !== 'READY') {
+                return $this->hold((string) ($measurement['hold_reason'] ?? 'MEASUREMENT_HOLD'), 0, $measurement, $policySnapshot);
+            }
+            if ($write) {
+                $this->policies->installForControlledCli($cohort, $environment, $releaseSha);
+            }
+        } catch (Throwable) {
+            return $this->hold('SOURCE_POLICY_HOLD', 0);
+        }
+
         $semantic = $this->registry->semanticRegistry();
+        $verifiedPolicies = $this->policies->policies();
         $projections = [];
         $sourcePolicies = [];
         $externalReads = 0;
@@ -54,28 +68,19 @@ final class CompetitiveEvidenceIngestionService
             ], $semantic);
             $externalReads += max(0, (int) data_get($result, 'dependency_ingestion.external_reads', 0));
             if (($result['status'] ?? null) !== 'ready' || ! is_array($result['projection'] ?? null)) {
-                return $this->hold((string) ($result['safe_error_code'] ?? 'SOURCE_POLICY_HOLD'), $externalReads);
+                return $this->hold((string) ($result['safe_error_code'] ?? 'SOURCE_POLICY_HOLD'), $externalReads, $measurement, $policySnapshot);
             }
             $projections[] = $result['projection'];
             $sourcePolicies[] = [
                 'source_id' => $sourceId,
                 'freshness_state' => 'fresh',
+                'policy_hash' => (string) $verifiedPolicies[$sourceId]['policy_hash'],
             ];
         }
 
         try {
-            $runtimeEnvironment = $environment === 'production' ? 'production_runtime' : 'staging_runtime';
-            $measurement = $this->measurement->diagnoseForScope(
-                'competitive:'.$releaseSha,
-                'search_measurement',
-                (string) $cohort['page_family'],
-                'en',
-                $runtimeEnvironment,
-            );
-            if (! $measurement->ready() || count($measurement->bundles()) !== 1) {
-                return $this->hold((string) $measurement->diagnostic()['hold_reason'], $externalReads);
-            }
-            $measurementBundle = $measurement->bundles()[0];
+            $measurementBundle = $measurement['bundles']['search_measurement'];
+            $croBundle = $measurement['bundles']['commercial_funnel_cro'];
             $authority = $this->authoritySnapshot($projections);
             $measurementInput = $this->measurementInput($measurementBundle);
             $output = $this->analyzer->analyze([
@@ -88,7 +93,7 @@ final class CompetitiveEvidenceIngestionService
                 'dependency_ingestion' => ['external_reads' => $externalReads],
             ]);
             if (($output['status'] ?? null) !== 'READY') {
-                return $this->hold((string) ($output['hold_reason'] ?? 'COMPETITIVE_EVIDENCE_HOLD'), $externalReads);
+                return $this->hold((string) ($output['hold_reason'] ?? 'COMPETITIVE_EVIDENCE_HOLD'), $externalReads, $measurement, $policySnapshot);
             }
 
             $bundle = $this->bundles->create([
@@ -109,11 +114,13 @@ final class CompetitiveEvidenceIngestionService
                 'source_license_class' => 'public_fact_permitted',
                 'data_usage_purpose' => 'competitive_evidence',
                 'egress_decision' => 'allowed_by_gateway',
-                'lineage_refs' => [(string) $measurementBundle['bundle_hash']],
+                'lineage_refs' => [(string) $measurementBundle['bundle_hash'], (string) $croBundle['bundle_hash']],
                 'payload' => [
                     'environment' => $environment,
                     'release_sha' => $releaseSha,
                     'cohort_id' => (string) $cohort['cohort_id'],
+                    'source_policy_set_hash' => $policySnapshot['source_policy_set_hash'],
+                    'measurement_bundle_set_hash' => $measurement['measurement_bundle_set_hash'],
                     'projections' => $projections,
                     'competitive_output' => $output,
                     '11i_handoff' => $output['11i_handoff'],
@@ -121,7 +128,7 @@ final class CompetitiveEvidenceIngestionService
                 ],
             ]);
             if (! $this->verifier->verify($bundle)['valid']) {
-                return $this->hold('BUNDLE_VERIFICATION_HOLD', $externalReads);
+                return $this->hold('BUNDLE_VERIFICATION_HOLD', $externalReads, $measurement, $policySnapshot);
             }
             if ($write) {
                 $this->store->create($bundle);
@@ -133,11 +140,13 @@ final class CompetitiveEvidenceIngestionService
                 'bundle_verification' => 'valid',
                 'bundle' => $bundle,
                 'competitive_output' => $output,
+                'policy_snapshot' => $policySnapshot,
+                'measurement' => $measurement,
                 'write_performed' => $write,
                 'dependency_ingestion' => ['external_reads' => $externalReads],
             ];
         } catch (Throwable) {
-            return $this->hold('COMPETITIVE_INGESTION_INTERNAL_HOLD', $externalReads);
+            return $this->hold('COMPETITIVE_INGESTION_INTERNAL_HOLD', $externalReads, $measurement, $policySnapshot);
         }
     }
 
@@ -194,13 +203,15 @@ final class CompetitiveEvidenceIngestionService
     }
 
     /** @return array<string, mixed> */
-    private function hold(string $reason, int $externalReads): array
+    private function hold(string $reason, int $externalReads, array $measurement = [], array $policySnapshot = []): array
     {
         return [
             'status' => 'HOLD',
             'hold_reason' => preg_match('/^[A-Z0-9_]{3,64}$/D', $reason) === 1 ? $reason : 'COMPETITIVE_EVIDENCE_HOLD',
             'bundle_verification' => 'missing',
             'write_performed' => false,
+            'policy_snapshot' => $policySnapshot,
+            'measurement' => $measurement,
             'dependency_ingestion' => ['external_reads' => max(0, min(64, $externalReads))],
         ];
     }

@@ -82,9 +82,9 @@ final class CompetitiveEvidenceAnalyzer
         $sourceCount = count(array_unique(array_column($competitors, 'source_id')));
         $demandWindows = $this->demandWindowCount($measurement);
         $multiSource = $sourceCount >= 2;
-        $ownerGap = ($authority['owner_gap_confirmed'] ?? false) === true;
         $entityGap = $entityGaps !== [];
         $structureGap = $structureGaps !== [];
+        $ownerGap = ($authority['owner_gap_confirmed'] ?? false) === true || $entityGap || $structureGap;
         $complete = ! $requiredMissing && ! $conflict && $freshness === 'fresh';
 
         $necessity = $this->pageNecessity(

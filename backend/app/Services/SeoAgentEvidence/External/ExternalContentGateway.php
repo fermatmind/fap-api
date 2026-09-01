@@ -24,6 +24,9 @@ final class ExternalContentGateway
 
     private const ALLOWED_SAVED_FIELDS = ['structured_facts', 'bounded_snippets'];
 
+    /** @var array<string, float> */
+    private array $lastRequestAt = [];
+
     public function __construct(
         private readonly ExternalDnsResolver $dns,
         private readonly ExternalContentTransport $transport,
@@ -244,6 +247,10 @@ final class ExternalContentGateway
     /** @param array<string, mixed> $policy @param array<string, mixed> $context @param array<string, mixed> $semantic @return array<string, mixed> */
     private function fetchCompetitiveValidated(string $sourceId, string $url, array $policy, array $context, array $semantic): array
     {
+        if (! hash_equals((string) ($policy['exact_source_url'] ?? ''), $url)
+            || ! hash_equals((string) ($policy['source_id'] ?? ''), $sourceId)) {
+            return $this->hold('SOURCE_URL_NOT_EXACT');
+        }
         $parts = $this->validateUrl($url, $policy);
         $host = (string) $parts['host'];
         $hostLock = $this->acquireLock('host', [$host], $this->lockTtl($policy));
@@ -252,14 +259,11 @@ final class ExternalContentGateway
         }
         $externalReads = 0;
         try {
-            $interval = max(1, (int) $policy['minimum_request_interval']);
-            if (! Cache::add($this->cacheKey('interval', [$sourceId, $host]), true, $interval)) {
-                return $this->hold('MINIMUM_INTERVAL_HELD');
-            }
             foreach (['terms', 'license'] as $kind) {
                 $policyUrl = $policy[$kind.'_url'] ?? null;
                 $expectedHash = $policy[$kind.'_evidence_hash'] ?? null;
-                if (! is_string($policyUrl) || ! is_string($expectedHash)) {
+                if (! is_string($policyUrl) || ! is_string($expectedHash)
+                    || ! hash_equals((string) ($policy[$kind.'_url_hash'] ?? ''), $this->hasher->hash($policyUrl))) {
                     return $this->hold(strtoupper($kind).'_POLICY_HELD', 'not_scanned', $externalReads);
                 }
                 $policyParts = $this->validateUrl($policyUrl, $policy);
@@ -268,10 +272,17 @@ final class ExternalContentGateway
                     return $this->hold('ROBOTS_HELD', 'not_scanned', $externalReads);
                 }
                 $policyResponse = $this->requestPinned('GET', $policyUrl, $policy, 262144, $externalReads);
-                if ($policyResponse['status'] !== 200 || $this->responseRedirected($policyResponse)) {
+                if ($policyResponse['status'] !== 200 || $this->responseRedirected($policyResponse)
+                    || ! $this->responseWithinLimit($policyResponse, 262144)) {
                     return $this->hold(strtoupper($kind).'_POLICY_HELD', 'not_scanned', $externalReads);
                 }
-                $normalized = mb_strtolower(preg_replace('/\s+/u', ' ', trim(strip_tags($policyResponse['body']))) ?: '', 'UTF-8');
+                $contentType = strtolower(trim(explode(';', (string) ($policyResponse['headers']['content-type'] ?? $policyResponse['headers']['Content-Type'] ?? ''))[0]));
+                if (! in_array($contentType, ['text/html', 'text/plain'], true)) {
+                    return $this->hold(strtoupper($kind).'_POLICY_HELD', 'not_scanned', $externalReads);
+                }
+                $normalized = $contentType === 'text/plain'
+                    ? mb_strtolower(preg_replace('/\s+/u', ' ', trim($policyResponse['body'])) ?: '', 'UTF-8')
+                    : $this->normalizedVisibleText($policyResponse['body']);
                 if (! hash_equals($expectedHash, $this->hasher->hash($normalized))) {
                     return $this->hold(strtoupper($kind).'_POLICY_DRIFT', 'not_scanned', $externalReads);
                 }
@@ -287,6 +298,15 @@ final class ExternalContentGateway
             $contentType = strtolower(trim(explode(';', (string) ($response['headers']['content-type'] ?? ''))[0]));
             if ($contentType !== 'text/html' || strtolower((string) ($response['headers']['content-encoding'] ?? 'identity')) !== 'identity') {
                 return $this->hold('CONTENT_TYPE_HELD', 'not_scanned', $externalReads);
+            }
+            if (! $this->responseWithinLimit($response, $maxBytes)) {
+                return $this->hold('CONTENT_LENGTH_HELD', 'not_scanned', $externalReads);
+            }
+            if ($this->injection->scan($this->visibleText($response['body'], false))['result'] !== 'pass') {
+                return $this->hold('INJECTION_BLOCKED', 'blocked', $externalReads);
+            }
+            if ($this->privateScanner->scan($this->mainVisibleText($response['body']))['private_data_present']) {
+                return $this->hold('PRIVATE_DATA_BLOCKED', 'pass', $externalReads);
             }
             $projectionInput = array_merge($context, [
                 'source_id' => $sourceId,
@@ -320,7 +340,15 @@ final class ExternalContentGateway
     /** @param array<string, mixed> $policy */
     private function robotsDecision(string $host, string $path, array $policy, int &$externalReads): bool
     {
-        $response = $this->requestPinned('GET', 'https://'.$host.'/robots.txt', $policy, 65536, $externalReads);
+        $url = 'https://'.$host.'/robots.txt';
+        $response = $this->requestPinned('GET', $url, $policy, 65536, $externalReads);
+        if (! $this->responseWithinLimit($response, 65536) || $this->responseRedirected($response)) {
+            return false;
+        }
+        if ($response['status'] === 200 && ($policy['robots_url'] ?? null) === $url
+            && ! hash_equals((string) ($policy['robots_evidence_hash'] ?? ''), $this->hasher->hash($this->normalizedVisibleText($response['body'])))) {
+            return false;
+        }
         if (in_array($response['status'], [404, 410], true)) {
             return true;
         }
@@ -334,6 +362,7 @@ final class ExternalContentGateway
     private function requestPinned(string $method, string $url, array $policy, int $maxBytes, int &$externalReads): array
     {
         $host = strtolower((string) parse_url($url, PHP_URL_HOST));
+        $this->enforceRequestInterval($host, (int) ($policy['minimum_request_interval'] ?? 1));
         $approved = $this->approvedAddresses($host);
         $externalReads++;
         $response = $this->transport->request(
@@ -418,13 +447,83 @@ final class ExternalContentGateway
             throw new \RuntimeException('HOST_BLOCKED');
         }
         $allowed = array_map(static fn (mixed $item): string => strtolower((string) $item), (array) $policy['allowed_hosts']);
-        $matches = array_filter($allowed, static fn (string $allowedHost): bool => $host === $allowedHost || str_ends_with($host, '.'.$allowedHost));
-        if ($matches === []) {
+        if (! in_array($host, $allowed, true)) {
             throw new \RuntimeException('HOST_NOT_ALLOWED');
         }
-        unset($parts['fragment']);
+        if ((isset($policy['exact_source_url']) || ($policy['prohibitions']['query_strings'] ?? false) === true)
+            && (isset($parts['query']) || isset($parts['fragment']))) {
+            throw new \RuntimeException('URL_QUERY_OR_FRAGMENT_BLOCKED');
+        }
+        $path = (string) ($parts['path'] ?? '/');
+        $prefixes = array_values((array) ($policy['allowed_path_prefixes'] ?? []));
+        if ($prefixes !== []) {
+            $pathAllowed = array_filter($prefixes, static function (mixed $prefix) use ($path): bool {
+                $prefix = (string) $prefix;
+
+                return $path === $prefix || ($prefix !== '/' && str_starts_with($path, rtrim($prefix, '/').'/'));
+            });
+            if ($pathAllowed === []) {
+                throw new \RuntimeException('PATH_NOT_ALLOWED');
+            }
+        }
 
         return $parts;
+    }
+
+    /** @param array{status:int,headers:array<string,string>,body:string,connected_ip:string} $response */
+    private function responseWithinLimit(array $response, int $maxBytes): bool
+    {
+        if (strlen($response['body']) > $maxBytes) {
+            return false;
+        }
+        $length = $response['headers']['content-length'] ?? $response['headers']['Content-Length'] ?? null;
+
+        return $length === null || ((int) $length <= $maxBytes && (int) $length === strlen($response['body']));
+    }
+
+    private function enforceRequestInterval(string $host, int $seconds): void
+    {
+        $seconds = max(1, $seconds);
+        $previous = $this->lastRequestAt[$host] ?? null;
+        if (is_float($previous) && ! app()->environment('testing')) {
+            $remaining = $seconds - (microtime(true) - $previous);
+            if ($remaining > 0) {
+                usleep((int) ceil($remaining * 1_000_000));
+            }
+        }
+        $this->lastRequestAt[$host] = microtime(true);
+    }
+
+    private function normalizedVisibleText(string $body): string
+    {
+        return mb_strtolower(preg_replace('/\s+/u', ' ', trim($this->visibleText($body, false))) ?: '', 'UTF-8');
+    }
+
+    private function mainVisibleText(string $body): string
+    {
+        return $this->visibleText($body, true);
+    }
+
+    private function visibleText(string $body, bool $mainOnly): string
+    {
+        $dom = new DOMDocument;
+        @$dom->loadHTML($body, LIBXML_NONET | LIBXML_NOWARNING | LIBXML_NOERROR);
+        $xpath = new DOMXPath($dom);
+        foreach ($xpath->query('//script|//style|//noscript|//template|//svg|//comment()') ?: [] as $node) {
+            $node->parentNode?->removeChild($node);
+        }
+        if ($mainOnly) {
+            foreach ($xpath->query('//header|//nav|//footer|//form') ?: [] as $node) {
+                $node->parentNode?->removeChild($node);
+            }
+            $main = $xpath->query('//main|//article');
+            $node = $main !== false ? $main->item(0) : null;
+            $text = $node?->textContent ?? $dom->textContent;
+        } else {
+            $text = $dom->textContent;
+        }
+
+        return preg_replace('/\s+/u', ' ', trim((string) $text)) ?: '';
     }
 
     /** @return list<string> */
@@ -455,6 +554,10 @@ final class ExternalContentGateway
             $long = ip2long($address);
             $cgnat = ip2long('100.64.0.0');
             if ($long !== false && $cgnat !== false && (($long & 0xFFC00000) === ($cgnat & 0xFFC00000))) {
+                return false;
+            }
+            $benchmark = ip2long('198.18.0.0');
+            if ($long !== false && $benchmark !== false && (($long & 0xFFFE0000) === ($benchmark & 0xFFFE0000))) {
                 return false;
             }
         }

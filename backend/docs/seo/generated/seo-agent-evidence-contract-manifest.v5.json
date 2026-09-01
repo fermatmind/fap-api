@@ -1,0 +1,87 @@
+{
+    "manifest_id": "seo.evidence_contract_manifest.v5",
+    "manifest_version": "5.0.0",
+    "append_only_base": {
+        "id": "seo.evidence_contract_manifest.v4",
+        "version": "4.0.0",
+        "path": "backend/docs/seo/generated/seo-agent-evidence-contract-manifest.v4.json",
+        "hash": "26e87d337fab3beaa1535661e39edcaef7c3269d504eb6f1d6eb02b10ac26aef"
+    },
+    "contracts": [
+        {
+            "id": "seo.competitive_page_projection.v2",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/evidence/competitive/schemas/seo.competitive_page_projection.v2.schema.json",
+            "hash": "7bbc2661d02b593fc97eb29892c0f9f26ff0bf301f3fc3370232c02a193e09a1"
+        },
+        {
+            "id": "seo.competitive_source_policy.v3",
+            "version": "3.0.0",
+            "path": "backend/resources/seo-agent/evidence/competitive/schemas/seo.competitive_source_policy.v3.schema.json",
+            "hash": "4dd3690207dcbb848036b745f1203c5b075e219270630717cff36ef6180b2614"
+        },
+        {
+            "id": "seo.competitive_source_registry.v2",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/evidence/competitive/schemas/seo.competitive_source_registry.v2.schema.json",
+            "hash": "1423b6c2c0e299eb2fd92e00f1f8992c77a1abff1a2cc9a9b12dd23d3d4af8b8"
+        },
+        {
+            "id": "seo.competitive_cohort_registry.v2",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/evidence/competitive/schemas/seo.competitive_cohort_registry.v2.schema.json",
+            "hash": "32662d77066e4df5cc36a0afe5a091571e9832bbd58c28fcab60b3f0cc85b0cb"
+        },
+        {
+            "id": "seo.competitive_semantic_registry.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/evidence/competitive/schemas/seo.competitive_semantic_registry.v1.schema.json",
+            "hash": "5c1a758a67285e6f9b571aa0077cc47815a6b1d257ee6faa8b25bd5b5a675c87"
+        },
+        {
+            "id": "seo.competitive_evidence_closeout.v3",
+            "version": "3.0.0",
+            "path": "backend/resources/seo-agent/evidence/competitive/schemas/seo.competitive_evidence_closeout.v3.schema.json",
+            "hash": "9eac120594b0b239f620d4e3d890b47440d0341b95705fa41ee75592ed23ff99"
+        }
+    ],
+    "source_field_ownership": {
+        "id": "seo.competitive_source_field_ownership.v1",
+        "version": "1.0.0",
+        "path": "backend/resources/seo-agent/evidence/competitive/seo.competitive_source_field_ownership.v1.json",
+        "hash": "292f3716d1e183d7433ed78ed70ae146a85f7b3a276628eb5c22a7c2248cefc9"
+    },
+    "historical_manifests": [
+        {
+            "id": "seo.evidence_contract_manifest.v1",
+            "path": "backend/docs/seo/generated/seo-agent-evidence-contract-manifest.v1.json",
+            "current_authority": false
+        },
+        {
+            "id": "seo.evidence_contract_manifest.v2",
+            "path": "backend/docs/seo/generated/seo-agent-evidence-contract-manifest.v2.json",
+            "current_authority": false
+        },
+        {
+            "id": "seo.evidence_contract_manifest.v3",
+            "path": "backend/docs/seo/generated/seo-agent-evidence-contract-manifest.v3.json",
+            "current_authority": false
+        },
+        {
+            "id": "seo.evidence_contract_manifest.v4",
+            "path": "backend/docs/seo/generated/seo-agent-evidence-contract-manifest.v4.json",
+            "current_authority": false
+        }
+    ],
+    "negative_guarantees": {
+        "gateway_live_adapter_enabled": true,
+        "external_ingestion_enabled": false,
+        "raw_html_retained": false,
+        "competitor_snippets_retained": false,
+        "production_permissions": 0,
+        "execution_allowed": false,
+        "outreach_actions": 0,
+        "digital_pr_scope": "deferred_p2_manual"
+    },
+    "manifest_hash": "a7b2a66ca918c9e624423b7158192373652b66e79fffa1203560cc9c3588c609"
+}

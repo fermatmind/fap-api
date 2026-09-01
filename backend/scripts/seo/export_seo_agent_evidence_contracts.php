@@ -12,7 +12,7 @@ $app->make(Kernel::class)->bootstrap();
 
 $manifests = [
     dirname(__DIR__, 2).'/docs/seo/generated/seo-agent-evidence-contract-manifest.v2.json' => $app->make(SeoEvidenceContractRegistry::class)->manifest(),
-    dirname(__DIR__, 2).'/docs/seo/generated/seo-agent-evidence-contract-manifest.v4.json' => $app->make(CompetitiveEvidenceContractRegistry::class)->manifest(),
+    dirname(__DIR__, 2).'/docs/seo/generated/seo-agent-evidence-contract-manifest.v5.json' => $app->make(CompetitiveEvidenceContractRegistry::class)->manifest(),
 ];
 
 foreach ($manifests as $target => $manifest) {

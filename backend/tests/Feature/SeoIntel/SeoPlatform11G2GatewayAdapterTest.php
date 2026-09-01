@@ -37,14 +37,14 @@ final class SeoPlatform11G2GatewayAdapterTest extends TestCase
         $this->assertTrue($robots->allows($body, '/public'));
     }
 
-    public function test_registry_is_hash_bound_exact_url_only_and_dormant(): void
+    public function test_registry_is_hash_bound_exact_url_only_and_live(): void
     {
         $registry = app(CompetitiveSourceRegistry::class);
-        $cohort = $registry->cohort('competitive.big-five.live.v1');
-        $this->assertSame('hold', $cohort['collection_state']);
-        $this->assertSame('SOURCE_POLICY_HOLD', $cohort['hold_reason']);
+        $cohort = $registry->cohort('competitive.big-five.live.v2');
+        $this->assertSame('approved', $cohort['collection_state']);
+        $this->assertSame('NONE', $cohort['hold_reason']);
         $sources = $registry->sourceRegistry()['sources'];
-        $this->assertSame(['123test', 'truity', '16personalities', 'bigfive-test', 'openpsychometrics'], array_values(array_map(
+        $this->assertSame(['123test', 'truity', '16personalities', 'bigfive-test', 'openpsychometrics', 'b5-allthethings'], array_values(array_map(
             static fn (array $source): string => $source['source_id'],
             array_filter($sources, static fn (array $source): bool => $source['source_class'] === 'competitor_public'),
         )));
@@ -99,17 +99,17 @@ HTML;
         }
     }
 
-    public function test_ingest_command_requires_registered_cohort_and_never_writes_while_dormant(): void
+    public function test_ingest_command_requires_measurement_and_controlled_write_boundary(): void
     {
         $this->artisan('seo:competitive-evidence-ingest', [
-            '--cohort' => 'competitive.big-five.live.v1', '--dry-run' => true, '--no-write' => true, '--json' => true,
-        ])->expectsOutputToContain('"competitive_hold_reason":"SOURCE_POLICY_HOLD"')
+            '--cohort' => 'competitive.big-five.live.v2', '--dry-run' => true, '--no-write' => true, '--json' => true,
+        ])->expectsOutputToContain('"SEO-PLATFORM-11G":"HOLD"')
             ->assertSuccessful();
 
         $this->artisan('seo:competitive-evidence-ingest', ['--cohort' => 'not-registered', '--dry-run' => true, '--json' => true])
             ->expectsOutputToContain('COMPETITIVE_REGISTRY_INVALID')
             ->assertFailed();
-        $this->artisan('seo:competitive-evidence-ingest', ['--cohort' => 'competitive.big-five.live.v1', '--json' => true])
+        $this->artisan('seo:competitive-evidence-ingest', ['--cohort' => 'competitive.big-five.live.v2', '--json' => true])
             ->expectsOutputToContain('COMPETITIVE_INGEST_MODE_INVALID')
             ->assertFailed();
     }

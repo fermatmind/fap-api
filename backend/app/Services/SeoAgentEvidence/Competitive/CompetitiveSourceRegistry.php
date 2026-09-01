@@ -9,18 +9,21 @@ use RuntimeException;
 
 final class CompetitiveSourceRegistry
 {
-    public function __construct(private readonly SeoEvidenceCanonicalHasher $hasher) {}
+    public function __construct(
+        private readonly SeoEvidenceCanonicalHasher $hasher,
+        private readonly CompetitiveSourcePolicyRegistry $policies,
+    ) {}
 
     /** @return array<string, mixed> */
     public function sourceRegistry(): array
     {
-        return $this->verifiedAsset('seo.competitive_source_registry.v1.json', 'registry_hash');
+        return $this->policies->sourceRegistry();
     }
 
     /** @return array<string, mixed> */
     public function cohortRegistry(): array
     {
-        return $this->verifiedAsset('seo.competitive_cohort_registry.v1.json', 'registry_hash');
+        return $this->policies->cohortRegistry();
     }
 
     /** @return array<string, mixed> */
@@ -44,29 +47,7 @@ final class CompetitiveSourceRegistry
     /** @return list<array<string, mixed>> */
     public function sourcesFor(array $cohort): array
     {
-        $wanted = array_values((array) ($cohort['source_ids'] ?? []));
-        $sources = [];
-        foreach ((array) ($this->sourceRegistry()['sources'] ?? []) as $source) {
-            if (is_array($source) && in_array($source['source_id'] ?? null, $wanted, true)) {
-                $this->assertExactUrl((string) ($source['url'] ?? ''));
-                $sources[(string) $source['source_id']] = $source;
-            }
-        }
-        if (count($sources) !== count($wanted)) {
-            throw new RuntimeException('COMPETITIVE_COHORT_SOURCE_MISSING');
-        }
-
-        return array_map(static fn (string $id): array => $sources[$id], $wanted);
-    }
-
-    private function assertExactUrl(string $url): void
-    {
-        $parts = parse_url($url);
-        if (! is_array($parts) || ($parts['scheme'] ?? null) !== 'https' || ($parts['host'] ?? '') === ''
-            || isset($parts['user']) || isset($parts['pass']) || isset($parts['query']) || isset($parts['fragment'])
-            || (int) ($parts['port'] ?? 443) !== 443) {
-            throw new RuntimeException('COMPETITIVE_SOURCE_URL_INVALID');
-        }
+        return $this->policies->sourcesFor($cohort);
     }
 
     /** @return array<string, mixed> */

@@ -1503,8 +1503,13 @@ task('seo:competitive-evidence-preactivation', function () {
 
         return;
     }
+    if (currentHost()->getAlias() !== 'production') {
+        writeln('<comment>Defer staging competitive evidence until real 11F readmodels are ready.</comment>');
 
-    set('competitive_environment', currentHost()->getAlias() === 'production' ? 'production' : 'staging');
+        return;
+    }
+
+    set('competitive_environment', 'production');
     within('{{release_path}}/backend', function (): void {
         run(<<<'BASH'
 set -euo pipefail
@@ -1516,13 +1521,17 @@ receipt="$(SEO_RELEASE_SHA="$candidate_sha" \
   SEO_COMPETITIVE_EXTERNAL_READ_ENABLED=true \
   SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED=true \
   {{bin/php}} artisan seo:competitive-evidence-ingest \
-    --cohort=competitive.big-five.live.v1 --write-evidence --json --no-interaction --no-ansi)"
+    --cohort=competitive.big-five.live.v2 --write-evidence --json --no-interaction --no-ansi)"
 printf '%s' "$receipt" | {{bin/php}} -r '
 $payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
 $zero = ["model_calls", "tool_calls", "external_calls", "cms_writes", "url_truth_writes", "search_writes", "business_writes", "production_permissions", "outreach_actions"];
-$ok = ($payload["receipt_version"] ?? null) === "seo.competitive_evidence_closeout.v2"
+$ok = ($payload["receipt_version"] ?? null) === "seo.competitive_evidence_closeout.v3"
     && ($payload["candidate_sha"] ?? null) === ($argv[1] ?? null)
     && ($payload["environment"] ?? null) === ($argv[2] ?? null)
+    && ($payload["closeout_state"] ?? null) === "CLOSED"
+    && ($payload["source_policy_version"] ?? null) === "seo.competitive_source_policy.v3"
+    && ($payload["source_registry_version"] ?? null) === "seo.competitive_source_registry.v2"
+    && ($payload["cohort_registry_version"] ?? null) === "seo.competitive_cohort_registry.v2"
     && ($payload["execution_allowed"] ?? null) === false
     && ($payload["digital_pr_scope"] ?? null) === "deferred_p2_manual"
     && is_int($payload["dependency_ingestion"]["external_reads"] ?? null)
@@ -1547,9 +1556,9 @@ else
   test ! -L "$receipt_path"
   cmp -s "$tmp" "$receipt_path"
 fi
-if [ "$environment" = production ]; then
-  printf '%s' "$receipt" | jq -e --arg sha "$candidate_sha" '
+printf '%s' "$receipt" | jq -e --arg sha "$candidate_sha" '
     ."SEO-PLATFORM-11G" == "CLOSED"
+    and .closeout_state == "CLOSED"
     and .production_sha == $sha
     and .ready_for_11H == true
     and ."11i_handoff_ready" == true
@@ -1558,16 +1567,17 @@ if [ "$environment" = production ]; then
     and .competitive_bundle_verification == "valid"
     and .competitive_context_status == "READY"
     and .competitive_hold_reason == "NONE"
+    and .search_measurement.source_state == "available"
+    and .search_measurement.freshness_state == "fresh"
+    and .search_measurement.bundle_verification == "valid"
+    and .search_measurement.context_status == "READY"
+    and .search_measurement.hold_reason == "NONE"
+    and .cro_measurement.source_state == "available"
+    and .cro_measurement.freshness_state == "fresh"
+    and .cro_measurement.bundle_verification == "valid"
+    and .cro_measurement.context_status == "READY"
+    and .cro_measurement.hold_reason == "NONE"
   ' >/dev/null
-else
-  printf '%s' "$receipt" | jq -e '
-    .competitive_source_state == "available"
-    and .competitive_freshness_state == "fresh"
-    and .competitive_bundle_verification == "valid"
-    and .competitive_context_status == "READY"
-    and .competitive_hold_reason == "STAGING_VALIDATED"
-  ' >/dev/null
-fi
 BASH);
     });
 });

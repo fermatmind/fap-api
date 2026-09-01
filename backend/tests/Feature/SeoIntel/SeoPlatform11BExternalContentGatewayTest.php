@@ -65,7 +65,7 @@ final class SeoPlatform11BExternalContentGatewayTest extends TestCase
         $this->assertSame('held', $blocked['status']);
         $this->assertFalse($blocked['context_eligible']);
 
-        foreach (['0.0.0.0', '::1', '10.0.0.1', '172.16.0.1', '192.168.1.1', '100.64.0.1', '169.254.169.254', '::ffff:127.0.0.1'] as $address) {
+        foreach (['0.0.0.0', '::1', '10.0.0.1', '172.16.0.1', '192.168.1.1', '100.64.0.1', '169.254.169.254', '198.18.0.1', '::ffff:127.0.0.1'] as $address) {
             Cache::flush();
             $dns = new class($address) implements ExternalDnsResolver
             {

@@ -18,17 +18,19 @@ test("11G uses the permanent exact-SHA control plane", () => {
   assert.match(deploy, /seo-competitive-evidence-production/);
 });
 
-test("competitive ingestion is candidate preactivation and environment independent", () => {
+test("competitive ingestion is measurement-gated and environment independent", () => {
   const preactivation = deployer.indexOf("task('seo:competitive-evidence-preactivation'");
   const activation = deployer.indexOf("before('deploy:symlink'");
   assert.ok(preactivation > 0 && activation > 0);
   assert.match(deployer, /after\('artisan:config:cache', 'seo:competitive-evidence-preactivation'\)/);
   assert.match(deployer, /SEO_COMPETITIVE_EXTERNAL_READ_ENABLED=true/);
   assert.match(deployer, /SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED=true/);
-  assert.match(deployer, /--cohort=competitive\.big-five\.live\.v1 --write-evidence/);
+  assert.match(deployer, /--cohort=competitive\.big-five\.live\.v2 --write-evidence/);
   assert.match(deployer, /environment=\{\{competitive_environment\}\}/);
   assert.match(deployer, /\.production_sha == \$sha/);
-  assert.match(deploy, /competitive_hold_reason == "SOURCE_POLICY_HOLD"/);
+  assert.match(deploy, /closeout_state == "STAGING_VALIDATED"/);
+  assert.match(deploy, /search_measurement\.hold_reason == "NONE"/);
+  assert.match(deploy, /cro_measurement\.hold_reason == "NONE"/);
 });
 
 test("Council stays zero-egress while dependency reads are accounted separately", () => {

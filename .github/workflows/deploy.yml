@@ -268,7 +268,8 @@ jobs:
               or (.seo_council_orchestration.required == false
                 and .seo_council_orchestration.result == "skipped"))
             and ((.seo_competitive_evidence.required == true
-                and .seo_competitive_evidence.receipt_version == "seo.competitive_evidence_closeout.v2"
+                and .seo_competitive_evidence.receipt_version == "seo.competitive_evidence_closeout.v3"
+                and .seo_competitive_evidence.closeout_state == "OFFLINE_EVAL_READY"
                 and .seo_competitive_evidence.candidate_sha == $sha
                 and .seo_competitive_evidence.environment == "ci_candidate"
                 and .seo_competitive_evidence."SEO-PLATFORM-11G" == "OFFLINE_EVAL_READY"
@@ -482,30 +483,6 @@ jobs:
             -o seo_council_orchestration="$council_orchestration" \
             -o seo_competitive_evidence='${{ needs.policy.outputs.seo_competitive_evidence }}' \
             -o seo_council_closeout_deferred="$council_orchestration" --no-interaction
-      - name: Read sanitized staging competitive evidence receipt
-        if: always() && needs.policy.outputs.seo_competitive_evidence == 'true'
-        run: |
-          set -euo pipefail
-          printf -v q_path '%q' "$DEPLOY_PATH"
-          printf -v q_sha '%q' "$DEPLOY_SHA"
-          remote="set -euo pipefail; file=$q_path/shared/backend/storage/app/release-receipts/seo-competitive-evidence/$q_sha.json; test -f \"\$file\"; test ! -L \"\$file\"; cat \"\$file\""
-          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-            -o ConnectionAttempts=3 -o IdentitiesOnly=yes -i "$DEPLOY_IDENTITY_FILE_STG" -p "$DEPLOY_PORT" \
-            "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > seo-competitive-evidence-staging.json
-          jq -e --arg sha "$DEPLOY_SHA" '
-            .candidate_sha == $sha and .environment == "staging"
-            and .execution_allowed == false and .external_calls == 0 and .production_permissions == 0
-            and ((.competitive_context_status == "READY" and .competitive_hold_reason == "STAGING_VALIDATED")
-              or (."SEO-PLATFORM-11G" == "HOLD" and .competitive_hold_reason == "SOURCE_POLICY_HOLD"
-                and .ready_for_11H == false and ."11i_handoff_ready" == false))
-          ' seo-competitive-evidence-staging.json >/dev/null
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        if: always() && needs.policy.outputs.seo_competitive_evidence == 'true'
-        with:
-          name: seo-competitive-evidence-staging-${{ env.DEPLOY_SHA }}
-          path: seo-competitive-evidence-staging.json
-          if-no-files-found: error
-          retention-days: 90
       - name: Materialize inactive staging measurement candidate
         if: needs.policy.outputs.seo_council_orchestration == 'true'
         env:
@@ -847,6 +824,44 @@ jobs:
           test "$active" = "$DEPLOY_SHA"
           timeout --signal=TERM --kill-after=30s 15m php /tmp/dep.phar seo:council-orchestration-closeout staging \
             -f deploy.php -o seo_council_orchestration=true --no-interaction
+      - name: Finalize staging competitive evidence after 11F readiness
+        if: needs.policy.outputs.seo_competitive_evidence == 'true' && needs.policy.outputs.seo_council_orchestration == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_sha '%q' "$DEPLOY_SHA"
+          remote="set -euo pipefail; active=\$(tr -d '\r\n' < $q_path/current/REVISION); test \"\$active\" = $q_sha; cd $q_path/current/backend; receipt=\$(SEO_RELEASE_SHA=$q_sha SEO_COMPETITIVE_EXTERNAL_READ_ENABLED=true SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED=true php artisan seo:competitive-evidence-ingest --cohort=competitive.big-five.live.v2 --write-evidence --json --no-interaction --no-ansi); dir=$q_path/shared/backend/storage/app/release-receipts/seo-competitive-evidence; mkdir -p \"\$dir\"; file=\"\$dir/$q_sha.json\"; test ! -e \"\$file\"; tmp=\$(mktemp \"\$dir/.$q_sha.XXXXXX\"); trap 'rm -f \"\$tmp\"' EXIT; printf '%s\n' \"\$receipt\" > \"\$tmp\"; chmod 0640 \"\$tmp\"; ln \"\$tmp\" \"\$file\"; printf '%s\n' \"\$receipt\""
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o ConnectionAttempts=3 -o IdentitiesOnly=yes -i "$DEPLOY_IDENTITY_FILE_STG" -p "$DEPLOY_PORT" \
+            "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > seo-competitive-evidence-staging.json
+          jq -e --arg sha "$DEPLOY_SHA" '
+            .receipt_version == "seo.competitive_evidence_closeout.v3"
+            and .candidate_sha == $sha and .production_sha == null and .environment == "staging"
+            and .closeout_state == "STAGING_VALIDATED" and ."SEO-PLATFORM-11G" == "HOLD"
+            and .competitive_source_state == "available" and .competitive_freshness_state == "fresh"
+            and .competitive_bundle_verification == "valid" and .competitive_context_status == "READY"
+            and .competitive_hold_reason == "NONE"
+            and .search_measurement.source_state == "available"
+            and .search_measurement.freshness_state == "fresh"
+            and .search_measurement.bundle_verification == "valid"
+            and .search_measurement.context_status == "READY"
+            and .search_measurement.hold_reason == "NONE"
+            and .cro_measurement.source_state == "available"
+            and .cro_measurement.freshness_state == "fresh"
+            and .cro_measurement.bundle_verification == "valid"
+            and .cro_measurement.context_status == "READY"
+            and .cro_measurement.hold_reason == "NONE"
+            and .ready_for_11H == false and ."11i_handoff_ready" == false
+            and .execution_allowed == false and .external_calls == 0 and .production_permissions == 0
+          ' seo-competitive-evidence-staging.json >/dev/null
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: always() && needs.policy.outputs.seo_competitive_evidence == 'true'
+        with:
+          name: seo-competitive-evidence-staging-${{ env.DEPLOY_SHA }}
+          path: seo-competitive-evidence-staging.json
+          if-no-files-found: error
+          retention-days: 90
       - name: Read staging SEO Evidence closeout receipt
         if: needs.policy.outputs.seo_agent_evidence_boundary == 'true'
         shell: bash
@@ -1246,11 +1261,23 @@ jobs:
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o ConnectionAttempts=3 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$receipt"
           jq -e --arg sha "$DEPLOY_SHA" '
-            .candidate_sha == $sha and .production_sha == $sha and .environment == "production"
+            .receipt_version == "seo.competitive_evidence_closeout.v3"
+            and .candidate_sha == $sha and .production_sha == $sha and .environment == "production"
+            and .closeout_state == "CLOSED"
             and ."SEO-PLATFORM-11G" == "CLOSED" and .ready_for_11H == true and ."11i_handoff_ready" == true
             and .competitive_source_state == "available" and .competitive_freshness_state == "fresh"
             and .competitive_bundle_verification == "valid" and .competitive_context_status == "READY"
             and .competitive_hold_reason == "NONE" and .execution_allowed == false
+            and .search_measurement.source_state == "available"
+            and .search_measurement.freshness_state == "fresh"
+            and .search_measurement.bundle_verification == "valid"
+            and .search_measurement.context_status == "READY"
+            and .search_measurement.hold_reason == "NONE"
+            and .cro_measurement.source_state == "available"
+            and .cro_measurement.freshness_state == "fresh"
+            and .cro_measurement.bundle_verification == "valid"
+            and .cro_measurement.context_status == "READY"
+            and .cro_measurement.hold_reason == "NONE"
             and .external_calls == 0 and .production_permissions == 0
           ' "$receipt" >/dev/null
       - name: Read production SEO Evidence closeout receipt

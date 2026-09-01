@@ -10,9 +10,9 @@ use RuntimeException;
 
 final class CompetitiveEvidenceContractRegistry
 {
-    public const MANIFEST_ID = 'seo.evidence_contract_manifest.v4';
+    public const MANIFEST_ID = 'seo.evidence_contract_manifest.v5';
 
-    public const MANIFEST_VERSION = '4.0.0';
+    public const MANIFEST_VERSION = '5.0.0';
 
     /** @var list<string> */
     private const HISTORICAL_SCHEMAS = [
@@ -25,16 +25,20 @@ final class CompetitiveEvidenceContractRegistry
         'seo.competitive_evidence_closeout.v1.schema.json',
         'seo.competitive_source_field_ownership.v1.schema.json',
         'seo.competitive_source_policy.v1.schema.json',
+        'seo.competitive_source_policy.v2.schema.json',
+        'seo.competitive_source_registry.v1.schema.json',
+        'seo.competitive_cohort_registry.v1.schema.json',
+        'seo.competitive_evidence_closeout.v2.schema.json',
     ];
 
     /** @var list<string> */
     private const SCHEMAS = [
         'seo.competitive_page_projection.v2.schema.json',
-        'seo.competitive_source_policy.v2.schema.json',
-        'seo.competitive_source_registry.v1.schema.json',
-        'seo.competitive_cohort_registry.v1.schema.json',
+        'seo.competitive_source_policy.v3.schema.json',
+        'seo.competitive_source_registry.v2.schema.json',
+        'seo.competitive_cohort_registry.v2.schema.json',
         'seo.competitive_semantic_registry.v1.schema.json',
-        'seo.competitive_evidence_closeout.v2.schema.json',
+        'seo.competitive_evidence_closeout.v3.schema.json',
     ];
 
     public function __construct(
@@ -45,7 +49,7 @@ final class CompetitiveEvidenceContractRegistry
     /** @return array<string, mixed> */
     public function manifest(): array
     {
-        $base = $this->decode(base_path('docs/seo/generated/seo-agent-evidence-contract-manifest.v3.json'));
+        $base = $this->decode(base_path('docs/seo/generated/seo-agent-evidence-contract-manifest.v4.json'));
         $contracts = [];
         foreach (self::SCHEMAS as $file) {
             $schema = $this->schemaFile($file);
@@ -64,7 +68,7 @@ final class CompetitiveEvidenceContractRegistry
             'append_only_base' => [
                 'id' => $base['manifest_id'],
                 'version' => $base['manifest_version'],
-                'path' => 'backend/docs/seo/generated/seo-agent-evidence-contract-manifest.v3.json',
+                'path' => 'backend/docs/seo/generated/seo-agent-evidence-contract-manifest.v4.json',
                 'hash' => $base['manifest_hash'],
             ],
             'contracts' => $contracts,
@@ -88,6 +92,11 @@ final class CompetitiveEvidenceContractRegistry
                 [
                     'id' => 'seo.evidence_contract_manifest.v3',
                     'path' => 'backend/docs/seo/generated/seo-agent-evidence-contract-manifest.v3.json',
+                    'current_authority' => false,
+                ],
+                [
+                    'id' => 'seo.evidence_contract_manifest.v4',
+                    'path' => 'backend/docs/seo/generated/seo-agent-evidence-contract-manifest.v4.json',
                     'current_authority' => false,
                 ],
             ],

@@ -13,18 +13,18 @@ use Tests\TestCase;
 
 final class SeoPlatform11GContractsBoundaryTest extends TestCase
 {
-    public function test_v4_is_an_append_only_competitive_contract_manifest(): void
+    public function test_v5_is_an_append_only_competitive_contract_manifest(): void
     {
         $registry = app(CompetitiveEvidenceContractRegistry::class);
         $manifest = $registry->manifest();
-        $generated = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-agent-evidence-contract-manifest.v4.json')), true, 512, JSON_THROW_ON_ERROR);
+        $generated = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-agent-evidence-contract-manifest.v5.json')), true, 512, JSON_THROW_ON_ERROR);
 
-        $this->assertSame('seo.evidence_contract_manifest.v4', $manifest['manifest_id']);
-        $this->assertSame('4.0.0', $manifest['manifest_version']);
+        $this->assertSame('seo.evidence_contract_manifest.v5', $manifest['manifest_id']);
+        $this->assertSame('5.0.0', $manifest['manifest_version']);
         $this->assertCount(6, $manifest['contracts']);
         $this->assertTrue($registry->verify($generated));
-        $v3 = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-agent-evidence-contract-manifest.v3.json')), true, 512, JSON_THROW_ON_ERROR);
-        $this->assertSame($v3['manifest_hash'], $manifest['append_only_base']['hash']);
+        $v4 = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-agent-evidence-contract-manifest.v4.json')), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame($v4['manifest_hash'], $manifest['append_only_base']['hash']);
         foreach ($manifest['contracts'] as $contract) {
             $schema = $registry->schema($contract['id']);
             $this->assertSame($contract['version'], $schema['schema_version']);
@@ -46,7 +46,7 @@ final class SeoPlatform11GContractsBoundaryTest extends TestCase
         $this->assertFalse($registry->verify($drifted));
     }
 
-    public function test_exporter_preserves_v2_stdout_while_regenerating_v4(): void
+    public function test_exporter_preserves_v2_stdout_while_regenerating_v5(): void
     {
         $process = new Process(['php', 'scripts/seo/export_seo_agent_evidence_contracts.php'], base_path());
         $process->mustRun();
@@ -55,7 +55,7 @@ final class SeoPlatform11GContractsBoundaryTest extends TestCase
             app(SeoEvidenceContractRegistry::class)->manifest()['manifest_hash']."\n",
             $process->getOutput(),
         );
-        $generated = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-agent-evidence-contract-manifest.v4.json')), true, 512, JSON_THROW_ON_ERROR);
+        $generated = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-agent-evidence-contract-manifest.v5.json')), true, 512, JSON_THROW_ON_ERROR);
         $this->assertTrue(app(CompetitiveEvidenceContractRegistry::class)->verify($generated));
     }
 

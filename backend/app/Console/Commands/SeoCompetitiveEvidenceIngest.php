@@ -44,10 +44,6 @@ final class SeoCompetitiveEvidenceIngest extends Command
             $cohort = $registry->cohort($cohortId);
             $environment = app()->environment();
             $releaseSha = $write ? (string) env('SEO_RELEASE_SHA') : str_repeat('0', 40);
-            if ($write) {
-                config()->set('seo_agent_evidence.external_fetch_enabled', true);
-                config()->set('seo_agent_evidence.bundle_write_enabled', true);
-            }
             $result = $ingestion->ingest(
                 $cohort,
                 $registry->sourcesFor($cohort),
@@ -61,6 +57,9 @@ final class SeoCompetitiveEvidenceIngest extends Command
                 in_array($environment, ['staging', 'production'], true) ? $environment : 'staging',
                 $environment === 'production' ? $releaseSha : null,
             );
+            if (! $closeout->verify($receipt, $releaseSha)) {
+                return $this->emit(['status' => 'HOLD', 'hold_reason' => 'COMPETITIVE_RECEIPT_INVALID', 'dependency_ingestion' => ['external_reads' => 0]], self::FAILURE);
+            }
 
             return $this->emit($receipt, self::SUCCESS);
         } catch (Throwable) {

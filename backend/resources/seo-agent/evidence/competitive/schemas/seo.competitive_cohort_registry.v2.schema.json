@@ -1,0 +1,11 @@
+{
+  "schema_id": "seo.competitive_cohort_registry.v2", "schema_version": "2.0.0", "type": "object", "additionalProperties": false,
+  "required": ["version", "registry_revision", "source_registry_version", "source_registry_hash", "source_policy_set_hash", "cohorts", "registry_hash"],
+  "properties": {
+    "version": {"const": "seo.competitive_cohort_registry.v2"}, "registry_revision": {"type": "string"},
+    "source_registry_version": {"const": "seo.competitive_source_registry.v2"},
+    "source_registry_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "source_policy_set_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "cohorts": {"type": "array", "minItems": 1}, "registry_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}
