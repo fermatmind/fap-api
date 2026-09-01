@@ -61,6 +61,8 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
         }
         $this->assertCount(2, array_unique($competitorDomains));
         foreach ($registry->policies() as $policy) {
+            $this->assertSame('2026-09-01T13:26:55Z', $policy['reviewed_at']);
+            $this->assertSame('2026-10-01T13:26:55Z', $policy['expires_at']);
             $this->assertLessThanOrEqual(2592000, strtotime($policy['expires_at']) - strtotime($policy['reviewed_at']));
             $this->assertGreaterThan(time(), strtotime($policy['expires_at']));
             $this->assertSame(['url_hash', 'content_hash', 'structural_projection', 'review_decision'], $policy['retention_scope']);
@@ -101,6 +103,22 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
         $this->assertSame('NONE', $production['competitive_hold_reason']);
         $this->assertSame(0, $production['external_calls']);
         $this->assertSame(0, $production['production_permissions']);
+    }
+
+    public function test_v3_policy_registry_rejects_future_review_dates(): void
+    {
+        $registry = app(CompetitiveSourcePolicyRegistry::class);
+        $sourceRegistry = $registry->sourceRegistry();
+        $source = (array) $sourceRegistry['sources'][0];
+        $policy = $registry->policies()[(string) $source['source_id']];
+        $policy['reviewed_at'] = now('UTC')->addDay()->format('Y-m-d\TH:i:s\Z');
+        $policy['expires_at'] = now('UTC')->addDays(2)->format('Y-m-d\TH:i:s\Z');
+
+        $method = new \ReflectionMethod($registry, 'assertPolicy');
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('COMPETITIVE_SOURCE_POLICY_INVALID');
+        $method->invoke($registry, $policy, $source, (string) $sourceRegistry['registry_revision']);
     }
 
     public function test_measurement_hold_prevents_all_external_reads(): void

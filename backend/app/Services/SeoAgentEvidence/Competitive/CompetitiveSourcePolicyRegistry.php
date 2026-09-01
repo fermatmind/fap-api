@@ -179,6 +179,7 @@ final class CompetitiveSourcePolicyRegistry
             || ($policy['terms_review'] ?? null) !== 'approved'
             || ($policy['robots_decision'] ?? null) !== 'approved'
             || ($policy['retention_scope'] ?? null) !== ['url_hash', 'content_hash', 'structural_projection', 'review_decision']
+            || $reviewed->greaterThan(now('UTC'))
             || $expires->lessThanOrEqualTo(now('UTC'))
             || $reviewed->diffInSeconds($expires) > 2592000
             || (int) ($policy['max_validity_seconds'] ?? 0) > 2592000) {
