@@ -13,17 +13,18 @@ use Tests\TestCase;
 
 final class SeoPlatform11GContractsBoundaryTest extends TestCase
 {
-    public function test_v3_is_an_append_only_competitive_contract_manifest(): void
+    public function test_v4_is_an_append_only_competitive_contract_manifest(): void
     {
         $registry = app(CompetitiveEvidenceContractRegistry::class);
         $manifest = $registry->manifest();
-        $generated = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-agent-evidence-contract-manifest.v3.json')), true, 512, JSON_THROW_ON_ERROR);
+        $generated = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-agent-evidence-contract-manifest.v4.json')), true, 512, JSON_THROW_ON_ERROR);
 
-        $this->assertSame('seo.evidence_contract_manifest.v3', $manifest['manifest_id']);
-        $this->assertSame('3.0.0', $manifest['manifest_version']);
-        $this->assertCount(9, $manifest['contracts']);
+        $this->assertSame('seo.evidence_contract_manifest.v4', $manifest['manifest_id']);
+        $this->assertSame('4.0.0', $manifest['manifest_version']);
+        $this->assertCount(6, $manifest['contracts']);
         $this->assertTrue($registry->verify($generated));
-        $this->assertSame(app(SeoEvidenceContractRegistry::class)->manifest()['manifest_hash'], $manifest['append_only_base']['hash']);
+        $v3 = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-agent-evidence-contract-manifest.v3.json')), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame($v3['manifest_hash'], $manifest['append_only_base']['hash']);
         foreach ($manifest['contracts'] as $contract) {
             $schema = $registry->schema($contract['id']);
             $this->assertSame($contract['version'], $schema['schema_version']);
@@ -34,7 +35,8 @@ final class SeoPlatform11GContractsBoundaryTest extends TestCase
 
         $this->assertSame('f152bd122e0a3ec289483d052fc3e5d0d580c05e8f6f3e2e89e05ac02b54b819', hash_file('sha256', base_path('docs/seo/generated/seo-agent-evidence-contract-manifest.v1.json')));
         $this->assertSame('2b3e0a4b6d6bdc5c1169a45cddd5b276d29527eb653fd7b8cf912d25c8ee85b7', hash_file('sha256', base_path('docs/seo/generated/seo-agent-evidence-contract-manifest.v2.json')));
-        $this->assertFalse($manifest['negative_guarantees']['gateway_live_adapter_enabled']);
+        $this->assertSame('61e61a58d95d1aed40c0d211b5ee6eb0f7333157d1488758fd541ca1d311e382', hash_file('sha256', base_path('docs/seo/generated/seo-agent-evidence-contract-manifest.v3.json')));
+        $this->assertTrue($manifest['negative_guarantees']['gateway_live_adapter_enabled']);
         $this->assertFalse($manifest['negative_guarantees']['external_ingestion_enabled']);
         $this->assertSame(0, $manifest['negative_guarantees']['outreach_actions']);
         $this->assertSame('deferred_p2_manual', $manifest['negative_guarantees']['digital_pr_scope']);
@@ -44,7 +46,7 @@ final class SeoPlatform11GContractsBoundaryTest extends TestCase
         $this->assertFalse($registry->verify($drifted));
     }
 
-    public function test_exporter_preserves_v2_stdout_while_regenerating_v3(): void
+    public function test_exporter_preserves_v2_stdout_while_regenerating_v4(): void
     {
         $process = new Process(['php', 'scripts/seo/export_seo_agent_evidence_contracts.php'], base_path());
         $process->mustRun();
@@ -53,7 +55,7 @@ final class SeoPlatform11GContractsBoundaryTest extends TestCase
             app(SeoEvidenceContractRegistry::class)->manifest()['manifest_hash']."\n",
             $process->getOutput(),
         );
-        $generated = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-agent-evidence-contract-manifest.v3.json')), true, 512, JSON_THROW_ON_ERROR);
+        $generated = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-agent-evidence-contract-manifest.v4.json')), true, 512, JSON_THROW_ON_ERROR);
         $this->assertTrue(app(CompetitiveEvidenceContractRegistry::class)->verify($generated));
     }
 

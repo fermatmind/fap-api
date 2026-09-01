@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\SeoAgentEvidence\External;
 
+use App\Services\SeoAgentEvidence\Competitive\CompetitivePageProjector;
 use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher;
 use App\Services\SeoAgentEvidence\Privacy\SeoPrivateDataScanner;
 use App\Services\SeoAgentEvidence\Privacy\SeoQueryHmac;
@@ -30,6 +31,8 @@ final class ExternalContentGateway
         private readonly SeoPrivateDataScanner $privateScanner,
         private readonly SeoEvidenceCanonicalHasher $hasher,
         private readonly SeoQueryHmac $queryHmac,
+        private readonly ?RobotsPolicyEvaluator $robots = null,
+        private readonly ?CompetitivePageProjector $projector = null,
     ) {}
 
     /** @return array<string, mixed> */
@@ -53,6 +56,38 @@ final class ExternalContentGateway
             }
 
             return $this->fetchValidated($sourceId, $url, $policy, 0, [], []);
+        } catch (Throwable) {
+            return $this->hold('EXTERNAL_GATEWAY_HELD');
+        } finally {
+            $globalLock?->release();
+        }
+    }
+
+    /** @param array<string, mixed> $context @param array<string, mixed> $semantic @return array<string, mixed> */
+    public function fetchCompetitive(string $sourceId, string $url, array $context, array $semantic): array
+    {
+        if (! (bool) config('seo_agent_evidence.external_fetch_enabled', false)
+            || (bool) config('seo_agent_evidence.agent_external_egress', false)) {
+            return $this->hold('EXTERNAL_FETCH_DISABLED');
+        }
+        $policy = ((array) config('seo_agent_evidence.allowed_sources', []))[$sourceId] ?? null;
+        if (! is_array($policy) || ! $this->sourcePolicyApproved($sourceId, $policy)) {
+            return $this->hold('SOURCE_POLICY_HELD');
+        }
+        if (($policy['collection_state'] ?? 'approved') !== 'approved'
+            || ! is_string($policy['expires_at'] ?? null)
+            || strtotime((string) $policy['expires_at']) <= time()) {
+            return $this->hold('SOURCE_POLICY_EXPIRED');
+        }
+
+        $globalLock = null;
+        try {
+            $globalLock = $this->acquireGlobalLock($policy);
+            if (! $globalLock instanceof Lock) {
+                return $this->hold('GLOBAL_CONCURRENCY_HELD');
+            }
+
+            return $this->fetchCompetitiveValidated($sourceId, $url, $policy, $context, $semantic);
         } catch (Throwable) {
             return $this->hold('EXTERNAL_GATEWAY_HELD');
         } finally {
@@ -102,8 +137,9 @@ final class ExternalContentGateway
 
             $robotsUrl = 'https://'.$host.'/robots.txt';
             $robots = $this->transport->request('GET', $robotsUrl, $approved[0], 3, 8, 65536);
-            if (! in_array($robots['connected_ip'], $approved, true) || $robots['status'] !== 200
-                || ! $this->robotsAllows($robots['body'], (string) ($parts['path'] ?? '/'))) {
+            if (! in_array($robots['connected_ip'], $approved, true)
+                || ! in_array($robots['status'], [200, 404, 410], true)
+                || $robots['status'] === 200 && ! $this->robotsAllows($robots['body'], (string) ($parts['path'] ?? '/'))) {
                 return $this->hold('ROBOTS_HELD');
             }
 
@@ -114,15 +150,7 @@ final class ExternalContentGateway
             }
             $location = $response['headers']['location'] ?? $response['headers']['Location'] ?? null;
             if ($response['status'] >= 300 && $response['status'] < 400 && is_string($location)) {
-                $allowedRedirects = min(2, max(0, (int) ($policy['redirect_policy'] ?? 0)));
-                if ($redirects >= $allowedRedirects) {
-                    return $this->hold('REDIRECT_BLOCKED');
-                }
-
-                $hostLock->release();
-                $hostLock = null;
-
-                return $this->fetchValidated($sourceId, $location, $policy, $redirects + 1, $visited, $rateLimitedHosts);
+                return $this->hold('REDIRECT_BLOCKED');
             }
             if ($response['status'] !== 200 || strlen($response['body']) > $maxBytes) {
                 return $this->hold('CONTENT_RESPONSE_HELD');
@@ -211,6 +239,120 @@ final class ExternalContentGateway
             && in_array($policy['license_class'], ['first_party', 'licensed', 'public_fact_permitted'], true)
             && self::savedFieldsAllowed((array) $policy['allowed_saved_fields'])
             && in_array($policy['retention_class'], ['external_structured_fact', 'external_short_excerpt'], true);
+    }
+
+    /** @param array<string, mixed> $policy @param array<string, mixed> $context @param array<string, mixed> $semantic @return array<string, mixed> */
+    private function fetchCompetitiveValidated(string $sourceId, string $url, array $policy, array $context, array $semantic): array
+    {
+        $parts = $this->validateUrl($url, $policy);
+        $host = (string) $parts['host'];
+        $hostLock = $this->acquireLock('host', [$host], $this->lockTtl($policy));
+        if (! $hostLock instanceof Lock) {
+            return $this->hold('HOST_CONCURRENCY_HELD');
+        }
+        $externalReads = 0;
+        try {
+            $interval = max(1, (int) $policy['minimum_request_interval']);
+            if (! Cache::add($this->cacheKey('interval', [$sourceId, $host]), true, $interval)) {
+                return $this->hold('MINIMUM_INTERVAL_HELD');
+            }
+            foreach (['terms', 'license'] as $kind) {
+                $policyUrl = $policy[$kind.'_url'] ?? null;
+                $expectedHash = $policy[$kind.'_evidence_hash'] ?? null;
+                if (! is_string($policyUrl) || ! is_string($expectedHash)) {
+                    return $this->hold(strtoupper($kind).'_POLICY_HELD');
+                }
+                $policyParts = $this->validateUrl($policyUrl, $policy);
+                $robotsDecision = $this->robotsDecision((string) $policyParts['host'], (string) ($policyParts['path'] ?? '/'), $policy, $externalReads);
+                if (! $robotsDecision) {
+                    return $this->hold('ROBOTS_HELD');
+                }
+                $policyResponse = $this->requestPinned('GET', $policyUrl, $policy, 262144, $externalReads);
+                if ($policyResponse['status'] !== 200 || $this->responseRedirected($policyResponse)) {
+                    return $this->hold(strtoupper($kind).'_POLICY_HELD');
+                }
+                $normalized = mb_strtolower(preg_replace('/\s+/u', ' ', trim(strip_tags($policyResponse['body']))) ?: '', 'UTF-8');
+                if (! hash_equals($expectedHash, $this->hasher->hash($normalized))) {
+                    return $this->hold(strtoupper($kind).'_POLICY_DRIFT');
+                }
+            }
+            if (! $this->robotsDecision($host, (string) ($parts['path'] ?? '/'), $policy, $externalReads)) {
+                return $this->hold('ROBOTS_HELD');
+            }
+            $maxBytes = min(1048576, max(1, (int) ($policy['max_content_bytes'] ?? 524288)));
+            $response = $this->requestPinned('GET', $url, $policy, $maxBytes, $externalReads);
+            if ($response['status'] !== 200 || $this->responseRedirected($response)) {
+                return $this->hold($this->responseRedirected($response) ? 'REDIRECT_BLOCKED' : 'CONTENT_RESPONSE_HELD');
+            }
+            $contentType = strtolower(trim(explode(';', (string) ($response['headers']['content-type'] ?? ''))[0]));
+            if ($contentType !== 'text/html' || strtolower((string) ($response['headers']['content-encoding'] ?? 'identity')) !== 'identity') {
+                return $this->hold('CONTENT_TYPE_HELD');
+            }
+            $projectionInput = array_merge($context, [
+                'source_id' => $sourceId,
+                'public_url' => $url,
+                'body' => $response['body'],
+                'captured_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
+                'source_policy_ref' => [
+                    'policy_id' => (string) $policy['policy_id'],
+                    'policy_version' => (int) $policy['policy_version'],
+                    'policy_hash' => (string) $policy['policy_hash'],
+                    'status' => 'approved',
+                    'expires_at' => (string) $policy['expires_at'],
+                ],
+            ]);
+            $projection = ($this->projector ?? app(CompetitivePageProjector::class))->project($projectionInput, $semantic);
+
+            return [
+                'status' => 'ready',
+                'projection' => $projection,
+                'dependency_ingestion' => ['external_reads' => $externalReads],
+                'egress_decision' => 'allowed_by_gateway',
+                'context_eligible' => true,
+            ];
+        } finally {
+            $hostLock->release();
+        }
+    }
+
+    /** @param array<string, mixed> $policy */
+    private function robotsDecision(string $host, string $path, array $policy, int &$externalReads): bool
+    {
+        $response = $this->requestPinned('GET', 'https://'.$host.'/robots.txt', $policy, 65536, $externalReads);
+        if (in_array($response['status'], [404, 410], true)) {
+            return true;
+        }
+
+        return $response['status'] === 200
+            && ! $this->responseRedirected($response)
+            && ($this->robots ?? app(RobotsPolicyEvaluator::class))->allows($response['body'], $path);
+    }
+
+    /** @param array<string, mixed> $policy @return array{status:int,headers:array<string,string>,body:string,connected_ip:string} */
+    private function requestPinned(string $method, string $url, array $policy, int $maxBytes, int &$externalReads): array
+    {
+        $host = strtolower((string) parse_url($url, PHP_URL_HOST));
+        $approved = $this->approvedAddresses($host);
+        $response = $this->transport->request(
+            $method,
+            $url,
+            $approved[0],
+            min(3, (int) ($policy['connect_timeout_seconds'] ?? 3)),
+            min(8, (int) ($policy['request_timeout_seconds'] ?? 8)),
+            $maxBytes,
+        );
+        $externalReads++;
+        if (! in_array(strtolower($response['connected_ip']), array_map('strtolower', $approved), true)) {
+            throw new \RuntimeException('DNS_REBINDING_BLOCKED');
+        }
+
+        return $response;
+    }
+
+    /** @param array{status:int,headers:array<string,string>,body:string,connected_ip:string} $response */
+    private function responseRedirected(array $response): bool
+    {
+        return $response['status'] >= 300 && $response['status'] < 400;
     }
 
     /** @param list<mixed> $fields */
@@ -320,22 +462,7 @@ final class ExternalContentGateway
 
     private function robotsAllows(string $robots, string $path): bool
     {
-        $active = false;
-        $seenUserAgent = false;
-        foreach (preg_split('/\R/', strtolower($robots)) ?: [] as $line) {
-            $line = trim(explode('#', $line, 2)[0]);
-            if (str_starts_with($line, 'user-agent:')) {
-                $seenUserAgent = true;
-                $active = trim(substr($line, 11)) === '*';
-            } elseif ($active && str_starts_with($line, 'disallow:')) {
-                $blocked = trim(substr($line, 9));
-                if ($blocked !== '' && str_starts_with(strtolower($path), $blocked)) {
-                    return false;
-                }
-            }
-        }
-
-        return $seenUserAgent;
+        return ($this->robots ?? app(RobotsPolicyEvaluator::class))->allows($robots, $path);
     }
 
     /** @return array{0:array<string, scalar|null>,1:list<string>} */

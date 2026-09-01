@@ -10,12 +10,12 @@ use RuntimeException;
 
 final class CompetitiveEvidenceContractRegistry
 {
-    public const MANIFEST_ID = 'seo.evidence_contract_manifest.v3';
+    public const MANIFEST_ID = 'seo.evidence_contract_manifest.v4';
 
-    public const MANIFEST_VERSION = '3.0.0';
+    public const MANIFEST_VERSION = '4.0.0';
 
     /** @var list<string> */
-    private const SCHEMAS = [
+    private const HISTORICAL_SCHEMAS = [
         'seo.competitive_page_projection.v1.schema.json',
         'seo.competitive_evidence_request.v1.schema.json',
         'seo.competitive_evidence_context.v1.schema.json',
@@ -27,6 +27,16 @@ final class CompetitiveEvidenceContractRegistry
         'seo.competitive_source_policy.v1.schema.json',
     ];
 
+    /** @var list<string> */
+    private const SCHEMAS = [
+        'seo.competitive_page_projection.v2.schema.json',
+        'seo.competitive_source_policy.v2.schema.json',
+        'seo.competitive_source_registry.v1.schema.json',
+        'seo.competitive_cohort_registry.v1.schema.json',
+        'seo.competitive_semantic_registry.v1.schema.json',
+        'seo.competitive_evidence_closeout.v2.schema.json',
+    ];
+
     public function __construct(
         private readonly SeoEvidenceCanonicalHasher $hasher,
         private readonly SeoEvidenceContractRegistry $baseContracts,
@@ -35,7 +45,7 @@ final class CompetitiveEvidenceContractRegistry
     /** @return array<string, mixed> */
     public function manifest(): array
     {
-        $base = $this->baseContracts->manifest();
+        $base = $this->decode(base_path('docs/seo/generated/seo-agent-evidence-contract-manifest.v3.json'));
         $contracts = [];
         foreach (self::SCHEMAS as $file) {
             $schema = $this->schemaFile($file);
@@ -52,9 +62,9 @@ final class CompetitiveEvidenceContractRegistry
             'manifest_id' => self::MANIFEST_ID,
             'manifest_version' => self::MANIFEST_VERSION,
             'append_only_base' => [
-                'id' => $base['schema_version'],
+                'id' => $base['manifest_id'],
                 'version' => $base['manifest_version'],
-                'path' => 'backend/docs/seo/generated/seo-agent-evidence-contract-manifest.v2.json',
+                'path' => 'backend/docs/seo/generated/seo-agent-evidence-contract-manifest.v3.json',
                 'hash' => $base['manifest_hash'],
             ],
             'contracts' => $contracts,
@@ -75,9 +85,14 @@ final class CompetitiveEvidenceContractRegistry
                     'path' => 'backend/docs/seo/generated/seo-agent-evidence-contract-manifest.v2.json',
                     'current_authority' => false,
                 ],
+                [
+                    'id' => 'seo.evidence_contract_manifest.v3',
+                    'path' => 'backend/docs/seo/generated/seo-agent-evidence-contract-manifest.v3.json',
+                    'current_authority' => false,
+                ],
             ],
             'negative_guarantees' => [
-                'gateway_live_adapter_enabled' => false,
+                'gateway_live_adapter_enabled' => true,
                 'external_ingestion_enabled' => false,
                 'raw_html_retained' => false,
                 'competitor_snippets_retained' => false,
@@ -95,7 +110,7 @@ final class CompetitiveEvidenceContractRegistry
     /** @return array<string, mixed> */
     public function schema(string $id): array
     {
-        foreach (self::SCHEMAS as $file) {
+        foreach (array_merge(self::HISTORICAL_SCHEMAS, self::SCHEMAS) as $file) {
             $schema = $this->schemaFile($file);
             if (($schema['schema_id'] ?? null) === $id) {
                 return $schema;

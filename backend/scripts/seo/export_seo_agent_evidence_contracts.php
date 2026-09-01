@@ -12,7 +12,7 @@ $app->make(Kernel::class)->bootstrap();
 
 $manifests = [
     dirname(__DIR__, 2).'/docs/seo/generated/seo-agent-evidence-contract-manifest.v2.json' => $app->make(SeoEvidenceContractRegistry::class)->manifest(),
-    dirname(__DIR__, 2).'/docs/seo/generated/seo-agent-evidence-contract-manifest.v3.json' => $app->make(CompetitiveEvidenceContractRegistry::class)->manifest(),
+    dirname(__DIR__, 2).'/docs/seo/generated/seo-agent-evidence-contract-manifest.v4.json' => $app->make(CompetitiveEvidenceContractRegistry::class)->manifest(),
 ];
 
 foreach ($manifests as $target => $manifest) {
@@ -24,5 +24,5 @@ foreach ($manifests as $target => $manifest) {
 }
 
 // Preserve the v2 exporter's stdout contract for existing CI consumers. The
-// append-only v3 artifact is generated and drift-checked without widening it.
+// append-only Competitive artifacts are generated and drift-checked without widening it.
 fwrite(STDOUT, $manifests[dirname(__DIR__, 2).'/docs/seo/generated/seo-agent-evidence-contract-manifest.v2.json']['manifest_hash']."\n");

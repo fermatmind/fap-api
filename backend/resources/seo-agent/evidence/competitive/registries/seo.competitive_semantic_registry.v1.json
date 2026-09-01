@@ -1,0 +1,10 @@
+{
+  "version": "seo.competitive_semantic_registry.v1",
+  "registry_revision": "11g2-semantic-20260901",
+  "module_signals": {"hero": "hero", "assessment": "assessment_entry", "method": "method", "definition": "definition", "dimension": "dimensions", "result": "results_overview", "faq": "faq", "comparison": "comparison", "trust": "trust", "related": "related_links", "cta": "cta"},
+  "entity_signals": {"big five": "entity.big-five", "personality": "entity.personality", "ocean": "entity.ocean"},
+  "relation_signals": {"about": "is_a", "mainEntity": "measures", "mentions": "related_to"},
+  "claim_signals": {"award": "claim.vendor-award", "review": "claim.vendor-review", "aggregateRating": "claim.vendor-rating"},
+  "path_families": {"/tests/": "tests", "/articles/": "articles_topics", "/personality/": "personality", "/career/": "career", "/help/": "trust_method_help"},
+  "registry_hash": "df38a3f7219419cfcdc3dd5dd3161becd487351af6c49c1606b2ca4285c5c31f"
+}

@@ -1,0 +1,82 @@
+{
+    "manifest_id": "seo.evidence_contract_manifest.v4",
+    "manifest_version": "4.0.0",
+    "append_only_base": {
+        "id": "seo.evidence_contract_manifest.v3",
+        "version": "3.0.0",
+        "path": "backend/docs/seo/generated/seo-agent-evidence-contract-manifest.v3.json",
+        "hash": "c6be21ea2b61c54fa1389befda81d8da98ab00059b7bcf2132b8341e24824c9d"
+    },
+    "contracts": [
+        {
+            "id": "seo.competitive_page_projection.v2",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/evidence/competitive/schemas/seo.competitive_page_projection.v2.schema.json",
+            "hash": "7bbc2661d02b593fc97eb29892c0f9f26ff0bf301f3fc3370232c02a193e09a1"
+        },
+        {
+            "id": "seo.competitive_source_policy.v2",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/evidence/competitive/schemas/seo.competitive_source_policy.v2.schema.json",
+            "hash": "b9cfebaf224eb4dfd3a2f8801e89aae6610526b976fb20cd6401ca0d3135eadd"
+        },
+        {
+            "id": "seo.competitive_source_registry.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/evidence/competitive/schemas/seo.competitive_source_registry.v1.schema.json",
+            "hash": "43b9ce71da30d7c11519dacbdabf8f4506d8e2c4b4fd5edd29a538fe0cf78442"
+        },
+        {
+            "id": "seo.competitive_cohort_registry.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/evidence/competitive/schemas/seo.competitive_cohort_registry.v1.schema.json",
+            "hash": "753b6f99f839cbff5ee86f9c1970c4e2ec15687dd1ac0d7c618bc6fbacab8903"
+        },
+        {
+            "id": "seo.competitive_semantic_registry.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/evidence/competitive/schemas/seo.competitive_semantic_registry.v1.schema.json",
+            "hash": "5c1a758a67285e6f9b571aa0077cc47815a6b1d257ee6faa8b25bd5b5a675c87"
+        },
+        {
+            "id": "seo.competitive_evidence_closeout.v2",
+            "version": "2.0.0",
+            "path": "backend/resources/seo-agent/evidence/competitive/schemas/seo.competitive_evidence_closeout.v2.schema.json",
+            "hash": "41c405d14eb0858bfa96fb39d7def823da4a11ff4d4e98ef6ab9d133fe4118bd"
+        }
+    ],
+    "source_field_ownership": {
+        "id": "seo.competitive_source_field_ownership.v1",
+        "version": "1.0.0",
+        "path": "backend/resources/seo-agent/evidence/competitive/seo.competitive_source_field_ownership.v1.json",
+        "hash": "292f3716d1e183d7433ed78ed70ae146a85f7b3a276628eb5c22a7c2248cefc9"
+    },
+    "historical_manifests": [
+        {
+            "id": "seo.evidence_contract_manifest.v1",
+            "path": "backend/docs/seo/generated/seo-agent-evidence-contract-manifest.v1.json",
+            "current_authority": false
+        },
+        {
+            "id": "seo.evidence_contract_manifest.v2",
+            "path": "backend/docs/seo/generated/seo-agent-evidence-contract-manifest.v2.json",
+            "current_authority": false
+        },
+        {
+            "id": "seo.evidence_contract_manifest.v3",
+            "path": "backend/docs/seo/generated/seo-agent-evidence-contract-manifest.v3.json",
+            "current_authority": false
+        }
+    ],
+    "negative_guarantees": {
+        "gateway_live_adapter_enabled": true,
+        "external_ingestion_enabled": false,
+        "raw_html_retained": false,
+        "competitor_snippets_retained": false,
+        "production_permissions": 0,
+        "execution_allowed": false,
+        "outreach_actions": 0,
+        "digital_pr_scope": "deferred_p2_manual"
+    },
+    "manifest_hash": "26e87d337fab3beaa1535661e39edcaef7c3269d504eb6f1d6eb02b10ac26aef"
+}

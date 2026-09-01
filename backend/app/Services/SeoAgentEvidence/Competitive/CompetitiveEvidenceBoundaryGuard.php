@@ -26,8 +26,10 @@ final class CompetitiveEvidenceBoundaryGuard
     /** @param array<string, mixed> $projection */
     public function projection(array $projection): bool
     {
-        return $this->exactSchemaKeys($projection, 'seo.competitive_page_projection.v1')
-            && ($projection['version'] ?? null) === 'seo.competitive_page_projection.v1'
+        $version = (string) ($projection['version'] ?? '');
+
+        return in_array($version, ['seo.competitive_page_projection.v1', 'seo.competitive_page_projection.v2'], true)
+            && $this->exactSchemaKeys($projection, $version)
             && in_array($projection['source_class'] ?? null, ['fermatmind_public', 'competitor_public'], true)
             && ($projection['redaction']['raw_html_retained'] ?? null) === false
             && ($projection['redaction']['competitor_snippets_retained'] ?? null) === false
@@ -86,7 +88,8 @@ final class CompetitiveEvidenceBoundaryGuard
     private function privacyPayload(array $value): array
     {
         foreach ($value as $key => $child) {
-            if (in_array($key, ['private_data_present', 'injection_scan_result'], true)) {
+            if (in_array($key, ['private_data_present', 'injection_scan_result', 'captured_at', 'expires_at'], true)
+                || str_ends_with((string) $key, '_hash')) {
                 unset($value[$key]);
 
                 continue;

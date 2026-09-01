@@ -1,0 +1,5 @@
+{
+  "schema_id": "seo.competitive_cohort_registry.v1", "schema_version": "1.0.0", "type": "object", "additionalProperties": false,
+  "required": ["version", "registry_revision", "cohorts", "registry_hash"],
+  "properties": {"version": {"const": "seo.competitive_cohort_registry.v1"}, "registry_revision": {"type": "string"}, "cohorts": {"type": "array", "minItems": 1}, "registry_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}
+}

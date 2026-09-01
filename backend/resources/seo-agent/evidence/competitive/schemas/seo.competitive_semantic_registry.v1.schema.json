@@ -1,0 +1,5 @@
+{
+  "schema_id": "seo.competitive_semantic_registry.v1", "schema_version": "1.0.0", "type": "object", "additionalProperties": false,
+  "required": ["version", "registry_revision", "module_signals", "entity_signals", "relation_signals", "claim_signals", "path_families", "registry_hash"],
+  "properties": {"version": {"const": "seo.competitive_semantic_registry.v1"}, "registry_revision": {"type": "string"}, "module_signals": {"type": "object"}, "entity_signals": {"type": "object"}, "relation_signals": {"type": "object"}, "claim_signals": {"type": "object"}, "path_families": {"type": "object"}, "registry_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}
+}

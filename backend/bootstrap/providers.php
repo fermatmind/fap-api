@@ -17,6 +17,7 @@ $tenantPanelEnabled = (bool) ($tenantConfig['panel_enabled'] ?? false);
 
 return array_values(array_filter([
     App\Providers\AppServiceProvider::class,
+    App\Providers\SeoAgentEvidenceServiceProvider::class,
     App\Providers\SeoCouncilServiceProvider::class,
     ($adminPanelEnabled && $filamentAvailable)
         ? App\Providers\Filament\AdminPanelProvider::class
