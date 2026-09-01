@@ -1,0 +1,21 @@
+{
+  "schema_id": "seo.competitive_evidence_context.v1",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "request_hash", "role_id", "mode_id", "page_family", "locale", "authority_ref", "search_measurement_ref", "projection_refs", "source_state", "freshness_state", "dependency_ingestion", "status", "hold_reasons", "raw_html_retained", "competitor_snippets_retained", "execution_allowed", "context_hash"],
+  "properties": {
+    "version": {"const": "seo.competitive_evidence_context.v1"}, "request_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "role_id": {"const": "seo.expert.competitor_research"}, "mode_id": {"const": "competitive_evidence"},
+    "page_family": {"type": "string"}, "locale": {"enum": ["en", "zh-CN"]},
+    "authority_ref": {"$ref": "#/$defs/ref"}, "search_measurement_ref": {"$ref": "#/$defs/ref"},
+    "projection_refs": {"type": "array", "minItems": 3, "maxItems": 16, "items": {"$ref": "#/$defs/ref"}},
+    "source_state": {"enum": ["available", "unavailable", "hold", "conflict"]},
+    "freshness_state": {"enum": ["fresh", "stale", "expired", "unknown", "conflict"]},
+    "dependency_ingestion": {"type": "object", "additionalProperties": false, "required": ["external_reads"], "properties": {"external_reads": {"type": "integer", "minimum": 0, "maximum": 64}}},
+    "status": {"enum": ["READY", "HOLD"]}, "hold_reasons": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{0,63}$"}},
+    "raw_html_retained": {"const": false}, "competitor_snippets_retained": {"const": false}, "execution_allowed": {"const": false},
+    "context_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  },
+  "$defs": {"ref": {"type": "object", "additionalProperties": false, "required": ["id", "hash"], "properties": {"id": {"type": "string"}, "hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}}}
+}

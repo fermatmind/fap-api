@@ -1,0 +1,21 @@
+{
+  "schema_id": "seo.competitive_evidence_request.v1",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "mission_id", "run_id", "role_id", "mode_id", "cohort_ref", "page_family", "locale", "fermatmind_authority_ref", "search_measurement_ref", "projection_refs", "requested_actions", "outreach_actions", "digital_pr_scope", "execution_allowed", "request_hash"],
+  "properties": {
+    "version": {"const": "seo.competitive_evidence_request.v1"},
+    "mission_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"},
+    "run_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"},
+    "role_id": {"const": "seo.expert.competitor_research"}, "mode_id": {"const": "competitive_evidence"},
+    "cohort_ref": {"$ref": "#/$defs/ref"},
+    "page_family": {"enum": ["tests", "articles_topics", "career", "personality", "trust_method_help", "other_public"]},
+    "locale": {"enum": ["en", "zh-CN"]},
+    "fermatmind_authority_ref": {"$ref": "#/$defs/ref"}, "search_measurement_ref": {"$ref": "#/$defs/ref"},
+    "projection_refs": {"type": "array", "minItems": 3, "maxItems": 16, "items": {"$ref": "#/$defs/ref"}},
+    "requested_actions": {"const": []}, "outreach_actions": {"const": 0}, "digital_pr_scope": {"const": "deferred_p2_manual"},
+    "execution_allowed": {"const": false}, "request_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  },
+  "$defs": {"ref": {"type": "object", "additionalProperties": false, "required": ["id", "version", "hash"], "properties": {"id": {"type": "string"}, "version": {"type": ["string", "integer"]}, "hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}}}
+}

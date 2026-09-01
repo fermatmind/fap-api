@@ -1,0 +1,21 @@
+{
+  "schema_id": "seo.competitive_evidence_finding.v1",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "role_id", "mode_id", "page_family", "locale", "structure_gaps", "entity_gaps", "information_gain", "internal_link_patterns", "competitor_claims", "unknowns", "holds", "evidence_refs", "outreach_actions", "digital_pr_scope", "execution_allowed", "finding_hash"],
+  "properties": {
+    "version": {"const": "seo.competitive_evidence_finding.v1"}, "role_id": {"const": "seo.expert.competitor_research"}, "mode_id": {"const": "competitive_evidence"},
+    "page_family": {"type": "string"}, "locale": {"enum": ["en", "zh-CN"]},
+    "structure_gaps": {"type": "array", "maxItems": 64, "items": {"type": "object", "additionalProperties": false, "required": ["module_type", "gap_kind", "source_count", "evidence_hash"], "properties": {"module_type": {"type": "string"}, "gap_kind": {"enum": ["missing", "ordering", "coverage", "unknown"]}, "source_count": {"type": "integer", "minimum": 2}, "evidence_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}}},
+    "entity_gaps": {"type": "array", "maxItems": 128, "items": {"type": "object", "additionalProperties": false, "required": ["entity_id", "relation", "gap_kind", "source_count", "evidence_hash"], "properties": {"entity_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"}, "relation": {"enum": ["is_a", "has_dimension", "compares_with", "measures", "related_to", "unknown"]}, "gap_kind": {"enum": ["missing", "incomplete_relation", "unknown"]}, "source_count": {"type": "integer", "minimum": 2}, "evidence_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}}},
+    "information_gain": {"type": "array", "maxItems": 128, "items": {"type": "object", "additionalProperties": false, "required": ["candidate_kind", "registered_id", "relation", "source_count", "evidence_hash"], "properties": {"candidate_kind": {"enum": ["question", "dimension", "relation"]}, "registered_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"}, "relation": {"enum": ["answers", "clarifies", "distinguishes", "connects", "unknown"]}, "source_count": {"type": "integer", "minimum": 2}, "evidence_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}}},
+    "internal_link_patterns": {"type": "array", "maxItems": 64, "items": {"type": "object", "additionalProperties": false, "required": ["from_family", "relation", "to_family", "count_bucket", "pattern_hash"], "properties": {"from_family": {"type": "string"}, "relation": {"enum": ["parent", "child", "sibling", "related", "comparison", "conversion"]}, "to_family": {"type": "string"}, "count_bucket": {"enum": ["0", "1", "2-3", "4-7", "8+"]}, "pattern_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}}},
+    "competitor_claims": {"type": "array", "maxItems": 64, "items": {"type": "object", "additionalProperties": false, "required": ["claim_id", "claim_class", "fact_upgrade_allowed", "source_ref", "claim_hash"], "properties": {"claim_id": {"type": "string"}, "claim_class": {"const": "competitor_claim"}, "fact_upgrade_allowed": {"const": false}, "source_ref": {"type": "string"}, "claim_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}}},
+    "unknowns": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{0,63}$"}},
+    "holds": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{0,63}$"}},
+    "evidence_refs": {"type": "array", "minItems": 3, "maxItems": 32, "items": {"type": "string", "pattern": "^[a-f0-9]{64}$"}},
+    "outreach_actions": {"const": 0}, "digital_pr_scope": {"const": "deferred_p2_manual"}, "execution_allowed": {"const": false},
+    "finding_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

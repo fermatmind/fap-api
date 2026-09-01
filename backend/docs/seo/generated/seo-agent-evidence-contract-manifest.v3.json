@@ -1,0 +1,95 @@
+{
+    "manifest_id": "seo.evidence_contract_manifest.v3",
+    "manifest_version": "3.0.0",
+    "append_only_base": {
+        "id": "seo.evidence_contract_manifest.v2",
+        "version": "2.0.0",
+        "path": "backend/docs/seo/generated/seo-agent-evidence-contract-manifest.v2.json",
+        "hash": "c7b6d23cd70b789f8dad80fe4c187679211a1485dab47cb23ed2cb51980c59ab"
+    },
+    "contracts": [
+        {
+            "id": "seo.competitive_page_projection.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/evidence/competitive/schemas/seo.competitive_page_projection.v1.schema.json",
+            "hash": "62804f2aa29c9ddc8b5580ed3ac032900ac210517ec8808cafcbcfe3d831eb2c"
+        },
+        {
+            "id": "seo.competitive_evidence_request.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/evidence/competitive/schemas/seo.competitive_evidence_request.v1.schema.json",
+            "hash": "36fe32fd146ba5d24dd9ac5f7afef45ac1af0c1e9fac7d0b908d55f37927313a"
+        },
+        {
+            "id": "seo.competitive_evidence_context.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/evidence/competitive/schemas/seo.competitive_evidence_context.v1.schema.json",
+            "hash": "59d34789f99582ba8d38eb47018e2f8670355841000d9f34760a48c473e82b7a"
+        },
+        {
+            "id": "seo.competitive_evidence_finding.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/evidence/competitive/schemas/seo.competitive_evidence_finding.v1.schema.json",
+            "hash": "67fc88c42985642d7b5ca026bbbe80de9693b7080efc40df709aab269f74f25e"
+        },
+        {
+            "id": "seo.competitive_evidence_output.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/evidence/competitive/schemas/seo.competitive_evidence_output.v1.schema.json",
+            "hash": "c04dbe6471f3502726e85da983fc87ee195dea0a08a62abe0b1bd5e532d3f0c7"
+        },
+        {
+            "id": "seo.competitive_11i_handoff.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/evidence/competitive/schemas/seo.competitive_11i_handoff.v1.schema.json",
+            "hash": "484cd5ced4fdcb09ad606fe2c9d51278dda80de96c1eb75c1ca173ea1f4bdcb1"
+        },
+        {
+            "id": "seo.competitive_evidence_closeout.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/evidence/competitive/schemas/seo.competitive_evidence_closeout.v1.schema.json",
+            "hash": "81acb2f6f6ee44d967c65359bcd36a343d09c2215c632b964d334e35b9609b0c"
+        },
+        {
+            "id": "seo.competitive_source_field_ownership.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/evidence/competitive/schemas/seo.competitive_source_field_ownership.v1.schema.json",
+            "hash": "7f39658492fdba6194a401297563e63dc72a4a5a1b4047c8cad53268121dc992"
+        },
+        {
+            "id": "seo.competitive_source_policy.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/evidence/competitive/schemas/seo.competitive_source_policy.v1.schema.json",
+            "hash": "cc2eb90cc1ac3a7e54e6a6c75d80e0920d396687b230327c24b750e67e576c08"
+        }
+    ],
+    "source_field_ownership": {
+        "id": "seo.competitive_source_field_ownership.v1",
+        "version": "1.0.0",
+        "path": "backend/resources/seo-agent/evidence/competitive/seo.competitive_source_field_ownership.v1.json",
+        "hash": "292f3716d1e183d7433ed78ed70ae146a85f7b3a276628eb5c22a7c2248cefc9"
+    },
+    "historical_manifests": [
+        {
+            "id": "seo.evidence_contract_manifest.v1",
+            "path": "backend/docs/seo/generated/seo-agent-evidence-contract-manifest.v1.json",
+            "current_authority": false
+        },
+        {
+            "id": "seo.evidence_contract_manifest.v2",
+            "path": "backend/docs/seo/generated/seo-agent-evidence-contract-manifest.v2.json",
+            "current_authority": false
+        }
+    ],
+    "negative_guarantees": {
+        "gateway_live_adapter_enabled": false,
+        "external_ingestion_enabled": false,
+        "raw_html_retained": false,
+        "competitor_snippets_retained": false,
+        "production_permissions": 0,
+        "execution_allowed": false,
+        "outreach_actions": 0,
+        "digital_pr_scope": "deferred_p2_manual"
+    },
+    "manifest_hash": "c6be21ea2b61c54fa1389befda81d8da98ab00059b7bcf2132b8341e24824c9d"
+}

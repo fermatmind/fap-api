@@ -1,0 +1,12 @@
+{
+  "schema_id": "seo.competitive_source_field_ownership.v1",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "ownership_version", "conflict_policy", "unknown_field_policy", "fields"],
+  "properties": {
+    "schema_version": {"const": "seo.competitive_source_field_ownership.v1"}, "ownership_version": {"const": "1.0.0"},
+    "conflict_policy": {"const": "SOURCE_CONFLICT_HOLD"}, "unknown_field_policy": {"const": "EVIDENCE_HOLD"},
+    "fields": {"type": "array", "minItems": 8, "uniqueItems": true, "items": {"type": "object", "additionalProperties": false, "required": ["field", "authority", "allowed_evidence", "overwrite_policy"], "properties": {"field": {"type": "string"}, "authority": {"enum": ["external_gateway_projection", "fermatmind_current_authority", "search_measurement_11f", "competitive_analyzer", "competitive_11i_handoff"]}, "allowed_evidence": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}}, "overwrite_policy": {"enum": ["never", "derived_only", "hold_on_conflict"]}}}}
+  }
+}

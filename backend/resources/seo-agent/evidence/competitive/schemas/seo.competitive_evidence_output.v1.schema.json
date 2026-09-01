@@ -1,0 +1,17 @@
+{
+  "schema_id": "seo.competitive_evidence_output.v1",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "status", "findings", "11i_handoff", "hold_reason", "dependency_ingestion", "model_calls", "tool_calls", "external_calls", "cms_writes", "url_truth_writes", "search_writes", "business_writes", "outreach_actions", "digital_pr_scope", "execution_allowed", "output_hash"],
+  "properties": {
+    "version": {"const": "seo.competitive_evidence_output.v1"}, "status": {"enum": ["READY", "HOLD"]},
+    "findings": {"type": "array", "maxItems": 32, "items": {"$ref": "seo.competitive_evidence_finding.v1"}},
+    "11i_handoff": {"$ref": "seo.competitive_11i_handoff.v1"}, "hold_reason": {"type": ["string", "null"]},
+    "dependency_ingestion": {"type": "object", "additionalProperties": false, "required": ["external_reads"], "properties": {"external_reads": {"type": "integer", "minimum": 0, "maximum": 64}}},
+    "model_calls": {"const": 0}, "tool_calls": {"const": 0}, "external_calls": {"const": 0},
+    "cms_writes": {"const": 0}, "url_truth_writes": {"const": 0}, "search_writes": {"const": 0}, "business_writes": {"const": 0},
+    "outreach_actions": {"const": 0}, "digital_pr_scope": {"const": "deferred_p2_manual"}, "execution_allowed": {"const": false},
+    "output_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

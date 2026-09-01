@@ -1,0 +1,23 @@
+{
+  "schema_id": "seo.competitive_evidence_closeout.v1",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["receipt_version", "environment", "candidate_sha", "production_sha", "contract_manifest_version", "contract_manifest_hash", "competitive_source_state", "competitive_freshness_state", "competitive_bundle_verification", "competitive_context_status", "competitive_hold_reason", "dependency_ingestion", "raw_html_retention_bypass_count", "competitor_copy_bypass_count", "privacy_bypass_count", "claim_upgrade_bypass_count", "single_source_inference_bypass_count", "freshness_bypass_count", "model_calls", "tool_calls", "external_calls", "cms_writes", "url_truth_writes", "search_writes", "business_writes", "production_permissions", "execution_allowed", "outreach_actions", "digital_pr_scope", "SEO-PLATFORM-11G", "ready_for_11H", "11i_handoff_ready", "receipt_hash"],
+  "properties": {
+    "receipt_version": {"const": "seo.competitive_evidence_closeout.v1"}, "environment": {"enum": ["ci_candidate", "staging", "production"]},
+    "candidate_sha": {"type": "string", "pattern": "^[a-f0-9]{40}$"}, "production_sha": {"type": ["string", "null"], "pattern": "^[a-f0-9]{40}$"},
+    "contract_manifest_version": {"const": "3.0.0"}, "contract_manifest_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "competitive_source_state": {"enum": ["available", "unavailable", "hold", "conflict"]}, "competitive_freshness_state": {"enum": ["fresh", "stale", "expired", "unknown", "conflict"]},
+    "competitive_bundle_verification": {"enum": ["valid", "invalid", "missing"]}, "competitive_context_status": {"enum": ["READY", "HOLD"]},
+    "competitive_hold_reason": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{0,63}$"},
+    "dependency_ingestion": {"type": "object", "additionalProperties": false, "required": ["external_reads"], "properties": {"external_reads": {"type": "integer", "minimum": 0, "maximum": 64}}},
+    "raw_html_retention_bypass_count": {"const": 0}, "competitor_copy_bypass_count": {"const": 0}, "privacy_bypass_count": {"const": 0},
+    "claim_upgrade_bypass_count": {"const": 0}, "single_source_inference_bypass_count": {"const": 0}, "freshness_bypass_count": {"const": 0},
+    "model_calls": {"const": 0}, "tool_calls": {"const": 0}, "external_calls": {"const": 0},
+    "cms_writes": {"const": 0}, "url_truth_writes": {"const": 0}, "search_writes": {"const": 0}, "business_writes": {"const": 0},
+    "production_permissions": {"const": 0}, "execution_allowed": {"const": false}, "outreach_actions": {"const": 0}, "digital_pr_scope": {"const": "deferred_p2_manual"},
+    "SEO-PLATFORM-11G": {"enum": ["OFFLINE_EVAL_READY", "HOLD", "CLOSED"]}, "ready_for_11H": {"type": "boolean"}, "11i_handoff_ready": {"type": "boolean"},
+    "receipt_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

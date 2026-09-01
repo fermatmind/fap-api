@@ -1,0 +1,20 @@
+{
+  "schema_version": "seo.competitive_source_field_ownership.v1",
+  "ownership_version": "1.0.0",
+  "conflict_policy": "SOURCE_CONFLICT_HOLD",
+  "unknown_field_policy": "EVIDENCE_HOLD",
+  "fields": [
+    {"field": "public_page_structure", "authority": "external_gateway_projection", "allowed_evidence": ["headings", "modules", "schema_types", "canonical_hash", "hreflang"], "overwrite_policy": "never"},
+    {"field": "public_internal_link_pattern", "authority": "external_gateway_projection", "allowed_evidence": ["from_family", "relation", "to_family", "count_bucket", "pattern_hash"], "overwrite_policy": "never"},
+    {"field": "fermatmind_content_fact", "authority": "fermatmind_current_authority", "allowed_evidence": ["registered_entity", "registered_relation", "field_owner"], "overwrite_policy": "never"},
+    {"field": "search_demand", "authority": "search_measurement_11f", "allowed_evidence": ["window_7", "window_28", "window_90", "measurement_state"], "overwrite_policy": "never"},
+    {"field": "structure_gaps", "authority": "competitive_analyzer", "allowed_evidence": ["module_type", "gap_kind", "source_count", "evidence_hash"], "overwrite_policy": "derived_only"},
+    {"field": "entity_gaps", "authority": "competitive_analyzer", "allowed_evidence": ["entity_id", "relation", "gap_kind", "source_count", "evidence_hash"], "overwrite_policy": "derived_only"},
+    {"field": "information_gain", "authority": "competitive_analyzer", "allowed_evidence": ["candidate_kind", "registered_id", "relation", "source_count", "evidence_hash"], "overwrite_policy": "derived_only"},
+    {"field": "internal_link_patterns", "authority": "competitive_analyzer", "allowed_evidence": ["from_family", "relation", "to_family", "count_bucket", "pattern_hash"], "overwrite_policy": "derived_only"},
+    {"field": "page_necessity", "authority": "competitive_11i_handoff", "allowed_evidence": ["demand_window_count", "owner_gap_confirmed", "entity_gap_confirmed", "structure_gap_confirmed", "multi_source_confirmed"], "overwrite_policy": "hold_on_conflict"},
+    {"field": "template_similarity", "authority": "competitive_11i_handoff", "allowed_evidence": ["module_set_bp", "module_order_bp", "entity_relation_bp", "internal_link_pattern_bp"], "overwrite_policy": "derived_only"},
+    {"field": "translation_only", "authority": "competitive_11i_handoff", "allowed_evidence": ["template_similarity", "local_entity_delta", "information_gain_delta"], "overwrite_policy": "hold_on_conflict"},
+    {"field": "source_freshness", "authority": "competitive_11i_handoff", "allowed_evidence": ["source_policy_expiry", "minimum_validity"], "overwrite_policy": "hold_on_conflict"}
+  ]
+}

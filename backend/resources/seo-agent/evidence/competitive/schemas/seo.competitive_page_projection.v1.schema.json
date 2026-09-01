@@ -1,0 +1,56 @@
+{
+  "schema_id": "seo.competitive_page_projection.v1",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "source_id", "cohort_id", "source_class", "page_family", "locale", "public_url_hash", "source_policy_ref", "capture", "structure", "redaction", "projection_hash"],
+  "properties": {
+    "version": {"const": "seo.competitive_page_projection.v1"},
+    "source_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,63}$"},
+    "cohort_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "source_class": {"enum": ["fermatmind_public", "competitor_public"]},
+    "page_family": {"enum": ["tests", "articles_topics", "career", "personality", "trust_method_help", "other_public"]},
+    "locale": {"enum": ["en", "zh-CN", "und"]},
+    "public_url_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "source_policy_ref": {
+      "type": "object", "additionalProperties": false,
+      "required": ["policy_id", "policy_version", "policy_hash", "status", "expires_at"],
+      "properties": {
+        "policy_id": {"type": "string"}, "policy_version": {"type": "integer", "minimum": 1},
+        "policy_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "status": {"const": "approved"}, "expires_at": {"type": "string", "format": "date-time"}
+      }
+    },
+    "capture": {
+      "type": "object", "additionalProperties": false,
+      "required": ["captured_at", "response_hash", "content_type", "response_bytes", "http_status", "robots_decision", "terms_decision", "license_decision"],
+      "properties": {
+        "captured_at": {"type": "string", "format": "date-time"},
+        "response_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "content_type": {"const": "text/html"}, "response_bytes": {"type": "integer", "minimum": 1, "maximum": 1048576},
+        "http_status": {"const": 200}, "robots_decision": {"const": "allowed"},
+        "terms_decision": {"const": "approved"}, "license_decision": {"const": "public_structure_permitted"}
+      }
+    },
+    "structure": {
+      "type": "object", "additionalProperties": false,
+      "required": ["headings", "modules", "schema_types", "entity_ids", "canonical_hash", "hreflang", "internal_link_patterns", "structure_fingerprint"],
+      "properties": {
+        "headings": {"type": "array", "maxItems": 64, "items": {"type": "object", "additionalProperties": false, "required": ["level", "ordinal", "label_hash"], "properties": {"level": {"type": "integer", "minimum": 1, "maximum": 6}, "ordinal": {"type": "integer", "minimum": 0, "maximum": 255}, "label_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}}},
+        "modules": {"type": "array", "maxItems": 64, "items": {"type": "object", "additionalProperties": false, "required": ["module_type", "ordinal", "module_hash"], "properties": {"module_type": {"enum": ["hero", "assessment_entry", "method", "definition", "dimensions", "results_overview", "faq", "comparison", "trust", "cta", "related_links", "other_registered"]}, "ordinal": {"type": "integer", "minimum": 0, "maximum": 255}, "module_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}}},
+        "schema_types": {"type": "array", "uniqueItems": true, "maxItems": 32, "items": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9]{0,63}$"}},
+        "entity_ids": {"type": "array", "uniqueItems": true, "maxItems": 128, "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"}},
+        "canonical_hash": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+        "hreflang": {"type": "array", "maxItems": 16, "items": {"type": "object", "additionalProperties": false, "required": ["locale", "url_hash"], "properties": {"locale": {"enum": ["en", "zh-CN", "x-default"]}, "url_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}}},
+        "internal_link_patterns": {"type": "array", "maxItems": 64, "items": {"type": "object", "additionalProperties": false, "required": ["from_family", "relation", "to_family", "count_bucket", "pattern_hash"], "properties": {"from_family": {"type": "string"}, "relation": {"enum": ["parent", "child", "sibling", "related", "comparison", "conversion"]}, "to_family": {"type": "string"}, "count_bucket": {"enum": ["0", "1", "2-3", "4-7", "8+"]}, "pattern_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}}},
+        "structure_fingerprint": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
+    "redaction": {
+      "type": "object", "additionalProperties": false,
+      "required": ["raw_html_retained", "competitor_snippets_retained", "private_data_present", "login_or_paywall_detected", "injection_scan_result"],
+      "properties": {"raw_html_retained": {"const": false}, "competitor_snippets_retained": {"const": false}, "private_data_present": {"const": false}, "login_or_paywall_detected": {"const": false}, "injection_scan_result": {"const": "pass"}}
+    },
+    "projection_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

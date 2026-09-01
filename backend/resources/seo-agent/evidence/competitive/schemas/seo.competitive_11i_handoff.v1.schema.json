@@ -1,0 +1,19 @@
+{
+  "schema_id": "seo.competitive_11i_handoff.v1",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "page_family", "locale", "page_necessity", "page_necessity_basis", "template_similarity", "template_similarity_components", "translation_only", "source_freshness", "source_count", "measurement_window_count", "hold_reasons", "outreach_actions", "digital_pr_scope", "execution_allowed", "handoff_hash"],
+  "properties": {
+    "version": {"const": "seo.competitive_11i_handoff.v1"}, "page_family": {"type": "string"}, "locale": {"enum": ["en", "zh-CN"]},
+    "page_necessity": {"enum": ["necessary", "conditional", "not_supported", "unknown"]},
+    "page_necessity_basis": {"type": "object", "additionalProperties": false, "required": ["demand_window_count", "owner_gap_confirmed", "entity_gap_confirmed", "structure_gap_confirmed", "multi_source_confirmed"], "properties": {"demand_window_count": {"type": "integer", "minimum": 0, "maximum": 3}, "owner_gap_confirmed": {"type": "boolean"}, "entity_gap_confirmed": {"type": "boolean"}, "structure_gap_confirmed": {"type": "boolean"}, "multi_source_confirmed": {"type": "boolean"}}},
+    "template_similarity": {"type": "integer", "minimum": 0, "maximum": 10000},
+    "template_similarity_components": {"type": "object", "additionalProperties": false, "required": ["module_set_bp", "module_order_bp", "entity_relation_bp", "internal_link_pattern_bp"], "properties": {"module_set_bp": {"type": "integer", "minimum": 0, "maximum": 4000}, "module_order_bp": {"type": "integer", "minimum": 0, "maximum": 3000}, "entity_relation_bp": {"type": "integer", "minimum": 0, "maximum": 2000}, "internal_link_pattern_bp": {"type": "integer", "minimum": 0, "maximum": 1000}}},
+    "translation_only": {"enum": ["yes", "no", "unknown"]}, "source_freshness": {"enum": ["fresh", "stale", "expired", "unknown", "conflict"]},
+    "source_count": {"type": "integer", "minimum": 0}, "measurement_window_count": {"type": "integer", "minimum": 0, "maximum": 3},
+    "hold_reasons": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{0,63}$"}},
+    "outreach_actions": {"const": 0}, "digital_pr_scope": {"const": "deferred_p2_manual"}, "execution_allowed": {"const": false},
+    "handoff_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}
