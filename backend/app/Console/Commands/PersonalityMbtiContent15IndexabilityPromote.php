@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Domain\Personality\Current\PersonalityLegacyPublicAuthorityArchive;
 use App\Services\Cms\MbtiContent15IndexabilityPromotionService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -33,6 +34,11 @@ final class PersonalityMbtiContent15IndexabilityPromote extends Command
     {
         try {
             $write = (bool) $this->option('write');
+            PersonalityLegacyPublicAuthorityArchive::assertLegacyWriteIsArchived(
+                $write,
+                app()->runningUnitTests(),
+                'personality:mbti-content15-indexability-promote --write',
+            );
             if ($write === (bool) $this->option('dry-run')) {
                 throw new RuntimeException('Exactly one of --dry-run or --write is required.');
             }

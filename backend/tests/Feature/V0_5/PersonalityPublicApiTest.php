@@ -30,7 +30,7 @@ final class PersonalityPublicApiTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        config(['fap.personality_current_authority_enabled' => false]);
+        config(['fap.testing_personality_legacy_public_db_fixture' => true]);
     }
 
     public function test_list_returns_published_public_only(): void

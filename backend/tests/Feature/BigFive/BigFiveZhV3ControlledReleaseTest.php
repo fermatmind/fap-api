@@ -42,7 +42,7 @@ final class BigFiveZhV3ControlledReleaseTest extends TestCase
         $decoded = json_decode((string) file_get_contents($this->packagePath), true, flags: JSON_THROW_ON_ERROR);
         $this->assertIsArray($decoded);
         $this->package = $decoded;
-        config(['fap.personality_current_authority_enabled' => false]);
+        config(['fap.testing_personality_legacy_public_db_fixture' => true]);
     }
 
     public function test_compiled_fixture_is_exact_deterministic_text_only_release(): void

@@ -17,7 +17,7 @@ final class MbtiCrossTypeComparisonAuthorityReadModelTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        config(['fap.personality_current_authority_enabled' => false]);
+        config(['fap.testing_personality_legacy_public_db_fixture' => true]);
     }
 
     public function test_cross_type_comparison_index_returns_the_existing_four_published_database_authorities(): void

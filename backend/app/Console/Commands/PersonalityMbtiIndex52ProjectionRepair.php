@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Domain\Personality\Current\PersonalityLegacyPublicAuthorityArchive;
 use App\Services\Cms\MbtiIndex52ProjectionRepairPackage;
 use App\Services\Cms\MbtiIndex52ProjectionRepairService;
 use Illuminate\Console\Command;
@@ -30,6 +31,11 @@ final class PersonalityMbtiIndex52ProjectionRepair extends Command
     public function handle(MbtiIndex52ProjectionRepairService $service): int
     {
         try {
+            PersonalityLegacyPublicAuthorityArchive::assertLegacyWriteIsArchived(
+                (bool) $this->option('execute'),
+                app()->runningUnitTests(),
+                'personality:mbti-index52-projection-repair --execute',
+            );
             [$package, $authorization] = $this->inputs();
             $summary = (bool) $this->option('execute')
                 ? $service->publish(

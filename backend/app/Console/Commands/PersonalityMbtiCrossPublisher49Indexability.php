@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Domain\Personality\Current\PersonalityLegacyPublicAuthorityArchive;
 use App\Services\Cms\MbtiCrossPublisher49IndexabilityService;
 use App\Services\Cms\MbtiCrossPublisher49Package;
 use Illuminate\Console\Command;
@@ -28,6 +29,11 @@ final class PersonalityMbtiCrossPublisher49Indexability extends Command
     public function handle(MbtiCrossPublisher49IndexabilityService $service): int
     {
         try {
+            PersonalityLegacyPublicAuthorityArchive::assertLegacyWriteIsArchived(
+                (bool) $this->option('execute'),
+                app()->runningUnitTests(),
+                'personality:mbti-cross-publisher49-indexability --execute',
+            );
             [$package, $authorization] = $this->inputs();
             if ((bool) $this->option('execute')) {
                 $summary = $service->release(

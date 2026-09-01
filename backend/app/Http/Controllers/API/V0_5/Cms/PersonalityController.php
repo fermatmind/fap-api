@@ -7,6 +7,7 @@ namespace App\Http\Controllers\API\V0_5\Cms;
 use App\Domain\Personality\Current\PersonalityCurrentIndexProjector;
 use App\Domain\Personality\Current\PersonalityCurrentPageReader;
 use App\Domain\Personality\Current\PersonalityCurrentSeoProjector;
+use App\Domain\Personality\Current\PersonalityLegacyPublicAuthorityArchive;
 use App\Http\Controllers\Concerns\RespondsWithNotFound;
 use App\Http\Controllers\Controller;
 use App\Models\PersonalityProfile;
@@ -2672,6 +2673,10 @@ class PersonalityController extends Controller
 
     private function usesCurrentAuthority(int $orgId): bool
     {
-        return $orgId === 0 && (bool) config('fap.personality_current_authority_enabled', true);
+        return PersonalityLegacyPublicAuthorityArchive::shouldUseCurrentAuthority(
+            $orgId,
+            app()->runningUnitTests(),
+            (bool) config(PersonalityLegacyPublicAuthorityArchive::TEST_LEGACY_DB_FIXTURE_CONFIG, false),
+        );
     }
 }

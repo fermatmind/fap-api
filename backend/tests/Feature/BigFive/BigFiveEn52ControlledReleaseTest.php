@@ -52,7 +52,7 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
         $this->assertIsArray($decoded);
         $this->package = $decoded;
         config(['seo_intel.connection' => config('database.default')]);
-        config(['fap.personality_current_authority_enabled' => false]);
+        config(['fap.testing_personality_legacy_public_db_fixture' => true]);
     }
 
     public function test_compiled_fixture_is_exact_deterministic_text_only_release(): void

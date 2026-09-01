@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Domain\Personality\Current\PersonalityLegacyPublicAuthorityArchive;
 use App\DTO\Personality\PersonalityPublicContentAssetData;
 use App\Models\PersonalityPublicContentAsset;
 use App\Services\Cms\PersonalityPublicContentAssetContract;
@@ -29,6 +30,11 @@ final class PersonalityPublicAssetsImport extends Command
         SeoDiscoverabilityCacheInvalidator $cacheInvalidator,
     ): int {
         try {
+            PersonalityLegacyPublicAuthorityArchive::assertLegacyWriteIsArchived(
+                (bool) $this->option('write'),
+                app()->runningUnitTests(),
+                'personality-public-assets:import --write',
+            );
             $sourcePath = $this->resolveSourcePath((string) $this->option('source'));
             $payload = $this->readPayload($sourcePath);
             $sourceHash = sha1((string) json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
