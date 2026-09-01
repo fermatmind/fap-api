@@ -21,5 +21,8 @@ foreach ($manifests as $target => $manifest) {
         fwrite(STDERR, "Unable to write evidence contract manifest.\n");
         exit(1);
     }
-    fwrite(STDOUT, basename($target).' '.$manifest['manifest_hash']."\n");
 }
+
+// Preserve the v2 exporter's stdout contract for existing CI consumers. The
+// append-only v3 artifact is generated and drift-checked without widening it.
+fwrite(STDOUT, $manifests[dirname(__DIR__, 2).'/docs/seo/generated/seo-agent-evidence-contract-manifest.v2.json']['manifest_hash']."\n");

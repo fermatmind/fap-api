@@ -8,6 +8,7 @@ use App\Services\SeoAgentEvidence\Competitive\CompetitiveEvidenceBoundaryGuard;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveEvidenceContractRegistry;
 use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher;
 use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceContractRegistry;
+use Symfony\Component\Process\Process;
 use Tests\TestCase;
 
 final class SeoPlatform11GContractsBoundaryTest extends TestCase
@@ -41,6 +42,19 @@ final class SeoPlatform11GContractsBoundaryTest extends TestCase
         $drifted = $generated;
         $drifted['contracts'][0]['hash'] = str_repeat('f', 64);
         $this->assertFalse($registry->verify($drifted));
+    }
+
+    public function test_exporter_preserves_v2_stdout_while_regenerating_v3(): void
+    {
+        $process = new Process(['php', 'scripts/seo/export_seo_agent_evidence_contracts.php'], base_path());
+        $process->mustRun();
+
+        $this->assertSame(
+            app(SeoEvidenceContractRegistry::class)->manifest()['manifest_hash']."\n",
+            $process->getOutput(),
+        );
+        $generated = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-agent-evidence-contract-manifest.v3.json')), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertTrue(app(CompetitiveEvidenceContractRegistry::class)->verify($generated));
     }
 
     public function test_fixed_outputs_and_11i_bridge_are_owned_without_content_authority(): void
