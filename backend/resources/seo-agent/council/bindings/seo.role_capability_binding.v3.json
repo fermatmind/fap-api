@@ -1,0 +1,258 @@
+{
+  "schema_version": "seo.role_capability_binding.v3",
+  "binding_id": "fermatmind.seo.role_capability_binding",
+  "binding_version": "3.0.0",
+  "supersedes": {
+    "version": "2.0.0",
+    "path": "backend/resources/seo-agent/council/bindings/seo.role_capability_binding.v2.json",
+    "canonical_hash": "2731bc15c21b6f5a58804272bbfd4f4cf338bd71f2b32405a84eb36d05e89f2e",
+    "file_sha256": "655d25e227e33f08dc8e8589a414a6a755572450bb9f7da740f7b5d47df40a73"
+  },
+  "registry_ref": {
+    "id": "fermatmind.seo.role_capability_registry",
+    "version": "1.0.0",
+    "hash": "b02b6edd816b75b42582468e5bc3aa2c9cd0060149825d1fdc6131cf71d73791"
+  },
+  "runtime_state": "dormant_not_authorized",
+  "requested_role_policy": "non_authoritative_selected_role_hint_only",
+  "evidence_type_registry": ["runtime_health", "authority_parity", "release_separation", "search_measurement", "content_claim", "entity", "duplicate", "lifecycle", "competitor_public", "gateway_competitor_public", "stability", "cache_projection", "funnel_aggregate", "career_candidate", "career_manifest_validation"],
+  "role_bindings": {
+    "seo.orchestrator": [],
+    "seo.expert.technical_search_authority": ["seo.runtime_health_review", "seo.release_separation_policy"],
+    "seo.expert.search_analytics_measurement": ["seo.search_measurement_review"],
+    "seo.expert.content_entity_quality": ["seo.content_claim_review", "seo.material_lifecycle_review"],
+    "seo.expert.competitor_research": ["seo.content_claim_review"],
+    "seo.expert.public_content_stability": ["seo.runtime_health_review", "seo.material_lifecycle_review", "seo.rollback_guard"],
+    "seo.expert.commercial_funnel_cro": ["seo.decision_authority"],
+    "seo.independent_reviewer": ["seo.content_claim_review", "seo.decision_authority", "seo.material_lifecycle_review", "seo.release_separation_policy"],
+    "career.content_agent": ["career.content_candidate"]
+  },
+  "deterministic_tool_registry": [
+    {
+      "tool_id": "seo.contract_validation",
+      "service_class": "App\\Services\\SeoCouncil\\Contracts\\CouncilContractValidator",
+      "execution_kind": "deterministic_internal_service",
+      "agent_tool_invocation": false,
+      "model_invocation": false,
+      "external_egress": false,
+      "write_permissions": [],
+      "execution_allowed": false
+    },
+    {
+      "tool_id": "seo.policy_admission",
+      "service_class": "App\\Services\\SeoAgentPolicyGateway\\PolicyGatewayCallerGuard",
+      "execution_kind": "deterministic_internal_service",
+      "agent_tool_invocation": false,
+      "model_invocation": false,
+      "external_egress": false,
+      "write_permissions": [],
+      "execution_allowed": false
+    },
+    {
+      "tool_id": "seo.evidence_context_verification",
+      "service_class": "App\\Services\\SeoAgentEvidence\\Contracts\\SeoEvidenceCanonicalHasher",
+      "execution_kind": "deterministic_internal_service",
+      "agent_tool_invocation": false,
+      "model_invocation": false,
+      "external_egress": false,
+      "write_permissions": [],
+      "execution_allowed": false
+    },
+    {
+      "tool_id": "career.current_package_dry_compile",
+      "service_class": "App\\Console\\Commands\\CareerTenBlockCurrentPackageCompile",
+      "execution_kind": "deterministic_internal_service",
+      "agent_tool_invocation": false,
+      "model_invocation": false,
+      "external_egress": false,
+      "write_permissions": [],
+      "execution_allowed": false
+    }
+  ],
+  "missions": [
+    {
+      "mission_id": "weekly_opportunity",
+      "mission_version": "3.0.0",
+      "admission_role": "seo.orchestrator",
+      "required_capabilities": ["seo.search_measurement_review"],
+      "eligible_roles": ["seo.expert.search_analytics_measurement", "seo.expert.technical_search_authority", "seo.expert.content_entity_quality", "seo.expert.public_content_stability", "seo.expert.commercial_funnel_cro", "seo.expert.competitor_research"],
+      "deterministic_tools": ["seo.contract_validation", "seo.policy_admission", "seo.evidence_context_verification"],
+      "required_evidence": ["search_measurement"],
+      "reviewer_requirement": "independent_review_before_execution_authority",
+      "max_modes": 3,
+      "allowed_page_families": ["tests", "articles_topics", "career", "personality", "trust_method_help", "other_public"],
+      "allowed_locales": ["en", "zh-CN"],
+      "authority_ceiling": "recommendation_only",
+      "stop_conditions": ["policy_deny_or_hold", "binding_invalid_or_drifted", "required_evidence_missing", "routing_scope_exceeded", "mode_unavailable", "unresolved_conflict", "write_or_external_egress_requested"],
+      "execution_allowed": false,
+      "allow_delegation": false,
+      "route_rule": {
+        "base_roles": ["seo.expert.search_analytics_measurement"],
+        "conditional_roles": [
+          {"role_id": "seo.expert.technical_search_authority", "evidence_types": ["runtime_health", "authority_parity", "release_separation"]},
+          {"role_id": "seo.expert.content_entity_quality", "evidence_types": ["content_claim", "entity", "duplicate", "lifecycle"]},
+          {"role_id": "seo.expert.public_content_stability", "evidence_types": ["stability", "cache_projection"]},
+          {"role_id": "seo.expert.commercial_funnel_cro", "evidence_types": ["funnel_aggregate"]},
+          {"role_id": "seo.expert.competitor_research", "evidence_types": ["gateway_competitor_public", "search_measurement"]}
+        ],
+        "all_team": false
+      }
+    },
+    {
+      "mission_id": "monthly_portfolio",
+      "mission_version": "3.0.0",
+      "admission_role": "seo.orchestrator",
+      "required_capabilities": ["seo.search_measurement_review", "seo.content_claim_review", "seo.decision_authority"],
+      "eligible_roles": ["seo.expert.search_analytics_measurement", "seo.expert.content_entity_quality", "seo.expert.commercial_funnel_cro", "seo.expert.technical_search_authority", "seo.expert.public_content_stability", "seo.expert.competitor_research"],
+      "deterministic_tools": ["seo.contract_validation", "seo.policy_admission", "seo.evidence_context_verification"],
+      "required_evidence": ["search_measurement", "content_claim", "funnel_aggregate"],
+      "reviewer_requirement": "independent_review_before_execution_authority",
+      "max_modes": 4,
+      "allowed_page_families": ["tests", "articles_topics", "career", "personality", "trust_method_help", "other_public"],
+      "allowed_locales": ["en", "zh-CN"],
+      "authority_ceiling": "recommendation_only",
+      "stop_conditions": ["policy_deny_or_hold", "binding_invalid_or_drifted", "required_evidence_missing", "routing_scope_exceeded", "mode_unavailable", "unresolved_conflict", "write_or_external_egress_requested"],
+      "execution_allowed": false,
+      "allow_delegation": false,
+      "route_rule": {
+        "base_roles": ["seo.expert.search_analytics_measurement", "seo.expert.content_entity_quality", "seo.expert.commercial_funnel_cro"],
+        "conditional_roles": [
+          {"role_id": "seo.expert.technical_search_authority", "evidence_types": ["runtime_health", "authority_parity", "release_separation"]},
+          {"role_id": "seo.expert.public_content_stability", "evidence_types": ["stability", "cache_projection"]},
+          {"role_id": "seo.expert.competitor_research", "evidence_types": ["gateway_competitor_public", "search_measurement"]}
+        ],
+        "all_team": false
+      }
+    },
+    {
+      "mission_id": "breakthrough_sprint",
+      "mission_version": "3.0.0",
+      "admission_role": "seo.orchestrator",
+      "required_capabilities": ["seo.content_claim_review", "seo.search_measurement_review", "seo.decision_authority"],
+      "eligible_roles": ["seo.expert.content_entity_quality", "seo.expert.search_analytics_measurement", "seo.expert.commercial_funnel_cro", "seo.expert.technical_search_authority", "seo.expert.public_content_stability", "seo.expert.competitor_research"],
+      "deterministic_tools": ["seo.contract_validation", "seo.policy_admission", "seo.evidence_context_verification"],
+      "required_evidence": ["content_claim", "search_measurement", "funnel_aggregate"],
+      "reviewer_requirement": "independent_review_before_execution_authority",
+      "max_modes": 5,
+      "allowed_page_families": ["tests", "articles_topics", "career", "personality", "trust_method_help", "other_public"],
+      "allowed_locales": ["en", "zh-CN"],
+      "authority_ceiling": "recommendation_only",
+      "stop_conditions": ["policy_deny_or_hold", "binding_invalid_or_drifted", "required_evidence_missing", "routing_scope_exceeded", "mode_unavailable", "unresolved_conflict", "write_or_external_egress_requested"],
+      "execution_allowed": false,
+      "allow_delegation": false,
+      "route_rule": {
+        "base_roles": ["seo.expert.content_entity_quality", "seo.expert.search_analytics_measurement", "seo.expert.commercial_funnel_cro"],
+        "conditional_roles": [
+          {"role_id": "seo.expert.technical_search_authority", "evidence_types": ["runtime_health", "authority_parity", "release_separation"]},
+          {"role_id": "seo.expert.public_content_stability", "evidence_types": ["stability", "cache_projection"]},
+          {"role_id": "seo.expert.competitor_research", "evidence_types": ["gateway_competitor_public", "search_measurement"]}
+        ],
+        "all_team": false
+      }
+    },
+    {
+      "mission_id": "global_portfolio",
+      "mission_version": "3.0.0",
+      "admission_role": "seo.orchestrator",
+      "required_capabilities": ["seo.runtime_health_review", "seo.search_measurement_review", "seo.content_claim_review", "seo.material_lifecycle_review", "seo.decision_authority", "seo.release_separation_policy"],
+      "eligible_roles": ["seo.expert.technical_search_authority", "seo.expert.search_analytics_measurement", "seo.expert.content_entity_quality", "seo.expert.competitor_research", "seo.expert.public_content_stability", "seo.expert.commercial_funnel_cro"],
+      "deterministic_tools": ["seo.contract_validation", "seo.policy_admission", "seo.evidence_context_verification"],
+      "required_evidence": ["runtime_health", "search_measurement", "content_claim", "gateway_competitor_public", "stability", "funnel_aggregate"],
+      "reviewer_requirement": "independent_review_before_execution_authority",
+      "max_modes": 6,
+      "allowed_page_families": ["tests", "articles_topics", "career", "personality", "trust_method_help", "other_public"],
+      "allowed_locales": ["en", "zh-CN"],
+      "authority_ceiling": "recommendation_only",
+      "stop_conditions": ["policy_deny_or_hold", "binding_invalid_or_drifted", "required_evidence_missing", "routing_scope_exceeded", "mode_unavailable", "unresolved_conflict", "write_or_external_egress_requested"],
+      "execution_allowed": false,
+      "allow_delegation": false,
+      "route_rule": {
+        "base_roles": ["seo.expert.technical_search_authority", "seo.expert.search_analytics_measurement", "seo.expert.content_entity_quality", "seo.expert.competitor_research", "seo.expert.public_content_stability", "seo.expert.commercial_funnel_cro"],
+        "conditional_roles": [],
+        "all_team": true
+      }
+    },
+    {
+      "mission_id": "bounded_review",
+      "mission_version": "3.0.0",
+      "admission_role": "selector_role",
+      "required_capabilities": ["seo.content_claim_review"],
+      "eligible_roles": ["seo.expert.technical_search_authority", "seo.expert.search_analytics_measurement", "seo.expert.content_entity_quality", "seo.expert.competitor_research", "seo.expert.public_content_stability", "seo.expert.commercial_funnel_cro"],
+      "deterministic_tools": ["seo.contract_validation", "seo.policy_admission", "seo.evidence_context_verification"],
+      "required_evidence": ["selector_required_evidence"],
+      "reviewer_requirement": "selected_role_review_only",
+      "max_modes": 1,
+      "allowed_page_families": ["tests", "articles_topics", "career", "personality", "trust_method_help", "other_public"],
+      "allowed_locales": ["en", "zh-CN"],
+      "authority_ceiling": "review_verdict",
+      "stop_conditions": ["policy_deny_or_hold", "binding_invalid_or_drifted", "unknown_review_domain", "required_evidence_missing", "routing_scope_exceeded", "mode_unavailable", "write_or_external_egress_requested"],
+      "execution_allowed": false,
+      "allow_delegation": false,
+      "route_rule": {"base_roles": [], "conditional_roles": [], "all_team": false},
+      "selector": {
+        "field": "review_domain",
+        "variants": [
+          {"value": "technical", "required_capabilities": ["seo.runtime_health_review", "seo.release_separation_policy"], "eligible_roles": ["seo.expert.technical_search_authority"], "deterministic_tools": ["seo.evidence_context_verification"], "required_evidence": ["runtime_health"], "reviewer_requirement": "selected_role_review_only"},
+          {"value": "analytics", "required_capabilities": ["seo.search_measurement_review"], "eligible_roles": ["seo.expert.search_analytics_measurement"], "deterministic_tools": ["seo.evidence_context_verification"], "required_evidence": ["search_measurement"], "reviewer_requirement": "selected_role_review_only"},
+          {"value": "content", "required_capabilities": ["seo.content_claim_review", "seo.material_lifecycle_review"], "eligible_roles": ["seo.expert.content_entity_quality"], "deterministic_tools": ["seo.evidence_context_verification"], "required_evidence": ["content_claim"], "reviewer_requirement": "selected_role_review_only"},
+          {"value": "competitor", "required_capabilities": ["seo.content_claim_review"], "eligible_roles": ["seo.expert.competitor_research"], "deterministic_tools": ["seo.evidence_context_verification"], "required_evidence": ["gateway_competitor_public", "search_measurement"], "reviewer_requirement": "selected_role_review_only"},
+          {"value": "stability", "required_capabilities": ["seo.runtime_health_review", "seo.material_lifecycle_review", "seo.rollback_guard"], "eligible_roles": ["seo.expert.public_content_stability"], "deterministic_tools": ["seo.evidence_context_verification"], "required_evidence": ["stability"], "reviewer_requirement": "selected_role_review_only"},
+          {"value": "cro", "required_capabilities": ["seo.decision_authority"], "eligible_roles": ["seo.expert.commercial_funnel_cro"], "deterministic_tools": ["seo.evidence_context_verification"], "required_evidence": ["funnel_aggregate"], "reviewer_requirement": "selected_role_review_only"}
+        ]
+      }
+    },
+    {
+      "mission_id": "independent_registry_review",
+      "mission_version": "3.0.0",
+      "admission_role": "seo.independent_reviewer",
+      "required_capabilities": ["seo.content_claim_review", "seo.decision_authority", "seo.material_lifecycle_review", "seo.release_separation_policy"],
+      "eligible_roles": ["seo.independent_reviewer"],
+      "deterministic_tools": ["seo.contract_validation", "seo.policy_admission", "seo.evidence_context_verification"],
+      "required_evidence": ["content_claim"],
+      "reviewer_requirement": "self_independent_review",
+      "max_modes": 1,
+      "allowed_page_families": ["tests", "articles_topics", "career", "personality", "trust_method_help", "other_public"],
+      "allowed_locales": ["en", "zh-CN"],
+      "authority_ceiling": "review_verdict",
+      "stop_conditions": ["policy_deny_or_hold", "binding_invalid_or_drifted", "required_evidence_missing", "mode_unavailable", "unresolved_conflict", "write_or_external_egress_requested"],
+      "execution_allowed": false,
+      "allow_delegation": false,
+      "route_rule": {"base_roles": ["seo.independent_reviewer"], "conditional_roles": [], "all_team": false}
+    },
+    {
+      "mission_id": "career_candidate_generation",
+      "mission_version": "3.0.0",
+      "admission_role": "career.content_agent",
+      "required_capabilities": ["career.content_candidate", "seo.content_claim_review", "seo.release_separation_policy"],
+      "eligible_roles": ["career.content_agent", "seo.expert.content_entity_quality", "seo.independent_reviewer"],
+      "deterministic_tools": ["seo.contract_validation", "seo.policy_admission", "seo.evidence_context_verification", "career.current_package_dry_compile"],
+      "required_evidence": ["career_candidate", "content_claim", "career_manifest_validation"],
+      "reviewer_requirement": "independent_reviewer_mandatory_after_content_claim_entity_audit",
+      "max_modes": 3,
+      "allowed_page_families": ["career"],
+      "allowed_locales": ["en", "zh-CN"],
+      "authority_ceiling": "candidate_only",
+      "stop_conditions": ["policy_deny_or_hold", "binding_invalid_or_drifted", "required_evidence_missing", "career_runtime_unavailable", "warn_blocked_or_hold", "authority_drift", "reviewer_missing_or_reordered", "write_current_requested", "publisher_cms_cache_or_discoverability_requested"],
+      "execution_allowed": false,
+      "allow_delegation": false,
+      "route_rule": {"base_roles": ["career.content_agent", "seo.expert.content_entity_quality", "seo.independent_reviewer"], "conditional_roles": [], "all_team": false},
+      "deterministic_compile": {
+        "operation": "career_ten_block_current_package_dry_compile",
+        "write_current": false,
+        "consumes_previous_output_hash": true,
+        "gates": ["claim", "locale", "seo", "duplicate", "material"]
+      }
+    }
+  ],
+  "prohibited_capabilities": ["seo.cms_writer", "seo.search_submission", "seo.url_truth_writer", "career.current_merger", "career.page_assembly_import", "personality.approval_queue_write", "personality.big_five_draft", "personality.big_five_promote"],
+  "negative_guarantees": {
+    "model_invocation": false,
+    "agent_tool_invocation": false,
+    "external_egress": false,
+    "agent_write_permissions": 0,
+    "peer_delegation": false,
+    "shared_agent_memory": false,
+    "execution_allowed": false
+  },
+  "binding_hash": "c77c3e45b184347711dd46cd87b1a76ecca311e06a8be452df70de903877df88"
+}

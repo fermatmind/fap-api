@@ -24,7 +24,7 @@ final class SeoPlatform11DCloseoutTest extends TestCase
         $this->assertSame('seo.council_closeout.v2', $receipt['contract_version']);
         $this->assertSame($sha, $receipt['source_sha']);
         $this->assertSame(1, $receipt['unique_orchestrator_probe_total']);
-        $this->assertSame('2.0.0', $receipt['binding_version']);
+        $this->assertSame('3.0.0', $receipt['binding_version']);
         $this->assertSame('READY', $receipt['dependency_status']);
         $this->assertSame(0, $receipt['contract_schema_hash_drift_count']);
         $this->assertSame(5, $receipt['five_entrypoint_probe_total']);

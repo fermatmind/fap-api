@@ -17,7 +17,7 @@ final class SeoPlatform11DContractsRoutingTest extends TestCase
     {
         $registry = app(CouncilContractRegistry::class);
         $manifest = $registry->manifest();
-        $artifact = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-council-contract-manifest.v2.json')), true, 512, JSON_THROW_ON_ERROR);
+        $artifact = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-council-contract-manifest.v3.json')), true, 512, JSON_THROW_ON_ERROR);
 
         $this->assertCount(11, $manifest['contracts']);
         $this->assertTrue($registry->verify($artifact));
@@ -37,7 +37,7 @@ final class SeoPlatform11DContractsRoutingTest extends TestCase
         $this->assertCount(9, $binding['role_bindings']);
         $this->assertCount(7, $binding['missions']);
         $this->assertSame([], array_values(array_intersect($bound, $binding['prohibited_capabilities'])));
-        $this->assertSame('2.0.0', $registry->reference()['version']);
+        $this->assertSame('3.0.0', $registry->reference()['version']);
         $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $registry->reference()['hash']);
         foreach (['seo.cms_writer', 'seo.search_submission', 'seo.url_truth_writer', 'career.current_merger', 'career.page_assembly_import'] as $writeCapability) {
             $this->assertNotContains($writeCapability, $bound);
@@ -47,7 +47,7 @@ final class SeoPlatform11DContractsRoutingTest extends TestCase
     public function test_golden_corpus_closes_with_exact_routing_and_unknown_metrics_are_not_observed(): void
     {
         $metrics = app(GoldenRoutingEvaluator::class)->evaluate();
-        $corpus = json_decode((string) file_get_contents(resource_path('seo-agent/council/routing/seo.council_golden_routing.v1.json')), true, 512, JSON_THROW_ON_ERROR);
+        $corpus = json_decode((string) file_get_contents(resource_path('seo-agent/council/routing/seo.council_golden_routing.v2.json')), true, 512, JSON_THROW_ON_ERROR);
         $fixtures = $corpus['fixtures'];
         $families = array_values(array_unique(array_column($fixtures, 'family')));
         $locales = array_values(array_unique(array_column($fixtures, 'locale')));
@@ -56,9 +56,9 @@ final class SeoPlatform11DContractsRoutingTest extends TestCase
         sort($locales);
         sort($evidenceTypes);
 
-        $this->assertSame(['numerator' => 32, 'denominator' => 32, 'measurement_state' => 'observed'], $metrics['routing_precision']);
+        $this->assertSame(['numerator' => 36, 'denominator' => 36, 'measurement_state' => 'observed'], $metrics['routing_precision']);
         $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $metrics['corpus_hash']);
-        $this->assertSame(['numerator' => 32, 'denominator' => 32, 'measurement_state' => 'observed'], $metrics['routing_recall']);
+        $this->assertSame(['numerator' => 36, 'denominator' => 36, 'measurement_state' => 'observed'], $metrics['routing_recall']);
         $this->assertSame(0, $metrics['missed_required_mode_rate']['numerator']);
         $this->assertSame(0, $metrics['unnecessary_mode_rate']['numerator']);
         $this->assertSame(1, $metrics['all_team_invocation_count']['numerator']);

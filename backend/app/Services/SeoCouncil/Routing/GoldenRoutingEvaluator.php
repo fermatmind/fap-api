@@ -22,7 +22,7 @@ final class GoldenRoutingEvaluator
     /** @return array<string, mixed> */
     public function evaluate(): array
     {
-        $corpus = json_decode((string) file_get_contents(resource_path('seo-agent/council/routing/seo.council_golden_routing.v1.json')), true, 512, JSON_THROW_ON_ERROR);
+        $corpus = json_decode((string) file_get_contents(resource_path('seo-agent/council/routing/seo.council_golden_routing.v2.json')), true, 512, JSON_THROW_ON_ERROR);
         if (($corpus['binding_ref'] ?? null) !== $this->binding->reference()) {
             throw new RuntimeException('GOLDEN_BINDING_DRIFT');
         }

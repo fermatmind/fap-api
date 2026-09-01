@@ -51,7 +51,11 @@ final class DeterministicMissionRouter
         } else {
             $roles = array_values((array) $mission['route_rule']['base_roles']);
             foreach ((array) $mission['route_rule']['conditional_roles'] as $conditional) {
-                if (array_intersect($evidenceTypes, (array) $conditional['evidence_types']) !== []) {
+                $required = (array) $conditional['evidence_types'];
+                $eligible = ($conditional['role_id'] ?? null) === 'seo.expert.competitor_research'
+                    ? array_diff($required, $evidenceTypes) === []
+                    : array_intersect($evidenceTypes, $required) !== [];
+                if ($eligible) {
                     $roles[] = (string) $conditional['role_id'];
                 }
             }

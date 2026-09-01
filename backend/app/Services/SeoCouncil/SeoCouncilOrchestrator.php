@@ -7,6 +7,9 @@ namespace App\Services\SeoCouncil;
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use App\Services\SeoAgentGovernance\SeoRoleCapabilityRegistry;
 use App\Services\SeoAgentPolicyGateway\PolicyGatewayRegistry;
+use App\Services\SeoCouncil\Competitive\CompetitiveModeRegistry;
+use App\Services\SeoCouncil\Competitive\CompetitiveRunner;
+use App\Services\SeoCouncil\Competitive\CompetitiveRuntimeGate;
 use App\Services\SeoCouncil\Contracts\CouncilContractValidator;
 use App\Services\SeoCouncil\Contracts\MissionRequestData;
 use App\Services\SeoCouncil\Governance\CouncilDependencySnapshotBuilder;
@@ -49,6 +52,9 @@ final class SeoCouncilOrchestrator
         private readonly RoleCapabilityBindingRegistry $binding,
         private readonly CouncilDependencySnapshotBuilder $dependencies,
         private readonly RuntimeCapabilitySnapshotBuilder $runtime,
+        private readonly CompetitiveModeRegistry $competitiveMode,
+        private readonly CompetitiveRunner $competitiveRunner,
+        private readonly CompetitiveRuntimeGate $competitiveGate,
         private readonly MeasurementModeRegistry $measurementMode,
         private readonly MeasurementRunner $measurementRunner,
         private readonly MeasurementRuntimeGate $measurementGate,
@@ -81,12 +87,14 @@ final class SeoCouncilOrchestrator
         $runtime = $this->runtime->snapshot();
         $technicalRuntime = $this->technicalMode->capabilitySnapshot();
         $measurementRuntime = $this->measurementMode->capabilitySnapshot();
+        $competitiveRuntime = $this->competitiveMode->capabilitySnapshot();
         $baseContext = [
             'registry' => $registry,
             'binding' => $binding,
             'runtime' => $runtime,
             'technical_runtime' => $technicalRuntime,
             'measurement_runtime' => $measurementRuntime,
+            'competitive_runtime' => $competitiveRuntime,
         ];
 
         $admission = $this->admissionGateway->admission(
@@ -130,10 +138,17 @@ final class SeoCouncilOrchestrator
             && $request->payload['review_domain'] === 'technical';
         $measurementMission = $request->payload['mission_type'] === 'bounded_review'
             && in_array($request->payload['review_domain'], ['analytics', 'cro'], true);
-        $status = $measurementMission ? 'MEASUREMENT_HOLD' : 'SOURCE_CAPABILITY_UNAVAILABLE';
+        $competitiveMission = $request->payload['mission_type'] === 'bounded_review'
+            && $request->payload['review_domain'] === 'competitor';
+        $status = match (true) {
+            $measurementMission => 'MEASUREMENT_HOLD',
+            $competitiveMission => 'COMPETITIVE_HOLD',
+            default => 'SOURCE_CAPABILITY_UNAVAILABLE',
+        };
         $stopReason = match (true) {
             $technicalMission => 'technical_diagnosis_production_disabled',
             $measurementMission => 'measurement_mode_offline_eval_only',
+            $competitiveMission => 'competitive_mode_offline_eval_only',
             default => '11g_to_11j_modes_unavailable',
         };
         if (in_array($route['status'], ['ROUTING_SCOPE_HOLD', 'MISSION_SCOPE_HOLD', 'REQUESTED_ROLE_EXPANSION_HOLD'], true)) {
@@ -194,6 +209,28 @@ final class SeoCouncilOrchestrator
                     $stopReason = ($output['status'] ?? null) === 'PASS'
                         ? 'measurement_completed'
                         : (string) ($output['summary_code'] ?? 'measurement_hold');
+                }
+            }
+        } elseif ($competitiveMission && $this->competitiveGate->allows($competitiveRuntime)) {
+            $handoff = $routePlan[0] ?? null;
+            if (! is_array($handoff) || ($handoff['kind'] ?? null) !== 'role_handoff') {
+                $status = 'COMPETITIVE_HOLD';
+                $stopReason = 'competitive_handoff_missing';
+            } else {
+                $output = $this->competitiveRunner->run($request, $handoff, $releaseSha, 'production_runtime');
+                if (! $this->acceptModeOutput(
+                    $output,
+                    (string) ($handoff['handoff_hash'] ?? ''),
+                    (string) ($handoff['target_role_id'] ?? ''),
+                )) {
+                    $status = 'COMPETITIVE_HOLD';
+                    $stopReason = 'competitive_mode_output_contract_hold';
+                } else {
+                    $routePlan[] = ['kind' => 'mode_output', ...$output];
+                    $status = ($output['status'] ?? null) === 'PASS' ? 'COMPETITIVE_READY' : 'COMPETITIVE_HOLD';
+                    $stopReason = ($output['status'] ?? null) === 'PASS'
+                        ? 'competitive_evidence_ready'
+                        : (string) ($output['summary_code'] ?? 'competitive_hold');
                 }
             }
         }
@@ -307,10 +344,10 @@ final class SeoCouncilOrchestrator
             'DEPENDENCY_HOLD' => 'dependency_snapshot',
             'POLICY_HOLD' => '11c_admission',
             'ROUTING_SCOPE_HOLD', 'MISSION_SCOPE_HOLD', 'REQUESTED_ROLE_EXPANSION_HOLD' => 'role_capability_binding',
-            'EVIDENCE_HOLD', 'MEASUREMENT_HOLD' => 'evidence_context_verification',
+            'EVIDENCE_HOLD', 'MEASUREMENT_HOLD', 'COMPETITIVE_HOLD' => 'evidence_context_verification',
             'unresolved_conflict' => 'evidence_context_verification',
             'STALE_RESUME_HOLD' => 'validate_privacy_scan',
-            'TECHNICAL_DIAGNOSIS_READY', 'MEASUREMENT_READY' => 'run_receipt',
+            'TECHNICAL_DIAGNOSIS_READY', 'MEASUREMENT_READY', 'COMPETITIVE_READY' => 'run_receipt',
             default => 'technical_mode_selection',
         };
         $stopped = false;
@@ -349,7 +386,7 @@ final class SeoCouncilOrchestrator
             return in_array($decision, ['DENY', 'HOLD'], true) ? $decision : 'HOLD';
         }
 
-        if (in_array($status, ['TECHNICAL_DIAGNOSIS_READY', 'MEASUREMENT_READY'], true)) {
+        if (in_array($status, ['TECHNICAL_DIAGNOSIS_READY', 'MEASUREMENT_READY', 'COMPETITIVE_READY'], true)) {
             return 'PASS';
         }
 

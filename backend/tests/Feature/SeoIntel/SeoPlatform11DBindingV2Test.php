@@ -19,11 +19,13 @@ final class SeoPlatform11DBindingV2Test extends TestCase
         $v1Path = resource_path('seo-agent/council/bindings/seo.role_capability_binding.v1.json');
         $v1 = json_decode((string) file_get_contents($v1Path), true, 512, JSON_THROW_ON_ERROR);
         $binding = app(RoleCapabilityBindingRegistry::class)->binding();
-        $schema = json_decode((string) file_get_contents(resource_path('seo-agent/council/schemas/seo.role_capability_binding.v2.schema.json')), true, 512, JSON_THROW_ON_ERROR);
+        $v2Path = resource_path('seo-agent/council/bindings/seo.role_capability_binding.v2.json');
+        $schema = json_decode((string) file_get_contents(resource_path('seo-agent/council/schemas/seo.role_capability_binding.v3.schema.json')), true, 512, JSON_THROW_ON_ERROR);
 
         $this->assertSame(RoleCapabilityBindingRegistry::V1_FILE_SHA256, hash_file('sha256', $v1Path));
+        $this->assertSame(RoleCapabilityBindingRegistry::V2_FILE_SHA256, hash_file('sha256', $v2Path));
         $this->assertSame('64afc23a9e61ccdee1e0551a5ac323a2fc2bbcc78abbcbd5799c84eaf979b9b0', $hasher->hash($v1));
-        $this->assertSame('2.0.0', $binding['binding_version']);
+        $this->assertSame('3.0.0', $binding['binding_version']);
         $this->assertSame($binding['binding_hash'], $hasher->hashWithout($binding, 'binding_hash'));
         $this->assertCount(7, $binding['missions']);
         foreach ($binding['deterministic_tool_registry'] as $tool) {

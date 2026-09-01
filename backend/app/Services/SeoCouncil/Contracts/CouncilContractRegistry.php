@@ -11,9 +11,9 @@ use RuntimeException;
 
 final class CouncilContractRegistry
 {
-    public const MANIFEST_ID = 'seo.council_contract_manifest.v2';
+    public const MANIFEST_ID = 'seo.council_contract_manifest.v3';
 
-    public const MANIFEST_VERSION = '2.0.0';
+    public const MANIFEST_VERSION = '3.0.0';
 
     private const SCHEMAS = [
         'seo.mission_request.v1.schema.json',
@@ -26,7 +26,7 @@ final class CouncilContractRegistry
         'seo.operator_time_entry.v1.schema.json',
         'seo.decision_history_projection.v1.schema.json',
         'seo.runtime_capability_snapshot.v1.schema.json',
-        'seo.role_capability_binding.v2.schema.json',
+        'seo.role_capability_binding.v3.schema.json',
     ];
 
     public function __construct(
@@ -61,7 +61,7 @@ final class CouncilContractRegistry
             ],
             'role_capability_binding' => [
                 ...$this->binding->reference(),
-                'path' => 'backend/resources/seo-agent/council/bindings/seo.role_capability_binding.v2.json',
+                'path' => 'backend/resources/seo-agent/council/bindings/seo.role_capability_binding.v3.json',
             ],
             'negative_guarantees' => [
                 'second_action_manifest' => false,

@@ -68,7 +68,7 @@ final class SeoCouncilCloseoutCommand extends Command
             }
             $closeoutEnvironment = (string) $this->option('closeout-environment');
 
-            $artifact = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-council-contract-manifest.v2.json')), true, 512, JSON_THROW_ON_ERROR);
+            $artifact = json_decode((string) file_get_contents(base_path('docs/seo/generated/seo-council-contract-manifest.v3.json')), true, 512, JSON_THROW_ON_ERROR);
             $bindingReport = $binding->validationReport();
             $bindingRef = $binding->reference();
             $registry = $roles->registry();
@@ -208,8 +208,8 @@ final class SeoCouncilCloseoutCommand extends Command
                 && $dependency['status'] === 'READY'
                 && $receipt['unique_orchestrator_probe_total'] === 1
                 && $entrypointPassed === 5
-                && $routingMetrics['routing_precision'] === ['numerator' => 32, 'denominator' => 32, 'measurement_state' => 'observed']
-                && $routingMetrics['routing_recall'] === ['numerator' => 32, 'denominator' => 32, 'measurement_state' => 'observed']
+                && $routingMetrics['routing_precision'] === ['numerator' => 36, 'denominator' => 36, 'measurement_state' => 'observed']
+                && $routingMetrics['routing_recall'] === ['numerator' => 36, 'denominator' => 36, 'measurement_state' => 'observed']
                 && $routingMetrics['missed_required_mode_rate']['numerator'] === 0
                 && $routingMetrics['unnecessary_mode_rate']['numerator'] === 0
                 && $routingMetrics['unauthorized_all_team_invocation_count']['numerator'] === 0

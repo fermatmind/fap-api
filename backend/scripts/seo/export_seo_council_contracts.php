@@ -12,7 +12,7 @@ $app = require dirname(__DIR__, 2).'/bootstrap/app.php';
 $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
 $artifacts = [
-    dirname(__DIR__, 2).'/docs/seo/generated/seo-council-contract-manifest.v2.json' => $app->make(CouncilContractRegistry::class)->manifest(),
+    dirname(__DIR__, 2).'/docs/seo/generated/seo-council-contract-manifest.v3.json' => $app->make(CouncilContractRegistry::class)->manifest(),
     dirname(__DIR__, 2).'/docs/seo/generated/seo-technical-diagnosis-contract-manifest.v2.json' => $app->make(TechnicalDiagnosisContractRegistry::class)->manifest(),
     dirname(__DIR__, 2).'/docs/seo/generated/seo-measurement-contract-manifest.v3.json' => $app->make(MeasurementContractRegistry::class)->manifest(),
 ];

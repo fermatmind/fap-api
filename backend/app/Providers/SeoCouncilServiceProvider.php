@@ -5,6 +5,13 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Services\SeoAgentEvidence\Sources\SeoPlatformDependencyEvidenceAdapter;
+use App\Services\SeoCouncil\Competitive\CompetitiveActivityLedger;
+use App\Services\SeoCouncil\Competitive\CompetitiveCoordinator;
+use App\Services\SeoCouncil\Competitive\CompetitiveEvidenceBundleLoader;
+use App\Services\SeoCouncil\Competitive\CompetitiveRunner;
+use App\Services\SeoCouncil\Competitive\CompetitiveRuntimeGate;
+use App\Services\SeoCouncil\Competitive\DenyOnlyCompetitiveRuntimeGate;
+use App\Services\SeoCouncil\Competitive\ReadOnlyCompetitiveEvidenceBundleLoader;
 use App\Services\SeoCouncil\Measurement\DenyOnlyMeasurementRuntimeGate;
 use App\Services\SeoCouncil\Measurement\MeasurementActivityLedger;
 use App\Services\SeoCouncil\Measurement\MeasurementCoordinator;
@@ -30,6 +37,10 @@ final class SeoCouncilServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(CouncilAdmissionGateway::class, PolicyGatewayCouncilAdmissionGateway::class);
+        $this->app->bind(CompetitiveRunner::class, CompetitiveCoordinator::class);
+        $this->app->bind(CompetitiveRuntimeGate::class, DenyOnlyCompetitiveRuntimeGate::class);
+        $this->app->bind(CompetitiveEvidenceBundleLoader::class, ReadOnlyCompetitiveEvidenceBundleLoader::class);
+        $this->app->singleton(CompetitiveActivityLedger::class);
         $this->app->bind(MeasurementRunner::class, MeasurementCoordinator::class);
         $this->app->bind(MeasurementRuntimeGate::class, DenyOnlyMeasurementRuntimeGate::class);
         $this->app->singleton(ReadOnlyMeasurementEvidenceBundleLoader::class);

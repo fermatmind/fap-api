@@ -13,9 +13,11 @@ use RuntimeException;
 
 final class RoleCapabilityBindingRegistry
 {
-    public const BINDING_VERSION = '2.0.0';
+    public const BINDING_VERSION = '3.0.0';
 
     public const V1_FILE_SHA256 = 'adb88f7c02f1a44069d36d22ee5e6d0413071960aa2957e872d7547465252932';
+
+    public const V2_FILE_SHA256 = '655d25e227e33f08dc8e8589a414a6a755572450bb9f7da740f7b5d47df40a73';
 
     private const MISSIONS = [
         'weekly_opportunity', 'monthly_portfolio', 'breakthrough_sprint', 'global_portfolio',
@@ -85,7 +87,7 @@ final class RoleCapabilityBindingRegistry
                 'missions', 'prohibited_capabilities', 'negative_guarantees', 'binding_hash',
             ];
             $schemaFailed += $this->missingCount($binding, $requiredTop);
-            $schemaFailed += (int) (($binding['schema_version'] ?? null) !== 'seo.role_capability_binding.v2');
+            $schemaFailed += (int) (($binding['schema_version'] ?? null) !== 'seo.role_capability_binding.v3');
             $schemaFailed += (int) (($binding['binding_version'] ?? null) !== self::BINDING_VERSION);
             $schemaFailed += (int) (($binding['runtime_state'] ?? null) !== 'dormant_not_authorized');
             $schemaFailed += (int) (($binding['requested_role_policy'] ?? null) !== 'non_authoritative_selected_role_hint_only');
@@ -93,8 +95,9 @@ final class RoleCapabilityBindingRegistry
             $schemaFailed += (int) (($binding['registry_ref'] ?? null) !== [
                 'id' => $registry['registry_id'], 'version' => $registry['registry_version'], 'hash' => $registry['registry_hash'],
             ]);
-            $schemaFailed += (int) (($binding['supersedes']['file_sha256'] ?? null) !== self::V1_FILE_SHA256);
+            $schemaFailed += (int) (($binding['supersedes']['file_sha256'] ?? null) !== self::V2_FILE_SHA256);
             $schemaFailed += (int) (! hash_equals(self::V1_FILE_SHA256, hash_file('sha256', resource_path('seo-agent/council/bindings/seo.role_capability_binding.v1.json')) ?: ''));
+            $schemaFailed += (int) (! hash_equals(self::V2_FILE_SHA256, hash_file('sha256', resource_path('seo-agent/council/bindings/seo.role_capability_binding.v2.json')) ?: ''));
             $schemaFailed += $this->duplicateCount(array_column((array) ($binding['deterministic_tool_registry'] ?? []), 'tool_id'));
             $schemaFailed += $this->duplicateCount(array_column((array) ($binding['missions'] ?? []), 'mission_id'));
 
@@ -286,7 +289,7 @@ final class RoleCapabilityBindingRegistry
     private function load(): array
     {
         try {
-            $binding = json_decode((string) file_get_contents(resource_path('seo-agent/council/bindings/seo.role_capability_binding.v2.json')), true, 512, JSON_THROW_ON_ERROR);
+            $binding = json_decode((string) file_get_contents(resource_path('seo-agent/council/bindings/seo.role_capability_binding.v3.json')), true, 512, JSON_THROW_ON_ERROR);
         } catch (JsonException $exception) {
             throw new RuntimeException('SEO Council Binding JSON is invalid.', previous: $exception);
         }

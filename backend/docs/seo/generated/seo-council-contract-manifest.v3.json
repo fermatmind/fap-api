@@ -1,0 +1,93 @@
+{
+    "manifest_id": "seo.council_contract_manifest.v3",
+    "manifest_version": "3.0.0",
+    "contracts": [
+        {
+            "id": "seo.mission_request.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/schemas/seo.mission_request.v1.schema.json",
+            "hash": "ad59dd77b6bbc3930c878a13db70eca86b18eb41687b517cf7886227edfe45ba"
+        },
+        {
+            "id": "seo.council_run.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/schemas/seo.council_run.v1.schema.json",
+            "hash": "5df4b544b1a5ce6dc5ab2c1fe70ae707d2b25ba01c1c40137070c2df7e66652a"
+        },
+        {
+            "id": "seo.run_step.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/schemas/seo.run_step.v1.schema.json",
+            "hash": "c65856109ff1c4b69f9ca03973f0fa5556fa6a2cb577f9057ab748f6ddb2f02f"
+        },
+        {
+            "id": "seo.handoff_envelope.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/schemas/seo.handoff_envelope.v1.schema.json",
+            "hash": "9c6029a834b41fdb0c59cd998c0d24cdc6c075d334a217ccdb5591bf9fe58b17"
+        },
+        {
+            "id": "seo.mode_output.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/schemas/seo.mode_output.v1.schema.json",
+            "hash": "ef3b969eb590186adc9d64c48c040b646a41b95517d78137935b9080b00e593a"
+        },
+        {
+            "id": "seo.run_receipt.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/schemas/seo.run_receipt.v1.schema.json",
+            "hash": "d85369390a944ba1d62d026a8b88df98a9a788f71e961bcad2d3fac15bab39cf"
+        },
+        {
+            "id": "seo.conflict_record.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/schemas/seo.conflict_record.v1.schema.json",
+            "hash": "47a4584d03ced0b3e6c34c95f39529a2568910f970d6c33ba15e22e4c6f9b458"
+        },
+        {
+            "id": "seo.operator_time_entry.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/schemas/seo.operator_time_entry.v1.schema.json",
+            "hash": "49027d7d3db082ad4a8e0bb1301c9913e2ceb155aaa145b61ef9898a725ce52d"
+        },
+        {
+            "id": "seo.decision_history_projection.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/schemas/seo.decision_history_projection.v1.schema.json",
+            "hash": "08c6d6ac53e8ca4a18d2924b3b128dde9a599273f73c1f7e3741b899c8274004"
+        },
+        {
+            "id": "seo.runtime_capability_snapshot.v1",
+            "version": "1.0.0",
+            "path": "backend/resources/seo-agent/council/schemas/seo.runtime_capability_snapshot.v1.schema.json",
+            "hash": "d6b6aa7983693a5fa98b246f2f1da2111b5f1f57f040ff31afef257442c96944"
+        },
+        {
+            "id": "seo.role_capability_binding.v3",
+            "version": "3.0.0",
+            "path": "backend/resources/seo-agent/council/schemas/seo.role_capability_binding.v3.schema.json",
+            "hash": "c0c3443d1dba9082235574cdf70a84bbc72e928b59f6fbdd085bffab670a277d"
+        }
+    ],
+    "reused_action_manifest": {
+        "id": "seo.action_scoped_manifest.v1",
+        "version": "1.0.0",
+        "path": "backend/resources/seo-agent/policy-gateway/schemas/seo.action_scoped_manifest.v1.schema.json",
+        "hash": "17f090a40623479d2eea2c4ab9734079cdd43d9cf4fe7b175fee09018440a537"
+    },
+    "role_capability_binding": {
+        "id": "fermatmind.seo.role_capability_binding",
+        "version": "3.0.0",
+        "hash": "c77c3e45b184347711dd46cd87b1a76ecca311e06a8be452df70de903877df88",
+        "path": "backend/resources/seo-agent/council/bindings/seo.role_capability_binding.v3.json"
+    },
+    "negative_guarantees": {
+        "second_action_manifest": false,
+        "external_trace_export": false,
+        "shared_agent_memory": false,
+        "model_calls": 0,
+        "tool_calls": 0,
+        "external_calls": 0
+    },
+    "manifest_hash": "6375a81af91fdc8f7ff7c527b935c69d07f9f35d901798b448b232dbf32d9c71"
+}
