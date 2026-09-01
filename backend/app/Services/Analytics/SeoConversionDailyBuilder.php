@@ -26,6 +26,25 @@ final class SeoConversionDailyBuilder
         'result_ready' => 'result_ready_count',
         'view_result' => 'view_result_count',
         'return_public_content' => 'return_public_content_count',
+        'test_start' => 'start_test_count',
+        'test_submit' => 'complete_test_count',
+        'test_complete' => 'complete_test_count',
+        'result_view' => 'view_result_count',
+    ];
+
+    /** @var array<string, string> */
+    private const AUTHORITATIVE_ATTEMPT_EVENT_METRIC_MAP = [
+        'test_start' => 'start_test_count',
+        'test_submit' => 'complete_test_count',
+        'test_complete' => 'complete_test_count',
+        'result_view' => 'view_result_count',
+    ];
+
+    /** @var array<string, string> */
+    private const BROWSER_MIRROR_EVENT_METRIC_MAP = [
+        'start_test' => 'start_test_count',
+        'complete_test' => 'complete_test_count',
+        'view_result' => 'view_result_count',
     ];
 
     /** @var list<string> */
@@ -84,10 +103,43 @@ final class SeoConversionDailyBuilder
         $rows = [];
         $skippedRows = 0;
 
-        foreach ($this->loadSeoEventsInRange($fromAt, $toAt, $normalizedOrgIds) as $event) {
+        $events = $this->loadSeoEventsInRange($fromAt, $toAt, $normalizedOrgIds);
+        $authoritativeCoverage = [];
+
+        foreach ($events as $event) {
+            $eventCode = strtolower(trim((string) ($event->event_code ?? '')));
+            $metric = self::AUTHORITATIVE_ATTEMPT_EVENT_METRIC_MAP[$eventCode] ?? null;
+            if ($metric === null) {
+                continue;
+            }
+
+            $day = $this->normalizeDay($event->occurred_at ?? null);
+            if ($day === null) {
+                $skippedRows++;
+
+                continue;
+            }
+
+            $meta = $this->decodeJson($event->meta_json ?? null);
+            if ($this->trafficExclusionPolicy->isExcludedSeoConversionEvent($event, $meta)) {
+                continue;
+            }
+
+            $dimensions = $this->resolveAttemptBoundDimensions($meta, $event);
+            if ($dimensions === null) {
+                $skippedRows++;
+
+                continue;
+            }
+
+            $this->incrementMetric($rows, $day, $dimensions, $metric);
+            $authoritativeCoverage[$this->metricCoverageKey($day, $dimensions, $metric)] = true;
+        }
+
+        foreach ($events as $event) {
             $eventCode = strtolower(trim((string) ($event->event_code ?? '')));
             $metric = self::EVENT_METRIC_MAP[$eventCode] ?? null;
-            if ($metric === null) {
+            if ($metric === null || array_key_exists($eventCode, self::AUTHORITATIVE_ATTEMPT_EVENT_METRIC_MAP)) {
                 continue;
             }
 
@@ -115,6 +167,10 @@ final class SeoConversionDailyBuilder
             if ($eventCode === 'return_public_content' && ! $this->isPublicReturnUrl((string) $dimensions['url'])) {
                 $skippedRows++;
 
+                continue;
+            }
+            if (array_key_exists($eventCode, self::BROWSER_MIRROR_EVENT_METRIC_MAP)
+                && isset($authoritativeCoverage[$this->metricCoverageKey($day, $dimensions, $metric)])) {
                 continue;
             }
 
@@ -215,7 +271,11 @@ final class SeoConversionDailyBuilder
         }
 
         $readbackReceipt = $dryRun
-            ? ['status' => 'not_executed', 'reason' => 'dry_run']
+            ? [
+                'status' => 'not_executed',
+                'reason' => 'dry_run',
+                'expected_metrics' => $this->metricTotals($rows),
+            ]
             : $this->readbackReceipt($payload, $rows);
 
         $result = $payload + [
@@ -324,12 +384,7 @@ final class SeoConversionDailyBuilder
             $query->selectRaw(sprintf('COALESCE(SUM(%s), 0) AS %s', $metric, $metric));
         }
         $persisted = $query->first();
-        $expected = array_fill_keys(self::METRICS, 0);
-        foreach ($rows as $row) {
-            foreach (self::METRICS as $metric) {
-                $expected[$metric] += max(0, (int) ($row[$metric] ?? 0));
-            }
-        }
+        $expected = $this->metricTotals($rows);
         $actual = [];
         foreach (self::METRICS as $metric) {
             $actual[$metric] = max(0, (int) ($persisted->{$metric} ?? 0));
@@ -344,6 +399,22 @@ final class SeoConversionDailyBuilder
             'persisted_metrics' => $actual,
             'raw_session_or_business_identifiers_exposed' => false,
         ];
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $rows
+     * @return array<string,int>
+     */
+    private function metricTotals(array $rows): array
+    {
+        $totals = array_fill_keys(self::METRICS, 0);
+        foreach ($rows as $row) {
+            foreach (self::METRICS as $metric) {
+                $totals[$metric] += max(0, (int) ($row[$metric] ?? 0));
+            }
+        }
+
+        return $totals;
     }
 
     /**
@@ -420,13 +491,39 @@ final class SeoConversionDailyBuilder
     private function resolveResultReadyDimensions(array $meta, object $event): ?array
     {
         $articleId = $this->positiveInteger($meta['source_article_id'] ?? null);
-        $article = $articleId === null
-            ? $this->articleAttributionFromAttempt($event)
-            : $this->articleAttribution->byPublicArticleId($articleId);
+        if ($articleId === null) {
+            return $this->resolveAttemptBoundDimensions($meta, $event);
+        }
+
+        $article = $this->articleAttribution->byPublicArticleId($articleId);
         if ($article === null) {
             return null;
         }
 
+        return $this->articleDimensions($article, $meta, $event);
+    }
+
+    /**
+     * @param  array<string,mixed>  $meta
+     * @return array<string,mixed>|null
+     */
+    private function resolveAttemptBoundDimensions(array $meta, object $event): ?array
+    {
+        $article = $this->articleAttributionFromAttempt($event);
+        if ($article === null) {
+            return null;
+        }
+
+        return $this->articleDimensions($article, $meta, $event);
+    }
+
+    /**
+     * @param  array{article_id:int,slug:string,locale:string,canonical_path:string}  $article
+     * @param  array<string,mixed>  $meta
+     * @return array<string,mixed>
+     */
+    private function articleDimensions(array $article, array $meta, object $event): array
+    {
         $canonicalPath = $article['canonical_path'];
         $sourceArticle = $article['slug'];
 
@@ -449,6 +546,18 @@ final class SeoConversionDailyBuilder
             'referrer_host' => '',
             'referrer_host_hash' => '',
         ];
+    }
+
+    /** @param array<string,mixed> $dimensions */
+    private function metricCoverageKey(string $day, array $dimensions, string $metric): string
+    {
+        return implode('|', [
+            $day,
+            (string) ($dimensions['org_id'] ?? 0),
+            $metric,
+            (string) ($dimensions['scale_id'] ?? ''),
+            (string) ($dimensions['form_id'] ?? ''),
+        ]);
     }
 
     /**

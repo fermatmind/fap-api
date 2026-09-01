@@ -212,6 +212,123 @@ final class SeoConversionDailyBuilderTest extends TestCase
         $this->assertSame(1, (int) $row->result_ready_count);
     }
 
+    public function test_refresh_uses_backend_attempt_events_as_the_real_cro_stage_source(): void
+    {
+        $day = CarbonImmutable::parse('2026-08-31 10:00:00');
+        $attemptId = (string) Str::uuid();
+        DB::table('articles')->insert([
+            'id' => 53,
+            'org_id' => 0,
+            'slug' => 'big-five-growth-guide',
+            'locale' => 'zh-CN',
+            'title' => 'Big Five growth guide',
+            'content_md' => '# Big Five growth guide',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => false,
+            'published_at' => $day->subDay(),
+            'created_at' => $day->subDay(),
+            'updated_at' => $day->subDay(),
+        ]);
+        $this->insertAttempt($attemptId, 0, 'zh-CN', $day, $day->addMinutes(5));
+        DB::table('attempts')->where('id', $attemptId)->update([
+            'scale_code' => 'BIG5_OCEAN',
+            'answers_summary_json' => json_encode([
+                'meta' => [
+                    'source_page_type' => 'article_detail',
+                    'content_id' => '53',
+                    'source_slug' => 'big-five-growth-guide',
+                    'landing_path' => '/zh/articles/big-five-growth-guide',
+                    'form_code' => 'big5_90',
+                ],
+            ], JSON_THROW_ON_ERROR),
+        ]);
+
+        foreach (['test_start', 'test_submit', 'result_ready', 'result_view'] as $offset => $eventCode) {
+            $this->insertAttemptBoundEvent(
+                $attemptId,
+                $eventCode,
+                $day->addMinutes($offset),
+                'BIG5_OCEAN',
+                'big5_90',
+            );
+        }
+        $publicPayload = [
+            'url' => '/zh/articles/big-five-growth-guide',
+            'lang' => 'zh-CN',
+            'page_type' => 'article',
+            'source_url' => '/zh/articles/big-five-growth-guide',
+            'source_article' => 'big-five-growth-guide',
+            'scale_id' => 'BIG5_OCEAN',
+            'form_id' => 'big5_90',
+            'session_id' => 'seo_sess_1234567890abcdef',
+        ];
+        foreach (['landing_pv', 'article_to_test_click', 'return_public_content'] as $offset => $eventCode) {
+            $this->insertSeoEvent(0, $eventCode, $day->addMinutes(10 + $offset), $publicPayload);
+        }
+
+        $result = app(SeoConversionDailyBuilder::class)->refresh($day, $day, [0], false);
+
+        $this->assertSame(1, (int) ($result['upserted_rows'] ?? 0));
+        $row = DB::table('analytics_seo_conversion_daily')->sole();
+        $this->assertSame('/zh/articles/big-five-growth-guide', (string) $row->url);
+        $this->assertSame(1, (int) $row->start_test_count);
+        $this->assertSame(1, (int) $row->complete_test_count);
+        $this->assertSame(1, (int) $row->result_ready_count);
+        $this->assertSame(1, (int) $row->view_result_count);
+        $this->assertSame(1, (int) $row->landing_pv_count);
+        $this->assertSame(1, (int) $row->article_to_test_click_count);
+        $this->assertSame(1, (int) $row->return_public_content_count);
+        $this->assertSame('pass', data_get($result, 'readback_receipt.status'));
+        $this->assertNotContains(0, array_values((array) data_get($result, 'readback_receipt.expected_metrics')));
+    }
+
+    public function test_refresh_does_not_double_count_browser_stage_mirrors_when_backend_authority_exists(): void
+    {
+        $day = CarbonImmutable::parse('2026-08-31 11:00:00');
+        $attemptId = (string) Str::uuid();
+        DB::table('articles')->insert([
+            'id' => 54,
+            'org_id' => 0,
+            'slug' => 'personality-types',
+            'locale' => 'en',
+            'title' => 'Personality types',
+            'content_md' => '# Personality types',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => false,
+            'published_at' => $day->subDay(),
+            'created_at' => $day->subDay(),
+            'updated_at' => $day->subDay(),
+        ]);
+        $this->insertAttempt($attemptId, 0, 'en', $day, null);
+        DB::table('attempts')->where('id', $attemptId)->update([
+            'answers_summary_json' => json_encode([
+                'meta' => [
+                    'source_page_type' => 'article_detail',
+                    'content_id' => '54',
+                    'source_slug' => 'personality-types',
+                    'landing_path' => '/en/articles/personality-types',
+                    'form_code' => 'mbti_144',
+                ],
+            ], JSON_THROW_ON_ERROR),
+        ]);
+        $this->insertAttemptBoundEvent($attemptId, 'test_start', $day, 'MBTI', 'mbti_144');
+        $this->insertSeoEvent(0, 'start_test', $day->addMinute(), [
+            'url' => '/en/articles/personality-types',
+            'lang' => 'en',
+            'page_type' => 'article',
+            'source_article' => 'personality-types',
+            'scale_id' => 'MBTI',
+            'form_id' => 'mbti_144',
+            'session_id' => 'seo_sess_1234567890abcdef',
+        ]);
+
+        app(SeoConversionDailyBuilder::class)->refresh($day, $day, [0], false);
+
+        $this->assertSame(1, (int) DB::table('analytics_seo_conversion_daily')->sum('start_test_count'));
+    }
+
     public function test_refresh_excludes_smoke_and_codex_probe_seo_conversion_events(): void
     {
         $day = CarbonImmutable::parse('2026-06-09 11:30:00');
@@ -313,6 +430,34 @@ final class SeoConversionDailyBuilderTest extends TestCase
 
         $this->assertSame(0, DB::table('analytics_seo_conversion_daily')->count());
         $this->assertSame(0, DB::table('analytics_seo_conversion_refresh_runs')->count());
+    }
+
+    public function test_dry_run_json_exposes_only_sanitized_metric_totals(): void
+    {
+        $day = CarbonImmutable::parse('2026-06-09 13:30:00');
+        $this->insertSeoEvent(0, 'landing_pv', $day, [
+            'url' => '/en/articles/personality-types',
+            'lang' => 'en',
+            'page_type' => 'article',
+            'source_article' => 'personality-types',
+            'session_id' => 'seo_sess_1234567890abcdef',
+        ]);
+
+        $exitCode = Artisan::call('analytics:refresh-seo-conversion-daily', [
+            '--from' => $day->toDateString(),
+            '--to' => $day->toDateString(),
+            '--org' => ['0'],
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+        $receipt = json_decode(trim(Artisan::output()), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertSame(1, $receipt['expected_metrics']['landing_pv_count'] ?? null);
+        $this->assertSame(0, $receipt['expected_metrics']['complete_test_count'] ?? null);
+        $this->assertArrayNotHasKey('rows', $receipt);
+        $this->assertArrayNotHasKey('org_scope', $receipt);
+        $this->assertStringNotContainsString('seo_sess_', json_encode($receipt, JSON_THROW_ON_ERROR));
     }
 
     public function test_scheduled_zero_event_refresh_records_a_sanitized_success_receipt(): void
@@ -439,6 +584,47 @@ final class SeoConversionDailyBuilderTest extends TestCase
 
         if (Schema::hasColumn('events', 'scale_code_v2')) {
             $row['scale_code_v2'] = 'MBTI';
+        }
+        if (Schema::hasColumn('events', 'scale_uid')) {
+            $row['scale_uid'] = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
+        }
+
+        DB::table('events')->insert($row);
+    }
+
+    private function insertAttemptBoundEvent(
+        string $attemptId,
+        string $eventCode,
+        CarbonImmutable $occurredAt,
+        string $scaleCode,
+        string $formCode,
+    ): void {
+        $row = [
+            'id' => (string) Str::uuid(),
+            'event_code' => $eventCode,
+            'event_name' => $eventCode,
+            'org_id' => 0,
+            'user_id' => null,
+            'anon_id' => 'anon_real_cro_source',
+            'session_id' => null,
+            'request_id' => null,
+            'attempt_id' => $attemptId,
+            'meta_json' => json_encode([
+                'scale_code' => $scaleCode,
+                'form_code' => $formCode,
+                'locale' => 'zh-CN',
+            ], JSON_THROW_ON_ERROR),
+            'occurred_at' => $occurredAt,
+            'share_id' => null,
+            'created_at' => $occurredAt,
+            'updated_at' => $occurredAt,
+            'scale_code' => $scaleCode,
+            'channel' => 'web',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+        ];
+        if (Schema::hasColumn('events', 'scale_code_v2')) {
+            $row['scale_code_v2'] = $scaleCode;
         }
         if (Schema::hasColumn('events', 'scale_uid')) {
             $row['scale_uid'] = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';

@@ -63,6 +63,7 @@ final class RefreshSeoConversionDailyCommand extends Command
                 'org_scope_count' => count($orgIds),
                 'attempted_rows' => (int) ($result['attempted_rows'] ?? 0),
                 'skipped_rows' => (int) ($result['skipped_rows'] ?? 0),
+                'expected_metrics' => (array) data_get($result, 'readback_receipt.expected_metrics', []),
                 'raw_session_or_business_identifiers_exposed' => false,
             ] : $result['refresh_receipt'];
             $this->line(json_encode($receipt, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));

@@ -716,6 +716,7 @@ jobs:
             and .org_scope_mode == "bounded"
             and .org_scope_count == 1
             and .attempted_rows > 0
+            and ((.expected_metrics | to_entries) | all(.value > 0))
             and .raw_session_or_business_identifiers_exposed == false
           ' "$cro_dry_run_json" >/dev/null || fail CRO_NO_REAL_AGGREGATE_SOURCE
 
