@@ -71,6 +71,32 @@ final class CompetitiveEvidenceBoundaryGuard
             && $this->sealed($handoff, 'handoff_hash');
     }
 
+    /** @param array<string, mixed> $output */
+    public function output(array $output): bool
+    {
+        $finding = (array) (($output['findings'] ?? [])[0] ?? []);
+        $handoff = (array) ($output['11i_handoff'] ?? []);
+
+        return $this->exactSchemaKeys($output, 'seo.competitive_evidence_output.v1')
+            && ($output['version'] ?? null) === 'seo.competitive_evidence_output.v1'
+            && in_array($output['status'] ?? null, ['READY', 'HOLD'], true)
+            && count((array) ($output['findings'] ?? [])) === 1
+            && $this->finding($finding)
+            && $this->handoff($handoff)
+            && ($output['model_calls'] ?? null) === 0
+            && ($output['tool_calls'] ?? null) === 0
+            && ($output['external_calls'] ?? null) === 0
+            && ($output['cms_writes'] ?? null) === 0
+            && ($output['url_truth_writes'] ?? null) === 0
+            && ($output['search_writes'] ?? null) === 0
+            && ($output['business_writes'] ?? null) === 0
+            && ($output['execution_allowed'] ?? null) === false
+            && ($output['outreach_actions'] ?? null) === 0
+            && ($output['digital_pr_scope'] ?? null) === 'deferred_p2_manual'
+            && $this->safePayload($output)
+            && $this->sealed($output, 'output_hash');
+    }
+
     /** @param array<string, mixed> $value */
     private function safePayload(array $value): bool
     {
@@ -88,7 +114,7 @@ final class CompetitiveEvidenceBoundaryGuard
     private function privacyPayload(array $value): array
     {
         foreach ($value as $key => $child) {
-            if (in_array($key, ['private_data_present', 'injection_scan_result', 'captured_at', 'expires_at'], true)
+            if (in_array($key, ['private_data_present', 'injection_scan_result', 'captured_at', 'expires_at', 'module_order_bp'], true)
                 || str_ends_with((string) $key, '_hash')) {
                 unset($value[$key]);
 
