@@ -24,6 +24,41 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
 
     private const MANIFEST_SHA = '6fa5fb22df81062fed26ebf7743cd24c0e42f67c28d5b5ef2d61f7ec7fd3e13c';
 
+    public function test_seeded_current_state_matches_public_article_projection(): void
+    {
+        $this->seedBatch('ALL');
+
+        foreach ($this->targets('ALL') as $target) {
+            $response = $this->getJson(
+                '/api/v0.5/articles/'.$target['slug'].'?locale='.$target['locale'].'&org_id=0'
+            )->assertOk();
+            $faq = array_map(static fn (array $item): array => [
+                'question' => (string) ($item['question'] ?? ''),
+                'answer' => (string) ($item['answer'] ?? ''),
+            ], (array) $response->json('answer_surface_v1.faq_blocks'));
+            $this->assertSame(
+                data_get($target, 'package.current_to_proposed.answer_surface_v1.current.faq_items'),
+                $faq,
+                'FAQ projection mismatch for article '.(string) $target['article_id']
+            );
+            $this->assertSame(
+                data_get($target, 'package.current_to_proposed.primary_cta.current'),
+                $response->json('answer_surface_v1.next_step_blocks'),
+                'CTA projection mismatch for article '.(string) $target['article_id']
+            );
+            $this->assertSame(
+                data_get($target, 'package.current_to_proposed.seo_title.current'),
+                $response->json('article.seo_meta.seo_title'),
+                'SEO title projection mismatch for article '.(string) $target['article_id']
+            );
+            $this->assertSame(
+                data_get($target, 'package.current_to_proposed.seo_description.current'),
+                $response->json('article.seo_meta.seo_description'),
+                'SEO description projection mismatch for article '.(string) $target['article_id']
+            );
+        }
+    }
+
     public function test_snapshot_then_locked_preflight_emit_complete_zero_write_contract_for_all_fifteen_targets(): void
     {
         $this->seedBatch('ALL');
@@ -67,7 +102,7 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
         $this->assertSame(['changed' => 9, 'unchanged' => 6], $payload['field_counts']['effective']['body']);
         $this->assertSame(['changed' => 2, 'unchanged' => 13], $payload['field_counts']['effective']['SEO title']);
         $this->assertSame(['changed' => 4, 'unchanged' => 11], $payload['field_counts']['effective']['SEO description']);
-        $this->assertSame(['changed' => 5, 'unchanged' => 10], $payload['field_counts']['effective']['FAQ']);
+        $this->assertSame(['changed' => 10, 'unchanged' => 5], $payload['field_counts']['effective']['FAQ']);
         $this->assertSame(['changed' => 10, 'unchanged' => 5], $payload['field_counts']['effective']['CTA']);
         $this->assertSame(['changed' => 10, 'unchanged' => 5], $payload['field_counts']['effective']['reading minutes']);
         $this->assertSame(['changed' => 4, 'unchanged' => 11], $payload['field_counts']['effective']['related test']);
@@ -105,12 +140,24 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
         $this->seedBatch('ALL');
         $title = ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', 3)->firstOrFail();
         $title->forceFill(['title' => 'forged KEEP title'])->saveQuietly();
-        foreach ([[58, 'answer_surface_v1.faq_items'], [40, 'cta_slots']] as [$articleId, $path]) {
-            $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->where('article_id', $articleId)->firstOrFail();
-            $schema = $seo->schema_json;
-            data_set($schema, 'editorial_package_v1.'.$path, [['forged' => true]]);
-            $seo->forceFill(['schema_json' => $schema])->saveQuietly();
-        }
+        $faqSeo = ArticleSeoMeta::query()->withoutGlobalScopes()->where('article_id', 58)->firstOrFail();
+        $faqSchema = $faqSeo->schema_json;
+        data_set($faqSchema, 'editorial_package_v1.answer_surface_policy', 'editor_supplied');
+        data_set($faqSchema, 'editorial_package_v1.answer_surface_visibility', 'visible');
+        data_set($faqSchema, 'editorial_package_v1.answer_surface_v1.faq_items', [[
+            'question' => 'forged question',
+            'answer' => 'forged answer',
+        ]]);
+        $faqSeo->forceFill(['schema_json' => $faqSchema])->saveQuietly();
+
+        $ctaSeo = ArticleSeoMeta::query()->withoutGlobalScopes()->where('article_id', 40)->firstOrFail();
+        $ctaSchema = $ctaSeo->schema_json;
+        data_set($ctaSchema, 'editorial_package_v1.cta_slots', [[
+            'label' => 'forged CTA',
+            'href' => '/zh/tests/mbti-personality-test-16-personality-types',
+            'kind' => 'start_test',
+        ]]);
+        $ctaSeo->forceFill(['schema_json' => $ctaSchema])->saveQuietly();
 
         $this->assertSame(1, Artisan::call('articles:article15-exact-package', $this->snapshotOptions()));
         $payload = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
@@ -126,8 +173,8 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
     {
         $this->seedBatch('ALL');
         $target = $this->targets('ALL')[0];
-        $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->where('article_id', 58)->firstOrFail();
-        $seo->forceFill([
+        $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', 58)->firstOrFail();
+        $revision->forceFill([
             'seo_description' => data_get($target, 'package.current_to_proposed.seo_description.proposed'),
         ])->saveQuietly();
 
@@ -135,6 +182,25 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
         $payload = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
         $this->assertSame(['changed' => 3, 'unchanged' => 12], $payload['field_counts']['effective']['SEO description']);
         $this->assertContains('current_value_drift:seo_description:58', $payload['public_authority_errors']);
+    }
+
+    public function test_snapshot_uses_published_revision_seo_instead_of_stale_article_seo_meta(): void
+    {
+        $this->seedBatch('ALL');
+        $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->where('article_id', 3)->firstOrFail();
+        $seo->forceFill([
+            'seo_title' => 'stale database SEO title',
+            'seo_description' => 'stale database SEO description',
+        ])->saveQuietly();
+
+        $exitCode = Artisan::call('articles:article15-exact-package', $this->snapshotOptions());
+        $output = Artisan::output();
+        $this->assertSame(0, $exitCode, $output);
+        $payload = json_decode($output, true, 512, JSON_THROW_ON_ERROR);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame(0, $payload['public_authority_drift']);
+        $this->assertSame(['changed' => 2, 'unchanged' => 13], $payload['field_counts']['effective']['SEO title']);
+        $this->assertSame(['changed' => 4, 'unchanged' => 11], $payload['field_counts']['effective']['SEO description']);
     }
 
     public function test_locked_preflight_detects_change_between_its_two_observations(): void
@@ -454,6 +520,11 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
         foreach ($this->targets($batch) as $target) {
             $package = $target['package'];
             $current = (array) $package['current_to_proposed'];
+            $coverImageVariants = ['preserved_media' => ['src' => '/images/preserved.webp']];
+            $editorialMetadata = $this->currentPublicEditorialMetadata($target);
+            if ($editorialMetadata !== []) {
+                $coverImageVariants['editorial_package_v1'] = $editorialMetadata;
+            }
             $article = Article::query()->withoutGlobalScopes()->forceCreate([
                 'id' => $target['article_id'],
                 'org_id' => 0,
@@ -466,15 +537,7 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
                 'excerpt' => data_get($current, 'intro.current'),
                 'content_md' => $this->revisionRawBody($target),
                 'content_html' => '<p>baseline body</p>',
-                'cover_image_variants' => [
-                    'preserved_media' => ['src' => '/images/preserved.webp'],
-                    'editorial_package_v1' => [
-                        'answer_surface_policy' => 'editor_supplied',
-                        'answer_surface_visibility' => 'visible',
-                        'answer_surface_v1' => ['faq_items' => data_get($current, 'faq.current', [])],
-                        'cta_slots' => data_get($current, 'primary_cta.current', []),
-                    ],
-                ],
+                'cover_image_variants' => $coverImageVariants,
                 'reading_minutes' => data_get($current, 'reading_minutes.current'),
                 'related_test_slug' => data_get($current, 'related_test_slug.current'),
                 'status' => 'published',
@@ -519,6 +582,75 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
                 'is_indexable' => true,
             ]);
         }
+    }
+
+    /** @param array<string,mixed> $target @return array<string,mixed> */
+    private function currentPublicEditorialMetadata(array $target): array
+    {
+        $package = (array) $target['package'];
+        $locale = (string) $target['locale'];
+        $faq = (array) data_get($package, 'current_to_proposed.answer_surface_v1.current.faq_items', []);
+        $ctas = (array) data_get($package, 'current_to_proposed.primary_cta.current', []);
+        $metadata = [];
+
+        if (! $this->isDefaultFaqProjection($faq, $locale)) {
+            $faqMetadata = $faq;
+            if ((int) $target['article_id'] === 51) {
+                $faqMetadata[0] = [
+                    'q' => $faq[0]['question'],
+                    'a' => $faq[0]['answer'],
+                ];
+                $faqMetadata[] = [
+                    'question' => 'hidden fixture question',
+                    'answer' => 'hidden fixture answer',
+                    'visibility' => 'hidden',
+                ];
+            }
+            $metadata = [
+                'answer_surface_policy' => 'editor_supplied',
+                'answer_surface_visibility' => 'visible',
+                'answer_surface_v1' => ['faq_items' => $faqMetadata],
+            ];
+        }
+        if (! $this->isDefaultCtaProjection($ctas, $locale)) {
+            $metadata['cta_slots'] = array_map(
+                static fn (array $cta, int $index): array => array_filter([
+                    'key' => (int) $target['article_id'] === 58 ? null : (string) ($cta['key'] ?? ''),
+                    $index % 2 === 0 ? 'title' : 'label' => (string) ($cta['title'] ?? ''),
+                    $index % 2 === 0 ? 'url' : 'href' => (string) ($cta['href'] ?? ''),
+                    'kind' => (string) ($cta['kind'] ?? ''),
+                ], static fn (mixed $value): bool => $value !== null),
+                $ctas,
+                array_keys($ctas),
+            );
+            $metadata['cta_slots'][] = [
+                'label' => 'invalid private fixture',
+                'href' => '/en/result/private-attempt',
+            ];
+        }
+
+        return $metadata;
+    }
+
+    /** @param list<array<string,mixed>> $faq */
+    private function isDefaultFaqProjection(array $faq, string $locale): bool
+    {
+        $questions = array_column($faq, 'question');
+
+        return $questions === ($locale === 'zh-CN'
+            ? ['什么时候适合阅读这篇文章？', '这篇文章会替代正式判断吗？']
+            : ['When should I use this article?', 'Does this replace formal judgment?']);
+    }
+
+    /** @param list<array<string,mixed>> $ctas */
+    private function isDefaultCtaProjection(array $ctas, string $locale): bool
+    {
+        $segment = $locale === 'zh-CN' ? 'zh' : 'en';
+        $hrefs = array_column($ctas, 'href', 'key');
+
+        return array_column($ctas, 'key') === ['articles_index', 'topic_hub', 'start_test']
+            && ($hrefs['articles_index'] ?? null) === '/'.$segment.'/articles'
+            && ($hrefs['topic_hub'] ?? null) === '/'.$segment.'/topics';
     }
 
     /** @return list<array<string,mixed>> */

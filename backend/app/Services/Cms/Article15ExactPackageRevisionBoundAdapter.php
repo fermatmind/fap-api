@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace App\Services\Cms;
 
+use App\Http\Controllers\API\V0_5\Cms\ArticleController;
 use App\Models\Article;
 use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
+use Throwable;
 
 /** @review-surface article */
 final class Article15ExactPackageRevisionBoundAdapter
@@ -29,6 +32,7 @@ final class Article15ExactPackageRevisionBoundAdapter
     public function __construct(
         private readonly ArticleBodyHeadingGuard $headingGuard,
         private readonly ArticlePublishService $articlePublishService,
+        private readonly ArticleController $articleController,
     ) {}
 
     /** @return array<string,mixed> */
@@ -470,13 +474,21 @@ final class Article15ExactPackageRevisionBoundAdapter
                 continue;
             }
 
-            $liveFields[(int) $target['article_id']] = $this->livePublicFields($article);
-            if (app()->environment('testing') && config('article15_test.skip_synthetic_current_body_lock') === true) {
-                $liveFields[(int) $target['article_id']]['body'] = (string) data_get(
-                    $target,
-                    'public_projection_body_sha256',
-                    ''
-                );
+            $publicProjectionFailed = false;
+            try {
+                $liveFields[(int) $target['article_id']] = $this->livePublicFields($article);
+                if (app()->environment('testing') && config('article15_test.skip_synthetic_current_body_lock') === true) {
+                    $liveFields[(int) $target['article_id']]['body'] = (string) data_get(
+                        $target,
+                        'public_projection_body_sha256',
+                        ''
+                    );
+                }
+            } catch (Throwable) {
+                $publicProjectionFailed = true;
+                $publicAuthorityDrift++;
+                $publicAuthorityErrors[] = 'public_projection_unavailable:'.(string) $article->id;
+                $liveFields[(int) $target['article_id']] = [];
             }
 
             $seo = $article->seoMeta;
@@ -506,11 +518,17 @@ final class Article15ExactPackageRevisionBoundAdapter
                 )) {
                     $publicBodyDrift++;
                 }
-                try {
-                    $this->assertOriginalPublicState($article, $target);
-                } catch (RuntimeException $exception) {
-                    $publicAuthorityDrift++;
-                    $publicAuthorityErrors[] = $exception->getMessage();
+                if (! $publicProjectionFailed) {
+                    try {
+                        $this->assertOriginalPublicState(
+                            $article,
+                            $target,
+                            $liveFields[(int) $target['article_id']]
+                        );
+                    } catch (RuntimeException $exception) {
+                        $publicAuthorityDrift++;
+                        $publicAuthorityErrors[] = $exception->getMessage();
+                    }
                 }
             }
 
@@ -918,7 +936,7 @@ final class Article15ExactPackageRevisionBoundAdapter
     }
 
     /** @param array<string,mixed> $target */
-    private function assertOriginalPublicState(Article $article, array $target): void
+    private function assertOriginalPublicState(Article $article, array $target, ?array $live = null): void
     {
         $package = (array) $target['package'];
         $identity = (array) ($package['identity_lock'] ?? []);
@@ -946,7 +964,7 @@ final class Article15ExactPackageRevisionBoundAdapter
             throw new RuntimeException('published_state_drift:'.(string) $article->id);
         }
 
-        $live = $this->livePublicFields($article);
+        $live ??= $this->livePublicFields($article);
         $skipSyntheticTestBodyLock = app()->environment('testing')
             && config('article15_test.skip_synthetic_current_body_lock') === true;
         foreach ($this->effectiveFieldDefinitions() as $definition) {
@@ -985,7 +1003,7 @@ final class Article15ExactPackageRevisionBoundAdapter
             'body' => ['live' => 'body', 'patches' => ['body_markdown'], 'error' => 'body_markdown'],
             'SEO title' => ['live' => 'seo_title', 'patches' => ['seo_title'], 'error' => 'seo_title'],
             'SEO description' => ['live' => 'seo_description', 'patches' => ['seo_description'], 'error' => 'seo_description'],
-            'FAQ' => ['live' => 'faq', 'patches' => ['faq'], 'error' => 'faq'],
+            'FAQ' => ['live' => 'faq', 'patches' => ['answer_surface_v1'], 'error' => 'faq'],
             'CTA' => ['live' => 'cta', 'patches' => ['primary_cta'], 'error' => 'primary_cta'],
             'reading minutes' => ['live' => 'reading_minutes', 'patches' => ['reading_minutes'], 'error' => 'reading_minutes'],
             'related test' => ['live' => 'related_test_slug', 'patches' => ['related_test_slug'], 'error' => 'related_test_slug'],
@@ -995,20 +1013,86 @@ final class Article15ExactPackageRevisionBoundAdapter
     /** @return array<string,mixed> */
     private function livePublicFields(Article $article): array
     {
-        $published = $article->publishedRevision;
-        $seo = $article->seoMeta;
-        $editorial = $this->publicEditorialMetadata($article);
+        $request = Request::create('/api/v0.5/articles/'.rawurlencode((string) $article->slug), 'GET', [
+            'locale' => (string) $article->locale,
+            'org_id' => (string) $article->org_id,
+        ]);
+        $response = $this->articleController->show($request, (string) $article->slug);
+        $payload = $response->getData(true);
+        if ($response->getStatusCode() !== 200 || ! is_array($payload) || ($payload['ok'] ?? null) !== true) {
+            throw new RuntimeException('public_projection_response_invalid:'.(string) $article->id);
+        }
+
+        $projected = data_get($payload, 'article');
+        $seo = data_get($projected, 'seo_meta');
+        $answerSurface = data_get($payload, 'answer_surface_v1');
+        if (! is_array($projected) || ! is_array($seo) || ! is_array($answerSurface)) {
+            throw new RuntimeException('public_projection_shape_invalid:'.(string) $article->id);
+        }
+        foreach ([
+            'id' => (int) $article->id,
+            'locale' => (string) $article->locale,
+            'slug' => (string) $article->slug,
+            'translation_group_id' => (string) $article->translation_group_id,
+            'published_revision_id' => (int) ($article->published_revision_id ?? 0),
+        ] as $field => $expected) {
+            if (($projected[$field] ?? null) !== $expected) {
+                throw new RuntimeException('public_projection_identity_mismatch:'.$field.':'.(string) $article->id);
+            }
+        }
+
+        $faqBlocks = $answerSurface['faq_blocks'] ?? null;
+        $nextStepBlocks = $answerSurface['next_step_blocks'] ?? null;
+        if (! is_array($faqBlocks) || ! is_array($nextStepBlocks)) {
+            throw new RuntimeException('public_projection_answer_surface_invalid:'.(string) $article->id);
+        }
+
+        $faq = [];
+        foreach ($faqBlocks as $item) {
+            if (! is_array($item) || ! is_string($item['question'] ?? null) || ! is_string($item['answer'] ?? null)) {
+                throw new RuntimeException('public_projection_faq_invalid:'.(string) $article->id);
+            }
+            $faq[] = [
+                'question' => $item['question'],
+                'answer' => $item['answer'],
+            ];
+        }
+
+        $ctas = [];
+        foreach ($nextStepBlocks as $item) {
+            if (! is_array($item)
+                || ! is_string($item['key'] ?? null)
+                || ! is_string($item['title'] ?? null)
+                || ! is_string($item['href'] ?? null)) {
+                throw new RuntimeException('public_projection_cta_invalid:'.(string) $article->id);
+            }
+            $ctas[] = [
+                'key' => $item['key'],
+                'title' => $item['title'],
+                'body' => is_string($item['body'] ?? null) ? $item['body'] : null,
+                'href' => $item['href'],
+                'kind' => is_string($item['kind'] ?? null) ? $item['kind'] : null,
+            ];
+        }
+
+        if (! is_string($projected['title'] ?? null)
+            || ! is_string($projected['content_md'] ?? null)
+            || ! is_string($seo['seo_title'] ?? null)
+            || ! is_string($seo['seo_description'] ?? null)) {
+            throw new RuntimeException('public_projection_fields_invalid:'.(string) $article->id);
+        }
 
         return [
-            'title_h1' => [(string) ($published?->title ?? ''), (string) ($published?->title ?? '')],
-            'intro' => (string) ($published?->excerpt ?? ''),
-            'body' => $this->publicProjectionBodySha((string) ($published?->content_md ?? '')),
-            'seo_title' => (string) ($seo?->seo_title ?? ''),
-            'seo_description' => (string) ($seo?->seo_description ?? ''),
-            'faq' => (array) data_get($editorial, 'answer_surface_v1.faq_items', []),
-            'cta' => (array) data_get($editorial, 'cta_slots', []),
-            'reading_minutes' => $article->reading_minutes !== null ? (int) $article->reading_minutes : null,
-            'related_test_slug' => $this->nullableString($article->related_test_slug),
+            'title_h1' => [$projected['title'], $projected['title']],
+            'intro' => (string) ($projected['excerpt'] ?? ''),
+            'body' => hash('sha256', $projected['content_md']),
+            'seo_title' => $seo['seo_title'],
+            'seo_description' => $seo['seo_description'],
+            'faq' => ['faq_items' => $faq],
+            'cta' => $ctas,
+            'reading_minutes' => is_int($projected['reading_minutes'] ?? null)
+                ? $projected['reading_minutes'] : null,
+            'related_test_slug' => $this->nullableString($projected['related_test_slug'] ?? null),
         ];
     }
 
