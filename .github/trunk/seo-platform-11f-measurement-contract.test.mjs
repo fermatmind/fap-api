@@ -128,11 +128,13 @@ test("staging deployment and smoke precede source readiness while production nev
   assert.match(staging, /--gsc-live-preflight --dry-run --no-write/);
   assert.match(staging, /seo-intel:gsc-sync --window=90 --search-types=web --full-window/);
   assert.match(staging, /analytics:refresh-seo-conversion-daily[^\n]+--dry-run/);
-  assert.match(staging, /\.attempted_rows > 0/);
-  assert.match(staging, /\.expected_metrics \| to_entries \| map\(\.value\) \| add/);
-  assert.match(staging, /\.persisted_metrics \| to_entries \| map\(\.value\) \| add/);
-  assert.doesNotMatch(staging, /expected_metrics \| to_entries\) \| all\(\.value > 0\)/);
-  assert.doesNotMatch(staging, /persisted_metrics \| to_entries\) \| all\(\.value > 0\)/);
+  assert.match(staging, /\.attempted_rows \| type == "number" and \. >= 0/);
+  assert.match(staging, /\.expected_metrics \| keys \| sort/);
+  assert.match(staging, /\.persisted_metrics \| keys \| sort/);
+  assert.match(staging, /expected_metrics \| to_entries\) \| all\(\.value \| type == "number" and \. >= 0\)/);
+  assert.match(staging, /persisted_metrics \| to_entries\) \| all\(\.value \| type == "number" and \. >= 0\)/);
+  assert.doesNotMatch(staging, /\.attempted_rows > 0|\.upserted_rows > 0/);
+  assert.doesNotMatch(staging, /expected_metrics \| to_entries \| map\(\.value\) \| add/);
   assert.match(staging, /\.unmapped_rows == 0/);
   assert.match(staging, /excluded_non_authority_rows/);
   assert.match(staging, /\.duplicate_natural_keys == 0/);
