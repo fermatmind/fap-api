@@ -7,7 +7,9 @@ namespace Tests\Feature\SeoIntel;
 use App\Services\SeoAgentEvidence\Bundle\SeoEvidenceBundleFactory;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveEvidenceIngestionService;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveGatewayReader;
+use App\Services\SeoAgentEvidence\Competitive\CompetitiveMeasurementReadiness;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveSourcePolicyRegistry;
+use App\Services\SeoAgentEvidence\Privacy\SeoPrivateDataScanner;
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use App\Services\SeoCouncil\Competitive\CompetitiveCloseoutBuilder;
 use App\Services\SeoCouncil\Competitive\CompetitiveEvidenceBundleLoader;
@@ -173,6 +175,19 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
         $this->assertNotSame('TERMS_POLICY_DRIFT', $result['hold_reason']);
         $this->assertSame(0, $result['dependency_ingestion']['external_reads']);
         $this->assertFalse($result['write_performed']);
+    }
+
+    public function test_measurement_mission_release_token_cannot_resemble_private_data(): void
+    {
+        $releaseSha = '4d92ffa1b5cf247f12441371647fade8043f5cc6';
+        $method = new \ReflectionMethod(app(CompetitiveMeasurementReadiness::class), 'releaseToken');
+        $token = $method->invoke(app(CompetitiveMeasurementReadiness::class), $releaseSha);
+
+        $this->assertMatchesRegularExpression('/^[a-p]{64}$/D', $token);
+        $this->assertSame(
+            'pass',
+            app(SeoPrivateDataScanner::class)->scan('competitive:'.$token.':search_measurement')['decision'],
+        );
     }
 
     /** @return array<string, mixed> */

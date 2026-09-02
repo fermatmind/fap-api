@@ -34,7 +34,7 @@ final class CompetitiveMeasurementReadiness
             'search_measurement' => 'seo.expert.search_analytics_measurement',
             'commercial_funnel_cro' => 'seo.expert.commercial_funnel_cro',
         ] as $modeId => $roleId) {
-            $missionId = 'competitive:'.$releaseSha.':'.$modeId;
+            $missionId = 'competitive:'.$this->releaseToken($releaseSha).':'.$modeId;
             $result = $this->loader->diagnoseForScope($missionId, $modeId, $pageFamily, 'en', $runtimeEnvironment);
             $diagnostic = $result->diagnostic();
             $mode = [
@@ -107,6 +107,11 @@ final class CompetitiveMeasurementReadiness
             'measurement_bundle_set_hash' => $this->hasher->hash($hashes),
             'bundles' => $bundles,
         ];
+    }
+
+    private function releaseToken(string $releaseSha): string
+    {
+        return strtr(hash('sha256', $releaseSha), '0123456789', 'ghijklmnop');
     }
 
     /** @param array<string, mixed> $mode */
