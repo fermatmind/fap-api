@@ -6,6 +6,7 @@ namespace Tests\Feature\SeoIntel;
 
 use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher;
 use App\Services\SeoAgentEvidence\External\ExternalContentGateway;
+use App\Services\SeoAgentEvidence\External\ExternalContentGatewayException;
 use App\Services\SeoAgentEvidence\External\ExternalContentTransport;
 use App\Services\SeoAgentEvidence\External\ExternalDnsResolver;
 use App\Services\SeoAgentEvidence\External\ExternalInjectionScanner;
@@ -167,7 +168,7 @@ final class SeoPlatform11BExternalContentGatewayTest extends TestCase
 
     public function test_gateway_releases_locks_when_transport_throws(): void
     {
-        $this->assertSame('EXTERNAL_GATEWAY_HELD', $this->gatewayFor('timeout')->fetch('public', 'https://example.com/facts')['safe_error_code']);
+        $this->assertSame('TRANSPORT_TIMEOUT', $this->gatewayFor('timeout')->fetch('public', 'https://example.com/facts')['safe_error_code']);
         foreach (['0', '1'] as $slot) {
             $lock = Cache::lock('seo-evidence:external:global:'.hash('sha256', $slot), 30);
             $this->assertTrue($lock->get());
@@ -199,7 +200,7 @@ final class SeoPlatform11BExternalContentGatewayTest extends TestCase
                     return ['status' => 200, 'headers' => ['content-type' => 'text/plain', 'content-length' => (string) strlen($body)], 'body' => $body, 'connected_ip' => $approvedIp];
                 }
                 if ($this->scenario === 'timeout') {
-                    throw new \RuntimeException('synthetic timeout with private body');
+                    throw new ExternalContentGatewayException('TRANSPORT_TIMEOUT', 'transport');
                 }
                 if ($this->scenario === 'redirect_private') {
                     return ['status' => 302, 'headers' => ['location' => 'https://127.0.0.1/private'], 'body' => '', 'connected_ip' => $approvedIp];

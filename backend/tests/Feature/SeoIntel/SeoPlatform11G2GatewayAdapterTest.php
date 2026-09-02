@@ -8,6 +8,7 @@ use App\Services\SeoAgentEvidence\Competitive\CompetitiveEvidenceBoundaryGuard;
 use App\Services\SeoAgentEvidence\Competitive\CompetitivePageProjector;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveSourceRegistry;
 use App\Services\SeoAgentEvidence\External\ExternalContentGateway;
+use App\Services\SeoAgentEvidence\External\ExternalContentGatewayException;
 use App\Services\SeoAgentEvidence\External\ExternalContentTransport;
 use App\Services\SeoAgentEvidence\External\ExternalDnsResolver;
 use App\Services\SeoAgentEvidence\External\NativeExternalDnsResolver;
@@ -58,13 +59,18 @@ final class SeoPlatform11G2GatewayAdapterTest extends TestCase
             /** @var list<string> */
             public array $requests = [];
 
+            private int $sourceFailures = 0;
+
             public function request(string $method, string $url, string $approvedIp, int $connectTimeoutSeconds, int $requestTimeoutSeconds, int $maxBytes): array
             {
                 $this->requests[] = $url;
+                if ($url === 'https://example.com/facts' && $this->sourceFailures++ === 0) {
+                    throw new ExternalContentGatewayException('TRANSPORT_TLS_FAILED', 'transport', true);
+                }
                 $body = match ($url) {
                     'https://example.com/robots.txt' => "User-agent: *\nDisallow:",
                     'https://example.com/policy' => '<main><p>MIT license permits structural use.</p></main>',
-                    default => '<main><section class="hero"><h1>Public Big Five</h1></section></main>',
+                    default => '<main><section class="hero"><h1>Public Big Five</h1><a href="/tests/related">Related test</a></section></main>',
                 };
 
                 return [
@@ -95,6 +101,7 @@ final class SeoPlatform11G2GatewayAdapterTest extends TestCase
             'policy_version' => 3,
             'policy_hash' => str_repeat('a', 64),
             'exact_source_url' => 'https://example.com/facts',
+            'exact_allowed_urls' => ['https://example.com/facts', 'https://example.com/policy', 'https://example.com/robots.txt'],
             'allowed_hosts' => ['example.com'],
             'allowed_protocols' => ['https'],
             'allowed_ports' => [443],
@@ -147,7 +154,40 @@ final class SeoPlatform11G2GatewayAdapterTest extends TestCase
 
         $this->assertSame('ready', $result['status']);
         $this->assertSame(4, $result['dependency_ingestion']['external_reads']);
+        $this->assertSame(1, $result['dependency_ingestion']['retry_count']);
         $this->assertSame(1, count(array_filter($transport->requests, static fn (string $url): bool => $url === $policyUrl)));
+    }
+
+    public function test_competitive_url_validation_rejects_encoded_paths_queries_and_cross_origin_reuse(): void
+    {
+        $gateway = app(ExternalContentGateway::class);
+        $method = new \ReflectionMethod($gateway, 'validateUrl');
+        $policy = [
+            'exact_source_url' => 'https://example.com/tests/big-five',
+            'exact_allowed_urls' => [
+                'https://example.com/tests/big-five',
+                'https://example.com/terms',
+                'https://example.com/robots.txt',
+            ],
+            'allowed_hosts' => ['example.com'],
+            'allowed_path_prefixes' => ['/tests/big-five', '/terms', '/robots.txt'],
+            'prohibitions' => ['query_strings' => true],
+        ];
+        foreach ([
+            'https://example.com/tests/%2e%2e/terms',
+            'https://example.com/tests/big-five?next=/terms',
+            'https://example.com/tests/big-five#fragment',
+            'https://example.com.evil.test/tests/big-five',
+            'https://example.com/tests/big-five/extra',
+        ] as $url) {
+            try {
+                $method->invoke($gateway, $url, $policy);
+                $this->fail('Expected exact URL rejection for '.$url);
+            } catch (\RuntimeException) {
+                $this->addToAssertionCount(1);
+            }
+        }
+        $this->assertSame('/tests/big-five', $method->invoke($gateway, 'https://example.com/tests/big-five', $policy)['path']);
     }
 
     public function test_registry_is_hash_bound_exact_url_only_and_live(): void
@@ -157,7 +197,7 @@ final class SeoPlatform11G2GatewayAdapterTest extends TestCase
         $this->assertSame('approved', $cohort['collection_state']);
         $this->assertSame('NONE', $cohort['hold_reason']);
         $sources = $registry->sourceRegistry()['sources'];
-        $this->assertSame(['123test', 'truity', '16personalities', 'bigfive-test', 'openpsychometrics', 'b5-allthethings'], array_values(array_map(
+        $this->assertSame(['123test', 'truity', '16personalities', 'bigfive-test', 'openpsychometrics', 'b5-allthethings', 'jobcannon'], array_values(array_map(
             static fn (array $source): string => $source['source_id'],
             array_filter($sources, static fn (array $source): bool => $source['source_class'] === 'competitor_public'),
         )));
@@ -210,6 +250,19 @@ HTML;
                 $this->assertSame('COMPETITIVE_LOGIN_OR_PAYWALL', $exception->getMessage());
             }
         }
+    }
+
+    public function test_projector_rejects_captcha_pages(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('COMPETITIVE_CAPTCHA_BLOCKED');
+        app(CompetitivePageProjector::class)->project([
+            'source_id' => 'source-a', 'cohort_id' => 'competitive.big-five.live.v2', 'source_class' => 'competitor_public',
+            'page_family' => 'tests', 'locale' => 'en', 'public_url' => 'https://example.com/test',
+            'body' => '<main><div class="h-captcha" data-sitekey="public"></div></main>',
+            'captured_at' => '2026-09-03T00:00:00Z',
+            'source_policy_ref' => ['policy_id' => 'policy.source-a', 'policy_version' => 3, 'policy_hash' => str_repeat('a', 64), 'status' => 'approved', 'expires_at' => '2026-09-30T00:00:00Z'],
+        ], app(CompetitiveSourceRegistry::class)->semanticRegistry());
     }
 
     public function test_ingest_command_requires_measurement_and_controlled_write_boundary(): void

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\SeoCouncil\Competitive;
 
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveEvidenceContractRegistry;
+use App\Services\SeoAgentEvidence\Competitive\CompetitiveReleaseIdentity;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveSourcePolicyRegistry;
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use App\Services\SeoCouncil\Governance\RoleCapabilityBindingRegistry;
@@ -22,6 +23,7 @@ final class CompetitiveCloseoutBuilder
         private readonly RoleCapabilityBindingRegistry $binding,
         private readonly GoldenRoutingEvaluator $routing,
         private readonly SeoRegistryHasher $hasher,
+        private readonly CompetitiveReleaseIdentity $releaseIdentity,
     ) {}
 
     /** @return array<string, mixed> */
@@ -73,7 +75,7 @@ final class CompetitiveCloseoutBuilder
     }
 
     /** @param array<string, mixed> $ingestion @return array<string, mixed> */
-    public function buildRuntime(array $ingestion, string $candidateSha, string $environment, ?string $productionSha = null): array
+    public function buildRuntime(array $ingestion, string $candidateSha, string $environment, ?array $activationObservation = null): array
     {
         $manifest = $this->contracts->manifest();
         $snapshot = (array) ($ingestion['policy_snapshot'] ?? []);
@@ -83,6 +85,8 @@ final class CompetitiveCloseoutBuilder
         $search = (array) ($measurement['search_measurement'] ?? []);
         $cro = (array) ($measurement['cro_measurement'] ?? []);
         $controlledSources = count((array) config('seo_agent_evidence.allowed_sources', []));
+        $releaseRef = $this->releaseIdentity->reference($environment, $candidateSha);
+        $bundleHash = (string) data_get($ingestion, 'dependency_ingestion.bundle_hash', '');
         $ready = ($ingestion['status'] ?? null) === 'READY'
             && ($ingestion['bundle_verification'] ?? null) === 'valid'
             && ($measurement['status'] ?? null) === 'READY'
@@ -93,8 +97,10 @@ final class CompetitiveCloseoutBuilder
             && (int) data_get($output, '11i_handoff.source_count', 0) >= 2
             && $this->snapshotReady($snapshot)
             && $controlledSources === 4;
-        $stagingValidated = $ready && $environment === 'staging' && $productionSha === null;
-        $closed = $ready && $environment === 'production' && hash_equals($candidateSha, (string) $productionSha);
+        $stagingValidated = $ready && $environment === 'staging' && $activationObservation === null;
+        $closed = $ready && $environment === 'production'
+            && $this->activationReady($activationObservation, $candidateSha, $releaseRef, $bundleHash);
+        $productionSha = $closed ? (string) $activationObservation['active_revision'] : null;
         $state = $closed ? 'CLOSED' : ($stagingValidated ? 'STAGING_VALIDATED' : 'HOLD');
         $receipt = $this->baseReceipt($candidateSha, $environment, $productionSha, $manifest, $snapshot, $measurement);
         $receipt += [
@@ -104,7 +110,12 @@ final class CompetitiveCloseoutBuilder
             'competitive_bundle_verification' => $ready ? 'valid' : 'missing',
             'competitive_context_status' => $ready ? 'READY' : 'HOLD',
             'competitive_hold_reason' => $ready ? 'NONE' : $this->safeReason($ingestion['hold_reason'] ?? null),
-            'dependency_ingestion' => ['external_reads' => $reads],
+            'dependency_ingestion' => array_merge((array) ($ingestion['dependency_ingestion'] ?? []), [
+                'external_reads' => $reads,
+                'release_ref' => $releaseRef,
+                'bundle_hash' => $bundleHash,
+                'activation_observation' => $activationObservation,
+            ]),
             'environment_isolation' => $this->isolation($controlledSources),
             'model_calls' => 0,
             'tool_calls' => 0,
@@ -121,6 +132,46 @@ final class CompetitiveCloseoutBuilder
             'ready_for_11H' => $closed,
             '11i_handoff_ready' => $closed,
         ];
+        $receipt['receipt_hash'] = $this->hasher->hash($receipt);
+
+        return $receipt;
+    }
+
+    /** @param array<string, mixed> $preactivation @return array<string, mixed> */
+    public function finalizeRuntime(array $preactivation, string $activeRevision): array
+    {
+        $candidateSha = (string) ($preactivation['candidate_sha'] ?? '');
+        if (($preactivation['environment'] ?? null) !== 'production'
+            || ($preactivation['closeout_state'] ?? null) !== 'HOLD'
+            || ($preactivation['competitive_context_status'] ?? null) !== 'READY'
+            || ! $this->verify($preactivation, $candidateSha)) {
+            return $preactivation;
+        }
+        $releaseRef = (string) data_get($preactivation, 'dependency_ingestion.release_ref', '');
+        $bundleHash = (string) data_get($preactivation, 'dependency_ingestion.bundle_hash', '');
+        $observation = [
+            'environment' => 'production',
+            'candidate_sha' => $candidateSha,
+            'active_revision' => $activeRevision,
+            'release_ref' => $releaseRef,
+            'competitive_bundle_hash' => $bundleHash,
+            'smoke_status' => 'pass',
+            'smoke_set' => ['public', 'public_dns', 'auth_guest', 'scale_lookup', 'ops_entry', 'seo_council_anonymous'],
+            'cross_environment_bundle_reuse' => 0,
+        ];
+        $observation['observation_hash'] = $this->hasher->hash($observation);
+        if (! $this->activationReady($observation, $candidateSha, $releaseRef, $bundleHash)) {
+            return $preactivation;
+        }
+
+        $receipt = $preactivation;
+        unset($receipt['receipt_hash']);
+        $receipt['production_sha'] = $activeRevision;
+        $receipt['closeout_state'] = 'CLOSED';
+        $receipt['dependency_ingestion']['activation_observation'] = $observation;
+        $receipt['SEO-PLATFORM-11G'] = 'CLOSED';
+        $receipt['ready_for_11H'] = true;
+        $receipt['11i_handoff_ready'] = true;
         $receipt['receipt_hash'] = $this->hasher->hash($receipt);
 
         return $receipt;
@@ -148,6 +199,14 @@ final class CompetitiveCloseoutBuilder
             && data_get($receipt, 'environment_isolation.cross_environment_bundle_reuse') === 0
             && data_get($receipt, 'environment_isolation.release_sha_mismatch') === 0
             && data_get($receipt, 'environment_isolation.duplicate_competitor_domains') === 0
+            && $this->activationReady(
+                is_array(data_get($receipt, 'dependency_ingestion.activation_observation'))
+                    ? (array) data_get($receipt, 'dependency_ingestion.activation_observation')
+                    : null,
+                $candidateSha,
+                (string) data_get($receipt, 'dependency_ingestion.release_ref', ''),
+                (string) data_get($receipt, 'dependency_ingestion.bundle_hash', ''),
+            )
             && $this->measurementReady((array) ($receipt['search_measurement'] ?? []))
             && $this->measurementReady((array) ($receipt['cro_measurement'] ?? []));
 
@@ -225,5 +284,28 @@ final class CompetitiveCloseoutBuilder
         $reason = (string) $reason;
 
         return preg_match('/^[A-Z0-9_]{3,64}$/D', $reason) === 1 ? $reason : 'SOURCE_POLICY_HOLD';
+    }
+
+    /** @param array<string, mixed>|null $observation */
+    private function activationReady(?array $observation, string $candidateSha, string $releaseRef, string $bundleHash): bool
+    {
+        if (! is_array($observation)) {
+            return false;
+        }
+        $hash = (string) ($observation['observation_hash'] ?? '');
+
+        return preg_match('/^[a-f0-9]{40}$/D', $candidateSha) === 1
+            && preg_match('/^release_[a-p]{64}$/D', $releaseRef) === 1
+            && preg_match('/^[a-f0-9]{64}$/D', $bundleHash) === 1
+            && ($observation['environment'] ?? null) === 'production'
+            && ($observation['candidate_sha'] ?? null) === $candidateSha
+            && ($observation['active_revision'] ?? null) === $candidateSha
+            && ($observation['release_ref'] ?? null) === $releaseRef
+            && ($observation['competitive_bundle_hash'] ?? null) === $bundleHash
+            && ($observation['smoke_status'] ?? null) === 'pass'
+            && ($observation['smoke_set'] ?? null) === ['public', 'public_dns', 'auth_guest', 'scale_lookup', 'ops_entry', 'seo_council_anonymous']
+            && ($observation['cross_environment_bundle_reuse'] ?? null) === 0
+            && preg_match('/^[a-f0-9]{64}$/D', $hash) === 1
+            && hash_equals($this->hasher->hashWithout($observation, 'observation_hash'), $hash);
     }
 }

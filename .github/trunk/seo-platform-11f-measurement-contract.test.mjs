@@ -57,7 +57,7 @@ test("11F deployment diagnostics expose only reason enums, booleans, and hashes"
   assert.doesNotMatch(diagnostic, /getMessage|DB_HOST|DB_PORT|DB_DATABASE|canonical_url|query_hash|source_ref|payload|token|credential/i);
 });
 
-test("staging deployment and smoke precede source readiness while production never backfills", () => {
+test("staging and production independently refresh real measurement before closeout", () => {
   const stagingStart = deploy.indexOf("  staging:");
   const productionStart = deploy.indexOf("  production:");
   const staging = deploy.slice(stagingStart, productionStart);
@@ -149,11 +149,15 @@ test("staging deployment and smoke precede source readiness while production nev
   assert.match(staging, /production_permissions: 0/);
   assert.match(staging, /execution_allowed: false/);
 
-  assert.doesNotMatch(production, /SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON/);
+  assert.match(production, /GSC_SERVICE_ACCOUNT_JSON: \$\{\{ secrets\.SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON \}\}/);
+  assert.match(production, /production_measurement_refresh=HOLD/);
+  assert.match(production, /gsc_restricted_connect_proxy\.mjs/);
+  assert.match(production, /seo_measurement_sync_env="\$remote_env"/);
   assert.doesNotMatch(production, /GSC_SYNC_DB_(USERNAME|PASSWORD)/);
-  assert.doesNotMatch(production, /seo-intel:gsc-sync/);
-  assert.doesNotMatch(production, /analytics:refresh-seo-conversion-daily/);
   assert.doesNotMatch(production, /measurement-source-readiness/);
+  assert.match(deployer, /task\('seo:competitive-measurement-refresh'/);
+  assert.match(deployer, /seo-intel:gsc-sync --window=90 --search-types=web --full-window/);
+  assert.match(deployer, /analytics:refresh-seo-conversion-daily --from="\$from_date" --to="\$to_date" --org=0/);
   assert.match(production, /ConnectionAttempts=3/);
   assert.match(production, /if test '\$\{\{ needs\.policy\.outputs\.seo_council_orchestration \}\}' = true; then deploy_timeout=60m; fi/);
 });

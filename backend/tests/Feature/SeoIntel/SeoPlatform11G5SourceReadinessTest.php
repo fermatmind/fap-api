@@ -66,13 +66,13 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
             'fermatmind-big-five-en' => ['58aad528ad4ea70fecd7527fdb435739ce444db9de13935f850d32ef0eeffb0a', '61ec67d56b12c396382db5473664f1457c5f37cc9d03896f331b52a0e2a1e9a3', 'c2597aba68ffc3fdb9cc697f42f98e00440d5ee86362515301c1917a6749ba0d'],
             'fermatmind-big-five-zh' => ['58aad528ad4ea70fecd7527fdb435739ce444db9de13935f850d32ef0eeffb0a', '61ec67d56b12c396382db5473664f1457c5f37cc9d03896f331b52a0e2a1e9a3', 'c2597aba68ffc3fdb9cc697f42f98e00440d5ee86362515301c1917a6749ba0d'],
             'bigfive-test' => ['b265717eeca2bceb69a8605bc3a17e8d3a961c5dfe2a49c37f42c27b0cb75869', 'b265717eeca2bceb69a8605bc3a17e8d3a961c5dfe2a49c37f42c27b0cb75869', '15441e54b432b2353bbc634cfd2c7ef22d6947ac396184ed3c2ee63fab56c564'],
-            'b5-allthethings' => ['35f340728d5f500cc8971f616ac01f8280bbf1147aa2ba724839a571cd5863b2', '35f340728d5f500cc8971f616ac01f8280bbf1147aa2ba724839a571cd5863b2', '4597a80874d9fc1cb30730bded2dcb7f256525b1e7d1da9075feb96db78f1ef9'],
+            'jobcannon' => ['75fc747de7ab9b0f1ad19b18ceb4a9f001630aec95b9d93d6bdbe8313278ffbc', 'b629bbe160ab05997cea7ba7235acf410a7e7072b76dfabf70591ae2880cfb86', 'e286629fa90f3adefefa64555ed5bee3343c1062c1f2fe9895896dc6b788a85c'],
         ];
         $expectedReviewWindows = [
             'fermatmind-big-five-en' => ['2026-09-02T12:21:07Z', '2026-10-02T12:21:07Z'],
             'fermatmind-big-five-zh' => ['2026-09-02T12:21:07Z', '2026-10-02T12:21:07Z'],
             'bigfive-test' => ['2026-09-02T13:09:56Z', '2026-10-02T13:09:56Z'],
-            'b5-allthethings' => ['2026-09-02T13:09:56Z', '2026-10-02T13:09:56Z'],
+            'jobcannon' => ['2026-09-02T22:00:00Z', '2026-10-02T22:00:00Z'],
         ];
         foreach ($registry->policies() as $sourceId => $policy) {
             $this->assertSame($expectedReviewWindows[$sourceId][0], $policy['reviewed_at']);
@@ -89,9 +89,9 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
             $this->assertTrue($policy['prohibitions']['competitor_text_retention']);
         }
         $this->assertSame('https://bigfive-test.com/faq', $registry->policies()['bigfive-test']['license_url']);
-        $this->assertSame('https://github.com/zrrrzzt/b5-web/blob/main/LICENSE', $registry->policies()['b5-allthethings']['license_url']);
+        $this->assertSame('https://jobcannon.io/embed', $registry->policies()['jobcannon']['license_url']);
         $this->assertNotContains('https://raw.githubusercontent.com', $registry->policies()['bigfive-test']['allowed_origins']);
-        $this->assertNotContains('https://raw.githubusercontent.com', $registry->policies()['b5-allthethings']['allowed_origins']);
+        $this->assertNotContains('b5-allthethings', array_keys($registry->policies()));
     }
 
     public function test_runtime_closeout_closes_only_for_independent_production_bundle(): void
@@ -107,7 +107,11 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
                 'status' => 'READY',
                 '11i_handoff' => ['source_freshness' => 'fresh', 'source_count' => 2],
             ],
-            'dependency_ingestion' => ['external_reads' => 12],
+            'dependency_ingestion' => [
+                'external_reads' => 12,
+                'bundle_hash' => str_repeat('d', 64),
+                'release_ref' => app(\App\Services\SeoAgentEvidence\Competitive\CompetitiveReleaseIdentity::class)->reference('production', $sha),
+            ],
             'policy_snapshot' => app(CompetitiveSourcePolicyRegistry::class)->snapshot('competitive.big-five.live.v2'),
             'measurement' => $this->readyMeasurement(),
         ];
@@ -120,7 +124,13 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
         $this->assertSame('NONE', $staging['cro_measurement']['hold_reason']);
         $this->assertSame(12, $staging['dependency_ingestion']['external_reads']);
 
-        $production = $builder->buildRuntime($ingestion, $sha, 'production', $sha);
+        $preactivation = $builder->buildRuntime($ingestion, $sha, 'production');
+        $this->assertSame('HOLD', $preactivation['closeout_state']);
+        $this->assertNull($preactivation['production_sha']);
+        $mismatch = $builder->finalizeRuntime($preactivation, str_repeat('b', 40));
+        $this->assertSame('HOLD', $mismatch['closeout_state']);
+        $this->assertNull($mismatch['production_sha']);
+        $production = $builder->finalizeRuntime($preactivation, $sha);
         $this->assertTrue($builder->verify($production, $sha));
         $this->assertSame('CLOSED', $production['SEO-PLATFORM-11G']);
         $this->assertTrue($production['ready_for_11H']);
@@ -146,6 +156,20 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
 
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('COMPETITIVE_SOURCE_POLICY_INVALID');
+        $method->invoke($registry, $policy, $source, (string) $sourceRegistry['registry_revision']);
+    }
+
+    public function test_v3_policy_registry_rejects_license_masquerading_as_terms(): void
+    {
+        $registry = app(CompetitiveSourcePolicyRegistry::class);
+        $sourceRegistry = $registry->sourceRegistry();
+        $source = collect($sourceRegistry['sources'])->firstWhere('source_id', 'bigfive-test');
+        $policy = $registry->policies()['bigfive-test'];
+        $policy['combined_terms_license_scope'] = false;
+
+        $method = new \ReflectionMethod($registry, 'assertPolicy');
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('COMPETITIVE_SOURCE_POLICY_LICENSE_AS_TERMS');
         $method->invoke($registry, $policy, $source, (string) $sourceRegistry['registry_revision']);
     }
 
@@ -188,6 +212,9 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
             'pass',
             app(SeoPrivateDataScanner::class)->scan('competitive:'.$token.':search_measurement')['decision'],
         );
+        $releaseRef = app(\App\Services\SeoAgentEvidence\Competitive\CompetitiveReleaseIdentity::class)->reference('staging', $releaseSha);
+        $this->assertMatchesRegularExpression('/^release_[a-p]{64}$/D', $releaseRef);
+        $this->assertSame('pass', app(SeoPrivateDataScanner::class)->scan($releaseRef)['decision']);
     }
 
     /** @return array<string, mixed> */
@@ -215,10 +242,11 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
     public function test_council_loader_rejects_staging_bundle_in_production(): void
     {
         $sha = str_repeat('b', 40);
+        $releaseRef = app(\App\Services\SeoAgentEvidence\Competitive\CompetitiveReleaseIdentity::class)->reference('staging', $sha);
         $bundle = app(SeoEvidenceBundleFactory::class)->create([
-            'bundle_id' => 'competitive:staging:'.$sha,
+            'bundle_id' => 'competitive:staging:'.$releaseRef,
             'bundle_version' => 1,
-            'mission_id' => 'competitive:ingestion:'.$sha,
+            'mission_id' => 'competitive:ingestion:'.$releaseRef,
             'source_type' => 'external_gateway',
             'source_ref' => hash('sha256', 'staging|'.$sha),
             'authority_type' => 'competitive_structural_projection',
@@ -236,7 +264,7 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
             'lineage_refs' => [],
             'payload' => [
                 'environment' => 'staging',
-                'release_sha' => $sha,
+                'release_ref' => $releaseRef,
                 'competitive_output' => [],
             ],
         ]);

@@ -32,6 +32,9 @@ final class CompetitivePageProjector
             throw new InvalidArgumentException('COMPETITIVE_HTML_INVALID');
         }
         $xpath = new DOMXPath($dom);
+        if ($this->captcha($xpath)) {
+            throw new InvalidArgumentException('COMPETITIVE_CAPTCHA_BLOCKED');
+        }
         if ($this->loginOrPaywall($xpath)) {
             throw new InvalidArgumentException('COMPETITIVE_LOGIN_OR_PAYWALL');
         }
@@ -113,7 +116,10 @@ final class CompetitivePageProjector
             if (! $node instanceof DOMElement || count($result) >= 64) {
                 continue;
             }
-            $signal = strtolower($node->tagName.' '.$node->getAttribute('id').' '.$node->getAttribute('class').' '.$node->getAttribute('data-module'));
+            $signal = $this->normalize(
+                $node->tagName.' '.$node->getAttribute('id').' '.$node->getAttribute('class').' '
+                .$node->getAttribute('data-module').' '.mb_substr((string) $node->textContent, 0, 8192),
+            );
             $moduleType = 'other_registered';
             foreach ($mapping as $token => $registeredType) {
                 if (str_contains($signal, strtolower((string) $token))) {
@@ -123,6 +129,23 @@ final class CompetitivePageProjector
             }
             $ordinal = count($result);
             $result[] = ['module_type' => $moduleType, 'ordinal' => $ordinal, 'module_hash' => $this->hasher->hash([$moduleType, $ordinal])];
+        }
+        $pageText = $this->semanticPageText($xpath);
+        $present = array_column($result, 'module_type');
+        foreach ($mapping as $token => $registeredType) {
+            $registeredType = (string) $registeredType;
+            if (count($result) >= 64 || in_array($registeredType, $present, true)
+                || ! str_contains($pageText, strtolower((string) $token))) {
+                continue;
+            }
+            $ordinal = count($result);
+            $result[] = ['module_type' => $registeredType, 'ordinal' => $ordinal, 'module_hash' => $this->hasher->hash([$registeredType, $ordinal])];
+            $present[] = $registeredType;
+        }
+        if (str_contains($pageText, 'test') && in_array('assessment_entry', $mapping, true)
+            && ! in_array('assessment_entry', $present, true) && count($result) < 64) {
+            $ordinal = count($result);
+            $result[] = ['module_type' => 'assessment_entry', 'ordinal' => $ordinal, 'module_hash' => $this->hasher->hash(['assessment_entry', $ordinal])];
         }
 
         return $result;
@@ -154,6 +177,12 @@ final class CompetitivePageProjector
         $entitySignals = (array) ($semantic['entity_signals'] ?? []);
         $relationSignals = (array) ($semantic['relation_signals'] ?? []);
         $claimSignals = (array) ($semantic['claim_signals'] ?? []);
+        $pageText = $this->semanticPageText($xpath);
+        foreach ($entitySignals as $signal => $entityId) {
+            if (str_contains($pageText, strtolower((string) $signal))) {
+                $entities[] = (string) $entityId;
+            }
+        }
         foreach ($this->jsonLd($xpath) as $node) {
             $encoded = strtolower(json_encode($node, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: '');
             foreach ($entitySignals as $signal => $entityId) {
@@ -178,6 +207,13 @@ final class CompetitivePageProjector
         }
         $entities = array_values(array_unique($entities));
         sort($entities, SORT_STRING);
+        if ($entities !== [] && (str_contains($pageText, 'test') || str_contains($pageText, 'assessment'))) {
+            foreach ($entities as $entityId) {
+                $value = ['entity_id' => $entityId, 'relation' => 'measures', 'target_id' => 'schema.quiz'];
+                $value['relation_hash'] = $this->hasher->hash($value);
+                $relations[] = $value;
+            }
+        }
         $relations = $this->uniqueSorted($relations, 'relation_hash');
         $claims = $this->uniqueSorted($claims, 'claim_hash');
 
@@ -287,6 +323,28 @@ final class CompetitivePageProjector
         }
 
         return false;
+    }
+
+    private function captcha(DOMXPath $xpath): bool
+    {
+        return ($xpath->query('//*[contains(translate(@id,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz"),"captcha") or contains(translate(@class,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz"),"captcha") or contains(translate(@class,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz"),"turnstile") or @data-sitekey]')->length ?? 0) > 0;
+    }
+
+    private function semanticPageText(DOMXPath $xpath): string
+    {
+        $parts = [];
+        foreach ($xpath->query('//title|//meta[@name="description"]|//h1|//h2|//h3|//main|//article') ?: [] as $node) {
+            if ($node instanceof DOMElement && strtolower($node->tagName) === 'meta') {
+                $parts[] = $node->getAttribute('content');
+            } else {
+                $parts[] = (string) $node->textContent;
+            }
+            if (mb_strlen(implode(' ', $parts)) >= 32768) {
+                break;
+            }
+        }
+
+        return $this->normalize(mb_substr(implode(' ', $parts), 0, 32768));
     }
 
     /** @param list<array<string, mixed>> $values @return list<array<string, mixed>> */

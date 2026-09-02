@@ -30,7 +30,7 @@ final class CompetitiveContractValidator
     /** @param array<string, mixed> $bundle */
     public function bundle(array $bundle, MissionRequestData $request): bool
     {
-        $expected = ['bundle_hash', 'competitive_output', 'environment', 'release_sha'];
+        $expected = ['bundle_hash', 'competitive_output', 'environment', 'release_ref'];
         $actual = array_keys($bundle);
         sort($expected, SORT_STRING);
         sort($actual, SORT_STRING);
@@ -39,7 +39,7 @@ final class CompetitiveContractValidator
         return $actual === $expected
             && $this->admits($request)
             && in_array($bundle['environment'] ?? null, ['ci_candidate', 'staging_runtime', 'production_runtime'], true)
-            && preg_match('/^[a-f0-9]{40}$/D', (string) ($bundle['release_sha'] ?? '')) === 1
+            && preg_match('/^release_[a-p]{64}$/D', (string) ($bundle['release_ref'] ?? '')) === 1
             && $this->guard->output($output)
             && ($output['status'] ?? null) === 'READY'
             && data_get($output, '11i_handoff.source_freshness') === 'fresh'

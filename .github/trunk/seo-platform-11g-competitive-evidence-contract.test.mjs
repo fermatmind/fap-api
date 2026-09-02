@@ -22,12 +22,15 @@ test("competitive ingestion is measurement-gated and environment independent", (
   const preactivation = deployer.indexOf("task('seo:competitive-evidence-preactivation'");
   const activation = deployer.indexOf("before('deploy:symlink'");
   assert.ok(preactivation > 0 && activation > 0);
-  assert.match(deployer, /after\('artisan:config:cache', 'seo:competitive-evidence-preactivation'\)/);
+  assert.match(deployer, /after\('artisan:config:cache', 'seo:competitive-measurement-refresh'\)/);
+  assert.match(deployer, /task\('seo:competitive-measurement-refresh'/);
+  assert.match(deployer, /after\('healthcheck:seo-council-anonymous', 'seo:competitive-evidence-finalize'\)/);
   assert.match(deployer, /SEO_COMPETITIVE_EXTERNAL_READ_ENABLED=true/);
   assert.match(deployer, /SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED=true/);
   assert.match(deployer, /--cohort=competitive\.big-five\.live\.v2 --write-evidence/);
   assert.match(deployer, /environment=\{\{competitive_environment\}\}/);
-  assert.match(deployer, /\.production_sha == \$sha/);
+  assert.match(deployer, /\.production_sha == null/);
+  assert.match(deployer, /--finalize-activation/);
   assert.match(deploy, /closeout_state == "STAGING_VALIDATED"/);
   assert.match(deploy, /search_measurement\.hold_reason == "NONE"/);
   assert.match(deploy, /cro_measurement\.hold_reason == "NONE"/);

@@ -21,6 +21,7 @@ set('seo_agent_evidence_boundary', false);
 set('seo_agent_policy_gateway', false);
 set('seo_council_orchestration', false);
 set('seo_competitive_evidence', false);
+set('seo_measurement_sync_env', '');
 set('seo_council_closeout_deferred', false);
 set('career_current_parity_required', false);
 set('private_result_authority_publish_required', true);
@@ -1497,6 +1498,41 @@ BASH);
     });
 });
 
+task('seo:competitive-measurement-refresh', function () {
+    if (! deployBooleanOption('seo_competitive_evidence', false) || currentHost()->getAlias() !== 'production') {
+        return;
+    }
+
+    within('{{release_path}}/backend', function (): void {
+        run(<<<'BASH'
+set -euo pipefail
+sync_env='{{seo_measurement_sync_env}}'
+[[ "$sync_env" =~ ^/tmp/fermatmind-11g-production-[1-9][0-9]*-[1-9][0-9]*/measurement\.env$ ]]
+test -f "$sync_env"
+test ! -L "$sync_env"
+set -a
+. "$sync_env"
+set +a
+[[ "${APP_CONFIG_CACHE:-}" =~ ^/tmp/fermatmind-11g-production-[1-9][0-9]*-[1-9][0-9]*/config\.php$ ]]
+test ! -e "$APP_CONFIG_CACHE"
+export SEO_INTEL_WRITE_ENABLED=true
+sync_raw="$(mktemp)"
+sync="$(mktemp)"
+trap 'rm -f "$sync_raw" "$sync"' EXIT
+timeout 15m {{bin/php}} artisan seo-intel:gsc-sync --window=90 --search-types=web --full-window --trigger=manual --json --no-interaction --no-ansi > "$sync_raw"
+awk 'started || /^[[:space:]]*\{/ { started=1; print }' "$sync_raw" > "$sync"
+jq -e '.status == "success" and .window_days == 90 and .fetch_mode == "full_window" and .search_types == ["web"] and .pages_fetched > 0 and .rows_seen > 0 and .rows_upserted > 0 and .mapped_rows > 0 and .unmapped_rows == 0 and (.excluded_non_authority_rows | type == "number" and . >= 0) and .duplicate_natural_keys == 0 and .quality_gate.status == "pass" and (.data_max_date | type == "string" and length == 10) and (.data_lag_days | type == "number" and . <= 10) and .read_only_gsc == true and .search_submission_allowed == false and .restricted_egress.status == "restricted"' "$sync" >/dev/null
+from_date="$(date -u -d '89 days ago' +%F)"
+to_date="$(date -u +%F)"
+export SEO_INTEL_ALLOW_EXTERNAL_API_CALLS=false SEO_INTEL_WRITE_ENABLED=false
+cro="$(mktemp)"
+trap 'rm -f "$sync_raw" "$sync" "$cro"' EXIT
+timeout 15m {{bin/php}} artisan analytics:refresh-seo-conversion-daily --from="$from_date" --to="$to_date" --org=0 --trigger=manual --json --no-interaction --no-ansi > "$cro"
+jq -e '.schema_version == "analytics-seo-conversion-refresh-receipt.v1" and .status == "success" and .org_scope_mode == "bounded" and .org_scope_count == 1 and .attempted_rows >= 0 and .upserted_rows >= 0 and .readback_receipt.status == "pass" and .raw_query_exposed == false and .raw_session_or_business_identifiers_exposed == false and .private_paths_allowed == false and .search_submission_allowed == false' "$cro" >/dev/null
+BASH);
+    });
+});
+
 task('seo:competitive-evidence-preactivation', function () {
     if (! deployBooleanOption('seo_competitive_evidence', false)) {
         writeln('<comment>Skip SEO competitive evidence ingestion.</comment>');
@@ -1528,7 +1564,11 @@ $zero = ["model_calls", "tool_calls", "external_calls", "cms_writes", "url_truth
 $ok = ($payload["receipt_version"] ?? null) === "seo.competitive_evidence_closeout.v3"
     && ($payload["candidate_sha"] ?? null) === ($argv[1] ?? null)
     && ($payload["environment"] ?? null) === ($argv[2] ?? null)
-    && ($payload["closeout_state"] ?? null) === "CLOSED"
+    && ($payload["closeout_state"] ?? null) === "HOLD"
+    && ($payload["production_sha"] ?? null) === null
+    && ($payload["SEO-PLATFORM-11G"] ?? null) === "HOLD"
+    && ($payload["competitive_context_status"] ?? null) === "READY"
+    && ($payload["competitive_hold_reason"] ?? null) === "NONE"
     && ($payload["source_policy_version"] ?? null) === "seo.competitive_source_policy.v3"
     && ($payload["source_registry_version"] ?? null) === "seo.competitive_source_registry.v2"
     && ($payload["cohort_registry_version"] ?? null) === "seo.competitive_cohort_registry.v2"
@@ -1543,7 +1583,7 @@ foreach ($zero as $field) {
 exit($ok ? 0 : 1);
 ' "$candidate_sha" "$environment"
 receipt_dir='{{deploy_path}}/shared/backend/storage/app/release-receipts/seo-competitive-evidence'
-receipt_path="$receipt_dir/$candidate_sha.json"
+receipt_path="$receipt_dir/preactivation-$candidate_sha.json"
 mkdir -p "$receipt_dir"
 tmp="$(mktemp "$receipt_dir/.${candidate_sha}.XXXXXX")"
 trap 'rm -f "$tmp"' EXIT
@@ -1557,11 +1597,11 @@ else
   cmp -s "$tmp" "$receipt_path"
 fi
 printf '%s' "$receipt" | jq -e --arg sha "$candidate_sha" '
-    ."SEO-PLATFORM-11G" == "CLOSED"
-    and .closeout_state == "CLOSED"
-    and .production_sha == $sha
-    and .ready_for_11H == true
-    and ."11i_handoff_ready" == true
+    ."SEO-PLATFORM-11G" == "HOLD"
+    and .closeout_state == "HOLD"
+    and .production_sha == null
+    and .ready_for_11H == false
+    and ."11i_handoff_ready" == false
     and .competitive_source_state == "available"
     and .competitive_freshness_state == "fresh"
     and .competitive_bundle_verification == "valid"
@@ -1578,6 +1618,33 @@ printf '%s' "$receipt" | jq -e --arg sha "$candidate_sha" '
     and .cro_measurement.context_status == "READY"
     and .cro_measurement.hold_reason == "NONE"
   ' >/dev/null
+BASH);
+    });
+});
+
+task('seo:competitive-evidence-finalize', function () {
+    if (! deployBooleanOption('seo_competitive_evidence', false) || currentHost()->getAlias() !== 'production') {
+        return;
+    }
+
+    within('{{current_path}}/backend', function (): void {
+        run(<<<'BASH'
+set -euo pipefail
+active_sha="$(tr -d '\r\n' < ../REVISION)"
+[[ "$active_sha" =~ ^[0-9a-f]{40}$ ]]
+receipt_dir='{{deploy_path}}/shared/backend/storage/app/release-receipts/seo-competitive-evidence'
+preactivation="$receipt_dir/preactivation-$active_sha.json"
+test -f "$preactivation"
+test ! -L "$preactivation"
+receipt="$(SEO_RELEASE_SHA="$active_sha" SEO_COMPETITIVE_EXTERNAL_READ_ENABLED=true SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED=true {{bin/php}} artisan seo:competitive-evidence-ingest --cohort=competitive.big-five.live.v2 --finalize-activation --preactivation-receipt="$preactivation" --json --no-interaction --no-ansi)"
+printf '%s' "$receipt" | jq -e --arg sha "$active_sha" '.receipt_version == "seo.competitive_evidence_closeout.v3" and .candidate_sha == $sha and .production_sha == $sha and .environment == "production" and .closeout_state == "CLOSED" and ."SEO-PLATFORM-11G" == "CLOSED" and .ready_for_11H == true and ."11i_handoff_ready" == true and .competitive_context_status == "READY" and .competitive_hold_reason == "NONE" and .execution_allowed == false and .production_permissions == 0 and .model_calls == 0 and .tool_calls == 0 and .cms_writes == 0 and .url_truth_writes == 0 and .search_writes == 0 and .business_writes == 0' >/dev/null
+final="$receipt_dir/$active_sha.json"
+test ! -e "$final"
+tmp="$(mktemp "$receipt_dir/.${active_sha}.XXXXXX")"
+trap 'rm -f "$tmp"' EXIT
+printf '%s\n' "$receipt" > "$tmp"
+chmod 0640 "$tmp"
+ln "$tmp" "$final"
 BASH);
     });
 });
@@ -4119,7 +4186,8 @@ test -f "$receipt_path"
 BASH);
 });
 
-after('artisan:config:cache', 'seo:competitive-evidence-preactivation');
+after('artisan:config:cache', 'seo:competitive-measurement-refresh');
+after('seo:competitive-measurement-refresh', 'seo:competitive-evidence-preactivation');
 after('seo:competitive-evidence-preactivation', 'career:current-authority-production-preactivation-parity');
 after('career:current-authority-production-preactivation-parity', 'guard:sitemap-authority');
 after('artisan:migrate', 'guard:no-pending-migrations');
@@ -4156,6 +4224,7 @@ after('deploy:symlink', 'healthcheck:public-static-media-assets');
 after('deploy:symlink', 'healthcheck:scale-lookup');
 after('deploy:symlink', 'healthcheck:ops-entry-contract');
 after('deploy:symlink', 'healthcheck:seo-council-anonymous');
+after('healthcheck:seo-council-anonymous', 'seo:competitive-evidence-finalize');
 after('healthcheck:ops-entry-contract', 'seo:ledger-production-closeout');
 after('healthcheck:ops-entry-contract', 'seo:agent-evidence-boundary-closeout');
 after('healthcheck:ops-entry-contract', 'seo:agent-policy-gateway-closeout');

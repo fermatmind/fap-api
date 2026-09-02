@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\SeoCouncil\Competitive;
 
 use App\Services\SeoAgentEvidence\Bundle\SeoEvidenceBundleVerifier;
+use App\Services\SeoAgentEvidence\Competitive\CompetitiveReleaseIdentity;
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use App\Services\SeoCouncil\Contracts\MissionRequestData;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +16,7 @@ final class ReadOnlyCompetitiveEvidenceBundleLoader implements CompetitiveEviden
     public function __construct(
         private readonly SeoEvidenceBundleVerifier $verifier,
         private readonly SeoRegistryHasher $hasher,
+        private readonly CompetitiveReleaseIdentity $releaseIdentity,
     ) {}
 
     public function load(MissionRequestData $request, string $releaseSha, string $environment): array
@@ -29,6 +31,7 @@ final class ReadOnlyCompetitiveEvidenceBundleLoader implements CompetitiveEviden
         }
 
         try {
+            $expectedReleaseRef = $this->releaseIdentity->reference($expectedEnvironment, $releaseSha);
             foreach ((array) $request->payload['evidence_bundle_refs'] as $ref) {
                 if (($ref['evidence_type'] ?? null) !== 'gateway_competitor_public'
                     || ($ref['status'] ?? null) !== 'READY') {
@@ -49,13 +52,13 @@ final class ReadOnlyCompetitiveEvidenceBundleLoader implements CompetitiveEviden
                 }
                 $payload = (array) ($bundle['payload'] ?? []);
                 if (($payload['environment'] ?? null) !== $expectedEnvironment
-                    || ($payload['release_sha'] ?? null) !== $releaseSha) {
+                    || ($payload['release_ref'] ?? null) !== $expectedReleaseRef) {
                     continue;
                 }
                 $loaded = [
                     'competitive_output' => (array) ($payload['competitive_output'] ?? []),
                     'environment' => $environment,
-                    'release_sha' => $releaseSha,
+                    'release_ref' => $expectedReleaseRef,
                 ];
                 $loaded['bundle_hash'] = $this->hasher->hash($loaded);
 

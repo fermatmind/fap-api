@@ -22,6 +22,13 @@ final class CompetitiveSourcePolicyRegistry
             if (! is_array($source) || ! $this->exactPublicUrl((string) ($source['url'] ?? ''))) {
                 throw new RuntimeException('COMPETITIVE_SOURCE_URL_INVALID');
             }
+            if (($source['policy_state'] ?? null) === 'approved'
+                && (! is_string($source['policy_id'] ?? null) || ! hash_equals(
+                    'competitive.source.'.(string) $source['source_id'].'.v3',
+                    (string) $source['policy_id'],
+                ))) {
+                throw new RuntimeException('COMPETITIVE_SOURCE_POLICY_RELATION_INVALID');
+            }
             if (($source['policy_state'] ?? null) !== 'approved'
                 && (! $this->exactPublicUrl((string) ($source['review_url'] ?? ''))
                     || ! hash_equals((string) ($source['review_url_hash'] ?? ''), $this->hasher->hash((string) $source['review_url'])))) {
@@ -42,6 +49,13 @@ final class CompetitiveSourcePolicyRegistry
             || ! hash_equals((string) ($registry['source_registry_hash'] ?? ''), (string) ($sources['registry_hash'] ?? ''))
             || ! hash_equals((string) ($registry['source_policy_set_hash'] ?? ''), $this->policySetHash($policies))) {
             throw new RuntimeException('COMPETITIVE_REGISTRY_RELATION_INVALID');
+        }
+        foreach ((array) ($registry['cohorts'] ?? []) as $cohort) {
+            if (! is_array($cohort) || ! is_string($cohort['cohort_hash'] ?? null)
+                || ! hash_equals($this->hasher->hashWithout($cohort, 'cohort_hash'), (string) $cohort['cohort_hash'])) {
+                throw new RuntimeException('COMPETITIVE_COHORT_HASH_INVALID');
+            }
+            $this->sourcesFor($cohort);
         }
 
         return $registry;
@@ -174,6 +188,7 @@ final class CompetitiveSourcePolicyRegistry
             || ($policy['source_class'] ?? null) !== ($source['source_class'] ?? null)
             || ($policy['source_registry_revision'] ?? null) !== $revision
             || ($policy['exact_source_url'] ?? null) !== ($source['url'] ?? null)
+            || ($policy['policy_id'] ?? null) !== ($source['policy_id'] ?? null)
             || ! hash_equals((string) ($source['url_hash'] ?? ''), $this->hasher->hash((string) $source['url']))
             || ($policy['collection_state'] ?? null) !== 'approved'
             || ($policy['terms_review'] ?? null) !== 'approved'
@@ -185,15 +200,38 @@ final class CompetitiveSourcePolicyRegistry
             || (int) ($policy['max_validity_seconds'] ?? 0) > 2592000) {
             throw new RuntimeException('COMPETITIVE_SOURCE_POLICY_INVALID');
         }
+        $sourceParts = $this->strictUrlParts((string) $policy['exact_source_url']);
+        $expectedOrigin = 'https://'.strtolower((string) $sourceParts['host']);
+        if (! hash_equals($expectedOrigin, (string) ($policy['exact_origin'] ?? ''))
+            || ! hash_equals((string) ($sourceParts['path'] ?? '/'), (string) ($policy['exact_path'] ?? ''))
+            || ! in_array($expectedOrigin, (array) ($policy['allowed_origins'] ?? []), true)
+            || ! in_array((string) ($policy['exact_path'] ?? ''), (array) ($policy['allowed_path_prefixes'] ?? []), true)) {
+            throw new RuntimeException('COMPETITIVE_SOURCE_POLICY_ORIGIN_PATH_INVALID');
+        }
         foreach ($expectedProhibitions as $key) {
             if (($policy['prohibitions'][$key] ?? null) !== true) {
                 throw new RuntimeException('COMPETITIVE_SOURCE_POLICY_PROHIBITION_INVALID');
             }
         }
         foreach (['terms', 'license'] as $kind) {
-            if (! hash_equals((string) ($policy[$kind.'_url_hash'] ?? ''), $this->hasher->hash((string) ($policy[$kind.'_url'] ?? '')))) {
+            $url = (string) ($policy[$kind.'_url'] ?? '');
+            $parts = $this->strictUrlParts($url);
+            $origin = 'https://'.strtolower((string) $parts['host']);
+            if (! hash_equals((string) ($policy[$kind.'_url_hash'] ?? ''), $this->hasher->hash($url))
+                || ! in_array($origin, (array) $policy['allowed_origins'], true)
+                || ! in_array((string) ($parts['path'] ?? '/'), (array) $policy['allowed_path_prefixes'], true)) {
                 throw new RuntimeException('COMPETITIVE_SOURCE_POLICY_URL_HASH_INVALID');
             }
+        }
+        $robotsParts = $this->strictUrlParts((string) ($policy['robots_url'] ?? ''));
+        if (! hash_equals('/robots.txt', (string) ($robotsParts['path'] ?? '/'))
+            || ! in_array('https://'.strtolower((string) $robotsParts['host']), (array) $policy['allowed_origins'], true)
+            || ! in_array('/robots.txt', (array) $policy['allowed_path_prefixes'], true)) {
+            throw new RuntimeException('COMPETITIVE_SOURCE_POLICY_ROBOTS_INVALID');
+        }
+        if (($policy['terms_url'] ?? null) === ($policy['license_url'] ?? null)
+            && ($policy['combined_terms_license_scope'] ?? false) !== true) {
+            throw new RuntimeException('COMPETITIVE_SOURCE_POLICY_LICENSE_AS_TERMS');
         }
     }
 
@@ -201,9 +239,16 @@ final class CompetitiveSourcePolicyRegistry
     private function gatewayPolicy(array $policy): array
     {
         $hosts = array_map(static fn (string $origin): string => (string) parse_url($origin, PHP_URL_HOST), $policy['allowed_origins']);
+        $exactUrls = array_values(array_unique([
+            (string) $policy['exact_source_url'],
+            (string) $policy['terms_url'],
+            (string) $policy['license_url'],
+            (string) $policy['robots_url'],
+        ]));
 
         return $policy + [
             'allowed_hosts' => $hosts,
+            'exact_allowed_urls' => $exactUrls,
             'allowed_protocols' => ['https'],
             'allowed_ports' => [443],
             'redirect_policy' => 0,
@@ -237,6 +282,22 @@ final class CompetitiveSourcePolicyRegistry
         return is_array($parts) && ($parts['scheme'] ?? null) === 'https' && ($parts['host'] ?? '') !== ''
             && ! isset($parts['user']) && ! isset($parts['pass']) && ! isset($parts['query']) && ! isset($parts['fragment'])
             && (int) ($parts['port'] ?? 443) === 443;
+    }
+
+    /** @return array<string, mixed> */
+    private function strictUrlParts(string $url): array
+    {
+        if (! $this->exactPublicUrl($url)) {
+            throw new RuntimeException('COMPETITIVE_SOURCE_POLICY_URL_INVALID');
+        }
+        $parts = parse_url($url);
+        $path = (string) ($parts['path'] ?? '/');
+        if ($path !== rawurldecode($path) || str_contains($path, '//')
+            || preg_match('#(?:^|/)\.\.?(/|$)#', $path) === 1) {
+            throw new RuntimeException('COMPETITIVE_SOURCE_POLICY_PATH_INVALID');
+        }
+
+        return $parts;
     }
 
     /** @return array<string, mixed> */

@@ -22,6 +22,7 @@ final class CompetitiveEvidenceIngestionService
         private readonly SeoEvidenceBundleVerifier $verifier,
         private readonly SeoEvidenceBundleStore $store,
         private readonly SeoEvidenceCanonicalHasher $hasher,
+        private readonly CompetitiveReleaseIdentity $releaseIdentity,
     ) {}
 
     /**
@@ -42,10 +43,12 @@ final class CompetitiveEvidenceIngestionService
 
         try {
             $measurement = $this->measurement->assess($releaseSha, (string) $cohort['page_family'], $environment);
-            $policySnapshot = $this->policies->snapshot((string) $cohort['cohort_id']);
             if (($measurement['status'] ?? null) !== 'READY') {
+                $policySnapshot = $this->policies->snapshot((string) $cohort['cohort_id']);
+
                 return $this->hold((string) ($measurement['hold_reason'] ?? 'MEASUREMENT_HOLD'), 0, $measurement, $policySnapshot);
             }
+            $policySnapshot = $this->policies->snapshot((string) $cohort['cohort_id']);
             if ($write) {
                 $this->policies->installForControlledCli($cohort, $environment, $releaseSha);
             }
@@ -58,6 +61,7 @@ final class CompetitiveEvidenceIngestionService
         $projections = [];
         $sourcePolicies = [];
         $externalReads = 0;
+        $gatewayDiagnostics = ['external_reads' => 0, 'logical_requests' => 0, 'transport_attempts' => 0, 'retry_count' => 0];
         foreach ($sources as $source) {
             $sourceId = (string) ($source['source_id'] ?? '');
             $result = $this->gateway->fetch($sourceId, (string) ($source['url'] ?? ''), [
@@ -67,8 +71,12 @@ final class CompetitiveEvidenceIngestionService
                 'locale' => (string) $source['locale'],
             ], $semantic);
             $externalReads += max(0, (int) data_get($result, 'dependency_ingestion.external_reads', 0));
+            foreach (['logical_requests', 'transport_attempts', 'retry_count'] as $field) {
+                $gatewayDiagnostics[$field] = max((int) $gatewayDiagnostics[$field], (int) data_get($result, 'dependency_ingestion.'.$field, 0));
+            }
+            $gatewayDiagnostics['external_reads'] = $externalReads;
             if (($result['status'] ?? null) !== 'ready' || ! is_array($result['projection'] ?? null)) {
-                return $this->hold((string) ($result['safe_error_code'] ?? 'SOURCE_POLICY_HOLD'), $externalReads, $measurement, $policySnapshot);
+                return $this->hold((string) ($result['safe_error_code'] ?? 'SOURCE_POLICY_HOLD'), $externalReads, $measurement, $policySnapshot, (array) ($result['dependency_ingestion'] ?? []));
             }
             $projections[] = $result['projection'];
             $sourcePolicies[] = [
@@ -96,10 +104,12 @@ final class CompetitiveEvidenceIngestionService
                 return $this->hold((string) ($output['hold_reason'] ?? 'COMPETITIVE_EVIDENCE_HOLD'), $externalReads, $measurement, $policySnapshot);
             }
 
+            $releaseRef = $this->releaseIdentity->reference($environment, $releaseSha);
+
             $bundle = $this->bundles->create([
-                'bundle_id' => 'competitive:'.$environment.':'.$releaseSha,
+                'bundle_id' => 'competitive:'.$environment.':'.$releaseRef,
                 'bundle_version' => 1,
-                'mission_id' => 'competitive:ingestion:'.$releaseSha,
+                'mission_id' => 'competitive:ingestion:'.$releaseRef,
                 'source_type' => 'external_gateway',
                 'source_ref' => $this->hasher->hash([$environment, $releaseSha, $cohort['cohort_id']]),
                 'authority_type' => 'competitive_structural_projection',
@@ -117,14 +127,14 @@ final class CompetitiveEvidenceIngestionService
                 'lineage_refs' => [(string) $measurementBundle['bundle_hash'], (string) $croBundle['bundle_hash']],
                 'payload' => [
                     'environment' => $environment,
-                    'release_sha' => $releaseSha,
+                    'release_ref' => $releaseRef,
                     'cohort_id' => (string) $cohort['cohort_id'],
                     'source_policy_set_hash' => $policySnapshot['source_policy_set_hash'],
                     'measurement_bundle_set_hash' => $measurement['measurement_bundle_set_hash'],
                     'projections' => $projections,
                     'competitive_output' => $output,
                     '11i_handoff' => $output['11i_handoff'],
-                    'dependency_ingestion' => ['external_reads' => $externalReads],
+                    'dependency_ingestion' => $gatewayDiagnostics,
                 ],
             ]);
             if (! $this->verifier->verify($bundle)['valid']) {
@@ -143,7 +153,7 @@ final class CompetitiveEvidenceIngestionService
                 'policy_snapshot' => $policySnapshot,
                 'measurement' => $measurement,
                 'write_performed' => $write,
-                'dependency_ingestion' => ['external_reads' => $externalReads],
+                'dependency_ingestion' => $gatewayDiagnostics + ['bundle_hash' => (string) $bundle['bundle_hash'], 'release_ref' => $releaseRef],
             ];
         } catch (Throwable) {
             return $this->hold('COMPETITIVE_INGESTION_INTERNAL_HOLD', $externalReads, $measurement, $policySnapshot);
@@ -203,7 +213,7 @@ final class CompetitiveEvidenceIngestionService
     }
 
     /** @return array<string, mixed> */
-    private function hold(string $reason, int $externalReads, array $measurement = [], array $policySnapshot = []): array
+    private function hold(string $reason, int $externalReads, array $measurement = [], array $policySnapshot = [], array $diagnostics = []): array
     {
         return [
             'status' => 'HOLD',
@@ -212,7 +222,9 @@ final class CompetitiveEvidenceIngestionService
             'write_performed' => false,
             'policy_snapshot' => $policySnapshot,
             'measurement' => $measurement,
-            'dependency_ingestion' => ['external_reads' => max(0, min(64, $externalReads))],
+            'dependency_ingestion' => ['external_reads' => max(0, min(32, $externalReads))] + array_intersect_key($diagnostics, array_flip([
+                'logical_requests', 'transport_attempts', 'retry_count', 'source_id', 'failed_stage', 'error_class',
+            ])),
         ];
     }
 }

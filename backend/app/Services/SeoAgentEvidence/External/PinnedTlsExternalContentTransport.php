@@ -4,22 +4,20 @@ declare(strict_types=1);
 
 namespace App\Services\SeoAgentEvidence\External;
 
-use RuntimeException;
-
 final class PinnedTlsExternalContentTransport implements ExternalContentTransport
 {
     public function request(string $method, string $url, string $approvedIp, int $connectTimeoutSeconds, int $requestTimeoutSeconds, int $maxBytes): array
     {
         if (! extension_loaded('curl')) {
-            throw new RuntimeException('CURL_EXTENSION_UNAVAILABLE');
+            throw new ExternalContentGatewayException('TRANSPORT_UNAVAILABLE', 'transport');
         }
         $parts = parse_url($url);
         $host = strtolower((string) ($parts['host'] ?? ''));
         if (! is_array($parts) || ($parts['scheme'] ?? null) !== 'https' || $host === '' || (int) ($parts['port'] ?? 443) !== 443) {
-            throw new RuntimeException('TRANSPORT_URL_BLOCKED');
+            throw new ExternalContentGatewayException('TRANSPORT_URL_BLOCKED', 'request');
         }
         if (! in_array($method, ['GET', 'HEAD'], true) || filter_var($approvedIp, FILTER_VALIDATE_IP) === false) {
-            throw new RuntimeException('TRANSPORT_REQUEST_BLOCKED');
+            throw new ExternalContentGatewayException('TRANSPORT_REQUEST_BLOCKED', 'request');
         }
 
         $headers = [];
@@ -27,7 +25,7 @@ final class PinnedTlsExternalContentTransport implements ExternalContentTranspor
         $oversized = false;
         $handle = curl_init($url);
         if ($handle === false) {
-            throw new RuntimeException('TRANSPORT_INIT_FAILED');
+            throw new ExternalContentGatewayException('TRANSPORT_INIT_FAILED', 'transport', true);
         }
         $resolveAddress = filter_var($approvedIp, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)
             ? '['.$approvedIp.']'
@@ -80,7 +78,21 @@ final class PinnedTlsExternalContentTransport implements ExternalContentTranspor
             $status = (int) curl_getinfo($handle, CURLINFO_RESPONSE_CODE);
             $connectedIp = strtolower((string) curl_getinfo($handle, CURLINFO_PRIMARY_IP));
             if ($ok === false || $oversized) {
-                throw new RuntimeException($oversized ? 'CONTENT_RESPONSE_TOO_LARGE' : 'TRANSPORT_REQUEST_FAILED');
+                if ($oversized) {
+                    throw new ExternalContentGatewayException('CONTENT_RESPONSE_TOO_LARGE', 'size');
+                }
+                $error = curl_errno($handle);
+                $reason = match ($error) {
+                    CURLE_OPERATION_TIMEDOUT => 'TRANSPORT_TIMEOUT',
+                    CURLE_COULDNT_RESOLVE_HOST => 'DNS_RESOLUTION_FAILED',
+                    CURLE_COULDNT_CONNECT => 'TRANSPORT_CONNECT_FAILED',
+                    CURLE_SSL_CONNECT_ERROR, CURLE_PEER_FAILED_VERIFICATION, CURLE_SSL_CERTPROBLEM => 'TRANSPORT_TLS_FAILED',
+                    CURLE_RECV_ERROR, CURLE_SEND_ERROR, CURLE_GOT_NOTHING => 'TRANSPORT_CONNECTION_RESET',
+                    default => 'TRANSPORT_REQUEST_FAILED',
+                };
+                $retryable = in_array($reason, ['TRANSPORT_CONNECT_FAILED', 'TRANSPORT_TLS_FAILED', 'TRANSPORT_CONNECTION_RESET'], true)
+                    && $status === 0;
+                throw new ExternalContentGatewayException($reason, 'transport', $retryable);
             }
 
             return ['status' => $status, 'headers' => $headers, 'body' => $body, 'connected_ip' => $connectedIp];

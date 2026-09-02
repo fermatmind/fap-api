@@ -51,7 +51,8 @@ final class CompetitiveEvidenceAnalyzer
         $conflict = ($authority['conflict'] ?? false) === true || ($measurement['conflict'] ?? false) === true;
         $requiredMissing = $pageFamily === ''
             || ! in_array($locale, ['en', 'zh-CN'], true)
-            || count($competitors) === 0
+            || count($competitors) < 2
+            || count(array_filter($competitors, fn (array $projection): bool => $this->substantiveProjection($projection))) !== count($competitors)
             || count($fermatmind) < 2
             || ! $this->hash((string) ($authority['source_hash'] ?? ''))
             || ! $this->hash((string) ($measurement['source_hash'] ?? ''));
@@ -86,6 +87,7 @@ final class CompetitiveEvidenceAnalyzer
         $structureGap = $structureGaps !== [];
         $ownerGap = ($authority['owner_gap_confirmed'] ?? false) === true || $entityGap || $structureGap;
         $complete = ! $requiredMissing && ! $conflict && $freshness === 'fresh';
+        $multiSourceJudgment = $structureGaps !== [] || $entityGaps !== [] || $informationGain !== [] || $internalLinks !== [];
 
         $necessity = $this->pageNecessity(
             $complete,
@@ -102,6 +104,9 @@ final class CompetitiveEvidenceAnalyzer
             : ($similarity >= 9000 && ! $targetLocaleAdds ? 'yes' : 'no');
 
         $holds = $this->holds($freshness, $requiredMissing, $conflict, $multiSource, $necessity);
+        if (! $multiSourceJudgment) {
+            $holds = $this->strings([...$holds, 'MULTI_SOURCE_FINDING_HOLD']);
+        }
         $evidenceRefs = $this->evidenceRefs($allProjections, $authority, $measurement);
 
         $finding = [
@@ -149,7 +154,7 @@ final class CompetitiveEvidenceAnalyzer
         ];
         $handoff['handoff_hash'] = $this->hasher->hash($handoff);
 
-        $status = $complete && ! in_array($necessity, ['conditional', 'unknown'], true) ? 'READY' : 'HOLD';
+        $status = $complete && $multiSourceJudgment && ! in_array($necessity, ['conditional', 'unknown'], true) ? 'READY' : 'HOLD';
         $output = [
             'version' => 'seo.competitive_evidence_output.v1',
             'status' => $status,
@@ -189,6 +194,20 @@ final class CompetitiveEvidenceAnalyzer
         }
 
         return $this->sortedRecords($verified, 'projection_hash');
+    }
+
+    /** @param array<string, mixed> $projection */
+    private function substantiveProjection(array $projection): bool
+    {
+        $modules = array_values(array_filter(
+            (array) data_get($projection, 'structure.modules', []),
+            static fn (mixed $module): bool => is_array($module) && ($module['module_type'] ?? 'other_registered') !== 'other_registered',
+        ));
+
+        return $modules !== []
+            && (array) data_get($projection, 'structure.entity_ids', []) !== []
+            && (array) data_get($projection, 'structure.entity_relations', []) !== []
+            && (array) data_get($projection, 'structure.internal_link_patterns', []) !== [];
     }
 
     /** @param list<array<string,mixed>> $policies @param array<string,mixed> $authority @param array<string,mixed> $measurement */

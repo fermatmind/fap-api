@@ -24,8 +24,25 @@ final class ExternalContentGateway
 
     private const ALLOWED_SAVED_FIELDS = ['structured_facts', 'bounded_snippets'];
 
+    private const MAX_TRANSPORT_ATTEMPTS = 32;
+
     /** @var array<string, float> */
     private array $lastRequestAt = [];
+
+    /** @var array<string, true> */
+    private array $validatedPolicyEvidence = [];
+
+    /** @var array<string, true> */
+    private array $validatedRobots = [];
+
+    /** @var array<string, array{status:int,headers:array<string,string>,body:string,connected_ip:string}> */
+    private array $robotsEvidence = [];
+
+    private int $transportAttempts = 0;
+
+    private int $logicalRequests = 0;
+
+    private int $retryCount = 0;
 
     public function __construct(
         private readonly ExternalDnsResolver $dns,
@@ -59,8 +76,10 @@ final class ExternalContentGateway
             }
 
             return $this->fetchValidated($sourceId, $url, $policy, 0, [], []);
+        } catch (ExternalContentGatewayException $exception) {
+            return $this->hold($exception->reasonCode, 'not_scanned', 0, $sourceId, $exception->stage);
         } catch (Throwable) {
-            return $this->hold('EXTERNAL_GATEWAY_HELD');
+            return $this->hold('EXTERNAL_GATEWAY_INTERNAL_HOLD', 'not_scanned', 0, $sourceId, 'internal');
         } finally {
             $globalLock?->release();
         }
@@ -91,8 +110,10 @@ final class ExternalContentGateway
             }
 
             return $this->fetchCompetitiveValidated($sourceId, $url, $policy, $context, $semantic);
+        } catch (ExternalContentGatewayException $exception) {
+            return $this->hold($exception->reasonCode, 'not_scanned', 0, $sourceId, $exception->stage);
         } catch (Throwable) {
-            return $this->hold('EXTERNAL_GATEWAY_HELD');
+            return $this->hold('EXTERNAL_GATEWAY_INTERNAL_HOLD', 'not_scanned', 0, $sourceId, 'internal');
         } finally {
             $globalLock?->release();
         }
@@ -253,12 +274,7 @@ final class ExternalContentGateway
         }
         $parts = $this->validateUrl($url, $policy);
         $host = (string) $parts['host'];
-        $hostLock = $this->acquireLock('host', [$host], $this->lockTtl($policy));
-        if (! $hostLock instanceof Lock) {
-            return $this->hold('HOST_CONCURRENCY_HELD');
-        }
         $externalReads = 0;
-        $validatedPolicyEvidence = [];
         try {
             foreach (['terms', 'license'] as $kind) {
                 $policyUrl = $policy[$kind.'_url'] ?? null;
@@ -269,7 +285,7 @@ final class ExternalContentGateway
                 }
                 $policyParts = $this->validateUrl($policyUrl, $policy);
                 $evidenceKey = $policyUrl.'|'.$expectedHash;
-                if (isset($validatedPolicyEvidence[$evidenceKey])) {
+                if (isset($this->validatedPolicyEvidence[$evidenceKey])) {
                     continue;
                 }
                 $robotsDecision = $this->robotsDecision((string) $policyParts['host'], (string) ($policyParts['path'] ?? '/'), $policy, $externalReads);
@@ -291,7 +307,7 @@ final class ExternalContentGateway
                 if (! hash_equals($expectedHash, $this->hasher->hash($normalized))) {
                     return $this->hold(strtoupper($kind).'_POLICY_DRIFT', 'not_scanned', $externalReads);
                 }
-                $validatedPolicyEvidence[$evidenceKey] = true;
+                $this->validatedPolicyEvidence[$evidenceKey] = true;
             }
             if (! $this->robotsDecision($host, (string) ($parts['path'] ?? '/'), $policy, $externalReads)) {
                 return $this->hold('ROBOTS_HELD', 'not_scanned', $externalReads);
@@ -328,18 +344,27 @@ final class ExternalContentGateway
                 ],
             ]);
             $projection = ($this->projector ?? app(CompetitivePageProjector::class))->project($projectionInput, $semantic);
+            if (! $this->projectionIsSubstantive($projection)) {
+                return $this->hold('PROJECTION_QUALITY_HOLD', 'pass', $externalReads, $sourceId, 'projection');
+            }
 
             return [
                 'status' => 'ready',
                 'projection' => $projection,
-                'dependency_ingestion' => ['external_reads' => $externalReads],
+                'dependency_ingestion' => $this->diagnostics($externalReads, $sourceId, 'complete', 'NONE'),
                 'egress_decision' => 'allowed_by_gateway',
                 'context_eligible' => true,
             ];
+        } catch (ExternalContentGatewayException $exception) {
+            return $this->hold($exception->reasonCode, 'not_scanned', $externalReads, $sourceId, $exception->stage);
+        } catch (\InvalidArgumentException $exception) {
+            $reason = preg_match('/^[A-Z0-9_]{3,64}$/D', $exception->getMessage()) === 1
+                ? $exception->getMessage()
+                : 'PROJECTION_HELD';
+
+            return $this->hold($reason, 'not_scanned', $externalReads, $sourceId, 'projection');
         } catch (Throwable) {
-            return $this->hold('EXTERNAL_GATEWAY_HELD', 'not_scanned', $externalReads);
-        } finally {
-            $hostLock->release();
+            return $this->hold('EXTERNAL_GATEWAY_INTERNAL_HOLD', 'not_scanned', $externalReads, $sourceId, 'internal');
         }
     }
 
@@ -347,7 +372,13 @@ final class ExternalContentGateway
     private function robotsDecision(string $host, string $path, array $policy, int &$externalReads): bool
     {
         $url = 'https://'.$host.'/robots.txt';
-        $response = $this->requestPinned('GET', $url, $policy, 65536, $externalReads);
+        $decisionKey = $url.'|'.(string) ($policy['robots_evidence_hash'] ?? '').'|'.$path;
+        if (isset($this->validatedRobots[$decisionKey])) {
+            return true;
+        }
+        $evidenceKey = $url.'|'.(string) ($policy['robots_evidence_hash'] ?? '');
+        $response = $this->robotsEvidence[$evidenceKey]
+            ??= $this->requestPinned('GET', $url, $policy, 65536, $externalReads);
         if (! $this->responseWithinLimit($response, 65536) || $this->responseRedirected($response)) {
             return false;
         }
@@ -359,31 +390,62 @@ final class ExternalContentGateway
             return true;
         }
 
-        return $response['status'] === 200
+        $allowed = $response['status'] === 200
             && ! $this->responseRedirected($response)
             && ($this->robots ?? app(RobotsPolicyEvaluator::class))->allows($response['body'], $path);
+        if ($allowed) {
+            $this->validatedRobots[$decisionKey] = true;
+        }
+
+        return $allowed;
     }
 
     /** @param array<string, mixed> $policy @return array{status:int,headers:array<string,string>,body:string,connected_ip:string} */
     private function requestPinned(string $method, string $url, array $policy, int $maxBytes, int &$externalReads): array
     {
         $host = strtolower((string) parse_url($url, PHP_URL_HOST));
-        $this->enforceRequestInterval($host, (int) ($policy['minimum_request_interval'] ?? 1));
-        $approved = $this->approvedAddresses($host);
-        $externalReads++;
-        $response = $this->transport->request(
-            $method,
-            $url,
-            $approved[0],
-            min(3, (int) ($policy['connect_timeout_seconds'] ?? 3)),
-            min(8, (int) ($policy['request_timeout_seconds'] ?? 8)),
-            $maxBytes,
-        );
-        if (! in_array(strtolower($response['connected_ip']), array_map('strtolower', $approved), true)) {
-            throw new \RuntimeException('DNS_REBINDING_BLOCKED');
+        $this->logicalRequests++;
+        for ($attempt = 0; $attempt < 2; $attempt++) {
+            if ($this->transportAttempts >= self::MAX_TRANSPORT_ATTEMPTS) {
+                throw new ExternalContentGatewayException('TRANSPORT_BUDGET_EXCEEDED', 'budget');
+            }
+            $hostLock = $this->acquireLock('host', [$host], $this->lockTtl($policy));
+            if (! $hostLock instanceof Lock) {
+                throw new ExternalContentGatewayException('HOST_CONCURRENCY_HELD', 'rate_limit');
+            }
+            try {
+                $this->enforceRequestInterval($host, (int) ($policy['minimum_request_interval'] ?? 1));
+                $approved = $this->approvedAddresses($host);
+                $this->transportAttempts++;
+                $externalReads++;
+                try {
+                    $response = $this->transport->request(
+                        $method,
+                        $url,
+                        $approved[$attempt % count($approved)],
+                        min(3, (int) ($policy['connect_timeout_seconds'] ?? 3)),
+                        min(8, (int) ($policy['request_timeout_seconds'] ?? 8)),
+                        $maxBytes,
+                    );
+                } catch (ExternalContentGatewayException $exception) {
+                    if (! $exception->retryable || $attempt === 1) {
+                        throw $exception;
+                    }
+                    $this->retryCount++;
+
+                    continue;
+                }
+                if (! in_array(strtolower($response['connected_ip']), array_map('strtolower', $approved), true)) {
+                    throw new ExternalContentGatewayException('DNS_REBINDING_BLOCKED', 'dns');
+                }
+
+                return $response;
+            } finally {
+                $hostLock->release();
+            }
         }
 
-        return $response;
+        throw new ExternalContentGatewayException('TRANSPORT_REQUEST_FAILED', 'transport');
     }
 
     /** @param array{status:int,headers:array<string,string>,body:string,connected_ip:string} $response */
@@ -445,22 +507,32 @@ final class ExternalContentGateway
         $parts = parse_url($url);
         if (! is_array($parts) || strtolower((string) ($parts['scheme'] ?? '')) !== 'https'
             || isset($parts['user']) || isset($parts['pass']) || (int) ($parts['port'] ?? 443) !== 443) {
-            throw new \RuntimeException('URL_BLOCKED');
+            throw new ExternalContentGatewayException('URL_BLOCKED', 'request');
         }
         $host = strtolower(rtrim((string) ($parts['host'] ?? ''), '.'));
         if ($host === '' || filter_var($host, FILTER_VALIDATE_IP)
             || preg_match('/(?:^|\.)(?:localhost|local|internal|onion)$/', $host) === 1) {
-            throw new \RuntimeException('HOST_BLOCKED');
+            throw new ExternalContentGatewayException('HOST_BLOCKED', 'request');
         }
         $allowed = array_map(static fn (mixed $item): string => strtolower((string) $item), (array) $policy['allowed_hosts']);
         if (! in_array($host, $allowed, true)) {
-            throw new \RuntimeException('HOST_NOT_ALLOWED');
+            throw new ExternalContentGatewayException('HOST_NOT_ALLOWED', 'request');
         }
         if ((isset($policy['exact_source_url']) || ($policy['prohibitions']['query_strings'] ?? false) === true)
             && (isset($parts['query']) || isset($parts['fragment']))) {
-            throw new \RuntimeException('URL_QUERY_OR_FRAGMENT_BLOCKED');
+            throw new ExternalContentGatewayException('URL_QUERY_OR_FRAGMENT_BLOCKED', 'request');
         }
         $path = (string) ($parts['path'] ?? '/');
+        $decodedPath = rawurldecode($path);
+        if ($decodedPath !== $path || str_contains($path, '//') || preg_match('#(?:^|/)\.\.?(/|$)#', $path) === 1) {
+            throw new ExternalContentGatewayException('PATH_ENCODING_BLOCKED', 'request');
+        }
+        if (isset($policy['exact_source_url'])) {
+            $exactUrls = array_values((array) ($policy['exact_allowed_urls'] ?? []));
+            if (! in_array($url, $exactUrls, true)) {
+                throw new ExternalContentGatewayException('SOURCE_URL_NOT_EXACT', 'request');
+            }
+        }
         $prefixes = array_values((array) ($policy['allowed_path_prefixes'] ?? []));
         if ($prefixes !== []) {
             $pathAllowed = array_filter($prefixes, static function (mixed $prefix) use ($path): bool {
@@ -469,7 +541,7 @@ final class ExternalContentGateway
                 return $path === $prefix || ($prefix !== '/' && str_starts_with($path, rtrim($prefix, '/').'/'));
             });
             if ($pathAllowed === []) {
-                throw new \RuntimeException('PATH_NOT_ALLOWED');
+                throw new ExternalContentGatewayException('PATH_NOT_ALLOWED', 'request');
             }
         }
 
@@ -490,14 +562,25 @@ final class ExternalContentGateway
     private function enforceRequestInterval(string $host, int $seconds): void
     {
         $seconds = max(1, $seconds);
-        $previous = $this->lastRequestAt[$host] ?? null;
-        if (is_float($previous) && ! app()->environment('testing')) {
-            $remaining = $seconds - (microtime(true) - $previous);
-            if ($remaining > 0) {
-                usleep((int) ceil($remaining * 1_000_000));
-            }
+        $lock = $this->acquireLock('interval-lock', [$host], max(3, $seconds + 2));
+        if (! $lock instanceof Lock) {
+            throw new ExternalContentGatewayException('MINIMUM_INTERVAL_HELD', 'rate_limit');
         }
-        $this->lastRequestAt[$host] = microtime(true);
+        try {
+            $key = $this->cacheKey('interval-at', [$host]);
+            $previous = Cache::get($key, $this->lastRequestAt[$host] ?? null);
+            if (is_numeric($previous) && ! app()->environment('testing')) {
+                $remaining = $seconds - (microtime(true) - (float) $previous);
+                if ($remaining > 0) {
+                    usleep((int) ceil($remaining * 1_000_000));
+                }
+            }
+            $now = microtime(true);
+            $this->lastRequestAt[$host] = $now;
+            Cache::put($key, $now, max(3, $seconds + 2));
+        } finally {
+            $lock->release();
+        }
     }
 
     private function normalizedVisibleText(string $body): string
@@ -542,11 +625,11 @@ final class ExternalContentGateway
     {
         $addresses = array_values(array_unique($this->dns->resolveAll($host)));
         if ($addresses === []) {
-            throw new \RuntimeException('DNS_EMPTY');
+            throw new ExternalContentGatewayException('DNS_EMPTY', 'dns');
         }
         foreach ($addresses as $address) {
             if (! $this->isPublicAddress($address)) {
-                throw new \RuntimeException('DNS_PRIVATE');
+                throw new ExternalContentGatewayException('DNS_PRIVATE', 'dns');
             }
         }
 
@@ -621,7 +704,7 @@ final class ExternalContentGateway
     }
 
     /** @return array<string, mixed> */
-    private function hold(string $code, string $injection = 'not_scanned', int $externalReads = 0): array
+    private function hold(string $code, string $injection = 'not_scanned', int $externalReads = 0, string $sourceId = 'unknown', string $stage = 'admission'): array
     {
         return [
             'status' => 'held',
@@ -629,7 +712,35 @@ final class ExternalContentGateway
             'injection_scan_result' => $injection,
             'egress_decision' => 'held',
             'context_eligible' => false,
-            'dependency_ingestion' => ['external_reads' => max(0, min(64, $externalReads))],
+            'dependency_ingestion' => $this->diagnostics($externalReads, $sourceId, $stage, $code),
         ];
+    }
+
+    /** @return array<string, int|string> */
+    private function diagnostics(int $externalReads, string $sourceId, string $stage, string $reason): array
+    {
+        return [
+            'external_reads' => max(0, min(self::MAX_TRANSPORT_ATTEMPTS, $externalReads)),
+            'logical_requests' => max(0, min(self::MAX_TRANSPORT_ATTEMPTS, $this->logicalRequests)),
+            'transport_attempts' => max(0, min(self::MAX_TRANSPORT_ATTEMPTS, $this->transportAttempts)),
+            'retry_count' => max(0, min(self::MAX_TRANSPORT_ATTEMPTS, $this->retryCount)),
+            'source_id' => preg_match('/^[a-z0-9][a-z0-9._-]{0,63}$/D', $sourceId) === 1 ? $sourceId : 'unknown',
+            'failed_stage' => preg_match('/^[a-z_]{3,32}$/D', $stage) === 1 ? $stage : 'internal',
+            'error_class' => preg_match('/^[A-Z0-9_]{3,64}$/D', $reason) === 1 ? $reason : 'EXTERNAL_GATEWAY_INTERNAL_HOLD',
+        ];
+    }
+
+    /** @param array<string, mixed> $projection */
+    private function projectionIsSubstantive(array $projection): bool
+    {
+        $modules = array_values(array_filter(
+            (array) data_get($projection, 'structure.modules', []),
+            static fn (mixed $module): bool => is_array($module) && ($module['module_type'] ?? 'other_registered') !== 'other_registered',
+        ));
+
+        return $modules !== []
+            && (array) data_get($projection, 'structure.entity_ids', []) !== []
+            && (array) data_get($projection, 'structure.entity_relations', []) !== []
+            && (array) data_get($projection, 'structure.internal_link_patterns', []) !== [];
     }
 }

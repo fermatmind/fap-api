@@ -60,7 +60,7 @@ final class SeoPlatform11G3CompetitiveAnalyzerTest extends TestCase
         $this->assertSame([], $output['findings'][0]['structure_gaps']);
         $this->assertSame([], $output['findings'][0]['entity_gaps']);
         $this->assertSame([], $output['findings'][0]['information_gain']);
-        $this->assertSame('conditional', $output['11i_handoff']['page_necessity']);
+        $this->assertSame('unknown', $output['11i_handoff']['page_necessity']);
         $this->assertSame('HOLD', $output['status']);
         $this->assertContains('MULTI_SOURCE_EVIDENCE_HOLD', $output['11i_handoff']['hold_reasons']);
     }

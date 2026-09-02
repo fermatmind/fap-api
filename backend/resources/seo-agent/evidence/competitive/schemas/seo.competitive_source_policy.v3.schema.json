@@ -3,7 +3,7 @@
   "schema_version": "3.0.0",
   "type": "object",
   "additionalProperties": false,
-  "required": ["version", "policy_id", "policy_version", "source_id", "source_class", "source_registry_revision", "exact_source_url", "exact_origin", "exact_path", "allowed_origins", "allowed_path_prefixes", "terms_url", "terms_url_hash", "terms_content_hash", "license_url", "license_url_hash", "license_content_hash", "robots_url", "robots_evidence_hash", "robots_decision", "terms_review", "license_review", "reviewed_at", "expires_at", "max_validity_seconds", "minimum_request_interval", "max_concurrency", "max_content_bytes", "connect_timeout_seconds", "request_timeout_seconds", "retention_scope", "collection_state", "prohibitions", "policy_hash"],
+  "required": ["version", "policy_id", "policy_version", "source_id", "source_class", "source_registry_revision", "exact_source_url", "exact_origin", "exact_path", "allowed_origins", "allowed_path_prefixes", "terms_url", "terms_url_hash", "terms_content_hash", "license_url", "license_url_hash", "license_content_hash", "combined_terms_license_scope", "robots_url", "robots_evidence_hash", "robots_decision", "terms_review", "license_review", "reviewed_at", "expires_at", "max_validity_seconds", "minimum_request_interval", "max_concurrency", "max_content_bytes", "connect_timeout_seconds", "request_timeout_seconds", "retention_scope", "collection_state", "prohibitions", "policy_hash"],
   "properties": {
     "version": {"const": "seo.competitive_source_policy.v3"},
     "policy_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"},
@@ -22,6 +22,7 @@
     "license_url": {"type": "string", "pattern": "^https://"},
     "license_url_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
     "license_content_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "combined_terms_license_scope": {"type": "boolean"},
     "robots_url": {"type": "string", "pattern": "^https://"},
     "robots_evidence_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
     "robots_decision": {"const": "approved"},
