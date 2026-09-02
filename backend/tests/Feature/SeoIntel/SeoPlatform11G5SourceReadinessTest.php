@@ -63,12 +63,18 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
         $expectedEvidenceHashes = [
             'fermatmind-big-five-en' => ['58aad528ad4ea70fecd7527fdb435739ce444db9de13935f850d32ef0eeffb0a', '61ec67d56b12c396382db5473664f1457c5f37cc9d03896f331b52a0e2a1e9a3', 'c2597aba68ffc3fdb9cc697f42f98e00440d5ee86362515301c1917a6749ba0d'],
             'fermatmind-big-five-zh' => ['58aad528ad4ea70fecd7527fdb435739ce444db9de13935f850d32ef0eeffb0a', '61ec67d56b12c396382db5473664f1457c5f37cc9d03896f331b52a0e2a1e9a3', 'c2597aba68ffc3fdb9cc697f42f98e00440d5ee86362515301c1917a6749ba0d'],
-            'bigfive-test' => ['b265717eeca2bceb69a8605bc3a17e8d3a961c5dfe2a49c37f42c27b0cb75869', '276108d1973a1ec0d4c25aa2e475d3a18ec47c595f9a39254466857a93c0d22e', '15441e54b432b2353bbc634cfd2c7ef22d6947ac396184ed3c2ee63fab56c564'],
-            'b5-allthethings' => ['44097c2556b0410db1d895247356e624e47a09ab3fce96d0645a4a9aa014911b', '44097c2556b0410db1d895247356e624e47a09ab3fce96d0645a4a9aa014911b', '4597a80874d9fc1cb30730bded2dcb7f256525b1e7d1da9075feb96db78f1ef9'],
+            'bigfive-test' => ['b265717eeca2bceb69a8605bc3a17e8d3a961c5dfe2a49c37f42c27b0cb75869', 'b265717eeca2bceb69a8605bc3a17e8d3a961c5dfe2a49c37f42c27b0cb75869', '15441e54b432b2353bbc634cfd2c7ef22d6947ac396184ed3c2ee63fab56c564'],
+            'b5-allthethings' => ['35f340728d5f500cc8971f616ac01f8280bbf1147aa2ba724839a571cd5863b2', '35f340728d5f500cc8971f616ac01f8280bbf1147aa2ba724839a571cd5863b2', '4597a80874d9fc1cb30730bded2dcb7f256525b1e7d1da9075feb96db78f1ef9'],
+        ];
+        $expectedReviewWindows = [
+            'fermatmind-big-five-en' => ['2026-09-02T12:21:07Z', '2026-10-02T12:21:07Z'],
+            'fermatmind-big-five-zh' => ['2026-09-02T12:21:07Z', '2026-10-02T12:21:07Z'],
+            'bigfive-test' => ['2026-09-02T13:09:56Z', '2026-10-02T13:09:56Z'],
+            'b5-allthethings' => ['2026-09-02T13:09:56Z', '2026-10-02T13:09:56Z'],
         ];
         foreach ($registry->policies() as $sourceId => $policy) {
-            $this->assertSame('2026-09-02T12:21:07Z', $policy['reviewed_at']);
-            $this->assertSame('2026-10-02T12:21:07Z', $policy['expires_at']);
+            $this->assertSame($expectedReviewWindows[$sourceId][0], $policy['reviewed_at']);
+            $this->assertSame($expectedReviewWindows[$sourceId][1], $policy['expires_at']);
             $this->assertSame($expectedEvidenceHashes[$sourceId], [
                 $policy['terms_content_hash'],
                 $policy['license_content_hash'],
@@ -80,6 +86,10 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
             $this->assertTrue($policy['prohibitions']['raw_html_retention']);
             $this->assertTrue($policy['prohibitions']['competitor_text_retention']);
         }
+        $this->assertSame('https://bigfive-test.com/faq', $registry->policies()['bigfive-test']['license_url']);
+        $this->assertSame('https://github.com/zrrrzzt/b5-web/blob/main/LICENSE', $registry->policies()['b5-allthethings']['license_url']);
+        $this->assertNotContains('https://raw.githubusercontent.com', $registry->policies()['bigfive-test']['allowed_origins']);
+        $this->assertNotContains('https://raw.githubusercontent.com', $registry->policies()['b5-allthethings']['allowed_origins']);
     }
 
     public function test_runtime_closeout_closes_only_for_independent_production_bundle(): void

@@ -50,6 +50,106 @@ final class SeoPlatform11G2GatewayAdapterTest extends TestCase
         $this->assertNotSame($normalizer->invoke($gateway, $first), $normalizer->invoke($gateway, $policyChanged));
     }
 
+    public function test_competitive_gateway_reads_identical_terms_and_license_evidence_once(): void
+    {
+        $hasher = app(\App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher::class);
+        $transport = new class implements ExternalContentTransport
+        {
+            /** @var list<string> */
+            public array $requests = [];
+
+            public function request(string $method, string $url, string $approvedIp, int $connectTimeoutSeconds, int $requestTimeoutSeconds, int $maxBytes): array
+            {
+                $this->requests[] = $url;
+                $body = match ($url) {
+                    'https://example.com/robots.txt' => "User-agent: *\nDisallow:",
+                    'https://example.com/policy' => '<main><p>MIT license permits structural use.</p></main>',
+                    default => '<main><section class="hero"><h1>Public Big Five</h1></section></main>',
+                };
+
+                return [
+                    'status' => 200,
+                    'headers' => [
+                        'content-type' => str_ends_with($url, '/robots.txt') ? 'text/plain' : 'text/html',
+                        'content-length' => (string) strlen($body),
+                    ],
+                    'body' => $body,
+                    'connected_ip' => $approvedIp,
+                ];
+            }
+        };
+        $dns = new class implements ExternalDnsResolver
+        {
+            public function resolveAll(string $host): array
+            {
+                return ['93.184.216.34'];
+            }
+        };
+        $policyUrl = 'https://example.com/policy';
+        $policyEvidenceHash = $hasher->hash('mit license permits structural use.');
+        config()->set('seo_agent_evidence.external_fetch_enabled', true);
+        config()->set('seo_agent_evidence.agent_external_egress', false);
+        config()->set('seo_agent_evidence.allowed_sources', ['public' => [
+            'source_id' => 'public',
+            'policy_id' => 'competitive.source.public.v3',
+            'policy_version' => 3,
+            'policy_hash' => str_repeat('a', 64),
+            'exact_source_url' => 'https://example.com/facts',
+            'allowed_hosts' => ['example.com'],
+            'allowed_protocols' => ['https'],
+            'allowed_ports' => [443],
+            'allowed_path_prefixes' => ['/facts', '/policy', '/robots.txt'],
+            'redirect_policy' => 0,
+            'robots_required' => true,
+            'robots_url' => 'https://example.com/robots.txt',
+            'robots_evidence_hash' => $hasher->hash('user-agent: * disallow:'),
+            'minimum_request_interval' => 1,
+            'max_concurrency' => 1,
+            'max_content_bytes' => 524288,
+            'allowed_content_types' => ['text/html', 'text/plain'],
+            'connect_timeout_seconds' => 3,
+            'request_timeout_seconds' => 8,
+            'terms_status' => 'approved',
+            'terms_reviewed_at' => '2026-09-02T00:00:00Z',
+            'terms_url' => $policyUrl,
+            'terms_url_hash' => $hasher->hash($policyUrl),
+            'terms_evidence_hash' => $policyEvidenceHash,
+            'license_url' => $policyUrl,
+            'license_url_hash' => $hasher->hash($policyUrl),
+            'license_evidence_hash' => $policyEvidenceHash,
+            'login_required' => false,
+            'technical_restriction_state' => 'permitted',
+            'license_class' => 'public_fact_permitted',
+            'allowed_saved_fields' => ['structured_facts'],
+            'max_snippet_chars' => 1,
+            'retention_class' => 'external_structured_fact',
+            'data_usage_purpose' => 'competitive_evidence',
+            'collection_state' => 'approved',
+            'expires_at' => '2026-10-02T00:00:00Z',
+        ]]);
+        $gateway = new ExternalContentGateway(
+            $dns,
+            $transport,
+            app(\App\Services\SeoAgentEvidence\External\ExternalInjectionScanner::class),
+            app(\App\Services\SeoAgentEvidence\Privacy\SeoPrivateDataScanner::class),
+            $hasher,
+            app(\App\Services\SeoAgentEvidence\Privacy\SeoQueryHmac::class),
+            new RobotsPolicyEvaluator,
+            app(CompetitivePageProjector::class),
+        );
+
+        $result = $gateway->fetchCompetitive('public', 'https://example.com/facts', [
+            'cohort_id' => 'competitive.big-five.live.v2',
+            'source_class' => 'competitor_public',
+            'page_family' => 'tests',
+            'locale' => 'en',
+        ], app(CompetitiveSourceRegistry::class)->semanticRegistry());
+
+        $this->assertSame('ready', $result['status']);
+        $this->assertSame(4, $result['dependency_ingestion']['external_reads']);
+        $this->assertSame(1, count(array_filter($transport->requests, static fn (string $url): bool => $url === $policyUrl)));
+    }
+
     public function test_registry_is_hash_bound_exact_url_only_and_live(): void
     {
         $registry = app(CompetitiveSourceRegistry::class);

@@ -258,6 +258,7 @@ final class ExternalContentGateway
             return $this->hold('HOST_CONCURRENCY_HELD');
         }
         $externalReads = 0;
+        $validatedPolicyEvidence = [];
         try {
             foreach (['terms', 'license'] as $kind) {
                 $policyUrl = $policy[$kind.'_url'] ?? null;
@@ -267,6 +268,10 @@ final class ExternalContentGateway
                     return $this->hold(strtoupper($kind).'_POLICY_HELD', 'not_scanned', $externalReads);
                 }
                 $policyParts = $this->validateUrl($policyUrl, $policy);
+                $evidenceKey = $policyUrl.'|'.$expectedHash;
+                if (isset($validatedPolicyEvidence[$evidenceKey])) {
+                    continue;
+                }
                 $robotsDecision = $this->robotsDecision((string) $policyParts['host'], (string) ($policyParts['path'] ?? '/'), $policy, $externalReads);
                 if (! $robotsDecision) {
                     return $this->hold('ROBOTS_HELD', 'not_scanned', $externalReads);
@@ -286,6 +291,7 @@ final class ExternalContentGateway
                 if (! hash_equals($expectedHash, $this->hasher->hash($normalized))) {
                     return $this->hold(strtoupper($kind).'_POLICY_DRIFT', 'not_scanned', $externalReads);
                 }
+                $validatedPolicyEvidence[$evidenceKey] = true;
             }
             if (! $this->robotsDecision($host, (string) ($parts['path'] ?? '/'), $policy, $externalReads)) {
                 return $this->hold('ROBOTS_HELD', 'not_scanned', $externalReads);
