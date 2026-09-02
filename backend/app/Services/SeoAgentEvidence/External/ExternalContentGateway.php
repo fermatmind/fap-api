@@ -282,7 +282,7 @@ final class ExternalContentGateway
                 }
                 $normalized = $contentType === 'text/plain'
                     ? mb_strtolower(preg_replace('/\s+/u', ' ', trim($policyResponse['body'])) ?: '', 'UTF-8')
-                    : $this->normalizedVisibleText($policyResponse['body']);
+                    : $this->normalizedPolicyText($policyResponse['body']);
                 if (! hash_equals($expectedHash, $this->hasher->hash($normalized))) {
                     return $this->hold(strtoupper($kind).'_POLICY_DRIFT', 'not_scanned', $externalReads);
                 }
@@ -497,6 +497,11 @@ final class ExternalContentGateway
     private function normalizedVisibleText(string $body): string
     {
         return mb_strtolower(preg_replace('/\s+/u', ' ', trim($this->visibleText($body, false))) ?: '', 'UTF-8');
+    }
+
+    private function normalizedPolicyText(string $body): string
+    {
+        return mb_strtolower(preg_replace('/\s+/u', ' ', trim($this->visibleText($body, true))) ?: '', 'UTF-8');
     }
 
     private function mainVisibleText(string $body): string

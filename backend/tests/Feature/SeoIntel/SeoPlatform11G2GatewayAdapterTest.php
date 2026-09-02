@@ -7,6 +7,7 @@ namespace Tests\Feature\SeoIntel;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveEvidenceBoundaryGuard;
 use App\Services\SeoAgentEvidence\Competitive\CompetitivePageProjector;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveSourceRegistry;
+use App\Services\SeoAgentEvidence\External\ExternalContentGateway;
 use App\Services\SeoAgentEvidence\External\ExternalContentTransport;
 use App\Services\SeoAgentEvidence\External\ExternalDnsResolver;
 use App\Services\SeoAgentEvidence\External\NativeExternalDnsResolver;
@@ -35,6 +36,18 @@ final class SeoPlatform11G2GatewayAdapterTest extends TestCase
         $this->assertFalse($robots->allows($body, '/private/public/child'));
         $this->assertTrue($robots->allows($body, '/same'));
         $this->assertTrue($robots->allows($body, '/public'));
+    }
+
+    public function test_policy_hash_excludes_dynamic_site_chrome_but_tracks_policy_body(): void
+    {
+        $normalizer = new \ReflectionMethod(ExternalContentGateway::class, 'normalizedPolicyText');
+        $gateway = app(ExternalContentGateway::class);
+        $first = '<html><body><header>live count 1</header><main><h1>Terms</h1><p>Stable rule.</p></main><footer>build a</footer></body></html>';
+        $chromeChanged = '<html><body><header>live count 2</header><main><h1>Terms</h1><p>Stable rule.</p></main><footer>build b</footer></body></html>';
+        $policyChanged = '<html><body><header>live count 2</header><main><h1>Terms</h1><p>Changed rule.</p></main><footer>build b</footer></body></html>';
+
+        $this->assertSame($normalizer->invoke($gateway, $first), $normalizer->invoke($gateway, $chromeChanged));
+        $this->assertNotSame($normalizer->invoke($gateway, $first), $normalizer->invoke($gateway, $policyChanged));
     }
 
     public function test_registry_is_hash_bound_exact_url_only_and_live(): void

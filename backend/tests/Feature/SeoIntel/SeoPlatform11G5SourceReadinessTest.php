@@ -61,14 +61,14 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
         }
         $this->assertCount(2, array_unique($competitorDomains));
         $expectedEvidenceHashes = [
-            'fermatmind-big-five-en' => ['de52de554efacb42c6165f3a9e21c807cb8bf70d2188b7c6ced81ed639586def', 'c9da47f3ddadece81d0b7cc026d8dcba359ea6ca2177bf7ffc040c972a11801b', '3ecbe5bd5b38eeefaeaa136701f7514ca52afe0e6cb79b90820795017f5f2f9d'],
-            'fermatmind-big-five-zh' => ['de52de554efacb42c6165f3a9e21c807cb8bf70d2188b7c6ced81ed639586def', 'c9da47f3ddadece81d0b7cc026d8dcba359ea6ca2177bf7ffc040c972a11801b', '3ecbe5bd5b38eeefaeaa136701f7514ca52afe0e6cb79b90820795017f5f2f9d'],
-            'bigfive-test' => ['2b27602ba192cab224c248452d3ec168bd9543588e7874f29996ccea3b3aa3ff', '2b27602ba192cab224c248452d3ec168bd9543588e7874f29996ccea3b3aa3ff', '19ef325fde27351b8049efb9521db24e1e43771ee966ecb59977cd062bce2606'],
-            'b5-allthethings' => ['44097c2556b0410db1d895247356e624e47a09ab3fce96d0645a4a9aa014911b', '44097c2556b0410db1d895247356e624e47a09ab3fce96d0645a4a9aa014911b', '3292c6bc6eb52945a4d1a34560d1b911a06ee97c60ad910ca43b430d0d8af1cd'],
+            'fermatmind-big-five-en' => ['58aad528ad4ea70fecd7527fdb435739ce444db9de13935f850d32ef0eeffb0a', '61ec67d56b12c396382db5473664f1457c5f37cc9d03896f331b52a0e2a1e9a3', 'c2597aba68ffc3fdb9cc697f42f98e00440d5ee86362515301c1917a6749ba0d'],
+            'fermatmind-big-five-zh' => ['58aad528ad4ea70fecd7527fdb435739ce444db9de13935f850d32ef0eeffb0a', '61ec67d56b12c396382db5473664f1457c5f37cc9d03896f331b52a0e2a1e9a3', 'c2597aba68ffc3fdb9cc697f42f98e00440d5ee86362515301c1917a6749ba0d'],
+            'bigfive-test' => ['b265717eeca2bceb69a8605bc3a17e8d3a961c5dfe2a49c37f42c27b0cb75869', '276108d1973a1ec0d4c25aa2e475d3a18ec47c595f9a39254466857a93c0d22e', '15441e54b432b2353bbc634cfd2c7ef22d6947ac396184ed3c2ee63fab56c564'],
+            'b5-allthethings' => ['44097c2556b0410db1d895247356e624e47a09ab3fce96d0645a4a9aa014911b', '44097c2556b0410db1d895247356e624e47a09ab3fce96d0645a4a9aa014911b', '4597a80874d9fc1cb30730bded2dcb7f256525b1e7d1da9075feb96db78f1ef9'],
         ];
         foreach ($registry->policies() as $sourceId => $policy) {
-            $this->assertSame('2026-09-02T10:28:33Z', $policy['reviewed_at']);
-            $this->assertSame('2026-10-02T10:28:33Z', $policy['expires_at']);
+            $this->assertSame('2026-09-02T12:21:07Z', $policy['reviewed_at']);
+            $this->assertSame('2026-10-02T12:21:07Z', $policy['expires_at']);
             $this->assertSame($expectedEvidenceHashes[$sourceId], [
                 $policy['terms_content_hash'],
                 $policy['license_content_hash'],

@@ -72,6 +72,7 @@ final class SeoPlatform11FCommercialFunnelCROTest extends TestCase
         $this->assertSame([], $output['candidates']);
         $this->assertSame([], $output['findings'][0]['hypotheses']);
         $this->assertSame('valid_zero', $output['findings'][0]['measurement_state']['state']);
+        $this->assertSame(0, $output['external_calls']);
         $this->assertSame(0, $output['write_count']);
     }
 }
