@@ -60,9 +60,20 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
             }
         }
         $this->assertCount(2, array_unique($competitorDomains));
-        foreach ($registry->policies() as $policy) {
-            $this->assertSame('2026-09-01T13:26:55Z', $policy['reviewed_at']);
-            $this->assertSame('2026-10-01T13:26:55Z', $policy['expires_at']);
+        $expectedEvidenceHashes = [
+            'fermatmind-big-five-en' => ['de52de554efacb42c6165f3a9e21c807cb8bf70d2188b7c6ced81ed639586def', 'c9da47f3ddadece81d0b7cc026d8dcba359ea6ca2177bf7ffc040c972a11801b', '3ecbe5bd5b38eeefaeaa136701f7514ca52afe0e6cb79b90820795017f5f2f9d'],
+            'fermatmind-big-five-zh' => ['de52de554efacb42c6165f3a9e21c807cb8bf70d2188b7c6ced81ed639586def', 'c9da47f3ddadece81d0b7cc026d8dcba359ea6ca2177bf7ffc040c972a11801b', '3ecbe5bd5b38eeefaeaa136701f7514ca52afe0e6cb79b90820795017f5f2f9d'],
+            'bigfive-test' => ['2b27602ba192cab224c248452d3ec168bd9543588e7874f29996ccea3b3aa3ff', '2b27602ba192cab224c248452d3ec168bd9543588e7874f29996ccea3b3aa3ff', '19ef325fde27351b8049efb9521db24e1e43771ee966ecb59977cd062bce2606'],
+            'b5-allthethings' => ['44097c2556b0410db1d895247356e624e47a09ab3fce96d0645a4a9aa014911b', '44097c2556b0410db1d895247356e624e47a09ab3fce96d0645a4a9aa014911b', '3292c6bc6eb52945a4d1a34560d1b911a06ee97c60ad910ca43b430d0d8af1cd'],
+        ];
+        foreach ($registry->policies() as $sourceId => $policy) {
+            $this->assertSame('2026-09-02T10:28:33Z', $policy['reviewed_at']);
+            $this->assertSame('2026-10-02T10:28:33Z', $policy['expires_at']);
+            $this->assertSame($expectedEvidenceHashes[$sourceId], [
+                $policy['terms_content_hash'],
+                $policy['license_content_hash'],
+                $policy['robots_evidence_hash'],
+            ]);
             $this->assertLessThanOrEqual(2592000, strtotime($policy['expires_at']) - strtotime($policy['reviewed_at']));
             $this->assertGreaterThan(time(), strtotime($policy['expires_at']));
             $this->assertSame(['url_hash', 'content_hash', 'structural_projection', 'review_decision'], $policy['retention_scope']);

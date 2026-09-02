@@ -103,6 +103,7 @@ export function classifyPaths(inputPaths) {
   const result = Object.fromEntries(CATEGORIES.map((category) => [category, false]));
   const reasons = Object.fromEntries(CATEGORIES.map((category) => [category, []]));
   const publisherRequired = paths.some(isCareerPublisherBoundary);
+  const seoCompetitiveEvidence = paths.some(isSeoCompetitiveEvidenceBoundary);
   const operations = {
     publisher_required: publisherRequired,
     career_current_authority_release: paths.some(isCareerAuthorityReleaseBoundary),
@@ -122,8 +123,8 @@ export function classifyPaths(inputPaths) {
     seo_agent_policy_gateway: paths.some((path) =>
       /^backend\/(?:app\/Services\/SeoAgentPolicyGateway\/|app\/Console\/Commands\/SeoPolicyGatewayCloseout\.php$|resources\/seo-agent\/policy-gateway\/|docs\/(?:seo\/generated\/seo-policy-gateway-contract-manifest\.v1\.json$|contracts\/openapi\.snapshot\.json$)|scripts\/seo\/export_seo_policy_gateway_contracts\.php$|tests\/Feature\/SeoIntel\/SeoPlatform11C|tests\/Feature\/Ops\/SeoUxImpl06AgentCouncilTest\.php$|app\/Filament\/Ops\/Support\/SeoAgentCouncilUiContract\.php$|resources\/views\/filament\/ops\/components\/ops-agent-council-workspace\.blade\.php$|app\/Http\/Controllers\/API\/V0_5\/Ops\/SeoIntel\/SeoIntelDashboardController\.php$|routes\/api\.php$)/.test(path)
     ),
-    seo_council_orchestration: paths.some(isSeoCouncilOrchestrationBoundary),
-    seo_competitive_evidence: paths.some(isSeoCompetitiveEvidenceBoundary),
+    seo_council_orchestration: paths.some(isSeoCouncilOrchestrationBoundary) || seoCompetitiveEvidence,
+    seo_competitive_evidence: seoCompetitiveEvidence,
   };
   let testsChanged = false;
 

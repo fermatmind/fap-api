@@ -319,10 +319,18 @@ test("11G competitive evidence changes select the controlled ingestion operation
     "backend/app/Services/SeoAgentEvidence/Competitive/CompetitiveEvidenceIngestionService.php",
   ]);
   assert.equal(result.operations.seo_competitive_evidence, true);
+  assert.equal(result.operations.seo_council_orchestration, true);
   assert.equal(result.flags.application_code, true);
-  assert.equal(classifyPaths([
+  const gateway = classifyPaths([
     "backend/app/Services/SeoAgentEvidence/External/ExternalContentGateway.php",
-  ]).operations.seo_competitive_evidence, true);
+  ]);
+  assert.equal(gateway.operations.seo_competitive_evidence, true);
+  assert.equal(gateway.operations.seo_council_orchestration, true);
+  const policy = classifyPaths([
+    "backend/resources/seo-agent/evidence/competitive/policies/bigfive-test.v3.json",
+  ]);
+  assert.equal(policy.operations.seo_competitive_evidence, true);
+  assert.equal(policy.operations.seo_council_orchestration, true);
 });
 
 test("retired EQ mirror cleanup is content-only and cannot trigger search submission", () => {
