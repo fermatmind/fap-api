@@ -317,6 +317,7 @@ final class SeoConversionDailyBuilder
             'storage_timezone' => $result['storage_timezone'],
             'org_scope_mode' => ($result['org_scope'] ?? []) === [] ? 'all' : 'bounded',
             'org_scope_count' => count((array) ($result['org_scope'] ?? [])),
+            'public_org_zero_only' => ($result['org_scope'] ?? []) === [0],
             'attempted_rows' => (int) ($result['attempted_rows'] ?? 0),
             'skipped_rows' => (int) ($result['skipped_rows'] ?? 0),
             'deleted_rows' => (int) ($result['deleted_rows'] ?? 0),

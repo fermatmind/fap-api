@@ -112,6 +112,9 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
         $this->assertTrue($production['ready_for_11H']);
         $this->assertTrue($production['11i_handoff_ready']);
         $this->assertSame('NONE', $production['competitive_hold_reason']);
+        $this->assertSame($ingestion['measurement']['measurement_bundle_set_hash'], $production['measurement_bundle_set_hash']);
+        $this->assertSame('available', $production['search_measurement']['source_state']);
+        $this->assertSame('available', $production['cro_measurement']['source_state']);
         $this->assertSame(0, $production['external_calls']);
         $this->assertSame(0, $production['production_permissions']);
     }

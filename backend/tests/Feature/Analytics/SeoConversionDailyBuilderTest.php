@@ -522,6 +522,7 @@ final class SeoConversionDailyBuilderTest extends TestCase
         $this->assertSame('success', $run->status);
         $this->assertSame(str_repeat('a', 40), $receipt['active_production_sha']);
         $this->assertSame('all', $receipt['org_scope_mode']);
+        $this->assertFalse($receipt['public_org_zero_only']);
         $this->assertSame(0, $receipt['attempted_rows']);
         $this->assertFalse($receipt['raw_query_exposed']);
         $this->assertFalse($receipt['raw_session_or_business_identifiers_exposed']);

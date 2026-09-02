@@ -7,6 +7,8 @@ namespace Tests\Feature\SeoIntel;
 use App\Models\AdminUser;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Services\Analytics\SeoConversionDailyBuilder;
+use App\Services\SeoIntel\OpsDashboard\SeoConversionFunnelReadService;
 use App\Support\Rbac\PermissionNames;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -245,6 +247,24 @@ final class SeoConversionFunnelOpsReadoutTest extends TestCase
             ->assertJsonPath('data.totals.landing_pv_count', 0)
             ->assertJsonPath('data.totals.return_public_content_count', 0)
             ->assertJsonPath('data.recent_rows', []);
+    }
+
+    #[Test]
+    public function fresh_bounded_public_org_zero_receipt_exposes_real_zero_metrics(): void
+    {
+        config(['app.git_sha' => str_repeat('e', 40)]);
+        app(SeoConversionDailyBuilder::class)->refresh(
+            now()->subDays(89),
+            now(),
+            [0],
+        );
+
+        $read = app(SeoConversionFunnelReadService::class)->read(0);
+
+        $this->assertSame('production_healthy', $read['measurement_state']);
+        $this->assertSame('success', data_get($read, 'freshness.latest_attempt_status'));
+        $this->assertSame(0, data_get($read, 'totals.landing_pv_count'));
+        $this->assertSame([], $read['recent_rows']);
     }
 
     /**

@@ -106,18 +106,51 @@ final class SeoConversionFunnelReadService
         ];
     }
 
+    public function currentPublicZeroRefreshProven(): bool
+    {
+        if (! SchemaBaseline::hasTable(self::RUN_TABLE)) {
+            return false;
+        }
+
+        $runs = DB::table(self::RUN_TABLE)
+            ->where('status', 'success')
+            ->where('org_scope_count', 1)
+            ->orderByDesc('completed_at')
+            ->limit(20)
+            ->get(['status', 'trigger_mode', 'completed_at', 'org_scope_count', 'receipt_json']);
+        foreach ($runs as $run) {
+            $receipt = $this->boundedPublicReceipt($run);
+            if ($receipt === null
+                || ($receipt['attempted_rows'] ?? null) !== 0
+                || ($receipt['upserted_rows'] ?? null) !== 0
+                || data_get($receipt, 'readback_receipt.status') !== 'pass') {
+                continue;
+            }
+            $expected = data_get($receipt, 'readback_receipt.expected_metrics');
+            $persisted = data_get($receipt, 'readback_receipt.persisted_metrics');
+            if (is_array($expected) && is_array($persisted)
+                && $this->allMetricValuesAreZero($expected)
+                && $this->allMetricValuesAreZero($persisted)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /** @return array{last_successful_refresh_at:mixed,latest_attempt_at:mixed,latest_status:?string,trigger_mode:?string,warning:string} */
     private function refreshEvidence(int $orgId): array
     {
         if (SchemaBaseline::hasTable(self::RUN_TABLE)) {
-            $latest = DB::table(self::RUN_TABLE)
-                ->where('org_scope_count', 0)
+            $runs = DB::table(self::RUN_TABLE)
                 ->orderByDesc('completed_at')
-                ->first(['status', 'trigger_mode', 'completed_at']);
-            $lastSuccess = DB::table(self::RUN_TABLE)
-                ->where('org_scope_count', 0)
-                ->where('status', 'success')
-                ->max('completed_at');
+                ->limit(100)
+                ->get(['status', 'trigger_mode', 'completed_at', 'org_scope_count', 'receipt_json']);
+            $relevant = $runs->filter(fn (object $run): bool => $this->refreshRunCoversOrg($run, $orgId));
+            $latest = $relevant->first();
+            $lastSuccess = $relevant
+                ->first(static fn (object $run): bool => (string) $run->status === 'success')
+                ?->completed_at;
 
             if ($latest !== null || $lastSuccess !== null) {
                 return [
@@ -143,6 +176,83 @@ final class SeoConversionFunnelReadService
             'trigger_mode' => null,
             'warning' => 'seo_conversion_daily_missing_or_stale',
         ];
+    }
+
+    private function refreshRunCoversOrg(object $run, int $orgId): bool
+    {
+        if ((int) ($run->org_scope_count ?? -1) === 0) {
+            return true;
+        }
+        if ($orgId !== 0 || (int) ($run->org_scope_count ?? -1) !== 1) {
+            return false;
+        }
+
+        return $this->boundedPublicReceipt($run) !== null;
+    }
+
+    /** @return array<string,mixed>|null */
+    private function boundedPublicReceipt(object $run): ?array
+    {
+        try {
+            $receipt = json_decode((string) ($run->receipt_json ?? ''), true, 32, JSON_THROW_ON_ERROR);
+            $from = \Carbon\CarbonImmutable::parse((string) ($receipt['from'] ?? ''), 'UTC')->startOfDay();
+            $to = \Carbon\CarbonImmutable::parse((string) ($receipt['to'] ?? ''), 'UTC')->startOfDay();
+        } catch (\Throwable) {
+            return null;
+        }
+        $releaseSha = $this->releaseSha();
+        if (! is_array($receipt)
+            || $releaseSha === null
+            || ($receipt['schema_version'] ?? null) !== 'analytics-seo-conversion-refresh-receipt.v1'
+            || ($receipt['status'] ?? null) !== 'success'
+            || ($receipt['org_scope_mode'] ?? null) !== 'bounded'
+            || ($receipt['org_scope_count'] ?? null) !== 1
+            || ($receipt['public_org_zero_only'] ?? null) !== true
+            || (int) $from->diffInDays($to) !== 89
+            || ! $to->isSameDay(now('UTC'))
+            || ($receipt['application_sha'] ?? null) !== $releaseSha
+            || ($receipt['workflow_sha'] ?? null) !== $releaseSha
+            || ($receipt['active_production_sha'] ?? null) !== $releaseSha
+            || ($receipt['raw_query_exposed'] ?? null) !== false
+            || ($receipt['raw_session_or_business_identifiers_exposed'] ?? null) !== false
+            || ($receipt['private_paths_allowed'] ?? null) !== false
+            || ($receipt['search_submission_allowed'] ?? null) !== false) {
+            return null;
+        }
+
+        return $receipt;
+    }
+
+    /** @param array<string,mixed> $metrics */
+    private function allMetricValuesAreZero(array $metrics): bool
+    {
+        foreach ([
+            ...self::METRICS,
+            'result_ready_count',
+        ] as $metric) {
+            if (($metrics[$metric] ?? null) !== 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function releaseSha(): ?string
+    {
+        $candidates = [
+            trim((string) config('app.git_sha', '')),
+            is_file(dirname(base_path()).'/REVISION')
+                ? trim((string) file_get_contents(dirname(base_path()).'/REVISION'))
+                : '',
+        ];
+        foreach ($candidates as $candidate) {
+            if (preg_match('/^[a-f0-9]{40}$/D', $candidate) === 1) {
+                return $candidate;
+            }
+        }
+
+        return null;
     }
 
     /** @return list<array<string,mixed>> */

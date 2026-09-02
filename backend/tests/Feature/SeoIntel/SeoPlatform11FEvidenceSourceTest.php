@@ -17,7 +17,7 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
     {
         parent::setUp();
         config(['seo_intel.connection' => 'sqlite']);
-        foreach (['analytics_seo_conversion_refresh_runs', 'analytics_seo_conversion_daily', 'seo_event_funnel_daily', 'seo_gsc_daily', 'seo_urls'] as $table) {
+        foreach (['analytics_seo_conversion_refresh_runs', 'analytics_seo_conversion_daily', 'seo_event_funnel_daily', 'seo_gsc_sync_runs', 'seo_gsc_daily', 'seo_urls'] as $table) {
             Schema::dropIfExists($table);
         }
         $this->createReadModels();
@@ -144,6 +144,52 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
         $this->assertSame('GSC_READMODEL_UNHEALTHY', app(ReadOnlyMeasurementEvidenceBundleLoader::class)->diagnoseForScope('mission:readmodel', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
     }
 
+    public function test_search_window_accepts_only_a_current_exact_sha_full_window_sync_receipt_for_zero_row_dates(): void
+    {
+        $sha = str_repeat('c', 40);
+        config(['app.git_sha' => $sha]);
+        DB::table('seo_gsc_daily')->where('report_date', now('UTC')->subDays(50)->toDateString())->delete();
+
+        $receipt = [
+            'status' => 'success',
+            'fetch_mode' => 'full_window',
+            'window_days' => 90,
+            'requested_start_date' => now('UTC')->subDays(92)->toDateString(),
+            'end_date' => now('UTC')->subDays(3)->toDateString(),
+            'search_types' => ['web'],
+            'pages_fetched' => 90,
+            'rows_seen' => 90,
+            'mapped_rows' => 90,
+            'unmapped_rows' => 0,
+            'duplicate_natural_keys' => 0,
+            'quality_gate' => ['status' => 'pass'],
+            'read_only_gsc' => true,
+            'search_submission_allowed' => false,
+            'restricted_egress' => ['status' => 'restricted'],
+            'application_sha' => str_repeat('d', 40),
+            'workflow_sha' => str_repeat('d', 40),
+            'active_production_sha' => str_repeat('d', 40),
+        ];
+        DB::table('seo_gsc_sync_runs')->insert([
+            'status' => 'success',
+            'receipt_json' => json_encode($receipt, JSON_THROW_ON_ERROR),
+            'finished_at' => now('UTC'),
+        ]);
+        $loader = app(ReadOnlyMeasurementEvidenceBundleLoader::class);
+        $this->assertSame('GSC_WINDOW_INCOMPLETE', $loader->diagnoseForScope('mission:wrong-sha', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
+
+        DB::table('seo_gsc_sync_runs')->delete();
+        foreach (['application_sha', 'workflow_sha', 'active_production_sha'] as $field) {
+            $receipt[$field] = $sha;
+        }
+        DB::table('seo_gsc_sync_runs')->insert([
+            'status' => 'success',
+            'receipt_json' => json_encode($receipt, JSON_THROW_ON_ERROR),
+            'finished_at' => now('UTC'),
+        ]);
+        $this->assertSame('NONE', $loader->diagnoseForScope('mission:exact-sha', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
+    }
+
     public function test_cro_diagnostics_distinguish_schema_readmodel_stale_and_mapping_failures(): void
     {
         Schema::drop('analytics_seo_conversion_daily');
@@ -173,9 +219,81 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
         $this->assertSame('NONE', $loader->diagnoseForRuntime('mission:runtime-cro', 'commercial_funnel_cro', 'staging_runtime')->diagnostic()['hold_reason']);
     }
 
+    public function test_runtime_scope_uses_exact_public_zero_refresh_proof_without_synthetic_cro_rows(): void
+    {
+        $sha = str_repeat('e', 40);
+        config(['app.git_sha' => $sha]);
+        DB::table('analytics_seo_conversion_daily')->delete();
+        DB::table('analytics_seo_conversion_refresh_runs')->delete();
+        $zeroMetrics = [
+            'landing_pv_count' => 0,
+            'article_to_test_click_count' => 0,
+            'start_test_count' => 0,
+            'complete_test_count' => 0,
+            'result_ready_count' => 0,
+            'view_result_count' => 0,
+            'return_public_content_count' => 0,
+        ];
+        $receipt = [
+            'schema_version' => 'analytics-seo-conversion-refresh-receipt.v1',
+            'status' => 'success',
+            'application_sha' => str_repeat('d', 40),
+            'workflow_sha' => str_repeat('d', 40),
+            'active_production_sha' => str_repeat('d', 40),
+            'from' => now('UTC')->subDays(89)->toDateString(),
+            'to' => now('UTC')->toDateString(),
+            'org_scope_mode' => 'bounded',
+            'org_scope_count' => 1,
+            'public_org_zero_only' => true,
+            'attempted_rows' => 0,
+            'upserted_rows' => 0,
+            'readback_receipt' => [
+                'status' => 'pass',
+                'expected_metrics' => $zeroMetrics,
+                'persisted_metrics' => $zeroMetrics,
+            ],
+            'raw_query_exposed' => false,
+            'raw_session_or_business_identifiers_exposed' => false,
+            'private_paths_allowed' => false,
+            'search_submission_allowed' => false,
+        ];
+        DB::table('analytics_seo_conversion_refresh_runs')->insert([
+            'org_scope_count' => 1,
+            'status' => 'success',
+            'trigger_mode' => 'manual',
+            'receipt_json' => json_encode($receipt, JSON_THROW_ON_ERROR),
+            'completed_at' => now('UTC'),
+        ]);
+        $loader = app(ReadOnlyMeasurementEvidenceBundleLoader::class);
+        $this->assertSame('CRO_READMODEL_UNHEALTHY', $loader->diagnoseForRuntime('mission:wrong-sha-zero', 'commercial_funnel_cro', 'staging_runtime')->diagnostic()['hold_reason']);
+
+        DB::table('analytics_seo_conversion_refresh_runs')->delete();
+        foreach (['application_sha', 'workflow_sha', 'active_production_sha'] as $field) {
+            $receipt[$field] = $sha;
+        }
+        DB::table('analytics_seo_conversion_refresh_runs')->insert([
+            'org_scope_count' => 1,
+            'status' => 'success',
+            'trigger_mode' => 'manual',
+            'receipt_json' => json_encode($receipt, JSON_THROW_ON_ERROR),
+            'completed_at' => now('UTC'),
+        ]);
+
+        $result = $loader->diagnoseForRuntime(
+            'mission:public-zero',
+            'commercial_funnel_cro',
+            'staging_runtime',
+        );
+
+        $this->assertSame('NONE', $result->diagnostic()['hold_reason']);
+        $this->assertTrue(data_get($result->bundles(), '0.payload.explicit_zero_proof'));
+        $this->assertSame(0, array_sum(data_get($result->bundles(), '0.payload.windows.0.metrics', [])));
+        $this->assertDatabaseCount('analytics_seo_conversion_daily', 0, 'sqlite');
+    }
+
     private function setUpReadModels(): void
     {
-        foreach (['analytics_seo_conversion_refresh_runs', 'analytics_seo_conversion_daily', 'seo_event_funnel_daily', 'seo_gsc_daily', 'seo_urls'] as $table) {
+        foreach (['analytics_seo_conversion_refresh_runs', 'analytics_seo_conversion_daily', 'seo_event_funnel_daily', 'seo_gsc_sync_runs', 'seo_gsc_daily', 'seo_urls'] as $table) {
             Schema::dropIfExists($table);
         }
         $this->createReadModels();
@@ -251,7 +369,13 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
             $table->unsignedInteger('org_scope_count');
             $table->string('status');
             $table->string('trigger_mode');
+            $table->text('receipt_json')->nullable();
             $table->timestamp('completed_at');
+        });
+        Schema::create('seo_gsc_sync_runs', function (Blueprint $table): void {
+            $table->string('status');
+            $table->text('receipt_json')->nullable();
+            $table->timestamp('finished_at')->nullable();
         });
     }
 

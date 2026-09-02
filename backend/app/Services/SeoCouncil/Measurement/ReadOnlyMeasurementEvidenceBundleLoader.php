@@ -163,7 +163,7 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
         } catch (Throwable) {
             $latestDate = null;
         }
-        $windowComplete = $latestDate !== null;
+        $scopeWindowsComplete = $latestDate !== null;
         $readmodelHealthy = true;
         $windowMetrics = [];
         $computedReadmodels = [];
@@ -180,7 +180,7 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
                     return $date->betweenIncluded($latestDate->subDays($days - 1), $latestDate);
                 }
             ));
-            $windowComplete = $windowComplete
+            $scopeWindowsComplete = $scopeWindowsComplete
                 && count(array_unique(array_column($windowRows, 'report_date'))) === $days;
             try {
                 $computed = $this->dashboard->searchPerformance(['days' => $days, 'locale' => $locale]);
@@ -198,6 +198,8 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
                 'metrics' => $this->computedGscMetrics(is_array($familyMetrics) ? $familyMetrics : []),
             ];
         }
+        $windowComplete = $scopeWindowsComplete
+            || ($latestDate !== null && $this->gscFullWindowReceiptCovers($connection, $latestDate));
 
         $lagDays = max(0, (int) data_get($quality, 'freshness.lag_days_required', 3));
         $maxAgeDays = max($lagDays, (int) data_get($quality, 'freshness.max_report_age_days', 10));
@@ -488,6 +490,19 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
             }
         }
 
+        try {
+            $read = $this->conversion->read(0, [
+                'group_by' => 'url',
+                'window_days' => 90,
+            ], 1);
+        } catch (Throwable) {
+            return null;
+        }
+        if ($this->conversion->currentPublicZeroRefreshProven()
+            && $this->croZeroRefreshProven($read)) {
+            return $this->searchRuntimeScope();
+        }
+
         return null;
     }
 
@@ -531,7 +546,7 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
                 'return_public_content_count', 'last_refreshed_at',
             ])
                 && $this->schemaHas($main, 'analytics_seo_conversion_refresh_runs', [
-                    'org_scope_count', 'status', 'trigger_mode', 'completed_at',
+                    'org_scope_count', 'status', 'trigger_mode', 'receipt_json', 'completed_at',
                 ]);
         } catch (Throwable) {
             return false;
@@ -551,6 +566,101 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
         }
 
         return true;
+    }
+
+    private function gscFullWindowReceiptCovers(string $connection, CarbonImmutable $latestDate): bool
+    {
+        $schema = Schema::connection($connection);
+        if (! $this->schemaHas($schema, 'seo_gsc_sync_runs', [
+            'status', 'receipt_json', 'finished_at',
+        ])) {
+            return false;
+        }
+        $releaseSha = $this->releaseSha();
+        if ($releaseSha === null) {
+            return false;
+        }
+
+        $receipts = DB::connection($connection)->table('seo_gsc_sync_runs')
+            ->where('status', 'success')
+            ->whereNotNull('receipt_json')
+            ->orderByDesc('finished_at')
+            ->limit(20)
+            ->pluck('receipt_json');
+        foreach ($receipts as $encoded) {
+            try {
+                $receipt = json_decode((string) $encoded, true, 64, JSON_THROW_ON_ERROR);
+                $start = CarbonImmutable::parse((string) ($receipt['requested_start_date'] ?? ''), 'UTC')->startOfDay();
+                $end = CarbonImmutable::parse((string) ($receipt['end_date'] ?? ''), 'UTC')->startOfDay();
+            } catch (Throwable) {
+                continue;
+            }
+            $searchTypes = $receipt['search_types'] ?? null;
+            $restricted = data_get($receipt, 'restricted_egress.status');
+            if (is_array($receipt)
+                && ($receipt['status'] ?? null) === 'success'
+                && ($receipt['fetch_mode'] ?? null) === 'full_window'
+                && ($receipt['window_days'] ?? null) === 90
+                && $searchTypes === ['web']
+                && (int) $start->diffInDays($end) === 89
+                && $latestDate->betweenIncluded($start, $end)
+                && ($receipt['pages_fetched'] ?? 0) > 0
+                && ($receipt['rows_seen'] ?? 0) > 0
+                && ($receipt['mapped_rows'] ?? 0) > 0
+                && ($receipt['unmapped_rows'] ?? null) === 0
+                && ($receipt['duplicate_natural_keys'] ?? null) === 0
+                && data_get($receipt, 'quality_gate.status') === 'pass'
+                && ($receipt['read_only_gsc'] ?? null) === true
+                && ($receipt['search_submission_allowed'] ?? null) === false
+                && $restricted === 'restricted'
+                && ($receipt['application_sha'] ?? null) === $releaseSha
+                && ($receipt['workflow_sha'] ?? null) === $releaseSha
+                && ($receipt['active_production_sha'] ?? null) === $releaseSha) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /** @param array<string,mixed> $read */
+    private function croZeroRefreshProven(array $read): bool
+    {
+        if (($read['measurement_state'] ?? null) !== 'production_healthy'
+            || ($read['recent_rows'] ?? null) !== []) {
+            return false;
+        }
+        $totals = $read['totals'] ?? null;
+        if (! is_array($totals)) {
+            return false;
+        }
+        foreach ([
+            'landing_pv_count', 'article_to_test_click_count', 'start_test_count',
+            'complete_test_count', 'view_result_count', 'return_public_content_count',
+        ] as $metric) {
+            if (($totals[$metric] ?? null) !== 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function releaseSha(): ?string
+    {
+        $candidates = [
+            trim((string) config('app.git_sha', '')),
+            is_file(dirname(base_path()).'/REVISION')
+                ? trim((string) file_get_contents(dirname(base_path()).'/REVISION'))
+                : '',
+        ];
+        foreach ($candidates as $candidate) {
+            if (preg_match('/^[a-f0-9]{40}$/D', $candidate) === 1) {
+                return $candidate;
+            }
+        }
+
+        return null;
     }
 
     /** @param array<string, mixed> $metrics @return array<string, int> */
