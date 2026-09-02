@@ -51,4 +51,27 @@ final class SeoPlatform11FCommercialFunnelCROTest extends TestCase
         $this->assertSame([], $output['candidates']);
         $this->assertSame([], $output['findings'][0]['associations']);
     }
+
+    public function test_exact_zero_proof_is_ready_without_inventing_a_candidate(): void
+    {
+        $zero = $this->croPayload();
+        foreach ($zero['windows'] as &$window) {
+            $window['metrics'] = array_map(static fn (): int => 0, $window['metrics']);
+        }
+        unset($window);
+        $zero['valid_measurement_present'] = false;
+        $zero['explicit_zero_proof'] = true;
+        $zero['all_relevant_values_zero'] = true;
+
+        $output = app(CommercialFunnelCROMode::class)->review(
+            $this->measurementContext('commercial_funnel_cro', $zero)
+        );
+
+        $this->assertSame('READY', $output['status']);
+        $this->assertNull($output['hold_reason']);
+        $this->assertSame([], $output['candidates']);
+        $this->assertSame([], $output['findings'][0]['hypotheses']);
+        $this->assertSame('valid_zero', $output['findings'][0]['measurement_state']['state']);
+        $this->assertSame(0, $output['write_count']);
+    }
 }

@@ -42,7 +42,9 @@ final class CommercialFunnelCROMode
         $chainComplete = $coverage !== [] && ! in_array(false, $coverage, true)
             && array_diff(['landing', 'start', 'completion', 'aggregate_outcome_view', 'return_public_content', 'cta'], array_keys($coverage)) === [];
         $sample = max(array_map('intval', $metrics) ?: [0]);
-        $ready = $validContext && ! $overclaim && $chainComplete && $sample >= 100;
+        $validZero = ($context['measurement_state']['state'] ?? null) === 'valid_zero';
+        $candidateReady = $sample >= 100;
+        $ready = $validContext && ! $overclaim && $chainComplete && ($candidateReady || $validZero);
         $candidate = [
             'version' => 'seo.measurement_candidate.v2',
             'hypothesis' => 'A bounded public promise-parity change may alter qualified test starts.',
@@ -60,7 +62,7 @@ final class CommercialFunnelCROMode
             'source_capability' => $context['source_capability'] ?? $this->heldDecision(true),
             'measurement_state' => $context['measurement_state'] ?? $this->heldDecision(false),
             'aggregate_metrics' => $ready ? $metrics : [], 'verified_facts' => [], 'associations' => [],
-            'hypotheses' => $ready ? [$candidate['hypothesis']] : [],
+            'hypotheses' => $ready && $candidateReady ? [$candidate['hypothesis']] : [],
             'unknowns' => $overclaim ? ['causal_or_attribution_claim_not_supported'] : [],
             'holds' => $ready ? [] : [$this->holdReason($overclaim, $chainComplete, $sample)],
             'evidence_refs' => $ready ? array_values(array_column((array) ($context['bundle_refs'] ?? []), 'bundle_hash')) : [],
@@ -68,7 +70,7 @@ final class CommercialFunnelCROMode
         ];
         $finding['finding_hash'] = $this->hasher->hash($finding);
         $reason = $ready ? null : $this->holdReason($overclaim, $chainComplete, $sample);
-        $output = $this->output($ready ? 'READY' : 'HOLD', [$finding], $ready ? [$candidate] : [], $reason);
+        $output = $this->output($ready ? 'READY' : 'HOLD', [$finding], $ready && $candidateReady ? [$candidate] : [], $reason);
         if (! $this->contracts->output($output)
             || $this->privacy->output($output)) {
             return $this->safeHold('output_contract_or_privacy_hold');

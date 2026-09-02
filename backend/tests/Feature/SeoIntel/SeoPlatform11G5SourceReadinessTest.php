@@ -104,6 +104,8 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
         $this->assertSame('HOLD', $staging['SEO-PLATFORM-11G']);
         $this->assertSame('STAGING_VALIDATED', $staging['closeout_state']);
         $this->assertSame('NONE', $staging['competitive_hold_reason']);
+        $this->assertSame('READY', $staging['cro_measurement']['context_status']);
+        $this->assertSame('NONE', $staging['cro_measurement']['hold_reason']);
         $this->assertSame(12, $staging['dependency_ingestion']['external_reads']);
 
         $production = $builder->buildRuntime($ingestion, $sha, 'production', $sha);
