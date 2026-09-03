@@ -100,6 +100,10 @@ test("production competitive receipts use the existing bounded runtime owner fal
     assert.doesNotMatch(receiptTask, /chmod 0?777|chown/);
   }
   assert.match(finalize, /set \+e/);
+  assert.match(finalize, /finalize_owner=deploy/);
+  assert.match(finalize, /if ! test -r "\$preactivation"/);
+  assert.match(finalize, /sudo -n -u www-data -- test -r "\$preactivation"/);
+  assert.match(finalize, /sudo -n -u www-data -- env SEO_RELEASE_SHA=/);
   assert.match(finalize, /finalize_status=\$\?/);
   assert.match(finalize, /competitive_finalize_status=/);
   assert.match(finalize, /competitive_finalize_reason=/);

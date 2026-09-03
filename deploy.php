@@ -1693,9 +1693,19 @@ receipt_dir='{{deploy_path}}/shared/backend/storage/app/release-receipts/seo-com
 preactivation="$receipt_dir/preactivation-$active_sha.json"
 test -f "$preactivation"
 test ! -L "$preactivation"
+finalize_owner=deploy
+if ! test -r "$preactivation"; then
+  sudo -n -u www-data -- test -r "$preactivation"
+  finalize_owner=www-data
+fi
 set +e
-receipt="$(SEO_RELEASE_SHA="$active_sha" SEO_COMPETITIVE_EXTERNAL_READ_ENABLED=true SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED=true {{bin/php}} artisan seo:competitive-evidence-ingest --cohort=competitive.big-five.live.v2 --finalize-activation --preactivation-receipt="$preactivation" --json --no-interaction --no-ansi)"
-finalize_status=$?
+if [ "$finalize_owner" = www-data ]; then
+  receipt="$(sudo -n -u www-data -- env SEO_RELEASE_SHA="$active_sha" SEO_COMPETITIVE_EXTERNAL_READ_ENABLED=true SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED=true {{bin/php}} artisan seo:competitive-evidence-ingest --cohort=competitive.big-five.live.v2 --finalize-activation --preactivation-receipt="$preactivation" --json --no-interaction --no-ansi)"
+  finalize_status=$?
+else
+  receipt="$(SEO_RELEASE_SHA="$active_sha" SEO_COMPETITIVE_EXTERNAL_READ_ENABLED=true SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED=true {{bin/php}} artisan seo:competitive-evidence-ingest --cohort=competitive.big-five.live.v2 --finalize-activation --preactivation-receipt="$preactivation" --json --no-interaction --no-ansi)"
+  finalize_status=$?
+fi
 set -e
 if [ "$finalize_status" -ne 0 ]; then
   printf '%s' "$receipt" | jq -r '
