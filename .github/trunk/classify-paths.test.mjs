@@ -338,6 +338,11 @@ test("11G competitive evidence selects the controlled ingestion operation", () =
   ]);
   assert.equal(analyzer.operations.seo_competitive_evidence, true);
   assert.equal(analyzer.operations.seo_council_orchestration, true);
+  const measurementSource = classifyPaths([
+    "backend/app/Services/SeoCouncil/Measurement/ReadOnlyMeasurementEvidenceBundleLoader.php",
+  ]);
+  assert.equal(measurementSource.operations.seo_competitive_evidence, true);
+  assert.equal(measurementSource.operations.seo_council_orchestration, true);
 });
 
 test("11G activation control change deploys with Council and competitive ingestion", () => {
