@@ -235,6 +235,48 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
         $this->assertSame('NONE', $loader->diagnoseForRuntime('mission:runtime-cro', 'commercial_funnel_cro', 'staging_runtime')->diagnostic()['hold_reason']);
     }
 
+    public function test_runtime_search_reuses_the_same_fixed_scope_verified_before_activation(): void
+    {
+        $canonical = 'https://www.fermatmind.com/en/articles/unmapped';
+        $canonicalHash = hash('sha256', $canonical);
+        DB::table('seo_urls')->insert([
+            'canonical_url_hash' => $canonicalHash, 'canonical_url' => $canonical, 'locale' => 'en',
+            'page_entity_type' => 'article', 'page_family' => 'articles_topics', 'source_authority' => 'backend_registry',
+            'indexability_state' => 'indexable', 'is_private_flow' => false, 'authority_revision' => str_repeat('c', 64),
+        ]);
+        DB::table('seo_gsc_daily')->insert([
+            'report_date' => now('UTC')->subDays(3)->toDateString(), 'canonical_url_hash' => $canonicalHash,
+            'canonical_url' => $canonical, 'query_hash' => hash('sha256', 'unmapped-aggregate'),
+            'source_engine' => 'google', 'locale' => 'en', 'device' => 'desktop', 'country' => 'usa',
+            'search_type' => 'web', 'query_type' => 'non_brand', 'query_display_masked' => null,
+            'data_state' => 'final', 'clicks' => 1, 'impressions' => 10, 'ctr_ppm' => 100000,
+            'average_position_milli' => 9000, 'is_brand_query' => false, 'mapping_state' => 'failed',
+            'metadata_json' => json_encode(['data_origin' => 'live_gsc_api'], JSON_THROW_ON_ERROR),
+            'collected_at' => now('UTC'),
+        ]);
+
+        $loader = app(ReadOnlyMeasurementEvidenceBundleLoader::class);
+
+        $this->assertSame(
+            'GSC_MAPPING_FAILED',
+            $loader->diagnoseForScope(
+                'mission:unmapped-scope',
+                'search_measurement',
+                'articles_topics',
+                'en',
+                'production_runtime',
+            )->diagnostic()['hold_reason'],
+        );
+        $this->assertSame(
+            'NONE',
+            $loader->diagnoseForRuntime(
+                'mission:fixed-runtime-scope',
+                'search_measurement',
+                'production_runtime',
+            )->diagnostic()['hold_reason'],
+        );
+    }
+
     public function test_runtime_scope_reuses_verified_public_zero_refresh_proof_across_release_shas(): void
     {
         $sha = str_repeat('e', 40);

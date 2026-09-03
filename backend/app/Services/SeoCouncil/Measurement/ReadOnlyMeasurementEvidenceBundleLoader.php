@@ -83,6 +83,19 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
         }
 
         try {
+            if ($modeId === 'search_measurement') {
+                $preferred = $this->diagnoseForScope(
+                    $missionId,
+                    $modeId,
+                    'tests',
+                    'en',
+                    $environment,
+                );
+                if ($preferred->ready()
+                    || ($preferred->diagnostic()['hold_reason'] ?? null) !== 'GSC_NO_ELIGIBLE_ROWS') {
+                    return $preferred;
+                }
+            }
             if ($modeId === 'search_measurement' && ! $this->searchSchemaAvailable()) {
                 return MeasurementEvidenceLoadResult::make(
                     $modeId, [], 'unavailable', 'unknown', 'GSC_SCHEMA_UNAVAILABLE'
