@@ -1189,8 +1189,8 @@ jobs:
           GSC_SCOPE: ${{ vars.SEO_INTEL_GSC_SCOPE }}
           GSC_SYNC_WINDOW_DAYS: ${{ vars.SEO_INTEL_GSC_SYNC_WINDOW_DAYS }}
           GSC_SYNC_SEARCH_TYPES: ${{ vars.SEO_INTEL_GSC_SYNC_SEARCH_TYPES }}
-          SEO_INTEL_MIGRATION_DB_USERNAME: ${{ secrets.SEO_INTEL_MIGRATION_DB_USERNAME }}
-          SEO_INTEL_MIGRATION_DB_PASSWORD: ${{ secrets.SEO_INTEL_MIGRATION_DB_PASSWORD }}
+          COMPETITIVE_WRITER_DB_USERNAME: ${{ secrets.SEO_INTEL_MIGRATION_DB_USERNAME }}
+          COMPETITIVE_WRITER_DB_PASSWORD: ${{ secrets.SEO_INTEL_MIGRATION_DB_PASSWORD }}
         run: |
           set -euo pipefail
           fail() {
@@ -1206,8 +1206,8 @@ jobs:
           test "$GSC_SCOPE" = https://www.googleapis.com/auth/webmasters.readonly || fail GSC_SCOPE_NOT_READONLY
           test "$GSC_SYNC_WINDOW_DAYS" = 90 || fail GSC_WINDOW_INVALID
           test "$GSC_SYNC_SEARCH_TYPES" = web || fail GSC_SEARCH_TYPE_INVALID
-          test -n "$SEO_INTEL_MIGRATION_DB_USERNAME" || fail COMPETITIVE_WRITER_DB_CREDENTIAL_MISSING
-          test -n "$SEO_INTEL_MIGRATION_DB_PASSWORD" || fail COMPETITIVE_WRITER_DB_CREDENTIAL_MISSING
+          test -n "$COMPETITIVE_WRITER_DB_USERNAME" || fail COMPETITIVE_WRITER_DB_CREDENTIAL_MISSING
+          test -n "$COMPETITIVE_WRITER_DB_PASSWORD" || fail COMPETITIVE_WRITER_DB_CREDENTIAL_MISSING
           printf 'production_competitive_configuration=READY\n'
       - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:

@@ -85,8 +85,9 @@ test("production validates the complete 11G configuration before transport", () 
   assert.match(preflight, /if: needs\.policy\.outputs\.seo_competitive_evidence == 'true'/);
   assert.match(preflight, /SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON/);
   assert.match(preflight, /SEO_INTEL_GSC_PROPERTY_URL/);
-  assert.match(preflight, /SEO_INTEL_MIGRATION_DB_USERNAME/);
-  assert.match(preflight, /SEO_INTEL_MIGRATION_DB_PASSWORD/);
+  assert.match(preflight, /COMPETITIVE_WRITER_DB_USERNAME: \$\{\{ secrets\.SEO_INTEL_MIGRATION_DB_USERNAME \}\}/);
+  assert.match(preflight, /COMPETITIVE_WRITER_DB_PASSWORD: \$\{\{ secrets\.SEO_INTEL_MIGRATION_DB_PASSWORD \}\}/);
+  assert.doesNotMatch(preflight, /^\s+SEO_INTEL_MIGRATION_DB_(?:USERNAME|PASSWORD):/m);
   assert.match(preflight, /COMPETITIVE_WRITER_DB_CREDENTIAL_MISSING/);
   assert.match(preflight, /production_competitive_configuration=READY/);
   assert.doesNotMatch(preflight, /\b(?:ssh|scp|curl)\b/);
