@@ -854,14 +854,47 @@ jobs:
       - name: Finalize staging competitive evidence after 11F readiness
         if: needs.policy.outputs.seo_competitive_evidence == 'true' && needs.policy.outputs.seo_council_orchestration == 'true'
         shell: bash
+        env:
+          SEO_INTEL_EVIDENCE_DB_USERNAME: ${{ secrets.SEO_INTEL_MIGRATION_DB_USERNAME }}
+          SEO_INTEL_EVIDENCE_DB_PASSWORD: ${{ secrets.SEO_INTEL_MIGRATION_DB_PASSWORD }}
         run: |
           set -euo pipefail
+          [[ "$GITHUB_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$GITHUB_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          test -n "$SEO_INTEL_EVIDENCE_DB_USERNAME"
+          test -n "$SEO_INTEL_EVIDENCE_DB_PASSWORD"
+          local_writer_env="$RUNNER_TEMP/competitive-writer.env"
+          remote_tmp="/tmp/fermatmind-11g-staging-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          remote_writer_env="$remote_tmp/competitive-writer.env"
+          remote_config="$remote_tmp/competitive-config.php"
+          ssh_base=(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o ConnectionAttempts=3 -o IdentitiesOnly=yes -i "$DEPLOY_IDENTITY_FILE_STG" \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST")
+          cleanup() {
+            "${ssh_base[@]}" "rm -f '$remote_writer_env' '$remote_config'; rmdir '$remote_tmp' 2>/dev/null || true" \
+              >/dev/null 2>&1 || true
+            rm -f "$local_writer_env"
+          }
+          trap cleanup EXIT HUP INT TERM
+          umask 077
+          {
+            printf 'SEO_INTEL_DB_USERNAME=%q\n' "$SEO_INTEL_EVIDENCE_DB_USERNAME"
+            printf 'SEO_INTEL_DB_PASSWORD=%q\n' "$SEO_INTEL_EVIDENCE_DB_PASSWORD"
+            printf 'SEO_INTEL_WRITE_ENABLED=true\n'
+            printf 'APP_CONFIG_CACHE=%q\n' "$remote_config"
+          } > "$local_writer_env"
+          chmod 0600 "$local_writer_env"
+          "${ssh_base[@]}" "umask 077; test ! -e '$remote_tmp'; mkdir '$remote_tmp'"
+          scp -q -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o ConnectionAttempts=3 -o IdentitiesOnly=yes -i "$DEPLOY_IDENTITY_FILE_STG" \
+            -P "$DEPLOY_PORT" "$local_writer_env" "$DEPLOY_USER@$DEPLOY_HOST:$remote_writer_env"
+          "${ssh_base[@]}" "chmod 0600 '$remote_writer_env'"
           printf -v q_path '%q' "$DEPLOY_PATH"
           printf -v q_sha '%q' "$DEPLOY_SHA"
-          remote="set -euo pipefail; active=\$(tr -d '\r\n' < $q_path/current/REVISION); test \"\$active\" = $q_sha; cd $q_path/current/backend; receipt=\$(SEO_RELEASE_SHA=$q_sha SEO_COMPETITIVE_EXTERNAL_READ_ENABLED=true SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED=true php artisan seo:competitive-evidence-ingest --cohort=competitive.big-five.live.v2 --write-evidence --json --no-interaction --no-ansi); dir=$q_path/shared/backend/storage/app/release-receipts/seo-competitive-evidence; mkdir -p \"\$dir\"; file=\"\$dir/$q_sha.json\"; test ! -e \"\$file\"; tmp=\$(mktemp \"\$dir/.$q_sha.XXXXXX\"); trap 'rm -f \"\$tmp\"' EXIT; printf '%s\n' \"\$receipt\" > \"\$tmp\"; chmod 0640 \"\$tmp\"; ln \"\$tmp\" \"\$file\"; printf '%s\n' \"\$receipt\""
-          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-            -o ConnectionAttempts=3 -o IdentitiesOnly=yes -i "$DEPLOY_IDENTITY_FILE_STG" -p "$DEPLOY_PORT" \
-            "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > seo-competitive-evidence-staging.json
+          printf -v q_writer_env '%q' "$remote_writer_env"
+          printf -v q_config '%q' "$remote_config"
+          remote="set -euo pipefail; writer_env=$q_writer_env; test -f \"\$writer_env\"; test ! -L \"\$writer_env\"; set -a; . \"\$writer_env\"; set +a; test \"\${APP_CONFIG_CACHE:-}\" = $q_config; test ! -e \"\$APP_CONFIG_CACHE\"; test \"\${SEO_INTEL_WRITE_ENABLED:-}\" = true; test -n \"\${SEO_INTEL_DB_USERNAME:-}\"; test -n \"\${SEO_INTEL_DB_PASSWORD:-}\"; active=\$(tr -d '\r\n' < $q_path/current/REVISION); test \"\$active\" = $q_sha; cd $q_path/current/backend; receipt=\$(SEO_RELEASE_SHA=$q_sha SEO_COMPETITIVE_EXTERNAL_READ_ENABLED=true SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED=true php artisan seo:competitive-evidence-ingest --cohort=competitive.big-five.live.v2 --write-evidence --json --no-interaction --no-ansi); dir=$q_path/shared/backend/storage/app/release-receipts/seo-competitive-evidence; mkdir -p \"\$dir\"; file=\"\$dir/$q_sha.json\"; test ! -e \"\$file\"; tmp=\$(mktemp \"\$dir/.$q_sha.XXXXXX\"); trap 'rm -f \"\$tmp\"' EXIT; printf '%s\n' \"\$receipt\" > \"\$tmp\"; chmod 0640 \"\$tmp\"; ln \"\$tmp\" \"\$file\"; printf '%s\n' \"\$receipt\""
+          "${ssh_base[@]}" "$remote" > seo-competitive-evidence-staging.json
           jq -e --arg sha "$DEPLOY_SHA" '
             .receipt_version == "seo.competitive_evidence_closeout.v3"
             and .candidate_sha == $sha and .production_sha == null and .environment == "staging"
@@ -1215,9 +1248,12 @@ jobs:
           competitive_evidence='${{ needs.policy.outputs.seo_competitive_evidence }}'
           local_key="$RUNNER_TEMP/service-account.json"
           local_env="$RUNNER_TEMP/measurement.env"
+          local_writer_env="$RUNNER_TEMP/competitive-writer.env"
           remote_tmp="/tmp/fermatmind-11g-production-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
           remote_key="$remote_tmp/service-account.json"
           remote_env="$remote_tmp/measurement.env"
+          remote_writer_env="$remote_tmp/competitive-writer.env"
+          remote_writer_config="$remote_tmp/competitive-config.php"
           proxy_pid=""
           tunnel_pid=""
           ssh_base=(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
@@ -1227,10 +1263,10 @@ jobs:
             if [ -n "$tunnel_pid" ]; then kill "$tunnel_pid" 2>/dev/null || true; fi
             if [ -n "$proxy_pid" ]; then kill "$proxy_pid" 2>/dev/null || true; fi
             if [ "$competitive_evidence" = true ]; then
-              "${ssh_base[@]}" "rm -f '$remote_key' '$remote_env' '$remote_tmp/config.php'; rmdir '$remote_tmp' 2>/dev/null || true" \
+              "${ssh_base[@]}" "rm -f '$remote_key' '$remote_env' '$remote_writer_env' '$remote_tmp/config.php' '$remote_writer_config'; rmdir '$remote_tmp' 2>/dev/null || true" \
                 >/dev/null 2>&1 || true
             fi
-            rm -f "$local_key" "$local_env"
+            rm -f "$local_key" "$local_env" "$local_writer_env"
           }
           trap cleanup EXIT HUP INT TERM
 
@@ -1276,11 +1312,22 @@ jobs:
             printf 'NO_PROXY=127.0.0.1,localhost\n'
             printf 'APP_CONFIG_CACHE=%q\n' "$remote_tmp/config.php"
           } > "$local_env"
+          {
+            printf 'SEO_INTEL_DB_USERNAME=%q\n' "$SEO_INTEL_MIGRATION_DB_USERNAME"
+            printf 'SEO_INTEL_DB_PASSWORD=%q\n' "$SEO_INTEL_MIGRATION_DB_PASSWORD"
+            printf 'SEO_INTEL_WRITE_ENABLED=true\n'
+            printf 'APP_CONFIG_CACHE=%q\n' "$remote_writer_config"
+          } > "$local_writer_env"
+          chmod 0600 "$local_writer_env"
 
           "${ssh_base[@]}" "umask 077; test ! -e '$remote_tmp'; mkdir '$remote_tmp'"
           scp -q -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -o ConnectionAttempts=3 -P "$DEPLOY_PORT" "$local_key" "$local_env" \
             "$DEPLOY_USER@$DEPLOY_HOST:$remote_tmp/"
+          scp -q -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o ConnectionAttempts=3 -P "$DEPLOY_PORT" "$local_writer_env" \
+            "$DEPLOY_USER@$DEPLOY_HOST:$remote_writer_env"
+          "${ssh_base[@]}" "chmod 0600 '$remote_writer_env'"
 
           node backend/scripts/seo/gsc_restricted_connect_proxy.mjs --port="$PROXY_PORT" \
             >"$RUNNER_TEMP/production-gsc-proxy.log" 2>&1 &
@@ -1315,7 +1362,8 @@ jobs:
             -o private_result_authority_publish_required='${{ needs.policy.outputs.private_result_authority_publish_required }}' \
             -o seo_council_orchestration='${{ needs.policy.outputs.seo_council_orchestration }}' \
             -o seo_competitive_evidence='${{ needs.policy.outputs.seo_competitive_evidence }}' \
-            -o seo_measurement_sync_env="$remote_env" --no-interaction
+            -o seo_measurement_sync_env="$remote_env" \
+            -o seo_competitive_writer_env="$remote_writer_env" --no-interaction
           deploy_rc=$?
           set -e
           if [ "$deploy_rc" -eq 0 ]; then exit 0; fi

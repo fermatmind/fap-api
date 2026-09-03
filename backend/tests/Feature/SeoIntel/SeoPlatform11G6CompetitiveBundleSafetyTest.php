@@ -49,6 +49,24 @@ final class SeoPlatform11G6CompetitiveBundleSafetyTest extends TestCase
         $this->assertStringNotContainsString('<html', (string) $stored->bundle_json);
     }
 
+    public function test_invalid_persistence_readback_rolls_back_the_bundle(): void
+    {
+        DB::connection('seo_intel')->statement(sprintf(
+            "CREATE TRIGGER corrupt_competitive_bundle AFTER INSERT ON seo_evidence_bundles BEGIN UPDATE seo_evidence_bundles SET bundle_hash = '%s' WHERE id = NEW.id; END",
+            str_repeat('0', 64),
+        ));
+        $bundle = app(SeoEvidenceBundleFactory::class)->create($this->competitiveBundleInput());
+
+        try {
+            app(SeoEvidenceBundleStore::class)->create($bundle);
+            $this->fail('Store accepted a corrupted persistence readback.');
+        } catch (InvalidArgumentException $exception) {
+            $this->assertSame('SEO_EVIDENCE_READBACK_INVALID', $exception->getMessage());
+        }
+
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_evidence_bundles')->count());
+    }
+
     public function test_competitive_bundle_rejects_private_data_injection_forged_fields_and_write_authority(): void
     {
         $mutations = [

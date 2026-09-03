@@ -22,6 +22,7 @@ set('seo_agent_policy_gateway', false);
 set('seo_council_orchestration', false);
 set('seo_competitive_evidence', false);
 set('seo_measurement_sync_env', '');
+set('seo_competitive_writer_env', '');
 set('seo_council_closeout_deferred', false);
 set('career_current_parity_required', false);
 set('private_result_authority_publish_required', true);
@@ -1549,6 +1550,18 @@ task('seo:competitive-evidence-preactivation', function () {
     within('{{release_path}}/backend', function (): void {
         run(<<<'BASH'
 set -euo pipefail
+writer_env='{{seo_competitive_writer_env}}'
+[[ "$writer_env" =~ ^/tmp/fermatmind-11g-production-[1-9][0-9]*-[1-9][0-9]*/competitive-writer\.env$ ]]
+test -f "$writer_env"
+test ! -L "$writer_env"
+set -a
+. "$writer_env"
+set +a
+[[ "${APP_CONFIG_CACHE:-}" =~ ^/tmp/fermatmind-11g-production-[1-9][0-9]*-[1-9][0-9]*/competitive-config\.php$ ]]
+test ! -e "$APP_CONFIG_CACHE"
+test "${SEO_INTEL_WRITE_ENABLED:-}" = true
+test -n "${SEO_INTEL_DB_USERNAME:-}"
+test -n "${SEO_INTEL_DB_PASSWORD:-}"
 candidate_sha="$(tr -d '\r\n' < ../REVISION)"
 case "$candidate_sha" in (*[!0-9a-f]*|'') exit 1 ;; esac
 test "${#candidate_sha}" -eq 40

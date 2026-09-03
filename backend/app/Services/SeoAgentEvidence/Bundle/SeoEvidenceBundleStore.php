@@ -23,38 +23,52 @@ final class SeoEvidenceBundleStore
             throw new InvalidArgumentException('SEO_EVIDENCE_INVALID');
         }
         $connection = $this->connection();
-        $latest = $connection->table('seo_evidence_bundles')
-            ->where('bundle_id', $bundle['bundle_id'])
-            ->orderByDesc('bundle_version')
-            ->first(['bundle_version', 'bundle_hash', 'bundle_json']);
-        $version = (int) $bundle['bundle_version'];
-        if ($latest === null && $version !== 1) {
-            throw new InvalidArgumentException('SEO_EVIDENCE_VERSION_MUST_START_AT_ONE');
-        }
-        if ($latest !== null) {
-            if ($version !== (int) $latest->bundle_version + 1) {
-                throw new InvalidArgumentException('SEO_EVIDENCE_VERSION_SEQUENCE');
+        $connection->transaction(function () use ($bundle, $connection): void {
+            $latest = $connection->table('seo_evidence_bundles')
+                ->where('bundle_id', $bundle['bundle_id'])
+                ->orderByDesc('bundle_version')
+                ->first(['bundle_version', 'bundle_hash', 'bundle_json']);
+            $version = (int) $bundle['bundle_version'];
+            if ($latest === null && $version !== 1) {
+                throw new InvalidArgumentException('SEO_EVIDENCE_VERSION_MUST_START_AT_ONE');
             }
-            $latestBundle = json_decode((string) $latest->bundle_json, true, 512, JSON_THROW_ON_ERROR);
-            if (! is_array($latestBundle) || ($latestBundle['content_hash'] ?? null) === $bundle['content_hash']) {
-                throw new InvalidArgumentException('SEO_EVIDENCE_NOOP_REVISION');
+            if ($latest !== null) {
+                if ($version !== (int) $latest->bundle_version + 1) {
+                    throw new InvalidArgumentException('SEO_EVIDENCE_VERSION_SEQUENCE');
+                }
+                $latestBundle = json_decode((string) $latest->bundle_json, true, 512, JSON_THROW_ON_ERROR);
+                if (! is_array($latestBundle) || ($latestBundle['content_hash'] ?? null) === $bundle['content_hash']) {
+                    throw new InvalidArgumentException('SEO_EVIDENCE_NOOP_REVISION');
+                }
+                if (! in_array((string) $latest->bundle_hash, (array) $bundle['lineage_refs'], true)) {
+                    throw new InvalidArgumentException('SEO_EVIDENCE_LINEAGE_REQUIRED');
+                }
             }
-            if (! in_array((string) $latest->bundle_hash, (array) $bundle['lineage_refs'], true)) {
-                throw new InvalidArgumentException('SEO_EVIDENCE_LINEAGE_REQUIRED');
+            $connection->table('seo_evidence_bundles')->insert([
+                'bundle_id' => $bundle['bundle_id'],
+                'bundle_version' => $version,
+                'bundle_hash' => $bundle['bundle_hash'],
+                'mission_id' => $bundle['mission_id'],
+                'page_family' => $bundle['page_family'],
+                'locale' => $bundle['locale'],
+                'source_type' => $bundle['source_type'],
+                'expires_at' => CarbonImmutable::parse((string) $bundle['expires_at'])->utc()->format('Y-m-d H:i:s'),
+                'bundle_json' => json_encode($bundle, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+                'created_at' => now('UTC'),
+            ]);
+            $stored = $connection->table('seo_evidence_bundles')
+                ->where('bundle_id', $bundle['bundle_id'])
+                ->where('bundle_version', $version)
+                ->first(['bundle_hash', 'bundle_json']);
+            $storedBundle = $stored === null
+                ? null
+                : json_decode((string) $stored->bundle_json, true, 512, JSON_THROW_ON_ERROR);
+            if (! is_array($storedBundle)
+                || ! hash_equals((string) $bundle['bundle_hash'], (string) $stored->bundle_hash)
+                || ! $this->verifier->verify($storedBundle)['valid']) {
+                throw new InvalidArgumentException('SEO_EVIDENCE_READBACK_INVALID');
             }
-        }
-        $connection->table('seo_evidence_bundles')->insert([
-            'bundle_id' => $bundle['bundle_id'],
-            'bundle_version' => $version,
-            'bundle_hash' => $bundle['bundle_hash'],
-            'mission_id' => $bundle['mission_id'],
-            'page_family' => $bundle['page_family'],
-            'locale' => $bundle['locale'],
-            'source_type' => $bundle['source_type'],
-            'expires_at' => CarbonImmutable::parse((string) $bundle['expires_at'])->utc()->format('Y-m-d H:i:s'),
-            'bundle_json' => json_encode($bundle, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
-            'created_at' => now('UTC'),
-        ]);
+        });
     }
 
     private function connection(): ConnectionInterface

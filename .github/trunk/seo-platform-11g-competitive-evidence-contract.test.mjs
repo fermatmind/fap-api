@@ -36,6 +36,44 @@ test("competitive ingestion is measurement-gated and environment independent", (
   assert.match(deploy, /cro_measurement\.hold_reason == "NONE"/);
 });
 
+test("competitive persistence uses an ephemeral writer without changing runtime authority", () => {
+  const stagingStart = deploy.indexOf("- name: Finalize staging competitive evidence after 11F readiness");
+  const stagingEnd = deploy.indexOf("- uses: actions/upload-artifact", stagingStart);
+  const staging = deploy.slice(stagingStart, stagingEnd);
+  const productionStart = deploy.indexOf("- name: Deploy once and automatically restore LKG after committed smoke failure");
+  const productionEnd = deploy.indexOf("- name: Read production competitive evidence receipt", productionStart);
+  const production = deploy.slice(productionStart, productionEnd);
+  const preactivationStart = deployer.indexOf("task('seo:competitive-evidence-preactivation'");
+  const preactivationEnd = deployer.indexOf("task('seo:competitive-evidence-finalize'", preactivationStart);
+  const preactivation = deployer.slice(preactivationStart, preactivationEnd);
+
+  assert.ok(stagingStart > 0 && stagingEnd > stagingStart);
+  assert.ok(productionStart > 0 && productionEnd > productionStart);
+  assert.ok(preactivationStart > 0 && preactivationEnd > preactivationStart);
+  assert.match(staging, /SEO_INTEL_EVIDENCE_DB_USERNAME: \$\{\{ secrets\.SEO_INTEL_MIGRATION_DB_USERNAME \}\}/);
+  assert.match(staging, /SEO_INTEL_EVIDENCE_DB_PASSWORD: \$\{\{ secrets\.SEO_INTEL_MIGRATION_DB_PASSWORD \}\}/);
+  assert.match(staging, /competitive-writer\.env/);
+  assert.match(staging, /competitive-config\.php/);
+  assert.match(staging, /chmod 0600/);
+  assert.match(staging, /test ! -L/);
+  assert.match(staging, /test ! -e/);
+  assert.match(staging, /trap cleanup EXIT HUP INT TERM/);
+  assert.doesNotMatch(staging, /HTTPS_PROXY|HTTP_PROXY|GSC_SERVICE_ACCOUNT/);
+
+  assert.match(deployer, /set\('seo_competitive_writer_env', ''\)/);
+  assert.match(production, /local_writer_env="\$RUNNER_TEMP\/competitive-writer\.env"/);
+  assert.match(production, /remote_writer_config="\$remote_tmp\/competitive-config\.php"/);
+  assert.match(production, /-o seo_competitive_writer_env="\$remote_writer_env"/);
+  assert.match(production, /rm -f "\$local_key" "\$local_env" "\$local_writer_env"/);
+  assert.match(preactivation, /writer_env='\{\{seo_competitive_writer_env\}\}'/);
+  assert.match(preactivation, /competitive-writer\\\.env/);
+  assert.match(preactivation, /competitive-config\\\.php/);
+  assert.match(preactivation, /test ! -L "\$writer_env"/);
+  assert.match(preactivation, /test ! -e "\$APP_CONFIG_CACHE"/);
+  assert.match(preactivation, /test "\$\{SEO_INTEL_WRITE_ENABLED:-\}" = true/);
+  assert.doesNotMatch(preactivation, /seo_measurement_sync_env|HTTPS_PROXY|HTTP_PROXY|GSC_/);
+});
+
 test("Council stays zero-egress while dependency reads are accounted separately", () => {
   for (const source of [ci, deploy, deployer]) {
     assert.match(source, /external_calls/);
