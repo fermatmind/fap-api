@@ -74,6 +74,35 @@ test("competitive persistence uses an ephemeral writer without changing runtime 
   assert.doesNotMatch(preactivation, /seo_measurement_sync_env|HTTPS_PROXY|HTTP_PROXY|GSC_/);
 });
 
+test("production competitive receipts use the existing bounded runtime owner fallback", () => {
+  const preactivationStart = deployer.indexOf("task('seo:competitive-evidence-preactivation'");
+  const finalizeStart = deployer.indexOf("task('seo:competitive-evidence-finalize'", preactivationStart);
+  const finalizeEnd = deployer.indexOf("task('seo:agent-policy-gateway-closeout'", finalizeStart);
+  const preactivation = deployer.slice(preactivationStart, finalizeStart);
+  const finalize = deployer.slice(finalizeStart, finalizeEnd);
+  const productionReceiptStart = deploy.indexOf("- name: Read production competitive evidence receipt");
+  const productionReceiptEnd = deploy.indexOf("- name: Read production SEO Evidence closeout receipt", productionReceiptStart);
+  const productionReceipt = deploy.slice(productionReceiptStart, productionReceiptEnd);
+
+  assert.ok(preactivationStart > 0 && finalizeStart > preactivationStart && finalizeEnd > finalizeStart);
+  assert.ok(productionReceiptStart > 0 && productionReceiptEnd > productionReceiptStart);
+  for (const receiptTask of [preactivation, finalize]) {
+    assert.match(receiptTask, /receipt_owner=deploy/);
+    assert.match(receiptTask, /sudo -n -u www-data -- mkdir -p "\$receipt_dir"/);
+    assert.match(receiptTask, /as_receipt_owner test ! -L "\$receipt_dir"/);
+    assert.match(receiptTask, /as_receipt_owner tee "\$tmp"/);
+    assert.match(receiptTask, /as_receipt_owner chmod 0640 "\$tmp"/);
+    assert.match(receiptTask, /as_receipt_owner ln "\$tmp"/);
+    assert.match(receiptTask, /as_receipt_owner cmp -s "\$tmp"/);
+    assert.match(receiptTask, /COMPETITIVE_RECEIPT_PERSISTENCE_UNAVAILABLE/);
+    assert.doesNotMatch(receiptTask, /chmod 0?777|chown/);
+  }
+  assert.match(
+    productionReceipt,
+    /sudo -n -u www-data -- test -f \\"\\\$file\\"; sudo -n -u www-data -- test ! -L \\"\\\$file\\"; sudo -n -u www-data -- cat \\"\\\$file\\"/,
+  );
+});
+
 test("production validates the complete 11G configuration before transport", () => {
   const preflightStart = deploy.indexOf("- name: Verify production 11G configuration before transport");
   const preflightEnd = deploy.indexOf("- uses: shivammathur/setup-php", preflightStart);

@@ -1597,17 +1597,41 @@ exit($ok ? 0 : 1);
 ' "$candidate_sha" "$environment"
 receipt_dir='{{deploy_path}}/shared/backend/storage/app/release-receipts/seo-competitive-evidence'
 receipt_path="$receipt_dir/preactivation-$candidate_sha.json"
-mkdir -p "$receipt_dir"
-tmp="$(mktemp "$receipt_dir/.${candidate_sha}.XXXXXX")"
-trap 'rm -f "$tmp"' EXIT
-printf '%s\n' "$receipt" > "$tmp"
-chmod 0640 "$tmp"
-if ln "$tmp" "$receipt_path" 2>/dev/null; then
+receipt_owner=deploy
+fail_receipt_persistence() {
+  printf 'competitive_receipt_status=HOLD\n' >&2
+  printf 'competitive_receipt_stage=preactivation\n' >&2
+  printf 'competitive_receipt_reason=COMPETITIVE_RECEIPT_PERSISTENCE_UNAVAILABLE\n' >&2
+  exit 1
+}
+as_receipt_owner() {
+  if [ "$receipt_owner" = www-data ]; then
+    sudo -n -u www-data -- "$@"
+  else
+    "$@"
+  fi
+}
+mkdir -p "$receipt_dir" 2>/dev/null || true
+[ ! -L "$receipt_dir" ] || fail_receipt_persistence
+if ! tmp="$(mktemp "$receipt_dir/.${candidate_sha}.XXXXXX" 2>/dev/null)"; then
+  sudo -n -u www-data -- mkdir -p "$receipt_dir" 2>/dev/null || fail_receipt_persistence
+  receipt_owner=www-data
+  as_receipt_owner test -d "$receipt_dir" || fail_receipt_persistence
+  as_receipt_owner test ! -L "$receipt_dir" || fail_receipt_persistence
+  tmp="$(as_receipt_owner mktemp "$receipt_dir/.${candidate_sha}.XXXXXX" 2>/dev/null)" \
+    || fail_receipt_persistence
+fi
+trap 'as_receipt_owner rm -f "$tmp" >/dev/null 2>&1 || true' EXIT
+printf '%s\n' "$receipt" | as_receipt_owner tee "$tmp" >/dev/null \
+  || fail_receipt_persistence
+as_receipt_owner chmod 0640 "$tmp" || fail_receipt_persistence
+if as_receipt_owner ln "$tmp" "$receipt_path" 2>/dev/null; then
   :
 else
-  test -f "$receipt_path"
-  test ! -L "$receipt_path"
-  cmp -s "$tmp" "$receipt_path"
+  as_receipt_owner test -f "$receipt_path" \
+    && as_receipt_owner test ! -L "$receipt_path" \
+    && as_receipt_owner cmp -s "$tmp" "$receipt_path" \
+    || fail_receipt_persistence
 fi
 printf '%s' "$receipt" | jq -e --arg sha "$candidate_sha" '
     ."SEO-PLATFORM-11G" == "HOLD"
@@ -1652,12 +1676,42 @@ test ! -L "$preactivation"
 receipt="$(SEO_RELEASE_SHA="$active_sha" SEO_COMPETITIVE_EXTERNAL_READ_ENABLED=true SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED=true {{bin/php}} artisan seo:competitive-evidence-ingest --cohort=competitive.big-five.live.v2 --finalize-activation --preactivation-receipt="$preactivation" --json --no-interaction --no-ansi)"
 printf '%s' "$receipt" | jq -e --arg sha "$active_sha" '.receipt_version == "seo.competitive_evidence_closeout.v3" and .candidate_sha == $sha and .production_sha == $sha and .environment == "production" and .closeout_state == "CLOSED" and ."SEO-PLATFORM-11G" == "CLOSED" and .ready_for_11H == true and ."11i_handoff_ready" == true and .competitive_context_status == "READY" and .competitive_hold_reason == "NONE" and .execution_allowed == false and .production_permissions == 0 and .model_calls == 0 and .tool_calls == 0 and .cms_writes == 0 and .url_truth_writes == 0 and .search_writes == 0 and .business_writes == 0' >/dev/null
 final="$receipt_dir/$active_sha.json"
-test ! -e "$final"
-tmp="$(mktemp "$receipt_dir/.${active_sha}.XXXXXX")"
-trap 'rm -f "$tmp"' EXIT
-printf '%s\n' "$receipt" > "$tmp"
-chmod 0640 "$tmp"
-ln "$tmp" "$final"
+receipt_owner=deploy
+fail_receipt_persistence() {
+  printf 'competitive_receipt_status=HOLD\n' >&2
+  printf 'competitive_receipt_stage=finalize\n' >&2
+  printf 'competitive_receipt_reason=COMPETITIVE_RECEIPT_PERSISTENCE_UNAVAILABLE\n' >&2
+  exit 1
+}
+as_receipt_owner() {
+  if [ "$receipt_owner" = www-data ]; then
+    sudo -n -u www-data -- "$@"
+  else
+    "$@"
+  fi
+}
+mkdir -p "$receipt_dir" 2>/dev/null || true
+[ ! -L "$receipt_dir" ] || fail_receipt_persistence
+if ! tmp="$(mktemp "$receipt_dir/.${active_sha}.XXXXXX" 2>/dev/null)"; then
+  sudo -n -u www-data -- mkdir -p "$receipt_dir" 2>/dev/null || fail_receipt_persistence
+  receipt_owner=www-data
+  as_receipt_owner test -d "$receipt_dir" || fail_receipt_persistence
+  as_receipt_owner test ! -L "$receipt_dir" || fail_receipt_persistence
+  tmp="$(as_receipt_owner mktemp "$receipt_dir/.${active_sha}.XXXXXX" 2>/dev/null)" \
+    || fail_receipt_persistence
+fi
+trap 'as_receipt_owner rm -f "$tmp" >/dev/null 2>&1 || true' EXIT
+printf '%s\n' "$receipt" | as_receipt_owner tee "$tmp" >/dev/null \
+  || fail_receipt_persistence
+as_receipt_owner chmod 0640 "$tmp" || fail_receipt_persistence
+if as_receipt_owner ln "$tmp" "$final" 2>/dev/null; then
+  :
+else
+  as_receipt_owner test -f "$final" \
+    && as_receipt_owner test ! -L "$final" \
+    && as_receipt_owner cmp -s "$tmp" "$final" \
+    || fail_receipt_persistence
+fi
 BASH);
     });
 });
