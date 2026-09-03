@@ -18,6 +18,9 @@ test("11D through 11L extend only the permanent CI and deploy control plane", ()
   assert.match(ci, /SEO-PLATFORM-11I/);
   assert.match(ci, /SEO-PLATFORM-11J/);
   assert.match(ci, /SEO-PLATFORM-11K/);
+  assert.match(ci, /SEO-PLATFORM-11L/);
+  assert.match(ci, /seo\.platform11_closeout\.v1/);
+  assert.match(ci, /ready_for_12/);
   assert.match(ci, /seo\.technical_diagnosis_closeout\.v2/);
   assert.match(ci, /closeout-environment=ci_candidate/);
   assert.equal((ci.match(/seo\.council_closeout\.v2/g) || []).length, 2);
@@ -48,6 +51,9 @@ test("11D through 11L deployment stays disabled and writes immutable exact-SHA c
   assert.match(deployer, /SEO-PLATFORM-11I/);
   assert.match(deployer, /SEO-PLATFORM-11J/);
   assert.match(deployer, /SEO-PLATFORM-11K/);
+  assert.match(deployer, /SEO-PLATFORM-11L/);
+  assert.match(deployer, /seo\.platform11_closeout\.v1/);
+  assert.match(deployer, /ready_for_12/);
   assert.match(deployer, /after\('seo:competitive-evidence-finalize', 'seo:council-orchestration-closeout'\)/);
   assert.match(deployer, /seo\.technical_diagnosis_closeout\.v2/);
   assert.match(deployer, /closeout-environment=\{\{technical_closeout_environment\}\}/);

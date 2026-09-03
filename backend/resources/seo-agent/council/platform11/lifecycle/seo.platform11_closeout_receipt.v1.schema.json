@@ -1,0 +1,29 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.platform11_closeout_receipt.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "receipt_version",
+        "candidate_sha",
+        "production_sha",
+        "environment",
+        "closeout_state",
+        "dependency_status",
+        "registry_ref",
+        "binding_ref",
+        "policy_ref",
+        "mode_refs",
+        "schema_refs",
+        "evaluation",
+        "fault_drill",
+        "capability_states",
+        "SEO-PLATFORM-11L",
+        "SEO-PLATFORM-11",
+        "ready_for_12",
+        "execution_allowed",
+        "receipt_hash"
+    ],
+    "schema_hash": "aa960ba35214cc6c2fee4cbb3e3958df8382b486ff8ad5784b0f36ed65b3f3d9"
+}

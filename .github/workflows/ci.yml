@@ -613,6 +613,7 @@ jobs:
             tests/Feature/SeoIntel/SeoPlatform11I*.php \
             tests/Feature/SeoIntel/SeoPlatform11J*.php \
             tests/Feature/SeoIntel/SeoPlatform11K*.php \
+            tests/Feature/SeoIntel/SeoPlatform11L*.php \
             tests/Feature/SeoIntel/SeoPlatform11A*.php \
             tests/Feature/SeoIntel/SeoPlatform11B*.php \
             tests/Feature/SeoIntel/SeoPlatform11C*.php \
@@ -645,7 +646,8 @@ jobs:
             tests/Feature/SeoIntel/SeoPlatform11H*.php \
             tests/Feature/SeoIntel/SeoPlatform11I*.php \
             tests/Feature/SeoIntel/SeoPlatform11J*.php \
-            tests/Feature/SeoIntel/SeoPlatform11K*.php
+            tests/Feature/SeoIntel/SeoPlatform11K*.php \
+            tests/Feature/SeoIntel/SeoPlatform11L*.php
           php artisan seo:council-closeout --expected-sha="$GITHUB_SHA" --closeout-environment=ci_candidate --json > ../seo-council-orchestration-closeout.json
           jq -e --arg sha "$GITHUB_SHA" '
             .contract_version == "seo.council_closeout.v2"
@@ -806,6 +808,31 @@ jobs:
             and .platform11_independent_review.business_writes == 0
             and .platform11_independent_review."SEO-PLATFORM-11K" == "OFFLINE_EVAL_READY"
             and .platform11_independent_review.ready_for_11L == false and .platform11_independent_review.execution_allowed == false
+            and .platform11_lifecycle.receipt_version == "seo.platform11_closeout.v1"
+            and .platform11_lifecycle.environment == "ci_candidate"
+            and .platform11_lifecycle.closeout_state == "OFFLINE_EVAL_READY"
+            and .platform11_lifecycle.dependency_status == "READY"
+            and .platform11_lifecycle.lifecycle_probes.bypass_count == 0
+            and .platform11_lifecycle.canary_probes.bypass_count == 0
+            and .platform11_lifecycle.evaluation.sample_size == 96
+            and .platform11_lifecycle.evaluation.golden_fixture_passed == 96
+            and .platform11_lifecycle.evaluation.golden_fixture_total == 96
+            and .platform11_lifecycle.evaluation.zero_sample_state.measurement_state == "not_measured"
+            and .platform11_lifecycle.fault_drill.scenario_count == 15
+            and .platform11_lifecycle.fault_drill.passed_count == 15
+            and .platform11_lifecycle.capability_states == {L0:"READY",L1:"READY",L2:"IMPLEMENTED_WRITE_DISABLED",L3:"IMPLEMENTED_WRITE_DISABLED",L4:"DORMANT_NOT_AUTHORIZED"}
+            and .platform11_lifecycle.active_manifest_count == 0
+            and .platform11_lifecycle.trusted_signing_key_count == 0
+            and .platform11_lifecycle.model_calls == 0 and .platform11_lifecycle.tool_calls == 0
+            and .platform11_lifecycle.external_calls == 0 and .platform11_lifecycle.production_permissions == 0
+            and .platform11_lifecycle.cms_writes == 0 and .platform11_lifecycle.publish_writes == 0
+            and .platform11_lifecycle.url_truth_writes == 0 and .platform11_lifecycle.search_writes == 0
+            and .platform11_lifecycle.business_writes == 0
+            and .platform11_lifecycle."SEO-PLATFORM-11L" == "OFFLINE_EVAL_READY"
+            and .platform11_lifecycle."SEO-PLATFORM-11" == "OFFLINE_EVAL_READY"
+            and .platform11_lifecycle.ready_for_12 == false
+            and .platform11_lifecycle.post12_agent_write_enabled == false
+            and .platform11_lifecycle.execution_allowed == false
             and (.measurement_review.contract_manifest_hash | test("^[a-f0-9]{64}$"))
             and (.measurement_review.dependency_snapshot_hash | test("^[a-f0-9]{64}$"))
             and (.measurement_review.receipt_hash | test("^[a-f0-9]{64}$"))

@@ -2145,6 +2145,43 @@ $ok = ($payload["contract_version"] ?? null) === "seo.council_closeout.v2"
     && ($payload["platform11_independent_review"]["execution_allowed"] ?? null) === false
     && ($payload["platform11_independent_review"]["SEO-PLATFORM-11K"] ?? null) === ($production ? "CLOSED" : "STAGING_READY")
     && ($payload["platform11_independent_review"]["ready_for_11L"] ?? null) === $production
+    && ($payload["platform11_lifecycle"]["receipt_version"] ?? null) === "seo.platform11_closeout.v1"
+    && ($payload["platform11_lifecycle"]["candidate_sha"] ?? null) === ($argv[1] ?? null)
+    && ($payload["platform11_lifecycle"]["environment"] ?? null) === $environment
+    && ($payload["platform11_lifecycle"]["closeout_state"] ?? null) === ($production ? "CLOSED" : "STAGING_READY")
+    && ($payload["platform11_lifecycle"]["dependency_status"] ?? null) === "READY"
+    && ($payload["platform11_lifecycle"]["lifecycle_probes"]["bypass_count"] ?? null) === 0
+    && ($payload["platform11_lifecycle"]["canary_probes"]["bypass_count"] ?? null) === 0
+    && ($payload["platform11_lifecycle"]["evaluation"]["sample_size"] ?? null) === 96
+    && ($payload["platform11_lifecycle"]["evaluation"]["golden_fixture_passed"] ?? null) === 96
+    && ($payload["platform11_lifecycle"]["evaluation"]["golden_fixture_total"] ?? null) === 96
+    && ($payload["platform11_lifecycle"]["evaluation"]["zero_sample_state"]["measurement_state"] ?? null) === "not_measured"
+    && ($payload["platform11_lifecycle"]["fault_drill"]["scenario_count"] ?? null) === 15
+    && ($payload["platform11_lifecycle"]["fault_drill"]["passed_count"] ?? null) === 15
+    && ($payload["platform11_lifecycle"]["capability_states"] ?? null) === [
+        "L0" => "READY", "L1" => "READY", "L2" => "IMPLEMENTED_WRITE_DISABLED",
+        "L3" => "IMPLEMENTED_WRITE_DISABLED", "L4" => "DORMANT_NOT_AUTHORIZED",
+    ]
+    && ($payload["platform11_lifecycle"]["role_count"] ?? null) === 9
+    && ($payload["platform11_lifecycle"]["seo_orchestrator_count"] ?? null) === 1
+    && ($payload["platform11_lifecycle"]["active_manifest_count"] ?? null) === 0
+    && ($payload["platform11_lifecycle"]["trusted_signing_key_count"] ?? null) === 0
+    && ($payload["platform11_lifecycle"]["model_calls"] ?? null) === 0
+    && ($payload["platform11_lifecycle"]["tool_calls"] ?? null) === 0
+    && ($payload["platform11_lifecycle"]["external_calls"] ?? null) === 0
+    && ($payload["platform11_lifecycle"]["cms_writes"] ?? null) === 0
+    && ($payload["platform11_lifecycle"]["publish_writes"] ?? null) === 0
+    && ($payload["platform11_lifecycle"]["url_truth_writes"] ?? null) === 0
+    && ($payload["platform11_lifecycle"]["canonical_writes"] ?? null) === 0
+    && ($payload["platform11_lifecycle"]["robots_writes"] ?? null) === 0
+    && ($payload["platform11_lifecycle"]["search_writes"] ?? null) === 0
+    && ($payload["platform11_lifecycle"]["business_writes"] ?? null) === 0
+    && ($payload["platform11_lifecycle"]["production_permissions"] ?? null) === 0
+    && ($payload["platform11_lifecycle"]["post12_agent_write_enabled"] ?? null) === false
+    && ($payload["platform11_lifecycle"]["execution_allowed"] ?? null) === false
+    && ($payload["platform11_lifecycle"]["SEO-PLATFORM-11L"] ?? null) === ($production ? "CLOSED" : "STAGING_READY")
+    && ($payload["platform11_lifecycle"]["SEO-PLATFORM-11"] ?? null) === ($production ? "CLOSED" : "STAGING_READY")
+    && ($payload["platform11_lifecycle"]["ready_for_12"] ?? null) === $production
     && ($payload["technical_diagnosis"]["receipt_version"] ?? null) === "seo.technical_diagnosis_closeout.v2"
     && ($payload["technical_diagnosis"]["environment"] ?? null) === $environment
     && ($payload["technical_diagnosis"]["dependency_mode"] ?? null) === "RUNTIME_READ_ONLY"

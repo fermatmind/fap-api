@@ -1,0 +1,66 @@
+{
+    "state_machine_id": "seo.capability_lifecycle_state_machine.v1",
+    "state_machine_version": "1.0.0",
+    "states": [
+        "draft",
+        "offline_eval",
+        "shadow",
+        "active",
+        "degraded",
+        "hold",
+        "deprecated"
+    ],
+    "transitions": {
+        "draft": [
+            "offline_eval",
+            "hold"
+        ],
+        "offline_eval": [
+            "shadow",
+            "hold"
+        ],
+        "shadow": [
+            "active",
+            "hold"
+        ],
+        "active": [
+            "degraded",
+            "hold",
+            "deprecated"
+        ],
+        "degraded": [
+            "hold",
+            "deprecated"
+        ],
+        "hold": [
+            "offline_eval",
+            "deprecated"
+        ],
+        "deprecated": []
+    },
+    "eval_receipt_required_for": [
+        "shadow",
+        "active"
+    ],
+    "mutation_channels_denied": [
+        "prompt",
+        "cli",
+        "scheduler",
+        "api",
+        "ui"
+    ],
+    "reevaluation_dimensions": [
+        "role",
+        "prompt",
+        "model",
+        "tool",
+        "policy",
+        "schema",
+        "evidence",
+        "binding"
+    ],
+    "version_change_state": "hold",
+    "version_change_reason": "REEVALUATION_REQUIRED",
+    "execution_allowed": false,
+    "state_machine_hash": "fc0616b4b0ed38293ed431b08ebf2b1ef61ab5d20e573ee2fd12ecec8b3397c0"
+}

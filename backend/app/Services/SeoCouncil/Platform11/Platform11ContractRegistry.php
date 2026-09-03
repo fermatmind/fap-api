@@ -512,6 +512,134 @@ final class Platform11ContractRegistry
     }
 
     /** @return array<string, mixed> */
+    public function lifecycleStateMachine(): array
+    {
+        $machine = [
+            'state_machine_id' => 'seo.capability_lifecycle_state_machine.v1',
+            'state_machine_version' => '1.0.0',
+            'states' => CapabilityLifecycleStateMachine::STATES,
+            'transitions' => [
+                'draft' => ['offline_eval', 'hold'],
+                'offline_eval' => ['shadow', 'hold'],
+                'shadow' => ['active', 'hold'],
+                'active' => ['degraded', 'hold', 'deprecated'],
+                'degraded' => ['hold', 'deprecated'],
+                'hold' => ['offline_eval', 'deprecated'],
+                'deprecated' => [],
+            ],
+            'eval_receipt_required_for' => ['shadow', 'active'],
+            'mutation_channels_denied' => ['prompt', 'cli', 'scheduler', 'api', 'ui'],
+            'reevaluation_dimensions' => CapabilityLifecycleStateMachine::REEVALUATION_DIMENSIONS,
+            'version_change_state' => 'hold',
+            'version_change_reason' => 'REEVALUATION_REQUIRED',
+            'execution_allowed' => false,
+        ];
+        $machine['state_machine_hash'] = $this->hasher->hash($machine);
+
+        return $machine;
+    }
+
+    /** @return array<string, mixed> */
+    public function l3ManifestSchema(): array
+    {
+        $schema = [
+            '$schema' => 'https://json-schema.org/draft/2020-12/schema',
+            'schema_id' => 'seo.post12_l3_canary_manifest.v1',
+            'schema_version' => '1.0.0',
+            'state' => 'IMPLEMENTED_WRITE_DISABLED',
+            'type' => 'object',
+            'additionalProperties' => false,
+            'required' => [
+                'signed_manifest_valid', 'exact_url_allowlist', 'page_family', 'locale', 'feature_flag',
+                'rollback_unit', 'current_evidence', 'prior_stage_readback', 'independent_review', 'policy_gateway_approved',
+            ],
+            'cohort_sequence' => ['1-3', '10', '50', 'approved_cohort'],
+            'minimum_initial_urls' => 1,
+            'maximum_initial_urls' => 3,
+            'active_manifest_count' => 0,
+            'trusted_signing_key_count' => 0,
+            'adapter' => Post12L3CanaryAdapter::class,
+            'canary_started' => false,
+            'execution_allowed' => false,
+        ];
+        $schema['schema_hash'] = $this->hasher->hash($schema);
+
+        return $schema;
+    }
+
+    /** @return array<string, mixed> */
+    public function faultDrillContract(): array
+    {
+        $contract = [
+            'contract_id' => 'seo.platform11_fault_drill_contract.v1',
+            'contract_version' => '1.0.0',
+            'scenario_count' => 15,
+            'isolation' => 'test_doubles_and_isolated_data',
+            'allowed_terminal_states' => ['HOLD', 'STOP'],
+            'model_invocation' => false,
+            'tool_invocation' => false,
+            'external_egress' => false,
+            'write_permissions' => [],
+            'execution_allowed' => false,
+        ];
+        $contract['contract_hash'] = $this->hasher->hash($contract);
+
+        return $contract;
+    }
+
+    /** @return array<string, mixed> */
+    public function platform11CloseoutSchema(): array
+    {
+        $schema = [
+            '$schema' => 'https://json-schema.org/draft/2020-12/schema',
+            'schema_id' => 'seo.platform11_closeout_receipt.v1',
+            'schema_version' => '1.0.0',
+            'type' => 'object',
+            'additionalProperties' => false,
+            'required' => [
+                'receipt_version', 'candidate_sha', 'production_sha', 'environment', 'closeout_state',
+                'dependency_status', 'registry_ref', 'binding_ref', 'policy_ref', 'mode_refs', 'schema_refs',
+                'evaluation', 'fault_drill', 'capability_states', 'SEO-PLATFORM-11L', 'SEO-PLATFORM-11',
+                'ready_for_12', 'execution_allowed', 'receipt_hash',
+            ],
+        ];
+        $schema['schema_hash'] = $this->hasher->hash($schema);
+
+        return $schema;
+    }
+
+    /** @return array<string, mixed> */
+    public function lifecycleMode(): array
+    {
+        $machine = $this->lifecycleStateMachine();
+        $l2 = $this->l2ManifestSchema();
+        $l3 = $this->l3ManifestSchema();
+        $evaluation = (new Platform11EvaluationBuilder($this->hasher))->fixtureManifest();
+        $fault = $this->faultDrillContract();
+        $mode = [
+            'mode_id' => 'seo.capability_lifecycle_evaluation',
+            'mode_version' => '1.0.0',
+            'permission_states' => (new CapabilityLifecycleStateMachine)->permissionStates(),
+            'lifecycle_ref' => $this->reference((string) $machine['state_machine_id'], '1.0.0', (string) $machine['state_machine_hash']),
+            'l2_manifest_schema_ref' => $this->reference((string) $l2['schema_id'], '1.0.0', (string) $l2['schema_hash']),
+            'l3_manifest_schema_ref' => $this->reference((string) $l3['schema_id'], '1.0.0', (string) $l3['schema_hash']),
+            'evaluation_fixture_ref' => $this->reference((string) $evaluation['manifest_id'], '1.0.0', (string) $evaluation['fixture_manifest_hash']),
+            'fault_drill_ref' => $this->reference((string) $fault['contract_id'], '1.0.0', (string) $fault['contract_hash']),
+            'prompt_ref' => $this->promptRef('seo.capability_lifecycle.prompt.v1.md'),
+            'active_manifest_count' => 0,
+            'trusted_signing_key_count' => 0,
+            'model_invocation' => false,
+            'tool_invocation' => false,
+            'external_egress' => false,
+            'write_permissions' => [],
+            'execution_allowed' => false,
+        ];
+        $mode['mode_hash'] = $this->hasher->hash($mode);
+
+        return $mode;
+    }
+
+    /** @return array<string, mixed> */
     public function manifest(): array
     {
         $registry = $this->registry();
@@ -523,6 +651,9 @@ final class Platform11ContractRegistry
         $l2 = $this->l2ManifestSchema();
         $runtimeQa = $this->runtimeQaMode();
         $independentReview = $this->independentReviewMode();
+        $lifecycle = $this->lifecycleMode();
+        $l3 = $this->l3ManifestSchema();
+        $closeout = $this->platform11CloseoutSchema();
         $manifest = [
             'manifest_id' => 'seo.council_contract_manifest.v4',
             'manifest_version' => self::MANIFEST_VERSION,
@@ -536,6 +667,9 @@ final class Platform11ContractRegistry
             'l2_manifest_schema_ref' => $this->reference((string) $l2['schema_id'], '1.0.0', (string) $l2['schema_hash']),
             'runtime_qa_mode_ref' => $this->reference((string) $runtimeQa['mode_id'], '1.0.0', (string) $runtimeQa['mode_hash']),
             'independent_review_mode_ref' => $this->reference((string) $independentReview['mode_id'], '1.0.0', (string) $independentReview['mode_hash']),
+            'lifecycle_mode_ref' => $this->reference((string) $lifecycle['mode_id'], '1.0.0', (string) $lifecycle['mode_hash']),
+            'l3_manifest_schema_ref' => $this->reference((string) $l3['schema_id'], '1.0.0', (string) $l3['schema_hash']),
+            'platform11_closeout_schema_ref' => $this->reference((string) $closeout['schema_id'], '1.0.0', (string) $closeout['schema_hash']),
             'evidence_privacy_ref' => $this->fileRef('seo.evidence_contract_manifest.v5', '5.0.0', 'docs/seo/generated/seo-agent-evidence-contract-manifest.v5.json'),
             'policy_gateway_ref' => $this->fileRef('seo.policy_gateway_contract_manifest.v1', '1.0.0', 'docs/seo/generated/seo-policy-gateway-contract-manifest.v1.json'),
             'legacy_frozen_files' => $this->legacyFiles(),
@@ -581,6 +715,7 @@ final class Platform11ContractRegistry
         $editorialSchemas = $this->editorialSchemas();
         $runtimeQaSchemas = $this->runtimeQaSchemas();
         $independentReviewSchemas = $this->independentReviewSchemas();
+        $evaluation = (new Platform11EvaluationBuilder($this->hasher))->fixtureManifest();
         $artifacts = [
             'docs/seo/generated/seo-agent-role-capability-registry.v2.json' => $this->registry(),
             'resources/seo-agent/council/bindings/seo.role_capability_binding.v4.json' => $this->binding(),
@@ -591,6 +726,12 @@ final class Platform11ContractRegistry
             'resources/seo-agent/council/platform11/editorial-draft/seo.post12_l2_cms_draft_manifest.v1.schema.json' => $this->l2ManifestSchema(),
             'resources/seo-agent/council/platform11/runtime-qa/seo.runtime_qa_mode.v1.json' => $this->runtimeQaMode(),
             'resources/seo-agent/council/platform11/independent-review/seo.independent_review_mode.v1.json' => $this->independentReviewMode(),
+            'resources/seo-agent/council/platform11/lifecycle/seo.capability_lifecycle_state_machine.v1.json' => $this->lifecycleStateMachine(),
+            'resources/seo-agent/council/platform11/lifecycle/seo.post12_l3_canary_manifest.v1.schema.json' => $this->l3ManifestSchema(),
+            'resources/seo-agent/council/platform11/lifecycle/seo.platform11_evaluation_fixture_manifest.v1.json' => $evaluation,
+            'resources/seo-agent/council/platform11/lifecycle/seo.platform11_fault_drill_contract.v1.json' => $this->faultDrillContract(),
+            'resources/seo-agent/council/platform11/lifecycle/seo.platform11_closeout_receipt.v1.schema.json' => $this->platform11CloseoutSchema(),
+            'resources/seo-agent/council/platform11/lifecycle/seo.capability_lifecycle_mode.v1.json' => $this->lifecycleMode(),
             'docs/seo/generated/seo-council-contract-manifest.v4.json' => $this->manifest(),
         ];
         foreach ($schemas as $name => $schema) {

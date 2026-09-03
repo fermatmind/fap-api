@@ -1,0 +1,34 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.post12_l3_canary_manifest.v1",
+    "schema_version": "1.0.0",
+    "state": "IMPLEMENTED_WRITE_DISABLED",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "signed_manifest_valid",
+        "exact_url_allowlist",
+        "page_family",
+        "locale",
+        "feature_flag",
+        "rollback_unit",
+        "current_evidence",
+        "prior_stage_readback",
+        "independent_review",
+        "policy_gateway_approved"
+    ],
+    "cohort_sequence": [
+        "1-3",
+        "10",
+        "50",
+        "approved_cohort"
+    ],
+    "minimum_initial_urls": 1,
+    "maximum_initial_urls": 3,
+    "active_manifest_count": 0,
+    "trusted_signing_key_count": 0,
+    "adapter": "App\\Services\\SeoCouncil\\Platform11\\Post12L3CanaryAdapter",
+    "canary_started": false,
+    "execution_allowed": false,
+    "schema_hash": "416558a80d7e19076031f08db1f41c7556b0a43cea2b5307dcc94d5d02633b77"
+}

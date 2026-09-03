@@ -1,0 +1,49 @@
+{
+    "mode_id": "seo.capability_lifecycle_evaluation",
+    "mode_version": "1.0.0",
+    "permission_states": {
+        "L0": "READY",
+        "L1": "READY",
+        "L2": "IMPLEMENTED_WRITE_DISABLED",
+        "L3": "IMPLEMENTED_WRITE_DISABLED",
+        "L4": "DORMANT_NOT_AUTHORIZED"
+    },
+    "lifecycle_ref": {
+        "id": "seo.capability_lifecycle_state_machine.v1",
+        "version": "1.0.0",
+        "hash": "fc0616b4b0ed38293ed431b08ebf2b1ef61ab5d20e573ee2fd12ecec8b3397c0"
+    },
+    "l2_manifest_schema_ref": {
+        "id": "seo.post12_l2_cms_draft_manifest.v1",
+        "version": "1.0.0",
+        "hash": "7b545e7b6ad23d07a23bd9159bbea049afe6ee6ace464492395cbf05550805f5"
+    },
+    "l3_manifest_schema_ref": {
+        "id": "seo.post12_l3_canary_manifest.v1",
+        "version": "1.0.0",
+        "hash": "416558a80d7e19076031f08db1f41c7556b0a43cea2b5307dcc94d5d02633b77"
+    },
+    "evaluation_fixture_ref": {
+        "id": "seo.platform11_evaluation_fixture_manifest.v1",
+        "version": "1.0.0",
+        "hash": "2f38bb99b9fd63d44b1f196445b02434d24e796face5a60abd55df38a9e38538"
+    },
+    "fault_drill_ref": {
+        "id": "seo.platform11_fault_drill_contract.v1",
+        "version": "1.0.0",
+        "hash": "f8c0a874e13defed96bd3885bc9a3b927b0e9a9b4a76f8ab89bc419a90e3cea4"
+    },
+    "prompt_ref": {
+        "id": "seo.capability_lifecycle.prompt",
+        "version": "1.0.0",
+        "hash": "fe21d064e9af5c736b9619c083c3b2cbc906abf101bfed0c0cea6d1a0dc8cfda"
+    },
+    "active_manifest_count": 0,
+    "trusted_signing_key_count": 0,
+    "model_invocation": false,
+    "tool_invocation": false,
+    "external_egress": false,
+    "write_permissions": [],
+    "execution_allowed": false,
+    "mode_hash": "5f3ae49ecba1955c8c39c7843f418e54b8c4d115f39b9370f2e1b2a1fc6082ac"
+}
