@@ -2081,6 +2081,21 @@ $ok = ($payload["contract_version"] ?? null) === "seo.council_closeout.v2"
     && ($payload["platform11"]["execution_allowed"] ?? null) === false
     && ($payload["platform11"]["SEO-PLATFORM-11H"] ?? null) === ($production ? "CLOSED" : "STAGING_READY")
     && ($payload["platform11"]["ready_for_11I"] ?? null) === $production
+    && ($payload["platform11_editorial"]["receipt_version"] ?? null) === "seo.editorial_draft_closeout.v1"
+    && ($payload["platform11_editorial"]["candidate_sha"] ?? null) === ($argv[1] ?? null)
+    && ($payload["platform11_editorial"]["environment"] ?? null) === $environment
+    && ($payload["platform11_editorial"]["closeout_state"] ?? null) === ($production ? "CLOSED" : "STAGING_READY")
+    && ($payload["platform11_editorial"]["dependency_status"] ?? null) === "READY"
+    && ($payload["platform11_editorial"]["negative_probes"]["bypass_count"] ?? null) === 0
+    && ($payload["platform11_editorial"]["artifact_only"] ?? null) === true
+    && ($payload["platform11_editorial"]["dry_run_only"] ?? null) === true
+    && ($payload["platform11_editorial"]["cms_write"] ?? null) === false
+    && ($payload["platform11_editorial"]["publish"] ?? null) === false
+    && ($payload["platform11_editorial"]["active_manifest_count"] ?? null) === 0
+    && ($payload["platform11_editorial"]["trusted_signing_key_count"] ?? null) === 0
+    && ($payload["platform11_editorial"]["execution_allowed"] ?? null) === false
+    && ($payload["platform11_editorial"]["SEO-PLATFORM-11I"] ?? null) === ($production ? "CLOSED" : "STAGING_READY")
+    && ($payload["platform11_editorial"]["ready_for_11J"] ?? null) === $production
     && ($payload["technical_diagnosis"]["receipt_version"] ?? null) === "seo.technical_diagnosis_closeout.v2"
     && ($payload["technical_diagnosis"]["environment"] ?? null) === $environment
     && ($payload["technical_diagnosis"]["dependency_mode"] ?? null) === "RUNTIME_READ_ONLY"

@@ -610,6 +610,7 @@ jobs:
             tests/Feature/SeoIntel/SeoPlatform11F*.php \
             tests/Feature/SeoIntel/SeoPlatform11G*.php \
             tests/Feature/SeoIntel/SeoPlatform11H*.php \
+            tests/Feature/SeoIntel/SeoPlatform11I*.php \
             tests/Feature/SeoIntel/SeoPlatform11A*.php \
             tests/Feature/SeoIntel/SeoPlatform11B*.php \
             tests/Feature/SeoIntel/SeoPlatform11C*.php \
@@ -639,7 +640,8 @@ jobs:
             tests/Feature/SeoIntel/SeoPlatform11ERoutingCloseoutTest.php \
             tests/Feature/SeoIntel/SeoPlatform11F*.php \
             tests/Feature/SeoIntel/SeoPlatform11G*.php \
-            tests/Feature/SeoIntel/SeoPlatform11H*.php
+            tests/Feature/SeoIntel/SeoPlatform11H*.php \
+            tests/Feature/SeoIntel/SeoPlatform11I*.php
           php artisan seo:council-closeout --expected-sha="$GITHUB_SHA" --closeout-environment=ci_candidate --json > ../seo-council-orchestration-closeout.json
           jq -e --arg sha "$GITHUB_SHA" '
             .contract_version == "seo.council_closeout.v2"
@@ -753,6 +755,16 @@ jobs:
             and .platform11.role_count == 9 and .platform11.seo_orchestrator_count == 1
             and .platform11."SEO-PLATFORM-11H" == "OFFLINE_EVAL_READY"
             and .platform11.ready_for_11I == false and .platform11.execution_allowed == false
+            and .platform11_editorial.receipt_version == "seo.editorial_draft_closeout.v1"
+            and .platform11_editorial.environment == "ci_candidate"
+            and .platform11_editorial.closeout_state == "OFFLINE_EVAL_READY"
+            and .platform11_editorial.dependency_status == "READY"
+            and .platform11_editorial.negative_probes.bypass_count == 0
+            and .platform11_editorial.artifact_only == true and .platform11_editorial.dry_run_only == true
+            and .platform11_editorial.cms_write == false and .platform11_editorial.publish == false
+            and .platform11_editorial.active_manifest_count == 0 and .platform11_editorial.trusted_signing_key_count == 0
+            and .platform11_editorial."SEO-PLATFORM-11I" == "OFFLINE_EVAL_READY"
+            and .platform11_editorial.ready_for_11J == false and .platform11_editorial.execution_allowed == false
             and (.measurement_review.contract_manifest_hash | test("^[a-f0-9]{64}$"))
             and (.measurement_review.dependency_snapshot_hash | test("^[a-f0-9]{64}$"))
             and (.measurement_review.receipt_hash | test("^[a-f0-9]{64}$"))

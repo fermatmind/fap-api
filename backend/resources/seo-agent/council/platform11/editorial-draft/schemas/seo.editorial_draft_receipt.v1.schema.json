@@ -1,0 +1,26 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.editorial_draft_receipt.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "receipt_version",
+        "run_id",
+        "context_id",
+        "request_hash",
+        "output_hash",
+        "role_id",
+        "capability_sequence",
+        "role_call_count",
+        "status",
+        "negative_metrics",
+        "model_calls",
+        "tool_calls",
+        "external_calls",
+        "write_count",
+        "execution_allowed",
+        "receipt_hash"
+    ],
+    "schema_hash": "bae1fb666201e420896c9be894a93ab714c24f86b26d41239de1ad1bc1697d6a"
+}

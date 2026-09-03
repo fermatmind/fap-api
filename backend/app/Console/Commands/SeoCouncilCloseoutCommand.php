@@ -22,6 +22,7 @@ use App\Services\SeoCouncil\Governance\RuntimeCapabilitySnapshotBuilder;
 use App\Services\SeoCouncil\Measurement\MeasurementCloseoutBuilder;
 use App\Services\SeoCouncil\Memory\OperatorTimeService;
 use App\Services\SeoCouncil\Platform11\Platform11HCloseoutBuilder;
+use App\Services\SeoCouncil\Platform11\Platform11ICloseoutBuilder;
 use App\Services\SeoCouncil\Policy\CouncilAdmissionRequestFactory;
 use App\Services\SeoCouncil\Routing\DeterministicMissionRouter;
 use App\Services\SeoCouncil\Routing\GoldenRoutingEvaluator;
@@ -60,6 +61,7 @@ final class SeoCouncilCloseoutCommand extends Command
         TechnicalDiagnosisCloseoutBuilder $technicalDiagnosis,
         MeasurementCloseoutBuilder $measurement,
         Platform11HCloseoutBuilder $platform11H,
+        Platform11ICloseoutBuilder $platform11I,
         SeoRegistryHasher $hasher,
     ): int {
         try {
@@ -124,6 +126,7 @@ final class SeoCouncilCloseoutCommand extends Command
                 $closeoutEnvironment === 'ci_candidate' ? $this->parentSha() : $sourceSha,
             );
             $platform11Receipt = $platform11H->build($sourceSha, $closeoutEnvironment);
+            $platform11EditorialReceipt = $platform11I->build($sourceSha, $closeoutEnvironment, $platform11Receipt);
 
             $receipt = [
                 'contract_version' => 'seo.council_closeout.v2',
@@ -193,6 +196,7 @@ final class SeoCouncilCloseoutCommand extends Command
                 'technical_diagnosis' => $technicalReceipt,
                 'measurement_review' => $measurementReceipt,
                 'platform11' => $platform11Receipt,
+                'platform11_editorial' => $platform11EditorialReceipt,
             ];
             $receiptProjection = $this->receiptProjectionProbe($receipt);
             $receipt['receipt_projection_probe_total'] = $receiptProjection['total'];
@@ -251,6 +255,7 @@ final class SeoCouncilCloseoutCommand extends Command
                 $ready && ($technicalReceipt['closeout_state'] ?? null) === $expectedTechnicalState
                     && ($measurementReceipt['closeout_state'] ?? null) === $expectedMeasurementState
                     && ($platform11Receipt['closeout_state'] ?? null) === $expectedPlatform11State
+                    && ($platform11EditorialReceipt['closeout_state'] ?? null) === $expectedPlatform11State
                     ? self::SUCCESS
                     : self::FAILURE,
             );

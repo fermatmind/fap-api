@@ -71,6 +71,8 @@ final class Platform11MissionValidator
         }
         if ($domain === 'intent_query_ownership') {
             $this->intentInput($input['mode_input'], (string) $input['locale']);
+        } elseif ($domain === 'editorial_draft') {
+            $this->editorialInput($input['mode_input'], (string) $input['locale']);
         }
 
         return $input;
@@ -111,6 +113,59 @@ final class Platform11MissionValidator
             || ($input['locale'] ?? null) !== $locale) {
             throw new InvalidArgumentException('INTENT_INPUT_INVALID');
         }
+    }
+
+    /** @param array<string, mixed> $input */
+    private function editorialInput(array $input, string $locale): void
+    {
+        $this->exactKeys($input, [
+            'owner_candidate_hash', 'locale', 'title', 'seo_title', 'meta_description', 'refresh_brief',
+            'direct_response', 'faq_or_modules', 'internal_link_candidates', 'source_claim_locale_map',
+            'schema_candidate', 'material_change', 'page_necessity', 'information_gain',
+            'template_overlap_score', 'duplicate_similarity', 'translation_only', 'locale_specific_value',
+            'scaled_content_score', 'authority_revision',
+        ], 'EDITORIAL_INPUT_FIELDS_INVALID');
+        foreach (['owner_candidate_hash', 'authority_revision'] as $field) {
+            if (preg_match('/^[a-f0-9]{64}$/D', (string) ($input[$field] ?? '')) !== 1) {
+                throw new InvalidArgumentException('EDITORIAL_HASH_INVALID');
+            }
+        }
+        if (($input['locale'] ?? null) !== $locale
+            || ! is_bool($input['material_change'] ?? null)
+            || ! is_bool($input['translation_only'] ?? null)
+            || ! $this->score($input['template_overlap_score'] ?? null)
+            || ! $this->score($input['duplicate_similarity'] ?? null)
+            || ! $this->score($input['scaled_content_score'] ?? null)) {
+            throw new InvalidArgumentException('EDITORIAL_INPUT_INVALID');
+        }
+        foreach (['title', 'seo_title', 'meta_description', 'refresh_brief', 'direct_response', 'page_necessity', 'information_gain', 'locale_specific_value'] as $field) {
+            if (! is_string($input[$field] ?? null) || mb_strlen((string) $input[$field]) > 2000) {
+                throw new InvalidArgumentException('EDITORIAL_TEXT_INVALID');
+            }
+        }
+        if (! is_array($input['faq_or_modules']) || ! array_is_list($input['faq_or_modules'])
+            || ! is_array($input['schema_candidate'])
+            || ! is_array($input['internal_link_candidates']) || ! array_is_list($input['internal_link_candidates'])
+            || ! is_array($input['source_claim_locale_map']) || ! array_is_list($input['source_claim_locale_map'])) {
+            throw new InvalidArgumentException('EDITORIAL_COLLECTION_INVALID');
+        }
+        foreach ($input['internal_link_candidates'] as $link) {
+            if (! is_array($link)) {
+                throw new InvalidArgumentException('EDITORIAL_LINK_INVALID');
+            }
+            $this->exactKeys($link, ['target_hash', 'truth_status', 'visibility', 'indexability', 'redirect_only', 'locale'], 'EDITORIAL_LINK_FIELDS_INVALID');
+        }
+        foreach ($input['source_claim_locale_map'] as $claim) {
+            if (! is_array($claim)) {
+                throw new InvalidArgumentException('EDITORIAL_CLAIM_INVALID');
+            }
+            $this->exactKeys($claim, ['claim_id', 'source_ref', 'evidence_ref', 'locale', 'risk_level', 'freshness_state', 'statement_kind'], 'EDITORIAL_CLAIM_FIELDS_INVALID');
+        }
+    }
+
+    private function score(mixed $value): bool
+    {
+        return (is_float($value) || is_int($value)) && $value >= 0 && $value <= 1;
     }
 
     private function containsForbiddenKey(mixed $value): bool

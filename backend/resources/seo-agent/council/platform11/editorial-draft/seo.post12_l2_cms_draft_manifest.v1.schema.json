@@ -1,0 +1,37 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.post12_l2_cms_draft_manifest.v1",
+    "schema_version": "1.0.0",
+    "state": "IMPLEMENTED_WRITE_DISABLED",
+    "additionalProperties": false,
+    "allowed_fields": [
+        "title",
+        "seo_title",
+        "meta_description",
+        "draft_body",
+        "draft_faq",
+        "draft_modules",
+        "draft_internal_links",
+        "draft_schema"
+    ],
+    "permanently_forbidden_fields": [
+        "slug",
+        "canonical",
+        "robots",
+        "noindex",
+        "publication_state",
+        "publish",
+        "unpublish",
+        "delete",
+        "redirect",
+        "scoring",
+        "private_result",
+        "url_truth",
+        "search_submission"
+    ],
+    "active_manifest_count": 0,
+    "trusted_signing_key_count": 0,
+    "adapter": "App\\Services\\SeoCouncil\\Platform11\\Post12L2DraftWriteAdapter",
+    "execution_allowed": false,
+    "schema_hash": "7b545e7b6ad23d07a23bd9159bbea049afe6ee6ace464492395cbf05550805f5"
+}

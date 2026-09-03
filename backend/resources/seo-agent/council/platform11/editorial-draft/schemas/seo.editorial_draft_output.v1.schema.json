@@ -1,0 +1,19 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.editorial_draft_output.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "status",
+        "draft_emitted",
+        "hold_reason",
+        "draft_package",
+        "artifact_only",
+        "dry_run_only",
+        "cms_write",
+        "publish",
+        "execution_allowed"
+    ],
+    "schema_hash": "5a1d013009a941b7f06b0286a87f5717fea6023c516dd0d39f229cd7e93dd151"
+}

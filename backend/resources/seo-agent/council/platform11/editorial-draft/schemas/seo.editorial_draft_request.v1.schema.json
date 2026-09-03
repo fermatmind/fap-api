@@ -1,0 +1,14 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.editorial_draft_request.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "owner_candidate_hash",
+        "locale",
+        "source_claim_locale_map",
+        "authority_revision"
+    ],
+    "schema_hash": "a40da2e84f882f076ae2ade709228ac3af79c7d9bbb5d58f81ce3a1e27fe8c30"
+}

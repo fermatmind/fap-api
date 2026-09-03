@@ -15,7 +15,7 @@ final class Platform11Coordinator
         'binding_v4_resolution',
         'dependency_snapshot',
         'bounded_review',
-        'intent_ownership_runner',
+        'deterministic_mode_runner',
         'mode_output',
         'run_receipt',
         'final_deterministic_veto',
@@ -25,6 +25,7 @@ final class Platform11Coordinator
         private readonly Platform11ContractRegistry $contracts,
         private readonly QueryOwnerUrlTruthReadModel $queryOwners,
         private readonly IntentOwnershipRunner $intentOwnership,
+        private readonly EditorialDraftRunner $editorialDraft,
         private readonly SeoRegistryHasher $hasher,
     ) {}
 
@@ -44,9 +45,7 @@ final class Platform11Coordinator
         $roleId = is_array($definition) ? (string) $definition['role'] : '';
 
         if ($this->contracts->verifyGenerated()) {
-            if ($domain !== 'intent_query_ownership') {
-                $reason = 'MODE_NOT_AVAILABLE_IN_CURRENT_STAGE';
-            } else {
+            if ($domain === 'intent_query_ownership') {
                 try {
                     $projection = $this->queryOwners->report((string) $request->payload['mode_input']['query_family_key']);
                 } catch (\Throwable) {
@@ -68,6 +67,19 @@ final class Platform11Coordinator
                         ? 'INTENT_OWNERSHIP_CANDIDATE_READY'
                         : (string) ($mode['output']['abstain_reason'] ?? 'INTENT_OWNERSHIP_HOLD');
                 }
+            } elseif ($domain === 'editorial_draft') {
+                $mode = $this->editorialDraft->evaluate(
+                    (array) $request->payload['mode_input'],
+                    (array) $request->payload['evidence_bundle_refs'],
+                    $runId,
+                    $contextId,
+                );
+                $status = ($mode['receipt']['status'] ?? null) === 'PASS' ? 'CANDIDATE_READY' : 'EVIDENCE_HOLD';
+                $reason = ($mode['receipt']['status'] ?? null) === 'PASS'
+                    ? 'EDITORIAL_DRAFT_CANDIDATE_READY'
+                    : (string) ($mode['output']['hold_reason'] ?? 'EDITORIAL_DRAFT_HOLD');
+            } else {
+                $reason = 'MODE_NOT_AVAILABLE_IN_CURRENT_STAGE';
             }
         }
 
@@ -85,14 +97,14 @@ final class Platform11Coordinator
             'autonomy' => $request->payload['autonomy'],
             'role_id' => $roleId,
             'role_call_count' => $mode === null ? 0 : 1,
-            'route_plan' => $mode === null ? [] : [[
-                'sequence' => 1,
+            'route_plan' => $mode === null ? [] : array_map(static fn (string $capability, int $index): array => [
+                'sequence' => $index + 1,
                 'role_id' => $roleId,
-                'capability_id' => 'seo.intent_query_ownership',
-                'authority_ceiling' => 'candidate_only',
+                'capability_id' => $capability,
+                'authority_ceiling' => (string) $definition['authority'],
                 'allow_delegation' => false,
                 'execution_allowed' => false,
-            ]],
+            ], (array) $definition['capabilities'], array_keys((array) $definition['capabilities'])),
             'mode_output' => $mode['output'] ?? null,
             'mode_receipt' => $mode['receipt'] ?? null,
             'status' => $status,

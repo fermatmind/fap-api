@@ -275,6 +275,11 @@ jobs:
                 and .seo_council_orchestration.platform11.seo_orchestrator_count == 1
                 and .seo_council_orchestration.platform11."SEO-PLATFORM-11H" == "OFFLINE_EVAL_READY"
                 and .seo_council_orchestration.platform11.ready_for_11I == false
+                and .seo_council_orchestration.platform11_editorial.receipt_version == "seo.editorial_draft_closeout.v1"
+                and .seo_council_orchestration.platform11_editorial.closeout_state == "OFFLINE_EVAL_READY"
+                and .seo_council_orchestration.platform11_editorial.negative_probes.bypass_count == 0
+                and .seo_council_orchestration.platform11_editorial."SEO-PLATFORM-11I" == "OFFLINE_EVAL_READY"
+                and .seo_council_orchestration.platform11_editorial.ready_for_11J == false
                 and .seo_council_orchestration.execution_allowed == false)
               or (.seo_council_orchestration.required == false
                 and .seo_council_orchestration.result == "skipped"))
@@ -1146,6 +1151,14 @@ jobs:
             and .platform11.negative_probes.bypass_count == 0
             and .platform11."SEO-PLATFORM-11H" == "STAGING_READY"
             and .platform11.ready_for_11I == false
+            and .platform11_editorial.receipt_version == "seo.editorial_draft_closeout.v1"
+            and .platform11_editorial.environment == "staging_runtime"
+            and .platform11_editorial.closeout_state == "STAGING_READY"
+            and .platform11_editorial.dependency_status == "READY"
+            and .platform11_editorial.negative_probes.bypass_count == 0
+            and .platform11_editorial.cms_write == false and .platform11_editorial.publish == false
+            and .platform11_editorial."SEO-PLATFORM-11I" == "STAGING_READY"
+            and .platform11_editorial.ready_for_11J == false
             and .execution_allowed == false and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
       - name: Record staging timing
@@ -1741,6 +1754,16 @@ jobs:
             and .platform11.negative_probes.bypass_count == 0
             and .platform11."SEO-PLATFORM-11H" == "CLOSED"
             and .platform11.ready_for_11I == true
+            and .platform11_editorial.receipt_version == "seo.editorial_draft_closeout.v1"
+            and .platform11_editorial.environment == "production_runtime"
+            and .platform11_editorial.closeout_state == "CLOSED"
+            and .platform11_editorial.dependency_status == "READY"
+            and .platform11_editorial.negative_probes.bypass_count == 0
+            and .platform11_editorial.artifact_only == true and .platform11_editorial.dry_run_only == true
+            and .platform11_editorial.cms_write == false and .platform11_editorial.publish == false
+            and .platform11_editorial.active_manifest_count == 0 and .platform11_editorial.trusted_signing_key_count == 0
+            and .platform11_editorial."SEO-PLATFORM-11I" == "CLOSED"
+            and .platform11_editorial.ready_for_11J == true
             and .execution_allowed == false and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
       - id: career-parity

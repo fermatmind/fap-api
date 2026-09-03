@@ -1,0 +1,29 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.editorial_draft_draft_package.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "title",
+        "seo_title",
+        "meta_description",
+        "refresh_brief",
+        "direct_answer",
+        "faq_or_modules",
+        "internal_link_candidates",
+        "source_claim_locale_map",
+        "schema_candidate",
+        "duplicate_risk",
+        "material_change",
+        "page_necessity",
+        "information_gain",
+        "template_overlap",
+        "locale_specific_value",
+        "scaled_content_risk",
+        "evidence_refs",
+        "authority_revision",
+        "package_hash"
+    ],
+    "schema_hash": "38dd17be36fe86feb2ff12e84556c64a71544c130a41313515ce6840c3e66475"
+}

@@ -1,0 +1,65 @@
+{
+    "mode_id": "seo.editorial_cms_draft",
+    "mode_version": "1.0.0",
+    "review_domain": "editorial_draft",
+    "role_id": "seo.expert.content_entity_quality",
+    "capability_sequence": [
+        "seo.content_claim_entity_audit",
+        "seo.editorial_cms_draft",
+        "seo.internal_link_recommendation"
+    ],
+    "autonomy": "L1",
+    "authority_ceiling": "candidate_only",
+    "prompt_refs": [
+        {
+            "id": "seo.content_claim_entity_audit.prompt",
+            "version": "1.0.0",
+            "hash": "69ff4d928a011c473aa9bb7ba1e6fa5b5e5fcd39588b1e56620aaf573b8cd5de"
+        },
+        {
+            "id": "seo.editorial_cms_draft.prompt",
+            "version": "1.0.0",
+            "hash": "a523e0a1a7b54eac978e66b435d671de303a7ddc91535963ffdaea413c192eb2"
+        },
+        {
+            "id": "seo.internal_link_recommendation.prompt",
+            "version": "1.0.0",
+            "hash": "9e5c71bf10f636a91d006223634da0787763d6301967419ecd4c5181aeaeee2e"
+        }
+    ],
+    "schema_refs": {
+        "request": {
+            "id": "seo.editorial_draft_request.v1",
+            "version": "1.0.0",
+            "hash": "a40da2e84f882f076ae2ade709228ac3af79c7d9bbb5d58f81ce3a1e27fe8c30"
+        },
+        "draft_package": {
+            "id": "seo.editorial_draft_draft_package.v1",
+            "version": "1.0.0",
+            "hash": "38dd17be36fe86feb2ff12e84556c64a71544c130a41313515ce6840c3e66475"
+        },
+        "output": {
+            "id": "seo.editorial_draft_output.v1",
+            "version": "1.0.0",
+            "hash": "5a1d013009a941b7f06b0286a87f5717fea6023c516dd0d39f229cd7e93dd151"
+        },
+        "receipt": {
+            "id": "seo.editorial_draft_receipt.v1",
+            "version": "1.0.0",
+            "hash": "bae1fb666201e420896c9be894a93ab714c24f86b26d41239de1ad1bc1697d6a"
+        }
+    },
+    "artifact_only": true,
+    "dry_run_only": true,
+    "cms_write": false,
+    "publish": false,
+    "tool_allowlist": [],
+    "egress_allowlist": [],
+    "write_permissions": [],
+    "allow_delegation": false,
+    "model_invocation": false,
+    "tool_invocation": false,
+    "external_egress": false,
+    "execution_allowed": false,
+    "mode_hash": "4d3f2092c1417489a20f828f56a192474901bfedb061675c5e1b16e765afcfcf"
+}

@@ -110,7 +110,7 @@ final class Platform11ContractRegistry
         $roleBindings['seo.independent_reviewer'][] = 'seo.independent_policy_experiment_safety_review';
         $binding['evidence_type_registry'] = array_values(array_unique(array_merge(
             $binding['evidence_type_registry'],
-            ['query_owner', 'url_truth', 'page_family_policy', 'competitive_handoff', 'cms_readback', 'experiment_ledger', 'frozen_artifact'],
+            ['query_owner', 'url_truth', 'page_family_policy', 'competitive_handoff', 'cms_readback', 'experiment_ledger', 'frozen_artifact', 'intent_ownership', 'public_content_authority'],
         )));
         foreach ($binding['missions'] as &$mission) {
             $mission['mission_version'] = self::BINDING_VERSION;
@@ -285,6 +285,98 @@ final class Platform11ContractRegistry
         return $mode;
     }
 
+    /** @return array<string, array<string, mixed>> */
+    public function editorialSchemas(): array
+    {
+        $fields = [
+            'request' => ['owner_candidate_hash', 'locale', 'source_claim_locale_map', 'authority_revision'],
+            'draft_package' => [
+                'title', 'seo_title', 'meta_description', 'refresh_brief', 'direct_answer', 'faq_or_modules',
+                'internal_link_candidates', 'source_claim_locale_map', 'schema_candidate', 'duplicate_risk',
+                'material_change', 'page_necessity', 'information_gain', 'template_overlap',
+                'locale_specific_value', 'scaled_content_risk', 'evidence_refs', 'authority_revision', 'package_hash',
+            ],
+            'output' => ['status', 'draft_emitted', 'hold_reason', 'draft_package', 'artifact_only', 'dry_run_only', 'cms_write', 'publish', 'execution_allowed'],
+            'receipt' => ['receipt_version', 'run_id', 'context_id', 'request_hash', 'output_hash', 'role_id', 'capability_sequence', 'role_call_count', 'status', 'negative_metrics', 'model_calls', 'tool_calls', 'external_calls', 'write_count', 'execution_allowed', 'receipt_hash'],
+        ];
+        $schemas = [];
+        foreach ($fields as $name => $required) {
+            $schema = [
+                '$schema' => 'https://json-schema.org/draft/2020-12/schema',
+                'schema_id' => 'seo.editorial_draft_'.$name.'.v1',
+                'schema_version' => '1.0.0',
+                'type' => 'object',
+                'additionalProperties' => false,
+                'required' => $required,
+            ];
+            $schema['schema_hash'] = $this->hasher->hash($schema);
+            $schemas[$name] = $schema;
+        }
+
+        return $schemas;
+    }
+
+    /** @return array<string, mixed> */
+    public function editorialMode(): array
+    {
+        $schemas = $this->editorialSchemas();
+        $mode = [
+            'mode_id' => 'seo.editorial_cms_draft',
+            'mode_version' => '1.0.0',
+            'review_domain' => 'editorial_draft',
+            'role_id' => 'seo.expert.content_entity_quality',
+            'capability_sequence' => [
+                'seo.content_claim_entity_audit',
+                'seo.editorial_cms_draft',
+                'seo.internal_link_recommendation',
+            ],
+            'autonomy' => 'L1',
+            'authority_ceiling' => 'candidate_only',
+            'prompt_refs' => [
+                $this->promptRef('seo.content_claim_entity_audit.prompt.v1.md'),
+                $this->promptRef('seo.editorial_cms_draft.prompt.v1.md'),
+                $this->promptRef('seo.internal_link_recommendation.prompt.v1.md'),
+            ],
+            'schema_refs' => array_map(fn (array $schema): array => $this->reference((string) $schema['schema_id'], '1.0.0', (string) $schema['schema_hash']), $schemas),
+            'artifact_only' => true,
+            'dry_run_only' => true,
+            'cms_write' => false,
+            'publish' => false,
+            'tool_allowlist' => [],
+            'egress_allowlist' => [],
+            'write_permissions' => [],
+            'allow_delegation' => false,
+            'model_invocation' => false,
+            'tool_invocation' => false,
+            'external_egress' => false,
+            'execution_allowed' => false,
+        ];
+        $mode['mode_hash'] = $this->hasher->hash($mode);
+
+        return $mode;
+    }
+
+    /** @return array<string, mixed> */
+    public function l2ManifestSchema(): array
+    {
+        $schema = [
+            '$schema' => 'https://json-schema.org/draft/2020-12/schema',
+            'schema_id' => 'seo.post12_l2_cms_draft_manifest.v1',
+            'schema_version' => '1.0.0',
+            'state' => 'IMPLEMENTED_WRITE_DISABLED',
+            'additionalProperties' => false,
+            'allowed_fields' => ['title', 'seo_title', 'meta_description', 'draft_body', 'draft_faq', 'draft_modules', 'draft_internal_links', 'draft_schema'],
+            'permanently_forbidden_fields' => ['slug', 'canonical', 'robots', 'noindex', 'publication_state', 'publish', 'unpublish', 'delete', 'redirect', 'scoring', 'private_result', 'url_truth', 'search_submission'],
+            'active_manifest_count' => 0,
+            'trusted_signing_key_count' => 0,
+            'adapter' => Post12L2DraftWriteAdapter::class,
+            'execution_allowed' => false,
+        ];
+        $schema['schema_hash'] = $this->hasher->hash($schema);
+
+        return $schema;
+    }
+
     /** @return array<string, mixed> */
     public function manifest(): array
     {
@@ -293,6 +385,8 @@ final class Platform11ContractRegistry
         $policy = $this->policy();
         $mission = $this->missionSchema();
         $mode = $this->intentMode();
+        $editorial = $this->editorialMode();
+        $l2 = $this->l2ManifestSchema();
         $manifest = [
             'manifest_id' => 'seo.council_contract_manifest.v4',
             'manifest_version' => self::MANIFEST_VERSION,
@@ -302,6 +396,8 @@ final class Platform11ContractRegistry
             'mission_request_ref' => $this->reference((string) $mission['schema_id'], self::MISSION_SCHEMA_VERSION, (string) $mission['schema_hash']),
             'policy_ref' => $this->reference((string) $policy['registry_id'], self::POLICY_VERSION, (string) $policy['registry_hash']),
             'intent_mode_ref' => $this->reference((string) $mode['mode_id'], '1.0.0', (string) $mode['mode_hash']),
+            'editorial_mode_ref' => $this->reference((string) $editorial['mode_id'], '1.0.0', (string) $editorial['mode_hash']),
+            'l2_manifest_schema_ref' => $this->reference((string) $l2['schema_id'], '1.0.0', (string) $l2['schema_hash']),
             'evidence_privacy_ref' => $this->fileRef('seo.evidence_contract_manifest.v5', '5.0.0', 'docs/seo/generated/seo-agent-evidence-contract-manifest.v5.json'),
             'policy_gateway_ref' => $this->fileRef('seo.policy_gateway_contract_manifest.v1', '1.0.0', 'docs/seo/generated/seo-policy-gateway-contract-manifest.v1.json'),
             'legacy_frozen_files' => $this->legacyFiles(),
@@ -344,16 +440,22 @@ final class Platform11ContractRegistry
     public function artifacts(): array
     {
         $schemas = $this->intentSchemas();
+        $editorialSchemas = $this->editorialSchemas();
         $artifacts = [
             'docs/seo/generated/seo-agent-role-capability-registry.v2.json' => $this->registry(),
             'resources/seo-agent/council/bindings/seo.role_capability_binding.v4.json' => $this->binding(),
             'resources/seo-agent/policy-gateway/seo.policy_gateway_registry.v2.json' => $this->policy(),
             'resources/seo-agent/council/schemas/seo.mission_request.v2.schema.json' => $this->missionSchema(),
             'resources/seo-agent/council/platform11/intent-ownership/seo.intent_ownership_mode.v1.json' => $this->intentMode(),
+            'resources/seo-agent/council/platform11/editorial-draft/seo.editorial_draft_mode.v1.json' => $this->editorialMode(),
+            'resources/seo-agent/council/platform11/editorial-draft/seo.post12_l2_cms_draft_manifest.v1.schema.json' => $this->l2ManifestSchema(),
             'docs/seo/generated/seo-council-contract-manifest.v4.json' => $this->manifest(),
         ];
         foreach ($schemas as $name => $schema) {
             $artifacts['resources/seo-agent/council/platform11/intent-ownership/schemas/seo.intent_ownership_'.$name.'.v1.schema.json'] = $schema;
+        }
+        foreach ($editorialSchemas as $name => $schema) {
+            $artifacts['resources/seo-agent/council/platform11/editorial-draft/schemas/seo.editorial_draft_'.$name.'.v1.schema.json'] = $schema;
         }
 
         return $artifacts;
