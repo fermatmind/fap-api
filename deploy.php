@@ -1693,7 +1693,17 @@ receipt_dir='{{deploy_path}}/shared/backend/storage/app/release-receipts/seo-com
 preactivation="$receipt_dir/preactivation-$active_sha.json"
 test -f "$preactivation"
 test ! -L "$preactivation"
+set +e
 receipt="$(SEO_RELEASE_SHA="$active_sha" SEO_COMPETITIVE_EXTERNAL_READ_ENABLED=true SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED=true {{bin/php}} artisan seo:competitive-evidence-ingest --cohort=competitive.big-five.live.v2 --finalize-activation --preactivation-receipt="$preactivation" --json --no-interaction --no-ansi)"
+finalize_status=$?
+set -e
+if [ "$finalize_status" -ne 0 ]; then
+  printf '%s' "$receipt" | jq -r '
+    "competitive_finalize_status=" + ((.status // "HOLD") | tostring),
+    "competitive_finalize_reason=" + ((.hold_reason // "COMPETITIVE_FINALIZE_FAILED") | tostring)
+  ' >&2
+  exit "$finalize_status"
+fi
 printf '%s' "$receipt" | jq -e --arg sha "$active_sha" '.receipt_version == "seo.competitive_evidence_closeout.v3" and .candidate_sha == $sha and .production_sha == $sha and .environment == "production" and .closeout_state == "CLOSED" and ."SEO-PLATFORM-11G" == "CLOSED" and .ready_for_11H == true and ."11i_handoff_ready" == true and .competitive_context_status == "READY" and .competitive_hold_reason == "NONE" and .execution_allowed == false and .production_permissions == 0 and .model_calls == 0 and .tool_calls == 0 and .cms_writes == 0 and .url_truth_writes == 0 and .search_writes == 0 and .business_writes == 0' >/dev/null
 final="$receipt_dir/$active_sha.json"
 receipt_owner=deploy

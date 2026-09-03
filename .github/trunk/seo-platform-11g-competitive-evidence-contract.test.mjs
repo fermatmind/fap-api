@@ -99,6 +99,12 @@ test("production competitive receipts use the existing bounded runtime owner fal
     assert.match(receiptTask, /COMPETITIVE_RECEIPT_PERSISTENCE_UNAVAILABLE/);
     assert.doesNotMatch(receiptTask, /chmod 0?777|chown/);
   }
+  assert.match(finalize, /set \+e/);
+  assert.match(finalize, /finalize_status=\$\?/);
+  assert.match(finalize, /competitive_finalize_status=/);
+  assert.match(finalize, /competitive_finalize_reason=/);
+  assert.match(finalize, /exit "\$finalize_status"/);
+  assert.doesNotMatch(finalize, /\.dependency_ingestion|\.policy_observations|\.release_ref/);
   assert.match(
     productionReceipt,
     /sudo -n -u www-data -- test -f \\"\\\$file\\"; sudo -n -u www-data -- test ! -L \\"\\\$file\\"; sudo -n -u www-data -- cat \\"\\\$file\\"/,
