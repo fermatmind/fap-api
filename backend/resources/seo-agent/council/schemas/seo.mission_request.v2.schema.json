@@ -1,0 +1,95 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.mission_request.v2",
+    "schema_version": "2.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "schema_version",
+        "mission_id",
+        "idempotency_key",
+        "mission_type",
+        "family",
+        "locale",
+        "review_domain",
+        "requested_role",
+        "evidence_bundle_refs",
+        "autonomy",
+        "budget",
+        "tool_scope",
+        "egress_scope",
+        "mode_input"
+    ],
+    "properties": {
+        "schema_version": {
+            "const": "seo.mission_request.v2"
+        },
+        "mission_id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,127}$"
+        },
+        "idempotency_key": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,127}$"
+        },
+        "mission_type": {
+            "enum": [
+                "bounded_review",
+                "independent_registry_review"
+            ]
+        },
+        "family": {
+            "enum": [
+                "tests",
+                "articles_topics",
+                "career",
+                "personality",
+                "trust_method_help",
+                "other_public"
+            ]
+        },
+        "locale": {
+            "enum": [
+                "en",
+                "zh-CN"
+            ]
+        },
+        "review_domain": {
+            "enum": [
+                "intent_query_ownership",
+                "editorial_draft",
+                "runtime_qa",
+                null
+            ]
+        },
+        "requested_role": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "evidence_bundle_refs": {
+            "type": "array",
+            "maxItems": 32
+        },
+        "autonomy": {
+            "enum": [
+                "L0",
+                "L1"
+            ]
+        },
+        "budget": {
+            "type": "object"
+        },
+        "tool_scope": {
+            "const": []
+        },
+        "egress_scope": {
+            "const": []
+        },
+        "mode_input": {
+            "type": "object"
+        }
+    },
+    "schema_hash": "bcd5e60ca1a18a782e295f4f0bc7f733f22257fde8d2aafda141398e347bcd5a"
+}

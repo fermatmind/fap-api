@@ -1,0 +1,100 @@
+{
+    "manifest_id": "seo.council_contract_manifest.v4",
+    "manifest_version": "4.0.0",
+    "production_baseline_sha": "f136b43af2af10a0b70608b7403fe75eafda8dd4",
+    "registry_ref": {
+        "id": "fermatmind.seo.role_capability_registry",
+        "version": "2.0.0",
+        "hash": "fb80c061eb787f64b14630a6eb81ed04650073f12ce95645f00d7f2cd3302c0d"
+    },
+    "binding_ref": {
+        "id": "fermatmind.seo.role_capability_binding",
+        "version": "4.0.0",
+        "hash": "7c94caa41128e642bff30130365fee6bb12ed3d13eacda07c820ceca76a57b4f"
+    },
+    "mission_request_ref": {
+        "id": "seo.mission_request.v2",
+        "version": "2.0.0",
+        "hash": "bcd5e60ca1a18a782e295f4f0bc7f733f22257fde8d2aafda141398e347bcd5a"
+    },
+    "policy_ref": {
+        "id": "fermatmind.seo.policy_gateway_registry",
+        "version": "2.0.0",
+        "hash": "d8c9dfd4245a079fef14c537d389fd79745aa766e704c7b0013e896ab1ae07a9"
+    },
+    "intent_mode_ref": {
+        "id": "seo.intent_query_ownership",
+        "version": "1.0.0",
+        "hash": "69291209ccc7cdcc1aaf48c6a3bc116e725aac40955a7a0953fcf0d20ae68c96"
+    },
+    "evidence_privacy_ref": {
+        "id": "seo.evidence_contract_manifest.v5",
+        "version": "5.0.0",
+        "hash": "c497a780dd69e5a36807073babf338dacf9233bcd7d277e2947ba2f0fe1a37c1",
+        "path": "backend/docs/seo/generated/seo-agent-evidence-contract-manifest.v5.json"
+    },
+    "policy_gateway_ref": {
+        "id": "seo.policy_gateway_contract_manifest.v1",
+        "version": "1.0.0",
+        "hash": "b3e92d482f85a32713e9d8fb632775bb75655d3491e59e46e892fab7be59242b",
+        "path": "backend/docs/seo/generated/seo-policy-gateway-contract-manifest.v1.json"
+    },
+    "legacy_frozen_files": [
+        {
+            "path": "backend/docs/seo/generated/seo-agent-role-capability-registry.v1.json",
+            "sha256": "5810f56e9c0e8cdf766a1baddd1480a05ef7755a675b0ad6e2aa6b944509962b"
+        },
+        {
+            "path": "backend/resources/seo-agent/council/bindings/seo.role_capability_binding.v1.json",
+            "sha256": "adb88f7c02f1a44069d36d22ee5e6d0413071960aa2957e872d7547465252932"
+        },
+        {
+            "path": "backend/resources/seo-agent/council/bindings/seo.role_capability_binding.v2.json",
+            "sha256": "655d25e227e33f08dc8e8589a414a6a755572450bb9f7da740f7b5d47df40a73"
+        },
+        {
+            "path": "backend/resources/seo-agent/council/bindings/seo.role_capability_binding.v3.json",
+            "sha256": "923409ae6082c48944b4d77a8443fc26507abdb1ce10d64c998b91dfea7c1a44"
+        },
+        {
+            "path": "backend/resources/seo-agent/policy-gateway/seo.policy_gateway_registry.v1.json",
+            "sha256": "3cc280b76af8fc88b01742c00c01ffe91690fa577e7df122df2ed2615e1c05fe"
+        },
+        {
+            "path": "backend/resources/seo-agent/prompts/career-content-agent.v1.md",
+            "sha256": "20ae9e99fc251639dbbfaf34209dbdd03504e13b7d66470850615c2e7a2a14ad"
+        },
+        {
+            "path": "backend/resources/seo-agent/prompts/seo-expert-review.v1.md",
+            "sha256": "7b68cec6c8a1a7d33dd2dc1d922f1c670128ce6c961a5eaba5451d039e15370c"
+        },
+        {
+            "path": "backend/resources/seo-agent/prompts/seo-independent-reviewer.v1.md",
+            "sha256": "84ffa12aaa80d597c0104bdeabf05ed2aa0c0d015a7ef585e71e5c51926743f0"
+        },
+        {
+            "path": "backend/resources/seo-agent/prompts/seo-orchestrator.v1.md",
+            "sha256": "397f5df2bc10925aaf80f729a3a55a1711da44355fef17373f7bb0f554cfde6a"
+        }
+    ],
+    "global_guards": {
+        "read_only_gsc": true,
+        "search_submission_allowed": false,
+        "post12_agent_write_enabled": false,
+        "l4_state": "dormant_not_authorized",
+        "agent_default_write_permission": false,
+        "deterministic_system_final_veto": true,
+        "global_write_gate": false,
+        "active_manifest_count": 0,
+        "trusted_signing_key_count": 0,
+        "model_invocation_enabled": false,
+        "tool_invocation_enabled": false,
+        "external_egress_enabled": false
+    },
+    "role_count": 9,
+    "seo_orchestrator_count": 1,
+    "new_agent_count": 0,
+    "delegation_count": 0,
+    "execution_allowed": false,
+    "manifest_hash": "b9bdd5cfd1ae2e79a307222fd0e22ca1cf1e10df12d59104933552add0f2361a"
+}

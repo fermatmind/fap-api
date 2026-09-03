@@ -1,0 +1,15 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.intent_ownership_owner_change_proposal.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "current_owner_hash",
+        "proposed_owner_hash",
+        "reason_code",
+        "evidence_refs",
+        "execution_allowed"
+    ],
+    "schema_hash": "b53b9330549010f3a11be8f9678958759f6739dab7f9d79a8cd0ef5897861ab6"
+}

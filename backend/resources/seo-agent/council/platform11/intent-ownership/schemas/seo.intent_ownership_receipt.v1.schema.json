@@ -1,0 +1,25 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.intent_ownership_receipt.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "receipt_version",
+        "run_id",
+        "context_id",
+        "request_hash",
+        "output_hash",
+        "role_id",
+        "capability_id",
+        "status",
+        "negative_metrics",
+        "model_calls",
+        "tool_calls",
+        "external_calls",
+        "write_count",
+        "execution_allowed",
+        "receipt_hash"
+    ],
+    "schema_hash": "3ae6727755edefadb7abab1926fa256ce76cbe50b11c3ca938beea854ab0a337"
+}

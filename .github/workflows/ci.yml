@@ -563,7 +563,7 @@ jobs:
           retention-days: 90
 
   seo-council-orchestration:
-    name: SEO Platform 11D-11G deterministic Council orchestration
+    name: SEO Platform 11D-11L deterministic Council orchestration
     needs: classify
     if: needs.classify.outputs.seo_council_orchestration == 'true'
     runs-on: ubuntu-latest
@@ -609,6 +609,7 @@ jobs:
             tests/Feature/SeoIntel/SeoPlatform11E*.php \
             tests/Feature/SeoIntel/SeoPlatform11F*.php \
             tests/Feature/SeoIntel/SeoPlatform11G*.php \
+            tests/Feature/SeoIntel/SeoPlatform11H*.php \
             tests/Feature/SeoIntel/SeoPlatform11A*.php \
             tests/Feature/SeoIntel/SeoPlatform11B*.php \
             tests/Feature/SeoIntel/SeoPlatform11C*.php \
@@ -637,7 +638,8 @@ jobs:
             tests/Feature/SeoIntel/SeoPlatform11EDiagnosisEvaluationTest.php \
             tests/Feature/SeoIntel/SeoPlatform11ERoutingCloseoutTest.php \
             tests/Feature/SeoIntel/SeoPlatform11F*.php \
-            tests/Feature/SeoIntel/SeoPlatform11G*.php
+            tests/Feature/SeoIntel/SeoPlatform11G*.php \
+            tests/Feature/SeoIntel/SeoPlatform11H*.php
           php artisan seo:council-closeout --expected-sha="$GITHUB_SHA" --closeout-environment=ci_candidate --json > ../seo-council-orchestration-closeout.json
           jq -e --arg sha "$GITHUB_SHA" '
             .contract_version == "seo.council_closeout.v2"
@@ -740,6 +742,17 @@ jobs:
             and .measurement_review.production_execution_enabled == false
             and .measurement_review."SEO-PLATFORM-11F" == "HOLD"
             and .measurement_review.ready_for_11G == false
+            and .platform11.receipt_version == "seo.intent_ownership_closeout.v1"
+            and .platform11.environment == "ci_candidate"
+            and .platform11.closeout_state == "OFFLINE_EVAL_READY"
+            and .platform11.dependency_status == "READY"
+            and .platform11.dependency_snapshot.source == "prior_production_closeout"
+            and .platform11.dependency_snapshot.production_sha == "f136b43af2af10a0b70608b7403fe75eafda8dd4"
+            and .platform11.dependency_snapshot.current_candidate_production_claimed == false
+            and .platform11.negative_probes.bypass_count == 0
+            and .platform11.role_count == 9 and .platform11.seo_orchestrator_count == 1
+            and .platform11."SEO-PLATFORM-11H" == "OFFLINE_EVAL_READY"
+            and .platform11.ready_for_11I == false and .platform11.execution_allowed == false
             and (.measurement_review.contract_manifest_hash | test("^[a-f0-9]{64}$"))
             and (.measurement_review.dependency_snapshot_hash | test("^[a-f0-9]{64}$"))
             and (.measurement_review.receipt_hash | test("^[a-f0-9]{64}$"))

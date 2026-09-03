@@ -1,0 +1,21 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.intent_ownership_output.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "intent",
+        "primary_owner_candidate",
+        "supporting_owners",
+        "cannibalization_cluster",
+        "authority_gap",
+        "locale_reasoning",
+        "owner_change_proposal",
+        "abstain_reason",
+        "evidence_refs",
+        "confidence",
+        "execution_allowed"
+    ],
+    "schema_hash": "f64cda7aaaeca5d2afbc79637b90311e46b00f1fdeb95a4e1a70a2aa3d1fcaa7"
+}

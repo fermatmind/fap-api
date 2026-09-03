@@ -19,6 +19,8 @@ use App\Services\SeoCouncil\Measurement\MeasurementModeRegistry;
 use App\Services\SeoCouncil\Measurement\MeasurementRunner;
 use App\Services\SeoCouncil\Measurement\MeasurementRuntimeGate;
 use App\Services\SeoCouncil\Persistence\CouncilRunRepository;
+use App\Services\SeoCouncil\Platform11\Platform11Coordinator;
+use App\Services\SeoCouncil\Platform11\Platform11MissionRequestData;
 use App\Services\SeoCouncil\Policy\CouncilAdmissionGateway;
 use App\Services\SeoCouncil\Policy\CouncilAdmissionRequestFactory;
 use App\Services\SeoCouncil\Routing\CouncilConflictResolver;
@@ -68,7 +70,14 @@ final class SeoCouncilOrchestrator
         private readonly CouncilConflictResolver $conflicts,
         private readonly CouncilContractValidator $contracts,
         private readonly CouncilRunRepository $repository,
+        private readonly Platform11Coordinator $platform11,
     ) {}
+
+    /** @return array<string, mixed> */
+    public function runPlatform11(Platform11MissionRequestData $request): array
+    {
+        return $this->platform11->run($request);
+    }
 
     /** @return array<string, mixed> */
     public function run(MissionRequestData $request): array

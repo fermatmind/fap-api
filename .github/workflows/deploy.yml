@@ -264,6 +264,17 @@ jobs:
                 and .seo_council_orchestration.external_trace_export == false
                 and .seo_council_orchestration.shared_agent_memory == false
                 and .seo_council_orchestration.mission_persistence_enabled == false
+                and .seo_council_orchestration.platform11.receipt_version == "seo.intent_ownership_closeout.v1"
+                and .seo_council_orchestration.platform11.environment == "ci_candidate"
+                and .seo_council_orchestration.platform11.closeout_state == "OFFLINE_EVAL_READY"
+                and .seo_council_orchestration.platform11.dependency_status == "READY"
+                and .seo_council_orchestration.platform11.dependency_snapshot.source == "prior_production_closeout"
+                and .seo_council_orchestration.platform11.dependency_snapshot.current_candidate_production_claimed == false
+                and .seo_council_orchestration.platform11.negative_probes.bypass_count == 0
+                and .seo_council_orchestration.platform11.role_count == 9
+                and .seo_council_orchestration.platform11.seo_orchestrator_count == 1
+                and .seo_council_orchestration.platform11."SEO-PLATFORM-11H" == "OFFLINE_EVAL_READY"
+                and .seo_council_orchestration.platform11.ready_for_11I == false
                 and .seo_council_orchestration.execution_allowed == false)
               or (.seo_council_orchestration.required == false
                 and .seo_council_orchestration.result == "skipped"))
@@ -1126,6 +1137,15 @@ jobs:
             and .active_manifests == 0 and .trusted_signing_keys == 0
             and .external_trace_export == false and .shared_agent_memory == false
             and .mission_persistence_enabled == false
+            and .platform11.receipt_version == "seo.intent_ownership_closeout.v1"
+            and .platform11.environment == "staging_runtime"
+            and .platform11.closeout_state == "STAGING_READY"
+            and .platform11.dependency_status == "READY"
+            and .platform11.dependency_snapshot.source == "prior_production_closeout"
+            and .platform11.dependency_snapshot.current_candidate_production_claimed == false
+            and .platform11.negative_probes.bypass_count == 0
+            and .platform11."SEO-PLATFORM-11H" == "STAGING_READY"
+            and .platform11.ready_for_11I == false
             and .execution_allowed == false and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
       - name: Record staging timing
@@ -1711,6 +1731,16 @@ jobs:
             and .active_manifests == 0 and .trusted_signing_keys == 0
             and .external_trace_export == false and .shared_agent_memory == false
             and .mission_persistence_enabled == false
+            and .platform11.receipt_version == "seo.intent_ownership_closeout.v1"
+            and .platform11.environment == "production_runtime"
+            and .platform11.closeout_state == "CLOSED"
+            and .platform11.dependency_status == "READY"
+            and .platform11.dependency_snapshot.source == "current_production_receipt"
+            and .platform11.dependency_snapshot.production_sha == $sha
+            and .platform11.dependency_snapshot.current_candidate_production_claimed == true
+            and .platform11.negative_probes.bypass_count == 0
+            and .platform11."SEO-PLATFORM-11H" == "CLOSED"
+            and .platform11.ready_for_11I == true
             and .execution_allowed == false and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
       - id: career-parity
@@ -1774,6 +1804,7 @@ jobs:
             career-current-authority-production-preactivation-parity.json
             seo-agent-evidence-boundary-production.json
             seo-agent-policy-gateway-production.json
+            seo-competitive-evidence-production.json
             seo-council-orchestration-production.json
             lkg-rollback-receipt.json
           if-no-files-found: error

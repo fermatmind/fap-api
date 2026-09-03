@@ -1864,7 +1864,11 @@ set -euo pipefail
 expected_sha="$(tr -d '\r\n' < ../REVISION)"
 case "$expected_sha" in (*[!0-9a-f]*|'') exit 1 ;; esac
 test "${#expected_sha}" -eq 40
-if receipt="$({{bin/php}} artisan seo:council-closeout --expected-sha="$expected_sha" --closeout-environment={{technical_closeout_environment}} --json --no-interaction --no-ansi)"; then
+runner=({{bin/php}} artisan)
+if [ "{{technical_closeout_environment}}" = production_runtime ]; then
+  runner=(sudo -n -u www-data -- {{bin/php}} artisan)
+fi
+if receipt="$("${runner[@]}" seo:council-closeout --expected-sha="$expected_sha" --closeout-environment={{technical_closeout_environment}} --json --no-interaction --no-ansi)"; then
   :
 else
   printf '%s' "$receipt" | {{bin/php}} -r '
@@ -2063,6 +2067,20 @@ $ok = ($payload["contract_version"] ?? null) === "seo.council_closeout.v2"
     && ($payload["measurement_review"]["execution_allowed"] ?? null) === false
     && ($payload["measurement_review"]["SEO-PLATFORM-11F"] ?? null) === ($production ? "CLOSED" : "HOLD")
     && ($payload["measurement_review"]["ready_for_11G"] ?? null) === $production
+    && ($payload["platform11"]["receipt_version"] ?? null) === "seo.intent_ownership_closeout.v1"
+    && ($payload["platform11"]["candidate_sha"] ?? null) === ($argv[1] ?? null)
+    && ($payload["platform11"]["environment"] ?? null) === $environment
+    && ($payload["platform11"]["closeout_state"] ?? null) === ($production ? "CLOSED" : "STAGING_READY")
+    && ($payload["platform11"]["dependency_status"] ?? null) === "READY"
+    && ($payload["platform11"]["dependency_snapshot"]["SEO-PLATFORM-11G"] ?? null) === "CLOSED"
+    && ($payload["platform11"]["dependency_snapshot"]["ready_for_11H"] ?? null) === true
+    && ($payload["platform11"]["dependency_snapshot"]["11i_handoff_ready"] ?? null) === true
+    && ($payload["platform11"]["negative_probes"]["bypass_count"] ?? null) === 0
+    && ($payload["platform11"]["role_count"] ?? null) === 9
+    && ($payload["platform11"]["seo_orchestrator_count"] ?? null) === 1
+    && ($payload["platform11"]["execution_allowed"] ?? null) === false
+    && ($payload["platform11"]["SEO-PLATFORM-11H"] ?? null) === ($production ? "CLOSED" : "STAGING_READY")
+    && ($payload["platform11"]["ready_for_11I"] ?? null) === $production
     && ($payload["technical_diagnosis"]["receipt_version"] ?? null) === "seo.technical_diagnosis_closeout.v2"
     && ($payload["technical_diagnosis"]["environment"] ?? null) === $environment
     && ($payload["technical_diagnosis"]["dependency_mode"] ?? null) === "RUNTIME_READ_ONLY"
@@ -4331,6 +4349,7 @@ after('deploy:symlink', 'healthcheck:scale-lookup');
 after('deploy:symlink', 'healthcheck:ops-entry-contract');
 after('deploy:symlink', 'healthcheck:seo-council-anonymous');
 after('healthcheck:seo-council-anonymous', 'seo:competitive-evidence-finalize');
+after('seo:competitive-evidence-finalize', 'seo:council-orchestration-closeout');
 after('healthcheck:ops-entry-contract', 'seo:ledger-production-closeout');
 after('healthcheck:ops-entry-contract', 'seo:agent-evidence-boundary-closeout');
 after('healthcheck:ops-entry-contract', 'seo:agent-policy-gateway-closeout');

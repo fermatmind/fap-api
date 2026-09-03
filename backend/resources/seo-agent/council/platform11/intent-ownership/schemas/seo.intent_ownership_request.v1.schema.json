@@ -1,0 +1,16 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.intent_ownership_request.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "query_hmac",
+        "query_cluster_id",
+        "intent_label",
+        "locale",
+        "query_family_key",
+        "evidence_refs"
+    ],
+    "schema_hash": "eecb239d882b78bf14265422e7294090c4928c0d0261cc275d65ec9426739e1d"
+}

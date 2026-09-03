@@ -1,0 +1,54 @@
+{
+    "mode_id": "seo.intent_query_ownership",
+    "mode_version": "1.0.0",
+    "review_domain": "intent_query_ownership",
+    "role_id": "seo.expert.content_entity_quality",
+    "autonomy": "L1",
+    "authority_ceiling": "candidate_only",
+    "prompt_ref": {
+        "id": "seo.intent_query_ownership.prompt",
+        "version": "1.0.0",
+        "hash": "230c0c6b333bec7a470d516d616b619739206ee45f5f79c1551a3601471d9f78"
+    },
+    "schema_refs": {
+        "request": {
+            "id": "seo.intent_ownership_request.v1",
+            "version": "1.0.0",
+            "hash": "eecb239d882b78bf14265422e7294090c4928c0d0261cc275d65ec9426739e1d"
+        },
+        "candidate": {
+            "id": "seo.intent_ownership_candidate.v1",
+            "version": "1.0.0",
+            "hash": "c5e0547db26dd8d649e27c95f8dfa98abf18391ff0be79f1b160cc9db0120d1f"
+        },
+        "cannibalization_cluster": {
+            "id": "seo.intent_ownership_cannibalization_cluster.v1",
+            "version": "1.0.0",
+            "hash": "38e7601ba7e471e7d18a74fefd2a4f0580d5300d54d4faafa1f05d9b8097d634"
+        },
+        "owner_change_proposal": {
+            "id": "seo.intent_ownership_owner_change_proposal.v1",
+            "version": "1.0.0",
+            "hash": "b53b9330549010f3a11be8f9678958759f6739dab7f9d79a8cd0ef5897861ab6"
+        },
+        "output": {
+            "id": "seo.intent_ownership_output.v1",
+            "version": "1.0.0",
+            "hash": "f64cda7aaaeca5d2afbc79637b90311e46b00f1fdeb95a4e1a70a2aa3d1fcaa7"
+        },
+        "receipt": {
+            "id": "seo.intent_ownership_receipt.v1",
+            "version": "1.0.0",
+            "hash": "3ae6727755edefadb7abab1926fa256ce76cbe50b11c3ca938beea854ab0a337"
+        }
+    },
+    "tool_allowlist": [],
+    "egress_allowlist": [],
+    "write_permissions": [],
+    "allow_delegation": false,
+    "model_invocation": false,
+    "tool_invocation": false,
+    "external_egress": false,
+    "execution_allowed": false,
+    "mode_hash": "69291209ccc7cdcc1aaf48c6a3bc116e725aac40955a7a0953fcf0d20ae68c96"
+}

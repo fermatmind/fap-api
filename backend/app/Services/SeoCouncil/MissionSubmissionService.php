@@ -8,6 +8,8 @@ use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use App\Services\SeoCouncil\Contracts\CouncilContractValidator;
 use App\Services\SeoCouncil\Contracts\MissionRequestData;
 use App\Services\SeoCouncil\Governance\RoleCapabilityBindingRegistry;
+use App\Services\SeoCouncil\Platform11\Platform11MissionRequestData;
+use App\Services\SeoCouncil\Platform11\Platform11MissionValidator;
 use InvalidArgumentException;
 
 final class MissionSubmissionService
@@ -19,6 +21,7 @@ final class MissionSubmissionService
         private readonly SeoRegistryHasher $hasher,
         private readonly RoleCapabilityBindingRegistry $binding,
         private readonly SeoCouncilOrchestrator $orchestrator,
+        private readonly Platform11MissionValidator $platform11Validator,
     ) {}
 
     /** @param array<string, mixed> $input @return array<string, mixed> */
@@ -28,6 +31,11 @@ final class MissionSubmissionService
             throw new InvalidArgumentException('CALLER_TYPE_DENIED');
         }
         unset($input['caller_type']);
+        if (($input['schema_version'] ?? null) === 'seo.mission_request.v2') {
+            $request = Platform11MissionRequestData::fromInput($input, $boundCallerType, $this->platform11Validator, $this->hasher);
+
+            return $this->orchestrator->runPlatform11($request);
+        }
         $request = MissionRequestData::fromInput($input, $boundCallerType, $this->validator, $this->hasher);
         $this->binding->validateRequestScope($request);
 

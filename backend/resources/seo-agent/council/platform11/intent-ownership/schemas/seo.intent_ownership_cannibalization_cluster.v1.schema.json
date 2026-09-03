@@ -1,0 +1,15 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.intent_ownership_cannibalization_cluster.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "query_cluster_id",
+        "locale",
+        "owner_hashes",
+        "status",
+        "evidence_refs"
+    ],
+    "schema_hash": "38e7601ba7e471e7d18a74fefd2a4f0580d5300d54d4faafa1f05d9b8097d634"
+}

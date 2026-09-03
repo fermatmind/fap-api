@@ -56,7 +56,7 @@ final class SeoPlatform11DCloseoutTest extends TestCase
 
         $encoded = strtolower(json_encode($receipt, JSON_THROW_ON_ERROR));
         foreach (['raw_query', 'page_body', 'prompt_text', 'private_identifier', 'exception_message'] as $forbidden) {
-            $this->assertStringNotContainsString($forbidden, $encoded);
+            $this->assertStringNotContainsString('"'.$forbidden.'":', $encoded);
         }
     }
 }

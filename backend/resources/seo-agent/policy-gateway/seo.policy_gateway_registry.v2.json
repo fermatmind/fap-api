@@ -1,0 +1,90 @@
+{
+    "registry_id": "fermatmind.seo.policy_gateway_registry",
+    "registry_version": "2.0.0",
+    "registry_state": "frozen_deny_only",
+    "runtime_state": "dormant_not_authorized",
+    "contract_manifest": "seo.policy_gateway_contract_manifest.v2",
+    "owner_repository": "fap-api",
+    "guards": {
+        "read_only_gsc": true,
+        "search_submission_allowed": false,
+        "post12_agent_write_enabled": false,
+        "l4_state": "dormant_not_authorized",
+        "agent_default_write_permission": false,
+        "deterministic_system_final_veto": true,
+        "global_write_gate": false,
+        "active_manifest_count": 0,
+        "trusted_signing_key_count": 0,
+        "model_invocation_enabled": false,
+        "tool_invocation_enabled": false,
+        "external_egress_enabled": false
+    },
+    "caller_types": [
+        "local_skill",
+        "cli",
+        "scheduler",
+        "api",
+        "seo_operations_ui"
+    ],
+    "dependencies": {
+        "role_capability_registry": {
+            "id": "fermatmind.seo.role_capability_registry",
+            "version": "2.0.0",
+            "hash": "fb80c061eb787f64b14630a6eb81ed04650073f12ce95645f00d7f2cd3302c0d"
+        },
+        "evidence_contract_manifest": {
+            "id": "seo.evidence_contract_manifest.v2",
+            "version": "2.0.0",
+            "hash": "c7b6d23cd70b789f8dad80fe4c187679211a1485dab47cb23ed2cb51980c59ab"
+        },
+        "page_family_policy": {
+            "id": "seo-page-family-policy.v1",
+            "version": "1.0.0",
+            "hash": "2e69428e1f4f589ceb392a6ee4d39e062b94e72101df0399cbed8e4140ef42dc"
+        },
+        "release_separation_policy": {
+            "id": "seo.release_separation",
+            "version": "1.0.0",
+            "hash": "6c1cf25f70ffc475a0c19f8c7cdf3451c9c35cb49482298e9d4485d365327be6"
+        },
+        "review_policy_registry": {
+            "id": "review-policy-registry.v1",
+            "version": "1.0.0",
+            "hash": "1abc4f3b7a25aecf3b32662b340d337588b477bfa6393d4380b1d36bb1d6107d"
+        },
+        "role_capability_binding": {
+            "id": "fermatmind.seo.role_capability_binding",
+            "version": "4.0.0",
+            "hash": "7c94caa41128e642bff30130365fee6bb12ed3d13eacda07c820ceca76a57b4f"
+        },
+        "mission_request": {
+            "id": "seo.mission_request.v2",
+            "version": "2.0.0",
+            "hash": "bcd5e60ca1a18a782e295f4f0bc7f733f22257fde8d2aafda141398e347bcd5a"
+        }
+    },
+    "legacy_advisory": {
+        "service": "App\\Services\\SeoAgent\\AutoApprovalPolicy",
+        "classification": "legacy_advisory_candidate_classification",
+        "authoritative_inputs": []
+    },
+    "supersedes": {
+        "version": "1.0.0",
+        "file_sha256": "3cc280b76af8fc88b01742c00c01ffe91690fa577e7df122df2ed2615e1c05fe"
+    },
+    "domain_autonomy": {
+        "intent_query_ownership": [
+            "L1"
+        ],
+        "editorial_draft": [
+            "L1"
+        ],
+        "runtime_qa": [
+            "L0"
+        ],
+        "independent_registry_review": [
+            "L0"
+        ]
+    },
+    "registry_hash": "d8c9dfd4245a079fef14c537d389fd79745aa766e704c7b0013e896ab1ae07a9"
+}

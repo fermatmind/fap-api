@@ -227,7 +227,7 @@ test("binds the deny-only SEO agent Policy Gateway to every 11C layer", () => {
     false,
   );
 });
-test("binds deterministic SEO Council orchestration to every 11D through 11F layer", () => {
+test("binds deterministic SEO Council orchestration to every 11D through 11L layer", () => {
   for (const path of [
     "backend/app/Services/SeoCouncil/SeoCouncilOrchestrator.php",
     "backend/app/Services/SeoAgentEvidence/Sources/SeoPlatformDependencyEvidenceAdapter.php",
@@ -240,6 +240,7 @@ test("binds deterministic SEO Council orchestration to every 11D through 11F lay
     "backend/resources/seo-agent/council/schemas/seo.mission_request.v1.schema.json",
     "backend/docs/seo/generated/seo-council-contract-manifest.v1.json",
     "backend/docs/seo/generated/seo-council-contract-manifest.v2.json",
+    "backend/docs/seo/generated/seo-council-contract-manifest.v4.json",
     "backend/docs/seo/generated/seo-technical-diagnosis-contract-manifest.v1.json",
     "backend/docs/seo/generated/seo-technical-diagnosis-contract-manifest.v2.json",
     "backend/docs/seo/generated/seo-measurement-contract-manifest.v1.json",
@@ -251,6 +252,11 @@ test("binds deterministic SEO Council orchestration to every 11D through 11F lay
     "backend/tests/Feature/SeoIntel/SeoPlatform11DOrchestratorTest.php",
     "backend/tests/Feature/SeoIntel/SeoPlatform11EDiagnosisEvaluationTest.php",
     "backend/tests/Feature/SeoIntel/SeoPlatform11FRoutingCloseoutTest.php",
+    "backend/tests/Feature/SeoIntel/SeoPlatform11HIntentOwnershipTest.php",
+    "backend/tests/Feature/SeoIntel/SeoPlatform11IEditorialDraftTest.php",
+    "backend/tests/Feature/SeoIntel/SeoPlatform11JRuntimeQaTest.php",
+    "backend/tests/Feature/SeoIntel/SeoPlatform11KIndependentReviewTest.php",
+    "backend/tests/Feature/SeoIntel/SeoPlatform11LLifecycleTest.php",
     ".agents/skills/fermatmind-global-seo-geo-growth-scan/SKILL.md",
     ".github/trunk/seo-council-workflow-contract.test.mjs",
     ".github/trunk/seo-platform-11e-runtime-dependency-contract.test.mjs",

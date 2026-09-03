@@ -21,6 +21,7 @@ use App\Services\SeoCouncil\Governance\RoleCapabilityBindingRegistry;
 use App\Services\SeoCouncil\Governance\RuntimeCapabilitySnapshotBuilder;
 use App\Services\SeoCouncil\Measurement\MeasurementCloseoutBuilder;
 use App\Services\SeoCouncil\Memory\OperatorTimeService;
+use App\Services\SeoCouncil\Platform11\Platform11HCloseoutBuilder;
 use App\Services\SeoCouncil\Policy\CouncilAdmissionRequestFactory;
 use App\Services\SeoCouncil\Routing\DeterministicMissionRouter;
 use App\Services\SeoCouncil\Routing\GoldenRoutingEvaluator;
@@ -58,6 +59,7 @@ final class SeoCouncilCloseoutCommand extends Command
         OperatorTimeService $operatorTime,
         TechnicalDiagnosisCloseoutBuilder $technicalDiagnosis,
         MeasurementCloseoutBuilder $measurement,
+        Platform11HCloseoutBuilder $platform11H,
         SeoRegistryHasher $hasher,
     ): int {
         try {
@@ -121,6 +123,7 @@ final class SeoCouncilCloseoutCommand extends Command
                 $closeoutEnvironment,
                 $closeoutEnvironment === 'ci_candidate' ? $this->parentSha() : $sourceSha,
             );
+            $platform11Receipt = $platform11H->build($sourceSha, $closeoutEnvironment);
 
             $receipt = [
                 'contract_version' => 'seo.council_closeout.v2',
@@ -189,6 +192,7 @@ final class SeoCouncilCloseoutCommand extends Command
                 'shared_agent_memory' => (bool) ($registry['architecture_decisions']['shared_agent_memory'] ?? true),
                 'technical_diagnosis' => $technicalReceipt,
                 'measurement_review' => $measurementReceipt,
+                'platform11' => $platform11Receipt,
             ];
             $receiptProjection = $this->receiptProjectionProbe($receipt);
             $receipt['receipt_projection_probe_total'] = $receiptProjection['total'];
@@ -236,11 +240,17 @@ final class SeoCouncilCloseoutCommand extends Command
                 'staging_runtime' => 'STAGING_READY',
                 default => 'OFFLINE_EVAL_READY',
             };
+            $expectedPlatform11State = match ($closeoutEnvironment) {
+                'production_runtime' => 'CLOSED',
+                'staging_runtime' => 'STAGING_READY',
+                default => 'OFFLINE_EVAL_READY',
+            };
 
             return $this->emit(
                 $receipt,
                 $ready && ($technicalReceipt['closeout_state'] ?? null) === $expectedTechnicalState
                     && ($measurementReceipt['closeout_state'] ?? null) === $expectedMeasurementState
+                    && ($platform11Receipt['closeout_state'] ?? null) === $expectedPlatform11State
                     ? self::SUCCESS
                     : self::FAILURE,
             );
