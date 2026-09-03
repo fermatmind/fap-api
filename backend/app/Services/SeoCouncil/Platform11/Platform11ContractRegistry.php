@@ -110,7 +110,7 @@ final class Platform11ContractRegistry
         $roleBindings['seo.independent_reviewer'][] = 'seo.independent_policy_experiment_safety_review';
         $binding['evidence_type_registry'] = array_values(array_unique(array_merge(
             $binding['evidence_type_registry'],
-            ['query_owner', 'url_truth', 'page_family_policy', 'competitive_handoff', 'cms_readback', 'experiment_ledger', 'frozen_artifact', 'intent_ownership', 'public_content_authority'],
+            ['query_owner', 'url_truth', 'page_family_policy', 'competitive_handoff', 'cms_readback', 'experiment_ledger', 'frozen_artifact', 'intent_ownership', 'public_content_authority', 'canonical', 'robots', 'schema', 'feed', 'rollback_receipt'],
         )));
         foreach ($binding['missions'] as &$mission) {
             $mission['mission_version'] = self::BINDING_VERSION;
@@ -377,6 +377,74 @@ final class Platform11ContractRegistry
         return $schema;
     }
 
+    /** @return array<string, array<string, mixed>> */
+    public function runtimeQaSchemas(): array
+    {
+        $fields = [
+            'request' => ['transport_http_status', 'expected_deployment_sha', 'observed_deployment_sha', 'expected_authority_revision', 'authority_revision', 'expected_cms_readback_hash', 'cms_readback_hash', 'expected_cache_source_hash', 'cache_source_hash', 'visible_content', 'canonical_parity', 'robots_parity', 'schema_parity', 'feed_membership_parity', 'locale_parity', 'rollback_receipt_present', 'experiment', 'action_type', 'preapproved', 'single_public_target', 'low_risk', 'reversible'],
+            'readback_snapshot' => ['transport_http_status', 'deployment_sha', 'authority_revision', 'cms_readback_hash', 'cache_source_hash', 'visible_content', 'canonical_parity', 'robots_parity', 'schema_parity', 'feed_membership_parity', 'locale_parity', 'rollback_receipt_present'],
+            'finding' => ['code', 'severity'],
+            'attribution_assessment' => ['classification', 'causality_supported', 'ledger_hash'],
+            'rollback_classification' => ['class', 'class_one_post12_eligible', 'automatic_action', 'human_decision_required', 'rollback_executed', 'execution_allowed'],
+            'output' => ['status', 'readback_snapshot', 'findings', 'attribution_assessment', 'rollback_classification', 'write_attempt_count', 'execution_allowed'],
+            'receipt' => ['receipt_version', 'run_id', 'context_id', 'request_hash', 'output_hash', 'role_id', 'capability_id', 'status', 'negative_metrics', 'model_calls', 'tool_calls', 'external_calls', 'write_count', 'execution_allowed', 'receipt_hash'],
+        ];
+        $schemas = [];
+        foreach ($fields as $name => $required) {
+            $schema = [
+                '$schema' => 'https://json-schema.org/draft/2020-12/schema',
+                'schema_id' => 'seo.runtime_qa_'.$name.'.v1',
+                'schema_version' => '1.0.0',
+                'type' => 'object',
+                'additionalProperties' => false,
+                'required' => $required,
+            ];
+            if ($name === 'attribution_assessment') {
+                $schema['classification_enum'] = [
+                    'technically_valid_and_attribution_supported',
+                    'technically_valid_but_causality_unproven',
+                    'technical_validation_failed',
+                    'measurement_hold',
+                    'dependency_hold',
+                ];
+            }
+            $schema['schema_hash'] = $this->hasher->hash($schema);
+            $schemas[$name] = $schema;
+        }
+
+        return $schemas;
+    }
+
+    /** @return array<string, mixed> */
+    public function runtimeQaMode(): array
+    {
+        $schemas = $this->runtimeQaSchemas();
+        $mode = [
+            'mode_id' => 'seo.runtime_qa_readback_attribution',
+            'mode_version' => '1.0.0',
+            'review_domain' => 'runtime_qa',
+            'role_id' => 'seo.expert.public_content_stability',
+            'capability_id' => 'seo.runtime_qa_readback_attribution',
+            'autonomy' => 'L0',
+            'authority_ceiling' => 'review_verdict',
+            'prompt_ref' => $this->promptRef('seo.runtime_qa_readback_attribution.prompt.v1.md'),
+            'schema_refs' => array_map(fn (array $schema): array => $this->reference((string) $schema['schema_id'], '1.0.0', (string) $schema['schema_hash']), $schemas),
+            'attribution_enum' => $schemas['attribution_assessment']['classification_enum'],
+            'rollback_mode' => 'CLASSIFY_SIMULATE_DENY_ONLY',
+            'tool_allowlist' => [],
+            'egress_allowlist' => [],
+            'write_permissions' => [],
+            'allow_delegation' => false,
+            'model_invocation' => false,
+            'tool_invocation' => false,
+            'external_egress' => false,
+            'execution_allowed' => false,
+        ];
+        $mode['mode_hash'] = $this->hasher->hash($mode);
+
+        return $mode;
+    }
+
     /** @return array<string, mixed> */
     public function manifest(): array
     {
@@ -387,6 +455,7 @@ final class Platform11ContractRegistry
         $mode = $this->intentMode();
         $editorial = $this->editorialMode();
         $l2 = $this->l2ManifestSchema();
+        $runtimeQa = $this->runtimeQaMode();
         $manifest = [
             'manifest_id' => 'seo.council_contract_manifest.v4',
             'manifest_version' => self::MANIFEST_VERSION,
@@ -398,6 +467,7 @@ final class Platform11ContractRegistry
             'intent_mode_ref' => $this->reference((string) $mode['mode_id'], '1.0.0', (string) $mode['mode_hash']),
             'editorial_mode_ref' => $this->reference((string) $editorial['mode_id'], '1.0.0', (string) $editorial['mode_hash']),
             'l2_manifest_schema_ref' => $this->reference((string) $l2['schema_id'], '1.0.0', (string) $l2['schema_hash']),
+            'runtime_qa_mode_ref' => $this->reference((string) $runtimeQa['mode_id'], '1.0.0', (string) $runtimeQa['mode_hash']),
             'evidence_privacy_ref' => $this->fileRef('seo.evidence_contract_manifest.v5', '5.0.0', 'docs/seo/generated/seo-agent-evidence-contract-manifest.v5.json'),
             'policy_gateway_ref' => $this->fileRef('seo.policy_gateway_contract_manifest.v1', '1.0.0', 'docs/seo/generated/seo-policy-gateway-contract-manifest.v1.json'),
             'legacy_frozen_files' => $this->legacyFiles(),
@@ -441,6 +511,7 @@ final class Platform11ContractRegistry
     {
         $schemas = $this->intentSchemas();
         $editorialSchemas = $this->editorialSchemas();
+        $runtimeQaSchemas = $this->runtimeQaSchemas();
         $artifacts = [
             'docs/seo/generated/seo-agent-role-capability-registry.v2.json' => $this->registry(),
             'resources/seo-agent/council/bindings/seo.role_capability_binding.v4.json' => $this->binding(),
@@ -449,6 +520,7 @@ final class Platform11ContractRegistry
             'resources/seo-agent/council/platform11/intent-ownership/seo.intent_ownership_mode.v1.json' => $this->intentMode(),
             'resources/seo-agent/council/platform11/editorial-draft/seo.editorial_draft_mode.v1.json' => $this->editorialMode(),
             'resources/seo-agent/council/platform11/editorial-draft/seo.post12_l2_cms_draft_manifest.v1.schema.json' => $this->l2ManifestSchema(),
+            'resources/seo-agent/council/platform11/runtime-qa/seo.runtime_qa_mode.v1.json' => $this->runtimeQaMode(),
             'docs/seo/generated/seo-council-contract-manifest.v4.json' => $this->manifest(),
         ];
         foreach ($schemas as $name => $schema) {
@@ -456,6 +528,9 @@ final class Platform11ContractRegistry
         }
         foreach ($editorialSchemas as $name => $schema) {
             $artifacts['resources/seo-agent/council/platform11/editorial-draft/schemas/seo.editorial_draft_'.$name.'.v1.schema.json'] = $schema;
+        }
+        foreach ($runtimeQaSchemas as $name => $schema) {
+            $artifacts['resources/seo-agent/council/platform11/runtime-qa/schemas/seo.runtime_qa_'.$name.'.v1.schema.json'] = $schema;
         }
 
         return $artifacts;

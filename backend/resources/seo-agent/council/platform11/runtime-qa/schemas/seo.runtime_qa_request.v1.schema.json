@@ -1,0 +1,32 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.runtime_qa_request.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "transport_http_status",
+        "expected_deployment_sha",
+        "observed_deployment_sha",
+        "expected_authority_revision",
+        "authority_revision",
+        "expected_cms_readback_hash",
+        "cms_readback_hash",
+        "expected_cache_source_hash",
+        "cache_source_hash",
+        "visible_content",
+        "canonical_parity",
+        "robots_parity",
+        "schema_parity",
+        "feed_membership_parity",
+        "locale_parity",
+        "rollback_receipt_present",
+        "experiment",
+        "action_type",
+        "preapproved",
+        "single_public_target",
+        "low_risk",
+        "reversible"
+    ],
+    "schema_hash": "ffa36c931da72160102ea1ca8ebdcbf99fc413b4b89fcae53b6dcb7594db6315"
+}

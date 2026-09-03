@@ -1,0 +1,17 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.runtime_qa_output.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "status",
+        "readback_snapshot",
+        "findings",
+        "attribution_assessment",
+        "rollback_classification",
+        "write_attempt_count",
+        "execution_allowed"
+    ],
+    "schema_hash": "74271d18ec837efc17318e7c3d61aebc116497034ab1d072cdefb475a2208212"
+}

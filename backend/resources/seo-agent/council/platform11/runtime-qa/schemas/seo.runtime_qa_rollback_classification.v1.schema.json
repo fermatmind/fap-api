@@ -1,0 +1,16 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.runtime_qa_rollback_classification.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "class",
+        "class_one_post12_eligible",
+        "automatic_action",
+        "human_decision_required",
+        "rollback_executed",
+        "execution_allowed"
+    ],
+    "schema_hash": "05482632f93646d9bb33c235b7325d56ed3b5da8e0d34fefe29ee630cc720ccd"
+}

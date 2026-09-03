@@ -1,0 +1,20 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.runtime_qa_attribution_assessment.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "classification",
+        "causality_supported",
+        "ledger_hash"
+    ],
+    "classification_enum": [
+        "technically_valid_and_attribution_supported",
+        "technically_valid_but_causality_unproven",
+        "technical_validation_failed",
+        "measurement_hold",
+        "dependency_hold"
+    ],
+    "schema_hash": "f9f42697eb2696df6b46a5e1dbf1de3e8932e862138785f30c15a186cec4070d"
+}

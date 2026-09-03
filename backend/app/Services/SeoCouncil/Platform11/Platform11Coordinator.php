@@ -26,6 +26,7 @@ final class Platform11Coordinator
         private readonly QueryOwnerUrlTruthReadModel $queryOwners,
         private readonly IntentOwnershipRunner $intentOwnership,
         private readonly EditorialDraftRunner $editorialDraft,
+        private readonly RuntimeQaRunner $runtimeQa,
         private readonly SeoRegistryHasher $hasher,
     ) {}
 
@@ -78,6 +79,17 @@ final class Platform11Coordinator
                 $reason = ($mode['receipt']['status'] ?? null) === 'PASS'
                     ? 'EDITORIAL_DRAFT_CANDIDATE_READY'
                     : (string) ($mode['output']['hold_reason'] ?? 'EDITORIAL_DRAFT_HOLD');
+            } elseif ($domain === 'runtime_qa') {
+                $mode = $this->runtimeQa->evaluate(
+                    (array) $request->payload['mode_input'],
+                    (array) $request->payload['evidence_bundle_refs'],
+                    $runId,
+                    $contextId,
+                );
+                $status = ($mode['receipt']['status'] ?? null) === 'TECHNICALLY_VALID' ? 'REVIEW_READY' : 'EVIDENCE_HOLD';
+                $reason = ($mode['receipt']['status'] ?? null) === 'TECHNICALLY_VALID'
+                    ? 'RUNTIME_QA_REVIEW_READY'
+                    : (string) data_get($mode, 'output.attribution_assessment.classification', 'RUNTIME_QA_HOLD');
             } else {
                 $reason = 'MODE_NOT_AVAILABLE_IN_CURRENT_STAGE';
             }

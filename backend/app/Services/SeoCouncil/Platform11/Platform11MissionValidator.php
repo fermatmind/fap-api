@@ -73,6 +73,8 @@ final class Platform11MissionValidator
             $this->intentInput($input['mode_input'], (string) $input['locale']);
         } elseif ($domain === 'editorial_draft') {
             $this->editorialInput($input['mode_input'], (string) $input['locale']);
+        } elseif ($domain === 'runtime_qa') {
+            $this->runtimeQaInput($input['mode_input']);
         }
 
         return $input;
@@ -166,6 +168,58 @@ final class Platform11MissionValidator
     private function score(mixed $value): bool
     {
         return (is_float($value) || is_int($value)) && $value >= 0 && $value <= 1;
+    }
+
+    /** @param array<string, mixed> $input */
+    private function runtimeQaInput(array $input): void
+    {
+        $this->exactKeys($input, [
+            'transport_http_status', 'expected_deployment_sha', 'observed_deployment_sha',
+            'expected_authority_revision', 'authority_revision', 'expected_cms_readback_hash', 'cms_readback_hash',
+            'expected_cache_source_hash', 'cache_source_hash', 'visible_content', 'canonical_parity', 'robots_parity',
+            'schema_parity', 'feed_membership_parity', 'locale_parity', 'rollback_receipt_present',
+            'experiment', 'action_type', 'preapproved', 'single_public_target', 'low_risk', 'reversible',
+        ], 'RUNTIME_QA_INPUT_FIELDS_INVALID');
+        foreach (['expected_deployment_sha', 'observed_deployment_sha'] as $field) {
+            if (preg_match('/^[a-f0-9]{40}$/D', (string) ($input[$field] ?? '')) !== 1) {
+                throw new InvalidArgumentException('RUNTIME_QA_SHA_INVALID');
+            }
+        }
+        foreach (['expected_authority_revision', 'authority_revision', 'expected_cms_readback_hash', 'cms_readback_hash', 'expected_cache_source_hash', 'cache_source_hash'] as $field) {
+            if (preg_match('/^[a-f0-9]{64}$/D', (string) ($input[$field] ?? '')) !== 1) {
+                throw new InvalidArgumentException('RUNTIME_QA_HASH_INVALID');
+            }
+        }
+        foreach (['visible_content', 'canonical_parity', 'robots_parity', 'schema_parity', 'feed_membership_parity', 'locale_parity', 'rollback_receipt_present', 'preapproved', 'single_public_target', 'low_risk', 'reversible'] as $field) {
+            if (! is_bool($input[$field] ?? null)) {
+                throw new InvalidArgumentException('RUNTIME_QA_BOOLEAN_INVALID');
+            }
+        }
+        if (! is_int($input['transport_http_status'] ?? null)
+            || $input['transport_http_status'] < 100 || $input['transport_http_status'] > 599
+            || ! in_array($input['action_type'] ?? null, ['meta_description', 'body', 'multilingual', 'schema', 'shared_cache', 'canonical', 'noindex', 'redirect', 'delete', 'unpublish', 'retire', 'new_family', 'sensitive_claim'], true)
+            || ! is_array($input['experiment'] ?? null)) {
+            throw new InvalidArgumentException('RUNTIME_QA_INPUT_INVALID');
+        }
+        $this->exactKeys($input['experiment'], [
+            'preregistered', 'exposure_scope_hash', 'window_start', 'window_end', 'measurement_valid', 'ledger_hash',
+            'tracking_changed', 'google_update_window', 'seasonal_confounder', 'single_observation',
+        ], 'RUNTIME_QA_EXPERIMENT_FIELDS_INVALID');
+        foreach (['exposure_scope_hash', 'ledger_hash'] as $field) {
+            if (preg_match('/^[a-f0-9]{64}$/D', (string) ($input['experiment'][$field] ?? '')) !== 1) {
+                throw new InvalidArgumentException('RUNTIME_QA_EXPERIMENT_HASH_INVALID');
+            }
+        }
+        foreach (['preregistered', 'measurement_valid', 'tracking_changed', 'google_update_window', 'seasonal_confounder', 'single_observation'] as $field) {
+            if (! is_bool($input['experiment'][$field] ?? null)) {
+                throw new InvalidArgumentException('RUNTIME_QA_EXPERIMENT_BOOLEAN_INVALID');
+            }
+        }
+        $start = strtotime((string) ($input['experiment']['window_start'] ?? ''));
+        $end = strtotime((string) ($input['experiment']['window_end'] ?? ''));
+        if ($start === false || $end === false || $start >= $end) {
+            throw new InvalidArgumentException('RUNTIME_QA_EXPERIMENT_WINDOW_INVALID');
+        }
     }
 
     private function containsForbiddenKey(mixed $value): bool

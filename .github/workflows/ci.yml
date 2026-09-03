@@ -611,6 +611,7 @@ jobs:
             tests/Feature/SeoIntel/SeoPlatform11G*.php \
             tests/Feature/SeoIntel/SeoPlatform11H*.php \
             tests/Feature/SeoIntel/SeoPlatform11I*.php \
+            tests/Feature/SeoIntel/SeoPlatform11J*.php \
             tests/Feature/SeoIntel/SeoPlatform11A*.php \
             tests/Feature/SeoIntel/SeoPlatform11B*.php \
             tests/Feature/SeoIntel/SeoPlatform11C*.php \
@@ -641,7 +642,8 @@ jobs:
             tests/Feature/SeoIntel/SeoPlatform11F*.php \
             tests/Feature/SeoIntel/SeoPlatform11G*.php \
             tests/Feature/SeoIntel/SeoPlatform11H*.php \
-            tests/Feature/SeoIntel/SeoPlatform11I*.php
+            tests/Feature/SeoIntel/SeoPlatform11I*.php \
+            tests/Feature/SeoIntel/SeoPlatform11J*.php
           php artisan seo:council-closeout --expected-sha="$GITHUB_SHA" --closeout-environment=ci_candidate --json > ../seo-council-orchestration-closeout.json
           jq -e --arg sha "$GITHUB_SHA" '
             .contract_version == "seo.council_closeout.v2"
@@ -765,6 +767,23 @@ jobs:
             and .platform11_editorial.active_manifest_count == 0 and .platform11_editorial.trusted_signing_key_count == 0
             and .platform11_editorial."SEO-PLATFORM-11I" == "OFFLINE_EVAL_READY"
             and .platform11_editorial.ready_for_11J == false and .platform11_editorial.execution_allowed == false
+            and .platform11_runtime_qa.receipt_version == "seo.runtime_qa_closeout.v1"
+            and .platform11_runtime_qa.environment == "ci_candidate"
+            and .platform11_runtime_qa.closeout_state == "OFFLINE_EVAL_READY"
+            and .platform11_runtime_qa.dependency_status == "READY"
+            and .platform11_runtime_qa.negative_probes.bypass_count == 0
+            and .platform11_runtime_qa.http_200_false_pass_count == 0
+            and .platform11_runtime_qa.revision_mismatch_miss_count == 0
+            and .platform11_runtime_qa.causality_overclaim_count == 0
+            and .platform11_runtime_qa.rollback_classification_error_count == 0
+            and .platform11_runtime_qa.prohibited_rollback_attempt_count == 0
+            and .platform11_runtime_qa.write_attempt_count == 0
+            and .platform11_runtime_qa.model_calls == 0 and .platform11_runtime_qa.tool_calls == 0
+            and .platform11_runtime_qa.external_calls == 0 and .platform11_runtime_qa.production_permissions == 0
+            and .platform11_runtime_qa.cms_writes == 0 and .platform11_runtime_qa.url_truth_writes == 0
+            and .platform11_runtime_qa.search_writes == 0 and .platform11_runtime_qa.business_writes == 0
+            and .platform11_runtime_qa."SEO-PLATFORM-11J" == "OFFLINE_EVAL_READY"
+            and .platform11_runtime_qa.ready_for_11K == false and .platform11_runtime_qa.execution_allowed == false
             and (.measurement_review.contract_manifest_hash | test("^[a-f0-9]{64}$"))
             and (.measurement_review.dependency_snapshot_hash | test("^[a-f0-9]{64}$"))
             and (.measurement_review.receipt_hash | test("^[a-f0-9]{64}$"))

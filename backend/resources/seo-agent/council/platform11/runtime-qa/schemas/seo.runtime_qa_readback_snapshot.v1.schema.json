@@ -1,0 +1,22 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.runtime_qa_readback_snapshot.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "transport_http_status",
+        "deployment_sha",
+        "authority_revision",
+        "cms_readback_hash",
+        "cache_source_hash",
+        "visible_content",
+        "canonical_parity",
+        "robots_parity",
+        "schema_parity",
+        "feed_membership_parity",
+        "locale_parity",
+        "rollback_receipt_present"
+    ],
+    "schema_hash": "f5c0a250a11bb14c10c5785a5e28555ed7bec485b4e6a179d53a61a5674f0dd0"
+}

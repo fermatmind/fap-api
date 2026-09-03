@@ -1,0 +1,68 @@
+{
+    "mode_id": "seo.runtime_qa_readback_attribution",
+    "mode_version": "1.0.0",
+    "review_domain": "runtime_qa",
+    "role_id": "seo.expert.public_content_stability",
+    "capability_id": "seo.runtime_qa_readback_attribution",
+    "autonomy": "L0",
+    "authority_ceiling": "review_verdict",
+    "prompt_ref": {
+        "id": "seo.runtime_qa_readback_attribution.prompt",
+        "version": "1.0.0",
+        "hash": "91662ddf3e9fae200fc5d8df6ce6e4f07136dbe93ebe5734f14ed7065d1151c7"
+    },
+    "schema_refs": {
+        "request": {
+            "id": "seo.runtime_qa_request.v1",
+            "version": "1.0.0",
+            "hash": "ffa36c931da72160102ea1ca8ebdcbf99fc413b4b89fcae53b6dcb7594db6315"
+        },
+        "readback_snapshot": {
+            "id": "seo.runtime_qa_readback_snapshot.v1",
+            "version": "1.0.0",
+            "hash": "f5c0a250a11bb14c10c5785a5e28555ed7bec485b4e6a179d53a61a5674f0dd0"
+        },
+        "finding": {
+            "id": "seo.runtime_qa_finding.v1",
+            "version": "1.0.0",
+            "hash": "12cfc5012581465600bd60d5dbf77a8b0e82c31fe8e6eca7423eeab906c858ac"
+        },
+        "attribution_assessment": {
+            "id": "seo.runtime_qa_attribution_assessment.v1",
+            "version": "1.0.0",
+            "hash": "f9f42697eb2696df6b46a5e1dbf1de3e8932e862138785f30c15a186cec4070d"
+        },
+        "rollback_classification": {
+            "id": "seo.runtime_qa_rollback_classification.v1",
+            "version": "1.0.0",
+            "hash": "05482632f93646d9bb33c235b7325d56ed3b5da8e0d34fefe29ee630cc720ccd"
+        },
+        "output": {
+            "id": "seo.runtime_qa_output.v1",
+            "version": "1.0.0",
+            "hash": "74271d18ec837efc17318e7c3d61aebc116497034ab1d072cdefb475a2208212"
+        },
+        "receipt": {
+            "id": "seo.runtime_qa_receipt.v1",
+            "version": "1.0.0",
+            "hash": "35ddd4cab977811a6d88325dd48688dfce8852812689dc13786d940843056293"
+        }
+    },
+    "attribution_enum": [
+        "technically_valid_and_attribution_supported",
+        "technically_valid_but_causality_unproven",
+        "technical_validation_failed",
+        "measurement_hold",
+        "dependency_hold"
+    ],
+    "rollback_mode": "CLASSIFY_SIMULATE_DENY_ONLY",
+    "tool_allowlist": [],
+    "egress_allowlist": [],
+    "write_permissions": [],
+    "allow_delegation": false,
+    "model_invocation": false,
+    "tool_invocation": false,
+    "external_egress": false,
+    "execution_allowed": false,
+    "mode_hash": "8ac3696856a5f994b082a95f275d126ae01cc1ad09a93c959b94002c11d2121a"
+}

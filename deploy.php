@@ -2096,6 +2096,29 @@ $ok = ($payload["contract_version"] ?? null) === "seo.council_closeout.v2"
     && ($payload["platform11_editorial"]["execution_allowed"] ?? null) === false
     && ($payload["platform11_editorial"]["SEO-PLATFORM-11I"] ?? null) === ($production ? "CLOSED" : "STAGING_READY")
     && ($payload["platform11_editorial"]["ready_for_11J"] ?? null) === $production
+    && ($payload["platform11_runtime_qa"]["receipt_version"] ?? null) === "seo.runtime_qa_closeout.v1"
+    && ($payload["platform11_runtime_qa"]["candidate_sha"] ?? null) === ($argv[1] ?? null)
+    && ($payload["platform11_runtime_qa"]["environment"] ?? null) === $environment
+    && ($payload["platform11_runtime_qa"]["closeout_state"] ?? null) === ($production ? "CLOSED" : "STAGING_READY")
+    && ($payload["platform11_runtime_qa"]["dependency_status"] ?? null) === "READY"
+    && ($payload["platform11_runtime_qa"]["negative_probes"]["bypass_count"] ?? null) === 0
+    && ($payload["platform11_runtime_qa"]["http_200_false_pass_count"] ?? null) === 0
+    && ($payload["platform11_runtime_qa"]["revision_mismatch_miss_count"] ?? null) === 0
+    && ($payload["platform11_runtime_qa"]["causality_overclaim_count"] ?? null) === 0
+    && ($payload["platform11_runtime_qa"]["rollback_classification_error_count"] ?? null) === 0
+    && ($payload["platform11_runtime_qa"]["prohibited_rollback_attempt_count"] ?? null) === 0
+    && ($payload["platform11_runtime_qa"]["write_attempt_count"] ?? null) === 0
+    && ($payload["platform11_runtime_qa"]["model_calls"] ?? null) === 0
+    && ($payload["platform11_runtime_qa"]["tool_calls"] ?? null) === 0
+    && ($payload["platform11_runtime_qa"]["external_calls"] ?? null) === 0
+    && ($payload["platform11_runtime_qa"]["cms_writes"] ?? null) === 0
+    && ($payload["platform11_runtime_qa"]["url_truth_writes"] ?? null) === 0
+    && ($payload["platform11_runtime_qa"]["search_writes"] ?? null) === 0
+    && ($payload["platform11_runtime_qa"]["business_writes"] ?? null) === 0
+    && ($payload["platform11_runtime_qa"]["production_permissions"] ?? null) === 0
+    && ($payload["platform11_runtime_qa"]["execution_allowed"] ?? null) === false
+    && ($payload["platform11_runtime_qa"]["SEO-PLATFORM-11J"] ?? null) === ($production ? "CLOSED" : "STAGING_READY")
+    && ($payload["platform11_runtime_qa"]["ready_for_11K"] ?? null) === $production
     && ($payload["technical_diagnosis"]["receipt_version"] ?? null) === "seo.technical_diagnosis_closeout.v2"
     && ($payload["technical_diagnosis"]["environment"] ?? null) === $environment
     && ($payload["technical_diagnosis"]["dependency_mode"] ?? null) === "RUNTIME_READ_ONLY"

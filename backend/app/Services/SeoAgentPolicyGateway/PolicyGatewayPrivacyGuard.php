@@ -30,9 +30,14 @@ final class PolicyGatewayPrivacyGuard
 
             return $normalized;
         }
+        $hashKey = $key === 'hash'
+            || str_ends_with((string) $key, '_hash')
+            || str_ends_with((string) $key, '_revision')
+            || str_ends_with((string) $key, '_ref');
+        $shaKey = $key === 'sha' || str_ends_with((string) $key, '_sha');
         if (is_string($value)
-            && preg_match('/^[a-f0-9]{64}$/', $value) === 1
-            && ($key === 'hash' || str_ends_with((string) $key, '_hash'))) {
+            && (($hashKey && preg_match('/^[a-f0-9]{64}$/D', $value) === 1)
+                || ($shaKey && preg_match('/^[a-f0-9]{40}$/D', $value) === 1))) {
             return 'verified_sha256';
         }
 

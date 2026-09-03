@@ -280,6 +280,11 @@ jobs:
                 and .seo_council_orchestration.platform11_editorial.negative_probes.bypass_count == 0
                 and .seo_council_orchestration.platform11_editorial."SEO-PLATFORM-11I" == "OFFLINE_EVAL_READY"
                 and .seo_council_orchestration.platform11_editorial.ready_for_11J == false
+                and .seo_council_orchestration.platform11_runtime_qa.receipt_version == "seo.runtime_qa_closeout.v1"
+                and .seo_council_orchestration.platform11_runtime_qa.closeout_state == "OFFLINE_EVAL_READY"
+                and .seo_council_orchestration.platform11_runtime_qa.negative_probes.bypass_count == 0
+                and .seo_council_orchestration.platform11_runtime_qa."SEO-PLATFORM-11J" == "OFFLINE_EVAL_READY"
+                and .seo_council_orchestration.platform11_runtime_qa.ready_for_11K == false
                 and .seo_council_orchestration.execution_allowed == false)
               or (.seo_council_orchestration.required == false
                 and .seo_council_orchestration.result == "skipped"))
@@ -1159,6 +1164,23 @@ jobs:
             and .platform11_editorial.cms_write == false and .platform11_editorial.publish == false
             and .platform11_editorial."SEO-PLATFORM-11I" == "STAGING_READY"
             and .platform11_editorial.ready_for_11J == false
+            and .platform11_runtime_qa.receipt_version == "seo.runtime_qa_closeout.v1"
+            and .platform11_runtime_qa.environment == "staging_runtime"
+            and .platform11_runtime_qa.closeout_state == "STAGING_READY"
+            and .platform11_runtime_qa.dependency_status == "READY"
+            and .platform11_runtime_qa.negative_probes.bypass_count == 0
+            and .platform11_runtime_qa.http_200_false_pass_count == 0
+            and .platform11_runtime_qa.revision_mismatch_miss_count == 0
+            and .platform11_runtime_qa.causality_overclaim_count == 0
+            and .platform11_runtime_qa.rollback_classification_error_count == 0
+            and .platform11_runtime_qa.prohibited_rollback_attempt_count == 0
+            and .platform11_runtime_qa.write_attempt_count == 0
+            and .platform11_runtime_qa.model_calls == 0 and .platform11_runtime_qa.tool_calls == 0
+            and .platform11_runtime_qa.external_calls == 0 and .platform11_runtime_qa.production_permissions == 0
+            and .platform11_runtime_qa.cms_writes == 0 and .platform11_runtime_qa.url_truth_writes == 0
+            and .platform11_runtime_qa.search_writes == 0 and .platform11_runtime_qa.business_writes == 0
+            and .platform11_runtime_qa."SEO-PLATFORM-11J" == "STAGING_READY"
+            and .platform11_runtime_qa.ready_for_11K == false and .platform11_runtime_qa.execution_allowed == false
             and .execution_allowed == false and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
       - name: Record staging timing
@@ -1764,6 +1786,23 @@ jobs:
             and .platform11_editorial.active_manifest_count == 0 and .platform11_editorial.trusted_signing_key_count == 0
             and .platform11_editorial."SEO-PLATFORM-11I" == "CLOSED"
             and .platform11_editorial.ready_for_11J == true
+            and .platform11_runtime_qa.receipt_version == "seo.runtime_qa_closeout.v1"
+            and .platform11_runtime_qa.environment == "production_runtime"
+            and .platform11_runtime_qa.closeout_state == "CLOSED"
+            and .platform11_runtime_qa.dependency_status == "READY"
+            and .platform11_runtime_qa.negative_probes.bypass_count == 0
+            and .platform11_runtime_qa.http_200_false_pass_count == 0
+            and .platform11_runtime_qa.revision_mismatch_miss_count == 0
+            and .platform11_runtime_qa.causality_overclaim_count == 0
+            and .platform11_runtime_qa.rollback_classification_error_count == 0
+            and .platform11_runtime_qa.prohibited_rollback_attempt_count == 0
+            and .platform11_runtime_qa.write_attempt_count == 0
+            and .platform11_runtime_qa.model_calls == 0 and .platform11_runtime_qa.tool_calls == 0
+            and .platform11_runtime_qa.external_calls == 0 and .platform11_runtime_qa.production_permissions == 0
+            and .platform11_runtime_qa.cms_writes == 0 and .platform11_runtime_qa.url_truth_writes == 0
+            and .platform11_runtime_qa.search_writes == 0 and .platform11_runtime_qa.business_writes == 0
+            and .platform11_runtime_qa."SEO-PLATFORM-11J" == "CLOSED"
+            and .platform11_runtime_qa.ready_for_11K == true and .platform11_runtime_qa.execution_allowed == false
             and .execution_allowed == false and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
       - id: career-parity
