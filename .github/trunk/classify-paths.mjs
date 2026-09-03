@@ -99,7 +99,7 @@ const isSeoCompetitiveEvidenceBoundary = (path) =>
   || path === ".github/trunk/classify-paths.test.mjs"
   || path === ".github/trunk/seo-platform-11g-competitive-evidence-contract.test.mjs";
 
-export const SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE = "DEFERRED_NON_BLOCKING";
+export const SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE = "ACTIVE";
 
 const isDeferredCompetitiveCouncilBoundary = (path) =>
   path.startsWith("backend/app/Services/SeoCouncil/Competitive/");
@@ -141,7 +141,7 @@ export function classifyPaths(inputPaths) {
     seo_competitive_evidence: seoCompetitiveEvidence,
     seo_competitive_evidence_state: SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE,
     seo_competitive_evidence_progress: "NEARLY_COMPLETE",
-    seo_competitive_evidence_blocks_delivery: false,
+    seo_competitive_evidence_blocks_delivery: SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE === "ACTIVE",
   };
   let testsChanged = false;
 
