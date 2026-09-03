@@ -124,7 +124,10 @@ final class Platform11ContractRegistry
                         'required_evidence' => match ($domain) {
                             'intent_query_ownership' => ['query_owner', 'url_truth', 'page_family_policy', 'search_measurement', 'competitive_handoff'],
                             'editorial_draft' => ['content_claim', 'entity', 'duplicate', 'lifecycle', 'url_truth', 'competitive_handoff'],
-                            default => ['runtime_health', 'cms_readback', 'cache_projection', 'experiment_ledger'],
+                            default => [
+                                'runtime_health', 'cms_readback', 'cache_projection', 'canonical', 'robots',
+                                'schema', 'feed', 'rollback_receipt', 'experiment_ledger',
+                            ],
                         },
                         'reviewer_requirement' => 'selected_role_review_only',
                         'autonomy' => $definition['autonomy'],

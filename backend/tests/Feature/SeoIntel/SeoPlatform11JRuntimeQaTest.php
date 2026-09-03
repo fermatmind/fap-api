@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\SeoIntel;
 
 use App\Services\SeoCouncil\Entrypoints\ApiMissionAdapter;
+use App\Services\SeoCouncil\Platform11\Platform11ContractRegistry;
 use App\Services\SeoCouncil\Platform11\Platform11HCloseoutBuilder;
 use App\Services\SeoCouncil\Platform11\Platform11ICloseoutBuilder;
 use App\Services\SeoCouncil\Platform11\Platform11JCloseoutBuilder;
@@ -86,6 +87,14 @@ final class SeoPlatform11JRuntimeQaTest extends TestCase
 
     public function test_runtime_qa_uses_l0_stability_role_and_rejects_write_requests(): void
     {
+        $binding = $this->app->make(Platform11ContractRegistry::class)->binding();
+        $boundedReview = collect($binding['missions'])->firstWhere('mission_id', 'bounded_review');
+        $runtime = collect($boundedReview['selector']['variants'])->firstWhere('value', 'runtime_qa');
+        $this->assertSame([
+            'runtime_health', 'cms_readback', 'cache_projection', 'canonical', 'robots',
+            'schema', 'feed', 'rollback_receipt', 'experiment_ledger',
+        ], $runtime['required_evidence']);
+
         $validator = $this->app->make(Platform11MissionValidator::class);
         $valid = $this->request();
         $this->assertSame($valid, $validator->validate($valid));
