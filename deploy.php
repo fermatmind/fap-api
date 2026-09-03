@@ -4357,7 +4357,6 @@ after('queue:reload-workers', 'scheduler:install-managed-cron');
 after('queue:reload-workers', 'healthcheck:queue-smoke');
 after('healthcheck:queue-smoke', 'healthcheck:staging-big-five-report-delivery');
 after('scheduler:install-managed-cron', 'scheduler:wait-natural-heartbeat');
-after('scheduler:wait-natural-heartbeat', 'seo:council-orchestration-closeout');
 
 /**
  * A code-only release deliberately omits every task that can mutate application

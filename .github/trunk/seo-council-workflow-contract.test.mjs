@@ -45,7 +45,7 @@ test("11D through 11L deployment stays disabled and writes immutable exact-SHA c
   assert.match(deployer, /after\('seo:competitive-evidence-finalize', 'seo:council-orchestration-closeout'\)/);
   assert.match(deployer, /seo\.technical_diagnosis_closeout\.v2/);
   assert.match(deployer, /closeout-environment=\{\{technical_closeout_environment\}\}/);
-  assert.match(deployer, /after\('scheduler:wait-natural-heartbeat', 'seo:council-orchestration-closeout'\)/);
+  assert.doesNotMatch(deployer, /after\('scheduler:wait-natural-heartbeat', 'seo:council-orchestration-closeout'\)/);
   assert.match(deployer, /set\('private_result_authority_publish_required', true\)/);
   assert.equal((deployer.match(/get\('private_result_authority_publish_required', true\)/g) || []).length, 4);
   assert.match(deployer, /"unavailable_dependency_refs" => \$unavailableRefs/);
