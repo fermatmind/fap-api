@@ -1177,6 +1177,38 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
           fetch-depth: 0
+      - name: Verify production 11G configuration before transport
+        if: needs.policy.outputs.seo_competitive_evidence == 'true'
+        env:
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON }}
+          GSC_PROPERTY_URL: ${{ secrets.SEO_INTEL_GSC_PROPERTY_URL }}
+          GSC_ENABLED: ${{ vars.SEO_INTEL_GSC_ENABLED }}
+          GSC_LIVE_API_ENABLED: ${{ vars.SEO_INTEL_GSC_LIVE_API_ENABLED }}
+          GSC_SYNC_ENABLED: ${{ vars.SEO_INTEL_GSC_SYNC_ENABLED }}
+          GSC_AUTH_MODE: ${{ vars.SEO_INTEL_GSC_AUTH_MODE }}
+          GSC_SCOPE: ${{ vars.SEO_INTEL_GSC_SCOPE }}
+          GSC_SYNC_WINDOW_DAYS: ${{ vars.SEO_INTEL_GSC_SYNC_WINDOW_DAYS }}
+          GSC_SYNC_SEARCH_TYPES: ${{ vars.SEO_INTEL_GSC_SYNC_SEARCH_TYPES }}
+          SEO_INTEL_MIGRATION_DB_USERNAME: ${{ secrets.SEO_INTEL_MIGRATION_DB_USERNAME }}
+          SEO_INTEL_MIGRATION_DB_PASSWORD: ${{ secrets.SEO_INTEL_MIGRATION_DB_PASSWORD }}
+        run: |
+          set -euo pipefail
+          fail() {
+            printf 'production_competitive_configuration=HOLD reason=%s\n' "$1" >&2
+            exit 1
+          }
+          test -n "$GSC_SERVICE_ACCOUNT_JSON" || fail GSC_SECRET_MISSING
+          [[ "$GSC_PROPERTY_URL" =~ ^sc-domain:[A-Za-z0-9.-]+$ ]] || fail GSC_PROPERTY_INVALID
+          test "$GSC_ENABLED" = true || fail GSC_DISABLED
+          test "$GSC_LIVE_API_ENABLED" = true || fail GSC_LIVE_API_DISABLED
+          test "$GSC_SYNC_ENABLED" = true || fail GSC_SYNC_DISABLED
+          test "$GSC_AUTH_MODE" = service_account || fail GSC_AUTH_MODE_INVALID
+          test "$GSC_SCOPE" = https://www.googleapis.com/auth/webmasters.readonly || fail GSC_SCOPE_NOT_READONLY
+          test "$GSC_SYNC_WINDOW_DAYS" = 90 || fail GSC_WINDOW_INVALID
+          test "$GSC_SYNC_SEARCH_TYPES" = web || fail GSC_SEARCH_TYPE_INVALID
+          test -n "$SEO_INTEL_MIGRATION_DB_USERNAME" || fail COMPETITIVE_WRITER_DB_CREDENTIAL_MISSING
+          test -n "$SEO_INTEL_MIGRATION_DB_PASSWORD" || fail COMPETITIVE_WRITER_DB_CREDENTIAL_MISSING
+          printf 'production_competitive_configuration=READY\n'
       - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
           php-version: '8.4'

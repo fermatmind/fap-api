@@ -74,6 +74,24 @@ test("competitive persistence uses an ephemeral writer without changing runtime 
   assert.doesNotMatch(preactivation, /seo_measurement_sync_env|HTTPS_PROXY|HTTP_PROXY|GSC_/);
 });
 
+test("production validates the complete 11G configuration before transport", () => {
+  const preflightStart = deploy.indexOf("- name: Verify production 11G configuration before transport");
+  const preflightEnd = deploy.indexOf("- uses: shivammathur/setup-php", preflightStart);
+  const preflight = deploy.slice(preflightStart, preflightEnd);
+  const sshStart = deploy.indexOf("- name: Start SSH agent without key metadata output", preflightStart);
+
+  assert.ok(preflightStart > 0 && preflightEnd > preflightStart);
+  assert.ok(sshStart > preflightEnd);
+  assert.match(preflight, /if: needs\.policy\.outputs\.seo_competitive_evidence == 'true'/);
+  assert.match(preflight, /SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON/);
+  assert.match(preflight, /SEO_INTEL_GSC_PROPERTY_URL/);
+  assert.match(preflight, /SEO_INTEL_MIGRATION_DB_USERNAME/);
+  assert.match(preflight, /SEO_INTEL_MIGRATION_DB_PASSWORD/);
+  assert.match(preflight, /COMPETITIVE_WRITER_DB_CREDENTIAL_MISSING/);
+  assert.match(preflight, /production_competitive_configuration=READY/);
+  assert.doesNotMatch(preflight, /\b(?:ssh|scp|curl)\b/);
+});
+
 test("Council stays zero-egress while dependency reads are accounted separately", () => {
   for (const source of [ci, deploy, deployer]) {
     assert.match(source, /external_calls/);
