@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\PersonalityCms;
 
+use App\Domain\Personality\Current\PersonalityLegacyPublicAuthorityArchive;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantSection;
@@ -15,8 +16,10 @@ final class PersonalityVariantAuthorityTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_imported_variant_authority_rows_can_resolve_published_public_variants_after_public_cutover(): void
+    public function test_imported_variant_authority_rows_remain_available_only_to_explicit_legacy_fixtures(): void
     {
+        config([PersonalityLegacyPublicAuthorityArchive::TEST_LEGACY_DB_FIXTURE_CONFIG => true]);
+
         $this->artisan('personality:import-local-baseline', [
             '--locale' => ['en'],
             '--type' => ['ENFP'],
@@ -71,5 +74,26 @@ final class PersonalityVariantAuthorityTest extends TestCase
 
         $this->getJson('/api/v0.5/personality/enfp-a?locale=en')
             ->assertStatus(404);
+    }
+
+    public function test_current_authority_ignores_legacy_database_fixture_selection_by_default(): void
+    {
+        config([PersonalityLegacyPublicAuthorityArchive::TEST_LEGACY_DB_FIXTURE_CONFIG => false]);
+
+        foreach (['enfp-a', 'enfp-t'] as $slug) {
+            $runtimeType = strtoupper($slug);
+            $response = $this->getJson("/api/v0.5/personality/{$slug}?locale=en")
+                ->assertOk()
+                ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1')
+                ->assertJsonPath('ok', true)
+                ->assertJsonPath('profile.type_code', 'ENFP')
+                ->assertJsonPath('profile.locale', 'en')
+                ->assertJsonPath('mbti_public_projection_v1.runtime_type_code', $runtimeType);
+
+            $this->assertMatchesRegularExpression(
+                '/\A[a-f0-9]{64}\z/',
+                (string) $response->headers->get('X-Fermat-Content-Aggregate'),
+            );
+        }
     }
 }

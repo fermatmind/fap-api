@@ -31,11 +31,12 @@ class SitemapGeneratorTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_generate_excludes_exact_pr24_fixture_cohort_without_deleting_registry_rows(): void
+    public function test_generate_excludes_exact_pr24_fixture_cohort_from_explicit_legacy_fallback_without_deleting_rows(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
 
         DB::table('scales_registry')->delete();
+        DB::table('scales_registry_v2')->delete();
         $now = now();
 
         foreach (range(1, 50) as $index) {
@@ -102,11 +103,12 @@ class SitemapGeneratorTest extends TestCase
         $this->assertStringContainsString('/zh/tests/pr24-control-51', $xml);
     }
 
-    public function test_generate_excludes_clinical_screening_scales_even_when_registry_marks_them_indexable(): void
+    public function test_generate_excludes_clinical_screening_scales_from_explicit_legacy_fallback(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
 
         DB::table('scales_registry')->delete();
+        DB::table('scales_registry_v2')->delete();
         $now = now();
 
         foreach ([
@@ -149,10 +151,11 @@ class SitemapGeneratorTest extends TestCase
         config(['app.frontend_url' => 'https://fermatmind.com']);
 
         $now = now();
-        // Isolate this test from migration-seeded default scales.
+        // Isolate this test from migration-seeded authority rows.
         DB::table('scales_registry')->delete();
+        DB::table('scales_registry_v2')->delete();
 
-        DB::table('scales_registry')->insert([
+        DB::table('scales_registry_v2')->insert([
             [
                 'code' => 'P0_PUBLIC_GLOBAL',
                 'org_id' => 0,
@@ -169,6 +172,7 @@ class SitemapGeneratorTest extends TestCase
                 'seo_schema_json' => null,
                 'is_public' => 1,
                 'is_active' => 1,
+                'is_indexable' => 1,
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
@@ -188,6 +192,7 @@ class SitemapGeneratorTest extends TestCase
                 'seo_schema_json' => null,
                 'is_public' => 0,
                 'is_active' => 1,
+                'is_indexable' => 1,
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
@@ -207,6 +212,7 @@ class SitemapGeneratorTest extends TestCase
                 'seo_schema_json' => null,
                 'is_public' => 1,
                 'is_active' => 1,
+                'is_indexable' => 1,
                 'created_at' => $now,
                 'updated_at' => $now,
             ],

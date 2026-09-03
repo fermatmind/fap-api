@@ -1,569 +1,59 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\SEO;
 
-use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
-use App\Models\Article;
-use App\Models\ArticleTranslationRevision;
-use App\Models\CareerGuide;
-use App\Models\CareerJob;
-use App\Models\CareerJobDisplayAsset;
-use App\Models\Occupation;
-use App\Models\OccupationFamily;
-use App\Models\PersonalityProfile;
-use App\Models\PersonalityProfileSeoMeta;
-use App\Models\PersonalityProfileVariant;
-use App\Models\PersonalityProfileVariantSeoMeta;
-use App\Models\TopicProfile;
-use App\Services\Career\PublicCareerAuthorityResponseCache;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Carbon;
+use App\Services\SeoIntel\UrlTruth\PublicCanonicalConsumerSnapshot;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
+use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
-class SitemapXmlTest extends TestCase
+final class SitemapXmlTest extends TestCase
 {
-    use RefreshDatabase;
-
-    public function test_sitemap_xml_is_cached_and_filtered(): void
+    protected function tearDown(): void
     {
-        config([
-            'services.seo.public_sitemap_authority' => 'backend',
-        ]);
-        config(['app.frontend_url' => 'https://staging.fermatmind.com']);
+        DB::purge('seo_intel');
+        Cache::flush();
+        parent::tearDown();
+    }
 
-        $nowA = Carbon::create(2026, 1, 30, 10, 0, 0);
-        $nowB = Carbon::create(2026, 1, 31, 12, 0, 0);
+    public function test_sitemap_xml_reads_only_current_public_url_truth_and_supports_etag_readback(): void
+    {
+        $this->prepareUrlTruth();
+        $this->insertUrl('/en/articles/trusted', 'en', 'article', 'trusted', '2026-08-01 08:30:00');
+        $this->insertUrl('/zh/career/jobs/hold', 'zh-CN', 'career_job', 'hold', null);
+        $this->insertUrl('/en/private', 'en', 'article', 'trusted', null, isPrivate: true);
+        $this->insertUrl('/en/noindex', 'en', 'article', 'trusted', null, metadata: ['robots' => 'noindex,follow']);
+        $this->insertUrl('/en/redirect', 'en', 'article', 'trusted', null, attributes: ['redirect_only' => true]);
+        $this->insertUrl('/en/noncanonical', 'en', 'article', 'trusted', null, metadata: ['canonical_self' => false]);
 
-        DB::table('scales_registry')->insert([
-            [
-                'code' => 'PR24_ALPHA',
-                'org_id' => 0,
-                'primary_slug' => 'alpha',
-                'slugs_json' => json_encode(['beta', 'alpha']),
-                'driver_type' => 'MBTI',
-                'default_pack_id' => null,
-                'default_region' => null,
-                'default_locale' => null,
-                'default_dir_version' => null,
-                'capabilities_json' => null,
-                'view_policy_json' => null,
-                'commercial_json' => null,
-                'seo_schema_json' => null,
-                'is_public' => 1,
-                'is_active' => 1,
-                'created_at' => $nowA,
-                'updated_at' => $nowA,
-            ],
-            [
-                'code' => 'PR24_GAMMA',
-                'org_id' => 0,
-                'primary_slug' => 'gamma',
-                'slugs_json' => json_encode(['delta']),
-                'driver_type' => 'MBTI',
-                'default_pack_id' => null,
-                'default_region' => null,
-                'default_locale' => null,
-                'default_dir_version' => null,
-                'capabilities_json' => null,
-                'view_policy_json' => null,
-                'commercial_json' => null,
-                'seo_schema_json' => null,
-                'is_public' => 1,
-                'is_active' => 1,
-                'created_at' => $nowB,
-                'updated_at' => $nowB,
-            ],
-            [
-                'code' => 'PR24_HIDDEN',
-                'org_id' => 0,
-                'primary_slug' => 'hidden',
-                'slugs_json' => json_encode(['hidden-alt']),
-                'driver_type' => 'MBTI',
-                'default_pack_id' => null,
-                'default_region' => null,
-                'default_locale' => null,
-                'default_dir_version' => null,
-                'capabilities_json' => null,
-                'view_policy_json' => null,
-                'commercial_json' => null,
-                'seo_schema_json' => null,
-                'is_public' => 1,
-                'is_active' => 0,
-                'created_at' => $nowB,
-                'updated_at' => $nowB,
-            ],
-        ]);
-
-        $personalityEn = PersonalityProfile::query()->create([
-            'org_id' => 0,
-            'scale_code' => PersonalityProfile::SCALE_CODE_MBTI,
-            'type_code' => 'INTJ',
-            'slug' => 'intj',
-            'locale' => 'en',
-            'title' => 'INTJ Personality Type',
-            'subtitle' => 'Strategic and future-oriented.',
-            'excerpt' => 'Explore INTJ traits, strengths, and growth.',
-            'status' => 'published',
-            'is_public' => true,
-            'is_indexable' => true,
-            'published_at' => Carbon::create(2026, 1, 31, 11, 0, 0),
-            'scheduled_at' => null,
-            'schema_version' => 'v1',
-            'created_at' => $nowB,
-            'updated_at' => $nowB,
-        ]);
-
-        $personalityZh = PersonalityProfile::query()->create([
-            'org_id' => 0,
-            'scale_code' => PersonalityProfile::SCALE_CODE_MBTI,
-            'type_code' => 'INTJ',
-            'slug' => 'intj',
-            'locale' => 'zh-CN',
-            'title' => 'INTJ 人格类型',
-            'subtitle' => '理性、战略、面向未来。',
-            'excerpt' => '探索 INTJ 的特质、优势与成长方向。',
-            'status' => 'published',
-            'is_public' => true,
-            'is_indexable' => true,
-            'published_at' => Carbon::create(2026, 1, 31, 12, 0, 0),
-            'scheduled_at' => null,
-            'schema_version' => 'v1',
-            'created_at' => $nowB,
-            'updated_at' => $nowB,
-        ]);
-
-        PersonalityProfileSeoMeta::query()->create([
-            'profile_id' => (int) $personalityEn->id,
-            'canonical_url' => 'https://staging.fermatmind.com/en/personality/intj-a',
-            'jsonld_overrides_json' => [
-                'mainEntityOfPage' => 'https://staging.fermatmind.com/en/personality/intj-a',
-            ],
-            'created_at' => $nowB,
-            'updated_at' => $nowB,
-        ]);
-        PersonalityProfileSeoMeta::query()->create([
-            'profile_id' => (int) $personalityZh->id,
-            'canonical_url' => 'https://staging.fermatmind.com/zh/personality/intj-a',
-            'jsonld_overrides_json' => [
-                'mainEntityOfPage' => 'https://staging.fermatmind.com/zh/personality/intj-a',
-            ],
-            'created_at' => $nowB,
-            'updated_at' => $nowB,
-        ]);
-        $personalityEnVariant = PersonalityProfileVariant::query()->create([
-            'personality_profile_id' => (int) $personalityEn->id,
-            'canonical_type_code' => 'INTJ',
-            'variant_code' => 'A',
-            'runtime_type_code' => 'INTJ-A',
-            'type_name' => 'Architect Assertive',
-            'nickname' => 'Assertive strategist',
-            'rarity_text' => 'About 3%',
-            'keywords_json' => ['assertive'],
-            'hero_summary_md' => 'Variant summary',
-            'hero_summary_html' => null,
-            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
-            'is_published' => true,
-            'published_at' => Carbon::create(2026, 1, 31, 11, 5, 0),
-            'created_at' => $nowB,
-            'updated_at' => $nowB,
-        ]);
-        PersonalityProfileVariantSeoMeta::query()->create([
-            'personality_profile_variant_id' => (int) $personalityEnVariant->id,
-            'canonical_url' => 'https://staging.fermatmind.com/en/personality/intj-a',
-            'created_at' => $nowB,
-            'updated_at' => $nowB,
-        ]);
-        $personalityZhVariant = PersonalityProfileVariant::query()->create([
-            'personality_profile_id' => (int) $personalityZh->id,
-            'canonical_type_code' => 'INTJ',
-            'variant_code' => 'T',
-            'runtime_type_code' => 'INTJ-T',
-            'type_name' => '建筑师-T',
-            'nickname' => '反思策划者',
-            'rarity_text' => '约 2%',
-            'keywords_json' => ['反思'],
-            'hero_summary_md' => '变体摘要',
-            'hero_summary_html' => null,
-            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
-            'is_published' => true,
-            'published_at' => Carbon::create(2026, 1, 31, 12, 5, 0),
-            'created_at' => $nowB,
-            'updated_at' => $nowB,
-        ]);
-        PersonalityProfileVariantSeoMeta::query()->create([
-            'personality_profile_variant_id' => (int) $personalityZhVariant->id,
-            'canonical_url' => 'https://staging.fermatmind.com/zh/personality/intj-t',
-            'created_at' => $nowB,
-            'updated_at' => $nowB,
-        ]);
-
-        TopicProfile::query()->create([
-            'org_id' => 0,
-            'topic_code' => 'mbti',
-            'slug' => 'mbti',
-            'locale' => 'en',
-            'title' => 'MBTI',
-            'subtitle' => 'Understand personality preferences and type dynamics.',
-            'excerpt' => 'Explore MBTI concepts, type profiles, guides, and tests.',
-            'status' => TopicProfile::STATUS_PUBLISHED,
-            'is_public' => true,
-            'is_indexable' => true,
-            'published_at' => Carbon::create(2026, 1, 31, 11, 30, 0),
-            'scheduled_at' => null,
-            'schema_version' => 'v1',
-            'sort_order' => 10,
-            'created_at' => $nowB,
-            'updated_at' => $nowB,
-        ]);
-
-        TopicProfile::query()->create([
-            'org_id' => 0,
-            'topic_code' => 'mbti',
-            'slug' => 'mbti',
-            'locale' => 'zh-CN',
-            'title' => 'MBTI 主题',
-            'subtitle' => '理解人格偏好与类型框架。',
-            'excerpt' => '探索 MBTI 概念、类型档案与测试入口。',
-            'status' => TopicProfile::STATUS_PUBLISHED,
-            'is_public' => true,
-            'is_indexable' => true,
-            'published_at' => Carbon::create(2026, 1, 31, 12, 30, 0),
-            'scheduled_at' => null,
-            'schema_version' => 'v1',
-            'sort_order' => 10,
-            'created_at' => $nowB,
-            'updated_at' => $nowB,
-        ]);
-
-        TopicProfile::query()->create([
-            'org_id' => 0,
-            'topic_code' => 'big-five',
-            'slug' => 'big-five',
-            'locale' => 'en',
-            'title' => 'Big Five',
-            'subtitle' => 'Trait dimensions for personality description.',
-            'excerpt' => 'Explore the Big Five model.',
-            'status' => TopicProfile::STATUS_DRAFT,
-            'is_public' => true,
-            'is_indexable' => true,
-            'published_at' => null,
-            'scheduled_at' => null,
-            'schema_version' => 'v1',
-            'sort_order' => 20,
-            'created_at' => $nowB,
-            'updated_at' => $nowB,
-        ]);
-
-        $this->createPublishedArticle([
-            'org_id' => 0,
-            'slug' => 'mbti-basics',
-            'locale' => 'en',
-            'title' => 'MBTI Basics',
-            'excerpt' => 'Learn the core concepts behind MBTI.',
-            'content_md' => '# MBTI Basics',
-            'content_html' => null,
-            'cover_image_url' => null,
-            'status' => 'published',
-            'is_public' => true,
-            'is_indexable' => true,
-            'sitemap_eligible' => true,
-            'llms_eligible' => true,
-            'published_at' => Carbon::create(2026, 1, 31, 11, 35, 0),
-            'scheduled_at' => null,
-            'created_at' => $nowB,
-            'updated_at' => $nowB,
-        ]);
-
-        $this->createPublishedArticle([
-            'org_id' => 0,
-            'slug' => 'mbti-basics',
-            'locale' => 'zh-CN',
-            'title' => 'MBTI 基础',
-            'excerpt' => '了解 MBTI 的核心概念。',
-            'content_md' => '# MBTI 基础',
-            'content_html' => null,
-            'cover_image_url' => null,
-            'status' => 'published',
-            'is_public' => true,
-            'is_indexable' => true,
-            'sitemap_eligible' => true,
-            'llms_eligible' => true,
-            'published_at' => Carbon::create(2026, 1, 31, 12, 35, 0),
-            'scheduled_at' => null,
-            'created_at' => $nowB,
-            'updated_at' => $nowB,
-        ]);
-
-        Article::query()->create([
-            'org_id' => 0,
-            'slug' => 'article-draft',
-            'locale' => 'en',
-            'title' => 'Draft Article',
-            'excerpt' => 'Draft article should stay out of sitemap.',
-            'content_md' => '# Draft Article',
-            'content_html' => null,
-            'cover_image_url' => null,
-            'status' => 'draft',
-            'is_public' => true,
-            'is_indexable' => true,
-            'published_at' => null,
-            'scheduled_at' => null,
-            'created_at' => $nowB,
-            'updated_at' => $nowB,
-        ]);
-
-        CareerJob::query()->create([
-            'org_id' => 0,
-            'job_code' => 'product-manager',
-            'slug' => 'product-manager',
-            'locale' => 'en',
-            'title' => 'Product Manager',
-            'excerpt' => 'Responsibilities, salary, growth path, and personality fit for Product Managers.',
-            'status' => CareerJob::STATUS_PUBLISHED,
-            'is_public' => true,
-            'is_indexable' => true,
-            'published_at' => Carbon::create(2026, 1, 31, 11, 45, 0),
-            'scheduled_at' => null,
-            'schema_version' => 'v1',
-            'sort_order' => 0,
-            'created_at' => $nowB,
-            'updated_at' => $nowB,
-        ]);
-
-        CareerJob::query()->create([
-            'org_id' => 0,
-            'job_code' => 'product-manager',
-            'slug' => 'product-manager',
-            'locale' => 'zh-CN',
-            'title' => '产品经理',
-            'excerpt' => '了解产品经理的职责、薪资水平、发展路径和人格匹配。',
-            'status' => CareerJob::STATUS_PUBLISHED,
-            'is_public' => true,
-            'is_indexable' => true,
-            'published_at' => Carbon::create(2026, 1, 31, 12, 45, 0),
-            'scheduled_at' => null,
-            'schema_version' => 'v1',
-            'sort_order' => 0,
-            'created_at' => $nowB,
-            'updated_at' => $nowB,
-        ]);
-
-        CareerJob::query()->create([
-            'org_id' => 0,
-            'job_code' => 'private-role',
-            'slug' => 'private-role',
-            'locale' => 'en',
-            'title' => 'Private Role',
-            'status' => CareerJob::STATUS_PUBLISHED,
-            'is_public' => false,
-            'is_indexable' => true,
-            'published_at' => Carbon::create(2026, 1, 31, 12, 50, 0),
-            'scheduled_at' => null,
-            'schema_version' => 'v1',
-            'sort_order' => 0,
-            'created_at' => $nowB,
-            'updated_at' => $nowB,
-        ]);
-
-        CareerJob::query()->create([
-            'org_id' => 0,
-            'job_code' => 'software-developers',
-            'slug' => 'software-developers',
-            'locale' => 'en',
-            'title' => 'Software Developers',
-            'status' => CareerJob::STATUS_PUBLISHED,
-            'is_public' => true,
-            'is_indexable' => true,
-            'published_at' => Carbon::create(2026, 1, 31, 12, 52, 0),
-            'scheduled_at' => null,
-            'schema_version' => 'v1',
-            'sort_order' => 0,
-            'created_at' => $nowB,
-            'updated_at' => $nowB,
-        ]);
-
-        $this->createDisplayAsset(
-            $this->createOccupation('agricultural-inspectors', 'Agricultural Inspectors'),
-            ['updated_at' => Carbon::create(2026, 1, 31, 12, 55, 0)]
-        );
-        $this->createDisplayAsset(
-            $this->createOccupation('software-developers', 'Software Developers'),
-            ['updated_at' => Carbon::create(2026, 1, 31, 12, 56, 0)]
-        );
-        $this->publishRuntimeProjection(['agricultural-inspectors', 'software-developers']);
-
-        $guideEn = $this->createCareerGuide([
-            'guide_code' => 'career-planning-101',
-            'slug' => 'career-planning-101',
-            'locale' => 'en',
-            'title' => 'Career Planning 101',
-            'published_at' => Carbon::create(2026, 1, 31, 13, 0, 0, 'UTC'),
-            'created_at' => Carbon::create(2026, 1, 31, 12, 50, 0, 'UTC'),
-            'updated_at' => Carbon::create(2026, 1, 31, 13, 30, 0, 'UTC'),
-        ]);
-
-        $guideZhPublishedAt = Carbon::create(2026, 1, 31, 14, 0, 0, 'UTC');
-
-        DB::table('career_guides')->insert([
-            'org_id' => 0,
-            'guide_code' => 'job-fit-guide',
-            'slug' => 'job-fit-guide',
-            'locale' => 'zh-CN',
-            'title' => '岗位匹配指南',
-            'excerpt' => '理解岗位匹配与职业选择。',
-            'category_slug' => 'job-fit',
-            'body_md' => '# 岗位匹配指南',
-            'body_html' => '<h1>岗位匹配指南</h1>',
-            'related_industry_slugs_json' => json_encode(['technology']),
-            'status' => CareerGuide::STATUS_PUBLISHED,
-            'is_public' => true,
-            'is_indexable' => true,
-            'sort_order' => 0,
-            'published_at' => $guideZhPublishedAt,
-            'scheduled_at' => null,
-            'schema_version' => 'v1',
-            'created_at' => Carbon::create(2026, 1, 31, 13, 45, 0, 'UTC'),
-            'updated_at' => null,
-        ]);
-
-        $this->createCareerGuide([
-            'guide_code' => 'guide-draft',
-            'slug' => 'guide-draft',
-            'status' => CareerGuide::STATUS_DRAFT,
-            'updated_at' => Carbon::create(2026, 1, 31, 14, 10, 0, 'UTC'),
-        ]);
-        $this->createCareerGuide([
-            'guide_code' => 'guide-private',
-            'slug' => 'guide-private',
-            'is_public' => false,
-            'updated_at' => Carbon::create(2026, 1, 31, 14, 20, 0, 'UTC'),
-        ]);
-        $this->createCareerGuide([
-            'guide_code' => 'guide-noindex',
-            'slug' => 'guide-noindex',
-            'is_indexable' => false,
-            'updated_at' => Carbon::create(2026, 1, 31, 14, 30, 0, 'UTC'),
-        ]);
-        $this->createCareerGuide([
-            'guide_code' => 'guide-future',
-            'slug' => 'guide-future',
-            'published_at' => Carbon::now('UTC')->addDay(),
-            'updated_at' => Carbon::create(2026, 1, 31, 14, 40, 0, 'UTC'),
-        ]);
-        $this->createCareerGuide([
-            'org_id' => 9,
-            'guide_code' => 'guide-tenant',
-            'slug' => 'guide-tenant',
-            'updated_at' => Carbon::create(2026, 1, 31, 14, 50, 0, 'UTC'),
-        ]);
-        $this->createCareerGuide([
-            'guide_code' => 'guide-fr',
-            'slug' => 'guide-fr',
-            'locale' => 'fr',
-            'updated_at' => Carbon::create(2026, 1, 31, 15, 0, 0, 'UTC'),
-        ]);
-
-        app(PublicCareerAuthorityResponseCache::class)->warm();
-        $response = $this->get('/sitemap.xml');
-
-        $response->assertStatus(200);
-        $contentType = (string) $response->headers->get('Content-Type');
-        $this->assertStringContainsString('application/xml', $contentType);
+        $response = $this->get('/sitemap.xml')->assertOk();
+        $response->assertHeader('Content-Type', 'application/xml; charset=utf-8');
         $cacheControl = (string) $response->headers->get('Cache-Control');
         $this->assertStringContainsString('public', $cacheControl);
         $this->assertStringContainsString('max-age=3600', $cacheControl);
         $this->assertStringContainsString('s-maxage=86400', $cacheControl);
         $this->assertStringContainsString('stale-while-revalidate=604800', $cacheControl);
-
-        $etag = (string) $response->headers->get('ETag');
-        $this->assertNotEmpty($etag);
         $response->assertHeaderMissing('Set-Cookie');
 
         $body = (string) $response->getContent();
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/tests/alpha</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/tests/alpha</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/tests/gamma</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/tests/gamma</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/tests/alpha</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/tests/beta</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/zh/tests/beta</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/tests/delta</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/zh/tests/delta</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/tests/hidden</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/zh/tests/hidden</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/tests/hidden-alt</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/zh/tests/hidden-alt</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/personality</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/personality</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/personality/intj-a</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/personality/intj-t</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/personality/intj</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/personality/intj</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/topics</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/topics</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/topics/mbti</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/topics/mbti</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/topics/big-five</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/articles</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/articles</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/articles/mbti-basics</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/articles/mbti-basics</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/articles/mbti-basics</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/articles/article-draft</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/career/jobs</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/zh/career/jobs</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/career/jobs/agricultural-inspectors</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/zh/career/jobs/agricultural-inspectors</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/career/jobs/product-manager</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/zh/career/jobs/product-manager</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/career/jobs/private-role</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/career/jobs/software-developers</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/zh/career/jobs/software-developers</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/career/guides</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/career/guides</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/career/guides/career-planning-101</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/career/guides/job-fit-guide</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/career/guides/career-planning-101</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/career/guides/guide-draft</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/career/guides/guide-private</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/career/guides/guide-noindex</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/career/guides/guide-future</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/career/guides/guide-tenant</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/fr/career/guides/guide-fr</loc>', $body);
-        $this->assertStringContainsString('<changefreq>weekly</changefreq>', $body);
-        $this->assertStringContainsString('<priority>0.7</priority>', $body);
-        $this->assertStringContainsString('<lastmod>2026-01-30</lastmod>', $body);
-        $this->assertStringContainsString('<lastmod>2026-01-31</lastmod>', $body);
-        $this->assertSame(1, substr_count($body, '<loc>https://staging.fermatmind.com/en/tests/alpha</loc>'));
-        $this->assertSame(1, substr_count($body, '<loc>https://staging.fermatmind.com/zh/tests/alpha</loc>'));
+        $this->assertSame([
+            'https://fermatmind.com/en/articles/trusted',
+            'https://fermatmind.com/zh/career/jobs/hold',
+        ], $this->xmlUrls($body));
+        $this->assertStringContainsString('<lastmod>2026-08-01T08:30:00+00:00</lastmod>', $body);
+        $this->assertSame(1, substr_count($body, '<lastmod>'));
 
-        $entries = $this->sitemapEntries($body);
-        $this->assertSame(
-            $guideEn->updated_at?->toAtomString(),
-            $entries['https://staging.fermatmind.com/en/career/guides/career-planning-101'] ?? null
-        );
-        $this->assertSame(
-            $guideZhPublishedAt->toAtomString(),
-            $entries['https://staging.fermatmind.com/zh/career/guides'] ?? null
-        );
-        $this->assertSame(
-            $guideZhPublishedAt->toAtomString(),
-            $entries['https://staging.fermatmind.com/zh/career/guides/job-fit-guide'] ?? null
-        );
-
-        $second = $this->withHeaders(['If-None-Match' => $etag])->get('/sitemap.xml');
-        $second->assertStatus(304);
-        $cacheControl304 = (string) $second->headers->get('Cache-Control');
-        $this->assertStringContainsString('public', $cacheControl304);
-        $this->assertStringContainsString('max-age=3600', $cacheControl304);
-        $this->assertStringContainsString('s-maxage=86400', $cacheControl304);
-        $this->assertStringContainsString('stale-while-revalidate=604800', $cacheControl304);
-        $second->assertHeader('ETag', $etag);
-        $second->assertHeaderMissing('Set-Cookie');
-        $this->assertSame('', (string) $second->getContent());
+        $etag = (string) $response->headers->get('ETag');
+        $this->assertMatchesRegularExpression('/\A"[a-f0-9]{64}"\z/', $etag);
+        $notModified = $this->withHeaders(['If-None-Match' => $etag])
+            ->get('/sitemap.xml')
+            ->assertStatus(304)
+            ->assertHeader('ETag', $etag)
+            ->assertHeaderMissing('Set-Cookie');
+        $this->assertSame($cacheControl, (string) $notModified->headers->get('Cache-Control'));
     }
 
     public function test_sitemap_xml_returns_404_when_frontend_is_public_authority(): void
@@ -573,334 +63,125 @@ class SitemapXmlTest extends TestCase
         $this->get('/sitemap.xml')->assertNotFound();
     }
 
-    public function test_sitemap_xml_exports_localized_canonical_tests_urls_on_frontend_host(): void
+    public function test_sitemap_xml_uses_the_configured_canonical_host_and_rejects_foreign_urls(): void
+    {
+        $this->prepareUrlTruth('https://staging.fermatmind.com');
+        $this->insertUrl('/en/tests/host-check', 'en', 'test', 'trusted', null, 'https://staging.fermatmind.com');
+        $this->insertUrl('/en/tests/foreign', 'en', 'test', 'trusted', null, 'https://api.fermatmind.com');
+
+        $body = (string) $this->get('/sitemap.xml')->assertOk()->getContent();
+
+        $this->assertSame(['https://staging.fermatmind.com/en/tests/host-check'], $this->xmlUrls($body));
+        $this->assertStringNotContainsString('api.fermatmind.com', $body);
+    }
+
+    public function test_sitemap_xml_returns_validated_lkg_when_url_truth_refresh_fails(): void
+    {
+        $this->prepareUrlTruth();
+        $this->insertUrl('/en/articles/lkg', 'en', 'article', 'trusted', '2026-08-01 08:30:00');
+
+        $first = $this->get('/sitemap.xml')->assertOk();
+        $etag = (string) $first->headers->get('ETag');
+        Cache::forget(PublicCanonicalConsumerSnapshot::FRESH_CACHE_KEY);
+        Schema::connection('seo_intel')->drop('seo_url_entities');
+
+        $second = $this->get('/sitemap.xml')->assertOk();
+        $second->assertHeader('ETag', $etag);
+        $this->assertSame((string) $first->getContent(), (string) $second->getContent());
+        $this->assertSame(['https://fermatmind.com/en/articles/lkg'], $this->xmlUrls((string) $second->getContent()));
+    }
+
+    private function prepareUrlTruth(string $canonicalHost = 'https://fermatmind.com'): void
     {
         config([
+            'cache.default' => 'array',
             'services.seo.public_sitemap_authority' => 'backend',
-            'services.seo.tests_url_prefix' => 'https://legacy.fermatmind.com/tests/',
-            'app.url' => 'https://api.fermatmind.com',
-            'app.frontend_url' => 'https://fermatmind.com',
-        ]);
-
-        DB::table('scales_registry')->insert([
-            'code' => 'PR24_HOST',
-            'org_id' => 0,
-            'primary_slug' => 'host-check',
-            'slugs_json' => json_encode(['host-check-alt']),
-            'driver_type' => 'MBTI',
-            'default_pack_id' => null,
-            'default_region' => null,
-            'default_locale' => null,
-            'default_dir_version' => null,
-            'capabilities_json' => null,
-            'view_policy_json' => null,
-            'commercial_json' => null,
-            'seo_schema_json' => null,
-            'is_public' => 1,
-            'is_active' => 1,
-            'created_at' => Carbon::create(2026, 1, 31, 9, 0, 0),
-            'updated_at' => Carbon::create(2026, 1, 31, 9, 0, 0),
-        ]);
-
-        app(PublicCareerAuthorityResponseCache::class)->warm();
-        $body = (string) $this->get('/sitemap.xml')->getContent();
-
-        $this->assertStringContainsString('<loc>https://fermatmind.com/en/tests/host-check</loc>', $body);
-        $this->assertStringContainsString('<loc>https://fermatmind.com/zh/tests/host-check</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://fermatmind.com/tests/host-check</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://fermatmind.com/en/tests/host-check-alt</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://fermatmind.com/zh/tests/host-check-alt</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://api.fermatmind.com/en/tests/host-check</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://legacy.fermatmind.com/tests/host-check</loc>', $body);
-    }
-
-    public function test_sitemap_xml_reads_public_tests_from_v2_registry_when_legacy_registry_is_empty(): void
-    {
-        config([
-            'services.seo.public_sitemap_authority' => 'backend',
-            'app.frontend_url' => 'https://fermatmind.com',
-        ]);
-
-        DB::table('scales_registry')->delete();
-        DB::table('scales_registry_v2')->delete();
-
-        DB::table('scales_registry_v2')->insert([
-            [
-                'org_id' => 0,
-                'code' => 'PR24_V2_PUBLIC',
-                'primary_slug' => 'v2-public',
-                'slugs_json' => json_encode(['v2-public-alt']),
-                'driver_type' => 'MBTI',
-                'assessment_driver' => null,
-                'default_pack_id' => null,
-                'default_region' => null,
-                'default_locale' => null,
-                'default_dir_version' => null,
-                'capabilities_json' => null,
-                'view_policy_json' => null,
-                'commercial_json' => null,
-                'seo_schema_json' => null,
-                'seo_i18n_json' => null,
-                'content_i18n_json' => null,
-                'report_summary_i18n_json' => null,
-                'is_public' => 1,
-                'is_active' => 1,
-                'is_indexable' => 1,
-                'created_at' => Carbon::create(2026, 1, 31, 9, 5, 0),
-                'updated_at' => Carbon::create(2026, 1, 31, 9, 5, 0),
-            ],
-            [
-                'org_id' => 0,
-                'code' => 'PR24_V2_NOINDEX',
-                'primary_slug' => 'v2-noindex',
-                'slugs_json' => json_encode(['v2-noindex-alt']),
-                'driver_type' => 'MBTI',
-                'assessment_driver' => null,
-                'default_pack_id' => null,
-                'default_region' => null,
-                'default_locale' => null,
-                'default_dir_version' => null,
-                'capabilities_json' => null,
-                'view_policy_json' => null,
-                'commercial_json' => null,
-                'seo_schema_json' => null,
-                'seo_i18n_json' => null,
-                'content_i18n_json' => null,
-                'report_summary_i18n_json' => null,
-                'is_public' => 1,
-                'is_active' => 1,
-                'is_indexable' => 0,
-                'created_at' => Carbon::create(2026, 1, 31, 9, 10, 0),
-                'updated_at' => Carbon::create(2026, 1, 31, 9, 10, 0),
+            'app.frontend_url' => $canonicalHost,
+            'seo_intel.public_canonical_host' => $canonicalHost,
+            'seo_intel.connection' => 'seo_intel',
+            'database.connections.seo_intel' => [
+                'driver' => 'sqlite',
+                'database' => ':memory:',
+                'prefix' => '',
+                'foreign_key_constraints' => false,
             ],
         ]);
-
-        app(PublicCareerAuthorityResponseCache::class)->warm();
-        $body = (string) $this->get('/sitemap.xml')->getContent();
-
-        $this->assertStringContainsString('<loc>https://fermatmind.com/en/tests/v2-public</loc>', $body);
-        $this->assertStringContainsString('<loc>https://fermatmind.com/zh/tests/v2-public</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://fermatmind.com/tests/v2-public</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://fermatmind.com/en/tests/v2-public-alt</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://fermatmind.com/zh/tests/v2-public-alt</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://fermatmind.com/en/tests/v2-noindex</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://fermatmind.com/zh/tests/v2-noindex</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://fermatmind.com/en/tests/v2-noindex-alt</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://fermatmind.com/zh/tests/v2-noindex-alt</loc>', $body);
-    }
-
-    /**
-     * @param  array<string, mixed>  $overrides
-     */
-    private function createCareerGuide(array $overrides = []): CareerGuide
-    {
-        /** @var CareerGuide */
-        return CareerGuide::query()->create(array_merge([
-            'org_id' => 0,
-            'guide_code' => 'career-guide',
-            'slug' => 'career-guide',
-            'locale' => 'en',
-            'title' => 'Career guide',
-            'excerpt' => 'Career guide excerpt.',
-            'category_slug' => 'career-planning',
-            'body_md' => '# Career guide',
-            'body_html' => '<h1>Career guide</h1>',
-            'related_industry_slugs_json' => ['technology'],
-            'status' => CareerGuide::STATUS_PUBLISHED,
-            'is_public' => true,
-            'is_indexable' => true,
-            'sort_order' => 0,
-            'published_at' => Carbon::create(2026, 1, 31, 12, 40, 0, 'UTC'),
-            'scheduled_at' => null,
-            'schema_version' => 'v1',
-            'created_at' => Carbon::create(2026, 1, 31, 12, 30, 0, 'UTC'),
-            'updated_at' => Carbon::create(2026, 1, 31, 12, 40, 0, 'UTC'),
-        ], $overrides));
-    }
-
-    private function createOccupation(string $slug, string $title): Occupation
-    {
-        $family = OccupationFamily::query()->create([
-            'canonical_slug' => 'family-'.$slug,
-            'title_en' => $title,
-            'title_zh' => $title,
-        ]);
-
-        return Occupation::query()->create([
-            'family_id' => $family->id,
-            'canonical_slug' => $slug,
-            'entity_level' => 'dataset_candidate',
-            'truth_market' => 'US',
-            'display_market' => 'zh-CN',
-            'crosswalk_mode' => 'direct_match',
-            'canonical_title_en' => $title,
-            'canonical_title_zh' => $title,
-            'search_h1_zh' => $title,
-            'structural_stability' => null,
-            'task_prototype_signature' => [],
-            'market_semantics_gap' => null,
-            'regulatory_divergence' => null,
-            'toolchain_divergence' => null,
-            'skill_gap_threshold' => null,
-            'trust_inheritance_scope' => [],
-            'created_at' => Carbon::create(2026, 1, 31, 12, 54, 0),
-            'updated_at' => Carbon::create(2026, 1, 31, 12, 54, 0),
-        ]);
-    }
-
-    /**
-     * @param  array<string, mixed>  $overrides
-     */
-    private function createDisplayAsset(Occupation $occupation, array $overrides = []): CareerJobDisplayAsset
-    {
-        return CareerJobDisplayAsset::query()->create(array_merge([
-            'occupation_id' => $occupation->id,
-            'canonical_slug' => (string) $occupation->canonical_slug,
-            'surface_version' => 'display.surface.v1',
-            'asset_version' => 'v4.2',
-            'template_version' => 'v4.2',
-            'asset_type' => 'career_job_public_display',
-            'asset_role' => 'formal_pilot_master',
-            'status' => 'ready_for_pilot',
-            'component_order_json' => range(1, 24),
-            'page_payload_json' => [
-                'zh' => ['hero' => ['title' => $occupation->canonical_title_zh]],
-                'en' => ['hero' => ['title' => $occupation->canonical_title_en]],
-            ],
-            'seo_payload_json' => [
-                'indexability_state' => 'index',
-                'robots_policy' => 'index,follow',
-            ],
-            'sources_json' => [],
-            'structured_data_json' => [],
-            'implementation_contract_json' => [],
-            'metadata_json' => [],
-            'created_at' => Carbon::create(2026, 1, 31, 12, 55, 0),
-            'updated_at' => Carbon::create(2026, 1, 31, 12, 55, 0),
-        ], $overrides));
-    }
-
-    /**
-     * @param  list<string>  $slugs
-     */
-    private function publishRuntimeProjection(array $slugs): void
-    {
-        $items = [];
-        foreach ($slugs as $slug) {
-            $items[$slug.'|en'] = [
-                'slug' => $slug,
-                'locale' => 'en',
-                'dataset_visible' => true,
-                'search_visible' => true,
-                'detail_route_enabled' => true,
-                'robots_indexable' => true,
-                'release_gate_pass' => true,
-                'runtime_publish_state' => 'published',
-            ];
-        }
-
-        $this->app->instance(
-            CareerRuntimePublishProjectionVisibility::class,
-            new CareerRuntimePublishProjectionVisibilityFixture(
-                defaultDatasetVisible: false,
-                defaultSearchVisible: false,
-                defaultDetailRouteEnabled: false,
-                defaultRobotsIndexable: false,
-                defaultReleaseGatePass: false,
-                items: $items,
-            ),
-        );
-
+        DB::purge('seo_intel');
         Cache::flush();
-        $responseCache = app(PublicCareerAuthorityResponseCache::class);
-        foreach ($items as $item) {
-            foreach (['en', 'zh-CN'] as $locale) {
-                $responseCache->publishJobDetailReadModel((string) $item['slug'], $locale, [
-                    'identity' => ['canonical_slug' => $item['slug']],
-                    'locale' => $locale,
-                    'fixture' => true,
-                ]);
+
+        $defaultConnection = DB::getDefaultConnection();
+        DB::setDefaultConnection('seo_intel');
+        try {
+            foreach ([
+                '2026_05_17_000100_create_seo_urls_table.php',
+                '2026_05_17_000200_create_seo_url_entities_table.php',
+                '2026_08_25_020000_expand_url_truth_current_bindings.php',
+                '2026_08_28_030000_expand_url_truth_material_authority.php',
+            ] as $file) {
+                (require database_path('migrations/seo_intel/'.$file))->up();
             }
+        } finally {
+            DB::setDefaultConnection($defaultConnection);
         }
     }
 
-    /**
-     * @param  array<string, mixed>  $overrides
-     */
-    private function createPublishedArticle(array $overrides = []): Article
-    {
-        /** @var Article */
-        $article = Article::query()->create(array_merge([
-            'org_id' => 0,
-            'slug' => 'article-slug',
-            'locale' => 'en',
-            'title' => 'Article Title',
-            'excerpt' => 'Article excerpt.',
-            'content_md' => '# Article body',
-            'content_html' => null,
-            'cover_image_url' => null,
-            'status' => 'published',
-            'is_public' => true,
-            'is_indexable' => true,
-            'sitemap_eligible' => true,
-            'llms_eligible' => true,
-            'published_at' => Carbon::create(2026, 1, 31, 11, 35, 0),
-            'scheduled_at' => null,
-        ], $overrides));
+    /** @param array<string,mixed> $metadata @param array<string,mixed> $attributes */
+    private function insertUrl(
+        string $path,
+        string $locale,
+        string $type,
+        string $materialState,
+        ?string $materialLastmod,
+        string $host = 'https://fermatmind.com',
+        bool $isPrivate = false,
+        array $metadata = [],
+        array $attributes = [],
+    ): void {
+        $url = rtrim($host, '/').$path;
+        $hash = hash('sha256', rtrim($url, '/'));
+        $entity = trim(basename($path), '/');
 
-        /** @var ArticleTranslationRevision */
-        $revision = ArticleTranslationRevision::query()->create([
-            'org_id' => (int) $article->org_id,
-            'article_id' => (int) $article->id,
-            'source_article_id' => (int) ($article->source_article_id ?: $article->id),
-            'translation_group_id' => (string) $article->translation_group_id,
-            'locale' => (string) $article->locale,
-            'source_locale' => (string) ($article->source_locale ?: $article->locale),
-            'revision_number' => 1,
-            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
-            'source_version_hash' => $article->source_version_hash,
-            'translated_from_version_hash' => $article->translated_from_version_hash ?: $article->source_version_hash,
-            'supersedes_revision_id' => null,
-            'title' => (string) $article->title,
-            'excerpt' => $article->excerpt,
-            'content_md' => (string) $article->content_md,
-            'seo_title' => null,
-            'seo_description' => null,
-            'published_at' => $article->published_at,
+        DB::connection('seo_intel')->table('seo_urls')->insert([
+            'canonical_url_hash' => $hash,
+            'canonical_url' => $url,
+            'locale' => $locale,
+            'page_entity_type' => $type,
+            'page_family' => $type,
+            'entity_id_or_slug' => $entity,
+            'source_authority' => 'cms',
+            'authority_revision' => hash('sha256', 'authority|'.$url),
+            'canonical_revision' => $hash,
+            'indexability_state' => 'indexable',
+            'is_private_flow' => $isPrivate,
+            'metadata_json' => json_encode($metadata, JSON_THROW_ON_ERROR),
+            'material_authority_state' => $materialState,
+            'material_lastmod_at' => $materialLastmod,
+            'created_at' => '2026-01-01 00:00:00',
+            'updated_at' => '2026-01-01 00:00:00',
         ]);
-
-        $article->forceFill(['published_revision_id' => $revision->id])->save();
-
-        return $article->fresh(['publishedRevision']) ?? $article;
+        DB::connection('seo_intel')->table('seo_url_entities')->insert([
+            'canonical_url_hash' => $hash,
+            'locale' => $locale,
+            'page_entity_type' => $type,
+            'page_family' => $type,
+            'entity_id_or_slug' => $entity,
+            'entity_source' => 'cms',
+            'authority_status' => 'published_approved',
+            'authority_revision' => hash('sha256', 'authority|'.$url),
+            'canonical_revision' => $hash,
+            'binding_status' => 'current',
+            'current_binding_key' => hash('sha256', $type.'|'.$entity.'|'.$locale),
+            'attributes_json' => json_encode($attributes, JSON_THROW_ON_ERROR),
+            'created_at' => '2026-01-01 00:00:00',
+            'updated_at' => '2026-01-01 00:00:00',
+        ]);
     }
 
-    /**
-     * @return array<string, string>
-     */
-    private function sitemapEntries(string $xml): array
+    /** @return list<string> */
+    private function xmlUrls(string $body): array
     {
-        $document = simplexml_load_string($xml);
-        if ($document === false) {
-            $this->fail('Failed to parse sitemap XML.');
-        }
+        preg_match_all('#<loc>([^<]+)</loc>#', $body, $matches);
 
-        $document->registerXPathNamespace('s', 'http://www.sitemaps.org/schemas/sitemap/0.9');
-        $nodes = $document->xpath('/s:urlset/s:url');
-        if ($nodes === false) {
-            return [];
-        }
-
-        $entries = [];
-        foreach ($nodes as $node) {
-            $children = $node->children('http://www.sitemaps.org/schemas/sitemap/0.9');
-            $loc = trim((string) $children->loc);
-            if ($loc === '') {
-                continue;
-            }
-
-            $entries[$loc] = trim((string) $children->lastmod);
-        }
-
-        return $entries;
+        return $matches[1];
     }
 }
