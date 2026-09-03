@@ -146,8 +146,15 @@ final class Article15ExactPackageRevisionBoundAdapter
             if (! hash_equals($locks['state_sha256'], $secondObservation['state_sha256'])
                 || ! hash_equals($locks['revision_set_sha256'], $secondObservation['revision_set_sha256'])
                 || ! $this->deepEqual($observation['database_row_counts'], $secondObservation['database_row_counts'])) {
-                return [...$summary, 'ok' => false, 'error' => 'preflight_observation_drift'];
+                return [
+                    ...$summary,
+                    'ok' => false,
+                    'preflight_observation_drift' => 1,
+                    'error' => 'preflight_observation_drift',
+                ];
             }
+
+            $summary['preflight_observation_drift'] = 0;
         }
 
         if (! $execute || in_array($phase, ['snapshot', 'preflight', 'readback'], true)) {

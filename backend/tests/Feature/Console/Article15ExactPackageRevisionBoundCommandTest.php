@@ -89,6 +89,7 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
         $this->assertSame(15, $payload['approved']);
         $this->assertSame('article-public-payload.v1', $payload['projection_contract_version']);
         $this->assertSame(0, $payload['public_mutations']);
+        $this->assertSame(0, $payload['preflight_observation_drift']);
         $this->assertSame($snapshot['database_row_counts'], $payload['database_row_counts']);
         $this->assertSame([
             'articles' => 15,
@@ -218,7 +219,9 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
             }
         });
         $this->assertSame(1, Artisan::call('articles:article15-exact-package', $options));
-        $this->assertStringContainsString('preflight_observation_drift', Artisan::output());
+        $payload = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame(1, $payload['preflight_observation_drift']);
+        $this->assertSame('preflight_observation_drift', $payload['error']);
         $this->assertSame(0, ArticleEditorialPackageImport::query()->count());
     }
 
