@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Services\SeoAgentEvidence\External;
 
 use App\Services\SeoAgentEvidence\Competitive\CompetitivePageProjector;
+use App\Services\SeoAgentEvidence\Competitive\CompetitivePolicyObservationSet;
+use App\Services\SeoAgentEvidence\Competitive\CompetitivePolicySemanticReviewer;
 use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher;
 use App\Services\SeoAgentEvidence\Privacy\SeoPrivateDataScanner;
 use App\Services\SeoAgentEvidence\Privacy\SeoQueryHmac;
@@ -29,8 +31,11 @@ final class ExternalContentGateway
     /** @var array<string, float> */
     private array $lastRequestAt = [];
 
-    /** @var array<string, true> */
-    private array $validatedPolicyEvidence = [];
+    /** @var array<string, array{status:int,headers:array<string,string>,body:string,connected_ip:string}> */
+    private array $policyEvidence = [];
+
+    /** @var array<string, array<string, mixed>> */
+    private array $policyObservations = [];
 
     /** @var array<string, true> */
     private array $validatedRobots = [];
@@ -53,6 +58,8 @@ final class ExternalContentGateway
         private readonly SeoQueryHmac $queryHmac,
         private readonly ?RobotsPolicyEvaluator $robots = null,
         private readonly ?CompetitivePageProjector $projector = null,
+        private readonly ?CompetitivePolicySemanticReviewer $policyReviewer = null,
+        private readonly ?CompetitivePolicyObservationSet $observationSet = null,
     ) {}
 
     /** @return array<string, mixed> */
@@ -97,9 +104,9 @@ final class ExternalContentGateway
             return $this->hold('SOURCE_POLICY_HELD');
         }
         if (($policy['collection_state'] ?? 'approved') !== 'approved'
-            || ! is_string($policy['expires_at'] ?? null)
-            || strtotime((string) $policy['expires_at']) <= time()) {
-            return $this->hold('SOURCE_POLICY_EXPIRED');
+            || ! is_string($policy['reviewed_at'] ?? null)
+            || ! is_string($policy['expires_at'] ?? null)) {
+            return $this->hold('SOURCE_POLICY_HELD');
         }
 
         $globalLock = null;
@@ -284,15 +291,12 @@ final class ExternalContentGateway
                     return $this->hold(strtoupper($kind).'_POLICY_HELD', 'not_scanned', $externalReads);
                 }
                 $policyParts = $this->validateUrl($policyUrl, $policy);
-                $evidenceKey = $policyUrl.'|'.$expectedHash;
-                if (isset($this->validatedPolicyEvidence[$evidenceKey])) {
-                    continue;
-                }
                 $robotsDecision = $this->robotsDecision((string) $policyParts['host'], (string) ($policyParts['path'] ?? '/'), $policy, $externalReads);
                 if (! $robotsDecision) {
                     return $this->hold('ROBOTS_HELD', 'not_scanned', $externalReads);
                 }
-                $policyResponse = $this->requestPinned('GET', $policyUrl, $policy, 262144, $externalReads);
+                $policyResponse = $this->policyEvidence[$policyUrl]
+                    ??= $this->requestPinned('GET', $policyUrl, $policy, 262144, $externalReads);
                 if ($policyResponse['status'] !== 200 || $this->responseRedirected($policyResponse)
                     || ! $this->responseWithinLimit($policyResponse, 262144)) {
                     return $this->hold(strtoupper($kind).'_POLICY_HELD', 'not_scanned', $externalReads);
@@ -304,12 +308,24 @@ final class ExternalContentGateway
                 $normalized = $contentType === 'text/plain'
                     ? mb_strtolower(preg_replace('/\s+/u', ' ', trim($policyResponse['body'])) ?: '', 'UTF-8')
                     : $this->normalizedPolicyText($policyResponse['body']);
-                if (! hash_equals($expectedHash, $this->hasher->hash($normalized))) {
-                    return $this->hold(strtoupper($kind).'_POLICY_DRIFT', 'not_scanned', $externalReads);
+                $observedHash = $this->hasher->hash($normalized);
+                $expired = strtotime((string) $policy['expires_at']) <= time();
+                $drifted = ! hash_equals($expectedHash, $observedHash);
+                $review = ['decision' => 'approved', 'reason_code' => 'NONE'];
+                if ($expired || $drifted) {
+                    $review = ($this->policyReviewer ?? app(CompetitivePolicySemanticReviewer::class))->review(
+                        $kind,
+                        $policyResponse['body'],
+                        $normalized,
+                        $drifted,
+                    );
                 }
-                $this->validatedPolicyEvidence[$evidenceKey] = true;
+                $this->recordPolicyObservation($sourceId, $kind, $policy, $context, $expectedHash, $observedHash, $expired, $drifted, $review);
+                if ($review['decision'] !== 'approved') {
+                    return $this->hold($review['reason_code'], 'not_scanned', $externalReads, $sourceId, 'policy_review');
+                }
             }
-            if (! $this->robotsDecision($host, (string) ($parts['path'] ?? '/'), $policy, $externalReads)) {
+            if (! $this->robotsDecision($host, (string) ($parts['path'] ?? '/'), $policy, $externalReads, $sourceId, $context, true)) {
                 return $this->hold('ROBOTS_HELD', 'not_scanned', $externalReads);
             }
             $maxBytes = min(1048576, max(1, (int) ($policy['max_content_bytes'] ?? 524288)));
@@ -340,7 +356,7 @@ final class ExternalContentGateway
                     'policy_version' => (int) $policy['policy_version'],
                     'policy_hash' => (string) $policy['policy_hash'],
                     'status' => 'approved',
-                    'expires_at' => (string) $policy['expires_at'],
+                    'expires_at' => $this->sourceObservationValidUntil($sourceId, (string) $policy['expires_at']),
                 ],
             ]);
             $projection = ($this->projector ?? app(CompetitivePageProjector::class))->project($projectionInput, $semantic);
@@ -369,35 +385,94 @@ final class ExternalContentGateway
     }
 
     /** @param array<string, mixed> $policy */
-    private function robotsDecision(string $host, string $path, array $policy, int &$externalReads): bool
-    {
+    private function robotsDecision(
+        string $host,
+        string $path,
+        array $policy,
+        int &$externalReads,
+        string $sourceId = '',
+        array $context = [],
+        bool $observe = false,
+    ): bool {
         $url = 'https://'.$host.'/robots.txt';
         $decisionKey = $url.'|'.(string) ($policy['robots_evidence_hash'] ?? '').'|'.$path;
-        if (isset($this->validatedRobots[$decisionKey])) {
+        if (isset($this->validatedRobots[$decisionKey]) && ! $observe) {
             return true;
         }
-        $evidenceKey = $url.'|'.(string) ($policy['robots_evidence_hash'] ?? '');
-        $response = $this->robotsEvidence[$evidenceKey]
+        $response = $this->robotsEvidence[$url]
             ??= $this->requestPinned('GET', $url, $policy, 65536, $externalReads);
         if (! $this->responseWithinLimit($response, 65536) || $this->responseRedirected($response)) {
             return false;
         }
-        if ($response['status'] === 200 && ($policy['robots_url'] ?? null) === $url
-            && ! hash_equals((string) ($policy['robots_evidence_hash'] ?? ''), $this->hasher->hash($this->normalizedVisibleText($response['body'])))) {
-            return false;
+        $allowed = in_array($response['status'], [404, 410], true)
+            || ($response['status'] === 200
+                && ($this->robots ?? app(RobotsPolicyEvaluator::class))->allows($response['body'], $path));
+        if ($observe && $sourceId !== '') {
+            $expectedHash = (string) ($policy['robots_evidence_hash'] ?? '');
+            $observedHash = $this->hasher->hash($this->normalizedVisibleText($response['body']));
+            $expired = strtotime((string) ($policy['expires_at'] ?? '')) <= time();
+            $drifted = ! hash_equals($expectedHash, $observedHash);
+            $review = $allowed
+                ? ['decision' => 'approved', 'reason_code' => 'NONE']
+                : ['decision' => 'hold', 'reason_code' => 'ROBOTS_HELD'];
+            $this->recordPolicyObservation($sourceId, 'robots', $policy, $context, $expectedHash, $observedHash, $expired, $drifted, $review);
         }
-        if (in_array($response['status'], [404, 410], true)) {
-            return true;
-        }
-
-        $allowed = $response['status'] === 200
-            && ! $this->responseRedirected($response)
-            && ($this->robots ?? app(RobotsPolicyEvaluator::class))->allows($response['body'], $path);
         if ($allowed) {
             $this->validatedRobots[$decisionKey] = true;
         }
 
         return $allowed;
+    }
+
+    /** @param array<string, mixed> $policy @param array<string, mixed> $context @param array{decision:string,reason_code:string} $review */
+    private function recordPolicyObservation(
+        string $sourceId,
+        string $kind,
+        array $policy,
+        array $context,
+        string $baselineHash,
+        string $observedHash,
+        bool $expired,
+        bool $drifted,
+        array $review,
+    ): void {
+        $reviewedAt = ($expired || $drifted)
+            ? \Carbon\CarbonImmutable::now('UTC')
+            : \Carbon\CarbonImmutable::parse((string) $policy['reviewed_at'])->utc();
+        $validUntil = ($expired || $drifted)
+            ? $reviewedAt->addSeconds(min(2592000, max(1, (int) ($policy['max_validity_seconds'] ?? 2592000))))
+            : \Carbon\CarbonImmutable::parse((string) $policy['expires_at'])->utc();
+        $state = match (true) {
+            $expired && $drifted => 'expired_and_drift',
+            $expired => 'expired',
+            $drifted => 'hash_drift',
+            default => 'baseline_valid',
+        };
+        $observation = [
+            'source_id' => $sourceId,
+            'evidence_kind' => $kind,
+            'environment' => (string) ($context['environment'] ?? ''),
+            'release_ref' => (string) ($context['release_ref'] ?? ''),
+            'policy_hash' => (string) ($policy['policy_hash'] ?? ''),
+            'baseline_hash' => $baselineHash,
+            'observed_hash' => $observedHash,
+            'review_state' => $state,
+            'semantic_decision' => $review['decision'],
+            'reason_code' => $review['reason_code'],
+            'reviewed_at' => $reviewedAt->format('Y-m-d\TH:i:s\Z'),
+            'valid_until' => $validUntil->format('Y-m-d\TH:i:s\Z'),
+        ];
+        $this->policyObservations[$sourceId.'|'.$kind] = ($this->observationSet ?? app(CompetitivePolicyObservationSet::class))->seal($observation);
+    }
+
+    private function sourceObservationValidUntil(string $sourceId, string $fallback): string
+    {
+        $validUntil = array_map(
+            static fn (array $observation): string => (string) $observation['valid_until'],
+            array_filter($this->policyObservations, static fn (array $observation): bool => $observation['source_id'] === $sourceId),
+        );
+
+        return $validUntil === [] ? $fallback : min($validUntil);
     }
 
     /** @param array<string, mixed> $policy @return array{status:int,headers:array<string,string>,body:string,connected_ip:string} */
@@ -716,10 +791,12 @@ final class ExternalContentGateway
         ];
     }
 
-    /** @return array<string, int|string> */
+    /** @return array<string, mixed> */
     private function diagnostics(int $externalReads, string $sourceId, string $stage, string $reason): array
     {
-        return [
+        $observations = ($this->observationSet ?? app(CompetitivePolicyObservationSet::class))->ordered(array_values($this->policyObservations));
+
+        $diagnostics = [
             'external_reads' => max(0, min(self::MAX_TRANSPORT_ATTEMPTS, $externalReads)),
             'logical_requests' => max(0, min(self::MAX_TRANSPORT_ATTEMPTS, $this->logicalRequests)),
             'transport_attempts' => max(0, min(self::MAX_TRANSPORT_ATTEMPTS, $this->transportAttempts)),
@@ -728,6 +805,16 @@ final class ExternalContentGateway
             'failed_stage' => preg_match('/^[a-z_]{3,32}$/D', $stage) === 1 ? $stage : 'internal',
             'error_class' => preg_match('/^[A-Z0-9_]{3,64}$/D', $reason) === 1 ? $reason : 'EXTERNAL_GATEWAY_INTERNAL_HOLD',
         ];
+        if ($observations !== []) {
+            $diagnostics['policy_observations'] = $observations;
+            $diagnostics['policy_observation_set_hash'] = ($this->observationSet ?? app(CompetitivePolicyObservationSet::class))->hash($observations);
+            $diagnostics['policy_revalidation_count'] = count(array_filter(
+                $observations,
+                static fn (array $observation): bool => ($observation['review_state'] ?? null) !== 'baseline_valid',
+            ));
+        }
+
+        return $diagnostics;
     }
 
     /** @param array<string, mixed> $projection */

@@ -8,6 +8,7 @@ use App\Services\SeoAgentEvidence\Bundle\SeoEvidenceBundleFactory;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveEvidenceIngestionService;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveGatewayReader;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveMeasurementReadiness;
+use App\Services\SeoAgentEvidence\Competitive\CompetitivePolicyObservationSet;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveSourcePolicyRegistry;
 use App\Services\SeoAgentEvidence\Privacy\SeoPrivateDataScanner;
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
@@ -69,13 +70,13 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
             'fermatmind-big-five-en' => ['58aad528ad4ea70fecd7527fdb435739ce444db9de13935f850d32ef0eeffb0a', '61ec67d56b12c396382db5473664f1457c5f37cc9d03896f331b52a0e2a1e9a3', 'c2597aba68ffc3fdb9cc697f42f98e00440d5ee86362515301c1917a6749ba0d'],
             'fermatmind-big-five-zh' => ['58aad528ad4ea70fecd7527fdb435739ce444db9de13935f850d32ef0eeffb0a', '61ec67d56b12c396382db5473664f1457c5f37cc9d03896f331b52a0e2a1e9a3', 'c2597aba68ffc3fdb9cc697f42f98e00440d5ee86362515301c1917a6749ba0d'],
             'bigfive-test' => ['b265717eeca2bceb69a8605bc3a17e8d3a961c5dfe2a49c37f42c27b0cb75869', 'b265717eeca2bceb69a8605bc3a17e8d3a961c5dfe2a49c37f42c27b0cb75869', '15441e54b432b2353bbc634cfd2c7ef22d6947ac396184ed3c2ee63fab56c564'],
-            'jobcannon' => ['75fc747de7ab9b0f1ad19b18ceb4a9f001630aec95b9d93d6bdbe8313278ffbc', 'b629bbe160ab05997cea7ba7235acf410a7e7072b76dfabf70591ae2880cfb86', 'e286629fa90f3adefefa64555ed5bee3343c1062c1f2fe9895896dc6b788a85c'],
+            'jobcannon' => ['f277997cebb5e972e344d20b53eb2f5855d717199f2e0830704f6ac6a160fd09', 'b629bbe160ab05997cea7ba7235acf410a7e7072b76dfabf70591ae2880cfb86', 'e286629fa90f3adefefa64555ed5bee3343c1062c1f2fe9895896dc6b788a85c'],
         ];
         $expectedReviewWindows = [
             'fermatmind-big-five-en' => ['2026-09-02T12:21:07Z', '2026-10-02T12:21:07Z'],
             'fermatmind-big-five-zh' => ['2026-09-02T12:21:07Z', '2026-10-02T12:21:07Z'],
             'bigfive-test' => ['2026-09-02T13:09:56Z', '2026-10-02T13:09:56Z'],
-            'jobcannon' => ['2026-09-02T22:00:00Z', '2026-10-02T22:00:00Z'],
+            'jobcannon' => ['2026-09-03T11:02:59Z', '2026-10-03T11:02:59Z'],
         ];
         foreach ($registry->policies() as $sourceId => $policy) {
             $this->assertSame($expectedReviewWindows[$sourceId][0], $policy['reviewed_at']);
@@ -86,7 +87,6 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
                 $policy['robots_evidence_hash'],
             ]);
             $this->assertLessThanOrEqual(2592000, strtotime($policy['expires_at']) - strtotime($policy['reviewed_at']));
-            $this->assertGreaterThan(time(), strtotime($policy['expires_at']));
             $this->assertSame(['url_hash', 'content_hash', 'structural_projection', 'review_decision'], $policy['retention_scope']);
             $this->assertTrue($policy['prohibitions']['raw_html_retention']);
             $this->assertTrue($policy['prohibitions']['competitor_text_retention']);
@@ -101,7 +101,7 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
     {
         $sha = str_repeat('a', 40);
         $builder = app(CompetitiveCloseoutBuilder::class);
-        config()->set('seo_agent_evidence.allowed_sources', ['a' => [], 'b' => [], 'c' => [], 'd' => []]);
+        config()->set('seo_agent_evidence.allowed_sources', app(CompetitiveSourcePolicyRegistry::class)->policies());
         $ingestion = [
             'status' => 'READY',
             'hold_reason' => 'NONE',
@@ -110,16 +110,17 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
                 'status' => 'READY',
                 '11i_handoff' => ['source_freshness' => 'fresh', 'source_count' => 2],
             ],
-            'dependency_ingestion' => [
-                'external_reads' => 12,
-                'bundle_hash' => str_repeat('d', 64),
-                'release_ref' => app(\App\Services\SeoAgentEvidence\Competitive\CompetitiveReleaseIdentity::class)->reference('production', $sha),
-            ],
             'policy_snapshot' => app(CompetitiveSourcePolicyRegistry::class)->snapshot('competitive.big-five.live.v2'),
             'measurement' => $this->readyMeasurement(),
         ];
 
-        $staging = $builder->buildRuntime($ingestion, $sha, 'staging');
+        $stagingIngestion = $ingestion;
+        $stagingIngestion['dependency_ingestion'] = $this->readyPolicyDiagnostics('staging', $sha) + [
+            'external_reads' => 12,
+            'bundle_hash' => str_repeat('d', 64),
+            'release_ref' => app(\App\Services\SeoAgentEvidence\Competitive\CompetitiveReleaseIdentity::class)->reference('staging', $sha),
+        ];
+        $staging = $builder->buildRuntime($stagingIngestion, $sha, 'staging');
         $this->assertSame('HOLD', $staging['SEO-PLATFORM-11G']);
         $this->assertSame('STAGING_VALIDATED', $staging['closeout_state']);
         $this->assertSame('NONE', $staging['competitive_hold_reason']);
@@ -127,7 +128,13 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
         $this->assertSame('NONE', $staging['cro_measurement']['hold_reason']);
         $this->assertSame(12, $staging['dependency_ingestion']['external_reads']);
 
-        $preactivation = $builder->buildRuntime($ingestion, $sha, 'production');
+        $productionIngestion = $ingestion;
+        $productionIngestion['dependency_ingestion'] = $this->readyPolicyDiagnostics('production', $sha) + [
+            'external_reads' => 12,
+            'bundle_hash' => str_repeat('d', 64),
+            'release_ref' => app(\App\Services\SeoAgentEvidence\Competitive\CompetitiveReleaseIdentity::class)->reference('production', $sha),
+        ];
+        $preactivation = $builder->buildRuntime($productionIngestion, $sha, 'production');
         $this->assertSame('HOLD', $preactivation['closeout_state']);
         $this->assertNull($preactivation['production_sha']);
         $mismatch = $builder->finalizeRuntime($preactivation, str_repeat('b', 40));
@@ -160,6 +167,21 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('COMPETITIVE_SOURCE_POLICY_INVALID');
         $method->invoke($registry, $policy, $source, (string) $sourceRegistry['registry_revision']);
+    }
+
+    public function test_v3_policy_registry_accepts_expired_baseline_for_runtime_semantic_review(): void
+    {
+        $registry = app(CompetitiveSourcePolicyRegistry::class);
+        $sourceRegistry = $registry->sourceRegistry();
+        $source = (array) $sourceRegistry['sources'][0];
+        $policy = $registry->policies()[(string) $source['source_id']];
+        $policy['reviewed_at'] = '2026-07-01T00:00:00Z';
+        $policy['expires_at'] = '2026-07-31T00:00:00Z';
+
+        $method = new \ReflectionMethod($registry, 'assertPolicy');
+        $method->invoke($registry, $policy, $source, (string) $sourceRegistry['registry_revision']);
+
+        $this->addToAssertionCount(1);
     }
 
     public function test_v3_policy_registry_rejects_license_masquerading_as_terms(): void
@@ -239,6 +261,42 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
             'search_measurement' => $mode,
             'cro_measurement' => $mode,
             'bundles' => [],
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    private function readyPolicyDiagnostics(string $environment, string $sha): array
+    {
+        $hasher = app(\App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher::class);
+        $releaseRef = app(\App\Services\SeoAgentEvidence\Competitive\CompetitiveReleaseIdentity::class)->reference($environment, $sha);
+        $observations = [];
+        foreach (app(CompetitiveSourcePolicyRegistry::class)->policies() as $sourceId => $policy) {
+            foreach (['terms', 'license', 'robots'] as $kind) {
+                $baselineHash = $kind === 'robots'
+                    ? $policy['robots_evidence_hash']
+                    : $policy[$kind.'_content_hash'];
+                $observations[] = app(CompetitivePolicyObservationSet::class)->seal([
+                    'source_id' => $sourceId,
+                    'evidence_kind' => $kind,
+                    'environment' => $environment,
+                    'release_ref' => $releaseRef,
+                    'policy_hash' => $policy['policy_hash'],
+                    'baseline_hash' => $baselineHash,
+                    'observed_hash' => $baselineHash,
+                    'review_state' => 'baseline_valid',
+                    'semantic_decision' => 'approved',
+                    'reason_code' => 'NONE',
+                    'reviewed_at' => $policy['reviewed_at'],
+                    'valid_until' => $policy['expires_at'],
+                ]);
+            }
+        }
+        $observations = app(CompetitivePolicyObservationSet::class)->ordered($observations);
+
+        return [
+            'policy_observations' => $observations,
+            'policy_observation_set_hash' => app(CompetitivePolicyObservationSet::class)->hash($observations),
+            'policy_revalidation_count' => 0,
         ];
     }
 

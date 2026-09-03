@@ -94,6 +94,11 @@ final class SeoPlatform11G6CompetitiveBundleSafetyTest extends TestCase
 
                 return $input;
             },
+            function (array $input): array {
+                $input['payload']['policy_observations'][0]['observed_hash'] = str_repeat('f', 64);
+
+                return $input;
+            },
         ];
 
         foreach ($mutations as $expected => $mutation) {

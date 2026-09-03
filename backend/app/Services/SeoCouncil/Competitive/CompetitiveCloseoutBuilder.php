@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\SeoCouncil\Competitive;
 
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveEvidenceContractRegistry;
+use App\Services\SeoAgentEvidence\Competitive\CompetitivePolicyObservationSet;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveReleaseIdentity;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveSourcePolicyRegistry;
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
@@ -24,6 +25,7 @@ final class CompetitiveCloseoutBuilder
         private readonly GoldenRoutingEvaluator $routing,
         private readonly SeoRegistryHasher $hasher,
         private readonly CompetitiveReleaseIdentity $releaseIdentity,
+        private readonly CompetitivePolicyObservationSet $observations,
     ) {}
 
     /** @return array<string, mixed> */
@@ -96,6 +98,7 @@ final class CompetitiveCloseoutBuilder
             && data_get($output, '11i_handoff.source_freshness') === 'fresh'
             && (int) data_get($output, '11i_handoff.source_count', 0) >= 2
             && $this->snapshotReady($snapshot)
+            && $this->policyObservationsReady($ingestion, $environment, $releaseRef, (string) ($snapshot['source_policy_set_hash'] ?? ''), $controlledSources)
             && $controlledSources === 4;
         $stagingValidated = $ready && $environment === 'staging' && $activationObservation === null;
         $closed = $ready && $environment === 'production'
@@ -208,7 +211,14 @@ final class CompetitiveCloseoutBuilder
                 (string) data_get($receipt, 'dependency_ingestion.bundle_hash', ''),
             )
             && $this->measurementReady((array) ($receipt['search_measurement'] ?? []))
-            && $this->measurementReady((array) ($receipt['cro_measurement'] ?? []));
+            && $this->measurementReady((array) ($receipt['cro_measurement'] ?? []))
+            && $this->policyObservationsReady(
+                ['dependency_ingestion' => (array) ($receipt['dependency_ingestion'] ?? [])],
+                'production',
+                (string) data_get($receipt, 'dependency_ingestion.release_ref', ''),
+                (string) ($receipt['source_policy_set_hash'] ?? ''),
+                4,
+            );
 
         return $actual === $expected
             && ($receipt['receipt_version'] ?? null) === 'seo.competitive_evidence_closeout.v3'
@@ -284,6 +294,35 @@ final class CompetitiveCloseoutBuilder
         $reason = (string) $reason;
 
         return preg_match('/^[A-Z0-9_]{3,64}$/D', $reason) === 1 ? $reason : 'SOURCE_POLICY_HOLD';
+    }
+
+    /** @param array<string, mixed> $ingestion */
+    private function policyObservationsReady(
+        array $ingestion,
+        string $environment,
+        string $releaseRef,
+        string $policySetHash,
+        int $expectedSources,
+    ): bool {
+        $observations = data_get($ingestion, 'dependency_ingestion.policy_observations');
+        $setHash = data_get($ingestion, 'dependency_ingestion.policy_observation_set_hash');
+        $controlledPolicies = (array) config('seo_agent_evidence.allowed_sources', []);
+        $expectedSourceIds = array_keys($controlledPolicies);
+        $expectedPolicies = array_map(
+            static fn (mixed $policy): string => is_array($policy) ? (string) ($policy['policy_hash'] ?? '') : '',
+            $controlledPolicies,
+        );
+        if (! is_array($observations) || ! is_string($setHash)
+            || ! $this->observations->verify($observations, $setHash, $environment, $releaseRef, $policySetHash, $expectedSources, $expectedSourceIds, $expectedPolicies)) {
+            return false;
+        }
+        $expectedRevalidations = count(array_filter(
+            $observations,
+            static fn (array $observation): bool => ($observation['review_state'] ?? null) !== 'baseline_valid',
+        ));
+
+        return (int) data_get($ingestion, 'dependency_ingestion.policy_revalidation_count', -1) === $expectedRevalidations
+            && array_filter($observations, static fn (array $observation): bool => ($observation['semantic_decision'] ?? null) !== 'approved') === [];
     }
 
     /** @param array<string, mixed>|null $observation */

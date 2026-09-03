@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\SeoIntel\Concerns;
 
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveEvidenceAnalyzer;
+use App\Services\SeoAgentEvidence\Competitive\CompetitivePolicyObservationSet;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveReleaseIdentity;
 use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher;
 
@@ -53,6 +54,33 @@ trait BuildsCompetitiveEvidenceBundle
             'dependency_ingestion' => ['external_reads' => 12],
         ]);
         $releaseRef = app(CompetitiveReleaseIdentity::class)->reference($environment, $releaseSha);
+        $policyObservations = [];
+        foreach ($projections as $projection) {
+            foreach (['terms', 'license', 'robots'] as $kind) {
+                $baselineHash = $hasher->hash([$projection['source_id'], $kind, 'baseline']);
+                $policyObservations[] = app(CompetitivePolicyObservationSet::class)->seal([
+                    'source_id' => $projection['source_id'],
+                    'evidence_kind' => $kind,
+                    'environment' => $environment,
+                    'release_ref' => $releaseRef,
+                    'policy_hash' => $projection['source_policy_ref']['policy_hash'],
+                    'baseline_hash' => $baselineHash,
+                    'observed_hash' => $baselineHash,
+                    'review_state' => 'baseline_valid',
+                    'semantic_decision' => 'approved',
+                    'reason_code' => 'NONE',
+                    'reviewed_at' => '2026-09-03T00:00:00Z',
+                    'valid_until' => '2026-10-03T00:00:00Z',
+                ]);
+            }
+        }
+        $policyObservations = app(CompetitivePolicyObservationSet::class)->ordered($policyObservations);
+        $policyHashes = array_values(array_unique(array_map(
+            static fn (array $projection): string => $projection['source_policy_ref']['policy_hash'],
+            $projections,
+        )));
+        sort($policyHashes, SORT_STRING);
+        $sourcePolicySetHash = $hasher->hash($policyHashes);
 
         return [
             'bundle_id' => 'competitive:'.$environment.':'.$releaseRef,
@@ -77,7 +105,9 @@ trait BuildsCompetitiveEvidenceBundle
                 'environment' => $environment,
                 'release_ref' => $releaseRef,
                 'cohort_id' => 'competitive.big-five.live.v2',
-                'source_policy_set_hash' => 'f1b0ed4903667883cabe128b5c2ecc1e90bc91ef4c1b6381a1b0ed0450be9499',
+                'source_policy_set_hash' => $sourcePolicySetHash,
+                'policy_observations' => $policyObservations,
+                'policy_observation_set_hash' => app(CompetitivePolicyObservationSet::class)->hash($policyObservations),
                 'measurement_bundle_set_hash' => $hasher->hash(['measurement-set']),
                 'projections' => $projections,
                 'competitive_output' => $output,

@@ -15,6 +15,8 @@ final class CompetitiveEvidenceBundlePayloadGuard
         'release_ref',
         'cohort_id',
         'source_policy_set_hash',
+        'policy_observations',
+        'policy_observation_set_hash',
         'measurement_bundle_set_hash',
         'projections',
         'competitive_output',
@@ -34,6 +36,7 @@ final class CompetitiveEvidenceBundlePayloadGuard
         private readonly CompetitiveEvidenceBoundaryGuard $boundary,
         private readonly SeoPrivateDataScanner $privacy,
         private readonly ExternalInjectionScanner $injection,
+        private readonly CompetitivePolicyObservationSet $observations,
     ) {}
 
     /** @param array<string, mixed> $payload @return array{valid:bool,code:string} */
@@ -44,6 +47,7 @@ final class CompetitiveEvidenceBundlePayloadGuard
             || preg_match('/^release_[a-p]{64}$/D', (string) ($payload['release_ref'] ?? '')) !== 1
             || preg_match('/^[a-z0-9][a-z0-9._:-]{0,127}$/D', (string) ($payload['cohort_id'] ?? '')) !== 1
             || ! $this->hash($payload['source_policy_set_hash'] ?? null)
+            || ! $this->hash($payload['policy_observation_set_hash'] ?? null)
             || ! $this->hash($payload['measurement_bundle_set_hash'] ?? null)) {
             return ['valid' => false, 'code' => 'COMPETITIVE_PAYLOAD_SCHEMA_INVALID'];
         }
@@ -53,6 +57,7 @@ final class CompetitiveEvidenceBundlePayloadGuard
             return ['valid' => false, 'code' => 'COMPETITIVE_PAYLOAD_PROJECTIONS_INVALID'];
         }
         $sourceIds = [];
+        $sourcePolicies = [];
         $competitorCount = 0;
         $evidenceRefs = (array) data_get($payload, 'competitive_output.findings.0.evidence_refs', []);
         foreach ($projections as $projection) {
@@ -72,12 +77,25 @@ final class CompetitiveEvidenceBundlePayloadGuard
                 return ['valid' => false, 'code' => 'COMPETITIVE_PAYLOAD_PROJECTIONS_INVALID'];
             }
             $sourceIds[] = (string) $projection['source_id'];
+            $sourcePolicies[(string) $projection['source_id']] = (string) data_get($projection, 'source_policy_ref.policy_hash', '');
             if (($projection['source_class'] ?? null) === 'competitor_public') {
                 $competitorCount++;
             }
         }
         if (count($sourceIds) !== count(array_unique($sourceIds)) || $competitorCount < 2) {
             return ['valid' => false, 'code' => 'COMPETITIVE_PAYLOAD_PROJECTIONS_INVALID'];
+        }
+        if (! $this->observations->verify(
+            is_array($payload['policy_observations'] ?? null) ? $payload['policy_observations'] : [],
+            (string) $payload['policy_observation_set_hash'],
+            (string) $payload['environment'],
+            (string) $payload['release_ref'],
+            (string) $payload['source_policy_set_hash'],
+            count($sourceIds),
+            $sourceIds,
+            $sourcePolicies,
+        )) {
+            return ['valid' => false, 'code' => 'COMPETITIVE_PAYLOAD_POLICY_OBSERVATIONS_INVALID'];
         }
 
         $output = $payload['competitive_output'] ?? null;

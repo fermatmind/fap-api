@@ -195,7 +195,7 @@ final class CompetitiveSourcePolicyRegistry
             || ($policy['robots_decision'] ?? null) !== 'approved'
             || ($policy['retention_scope'] ?? null) !== ['url_hash', 'content_hash', 'structural_projection', 'review_decision']
             || $reviewed->greaterThan(now('UTC'))
-            || $expires->lessThanOrEqualTo(now('UTC'))
+            || $expires->lessThanOrEqualTo($reviewed)
             || $reviewed->diffInSeconds($expires) > 2592000
             || (int) ($policy['max_validity_seconds'] ?? 0) > 2592000) {
             throw new RuntimeException('COMPETITIVE_SOURCE_POLICY_INVALID');

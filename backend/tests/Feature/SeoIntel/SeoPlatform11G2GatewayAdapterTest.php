@@ -6,6 +6,7 @@ namespace Tests\Feature\SeoIntel;
 
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveEvidenceBoundaryGuard;
 use App\Services\SeoAgentEvidence\Competitive\CompetitivePageProjector;
+use App\Services\SeoAgentEvidence\Competitive\CompetitivePolicySemanticReviewer;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveSourceRegistry;
 use App\Services\SeoAgentEvidence\External\ExternalContentGateway;
 use App\Services\SeoAgentEvidence\External\ExternalContentGatewayException;
@@ -51,7 +52,63 @@ final class SeoPlatform11G2GatewayAdapterTest extends TestCase
         $this->assertNotSame($normalizer->invoke($gateway, $first), $normalizer->invoke($gateway, $policyChanged));
     }
 
-    public function test_competitive_gateway_reads_identical_terms_and_license_evidence_once(): void
+    public function test_policy_semantic_review_allows_safe_drift_and_fails_closed_on_real_risk(): void
+    {
+        $reviewer = app(CompetitivePolicySemanticReviewer::class);
+
+        $this->assertSame(
+            ['decision' => 'approved', 'reason_code' => 'NONE'],
+            $reviewer->review(
+                'terms',
+                '<main><h1>Terms of Service</h1><p>User conduct and service access.</p></main>',
+                'terms of service user conduct and service access.',
+                true,
+            ),
+        );
+        $this->assertSame(
+            ['decision' => 'approved', 'reason_code' => 'NONE'],
+            $reviewer->review(
+                'license',
+                '<main>Public REST API for AI agents. No API key. Structured metadata embed.</main>',
+                'public rest api for ai agents. no api key. structured metadata embed.',
+                true,
+            ),
+        );
+        $this->assertSame(
+            'TERMS_AUTOMATION_PROHIBITED',
+            $reviewer->review('terms', '<main>Bots and scraping are prohibited.</main>', 'bots and scraping are prohibited.', true)['reason_code'],
+        );
+        $this->assertSame(
+            'LICENSE_STRUCTURE_SCOPE_AMBIGUOUS',
+            $reviewer->review('license', '<main>Copyright owner.</main>', 'copyright owner.', true)['reason_code'],
+        );
+        $this->assertSame(
+            'POLICY_LOGIN_REQUIRED',
+            $reviewer->review('terms', '<input type="password">', '', true)['reason_code'],
+        );
+        $this->assertSame(
+            'POLICY_PAYWALL_HELD',
+            $reviewer->review('terms', '<main data-paywall="true">Subscribe to continue.</main>', 'subscribe to continue.', true)['reason_code'],
+        );
+        $this->assertSame(
+            'POLICY_CAPTCHA_HELD',
+            $reviewer->review('license', '<div class="hcaptcha" data-sitekey="public"></div>', '', true)['reason_code'],
+        );
+        $this->assertSame(
+            'LICENSE_AUTOMATION_PROHIBITED',
+            $reviewer->review('license', '<main>Automated access is forbidden.</main>', 'automated access is forbidden.', true)['reason_code'],
+        );
+        $this->assertSame(
+            ['decision' => 'approved', 'reason_code' => 'NONE'],
+            $reviewer->review('license', '<main>Automated access is not prohibited.</main>', 'automated access is not prohibited.', false),
+        );
+        $this->assertSame(
+            ['decision' => 'approved', 'reason_code' => 'NONE'],
+            $reviewer->review('license', '<main>Previously approved baseline.</main>', 'previously approved baseline.', false),
+        );
+    }
+
+    public function test_competitive_gateway_auto_reviews_expiry_and_safe_hash_drift_with_one_shared_read(): void
     {
         $hasher = app(\App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher::class);
         $transport = new class implements ExternalContentTransport
@@ -69,7 +126,7 @@ final class SeoPlatform11G2GatewayAdapterTest extends TestCase
                 }
                 $body = match ($url) {
                     'https://example.com/robots.txt' => "User-agent: *\nDisallow:",
-                    'https://example.com/policy' => '<main><p>MIT license permits structural use.</p></main>',
+                    'https://example.com/policy' => '<main><h1>Terms of Service</h1><p>User conduct and service access.</p><p>Public REST API for AI agents. No API key. Structured metadata embed.</p></main>',
                     default => '<main><section class="hero"><h1>Public Big Five</h1><a href="/tests/related">Related test</a></section></main>',
                 };
 
@@ -92,7 +149,7 @@ final class SeoPlatform11G2GatewayAdapterTest extends TestCase
             }
         };
         $policyUrl = 'https://example.com/policy';
-        $policyEvidenceHash = $hasher->hash('mit license permits structural use.');
+        $policyEvidenceHash = $hasher->hash('previous approved baseline.');
         config()->set('seo_agent_evidence.external_fetch_enabled', true);
         config()->set('seo_agent_evidence.agent_external_egress', false);
         config()->set('seo_agent_evidence.allowed_sources', ['public' => [
@@ -117,7 +174,8 @@ final class SeoPlatform11G2GatewayAdapterTest extends TestCase
             'connect_timeout_seconds' => 3,
             'request_timeout_seconds' => 8,
             'terms_status' => 'approved',
-            'terms_reviewed_at' => '2026-09-02T00:00:00Z',
+            'terms_reviewed_at' => '2026-08-01T00:00:00Z',
+            'reviewed_at' => '2026-08-01T00:00:00Z',
             'terms_url' => $policyUrl,
             'terms_url_hash' => $hasher->hash($policyUrl),
             'terms_evidence_hash' => $policyEvidenceHash,
@@ -132,7 +190,8 @@ final class SeoPlatform11G2GatewayAdapterTest extends TestCase
             'retention_class' => 'external_structured_fact',
             'data_usage_purpose' => 'competitive_evidence',
             'collection_state' => 'approved',
-            'expires_at' => '2026-10-02T00:00:00Z',
+            'expires_at' => '2026-08-31T00:00:00Z',
+            'max_validity_seconds' => 2592000,
         ]]);
         $gateway = new ExternalContentGateway(
             $dns,
@@ -150,11 +209,21 @@ final class SeoPlatform11G2GatewayAdapterTest extends TestCase
             'source_class' => 'competitor_public',
             'page_family' => 'tests',
             'locale' => 'en',
+            'environment' => 'staging',
+            'release_ref' => 'release_'.str_repeat('a', 64),
         ], app(CompetitiveSourceRegistry::class)->semanticRegistry());
 
-        $this->assertSame('ready', $result['status']);
+        $this->assertSame('ready', $result['status'], json_encode($result, JSON_THROW_ON_ERROR));
         $this->assertSame(4, $result['dependency_ingestion']['external_reads']);
         $this->assertSame(1, $result['dependency_ingestion']['retry_count']);
+        $this->assertCount(3, $result['dependency_ingestion']['policy_observations']);
+        $this->assertSame(3, $result['dependency_ingestion']['policy_revalidation_count']);
+        $states = array_values(array_unique(array_column($result['dependency_ingestion']['policy_observations'], 'review_state')));
+        sort($states, SORT_STRING);
+        $this->assertSame(['expired', 'expired_and_drift'], $states);
+        $encodedObservations = json_encode($result['dependency_ingestion']['policy_observations'], JSON_THROW_ON_ERROR);
+        $this->assertStringNotContainsString('example.com', $encodedObservations);
+        $this->assertStringNotContainsString('Terms of Service', $encodedObservations);
         $this->assertSame(1, count(array_filter($transport->requests, static fn (string $url): bool => $url === $policyUrl)));
     }
 
