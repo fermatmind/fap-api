@@ -67,8 +67,6 @@ const isPersonalityCurrentBoundary = (path) => PERSONALITY_CURRENT_BOUNDARY_MATR
 );
 
 const SEO_COUNCIL_CONTROL_PLANE_PATHS = new Set([
-  ".github/trunk/classify-paths.mjs",
-  ".github/trunk/classify-paths.test.mjs",
   ".github/trunk/seo-council-workflow-contract.test.mjs",
   ".github/trunk/seo-platform-11e-runtime-dependency-contract.test.mjs",
   ".github/trunk/seo-platform-11f-measurement-contract.test.mjs",
@@ -76,6 +74,11 @@ const SEO_COUNCIL_CONTROL_PLANE_PATHS = new Set([
   ".github/workflows/ci.yml",
   ".github/workflows/deploy.yml",
   "deploy.php",
+]);
+
+const SEO_CLASSIFIER_CONTROL_PLANE_PATHS = new Set([
+  ".github/trunk/classify-paths.mjs",
+  ".github/trunk/classify-paths.test.mjs",
 ]);
 
 const isSeoCouncilOrchestrationBoundary = (path) =>
@@ -96,6 +99,11 @@ const isSeoCompetitiveEvidenceBoundary = (path) =>
   || path === ".github/trunk/classify-paths.test.mjs"
   || path === ".github/trunk/seo-platform-11g-competitive-evidence-contract.test.mjs";
 
+export const SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE = "DEFERRED_NON_BLOCKING";
+
+const isDeferredCompetitiveCouncilBoundary = (path) =>
+  path.startsWith("backend/app/Services/SeoCouncil/Competitive/");
+
 export function classifyPaths(inputPaths) {
   const paths = [...new Set(inputPaths.map(normalize).filter(Boolean))].sort();
   if (paths.length === 0) throw new Error("changed path set must not be empty");
@@ -103,7 +111,9 @@ export function classifyPaths(inputPaths) {
   const result = Object.fromEntries(CATEGORIES.map((category) => [category, false]));
   const reasons = Object.fromEntries(CATEGORIES.map((category) => [category, []]));
   const publisherRequired = paths.some(isCareerPublisherBoundary);
-  const seoCompetitiveEvidence = paths.some(isSeoCompetitiveEvidenceBoundary);
+  const seoCompetitiveEvidenceAffected = paths.some(isSeoCompetitiveEvidenceBoundary);
+  const seoCompetitiveEvidence = SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE === "ACTIVE"
+    && seoCompetitiveEvidenceAffected;
   const operations = {
     publisher_required: publisherRequired,
     career_current_authority_release: paths.some(isCareerAuthorityReleaseBoundary),
@@ -123,8 +133,15 @@ export function classifyPaths(inputPaths) {
     seo_agent_policy_gateway: paths.some((path) =>
       /^backend\/(?:app\/Services\/SeoAgentPolicyGateway\/|app\/Console\/Commands\/SeoPolicyGatewayCloseout\.php$|resources\/seo-agent\/policy-gateway\/|docs\/(?:seo\/generated\/seo-policy-gateway-contract-manifest\.v1\.json$|contracts\/openapi\.snapshot\.json$)|scripts\/seo\/export_seo_policy_gateway_contracts\.php$|tests\/Feature\/SeoIntel\/SeoPlatform11C|tests\/Feature\/Ops\/SeoUxImpl06AgentCouncilTest\.php$|app\/Filament\/Ops\/Support\/SeoAgentCouncilUiContract\.php$|resources\/views\/filament\/ops\/components\/ops-agent-council-workspace\.blade\.php$|app\/Http\/Controllers\/API\/V0_5\/Ops\/SeoIntel\/SeoIntelDashboardController\.php$|routes\/api\.php$)/.test(path)
     ),
-    seo_council_orchestration: paths.some(isSeoCouncilOrchestrationBoundary) || seoCompetitiveEvidence,
+    seo_council_orchestration: paths.some((path) =>
+      isSeoCouncilOrchestrationBoundary(path)
+      && !(SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE === "DEFERRED_NON_BLOCKING"
+        && isDeferredCompetitiveCouncilBoundary(path))
+    ) || seoCompetitiveEvidence,
     seo_competitive_evidence: seoCompetitiveEvidence,
+    seo_competitive_evidence_state: SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE,
+    seo_competitive_evidence_progress: "NEARLY_COMPLETE",
+    seo_competitive_evidence_blocks_delivery: false,
   };
   let testsChanged = false;
 
@@ -142,7 +159,8 @@ export function classifyPaths(inputPaths) {
       /(^|\/)(?:tests?|__tests__)\//,
       /(?:Test\.php|\.test\.[cm]?[jt]sx?)$/,
     ]);
-    const seoCouncilControlPlane = SEO_COUNCIL_CONTROL_PLANE_PATHS.has(path);
+    const seoCouncilControlPlane = SEO_COUNCIL_CONTROL_PLANE_PATHS.has(path)
+      || SEO_CLASSIFIER_CONTROL_PLANE_PATHS.has(path);
     testsChanged ||= testPath;
     const payment = matches(path, [
       /(^|\/)(?:Commerce|Payments?|Billing|Entitlement)(\/|\.)/i,

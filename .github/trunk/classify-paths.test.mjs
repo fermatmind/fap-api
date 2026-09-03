@@ -26,7 +26,7 @@ test("keeps repository Skills rules-only when their names contain domain keyword
   assert.equal(result.flags.seo_discoverability, false);
 });
 
-test("deploys SEO Council classifier changes for exact-SHA runtime closeout", () => {
+test("deploys classifier changes without coupling them to deferred Council closeout", () => {
   const result = classifyPaths([
     ".github/trunk/classify-paths.mjs",
     ".github/trunk/classify-paths.test.mjs",
@@ -34,7 +34,8 @@ test("deploys SEO Council classifier changes for exact-SHA runtime closeout", ()
   assert.deepEqual(result.categories, ["infrastructure_deployment"]);
   assert.equal(result.deploy, true);
   assert.equal(result.tests_changed, true);
-  assert.equal(result.operations.seo_council_orchestration, true);
+  assert.equal(result.operations.seo_council_orchestration, false);
+  assert.equal(result.operations.seo_competitive_evidence_state, "DEFERRED_NON_BLOCKING");
 });
 
 test("keeps all SEO platform closeout evidence docs-only", () => {
@@ -251,8 +252,6 @@ test("binds deterministic SEO Council orchestration to every 11D through 11F lay
     "backend/tests/Feature/SeoIntel/SeoPlatform11EDiagnosisEvaluationTest.php",
     "backend/tests/Feature/SeoIntel/SeoPlatform11FRoutingCloseoutTest.php",
     ".agents/skills/fermatmind-global-seo-geo-growth-scan/SKILL.md",
-    ".github/trunk/classify-paths.mjs",
-    ".github/trunk/classify-paths.test.mjs",
     ".github/trunk/seo-council-workflow-contract.test.mjs",
     ".github/trunk/seo-platform-11e-runtime-dependency-contract.test.mjs",
     ".github/trunk/seo-platform-11f-measurement-contract.test.mjs",
@@ -314,23 +313,42 @@ test("keeps adjacent GSC discoverability behavior in the SEO lane", () => {
 });
 test("classifies deployment infrastructure", () => assert.equal(has([".github/workflows/ci.yml"], "infrastructure_deployment"), true));
 
-test("11G competitive evidence changes select the controlled ingestion operation", () => {
+test("11G competitive evidence remains visible but deferred and non-blocking", () => {
   const result = classifyPaths([
     "backend/app/Services/SeoAgentEvidence/Competitive/CompetitiveEvidenceIngestionService.php",
   ]);
-  assert.equal(result.operations.seo_competitive_evidence, true);
-  assert.equal(result.operations.seo_council_orchestration, true);
+  assert.equal(result.operations.seo_competitive_evidence, false);
+  assert.equal(result.operations.seo_council_orchestration, false);
+  assert.equal(result.operations.seo_competitive_evidence_state, "DEFERRED_NON_BLOCKING");
+  assert.equal(result.operations.seo_competitive_evidence_progress, "NEARLY_COMPLETE");
+  assert.equal(result.operations.seo_competitive_evidence_blocks_delivery, false);
   assert.equal(result.flags.application_code, true);
   const gateway = classifyPaths([
     "backend/app/Services/SeoAgentEvidence/External/ExternalContentGateway.php",
   ]);
-  assert.equal(gateway.operations.seo_competitive_evidence, true);
-  assert.equal(gateway.operations.seo_council_orchestration, true);
+  assert.equal(gateway.operations.seo_competitive_evidence, false);
+  assert.equal(gateway.operations.seo_council_orchestration, false);
   const policy = classifyPaths([
     "backend/resources/seo-agent/evidence/competitive/policies/bigfive-test.v3.json",
   ]);
-  assert.equal(policy.operations.seo_competitive_evidence, true);
-  assert.equal(policy.operations.seo_council_orchestration, true);
+  assert.equal(policy.operations.seo_competitive_evidence, false);
+  assert.equal(policy.operations.seo_council_orchestration, false);
+  const analyzer = classifyPaths([
+    "backend/app/Services/SeoCouncil/Competitive/CompetitiveEvidenceAnalyzer.php",
+  ]);
+  assert.equal(analyzer.operations.seo_competitive_evidence, false);
+  assert.equal(analyzer.operations.seo_council_orchestration, false);
+});
+
+test("11G deferral control change deploys without running Council or competitive ingestion", () => {
+  const result = classifyPaths([
+    ".github/trunk/classify-paths.mjs",
+    ".github/trunk/classify-paths.test.mjs",
+  ]);
+  assert.equal(result.deploy, true);
+  assert.deepEqual(result.categories, ["infrastructure_deployment"]);
+  assert.equal(result.operations.seo_competitive_evidence, false);
+  assert.equal(result.operations.seo_council_orchestration, false);
 });
 
 test("retired EQ mirror cleanup is content-only and cannot trigger search submission", () => {
