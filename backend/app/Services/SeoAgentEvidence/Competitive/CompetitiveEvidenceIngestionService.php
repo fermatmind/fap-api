@@ -8,6 +8,7 @@ use App\Services\SeoAgentEvidence\Bundle\SeoEvidenceBundleFactory;
 use App\Services\SeoAgentEvidence\Bundle\SeoEvidenceBundleStore;
 use App\Services\SeoAgentEvidence\Bundle\SeoEvidenceBundleVerifier;
 use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher;
+use InvalidArgumentException;
 use Throwable;
 
 final class CompetitiveEvidenceIngestionService
@@ -32,51 +33,87 @@ final class CompetitiveEvidenceIngestionService
      */
     public function ingest(array $cohort, array $sources, string $environment, string $releaseSha, bool $write): array
     {
+        $zeroDiagnostics = $this->stageDiagnostics([], 'policy', 'policy');
         $competitorCount = count(array_filter(
             $sources,
             static fn (array $source): bool => ($source['source_class'] ?? null) === 'competitor_public',
         ));
         if (($cohort['collection_state'] ?? null) !== 'approved'
             || $competitorCount < (int) ($cohort['minimum_competitor_sources'] ?? 2)) {
-            return $this->hold('SOURCE_POLICY_HOLD', 0);
+            return $this->hold('SOURCE_POLICY_HOLD', 0, diagnostics: $zeroDiagnostics);
         }
 
         try {
             $measurement = $this->measurement->assess($releaseSha, (string) $cohort['page_family'], $environment);
-            if (($measurement['status'] ?? null) !== 'READY') {
+        } catch (Throwable) {
+            return $this->hold('MEASUREMENT_INTERNAL_HOLD', 0, diagnostics: $this->stageDiagnostics([], 'measurement', 'internal'));
+        }
+        if (($measurement['status'] ?? null) !== 'READY') {
+            try {
                 $policySnapshot = $this->policies->snapshot((string) $cohort['cohort_id']);
-
-                return $this->hold((string) ($measurement['hold_reason'] ?? 'MEASUREMENT_HOLD'), 0, $measurement, $policySnapshot);
+            } catch (Throwable) {
+                return $this->hold('SOURCE_POLICY_HOLD', 0, $measurement, diagnostics: $zeroDiagnostics);
             }
+
+            return $this->hold(
+                (string) ($measurement['hold_reason'] ?? 'MEASUREMENT_HOLD'),
+                0,
+                $measurement,
+                $policySnapshot,
+                diagnostics: $this->stageDiagnostics([], 'measurement', 'readiness'),
+            );
+        }
+
+        try {
             $policySnapshot = $this->policies->snapshot((string) $cohort['cohort_id']);
             if ($write) {
                 $this->policies->installForControlledCli($cohort, $environment, $releaseSha);
             }
         } catch (Throwable) {
-            return $this->hold('SOURCE_POLICY_HOLD', 0);
+            return $this->hold('SOURCE_POLICY_HOLD', 0, $measurement, diagnostics: $zeroDiagnostics);
         }
 
-        $semantic = $this->registry->semanticRegistry();
-        $verifiedPolicies = $this->policies->policies();
+        try {
+            $semantic = $this->registry->semanticRegistry();
+            $verifiedPolicies = $this->policies->policies();
+        } catch (Throwable) {
+            return $this->hold('SOURCE_POLICY_HOLD', 0, $measurement, $policySnapshot, $zeroDiagnostics);
+        }
         $projections = [];
         $sourcePolicies = [];
         $externalReads = 0;
         $gatewayDiagnostics = ['external_reads' => 0, 'logical_requests' => 0, 'transport_attempts' => 0, 'retry_count' => 0];
         foreach ($sources as $source) {
             $sourceId = (string) ($source['source_id'] ?? '');
-            $result = $this->gateway->fetch($sourceId, (string) ($source['url'] ?? ''), [
-                'cohort_id' => (string) $cohort['cohort_id'],
-                'source_class' => (string) $source['source_class'],
-                'page_family' => (string) $source['page_family'],
-                'locale' => (string) $source['locale'],
-            ], $semantic);
+            try {
+                $result = $this->gateway->fetch($sourceId, (string) ($source['url'] ?? ''), [
+                    'cohort_id' => (string) $cohort['cohort_id'],
+                    'source_class' => (string) $source['source_class'],
+                    'page_family' => (string) $source['page_family'],
+                    'locale' => (string) $source['locale'],
+                ], $semantic);
+            } catch (Throwable) {
+                return $this->hold(
+                    'EXTERNAL_GATEWAY_INTERNAL_HOLD',
+                    $externalReads,
+                    $measurement,
+                    $policySnapshot,
+                    $this->stageDiagnostics($gatewayDiagnostics + ['source_id' => $sourceId], 'gateway', 'internal'),
+                );
+            }
             $externalReads += max(0, (int) data_get($result, 'dependency_ingestion.external_reads', 0));
             foreach (['logical_requests', 'transport_attempts', 'retry_count'] as $field) {
                 $gatewayDiagnostics[$field] = max((int) $gatewayDiagnostics[$field], (int) data_get($result, 'dependency_ingestion.'.$field, 0));
             }
             $gatewayDiagnostics['external_reads'] = $externalReads;
             if (($result['status'] ?? null) !== 'ready' || ! is_array($result['projection'] ?? null)) {
-                return $this->hold((string) ($result['safe_error_code'] ?? 'SOURCE_POLICY_HOLD'), $externalReads, $measurement, $policySnapshot, (array) ($result['dependency_ingestion'] ?? []));
+                return $this->hold(
+                    (string) ($result['safe_error_code'] ?? 'SOURCE_POLICY_HOLD'),
+                    $externalReads,
+                    $measurement,
+                    $policySnapshot,
+                    $this->stageDiagnostics((array) ($result['dependency_ingestion'] ?? []), 'gateway', 'gateway'),
+                );
             }
             $projections[] = $result['projection'];
             $sourcePolicies[] = [
@@ -100,12 +137,27 @@ final class CompetitiveEvidenceIngestionService
                 'measurement' => $measurementInput,
                 'dependency_ingestion' => ['external_reads' => $externalReads],
             ]);
-            if (($output['status'] ?? null) !== 'READY') {
-                return $this->hold((string) ($output['hold_reason'] ?? 'COMPETITIVE_EVIDENCE_HOLD'), $externalReads, $measurement, $policySnapshot);
-            }
+        } catch (Throwable) {
+            return $this->hold(
+                'ANALYZER_INTERNAL_HOLD',
+                $externalReads,
+                $measurement,
+                $policySnapshot,
+                $this->stageDiagnostics($gatewayDiagnostics, 'analyzer', 'internal'),
+            );
+        }
+        if (($output['status'] ?? null) !== 'READY') {
+            return $this->hold(
+                (string) ($output['hold_reason'] ?? 'COMPETITIVE_EVIDENCE_HOLD'),
+                $externalReads,
+                $measurement,
+                $policySnapshot,
+                $this->stageDiagnostics($gatewayDiagnostics, 'analyzer', 'evidence'),
+            );
+        }
 
+        try {
             $releaseRef = $this->releaseIdentity->reference($environment, $releaseSha);
-
             $bundle = $this->bundles->create([
                 'bundle_id' => 'competitive:'.$environment.':'.$releaseRef,
                 'bundle_version' => 1,
@@ -137,27 +189,76 @@ final class CompetitiveEvidenceIngestionService
                     'dependency_ingestion' => $gatewayDiagnostics,
                 ],
             ]);
-            if (! $this->verifier->verify($bundle)['valid']) {
-                return $this->hold('BUNDLE_VERIFICATION_HOLD', $externalReads, $measurement, $policySnapshot);
-            }
-            if ($write) {
-                $this->store->create($bundle);
-            }
+        } catch (InvalidArgumentException $exception) {
+            [$reason, $errorClass] = match ($exception->getMessage()) {
+                'SEO_EVIDENCE_PRIVATE_DATA' => ['BUNDLE_PRIVACY_SCAN_HOLD', 'privacy'],
+                'SEO_EVIDENCE_INJECTION_BLOCKED' => ['BUNDLE_INJECTION_SCAN_HOLD', 'injection'],
+                default => ['BUNDLE_BUILD_INTERNAL_HOLD', 'validation'],
+            };
 
-            return [
-                'status' => 'READY',
-                'hold_reason' => 'NONE',
-                'bundle_verification' => 'valid',
-                'bundle' => $bundle,
-                'competitive_output' => $output,
-                'policy_snapshot' => $policySnapshot,
-                'measurement' => $measurement,
-                'write_performed' => $write,
-                'dependency_ingestion' => $gatewayDiagnostics + ['bundle_hash' => (string) $bundle['bundle_hash'], 'release_ref' => $releaseRef],
-            ];
+            return $this->hold(
+                $reason,
+                $externalReads,
+                $measurement,
+                $policySnapshot,
+                $this->stageDiagnostics($gatewayDiagnostics, 'bundle_build', $errorClass),
+            );
         } catch (Throwable) {
-            return $this->hold('COMPETITIVE_INGESTION_INTERNAL_HOLD', $externalReads, $measurement, $policySnapshot);
+            return $this->hold(
+                'BUNDLE_BUILD_INTERNAL_HOLD',
+                $externalReads,
+                $measurement,
+                $policySnapshot,
+                $this->stageDiagnostics($gatewayDiagnostics, 'bundle_build', 'internal'),
+            );
         }
+
+        try {
+            $verification = $this->verifier->verify($bundle);
+        } catch (Throwable) {
+            return $this->hold(
+                'BUNDLE_VERIFICATION_HOLD',
+                $externalReads,
+                $measurement,
+                $policySnapshot,
+                $this->stageDiagnostics($gatewayDiagnostics, 'bundle_verify', 'internal'),
+            );
+        }
+        if (! $verification['valid']) {
+            return $this->hold(
+                'BUNDLE_VERIFICATION_HOLD',
+                $externalReads,
+                $measurement,
+                $policySnapshot,
+                $this->stageDiagnostics($gatewayDiagnostics, 'bundle_verify', 'verification'),
+            );
+        }
+
+        if ($write) {
+            try {
+                $this->store->create($bundle);
+            } catch (Throwable) {
+                return $this->hold(
+                    'EVIDENCE_STORE_INTERNAL_HOLD',
+                    $externalReads,
+                    $measurement,
+                    $policySnapshot,
+                    $this->stageDiagnostics($gatewayDiagnostics, 'evidence_store', 'persistence'),
+                );
+            }
+        }
+
+        return [
+            'status' => 'READY',
+            'hold_reason' => 'NONE',
+            'bundle_verification' => 'valid',
+            'bundle' => $bundle,
+            'competitive_output' => $output,
+            'policy_snapshot' => $policySnapshot,
+            'measurement' => $measurement,
+            'write_performed' => $write,
+            'dependency_ingestion' => $gatewayDiagnostics + ['bundle_hash' => (string) $bundle['bundle_hash'], 'release_ref' => $releaseRef],
+        ];
     }
 
     /** @param list<array<string, mixed>> $projections @return array<string, mixed> */
@@ -215,6 +316,22 @@ final class CompetitiveEvidenceIngestionService
     /** @return array<string, mixed> */
     private function hold(string $reason, int $externalReads, array $measurement = [], array $policySnapshot = [], array $diagnostics = []): array
     {
+        $dependency = [
+            'external_reads' => max(0, min(32, $externalReads)),
+            'logical_requests' => max(0, min(32, (int) ($diagnostics['logical_requests'] ?? 0))),
+            'transport_attempts' => max(0, min(32, (int) ($diagnostics['transport_attempts'] ?? 0))),
+            'retry_count' => max(0, min(32, (int) ($diagnostics['retry_count'] ?? 0))),
+            'failed_stage' => preg_match('/^[a-z0-9_]{3,32}$/D', (string) ($diagnostics['failed_stage'] ?? 'unknown')) === 1
+                ? (string) $diagnostics['failed_stage']
+                : 'unknown',
+            'error_class' => preg_match('/^[a-z0-9_]{3,32}$/D', (string) ($diagnostics['error_class'] ?? 'internal')) === 1
+                ? (string) $diagnostics['error_class']
+                : 'internal',
+        ];
+        if (preg_match('/^[a-z0-9][a-z0-9._-]{0,63}$/D', (string) ($diagnostics['source_id'] ?? '')) === 1) {
+            $dependency['source_id'] = (string) $diagnostics['source_id'];
+        }
+
         return [
             'status' => 'HOLD',
             'hold_reason' => preg_match('/^[A-Z0-9_]{3,64}$/D', $reason) === 1 ? $reason : 'COMPETITIVE_EVIDENCE_HOLD',
@@ -222,9 +339,19 @@ final class CompetitiveEvidenceIngestionService
             'write_performed' => false,
             'policy_snapshot' => $policySnapshot,
             'measurement' => $measurement,
-            'dependency_ingestion' => ['external_reads' => max(0, min(32, $externalReads))] + array_intersect_key($diagnostics, array_flip([
-                'logical_requests', 'transport_attempts', 'retry_count', 'source_id', 'failed_stage', 'error_class',
-            ])),
+            'dependency_ingestion' => $dependency,
+        ];
+    }
+
+    /** @param array<string, mixed> $diagnostics @return array<string, mixed> */
+    private function stageDiagnostics(array $diagnostics, string $stage, string $errorClass): array
+    {
+        return $diagnostics + [
+            'logical_requests' => 0,
+            'transport_attempts' => 0,
+            'retry_count' => 0,
+            'failed_stage' => $stage,
+            'error_class' => $errorClass,
         ];
     }
 }

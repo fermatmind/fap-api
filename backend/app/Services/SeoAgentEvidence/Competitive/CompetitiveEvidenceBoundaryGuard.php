@@ -16,6 +16,14 @@ final class CompetitiveEvidenceBoundaryGuard
         'prose', 'quote', 'raw_html', 'sentence', 'snippet', 'text', 'title',
     ];
 
+    /** @var list<string> */
+    private const SAFE_HASH_FIELDS = [
+        'canonical_hash', 'claim_hash', 'evidence_hash', 'finding_hash', 'handoff_hash',
+        'label_hash', 'module_hash', 'output_hash', 'pattern_hash', 'policy_hash',
+        'projection_hash', 'public_url_hash', 'relation_hash', 'response_hash',
+        'structure_fingerprint', 'url_hash',
+    ];
+
     public function __construct(
         private readonly CompetitiveEvidenceContractRegistry $contracts,
         private readonly SeoEvidenceCanonicalHasher $hasher,
@@ -39,6 +47,18 @@ final class CompetitiveEvidenceBoundaryGuard
             && $this->sealed($projection, 'projection_hash');
     }
 
+    /** @param array<string, mixed> $projection */
+    public function projectionFailureCode(array $projection): string
+    {
+        $version = (string) ($projection['version'] ?? '');
+        if (! in_array($version, ['seo.competitive_page_projection.v1', 'seo.competitive_page_projection.v2'], true)
+            || ! $this->exactSchemaKeys($projection, $version)) {
+            return 'COMPETITIVE_PAYLOAD_SCHEMA_INVALID';
+        }
+
+        return $this->safePayloadCode($projection);
+    }
+
     /** @param array<string, mixed> $finding */
     public function finding(array $finding): bool
     {
@@ -49,6 +69,7 @@ final class CompetitiveEvidenceBoundaryGuard
             && ($finding['execution_allowed'] ?? null) === false
             && ($finding['outreach_actions'] ?? null) === 0
             && ($finding['digital_pr_scope'] ?? null) === 'deferred_p2_manual'
+            && $this->findingReferencesAreHashes($finding)
             && $this->safePayload($finding)
             && $this->sealed($finding, 'finding_hash');
     }
@@ -100,22 +121,33 @@ final class CompetitiveEvidenceBoundaryGuard
     /** @param array<string, mixed> $value */
     private function safePayload(array $value): bool
     {
-        if ($this->containsForbiddenField($value) || $this->containsRawUrlOrMarkup($value)) {
-            return false;
+        return $this->safePayloadCode($value) === 'PASS';
+    }
+
+    /** @param array<string, mixed> $value */
+    private function safePayloadCode(array $value): string
+    {
+        if (! $this->hashFieldsAreValid($value)
+            || $this->containsForbiddenField($value)
+            || $this->containsRawUrlOrMarkup($value)) {
+            return 'COMPETITIVE_PAYLOAD_CONTENT_INVALID';
         }
         if (($this->privacy->scan($this->privacyPayload($value))['decision'] ?? null) !== 'pass') {
-            return false;
+            return 'PRIVATE_DATA_PRESENT';
+        }
+        if (($this->injection->scan($this->injectionPayload($value))['result'] ?? null) !== 'pass') {
+            return 'INJECTION_BLOCKED';
         }
 
-        return ($this->injection->scan($this->injectionPayload($value))['result'] ?? null) === 'pass';
+        return 'PASS';
     }
 
     /** @param array<string, mixed> $value @return array<string, mixed> */
     private function privacyPayload(array $value): array
     {
         foreach ($value as $key => $child) {
-            if (in_array($key, ['private_data_present', 'injection_scan_result', 'captured_at', 'expires_at', 'module_order_bp'], true)
-                || str_ends_with((string) $key, '_hash')) {
+            if (in_array($key, ['private_data_present', 'injection_scan_result', 'captured_at', 'expires_at', 'module_order_bp', 'evidence_refs', 'source_ref'], true)
+                || (in_array($key, self::SAFE_HASH_FIELDS, true) && $this->hash($child))) {
                 unset($value[$key]);
 
                 continue;
@@ -126,6 +158,26 @@ final class CompetitiveEvidenceBoundaryGuard
         }
 
         return $value;
+    }
+
+    /** @param array<string, mixed> $value */
+    private function hashFieldsAreValid(array $value): bool
+    {
+        foreach ($value as $key => $child) {
+            if (is_string($key) && (str_ends_with($key, '_hash') || $key === 'structure_fingerprint')) {
+                if ($key === 'canonical_hash' && $child === null) {
+                    continue;
+                }
+                if (! in_array($key, self::SAFE_HASH_FIELDS, true) || ! $this->hash($child)) {
+                    return false;
+                }
+            }
+            if (is_array($child) && ! $this->hashFieldsAreValid($child)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /** @param array<string, mixed> $value @return array<string, mixed> */
@@ -182,6 +234,33 @@ final class CompetitiveEvidenceBoundaryGuard
         return is_string($value[$hashField] ?? null)
             && preg_match('/^[a-f0-9]{64}$/', (string) $value[$hashField]) === 1
             && hash_equals($this->hasher->hashWithout($value, $hashField), (string) $value[$hashField]);
+    }
+
+    /** @param array<string, mixed> $finding */
+    private function findingReferencesAreHashes(array $finding): bool
+    {
+        $refs = $finding['evidence_refs'] ?? null;
+        if (! is_array($refs) || ! array_is_list($refs) || count($refs) < 3 || count($refs) > 32
+            || count($refs) !== count(array_unique($refs))) {
+            return false;
+        }
+        foreach ($refs as $ref) {
+            if (! $this->hash($ref)) {
+                return false;
+            }
+        }
+        foreach ((array) ($finding['competitor_claims'] ?? []) as $claim) {
+            if (! is_array($claim) || ! $this->hash($claim['source_ref'] ?? null) || ! $this->hash($claim['claim_hash'] ?? null)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function hash(mixed $value): bool
+    {
+        return is_string($value) && preg_match('/^[a-f0-9]{64}$/D', $value) === 1;
     }
 
     /** @param array<string, mixed> $value */

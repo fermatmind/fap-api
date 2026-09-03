@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\SeoAgentEvidence\Bundle;
 
+use App\Services\SeoAgentEvidence\Competitive\CompetitiveEvidenceBundlePayloadGuard;
 use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher;
 use App\Services\SeoAgentEvidence\External\ExternalInjectionScanner;
 use App\Services\SeoAgentEvidence\Privacy\SeoPrivateDataScanner;
@@ -20,23 +21,44 @@ final class SeoEvidenceBundleFactory
         private readonly SeoPrivateRouteNegativeSet $negativeSet,
         private readonly SeoEvidenceRetentionPolicyRegistry $retention,
         private readonly ExternalInjectionScanner $injection,
+        private readonly CompetitiveEvidenceBundlePayloadGuard $competitivePayload,
     ) {}
 
     /** @param array<string, mixed> $input @return array<string, mixed> */
     public function create(array $input): array
     {
-        $scan = $this->scanner->scan($input, SeoPrivateDataScanner::BUNDLE_INPUT_HASH_PATHS);
+        $payload = $input['payload'] ?? [];
+        $competitive = ($input['authority_type'] ?? null) === 'competitive_structural_projection';
+        if ($competitive !== (($input['source_type'] ?? null) === 'external_gateway')) {
+            throw new InvalidArgumentException('SEO_EVIDENCE_COMPETITIVE_PAYLOAD_INVALID');
+        }
+        if ($competitive) {
+            $competitiveSafety = is_array($payload)
+                ? $this->competitivePayload->verify($payload)
+                : ['valid' => false, 'code' => 'COMPETITIVE_PAYLOAD_SCHEMA_INVALID'];
+            if (! $competitiveSafety['valid'] || ! $this->competitivePayload->envelopeIsBound($input)) {
+                throw new InvalidArgumentException(match ($competitiveSafety['code']) {
+                    'PRIVATE_DATA_PRESENT' => 'SEO_EVIDENCE_PRIVATE_DATA',
+                    'INJECTION_BLOCKED' => 'SEO_EVIDENCE_INJECTION_BLOCKED',
+                    default => 'SEO_EVIDENCE_COMPETITIVE_PAYLOAD_INVALID',
+                });
+            }
+        }
+        $scanInput = $input;
+        if ($competitive) {
+            unset($scanInput['payload']);
+        }
+        $scan = $this->scanner->scan($scanInput, SeoPrivateDataScanner::BUNDLE_INPUT_HASH_PATHS);
         if ($scan['private_data_present']) {
             throw new InvalidArgumentException('SEO_EVIDENCE_PRIVATE_DATA');
         }
 
         $capturedAt = CarbonImmutable::parse((string) ($input['captured_at'] ?? 'now'))->utc();
-        $payload = $input['payload'] ?? [];
         $sourceRef = $this->safeRef($input['source_ref'] ?? null);
         if ($this->negativeSet->classify($sourceRef)['private']) {
             throw new InvalidArgumentException('SEO_EVIDENCE_PRIVATE_DATA');
         }
-        if ($this->injection->scan($payload)['result'] !== 'pass') {
+        if (! $competitive && $this->injection->scan($payload)['result'] !== 'pass') {
             throw new InvalidArgumentException('SEO_EVIDENCE_INJECTION_BLOCKED');
         }
         $retentionClass = (string) ($input['retention_class'] ?? '');

@@ -16,10 +16,13 @@ use App\Services\SeoCouncil\Competitive\CompetitiveEvidenceBundleLoader;
 use App\Services\SeoCouncil\Contracts\CouncilContractValidator;
 use App\Services\SeoCouncil\Contracts\MissionRequestData;
 use Illuminate\Support\Facades\DB;
+use Tests\Feature\SeoIntel\Concerns\BuildsCompetitiveEvidenceBundle;
 use Tests\TestCase;
 
 final class SeoPlatform11G5SourceReadinessTest extends TestCase
 {
+    use BuildsCompetitiveEvidenceBundle;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -242,32 +245,7 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
     public function test_council_loader_rejects_staging_bundle_in_production(): void
     {
         $sha = str_repeat('b', 40);
-        $releaseRef = app(\App\Services\SeoAgentEvidence\Competitive\CompetitiveReleaseIdentity::class)->reference('staging', $sha);
-        $bundle = app(SeoEvidenceBundleFactory::class)->create([
-            'bundle_id' => 'competitive:staging:'.$releaseRef,
-            'bundle_version' => 1,
-            'mission_id' => 'competitive:ingestion:'.$releaseRef,
-            'source_type' => 'external_gateway',
-            'source_ref' => hash('sha256', 'staging|'.$sha),
-            'authority_type' => 'competitive_structural_projection',
-            'captured_at' => '2026-09-01T00:00:00Z',
-            'evidence_state' => 'verified',
-            'freshness_state' => 'fresh',
-            'source_capability_state' => 'available',
-            'retention_class' => 'external_structured_fact',
-            'page_family' => 'tests',
-            'locale' => 'en',
-            'authority_revision' => str_repeat('c', 64),
-            'source_license_class' => 'public_fact_permitted',
-            'data_usage_purpose' => 'competitive_evidence',
-            'egress_decision' => 'allowed_by_gateway',
-            'lineage_refs' => [],
-            'payload' => [
-                'environment' => 'staging',
-                'release_ref' => $releaseRef,
-                'competitive_output' => [],
-            ],
-        ]);
+        $bundle = app(SeoEvidenceBundleFactory::class)->create($this->competitiveBundleInput('staging', $sha));
         DB::connection('seo_intel')->table('seo_evidence_bundles')->insert([
             'bundle_id' => $bundle['bundle_id'],
             'bundle_version' => 1,

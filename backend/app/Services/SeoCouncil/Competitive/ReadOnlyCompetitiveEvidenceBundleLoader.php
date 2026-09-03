@@ -50,6 +50,11 @@ final class ReadOnlyCompetitiveEvidenceBundleLoader implements CompetitiveEviden
                 if (! is_array($bundle) || ! $this->verifier->verify($bundle)['valid']) {
                     continue;
                 }
+                if (($bundle['authority_type'] ?? null) !== 'competitive_structural_projection'
+                    || ($bundle['source_type'] ?? null) !== 'external_gateway'
+                    || ($bundle['egress_decision'] ?? null) !== 'allowed_by_gateway') {
+                    continue;
+                }
                 $payload = (array) ($bundle['payload'] ?? []);
                 if (($payload['environment'] ?? null) !== $expectedEnvironment
                     || ($payload['release_ref'] ?? null) !== $expectedReleaseRef) {

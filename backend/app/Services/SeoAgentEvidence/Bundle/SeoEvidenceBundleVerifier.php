@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\SeoAgentEvidence\Bundle;
 
+use App\Services\SeoAgentEvidence\Competitive\CompetitiveEvidenceBundlePayloadGuard;
 use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher;
 use App\Services\SeoAgentEvidence\External\ExternalInjectionScanner;
 use App\Services\SeoAgentEvidence\Privacy\SeoPrivateDataScanner;
@@ -22,6 +23,7 @@ final class SeoEvidenceBundleVerifier
         private readonly SeoPrivateRouteNegativeSet $negativeSet,
         private readonly SeoEvidenceRetentionPolicyRegistry $retention,
         private readonly ExternalInjectionScanner $injection,
+        private readonly CompetitiveEvidenceBundlePayloadGuard $competitivePayload,
     ) {}
 
     /** @param array<string, mixed> $bundle @return array{valid:bool,code:string} */
@@ -65,6 +67,7 @@ final class SeoEvidenceBundleVerifier
             || ! in_array($bundle['source_capability_state'], ['available', 'degraded', 'unavailable', 'held'], true)
             || ! in_array($bundle['source_license_class'], ['first_party', 'licensed', 'public_fact_permitted'], true)
             || ! in_array($bundle['egress_decision'], ['not_required', 'allowed_by_gateway', 'denied', 'held'], true)
+            || (($bundle['authority_type'] === 'competitive_structural_projection') !== ($bundle['source_type'] === 'external_gateway'))
             || ($bundle['source_type'] === 'external_gateway' && $bundle['egress_decision'] !== 'allowed_by_gateway')) {
             return ['valid' => false, 'code' => 'SCHEMA_VALUE_INVALID'];
         }
@@ -74,11 +77,23 @@ final class SeoEvidenceBundleVerifier
         if (! is_string($bundle['content_hash']) || ! hash_equals($this->hasher->hash($bundle['payload']), $bundle['content_hash'])) {
             return ['valid' => false, 'code' => 'CONTENT_HASH_INVALID'];
         }
+        $competitive = $bundle['authority_type'] === 'competitive_structural_projection';
+        $competitiveSafety = $competitive
+            ? $this->competitivePayload->verify($bundle['payload'])
+            : ['valid' => true, 'code' => 'PASS'];
+        if ($competitive && (! $competitiveSafety['valid'] || ! $this->competitivePayload->envelopeIsBound($bundle))) {
+            return ['valid' => false, 'code' => match ($competitiveSafety['code']) {
+                'PRIVATE_DATA_PRESENT' => 'PRIVATE_DATA_PRESENT',
+                'INJECTION_BLOCKED' => 'INJECTION_BLOCKED',
+                default => 'COMPETITIVE_PAYLOAD_INVALID',
+            }];
+        }
         if ($bundle['private_data_present'] !== false
-            || $this->scanner->scan($bundle['payload'], SeoPrivateDataScanner::MINIMIZED_PAYLOAD_HASH_PATHS)['private_data_present']) {
+            || (! $competitive && $this->scanner->scan($bundle['payload'], SeoPrivateDataScanner::MINIMIZED_PAYLOAD_HASH_PATHS)['private_data_present'])) {
             return ['valid' => false, 'code' => 'PRIVATE_DATA_PRESENT'];
         }
-        if ($bundle['injection_scan_result'] !== 'pass' || $this->injection->scan($bundle['payload'])['result'] !== 'pass') {
+        if ($bundle['injection_scan_result'] !== 'pass'
+            || (! $competitive && $this->injection->scan($bundle['payload'])['result'] !== 'pass')) {
             return ['valid' => false, 'code' => 'INJECTION_BLOCKED'];
         }
         try {
