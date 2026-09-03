@@ -2119,6 +2119,32 @@ $ok = ($payload["contract_version"] ?? null) === "seo.council_closeout.v2"
     && ($payload["platform11_runtime_qa"]["execution_allowed"] ?? null) === false
     && ($payload["platform11_runtime_qa"]["SEO-PLATFORM-11J"] ?? null) === ($production ? "CLOSED" : "STAGING_READY")
     && ($payload["platform11_runtime_qa"]["ready_for_11K"] ?? null) === $production
+    && ($payload["platform11_independent_review"]["receipt_version"] ?? null) === "seo.independent_review_closeout.v1"
+    && ($payload["platform11_independent_review"]["candidate_sha"] ?? null) === ($argv[1] ?? null)
+    && ($payload["platform11_independent_review"]["environment"] ?? null) === $environment
+    && ($payload["platform11_independent_review"]["closeout_state"] ?? null) === ($production ? "CLOSED" : "STAGING_READY")
+    && ($payload["platform11_independent_review"]["dependency_status"] ?? null) === "READY"
+    && ($payload["platform11_independent_review"]["negative_probes"]["bypass_count"] ?? null) === 0
+    && ($payload["platform11_independent_review"]["run_id_reuse_count"] ?? null) === 0
+    && ($payload["platform11_independent_review"]["context_reuse_count"] ?? null) === 0
+    && ($payload["platform11_independent_review"]["generation_context_inheritance_count"] ?? null) === 0
+    && ($payload["platform11_independent_review"]["hidden_reasoning_ingestion_count"] ?? null) === 0
+    && ($payload["platform11_independent_review"]["mutable_manifest_acceptance_count"] ?? null) === 0
+    && ($payload["platform11_independent_review"]["forbidden_tool_exposure_count"] ?? null) === 0
+    && ($payload["platform11_independent_review"]["verdict_enum_violation_count"] ?? null) === 0
+    && ($payload["platform11_independent_review"]["policy_approve_bypass_count"] ?? null) === 0
+    && ($payload["platform11_independent_review"]["model_calls"] ?? null) === 0
+    && ($payload["platform11_independent_review"]["tool_calls"] ?? null) === 0
+    && ($payload["platform11_independent_review"]["external_calls"] ?? null) === 0
+    && ($payload["platform11_independent_review"]["cms_writes"] ?? null) === 0
+    && ($payload["platform11_independent_review"]["deploy_writes"] ?? null) === 0
+    && ($payload["platform11_independent_review"]["url_truth_writes"] ?? null) === 0
+    && ($payload["platform11_independent_review"]["search_writes"] ?? null) === 0
+    && ($payload["platform11_independent_review"]["business_writes"] ?? null) === 0
+    && ($payload["platform11_independent_review"]["production_permissions"] ?? null) === 0
+    && ($payload["platform11_independent_review"]["execution_allowed"] ?? null) === false
+    && ($payload["platform11_independent_review"]["SEO-PLATFORM-11K"] ?? null) === ($production ? "CLOSED" : "STAGING_READY")
+    && ($payload["platform11_independent_review"]["ready_for_11L"] ?? null) === $production
     && ($payload["technical_diagnosis"]["receipt_version"] ?? null) === "seo.technical_diagnosis_closeout.v2"
     && ($payload["technical_diagnosis"]["environment"] ?? null) === $environment
     && ($payload["technical_diagnosis"]["dependency_mode"] ?? null) === "RUNTIME_READ_ONLY"

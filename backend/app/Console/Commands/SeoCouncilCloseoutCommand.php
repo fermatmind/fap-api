@@ -24,6 +24,7 @@ use App\Services\SeoCouncil\Memory\OperatorTimeService;
 use App\Services\SeoCouncil\Platform11\Platform11HCloseoutBuilder;
 use App\Services\SeoCouncil\Platform11\Platform11ICloseoutBuilder;
 use App\Services\SeoCouncil\Platform11\Platform11JCloseoutBuilder;
+use App\Services\SeoCouncil\Platform11\Platform11KCloseoutBuilder;
 use App\Services\SeoCouncil\Policy\CouncilAdmissionRequestFactory;
 use App\Services\SeoCouncil\Routing\DeterministicMissionRouter;
 use App\Services\SeoCouncil\Routing\GoldenRoutingEvaluator;
@@ -64,6 +65,7 @@ final class SeoCouncilCloseoutCommand extends Command
         Platform11HCloseoutBuilder $platform11H,
         Platform11ICloseoutBuilder $platform11I,
         Platform11JCloseoutBuilder $platform11J,
+        Platform11KCloseoutBuilder $platform11K,
         SeoRegistryHasher $hasher,
     ): int {
         try {
@@ -130,6 +132,7 @@ final class SeoCouncilCloseoutCommand extends Command
             $platform11Receipt = $platform11H->build($sourceSha, $closeoutEnvironment);
             $platform11EditorialReceipt = $platform11I->build($sourceSha, $closeoutEnvironment, $platform11Receipt);
             $platform11RuntimeQaReceipt = $platform11J->build($sourceSha, $closeoutEnvironment, $platform11EditorialReceipt);
+            $platform11IndependentReviewReceipt = $platform11K->build($sourceSha, $closeoutEnvironment, $platform11RuntimeQaReceipt);
 
             $receipt = [
                 'contract_version' => 'seo.council_closeout.v2',
@@ -201,6 +204,7 @@ final class SeoCouncilCloseoutCommand extends Command
                 'platform11' => $platform11Receipt,
                 'platform11_editorial' => $platform11EditorialReceipt,
                 'platform11_runtime_qa' => $platform11RuntimeQaReceipt,
+                'platform11_independent_review' => $platform11IndependentReviewReceipt,
             ];
             $receiptProjection = $this->receiptProjectionProbe($receipt);
             $receipt['receipt_projection_probe_total'] = $receiptProjection['total'];
@@ -261,6 +265,7 @@ final class SeoCouncilCloseoutCommand extends Command
                     && ($platform11Receipt['closeout_state'] ?? null) === $expectedPlatform11State
                     && ($platform11EditorialReceipt['closeout_state'] ?? null) === $expectedPlatform11State
                     && ($platform11RuntimeQaReceipt['closeout_state'] ?? null) === $expectedPlatform11State
+                    && ($platform11IndependentReviewReceipt['closeout_state'] ?? null) === $expectedPlatform11State
                     ? self::SUCCESS
                     : self::FAILURE,
             );

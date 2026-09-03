@@ -448,6 +448,69 @@ final class Platform11ContractRegistry
         return $mode;
     }
 
+    /** @return array<string, array<string, mixed>> */
+    public function independentReviewSchemas(): array
+    {
+        $fields = [
+            'frozen_manifest' => ['manifest_id', 'manifest_version', 'frozen', 'candidate_artifact_hash', 'policy_review', 'experiment_review', 'safety_review', 'manifest_hash'],
+            'request' => ['generation_run_id', 'generation_context_id', 'frozen_manifest', 'candidate_artifact_hash', 'policy_ref', 'registry_ref', 'binding_ref'],
+            'output' => ['verdict', 'reason_codes', 'evidence_refs', 'manifest_hash', 'candidate_artifact_hash', 'policy_gateway_decision', 'tool_allowlist', 'egress_allowlist', 'cms_access', 'deploy_access', 'url_truth_access', 'search_access', 'allow_delegation', 'execution_allowed'],
+            'receipt' => ['receipt_version', 'run_id', 'context_id', 'prompt_namespace', 'request_hash', 'output_hash', 'role_id', 'capability_id', 'verdict', 'policy_gateway_decision', 'model_calls', 'tool_calls', 'external_calls', 'write_count', 'execution_allowed', 'receipt_hash'],
+        ];
+        $schemas = [];
+        foreach ($fields as $name => $required) {
+            $schema = [
+                '$schema' => 'https://json-schema.org/draft/2020-12/schema',
+                'schema_id' => 'seo.independent_review_'.$name.'.v1',
+                'schema_version' => '1.0.0',
+                'type' => 'object',
+                'additionalProperties' => false,
+                'required' => $required,
+            ];
+            if ($name === 'output') {
+                $schema['verdict_enum'] = ['recommend_approve', 'hold', 'reject'];
+            }
+            $schema['schema_hash'] = $this->hasher->hash($schema);
+            $schemas[$name] = $schema;
+        }
+
+        return $schemas;
+    }
+
+    /** @return array<string, mixed> */
+    public function independentReviewMode(): array
+    {
+        $schemas = $this->independentReviewSchemas();
+        $mode = [
+            'mode_id' => 'seo.independent_policy_experiment_safety_review',
+            'mode_version' => '1.0.0',
+            'mission_type' => 'independent_registry_review',
+            'role_id' => 'seo.independent_reviewer',
+            'capability_id' => 'seo.independent_policy_experiment_safety_review',
+            'autonomy' => 'L0',
+            'authority_ceiling' => 'review_verdict',
+            'prompt_namespace' => 'seo.independent_review.v1',
+            'prompt_ref' => $this->promptRef('seo.independent_policy_experiment_safety_review.prompt.v1.md'),
+            'schema_refs' => array_map(fn (array $schema): array => $this->reference((string) $schema['schema_id'], '1.0.0', (string) $schema['schema_hash']), $schemas),
+            'verdict_enum' => ['recommend_approve', 'hold', 'reject'],
+            'tool_allowlist' => [],
+            'egress_allowlist' => [],
+            'cms_access' => false,
+            'deploy_access' => false,
+            'url_truth_access' => false,
+            'search_access' => false,
+            'write_permissions' => [],
+            'allow_delegation' => false,
+            'model_invocation' => false,
+            'tool_invocation' => false,
+            'external_egress' => false,
+            'execution_allowed' => false,
+        ];
+        $mode['mode_hash'] = $this->hasher->hash($mode);
+
+        return $mode;
+    }
+
     /** @return array<string, mixed> */
     public function manifest(): array
     {
@@ -459,6 +522,7 @@ final class Platform11ContractRegistry
         $editorial = $this->editorialMode();
         $l2 = $this->l2ManifestSchema();
         $runtimeQa = $this->runtimeQaMode();
+        $independentReview = $this->independentReviewMode();
         $manifest = [
             'manifest_id' => 'seo.council_contract_manifest.v4',
             'manifest_version' => self::MANIFEST_VERSION,
@@ -471,6 +535,7 @@ final class Platform11ContractRegistry
             'editorial_mode_ref' => $this->reference((string) $editorial['mode_id'], '1.0.0', (string) $editorial['mode_hash']),
             'l2_manifest_schema_ref' => $this->reference((string) $l2['schema_id'], '1.0.0', (string) $l2['schema_hash']),
             'runtime_qa_mode_ref' => $this->reference((string) $runtimeQa['mode_id'], '1.0.0', (string) $runtimeQa['mode_hash']),
+            'independent_review_mode_ref' => $this->reference((string) $independentReview['mode_id'], '1.0.0', (string) $independentReview['mode_hash']),
             'evidence_privacy_ref' => $this->fileRef('seo.evidence_contract_manifest.v5', '5.0.0', 'docs/seo/generated/seo-agent-evidence-contract-manifest.v5.json'),
             'policy_gateway_ref' => $this->fileRef('seo.policy_gateway_contract_manifest.v1', '1.0.0', 'docs/seo/generated/seo-policy-gateway-contract-manifest.v1.json'),
             'legacy_frozen_files' => $this->legacyFiles(),
@@ -515,6 +580,7 @@ final class Platform11ContractRegistry
         $schemas = $this->intentSchemas();
         $editorialSchemas = $this->editorialSchemas();
         $runtimeQaSchemas = $this->runtimeQaSchemas();
+        $independentReviewSchemas = $this->independentReviewSchemas();
         $artifacts = [
             'docs/seo/generated/seo-agent-role-capability-registry.v2.json' => $this->registry(),
             'resources/seo-agent/council/bindings/seo.role_capability_binding.v4.json' => $this->binding(),
@@ -524,6 +590,7 @@ final class Platform11ContractRegistry
             'resources/seo-agent/council/platform11/editorial-draft/seo.editorial_draft_mode.v1.json' => $this->editorialMode(),
             'resources/seo-agent/council/platform11/editorial-draft/seo.post12_l2_cms_draft_manifest.v1.schema.json' => $this->l2ManifestSchema(),
             'resources/seo-agent/council/platform11/runtime-qa/seo.runtime_qa_mode.v1.json' => $this->runtimeQaMode(),
+            'resources/seo-agent/council/platform11/independent-review/seo.independent_review_mode.v1.json' => $this->independentReviewMode(),
             'docs/seo/generated/seo-council-contract-manifest.v4.json' => $this->manifest(),
         ];
         foreach ($schemas as $name => $schema) {
@@ -534,6 +601,9 @@ final class Platform11ContractRegistry
         }
         foreach ($runtimeQaSchemas as $name => $schema) {
             $artifacts['resources/seo-agent/council/platform11/runtime-qa/schemas/seo.runtime_qa_'.$name.'.v1.schema.json'] = $schema;
+        }
+        foreach ($independentReviewSchemas as $name => $schema) {
+            $artifacts['resources/seo-agent/council/platform11/independent-review/schemas/seo.independent_review_'.$name.'.v1.schema.json'] = $schema;
         }
 
         return $artifacts;

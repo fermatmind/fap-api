@@ -1,0 +1,55 @@
+{
+    "mode_id": "seo.independent_policy_experiment_safety_review",
+    "mode_version": "1.0.0",
+    "mission_type": "independent_registry_review",
+    "role_id": "seo.independent_reviewer",
+    "capability_id": "seo.independent_policy_experiment_safety_review",
+    "autonomy": "L0",
+    "authority_ceiling": "review_verdict",
+    "prompt_namespace": "seo.independent_review.v1",
+    "prompt_ref": {
+        "id": "seo.independent_policy_experiment_safety_review.prompt",
+        "version": "1.0.0",
+        "hash": "2483bbd6386030db91b7a2cfa755f9657a5e50e85f8b8eef2d6d2d708b9a192e"
+    },
+    "schema_refs": {
+        "frozen_manifest": {
+            "id": "seo.independent_review_frozen_manifest.v1",
+            "version": "1.0.0",
+            "hash": "fa6734c93627e5b3b71580ea4ecda2d82c5ff170909262e0b5d79064ebed4831"
+        },
+        "request": {
+            "id": "seo.independent_review_request.v1",
+            "version": "1.0.0",
+            "hash": "5e1dcc2c39cb6594e29c6a949a80c534b96dcd3602df54e742ccccb04f6ee2ff"
+        },
+        "output": {
+            "id": "seo.independent_review_output.v1",
+            "version": "1.0.0",
+            "hash": "1559b2506c4a864688a961a86a633ef8cc1666fdf9a9341267d8989ecd1556d3"
+        },
+        "receipt": {
+            "id": "seo.independent_review_receipt.v1",
+            "version": "1.0.0",
+            "hash": "56ff41385311205da8839ddce89f05f84688f4f5a545291fb398d2bf578da954"
+        }
+    },
+    "verdict_enum": [
+        "recommend_approve",
+        "hold",
+        "reject"
+    ],
+    "tool_allowlist": [],
+    "egress_allowlist": [],
+    "cms_access": false,
+    "deploy_access": false,
+    "url_truth_access": false,
+    "search_access": false,
+    "write_permissions": [],
+    "allow_delegation": false,
+    "model_invocation": false,
+    "tool_invocation": false,
+    "external_egress": false,
+    "execution_allowed": false,
+    "mode_hash": "78961f38a6df42f70fe0d95c83b6cc6b11664cc54967d9990868cc16940492db"
+}

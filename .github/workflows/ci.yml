@@ -612,6 +612,7 @@ jobs:
             tests/Feature/SeoIntel/SeoPlatform11H*.php \
             tests/Feature/SeoIntel/SeoPlatform11I*.php \
             tests/Feature/SeoIntel/SeoPlatform11J*.php \
+            tests/Feature/SeoIntel/SeoPlatform11K*.php \
             tests/Feature/SeoIntel/SeoPlatform11A*.php \
             tests/Feature/SeoIntel/SeoPlatform11B*.php \
             tests/Feature/SeoIntel/SeoPlatform11C*.php \
@@ -643,7 +644,8 @@ jobs:
             tests/Feature/SeoIntel/SeoPlatform11G*.php \
             tests/Feature/SeoIntel/SeoPlatform11H*.php \
             tests/Feature/SeoIntel/SeoPlatform11I*.php \
-            tests/Feature/SeoIntel/SeoPlatform11J*.php
+            tests/Feature/SeoIntel/SeoPlatform11J*.php \
+            tests/Feature/SeoIntel/SeoPlatform11K*.php
           php artisan seo:council-closeout --expected-sha="$GITHUB_SHA" --closeout-environment=ci_candidate --json > ../seo-council-orchestration-closeout.json
           jq -e --arg sha "$GITHUB_SHA" '
             .contract_version == "seo.council_closeout.v2"
@@ -784,6 +786,26 @@ jobs:
             and .platform11_runtime_qa.search_writes == 0 and .platform11_runtime_qa.business_writes == 0
             and .platform11_runtime_qa."SEO-PLATFORM-11J" == "OFFLINE_EVAL_READY"
             and .platform11_runtime_qa.ready_for_11K == false and .platform11_runtime_qa.execution_allowed == false
+            and .platform11_independent_review.receipt_version == "seo.independent_review_closeout.v1"
+            and .platform11_independent_review.environment == "ci_candidate"
+            and .platform11_independent_review.closeout_state == "OFFLINE_EVAL_READY"
+            and .platform11_independent_review.dependency_status == "READY"
+            and .platform11_independent_review.negative_probes.bypass_count == 0
+            and .platform11_independent_review.run_id_reuse_count == 0
+            and .platform11_independent_review.context_reuse_count == 0
+            and .platform11_independent_review.generation_context_inheritance_count == 0
+            and .platform11_independent_review.hidden_reasoning_ingestion_count == 0
+            and .platform11_independent_review.mutable_manifest_acceptance_count == 0
+            and .platform11_independent_review.forbidden_tool_exposure_count == 0
+            and .platform11_independent_review.verdict_enum_violation_count == 0
+            and .platform11_independent_review.policy_approve_bypass_count == 0
+            and .platform11_independent_review.model_calls == 0 and .platform11_independent_review.tool_calls == 0
+            and .platform11_independent_review.external_calls == 0 and .platform11_independent_review.production_permissions == 0
+            and .platform11_independent_review.cms_writes == 0 and .platform11_independent_review.deploy_writes == 0
+            and .platform11_independent_review.url_truth_writes == 0 and .platform11_independent_review.search_writes == 0
+            and .platform11_independent_review.business_writes == 0
+            and .platform11_independent_review."SEO-PLATFORM-11K" == "OFFLINE_EVAL_READY"
+            and .platform11_independent_review.ready_for_11L == false and .platform11_independent_review.execution_allowed == false
             and (.measurement_review.contract_manifest_hash | test("^[a-f0-9]{64}$"))
             and (.measurement_review.dependency_snapshot_hash | test("^[a-f0-9]{64}$"))
             and (.measurement_review.receipt_hash | test("^[a-f0-9]{64}$"))

@@ -1,0 +1,26 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.independent_review_receipt.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "receipt_version",
+        "run_id",
+        "context_id",
+        "prompt_namespace",
+        "request_hash",
+        "output_hash",
+        "role_id",
+        "capability_id",
+        "verdict",
+        "policy_gateway_decision",
+        "model_calls",
+        "tool_calls",
+        "external_calls",
+        "write_count",
+        "execution_allowed",
+        "receipt_hash"
+    ],
+    "schema_hash": "56ff41385311205da8839ddce89f05f84688f4f5a545291fb398d2bf578da954"
+}

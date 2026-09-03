@@ -75,6 +75,8 @@ final class Platform11MissionValidator
             $this->editorialInput($input['mode_input'], (string) $input['locale']);
         } elseif ($domain === 'runtime_qa') {
             $this->runtimeQaInput($input['mode_input']);
+        } elseif ($missionType === 'independent_registry_review') {
+            $this->independentReviewInput($input['mode_input']);
         }
 
         return $input;
@@ -219,6 +221,51 @@ final class Platform11MissionValidator
         $end = strtotime((string) ($input['experiment']['window_end'] ?? ''));
         if ($start === false || $end === false || $start >= $end) {
             throw new InvalidArgumentException('RUNTIME_QA_EXPERIMENT_WINDOW_INVALID');
+        }
+    }
+
+    /** @param array<string, mixed> $input */
+    private function independentReviewInput(array $input): void
+    {
+        $this->exactKeys($input, [
+            'generation_run_id', 'generation_context_id', 'frozen_manifest', 'candidate_artifact_hash',
+            'policy_ref', 'registry_ref', 'binding_ref',
+        ], 'INDEPENDENT_REVIEW_INPUT_FIELDS_INVALID');
+        foreach (['generation_run_id', 'generation_context_id', 'candidate_artifact_hash'] as $field) {
+            if (preg_match('/^[a-f0-9]{64}$/D', (string) ($input[$field] ?? '')) !== 1) {
+                throw new InvalidArgumentException('INDEPENDENT_REVIEW_HASH_INVALID');
+            }
+        }
+        if (! is_array($input['frozen_manifest'] ?? null)) {
+            throw new InvalidArgumentException('INDEPENDENT_REVIEW_MANIFEST_INVALID');
+        }
+        $manifest = $input['frozen_manifest'];
+        $this->exactKeys($manifest, [
+            'manifest_id', 'manifest_version', 'frozen', 'candidate_artifact_hash',
+            'policy_review', 'experiment_review', 'safety_review', 'manifest_hash',
+        ], 'INDEPENDENT_REVIEW_MANIFEST_FIELDS_INVALID');
+        if (! is_string($manifest['manifest_id'] ?? null)
+            || ! is_int($manifest['manifest_version'] ?? null)
+            || ! is_bool($manifest['frozen'] ?? null)
+            || preg_match('/^[a-f0-9]{64}$/D', (string) ($manifest['candidate_artifact_hash'] ?? '')) !== 1
+            || preg_match('/^[a-f0-9]{64}$/D', (string) ($manifest['manifest_hash'] ?? '')) !== 1) {
+            throw new InvalidArgumentException('INDEPENDENT_REVIEW_MANIFEST_INVALID');
+        }
+        foreach (['policy_review', 'experiment_review', 'safety_review'] as $field) {
+            if (! in_array($manifest[$field] ?? null, ['PASS', 'HOLD', 'REJECT'], true)) {
+                throw new InvalidArgumentException('INDEPENDENT_REVIEW_STATE_INVALID');
+            }
+        }
+        foreach (['policy_ref', 'registry_ref', 'binding_ref'] as $field) {
+            $ref = $input[$field] ?? null;
+            if (! is_array($ref)) {
+                throw new InvalidArgumentException('INDEPENDENT_REVIEW_REF_INVALID');
+            }
+            $this->exactKeys($ref, ['id', 'version', 'hash'], 'INDEPENDENT_REVIEW_REF_FIELDS_INVALID');
+            if (! is_string($ref['id'] ?? null) || ! is_string($ref['version'] ?? null)
+                || preg_match('/^[a-f0-9]{64}$/D', (string) ($ref['hash'] ?? '')) !== 1) {
+                throw new InvalidArgumentException('INDEPENDENT_REVIEW_REF_INVALID');
+            }
         }
     }
 

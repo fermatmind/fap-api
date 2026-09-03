@@ -1,0 +1,17 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.independent_review_request.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "generation_run_id",
+        "generation_context_id",
+        "frozen_manifest",
+        "candidate_artifact_hash",
+        "policy_ref",
+        "registry_ref",
+        "binding_ref"
+    ],
+    "schema_hash": "5e1dcc2c39cb6594e29c6a949a80c534b96dcd3602df54e742ccccb04f6ee2ff"
+}

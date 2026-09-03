@@ -1,0 +1,18 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.independent_review_frozen_manifest.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "manifest_id",
+        "manifest_version",
+        "frozen",
+        "candidate_artifact_hash",
+        "policy_review",
+        "experiment_review",
+        "safety_review",
+        "manifest_hash"
+    ],
+    "schema_hash": "fa6734c93627e5b3b71580ea4ecda2d82c5ff170909262e0b5d79064ebed4831"
+}

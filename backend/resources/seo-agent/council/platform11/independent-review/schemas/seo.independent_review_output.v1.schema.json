@@ -1,0 +1,29 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.independent_review_output.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "verdict",
+        "reason_codes",
+        "evidence_refs",
+        "manifest_hash",
+        "candidate_artifact_hash",
+        "policy_gateway_decision",
+        "tool_allowlist",
+        "egress_allowlist",
+        "cms_access",
+        "deploy_access",
+        "url_truth_access",
+        "search_access",
+        "allow_delegation",
+        "execution_allowed"
+    ],
+    "verdict_enum": [
+        "recommend_approve",
+        "hold",
+        "reject"
+    ],
+    "schema_hash": "1559b2506c4a864688a961a86a633ef8cc1666fdf9a9341267d8989ecd1556d3"
+}
