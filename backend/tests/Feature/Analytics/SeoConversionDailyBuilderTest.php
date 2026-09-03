@@ -518,6 +518,12 @@ final class SeoConversionDailyBuilderTest extends TestCase
 
         $run = DB::table('analytics_seo_conversion_refresh_runs')->sole();
         $receipt = json_decode((string) $run->receipt_json, true, flags: JSON_THROW_ON_ERROR);
+        $this->assertSame('analytics-seo-conversion-refresh-receipt.v2', $receipt['schema_version']);
+        $this->assertSame('testing', $receipt['environment']);
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $receipt['readmodel_snapshot_hash']);
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $receipt['receipt_hash']);
+        $this->assertSame(0.0, CarbonImmutable::parse($receipt['readmodel_snapshot']['from'])->diffInDays(CarbonImmutable::parse($receipt['readmodel_snapshot']['to'])));
+        $this->assertSame(0, array_sum($receipt['readmodel_snapshot']['persisted_metrics']));
         $this->assertSame('scheduled', $run->trigger_mode);
         $this->assertSame('success', $run->status);
         $this->assertSame(str_repeat('a', 40), $receipt['active_production_sha']);
@@ -530,6 +536,19 @@ final class SeoConversionDailyBuilderTest extends TestCase
         $this->assertFalse($receipt['search_submission_allowed']);
         $this->assertArrayNotHasKey('org_scope', $receipt);
         $this->assertSame($receipt, $result['refresh_receipt']);
+    }
+
+    public function test_bounded_public_incremental_refresh_seals_current_ninety_day_snapshot(): void
+    {
+        $to = CarbonImmutable::now('UTC')->startOfDay();
+        $result = app(SeoConversionDailyBuilder::class)->refresh($to->subDays(6), $to, [0], false, 'manual');
+        $receipt = $result['refresh_receipt'];
+
+        $this->assertSame('analytics-seo-conversion-refresh-receipt.v2', $receipt['schema_version']);
+        $this->assertTrue($receipt['public_org_zero_only']);
+        $this->assertSame(89.0, CarbonImmutable::parse($receipt['readmodel_snapshot']['from'])->diffInDays(CarbonImmutable::parse($receipt['readmodel_snapshot']['to'])));
+        $this->assertSame('testing', $receipt['readmodel_snapshot']['environment']);
+        $this->assertSame(0, array_sum($receipt['readmodel_snapshot']['persisted_metrics']));
     }
 
     public function test_scheduled_json_command_emits_only_the_sanitized_receipt(): void

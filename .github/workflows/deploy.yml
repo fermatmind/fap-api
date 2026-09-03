@@ -752,7 +752,10 @@ jobs:
             > "$cro_refresh_json" 2> "$cro_refresh_stderr" \
             || fail CRO_REFRESH_COMMAND_FAILED
           jq -e '
-            .schema_version == "analytics-seo-conversion-refresh-receipt.v1"
+            .schema_version == "analytics-seo-conversion-refresh-receipt.v2"
+            and .environment == "staging"
+            and (.readmodel_snapshot_hash | type == "string" and test("^[a-f0-9]{64}$"))
+            and (.receipt_hash | type == "string" and test("^[a-f0-9]{64}$"))
             and .status == "success"
             and .org_scope_mode == "bounded"
             and .org_scope_count == 1
@@ -1197,18 +1200,9 @@ jobs:
             printf 'production_competitive_configuration=HOLD reason=%s\n' "$1" >&2
             exit 1
           }
-          test -n "$GSC_SERVICE_ACCOUNT_JSON" || fail GSC_SECRET_MISSING
-          [[ "$GSC_PROPERTY_URL" =~ ^sc-domain:[A-Za-z0-9.-]+$ ]] || fail GSC_PROPERTY_INVALID
-          test "$GSC_ENABLED" = true || fail GSC_DISABLED
-          test "$GSC_LIVE_API_ENABLED" = true || fail GSC_LIVE_API_DISABLED
-          test "$GSC_SYNC_ENABLED" = true || fail GSC_SYNC_DISABLED
-          test "$GSC_AUTH_MODE" = service_account || fail GSC_AUTH_MODE_INVALID
-          test "$GSC_SCOPE" = https://www.googleapis.com/auth/webmasters.readonly || fail GSC_SCOPE_NOT_READONLY
-          test "$GSC_SYNC_WINDOW_DAYS" = 90 || fail GSC_WINDOW_INVALID
-          test "$GSC_SYNC_SEARCH_TYPES" = web || fail GSC_SEARCH_TYPE_INVALID
           test -n "$COMPETITIVE_WRITER_DB_USERNAME" || fail COMPETITIVE_WRITER_DB_CREDENTIAL_MISSING
           test -n "$COMPETITIVE_WRITER_DB_PASSWORD" || fail COMPETITIVE_WRITER_DB_CREDENTIAL_MISSING
-          printf 'production_competitive_configuration=READY\n'
+          printf 'production_competitive_configuration=READY gsc_refresh_validation=deferred_until_needed\n'
       - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
           php-version: '8.4'
@@ -1288,50 +1282,62 @@ jobs:
           remote_writer_config="$remote_tmp/competitive-config.php"
           proxy_pid=""
           tunnel_pid=""
+          gsc_refresh_configured=false
           ssh_base=(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -o ConnectionAttempts=3 -o ServerAliveInterval=15 -o ServerAliveCountMax=8 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST")
           cleanup() {
-            if [ -n "$tunnel_pid" ]; then kill "$tunnel_pid" 2>/dev/null || true; fi
-            if [ -n "$proxy_pid" ]; then kill "$proxy_pid" 2>/dev/null || true; fi
+            stop_owned_pid "$tunnel_pid" "ssh -N"
+            stop_owned_pid "$proxy_pid" "gsc_restricted_connect_proxy.mjs"
             if [ "$competitive_evidence" = true ]; then
               "${ssh_base[@]}" "rm -f '$remote_key' '$remote_env' '$remote_writer_env' '$remote_tmp/config.php' '$remote_writer_config'; rmdir '$remote_tmp' 2>/dev/null || true" \
                 >/dev/null 2>&1 || true
             fi
             rm -f "$local_key" "$local_env" "$local_writer_env"
           }
+          stop_owned_pid() {
+            local pid="${1:-}" marker="${2:-}"
+            [[ "$pid" =~ ^[1-9][0-9]*$ ]] || return 0
+            kill -0 "$pid" 2>/dev/null || return 0
+            ps -p "$pid" -o command= 2>/dev/null | grep -F -- "$marker" >/dev/null || return 0
+            kill "$pid" 2>/dev/null || true
+          }
           trap cleanup EXIT HUP INT TERM
 
           if [ "$competitive_evidence" = true ]; then
           [[ "$GITHUB_RUN_ID" =~ ^[1-9][0-9]*$ ]] || fail RUN_ID_INVALID
           [[ "$GITHUB_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]] || fail RUN_ATTEMPT_INVALID
-          test -n "$GSC_SERVICE_ACCOUNT_JSON" || fail GSC_SECRET_MISSING
-          [[ "$GSC_PROPERTY_URL" =~ ^sc-domain:[A-Za-z0-9.-]+$ ]] || fail GSC_PROPERTY_INVALID
-          test "$GSC_ENABLED" = true || fail GSC_DISABLED
-          test "$GSC_LIVE_API_ENABLED" = true || fail GSC_LIVE_API_DISABLED
-          test "$GSC_SYNC_ENABLED" = true || fail GSC_SYNC_DISABLED
-          test "$GSC_AUTH_MODE" = service_account || fail GSC_AUTH_MODE_INVALID
-          test "$GSC_SCOPE" = https://www.googleapis.com/auth/webmasters.readonly || fail GSC_SCOPE_NOT_READONLY
-          test "$GSC_SYNC_WINDOW_DAYS" = 90 || fail GSC_WINDOW_INVALID
-          test "$GSC_SYNC_SEARCH_TYPES" = web || fail GSC_SEARCH_TYPE_INVALID
           test -n "$SEO_INTEL_MIGRATION_DB_USERNAME" || fail GSC_SYNC_DB_CREDENTIAL_MISSING
           test -n "$SEO_INTEL_MIGRATION_DB_PASSWORD" || fail GSC_SYNC_DB_CREDENTIAL_MISSING
 
           umask 077
-          printf '%s' "$GSC_SERVICE_ACCOUNT_JSON" > "$local_key"
-          jq -e '
-            .type == "service_account"
-            and (.client_email | type == "string" and length > 0)
-            and (.private_key | type == "string" and length > 0)
-            and .token_uri == "https://oauth2.googleapis.com/token"
-          ' "$local_key" >/dev/null || fail GSC_CREDENTIAL_INVALID
+          if [ -n "$GSC_SERVICE_ACCOUNT_JSON" ] \
+            && [[ "$GSC_PROPERTY_URL" =~ ^sc-domain:[A-Za-z0-9.-]+$ ]] \
+            && [ "$GSC_ENABLED" = true ] && [ "$GSC_LIVE_API_ENABLED" = true ] \
+            && [ "$GSC_SYNC_ENABLED" = true ] && [ "$GSC_AUTH_MODE" = service_account ] \
+            && [ "$GSC_SCOPE" = https://www.googleapis.com/auth/webmasters.readonly ] \
+            && [ "$GSC_SYNC_WINDOW_DAYS" = 90 ] && [ "$GSC_SYNC_SEARCH_TYPES" = web ]; then
+            printf '%s' "$GSC_SERVICE_ACCOUNT_JSON" > "$local_key"
+            if jq -e '
+              .type == "service_account"
+              and (.client_email | type == "string" and length > 0)
+              and (.private_key | type == "string" and length > 0)
+              and .token_uri == "https://oauth2.googleapis.com/token"
+            ' "$local_key" >/dev/null; then
+              gsc_refresh_configured=true
+            fi
+          fi
           {
             printf 'SEO_INTEL_GSC_ENABLED=%q\n' "$GSC_ENABLED"
             printf 'SEO_INTEL_GSC_LIVE_API_ENABLED=%q\n' "$GSC_LIVE_API_ENABLED"
             printf 'SEO_INTEL_GSC_SYNC_ENABLED=%q\n' "$GSC_SYNC_ENABLED"
             printf 'SEO_INTEL_GSC_PROPERTY_URL=%q\n' "$GSC_PROPERTY_URL"
             printf 'SEO_INTEL_GSC_AUTH_MODE=%q\n' "$GSC_AUTH_MODE"
-            printf 'SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON_PATH=%q\n' "$remote_key"
+            if [ "$gsc_refresh_configured" = true ]; then
+              printf 'SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON_PATH=%q\n' "$remote_key"
+            else
+              printf 'SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON_PATH=\n'
+            fi
             printf 'SEO_INTEL_GSC_SCOPE=%q\n' "$GSC_SCOPE"
             printf 'SEO_INTEL_GSC_SYNC_WINDOW_DAYS=%q\n' "$GSC_SYNC_WINDOW_DAYS"
             printf 'SEO_INTEL_GSC_SYNC_SEARCH_TYPES=%q\n' "$GSC_SYNC_SEARCH_TYPES"
@@ -1350,39 +1356,56 @@ jobs:
             printf 'SEO_INTEL_WRITE_ENABLED=true\n'
             printf 'APP_CONFIG_CACHE=%q\n' "$remote_writer_config"
           } > "$local_writer_env"
-          chmod 0600 "$local_writer_env"
+          chmod 0600 "$local_env" "$local_writer_env"
+          if [ -f "$local_key" ]; then chmod 0600 "$local_key"; fi
 
           "${ssh_base[@]}" "umask 077; test ! -e '$remote_tmp'; mkdir '$remote_tmp'"
           scp -q -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-            -o ConnectionAttempts=3 -P "$DEPLOY_PORT" "$local_key" "$local_env" \
+            -o ConnectionAttempts=3 -P "$DEPLOY_PORT" "$local_env" \
             "$DEPLOY_USER@$DEPLOY_HOST:$remote_tmp/"
+          if [ "$gsc_refresh_configured" = true ]; then
+            scp -q -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+              -o ConnectionAttempts=3 -P "$DEPLOY_PORT" "$local_key" \
+              "$DEPLOY_USER@$DEPLOY_HOST:$remote_key"
+          fi
           scp -q -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -o ConnectionAttempts=3 -P "$DEPLOY_PORT" "$local_writer_env" \
             "$DEPLOY_USER@$DEPLOY_HOST:$remote_writer_env"
           "${ssh_base[@]}" "chmod 0600 '$remote_writer_env'"
 
-          node backend/scripts/seo/gsc_restricted_connect_proxy.mjs --port="$PROXY_PORT" \
-            >"$RUNNER_TEMP/production-gsc-proxy.log" 2>&1 &
-          proxy_pid=$!
-          for _ in {1..20}; do
-            nc -z 127.0.0.1 "$PROXY_PORT" && break
-            sleep 1
-          done
-          nc -z 127.0.0.1 "$PROXY_PORT" || fail GSC_RESTRICTED_EGRESS_TRANSPORT_FAILED
-          ssh -N -o BatchMode=yes -o StrictHostKeyChecking=yes -o ExitOnForwardFailure=yes \
-            -o ConnectTimeout=10 -o ConnectionAttempts=3 -o ServerAliveInterval=15 \
-            -o ServerAliveCountMax=8 -R "127.0.0.1:$PROXY_PORT:127.0.0.1:$PROXY_PORT" \
-            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            >"$RUNNER_TEMP/production-gsc-tunnel.log" 2>&1 &
-          tunnel_pid=$!
-          sleep 2
-          kill -0 "$tunnel_pid" || fail GSC_RESTRICTED_EGRESS_TRANSPORT_FAILED
+          if [ "$gsc_refresh_configured" = true ]; then
+            node backend/scripts/seo/gsc_restricted_connect_proxy.mjs --port="$PROXY_PORT" \
+              >"$RUNNER_TEMP/production-gsc-proxy.log" 2>&1 &
+            proxy_pid=$!
+            for _ in {1..20}; do
+              nc -z 127.0.0.1 "$PROXY_PORT" && break
+              sleep 1
+            done
+            if nc -z 127.0.0.1 "$PROXY_PORT"; then
+              ssh -N -o BatchMode=yes -o StrictHostKeyChecking=yes -o ExitOnForwardFailure=yes \
+                -o ConnectTimeout=10 -o ConnectionAttempts=3 -o ServerAliveInterval=15 \
+                -o ServerAliveCountMax=8 -R "127.0.0.1:$PROXY_PORT:127.0.0.1:$PROXY_PORT" \
+                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+                >"$RUNNER_TEMP/production-gsc-tunnel.log" 2>&1 &
+              tunnel_pid=$!
+              sleep 2
+              if ! kill -0 "$tunnel_pid" 2>/dev/null; then
+                stop_owned_pid "$proxy_pid" "gsc_restricted_connect_proxy.mjs"
+                proxy_pid=""
+                tunnel_pid=""
+              fi
+            else
+              stop_owned_pid "$proxy_pid" "gsc_restricted_connect_proxy.mjs"
+              proxy_pid=""
+            fi
+          fi
           fi
 
           release="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}"
           candidate_sha="$DEPLOY_SHA"
           lkg_sha='${{ steps.baseline.outputs.active }}'
           deploy_timeout=30m
+          if test "$competitive_evidence" = true; then deploy_timeout=35m; fi
           if test '${{ needs.policy.outputs.seo_council_orchestration }}' = true; then deploy_timeout=60m; fi
           set +e
           timeout --signal=TERM --kill-after=30s "$deploy_timeout" php /tmp/dep.phar deploy production -f deploy.php --revision "$DEPLOY_SHA" \

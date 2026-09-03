@@ -126,6 +126,10 @@ final class SeoIntelGscReadModelSyncTest extends TestCase
         $repeat = app(GscReadModelSyncService::class)->sync(7, ['web']);
 
         $this->assertSame('success', $result['status']);
+        $this->assertSame('seo.gsc_refresh_receipt.v2', $result['schema_version']);
+        $this->assertSame('testing', $result['environment']);
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', (string) $result['readmodel_snapshot_hash']);
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', (string) $result['receipt_hash']);
         $this->assertSame('success', $repeat['status']);
         $this->assertSame(0, $result['unmapped_rows']);
         $this->assertSame(0, $result['mapped_rows']);

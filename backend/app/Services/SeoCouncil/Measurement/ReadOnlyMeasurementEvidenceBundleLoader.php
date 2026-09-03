@@ -7,6 +7,7 @@ namespace App\Services\SeoCouncil\Measurement;
 use App\Services\SeoAgentEvidence\Bundle\SeoEvidenceBundleFactory;
 use App\Services\SeoAgentEvidence\Privacy\SeoPrivateDataScanner;
 use App\Services\SeoIntel\GscDataQualityGate;
+use App\Services\SeoIntel\GscRunCloseoutSummarizer;
 use App\Services\SeoIntel\OpsDashboard\SeoConversionFunnelReadService;
 use App\Services\SeoIntel\OpsDashboard\SeoDashboardApiReadService;
 use App\Services\SeoIntel\PageFamily\PageFamilyPolicyRegistry;
@@ -24,6 +25,7 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
         private readonly SeoEvidenceBundleFactory $bundles,
         private readonly SeoPrivateDataScanner $privacy,
         private readonly GscDataQualityGate $quality,
+        private readonly GscRunCloseoutSummarizer $gscCloseout,
         private readonly SeoDashboardApiReadService $dashboard,
         private readonly SeoConversionFunnelReadService $conversion,
         private readonly MeasurementEvidenceHoldReasonResolver $reasons,
@@ -199,7 +201,7 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
             ];
         }
         $windowComplete = $scopeWindowsComplete
-            || ($latestDate !== null && $this->gscFullWindowReceiptCovers($connection, $latestDate));
+            || ($latestDate !== null && $this->gscFullWindowReceiptCovers($connection, $latestDate, $environment));
 
         $lagDays = max(0, (int) data_get($quality, 'freshness.lag_days_required', 3));
         $maxAgeDays = max($lagDays, (int) data_get($quality, 'freshness.max_report_age_days', 10));
@@ -568,7 +570,7 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
         return true;
     }
 
-    private function gscFullWindowReceiptCovers(string $connection, CarbonImmutable $latestDate): bool
+    private function gscFullWindowReceiptCovers(string $connection, CarbonImmutable $latestDate, string $environment): bool
     {
         $schema = Schema::connection($connection);
         if (! $this->schemaHas($schema, 'seo_gsc_sync_runs', [
@@ -576,11 +578,6 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
         ])) {
             return false;
         }
-        $releaseSha = $this->releaseSha();
-        if ($releaseSha === null) {
-            return false;
-        }
-
         $receipts = DB::connection($connection)->table('seo_gsc_sync_runs')
             ->where('status', 'success')
             ->whereNotNull('receipt_json')
@@ -597,9 +594,33 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
             }
             $searchTypes = $receipt['search_types'] ?? null;
             $restricted = data_get($receipt, 'restricted_egress.status');
+            $expectedEnvironment = $environment === 'production_runtime' ? 'production' : 'staging';
+            $configuredProperty = trim((string) config('seo_intel.gsc_property_url', ''));
+            $propertyMatches = $configuredProperty === ''
+                || hash_equals(hash('sha256', $configuredProperty), (string) ($receipt['property_hash'] ?? ''));
+            $currentSnapshot = $this->gscCloseout->readModelSnapshot(
+                DB::connection($connection),
+                $start,
+                $end,
+                ['web'],
+            );
+            $recordedSnapshot = data_get($receipt, 'gsc_data_quality.read_model_after');
+            $snapshotMatches = is_array($recordedSnapshot)
+                && hash_equals($this->canonicalHash($recordedSnapshot), $this->canonicalHash($currentSnapshot));
+            $newReceiptHashesValid = true;
+            if (isset($receipt['schema_version']) || isset($receipt['readmodel_snapshot_hash']) || isset($receipt['receipt_hash'])) {
+                $withoutHash = $receipt;
+                unset($withoutHash['receipt_hash']);
+                $newReceiptHashesValid = ($receipt['schema_version'] ?? null) === 'seo.gsc_refresh_receipt.v2'
+                    && ($receipt['environment'] ?? null) === $expectedEnvironment
+                    && is_string($receipt['readmodel_snapshot_hash'] ?? null)
+                    && hash_equals($this->canonicalHash($currentSnapshot), (string) $receipt['readmodel_snapshot_hash'])
+                    && is_string($receipt['receipt_hash'] ?? null)
+                    && hash_equals($this->canonicalHash($withoutHash), (string) $receipt['receipt_hash']);
+            }
             if (is_array($receipt)
                 && ($receipt['status'] ?? null) === 'success'
-                && ($receipt['fetch_mode'] ?? null) === 'full_window'
+                && in_array(($receipt['fetch_mode'] ?? null), ['full_window', 'incremental'], true)
                 && ($receipt['window_days'] ?? null) === 90
                 && $searchTypes === ['web']
                 && (int) $start->diffInDays($end) === 89
@@ -613,9 +634,10 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
                 && ($receipt['read_only_gsc'] ?? null) === true
                 && ($receipt['search_submission_allowed'] ?? null) === false
                 && $restricted === 'restricted'
-                && ($receipt['application_sha'] ?? null) === $releaseSha
-                && ($receipt['workflow_sha'] ?? null) === $releaseSha
-                && ($receipt['active_production_sha'] ?? null) === $releaseSha) {
+                && $propertyMatches
+                && $snapshotMatches
+                && $newReceiptHashesValid
+                && (($receipt['fetch_mode'] ?? null) === 'full_window' || ($receipt['schema_version'] ?? null) === 'seo.gsc_refresh_receipt.v2')) {
                 return true;
             }
         }
@@ -646,21 +668,24 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
         return true;
     }
 
-    private function releaseSha(): ?string
+    /** @param array<string, mixed> $value */
+    private function canonicalHash(array $value): string
     {
-        $candidates = [
-            trim((string) config('app.git_sha', '')),
-            is_file(dirname(base_path()).'/REVISION')
-                ? trim((string) file_get_contents(dirname(base_path()).'/REVISION'))
-                : '',
-        ];
-        foreach ($candidates as $candidate) {
-            if (preg_match('/^[a-f0-9]{40}$/D', $candidate) === 1) {
-                return $candidate;
+        $sort = function (mixed $item) use (&$sort): mixed {
+            if (! is_array($item)) {
+                return $item;
             }
-        }
+            if (! array_is_list($item)) {
+                ksort($item, SORT_STRING);
+            }
+            foreach ($item as $key => $child) {
+                $item[$key] = $sort($child);
+            }
 
-        return null;
+            return $item;
+        };
+
+        return hash('sha256', json_encode($sort($value), JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
     }
 
     /** @param array<string, mixed> $metrics @return array<string, int> */

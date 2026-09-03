@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace Tests\Feature\SeoIntel;
 
 use App\Services\SeoAgentEvidence\Bundle\SeoEvidenceBundleVerifier;
+use App\Services\SeoAgentEvidence\Competitive\MeasurementSnapshotVerifier;
 use App\Services\SeoCouncil\Measurement\ReadOnlyMeasurementEvidenceBundleLoader;
+use App\Services\SeoIntel\GscRunCloseoutSummarizer;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -50,6 +53,22 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
         foreach (['canonical_url', 'raw_query', 'query_display_masked', 'user_id', 'database'] as $forbidden) {
             $this->assertStringNotContainsString($forbidden, $encoded);
         }
+    }
+
+    public function test_measurement_snapshot_is_deterministic_and_release_sha_independent(): void
+    {
+        $verifier = app(MeasurementSnapshotVerifier::class);
+        $first = $verifier->verify(str_repeat('a', 40), 'tests', 'production');
+        $second = $verifier->verify(str_repeat('b', 40), 'tests', 'production');
+
+        $this->assertSame('READY', $first['status']);
+        $this->assertSame($first['measurement_snapshot_set_hash'], $second['measurement_snapshot_set_hash']);
+        $this->assertSame($first['search_measurement']['snapshot_hash'], $second['search_measurement']['snapshot_hash']);
+        $this->assertSame($first['cro_measurement']['snapshot_hash'], $second['cro_measurement']['snapshot_hash']);
+        $this->assertTrue($verifier->refreshable('search_measurement', 'GSC_STALE'));
+        $this->assertFalse($verifier->refreshable('search_measurement', 'GSC_MAPPING_FAILED'));
+        $this->assertTrue($verifier->refreshable('commercial_funnel_cro', 'CRO_WINDOW_INCOMPLETE'));
+        $this->assertFalse($verifier->refreshable('commercial_funnel_cro', 'CRO_MAPPING_FAILED'));
     }
 
     public function test_loader_uses_read_only_current_authority_metadata_when_url_truth_is_empty(): void
@@ -144,11 +163,15 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
         $this->assertSame('GSC_READMODEL_UNHEALTHY', app(ReadOnlyMeasurementEvidenceBundleLoader::class)->diagnoseForScope('mission:readmodel', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
     }
 
-    public function test_search_window_accepts_only_a_current_exact_sha_full_window_sync_receipt_for_zero_row_dates(): void
+    public function test_search_window_reuses_a_verified_environment_snapshot_across_release_shas(): void
     {
         $sha = str_repeat('c', 40);
         config(['app.git_sha' => $sha]);
         DB::table('seo_gsc_daily')->where('report_date', now('UTC')->subDays(50)->toDateString())->delete();
+
+        $start = CarbonImmutable::parse(now('UTC')->subDays(92)->toDateString(), 'UTC');
+        $end = CarbonImmutable::parse(now('UTC')->subDays(3)->toDateString(), 'UTC');
+        $snapshot = app(GscRunCloseoutSummarizer::class)->readModelSnapshot(DB::connection(), $start, $end, ['web']);
 
         $receipt = [
             'status' => 'success',
@@ -166,6 +189,7 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
             'read_only_gsc' => true,
             'search_submission_allowed' => false,
             'restricted_egress' => ['status' => 'restricted'],
+            'gsc_data_quality' => ['read_model_after' => $snapshot],
             'application_sha' => str_repeat('d', 40),
             'workflow_sha' => str_repeat('d', 40),
             'active_production_sha' => str_repeat('d', 40),
@@ -176,18 +200,10 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
             'finished_at' => now('UTC'),
         ]);
         $loader = app(ReadOnlyMeasurementEvidenceBundleLoader::class);
-        $this->assertSame('GSC_WINDOW_INCOMPLETE', $loader->diagnoseForScope('mission:wrong-sha', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
+        $this->assertSame('NONE', $loader->diagnoseForScope('mission:cross-sha', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
 
-        DB::table('seo_gsc_sync_runs')->delete();
-        foreach (['application_sha', 'workflow_sha', 'active_production_sha'] as $field) {
-            $receipt[$field] = $sha;
-        }
-        DB::table('seo_gsc_sync_runs')->insert([
-            'status' => 'success',
-            'receipt_json' => json_encode($receipt, JSON_THROW_ON_ERROR),
-            'finished_at' => now('UTC'),
-        ]);
-        $this->assertSame('NONE', $loader->diagnoseForScope('mission:exact-sha', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
+        DB::table('seo_gsc_daily')->where('report_date', now('UTC')->subDays(49)->toDateString())->delete();
+        $this->assertSame('GSC_WINDOW_INCOMPLETE', $loader->diagnoseForScope('mission:drifted-snapshot', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
     }
 
     public function test_cro_diagnostics_distinguish_schema_readmodel_stale_and_mapping_failures(): void
@@ -219,7 +235,7 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
         $this->assertSame('NONE', $loader->diagnoseForRuntime('mission:runtime-cro', 'commercial_funnel_cro', 'staging_runtime')->diagnostic()['hold_reason']);
     }
 
-    public function test_runtime_scope_uses_exact_public_zero_refresh_proof_without_synthetic_cro_rows(): void
+    public function test_runtime_scope_reuses_verified_public_zero_refresh_proof_across_release_shas(): void
     {
         $sha = str_repeat('e', 40);
         config(['app.git_sha' => $sha]);
@@ -265,22 +281,8 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
             'completed_at' => now('UTC'),
         ]);
         $loader = app(ReadOnlyMeasurementEvidenceBundleLoader::class);
-        $this->assertSame('CRO_READMODEL_UNHEALTHY', $loader->diagnoseForRuntime('mission:wrong-sha-zero', 'commercial_funnel_cro', 'staging_runtime')->diagnostic()['hold_reason']);
-
-        DB::table('analytics_seo_conversion_refresh_runs')->delete();
-        foreach (['application_sha', 'workflow_sha', 'active_production_sha'] as $field) {
-            $receipt[$field] = $sha;
-        }
-        DB::table('analytics_seo_conversion_refresh_runs')->insert([
-            'org_scope_count' => 1,
-            'status' => 'success',
-            'trigger_mode' => 'manual',
-            'receipt_json' => json_encode($receipt, JSON_THROW_ON_ERROR),
-            'completed_at' => now('UTC'),
-        ]);
-
         $result = $loader->diagnoseForRuntime(
-            'mission:public-zero',
+            'mission:cross-sha-public-zero',
             'commercial_funnel_cro',
             'staging_runtime',
         );
@@ -361,6 +363,7 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
             $table->unsignedInteger('article_to_test_click_count');
             $table->unsignedInteger('start_test_count');
             $table->unsignedInteger('complete_test_count');
+            $table->unsignedInteger('result_ready_count')->default(0);
             $table->unsignedInteger('view_result_count');
             $table->unsignedInteger('return_public_content_count');
             $table->timestamp('last_refreshed_at')->nullable();

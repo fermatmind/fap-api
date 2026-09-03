@@ -163,6 +163,14 @@ final class SeoConversionFunnelReadService
                         : 'seo_conversion_refresh_missing_or_stale',
                 ];
             }
+
+            return [
+                'last_successful_refresh_at' => null,
+                'latest_attempt_at' => null,
+                'latest_status' => null,
+                'trigger_mode' => null,
+                'warning' => 'seo_conversion_refresh_missing_or_stale',
+            ];
         }
 
         $legacy = DB::table(self::TABLE)
@@ -200,19 +208,55 @@ final class SeoConversionFunnelReadService
         } catch (\Throwable) {
             return null;
         }
-        $releaseSha = $this->releaseSha();
+        $schemaVersion = $receipt['schema_version'] ?? null;
+        $expected = data_get($receipt, 'readback_receipt.expected_metrics');
+        $persisted = data_get($receipt, 'readback_receipt.persisted_metrics');
+        $current = $this->metricsForRange($from, $to, 0, is_array($persisted) ? array_keys($persisted) : []);
+        $snapshot = (array) ($receipt['readmodel_snapshot'] ?? []);
+        $newHashesValid = true;
+        if ($schemaVersion === 'analytics-seo-conversion-refresh-receipt.v2') {
+            $withoutHash = $receipt;
+            unset($withoutHash['receipt_hash']);
+            try {
+                $snapshotFrom = \Carbon\CarbonImmutable::parse((string) ($snapshot['from'] ?? ''), 'UTC')->startOfDay();
+                $snapshotTo = \Carbon\CarbonImmutable::parse((string) ($snapshot['to'] ?? ''), 'UTC')->startOfDay();
+            } catch (\Throwable) {
+                return null;
+            }
+            $snapshotMetrics = $snapshot['persisted_metrics'] ?? null;
+            $currentSnapshotMetrics = $this->metricsForRange(
+                $snapshotFrom,
+                $snapshotTo,
+                0,
+                is_array($snapshotMetrics) ? array_keys($snapshotMetrics) : [],
+            );
+            $newHashesValid = ($receipt['environment'] ?? null) === app()->environment()
+                && ($snapshot['environment'] ?? null) === app()->environment()
+                && ($snapshot['org_scope_mode'] ?? null) === 'bounded'
+                && ($snapshot['org_scope_count'] ?? null) === 1
+                && ($snapshot['public_org_zero_only'] ?? null) === true
+                && (int) $snapshotFrom->diffInDays($snapshotTo) === 89
+                && $snapshotTo->isSameDay(now('UTC'))
+                && is_array($snapshotMetrics)
+                && $snapshotMetrics === $currentSnapshotMetrics
+                && is_string($receipt['readmodel_snapshot_hash'] ?? null)
+                && hash_equals($this->canonicalHash($snapshot), (string) $receipt['readmodel_snapshot_hash'])
+                && is_string($receipt['receipt_hash'] ?? null)
+                && hash_equals($this->canonicalHash($withoutHash), (string) $receipt['receipt_hash']);
+        }
         if (! is_array($receipt)
-            || $releaseSha === null
-            || ($receipt['schema_version'] ?? null) !== 'analytics-seo-conversion-refresh-receipt.v1'
+            || ! in_array($schemaVersion, ['analytics-seo-conversion-refresh-receipt.v1', 'analytics-seo-conversion-refresh-receipt.v2'], true)
             || ($receipt['status'] ?? null) !== 'success'
             || ($receipt['org_scope_mode'] ?? null) !== 'bounded'
             || ($receipt['org_scope_count'] ?? null) !== 1
             || ($receipt['public_org_zero_only'] ?? null) !== true
-            || (int) $from->diffInDays($to) !== 89
-            || ! $to->isSameDay(now('UTC'))
-            || ($receipt['application_sha'] ?? null) !== $releaseSha
-            || ($receipt['workflow_sha'] ?? null) !== $releaseSha
-            || ($receipt['active_production_sha'] ?? null) !== $releaseSha
+            || ($schemaVersion === 'analytics-seo-conversion-refresh-receipt.v1' && (int) $from->diffInDays($to) !== 89)
+            || ($schemaVersion === 'analytics-seo-conversion-refresh-receipt.v1' && ! $to->isSameDay(now('UTC')))
+            || ! is_array($expected)
+            || ! is_array($persisted)
+            || $expected !== $persisted
+            || $persisted !== $current
+            || ! $newHashesValid
             || ($receipt['raw_query_exposed'] ?? null) !== false
             || ($receipt['raw_session_or_business_identifiers_exposed'] ?? null) !== false
             || ($receipt['private_paths_allowed'] ?? null) !== false
@@ -221,6 +265,47 @@ final class SeoConversionFunnelReadService
         }
 
         return $receipt;
+    }
+
+    /** @param list<string> $metrics @return array<string, int> */
+    private function metricsForRange(\Carbon\CarbonImmutable $from, \Carbon\CarbonImmutable $to, int $orgId, array $metrics): array
+    {
+        $allowed = [...self::METRICS, 'result_ready_count'];
+        if ($metrics === [] || array_diff($metrics, $allowed) !== []) {
+            return [];
+        }
+        $query = DB::table(self::TABLE)
+            ->where('org_id', $orgId)
+            ->whereBetween('day', [$from->toDateString(), $to->toDateString()]);
+        foreach ($metrics as $metric) {
+            $query->selectRaw(sprintf('COALESCE(SUM(%s), 0) AS %s', $metric, $metric));
+        }
+        $row = $query->first();
+
+        return array_combine($metrics, array_map(
+            static fn (string $metric): int => max(0, (int) ($row->{$metric} ?? 0)),
+            $metrics,
+        ));
+    }
+
+    /** @param array<string, mixed> $value */
+    private function canonicalHash(array $value): string
+    {
+        $sort = function (mixed $item) use (&$sort): mixed {
+            if (! is_array($item)) {
+                return $item;
+            }
+            if (! array_is_list($item)) {
+                ksort($item, SORT_STRING);
+            }
+            foreach ($item as $key => $child) {
+                $item[$key] = $sort($child);
+            }
+
+            return $item;
+        };
+
+        return hash('sha256', json_encode($sort($value), JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
     }
 
     /** @param array<string,mixed> $metrics */
@@ -236,23 +321,6 @@ final class SeoConversionFunnelReadService
         }
 
         return true;
-    }
-
-    private function releaseSha(): ?string
-    {
-        $candidates = [
-            trim((string) config('app.git_sha', '')),
-            is_file(dirname(base_path()).'/REVISION')
-                ? trim((string) file_get_contents(dirname(base_path()).'/REVISION'))
-                : '',
-        ];
-        foreach ($candidates as $candidate) {
-            if (preg_match('/^[a-f0-9]{40}$/D', $candidate) === 1) {
-                return $candidate;
-            }
-        }
-
-        return null;
     }
 
     /** @return list<array<string,mixed>> */

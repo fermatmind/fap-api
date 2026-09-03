@@ -4,15 +4,37 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SeoIntel;
 
+use App\Console\Commands\SeoCompetitiveReleasePrepareCommand;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveEvidenceBoundaryGuard;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveEvidenceContractRegistry;
 use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher;
 use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceContractRegistry;
+use ReflectionMethod;
 use Symfony\Component\Process\Process;
 use Tests\TestCase;
 
 final class SeoPlatform11GContractsBoundaryTest extends TestCase
 {
+    public function test_release_prepare_uses_source_specific_refresh_reasons_and_safe_output_validation(): void
+    {
+        $command = app(SeoCompetitiveReleasePrepareCommand::class);
+        $reason = new ReflectionMethod($command, 'refreshFailureReason');
+        $output = new ReflectionMethod($command, 'refreshOutputValid');
+
+        $this->assertSame('GSC_REFRESH_TIMEOUT', $reason->invoke($command, 'gsc', true));
+        $this->assertSame('GSC_REFRESH_FAILED', $reason->invoke($command, 'gsc', false));
+        $this->assertSame('CRO_REFRESH_TIMEOUT', $reason->invoke($command, 'cro', true));
+        $this->assertSame('CRO_REFRESH_FAILED', $reason->invoke($command, 'cro', false));
+        $this->assertTrue($output->invoke($command, 'gsc', json_encode([
+            'status' => 'success', 'window_days' => 90, 'search_types' => ['web'],
+        ], JSON_THROW_ON_ERROR)));
+        $this->assertTrue($output->invoke($command, 'cro', json_encode([
+            'status' => 'success', 'readback_receipt' => ['status' => 'pass'],
+        ], JSON_THROW_ON_ERROR)));
+        $this->assertFalse($output->invoke($command, 'gsc', '{"status":"blocked"}'));
+        $this->assertFalse($output->invoke($command, 'cro', 'not-json'));
+    }
+
     public function test_v5_is_an_append_only_competitive_contract_manifest(): void
     {
         $registry = app(CompetitiveEvidenceContractRegistry::class);

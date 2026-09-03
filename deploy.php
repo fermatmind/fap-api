@@ -1499,41 +1499,6 @@ BASH);
     });
 });
 
-task('seo:competitive-measurement-refresh', function () {
-    if (! deployBooleanOption('seo_competitive_evidence', false) || currentHost()->getAlias() !== 'production') {
-        return;
-    }
-
-    within('{{release_path}}/backend', function (): void {
-        run(<<<'BASH'
-set -euo pipefail
-sync_env='{{seo_measurement_sync_env}}'
-[[ "$sync_env" =~ ^/tmp/fermatmind-11g-production-[1-9][0-9]*-[1-9][0-9]*/measurement\.env$ ]]
-test -f "$sync_env"
-test ! -L "$sync_env"
-set -a
-. "$sync_env"
-set +a
-[[ "${APP_CONFIG_CACHE:-}" =~ ^/tmp/fermatmind-11g-production-[1-9][0-9]*-[1-9][0-9]*/config\.php$ ]]
-test ! -e "$APP_CONFIG_CACHE"
-export SEO_INTEL_WRITE_ENABLED=true
-sync_raw="$(mktemp)"
-sync="$(mktemp)"
-trap 'rm -f "$sync_raw" "$sync"' EXIT
-timeout 15m {{bin/php}} artisan seo-intel:gsc-sync --window=90 --search-types=web --full-window --trigger=manual --json --no-interaction --no-ansi > "$sync_raw"
-awk 'started || /^[[:space:]]*\{/ { started=1; print }' "$sync_raw" > "$sync"
-jq -e '.status == "success" and .window_days == 90 and .fetch_mode == "full_window" and .search_types == ["web"] and .pages_fetched > 0 and .rows_seen > 0 and .rows_upserted > 0 and .mapped_rows > 0 and .unmapped_rows == 0 and (.excluded_non_authority_rows | type == "number" and . >= 0) and .duplicate_natural_keys == 0 and .quality_gate.status == "pass" and (.data_max_date | type == "string" and length == 10) and (.data_lag_days | type == "number" and . <= 10) and .read_only_gsc == true and .search_submission_allowed == false and .restricted_egress.status == "restricted"' "$sync" >/dev/null
-from_date="$(date -u -d '89 days ago' +%F)"
-to_date="$(date -u +%F)"
-export SEO_INTEL_ALLOW_EXTERNAL_API_CALLS=false SEO_INTEL_WRITE_ENABLED=false
-cro="$(mktemp)"
-trap 'rm -f "$sync_raw" "$sync" "$cro"' EXIT
-timeout 15m {{bin/php}} artisan analytics:refresh-seo-conversion-daily --from="$from_date" --to="$to_date" --org=0 --trigger=manual --json --no-interaction --no-ansi > "$cro"
-jq -e '.schema_version == "analytics-seo-conversion-refresh-receipt.v1" and .status == "success" and .org_scope_mode == "bounded" and .org_scope_count == 1 and .attempted_rows >= 0 and .upserted_rows >= 0 and .readback_receipt.status == "pass" and .raw_query_exposed == false and .raw_session_or_business_identifiers_exposed == false and .private_paths_allowed == false and .search_submission_allowed == false' "$cro" >/dev/null
-BASH);
-    });
-});
-
 task('seo:competitive-evidence-preactivation', function () {
     if (! deployBooleanOption('seo_competitive_evidence', false)) {
         writeln('<comment>Skip SEO competitive evidence ingestion.</comment>');
@@ -1551,9 +1516,13 @@ task('seo:competitive-evidence-preactivation', function () {
         run(<<<'BASH'
 set -euo pipefail
 writer_env='{{seo_competitive_writer_env}}'
+gsc_env='{{seo_measurement_sync_env}}'
 [[ "$writer_env" =~ ^/tmp/fermatmind-11g-production-[1-9][0-9]*-[1-9][0-9]*/competitive-writer\.env$ ]]
+[[ "$gsc_env" =~ ^/tmp/fermatmind-11g-production-[1-9][0-9]*-[1-9][0-9]*/measurement\.env$ ]]
 test -f "$writer_env"
 test ! -L "$writer_env"
+test -f "$gsc_env"
+test ! -L "$gsc_env"
 set -a
 . "$writer_env"
 set +a
@@ -1566,36 +1535,87 @@ candidate_sha="$(tr -d '\r\n' < ../REVISION)"
 case "$candidate_sha" in (*[!0-9a-f]*|'') exit 1 ;; esac
 test "${#candidate_sha}" -eq 40
 environment={{competitive_environment}}
-receipt="$(SEO_RELEASE_SHA="$candidate_sha" \
+receipt_dir='{{deploy_path}}/shared/backend/storage/app/release-receipts/seo-competitive-evidence'
+receipt_probe_owner=deploy
+receipt_probe=''
+receipt_probe_link=''
+cleanup_receipt_probe() {
+  if [ -n "$receipt_probe_link" ]; then as_receipt_probe_owner rm -f "$receipt_probe_link" 2>/dev/null || true; fi
+  if [ -n "$receipt_probe" ]; then as_receipt_probe_owner rm -f "$receipt_probe" 2>/dev/null || true; fi
+}
+trap cleanup_receipt_probe EXIT HUP INT TERM
+fail_receipt_preflight() {
+  printf 'competitive_prepare_status=HOLD\n' >&2
+  printf 'competitive_prepare_stage=local_preflight\n' >&2
+  printf 'competitive_prepare_reason=RECEIPT_OWNER_PREFLIGHT_HOLD\n' >&2
+  exit 1
+}
+as_receipt_probe_owner() {
+  if [ "$receipt_probe_owner" = www-data ]; then
+    sudo -n -u www-data -- "$@"
+  else
+    "$@"
+  fi
+}
+mkdir -p "$receipt_dir" 2>/dev/null || true
+[ ! -L "$receipt_dir" ] || fail_receipt_preflight
+if ! receipt_probe="$(mktemp "$receipt_dir/.preflight-${candidate_sha}.XXXXXX" 2>/dev/null)"; then
+  sudo -n -u www-data -- mkdir -p "$receipt_dir" 2>/dev/null || fail_receipt_preflight
+  receipt_probe_owner=www-data
+  as_receipt_probe_owner test -d "$receipt_dir" || fail_receipt_preflight
+  as_receipt_probe_owner test ! -L "$receipt_dir" || fail_receipt_preflight
+  receipt_probe="$(as_receipt_probe_owner mktemp "$receipt_dir/.preflight-${candidate_sha}.XXXXXX" 2>/dev/null)" \
+    || fail_receipt_preflight
+fi
+receipt_probe_link="$receipt_probe.link"
+printf 'receipt-preflight\n' | as_receipt_probe_owner tee "$receipt_probe" >/dev/null \
+  || fail_receipt_preflight
+as_receipt_probe_owner chmod 0640 "$receipt_probe" || fail_receipt_preflight
+as_receipt_probe_owner ln "$receipt_probe" "$receipt_probe_link" || fail_receipt_preflight
+as_receipt_probe_owner cmp -s "$receipt_probe" "$receipt_probe_link" || fail_receipt_preflight
+as_receipt_probe_owner rm -f "$receipt_probe_link" "$receipt_probe" || fail_receipt_preflight
+receipt_probe=''
+receipt_probe_link=''
+prepare="$(SEO_RELEASE_SHA="$candidate_sha" \
   SEO_COMPETITIVE_EXTERNAL_READ_ENABLED=true \
   SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED=true \
-  {{bin/php}} artisan seo:competitive-evidence-ingest \
-    --cohort=competitive.big-five.live.v2 --write-evidence --json --no-interaction --no-ansi)"
-printf '%s' "$receipt" | {{bin/php}} -r '
+  {{bin/php}} artisan seo:competitive-release-prepare \
+    --candidate-sha="$candidate_sha" \
+    --cohort=competitive.big-five.live.v2 \
+    --gsc-env="$gsc_env" \
+    --writer-env="$writer_env" \
+    --json --no-interaction --no-ansi)"
+printf '%s' "$prepare" | {{bin/php}} -r '
 $payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
+$receipt = $payload["preactivation_receipt"] ?? [];
 $zero = ["model_calls", "tool_calls", "external_calls", "cms_writes", "url_truth_writes", "search_writes", "business_writes", "production_permissions", "outreach_actions"];
-$ok = ($payload["receipt_version"] ?? null) === "seo.competitive_evidence_closeout.v3"
-    && ($payload["candidate_sha"] ?? null) === ($argv[1] ?? null)
-    && ($payload["environment"] ?? null) === ($argv[2] ?? null)
-    && ($payload["closeout_state"] ?? null) === "HOLD"
-    && ($payload["production_sha"] ?? null) === null
-    && ($payload["SEO-PLATFORM-11G"] ?? null) === "HOLD"
-    && ($payload["competitive_context_status"] ?? null) === "READY"
-    && ($payload["competitive_hold_reason"] ?? null) === "NONE"
-    && ($payload["source_policy_version"] ?? null) === "seo.competitive_source_policy.v3"
-    && ($payload["source_registry_version"] ?? null) === "seo.competitive_source_registry.v2"
-    && ($payload["cohort_registry_version"] ?? null) === "seo.competitive_cohort_registry.v2"
-    && ($payload["execution_allowed"] ?? null) === false
-    && ($payload["digital_pr_scope"] ?? null) === "deferred_p2_manual"
+$ok = ($payload["schema_version"] ?? null) === "seo.competitive_release_prepare.v1"
+    && ($payload["status"] ?? null) === "READY"
+    && ($payload["failed_stage"] ?? null) === "none"
+    && ($payload["reason_code"] ?? null) === "NONE"
+    && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["measurement_snapshot_set_hash"] ?? "")) === 1
     && is_int($payload["dependency_ingestion"]["external_reads"] ?? null)
     && ($payload["dependency_ingestion"]["external_reads"] ?? -1) >= 0
-    && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["receipt_hash"] ?? "")) === 1;
+    && ($receipt["receipt_version"] ?? null) === "seo.competitive_evidence_closeout.v3"
+    && ($receipt["candidate_sha"] ?? null) === ($argv[1] ?? null)
+    && ($receipt["environment"] ?? null) === ($argv[2] ?? null)
+    && ($receipt["closeout_state"] ?? null) === "HOLD"
+    && ($receipt["production_sha"] ?? null) === null
+    && ($receipt["SEO-PLATFORM-11G"] ?? null) === "HOLD"
+    && ($receipt["competitive_context_status"] ?? null) === "READY"
+    && ($receipt["competitive_hold_reason"] ?? null) === "NONE"
+    && ($receipt["source_policy_version"] ?? null) === "seo.competitive_source_policy.v3"
+    && ($receipt["source_registry_version"] ?? null) === "seo.competitive_source_registry.v2"
+    && ($receipt["cohort_registry_version"] ?? null) === "seo.competitive_cohort_registry.v2"
+    && ($receipt["execution_allowed"] ?? null) === false
+    && ($receipt["digital_pr_scope"] ?? null) === "deferred_p2_manual"
+    && preg_match("/^[a-f0-9]{64}$/", (string) ($receipt["receipt_hash"] ?? "")) === 1;
 foreach ($zero as $field) {
-    $ok = $ok && ($payload[$field] ?? null) === 0;
+    $ok = $ok && ($receipt[$field] ?? null) === 0;
 }
 exit($ok ? 0 : 1);
 ' "$candidate_sha" "$environment"
-receipt_dir='{{deploy_path}}/shared/backend/storage/app/release-receipts/seo-competitive-evidence'
+receipt="$(printf '%s' "$prepare" | jq -c '.preactivation_receipt')"
 receipt_path="$receipt_dir/preactivation-$candidate_sha.json"
 receipt_owner=deploy
 fail_receipt_persistence() {
@@ -1655,7 +1675,7 @@ printf '%s' "$receipt" | jq -e --arg sha "$candidate_sha" '
     and .cro_measurement.context_status == "READY"
     and .cro_measurement.hold_reason == "NONE"
   ' >/dev/null
-BASH);
+BASH, timeout: 2100);
     });
 });
 
@@ -4253,8 +4273,7 @@ test -f "$receipt_path"
 BASH);
 });
 
-after('artisan:config:cache', 'seo:competitive-measurement-refresh');
-after('seo:competitive-measurement-refresh', 'seo:competitive-evidence-preactivation');
+after('artisan:config:cache', 'seo:competitive-evidence-preactivation');
 after('seo:competitive-evidence-preactivation', 'career:current-authority-production-preactivation-parity');
 after('career:current-authority-production-preactivation-parity', 'guard:sitemap-authority');
 after('artisan:migrate', 'guard:no-pending-migrations');

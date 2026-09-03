@@ -304,7 +304,8 @@ final class SeoConversionDailyBuilder
         $completedAt = CarbonImmutable::now('UTC');
         $status = data_get($result, 'readback_receipt.status') === 'pass' ? 'success' : 'blocked';
         $receipt = [
-            'schema_version' => 'analytics-seo-conversion-refresh-receipt.v1',
+            'schema_version' => 'analytics-seo-conversion-refresh-receipt.v2',
+            'environment' => app()->environment(),
             'run_uid' => $result['run_uid'],
             'trigger_mode' => $result['trigger_mode'],
             'status' => $status,
@@ -328,6 +329,25 @@ final class SeoConversionDailyBuilder
             'private_paths_allowed' => false,
             'search_submission_allowed' => false,
         ];
+        $coverageTo = CarbonImmutable::parse((string) $receipt['to'], 'UTC')->startOfDay();
+        $coverageFrom = ($receipt['public_org_zero_only'] ?? false)
+            ? $coverageTo->subDays(89)
+            : CarbonImmutable::parse((string) $receipt['from'], 'UTC')->startOfDay();
+        $receipt['readmodel_snapshot'] = [
+            'environment' => $receipt['environment'],
+            'from' => $coverageFrom->toDateString(),
+            'to' => $coverageTo->toDateString(),
+            'org_scope_mode' => $receipt['org_scope_mode'],
+            'org_scope_count' => $receipt['org_scope_count'],
+            'public_org_zero_only' => $receipt['public_org_zero_only'],
+            'persisted_metrics' => $this->persistedMetrics(
+                $coverageFrom,
+                $coverageTo,
+                ($receipt['public_org_zero_only'] ?? false) ? [0] : [],
+            ),
+        ];
+        $receipt['readmodel_snapshot_hash'] = $this->canonicalHash($receipt['readmodel_snapshot']);
+        $receipt['receipt_hash'] = $this->canonicalHash($receipt);
 
         DB::table(self::RUN_TABLE)->insert([
             'run_uid' => $result['run_uid'],
@@ -363,6 +383,44 @@ final class SeoConversionDailyBuilder
         }
 
         return null;
+    }
+
+    /** @param array<string, mixed> $value */
+    private function canonicalHash(array $value): string
+    {
+        $sort = function (mixed $item) use (&$sort): mixed {
+            if (! is_array($item)) {
+                return $item;
+            }
+            if (! array_is_list($item)) {
+                ksort($item, SORT_STRING);
+            }
+            foreach ($item as $key => $child) {
+                $item[$key] = $sort($child);
+            }
+
+            return $item;
+        };
+
+        return hash('sha256', json_encode($sort($value), JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
+    }
+
+    /** @param list<int> $orgIds @return array<string, int> */
+    private function persistedMetrics(CarbonImmutable $from, CarbonImmutable $to, array $orgIds): array
+    {
+        $query = DB::table(self::TABLE)->whereBetween('day', [$from->toDateString(), $to->toDateString()]);
+        if ($orgIds !== []) {
+            $query->whereIn('org_id', $orgIds);
+        }
+        foreach (self::METRICS as $metric) {
+            $query->selectRaw(sprintf('COALESCE(SUM(%s), 0) AS %s', $metric, $metric));
+        }
+        $row = $query->first();
+
+        return array_combine(self::METRICS, array_map(
+            static fn (string $metric): int => max(0, (int) ($row->{$metric} ?? 0)),
+            self::METRICS,
+        ));
     }
 
     /**

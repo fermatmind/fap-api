@@ -22,12 +22,13 @@ test("competitive ingestion is measurement-gated and environment independent", (
   const preactivation = deployer.indexOf("task('seo:competitive-evidence-preactivation'");
   const activation = deployer.indexOf("before('deploy:symlink'");
   assert.ok(preactivation > 0 && activation > 0);
-  assert.match(deployer, /after\('artisan:config:cache', 'seo:competitive-measurement-refresh'\)/);
-  assert.match(deployer, /task\('seo:competitive-measurement-refresh'/);
+  assert.match(deployer, /after\('artisan:config:cache', 'seo:competitive-evidence-preactivation'\)/);
+  assert.doesNotMatch(deployer, /task\('seo:competitive-measurement-refresh'/);
   assert.match(deployer, /after\('healthcheck:seo-council-anonymous', 'seo:competitive-evidence-finalize'\)/);
   assert.match(deployer, /SEO_COMPETITIVE_EXTERNAL_READ_ENABLED=true/);
   assert.match(deployer, /SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED=true/);
-  assert.match(deployer, /--cohort=competitive\.big-five\.live\.v2 --write-evidence/);
+  assert.match(deployer, /seo:competitive-release-prepare/);
+  assert.match(deployer, /--cohort=competitive\.big-five\.live\.v2/);
   assert.match(deployer, /environment=\{\{competitive_environment\}\}/);
   assert.match(deployer, /\.production_sha == null/);
   assert.match(deployer, /--finalize-activation/);
@@ -71,7 +72,8 @@ test("competitive persistence uses an ephemeral writer without changing runtime 
   assert.match(preactivation, /test ! -L "\$writer_env"/);
   assert.match(preactivation, /test ! -e "\$APP_CONFIG_CACHE"/);
   assert.match(preactivation, /test "\$\{SEO_INTEL_WRITE_ENABLED:-\}" = true/);
-  assert.doesNotMatch(preactivation, /seo_measurement_sync_env|HTTPS_PROXY|HTTP_PROXY|GSC_/);
+  assert.match(preactivation, /gsc_env='\{\{seo_measurement_sync_env\}\}'/);
+  assert.doesNotMatch(preactivation, /HTTPS_PROXY|HTTP_PROXY|GSC_SERVICE_ACCOUNT/);
 });
 
 test("production competitive receipts use the existing bounded runtime owner fallback", () => {
@@ -103,7 +105,7 @@ test("production competitive receipts use the existing bounded runtime owner fal
   );
 });
 
-test("production validates the complete 11G configuration before transport", () => {
+test("production validates local write configuration without requiring live GSC transport", () => {
   const preflightStart = deploy.indexOf("- name: Verify production 11G configuration before transport");
   const preflightEnd = deploy.indexOf("- uses: shivammathur/setup-php", preflightStart);
   const preflight = deploy.slice(preflightStart, preflightEnd);
@@ -112,14 +114,48 @@ test("production validates the complete 11G configuration before transport", () 
   assert.ok(preflightStart > 0 && preflightEnd > preflightStart);
   assert.ok(sshStart > preflightEnd);
   assert.match(preflight, /if: needs\.policy\.outputs\.seo_competitive_evidence == 'true'/);
-  assert.match(preflight, /SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON/);
-  assert.match(preflight, /SEO_INTEL_GSC_PROPERTY_URL/);
   assert.match(preflight, /COMPETITIVE_WRITER_DB_USERNAME: \$\{\{ secrets\.SEO_INTEL_MIGRATION_DB_USERNAME \}\}/);
   assert.match(preflight, /COMPETITIVE_WRITER_DB_PASSWORD: \$\{\{ secrets\.SEO_INTEL_MIGRATION_DB_PASSWORD \}\}/);
   assert.doesNotMatch(preflight, /^\s+SEO_INTEL_MIGRATION_DB_(?:USERNAME|PASSWORD):/m);
   assert.match(preflight, /COMPETITIVE_WRITER_DB_CREDENTIAL_MISSING/);
+  assert.match(preflight, /gsc_refresh_validation=deferred_until_needed/);
   assert.match(preflight, /production_competitive_configuration=READY/);
   assert.doesNotMatch(preflight, /\b(?:ssh|scp|curl)\b/);
+});
+
+test("production preparation reuses valid snapshots and bounds conditional parallel refresh", () => {
+  const command = readFileSync(
+    new URL("../../backend/app/Console/Commands/SeoCompetitiveReleasePrepareCommand.php", import.meta.url),
+    "utf8",
+  );
+  const verifier = readFileSync(
+    new URL("../../backend/app/Services/SeoAgentEvidence/Competitive/MeasurementSnapshotVerifier.php", import.meta.url),
+    "utf8",
+  );
+  const productionStart = deploy.indexOf("- name: Deploy once and automatically restore LKG after committed smoke failure");
+  const productionEnd = deploy.indexOf("- name: Read production competitive evidence receipt", productionStart);
+  const production = deploy.slice(productionStart, productionEnd);
+
+  assert.match(command, /seo:competitive-release-prepare/);
+  assert.match(command, /seo\.competitive_release_prepare\.v1/);
+  assert.match(command, /PROCESS_TIMEOUT_SECONDS = 1500/);
+  assert.match(command, /SUPERVISOR_TIMEOUT_SECONDS = 1800/);
+  assert.match(command, /->start\(\)/);
+  assert.match(command, /GSC_REFRESH_TIMEOUT/);
+  assert.match(command, /CRO_REFRESH_TIMEOUT/);
+  assert.match(command, /MEASUREMENT_REVALIDATION_HOLD/);
+  assert.match(command, /incremental_refresh/);
+  assert.match(command, /full_refresh/);
+  assert.match(command, /probeEvidenceWriter/);
+  assert.match(verifier, /measurement_snapshot_set_hash/);
+  assert.match(verifier, /property_hash/);
+  assert.match(verifier, /'org_id' => .*0/);
+  assert.doesNotMatch(deployer, /timeout 15m .*seo-intel:gsc-sync/);
+  assert.doesNotMatch(deployer, /timeout 15m .*analytics:refresh-seo-conversion-daily/);
+  assert.match(deployer, /BASH, timeout: 2100/);
+  assert.match(production, /stop_owned_pid/);
+  assert.match(production, /\^\[1-9\]\[0-9\]\*\$/);
+  assert.match(production, /ps -p "\$pid" -o command=/);
 });
 
 test("Council stays zero-egress while dependency reads are accounted separately", () => {

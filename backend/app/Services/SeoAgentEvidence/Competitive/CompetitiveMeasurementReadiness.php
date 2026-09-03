@@ -95,6 +95,24 @@ final class CompetitiveMeasurementReadiness
         }
         $search = $modes['search_measurement'];
         $cro = $modes['commercial_funnel_cro'];
+        foreach (['search_measurement', 'commercial_funnel_cro'] as $modeId) {
+            $bundle = (array) ($bundles[$modeId] ?? []);
+            $modes[$modeId]['snapshot_hash'] = $this->hasher->hash([
+                'environment' => $environment,
+                'mode_id' => $modeId,
+                'property_hash' => $modeId === 'search_measurement'
+                    ? hash('sha256', (string) config('seo_intel.gsc_property_url', 'unconfigured'))
+                    : null,
+                'org_id' => $modeId === 'commercial_funnel_cro' ? 0 : null,
+                'authority_revision' => (string) ($bundle['authority_revision'] ?? hash('sha256', $modeId.'|unavailable')),
+                'windows' => (array) data_get($bundle, 'payload.windows', []),
+                'freshness' => (array) data_get($bundle, 'payload.freshness', []),
+                'mapping_state' => data_get($bundle, 'payload.mapping_state'),
+                'quality_gate_status' => data_get($bundle, 'payload.quality_gate_status'),
+            ]);
+        }
+        $search = $modes['search_measurement'];
+        $cro = $modes['commercial_funnel_cro'];
         $ready = $this->readyMode($search) && $this->readyMode($cro);
         $hashes = array_values(array_map(static fn (array $mode): string => (string) $mode['bundle_hash'], $modes));
         sort($hashes, SORT_STRING);
@@ -105,6 +123,10 @@ final class CompetitiveMeasurementReadiness
             'search_measurement' => $search,
             'cro_measurement' => $cro,
             'measurement_bundle_set_hash' => $this->hasher->hash($hashes),
+            'measurement_snapshot_set_hash' => $this->hasher->hash([
+                $search['snapshot_hash'],
+                $cro['snapshot_hash'],
+            ]),
             'bundles' => $bundles,
         ];
     }

@@ -152,6 +152,8 @@ final class GscReadModelSyncService
             ]);
 
             $receipt = [
+                'schema_version' => 'seo.gsc_refresh_receipt.v2',
+                'environment' => app()->environment(),
                 'status' => 'success',
                 'sync_run_uid' => $runUid,
                 'window_days' => $windowDays,
@@ -184,7 +186,9 @@ final class GscReadModelSyncService
                 'workflow_sha' => $this->releaseSha(),
                 'active_production_sha' => $this->releaseSha(),
                 'property_hash' => $preflight['property_hash'] ?? null,
+                'readmodel_snapshot_hash' => $this->canonicalHash((array) data_get($closeout, 'gsc_data_quality.read_model_after', [])),
             ];
+            $receipt['receipt_hash'] = $this->canonicalHash($receipt);
             $connection->table('seo_gsc_sync_runs')->where('sync_run_uid', $runUid)->update([
                 'receipt_json' => json_encode($receipt, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES),
                 'updated_at' => $finished->toDateTimeString(),
@@ -209,6 +213,26 @@ final class GscReadModelSyncService
         }
 
         return null;
+    }
+
+    /** @param array<string, mixed> $value */
+    private function canonicalHash(array $value): string
+    {
+        $sort = function (mixed $item) use (&$sort): mixed {
+            if (! is_array($item)) {
+                return $item;
+            }
+            if (! array_is_list($item)) {
+                ksort($item, SORT_STRING);
+            }
+            foreach ($item as $key => $child) {
+                $item[$key] = $sort($child);
+            }
+
+            return $item;
+        };
+
+        return hash('sha256', json_encode($sort($value), JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
     }
 
     /**
