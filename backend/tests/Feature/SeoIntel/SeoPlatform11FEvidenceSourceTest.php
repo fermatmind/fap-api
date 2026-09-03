@@ -277,6 +277,29 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
         );
     }
 
+    public function test_runtime_cro_reuses_the_same_fixed_scope_verified_before_activation(): void
+    {
+        DB::table('analytics_seo_conversion_daily')->insert([
+            'day' => now('UTC')->subDay()->toDateString(), 'org_id' => 0,
+            'url' => '/en/articles/new', 'lang' => 'en', 'page_type' => 'article',
+            'source_article' => 'new', 'target_test' => '/en/tests/public', 'scale_id' => 'public',
+            'form_id' => 'default', 'source_url' => '/en/articles/new', 'landing_pv_count' => 1,
+            'article_to_test_click_count' => 1, 'start_test_count' => 1, 'complete_test_count' => 1,
+            'view_result_count' => 1, 'return_public_content_count' => 1, 'last_refreshed_at' => now('UTC'),
+        ]);
+
+        $loader = app(ReadOnlyMeasurementEvidenceBundleLoader::class);
+        $runtime = $loader->diagnoseForRuntime(
+            'mission:fixed-runtime-cro-scope',
+            'commercial_funnel_cro',
+            'production_runtime',
+        );
+
+        $this->assertSame('NONE', $runtime->diagnostic()['hold_reason']);
+        $this->assertSame('tests', data_get($runtime->bundles(), '0.page_family'));
+        $this->assertSame('en', data_get($runtime->bundles(), '0.locale'));
+    }
+
     public function test_runtime_scope_reuses_verified_public_zero_refresh_proof_across_release_shas(): void
     {
         $sha = str_repeat('e', 40);

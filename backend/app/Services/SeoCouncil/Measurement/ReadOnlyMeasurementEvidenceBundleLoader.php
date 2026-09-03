@@ -83,7 +83,7 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
         }
 
         try {
-            if ($modeId === 'search_measurement') {
+            if (in_array($modeId, ['search_measurement', 'commercial_funnel_cro'], true)) {
                 $preferred = $this->diagnoseForScope(
                     $missionId,
                     $modeId,
@@ -92,7 +92,11 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
                     $environment,
                 );
                 if ($preferred->ready()
-                    || ($preferred->diagnostic()['hold_reason'] ?? null) !== 'GSC_NO_ELIGIBLE_ROWS') {
+                    || ! in_array(
+                        $preferred->diagnostic()['hold_reason'] ?? null,
+                        ['GSC_NO_ELIGIBLE_ROWS', 'CRO_READMODEL_UNHEALTHY'],
+                        true,
+                    )) {
                     return $preferred;
                 }
             }
