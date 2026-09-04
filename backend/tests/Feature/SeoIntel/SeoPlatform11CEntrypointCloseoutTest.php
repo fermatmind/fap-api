@@ -82,8 +82,10 @@ final class SeoPlatform11CEntrypointCloseoutTest extends TestCase
         $process->mustRun();
         $sha = trim($process->getOutput());
         $tester = new CommandTester(Artisan::all()['seo:policy-gateway-closeout']);
-        $this->assertSame(0, $tester->execute(['--expected-sha' => $sha, '--json' => true]));
-        $receipt = json_decode(trim($tester->getDisplay()), true, 512, JSON_THROW_ON_ERROR);
+        $exitCode = $tester->execute(['--expected-sha' => $sha, '--json' => true]);
+        $display = trim($tester->getDisplay());
+        $this->assertSame(0, $exitCode, $display);
+        $receipt = json_decode($display, true, 512, JSON_THROW_ON_ERROR);
 
         $this->assertSame('seo.policy_gateway_closeout.v2', $receipt['contract_version']);
         $this->assertSame($sha, $receipt['release_sha']);
