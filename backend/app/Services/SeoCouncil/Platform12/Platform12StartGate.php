@@ -6,6 +6,7 @@ namespace App\Services\SeoCouncil\Platform12;
 
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use App\Services\SeoCouncil\Platform11\Platform11ContractRegistry;
+use App\Services\SeoCouncil\Platform12\Tool\Platform12ToolManifest;
 use App\Services\SeoIntel\PageFamily\PageFamilyPolicyRegistry;
 
 final class Platform12StartGate
@@ -26,6 +27,7 @@ final class Platform12StartGate
         private readonly Platform12ContractRegistry $contracts,
         private readonly PageFamilyPolicyRegistry $pageFamilies,
         private readonly SeoRegistryHasher $hasher,
+        private readonly Platform12ToolManifest $tools,
     ) {}
 
     /**
@@ -41,7 +43,6 @@ final class Platform12StartGate
         string $nightlyState = 'NOT_OBSERVED',
     ): array {
         $manifest = $this->platform11->manifest();
-        $binding = $this->platform11->binding();
         $schema = $this->contracts->startReceiptSchema();
         $closeoutHashValid = preg_match(self::HASH_PATTERN, (string) ($platform11Closeout['receipt_hash'] ?? '')) === 1
             && hash_equals(
@@ -95,11 +96,7 @@ final class Platform12StartGate
                 'role_registry' => $manifest['registry_ref'],
                 'role_capability_binding' => $manifest['binding_ref'],
                 'policy_registry' => $manifest['policy_ref'],
-                'tool_manifest' => [
-                    'id' => 'seo.platform11_deterministic_tool_registry',
-                    'version' => Platform11ContractRegistry::BINDING_VERSION,
-                    'hash' => $this->hasher->hash($binding['deterministic_tool_registry']),
-                ],
+                'tool_manifest' => $this->tools->reference(),
                 'schema_vector' => [
                     'id' => 'seo.platform11_schema_vector',
                     'version' => Platform11ContractRegistry::MANIFEST_VERSION,

@@ -7,6 +7,7 @@ namespace App\Services\SeoCouncil\Platform12;
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use App\Services\SeoCouncil\Platform11\Platform11ContractRegistry;
 use App\Services\SeoCouncil\Platform12\Model\Platform12BoundedModelContract;
+use App\Services\SeoCouncil\Platform12\Tool\Platform12ToolManifest;
 
 final class Platform12ContractRegistry
 {
@@ -16,6 +17,7 @@ final class Platform12ContractRegistry
         private readonly SeoRegistryHasher $hasher,
         private readonly Platform11ContractRegistry $platform11,
         private readonly Platform12BoundedModelContract $boundedModel,
+        private readonly Platform12ToolManifest $tools,
     ) {}
 
     /** @return array<string, mixed> */
@@ -163,7 +165,6 @@ final class Platform12ContractRegistry
     public function missionCatalogDependencyRefs(): array
     {
         $manifest = $this->platform11->manifest();
-        $binding = $this->platform11->binding();
         $catalogSchema = $this->missionCatalogSchema();
         $schemaRefs = array_filter(
             $manifest,
@@ -181,11 +182,7 @@ final class Platform12ContractRegistry
             'role_registry' => $manifest['registry_ref'],
             'role_capability_binding' => $manifest['binding_ref'],
             'policy_registry' => $manifest['policy_ref'],
-            'tool_manifest' => [
-                'id' => 'seo.platform11_deterministic_tool_registry',
-                'version' => Platform11ContractRegistry::BINDING_VERSION,
-                'hash' => $this->hasher->hash($binding['deterministic_tool_registry']),
-            ],
+            'tool_manifest' => $this->tools->reference(),
             'schema_vector' => [
                 'id' => 'seo.platform12_mission_catalog_schema_vector',
                 'version' => self::MISSION_CATALOG_VERSION,
@@ -236,6 +233,7 @@ final class Platform12ContractRegistry
             'resources/seo-agent/council/platform12/schemas/seo.platform12_mission_catalog.v1.schema.json' => $this->missionCatalogSchema(),
             'resources/seo-agent/council/platform12/catalogs/seo.platform12_mission_catalog.v1.json' => $this->missionCatalog(),
             ...$this->boundedModel->artifacts(),
+            ...$this->tools->artifacts(),
         ];
     }
 }

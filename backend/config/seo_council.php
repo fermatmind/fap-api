@@ -13,6 +13,7 @@ return [
     'read_only_runtime_expected_version_vector' => [],
     'model_provider' => 'disabled',
     'model_runtime_enabled' => false,
+    'tool_broker_enabled' => false,
     'model_http' => [
         'endpoint' => env('SEO_COUNCIL_MODEL_HTTP_ENDPOINT', ''),
         'secret' => env('SEO_COUNCIL_MODEL_HTTP_SECRET', ''),

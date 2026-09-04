@@ -11,6 +11,7 @@ use App\Services\SeoAgentGovernance\SeoRoleCapabilityRegistry;
 use App\Services\SeoAgentPolicyGateway\PolicyGatewayRegistry;
 use App\Services\SeoCouncil\Contracts\CouncilContractRegistry;
 use App\Services\SeoCouncil\Platform12\Platform12ReadOnlyRuntimeGate;
+use App\Services\SeoCouncil\Platform12\Tool\Platform12ToolManifest;
 
 final class RuntimeCapabilitySnapshotBuilder
 {
@@ -23,6 +24,7 @@ final class RuntimeCapabilitySnapshotBuilder
         private readonly CouncilContractRegistry $contracts,
         private readonly SeoEvidenceContractRegistry $evidence,
         private readonly Platform12ReadOnlyRuntimeGate $readOnlyGate,
+        private readonly Platform12ToolManifest $platform12Tools,
     ) {}
 
     /** @return array<string, mixed> */
@@ -79,13 +81,11 @@ final class RuntimeCapabilitySnapshotBuilder
     /** @return array<string, string> */
     private function versionVector(): array
     {
-        $binding = $this->binding->binding();
-
         return [
             'role' => (string) $this->roles->registry()['registry_hash'],
             'prompt' => $this->hasher->hash($this->prompts->definitions()),
             'model' => $this->hasher->hash(['provider' => (string) config('seo_council.model_provider', 'disabled')]),
-            'tool' => $this->hasher->hash($binding['deterministic_tool_registry']),
+            'tool' => $this->platform12Tools->reference()['hash'],
             'policy' => (string) $this->policy->registry()['registry_hash'],
             'schema' => (string) $this->contracts->manifest()['manifest_hash'],
             'evidence' => (string) $this->evidence->manifest()['manifest_hash'],

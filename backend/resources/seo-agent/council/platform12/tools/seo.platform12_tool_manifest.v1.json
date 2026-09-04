@@ -1,0 +1,51 @@
+{
+    "schema_version": "seo.platform12_tool_manifest.v1",
+    "manifest_id": "fermatmind.seo.platform12.readonly_tools",
+    "manifest_version": "1.0.0",
+    "runtime_state": "FOUNDATION_DISABLED",
+    "external_content_policy": "EXISTING_GATEWAY_ONLY_NO_MISSION_URL",
+    "tools": [
+        {
+            "tool_id": "seo.platform12.contract_verify",
+            "tool_version": "1.0.0",
+            "handler_class": "App\\Services\\SeoCouncil\\Platform12\\Tool\\Platform12ContractVerificationTool",
+            "input_schema_hash": "c086f0bc83f104de285247eadb5268dc8ccebb8ee413240374db34bae843b906",
+            "output_schema_hash": "22cc6f679671505853f07a6952a9222b55024727fc7458c5003082f93bde7737",
+            "timeout_ms": 250,
+            "read_only": true,
+            "internal_only": true,
+            "external_egress": false,
+            "model_invocation": false,
+            "write_permissions": [],
+            "delegation_allowed": false,
+            "all_team_invocation": false
+        },
+        {
+            "tool_id": "seo.platform12.capability_snapshot_read",
+            "tool_version": "1.0.0",
+            "handler_class": "App\\Services\\SeoCouncil\\Platform12\\Tool\\Platform12CapabilitySnapshotTool",
+            "input_schema_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "output_schema_hash": "6bdcb1bfb57055313aecb31d1c8a909bb1259e396b42c4fd84a61468eba8c0fa",
+            "timeout_ms": 250,
+            "read_only": true,
+            "internal_only": true,
+            "external_egress": false,
+            "model_invocation": false,
+            "write_permissions": [],
+            "delegation_allowed": false,
+            "all_team_invocation": false
+        }
+    ],
+    "prohibited_capabilities": [
+        "shell",
+        "arbitrary_http",
+        "cms_write",
+        "deploy",
+        "url_truth_write",
+        "search_submission",
+        "peer_delegation",
+        "all_team_invocation"
+    ],
+    "production_enabled": false,
+    "manifest_hash": "b5831b7fbbd0e45464c2f53a47d7268dd3eabdf7f169c0c123633cf7ba6979a2"
+}
