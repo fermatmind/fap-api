@@ -20,6 +20,7 @@ final class SeoPlatform11GContractsBoundaryTest extends TestCase
         $command = app(SeoCompetitiveReleasePrepareCommand::class);
         $reason = new ReflectionMethod($command, 'refreshFailureReason');
         $output = new ReflectionMethod($command, 'refreshOutputValid');
+        $fullRefresh = new ReflectionMethod($command, 'requiresFullRefresh');
 
         $this->assertSame('GSC_REFRESH_TIMEOUT', $reason->invoke($command, 'gsc', true));
         $this->assertSame('GSC_REFRESH_FAILED', $reason->invoke($command, 'gsc', false));
@@ -33,6 +34,12 @@ final class SeoPlatform11GContractsBoundaryTest extends TestCase
         ], JSON_THROW_ON_ERROR)));
         $this->assertFalse($output->invoke($command, 'gsc', '{"status":"blocked"}'));
         $this->assertFalse($output->invoke($command, 'cro', 'not-json'));
+        foreach (['GSC_NO_ELIGIBLE_ROWS', 'GSC_WINDOW_INCOMPLETE', 'CRO_READMODEL_UNHEALTHY', 'CRO_WINDOW_INCOMPLETE'] as $holdReason) {
+            $this->assertTrue($fullRefresh->invoke($command, $holdReason), $holdReason);
+        }
+        foreach (['GSC_STALE', 'CRO_STALE'] as $holdReason) {
+            $this->assertFalse($fullRefresh->invoke($command, $holdReason), $holdReason);
+        }
     }
 
     public function test_v5_is_an_append_only_competitive_contract_manifest(): void

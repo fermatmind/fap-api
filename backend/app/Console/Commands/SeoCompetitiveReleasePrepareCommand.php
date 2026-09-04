@@ -73,7 +73,12 @@ final class SeoCompetitiveReleasePrepareCommand extends Command
             }
             $measurement = $snapshots->verify($sha, 'tests', 'production');
             if (($measurement['status'] ?? null) !== 'READY') {
-                return $this->hold('measurement_revalidation', 'MEASUREMENT_REVALIDATION_HOLD', $actions, $measurement);
+                return $this->hold(
+                    'measurement_revalidation',
+                    $this->safeReason((string) ($measurement['hold_reason'] ?? ''), 'MEASUREMENT_REVALIDATION_HOLD'),
+                    $actions,
+                    $measurement,
+                );
             }
         } else {
             $actions = ['gsc' => 'reused', 'cro' => 'reused'];
@@ -200,12 +205,23 @@ final class SeoCompetitiveReleasePrepareCommand extends Command
             if (! $snapshots->refreshable($modeId, $reason)) {
                 return ['actions' => $actions, 'hold_reason' => $reason];
             }
-            $actions[$key] = $snapshots->hasTrustedBaseline($modeId, $environment)
-                ? 'incremental_refresh'
-                : 'full_refresh';
+            $actions[$key] = ! $snapshots->hasTrustedBaseline($modeId, $environment)
+                || $this->requiresFullRefresh($reason)
+                    ? 'full_refresh'
+                    : 'incremental_refresh';
         }
 
         return ['actions' => $actions, 'hold_reason' => null];
+    }
+
+    private function requiresFullRefresh(string $reason): bool
+    {
+        return in_array($reason, [
+            'GSC_NO_ELIGIBLE_ROWS',
+            'GSC_WINDOW_INCOMPLETE',
+            'CRO_READMODEL_UNHEALTHY',
+            'CRO_WINDOW_INCOMPLETE',
+        ], true);
     }
 
     /** @param array<string, string> $actions @return array<string, Process> */
