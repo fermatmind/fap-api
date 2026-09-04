@@ -1,0 +1,76 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.platform12_monthly_lifecycle_candidates_output.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "artifact_version",
+        "mission_id",
+        "evaluated_at",
+        "state",
+        "candidate_count",
+        "candidates",
+        "forbidden_automatic_actions",
+        "artifact_only",
+        "read_only",
+        "execution_allowed",
+        "writes",
+        "artifact_hash"
+    ],
+    "properties": {
+        "artifact_version": {
+            "const": "seo.platform12_monthly_lifecycle_candidates.v1"
+        },
+        "mission_id": {
+            "const": "seo.platform12.monthly_lifecycle_candidates"
+        },
+        "evaluated_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "state": {
+            "enum": [
+                "READY",
+                "HOLD"
+            ]
+        },
+        "candidate_count": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+        },
+        "candidates": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+                "type": "object"
+            }
+        },
+        "forbidden_automatic_actions": {
+            "const": [
+                "RETIRE",
+                "DELETE",
+                "UNPUBLISH",
+                "REDIRECT"
+            ]
+        },
+        "artifact_only": {
+            "const": true
+        },
+        "read_only": {
+            "const": true
+        },
+        "execution_allowed": {
+            "const": false
+        },
+        "writes": {
+            "type": "object"
+        },
+        "artifact_hash": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+        }
+    },
+    "schema_hash": "8fd89b64bb53f029c7f1d60ac60b8c300898e6ab98a9138c38f02c2057101ff5"
+}

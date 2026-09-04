@@ -1,7 +1,7 @@
 {
     "schema_version": "seo.platform12_mission_catalog.v1",
     "catalog_id": "fermatmind.seo.platform12_mission_catalog",
-    "catalog_version": "1.7.0",
+    "catalog_version": "1.8.0",
     "catalog_state": "FOUNDATION_ONLY",
     "dependency_refs": {
         "role_registry": {
@@ -31,8 +31,8 @@
         },
         "schema_vector": {
             "id": "seo.platform12_mission_catalog_schema_vector",
-            "version": "1.7.0",
-            "hash": "51f9ad06339cde367e56421fd1a5b0af5e1c86deed78e8d4f2298e4c69269d9c"
+            "version": "1.8.0",
+            "hash": "be26342b08ec153fdb2299e7102e090059beaa6cc3c62077fa080a0efd143c65"
         }
     },
     "missions": [
@@ -357,8 +357,48 @@
                 "version": "1.0.0",
                 "hash": "b315e2bcdd571450c2e83c6473fead75869abfef2f904d0872ce7d9aa1de7242"
             }
+        },
+        {
+            "mission_id": "seo.platform12.monthly_lifecycle_candidates",
+            "cadence": "monthly",
+            "timezone": "Asia/Shanghai",
+            "natural_slot": "monthly:01:04:10",
+            "family": "other_public",
+            "locale": "zh-CN",
+            "review_domain": "content_lifecycle",
+            "required_evidence": [
+                "material_change",
+                "traffic",
+                "authority_revision",
+                "locale_evidence",
+                "rollback_readiness",
+                "shared_layer_risk",
+                "sensitive_claim_risk"
+            ],
+            "eligible_capability": "seo.content_decay_refresh_review",
+            "priority": "normal",
+            "timeout_seconds": 180,
+            "max_attempts": 1,
+            "budgets": {
+                "model_calls": 0,
+                "model_input_tokens": 0,
+                "model_output_tokens": 0,
+                "tool_calls": 0,
+                "cost_microusd": 0
+            },
+            "failure_policy": {
+                "terminal_state": "HOLD",
+                "retry_strategy": "none",
+                "initial_backoff_seconds": 0,
+                "max_backoff_seconds": 0
+            },
+            "output_schema": {
+                "id": "seo.platform12_monthly_lifecycle_candidates_output.v1",
+                "version": "1.0.0",
+                "hash": "8fd89b64bb53f029c7f1d60ac60b8c300898e6ab98a9138c38f02c2057101ff5"
+            }
         }
     ],
     "runtime_activation_allowed": false,
-    "catalog_hash": "bdc401cc038c57bace274c639a862192e7fd4c96249599081bf196b76ace0443"
+    "catalog_hash": "cd7d66bf93c98c3cf7344cf307a0b3238958da41c1b4c9538013af5abf1b6afa"
 }
