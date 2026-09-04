@@ -107,11 +107,45 @@ jobs:
         if: always()
         run: exit "${SCHEDULER_MONITOR_EXIT_CODE:-1}"
 
-  full-regression:
-    name: Full regression, content consistency, dependencies, and performance
+  dependency-audit:
+    name: Dependency contract and vulnerability audit
     if: github.event_name == 'schedule' && github.event.schedule == '17 18 * * *'
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
+      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+        with:
+          php-version: '8.4'
+          coverage: none
+          tools: composer:v2
+      - working-directory: backend
+        run: composer validate --strict
+      - working-directory: backend
+        run: composer audit --locked --no-interaction --ignore-unreachable
+
+  workflow-contracts:
+    name: Workflow, classifier, and secret contracts
+    if: github.event_name == 'schedule' && github.event.schedule == '17 18 * * *'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: 24
+      - run: bash backend/scripts/ci/guard_no_committed_secrets.sh
+      - run: node --test .github/trunk/*.test.mjs
+
+  authority-contract:
+    name: MBTI, Personality, and Sitemap authority contract
+    if: github.event_name == 'schedule' && github.event.schedule == '17 18 * * *'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
     services:
       mysql:
         image: mysql:8.0
@@ -144,17 +178,53 @@ jobs:
           coverage: none
           tools: composer:v2
           extensions: mbstring, intl, pdo_sqlite, sqlite3, pdo_mysql, redis
-      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
-        with:
-          node-version: 24
       - working-directory: backend
         run: composer install --no-interaction --prefer-dist --no-progress
-      - working-directory: backend
-        run: composer audit --locked --no-interaction --ignore-unreachable
-      - run: node --test .github/trunk/*.test.mjs
       - name: Install CI verification tools
         run: sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends ripgrep
       - run: bash backend/scripts/ci_verify_mbti.sh
+
+  full-phpunit:
+    name: Full PHPUnit regression and performance contracts
+    if: github.event_name == 'schedule' && github.event.schedule == '17 18 * * *'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: fap_ci
+          MYSQL_ROOT_PASSWORD: root
+        ports: ["3306:3306"]
+        options: --health-cmd="mysqladmin ping -h 127.0.0.1 -proot" --health-interval=10s --health-timeout=5s --health-retries=12
+      redis:
+        image: redis:6-alpine
+        ports: ["6379:6379"]
+        options: --health-cmd="redis-cli ping || exit 1" --health-interval=10s --health-timeout=5s --health-retries=12
+    env:
+      APP_ENV: testing
+      DB_CONNECTION: mysql
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      DB_DATABASE: fap_ci
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      REDIS_HOST: 127.0.0.1
+      REDIS_PORT: 6379
+      RUN_BIG5_OCEAN_GATE: "1"
+      RUN_ENNEAGRAM_GATE: "1"
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
+      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+        with:
+          php-version: '8.4'
+          coverage: none
+          tools: composer:v2
+          extensions: mbstring, intl, pdo_sqlite, sqlite3, pdo_mysql, redis
+      - working-directory: backend
+        run: composer install --no-interaction --prefer-dist --no-progress
       - working-directory: backend
         run: php artisan test --no-ansi
 
@@ -388,10 +458,66 @@ jobs:
           if-no-files-found: error
           retention-days: 90
 
-  alert:
-    name: Actionable nightly diagnostic
-    needs: [full-regression, codeql, gsc-read-model-sync]
-    if: failure() && github.event.schedule == '17 18 * * *'
+  nightly-summary:
+    name: Final failure-domain receipt
+    needs:
+      - authority-contract
+      - full-phpunit
+      - dependency-audit
+      - workflow-contracts
+      - codeql
+      - scheduler-evidence-monitor
+      - gsc-read-model-sync
+    if: always() && github.event_name == 'schedule' && github.event.schedule == '17 18 * * *'
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      AUTHORITY_RESULT: ${{ needs.authority-contract.result }}
+      FULL_PHPUNIT_RESULT: ${{ needs.full-phpunit.result }}
+      DEPENDENCY_RESULT: ${{ needs.dependency-audit.result }}
+      WORKFLOW_RESULT: ${{ needs.workflow-contracts.result }}
+      SECURITY_RESULT: ${{ needs.codeql.result }}
+      SCHEDULER_RESULT: ${{ needs.scheduler-evidence-monitor.result }}
+      GSC_RESULT: ${{ needs.gsc-read-model-sync.result }}
     steps:
-      - run: echo "Nightly failed. Production remains on its current healthy SHA; inspect this run for the failing boundary."
+      - name: Build sanitized failure-domain receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/nightly-summary
+          jq -n \
+            --arg sha "$GITHUB_SHA" \
+            --arg authority "$AUTHORITY_RESULT" \
+            --arg full_phpunit "$FULL_PHPUNIT_RESULT" \
+            --arg dependency "$DEPENDENCY_RESULT" \
+            --arg workflow "$WORKFLOW_RESULT" \
+            --arg security "$SECURITY_RESULT" \
+            --arg scheduler "$SCHEDULER_RESULT" \
+            --arg gsc "$GSC_RESULT" '
+            {
+              schema_version: "nightly-failure-domain-summary.v1",
+              workflow_sha: $sha,
+              status: (if ([$authority, $full_phpunit, $dependency, $workflow, $security, $scheduler, $gsc] | all(. == "success")) then "pass" else "fail" end),
+              production_rollback_requested: false,
+              domains: {
+                authority_contract: {result: $authority},
+                full_phpunit: {result: $full_phpunit},
+                dependency_audit: {result: $dependency},
+                workflow_contracts: {result: $workflow},
+                security_scan: {result: $security},
+                scheduler_evidence: {result: $scheduler},
+                gsc_readonly_sync: {result: $gsc}
+              }
+            }
+          ' > artifacts/nightly-summary/receipt.json
+      - name: Upload sanitized failure-domain receipt
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: nightly-summary-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/nightly-summary/receipt.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Enforce aggregate verdict
+        if: always()
+        run: jq -e '.status == "pass"' artifacts/nightly-summary/receipt.json >/dev/null
