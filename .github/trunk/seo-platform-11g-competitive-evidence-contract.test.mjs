@@ -81,6 +81,9 @@ test("competitive persistence uses an ephemeral writer without changing runtime 
   assert.match(preactivation, /test ! -e "\$APP_CONFIG_CACHE"/);
   assert.match(preactivation, /test "\$\{SEO_INTEL_WRITE_ENABLED:-\}" = true/);
   assert.match(preactivation, /gsc_env='\{\{seo_measurement_sync_env\}\}'/);
+  assert.match(preactivation, /prepare_status=\$\?/);
+  assert.match(preactivation, /extract_competitive_preactivation_receipt\.php --diagnose/);
+  assert.match(preactivation, /exit "\$prepare_status"/);
   assert.match(preactivation, /extract_competitive_preactivation_receipt\.php "\$candidate_sha" "\$environment"/);
   assert.doesNotMatch(preactivation, /jq -ce|\{\{bin\/php\}\} -r/);
   assert.doesNotMatch(preactivation, /printf '%s' "\$receipt" \| jq -e/);

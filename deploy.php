@@ -1596,6 +1596,7 @@ as_receipt_probe_owner cmp -s "$receipt_probe" "$receipt_probe_link" || fail_rec
 as_receipt_probe_owner rm -f "$receipt_probe_link" "$receipt_probe" || fail_receipt_preflight
 receipt_probe=''
 receipt_probe_link=''
+set +e
 prepare="$(SEO_RELEASE_SHA="$candidate_sha" \
   SEO_COMPETITIVE_EXTERNAL_READ_ENABLED=true \
   SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED=true \
@@ -1605,6 +1606,12 @@ prepare="$(SEO_RELEASE_SHA="$candidate_sha" \
     --gsc-env="$gsc_env" \
     --writer-env="$writer_env" \
     --json --no-interaction --no-ansi)"
+prepare_status=$?
+set -e
+if [ "$prepare_status" -ne 0 ]; then
+  printf '%s' "$prepare" | {{bin/php}} scripts/deploy/extract_competitive_preactivation_receipt.php --diagnose || true
+  exit "$prepare_status"
+fi
 receipt="$(printf '%s' "$prepare" | {{bin/php}} scripts/deploy/extract_competitive_preactivation_receipt.php "$candidate_sha" "$environment")"
 receipt_path="$receipt_dir/preactivation-$candidate_sha.json"
 receipt_owner=deploy
