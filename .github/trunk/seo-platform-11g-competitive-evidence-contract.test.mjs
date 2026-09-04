@@ -30,7 +30,7 @@ test("competitive ingestion is measurement-gated and environment independent", (
   assert.match(deployer, /seo:competitive-release-prepare/);
   assert.match(deployer, /--cohort=competitive\.big-five\.live\.v2/);
   assert.match(deployer, /environment=\{\{competitive_environment\}\}/);
-  assert.match(deployer, /\.production_sha == null/);
+  assert.match(deployer, /\$receipt\["production_sha"\].*=== null/);
   assert.match(deployer, /--finalize-activation/);
   assert.match(deploy, /closeout_state == "STAGING_VALIDATED"/);
   assert.match(deploy, /search_measurement\.hold_reason == "NONE"/);
@@ -73,6 +73,9 @@ test("competitive persistence uses an ephemeral writer without changing runtime 
   assert.match(preactivation, /test ! -e "\$APP_CONFIG_CACHE"/);
   assert.match(preactivation, /test "\$\{SEO_INTEL_WRITE_ENABLED:-\}" = true/);
   assert.match(preactivation, /gsc_env='\{\{seo_measurement_sync_env\}\}'/);
+  assert.match(preactivation, /\$payload\["status"\].*=== "READY"/);
+  assert.match(preactivation, /\$payload\["preactivation_receipt"\]/);
+  assert.doesNotMatch(preactivation, /printf '%s' "\$receipt" \| jq -e/);
   assert.doesNotMatch(preactivation, /HTTPS_PROXY|HTTP_PROXY|GSC_SERVICE_ACCOUNT/);
 });
 

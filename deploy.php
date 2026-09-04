@@ -1667,28 +1667,6 @@ else
     && as_receipt_owner cmp -s "$tmp" "$receipt_path" \
     || fail_receipt_persistence
 fi
-printf '%s' "$receipt" | jq -e --arg sha "$candidate_sha" '
-    ."SEO-PLATFORM-11G" == "HOLD"
-    and .closeout_state == "HOLD"
-    and .production_sha == null
-    and .ready_for_11H == false
-    and ."11i_handoff_ready" == false
-    and .competitive_source_state == "available"
-    and .competitive_freshness_state == "fresh"
-    and .competitive_bundle_verification == "valid"
-    and .competitive_context_status == "READY"
-    and .competitive_hold_reason == "NONE"
-    and .search_measurement.source_state == "available"
-    and .search_measurement.freshness_state == "fresh"
-    and .search_measurement.bundle_verification == "valid"
-    and .search_measurement.context_status == "READY"
-    and .search_measurement.hold_reason == "NONE"
-    and .cro_measurement.source_state == "available"
-    and .cro_measurement.freshness_state == "fresh"
-    and .cro_measurement.bundle_verification == "valid"
-    and .cro_measurement.context_status == "READY"
-    and .cro_measurement.hold_reason == "NONE"
-  ' >/dev/null
 BASH, timeout: 2100);
     });
 });
