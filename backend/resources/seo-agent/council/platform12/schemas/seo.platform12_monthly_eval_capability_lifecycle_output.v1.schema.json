@@ -1,0 +1,73 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.platform12_monthly_eval_capability_lifecycle_output.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "artifact_version",
+        "mission_id",
+        "evaluated_at",
+        "state",
+        "evaluations",
+        "capabilities",
+        "all_team_invocation",
+        "artifact_only",
+        "read_only",
+        "production_capability_activation_allowed",
+        "execution_allowed",
+        "artifact_hash"
+    ],
+    "properties": {
+        "artifact_version": {
+            "const": "seo.platform12_monthly_eval_capability_lifecycle.v1"
+        },
+        "mission_id": {
+            "const": "seo.platform12.monthly_eval_capability_lifecycle"
+        },
+        "evaluated_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "state": {
+            "enum": [
+                "READY",
+                "HOLD"
+            ]
+        },
+        "evaluations": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+                "type": "object"
+            }
+        },
+        "capabilities": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+                "type": "object"
+            }
+        },
+        "all_team_invocation": {
+            "const": 0
+        },
+        "artifact_only": {
+            "const": true
+        },
+        "read_only": {
+            "const": true
+        },
+        "production_capability_activation_allowed": {
+            "const": false
+        },
+        "execution_allowed": {
+            "const": false
+        },
+        "artifact_hash": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+        }
+    },
+    "schema_hash": "88eefea0c932c8bcdc08dd2e83a0cbb8461de5da64734061f613fa276f8b4fd7"
+}

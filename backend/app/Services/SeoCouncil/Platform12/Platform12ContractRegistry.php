@@ -12,7 +12,7 @@ use App\Services\SeoCouncil\Platform12\Tool\Platform12ToolManifest;
 
 final class Platform12ContractRegistry
 {
-    public const MISSION_CATALOG_VERSION = '1.8.0';
+    public const MISSION_CATALOG_VERSION = '1.9.0';
 
     public function __construct(
         private readonly SeoRegistryHasher $hasher,
@@ -517,6 +517,40 @@ final class Platform12ContractRegistry
         return $schema;
     }
 
+    /** @return array<string, mixed> */
+    public function monthlyEvalCapabilityLifecycleOutputSchema(): array
+    {
+        $schema = [
+            '$schema' => 'https://json-schema.org/draft/2020-12/schema',
+            'schema_id' => 'seo.platform12_monthly_eval_capability_lifecycle_output.v1',
+            'schema_version' => '1.0.0',
+            'type' => 'object',
+            'additionalProperties' => false,
+            'required' => [
+                'artifact_version', 'mission_id', 'evaluated_at', 'state', 'evaluations',
+                'capabilities', 'all_team_invocation', 'artifact_only', 'read_only',
+                'production_capability_activation_allowed', 'execution_allowed', 'artifact_hash',
+            ],
+            'properties' => [
+                'artifact_version' => ['const' => 'seo.platform12_monthly_eval_capability_lifecycle.v1'],
+                'mission_id' => ['const' => 'seo.platform12.monthly_eval_capability_lifecycle'],
+                'evaluated_at' => ['type' => 'string', 'format' => 'date-time'],
+                'state' => ['enum' => ['READY', 'HOLD']],
+                'evaluations' => ['type' => 'array', 'maxItems' => 100, 'items' => ['type' => 'object']],
+                'capabilities' => ['type' => 'array', 'maxItems' => 100, 'items' => ['type' => 'object']],
+                'all_team_invocation' => ['const' => 0],
+                'artifact_only' => ['const' => true],
+                'read_only' => ['const' => true],
+                'production_capability_activation_allowed' => ['const' => false],
+                'execution_allowed' => ['const' => false],
+                'artifact_hash' => ['type' => 'string', 'pattern' => '^[a-f0-9]{64}$'],
+            ],
+        ];
+        $schema['schema_hash'] = $this->hasher->hash($schema);
+
+        return $schema;
+    }
+
     /** @return array<string, array{id:string,version:string,hash:string}> */
     public function missionCatalogDependencyRefs(): array
     {
@@ -581,6 +615,12 @@ final class Platform12ContractRegistry
             'version' => $monthlyLifecycleSchema['schema_version'],
             'hash' => $monthlyLifecycleSchema['schema_hash'],
         ];
+        $monthlyEvalLifecycleSchema = $this->monthlyEvalCapabilityLifecycleOutputSchema();
+        $schemaRefs['platform12_monthly_eval_capability_lifecycle_output_schema'] = [
+            'id' => $monthlyEvalLifecycleSchema['schema_id'],
+            'version' => $monthlyEvalLifecycleSchema['schema_version'],
+            'hash' => $monthlyEvalLifecycleSchema['schema_hash'],
+        ];
 
         return [
             'role_registry' => $manifest['registry_ref'],
@@ -615,6 +655,7 @@ final class Platform12ContractRegistry
                 $this->weeklyEfficiencyMission(),
                 $this->monthlyFamilyMission(),
                 $this->monthlyLifecycleMission(),
+                $this->monthlyEvalCapabilityLifecycleMission(),
             ],
             'runtime_activation_allowed' => false,
         ];
@@ -965,6 +1006,48 @@ final class Platform12ContractRegistry
         ];
     }
 
+    /** @return array<string, mixed> */
+    private function monthlyEvalCapabilityLifecycleMission(): array
+    {
+        $output = $this->monthlyEvalCapabilityLifecycleOutputSchema();
+
+        return [
+            'mission_id' => 'seo.platform12.monthly_eval_capability_lifecycle',
+            'cadence' => 'monthly',
+            'timezone' => 'Asia/Shanghai',
+            'natural_slot' => 'monthly:01:04:20',
+            'family' => 'other_public',
+            'locale' => 'zh-CN',
+            'review_domain' => 'stability',
+            'required_evidence' => [
+                'detector_eval', 'agent_eval', 'family_locale_samples', 'sampling_method',
+                'confidence_interval_95', 'capability_lifecycle', 'version_drift_vector',
+            ],
+            'eligible_capability' => 'seo.runtime_health_review',
+            'priority' => 'normal',
+            'timeout_seconds' => 180,
+            'max_attempts' => 1,
+            'budgets' => [
+                'model_calls' => 0,
+                'model_input_tokens' => 0,
+                'model_output_tokens' => 0,
+                'tool_calls' => 0,
+                'cost_microusd' => 0,
+            ],
+            'failure_policy' => [
+                'terminal_state' => 'HOLD',
+                'retry_strategy' => 'none',
+                'initial_backoff_seconds' => 0,
+                'max_backoff_seconds' => 0,
+            ],
+            'output_schema' => [
+                'id' => $output['schema_id'],
+                'version' => $output['schema_version'],
+                'hash' => $output['schema_hash'],
+            ],
+        ];
+    }
+
     public function verifyGenerated(): bool
     {
         try {
@@ -996,6 +1079,7 @@ final class Platform12ContractRegistry
             'resources/seo-agent/council/platform12/schemas/seo.platform12_weekly_efficiency_output.v1.schema.json' => $this->weeklyEfficiencyOutputSchema(),
             'resources/seo-agent/council/platform12/schemas/seo.platform12_monthly_family_output.v1.schema.json' => $this->monthlyFamilyOutputSchema(),
             'resources/seo-agent/council/platform12/schemas/seo.platform12_monthly_lifecycle_candidates_output.v1.schema.json' => $this->monthlyLifecycleCandidatesOutputSchema(),
+            'resources/seo-agent/council/platform12/schemas/seo.platform12_monthly_eval_capability_lifecycle_output.v1.schema.json' => $this->monthlyEvalCapabilityLifecycleOutputSchema(),
             'resources/seo-agent/council/platform12/catalogs/seo.platform12_mission_catalog.v1.json' => $this->missionCatalog(),
             ...$this->boundedModel->artifacts(),
             ...$this->tools->artifacts(),

@@ -1,7 +1,7 @@
 {
     "schema_version": "seo.platform12_mission_catalog.v1",
     "catalog_id": "fermatmind.seo.platform12_mission_catalog",
-    "catalog_version": "1.8.0",
+    "catalog_version": "1.9.0",
     "catalog_state": "FOUNDATION_ONLY",
     "dependency_refs": {
         "role_registry": {
@@ -31,8 +31,8 @@
         },
         "schema_vector": {
             "id": "seo.platform12_mission_catalog_schema_vector",
-            "version": "1.8.0",
-            "hash": "be26342b08ec153fdb2299e7102e090059beaa6cc3c62077fa080a0efd143c65"
+            "version": "1.9.0",
+            "hash": "a0fc42f7a11e4b54eeaa1c5306922cc3bedd01b533493924d37d33833307a0b8"
         }
     },
     "missions": [
@@ -397,8 +397,48 @@
                 "version": "1.0.0",
                 "hash": "8fd89b64bb53f029c7f1d60ac60b8c300898e6ab98a9138c38f02c2057101ff5"
             }
+        },
+        {
+            "mission_id": "seo.platform12.monthly_eval_capability_lifecycle",
+            "cadence": "monthly",
+            "timezone": "Asia/Shanghai",
+            "natural_slot": "monthly:01:04:20",
+            "family": "other_public",
+            "locale": "zh-CN",
+            "review_domain": "stability",
+            "required_evidence": [
+                "detector_eval",
+                "agent_eval",
+                "family_locale_samples",
+                "sampling_method",
+                "confidence_interval_95",
+                "capability_lifecycle",
+                "version_drift_vector"
+            ],
+            "eligible_capability": "seo.runtime_health_review",
+            "priority": "normal",
+            "timeout_seconds": 180,
+            "max_attempts": 1,
+            "budgets": {
+                "model_calls": 0,
+                "model_input_tokens": 0,
+                "model_output_tokens": 0,
+                "tool_calls": 0,
+                "cost_microusd": 0
+            },
+            "failure_policy": {
+                "terminal_state": "HOLD",
+                "retry_strategy": "none",
+                "initial_backoff_seconds": 0,
+                "max_backoff_seconds": 0
+            },
+            "output_schema": {
+                "id": "seo.platform12_monthly_eval_capability_lifecycle_output.v1",
+                "version": "1.0.0",
+                "hash": "88eefea0c932c8bcdc08dd2e83a0cbb8461de5da64734061f613fa276f8b4fd7"
+            }
         }
     ],
     "runtime_activation_allowed": false,
-    "catalog_hash": "cd7d66bf93c98c3cf7344cf307a0b3238958da41c1b4c9538013af5abf1b6afa"
+    "catalog_hash": "939f484fa8c29fe56a95b1a539978855e3757bc07a045dbbf1fa9f380ef53639"
 }
