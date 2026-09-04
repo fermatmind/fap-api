@@ -378,6 +378,18 @@ test("11G activation control change deploys with Council and competitive ingesti
   assert.equal(result.operations.seo_council_orchestration, true);
 });
 
+test("Platform 12 Council changes generate the exact-SHA competitive dependency receipt", () => {
+  for (const path of [
+    "backend/app/Services/SeoCouncil/Platform12/Platform12MissionCatalogValidator.php",
+    "backend/resources/seo-agent/council/platform12/catalogs/seo.platform12_mission_catalog.v1.json",
+  ]) {
+    const result = classifyPaths([path]);
+    assert.equal(result.operations.seo_council_orchestration, true, path);
+    assert.equal(result.operations.seo_competitive_evidence, true, path);
+    assert.equal(result.operations.seo_competitive_evidence_blocks_delivery, true, path);
+  }
+});
+
 test("retired EQ mirror cleanup is content-only and cannot trigger search submission", () => {
   const result = classifyPaths([
     "backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/seo_geo_authority.json",
