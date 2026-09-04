@@ -12,7 +12,7 @@ use App\Services\SeoCouncil\Platform12\Tool\Platform12ToolManifest;
 
 final class Platform12ContractRegistry
 {
-    public const MISSION_CATALOG_VERSION = '1.4.0';
+    public const MISSION_CATALOG_VERSION = '1.5.0';
 
     public function __construct(
         private readonly SeoRegistryHasher $hasher,
@@ -370,6 +370,45 @@ final class Platform12ContractRegistry
         return $schema;
     }
 
+    /** @return array<string, mixed> */
+    public function weeklyMeasurementOutputSchema(): array
+    {
+        $schema = [
+            '$schema' => 'https://json-schema.org/draft/2020-12/schema',
+            'schema_id' => 'seo.platform12_weekly_measurement_output.v1',
+            'schema_version' => '1.0.0',
+            'type' => 'object',
+            'additionalProperties' => false,
+            'required' => [
+                'artifact_version', 'mission_id', 'evaluated_at', 'state', 'minimum_sample_size',
+                'checkpoints', 'gai', 'public_funnel', 'cro_candidates', 'identity_data_read',
+                'private_result_data_read', 'third_party_gai_sync_assumed', 'artifact_only',
+                'read_only', 'execution_allowed', 'artifact_hash',
+            ],
+            'properties' => [
+                'artifact_version' => ['const' => 'seo.platform12_weekly_measurement.v1'],
+                'mission_id' => ['const' => 'seo.platform12.weekly_checkpoints_gai_funnel_cro'],
+                'evaluated_at' => ['type' => 'string', 'format' => 'date-time'],
+                'state' => ['enum' => ['READY', 'MEASUREMENT_HOLD']],
+                'minimum_sample_size' => ['const' => 100],
+                'checkpoints' => ['type' => 'array', 'maxItems' => 3, 'items' => ['type' => 'object']],
+                'gai' => ['type' => 'object'],
+                'public_funnel' => ['type' => 'object'],
+                'cro_candidates' => ['type' => 'array', 'maxItems' => 50, 'items' => ['type' => 'object']],
+                'identity_data_read' => ['const' => false],
+                'private_result_data_read' => ['const' => false],
+                'third_party_gai_sync_assumed' => ['const' => false],
+                'artifact_only' => ['const' => true],
+                'read_only' => ['const' => true],
+                'execution_allowed' => ['const' => false],
+                'artifact_hash' => ['type' => 'string', 'pattern' => '^[a-f0-9]{64}$'],
+            ],
+        ];
+        $schema['schema_hash'] = $this->hasher->hash($schema);
+
+        return $schema;
+    }
+
     /** @return array<string, array{id:string,version:string,hash:string}> */
     public function missionCatalogDependencyRefs(): array
     {
@@ -410,6 +449,12 @@ final class Platform12ContractRegistry
             'version' => $weeklyOpportunitySchema['schema_version'],
             'hash' => $weeklyOpportunitySchema['schema_hash'],
         ];
+        $weeklyMeasurementSchema = $this->weeklyMeasurementOutputSchema();
+        $schemaRefs['platform12_weekly_measurement_output_schema'] = [
+            'id' => $weeklyMeasurementSchema['schema_id'],
+            'version' => $weeklyMeasurementSchema['schema_version'],
+            'hash' => $weeklyMeasurementSchema['schema_hash'],
+        ];
 
         return [
             'role_registry' => $manifest['registry_ref'],
@@ -440,6 +485,7 @@ final class Platform12ContractRegistry
                 $this->dailySecurityDriftMission(),
                 $this->weeklyOpportunityMission('zh-CN', 'weekly:MON:03:00'),
                 $this->weeklyOpportunityMission('en', 'weekly:MON:03:10'),
+                $this->weeklyMeasurementMission(),
             ],
             'runtime_activation_allowed' => false,
         ];
@@ -620,6 +666,48 @@ final class Platform12ContractRegistry
         ];
     }
 
+    /** @return array<string, mixed> */
+    private function weeklyMeasurementMission(): array
+    {
+        $output = $this->weeklyMeasurementOutputSchema();
+
+        return [
+            'mission_id' => 'seo.platform12.weekly_checkpoints_gai_funnel_cro',
+            'cadence' => 'weekly',
+            'timezone' => 'Asia/Shanghai',
+            'natural_slot' => 'weekly:MON:03:20',
+            'family' => 'other_public',
+            'locale' => 'zh-CN',
+            'review_domain' => 'cro',
+            'required_evidence' => [
+                'd7_checkpoint', 'd14_checkpoint', 'd28_checkpoint',
+                'gai_capability', 'public_funnel_aggregate', 'attribution_caveat',
+            ],
+            'eligible_capability' => 'seo.search_measurement_review',
+            'priority' => 'normal',
+            'timeout_seconds' => 180,
+            'max_attempts' => 1,
+            'budgets' => [
+                'model_calls' => 0,
+                'model_input_tokens' => 0,
+                'model_output_tokens' => 0,
+                'tool_calls' => 0,
+                'cost_microusd' => 0,
+            ],
+            'failure_policy' => [
+                'terminal_state' => 'HOLD',
+                'retry_strategy' => 'none',
+                'initial_backoff_seconds' => 0,
+                'max_backoff_seconds' => 0,
+            ],
+            'output_schema' => [
+                'id' => $output['schema_id'],
+                'version' => $output['schema_version'],
+                'hash' => $output['schema_hash'],
+            ],
+        ];
+    }
+
     public function verifyGenerated(): bool
     {
         try {
@@ -647,6 +735,7 @@ final class Platform12ContractRegistry
             'resources/seo-agent/council/platform12/schemas/seo.platform12_daily_url_truth_output.v1.schema.json' => $this->dailyUrlTruthOutputSchema(),
             'resources/seo-agent/council/platform12/schemas/seo.platform12_daily_security_drift_output.v1.schema.json' => $this->dailySecurityDriftOutputSchema(),
             'resources/seo-agent/council/platform12/schemas/seo.platform12_weekly_opportunity_output.v1.schema.json' => $this->weeklyOpportunityOutputSchema(),
+            'resources/seo-agent/council/platform12/schemas/seo.platform12_weekly_measurement_output.v1.schema.json' => $this->weeklyMeasurementOutputSchema(),
             'resources/seo-agent/council/platform12/catalogs/seo.platform12_mission_catalog.v1.json' => $this->missionCatalog(),
             ...$this->boundedModel->artifacts(),
             ...$this->tools->artifacts(),
