@@ -12,7 +12,7 @@ use App\Services\SeoCouncil\Platform12\Tool\Platform12ToolManifest;
 
 final class Platform12ContractRegistry
 {
-    public const MISSION_CATALOG_VERSION = '1.2.0';
+    public const MISSION_CATALOG_VERSION = '1.3.0';
 
     public function __construct(
         private readonly SeoRegistryHasher $hasher,
@@ -282,6 +282,48 @@ final class Platform12ContractRegistry
         return $schema;
     }
 
+    /** @return array<string, mixed> */
+    public function dailySecurityDriftOutputSchema(): array
+    {
+        $schema = [
+            '$schema' => 'https://json-schema.org/draft/2020-12/schema',
+            'schema_id' => 'seo.platform12_daily_security_drift_output.v1',
+            'schema_version' => '1.0.0',
+            'type' => 'object',
+            'additionalProperties' => false,
+            'required' => [
+                'receipt_version', 'mission_id', 'evaluated_at', 'state', 'reason_codes',
+                'private_routes', 'query_security', 'drift', 'evidence_freshness',
+                'injection', 'tools', 'posture', 'automatic_repair_allowed',
+                'authority_mutation_allowed', 'permission_mutation_allowed',
+                'read_only', 'execution_allowed', 'receipt_hash',
+            ],
+            'properties' => [
+                'receipt_version' => ['const' => 'seo.platform12_daily_security_drift.v1'],
+                'mission_id' => ['const' => 'seo.platform12.daily_private_policy_evidence_drift'],
+                'evaluated_at' => ['type' => 'string', 'format' => 'date-time'],
+                'state' => ['enum' => ['READY', 'HOLD', 'DENY']],
+                'reason_codes' => ['type' => 'array', 'maxItems' => 16, 'uniqueItems' => true, 'items' => ['type' => 'string']],
+                'private_routes' => ['type' => 'object'],
+                'query_security' => ['type' => 'object'],
+                'drift' => ['type' => 'object'],
+                'evidence_freshness' => ['type' => 'object'],
+                'injection' => ['type' => 'object'],
+                'tools' => ['type' => 'object'],
+                'posture' => ['type' => 'object'],
+                'automatic_repair_allowed' => ['const' => false],
+                'authority_mutation_allowed' => ['const' => false],
+                'permission_mutation_allowed' => ['const' => false],
+                'read_only' => ['const' => true],
+                'execution_allowed' => ['const' => false],
+                'receipt_hash' => ['type' => 'string', 'pattern' => '^[a-f0-9]{64}$'],
+            ],
+        ];
+        $schema['schema_hash'] = $this->hasher->hash($schema);
+
+        return $schema;
+    }
+
     /** @return array<string, array{id:string,version:string,hash:string}> */
     public function missionCatalogDependencyRefs(): array
     {
@@ -310,6 +352,12 @@ final class Platform12ContractRegistry
             'version' => $dailyUrlTruthSchema['schema_version'],
             'hash' => $dailyUrlTruthSchema['schema_hash'],
         ];
+        $dailySecuritySchema = $this->dailySecurityDriftOutputSchema();
+        $schemaRefs['platform12_daily_security_drift_output_schema'] = [
+            'id' => $dailySecuritySchema['schema_id'],
+            'version' => $dailySecuritySchema['schema_version'],
+            'hash' => $dailySecuritySchema['schema_hash'],
+        ];
 
         return [
             'role_registry' => $manifest['registry_ref'],
@@ -334,7 +382,11 @@ final class Platform12ContractRegistry
             'catalog_version' => self::MISSION_CATALOG_VERSION,
             'catalog_state' => 'FOUNDATION_ONLY',
             'dependency_refs' => $this->missionCatalogDependencyRefs(),
-            'missions' => [$this->dailyGscCoreRuntimeMission(), $this->dailyUrlTruthMission()],
+            'missions' => [
+                $this->dailyGscCoreRuntimeMission(),
+                $this->dailyUrlTruthMission(),
+                $this->dailySecurityDriftMission(),
+            ],
             'runtime_activation_allowed' => false,
         ];
         $catalog['catalog_hash'] = $this->hasher->hash($catalog);
@@ -427,6 +479,50 @@ final class Platform12ContractRegistry
         ];
     }
 
+    /** @return array<string, mixed> */
+    private function dailySecurityDriftMission(): array
+    {
+        $output = $this->dailySecurityDriftOutputSchema();
+
+        return [
+            'mission_id' => 'seo.platform12.daily_private_policy_evidence_drift',
+            'cadence' => 'daily',
+            'timezone' => 'Asia/Shanghai',
+            'natural_slot' => 'daily:ALL:02:20',
+            'family' => 'other_public',
+            'locale' => 'zh-CN',
+            'review_domain' => 'stability',
+            'required_evidence' => [
+                'private_route_negative_set', 'query_hmac', 'query_pii',
+                'role_binding_policy_vector', 'tool_schema_prompt_vector',
+                'evidence_expiry', 'metadata_injection', 'tool_authorization',
+                'retention_egress',
+            ],
+            'eligible_capability' => 'seo.release_separation_policy',
+            'priority' => 'critical',
+            'timeout_seconds' => 120,
+            'max_attempts' => 1,
+            'budgets' => [
+                'model_calls' => 0,
+                'model_input_tokens' => 0,
+                'model_output_tokens' => 0,
+                'tool_calls' => 0,
+                'cost_microusd' => 0,
+            ],
+            'failure_policy' => [
+                'terminal_state' => 'HOLD',
+                'retry_strategy' => 'none',
+                'initial_backoff_seconds' => 0,
+                'max_backoff_seconds' => 0,
+            ],
+            'output_schema' => [
+                'id' => $output['schema_id'],
+                'version' => $output['schema_version'],
+                'hash' => $output['schema_hash'],
+            ],
+        ];
+    }
+
     public function verifyGenerated(): bool
     {
         try {
@@ -452,6 +548,7 @@ final class Platform12ContractRegistry
             'resources/seo-agent/council/platform12/schemas/seo.platform12_mission_catalog.v1.schema.json' => $this->missionCatalogSchema(),
             'resources/seo-agent/council/platform12/schemas/seo.platform12_daily_gsc_core_runtime_output.v1.schema.json' => $this->dailyGscCoreRuntimeOutputSchema(),
             'resources/seo-agent/council/platform12/schemas/seo.platform12_daily_url_truth_output.v1.schema.json' => $this->dailyUrlTruthOutputSchema(),
+            'resources/seo-agent/council/platform12/schemas/seo.platform12_daily_security_drift_output.v1.schema.json' => $this->dailySecurityDriftOutputSchema(),
             'resources/seo-agent/council/platform12/catalogs/seo.platform12_mission_catalog.v1.json' => $this->missionCatalog(),
             ...$this->boundedModel->artifacts(),
             ...$this->tools->artifacts(),

@@ -1,7 +1,7 @@
 {
     "schema_version": "seo.platform12_mission_catalog.v1",
     "catalog_id": "fermatmind.seo.platform12_mission_catalog",
-    "catalog_version": "1.2.0",
+    "catalog_version": "1.3.0",
     "catalog_state": "FOUNDATION_ONLY",
     "dependency_refs": {
         "role_registry": {
@@ -31,8 +31,8 @@
         },
         "schema_vector": {
             "id": "seo.platform12_mission_catalog_schema_vector",
-            "version": "1.2.0",
-            "hash": "517582d1f0ea1ce0b0039a688b913fa9a26738f554eaffbfda59d1a25db58380"
+            "version": "1.3.0",
+            "hash": "49e936f64d0c2e018f1569a73812c73f60cf58929e214d88a0aa5439202fef0c"
         }
     },
     "missions": [
@@ -115,8 +115,50 @@
                 "version": "1.0.0",
                 "hash": "104a0a1b474af277a95b6ceec7b318d570cd5e12a360c2ac61fbc01c3a6797ff"
             }
+        },
+        {
+            "mission_id": "seo.platform12.daily_private_policy_evidence_drift",
+            "cadence": "daily",
+            "timezone": "Asia/Shanghai",
+            "natural_slot": "daily:ALL:02:20",
+            "family": "other_public",
+            "locale": "zh-CN",
+            "review_domain": "stability",
+            "required_evidence": [
+                "private_route_negative_set",
+                "query_hmac",
+                "query_pii",
+                "role_binding_policy_vector",
+                "tool_schema_prompt_vector",
+                "evidence_expiry",
+                "metadata_injection",
+                "tool_authorization",
+                "retention_egress"
+            ],
+            "eligible_capability": "seo.release_separation_policy",
+            "priority": "critical",
+            "timeout_seconds": 120,
+            "max_attempts": 1,
+            "budgets": {
+                "model_calls": 0,
+                "model_input_tokens": 0,
+                "model_output_tokens": 0,
+                "tool_calls": 0,
+                "cost_microusd": 0
+            },
+            "failure_policy": {
+                "terminal_state": "HOLD",
+                "retry_strategy": "none",
+                "initial_backoff_seconds": 0,
+                "max_backoff_seconds": 0
+            },
+            "output_schema": {
+                "id": "seo.platform12_daily_security_drift_output.v1",
+                "version": "1.0.0",
+                "hash": "42c9c973c869228cf824fa69ceb7e5ca2c4dfae2ba639da91bd73b6accf16b37"
+            }
         }
     ],
     "runtime_activation_allowed": false,
-    "catalog_hash": "36c76849d997dc49bfac398211f9e8f68660157ebc853301828db480acfc92a2"
+    "catalog_hash": "2a840fbe27700ac653119c17a1e9ea4b5a16fc95217cd0d349cbac17c0b2b347"
 }

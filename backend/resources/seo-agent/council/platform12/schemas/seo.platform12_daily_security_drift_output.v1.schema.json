@@ -1,0 +1,95 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.platform12_daily_security_drift_output.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "receipt_version",
+        "mission_id",
+        "evaluated_at",
+        "state",
+        "reason_codes",
+        "private_routes",
+        "query_security",
+        "drift",
+        "evidence_freshness",
+        "injection",
+        "tools",
+        "posture",
+        "automatic_repair_allowed",
+        "authority_mutation_allowed",
+        "permission_mutation_allowed",
+        "read_only",
+        "execution_allowed",
+        "receipt_hash"
+    ],
+    "properties": {
+        "receipt_version": {
+            "const": "seo.platform12_daily_security_drift.v1"
+        },
+        "mission_id": {
+            "const": "seo.platform12.daily_private_policy_evidence_drift"
+        },
+        "evaluated_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "state": {
+            "enum": [
+                "READY",
+                "HOLD",
+                "DENY"
+            ]
+        },
+        "reason_codes": {
+            "type": "array",
+            "maxItems": 16,
+            "uniqueItems": true,
+            "items": {
+                "type": "string"
+            }
+        },
+        "private_routes": {
+            "type": "object"
+        },
+        "query_security": {
+            "type": "object"
+        },
+        "drift": {
+            "type": "object"
+        },
+        "evidence_freshness": {
+            "type": "object"
+        },
+        "injection": {
+            "type": "object"
+        },
+        "tools": {
+            "type": "object"
+        },
+        "posture": {
+            "type": "object"
+        },
+        "automatic_repair_allowed": {
+            "const": false
+        },
+        "authority_mutation_allowed": {
+            "const": false
+        },
+        "permission_mutation_allowed": {
+            "const": false
+        },
+        "read_only": {
+            "const": true
+        },
+        "execution_allowed": {
+            "const": false
+        },
+        "receipt_hash": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+        }
+    },
+    "schema_hash": "42c9c973c869228cf824fa69ceb7e5ca2c4dfae2ba639da91bd73b6accf16b37"
+}
