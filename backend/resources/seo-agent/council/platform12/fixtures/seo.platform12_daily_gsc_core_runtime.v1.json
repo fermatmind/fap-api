@@ -1,0 +1,155 @@
+{
+    "fixture_set_id": "seo.platform12_daily_gsc_core_runtime.v1",
+    "cases": [
+        {
+            "id": "ready",
+            "evidence": {
+                "evaluated_at": "2026-09-04T02:00:00Z",
+                "gsc": {
+                    "availability": "AVAILABLE",
+                    "scheduled_receipt_status": "success",
+                    "trigger_mode": "scheduled",
+                    "data_max_date": "2026-09-02",
+                    "row_count": 42,
+                    "mapping_state": "READY",
+                    "data_quality_state": "READY",
+                    "window_state": "COMPLETE"
+                },
+                "runtime": {
+                    "core_runtime_state": "AVAILABLE",
+                    "public_api_state": "AVAILABLE",
+                    "readback_state": "AVAILABLE",
+                    "production_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                    "readback_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                }
+            },
+            "expected_state": "READY",
+            "expected_gsc_capability": "AVAILABLE"
+        },
+        {
+            "id": "valid-zero",
+            "evidence": {
+                "evaluated_at": "2026-09-04T02:00:00Z",
+                "gsc": {
+                    "availability": "AVAILABLE",
+                    "scheduled_receipt_status": "success",
+                    "trigger_mode": "scheduled",
+                    "data_max_date": "2026-09-01",
+                    "row_count": 0,
+                    "mapping_state": "READY",
+                    "data_quality_state": "READY",
+                    "window_state": "COMPLETE"
+                },
+                "runtime": {
+                    "core_runtime_state": "AVAILABLE",
+                    "public_api_state": "AVAILABLE",
+                    "readback_state": "AVAILABLE",
+                    "production_sha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                    "readback_sha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+                }
+            },
+            "expected_state": "READY",
+            "expected_gsc_capability": "VALID_ZERO"
+        },
+        {
+            "id": "delayed",
+            "evidence": {
+                "evaluated_at": "2026-09-04T02:00:00Z",
+                "gsc": {
+                    "availability": "AVAILABLE",
+                    "scheduled_receipt_status": "success",
+                    "trigger_mode": "scheduled",
+                    "data_max_date": "2026-08-31",
+                    "row_count": 12,
+                    "mapping_state": "READY",
+                    "data_quality_state": "READY",
+                    "window_state": "COMPLETE"
+                },
+                "runtime": {
+                    "core_runtime_state": "AVAILABLE",
+                    "public_api_state": "AVAILABLE",
+                    "readback_state": "AVAILABLE",
+                    "production_sha": "cccccccccccccccccccccccccccccccccccccccc",
+                    "readback_sha": "cccccccccccccccccccccccccccccccccccccccc"
+                }
+            },
+            "expected_state": "DATA_FRESHNESS_HOLD",
+            "expected_gsc_capability": "DELAYED"
+        },
+        {
+            "id": "mapping-failed",
+            "evidence": {
+                "evaluated_at": "2026-09-04T02:00:00Z",
+                "gsc": {
+                    "availability": "AVAILABLE",
+                    "scheduled_receipt_status": "success",
+                    "trigger_mode": "scheduled",
+                    "data_max_date": "2026-09-03",
+                    "row_count": 12,
+                    "mapping_state": "FAILED",
+                    "data_quality_state": "READY",
+                    "window_state": "COMPLETE"
+                },
+                "runtime": {
+                    "core_runtime_state": "AVAILABLE",
+                    "public_api_state": "AVAILABLE",
+                    "readback_state": "AVAILABLE",
+                    "production_sha": "dddddddddddddddddddddddddddddddddddddddd",
+                    "readback_sha": "dddddddddddddddddddddddddddddddddddddddd"
+                }
+            },
+            "expected_state": "MAPPING_FAILED_HOLD",
+            "expected_gsc_capability": "MAPPING_FAILED"
+        },
+        {
+            "id": "window-incomplete",
+            "evidence": {
+                "evaluated_at": "2026-09-04T02:00:00Z",
+                "gsc": {
+                    "availability": "AVAILABLE",
+                    "scheduled_receipt_status": "success",
+                    "trigger_mode": "scheduled",
+                    "data_max_date": "2026-09-03",
+                    "row_count": 12,
+                    "mapping_state": "READY",
+                    "data_quality_state": "READY",
+                    "window_state": "INCOMPLETE"
+                },
+                "runtime": {
+                    "core_runtime_state": "AVAILABLE",
+                    "public_api_state": "AVAILABLE",
+                    "readback_state": "AVAILABLE",
+                    "production_sha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                    "readback_sha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+                }
+            },
+            "expected_state": "WINDOW_INCOMPLETE_HOLD",
+            "expected_gsc_capability": "WINDOW_INCOMPLETE"
+        },
+        {
+            "id": "unavailable",
+            "evidence": {
+                "evaluated_at": "2026-09-04T02:00:00Z",
+                "gsc": {
+                    "availability": "UNAVAILABLE",
+                    "scheduled_receipt_status": null,
+                    "trigger_mode": null,
+                    "data_max_date": null,
+                    "row_count": 0,
+                    "mapping_state": "UNAVAILABLE",
+                    "data_quality_state": "UNAVAILABLE",
+                    "window_state": "UNAVAILABLE"
+                },
+                "runtime": {
+                    "core_runtime_state": "UNAVAILABLE",
+                    "public_api_state": "UNAVAILABLE",
+                    "readback_state": "UNAVAILABLE",
+                    "production_sha": "ffffffffffffffffffffffffffffffffffffffff",
+                    "readback_sha": "ffffffffffffffffffffffffffffffffffffffff"
+                }
+            },
+            "expected_state": "GSC_UNAVAILABLE_HOLD",
+            "expected_gsc_capability": "UNAVAILABLE"
+        }
+    ]
+}

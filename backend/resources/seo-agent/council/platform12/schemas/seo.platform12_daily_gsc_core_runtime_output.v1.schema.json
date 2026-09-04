@@ -1,0 +1,188 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.platform12_daily_gsc_core_runtime_output.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "receipt_version",
+        "mission_id",
+        "evaluated_at",
+        "state",
+        "gsc",
+        "runtime",
+        "read_only",
+        "execution_allowed",
+        "writes_allowed",
+        "receipt_hash"
+    ],
+    "properties": {
+        "receipt_version": {
+            "const": "seo.platform12_daily_gsc_core_runtime.v1"
+        },
+        "mission_id": {
+            "const": "seo.platform12.daily_gsc_core_runtime"
+        },
+        "evaluated_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "state": {
+            "enum": [
+                "READY",
+                "DATA_FRESHNESS_HOLD",
+                "GSC_UNAVAILABLE_HOLD",
+                "MAPPING_FAILED_HOLD",
+                "WINDOW_INCOMPLETE_HOLD",
+                "DATA_QUALITY_HOLD",
+                "RUNTIME_UNAVAILABLE_HOLD",
+                "RUNTIME_READBACK_HOLD",
+                "INPUT_HOLD"
+            ]
+        },
+        "gsc": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "capability_state",
+                "scheduled_receipt_status",
+                "data_max_date",
+                "lag_days",
+                "row_count",
+                "mapping_state",
+                "data_quality_state",
+                "window_state",
+                "source_read_only"
+            ],
+            "properties": {
+                "capability_state": {
+                    "enum": [
+                        "AVAILABLE",
+                        "UNAVAILABLE",
+                        "VALID_ZERO",
+                        "DELAYED",
+                        "MAPPING_FAILED",
+                        "WINDOW_INCOMPLETE"
+                    ]
+                },
+                "scheduled_receipt_status": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "data_max_date": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "lag_days": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "minimum": 0
+                },
+                "row_count": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "minimum": 0
+                },
+                "mapping_state": {
+                    "enum": [
+                        "READY",
+                        "FAILED",
+                        "UNAVAILABLE"
+                    ]
+                },
+                "data_quality_state": {
+                    "enum": [
+                        "READY",
+                        "HOLD",
+                        "UNAVAILABLE"
+                    ]
+                },
+                "window_state": {
+                    "enum": [
+                        "COMPLETE",
+                        "INCOMPLETE",
+                        "UNAVAILABLE"
+                    ]
+                },
+                "source_read_only": {
+                    "const": true
+                }
+            }
+        },
+        "runtime": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "core_runtime_state",
+                "public_api_state",
+                "readback_state",
+                "production_sha",
+                "readback_sha",
+                "sha_match"
+            ],
+            "properties": {
+                "core_runtime_state": {
+                    "enum": [
+                        "AVAILABLE",
+                        "UNAVAILABLE",
+                        "FAILED"
+                    ]
+                },
+                "public_api_state": {
+                    "enum": [
+                        "AVAILABLE",
+                        "UNAVAILABLE",
+                        "FAILED"
+                    ]
+                },
+                "readback_state": {
+                    "enum": [
+                        "AVAILABLE",
+                        "UNAVAILABLE",
+                        "FAILED"
+                    ]
+                },
+                "production_sha": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "readback_sha": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "sha_match": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                }
+            }
+        },
+        "read_only": {
+            "const": true
+        },
+        "execution_allowed": {
+            "const": false
+        },
+        "writes_allowed": {
+            "const": false
+        },
+        "receipt_hash": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+        }
+    },
+    "schema_hash": "1e11fd1b9ec8c31c817e7ee462db79fd22ddc04a624eac8be491b392a9626081"
+}

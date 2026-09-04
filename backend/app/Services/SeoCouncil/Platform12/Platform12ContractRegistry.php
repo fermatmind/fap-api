@@ -12,7 +12,7 @@ use App\Services\SeoCouncil\Platform12\Tool\Platform12ToolManifest;
 
 final class Platform12ContractRegistry
 {
-    public const MISSION_CATALOG_VERSION = '1.0.0';
+    public const MISSION_CATALOG_VERSION = '1.1.0';
 
     public function __construct(
         private readonly SeoRegistryHasher $hasher,
@@ -167,6 +167,75 @@ final class Platform12ContractRegistry
         return $schema;
     }
 
+    /** @return array<string, mixed> */
+    public function dailyGscCoreRuntimeOutputSchema(): array
+    {
+        $state = [
+            'READY', 'DATA_FRESHNESS_HOLD', 'GSC_UNAVAILABLE_HOLD',
+            'MAPPING_FAILED_HOLD', 'WINDOW_INCOMPLETE_HOLD', 'DATA_QUALITY_HOLD',
+            'RUNTIME_UNAVAILABLE_HOLD', 'RUNTIME_READBACK_HOLD', 'INPUT_HOLD',
+        ];
+        $schema = [
+            '$schema' => 'https://json-schema.org/draft/2020-12/schema',
+            'schema_id' => 'seo.platform12_daily_gsc_core_runtime_output.v1',
+            'schema_version' => '1.0.0',
+            'type' => 'object',
+            'additionalProperties' => false,
+            'required' => [
+                'receipt_version', 'mission_id', 'evaluated_at', 'state', 'gsc', 'runtime',
+                'read_only', 'execution_allowed', 'writes_allowed', 'receipt_hash',
+            ],
+            'properties' => [
+                'receipt_version' => ['const' => 'seo.platform12_daily_gsc_core_runtime.v1'],
+                'mission_id' => ['const' => 'seo.platform12.daily_gsc_core_runtime'],
+                'evaluated_at' => ['type' => 'string', 'format' => 'date-time'],
+                'state' => ['enum' => $state],
+                'gsc' => [
+                    'type' => 'object',
+                    'additionalProperties' => false,
+                    'required' => [
+                        'capability_state', 'scheduled_receipt_status', 'data_max_date', 'lag_days',
+                        'row_count', 'mapping_state', 'data_quality_state', 'window_state', 'source_read_only',
+                    ],
+                    'properties' => [
+                        'capability_state' => ['enum' => ['AVAILABLE', 'UNAVAILABLE', 'VALID_ZERO', 'DELAYED', 'MAPPING_FAILED', 'WINDOW_INCOMPLETE']],
+                        'scheduled_receipt_status' => ['type' => ['string', 'null']],
+                        'data_max_date' => ['type' => ['string', 'null']],
+                        'lag_days' => ['type' => ['integer', 'null'], 'minimum' => 0],
+                        'row_count' => ['type' => ['integer', 'null'], 'minimum' => 0],
+                        'mapping_state' => ['enum' => ['READY', 'FAILED', 'UNAVAILABLE']],
+                        'data_quality_state' => ['enum' => ['READY', 'HOLD', 'UNAVAILABLE']],
+                        'window_state' => ['enum' => ['COMPLETE', 'INCOMPLETE', 'UNAVAILABLE']],
+                        'source_read_only' => ['const' => true],
+                    ],
+                ],
+                'runtime' => [
+                    'type' => 'object',
+                    'additionalProperties' => false,
+                    'required' => [
+                        'core_runtime_state', 'public_api_state', 'readback_state',
+                        'production_sha', 'readback_sha', 'sha_match',
+                    ],
+                    'properties' => [
+                        'core_runtime_state' => ['enum' => ['AVAILABLE', 'UNAVAILABLE', 'FAILED']],
+                        'public_api_state' => ['enum' => ['AVAILABLE', 'UNAVAILABLE', 'FAILED']],
+                        'readback_state' => ['enum' => ['AVAILABLE', 'UNAVAILABLE', 'FAILED']],
+                        'production_sha' => ['type' => ['string', 'null']],
+                        'readback_sha' => ['type' => ['string', 'null']],
+                        'sha_match' => ['type' => ['boolean', 'null']],
+                    ],
+                ],
+                'read_only' => ['const' => true],
+                'execution_allowed' => ['const' => false],
+                'writes_allowed' => ['const' => false],
+                'receipt_hash' => ['type' => 'string', 'pattern' => '^[a-f0-9]{64}$'],
+            ],
+        ];
+        $schema['schema_hash'] = $this->hasher->hash($schema);
+
+        return $schema;
+    }
+
     /** @return array<string, array{id:string,version:string,hash:string}> */
     public function missionCatalogDependencyRefs(): array
     {
@@ -183,6 +252,12 @@ final class Platform12ContractRegistry
             'hash' => $catalogSchema['schema_hash'],
         ];
         $schemaRefs['platform12_bounded_model_output_schema'] = $this->boundedModel->outputSchemaRef();
+        $dailyOutputSchema = $this->dailyGscCoreRuntimeOutputSchema();
+        $schemaRefs['platform12_daily_gsc_core_runtime_output_schema'] = [
+            'id' => $dailyOutputSchema['schema_id'],
+            'version' => $dailyOutputSchema['schema_version'],
+            'hash' => $dailyOutputSchema['schema_hash'],
+        ];
 
         return [
             'role_registry' => $manifest['registry_ref'],
@@ -207,12 +282,54 @@ final class Platform12ContractRegistry
             'catalog_version' => self::MISSION_CATALOG_VERSION,
             'catalog_state' => 'FOUNDATION_ONLY',
             'dependency_refs' => $this->missionCatalogDependencyRefs(),
-            'missions' => [],
+            'missions' => [$this->dailyGscCoreRuntimeMission()],
             'runtime_activation_allowed' => false,
         ];
         $catalog['catalog_hash'] = $this->hasher->hash($catalog);
 
         return $catalog;
+    }
+
+    /** @return array<string, mixed> */
+    private function dailyGscCoreRuntimeMission(): array
+    {
+        $output = $this->dailyGscCoreRuntimeOutputSchema();
+
+        return [
+            'mission_id' => 'seo.platform12.daily_gsc_core_runtime',
+            'cadence' => 'daily',
+            'timezone' => 'Asia/Shanghai',
+            'natural_slot' => 'daily:ALL:02:00',
+            'family' => 'other_public',
+            'locale' => 'zh-CN',
+            'review_domain' => 'runtime_health',
+            'required_evidence' => [
+                'gsc_scheduled_receipt', 'gsc_data_freshness', 'gsc_mapping_quality',
+                'core_runtime_health', 'public_api_health', 'production_readback',
+            ],
+            'eligible_capability' => 'seo.runtime_health_review',
+            'priority' => 'high',
+            'timeout_seconds' => 120,
+            'max_attempts' => 1,
+            'budgets' => [
+                'model_calls' => 0,
+                'model_input_tokens' => 0,
+                'model_output_tokens' => 0,
+                'tool_calls' => 0,
+                'cost_microusd' => 0,
+            ],
+            'failure_policy' => [
+                'terminal_state' => 'HOLD',
+                'retry_strategy' => 'none',
+                'initial_backoff_seconds' => 0,
+                'max_backoff_seconds' => 0,
+            ],
+            'output_schema' => [
+                'id' => $output['schema_id'],
+                'version' => $output['schema_version'],
+                'hash' => $output['schema_hash'],
+            ],
+        ];
     }
 
     public function verifyGenerated(): bool
@@ -238,6 +355,7 @@ final class Platform12ContractRegistry
         return [
             'resources/seo-agent/council/platform12/schemas/seo.platform12_start_receipt.v1.schema.json' => $this->startReceiptSchema(),
             'resources/seo-agent/council/platform12/schemas/seo.platform12_mission_catalog.v1.schema.json' => $this->missionCatalogSchema(),
+            'resources/seo-agent/council/platform12/schemas/seo.platform12_daily_gsc_core_runtime_output.v1.schema.json' => $this->dailyGscCoreRuntimeOutputSchema(),
             'resources/seo-agent/council/platform12/catalogs/seo.platform12_mission_catalog.v1.json' => $this->missionCatalog(),
             ...$this->boundedModel->artifacts(),
             ...$this->tools->artifacts(),
