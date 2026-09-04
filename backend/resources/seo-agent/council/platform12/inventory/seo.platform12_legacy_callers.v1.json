@@ -1,0 +1,148 @@
+{
+  "schema_version": "seo.platform12_legacy_caller_inventory.v1",
+  "inventory_id": "fermatmind.seo.platform12_legacy_callers",
+  "inventory_version": "1.0.0",
+  "inventory_state": "READ_ONLY",
+  "authority_owner": "fap-api canonical SEO registries and domain services",
+  "deletion_rule": "Only a superseded entrypoint with zero references in every scanned domain and a non-empty replacement may become delete-ready.",
+  "scan_domains": {
+    "code": ["backend/app", "backend/routes"],
+    "laravel_schedule": ["backend/bootstrap/app.php", "backend/app/Console/Kernel.php"],
+    "ci_deploy_nightly": [".github/workflows/ci.yml", ".github/workflows/deploy.yml", ".github/workflows/nightly.yml"],
+    "documentation": ["backend/docs/seo", "docs/seo"],
+    "external_scripts": ["backend/scripts", ".agents/skills"],
+    "audit_history": ["backend/tests"]
+  },
+  "current_callers": [
+    {
+      "caller_id": "production.weekly_decisions",
+      "kind": "scheduler",
+      "entrypoint": "seo:weekly-decisions",
+      "state": "active_not_owned_by_council",
+      "authority_owner": "SeoIntel weekly decision authority",
+      "replacement": null,
+      "audit_history_value": "scheduled receipt continuity",
+      "evidence_refs": ["backend/bootstrap/app.php"]
+    },
+    {
+      "caller_id": "production.gsc_sync",
+      "kind": "scheduler",
+      "entrypoint": "seo-intel:gsc-sync",
+      "state": "active_not_owned_by_council",
+      "authority_owner": "SeoIntel GSC ingestion",
+      "replacement": null,
+      "audit_history_value": "source freshness and lag evidence",
+      "evidence_refs": ["backend/bootstrap/app.php", ".github/workflows/nightly.yml"]
+    },
+    {
+      "caller_id": "production.seo_conversion_funnel",
+      "kind": "scheduler",
+      "entrypoint": "analytics:refresh-seo-conversion-daily",
+      "state": "active_not_owned_by_council",
+      "authority_owner": "Analytics conversion projection",
+      "replacement": null,
+      "audit_history_value": "public funnel measurement continuity",
+      "evidence_refs": ["backend/bootstrap/app.php"]
+    },
+    {
+      "caller_id": "production.url_truth_reconciliation",
+      "kind": "scheduler",
+      "entrypoint": "seo-intel:url-truth-controlled-reconcile",
+      "state": "active_not_owned_by_council",
+      "authority_owner": "URL Truth controlled reconciler",
+      "replacement": null,
+      "audit_history_value": "canonical and indexability reconciliation",
+      "evidence_refs": ["backend/bootstrap/app.php"]
+    },
+    {
+      "caller_id": "production.runtime_probe",
+      "kind": "scheduler",
+      "entrypoint": "seo:runtime-probe-scheduled",
+      "state": "active_not_owned_by_council",
+      "authority_owner": "SeoIntel runtime probe",
+      "replacement": null,
+      "audit_history_value": "runtime health receipts",
+      "evidence_refs": ["backend/bootstrap/app.php", "backend/scripts/deploy/restart_supervisor_scheduler.sh"]
+    },
+    {
+      "caller_id": "production.sitemap_cache_warm",
+      "kind": "scheduler",
+      "entrypoint": "seo:warm-sitemap-source-cache",
+      "state": "active_not_owned_by_council",
+      "authority_owner": "Sitemap derived-cache publisher",
+      "replacement": null,
+      "audit_history_value": "discoverability cache continuity",
+      "evidence_refs": ["backend/bootstrap/app.php", "backend/scripts/deploy/verify_sitemap_source_cache_warm.sh"]
+    },
+    {
+      "caller_id": "council.local_skill",
+      "kind": "skill",
+      "entrypoint": "submit_seo_council_mission.php",
+      "state": "active_foundation",
+      "authority_owner": "fap-api Council Admission",
+      "replacement": null,
+      "audit_history_value": "structured MissionRequest submission",
+      "evidence_refs": [".agents/skills/fermatmind-global-seo-geo-growth-scan/SKILL.md", "backend/scripts/seo/submit_seo_council_mission.php"]
+    },
+    {
+      "caller_id": "council.cli",
+      "kind": "cli",
+      "entrypoint": "seo:council-submit",
+      "state": "active_foundation",
+      "authority_owner": "fap-api Council Admission",
+      "replacement": null,
+      "audit_history_value": "machine-readable HOLD receipts",
+      "evidence_refs": ["backend/app/Console/Commands/SeoCouncilSubmitCommand.php"]
+    },
+    {
+      "caller_id": "council.api",
+      "kind": "api",
+      "entrypoint": "council/missions",
+      "state": "active_foundation",
+      "authority_owner": "fap-api Council Admission",
+      "replacement": null,
+      "audit_history_value": "authenticated MissionRequest receipts",
+      "evidence_refs": ["backend/routes/api.php"]
+    },
+    {
+      "caller_id": "council.ui_submission_route",
+      "kind": "ui",
+      "entrypoint": "council/ui-missions",
+      "state": "deferred",
+      "authority_owner": "fap-api Council Admission",
+      "replacement": "read-only Council operations surface",
+      "audit_history_value": "route compatibility while visible submission controls remain absent",
+      "evidence_refs": ["backend/routes/web.php"]
+    },
+    {
+      "caller_id": "council.scheduler",
+      "kind": "scheduler",
+      "entrypoint": "seo:council-scheduled",
+      "state": "deferred",
+      "authority_owner": "fap-api Council scheduler gate",
+      "replacement": "SEO-PLATFORM-12A-08 activation decision",
+      "audit_history_value": "disabled scheduler contract",
+      "evidence_refs": ["backend/bootstrap/app.php", "backend/app/Console/Commands/SeoCouncilScheduledCommand.php"]
+    },
+    {
+      "caller_id": "delivery.council_ci_closeout",
+      "kind": "ci",
+      "entrypoint": "seo:council-closeout",
+      "state": "active_validation",
+      "authority_owner": "exact-SHA CI",
+      "replacement": null,
+      "audit_history_value": "immutable candidate receipt",
+      "evidence_refs": [".github/workflows/ci.yml"]
+    },
+    {
+      "caller_id": "delivery.council_deploy_closeout",
+      "kind": "deploy",
+      "entrypoint": "seo:council-orchestration-closeout",
+      "state": "active_validation",
+      "authority_owner": "exact-SHA deploy",
+      "replacement": null,
+      "audit_history_value": "staging and production closeout receipts",
+      "evidence_refs": [".github/workflows/deploy.yml"]
+    }
+  ]
+}
