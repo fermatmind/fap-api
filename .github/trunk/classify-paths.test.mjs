@@ -298,14 +298,17 @@ test("keeps the Ops SEO execution migration out of discoverability", () => {
   assert.equal(result.deploy, true);
 });
 test("binds Platform 12 scheduler storage to migration and Council receipts without discoverability", () => {
-  const result = classifyPaths([
+  for (const path of [
     "backend/database/migrations/seo_intel/2026_09_04_010000_create_seo_council_scheduler_storage.php",
-  ]);
-  assert.equal(result.flags.backward_compatible_migration, true);
-  assert.equal(result.flags.seo_discoverability, false);
-  assert.equal(result.operations.seo_council_orchestration, true);
-  assert.equal(result.operations.seo_competitive_evidence, true);
-  assert.equal(result.deploy, true);
+    "backend/database/migrations/seo_intel/2026_09_04_020000_expand_seo_council_scheduler_fencing.php",
+  ]) {
+    const result = classifyPaths([path]);
+    assert.equal(result.flags.backward_compatible_migration, true, path);
+    assert.equal(result.flags.seo_discoverability, false, path);
+    assert.equal(result.operations.seo_council_orchestration, true, path);
+    assert.equal(result.operations.seo_competitive_evidence, true, path);
+    assert.equal(result.deploy, true, path);
+  }
 });
 test("classifies payments", () => assert.equal(has(["backend/app/Services/Payments/StripeService.php"], "payment"), true));
 test("classifies cache projections", () => assert.equal(has(["backend/app/Services/Cache/ActiveProjection.php"], "cache_runtime_projection"), true));
