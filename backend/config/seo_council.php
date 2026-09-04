@@ -14,6 +14,10 @@ return [
     'model_provider' => 'disabled',
     'model_runtime_enabled' => false,
     'tool_broker_enabled' => false,
+    'notification_dispatch_enabled' => false,
+    'notification_max_attempts' => 3,
+    'notification_lease_seconds' => 60,
+    'notification_max_lease_seconds' => 300,
     'model_http' => [
         'endpoint' => env('SEO_COUNCIL_MODEL_HTTP_ENDPOINT', ''),
         'secret' => env('SEO_COUNCIL_MODEL_HTTP_SECRET', ''),

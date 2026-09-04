@@ -24,6 +24,8 @@ use App\Services\SeoCouncil\Platform12\Model\DisabledSeoCouncilModelClient;
 use App\Services\SeoCouncil\Platform12\Model\FakeSeoCouncilModelClient;
 use App\Services\SeoCouncil\Platform12\Model\HttpSeoCouncilModelClient;
 use App\Services\SeoCouncil\Platform12\Model\SeoCouncilModelClient;
+use App\Services\SeoCouncil\Platform12\Notification\OpsAlertNotificationTransport;
+use App\Services\SeoCouncil\Platform12\Notification\Platform12NotificationTransport;
 use App\Services\SeoCouncil\Policy\CouncilAdmissionGateway;
 use App\Services\SeoCouncil\Policy\PolicyGatewayCouncilAdmissionGateway;
 use App\Services\SeoCouncil\TechnicalDiagnosis\DenyOnlyTechnicalDiagnosisRuntimeGate;
@@ -65,6 +67,7 @@ final class SeoCouncilServiceProvider extends ServiceProvider
         $this->app->singleton(DisabledSeoCouncilModelClient::class);
         $this->app->singleton(HttpSeoCouncilModelClient::class);
         $this->app->singleton(FakeSeoCouncilModelClient::class);
+        $this->app->bind(Platform12NotificationTransport::class, OpsAlertNotificationTransport::class);
         $this->app->singleton(
             SeoCouncilModelClient::class,
             static function ($app): SeoCouncilModelClient {
