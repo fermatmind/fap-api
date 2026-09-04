@@ -53,10 +53,20 @@ test("keeps all SEO platform closeout evidence docs-only", () => {
 test("classifies application code", () => assert.equal(has(["backend/app/Models/User.php"], "application_code"), true));
 test("classifies content assets", () => assert.equal(has(["backend/content_packs/BIG5/v1/manifest.json"], "content_assets"), true));
 test("binds the Career data recovery manifest to its controlled deploy operation", () => {
-  const result = classifyPaths(["backend/content_assets/career/career_data_recovery.v1.json"]);
-  assert.equal(result.flags.content_assets, true);
-  assert.equal(result.deploy, true);
-  assert.equal(result.operations.career_data_recovery, true);
+  const boundaries = [
+    "backend/content_assets/career/career_data_recovery.v1.json",
+    "backend/app/Console/Commands/CareerCompileRecommendationSubjects.php",
+    "backend/app/Services/ContentPromotion/CareerCmsPromotionAuthority.php",
+    "backend/app/Services/Career/Recovery/CareerGuideLocaleRecovery.php",
+    "backend/app/Services/Career/Recovery/CareerRecommendationAuthorityRecovery.php",
+  ];
+
+  for (const path of boundaries) {
+    const result = classifyPaths([path]);
+    assert.equal(result.deploy, true, path);
+    assert.equal(result.operations.career_data_recovery, true, path);
+  }
+  assert.equal(classifyPaths([boundaries[0]]).flags.content_assets, true);
 });
 test("classifies Career Current legacy and sharded assets", () => {
   assert.equal(has(["backend/content_assets/career/current/assets.jsonl"], "content_assets"), true);

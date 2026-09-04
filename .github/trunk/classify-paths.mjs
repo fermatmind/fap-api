@@ -105,6 +105,12 @@ export const SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE = "ACTIVE";
 const isDeferredCompetitiveCouncilBoundary = (path) =>
   path.startsWith("backend/app/Services/SeoCouncil/Competitive/");
 
+const isCareerDataRecoveryBoundary = (path) =>
+  path === "backend/content_assets/career/career_data_recovery.v1.json"
+  || path === "backend/app/Console/Commands/CareerCompileRecommendationSubjects.php"
+  || path === "backend/app/Services/ContentPromotion/CareerCmsPromotionAuthority.php"
+  || path.startsWith("backend/app/Services/Career/Recovery/");
+
 export function classifyPaths(inputPaths) {
   const paths = [...new Set(inputPaths.map(normalize).filter(Boolean))].sort();
   if (paths.length === 0) throw new Error("changed path set must not be empty");
@@ -122,9 +128,7 @@ export function classifyPaths(inputPaths) {
     mbti_zh_result_authority_release: paths.includes(
       "backend/content_assets/personality_public/mbti_zh_result_authority_release.v1.json",
     ),
-    career_data_recovery: paths.includes(
-      "backend/content_assets/career/career_data_recovery.v1.json",
-    ),
+    career_data_recovery: paths.some(isCareerDataRecoveryBoundary),
     seo_platform_10_closeout: paths.includes("backend/config/seo_platform_10.php"),
     seo_platform_11a_closeout: paths.includes(
       "backend/docs/seo/generated/seo-platform-11a-inventory.v3.json",

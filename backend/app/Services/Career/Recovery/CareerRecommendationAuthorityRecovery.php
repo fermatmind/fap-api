@@ -216,9 +216,7 @@ final class CareerRecommendationAuthorityRecovery
             || ! in_array((string) $occupation->crosswalk_mode, self::SAFE_CROSSWALK_MODES, true)) {
             throw new RuntimeException('career_recommendation_authority_recovery_occupation_conflict:'.$occupation->canonical_slug);
         }
-        $actualFingerprint = hash('sha256', PromotionContextFactory::canonicalJson($this->sourceState($job->toArray())));
-        $baselineFingerprint = hash('sha256', PromotionContextFactory::canonicalJson($baseline));
-        if (! hash_equals($baselineFingerprint, $actualFingerprint)) {
+        if (! hash_equals($this->sourceFingerprint($baseline), $this->sourceFingerprint($job->toArray()))) {
             throw new RuntimeException('career_recommendation_authority_recovery_cms_baseline_conflict:'.$occupation->canonical_slug);
         }
     }
@@ -344,5 +342,11 @@ final class CareerRecommendationAuthorityRecovery
             'is_public' => (bool) ($job['is_public'] ?? false),
             'is_indexable' => (bool) ($job['is_indexable'] ?? false),
         ];
+    }
+
+    /** @param array<string,mixed> $job */
+    private function sourceFingerprint(array $job): string
+    {
+        return hash('sha256', PromotionContextFactory::canonicalJson($this->sourceState($job)));
     }
 }
