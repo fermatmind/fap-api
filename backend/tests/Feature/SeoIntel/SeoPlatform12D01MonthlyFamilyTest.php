@@ -73,6 +73,18 @@ final class SeoPlatform12D01MonthlyFamilyTest extends TestCase
         $this->assertNull($artifact['authority']['public_url_count']);
     }
 
+    public function test_duplicate_locale_for_one_parity_identity_fails_closed(): void
+    {
+        $evidence = $this->evidence();
+        $evidence['authority_inventory']['urls'][] = $this->url('6', 'f', 'career', 'zh-CN');
+
+        $artifact = app(Platform12MonthlyFamilyEvaluator::class)->evaluate($evidence);
+
+        $this->assertSame('MEASUREMENT_HOLD', $artifact['state']);
+        $this->assertSame([], $artifact['authority']['public_url_refs']);
+        $this->assertSame(0, $artifact['authority']['private_url_count']);
+    }
+
     public function test_catalog_declares_zero_budget_monthly_evaluator_without_registration(): void
     {
         $contracts = app(Platform12ContractRegistry::class);

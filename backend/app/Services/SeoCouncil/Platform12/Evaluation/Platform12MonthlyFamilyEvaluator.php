@@ -98,6 +98,9 @@ final readonly class Platform12MonthlyFamilyEvaluator
             if (isset($publicRefs[$row['url_ref']])) {
                 throw new InvalidArgumentException('PUBLIC_URL_DUPLICATE');
             }
+            if (in_array($row['locale'], $parityKeys[$row['parity_key']] ?? [], true)) {
+                throw new InvalidArgumentException('PARITY_LOCALE_DUPLICATE');
+            }
             $publicRefs[$row['url_ref']] = true;
             $parityKeys[$row['parity_key']][] = $row['locale'];
             $canonicalValid += (int) $row['canonical_ok'];
