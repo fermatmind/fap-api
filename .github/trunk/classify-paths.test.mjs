@@ -326,7 +326,7 @@ test("11G competitive evidence selects the controlled ingestion operation", () =
   assert.equal(result.operations.seo_competitive_evidence, true);
   assert.equal(result.operations.seo_council_orchestration, true);
   assert.equal(result.operations.seo_competitive_evidence_state, "ACTIVE");
-  assert.equal(result.operations.seo_competitive_evidence_progress, "NEARLY_COMPLETE");
+  assert.equal(result.operations.seo_competitive_evidence_progress, "COMPLETE");
   assert.equal(result.operations.seo_competitive_evidence_blocks_delivery, true);
   assert.equal(result.flags.application_code, true);
   const gateway = classifyPaths([

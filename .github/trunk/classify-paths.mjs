@@ -141,7 +141,7 @@ export function classifyPaths(inputPaths) {
     ) || seoCompetitiveEvidence,
     seo_competitive_evidence: seoCompetitiveEvidence,
     seo_competitive_evidence_state: SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE,
-    seo_competitive_evidence_progress: "NEARLY_COMPLETE",
+    seo_competitive_evidence_progress: "COMPLETE",
     seo_competitive_evidence_blocks_delivery: SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE === "ACTIVE",
   };
   let testsChanged = false;

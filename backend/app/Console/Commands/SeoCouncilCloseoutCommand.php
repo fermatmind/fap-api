@@ -26,6 +26,7 @@ use App\Services\SeoCouncil\Platform11\Platform11ICloseoutBuilder;
 use App\Services\SeoCouncil\Platform11\Platform11JCloseoutBuilder;
 use App\Services\SeoCouncil\Platform11\Platform11KCloseoutBuilder;
 use App\Services\SeoCouncil\Platform11\Platform11LCloseoutBuilder;
+use App\Services\SeoCouncil\Platform12\Platform12StartGate;
 use App\Services\SeoCouncil\Policy\CouncilAdmissionRequestFactory;
 use App\Services\SeoCouncil\Routing\DeterministicMissionRouter;
 use App\Services\SeoCouncil\Routing\GoldenRoutingEvaluator;
@@ -68,6 +69,7 @@ final class SeoCouncilCloseoutCommand extends Command
         Platform11JCloseoutBuilder $platform11J,
         Platform11KCloseoutBuilder $platform11K,
         Platform11LCloseoutBuilder $platform11L,
+        Platform12StartGate $platform12Start,
         SeoRegistryHasher $hasher,
     ): int {
         try {
@@ -143,6 +145,13 @@ final class SeoCouncilCloseoutCommand extends Command
                 $platform11RuntimeQaReceipt,
                 $platform11IndependentReviewReceipt,
             );
+            $operatorTimeBaseline = $operatorTime->routineMaintenanceBaseline();
+            $platform12StartReceipt = $platform12Start->build(
+                $platform11LifecycleReceipt,
+                $sourceSha,
+                (string) ($technicalReceipt['url_truth_projection_hash'] ?? 'unavailable'),
+                $operatorTimeBaseline,
+            );
 
             $receipt = [
                 'contract_version' => 'seo.council_closeout.v2',
@@ -203,7 +212,7 @@ final class SeoCouncilCloseoutCommand extends Command
                 'routing' => $routingMetrics,
                 'career_runtime' => $runtimeSnapshot['career_runtime'],
                 'mission_persistence_enabled' => $runtimeSnapshot['mission_persistence_enabled'],
-                'operator_time_baseline' => $operatorTime->routineMaintenanceBaseline(),
+                'operator_time_baseline' => $operatorTimeBaseline,
                 'action_manifest_ref' => $contracts->manifest()['reused_action_manifest'],
                 'policy_registry_hash' => $policyRegistry['registry_hash'],
                 'execution_allowed' => false,
@@ -216,6 +225,7 @@ final class SeoCouncilCloseoutCommand extends Command
                 'platform11_runtime_qa' => $platform11RuntimeQaReceipt,
                 'platform11_independent_review' => $platform11IndependentReviewReceipt,
                 'platform11_lifecycle' => $platform11LifecycleReceipt,
+                'platform12_start' => $platform12StartReceipt,
             ];
             $receiptProjection = $this->receiptProjectionProbe($receipt);
             $receipt['receipt_projection_probe_total'] = $receiptProjection['total'];

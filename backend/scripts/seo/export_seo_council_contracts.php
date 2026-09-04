@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Services\SeoCouncil\Contracts\CouncilContractRegistry;
 use App\Services\SeoCouncil\Measurement\MeasurementContractRegistry;
 use App\Services\SeoCouncil\Platform11\Platform11ContractRegistry;
+use App\Services\SeoCouncil\Platform12\Platform12ContractRegistry;
 use App\Services\SeoCouncil\TechnicalDiagnosis\TechnicalDiagnosisContractRegistry;
 
 require dirname(__DIR__, 2).'/vendor/autoload.php';
@@ -18,6 +19,9 @@ $artifacts = [
     dirname(__DIR__, 2).'/docs/seo/generated/seo-measurement-contract-manifest.v3.json' => $app->make(MeasurementContractRegistry::class)->manifest(),
 ];
 foreach ($app->make(Platform11ContractRegistry::class)->artifacts() as $relative => $artifact) {
+    $artifacts[dirname(__DIR__, 2).'/'.$relative] = $artifact;
+}
+foreach ($app->make(Platform12ContractRegistry::class)->artifacts() as $relative => $artifact) {
     $artifacts[dirname(__DIR__, 2).'/'.$relative] = $artifact;
 }
 

@@ -1,0 +1,23 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.platform12_start_receipt.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "receipt_version",
+        "production_sha",
+        "foundation_state",
+        "foundation_build_allowed",
+        "runtime_activation_allowed",
+        "runtime_activation_state",
+        "nightly_state",
+        "measurement_baseline_state",
+        "dependency_refs",
+        "write_guards",
+        "SEO-PLATFORM-11",
+        "SEO-PLATFORM-12",
+        "receipt_hash"
+    ],
+    "schema_hash": "ac92ae4a642226c25b95aad501e2679be3e194d73d5ead4f86e446f641febde5"
+}
