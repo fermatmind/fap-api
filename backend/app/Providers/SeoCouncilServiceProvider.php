@@ -20,6 +20,10 @@ use App\Services\SeoCouncil\Measurement\MeasurementEvidenceDiagnosticLoader;
 use App\Services\SeoCouncil\Measurement\MeasurementRunner;
 use App\Services\SeoCouncil\Measurement\MeasurementRuntimeGate;
 use App\Services\SeoCouncil\Measurement\ReadOnlyMeasurementEvidenceBundleLoader;
+use App\Services\SeoCouncil\Platform12\Model\DisabledSeoCouncilModelClient;
+use App\Services\SeoCouncil\Platform12\Model\FakeSeoCouncilModelClient;
+use App\Services\SeoCouncil\Platform12\Model\HttpSeoCouncilModelClient;
+use App\Services\SeoCouncil\Platform12\Model\SeoCouncilModelClient;
 use App\Services\SeoCouncil\Policy\CouncilAdmissionGateway;
 use App\Services\SeoCouncil\Policy\PolicyGatewayCouncilAdmissionGateway;
 use App\Services\SeoCouncil\TechnicalDiagnosis\DenyOnlyTechnicalDiagnosisRuntimeGate;
@@ -58,5 +62,22 @@ final class SeoCouncilServiceProvider extends ServiceProvider
         $this->app->bind(TechnicalDiagnosisEvidenceBundleLoader::class, ReadOnlyTechnicalDiagnosisEvidenceBundleLoader::class);
         $this->app->bind(TechnicalDiagnosisDependencyBindingSource::class, SeoPlatformDependencyEvidenceAdapter::class);
         $this->app->singleton(TechnicalDiagnosisActivityLedger::class);
+        $this->app->singleton(DisabledSeoCouncilModelClient::class);
+        $this->app->singleton(HttpSeoCouncilModelClient::class);
+        $this->app->singleton(FakeSeoCouncilModelClient::class);
+        $this->app->singleton(
+            SeoCouncilModelClient::class,
+            static function ($app): SeoCouncilModelClient {
+                $provider = strtolower(trim((string) config('seo_council.model_provider', 'disabled')));
+
+                return match ($provider) {
+                    'http' => $app->make(HttpSeoCouncilModelClient::class),
+                    'fake' => $app->environment('testing')
+                        ? $app->make(FakeSeoCouncilModelClient::class)
+                        : $app->make(DisabledSeoCouncilModelClient::class),
+                    default => $app->make(DisabledSeoCouncilModelClient::class),
+                };
+            },
+        );
     }
 }

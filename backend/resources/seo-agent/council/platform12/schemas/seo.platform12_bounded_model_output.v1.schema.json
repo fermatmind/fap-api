@@ -1,0 +1,67 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.platform12_bounded_model_output.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "summary",
+        "findings",
+        "uncertainties"
+    ],
+    "properties": {
+        "summary": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+        },
+        "findings": {
+            "type": "array",
+            "maxItems": 12,
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "claim",
+                    "confidence",
+                    "evidence_refs"
+                ],
+                "properties": {
+                    "claim": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1000
+                    },
+                    "confidence": {
+                        "enum": [
+                            "low",
+                            "medium",
+                            "high"
+                        ]
+                    },
+                    "evidence_refs": {
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 16,
+                        "uniqueItems": true,
+                        "items": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 160
+                        }
+                    }
+                }
+            }
+        },
+        "uncertainties": {
+            "type": "array",
+            "maxItems": 12,
+            "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+            }
+        }
+    },
+    "schema_hash": "3c1a8ca0856a11d4896379c7a82ddc4a3595ad7ed6c95a79706b25ae3b339a90"
+}

@@ -6,6 +6,7 @@ namespace App\Services\SeoCouncil\Platform12;
 
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use App\Services\SeoCouncil\Platform11\Platform11ContractRegistry;
+use App\Services\SeoCouncil\Platform12\Model\Platform12BoundedModelContract;
 
 final class Platform12ContractRegistry
 {
@@ -14,6 +15,7 @@ final class Platform12ContractRegistry
     public function __construct(
         private readonly SeoRegistryHasher $hasher,
         private readonly Platform11ContractRegistry $platform11,
+        private readonly Platform12BoundedModelContract $boundedModel,
     ) {}
 
     /** @return array<string, mixed> */
@@ -173,6 +175,7 @@ final class Platform12ContractRegistry
             'version' => $catalogSchema['schema_version'],
             'hash' => $catalogSchema['schema_hash'],
         ];
+        $schemaRefs['platform12_bounded_model_output_schema'] = $this->boundedModel->outputSchemaRef();
 
         return [
             'role_registry' => $manifest['registry_ref'],
@@ -232,6 +235,7 @@ final class Platform12ContractRegistry
             'resources/seo-agent/council/platform12/schemas/seo.platform12_start_receipt.v1.schema.json' => $this->startReceiptSchema(),
             'resources/seo-agent/council/platform12/schemas/seo.platform12_mission_catalog.v1.schema.json' => $this->missionCatalogSchema(),
             'resources/seo-agent/council/platform12/catalogs/seo.platform12_mission_catalog.v1.json' => $this->missionCatalog(),
+            ...$this->boundedModel->artifacts(),
         ];
     }
 }
