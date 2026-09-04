@@ -117,7 +117,9 @@ final readonly class Platform12WeeklyMeasurementEvaluator
                 throw new \InvalidArgumentException('FUNNEL_INVALID');
             }
         }
-        if ($source['landing_count'] < $source['start_count'] || $source['start_count'] < $source['result_count']) {
+        if ($source['sample_size'] < $source['landing_count']
+            || $source['landing_count'] < $source['start_count']
+            || $source['start_count'] < $source['result_count']) {
             throw new \InvalidArgumentException('FUNNEL_INVALID');
         }
 

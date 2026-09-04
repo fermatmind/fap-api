@@ -56,6 +56,18 @@ final class SeoPlatform12C02WeeklyMeasurementTest extends TestCase
         }
     }
 
+    public function test_funnel_counts_cannot_exceed_the_declared_public_sample(): void
+    {
+        $evidence = $this->readyEvidence();
+        $evidence['public_funnel']['sample_size'] = 299;
+
+        $artifact = app(Platform12WeeklyMeasurementEvaluator::class)->evaluate($evidence);
+
+        $this->assertSame('MEASUREMENT_HOLD', $artifact['state']);
+        $this->assertSame('UNAVAILABLE', $artifact['public_funnel']['availability']);
+        $this->assertNull($artifact['public_funnel']['sample_size']);
+    }
+
     public function test_identity_attempt_and_private_result_fields_are_never_read_or_emitted(): void
     {
         $evidence = $this->readyEvidence();
