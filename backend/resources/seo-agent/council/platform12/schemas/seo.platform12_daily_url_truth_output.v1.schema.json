@@ -1,0 +1,95 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.platform12_daily_url_truth_output.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "receipt_version",
+        "mission_id",
+        "evaluated_at",
+        "state",
+        "authority_reconciliation",
+        "clustering_dedupe",
+        "d1_observation",
+        "observation_boundaries",
+        "candidate_actions",
+        "read_only",
+        "execution_allowed",
+        "writes",
+        "receipt_hash"
+    ],
+    "properties": {
+        "receipt_version": {
+            "const": "seo.platform12_daily_url_truth.v1"
+        },
+        "mission_id": {
+            "const": "seo.platform12.daily_url_truth_reconciliation"
+        },
+        "evaluated_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "state": {
+            "enum": [
+                "READY",
+                "URL_TRUTH_UNAVAILABLE_HOLD",
+                "CLUSTER_DEDUPE_UNAVAILABLE_HOLD",
+                "D1_OBSERVATION_HOLD",
+                "OBSERVATION_UNAVAILABLE_HOLD",
+                "INPUT_HOLD"
+            ]
+        },
+        "authority_reconciliation": {
+            "type": "object"
+        },
+        "clustering_dedupe": {
+            "type": "object"
+        },
+        "d1_observation": {
+            "type": "object"
+        },
+        "observation_boundaries": {
+            "type": "object"
+        },
+        "candidate_actions": {
+            "type": "array",
+            "maxItems": 0
+        },
+        "read_only": {
+            "const": true
+        },
+        "execution_allowed": {
+            "const": false
+        },
+        "writes": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "url_truth",
+                "canonical",
+                "robots",
+                "authority"
+            ],
+            "properties": {
+                "url_truth": {
+                    "const": false
+                },
+                "canonical": {
+                    "const": false
+                },
+                "robots": {
+                    "const": false
+                },
+                "authority": {
+                    "const": false
+                }
+            }
+        },
+        "receipt_hash": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+        }
+    },
+    "schema_hash": "104a0a1b474af277a95b6ceec7b318d570cd5e12a360c2ac61fbc01c3a6797ff"
+}

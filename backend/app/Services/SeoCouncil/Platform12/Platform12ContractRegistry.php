@@ -12,7 +12,7 @@ use App\Services\SeoCouncil\Platform12\Tool\Platform12ToolManifest;
 
 final class Platform12ContractRegistry
 {
-    public const MISSION_CATALOG_VERSION = '1.1.0';
+    public const MISSION_CATALOG_VERSION = '1.2.0';
 
     public function __construct(
         private readonly SeoRegistryHasher $hasher,
@@ -236,6 +236,52 @@ final class Platform12ContractRegistry
         return $schema;
     }
 
+    /** @return array<string, mixed> */
+    public function dailyUrlTruthOutputSchema(): array
+    {
+        $schema = [
+            '$schema' => 'https://json-schema.org/draft/2020-12/schema',
+            'schema_id' => 'seo.platform12_daily_url_truth_output.v1',
+            'schema_version' => '1.0.0',
+            'type' => 'object',
+            'additionalProperties' => false,
+            'required' => [
+                'receipt_version', 'mission_id', 'evaluated_at', 'state',
+                'authority_reconciliation', 'clustering_dedupe', 'd1_observation',
+                'observation_boundaries', 'candidate_actions', 'read_only',
+                'execution_allowed', 'writes', 'receipt_hash',
+            ],
+            'properties' => [
+                'receipt_version' => ['const' => 'seo.platform12_daily_url_truth.v1'],
+                'mission_id' => ['const' => 'seo.platform12.daily_url_truth_reconciliation'],
+                'evaluated_at' => ['type' => 'string', 'format' => 'date-time'],
+                'state' => ['enum' => ['READY', 'URL_TRUTH_UNAVAILABLE_HOLD', 'CLUSTER_DEDUPE_UNAVAILABLE_HOLD', 'D1_OBSERVATION_HOLD', 'OBSERVATION_UNAVAILABLE_HOLD', 'INPUT_HOLD']],
+                'authority_reconciliation' => ['type' => 'object'],
+                'clustering_dedupe' => ['type' => 'object'],
+                'd1_observation' => ['type' => 'object'],
+                'observation_boundaries' => ['type' => 'object'],
+                'candidate_actions' => ['type' => 'array', 'maxItems' => 0],
+                'read_only' => ['const' => true],
+                'execution_allowed' => ['const' => false],
+                'writes' => [
+                    'type' => 'object',
+                    'additionalProperties' => false,
+                    'required' => ['url_truth', 'canonical', 'robots', 'authority'],
+                    'properties' => [
+                        'url_truth' => ['const' => false],
+                        'canonical' => ['const' => false],
+                        'robots' => ['const' => false],
+                        'authority' => ['const' => false],
+                    ],
+                ],
+                'receipt_hash' => ['type' => 'string', 'pattern' => '^[a-f0-9]{64}$'],
+            ],
+        ];
+        $schema['schema_hash'] = $this->hasher->hash($schema);
+
+        return $schema;
+    }
+
     /** @return array<string, array{id:string,version:string,hash:string}> */
     public function missionCatalogDependencyRefs(): array
     {
@@ -257,6 +303,12 @@ final class Platform12ContractRegistry
             'id' => $dailyOutputSchema['schema_id'],
             'version' => $dailyOutputSchema['schema_version'],
             'hash' => $dailyOutputSchema['schema_hash'],
+        ];
+        $dailyUrlTruthSchema = $this->dailyUrlTruthOutputSchema();
+        $schemaRefs['platform12_daily_url_truth_output_schema'] = [
+            'id' => $dailyUrlTruthSchema['schema_id'],
+            'version' => $dailyUrlTruthSchema['schema_version'],
+            'hash' => $dailyUrlTruthSchema['schema_hash'],
         ];
 
         return [
@@ -282,7 +334,7 @@ final class Platform12ContractRegistry
             'catalog_version' => self::MISSION_CATALOG_VERSION,
             'catalog_state' => 'FOUNDATION_ONLY',
             'dependency_refs' => $this->missionCatalogDependencyRefs(),
-            'missions' => [$this->dailyGscCoreRuntimeMission()],
+            'missions' => [$this->dailyGscCoreRuntimeMission(), $this->dailyUrlTruthMission()],
             'runtime_activation_allowed' => false,
         ];
         $catalog['catalog_hash'] = $this->hasher->hash($catalog);
@@ -306,6 +358,49 @@ final class Platform12ContractRegistry
             'required_evidence' => [
                 'gsc_scheduled_receipt', 'gsc_data_freshness', 'gsc_mapping_quality',
                 'core_runtime_health', 'public_api_health', 'production_readback',
+            ],
+            'eligible_capability' => 'seo.runtime_health_review',
+            'priority' => 'high',
+            'timeout_seconds' => 120,
+            'max_attempts' => 1,
+            'budgets' => [
+                'model_calls' => 0,
+                'model_input_tokens' => 0,
+                'model_output_tokens' => 0,
+                'tool_calls' => 0,
+                'cost_microusd' => 0,
+            ],
+            'failure_policy' => [
+                'terminal_state' => 'HOLD',
+                'retry_strategy' => 'none',
+                'initial_backoff_seconds' => 0,
+                'max_backoff_seconds' => 0,
+            ],
+            'output_schema' => [
+                'id' => $output['schema_id'],
+                'version' => $output['schema_version'],
+                'hash' => $output['schema_hash'],
+            ],
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    private function dailyUrlTruthMission(): array
+    {
+        $output = $this->dailyUrlTruthOutputSchema();
+
+        return [
+            'mission_id' => 'seo.platform12.daily_url_truth_reconciliation',
+            'cadence' => 'daily',
+            'timezone' => 'Asia/Shanghai',
+            'natural_slot' => 'daily:ALL:02:10',
+            'family' => 'other_public',
+            'locale' => 'zh-CN',
+            'review_domain' => 'technical',
+            'required_evidence' => [
+                'url_truth', 'backend_authority', 'canonical_indexability',
+                'issue_cluster', 'dedupe_coverage', 'd1_observation',
+                'runtime_observation', 'sitemap_observation',
             ],
             'eligible_capability' => 'seo.runtime_health_review',
             'priority' => 'high',
@@ -356,6 +451,7 @@ final class Platform12ContractRegistry
             'resources/seo-agent/council/platform12/schemas/seo.platform12_start_receipt.v1.schema.json' => $this->startReceiptSchema(),
             'resources/seo-agent/council/platform12/schemas/seo.platform12_mission_catalog.v1.schema.json' => $this->missionCatalogSchema(),
             'resources/seo-agent/council/platform12/schemas/seo.platform12_daily_gsc_core_runtime_output.v1.schema.json' => $this->dailyGscCoreRuntimeOutputSchema(),
+            'resources/seo-agent/council/platform12/schemas/seo.platform12_daily_url_truth_output.v1.schema.json' => $this->dailyUrlTruthOutputSchema(),
             'resources/seo-agent/council/platform12/catalogs/seo.platform12_mission_catalog.v1.json' => $this->missionCatalog(),
             ...$this->boundedModel->artifacts(),
             ...$this->tools->artifacts(),

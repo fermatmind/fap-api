@@ -23,7 +23,10 @@ final class SeoPlatform12A01MissionCatalogTest extends TestCase
         $this->assertFalse($schema['$defs']['mission']['additionalProperties']);
         $this->assertFalse($schema['$defs']['mission']['properties']['budgets']['additionalProperties']);
         $this->assertFalse($schema['$defs']['mission']['properties']['failure_policy']['additionalProperties']);
-        $this->assertSame(['seo.platform12.daily_gsc_core_runtime'], array_column($catalog['missions'], 'mission_id'));
+        $this->assertSame([
+            'seo.platform12.daily_gsc_core_runtime',
+            'seo.platform12.daily_url_truth_reconciliation',
+        ], array_column($catalog['missions'], 'mission_id'));
         $this->assertFalse($catalog['runtime_activation_allowed']);
         $this->assertSame(
             $this->app->make(SeoRegistryHasher::class)->hashWithout($catalog, 'catalog_hash'),

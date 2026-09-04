@@ -1,0 +1,31 @@
+{
+    "fixture_set_id": "seo.platform12_daily_url_truth.v1",
+    "cases": [
+        {
+            "id": "ready-with-candidates",
+            "evidence": {
+                "evaluated_at": "2026-09-04T02:10:00Z",
+                "authority": {"availability": "AVAILABLE", "revision_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "current_public_count": 100},
+                "url_truth": {"availability": "AVAILABLE", "revision_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "current_url_truth_count": 98, "wrong_canonical_count": 2, "false_noindex_count": 1},
+                "clustering": {"availability": "AVAILABLE", "issue_count": 3, "clustered_issue_count": 3, "dedupe_candidate_count": 3, "dedupe_unique_count": 2},
+                "d1_observation": {"availability": "AVAILABLE", "candidate_count": 3, "observed_count": 3},
+                "runtime_observation": {"availability": "AVAILABLE", "observation_count": 100},
+                "sitemap_observation": {"availability": "AVAILABLE", "observation_count": 100}
+            },
+            "expected_state": "READY"
+        },
+        {
+            "id": "url-truth-unavailable",
+            "evidence": {
+                "evaluated_at": "2026-09-04T02:10:00Z",
+                "authority": {"availability": "UNAVAILABLE"},
+                "url_truth": {"availability": "UNAVAILABLE"},
+                "clustering": {"availability": "AVAILABLE", "issue_count": 0, "clustered_issue_count": 0, "dedupe_candidate_count": 0, "dedupe_unique_count": 0},
+                "d1_observation": {"availability": "AVAILABLE", "candidate_count": 0, "observed_count": 0},
+                "runtime_observation": {"availability": "AVAILABLE", "observation_count": 0},
+                "sitemap_observation": {"availability": "AVAILABLE", "observation_count": 0}
+            },
+            "expected_state": "URL_TRUTH_UNAVAILABLE_HOLD"
+        }
+    ]
+}

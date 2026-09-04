@@ -1,7 +1,7 @@
 {
     "schema_version": "seo.platform12_mission_catalog.v1",
     "catalog_id": "fermatmind.seo.platform12_mission_catalog",
-    "catalog_version": "1.1.0",
+    "catalog_version": "1.2.0",
     "catalog_state": "FOUNDATION_ONLY",
     "dependency_refs": {
         "role_registry": {
@@ -31,8 +31,8 @@
         },
         "schema_vector": {
             "id": "seo.platform12_mission_catalog_schema_vector",
-            "version": "1.1.0",
-            "hash": "929c72145d4e31d676e096dd54e5d8e1e31499eaf28f42e1149f2b088d5ab137"
+            "version": "1.2.0",
+            "hash": "517582d1f0ea1ce0b0039a688b913fa9a26738f554eaffbfda59d1a25db58380"
         }
     },
     "missions": [
@@ -74,8 +74,49 @@
                 "version": "1.0.0",
                 "hash": "1e11fd1b9ec8c31c817e7ee462db79fd22ddc04a624eac8be491b392a9626081"
             }
+        },
+        {
+            "mission_id": "seo.platform12.daily_url_truth_reconciliation",
+            "cadence": "daily",
+            "timezone": "Asia/Shanghai",
+            "natural_slot": "daily:ALL:02:10",
+            "family": "other_public",
+            "locale": "zh-CN",
+            "review_domain": "technical",
+            "required_evidence": [
+                "url_truth",
+                "backend_authority",
+                "canonical_indexability",
+                "issue_cluster",
+                "dedupe_coverage",
+                "d1_observation",
+                "runtime_observation",
+                "sitemap_observation"
+            ],
+            "eligible_capability": "seo.runtime_health_review",
+            "priority": "high",
+            "timeout_seconds": 120,
+            "max_attempts": 1,
+            "budgets": {
+                "model_calls": 0,
+                "model_input_tokens": 0,
+                "model_output_tokens": 0,
+                "tool_calls": 0,
+                "cost_microusd": 0
+            },
+            "failure_policy": {
+                "terminal_state": "HOLD",
+                "retry_strategy": "none",
+                "initial_backoff_seconds": 0,
+                "max_backoff_seconds": 0
+            },
+            "output_schema": {
+                "id": "seo.platform12_daily_url_truth_output.v1",
+                "version": "1.0.0",
+                "hash": "104a0a1b474af277a95b6ceec7b318d570cd5e12a360c2ac61fbc01c3a6797ff"
+            }
         }
     ],
     "runtime_activation_allowed": false,
-    "catalog_hash": "c67420f30dd3d7f578a380eb4d67270d685564b1efc6be87735ed6dcdf5ad56a"
+    "catalog_hash": "36c76849d997dc49bfac398211f9e8f68660157ebc853301828db480acfc92a2"
 }
