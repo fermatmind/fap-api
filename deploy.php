@@ -1599,37 +1599,43 @@ prepare="$(SEO_RELEASE_SHA="$candidate_sha" \
     --gsc-env="$gsc_env" \
     --writer-env="$writer_env" \
     --json --no-interaction --no-ansi)"
-printf '%s' "$prepare" | {{bin/php}} -r '
-$payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
-$receipt = $payload["preactivation_receipt"] ?? [];
-$zero = ["model_calls", "tool_calls", "external_calls", "cms_writes", "url_truth_writes", "search_writes", "business_writes", "production_permissions", "outreach_actions"];
-$ok = ($payload["schema_version"] ?? null) === "seo.competitive_release_prepare.v1"
-    && ($payload["status"] ?? null) === "READY"
-    && ($payload["failed_stage"] ?? null) === "none"
-    && ($payload["reason_code"] ?? null) === "NONE"
-    && preg_match("/^[a-f0-9]{64}$/", (string) ($payload["measurement_snapshot_set_hash"] ?? "")) === 1
-    && is_int($payload["dependency_ingestion"]["external_reads"] ?? null)
-    && ($payload["dependency_ingestion"]["external_reads"] ?? -1) >= 0
-    && ($receipt["receipt_version"] ?? null) === "seo.competitive_evidence_closeout.v3"
-    && ($receipt["candidate_sha"] ?? null) === ($argv[1] ?? null)
-    && ($receipt["environment"] ?? null) === ($argv[2] ?? null)
-    && ($receipt["closeout_state"] ?? null) === "HOLD"
-    && ($receipt["production_sha"] ?? null) === null
-    && ($receipt["SEO-PLATFORM-11G"] ?? null) === "HOLD"
-    && ($receipt["competitive_context_status"] ?? null) === "READY"
-    && ($receipt["competitive_hold_reason"] ?? null) === "NONE"
-    && ($receipt["source_policy_version"] ?? null) === "seo.competitive_source_policy.v3"
-    && ($receipt["source_registry_version"] ?? null) === "seo.competitive_source_registry.v2"
-    && ($receipt["cohort_registry_version"] ?? null) === "seo.competitive_cohort_registry.v2"
-    && ($receipt["execution_allowed"] ?? null) === false
-    && ($receipt["digital_pr_scope"] ?? null) === "deferred_p2_manual"
-    && preg_match("/^[a-f0-9]{64}$/", (string) ($receipt["receipt_hash"] ?? "")) === 1;
-foreach ($zero as $field) {
-    $ok = $ok && ($receipt[$field] ?? null) === 0;
+receipt="$(printf '%s' "$prepare" | jq -ce --arg sha "$candidate_sha" --arg environment "$environment" '
+  select(.schema_version == "seo.competitive_release_prepare.v1"
+  and .status == "READY"
+  and .failed_stage == "none"
+  and .reason_code == "NONE"
+  and (.measurement_snapshot_set_hash | strings | test("^[a-f0-9]{64}$"))
+  and (.dependency_ingestion.external_reads | numbers | . >= 0)
+  and .preactivation_receipt.receipt_version == "seo.competitive_evidence_closeout.v3"
+  and .preactivation_receipt.candidate_sha == $sha
+  and .preactivation_receipt.environment == $environment
+  and .preactivation_receipt.closeout_state == "HOLD"
+  and .preactivation_receipt.production_sha == null
+  and .preactivation_receipt."SEO-PLATFORM-11G" == "HOLD"
+  and .preactivation_receipt.ready_for_11H == false
+  and .preactivation_receipt."11i_handoff_ready" == false
+  and .preactivation_receipt.competitive_context_status == "READY"
+  and .preactivation_receipt.competitive_hold_reason == "NONE"
+  and .preactivation_receipt.execution_allowed == false
+  and ([
+    .preactivation_receipt.model_calls,
+    .preactivation_receipt.tool_calls,
+    .preactivation_receipt.external_calls,
+    .preactivation_receipt.cms_writes,
+    .preactivation_receipt.url_truth_writes,
+    .preactivation_receipt.search_writes,
+    .preactivation_receipt.business_writes,
+    .preactivation_receipt.production_permissions,
+    .preactivation_receipt.outreach_actions
+  ] | all(. == 0))
+  and (.preactivation_receipt.receipt_hash | strings | test("^[a-f0-9]{64}$")))
+  | .preactivation_receipt
+')" || {
+  printf 'competitive_prepare_status=HOLD\n' >&2
+  printf 'competitive_prepare_stage=preactivation_receipt_validation\n' >&2
+  printf 'competitive_prepare_reason=COMPETITIVE_PREACTIVATION_ENVELOPE_INVALID\n' >&2
+  exit 1
 }
-exit($ok ? 0 : 1);
-' "$candidate_sha" "$environment"
-receipt="$(printf '%s' "$prepare" | jq -c '.preactivation_receipt')"
 receipt_path="$receipt_dir/preactivation-$candidate_sha.json"
 receipt_owner=deploy
 fail_receipt_persistence() {
