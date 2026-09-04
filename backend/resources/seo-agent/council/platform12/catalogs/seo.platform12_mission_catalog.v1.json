@@ -1,7 +1,7 @@
 {
     "schema_version": "seo.platform12_mission_catalog.v1",
     "catalog_id": "fermatmind.seo.platform12_mission_catalog",
-    "catalog_version": "1.6.1",
+    "catalog_version": "1.7.0",
     "catalog_state": "FOUNDATION_ONLY",
     "dependency_refs": {
         "role_registry": {
@@ -31,8 +31,8 @@
         },
         "schema_vector": {
             "id": "seo.platform12_mission_catalog_schema_vector",
-            "version": "1.6.1",
-            "hash": "1826835de67e5644c713fc148836d3e30676b59005a8af843847e4f08edcc8b2"
+            "version": "1.7.0",
+            "hash": "51f9ad06339cde367e56421fd1a5b0af5e1c86deed78e8d4f2298e4c69269d9c"
         }
     },
     "missions": [
@@ -317,8 +317,48 @@
                 "version": "1.0.0",
                 "hash": "fb5e105ce46523a1ade7bf8805b7858fdf59c8ed582e33dc9bce0d52349065f0"
             }
+        },
+        {
+            "mission_id": "seo.platform12.monthly_family_maturity_parity_public_url_set",
+            "cadence": "monthly",
+            "timezone": "Asia/Shanghai",
+            "natural_slot": "monthly:01:04:00",
+            "family": "other_public",
+            "locale": "zh-CN",
+            "review_domain": "analytics",
+            "required_evidence": [
+                "family_maturity",
+                "locale_parity",
+                "public_url_authority",
+                "runtime_url_observation",
+                "canonical_hreflang_indexability",
+                "public_funnel_aggregate",
+                "url_set_drift"
+            ],
+            "eligible_capability": "seo.search_measurement_review",
+            "priority": "normal",
+            "timeout_seconds": 180,
+            "max_attempts": 1,
+            "budgets": {
+                "model_calls": 0,
+                "model_input_tokens": 0,
+                "model_output_tokens": 0,
+                "tool_calls": 0,
+                "cost_microusd": 0
+            },
+            "failure_policy": {
+                "terminal_state": "HOLD",
+                "retry_strategy": "none",
+                "initial_backoff_seconds": 0,
+                "max_backoff_seconds": 0
+            },
+            "output_schema": {
+                "id": "seo.platform12_monthly_family_output.v1",
+                "version": "1.0.0",
+                "hash": "b315e2bcdd571450c2e83c6473fead75869abfef2f904d0872ce7d9aa1de7242"
+            }
         }
     ],
     "runtime_activation_allowed": false,
-    "catalog_hash": "0b8f56ded8395b7ffd5514f3c6728cf9e664b135ea8436790c0d2420deed7a07"
+    "catalog_hash": "bdc401cc038c57bace274c639a862192e7fd4c96249599081bf196b76ace0443"
 }

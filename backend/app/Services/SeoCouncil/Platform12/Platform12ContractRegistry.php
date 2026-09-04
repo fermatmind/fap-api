@@ -12,7 +12,7 @@ use App\Services\SeoCouncil\Platform12\Tool\Platform12ToolManifest;
 
 final class Platform12ContractRegistry
 {
-    public const MISSION_CATALOG_VERSION = '1.6.1';
+    public const MISSION_CATALOG_VERSION = '1.7.0';
 
     public function __construct(
         private readonly SeoRegistryHasher $hasher,
@@ -445,6 +445,44 @@ final class Platform12ContractRegistry
         return $schema;
     }
 
+    /** @return array<string, mixed> */
+    public function monthlyFamilyOutputSchema(): array
+    {
+        $schema = [
+            '$schema' => 'https://json-schema.org/draft/2020-12/schema',
+            'schema_id' => 'seo.platform12_monthly_family_output.v1',
+            'schema_version' => '1.0.0',
+            'type' => 'object',
+            'additionalProperties' => false,
+            'required' => [
+                'artifact_version', 'mission_id', 'evaluated_at', 'state', 'family_maturity',
+                'parity', 'authority', 'runtime_observation', 'public_funnel',
+                'authority_runtime_separated', 'redirect_aliases_in_public_set',
+                'artifact_only', 'read_only', 'execution_allowed', 'artifact_hash',
+            ],
+            'properties' => [
+                'artifact_version' => ['const' => 'seo.platform12_monthly_family_maturity.v1'],
+                'mission_id' => ['const' => 'seo.platform12.monthly_family_maturity_parity_public_url_set'],
+                'evaluated_at' => ['type' => 'string', 'format' => 'date-time'],
+                'state' => ['enum' => ['READY', 'MEASUREMENT_HOLD']],
+                'family_maturity' => ['type' => 'array', 'maxItems' => 100, 'items' => ['type' => 'object']],
+                'parity' => ['type' => 'object'],
+                'authority' => ['type' => 'object'],
+                'runtime_observation' => ['type' => 'object'],
+                'public_funnel' => ['type' => 'object'],
+                'authority_runtime_separated' => ['const' => true],
+                'redirect_aliases_in_public_set' => ['const' => false],
+                'artifact_only' => ['const' => true],
+                'read_only' => ['const' => true],
+                'execution_allowed' => ['const' => false],
+                'artifact_hash' => ['type' => 'string', 'pattern' => '^[a-f0-9]{64}$'],
+            ],
+        ];
+        $schema['schema_hash'] = $this->hasher->hash($schema);
+
+        return $schema;
+    }
+
     /** @return array<string, array{id:string,version:string,hash:string}> */
     public function missionCatalogDependencyRefs(): array
     {
@@ -497,6 +535,12 @@ final class Platform12ContractRegistry
             'version' => $weeklyEfficiencySchema['schema_version'],
             'hash' => $weeklyEfficiencySchema['schema_hash'],
         ];
+        $monthlyFamilySchema = $this->monthlyFamilyOutputSchema();
+        $schemaRefs['platform12_monthly_family_output_schema'] = [
+            'id' => $monthlyFamilySchema['schema_id'],
+            'version' => $monthlyFamilySchema['schema_version'],
+            'hash' => $monthlyFamilySchema['schema_hash'],
+        ];
 
         return [
             'role_registry' => $manifest['registry_ref'],
@@ -529,6 +573,7 @@ final class Platform12ContractRegistry
                 $this->weeklyOpportunityMission('en', 'weekly:MON:03:10'),
                 $this->weeklyMeasurementMission(),
                 $this->weeklyEfficiencyMission(),
+                $this->monthlyFamilyMission(),
             ],
             'runtime_activation_allowed' => false,
         ];
@@ -794,6 +839,49 @@ final class Platform12ContractRegistry
         ];
     }
 
+    /** @return array<string, mixed> */
+    private function monthlyFamilyMission(): array
+    {
+        $output = $this->monthlyFamilyOutputSchema();
+
+        return [
+            'mission_id' => 'seo.platform12.monthly_family_maturity_parity_public_url_set',
+            'cadence' => 'monthly',
+            'timezone' => 'Asia/Shanghai',
+            'natural_slot' => 'monthly:01:04:00',
+            'family' => 'other_public',
+            'locale' => 'zh-CN',
+            'review_domain' => 'analytics',
+            'required_evidence' => [
+                'family_maturity', 'locale_parity', 'public_url_authority',
+                'runtime_url_observation', 'canonical_hreflang_indexability',
+                'public_funnel_aggregate', 'url_set_drift',
+            ],
+            'eligible_capability' => 'seo.search_measurement_review',
+            'priority' => 'normal',
+            'timeout_seconds' => 180,
+            'max_attempts' => 1,
+            'budgets' => [
+                'model_calls' => 0,
+                'model_input_tokens' => 0,
+                'model_output_tokens' => 0,
+                'tool_calls' => 0,
+                'cost_microusd' => 0,
+            ],
+            'failure_policy' => [
+                'terminal_state' => 'HOLD',
+                'retry_strategy' => 'none',
+                'initial_backoff_seconds' => 0,
+                'max_backoff_seconds' => 0,
+            ],
+            'output_schema' => [
+                'id' => $output['schema_id'],
+                'version' => $output['schema_version'],
+                'hash' => $output['schema_hash'],
+            ],
+        ];
+    }
+
     public function verifyGenerated(): bool
     {
         try {
@@ -823,6 +911,7 @@ final class Platform12ContractRegistry
             'resources/seo-agent/council/platform12/schemas/seo.platform12_weekly_opportunity_output.v1.schema.json' => $this->weeklyOpportunityOutputSchema(),
             'resources/seo-agent/council/platform12/schemas/seo.platform12_weekly_measurement_output.v1.schema.json' => $this->weeklyMeasurementOutputSchema(),
             'resources/seo-agent/council/platform12/schemas/seo.platform12_weekly_efficiency_output.v1.schema.json' => $this->weeklyEfficiencyOutputSchema(),
+            'resources/seo-agent/council/platform12/schemas/seo.platform12_monthly_family_output.v1.schema.json' => $this->monthlyFamilyOutputSchema(),
             'resources/seo-agent/council/platform12/catalogs/seo.platform12_mission_catalog.v1.json' => $this->missionCatalog(),
             ...$this->boundedModel->artifacts(),
             ...$this->tools->artifacts(),

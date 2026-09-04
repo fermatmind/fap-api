@@ -1,0 +1,81 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.platform12_monthly_family_output.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "artifact_version",
+        "mission_id",
+        "evaluated_at",
+        "state",
+        "family_maturity",
+        "parity",
+        "authority",
+        "runtime_observation",
+        "public_funnel",
+        "authority_runtime_separated",
+        "redirect_aliases_in_public_set",
+        "artifact_only",
+        "read_only",
+        "execution_allowed",
+        "artifact_hash"
+    ],
+    "properties": {
+        "artifact_version": {
+            "const": "seo.platform12_monthly_family_maturity.v1"
+        },
+        "mission_id": {
+            "const": "seo.platform12.monthly_family_maturity_parity_public_url_set"
+        },
+        "evaluated_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "state": {
+            "enum": [
+                "READY",
+                "MEASUREMENT_HOLD"
+            ]
+        },
+        "family_maturity": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+                "type": "object"
+            }
+        },
+        "parity": {
+            "type": "object"
+        },
+        "authority": {
+            "type": "object"
+        },
+        "runtime_observation": {
+            "type": "object"
+        },
+        "public_funnel": {
+            "type": "object"
+        },
+        "authority_runtime_separated": {
+            "const": true
+        },
+        "redirect_aliases_in_public_set": {
+            "const": false
+        },
+        "artifact_only": {
+            "const": true
+        },
+        "read_only": {
+            "const": true
+        },
+        "execution_allowed": {
+            "const": false
+        },
+        "artifact_hash": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+        }
+    },
+    "schema_hash": "b315e2bcdd571450c2e83c6473fead75869abfef2f904d0872ce7d9aa1de7242"
+}
