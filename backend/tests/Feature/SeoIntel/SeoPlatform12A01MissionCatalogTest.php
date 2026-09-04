@@ -27,6 +27,8 @@ final class SeoPlatform12A01MissionCatalogTest extends TestCase
             'seo.platform12.daily_gsc_core_runtime',
             'seo.platform12.daily_url_truth_reconciliation',
             'seo.platform12.daily_private_policy_evidence_drift',
+            'seo.platform12.weekly_opportunity_zh_cn',
+            'seo.platform12.weekly_opportunity_en',
         ], array_column($catalog['missions'], 'mission_id'));
         $this->assertFalse($catalog['runtime_activation_allowed']);
         $this->assertSame(

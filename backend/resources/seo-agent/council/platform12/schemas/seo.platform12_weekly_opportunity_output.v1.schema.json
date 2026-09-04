@@ -1,0 +1,110 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.platform12_weekly_opportunity_output.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "artifact_version",
+        "mission_id",
+        "evaluated_at",
+        "locale",
+        "state",
+        "reason_codes",
+        "candidate_count",
+        "unresolved_owner_conflict_count",
+        "candidates",
+        "artifact_only",
+        "read_only",
+        "execution_allowed",
+        "writes",
+        "artifact_hash"
+    ],
+    "properties": {
+        "artifact_version": {
+            "const": "seo.platform12_weekly_opportunity_candidates.v1"
+        },
+        "mission_id": {
+            "enum": [
+                "seo.platform12.weekly_opportunity_zh_cn",
+                "seo.platform12.weekly_opportunity_en"
+            ]
+        },
+        "evaluated_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "locale": {
+            "enum": [
+                "zh-CN",
+                "en"
+            ]
+        },
+        "state": {
+            "enum": [
+                "READY",
+                "VALID_ZERO",
+                "HOLD"
+            ]
+        },
+        "reason_codes": {
+            "type": "array",
+            "maxItems": 16,
+            "uniqueItems": true,
+            "items": {
+                "type": "string"
+            }
+        },
+        "candidate_count": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+        },
+        "unresolved_owner_conflict_count": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+        },
+        "candidates": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+                "type": "object"
+            }
+        },
+        "artifact_only": {
+            "const": true
+        },
+        "read_only": {
+            "const": true
+        },
+        "execution_allowed": {
+            "const": false
+        },
+        "writes": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "query_owner",
+                "url_truth",
+                "cms"
+            ],
+            "properties": {
+                "query_owner": {
+                    "const": false
+                },
+                "url_truth": {
+                    "const": false
+                },
+                "cms": {
+                    "const": false
+                }
+            }
+        },
+        "artifact_hash": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+        }
+    },
+    "schema_hash": "99389396366768808b131aca35ce86af4b671fc933ea0d8e7f8d94127ad37e86"
+}

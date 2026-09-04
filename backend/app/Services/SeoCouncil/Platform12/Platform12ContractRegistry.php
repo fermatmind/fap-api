@@ -12,7 +12,7 @@ use App\Services\SeoCouncil\Platform12\Tool\Platform12ToolManifest;
 
 final class Platform12ContractRegistry
 {
-    public const MISSION_CATALOG_VERSION = '1.3.0';
+    public const MISSION_CATALOG_VERSION = '1.4.0';
 
     public function __construct(
         private readonly SeoRegistryHasher $hasher,
@@ -324,6 +324,52 @@ final class Platform12ContractRegistry
         return $schema;
     }
 
+    /** @return array<string, mixed> */
+    public function weeklyOpportunityOutputSchema(): array
+    {
+        $schema = [
+            '$schema' => 'https://json-schema.org/draft/2020-12/schema',
+            'schema_id' => 'seo.platform12_weekly_opportunity_output.v1',
+            'schema_version' => '1.0.0',
+            'type' => 'object',
+            'additionalProperties' => false,
+            'required' => [
+                'artifact_version', 'mission_id', 'evaluated_at', 'locale', 'state',
+                'reason_codes', 'candidate_count', 'unresolved_owner_conflict_count',
+                'candidates', 'artifact_only', 'read_only', 'execution_allowed',
+                'writes', 'artifact_hash',
+            ],
+            'properties' => [
+                'artifact_version' => ['const' => 'seo.platform12_weekly_opportunity_candidates.v1'],
+                'mission_id' => ['enum' => ['seo.platform12.weekly_opportunity_zh_cn', 'seo.platform12.weekly_opportunity_en']],
+                'evaluated_at' => ['type' => 'string', 'format' => 'date-time'],
+                'locale' => ['enum' => ['zh-CN', 'en']],
+                'state' => ['enum' => ['READY', 'VALID_ZERO', 'HOLD']],
+                'reason_codes' => ['type' => 'array', 'maxItems' => 16, 'uniqueItems' => true, 'items' => ['type' => 'string']],
+                'candidate_count' => ['type' => 'integer', 'minimum' => 0, 'maximum' => 100],
+                'unresolved_owner_conflict_count' => ['type' => 'integer', 'minimum' => 0, 'maximum' => 100],
+                'candidates' => ['type' => 'array', 'maxItems' => 100, 'items' => ['type' => 'object']],
+                'artifact_only' => ['const' => true],
+                'read_only' => ['const' => true],
+                'execution_allowed' => ['const' => false],
+                'writes' => [
+                    'type' => 'object',
+                    'additionalProperties' => false,
+                    'required' => ['query_owner', 'url_truth', 'cms'],
+                    'properties' => [
+                        'query_owner' => ['const' => false],
+                        'url_truth' => ['const' => false],
+                        'cms' => ['const' => false],
+                    ],
+                ],
+                'artifact_hash' => ['type' => 'string', 'pattern' => '^[a-f0-9]{64}$'],
+            ],
+        ];
+        $schema['schema_hash'] = $this->hasher->hash($schema);
+
+        return $schema;
+    }
+
     /** @return array<string, array{id:string,version:string,hash:string}> */
     public function missionCatalogDependencyRefs(): array
     {
@@ -358,6 +404,12 @@ final class Platform12ContractRegistry
             'version' => $dailySecuritySchema['schema_version'],
             'hash' => $dailySecuritySchema['schema_hash'],
         ];
+        $weeklyOpportunitySchema = $this->weeklyOpportunityOutputSchema();
+        $schemaRefs['platform12_weekly_opportunity_output_schema'] = [
+            'id' => $weeklyOpportunitySchema['schema_id'],
+            'version' => $weeklyOpportunitySchema['schema_version'],
+            'hash' => $weeklyOpportunitySchema['schema_hash'],
+        ];
 
         return [
             'role_registry' => $manifest['registry_ref'],
@@ -386,6 +438,8 @@ final class Platform12ContractRegistry
                 $this->dailyGscCoreRuntimeMission(),
                 $this->dailyUrlTruthMission(),
                 $this->dailySecurityDriftMission(),
+                $this->weeklyOpportunityMission('zh-CN', 'weekly:MON:03:00'),
+                $this->weeklyOpportunityMission('en', 'weekly:MON:03:10'),
             ],
             'runtime_activation_allowed' => false,
         ];
@@ -523,6 +577,49 @@ final class Platform12ContractRegistry
         ];
     }
 
+    /** @return array<string, mixed> */
+    private function weeklyOpportunityMission(string $locale, string $slot): array
+    {
+        $output = $this->weeklyOpportunityOutputSchema();
+        $localeCode = $locale === 'zh-CN' ? 'zh_cn' : 'en';
+
+        return [
+            'mission_id' => 'seo.platform12.weekly_opportunity_'.$localeCode,
+            'cadence' => 'weekly',
+            'timezone' => 'Asia/Shanghai',
+            'natural_slot' => $slot,
+            'family' => 'other_public',
+            'locale' => $locale,
+            'review_domain' => 'analytics',
+            'required_evidence' => [
+                'search_opportunity', 'content_decay', 'content_review_due',
+                'query_owner', 'cannibalization', 'internal_link_graph', 'url_truth',
+            ],
+            'eligible_capability' => 'seo.search_measurement_review',
+            'priority' => 'normal',
+            'timeout_seconds' => 180,
+            'max_attempts' => 1,
+            'budgets' => [
+                'model_calls' => 0,
+                'model_input_tokens' => 0,
+                'model_output_tokens' => 0,
+                'tool_calls' => 0,
+                'cost_microusd' => 0,
+            ],
+            'failure_policy' => [
+                'terminal_state' => 'HOLD',
+                'retry_strategy' => 'none',
+                'initial_backoff_seconds' => 0,
+                'max_backoff_seconds' => 0,
+            ],
+            'output_schema' => [
+                'id' => $output['schema_id'],
+                'version' => $output['schema_version'],
+                'hash' => $output['schema_hash'],
+            ],
+        ];
+    }
+
     public function verifyGenerated(): bool
     {
         try {
@@ -549,6 +646,7 @@ final class Platform12ContractRegistry
             'resources/seo-agent/council/platform12/schemas/seo.platform12_daily_gsc_core_runtime_output.v1.schema.json' => $this->dailyGscCoreRuntimeOutputSchema(),
             'resources/seo-agent/council/platform12/schemas/seo.platform12_daily_url_truth_output.v1.schema.json' => $this->dailyUrlTruthOutputSchema(),
             'resources/seo-agent/council/platform12/schemas/seo.platform12_daily_security_drift_output.v1.schema.json' => $this->dailySecurityDriftOutputSchema(),
+            'resources/seo-agent/council/platform12/schemas/seo.platform12_weekly_opportunity_output.v1.schema.json' => $this->weeklyOpportunityOutputSchema(),
             'resources/seo-agent/council/platform12/catalogs/seo.platform12_mission_catalog.v1.json' => $this->missionCatalog(),
             ...$this->boundedModel->artifacts(),
             ...$this->tools->artifacts(),
