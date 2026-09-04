@@ -82,7 +82,7 @@ const SEO_CLASSIFIER_CONTROL_PLANE_PATHS = new Set([
 ]);
 
 const isSeoCouncilOrchestrationBoundary = (path) =>
-  /^backend\/(?:app\/Services\/SeoCouncil\/|app\/Console\/Commands\/SeoCouncil[^/]+\.php$|app\/Http\/Controllers\/API\/V0_5\/Ops\/SeoIntel\/SeoCouncilMissionController\.php$|app\/Http\/Middleware\/EnsureSeoCouncilMissionAuthorized\.php$|app\/Http\/Middleware\/OpsAccessControl\.php$|app\/Filament\/Ops\/Support\/SeoAgentCouncilUiContract\.php$|app\/Providers\/SeoCouncilServiceProvider\.php$|bootstrap\/(?:app|providers)\.php$|config\/seo_council\.php$|resources\/seo-agent\/council\/|resources\/views\/filament\/ops\/components\/ops-agent-council-workspace\.blade\.php$|lang\/(?:en|zh_CN)\/ops\.php$|docs\/(?:seo\/generated\/(?:seo-council-contract-manifest\.v[1-9]|seo-technical-diagnosis-contract-manifest\.v[12]|seo-measurement-contract-manifest\.v[123])\.json$|contracts\/openapi\.snapshot\.json$)|scripts\/seo\/(?:export_seo_council_contracts|submit_seo_council_mission)\.php$|database\/migrations\/seo_intel\/2026_08_29_030000_create_seo_council_runtime_tables\.php$|tests\/Feature\/(?:SeoIntel\/SeoPlatform11[D-L]|Ops\/SeoUxImpl06AgentCouncilTest\.php$)|routes\/(?:api|web)\.php$)/.test(path)
+  /^backend\/(?:app\/Services\/SeoCouncil\/|app\/Console\/Commands\/SeoCouncil[^/]+\.php$|app\/Http\/Controllers\/API\/V0_5\/Ops\/SeoIntel\/SeoCouncilMissionController\.php$|app\/Http\/Middleware\/EnsureSeoCouncilMissionAuthorized\.php$|app\/Http\/Middleware\/OpsAccessControl\.php$|app\/Filament\/Ops\/Support\/SeoAgentCouncilUiContract\.php$|app\/Providers\/SeoCouncilServiceProvider\.php$|bootstrap\/(?:app|providers)\.php$|config\/seo_council\.php$|resources\/seo-agent\/council\/|resources\/views\/filament\/ops\/components\/ops-agent-council-workspace\.blade\.php$|lang\/(?:en|zh_CN)\/ops\.php$|docs\/(?:seo\/generated\/(?:seo-council-contract-manifest\.v[1-9]|seo-technical-diagnosis-contract-manifest\.v[12]|seo-measurement-contract-manifest\.v[123])\.json$|contracts\/openapi\.snapshot\.json$)|scripts\/seo\/(?:export_seo_council_contracts|submit_seo_council_mission)\.php$|database\/migrations\/seo_intel\/(?:2026_08_29_030000_create_seo_council_runtime_tables|\d{4}_\d{2}_\d{2}_\d+_create_seo_council_scheduler_storage)\.php$|tests\/Feature\/(?:SeoIntel\/SeoPlatform11[D-L]|Ops\/SeoUxImpl06AgentCouncilTest\.php$)|routes\/(?:api|web)\.php$)/.test(path)
   || path === "backend/app/Services/SeoAgentEvidence/Sources/SeoPlatformDependencyEvidenceAdapter.php"
   || path === ".agents/skills/fermatmind-global-seo-geo-growth-scan/SKILL.md"
   || SEO_COUNCIL_CONTROL_PLANE_PATHS.has(path);
@@ -93,6 +93,7 @@ const isSeoCompetitiveEvidenceBoundary = (path) =>
   || path === "backend/config/seo_agent_evidence.php"
   || path === "backend/scripts/seo/export_seo_agent_evidence_contracts.php"
   || path === "backend/scripts/seo/export_seo_council_contracts.php"
+  || /^backend\/database\/migrations\/seo_intel\/\d{4}_\d{2}_\d{2}_\d+_create_seo_council_scheduler_storage\.php$/.test(path)
   || path === "deploy.php"
   || path === ".github/workflows/ci.yml"
   || path === ".github/workflows/deploy.yml"
