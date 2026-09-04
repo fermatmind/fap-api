@@ -1900,6 +1900,12 @@ return [
                 'states' => ['not_started' => 'Not started', 'unavailable' => 'Unavailable', 'available' => 'Available'],
                 'boundary' => 'No Agent run, write, publish, feature-flag, allowlist, or permission control is exposed. Existing Filament CMS resources remain authoritative.',
             ],
+            'trace_drilldown' => [
+                'eyebrow' => 'Sanitized trace', 'title' => 'Mission → Mode → Role → Evidence → Receipt',
+                'fields' => ['mission' => 'Mission', 'mode' => 'Mode', 'role' => 'Role', 'evidence' => 'Evidence', 'receipt' => 'Receipt', 'status' => 'HOLD / reason · cost · latency'],
+                'states' => ['not_started' => 'No retained traces', 'unavailable' => 'Trace source unavailable', 'available' => 'Retained traces'],
+                'boundary' => 'Only whitelisted codes, aggregate cost/latency, and version/hash references are shown. Full receipts, evidence payloads, model input, prompts, credentials, and private identifiers are excluded.',
+            ],
             'execution' => [
                 'title' => 'SEO issue execution center',
                 'description' => 'Discover → assign → fix → verify → close, backed by protected issue records.',

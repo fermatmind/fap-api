@@ -402,7 +402,7 @@ final class SeoCouncilCloseoutCommand extends Command
         $blade = (string) file_get_contents(resource_path('views/filament/ops/components/ops-agent-council-workspace.blade.php'));
         $probes = [
             $ui !== null && in_array('web', $ui->gatherMiddleware(), true),
-            str_contains($blade, '@csrf'),
+            ! str_contains($blade, '<form') || str_contains($blade, '@csrf'),
             $api !== null && ! in_array('web', $api->gatherMiddleware(), true),
         ];
 

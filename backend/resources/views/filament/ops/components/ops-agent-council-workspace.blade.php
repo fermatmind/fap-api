@@ -48,6 +48,7 @@
     </div>
 
     <x-filament-ops::ops-system-health-workspace />
+    <x-filament-ops::ops-trace-drilldown-workspace />
 
     <div class="ops-agent-council__layout">
         <section class="ops-agent-council__capabilities" aria-labelledby="agent-capabilities-title">
@@ -67,17 +68,7 @@
                 :description="__($copy.'.hold_description')"
             />
 
-            <form method="POST" action="{{ route('ops.seo_intel.council.ui_missions.store') }}" class="ops-agent-council__mission-form">
-                @csrf
-                <input type="hidden" name="mission_id" value="mission:seo-operations-ui" />
-                <label><span>Idempotency key</span><input name="idempotency_key" required pattern="[A-Za-z0-9._:-]{1,128}" value="seo-operations-ui:route-plan" /></label>
-                <label><span>Mission</span><select name="mission_type"><option value="weekly_opportunity">weekly_opportunity</option><option value="monthly_portfolio">monthly_portfolio</option><option value="breakthrough_sprint">breakthrough_sprint</option><option value="global_portfolio">global_portfolio</option><option value="bounded_review">bounded_review</option><option value="independent_registry_review">independent_registry_review</option><option value="career_candidate_generation">career_candidate_generation</option></select></label>
-                <label><span>Family</span><select name="family"><option value="tests">tests</option><option value="articles_topics">articles_topics</option><option value="career">career</option><option value="personality">personality</option><option value="trust_method_help">trust_method_help</option><option value="other_public">other_public</option></select></label>
-                <label><span>Locale</span><select name="locale"><option value="zh-CN">zh-CN</option><option value="en">en</option></select></label>
-                <label><span>Review domain (bounded only)</span><select name="review_domain"><option value="">none</option><option value="technical">technical</option><option value="analytics">analytics</option><option value="content">content</option><option value="competitor">competitor</option><option value="stability">stability</option><option value="cro">cro</option></select></label>
-                <button type="submit">Generate deterministic RunReceipt / HOLD</button>
-            </form>
-            <p class="ops-control-hint">The UI submits only a zero-budget MissionRequest. It cannot select roles, tools, writers, manifests, or production execution.</p>
+            <p class="ops-control-hint">Read-only foundation view. Mission submission remains unavailable from this UI.</p>
         </section>
 
         <aside class="ops-agent-council__trace" aria-labelledby="agent-trace-title">

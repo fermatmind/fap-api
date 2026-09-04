@@ -36,7 +36,7 @@ final class SeoUxImpl06AgentCouncilTest extends TestCase
         $this->assertNull($snapshot['rollback']);
     }
 
-    public function test_agent_council_is_an_internal_zero_budget_submission_section_without_chat_or_execution_controls(): void
+    public function test_agent_council_is_a_read_only_foundation_section_without_chat_or_execution_controls(): void
     {
         $page = (string) file_get_contents(resource_path('views/filament/ops/pages/seo-operations.blade.php'));
         $workspace = (string) file_get_contents(resource_path('views/filament/ops/components/ops-agent-council-workspace.blade.php'));
@@ -48,10 +48,10 @@ final class SeoUxImpl06AgentCouncilTest extends TestCase
         $this->assertStringContainsString('data-registry-status', $workspace);
         $this->assertStringContainsString('data-policy-mode', $workspace);
         $this->assertStringContainsString("['orchestrator', 'policy_gateway', 'binding', 'route_plan', 'independent_review', 'receipt']", (string) file_get_contents(app_path('Filament/Ops/Support/SeoAgentCouncilUiContract.php')));
-        $this->assertStringContainsString('<form', $workspace);
-        $this->assertStringContainsString("route('ops.seo_intel.council.ui_missions.store')", $workspace);
-        $this->assertStringContainsString('@csrf', $workspace);
-        $this->assertStringContainsString('zero-budget MissionRequest', $workspace);
+        $this->assertStringNotContainsString("route('ops.seo_intel.council.ui_missions.store')", $workspace);
+        $this->assertStringNotContainsString('<form', $workspace);
+        $this->assertStringNotContainsString('@csrf', $workspace);
+        $this->assertStringContainsString('Read-only foundation view', $workspace);
         $this->assertStringNotContainsString('wire:click', $workspace);
         $this->assertStringNotContainsString('wire:model', $workspace);
         foreach (['name="caller_type"', 'name="requested_role"', 'name="tool_scope"', 'name="egress_scope"', 'name="budget"'] as $forbidden) {

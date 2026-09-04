@@ -175,7 +175,7 @@ final class SeoPlatform11DPersistenceApiTest extends TestCase
         $route = Route::getRoutes()->getByName('ops.seo_intel.council.ui_missions.store');
         $this->assertNotNull($route);
         $this->assertContains('web', $route->gatherMiddleware());
-        $this->assertStringContainsString('@csrf', (string) file_get_contents(resource_path('views/filament/ops/components/ops-agent-council-workspace.blade.php')));
+        $this->assertStringNotContainsString('@csrf', (string) file_get_contents(resource_path('views/filament/ops/components/ops-agent-council-workspace.blade.php')));
         $this->assertNotContains('web', Route::getRoutes()->getByName('api.v0_5.ops.seo_intel.council.missions.store')->gatherMiddleware());
 
         $this->app->detectEnvironment(static fn (): string => 'local');

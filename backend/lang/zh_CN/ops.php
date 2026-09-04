@@ -1900,6 +1900,12 @@ return [
                 'states' => ['not_started' => '尚未开始', 'unavailable' => '不可用', 'available' => '可用'],
                 'boundary' => '不提供 Agent 运行、写入、发布、feature flag、allowlist 或权限开关；现有 Filament CMS Resources 继续作为权威。',
             ],
+            'trace_drilldown' => [
+                'eyebrow' => '安全 Trace', 'title' => 'Mission → Mode → Role → Evidence → Receipt',
+                'fields' => ['mission' => 'Mission', 'mode' => 'Mode', 'role' => 'Role', 'evidence' => 'Evidence', 'receipt' => 'Receipt', 'status' => 'HOLD / 原因 · 成本 · 时延'],
+                'states' => ['not_started' => '保留期内暂无 Trace', 'unavailable' => 'Trace 数据源不可用', 'available' => '保留期内 Trace'],
+                'boundary' => '仅展示白名单代码、聚合成本/时延和版本/hash 引用；完整 receipt、Evidence payload、模型输入、Prompt、凭据和私有标识均被排除。',
+            ],
             'execution' => [
                 'title' => 'SEO 问题执行中心',
                 'description' => '发现 → 分派 → 修复 → 验证 → 关闭，状态落在受保护的真实问题记录。',
