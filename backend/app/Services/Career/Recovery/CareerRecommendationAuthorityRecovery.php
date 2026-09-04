@@ -216,7 +216,9 @@ final class CareerRecommendationAuthorityRecovery
             || ! in_array((string) $occupation->crosswalk_mode, self::SAFE_CROSSWALK_MODES, true)) {
             throw new RuntimeException('career_recommendation_authority_recovery_occupation_conflict:'.$occupation->canonical_slug);
         }
-        if ($this->sourceState($job->toArray()) !== $baseline) {
+        $actualFingerprint = hash('sha256', PromotionContextFactory::canonicalJson($this->sourceState($job->toArray())));
+        $baselineFingerprint = hash('sha256', PromotionContextFactory::canonicalJson($baseline));
+        if (! hash_equals($baselineFingerprint, $actualFingerprint)) {
             throw new RuntimeException('career_recommendation_authority_recovery_cms_baseline_conflict:'.$occupation->canonical_slug);
         }
     }

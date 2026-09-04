@@ -122,6 +122,16 @@ final class CareerRecommendationSubjectCompileCommandTest extends TestCase
     public function it_recovers_a_formal_import_run_from_the_bound_published_cms_baseline(): void
     {
         $this->seedRecommendationRecoveryAuthority();
+        $job = \App\Models\CareerJob::query()
+            ->withoutGlobalScopes()
+            ->where('slug', 'accountants-and-auditors')
+            ->where('locale', 'zh-CN')
+            ->firstOrFail();
+        $job->forceFill([
+            'salary_json' => array_reverse($job->salary_json, true),
+            'outlook_json' => array_reverse($job->outlook_json, true),
+            'market_demand_json' => array_reverse($job->market_demand_json, true),
+        ])->save();
 
         $this->artisan('career:compile-recommendation-subjects')
             ->expectsOutputToContain('types_requested=16')
