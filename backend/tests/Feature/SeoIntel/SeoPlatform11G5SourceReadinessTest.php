@@ -14,6 +14,7 @@ use App\Services\SeoAgentEvidence\Privacy\SeoPrivateDataScanner;
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use App\Services\SeoCouncil\Competitive\CompetitiveCloseoutBuilder;
 use App\Services\SeoCouncil\Competitive\CompetitiveEvidenceBundleLoader;
+use App\Services\SeoCouncil\Competitive\CompetitiveReleasePrepareEnvelope;
 use App\Services\SeoCouncil\Contracts\CouncilContractValidator;
 use App\Services\SeoCouncil\Contracts\MissionRequestData;
 use Illuminate\Support\Facades\DB;
@@ -137,6 +138,23 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
         $preactivation = $builder->buildRuntime($productionIngestion, $sha, 'production');
         $this->assertSame('HOLD', $preactivation['closeout_state']);
         $this->assertNull($preactivation['production_sha']);
+        $payload = [
+            'schema_version' => 'seo.competitive_release_prepare.v1',
+            'status' => 'READY',
+            'failed_stage' => 'none',
+            'reason_code' => 'NONE',
+            'measurement_snapshot_set_hash' => str_repeat('e', 64),
+            'dependency_ingestion' => ['external_reads' => 12],
+            'preactivation_receipt' => $preactivation,
+        ];
+        $envelope = app(CompetitiveReleasePrepareEnvelope::class);
+        $this->assertTrue($envelope->verify($payload, $sha, 'production'));
+        $this->assertSame(
+            $preactivation,
+            $envelope->extract("non-json diagnostic\n".json_encode($payload, JSON_THROW_ON_ERROR)."\n", $sha, 'production'),
+        );
+        $payload['preactivation_receipt']['cms_writes'] = 1;
+        $this->assertFalse($envelope->verify($payload, $sha, 'production'));
         $mismatch = $builder->finalizeRuntime($preactivation, str_repeat('b', 40));
         $this->assertSame('HOLD', $mismatch['closeout_state']);
         $this->assertNull($mismatch['production_sha']);

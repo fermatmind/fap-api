@@ -1,6 +1,5 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { spawnSync } from "node:child_process";
 import test from "node:test";
 
 const classifier = readFileSync(new URL("./classify-paths.mjs", import.meta.url), "utf8");
@@ -9,6 +8,10 @@ const deploy = readFileSync(new URL("../workflows/deploy.yml", import.meta.url),
 const deployer = readFileSync(new URL("../../deploy.php", import.meta.url), "utf8");
 const competitiveCloseout = readFileSync(
   new URL("../../backend/app/Services/SeoCouncil/Competitive/CompetitiveCloseoutBuilder.php", import.meta.url),
+  "utf8",
+);
+const competitivePrepare = readFileSync(
+  new URL("../../backend/app/Console/Commands/SeoCompetitiveReleasePrepareCommand.php", import.meta.url),
   "utf8",
 );
 
@@ -35,7 +38,7 @@ test("competitive ingestion is measurement-gated and environment independent", (
   assert.match(deployer, /seo:competitive-release-prepare/);
   assert.match(deployer, /--cohort=competitive\.big-five\.live\.v2/);
   assert.match(deployer, /environment=\{\{competitive_environment\}\}/);
-  assert.match(deployer, /\.preactivation_receipt\.production_sha == null/);
+  assert.match(deployer, /extract_competitive_preactivation_receipt\.php/);
   assert.match(deployer, /--finalize-activation/);
   assert.match(deploy, /closeout_state == "STAGING_VALIDATED"/);
   assert.match(deploy, /search_measurement\.hold_reason == "NONE"/);
@@ -78,72 +81,10 @@ test("competitive persistence uses an ephemeral writer without changing runtime 
   assert.match(preactivation, /test ! -e "\$APP_CONFIG_CACHE"/);
   assert.match(preactivation, /test "\$\{SEO_INTEL_WRITE_ENABLED:-\}" = true/);
   assert.match(preactivation, /gsc_env='\{\{seo_measurement_sync_env\}\}'/);
-  assert.match(preactivation, /\.status == "READY"/);
-  assert.doesNotMatch(preactivation, /\{\{bin\/php\}\} -r/);
-  assert.match(preactivation, /jq -ce --arg sha "\$candidate_sha" --arg environment "\$environment"/);
-  assert.match(preactivation, /\.preactivation_receipt\.candidate_sha == \$sha/);
-  assert.match(preactivation, /\.preactivation_receipt\.production_sha == null/);
-  assert.match(preactivation, /\.preactivation_receipt\.execution_allowed == false/);
-  assert.match(preactivation, /COMPETITIVE_PREACTIVATION_ENVELOPE_INVALID/);
+  assert.match(preactivation, /extract_competitive_preactivation_receipt\.php "\$candidate_sha" "\$environment"/);
+  assert.doesNotMatch(preactivation, /jq -ce|\{\{bin\/php\}\} -r/);
   assert.doesNotMatch(preactivation, /printf '%s' "\$receipt" \| jq -e/);
   assert.doesNotMatch(preactivation, /HTTPS_PROXY|HTTP_PROXY|GSC_SERVICE_ACCOUNT/);
-});
-
-test("production preactivation envelope filter returns only a valid zero-write receipt", () => {
-  const preactivationStart = deployer.indexOf("task('seo:competitive-evidence-preactivation'");
-  const preactivationEnd = deployer.indexOf("task('seo:competitive-evidence-finalize'", preactivationStart);
-  const preactivation = deployer.slice(preactivationStart, preactivationEnd);
-  const match = preactivation.match(
-    /jq -ce --arg sha "\$candidate_sha" --arg environment "\$environment" '\n([\s\S]*?)\n'\)"/,
-  );
-  assert.ok(match);
-
-  const sha = "a".repeat(40);
-  const receipt = {
-    receipt_version: "seo.competitive_evidence_closeout.v3",
-    candidate_sha: sha,
-    environment: "production",
-    closeout_state: "HOLD",
-    production_sha: null,
-    "SEO-PLATFORM-11G": "HOLD",
-    ready_for_11H: false,
-    "11i_handoff_ready": false,
-    competitive_context_status: "READY",
-    competitive_hold_reason: "NONE",
-    execution_allowed: false,
-    model_calls: 0,
-    tool_calls: 0,
-    external_calls: 0,
-    cms_writes: 0,
-    url_truth_writes: 0,
-    search_writes: 0,
-    business_writes: 0,
-    production_permissions: 0,
-    outreach_actions: 0,
-    receipt_hash: "b".repeat(64),
-  };
-  const payload = {
-    schema_version: "seo.competitive_release_prepare.v1",
-    status: "READY",
-    failed_stage: "none",
-    reason_code: "NONE",
-    measurement_snapshot_set_hash: "c".repeat(64),
-    dependency_ingestion: { external_reads: 4 },
-    preactivation_receipt: receipt,
-  };
-  const run = (input) => spawnSync(
-    "jq",
-    ["-ce", "--arg", "sha", sha, "--arg", "environment", "production", match[1]],
-    { input: JSON.stringify(input), encoding: "utf8" },
-  );
-
-  const valid = run(payload);
-  assert.equal(valid.status, 0, valid.stderr);
-  assert.deepEqual(JSON.parse(valid.stdout), receipt);
-
-  const writeEnabled = structuredClone(payload);
-  writeEnabled.preactivation_receipt.cms_writes = 1;
-  assert.notEqual(run(writeEnabled).status, 0);
 });
 
 test("production competitive receipts use the existing bounded runtime owner fallback", () => {
@@ -244,7 +185,7 @@ test("Council stays zero-egress while dependency reads are accounted separately"
     assert.match(source, /production_permissions/);
     assert.match(source, /execution_allowed/);
   }
-  assert.match(deployer, /dependency_ingestion/);
-  assert.match(deployer, /outreach_actions/);
+  assert.match(competitivePrepare, /dependency_ingestion/);
+  assert.match(competitiveCloseout, /outreach_actions/);
   assert.match(competitiveCloseout, /deferred_p2_manual/);
 });

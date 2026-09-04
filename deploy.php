@@ -1599,43 +1599,7 @@ prepare="$(SEO_RELEASE_SHA="$candidate_sha" \
     --gsc-env="$gsc_env" \
     --writer-env="$writer_env" \
     --json --no-interaction --no-ansi)"
-receipt="$(printf '%s' "$prepare" | jq -ce --arg sha "$candidate_sha" --arg environment "$environment" '
-  select(.schema_version == "seo.competitive_release_prepare.v1"
-  and .status == "READY"
-  and .failed_stage == "none"
-  and .reason_code == "NONE"
-  and (.measurement_snapshot_set_hash | strings | test("^[a-f0-9]{64}$"))
-  and (.dependency_ingestion.external_reads | numbers | . >= 0)
-  and .preactivation_receipt.receipt_version == "seo.competitive_evidence_closeout.v3"
-  and .preactivation_receipt.candidate_sha == $sha
-  and .preactivation_receipt.environment == $environment
-  and .preactivation_receipt.closeout_state == "HOLD"
-  and .preactivation_receipt.production_sha == null
-  and .preactivation_receipt."SEO-PLATFORM-11G" == "HOLD"
-  and .preactivation_receipt.ready_for_11H == false
-  and .preactivation_receipt."11i_handoff_ready" == false
-  and .preactivation_receipt.competitive_context_status == "READY"
-  and .preactivation_receipt.competitive_hold_reason == "NONE"
-  and .preactivation_receipt.execution_allowed == false
-  and ([
-    .preactivation_receipt.model_calls,
-    .preactivation_receipt.tool_calls,
-    .preactivation_receipt.external_calls,
-    .preactivation_receipt.cms_writes,
-    .preactivation_receipt.url_truth_writes,
-    .preactivation_receipt.search_writes,
-    .preactivation_receipt.business_writes,
-    .preactivation_receipt.production_permissions,
-    .preactivation_receipt.outreach_actions
-  ] | all(. == 0))
-  and (.preactivation_receipt.receipt_hash | strings | test("^[a-f0-9]{64}$")))
-  | .preactivation_receipt
-')" || {
-  printf 'competitive_prepare_status=HOLD\n' >&2
-  printf 'competitive_prepare_stage=preactivation_receipt_validation\n' >&2
-  printf 'competitive_prepare_reason=COMPETITIVE_PREACTIVATION_ENVELOPE_INVALID\n' >&2
-  exit 1
-}
+receipt="$(printf '%s' "$prepare" | {{bin/php}} scripts/deploy/extract_competitive_preactivation_receipt.php "$candidate_sha" "$environment")"
 receipt_path="$receipt_dir/preactivation-$candidate_sha.json"
 receipt_owner=deploy
 fail_receipt_persistence() {

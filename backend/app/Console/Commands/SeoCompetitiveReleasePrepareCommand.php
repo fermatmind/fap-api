@@ -8,6 +8,7 @@ use App\Services\SeoAgentEvidence\Competitive\CompetitiveEvidenceIngestionServic
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveSourceRegistry;
 use App\Services\SeoAgentEvidence\Competitive\MeasurementSnapshotVerifier;
 use App\Services\SeoCouncil\Competitive\CompetitiveCloseoutBuilder;
+use App\Services\SeoCouncil\Competitive\CompetitiveReleasePrepareEnvelope;
 use Carbon\CarbonImmutable;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -38,6 +39,7 @@ final class SeoCompetitiveReleasePrepareCommand extends Command
         CompetitiveSourceRegistry $registry,
         CompetitiveEvidenceIngestionService $ingestion,
         CompetitiveCloseoutBuilder $closeout,
+        CompetitiveReleasePrepareEnvelope $envelope,
     ): int {
         $startedAt = microtime(true);
         $sha = trim((string) $this->option('candidate-sha'));
@@ -96,13 +98,7 @@ final class SeoCompetitiveReleasePrepareCommand extends Command
                 );
             }
             $receipt = $closeout->buildRuntime($result, $sha, 'production');
-            if (! $closeout->verify($receipt, $sha)
-                || ($receipt['closeout_state'] ?? null) !== 'HOLD'
-                || ($receipt['competitive_context_status'] ?? null) !== 'READY') {
-                return $this->hold('preactivation_receipt_build', 'COMPETITIVE_RECEIPT_INVALID', $actions, $measurement);
-            }
-
-            return $this->emit([
+            $payload = [
                 'schema_version' => 'seo.competitive_release_prepare.v1',
                 'status' => 'READY',
                 'failed_stage' => 'none',
@@ -114,7 +110,12 @@ final class SeoCompetitiveReleasePrepareCommand extends Command
                 'cro_snapshot_hash' => (string) data_get($measurement, 'cro_measurement.snapshot_hash', ''),
                 'dependency_ingestion' => $this->counts((array) ($result['dependency_ingestion'] ?? [])),
                 'preactivation_receipt' => $receipt,
-            ], self::SUCCESS);
+            ];
+            if (! $envelope->verify($payload, $sha, 'production')) {
+                return $this->hold('preactivation_receipt_build', 'COMPETITIVE_RECEIPT_INVALID', $actions, $measurement);
+            }
+
+            return $this->emit($payload, self::SUCCESS);
         } catch (Throwable) {
             return $this->hold('competitive_ingestion', 'COMPETITIVE_PREPARE_INTERNAL_HOLD', $actions, $measurement);
         }
