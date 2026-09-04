@@ -199,6 +199,8 @@ final class CareerGuideLocaleRecovery
                 'source_ledger_sha256' => self::CORRUPTING_SOURCE_LEDGER_SHA256,
                 'candidate_is_recovery_source' => false,
             ]
+            || data_get($manifest, 'recommendation_publication.publish_environment') !== 'production'
+            || data_get($manifest, 'recommendation_publication.staging_mode') !== 'guide_recovery_only'
             || $manifestHashes !== $expectedHashes
             || $manifestCodes !== self::GUIDE_CODES
             || data_get($manifest, 'guide_recovery.expected_guide_count') !== count(self::GUIDE_CODES)

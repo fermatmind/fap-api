@@ -64,6 +64,8 @@
   },
   "recommendation_publication": {
     "command": "career:compile-recommendation-subjects",
+    "publish_environment": "production",
+    "staging_mode": "guide_recovery_only",
     "source": "latest_completed_non_dry_run_failure_free_public_authority_import",
     "compiler_version": "career_scoring_engine.v1.2",
     "canonical_type_count": 16,
