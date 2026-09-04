@@ -166,8 +166,13 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
     public function test_search_window_reuses_a_verified_environment_snapshot_across_release_shas(): void
     {
         $sha = str_repeat('c', 40);
-        config(['app.git_sha' => $sha]);
-        DB::table('seo_gsc_daily')->where('report_date', now('UTC')->subDays(50)->toDateString())->delete();
+        config([
+            'app.git_sha' => $sha,
+            'seo_intel.gsc_reporting_timezone' => 'UTC',
+        ]);
+        DB::table('seo_gsc_daily')
+            ->where('report_date', '>', now('UTC')->subDays(20)->toDateString())
+            ->delete();
 
         $start = CarbonImmutable::parse(now('UTC')->subDays(92)->toDateString(), 'UTC');
         $end = CarbonImmutable::parse(now('UTC')->subDays(3)->toDateString(), 'UTC');
@@ -202,7 +207,9 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
         $loader = app(ReadOnlyMeasurementEvidenceBundleLoader::class);
         $this->assertSame('NONE', $loader->diagnoseForScope('mission:cross-sha', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
 
-        DB::table('seo_gsc_daily')->where('report_date', now('UTC')->subDays(49)->toDateString())->delete();
+        DB::table('seo_gsc_daily')
+            ->where('report_date', now('UTC')->subDays(20)->toDateString())
+            ->update(['report_date' => now('UTC')->subDays(3)->toDateString()]);
         $this->assertSame('GSC_WINDOW_INCOMPLETE', $loader->diagnoseForScope('mission:drifted-snapshot', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
     }
 

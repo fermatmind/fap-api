@@ -182,23 +182,36 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
         } catch (Throwable) {
             $latestDate = null;
         }
+        $lagDays = max(0, (int) data_get($quality, 'freshness.lag_days_required', 3));
+        $maxAgeDays = max($lagDays, (int) data_get($quality, 'freshness.max_report_age_days', 10));
+        $currentSnapshotVerified = $latestDate !== null
+            && $this->gscFullWindowReceiptCovers($connection, $latestDate, $environment);
+        $windowEnd = $currentSnapshotVerified
+            ? now((string) config('seo_intel.gsc_reporting_timezone', 'America/Los_Angeles'))
+                ->subDays($lagDays)
+                ->startOfDay()
+            : $latestDate;
         $scopeWindowsComplete = $latestDate !== null;
         $readmodelHealthy = true;
         $windowMetrics = [];
         $computedReadmodels = [];
+        $currentWindowRows = [];
         foreach (self::WINDOWS as $days) {
-            $windowRows = $latestDate === null ? [] : array_values(array_filter(
+            $windowRows = $windowEnd === null ? [] : array_values(array_filter(
                 $rows,
-                static function (array $row) use ($latestDate, $days): bool {
+                static function (array $row) use ($windowEnd, $days): bool {
                     try {
                         $date = CarbonImmutable::parse((string) $row['report_date'], 'UTC')->startOfDay();
                     } catch (Throwable) {
                         return false;
                     }
 
-                    return $date->betweenIncluded($latestDate->subDays($days - 1), $latestDate);
+                    return $date->betweenIncluded($windowEnd->subDays($days - 1), $windowEnd);
                 }
             ));
+            if ($days === 90) {
+                $currentWindowRows = $windowRows;
+            }
             $scopeWindowsComplete = $scopeWindowsComplete
                 && count(array_unique(array_column($windowRows, 'report_date'))) === $days;
             try {
@@ -208,24 +221,29 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
             }
             $familyMetrics = collect((array) data_get($computed, 'breakdowns.page_family', []))
                 ->firstWhere('dimension', $pageFamily);
-            if (($computed['measurement_state'] ?? null) !== 'production_healthy' || ! is_array($familyMetrics)) {
+            $computedHealthy = ($computed['measurement_state'] ?? null) === 'production_healthy'
+                && is_array($familyMetrics);
+            if (! $computedHealthy && ! $currentSnapshotVerified) {
                 $readmodelHealthy = false;
             }
             $computedReadmodels[$days] = $computed;
             $windowMetrics[] = [
                 'window_days' => $days,
-                'metrics' => $this->computedGscMetrics(is_array($familyMetrics) ? $familyMetrics : []),
+                'metrics' => $computedHealthy
+                    ? $this->computedGscMetrics($familyMetrics)
+                    : $this->rawGscMetrics($windowRows),
             ];
         }
-        $windowComplete = $scopeWindowsComplete
-            || ($latestDate !== null && $this->gscFullWindowReceiptCovers($connection, $latestDate, $environment));
+        $windowComplete = $scopeWindowsComplete || $currentSnapshotVerified;
 
-        $lagDays = max(0, (int) data_get($quality, 'freshness.lag_days_required', 3));
-        $maxAgeDays = max($lagDays, (int) data_get($quality, 'freshness.max_report_age_days', 10));
-        $stale = $latestDate === null || $latestDate->lessThan(now('UTC')->subDays($maxAgeDays)->startOfDay());
+        $stale = ! $currentSnapshotVerified
+            && ($latestDate === null || $latestDate->lessThan(now('UTC')->subDays($maxAgeDays)->startOfDay()));
         $fresh = ! $stale
             && ! $latestDate?->greaterThan(now('UTC')->subDays($lagDays)->startOfDay());
-        $qualityPassed = ($quality['status'] ?? null) === 'pass';
+        $qualityReasons = array_values(array_map('strval', (array) ($quality['reasons'] ?? [])));
+        $qualityPassed = ($quality['status'] ?? null) === 'pass'
+            || ($currentSnapshotVerified
+                && array_values(array_diff($qualityReasons, ['stale_gsc_report_date'])) === []);
         $reason = $this->reasons->search([
             'schema_available' => true,
             'eligible_rows' => true,
@@ -246,7 +264,9 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
         )) === 0;
         $payload = [
             'windows' => $windowMetrics,
-            'branded_non_branded' => $this->computedBrandMetrics((array) data_get($computedReadmodels, '90.breakdowns.brand', [])),
+            'branded_non_branded' => data_get($computedReadmodels, '90.measurement_state') === 'production_healthy'
+                ? $this->computedBrandMetrics((array) data_get($computedReadmodels, '90.breakdowns.brand', []))
+                : $this->rawBrandMetrics($currentWindowRows),
             'detector_findings' => $this->detectorResults($connection, $pageFamily, $revisions[0] ?? null),
             'freshness' => [
                 'lag_days_required' => data_get($quality, 'freshness.lag_days_required'),
@@ -612,6 +632,9 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
             $searchTypes = $receipt['search_types'] ?? null;
             $restricted = data_get($receipt, 'restricted_egress.status');
             $expectedEnvironment = $environment === 'production_runtime' ? 'production' : 'staging';
+            $currentEndDate = now((string) config('seo_intel.gsc_reporting_timezone', 'America/Los_Angeles'))
+                ->subDays(max(0, (int) config('seo_intel.gsc_backfill_lag_days', 3)))
+                ->toDateString();
             $configuredProperty = trim((string) config('seo_intel.gsc_property_url', ''));
             $propertyMatches = $configuredProperty === ''
                 || hash_equals(hash('sha256', $configuredProperty), (string) ($receipt['property_hash'] ?? ''));
@@ -641,6 +664,7 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
                 && ($receipt['window_days'] ?? null) === 90
                 && $searchTypes === ['web']
                 && (int) $start->diffInDays($end) === 89
+                && $end->toDateString() === $currentEndDate
                 && $latestDate->betweenIncluded($start, $end)
                 && ($receipt['pages_fetched'] ?? 0) > 0
                 && ($receipt['rows_seen'] ?? 0) > 0
@@ -713,6 +737,42 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
             'impressions' => max(0, (int) ($metrics['impressions'] ?? 0)),
             'ctr_ppm' => max(0, (int) round((float) ($metrics['ctr_percent'] ?? 0) * 10_000)),
             'average_position_milli' => max(0, (int) round((float) ($metrics['average_position'] ?? 0) * 1_000)),
+        ];
+    }
+
+    /** @param list<array<string, mixed>> $rows @return array<string, int> */
+    private function rawGscMetrics(array $rows): array
+    {
+        $clicks = array_sum(array_column($rows, 'clicks'));
+        $impressions = array_sum(array_column($rows, 'impressions'));
+        $positionWeight = array_sum(array_map(
+            static fn (array $row): int => (int) ($row['average_position_milli'] ?? 0)
+                * (int) ($row['impressions'] ?? 0),
+            $rows,
+        ));
+
+        return [
+            'clicks' => max(0, (int) $clicks),
+            'impressions' => max(0, (int) $impressions),
+            'ctr_ppm' => $impressions > 0 ? max(0, (int) round($clicks * 1_000_000 / $impressions)) : 0,
+            'average_position_milli' => $impressions > 0
+                ? max(0, (int) round($positionWeight / $impressions))
+                : 0,
+        ];
+    }
+
+    /** @param list<array<string, mixed>> $rows @return array<string, array<string, int>> */
+    private function rawBrandMetrics(array $rows): array
+    {
+        return [
+            'branded' => $this->rawGscMetrics(array_values(array_filter(
+                $rows,
+                static fn (array $row): bool => (bool) ($row['is_brand_query'] ?? false),
+            ))),
+            'non_branded' => $this->rawGscMetrics(array_values(array_filter(
+                $rows,
+                static fn (array $row): bool => ! (bool) ($row['is_brand_query'] ?? false),
+            ))),
         ];
     }
 
