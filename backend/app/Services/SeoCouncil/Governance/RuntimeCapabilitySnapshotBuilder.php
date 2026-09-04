@@ -13,8 +13,9 @@ final class RuntimeCapabilitySnapshotBuilder
     /** @return array<string, mixed> */
     public function snapshot(): array
     {
-        $persistence = ! app()->environment('production')
-            && (bool) config('seo_council.mission_persistence_enabled', false);
+        $persistenceState = (string) config('seo_council.mission_persistence_runtime_state', 'DISABLED');
+        $persistence = (bool) config('seo_council.mission_persistence_enabled', false)
+            && $persistenceState === 'ACTIVE';
         $snapshot = [
             'snapshot_id' => 'seo.runtime_capability_snapshot.v1',
             'orchestrator_state' => 'DEPLOYED_DISABLED',
@@ -30,6 +31,7 @@ final class RuntimeCapabilitySnapshotBuilder
             'trusted_signing_keys' => 0,
             'l4' => 'dormant_not_authorized',
             'mission_execution_enabled' => false,
+            'mission_persistence_runtime_state' => $persistenceState,
             'mission_persistence_enabled' => $persistence,
             'execution_allowed' => false,
         ];

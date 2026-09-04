@@ -39,10 +39,13 @@ final class SeoPlatform11DPersistenceApiTest extends TestCase
         ]);
         config()->set('seo_council.connection', 'seo_intel');
         config()->set('seo_council.mission_persistence_enabled', true);
+        config()->set('seo_council.mission_persistence_runtime_state', 'ACTIVE');
         DB::purge('seo_intel');
         DB::connection('seo_intel')->getPdo();
         $migration = require database_path('migrations/seo_intel/2026_08_29_030000_create_seo_council_runtime_tables.php');
         $migration->up();
+        $receiptMigration = require database_path('migrations/seo_intel/2026_09_04_030000_expand_seo_council_run_receipts.php');
+        $receiptMigration->up();
     }
 
     public function test_expand_only_runtime_migration_has_all_tables_and_unique_constraints(): void
@@ -87,6 +90,11 @@ final class SeoPlatform11DPersistenceApiTest extends TestCase
         $resume['resume_from'] = [
             'receipt_hash' => $first['receipt_hash'],
             'step_hash' => $first['steps'][0]['step_hash'],
+            'catalog_hash' => $first['catalog_ref']['hash'],
+            'policy_hash' => $first['policy_ref']['hash'],
+            'binding_hash' => $first['binding_ref']['hash'],
+            'evidence_hash' => $first['evidence_hash'],
+            'capability_hash' => $first['capability_hash'],
         ];
 
         $receipt = app(ApiMissionAdapter::class)->submit($resume);

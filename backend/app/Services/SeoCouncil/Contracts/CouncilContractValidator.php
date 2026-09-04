@@ -155,10 +155,15 @@ final class CouncilContractValidator
         if (! is_array($resume)) {
             throw new InvalidArgumentException('RESUME_REF_INVALID');
         }
-        $this->exactKeys($resume, ['receipt_hash', 'step_hash'], 'RESUME_REF_FIELDS_INVALID');
-        if (preg_match('/^[a-f0-9]{64}$/D', (string) $resume['receipt_hash']) !== 1
-            || preg_match('/^[a-f0-9]{64}$/D', (string) $resume['step_hash']) !== 1) {
-            throw new InvalidArgumentException('RESUME_REF_INVALID');
+        $fields = [
+            'receipt_hash', 'step_hash', 'catalog_hash', 'policy_hash',
+            'binding_hash', 'evidence_hash', 'capability_hash',
+        ];
+        $this->exactKeys($resume, $fields, 'RESUME_REF_FIELDS_INVALID');
+        foreach ($fields as $field) {
+            if (preg_match('/^[a-f0-9]{64}$/D', (string) $resume[$field]) !== 1) {
+                throw new InvalidArgumentException('RESUME_REF_INVALID');
+            }
         }
     }
 

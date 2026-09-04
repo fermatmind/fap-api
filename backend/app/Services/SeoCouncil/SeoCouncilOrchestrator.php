@@ -21,6 +21,7 @@ use App\Services\SeoCouncil\Measurement\MeasurementRuntimeGate;
 use App\Services\SeoCouncil\Persistence\CouncilRunRepository;
 use App\Services\SeoCouncil\Platform11\Platform11Coordinator;
 use App\Services\SeoCouncil\Platform11\Platform11MissionRequestData;
+use App\Services\SeoCouncil\Platform12\Platform12ContractRegistry;
 use App\Services\SeoCouncil\Policy\CouncilAdmissionGateway;
 use App\Services\SeoCouncil\Policy\CouncilAdmissionRequestFactory;
 use App\Services\SeoCouncil\Routing\CouncilConflictResolver;
@@ -71,6 +72,7 @@ final class SeoCouncilOrchestrator
         private readonly CouncilContractValidator $contracts,
         private readonly CouncilRunRepository $repository,
         private readonly Platform11Coordinator $platform11,
+        private readonly Platform12ContractRegistry $platform12Contracts,
     ) {}
 
     /** @return array<string, mixed> */
@@ -94,6 +96,7 @@ final class SeoCouncilOrchestrator
         $runId = $this->runId($request, $registry, $binding);
         $releaseSha = $this->releaseSha();
         $runtime = $this->runtime->snapshot();
+        $catalog = $this->platform12Contracts->missionCatalog();
         $technicalRuntime = $this->technicalMode->capabilitySnapshot();
         $measurementRuntime = $this->measurementMode->capabilitySnapshot();
         $competitiveRuntime = $this->competitiveMode->capabilitySnapshot();
@@ -101,6 +104,7 @@ final class SeoCouncilOrchestrator
             'registry' => $registry,
             'binding' => $binding,
             'runtime' => $runtime,
+            'catalog' => $catalog,
             'technical_runtime' => $technicalRuntime,
             'measurement_runtime' => $measurementRuntime,
             'competitive_runtime' => $competitiveRuntime,
@@ -135,7 +139,13 @@ final class SeoCouncilOrchestrator
         }
 
         $resume = $request->payload['resume_from'];
-        if (is_array($resume) && ! $this->repository->resumeValid((string) $resume['receipt_hash'], (string) $resume['step_hash'])) {
+        if (is_array($resume) && ! $this->repository->resumeValid($resume, [
+            'catalog_hash' => (string) $catalog['catalog_hash'],
+            'policy_hash' => (string) $this->policy->registry()['registry_hash'],
+            'binding_hash' => (string) $binding['hash'],
+            'evidence_hash' => $request->evidenceHash,
+            'capability_hash' => (string) $runtime['snapshot_hash'],
+        ])) {
             return $this->terminalReceipt($request, 'STALE_RESUME_HOLD', 'resume_hash_verification_failed', [], [], $baseContext);
         }
 
@@ -271,10 +281,13 @@ final class SeoCouncilOrchestrator
         array $routePlan,
         array $conflicts,
         ?array $context,
+        bool $persist = true,
     ): array {
         $registry = $context['registry'] ?? $this->roles->registry();
         $binding = $context['binding'] ?? $this->binding->reference();
         $policy = $this->policy->registry();
+        $catalog = $context['catalog'] ?? $this->platform12Contracts->missionCatalog();
+        $runtime = $context['runtime'] ?? $this->runtime->snapshot();
         $runId = $this->runId($request, $registry, $binding);
         $steps = $this->steps($runId, $request, $status, $stopReason, $context);
         $resume = $request->payload['resume_from'];
@@ -294,7 +307,13 @@ final class SeoCouncilOrchestrator
                 'hash' => $registry['registry_hash'],
             ],
             'binding_ref' => $binding,
+            'catalog_ref' => [
+                'id' => $catalog['catalog_id'],
+                'version' => $catalog['catalog_version'],
+                'hash' => $catalog['catalog_hash'],
+            ],
             'evidence_hash' => $request->evidenceHash,
+            'capability_hash' => $runtime['snapshot_hash'],
             'policy_ref' => [
                 'id' => $policy['registry_id'],
                 'version' => $policy['registry_version'],
@@ -336,8 +355,25 @@ final class SeoCouncilOrchestrator
             'supersedes_receipt_hash' => is_array($resume) ? $resume['receipt_hash'] : null,
         ];
         $receipt['receipt_hash'] = $this->hasher->hash($receipt);
-        if ($status !== 'IDEMPOTENCY_CONFLICT') {
-            $this->repository->persist($receipt, $request->idempotencyKey());
+        if ($status !== 'IDEMPOTENCY_CONFLICT' && $persist) {
+            $result = $this->repository->persist($receipt, $request->idempotencyKey());
+            if ($result['decision'] === 'REPLAY') {
+                return $result['receipt'];
+            }
+            if ($result['decision'] === 'IDEMPOTENCY_CONFLICT') {
+                return $this->idempotencyConflict($request, $result['receipt']);
+            }
+            if ($result['decision'] === 'PERSISTENCE_HOLD') {
+                return $this->terminalReceipt(
+                    $request,
+                    'PERSISTENCE_HOLD',
+                    'council_persistence_transaction_failed',
+                    [],
+                    [],
+                    $context,
+                    false,
+                );
+            }
         }
 
         return $receipt;
@@ -348,6 +384,10 @@ final class SeoCouncilOrchestrator
     {
         $registryHash = (string) (($context['registry']['registry_hash'] ?? null) ?: $this->roles->registry()['registry_hash']);
         $bindingHash = (string) (($context['binding']['hash'] ?? null) ?: $this->binding->reference()['hash']);
+        $catalogHash = (string) (($context['catalog']['catalog_hash'] ?? null)
+            ?: $this->platform12Contracts->missionCatalog()['catalog_hash']);
+        $capabilityHash = (string) (($context['runtime']['snapshot_hash'] ?? null)
+            ?: $this->runtime->snapshot()['snapshot_hash']);
         $policy = $this->policy->registry();
         $stopStep = match ($status) {
             'DEPENDENCY_HOLD' => 'dependency_snapshot',
@@ -356,6 +396,7 @@ final class SeoCouncilOrchestrator
             'EVIDENCE_HOLD', 'MEASUREMENT_HOLD', 'COMPETITIVE_HOLD' => 'evidence_context_verification',
             'unresolved_conflict' => 'evidence_context_verification',
             'STALE_RESUME_HOLD' => 'validate_privacy_scan',
+            'PERSISTENCE_HOLD' => 'run_receipt',
             'TECHNICAL_DIAGNOSIS_READY', 'MEASUREMENT_READY', 'COMPETITIVE_READY' => 'run_receipt',
             default => 'technical_mode_selection',
         };
@@ -371,7 +412,9 @@ final class SeoCouncilOrchestrator
                 'request_hash' => $request->requestHash,
                 'registry_hash' => $registryHash,
                 'binding_hash' => $bindingHash,
+                'catalog_hash' => $catalogHash,
                 'evidence_hash' => $request->evidenceHash,
+                'capability_hash' => $capabilityHash,
                 'policy_revision' => ['version' => $policy['registry_version'], 'hash' => $policy['registry_hash']],
                 'status' => $stopped ? 'NOT_RUN' : ($isStop ? $this->stopStepStatus($status, $context) : 'PASS'),
                 'stop_reason' => $isStop ? $stopReason : null,

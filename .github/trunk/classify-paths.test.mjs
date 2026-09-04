@@ -301,6 +301,7 @@ test("binds Platform 12 scheduler storage to migration and Council receipts with
   for (const path of [
     "backend/database/migrations/seo_intel/2026_09_04_010000_create_seo_council_scheduler_storage.php",
     "backend/database/migrations/seo_intel/2026_09_04_020000_expand_seo_council_scheduler_fencing.php",
+    "backend/database/migrations/seo_intel/2026_09_04_030000_expand_seo_council_run_receipts.php",
   ]) {
     const result = classifyPaths([path]);
     assert.equal(result.flags.backward_compatible_migration, true, path);

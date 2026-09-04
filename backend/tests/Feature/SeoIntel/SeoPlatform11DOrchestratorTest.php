@@ -120,7 +120,15 @@ final class SeoPlatform11DOrchestratorTest extends TestCase
     {
         $this->bindAdmission('ALLOW');
         $stale = $this->request('weekly_opportunity', 'tests', ['search_measurement']);
-        $stale['resume_from'] = ['receipt_hash' => str_repeat('a', 64), 'step_hash' => str_repeat('b', 64)];
+        $stale['resume_from'] = [
+            'receipt_hash' => str_repeat('a', 64),
+            'step_hash' => str_repeat('b', 64),
+            'catalog_hash' => str_repeat('c', 64),
+            'policy_hash' => str_repeat('d', 64),
+            'binding_hash' => str_repeat('e', 64),
+            'evidence_hash' => str_repeat('f', 64),
+            'capability_hash' => str_repeat('1', 64),
+        ];
         $staleReceipt = app(ApiMissionAdapter::class)->submit($stale);
 
         $conflict = $this->request('weekly_opportunity', 'tests', ['search_measurement', 'content_claim']);

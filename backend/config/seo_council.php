@@ -7,6 +7,7 @@ return [
     'runtime_mode' => 'DETERMINISTIC_ROUTE_HOLD_ONLY',
     'mission_execution_enabled' => false,
     'mission_persistence_enabled' => (bool) env('SEO_COUNCIL_MISSION_PERSISTENCE_ENABLED', false),
+    'mission_persistence_runtime_state' => 'DISABLED',
     'scheduler_enabled' => (bool) env('SEO_COUNCIL_SCHEDULER_ENABLED', false),
     'scheduler_lease_ttl_seconds' => 120,
     'scheduler_max_lease_ttl_seconds' => 300,
