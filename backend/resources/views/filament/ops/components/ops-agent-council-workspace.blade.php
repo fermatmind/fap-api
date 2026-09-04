@@ -47,6 +47,8 @@
         <span class="ops-tag">binding=v{{ $snapshot['binding_metadata']['version'] }} · {{ $snapshot['binding_metadata']['hash'] }}</span>
     </div>
 
+    <x-filament-ops::ops-system-health-workspace />
+
     <div class="ops-agent-council__layout">
         <section class="ops-agent-council__capabilities" aria-labelledby="agent-capabilities-title">
             <span class="ops-shell-eyebrow">{{ __($copy.'.capabilities.eyebrow') }}</span>
