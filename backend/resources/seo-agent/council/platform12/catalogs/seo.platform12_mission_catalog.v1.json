@@ -1,7 +1,7 @@
 {
     "schema_version": "seo.platform12_mission_catalog.v1",
     "catalog_id": "fermatmind.seo.platform12_mission_catalog",
-    "catalog_version": "1.6.0",
+    "catalog_version": "1.6.1",
     "catalog_state": "FOUNDATION_ONLY",
     "dependency_refs": {
         "role_registry": {
@@ -31,8 +31,8 @@
         },
         "schema_vector": {
             "id": "seo.platform12_mission_catalog_schema_vector",
-            "version": "1.6.0",
-            "hash": "0c775df4cdb2247eef0b22e3572b189da34bc63984e4438493deec6e9d361b11"
+            "version": "1.6.1",
+            "hash": "1826835de67e5644c713fc148836d3e30676b59005a8af843847e4f08edcc8b2"
         }
     },
     "missions": [
@@ -291,8 +291,9 @@
                 "all_team_invocation",
                 "human_route_correction",
                 "model_tool_cost",
+                "mission_budget",
                 "human_time_categories",
-                "locale_brief"
+                "locale_specific_brief_evidence"
             ],
             "eligible_capability": "seo.search_measurement_review",
             "priority": "normal",
@@ -314,10 +315,10 @@
             "output_schema": {
                 "id": "seo.platform12_weekly_efficiency_output.v1",
                 "version": "1.0.0",
-                "hash": "95b984e50b7f7e9a9ca667cb9ae4e90ae71ef43fcd85c47d98ddbf95ce2843ee"
+                "hash": "fb5e105ce46523a1ade7bf8805b7858fdf59c8ed582e33dc9bce0d52349065f0"
             }
         }
     ],
     "runtime_activation_allowed": false,
-    "catalog_hash": "d20297418191ea33d5a05b161e9628e127aa9b8d3af385f348f82d9494bad3b2"
+    "catalog_hash": "0b8f56ded8395b7ffd5514f3c6728cf9e664b135ea8436790c0d2420deed7a07"
 }

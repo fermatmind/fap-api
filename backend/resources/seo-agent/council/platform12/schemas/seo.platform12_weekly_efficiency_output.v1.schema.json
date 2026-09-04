@@ -11,6 +11,7 @@
         "state",
         "routing",
         "cost",
+        "budget",
         "human_time",
         "locale_briefs",
         "routine_time_excludes_projects_incidents_research_outreach",
@@ -33,6 +34,7 @@
         "state": {
             "enum": [
                 "READY",
+                "BACKPRESSURE_HOLD",
                 "MEASUREMENT_HOLD"
             ]
         },
@@ -40,6 +42,9 @@
             "type": "object"
         },
         "cost": {
+            "type": "object"
+        },
+        "budget": {
             "type": "object"
         },
         "human_time": {
@@ -70,5 +75,5 @@
             "pattern": "^[a-f0-9]{64}$"
         }
     },
-    "schema_hash": "95b984e50b7f7e9a9ca667cb9ae4e90ae71ef43fcd85c47d98ddbf95ce2843ee"
+    "schema_hash": "fb5e105ce46523a1ade7bf8805b7858fdf59c8ed582e33dc9bce0d52349065f0"
 }

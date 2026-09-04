@@ -38,17 +38,19 @@ final readonly class Platform12WeeklyEfficiencyEvaluator
             $evaluatedAt = $this->evaluatedAt($evidence);
             $routing = $this->routing($evidence['routing'] ?? null);
             $cost = $this->cost($evidence['cost'] ?? null);
+            $budget = $this->budget($evidence['budget'] ?? null);
             $humanTime = $this->humanTime($evidence['human_time'] ?? null);
             $localeBriefs = $this->localeBriefs($evidence['locale_briefs'] ?? null);
-            $state = 'READY';
+            $state = $budget['used_microusd'] > $budget['limit_microusd'] ? 'BACKPRESSURE_HOLD' : 'READY';
         } catch (Throwable) {
             $evaluatedAt = '1970-01-01T00:00:00Z';
             $routing = array_fill_keys(self::METRICS, $this->notMeasuredRatio());
             $cost = ['model_cost_microusd' => null, 'tool_cost_microusd' => null, 'measurement_state' => 'NOT_MEASURED'];
+            $budget = ['limit_microusd' => null, 'used_microusd' => null, 'backpressure' => true];
             $humanTime = array_fill_keys(self::TIME_CATEGORIES, null);
             $humanTime['measurement_state'] = 'NOT_MEASURED';
             $localeBriefs = array_map(
-                static fn (string $locale): array => ['locale' => $locale, 'measurement_state' => 'NOT_MEASURED', 'brief_code' => null, 'unknowns' => ['evidence_invalid']],
+                static fn (string $locale): array => ['locale' => $locale, 'measurement_state' => 'NOT_MEASURED', 'brief_code' => null, 'evidence_refs' => [], 'unknowns' => ['evidence_invalid']],
                 self::LOCALES,
             );
             $state = 'MEASUREMENT_HOLD';
@@ -61,6 +63,7 @@ final readonly class Platform12WeeklyEfficiencyEvaluator
             'state' => $state,
             'routing' => $routing,
             'cost' => $cost,
+            'budget' => $budget,
             'human_time' => $humanTime,
             'locale_briefs' => $localeBriefs,
             'routine_time_excludes_projects_incidents_research_outreach' => true,
@@ -129,6 +132,25 @@ final readonly class Platform12WeeklyEfficiencyEvaluator
         return ['model_cost_microusd' => $source['model_cost_microusd'], 'tool_cost_microusd' => $source['tool_cost_microusd'], 'measurement_state' => 'OBSERVED'];
     }
 
+    /** @return array{limit_microusd:int,used_microusd:int,backpressure:bool} */
+    private function budget(mixed $source): array
+    {
+        if (! is_array($source) || ! $this->hasExactKeys($source, ['limit_microusd', 'used_microusd'])) {
+            throw new InvalidArgumentException('BUDGET_INVALID');
+        }
+        foreach (['limit_microusd', 'used_microusd'] as $field) {
+            if (! is_int($source[$field]) || $source[$field] < 0 || $source[$field] > 1000000000000) {
+                throw new InvalidArgumentException('BUDGET_INVALID');
+            }
+        }
+
+        return [
+            'limit_microusd' => $source['limit_microusd'],
+            'used_microusd' => $source['used_microusd'],
+            'backpressure' => $source['used_microusd'] > $source['limit_microusd'],
+        ];
+    }
+
     /** @return array<string,int|string> */
     private function humanTime(mixed $source): array
     {
@@ -151,10 +173,13 @@ final readonly class Platform12WeeklyEfficiencyEvaluator
             throw new InvalidArgumentException('LOCALE_BRIEFS_INVALID');
         }
 
-        return array_map(function (mixed $brief): array {
+        $briefs = array_map(function (mixed $brief): array {
             if (! is_array($brief)
-                || ! $this->hasExactKeys($brief, ['locale', 'measurement_state', 'brief_code', 'unknowns'])
+                || ! $this->hasExactKeys($brief, ['locale', 'measurement_state', 'brief_code', 'evidence_refs', 'unknowns'])
                 || ! in_array($brief['measurement_state'] ?? null, ['OBSERVED', 'NOT_MEASURED'], true)
+                || ! is_array($brief['evidence_refs'] ?? null)
+                || ! array_is_list($brief['evidence_refs'])
+                || count($brief['evidence_refs']) > 20
                 || ! is_array($brief['unknowns'] ?? null)
                 || ! array_is_list($brief['unknowns'])
                 || count($brief['unknowns']) > 20) {
@@ -162,8 +187,14 @@ final readonly class Platform12WeeklyEfficiencyEvaluator
             }
             $briefCode = $brief['brief_code'] ?? null;
             if (($brief['measurement_state'] === 'OBSERVED' && (! is_string($briefCode) || preg_match('/^[a-z][a-z0-9._-]{0,63}$/D', $briefCode) !== 1))
-                || ($brief['measurement_state'] === 'NOT_MEASURED' && $briefCode !== null)) {
+                || ($brief['measurement_state'] === 'OBSERVED' && $brief['evidence_refs'] === [])
+                || ($brief['measurement_state'] === 'NOT_MEASURED' && ($briefCode !== null || $brief['evidence_refs'] !== []))) {
                 throw new InvalidArgumentException('LOCALE_BRIEF_INVALID');
+            }
+            foreach ($brief['evidence_refs'] as $evidenceRef) {
+                if (! is_string($evidenceRef) || preg_match('/^[a-f0-9]{64}$/D', $evidenceRef) !== 1) {
+                    throw new InvalidArgumentException('LOCALE_BRIEF_INVALID');
+                }
             }
             foreach ($brief['unknowns'] as $unknown) {
                 if (! is_string($unknown) || preg_match('/^[a-z][a-z0-9._-]{0,63}$/D', $unknown) !== 1) {
@@ -171,8 +202,14 @@ final readonly class Platform12WeeklyEfficiencyEvaluator
                 }
             }
 
-            return array_intersect_key($brief, array_flip(['locale', 'measurement_state', 'brief_code', 'unknowns']));
+            return array_intersect_key($brief, array_flip(['locale', 'measurement_state', 'brief_code', 'evidence_refs', 'unknowns']));
         }, $source);
+
+        if (array_intersect($briefs[0]['evidence_refs'], $briefs[1]['evidence_refs']) !== []) {
+            throw new InvalidArgumentException('LOCALE_EVIDENCE_NOT_SPECIFIC');
+        }
+
+        return $briefs;
     }
 
     /** @param array<string,mixed> $evidence */

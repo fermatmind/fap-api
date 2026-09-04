@@ -12,7 +12,7 @@ use App\Services\SeoCouncil\Platform12\Tool\Platform12ToolManifest;
 
 final class Platform12ContractRegistry
 {
-    public const MISSION_CATALOG_VERSION = '1.6.0';
+    public const MISSION_CATALOG_VERSION = '1.6.1';
 
     public function __construct(
         private readonly SeoRegistryHasher $hasher,
@@ -419,7 +419,7 @@ final class Platform12ContractRegistry
             'type' => 'object',
             'additionalProperties' => false,
             'required' => [
-                'artifact_version', 'mission_id', 'evaluated_at', 'state', 'routing', 'cost',
+                'artifact_version', 'mission_id', 'evaluated_at', 'state', 'routing', 'cost', 'budget',
                 'human_time', 'locale_briefs', 'routine_time_excludes_projects_incidents_research_outreach',
                 'artifact_only', 'read_only', 'execution_allowed', 'artifact_hash',
             ],
@@ -427,9 +427,10 @@ final class Platform12ContractRegistry
                 'artifact_version' => ['const' => 'seo.platform12_weekly_efficiency.v1'],
                 'mission_id' => ['const' => 'seo.platform12.weekly_routing_cost_time_locale_brief'],
                 'evaluated_at' => ['type' => 'string', 'format' => 'date-time'],
-                'state' => ['enum' => ['READY', 'MEASUREMENT_HOLD']],
+                'state' => ['enum' => ['READY', 'BACKPRESSURE_HOLD', 'MEASUREMENT_HOLD']],
                 'routing' => ['type' => 'object'],
                 'cost' => ['type' => 'object'],
+                'budget' => ['type' => 'object'],
                 'human_time' => ['type' => 'object'],
                 'locale_briefs' => ['type' => 'array', 'minItems' => 2, 'maxItems' => 2, 'items' => ['type' => 'object']],
                 'routine_time_excludes_projects_incidents_research_outreach' => ['const' => true],
@@ -765,7 +766,8 @@ final class Platform12ContractRegistry
             'review_domain' => 'analytics',
             'required_evidence' => [
                 'routing_evaluation', 'required_mode_evaluation', 'all_team_invocation',
-                'human_route_correction', 'model_tool_cost', 'human_time_categories', 'locale_brief',
+                'human_route_correction', 'model_tool_cost', 'mission_budget',
+                'human_time_categories', 'locale_specific_brief_evidence',
             ],
             'eligible_capability' => 'seo.search_measurement_review',
             'priority' => 'normal',

@@ -21,9 +21,11 @@ final class SeoPlatform12C03WeeklyEfficiencyTest extends TestCase
         $this->assertSame(95, $artifact['routing']['required_mode_recall']['numerator']);
         $this->assertSame(4200, $artifact['cost']['model_cost_microusd']);
         $this->assertSame(['zh-CN', 'en'], array_column($artifact['locale_briefs'], 'locale'));
+        $this->assertNotSame($artifact['locale_briefs'][0]['evidence_refs'], $artifact['locale_briefs'][1]['evidence_refs']);
         $this->assertTrue($artifact['artifact_only']);
         $this->assertTrue($artifact['read_only']);
         $this->assertFalse($artifact['execution_allowed']);
+        $this->assertArrayNotHasKey('weekly_cards', $artifact);
         $this->assertSame(app(SeoRegistryHasher::class)->hashWithout($artifact, 'artifact_hash'), $artifact['artifact_hash']);
     }
 
@@ -55,6 +57,18 @@ final class SeoPlatform12C03WeeklyEfficiencyTest extends TestCase
         $this->assertSame(90, $artifact['human_time']['research_minutes']);
         $this->assertSame(30, $artifact['human_time']['outreach_minutes']);
         $this->assertTrue($artifact['routine_time_excludes_projects_incidents_research_outreach']);
+    }
+
+    public function test_over_budget_returns_backpressure_hold_without_generating_cards(): void
+    {
+        $evidence = $this->evidence();
+        $evidence['budget']['used_microusd'] = 10001;
+
+        $artifact = app(Platform12WeeklyEfficiencyEvaluator::class)->evaluate($evidence);
+
+        $this->assertSame('BACKPRESSURE_HOLD', $artifact['state']);
+        $this->assertTrue($artifact['budget']['backpressure']);
+        $this->assertArrayNotHasKey('weekly_cards', $artifact);
     }
 
     public function test_invalid_ratio_or_private_fields_fail_closed_without_leaking(): void
@@ -105,6 +119,7 @@ final class SeoPlatform12C03WeeklyEfficiencyTest extends TestCase
                 'human_route_correction_rate' => ['numerator' => 3, 'denominator' => 100],
             ],
             'cost' => ['model_cost_microusd' => 4200, 'tool_cost_microusd' => 800],
+            'budget' => ['limit_microusd' => 10000, 'used_microusd' => 5000],
             'human_time' => [
                 'routine_maintenance_minutes' => 40,
                 'growth_project_minutes' => 120,
@@ -113,8 +128,8 @@ final class SeoPlatform12C03WeeklyEfficiencyTest extends TestCase
                 'outreach_minutes' => 30,
             ],
             'locale_briefs' => [
-                ['locale' => 'zh-CN', 'measurement_state' => 'OBSERVED', 'brief_code' => 'zh_cn.routing_stable', 'unknowns' => []],
-                ['locale' => 'en', 'measurement_state' => 'NOT_MEASURED', 'brief_code' => null, 'unknowns' => ['sample_zero']],
+                ['locale' => 'zh-CN', 'measurement_state' => 'OBSERVED', 'brief_code' => 'zh_cn.routing_stable', 'evidence_refs' => [str_repeat('a', 64)], 'unknowns' => []],
+                ['locale' => 'en', 'measurement_state' => 'NOT_MEASURED', 'brief_code' => null, 'evidence_refs' => [], 'unknowns' => ['sample_zero']],
             ],
         ];
     }
