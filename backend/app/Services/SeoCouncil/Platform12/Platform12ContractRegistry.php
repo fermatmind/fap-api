@@ -6,6 +6,7 @@ namespace App\Services\SeoCouncil\Platform12;
 
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use App\Services\SeoCouncil\Platform11\Platform11ContractRegistry;
+use App\Services\SeoCouncil\Platform12\Measurement\Platform12MetricContract;
 use App\Services\SeoCouncil\Platform12\Model\Platform12BoundedModelContract;
 use App\Services\SeoCouncil\Platform12\Notification\Platform12NotificationPolicyContract;
 use App\Services\SeoCouncil\Platform12\Tool\Platform12ToolManifest;
@@ -20,6 +21,7 @@ final class Platform12ContractRegistry
         private readonly Platform12BoundedModelContract $boundedModel,
         private readonly Platform12ToolManifest $tools,
         private readonly Platform12NotificationPolicyContract $notifications,
+        private readonly Platform12MetricContract $metrics,
     ) {}
 
     /** @return array<string, mixed> */
@@ -1080,7 +1082,9 @@ final class Platform12ContractRegistry
             'resources/seo-agent/council/platform12/schemas/seo.platform12_monthly_family_output.v1.schema.json' => $this->monthlyFamilyOutputSchema(),
             'resources/seo-agent/council/platform12/schemas/seo.platform12_monthly_lifecycle_candidates_output.v1.schema.json' => $this->monthlyLifecycleCandidatesOutputSchema(),
             'resources/seo-agent/council/platform12/schemas/seo.platform12_monthly_eval_capability_lifecycle_output.v1.schema.json' => $this->monthlyEvalCapabilityLifecycleOutputSchema(),
+            'resources/seo-agent/council/platform12/schemas/seo.platform12_metric_contract.v1.schema.json' => $this->metrics->schema(),
             'resources/seo-agent/council/platform12/catalogs/seo.platform12_mission_catalog.v1.json' => $this->missionCatalog(),
+            'resources/seo-agent/council/platform12/measurement/seo.platform12_metric_contract.v1.json' => $this->metrics->contract(),
             ...$this->boundedModel->artifacts(),
             ...$this->tools->artifacts(),
             ...$this->notifications->artifacts(),

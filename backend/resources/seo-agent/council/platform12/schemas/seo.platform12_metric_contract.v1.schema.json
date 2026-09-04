@@ -1,0 +1,164 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.platform12_metric_contract.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "schema_version",
+        "contract_id",
+        "contract_version",
+        "contract_state",
+        "evaluation_window",
+        "frozen_strata",
+        "terminal_states",
+        "decision_rules",
+        "metrics",
+        "runtime_controls",
+        "contract_hash"
+    ],
+    "properties": {
+        "schema_version": {
+            "const": "seo.platform12_metric_contract.v1"
+        },
+        "contract_id": {
+            "const": "fermatmind.seo.platform12_metric_contract"
+        },
+        "contract_version": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "contract_state": {
+            "const": "FROZEN_PRE_DAY1"
+        },
+        "evaluation_window": {
+            "type": "object"
+        },
+        "frozen_strata": {
+            "type": "object"
+        },
+        "terminal_states": {
+            "type": "array",
+            "minItems": 7,
+            "uniqueItems": true
+        },
+        "decision_rules": {
+            "type": "object"
+        },
+        "metrics": {
+            "type": "array",
+            "minItems": 19,
+            "maxItems": 19,
+            "items": {
+                "$ref": "#/$defs/metric"
+            }
+        },
+        "runtime_controls": {
+            "type": "object"
+        },
+        "contract_hash": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+        }
+    },
+    "$defs": {
+        "metric": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "metric_id",
+                "numerator",
+                "denominator",
+                "data_sources",
+                "sample_method",
+                "minimum_sample",
+                "strata",
+                "confidence_interval_95",
+                "threshold",
+                "allowed_terminal_states",
+                "hold_rules",
+                "fail_rules",
+                "inconclusive_rules",
+                "restart_rules"
+            ],
+            "properties": {
+                "metric_id": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9_]+$"
+                },
+                "numerator": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "denominator": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "data_sources": {
+                    "type": "array",
+                    "minItems": 1,
+                    "uniqueItems": true
+                },
+                "sample_method": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "minimum_sample": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "strata": {
+                    "type": "array",
+                    "uniqueItems": true
+                },
+                "confidence_interval_95": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "required",
+                        "method",
+                        "confidence_level"
+                    ],
+                    "properties": {
+                        "required": {
+                            "type": "boolean"
+                        },
+                        "method": {
+                            "type": "string",
+                            "minLength": 1
+                        },
+                        "confidence_level": {
+                            "const": 0.95
+                        }
+                    }
+                },
+                "threshold": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "allowed_terminal_states": {
+                    "type": "array",
+                    "minItems": 4,
+                    "uniqueItems": true
+                },
+                "hold_rules": {
+                    "type": "array",
+                    "minItems": 1
+                },
+                "fail_rules": {
+                    "type": "array",
+                    "minItems": 1
+                },
+                "inconclusive_rules": {
+                    "type": "array",
+                    "minItems": 1
+                },
+                "restart_rules": {
+                    "type": "array",
+                    "minItems": 1
+                }
+            }
+        }
+    },
+    "schema_hash": "44d52e778cc782737000309c80a1e94f39743413c6411a83a807c649339237a5"
+}

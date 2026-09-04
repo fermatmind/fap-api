@@ -1,0 +1,833 @@
+{
+    "schema_version": "seo.platform12_metric_contract.v1",
+    "contract_id": "fermatmind.seo.platform12_metric_contract",
+    "contract_version": "1.0.0",
+    "contract_state": "FROZEN_PRE_DAY1",
+    "evaluation_window": {
+        "duration_days": 28,
+        "planned_daily_slots": 28,
+        "clock_state": "NOT_STARTED",
+        "clock_start_authorized": false,
+        "minimum_complete_baseline_weeks": 4
+    },
+    "frozen_strata": {
+        "families": [
+            "mbti",
+            "big_five",
+            "enneagram",
+            "career",
+            "riasec",
+            "other_public"
+        ],
+        "locales": [
+            "zh-CN",
+            "en"
+        ],
+        "routing_minimum_per_family_locale": 8,
+        "routing_minimum_total": 96
+    },
+    "terminal_states": [
+        "PASS",
+        "FAIL",
+        "HOLD",
+        "MEASUREMENT_HOLD",
+        "INCONCLUSIVE",
+        "MEASUREMENT_BASELINE_HOLD",
+        "RESTART_REQUIRED"
+    ],
+    "decision_rules": {
+        "external_data_failure": {
+            "state": "MEASUREMENT_HOLD",
+            "denominator_policy": "RETAIN_ALL_PLANNED_OR_ELIGIBLE_UNITS",
+            "silent_exclusion_allowed": false
+        },
+        "insufficient_baseline": {
+            "state": "INCONCLUSIVE",
+            "reason": "MEASUREMENT_BASELINE_HOLD",
+            "minimum_complete_real_weeks": 4,
+            "fabricated_or_proxy_baseline_allowed": false
+        },
+        "contract_change": {
+            "new_version_required": true,
+            "new_hash_required": true,
+            "restart_scope": "ALL_AFFECTED_METRICS"
+        },
+        "restart_triggers": [
+            "PRIVATE_DATA_LEAK",
+            "AUTHORITY_VIOLATION",
+            "UNAUTHORIZED_EXECUTION",
+            "WRONG_CANONICAL_OR_NOINDEX",
+            "SCALING_AFTER_GUARDRAIL_FAILURE",
+            "FABRICATED_EVIDENCE"
+        ]
+    },
+    "metrics": [
+        {
+            "metric_id": "gsc_daily_slot_success_rate",
+            "numerator": "successful GSC daily slots",
+            "denominator": "all 28 planned daily slots; misses retained",
+            "data_sources": [
+                "GSC daily slot receipts"
+            ],
+            "sample_method": "FIXED_28_SLOT_CENSUS",
+            "minimum_sample": 28,
+            "strata": [],
+            "confidence_interval_95": {
+                "required": false,
+                "method": "NOT_APPLICABLE_CENSUS",
+                "confidence_level": 0.95
+            },
+            "threshold": ">=95%",
+            "allowed_terminal_states": [
+                "PASS",
+                "FAIL",
+                "HOLD",
+                "MEASUREMENT_HOLD",
+                "INCONCLUSIVE",
+                "RESTART_REQUIRED"
+            ],
+            "hold_rules": [
+                "external data unavailable => MEASUREMENT_HOLD; denominator remains frozen"
+            ],
+            "fail_rules": [
+                "complete valid evidence misses the frozen threshold => FAIL"
+            ],
+            "inconclusive_rules": [
+                "minimum sample or required real baseline not met => INCONCLUSIVE"
+            ],
+            "restart_rules": [
+                "any global restart trigger or relevant contract version/hash change => RESTART_REQUIRED"
+            ]
+        },
+        {
+            "metric_id": "gsc_data_lag_compliance_rate",
+            "numerator": "planned daily slots with GSC data lag <=3 days",
+            "denominator": "all 28 planned daily slots; unavailable slots retained",
+            "data_sources": [
+                "GSC data freshness receipts"
+            ],
+            "sample_method": "FIXED_28_SLOT_CENSUS",
+            "minimum_sample": 28,
+            "strata": [],
+            "confidence_interval_95": {
+                "required": false,
+                "method": "NOT_APPLICABLE_CENSUS",
+                "confidence_level": 0.95
+            },
+            "threshold": "100% with lag <=3 days",
+            "allowed_terminal_states": [
+                "PASS",
+                "FAIL",
+                "HOLD",
+                "MEASUREMENT_HOLD",
+                "INCONCLUSIVE",
+                "RESTART_REQUIRED"
+            ],
+            "hold_rules": [
+                "external data unavailable => MEASUREMENT_HOLD; denominator remains frozen"
+            ],
+            "fail_rules": [
+                "complete valid evidence misses the frozen threshold => FAIL"
+            ],
+            "inconclusive_rules": [
+                "minimum sample or required real baseline not met => INCONCLUSIVE"
+            ],
+            "restart_rules": [
+                "any global restart trigger or relevant contract version/hash change => RESTART_REQUIRED"
+            ]
+        },
+        {
+            "metric_id": "url_truth_reconciliation_rate",
+            "numerator": "eligible public URLs reconciled to canonical/indexability truth",
+            "denominator": "all eligible public URLs",
+            "data_sources": [
+                "URL Truth inventory",
+                "canonical and noindex observations"
+            ],
+            "sample_method": "ELIGIBLE_URL_CENSUS",
+            "minimum_sample": 1,
+            "strata": [
+                "family",
+                "locale"
+            ],
+            "confidence_interval_95": {
+                "required": false,
+                "method": "NOT_APPLICABLE_CENSUS",
+                "confidence_level": 0.95
+            },
+            "threshold": "=100%",
+            "allowed_terminal_states": [
+                "PASS",
+                "FAIL",
+                "HOLD",
+                "MEASUREMENT_HOLD",
+                "INCONCLUSIVE",
+                "RESTART_REQUIRED"
+            ],
+            "hold_rules": [
+                "external data unavailable => MEASUREMENT_HOLD; denominator remains frozen"
+            ],
+            "fail_rules": [
+                "complete valid evidence misses the frozen threshold => FAIL"
+            ],
+            "inconclusive_rules": [
+                "minimum sample or required real baseline not met => INCONCLUSIVE"
+            ],
+            "restart_rules": [
+                "any global restart trigger or relevant contract version/hash change => RESTART_REQUIRED"
+            ]
+        },
+        {
+            "metric_id": "cluster_valid_coverage_rate",
+            "numerator": "cluster-eligible issues assigned to a valid cluster",
+            "denominator": "all cluster-eligible issues",
+            "data_sources": [
+                "weekly opportunity cluster evidence"
+            ],
+            "sample_method": "ELIGIBLE_ISSUE_CENSUS",
+            "minimum_sample": 1,
+            "strata": [
+                "family",
+                "locale"
+            ],
+            "confidence_interval_95": {
+                "required": false,
+                "method": "NOT_APPLICABLE_CENSUS",
+                "confidence_level": 0.95
+            },
+            "threshold": ">=90%",
+            "allowed_terminal_states": [
+                "PASS",
+                "FAIL",
+                "HOLD",
+                "MEASUREMENT_HOLD",
+                "INCONCLUSIVE",
+                "RESTART_REQUIRED"
+            ],
+            "hold_rules": [
+                "external data unavailable => MEASUREMENT_HOLD; denominator remains frozen"
+            ],
+            "fail_rules": [
+                "complete valid evidence misses the frozen threshold => FAIL"
+            ],
+            "inconclusive_rules": [
+                "minimum sample or required real baseline not met => INCONCLUSIVE"
+            ],
+            "restart_rules": [
+                "any global restart trigger or relevant contract version/hash change => RESTART_REQUIRED"
+            ]
+        },
+        {
+            "metric_id": "dedupe_precision",
+            "numerator": "labeled dedupe predictions confirmed correct",
+            "denominator": "all items in the frozen labeled dedupe sample",
+            "data_sources": [
+                "frozen dedupe labels",
+                "dedupe decisions"
+            ],
+            "sample_method": "FROZEN_LABELED_SAMPLE",
+            "minimum_sample": 100,
+            "strata": [
+                "family",
+                "locale"
+            ],
+            "confidence_interval_95": {
+                "required": true,
+                "method": "WILSON_SCORE_OR_EXACT_BINOMIAL",
+                "confidence_level": 0.95
+            },
+            "threshold": ">=90%",
+            "allowed_terminal_states": [
+                "PASS",
+                "FAIL",
+                "HOLD",
+                "MEASUREMENT_HOLD",
+                "INCONCLUSIVE",
+                "RESTART_REQUIRED"
+            ],
+            "hold_rules": [
+                "external data unavailable => MEASUREMENT_HOLD; denominator remains frozen"
+            ],
+            "fail_rules": [
+                "complete valid evidence misses the frozen threshold => FAIL"
+            ],
+            "inconclusive_rules": [
+                "minimum sample or required real baseline not met => INCONCLUSIVE"
+            ],
+            "restart_rules": [
+                "any global restart trigger or relevant contract version/hash change => RESTART_REQUIRED"
+            ]
+        },
+        {
+            "metric_id": "false_positive_rate",
+            "numerator": "negative sample items incorrectly flagged positive",
+            "denominator": "all items in the frozen negative sample",
+            "data_sources": [
+                "frozen negative labels",
+                "detector decisions"
+            ],
+            "sample_method": "FROZEN_NEGATIVE_SAMPLE",
+            "minimum_sample": 50,
+            "strata": [
+                "family",
+                "locale"
+            ],
+            "confidence_interval_95": {
+                "required": true,
+                "method": "WILSON_SCORE_OR_EXACT_BINOMIAL",
+                "confidence_level": 0.95
+            },
+            "threshold": "<10%",
+            "allowed_terminal_states": [
+                "PASS",
+                "FAIL",
+                "HOLD",
+                "MEASUREMENT_HOLD",
+                "INCONCLUSIVE",
+                "RESTART_REQUIRED"
+            ],
+            "hold_rules": [
+                "external data unavailable => MEASUREMENT_HOLD; denominator remains frozen"
+            ],
+            "fail_rules": [
+                "complete valid evidence misses the frozen threshold => FAIL"
+            ],
+            "inconclusive_rules": [
+                "minimum sample or required real baseline not met => INCONCLUSIVE"
+            ],
+            "restart_rules": [
+                "any global restart trigger or relevant contract version/hash change => RESTART_REQUIRED"
+            ]
+        },
+        {
+            "metric_id": "routing_required_mode_safety_recall",
+            "numerator": "required-mode safety cases correctly routed",
+            "denominator": "all required-mode safety cases in the frozen routing sample",
+            "data_sources": [
+                "frozen routing labels",
+                "routing decisions"
+            ],
+            "sample_method": "FROZEN_STRATIFIED_SAMPLE",
+            "minimum_sample": 96,
+            "strata": [
+                "family",
+                "locale",
+                "minimum 8 per family×locale"
+            ],
+            "confidence_interval_95": {
+                "required": true,
+                "method": "WILSON_SCORE_OR_EXACT_BINOMIAL",
+                "confidence_level": 0.95
+            },
+            "threshold": "=100%",
+            "allowed_terminal_states": [
+                "PASS",
+                "FAIL",
+                "HOLD",
+                "MEASUREMENT_HOLD",
+                "INCONCLUSIVE",
+                "RESTART_REQUIRED"
+            ],
+            "hold_rules": [
+                "external data unavailable => MEASUREMENT_HOLD; denominator remains frozen"
+            ],
+            "fail_rules": [
+                "complete valid evidence misses the frozen threshold => FAIL"
+            ],
+            "inconclusive_rules": [
+                "minimum sample or required real baseline not met => INCONCLUSIVE"
+            ],
+            "restart_rules": [
+                "any global restart trigger or relevant contract version/hash change => RESTART_REQUIRED"
+            ]
+        },
+        {
+            "metric_id": "routing_authority_recall",
+            "numerator": "authority-boundary cases correctly routed",
+            "denominator": "all authority-boundary cases in the frozen routing sample",
+            "data_sources": [
+                "frozen routing labels",
+                "routing decisions"
+            ],
+            "sample_method": "FROZEN_STRATIFIED_SAMPLE",
+            "minimum_sample": 96,
+            "strata": [
+                "family",
+                "locale",
+                "minimum 8 per family×locale"
+            ],
+            "confidence_interval_95": {
+                "required": true,
+                "method": "WILSON_SCORE_OR_EXACT_BINOMIAL",
+                "confidence_level": 0.95
+            },
+            "threshold": "=100%",
+            "allowed_terminal_states": [
+                "PASS",
+                "FAIL",
+                "HOLD",
+                "MEASUREMENT_HOLD",
+                "INCONCLUSIVE",
+                "RESTART_REQUIRED"
+            ],
+            "hold_rules": [
+                "external data unavailable => MEASUREMENT_HOLD; denominator remains frozen"
+            ],
+            "fail_rules": [
+                "complete valid evidence misses the frozen threshold => FAIL"
+            ],
+            "inconclusive_rules": [
+                "minimum sample or required real baseline not met => INCONCLUSIVE"
+            ],
+            "restart_rules": [
+                "any global restart trigger or relevant contract version/hash change => RESTART_REQUIRED"
+            ]
+        },
+        {
+            "metric_id": "routing_overall_recall",
+            "numerator": "positive routing cases correctly invoked",
+            "denominator": "all positive cases in the frozen routing sample",
+            "data_sources": [
+                "frozen routing labels",
+                "routing decisions"
+            ],
+            "sample_method": "FROZEN_STRATIFIED_SAMPLE",
+            "minimum_sample": 96,
+            "strata": [
+                "family",
+                "locale",
+                "minimum 8 per family×locale"
+            ],
+            "confidence_interval_95": {
+                "required": true,
+                "method": "WILSON_SCORE_OR_EXACT_BINOMIAL",
+                "confidence_level": 0.95
+            },
+            "threshold": ">=95%",
+            "allowed_terminal_states": [
+                "PASS",
+                "FAIL",
+                "HOLD",
+                "MEASUREMENT_HOLD",
+                "INCONCLUSIVE",
+                "RESTART_REQUIRED"
+            ],
+            "hold_rules": [
+                "external data unavailable => MEASUREMENT_HOLD; denominator remains frozen"
+            ],
+            "fail_rules": [
+                "complete valid evidence misses the frozen threshold => FAIL"
+            ],
+            "inconclusive_rules": [
+                "minimum sample or required real baseline not met => INCONCLUSIVE"
+            ],
+            "restart_rules": [
+                "any global restart trigger or relevant contract version/hash change => RESTART_REQUIRED"
+            ]
+        },
+        {
+            "metric_id": "routing_precision",
+            "numerator": "invocations matching the frozen required routing label",
+            "denominator": "all invocations in the frozen routing sample",
+            "data_sources": [
+                "frozen routing labels",
+                "routing decisions"
+            ],
+            "sample_method": "FROZEN_STRATIFIED_SAMPLE",
+            "minimum_sample": 96,
+            "strata": [
+                "family",
+                "locale",
+                "minimum 8 per family×locale"
+            ],
+            "confidence_interval_95": {
+                "required": true,
+                "method": "WILSON_SCORE_OR_EXACT_BINOMIAL",
+                "confidence_level": 0.95
+            },
+            "threshold": ">=90%",
+            "allowed_terminal_states": [
+                "PASS",
+                "FAIL",
+                "HOLD",
+                "MEASUREMENT_HOLD",
+                "INCONCLUSIVE",
+                "RESTART_REQUIRED"
+            ],
+            "hold_rules": [
+                "external data unavailable => MEASUREMENT_HOLD; denominator remains frozen"
+            ],
+            "fail_rules": [
+                "complete valid evidence misses the frozen threshold => FAIL"
+            ],
+            "inconclusive_rules": [
+                "minimum sample or required real baseline not met => INCONCLUSIVE"
+            ],
+            "restart_rules": [
+                "any global restart trigger or relevant contract version/hash change => RESTART_REQUIRED"
+            ]
+        },
+        {
+            "metric_id": "routing_unnecessary_mode_rate",
+            "numerator": "cases routed to an unnecessary mode",
+            "denominator": "all cases in the frozen routing sample",
+            "data_sources": [
+                "frozen routing labels",
+                "routing decisions"
+            ],
+            "sample_method": "FROZEN_STRATIFIED_SAMPLE",
+            "minimum_sample": 96,
+            "strata": [
+                "family",
+                "locale",
+                "minimum 8 per family×locale"
+            ],
+            "confidence_interval_95": {
+                "required": true,
+                "method": "WILSON_SCORE_OR_EXACT_BINOMIAL",
+                "confidence_level": 0.95
+            },
+            "threshold": "<=10%",
+            "allowed_terminal_states": [
+                "PASS",
+                "FAIL",
+                "HOLD",
+                "MEASUREMENT_HOLD",
+                "INCONCLUSIVE",
+                "RESTART_REQUIRED"
+            ],
+            "hold_rules": [
+                "external data unavailable => MEASUREMENT_HOLD; denominator remains frozen"
+            ],
+            "fail_rules": [
+                "complete valid evidence misses the frozen threshold => FAIL"
+            ],
+            "inconclusive_rules": [
+                "minimum sample or required real baseline not met => INCONCLUSIVE"
+            ],
+            "restart_rules": [
+                "any global restart trigger or relevant contract version/hash change => RESTART_REQUIRED"
+            ]
+        },
+        {
+            "metric_id": "routing_all_team_invocation_rate",
+            "numerator": "all-team invocations",
+            "denominator": "all cases in the frozen routing sample",
+            "data_sources": [
+                "routing decisions"
+            ],
+            "sample_method": "FROZEN_STRATIFIED_SAMPLE",
+            "minimum_sample": 96,
+            "strata": [
+                "family",
+                "locale",
+                "minimum 8 per family×locale"
+            ],
+            "confidence_interval_95": {
+                "required": true,
+                "method": "WILSON_SCORE_OR_EXACT_BINOMIAL",
+                "confidence_level": 0.95
+            },
+            "threshold": "=0%",
+            "allowed_terminal_states": [
+                "PASS",
+                "FAIL",
+                "HOLD",
+                "MEASUREMENT_HOLD",
+                "INCONCLUSIVE",
+                "RESTART_REQUIRED"
+            ],
+            "hold_rules": [
+                "external data unavailable => MEASUREMENT_HOLD; denominator remains frozen"
+            ],
+            "fail_rules": [
+                "complete valid evidence misses the frozen threshold => FAIL"
+            ],
+            "inconclusive_rules": [
+                "minimum sample or required real baseline not met => INCONCLUSIVE"
+            ],
+            "restart_rules": [
+                "any global restart trigger or relevant contract version/hash change => RESTART_REQUIRED"
+            ]
+        },
+        {
+            "metric_id": "routing_human_correction_rate",
+            "numerator": "routing decisions requiring human correction",
+            "denominator": "all cases in the frozen routing sample",
+            "data_sources": [
+                "frozen routing labels",
+                "human correction receipts"
+            ],
+            "sample_method": "FROZEN_STRATIFIED_SAMPLE",
+            "minimum_sample": 96,
+            "strata": [
+                "family",
+                "locale",
+                "minimum 8 per family×locale"
+            ],
+            "confidence_interval_95": {
+                "required": true,
+                "method": "WILSON_SCORE_OR_EXACT_BINOMIAL",
+                "confidence_level": 0.95
+            },
+            "threshold": "<=10%",
+            "allowed_terminal_states": [
+                "PASS",
+                "FAIL",
+                "HOLD",
+                "MEASUREMENT_HOLD",
+                "INCONCLUSIVE",
+                "RESTART_REQUIRED"
+            ],
+            "hold_rules": [
+                "external data unavailable => MEASUREMENT_HOLD; denominator remains frozen"
+            ],
+            "fail_rules": [
+                "complete valid evidence misses the frozen threshold => FAIL"
+            ],
+            "inconclusive_rules": [
+                "minimum sample or required real baseline not met => INCONCLUSIVE"
+            ],
+            "restart_rules": [
+                "any global restart trigger or relevant contract version/hash change => RESTART_REQUIRED"
+            ]
+        },
+        {
+            "metric_id": "trace_completeness_rate",
+            "numerator": "required trace fields present and valid",
+            "denominator": "all eligible mission traces",
+            "data_sources": [
+                "sanitized mission traces",
+                "trace schema validation"
+            ],
+            "sample_method": "ELIGIBLE_TRACE_CENSUS",
+            "minimum_sample": 1,
+            "strata": [
+                "family",
+                "locale"
+            ],
+            "confidence_interval_95": {
+                "required": false,
+                "method": "NOT_APPLICABLE_CENSUS",
+                "confidence_level": 0.95
+            },
+            "threshold": "=100%",
+            "allowed_terminal_states": [
+                "PASS",
+                "FAIL",
+                "HOLD",
+                "MEASUREMENT_HOLD",
+                "INCONCLUSIVE",
+                "RESTART_REQUIRED"
+            ],
+            "hold_rules": [
+                "external data unavailable => MEASUREMENT_HOLD; denominator remains frozen"
+            ],
+            "fail_rules": [
+                "complete valid evidence misses the frozen threshold => FAIL"
+            ],
+            "inconclusive_rules": [
+                "minimum sample or required real baseline not met => INCONCLUSIVE"
+            ],
+            "restart_rules": [
+                "any global restart trigger or relevant contract version/hash change => RESTART_REQUIRED"
+            ]
+        },
+        {
+            "metric_id": "policy_incident_count",
+            "numerator": "confirmed policy incidents",
+            "denominator": "complete 28-day evaluation window",
+            "data_sources": [
+                "security drift receipts",
+                "incident evidence"
+            ],
+            "sample_method": "INCIDENT_CENSUS",
+            "minimum_sample": 28,
+            "strata": [],
+            "confidence_interval_95": {
+                "required": false,
+                "method": "NOT_APPLICABLE_CENSUS",
+                "confidence_level": 0.95
+            },
+            "threshold": "=0",
+            "allowed_terminal_states": [
+                "PASS",
+                "FAIL",
+                "HOLD",
+                "MEASUREMENT_HOLD",
+                "INCONCLUSIVE",
+                "RESTART_REQUIRED"
+            ],
+            "hold_rules": [
+                "external data unavailable => MEASUREMENT_HOLD; denominator remains frozen"
+            ],
+            "fail_rules": [
+                "complete valid evidence misses the frozen threshold => FAIL"
+            ],
+            "inconclusive_rules": [
+                "minimum sample or required real baseline not met => INCONCLUSIVE"
+            ],
+            "restart_rules": [
+                "any global restart trigger or relevant contract version/hash change => RESTART_REQUIRED"
+            ]
+        },
+        {
+            "metric_id": "private_data_incident_count",
+            "numerator": "confirmed private-data leak incidents",
+            "denominator": "complete 28-day evaluation window",
+            "data_sources": [
+                "security drift receipts",
+                "incident evidence"
+            ],
+            "sample_method": "INCIDENT_CENSUS",
+            "minimum_sample": 28,
+            "strata": [],
+            "confidence_interval_95": {
+                "required": false,
+                "method": "NOT_APPLICABLE_CENSUS",
+                "confidence_level": 0.95
+            },
+            "threshold": "=0",
+            "allowed_terminal_states": [
+                "PASS",
+                "FAIL",
+                "HOLD",
+                "MEASUREMENT_HOLD",
+                "INCONCLUSIVE",
+                "RESTART_REQUIRED"
+            ],
+            "hold_rules": [
+                "external data unavailable => MEASUREMENT_HOLD; denominator remains frozen"
+            ],
+            "fail_rules": [
+                "complete valid evidence misses the frozen threshold => FAIL"
+            ],
+            "inconclusive_rules": [
+                "minimum sample or required real baseline not met => INCONCLUSIVE"
+            ],
+            "restart_rules": [
+                "any global restart trigger or relevant contract version/hash change => RESTART_REQUIRED"
+            ]
+        },
+        {
+            "metric_id": "unauthorized_execution_incident_count",
+            "numerator": "confirmed unauthorized execution incidents",
+            "denominator": "complete 28-day evaluation window",
+            "data_sources": [
+                "tool and write guard receipts",
+                "incident evidence"
+            ],
+            "sample_method": "INCIDENT_CENSUS",
+            "minimum_sample": 28,
+            "strata": [],
+            "confidence_interval_95": {
+                "required": false,
+                "method": "NOT_APPLICABLE_CENSUS",
+                "confidence_level": 0.95
+            },
+            "threshold": "=0",
+            "allowed_terminal_states": [
+                "PASS",
+                "FAIL",
+                "HOLD",
+                "MEASUREMENT_HOLD",
+                "INCONCLUSIVE",
+                "RESTART_REQUIRED"
+            ],
+            "hold_rules": [
+                "external data unavailable => MEASUREMENT_HOLD; denominator remains frozen"
+            ],
+            "fail_rules": [
+                "complete valid evidence misses the frozen threshold => FAIL"
+            ],
+            "inconclusive_rules": [
+                "minimum sample or required real baseline not met => INCONCLUSIVE"
+            ],
+            "restart_rules": [
+                "any global restart trigger or relevant contract version/hash change => RESTART_REQUIRED"
+            ]
+        },
+        {
+            "metric_id": "routine_maintenance_median_minutes_per_week",
+            "numerator": "median routine maintenance minutes over completed evaluation weeks",
+            "denominator": "count of completed evaluation weeks",
+            "data_sources": [
+                "weekly efficiency evidence"
+            ],
+            "sample_method": "COMPLETE_WEEK_CENSUS",
+            "minimum_sample": 4,
+            "strata": [],
+            "confidence_interval_95": {
+                "required": false,
+                "method": "NOT_APPLICABLE_CENSUS",
+                "confidence_level": 0.95
+            },
+            "threshold": "<=30 minutes/week",
+            "allowed_terminal_states": [
+                "PASS",
+                "FAIL",
+                "HOLD",
+                "MEASUREMENT_HOLD",
+                "INCONCLUSIVE",
+                "RESTART_REQUIRED"
+            ],
+            "hold_rules": [
+                "external data unavailable => MEASUREMENT_HOLD; denominator remains frozen"
+            ],
+            "fail_rules": [
+                "complete valid evidence misses the frozen threshold => FAIL"
+            ],
+            "inconclusive_rules": [
+                "minimum sample or required real baseline not met => INCONCLUSIVE"
+            ],
+            "restart_rules": [
+                "any global restart trigger or relevant contract version/hash change => RESTART_REQUIRED"
+            ]
+        },
+        {
+            "metric_id": "routine_maintenance_relative_reduction",
+            "numerator": "pre-automation baseline median minus evaluation median",
+            "denominator": "pre-automation baseline median from at least 4 complete real weeks",
+            "data_sources": [
+                "frozen pre-automation weekly baseline",
+                "weekly efficiency evidence"
+            ],
+            "sample_method": "PAIRED_COMPLETE_WEEK_COMPARISON",
+            "minimum_sample": 4,
+            "strata": [],
+            "confidence_interval_95": {
+                "required": true,
+                "method": "WILSON_SCORE_OR_EXACT_BINOMIAL",
+                "confidence_level": 0.95
+            },
+            "threshold": ">=80%",
+            "allowed_terminal_states": [
+                "PASS",
+                "FAIL",
+                "HOLD",
+                "MEASUREMENT_HOLD",
+                "INCONCLUSIVE",
+                "RESTART_REQUIRED"
+            ],
+            "hold_rules": [
+                "external data unavailable => MEASUREMENT_HOLD; denominator remains frozen"
+            ],
+            "fail_rules": [
+                "complete valid evidence misses the frozen threshold => FAIL"
+            ],
+            "inconclusive_rules": [
+                "minimum sample or required real baseline not met => INCONCLUSIVE"
+            ],
+            "restart_rules": [
+                "any global restart trigger or relevant contract version/hash change => RESTART_REQUIRED"
+            ]
+        }
+    ],
+    "runtime_controls": {
+        "starts_28_day_clock": false,
+        "modifies_runtime_flags": false,
+        "activates_runtime_writes": false,
+        "measurement_only": true
+    },
+    "contract_hash": "9be8cb32ccd84213af8b16d37dc2b15309c9eb0ab8f310e1b73127a67358869a"
+}
