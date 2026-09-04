@@ -1,0 +1,74 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_id": "seo.platform12_weekly_efficiency_output.v1",
+    "schema_version": "1.0.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "artifact_version",
+        "mission_id",
+        "evaluated_at",
+        "state",
+        "routing",
+        "cost",
+        "human_time",
+        "locale_briefs",
+        "routine_time_excludes_projects_incidents_research_outreach",
+        "artifact_only",
+        "read_only",
+        "execution_allowed",
+        "artifact_hash"
+    ],
+    "properties": {
+        "artifact_version": {
+            "const": "seo.platform12_weekly_efficiency.v1"
+        },
+        "mission_id": {
+            "const": "seo.platform12.weekly_routing_cost_time_locale_brief"
+        },
+        "evaluated_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "state": {
+            "enum": [
+                "READY",
+                "MEASUREMENT_HOLD"
+            ]
+        },
+        "routing": {
+            "type": "object"
+        },
+        "cost": {
+            "type": "object"
+        },
+        "human_time": {
+            "type": "object"
+        },
+        "locale_briefs": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+                "type": "object"
+            }
+        },
+        "routine_time_excludes_projects_incidents_research_outreach": {
+            "const": true
+        },
+        "artifact_only": {
+            "const": true
+        },
+        "read_only": {
+            "const": true
+        },
+        "execution_allowed": {
+            "const": false
+        },
+        "artifact_hash": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+        }
+    },
+    "schema_hash": "95b984e50b7f7e9a9ca667cb9ae4e90ae71ef43fcd85c47d98ddbf95ce2843ee"
+}

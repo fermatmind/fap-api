@@ -12,7 +12,7 @@ use App\Services\SeoCouncil\Platform12\Tool\Platform12ToolManifest;
 
 final class Platform12ContractRegistry
 {
-    public const MISSION_CATALOG_VERSION = '1.5.0';
+    public const MISSION_CATALOG_VERSION = '1.6.0';
 
     public function __construct(
         private readonly SeoRegistryHasher $hasher,
@@ -409,6 +409,41 @@ final class Platform12ContractRegistry
         return $schema;
     }
 
+    /** @return array<string, mixed> */
+    public function weeklyEfficiencyOutputSchema(): array
+    {
+        $schema = [
+            '$schema' => 'https://json-schema.org/draft/2020-12/schema',
+            'schema_id' => 'seo.platform12_weekly_efficiency_output.v1',
+            'schema_version' => '1.0.0',
+            'type' => 'object',
+            'additionalProperties' => false,
+            'required' => [
+                'artifact_version', 'mission_id', 'evaluated_at', 'state', 'routing', 'cost',
+                'human_time', 'locale_briefs', 'routine_time_excludes_projects_incidents_research_outreach',
+                'artifact_only', 'read_only', 'execution_allowed', 'artifact_hash',
+            ],
+            'properties' => [
+                'artifact_version' => ['const' => 'seo.platform12_weekly_efficiency.v1'],
+                'mission_id' => ['const' => 'seo.platform12.weekly_routing_cost_time_locale_brief'],
+                'evaluated_at' => ['type' => 'string', 'format' => 'date-time'],
+                'state' => ['enum' => ['READY', 'MEASUREMENT_HOLD']],
+                'routing' => ['type' => 'object'],
+                'cost' => ['type' => 'object'],
+                'human_time' => ['type' => 'object'],
+                'locale_briefs' => ['type' => 'array', 'minItems' => 2, 'maxItems' => 2, 'items' => ['type' => 'object']],
+                'routine_time_excludes_projects_incidents_research_outreach' => ['const' => true],
+                'artifact_only' => ['const' => true],
+                'read_only' => ['const' => true],
+                'execution_allowed' => ['const' => false],
+                'artifact_hash' => ['type' => 'string', 'pattern' => '^[a-f0-9]{64}$'],
+            ],
+        ];
+        $schema['schema_hash'] = $this->hasher->hash($schema);
+
+        return $schema;
+    }
+
     /** @return array<string, array{id:string,version:string,hash:string}> */
     public function missionCatalogDependencyRefs(): array
     {
@@ -455,6 +490,12 @@ final class Platform12ContractRegistry
             'version' => $weeklyMeasurementSchema['schema_version'],
             'hash' => $weeklyMeasurementSchema['schema_hash'],
         ];
+        $weeklyEfficiencySchema = $this->weeklyEfficiencyOutputSchema();
+        $schemaRefs['platform12_weekly_efficiency_output_schema'] = [
+            'id' => $weeklyEfficiencySchema['schema_id'],
+            'version' => $weeklyEfficiencySchema['schema_version'],
+            'hash' => $weeklyEfficiencySchema['schema_hash'],
+        ];
 
         return [
             'role_registry' => $manifest['registry_ref'],
@@ -486,6 +527,7 @@ final class Platform12ContractRegistry
                 $this->weeklyOpportunityMission('zh-CN', 'weekly:MON:03:00'),
                 $this->weeklyOpportunityMission('en', 'weekly:MON:03:10'),
                 $this->weeklyMeasurementMission(),
+                $this->weeklyEfficiencyMission(),
             ],
             'runtime_activation_allowed' => false,
         ];
@@ -708,6 +750,48 @@ final class Platform12ContractRegistry
         ];
     }
 
+    /** @return array<string, mixed> */
+    private function weeklyEfficiencyMission(): array
+    {
+        $output = $this->weeklyEfficiencyOutputSchema();
+
+        return [
+            'mission_id' => 'seo.platform12.weekly_routing_cost_time_locale_brief',
+            'cadence' => 'weekly',
+            'timezone' => 'Asia/Shanghai',
+            'natural_slot' => 'weekly:MON:03:30',
+            'family' => 'other_public',
+            'locale' => 'zh-CN',
+            'review_domain' => 'analytics',
+            'required_evidence' => [
+                'routing_evaluation', 'required_mode_evaluation', 'all_team_invocation',
+                'human_route_correction', 'model_tool_cost', 'human_time_categories', 'locale_brief',
+            ],
+            'eligible_capability' => 'seo.search_measurement_review',
+            'priority' => 'normal',
+            'timeout_seconds' => 180,
+            'max_attempts' => 1,
+            'budgets' => [
+                'model_calls' => 0,
+                'model_input_tokens' => 0,
+                'model_output_tokens' => 0,
+                'tool_calls' => 0,
+                'cost_microusd' => 0,
+            ],
+            'failure_policy' => [
+                'terminal_state' => 'HOLD',
+                'retry_strategy' => 'none',
+                'initial_backoff_seconds' => 0,
+                'max_backoff_seconds' => 0,
+            ],
+            'output_schema' => [
+                'id' => $output['schema_id'],
+                'version' => $output['schema_version'],
+                'hash' => $output['schema_hash'],
+            ],
+        ];
+    }
+
     public function verifyGenerated(): bool
     {
         try {
@@ -736,6 +820,7 @@ final class Platform12ContractRegistry
             'resources/seo-agent/council/platform12/schemas/seo.platform12_daily_security_drift_output.v1.schema.json' => $this->dailySecurityDriftOutputSchema(),
             'resources/seo-agent/council/platform12/schemas/seo.platform12_weekly_opportunity_output.v1.schema.json' => $this->weeklyOpportunityOutputSchema(),
             'resources/seo-agent/council/platform12/schemas/seo.platform12_weekly_measurement_output.v1.schema.json' => $this->weeklyMeasurementOutputSchema(),
+            'resources/seo-agent/council/platform12/schemas/seo.platform12_weekly_efficiency_output.v1.schema.json' => $this->weeklyEfficiencyOutputSchema(),
             'resources/seo-agent/council/platform12/catalogs/seo.platform12_mission_catalog.v1.json' => $this->missionCatalog(),
             ...$this->boundedModel->artifacts(),
             ...$this->tools->artifacts(),

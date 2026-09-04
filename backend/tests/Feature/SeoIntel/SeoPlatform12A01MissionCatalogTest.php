@@ -30,6 +30,7 @@ final class SeoPlatform12A01MissionCatalogTest extends TestCase
             'seo.platform12.weekly_opportunity_zh_cn',
             'seo.platform12.weekly_opportunity_en',
             'seo.platform12.weekly_checkpoints_gai_funnel_cro',
+            'seo.platform12.weekly_routing_cost_time_locale_brief',
         ], array_column($catalog['missions'], 'mission_id'));
         $this->assertFalse($catalog['runtime_activation_allowed']);
         $this->assertSame(

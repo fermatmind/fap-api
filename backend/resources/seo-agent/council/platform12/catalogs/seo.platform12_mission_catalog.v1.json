@@ -1,7 +1,7 @@
 {
     "schema_version": "seo.platform12_mission_catalog.v1",
     "catalog_id": "fermatmind.seo.platform12_mission_catalog",
-    "catalog_version": "1.5.0",
+    "catalog_version": "1.6.0",
     "catalog_state": "FOUNDATION_ONLY",
     "dependency_refs": {
         "role_registry": {
@@ -31,8 +31,8 @@
         },
         "schema_vector": {
             "id": "seo.platform12_mission_catalog_schema_vector",
-            "version": "1.5.0",
-            "hash": "80d20f824d242a78f87c6a95726a7cafe596c0e9e46c661e78f46609faf2e1c6"
+            "version": "1.6.0",
+            "hash": "0c775df4cdb2247eef0b22e3572b189da34bc63984e4438493deec6e9d361b11"
         }
     },
     "missions": [
@@ -276,8 +276,48 @@
                 "version": "1.0.0",
                 "hash": "9e2a32391e7c759f9fe66482063a94e7e71de72f618c1e01f66bd7cb241a4c5f"
             }
+        },
+        {
+            "mission_id": "seo.platform12.weekly_routing_cost_time_locale_brief",
+            "cadence": "weekly",
+            "timezone": "Asia/Shanghai",
+            "natural_slot": "weekly:MON:03:30",
+            "family": "other_public",
+            "locale": "zh-CN",
+            "review_domain": "analytics",
+            "required_evidence": [
+                "routing_evaluation",
+                "required_mode_evaluation",
+                "all_team_invocation",
+                "human_route_correction",
+                "model_tool_cost",
+                "human_time_categories",
+                "locale_brief"
+            ],
+            "eligible_capability": "seo.search_measurement_review",
+            "priority": "normal",
+            "timeout_seconds": 180,
+            "max_attempts": 1,
+            "budgets": {
+                "model_calls": 0,
+                "model_input_tokens": 0,
+                "model_output_tokens": 0,
+                "tool_calls": 0,
+                "cost_microusd": 0
+            },
+            "failure_policy": {
+                "terminal_state": "HOLD",
+                "retry_strategy": "none",
+                "initial_backoff_seconds": 0,
+                "max_backoff_seconds": 0
+            },
+            "output_schema": {
+                "id": "seo.platform12_weekly_efficiency_output.v1",
+                "version": "1.0.0",
+                "hash": "95b984e50b7f7e9a9ca667cb9ae4e90ae71ef43fcd85c47d98ddbf95ce2843ee"
+            }
         }
     ],
     "runtime_activation_allowed": false,
-    "catalog_hash": "f5b7b6309e251f1231fe61dc99680a31c5e6a483bdb48d5dc95706fe4536dccd"
+    "catalog_hash": "d20297418191ea33d5a05b161e9628e127aa9b8d3af385f348f82d9494bad3b2"
 }
