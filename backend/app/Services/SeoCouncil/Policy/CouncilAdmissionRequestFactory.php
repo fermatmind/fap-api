@@ -62,7 +62,7 @@ final class CouncilAdmissionRequestFactory
             'family' => $request->payload['family'],
             'locale' => $request->payload['locale'],
             'claim_risk' => 'R1',
-            'autonomy' => 'L0',
+            'autonomy' => $request->payload['autonomy'],
             'budget' => ['model_calls' => 0, 'tool_calls' => 0, 'execution_seconds' => 0, 'cost_amount' => 0, 'currency' => 'USD'],
             'deadline_seconds' => 0,
             'tool_scope' => [],

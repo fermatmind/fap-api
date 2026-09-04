@@ -347,6 +347,13 @@ final class SeoCouncilOrchestrator
                 'active_manifests' => 0,
                 'trusted_signing_keys' => 0,
             ],
+            'output_boundary' => [
+                'autonomy' => $request->payload['autonomy'],
+                'kind' => $request->payload['autonomy'] === 'L1' ? 'structured_candidate' : 'structured_diagnosis',
+                'artifact_only' => true,
+                'execution_allowed' => false,
+                'write_allowed' => false,
+            ],
             'human_decision_required' => $status === 'unresolved_conflict'
                 || ($status === 'POLICY_HOLD'
                     && (($context['admission']['human_decision_required'] ?? null)

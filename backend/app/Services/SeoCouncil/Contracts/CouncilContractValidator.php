@@ -55,7 +55,7 @@ final class CouncilContractValidator
         if ($requestedRole !== null && (! is_string($requestedRole) || preg_match('/^[a-z0-9][a-z0-9._:-]{0,127}$/D', $requestedRole) !== 1)) {
             throw new InvalidArgumentException('REQUESTED_ROLE_HINT_INVALID');
         }
-        if ($input['autonomy'] !== 'L0' || $input['tool_scope'] !== [] || $input['egress_scope'] !== []) {
+        if (! in_array($input['autonomy'], ['L0', 'L1'], true) || $input['tool_scope'] !== [] || $input['egress_scope'] !== []) {
             throw new InvalidArgumentException('MISSION_SCOPE_EXPANSION_DENIED');
         }
         $this->zeroBudget($input['budget']);
