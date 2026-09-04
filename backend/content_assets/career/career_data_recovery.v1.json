@@ -69,7 +69,46 @@
     "source": "latest_completed_non_dry_run_failure_free_public_authority_import",
     "compiler_version": "career_scoring_engine.v1.2",
     "canonical_type_count": 16,
-    "minimum_authoritative_matches_per_type": 1
+    "minimum_authoritative_matches_per_type": 1,
+    "authority_recovery": {
+      "operation_version": "career_recommendation_authority_recovery.v1",
+      "source_content_version": "docx_342_career_batch",
+      "source_baseline_path": "content_baselines/career_jobs/career_jobs.zh-CN.json",
+      "source_baseline_sha256": "89be50935eb2c1433c41fbbb3d6aca0d2687ece864208cb24e859f37a875c658",
+      "target_count": 6,
+      "targets": [
+        {
+          "canonical_slug": "accountants-and-auditors",
+          "occupation_uuid": "383cccee-0364-4866-9dc1-f7cd1cfcdf51",
+          "family_uuid": "37ec69bd-655e-4ab4-b8ea-349632e87159"
+        },
+        {
+          "canonical_slug": "data-scientists",
+          "occupation_uuid": "fdffb946-2c8f-4f3d-91c4-d351bf6bf6b2",
+          "family_uuid": "f639c622-1a90-4b6d-a67c-081f6de2f48f"
+        },
+        {
+          "canonical_slug": "human-resources-specialists",
+          "occupation_uuid": "615bdd41-1b3d-40c0-94cc-ab6ee08dbbe7",
+          "family_uuid": "37ec69bd-655e-4ab4-b8ea-349632e87159"
+        },
+        {
+          "canonical_slug": "management-analysts",
+          "occupation_uuid": "bf7beb7c-9881-456e-a65e-447c9477e9cc",
+          "family_uuid": "a0352070-41e8-4cc9-b54d-06d6401d097c"
+        },
+        {
+          "canonical_slug": "project-management-specialists",
+          "occupation_uuid": "36060017-d3cb-42f7-bdc6-ead26c925cf5",
+          "family_uuid": "37ec69bd-655e-4ab4-b8ea-349632e87159"
+        },
+        {
+          "canonical_slug": "registered-nurses",
+          "occupation_uuid": "be1bd5aa-353b-4760-a11d-0d44b1fe1810",
+          "family_uuid": "3d7712d5-9ab5-4eda-88b0-e295149a7a9d"
+        }
+      ]
+    }
   },
   "negative_guarantees": {
     "public_api_schema_changed": false,

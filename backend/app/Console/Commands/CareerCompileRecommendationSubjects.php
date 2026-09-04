@@ -15,6 +15,7 @@ use App\Models\RecommendationSnapshot;
 use App\Models\TrustManifest;
 use App\Services\Career\CareerRecommendationCompiler;
 use App\Services\Career\Import\CareerAuthorityMaterializer;
+use App\Services\Career\Recovery\CareerRecommendationAuthorityRecovery;
 use App\Services\ContentPromotion\PromotionContextFactory;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -46,12 +47,14 @@ final class CareerCompileRecommendationSubjects extends Command
 
     protected $description = 'Atomically publish complete MBTI recommendation subject snapshots from career authority.';
 
-    public function handle(CareerAuthorityMaterializer $materializer): int
-    {
+    public function handle(
+        CareerAuthorityMaterializer $materializer,
+        CareerRecommendationAuthorityRecovery $authorityRecovery,
+    ): int {
         try {
             $types = $this->typeSubjects();
             $this->assertCanonicalPublicTypeSet($types);
-            [$importRun, $occupationIds] = $this->selectImportRun();
+            [$importRun, $occupationIds] = $this->selectImportRun($authorityRecovery);
             $publicationKey = $this->publicationKey($importRun, $types, $occupationIds);
             $priorRun = $this->priorPublicationRun($importRun, $publicationKey);
 
@@ -138,7 +141,7 @@ final class CareerCompileRecommendationSubjects extends Command
     }
 
     /** @return array{0:CareerImportRun,1:list<string>} */
-    private function selectImportRun(): array
+    private function selectImportRun(CareerRecommendationAuthorityRecovery $authorityRecovery): array
     {
         $requested = trim((string) $this->option('import-run'));
         $runs = $requested !== ''
@@ -156,6 +159,14 @@ final class CareerCompileRecommendationSubjects extends Command
             if (! $run instanceof CareerImportRun || $run->dry_run || $run->status !== RunStatus::COMPLETED || $run->rows_failed !== 0) {
                 continue;
             }
+            $occupationIds = $this->eligibleOccupationIds($run);
+            if ($occupationIds !== []) {
+                return [$run, $occupationIds];
+            }
+        }
+
+        if ($requested === '') {
+            $run = $authorityRecovery->ensure();
             $occupationIds = $this->eligibleOccupationIds($run);
             if ($occupationIds !== []) {
                 return [$run, $occupationIds];

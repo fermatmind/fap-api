@@ -7,6 +7,9 @@ namespace Tests\Feature\Career;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
 use App\Models\IndexState;
+use App\Models\Occupation;
+use App\Models\OccupationCrosswalk;
+use App\Models\OccupationFamily;
 use App\Models\RecommendationSnapshot;
 use App\Models\TrustManifest;
 use App\Services\Career\Bundles\CareerRecommendationDetailBundleBuilder;
@@ -113,5 +116,102 @@ final class CareerRecommendationSubjectCompileCommandTest extends TestCase
             '--types' => 'INTJ-A',
         ])->assertExitCode(1);
         $this->assertDatabaseCount('career_compile_runs', 0);
+    }
+
+    #[Test]
+    public function it_recovers_a_formal_import_run_from_the_bound_published_cms_baseline(): void
+    {
+        $this->seedRecommendationRecoveryAuthority();
+
+        $this->artisan('career:compile-recommendation-subjects')
+            ->expectsOutputToContain('types_requested=16')
+            ->expectsOutputToContain('occupations_requested=6')
+            ->expectsOutputToContain('snapshots_created=96')
+            ->expectsOutputToContain('public_entry_count=16')
+            ->assertExitCode(0);
+
+        $importRun = CareerImportRun::query()->where('dataset_version', 'career_recommendation_authority_recovery.v1')->firstOrFail();
+        $this->assertSame(6, $importRun->rows_accepted);
+        $this->assertSame(0, $importRun->rows_failed);
+        $this->assertDatabaseCount('career_import_runs', 1);
+        $this->assertDatabaseCount('career_compile_runs', 1);
+        $this->assertDatabaseCount('recommendation_snapshots', 96);
+
+        $this->artisan('career:compile-recommendation-subjects')
+            ->expectsOutputToContain('replay=1')
+            ->expectsOutputToContain('snapshots_created=0')
+            ->assertExitCode(0);
+        $this->assertDatabaseCount('career_import_runs', 1);
+        $this->assertDatabaseCount('career_compile_runs', 1);
+        $this->assertDatabaseCount('recommendation_snapshots', 96);
+    }
+
+    #[Test]
+    public function recommendation_authority_recovery_rolls_back_on_unknown_cms_baseline_drift(): void
+    {
+        $this->seedRecommendationRecoveryAuthority();
+        $job = \App\Models\CareerJob::query()
+            ->withoutGlobalScopes()
+            ->where('slug', 'accountants-and-auditors')
+            ->where('locale', 'zh-CN')
+            ->firstOrFail();
+        $salary = $job->salary_json;
+        $salary['annual_median_usd'] = 1;
+        $job->forceFill(['salary_json' => $salary])->save();
+
+        $this->artisan('career:compile-recommendation-subjects')
+            ->expectsOutputToContain('career_recommendation_authority_recovery_cms_baseline_conflict')
+            ->assertExitCode(1);
+
+        $this->assertDatabaseCount('career_import_runs', 0);
+        $this->assertDatabaseCount('career_compile_runs', 0);
+        $this->assertDatabaseCount('occupation_truth_metrics', 0);
+    }
+
+    private function seedRecommendationRecoveryAuthority(): void
+    {
+        $targets = [
+            'accountants-and-auditors' => ['383cccee-0364-4866-9dc1-f7cd1cfcdf51', '37ec69bd-655e-4ab4-b8ea-349632e87159'],
+            'data-scientists' => ['fdffb946-2c8f-4f3d-91c4-d351bf6bf6b2', 'f639c622-1a90-4b6d-a67c-081f6de2f48f'],
+            'human-resources-specialists' => ['615bdd41-1b3d-40c0-94cc-ab6ee08dbbe7', '37ec69bd-655e-4ab4-b8ea-349632e87159'],
+            'management-analysts' => ['bf7beb7c-9881-456e-a65e-447c9477e9cc', 'a0352070-41e8-4cc9-b54d-06d6401d097c'],
+            'project-management-specialists' => ['36060017-d3cb-42f7-bdc6-ead26c925cf5', '37ec69bd-655e-4ab4-b8ea-349632e87159'],
+            'registered-nurses' => ['be1bd5aa-353b-4760-a11d-0d44b1fe1810', '3d7712d5-9ab5-4eda-88b0-e295149a7a9d'],
+        ];
+
+        $this->artisan('career-jobs:import-local-baseline', [
+            '--locale' => ['zh-CN'],
+            '--job' => array_keys($targets),
+            '--status' => 'published',
+        ])->assertExitCode(0);
+
+        foreach ($targets as $slug => [$occupationId, $familyId]) {
+            OccupationFamily::query()->firstOrCreate(['id' => $familyId], [
+                'canonical_slug' => 'family-'.substr($familyId, 0, 8),
+                'title_en' => 'Recovery family',
+                'title_zh' => '恢复职业族',
+            ]);
+            $job = \App\Models\CareerJob::query()->withoutGlobalScopes()->where('slug', $slug)->where('locale', 'zh-CN')->firstOrFail();
+            $occupation = Occupation::query()->create([
+                'id' => $occupationId,
+                'family_id' => $familyId,
+                'canonical_slug' => $slug,
+                'entity_level' => 'market_child',
+                'truth_market' => 'US',
+                'display_market' => 'US',
+                'crosswalk_mode' => 'exact',
+                'canonical_title_en' => $job->subtitle,
+                'canonical_title_zh' => $job->title,
+                'search_h1_zh' => $job->title.'职业诊断',
+            ]);
+            OccupationCrosswalk::query()->create([
+                'occupation_id' => $occupation->id,
+                'source_system' => 'us_soc',
+                'source_code' => 'test-'.$slug,
+                'source_title' => $job->subtitle,
+                'mapping_type' => 'exact',
+                'confidence_score' => 1,
+            ]);
+        }
     }
 }
