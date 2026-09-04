@@ -35,6 +35,8 @@ final class CareerGuideLocaleRecovery
         'sort_order',
     ];
 
+    private const CORRUPTING_REVISION_SUBSCOPES = ['W3-CAREER-GUIDES', 'career-guides'];
+
     private const GUIDE_CODES = [
         'annual-career-review-system',
         'big5-for-career-decisions',
@@ -185,6 +187,13 @@ final class CareerGuideLocaleRecovery
         ksort($expectedHashes);
         if (($manifest['schema_version'] ?? null) !== 'career.data_recovery.v1'
             || data_get($manifest, 'guide_recovery.corrupting_package_sha256') !== self::CORRUPTING_PACKAGE_SHA256
+            || data_get($manifest, 'guide_recovery.corrupting_revision_provenance') !== [
+                'schema_version' => 'fermatmind.career_cms_promotion_revision.v2',
+                'lane' => 'W3',
+                'accepted_subscopes' => self::CORRUPTING_REVISION_SUBSCOPES,
+                'asset_locale' => 'en',
+                'requires_exact_current_content_match' => true,
+            ]
             || $manifestHashes !== $expectedHashes
             || $manifestCodes !== self::GUIDE_CODES
             || data_get($manifest, 'guide_recovery.expected_guide_count') !== count(self::GUIDE_CODES)
@@ -259,9 +268,21 @@ final class CareerGuideLocaleRecovery
             ->first(function (array $snapshot) use ($assetKey, $currentContent): bool {
                 $promotion = (array) data_get($snapshot, 'promotion', []);
                 $content = (array) data_get($snapshot, 'content', []);
+                $contentKeys = array_keys($content);
+                $expectedKeys = self::GUIDE_FIELDS;
+                sort($contentKeys);
+                sort($expectedKeys);
 
-                return ($promotion['package_sha256'] ?? null) === self::CORRUPTING_PACKAGE_SHA256
+                return ($snapshot['schema_version'] ?? null) === 'fermatmind.career_cms_promotion_revision.v2'
+                    && ($promotion['lane'] ?? null) === 'W3'
+                    && in_array((string) ($promotion['subscope'] ?? ''), self::CORRUPTING_REVISION_SUBSCOPES, true)
+                    && preg_match('/\A[a-f0-9]{64}\z/', (string) ($promotion['package_sha256'] ?? '')) === 1
                     && ($promotion['asset_key'] ?? null) === $assetKey
+                    && $contentKeys === $expectedKeys
+                    && trim((string) ($content['title'] ?? '')) !== ''
+                    && trim((string) ($content['excerpt'] ?? '')) !== ''
+                    && trim((string) ($content['body_md'] ?? '')) !== ''
+                    && preg_match('/[\p{Han}]/u', PromotionContextFactory::canonicalJson($content)) !== 1
                     && hash_equals(
                         PromotionContextFactory::canonicalJson($currentContent),
                         PromotionContextFactory::canonicalJson($content),

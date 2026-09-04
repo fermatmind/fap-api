@@ -157,7 +157,11 @@ final class CareerGuideLocaleRecoveryTest extends TestCase
                 'snapshot_json' => [
                     'schema_version' => 'fermatmind.career_cms_promotion_revision.v2',
                     'promotion' => [
-                        'package_sha256' => CareerGuideLocaleRecovery::CORRUPTING_PACKAGE_SHA256,
+                        'lane' => 'W3',
+                        'subscope' => 'W3-CAREER-GUIDES',
+                        // Deployment revisions bind a transformed exact package, whose digest can
+                        // differ from the committed W3 source package digest.
+                        'package_sha256' => str_repeat('b', 64),
                         'asset_key' => '0:en:'.$guide->slug,
                     ],
                     'content' => $content,

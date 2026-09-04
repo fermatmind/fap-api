@@ -4,6 +4,16 @@
   "guide_recovery": {
     "command": "career:recover-guide-locale-corruption --execute --json",
     "corrupting_package_sha256": "ae22a6bdffe9638971de3a725ef1c725d8b5a22d76f1ad32bd20e0e75206ffd5",
+    "corrupting_revision_provenance": {
+      "schema_version": "fermatmind.career_cms_promotion_revision.v2",
+      "lane": "W3",
+      "accepted_subscopes": [
+        "W3-CAREER-GUIDES",
+        "career-guides"
+      ],
+      "asset_locale": "en",
+      "requires_exact_current_content_match": true
+    },
     "baseline_sha256": {
       "zh-CN": "3664183d9685dc67fd2b44d231837e5638ad64410f9e7b6b70110d9fd93d5b31",
       "en": "474b3ca869e3f32033089f48967458f977f7bf3cffd4d42c29eae689362bb416"
