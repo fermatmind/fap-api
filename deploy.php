@@ -551,6 +551,7 @@ $productionHost = host('production')
     ->set('ops_entry_host', getenv('OPS_ENTRY_HOST_PROD') ?: 'ops.fermatmind.com')
     ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api-prod.conf')
     ->set('php_fpm_service', getenv('PHP_FPM_SERVICE_PROD') ?: 'php8.4-fpm')
+    ->set('career_recommendation_publish_required', true)
     ->set('env', [
         'SEO_PUBLIC_SITEMAP_AUTHORITY' => getenv('SEO_PUBLIC_SITEMAP_AUTHORITY_PROD') ?: 'backend',
     ]);
@@ -574,6 +575,7 @@ $stagingHost = host('staging')
     ->set('ops_entry_host', getenv('OPS_ENTRY_HOST_STG') ?: '')
     ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api-staging')
     ->set('php_fpm_service', getenv('PHP_FPM_SERVICE_STG') ?: 'php8.4-fpm')
+    ->set('career_recommendation_publish_required', false)
     ->set('keep_releases', 3)
     ->set('queue_supervisor_required_programs', [
         'fap-queue-reports',
@@ -1193,7 +1195,11 @@ task('career:recover-data', function () {
 
     within('{{release_path}}/backend', function (): void {
         run('{{bin/php}} artisan career:recover-guide-locale-corruption --execute --json --no-interaction --ansi');
-        run('{{bin/php}} artisan career:compile-recommendation-subjects --no-interaction --ansi');
+        if ((bool) get('career_recommendation_publish_required')) {
+            run('{{bin/php}} artisan career:compile-recommendation-subjects --no-interaction --ansi');
+        } else {
+            writeln('<comment>Staging has no authoritative Career import history; recommendation publication remains production-only.</comment>');
+        }
     });
 });
 
@@ -3726,10 +3732,6 @@ task('healthcheck:career-data-recovery', function () {
     $resolveArg = deployCurlResolveArg($host, (bool) get('healthcheck_use_resolve', true));
     $checks = [
         [
-            '/api/v0.5/career/recommendations/mbti',
-            '.bundle_kind == "career_recommendation_index" and (.items | length) == 16 and ([.items[].recommendation_subject_meta.public_route_slug] | unique | length) == 16',
-        ],
-        [
             '/api/v0.5/career-guides/annual-career-review-system?locale=zh-CN',
             '.ok == true and .guide.locale == "zh-CN" and .guide.title == "年度职业复盘系统"',
         ],
@@ -3738,6 +3740,13 @@ task('healthcheck:career-data-recovery', function () {
             '.ok == true and .guide.locale == "en" and .guide.title == "Annual Career Review System"',
         ],
     ];
+
+    if ((bool) get('career_recommendation_publish_required')) {
+        array_unshift($checks, [
+            '/api/v0.5/career/recommendations/mbti',
+            '.bundle_kind == "career_recommendation_index" and (.items | length) == 16 and ([.items[].recommendation_subject_meta.public_route_slug] | unique | length) == 16',
+        ]);
+    }
 
     foreach ($checks as [$path, $filter]) {
         $url = deployHttpsUrlArg($host, $path);

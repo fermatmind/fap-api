@@ -31,13 +31,16 @@ test("deploy consumes the CI decision and leaves staging on its public cohort", 
   assert.match(deployer, /after\('career:current-authority-production-preactivation-parity', 'guard:sitemap-authority'\)/);
 });
 
-test("Career data recovery is classifier-bound, deployed in both environments, and smoked after activation", () => {
+test("Career data recovery is classifier-bound while recommendation publication requires production authority", () => {
   assert.match(ci, /career_data_recovery=\$\(jq -r \.operations\.career_data_recovery/);
   assert.match(deploy, /career_data_recovery="\$\(jq -r '\.classification\.operations\.career_data_recovery == true'/);
   assert.equal((deploy.match(/-o career_data_recovery=/g) ?? []).length, 2);
   assert.match(deployer, /task\('career:recover-data'/);
   assert.match(deployer, /career:recover-guide-locale-corruption --execute --json/);
   assert.match(deployer, /career:compile-recommendation-subjects --no-interaction/);
+  assert.match(deployer, /set\('career_recommendation_publish_required', true\)/);
+  assert.match(deployer, /set\('career_recommendation_publish_required', false\)/);
+  assert.match(deployer, /if \(\(bool\) get\('career_recommendation_publish_required'\)\)/);
   assert.match(deployer, /task\('healthcheck:career-data-recovery'/);
   assert.match(deployer, /after\('healthcheck:public-dns', 'healthcheck:career-data-recovery'\)/);
 });
