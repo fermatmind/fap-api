@@ -25,10 +25,16 @@ test('nightly runs the active production sync without copying the GSC credential
 
   assert.match(workflow, /environment: production/);
   assert.match(workflow, /gsc_restricted_connect_proxy\.mjs/);
-  assert.match(workflow, /seo-intel:gsc-sync --window=90 --search-types=web --full-window --json/);
+  assert.match(workflow, /SEO_INTEL_ALLOW_EXTERNAL_API_CALLS=true php artisan seo-intel:gsc-sync --window=90 --search-types=web --full-window --trigger=scheduled --json/);
+  assert.equal((workflow.match(/SEO_INTEL_ALLOW_EXTERNAL_API_CALLS=true/g) ?? []).length, 1);
   assert.match(workflow, /\.fetch_mode == "full_window"/);
   assert.match(workflow, /unmapped_classification: \$sync\[0\]\.unmapped_classification/);
   assert.match(workflow, /issue_clusters: \$sync\[0\]\.issue_clusters/);
+  assert.match(workflow, /schema_version: "gsc-read-model-nightly-sync\.v2"/);
+  assert.match(workflow, /external_api_scope: "nightly_restricted_proxy_only"/);
+  assert.match(workflow, /credential_copied_to_runner: false/);
+  assert.match(workflow, /- name: Build sanitized GSC sync receipt\n\s+if: always\(\)/);
+  assert.match(workflow, /- name: Upload sanitized GSC sync receipt\n\s+if: always\(\)/);
   assert.doesNotMatch(workflow, /SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON/);
   assert.doesNotMatch(workflow, /SEO_INTEL_GSC_ACCESS_TOKEN/);
 });

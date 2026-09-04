@@ -213,9 +213,22 @@ jobs:
           printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
       - name: Sync the active production GSC read model
+        id: gsc_sync
         shell: bash
         run: |
           set -euo pipefail
+          mkdir -p artifacts/gsc-read-model-sync
+          state_file="$RUNNER_TEMP/gsc-sync-state.json"
+          active_sha_file="$RUNNER_TEMP/gsc-active-sha"
+          sync_json="$RUNNER_TEMP/gsc-sync.json"
+          record_state() {
+            jq -n --arg phase "$1" --arg reason_code "$2" \
+              '{phase: $phase, reason_code: $reason_code}' > "$state_file"
+          }
+          record_state "setup" "setup_failed"
+          : > "$active_sha_file"
+          : > "$sync_json"
+
           proxy_pid=""
           tunnel_pid=""
           cleanup() {
@@ -224,6 +237,7 @@ jobs:
           }
           trap cleanup EXIT HUP INT TERM
 
+          record_state "restricted_proxy_start" "restricted_proxy_start_failed"
           node backend/scripts/seo/gsc_restricted_connect_proxy.mjs --port="$PROXY_PORT" \
             >"$RUNNER_TEMP/gsc-proxy.log" 2>&1 &
           proxy_pid=$!
@@ -233,6 +247,7 @@ jobs:
           done
           nc -z 127.0.0.1 "$PROXY_PORT"
 
+          record_state "restricted_tunnel_start" "restricted_tunnel_start_failed"
           ssh_base=(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -o ServerAliveInterval=15 -o ServerAliveCountMax=8 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST")
           ssh -N -o BatchMode=yes -o StrictHostKeyChecking=yes -o ExitOnForwardFailure=yes \
@@ -243,6 +258,7 @@ jobs:
           sleep 2
           kill -0 "$tunnel_pid"
 
+          record_state "proxy_policy_probe" "proxy_policy_probe_failed"
           "${ssh_base[@]}" "HTTPS_PROXY=http://127.0.0.1:$PROXY_PORT curl -sS -o /dev/null --fail-with-body --connect-timeout 5 --max-time 15 https://oauth2.googleapis.com/token || test \$? -eq 22"
           if "${ssh_base[@]}" "HTTPS_PROXY=http://127.0.0.1:$PROXY_PORT curl -fsS -o /dev/null --connect-timeout 5 --max-time 15 https://example.com/"; then
             echo "restricted proxy allowed a forbidden target" >&2
@@ -254,9 +270,15 @@ jobs:
           cache_path="/tmp/fermatmind-gsc-nightly-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.php"
           printf -v q_cache '%q' "$cache_path"
           remote_prefix="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; cd \"\$current/backend\";"
-          remote_command="$remote_prefix sudo -n -u www-data -- env HTTPS_PROXY=$q_proxy HTTP_PROXY=$q_proxy NO_PROXY=127.0.0.1,localhost APP_CONFIG_CACHE=$q_cache SEO_INTEL_ENABLED=true SEO_INTEL_WRITE_ENABLED=true php artisan seo-intel:gsc-sync --window=90 --search-types=web --full-window --json"
-          sync_json="$RUNNER_TEMP/gsc-sync.json"
+          record_state "active_revision" "active_revision_unavailable"
+          active_sha="$("${ssh_base[@]}" "$remote_prefix tr -d '\\r\\n' < ../REVISION")"
+          [[ "$active_sha" =~ ^[0-9a-f]{40}$ ]]
+          printf '%s' "$active_sha" > "$active_sha_file"
+
+          remote_command="$remote_prefix sudo -n -u www-data -- env HTTPS_PROXY=$q_proxy HTTP_PROXY=$q_proxy NO_PROXY=127.0.0.1,localhost APP_CONFIG_CACHE=$q_cache SEO_INTEL_ENABLED=true SEO_INTEL_WRITE_ENABLED=true SEO_INTEL_ALLOW_EXTERNAL_API_CALLS=true php artisan seo-intel:gsc-sync --window=90 --search-types=web --full-window --trigger=scheduled --json"
+          record_state "sync" "sync_command_failed"
           "${ssh_base[@]}" "$remote_command" > "$sync_json"
+          record_state "receipt_validation" "sync_receipt_contract_failed"
           jq -e '
             .status == "success"
             and .window_days == 90
@@ -269,16 +291,38 @@ jobs:
             and .read_only_gsc == true
             and .search_submission_allowed == false
           ' "$sync_json" >/dev/null
-
-          active_sha="$("${ssh_base[@]}" "$remote_prefix tr -d '\\r\\n' < ../REVISION")"
-          [[ "$active_sha" =~ ^[0-9a-f]{40}$ ]]
+          record_state "complete" "none"
+      - name: Build sanitized GSC sync receipt
+        if: always()
+        shell: bash
+        env:
+          SYNC_OUTCOME: ${{ steps.gsc_sync.outcome }}
+        run: |
+          set -euo pipefail
           mkdir -p artifacts/gsc-read-model-sync
-          jq -n --arg workflow_sha "$GITHUB_SHA" --arg active_sha "$active_sha" --slurpfile sync "$sync_json" '
+          state_file="$RUNNER_TEMP/gsc-sync-state.json"
+          active_sha_file="$RUNNER_TEMP/gsc-active-sha"
+          sync_json="$RUNNER_TEMP/gsc-sync.json"
+          phase="setup"
+          reason_code="setup_failed"
+          if jq -e '.phase | type == "string"' "$state_file" >/dev/null 2>&1; then
+            phase="$(jq -r '.phase' "$state_file")"
+            reason_code="$(jq -r '.reason_code' "$state_file")"
+          fi
+          active_sha="$(tr -d '\\r\\n' < "$active_sha_file" 2>/dev/null || true)"
+          if [[ ! "$active_sha" =~ ^[0-9a-f]{40}$ ]]; then
+            active_sha=""
+          fi
+
+          if [ "$SYNC_OUTCOME" = "success" ] && jq -e '.status == "success"' "$sync_json" >/dev/null 2>&1; then
+            jq -n --arg workflow_sha "$GITHUB_SHA" --arg active_sha "$active_sha" --slurpfile sync "$sync_json" '
             {
-              schema_version: "gsc-read-model-nightly-sync.v1",
+              schema_version: "gsc-read-model-nightly-sync.v2",
               workflow_sha: $workflow_sha,
               active_production_sha: $active_sha,
-              status: $sync[0].status,
+              status: "success",
+              phase: "complete",
+              reason_code: "none",
               window_days: $sync[0].window_days,
               fetch_mode: $sync[0].fetch_mode,
               requested_start_date: $sync[0].requested_start_date,
@@ -295,10 +339,48 @@ jobs:
               issue_clusters: $sync[0].issue_clusters,
               read_only_gsc: true,
               search_submission_allowed: false,
+              cms_write_allowed: false,
+              credential_copied_to_runner: false,
+              external_api_scope: "nightly_restricted_proxy_only",
               proxy_allowlist: ["oauth2.googleapis.com:443", "searchconsole.googleapis.com:443"]
             }
-          ' > artifacts/gsc-read-model-sync/receipt.json
+            ' > artifacts/gsc-read-model-sync/receipt.json
+          else
+            source_reason_code=""
+            if jq -e '.issue | type == "string"' "$sync_json" >/dev/null 2>&1; then
+              candidate="$(jq -r '.issue' "$sync_json")"
+              if [[ "$candidate" =~ ^[a-z0-9_]{1,80}$ ]]; then
+                source_reason_code="$candidate"
+              fi
+            fi
+            jq -n \
+              --arg workflow_sha "$GITHUB_SHA" \
+              --arg active_sha "$active_sha" \
+              --arg phase "$phase" \
+              --arg reason_code "$reason_code" \
+              --arg source_reason_code "$source_reason_code" '
+              {
+                schema_version: "gsc-read-model-nightly-sync.v2",
+                workflow_sha: $workflow_sha,
+                active_production_sha: $active_sha,
+                status: "fail",
+                phase: $phase,
+                reason_code: $reason_code,
+                source_reason_code: (if $source_reason_code == "" then null else $source_reason_code end),
+                window_days: 90,
+                fetch_mode: "full_window",
+                search_types: ["web"],
+                read_only_gsc: true,
+                search_submission_allowed: false,
+                cms_write_allowed: false,
+                credential_copied_to_runner: false,
+                external_api_scope: "nightly_restricted_proxy_only",
+                proxy_allowlist: ["oauth2.googleapis.com:443", "searchconsole.googleapis.com:443"]
+              }
+            ' > artifacts/gsc-read-model-sync/receipt.json
+          fi
       - name: Upload sanitized GSC sync receipt
+        if: always()
         uses: actions/upload-artifact@v7
         with:
           name: gsc-read-model-sync-${{ github.run_id }}-${{ github.run_attempt }}
