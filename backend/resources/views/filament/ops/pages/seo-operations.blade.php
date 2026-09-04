@@ -218,6 +218,7 @@
 
         @if ($activeWorkspace === 'automation' && $activeAutomationSection === 'experiments')
             <x-filament-ops::ops-experiment-ledger-workspace />
+            <x-filament-ops::ops-decision-experiment-workspace />
         @endif
 
         @if ($activeWorkspace === 'automation' && $activeAutomationSection === 'agents')

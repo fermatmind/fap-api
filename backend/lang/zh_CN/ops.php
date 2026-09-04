@@ -1888,6 +1888,18 @@ return [
                 ],
                 'causality_note' => '相关性不是因果。没有 baseline 和完整观察窗时，Ledger 不得宣称实验成功。',
             ],
+            'decision_experiment' => [
+                'eyebrow' => '基础可见性',
+                'title' => '决策卡与活跃实验',
+                'scope_note' => '只展示生产数据支持的状态、范围、过期时间、观察、readback 与 rollback；本区域仅用于查看和导航。',
+                'read_only' => '只读',
+                'status_label' => '决策与实验数据源状态',
+                'cms_authority' => 'CMS 权威',
+                'cards' => ['title' => 'Weekly Decision Cards', 'expiry' => '过期时间', 'empty' => '当前权威数据中没有真实的每周决策卡。'],
+                'experiments' => ['eyebrow' => '生产 Ledger', 'title' => 'Active Experiments / Canary', 'owner' => 'Owner', 'sample' => '样本', 'window' => '窗口', 'empty' => '生产 Ledger 中没有真实的活跃实验或 Canary。'],
+                'states' => ['not_started' => '尚未开始', 'unavailable' => '不可用', 'available' => '可用'],
+                'boundary' => '不提供 Agent 运行、写入、发布、feature flag、allowlist 或权限开关；现有 Filament CMS Resources 继续作为权威。',
+            ],
             'execution' => [
                 'title' => 'SEO 问题执行中心',
                 'description' => '发现 → 分派 → 修复 → 验证 → 关闭，状态落在受保护的真实问题记录。',

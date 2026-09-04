@@ -78,6 +78,9 @@ final class SeoLedgerSnapshotReadService
                 'public_runtime' => $this->safeEvidence($row->public_runtime_readback_json),
                 'measurement' => $this->safeEvidence($row->gsc_funnel_evidence_state_json),
             ],
+            'canary_scope' => $this->safeCanaryScope($row->canary_scope_json),
+            'rollback' => $this->safeEvidence($row->rollback_plan_json),
+            'owner' => $this->safeOwner($row->owner_actor_json),
             'status' => (string) $row->current_state,
             'close_reason' => $this->nullableString($row->close_reason),
             'updated_at' => $this->nullableString($row->updated_at),
@@ -103,6 +106,33 @@ final class SeoLedgerSnapshotReadService
         }
 
         return $safe;
+    }
+
+    /** @return array<string, bool|int|null> */
+    private function safeCanaryScope(mixed $json): array
+    {
+        $source = $this->jsonArray($json);
+        $safe = [];
+        foreach (['shared_layer', 'feature_flag', 'allowlist'] as $key) {
+            $safe[$key] = is_bool($source[$key] ?? null) ? $source[$key] : null;
+        }
+        $safe['sample_size'] = is_int($source['sample_size'] ?? null) && $source['sample_size'] >= 0
+            ? $source['sample_size'] : null;
+
+        return $safe;
+    }
+
+    private function safeOwner(mixed $json): string
+    {
+        $source = $this->jsonArray($json);
+        foreach (['role', 'type'] as $key) {
+            $value = $source[$key] ?? null;
+            if (is_string($value) && preg_match('/^[a-z][a-z0-9._-]{0,63}$/D', $value) === 1) {
+                return $value;
+            }
+        }
+
+        return 'unavailable';
     }
 
     /** @return array<string, mixed> */

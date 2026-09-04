@@ -6102,6 +6102,81 @@
         }
     }
 
+    .fi-body.fi-panel-ops .ops-decision-experiment {
+        display: grid;
+        gap: 1rem;
+        padding: 1.25rem;
+        border: 1px solid var(--ops-border-default);
+        border-radius: var(--ops-radius-card);
+        background: var(--ops-bg-surface);
+        box-shadow: var(--ops-shadow-surface);
+    }
+
+    .fi-body.fi-panel-ops .ops-decision-experiment__status {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.25rem;
+        padding-block: .75rem;
+        border-block: 1px solid var(--ops-border-default);
+        color: var(--ops-text-secondary);
+        font-size: .7rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-decision-experiment__status span {
+        display: flex;
+        gap: .45rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-decision-experiment__grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-decision-experiment h3 {
+        margin-block: .3rem .75rem;
+        font-size: 1rem;
+        font-weight: 700;
+    }
+
+    .fi-body.fi-panel-ops .ops-decision-experiment__rows {
+        display: grid;
+        border-top: 1px solid var(--ops-border-default);
+    }
+
+    .fi-body.fi-panel-ops .ops-decision-experiment__rows article {
+        display: grid;
+        gap: .4rem;
+        padding-block: .85rem;
+        border-bottom: 1px solid var(--ops-border-default);
+        transition: background-color .18s ease, padding-inline .18s ease;
+    }
+
+    .fi-body.fi-panel-ops .ops-decision-experiment__rows article:hover {
+        padding-inline: .45rem;
+        background: var(--ops-bg-surface-subtle);
+    }
+
+    .fi-body.fi-panel-ops .ops-decision-experiment__rows article > div,
+    .fi-body.fi-panel-ops .ops-decision-experiment__rows dl {
+        display: flex;
+        justify-content: space-between;
+        gap: .75rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-decision-experiment__rows span,
+    .fi-body.fi-panel-ops .ops-decision-experiment__rows p,
+    .fi-body.fi-panel-ops .ops-decision-experiment__rows dl {
+        color: var(--ops-text-tertiary);
+        font-size: .65rem;
+    }
+
+    @media (max-width: 900px) {
+        .fi-body.fi-panel-ops .ops-decision-experiment__grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
     .fi-body.fi-panel-ops .ops-scheduler-workspace { display:grid; gap:1rem; padding:1.25rem; border:1px solid var(--ops-border-default); border-radius:var(--ops-radius-card); background:var(--ops-bg-surface); box-shadow:var(--ops-shadow-surface); }
     .fi-body.fi-panel-ops .ops-scheduler-workspace__cadence { display:grid; grid-template-columns:repeat(3,1fr); gap:.75rem; }
     .fi-body.fi-panel-ops .ops-scheduler-workspace__cadence div { display:flex; justify-content:space-between; gap:.75rem; padding:.9rem 1rem; border:1px solid var(--ops-border-default); border-radius:var(--ops-radius-input); background:var(--ops-bg-surface-subtle); }

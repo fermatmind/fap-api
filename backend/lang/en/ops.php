@@ -1888,6 +1888,18 @@ return [
                 ],
                 'causality_note' => 'Correlation is not causation. Without a baseline and a complete observation window, the Ledger cannot claim success.',
             ],
+            'decision_experiment' => [
+                'eyebrow' => 'Foundation visibility',
+                'title' => 'Decision cards and active experiments',
+                'scope_note' => 'Production-backed status, scope, expiry, observation, readback, and rollback. This surface only inspects and navigates.',
+                'read_only' => 'Read-only',
+                'status_label' => 'Decision and experiment source status',
+                'cms_authority' => 'CMS authority',
+                'cards' => ['title' => 'Weekly Decision Cards', 'expiry' => 'Expiry', 'empty' => 'No real weekly decision card is available from the current authority.'],
+                'experiments' => ['eyebrow' => 'Production ledger', 'title' => 'Active Experiments / Canary', 'owner' => 'Owner', 'sample' => 'Sample', 'window' => 'Window', 'empty' => 'No real active experiment or canary is available from the production ledger.'],
+                'states' => ['not_started' => 'Not started', 'unavailable' => 'Unavailable', 'available' => 'Available'],
+                'boundary' => 'No Agent run, write, publish, feature-flag, allowlist, or permission control is exposed. Existing Filament CMS resources remain authoritative.',
+            ],
             'execution' => [
                 'title' => 'SEO issue execution center',
                 'description' => 'Discover → assign → fix → verify → close, backed by protected issue records.',
