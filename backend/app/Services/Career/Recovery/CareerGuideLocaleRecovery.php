@@ -8,7 +8,6 @@ use App\CareerCms\Baseline\CareerGuideBaselineImporter;
 use App\CareerCms\Baseline\CareerGuideBaselineNormalizer;
 use App\CareerCms\Baseline\CareerGuideBaselineReader;
 use App\Models\CareerGuide;
-use App\Models\CareerGuideRevision;
 use App\Services\ContentPromotion\PromotionContextFactory;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
@@ -17,7 +16,9 @@ final class CareerGuideLocaleRecovery
 {
     public const OPERATION_VERSION = 'career_guide_locale_recovery.v1';
 
-    public const CORRUPTING_PACKAGE_SHA256 = 'ae22a6bdffe9638971de3a725ef1c725d8b5a22d76f1ad32bd20e0e75206ffd5';
+    public const CORRUPTING_PACKAGE_SHA256 = '0b6728c9a07e9404d0de57698f0f8b59616358ba91e456d1be848a1fe167ca7c';
+
+    public const CORRUPTING_SOURCE_LEDGER_SHA256 = '1241b04e2d21b3342b8363274a35122b38faa213152282b5b0b2fb3b28a1c9bc';
 
     private const BASELINE_SHA256 = [
         'en' => '474b3ca869e3f32033089f48967458f977f7bf3cffd4d42c29eae689362bb416',
@@ -34,8 +35,6 @@ final class CareerGuideLocaleRecovery
         'schema_version',
         'sort_order',
     ];
-
-    private const CORRUPTING_REVISION_SUBSCOPES = ['W3-CAREER-GUIDES', 'career-guides'];
 
     private const GUIDE_CODES = [
         'annual-career-review-system',
@@ -69,9 +68,9 @@ final class CareerGuideLocaleRecovery
     /** @return array<string, mixed> */
     public function run(bool $execute): array
     {
-        [$guides, $baselineHashes] = $this->loadBoundBaseline();
+        [$guides, $baselineHashes, $corruptingContentHashes] = $this->loadBoundBaseline();
 
-        return DB::transaction(function () use ($guides, $baselineHashes, $execute): array {
+        return DB::transaction(function () use ($guides, $baselineHashes, $corruptingContentHashes, $execute): array {
             $locked = CareerGuide::query()
                 ->withoutGlobalScopes()
                 ->where('org_id', 0)
@@ -116,13 +115,17 @@ final class CareerGuideLocaleRecovery
                     continue;
                 }
 
-                $promotedContent = $this->corruptingRevisionContent($existing);
-                if ($promotedContent === null) {
+                $currentContent = [];
+                foreach (self::GUIDE_FIELDS as $field) {
+                    $currentContent[$field] = data_get($current, 'guide.'.$field);
+                }
+                $currentContentHash = hash('sha256', PromotionContextFactory::canonicalJson($currentContent));
+                if (! hash_equals((string) ($corruptingContentHashes[$payload['guide_code']] ?? ''), $currentContentHash)) {
                     throw new RuntimeException('career_guide_recovery_unknown_chinese_state:'.$payload['guide_code']);
                 }
                 $expectedCorrupt = $desired;
                 foreach (self::GUIDE_FIELDS as $field) {
-                    $expectedCorrupt['guide'][$field] = $promotedContent[$field] ?? null;
+                    $expectedCorrupt['guide'][$field] = $currentContent[$field];
                 }
                 if ($current !== $expectedCorrupt) {
                     throw new RuntimeException('career_guide_recovery_chinese_state_conflict:'.$payload['guide_code']);
@@ -150,6 +153,7 @@ final class CareerGuideLocaleRecovery
                 'target_locale_row_count' => count($guides),
                 'baseline_sha256' => $baselineHashes,
                 'corrupting_package_sha256' => self::CORRUPTING_PACKAGE_SHA256,
+                'corrupting_source_ledger_sha256' => self::CORRUPTING_SOURCE_LEDGER_SHA256,
                 'preflight' => [
                     'corrupted_zh_count' => $corrupted,
                     'healthy_zh_count' => $healthyZh,
@@ -171,7 +175,7 @@ final class CareerGuideLocaleRecovery
         }, 3);
     }
 
-    /** @return array{0:list<array<string,mixed>>,1:array<string,string>} */
+    /** @return array{0:list<array<string,mixed>>,1:array<string,string>,2:array<string,string>} */
     private function loadBoundBaseline(): array
     {
         $manifestPath = base_path('content_assets/career/career_data_recovery.v1.json');
@@ -182,23 +186,32 @@ final class CareerGuideLocaleRecovery
             ? array_values(data_get($manifest, 'guide_recovery.guide_codes'))
             : [];
         $manifestHashes = (array) data_get($manifest, 'guide_recovery.baseline_sha256', []);
+        $corruptingContentHashes = (array) data_get($manifest, 'guide_recovery.corrupting_content_sha256', []);
         $expectedHashes = self::BASELINE_SHA256;
         ksort($manifestHashes);
         ksort($expectedHashes);
         if (($manifest['schema_version'] ?? null) !== 'career.data_recovery.v1'
             || data_get($manifest, 'guide_recovery.corrupting_package_sha256') !== self::CORRUPTING_PACKAGE_SHA256
-            || data_get($manifest, 'guide_recovery.corrupting_revision_provenance') !== [
-                'schema_version' => 'fermatmind.career_cms_promotion_revision.v2',
+            || data_get($manifest, 'guide_recovery.corrupting_content_fingerprint_source') !== [
+                'schema_version' => 'fermatmind.en_content_parity_source_ledger.v1',
                 'lane' => 'W3',
-                'accepted_subscopes' => self::CORRUPTING_REVISION_SUBSCOPES,
-                'asset_locale' => 'en',
-                'requires_exact_current_content_match' => true,
+                'subscope' => 'W3-CAREER-GUIDES',
+                'source_ledger_sha256' => self::CORRUPTING_SOURCE_LEDGER_SHA256,
+                'candidate_is_recovery_source' => false,
             ]
             || $manifestHashes !== $expectedHashes
             || $manifestCodes !== self::GUIDE_CODES
             || data_get($manifest, 'guide_recovery.expected_guide_count') !== count(self::GUIDE_CODES)
             || data_get($manifest, 'guide_recovery.expected_locale_row_count') !== count(self::GUIDE_CODES) * 2) {
             throw new RuntimeException('career_guide_recovery_manifest_invalid');
+        }
+        if (array_keys($corruptingContentHashes) !== self::GUIDE_CODES) {
+            throw new RuntimeException('career_guide_recovery_corrupting_identity_invalid');
+        }
+        foreach ($corruptingContentHashes as $guideCode => $hash) {
+            if (preg_match('/\A[a-f0-9]{64}\z/', (string) $hash) !== 1) {
+                throw new RuntimeException('career_guide_recovery_corrupting_hash_invalid:'.$guideCode);
+            }
         }
 
         $sourceDir = $this->reader->resolveSourceDir();
@@ -234,7 +247,7 @@ final class CareerGuideLocaleRecovery
             throw new RuntimeException('career_guide_recovery_baseline_identity_invalid');
         }
 
-        return [$guides, $hashes];
+        return [$guides, $hashes, $corruptingContentHashes];
     }
 
     /** @param list<CareerGuide> $guides */
@@ -248,48 +261,6 @@ final class CareerGuideLocaleRecovery
             }
             $seen[$key] = true;
         }
-    }
-
-    /** @return array<string,mixed>|null */
-    private function corruptingRevisionContent(CareerGuide $guide): ?array
-    {
-        $assetKey = '0:en:'.$guide->slug;
-        $currentContent = [];
-        foreach (self::GUIDE_FIELDS as $field) {
-            $currentContent[$field] = $guide->getAttribute($field);
-        }
-
-        $matching = CareerGuideRevision::query()
-            ->where('career_guide_id', $guide->id)
-            ->orderByDesc('revision_no')
-            ->orderByDesc('id')
-            ->get()
-            ->map(static fn (CareerGuideRevision $revision): array => (array) $revision->snapshot_json)
-            ->first(function (array $snapshot) use ($assetKey, $currentContent): bool {
-                $promotion = (array) data_get($snapshot, 'promotion', []);
-                $content = (array) data_get($snapshot, 'content', []);
-                $contentKeys = array_keys($content);
-                $expectedKeys = self::GUIDE_FIELDS;
-                sort($contentKeys);
-                sort($expectedKeys);
-
-                return ($snapshot['schema_version'] ?? null) === 'fermatmind.career_cms_promotion_revision.v2'
-                    && ($promotion['lane'] ?? null) === 'W3'
-                    && in_array((string) ($promotion['subscope'] ?? ''), self::CORRUPTING_REVISION_SUBSCOPES, true)
-                    && preg_match('/\A[a-f0-9]{64}\z/', (string) ($promotion['package_sha256'] ?? '')) === 1
-                    && ($promotion['asset_key'] ?? null) === $assetKey
-                    && $contentKeys === $expectedKeys
-                    && trim((string) ($content['title'] ?? '')) !== ''
-                    && trim((string) ($content['excerpt'] ?? '')) !== ''
-                    && trim((string) ($content['body_md'] ?? '')) !== ''
-                    && preg_match('/[\p{Han}]/u', PromotionContextFactory::canonicalJson($content)) !== 1
-                    && hash_equals(
-                        PromotionContextFactory::canonicalJson($currentContent),
-                        PromotionContextFactory::canonicalJson($content),
-                    );
-            });
-
-        return is_array($matching) ? (array) ($matching['content'] ?? []) : null;
     }
 
     /** @param list<array<string,mixed>> $guides */

@@ -3,16 +3,35 @@
   "operation": "career_guide_locale_recovery_and_mbti_recommendation_publication",
   "guide_recovery": {
     "command": "career:recover-guide-locale-corruption --execute --json",
-    "corrupting_package_sha256": "ae22a6bdffe9638971de3a725ef1c725d8b5a22d76f1ad32bd20e0e75206ffd5",
-    "corrupting_revision_provenance": {
-      "schema_version": "fermatmind.career_cms_promotion_revision.v2",
+    "corrupting_package_sha256": "0b6728c9a07e9404d0de57698f0f8b59616358ba91e456d1be848a1fe167ca7c",
+    "corrupting_content_fingerprint_source": {
+      "schema_version": "fermatmind.en_content_parity_source_ledger.v1",
       "lane": "W3",
-      "accepted_subscopes": [
-        "W3-CAREER-GUIDES",
-        "career-guides"
-      ],
-      "asset_locale": "en",
-      "requires_exact_current_content_match": true
+      "subscope": "W3-CAREER-GUIDES",
+      "source_ledger_sha256": "1241b04e2d21b3342b8363274a35122b38faa213152282b5b0b2fb3b28a1c9bc",
+      "candidate_is_recovery_source": false
+    },
+    "corrupting_content_sha256": {
+      "annual-career-review-system": "c3b2c1b25a1f15f581ff7d1c9c5b6074a852c89b31c9fba658748edab45551b8",
+      "big5-for-career-decisions": "accd92a7faeca39530f9fbf8fa342854dfc2074602e4bf7b226f8141f83dfc55",
+      "build-five-year-career-roadmap": "3790f4c4f271a728d5e284b281982919019b656d8500bcdb5107558f6622acc2",
+      "build-portfolio-for-career-switch": "af8af4040813e43c27b0f0ab32755eb130ad1b15910d59eb25c4f281c8cb2f07",
+      "career-growth-with-manager": "6f5fcc1c594e820431aab76bf470a253de6f4e0012be65cfe1ae8b3cc44c1612",
+      "career-risk-management": "df5008c8b3522128ae0cdccc44a3de72e945c415797cddf783dd2f6671b69a35",
+      "career-transition-playbook": "fe586714390fb7599916691daff450a2b1e8b4e633e01010d8463da8cdefa8c1",
+      "cross-industry-move-strategy": "b71ba6a3c00b03bc1c210de60231f9521583c8874c17daf3031c4730f6aaf51e",
+      "first-90-days-in-new-role": "fe5d0664b13fec6d07af97aa3238442d54d83613220a59ba35229687644aecd0",
+      "from-mbti-to-job-fit": "05ab5102e05d4c39f33177fd2031575d8b03439c76a1f41ffa0822a620318395",
+      "how-to-choose-college-major": "c523497b5dec6a57596bbef9b6372ce0c949d95928920d5afb81a0b7e7f168ca",
+      "how-to-find-right-career-direction": "b0f90655b6df9c04f9064e604a9fd3db1fd55635727210bc113c076b4cc15f1a",
+      "improve-workplace-competitiveness": "96f971fb97b132d9c505a80b8b5c0ee7411ca50bec359adbd4ffe6f4bed9d122",
+      "interview-strategy-by-role": "aadcad37fc607d95a1f0ec91eea18801c0e7fd525724a3f63f685677308c094f",
+      "iq-eq-balance-at-work": "858f4bb3696682be8d29490efcf94120a0c88cfd03e462c65233c3eba0de4d91",
+      "leader-track-vs-expert-track": "ff84d97dd9df3202b2b02e94f1bed208533b7fbe5cfccfab9574561761a142c8",
+      "networking-that-actually-works": "0507222055621b4c47bcc4bbe36aec1a3265815a1554de7d6287e5e43140f5a4",
+      "personal-brand-for-professionals": "fe8b0552c374f9f8f203ce9c83da7c20fb55a1027e459c1f47befc32319a3d43",
+      "prevent-burnout-while-growing": "7463b65bffd8706a2c832addd3c03c3715dfcd1f62cb7508e87412b64757b8be",
+      "salary-negotiation-framework": "9998fc9f145c1d0e82788b5f4cf8c9af83d2c89bc0ec7590ec5b0c13a6f10aae"
     },
     "baseline_sha256": {
       "zh-CN": "3664183d9685dc67fd2b44d231837e5638ad64410f9e7b6b70110d9fd93d5b31",

@@ -143,32 +143,27 @@ final class CareerGuideLocaleRecoveryTest extends TestCase
             'status' => null,
         ]);
 
+        $ledgerPath = base_path('content_assets/en-content-parity/W3/career-guides/'
+            .CareerGuideLocaleRecovery::CORRUPTING_PACKAGE_SHA256.'/source_ledger.json');
+        $this->assertSame(CareerGuideLocaleRecovery::CORRUPTING_SOURCE_LEDGER_SHA256, hash_file('sha256', $ledgerPath));
+        $ledger = json_decode((string) file_get_contents($ledgerPath), true, 512, JSON_THROW_ON_ERROR);
+        $candidates = collect((array) ($ledger['rows'] ?? []))->keyBy('guide_code');
+
         foreach ($this->guideCodes() as $code) {
             $guide = $this->guide($code, 'zh-CN');
-            $en = $this->payload($code, 'en');
-            $content = [];
-            foreach (['title', 'excerpt', 'category_slug', 'body_md', 'body_html', 'related_industry_slugs_json', 'schema_version', 'sort_order'] as $field) {
-                $content[$field] = $en[$field];
-            }
+            $candidate = (array) $candidates->get($code);
+            $this->assertNotEmpty($candidate);
+            $content = [
+                'title' => $candidate['candidate_title'],
+                'excerpt' => $candidate['candidate_excerpt'],
+                'category_slug' => '',
+                'body_md' => $candidate['candidate_content_md'],
+                'body_html' => '',
+                'related_industry_slugs_json' => [],
+                'schema_version' => 'v1',
+                'sort_order' => 0,
+            ];
             $guide->forceFill($content)->save();
-            CareerGuideRevision::query()->create([
-                'career_guide_id' => $guide->id,
-                'revision_no' => ((int) CareerGuideRevision::query()->where('career_guide_id', $guide->id)->max('revision_no')) + 1,
-                'snapshot_json' => [
-                    'schema_version' => 'fermatmind.career_cms_promotion_revision.v2',
-                    'promotion' => [
-                        'lane' => 'W3',
-                        'subscope' => 'W3-CAREER-GUIDES',
-                        // Deployment revisions bind a transformed exact package, whose digest can
-                        // differ from the committed W3 source package digest.
-                        'package_sha256' => str_repeat('b', 64),
-                        'asset_key' => '0:en:'.$guide->slug,
-                    ],
-                    'content' => $content,
-                ],
-                'note' => 'corrupting promotion fixture',
-                'created_at' => now(),
-            ]);
         }
     }
 
