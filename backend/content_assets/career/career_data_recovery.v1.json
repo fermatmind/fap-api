@@ -1,0 +1,51 @@
+{
+  "schema_version": "career.data_recovery.v1",
+  "operation": "career_guide_locale_recovery_and_mbti_recommendation_publication",
+  "guide_recovery": {
+    "command": "career:recover-guide-locale-corruption --execute --json",
+    "corrupting_package_sha256": "ae22a6bdffe9638971de3a725ef1c725d8b5a22d76f1ad32bd20e0e75206ffd5",
+    "baseline_sha256": {
+      "zh-CN": "3664183d9685dc67fd2b44d231837e5638ad64410f9e7b6b70110d9fd93d5b31",
+      "en": "474b3ca869e3f32033089f48967458f977f7bf3cffd4d42c29eae689362bb416"
+    },
+    "guide_codes": [
+      "annual-career-review-system",
+      "big5-for-career-decisions",
+      "build-five-year-career-roadmap",
+      "build-portfolio-for-career-switch",
+      "career-growth-with-manager",
+      "career-risk-management",
+      "career-transition-playbook",
+      "cross-industry-move-strategy",
+      "first-90-days-in-new-role",
+      "from-mbti-to-job-fit",
+      "how-to-choose-college-major",
+      "how-to-find-right-career-direction",
+      "improve-workplace-competitiveness",
+      "interview-strategy-by-role",
+      "iq-eq-balance-at-work",
+      "leader-track-vs-expert-track",
+      "networking-that-actually-works",
+      "personal-brand-for-professionals",
+      "prevent-burnout-while-growing",
+      "salary-negotiation-framework"
+    ],
+    "expected_guide_count": 20,
+    "expected_locale_row_count": 40
+  },
+  "recommendation_publication": {
+    "command": "career:compile-recommendation-subjects",
+    "source": "latest_completed_non_dry_run_failure_free_public_authority_import",
+    "compiler_version": "career_scoring_engine.v1.2",
+    "canonical_type_count": 16,
+    "minimum_authoritative_matches_per_type": 1
+  },
+  "negative_guarantees": {
+    "public_api_schema_changed": false,
+    "frontend_fallback_created": false,
+    "unapproved_w3_candidate_used_as_recovery_source": false,
+    "trust_gate_weakened": false,
+    "indexability_gate_weakened": false,
+    "search_submission_authorized": false
+  }
+}

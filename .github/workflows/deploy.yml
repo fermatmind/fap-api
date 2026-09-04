@@ -40,6 +40,7 @@ jobs:
       config_fingerprint: ${{ steps.receipt.outputs.config_fingerprint }}
       career_current: ${{ steps.receipt.outputs.career_current }}
       career_current_release: ${{ steps.receipt.outputs.career_current_release }}
+      career_data_recovery: ${{ steps.receipt.outputs.career_data_recovery }}
       career_current_full_scan: ${{ steps.receipt.outputs.career_current_full_scan }}
       career_current_assets_sha256: ${{ steps.career-current.outputs.assets_sha256 }}
       career_current_source_merge_sha: ${{ steps.career-current.outputs.source_merge_sha }}
@@ -318,6 +319,7 @@ jobs:
             "$receipt" >/dev/null
           classification="$(jq -c .classification "$receipt")"
           career_current_release="$(jq -r '.classification.operations.career_current_authority_release == true' "$receipt")"
+          career_data_recovery="$(jq -r '.classification.operations.career_data_recovery == true' "$receipt")"
           career_current="$(jq -r '.publisher.required == true' "$receipt")"
           career_current_full_scan="$career_current"
           mbti_zh_result_release="$(jq -r '.classification.operations.mbti_zh_result_authority_release == true' "$receipt")"
@@ -342,6 +344,7 @@ jobs:
             echo "config_fingerprint=$(sha256sum "$receipt" | awk '{print $1}')"
             echo "career_current=$career_current"
             echo "career_current_release=$career_current_release"
+            echo "career_data_recovery=$career_data_recovery"
             echo "career_current_full_scan=$career_current_full_scan"
             echo "career_parity_receipt_digest=$(jq -r '.publisher.parity.receipt_digest // ""' "$receipt")"
             echo "career_parity_compiler_digest=$(jq -r '.publisher.parity.package.compiler_digest // ""' "$receipt")"
@@ -515,6 +518,7 @@ jobs:
             -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' \
             -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' \
             -o private_result_authority_publish_required='${{ needs.policy.outputs.private_result_authority_publish_required }}' \
+            -o career_data_recovery='${{ needs.policy.outputs.career_data_recovery }}' \
             -o seo_council_orchestration="$council_orchestration" \
             -o seo_competitive_evidence='${{ needs.policy.outputs.seo_competitive_evidence }}' \
             -o seo_council_closeout_deferred="$council_orchestration" --no-interaction
@@ -1522,6 +1526,7 @@ jobs:
           timeout --signal=TERM --kill-after=30s "$deploy_timeout" php /tmp/dep.phar deploy production -f deploy.php --revision "$DEPLOY_SHA" \
             -o release_name="$release" -o deploy_mode=standard \
             -o career_current_parity_required='${{ needs.policy.outputs.career_current }}' \
+            -o career_data_recovery='${{ needs.policy.outputs.career_data_recovery }}' \
             -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' \
             -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' \
             -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' \

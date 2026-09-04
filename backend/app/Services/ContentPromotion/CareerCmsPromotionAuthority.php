@@ -85,7 +85,7 @@ final class CareerCmsPromotionAuthority
             $snapshot = is_array($row['snapshot'] ?? null) ? $row['snapshot'] : [];
             $this->assertSnapshot($kind, $snapshot);
             $this->assertNoPrivatePayload($row);
-            $model = $this->findTarget($kind, $orgId, $slug);
+            $model = $this->findTarget($kind, $orgId, $slug, $locale);
             if (! $model instanceof Model || (string) $model->getAttribute('status') !== 'published' || ! (bool) $model->getAttribute('is_public')) {
                 throw new DomainException('career_promotion_target_not_public_authority');
             }
@@ -156,7 +156,12 @@ final class CareerCmsPromotionAuthority
     {
         $package = $this->inspect($context);
         foreach ($package['targets'] as $target) {
-            $model = $this->findTarget($package['kind'], (int) $target['identity']['org_id'], (string) $target['identity']['slug']);
+            $model = $this->findTarget(
+                $package['kind'],
+                (int) $target['identity']['org_id'],
+                (string) $target['identity']['slug'],
+                (string) $target['identity']['locale'],
+            );
             $revision = $model instanceof Model ? $this->exactRevision($package['kind'], $model, $context, $target) : null;
             if (! $model instanceof Model || ! $revision instanceof Model
                 || (string) $model->getAttribute('status') !== 'published' || ! (bool) $model->getAttribute('is_public')
@@ -218,22 +223,11 @@ final class CareerCmsPromotionAuthority
         };
     }
 
-    private function findTarget(string $kind, int $orgId, string $slug): ?Model
+    private function findTarget(string $kind, int $orgId, string $slug, string $locale): ?Model
     {
-        $model = match ($kind) {
-            'guide' => CareerGuide::query()->withoutGlobalScopes()->where(['org_id' => $orgId, 'slug' => $slug, 'locale' => 'en'])->first(),
-            'job' => CareerJob::query()->withoutGlobalScopes()->where(['org_id' => $orgId, 'slug' => $slug, 'locale' => 'en'])->first(),
-            default => null,
-        };
-        if ($model !== null) {
-            return $model;
-        }
-        // Fall back to zh-CN source authority when the English target does not
-        // exist yet (candidate-only first import). The ZH source must still be
-        // published and public.
         return match ($kind) {
-            'guide' => CareerGuide::query()->withoutGlobalScopes()->where(['org_id' => $orgId, 'slug' => $slug, 'locale' => 'zh-CN'])->first(),
-            'job' => CareerJob::query()->withoutGlobalScopes()->where(['org_id' => $orgId, 'slug' => $slug, 'locale' => 'zh-CN'])->first(),
+            'guide' => CareerGuide::query()->withoutGlobalScopes()->where(['org_id' => $orgId, 'slug' => $slug, 'locale' => $locale])->first(),
+            'job' => CareerJob::query()->withoutGlobalScopes()->where(['org_id' => $orgId, 'slug' => $slug, 'locale' => $locale])->first(),
             default => null,
         };
     }

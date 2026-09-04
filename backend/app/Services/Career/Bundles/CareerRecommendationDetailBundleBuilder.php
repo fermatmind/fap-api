@@ -9,6 +9,7 @@ use App\Domain\Career\IndexStateValue;
 use App\Domain\Career\Publish\CareerLifecycleOperationalSummaryService;
 use App\DTO\Career\CareerRecommendationDetailBundle;
 use App\DTO\Career\CareerTransitionPreviewBundle;
+use App\Models\CareerCompileRun;
 use App\Models\Occupation;
 use App\Models\RecommendationSnapshot;
 use App\Services\Analytics\CareerConversionClosureBuilder;
@@ -172,8 +173,17 @@ final class CareerRecommendationDetailBundleBuilder
      */
     private function matchingSnapshots(string $normalizedType, string $canonicalType): Collection
     {
+        $publishedCompileRunId = CareerCompileRun::query()
+            ->where('status', 'completed')
+            ->where('dry_run', false)
+            ->where('meta->publication_state', 'published_complete')
+            ->orderByDesc('finished_at')
+            ->orderByDesc('started_at')
+            ->orderByDesc('created_at')
+            ->value('id');
+
         /** @var Collection<int, RecommendationSnapshot> $snapshots */
-        $snapshots = RecommendationSnapshot::query()
+        $query = RecommendationSnapshot::query()
             ->with([
                 'occupation.family',
                 'truthMetric.sourceTrace',
@@ -197,7 +207,12 @@ final class CareerRecommendationDetailBundleBuilder
                         ->orWhere('projection_payload->recommendation_subject_meta->canonical_type_code', $normalizedType)
                         ->orWhere('projection_payload->recommendation_subject_meta->canonical_type_code', $canonicalType);
                 });
-            })
+            });
+        if (is_string($publishedCompileRunId) && $publishedCompileRunId !== '') {
+            $query->where('compile_run_id', $publishedCompileRunId);
+        }
+
+        $snapshots = $query
             ->orderByDesc('compiled_at')
             ->orderByDesc('created_at')
             ->get();

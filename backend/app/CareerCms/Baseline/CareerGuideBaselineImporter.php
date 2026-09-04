@@ -27,7 +27,8 @@ final class CareerGuideBaselineImporter
      * @param  array{
      *   dry_run: bool,
      *   upsert: bool,
-     *   status: 'draft'|'published'|null
+     *   status: 'draft'|'published'|null,
+     *   revision_note?: string
      * }  $options
      * @return array<string, int|string|bool>
      */
@@ -36,6 +37,7 @@ final class CareerGuideBaselineImporter
         $dryRun = (bool) ($options['dry_run'] ?? false);
         $upsert = (bool) ($options['upsert'] ?? false);
         $statusOverride = $options['status'] ?? null;
+        $revisionNote = trim((string) ($options['revision_note'] ?? ''));
         $statusMode = is_string($statusOverride) && $statusOverride !== '' ? $statusOverride : 'baseline';
 
         $summary = [
@@ -82,7 +84,7 @@ final class CareerGuideBaselineImporter
                 continue;
             }
 
-            DB::transaction(function () use ($operation): void {
+            DB::transaction(function () use ($operation, $revisionNote): void {
                 $status = (string) $operation['status'];
                 $guidePayload = (array) $operation['payload'];
                 $resolvedRelations = (array) $operation['resolved_relations'];
@@ -91,13 +93,13 @@ final class CareerGuideBaselineImporter
                     $guide = CareerGuide::query()->create(
                         $this->guideAttributes($guidePayload, $status)
                     );
-                    $note = 'baseline import';
+                    $note = $revisionNote !== '' ? $revisionNote : 'baseline import';
                 } else {
                     /** @var CareerGuide $guide */
                     $guide = $operation['existing'];
                     $guide->fill($this->guideAttributes($guidePayload, $status, $guide));
                     $guide->save();
-                    $note = 'baseline upsert';
+                    $note = $revisionNote !== '' ? $revisionNote : 'baseline upsert';
                 }
 
                 $this->syncRelatedJobs($guide, (array) ($resolvedRelations['related_jobs'] ?? []));
@@ -115,7 +117,7 @@ final class CareerGuideBaselineImporter
      * @param  array<string, mixed>  $guidePayload
      * @return array<string, mixed>
      */
-    private function planOperation(array $guidePayload, bool $upsert, ?string $statusOverride): array
+    public function planOperation(array $guidePayload, bool $upsert, ?string $statusOverride): array
     {
         $existing = $this->resolveExistingGuide($guidePayload);
         $status = $statusOverride ?? (string) $guidePayload['status'];
@@ -134,6 +136,7 @@ final class CareerGuideBaselineImporter
                 'resolved_relations' => $resolvedRelations,
                 'existing' => null,
                 'desired_state' => $desiredState,
+                'current_state' => null,
             ];
         }
 
@@ -145,6 +148,7 @@ final class CareerGuideBaselineImporter
                 'resolved_relations' => $resolvedRelations,
                 'existing' => $existing,
                 'desired_state' => $desiredState,
+                'current_state' => $this->currentComparableState($existing),
             ];
         }
 
@@ -158,6 +162,7 @@ final class CareerGuideBaselineImporter
                 'resolved_relations' => $resolvedRelations,
                 'existing' => $existing,
                 'desired_state' => $desiredState,
+                'current_state' => $currentState,
             ];
         }
 
@@ -168,6 +173,7 @@ final class CareerGuideBaselineImporter
             'resolved_relations' => $resolvedRelations,
             'existing' => $existing,
             'desired_state' => $desiredState,
+            'current_state' => $currentState,
         ];
     }
 

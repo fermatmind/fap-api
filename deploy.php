@@ -25,6 +25,7 @@ set('seo_measurement_sync_env', '');
 set('seo_competitive_writer_env', '');
 set('seo_council_closeout_deferred', false);
 set('career_current_parity_required', false);
+set('career_data_recovery', false);
 set('private_result_authority_publish_required', true);
 
 set('sentry_release', function () {
@@ -1181,6 +1182,19 @@ task('artisan:event:cache', function () {
 
 task('artisan:migrate', function () {
     run('{{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' migrate --force --no-interaction --ansi');
+});
+
+task('career:recover-data', function () {
+    if (! deployBooleanOption('career_data_recovery', false)) {
+        writeln('<comment>Skipping unchanged Career data recovery.</comment>');
+
+        return;
+    }
+
+    within('{{release_path}}/backend', function (): void {
+        run('{{bin/php}} artisan career:recover-guide-locale-corruption --execute --json --no-interaction --ansi');
+        run('{{bin/php}} artisan career:compile-recommendation-subjects --no-interaction --ansi');
+    });
 });
 
 task('artisan:migrate-seo-intel', function () {
@@ -3753,6 +3767,37 @@ task('healthcheck:sitemap-source', function () {
     run($cmd);
 });
 
+task('healthcheck:career-data-recovery', function () {
+    if (! deployBooleanOption('career_data_recovery', false)) {
+        writeln('<comment>Skipping unchanged Career data recovery smoke.</comment>');
+
+        return;
+    }
+
+    $host = deploySafeHost((string) get('healthcheck_host'), 'healthcheck_host');
+    $resolveArg = deployCurlResolveArg($host, (bool) get('healthcheck_use_resolve', true));
+    $checks = [
+        [
+            '/api/v0.5/career/recommendations/mbti',
+            '.bundle_kind == "career_recommendation_index" and (.items | length) == 16 and ([.items[].recommendation_subject_meta.public_route_slug] | unique | length) == 16',
+        ],
+        [
+            '/api/v0.5/career-guides/annual-career-review-system?locale=zh-CN',
+            '.ok == true and .guide.locale == "zh-CN" and .guide.title == "年度职业复盘系统"',
+        ],
+        [
+            '/api/v0.5/career-guides/annual-career-review-system?locale=en',
+            '.ok == true and .guide.locale == "en" and .guide.title == "Annual Career Review System"',
+        ],
+    ];
+
+    foreach ($checks as [$path, $filter]) {
+        $url = deployHttpsUrlArg($host, $path);
+        $jq = deployShellArg($filter);
+        run("curl -fsS --max-time 15 {$resolveArg}{$url} | jq -e {$jq} >/dev/null");
+    }
+});
+
 task('healthcheck:public-dns', function () {
     runProductionPublicDnsBusinessEvidence('{{release_path}}');
 });
@@ -4416,7 +4461,8 @@ after('artisan:config:cache', 'seo:competitive-evidence-preactivation');
 after('seo:competitive-evidence-preactivation', 'career:current-authority-production-preactivation-parity');
 after('career:current-authority-production-preactivation-parity', 'guard:sitemap-authority');
 after('artisan:migrate', 'guard:no-pending-migrations');
-after('guard:no-pending-migrations', 'artisan:migrate-seo-intel');
+after('guard:no-pending-migrations', 'career:recover-data');
+after('career:recover-data', 'artisan:migrate-seo-intel');
 after('artisan:migrate-seo-intel', 'guard:no-pending-seo-intel-migrations');
 after('guard:no-pending-seo-intel-migrations', 'seo:platform-10-material-backfill');
 after('seo:platform-10-material-backfill', 'seo:detector-foundation-receipt');
@@ -4442,6 +4488,7 @@ after('deploy:symlink', 'queue:reload-workers');
 after('deploy:symlink', 'healthcheck:public');
 after('healthcheck:public', 'healthcheck:sitemap-source');
 after('healthcheck:sitemap-source', 'healthcheck:public-dns');
+after('healthcheck:public-dns', 'healthcheck:career-data-recovery');
 after('healthcheck:public-dns', 'seo:url-truth-reconciliation-receipt');
 after('seo:url-truth-reconciliation-receipt', 'seo:platform-10-public-closeout');
 after('deploy:symlink', 'healthcheck:auth-guest-contract');

@@ -79,6 +79,7 @@ jobs:
             echo "tests_changed=$(jq -r .tests_changed "$RUNNER_TEMP/classification.json")"
             echo "publisher_required=$(jq -r .operations.publisher_required "$RUNNER_TEMP/classification.json")"
             echo "career_current_authority_release=$(jq -r .operations.career_current_authority_release "$RUNNER_TEMP/classification.json")"
+            echo "career_data_recovery=$(jq -r .operations.career_data_recovery "$RUNNER_TEMP/classification.json")"
             echo "personality_current_authority_release=$(jq -r .operations.personality_current_authority_release "$RUNNER_TEMP/classification.json")"
             echo "seo_platform_10_closeout=$(jq -r .operations.seo_platform_10_closeout "$RUNNER_TEMP/classification.json")"
             echo "seo_platform_11a_closeout=$(jq -r .operations.seo_platform_11a_closeout "$RUNNER_TEMP/classification.json")"

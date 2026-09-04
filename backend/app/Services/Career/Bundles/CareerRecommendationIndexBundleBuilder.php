@@ -189,6 +189,18 @@ final class CareerRecommendationIndexBundleBuilder
 
     private function latestCompletedRecommendationIndexCompileRunId(): ?string
     {
+        $publishedId = CareerCompileRun::query()
+            ->where('status', RunStatus::COMPLETED)
+            ->where('dry_run', false)
+            ->where('meta->publication_state', 'published_complete')
+            ->orderByDesc('finished_at')
+            ->orderByDesc('started_at')
+            ->orderByDesc('created_at')
+            ->value('id');
+        if (is_string($publishedId) && $publishedId !== '') {
+            return $publishedId;
+        }
+
         $id = CareerCompileRun::query()
             ->where('status', RunStatus::COMPLETED)
             ->where('dry_run', false)

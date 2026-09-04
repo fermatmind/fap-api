@@ -103,6 +103,26 @@ final class CareerCmsPromotionAdapterTest extends TestCase
         }
     }
 
+    public function test_english_career_promotion_never_falls_back_to_a_chinese_record(): void
+    {
+        $guide = $this->guide('missing-english-guide');
+        $guide->forceFill(['locale' => 'zh-CN'])->save();
+        $package = $this->package('guide', $guide);
+        $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'W3-CAREER-GUIDES');
+
+        try {
+            $adapter->preflight($this->context($package, 'W3', 'W3-CAREER-GUIDES'));
+            self::fail('A missing English target must fail closed.');
+        } catch (DomainException $exception) {
+            self::assertSame('career_promotion_target_not_public_authority', $exception->getMessage());
+        }
+
+        self::assertSame('zh-CN', $guide->refresh()->locale);
+        self::assertSame('Original guide', $guide->title);
+        self::assertSame('Original guide body.', $guide->body_md);
+        self::assertSame(0, CareerGuideRevision::query()->count());
+    }
+
     private function guide(string $slug): CareerGuide
     {
         return CareerGuide::query()->withoutGlobalScopes()->create([

@@ -122,6 +122,9 @@ export function classifyPaths(inputPaths) {
     mbti_zh_result_authority_release: paths.includes(
       "backend/content_assets/personality_public/mbti_zh_result_authority_release.v1.json",
     ),
+    career_data_recovery: paths.includes(
+      "backend/content_assets/career/career_data_recovery.v1.json",
+    ),
     seo_platform_10_closeout: paths.includes("backend/config/seo_platform_10.php"),
     seo_platform_11a_closeout: paths.includes(
       "backend/docs/seo/generated/seo-platform-11a-inventory.v3.json",
