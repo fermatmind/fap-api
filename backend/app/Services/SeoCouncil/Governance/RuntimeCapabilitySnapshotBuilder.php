@@ -10,6 +10,7 @@ use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use App\Services\SeoAgentGovernance\SeoRoleCapabilityRegistry;
 use App\Services\SeoAgentPolicyGateway\PolicyGatewayRegistry;
 use App\Services\SeoCouncil\Contracts\CouncilContractRegistry;
+use App\Services\SeoCouncil\Platform12\Notification\Platform12NotificationPolicyContract;
 use App\Services\SeoCouncil\Platform12\Platform12ReadOnlyRuntimeGate;
 use App\Services\SeoCouncil\Platform12\Tool\Platform12ToolManifest;
 
@@ -25,6 +26,7 @@ final class RuntimeCapabilitySnapshotBuilder
         private readonly SeoEvidenceContractRegistry $evidence,
         private readonly Platform12ReadOnlyRuntimeGate $readOnlyGate,
         private readonly Platform12ToolManifest $platform12Tools,
+        private readonly Platform12NotificationPolicyContract $notifications,
     ) {}
 
     /** @return array<string, mixed> */
@@ -86,7 +88,10 @@ final class RuntimeCapabilitySnapshotBuilder
             'prompt' => $this->hasher->hash($this->prompts->definitions()),
             'model' => $this->hasher->hash(['provider' => (string) config('seo_council.model_provider', 'disabled')]),
             'tool' => $this->platform12Tools->reference()['hash'],
-            'policy' => (string) $this->policy->registry()['registry_hash'],
+            'policy' => $this->hasher->hash([
+                'gateway' => (string) $this->policy->registry()['registry_hash'],
+                'notification' => $this->notifications->reference()['hash'],
+            ]),
             'schema' => (string) $this->contracts->manifest()['manifest_hash'],
             'evidence' => (string) $this->evidence->manifest()['manifest_hash'],
             'binding' => (string) $this->binding->reference()['hash'],

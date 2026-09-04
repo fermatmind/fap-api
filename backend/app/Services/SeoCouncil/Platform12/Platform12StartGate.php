@@ -6,6 +6,7 @@ namespace App\Services\SeoCouncil\Platform12;
 
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use App\Services\SeoCouncil\Platform11\Platform11ContractRegistry;
+use App\Services\SeoCouncil\Platform12\Notification\Platform12NotificationPolicyContract;
 use App\Services\SeoCouncil\Platform12\Tool\Platform12ToolManifest;
 use App\Services\SeoIntel\PageFamily\PageFamilyPolicyRegistry;
 
@@ -28,6 +29,7 @@ final class Platform12StartGate
         private readonly PageFamilyPolicyRegistry $pageFamilies,
         private readonly SeoRegistryHasher $hasher,
         private readonly Platform12ToolManifest $tools,
+        private readonly Platform12NotificationPolicyContract $notifications,
     ) {}
 
     /**
@@ -96,6 +98,7 @@ final class Platform12StartGate
                 'role_registry' => $manifest['registry_ref'],
                 'role_capability_binding' => $manifest['binding_ref'],
                 'policy_registry' => $manifest['policy_ref'],
+                'notification_policy' => $this->notifications->reference(),
                 'tool_manifest' => $this->tools->reference(),
                 'schema_vector' => [
                     'id' => 'seo.platform11_schema_vector',

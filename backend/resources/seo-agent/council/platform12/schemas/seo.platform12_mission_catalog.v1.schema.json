@@ -35,6 +35,7 @@
                 "role_registry",
                 "role_capability_binding",
                 "policy_registry",
+                "notification_policy",
                 "tool_manifest",
                 "schema_vector"
             ],
@@ -86,6 +87,29 @@
                     }
                 },
                 "policy_registry": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "id",
+                        "version",
+                        "hash"
+                    ],
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "pattern": "^[a-z0-9][a-z0-9._-]{0,127}$"
+                        },
+                        "version": {
+                            "type": "string",
+                            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,31}$"
+                        },
+                        "hash": {
+                            "type": "string",
+                            "pattern": "^[a-f0-9]{64}$"
+                        }
+                    }
+                },
+                "notification_policy": {
                     "type": "object",
                     "additionalProperties": false,
                     "required": [
@@ -411,5 +435,5 @@
             ]
         }
     },
-    "schema_hash": "2cf20943ccefba26dbd1506dd717bf96cd11997398a49124f5b7bb72fd307520"
+    "schema_hash": "adf6bb1c2ecb83d555ef34fc774688d56640bd91deed4cc0859e5d9da63ffb00"
 }

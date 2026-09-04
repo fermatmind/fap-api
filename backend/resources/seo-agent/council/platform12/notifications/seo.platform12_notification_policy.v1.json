@@ -1,0 +1,81 @@
+{
+    "schema_version": "seo.platform12_notification_policy.v1",
+    "policy_id": "fermatmind.seo.platform12.notification_policy",
+    "policy_version": "1.0.0",
+    "runtime_state": "CONTRACT_ONLY_NO_TRANSPORT",
+    "event_types": [
+        "PRIVATE_OR_SAFETY",
+        "AUTHORITY_INDEXABILITY_P0",
+        "AUTHORITY_INDEXABILITY_P1",
+        "DATA_FAILURE",
+        "CANARY_ROLLBACK_FAILURE",
+        "POLICY_HASH_DRIFT",
+        "UNAUTHORIZED_TOOL",
+        "HIGH_VALUE_TIME_SENSITIVE_DECISION",
+        "GENERAL_OBSERVATION",
+        "MISSION_HOLD_LOW",
+        "MISSION_SUCCESS"
+    ],
+    "immediate_event_severities": {
+        "PRIVATE_OR_SAFETY": [
+            "P0",
+            "P1"
+        ],
+        "AUTHORITY_INDEXABILITY_P0": [
+            "P0"
+        ],
+        "AUTHORITY_INDEXABILITY_P1": [
+            "P1"
+        ],
+        "DATA_FAILURE": [
+            "P0",
+            "P1"
+        ],
+        "CANARY_ROLLBACK_FAILURE": [
+            "P0",
+            "P1"
+        ],
+        "POLICY_HASH_DRIFT": [
+            "P1"
+        ],
+        "UNAUTHORIZED_TOOL": [
+            "P1"
+        ],
+        "HIGH_VALUE_TIME_SENSITIVE_DECISION": [
+            "P1"
+        ]
+    },
+    "ordinary_route": "WEEKLY_AGGREGATION",
+    "success_route": "RECEIPT_ONLY",
+    "high_value_time_sensitive_threshold": {
+        "minimum_value_score": 80,
+        "maximum_timeliness_minutes": 240,
+        "model_escalation_allowed": false
+    },
+    "required_event_fields": [
+        "event_type",
+        "severity",
+        "subject_hash",
+        "evidence_refs",
+        "policy_revision",
+        "state",
+        "expires_at",
+        "decision_metrics"
+    ],
+    "allowed_states": [
+        "ACTIVE",
+        "HOLD",
+        "RESOLVED",
+        "OBSERVED"
+    ],
+    "allowed_severities": [
+        "P0",
+        "P1",
+        "P2",
+        "P3",
+        "HOLD",
+        "INFO"
+    ],
+    "notification_transport_enabled": false,
+    "policy_hash": "fdb1c2796e345e97dbe893c5d459ace8110ec3709fdebdd958a3e7db6182e04e"
+}

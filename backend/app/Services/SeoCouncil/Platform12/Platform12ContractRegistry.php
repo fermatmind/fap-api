@@ -7,6 +7,7 @@ namespace App\Services\SeoCouncil\Platform12;
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use App\Services\SeoCouncil\Platform11\Platform11ContractRegistry;
 use App\Services\SeoCouncil\Platform12\Model\Platform12BoundedModelContract;
+use App\Services\SeoCouncil\Platform12\Notification\Platform12NotificationPolicyContract;
 use App\Services\SeoCouncil\Platform12\Tool\Platform12ToolManifest;
 
 final class Platform12ContractRegistry
@@ -18,6 +19,7 @@ final class Platform12ContractRegistry
         private readonly Platform11ContractRegistry $platform11,
         private readonly Platform12BoundedModelContract $boundedModel,
         private readonly Platform12ToolManifest $tools,
+        private readonly Platform12NotificationPolicyContract $notifications,
     ) {}
 
     /** @return array<string, mixed> */
@@ -72,11 +74,15 @@ final class Platform12ContractRegistry
                 'dependency_refs' => [
                     'type' => 'object',
                     'additionalProperties' => false,
-                    'required' => ['role_registry', 'role_capability_binding', 'policy_registry', 'tool_manifest', 'schema_vector'],
+                    'required' => [
+                        'role_registry', 'role_capability_binding', 'policy_registry',
+                        'notification_policy', 'tool_manifest', 'schema_vector',
+                    ],
                     'properties' => [
                         'role_registry' => $reference,
                         'role_capability_binding' => $reference,
                         'policy_registry' => $reference,
+                        'notification_policy' => $reference,
                         'tool_manifest' => $reference,
                         'schema_vector' => $reference,
                     ],
@@ -182,6 +188,7 @@ final class Platform12ContractRegistry
             'role_registry' => $manifest['registry_ref'],
             'role_capability_binding' => $manifest['binding_ref'],
             'policy_registry' => $manifest['policy_ref'],
+            'notification_policy' => $this->notifications->reference(),
             'tool_manifest' => $this->tools->reference(),
             'schema_vector' => [
                 'id' => 'seo.platform12_mission_catalog_schema_vector',
@@ -234,6 +241,7 @@ final class Platform12ContractRegistry
             'resources/seo-agent/council/platform12/catalogs/seo.platform12_mission_catalog.v1.json' => $this->missionCatalog(),
             ...$this->boundedModel->artifacts(),
             ...$this->tools->artifacts(),
+            ...$this->notifications->artifacts(),
         ];
     }
 }
