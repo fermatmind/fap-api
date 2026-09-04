@@ -10,7 +10,7 @@ use RuntimeException;
 
 final class SchedulerHeartbeatService
 {
-    public const CONTRACT_VERSION = 'ops.scheduler_heartbeat.v1';
+    public const CONTRACT_VERSION = 'ops.scheduler_heartbeat.v2';
 
     public const RUNNER = 'cron_schedule_run';
 
@@ -21,7 +21,7 @@ final class SchedulerHeartbeatService
     public static function schedulerContractRevision(): string
     {
         return hash('sha256', implode('|', [
-            'cron.v1',
+            'cron.v2',
             'cadence_seconds=60',
             'weekly_mode=foreground',
             SeoWeeklyDecisionReceiptService::capabilityRevision(),
@@ -127,10 +127,29 @@ final class SchedulerHeartbeatService
         if ($completedAt->greaterThan($observedAt)) {
             return $this->failure('completion_after_observation', $payload, $age);
         }
-        if (($payload['status'] ?? null) === 'overlap') {
+        $status = (string) $payload['status'];
+        if (! in_array($status, ['started', 'healthy', 'failed', 'overlap'], true)) {
+            return $this->failure('contract_mismatch', $payload, $age);
+        }
+        if ($status === 'overlap') {
             return $this->failure('overlap', $payload, $age);
         }
-        if (($payload['status'] ?? null) !== 'healthy' || ($payload['last_exit_code'] ?? null) !== 0) {
+        if ($status === 'started') {
+            $completionAge = (int) floor($completedAt->diffInSeconds($now, false));
+            if (($payload['last_exit_code'] ?? null) !== 0) {
+                return $this->failure('in_progress_after_failed_completion', $payload, $age);
+            }
+            if ($completionAge > $maxAgeSeconds) {
+                return $this->failure('previous_completion_stale', $payload, $age);
+            }
+
+            return array_merge($payload, [
+                'ok' => true,
+                'reason' => 'in_progress',
+                'age_seconds' => max(0, $age),
+            ]);
+        }
+        if ($status !== 'healthy' || ($payload['last_exit_code'] ?? null) !== 0) {
             return $this->failure('failed', $payload, $age);
         }
 

@@ -71,7 +71,7 @@ jobs:
             monitor_rc=1
           fi
           if jq -e '
-            .schema_version == "scheduler-evidence-monitor.v1"
+            .schema_version == "scheduler-evidence-monitor.v2"
             and (.status == "pass" or .status == "fail")
             and .read_only == true
             and .deployment_action == false
@@ -81,7 +81,7 @@ jobs:
           else
             monitor_rc=1
             jq -n --arg active_sha "$active_sha" '{
-              schema_version: "scheduler-evidence-monitor.v1",
+              schema_version: "scheduler-evidence-monitor.v2",
               status: "fail",
               reason: "monitor_transport_or_contract_failed",
               active_production_sha: $active_sha,

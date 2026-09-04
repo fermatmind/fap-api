@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Ops;
 
 use App\Services\SeoIntel\Decision\SeoWeeklyDecisionReceiptService;
+use App\Services\SeoIntel\Decision\SeoWeeklyDecisionReceiptValidator;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -13,7 +14,7 @@ use Throwable;
 
 final class SchedulerEvidenceMonitorService
 {
-    public const CONTRACT_VERSION = 'scheduler-evidence-monitor.v1';
+    public const CONTRACT_VERSION = 'scheduler-evidence-monitor.v2';
 
     private const HEARTBEAT_MAX_AGE_SECONDS = 180;
 
@@ -52,17 +53,23 @@ final class SchedulerEvidenceMonitorService
     private function evaluateWeekly(CarbonImmutable $now): array
     {
         $slot = SeoWeeklyDecisionReceiptService::naturalSlotForWeek($now);
+        $effectiveSlot = CarbonImmutable::parse(SeoWeeklyDecisionReceiptService::CAPABILITY_EFFECTIVE_SLOT, 'UTC');
+        if ($slot->lessThan($effectiveSlot)) {
+            $slot = $effectiveSlot;
+        }
         $dueAt = $slot->addMinutes(self::WEEKLY_GRACE_MINUTES);
         $isoWeek = $slot->format('o-\WW');
         $capabilityRevision = SeoWeeklyDecisionReceiptService::capabilityRevision();
         $base = [
             'state' => 'not_due',
-            'reason' => 'grace_window_open',
+            'reason' => $now->lessThan($slot) ? 'capability_activation_pending' : 'grace_window_open',
             'iso_week' => $isoWeek,
             'due_at' => $dueAt->format('Y-m-d\TH:i:s\Z'),
             'capability_revision' => $capabilityRevision,
             'scheduler_contract_revision_alias' => $capabilityRevision,
+            'receipt_hash_algorithm' => SeoWeeklyDecisionReceiptValidator::HASH_ALGORITHM,
             'manual_receipts_excluded' => true,
+            'mismatch_codes' => [],
         ];
         if ($now->lessThan($dueAt)) {
             return $base;
@@ -83,39 +90,30 @@ final class SchedulerEvidenceMonitorService
                 return $this->weeklyFailure($base, 'weekly_receipt_missing');
             }
 
-            $receiptJson = (string) ($row->receipt_json ?? '');
-            $receipt = json_decode($receiptJson, true, 32, JSON_THROW_ON_ERROR);
+            $capability = SeoWeeklyDecisionReceiptValidator::decodeAndVerify($row, 'capability');
+            $receipt = $capability['payload'];
+            if (! is_array($receipt)) {
+                return $this->weeklyFailure($base, 'receipt_contract_mismatch', $capability['mismatch_codes']);
+            }
             $selectionRevision = (string) ($receipt['selection_revision'] ?? '');
             $selectionRow = DB::connection($this->connection)->table('seo_weekly_decision_receipts')
                 ->where('selection_revision', $selectionRevision)
                 ->first();
-            $selectionJson = (string) ($selectionRow->receipt_json ?? '');
-            $selectionReceipt = json_decode($selectionJson, true, 32, JSON_THROW_ON_ERROR);
-            $scheduledFor = CarbonImmutable::createFromFormat(
-                '!Y-m-d\TH:i:s\Z',
-                (string) ($receipt['scheduled_for'] ?? ''),
-                'UTC',
+            $validation = SeoWeeklyDecisionReceiptValidator::validatePair(
+                $row,
+                $selectionRow,
+                $capabilityRevision,
+                $isoWeek,
+                $slot,
             );
-
-            if (! is_array($receipt)
-                || ! is_array($selectionReceipt)
-                || $scheduledFor === false
-                || ! hash_equals((string) ($row->receipt_hash ?? ''), hash('sha256', $receiptJson))
-                || ! hash_equals((string) ($selectionRow->receipt_hash ?? ''), hash('sha256', $selectionJson))
-                || ($receipt['schema_version'] ?? null) !== SeoWeeklyDecisionReceiptService::CONTRACT_VERSION
-                || ($receipt['trigger'] ?? null) !== 'scheduled'
-                || ($receipt['manual_receipts_excluded'] ?? null) !== true
-                || (string) ($receipt['iso_week'] ?? '') !== $isoWeek
-                || ! hash_equals($capabilityRevision, (string) ($row->capability_revision ?? ''))
-                || ! hash_equals($capabilityRevision, (string) ($receipt['capability_revision'] ?? ''))
-                || $scheduledFor->getTimestamp() !== $slot->getTimestamp()
-                || preg_match('/\A[a-f0-9]{64}\z/', $selectionRevision) !== 1
-                || ! hash_equals((string) ($row->selection_revision ?? ''), $selectionRevision)
-                || ! hash_equals((string) ($selectionReceipt['selection_revision'] ?? ''), $selectionRevision)
-                || ($selectionReceipt['trigger'] ?? null) !== 'scheduled'
-                || ($selectionReceipt['manual_receipts_excluded'] ?? null) !== true) {
-                return $this->weeklyFailure($base, 'receipt_contract_mismatch');
+            if (! $validation['valid'] || $validation['scheduled_for'] === null) {
+                return $this->weeklyFailure(
+                    $base,
+                    'receipt_contract_mismatch',
+                    $validation['mismatch_codes'],
+                );
             }
+            $scheduledFor = $validation['scheduled_for'];
 
             return array_merge($base, [
                 'state' => 'healthy',
@@ -133,11 +131,16 @@ final class SchedulerEvidenceMonitorService
 
     /**
      * @param  array<string, mixed>  $base
+     * @param  list<string>  $mismatchCodes
      * @return array<string, mixed>
      */
-    private function weeklyFailure(array $base, string $reason): array
+    private function weeklyFailure(array $base, string $reason, array $mismatchCodes = []): array
     {
-        return array_merge($base, ['state' => 'failed', 'reason' => $reason]);
+        return array_merge($base, [
+            'state' => 'failed',
+            'reason' => $reason,
+            'mismatch_codes' => array_values(array_unique($mismatchCodes)),
+        ]);
     }
 
     /**

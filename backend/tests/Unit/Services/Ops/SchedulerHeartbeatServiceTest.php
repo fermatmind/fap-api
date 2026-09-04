@@ -43,6 +43,37 @@ final class SchedulerHeartbeatServiceTest extends TestCase
     }
 
     #[Test]
+    public function fresh_started_state_uses_the_previous_success_without_a_false_failure(): void
+    {
+        $service = new SchedulerHeartbeatService($this->path);
+        $completedAt = CarbonImmutable::parse('2026-08-27T13:45:00Z');
+        $service->record('completed', 0, $completedAt);
+        $service->record('started', null, $completedAt->addMinute());
+
+        $checked = $service->check(180, $completedAt->addSeconds(61));
+
+        $this->assertTrue($checked['ok']);
+        $this->assertSame('in_progress', $checked['reason']);
+        $this->assertSame(1, $checked['age_seconds']);
+        $this->assertSame(0, $checked['last_exit_code']);
+    }
+
+    #[Test]
+    public function started_state_cannot_hide_a_failed_or_stale_previous_completion(): void
+    {
+        $service = new SchedulerHeartbeatService($this->path);
+        $now = CarbonImmutable::parse('2026-08-27T13:45:30Z');
+
+        $service->record('completed', 1, $now->subMinute());
+        $service->record('started', null, $now);
+        $this->assertSame('in_progress_after_failed_completion', $service->check(180, $now)['reason']);
+
+        $service->record('completed', 0, $now->subSeconds(181));
+        $service->record('started', null, $now);
+        $this->assertSame('previous_completion_stale', $service->check(180, $now)['reason']);
+    }
+
+    #[Test]
     public function stale_future_failed_and_overlap_heartbeats_fail_closed(): void
     {
         $service = new SchedulerHeartbeatService($this->path);

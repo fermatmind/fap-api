@@ -11,7 +11,7 @@ use Throwable;
 
 final class SeoWeeklyDecisionCloseoutService
 {
-    public const CONTRACT_VERSION = 'seo.weekly_decision_closeout.v1';
+    public const CONTRACT_VERSION = 'seo.weekly_decision_closeout.v2';
 
     private const MAX_EVIDENCE_AGE_SECONDS = 8 * 24 * 60 * 60;
 
@@ -46,37 +46,26 @@ final class SeoWeeklyDecisionCloseoutService
             if ($row === null) {
                 return $this->unproven('natural_capability_receipt_pending');
             }
-            $receipt = json_decode((string) $row->receipt_json, true);
-            $scheduledFor = CarbonImmutable::parse((string) ($receipt['scheduled_for'] ?? ''), 'UTC');
-            $evaluatedAt = ($now ?? CarbonImmutable::now('UTC'))->setTimezone('UTC');
-            $evidenceAgeSeconds = $evaluatedAt->getTimestamp() - $scheduledFor->getTimestamp();
+            $capability = SeoWeeklyDecisionReceiptValidator::decodeAndVerify($row, 'capability');
+            $receipt = $capability['payload'];
+            if (! is_array($receipt)) {
+                return $this->unproven('receipt_or_snapshot_mismatch');
+            }
             $selectionRow = DB::connection($this->connection)->table('seo_weekly_decision_receipts')
                 ->where('selection_revision', (string) ($receipt['selection_revision'] ?? ''))
                 ->first();
-            $selectionReceipt = $selectionRow === null
-                ? null
-                : json_decode((string) $selectionRow->receipt_json, true);
-            if (! is_array($receipt)
-                || ! hash_equals((string) $row->receipt_hash, hash('sha256', (string) $row->receipt_json))
-                || ($receipt['schema_version'] ?? null) !== SeoWeeklyDecisionReceiptService::CONTRACT_VERSION
-                || ($receipt['trigger'] ?? null) !== 'scheduled'
-                || ($receipt['manual_receipts_excluded'] ?? null) !== true
-                || preg_match('/\A[a-f0-9]{40}\z/', (string) ($receipt['release_sha'] ?? '')) !== 1
-                || ! hash_equals($capabilityRevision, (string) ($row->capability_revision ?? ''))
-                || ! hash_equals($capabilityRevision, (string) ($receipt['capability_revision'] ?? ''))
-                || ($receipt['capability_version'] ?? null) !== SeoWeeklyDecisionReceiptService::CAPABILITY_VERSION
-                || ! SeoWeeklyDecisionReceiptService::isNaturalSlot($scheduledFor)
-                || (string) ($receipt['iso_week'] ?? '') !== $scheduledFor->format('o-\WW')
-                || $evidenceAgeSeconds < 0
-                || $evidenceAgeSeconds > self::MAX_EVIDENCE_AGE_SECONDS
-                || ! is_array($selectionReceipt)
-                || ! hash_equals((string) ($selectionRow->receipt_hash ?? ''), hash('sha256', (string) ($selectionRow->receipt_json ?? '')))
-                || ! hash_equals((string) ($selectionReceipt['selection_revision'] ?? ''), (string) ($receipt['selection_revision'] ?? ''))
-                || (int) ($selectionReceipt['decision_count'] ?? -1) !== (int) ($receipt['decision_count'] ?? -2)
-                || array_values((array) ($selectionReceipt['decision_card_ids'] ?? [])) !== array_values((array) ($receipt['decision_card_ids'] ?? []))
-                || array_values((array) ($selectionReceipt['decision_revision_ids'] ?? [])) !== array_values((array) ($receipt['decision_revision_ids'] ?? []))
-                || (int) ($receipt['decision_count'] ?? -1) < 0
-                || (int) ($receipt['decision_count'] ?? -1) > SeoWeeklyDecisionSelector::MAX_COUNT) {
+            $validation = SeoWeeklyDecisionReceiptValidator::validatePair(
+                $row,
+                $selectionRow,
+                $capabilityRevision,
+            );
+            if (! $validation['valid'] || $validation['scheduled_for'] === null) {
+                return $this->unproven('receipt_or_snapshot_mismatch');
+            }
+            $scheduledFor = $validation['scheduled_for'];
+            $evaluatedAt = ($now ?? CarbonImmutable::now('UTC'))->setTimezone('UTC');
+            $evidenceAgeSeconds = $evaluatedAt->getTimestamp() - $scheduledFor->getTimestamp();
+            if ($evidenceAgeSeconds < 0 || $evidenceAgeSeconds > self::MAX_EVIDENCE_AGE_SECONDS) {
                 return $this->unproven('receipt_or_snapshot_mismatch');
             }
 
@@ -91,6 +80,7 @@ final class SeoWeeklyDecisionCloseoutService
                 'selection_revision' => (string) $receipt['selection_revision'],
                 'decision_count' => (int) $receipt['decision_count'],
                 'receipt_hash' => (string) $row->receipt_hash,
+                'receipt_hash_algorithm' => SeoWeeklyDecisionReceiptValidator::HASH_ALGORITHM,
                 'evidence_age_seconds' => $evidenceAgeSeconds,
                 'natural_scheduler_proven' => true,
                 'idempotent_selection_proven' => true,

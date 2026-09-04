@@ -11,15 +11,17 @@ use RuntimeException;
 
 final class SeoWeeklyDecisionReceiptService
 {
-    public const CONTRACT_VERSION = 'seo.weekly_decision_receipt.v2';
+    public const CONTRACT_VERSION = 'seo.weekly_decision_receipt.v3';
 
-    private const SELECTION_CONTRACT_VERSION = 'seo.weekly_decision_receipt.v1';
+    public const SELECTION_CONTRACT_VERSION = 'seo.weekly_decision_selection_receipt.v2';
 
-    public const CAPABILITY_VERSION = 'seo.weekly_decision_natural.v2';
+    public const CAPABILITY_VERSION = 'seo.weekly_decision_natural.v3';
 
     public const NATURAL_SLOT_DAY = 4;
 
     public const NATURAL_SLOT_TIME = '13:45';
+
+    public const CAPABILITY_EFFECTIVE_SLOT = '2026-09-10T13:45:00Z';
 
     public const TRANSACTION_DEADLINE_SECONDS = 50;
 
@@ -47,7 +49,7 @@ final class SeoWeeklyDecisionReceiptService
         }
 
         $slot = ($scheduledFor ?? CarbonImmutable::now('UTC'))->setTimezone('UTC');
-        if (! self::isNaturalSlot($slot)) {
+        if (! self::isCapabilitySlot($slot)) {
             return [
                 'schema_version' => self::CONTRACT_VERSION,
                 'status' => 'MEASUREMENT_HOLD',
@@ -81,7 +83,11 @@ final class SeoWeeklyDecisionReceiptService
             if ($existing !== null) {
                 $this->assertWithinDeadline($deadline);
 
-                return $this->presentCapability($existing, true);
+                $selectionRow = $this->db()->table('seo_weekly_decision_receipts')
+                    ->where('selection_revision', $selection['selection_revision'])
+                    ->first();
+
+                return $this->presentCapability($existing, $selectionRow, $selection, $slot, true);
             }
 
             $selectionRow = $this->db()->table('seo_weekly_decision_receipts')
@@ -103,6 +109,7 @@ final class SeoWeeklyDecisionReceiptService
 
             $payload = [
                 'schema_version' => self::CONTRACT_VERSION,
+                'receipt_hash_algorithm' => SeoWeeklyDecisionReceiptValidator::HASH_ALGORITHM,
                 'status' => 'scheduled_completed',
                 'trigger' => 'scheduled',
                 'iso_week' => $selection['iso_week'],
@@ -122,8 +129,8 @@ final class SeoWeeklyDecisionReceiptService
                 'l4_enabled' => false,
                 'search_submission_allowed' => false,
             ];
-            $receiptJson = json_encode($payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
-            $receiptHash = hash('sha256', $receiptJson);
+            $receiptJson = SeoWeeklyDecisionReceiptValidator::encode($payload);
+            $receiptHash = SeoWeeklyDecisionReceiptValidator::hash($payload);
             $row = [
                 'receipt_id' => $this->deterministicUuid((string) $selection['selection_revision'].'|'.$capabilityRevision),
                 'selection_revision' => $selection['selection_revision'],
@@ -141,6 +148,23 @@ final class SeoWeeklyDecisionReceiptService
             $this->db()->table('seo_weekly_decision_capability_receipts')->insert($row);
             $this->assertWithinDeadline($deadline);
 
+            $storedCapability = $this->db()->table('seo_weekly_decision_capability_receipts')
+                ->where('receipt_id', $row['receipt_id'])
+                ->first();
+            $storedSelection = $this->db()->table('seo_weekly_decision_receipts')
+                ->where('selection_revision', $selection['selection_revision'])
+                ->first();
+            $validation = SeoWeeklyDecisionReceiptValidator::validatePair(
+                $storedCapability,
+                $storedSelection,
+                $capabilityRevision,
+                (string) $selection['iso_week'],
+                $slot,
+            );
+            if (! $validation['valid']) {
+                throw new RuntimeException('Weekly decision receipt readback failed: '.implode(',', $validation['mismatch_codes']));
+            }
+
             return array_merge($payload, [
                 'receipt_id' => $row['receipt_id'],
                 'receipt_hash' => $receiptHash,
@@ -157,14 +181,28 @@ final class SeoWeeklyDecisionReceiptService
         }
     }
 
-    /** @return array<string, mixed> */
-    private function presentCapability(object $row, bool $replay): array
-    {
-        $payload = json_decode((string) $row->receipt_json, true);
-        if (! is_array($payload)
-            || ! hash_equals((string) $row->receipt_hash, hash('sha256', (string) $row->receipt_json))) {
-            throw new RuntimeException('Weekly decision receipt integrity check failed.');
+    /**
+     * @param  array<string, mixed>  $selection
+     * @return array<string, mixed>
+     */
+    private function presentCapability(
+        object $row,
+        ?object $selectionRow,
+        array $selection,
+        CarbonImmutable $slot,
+        bool $replay,
+    ): array {
+        $validation = SeoWeeklyDecisionReceiptValidator::validatePair(
+            $row,
+            $selectionRow,
+            self::capabilityRevision(),
+            (string) $selection['iso_week'],
+            $slot,
+        );
+        if (! $validation['valid'] || $validation['capability_receipt'] === null) {
+            throw new RuntimeException('Weekly decision receipt integrity check failed: '.implode(',', $validation['mismatch_codes']));
         }
+        $payload = $validation['capability_receipt'];
 
         return array_merge($payload, [
             'receipt_id' => (string) $row->receipt_id,
@@ -200,6 +238,7 @@ final class SeoWeeklyDecisionReceiptService
 
         $payload = [
             'schema_version' => self::SELECTION_CONTRACT_VERSION,
+            'receipt_hash_algorithm' => SeoWeeklyDecisionReceiptValidator::HASH_ALGORITHM,
             'status' => 'scheduled_completed',
             'trigger' => 'scheduled',
             'iso_week' => $selection['iso_week'],
@@ -217,7 +256,7 @@ final class SeoWeeklyDecisionReceiptService
             'l4_enabled' => false,
             'search_submission_allowed' => false,
         ];
-        $receiptJson = json_encode($payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
+        $receiptJson = SeoWeeklyDecisionReceiptValidator::encode($payload);
         $this->db()->table('seo_weekly_decision_receipts')->insert([
             'receipt_id' => $this->deterministicUuid((string) $selection['selection_revision']),
             'selection_revision' => $selection['selection_revision'],
@@ -228,7 +267,7 @@ final class SeoWeeklyDecisionReceiptService
             'decision_card_ids_json' => json_encode($payload['decision_card_ids'], JSON_THROW_ON_ERROR),
             'decision_revision_ids_json' => json_encode($revisionIds, JSON_THROW_ON_ERROR),
             'receipt_json' => $receiptJson,
-            'receipt_hash' => hash('sha256', $receiptJson),
+            'receipt_hash' => SeoWeeklyDecisionReceiptValidator::hash($payload),
             'created_at' => $slot,
         ]);
 
@@ -238,9 +277,12 @@ final class SeoWeeklyDecisionReceiptService
     /** @param array<string, mixed> $selection @return array<string, mixed> */
     private function decodeSelectionReceipt(object $row, array $selection): array
     {
-        $payload = json_decode((string) $row->receipt_json, true);
-        if (! is_array($payload)
-            || ! hash_equals((string) $row->receipt_hash, hash('sha256', (string) $row->receipt_json))
+        $verified = SeoWeeklyDecisionReceiptValidator::decodeAndVerify($row, 'selection');
+        $payload = $verified['payload'];
+        if (! $verified['valid']
+            || ! is_array($payload)
+            || ($payload['schema_version'] ?? null) !== self::SELECTION_CONTRACT_VERSION
+            || ($payload['receipt_hash_algorithm'] ?? null) !== SeoWeeklyDecisionReceiptValidator::HASH_ALGORITHM
             || ($payload['trigger'] ?? null) !== 'scheduled'
             || ! hash_equals((string) $selection['selection_revision'], (string) ($payload['selection_revision'] ?? ''))
             || (int) ($payload['decision_count'] ?? -1) !== (int) $selection['count']
@@ -272,6 +314,7 @@ final class SeoWeeklyDecisionReceiptService
             self::CAPABILITY_VERSION,
             (string) self::NATURAL_SLOT_DAY,
             self::NATURAL_SLOT_TIME,
+            self::CAPABILITY_EFFECTIVE_SLOT,
             SeoWeeklyDecisionSelector::CONTRACT_VERSION,
         ]));
     }
@@ -282,6 +325,14 @@ final class SeoWeeklyDecisionReceiptService
 
         return (int) $slot->isoWeekday() === self::NATURAL_SLOT_DAY
             && $slot->format('H:i') === self::NATURAL_SLOT_TIME;
+    }
+
+    public static function isCapabilitySlot(CarbonImmutable $slot): bool
+    {
+        $slot = $slot->setTimezone('UTC');
+
+        return self::isNaturalSlot($slot)
+            && $slot->greaterThanOrEqualTo(CarbonImmutable::parse(self::CAPABILITY_EFFECTIVE_SLOT, 'UTC'));
     }
 
     public static function naturalSlotForWeek(CarbonImmutable $now): CarbonImmutable
