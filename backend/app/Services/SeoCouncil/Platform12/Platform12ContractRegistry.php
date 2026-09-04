@@ -5,10 +5,16 @@ declare(strict_types=1);
 namespace App\Services\SeoCouncil\Platform12;
 
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
+use App\Services\SeoCouncil\Platform11\Platform11ContractRegistry;
 
 final class Platform12ContractRegistry
 {
-    public function __construct(private readonly SeoRegistryHasher $hasher) {}
+    public const MISSION_CATALOG_VERSION = '1.0.0';
+
+    public function __construct(
+        private readonly SeoRegistryHasher $hasher,
+        private readonly Platform11ContractRegistry $platform11,
+    ) {}
 
     /** @return array<string, mixed> */
     public function startReceiptSchema(): array
@@ -31,11 +37,201 @@ final class Platform12ContractRegistry
         return $schema;
     }
 
+    /** @return array<string, mixed> */
+    public function missionCatalogSchema(): array
+    {
+        $reference = [
+            'type' => 'object',
+            'additionalProperties' => false,
+            'required' => ['id', 'version', 'hash'],
+            'properties' => [
+                'id' => ['type' => 'string', 'pattern' => '^[a-z0-9][a-z0-9._-]{0,127}$'],
+                'version' => ['type' => 'string', 'pattern' => '^[a-zA-Z0-9][a-zA-Z0-9._-]{0,31}$'],
+                'hash' => ['type' => 'string', 'pattern' => '^[a-f0-9]{64}$'],
+            ],
+        ];
+        $schema = [
+            '$schema' => 'https://json-schema.org/draft/2020-12/schema',
+            'schema_id' => 'seo.platform12_mission_catalog.v1',
+            'schema_version' => '1.0.0',
+            'type' => 'object',
+            'additionalProperties' => false,
+            'required' => [
+                'schema_version', 'catalog_id', 'catalog_version', 'catalog_state',
+                'dependency_refs', 'missions', 'runtime_activation_allowed', 'catalog_hash',
+            ],
+            'properties' => [
+                'schema_version' => ['const' => 'seo.platform12_mission_catalog.v1'],
+                'catalog_id' => ['const' => 'fermatmind.seo.platform12_mission_catalog'],
+                'catalog_version' => ['type' => 'string', 'pattern' => '^\\d+\\.\\d+\\.\\d+$'],
+                'catalog_state' => ['const' => 'FOUNDATION_ONLY'],
+                'dependency_refs' => [
+                    'type' => 'object',
+                    'additionalProperties' => false,
+                    'required' => ['role_registry', 'role_capability_binding', 'policy_registry', 'tool_manifest', 'schema_vector'],
+                    'properties' => [
+                        'role_registry' => $reference,
+                        'role_capability_binding' => $reference,
+                        'policy_registry' => $reference,
+                        'tool_manifest' => $reference,
+                        'schema_vector' => $reference,
+                    ],
+                ],
+                'missions' => [
+                    'type' => 'array',
+                    'maxItems' => 128,
+                    'items' => ['$ref' => '#/$defs/mission'],
+                ],
+                'runtime_activation_allowed' => ['const' => false],
+                'catalog_hash' => ['type' => 'string', 'pattern' => '^[a-f0-9]{64}$'],
+            ],
+            '$defs' => [
+                'mission' => [
+                    'type' => 'object',
+                    'additionalProperties' => false,
+                    'required' => [
+                        'mission_id', 'cadence', 'timezone', 'natural_slot', 'family', 'locale',
+                        'review_domain', 'required_evidence', 'eligible_capability', 'priority',
+                        'timeout_seconds', 'max_attempts', 'budgets', 'failure_policy', 'output_schema',
+                    ],
+                    'properties' => [
+                        'mission_id' => ['type' => 'string', 'pattern' => '^seo\\.platform12\\.[a-z0-9][a-z0-9._-]{0,95}$'],
+                        'cadence' => ['enum' => ['daily', 'weekly', 'monthly']],
+                        'timezone' => ['const' => 'Asia/Shanghai'],
+                        'natural_slot' => ['type' => 'string', 'pattern' => '^(daily|weekly|monthly):[A-Z0-9]{2,3}:(?:[01][0-9]|2[0-3]):[0-5][0-9]$'],
+                        'family' => ['enum' => ['tests', 'articles_topics', 'career', 'personality', 'trust_method_help', 'other_public']],
+                        'locale' => ['enum' => ['en', 'zh-CN']],
+                        'review_domain' => ['type' => 'string', 'pattern' => '^[a-z][a-z0-9_]{0,63}$'],
+                        'required_evidence' => [
+                            'type' => 'array', 'minItems' => 1, 'maxItems' => 32, 'uniqueItems' => true,
+                            'items' => ['type' => 'string', 'pattern' => '^[a-z][a-z0-9._-]{0,63}$'],
+                        ],
+                        'eligible_capability' => ['type' => 'string', 'pattern' => '^seo\\.[a-z][a-z0-9._-]{0,95}$'],
+                        'priority' => ['enum' => ['critical', 'high', 'normal', 'low']],
+                        'timeout_seconds' => ['type' => 'integer', 'minimum' => 1, 'maximum' => 900],
+                        'max_attempts' => ['type' => 'integer', 'minimum' => 1, 'maximum' => 5],
+                        'budgets' => [
+                            'type' => 'object',
+                            'additionalProperties' => false,
+                            'required' => ['model_calls', 'model_input_tokens', 'model_output_tokens', 'tool_calls', 'cost_microusd'],
+                            'properties' => [
+                                'model_calls' => ['type' => 'integer', 'minimum' => 0, 'maximum' => 8],
+                                'model_input_tokens' => ['type' => 'integer', 'minimum' => 0, 'maximum' => 100000],
+                                'model_output_tokens' => ['type' => 'integer', 'minimum' => 0, 'maximum' => 20000],
+                                'tool_calls' => ['type' => 'integer', 'minimum' => 0, 'maximum' => 32],
+                                'cost_microusd' => ['type' => 'integer', 'minimum' => 0, 'maximum' => 10000000],
+                            ],
+                        ],
+                        'failure_policy' => [
+                            'type' => 'object',
+                            'additionalProperties' => false,
+                            'required' => ['terminal_state', 'retry_strategy', 'initial_backoff_seconds', 'max_backoff_seconds'],
+                            'properties' => [
+                                'terminal_state' => ['enum' => ['HOLD', 'FAILED']],
+                                'retry_strategy' => ['enum' => ['none', 'bounded_exponential']],
+                                'initial_backoff_seconds' => ['type' => 'integer', 'minimum' => 0, 'maximum' => 300],
+                                'max_backoff_seconds' => ['type' => 'integer', 'minimum' => 0, 'maximum' => 1800],
+                            ],
+                        ],
+                        'output_schema' => $reference,
+                    ],
+                    'allOf' => [
+                        [
+                            'if' => ['properties' => ['cadence' => ['const' => 'daily']]],
+                            'then' => ['properties' => ['natural_slot' => ['pattern' => '^daily:ALL:(?:[01][0-9]|2[0-3]):[0-5][0-9]$']]],
+                        ],
+                        [
+                            'if' => ['properties' => ['cadence' => ['const' => 'weekly']]],
+                            'then' => ['properties' => ['natural_slot' => ['pattern' => '^weekly:(MON|TUE|WED|THU|FRI|SAT|SUN):(?:[01][0-9]|2[0-3]):[0-5][0-9]$']]],
+                        ],
+                        [
+                            'if' => ['properties' => ['cadence' => ['const' => 'monthly']]],
+                            'then' => ['properties' => ['natural_slot' => ['pattern' => '^monthly:(0[1-9]|[12][0-9]|3[01]):(?:[01][0-9]|2[0-3]):[0-5][0-9]$']]],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+        $schema['schema_hash'] = $this->hasher->hash($schema);
+
+        return $schema;
+    }
+
+    /** @return array<string, array{id:string,version:string,hash:string}> */
+    public function missionCatalogDependencyRefs(): array
+    {
+        $manifest = $this->platform11->manifest();
+        $binding = $this->platform11->binding();
+        $catalogSchema = $this->missionCatalogSchema();
+        $schemaRefs = array_filter(
+            $manifest,
+            static fn (string $key): bool => str_ends_with($key, '_schema_ref') || $key === 'mission_request_ref',
+            ARRAY_FILTER_USE_KEY,
+        );
+        $schemaRefs['platform12_mission_catalog_schema'] = [
+            'id' => $catalogSchema['schema_id'],
+            'version' => $catalogSchema['schema_version'],
+            'hash' => $catalogSchema['schema_hash'],
+        ];
+
+        return [
+            'role_registry' => $manifest['registry_ref'],
+            'role_capability_binding' => $manifest['binding_ref'],
+            'policy_registry' => $manifest['policy_ref'],
+            'tool_manifest' => [
+                'id' => 'seo.platform11_deterministic_tool_registry',
+                'version' => Platform11ContractRegistry::BINDING_VERSION,
+                'hash' => $this->hasher->hash($binding['deterministic_tool_registry']),
+            ],
+            'schema_vector' => [
+                'id' => 'seo.platform12_mission_catalog_schema_vector',
+                'version' => self::MISSION_CATALOG_VERSION,
+                'hash' => $this->hasher->hash($schemaRefs),
+            ],
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    public function missionCatalog(): array
+    {
+        $catalog = [
+            'schema_version' => 'seo.platform12_mission_catalog.v1',
+            'catalog_id' => 'fermatmind.seo.platform12_mission_catalog',
+            'catalog_version' => self::MISSION_CATALOG_VERSION,
+            'catalog_state' => 'FOUNDATION_ONLY',
+            'dependency_refs' => $this->missionCatalogDependencyRefs(),
+            'missions' => [],
+            'runtime_activation_allowed' => false,
+        ];
+        $catalog['catalog_hash'] = $this->hasher->hash($catalog);
+
+        return $catalog;
+    }
+
+    public function verifyGenerated(): bool
+    {
+        try {
+            foreach ($this->artifacts() as $relative => $expected) {
+                $path = dirname(__DIR__, 4).'/'.$relative;
+                $actual = json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
+                if (! is_array($actual) || ! hash_equals($this->hasher->hash($expected), $this->hasher->hash($actual))) {
+                    return false;
+                }
+            }
+
+            return true;
+        } catch (\Throwable) {
+            return false;
+        }
+    }
+
     /** @return array<string, array<string, mixed>> */
     public function artifacts(): array
     {
         return [
             'resources/seo-agent/council/platform12/schemas/seo.platform12_start_receipt.v1.schema.json' => $this->startReceiptSchema(),
+            'resources/seo-agent/council/platform12/schemas/seo.platform12_mission_catalog.v1.schema.json' => $this->missionCatalogSchema(),
+            'resources/seo-agent/council/platform12/catalogs/seo.platform12_mission_catalog.v1.json' => $this->missionCatalog(),
         ];
     }
 }

@@ -1,0 +1,36 @@
+{
+    "schema_version": "seo.platform12_mission_catalog.v1",
+    "catalog_id": "fermatmind.seo.platform12_mission_catalog",
+    "catalog_version": "1.0.0",
+    "catalog_state": "FOUNDATION_ONLY",
+    "dependency_refs": {
+        "role_registry": {
+            "id": "fermatmind.seo.role_capability_registry",
+            "version": "2.0.0",
+            "hash": "fb80c061eb787f64b14630a6eb81ed04650073f12ce95645f00d7f2cd3302c0d"
+        },
+        "role_capability_binding": {
+            "id": "fermatmind.seo.role_capability_binding",
+            "version": "4.0.0",
+            "hash": "65ae9119be074b21b156bb218920a4788d7c0ab6cec7e643955bfb6c1a9e3027"
+        },
+        "policy_registry": {
+            "id": "fermatmind.seo.policy_gateway_registry",
+            "version": "2.0.0",
+            "hash": "da812f67d3330fbe06b271a2415cbf8da0a6e326c5e6c10a0aeea9402f0e362d"
+        },
+        "tool_manifest": {
+            "id": "seo.platform11_deterministic_tool_registry",
+            "version": "4.0.0",
+            "hash": "d11b777b5b6f4f68be8075f9fd5948f5a440959238f1c00687525fb8cec5cbdf"
+        },
+        "schema_vector": {
+            "id": "seo.platform12_mission_catalog_schema_vector",
+            "version": "1.0.0",
+            "hash": "4f50b71c2d5d218c8e0edd775218737470fdd959e0a31b3bd747cc04a459db4e"
+        }
+    },
+    "missions": [],
+    "runtime_activation_allowed": false,
+    "catalog_hash": "8761f60dc61dfddf0f4ae056172df114450e4ea52b303c99473f3ae33a00f144"
+}
