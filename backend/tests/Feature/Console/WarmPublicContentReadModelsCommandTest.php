@@ -192,6 +192,7 @@ final class WarmPublicContentReadModelsCommandTest extends TestCase
 
     public function test_warm_json_suppresses_child_output_and_scopes_career_to_directory_only(): void
     {
+        config()->set('fap.testing_personality_legacy_public_db_fixture', true);
         $mbtiCache = app(PersonalityPublicReadModelCache::class);
         $this->seedMbtiReadModels($mbtiCache);
 

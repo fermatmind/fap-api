@@ -120,6 +120,7 @@ final class PersonalityEnsureMbtiVariantSectionStructureCommandTest extends Test
 
     public function test_public_api_exposes_the_structured_sections_for_variant_routes(): void
     {
+        config()->set('fap.testing_personality_legacy_public_db_fixture', true);
         $variants = $this->createMbtiVariantMatrix();
 
         $this->artisan('personality:ensure-mbti-variant-section-structure', [

@@ -26,6 +26,7 @@ final class PersonalityMbtiContent15ProductionImportCommandTest extends TestCase
 
     public function test_dry_run_and_exact_authorized_write_import_the_nine_record_batch_without_releasing_indexability(): void
     {
+        config()->set('fap.testing_personality_legacy_public_db_fixture', true);
         $this->seedPublicProfiles();
         [$packagePath, $authorizationPath] = $this->writeFixturePair($this->validPackage(), $this->validAuthorizationPackage());
 
