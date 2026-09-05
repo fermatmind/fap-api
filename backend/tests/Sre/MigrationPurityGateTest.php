@@ -231,6 +231,9 @@ final class MigrationPurityGateTest extends TestCase
 
     private function isAllowlisted(string $keyword, string $snippet): bool
     {
+        if ($keyword === 'DB::table(' && $this->isReadOnlyDuplicatePrecondition($snippet)) {
+            return true;
+        }
         if (! in_array($keyword, ['DB::select(', 'DB::statement('], true)) {
             return false;
         }
@@ -242,6 +245,82 @@ final class MigrationPurityGateTest extends TestCase
         }
 
         return false;
+    }
+
+    private function isReadOnlyDuplicatePrecondition(string $snippet): bool
+    {
+        try {
+            $nodes = (new \PhpParser\ParserFactory)->createForNewestSupportedVersion()->parse('<?php '.$snippet);
+        } catch (\PhpParser\Error) {
+            return false;
+        }
+        if (count($nodes ?? []) !== 1 || ! $nodes[0] instanceof \PhpParser\Node\Stmt\Expression
+            || ! $nodes[0]->expr instanceof \PhpParser\Node\Expr\Assign
+            || ! $nodes[0]->expr->var instanceof \PhpParser\Node\Expr\Variable
+            || ! is_string($nodes[0]->expr->var->name)) {
+            return false;
+        }
+        $call = $nodes[0]->expr->expr;
+        $arguments = [];
+        foreach (['first', 'havingRaw', 'groupByRaw', 'selectRaw'] as $method) {
+            if (! $call instanceof \PhpParser\Node\Expr\MethodCall
+                || ! $call->name instanceof \PhpParser\Node\Identifier || $call->name->toString() !== $method
+                || count($call->args) !== ($method === 'first' ? 0 : 1)) {
+                return false;
+            }
+            if ($method !== 'first') {
+                if (! $call->args[0]->value instanceof \PhpParser\Node\Scalar\String_) {
+                    return false;
+                }
+                $arguments[$method] = preg_replace('/\s+/', ' ', trim($call->args[0]->value->value));
+            }
+            $call = $call->var;
+        }
+        if (! $call instanceof \PhpParser\Node\Expr\StaticCall
+            || ! $call->class instanceof \PhpParser\Node\Name || $call->class->toString() !== 'DB'
+            || ! $call->name instanceof \PhpParser\Node\Identifier || $call->name->toString() !== 'table'
+            || count($call->args) !== 1) {
+            return false;
+        }
+        $table = $call->args[0]->value;
+        if (! $table instanceof \PhpParser\Node\Scalar\String_
+            && ! ($table instanceof \PhpParser\Node\Expr\ClassConstFetch
+                && $table->class instanceof \PhpParser\Node\Name && $table->class->toString() === 'self'
+                && $table->name instanceof \PhpParser\Node\Identifier)) {
+            return false;
+        }
+        // Accept only a bounded duplicate-existence aggregate, never arbitrary raw SQL or callbacks.
+        $column = '[A-Za-z_][A-Za-z0-9_]*';
+        $expression = '(?:'.$column.'|LOWER\(TRIM\('.$column.'\)\))';
+        if (preg_match('/^('.$expression.') AS '.$column.', COUNT\(\*\) AS '.$column.'$/iD', $arguments['selectRaw'], $match) !== 1) {
+            return false;
+        }
+
+        return strcasecmp($match[1], $arguments['groupByRaw']) === 0
+            && preg_match('/^COUNT\(\*\) > 1$/iD', $arguments['havingRaw']) === 1;
+    }
+
+    #[Test]
+    public function duplicate_preconditions_do_not_authorize_dml_backfills_or_side_effects(): void
+    {
+        $read = "\$duplicate = DB::table(self::TABLE)->selectRaw('LOWER(TRIM(canonical_slug)) AS slug, COUNT(*) AS aggregate')->groupByRaw('LOWER(TRIM(canonical_slug))')->havingRaw('COUNT(*) > 1')->first();";
+        $this->assertTrue($this->isReadOnlyDuplicatePrecondition($read));
+        foreach ([
+            str_replace('->first()', "->update(['canonical_slug' => 'replaced'])", $read),
+            str_replace('->first()', '->delete()', $read),
+            str_replace('->first()', '->insert([])', $read),
+            str_replace('->first()', '->upsert([], [])', $read),
+            str_replace('->first()', '->truncate()', $read),
+            str_replace('LOWER(TRIM(canonical_slug))', 'SLEEP(10)', $read),
+            str_replace('COUNT(*) > 1', 'COUNT(*) > 1; DELETE FROM users', $read),
+            str_replace('self::TABLE', 'sideEffect()', $read),
+            str_replace('$duplicate =', '$state[sideEffect()] =', $read),
+            str_replace('->first()', '->first()->save()', $read),
+            $read.' DB::table(self::TABLE)->delete();',
+            str_replace('->first()', '->first(function () { sideEffect(); })', $read),
+        ] as $unsafe) {
+            $this->assertFalse($this->isAllowlisted('DB::table(', $unsafe), $unsafe);
+        }
     }
 
     /**
