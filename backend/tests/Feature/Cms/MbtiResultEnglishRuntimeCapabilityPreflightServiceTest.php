@@ -90,14 +90,14 @@ final class MbtiResultEnglishRuntimeCapabilityPreflightServiceTest extends TestC
         $this->inspect();
     }
 
-    public function test_the_executor_and_workflow_are_read_only_and_frame_only_validated_stdout_receipts(): void
+    public function test_the_executor_is_read_only_and_its_retired_workflow_stays_removed(): void
     {
         $approvalPath = MbtiResultEnglishRuntimeCapabilityPreflightService::defaultApprovalPath();
         $approvalBytes = (string) File::get($approvalPath);
         $approval = json_decode($approvalBytes, true, 512, JSON_THROW_ON_ERROR);
         $executor = (string) File::get(base_path('scripts/mbti_result_english_runtime_capability_preflight.php'));
         $service = (string) File::get(base_path('app/Services/Cms/MbtiResultEnglishRuntimeCapabilityPreflightService.php'));
-        $workflow = (string) File::get(base_path('../.github/workflows/mbti-result-english-runtime-capability-preflight.yml'));
+        self::assertFileDoesNotExist(base_path('../.github/workflows/mbti-result-english-runtime-capability-preflight.yml'));
 
         self::assertSame(MbtiResultEnglishRuntimeCapabilityPreflightService::APPROVAL_SHA256, hash('sha256', $approvalBytes));
         self::assertSame('runtime_capability_preflight', $approval['gate']);
@@ -123,24 +123,6 @@ final class MbtiResultEnglishRuntimeCapabilityPreflightServiceTest extends TestC
         self::assertStringNotContainsString('payload_json', $service);
         self::assertStringNotContainsString("DB::table('attempts')", $service);
         self::assertStringNotContainsString("DB::table('results')", $service);
-        self::assertStringContainsString('environment: production', $workflow);
-        self::assertStringContainsString('controlled_read_only_runtime_capability_preflight', $workflow);
-        self::assertStringContainsString('candidate_receipt_path=', $workflow);
-        self::assertStringContainsString('> "$RUN_DIR/executor.stdout" 2> "$RUN_DIR/executor.stderr"', $workflow);
-        self::assertStringContainsString('jq -e -s', $workflow);
-        self::assertStringContainsString('length == 1', $workflow);
-        self::assertStringContainsString('emit_remote_receipt remote_executor_failed remote_executor_failed', $workflow);
-        self::assertStringContainsString('emit_remote_receipt remote_executor_stdout_invalid remote_executor_stdout_invalid', $workflow);
-        self::assertStringContainsString('emit_failure_receipt remote_transport_or_bootstrap_failed remote_transport_or_bootstrap_failed', $workflow);
-        self::assertStringContainsString('cat "$RUN_DIR/executor.stdout"', $workflow);
-        self::assertStringContainsString('mv "$candidate_receipt_path" "$receipt_path"', $workflow);
-        self::assertStringContainsString("jq -e '.status == \"BLOCKED\"' \"\$receipt_path\"", $workflow);
-        self::assertStringContainsString('runner_receipt_contract_failed', $workflow);
-        self::assertStringNotContainsString('> "$receipt_path" 2>"$RUNNER_TEMP/mbti-result-runtime-preflight.stderr"', $workflow);
-        self::assertStringNotContainsString('$run_dir/receipts/.', $workflow);
-        self::assertStringNotContainsString('scp -P "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes "$run_dir/receipt', $workflow);
-        self::assertStringNotContainsString('php artisan migrate', $workflow);
-        self::assertStringNotContainsString('dep deploy', $workflow);
     }
 
     public function test_the_executor_emits_only_a_single_json_receipt_or_a_safe_stderr_failure(): void
@@ -171,12 +153,12 @@ final class MbtiResultEnglishRuntimeCapabilityPreflightServiceTest extends TestC
         }
     }
 
-    public function test_the_stdout_provenance_diagnostic_is_read_only_and_does_not_export_raw_probe_output(): void
+    public function test_the_historical_stdout_diagnostic_keeps_closed_permissions_and_no_workflow(): void
     {
         $approvalPath = base_path('content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-RESULT-CONTENT/runtime-capability-provenance-diagnostic-approval-2026-08-02.json');
         $approvalBytes = (string) File::get($approvalPath);
         $approval = json_decode($approvalBytes, true, 512, JSON_THROW_ON_ERROR);
-        $workflow = (string) File::get(base_path('../.github/workflows/mbti-result-english-runtime-capability-provenance-diagnostic.yml'));
+        self::assertFileDoesNotExist(base_path('../.github/workflows/mbti-result-english-runtime-capability-provenance-diagnostic.yml'));
 
         self::assertSame('31681314c75d04c9670e8f013362f609d02e2a053cbbff7977e5b5fa5a41e92b', hash('sha256', $approvalBytes));
         self::assertSame('runtime_capability_provenance_diagnostic', $approval['gate']);
@@ -186,38 +168,14 @@ final class MbtiResultEnglishRuntimeCapabilityPreflightServiceTest extends TestC
             self::assertFalse($approval['permissions'][$permission], $permission.' must remain closed.');
         }
 
-        self::assertStringContainsString('expected_approval_sha', $workflow);
-        self::assertStringContainsString('runtime_capability_provenance_diagnostic', $workflow);
-        self::assertStringContainsString('run_probe bootstrap', $workflow);
-        self::assertStringContainsString('run_probe service', $workflow);
-        self::assertStringContainsString('run_probe executor', $workflow);
-        self::assertStringContainsString('runtime-capability-preflight-approval-2026-08-02.json', $workflow);
-        self::assertStringContainsString('7d20ee867a1a2eb0f69d0d3a4441615690d836f3e8f3a47222b6dfb43f6c5a3b', $workflow);
-        self::assertStringContainsString('stdout_bytes', $workflow);
-        self::assertStringContainsString('newline_count', $workflow);
-        self::assertStringContainsString('json_document_count', $workflow);
-        self::assertStringContainsString('stdout_sha256', $workflow);
-        self::assertStringContainsString('bootstrap_stdout_observed', $workflow);
-        self::assertStringContainsString('runtime_stdout_observed', $workflow);
-        self::assertStringContainsString('multiple_json_documents', $workflow);
-        self::assertStringContainsString('single_json_contract_mismatch', $workflow);
-        self::assertStringContainsString('probe_failed', $workflow);
-        self::assertStringContainsString("trap 'rm -rf \"\$RUN_DIR\" \"\$RUN_DIR.tgz\"' EXIT", $workflow);
-        self::assertStringContainsString('keys | sort', $workflow);
-        self::assertStringNotContainsString('cat "$RUN_DIR/bootstrap.stdout"', $workflow);
-        self::assertStringNotContainsString('cat "$RUN_DIR/service.stdout"', $workflow);
-        self::assertStringNotContainsString('cat "$RUN_DIR/executor.stdout"', $workflow);
-        self::assertStringNotContainsString('scp -P "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes "$RUN_DIR/', $workflow);
-        self::assertStringNotContainsString('php artisan migrate', $workflow);
-        self::assertStringNotContainsString('dep deploy', $workflow);
     }
 
-    public function test_the_phase_stdout_provenance_diagnostic_is_read_only_and_records_only_phase_statistics(): void
+    public function test_the_historical_phase_diagnostic_keeps_closed_permissions_and_no_workflow(): void
     {
         $approvalPath = base_path('content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-RESULT-CONTENT/runtime-capability-phase-provenance-diagnostic-approval-2026-08-02.json');
         $approvalBytes = (string) File::get($approvalPath);
         $approval = json_decode($approvalBytes, true, 512, JSON_THROW_ON_ERROR);
-        $workflow = (string) File::get(base_path('../.github/workflows/mbti-result-english-runtime-capability-phase-provenance-diagnostic.yml'));
+        self::assertFileDoesNotExist(base_path('../.github/workflows/mbti-result-english-runtime-capability-phase-provenance-diagnostic.yml'));
 
         self::assertSame('6e266ad254ca445ce4d60524af7deecebb78398cf5e65db34a62919f97aff6f7', hash('sha256', $approvalBytes));
         self::assertSame('runtime_capability_phase_provenance_diagnostic', $approval['gate']);
@@ -227,31 +185,6 @@ final class MbtiResultEnglishRuntimeCapabilityPreflightServiceTest extends TestC
             self::assertFalse($approval['permissions'][$permission], $permission.' must remain closed.');
         }
 
-        self::assertStringContainsString('expected_approval_sha', $workflow);
-        self::assertStringContainsString('runtime_capability_phase_provenance_diagnostic', $workflow);
-        self::assertStringContainsString('run_phase authority_metadata', $workflow);
-        self::assertStringContainsString('run_phase physical_pack_resolver', $workflow);
-        self::assertStringContainsString('run_phase compiled_path_resolver', $workflow);
-        self::assertStringContainsString('run_phase isolated_projection_renderer', $workflow);
-        self::assertStringContainsString("config()->set('storage_rollout.resolver_materialization_enabled', false)", $workflow);
-        self::assertStringContainsString("config()->set('storage_rollout.packs_v2_remote_rehydrate_enabled', false)", $workflow);
-        self::assertStringContainsString('stdout_bytes', $workflow);
-        self::assertStringContainsString('newline_count', $workflow);
-        self::assertStringContainsString('json_document_count', $workflow);
-        self::assertStringContainsString('stdout_sha256', $workflow);
-        self::assertStringContainsString('direct_stdout_observed', $workflow);
-        self::assertStringContainsString('single_json_document_observed', $workflow);
-        self::assertStringContainsString('multiple_json_documents', $workflow);
-        self::assertStringContainsString('probe_failed', $workflow);
-        self::assertStringContainsString("trap 'rm -rf \"\$RUN_DIR\"' EXIT", $workflow);
-        self::assertStringContainsString('keys | sort', $workflow);
-        self::assertStringNotContainsString('cat "$RUN_DIR/authority_metadata.stdout"', $workflow);
-        self::assertStringNotContainsString('cat "$RUN_DIR/physical_pack_resolver.stdout"', $workflow);
-        self::assertStringNotContainsString('cat "$RUN_DIR/compiled_path_resolver.stdout"', $workflow);
-        self::assertStringNotContainsString('cat "$RUN_DIR/isolated_projection_renderer.stdout"', $workflow);
-        self::assertStringNotContainsString('scp -P "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes "$RUN_DIR/', $workflow);
-        self::assertStringNotContainsString('php artisan migrate', $workflow);
-        self::assertStringNotContainsString('dep deploy', $workflow);
     }
 
     private function seedExactInactiveAuthority(): void

@@ -264,6 +264,10 @@ final class MbtiResultEnglishRuntimeCapabilityPreflightService
                 $this->fail('runtime_projection_renderer_unavailable');
             }
 
+            // Projection rendering reads the active English authority through this resolver.
+            // Initialize only that dependency; the reporting graph remains outside this read-only probe.
+            $reflection->getProperty('contentPackV2Resolver')->setValue($renderer, $this->contentPackV2Resolver);
+
             return $renderer;
         } catch (DomainException $exception) {
             throw $exception;
