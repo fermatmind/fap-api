@@ -5,76 +5,35 @@ declare(strict_types=1);
 namespace Tests\Unit\Domain\Career\Compilation;
 
 use App\Domain\Career\Compilation\CareerPresentationV1Compiler;
-use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure;
-use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Display\CareerPresentationV1Contract;
 use Tests\TestCase;
 
 final class CareerPresentationV1CompilerTest extends TestCase
 {
-    private const SOURCE = '/Users/rainie/Desktop/1046个职业/career-pages';
-
-    public function test_current_package_contains_strict_zh_presentations_without_english_projection_drift(): void
+    public function test_legacy_zh_projection_preserves_the_bilingual_input_and_strict_contract(): void
     {
-        ini_set('memory_limit', '1024M');
-        $package = app(CareerCurrentAuthorityPackage::class);
-        $authority = $package->load(base_path());
-
-        self::assertCount(1046, $authority['rows']);
-        self::assertSame(2092, $authority['summary']['locale_page_count']);
-        self::assertSame(
-            count(CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS),
-            $authority['summary']['components_per_page'],
-        );
-        foreach ($authority['rows'] as $row) {
-            $presentation = $row['metadata_json']['presentation_v1']['zh'] ?? null;
-            self::assertIsArray($presentation);
-            CareerPresentationV1Contract::assert($presentation);
-            self::assertArrayHasKey('presentation_v1', $authority['rows'][$row['canonical_slug']]['metadata_json']);
-            self::assertArrayNotHasKey('presentation_v1', $package->publicProjection($row, 'en'));
-            self::assertArrayHasKey('presentation_v1', $package->publicProjection($row, 'zh-CN'));
-        }
-
-        $accountants = $authority['rows']['accountants-and-auditors']['metadata_json']['presentation_v1']['zh'];
-        self::assertSame(8, data_get($accountants, 'hero.ai_exposure.value'));
-        self::assertSame('8/10', data_get($accountants, 'hero.ai_exposure.display_value'));
-        self::assertSame('fermatmind_internal_rubric', data_get($accountants, 'hero.ai_exposure.metric_kind'));
-        self::assertSame(['interest', 'scene', 'risk'], array_column(data_get($accountants, 'hero.badges'), 'key'));
-
-        $actuaries = $authority['rows']['actuaries']['metadata_json']['presentation_v1']['zh'];
-        self::assertSame(8, data_get($actuaries, 'hero.ai_exposure.value'));
-        self::assertSame(
-            ['$125,770', '22%', '33,600 人', '2,400 个', '8/10'],
-            array_column(data_get($actuaries, 'hero.stats'), 'value'),
-        );
-        self::assertStringNotContainsString(
-            '国内已上自动报表与 AI 定价',
-            CareerCurrentAuthorityPackage::encodeCanonical(data_get($actuaries, 'hero.ai_exposure')),
-        );
+        [$presentation, $blocks, $row] = $this->fixtureProjection();
+        CareerPresentationV1Contract::assert($presentation);
+        self::assertSame(['en', 'zh'], array_keys($row['page_payload_json']['page']));
+        self::assertSame('Unchanged English fixture', $row['page_payload_json']['page']['en']['hero']['h1']);
+        self::assertSame(8, data_get($presentation, 'hero.ai_exposure.value'));
+        self::assertSame('8/10', data_get($presentation, 'hero.ai_exposure.display_value'));
+        self::assertSame('fermatmind_internal_rubric', data_get($presentation, 'hero.ai_exposure.metric_kind'));
+        self::assertSame(['interest', 'scene', 'risk'], array_column(data_get($presentation, 'hero.badges'), 'key'));
+        self::assertSame(['$125,770', '22%', '33,600 人', '2,400 个', '8/10'], array_column(data_get($presentation, 'hero.stats'), 'value'));
     }
 
-    public function test_accountants_and_actuaries_fields_match_the_immutable_master_when_available(): void
+    public function test_legacy_projection_uses_only_explicit_source_fields(): void
     {
-        if (! is_dir(self::SOURCE)) {
-            self::markTestSkipped('The immutable Desktop canonical source is not mounted in CI.');
-        }
-        $package = app(CareerCurrentAuthorityPackage::class)->load(base_path());
-        foreach (['accountants-and-auditors', 'actuaries'] as $slug) {
-            $presentation = $package['rows'][$slug]['metadata_json']['presentation_v1']['zh'];
-            $identity = $this->readJson(self::SOURCE.'/'.$slug.'/identity.json');
-            $definition = $this->readJson(self::SOURCE.'/'.$slug.'/definition.json');
-            $risk = $this->readJson(self::SOURCE.'/'.$slug.'/risk.json');
-            $pageMeta = $this->readJson(self::SOURCE.'/'.$slug.'/page-meta.json');
-
-            self::assertSame($identity['title_zh'], data_get($presentation, 'hero.title_zh'));
-            self::assertSame($identity['title_en'], data_get($presentation, 'hero.title_en'));
-            self::assertSame($identity['riasec_short'], data_get($presentation, 'hero.badges.0.text'));
-            self::assertSame($definition['scene'], data_get($presentation, 'hero.badges.1.text'));
-            self::assertSame($risk['risk_badge'], data_get($presentation, 'hero.badges.2.text'));
-            self::assertSame($pageMeta['hero_lead'], data_get($presentation, 'hero.lead'));
-            self::assertSame($pageMeta['gauge_note'], data_get($presentation, 'hero.ai_exposure.note'));
-        }
+        [$presentation, $blocks] = $this->fixtureProjection();
+        self::assertSame($blocks['identity']['title_zh'], data_get($presentation, 'hero.title_zh'));
+        self::assertSame($blocks['identity']['title_en'], data_get($presentation, 'hero.title_en'));
+        self::assertSame($blocks['identity']['riasec_short'], data_get($presentation, 'hero.badges.0.text'));
+        self::assertSame($blocks['definition']['scene'], data_get($presentation, 'hero.badges.1.text'));
+        self::assertSame($blocks['risk']['risk_badge'], data_get($presentation, 'hero.badges.2.text'));
+        self::assertSame($blocks['page-meta']['hero_lead'], data_get($presentation, 'hero.lead'));
+        self::assertSame($blocks['page-meta']['gauge_note'], data_get($presentation, 'hero.ai_exposure.note'));
     }
 
     public function test_missing_ai_score_does_not_parse_body_text_or_block_other_hero_fields(): void
@@ -124,8 +83,7 @@ final class CareerPresentationV1CompilerTest extends TestCase
 
     public function test_standard_indicator_value_salary_schema_remains_supported_without_output_drift(): void
     {
-        $package = app(CareerCurrentAuthorityPackage::class)->load(base_path());
-        $actuaries = $package['rows']['actuaries']['metadata_json']['presentation_v1']['zh'];
+        [$actuaries] = $this->fixtureProjection();
 
         self::assertSame(
             ['$125,770', '22%', '33,600 人', '2,400 个'],
@@ -142,8 +100,7 @@ final class CareerPresentationV1CompilerTest extends TestCase
 
     public function test_contract_rejects_silent_extra_fields(): void
     {
-        $package = app(CareerCurrentAuthorityPackage::class)->load(base_path());
-        $presentation = $package['rows']['actuaries']['metadata_json']['presentation_v1']['zh'];
+        [$presentation] = $this->fixtureProjection();
         $presentation['hero']['ai_exposure']['ai_survival_score'] = 8;
 
         $this->expectException(CareerCurrentAuthorityPackageFailure::class);
@@ -152,9 +109,37 @@ final class CareerPresentationV1CompilerTest extends TestCase
         CareerPresentationV1Contract::assert($presentation);
     }
 
-    /** @return array<string,mixed> */
-    private function readJson(string $path): array
+    /** Minimal retired projection input; not Current occupation content. */
+    private function fixtureProjection(): array
     {
-        return json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
+        $compiler = app(CareerPresentationV1Compiler::class);
+        (new \ReflectionProperty($compiler, 'registry'))->setValue($compiler, ['document' => [], 'onet' => [], 'bls' => []]);
+        $blocks = [
+            'identity' => ['title_zh' => '测试职业', 'title_en' => 'Fixture occupation', 'soc' => '11-1011', 'onet' => '11-1011.00', 'riasec_short' => '研究型 I', 'ai_score' => 8],
+            'definition' => ['scene' => '测试工作场景'],
+            'risk' => ['risk_badge' => '测试风险说明'],
+            'page-meta' => ['hero_lead' => '测试导语', 'gauge_note' => '内部 rubric 测试说明', 'snapshot_callout' => '测试快照说明'],
+            'salary' => ['bls_table' => [
+                ['指标' => '中位年薪', '数值' => '$125,770'],
+                ['指标' => '就业增长', '数值' => '22%'],
+                ['指标' => '在岗人数', '数值' => '33,600 人'],
+                ['指标' => '年均职位空缺', '数值' => '2,400 个'],
+            ]],
+        ];
+        $row = ['page_payload_json' => ['page' => [
+            'en' => ['hero' => ['h1' => 'Unchanged English fixture']],
+            'zh' => [
+                'primary_cta' => ['label' => '开始测试', 'href' => '/zh/tests/holland-career-interest-test-riasec'],
+                'career_snapshot_primary_locale' => ['salary' => ['china_salary_note' => '测试薪资边界']],
+                'boundary_notice' => ['仅用于测试。'],
+            ],
+        ]]];
+        $before = $row;
+        $coverage = $compiler->newCoverage();
+        $missing = [];
+        $presentation = $compiler->project('fixture-occupation', $blocks, $row, $coverage, $missing);
+        self::assertSame($before, $row);
+
+        return [$presentation, $blocks, $row];
     }
 }

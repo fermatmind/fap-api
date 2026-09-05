@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RuntimeException;
+use Tests\Support\CareerLegacyCodecFixture;
 use Tests\Support\CareerShardedCurrentContractGate;
 
 final class CareerLegacyCurrentSharderTest extends TestCase
@@ -21,10 +22,17 @@ final class CareerLegacyCurrentSharderTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->repoRoot = dirname(__DIR__, 6);
-        require_once $this->repoRoot.'/.agents/skills/fap-api-career-canonical-builder/scripts/split_legacy_current.php';
+        $sourceRepository = dirname(__DIR__, 6);
+        require_once $sourceRepository.'/.agents/skills/fap-api-career-canonical-builder/scripts/split_legacy_current.php';
+        $this->repoRoot = CareerLegacyCodecFixture::createRepository($sourceRepository);
         $this->assetsPath = $this->repoRoot.'/backend/content_assets/career/current/assets.jsonl';
         $this->manifestPath = $this->repoRoot.'/backend/content_assets/career/current/manifest.json';
+    }
+
+    protected function tearDown(): void
+    {
+        $this->deleteTemporaryDirectory($this->repoRoot);
+        parent::tearDown();
     }
 
     public function test_it_splits_the_complete_legacy_current_deterministically_without_repository_writes(): void

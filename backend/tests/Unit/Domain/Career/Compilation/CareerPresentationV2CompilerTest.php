@@ -5,160 +5,62 @@ declare(strict_types=1);
 namespace Tests\Unit\Domain\Career\Compilation;
 
 use App\Domain\Career\Compilation\CareerPresentationV2Compiler;
+use App\Domain\Career\Display\CareerContentV3Contract;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
+use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Display\CareerPresentationV2Contract;
 use Tests\TestCase;
 
 final class CareerPresentationV2CompilerTest extends TestCase
 {
-    public function test_current_package_publishes_bilingual_v2_for_every_locale_page(): void
+    public function test_current_package_uses_per_page_schema_bilingual_identities_and_explicit_body_states(): void
     {
-        ini_set('memory_limit', '2048M');
         $package = app(CareerCurrentAuthorityPackage::class)->load(base_path());
-        $localePages = 0;
-        $enhanced = 0;
-        $legacy = 0;
-        foreach ($package['rows'] as $slug => $row) {
-            foreach (['en', 'zh-CN'] as $locale) {
-                $projection = app(CareerCurrentAuthorityPackage::class)->publicProjection($row, $locale);
-                $presentation = $projection['presentation_v2'] ?? null;
-                self::assertIsArray($presentation);
-                CareerPresentationV2Contract::assert($presentation, $row['component_order_json']);
-                self::assertSame($locale, $presentation['locale']);
-                self::assertSame($row['component_order_json'], array_merge(...array_column($presentation['groups'], 'component_ids')));
-                $fitGroup = collect($presentation['groups'])->firstWhere('id', 'fit');
-                foreach ($presentation['groups'] as $group) {
-                    if ($slug === 'accountants-and-auditors') {
-                        self::assertSame('enhanced', $group['content_state']);
-                        self::assertArrayNotHasKey('pending_enrichment', $group);
-                        $enhanced++;
-                    } else {
-                        self::assertSame('legacy', $group['content_state']);
-                        self::assertSame('display_placeholder', $group['pending_enrichment']);
-                        $legacy++;
-                    }
-                }
+        self::assertArrayNotHasKey('rows', $package);
+        self::assertCount(1046, $package['pages']);
+        self::assertCount(2092, $package['manifest']['files']);
+        $enhanced = $legacy = 0;
+        foreach ($package['pages'] as $slug => $localized) {
+            self::assertSame(['en', 'zh-CN'], array_keys($localized));
+            foreach ($localized as $locale => $page) {
+                CareerContentV3Contract::assert($page);
+                self::assertSame($locale, $page['locale']);
+                self::assertSame($slug, $page['subject']['canonical_slug']);
+                self::assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $page['source_content_sha256']);
                 if ($slug === 'accountants-and-auditors') {
-                    self::assertSame(
-                        ['faq_block', 'source_card', 'boundary_notice'],
-                        collect($presentation['groups'])->firstWhere('id', 'sources')['component_ids'] ?? null,
-                    );
-                    foreach (['contract_project_risk_block', 'next_steps_block', 'related_next_pages', 'review_validity_card', 'final_cta'] as $omittedComponent) {
-                        self::assertNotContains($omittedComponent, $row['component_order_json']);
-                        self::assertArrayNotHasKey($omittedComponent, $projection['page']['content']);
-                    }
-                    self::assertNotEmpty($projection['page']['content']['boundary_notice'] ?? []);
-                    self::assertSame(
-                        $locale === 'zh-CN' ? 'AI影响程度' : 'AI impact level',
-                        $presentation['hero']['ai_exposure']['label'] ?? null,
-                    );
-                    self::assertSame(
-                        ['us_median_pay', 'us_growth', 'employment', 'annual_openings', 'china_median_pay'],
-                        array_column($presentation['hero']['stats'], 'key'),
-                    );
-                    self::assertSame('¥78,500', $presentation['hero']['stats'][4]['value'] ?? null);
-                    self::assertSame(
-                        $locale === 'zh-CN' ? '职业适配指南' : 'Career fit guide',
-                        $fitGroup['label'] ?? null,
-                        $slug.' '.$locale,
-                    );
-                    self::assertSame('career.work_risk.v1', $projection['page']['content']['career_risk_cards']['schema_version'] ?? null);
-                    self::assertCount(6, $projection['page']['content']['career_risk_cards']['risks'] ?? []);
-                    self::assertSame('career.career_progression.v1', $projection['page']['content']['career_path_block']['schema_version'] ?? null);
-                    self::assertCount(3, $projection['page']['content']['career_path_block']['tracks'] ?? []);
-                    self::assertSame('career.outlook_transitions.v1', $projection['page']['content']['market_signal_card']['schema_version'] ?? null);
-                    self::assertCount(8, $projection['page']['content']['market_signal_card']['transitions'] ?? []);
-                    self::assertSame(
-                        $locale === 'zh-CN'
-                            ? [
-                                'risk' => '工作压力、风险与职业边界',
-                                'path' => '入行、证书与职业发展',
-                                'market-signals' => '职业前景与相关职业转向',
-                            ]
-                            : [
-                                'risk' => 'Work pressure, risks and boundaries',
-                                'path' => 'Entry, credentials and career development',
-                                'market-signals' => 'Career outlook and related transitions',
-                            ],
-                        collect($presentation['groups'])
-                            ->whereIn('id', ['risk', 'path', 'market-signals'])
-                            ->pluck('label', 'id')
-                            ->all(),
-                    );
-                    $directions = $projection['page']['content']['personality_fit_block']['directions'] ?? null;
-                    self::assertIsArray($directions);
-                    self::assertCount(6, $directions);
+                    self::assertSame('enhanced', $page['content_state']);
                     self::assertSame([
-                        'bookkeeping-accounting-and-auditing-clerks',
-                        'financial-examiners',
-                        'tax-preparers',
-                        'financial-analysts',
-                        'fraud-examiners-investigators-and-analysts',
-                        'financial-managers',
-                    ], array_column(array_column($directions, 'target'), 'slug'));
-                    foreach ($directions as $direction) {
-                        self::assertSame(
-                            '/'.($locale === 'zh-CN' ? 'zh' : 'en').'/career/jobs/'.$direction['target']['slug'],
-                            $direction['target']['href'],
-                        );
-                        self::assertNotSame('', $direction['target']['title']);
-                    }
-                    $fit = $projection['page']['content']['personality_fit_block'] ?? null;
-                    self::assertIsArray($fit);
-                    self::assertSame(
-                        $locale === 'zh-CN'
-                            ? [
-                                '霍兰德职业兴趣模型（RIASEC）',
-                                '五因素人格模型（大五人格）',
-                                '迈尔斯-布里格斯类型指标（MBTI）',
-                                '九型人格（Enneagram）',
-                                '智力商数（IQ）与数理推理',
-                                '情绪智力（EI，常称“情商”）',
-                            ]
-                            : [
-                                'Holland RIASEC interest model',
-                                'Five-Factor Model (Big Five)',
-                                'Myers-Briggs Type Indicator (MBTI)',
-                                'Enneagram personality system',
-                                'Intelligence quotient (IQ) and numerical reasoning',
-                                'Emotional intelligence (EI)',
-                            ],
-                        array_column($fit['assessments'], 'label'),
-                    );
-                    self::assertCount(8, $fit['source_links']);
-                    $riasec = $projection['page']['content']['riasec_fit_block']['fit_interest'] ?? null;
-                    self::assertIsString($riasec);
-                    self::assertFalse(str_ends_with($riasec, $locale === 'zh-CN' ? '如' : 'For'));
+                        'quick-decision', 'profile', 'direction-comparison', 'ai-impact',
+                        'china-salary', 'us-salary', 'fit', 'risk', 'path',
+                        'market-signals', 'sources', 'navigation', 'source-register',
+                    ], array_column($page['blocks'], 'id'));
+                    $enhanced++;
+                } else {
+                    self::assertSame('legacy', $page['content_state']);
+                    self::assertSame([], $page['blocks']);
+                    self::assertNull($page['subject']['summary']);
+                    $legacy++;
                 }
-                $localePages++;
             }
         }
-
-        self::assertSame(2092, $localePages);
-        self::assertGreaterThan(0, $enhanced);
-        self::assertGreaterThan(0, $legacy);
+        self::assertSame(2, $enhanced);
+        self::assertSame(2090, $legacy);
     }
 
     public function test_projection_is_content_preserving_and_uses_language_neutral_contract_keys(): void
     {
-        $authorityPackage = app(CareerCurrentAuthorityPackage::class);
-        $package = $authorityPackage->load(base_path());
-        $row = $package['rows']['actors'];
-        $projection = $authorityPackage->publicProjection($row, 'en');
-        $page = $projection['page']['content'];
+        $page = [
+            'hero' => ['h1' => 'Fixture occupation', 'quick_answer' => 'Fixture summary'],
+            'primary_cta' => ['label' => 'Explore', 'href' => '/en/tests/holland-career-interest-test-riasec'],
+        ];
+        $order = CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS;
         $pageHash = CareerCurrentAuthorityPackage::hashValue($page);
-        $orderHash = CareerCurrentAuthorityPackage::hashValue($row['component_order_json']);
-
-        $presentation = app(CareerPresentationV2Compiler::class)->project(
-            'actors',
-            'en',
-            $page,
-            $row['component_order_json'],
-            $row['metadata_json']['presentation_v1']['zh'],
-        );
+        $orderHash = CareerCurrentAuthorityPackage::hashValue($order);
+        $presentation = app(CareerPresentationV2Compiler::class)->project('fixture-occupation', 'en', $page, $order, null);
+        CareerPresentationV2Contract::assert($presentation, $order);
 
         self::assertSame($pageHash, CareerCurrentAuthorityPackage::hashValue($page));
-        self::assertSame($orderHash, CareerCurrentAuthorityPackage::hashValue($row['component_order_json']));
+        self::assertSame($orderHash, CareerCurrentAuthorityPackage::hashValue($order));
         $keys = array_keys($presentation);
         sort($keys, SORT_STRING);
         self::assertSame(

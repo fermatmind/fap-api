@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RuntimeException;
+use Tests\Support\CareerLegacyCodecFixture;
 
 final class CareerShardedCurrentAssemblerTest extends TestCase
 {
@@ -20,10 +21,17 @@ final class CareerShardedCurrentAssemblerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->repoRoot = dirname(__DIR__, 6);
-        require_once $this->repoRoot.'/.agents/skills/fap-api-career-canonical-builder/scripts/assemble_sharded_current.php';
+        $sourceRepository = dirname(__DIR__, 6);
+        require_once $sourceRepository.'/.agents/skills/fap-api-career-canonical-builder/scripts/assemble_sharded_current.php';
+        $this->repoRoot = CareerLegacyCodecFixture::createRepository($sourceRepository);
         $this->assetsPath = $this->repoRoot.'/backend/content_assets/career/current/assets.jsonl';
         $this->manifestPath = $this->repoRoot.'/backend/content_assets/career/current/manifest.json';
+    }
+
+    protected function tearDown(): void
+    {
+        $this->deleteTemporaryDirectory($this->repoRoot);
+        parent::tearDown();
     }
 
     public function test_it_assembles_all_candidate_shards_deterministically_and_proves_every_projection_equivalent(): void

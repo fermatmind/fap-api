@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace Tests\Unit\Domain\Career\Compilation;
 
 use App\Domain\Career\Compilation\CareerPresentationSourceRegistry;
+use App\Domain\Career\Compilation\CareerTenBlockCompileFailure;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
+use App\Domain\Career\Display\CareerShardedCurrentAuthorityPackage;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 final class CareerPresentationSourceRegistryTest extends TestCase
 {
-    /** @var array<string,mixed>|null */
-    private static ?array $package = null;
-
     private const BLS_EXPECTED = [
         'appraisers-of-personal-and-business-property' => [
             'combined_official', ['$65,420', '4%', '77,300 人', '6,300 个'],
@@ -104,15 +103,58 @@ final class CareerPresentationSourceRegistryTest extends TestCase
         }
     }
 
-    public static function tearDownAfterClass(): void
+    public function test_missing_rows_and_inconsistent_metric_source_bindings_fail_closed(): void
     {
-        self::$package = null;
-        parent::tearDownAfterClass();
+        $package = self::package();
+        foreach ([[], array_replace_recursive($package['rows'], [
+            'customs-brokers' => ['metadata_json' => ['presentation_v1' => ['zh' => ['hero' => [
+                'stats' => [1 => ['source_keys' => ['bls.unrelated']]],
+            ]]]]],
+        ])] as $rows) {
+            try {
+                app(CareerPresentationSourceRegistry::class)->load(base_path(), $package['manifest'], $rows);
+                self::fail('Invalid legacy source bindings were accepted.');
+            } catch (CareerTenBlockCompileFailure $exception) {
+                self::assertSame('PRESENTATION_V1_SHARDED_SOURCE_BINDINGS_INVALID', $exception->getMessage());
+            }
+        }
     }
 
     /** @return array<string,mixed> */
     private static function package(): array
     {
-        return self::$package ??= app(CareerCurrentAuthorityPackage::class)->load(base_path());
+        // These retired projection inputs are synthetic and never read Current body assets.
+        $rows = [];
+        foreach ([
+            'electrical-and-electronics-engineers' => ['17-2070', ['17-2071.00', '17-2072.00']],
+            'mathematicians-and-statisticians' => ['15-2020', ['15-2021.00', '15-2041.00']],
+        ] as $slug => [$soc, $children]) {
+            $rows[$slug] = [
+                'metadata_json' => ['presentation_v1' => ['zh' => ['hero' => ['soc_code' => $soc, 'onet_code' => null]]]],
+                'sources_json' => ['references' => array_map(static fn (string $code): array => [
+                    'url' => 'https://www.onetonline.org/link/details/'.$code,
+                    'label' => 'O*NET OnLine: Fixture occupation '.$code,
+                ], $children)],
+            ];
+        }
+        foreach (self::BLS_EXPECTED as $slug => [$scope, $values]) {
+            $label = 'BLS 2024 · '.match ($scope) {
+                'parent_occupation_proxy' => '上级职业代理：Compliance Officers',
+                'combined_official' => '官方组合口径',
+                default => '精确职业',
+            };
+            $rows[$slug] = [
+                'metadata_json' => ['presentation_v1' => ['zh' => ['hero' => ['stats' => array_map(
+                    static fn (string $value): array => ['value' => $value, 'source_keys' => ['bls.'.$slug], 'source_label' => $label],
+                    $values,
+                )]]]],
+                'sources_json' => ['references' => []],
+            ];
+        }
+        for ($index = count($rows); $index < CareerCurrentAuthorityPackage::EXPECTED_CAREERS; $index++) {
+            $rows['fixture-career-'.$index] = ['metadata_json' => ['presentation_v1' => ['zh' => ['hero' => []]]]];
+        }
+
+        return ['manifest' => ['contract_version' => CareerShardedCurrentAuthorityPackage::CONTRACT_VERSION], 'rows' => $rows];
     }
 }

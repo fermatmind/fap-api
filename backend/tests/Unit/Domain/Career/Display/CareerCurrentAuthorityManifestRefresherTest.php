@@ -31,24 +31,45 @@ final class CareerCurrentAuthorityManifestRefresherTest extends TestCase
         parent::tearDown();
     }
 
-    public function test_it_refreshes_only_computed_fields_and_is_deterministic_and_fail_closed(): void
+    public function test_legacy_refresher_rejects_per_page_current_without_creating_flat_assets(): void
     {
         $backendRoot = dirname(__DIR__, 5);
         $manifestPath = $backendRoot.'/content_assets/career/current/manifest.json';
         $assetsPath = $backendRoot.'/content_assets/career/current/assets.jsonl';
         $manifestHash = hash_file('sha256', $manifestPath);
-        $assetsHash = hash_file('sha256', $assetsPath);
+        self::assertFileDoesNotExist($assetsPath);
         $refresher = new CareerCurrentAuthorityManifestRefresher(new CareerCurrentAuthorityPackage);
         foreach (['check', 'write'] as $method) {
             try {
                 $refresher->{$method}($backendRoot);
-                self::fail('The legacy manifest refresher must reject installed sharded authority.');
+                self::fail('The legacy manifest refresher must not rewrite per-page Current authority.');
+            } catch (CareerCurrentAuthorityPackageFailure $failure) {
+                self::assertSame('CURRENT_PACKAGE_FILE_MISSING', $failure->safeCode);
+            }
+        }
+        self::assertSame($manifestHash, hash_file('sha256', $manifestPath));
+        self::assertFileDoesNotExist($assetsPath);
+    }
+
+    public function test_legacy_refresher_also_rejects_compiler_owned_sharded_manifests(): void
+    {
+        $this->temporaryRoot = sys_get_temp_dir().'/career-current-manifest-'.bin2hex(random_bytes(8));
+        $backendRoot = $this->temporaryRoot.'/backend';
+        $root = $backendRoot.'/content_assets/career/current';
+        self::assertTrue(mkdir($root, 0700, true));
+        $bytes = json_encode(['contract_version' => 'career.sharded_current.manifest.v1'], JSON_THROW_ON_ERROR);
+        file_put_contents($root.'/manifest.json', $bytes);
+        $refresher = new CareerCurrentAuthorityManifestRefresher(new CareerCurrentAuthorityPackage);
+        foreach (['check', 'write'] as $method) {
+            try {
+                $refresher->{$method}($backendRoot);
+                self::fail('The sharded manifest remains compiler owned.');
             } catch (CareerCurrentAuthorityPackageFailure $failure) {
                 self::assertSame('CURRENT_SHARDED_MANIFEST_COMPILER_OWNED', $failure->safeCode);
             }
         }
-        self::assertSame($manifestHash, hash_file('sha256', $manifestPath));
-        self::assertSame($assetsHash, hash_file('sha256', $assetsPath));
+        self::assertSame($bytes, file_get_contents($root.'/manifest.json'));
+        self::assertFileDoesNotExist($root.'/assets.jsonl');
     }
 
     private function copyCurrentPackage(string $sourceBackendRoot): string
