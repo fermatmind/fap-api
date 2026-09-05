@@ -49,7 +49,7 @@ final class SeoCompetitiveEvidenceIngest extends Command
         try {
             $cohort = $registry->cohort($cohortId);
             $environment = app()->environment();
-            $releaseSha = $write ? (string) env('SEO_RELEASE_SHA') : str_repeat('0', 40);
+            $releaseSha = $write ? (string) config('seo_agent_evidence.competitive.release_sha', '') : str_repeat('0', 40);
             $result = $ingestion->ingest(
                 $cohort,
                 $registry->sourcesFor($cohort),
@@ -78,7 +78,7 @@ final class SeoCompetitiveEvidenceIngest extends Command
             || (bool) $this->option('write-evidence') || (bool) $this->option('dry-run') || (bool) $this->option('no-write')) {
             return $this->emit(['status' => 'HOLD', 'hold_reason' => 'COMPETITIVE_ACTIVATION_BOUNDARY_HELD', 'dependency_ingestion' => ['external_reads' => 0]], self::FAILURE);
         }
-        $sha = (string) env('SEO_RELEASE_SHA');
+        $sha = (string) config('seo_agent_evidence.competitive.release_sha', '');
         $path = (string) $this->option('preactivation-receipt');
         $real = realpath($path);
         $expectedDirectory = realpath(storage_path('app/release-receipts/seo-competitive-evidence'));
@@ -105,9 +105,9 @@ final class SeoCompetitiveEvidenceIngest extends Command
     private function writeBoundaryAllowed(): bool
     {
         return in_array(app()->environment(), ['staging', 'production'], true)
-            && env('SEO_COMPETITIVE_EXTERNAL_READ_ENABLED') === true
-            && env('SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED') === true
-            && preg_match('/^[a-f0-9]{40}$/', (string) env('SEO_RELEASE_SHA')) === 1;
+            && config('seo_agent_evidence.competitive.external_read_enabled', false) === true
+            && config('seo_agent_evidence.competitive.evidence_write_enabled', false) === true
+            && preg_match('/^[a-f0-9]{40}$/', (string) config('seo_agent_evidence.competitive.release_sha', '')) === 1;
     }
 
     /** @param array<string, mixed> $payload */

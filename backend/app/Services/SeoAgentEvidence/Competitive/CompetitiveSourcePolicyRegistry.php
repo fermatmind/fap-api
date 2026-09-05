@@ -121,8 +121,8 @@ final class CompetitiveSourcePolicyRegistry
         if (! app()->runningInConsole()
             || ! in_array($environment, ['staging', 'production'], true)
             || preg_match('/^[a-f0-9]{40}$/D', $releaseSha) !== 1
-            || env('SEO_COMPETITIVE_EXTERNAL_READ_ENABLED') !== true
-            || env('SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED') !== true
+            || config('seo_agent_evidence.competitive.external_read_enabled', false) !== true
+            || config('seo_agent_evidence.competitive.evidence_write_enabled', false) !== true
             || (array) config('seo_agent_evidence.allowed_sources', []) !== []
             || (bool) config('seo_agent_evidence.agent_external_egress', false)) {
             throw new RuntimeException('COMPETITIVE_POLICY_INSTALL_HELD');

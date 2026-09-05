@@ -1673,15 +1673,20 @@ if ! test -r "$preactivation"; then
   sudo -n -u www-data -- test -r "$preactivation"
   finalize_owner=www-data
 fi
+finalize_config_dir="$(mktemp -d /tmp/fermatmind-competitive-finalize.XXXXXX)"
+chmod 0755 "$finalize_config_dir"
+trap 'rmdir "$finalize_config_dir"' EXIT
 set +e
 if [ "$finalize_owner" = www-data ]; then
-  receipt="$(sudo -n -u www-data -- env SEO_RELEASE_SHA="$active_sha" SEO_COMPETITIVE_EXTERNAL_READ_ENABLED=true SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED=true {{bin/php}} artisan seo:competitive-evidence-ingest --cohort=competitive.big-five.live.v2 --finalize-activation --preactivation-receipt="$preactivation" --json --no-interaction --no-ansi)"
+  receipt="$(sudo -n -u www-data -- env SEO_RELEASE_SHA="$active_sha" APP_CONFIG_CACHE="$finalize_config_dir/config.php" SEO_COMPETITIVE_EXTERNAL_READ_ENABLED=true SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED=true {{bin/php}} artisan seo:competitive-evidence-ingest --cohort=competitive.big-five.live.v2 --finalize-activation --preactivation-receipt="$preactivation" --json --no-interaction --no-ansi)"
   finalize_status=$?
 else
-  receipt="$(SEO_RELEASE_SHA="$active_sha" SEO_COMPETITIVE_EXTERNAL_READ_ENABLED=true SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED=true {{bin/php}} artisan seo:competitive-evidence-ingest --cohort=competitive.big-five.live.v2 --finalize-activation --preactivation-receipt="$preactivation" --json --no-interaction --no-ansi)"
+  receipt="$(APP_CONFIG_CACHE="$finalize_config_dir/config.php" SEO_RELEASE_SHA="$active_sha" SEO_COMPETITIVE_EXTERNAL_READ_ENABLED=true SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED=true {{bin/php}} artisan seo:competitive-evidence-ingest --cohort=competitive.big-five.live.v2 --finalize-activation --preactivation-receipt="$preactivation" --json --no-interaction --no-ansi)"
   finalize_status=$?
 fi
 set -e
+rmdir "$finalize_config_dir"
+trap - EXIT
 if [ "$finalize_status" -ne 0 ]; then
   printf '%s' "$receipt" | jq -r '
     "competitive_finalize_status=" + ((.status // "HOLD") | tostring),

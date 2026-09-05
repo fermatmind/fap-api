@@ -144,8 +144,9 @@ final class SeoCompetitiveReleasePrepareCommand extends Command
                 throw new RuntimeException('TEMP_ENV_INVALID');
             }
         }
-        $configCache = (string) env('APP_CONFIG_CACHE');
+        $configCache = app()->getCachedConfigPath();
         if (preg_match('#^/tmp/fermatmind-11g-production-[1-9][0-9]*-[1-9][0-9]*/competitive-config\.php$#D', $configCache) !== 1
+            || ! is_dir(dirname($configCache)) || is_link(dirname($configCache))
             || file_exists($configCache) || is_link($configCache)) {
             throw new RuntimeException('CONFIG_CACHE_INVALID');
         }

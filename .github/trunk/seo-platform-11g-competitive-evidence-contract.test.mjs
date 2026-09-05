@@ -192,3 +192,15 @@ test("Council stays zero-egress while dependency reads are accounted separately"
   assert.match(competitiveCloseout, /outreach_actions/);
   assert.match(competitiveCloseout, /deferred_p2_manual/);
 });
+
+
+test("competitive finalization loads its scoped CLI configuration outside the deployed cache", () => {
+  const start = deployer.indexOf("task('seo:competitive-evidence-finalize'");
+  const end = deployer.indexOf("task('seo:agent-policy-gateway-closeout'", start);
+  const finalize = deployer.slice(start, end);
+  assert.match(finalize, /mktemp -d \/tmp\/fermatmind-competitive-finalize\.XXXXXX/);
+  assert.equal((finalize.match(/APP_CONFIG_CACHE="\$finalize_config_dir\/config\.php"/g) ?? []).length, 2);
+  assert.match(finalize, /rmdir "\$finalize_config_dir"/);
+  assert.match(competitivePrepare, /app\(\)->getCachedConfigPath\(\)/);
+  assert.match(competitivePrepare, /is_link\(dirname\(\$configCache\)\)/);
+});
