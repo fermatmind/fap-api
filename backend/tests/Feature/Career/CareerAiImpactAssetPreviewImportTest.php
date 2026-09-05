@@ -17,16 +17,19 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
+use Tests\Concerns\UsesCareerDetailCacheFixture;
 use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
 
 final class CareerAiImpactAssetPreviewImportTest extends TestCase
 {
     use RefreshDatabase;
+    use UsesCareerDetailCacheFixture;
 
     protected function setUp(): void
     {
         parent::setUp();
+        $this->installCareerDetailCacheFixture();
 
         Cache::flush();
         $this->seedRuntimeProjectionAuthority([]);
@@ -1178,8 +1181,8 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
             ->assertJsonPath('display_surface_v1.status', 'ready_for_pilot')
             ->assertJsonPath('display_surface_v1.subject.canonical_slug', 'emergency-medicine-physicians')
             ->assertJsonPath('display_surface_v1.page.content.path', '/en/career/jobs/emergency-medicine-physicians')
-            ->assertJsonPath('seo_contract.index_eligible', true)
-            ->assertJsonPath('seo_contract.robots_policy', 'index,follow')
+            ->assertJsonPath('seo_contract.index_eligible', false)
+            ->assertJsonPath('seo_contract.robots_policy', 'noindex,follow')
             ->assertJsonPath('display_surface_v1.claim_permissions.allow_strong_claim', false);
 
         $encoded = json_encode($response->json(), JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
@@ -1375,8 +1378,8 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
 
             app(PublicCareerAuthorityResponseCache::class)->forgetJobDetailPayload($slug, 'zh-CN');
             app(PublicCareerAuthorityResponseCache::class)->forgetJobDetailPayload($slug, 'en');
-            app(PublicCareerAuthorityResponseCache::class)->warmJobDetailPayload($slug, 'zh-CN', true);
-            app(PublicCareerAuthorityResponseCache::class)->warmJobDetailPayload($slug, 'en', true);
+            app(PublicCareerAuthorityResponseCache::class)->publishJobDetailReadModel($slug, 'zh-CN', app(\App\Services\Career\AiImpactAssets\CareerAiImpactPreviewDetailShellBuilder::class)->build($slug, 'zh-CN') ?? $this->detailCacheFixture(['identity' => ['canonical_slug' => $slug]], $slug, 'zh-CN'));
+            app(PublicCareerAuthorityResponseCache::class)->publishJobDetailReadModel($slug, 'en', app(\App\Services\Career\AiImpactAssets\CareerAiImpactPreviewDetailShellBuilder::class)->build($slug, 'en') ?? $this->detailCacheFixture(['identity' => ['canonical_slug' => $slug]], $slug, 'en'));
         }
 
         $this->app->forgetInstance(CareerAiImpactAssetImportService::class);

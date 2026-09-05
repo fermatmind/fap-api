@@ -14,16 +14,19 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
+use Tests\Concerns\UsesCareerDetailCacheFixture;
 use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
 
 final class CareerDirectory10kOpsWarmValidateCommandTest extends TestCase
 {
     use RefreshDatabase;
+    use UsesCareerDetailCacheFixture;
 
     protected function setUp(): void
     {
         parent::setUp();
+        $this->installCareerDetailCacheFixture();
 
         Cache::flush();
         config(['app.frontend_url' => 'https://fermatmind.com']);
@@ -221,11 +224,11 @@ final class CareerDirectory10kOpsWarmValidateCommandTest extends TestCase
             }
 
             foreach (['en', 'zh-CN'] as $locale) {
-                $responseCache->publishJobDetailReadModel((string) $item['slug'], $locale, [
+                $responseCache->publishJobDetailReadModel((string) $item['slug'], $locale, $this->detailCacheFixture([
                     'identity' => ['canonical_slug' => $item['slug']],
                     'locale' => $locale,
                     'fixture' => true,
-                ]);
+                ], $item['slug'], $locale));
             }
         }
     }

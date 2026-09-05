@@ -14,14 +14,18 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Queue;
+use Tests\Concerns\UsesCareerDetailCacheFixture;
 use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
 
 final class CareerJobDetailReadModel10kTest extends TestCase
 {
+    use UsesCareerDetailCacheFixture;
+
     protected function setUp(): void
     {
         parent::setUp();
+        $this->installCareerDetailCacheFixture();
         Cache::flush();
         config()->set('queue.default', 'database');
         $this->app->instance(
@@ -45,8 +49,8 @@ final class CareerJobDetailReadModel10kTest extends TestCase
     public function test_versioned_detail_projection_switches_atomically_and_uses_lkg(): void
     {
         $cache = app(PublicCareerAuthorityResponseCache::class);
-        $old = ['slug' => 'one', 'revision' => 1];
-        $new = ['slug' => 'one', 'revision' => 2];
+        $old = $this->detailCacheFixture(['slug' => 'one', 'revision' => 1]);
+        $new = $this->detailCacheFixture(['slug' => 'one', 'revision' => 2]);
         $oldVersion = $cache->publishJobDetailReadModel('one', 'en', $old);
         $newVersion = $cache->publishJobDetailReadModel('one', 'en', $new);
 
@@ -123,7 +127,7 @@ final class CareerJobDetailReadModel10kTest extends TestCase
     {
         Queue::fake();
         $cache = app(PublicCareerAuthorityResponseCache::class);
-        $legacy = ['identity' => ['canonical_slug' => 'one'], 'legacy' => true];
+        $legacy = $this->detailCacheFixture(['identity' => ['canonical_slug' => 'one'], 'legacy' => true]);
         Cache::forever($cache->jobDetailCacheKey('one', 'en'), $legacy);
 
         $this->withHeaders($this->verifyOnlyHeaders('/api/v0.5/career/jobs/one?locale=en'))
@@ -167,7 +171,7 @@ final class CareerJobDetailReadModel10kTest extends TestCase
     public function test_legacy_projection_is_promoted_and_reported_as_stale_for_the_current_response(): void
     {
         $cache = app(PublicCareerAuthorityResponseCache::class);
-        $legacy = ['identity' => ['canonical_slug' => 'one'], 'legacy' => true];
+        $legacy = $this->detailCacheFixture(['identity' => ['canonical_slug' => 'one'], 'legacy' => true]);
         Cache::forever($cache->jobDetailCacheKey('one', 'en'), $legacy);
 
         $read = $cache->jobDetailRead('one', 'en');
@@ -233,13 +237,8 @@ final class CareerJobDetailReadModel10kTest extends TestCase
     public function test_http_response_reports_fresh_and_stale_cache_states(): void
     {
         $cache = app(PublicCareerAuthorityResponseCache::class);
-        $oldVersion = $cache->publishJobDetailReadModel('one', 'en', [
-            'identity' => ['canonical_slug' => 'one'],
-        ]);
-        $newVersion = $cache->publishJobDetailReadModel('one', 'en', [
-            'identity' => ['canonical_slug' => 'one'],
-            'revision' => 2,
-        ]);
+        $oldVersion = $cache->publishJobDetailReadModel('one', 'en', $this->detailCacheFixture(['identity' => ['canonical_slug' => 'one']]));
+        $newVersion = $cache->publishJobDetailReadModel('one', 'en', $this->detailCacheFixture(['identity' => ['canonical_slug' => 'one'], 'revision' => 2]));
 
         $this->getJson('/api/v0.5/career/jobs/one?locale=en')
             ->assertOk()
@@ -260,13 +259,13 @@ final class CareerJobDetailReadModel10kTest extends TestCase
         $cache = app(PublicCareerAuthorityResponseCache::class);
         $cache->publishJobDetailReadModel('one', 'en', ['slug' => 'one']);
         $twoKey = $cache->jobDetailActiveVersionKey('two', 'en');
-        $cache->publishJobDetailReadModel('two', 'en', ['slug' => 'two']);
+        $cache->publishJobDetailReadModel('two', 'en', $this->detailCacheFixture(['slug' => 'two'], 'two'));
         $twoVersion = Cache::get($twoKey);
 
-        $cache->publishJobDetailReadModel('one', 'en', ['slug' => 'one', 'revision' => 2]);
+        $cache->publishJobDetailReadModel('one', 'en', $this->detailCacheFixture(['slug' => 'one', 'revision' => 2]));
 
         $this->assertSame($twoVersion, Cache::get($twoKey));
-        $this->assertSame(['slug' => 'two'], $cache->jobDetailPayload('two', 'en'));
+        $this->assertSame($this->detailCacheFixture(['slug' => 'two'], 'two'), $cache->jobDetailPayload('two', 'en'));
     }
 
     public function test_warm_detail_api_reads_only_the_projection_with_p95_below_400ms(): void

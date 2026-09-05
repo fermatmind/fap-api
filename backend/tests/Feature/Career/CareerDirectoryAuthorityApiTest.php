@@ -15,16 +15,19 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
+use Tests\Concerns\UsesCareerDetailCacheFixture;
 use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
 
 final class CareerDirectoryAuthorityApiTest extends TestCase
 {
     use RefreshDatabase;
+    use UsesCareerDetailCacheFixture;
 
     protected function setUp(): void
     {
         parent::setUp();
+        $this->installCareerDetailCacheFixture();
 
         Cache::flush();
     }
@@ -350,11 +353,11 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
             }
 
             foreach (['en', 'zh-CN'] as $locale) {
-                $responseCache->publishJobDetailReadModel($item['slug'], $locale, [
+                $responseCache->publishJobDetailReadModel($item['slug'], $locale, $this->detailCacheFixture([
                     'identity' => ['canonical_slug' => $item['slug']],
                     'locale' => $locale,
                     'fixture' => true,
-                ]);
+                ], $item['slug'], $locale));
             }
         }
     }

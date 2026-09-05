@@ -16,16 +16,19 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
+use Tests\Concerns\UsesCareerDetailCacheFixture;
 use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
 
 final class CareerSalaryAssetPreviewImportTest extends TestCase
 {
     use RefreshDatabase;
+    use UsesCareerDetailCacheFixture;
 
     protected function setUp(): void
     {
         parent::setUp();
+        $this->installCareerDetailCacheFixture();
 
         Cache::flush();
         $this->seedRuntimeProjectionAuthority([]);
@@ -789,8 +792,8 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
             app(PublicCareerAuthorityResponseCache::class)->forgetJobDetailPayload($slug, 'zh-CN');
             app(PublicCareerAuthorityResponseCache::class)->forgetJobDetailPayload($slug, 'en');
 
-            app(PublicCareerAuthorityResponseCache::class)->warmJobDetailPayload($slug, 'zh-CN', true);
-            app(PublicCareerAuthorityResponseCache::class)->warmJobDetailPayload($slug, 'en', true);
+            app(PublicCareerAuthorityResponseCache::class)->publishJobDetailReadModel($slug, 'zh-CN', $this->detailCacheFixture(['identity' => ['canonical_slug' => $slug]], $slug, 'zh-CN'));
+            app(PublicCareerAuthorityResponseCache::class)->publishJobDetailReadModel($slug, 'en', $this->detailCacheFixture(['identity' => ['canonical_slug' => $slug]], $slug, 'en'));
         }
 
         $this->app->forgetInstance(CareerSalaryAssetImportService::class);

@@ -11,24 +11,28 @@ use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
+use Tests\Concerns\UsesCareerDetailCacheFixture;
 use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
 
 final class CareerValidateCanonicalPostPromotionReleaseGateCommandTest extends TestCase
 {
+    use UsesCareerDetailCacheFixture;
+
     protected function setUp(): void
     {
         parent::setUp();
+        $this->installCareerDetailCacheFixture();
 
         Cache::flush();
         $this->app->instance(
             CareerRuntimePublishProjectionVisibility::class,
             new CareerRuntimePublishProjectionVisibilityFixture(defaultItemPublished: true),
         );
-        app(PublicCareerAuthorityResponseCache::class)->publishJobDetailReadModel('actors', 'en', [
+        app(PublicCareerAuthorityResponseCache::class)->publishJobDetailReadModel('actors', 'en', $this->detailCacheFixture([
             'identity' => ['canonical_slug' => 'actors'],
             'fixture' => true,
-        ]);
+        ], 'actors', 'en'));
     }
 
     public function test_validate_canonical_post_promotion_release_gate_command_passes_for_valid_payload(): void
@@ -56,9 +60,9 @@ final class CareerValidateCanonicalPostPromotionReleaseGateCommandTest extends T
             '--json' => true,
         ]);
 
-        $this->assertSame(0, $exitCode);
         $output = Artisan::output();
         $payload = json_decode($output, true);
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
 
         $this->assertIsArray($payload);
         $this->assertSame('pass', $payload['status'] ?? null);
