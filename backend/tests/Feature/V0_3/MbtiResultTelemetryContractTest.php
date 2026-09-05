@@ -240,11 +240,11 @@ class MbtiResultTelemetryContractTest extends TestCase
             data_get($eventMeta, 'report_view.orchestration.primary_focus_key')
         );
         $this->assertSame(
-            ['career_bridge', 'unlock_full_report', 'share_result'],
+            ['workspace_lite', 'career_bridge', 'share_result'],
             data_get($eventMeta, 'result_view.orchestration.cta_priority_keys')
         );
         $this->assertSame(
-            ['career_bridge', 'unlock_full_report', 'share_result'],
+            ['workspace_lite', 'career_bridge', 'share_result'],
             data_get($eventMeta, 'report_view.orchestration.cta_priority_keys')
         );
         $this->assertNotSame('', trim((string) data_get($eventMeta, 'result_view.orchestration.cta_bundle_key', '')));

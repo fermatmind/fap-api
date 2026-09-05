@@ -14,15 +14,31 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 final class AttemptPublicReportPdfParityTest extends TestCase
 {
     use RefreshDatabase;
 
-    private function seedScales(): void
+    protected function setUp(): void
+    {
+        parent::setUp();
+        // Locked-cache and print-token contracts explicitly exercise paid preview mode.
+        config()->set('report_unlock.mbti_access_mode', 'paid_unlock');
+    }
+
+    private function seedScales(bool $paidPreview = true): void
     {
         (new ScaleRegistrySeeder)->run();
+        if ($paidPreview) {
+            $scale = \App\Models\ScaleRegistry::query()->where('org_id', 0)->where('code', 'MBTI')->firstOrFail();
+            $fixture = $scale->only($scale->getFillable());
+            $fixture['capabilities_json']['paywall_mode'] = 'full';
+            $fixture['commercial_json']['report_unlock_sku'] = 'MBTI_REPORT_FULL_199';
+            $fixture['commercial_json']['report_benefit_code'] = 'MBTI_REPORT_FULL';
+            app(\App\Services\Scale\ScaleRegistryWriter::class)->upsertScale($fixture);
+        }
     }
 
     private function issueAnonToken(string $anonId): string
@@ -175,9 +191,16 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         );
     }
 
-    public function test_public_mbti_report_pdf_prefers_gotenberg_result_print_route_when_enabled(): void
+    public static function reportAccessModes(): array
     {
-        $this->seedScales();
+        return [['paid_unlock', 'free', 'true'], ['free_full', 'full', 'false']];
+    }
+
+    #[DataProvider('reportAccessModes')]
+    public function test_public_mbti_report_pdf_prefers_gotenberg_result_print_route_when_enabled(string $mode, string $variant, string $locked): void
+    {
+        $this->seedScales($mode === 'paid_unlock');
+        config()->set('report_unlock.mbti_access_mode', $mode);
         config()->set('fap.features.report_snapshot_strict_v2', false);
         config()->set('gotenberg.enabled', true);
         config()->set('gotenberg.base_url', 'http://gotenberg:3000');
@@ -216,6 +239,7 @@ final class AttemptPublicReportPdfParityTest extends TestCase
 
         $pdf->assertStatus(200);
         $pdf->assertHeader('Content-Type', 'application/pdf');
+        $pdf->assertHeader('X-Report-Locked', $locked);
         $pdf->assertHeader('X-Pdf-Surface-Version', 'mbti.pdf_surface.v4');
 
         $pdfBinary = (string) $pdf->getContent();
@@ -233,7 +257,7 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         });
 
         Storage::disk('local')->assertExists(
-            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.pdf_surface.v4/report_free.pdf"
+            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.pdf_surface.v4/report_{$variant}.pdf"
         );
     }
 
