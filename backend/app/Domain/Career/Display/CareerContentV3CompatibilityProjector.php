@@ -37,6 +37,7 @@ final class CareerContentV3CompatibilityProjector
             || data_get($content, 'subject.canonical_slug') !== self::ACCOUNTING_SLUG) {
             return $surface;
         }
+        $surface = $this->projectExperience($surface, $content);
         $facts = $this->facts($content);
         foreach (self::CORE_FACTS as $factId) {
             if (! isset($facts[$factId])) {
@@ -52,6 +53,41 @@ final class CareerContentV3CompatibilityProjector
         $surface = $this->projectOutlook($surface, $facts);
 
         return $this->projectFaq($surface, $content);
+    }
+
+    /** @param array<string,mixed> $surface @param array<string,mixed> $content @return array<string,mixed> */
+    private function projectExperience(array $surface, array $content): array
+    {
+        $checklist = data_get($surface, 'page.content.fit_decision_checklist');
+        if (! is_array($checklist) || ! array_key_exists('how', $checklist)) {
+            return $surface;
+        }
+        $blocks = array_values(array_filter(
+            (array) ($content['blocks'] ?? []),
+            static fn (mixed $block): bool => is_array($block) && ($block['id'] ?? null) === 'quick-decision',
+        ));
+        if (count($blocks) !== 1
+            || ($blocks[0]['copy_key'] ?? null) !== 'career.block.quick-decision'
+            || ($blocks[0]['availability'] ?? null) !== 'available'
+            || ! is_array($blocks[0]['items'] ?? null)) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_INVALID');
+        }
+        $items = array_values(array_filter(
+            $blocks[0]['items'],
+            static fn (mixed $item): bool => is_array($item) && ($item['id'] ?? null) === 'fit-decision-checklist-2',
+        ));
+        $paragraphs = $items[0]['data']['paragraphs'] ?? null;
+        if (count($items) !== 1
+            || ($items[0]['copy_key'] ?? null) !== 'career.item.fit-decision-checklist'
+            || ($items[0]['type'] ?? null) !== 'prose'
+            || ($items[0]['availability'] ?? null) !== 'available'
+            || ! is_array($paragraphs) || ! array_is_list($paragraphs) || count($paragraphs) !== 1
+            || ! is_string($paragraphs[0]) || trim($paragraphs[0]) === '') {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_INVALID');
+        }
+        data_set($surface, 'page.content.fit_decision_checklist.how', $paragraphs[0]);
+
+        return $surface;
     }
 
     /** @param array<string,mixed> $surface @param array<string,array<string,mixed>> $facts @return array<string,mixed> */

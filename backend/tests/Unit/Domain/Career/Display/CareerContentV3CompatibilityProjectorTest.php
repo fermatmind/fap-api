@@ -5,10 +5,142 @@ declare(strict_types=1);
 namespace Tests\Unit\Domain\Career\Display;
 
 use App\Domain\Career\Display\CareerContentV3CompatibilityProjector;
+use App\Domain\Career\Display\CareerContentV3FactResolver;
+use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
+use App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure;
 use PHPUnit\Framework\TestCase;
 
 final class CareerContentV3CompatibilityProjectorTest extends TestCase
 {
+    public function test_experience_follows_the_asset_without_a_salary_fact_dependency(): void
+    {
+        $content = $this->experienceContent();
+        $surface = ['page' => ['content' => ['fit_decision_checklist' => [
+            'how' => '准备20笔旧交易。',
+            'suit' => '适合说明不变',
+            'boundary' => '慎重说明不变',
+        ]]]];
+        $projector = new CareerContentV3CompatibilityProjector;
+        foreach (['新体验正文。', '  第二版体验正文，保留原文字节。  '] as $text) {
+            $content['blocks'][0]['items'][0]['data']['paragraphs'] = [$text];
+            $expected = $surface;
+            $expected['page']['content']['fit_decision_checklist']['how'] = $text;
+            self::assertSame($expected, $projector->project($surface, $content));
+        }
+    }
+
+    public function test_experience_uses_unique_ids_instead_of_array_order(): void
+    {
+        $content = $this->experienceContent();
+        $content['blocks'][0]['items'][] = [
+            'id' => 'fit-decision-checklist-1', 'data' => ['paragraphs' => ['不能误取的正文']],
+        ];
+        $content['blocks'][0]['items'] = array_reverse($content['blocks'][0]['items']);
+        array_unshift($content['blocks'], ['id' => 'profile', 'items' => []]);
+        $surface = ['page' => ['content' => ['fit_decision_checklist' => ['how' => '旧正文']]]];
+        self::assertSame('新体验正文。', data_get(
+            (new CareerContentV3CompatibilityProjector)->project($surface, $content),
+            'page.content.fit_decision_checklist.how',
+        ));
+    }
+
+    public function test_experience_does_not_change_other_identities_or_create_missing_fields(): void
+    {
+        $projector = new CareerContentV3CompatibilityProjector;
+        $surface = ['page' => ['content' => ['fit_decision_checklist' => ['how' => '旧正文']]]];
+        foreach (['en', 'cashiers'] as $variant) {
+            $content = $this->experienceContent();
+            if ($variant === 'en') {
+                $content['locale'] = 'en';
+            } else {
+                $content['subject']['canonical_slug'] = $variant;
+            }
+            self::assertSame($surface, $projector->project($surface, $content));
+        }
+        foreach ([[], ['page' => ['content' => ['fit_decision_checklist' => ['suit' => '保留']]]]] as $missing) {
+            self::assertSame($missing, $projector->project($missing, $this->experienceContent()));
+        }
+    }
+
+    public function test_invalid_experience_sources_fail_instead_of_leaking_stale_copy(): void
+    {
+        // The canonical reader loads the package and its co-located failure class before projection.
+        self::assertTrue(class_exists(CareerCurrentAuthorityPackage::class));
+        foreach (['missing-block', 'duplicate-block', 'block-unavailable', 'missing-item', 'duplicate-item', 'empty', 'wrong-type', 'unavailable', 'wrong-copy-key', 'non-string', 'multiple-paragraphs', 'invalid-data'] as $case) {
+            $content = $this->experienceContent();
+            switch ($case) {
+                case 'missing-block': $content['blocks'] = [];
+                    break;
+                case 'duplicate-block': $content['blocks'][] = $content['blocks'][0];
+                    break;
+                case 'block-unavailable': $content['blocks'][0]['availability'] = 'missing';
+                    break;
+                case 'missing-item': $content['blocks'][0]['items'] = [];
+                    break;
+                case 'duplicate-item': $content['blocks'][0]['items'][] = $content['blocks'][0]['items'][0];
+                    break;
+                case 'empty': $content['blocks'][0]['items'][0]['data']['paragraphs'] = ['  '];
+                    break;
+                case 'wrong-type': $content['blocks'][0]['items'][0]['type'] = 'list';
+                    break;
+                case 'unavailable': $content['blocks'][0]['items'][0]['availability'] = 'missing';
+                    break;
+                case 'wrong-copy-key': $content['blocks'][0]['items'][0]['copy_key'] = 'career.item.other';
+                    break;
+                case 'non-string': $content['blocks'][0]['items'][0]['data']['paragraphs'] = [23];
+                    break;
+                case 'multiple-paragraphs': $content['blocks'][0]['items'][0]['data']['paragraphs'] = ['one', 'two'];
+                    break;
+                case 'invalid-data': $content['blocks'][0]['items'][0]['data'] = 'invalid';
+                    break;
+            }
+            try {
+                (new CareerContentV3CompatibilityProjector)->project(
+                    ['page' => ['content' => ['fit_decision_checklist' => ['how' => '准备20笔旧交易。']]]],
+                    $content,
+                );
+                self::fail('Invalid source accepted: '.$case);
+            } catch (CareerCurrentAuthorityPackageFailure $failure) {
+                self::assertSame('CURRENT_CONTENT_V3_INVALID', $failure->safeCode, $case);
+            }
+        }
+    }
+
+    public function test_real_accountant_asset_updates_experience_and_preserves_other_checklist_fields(): void
+    {
+        $path = dirname(__DIR__, 5).'/content_assets/career/current/careers/accountants-and-auditors/zh-CN.json';
+        $content = (new CareerContentV3FactResolver)->resolve(json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR));
+        $quick = collect($content['blocks'])->firstWhere('id', 'quick-decision');
+        $source = collect($quick['items'])->firstWhere('id', 'fit-decision-checklist-2');
+        $surface = $this->surface();
+        data_set($surface, 'page.content.fit_decision_checklist', ['how' => '准备20笔旧交易。', 'suit' => '不变', 'boundary' => '不变']);
+        $projected = (new CareerContentV3CompatibilityProjector)->project($surface, $content);
+        self::assertSame($source['data']['paragraphs'][0], data_get($projected, 'page.content.fit_decision_checklist.how'));
+        self::assertStringContainsString('一笔虚构报销', data_get($projected, 'page.content.fit_decision_checklist.how'));
+        self::assertSame('不变', data_get($projected, 'page.content.fit_decision_checklist.suit'));
+        self::assertSame('不变', data_get($projected, 'page.content.fit_decision_checklist.boundary'));
+    }
+
+    private function experienceContent(): array
+    {
+        return [
+            'locale' => 'zh-CN',
+            'subject' => ['canonical_slug' => 'accountants-and-auditors'],
+            'blocks' => [[
+                'id' => 'quick-decision',
+                'copy_key' => 'career.block.quick-decision',
+                'availability' => 'available',
+                'items' => [[
+                    'id' => 'fit-decision-checklist-2',
+                    'copy_key' => 'career.item.fit-decision-checklist',
+                    'type' => 'prose',
+                    'availability' => 'available',
+                    'data' => ['paragraphs' => ['新体验正文。']],
+                ]],
+            ]],
+        ];
+    }
+
     public function test_it_keeps_the_existing_surface_until_the_complete_fact_set_exists(): void
     {
         $surface = $this->surface();
