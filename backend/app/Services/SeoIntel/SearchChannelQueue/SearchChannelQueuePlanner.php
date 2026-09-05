@@ -6,6 +6,9 @@ namespace App\Services\SeoIntel\SearchChannelQueue;
 
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @review-surface search_submission_queue_approval
+ */
 final class SearchChannelQueuePlanner
 {
     public function __construct(

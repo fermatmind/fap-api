@@ -9,6 +9,11 @@ use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
+/**
+ * @review-surface article
+ * @review-surface career_import_publish_readiness
+ * @review-surface personality_public_content_asset
+ */
 final class ContentLifecycleReadService extends AbstractSeoDashboardReadService
 {
     public const CONTRACT_VERSION = 'seo.content_lifecycle_read_model.v1';

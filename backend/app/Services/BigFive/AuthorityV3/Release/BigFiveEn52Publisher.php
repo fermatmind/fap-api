@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Schema;
 use RuntimeException;
 use Throwable;
 
+/**
+ * @review-surface personality_public_content_asset
+ * @review-surface personality_public_content_asset_revision_review
+ */
 final class BigFiveEn52Publisher
 {
     public const PACKAGE_FILE_SHA256 = BigFiveEn52PackageCompiler::RELEASE_PACKAGE_FILE_SHA256;

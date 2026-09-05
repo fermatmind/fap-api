@@ -7,6 +7,9 @@ namespace App\Services\SeoIntel;
 use App\Services\SeoIntel\Sources\BackendAuthorityUrlTruthSource;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @review-surface search_submission_queue_approval
+ */
 final class MbtiUrlTruthCleanupService
 {
     public const PRESET = 'mbti-fix-02-www-research-apex';
