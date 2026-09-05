@@ -250,6 +250,15 @@ function deployIsTransientGitTransportFailure(\Throwable $failure): bool
     return false;
 }
 
+function deployGitWithResourceLimits(string $git): string
+{
+    // Keep housekeeping synchronous with the deployment. Limit the delta
+    // search per thread and stream large blobs instead of retaining them.
+    return $git.' -c gc.autoDetach=false -c maintenance.autoDetach=false'
+        .' -c pack.threads=1 -c pack.windowMemory=64m -c pack.deltaCacheSize=32m'
+        .' -c core.bigFileThreshold=16m -c core.deltaBaseCacheLimit=32m';
+}
+
 /**
  * Updating the local bare repository is read-only with respect to the active
  * application release and safe to repeat after a proven transport-only SSH
@@ -4300,7 +4309,7 @@ BASH);
  * repository refresh resilient to one proven transient SSH transport failure.
  */
 task('deploy:update_code', function () {
-    $git = get('bin/git');
+    $git = deployGitWithResourceLimits(get('bin/git'));
     $repository = get('repository');
     $target = get('target');
 
