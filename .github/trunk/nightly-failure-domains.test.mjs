@@ -1,5 +1,8 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import test from 'node:test';
 
 const workflow = readFileSync(new URL('../workflows/nightly.yml', import.meta.url), 'utf8');
@@ -46,9 +49,97 @@ test('final receipt reports every domain and fails closed without rolling back p
   ]) {
     assert.match(summary, new RegExp(`${domain}: \\{result:`));
   }
-  assert.match(summary, /schema_version: "nightly-failure-domain-summary\.v1"/);
+  assert.match(summary, /schema_version: "nightly-failure-domain-summary\.v2"/);
   assert.match(summary, /production_rollback_requested: false/);
   assert.match(summary, /jq -e '\.status == "pass"'/);
+});
+
+const dailySchedule = '17 18 * * *';
+const weeklySchedule = '37 18 * * 0';
+const weeklyResults = ['AUTHORITY_RESULT', 'FULL_PHPUNIT_RESULT', 'DEPENDENCY_RESULT', 'WORKFLOW_RESULT', 'SECURITY_RESULT'];
+const dailyResults = ['SCHEDULER_RESULT', 'GSC_RESULT'];
+
+test('daily operations and weekly complete checks have independent schedules and concurrency', () => {
+  assert.deepEqual([...workflow.matchAll(/- cron: "([^"]+)"/g)].map((match) => match[1]), [dailySchedule, weeklySchedule]);
+  assert.match(workflow, /group: nightly-\$\{\{ github\.repository \}\}-\$\{\{ github\.event\.schedule \}\}/);
+  for (const [job, next] of [
+    ['dependency-audit', 'workflow-contracts'],
+    ['workflow-contracts', 'authority-contract'],
+    ['authority-contract', 'full-phpunit'],
+    ['full-phpunit', 'codeql'],
+    ['codeql', 'gsc-read-model-sync'],
+  ]) {
+    assert.ok(jobSection(job, next).includes(`if: github.event_name == 'schedule' && github.event.schedule == '${weeklySchedule}'`));
+  }
+  for (const [job, next] of [['scheduler-evidence-monitor', 'dependency-audit'], ['gsc-read-model-sync', 'nightly-summary']]) {
+    assert.ok(jobSection(job, next).includes(`if: github.event_name == 'schedule' && github.event.schedule == '${dailySchedule}'`));
+  }
+  assert.ok(jobSection('nightly-summary').includes(`if: always() && github.event_name == 'schedule' && (github.event.schedule == '${dailySchedule}' || github.event.schedule == '${weeklySchedule}')`));
+  assert.doesNotMatch(workflow, /workflow_dispatch:|continue-on-error:/);
+});
+
+function runSummary(schedule, overrides = {}) {
+  const summary = jobSection('nightly-summary');
+  const marker = '        run: |\n';
+  const start = summary.indexOf(marker);
+  assert.notEqual(start, -1);
+  const lines = [];
+  for (const line of summary.slice(start + marker.length).split('\n')) {
+    if (!line.startsWith('          ')) break;
+    lines.push(line.slice(10));
+  }
+  const root = mkdtempSync(join(tmpdir(), 'nightly-summary-'));
+  const results = Object.fromEntries([...weeklyResults, ...dailyResults].map((key) => [key, 'skipped']));
+  for (const key of schedule === dailySchedule ? dailyResults : weeklyResults) results[key] = 'success';
+  try {
+    const run = spawnSync('bash', ['-c', lines.join('\n')], {
+      cwd: root,
+      encoding: 'utf8',
+      env: { ...process.env, GITHUB_SHA: 'a'.repeat(40), SCHEDULE: schedule, ...results, ...overrides },
+    });
+    assert.equal(run.status, 0, run.stderr);
+    const receipt = JSON.parse(readFileSync(join(root, 'artifacts/nightly-summary/receipt.json'), 'utf8'));
+    const verdict = spawnSync('bash', ['-c', "jq -e '.status == \"pass\"' artifacts/nightly-summary/receipt.json >/dev/null"], { cwd: root });
+    assert.equal(verdict.status, receipt.status === 'pass' ? 0 : 1);
+    return receipt;
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+}
+
+test('daily receipt cannot be mistaken for full regression success', () => {
+  const receipt = runSummary(dailySchedule);
+  assert.equal(receipt.status, 'pass');
+  assert.equal(receipt.check_scope, 'daily_operations');
+  assert.equal(receipt.workflow_sha, 'a'.repeat(40));
+  assert.equal(receipt.production_rollback_requested, false);
+  assert.deepEqual(receipt.domains.full_phpunit, { result: 'skipped', required: false });
+  assert.deepEqual(receipt.domains.scheduler_evidence, { result: 'success', required: true });
+});
+
+test('weekly receipt requires all five complete-check domains', () => {
+  const receipt = runSummary(weeklySchedule);
+  assert.equal(receipt.status, 'pass');
+  assert.equal(receipt.check_scope, 'weekly_full_checks');
+  assert.equal(Object.values(receipt.domains).filter((domain) => domain.required).length, 5);
+  assert.deepEqual(receipt.domains.full_phpunit, { result: 'success', required: true });
+  assert.deepEqual(receipt.domains.gsc_readonly_sync, { result: 'skipped', required: false });
+});
+
+test('required failures, cancellations, missing results and skips fail both schedules closed', () => {
+  for (const [schedule, keys] of [[dailySchedule, dailyResults], [weeklySchedule, weeklyResults]]) {
+    for (const key of keys) {
+      for (const result of ['failure', 'cancelled', 'skipped', '']) {
+        assert.equal(runSummary(schedule, { [key]: result }).status, 'fail', `${schedule}: ${key}=${result}`);
+      }
+    }
+  }
+});
+
+test('unknown schedules and unexpected out-of-schedule execution fail closed', () => {
+  assert.equal(runSummary('unknown').status, 'fail');
+  assert.equal(runSummary(dailySchedule, { FULL_PHPUNIT_RESULT: 'success' }).status, 'fail');
+  assert.equal(runSummary(weeklySchedule, { GSC_RESULT: 'failure' }).status, 'fail');
 });
 
 

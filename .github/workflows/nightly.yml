@@ -1,8 +1,12 @@
 name: Nightly
+run-name: "${{ github.event.schedule == '17 18 * * *' && 'Daily operations' || 'Weekly full checks' }} · ${{ github.sha }}"
 
 on:
   schedule:
+    # Daily operations: 02:17 Asia/Shanghai.
     - cron: "17 18 * * *"
+    # Full checks: Monday 02:37 Asia/Shanghai (Sunday UTC).
+    - cron: "37 18 * * 0"
 
 permissions:
   actions: read
@@ -10,7 +14,7 @@ permissions:
   security-events: write
 
 concurrency:
-  group: nightly-${{ github.repository }}
+  group: nightly-${{ github.repository }}-${{ github.event.schedule }}
   cancel-in-progress: true
 
 jobs:
@@ -109,7 +113,7 @@ jobs:
 
   dependency-audit:
     name: Dependency contract and vulnerability audit
-    if: github.event_name == 'schedule' && github.event.schedule == '17 18 * * *'
+    if: github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -128,7 +132,7 @@ jobs:
 
   workflow-contracts:
     name: Workflow, classifier, and secret contracts
-    if: github.event_name == 'schedule' && github.event.schedule == '17 18 * * *'
+    if: github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -143,7 +147,7 @@ jobs:
 
   authority-contract:
     name: MBTI, Personality, and Sitemap authority contract
-    if: github.event_name == 'schedule' && github.event.schedule == '17 18 * * *'
+    if: github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0'
     runs-on: ubuntu-latest
     timeout-minutes: 45
     services:
@@ -186,7 +190,7 @@ jobs:
 
   full-phpunit:
     name: Full PHPUnit regression and performance contracts
-    if: github.event_name == 'schedule' && github.event.schedule == '17 18 * * *'
+    if: github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0'
     runs-on: ubuntu-latest
     timeout-minutes: 90
     services:
@@ -234,7 +238,7 @@ jobs:
 
   codeql:
     name: CodeQL and Semgrep security scan
-    if: github.event_name == 'schedule' && github.event.schedule == '17 18 * * *'
+    if: github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0'
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -472,10 +476,11 @@ jobs:
       - codeql
       - scheduler-evidence-monitor
       - gsc-read-model-sync
-    if: always() && github.event_name == 'schedule' && github.event.schedule == '17 18 * * *'
+    if: always() && github.event_name == 'schedule' && (github.event.schedule == '17 18 * * *' || github.event.schedule == '37 18 * * 0')
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
+      SCHEDULE: ${{ github.event.schedule }}
       AUTHORITY_RESULT: ${{ needs.authority-contract.result }}
       FULL_PHPUNIT_RESULT: ${{ needs.full-phpunit.result }}
       DEPENDENCY_RESULT: ${{ needs.dependency-audit.result }}
@@ -491,6 +496,7 @@ jobs:
           mkdir -p artifacts/nightly-summary
           jq -n \
             --arg sha "$GITHUB_SHA" \
+            --arg schedule "$SCHEDULE" \
             --arg authority "$AUTHORITY_RESULT" \
             --arg full_phpunit "$FULL_PHPUNIT_RESULT" \
             --arg dependency "$DEPENDENCY_RESULT" \
@@ -498,21 +504,27 @@ jobs:
             --arg security "$SECURITY_RESULT" \
             --arg scheduler "$SCHEDULER_RESULT" \
             --arg gsc "$GSC_RESULT" '
+            ($schedule == "17 18 * * *") as $daily |
+            ($schedule == "37 18 * * 0") as $weekly |
             {
-              schema_version: "nightly-failure-domain-summary.v1",
+              schema_version: "nightly-failure-domain-summary.v2",
               workflow_sha: $sha,
-              status: (if ([$authority, $full_phpunit, $dependency, $workflow, $security, $scheduler, $gsc] | all(. == "success")) then "pass" else "fail" end),
+              schedule: $schedule,
+              check_scope: (if $daily then "daily_operations" elif $weekly then "weekly_full_checks" else "unknown" end),
               production_rollback_requested: false,
               domains: {
-                authority_contract: {result: $authority},
-                full_phpunit: {result: $full_phpunit},
-                dependency_audit: {result: $dependency},
-                workflow_contracts: {result: $workflow},
-                security_scan: {result: $security},
-                scheduler_evidence: {result: $scheduler},
-                gsc_readonly_sync: {result: $gsc}
+                authority_contract: {result: $authority, required: $weekly},
+                full_phpunit: {result: $full_phpunit, required: $weekly},
+                dependency_audit: {result: $dependency, required: $weekly},
+                workflow_contracts: {result: $workflow, required: $weekly},
+                security_scan: {result: $security, required: $weekly},
+                scheduler_evidence: {result: $scheduler, required: $daily},
+                gsc_readonly_sync: {result: $gsc, required: $daily}
               }
-            }
+            } |
+            .status = (if (($daily or $weekly) and
+              (.domains | all(.[]; if .required then .result == "success" else .result == "skipped" end)))
+              then "pass" else "fail" end)
           ' > artifacts/nightly-summary/receipt.json
       - name: Upload sanitized failure-domain receipt
         if: always()
