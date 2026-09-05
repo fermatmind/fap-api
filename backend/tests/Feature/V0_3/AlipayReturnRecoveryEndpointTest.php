@@ -87,9 +87,11 @@ final class AlipayReturnRecoveryEndpointTest extends TestCase
 
         $attemptId = $this->insertAttempt('anon_alipay_return_recovery_compensate');
         $orderNo = $this->insertOrder('anon_alipay_return_recovery_compensate', [
-            'sku' => 'MBTI_REPORT_FULL',
-            'item_sku' => 'MBTI_REPORT_FULL',
+            'sku' => 'MBTI_REPORT_FULL_199',
+            'item_sku' => 'MBTI_REPORT_FULL_199',
             'target_attempt_id' => $attemptId,
+            'amount_cents' => 199,
+            'amount_total' => 199,
             'provider_app' => 'app_alipay_return_recovery',
             'status' => Order::STATUS_PENDING,
             'payment_state' => Order::PAYMENT_STATE_PENDING,
@@ -116,7 +118,7 @@ final class AlipayReturnRecoveryEndpointTest extends TestCase
             'out_trade_no' => $orderNo,
             'trade_no' => 'ali_trade_return_recovery_compensate',
             'trade_status' => 'TRADE_SUCCESS',
-            'total_amount' => '19.90',
+            'total_amount' => '1.99',
             'sign_type' => 'RSA2',
             'notify_time' => '2026-04-02 12:00:00',
         ];

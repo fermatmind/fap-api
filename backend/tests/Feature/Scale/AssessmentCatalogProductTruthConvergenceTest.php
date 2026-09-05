@@ -21,7 +21,7 @@ final class AssessmentCatalogProductTruthConvergenceTest extends TestCase
         'EQ_60',
     ];
 
-    public function test_seeders_keep_six_public_assessments_free_and_only_retire_report_unlock_skus(): void
+    public function test_commerce_seed_preserves_free_scales_and_exact_current_paid_report_offers(): void
     {
         $this->artisan('fap:scales:seed-default')->assertExitCode(0);
         $this->artisan('db:seed', [
@@ -36,6 +36,15 @@ final class AssessmentCatalogProductTruthConvergenceTest extends TestCase
                     ->where('code', $scaleCode)
                     ->value('commercial_json'));
 
+                if (in_array($scaleCode, ['MBTI', 'BIG5_OCEAN'], true)) {
+                    $this->assertSame($scaleCode === 'MBTI' ? 'MBTI_REPORT_FULL_199' : 'SKU_BIG5_FULL_REPORT_199', $commercial['report_unlock_sku']);
+                    $this->assertNotEmpty($commercial['offers']);
+                    $this->assertSame($commercial['report_unlock_sku'], $commercial['upgrade_sku']);
+                    $this->assertNotContains('MBTI_CREDIT', array_column($commercial['offers'], 'sku'));
+
+                    continue;
+                }
+
                 $this->assertSame('FREE', $commercial['price_tier'] ?? null);
                 $this->assertNull($commercial['report_unlock_sku'] ?? null);
                 $this->assertNull($commercial['upgrade_sku'] ?? null);
@@ -48,10 +57,17 @@ final class AssessmentCatalogProductTruthConvergenceTest extends TestCase
             ->whereIn('scale_code', ['MBTI', 'BIG5_OCEAN', 'EQ_60'])
             ->where('kind', 'report_unlock')
             ->where('scope', 'attempt')
-            ->get(['is_active', 'meta_json']);
+            ->get(['sku', 'price_cents', 'is_active', 'meta_json']);
         $this->assertNotEmpty($reportUnlocks);
         foreach ($reportUnlocks as $sku) {
             $metadata = $this->decodeJson($sku->meta_json ?? null);
+            if (in_array($sku->sku, ['MBTI_REPORT_FULL_199', 'SKU_BIG5_FULL_REPORT_199'], true)) {
+                $this->assertTrue((bool) $sku->is_active);
+                $this->assertSame(199, (int) $sku->price_cents);
+                $this->assertFalse((bool) ($metadata['historical_only'] ?? false));
+
+                continue;
+            }
             $this->assertFalse((bool) ($sku->is_active ?? true));
             $this->assertTrue((bool) ($metadata['deprecated'] ?? false));
             $this->assertTrue((bool) ($metadata['historical_only'] ?? false));

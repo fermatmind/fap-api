@@ -191,14 +191,25 @@ class Pr19CommerceSeeder extends Seeder
                 $capabilities = $this->json($scale->capabilities_json ?? null);
                 $viewPolicy = $this->json($scale->view_policy_json ?? null);
 
-                $offers = $this->buildOffersFromSkus($catalog->listActiveSkus($scaleCode));
-                $defaultEffective = $catalog->defaultEffectiveSku($scaleCode);
-                $defaultAnchor = $catalog->defaultAnchorSku($scaleCode);
+                $reportSkus = array_values(array_filter(
+                    $catalog->listActiveSkus($scaleCode, 0),
+                    static fn (array $item): bool => ($item['kind'] ?? null) === 'report_unlock'
+                        && ($item['scope'] ?? null) === 'attempt',
+                ));
+                $offers = $this->buildOffersFromSkus($reportSkus);
+                $defaultReport = collect($reportSkus)->first(
+                    static fn (array $item): bool => ! empty($item['meta_json']['effective_default'])
+                        || ! empty($item['meta_json']['default']),
+                    $reportSkus[0] ?? null,
+                );
+                $defaultEffective = $defaultReport['sku'] ?? null;
+                $defaultAnchor = $defaultEffective === null ? null : $catalog->anchorForSku($defaultEffective, $scaleCode, 0);
 
                 $commercial['report_benefit_code'] = $benefits['report_benefit_code'];
                 $commercial['credit_benefit_code'] = $benefits['credit_benefit_code'];
                 if ($defaultEffective) {
                     $commercial['report_unlock_sku'] = $defaultEffective;
+                    $commercial['upgrade_sku'] = $defaultEffective;
                     $viewPolicy['upgrade_sku'] = $defaultEffective;
                 }
                 if ($defaultAnchor) {
