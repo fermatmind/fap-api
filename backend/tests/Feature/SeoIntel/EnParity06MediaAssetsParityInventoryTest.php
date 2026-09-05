@@ -50,10 +50,20 @@ final class EnParity06MediaAssetsParityInventoryTest extends TestCase
         $enArticles = $this->articles('content_baselines/articles/articles.en.json');
         $zhArticles = $this->articles('content_baselines/articles/articles.zh-CN.json');
 
-        $this->assertCount(20, $enArticles);
+        $publicArticles = [];
+        foreach ($enArticles as $article) {
+            if (($article['status'] ?? null) === 'draft') {
+                $this->assertFalse($article['is_public']);
+                $this->assertFalse($article['is_indexable']);
+
+                continue;
+            }
+            $publicArticles[] = $article;
+        }
+        $this->assertCount(20, $publicArticles);
         $this->assertCount(25, $zhArticles);
 
-        foreach ($enArticles as $article) {
+        foreach ($publicArticles as $article) {
             $this->assertNotEmpty($article['cover_image_url'] ?? null, (string) ($article['slug'] ?? 'unknown'));
             $this->assertNotEmpty($article['cover_image_alt'] ?? null, (string) ($article['slug'] ?? 'unknown'));
             $this->assertIsArray($article['cover_image_variants'] ?? null, (string) ($article['slug'] ?? 'unknown'));

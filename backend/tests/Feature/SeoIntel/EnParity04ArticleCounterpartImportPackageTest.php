@@ -78,13 +78,18 @@ final class EnParity04ArticleCounterpartImportPackageTest extends TestCase
     #[Test]
     public function article_baseline_import_pairs_target_counterparts_with_backend_translation_authority(): void
     {
+        $expectedCount = 0;
+        foreach (['en', 'zh-CN'] as $locale) {
+            $baseline = json_decode((string) file_get_contents(base_path('../content_baselines/articles/articles.'.$locale.'.json')), true, 512, JSON_THROW_ON_ERROR);
+            $expectedCount += count($baseline['articles']);
+        }
         $this->artisan('articles:import-local-baseline', [
             '--upsert' => true,
             '--status' => 'published',
             '--source-dir' => '../content_baselines/articles',
         ])
             ->expectsOutputToContain('files_found=2')
-            ->expectsOutputToContain('articles_found=45')
+            ->expectsOutputToContain('articles_found='.$expectedCount)
             ->assertExitCode(0);
 
         foreach (self::TARGET_COUNTERPART_SLUGS as $slug) {
