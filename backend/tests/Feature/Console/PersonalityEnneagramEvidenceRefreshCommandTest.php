@@ -105,7 +105,7 @@ final class PersonalityEnneagramEvidenceRefreshCommandTest extends TestCase
         $this->assertSame('already_refreshed', $semanticReadback['status']);
         $this->assertSame(26, $semanticReadback['already_current_count']);
 
-        DB::table('personality_public_content_assets')->where('id', 1)->update([
+        DB::table('personality_public_content_assets')->where('id', PersonalityPublicContentAsset::query()->min('id'))->update([
             'source_hash' => str_repeat('f', 64),
         ]);
         $scalarMismatch = $this->evaluate();

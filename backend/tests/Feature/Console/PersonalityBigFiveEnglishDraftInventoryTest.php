@@ -848,10 +848,10 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             'big5-authority-v2-domains-08',
             $this->completeSnapshot('Historical'),
         );
-        DB::table('personality_public_content_asset_revisions')->whereKey($published->id)->update([
+        DB::table('personality_public_content_asset_revisions')->where('id', $published->id)->update([
             'updated_at' => now()->addDay(),
         ]);
-        DB::table('personality_public_content_asset_revisions')->whereKey($working->id)->update([
+        DB::table('personality_public_content_asset_revisions')->where('id', $working->id)->update([
             'updated_at' => now()->subDay(),
         ]);
         $asset->forceFill([
@@ -878,7 +878,7 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         );
         $working = $this->createRevision($asset, 2, 'working-two', $this->completeSnapshot('Working'));
         $working->forceFill([
-            'workflow_state' => 'https://private.invalid/credential-token-must-not-appear',
+            'workflow_state' => 'https://private.invalid/token',
         ])->saveQuietly();
         $asset->forceFill([
             'working_revision_id' => $working->id,
@@ -893,7 +893,7 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertFalse($row['working_revision_status_safe']);
         $this->assertSame('invalid_unrecognized', $row['working_revision_status']);
         $this->assertSame('schema_repair_required', $row['recommended_disposition']);
-        $this->assertStringNotContainsString('credential-token-must-not-appear', $encoded);
+        $this->assertStringNotContainsString('private.invalid/token', $encoded);
         $this->assertFalse($result['ok']);
     }
 

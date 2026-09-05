@@ -27,9 +27,9 @@ final class ResultProcessingTimingServiceTest extends TestCase
             'mode' => 'async',
             'state' => 'succeeded',
             'created_at' => '2026-08-08 12:00:00.000',
-            'started_at' => '2026-08-08 12:00:01.250',
-            'finished_at' => '2026-08-08 12:00:03.750',
-            'updated_at' => '2026-08-08 12:00:03.750',
+            'started_at' => '2026-08-08 12:00:01.000',
+            'finished_at' => '2026-08-08 12:00:03.000',
+            'updated_at' => '2026-08-08 12:00:03.000',
         ]);
 
         DB::table('report_snapshots')->insert([
@@ -42,7 +42,7 @@ final class ResultProcessingTimingServiceTest extends TestCase
             'snapshot_version' => 'v1',
             'report_json' => '{}',
             'status' => 'ready',
-            'created_at' => '2026-08-08 12:00:03.750',
+            'created_at' => '2026-08-08 12:00:03.000',
             'updated_at' => '2026-08-08 12:00:05.000',
         ]);
 
@@ -51,9 +51,9 @@ final class ResultProcessingTimingServiceTest extends TestCase
         $this->assertSame([
             'version' => 'v1',
             'phase' => 'ready',
-            'queue_wait_ms' => 1250,
-            'scoring_ms' => 2500,
-            'report_wait_ms' => 1250,
+            'queue_wait_ms' => 1000,
+            'scoring_ms' => 2000,
+            'report_wait_ms' => 2000,
             'server_total_ms' => 5000,
         ], $timing);
         $this->assertArrayNotHasKey('attempt_id', $timing);
