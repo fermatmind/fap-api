@@ -32,7 +32,7 @@ case "$CI_VERIFY_TOPOLOGY" in
       exit 18
     }
     export DB_CONNECTION=sqlite
-    export DB_DATABASE=/tmp/fap-ci.sqlite
+    export DB_DATABASE="${CI_VERIFY_SQLITE_DATABASE:-/tmp/fap-ci.sqlite}"
     export QUEUE_CONNECTION=sync
     export FAP_ATTEMPT_WRITE_CONNECTION=sqlite
     export CACHE_STORE=array
