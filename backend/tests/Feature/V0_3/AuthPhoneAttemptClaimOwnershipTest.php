@@ -8,11 +8,59 @@ use App\Models\Attempt;
 use App\Services\Attempts\AttemptProgressService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 final class AuthPhoneAttemptClaimOwnershipTest extends TestCase
 {
     use RefreshDatabase;
+
+    private string|false $previousCi;
+
+    protected function setUp(): void
+    {
+        $this->previousCi = getenv('CI');
+        putenv('CI=false');
+        parent::setUp();
+    }
+
+    protected function tearDown(): void
+    {
+        try {
+            parent::tearDown();
+        } finally {
+            putenv($this->previousCi === false ? 'CI' : 'CI='.$this->previousCi);
+        }
+    }
+
+    #[DataProvider('untrustedClaimModes')]
+    public function test_missing_or_wrong_resume_token_cannot_reassign_an_owned_attempt(bool $ci, ?string $token): void
+    {
+        putenv('CI='.($ci ? 'true' : 'false'));
+        $anonId = 'owned-attempt-'.Str::uuid();
+        $attempt = $this->seedAttempt($anonId);
+        $draft = app(AttemptProgressService::class)->createDraftForAttempt($attempt);
+        $this->verifyPhone(['anon_id' => $anonId, 'resume_token' => $draft['token']])->assertOk();
+        $owner = $attempt->fresh()->user_id;
+        self::assertNotNull($owner);
+
+        $claim = ['anon_id' => $anonId];
+        if ($token !== null) {
+            $claim['resume_token'] = $token;
+        }
+        $this->verifyPhone($claim)->assertOk();
+        self::assertSame($owner, $attempt->fresh()->user_id);
+    }
+
+    public static function untrustedClaimModes(): array
+    {
+        return [
+            'normal missing token' => [false, null],
+            'normal wrong token' => [false, 'resume_wrong'],
+            'CI missing token' => [true, null],
+            'CI wrong token' => [true, 'resume_wrong'],
+        ];
+    }
 
     public function test_phone_verify_does_not_claim_attempt_from_anon_id_without_resume_token(): void
     {
