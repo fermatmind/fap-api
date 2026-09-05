@@ -9,17 +9,17 @@ use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantRevision;
 use App\Models\PersonalityProfileVariantSection;
 use App\Models\PersonalityProfileVariantSeoMeta;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use RuntimeException;
+use Tests\Concerns\UsesIsolatedSqliteDatabase;
 use Tests\TestCase;
 
 final class PersonalityMbtiIntpASeoTitleProductionPromotionCommandTest extends TestCase
 {
-    use RefreshDatabase;
+    use UsesIsolatedSqliteDatabase;
 
     private const PACKAGE_PATH = 'docs/seo/personality/experiments/zh-intp-a-seo-title-production-promotion-v1.json';
 

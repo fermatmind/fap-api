@@ -7,14 +7,14 @@ namespace Tests\Feature\Console;
 use App\Console\Commands\PersonalityBigFiveCmsStagingWriteImport;
 use App\Models\PersonalityPublicContentAsset;
 use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use Tests\Concerns\UsesIsolatedSqliteDatabase;
 use Tests\TestCase;
 
 final class PersonalityBigFiveCmsStagingWriteImportCommandTest extends TestCase
 {
-    use RefreshDatabase;
+    use UsesIsolatedSqliteDatabase;
 
     private const CONFIRMATION_PHRASE = 'I authorize Big Five CMS staging/dev draft import only. No production import, publish, indexability, sitemap, llms, JSON-LD runtime, deploy, or search release is authorized.';
 

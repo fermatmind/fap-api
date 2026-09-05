@@ -8,14 +8,14 @@ use App\Console\Commands\PersonalityBigFiveCmsPublishGate;
 use App\Models\PersonalityPublicContentAsset;
 use App\Services\Cms\BigFiveCmsPublishGateWriter;
 use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use Tests\Concerns\UsesIsolatedSqliteDatabase;
 use Tests\TestCase;
 
 final class PersonalityBigFiveCmsPublishGateCommandTest extends TestCase
 {
-    use RefreshDatabase;
+    use UsesIsolatedSqliteDatabase;
 
     protected function setUp(): void
     {

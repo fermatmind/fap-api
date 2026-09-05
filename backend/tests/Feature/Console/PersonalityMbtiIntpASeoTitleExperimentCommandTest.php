@@ -11,15 +11,15 @@ use App\Models\PersonalityProfileVariantRevision;
 use App\Models\PersonalityProfileVariantSection;
 use App\Models\PersonalityProfileVariantSeoMeta;
 use App\Services\Mbti\MbtiPublicProjectionService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Tests\Concerns\UsesIsolatedSqliteDatabase;
 use Tests\TestCase;
 
 final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
 {
-    use RefreshDatabase;
+    use UsesIsolatedSqliteDatabase;
 
     private const PACKAGE_PATH = 'docs/seo/personality/experiments/zh-intp-a-seo-title-v1.json';
 
