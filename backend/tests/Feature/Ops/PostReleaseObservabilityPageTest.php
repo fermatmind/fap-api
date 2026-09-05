@@ -544,6 +544,7 @@ final class PostReleaseObservabilityPageTest extends TestCase
 
     private function routeRecordIntoReview(int $orgId, AdminUser $owner, AdminUser $reviewer, string $type, object $record): void
     {
+        config(['review_governance.mode' => 'solo_owner', 'review_governance.solo_owner_admin_user_id' => (int) $reviewer->id]);
         $this->actingAs($owner, (string) config('admin.guard', 'admin'));
         app()->instance('request', Request::create('/ops/editorial-review', 'POST'));
 

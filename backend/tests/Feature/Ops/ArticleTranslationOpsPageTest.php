@@ -78,8 +78,15 @@ final class ArticleTranslationOpsPageTest extends TestCase
             ->assertSet('coverageMatrix.0.cells.zh-CN.state', 'source')
             ->assertSet('coverageMatrix.0.cells.en.state', 'published')
             ->assertSee('how-16-personality-types-talk-to-an-ai-coach')
-            ->assertSee('Create translation draft disabled')
-            ->assertSee('Re-sync from source disabled');
+            ->assertSee(__('ops.translation_ops.authority_label'));
+
+        $sourceId = (int) Article::query()->where('slug', $this->fixtureSlugs[0])->where('locale', 'zh-CN')->value('id');
+        Livewire::test(ArticleTranslationOpsPage::class)
+            ->call('createTranslationDraft', 'article', $sourceId, 'en')
+            ->assertForbidden();
+        Livewire::test(ArticleTranslationOpsPage::class)
+            ->call('resyncFromSource', 'article', $sourceId, 'en')
+            ->assertForbidden();
     }
 
     public function test_translation_ops_page_localizes_visible_chinese_console_copy(): void
@@ -100,7 +107,7 @@ final class ArticleTranslationOpsPageTest extends TestCase
             ->assertSee('源文')
             ->assertSee('已发布')
             ->assertSet('coverageMatrix.0.health_state', 'success')
-            ->assertSee('未配置机器翻译 provider')
+            ->assertSee(__('ops.translation_ops.authority_label'))
             ->assertDontSee('Machine translation provider is not configured')
             ->assertDontSee('Unified Translation Ops Console')
             ->assertDontSee('Translation health')
@@ -684,6 +691,7 @@ final class ArticleTranslationOpsPageTest extends TestCase
             PermissionNames::ADMIN_APPROVAL_REVIEW,
             PermissionNames::ADMIN_CONTENT_RELEASE,
         ]);
+        config(['review_governance.mode' => 'solo_owner', 'review_governance.solo_owner_admin_user_id' => (int) $admin->id]);
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));
         $this->app->instance(ArticleMachineTranslationProvider::class, new FakeArticleMachineTranslationProvider);
 
@@ -793,7 +801,7 @@ final class ArticleTranslationOpsPageTest extends TestCase
             'org_id' => 0,
             'article_id' => (int) $translation->id,
             'locale' => 'en',
-            'seo_title' => 'English SEO '.$slug,
+            'seo_title' => mb_substr('English SEO '.$slug, 0, 60),
             'seo_description' => 'English SEO description',
             'is_indexable' => true,
         ]);
@@ -812,7 +820,7 @@ final class ArticleTranslationOpsPageTest extends TestCase
             'org_id' => $orgId,
             'slug' => $slug,
             'locale' => 'zh-CN',
-            'translation_group_id' => 'article-'.$slug,
+            'translation_group_id' => strlen('article-'.$slug) <= 64 ? 'article-'.$slug : 'article-'.substr(hash('sha256', $slug), 0, 40),
             'source_locale' => 'zh-CN',
             'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
             'title' => '中文 '.$slug,
@@ -840,7 +848,7 @@ final class ArticleTranslationOpsPageTest extends TestCase
             'org_id' => $orgId,
             'article_id' => (int) $source->id,
             'locale' => 'zh-CN',
-            'seo_title' => '中文 SEO '.$slug,
+            'seo_title' => mb_substr('中文 SEO '.$slug, 0, 60),
             'seo_description' => '中文 SEO 描述',
             'is_indexable' => true,
         ]);
@@ -969,7 +977,7 @@ final class FakeArticleMachineTranslationProvider implements ArticleMachineTrans
             'title' => 'English '.$this->suffix.' '.$source->slug,
             'excerpt' => 'English excerpt for '.$source->slug,
             'content_md' => "English body for {$source->slug}.\n\nReferences: https://example.test/reference",
-            'seo_title' => 'SEO '.$source->slug,
+            'seo_title' => mb_substr('SEO '.$source->slug, 0, 60),
             'seo_description' => 'SEO description '.$source->slug,
         ];
     }

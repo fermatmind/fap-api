@@ -666,9 +666,9 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->assertSame(__('ops.group.content'), EditorialOperationsPage::getNavigationGroup());
         $this->assertSame(__('ops.group.translation'), ArticleTranslationOpsPage::getNavigationGroup());
         $this->assertSame(__('ops.group.content_release'), EditorialReviewPage::getNavigationGroup());
-        $this->assertSame(__('ops.group.editorial'), ArticleResource::getNavigationGroup());
-        $this->assertSame(__('ops.group.editorial'), CareerGuideResource::getNavigationGroup());
-        $this->assertSame(__('ops.group.editorial'), CareerJobResource::getNavigationGroup());
+        $this->assertSame(__('ops.group.content'), ArticleResource::getNavigationGroup());
+        $this->assertSame(__('ops.group.content'), CareerGuideResource::getNavigationGroup());
+        $this->assertSame(__('ops.group.content'), CareerJobResource::getNavigationGroup());
         $this->assertSame(__('ops.group.taxonomy'), ArticleCategoryResource::getNavigationGroup());
         $this->assertSame(__('ops.group.taxonomy'), ArticleTagResource::getNavigationGroup());
         $this->assertSame(__('ops.group.content_release'), ContentReleasePage::getNavigationGroup());
@@ -1764,13 +1764,11 @@ final class ContentCmsProductLayerTest extends TestCase
 
         $role = Role::query()->create([
             'name' => 'cms_product_layer_'.Str::lower(Str::random(6)),
-            'guard_name' => (string) config('admin.guard', 'admin'),
         ]);
 
         foreach ($permissions as $permissionName) {
             $permission = Permission::query()->firstOrCreate(
-                ['name' => $permissionName],
-                ['guard_name' => (string) config('admin.guard', 'admin')]
+                ['name' => $permissionName]
             );
 
             $role->permissions()->syncWithoutDetaching([$permission->id]);
@@ -1812,6 +1810,7 @@ final class ContentCmsProductLayerTest extends TestCase
 
     private function approveRecord(AdminUser $admin, int $orgId, string $type, object $record): void
     {
+        config(['review_governance.mode' => 'solo_owner', 'review_governance.solo_owner_admin_user_id' => (int) $admin->id]);
         $this->ensureSeoReady($orgId, $type, $record);
 
         $owner = $admin;
