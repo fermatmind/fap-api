@@ -49,9 +49,9 @@ final class CareerFirstWaveRecommendationCompanionLinksApiTest extends TestCase
             ->assertJsonPath('subject_identity.type_code', 'INTJ-A')
             ->assertJsonPath('subject_identity.canonical_type_code', 'INTJ')
             ->assertJsonPath('subject_identity.public_route_slug', 'intj')
-            ->assertJsonPath('counts.total', 5)
+            ->assertJsonPath('counts.total', 4)
             ->assertJsonPath('counts.job_detail', 2)
-            ->assertJsonPath('counts.family_hub', 1)
+            ->assertJsonPath('counts.family_hub', 0)
             ->assertJsonPath('counts.test_landing', 1)
             ->assertJsonPath('counts.topic_detail', 1)
             ->assertJsonStructure([
@@ -74,7 +74,7 @@ final class CareerFirstWaveRecommendationCompanionLinksApiTest extends TestCase
         $links = collect($response->json('companion_links'));
 
         $this->assertSame(
-            ['career_family_hub', 'career_job_detail', 'test_landing', 'topic_detail'],
+            ['career_job_detail', 'test_landing', 'topic_detail'],
             $links->pluck('route_kind')->unique()->sort()->values()->all()
         );
         $testLanding = $links->firstWhere('route_kind', 'test_landing');

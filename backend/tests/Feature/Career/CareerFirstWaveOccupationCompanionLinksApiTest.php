@@ -28,9 +28,9 @@ final class CareerFirstWaveOccupationCompanionLinksApiTest extends TestCase
             ->assertJsonPath('scope', CareerFirstWaveOccupationCompanionLinksService::SCOPE)
             ->assertJsonPath('subject_kind', 'occupation')
             ->assertJsonPath('subject_identity.canonical_slug', 'accountants-and-auditors')
-            ->assertJsonPath('counts.total', 3)
+            ->assertJsonPath('counts.total', 2)
             ->assertJsonPath('counts.job_detail', 2)
-            ->assertJsonPath('counts.family_hub', 1)
+            ->assertJsonPath('counts.family_hub', 0)
             ->assertJsonStructure([
                 'summary_kind',
                 'summary_version',
@@ -51,7 +51,7 @@ final class CareerFirstWaveOccupationCompanionLinksApiTest extends TestCase
         $links = collect($response->json('companion_links'));
 
         $this->assertSame(
-            ['career_family_hub', 'career_job_detail'],
+            ['career_job_detail'],
             $links->pluck('route_kind')->unique()->sort()->values()->all()
         );
         $this->assertFalse($links->contains(static fn (array $row): bool => str_starts_with((string) ($row['canonical_path'] ?? ''), '/career/recommendations')));

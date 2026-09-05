@@ -91,7 +91,7 @@ final class CareerFirstWaveDiscoverabilityManifestApiTest extends TestCase
 
         $this->assertSame('candidate', $jobRoutes['data-scientists']['launch_tier']);
         $this->assertSame('excluded', $jobRoutes['data-scientists']['discoverability_state']);
-        $this->assertSame(['excluded_not_index_eligible'], $jobRoutes['data-scientists']['reason_codes']);
+        $this->assertSame(['excluded_non_stable_tier'], $jobRoutes['data-scientists']['reason_codes']);
 
         $this->assertFalse($routes->contains(static fn (array $row): bool => ($row['route_kind'] ?? null) === 'career_family_hub'));
     }

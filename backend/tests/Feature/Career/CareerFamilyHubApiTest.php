@@ -13,6 +13,18 @@ final class CareerFamilyHubApiTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->app->instance(
+            \App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility::class,
+            new \Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture(
+                defaultFamilyHubLive: false,
+                familyHubLive: ['computer-and-information-technology' => true, 'empty-family-api' => true],
+            ),
+        );
+    }
+
     public function test_it_returns_a_minimal_family_hub_bundle_with_visible_children_and_counts(): void
     {
         $this->materializeCurrentFirstWaveFixture();

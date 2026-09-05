@@ -26,12 +26,14 @@ use Tests\TestCase;
 final class CareerJobListApiTest extends TestCase
 {
     use RefreshDatabase;
+    use \Tests\Concerns\UsesCareerDetailCacheFixture;
 
     private const DISPLAY_COMPONENT_ORDER = CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS;
 
     protected function setUp(): void
     {
         parent::setUp();
+        $this->installCareerDetailCacheFixture();
 
         $this->app->instance(
             CareerRuntimePublishProjectionVisibility::class,
@@ -555,10 +557,10 @@ final class CareerJobListApiTest extends TestCase
 
     private function markDetailReady(string $slug, string $locale = 'zh-CN'): void
     {
-        app(PublicCareerAuthorityResponseCache::class)->publishJobDetailReadModel($slug, $locale, [
+        app(PublicCareerAuthorityResponseCache::class)->publishJobDetailReadModel($slug, $locale, $this->detailCacheFixture([
             'identity' => ['canonical_slug' => $slug],
             'fixture' => true,
-        ]);
+        ], $slug, $locale));
     }
 
     /**
