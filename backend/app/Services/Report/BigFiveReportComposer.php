@@ -140,7 +140,12 @@ final class BigFiveReportComposer
         }
         $facetVector = [];
         if (! $locked) {
-            foreach ((array) data_get($scoreResult, 'scores_0_100.facets_percentile', []) as $facet => $percentile) {
+            $facets = (array) data_get($scoreResult, 'scores_0_100.facets_percentile', []);
+            foreach (self::FACET_ORDER as $facet) {
+                if (! array_key_exists($facet, $facets)) {
+                    continue;
+                }
+                $percentile = $facets[$facet];
                 $facetVector[] = [
                     'key' => (string) $facet,
                     'domain' => substr((string) $facet, 0, 1),
