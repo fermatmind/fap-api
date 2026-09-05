@@ -8,6 +8,8 @@ use App\Services\Content\ContentPackV2Resolver;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+use Ramsey\Uuid\Uuid;
 use Tests\TestCase;
 
 final class LegacyContentPackBridgeMetadataTest extends TestCase
@@ -128,6 +130,8 @@ final class LegacyContentPackBridgeMetadataTest extends TestCase
 
     public function test_dual_mode_rollback_keeps_backup_selection_and_bridges_release_metadata(): void
     {
+        $this->freezeTime();
+
         config()->set('scale_identity.content_publish_mode', 'dual');
         config()->set('storage_rollout.blob_catalog_enabled', true);
         config()->set('storage_rollout.manifest_catalog_enabled', true);
@@ -141,8 +145,24 @@ final class LegacyContentPackBridgeMetadataTest extends TestCase
             'packs:publish --scale=BIG5_OCEAN --pack=BIG5_OCEAN --pack-version=v1 --region=CN_MAINLAND --locale=zh-CN --dir_alias=%s --probe=0',
             self::ROLLBACK_ALIAS
         );
-        $this->artisan($publishCommand)->assertExitCode(0);
-        $this->artisan($publishCommand)->assertExitCode(0);
+        // Equal timestamps and reverse UUID order must not change the first publication identity.
+        $sequence = 0;
+        $uuidPrefix = 'ffffffff';
+        Str::createUuidsUsing(static function () use (&$sequence, &$uuidPrefix) {
+            return Uuid::fromString(sprintf('%s-ffff-4fff-8fff-%012x', $uuidPrefix, ++$sequence));
+        });
+        try {
+            $this->artisan($publishCommand)->assertExitCode(0);
+            $initialPublish = DB::table('content_pack_releases')
+                ->where('action', 'publish')
+                ->where('status', 'success')
+                ->where('dir_alias', self::ROLLBACK_ALIAS)
+                ->sole();
+            $uuidPrefix = '00000000';
+            $this->artisan($publishCommand)->assertExitCode(0);
+        } finally {
+            Str::createUuidsNormally();
+        }
 
         $targetReleaseId = '';
         $sourceBackupPath = '';
@@ -165,13 +185,6 @@ final class LegacyContentPackBridgeMetadataTest extends TestCase
 
         $this->assertNotSame('', $targetReleaseId);
         $this->assertTrue(File::isDirectory($sourceBackupPath));
-        $initialPublish = DB::table('content_pack_releases')
-            ->where('action', 'publish')
-            ->where('status', 'success')
-            ->where('dir_alias', self::ROLLBACK_ALIAS)
-            ->orderBy('created_at')
-            ->orderBy('updated_at')
-            ->first();
         $this->assertNotNull($initialPublish);
         $initialManifestStoragePath = storage_path('app/private/content_releases/'.(string) ($initialPublish->to_version_id ?? '').'/source_pack');
 
