@@ -85,7 +85,8 @@ final class SeoDashCollector01ReadinessTest extends TestCase
         $allowedCollectors = $artifact['allowed_collectors'] ?? [];
         $commands = $artifact['allowed_smoke_commands'] ?? [];
 
-        $this->assertSame(config('seo_intel.allowed_collectors'), $allowedCollectors);
+        $this->assertSame(['detector_foundation'], array_values(array_diff(config('seo_intel.allowed_collectors'), $allowedCollectors)));
+        $this->assertSame([], array_values(array_diff($allowedCollectors, config('seo_intel.allowed_collectors'))));
         $this->assertCount(count($allowedCollectors), $commands);
 
         $commandCollectors = array_column($commands, 'collector');
