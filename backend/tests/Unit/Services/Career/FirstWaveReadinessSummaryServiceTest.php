@@ -16,6 +16,7 @@ final class FirstWaveReadinessSummaryServiceTest extends TestCase
 
     public function test_it_normalizes_validator_truth_into_a_stable_readiness_summary(): void
     {
+        $this->freezeTime();
         $this->materializeCurrentFirstWaveFixture();
 
         $summary = app(FirstWaveReadinessSummaryService::class)->build()->toArray();
@@ -63,7 +64,7 @@ final class FirstWaveReadinessSummaryServiceTest extends TestCase
         $this->assertTrue($dataScientists['index_eligible']);
 
         $occupation = Occupation::query()->where('canonical_slug', 'data-scientists')->firstOrFail();
-        $latestIndexState = $occupation->indexStates()->orderByDesc('changed_at')->orderByDesc('updated_at')->firstOrFail();
+        $latestIndexState = $occupation->indexStates()->orderByDesc('changed_at')->orderByDesc('updated_at')->orderByDesc('id')->firstOrFail();
         $this->assertSame('indexed', $latestIndexState->index_state);
         $this->assertTrue($latestIndexState->index_eligible);
     }
