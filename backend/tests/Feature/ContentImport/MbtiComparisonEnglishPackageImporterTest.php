@@ -6,10 +6,12 @@ namespace Tests\Feature\ContentImport;
 
 use App\Models\MbtiCrossTypeComparisonAuthority;
 use App\Services\ContentImport\MbtiComparisonEnglishPackageImporter;
+use Illuminate\Database\Connection;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 final class MbtiComparisonEnglishPackageImporterTest extends TestCase
@@ -460,7 +462,13 @@ final class MbtiComparisonEnglishPackageImporterTest extends TestCase
 
     public function test_database_exception_receipt_is_redacted(): void
     {
-        Schema::drop('mbti_cross_type_comparison_authorities');
+        $failedQueries = 0;
+        DB::connection()->beforeExecuting(static function (string $query, array $bindings, Connection $connection) use (&$failedQueries): void {
+            if ($failedQueries === 0 && str_contains($query, 'mbti_cross_type_comparison_authorities')) {
+                $failedQueries++;
+                throw new QueryException($connection->getName(), $query, $bindings, new \PDOException('Fixture query failure: content_payload_json'));
+            }
+        });
 
         self::assertSame(1, $this->runWrite());
         $output = Artisan::output();
@@ -472,6 +480,8 @@ final class MbtiComparisonEnglishPackageImporterTest extends TestCase
         self::assertStringNotContainsString('SQLSTATE', $output);
         self::assertStringNotContainsString('mbti_cross_type_comparison_authorities', $output);
         self::assertStringNotContainsString('content_payload_json', $output);
+        self::assertSame(1, $failedQueries);
+        $this->assertDatabaseCount('mbti_cross_type_comparison_authorities', 0);
     }
 
     private function runDryRun(
