@@ -470,7 +470,9 @@ final class AttemptReportAccessReadTest extends TestCase
 
         $this->assertNotSame(true, $response->json('big5_public_projection_v1._meta.redacted'));
         $this->assertNotEmpty((array) $response->json('big5_public_projection_v1.facet_vector'));
-        $this->assertNotEmpty((array) $response->json('big5_public_projection_v1.action_plan_summary'));
+        $actionPlan = collect($response->json('big5_public_projection_v1.sections'))->firstWhere('section_key', 'action_plan');
+        $this->assertNotEmpty($actionPlan['blocks'] ?? []);
+        $this->assertSame($actionPlan, collect($response->json('report.sections'))->firstWhere('section_key', 'action_plan'));
     }
 
     public function test_it_keeps_projection_missing_pending_when_active_grant_exists_but_result_does_not_exist(): void

@@ -142,6 +142,7 @@ final class ScalesLookupSeoMetadataTest extends TestCase
                 ->where('org_id', 0)
                 ->where('code', 'BIG5_OCEAN')
                 ->update(['content_i18n_json' => $content]);
+            $existingByTable[$table] = DB::table($table)->where('org_id', 0)->where('code', 'BIG5_OCEAN')->value('content_i18n_json');
         }
 
         putenv('FAP_PRESERVE_EXISTING_BIG5_CMS_CONTENT=1');

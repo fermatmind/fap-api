@@ -41,6 +41,11 @@ class ReportPaywallTeaserTest extends TestCase
         (new ScaleRegistrySeeder)->run();
         (new Pr17SimpleScoreDemoSeeder)->run();
         (new Pr19CommerceSeeder)->run();
+        $scale = \App\Models\ScaleRegistry::query()->where('org_id', 0)->where('code', 'MBTI')->firstOrFail();
+        $fixture = $scale->only($scale->getFillable());
+        $fixture['capabilities_json']['paywall_mode'] = 'free_only';
+        app(\App\Services\Scale\ScaleRegistryWriter::class)->upsertScale($fixture);
+
     }
 
     private function createMbtiAttemptWithResult(): string

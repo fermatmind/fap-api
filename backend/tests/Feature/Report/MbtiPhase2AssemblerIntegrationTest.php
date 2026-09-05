@@ -375,37 +375,49 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             0
         );
 
-        $relationshipsRelRisks = collect(Arr::wrap($projection['sections'] ?? []))
+        // Current Chinese projections do not use report fallback as narrative authority.
+        $this->assertNotContains('relationships.rel_risks', array_column($projection['sections'], 'key'));
+        // Exercise the historical snapshot adapter independently of that runtime boundary.
+        $sectionProjection = app(\App\Services\Mbti\MbtiCanonicalPublicResultPayloadBuilder::class)->build(
+            \App\Support\Mbti\MbtiPublicTypeIdentity::fromTypeCode((string) $result->type_code),
+            new \App\Services\Mbti\Adapters\MbtiReportAuthoritySourceAdapter($roundTrippedReport),
+        );
+        $sectionProjection = app(\App\Services\Mbti\MbtiResultPersonalizationService::class)->applyToProjection(
+            $sectionProjection,
+            (array) data_get($roundTrippedReport, '_meta.personalization'),
+        );
+
+        $relationshipsRelRisks = collect(Arr::wrap($sectionProjection['sections'] ?? []))
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'relationships.rel_risks');
-        $decisionStyle = collect(Arr::wrap($projection['sections'] ?? []))
+        $decisionStyle = collect(Arr::wrap($sectionProjection['sections'] ?? []))
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'traits.decision_style');
-        $stressRecovery = collect(Arr::wrap($projection['sections'] ?? []))
+        $stressRecovery = collect(Arr::wrap($sectionProjection['sections'] ?? []))
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'growth.stress_recovery');
-        $communicationStyle = collect(Arr::wrap($projection['sections'] ?? []))
+        $communicationStyle = collect(Arr::wrap($sectionProjection['sections'] ?? []))
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'relationships.communication_style');
-        $careerCollaborationFit = collect(Arr::wrap($projection['sections'] ?? []))
+        $careerCollaborationFit = collect(Arr::wrap($sectionProjection['sections'] ?? []))
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'career.collaboration_fit');
-        $careerWorkEnvironment = collect(Arr::wrap($projection['sections'] ?? []))
+        $careerWorkEnvironment = collect(Arr::wrap($sectionProjection['sections'] ?? []))
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'career.work_environment');
-        $careerNextStep = collect(Arr::wrap($projection['sections'] ?? []))
+        $careerNextStep = collect(Arr::wrap($sectionProjection['sections'] ?? []))
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'career.next_step');
-        $whyThisType = collect(Arr::wrap($projection['sections'] ?? []))
+        $whyThisType = collect(Arr::wrap($sectionProjection['sections'] ?? []))
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'traits.why_this_type');
-        $closeCallAxes = collect(Arr::wrap($projection['sections'] ?? []))
+        $closeCallAxes = collect(Arr::wrap($sectionProjection['sections'] ?? []))
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'traits.close_call_axes');
-        $adjacentTypeContrast = collect(Arr::wrap($projection['sections'] ?? []))
+        $adjacentTypeContrast = collect(Arr::wrap($sectionProjection['sections'] ?? []))
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'traits.adjacent_type_contrast');
-        $stabilityConfidence = collect(Arr::wrap($projection['sections'] ?? []))
+        $stabilityConfidence = collect(Arr::wrap($sectionProjection['sections'] ?? []))
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'growth.stability_confidence');
-        $careerWorkExperiments = collect(Arr::wrap($projection['sections'] ?? []))
+        $careerWorkExperiments = collect(Arr::wrap($sectionProjection['sections'] ?? []))
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'career.work_experiments');
-        $growthNextActions = collect(Arr::wrap($projection['sections'] ?? []))
+        $growthNextActions = collect(Arr::wrap($sectionProjection['sections'] ?? []))
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'growth.next_actions');
-        $growthWeeklyExperiments = collect(Arr::wrap($projection['sections'] ?? []))
+        $growthWeeklyExperiments = collect(Arr::wrap($sectionProjection['sections'] ?? []))
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'growth.weekly_experiments');
-        $growthWatchouts = collect(Arr::wrap($projection['sections'] ?? []))
+        $growthWatchouts = collect(Arr::wrap($sectionProjection['sections'] ?? []))
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'growth.watchouts');
-        $relationshipsTryThisWeek = collect(Arr::wrap($projection['sections'] ?? []))
+        $relationshipsTryThisWeek = collect(Arr::wrap($sectionProjection['sections'] ?? []))
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'relationships.try_this_week');
 
         $this->assertSame(

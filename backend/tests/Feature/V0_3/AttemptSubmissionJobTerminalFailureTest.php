@@ -122,6 +122,8 @@ class AttemptSubmissionJobTerminalFailureTest extends TestCase
             ],
         ]);
 
+        $persistedSuccess = DB::table('attempt_submissions')->where('id', $succeededId)->value('response_payload_json');
+
         (new ProcessAttemptSubmissionJob($succeededId))->failed(new \RuntimeException('should not overwrite success'));
         (new ProcessAttemptSubmissionJob($failedId))->failed(new \RuntimeException('should not overwrite failure'));
 
@@ -130,7 +132,7 @@ class AttemptSubmissionJobTerminalFailureTest extends TestCase
 
         $this->assertNotNull($succeeded);
         $this->assertSame('succeeded', (string) ($succeeded->state ?? ''));
-        $this->assertSame('{"ok":true}', (string) ($succeeded->response_payload_json ?? ''));
+        $this->assertSame($persistedSuccess, $succeeded->response_payload_json);
 
         $this->assertNotNull($failed);
         $this->assertSame('failed', (string) ($failed->state ?? ''));

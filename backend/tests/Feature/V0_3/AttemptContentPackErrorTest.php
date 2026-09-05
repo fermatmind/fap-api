@@ -22,13 +22,11 @@ final class AttemptContentPackErrorTest extends TestCase
         $brokenPackId = 'PACK_DOES_NOT_EXIST';
         $brokenDirVersion = 'DIR_VERSION_DOES_NOT_EXIST';
 
-        ScaleRegistry::query()
-            ->where('org_id', 0)
-            ->where('code', 'MBTI')
-            ->update([
-                'default_pack_id' => $brokenPackId,
-                'default_dir_version' => $brokenDirVersion,
-            ]);
+        $scale = ScaleRegistry::query()->where('org_id', 0)->where('code', 'MBTI')->firstOrFail();
+        app(\App\Services\Scale\ScaleRegistryWriter::class)->upsertScale(array_replace(
+            $scale->only($scale->getFillable()),
+            ['default_pack_id' => $brokenPackId, 'default_dir_version' => $brokenDirVersion],
+        ));
 
         Cache::flush();
         Log::spy();

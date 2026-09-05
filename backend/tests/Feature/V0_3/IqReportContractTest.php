@@ -18,9 +18,16 @@ final class IqReportContractTest extends TestCase
 {
     use RefreshDatabase;
 
-    private function seedScales(): void
+    private function seedScales(bool $paidPreview = false): void
     {
         (new ScaleRegistrySeeder)->run();
+        if ($paidPreview) {
+            $scale = \App\Models\ScaleRegistry::query()->where('org_id', 0)->where('code', 'IQ_RAVEN')->firstOrFail();
+            $fixture = $scale->only($scale->getFillable());
+            $fixture['capabilities_json']['paywall_mode'] = 'full';
+            app(\App\Services\Scale\ScaleRegistryWriter::class)->upsertScale($fixture);
+        }
+
     }
 
     private function issueAnonToken(string $anonId): string
@@ -183,7 +190,7 @@ final class IqReportContractTest extends TestCase
 
     public function test_iq_report_endpoint_uses_iq_specific_three_dimension_payload_without_payment_unlock_changes(): void
     {
-        $this->seedScales();
+        $this->seedScales(paidPreview: true);
 
         $attemptId = (string) Str::uuid();
         $anonId = 'anon_iq_report_contract';
@@ -446,7 +453,7 @@ final class IqReportContractTest extends TestCase
 
     public function test_iq_paid_report_entitlement_unlocks_full_payload_for_matching_anon(): void
     {
-        $this->seedScales();
+        $this->seedScales(paidPreview: true);
 
         $attemptId = (string) Str::uuid();
         $anonId = 'anon-iq-paid-owner';
@@ -487,7 +494,7 @@ final class IqReportContractTest extends TestCase
 
     public function test_iq_paid_report_entitlement_does_not_unlock_for_wrong_anon(): void
     {
-        $this->seedScales();
+        $this->seedScales(paidPreview: true);
 
         $attemptId = (string) Str::uuid();
         $anonId = 'anon-iq-paid-owner-locked';
