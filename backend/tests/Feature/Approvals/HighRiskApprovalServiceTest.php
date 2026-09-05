@@ -42,12 +42,12 @@ final class HighRiskApprovalServiceTest extends TestCase
             'order_no' => 'ord-safe-target',
         ]);
 
-        $service = app(HighRiskApprovalService::class);
         $freshStepUpCode = $this->freshStepUpCode($owner);
         $request = Request::create('/', 'POST');
         $request->headers->set('User-Agent', str_repeat('a', 400));
         $this->app->instance('request', $request);
         $this->app->instance(Request::class, $request);
+        $service = app(HighRiskApprovalService::class);
         $approved = $service->approve((string) $approval->id, (int) $owner->id, $freshStepUpCode);
 
         $this->assertSame(AdminApproval::STATUS_APPROVED, (string) $approved->status);
@@ -612,6 +612,7 @@ final class HighRiskApprovalServiceTest extends TestCase
         ]);
         $this->app->instance('request', $request);
         $this->app->instance(Request::class, $request);
+        $service = app(HighRiskApprovalService::class);
 
         $rejected = $service->reject(
             (string) $approval->id,
@@ -647,13 +648,13 @@ final class HighRiskApprovalServiceTest extends TestCase
         $approval = $this->approval(AdminApproval::TYPE_REFUND, $owner, [
             'order_no' => 'ord-recovery-consumption',
         ]);
-        $service = app(HighRiskApprovalService::class);
         $request = Request::create('/', 'POST', [
             'fresh_step_up_code' => $recoveryCode,
             'reason_append' => 'safe recovery step-up',
         ]);
         $this->app->instance('request', $request);
         $this->app->instance(Request::class, $request);
+        $service = app(HighRiskApprovalService::class);
 
         try {
             $service->approve((string) $approval->id, (int) $other->id, $recoveryCode);

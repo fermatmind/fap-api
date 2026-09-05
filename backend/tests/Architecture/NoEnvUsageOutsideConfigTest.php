@@ -33,6 +33,7 @@ final class NoEnvUsageOutsideConfigTest extends TestCase
     #[Test]
     public function app_and_routes_do_not_use_env_or_getenv(): void
     {
+        $scan = require base_path('scripts/ci/php_source_calls.php');
         $roots = [base_path('app'), base_path('routes')];
         $offenders = [];
 
@@ -44,7 +45,7 @@ final class NoEnvUsageOutsideConfigTest extends TestCase
                 }
 
                 $source = (string) file_get_contents($filePath);
-                if (str_contains($source, 'env(') || str_contains($source, 'getenv(')) {
+                if ($scan($source, ['env', 'getenv']) !== []) {
                     $offenders[] = $relative;
                 }
             }

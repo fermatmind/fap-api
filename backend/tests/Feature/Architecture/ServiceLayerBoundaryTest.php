@@ -13,12 +13,7 @@ final class ServiceLayerBoundaryTest extends TestCase
     public function test_service_layer_has_no_http_dependencies(): void
     {
         $servicesRoot = app_path('Services');
-        $forbiddenTokens = [
-            'request(',
-            'abort(',
-            'response(',
-            'JsonResponse',
-        ];
+        $scan = require base_path('scripts/ci/php_source_calls.php');
 
         $violations = [];
 
@@ -32,17 +27,8 @@ final class ServiceLayerBoundaryTest extends TestCase
             }
 
             $path = (string) $fileInfo->getPathname();
-            $lines = @file($path);
-            if (! is_array($lines)) {
-                continue;
-            }
-
-            foreach ($lines as $index => $line) {
-                foreach ($forbiddenTokens as $token) {
-                    if (str_contains($line, $token)) {
-                        $violations[] = sprintf('%s:%d => %s', $path, $index + 1, $token);
-                    }
-                }
+            foreach ($scan((string) file_get_contents($path), ['request', 'abort', 'response'], ['jsonresponse']) as $match) {
+                $violations[] = sprintf('%s:%d => %s', $path, $match['line'], $match['name']);
             }
         }
 

@@ -9,6 +9,7 @@ use App\Models\AdminUser;
 use App\Services\Auth\AdminTotpService;
 use App\Services\ReviewGovernance\ReviewAttestationCanonicalizer;
 use App\Support\Rbac\PermissionNames;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\RateLimiter;
@@ -75,6 +76,7 @@ final readonly class HighRiskApprovalService
     public function __construct(
         private ReviewAttestationCanonicalizer $canonicalizer,
         private AdminTotpService $adminTotp,
+        private Request $request,
     ) {}
 
     public function approve(
@@ -490,7 +492,7 @@ final readonly class HighRiskApprovalService
 
     private function verifyStepUpWithoutRequestSecrets(AdminUser $actor, string $freshStepUpCode): bool
     {
-        $request = request();
+        $request = $this->request;
         $auditRequest = $request->duplicate(
             query: [],
             request: [],
@@ -634,7 +636,7 @@ final readonly class HighRiskApprovalService
         array $metadata,
         string $action = 'approval_approved',
     ): void {
-        $request = request();
+        $request = $this->request;
         DB::table('audit_logs')->insert([
             'org_id' => (int) $approval->org_id,
             'actor_admin_id' => (int) $approval->approved_by_admin_user_id,
@@ -667,7 +669,7 @@ final readonly class HighRiskApprovalService
         int $actorAdminUserId,
         string $reasonAppend,
     ): void {
-        $request = request();
+        $request = $this->request;
         DB::table('audit_logs')->insert([
             'org_id' => (int) $approval->org_id,
             'actor_admin_id' => $actorAdminUserId,
@@ -712,9 +714,9 @@ final readonly class HighRiskApprovalService
                 'approval_evidence_sha256' => (string) $metadata['approval_evidence_sha256'],
                 'authorization_sha256' => (string) $metadata['authorization_sha256'],
             ], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR),
-            'ip' => request()->ip(),
-            'user_agent' => mb_substr((string) request()->userAgent(), 0, 255),
-            'request_id' => (string) request()->headers->get('X-Request-Id', ''),
+            'ip' => $this->request->ip(),
+            'user_agent' => mb_substr((string) $this->request->userAgent(), 0, 255),
+            'request_id' => (string) $this->request->headers->get('X-Request-Id', ''),
             'reason' => 'high-risk approval execution authorized after fresh step-up',
             'result' => 'authorized',
             'created_at' => now(),
