@@ -163,6 +163,16 @@ final class AttemptInviteUnlockFoundationTest extends TestCase
             InviteUnlockCompletionStatus::REJECTED_NOT_SUBMITTED_OR_RESULT_MISSING,
             (string) ($missingResult['qualification_status'] ?? '')
         );
+        $storedRejection = AttemptInviteUnlockCompletion::query()->findOrFail($missingResult['completion_id']);
+        $this->assertSame(InviteUnlockCompletionStatus::REJECTED_INVALID_ATTEMPT, $storedRejection->getRawOriginal('qualification_status'));
+        $this->assertSame(InviteUnlockCompletionStatus::REJECTED_NOT_SUBMITTED_OR_RESULT_MISSING, $storedRejection->qualified_reason);
+        $this->assertSame(InviteUnlockCompletionStatus::REJECTED_NOT_SUBMITTED_OR_RESULT_MISSING, $storedRejection->qualification_status);
+        $this->assertFalse($storedRejection->qualified);
+        $this->assertFalse($storedRejection->counted);
+        $replayedRejection = $completionService->recordCompletionForInvite($inviteCode, $missingResultAttempt, null, 'anon_missing_result');
+        $this->assertTrue($replayedRejection['idempotent']);
+        $this->assertSame($missingResult['qualification_status'], $replayedRejection['qualification_status']);
+        $this->assertFalse($replayedRejection['counted']);
 
         $scaleMismatchAttempt = $this->createAttemptWithOptionalResult('anon_big5_mismatch', 'BIG5_OCEAN', true, true);
         $scaleMismatch = $completionService->recordCompletionForInvite(

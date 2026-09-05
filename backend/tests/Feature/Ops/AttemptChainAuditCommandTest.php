@@ -346,6 +346,15 @@ final class AttemptChainAuditCommandTest extends TestCase
                 'updated_at' => $now->copy()->subMinutes(3),
             ],
         ]);
+        $missingResultCompletion = (array) DB::table('attempt_invite_unlock_completions')->where('qualification_status', 'rejected_self_referral')->first();
+        DB::table('attempt_invite_unlock_completions')->insert(array_replace($missingResultCompletion, [
+            'id' => (string) Str::uuid(),
+            'invitee_anon_id' => 'anon-missing-result',
+            'invitee_identity_key' => 'anon:anon-missing-result',
+            'qualified_reason' => 'rejected_not_submitted_or_result_missing',
+            'qualification_status' => 'rejected_invalid_attempt',
+            'idempotency_key' => 'missing-result:'.hash('sha256', 'attempt-healthy|missing-result'),
+        ]));
 
         DB::table('benefit_grants')->insert([
             'id' => (string) Str::uuid(),
@@ -396,6 +405,9 @@ final class AttemptChainAuditCommandTest extends TestCase
         $this->assertSame('invite', (string) data_get($inspectionForHealthy, 'invite_unlock_diagnostic_v1.projection_unlock_source', ''));
         $this->assertSame(1, (int) data_get($inspectionForHealthy, 'invite_unlock_diagnostic_v1.completed_invitees', -1));
         $this->assertSame(1, (int) data_get($inspectionForHealthy, 'invite_unlock_diagnostic_v1.rejections_by_status.rejected_self_referral', -1));
+        $this->assertSame(1, (int) data_get($inspectionForHealthy, 'invite_unlock_diagnostic_v1.rejections_by_status.rejected_not_submitted_or_result_missing', -1));
+        $rejectedCompletions = collect(data_get($inspectionForHealthy, 'invite_unlock_diagnostic_v1.rejected_completions', []))->keyBy('qualification_status');
+        $this->assertSame('rejected_not_submitted_or_result_missing', data_get($rejectedCompletions->get('rejected_not_submitted_or_result_missing'), 'qualified_reason'));
         $this->assertSame('MBTI_CAREER', (string) data_get($inspectionForHealthy, 'invite_unlock_diagnostic_v1.grants.0.benefit_code', ''));
     }
 

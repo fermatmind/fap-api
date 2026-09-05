@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Services\Attempts\InviteUnlock\InviteUnlockCompletionStatus;
 use Illuminate\Database\Eloquent\Model;
 
 final class AttemptInviteUnlockCompletion extends Model
@@ -39,4 +40,14 @@ final class AttemptInviteUnlockCompletion extends Model
         'counted' => 'boolean',
         'meta_json' => 'array',
     ];
+
+    public function setQualificationStatusAttribute(string $value): void
+    {
+        $this->attributes['qualification_status'] = InviteUnlockCompletionStatus::toStoredStatus($value);
+    }
+
+    public function getQualificationStatusAttribute(mixed $value): string
+    {
+        return InviteUnlockCompletionStatus::fromStoredStatus((string) $value, $this->attributes['qualified_reason'] ?? null);
+    }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Ops;
 
+use App\Services\Attempts\InviteUnlock\InviteUnlockCompletionStatus;
 use App\Support\Logging\SensitiveDiagnosticRedactor;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -603,15 +604,15 @@ final class AttemptChainAuditService
             $grouped = DB::table('attempt_invite_unlock_completions')
                 ->where('invite_id', $inviteId)
                 ->where('counted', false)
-                ->selectRaw('qualification_status, COUNT(*) as total')
-                ->groupBy('qualification_status')
+                ->selectRaw('qualification_status, qualified_reason, COUNT(*) as total')
+                ->groupBy('qualification_status', 'qualified_reason')
                 ->get();
             foreach ($grouped as $group) {
-                $status = $this->normalizeString($group->qualification_status ?? null);
+                $status = $this->completionStatus($group);
                 if ($status === null) {
                     continue;
                 }
-                $rejectionsByStatus[$status] = (int) ($group->total ?? 0);
+                $rejectionsByStatus[$status] = ($rejectionsByStatus[$status] ?? 0) + (int) ($group->total ?? 0);
             }
         }
 
@@ -659,7 +660,7 @@ final class AttemptChainAuditService
                     'invitee_attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($this->normalizeString($row->invitee_attempt_id ?? null)),
                     'invitee_identity_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($this->normalizeString($row->invitee_identity_key ?? null)),
                     'qualified_reason' => $this->normalizeString($row->qualified_reason ?? null),
-                    'qualification_status' => $this->normalizeString($row->qualification_status ?? null),
+                    'qualification_status' => $this->completionStatus($row),
                     'created_at' => $this->formatTimestamp($row->created_at ?? null),
                 ];
             })->values()->all(),
@@ -669,12 +670,20 @@ final class AttemptChainAuditService
                     'invitee_attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($this->normalizeString($row->invitee_attempt_id ?? null)),
                     'invitee_identity_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($this->normalizeString($row->invitee_identity_key ?? null)),
                     'qualified_reason' => $this->normalizeString($row->qualified_reason ?? null),
-                    'qualification_status' => $this->normalizeString($row->qualification_status ?? null),
+                    'qualification_status' => $this->completionStatus($row),
                     'created_at' => $this->formatTimestamp($row->created_at ?? null),
                 ];
             })->values()->all(),
             'rejections_by_status' => $rejectionsByStatus,
         ];
+    }
+
+    private function completionStatus(object $row): ?string
+    {
+        return $this->normalizeString(InviteUnlockCompletionStatus::fromStoredStatus(
+            (string) ($row->qualification_status ?? ''),
+            $this->normalizeString($row->qualified_reason ?? null),
+        ));
     }
 
     private function nullableInt(mixed $value): ?int

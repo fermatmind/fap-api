@@ -45,4 +45,19 @@ final class InviteUnlockCompletionStatus
 
         return $normalized === self::PENDING_VALIDATION ? null : $normalized;
     }
+
+    public static function toStoredStatus(string $status): string
+    {
+        // The legacy status column is 32 characters; qualified_reason retains the full v1 rejection.
+        return $status === self::REJECTED_NOT_SUBMITTED_OR_RESULT_MISSING
+            ? self::REJECTED_INVALID_ATTEMPT
+            : $status;
+    }
+
+    public static function fromStoredStatus(string $status, ?string $reason): string
+    {
+        return $status === self::REJECTED_INVALID_ATTEMPT && $reason === self::REJECTED_NOT_SUBMITTED_OR_RESULT_MISSING
+            ? self::REJECTED_NOT_SUBMITTED_OR_RESULT_MISSING
+            : $status;
+    }
 }
