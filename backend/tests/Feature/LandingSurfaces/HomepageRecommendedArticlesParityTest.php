@@ -119,7 +119,7 @@ final class HomepageRecommendedArticlesParityTest extends TestCase
             'is_indexable' => true,
             'published_at' => Carbon::create(2026, 5, 15, 0, 0, 0, 'UTC'),
             'scheduled_at' => null,
-            'translation_group_id' => 'article:'.$slug,
+            'translation_group_id' => 'article:'.substr(hash('sha256', $slug), 0, 24),
             'source_locale' => $locale === 'zh-CN' ? 'zh-CN' : 'zh-CN',
             'translation_status' => $locale === 'zh-CN'
                 ? Article::TRANSLATION_STATUS_SOURCE
@@ -130,7 +130,7 @@ final class HomepageRecommendedArticlesParityTest extends TestCase
             'org_id' => 0,
             'article_id' => (int) $article->id,
             'source_article_id' => (int) $article->id,
-            'translation_group_id' => 'article:'.$slug,
+            'translation_group_id' => 'article:'.substr(hash('sha256', $slug), 0, 24),
             'locale' => $locale,
             'source_locale' => $locale === 'zh-CN' ? 'zh-CN' : 'zh-CN',
             'revision_number' => 1,
@@ -261,6 +261,6 @@ final class HomepageRecommendedArticlesParityTest extends TestCase
 
     private function titleFor(string $slug, string $locale): string
     {
-        return ($locale === 'zh-CN' ? '中文文章 ' : 'English Article ').$slug;
+        return ($locale === 'zh-CN' ? '中文文章 ' : 'English Article ').substr(hash('sha256', $slug), 0, 12);
     }
 }

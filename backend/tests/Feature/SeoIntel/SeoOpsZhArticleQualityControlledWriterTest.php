@@ -223,7 +223,7 @@ final class SeoOpsZhArticleQualityControlledWriterTest extends TestCase
             'title' => $title,
             'excerpt' => 'Existing excerpt.',
             'content_md' => $content,
-            'seo_title' => $title.' | FermatMind',
+            'seo_title' => mb_substr($title, 0, 47).' | FermatMind',
             'seo_description' => 'Existing SEO description.',
             'published_at' => now()->subHour(),
         ]);
@@ -235,7 +235,7 @@ final class SeoOpsZhArticleQualityControlledWriterTest extends TestCase
             'org_id' => 0,
             'article_id' => (int) $article->id,
             'locale' => $locale,
-            'seo_title' => $title.' | FermatMind',
+            'seo_title' => mb_substr($title, 0, 47).' | FermatMind',
             'seo_description' => 'Existing SEO description.',
             'canonical_url' => 'https://fermatmind.com'.$canonicalPath,
             'robots' => 'index,follow',
