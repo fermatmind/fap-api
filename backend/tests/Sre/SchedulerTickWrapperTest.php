@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\Sre;
 
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Process\Process;
-use Tests\TestCase;
 
 final class SchedulerTickWrapperTest extends TestCase
 {
@@ -22,17 +22,37 @@ final class SchedulerTickWrapperTest extends TestCase
 #!/usr/bin/env bash
 set -euo pipefail
 printf '%s\n' "$*" >> "$FAKE_TICK_LOG"
+if [[ "$*" == *"ops:scheduler-heartbeat-record"* && "${FAKE_HEARTBEAT_BLOCK:-false}" == true ]]; then sleep 20; fi
 if [[ "$*" == *"artisan schedule:run"* ]]; then
   sleep "${FAKE_SCHEDULE_SLEEP:-0}"
   exit "${FAKE_SCHEDULE_EXIT:-0}"
 fi
 BASH);
-        $this->writeExecutable('flock', <<<'BASH'
-#!/usr/bin/env bash
-set -euo pipefail
-[[ "${1:-}" == -n && "${2:-}" == 9 ]]
-mkdir "$FAKE_FLOCK_DIR"
-BASH);
+        $this->writeExecutable('flock', <<<'PYTHON'
+#!/usr/bin/python3
+import fcntl
+import sys
+try:
+    fcntl.flock(9, fcntl.LOCK_EX | fcntl.LOCK_NB)
+except BlockingIOError:
+    sys.exit(1)
+PYTHON);
+        $this->writeExecutable('timeout', <<<'PYTHON'
+#!/usr/bin/python3
+import os
+import signal
+import subprocess
+import sys
+args = sys.argv[1:]
+assert args[:3] == ['--signal=TERM', '--kill-after=5s', '10s']
+process = subprocess.Popen(args[3:], start_new_session=True)
+try:
+    sys.exit(process.wait(timeout=float(os.environ.get('FAKE_PROBE_TIMEOUT', '10'))))
+except subprocess.TimeoutExpired:
+    os.killpg(process.pid, signal.SIGKILL)
+    process.wait()
+    sys.exit(124)
+PYTHON);
     }
 
     protected function tearDown(): void
@@ -73,6 +93,36 @@ BASH);
         $this->assertStringContainsString('--status=completed --exit-code=9', $log);
     }
 
+    #[Test]
+    public function blocked_heartbeat_times_out_without_starting_business_work_and_releases_lock(): void
+    {
+        $blocked = $this->process(['FAKE_HEARTBEAT_BLOCK' => 'true', 'FAKE_PROBE_TIMEOUT' => '0.2']);
+        $blocked->run();
+        $this->assertSame(124, $blocked->getExitCode());
+        $this->assertStringNotContainsString('artisan schedule:run', (string) file_get_contents($this->temporaryDirectory.'/tick.log'));
+
+        $next = $this->process();
+        $next->run();
+        $this->assertTrue($next->isSuccessful(), $next->getErrorOutput());
+    }
+
+    #[Test]
+    public function repeated_contention_never_bootstraps_php(): void
+    {
+        $owner = $this->process(['FAKE_SCHEDULE_SLEEP' => '2']);
+        $owner->start();
+        $this->waitForLog('artisan schedule:run');
+        $before = file_get_contents($this->temporaryDirectory.'/tick.log');
+        for ($attempt = 0; $attempt < 5; $attempt++) {
+            $overlap = $this->process(['FAKE_HEARTBEAT_BLOCK' => 'true']);
+            $overlap->run();
+            $this->assertSame(75, $overlap->getExitCode());
+        }
+        $this->assertSame($before, file_get_contents($this->temporaryDirectory.'/tick.log'));
+        $owner->wait();
+        $this->assertTrue($owner->isSuccessful(), $owner->getErrorOutput());
+    }
+
     /** @param array<string, string> $environment */
     private function process(array $environment = []): Process
     {
@@ -82,6 +132,7 @@ BASH);
             '--php-bin='.$this->temporaryDirectory.'/php',
             '--backend-path='.$this->temporaryDirectory.'/backend',
             '--flock-bin='.$this->temporaryDirectory.'/flock',
+            '--timeout-bin='.$this->temporaryDirectory.'/timeout',
         ], dirname(__DIR__, 2), $environment + [
             'FAKE_TICK_LOG' => $this->temporaryDirectory.'/tick.log',
             'FAKE_FLOCK_DIR' => $this->temporaryDirectory.'/flock-held',

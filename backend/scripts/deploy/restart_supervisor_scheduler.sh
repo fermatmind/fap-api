@@ -9,6 +9,7 @@ crontab_bin="/usr/bin/crontab"
 php_bin="/usr/bin/php"
 deploy_path=""
 proc_root="/proc"
+system_cron_file="/etc/cron.d/fap-api-scheduler"
 required="true"
 
 for argument in "$@"; do
@@ -20,6 +21,7 @@ for argument in "$@"; do
     --php-bin=*) php_bin="${argument#*=}" ;;
     --deploy-path=*) deploy_path="${argument#*=}" ;;
     --proc-root=*) proc_root="${argument#*=}" ;;
+    --system-cron-file=*) system_cron_file="${argument#*=}" ;;
     --required=*) required="${argument#*=}" ;;
     --restart-script=*) : ;;
     *) printf 'scheduler_refresh_invalid_argument\n' >&2; exit 2 ;;
@@ -31,7 +33,7 @@ fail() {
   exit 1
 }
 
-for path in "$supervisorctl_bin" "$sudo_bin" "$timeout_bin" "$crontab_bin" "$php_bin" "$deploy_path" "$proc_root"; do
+for path in "$supervisorctl_bin" "$sudo_bin" "$timeout_bin" "$crontab_bin" "$php_bin" "$deploy_path" "$proc_root" "$system_cron_file"; do
   [[ "$path" =~ ^/[A-Za-z0-9._/-]+$ ]] || fail invalid_path
   [[ "$path" != *".."* ]] || fail invalid_path
 done
@@ -160,6 +162,10 @@ if [[ "$required" == false ]]; then
 fi
 
 [[ -x "$crontab_bin" ]] || fail crontab_unavailable
+legacy_cron_helper="$current_backend/scripts/deploy/retire_legacy_scheduler_cron.py"
+[[ -f "$legacy_cron_helper" ]] || fail legacy_cron_helper_unavailable
+legacy_cron_command=("$sudo_bin" -n /usr/bin/python3 "$legacy_cron_helper" --deploy-root "$deploy_root" --cron-file "$system_cron_file")
+"${legacy_cron_command[@]}" --check || fail legacy_system_cron_preflight_failed
 begin_marker="# BEGIN fap-api managed scheduler"
 end_marker="# END fap-api managed scheduler"
 canonical_line="* * * * * $tick_wrapper --php-bin=$php_bin --backend-path=$deploy_root/current/backend >> /dev/null 2>&1"
@@ -214,5 +220,9 @@ installed="$("$crontab_bin" -l 2>/dev/null)" || fail crontab_verify_failed
 [[ "$(grep -Fxc "$canonical_line" <<< "$installed" || true)" -eq 1 ]] || fail cron_current_release_verify
 [[ "$(grep -c 'run_scheduler_tick.sh' <<< "$installed" || true)" -eq 1 ]] || fail cron_scheduler_identity_count
 [[ "$(grep -c 'artisan schedule:\(run\|work\)' <<< "$installed" || true)" -eq 0 ]] || fail cron_scheduler_identity_count
+
+# Install and verify the replacement first, then atomically comment only the
+# exact legacy system entry. Retain its original text for incident rollback.
+"${legacy_cron_command[@]}" || fail legacy_system_cron_retirement_failed
 
 printf 'scheduler_refresh_pass revision=%s mode=cron_schedule_run\n' "$active_revision"

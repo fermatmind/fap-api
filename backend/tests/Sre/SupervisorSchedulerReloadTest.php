@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\Sre;
 
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Process\Process;
-use Tests\TestCase;
 
 final class SupervisorSchedulerReloadTest extends TestCase
 {
@@ -27,6 +27,7 @@ final class SupervisorSchedulerReloadTest extends TestCase
         file_put_contents($backend.'/artisan', "#!/usr/bin/env php\n");
         copy(dirname(__DIR__, 2).'/scripts/deploy/run_scheduler_tick.sh', $backend.'/scripts/deploy/run_scheduler_tick.sh');
         chmod($backend.'/scripts/deploy/run_scheduler_tick.sh', 0700);
+        copy(dirname(__DIR__, 2).'/scripts/deploy/retire_legacy_scheduler_cron.py', $backend.'/scripts/deploy/retire_legacy_scheduler_cron.py');
 
         $this->writeExecutable('sudo', <<<'BASH'
 #!/usr/bin/env bash
@@ -52,6 +53,7 @@ if [[ "${1:-}" == -l ]]; then
   exit 0
 fi
 [[ $# -eq 1 && -f "$1" ]]
+[[ "${FAKE_CRONTAB_WRITE_ERROR:-false}" != true ]] || exit 1
 cp "$1" "$FAKE_CRONTAB_FILE"
 BASH);
         $this->writeExecutable('php', <<<'BASH'
@@ -202,6 +204,53 @@ BASH);
         $this->assertMatchesRegularExpression("/task\\('scheduler:install-managed-cron'[\\s\\S]+currentHost\\(\\)->getAlias\\(\\) !== 'production'[\\s\\S]+return;/", $deploy);
     }
 
+    #[Test]
+    public function exact_system_duplicate_is_retired_after_user_cron_is_installed_and_is_idempotent(): void
+    {
+        $root = realpath($this->temporaryDirectory.'/deploy');
+        $line = "* * * * * www-data cd {$root}/current/backend && /usr/bin/php artisan schedule:run >> /var/log/fap-schedule.log 2>&1\n";
+        file_put_contents($this->temporaryDirectory.'/system-cron', "SHELL=/bin/sh\n".$line);
+        chmod($this->temporaryDirectory.'/system-cron', 0640);
+        $first = $this->runScript();
+        $this->assertTrue($first->isSuccessful(), $first->getErrorOutput());
+        $retired = file_get_contents($this->temporaryDirectory.'/system-cron');
+        $this->assertStringContainsString('# '.$line, $retired);
+        $this->assertSame(0640, fileperms($this->temporaryDirectory.'/system-cron') & 0777);
+        $second = $this->runScript();
+        $this->assertTrue($second->isSuccessful(), $second->getErrorOutput());
+        $this->assertSame($retired, file_get_contents($this->temporaryDirectory.'/system-cron'));
+    }
+
+    #[Test]
+    public function foreign_system_cron_and_symlinks_fail_before_user_cron_changes(): void
+    {
+        $path = $this->temporaryDirectory.'/system-cron';
+        $original = "* * * * * root /bin/true\n";
+        file_put_contents($path, $original);
+        $foreign = $this->runScript();
+        $this->assertFalse($foreign->isSuccessful());
+        $this->assertSame($original, file_get_contents($path));
+        $this->assertFileDoesNotExist($this->temporaryDirectory.'/crontab-state');
+        rename($path, $path.'-target');
+        symlink($path.'-target', $path);
+        $symlink = $this->runScript();
+        $this->assertFalse($symlink->isSuccessful());
+        $this->assertTrue(is_link($path));
+        $this->assertFileDoesNotExist($this->temporaryDirectory.'/crontab-state');
+    }
+
+    #[Test]
+    public function legacy_entry_survives_a_failed_replacement_install(): void
+    {
+        $root = realpath($this->temporaryDirectory.'/deploy');
+        $original = "* * * * * www-data cd {$root}/current/backend && /usr/bin/php artisan schedule:run >> /var/log/fap-schedule.log 2>&1\n";
+        file_put_contents($this->temporaryDirectory.'/system-cron', $original);
+        $process = $this->runScript(['FAKE_CRONTAB_WRITE_ERROR' => 'true']);
+        $this->assertFalse($process->isSuccessful());
+        $this->assertSame($original, file_get_contents($this->temporaryDirectory.'/system-cron'));
+        $this->assertFileDoesNotExist($this->temporaryDirectory.'/crontab-state');
+    }
+
     private function addSupervisorScheduleWork(bool $owned): void
     {
         mkdir($this->temporaryDirectory.'/proc/301', 0700, true);
@@ -235,6 +284,7 @@ BASH);
             '--php-bin='.$this->temporaryDirectory.'/php',
             '--deploy-path='.$this->temporaryDirectory.'/deploy',
             '--proc-root='.$this->temporaryDirectory.'/proc',
+            '--system-cron-file='.$this->temporaryDirectory.'/system-cron',
             '--required='.($required ? 'true' : 'false'),
         ], $backendRoot, $environment + [
             'FAKE_CRONTAB_FILE' => $this->temporaryDirectory.'/crontab-state',
