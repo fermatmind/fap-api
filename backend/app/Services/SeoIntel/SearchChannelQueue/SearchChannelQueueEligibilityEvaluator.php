@@ -56,11 +56,17 @@ final class SearchChannelQueueEligibilityEvaluator
         $sourceAuthority = (string) ($url['source_authority'] ?? '');
         $indexabilityState = (string) ($url['indexability_state'] ?? '');
         $canonicalUrl = (string) ($url['canonical_url'] ?? '');
+        $entitySource = (string) ($url['entity_source'] ?? $metadata['entity_source'] ?? $url['source_table'] ?? $metadata['source_table'] ?? '');
+        if ($entitySource === 'backend_authority_canary_contract') {
+            // This historical lastmod marker is not an entity source. The classifier
+            // must resolve an exact registered static route, or continue to reject it.
+            $entitySource = '';
+        }
         $pageFamilyDecision = ($this->pageFamilyPolicyGuard ?? new PageFamilyPolicyGuard)->evaluate([
             'canonical_url' => $canonicalUrl,
             'locale' => (string) ($url['locale'] ?? ''),
             'page_entity_type' => $pageType,
-            'entity_source' => (string) ($url['entity_source'] ?? $metadata['entity_source'] ?? $url['source_table'] ?? $metadata['source_table'] ?? ''),
+            'entity_source' => $entitySource,
             'source_authority' => $sourceAuthority,
             'authority_status' => (string) ($url['authority_status'] ?? $metadata['authority_status'] ?? 'published_approved'),
             'indexability_state' => $indexabilityState,

@@ -61,7 +61,7 @@ final class SeoIntelSearchChannelLiveSubmissionExecutorTest extends TestCase
             '--json' => true,
         ]);
 
-        $this->assertSame(0, $exitCode);
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertSame('success', $payload['status'] ?? null);
         $this->assertSame(
             'I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item '.$queueItemId.' channel indexnow URL https://fermatmind.com/en.',
@@ -92,7 +92,7 @@ final class SeoIntelSearchChannelLiveSubmissionExecutorTest extends TestCase
             'entity_type' => 'article',
             'entity_id' => 'article:37',
             'source_authority' => 'backend_cms',
-            'source_table' => 'cms_articles',
+            'source_table' => 'articles',
             'channel' => 'baidu_push',
         ]);
 
@@ -102,7 +102,7 @@ final class SeoIntelSearchChannelLiveSubmissionExecutorTest extends TestCase
             '--json' => true,
         ]);
 
-        $this->assertSame(0, $exitCode);
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertSame('success', $payload['status'] ?? null);
         $this->assertSame(
             'I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item '.$queueItemId.' channel baidu_push URL '.$canonicalUrl.'.',
@@ -157,7 +157,7 @@ final class SeoIntelSearchChannelLiveSubmissionExecutorTest extends TestCase
             'entity_type' => 'article',
             'entity_id' => 'article:37',
             'source_authority' => 'backend_cms',
-            'source_table' => 'cms_articles',
+            'source_table' => 'articles',
             'channel' => 'baidu_push',
         ]);
 
@@ -209,7 +209,7 @@ final class SeoIntelSearchChannelLiveSubmissionExecutorTest extends TestCase
             '--json' => true,
         ]);
 
-        $this->assertSame(0, $exitCode);
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertSame('success', $payload['status'] ?? null);
         $this->assertTrue((bool) ($payload['external_calls_attempted'] ?? false));
         $this->assertTrue((bool) ($payload['search_submission_attempted'] ?? false));
@@ -286,7 +286,7 @@ final class SeoIntelSearchChannelLiveSubmissionExecutorTest extends TestCase
             'entity_type' => 'article',
             'entity_id' => 'article:37',
             'source_authority' => 'backend_cms',
-            'source_table' => 'cms_articles',
+            'source_table' => 'articles',
             'channel' => 'baidu_push',
         ]);
         $approvalPhrase = app(SearchChannelQueueLiveSubmissionExecutor::class)
@@ -299,7 +299,7 @@ final class SeoIntelSearchChannelLiveSubmissionExecutorTest extends TestCase
             '--json' => true,
         ]);
 
-        $this->assertSame(0, $exitCode);
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertSame('success', $payload['status'] ?? null);
         $this->assertTrue((bool) ($payload['external_calls_attempted'] ?? false));
         $this->assertTrue((bool) ($payload['search_submission_attempted'] ?? false));
@@ -377,7 +377,7 @@ final class SeoIntelSearchChannelLiveSubmissionExecutorTest extends TestCase
             'entity_type' => 'article',
             'entity_id' => 'article:37',
             'source_authority' => 'backend_cms',
-            'source_table' => 'cms_articles',
+            'source_table' => 'articles',
             'channel' => 'baidu_push',
         ]);
         $approvalPhrase = app(SearchChannelQueueLiveSubmissionExecutor::class)
@@ -424,6 +424,20 @@ final class SeoIntelSearchChannelLiveSubmissionExecutorTest extends TestCase
         $this->assertFalse((bool) ($payload['external_calls_attempted'] ?? true));
         $this->assertFalse((bool) ($payload['writes_committed'] ?? true));
         $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_events')->count());
+        Http::assertNothingSent();
+    }
+
+    #[Test]
+    public function historical_lastmod_marker_cannot_authorize_unregistered_routes_or_unknown_sources(): void
+    {
+        Http::fake();
+        foreach ([['canonical_url' => 'https://fermatmind.com/en/unregistered'], ['source_table' => 'unknown_authority']] as $overrides) {
+            $id = $this->seedQueueItem($overrides);
+            [$exit, $payload] = $this->runSubmitCommand(['--queue-item-id' => $id, '--dry-run' => true, '--json' => true]);
+            self::assertSame(1, $exit);
+            self::assertContains('eligibility_page_family_policy_blocked', $payload['issues']);
+            self::assertFalse($payload['writes_committed']);
+        }
         Http::assertNothingSent();
     }
 
