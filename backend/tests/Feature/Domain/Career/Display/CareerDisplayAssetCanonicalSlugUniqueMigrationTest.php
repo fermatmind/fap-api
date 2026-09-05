@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Domain\Career\Display;
 
+use App\Support\SchemaBaseline;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Foundation\Testing\RefreshDatabaseState;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use RuntimeException;
@@ -13,18 +15,24 @@ use Tests\TestCase;
 
 final class CareerDisplayAssetCanonicalSlugUniqueMigrationTest extends TestCase
 {
+    private bool $createdOccupations = false;
+
     protected function setUp(): void
     {
         parent::setUp();
         Schema::dropIfExists('career_job_display_assets');
-        Schema::dropIfExists('occupations');
+        RefreshDatabaseState::$migrated = false;
+        SchemaBaseline::clearCache();
     }
 
     public function test_fresh_schema_keeps_legacy_columns_and_composite_index_while_adding_slug_unique(): void
     {
-        Schema::create('occupations', function (Blueprint $table): void {
-            $table->uuid('id')->primary();
-        });
+        if (! Schema::hasTable('occupations')) {
+            Schema::create('occupations', function (Blueprint $table): void {
+                $table->uuid('id')->primary();
+            });
+            $this->createdOccupations = true;
+        }
         $this->createMigration()->up();
         $migration = $this->expandMigration();
         $migration->up();
@@ -73,6 +81,20 @@ final class CareerDisplayAssetCanonicalSlugUniqueMigrationTest extends TestCase
             self::assertSame('CAREER_DISPLAY_CANONICAL_SLUG_DUPLICATE', $failure->getMessage());
             self::assertFalse(collect(Schema::getIndexes('career_job_display_assets'))
                 ->contains(static fn (array $index): bool => ($index['name'] ?? null) === 'career_job_display_assets_canonical_slug_unique'));
+        }
+    }
+
+    protected function tearDown(): void
+    {
+        try {
+            Schema::dropIfExists('career_job_display_assets');
+            if ($this->createdOccupations) {
+                Schema::dropIfExists('occupations');
+            }
+            RefreshDatabaseState::$migrated = false;
+            SchemaBaseline::clearCache();
+        } finally {
+            parent::tearDown();
         }
     }
 
