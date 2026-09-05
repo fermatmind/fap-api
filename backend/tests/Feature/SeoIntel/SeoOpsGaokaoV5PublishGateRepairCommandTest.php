@@ -112,13 +112,14 @@ final class SeoOpsGaokaoV5PublishGateRepairCommandTest extends TestCase
         $this->assertCount(8, (array) data_get($article->seoMeta?->schema_json, 'editorial_package_v1.answer_surface_v1.faq_items'));
         $this->assertFalse((bool) data_get($article->seoMeta?->schema_json, 'editorial_package_v1.search_submission_allowed', true));
 
-        $this->artisan('articles:publish-controlled', [
+        $publishExit = \Illuminate\Support\Facades\Artisan::call('articles:publish-controlled', [
             '--article' => [(string) $article->id],
             '--dry-run' => true,
             '--make-indexable' => true,
-        ])
-            ->expectsOutputToContain('ok=1')
-            ->assertExitCode(0);
+        ]);
+        $publishOutput = \Illuminate\Support\Facades\Artisan::output();
+        $this->assertSame(0, $publishExit, $publishOutput);
+        $this->assertStringContainsString('ok=1', $publishOutput);
 
         $article->refresh();
         $this->assertSame('draft', (string) $article->status);
@@ -195,6 +196,7 @@ final class SeoOpsGaokaoV5PublishGateRepairCommandTest extends TestCase
             'is_active' => true,
         ]);
         $body = "## 选专业父母不同意怎么办\n\n正文。\n\n## 常见问题\n\n### Q\n\nA.";
+        $body .= "\n\n".str_repeat('专业选择应结合课程要求、兴趣体验、家庭约束与真实资料进行逐项核对。', 80);
         $bodyHash = hash('sha256', preg_replace("/\r\n?/", "\n", trim($body)));
 
         $article = Article::query()->withoutGlobalScopes()->create([
