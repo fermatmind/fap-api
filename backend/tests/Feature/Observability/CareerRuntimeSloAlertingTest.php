@@ -21,10 +21,13 @@ use Tests\TestCase;
 
 final class CareerRuntimeSloAlertingTest extends TestCase
 {
+    use \Tests\Concerns\UsesCareerDetailCacheFixture;
+
     protected function setUp(): void
     {
         parent::setUp();
         Cache::flush();
+        $this->installCareerDetailCacheFixture();
     }
 
     public function test_middleware_records_directory_latency_and_status_for_rolling_slo(): void
@@ -290,7 +293,7 @@ final class CareerRuntimeSloAlertingTest extends TestCase
         $cache = app(PublicCareerAuthorityResponseCache::class);
         foreach ($slugs as $slug) {
             foreach (['en', 'zh-CN'] as $locale) {
-                $cache->publishJobDetailReadModel($slug, $locale, ['slug' => $slug]);
+                $cache->publishJobDetailReadModel($slug, $locale, $this->detailCacheFixture(['slug' => $slug], $slug, $locale));
             }
         }
         config()->set('ops.career_runtime_slo.minimum_detail_target_count', count($slugs) * 2);

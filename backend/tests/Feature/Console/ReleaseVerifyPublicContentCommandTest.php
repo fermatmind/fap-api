@@ -15,6 +15,15 @@ final class ReleaseVerifyPublicContentCommandTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->app->instance(
+            \App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility::class,
+            new \Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture,
+        );
+    }
+
     #[Test]
     public function it_fails_when_backend_content_page_baselines_are_missing(): void
     {
