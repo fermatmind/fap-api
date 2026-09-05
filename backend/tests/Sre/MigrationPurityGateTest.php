@@ -32,6 +32,8 @@ final class MigrationPurityGateTest extends TestCase
         '2026_08_10_120000_converge_assessment_catalog_product_truth.php',
         '2026_08_13_120000_unify_wechat_report_unlock_to_199.php',
         '2026_08_13_130000_add_wechat_membership_skus.php',
+        // Published bounded content migration; its transaction and scope are covered by MbtiLandingContentMigrationTest.
+        '2026_09_05_120000_publish_mbti_landing_zh_content.php',
     ];
 
     private const BASELINE_CUTOFF_MIGRATION = '2026_04_21_000000';
