@@ -123,7 +123,7 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
             'SKU_BIG5_FULL_REPORT_199',
             1,
         );
-        $this->assertTrue((bool) ($eligibility['ok'] ?? false));
+        $this->assertTrue((bool) ($eligibility['ok'] ?? false), json_encode($eligibility, JSON_THROW_ON_ERROR));
 
         $created = app(OrderManager::class)->createOrder(
             0,
@@ -530,11 +530,11 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
 
     private function setBigFivePaywallMode(string $mode): void
     {
-        $scale = DB::table('scales_registry')->where('org_id', 0)->where('code', 'BIG5_OCEAN')->first();
+        $scale = DB::table('scales_registry_v2')->where('org_id', 0)->where('code', 'BIG5_OCEAN')->first();
         $capabilities = json_decode((string) ($scale->capabilities_json ?? '{}'), true);
         $capabilities = is_array($capabilities) ? $capabilities : [];
         $capabilities['paywall_mode'] = $mode;
-        DB::table('scales_registry')->where('org_id', 0)->where('code', 'BIG5_OCEAN')->update([
+        DB::table('scales_registry_v2')->where('org_id', 0)->where('code', 'BIG5_OCEAN')->update([
             'capabilities_json' => json_encode($capabilities, JSON_UNESCAPED_SLASHES),
             'updated_at' => now(),
         ]);
@@ -542,7 +542,7 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
 
     private function setReportPaywall(string $scaleCode, string $sku): void
     {
-        $scale = DB::table('scales_registry')->where('org_id', 0)->where('code', $scaleCode)->first();
+        $scale = DB::table('scales_registry_v2')->where('org_id', 0)->where('code', $scaleCode)->first();
         $capabilities = json_decode((string) ($scale->capabilities_json ?? '{}'), true);
         $commercial = json_decode((string) ($scale->commercial_json ?? '{}'), true);
         $viewPolicy = json_decode((string) ($scale->view_policy_json ?? '{}'), true);
@@ -553,7 +553,7 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
         $commercial['report_unlock_sku'] = $sku;
         $viewPolicy['upgrade_sku'] = $sku;
         $viewPolicy['blur_others'] = true;
-        DB::table('scales_registry')->where('org_id', 0)->where('code', $scaleCode)->update([
+        DB::table('scales_registry_v2')->where('org_id', 0)->where('code', $scaleCode)->update([
             'capabilities_json' => json_encode($capabilities, JSON_UNESCAPED_SLASHES),
             'commercial_json' => json_encode($commercial, JSON_UNESCAPED_SLASHES),
             'view_policy_json' => json_encode($viewPolicy, JSON_UNESCAPED_SLASHES),
