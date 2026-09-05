@@ -116,9 +116,8 @@ final class MbtiSeoFieldOverrideRevisionService
      */
     public function snapshotSha256(array $snapshot): string
     {
-        unset($snapshot['snapshot_sha256']);
         $encoded = json_encode(
-            $snapshot,
+            $this->orderedSnapshot($snapshot),
             JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE,
         );
 
@@ -127,6 +126,33 @@ final class MbtiSeoFieldOverrideRevisionService
         }
 
         return hash('sha256', $encoded);
+    }
+
+    /** Restore the v1 writer's byte order after JSON database storage. */
+    private function orderedSnapshot(array $snapshot): array
+    {
+        unset($snapshot['snapshot_sha256']);
+        $snapshot = $this->orderedFields($snapshot, ['schema_version', 'status', 'promotion_id', 'package_sha256', 'target', 'change']);
+        if (! is_array($snapshot['target']) || ! is_array($snapshot['change'])) {
+            throw new RuntimeException('MBTI SEO field override marker checksum mismatch.');
+        }
+        $snapshot['target'] = $this->orderedFields($snapshot['target'], ['org_id', 'framework', 'locale', 'runtime_type_code', 'route']);
+        $snapshot['change'] = $this->orderedFields($snapshot['change'], ['field', 'previous', 'promoted', 'live_value']);
+
+        return $snapshot;
+    }
+
+    private function orderedFields(array $value, array $fields): array
+    {
+        if (count($value) !== count($fields) || array_diff(array_keys($value), $fields) !== []) {
+            throw new RuntimeException('MBTI SEO field override marker checksum mismatch.');
+        }
+        $ordered = [];
+        foreach ($fields as $field) {
+            $ordered[$field] = $value[$field];
+        }
+
+        return $ordered;
     }
 
     /**
@@ -139,6 +165,7 @@ final class MbtiSeoFieldOverrideRevisionService
         PersonalityProfileVariantSeoMeta $seoMeta,
     ): void {
         $storedSha = (string) ($snapshot['snapshot_sha256'] ?? '');
+        $snapshot = $this->orderedSnapshot($snapshot);
         if (preg_match('/^[a-f0-9]{64}$/', $storedSha) !== 1
             || ! hash_equals($this->snapshotSha256($snapshot), $storedSha)) {
             throw new RuntimeException('MBTI SEO field override marker checksum mismatch.');
