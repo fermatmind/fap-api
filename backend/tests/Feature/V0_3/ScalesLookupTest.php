@@ -204,6 +204,20 @@ class ScalesLookupTest extends TestCase
         $this->artisan('fap:scales:seed-default');
         $this->artisan('fap:scales:sync-slugs');
 
+        // Published CMS content survives reseeding; explicitly define this projection fixture.
+        foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+            if (! Schema::hasTable($table)) {
+                continue;
+            }
+            $query = DB::table($table)->where('org_id', 0)->where('code', 'MBTI');
+            $content = json_decode($query->value('content_i18n_json'), true, 512, JSON_THROW_ON_ERROR);
+            $content['zh']['title'] = 'Catalog title from backend';
+            $content['zh']['card']['visual'] = 'spark_minimal';
+            $content['zh']['card']['tagline'] = '类型轴线综合';
+            $content['zh']['highlight']['priority'] = 100;
+            $query->update(['content_i18n_json' => json_encode($content, JSON_THROW_ON_ERROR)]);
+        }
+
         $response = $this->getJson('/api/v0.3/scales/catalog?locale=zh');
 
         $response->assertStatus(200);
@@ -244,7 +258,7 @@ class ScalesLookupTest extends TestCase
         $mbti = $items->firstWhere('slug', 'mbti-personality-test-16-personality-types');
         $this->assertIsArray($mbti);
         $this->assertSame('MBTI', $mbti['scale_code']);
-        $this->assertSame('MBTI 性格测试（16型人格测试）', $mbti['title']);
+        $this->assertSame('Catalog title from backend', $mbti['title']);
         $this->assertSame(144, $mbti['questions_count']);
         $this->assertSame(15, $mbti['time_minutes']);
         $this->assertSame('spark_minimal', $mbti['card_visual']);
