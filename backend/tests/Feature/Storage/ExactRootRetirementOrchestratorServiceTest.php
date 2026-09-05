@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Ramsey\Uuid\Uuid;
 use Tests\TestCase;
 
 final class ExactRootRetirementOrchestratorServiceTest extends TestCase
@@ -366,7 +367,7 @@ final class ExactRootRetirementOrchestratorServiceTest extends TestCase
     private function insertRelease(string $releaseId, string $packId, string $packVersion, string $sourceRoot): void
     {
         DB::table('content_pack_versions')->updateOrInsert(
-            ['id' => 'version-'.$releaseId],
+            ['id' => Uuid::uuid5(Uuid::NAMESPACE_URL, 'version-'.$releaseId)->toString()],
             [
                 'region' => 'CN_MAINLAND',
                 'locale' => 'zh-CN',
@@ -391,7 +392,7 @@ final class ExactRootRetirementOrchestratorServiceTest extends TestCase
             'locale' => 'zh-CN',
             'dir_alias' => $packVersion,
             'from_version_id' => null,
-            'to_version_id' => 'version-'.$releaseId,
+            'to_version_id' => Uuid::uuid5(Uuid::NAMESPACE_URL, 'version-'.$releaseId)->toString(),
             'from_pack_id' => null,
             'to_pack_id' => $packId,
             'status' => 'success',
@@ -414,7 +415,7 @@ final class ExactRootRetirementOrchestratorServiceTest extends TestCase
     private function insertV2Release(string $releaseId, string $packId, string $packVersion, string $storagePath, string $manifestHash): void
     {
         DB::table('content_pack_versions')->updateOrInsert(
-            ['id' => 'version-'.$releaseId],
+            ['id' => Uuid::uuid5(Uuid::NAMESPACE_URL, 'version-'.$releaseId)->toString()],
             [
                 'region' => 'GLOBAL',
                 'locale' => 'global',
@@ -440,7 +441,7 @@ final class ExactRootRetirementOrchestratorServiceTest extends TestCase
                 'locale' => 'global',
                 'dir_alias' => $packVersion,
                 'from_version_id' => null,
-                'to_version_id' => 'version-'.$releaseId,
+                'to_version_id' => Uuid::uuid5(Uuid::NAMESPACE_URL, 'version-'.$releaseId)->toString(),
                 'from_pack_id' => null,
                 'to_pack_id' => $packId,
                 'status' => 'success',

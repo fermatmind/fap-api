@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Ramsey\Uuid\Uuid;
 use Tests\TestCase;
 
 final class ExactRootQuarantineServiceTest extends TestCase
@@ -677,7 +678,7 @@ final class ExactRootQuarantineServiceTest extends TestCase
 
     private function insertV2Release(string $releaseId, string $packId, string $packVersion, string $storagePath, string $manifestHash): void
     {
-        $versionId = 'version-'.$releaseId;
+        $versionId = Uuid::uuid5(Uuid::NAMESPACE_URL, 'version-'.$releaseId)->toString();
 
         DB::table('content_pack_versions')->updateOrInsert(
             ['id' => $versionId],
