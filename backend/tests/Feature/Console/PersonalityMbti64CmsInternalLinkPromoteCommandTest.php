@@ -19,6 +19,7 @@ use App\Services\Cms\PersonalityReviewAttestationService;
 use App\Services\ReviewGovernance\ReviewAttestationCanonicalizer;
 use App\Services\ReviewGovernance\ReviewAttestationFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\RefreshDatabaseState;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -58,6 +59,7 @@ final class PersonalityMbti64CmsInternalLinkPromoteCommandTest extends TestCase
             : null;
         File::put($this->revisionPath, self::DEPLOY_SHA.PHP_EOL);
         AdminUser::query()->create([
+            'id' => 1,
             'name' => 'Owner',
             'email' => 'owner@example.test',
             'password' => 'test-password',
@@ -541,7 +543,7 @@ final class PersonalityMbti64CmsInternalLinkPromoteCommandTest extends TestCase
             ->findOrFail($reviewed['fixture']['rows'][0]['target_id'])
             ->personality_profile_id;
 
-        DB::statement(
+        $this->installDriftTrigger(
             'CREATE TRIGGER mbti_en64_profile_drift_after_section '
             .'AFTER INSERT ON personality_profile_variant_sections '
             .'BEGIN UPDATE personality_profiles SET is_indexable = 0 '
@@ -580,7 +582,7 @@ final class PersonalityMbti64CmsInternalLinkPromoteCommandTest extends TestCase
             'robots' => 'noindex,follow',
         ]);
 
-        DB::statement(
+        $this->installDriftTrigger(
             'CREATE TRIGGER mbti_en64_seo_drift_after_section '
             .'AFTER INSERT ON personality_profile_variant_sections '
             .'BEGIN UPDATE personality_profile_variant_seo_meta '
@@ -624,7 +626,7 @@ final class PersonalityMbti64CmsInternalLinkPromoteCommandTest extends TestCase
             'robots' => 'noindex,follow',
         ]);
 
-        DB::statement(
+        $this->installDriftTrigger(
             'CREATE TRIGGER mbti_en64_parent_seo_drift_after_section '
             .'AFTER INSERT ON personality_profile_variant_sections '
             .'BEGIN UPDATE personality_profile_seo_meta '
@@ -888,6 +890,17 @@ final class PersonalityMbti64CmsInternalLinkPromoteCommandTest extends TestCase
         ];
     }
 
+    private function installDriftTrigger(string $sql): void
+    {
+        if (DB::connection()->getDriverName() === 'mysql') {
+            self::assertSame(1, DB::transactionLevel());
+            DB::commit();
+            RefreshDatabaseState::$migrated = false;
+            $sql = str_replace(' BEGIN ', ' FOR EACH ROW BEGIN ', $sql);
+        }
+        DB::statement($sql);
+    }
+
     /**
      * @param  array<string,mixed>  $options
      * @return array<string,mixed>
@@ -898,9 +911,10 @@ final class PersonalityMbti64CmsInternalLinkPromoteCommandTest extends TestCase
             'personality:mbti64-cms-internal-link-promote',
             array_merge(['--dry-run' => true], $options)
         );
-        $this->assertSame(0, $exit);
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exit, json_encode($payload, JSON_THROW_ON_ERROR));
 
-        return $this->jsonOutput();
+        return $payload;
     }
 
     /**
@@ -987,6 +1001,9 @@ final class PersonalityMbti64CmsInternalLinkPromoteCommandTest extends TestCase
                     'note' => 'fixture',
                     'created_at' => now(),
                 ]);
+                // The exact-byte evidence binds the persisted database representation.
+                $snapshot = $revision->fresh()->snapshot_json;
+                $links = data_get($snapshot, 'mbti64_internal_link_graph_v1.first_class_draft_fields.internal_links');
                 $identity = [
                     'runtime_type_code' => $runtime,
                     'target_id' => (int) $variant->id,
