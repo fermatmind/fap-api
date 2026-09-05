@@ -254,6 +254,7 @@ final class MeasurementFailureCohortReadModelTest extends TestCase
         $this->assertContains('filter_invalid', $invalid['issues'] ?? []);
 
         Schema::drop('events');
+        \App\Support\SchemaBaseline::clearCache();
         $missing = app(MeasurementFailureCohortReadModel::class)->report(999, '2026-08-10', '2026-08-10');
         $this->assertFalse($missing['ok'] ?? true);
         $this->assertContains('events_missing', $missing['issues'] ?? []);

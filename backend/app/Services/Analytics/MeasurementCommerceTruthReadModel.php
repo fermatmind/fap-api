@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Services\Analytics;
 
 use App\Models\Order;
+use App\Support\SchemaBaseline;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Throwable;
 
 final class MeasurementCommerceTruthReadModel
@@ -307,13 +307,13 @@ final class MeasurementCommerceTruthReadModel
         $issues = [];
         foreach (self::REQUIRED_TABLES as $table) {
             try {
-                if (! Schema::hasTable($table)) {
+                if (! SchemaBaseline::tableExists($table)) {
                     $issues[] = $table.'_missing';
 
                     continue;
                 }
                 foreach (self::REQUIRED_COLUMNS[$table] as $column) {
-                    if (! Schema::hasColumn($table, $column)) {
+                    if (! SchemaBaseline::hasColumn($table, $column)) {
                         $issues[] = $table.'.'.$column.'_missing';
                     }
                 }

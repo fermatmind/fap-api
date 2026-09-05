@@ -10,9 +10,9 @@ use App\Services\Cms\PersonalityPublicAssetReadModelCache;
 use App\Services\Cms\PersonalityPublicContentAssetContract;
 use App\Services\SEO\BigFiveCanonicalRouteCatalog;
 use App\Services\SEO\SeoDiscoverabilityCacheInvalidator;
+use App\Support\SchemaBaseline;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Schema;
 use RuntimeException;
 use Throwable;
 
@@ -437,12 +437,12 @@ final class BigFiveZhV3Publisher
     private function assertSchema(): void
     {
         foreach (self::REQUIRED_ASSET_COLUMNS as $column) {
-            if (! Schema::hasColumn('personality_public_content_assets', $column)) {
+            if (! SchemaBaseline::hasColumn('personality_public_content_assets', $column)) {
                 throw new RuntimeException('Required CMS asset column is missing: '.$column.'.');
             }
         }
         foreach (self::REQUIRED_REVISION_COLUMNS as $column) {
-            if (! Schema::hasColumn('personality_public_content_asset_revisions', $column)) {
+            if (! SchemaBaseline::hasColumn('personality_public_content_asset_revisions', $column)) {
                 throw new RuntimeException('Required CMS revision column is missing: '.$column.'.');
             }
         }
@@ -633,7 +633,7 @@ final class BigFiveZhV3Publisher
 
         $nonPersonality = [];
         foreach (['articles', 'topic_profiles', 'landing_surfaces', 'content_pages'] as $table) {
-            $nonPersonality[$table] = Schema::hasTable($table)
+            $nonPersonality[$table] = SchemaBaseline::tableExists($table)
                 ? DB::table($table)->orderBy('id')->get()
                     ->map(static fn (object $row): array => (array) $row)->all()
                 : [];
@@ -647,11 +647,11 @@ final class BigFiveZhV3Publisher
 
     private function databaseSnapshotFingerprint(): string
     {
-        $personalityRows = Schema::hasTable('personality_public_content_assets')
+        $personalityRows = SchemaBaseline::tableExists('personality_public_content_assets')
             ? DB::table('personality_public_content_assets')->orderBy('id')->get()
                 ->map(static fn (object $row): array => (array) $row)->all()
             : [];
-        $revisionRows = Schema::hasTable('personality_public_content_asset_revisions')
+        $revisionRows = SchemaBaseline::tableExists('personality_public_content_asset_revisions')
             ? DB::table('personality_public_content_asset_revisions')->orderBy('id')->get()
                 ->map(static fn (object $row): array => (array) $row)->all()
             : [];

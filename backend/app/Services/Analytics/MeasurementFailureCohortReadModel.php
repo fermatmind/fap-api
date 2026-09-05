@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Services\Analytics;
 
+use App\Support\SchemaBaseline;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Throwable;
 
 final class MeasurementFailureCohortReadModel
@@ -52,7 +52,7 @@ final class MeasurementFailureCohortReadModel
 
         foreach (self::REQUIRED_TABLES as $table) {
             try {
-                if (! Schema::hasTable($table)) {
+                if (! SchemaBaseline::tableExists($table)) {
                     $issues[] = $table.'_missing';
                 }
             } catch (Throwable) {

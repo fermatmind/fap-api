@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Services\SeoAgentEvidence\Competitive;
 
 use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher;
+use App\Support\SchemaBaseline;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Throwable;
 
 final class MeasurementSnapshotVerifier
@@ -57,7 +57,7 @@ final class MeasurementSnapshotVerifier
         try {
             if ($modeId === 'search_measurement') {
                 $connection = (string) config('seo_intel.connection', 'seo_intel');
-                if (! Schema::connection($connection)->hasTable('seo_gsc_sync_runs')) {
+                if (! SchemaBaseline::tableExists('seo_gsc_sync_runs', $connection)) {
                     return false;
                 }
                 $receipts = DB::connection($connection)->table('seo_gsc_sync_runs')
@@ -91,7 +91,7 @@ final class MeasurementSnapshotVerifier
             }
 
             $connection = (string) config('database.default');
-            if (! Schema::connection($connection)->hasTable('analytics_seo_conversion_refresh_runs')) {
+            if (! SchemaBaseline::tableExists('analytics_seo_conversion_refresh_runs', $connection)) {
                 return false;
             }
 

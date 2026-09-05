@@ -8,10 +8,10 @@ use App\Models\ContentPackRelease;
 use App\Services\Content\Eq60ContentLintService;
 use App\Services\Content\Eq60PackLoader;
 use App\Services\Storage\ContentReleaseManifestCatalogService;
+use App\Support\SchemaBaseline;
 use DomainException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 /**
@@ -337,7 +337,7 @@ final class Eq60CompiledPromotionAuthority
      */
     private function assertNormAuthorityCalibrated(): void
     {
-        if (! Schema::hasTable('scale_norms_versions') || ! Schema::hasTable('scale_norm_stats')) {
+        if (! SchemaBaseline::tableExists('scale_norms_versions') || ! SchemaBaseline::tableExists('scale_norm_stats')) {
             throw new DomainException('eq60_promotion_english_norm_not_calibrated');
         }
 

@@ -6,11 +6,11 @@ namespace App\Services\BigFive\AuthorityV2\RangeIa;
 
 use App\Models\PersonalityPublicContentAsset;
 use App\Services\SEO\BigFiveCanonicalRouteCatalog;
+use App\Support\SchemaBaseline;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Schema;
 use RuntimeException;
 
 /** @review-surface personality_public_content_asset */
@@ -338,7 +338,7 @@ final class BigFiveLegacyAliasHardPurge
     /** @param Collection<int,PersonalityPublicContentAsset> $aliases @param list<array<string,mixed>> $revisionRows */
     private function aliasAttestationTargetCount(Collection $aliases, array $revisionRows): int
     {
-        if (! Schema::hasTable('review_attestation_target_evidences')) {
+        if (! SchemaBaseline::tableExists('review_attestation_target_evidences')) {
             return 0;
         }
         $tokens = [];
@@ -575,7 +575,7 @@ final class BigFiveLegacyAliasHardPurge
             'personality_public_content_asset_revision_reviews',
             'review_attestation_target_evidences',
         ] as $table) {
-            if (! Schema::hasTable($table)) {
+            if (! SchemaBaseline::tableExists($table)) {
                 throw new RuntimeException('Required table is missing: '.$table.'.');
             }
         }

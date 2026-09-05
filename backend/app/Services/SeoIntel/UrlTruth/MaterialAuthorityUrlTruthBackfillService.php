@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\SeoIntel\UrlTruth;
 
 use App\Models\ContentMaterialDecision;
+use App\Support\SchemaBaseline;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -422,7 +423,7 @@ final class MaterialAuthorityUrlTruthBackfillService
         try {
             $schema = Schema::connection((string) config('seo_intel.connection', 'seo_intel'));
 
-            return Schema::hasTable('content_material_decisions')
+            return SchemaBaseline::tableExists('content_material_decisions')
                 && $schema->hasTable('seo_urls')
                 && $schema->hasColumn('seo_urls', 'page_family')
                 && $schema->hasColumn('seo_urls', 'material_fingerprint');

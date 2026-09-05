@@ -52,19 +52,37 @@ final class SchemaBaseline
 
         $feature = self::featureForTable($table);
         if ($feature !== null && (bool) config("fap.features.{$feature}", false) !== true) {
-            $cacheKey = self::cacheKey($table);
-            self::$tableExistsCache[$cacheKey] = false;
-            self::$tableMetaCache[$cacheKey] = [
-                'reason' => 'feature_disabled',
-                'exception_class' => null,
-            ];
             $reason = 'feature_disabled';
             $exceptionClass = null;
 
             return false;
         }
 
-        $cacheKey = self::cacheKey($table);
+        return self::probeTable($table, $reason, $exceptionClass);
+    }
+
+    /** Physical schema preflight: independent of product flags, and never hide query failure. */
+    public static function tableExists(string $table, ?string $connection = null): bool
+    {
+        $reason = null;
+        $exceptionClass = null;
+        $exists = self::probeTable(strtolower(trim($table)), $reason, $exceptionClass, $connection);
+        if ($reason === 'schema_query_exception') {
+            throw new \RuntimeException('Schema table availability could not be verified.');
+        }
+
+        return $exists;
+    }
+
+    private static function probeTable(string $table, ?string &$reason, ?string &$exceptionClass, ?string $connection = null): bool
+    {
+        if ($table === '') {
+            $reason = 'invalid_input';
+            $exceptionClass = null;
+
+            return false;
+        }
+        $cacheKey = self::cacheKey($table, $connection);
         if (array_key_exists($cacheKey, self::$tableExistsCache)) {
             $meta = self::$tableMetaCache[$cacheKey] ?? [
                 'reason' => self::$tableExistsCache[$cacheKey] ? 'exists' : 'unknown_false',
@@ -82,12 +100,12 @@ final class SchemaBaseline
         ];
 
         try {
-            $exists = Schema::hasTable($table);
+            $exists = $connection === null ? Schema::hasTable($table) : Schema::connection($connection)->hasTable($table);
             $meta['reason'] = $exists ? 'exists' : 'table_missing';
         } catch (\Throwable $e) {
             Log::warning('[schema_baseline] has_table_failed', [
                 'table' => $table,
-                'connection' => self::connectionName(),
+                'connection' => self::connectionName($connection),
                 'exception' => $e::class,
             ]);
             $exists = false;
@@ -226,9 +244,9 @@ final class SchemaBaseline
         return $normalized;
     }
 
-    private static function cacheKey(string $table): string
+    private static function cacheKey(string $table, ?string $connection = null): string
     {
-        return self::connectionName().':'.$table;
+        return self::connectionName($connection).':'.$table;
     }
 
     private static function columnCacheKey(string $table, string $column): string
@@ -236,10 +254,10 @@ final class SchemaBaseline
         return self::cacheKey($table).'.'.$column;
     }
 
-    private static function connectionName(): string
+    private static function connectionName(?string $connection = null): string
     {
         try {
-            $name = DB::connection()->getName();
+            $name = DB::connection($connection)->getName();
             $name = strtolower(trim((string) $name));
             if ($name !== '') {
                 return $name;
@@ -250,7 +268,7 @@ final class SchemaBaseline
             ]);
         }
 
-        $default = strtolower(trim((string) config('database.default', 'default')));
+        $default = strtolower(trim((string) ($connection ?? config('database.default', 'default'))));
 
         return $default !== '' ? $default : 'default';
     }

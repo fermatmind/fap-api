@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\SeoIntel\Sources;
 
 use App\Services\SeoIntel\PageFamily\PageFamilyPolicyRegistry;
+use App\Support\SchemaBaseline;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -93,7 +94,7 @@ final class ProductionDetectorFoundationEvidenceSource implements DetectorFounda
     private function funnelFreshness(CarbonImmutable $observedAt): array
     {
         try {
-            if (! Schema::hasTable('analytics_seo_conversion_daily')) {
+            if (! SchemaBaseline::tableExists('analytics_seo_conversion_daily')) {
                 return $this->unavailableFreshness();
             }
             $row = DB::table('analytics_seo_conversion_daily')

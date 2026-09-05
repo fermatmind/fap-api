@@ -6,6 +6,7 @@ namespace App\Services\BigFive\AuthorityV3\Release;
 
 use App\Models\PersonalityPublicContentAsset;
 use App\Services\SEO\BigFiveCanonicalRouteCatalog;
+use App\Support\SchemaBaseline;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -420,7 +421,7 @@ final class BigFiveEn52ProductionEvidence
     /** @param list<int> $ids @return list<array<string,mixed>> */
     private function rows(string $table, string $column, array $ids, bool $lockForUpdate): array
     {
-        if (! Schema::hasTable($table)) {
+        if (! SchemaBaseline::tableExists($table)) {
             throw new RuntimeException('Required EN52 evidence table is missing: '.$table.'.');
         }
         if ($ids === []) {
@@ -446,7 +447,7 @@ final class BigFiveEn52ProductionEvidence
         })->orderBy('id')->get()->map(static fn (object $row): array => (array) $row)->all();
         $authority = [];
         foreach (self::NON_PERSONALITY_TABLES as $table) {
-            $authority[$table] = Schema::hasTable($table)
+            $authority[$table] = SchemaBaseline::tableExists($table)
                 ? DB::table($table)->orderBy('id')->get()->map(static fn (object $row): array => (array) $row)->all()
                 : [];
         }
@@ -480,10 +481,10 @@ final class BigFiveEn52ProductionEvidence
     private function databaseFingerprint(): string
     {
         return $this->fingerprint([
-            Schema::hasTable('personality_public_content_assets')
+            SchemaBaseline::tableExists('personality_public_content_assets')
                 ? DB::table('personality_public_content_assets')->orderBy('id')->get()->map(static fn (object $row): array => (array) $row)->all()
                 : [],
-            Schema::hasTable('personality_public_content_asset_revisions')
+            SchemaBaseline::tableExists('personality_public_content_asset_revisions')
                 ? DB::table('personality_public_content_asset_revisions')->orderBy('id')->get()->map(static fn (object $row): array => (array) $row)->all()
                 : [],
             $this->nonTargetFingerprint(),

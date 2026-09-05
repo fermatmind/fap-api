@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Services\Analytics;
 
+use App\Support\SchemaBaseline;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Throwable;
 
 final class MeasurementFunnelReadModel
@@ -51,7 +51,7 @@ final class MeasurementFunnelReadModel
 
         foreach (self::REQUIRED_TABLES as $table) {
             try {
-                if (! Schema::hasTable($table)) {
+                if (! SchemaBaseline::tableExists($table)) {
                     $issues[] = $table.'_missing';
                 }
             } catch (Throwable) {

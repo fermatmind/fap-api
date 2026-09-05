@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\GreenfieldBaseline;
 
+use App\Support\SchemaBaseline;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -44,7 +45,7 @@ final class GreenfieldBaselineImporter
         if (hash_equals((string) data_get($manifest, 'source.database_name_sha256', ''), $databaseSha)) {
             throw new RuntimeException('Greenfield baseline import refuses the source database.');
         }
-        if (! Schema::hasTable('migrations')) {
+        if (! SchemaBaseline::tableExists('migrations')) {
             throw new RuntimeException('Greenfield target must be migrated before baseline import.');
         }
 
@@ -197,7 +198,7 @@ final class GreenfieldBaselineImporter
         $tables = [];
         foreach (GreenfieldBaselineCatalog::datasets() as $definition) {
             $table = (string) $definition['table'];
-            if (Schema::hasTable($table) && $connection->table($table)->limit(1)->exists()) {
+            if (SchemaBaseline::tableExists($table) && $connection->table($table)->limit(1)->exists()) {
                 $tables[] = $table;
             }
         }
@@ -211,7 +212,7 @@ final class GreenfieldBaselineImporter
     {
         $counts = [];
         foreach (GreenfieldBaselineCatalog::forbiddenDatasetNames() as $table) {
-            if (! Schema::hasTable($table)) {
+            if (! SchemaBaseline::tableExists($table)) {
                 continue;
             }
             $count = (int) $connection->table($table)->count();

@@ -9,8 +9,8 @@ use App\Models\PersonalityPublicContentAssetRevision;
 use App\Services\BigFive\AuthorityV3\Release\BigFiveEn52PackageCompiler;
 use App\Services\BigFive\AuthorityV3\Release\BigFiveEn52Publisher;
 use App\Services\SEO\BigFiveCanonicalRouteCatalog;
+use App\Support\SchemaBaseline;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use RuntimeException;
 
 final class BigFiveEnglishDraftInventory
@@ -958,7 +958,7 @@ final class BigFiveEnglishDraftInventory
     private function databaseFingerprint(): string
     {
         foreach (['personality_public_content_assets', 'personality_public_content_asset_revisions'] as $table) {
-            if (! Schema::hasTable($table)) {
+            if (! SchemaBaseline::tableExists($table)) {
                 throw new RuntimeException("Required authority table {$table} is missing.");
             }
         }

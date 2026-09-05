@@ -5,10 +5,10 @@ namespace App\Services\Commerce;
 use App\Models\UnifiedAccessProjection;
 use App\Services\Report\ReportAccess;
 use App\Services\Storage\UnifiedAccessProjectionWriter;
+use App\Support\SchemaBaseline;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class EntitlementManager
@@ -606,7 +606,7 @@ class EntitlementManager
         }
 
         $isActualRefund = strtolower(trim((string) ($order->payment_state ?? $order->status ?? ''))) === 'refunded';
-        $isGiftOrder = Schema::hasTable('report_gift_requests')
+        $isGiftOrder = SchemaBaseline::tableExists('report_gift_requests')
             && DB::table('report_gift_requests')
                 ->where('purchased_order_id', (string) ($order->id ?? ''))
                 ->exists();
@@ -633,7 +633,7 @@ class EntitlementManager
         }
 
         $now = now();
-        $fallbackGift = $directGrant !== null && Schema::hasTable('report_gift_requests')
+        $fallbackGift = $directGrant !== null && SchemaBaseline::tableExists('report_gift_requests')
             ? DB::table('report_gift_requests as gifts')
                 ->join('orders as gift_orders', 'gift_orders.id', '=', 'gifts.purchased_order_id')
                 ->where('gifts.org_id', $orderOrgId)

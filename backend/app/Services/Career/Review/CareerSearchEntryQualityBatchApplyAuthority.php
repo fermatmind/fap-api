@@ -6,7 +6,7 @@ namespace App\Services\Career\Review;
 
 use App\Models\CareerSearchEntryQualityBatchOperation;
 use App\Services\ReviewGovernance\ReviewAttestationCanonicalizer;
-use Illuminate\Support\Facades\Schema;
+use App\Support\SchemaBaseline;
 use Throwable;
 
 /**
@@ -40,7 +40,7 @@ final class CareerSearchEntryQualityBatchApplyAuthority
         }
 
         try {
-            $this->tableAvailable ??= Schema::hasTable(
+            $this->tableAvailable ??= SchemaBaseline::tableExists(
                 'career_search_entry_quality_batch_operations'
             );
             if (! $this->tableAvailable

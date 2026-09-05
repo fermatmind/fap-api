@@ -199,6 +199,7 @@ final class MeasurementCommerceTruthReadModelTest extends TestCase
         $this->assertContains('date_window_invalid', $invalidWindow['issues'] ?? []);
 
         Schema::drop('payment_events');
+        \App\Support\SchemaBaseline::clearCache();
         $missing = app(MeasurementCommerceTruthReadModel::class)->report('2026-08-10', '2026-08-10');
         $this->assertFalse($missing['ok'] ?? true);
         $this->assertContains('payment_events_missing', $missing['issues'] ?? []);

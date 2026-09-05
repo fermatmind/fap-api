@@ -8,6 +8,7 @@ use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
 use App\Services\Cms\PersonalityPublicAssetReadModelCache;
 use App\Services\SEO\BigFiveCanonicalRouteCatalog;
+use App\Support\SchemaBaseline;
 use DOMDocument;
 use DOMXPath;
 use Illuminate\Http\Client\Response;
@@ -330,7 +331,7 @@ final class BigFiveEn52RuntimeVerifier
             'career_job_page_assembly_assets', 'career_job_salary_assets',
             'media_assets', 'media_variants',
         ] as $table) {
-            $authority[$table] = Schema::hasTable($table)
+            $authority[$table] = SchemaBaseline::tableExists($table)
                 ? DB::table($table)->orderBy('id')->get()->map(fn ($row) => (array) $row)->all()
                 : [];
         }
