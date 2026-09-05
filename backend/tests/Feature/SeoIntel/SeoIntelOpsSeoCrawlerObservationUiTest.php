@@ -25,7 +25,8 @@ final class SeoIntelOpsSeoCrawlerObservationUiTest extends TestCase
         $this->assertStringContainsString("'search_submission_allowed' => false", $composition);
 
         preg_match_all("/data_get\\(\\\$platformoverview, 'crawler\\.([^']+)'\\)/", $view, $crawlerFields);
-        $this->assertSame(['total_count'], array_values(array_unique($crawlerFields[1])));
+        $this->assertSame([], array_values(array_unique($crawlerFields[1])));
+        $this->assertStringContainsString('<x-filament-ops::ops-technical-health-workspace', $view);
 
         foreach ([
             'seo_crawler_log_daily_aggregates',
@@ -63,15 +64,15 @@ final class SeoIntelOpsSeoCrawlerObservationUiTest extends TestCase
             $this->assertStringNotContainsString($forbidden, $crawlerReadModel);
         }
 
-        foreach ([
-            'canonical_url_hash',
-            'query_hash',
-            'evidence_hash',
-            'evidence_fingerprint',
-            'session_id_hash',
-        ] as $sanitized) {
-            $this->assertStringContainsString("'{$sanitized}'", $composition);
-        }
+        $privateFields = array_fill_keys([
+            'canonical_url_hash', 'query_hash', 'evidence_hash', 'evidence_fingerprint', 'session_id_hash',
+        ], 'must-not-leak');
+        $reader = app(\App\Services\Ops\SeoOperationsReadService::class);
+        $sanitize = new \ReflectionMethod($reader, 'sanitize');
+        $this->assertSame(
+            ['total_count' => 1, 'rows' => [['hit_count' => 2]]],
+            $sanitize->invoke($reader, $privateFields + ['total_count' => 1, 'rows' => [$privateFields + ['hit_count' => 2]]]),
+        );
 
         $crawlerBoundary = $crawlerReadModel."\n".$composition;
         foreach ([

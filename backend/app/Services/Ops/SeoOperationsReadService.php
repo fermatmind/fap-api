@@ -159,7 +159,7 @@ final class SeoOperationsReadService
     {
         foreach (array_keys($payload) as $key) {
             $normalized = strtolower((string) $key);
-            if (str_contains($normalized, 'hash') || str_ends_with($normalized, '_sha')) {
+            if (str_contains($normalized, 'hash') || str_ends_with($normalized, '_sha') || str_ends_with($normalized, '_fingerprint')) {
                 unset($payload[$key]);
             }
         }
