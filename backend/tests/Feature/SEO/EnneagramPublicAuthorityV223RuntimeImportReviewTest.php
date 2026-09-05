@@ -26,6 +26,13 @@ final class EnneagramPublicAuthorityV223RuntimeImportReviewTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        config(['fap.testing_personality_legacy_public_db_fixture' => true]);
+    }
+
     private const TEST_DEPLOY_SHA = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
 
     public function test_compact_owner_attestation_expands_to_exact_116_private_evidence_rows_without_promotion(): void

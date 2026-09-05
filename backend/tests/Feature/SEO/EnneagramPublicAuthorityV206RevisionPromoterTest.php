@@ -20,6 +20,52 @@ final class EnneagramPublicAuthorityV206RevisionPromoterTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        config(['fap.testing_personality_legacy_public_db_fixture' => true]);
+    }
+
+    private ?array $sqliteFixtureState = null;
+
+    protected function beforeRefreshingDatabase(): void
+    {
+        if ($this->name() !== 'test_console_rollback_reads_large_signed_token_from_file') {
+            return;
+        }
+        $this->sqliteFixtureState = [
+            'default' => config('database.default'),
+            'sqlite' => config('database.connections.sqlite'),
+            'migrated' => RefreshDatabaseState::$migrated,
+            'memory' => RefreshDatabaseState::$inMemoryConnections,
+        ];
+        config([
+            'database.default' => 'sqlite',
+            'database.connections.sqlite' => ['driver' => 'sqlite', 'database' => ':memory:', 'prefix' => '', 'foreign_key_constraints' => true],
+        ]);
+        DB::purge('sqlite');
+        RefreshDatabaseState::$migrated = false;
+        RefreshDatabaseState::$inMemoryConnections = [];
+    }
+
+    protected function afterRefreshingDatabase(): void
+    {
+        if ($this->sqliteFixtureState === null) {
+            return;
+        }
+        // Registered after RefreshDatabase's rollback, so restore only after the test transaction ends.
+        $this->beforeApplicationDestroyed(function (): void {
+            DB::purge('sqlite');
+            config([
+                'database.default' => $this->sqliteFixtureState['default'],
+                'database.connections.sqlite' => $this->sqliteFixtureState['sqlite'],
+            ]);
+            RefreshDatabaseState::$migrated = $this->sqliteFixtureState['migrated'];
+            RefreshDatabaseState::$inMemoryConnections = $this->sqliteFixtureState['memory'];
+        });
+    }
+
     private const TEST_DEPLOY_SHA = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
 
     public function test_preflight_resolves_exactly_116_approved_targets_without_writes(): void
