@@ -50,3 +50,11 @@ test('final receipt reports every domain and fails closed without rolling back p
   assert.match(summary, /production_rollback_requested: false/);
   assert.match(summary, /jq -e '\.status == "pass"'/);
 });
+
+
+test('full PHPUnit has parent revision history and an empty test environment file', () => {
+  const fullPhpunit = jobSection('full-phpunit', 'codeql');
+  assert.match(fullPhpunit, /persist-credentials: false\s+fetch-depth: 2/);
+  assert.match(fullPhpunit, /working-directory: backend\s+run: touch \.env/);
+  assert.ok(fullPhpunit.indexOf('run: touch .env') < fullPhpunit.indexOf('run: php artisan test'));
+});
