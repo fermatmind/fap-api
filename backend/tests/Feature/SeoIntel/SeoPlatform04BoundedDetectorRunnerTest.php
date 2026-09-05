@@ -232,6 +232,58 @@ final class SeoPlatform04BoundedDetectorRunnerTest extends TestCase
         $runner->run($jobs, $this->runOptions(['page_family' => '../unsafe']));
     }
 
+    #[Test]
+    public function invalid_evidence_timestamps_always_hold_without_parsing_now(): void
+    {
+        foreach (self::invalidTimestampInputs() as $label => $input) {
+            $job = $this->job('http_404', ['observed_status' => 404]);
+            unset($job['evidence']['evidence_observed_at']);
+            $job['evidence'] += $input;
+            $artifact = (new BoundedDetectorRunner)->run([$job], $this->runOptions());
+            $this->assertSame('measurement_hold', $artifact['results'][0]['outcome'], $label);
+            $this->assertSame('evidence_timestamp_missing_or_invalid', $artifact['results'][0]['root_cause_or_error_code'], $label);
+        }
+    }
+
+    public static function invalidTimestampInputs(): array
+    {
+        $inputs = ['missing' => []];
+        foreach ([null, '', '   ', 1787688000, 1787688000.5, true, false, [], (object) [], 'broken', 'now', 'tomorrow', '+1 minute',
+            '2026-02-30T00:00:00Z', '2025-02-29T00:00:00Z', '2026-13-01T00:00:00Z', '2026-08-24T24:00:00Z', '2026-08-24T20:60:00Z',
+            '2026-08-24T20:00:60Z', '2026-08-24T20:00:00+25:00', '2026-08-24T20:00:00Z trailing',
+        ] as $index => $value) {
+            $inputs['invalid-'.$index] = ['evidence_observed_at' => $value];
+        }
+
+        return $inputs;
+    }
+
+    #[Test]
+    public function absolute_timestamp_offsets_precision_and_age_boundaries_remain_valid(): void
+    {
+        foreach (['2026-08-24T20:00:00Z', '2026-08-25T04:00:00+08:00', '2026-08-24T15:00:00-05:00',
+            '2026-08-24T20:00:00.123456Z', '2026-08-24T20:00:00.1+00:00',
+        ] as $timestamp) {
+            $artifact = (new BoundedDetectorRunner)->run([
+                $this->job('http_404', ['observed_status' => 404, 'evidence_observed_at' => $timestamp]),
+            ], $this->runOptions());
+            $this->assertSame('issue', $artifact['results'][0]['outcome'], $timestamp);
+            $this->assertSame('2026-08-25T20:00:00+00:00', $artifact['materialize_before']);
+        }
+        foreach ([
+            '2026-08-24T20:35:00Z' => 'issue',
+            '2026-08-24T20:35:01Z' => 'evidence_timestamp_in_future',
+            '2026-08-23T20:30:00Z' => 'issue',
+            '2026-08-23T20:29:59Z' => 'evidence_stale',
+        ] as $timestamp => $expected) {
+            $artifact = (new BoundedDetectorRunner)->run([
+                $this->job('http_404', ['observed_status' => 404, 'evidence_observed_at' => $timestamp]),
+            ], $this->runOptions());
+            $result = $artifact['results'][0];
+            $this->assertSame($expected, $result['outcome'] === 'issue' ? 'issue' : $result['root_cause_or_error_code']);
+        }
+    }
+
     /** @param array<string, mixed> $evidence */
     private function job(string $detectorId, array $evidence): array
     {

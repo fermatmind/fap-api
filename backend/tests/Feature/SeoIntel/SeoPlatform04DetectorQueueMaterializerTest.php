@@ -43,6 +43,29 @@ final class SeoPlatform04DetectorQueueMaterializerTest extends TestCase
     }
 
     #[Test]
+    public function invalid_timestamp_holds_cannot_materialize_either_queue(): void
+    {
+        foreach (SeoPlatform04BoundedDetectorRunnerTest::invalidTimestampInputs() as $label => $input) {
+            $jobs = [
+                $this->job('http_404', ['observed_status' => 404]),
+                $this->job('high_impressions_low_ctr', ['high_impressions' => true, 'low_ctr' => true, 'ctr_opportunity_evidence' => true]),
+            ];
+            foreach ($jobs as &$job) {
+                unset($job['evidence']['evidence_observed_at']);
+                $job['evidence'] += $input;
+            }
+            unset($job);
+            $artifact = (new BoundedDetectorRunner)->run($jobs, $this->runOptions());
+            $this->assertSame(2, $artifact['outcome_counts']['measurement_hold'], $label);
+            $receipt = $this->materializer()->materialize($artifact, execute: true, now: $artifact['evaluated_at']);
+            $this->assertSame(2, $receipt['counts']['measurement_holds'], $label);
+            $this->assertFalse($receipt['writes_committed']);
+            $this->assertSame(0, DB::connection(self::CONNECTION)->table('seo_issue_queue')->count());
+            $this->assertSame(0, DB::connection(self::CONNECTION)->table('seo_detector_opportunities')->count());
+        }
+    }
+
+    #[Test]
     public function dry_run_plans_both_queues_without_writing(): void
     {
         $artifact = $this->artifact();

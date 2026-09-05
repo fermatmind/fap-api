@@ -69,11 +69,12 @@ final class BoundedDetectorRunner
             }
 
             $detectorId = is_string($job['detector_id'] ?? null) ? $job['detector_id'] : '';
-            $result = $this->evaluate($detectorId, $evidence, $settings);
+            $observedAt = $this->observedAt($evidence['evidence_observed_at'] ?? null);
+            $result = $this->evaluate($detectorId, $evidence, $settings, $observedAt);
             $results[] = $result;
             if (($result['outcome'] ?? null) !== 'measurement_hold') {
-                // evaluate() holds malformed timestamps before this branch.
-                $expiresAt = CarbonImmutable::parse((string) $evidence['evidence_observed_at'])
+                // Use the same validated instant for freshness and materialization expiry.
+                $expiresAt = $observedAt
                     ->utc()
                     ->addSeconds($settings['max_evidence_age_seconds']);
                 if ($materializeBefore === null || $expiresAt->lt($materializeBefore)) {
@@ -181,14 +182,14 @@ final class BoundedDetectorRunner
     }
 
     /** @param array<string, mixed> $evidence @param array<string, mixed> $settings */
-    private function evaluate(string $detectorId, array $evidence, array $settings): array
+    private function evaluate(string $detectorId, array $evidence, array $settings, ?CarbonImmutable $observedAt): array
     {
         if (! array_key_exists($detectorId, $this->registry->detectors())
             || ($this->registry->detectors()[$detectorId]['enabled'] ?? false) !== true) {
             throw new InvalidArgumentException("Unknown or disabled detector: {$detectorId}.");
         }
 
-        $holdReason = $this->holdReason($evidence, $settings);
+        $holdReason = $this->holdReason($evidence, $settings, $observedAt);
         if ($holdReason !== null) {
             $result = $this->dispatch($detectorId, $evidence + ['direct_evidence' => false]);
             $result['outcome'] = 'measurement_hold';
@@ -204,7 +205,7 @@ final class BoundedDetectorRunner
     }
 
     /** @param array<string, mixed> $evidence @param array<string, mixed> $settings */
-    private function holdReason(array $evidence, array $settings): ?string
+    private function holdReason(array $evidence, array $settings, ?CarbonImmutable $observedAt): ?string
     {
         if (($evidence['private_negative_set_checked'] ?? false) !== true) {
             return 'private_negative_set_not_checked';
@@ -223,9 +224,7 @@ final class BoundedDetectorRunner
             return 'authority_revision_mismatch';
         }
 
-        try {
-            $observedAt = CarbonImmutable::parse((string) ($evidence['evidence_observed_at'] ?? ''));
-        } catch (Throwable) {
+        if ($observedAt === null) {
             return 'evidence_timestamp_missing_or_invalid';
         }
         $ageSeconds = $observedAt->diffInSeconds($settings['now'], false);
@@ -237,6 +236,32 @@ final class BoundedDetectorRunner
         }
 
         return null;
+    }
+
+    /** Producers emit ISO 8601 instants; retain offsets and up to microsecond precision. */
+    private function observedAt(mixed $value): ?CarbonImmutable
+    {
+        if (! is_string($value) || preg_match(
+            '/\A(\d{4})-(\d{2})-(\d{2})[Tt](\d{2}):(\d{2}):(\d{2})(?:\.(\d{1,6}))?([Zz]|[+-]\d{2}:\d{2})\z/',
+            $value,
+            $parts,
+        ) !== 1) {
+            return null;
+        }
+        if (! checkdate((int) $parts[2], (int) $parts[3], (int) $parts[1])
+            || (int) $parts[4] > 23 || (int) $parts[5] > 59 || (int) $parts[6] > 59) {
+            return null;
+        }
+        $zone = strtoupper($parts[8]);
+        if ($zone !== 'Z' && ((int) substr($zone, 1, 2) > 23 || (int) substr($zone, 4, 2) > 59)) {
+            return null;
+        }
+        $normalized = sprintf('%s-%s-%sT%s:%s:%s.%s%s',
+            $parts[1], $parts[2], $parts[3], $parts[4], $parts[5], $parts[6],
+            str_pad($parts[7], 6, '0'), $zone === 'Z' ? '+00:00' : $zone,
+        );
+
+        return CarbonImmutable::createFromFormat('!Y-m-d\TH:i:s.uP', $normalized)->utc();
     }
 
     /** @param array<string, mixed> $evidence @return array<string, mixed> */
