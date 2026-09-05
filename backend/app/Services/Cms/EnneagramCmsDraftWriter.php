@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Cms;
 
+use App\Domain\GreenfieldBaseline\GreenfieldBaselineJson;
 use App\Models\PersonalityPublicContentAsset;
 use Illuminate\Support\Facades\DB;
 
@@ -715,7 +716,7 @@ final class EnneagramCmsDraftWriter
     private function contentReadyAssetMatchesPayload(PersonalityPublicContentAsset $asset, array $assetPayload): bool
     {
         foreach ($this->contentReadyUpdatePayload($assetPayload) as $field => $expectedValue) {
-            if ($asset->getAttribute($field) !== $expectedValue) {
+            if (GreenfieldBaselineJson::normalize($asset->getAttribute($field)) !== GreenfieldBaselineJson::normalize($expectedValue)) {
                 return false;
             }
         }
