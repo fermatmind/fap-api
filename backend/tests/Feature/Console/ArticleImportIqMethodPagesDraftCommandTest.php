@@ -31,7 +31,7 @@ final class ArticleImportIqMethodPagesDraftCommandTest extends TestCase
 
         $payload = $this->jsonOutput();
 
-        $this->assertSame(0, $exitCode);
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_UNESCAPED_UNICODE));
         $this->assertTrue($payload['ok']);
         $this->assertTrue($payload['dry_run']);
         $this->assertSame('would_create_draft', $payload['action']);
@@ -60,7 +60,7 @@ final class ArticleImportIqMethodPagesDraftCommandTest extends TestCase
 
         $payload = $this->jsonOutput();
 
-        $this->assertSame(0, $exitCode);
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_UNESCAPED_UNICODE));
         $this->assertTrue($payload['ok']);
         $this->assertFalse($payload['dry_run']);
         $this->assertSame('imported_draft_only', $payload['action']);
@@ -70,6 +70,9 @@ final class ArticleImportIqMethodPagesDraftCommandTest extends TestCase
         $this->assertCount(7, $articles);
         foreach ($articles as $article) {
             $this->assertSame('zh-CN', $article->locale);
+            $group = 'iq-method-pages-zh-cn-v0-2-'.$article->slug;
+            $this->assertSame(strlen($group) > 64 ? hash('sha256', $group) : $group, $article->translation_group_id);
+            $this->assertLessThanOrEqual(64, strlen($article->translation_group_id));
             $this->assertSame('draft_review_only', $article->status);
             $this->assertFalse((bool) $article->is_public);
             $this->assertFalse((bool) $article->is_indexable);

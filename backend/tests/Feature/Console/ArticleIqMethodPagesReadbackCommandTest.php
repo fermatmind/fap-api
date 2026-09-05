@@ -30,7 +30,7 @@ final class ArticleIqMethodPagesReadbackCommandTest extends TestCase
         ]);
         $payload = $this->jsonOutput();
 
-        $this->assertSame(0, $readbackExit);
+        $this->assertSame(0, $readbackExit, json_encode($payload, JSON_UNESCAPED_UNICODE));
         $this->assertTrue($payload['ok']);
         $this->assertSame('pass', $payload['status']);
         $this->assertTrue($payload['dry_run']);

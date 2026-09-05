@@ -12,6 +12,7 @@ use App\Models\PageBlock;
 use App\Models\TopicProfile;
 use App\Models\TopicProfileEntry;
 use App\Services\Cms\ArticleBodyHeadingGuard;
+use App\Services\Cms\IqMethodPages\IqMethodPagesDraftImporter;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use JsonException;
@@ -274,7 +275,7 @@ final class ArticleIqMethodPagesReadback extends Command
             $this->assertSameValue($issues, $slug.'.excerpt', (string) $expected['excerpt'], (string) $article->excerpt);
             $this->assertSameValue($issues, $slug.'.content_md', (string) $expected['content_md'], (string) $article->content_md);
             $this->assertSameValue($issues, $slug.'.related_test_slug', 'iq-test-intelligence-quotient-assessment', (string) $article->related_test_slug);
-            $this->assertSameValue($issues, $slug.'.translation_group_id', 'iq-method-pages-zh-cn-v0-2-'.$slug, (string) $article->translation_group_id);
+            $this->assertSameValue($issues, $slug.'.translation_group_id', IqMethodPagesDraftImporter::translationGroupId($slug), (string) $article->translation_group_id);
             $this->assertDraftState($issues, $slug.'.article', [
                 'status' => (string) $article->status,
                 'is_public' => (bool) $article->is_public,

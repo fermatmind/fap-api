@@ -503,6 +503,13 @@ final class IqMethodPagesDraftImporter
         ];
     }
 
+    public static function translationGroupId(string $slug): string
+    {
+        $group = 'iq-method-pages-zh-cn-v0-2-'.$slug;
+
+        return strlen($group) > 64 ? hash('sha256', $group) : $group;
+    }
+
     /**
      * @param  array<string,mixed>  $item
      * @return array<string,mixed>
@@ -526,7 +533,7 @@ final class IqMethodPagesDraftImporter
             'reading_minutes' => $this->readingMinutes((string) $item['content_md']),
             'slug' => (string) $item['slug'],
             'locale' => 'zh-CN',
-            'translation_group_id' => 'iq-method-pages-zh-cn-v0-2-'.(string) $item['slug'],
+            'translation_group_id' => self::translationGroupId((string) $item['slug']),
             'title' => (string) $item['title'],
             'excerpt' => (string) $item['excerpt'],
             'content_md' => (string) $item['content_md'],
