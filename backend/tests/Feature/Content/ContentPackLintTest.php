@@ -18,7 +18,7 @@ final class ContentPackLintTest extends TestCase
         $this->artisan('content:lint --pack=MBTI.cn-mainland.zh-CN.v0.3')->assertExitCode(0);
         $this->artisan('content:compile --pack=MBTI.cn-mainland.zh-CN.v0.3')->assertExitCode(0);
 
-        $compiledDir = base_path('../content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/compiled');
+        $compiledDir = dirname(base_path()).'/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/compiled';
         $this->assertFileExists($compiledDir.'/cards.normalized.json');
         $this->assertFileExists($compiledDir.'/cards.tag_index.json');
         $this->assertFileExists($compiledDir.'/rules.normalized.json');
@@ -29,37 +29,29 @@ final class ContentPackLintTest extends TestCase
         $this->assertFileExists($compiledDir.'/manifest.json');
     }
 
-    public function test_pack_scoped_lint_targets_only_the_canonical_governed_mbti_pack(): void
+    public function test_pack_scoped_lint_targets_only_the_canonical_governed_mbti_forms(): void
     {
         $result = $this->app->make(ContentLintService::class)->lintAll('MBTI.cn-mainland.zh-CN.v0.3');
 
         $packs = is_array($result['packs'] ?? null) ? $result['packs'] : [];
-        $this->assertCount(3, $packs);
+        $this->assertCount(2, $packs);
         $baseDirs = array_map(static fn (array $pack): string => (string) ($pack['base_dir'] ?? ''), $packs);
-        $this->assertTrue(
-            collect($baseDirs)->contains(static fn (string $dir): bool => str_contains($dir, 'MBTI-CN-v0.3')),
-            'Expected scoped lint to include the canonical MBTI-CN-v0.3 pack.'
-        );
-        $this->assertStringNotContainsString(
-            'MBTI_PERSONALITY_TEST_16_TYPES-CN-v0.3',
-            (string) ($packs[0]['base_dir'] ?? '')
-        );
+        $this->assertEqualsCanonicalizing([
+            dirname(base_path()).'/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3',
+            dirname(base_path()).'/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3-form-93',
+        ], $baseDirs);
     }
 
-    public function test_pack_scoped_compile_targets_only_the_canonical_governed_mbti_pack(): void
+    public function test_pack_scoped_compile_targets_only_the_canonical_governed_mbti_forms(): void
     {
         $result = $this->app->make(ContentCompileService::class)->compileAll('MBTI.cn-mainland.zh-CN.v0.3');
 
         $packs = is_array($result['packs'] ?? null) ? $result['packs'] : [];
-        $this->assertCount(3, $packs);
+        $this->assertCount(2, $packs);
         $compiledDirs = array_map(static fn (array $pack): string => (string) ($pack['compiled_dir'] ?? ''), $packs);
-        $this->assertTrue(
-            collect($compiledDirs)->contains(static fn (string $dir): bool => str_contains($dir, 'MBTI-CN-v0.3/compiled')),
-            'Expected scoped compile to include the canonical MBTI-CN-v0.3 compiled pack.'
-        );
-        $this->assertStringNotContainsString(
-            'MBTI_PERSONALITY_TEST_16_TYPES-CN-v0.3',
-            (string) ($packs[0]['compiled_dir'] ?? '')
-        );
+        $this->assertEqualsCanonicalizing([
+            dirname(base_path()).'/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/compiled',
+            dirname(base_path()).'/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3-form-93/compiled',
+        ], $compiledDirs);
     }
 }

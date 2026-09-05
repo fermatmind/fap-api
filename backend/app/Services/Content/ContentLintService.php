@@ -66,7 +66,7 @@ final class ContentLintService
             fn (array $pack): bool => $this->mbtiGovernance->appliesTo($pack)
         ));
 
-        return count($governedMatches) === 1 ? $governedMatches : $matches;
+        return $governedMatches !== [] ? $governedMatches : $matches;
     }
 
     /**
