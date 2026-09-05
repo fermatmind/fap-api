@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Domain\Career\Compilation\CareerContentV3Projector;
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionCoverageSnapshot;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Http\Controllers\API\V0_5\Career\CareerJobDetailController;
@@ -25,6 +27,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Queue;
 use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
+use Tests\Support\DynamicCareerContentV3CanonicalReader;
 use Tests\TestCase;
 
 final class CareerSearchEntryQualityBatchTest extends TestCase
@@ -39,6 +42,10 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
     {
         parent::setUp();
 
+        $this->app->instance(
+            CareerContentV3CanonicalReader::class,
+            new DynamicCareerContentV3CanonicalReader(app(CareerContentV3Projector::class)),
+        );
         Cache::flush();
         Queue::fake();
         $this->app->instance(

@@ -61,13 +61,17 @@ final class CareerC2EvidenceCohortContractTest extends TestCase
         }
 
         $package = app(CareerCurrentAuthorityPackage::class)->load(base_path());
-        self::assertCount(1046, $package['rows']);
+        self::assertCount(1046, $package['pages']);
         self::assertNotContains('software-developers', $package['slugs']);
         foreach ($cohort['evidence_bound_slugs'] as $slug) {
-            self::assertSame(
-                'exact_claim_binding',
-                $package['rows'][$slug]['metadata_json']['ten_block_compilation_v1']['content_application'],
-            );
+            foreach (['en', 'zh-CN'] as $locale) {
+                $page = $package['pages'][$slug][$locale];
+                self::assertSame($slug === 'accountants-and-auditors' ? 'enhanced' : 'legacy', $page['content_state']);
+                if ($slug !== 'accountants-and-auditors') {
+                    // Archived evidence is not Current publication authority.
+                    self::assertSame([], $page['blocks']);
+                }
+            }
         }
     }
 
