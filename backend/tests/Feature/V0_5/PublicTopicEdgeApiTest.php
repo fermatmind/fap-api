@@ -9,7 +9,9 @@ use App\Models\TopicProfile;
 use App\Models\TopicProfileSeoMeta;
 use DomainException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\RefreshDatabaseState;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
@@ -248,7 +250,14 @@ final class PublicTopicEdgeApiTest extends TestCase
 
     public function test_authority_database_failure_returns_fail_closed_unavailable_envelope(): void
     {
-        Schema::drop('topic_profiles');
+        if (DB::connection()->getDriverName() === 'mysql') {
+            self::assertSame(1, DB::transactionLevel());
+            DB::commit();
+            RefreshDatabaseState::$migrated = false;
+        }
+        foreach (['topic_profile_revisions', 'topic_profile_entries', 'topic_profile_seo_meta', 'topic_profile_sections', 'topic_profiles'] as $table) {
+            Schema::drop($table);
+        }
 
         $this->getJson('/api/v0.5/public-topic-edges?source_type=topic&source_id=1&locale=en')
             ->assertServiceUnavailable()
