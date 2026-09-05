@@ -17,7 +17,8 @@ final class CareerRecommendationIndexApiTest extends TestCase
 
     public function test_it_returns_a_resource_backed_lightweight_recommendation_index(): void
     {
-        $this->compileRecommendationChain(
+        $this->freezeTime();
+        $compileRun = $this->compileRecommendationChain(
             CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'backend-architect-intj-index']),
             [
                 'type_code' => 'INTJ-A',
@@ -26,6 +27,7 @@ final class CareerRecommendationIndexApiTest extends TestCase
                 'public_route_slug' => 'intj',
             ]
         );
+        $this->travel(1)->seconds();
         $this->compileRecommendationChain(
             CareerFoundationFixture::seedTrustLimitedCrossMarketChain(),
             [
@@ -33,7 +35,8 @@ final class CareerRecommendationIndexApiTest extends TestCase
                 'canonical_type_code' => 'ENFP',
                 'display_title' => 'ENFP-T Career Match',
                 'public_route_slug' => 'enfp',
-            ]
+            ],
+            compileRun: $compileRun
         );
 
         $this->getJson('/api/v0.5/career/recommendations/mbti')
@@ -112,27 +115,30 @@ final class CareerRecommendationIndexApiTest extends TestCase
     private function compileRecommendationChain(
         array $chain,
         array $subjectMeta,
-        int $compileFinishedMinutesAgo = 7
-    ): void {
-        $importRun = CareerImportRun::query()->create([
-            'dataset_name' => 'fixture',
-            'dataset_version' => 'v1',
-            'dataset_checksum' => 'checksum-rec-api-'.$chain['occupation']->canonical_slug,
-            'scope_mode' => 'first_wave_exact',
-            'dry_run' => false,
-            'status' => 'completed',
-            'started_at' => now()->subMinutes($compileFinishedMinutesAgo + 3),
-            'finished_at' => now()->subMinutes($compileFinishedMinutesAgo + 2),
-        ]);
-        $compileRun = CareerCompileRun::query()->create([
-            'import_run_id' => $importRun->id,
-            'compiler_version' => CareerRecommendationCompiler::COMPILER_VERSION,
-            'scope_mode' => 'first_wave_exact',
-            'dry_run' => false,
-            'status' => 'completed',
-            'started_at' => now()->subMinutes($compileFinishedMinutesAgo + 1),
-            'finished_at' => now()->subMinutes($compileFinishedMinutesAgo),
-        ]);
+        int $compileFinishedMinutesAgo = 7,
+        ?CareerCompileRun $compileRun = null
+    ): CareerCompileRun {
+        if ($compileRun === null) {
+            $importRun = CareerImportRun::query()->create([
+                'dataset_name' => 'fixture',
+                'dataset_version' => 'v1',
+                'dataset_checksum' => 'checksum-rec-api-'.$chain['occupation']->canonical_slug,
+                'scope_mode' => 'first_wave_exact',
+                'dry_run' => false,
+                'status' => 'completed',
+                'started_at' => now()->subMinutes($compileFinishedMinutesAgo + 3),
+                'finished_at' => now()->subMinutes($compileFinishedMinutesAgo + 2),
+            ]);
+            $compileRun = CareerCompileRun::query()->create([
+                'import_run_id' => $importRun->id,
+                'compiler_version' => CareerRecommendationCompiler::COMPILER_VERSION,
+                'scope_mode' => 'first_wave_exact',
+                'dry_run' => false,
+                'status' => 'completed',
+                'started_at' => now()->subMinutes($compileFinishedMinutesAgo + 1),
+                'finished_at' => now()->subMinutes($compileFinishedMinutesAgo),
+            ]);
+        }
 
         $chain['contextSnapshot']->update([
             'compile_run_id' => $compileRun->id,
@@ -151,7 +157,9 @@ final class CareerRecommendationIndexApiTest extends TestCase
 
         app(CareerRecommendationCompiler::class)->compile($chain['childProjection'], $chain['occupation'], [
             'compile_run_id' => $compileRun->id,
-            'import_run_id' => $importRun->id,
+            'import_run_id' => $compileRun->import_run_id,
         ]);
+
+        return $compileRun;
     }
 }
