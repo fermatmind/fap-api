@@ -80,9 +80,16 @@ final class RiasecContentPromotionAdapter implements ExactPackagePromotionAdapte
         $targets = $this->targets($package);
         if ($phase === 'before_publication') {
             $phaseKey = PromotionPhaseIdentity::idempotencyKey($context, $phase, $targets);
-            $existing = ContentReleaseSnapshot::query()->where('pack_id', 'riasec-content-release')->where('reason', 'content_promotion_before_publication')->orderBy('id')->get()->first(static fn (ContentReleaseSnapshot $snapshot): bool => data_get($snapshot->meta_json, 'phase_idempotency_key') === $phaseKey && data_get($snapshot->meta_json, 'target_fingerprint') === $targets->fingerprint());
-            if ($existing instanceof ContentReleaseSnapshot) {
-                return 'content-release-snapshot:'.$existing->id;
+            $snapshots = ContentReleaseSnapshot::query()
+                ->where('pack_id', 'riasec-content-release')
+                ->where('reason', 'content_promotion_before_publication');
+            // Sort identities only: full snapshot JSON can exceed MySQL's sort buffer.
+            foreach ((clone $snapshots)->orderBy('id')->pluck('id') as $id) {
+                $snapshot = (clone $snapshots)->findOrFail($id);
+                if (data_get($snapshot->meta_json, 'phase_idempotency_key') === $phaseKey
+                    && data_get($snapshot->meta_json, 'target_fingerprint') === $targets->fingerprint()) {
+                    return 'content-release-snapshot:'.$snapshot->id;
+                }
             }
         }
         $previous = $this->authority->activeReleaseId($context->packageSha256);

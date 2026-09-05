@@ -6,11 +6,13 @@ namespace Tests\Unit\ContentPromotion;
 
 use App\Models\ContentPackRelease;
 use App\Models\ContentReleaseManifest;
+use App\Models\ContentReleaseSnapshot;
 use App\Services\ContentImport\RiasecEnglishPackageImporter;
 use App\Services\ContentPromotion\PromotionAdapterRegistry;
 use App\Services\ContentPromotion\PromotionContext;
 use App\Services\ContentPromotion\RiasecContentPromotionAuthority;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Tests\Support\RiasecDeclaredAuthorityFixture;
 use Tests\TestCase;
@@ -22,12 +24,29 @@ final class RiasecContentPromotionAdapterTest extends TestCase
     /** @var list<string> */
     private array $directories = [];
 
+    private ?int $sortBufferSize = null;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        if (DB::getDriverName() === 'mysql') {
+            $this->sortBufferSize = (int) DB::scalar('SELECT @@SESSION.sort_buffer_size');
+            DB::statement('SET SESSION sort_buffer_size = 262144');
+        }
+    }
+
     protected function tearDown(): void
     {
-        foreach ($this->directories as $directory) {
-            File::deleteDirectory($directory);
+        try {
+            foreach ($this->directories as $directory) {
+                File::deleteDirectory($directory);
+            }
+        } finally {
+            if ($this->sortBufferSize !== null) {
+                DB::statement('SET SESSION sort_buffer_size = '.$this->sortBufferSize);
+            }
+            parent::tearDown();
         }
-        parent::tearDown();
     }
 
     public function test_exact_english_release_is_drafted_published_and_rolled_back_without_touching_runtime_or_chinese_content(): void
@@ -59,11 +78,22 @@ final class RiasecContentPromotionAdapterTest extends TestCase
             self::assertDoesNotMatchRegularExpression('/[\x{3400}-\x{9fff}]/u', json_encode($target['reader_payload'], JSON_THROW_ON_ERROR));
         }
 
+        ContentReleaseSnapshot::query()->insert(array_fill(0, 64, [
+            'pack_id' => 'unrelated-release', 'reason' => 'other_phase', 'meta_json' => '{}',
+        ]));
+        ContentReleaseSnapshot::query()->create([
+            'pack_id' => 'riasec-content-release',
+            'reason' => 'content_promotion_before_publication',
+            'meta_json' => ['phase_idempotency_key' => 'unrelated-phase', 'padding' => str_repeat('x', 2 * 1024 * 1024)],
+        ]);
+
         $published = $adapter->publish($context);
         self::assertSame(1550, $published['published_count']);
         self::assertSame('superseded', $previous->refresh()->status);
         self::assertSame(1550, $adapter->liveQa($context)['published_count']);
-        self::assertSame(0, $adapter->publish($context)['written_count']);
+        $publishedAgain = $adapter->publish($context);
+        self::assertSame(0, $publishedAgain['written_count']);
+        self::assertSame($published['rollback_reference'], $publishedAgain['rollback_reference']);
 
         $adapter->rollback($context, (string) $published['rollback_reference']);
         self::assertSame('published', $previous->refresh()->status);
