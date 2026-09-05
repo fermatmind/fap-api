@@ -15,8 +15,16 @@ trait UsesIsolatedSqliteDatabase
 
     private ?array $sqliteFixtureState = null;
 
+    protected function requiresIsolatedSqliteDatabase(): bool
+    {
+        return true;
+    }
+
     protected function beforeRefreshingDatabase(): void
     {
+        if (! $this->requiresIsolatedSqliteDatabase()) {
+            return;
+        }
         $this->sqliteFixtureState = [
             'default' => config('database.default'),
             'sqlite' => config('database.connections.sqlite'),
@@ -34,6 +42,9 @@ trait UsesIsolatedSqliteDatabase
 
     protected function afterRefreshingDatabase(): void
     {
+        if ($this->sqliteFixtureState === null) {
+            return;
+        }
         // Restore after RefreshDatabase has rolled back its SQLite transaction.
         $this->beforeApplicationDestroyed(function (): void {
             DB::purge('sqlite');

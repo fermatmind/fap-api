@@ -7,13 +7,13 @@ namespace Tests\Feature\Console;
 use App\Console\Commands\PersonalityBigFiveCmsPreviewRenderQa;
 use App\Models\PersonalityPublicContentAsset;
 use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Tests\Concerns\UsesIsolatedSqliteDatabase;
 use Tests\TestCase;
 
 final class PersonalityBigFiveCmsPreviewRenderQaCommandTest extends TestCase
 {
-    use RefreshDatabase;
+    use UsesIsolatedSqliteDatabase;
 
     private const SOURCE_PACKAGE = 'big-five-cms-import-draft-polished.v2';
 

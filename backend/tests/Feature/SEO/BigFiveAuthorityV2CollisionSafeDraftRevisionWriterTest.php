@@ -16,15 +16,15 @@ use App\Models\TopicProfileRevision;
 use App\Services\BigFive\AuthorityV2\ReleaseGate\BigFiveAuthorityV2CollisionSafeDraftRevisionWriter;
 use App\Services\BigFive\AuthorityV2\ReleaseGate\BigFiveAuthorityV2DraftImportWriter;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use RuntimeException;
+use Tests\Concerns\UsesIsolatedSqliteDatabase;
 use Tests\TestCase;
 
 final class BigFiveAuthorityV2CollisionSafeDraftRevisionWriterTest extends TestCase
 {
-    use RefreshDatabase;
+    use UsesIsolatedSqliteDatabase;
 
     private const PACKAGE = '../generated/big-five-authority-v2/big5-authority-v2-release-gate-37/draft-import-package.json';
 
@@ -49,6 +49,13 @@ final class BigFiveAuthorityV2CollisionSafeDraftRevisionWriterTest extends TestC
         'big-five-narrative-portrait',
         'big-five-tool-guide',
     ];
+
+    protected function requiresIsolatedSqliteDatabase(): bool
+    {
+        return in_array($this->name(), [
+            'test_console_preflight_is_read_only_and_write_rejects_an_unapproved_phrase',
+        ], true);
+    }
 
     public function test_preflight_reports_exact_collision_safe_actions_without_writes(): void
     {

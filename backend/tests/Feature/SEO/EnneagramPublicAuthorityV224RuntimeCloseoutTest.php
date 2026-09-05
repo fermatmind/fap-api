@@ -15,7 +15,6 @@ use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV224RuntimeCloseo
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV224RuntimeReadback;
 use App\Services\ReviewGovernance\PublicReviewContract;
 use App\Services\ReviewGovernance\ReviewAttestationFactory;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
@@ -23,17 +22,32 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Console\Output\BufferedOutput;
+use Tests\Concerns\UsesIsolatedSqliteDatabase;
 use Tests\TestCase;
 
 final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
 {
-    use RefreshDatabase;
+    use UsesIsolatedSqliteDatabase;
 
     private const BACKEND_SHA = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
 
     private const FRONTEND_SHA = 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb';
 
     private const REVALIDATION_SECRET = 'runtime-closeout-test-secret-with-entropy';
+
+    protected function requiresIsolatedSqliteDatabase(): bool
+    {
+        return in_array($this->name(), [
+            'test_authorized_execute_runs_import_bind_atomic_promotion_cache_and_nine_plus_canary_readbacks',
+            'test_standalone_post_readback_rejects_incomplete_review_register_before_http',
+            'test_standalone_readback_rejects_non_origin_api_and_frontend_base_urls_before_http',
+            'test_console_preflight_generates_only_redacted_operator_artifacts',
+            'test_console_rejects_non_origin_api_and_frontend_base_urls_before_any_write',
+            'test_console_rejects_frontend_revision_probe_on_a_different_origin_before_any_write',
+            'test_console_execute_rejects_invalid_closeout_output_before_any_runtime_write',
+            'test_console_execute_persists_the_redacted_closeout_result_to_the_reserved_output',
+        ], true);
+    }
 
     public function test_preflight_generates_exact_review_batches_and_authorization_without_writes(): void
     {

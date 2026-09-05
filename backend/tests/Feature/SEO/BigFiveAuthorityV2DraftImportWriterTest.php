@@ -10,16 +10,24 @@ use App\Models\LandingSurface;
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\TopicProfile;
 use App\Services\BigFive\AuthorityV2\ReleaseGate\BigFiveAuthorityV2DraftImportWriter;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\Concerns\UsesIsolatedSqliteDatabase;
 use Tests\TestCase;
 
 final class BigFiveAuthorityV2DraftImportWriterTest extends TestCase
 {
-    use RefreshDatabase;
+    use UsesIsolatedSqliteDatabase;
 
     private const PACKAGE = '../generated/big-five-authority-v2/big5-authority-v2-release-gate-37/draft-import-package.json';
 
     private const AUTHORIZATION = '../generated/big-five-authority-v2/big5-authority-v2-release-gate-37/production-authorization-packet.json';
+
+    protected function requiresIsolatedSqliteDatabase(): bool
+    {
+        return in_array($this->name(), [
+            'test_write_requires_exact_authorization_and_commits_only_fail_closed_drafts',
+            'test_existing_identity_aborts_authorized_create_only_retry_without_mutation',
+        ], true);
+    }
 
     public function test_preflight_reports_exact_231_create_zero_update_without_writes(): void
     {

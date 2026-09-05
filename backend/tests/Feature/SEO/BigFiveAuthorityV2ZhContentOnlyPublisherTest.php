@@ -15,15 +15,15 @@ use App\Models\TopicProfile;
 use App\Models\TopicProfileRevision;
 use App\Services\BigFive\AuthorityV2\ContentOnlyRelease\BigFiveZhContentOnlyPublisher;
 use App\Services\BigFive\AuthorityV2\ReleaseGate\BigFiveAuthorityV2DraftImportWriter;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
+use Tests\Concerns\UsesIsolatedSqliteDatabase;
 use Tests\TestCase;
 
 final class BigFiveAuthorityV2ZhContentOnlyPublisherTest extends TestCase
 {
-    use RefreshDatabase;
+    use UsesIsolatedSqliteDatabase;
 
     private const RELEASE = '../generated/big-five-authority-v2/big5-authority-v2-zh-content-only-release/release-package.json';
 
@@ -57,6 +57,13 @@ final class BigFiveAuthorityV2ZhContentOnlyPublisherTest extends TestCase
             231,
             0,
         );
+    }
+
+    protected function requiresIsolatedSqliteDatabase(): bool
+    {
+        return in_array($this->name(), [
+            'test_console_defaults_to_preflight_and_execute_is_testing_guarded',
+        ], true);
     }
 
     public function test_preflight_locks_exact_112_chinese_assets_without_writes(): void
