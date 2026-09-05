@@ -7,6 +7,7 @@ namespace Tests\Feature\Content;
 use App\Services\Content\ContentCompileService;
 use App\Services\Content\ContentLintService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 final class ContentPackLintTest extends TestCase
@@ -29,8 +30,10 @@ final class ContentPackLintTest extends TestCase
         $this->assertFileExists($compiledDir.'/manifest.json');
     }
 
-    public function test_pack_scoped_lint_targets_only_the_canonical_governed_mbti_forms(): void
+    #[DataProvider('packRootForms')]
+    public function test_pack_scoped_lint_targets_only_the_canonical_governed_mbti_forms(bool $relativeRoot): void
     {
+        config(['content_packs.root' => $relativeRoot ? '../content_packages' : dirname(base_path()).'/content_packages']);
         $result = $this->app->make(ContentLintService::class)->lintAll('MBTI.cn-mainland.zh-CN.v0.3');
 
         $packs = is_array($result['packs'] ?? null) ? $result['packs'] : [];
@@ -39,11 +42,13 @@ final class ContentPackLintTest extends TestCase
         $this->assertEqualsCanonicalizing([
             dirname(base_path()).'/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3',
             dirname(base_path()).'/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3-form-93',
-        ], $baseDirs);
+        ], array_map('realpath', $baseDirs));
     }
 
-    public function test_pack_scoped_compile_targets_only_the_canonical_governed_mbti_forms(): void
+    #[DataProvider('packRootForms')]
+    public function test_pack_scoped_compile_targets_only_the_canonical_governed_mbti_forms(bool $relativeRoot): void
     {
+        config(['content_packs.root' => $relativeRoot ? '../content_packages' : dirname(base_path()).'/content_packages']);
         $result = $this->app->make(ContentCompileService::class)->compileAll('MBTI.cn-mainland.zh-CN.v0.3');
 
         $packs = is_array($result['packs'] ?? null) ? $result['packs'] : [];
@@ -52,6 +57,11 @@ final class ContentPackLintTest extends TestCase
         $this->assertEqualsCanonicalizing([
             dirname(base_path()).'/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/compiled',
             dirname(base_path()).'/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3-form-93/compiled',
-        ], $compiledDirs);
+        ], array_map('realpath', $compiledDirs));
+    }
+
+    public static function packRootForms(): array
+    {
+        return ['relative root' => [true], 'absolute root' => [false]];
     }
 }
