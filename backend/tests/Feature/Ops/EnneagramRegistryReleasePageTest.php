@@ -141,13 +141,11 @@ final class EnneagramRegistryReleasePageTest extends TestCase
 
         $role = Role::query()->create([
             'name' => 'enneagram_registry_role_'.Str::lower(Str::random(6)),
-            'guard_name' => (string) config('admin.guard', 'admin'),
         ]);
 
         foreach ($permissions as $permissionName) {
             $permission = Permission::query()->firstOrCreate([
                 'name' => $permissionName,
-                'guard_name' => (string) config('admin.guard', 'admin'),
             ]);
 
             $role->permissions()->syncWithoutDetaching([$permission->id]);

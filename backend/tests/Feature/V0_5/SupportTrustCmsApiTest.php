@@ -321,13 +321,11 @@ final class SupportTrustCmsApiTest extends TestCase
         ]);
         $role = Role::query()->create([
             'name' => 'support-trust-'.Str::lower(Str::random(8)),
-            'guard_name' => (string) config('admin.guard', 'admin'),
         ]);
 
         foreach ($permissionNames as $permissionName) {
             $permission = Permission::query()->firstOrCreate([
                 'name' => $permissionName,
-                'guard_name' => (string) config('admin.guard', 'admin'),
             ]);
             $role->permissions()->syncWithoutDetaching([$permission->id]);
         }
