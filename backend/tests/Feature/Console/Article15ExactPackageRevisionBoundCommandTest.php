@@ -350,7 +350,7 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
                 data_get($target, 'package.current_to_proposed.reading_minutes.proposed'),
                 $metadata['reading_minutes'] ?? null
             );
-            $this->assertSame(
+            $this->assertJsonValueSame(
                 data_get($target, 'package.current_to_proposed.answer_surface_v1.proposed.faq_items'),
                 $metadata['faq_items'] ?? null
             );
@@ -422,8 +422,8 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
             $article = Article::query()->withoutGlobalScopes()->with(['publishedRevision', 'seoMeta'])->findOrFail($target['article_id']);
             $this->assertSame(data_get($target, 'package.current_to_proposed.reading_minutes.proposed'), $article->reading_minutes);
             $this->assertSame(data_get($target, 'package.current_to_proposed.related_test_slug.proposed'), $article->related_test_slug);
-            $this->assertSame(data_get($target, 'package.current_to_proposed.answer_surface_v1.proposed.faq_items'), data_get($article->seoMeta?->schema_json, 'editorial_package_v1.answer_surface_v1.faq_items'));
-            $this->assertSame(
+            $this->assertJsonValueSame(data_get($target, 'package.current_to_proposed.answer_surface_v1.proposed.faq_items'), data_get($article->seoMeta?->schema_json, 'editorial_package_v1.answer_surface_v1.faq_items'));
+            $this->assertJsonValueSame(
                 data_get($target, 'package.current_to_proposed.primary_cta.proposed'),
                 data_get($article->seoMeta?->schema_json, 'editorial_package_v1.cta_slots')
             );
