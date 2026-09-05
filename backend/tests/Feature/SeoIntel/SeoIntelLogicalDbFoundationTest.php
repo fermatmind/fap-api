@@ -74,18 +74,25 @@ final class SeoIntelLogicalDbFoundationTest extends TestCase
     #[Test]
     public function seo_intel_database_connection_exists_without_business_db_defaults(): void
     {
-        $connection = config('database.connections.seo_intel');
+        $keys = ['SEO_INTEL_DB_HOST', 'SEO_INTEL_DB_DATABASE', 'SEO_INTEL_DB_USERNAME', 'SEO_INTEL_DB_PASSWORD'];
+        $snapshot = $this->snapshotEnv($keys);
+        try {
+            $this->clearEnv($keys);
+            $connection = (require base_path('config/database.php'))['connections']['seo_intel'];
 
-        $this->assertIsArray($connection);
-        $this->assertSame('mysql', $connection['driver'] ?? null);
-        $this->assertArrayHasKey('host', $connection);
-        $this->assertArrayHasKey('database', $connection);
-        $this->assertArrayHasKey('username', $connection);
-        $this->assertArrayHasKey('password', $connection);
-        $this->assertNull($connection['host']);
-        $this->assertNull($connection['database']);
-        $this->assertNull($connection['username']);
-        $this->assertNull($connection['password']);
+            $this->assertIsArray($connection);
+            $this->assertSame('mysql', $connection['driver'] ?? null);
+            $this->assertArrayHasKey('host', $connection);
+            $this->assertArrayHasKey('database', $connection);
+            $this->assertArrayHasKey('username', $connection);
+            $this->assertArrayHasKey('password', $connection);
+            $this->assertNull($connection['host']);
+            $this->assertNull($connection['database']);
+            $this->assertNull($connection['username']);
+            $this->assertNull($connection['password']);
+        } finally {
+            $this->restoreEnv($snapshot);
+        }
     }
 
     #[Test]

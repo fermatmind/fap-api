@@ -72,6 +72,8 @@ final class PublicScaleInputHardeningTest extends TestCase
         $second->assertHeader('X-FAP-Cache', 'hit');
         $second->assertJsonPath('locale', 'en-US');
 
+        Config::set('app.version', 'test');
+        Config::set('cache.prefix', 'lookup-key-contract');
         $longKey = CacheKeys::mbtiLookup(0, str_repeat('mbti-test-', 30), str_repeat('en-US-', 30), true);
         $this->assertLessThanOrEqual(220, strlen($longKey));
     }
