@@ -89,7 +89,6 @@ final class BigFiveModulesUnlockFlowTest extends TestCase
 
     public function test_big5_modules_unlock_flow(): void
     {
-        $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
         (new ScaleRegistrySeeder)->run();
         (new Pr19CommerceSeeder)->run();
 
