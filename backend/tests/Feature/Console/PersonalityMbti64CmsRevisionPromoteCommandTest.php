@@ -43,6 +43,12 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
 
     private const V8_5_V5_BILINGUAL_64_PACKAGE_PATH = 'docs/seo/personality/mbti64-zh32-en32-v8-5-v5-bilingual-package-2026-07-01.json';
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        config()->set('fap.testing_personality_legacy_public_db_fixture', true);
+    }
+
     public function test_dry_run_lists_eight_latest_revisions_without_live_writes(): void
     {
         $this->seedTargets();
@@ -347,7 +353,7 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         ]);
 
         $payload = $this->jsonOutput();
-        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertTrue($payload['ok']);
         $this->assertTrue($payload['dry_run']);
         $this->assertFalse($payload['write']);
@@ -376,7 +382,7 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         ]);
 
         $payload = $this->jsonOutput();
-        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertTrue($payload['ok']);
         $this->assertTrue($payload['dry_run']);
         $this->assertFalse($payload['write']);
@@ -410,7 +416,7 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         ]);
 
         $payload = $this->jsonOutput();
-        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertTrue($payload['ok']);
         $this->assertTrue($payload['dry_run']);
         $this->assertFalse($payload['write']);
@@ -446,7 +452,7 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         ]);
 
         $payload = $this->jsonOutput();
-        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertTrue($payload['ok']);
         $this->assertTrue($payload['dry_run']);
         $this->assertFalse($payload['write']);
@@ -478,7 +484,7 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         ]);
 
         $payload = $this->jsonOutput();
-        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertTrue($payload['ok']);
         $this->assertTrue($payload['dry_run']);
         $this->assertFalse($payload['write']);
@@ -510,7 +516,7 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         ]);
 
         $payload = $this->jsonOutput();
-        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertTrue($payload['ok']);
         $this->assertTrue($payload['dry_run']);
         $this->assertFalse($payload['write']);
@@ -544,7 +550,7 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         ]);
 
         $payload = $this->jsonOutput();
-        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertTrue($payload['ok']);
         $this->assertSame('remaining_58', $payload['contract']['subset']['mode']);
         $this->assertSame(58, $payload['contract']['row_count']);
@@ -575,7 +581,7 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         ]);
 
         $payload = $this->jsonOutput();
-        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertTrue($payload['ok']);
         $this->assertTrue($payload['dry_run']);
         $this->assertFalse($payload['write']);
@@ -607,7 +613,7 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', $this->promoteWriteOptions($packagePath));
 
         $payload = $this->jsonOutput();
-        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertTrue($payload['ok']);
         $this->assertTrue($payload['write']);
         $this->assertTrue($payload['writes_committed']);
@@ -647,7 +653,7 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', $options);
 
         $payload = $this->jsonOutput();
-        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertTrue($payload['ok']);
         $this->assertTrue($payload['write']);
         $this->assertSame('visible_query_backed_3', $payload['contract']['subset']['mode']);
@@ -680,7 +686,7 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', $options);
 
         $payload = $this->jsonOutput();
-        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertTrue($payload['ok']);
         $this->assertTrue($payload['write']);
         $this->assertSame('fresh_query_backed_5', $payload['contract']['subset']['mode']);
@@ -716,7 +722,7 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', $options);
 
         $payload = $this->jsonOutput();
-        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertTrue($payload['ok']);
         $this->assertTrue($payload['write']);
         $this->assertSame('next_batch_6', $payload['contract']['subset']['mode']);
@@ -752,7 +758,7 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', $options);
 
         $payload = $this->jsonOutput();
-        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertTrue($payload['ok']);
         $this->assertTrue($payload['write']);
         $this->assertSame('next_batch_6', $payload['contract']['subset']['mode']);
@@ -795,7 +801,7 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', $options);
 
         $payload = $this->jsonOutput();
-        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertTrue($payload['ok']);
         $this->assertTrue($payload['write']);
         $this->assertSame('remaining_58', $payload['contract']['subset']['mode']);
@@ -842,7 +848,7 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', $options);
 
         $payload = $this->jsonOutput();
-        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertTrue($payload['ok']);
         $this->assertTrue($payload['write']);
         $this->assertTrue($payload['writes_committed']);

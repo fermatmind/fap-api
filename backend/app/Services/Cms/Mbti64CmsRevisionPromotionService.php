@@ -909,7 +909,8 @@ final class Mbti64CmsRevisionPromotionService
             ? PersonalityProfileRevision::query()->where($targetField, $targetId)
             : PersonalityProfileVariantRevision::query()->where($targetField, $targetId);
 
-        foreach ($query->orderByDesc('revision_no')->get() as $revision) {
+        // Sort model references, keeping large snapshot JSON out of MySQL filesort.
+        foreach ($query->get()->sortByDesc('revision_no') as $revision) {
             $snapshot = is_array($revision->snapshot_json) ? $revision->snapshot_json : [];
             $storedSha = (string) ($snapshot[$snapshotKey]['source']['source_sha256'] ?? '');
             if ($storedSha === $sourceSha256) {
@@ -926,7 +927,8 @@ final class Mbti64CmsRevisionPromotionService
             ? PersonalityProfileRevision::query()->where($targetField, $targetId)
             : PersonalityProfileVariantRevision::query()->where($targetField, $targetId);
 
-        foreach ($query->orderByDesc('revision_no')->get() as $revision) {
+        // Sort model references, keeping large snapshot JSON out of MySQL filesort.
+        foreach ($query->get()->sortByDesc('revision_no') as $revision) {
             $snapshot = is_array($revision->snapshot_json) ? $revision->snapshot_json : [];
             if (is_array($snapshot[$snapshotKey] ?? null)) {
                 return (int) $revision->revision_no;
