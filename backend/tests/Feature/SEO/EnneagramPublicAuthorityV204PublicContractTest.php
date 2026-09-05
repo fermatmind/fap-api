@@ -12,6 +12,12 @@ final class EnneagramPublicAuthorityV204PublicContractTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        config()->set('fap.testing_personality_legacy_public_db_fixture', true);
+    }
+
     public function test_ten_entity_locale_fixtures_expose_v2_visible_evidence_and_preserve_v1(): void
     {
         $fixtures = $this->contractFixtures();

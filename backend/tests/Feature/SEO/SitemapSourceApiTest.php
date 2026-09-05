@@ -23,10 +23,12 @@ use Tests\TestCase;
 class SitemapSourceApiTest extends TestCase
 {
     use RefreshDatabase;
+    use \Tests\Concerns\UsesCareerDetailCacheFixture;
 
     protected function setUp(): void
     {
         parent::setUp();
+        $this->installCareerDetailCacheFixture();
 
         Cache::flush();
         File::deleteDirectory(storage_path('app/private/career_generation_authority'));
@@ -45,7 +47,7 @@ class SitemapSourceApiTest extends TestCase
         config(['app.frontend_url' => 'https://staging.fermatmind.com']);
 
         $this->createDisplayAsset(
-            $this->createOccupation('agricultural-inspectors', 'Agricultural Inspectors'),
+            $this->createOccupation('fixture-agricultural-inspectors', 'Agricultural Inspectors'),
             ['updated_at' => Carbon::create(2026, 1, 31, 12, 55, 0)]
         );
         $this->createDisplayAsset(
@@ -53,8 +55,8 @@ class SitemapSourceApiTest extends TestCase
             ['updated_at' => Carbon::create(2026, 1, 31, 12, 56, 0)]
         );
         $this->writeProjectionArtifact([
-            $this->projectionItem('agricultural-inspectors', 'en'),
-            $this->projectionItem('agricultural-inspectors', 'zh'),
+            $this->projectionItem('fixture-agricultural-inspectors', 'en'),
+            $this->projectionItem('fixture-agricultural-inspectors', 'zh'),
             $this->projectionItem(
                 'software-developers',
                 'en',
@@ -84,8 +86,8 @@ class SitemapSourceApiTest extends TestCase
 
         $locs = collect($response->json('items'))->pluck('loc')->all();
 
-        $this->assertContains('https://staging.fermatmind.com/en/career/jobs/agricultural-inspectors', $locs);
-        $this->assertContains('https://staging.fermatmind.com/zh/career/jobs/agricultural-inspectors', $locs);
+        $this->assertContains('https://staging.fermatmind.com/en/career/jobs/fixture-agricultural-inspectors', $locs);
+        $this->assertContains('https://staging.fermatmind.com/zh/career/jobs/fixture-agricultural-inspectors', $locs);
         $this->assertNotContains('https://staging.fermatmind.com/en/career/jobs/software-developers', $locs);
         $this->assertNotContains('https://staging.fermatmind.com/zh/career/jobs/software-developers', $locs);
         $this->assertSame(count($locs), $response->json('count'));
@@ -101,13 +103,13 @@ class SitemapSourceApiTest extends TestCase
         $this->createCareerJob('software-engineer', 'Software Engineer', 'zh-CN');
 
         $this->createDisplayAsset(
-            $this->createOccupation('data-scientists', 'Data Scientists'),
+            $this->createOccupation('fixture-data-scientists', 'Data Scientists'),
             ['updated_at' => Carbon::create(2026, 1, 31, 12, 57, 0)]
         );
         $this->writeProjectionArtifact([
-            $this->projectionItem('data-scientists', 'en'),
+            $this->projectionItem('fixture-data-scientists', 'en'),
             $this->projectionItem(
-                'data-scientists',
+                'fixture-data-scientists',
                 'zh',
                 CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE,
                 [
@@ -129,10 +131,10 @@ class SitemapSourceApiTest extends TestCase
         $response->assertOk();
         $locs = collect($response->json('items'))->pluck('loc')->all();
 
-        $this->assertContains('https://fermatmind.com/en/career/jobs/data-scientists', $locs);
-        $this->assertNotContains('https://fermatmind.com/zh/career/jobs/data-scientists', $locs);
-        $this->assertNotContains('https://www.fermatmind.com/en/career/jobs/data-scientists', $locs);
-        $this->assertNotContains('https://www.fermatmind.com/zh/career/jobs/data-scientists', $locs);
+        $this->assertContains('https://fermatmind.com/en/career/jobs/fixture-data-scientists', $locs);
+        $this->assertNotContains('https://fermatmind.com/zh/career/jobs/fixture-data-scientists', $locs);
+        $this->assertNotContains('https://www.fermatmind.com/en/career/jobs/fixture-data-scientists', $locs);
+        $this->assertNotContains('https://www.fermatmind.com/zh/career/jobs/fixture-data-scientists', $locs);
         $this->assertNotContains('https://fermatmind.com/en/career/jobs/backend-engineer', $locs);
         $this->assertNotContains('https://fermatmind.com/zh/career/jobs/backend-engineer', $locs);
         $this->assertNotContains('https://fermatmind.com/en/career/jobs/software-engineer', $locs);
@@ -259,11 +261,9 @@ class SitemapSourceApiTest extends TestCase
                 continue;
             }
 
-            $cache->warmJobDetailPayload(
-                (string) ($item['slug'] ?? ''),
-                (string) ($item['locale'] ?? 'en'),
-                true,
-            );
+            $slug = (string) ($item['slug'] ?? '');
+            $locale = (string) ($item['locale'] ?? 'en');
+            $cache->publishJobDetailReadModel($slug, $locale, $this->detailCacheFixture(['slug' => $slug], $slug, $locale));
         }
 
         $cache->warm();
@@ -357,12 +357,12 @@ class SitemapSourceApiTest extends TestCase
         config(['app.url' => 'https://fermatmind.com']);
 
         $this->createDisplayAsset(
-            $this->createOccupation('civil-engineers', 'Civil Engineers'),
+            $this->createOccupation('fixture-civil-engineers', 'Civil Engineers'),
             ['updated_at' => Carbon::create(2026, 2, 1, 12, 55, 0)]
         );
         $this->writeProjectionArtifact([
-            $this->projectionItem('civil-engineers', 'en'),
-            $this->projectionItem('civil-engineers', 'zh'),
+            $this->projectionItem('fixture-civil-engineers', 'en'),
+            $this->projectionItem('fixture-civil-engineers', 'zh'),
         ]);
 
         $this->artisan('seo:warm-sitemap-source-cache --json')
@@ -417,8 +417,8 @@ class SitemapSourceApiTest extends TestCase
         $this->assertContains('https://fermatmind.com/zh/tests', $locs);
         $this->assertContains('https://fermatmind.com/zh/tests/category/career', $locs);
         $this->assertContains('https://fermatmind.com/zh/tests/category/personality', $locs);
-        $this->assertContains('https://fermatmind.com/en/career/jobs/civil-engineers', $locs);
-        $this->assertContains('https://fermatmind.com/zh/career/jobs/civil-engineers', $locs);
+        $this->assertContains('https://fermatmind.com/en/career/jobs/fixture-civil-engineers', $locs);
+        $this->assertContains('https://fermatmind.com/zh/career/jobs/fixture-civil-engineers', $locs);
         $this->assertNotContains('https://fermatmind.com/datasets/occupations', $locs);
         $this->assertNotContains('https://fermatmind.com/datasets/occupations/method', $locs);
         $this->assertNotContains('https://fermatmind.com/en/career/jobs', $locs);
@@ -469,7 +469,7 @@ class SitemapSourceApiTest extends TestCase
         config(['app.url' => 'https://fermatmind.com']);
 
         $this->createDisplayAsset(
-            $this->createOccupation('electrical-engineers', 'Electrical Engineers'),
+            $this->createOccupation('fixture-electrical-engineers', 'Electrical Engineers'),
             ['updated_at' => Carbon::create(2026, 2, 1, 12, 55, 0)]
         );
         $this->createDisplayAsset(
@@ -477,8 +477,8 @@ class SitemapSourceApiTest extends TestCase
             ['updated_at' => Carbon::create(2026, 2, 1, 12, 56, 0)]
         );
         $this->writeProjectionArtifact([
-            $this->projectionItem('electrical-engineers', 'en'),
-            $this->projectionItem('electrical-engineers', 'zh'),
+            $this->projectionItem('fixture-electrical-engineers', 'en'),
+            $this->projectionItem('fixture-electrical-engineers', 'zh'),
             $this->projectionItem(
                 'software-developers',
                 'en',
@@ -503,7 +503,7 @@ class SitemapSourceApiTest extends TestCase
 
         $locs = collect($response->json('items'))->pluck('loc')->all();
 
-        $this->assertContains('https://fermatmind.com/en/career/jobs/electrical-engineers', $locs);
+        $this->assertContains('https://fermatmind.com/en/career/jobs/fixture-electrical-engineers', $locs);
         $this->assertNotContains('https://fermatmind.com/en/career/jobs/software-developers', $locs);
         $this->assertNotContains('https://fermatmind.com/zh/career/jobs/software-developers', $locs);
 
