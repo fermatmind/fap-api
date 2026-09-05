@@ -53,21 +53,22 @@ final class CareerFirstWaveLifecycleSummaryServiceTest extends TestCase
 
     public function test_it_curates_candidate_and_demoted_reason_codes_without_leaking_internal_compiler_tags(): void
     {
+        $this->freezeTime();
         $this->materializeCurrentFirstWaveFixture();
 
         $candidate = Occupation::query()->where('canonical_slug', 'data-scientists')->firstOrFail();
         $demoted = Occupation::query()->where('canonical_slug', 'management-analysts')->firstOrFail();
 
-        $candidate->indexStates()->orderByDesc('changed_at')->orderByDesc('updated_at')->firstOrFail()->update([
+        $candidate->indexStates()->orderByDesc('changed_at')->orderByDesc('updated_at')->orderByDesc('id')->firstOrFail()->update([
             'index_state' => 'promotion_candidate',
             'index_eligible' => false,
             'reason_codes' => ['career_index_lifecycle_promotion_candidate', 'debug_candidate_tag'],
         ]);
 
-        $demoted->trustManifests()->orderByDesc('reviewed_at')->orderByDesc('created_at')->firstOrFail()->update([
+        $demoted->trustManifests()->orderByDesc('reviewed_at')->orderByDesc('created_at')->orderByDesc('id')->firstOrFail()->update([
             'reviewer_status' => 'changes_required',
         ]);
-        $demoted->indexStates()->orderByDesc('changed_at')->orderByDesc('updated_at')->firstOrFail()->update([
+        $demoted->indexStates()->orderByDesc('changed_at')->orderByDesc('updated_at')->orderByDesc('id')->firstOrFail()->update([
             'index_state' => 'demoted',
             'index_eligible' => false,
             'reason_codes' => ['career_index_lifecycle_demoted', 'career_index_lifecycle_regressed'],
