@@ -16,7 +16,7 @@ final class EnneagramRegistryOpsPreviewTest extends TestCase
         $preview = $service->preview();
 
         $this->assertSame(9, (int) data_get($preview, 'coverage.type_count'));
-        $this->assertSame(15, (int) data_get($preview, 'coverage.p0_pair_coverage_count'));
+        $this->assertSame(36, (int) data_get($preview, 'coverage.p0_pair_coverage_count'));
         $this->assertSame(7, (int) data_get($preview, 'coverage.observation_day_coverage'));
         $this->assertSame(3, (int) data_get($preview, 'coverage.sample_report_count'));
         $this->assertGreaterThanOrEqual(13, (int) data_get($preview, 'coverage.technical_note_sections_count'));
