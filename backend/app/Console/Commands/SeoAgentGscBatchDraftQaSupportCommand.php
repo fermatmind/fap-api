@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Domain\GreenfieldBaseline\GreenfieldBaselineJson;
 use App\Models\Article;
 use App\Models\ArticleRevision;
 use Illuminate\Support\Carbon;
@@ -303,7 +304,7 @@ final class SeoAgentGscBatchDraftQaSupportCommand extends RetiredSeoAgentCommand
 
     private function canonical(mixed $value): string
     {
-        return json_encode($value, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRESERVE_ZERO_FRACTION) ?: '';
+        return json_encode(GreenfieldBaselineJson::normalize($value), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRESERVE_ZERO_FRACTION) ?: '';
     }
 
     private function readablePath(string $rawPath): ?string
