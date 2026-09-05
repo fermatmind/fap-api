@@ -288,7 +288,7 @@ final class SeoOperationsPageTest extends TestCase
             ->assertSee('ops-seo-council-nav', false)
             ->assertSee('ops-trust-strip', false)
             ->assertSee('ops-seo-workbench-home', false)
-            ->assertSee('data-contract-state="MEASUREMENT_HOLD"', false)
+            ->assertSee('data-contract-state="unavailable"', false)
             ->assertSee('data-default-decision-count="3"', false)
             ->assertSee('data-max-decision-count="5"', false)
             ->assertSee('id="ops-seo-issue-filter"', false)

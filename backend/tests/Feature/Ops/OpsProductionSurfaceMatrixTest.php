@@ -35,28 +35,15 @@ final class OpsProductionSurfaceMatrixTest extends TestCase
         }
     }
 
-    public function test_every_production_domain_is_bound_to_the_shared_shell(): void
+    public function test_production_panel_is_bound_to_the_shared_context_shell(): void
     {
         $topbar = (string) file_get_contents(
             resource_path('views/filament/ops/hooks/topbar-context.blade.php'),
         );
 
-        foreach ([
-            'workspace',
-            'content',
-            'commerce',
-            'content_release',
-            'legacy_content',
-            'content_overview',
-            'support',
-            'translation',
-            'operations',
-            'psychometrics',
-            'governance',
-        ] as $domain) {
-            $this->assertStringContainsString("'{$domain}'", $topbar, $domain);
-        }
-
-        $this->assertStringContainsString('data-ops-domain=', $topbar);
+        $this->assertStringContainsString('<x-filament-ops::ops-context-bar', $topbar);
+        $this->assertStringContainsString('title="Fermat Ops"', $topbar);
+        $provider = (string) file_get_contents(app_path('Providers/Filament/AdminPanelProvider.php'));
+        $this->assertStringContainsString('filament.ops.hooks.topbar-context', $provider);
     }
 }

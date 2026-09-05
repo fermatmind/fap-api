@@ -258,19 +258,19 @@ final class OpsCmsResourceI18nTest extends TestCase
 
         $role = Role::query()->create([
             'name' => 'ops_i18n_role_'.Str::lower(Str::random(8)),
-            'guard_name' => (string) config('admin.guard', 'admin'),
         ]);
 
         foreach ($permissions as $permissionName) {
             $permission = Permission::query()->firstOrCreate(
                 ['name' => $permissionName],
-                ['guard_name' => (string) config('admin.guard', 'admin')]
+                []
             );
 
             $role->permissions()->syncWithoutDetaching([$permission->id]);
         }
 
         $admin->roles()->syncWithoutDetaching([$role->id]);
+        config(['review_governance.solo_owner_admin_user_id' => $admin->id]);
 
         return $admin;
     }

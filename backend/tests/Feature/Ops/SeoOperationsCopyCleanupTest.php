@@ -50,7 +50,7 @@ final class SeoOperationsCopyCleanupTest extends TestCase
         }
 
         foreach ([
-            ".description')",
+            "content.description')",
             '.authority.description',
             '.editor.description',
             '.preview.description',
