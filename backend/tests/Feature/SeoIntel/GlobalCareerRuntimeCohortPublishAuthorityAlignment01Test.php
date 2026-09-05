@@ -11,12 +11,20 @@ use App\Models\Occupation;
 use App\Models\OccupationFamily;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\Concerns\UsesCareerDetailCacheFixture;
 use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
 
 final class GlobalCareerRuntimeCohortPublishAuthorityAlignment01Test extends TestCase
 {
     use RefreshDatabase;
+    use UsesCareerDetailCacheFixture;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->installCareerDetailCacheFixture();
+    }
 
     public function test_runtime_detail_and_seo_authority_are_aligned_for_public_en_and_zh_routes(): void
     {
@@ -109,6 +117,7 @@ final class GlobalCareerRuntimeCohortPublishAuthorityAlignment01Test extends Tes
             foreach (['en', 'zh'] as $locale) {
                 $items[$normalizedSlug.'|'.$locale] = [
                     'slug' => $normalizedSlug,
+                    'public_resolution_type' => 'public_canonical_job',
                     'locale' => $locale,
                     'dataset_visible' => $enabled,
                     'search_visible' => $enabled,
@@ -144,7 +153,7 @@ final class GlobalCareerRuntimeCohortPublishAuthorityAlignment01Test extends Tes
             'title_zh' => '运行时职业族',
         ]);
 
-        return Occupation::query()->create([
+        $occupation = Occupation::query()->create([
             'family_id' => $family->id,
             'canonical_slug' => $slug,
             'entity_level' => 'market_child',
@@ -162,6 +171,18 @@ final class GlobalCareerRuntimeCohortPublishAuthorityAlignment01Test extends Tes
             'skill_gap_threshold' => null,
             'trust_inheritance_scope' => [],
         ]);
+        \App\Models\CareerJobDisplayAsset::query()->create([
+            'occupation_id' => $occupation->id, 'canonical_slug' => $slug,
+            'surface_version' => 'display.surface.v1', 'asset_version' => 'test-v1',
+            'template_version' => 'v4.2', 'asset_type' => 'career_job_public_display',
+            'asset_role' => 'formal_pilot_master', 'status' => 'ready_for_pilot',
+            'component_order_json' => ['hero'],
+            'page_payload_json' => ['page' => ['en' => ['hero' => ['title' => 'Runtime Aligned Job']], 'zh' => ['hero' => ['title' => '运行时对齐职业']]]],
+            'seo_payload_json' => [], 'sources_json' => [], 'structured_data_json' => [],
+            'implementation_contract_json' => [], 'metadata_json' => [],
+        ]);
+
+        return $occupation;
     }
 
     private function createPublishedDocxCareerJob(string $slug): CareerJob
