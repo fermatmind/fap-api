@@ -1428,6 +1428,7 @@ return [
             'content_unproven' => '统一 CMS 编辑合同尚未获得生产证明；在 read model 与策略门禁可用前，继续使用现有 CMS Resource。',
             'states' => [
                 'production_healthy' => ['label' => '生产健康', 'description' => '当前生产证据可用。'],
+                'production_proven' => ['label' => '生产已验证', 'description' => '当前生产证据已验证此能力。'],
                 'production_unproven' => ['label' => '待证明', 'description' => '生产证据不完整，禁止扩量和高风险动作。'],
                 'production_degraded' => ['label' => '生产降级', 'description' => '使用最近健康证据并检查根因。'],
                 'deployed_disabled' => ['label' => '已部署未启用', 'description' => '能力已部署但尚未启用。'],

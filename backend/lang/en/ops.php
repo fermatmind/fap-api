@@ -1428,6 +1428,7 @@ return [
             'content_unproven' => 'The unified CMS editor contract is not proven in production. Continue using the existing CMS resources until its read model and policy gates are available.',
             'states' => [
                 'production_healthy' => ['label' => 'Production healthy', 'description' => 'Current production evidence is available.'],
+                'production_proven' => ['label' => 'Production proven', 'description' => 'Current production evidence verifies this capability.'],
                 'production_unproven' => ['label' => 'Awaiting proof', 'description' => 'Production evidence is incomplete; expansion and high-risk actions remain blocked.'],
                 'production_degraded' => ['label' => 'Production degraded', 'description' => 'Use the last known good evidence and inspect the root cause.'],
                 'deployed_disabled' => ['label' => 'Deployed, disabled', 'description' => 'The capability is deployed but not enabled.'],
