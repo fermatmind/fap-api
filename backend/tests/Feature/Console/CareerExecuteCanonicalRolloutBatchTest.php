@@ -15,11 +15,13 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
+use Tests\Concerns\UsesCareerDetailCacheFixture;
 use Tests\TestCase;
 
 final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
 {
     use RefreshDatabase;
+    use UsesCareerDetailCacheFixture;
 
     private string $tmpProjectionPath;
 
@@ -28,6 +30,7 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $this->installCareerDetailCacheFixture();
         $this->tmpProjectionPath = sys_get_temp_dir().'/test-projection-'.uniqid().'.json';
 
         $family = OccupationFamily::query()->create([
@@ -37,7 +40,7 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         ]);
 
         foreach (['actuaries', 'economists', 'financial-analysts', 'web-developers', 'software-developers', 'cn-engineers'] as $slug) {
-            Occupation::query()->create([
+            $occupation = Occupation::query()->create([
                 'family_id' => $family->id,
                 'canonical_slug' => $slug,
                 'entity_level' => 'market_child',
@@ -45,8 +48,18 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
                 'display_market' => 'US',
                 'crosswalk_mode' => 'global_standard',
                 'canonical_title_en' => ucfirst(str_replace('-', ' ', $slug)),
-                'canonical_title_zh' => $slug,
-                'search_h1_zh' => $slug,
+                'canonical_title_zh' => '测试职业',
+                'search_h1_zh' => '测试职业',
+            ]);
+            \App\Models\CareerJobDisplayAsset::query()->create([
+                'occupation_id' => $occupation->id, 'canonical_slug' => $slug,
+                'surface_version' => 'display.surface.v1', 'asset_version' => 'test-v1',
+                'template_version' => 'v4.2', 'asset_type' => 'career_job_public_display',
+                'asset_role' => 'formal_pilot_master', 'status' => 'ready_for_pilot',
+                'component_order_json' => ['hero'],
+                'page_payload_json' => ['page' => ['en' => ['hero' => ['title' => $slug]], 'zh' => ['hero' => ['title' => '测试职业']]]],
+                'seo_payload_json' => [], 'sources_json' => [], 'structured_data_json' => [],
+                'implementation_contract_json' => [], 'metadata_json' => [],
             ]);
         }
     }
@@ -311,13 +324,11 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $candidateProjection = $this->candidateProjection(['actuaries']);
         $this->writeProjection($candidateProjection);
         $this->writeMaterializedProjection($candidateProjection);
-        $this->assertSame(
-            CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE,
-            app(CareerRuntimePublishProjectionVisibility::class)->itemForSlug('actuaries', 'en')['runtime_publish_state'] ?? null,
-        );
+        $this->assertNull(app(CareerRuntimePublishProjectionVisibility::class)->itemForSlug('actuaries', 'en'));
         $cache = app(PublicCareerAuthorityResponseCache::class);
         $this->assertFalse($cache->jobDetailCacheIsReady('actuaries', 'en'));
         $this->assertFalse($cache->jobDetailCacheIsReady('actuaries', 'zh'));
+        $cache->warmDirectoryReadModels(['en'], activateJobIndexPayloads: true);
         $this->assertNotContains(
             'actuaries',
             array_map(
@@ -344,7 +355,7 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertCount(2, data_get($payload, 'cache_preparation.entries'));
         $this->assertSame('pass', data_get($payload, 'detail_cache_activation.status'));
         $this->assertTrue($cache->jobDetailCacheIsReady('actuaries', 'en'));
-        $this->assertTrue($cache->jobDetailCacheIsReady('actuaries', 'zh'));
+        $this->assertTrue($cache->jobDetailCacheIsReady('actuaries', 'zh'), json_encode(array_diff_key($cache->jobDetailCacheReadiness('actuaries', 'zh'), ['payload' => true]), JSON_THROW_ON_ERROR));
         $cachedPayload = $cache->jobDetailCacheReadiness('actuaries', 'en')['payload'];
         $this->assertTrue(
             (bool) data_get($cachedPayload, 'seo_contract.index_eligible'),
@@ -437,9 +448,9 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertIsArray($publishedEn);
 
         $cache = app(PublicCareerAuthorityResponseCache::class);
-        $oldVersion = $cache->publishJobDetailReadModel('actuaries', 'en', ['fixture' => 'old']);
+        $oldVersion = $cache->publishJobDetailReadModel('actuaries', 'en', $this->detailCacheFixture(['fixture' => 'old'], 'actuaries', 'en'));
         Cache::forever($cache->jobDetailNegativeKey('actuaries', 'en'), ['fixture' => 'negative']);
-        Cache::forever($cache->jobDetailCacheKey('actuaries', 'en'), ['fixture' => 'legacy']);
+        Cache::forever($cache->jobDetailCacheKey('actuaries', 'en'), $this->detailCacheFixture(['fixture' => 'legacy'], 'actuaries', 'en'));
         $prepared = $cache->prepareJobDetailPayloadForExposure('actuaries', 'en', $publishedEn);
 
         $activation = $cache->activatePreparedJobDetailPayloadsForExposure([$prepared], true);
@@ -454,7 +465,7 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
 
         $this->assertSame($oldVersion, Cache::get($cache->jobDetailActiveVersionKey('actuaries', 'en')));
         $this->assertSame(['fixture' => 'negative'], Cache::get($cache->jobDetailNegativeKey('actuaries', 'en')));
-        $this->assertSame(['fixture' => 'legacy'], Cache::get($cache->jobDetailCacheKey('actuaries', 'en')));
+        $this->assertSame($this->detailCacheFixture(['fixture' => 'legacy'], 'actuaries', 'en'), Cache::get($cache->jobDetailCacheKey('actuaries', 'en')));
         $this->assertNull($cache->preparedJobDetailReplacementPayload($prepared));
     }
 
@@ -466,10 +477,10 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertIsArray($publishedEn);
 
         $cache = app(PublicCareerAuthorityResponseCache::class);
-        $cache->publishJobDetailReadModel('actuaries', 'en', ['fixture' => 'old']);
+        $cache->publishJobDetailReadModel('actuaries', 'en', $this->detailCacheFixture(['fixture' => 'old'], 'actuaries', 'en'));
         $prepared = $cache->prepareJobDetailPayloadForExposure('actuaries', 'en', $publishedEn);
         $activation = $cache->activatePreparedJobDetailPayloadsForExposure([$prepared], true);
-        $newerVersion = $cache->publishJobDetailReadModel('actuaries', 'en', ['fixture' => 'newer']);
+        $newerVersion = $cache->publishJobDetailReadModel('actuaries', 'en', $this->detailCacheFixture(['fixture' => 'newer'], 'actuaries', 'en'));
 
         try {
             $cache->restorePreparedJobDetailExposurePointers([$prepared], $activation['rollback_snapshots']);
@@ -505,14 +516,14 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertSame('not_found', $cache->jobDetailRead('actuaries', 'en')['state']);
 
         Cache::forget($lkgKey);
-        Cache::forever($cache->jobDetailCacheKey('actuaries', 'en'), ['fixture' => 'legacy']);
+        Cache::forever($cache->jobDetailCacheKey('actuaries', 'en'), $this->detailCacheFixture(['fixture' => 'legacy'], 'actuaries', 'en'));
 
         $this->assertSame('legacy_migratable', $cache->jobDetailCacheReadiness('actuaries', 'en')['classification']);
         $this->assertFalse($cache->jobDetailCacheIsReady('actuaries', 'en'));
         $this->assertSame('not_found', $cache->jobDetailRead('actuaries', 'en')['state']);
     }
 
-    public function test_apply_reports_committed_write_as_not_rolled_back_when_remediation_is_unverified(): void
+    public function test_apply_rolls_back_database_when_failed_snapshot_cleanup_is_unreachable_after_pointer_restore(): void
     {
         $candidateProjection = $this->candidateProjection(['actuaries']);
         $this->writeProjection($candidateProjection);
@@ -571,13 +582,15 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
 
         $this->assertSame(1, $exitCode);
         $this->assertIsArray($payload);
-        $this->assertSame('rollback_write_not_persisted', $payload['status'] ?? null);
+        $this->assertSame('failed_and_rolled_back', $payload['status'] ?? null, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertTrue($payload['writes_database'] ?? false);
         $this->assertTrue($payload['database_commit_succeeded'] ?? false);
-        $this->assertFalse($payload['promotion_rolled_back'] ?? true);
-        $this->assertTrue($payload['rollback_required'] ?? false);
-        $this->assertFalse(data_get($payload, 'remediation.succeeded', true));
-        $this->assertSame('rollback_not_persisted', data_get($payload, 'remediation.status'));
+        $this->assertTrue($payload['promotion_rolled_back'] ?? false);
+        $this->assertFalse($payload['rollback_required'] ?? true);
+        $this->assertTrue(data_get($payload, 'remediation.succeeded', false));
+        $this->assertSame('rolled_back_to_candidate', data_get($payload, 'remediation.status'));
+        self::assertNull(Cache::get($cache->jobDetailActiveVersionKey('actuaries', 'en')));
+        self::assertNull(Cache::get($zhActiveKey));
         $this->assertGreaterThan(0, $snapshotCleanupAttempts);
         $this->assertContains(
             'post_promotion_exposure_snapshot_cleanup_failed',
@@ -690,8 +703,8 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
     {
         $publishedProjection = $this->publishedProjection(['actuaries']);
         $cache = app(PublicCareerAuthorityResponseCache::class);
-        $oldEnVersion = $cache->publishJobDetailReadModel('actuaries', 'en', ['fixture' => 'old-en']);
-        $oldZhVersion = $cache->publishJobDetailReadModel('actuaries', 'zh', ['fixture' => 'old-zh']);
+        $oldEnVersion = $cache->publishJobDetailReadModel('actuaries', 'en', $this->detailCacheFixture(['fixture' => 'old-en'], 'actuaries', 'en'));
+        $oldZhVersion = $cache->publishJobDetailReadModel('actuaries', 'zh', $this->detailCacheFixture(['fixture' => 'old-zh'], 'actuaries', 'zh'));
         $prepared = collect($publishedProjection['items'])
             ->map(fn (array $item): array => $cache->prepareJobDetailPayloadForExposure(
                 'actuaries',
