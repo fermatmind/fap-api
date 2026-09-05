@@ -43,6 +43,8 @@ final class SeoConversionFunnelOpsReadoutTest extends TestCase
             'return_public_content_count' => 1,
         ]);
 
+        $this->recordSuccessfulRefresh();
+
         $this->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->getJson('/api/v0.5/ops/seo-intel/conversion-funnel?group_by=url')
             ->assertOk()
@@ -110,6 +112,8 @@ final class SeoConversionFunnelOpsReadoutTest extends TestCase
             'view_result_count' => 9,
         ]);
 
+        $this->recordSuccessfulRefresh();
+
         $response = $this->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->getJson('/api/v0.5/ops/seo-intel/conversion-funnel?group_by=url')
             ->assertOk()
@@ -173,6 +177,8 @@ final class SeoConversionFunnelOpsReadoutTest extends TestCase
             'landing_pv_count' => 9,
         ]);
 
+        $this->recordSuccessfulRefresh();
+
         foreach (['article', 'test', 'url'] as $groupBy) {
             $response = $this->withSession(['ops_org_id' => 41])
                 ->actingAs($admin, (string) config('admin.guard', 'admin'))
@@ -219,24 +225,7 @@ final class SeoConversionFunnelOpsReadoutTest extends TestCase
     public function fresh_zero_event_receipt_exposes_real_zero_metrics_without_synthetic_rows(): void
     {
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_SEO_INTEL_READ]);
-        $now = now();
-        DB::table('analytics_seo_conversion_refresh_runs')->insert([
-            'run_uid' => (string) Str::uuid(),
-            'trigger_mode' => 'scheduled',
-            'status' => 'success',
-            'from_date' => $now->toDateString(),
-            'to_date' => $now->toDateString(),
-            'org_scope_count' => 0,
-            'attempted_rows' => 0,
-            'skipped_rows' => 0,
-            'deleted_rows' => 0,
-            'upserted_rows' => 0,
-            'receipt_json' => '{}',
-            'started_at' => $now,
-            'completed_at' => $now,
-            'created_at' => $now,
-            'updated_at' => $now,
-        ]);
+        $this->recordSuccessfulRefresh();
 
         $this->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->getJson('/api/v0.5/ops/seo-intel/conversion-funnel')
@@ -265,6 +254,28 @@ final class SeoConversionFunnelOpsReadoutTest extends TestCase
         $this->assertSame('success', data_get($read, 'freshness.latest_attempt_status'));
         $this->assertSame(0, data_get($read, 'totals.landing_pv_count'));
         $this->assertSame([], $read['recent_rows']);
+    }
+
+    private function recordSuccessfulRefresh(): void
+    {
+        $now = now();
+        DB::table('analytics_seo_conversion_refresh_runs')->insert([
+            'run_uid' => (string) Str::uuid(),
+            'trigger_mode' => 'scheduled',
+            'status' => 'success',
+            'from_date' => $now->toDateString(),
+            'to_date' => $now->toDateString(),
+            'org_scope_count' => 0,
+            'attempted_rows' => DB::table('analytics_seo_conversion_daily')->count(),
+            'skipped_rows' => 0,
+            'deleted_rows' => 0,
+            'upserted_rows' => DB::table('analytics_seo_conversion_daily')->count(),
+            'receipt_json' => '{}',
+            'started_at' => $now,
+            'completed_at' => $now,
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
     }
 
     /**
