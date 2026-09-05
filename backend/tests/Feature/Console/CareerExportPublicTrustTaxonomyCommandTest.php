@@ -25,7 +25,6 @@ final class CareerExportPublicTrustTaxonomyCommandTest extends TestCase
         $this->insertAlias($betaId, $familyId, 'beta career', 'beta-career');
         $this->insertIndexState($alphaId, true);
         $this->insertIndexState($betaId, true);
-        $this->insertDisplayAsset($alphaId, 'alpha-career', 'draft-v2', 'draft', '2026-05-18 02:00:00');
         $this->insertDisplayAsset($alphaId, 'alpha-career', 'public-v1', 'ready_for_pilot', '2026-05-18 01:00:00');
         $this->insertDisplayAsset($betaId, 'beta-career', 'public-v1', 'ready_for_pilot', '2026-05-18 01:00:00');
 
@@ -53,8 +52,17 @@ final class CareerExportPublicTrustTaxonomyCommandTest extends TestCase
 
         $canonicalAlpha = $this->firstItemBySlug($artifact['items'], 'alpha-career');
         $this->assertSame('ready_for_pilot', $canonicalAlpha['routeEvidence']['display_asset_status']);
-        $this->assertSame('public-v1', $canonicalAlpha['routeEvidence']['asset_version']);
+        $this->assertArrayNotHasKey('asset_version', $canonicalAlpha['routeEvidence']);
         $this->assertTrue((bool) $canonicalAlpha['publicRouteAvailable']);
+    }
+
+    public function test_duplicate_canonical_display_assets_are_rejected_by_the_real_schema(): void
+    {
+        $familyId = (string) Str::uuid();
+        $id = $this->insertOccupation($familyId, 'duplicate-career');
+        $this->insertDisplayAsset($id, 'duplicate-career', 'public-v1', 'ready_for_pilot', '2026-05-18 01:00:00');
+        $this->expectException(\Illuminate\Database\UniqueConstraintViolationException::class);
+        $this->insertDisplayAsset($id, 'duplicate-career', 'draft-v2', 'draft', '2026-05-18 02:00:00');
     }
 
     private function insertOccupation(string $familyId, string $slug): string
