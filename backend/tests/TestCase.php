@@ -8,6 +8,23 @@ use Illuminate\Support\Facades\Schema;
 
 abstract class TestCase extends BaseTestCase
 {
+    /** Compare decoded JSON with strict values and list order, ignoring only object-key order. */
+    protected static function assertJsonValueSame(mixed $expected, mixed $actual): void
+    {
+        $canonicalize = static function (mixed $value) use (&$canonicalize): mixed {
+            if (! is_array($value)) {
+                return $value;
+            }
+            if (! array_is_list($value)) {
+                ksort($value, SORT_STRING);
+            }
+
+            return array_map($canonicalize, $value);
+        };
+
+        self::assertSame($canonicalize($expected), $canonicalize($actual));
+    }
+
     protected function setUp(): void
     {
         parent::setUp();

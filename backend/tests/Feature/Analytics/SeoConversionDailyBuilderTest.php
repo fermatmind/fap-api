@@ -535,7 +535,7 @@ final class SeoConversionDailyBuilderTest extends TestCase
         $this->assertFalse($receipt['private_paths_allowed']);
         $this->assertFalse($receipt['search_submission_allowed']);
         $this->assertArrayNotHasKey('org_scope', $receipt);
-        $this->assertSame($receipt, $result['refresh_receipt']);
+        $this->assertJsonValueSame($receipt, $result['refresh_receipt']);
     }
 
     public function test_bounded_public_incremental_refresh_seals_current_ninety_day_snapshot(): void

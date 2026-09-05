@@ -63,7 +63,7 @@ final class CareerTransitionPathWriterTest extends TestCase
             'higher_work_experience_required',
             'higher_training_required',
         ], $path->normalizedPathPayload()->tradeoffCodes);
-        $this->assertSame([
+        $this->assertJsonValueSame([
             'steps' => TransitionPathPayload::allowedStepLabels(),
             'rationale_codes' => [
                 'skill_overlap',

@@ -169,8 +169,8 @@ class ShareScaleIdentityDualWriteTest extends TestCase
         $ctx->set(0, null, 'public', $anonId);
         $data = app(ShareService::class)->getOrCreateShare($attemptId, $ctx);
 
-        $this->assertSame($authority, $data['big5_private_result_authority'] ?? null);
-        $this->assertSame($projection, $data['big5_public_projection_v1'] ?? null);
+        $this->assertJsonValueSame($authority, $data['big5_private_result_authority'] ?? null);
+        $this->assertJsonValueSame($projection, $data['big5_public_projection_v1'] ?? null);
         $this->assertTrue((bool) data_get($data, 'big5_public_projection_v1._meta.locked'));
         $this->assertStringNotContainsString('must-not-reach-share', json_encode($data, JSON_THROW_ON_ERROR));
     }

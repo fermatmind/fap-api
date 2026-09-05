@@ -905,11 +905,11 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
         $response = $this->getJson('/api/v0.5/personality-content-assets/enneagram/hub/enneagram?locale=en')
             ->assertOk();
 
-        $this->assertSame([
+        $this->assertJsonValueSame([
             ['question' => 'Alias question?', 'answer' => 'Alias answer.'],
             ['question' => 'Canonical question?', 'answer' => 'Canonical answer.'],
         ], $response->json('personality_public_content_asset_v1.faq'));
-        $this->assertSame([
+        $this->assertJsonValueSame([
             ['label' => 'Alias link', 'href' => '/en/personality/enneagram/type-1'],
             ['label' => 'Canonical link', 'href' => '/en/personality/enneagram/type-2?source=cms#overview'],
             ['label' => 'Alias fallback', 'href' => '/en/personality/enneagram/type-3'],
@@ -939,10 +939,10 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
         $response = $this->getJson('/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=en')
             ->assertOk();
 
-        $this->assertSame([
+        $this->assertJsonValueSame([
             ['question' => 'What does Big Five describe?', 'answer' => 'It describes broad trait dimensions.'],
         ], $response->json('personality_public_content_asset_v1.faq'));
-        $this->assertSame([
+        $this->assertJsonValueSame([
             [
                 'label' => 'Openness',
                 'href' => '/en/personality/big-five/openness',

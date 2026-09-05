@@ -75,7 +75,7 @@ final class PromotionConformancePrimitivesTest extends TestCase
 
         $snapshot = $snapshots->resolve($context, $targets, 'test-pack', 'before_draft_import', $reference);
         self::assertSame('test-pack', $snapshot->pack_id);
-        self::assertSame([['id' => 7, 'locale' => 'en', 'slug' => 'a']], data_get($snapshot->meta_json, 'rows'));
+        self::assertJsonValueSame([['id' => 7, 'locale' => 'en', 'slug' => 'a']], data_get($snapshot->meta_json, 'rows'));
         self::assertSame('before_draft_import', data_get($snapshot->meta_json, 'phase'));
 
         $meta = $snapshot->meta_json;

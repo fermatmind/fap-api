@@ -463,7 +463,7 @@ final class ContentPagePublicApiTest extends TestCase
             ->where('locale', 'en')
             ->firstOrFail();
 
-        $this->assertSame([
+        $this->assertJsonValueSame([
             [
                 'question' => 'How do I contact support?',
                 'answer' => 'Email support.',

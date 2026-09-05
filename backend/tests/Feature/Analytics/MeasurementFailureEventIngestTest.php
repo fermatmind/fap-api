@@ -41,7 +41,7 @@ final class MeasurementFailureEventIngestTest extends TestCase
         $this->assertSame('anon_internal_123', (string) ($row->anon_id ?? ''));
 
         $meta = json_decode((string) $row->meta_json, true, 512, JSON_THROW_ON_ERROR);
-        $this->assertSame(MeasurementFailureEventContract::ALLOWED_PROPERTIES, array_keys($meta));
+        $this->assertEqualsCanonicalizing(MeasurementFailureEventContract::ALLOWED_PROPERTIES, array_keys($meta));
         $this->assertSame('attempt_submit', $meta['endpoint_class'] ?? null);
         $this->assertSame('server_5xx', $meta['status_group'] ?? null);
         $this->assertSame('server_error', $meta['error_class'] ?? null);

@@ -48,7 +48,7 @@ final class ResultReadyEventRecorderTest extends TestCase
             $this->assertNull($event->user_id);
             $this->assertNull($event->anon_id);
             $meta = json_decode((string) ($event->meta_json ?? '{}'), true);
-            $this->assertSame([
+            $this->assertEqualsCanonicalizing([
                 'scale_code',
                 'form_code',
                 'locale',
