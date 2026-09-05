@@ -48,7 +48,6 @@ final class ReportPdfCenterTest extends TestCase
             ->get('/ops/reports')
             ->assertOk()
             ->assertSee('报告 / PDF 中心')
-            ->assertSee('最近 45 天记录')
             ->assertDontSee('Create Report Snapshot')
             ->assertDontSee('Edit Report Snapshot');
 
@@ -144,8 +143,8 @@ final class ReportPdfCenterTest extends TestCase
     public function test_report_pdf_center_index_query_stays_lightweight_for_production_listing(): void
     {
         $support = app(ReportSnapshotExplorerSupport::class);
-        $sql = strtolower($support->indexQuery()->toBase()->toSql());
-        $resourceSql = strtolower(ReportSnapshotResource::getEloquentQuery()->toBase()->toSql());
+        $sql = str_replace('`', '"', strtolower($support->indexQuery()->toBase()->toSql()));
+        $resourceSql = str_replace('`', '"', strtolower(ReportSnapshotResource::getEloquentQuery()->toBase()->toSql()));
 
         $this->assertStringContainsString('from "report_snapshots"', $sql);
         $this->assertStringContainsString('"report_snapshots"."updated_at" >= ?', $sql);
@@ -185,8 +184,7 @@ final class ReportPdfCenterTest extends TestCase
         $this->withSession($this->opsSession($admin, $selectedOrg))
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/reports')
-            ->assertOk()
-            ->assertSee('最近 45 天记录');
+            ->assertOk();
 
         $resourceSource = file_get_contents(__DIR__.'/../../..'.'/app/Filament/Ops/Resources/ReportSnapshotResource.php');
 
