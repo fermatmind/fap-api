@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Domain\Career\Compilation\CareerContentV3Projector;
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\IndexStateValue;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
@@ -22,6 +24,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Tests\Fixtures\Career\CareerFoundationFixture;
 use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
+use Tests\Support\DynamicCareerContentV3CanonicalReader;
 use Tests\TestCase;
 
 final class CareerJobDetailApiTest extends TestCase
@@ -33,6 +36,11 @@ final class CareerJobDetailApiTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->app->instance(
+            CareerContentV3CanonicalReader::class,
+            new DynamicCareerContentV3CanonicalReader(app(CareerContentV3Projector::class)),
+        );
 
         $this->app->instance(
             CareerRuntimePublishProjectionVisibility::class,
@@ -145,6 +153,7 @@ final class CareerJobDetailApiTest extends TestCase
                 'bundle_kind' => 'career_job_detail',
                 'identity' => ['canonical_slug' => 'cached-career-detail'],
                 'titles' => ['canonical_en' => 'Cached Career Detail'],
+                'display_surface_v1' => ['page' => ['locale' => 'en', 'content' => ['hero' => ['title' => 'Cached Career Detail']]]],
                 'trust_manifest' => [
                     'reviewer_status' => 'approved',
                     'reviewed_at' => '2026-07-18T00:00:00Z',

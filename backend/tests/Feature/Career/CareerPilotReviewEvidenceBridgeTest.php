@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Domain\Career\Compilation\CareerContentV3Projector;
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Jobs\Career\WarmCareerJobDetailProjection;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
@@ -14,6 +16,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Queue;
 use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
+use Tests\Support\DynamicCareerContentV3CanonicalReader;
 use Tests\TestCase;
 
 final class CareerPilotReviewEvidenceBridgeTest extends TestCase
@@ -26,6 +29,10 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
     {
         parent::setUp();
 
+        $this->app->instance(
+            CareerContentV3CanonicalReader::class,
+            new DynamicCareerContentV3CanonicalReader(app(CareerContentV3Projector::class)),
+        );
         config()->set('review_governance.mode', 'solo_owner');
         config()->set('review_governance.solo_owner_admin_user_id', 1);
         $this->app->instance(
@@ -473,7 +480,7 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
             ],
             'structured_data' => ['occupation' => ['@type' => 'Occupation']],
             'display_surface_v1' => [
-                'page' => ['locale' => $locale],
+                'page' => ['locale' => $locale, 'content' => ['hero' => ['title' => 'Reviewed Pilot Career', 'quick_answer' => $content]]],
             ],
         ];
     }
@@ -493,6 +500,7 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
                     'reviewer' => null,
                 ],
                 'seo_contract' => [
+                    'canonical_path' => '/career/jobs/'.self::SLUG,
                     'robots_policy' => 'index,follow',
                     'index_eligible' => true,
                 ],
