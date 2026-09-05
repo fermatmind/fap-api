@@ -33,7 +33,7 @@ final class ScaleRegistrySeeder extends Seeder
 
         $writer = app(ScaleRegistryWriter::class);
 
-        $scale = $writer->upsertScale([
+        $scale = $this->upsertMbtiPreservingPublishedContent($writer, [
             'code' => 'MBTI',
             'org_id' => 0,
             'primary_slug' => 'mbti-personality-test-16-personality-types',
@@ -738,6 +738,29 @@ final class ScaleRegistrySeeder extends Seeder
 
         $writer->syncSlugsForScale($eq60);
         $this->command?->info('ScaleRegistrySeeder: EQ_60 scale upserted.');
+    }
+
+    private function upsertMbtiPreservingPublishedContent(ScaleRegistryWriter $writer, array $attributes): \App\Models\ScaleRegistry
+    {
+        return DB::transaction(function () use ($writer, $attributes) {
+            $published = [];
+            foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+                if (! Schema::hasTable($table)) {
+                    continue;
+                }
+                $row = DB::table($table)->where('org_id', 0)->where('code', 'MBTI')->lockForUpdate()->first();
+                $content = json_decode($row->content_i18n_json ?? '{}', true, 512, JSON_THROW_ON_ERROR);
+                if (isset($content['zh']['why_choose'])) {
+                    $published[$table] = $row->content_i18n_json;
+                }
+            }
+            $scale = $writer->upsertScale($attributes);
+            foreach ($published as $table => $content) {
+                DB::table($table)->where('org_id', 0)->where('code', 'MBTI')->update(['content_i18n_json' => $content]);
+            }
+
+            return $scale;
+        });
     }
 
     /**

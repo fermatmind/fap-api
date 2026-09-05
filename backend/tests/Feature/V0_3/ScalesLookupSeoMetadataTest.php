@@ -40,37 +40,40 @@ final class ScalesLookupSeoMetadataTest extends TestCase
         $faq = $response->json('content_i18n_json.zh.faq');
 
         $this->assertIsArray($faq);
-        $this->assertCount(8, $faq);
-
-        $questions = array_map(static fn (array $item): string => (string) ($item['q'] ?? ''), $faq);
+        $this->assertCount(9, $faq);
         $this->assertSame([
-            'MBTI 测试免费吗？',
-            'MBTI 完整结果能看到什么？',
-            'MBTI 测试一般多久？',
-            'MBTI 能决定职业吗？',
-            'MBTI 是心理诊断吗？',
-            '16 型人格结果会变吗？',
-            'MBTI 和大五人格有什么区别？',
-            '做完 MBTI 后下一步看什么？',
-        ], $questions);
+            'faq-free', 'faq-results', 'faq-versions', 'faq-validity', 'faq-career',
+            'faq-diagnosis', 'faq-result-changes', 'faq-big-five', 'faq-next-steps',
+        ], array_column($faq, 'id'));
+        $this->assertStringContainsString('没有报告解锁费用', $faq[0]['a']);
+        $this->assertStringContainsString('题目更多不能直接证明结果更准确', $faq[2]['a']);
+        $this->assertStringContainsString('不能仅凭 MBTI 类型决定职业', $faq[4]['a']);
+        $this->assertStringContainsString('MBTI 不是心理诊断工具', $faq[5]['a']);
+        $this->assertSame([], $faq[0]['references']);
+        $this->assertNotEmpty($faq[3]['references']);
+        $this->assertCount(5, $response->json('content_i18n_json.zh.version_comparison.rows'));
 
-        $this->assertStringContainsString('不会把基础结果说明作为付费前置条件', (string) ($faq[0]['a'] ?? ''));
-        $this->assertStringContainsString('16 型人格类型', (string) ($faq[1]['a'] ?? ''));
-        $this->assertStringContainsString('不同版本题量不同', (string) ($faq[2]['a'] ?? ''));
-        $this->assertStringContainsString('不能单独决定职业选择、录用结果或发展上限', (string) ($faq[3]['a'] ?? ''));
-        $this->assertStringContainsString('不能替代心理诊断、治疗建议或医疗专业意见', (string) ($faq[4]['a'] ?? ''));
-        $this->assertStringContainsString('不是固定身份标签', (string) ($faq[5]['a'] ?? ''));
-        $this->assertStringContainsString('大五人格更像连续维度评分', (string) ($faq[6]['a'] ?? ''));
-        $this->assertStringContainsString('职业探索场景做记录', (string) ($faq[7]['a'] ?? ''));
+    }
 
-        $serializedFaq = json_encode($faq, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
-        $this->assertStringNotContainsString('真全免', $serializedFaq);
-        $this->assertStringNotContainsString('无付费墙', $serializedFaq);
-        $this->assertStringNotContainsString('拒绝强制收费', $serializedFaq);
-        $this->assertStringNotContainsString('2026专业版', $serializedFaq);
-        $this->assertStringNotContainsString('官方 MBTI', $serializedFaq);
-        $this->assertStringNotContainsString('招聘筛选', $serializedFaq);
-        $this->assertStringNotContainsString('职业保证', $serializedFaq);
+    public function test_subsequent_default_seed_preserves_published_mbti_content(): void
+    {
+        $expected = [];
+        foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+            $raw = DB::table($table)->where('org_id', 0)->where('code', 'MBTI')->value('content_i18n_json');
+            if ($raw === null) {
+                continue;
+            }
+            $content = json_decode($raw, true);
+            $content['zh']['faq'][0]['a'] = 'Reviewed CMS edit';
+            $content['en']['landing_copy'] = 'Preserve English';
+            $expected[$table] = $content;
+            DB::table($table)->where('org_id', 0)->where('code', 'MBTI')->update(['content_i18n_json' => json_encode($content)]);
+        }
+        $this->artisan('fap:scales:seed-default')->assertExitCode(0);
+        foreach ($expected as $table => $content) {
+            $actual = json_decode(DB::table($table)->where('org_id', 0)->where('code', 'MBTI')->value('content_i18n_json'), true);
+            $this->assertJsonValueSame($content, $actual);
+        }
     }
 
     public function test_big_five_lookup_keeps_form_minutes_and_zh_content_in_sync(): void
