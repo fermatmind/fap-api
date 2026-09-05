@@ -127,7 +127,7 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $this->assertSame($asset->component_order_json, $surface['component_order']);
         $this->assertSame('career.detail.content.v3', $surface['content_v3']['contract_version']);
         $this->assertSame([], $surface['page']['content']['boundary_notice']);
-        $this->assertSame(
+        $this->assertJsonValueSame(
             $asset->page_payload_json['zh']['career_quick_answers_block'],
             $surface['page']['content']['career_quick_answers_block'],
         );
@@ -196,7 +196,7 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $zh = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
         $en = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'en');
 
-        $this->assertSame($presentation, $zh['presentation_v1']);
+        $this->assertJsonValueSame($presentation, $zh['presentation_v1']);
         $this->assertArrayNotHasKey('presentation_v1', $en);
         $this->assertSame(8, data_get($zh, 'presentation_v1.hero.ai_exposure.value'));
     }
