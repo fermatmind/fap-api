@@ -29,7 +29,7 @@ return new class extends Migration
                 if (array_intersect_key($zh, $candidate) == $candidate) {
                     continue;
                 }
-                if (($zh['faq'] ?? []) != $package['expected_faq'] || isset($zh['why_choose']) || isset($zh['version_comparison'])) {
+                if ($zh != $package['expected_initial_zh'] && (($zh['faq'] ?? []) != $package['expected_faq'] || isset($zh['why_choose']) || isset($zh['version_comparison']))) {
                     throw new RuntimeException('MBTI Chinese landing content changed since review; refusing to overwrite.');
                 }
                 $content['zh'] = array_replace($zh, $candidate);

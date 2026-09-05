@@ -73,6 +73,14 @@ class MbtiLandingContentMigrationTest extends TestCase
         $this->assertArrayNotHasKey('why_choose', $content['zh']);
     }
 
+    public function test_accepts_exact_fresh_install_content(): void
+    {
+        DB::table('scales_registry')->insert(['org_id' => 0, 'code' => 'MBTI', 'content_i18n_json' => json_encode(['zh' => $this->package()['expected_initial_zh']])]);
+        $this->migrateContent();
+        $content = json_decode(DB::table('scales_registry')->value('content_i18n_json'), true);
+        $this->assertCount(9, $content['zh']['faq']);
+    }
+
     public function test_empty_registry_is_compatible_with_fresh_migrations(): void
     {
         $this->migrateContent();
