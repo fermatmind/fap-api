@@ -1276,7 +1276,8 @@ final class OrderLinkageSupport
                 }
             })
             ->orderByRaw(
-                'case when skus.org_id = orders.org_id then 0 when skus.org_id = 0 then 1 else 2 end'
+                'case when skus.org_id = ? then 0 when skus.org_id = 0 then 1 else 2 end',
+                [$this->currentOrgId()]
             )
             ->limit(1);
     }

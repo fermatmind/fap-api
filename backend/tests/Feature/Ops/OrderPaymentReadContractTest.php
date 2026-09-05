@@ -6,6 +6,7 @@ namespace Tests\Feature\Ops;
 
 use App\Filament\Ops\Resources\OrderResource\Support\OrderLinkageSupport;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Tests\Feature\Ops\Support\InteractsWithCommerceOpsWorkbench;
 use Tests\TestCase;
 
@@ -13,6 +14,30 @@ final class OrderPaymentReadContractTest extends TestCase
 {
     use InteractsWithCommerceOpsWorkbench;
     use RefreshDatabase;
+
+    public function test_expected_benefit_uses_eligible_catalog_scopes_and_preserves_tenant_isolation(): void
+    {
+        config()->set('fap.legacy_org_id', 1);
+        $chain = $this->seedCommerceOpsChain(orgId: 71);
+        $foreign = $this->seedCommerceOpsChain(orgId: 72);
+        $this->setOpsOrgContext(71);
+        $support = app(OrderLinkageSupport::class);
+        $read = fn () => $support->query()->where('orders.order_no', $chain['order_no'])->firstOrFail();
+
+        // The migrated catalog keeps sku globally unique; exercise each eligible
+        // owner independently without inventing a multi-owner production schema.
+        foreach ([71, 0, 1] as $orgId) {
+            DB::table('skus')->updateOrInsert(['sku' => 'MBTI_FULL_REPORT'], [
+                'org_id' => $orgId, 'benefit_code' => 'MBTI_FULL_REPORT', 'is_active' => true,
+                'kind' => 'report_unlock', 'scope' => 'attempt', 'scale_code' => 'MBTI',
+                'unit_qty' => 1, 'price_cents' => 2990, 'currency' => 'USD',
+            ]);
+            self::assertSame(1, (int) $read()->has_active_benefit_grant);
+            DB::table('skus')->where('sku', 'MBTI_FULL_REPORT')->update(['benefit_code' => 'OTHER_REPORT']);
+            self::assertSame(0, (int) $read()->has_active_benefit_grant);
+        }
+        self::assertNull($support->query()->where('orders.order_no', $foreign['order_no'])->first());
+    }
 
     public function test_ops_support_separates_payment_truth_from_webhook_diagnostics(): void
     {
