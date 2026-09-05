@@ -67,12 +67,12 @@ final class CareerCurrentAuthorityParityTest extends TestCase
         $workflow = (string) file_get_contents($root.'/.github/workflows/deploy.yml');
         $task = 'career:current-authority-production-preactivation-parity';
 
-        self::assertStringContainsString("after('artisan:config:cache', '".$task."')", $deploy);
+        self::assertStringContainsString("after('seo:competitive-evidence-preactivation', '".$task."')", $deploy);
         self::assertStringContainsString("after('".$task."', 'guard:sitemap-authority')", $deploy);
         self::assertStringContainsString('Career production parity failed: $safe_error_code', $deploy);
         self::assertLessThan(
-            strpos($deploy, "after('guard:no-pending-migrations', 'artisan:migrate-seo-intel')"),
-            strpos($deploy, "after('artisan:config:cache', '".$task."')"),
+            strpos($deploy, "after('career:recover-data', 'artisan:migrate-seo-intel')"),
+            strpos($deploy, "after('seo:competitive-evidence-preactivation', '".$task."')"),
         );
         self::assertStringContainsString("-o career_current_parity_required='", $workflow);
         self::assertStringNotContainsString('Run staging zero-write 2092-page Career parity', $workflow);
