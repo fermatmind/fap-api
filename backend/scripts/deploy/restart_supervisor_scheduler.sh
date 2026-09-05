@@ -168,7 +168,7 @@ legacy_cron_command=("$sudo_bin" -n /usr/bin/python3 "$legacy_cron_helper" --dep
 "${legacy_cron_command[@]}" --check || fail legacy_system_cron_preflight_failed
 begin_marker="# BEGIN fap-api managed scheduler"
 end_marker="# END fap-api managed scheduler"
-canonical_line="* * * * * $tick_wrapper --php-bin=$php_bin --backend-path=$deploy_root/current/backend >> /dev/null 2>&1"
+canonical_line="* * * * * $deploy_root/current/backend/scripts/deploy/run_scheduler_tick.sh --php-bin=$php_bin --backend-path=$deploy_root/current/backend >> /dev/null 2>&1"
 crontab_error="$(mktemp)"
 candidate="$(mktemp)"
 trap 'rm -f "$crontab_error" "$candidate" "$candidate.raw"' EXIT

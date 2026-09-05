@@ -103,6 +103,8 @@ BASH);
         $this->assertTrue($process->isSuccessful(), $process->getErrorOutput());
         $this->assertSame(1, substr_count($crontab, '# BEGIN fap-api managed scheduler'));
         $this->assertSame(1, substr_count($crontab, 'run_scheduler_tick.sh'));
+        $this->assertStringContainsString('/deploy/current/backend/scripts/deploy/run_scheduler_tick.sh', $crontab);
+        $this->assertStringNotContainsString('/releases/'.$this->revision, $crontab);
         $this->assertStringNotContainsString('artisan schedule:run', $crontab);
         $this->assertStringNotContainsString('artisan schedule:work', $crontab);
         $this->assertStringContainsString('mode=cron_schedule_run', $process->getOutput());
