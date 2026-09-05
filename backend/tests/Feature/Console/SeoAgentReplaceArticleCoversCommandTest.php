@@ -10,6 +10,7 @@ use App\Models\ArticleTranslationRevision;
 use App\Models\MediaAsset;
 use App\Models\MediaVariant;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\RefreshDatabaseState;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -243,7 +244,16 @@ final class SeoAgentReplaceArticleCoversCommandTest extends TestCase
         [$manifest] = $this->fixture();
         $sha = hash_file('sha256', $manifest);
         $this->fakeSuccessfulRuntime();
-        DB::statement("CREATE TRIGGER fail_english_cover_update BEFORE UPDATE OF cover_image_url ON articles WHEN NEW.id = 202 BEGIN SELECT RAISE(FAIL, 'forced article update failure'); END");
+        // MySQL trigger DDL commits implicitly. Keep the service transaction real,
+        // and rebuild this disposable test database before the next test.
+        if (DB::connection()->getDriverName() === 'mysql') {
+            self::assertSame(1, DB::transactionLevel());
+            DB::commit();
+            RefreshDatabaseState::$migrated = false;
+        }
+        DB::statement(DB::connection()->getDriverName() === 'mysql'
+            ? "CREATE TRIGGER fail_english_cover_update BEFORE UPDATE ON articles FOR EACH ROW BEGIN IF NEW.id = 202 AND NOT (NEW.cover_image_url <=> OLD.cover_image_url) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'forced article update failure'; END IF; END"
+            : "CREATE TRIGGER fail_english_cover_update BEFORE UPDATE OF cover_image_url ON articles WHEN NEW.id = 202 BEGIN SELECT RAISE(FAIL, 'forced article update failure'); END");
 
         $exit = Artisan::call('seo-agent:replace-article-covers', $this->executeOptions($manifest, $sha));
         $payload = $this->jsonOutput();

@@ -16,6 +16,7 @@ use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV223ReviewEvidenc
 use App\Services\ReviewGovernance\PublicReviewContract;
 use App\Services\ReviewGovernance\ReviewAttestationFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\RefreshDatabaseState;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 use Tests\TestCase;
@@ -221,7 +222,24 @@ final class EnneagramPublicAuthorityV223RuntimeImportReviewTest extends TestCase
         $register = $this->reviewRegister();
         $registerSha = $this->fingerprint($register);
         $plan = $this->binder()->preflight($this->releaseReport(), $register, $registerSha);
-        DB::unprepared(<<<'SQL'
+        // MySQL trigger DDL commits implicitly. Keep the service transaction real,
+        // and rebuild this disposable test database before the next test.
+        if (DB::connection()->getDriverName() === 'mysql') {
+            self::assertSame(1, DB::transactionLevel());
+            DB::commit();
+            RefreshDatabaseState::$migrated = false;
+        }
+        DB::unprepared(DB::connection()->getDriverName() === 'mysql' ? <<<'SQL'
+CREATE TRIGGER fail_enneagram_review_evidence_bind
+BEFORE INSERT ON personality_public_content_asset_revision_reviews
+FOR EACH ROW
+BEGIN
+    IF NEW.authority_asset_key = 'enneagram:wing:8w9:zh-CN' THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'forced review evidence bind failure';
+    END IF;
+END
+SQL
+            : <<<'SQL'
 CREATE TRIGGER fail_enneagram_review_evidence_bind
 BEFORE INSERT ON personality_public_content_asset_revision_reviews
 WHEN NEW.authority_asset_key = 'enneagram:wing:8w9:zh-CN'

@@ -10,6 +10,7 @@ use App\Models\PersonalityPublicContentAssetRevisionReview;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV206RevisionPromoter;
 use App\Services\ReviewGovernance\PublicReviewContract;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\RefreshDatabaseState;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 use Tests\TestCase;
@@ -237,7 +238,24 @@ final class EnneagramPublicAuthorityV206RevisionPromoterTest extends TestCase
         $targets = $this->seedRevisionEstate();
         $plan = $this->promoter()->preflight($targets);
         $before = $this->databaseFingerprint();
-        DB::unprepared(<<<'SQL'
+        // MySQL trigger DDL commits implicitly. Keep the service transaction real,
+        // and rebuild this disposable test database before the next test.
+        if (DB::connection()->getDriverName() === 'mysql') {
+            self::assertSame(1, DB::transactionLevel());
+            DB::commit();
+            RefreshDatabaseState::$migrated = false;
+        }
+        DB::unprepared(DB::connection()->getDriverName() === 'mysql' ? <<<'SQL'
+CREATE TRIGGER fail_enneagram_revision_promotion
+BEFORE UPDATE ON personality_public_content_assets
+FOR EACH ROW
+BEGIN
+    IF NEW.title = 'Promoted Enneagram authority 116' THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'forced partial promotion failure';
+    END IF;
+END
+SQL
+            : <<<'SQL'
 CREATE TRIGGER fail_enneagram_revision_promotion
 BEFORE UPDATE ON personality_public_content_assets
 WHEN NEW.title = 'Promoted Enneagram authority 116'

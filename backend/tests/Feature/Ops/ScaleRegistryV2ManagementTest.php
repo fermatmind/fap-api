@@ -20,6 +20,7 @@ use Filament\Facades\Filament;
 use Filament\PanelRegistry;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\RefreshDatabaseState;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
@@ -140,7 +141,24 @@ final class ScaleRegistryV2ManagementTest extends TestCase
         $this->assertDatabaseMissing('scales_registry', ['org_id' => 0, 'code' => 'OWNER_B']);
         $this->assertSame($generationBefore, app(PublicScaleCatalogCache::class)->generation(0));
 
-        DB::statement(<<<'SQL'
+        // MySQL trigger DDL commits implicitly. Keep the service transaction real,
+        // and rebuild this disposable test database before the next test.
+        if (DB::connection()->getDriverName() === 'mysql') {
+            self::assertSame(1, DB::transactionLevel());
+            DB::commit();
+            RefreshDatabaseState::$migrated = false;
+        }
+        DB::statement(DB::connection()->getDriverName() === 'mysql' ? <<<'SQL'
+CREATE TRIGGER reject_projection_insert
+BEFORE INSERT ON scale_slugs
+FOR EACH ROW
+BEGIN
+    IF NEW.scale_code = 'ROLLBACK_SAMPLE' THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'projection rejected';
+    END IF;
+END
+SQL
+            : <<<'SQL'
 CREATE TRIGGER reject_projection_insert
 BEFORE INSERT ON scale_slugs
 WHEN NEW.scale_code = 'ROLLBACK_SAMPLE'
