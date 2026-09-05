@@ -21,7 +21,7 @@ foreach ($runtimeDirs as $dir) {
     }
 }
 
-return Application::configure(basePath: dirname(__DIR__))
+$app = Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
         api: __DIR__.'/../routes/api.php',
@@ -160,3 +160,10 @@ return Application::configure(basePath: dirname(__DIR__))
         );
     })
     ->create();
+
+$app->afterBootstrapping(
+    \Illuminate\Foundation\Bootstrap\LoadConfiguration::class,
+    require __DIR__.'/promotion_execution_context.php',
+);
+
+return $app;

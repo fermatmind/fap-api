@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\ContentPromotion;
 
-use App\Services\ContentPromotion\PromotionContextFactory;
+use App\Services\ContentPromotion\PromotionExecutionContext;
 use Tests\TestCase;
 
 /**
@@ -15,7 +15,7 @@ use Tests\TestCase;
  * frozen into `bootstrap/cache/config.php` (typically null) instead of the
  * value the workflow just exported.
  *
- * PromotionContextFactory::runtimeEnv resolves the value in priority
+ * self::runtimeValue resolves the value in priority
  * order: `$_SERVER` → `$_ENV` → `getenv()` → `config()` fallback → default.
  * The config fallback keeps tests and non-cached local environments
  * working; in production with `config:cache` the frozen value is null for
@@ -35,11 +35,30 @@ final class PromotionContextRuntimeEnvTest extends TestCase
         'CONTENT_PROMOTION_PREVIOUS_RECEIPT',
     ];
 
+    private array $originalEnvironment = [];
+
+    protected function setUp(): void
+    {
+        foreach (self::RUNTIME_ENV_NAMES as $name) {
+            $this->originalEnvironment[$name] = [$_SERVER[$name] ?? null, $_ENV[$name] ?? null, getenv($name)];
+            unset($_SERVER[$name], $_ENV[$name]);
+            putenv($name);
+        }
+        parent::setUp();
+    }
+
     protected function tearDown(): void
     {
         foreach (self::RUNTIME_ENV_NAMES as $name) {
-            putenv($name);
+            [$server, $env, $process] = $this->originalEnvironment[$name];
             unset($_ENV[$name], $_SERVER[$name]);
+            if ($server !== null) {
+                $_SERVER[$name] = $server;
+            }
+            if ($env !== null) {
+                $_ENV[$name] = $env;
+            }
+            putenv($process === false ? $name : $name.'='.$process);
         }
         parent::tearDown();
     }
@@ -48,7 +67,7 @@ final class PromotionContextRuntimeEnvTest extends TestCase
     {
         $_SERVER['CONTENT_PROMOTION_RELEASE_POLICY_SHA256'] = 'aabbcc';
 
-        self::assertSame('aabbcc', PromotionContextFactory::runtimeEnv(
+        self::assertSame('aabbcc', self::runtimeValue(
             'CONTENT_PROMOTION_RELEASE_POLICY_SHA256',
             'content_promotion.execution.release_policy_sha256',
         ));
@@ -58,7 +77,7 @@ final class PromotionContextRuntimeEnvTest extends TestCase
     {
         $_ENV['CONTENT_PROMOTION_WORKFLOW_RUN_ID'] = '99887766';
 
-        self::assertSame('99887766', PromotionContextFactory::runtimeEnv(
+        self::assertSame('99887766', self::runtimeValue(
             'CONTENT_PROMOTION_WORKFLOW_RUN_ID',
             'content_promotion.execution.workflow_run_id',
         ));
@@ -68,7 +87,7 @@ final class PromotionContextRuntimeEnvTest extends TestCase
     {
         putenv('CONTENT_PROMOTION_WORKFLOW_RUN_ATTEMPT=7');
 
-        self::assertSame('7', PromotionContextFactory::runtimeEnv(
+        self::assertSame('7', self::runtimeValue(
             'CONTENT_PROMOTION_WORKFLOW_RUN_ATTEMPT',
             'content_promotion.execution.workflow_run_attempt',
         ));
@@ -80,7 +99,7 @@ final class PromotionContextRuntimeEnvTest extends TestCase
         $_ENV['CONTENT_PROMOTION_SOURCE_COMMIT'] = 'from-env';
         putenv('CONTENT_PROMOTION_SOURCE_COMMIT=from-getenv');
 
-        self::assertSame('from-server', PromotionContextFactory::runtimeEnv(
+        self::assertSame('from-server', self::runtimeValue(
             'CONTENT_PROMOTION_SOURCE_COMMIT',
             'content_promotion.execution.source_commit',
         ));
@@ -92,7 +111,7 @@ final class PromotionContextRuntimeEnvTest extends TestCase
         // env, value set directly into the config repository.
         config(['content_promotion.execution.previous_receipt' => '/tmp/receipt.json']);
 
-        self::assertSame('/tmp/receipt.json', PromotionContextFactory::runtimeEnv(
+        self::assertSame('/tmp/receipt.json', self::runtimeValue(
             'CONTENT_PROMOTION_PREVIOUS_RECEIPT',
             'content_promotion.execution.previous_receipt',
         ));
@@ -106,7 +125,7 @@ final class PromotionContextRuntimeEnvTest extends TestCase
         config(['content_promotion.execution.release_policy_sha256' => 'frozen-at-deploy-time']);
         $_SERVER['CONTENT_PROMOTION_RELEASE_POLICY_SHA256'] = 'from-workflow-dispatch';
 
-        self::assertSame('from-workflow-dispatch', PromotionContextFactory::runtimeEnv(
+        self::assertSame('from-workflow-dispatch', self::runtimeValue(
             'CONTENT_PROMOTION_RELEASE_POLICY_SHA256',
             'content_promotion.execution.release_policy_sha256',
         ));
@@ -114,11 +133,11 @@ final class PromotionContextRuntimeEnvTest extends TestCase
 
     public function test_runtime_env_returns_default_when_variable_absent_everywhere(): void
     {
-        self::assertSame('', PromotionContextFactory::runtimeEnv(
+        self::assertSame('', self::runtimeValue(
             'CONTENT_PROMOTION_PREVIOUS_RECEIPT',
             'content_promotion.execution.previous_receipt',
         ));
-        self::assertSame('fallback', PromotionContextFactory::runtimeEnv(
+        self::assertSame('fallback', self::runtimeValue(
             'CONTENT_PROMOTION_PREVIOUS_RECEIPT',
             'content_promotion.execution.previous_receipt',
             'fallback',
@@ -130,9 +149,29 @@ final class PromotionContextRuntimeEnvTest extends TestCase
         $_SERVER['CONTENT_PROMOTION_WORKFLOW_SIGNATURE'] = '';
         putenv('CONTENT_PROMOTION_WORKFLOW_SIGNATURE=from-getenv');
 
-        self::assertSame('from-getenv', PromotionContextFactory::runtimeEnv(
+        self::assertSame('from-getenv', self::runtimeValue(
             'CONTENT_PROMOTION_WORKFLOW_SIGNATURE',
             'content_promotion.execution.workflow_signature',
         ));
+    }
+
+    private static function runtimeValue(string $name, string $configKey, string $default = ''): string
+    {
+        (require base_path('bootstrap/promotion_execution_context.php'))(app());
+
+        return app(PromotionExecutionContext::class)->value($configKey, $default);
+    }
+
+    public function test_bootstrap_snapshot_is_immutable_within_one_run(): void
+    {
+        $_SERVER['CONTENT_PROMOTION_WORKFLOW_RUN_ID'] = '123';
+        (require base_path('bootstrap/promotion_execution_context.php'))(app());
+        $context = app(PromotionExecutionContext::class);
+        $_SERVER['CONTENT_PROMOTION_WORKFLOW_RUN_ID'] = '456';
+        config()->set('content_promotion.execution.workflow_run_id', '789');
+
+        self::assertSame('123', $context->value('content_promotion.execution.workflow_run_id'));
+        (require base_path('bootstrap/promotion_execution_context.php'))(app());
+        self::assertSame('456', app(PromotionExecutionContext::class)->value('content_promotion.execution.workflow_run_id'));
     }
 }

@@ -9,7 +9,10 @@ use DomainException;
 
 final class PromotionReceiptStore
 {
-    public function __construct(private readonly ControlledReceiptWriter $writer) {}
+    public function __construct(
+        private readonly ControlledReceiptWriter $writer,
+        private readonly PromotionExecutionContext $execution,
+    ) {}
 
     /** @param array<string, mixed> $receipt
      * @return array{receipt:array<string,mixed>,receipt_sha256:string,path:string}
@@ -32,12 +35,7 @@ final class PromotionReceiptStore
     /** @return array{receipt:array<string,mixed>,sha256:string,path:string} */
     public function readPrevious(string $expectedKind, PromotionContext $context): array
     {
-        // Bypass the config cache for the previous-receipt path the same way
-        // PromotionContextFactory does for the rest of the workflow runtime
-        // context: this value is supplied by the dispatching workflow via
-        // process env, not by the deployed shared `.env`, so reading it via
-        // `config()` would return the value frozen at `config:cache` time.
-        $path = trim(PromotionContextFactory::runtimeEnv('CONTENT_PROMOTION_PREVIOUS_RECEIPT', 'content_promotion.execution.previous_receipt'));
+        $path = trim($this->execution->value('content_promotion.execution.previous_receipt'));
         if ($path === '' || ! is_file($path) || is_link($path)) {
             throw new DomainException('previous_receipt_required');
         }
