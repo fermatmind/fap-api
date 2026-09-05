@@ -20,8 +20,10 @@ use App\Services\ContentPromotion\PromotionContextFactory;
 use DomainException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Console\Output\BufferedOutput;
+use Tests\Support\RiasecDeclaredAuthorityFixture;
 use Tests\TestCase;
 use Tests\Unit\ContentPromotion\Concerns\AssertsExactPackagePromotionConformance;
 
@@ -199,7 +201,7 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
         CareerJob::query()->withoutGlobalScopes()->create([
             'org_id' => 0, 'job_code' => 'command-job', 'slug' => 'command-job', 'locale' => 'en', 'title' => 'Original job', 'subtitle' => 'Original subtitle', 'excerpt' => 'Original excerpt', 'hero_kicker' => 'Explore', 'hero_quote' => 'Original quote.', 'industry_slug' => 'technology', 'industry_label' => 'Technology', 'body_md' => 'Original job body.', 'body_html' => '<p>Original job body.</p>', 'salary_json' => [], 'outlook_json' => [], 'skills_json' => [], 'work_contents_json' => [], 'growth_path_json' => [], 'fit_personality_codes_json' => [], 'mbti_primary_codes_json' => [], 'mbti_secondary_codes_json' => [], 'riasec_profile_json' => [], 'big5_targets_json' => [], 'iq_eq_notes_json' => [], 'market_demand_json' => [], 'status' => 'published', 'is_public' => true, 'is_indexable' => false, 'published_at' => now(), 'schema_version' => 'v1', 'sort_order' => 0,
         ]);
-        foreach ([['guide', 'W3', 'career-guides'], ['job', 'W8', 'career-jobs']] as [$kind, $lane, $subscope]) {
+        foreach ([['guide', 'W3', 'W3-CAREER-GUIDES'], ['job', 'W8', 'career-jobs']] as [$kind, $lane, $subscope]) {
             $package = $this->careerPackageDirectory($kind);
             $sha = (string) json_decode((string) File::get($package.'/manifest.json'), true, 512, JSON_THROW_ON_ERROR)['package_sha256'];
             $this->withExpectedCount(1, function () use ($package, $sha, $lane, $subscope, $kind): void {
@@ -216,7 +218,10 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
 
     public function test_w4_riasec_adapter_runs_the_full_receipt_chain_against_the_exact_english_release_authority(): void
     {
-        $package = RiasecEnglishPackageImporter::defaultPackageDirectory();
+        $package = base_path('content_assets/en-content-parity/riasec-declared-command-').bin2hex(random_bytes(8));
+        File::copyDirectory(RiasecEnglishPackageImporter::defaultPackageDirectory(), $package);
+        RiasecDeclaredAuthorityFixture::restore($package);
+        $this->beforeApplicationDestroyed(static fn () => File::deleteDirectory($package));
         $sha = RiasecEnglishPackageImporter::PACKAGE_SHA256;
         $this->withExpectedCount(1550, function () use ($package, $sha): void {
             self::assertTrue($this->runRiasecPhase($package, $sha, 'preflight', 'riasec-preflight.json')['ok']);
@@ -234,6 +239,12 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
 
     public function test_w7_eq_adapter_runs_the_full_receipt_chain_against_the_exact_compiled_english_result_content_authority(): void
     {
+        DB::table('scale_norms_versions')->insert([
+            'id' => '8df7904a-9903-4ecf-89a3-a126215672cc', 'scale_code' => 'EQ_60',
+            'norm_id' => 'eq60_en_test', 'region' => 'GLOBAL', 'locale' => 'en',
+            'version' => 'v1', 'group_id' => 'all', 'status' => 'calibrated',
+            'is_active' => true, 'created_at' => now(), 'updated_at' => now(),
+        ]);
         $loader = app(Eq60PackLoader::class);
         $package = $loader->compiledDir(Eq60PackLoader::PACK_VERSION);
         $sha = $loader->resolveManifestHash(Eq60PackLoader::PACK_VERSION);
@@ -458,7 +469,7 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
             ? ['title' => 'Promoted guide', 'excerpt' => 'Promoted excerpt', 'category_slug' => 'career', 'body_md' => 'Promoted guide body.', 'body_html' => null, 'related_industry_slugs_json' => [], 'schema_version' => 'v1', 'sort_order' => 1]
             : ['title' => 'Promoted job', 'subtitle' => 'Promoted subtitle', 'excerpt' => 'Promoted excerpt', 'hero_kicker' => 'Explore', 'hero_quote' => 'Promoted quote.', 'industry_slug' => 'technology', 'industry_label' => 'Technology', 'body_md' => 'Promoted job body.', 'body_html' => null, 'salary_json' => [], 'outlook_json' => [], 'skills_json' => [], 'work_contents_json' => [], 'growth_path_json' => [], 'fit_personality_codes_json' => [], 'mbti_primary_codes_json' => [], 'mbti_secondary_codes_json' => [], 'riasec_profile_json' => [], 'big5_targets_json' => [], 'iq_eq_notes_json' => [], 'market_demand_json' => [], 'schema_version' => 'v1', 'sort_order' => 1];
         $lane = $isGuide ? 'W3' : 'W8';
-        $subscope = $isGuide ? 'career-guides' : 'career-jobs';
+        $subscope = $isGuide ? 'W3-CAREER-GUIDES' : 'career-jobs';
         $assetsBytes = json_encode(['assets' => [['identity' => ['org_id' => 0, 'slug' => $isGuide ? 'command-guide' : 'command-job', 'locale' => 'en'], 'snapshot' => $snapshot]]], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
         File::put($directory.'/assets.json', $assetsBytes);
         $manifest = ['schema_version' => 'fermatmind.career_cms_promotion.v2', 'lane' => $lane, 'subscope' => $subscope, 'locale' => 'en', 'permissions' => ['cms_draft_import' => false, 'public_publish' => false, 'indexability' => false, 'sitemap' => false, 'llms' => false, 'search' => false, 'deploy' => false], 'expected_row_count' => 1, 'payloads' => [['path' => 'assets.json', 'sha256' => hash('sha256', $assetsBytes)]]];

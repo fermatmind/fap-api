@@ -7,6 +7,7 @@ namespace Tests\Feature\ContentImport;
 use App\Services\ContentImport\RiasecEnglishPackageImporter;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use Tests\Support\RiasecDeclaredAuthorityFixture;
 use Tests\TestCase;
 
 final class RiasecEnglishPackageImporterTest extends TestCase
@@ -118,7 +119,7 @@ final class RiasecEnglishPackageImporterTest extends TestCase
     public function test_authority_plan_binds_all_nine_physical_segments_and_rejects_reader_visible_cjk(): void
     {
         $authority = app(RiasecEnglishPackageImporter::class)->authorityPlan(
-            RiasecEnglishPackageImporter::defaultPackageDirectory(),
+            $this->copyPackage(),
             RiasecEnglishPackageImporter::PACKAGE_SHA256,
         );
         self::assertCount(1550, $authority['authority_rows']);
@@ -154,7 +155,7 @@ final class RiasecEnglishPackageImporterTest extends TestCase
     /** @param array<string, mixed> $options @return array<string, mixed> */
     private function runDryRun(array $options = []): array
     {
-        $options += ['--package-sha' => RiasecEnglishPackageImporter::PACKAGE_SHA256, '--dry-run' => true, '--json' => true];
+        $options += ['--package' => $this->copyPackage(), '--package-sha' => RiasecEnglishPackageImporter::PACKAGE_SHA256, '--dry-run' => true, '--json' => true];
         Artisan::call('content:import-riasec-english-package', $options);
 
         return json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
@@ -164,6 +165,7 @@ final class RiasecEnglishPackageImporterTest extends TestCase
     {
         $directory = storage_path('framework/testing/w4-riasec-'.bin2hex(random_bytes(8)));
         File::copyDirectory(RiasecEnglishPackageImporter::defaultPackageDirectory(), $directory);
+        RiasecDeclaredAuthorityFixture::restore($directory);
         $this->beforeApplicationDestroyed(static fn () => File::deleteDirectory($directory));
 
         return $directory;
