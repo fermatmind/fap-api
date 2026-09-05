@@ -9,15 +9,45 @@ use Tests\TestCase;
 
 class MbtiLandingContentMigrationTest extends TestCase
 {
+    private const FIXTURE_CONNECTION = 'mbti_landing_content_fixture';
+
+    private ?string $originalConnection = null;
+
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->originalConnection = DB::getDefaultConnection();
+        $connection = DB::connection()->getConfig();
+        $connection['prefix'] = 'mbti_landing_fixture_'.bin2hex(random_bytes(6)).'_';
+        config(['database.connections.'.self::FIXTURE_CONNECTION => $connection]);
+        DB::setDefaultConnection(self::FIXTURE_CONNECTION);
+        Schema::clearResolvedInstance('db.schema');
+
         foreach (['scales_registry', 'scales_registry_v2'] as $table) {
             Schema::create($table, function (Blueprint $schema): void {
                 $schema->integer('org_id');
                 $schema->string('code');
                 $schema->text('content_i18n_json');
             });
+        }
+    }
+
+    protected function tearDown(): void
+    {
+        try {
+            if ($this->originalConnection !== null) {
+                foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+                    Schema::connection(self::FIXTURE_CONNECTION)->dropIfExists($table);
+                }
+            }
+        } finally {
+            if ($this->originalConnection !== null) {
+                DB::setDefaultConnection($this->originalConnection);
+                DB::purge(self::FIXTURE_CONNECTION);
+                Schema::clearResolvedInstance('db.schema');
+            }
+            parent::tearDown();
         }
     }
 
