@@ -44,7 +44,7 @@ final class CmsTranslationBackboneTest extends TestCase
         $selectedOrg = $this->createOrganization($admin);
 
         $this->createPublishedArticleGroup('ops-article');
-        $this->createSourceSupportArticle('support-faq');
+        $sourceSupport = $this->createSourceSupportArticle('support-faq');
         $this->createSourceInterpretationGuide('guide-reading');
         $this->createSourceContentPage('company-charter', '/charter');
 
@@ -57,7 +57,7 @@ final class CmsTranslationBackboneTest extends TestCase
             ->assertSee('Support Articles')
             ->assertSee('Interpretation Guides')
             ->assertSee('Content Pages')
-            ->assertSee('Create translation draft disabled')
+            ->assertSee(__('ops.translation_ops.authority_label'))
             ->assertSet('metrics.translation_groups', 4)
             ->assertSet('metrics.missing_translation_count', 3)
             ->assertSet('metrics.published_target_coverage_rate', 25)
@@ -65,7 +65,9 @@ final class CmsTranslationBackboneTest extends TestCase
             ->assertSet('summaryCards.1.value', '3')
             ->set('contentTypeFilter', 'support_article')
             ->assertSee('support-faq')
-            ->assertDontSee('ops-article');
+            ->assertDontSee('ops-article')
+            ->call('createTranslationDraft', 'support_article', (int) $sourceSupport->id, 'en')
+            ->assertForbidden();
     }
 
     public function test_row_backed_translation_workflow_publishes_with_invalidation_signals(): void
@@ -484,13 +486,11 @@ final class CmsTranslationBackboneTest extends TestCase
     {
         $role = Role::query()->create([
             'name' => 'Ops Tester '.uniqid('', true),
-            'guard_name' => (string) config('admin.guard', 'admin'),
         ]);
 
         foreach ($permissions as $permissionName) {
             $permission = Permission::query()->firstOrCreate([
                 'name' => $permissionName,
-                'guard_name' => (string) config('admin.guard', 'admin'),
             ]);
             $role->permissions()->syncWithoutDetaching([$permission->id]);
         }
