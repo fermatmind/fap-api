@@ -220,7 +220,8 @@ final class MbtiResultEnglishPackageImporterTest extends TestCase
     public function test_exact_approval_imports_twenty_one_candidates_into_inactive_authority_and_replays_without_writes(): void
     {
         $authorityDirectory = sys_get_temp_dir().'/w1-mbti-result-authority-'.bin2hex(random_bytes(6));
-        File::copyDirectory(MbtiResultEnglishPackageImporter::defaultAuthorityDirectory(), $authorityDirectory);
+        File::copyDirectory(base_path('tests/Fixtures/mbti_global_english_inactive_authority'), $authorityDirectory);
+        $this->beforeApplicationDestroyed(static fn () => File::deleteDirectory($authorityDirectory));
         File::deleteDirectory($authorityDirectory.'/drafts');
         $importer = $this->app->make(MbtiResultEnglishPackageImporter::class);
 
@@ -275,7 +276,8 @@ final class MbtiResultEnglishPackageImporterTest extends TestCase
     public function test_wrong_approval_fails_closed(): void
     {
         $authorityDirectory = sys_get_temp_dir().'/w1-mbti-result-authority-'.bin2hex(random_bytes(6));
-        File::copyDirectory(MbtiResultEnglishPackageImporter::defaultAuthorityDirectory(), $authorityDirectory);
+        File::copyDirectory(base_path('tests/Fixtures/mbti_global_english_inactive_authority'), $authorityDirectory);
+        $this->beforeApplicationDestroyed(static fn () => File::deleteDirectory($authorityDirectory));
         File::deleteDirectory($authorityDirectory.'/drafts');
         $importer = $this->app->make(MbtiResultEnglishPackageImporter::class);
 
@@ -293,8 +295,10 @@ final class MbtiResultEnglishPackageImporterTest extends TestCase
     public function test_existing_inactive_authority_collision_is_never_overwritten(): void
     {
         $authorityDirectory = sys_get_temp_dir().'/w1-mbti-result-authority-'.bin2hex(random_bytes(6));
-        File::copyDirectory(MbtiResultEnglishPackageImporter::defaultAuthorityDirectory(), $authorityDirectory);
+        File::copyDirectory(base_path('tests/Fixtures/mbti_global_english_inactive_authority'), $authorityDirectory);
+        $this->beforeApplicationDestroyed(static fn () => File::deleteDirectory($authorityDirectory));
         $draftPath = $authorityDirectory.'/drafts/en-parity-w1-mbti-result-content-v1.json';
+        File::ensureDirectoryExists(dirname($draftPath));
         File::put($draftPath, "protected unrelated draft\n");
         $importer = $this->app->make(MbtiResultEnglishPackageImporter::class);
 
@@ -314,8 +318,9 @@ final class MbtiResultEnglishPackageImporterTest extends TestCase
         self::assertFalse($importer->authorityWriteAttempted());
     }
 
-    public function test_command_replays_committed_default_inactive_authority_without_write(): void
+    public function test_historical_approval_refuses_the_changed_current_authority_without_write(): void
     {
+        $before = hash_file('sha256', MbtiResultEnglishPackageImporter::defaultDraftPath());
         $exitCode = Artisan::call('content:import-mbti-result-english-package', [
             '--package-sha' => MbtiResultEnglishPackageImporter::PACKAGE_SHA256,
             '--write' => true,
@@ -324,12 +329,11 @@ final class MbtiResultEnglishPackageImporterTest extends TestCase
         ]);
         $payload = $this->jsonOutput();
 
-        self::assertSame(0, $exitCode);
-        self::assertTrue($payload['ok']);
-        self::assertSame('write_inactive_draft', $payload['mode']);
+        self::assertSame(1, $exitCode);
+        self::assertFalse($payload['ok']);
+        self::assertSame('authority_file_identity_mismatch', $payload['errors'][0]['code']);
+        self::assertSame($before, hash_file('sha256', MbtiResultEnglishPackageImporter::defaultDraftPath()));
         self::assertFalse($payload['writes_committed']);
-        self::assertFalse($payload['content_authority_write_attempted']);
-        self::assertSame(46, $payload['authority']['preserved_count']);
     }
 
     public function test_staging_environment_refuses_write_before_authority_attempt(): void

@@ -1,0 +1,30 @@
+{
+    "schema_version": "pack-manifest@v1",
+    "pack_type": "content_pack",
+    "scale_code": "MBTI",
+    "region": "GLOBAL",
+    "locale": "en",
+    "content_package_version": "v0.3",
+    "pack_id": "MBTI.global.en.default",
+    "fallback": [],
+    "lifecycle": {
+        "state": "inactive_draft",
+        "runtime_available": false,
+        "active_pointer_registered": false,
+        "publication_allowed": false,
+        "indexability_allowed": false
+    },
+    "capabilities": {
+        "questions": false,
+        "result_runtime": false,
+        "commercial_authority": true
+    },
+    "schemas": {
+        "rules": "fap.report.rules.v1"
+    },
+    "assets": {
+        "rules": [
+            "commercial_spec.json"
+        ]
+    }
+}

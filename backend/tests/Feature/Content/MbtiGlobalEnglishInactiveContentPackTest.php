@@ -36,7 +36,7 @@ final class MbtiGlobalEnglishInactiveContentPackTest extends TestCase
         'authorization',
     ];
 
-    public function test_pack_is_exactly_the_new_global_english_inactive_authority(): void
+    public function test_current_pack_retains_the_declared_english_draft_delivery_contract(): void
     {
         $manifest = $this->jsonFile('manifest.json');
         $version = $this->jsonFile('version.json');
@@ -50,13 +50,14 @@ final class MbtiGlobalEnglishInactiveContentPackTest extends TestCase
         self::assertSame('v0.3', $manifest['content_package_version']);
         self::assertSame(self::PACK_ID, $manifest['pack_id']);
         self::assertSame([], $manifest['fallback']);
-        self::assertSame('inactive_draft', data_get($manifest, 'lifecycle.state'));
-        self::assertFalse(data_get($manifest, 'lifecycle.runtime_available'));
-        self::assertFalse(data_get($manifest, 'lifecycle.active_pointer_registered'));
+        self::assertSame('draft', data_get($manifest, 'lifecycle.state'));
+        self::assertTrue(data_get($manifest, 'lifecycle.runtime_available'));
+        self::assertTrue(data_get($manifest, 'lifecycle.active_pointer_registered'));
         self::assertFalse(data_get($manifest, 'lifecycle.publication_allowed'));
         self::assertFalse(data_get($manifest, 'lifecycle.indexability_allowed'));
         self::assertSame([
-            'rules' => ['commercial_spec.json'],
+            'rules' => ['commercial_spec.json', 'report_identity_cards.json'],
+            'share_templates' => ['share_templates/wechat_default.json'],
         ], $manifest['assets']);
 
         self::assertSame(self::PACK_ID, $version['pack_id']);
@@ -69,11 +70,11 @@ final class MbtiGlobalEnglishInactiveContentPackTest extends TestCase
         self::assertSame('MBTI', $commercial['scale_code']);
         self::assertSame('GLOBAL', $commercial['region']);
         self::assertSame('en', $commercial['locale']);
-        self::assertSame('inactive_draft', $commercial['authority_state']);
-        self::assertFalse($commercial['runtime_available']);
-        self::assertFalse($commercial['active_pointer_registered']);
-        self::assertSame([], $commercial['offers']);
-        self::assertSame([], $commercial['variants']);
+        self::assertSame('draft', $commercial['authority_state']);
+        self::assertTrue($commercial['runtime_available']);
+        self::assertTrue($commercial['active_pointer_registered']);
+        self::assertCount(1, $commercial['offers']);
+        self::assertCount(1, $commercial['variants']);
         self::assertSame([
             'assessment_role' => 'structured_reference_and_working_hypothesis',
             'diagnosis' => false,
@@ -115,8 +116,12 @@ final class MbtiGlobalEnglishInactiveContentPackTest extends TestCase
         ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         self::assertDoesNotMatchRegularExpression('/\p{Han}/u', $serialized);
 
+        $publicFields = json_decode($serialized, true, 512, JSON_THROW_ON_ERROR);
+        // The email CTA is a fixed public label, not an email address or private field.
+        self::assertSame('Send Report to Email', $publicFields[2]['variants'][0]['cta_copy']['email']);
+        unset($publicFields[2]['variants'][0]['cta_copy']['email']);
         $keys = [];
-        $this->collectKeys(json_decode($serialized, true, 512, JSON_THROW_ON_ERROR), $keys);
+        $this->collectKeys($publicFields, $keys);
         foreach (self::FORBIDDEN_PRIVATE_KEYS as $forbidden) {
             self::assertNotContains($forbidden, $keys);
         }
@@ -150,7 +155,7 @@ final class MbtiGlobalEnglishInactiveContentPackTest extends TestCase
         self::assertSame(21, $draft['counts']['authority_content_rows']);
         self::assertCount(46, $draft['rows']);
         self::assertCount(21, array_filter($draft['rows'], static fn (array $row): bool => isset($row['asset'])));
-        self::assertSame(['commercial_spec.json'], $this->jsonFile('manifest.json')['assets']['rules']);
+        self::assertSame(['commercial_spec.json', 'report_identity_cards.json'], $this->jsonFile('manifest.json')['assets']['rules']);
     }
 
     private function packDirectory(): string
