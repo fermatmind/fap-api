@@ -179,6 +179,36 @@ final class SeoAgentCmsPublishCanaryTest extends TestCase
     }
 
     #[Test]
+    public function provenance_ignores_object_key_order_but_preserves_types_and_complete_identity(): void
+    {
+        $page = $this->createContentPage();
+        [$packagePath, $draftEvidencePath] = $this->createPackageAndDraftEvidence($page);
+        $revision = CmsTranslationRevision::query()->firstOrFail();
+        $original = $revision->payload_json;
+        $provenance = data_get($original, 'seo_agent.content_page_gate_provenance');
+        $reordered = array_reverse($provenance, true);
+        $wrongType = $provenance;
+        $wrongType['content_page_id'] = (string) $wrongType['content_page_id'];
+        $missing = $provenance;
+        unset($missing['published_revision_id']);
+        foreach ([[$reordered, 0], [$wrongType, 1], [$missing, 1], [null, 1]] as [$candidate, $expectedExit]) {
+            $payload = $original;
+            data_set($payload, 'seo_agent.content_page_gate_provenance', $candidate);
+            $revision->forceFill(['payload_json' => $payload])->save();
+            $exit = Artisan::call('seo-agent:cms-publish-canary', [
+                '--package' => $packagePath, '--draft-write-evidence' => $draftEvidencePath,
+                '--limit' => 1, '--json' => true,
+            ]);
+            $receipt = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+            self::assertSame($expectedExit, $exit, json_encode($receipt, JSON_THROW_ON_ERROR));
+            if ($expectedExit !== 0) {
+                self::assertSame('content_page_gate_provenance_mismatch', data_get($receipt, 'plan.issue'));
+            }
+            self::assertFalse($receipt['writes_committed']);
+        }
+    }
+
+    #[Test]
     public function generated_contract_documents_publish_canary_boundaries(): void
     {
         $artifact = $this->readJson(base_path('docs/seo/generated/seo-agent-cms-publish-canary.v1.json'));

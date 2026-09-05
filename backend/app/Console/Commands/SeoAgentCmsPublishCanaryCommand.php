@@ -345,6 +345,18 @@ final class SeoAgentCmsPublishCanaryCommand extends RetiredSeoAgentCommand
         )));
     }
 
+    private function gateProvenanceMatches(mixed $actual, ContentPage $page): bool
+    {
+        if (! is_array($actual)) {
+            return false;
+        }
+        $expected = $page->seoAgentPublishGateProvenance();
+        ksort($actual);
+        ksort($expected);
+
+        return $actual === $expected;
+    }
+
     /**
      * @param  array<string, mixed>  $proposal
      * @return array<string, mixed>
@@ -365,7 +377,7 @@ final class SeoAgentCmsPublishCanaryCommand extends RetiredSeoAgentCommand
             && (int) $page->published_revision_id === (int) $revision->id
             && (string) $revision->revision_status === CmsTranslationRevision::STATUS_PUBLISHED;
         $gateProvenance = data_get($revision->payload_json, 'seo_agent.content_page_gate_provenance');
-        if (! $alreadyPublished && (! is_array($gateProvenance) || $gateProvenance !== $page->seoAgentPublishGateProvenance())) {
+        if (! $alreadyPublished && (! $this->gateProvenanceMatches($gateProvenance, $page))) {
             return [
                 'publishable' => false,
                 'issue' => 'content_page_gate_provenance_mismatch',
@@ -408,7 +420,7 @@ final class SeoAgentCmsPublishCanaryCommand extends RetiredSeoAgentCommand
             ];
         }
 
-        if ((array) data_get($revision->payload_json, 'seo_agent.content_page_gate_provenance', []) !== $page->seoAgentPublishGateProvenance()) {
+        if (! $this->gateProvenanceMatches(data_get($revision->payload_json, 'seo_agent.content_page_gate_provenance'), $page)) {
             throw new RuntimeException('content_page_gate_provenance_mismatch');
         }
 
