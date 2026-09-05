@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\CareerCms\Baseline;
 
+use App\Domain\GreenfieldBaseline\GreenfieldBaselineJson;
 use App\Models\CareerJob;
 use App\Models\CareerJobRevision;
 use App\Models\CareerJobSection;
@@ -77,7 +78,7 @@ final class CareerJobBaselineImporter
             $desiredState = $this->desiredComparableState($jobPayload, $status, $existing);
             $currentState = $this->currentComparableState($existing);
 
-            if ($desiredState === $currentState) {
+            if (GreenfieldBaselineJson::normalize($desiredState) === GreenfieldBaselineJson::normalize($currentState)) {
                 $summary['will_skip']++;
 
                 continue;

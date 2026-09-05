@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\PersonalityCms\DesktopClone\Baseline;
 
+use App\Domain\GreenfieldBaseline\GreenfieldBaselineJson;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantCloneContent;
@@ -83,7 +84,7 @@ final class PersonalityDesktopCloneBaselineImporter
             $desired = $this->comparableState($row, $templateKey, $status);
             $current = $this->currentComparableState($existing);
 
-            if ($desired === $current) {
+            if (GreenfieldBaselineJson::normalize($desired) === GreenfieldBaselineJson::normalize($current)) {
                 $summary['will_skip']++;
 
                 continue;

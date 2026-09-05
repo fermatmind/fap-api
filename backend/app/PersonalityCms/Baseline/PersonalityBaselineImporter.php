@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\PersonalityCms\Baseline;
 
+use App\Domain\GreenfieldBaseline\GreenfieldBaselineJson;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileRevision;
 use App\Models\PersonalityProfileSection;
@@ -93,7 +94,7 @@ final class PersonalityBaselineImporter
 
             $desiredState = $this->desiredComparableState($profilePayload, $status, $existing);
             $currentState = $this->currentComparableState($existing);
-            $baseChanged = $desiredState !== $currentState;
+            $baseChanged = GreenfieldBaselineJson::normalize($desiredState) !== GreenfieldBaselineJson::normalize($currentState);
             $variantSummary = $this->calculateVariantSummary($existing, $profilePayload, $status, true);
 
             if (! $baseChanged
@@ -460,7 +461,7 @@ final class PersonalityBaselineImporter
             $desiredState = $this->desiredComparableVariantState($variantPayload, $status, $existing);
             $currentState = $this->currentComparableVariantState($existing);
 
-            if ($desiredState === $currentState) {
+            if (GreenfieldBaselineJson::normalize($desiredState) === GreenfieldBaselineJson::normalize($currentState)) {
                 $summary['variant_will_skip']++;
 
                 continue;
@@ -533,7 +534,7 @@ final class PersonalityBaselineImporter
             $desiredState = $this->desiredComparableVariantState($variantPayload, $status, $existing);
             $currentState = $this->currentComparableVariantState($existing);
 
-            if ($desiredState === $currentState) {
+            if (GreenfieldBaselineJson::normalize($desiredState) === GreenfieldBaselineJson::normalize($currentState)) {
                 continue;
             }
 

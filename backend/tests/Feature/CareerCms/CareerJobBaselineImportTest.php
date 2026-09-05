@@ -61,11 +61,11 @@ final class CareerJobBaselineImportTest extends TestCase
         $this->assertNull($job->published_at);
         $this->assertNull($job->fit_personality_codes_json);
         $this->assertSame(['raw' => 82], $job->market_demand_json);
-        $this->assertSame(
+        $this->assertJsonValueSame(
             ['raw' => ['openness' => ['min' => 40, 'max' => 80], 'conscientiousness' => ['min' => 50, 'max' => 90]]],
             $job->big5_targets_json,
         );
-        $this->assertSame(
+        $this->assertJsonValueSame(
             ['iq_range' => ['min' => 50, 'max' => 98], 'eq_range' => ['min' => 55, 'max' => 100]],
             $job->iq_eq_notes_json,
         );
