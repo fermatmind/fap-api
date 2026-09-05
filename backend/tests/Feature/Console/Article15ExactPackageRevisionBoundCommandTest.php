@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Console;
 
 use App\Events\PublicAuthorityChanged;
+use App\Http\Controllers\API\V0_5\Cms\ArticleController;
 use App\Models\Article;
 use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
@@ -440,6 +441,44 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
         $this->assertStringContainsString('already_applied', Artisan::output());
     }
 
+    public function test_keep_publication_uses_pinned_revision_despite_stale_article_and_ancestor_bodies(): void
+    {
+        Event::fake([PublicAuthorityChanged::class]);
+        $this->seedBatch('C');
+        $article = Article::query()->withoutGlobalScopes()->with('publishedRevision')->findOrFail(61);
+        $published = $article->publishedRevision;
+        $ancestor = $published->replicate();
+        $ancestor->forceFill(['revision_number' => 0, 'content_md' => 'historical ancestor'])->saveQuietly();
+        $published->forceFill(['supersedes_revision_id' => $ancestor->id])->saveQuietly();
+        $article->forceFill(['content_md' => 'stale compatibility body'])->saveQuietly();
+
+        $before = [];
+        foreach ($this->targets('C') as $target) {
+            if ($target['decision'] === 'KEEP') {
+                $keep = Article::query()->withoutGlobalScopes()->with('publishedRevision')->findOrFail($target['article_id']);
+                $before[$keep->id] = [$keep->content_md, $keep->published_revision_id, $keep->publishedRevision->content_md];
+            }
+        }
+        $this->assertSame(0, Artisan::call('articles:article15-exact-package', $this->commandOptions('draft-import', 'C', true)), Artisan::output());
+        $revisionCount = ArticleTranslationRevision::query()->count();
+        $draftId = Article::query()->findOrFail(31)->working_revision_id;
+        $this->assertSame(0, Artisan::call('articles:article15-exact-package', $this->commandOptions('publish', 'C', true)), Artisan::output());
+        $this->assertSame($draftId, Article::query()->findOrFail(31)->published_revision_id);
+        $this->assertSame($revisionCount, ArticleTranslationRevision::query()->count());
+        $this->assertSame(1, ArticleEditorialPackageImport::query()->count());
+        foreach ($before as $id => $expected) {
+            $keep = Article::query()->withoutGlobalScopes()->with('publishedRevision')->findOrFail($id);
+            $this->assertSame($expected, [$keep->content_md, $keep->published_revision_id, $keep->publishedRevision->content_md]);
+            $this->assertSame(0, ArticleEditorialPackageImport::query()->where('article_id', $id)->count());
+        }
+        $exitCode = Artisan::call('articles:article15-exact-package', $this->commandOptions('readback', 'C'));
+        $output = Artisan::output();
+        $this->assertSame(0, $exitCode, $output);
+        $readback = json_decode($output, true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame(0, $readback['keep_body_writes']);
+        $this->assertSame(['published'], array_values(array_unique(array_column($readback['targets'], 'adapter_state'))));
+    }
+
     public function test_publish_rolls_back_all_five_when_one_working_revision_drifts(): void
     {
         $this->seedBatch('C');
@@ -455,6 +494,40 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
         foreach ($this->targets('C') as $target) {
             $this->assertSame($target['published_revision_id'], Article::query()->withoutGlobalScopes()->findOrFail($target['article_id'])->published_revision_id);
         }
+    }
+
+    public function test_keep_public_projection_mismatch_during_publish_rolls_back_entire_batch(): void
+    {
+        Event::fake([PublicAuthorityChanged::class]);
+        $this->seedBatch('C');
+        $this->assertSame(0, Artisan::call('articles:article15-exact-package', $this->commandOptions('draft-import', 'C', true)));
+        $before = app(Article15ExactPackageRevisionBoundAdapter::class)->currentLockHashes('C');
+        $publicBefore = $this->publicFingerprint('C');
+        $controller = app(ArticleController::class);
+        $mock = \Mockery::mock(ArticleController::class);
+        $mock->shouldReceive('show')->andReturnUsing(function ($request, $slug) use ($controller) {
+            $response = $controller->show($request, $slug);
+            $seo = ArticleSeoMeta::query()->where('article_id', 61)->firstOrFail();
+            if ($slug === 'mbti-full-report-career-relationship-communication'
+                && data_get($seo->schema_json, 'editorial_package_v1.article15_exact_package_v1.status') === 'published') {
+                $payload = $response->getData(true);
+                $payload['article']['content_md'] = 'incorrect public projection';
+                $response->setData($payload);
+            }
+
+            return $response;
+        });
+        $this->app->instance(ArticleController::class, $mock);
+        $exitCode = Artisan::call('articles:article15-exact-package', $this->commandOptions('publish', 'C', true));
+        $output = Artisan::output();
+        $this->assertSame(1, $exitCode, $output);
+        $this->assertStringContainsString('post_publish_readback_mismatch:61', $output);
+        $this->app->instance(ArticleController::class, $controller);
+        $this->assertSame($before, app(Article15ExactPackageRevisionBoundAdapter::class)->currentLockHashes('C'));
+        $this->assertSame($publicBefore, $this->publicFingerprint('C'));
+        $this->assertSame(1, ArticleEditorialPackageImport::query()->count());
+        $this->assertSame(0, DB::table('audit_logs')->where('action', 'content_release_publish')->count());
+        Event::assertNotDispatched(PublicAuthorityChanged::class);
     }
 
     public function test_article15_seven_and_eight_faqs_are_complete_while_normal_api_stays_at_six_and_json_ld_returns_eight(): void

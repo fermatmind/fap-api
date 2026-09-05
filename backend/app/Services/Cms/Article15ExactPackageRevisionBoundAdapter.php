@@ -1172,7 +1172,7 @@ final class Article15ExactPackageRevisionBoundAdapter
             && hash_equals((string) $target['package_sha256'], (string) data_get($revisionMetadata, 'package_sha256', ''))
             && (string) $article->title === $this->proposedString($package, 'title')
             && (string) $article->excerpt === $this->proposedString($package, 'intro')
-            && (string) $article->content_md === $this->expectedRevisionBody($published, $target)
+            && $this->publishedBodyMatches($article, $published, $target)
             && hash_equals($this->expectedBodySha($target), hash('sha256', (string) $published->content_md))
             && hash_equals($this->expectedProjectedBodySha($target), $this->publicProjectionBodySha((string) $published->content_md))
             && (int) $article->reading_minutes === (int) data_get($package, 'current_to_proposed.reading_minutes.proposed')
@@ -1183,6 +1183,25 @@ final class Article15ExactPackageRevisionBoundAdapter
             && (string) $seo->og_description === $this->proposedString($package, 'seo_description')
             && $this->deepEqual(data_get($publicEditorial, 'answer_surface_v1.faq_items', []), data_get($package, 'current_to_proposed.answer_surface_v1.proposed.faq_items', []))
             && $this->deepEqual(data_get($publicEditorial, 'cta_slots', []), data_get($package, 'current_to_proposed.primary_cta.proposed', []));
+    }
+
+    /** @param array<string,mixed> $target */
+    private function publishedBodyMatches(Article $article, ArticleTranslationRevision $published, array $target): bool
+    {
+        if (($target['decision'] ?? null) !== 'KEEP') {
+            return (string) $article->content_md === $this->expectedRevisionBody($published, $target);
+        }
+
+        // KEEP retains the pinned published revision, not the legacy Article body or its ancestor.
+        if ((int) $published->id !== (int) $target['published_revision_id']) {
+            return false;
+        }
+
+        try {
+            return hash_equals($this->expectedProjectedBodySha($target), (string) $this->livePublicFields($article)['body']);
+        } catch (Throwable) {
+            return false;
+        }
     }
 
     /** @return array<string,mixed> */
@@ -1548,13 +1567,8 @@ final class Article15ExactPackageRevisionBoundAdapter
         if (data_get($target, 'package.current_to_proposed.body_markdown.status') !== 'KEEP') {
             return (string) $target['body'];
         }
-        $sourceId = (int) ($revision->supersedes_revision_id ?? 0);
-        if ($sourceId <= 0) {
-            return (string) $revision->content_md;
-        }
-        $source = ArticleTranslationRevision::query()->withoutGlobalScopes()->find($sourceId);
 
-        return $source instanceof ArticleTranslationRevision ? (string) $source->content_md : (string) $revision->content_md;
+        return (string) $revision->content_md;
     }
 
     private function nullableString(mixed $value): ?string
