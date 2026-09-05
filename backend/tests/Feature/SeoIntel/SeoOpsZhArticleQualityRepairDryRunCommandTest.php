@@ -57,7 +57,7 @@ final class SeoOpsZhArticleQualityRepairDryRunCommandTest extends TestCase
         $this->assertSame('seo-ops-zh-article-quality-repair-dry-run.v1', $artifact['schema_version'] ?? null);
         $this->assertSame($source['sha256'], data_get($artifact, 'source_package.sha256'));
         $this->assertCount(9, $artifact['article_operation_plans'] ?? []);
-        $this->assertSame('article:1:zh-CN', data_get($artifact, 'article_operation_plans.0.target'));
+        $this->assertSame('article:'.Article::query()->where('slug', 'riasec-holland-career-interest-test-explained')->where('locale', 'zh-CN')->value('id').':zh-CN', data_get($artifact, 'article_operation_plans.0.target'));
         $this->assertSame('/zh/articles/riasec-holland-career-interest-test-explained', data_get($artifact, 'article_operation_plans.0.current.canonical_path'));
         $this->assertSame('下一步怎么做', data_get($artifact, 'article_operation_plans.0.planned_repairs.heading_replacements.0.replace_with'));
         $linkRepairs = data_get($artifact, 'article_operation_plans.7.planned_repairs.link_replacements');
@@ -185,7 +185,7 @@ final class SeoOpsZhArticleQualityRepairDryRunCommandTest extends TestCase
             'title' => $title,
             'excerpt' => 'Existing excerpt.',
             'content_md' => 'Existing markdown.',
-            'seo_title' => $title.' | FermatMind',
+            'seo_title' => mb_substr($title, 0, 47).' | FermatMind',
             'seo_description' => 'Existing SEO description.',
             'published_at' => now()->subHour(),
         ]);
@@ -197,7 +197,7 @@ final class SeoOpsZhArticleQualityRepairDryRunCommandTest extends TestCase
             'org_id' => 0,
             'article_id' => (int) $article->id,
             'locale' => $locale,
-            'seo_title' => $title.' | FermatMind',
+            'seo_title' => mb_substr($title, 0, 47).' | FermatMind',
             'seo_description' => 'Existing SEO description.',
             'canonical_url' => 'https://fermatmind.com'.$canonicalPath,
             'robots' => 'index,follow',
