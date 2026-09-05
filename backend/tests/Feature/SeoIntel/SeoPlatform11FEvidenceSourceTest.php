@@ -19,13 +19,27 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        config(['seo_intel.connection' => config('database.default')]);
+        config([
+            'database.default' => 'measurement_source_fixture',
+            'database.connections.measurement_source_fixture' => [
+                'driver' => 'sqlite', 'database' => ':memory:', 'prefix' => '',
+                'foreign_key_constraints' => false,
+            ],
+            'seo_intel.connection' => 'measurement_source_fixture',
+        ]);
+        DB::purge('measurement_source_fixture');
         foreach (['analytics_seo_conversion_refresh_runs', 'analytics_seo_conversion_daily', 'seo_event_funnel_daily', 'seo_gsc_sync_runs', 'seo_gsc_daily', 'seo_urls'] as $table) {
             Schema::dropIfExists($table);
         }
         \App\Support\SchemaBaseline::clearCache();
         $this->createReadModels();
         $this->seedReadModels();
+    }
+
+    protected function tearDown(): void
+    {
+        DB::purge('measurement_source_fixture');
+        parent::tearDown();
     }
 
     public function test_loader_reads_environment_local_gsc_and_public_funnel_aggregates_without_fixture_fallback(): void
