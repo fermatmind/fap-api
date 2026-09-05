@@ -13,6 +13,8 @@ use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
 use Filament\PanelRegistry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Livewire\Livewire;
 use Tests\Feature\Ops\Support\InteractsWithCommerceOpsWorkbench;
 use Tests\TestCase;
@@ -151,6 +153,19 @@ final class OpsAccessBoundaryTest extends TestCase
             ->call('runSearch')
             ->assertSet('items.0.label', $chain['order_no'])
             ->assertSet('items.0.type', 'order');
+
+        Livewire::test(GlobalSearchPage::class)
+            ->set('query', $chain['share_id'])
+            ->call('runSearch')
+            ->assertSet('items.0.label', $chain['share_id'])
+            ->assertSet('items.0.type', 'share')
+            ->assertSet('items.0.org_id', (int) $selectedOrg->id);
+
+        DB::table('shares')->where('id', $chain['share_id'])->update(['attempt_id' => (string) Str::uuid()]);
+        Livewire::test(GlobalSearchPage::class)
+            ->set('query', $chain['share_id'])
+            ->call('runSearch')
+            ->assertSet('items', []);
     }
 
     public function test_delivery_tools_request_requires_elevated_action_permission(): void

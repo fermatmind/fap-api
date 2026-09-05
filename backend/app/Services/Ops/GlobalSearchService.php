@@ -65,11 +65,13 @@ class GlobalSearchService
             }
         }
 
-        if (\App\Support\SchemaBaseline::hasTable('shares')) {
+        if (\App\Support\SchemaBaseline::hasTable('shares')
+            && \App\Support\SchemaBaseline::hasTable('attempts')) {
             $shares = DB::table('shares')
-                ->select(['org_id', 'id', 'updated_at'])
-                ->where('id', 'like', '%'.$needle.'%')
-                ->orderByDesc('updated_at')
+                ->join('attempts', 'attempts.id', '=', 'shares.attempt_id')
+                ->select(['attempts.org_id', 'shares.id', 'shares.updated_at'])
+                ->where('shares.id', 'like', '%'.$needle.'%')
+                ->orderByDesc('shares.updated_at')
                 ->limit(10)
                 ->get();
 
