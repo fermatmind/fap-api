@@ -48,10 +48,11 @@ jobs:
         with:
           node-version: 24
       - id: classify
-        name: Resolve deterministic before-to-SHA path union
+        name: Resolve push and unreleased runtime path union
         shell: bash
         env:
           PUSH_BEFORE: ${{ github.event.before }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           base_sha="$PUSH_BEFORE"
@@ -64,7 +65,8 @@ jobs:
           git merge-base --is-ancestor "$base_sha" "$GITHUB_SHA"
           git diff --no-renames --name-only -z "$base_sha" "$GITHUB_SHA" > "$RUNNER_TEMP/changed-paths"
           test -s "$RUNNER_TEMP/changed-paths"
-          node .github/trunk/classify-paths.mjs "$RUNNER_TEMP/changed-paths" > "$RUNNER_TEMP/classification.json"
+          node .github/trunk/classify-release.mjs > "$RUNNER_TEMP/classification.json"
+          base_sha="$(jq -r .scope.validation_base_sha "$RUNNER_TEMP/classification.json")"
           compact="$(jq -c . "$RUNNER_TEMP/classification.json")"
           {
             echo "base_sha=$base_sha"

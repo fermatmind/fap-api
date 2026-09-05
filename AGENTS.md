@@ -74,7 +74,7 @@ Provide a relevant focused verification command for each touched layer. Do not i
 
 ## Exact-SHA CI and deployment contract
 
-- `ci.yml` handles only `main` pushes. It classifies the exact `github.event.before` to `github.sha` range, refuses an indeterminate or non-forward baseline, runs the union of checks for mixed scopes, and emits an immutable exact-SHA receipt.
+- `ci.yml` handles only `main` pushes. It always classifies the exact `github.event.before` to `github.sha` range. When runtime changes remain since the latest successful production activation, it also includes that unreleased diff and uses the earlier baseline for changed-test and migration checks. A tests-only correction must not strand a prior failed runtime release. Successful deploy-skip workflows are not production baselines; require the successful production job and activation step. Refuse indeterminate or non-forward baselines, run the union of checks for mixed scopes, and record both baselines in the immutable exact-SHA receipt.
 - `deploy.yml` consumes only a successful CI result for the same SHA. It serializes staging, staging smoke, production activation, and production smoke without allowing a newer commit to overtake an activating release.
 - Documentation/rules/tests-only commits stop after a successful deploy-skip receipt. They do not deploy application code.
 - Staging failure leaves production unchanged. Pre-activation failure leaves the current release active. Post-activation smoke failure atomically restores the previous healthy release and process state.
