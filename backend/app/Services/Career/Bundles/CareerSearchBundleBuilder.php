@@ -115,6 +115,7 @@ final class CareerSearchBundleBuilder
             })
             ->orderByDesc('compiled_at')
             ->orderByDesc('created_at')
+            ->orderByDesc('id')
             ->limit(self::MAX_SEARCH_CANDIDATE_ROWS)
             ->get();
 

@@ -262,6 +262,7 @@ final class CareerAuthorityMaterializer
             $previousIndexState = $occupation->indexStates()
                 ->orderByDesc('changed_at')
                 ->orderByDesc('updated_at')
+                ->orderByDesc('id')
                 ->first();
             $lifecycle = $this->indexLifecycleCompiler->compile([
                 'crosswalk_mode' => $occupation->crosswalk_mode,

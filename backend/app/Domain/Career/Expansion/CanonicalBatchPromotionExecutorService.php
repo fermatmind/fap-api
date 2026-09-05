@@ -513,7 +513,7 @@ final class CanonicalBatchPromotionExecutorService
         $preStates = [];
         $occupations = Occupation::query()
             ->with(['indexStates' => function ($q): void {
-                $q->orderByDesc('changed_at')->orderByDesc('updated_at')->limit(1);
+                $q->orderByDesc('changed_at')->orderByDesc('updated_at')->orderByDesc('id')->limit(1);
             }])
             ->whereIn('canonical_slug', $slugs)
             ->get(['id', 'canonical_slug']);

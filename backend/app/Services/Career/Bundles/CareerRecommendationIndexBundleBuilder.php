@@ -62,6 +62,7 @@ final class CareerRecommendationIndexBundleBuilder
             })
             ->orderByDesc('compiled_at')
             ->orderByDesc('created_at')
+            ->orderByDesc('id')
             ->limit(self::MAX_PUBLIC_RECOMMENDATION_ROWS)
             ->get();
 

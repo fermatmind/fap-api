@@ -475,7 +475,8 @@ final class CareerFullReleaseLedgerService
             ->with(['indexStates' => function ($q): void {
                 $q->select(['id', 'occupation_id', 'index_state', 'index_eligible', 'changed_at', 'updated_at', 'created_at'])
                     ->orderByDesc('changed_at')
-                    ->orderByDesc('created_at');
+                    ->orderByDesc('created_at')
+                    ->orderByDesc('id');
             }])
             ->whereIn('canonical_slug', $slugs)
             ->get(['id', 'canonical_slug'])

@@ -140,6 +140,7 @@ final class CareerJobDetailBundleBuilder
             })
             ->orderByDesc('compiled_at')
             ->orderByDesc('created_at')
+            ->orderByDesc('id')
             ->first();
 
         if (! $snapshot instanceof RecommendationSnapshot) {

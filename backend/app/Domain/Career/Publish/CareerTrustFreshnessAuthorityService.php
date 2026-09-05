@@ -129,6 +129,7 @@ final class CareerTrustFreshnessAuthorityService
             ->orderBy('occupation_id')
             ->orderByDesc('compiled_at')
             ->orderByDesc('created_at')
+            ->orderByDesc('id')
             ->get([
                 'id',
                 'occupation_id',

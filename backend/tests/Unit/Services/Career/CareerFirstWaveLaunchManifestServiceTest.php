@@ -23,6 +23,7 @@ final class CareerFirstWaveLaunchManifestServiceTest extends TestCase
 
     public function test_it_builds_an_internal_job_detail_only_launch_manifest_with_backend_owned_smoke_matrix(): void
     {
+        $this->freezeSecond();
         $this->materializeCurrentFirstWaveFixture();
 
         $manifest = app(CareerFirstWaveLaunchManifestService::class)->build()->toArray();

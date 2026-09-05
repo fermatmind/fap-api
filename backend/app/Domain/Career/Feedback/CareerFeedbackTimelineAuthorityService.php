@@ -88,6 +88,7 @@ final class CareerFeedbackTimelineAuthorityService
             })
             ->orderByDesc('compiled_at')
             ->orderByDesc('created_at')
+            ->orderByDesc('id')
             ->first();
 
         return $snapshot;

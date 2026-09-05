@@ -198,7 +198,7 @@ final class CareerPublicTrustTaxonomyExporter
                 'reason_codes',
                 'changed_at',
             ])
-            ->orderByDesc('changed_at')
+            ->orderByDesc('changed_at')->orderByDesc('id')
             ->get();
 
         $byOccupation = [];

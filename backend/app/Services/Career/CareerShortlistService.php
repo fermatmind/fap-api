@@ -48,6 +48,7 @@ final class CareerShortlistService
             })
             ->orderByDesc('compiled_at')
             ->orderByDesc('created_at')
+            ->orderByDesc('id')
             ->first();
 
         $item = CareerShortlistItem::query()->create([

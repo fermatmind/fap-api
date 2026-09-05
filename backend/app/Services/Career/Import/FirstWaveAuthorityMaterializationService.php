@@ -542,18 +542,20 @@ final class FirstWaveAuthorityMaterializationService
             ->where('occupation_id', $occupation->id)
             ->where('import_run_id', $importRun->id)
             ->orderByDesc('created_at')
+            ->orderByDesc('id')
             ->value('id');
 
         $trustManifestId = TrustManifest::query()
             ->where('occupation_id', $occupation->id)
             ->where('import_run_id', $importRun->id)
             ->orderByDesc('created_at')
+            ->orderByDesc('id')
             ->value('id');
 
         $indexStateId = IndexState::query()
             ->where('occupation_id', $occupation->id)
             ->where('import_run_id', $importRun->id)
-            ->orderByDesc('changed_at')
+            ->orderByDesc('changed_at')->orderByDesc('id')
             ->value('id');
 
         return [

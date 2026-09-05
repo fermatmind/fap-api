@@ -95,6 +95,7 @@ final class CareerJobListBundleBuilder
             })
             ->orderByDesc('compiled_at')
             ->orderByDesc('created_at')
+            ->orderByDesc('id')
             ->limit(self::MAX_PUBLIC_COMPILED_ROWS);
 
         if ($hasRuntimeDetailAuthority) {

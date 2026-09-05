@@ -252,15 +252,18 @@ final class CareerFirstWaveLaunchTierSummaryService
         $trustManifest = $occupation->trustManifests()
             ->orderByDesc('reviewed_at')
             ->orderByDesc('created_at')
+            ->orderByDesc('id')
             ->first();
         $indexState = $occupation->indexStates()
             ->orderByDesc('changed_at')
             ->orderByDesc('updated_at')
+            ->orderByDesc('id')
             ->first();
         $snapshot = $occupation->recommendationSnapshots()
             ->with(['contextSnapshot', 'profileProjection'])
             ->orderByDesc('compiled_at')
             ->orderByDesc('created_at')
+            ->orderByDesc('id')
             ->first();
 
         $confidenceScore = data_get($trustManifest?->quality, 'confidence_score', data_get($trustManifest?->quality, 'confidence'));

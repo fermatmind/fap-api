@@ -176,6 +176,7 @@ final class CareerFamilyHubBundleBuilder
             })
             ->orderByDesc('compiled_at')
             ->orderByDesc('created_at')
+            ->orderByDesc('id')
             ->get()
             ->groupBy('occupation_id')
             ->map(function (Collection $group): ?RecommendationSnapshot {

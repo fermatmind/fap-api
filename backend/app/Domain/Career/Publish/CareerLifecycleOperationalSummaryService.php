@@ -201,6 +201,7 @@ final class CareerLifecycleOperationalSummaryService
                 ->orderBy('occupation_id')
                 ->orderByDesc('compiled_at')
                 ->orderByDesc('created_at')
+                ->orderByDesc('id')
                 ->get(['id', 'occupation_id', 'profile_projection_id', 'compiled_at', 'created_at'])
                 ->each(function (RecommendationSnapshot $snapshot) use (&$profiles, &$seenLatest, $slugByOccupationId): void {
                     $occupationId = (string) $snapshot->occupation_id;

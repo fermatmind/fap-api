@@ -215,6 +215,7 @@ final class CareerRecommendationDetailBundleBuilder
         $snapshots = $query
             ->orderByDesc('compiled_at')
             ->orderByDesc('created_at')
+            ->orderByDesc('id')
             ->get();
 
         return $snapshots;

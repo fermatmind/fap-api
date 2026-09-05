@@ -130,6 +130,7 @@ final class CareerScoringInputResolver
             ->orderByDesc('reviewed_at')
             ->orderByDesc('effective_at')
             ->orderByDesc('created_at')
+            ->orderByDesc('id')
             ->first();
     }
 
@@ -142,6 +143,7 @@ final class CareerScoringInputResolver
         return $occupation->trustManifests()
             ->orderByDesc('reviewed_at')
             ->orderByDesc('created_at')
+            ->orderByDesc('id')
             ->first();
     }
 
@@ -154,6 +156,7 @@ final class CareerScoringInputResolver
         return $occupation->indexStates()
             ->orderByDesc('changed_at')
             ->orderByDesc('updated_at')
+            ->orderByDesc('id')
             ->first();
     }
 

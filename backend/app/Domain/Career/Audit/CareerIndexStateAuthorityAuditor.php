@@ -109,7 +109,8 @@ final class CareerIndexStateAuthorityAuditor
             ->whereIn('canonical_slug', array_keys($normalized))
             ->with(['indexStates' => fn ($query) => $query
                 ->orderByDesc('changed_at')
-                ->orderByDesc('created_at')])
+                ->orderByDesc('created_at')
+                ->orderByDesc('id')])
             ->get();
 
         foreach ($occupations as $occupation) {
