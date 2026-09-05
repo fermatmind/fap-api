@@ -205,7 +205,9 @@ SQL);
             '--allow-testing' => true,
         ])
             ->expectsOutputToContain('status=FAIL_CLOSED')
-            ->expectsOutputToContain('authorization phrase mismatch')
+            ->expectsOutputToContain(config('database.default') === 'sqlite'
+                ? 'authorization phrase mismatch'
+                : 'Write mode requires APP_ENV=production, or --allow-testing with APP_ENV=testing and SQLite.')
             ->assertFailed();
         $this->assertSame(0, PersonalityPublicContentAssetRevision::query()->count());
     }
