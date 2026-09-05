@@ -377,7 +377,7 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
             ->where('benefit_code', 'FERMAT_MEMBER')
             ->where('benefit_ref', 'anon_vpay_contract')
             ->where('status', 'active')
-            ->where('meta_json', 'like', '%"granted_via":"five_paid_reports"%')
+            ->where('meta_json->granted_via', 'five_paid_reports')
             ->count());
 
         Http::fake([
@@ -411,7 +411,7 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
             ->where('benefit_code', 'FERMAT_MEMBER')
             ->where('benefit_ref', 'anon_vpay_contract')
             ->where('status', 'revoked')
-            ->where('meta_json', 'like', '%"granted_via":"five_paid_reports"%')
+            ->where('meta_json->granted_via', 'five_paid_reports')
             ->count());
     }
 

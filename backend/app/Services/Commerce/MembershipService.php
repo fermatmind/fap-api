@@ -164,7 +164,7 @@ final class MembershipService
             ->where('status', 'active')
             ->where('scope', 'org')
             ->whereNull('order_no')
-            ->where('meta_json', 'like', '%"granted_via":"five_paid_reports"%');
+            ->where('meta_json->granted_via', 'five_paid_reports');
         $this->grantActor($query, $userId, $anonId);
         $query->update(['status' => 'revoked', 'revoked_at' => now(), 'updated_at' => now()]);
     }

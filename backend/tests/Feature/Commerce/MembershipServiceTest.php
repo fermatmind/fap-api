@@ -53,6 +53,42 @@ final class MembershipServiceTest extends TestCase
         $this->assertSame(4, data_get($status, 'credit.paid_report_count'));
     }
 
+    public function test_refund_revocation_matches_json_values_and_only_the_earned_actor_and_tenant(): void
+    {
+        $anonId = 'membership-json-revocation';
+        foreach (range(1, 5) as $index) {
+            $this->insertPaidReportOrder($anonId, $index);
+        }
+        $service = app(MembershipService::class);
+        $service->status(0, null, $anonId);
+        $earned = (array) DB::table('benefit_grants')->where('benefit_ref', $anonId)->first();
+        self::assertNotEmpty($earned);
+        $protectedIds = [];
+        foreach ([
+            ['org_id' => 71],
+            ['benefit_ref' => 'another-actor', 'user_id' => 'another-actor'],
+            ['meta_json' => json_encode(['membership_plan' => 'annual', 'granted_via' => 'purchase'], JSON_THROW_ON_ERROR)],
+        ] as $override) {
+            $id = (string) Str::uuid();
+            DB::table('benefit_grants')->insert(array_merge($earned, $override, ['id' => $id, 'source_order_id' => (string) Str::uuid()]));
+            $protectedIds[] = $id;
+        }
+        DB::table('benefit_grants')->where('id', $earned['id'])->update([
+            'meta_json' => json_encode(json_decode($earned['meta_json'], true, flags: JSON_THROW_ON_ERROR), JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR),
+        ]);
+        DB::table('orders')->where('anon_id', $anonId)->orderBy('created_at')->limit(1)->update([
+            'payment_state' => Order::PAYMENT_STATE_REFUNDED,
+            'grant_state' => Order::GRANT_STATE_REVOKED,
+            'amount_refunded' => 199,
+            'refunded_at' => now(),
+        ]);
+        $status = $service->status(0, null, $anonId);
+
+        self::assertSame(4, data_get($status, 'credit.paid_report_count'));
+        self::assertSame('revoked', DB::table('benefit_grants')->where('id', $earned['id'])->value('status'));
+        self::assertSame(3, DB::table('benefit_grants')->whereIn('id', $protectedIds)->where('status', 'active')->count());
+    }
+
     public function test_annual_member_gets_fixed_999_lifetime_upgrade_offer(): void
     {
         $anonId = 'anon_membership_upgrade';
@@ -225,7 +261,7 @@ final class MembershipServiceTest extends TestCase
             'user_id' => null,
             'anon_id' => $anonId,
             'scale_code' => $scaleCode,
-            'scale_version' => 'membership-test.v1',
+            'scale_version' => 'membership.v1',
             'question_count' => 0,
             'answers_summary_json' => '[]',
             'client_platform' => $clientPlatform,
