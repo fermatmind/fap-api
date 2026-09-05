@@ -205,6 +205,7 @@ final class SchedulerEvidenceMonitorService
             OpsAlertService::send($message);
         } catch (Throwable) {
             // Monitoring verdict remains evidence-driven if the alert transport is unavailable.
+            return;
         }
     }
 

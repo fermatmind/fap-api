@@ -159,6 +159,7 @@ final class PublicTopicEdge extends Model
             Cache::forget(self::candidateCacheKey($orgId, $sourceType, $sourceId, $sourceLocale));
         } catch (\Throwable) {
             // A cache outage must not block the CMS authority write.
+            return;
         }
     }
 

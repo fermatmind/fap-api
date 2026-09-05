@@ -1518,6 +1518,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                     );
                 } catch (\Throwable) {
                     // A telemetry write must not mask the activation failure.
+                    continue;
                 }
             }
         }

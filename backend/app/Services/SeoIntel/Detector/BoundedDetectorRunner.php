@@ -72,15 +72,12 @@ final class BoundedDetectorRunner
             $result = $this->evaluate($detectorId, $evidence, $settings);
             $results[] = $result;
             if (($result['outcome'] ?? null) !== 'measurement_hold') {
-                try {
-                    $expiresAt = CarbonImmutable::parse((string) $evidence['evidence_observed_at'])
-                        ->utc()
-                        ->addSeconds($settings['max_evidence_age_seconds']);
-                    if ($materializeBefore === null || $expiresAt->lt($materializeBefore)) {
-                        $materializeBefore = $expiresAt;
-                    }
-                } catch (Throwable) {
-                    // Invalid timestamps already produce measurement_hold.
+                // evaluate() holds malformed timestamps before this branch.
+                $expiresAt = CarbonImmutable::parse((string) $evidence['evidence_observed_at'])
+                    ->utc()
+                    ->addSeconds($settings['max_evidence_age_seconds']);
+                if ($materializeBefore === null || $expiresAt->lt($materializeBefore)) {
+                    $materializeBefore = $expiresAt;
                 }
             }
             $processedUrlCount += $affectedUrlCount;

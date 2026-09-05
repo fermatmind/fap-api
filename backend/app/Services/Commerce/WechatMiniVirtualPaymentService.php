@@ -880,6 +880,7 @@ final class WechatMiniVirtualPaymentService
         } catch (\Throwable) {
             // The next reconciliation retries delivery acknowledgement. Never
             // bubble provider URLs because they contain access_token.
+            return;
         }
     }
 

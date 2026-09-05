@@ -299,6 +299,7 @@ class PublicScaleCatalogCache
             ]));
         } catch (\Throwable) {
             // Telemetry must never change the public read result.
+            return;
         }
     }
 }

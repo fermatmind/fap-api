@@ -363,6 +363,7 @@ final class SeoEvidenceBoundaryCloseout extends Command
             $verifierPassed = $verifier->verify($validBundle)['valid'];
         } catch (Throwable) {
             // The counters below fail closed without exposing probe or bundle values.
+            $verifierPassed = false;
         }
         $validPassed = (int) $scannerPassed + (int) $factoryPassed + (int) $verifierPassed;
         $maliciousTotal = count($probes) * 3;
