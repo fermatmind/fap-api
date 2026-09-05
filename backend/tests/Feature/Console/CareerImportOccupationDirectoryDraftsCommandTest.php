@@ -128,6 +128,8 @@ final class CareerImportOccupationDirectoryDraftsCommandTest extends TestCase
             'import_run_id' => $run->id,
         ]);
 
+        app(\App\Services\Career\PublicCareerAuthorityResponseCache::class)->warmDirectoryReadModels(['en', 'zh-CN'], activateJobIndexPayloads: true);
+
         $this->getJson('/api/v0.5/career/jobs')
             ->assertOk()
             ->assertJsonCount(0, 'items');
