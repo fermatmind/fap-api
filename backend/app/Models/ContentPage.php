@@ -393,7 +393,23 @@ final class ContentPage extends Model
 
     private function computeSourceVersionHash(): string
     {
-        return hash('sha256', json_encode([
+        $payload = \App\Domain\GreenfieldBaseline\GreenfieldBaselineJson::normalize($this->sourceVersionPayload());
+        $originalHash = (string) $this->getRawOriginal('source_version_hash', '');
+        if ($this->exists && $originalHash !== '') {
+            $original = new self;
+            $original->setRawAttributes($this->getRawOriginal());
+            if ($payload === \App\Domain\GreenfieldBaseline\GreenfieldBaselineJson::normalize($original->sourceVersionPayload())) {
+                return $originalHash;
+            }
+        }
+
+        return hash('sha256', json_encode($payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    }
+
+    /** @return array<string, mixed> */
+    private function sourceVersionPayload(): array
+    {
+        return [
             'slug' => (string) $this->slug,
             'path' => (string) $this->path,
             'locale' => (string) $this->locale,
@@ -413,6 +429,6 @@ final class ContentPage extends Model
             'reviewer' => (string) ($this->reviewer ?? ''),
             'faq_items' => $this->faq_items ?? [],
             'schema_enabled' => (bool) ($this->schema_enabled ?? false),
-        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '');
+        ];
     }
 }

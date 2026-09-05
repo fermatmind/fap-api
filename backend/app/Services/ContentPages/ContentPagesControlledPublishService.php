@@ -192,6 +192,9 @@ final class ContentPagesControlledPublishService
             }
 
             $afterPlan = $this->buildPlan($scope, $locale, $keys, true);
+            if (! (bool) ($afterPlan['ok'] ?? false)) {
+                throw new RuntimeException('Controlled publish readback validation failed.');
+            }
 
             return [
                 ...$afterPlan,

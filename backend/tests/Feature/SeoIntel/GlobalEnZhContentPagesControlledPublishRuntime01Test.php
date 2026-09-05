@@ -480,9 +480,50 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
         $this->assertFalse((bool) ($generated['is_indexable_after_publish'] ?? true));
     }
 
-    /**
-     * @param  list<string>  $skip
-     */
+    public function test_source_hash_preserves_legacy_identity_for_json_key_reordering_but_invalidates_changed_content(): void
+    {
+        $this->seedHelpServiceTargets();
+        $page = ContentPage::query()->withoutGlobalScopes()->firstOrFail();
+        $legacyHash = hash('sha256', 'legacy source hash fixture');
+        \Illuminate\Support\Facades\DB::table('content_pages')->where('id', $page->id)->update(['source_version_hash' => $legacyHash]);
+        $page->refresh();
+        $faq = array_map(static fn (array $item): array => array_reverse($item, true), $page->faq_items);
+        $page->forceFill(['faq_items' => $faq])->save();
+        $this->assertSame($legacyHash, $page->refresh()->source_version_hash);
+
+        $faq[0]['answer'] = (string) $faq[0]['answer'].' Changed source content.';
+        $page->forceFill(['faq_items' => $faq])->save();
+        $this->assertNotSame($legacyHash, $page->refresh()->source_version_hash);
+        $changedHash = $page->source_version_hash;
+        $page->save();
+        $this->assertSame($changedHash, $page->refresh()->source_version_hash);
+    }
+
+    public function test_failed_post_publish_review_readback_rolls_back_the_whole_scope(): void
+    {
+        $this->seedHelpServiceTargets();
+        $dispatcher = ContentPage::getEventDispatcher();
+        ContentPage::setEventDispatcher(clone $dispatcher);
+        ContentPage::saved(static function (ContentPage $page): void {
+            if ($page->status === ContentPage::STATUS_PUBLISHED) {
+                \Illuminate\Support\Facades\DB::table('content_pages')->where('id', $page->id)->update(['source_version_hash' => hash('sha256', 'invalid readback fixture')]);
+            }
+        });
+        try {
+            try {
+                app(ContentPagesControlledPublishService::class)->execute('help-service', 'all', self::helpServiceTargetKeys());
+                $this->fail('An invalid post-publication snapshot must roll back.');
+            } catch (\RuntimeException $exception) {
+                $this->assertSame('Controlled publish readback validation failed.', $exception->getMessage());
+            }
+            $this->assertSame(12, ContentPage::query()->withoutGlobalScopes()->where('status', ContentPage::STATUS_DRAFT)->count());
+            $this->assertSame(0, ContentPage::query()->withoutGlobalScopes()->whereNotNull('published_revision_id')->count());
+        } finally {
+            ContentPage::setEventDispatcher($dispatcher);
+        }
+    }
+
+    /** @param list<string> $skip */
     private function seedControlledTargets(array $skip = []): void
     {
         foreach (self::targetKeys() as $key) {
