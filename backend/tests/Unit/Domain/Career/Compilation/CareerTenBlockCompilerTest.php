@@ -19,9 +19,6 @@ use ReflectionClass;
 
 final class CareerTenBlockCompilerTest extends TestCase
 {
-    /** @var array<string,mixed>|null */
-    private static ?array $baselineRow = null;
-
     private string $root;
 
     protected function setUp(): void
@@ -39,13 +36,23 @@ final class CareerTenBlockCompilerTest extends TestCase
             ]],
         ], JSON_THROW_ON_ERROR));
         $this->writeEvidenceAuthority();
-        if (self::$baselineRow === null) {
-            ini_set('memory_limit', '1024M');
-            self::$baselineRow = (new CareerCurrentAuthorityPackage)->load(dirname(__DIR__, 5))['rows']['accountants-and-auditors'];
-        }
+        $baseline = [
+            'canonical_slug' => 'accountants-and-auditors',
+            'surface_version' => CareerCurrentAuthorityPackage::SURFACE_VERSION,
+            'asset_type' => CareerCurrentAuthorityPackage::ASSET_TYPE,
+            'asset_role' => CareerCurrentAuthorityPackage::ASSET_ROLE,
+            'status' => CareerCurrentAuthorityPackage::READY_STATUS,
+            'component_order_json' => CareerDisplayAssetComponentContract::SUPPORTED_COMPONENTS,
+            'page_payload_json' => ['page' => ['en' => [], 'zh' => []]],
+            'seo_payload_json' => ['en' => [], 'zh' => []],
+            'sources_json' => ['references' => []],
+            'structured_data_json' => [],
+            'implementation_contract_json' => [],
+            'metadata_json' => [],
+        ];
         file_put_contents(
             $this->root.'/baseline.jsonl',
-            CareerCurrentAuthorityPackage::encodeCanonical(self::$baselineRow)."\n",
+            CareerCurrentAuthorityPackage::encodeCanonical($baseline)."\n",
         );
     }
 
