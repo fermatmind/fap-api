@@ -6,7 +6,6 @@ namespace App\Services\SeoIntel\OpsDashboard;
 
 use App\Services\SeoIntel\Detector\SeoDetectorRegistry;
 use App\Services\SeoIntel\PageFamily\PageFamilyClassifier;
-use Illuminate\Support\Facades\Schema;
 use Throwable;
 
 final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
@@ -150,7 +149,7 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
         $days = in_array($requestedDays, [7, 28, 90], true) ? $requestedDays : 28;
         $query = $this->table('seo_gsc_daily')
             ->where('report_date', '>=', now()->subDays($days - 1)->toDateString());
-        if ($this->connection()->getSchemaBuilder()->hasColumn('seo_gsc_daily', 'mapping_state')) {
+        if (\App\Support\SchemaBaseline::columnExists('seo_gsc_daily', 'mapping_state', $this->connection()->getName())) {
             $query->where('mapping_state', 'mapped');
         }
 
@@ -365,7 +364,7 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
     private function gscSyncState(): array
     {
         $connectionName = $this->connectionName ?? (string) config('seo_intel.connection', 'seo_intel');
-        if (! Schema::connection($connectionName)->hasTable('seo_gsc_sync_runs')) {
+        if (! \App\Support\SchemaBaseline::tableExists('seo_gsc_sync_runs', $connectionName)) {
             return ['state' => 'disconnected', 'failure_code' => null, 'last_success_at' => null, 'last_attempt_at' => null];
         }
 

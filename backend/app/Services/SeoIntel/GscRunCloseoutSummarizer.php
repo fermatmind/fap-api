@@ -191,7 +191,7 @@ final class GscRunCloseoutSummarizer
                 'aggregation_strategy' => 'unbounded_database_aggregate',
             ],
             'unmapped_classification' => $this->unmappedClassification($connection, $rows),
-            'issue_clusters' => $connection->getSchemaBuilder()->hasTable('seo_issue_queue')
+            'issue_clusters' => \App\Support\SchemaBaseline::tableExists('seo_issue_queue', $connection->getName())
                 ? $this->issueClusters->closeoutSummary()
                 : ['status' => 'unavailable', 'reason' => 'issue_queue_schema_missing'],
         ];

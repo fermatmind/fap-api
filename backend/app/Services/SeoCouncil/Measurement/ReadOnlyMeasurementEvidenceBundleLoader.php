@@ -595,11 +595,11 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
     /** @param list<string> $columns */
     private function schemaHas(Builder $schema, string $table, array $columns): bool
     {
-        if (! $schema->hasTable($table)) {
+        if (! \App\Support\SchemaBaseline::tableExists($table, $schema->getConnection()->getName())) {
             return false;
         }
         foreach ($columns as $column) {
-            if (! $schema->hasColumn($table, $column)) {
+            if (! \App\Support\SchemaBaseline::columnExists($table, $column, $schema->getConnection()->getName())) {
                 return false;
             }
         }
@@ -791,11 +791,11 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
     private function detectorResults(string $connection, string $pageFamily, ?string $authorityRevision): array
     {
         $schema = Schema::connection($connection);
-        if (! $schema->hasTable('seo_issue_queue') || ! $schema->hasColumn('seo_issue_queue', 'page_family')) {
+        if (! \App\Support\SchemaBaseline::tableExists('seo_issue_queue', $schema->getConnection()->getName()) || ! \App\Support\SchemaBaseline::columnExists('seo_issue_queue', 'page_family', $schema->getConnection()->getName())) {
             return [];
         }
         $query = DB::connection($connection)->table('seo_issue_queue')->where('page_family', $pageFamily);
-        if ($authorityRevision !== null && $schema->hasColumn('seo_issue_queue', 'authority_revision')) {
+        if ($authorityRevision !== null && \App\Support\SchemaBaseline::columnExists('seo_issue_queue', 'authority_revision', $schema->getConnection()->getName())) {
             $query->where('authority_revision', $authorityRevision);
         }
 

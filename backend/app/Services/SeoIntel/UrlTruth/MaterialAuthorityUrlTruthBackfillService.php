@@ -8,7 +8,6 @@ use App\Models\ContentMaterialDecision;
 use App\Support\SchemaBaseline;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use RuntimeException;
 use Throwable;
 
@@ -421,12 +420,12 @@ final class MaterialAuthorityUrlTruthBackfillService
     private function schemaReady(): bool
     {
         try {
-            $schema = Schema::connection((string) config('seo_intel.connection', 'seo_intel'));
+            $connection = (string) config('seo_intel.connection', 'seo_intel');
 
             return SchemaBaseline::tableExists('content_material_decisions')
-                && $schema->hasTable('seo_urls')
-                && $schema->hasColumn('seo_urls', 'page_family')
-                && $schema->hasColumn('seo_urls', 'material_fingerprint');
+                && SchemaBaseline::tableExists('seo_urls', $connection)
+                && SchemaBaseline::columnExists('seo_urls', 'page_family', $connection)
+                && SchemaBaseline::columnExists('seo_urls', 'material_fingerprint', $connection);
         } catch (Throwable) {
             return false;
         }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Services\SeoIntel;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Throwable;
 
 final class UrlTruthDriftIssueCandidateSource
@@ -19,8 +18,8 @@ final class UrlTruthDriftIssueCandidateSource
 
         try {
             if (
-                ! Schema::connection($connectionName)->hasTable('seo_urls')
-                || ! Schema::connection($connectionName)->hasTable('seo_url_entities')
+                ! \App\Support\SchemaBaseline::tableExists('seo_urls', $connectionName)
+                || ! \App\Support\SchemaBaseline::tableExists('seo_url_entities', $connectionName)
             ) {
                 return $this->unavailable('url_truth_tables_missing');
             }

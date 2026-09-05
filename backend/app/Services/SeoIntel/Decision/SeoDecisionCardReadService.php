@@ -19,8 +19,8 @@ final class SeoDecisionCardReadService
     {
         try {
             $schema = Schema::connection($this->connection);
-            if (! $schema->hasTable('seo_decision_cards')
-                || ! $schema->hasTable('seo_current_decision_cards')) {
+            if (! \App\Support\SchemaBaseline::tableExists('seo_decision_cards', $schema->getConnection()->getName())
+                || ! \App\Support\SchemaBaseline::tableExists('seo_current_decision_cards', $schema->getConnection()->getName())) {
                 return $this->unavailable();
             }
 

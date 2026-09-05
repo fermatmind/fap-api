@@ -622,10 +622,10 @@ final class ControlledUrlTruthReconciliationService
         try {
             $schema = Schema::connection((string) config('seo_intel.connection', 'seo_intel'));
 
-            return $schema->hasTable('seo_urls')
-                && $schema->hasTable('seo_url_entities')
-                && $schema->hasColumn('seo_urls', 'authority_revision')
-                && $schema->hasColumn('seo_url_entities', 'current_binding_key');
+            return \App\Support\SchemaBaseline::tableExists('seo_urls', $schema->getConnection()->getName())
+                && \App\Support\SchemaBaseline::tableExists('seo_url_entities', $schema->getConnection()->getName())
+                && \App\Support\SchemaBaseline::columnExists('seo_urls', 'authority_revision', $schema->getConnection()->getName())
+                && \App\Support\SchemaBaseline::columnExists('seo_url_entities', 'current_binding_key', $schema->getConnection()->getName());
         } catch (Throwable) {
             return false;
         }

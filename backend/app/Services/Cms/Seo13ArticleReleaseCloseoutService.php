@@ -8,7 +8,6 @@ use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 /**
  * @review-surface article
@@ -266,7 +265,7 @@ final class Seo13ArticleReleaseCloseoutService
         $hashes = array_map(static fn (string $url): string => hash('sha256', $url), $canonicals);
 
         foreach ($tables as $table) {
-            if (! Schema::connection($connection)->hasTable($table)) {
+            if (! \App\Support\SchemaBaseline::tableExists($table, $connection)) {
                 $errors[] = $this->issue(null, $table.'_missing');
                 $counts[$table] = null;
 

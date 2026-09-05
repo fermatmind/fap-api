@@ -7,7 +7,6 @@ namespace App\Services\SeoIntel\OpsDashboard;
 use App\Services\SeoIntel\Lifecycle\ContentLifecycleCandidateEvaluator;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Throwable;
 
 final class ContentLifecycleReadService extends AbstractSeoDashboardReadService
@@ -155,9 +154,9 @@ final class ContentLifecycleReadService extends AbstractSeoDashboardReadService
 
     private function schemaReady(): bool
     {
-        return Schema::connection((string) config('database.default'))->hasTable('content_material_decisions')
-            && $this->connection()->getSchemaBuilder()->hasTable('seo_urls')
-            && $this->connection()->getSchemaBuilder()->hasTable('seo_issue_queue');
+        return \App\Support\SchemaBaseline::tableExists('content_material_decisions', (string) config('database.default'))
+            && \App\Support\SchemaBaseline::tableExists('seo_urls', $this->connection()->getName())
+            && \App\Support\SchemaBaseline::tableExists('seo_issue_queue', $this->connection()->getName());
     }
 
     private function pageFamily(string $family): string

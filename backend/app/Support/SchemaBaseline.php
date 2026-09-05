@@ -137,6 +137,43 @@ final class SchemaBaseline
         ?string &$reason = null,
         ?string &$exceptionClass = null
     ): bool {
+        if (trim($table) === '' || trim($column) === '') {
+            $reason = 'invalid_input';
+            $exceptionClass = null;
+
+            return false;
+        }
+        $feature = self::featureForTable(strtolower(trim($table)));
+        if ($feature !== null && (bool) config("fap.features.{$feature}", false) !== true) {
+            $reason = 'table_missing';
+            $exceptionClass = null;
+
+            return false;
+        }
+
+        return self::probeColumn($table, $column, $reason, $exceptionClass);
+    }
+
+    /** Physical column preflight, independent of product flags. */
+    public static function columnExists(string $table, string $column, ?string $connection = null): bool
+    {
+        $reason = null;
+        $exceptionClass = null;
+        $exists = self::probeColumn($table, $column, $reason, $exceptionClass, $connection);
+        if (in_array($reason, ['table_check_exception', 'column_listing_exception'], true)) {
+            throw new \RuntimeException('Schema column availability could not be verified.');
+        }
+
+        return $exists;
+    }
+
+    private static function probeColumn(
+        string $table,
+        string $column,
+        ?string &$reason,
+        ?string &$exceptionClass,
+        ?string $connection = null,
+    ): bool {
         $table = strtolower(trim($table));
         $column = strtolower(trim($column));
         if ($table === '' || $column === '') {
@@ -146,7 +183,7 @@ final class SchemaBaseline
             return false;
         }
 
-        $columnCacheKey = self::columnCacheKey($table, $column);
+        $columnCacheKey = self::columnCacheKey($table, $column, $connection);
         if (array_key_exists($columnCacheKey, self::$columnMetaCache)) {
             $meta = self::$columnMetaCache[$columnCacheKey];
             $reason = $meta['reason'];
@@ -161,7 +198,7 @@ final class SchemaBaseline
 
         $tableReason = null;
         $tableExceptionClass = null;
-        if (! self::hasTableWithMeta($table, $tableReason, $tableExceptionClass)) {
+        if (! self::probeTable($table, $tableReason, $tableExceptionClass, $connection)) {
             $reason = $tableReason === 'schema_query_exception'
                 ? 'table_check_exception'
                 : 'table_missing';
@@ -174,9 +211,9 @@ final class SchemaBaseline
             return false;
         }
 
-        $cacheKey = self::cacheKey($table);
+        $cacheKey = self::cacheKey($table, $connection);
         if (! array_key_exists($cacheKey, self::$tableColumnsCache)) {
-            self::$tableColumnsCache[$cacheKey] = self::introspectColumns($table);
+            self::$tableColumnsCache[$cacheKey] = self::introspectColumns($table, $connection);
         }
 
         $introspectionExceptionClass = self::$tableColumnsIntrospectionExceptionCache[$cacheKey] ?? null;
@@ -214,17 +251,17 @@ final class SchemaBaseline
     /**
      * @return array<string, bool>
      */
-    private static function introspectColumns(string $table): array
+    private static function introspectColumns(string $table, ?string $connection = null): array
     {
-        $cacheKey = self::cacheKey($table);
+        $cacheKey = self::cacheKey($table, $connection);
 
         try {
-            $columns = Schema::getColumnListing($table);
+            $columns = $connection === null ? Schema::getColumnListing($table) : Schema::connection($connection)->getColumnListing($table);
             self::$tableColumnsIntrospectionExceptionCache[$cacheKey] = null;
         } catch (\Throwable $e) {
             Log::warning('[schema_baseline] get_column_listing_failed', [
                 'table' => $table,
-                'connection' => self::connectionName(),
+                'connection' => self::connectionName($connection),
                 'exception' => $e::class,
             ]);
             self::$tableColumnsIntrospectionExceptionCache[$cacheKey] = $e::class;
@@ -249,9 +286,9 @@ final class SchemaBaseline
         return self::connectionName($connection).':'.$table;
     }
 
-    private static function columnCacheKey(string $table, string $column): string
+    private static function columnCacheKey(string $table, string $column, ?string $connection = null): string
     {
-        return self::cacheKey($table).'.'.$column;
+        return self::cacheKey($table, $connection).'.'.$column;
     }
 
     private static function connectionName(?string $connection = null): string

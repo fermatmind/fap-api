@@ -40,7 +40,7 @@ final class SeoSchedulerReceiptReadService
     {
         $connection = (string) config('seo_intel.connection', 'seo_intel');
         $schema = Schema::connection($connection);
-        if (! $schema->hasTable('seo_gsc_sync_runs') || ! $schema->hasColumn('seo_gsc_sync_runs', 'receipt_json')) {
+        if (! \App\Support\SchemaBaseline::tableExists('seo_gsc_sync_runs', $schema->getConnection()->getName()) || ! \App\Support\SchemaBaseline::columnExists('seo_gsc_sync_runs', 'receipt_json', $schema->getConnection()->getName())) {
             return ['status' => 'missing'];
         }
 

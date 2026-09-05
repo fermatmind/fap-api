@@ -89,7 +89,7 @@ final class NoRuntimeSchemaIntrospectionTest extends TestCase
             }
 
             $source = (string) file_get_contents($filePath);
-            if (str_contains($source, 'Schema::hasTable') || str_contains($source, 'Schema::hasColumn')) {
+            if ($this->schemaCalls($source) !== []) {
                 $offenders[] = $relative;
             }
         }
@@ -100,6 +100,31 @@ final class NoRuntimeSchemaIntrospectionTest extends TestCase
         }
 
         self::assertTrue(true);
+    }
+
+    #[Test]
+    public function schema_builder_receivers_cannot_escape_the_runtime_scan(): void
+    {
+        foreach ([
+            'Schema::connection(\'seo_intel\')->hasTable(\'seo_urls\');',
+            '$schema = Schema::connection(\'seo_intel\'); $schema->hasColumn(\'seo_urls\', \'page_family\');',
+            'DB::connection(\'seo_intel\')->getSchemaBuilder()->hasTable(\'seo_urls\');',
+            '$connection = DB::connection(\'seo_intel\'); $schema = $connection->getSchemaBuilder(); $schema->hasColumn(\'seo_urls\', \'id\');',
+            'S::connection(\'seo_intel\')->hasColumn(\'seo_urls\', \'id\');',
+            '$schema = Schema::connection("seo_intel"); $check = static fn ($table) => $schema->hasTable($table);',
+            'class Probe { function connection() { return DB::connection("seo_intel"); } function check() { return $this->connection()->getSchemaBuilder()->hasTable("seo_urls"); } }',
+            'function check(\\Illuminate\\Database\\Schema\\Builder $schema) { return $schema->hasColumn("seo_urls", "id"); }',
+
+        ] as $snippet) {
+            $source = '<?php use Illuminate\\Support\\Facades\\Schema; use Illuminate\\Support\\Facades\\Schema as S; use Illuminate\\Support\\Facades\\DB; '.$snippet;
+            $this->assertNotEmpty($this->schemaCalls($source), $snippet);
+        }
+        $this->assertSame([], $this->schemaCalls('<?php $business = new Catalog; $business->hasTable("x"); $business->hasColumn("x", "y");'));
+    }
+
+    private function schemaCalls(string $source): array
+    {
+        return (require base_path('scripts/ci/php_schema_calls.php'))($source);
     }
 
     /**

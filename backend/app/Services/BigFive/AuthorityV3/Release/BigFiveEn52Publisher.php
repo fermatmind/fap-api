@@ -827,7 +827,7 @@ final class BigFiveEn52Publisher
             'seo_search_channel_queue_batches', 'seo_search_channel_queue_items',
             'seo_search_channel_queue_events',
         ] as $table) {
-            $nonPersonality[$table] = $seoSchema->hasTable($table)
+            $nonPersonality[$table] = \App\Support\SchemaBaseline::tableExists($table, $seoSchema->getConnection()->getName())
                 ? $seoDatabase->table($table)->orderBy('id')->get()
                     ->map(static fn (object $row): array => (array) $row)->all()
                 : [];

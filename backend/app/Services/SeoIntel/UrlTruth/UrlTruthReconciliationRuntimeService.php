@@ -77,7 +77,7 @@ final class UrlTruthReconciliationRuntimeService
         $connectionName = (string) config('seo_intel.connection', 'seo_intel');
         try {
             $schema = Schema::connection($connectionName);
-            if (! $schema->hasTable('seo_urls') || ! $schema->hasTable('seo_url_entities')) {
+            if (! \App\Support\SchemaBaseline::tableExists('seo_urls', $schema->getConnection()->getName()) || ! \App\Support\SchemaBaseline::tableExists('seo_url_entities', $schema->getConnection()->getName())) {
                 return [null, null];
             }
             $connection = DB::connection($connectionName);

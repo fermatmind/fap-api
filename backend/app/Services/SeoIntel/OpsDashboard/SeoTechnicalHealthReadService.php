@@ -84,7 +84,7 @@ final class SeoTechnicalHealthReadService extends AbstractSeoDashboardReadServic
                 'cluster_uid', 'detector_id', 'severity', 'page_entity_type', 'locale', 'status',
                 'detected_at', 'last_evidence_at', 'affected_url_count',
             ] as $column) {
-                if (! $schema->hasColumn('seo_issue_queue', $column)) {
+                if (! \App\Support\SchemaBaseline::columnExists('seo_issue_queue', $column, $schema->getConnection()->getName())) {
                     return [];
                 }
             }

@@ -86,8 +86,8 @@ final class SeoLedgerProductionCloseoutService
         try {
             $schema = Schema::connection($this->connection);
 
-            return $schema->hasTable('seo_change_ledgers')
-                && $schema->hasTable('seo_change_ledger_events')
+            return \App\Support\SchemaBaseline::tableExists('seo_change_ledgers', $schema->getConnection()->getName())
+                && \App\Support\SchemaBaseline::tableExists('seo_change_ledger_events', $schema->getConnection()->getName())
                 && $schema->hasColumns('seo_change_ledgers', self::REQUIRED_LEDGER_COLUMNS)
                 && $schema->hasColumns('seo_change_ledger_events', self::REQUIRED_EVENT_COLUMNS);
         } catch (Throwable) {

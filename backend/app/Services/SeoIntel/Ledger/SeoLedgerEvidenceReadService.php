@@ -74,7 +74,7 @@ final class SeoLedgerEvidenceReadService
         try {
             $schema = Schema::connection($this->seoConnection()->getName());
             foreach (['page_family', 'authority_revision', 'canonical_url_hash', 'is_private_flow', 'indexability_state', 'updated_at'] as $column) {
-                if (! $schema->hasColumn('seo_urls', $column)) {
+                if (! \App\Support\SchemaBaseline::columnExists('seo_urls', $column, $schema->getConnection()->getName())) {
                     return [];
                 }
             }
@@ -101,7 +101,7 @@ final class SeoLedgerEvidenceReadService
         }
 
         try {
-            if (! Schema::connection($this->seoConnection()->getName())->hasTable('seo_gsc_daily')) {
+            if (! \App\Support\SchemaBaseline::tableExists('seo_gsc_daily', $this->seoConnection()->getName())) {
                 return [];
             }
 
@@ -140,7 +140,7 @@ final class SeoLedgerEvidenceReadService
     private function deploy(): array
     {
         try {
-            if (! Schema::connection($this->applicationConnection()->getName())->hasTable('ops_deploy_events')) {
+            if (! \App\Support\SchemaBaseline::tableExists('ops_deploy_events', $this->applicationConnection()->getName())) {
                 return [];
             }
 

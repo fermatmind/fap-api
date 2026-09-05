@@ -66,7 +66,7 @@ final class GscReadModelSyncService
         $connectionName = (string) config('seo_intel.connection', 'seo_intel');
         $schema = Schema::connection($connectionName);
         foreach (['seo_gsc_daily', 'seo_urls', 'seo_url_entities', 'seo_gsc_sync_runs', 'seo_gsc_data_quality_queue'] as $table) {
-            if (! $schema->hasTable($table)) {
+            if (! \App\Support\SchemaBaseline::tableExists($table, $schema->getConnection()->getName())) {
                 return $this->blocked('gsc_read_model_schema_missing', [$table], $preflight);
             }
         }
@@ -301,8 +301,8 @@ final class GscReadModelSyncService
     private function persistRows(ConnectionInterface $connection, string $runUid, array $rows): array
     {
         $schema = $connection->getSchemaBuilder();
-        $hmacColumnsAvailable = $schema->hasColumn('seo_gsc_daily', 'query_hmac')
-            && $schema->hasColumn('seo_gsc_daily', 'query_hmac_key_version');
+        $hmacColumnsAvailable = \App\Support\SchemaBaseline::columnExists('seo_gsc_daily', 'query_hmac', $schema->getConnection()->getName())
+            && \App\Support\SchemaBaseline::columnExists('seo_gsc_daily', 'query_hmac_key_version', $schema->getConnection()->getName());
         $hashes = array_values(array_unique(array_filter(array_map(
             static fn (array $row): ?string => is_string($row['canonical_url_hash'] ?? null) ? $row['canonical_url_hash'] : null,
             $rows,

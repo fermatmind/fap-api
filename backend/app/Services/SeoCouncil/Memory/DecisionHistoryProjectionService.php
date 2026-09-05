@@ -6,7 +6,6 @@ namespace App\Services\SeoCouncil\Memory;
 
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 final class DecisionHistoryProjectionService
 {
@@ -32,7 +31,7 @@ final class DecisionHistoryProjectionService
             $states[] = [
                 'source' => $source,
                 'table_hash' => hash('sha256', $table),
-                'available' => Schema::connection($connection)->hasTable($table),
+                'available' => \App\Support\SchemaBaseline::tableExists($table, $connection),
             ];
         }
         $available = array_filter($states, static fn (array $state): bool => $state['available']);

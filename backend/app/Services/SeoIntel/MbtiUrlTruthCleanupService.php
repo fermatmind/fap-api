@@ -6,7 +6,6 @@ namespace App\Services\SeoIntel;
 
 use App\Services\SeoIntel\Sources\BackendAuthorityUrlTruthSource;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 final class MbtiUrlTruthCleanupService
 {
@@ -479,7 +478,7 @@ final class MbtiUrlTruthCleanupService
     private function hasTable(string $connectionName, string $table): bool
     {
         try {
-            return Schema::connection($connectionName)->hasTable($table);
+            return \App\Support\SchemaBaseline::tableExists($table, $connectionName);
         } catch (\Throwable) {
             return false;
         }

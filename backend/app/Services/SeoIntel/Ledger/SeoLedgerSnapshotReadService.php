@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Services\SeoIntel\Ledger;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Throwable;
 
 final class SeoLedgerSnapshotReadService
@@ -23,7 +22,7 @@ final class SeoLedgerSnapshotReadService
         $perPage = max(1, min($perPage, 100));
 
         try {
-            if (! Schema::connection($this->connection)->hasTable('seo_change_ledgers')) {
+            if (! \App\Support\SchemaBaseline::tableExists('seo_change_ledgers', $this->connection)) {
                 return $this->unavailableSnapshot($page, $perPage);
             }
 

@@ -350,6 +350,7 @@ final class SeoQueryOwnerUrlTruthTest extends TestCase
         $this->assertSame(['query_family_not_found'], $unknown['issues'] ?? []);
 
         Schema::connection('seo_intel')->drop('seo_query_url_bindings');
+        \App\Support\SchemaBaseline::clearCache();
         $missingSchema = app(QueryOwnerUrlTruthReadModel::class)->report();
 
         $this->assertFalse($missingSchema['ok'] ?? true);

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Services\SeoIntel\SearchChannelQueue;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 final class SearchChannelQueuePlanner
 {
@@ -26,13 +25,13 @@ final class SearchChannelQueuePlanner
         try {
             $connectionName = (string) config('seo_intel.connection', 'seo_intel');
 
-            if (! Schema::connection($connectionName)->hasTable('seo_urls')) {
+            if (! \App\Support\SchemaBaseline::tableExists('seo_urls', $connectionName)) {
                 $sourceUnavailableReason = 'seo_urls_table_missing';
             } else {
                 $query = DB::connection($connectionName)
                     ->table('seo_urls');
 
-                $authorityBindingJoined = Schema::connection($connectionName)->hasTable('seo_url_entities');
+                $authorityBindingJoined = \App\Support\SchemaBaseline::tableExists('seo_url_entities', $connectionName);
                 if ($authorityBindingJoined) {
                     $query
                         ->leftJoin('seo_url_entities', static function ($join): void {

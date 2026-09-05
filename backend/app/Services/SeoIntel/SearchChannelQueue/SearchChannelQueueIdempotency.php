@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Services\SeoIntel\SearchChannelQueue;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 final class SearchChannelQueueIdempotency
 {
@@ -40,7 +39,7 @@ final class SearchChannelQueueIdempotency
         $connectionName = (string) config('seo_intel.connection', 'seo_intel');
 
         try {
-            if (! Schema::connection($connectionName)->hasTable('seo_search_channel_queue_items')) {
+            if (! \App\Support\SchemaBaseline::tableExists('seo_search_channel_queue_items', $connectionName)) {
                 return $this->emptyStatus();
             }
 

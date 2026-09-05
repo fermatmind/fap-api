@@ -6,7 +6,6 @@ namespace App\Services\SeoCouncil\Persistence;
 
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Throwable;
 
 final class CouncilRunRepository
@@ -239,8 +238,8 @@ final class CouncilRunRepository
     private function storageReady(): bool
     {
         try {
-            return Schema::connection($this->connectionName())->hasTable('seo_council_runs')
-                && Schema::connection($this->connectionName())->hasTable('seo_council_run_receipts');
+            return \App\Support\SchemaBaseline::tableExists('seo_council_runs', $this->connectionName())
+                && \App\Support\SchemaBaseline::tableExists('seo_council_run_receipts', $this->connectionName());
         } catch (Throwable) {
             return false;
         }

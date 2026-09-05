@@ -10,7 +10,6 @@ use App\Support\SchemaBaseline;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Schema;
 use RuntimeException;
 use Throwable;
 
@@ -453,7 +452,7 @@ final class BigFiveEn52ProductionEvidence
         }
         $connection = trim((string) config('seo_intel.connection', 'seo_intel'));
         foreach (self::SEARCH_TABLES as $table) {
-            $authority[$table] = Schema::connection($connection)->hasTable($table)
+            $authority[$table] = \App\Support\SchemaBaseline::tableExists($table, $connection)
                 ? DB::connection($connection)->table($table)->orderBy('id')->get()->map(static fn (object $row): array => (array) $row)->all()
                 : [];
         }
@@ -470,7 +469,7 @@ final class BigFiveEn52ProductionEvidence
         $connection = trim((string) config('seo_intel.connection', 'seo_intel'));
         $rows = [];
         foreach (self::SEARCH_TABLES as $table) {
-            $rows[$table] = Schema::connection($connection)->hasTable($table)
+            $rows[$table] = \App\Support\SchemaBaseline::tableExists($table, $connection)
                 ? DB::connection($connection)->table($table)->orderBy('id')->get()->map(static fn (object $row): array => (array) $row)->all()
                 : [];
         }

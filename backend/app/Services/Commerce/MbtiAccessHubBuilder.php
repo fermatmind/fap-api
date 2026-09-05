@@ -403,7 +403,7 @@ final class MbtiAccessHubBuilder
      */
     private function resolveInviteProgressSnapshot(int $orgId, string $attemptId): ?array
     {
-        if (! DB::getSchemaBuilder()->hasTable('attempt_invite_unlocks')) {
+        if (! \App\Support\SchemaBaseline::tableExists('attempt_invite_unlocks')) {
             return null;
         }
 

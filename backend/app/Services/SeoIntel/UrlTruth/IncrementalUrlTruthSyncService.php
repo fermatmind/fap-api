@@ -136,9 +136,9 @@ final class IncrementalUrlTruthSyncService
     private function assertSchemaReady(): void
     {
         $schema = Schema::connection((string) config('seo_intel.connection', 'seo_intel'));
-        if (! $schema->hasTable('seo_urls') || ! $schema->hasTable('seo_url_entities')
-            || ! $schema->hasColumn('seo_urls', 'authority_revision')
-            || ! $schema->hasColumn('seo_url_entities', 'current_binding_key')) {
+        if (! \App\Support\SchemaBaseline::tableExists('seo_urls', $schema->getConnection()->getName()) || ! \App\Support\SchemaBaseline::tableExists('seo_url_entities', $schema->getConnection()->getName())
+            || ! \App\Support\SchemaBaseline::columnExists('seo_urls', 'authority_revision', $schema->getConnection()->getName())
+            || ! \App\Support\SchemaBaseline::columnExists('seo_url_entities', 'current_binding_key', $schema->getConnection()->getName())) {
             throw new RuntimeException('incremental URL Truth schema is unavailable.');
         }
     }

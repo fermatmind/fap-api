@@ -84,7 +84,7 @@ final class ScheduledRuntimeProbeReceiptService
     {
         $observedAt = $now === null ? CarbonImmutable::now('UTC') : CarbonImmutable::parse($now)->utc();
         $schema = Schema::connection($this->connection()->getName());
-        if (! $schema->hasTable('seo_runtime_probe_receipts')) {
+        if (! \App\Support\SchemaBaseline::tableExists('seo_runtime_probe_receipts', $schema->getConnection()->getName())) {
             return [
                 'state' => UnifiedRuntimeProbeEvaluator::MEASUREMENT_HOLD,
                 'slot_count' => null,
@@ -137,13 +137,13 @@ final class ScheduledRuntimeProbeReceiptService
     {
         $connection = $this->connection();
         $schema = Schema::connection($connection->getName());
-        if (! $schema->hasTable('seo_crawler_log_daily_aggregates')) {
+        if (! \App\Support\SchemaBaseline::tableExists('seo_crawler_log_daily_aggregates', $schema->getConnection()->getName())) {
             return $this->missingCrawler('table_missing');
         }
 
         $rowCount = $connection->table('seo_crawler_log_daily_aggregates')->count();
         $hitCount = (int) $connection->table('seo_crawler_log_daily_aggregates')->sum('hit_count');
-        $observationColumn = $schema->hasColumn('seo_crawler_log_daily_aggregates', 'last_seen_at')
+        $observationColumn = \App\Support\SchemaBaseline::columnExists('seo_crawler_log_daily_aggregates', 'last_seen_at', $schema->getConnection()->getName())
             ? 'last_seen_at'
             : 'updated_at';
         $latest = $connection->table('seo_crawler_log_daily_aggregates')

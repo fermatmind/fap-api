@@ -11,7 +11,6 @@ use App\Models\ArticleTag;
 use App\Models\ArticleTranslationRevision;
 use App\Support\PublicMediaUrlGuard;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 /**
  * @review-surface article
@@ -410,7 +409,7 @@ final class ArticleReleaseCloseoutService
     private function urlTruthCheck(Article $article, string $canonicalUrl): array
     {
         $connection = (string) config('seo_intel.connection', 'seo_intel');
-        if (! Schema::connection($connection)->hasTable('seo_urls')) {
+        if (! \App\Support\SchemaBaseline::tableExists('seo_urls', $connection)) {
             return [
                 'ok' => false,
                 'table_available' => false,
@@ -471,7 +470,7 @@ final class ArticleReleaseCloseoutService
     private function searchChannelCheck(string $canonicalUrl): array
     {
         $connection = (string) config('seo_intel.connection', 'seo_intel');
-        if (! Schema::connection($connection)->hasTable('seo_search_channel_queue_items')) {
+        if (! \App\Support\SchemaBaseline::tableExists('seo_search_channel_queue_items', $connection)) {
             return [
                 'ok' => false,
                 'table_available' => false,
@@ -550,7 +549,7 @@ final class ArticleReleaseCloseoutService
     private function providerSecurityHoldEvidence(int $queueItemId): ?array
     {
         $connection = (string) config('seo_intel.connection', 'seo_intel');
-        if (! Schema::connection($connection)->hasTable('seo_search_channel_queue_events')) {
+        if (! \App\Support\SchemaBaseline::tableExists('seo_search_channel_queue_events', $connection)) {
             return null;
         }
 

@@ -6,7 +6,6 @@ namespace App\Services\SeoIntel;
 
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Throwable;
 
 final class SearchToResultFunnelReadModel
@@ -104,7 +103,7 @@ final class SearchToResultFunnelReadModel
         $connection = (string) config('seo_intel.connection', 'seo_intel');
         foreach ([self::GSC_TABLE, self::FUNNEL_TABLE, self::URL_TRUTH_TABLE] as $table) {
             try {
-                if (! Schema::connection($connection)->hasTable($table)) {
+                if (! \App\Support\SchemaBaseline::tableExists($table, $connection)) {
                     $issues[] = $table.'_missing';
                 }
             } catch (Throwable) {
@@ -395,7 +394,7 @@ final class SearchToResultFunnelReadModel
     private function urlTruthByHash(string $connection, array $hashes): array
     {
         $truth = [];
-        $familyColumn = Schema::connection($connection)->hasColumn(self::URL_TRUTH_TABLE, 'page_family')
+        $familyColumn = \App\Support\SchemaBaseline::columnExists(self::URL_TRUTH_TABLE, 'page_family', $connection)
             ? 'page_family'
             : 'page_entity_type';
 

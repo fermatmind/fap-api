@@ -6,7 +6,6 @@ namespace App\Services\SeoCouncil\Platform12\Operations;
 
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Throwable;
 
 final readonly class Platform12TraceDrilldownReadService
@@ -29,7 +28,7 @@ final readonly class Platform12TraceDrilldownReadService
         $page = max(1, min($page, (int) ceil(self::MAX_QUERY_ROWS / self::PER_PAGE)));
         try {
             $connection = (string) config('seo_council.connection', 'seo_intel');
-            if (! Schema::connection($connection)->hasTable('seo_council_runs')) {
+            if (! \App\Support\SchemaBaseline::tableExists('seo_council_runs', $connection)) {
                 return $this->envelope('unavailable', [], $page, null);
             }
             $query = DB::connection($connection)->table('seo_council_runs')

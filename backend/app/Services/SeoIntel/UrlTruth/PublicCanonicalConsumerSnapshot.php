@@ -176,17 +176,17 @@ final class PublicCanonicalConsumerSnapshot
         $connectionName = (string) config('seo_intel.connection', 'seo_intel');
         $schema = Schema::connection($connectionName);
         foreach (['seo_urls', 'seo_url_entities'] as $table) {
-            if (! $schema->hasTable($table)) {
+            if (! \App\Support\SchemaBaseline::tableExists($table, $schema->getConnection()->getName())) {
                 throw new RuntimeException("URL Truth table {$table} is unavailable.");
             }
         }
         foreach (['material_lastmod_at', 'material_authority_state'] as $column) {
-            if (! $schema->hasColumn('seo_urls', $column)) {
+            if (! \App\Support\SchemaBaseline::columnExists('seo_urls', $column, $schema->getConnection()->getName())) {
                 throw new RuntimeException("URL Truth column seo_urls.{$column} is unavailable.");
             }
         }
         foreach (['binding_status', 'current_binding_key'] as $column) {
-            if (! $schema->hasColumn('seo_url_entities', $column)) {
+            if (! \App\Support\SchemaBaseline::columnExists('seo_url_entities', $column, $schema->getConnection()->getName())) {
                 throw new RuntimeException("URL Truth column seo_url_entities.{$column} is unavailable.");
             }
         }

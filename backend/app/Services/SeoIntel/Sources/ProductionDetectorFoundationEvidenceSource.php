@@ -8,7 +8,6 @@ use App\Services\SeoIntel\PageFamily\PageFamilyPolicyRegistry;
 use App\Support\SchemaBaseline;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Throwable;
 
 final class ProductionDetectorFoundationEvidenceSource implements DetectorFoundationEvidenceSource
@@ -65,7 +64,7 @@ final class ProductionDetectorFoundationEvidenceSource implements DetectorFounda
         $connection = (string) config('seo_intel.connection', 'seo_intel');
 
         try {
-            if (! Schema::connection($connection)->hasTable('seo_gsc_sync_runs')) {
+            if (! \App\Support\SchemaBaseline::tableExists('seo_gsc_sync_runs', $connection)) {
                 return $this->unavailableFreshness();
             }
             $row = DB::connection($connection)->table('seo_gsc_sync_runs')
@@ -125,7 +124,7 @@ final class ProductionDetectorFoundationEvidenceSource implements DetectorFounda
         $connection = (string) config('seo_intel.connection', 'seo_intel');
 
         try {
-            if (! Schema::connection($connection)->hasTable('seo_urls')) {
+            if (! \App\Support\SchemaBaseline::tableExists('seo_urls', $connection)) {
                 return $this->unavailableUrlTruthRevision();
             }
             $row = DB::connection($connection)->table('seo_urls')

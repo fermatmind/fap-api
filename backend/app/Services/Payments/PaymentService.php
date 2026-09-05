@@ -595,7 +595,7 @@ class PaymentService
 
     private function ensureLegacyPaymentAttempt(object $order): ?object
     {
-        if (! DB::getSchemaBuilder()->hasTable('payment_attempts')) {
+        if (! \App\Support\SchemaBaseline::tableExists('payment_attempts')) {
             return null;
         }
 
@@ -643,7 +643,7 @@ class PaymentService
 
     private function latestPaymentAttemptForOrder(string $orderId): ?object
     {
-        if ($orderId === '' || ! DB::getSchemaBuilder()->hasTable('payment_attempts')) {
+        if ($orderId === '' || ! \App\Support\SchemaBaseline::tableExists('payment_attempts')) {
             return null;
         }
 
@@ -655,7 +655,7 @@ class PaymentService
 
     private function advanceLegacyPaymentAttempt(string $attemptId, array $updates): void
     {
-        if ($attemptId === '' || ! DB::getSchemaBuilder()->hasTable('payment_attempts')) {
+        if ($attemptId === '' || ! \App\Support\SchemaBaseline::tableExists('payment_attempts')) {
             return;
         }
 

@@ -26,8 +26,8 @@ final class UrlTruthInventoryRecordWriter
 
         $connection = DB::connection((string) config('seo_intel.connection', 'seo_intel'));
         $schema = Schema::connection((string) config('seo_intel.connection', 'seo_intel'));
-        $hardenedSchema = $schema->hasColumn('seo_url_entities', 'current_binding_key')
-            && $schema->hasColumn('seo_urls', 'authority_revision');
+        $hardenedSchema = \App\Support\SchemaBaseline::columnExists('seo_url_entities', 'current_binding_key', $schema->getConnection()->getName())
+            && \App\Support\SchemaBaseline::columnExists('seo_urls', 'authority_revision', $schema->getConnection()->getName());
 
         return $connection->transaction(function () use ($connection, $hardenedSchema, $records): int {
             foreach ($records as $record) {

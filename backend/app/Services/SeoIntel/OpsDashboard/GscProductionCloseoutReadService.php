@@ -45,12 +45,12 @@ final class GscProductionCloseoutReadService extends AbstractSeoDashboardReadSer
         $schema = Schema::connection($connectionName);
         $missingTables = array_values(array_filter(
             self::REQUIRED_TABLES,
-            static fn (string $table): bool => ! $schema->hasTable($table),
+            static fn (string $table): bool => ! \App\Support\SchemaBaseline::tableExists($table, $schema->getConnection()->getName()),
         ));
-        $missingColumns = $schema->hasTable('seo_gsc_daily')
+        $missingColumns = \App\Support\SchemaBaseline::tableExists('seo_gsc_daily', $schema->getConnection()->getName())
             ? array_values(array_filter(
                 self::REQUIRED_GSC_COLUMNS,
-                static fn (string $column): bool => ! $schema->hasColumn('seo_gsc_daily', $column),
+                static fn (string $column): bool => ! \App\Support\SchemaBaseline::columnExists('seo_gsc_daily', $column, $schema->getConnection()->getName()),
             ))
             : self::REQUIRED_GSC_COLUMNS;
 

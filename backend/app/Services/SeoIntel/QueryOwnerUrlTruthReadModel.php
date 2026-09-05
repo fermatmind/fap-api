@@ -540,7 +540,7 @@ final class QueryOwnerUrlTruthReadModel
             'seo_query_family_queries',
             'seo_query_url_bindings',
         ] as $table) {
-            if (! $schema->hasTable($table)) {
+            if (! \App\Support\SchemaBaseline::tableExists($table, $schema->getConnection()->getName())) {
                 return false;
             }
         }

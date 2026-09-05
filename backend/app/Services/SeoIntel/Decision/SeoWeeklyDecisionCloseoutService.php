@@ -30,8 +30,8 @@ final class SeoWeeklyDecisionCloseoutService
 
         try {
             $schema = Schema::connection($this->connection);
-            if (! $schema->hasTable('seo_weekly_decision_capability_receipts')
-                || ! $schema->hasTable('seo_weekly_decision_receipts')) {
+            if (! \App\Support\SchemaBaseline::tableExists('seo_weekly_decision_capability_receipts', $schema->getConnection()->getName())
+                || ! \App\Support\SchemaBaseline::tableExists('seo_weekly_decision_receipts', $schema->getConnection()->getName())) {
                 return $this->unproven('receipt_store_unavailable');
             }
             $selection = $this->selector->snapshot($now);
