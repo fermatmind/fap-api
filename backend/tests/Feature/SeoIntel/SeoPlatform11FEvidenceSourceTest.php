@@ -19,10 +19,11 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        config(['seo_intel.connection' => 'sqlite']);
+        config(['seo_intel.connection' => config('database.default')]);
         foreach (['analytics_seo_conversion_refresh_runs', 'analytics_seo_conversion_daily', 'seo_event_funnel_daily', 'seo_gsc_sync_runs', 'seo_gsc_daily', 'seo_urls'] as $table) {
             Schema::dropIfExists($table);
         }
+        \App\Support\SchemaBaseline::clearCache();
         $this->createReadModels();
         $this->seedReadModels();
     }
@@ -105,7 +106,7 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
                 'staging_runtime'
             )->diagnostic()['hold_reason']
         );
-        $this->assertDatabaseCount('seo_urls', 0, 'sqlite');
+        $this->assertDatabaseCount('seo_urls', 0);
     }
 
     public function test_missing_mapping_and_stale_sources_return_hold_or_no_bundle_never_defaults(): void
@@ -202,6 +203,7 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
         DB::table('seo_gsc_sync_runs')->insert([
             'status' => 'success',
             'receipt_json' => json_encode($receipt, JSON_THROW_ON_ERROR),
+            'started_at' => now('UTC'),
             'finished_at' => now('UTC'),
         ]);
         $loader = app(ReadOnlyMeasurementEvidenceBundleLoader::class);
@@ -216,6 +218,7 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
     public function test_cro_diagnostics_distinguish_schema_readmodel_stale_and_mapping_failures(): void
     {
         Schema::drop('analytics_seo_conversion_daily');
+        \App\Support\SchemaBaseline::clearCache();
         $this->assertSame('CRO_SCHEMA_UNAVAILABLE', app(ReadOnlyMeasurementEvidenceBundleLoader::class)->diagnoseForScope('mission:cro-schema', 'commercial_funnel_cro', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
 
         $this->setUpReadModels();
@@ -362,7 +365,7 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
         $this->assertSame('NONE', $result->diagnostic()['hold_reason']);
         $this->assertTrue(data_get($result->bundles(), '0.payload.explicit_zero_proof'));
         $this->assertSame(0, array_sum(data_get($result->bundles(), '0.payload.windows.0.metrics', [])));
-        $this->assertDatabaseCount('analytics_seo_conversion_daily', 0, 'sqlite');
+        $this->assertDatabaseCount('analytics_seo_conversion_daily', 0);
     }
 
     private function setUpReadModels(): void
@@ -370,6 +373,7 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
         foreach (['analytics_seo_conversion_refresh_runs', 'analytics_seo_conversion_daily', 'seo_event_funnel_daily', 'seo_gsc_sync_runs', 'seo_gsc_daily', 'seo_urls'] as $table) {
             Schema::dropIfExists($table);
         }
+        \App\Support\SchemaBaseline::clearCache();
         $this->createReadModels();
         $this->seedReadModels();
         $this->app->forgetInstance(ReadOnlyMeasurementEvidenceBundleLoader::class);
@@ -450,6 +454,7 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
         Schema::create('seo_gsc_sync_runs', function (Blueprint $table): void {
             $table->string('status');
             $table->text('receipt_json')->nullable();
+            $table->timestamp('started_at');
             $table->timestamp('finished_at')->nullable();
         });
     }

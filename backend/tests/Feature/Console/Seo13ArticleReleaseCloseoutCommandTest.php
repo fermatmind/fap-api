@@ -41,7 +41,7 @@ final class Seo13ArticleReleaseCloseoutCommandTest extends TestCase
         parent::setUp();
         config([
             'app.frontend_url' => 'https://fermatmind.com',
-            'seo_intel.connection' => 'sqlite',
+            'seo_intel.connection' => config('database.default'),
             'ops.content_release_observability.cache_invalidation_urls' => ['https://frontend.example.test/revalidate'],
             'ops.content_release_observability.cache_invalidation_secret' => 'test-secret',
         ]);
@@ -96,7 +96,7 @@ final class Seo13ArticleReleaseCloseoutCommandTest extends TestCase
         ArticleTranslationRevision::query()->withoutGlobalScopes()->whereKey(35)->update([
             'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
         ]);
-        \DB::connection('sqlite')->table('seo_search_channel_queue_items')->insert([
+        \DB::connection()->table('seo_search_channel_queue_items')->insert([
             'canonical_url' => 'https://fermatmind.com/zh/articles/which-love-script-fits-you-best',
         ]);
 
@@ -151,12 +151,12 @@ final class Seo13ArticleReleaseCloseoutCommandTest extends TestCase
 
     private function createSearchHoldTables(): void
     {
-        Schema::connection('sqlite')->create('seo_search_channel_queue_items', function (Blueprint $table): void {
+        Schema::create('seo_search_channel_queue_items', function (Blueprint $table): void {
             $table->id();
             $table->text('canonical_url');
         });
         foreach (['seo_indexnow_submissions', 'seo_baidu_push_logs'] as $tableName) {
-            Schema::connection('sqlite')->create($tableName, function (Blueprint $table): void {
+            Schema::create($tableName, function (Blueprint $table): void {
                 $table->id();
                 $table->char('canonical_url_hash', 64);
             });
@@ -166,7 +166,7 @@ final class Seo13ArticleReleaseCloseoutCommandTest extends TestCase
     private function createReleasedCohort(): void
     {
         foreach (self::TARGETS as [$articleId, $slug, $translationGroupId, $revisionId, $oldRevisionId]) {
-            $title = '独立主题 '.$slug.' 深度说明';
+            $title = str_replace('-', ' ', $slug);
             $excerpt = '文章 '.$articleId.' 独立主题摘要。';
             $body = $this->body($articleId);
             $publishedAt = Carbon::create(2026, 7, 27, 8, 0, 0, 'UTC');
