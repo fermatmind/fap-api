@@ -89,21 +89,9 @@ final class PersonalityEnneagramLlmsTxtReleaseGateCommandTest extends TestCase
         $this->assertStringContainsString('evidence_or_claim_boundary_incomplete', $issues);
     }
 
-    public function test_workflow_is_manual_sha_bound_dry_run_before_write_and_does_not_release_llms_full(): void
+    public function test_retired_manual_workflow_cannot_be_reintroduced(): void
     {
-        $workflow = file_get_contents(base_path('../.github/workflows/enneagram-llms-txt-production-ops.yml'));
-        $this->assertIsString($workflow);
-        $this->assertStringContainsString('workflow_dispatch:', $workflow);
-        $this->assertStringContainsString('release_sha:', $workflow);
-        $this->assertStringContainsString('cohort_sha256:', $workflow);
-        $this->assertStringContainsString('operation_mode:', $workflow);
-        $this->assertStringContainsString('dry_run', $workflow);
-        $this->assertStringContainsString('write', $workflow);
-        $this->assertStringContainsString('llmsTxtRelease', $workflow);
-        $this->assertStringContainsString('personality.enneagram_llms_txt_write_enabled', $workflow);
-        $this->assertStringContainsString('llms_full_release', $workflow);
-        $this->assertStringNotContainsString('llms-full.txt', $workflow);
-        $this->assertStringNotContainsString('IndexNow', $workflow);
+        $this->assertFileDoesNotExist(base_path('../.github/workflows/enneagram-llms-txt-production-ops.yml'));
     }
 
     /** @return array<string, mixed> */

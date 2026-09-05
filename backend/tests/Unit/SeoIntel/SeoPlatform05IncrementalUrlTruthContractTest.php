@@ -67,7 +67,8 @@ final class SeoPlatform05IncrementalUrlTruthContractTest extends TestCase
         self::assertStringContainsString('seo-intel:url-truth-controlled-reconcile --execute --no-http --max-records=5000 --batch-size=250', $scheduler);
         self::assertStringContainsString('->onOneServer()', $scheduler);
         self::assertStringContainsString("task('seo:url-truth-incremental-cms-canary'", $deploy);
-        self::assertStringContainsString("task('artisan:migrate-seo-intel', function () {\n    within('{{release_path}}/backend', function (): void {", $deploy);
+        self::assertStringContainsString("task('artisan:migrate-seo-intel', function () {", $deploy);
+        self::assertStringContainsString("within('{{release_path}}/backend', function () use (\$migration): void {", $deploy);
         self::assertStringContainsString("task('seo:url-truth-incremental-cms-canary'", $deploy);
         self::assertStringNotContainsString("after('seo:url-truth-controlled-reconcile', 'seo:url-truth-incremental-cms-canary')", $deploy);
         $canary = file_get_contents($root.'/app/Console/Commands/SeoPlatformUrlTruthCmsCanaryCommand.php');

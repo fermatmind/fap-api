@@ -156,30 +156,9 @@ final class PersonalityEnneagramEvidenceRefreshCommandTest extends TestCase
         );
     }
 
-    public function test_production_workflow_is_sha_cohort_bound_dry_run_first_and_has_no_release_side_effects(): void
+    public function test_retired_manual_workflow_cannot_be_reintroduced(): void
     {
-        $workflow = (string) File::get(dirname(base_path()).'/.github/workflows/enneagram-en13-evidence-production-ops.yml');
-
-        $this->assertStringContainsString('Approve ENNEAGRAM EN13 evidence refresh dry-run for SHA ${RELEASE_SHA}', $workflow);
-        $this->assertStringContainsString('I explicitly approve ENNEAGRAM EN13 evidence refresh for SHA ${RELEASE_SHA} cohort ${COHORT_SHA256}.', $workflow);
-        $this->assertStringContainsString('test "$deployed_sha" = "$RELEASE_SHA"', $workflow);
-        $this->assertStringContainsString('tmp_dir="$(mktemp -d /tmp/en13-evidence-refresh.XXXXXX)"', $workflow);
-        $this->assertStringContainsString('trap emit_summary EXIT', $workflow);
-        $this->assertStringContainsString('run_refresh dry_run > "$tmp_dir/dry-run.json"', $workflow);
-        $this->assertStringContainsString('ENNEAGRAM_EN13_EVIDENCE_WRITE_ENABLED=true run_refresh write', $workflow);
-        $this->assertStringContainsString('.status == "already_refreshed"', $workflow);
-        $this->assertStringContainsString('failed_stage:"transport_or_summary"', $workflow);
-        $this->assertStringContainsString('if: always()', $workflow);
-        $this->assertStringContainsString('Enforce fail-closed refresh result', $workflow);
-        $this->assertStringNotContainsString('/tmp/en13-evidence-dry-run.json', $workflow);
-        $this->assertLessThan(
-            strpos($workflow, 'ENNEAGRAM_EN13_EVIDENCE_WRITE_ENABLED=true run_refresh write'),
-            strpos($workflow, 'run_refresh dry_run > "$tmp_dir/dry-run.json"')
-        );
-        $this->assertStringNotContainsString('seo:warm-sitemap-source-cache', $workflow);
-        $this->assertStringNotContainsString('IndexNow', $workflow);
-        $this->assertStringNotContainsString('llms_eligible=true', $workflow);
-        $this->assertStringNotContainsString('deploy production', $workflow);
+        $this->assertFileDoesNotExist(base_path('../.github/workflows/enneagram-en13-evidence-production-ops.yml'));
     }
 
     private static function reverseAssociativeObjectKeys(mixed $value): mixed

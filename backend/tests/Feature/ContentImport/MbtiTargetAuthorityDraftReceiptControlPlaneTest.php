@@ -38,7 +38,7 @@ final class MbtiTargetAuthorityDraftReceiptControlPlaneTest extends TestCase
     public function test_executor_and_workflow_are_fixed_to_inactive_draft_receipts_without_deployment_or_public_release(): void
     {
         $executor = (string) File::get(base_path('scripts/mbti_target_authority_draft_receipt.php'));
-        $workflow = (string) File::get(base_path('../.github/workflows/mbti-target-authority-draft-receipt.yml'));
+        self::assertFileDoesNotExist(base_path('../.github/workflows/mbti-target-authority-draft-receipt.yml'));
 
         foreach ([
             'mbti_cross_type_comparison_authorities',
@@ -56,14 +56,6 @@ final class MbtiTargetAuthorityDraftReceiptControlPlaneTest extends TestCase
             self::assertStringContainsString($required, $executor);
         }
 
-        self::assertStringNotContainsString('deploy ', $workflow);
-        self::assertStringNotContainsString('php artisan migrate', $workflow);
-        self::assertStringContainsString('environment: production', $workflow);
-        self::assertStringContainsString('mbti_target_authority_draft_receipt.php', $workflow);
-        self::assertStringContainsString('active_pointer_changed == false', $workflow);
-        self::assertStringContainsString('>"$RUN_DIR/executor.stdout" 2>"$RUN_DIR/executor.stderr"', $workflow);
-        self::assertStringContainsString("printf '%s\\n' 'target_authority_receipt_failed' >&2", $workflow);
-        self::assertStringContainsString('scp -r -P "$DEPLOY_PORT"', $workflow);
     }
 
     public function test_result_manifest_storage_schema_fits_the_existing_authority_column_without_changing_the_document_schema(): void

@@ -150,7 +150,7 @@ final class CmsBaselineOperationCommandTest extends TestCase
         $this->assertStringNotContainsString('landing-surfaces:import-local-baseline', $deploy);
         $this->assertStringNotContainsString('content-pages:import-local-baseline', $deploy);
         $this->assertStringContainsString(
-            "after('artisan:scales:seed-default', 'career:warm-public-authority-cache');",
+            "after('guard:career-detail-cache-coverage', 'career:warm-public-authority-cache');",
             $deploy,
         );
     }

@@ -247,21 +247,9 @@ final class PersonalityEnneagramSearchQueueInspectCommandTest extends TestCase
     }
 
     #[Test]
-    public function production_workflow_requires_deployed_sha_and_dry_run_before_bounded_enqueue(): void
+    public function test_retired_manual_workflow_cannot_be_reintroduced(): void
     {
-        $workflow = (string) file_get_contents(base_path('../.github/workflows/enneagram-search-queue-production-enqueue.yml'));
-
-        $this->assertStringContainsString('test "$deployed_sha" = "$RELEASE_SHA"', $workflow);
-        $this->assertStringContainsString('Approve ENNEAGRAM Search Queue enqueue for SHA ${RELEASE_SHA} artifact ${ARTIFACT_SHA256}', $workflow);
-        $dryRunPosition = strpos($workflow, '--dry-run --artifact-sha256="$ARTIFACT_SHA256"');
-        $writePosition = strpos($workflow, '--write --artifact-sha256="$ARTIFACT_SHA256"');
-        $this->assertIsInt($dryRunPosition);
-        $this->assertIsInt($writePosition);
-        $this->assertLessThan($writePosition, $dryRunPosition);
-        $this->assertStringContainsString('.summary.active_duplicate_count == 116', $workflow);
-        $this->assertStringNotContainsString('indexnow:submit', $workflow);
-        $this->assertStringNotContainsString('seo:warm-sitemap-source-cache', $workflow);
-        $this->assertStringNotContainsString('deploy-production', $workflow);
+        $this->assertFileDoesNotExist(base_path('../.github/workflows/enneagram-search-queue-production-enqueue.yml'));
     }
 
     /** @return list<array{locale:string,path:string}> */

@@ -113,8 +113,8 @@ final class MbtiComparisonEnglishPublishDiagnosticServiceTest extends TestCase
         $approvalBytes = (string) File::get($approvalPath);
         $approval = json_decode($approvalBytes, true, 512, JSON_THROW_ON_ERROR);
         $executor = (string) File::get(base_path('scripts/mbti_comparison_english_publish_diagnostic.php'));
-        $workflow = (string) File::get(base_path('../.github/workflows/mbti-comparison-english-publish-diagnostic.yml'));
-        $publishWorkflow = (string) File::get(base_path('../.github/workflows/mbti-comparison-english-publish-live-qa.yml'));
+        self::assertFileDoesNotExist(base_path('../.github/workflows/mbti-comparison-english-publish-diagnostic.yml'));
+        self::assertFileDoesNotExist(base_path('../.github/workflows/mbti-comparison-english-publish-live-qa.yml'));
 
         self::assertSame(MbtiComparisonEnglishPublishDiagnosticService::APPROVAL_SHA256, hash('sha256', $approvalBytes));
         self::assertSame('publish_diagnostic_readback', $approval['gate']);
@@ -124,14 +124,6 @@ final class MbtiComparisonEnglishPublishDiagnosticServiceTest extends TestCase
         }
         self::assertStringContainsString("const REQUIRED_ACTIVE_REVISION = '660280d00a57e58bd8bc76608e19de2492c03f53'", $executor);
         self::assertStringContainsString('controlled_read_only_publish_diagnostic', (string) File::get(base_path('app/Services/Cms/MbtiComparisonEnglishPublishDiagnosticService.php')));
-        self::assertStringContainsString('environment: production', $workflow);
-        self::assertStringContainsString('read_only:true', $workflow);
-        self::assertStringContainsString('> "$receipt_path" <<\'REMOTE\'', $workflow);
-        self::assertStringNotContainsString('mbti-w1-comparison-english-publish-diagnostic-receipts/.', $workflow);
-        self::assertStringContainsString('> "$receipt_path" <<\'REMOTE\'', $publishWorkflow);
-        self::assertStringNotContainsString('$run_dir/receipts/.', $publishWorkflow);
-        self::assertStringNotContainsString('php artisan migrate', $workflow);
-        self::assertStringNotContainsString('dep deploy', $workflow);
     }
 
     /** @return array<string, mixed> */

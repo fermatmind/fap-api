@@ -230,27 +230,9 @@ final class EnneagramUrlTruthHandoffTest extends TestCase
     }
 
     #[Test]
-    public function production_ops_workflow_locks_sha_artifact_and_dry_run_before_write(): void
+    public function test_retired_manual_workflow_cannot_be_reintroduced(): void
     {
-        $workflow = (string) file_get_contents(base_path('../.github/workflows/enneagram-url-truth-production-ops.yml'));
-
-        $this->assertStringContainsString('workflow_dispatch:', $workflow);
-        $this->assertStringContainsString('expected="Approve ENNEAGRAM URL Truth import for SHA ${RELEASE_SHA} artifact ${ARTIFACT_SHA256}"', $workflow);
-        $this->assertStringContainsString('test "$deployed_sha" = "$RELEASE_SHA"', $workflow);
-        $this->assertStringContainsString('--dry-run --limit=116', $workflow);
-        $this->assertStringContainsString('--write --limit=116', $workflow);
-        $this->assertStringContainsString('--page-type=personality_public_content_asset', $workflow);
-        $this->assertStringContainsString('--operator-approved="ENNEAGRAM-SEARCH-URL-TRUTH-OPS-GATE-01:${ARTIFACT_SHA256}"', $workflow);
-        $this->assertStringContainsString('seo_urls', $workflow);
-        $this->assertStringContainsString('seo_url_entities', $workflow);
-        $this->assertStringNotContainsString('SEO_INTEL_WRITE_ENABLED=true', $workflow);
-        $this->assertStringNotContainsString('config:clear', $workflow);
-
-        $dryRunPosition = strpos($workflow, '--dry-run --limit=116');
-        $writePosition = strpos($workflow, '--write --limit=116');
-        $this->assertIsInt($dryRunPosition);
-        $this->assertIsInt($writePosition);
-        $this->assertLessThan($writePosition, $dryRunPosition);
+        $this->assertFileDoesNotExist(base_path('../.github/workflows/enneagram-url-truth-production-ops.yml'));
     }
 
     /** @return array{0:int,1:array<string,mixed>} */

@@ -99,7 +99,7 @@ final class MbtiComparisonEnglishPublishServiceTest extends TestCase
         $bytes = (string) File::get($path);
         $approval = json_decode($bytes, true, 512, JSON_THROW_ON_ERROR);
         $executor = (string) File::get(base_path('scripts/mbti_comparison_english_publish_live_qa.php'));
-        $workflow = (string) File::get(base_path('../.github/workflows/mbti-comparison-english-publish-live-qa.yml'));
+        self::assertFileDoesNotExist(base_path('../.github/workflows/mbti-comparison-english-publish-live-qa.yml'));
 
         self::assertSame(MbtiComparisonEnglishPublishService::APPROVAL_SHA256, hash('sha256', $bytes));
         self::assertSame(MbtiComparisonEnglishPublishService::TARGET_AUTHORITY_RECEIPT_SHA256, $approval['target_authority_receipt_sha256']);
@@ -113,15 +113,6 @@ final class MbtiComparisonEnglishPublishServiceTest extends TestCase
         self::assertStringContainsString("\$projection['source_sha256']", $executor);
         self::assertStringContainsString('comparison_english_publish_live_qa_failed:$errorCode', $executor);
         self::assertStringContainsString('ControlledReceiptWriter', $executor);
-        self::assertStringContainsString('environment: production', $workflow);
-        self::assertStringContainsString('mbti_comparison_english_publish_live_qa.php', $workflow);
-        self::assertStringContainsString("sed -n '1p' \"\$RUN_DIR/executor.stderr\" >&2 || true", $workflow);
-        self::assertStringContainsString('test -s "$remote_receipt_path"', $workflow);
-        self::assertStringContainsString('sha256sum "$remote_receipt_path"', $workflow);
-        self::assertStringContainsString('> "$receipt_path" <<\'REMOTE\'', $workflow);
-        self::assertStringNotContainsString('$run_dir/receipts/.', $workflow);
-        self::assertStringNotContainsString('php artisan migrate', $workflow);
-        self::assertStringNotContainsString('dep deploy', $workflow);
     }
 
     private function seedExactDrafts(): void

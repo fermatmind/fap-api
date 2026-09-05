@@ -161,17 +161,10 @@ final class EnneagramIndexNowCanaryBatchTest extends TestCase
     }
 
     #[Test]
-    public function production_workflow_locks_deployed_sha_artifact_and_canary_before_batch_without_secret_output(): void
+    public function test_retired_manual_workflow_cannot_be_reintroduced(): void
     {
-        $workflow = (string) file_get_contents(base_path('../.github/workflows/enneagram-search-indexnow-production-submit.yml'));
-
-        $this->assertStringContainsString('test "$deployed_sha" = "$RELEASE_SHA"', $workflow);
-        $this->assertStringContainsString('canary_dry_run, canary_submit, batch_dry_run, batch_submit', $workflow);
+        $this->assertFileDoesNotExist(base_path('../.github/workflows/enneagram-search-indexnow-production-submit.yml'));
         $this->assertStringContainsString('batch_requires_one_successful_canary', file_get_contents(base_path('app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueBoundedLiveExecutor.php')));
-        $this->assertLessThan(strpos($workflow, 'run_phase 1'), strpos($workflow, 'run_phase 0'));
-        $this->assertStringContainsString('provider_credentials_exposed: false', $workflow);
-        $this->assertStringNotContainsString('seo:warm-sitemap-source-cache', $workflow);
-        $this->assertStringNotContainsString('deploy-production', $workflow);
     }
 
     /** @return array<string, mixed> */
