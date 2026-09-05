@@ -219,7 +219,7 @@ final class CareerJobDetailBundleBuilderTest extends TestCase
             ),
         ]);
 
-        app(CareerRecommendationCompiler::class)->compile(
+        $publicSnapshot = app(CareerRecommendationCompiler::class)->compile(
             $chain['childProjection'],
             $chain['occupation'],
             [
@@ -230,6 +230,8 @@ final class CareerJobDetailBundleBuilderTest extends TestCase
                 'import_run_id' => $importRun->id,
             ],
         );
+
+        $publicSnapshot->update(['compiled_at' => now()->subMinutes(2)]);
 
         $personalContext = $chain['contextSnapshot']->replicate();
         $personalContext->compile_run_id = null;
@@ -248,9 +250,10 @@ final class CareerJobDetailBundleBuilderTest extends TestCase
         $bundle = app(CareerJobDetailBundleBuilder::class)->buildBySlug('backend-architect-wave');
 
         $this->assertNotNull($bundle);
+        $this->assertArrayNotHasKey('compile_run_id', $bundle->provenanceMeta);
         $this->assertSame(
-            $compileRun->id,
-            data_get($bundle?->toArray(), 'provenance_meta.compile_run_id')
+            $publicSnapshot->fresh()->compiled_at->toISOString(),
+            data_get($bundle?->toArray(), 'provenance_meta.compiled_at')
         );
     }
 

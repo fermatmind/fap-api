@@ -44,12 +44,13 @@ final class CareerJobListBundleBuilderTest extends TestCase
 
         $this->assertCount(1, $items);
         $payload = $items[0]->toArray();
+        $this->assertArrayNotHasKey('compile_run_id', $payload['provenance_meta']);
 
         $this->assertSame('backend-architect-index', data_get($payload, 'identity.canonical_slug'));
         $this->assertTrue((bool) data_get($payload, 'seo_contract.index_eligible'));
         $this->assertSame(
-            $indexable['compileRun']->id,
-            data_get($payload, 'provenance_meta.compile_run_id')
+            $indexable['snapshot']->fresh()->compiled_at->toISOString(),
+            data_get($payload, 'provenance_meta.compiled_at')
         );
     }
 
@@ -190,11 +191,12 @@ final class CareerJobListBundleBuilderTest extends TestCase
 
         $this->assertCount(1, $items);
         $payload = $items[0]->toArray();
+        $this->assertArrayNotHasKey('compile_run_id', $payload['provenance_meta']);
 
         $this->assertSame('backend-architect-stable', data_get($payload, 'identity.canonical_slug'));
         $this->assertFalse((bool) data_get($payload, 'seo_contract.index_eligible'));
-        $this->assertSame($current['compileRun']->id, data_get($payload, 'provenance_meta.compile_run_id'));
-        $this->assertNotSame($older['compileRun']->id, data_get($payload, 'provenance_meta.compile_run_id'));
+        $this->assertSame($current['snapshot']->fresh()->compiled_at->toISOString(), data_get($payload, 'provenance_meta.compiled_at'));
+        $this->assertNotSame($older['snapshot']->fresh()->compiled_at->toISOString(), data_get($payload, 'provenance_meta.compiled_at'));
     }
 
     public function test_it_ignores_newer_recommendation_subject_compile_runs(): void
@@ -219,8 +221,8 @@ final class CareerJobListBundleBuilderTest extends TestCase
 
         $this->assertCount(1, $payloads);
         $this->assertSame('backend-architect-public-index', data_get($payloads[0], 'identity.canonical_slug'));
-        $this->assertSame($jobRun['compileRun']->id, data_get($payloads[0], 'provenance_meta.compile_run_id'));
-        $this->assertNotSame($recommendationRun['compileRun']->id, data_get($payloads[0], 'provenance_meta.compile_run_id'));
+        $this->assertSame($jobRun['snapshot']->fresh()->compiled_at->toISOString(), data_get($payloads[0], 'provenance_meta.compiled_at'));
+        $this->assertNotSame($recommendationRun['snapshot']->fresh()->compiled_at->toISOString(), data_get($payloads[0], 'provenance_meta.compiled_at'));
     }
 
     /**
