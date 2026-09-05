@@ -202,19 +202,14 @@ final class CareerAlignActorsAuthorityOccupationCommandTest extends TestCase
     }
 
     #[Test]
-    public function after_force_the_display_asset_import_dry_run_passes(): void
+    public function alignment_does_not_restore_the_retired_display_asset_publication_command(): void
     {
-        $file = $this->writeAsset();
-
-        $this->runAlign($file, ['--force' => true]);
-        [$exitCode, $report] = $this->runDisplayImportDryRun($file);
-
-        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
-        $this->assertSame('pass', $report['decision']);
-        $this->assertTrue($report['occupation_found']);
-        $this->assertTrue($report['soc_crosswalk_valid']);
-        $this->assertTrue($report['onet_crosswalk_valid']);
-        $this->assertFalse($report['did_write']);
+        [$exitCode, $report] = $this->runAlign($this->writeAsset(), ['--force' => true]);
+        self::assertSame(0, $exitCode, json_encode($report, JSON_THROW_ON_ERROR));
+        self::assertSame(1, Occupation::query()->where('canonical_slug', 'actors')->count());
+        self::assertSame(2, OccupationCrosswalk::query()->count());
+        self::assertSame(0, CareerJobDisplayAsset::query()->count());
+        self::assertArrayNotHasKey('career:import-actors-display-asset', Artisan::all());
     }
 
     #[Test]
@@ -249,22 +244,6 @@ final class CareerAlignActorsAuthorityOccupationCommandTest extends TestCase
             '--file' => $file,
             '--json' => true,
         ], $options));
-        $report = json_decode(Artisan::output(), true);
-        $this->assertIsArray($report, Artisan::output());
-
-        return [$exitCode, $report];
-    }
-
-    /**
-     * @return array{0:int,1:array<string,mixed>}
-     */
-    private function runDisplayImportDryRun(string $file): array
-    {
-        $exitCode = Artisan::call('career:import-actors-display-asset', [
-            '--file' => $file,
-            '--dry-run' => true,
-            '--json' => true,
-        ]);
         $report = json_decode(Artisan::output(), true);
         $this->assertIsArray($report, Artisan::output());
 
