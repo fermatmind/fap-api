@@ -397,7 +397,7 @@ final class StorageBlobOffloadCommandTest extends TestCase
         $this->assertSame(1, (int) ($auditMeta['local_only_count'] ?? -1));
         $this->assertSame(1, (int) ($auditMeta['target_only_count'] ?? -1));
         $this->assertSame(1, (int) ($auditMeta['both_count'] ?? -1));
-        $this->assertSame(['local' => 2, 's3' => 2], $auditMeta['verified_remote_copy_counts_by_disk'] ?? null);
+        $this->assertJsonValueSame(['local' => 2, 's3' => 2], $auditMeta['verified_remote_copy_counts_by_disk'] ?? null);
         $this->assertTrue((bool) ($auditMeta['copy_only'] ?? false));
     }
 

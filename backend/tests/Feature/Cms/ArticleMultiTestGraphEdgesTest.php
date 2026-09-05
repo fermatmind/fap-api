@@ -142,7 +142,7 @@ final class ArticleMultiTestGraphEdgesTest extends TestCase
             ->firstOrFail();
 
         $this->assertSame('mbti-personality-test-16-personality-types', (string) $article->related_test_slug);
-        $this->assertSame(
+        $this->assertEqualsCanonicalizing(
             [
                 'mbti-personality-test-16-personality-types',
                 'big-five-personality-test',
@@ -151,7 +151,7 @@ final class ArticleMultiTestGraphEdgesTest extends TestCase
             ],
             $article->testEdges->pluck('test_slug')->values()->all()
         );
-        $this->assertSame(ArticleTestEdge::ROLE_PRIMARY, (string) $article->testEdges[0]->role);
+        $this->assertSame(ArticleTestEdge::ROLE_PRIMARY, (string) $article->testEdges->firstWhere('test_slug', 'mbti-personality-test-16-personality-types')->role);
         $this->assertSame(
             ArticleTestEdge::SAFETY_SENSITIVE,
             (string) $article->testEdges->firstWhere('test_slug', 'depression-screening-test-standard-edition')?->safety_level

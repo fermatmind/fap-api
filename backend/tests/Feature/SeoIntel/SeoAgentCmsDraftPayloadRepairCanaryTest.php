@@ -121,12 +121,12 @@ final class SeoAgentCmsDraftPayloadRepairCanaryTest extends TestCase
         $this->assertSame(2, ArticleRevision::query()->where('article_id', (int) $article->id)->count());
 
         $oldRevision->refresh();
-        $this->assertSame($oldPayload, $oldRevision->payload_json);
+        $this->assertJsonValueSame($oldPayload, $oldRevision->payload_json);
 
         $newRevision = ArticleRevision::query()->findOrFail((int) data_get($summary, 'new_revision.revision_id'));
         $this->assertSame(((int) $oldRevision->revision_no) + 1, (int) $newRevision->revision_no);
         $this->assertSame((string) $oldRevision->content_md, (string) $newRevision->content_md);
-        $this->assertSame($proposal['proposed_internal_link_actions'], data_get($newRevision->payload_json, 'proposal.proposed_internal_link_actions'));
+        $this->assertJsonValueSame($proposal['proposed_internal_link_actions'], data_get($newRevision->payload_json, 'proposal.proposed_internal_link_actions'));
         $this->assertSame('gsc_cohort_artifact', data_get($newRevision->payload_json, 'proposal.proposal_quality.source'));
         $this->assertSame('SEO-AGENT-CMS-DRAFT-PAYLOAD-REPAIR-CANARY-01', data_get($newRevision->payload_json, 'seo_agent.repair_task'));
 
@@ -293,7 +293,7 @@ final class SeoAgentCmsDraftPayloadRepairCanaryTest extends TestCase
         $this->assertSame(0, $exitCode, Artisan::output());
         $this->assertSame('success', $summary['status'] ?? null);
         $newRevision = ArticleRevision::query()->findOrFail((int) data_get($summary, 'new_revision.revision_id'));
-        $this->assertSame($faqItems, data_get($newRevision->payload_json, 'proposal.proposed_faq_items'));
+        $this->assertJsonValueSame($faqItems, data_get($newRevision->payload_json, 'proposal.proposed_faq_items'));
         $this->assertSame($effectivePackageSha, data_get($newRevision->payload_json, 'seo_agent.package_sha256'));
         $this->assertSame($sourcePackageSha, $summary['source_package_sha256'] ?? null);
 

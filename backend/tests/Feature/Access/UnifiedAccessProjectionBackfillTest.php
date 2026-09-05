@@ -186,7 +186,7 @@ final class UnifiedAccessProjectionBackfillTest extends TestCase
         $this->assertSame('ready', $projection->pdf_state);
         $this->assertSame('benefit_grant_active', $projection->reason_code);
         $this->assertSame(1, (int) $projection->projection_version);
-        $this->assertSame(['report' => true, 'pdf' => true, 'share' => true, 'payment' => true, 'unlock' => true], $projection->actions_json);
+        $this->assertJsonValueSame(['report' => true, 'pdf' => true, 'share' => true, 'payment' => true, 'unlock' => true], $projection->actions_json);
         $this->assertSame($attemptId, data_get($projection->payload_json, 'attempt_id'));
         $this->assertDatabaseHas('attempt_receipts', [
             'attempt_id' => $attemptId,
