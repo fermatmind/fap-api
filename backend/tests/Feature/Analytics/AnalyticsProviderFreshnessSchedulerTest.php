@@ -15,7 +15,7 @@ final class AnalyticsProviderFreshnessSchedulerTest extends TestCase
         $this->assertSame(0, Artisan::call('schedule:list', ['--no-ansi' => true]));
         $enabled = Artisan::output();
 
-        $this->assertStringContainsString('0 * * * *', $enabled);
+        $this->assertMatchesRegularExpression('/0\s+\*\s+\*\s+\*\s+\*\s+php artisan analytics:refresh-provider-freshness --json/', $enabled);
         $this->assertStringContainsString('analytics:refresh-provider-freshness --json', $enabled);
     }
 
