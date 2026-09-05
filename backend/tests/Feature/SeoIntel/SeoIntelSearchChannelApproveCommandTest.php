@@ -64,7 +64,7 @@ final class SeoIntelSearchChannelApproveCommandTest extends TestCase
             '--json' => true,
         ]);
 
-        $this->assertSame(0, $exitCode);
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertSame('success', $payload['status'] ?? null);
         $this->assertTrue((bool) ($payload['dry_run'] ?? false));
         $this->assertSame(
@@ -124,7 +124,7 @@ final class SeoIntelSearchChannelApproveCommandTest extends TestCase
             '--json' => true,
         ]);
 
-        $this->assertSame(0, $exitCode);
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertSame('success', $payload['status'] ?? null);
         $this->assertFalse((bool) ($payload['dry_run'] ?? true));
         $this->assertTrue((bool) ($payload['writes_committed'] ?? false));
@@ -181,7 +181,7 @@ final class SeoIntelSearchChannelApproveCommandTest extends TestCase
         ]);
         $payload = json_decode(trim(Artisan::output()), true, 512, JSON_THROW_ON_ERROR);
 
-        $this->assertSame(0, $exitCode);
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertSame('success', $payload['status'] ?? null);
         $this->assertTrue((bool) ($payload['dry_run'] ?? false));
         $this->assertSame([], $payload['issues'] ?? null);
@@ -286,7 +286,7 @@ final class SeoIntelSearchChannelApproveCommandTest extends TestCase
             'entity_type' => $overrides['entity_type'] ?? 'article',
             'entity_id' => $overrides['entity_id'] ?? 'article:fixture',
             'source_authority' => $overrides['source_authority'] ?? 'backend_cms',
-            'source_table' => $overrides['source_table'] ?? 'cms_articles',
+            'source_table' => $overrides['source_table'] ?? 'articles',
             'channel' => $channel,
             'eligibility_state' => $overrides['eligibility_state'] ?? 'eligible',
             'approval_state' => $overrides['approval_state'] ?? 'pending',

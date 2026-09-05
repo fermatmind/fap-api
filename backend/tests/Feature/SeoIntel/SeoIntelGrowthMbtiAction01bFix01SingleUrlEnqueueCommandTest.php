@@ -52,7 +52,7 @@ final class SeoIntelGrowthMbtiAction01bFix01SingleUrlEnqueueCommandTest extends 
             'page_entity_type' => 'test_detail',
             'entity_id_or_slug' => 'mbti-personality-test-16-personality-types',
             'source_authority' => 'scale_catalog',
-            'metadata_json' => ['claim_safe' => true, 'source_table' => 'backend_authority_canary_contract'],
+            'metadata_json' => ['claim_safe' => true, 'source_table' => 'scales_registry'],
         ]);
 
         $output = $this->runQueueCommand([
@@ -67,7 +67,7 @@ final class SeoIntelGrowthMbtiAction01bFix01SingleUrlEnqueueCommandTest extends 
         $this->assertSame('success', $output['status'] ?? null);
         $this->assertSame($url, $output['canonical_url_filter'] ?? null);
         $this->assertSame(1, $output['candidate_count'] ?? null);
-        $this->assertSame(1, $output['eligible_count'] ?? null);
+        $this->assertSame(1, $output['eligible_count'] ?? null, json_encode($output, JSON_THROW_ON_ERROR));
         $this->assertSame(1, $output['planned_queue_count'] ?? null);
         $this->assertSame($url, data_get($output, 'selected_candidate.canonical_url'));
         $this->assertSame('eligible', data_get($output, 'selected_candidate.eligibility_state'));
@@ -108,7 +108,7 @@ final class SeoIntelGrowthMbtiAction01bFix01SingleUrlEnqueueCommandTest extends 
 
         $this->assertSame('success', $output['status'] ?? null);
         $this->assertSame(1, $output['candidate_count'] ?? null);
-        $this->assertSame(1, $output['eligible_count'] ?? null);
+        $this->assertSame(1, $output['eligible_count'] ?? null, json_encode($output, JSON_THROW_ON_ERROR));
         $this->assertSame(1, $output['planned_queue_count'] ?? null);
         $this->assertSame('personality_profile_variant', data_get($output, 'selected_candidate.page_entity_type'));
         $this->assertFalse((bool) ($output['writes_attempted'] ?? true));
@@ -224,7 +224,7 @@ final class SeoIntelGrowthMbtiAction01bFix01SingleUrlEnqueueCommandTest extends 
             'page_entity_type' => 'test_detail',
             'entity_id_or_slug' => 'mbti-personality-test-16-personality-types',
             'source_authority' => 'scale_catalog',
-            'metadata_json' => ['claim_safe' => true, 'source_table' => 'backend_authority_canary_contract'],
+            'metadata_json' => ['claim_safe' => true, 'source_table' => 'scales_registry'],
         ]);
 
         $output = $this->runQueueCommand([
@@ -254,7 +254,7 @@ final class SeoIntelGrowthMbtiAction01bFix01SingleUrlEnqueueCommandTest extends 
             'page_entity_type' => 'test_detail',
             'entity_id_or_slug' => 'mbti-personality-test-16-personality-types',
             'source_authority' => 'scale_catalog',
-            'metadata_json' => ['claim_safe' => true, 'source_table' => 'backend_authority_canary_contract'],
+            'metadata_json' => ['claim_safe' => true, 'source_table' => 'scales_registry'],
         ]);
 
         DB::connection('seo_intel')->table('seo_search_channel_queue_items')->insert([
@@ -265,7 +265,7 @@ final class SeoIntelGrowthMbtiAction01bFix01SingleUrlEnqueueCommandTest extends 
             'entity_type' => 'test_detail',
             'entity_id' => 'mbti-personality-test-16-personality-types',
             'source_authority' => 'scale_catalog',
-            'source_table' => 'backend_authority_canary_contract',
+            'source_table' => 'scales_registry',
             'channel' => $channel,
             'eligibility_state' => 'eligible',
             'approval_state' => 'pending',
@@ -329,7 +329,7 @@ final class SeoIntelGrowthMbtiAction01bFix01SingleUrlEnqueueCommandTest extends 
         $output = json_decode(trim(Artisan::output()), true);
 
         $this->assertIsArray($output);
-        $this->assertSame($expectSuccess ? 0 : 1, $exitCode, Artisan::output());
+        $this->assertSame($expectSuccess ? 0 : 1, $exitCode, json_encode($output, JSON_THROW_ON_ERROR));
 
         return $output;
     }
