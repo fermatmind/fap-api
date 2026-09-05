@@ -38,6 +38,7 @@ final class PersonalityEnneagramLlmsTxtReleaseGateCommandTest extends TestCase
 
     public function test_write_requires_process_gate_exact_hash_and_token_then_changes_only_llms_flag(): void
     {
+        $this->freezeTime();
         $this->seedCohort();
         $cohortSha = $this->dryRun()['cohort_sha256'];
         $before = PersonalityPublicContentAsset::query()->orderBy('id')->get()->map(fn ($asset) => $asset->getAttributes())->all();
