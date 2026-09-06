@@ -750,6 +750,11 @@ final class ScaleRegistrySeeder extends Seeder
             $attributes['content_i18n_json']['zh'][$key] = $value;
         }
 
+        $methods = json_decode(file_get_contents(database_path('data/assessment_methods_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
+        foreach ($methods['scales'][$attributes['code']] as $key => $value) {
+            $attributes['content_i18n_json']['zh'][$key] = $value;
+        }
+
         return DB::transaction(function () use ($writer, $attributes) {
             $published = [];
             foreach (['scales_registry', 'scales_registry_v2'] as $table) {
@@ -782,6 +787,10 @@ final class ScaleRegistrySeeder extends Seeder
 
     private function upsertMbtiPreservingPublishedContent(ScaleRegistryWriter $writer, array $attributes): \App\Models\ScaleRegistry
     {
+        $methods = json_decode(file_get_contents(database_path('data/assessment_methods_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
+        $base = json_decode(file_get_contents(database_path('data/mbti_landing_zh_20260905.json')), true, 512, JSON_THROW_ON_ERROR);
+        $attributes['content_i18n_json']['zh'] = array_replace($attributes['content_i18n_json']['zh'] ?? [], $base['content'], $methods['scales']['MBTI']);
+
         return DB::transaction(function () use ($writer, $attributes) {
             $published = [];
             foreach (['scales_registry', 'scales_registry_v2'] as $table) {

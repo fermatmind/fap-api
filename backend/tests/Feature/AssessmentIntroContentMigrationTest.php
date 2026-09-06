@@ -129,7 +129,8 @@ class AssessmentIntroContentMigrationTest extends TestCase
             $method->invoke($seeder, $writer, $attributes);
             foreach (['scales_registry', 'scales_registry_v2'] as $table) {
                 $content = json_decode(DB::table($table)->where('code', $code)->value('content_i18n_json'), true);
-                $this->assertSame($fields['why_choose'], $content['zh']['why_choose']);
+                $latest = json_decode(file_get_contents(database_path('data/assessment_methods_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
+                $this->assertSame($latest['scales'][$code]['why_choose'], $content['zh']['why_choose']);
                 if (isset($fields['version_comparison'])) {
                     $this->assertSame($fields['version_comparison'], $content['zh']['version_comparison']);
                 }
