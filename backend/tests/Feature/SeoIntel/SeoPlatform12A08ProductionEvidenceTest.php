@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SeoIntel;
 
-use App\Services\SEO\SitemapCache;
+use App\Http\Controllers\API\V0_5\SEO\SitemapSourceController;
 use App\Services\SeoCouncil\Platform12\Platform12DailyMissionSet;
 use App\Services\SeoCouncil\Platform12\Platform12ProductionEvidenceReader;
 use Carbon\CarbonImmutable;
@@ -186,13 +186,46 @@ final class SeoPlatform12A08ProductionEvidenceTest extends TestCase
         $this->assertSame(['availability' => 'AVAILABLE', 'candidate_count' => 2, 'observed_count' => 1], $this->read('d1', $at));
     }
 
-    public function test_sitemap_reads_existing_cache_without_warming_and_blocks_entities(): void
+    public function test_sitemap_reads_deploy_verified_source_cache_without_warming(): void
     {
-        app(SitemapCache::class)->put('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://example.test/en</loc></url></urlset>', 'etag', 'test-identity');
+        Cache::put(SitemapSourceController::CACHE_KEY_FRESH, [
+            'ok' => true,
+            'source' => 'backend_sitemap_generator',
+            'count' => 1,
+            'items' => [['loc' => 'https://fermatmind.com/en', 'lastmod' => '2026-09-06T00:00:00Z']],
+        ]);
         $this->assertSame(['availability' => 'AVAILABLE', 'observation_count' => 1], $this->read('sitemap'));
-        Cache::put(SitemapCache::XML_CACHE_KEY, '<!DOCTYPE urlset [<!ENTITY x SYSTEM "file:///unreadable">]><urlset>&x;</urlset>');
+
+        Cache::put(SitemapSourceController::CACHE_KEY_FRESH, [
+            'ok' => true,
+            'source' => 'backend_sitemap_generator',
+            'count' => 1,
+            'items' => [['loc' => '', 'lastmod' => '2026-09-06T00:00:00Z']],
+        ]);
         $this->expectException(\RuntimeException::class);
         $this->read('sitemap');
+    }
+
+    public function test_sitemap_rejects_fallback_or_malformed_source_cache(): void
+    {
+        foreach ([
+            null,
+            ['ok' => true, 'source' => 'backend_sitemap_generator_fallback', 'count' => 1, 'items' => []],
+            ['ok' => true, 'source' => 'backend_sitemap_generator', 'count' => 2,
+                'items' => [['loc' => 'https://fermatmind.com/en', 'lastmod' => '2026-09-06T00:00:00Z']]],
+        ] as $invalid) {
+            Cache::forget(SitemapSourceController::CACHE_KEY_FRESH);
+            if ($invalid !== null) {
+                Cache::put(SitemapSourceController::CACHE_KEY_FRESH, $invalid);
+            }
+
+            try {
+                $this->read('sitemap');
+                $this->fail('Missing, fallback, or malformed sitemap observations must fail closed.');
+            } catch (\RuntimeException $error) {
+                $this->assertSame('SITEMAP_OBSERVATION_UNAVAILABLE', $error->getMessage());
+            }
+        }
     }
 
     public function test_empty_minimized_evidence_is_counted_but_missing_hmac_capability_is_not_passed(): void

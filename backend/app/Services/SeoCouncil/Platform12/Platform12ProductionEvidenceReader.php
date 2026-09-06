@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\SeoCouncil\Platform12;
 
+use App\Http\Controllers\API\V0_5\SEO\SitemapSourceController;
 use App\Services\Ops\PublicContentDeliveryProbeService;
-use App\Services\SEO\SitemapCache;
 use App\Services\SeoAgentEvidence\Bundle\SeoEvidenceBundleVerifier;
 use App\Services\SeoAgentEvidence\Privacy\SeoQueryHmac;
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
@@ -301,26 +301,30 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
 
     private function sitemap(): array
     {
-        $identity = Cache::get(SitemapCache::IDENTITY_CACHE_KEY);
-        $cached = is_string($identity) ? app(SitemapCache::class)->get($identity) : null;
-        $xml = $cached['xml'] ?? null;
-        if (! is_string($xml) || strlen($xml) > 5242880 || preg_match('/<!DOCTYPE|<!ENTITY/i', $xml)) {
+        // Observe the same bounded projection that deploy warms and verifies at
+        // /api/v0.5/seo/sitemap-source. The rendered XML cache is populated by
+        // a different consumer and is not a deployment source contract.
+        $cached = Cache::get(SitemapSourceController::CACHE_KEY_FRESH);
+        if (! is_array($cached) || array_is_list($cached)
+            || array_keys($cached) !== ['ok', 'source', 'count', 'items']
+            || ($cached['ok'] ?? false) !== true
+            || ($cached['source'] ?? null) !== 'backend_sitemap_generator'
+            || ! is_int($cached['count'] ?? null) || $cached['count'] < 1
+            || ! is_array($cached['items'] ?? null) || ! array_is_list($cached['items'])
+            || count($cached['items']) !== $cached['count']) {
             throw new \RuntimeException('SITEMAP_OBSERVATION_UNAVAILABLE');
         }
-        $previous = libxml_use_internal_errors(true);
-        try {
-            $document = simplexml_load_string($xml, \SimpleXMLElement::class, LIBXML_NONET);
-            if ($document === false || $document->getName() !== 'urlset') {
+
+        foreach ($cached['items'] as $item) {
+            if (! is_array($item) || array_keys($item) !== ['loc', 'lastmod']
+                || ! is_string($item['loc'] ?? null) || trim($item['loc']) === ''
+                || ! is_string($item['lastmod'] ?? null) || trim($item['lastmod']) === '') {
                 throw new \RuntimeException('SITEMAP_OBSERVATION_INVALID');
             }
-            $count = count($document->xpath('//*[local-name()="url"]') ?: []);
-        } finally {
-            libxml_clear_errors();
-            libxml_use_internal_errors($previous);
         }
 
         // This is a cached observation count, never the public authority denominator.
-        return ['availability' => 'AVAILABLE', 'observation_count' => $count];
+        return ['availability' => 'AVAILABLE', 'observation_count' => $cached['count']];
     }
 
     private function evidenceSafety(CarbonImmutable $at): array
