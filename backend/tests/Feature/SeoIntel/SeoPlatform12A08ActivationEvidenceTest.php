@@ -158,6 +158,12 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
         $this->assertStringContainsString('set +e', $step);
         $this->assertStringContainsString('public_probe_exit=$?', $step);
         $this->assertStringContainsString('write_hold_receipt', $step);
+        $this->assertStringContainsString('failure_stage="sitemap_observation_refresh"', $step);
+        $this->assertStringContainsString(
+            'seo:warm-sitemap-source-cache --refresh-if-changed --json',
+            $step,
+        );
+        $this->assertStringContainsString('IN("verified_unchanged","rebuilt")', $step);
         $this->assertStringContainsString('failure_stage="public_probe_observation"', $step);
         $this->assertStringContainsString('failure_stage="acceptance_complete"', $step);
         $this->assertStringContainsString('probe_exit_code:$probe_exit', $step);
@@ -180,6 +186,24 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
         $this->assertMatchesRegularExpression(
             '/abort_acceptance\(\).*?write_hold_receipt.*?acceptance-abort/s',
             $step,
+        );
+        $this->assertLessThan(
+            strpos($step, 'for mission in'),
+            strpos($step, 'failure_stage="sitemap_observation_refresh"'),
+        );
+
+        $productionStart = strpos($workflow, 'name: Run first production controlled acceptance');
+        $productionEnd = strpos($workflow, 'name: Record compatible carry or HOLD receipt', $productionStart ?: 0);
+        $this->assertIsInt($productionStart);
+        $this->assertIsInt($productionEnd);
+        $productionStep = substr($workflow, $productionStart, $productionEnd - $productionStart);
+        $this->assertStringContainsString(
+            'seo:warm-sitemap-source-cache --refresh-if-changed --json',
+            $productionStep,
+        );
+        $this->assertLessThan(
+            strpos($productionStep, 'for mission in'),
+            strpos($productionStep, 'sitemap_refresh='),
         );
     }
 

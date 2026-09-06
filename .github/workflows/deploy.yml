@@ -1301,6 +1301,12 @@ jobs:
             exit "$exit_code"
           }
           trap abort_acceptance ERR
+          failure_stage="sitemap_observation_refresh"
+          sitemap_refresh="$("${ssh_base[@]}" "set -euo pipefail; test \"\$(tr -d '\\r\\n' < $q_path/current/REVISION)\" = $q_sha; cd $q_path/current/backend; php artisan seo:warm-sitemap-source-cache --refresh-if-changed --json --no-interaction --no-ansi")"
+          jq -e '((keys | sort) == ["count","elapsed_seconds","status"])
+            and (.status | IN("verified_unchanged","rebuilt"))
+            and (.count | type == "number" and . >= 1)
+            and (.elapsed_seconds | type == "number" and . >= 0)' <<<"$sitemap_refresh" >/dev/null
           trap - ERR
           set +e
           public_probe="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan public-content:probe-delivery --all --json --no-interaction --no-ansi")"
@@ -2779,7 +2785,13 @@ jobs:
           ssh_base=(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -i "$PRODUCTION_IDENTITY" \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST")
           printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_sha '%q' "$SOURCE_SHA"
           operation="deploy:${GITHUB_RUN_ID}:${GITHUB_RUN_ATTEMPT}:${SOURCE_SHA}"
+          sitemap_refresh="$("${ssh_base[@]}" "set -euo pipefail; test \"\$(tr -d '\\r\\n' < $q_path/current/REVISION)\" = $q_sha; cd $q_path/current/backend; php artisan seo:warm-sitemap-source-cache --refresh-if-changed --json --no-interaction --no-ansi")"
+          jq -e '((keys | sort) == ["count","elapsed_seconds","status"])
+            and (.status | IN("verified_unchanged","rebuilt"))
+            and (.count | type == "number" and . >= 1)
+            and (.elapsed_seconds | type == "number" and . >= 0)' <<<"$sitemap_refresh" >/dev/null
           begun="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-runtime acceptance-begin --operation-ref='$operation' --no-interaction --no-ansi")"
           jq -e --arg operation "$operation" '.state == "CONTROLLED_ACCEPTANCE_ONLY"
             and .controlled_acceptance_enabled == true and .operation_ref == $operation
@@ -2820,7 +2832,6 @@ jobs:
           "${ssh_base[@]}" "set -euo pipefail; umask 077; test ! -e '$remote_tmp'; mkdir '$remote_tmp'"
           scp -q -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -i "$PRODUCTION_IDENTITY" \
             -P "$DEPLOY_PORT" "$output" "$output.sha256" "$DEPLOY_USER@$DEPLOY_HOST:$remote_tmp/"
-          printf -v q_sha '%q' "$SOURCE_SHA"
           remote="set -euo pipefail; trap 'rm -rf \"$remote_tmp\"' EXIT; test \"\$(tr -d '\\r\\n' < $q_path/current/REVISION)\" = $q_sha; \
             test \"\$(sha256sum '$remote_tmp/activation.json' | awk '{print \$1}')\" = \"\$(cat '$remote_tmp/activation.json.sha256')\"; \
             target=$q_path/shared/backend/storage/app/release-receipts/seo-council-a08; \
