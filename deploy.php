@@ -1043,7 +1043,7 @@ echo "SEO Council unavailable writer aliases removed.\n";
 PHP;
         run('{{bin/php}} -d display_errors=0 -r '.deployShellArg($scrubber).' '.deployPlaceholderPathArg('{{deploy_path}}', 'shared/backend/.env'));
         throw new \RuntimeException(
-            'SEO_COUNCIL_RUNTIME_WRITER_UNAVAILABLE: configure SEO_COUNCIL_DB_USERNAME and SEO_COUNCIL_DB_PASSWORD'
+            'SEO_COUNCIL_RUNTIME_WRITER_UNAVAILABLE: verify SEO_COUNCIL_DB credentials and SEO_INTEL_DB target'
         );
     }
     $runtime += [
