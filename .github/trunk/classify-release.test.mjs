@@ -83,7 +83,10 @@ test('missing evidence and API failures cannot silently select deploy-skip', asy
 });
 
 test('CI uses the release-aware scope for downstream test and migration selection', () => {
+  const resolver = readFileSync(new URL('./classify-release.mjs', import.meta.url), 'utf8');
   const workflow = readFileSync(new URL('../workflows/ci.yml', import.meta.url), 'utf8');
+  assert.match(resolver, /actions\/workflows\/deploy\.yml\/runs\?per_page=100&page=\$\{page\}/);
+  assert.doesNotMatch(resolver, /runs\?status=success/);
   assert.match(workflow, /node \.github\/trunk\/classify-release\.mjs/);
   assert.match(workflow, /base_sha="\$\(jq -r \.scope\.validation_base_sha/);
   assert.match(workflow, /PUSH_BEFORE: \$\{\{ github\.event\.before \}\}/);

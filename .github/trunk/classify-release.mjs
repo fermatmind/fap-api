@@ -64,7 +64,11 @@ async function cli() {
     }
   };
   const baseline = await productionBaseline({
-    listRuns: (page) => api(`actions/workflows/deploy.yml/runs?status=success&per_page=100&page=${page}`, '.workflow_runs | map({id, head_sha, status, conclusion, head_branch, event, run_attempt})'),
+    // Read the ordered workflow history without the API status filter. The
+    // resolver already verifies every terminal state and production activation
+    // step locally; relying on the filtered endpoint can return a stale subset
+    // and incorrectly roll the production baseline backwards.
+    listRuns: (page) => api(`actions/workflows/deploy.yml/runs?per_page=100&page=${page}`, '.workflow_runs | map({id, head_sha, status, conclusion, head_branch, event, run_attempt})'),
     listJobs: (runId) => {
       const result = api(`actions/runs/${runId}/attempts/1/jobs?per_page=100`, '{total_count, jobs: [.jobs[] | {name, status, conclusion, steps: [.steps[]? | {name, conclusion}]}]}');
       if (result.total_count !== result.jobs?.length) throw new Error('Incomplete deployment jobs response');
