@@ -156,6 +156,7 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
         $step = substr($workflow, $start, $end - $start);
 
         $this->assertStringContainsString('set +e', $step);
+        $this->assertStringContainsString('-o ServerAliveInterval=15 -o ServerAliveCountMax=8', $step);
         $this->assertStringContainsString('public_probe_exit=$?', $step);
         $this->assertStringContainsString('write_hold_receipt', $step);
         $this->assertStringContainsString('failure_stage="sitemap_observation_refresh"', $step);
@@ -206,6 +207,10 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
         $this->assertIsInt($productionStart);
         $this->assertIsInt($productionEnd);
         $productionStep = substr($workflow, $productionStart, $productionEnd - $productionStart);
+        $this->assertStringContainsString(
+            '-o ServerAliveInterval=15 -o ServerAliveCountMax=8',
+            $productionStep,
+        );
         $this->assertStringContainsString(
             'seo:warm-sitemap-source-cache --refresh-if-changed --json',
             $productionStep,
