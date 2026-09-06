@@ -31,6 +31,7 @@ final class PolicyGatewayPrivacyGuard
             return $normalized;
         }
         $hashKey = $key === 'hash'
+            || $key === 'context_id'
             || str_ends_with((string) $key, '_hash')
             || str_ends_with((string) $key, '_revision')
             || str_ends_with((string) $key, '_ref');
