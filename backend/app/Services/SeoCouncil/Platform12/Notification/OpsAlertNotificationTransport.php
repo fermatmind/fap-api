@@ -14,6 +14,7 @@ final class OpsAlertNotificationTransport implements Platform12NotificationTrans
         $recovering = str_ends_with($type, '_RECOVERY');
         $base = $recovering ? substr($type, 0, -9) : $type;
         $description = match ($base) {
+            'STAGING_ACCEPTANCE' => '【STAGING 验收】SEO Council 只读通知链真实发送测试；这不是生产告警。',
             'PRIVATE_OR_SAFETY' => '隐私或安全检查异常，请优先查看证据并保持业务写入关闭。',
             'AUTHORITY_INDEXABILITY_P0', 'AUTHORITY_INDEXABILITY_P1' => 'canonical 或 indexability 检查异常，请核对 URL Truth 与权威来源。',
             'DATA_FAILURE' => '数据来源失败或过期，请检查 GSC 与运行证据的新鲜度。',

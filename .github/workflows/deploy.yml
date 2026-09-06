@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   workflow_run:
-    workflows: [CI, Nightly]
+    workflows: [CI]
     types: [completed]
 
 permissions:
@@ -1258,42 +1258,59 @@ jobs:
           ssh_base=(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -o ConnectionAttempts=3 -o IdentitiesOnly=yes -i "$DEPLOY_IDENTITY_FILE_STG" \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST")
-          status="$("${ssh_base[@]}" "set -euo pipefail; test \"\$(tr -d '\\r\\n' < $q_path/current/REVISION)\" = $q_sha; cd $q_path/current/backend; php artisan seo:council-runtime status --no-interaction --no-ansi")"
-          intent="$(jq -r .pause_intent <<<"$status")"
+          operation="deploy:${GITHUB_RUN_ID}:${GITHUB_RUN_ATTEMPT}:${DEPLOY_SHA}"
           mkdir -p artifacts/seo-council-a08-staging
-          if test "$intent" = PAUSED; then
-            jq -n --arg sha "$DEPLOY_SHA" --arg run "$GITHUB_RUN_ID" --arg attempt "$GITHUB_RUN_ATTEMPT" \
-              '{schema_version:"seo.platform12_a08_staging_acceptance.v1",sha:$sha,deploy_run_id:($run|tonumber),deploy_run_attempt:($attempt|tonumber),
-                status:"hold",reason:"PAUSE_INTENT_PRESERVED",trigger_mode:"controlled_acceptance",
-                natural_slot_receipt:false,mission_count:0,missions:[],model_calls:0,tool_calls:0,external_calls:0,business_writes:0}' \
-              > artifacts/seo-council-a08-staging/receipt.json
-            exit 0
-          fi
-          if test "$intent" = UNSET; then
-            "${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-runtime resume --no-interaction --no-ansi" >/dev/null
-          fi
+          begun="$("${ssh_base[@]}" "set -euo pipefail; test \"\$(tr -d '\\r\\n' < $q_path/current/REVISION)\" = $q_sha; cd $q_path/current/backend; php artisan seo:council-runtime acceptance-begin --operation-ref='$operation' --no-interaction --no-ansi")"
+          jq -e --arg operation "$operation" '.state == "CONTROLLED_ACCEPTANCE_ONLY"
+            and .controlled_acceptance_enabled == true and .operation_ref == $operation
+            and .pause_source == "acceptance_protection" and (.generation | test("^[a-f0-9]{32}$"))
+            and .business_write_enabled == false' <<<"$begun" >/dev/null
+          generation="$(jq -r .generation <<<"$begun")"
+          abort_acceptance() {
+            "${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-runtime acceptance-abort --operation-ref='$operation' --expected-generation='$generation' --no-interaction --no-ansi" >/dev/null || true
+          }
+          trap abort_acceptance ERR
           results='[]'
           for mission in \
             seo.platform12.daily_gsc_core_runtime \
             seo.platform12.daily_url_truth_reconciliation \
             seo.platform12.daily_private_policy_evidence_drift; do
-            result="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-scheduled --acceptance=$mission --json --no-interaction --no-ansi")"
+            result="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-scheduled --acceptance=$mission --acceptance-operation='$operation' --json --no-interaction --no-ansi")"
             results="$(jq -c --argjson result "$result" '. + [$result]' <<<"$results")"
             if ! jq -e '.status == "TERMINAL_COMMITTED" and .terminal_committed == true
               and .source_gaps == [] and (.mission_verdict | type == "string")
               and .execution_allowed == false and .business_write_enabled == false' <<<"$result" >/dev/null; then
               jq -n --arg sha "$DEPLOY_SHA" --arg run "$GITHUB_RUN_ID" --arg attempt "$GITHUB_RUN_ATTEMPT" --argjson missions "$results" \
-                '{schema_version:"seo.platform12_a08_staging_acceptance.v1",sha:$sha,deploy_run_id:($run|tonumber),deploy_run_attempt:($attempt|tonumber),
+                '{schema_version:"seo.platform12_a08_staging_acceptance.v2",sha:$sha,deploy_run_id:($run|tonumber),deploy_run_attempt:($attempt|tonumber),
                   status:"hold",reason:"A08_SOURCE_ACCEPTANCE_HOLD",trigger_mode:"controlled_acceptance",natural_slot_receipt:false,
+                  source_connected:false,notification_delivery_verified:false,pause_resume_verified:false,
+                  receipt_to_ui_verified:false,
                   mission_count:($missions|length),missions:$missions,model_calls:0,tool_calls:0,external_calls:0,business_writes:0}' \
                 > artifacts/seo-council-a08-staging/receipt.json
               jq -c '{status,mission_id,terminal_committed,mission_verdict,source_gaps,execution_allowed,business_write_enabled}' <<<"$result" >&2
               exit 1
             fi
           done
+          hashes="$(jq -c '[.[].receipt_hash]' <<<"$results")"
+          hash_csv="$(jq -r 'join(",")' <<<"$hashes")"
+          readback="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-acceptance-readback --receipt-hashes='$hash_csv' --no-interaction --no-ansi")"
+          jq -e '.status == "pass" and .receipt_to_ui_verified == true
+            and .notification_configuration_verified == true
+            and .controlled_acceptance_verified == true and .receipt_count == 3
+            and .business_write_enabled == false' <<<"$readback" >/dev/null
+          notification="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-notification-acceptance --operation-ref='$operation' --json --no-interaction --no-ansi")"
+          jq -e '.status == "sent" and .business_write_enabled == false' <<<"$notification" >/dev/null
+          duplicate="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-notification-acceptance --operation-ref='$operation' --json --no-interaction --no-ansi")"
+          jq -e '.status == "DEDUPLICATED" and .business_write_enabled == false' <<<"$duplicate" >/dev/null
+          completed="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-runtime acceptance-complete --operation-ref='$operation' --expected-generation='$generation' --no-interaction --no-ansi")"
+          jq -e '.state == "ACTIVE_READ_ONLY" and .controlled_acceptance_enabled == false
+            and .business_write_enabled == false' <<<"$completed" >/dev/null
+          trap - ERR
           jq -n --arg sha "$DEPLOY_SHA" --arg run "$GITHUB_RUN_ID" --arg attempt "$GITHUB_RUN_ATTEMPT" --argjson missions "$results" \
-            '{schema_version:"seo.platform12_a08_staging_acceptance.v1",sha:$sha,deploy_run_id:($run|tonumber),deploy_run_attempt:($attempt|tonumber),
-              status:"pass",trigger_mode:"controlled_acceptance",natural_slot_receipt:false,mission_count:3,
+            '{schema_version:"seo.platform12_a08_staging_acceptance.v2",sha:$sha,deploy_run_id:($run|tonumber),deploy_run_attempt:($attempt|tonumber),
+              status:"pass",source_connected:true,notification_delivery_verified:true,pause_resume_verified:true,
+              receipt_to_ui_verified:true,
+              trigger_mode:"controlled_acceptance",natural_slot_receipt:false,mission_count:3,
               missions:$missions,model_calls:0,tool_calls:0,external_calls:0,business_writes:0}' \
             > artifacts/seo-council-a08-staging/receipt.json
       - name: Record staging timing
@@ -2434,20 +2451,19 @@ jobs:
       - run: echo "Validated docs/rules/tests-only SHA; application deployment intentionally skipped."
 
   council-a08-activation:
-    name: Council A08 trusted read-only activation
+    name: Council A08 scoped read-only activation
     needs: [policy, staging, production]
     if: >-
       always() && github.event.workflow_run.head_branch == 'main' &&
       github.event.workflow_run.run_attempt == 1 && github.run_attempt == 1 &&
-      ((github.event.workflow_run.name == 'Nightly' &&
-        github.event.workflow_run.event == 'schedule' &&
-        github.event.workflow_run.conclusion == 'success') ||
-       (github.event.workflow_run.name == 'CI' && needs.production.result == 'success'))
+      github.event.workflow_run.name == 'CI' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.conclusion == 'success' &&
+      needs.production.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     environment: production
     env:
-      SOURCE_WORKFLOW: ${{ github.event.workflow_run.name }}
       SOURCE_RUN_ID: ${{ github.event.workflow_run.id }}
       SOURCE_SHA: ${{ github.event.workflow_run.head_sha }}
       DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
@@ -2484,7 +2500,6 @@ jobs:
             const owner = context.repo.owner;
             const repo = context.repo.repo;
             const sha = process.env.SOURCE_SHA;
-            const source = process.env.SOURCE_WORKFLOW;
             const artifacts = async (runId) => (await github.rest.actions.listWorkflowRunArtifacts({
               owner, repo, run_id: Number(runId), per_page: 100,
             })).data.artifacts.filter((artifact) => !artifact.expired);
@@ -2495,19 +2510,15 @@ jobs:
               }
               return found[0];
             };
-            const successfulRun = async (workflow) => {
-              const runs = (await github.rest.actions.listWorkflowRuns({
-                owner, repo, workflow_id: workflow, branch: "main", status: "success", per_page: 100,
-              })).data.workflow_runs.filter((run) => run.head_sha === sha && run.run_attempt === 1);
-              if (runs.length !== 1) throw new Error(`Expected one successful ${workflow} run for ${sha}; found ${runs.length}`);
-              return runs[0];
-            };
-            const ci = source === "Nightly" ? await successfulRun("ci.yml")
-              : (await github.rest.actions.getWorkflowRun({ owner, repo, run_id: Number(process.env.SOURCE_RUN_ID) })).data;
-            const deploy = source === "Nightly" ? await successfulRun("deploy.yml")
-              : (await github.rest.actions.getWorkflowRun({ owner, repo, run_id: Number(process.env.CURRENT_DEPLOY_RUN_ID) })).data;
+            const ci = (await github.rest.actions.getWorkflowRun({
+              owner, repo, run_id: Number(process.env.SOURCE_RUN_ID),
+            })).data;
+            const deploy = (await github.rest.actions.getWorkflowRun({
+              owner, repo, run_id: Number(process.env.CURRENT_DEPLOY_RUN_ID),
+            })).data;
             const ciArtifact = one(await artifacts(ci.id), `trunk-validation-${sha}`);
             const productionArtifact = one(await artifacts(deploy.id), `trunk-production-${sha}`);
+            const stagingArtifact = one(await artifacts(deploy.id), `trunk-staging-${sha}`);
             if (ci.name !== "CI" || ci.path !== ".github/workflows/ci.yml" || ci.head_branch !== "main"
               || ci.event !== "push" || ci.head_sha !== sha || ci.run_attempt !== 1 || ci.conclusion !== "success") {
               throw new Error("CI metadata mismatch");
@@ -2521,31 +2532,15 @@ jobs:
                 artifact_id: ciArtifact.id, artifact_digest: ciArtifact.digest },
               deploy: { repository: `${owner}/${repo}`, workflow_name: deploy.name, workflow_path: deploy.path,
                 head_branch: deploy.head_branch, event: deploy.event, run_id: deploy.id, run_attempt: deploy.run_attempt,
-                artifact_id: productionArtifact.id, artifact_digest: productionArtifact.digest } };
-            if (source === "Nightly") {
-              const nightly = (await github.rest.actions.getWorkflowRun({ owner, repo, run_id: Number(process.env.SOURCE_RUN_ID) })).data;
-              if (nightly.name !== "Nightly" || nightly.path !== ".github/workflows/nightly.yml"
-                || nightly.head_branch !== "main" || nightly.event !== "schedule" || nightly.head_sha !== sha
-                || nightly.run_attempt !== 1 || nightly.conclusion !== "success") throw new Error("Nightly metadata mismatch");
-              const nightlyArtifact = one(await artifacts(nightly.id), `nightly-summary-${nightly.id}-${nightly.run_attempt}`);
-              const stagingArtifact = one(await artifacts(deploy.id), `trunk-staging-${sha}`);
-              metadata.nightly = { repository: `${owner}/${repo}`, workflow_name: nightly.name,
-                workflow_path: nightly.path, head_branch: nightly.head_branch, event: nightly.event,
-                run_id: nightly.id, run_attempt: nightly.run_attempt, sha,
-                artifact_id: nightlyArtifact.id, artifact_digest: nightlyArtifact.digest };
-              metadata.staging = { artifact_id: stagingArtifact.id, artifact_digest: stagingArtifact.digest };
-            }
+                artifact_id: productionArtifact.id, artifact_digest: productionArtifact.digest },
+              staging: { artifact_id: stagingArtifact.id, artifact_digest: stagingArtifact.digest } };
             fs.writeFileSync(`${process.env.RUNNER_TEMP}/a08-metadata.json`, JSON.stringify(metadata));
             core.setOutput("ci_artifact_id", String(metadata.ci.artifact_id));
             core.setOutput("ci_artifact_digest", metadata.ci.artifact_digest);
             core.setOutput("production_artifact_id", String(metadata.deploy.artifact_id));
             core.setOutput("production_artifact_digest", metadata.deploy.artifact_digest);
-            if (metadata.nightly) {
-              core.setOutput("nightly_artifact_id", String(metadata.nightly.artifact_id));
-              core.setOutput("nightly_artifact_digest", metadata.nightly.artifact_digest);
-              core.setOutput("staging_artifact_id", String(metadata.staging.artifact_id));
-              core.setOutput("staging_artifact_digest", metadata.staging.artifact_digest);
-            }
+            core.setOutput("staging_artifact_id", String(metadata.staging.artifact_id));
+            core.setOutput("staging_artifact_digest", metadata.staging.artifact_digest);
       - name: Read actual production SHA, pause intent, vector, and prior evidence
         shell: bash
         run: |
@@ -2557,16 +2552,13 @@ jobs:
           active="$("${ssh_base[@]}" "tr -d '\\r\\n' < $q_path/current/REVISION")"
           test "$active" = "$SOURCE_SHA"
           "${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-runtime status --no-interaction --no-ansi" > "$RUNNER_TEMP/runtime-status.json"
-          jq -e '.pause_intent | IN("UNSET","PAUSED","RUNNING")' "$RUNNER_TEMP/runtime-status.json" >/dev/null
+          jq -e '.pause_intent | IN("UNSET","UNKNOWN","PAUSED","RUNNING")' "$RUNNER_TEMP/runtime-status.json" >/dev/null
           "${ssh_base[@]}" "file=$q_path/shared/backend/storage/app/release-receipts/seo-council-a08/activation.json; if test -f \"\$file\" && test ! -L \"\$file\"; then cat \"\$file\"; fi" \
             > "$RUNNER_TEMP/prior-activation.json"
           node .github/trunk/seo-platform-12a08-activation.mjs fingerprint "$GITHUB_WORKSPACE" > "$RUNNER_TEMP/fingerprint.json"
       - name: Download and verify exact validation artifacts
-        if: env.SOURCE_WORKFLOW == 'Nightly'
         env:
           GH_TOKEN: ${{ github.token }}
-          NIGHTLY_ARTIFACT_ID: ${{ steps.evidence.outputs.nightly_artifact_id }}
-          NIGHTLY_ARTIFACT_DIGEST: ${{ steps.evidence.outputs.nightly_artifact_digest }}
           CI_ARTIFACT_ID: ${{ steps.evidence.outputs.ci_artifact_id }}
           CI_ARTIFACT_DIGEST: ${{ steps.evidence.outputs.ci_artifact_digest }}
           STAGING_ARTIFACT_ID: ${{ steps.evidence.outputs.staging_artifact_id }}
@@ -2581,25 +2573,28 @@ jobs:
               "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/artifacts/$id/zip" -o "$target"
             test "sha256:$(sha256sum "$target" | awk '{print $1}')" = "$digest"
           }
-          download "$NIGHTLY_ARTIFACT_ID" "$NIGHTLY_ARTIFACT_DIGEST" "$RUNNER_TEMP/nightly.zip"
           download "$CI_ARTIFACT_ID" "$CI_ARTIFACT_DIGEST" "$RUNNER_TEMP/ci.zip"
           download "$STAGING_ARTIFACT_ID" "$STAGING_ARTIFACT_DIGEST" "$RUNNER_TEMP/staging.zip"
           download "$PRODUCTION_ARTIFACT_ID" "$PRODUCTION_ARTIFACT_DIGEST" "$RUNNER_TEMP/production.zip"
-          for name in nightly ci staging production; do unzip -q "$RUNNER_TEMP/$name.zip" -d "$RUNNER_TEMP/$name"; done
-          nightly="$RUNNER_TEMP/nightly/receipt.json"
+          for name in ci staging production; do unzip -q "$RUNNER_TEMP/$name.zip" -d "$RUNNER_TEMP/$name"; done
           staging="$RUNNER_TEMP/staging/artifacts/seo-council-a08-staging/receipt.json"
           ci="$RUNNER_TEMP/ci/trunk-validation.json"
           production="$RUNNER_TEMP/production/trunk-delivery-timing.json"
-          test -f "$nightly" && test -f "$staging" && test -f "$ci" && test -f "$production"
-          jq '.nightly' "$RUNNER_TEMP/a08-metadata.json" > "$RUNNER_TEMP/nightly-metadata.json"
-          node .github/trunk/seo-platform-12a08-activation.mjs verify-nightly "$nightly" "$RUNNER_TEMP/nightly-metadata.json"
+          test -f "$ci" && test -f "$production"
           jq -e --arg sha "$SOURCE_SHA" '.sha == $sha and .result == "success"' "$ci" >/dev/null
           jq -e --arg sha "$SOURCE_SHA" '.sha == $sha and .phase == "staging"' "$RUNNER_TEMP/staging/staging-timing.json" >/dev/null
-          jq -e --arg sha "$SOURCE_SHA" '.sha == $sha and .status == "pass" and .mission_count == 3
-            and .trigger_mode == "controlled_acceptance" and .natural_slot_receipt == false
-            and .model_calls == 0 and .tool_calls == 0 and .external_calls == 0 and .business_writes == 0' "$staging" >/dev/null
           jq -e --arg sha "$SOURCE_SHA" '.sha == $sha and .production_smoke_completed_at != null' "$production" >/dev/null
-          printf '%s' "$(sha256sum "$nightly" | awk '{print $1}')" > "$RUNNER_TEMP/nightly-receipt-digest"
+          if test -f "$staging"; then
+            jq -e --arg sha "$SOURCE_SHA" '.schema_version == "seo.platform12_a08_staging_acceptance.v2"
+              and .sha == $sha and .status == "pass" and .source_connected == true and .mission_count == 3
+              and .trigger_mode == "controlled_acceptance" and .natural_slot_receipt == false
+              and .notification_delivery_verified == true and .pause_resume_verified == true
+              and .receipt_to_ui_verified == true
+              and .model_calls == 0 and .tool_calls == 0 and .external_calls == 0 and .business_writes == 0' "$staging" >/dev/null
+            echo true > "$RUNNER_TEMP/a08-scoped-required"
+          else
+            echo false > "$RUNNER_TEMP/a08-scoped-required"
+          fi
       - id: manifest
         name: Build exact or compatible descendant activation manifest
         shell: bash
@@ -2614,50 +2609,67 @@ jobs:
           vector="$(jq -c .version_vector "$RUNNER_TEMP/runtime-status.json")"
           vector_hash="$(jq -r .version_vector_hash "$RUNNER_TEMP/runtime-status.json")"
           fingerprint="$(cat "$RUNNER_TEMP/fingerprint.json")"
-          if test "$SOURCE_WORKFLOW" = Nightly; then
+          metadata="$(cat "$RUNNER_TEMP/a08-metadata.json")"
+          if test "$(cat "$RUNNER_TEMP/a08-scoped-required")" = true; then
             metadata="$(cat "$RUNNER_TEMP/a08-metadata.json")"
-            receipt="$RUNNER_TEMP/nightly/receipt.json"
-            receipt_digest="$(cat "$RUNNER_TEMP/nightly-receipt-digest")"
-            jq -n --arg sha "$SOURCE_SHA" --argjson metadata "$metadata" --argjson receipt "$(cat "$receipt")" \
-              --arg receipt_digest "$receipt_digest" --argjson fingerprint "$fingerprint" --argjson vector "$vector" \
+            staging="$(cat "$RUNNER_TEMP/staging/artifacts/seo-council-a08-staging/receipt.json")"
+            jq -n --arg sha "$SOURCE_SHA" --argjson metadata "$metadata" --argjson staging "$staging" \
+              --argjson fingerprint "$fingerprint" --argjson vector "$vector" \
               --arg vector_hash "$vector_hash" \
-              '{schema_version:"seo.platform12_a08_activation.v1",repository:"fermatmind/fap-api",bound_production_sha:$sha,
-                validation:{nightly:($metadata.nightly + {receipt_digest:$receipt_digest,check_scope:$receipt.check_scope,
-                  status:$receipt.status,domains:$receipt.domains}|del(.artifact_id)),
-                  ci:($metadata.ci + {sha:$sha,status:"success"}|del(.artifact_id)),
+              '{schema_version:"seo.platform12_a08_activation.v2",repository:"fermatmind/fap-api",
+                activation_basis:"A08_SCOPED_READ_ONLY_ACCEPTANCE",activation_state:"CONTROLLED_ACCEPTANCE_ONLY",
+                bound_production_sha:$sha,
+                validation:{ci:($metadata.ci + {sha:$sha,status:"success"}|del(.artifact_id)),
                   deploy:($metadata.deploy + {sha:$sha,status:"success"}|del(.artifact_id)),
-                  staging_acceptance:{sha:$sha,status:"pass",mission_count:3,deploy_run_id:$metadata.deploy.run_id,
-                    deploy_run_attempt:$metadata.deploy.run_attempt,artifact_digest:$metadata.staging.artifact_digest}},
+                  staging_acceptance:{sha:$sha,status:$staging.status,source_connected:$staging.source_connected,
+                    mission_count:$staging.mission_count,trigger_mode:$staging.trigger_mode,
+                    natural_slot_receipt:$staging.natural_slot_receipt,
+                    notification_delivery_verified:$staging.notification_delivery_verified,
+                    pause_resume_verified:$staging.pause_resume_verified,
+                    receipt_to_ui_verified:$staging.receipt_to_ui_verified,
+                    deploy_run_id:$metadata.deploy.run_id,deploy_run_attempt:$metadata.deploy.run_attempt,
+                    artifact_digest:$metadata.staging.artifact_digest},
+                  production_smoke:{sha:$sha,status:"pass",deploy_run_id:$metadata.deploy.run_id,
+                    deploy_run_attempt:$metadata.deploy.run_attempt,artifact_digest:$metadata.deploy.artifact_digest},
+                  production_controlled_acceptance:{status:"pending",source_connected:false,mission_count:0,
+                    enabled_daily_missions:0,notification_configuration_verified:false,
+                    receipt_to_ui_verified:false,receipt_hashes:[]}},
                 compatibility:{mode:"exact_sha",source_sha:$sha,bound_sha:$sha,fingerprint:$fingerprint},
                 runtime:{version_vector:$vector,version_vector_hash:$vector_hash},
-                permissions:{model_calls:false,tool_broker:false,cms_writes:false,publish_writes:false,canonical_writes:false,
-                  robots_writes:false,url_truth_writes:false,search_submission:false,business_writes:false},
-                measurement:{day_28_started:false,efficiency_claim_allowed:false}}' > "$output"
-            echo "decision=activate" >> "$GITHUB_OUTPUT"
+                permissions:{model_runtime_enabled:false,tool_broker_enabled:false,post12_agent_write_enabled:false,
+                  L2:"artifact_only",L3:false,L4:false,cms_agent_write:false,publish:false,canonical_write:false,
+                  robots_write:false,url_truth_write:false,search_submission:false,business_write_enabled:false,
+                  active_action_manifest_count:0,trusted_signing_key_count:0},
+                measurement:{day_28_started:false,baseline_state:"MEASUREMENT_BASELINE_HOLD",
+                  efficiency_claim_allowed:false}}' > "$output"
+            echo "decision=accept" >> "$GITHUB_OUTPUT"
           else
             if ! jq -e --argjson fingerprint "$fingerprint" --argjson vector "$vector" '
-              .schema_version == "seo.platform12_a08_activation.v1"
+              .schema_version == "seo.platform12_a08_activation.v2"
+              and .activation_state == "ACTIVE_READ_ONLY"
+              and .activation_basis == "A08_SCOPED_READ_ONLY_ACCEPTANCE"
               and .compatibility.fingerprint == $fingerprint
               and .runtime.version_vector == $vector' "$RUNNER_TEMP/prior-activation.json" >/dev/null 2>&1; then
-              jq -n --arg sha "$SOURCE_SHA" '{schema_version:"seo.platform12_a08_activation_hold.v1",sha:$sha,
-                status:"HOLD",reason:"RUNTIME_COMPATIBILITY_CHANGED",business_writes:false}' > "$output"
+              jq -n --arg sha "$SOURCE_SHA" '{schema_version:"seo.platform12_a08_activation_hold.v2",sha:$sha,
+                status:"HOLD",reason:"NOT_ACTIVATED_OR_RELATED_DEPENDENCY_CHANGED",business_writes:false}' > "$output"
               echo "decision=hold" >> "$GITHUB_OUTPUT"
               exit 0
             fi
-            metadata="$(cat "$RUNNER_TEMP/a08-metadata.json")"
             jq --arg sha "$SOURCE_SHA" --argjson metadata "$metadata" '
               .bound_production_sha=$sha
               | .validation.ci=($metadata.ci + {sha:$sha,status:"success"}|del(.artifact_id))
               | .validation.deploy=($metadata.deploy + {sha:$sha,status:"success"}|del(.artifact_id))
+              | .validation.production_smoke={sha:$sha,status:"pass",deploy_run_id:$metadata.deploy.run_id,
+                  deploy_run_attempt:$metadata.deploy.run_attempt,artifact_digest:$metadata.deploy.artifact_digest}
               | .compatibility.mode="compatible_descendant"
               | .compatibility.bound_sha=$sha' "$RUNNER_TEMP/prior-activation.json" > "$output"
-            echo "decision=activate" >> "$GITHUB_OUTPUT"
+            echo "decision=carry" >> "$GITHUB_OUTPUT"
           fi
           jq -cS . "$output" > "$output.canonical"
           mv "$output.canonical" "$output"
           sha256sum "$output" | awk '{print $1}' > "$output.sha256"
-      - name: Install trusted manifest and preserve pause intent
-        if: steps.manifest.outputs.decision == 'activate'
+      - name: Install scoped candidate or compatible manifest without changing pause intent
+        if: steps.manifest.outputs.decision == 'accept' || steps.manifest.outputs.decision == 'carry'
         shell: bash
         run: |
           set -euo pipefail
@@ -2678,44 +2690,75 @@ jobs:
             sudo -n -u www-data -- mv -f \"\$target/activation.json.next\" \"\$target/activation.json\"; \
             sudo -n -u www-data -- mv -f \"\$target/activation.json.sha256.next\" \"\$target/activation.json.sha256\""
           "${ssh_base[@]}" "$remote"
-          intent="$(jq -r .pause_intent "$RUNNER_TEMP/runtime-status.json")"
-          if test "$intent" = UNSET; then
-            "${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-runtime resume --no-interaction --no-ansi" > "$RUNNER_TEMP/post-activation.json"
-            jq -e '.state == "ACTIVE_READ_ONLY" and .business_write_enabled == false' "$RUNNER_TEMP/post-activation.json" >/dev/null
-          elif test "$intent" = PAUSED; then
-            "${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-runtime status --no-interaction --no-ansi" > "$RUNNER_TEMP/post-activation.json"
-            jq -e '.state == "PAUSED" and .pause_intent == "PAUSED"' "$RUNNER_TEMP/post-activation.json" >/dev/null
-          else
-            "${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-runtime status --no-interaction --no-ansi" > "$RUNNER_TEMP/post-activation.json"
-            jq -e '.state == "ACTIVE_READ_ONLY" and .pause_intent == "RUNNING"' "$RUNNER_TEMP/post-activation.json" >/dev/null
-          fi
       - name: Run first production controlled acceptance
-        if: env.SOURCE_WORKFLOW == 'Nightly' && steps.manifest.outputs.decision == 'activate'
+        if: steps.manifest.outputs.decision == 'accept'
         shell: bash
         run: |
           set -euo pipefail
-          test "$(jq -r .pause_intent "$RUNNER_TEMP/runtime-status.json")" = UNSET
+          cp artifacts/seo-council-a08-activation/activation.json artifacts/seo-council-a08-activation/receipt.json
           ssh_base=(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -i "$PRODUCTION_IDENTITY" \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST")
           printf -v q_path '%q' "$DEPLOY_PATH"
+          operation="deploy:${GITHUB_RUN_ID}:${GITHUB_RUN_ATTEMPT}:${SOURCE_SHA}"
+          begun="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-runtime acceptance-begin --operation-ref='$operation' --no-interaction --no-ansi")"
+          jq -e --arg operation "$operation" '.state == "CONTROLLED_ACCEPTANCE_ONLY"
+            and .controlled_acceptance_enabled == true and .operation_ref == $operation
+            and .pause_source == "acceptance_protection" and (.generation | test("^[a-f0-9]{32}$"))
+            and .notification_configuration_verified == true
+            and .business_write_enabled == false' <<<"$begun" >/dev/null
+          generation="$(jq -r .generation <<<"$begun")"
+          abort_acceptance() {
+            "${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-runtime acceptance-abort --operation-ref='$operation' --expected-generation='$generation' --no-interaction --no-ansi" >/dev/null || true
+          }
+          trap abort_acceptance ERR
           results='[]'
           for mission in seo.platform12.daily_gsc_core_runtime seo.platform12.daily_url_truth_reconciliation seo.platform12.daily_private_policy_evidence_drift; do
-            result="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-scheduled --acceptance=$mission --json --no-interaction --no-ansi")"
-            if ! jq -e '.status == "TERMINAL_COMMITTED" and .terminal_committed == true and .source_gaps == []' <<<"$result" >/dev/null; then
-              "${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-runtime pause --no-interaction --no-ansi" >/dev/null
-              rejected="rejected-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
-              printf -v q_rejected '%q' "$rejected"
-              "${ssh_base[@]}" "set -euo pipefail; target=$q_path/shared/backend/storage/app/release-receipts/seo-council-a08; \
-                sudo -n -u www-data -- mv \"\$target/activation.json\" \"\$target/$q_rejected.json\"; \
-                sudo -n -u www-data -- mv \"\$target/activation.json.sha256\" \"\$target/$q_rejected.json.sha256\""
-              exit 1
-            fi
+            result="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-scheduled --acceptance=$mission --acceptance-operation='$operation' --json --no-interaction --no-ansi")"
+            jq -e '(.status == "TERMINAL_COMMITTED" or .status == "TERMINAL_REPLAY")
+              and .terminal_committed == true and .source_gaps == []
+              and (.mission_verdict | type == "string") and (.receipt_hash | test("^[a-f0-9]{64}$"))
+              and .execution_allowed == false and .business_write_enabled == false' <<<"$result" >/dev/null
             results="$(jq -c --argjson result "$result" '. + [$result]' <<<"$results")"
           done
-          jq --argjson missions "$results" '. + {activation_status:"ACTIVE_READ_ONLY",controlled_acceptance:$missions}' \
-            artifacts/seo-council-a08-activation/activation.json > artifacts/seo-council-a08-activation/receipt.json
-      - name: Record compatible HOLD without mutating trusted evidence
-        if: steps.manifest.outputs.decision == 'hold'
+          hashes="$(jq -c '[.[].receipt_hash]' <<<"$results")"
+          hash_csv="$(jq -r 'join(",")' <<<"$hashes")"
+          readback="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-acceptance-readback --receipt-hashes='$hash_csv' --no-interaction --no-ansi")"
+          jq -e '.status == "pass" and .receipt_to_ui_verified == true
+            and .notification_configuration_verified == true
+            and .controlled_acceptance_verified == true and .receipt_count == 3
+            and .business_write_enabled == false' <<<"$readback" >/dev/null
+          output=artifacts/seo-council-a08-activation/activation.json
+          jq --argjson hashes "$hashes" '
+            .activation_state="ACTIVE_READ_ONLY"
+            | .validation.production_controlled_acceptance={status:"pass",source_connected:true,
+                mission_count:3,enabled_daily_missions:3,notification_configuration_verified:true,
+                receipt_to_ui_verified:true,receipt_hashes:$hashes}' "$output" > "$output.next"
+          jq -cS . "$output.next" > "$output"
+          rm "$output.next"
+          sha256sum "$output" | awk '{print $1}' > "$output.sha256"
+          remote_tmp="/tmp/seo-council-a08-final-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          "${ssh_base[@]}" "set -euo pipefail; umask 077; test ! -e '$remote_tmp'; mkdir '$remote_tmp'"
+          scp -q -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -i "$PRODUCTION_IDENTITY" \
+            -P "$DEPLOY_PORT" "$output" "$output.sha256" "$DEPLOY_USER@$DEPLOY_HOST:$remote_tmp/"
+          printf -v q_sha '%q' "$SOURCE_SHA"
+          remote="set -euo pipefail; trap 'rm -rf \"$remote_tmp\"' EXIT; test \"\$(tr -d '\\r\\n' < $q_path/current/REVISION)\" = $q_sha; \
+            test \"\$(sha256sum '$remote_tmp/activation.json' | awk '{print \$1}')\" = \"\$(cat '$remote_tmp/activation.json.sha256')\"; \
+            target=$q_path/shared/backend/storage/app/release-receipts/seo-council-a08; \
+            sudo -n -u www-data -- install -m 0640 '$remote_tmp/activation.json' \"\$target/activation.json.next\"; \
+            sudo -n -u www-data -- install -m 0640 '$remote_tmp/activation.json.sha256' \"\$target/activation.json.sha256.next\"; \
+            sudo -n -u www-data -- mv -f \"\$target/activation.json.next\" \"\$target/activation.json\"; \
+            sudo -n -u www-data -- mv -f \"\$target/activation.json.sha256.next\" \"\$target/activation.json.sha256\""
+          "${ssh_base[@]}" "$remote"
+          completed="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-runtime acceptance-complete --operation-ref='$operation' --expected-generation='$generation' --no-interaction --no-ansi")"
+          jq -e '(.state == "ACTIVE_READ_ONLY" or (.state == "MANUAL_PAUSE_HOLD" and .pause_source == "manual"))
+            and .controlled_acceptance_enabled == false and .activation_basis == "A08_SCOPED_READ_ONLY_ACCEPTANCE"
+            and .business_write_enabled == false' <<<"$completed" >/dev/null
+          jq --argjson missions "$results" --argjson runtime "$completed" '
+            . + {activation_status:"ACTIVE_READ_ONLY",controlled_acceptance:$missions,runtime_status:$runtime}' \
+            "$output" > artifacts/seo-council-a08-activation/receipt.json
+          trap - ERR
+      - name: Record compatible carry or HOLD receipt
+        if: steps.manifest.outputs.decision != 'accept'
         run: cp artifacts/seo-council-a08-activation/activation.json artifacts/seo-council-a08-activation/receipt.json
       - name: Upload Council A08 activation receipt
         if: always()

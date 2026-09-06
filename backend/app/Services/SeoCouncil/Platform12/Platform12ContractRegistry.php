@@ -13,7 +13,7 @@ use App\Services\SeoCouncil\Platform12\Tool\Platform12ToolManifest;
 
 final class Platform12ContractRegistry
 {
-    public const MISSION_CATALOG_VERSION = '1.11.0';
+    public const MISSION_CATALOG_VERSION = '1.12.0';
 
     public function __construct(
         private readonly SeoRegistryHasher $hasher,

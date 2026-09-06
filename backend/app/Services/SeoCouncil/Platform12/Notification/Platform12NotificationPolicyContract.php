@@ -12,7 +12,7 @@ use Throwable;
 
 final class Platform12NotificationPolicyContract
 {
-    public const VERSION = '1.0.0';
+    public const VERSION = '1.1.0';
 
     /** @var list<string> */
     private const EVENT_FIELDS = [
@@ -22,6 +22,7 @@ final class Platform12NotificationPolicyContract
 
     /** @var array<string, list<string>> */
     private const IMMEDIATE_SEVERITIES = [
+        'STAGING_ACCEPTANCE' => ['INFO'],
         'PRIVATE_OR_SAFETY' => ['P0', 'P1'],
         'AUTHORITY_INDEXABILITY_P0' => ['P0'],
         'AUTHORITY_INDEXABILITY_P1' => ['P1'],

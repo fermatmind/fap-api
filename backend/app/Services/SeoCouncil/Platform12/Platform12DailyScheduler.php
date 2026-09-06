@@ -32,13 +32,18 @@ final readonly class Platform12DailyScheduler
         private Platform12DailyNotifications $notifications,
     ) {}
 
-    public function tick(?string $acceptanceMission = null): array
+    public function tick(?string $acceptanceMission = null, ?string $acceptanceOperation = null): array
     {
-        if ($acceptanceMission !== null && ! in_array($acceptanceMission, Platform12DailyMissionSet::IDS, true)) {
+        if ($acceptanceMission !== null && (! in_array($acceptanceMission, Platform12DailyMissionSet::IDS, true)
+            || $acceptanceOperation === null)) {
             return $this->result('ACCEPTANCE_SCOPE_DENIED');
         }
         $state = $this->control->status();
-        if (! $state['computation_enabled']) {
+        if ($acceptanceMission !== null && (! ($state['controlled_acceptance_enabled'] ?? false)
+            || ! hash_equals((string) ($state['operation_ref'] ?? ''), $acceptanceOperation))) {
+            return $this->result('ACCEPTANCE_AUTHORITY_DENIED');
+        }
+        if ($acceptanceMission === null && ! $state['computation_enabled']) {
             return $this->result($state['state']);
         }
         $owner = bin2hex(random_bytes(24));
@@ -56,7 +61,8 @@ final readonly class Platform12DailyScheduler
             $row = $this->deliveries()->whereIn('mission_id', Platform12DailyMissionSet::IDS)
                 ->whereNotIn('status', ['CLOSED', 'HELD', 'FAILED'])
                 ->orderBy('scheduled_for')->first();
-            if ($row !== null && $acceptanceMission !== null) {
+            if ($row !== null && $acceptanceMission !== null
+                && ! $this->sameAcceptanceDelivery($row, $acceptanceMission)) {
                 return $this->result('ACCEPTANCE_REQUIRES_IDLE');
             }
             if ($row === null) {
@@ -70,15 +76,16 @@ final readonly class Platform12DailyScheduler
                 if ($slot === null) {
                     return $this->result('IDLE');
                 }
-                if ($this->deliveries()->where('slot_key', $slot['slot_key'])->exists()) {
-                    return $this->result('ACCEPTANCE_ALREADY_RECORDED');
+                $existing = $this->deliveries()->where('slot_key', $slot['slot_key'])->first();
+                if ($existing !== null) {
+                    return $this->existingAcceptance($existing);
                 }
                 $evidence = $slot['trigger_mode'] === 'missed'
                     ? ['input' => [], 'sources' => [], 'source_gaps' => ['missed_slot'],
                         'captured_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
                         'expires_at' => now('UTC')->addMinutes(10)->format('Y-m-d\TH:i:s\Z')]
                     : $this->evidence->capture($slot['mission_id']);
-                if (! $this->sameGeneration($state)) {
+                if (! $this->sameGeneration($state, $acceptanceMission !== null)) {
                     return $this->result('PAUSED_BEFORE_RESERVATION');
                 }
                 $mission = Platform12FrozenMission::freeze($slot, $evidence, $vector, $catalog['catalog_hash']);
@@ -119,14 +126,14 @@ final readonly class Platform12DailyScheduler
                 || CarbonImmutable::parse($row->scheduled_for, 'UTC')->setTimezone('Asia/Shanghai')->toDateString()
                     !== CarbonImmutable::now('Asia/Shanghai')->toDateString()) {
                 $reason = 'daily_missed_slot';
-            } elseif (! $this->sameGeneration($state)) {
+            } elseif (! $this->sameGeneration($state, $acceptanceMission !== null)) {
                 $reason = 'daily_paused';
             } elseif ((hrtime(true) - $start) / 1e9 >= 120) {
                 $reason = 'daily_timeout';
             }
             $receipt = $reason !== null ? $this->orchestrator->stoppedScheduled($mission, $reason)
                 : $this->adapter->submitFrozen($mission);
-            if (! $this->sameGeneration($state) || (hrtime(true) - $start) / 1e9 >= 120) {
+            if (! $this->sameGeneration($state, $acceptanceMission !== null) || (hrtime(true) - $start) / 1e9 >= 120) {
                 $receipt = $this->orchestrator->stoppedScheduled($mission, 'daily_paused_or_timeout');
             }
             $receipt['route_plan'][] = [
@@ -141,9 +148,9 @@ final readonly class Platform12DailyScheduler
             $receipt['receipt_hash'] = $this->hasher->hashWithout($receipt, 'receipt_hash');
             $result = $this->store->completeDelivery($row->delivery_id, self::LEASE, $owner, $fence,
                 $receipt['receipt_id'], $receipt['receipt_hash'], $receipt['status'] === 'DAILY_MISSION_READY' ? 'CLOSED' : 'HELD',
-                function ($connection) use ($mission, $receipt, $state, $vector): void {
+                function ($connection) use ($mission, $receipt, $state, $vector, $acceptanceMission): void {
                     if ($connection->getName() !== config('seo_council.connection', 'seo_intel')
-                        || ($receipt['status'] !== 'DAILY_STOPPED_HOLD' && (! $this->sameGeneration($state)
+                        || ($receipt['status'] !== 'DAILY_STOPPED_HOLD' && (! $this->sameGeneration($state, $acceptanceMission !== null)
                             || $vector !== $this->capabilities->snapshot()['version_vector']))) {
                         throw new \RuntimeException('TERMINAL_RUNTIME_OR_VERSION_HOLD');
                     }
@@ -153,7 +160,7 @@ final readonly class Platform12DailyScheduler
                         throw new \RuntimeException('TERMINAL_AUDIT_PERSISTENCE_HOLD');
                     }
                     $this->notifications->enqueue($mission, $receipt);
-                    if ($receipt['status'] !== 'DAILY_STOPPED_HOLD' && (! $this->sameGeneration($state)
+                    if ($receipt['status'] !== 'DAILY_STOPPED_HOLD' && (! $this->sameGeneration($state, $acceptanceMission !== null)
                         || $vector !== $this->capabilities->snapshot()['version_vector'])) {
                         throw new \RuntimeException('TERMINAL_RUNTIME_CHANGED');
                     }
@@ -192,11 +199,40 @@ final readonly class Platform12DailyScheduler
         return null;
     }
 
-    private function sameGeneration(array $started): bool
+    private function sameGeneration(array $started, bool $acceptance): bool
     {
         $current = $this->control->status();
 
-        return $current['computation_enabled'] && $current['generation'] === $started['generation'];
+        return ($acceptance ? ($current['controlled_acceptance_enabled'] ?? false) : $current['computation_enabled'])
+            && $current['generation'] === $started['generation'];
+    }
+
+    private function sameAcceptanceDelivery(object $delivery, string $missionId): bool
+    {
+        $index = array_search($missionId, Platform12DailyMissionSet::IDS, true);
+        $prefix = 'a08:acceptance:'.$index.':';
+
+        return $delivery->mission_id === $missionId
+            && str_starts_with((string) $delivery->slot_key, $prefix)
+            && str_ends_with((string) $delivery->slot_key, ':'.$this->releaseSha());
+    }
+
+    private function existingAcceptance(object $delivery): array
+    {
+        if (! in_array((string) $delivery->status, ['CLOSED', 'HELD'], true)
+            || ! is_string($delivery->terminal_receipt_hash)
+            || preg_match('/^[a-f0-9]{64}$/D', $delivery->terminal_receipt_hash) !== 1) {
+            return $this->result('ACCEPTANCE_ALREADY_RECORDED');
+        }
+        $envelope = json_decode((string) $delivery->mission_request_json, true, 64, JSON_THROW_ON_ERROR);
+
+        return $this->result('TERMINAL_REPLAY', [
+            'mission_id' => $delivery->mission_id,
+            'terminal_committed' => true,
+            'mission_verdict' => (string) $delivery->status === 'CLOSED' ? 'READY' : 'HOLD',
+            'source_gaps' => data_get($envelope, 'evidence.source_gaps', []),
+            'receipt_hash' => $delivery->terminal_receipt_hash,
+        ]);
     }
 
     private function releaseSha(): string

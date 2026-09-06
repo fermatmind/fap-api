@@ -32,7 +32,12 @@
 
     @if (isset($snapshot['daily_missions']))
         <div class="ops-data-strip" aria-label="{{ __('seo-council.overview') }}">
-            <p>{{ $snapshot['daily_missions']['runtime_state'] }} · {{ __('seo-council.actionable') }}: {{ $snapshot['daily_missions']['actionable_count'] }}</p>
+            <p>
+                {{ $snapshot['daily_missions']['runtime_state'] ?? 'UNAVAILABLE' }} ·
+                {{ $snapshot['daily_missions']['runtime_phase'] ?? (($snapshot['daily_missions']['enabled'] ?? false) ? 'ACTIVE_READ_ONLY' : 'DISABLED') }} ·
+                pause_source={{ $snapshot['daily_missions']['pause_source'] ?? 'none' }} ·
+                {{ __('seo-council.actionable') }}: {{ $snapshot['daily_missions']['actionable_count'] }}
+            </p>
             @foreach ($snapshot['daily_missions']['items'] as $mission)
                 <div class="ops-metric">
                     <strong>{{ __($mission['label_key']) }}</strong>

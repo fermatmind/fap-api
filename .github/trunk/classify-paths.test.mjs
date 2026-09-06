@@ -291,6 +291,8 @@ test("binds deterministic SEO Council orchestration to every 11D through 11L lay
     ".github/trunk/seo-council-workflow-contract.test.mjs",
     ".github/trunk/seo-platform-11e-runtime-dependency-contract.test.mjs",
     ".github/trunk/seo-platform-11f-measurement-contract.test.mjs",
+    ".github/trunk/seo-platform-12a08-activation.mjs",
+    ".github/trunk/seo-platform-12a08-activation-contract.test.mjs",
     ".github/workflows/ci.yml",
     ".github/workflows/deploy.yml",
     "deploy.php",

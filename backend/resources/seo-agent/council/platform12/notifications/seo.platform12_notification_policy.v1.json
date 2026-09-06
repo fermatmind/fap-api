@@ -1,9 +1,10 @@
 {
     "schema_version": "seo.platform12_notification_policy.v1",
     "policy_id": "fermatmind.seo.platform12.notification_policy",
-    "policy_version": "1.0.0",
+    "policy_version": "1.1.0",
     "runtime_state": "CONTRACT_ONLY_NO_TRANSPORT",
     "event_types": [
+        "STAGING_ACCEPTANCE",
         "PRIVATE_OR_SAFETY",
         "AUTHORITY_INDEXABILITY_P0",
         "AUTHORITY_INDEXABILITY_P1",
@@ -17,6 +18,9 @@
         "MISSION_SUCCESS"
     ],
     "immediate_event_severities": {
+        "STAGING_ACCEPTANCE": [
+            "INFO"
+        ],
         "PRIVATE_OR_SAFETY": [
             "P0",
             "P1"
@@ -77,5 +81,5 @@
         "INFO"
     ],
     "notification_transport_enabled": false,
-    "policy_hash": "fdb1c2796e345e97dbe893c5d459ace8110ec3709fdebdd958a3e7db6182e04e"
+    "policy_hash": "710c39c971cf0e47212a1e7ecce73a9dd48f8f640e5d47377b466c2b3273d15a"
 }

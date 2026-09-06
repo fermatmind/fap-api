@@ -71,6 +71,8 @@ const SEO_COUNCIL_CONTROL_PLANE_PATHS = new Set([
   ".github/trunk/seo-platform-11e-runtime-dependency-contract.test.mjs",
   ".github/trunk/seo-platform-11f-measurement-contract.test.mjs",
   ".github/trunk/seo-platform-11g-competitive-evidence-contract.test.mjs",
+  ".github/trunk/seo-platform-12a08-activation.mjs",
+  ".github/trunk/seo-platform-12a08-activation-contract.test.mjs",
   ".github/workflows/ci.yml",
   ".github/workflows/deploy.yml",
   "deploy.php",

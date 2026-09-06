@@ -2,23 +2,39 @@
 
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
-import { readFileSync } from "node:fs";
 
-export const SCOPE_VERSION = "seo-council-a08-runtime.v1";
-export const REQUIRED_DOMAINS = [
-  "authority_contract", "full_phpunit", "dependency_audit", "workflow_contracts", "security_scan",
-];
+export const SCOPE_VERSION = "seo-council-a08-runtime.v2";
+
+const EXACT_FILES = new Set([
+  ".github/workflows/ci.yml",
+  ".github/workflows/deploy.yml",
+  "deploy.php",
+  "backend/composer.json",
+  "backend/composer.lock",
+  "backend/bootstrap/app.php",
+  "backend/bootstrap/providers.php",
+  "backend/config/cache.php",
+  "backend/config/database.php",
+  "backend/config/ops.php",
+  "backend/config/seo_agent_evidence.php",
+  "backend/config/seo_council.php",
+  "backend/config/seo_intel.php",
+  "backend/app/Services/Ops/OpsAlertService.php",
+  "backend/app/Services/Ops/PublicContentDeliveryProbeService.php",
+  "backend/app/Services/SEO/SitemapCache.php",
+]);
 
 export function inRuntimeScope(path) {
-  return path === "deploy.php"
-    || path === "backend/composer.lock"
-    || /^(?:backend\/(?:app|bootstrap|config|routes|database\/migrations|resources\/seo-agent)\/)/.test(path)
-    || /^backend\/resources\/(?:views|lang)\//.test(path)
-    || /^backend\/(?:content_assets|content_packs)\//.test(path)
-    || /^content_packages\//.test(path)
-    || /^backend\/scripts\/(?:ci|deploy|seo)\//.test(path)
-    || /^\.github\/trunk\//.test(path)
-    || /^\.github\/workflows\/(?:ci|deploy|nightly)\.yml$/.test(path);
+  return EXACT_FILES.has(path)
+    || /^\.github\/trunk\/(?:classify-paths|seo-council|seo-platform-1[12]).*\.(?:mjs|json)$/.test(path)
+    || /^backend\/app\/Services\/(?:SeoCouncil|SeoAgentPolicyGateway|SeoAgentGovernance)\//.test(path)
+    || /^backend\/app\/Services\/SeoAgentEvidence\//.test(path)
+    || /^backend\/app\/Services\/SeoIntel\/(?:Runtime|UrlTruth)\//.test(path)
+    || /^backend\/app\/Console\/Commands\/SeoCouncil[^/]+\.php$/.test(path)
+    || /^backend\/app\/Providers\/SeoCouncilServiceProvider\.php$/.test(path)
+    || /^backend\/database\/migrations\/seo_intel\/.*seo_council_.*\.php$/.test(path)
+    || /^backend\/resources\/seo-agent\/(?:council|policy-gateway)\//.test(path)
+    || /^backend\/scripts\/(?:ci|deploy|seo)\/.*(?:council|platform12|runtime).*\.(?:php|sh|mjs)$/.test(path);
 }
 
 export function fingerprint(root = process.cwd()) {
@@ -29,34 +45,35 @@ export function fingerprint(root = process.cwd()) {
       return { mode: match[1], object: match[2], path: match[3] };
     }).filter(({ path }) => inRuntimeScope(path)).sort((left, right) => left.path.localeCompare(right.path));
   const hash = createHash("sha256");
-  for (const entry of entries) {
-    hash.update(`${entry.path}\0${entry.mode}\0${entry.object}\0`);
-  }
+  for (const entry of entries) hash.update(`${entry.path}\0${entry.mode}\0${entry.object}\0`);
   return { scope_version: SCOPE_VERSION, sha256: hash.digest("hex"), file_count: entries.length };
 }
 
-export function validateNightly(receipt, metadata) {
-  const valid = metadata.repository === "fermatmind/fap-api"
-    && metadata.workflow_name === "Nightly"
-    && metadata.workflow_path === ".github/workflows/nightly.yml"
-    && metadata.head_branch === "main"
-    && metadata.event === "schedule"
-    && metadata.run_attempt === 1
-    && Number.isInteger(metadata.run_id) && metadata.run_id > 0
-    && /^[a-f0-9]{40}$/.test(metadata.sha)
-    && /^sha256:[a-f0-9]{64}$/.test(metadata.artifact_digest)
-    && receipt.schema_version === "nightly-failure-domain-summary.v2"
-    && receipt.workflow_sha === metadata.sha
-    && receipt.check_scope === "weekly_full_checks"
-    && receipt.status === "pass"
-    && REQUIRED_DOMAINS.every((domain) => receipt.domains?.[domain]?.required === true
-      && receipt.domains?.[domain]?.result === "success");
-  if (!valid) throw new Error("FULL_NIGHTLY_EVIDENCE_HOLD");
+export function validateScopedAcceptance(receipt, sha) {
+  const valid = receipt?.schema_version === "seo.platform12_a08_staging_acceptance.v2"
+    && receipt?.sha === sha
+    && receipt?.status === "pass"
+    && receipt?.source_connected === true
+    && receipt?.mission_count === 3
+    && receipt?.trigger_mode === "controlled_acceptance"
+    && receipt?.natural_slot_receipt === false
+    && receipt?.notification_delivery_verified === true
+    && receipt?.pause_resume_verified === true
+    && receipt?.receipt_to_ui_verified === true
+    && receipt?.model_calls === 0
+    && receipt?.tool_calls === 0
+    && receipt?.external_calls === 0
+    && receipt?.business_writes === 0
+    && Number.isInteger(receipt?.deploy_run_id) && receipt.deploy_run_id > 0
+    && receipt?.deploy_run_attempt === 1;
+  if (!valid) throw new Error("SCOPED_ACCEPTANCE_EVIDENCE_HOLD");
   return true;
 }
 
 export function mayCarry(manifest, candidate) {
-  return manifest?.schema_version === "seo.platform12_a08_activation.v1"
+  return manifest?.schema_version === "seo.platform12_a08_activation.v2"
+    && manifest?.activation_state === "ACTIVE_READ_ONLY"
+    && manifest?.activation_basis === "A08_SCOPED_READ_ONLY_ACCEPTANCE"
     && manifest?.repository === "fermatmind/fap-api"
     && manifest?.compatibility?.fingerprint?.scope_version === SCOPE_VERSION
     && manifest?.compatibility?.fingerprint?.sha256 === candidate.fingerprint.sha256
@@ -70,13 +87,6 @@ function main() {
   const [command, ...args] = process.argv.slice(2);
   if (command === "fingerprint") {
     process.stdout.write(`${JSON.stringify(fingerprint(args[0] || process.cwd()))}\n`);
-    return;
-  }
-  if (command === "verify-nightly") {
-    const receipt = JSON.parse(readFileSync(args[0], "utf8"));
-    const metadata = JSON.parse(readFileSync(args[1], "utf8"));
-    validateNightly(receipt, metadata);
-    process.stdout.write("FULL_NIGHTLY_EVIDENCE_READY\n");
     return;
   }
   throw new Error("SEO_COUNCIL_A08_COMMAND_DENIED");

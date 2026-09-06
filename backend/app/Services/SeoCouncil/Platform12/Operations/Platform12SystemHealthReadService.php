@@ -228,7 +228,10 @@ final readonly class Platform12SystemHealthReadService
 
         $health['trace'] = $terminal === 0 ? 'UNAVAILABLE' : ($verified === $terminal ? 'READY' : 'HOLD');
 
-        return ['runtime_state' => $runtime['state'], 'enabled' => $runtime['computation_enabled'],
+        return ['runtime_state' => $runtime['state'], 'runtime_phase' => $runtime['runtime_phase'],
+            'pause_source' => $runtime['pause_source'], 'pause_reason' => $runtime['pause_reason'],
+            'changed_at' => $runtime['changed_at'], 'operation_ref' => $runtime['operation_ref'],
+            'enabled' => $runtime['computation_enabled'],
             'audit_enabled' => $runtime['audit_enabled'], 'business_write_enabled' => false, 'health' => $health,
             'actionable_count' => count(array_filter($items, static fn (array $item): bool => in_array($item['state'], ['HOLD', 'STALE', 'UNAVAILABLE'], true))),
             'items' => $items];

@@ -390,9 +390,10 @@ final class SecurityGuardrailsTest extends TestCase
         $this->assertStringContainsString('git push origin HEAD:main', $agents);
         $this->assertStringContainsString('only manual entrypoint', $agents);
         $this->assertIsString($deploy);
-        $this->assertStringContainsString('workflows: [CI, Nightly]', $deploy);
+        $this->assertStringContainsString('workflows: [CI]', $deploy);
         $this->assertStringContainsString("github.event.workflow_run.name == 'CI'", $deploy);
-        $this->assertStringContainsString("github.event.workflow_run.name == 'Nightly'", $deploy);
+        $this->assertStringNotContainsString("github.event.workflow_run.name == 'Nightly'", $deploy);
+        $this->assertStringContainsString('A08_SCOPED_READ_ONLY_ACCEPTANCE', $deploy);
         $this->assertIsString($deployer);
         $this->assertStringNotContainsString('GRANT SELECT, INSERT, UPDATE ON', $deployer);
         $this->assertStringNotContainsString('GRANT ALL', $deployer);
