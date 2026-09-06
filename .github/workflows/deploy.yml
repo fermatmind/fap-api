@@ -1249,6 +1249,7 @@ jobs:
             and .execution_allowed == false and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
       - name: Validate three A08 sources through controlled read-only Missions
+        if: needs.policy.outputs.seo_council_orchestration == 'true'
         shell: bash
         run: |
           set -euo pipefail

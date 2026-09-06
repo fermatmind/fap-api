@@ -105,7 +105,7 @@ const isSeoCompetitiveEvidenceBoundary = (path) =>
   || path === ".github/trunk/classify-paths.test.mjs"
   || path === ".github/trunk/seo-platform-11g-competitive-evidence-contract.test.mjs";
 
-export const SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE = "ACTIVE";
+export const SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE = "DEFERRED_NON_BLOCKING";
 
 const isDeferredCompetitiveCouncilBoundary = (path) =>
   path.startsWith("backend/app/Services/SeoCouncil/Competitive/");
