@@ -89,6 +89,11 @@ final class WarmSitemapSourceCacheCommand extends Command
             $this->fingerprintReceiptMatches($cachedFingerprint, $fingerprint)
             && $this->cachePayloadIsReadable($cachedPayload)
         ) {
+            // The authority is unchanged, but this command is also the bounded
+            // freshness owner for the derived HTTP projection. Preserve the
+            // validated bytes while renewing their finite fresh-cache lease.
+            $controller->storeCache($cachedPayload);
+
             return $this->emitResult(
                 'verified_unchanged',
                 (int) ($cachedPayload['count'] ?? 0),

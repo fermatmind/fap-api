@@ -189,6 +189,13 @@ class SitemapSourceCacheTest extends TestCase
             Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY),
         );
         $this->assertSame($fresh, Cache::get('seo:sitemap-source:v1:fresh'));
+
+        Carbon::setTestNow('2026-07-29 10:11:00 UTC');
+        $this->assertSame(
+            $fresh,
+            Cache::get('seo:sitemap-source:v1:fresh'),
+            'Verified unchanged authority must renew the bounded fresh-cache lease.',
+        );
     }
 
     public function test_refresh_if_changed_rebuilds_when_published_indexable_authority_changes(): void
