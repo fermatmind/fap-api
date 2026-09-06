@@ -745,6 +745,10 @@ final class ScaleRegistrySeeder extends Seeder
         $package = json_decode(file_get_contents(database_path('data/assessment_faq_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
         $entry = $package['scales'][$attributes['code']];
         $attributes['content_i18n_json']['zh']['faq'] = $entry['faq'];
+        $introPackage = json_decode(file_get_contents(database_path('data/assessment_intro_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
+        foreach ($introPackage['scales'][$attributes['code']] ?? [] as $key => $value) {
+            $attributes['content_i18n_json']['zh'][$key] = $value;
+        }
 
         return DB::transaction(function () use ($writer, $attributes) {
             $published = [];
@@ -754,15 +758,19 @@ final class ScaleRegistrySeeder extends Seeder
                 }
                 $row = DB::table($table)->where('org_id', 0)->where('code', $attributes['code'])->lockForUpdate()->first();
                 $content = json_decode($row->content_i18n_json ?? '{}', true, 512, JSON_THROW_ON_ERROR);
-                if (isset($content['zh']['faq'])) {
-                    $published[$table] = $content['zh']['faq'];
+                foreach (['faq', 'why_choose', 'version_comparison'] as $key) {
+                    if (array_key_exists($key, $content['zh'] ?? [])) {
+                        $published[$table][$key] = $content['zh'][$key];
+                    }
                 }
             }
             $scale = $writer->upsertScale($attributes);
-            foreach ($published as $table => $faq) {
+            foreach ($published as $table => $fields) {
                 $row = DB::table($table)->where('org_id', 0)->where('code', $attributes['code'])->first();
                 $content = json_decode($row->content_i18n_json, true, 512, JSON_THROW_ON_ERROR);
-                $content['zh']['faq'] = $faq;
+                foreach ($fields as $key => $value) {
+                    $content['zh'][$key] = $value;
+                }
                 DB::table($table)->where('org_id', 0)->where('code', $attributes['code'])->update([
                     'content_i18n_json' => json_encode($content, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
                 ]);
