@@ -217,11 +217,13 @@ final class ProductionCalibrationProbeService
 
     private function releaseSha(): ?string
     {
+        $activeRevisionPath = dirname(base_path()).'/REVISION';
         $revisionPath = (string) config(
             'seo_council.release_revision_path',
-            dirname(base_path()).'/REVISION',
+            $activeRevisionPath,
         );
         foreach ([
+            is_file($activeRevisionPath) ? trim((string) file_get_contents($activeRevisionPath)) : '',
             is_file($revisionPath) ? trim((string) file_get_contents($revisionPath)) : '',
             trim((string) config('app.git_sha', '')),
         ] as $candidate) {

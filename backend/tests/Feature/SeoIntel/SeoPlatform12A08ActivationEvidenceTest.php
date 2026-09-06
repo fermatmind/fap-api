@@ -170,6 +170,9 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
             $step,
         );
         $this->assertStringContainsString('.production_calibration.deploy_revision == $sha', $step);
+        $this->assertStringContainsString('runtime_receipt_schema_valid:', $step);
+        $this->assertStringContainsString('release_sha_valid:', $step);
+        $this->assertStringContainsString('sanitized_boundaries_valid:', $step);
         $this->assertStringContainsString('failure_stage="public_probe_observation"', $step);
         $this->assertStringContainsString('failure_stage="acceptance_complete"', $step);
         $this->assertStringContainsString('probe_exit_code:$probe_exit', $step);
