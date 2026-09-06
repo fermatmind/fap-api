@@ -1443,6 +1443,11 @@ jobs:
             exit 1
           }
           competitive_evidence='${{ needs.policy.outputs.seo_competitive_evidence }}'
+          council_orchestration='${{ needs.policy.outputs.seo_council_orchestration }}'
+          production_council_closeout=false
+          if [ "$competitive_evidence" = true ] && [ "$council_orchestration" = true ]; then
+            production_council_closeout=true
+          fi
           local_key="$RUNNER_TEMP/service-account.json"
           local_env="$RUNNER_TEMP/measurement.env"
           local_writer_env="$RUNNER_TEMP/competitive-writer.env"
@@ -1577,7 +1582,7 @@ jobs:
           lkg_sha='${{ steps.baseline.outputs.active }}'
           deploy_timeout=30m
           if test "$competitive_evidence" = true; then deploy_timeout=35m; fi
-          if test '${{ needs.policy.outputs.seo_council_orchestration }}' = true; then deploy_timeout=60m; fi
+          if test "$production_council_closeout" = true; then deploy_timeout=60m; fi
           set +e
           timeout --signal=TERM --kill-after=30s "$deploy_timeout" php /tmp/dep.phar deploy production -f deploy.php --revision "$DEPLOY_SHA" \
             -o release_name="$release" -o deploy_mode=standard \
@@ -1587,7 +1592,7 @@ jobs:
             -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' \
             -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' \
             -o private_result_authority_publish_required='${{ needs.policy.outputs.private_result_authority_publish_required }}' \
-            -o seo_council_orchestration='${{ needs.policy.outputs.seo_council_orchestration }}' \
+            -o seo_council_orchestration="$production_council_closeout" \
             -o seo_competitive_evidence='${{ needs.policy.outputs.seo_competitive_evidence }}' \
             -o seo_measurement_sync_env="$remote_env" \
             -o seo_competitive_writer_env="$remote_writer_env" --no-interaction
@@ -1776,7 +1781,7 @@ jobs:
             and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
       - name: Read production SEO Council closeout receipt
-        if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.seo_council_orchestration == 'true'
+        if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.seo_council_orchestration == 'true' && needs.policy.outputs.seo_competitive_evidence == 'true'
         shell: bash
         run: |
           set -euo pipefail

@@ -161,7 +161,10 @@ test("staging refreshes real measurement and production validates before conditi
   assert.match(production, /gsc_refresh_configured=false/);
   assert.match(production, /stop_owned_pid/);
   assert.match(production, /ConnectionAttempts=3/);
-  assert.match(production, /if test '\$\{\{ needs\.policy\.outputs\.seo_council_orchestration \}\}' = true; then deploy_timeout=60m; fi/);
+  assert.match(production, /production_council_closeout=false/);
+  assert.match(production, /if \[ "\$competitive_evidence" = true \] && \[ "\$council_orchestration" = true \]; then/);
+  assert.match(production, /if test "\$production_council_closeout" = true; then deploy_timeout=60m; fi/);
+  assert.match(production, /-o seo_council_orchestration="\$production_council_closeout"/);
 });
 
 test("11F readiness remains downstream of queue-backed Big Five delivery", () => {

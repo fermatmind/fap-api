@@ -50,6 +50,9 @@ test("deploy uses one workflow for CI release and Nightly activation with no man
   assert.match(deploy, /A08_SOURCE_ACCEPTANCE_HOLD/);
   assert.match(deploy, /status,mission_id,terminal_committed,mission_verdict,source_gaps/);
   assert.match(deploy, /- name: Validate three A08 sources through controlled read-only Missions\n\s+if: needs\.policy\.outputs\.seo_council_orchestration == 'true'/);
+  assert.match(deploy, /production_council_closeout=false/);
+  assert.match(deploy, /-o seo_council_orchestration="\$production_council_closeout"/);
+  assert.match(deploy, /Read production SEO Council closeout receipt\n\s+if: [^\n]+seo_council_orchestration == 'true' && needs\.policy\.outputs\.seo_competitive_evidence == 'true'/);
 });
 
 test("current checkout produces a non-empty deterministic fingerprint", () => {
