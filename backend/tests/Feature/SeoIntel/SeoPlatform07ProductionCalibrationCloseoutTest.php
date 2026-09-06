@@ -79,6 +79,10 @@ final class SeoPlatform07ProductionCalibrationCloseoutTest extends TestCase
         config(['app.git_sha' => str_repeat('a', 40)]);
         Http::fake(fn () => Http::response('', 404));
 
+        $privatePaths = (new PageFamilyPolicyRegistry)->privatePathSegments();
+        $controlledConcurrency = (new \ReflectionClass(ProductionCalibrationProbeService::class))
+            ->getConstant('CONTROLLED_NEGATIVE_SET_MAX_CONCURRENCY');
+
         $result = app(ProductionCalibrationProbeService::class)->observePrivateNegativeSet();
 
         $this->assertSame('MEASUREMENT_HOLD', $result['state']);
@@ -87,7 +91,9 @@ final class SeoPlatform07ProductionCalibrationCloseoutTest extends TestCase
         $this->assertTrue(data_get($result, 'private_negative_set.checked'));
         $this->assertTrue(data_get($result, 'private_negative_set.accepted'));
         $this->assertSame(str_repeat('a', 40), $result['deploy_revision']);
-        Http::assertSentCount(count((new PageFamilyPolicyRegistry)->privatePathSegments()));
+        $this->assertIsInt($controlledConcurrency);
+        $this->assertGreaterThanOrEqual(count($privatePaths), $controlledConcurrency);
+        Http::assertSentCount(count($privatePaths));
     }
 
     #[Test]

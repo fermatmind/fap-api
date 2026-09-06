@@ -20,6 +20,8 @@ final class ProductionCalibrationProbeService
 
     private const MAX_CONCURRENCY = 4;
 
+    private const CONTROLLED_NEGATIVE_SET_MAX_CONCURRENCY = 24;
+
     public function __construct(
         private readonly UrlTruthInventorySource $source,
         private readonly PageFamilyPolicyRegistry $registry,
@@ -62,7 +64,7 @@ final class ProductionCalibrationProbeService
     public function observePrivateNegativeSet(): array
     {
         try {
-            $negativeSet = $this->observeNegativeSet();
+            $negativeSet = $this->observeNegativeSet(self::CONTROLLED_NEGATIVE_SET_MAX_CONCURRENCY);
         } catch (Throwable) {
             return $this->unavailable('private_negative_set_unavailable');
         }
@@ -175,7 +177,7 @@ final class ProductionCalibrationProbeService
     }
 
     /** @return array<string,mixed> */
-    private function observeNegativeSet(): array
+    private function observeNegativeSet(int $maxConcurrency = self::MAX_CONCURRENCY): array
     {
         $classifier = new PageFamilyClassifier($this->registry);
         $contractProbes = $this->registry->negativeSetProbes();
@@ -194,7 +196,7 @@ final class ProductionCalibrationProbeService
                     ->withOptions(['allow_redirects' => false])
                     ->get($base.'/en/'.$segment.'/seo-platform-07-negative-set');
             }
-        }, self::MAX_CONCURRENCY);
+        }, $maxConcurrency);
 
         $acceptedCount = 0;
         $acceptedNoindexCount = 0;
