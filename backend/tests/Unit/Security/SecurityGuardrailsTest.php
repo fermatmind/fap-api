@@ -398,6 +398,8 @@ final class SecurityGuardrailsTest extends TestCase
         $this->assertStringNotContainsString('GRANT ALL', $deployer);
         $this->assertStringContainsString("'SEO_COUNCIL_DB_CONNECTION' => 'seo_council'", $deployer);
         $this->assertStringContainsString('SEO_COUNCIL_RUNTIME_WRITER_UNAVAILABLE', $deployer);
+        $this->assertStringContainsString('SEO Council unavailable writer aliases removed.', $deployer);
+        $this->assertStringContainsString("['SEO_COUNCIL_DB_CONNECTION', 'SEO_COUNCIL_DB_USERNAME', 'SEO_COUNCIL_DB_PASSWORD']", $deployer);
         $this->assertStringContainsString("['runtime' => 'SEO_COUNCIL_RUNTIME', 'migration' => 'SEO_COUNCIL_MIGRATION']", $deployer);
         $this->assertStringContainsString('SEO_COUNCIL_RUNTIME_DB_WRITE_PRIVILEGE_MISSING', $deployer);
         $this->assertStringContainsString("task('seo:council-runtime-db-access'", $deployer);

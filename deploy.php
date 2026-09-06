@@ -982,7 +982,66 @@ try {
 fwrite(STDERR, "SEO_COUNCIL_RUNTIME_WRITER_UNAVAILABLE\n");
 exit(1);
 PHP;
-    $selected = trim(run('{{bin/php}} -d display_errors=0 -r '.deployShellArg($selector), ['env' => $candidates]));
+    try {
+        $selected = trim(run('{{bin/php}} -d display_errors=0 -r '.deployShellArg($selector), ['env' => $candidates]));
+    } catch (Throwable) {
+        $scrubber = <<<'PHP'
+$path = $argv[1] ?? '';
+$keys = ['SEO_COUNCIL_DB_CONNECTION', 'SEO_COUNCIL_DB_USERNAME', 'SEO_COUNCIL_DB_PASSWORD'];
+if ($path === '' || is_link($path) || ! is_file($path)) {
+    fwrite(STDERR, "SEO_COUNCIL_RUNTIME_ENV_SCRUB_FAILED\n");
+    exit(1);
+}
+$handle = fopen($path, 'c+b');
+if ($handle === false || ! flock($handle, LOCK_EX)) {
+    fwrite(STDERR, "SEO_COUNCIL_RUNTIME_ENV_SCRUB_FAILED\n");
+    exit(1);
+}
+$stat = fstat($handle);
+$pathStat = lstat($path);
+rewind($handle);
+$original = stream_get_contents($handle);
+if (! is_array($stat) || ! is_array($pathStat) || $stat['ino'] !== $pathStat['ino']
+    || $stat['dev'] !== $pathStat['dev'] || ! is_string($original)) {
+    fwrite(STDERR, "SEO_COUNCIL_RUNTIME_ENV_SCRUB_FAILED\n");
+    exit(1);
+}
+$updated = '';
+foreach (preg_split('/(?<=\n)/', $original, -1, PREG_SPLIT_NO_EMPTY) ?: [] as $segment) {
+    $body = preg_replace('/\r?\n\z/', '', $segment);
+    if (preg_match('/\A\s*([A-Z0-9_]+)\s*=/', (string) $body, $matches) === 1
+        && in_array($matches[1], $keys, true)) {
+        continue;
+    }
+    $updated .= $segment;
+}
+$temporary = tempnam(dirname($path), '.seo-council-env-scrub-');
+if (! is_string($temporary) || file_put_contents($temporary, $updated, LOCK_EX) === false
+    || ! chmod($temporary, $stat['mode'] & 0777)) {
+    fwrite(STDERR, "SEO_COUNCIL_RUNTIME_ENV_SCRUB_FAILED\n");
+    exit(1);
+}
+$temporaryHandle = fopen($temporary, 'rb');
+if ($temporaryHandle === false || ! fsync($temporaryHandle) || ! fclose($temporaryHandle)
+    || ! rename($temporary, $path)) {
+    @unlink($temporary);
+    fwrite(STDERR, "SEO_COUNCIL_RUNTIME_ENV_SCRUB_FAILED\n");
+    exit(1);
+}
+$readback = (string) file_get_contents($path);
+foreach ($keys as $key) {
+    if (preg_match('/^'.preg_quote($key, '/').'\s*=/m', $readback) === 1) {
+        fwrite(STDERR, "SEO_COUNCIL_RUNTIME_ENV_SCRUB_FAILED\n");
+        exit(1);
+    }
+}
+flock($handle, LOCK_UN);
+fclose($handle);
+echo "SEO Council unavailable writer aliases removed.\n";
+PHP;
+        run('{{bin/php}} -d display_errors=0 -r '.deployShellArg($scrubber).' '.deployPlaceholderPathArg('{{deploy_path}}', 'shared/backend/.env'));
+        throw new \RuntimeException('SEO_COUNCIL_RUNTIME_WRITER_UNAVAILABLE');
+    }
     if (! in_array($selected, ['runtime', 'migration'], true)) {
         throw new \RuntimeException('SEO_COUNCIL_RUNTIME_WRITER_UNAVAILABLE');
     }
