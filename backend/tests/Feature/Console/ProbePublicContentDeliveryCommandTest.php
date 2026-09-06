@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Console;
 
+use App\Domain\Personality\Current\PersonalityCurrentPageReader;
 use App\Services\Ops\PublicContentDeliveryProbeService;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Client\Request;
@@ -33,35 +34,28 @@ final class ProbePublicContentDeliveryCommandTest extends TestCase
 
     public function test_it_rotates_the_fixed_l1_l2_l3_allowlist_and_persists_only_safe_readback_fields(): void
     {
-        Http::fake(function (Request $request) {
+        $mbti = $this->currentPayload('mbti', 'variant', 'intj-a');
+        $bigFive = $this->currentPayload('big_five', 'hub', 'big-five');
+        $headers = $this->currentAuthorityHeaders();
+        $mbti['private_payload'] = 'must-not-persist';
+        $bigFive['private_payload'] = 'must-not-persist';
+
+        Http::fake(function (Request $request) use ($mbti, $bigFive, $headers) {
             $this->assertSame('GET', $request->method());
             $this->assertSame('FermatMind-Public-Content-Probe/1.0', $request->header('User-Agent')[0] ?? null);
             $this->assertSame([], $request->header('Authorization'));
 
             return match (true) {
-                str_contains($request->url(), '/personality/intj-a') => (function () use ($request) {
+                str_contains($request->url(), '/personality/intj-a') => (function () use ($request, $mbti, $headers) {
                     $this->assertSame('MBTI', $request->data()['scale_code'] ?? null);
 
-                    return Http::response([
-                        'profile' => [
-                            'published_at' => '2026-07-01T00:00:00Z',
-                            'updated_at' => '2026-07-13T00:00:00Z',
-                            'private_marker' => 'must-not-persist',
-                        ],
-                        'mbti_public_projection_v1' => ['display_type' => 'INTJ-A'],
-                        'body' => 'must-not-persist',
-                    ], 200, ['X-Fermat-Public-Read-Cache' => 'fresh']);
+                    return Http::response($mbti, 200, $headers);
                 })(),
-                str_contains($request->url(), '/personality-content-assets/') => Http::response([
-                    'personality_public_content_asset_v1' => [
-                        'contract_version' => 'personality.public_content_asset.v1',
-                        'launch_state' => 'published',
-                        'review_state' => 'approved',
-                        'published_at' => '2026-07-01T00:00:00Z',
-                        'updated_at' => '2026-07-13T00:00:00Z',
-                        'sections' => ['must-not-persist'],
-                    ],
-                ], 200, ['X-Fermat-Public-Read-Cache' => 'miss']),
+                str_contains($request->url(), '/personality-content-assets/') => Http::response(
+                    $bigFive,
+                    200,
+                    $headers,
+                ),
                 default => Http::response([
                     'authority_version' => 'career.industry_directory.v1',
                     'bundle_version' => 'career.industry_directory.v1',
@@ -95,6 +89,12 @@ final class ProbePublicContentDeliveryCommandTest extends TestCase
         $this->assertStringNotContainsString('probe.example.test', $encoded);
         $this->assertStringNotContainsString('/api/', $encoded);
         $this->assertArrayNotHasKey('response_body', $latest['items'][0]);
+        $this->assertSame(1048576, config('public_content_observability.probe.payload_budget_bytes'));
+        $this->assertSame('personality.page.content.v1', $latest['items'][0]['content_authority']);
+        $this->assertMatchesRegularExpression(
+            '/^[a-f0-9]{64}$/D',
+            $latest['items'][0]['content_aggregate_sha256'],
+        );
     }
 
     public function test_all_mode_marks_stale_cache_and_missing_publication_fields_as_failed(): void
@@ -102,9 +102,10 @@ final class ProbePublicContentDeliveryCommandTest extends TestCase
         Http::fake([
             '*personality/intj-a*' => Http::response($this->mbtiPayload(), 200, [
                 'X-Fermat-Public-Read-Cache' => 'stale',
+                ...$this->currentAuthorityHeaders(),
             ]),
             '*personality-content-assets*' => Http::response(['ok' => true], 200, [
-                'X-Fermat-Public-Read-Cache' => 'fresh',
+                ...$this->currentAuthorityHeaders(),
             ]),
             '*career/industries*' => Http::response($this->careerPayload()),
         ]);
@@ -122,16 +123,16 @@ final class ProbePublicContentDeliveryCommandTest extends TestCase
 
     public function test_payload_budget_and_connection_failures_are_bounded_without_exception_details(): void
     {
-        config()->set('public_content_observability.probe.payload_budget_bytes', 1024);
+        config()->set('public_content_observability.probe.payload_budget_bytes', 1048576);
         Http::fakeSequence()
-            ->push(str_repeat('x', 2048), 200, ['X-Fermat-Public-Read-Cache' => 'fresh'])
+            ->push(str_repeat('x', 1048577), 200, $this->currentAuthorityHeaders())
             ->push(function (): never {
                 throw new \Illuminate\Http\Client\ConnectionException('private upstream detail');
             });
 
         $this->assertSame(1, Artisan::call('public-content:probe-delivery', ['--json' => true]));
         $oversized = $this->jsonOutput()['items'][0];
-        $this->assertSame(1025, $oversized['bytes']);
+        $this->assertSame(1048577, $oversized['bytes']);
         $this->assertSame('payload_budget_exceeded', $oversized['error_code']);
         $this->assertArrayNotHasKey('body', $oversized);
 
@@ -139,6 +140,33 @@ final class ProbePublicContentDeliveryCommandTest extends TestCase
         $network = $this->jsonOutput()['items'][0];
         $this->assertSame('connection_failed', $network['error_code']);
         $this->assertStringNotContainsString('private upstream detail', json_encode($network, JSON_THROW_ON_ERROR));
+    }
+
+    public function test_current_targets_fail_closed_on_missing_authority_or_invalid_aggregate(): void
+    {
+        Http::fake([
+            '*personality/intj-a*' => Http::response($this->mbtiPayload()),
+            '*personality-content-assets*' => Http::response($this->bigFivePayload(), 200, [
+                'X-Fermat-Content-Authority' => 'personality.page.content.v1',
+                'X-Fermat-Content-Aggregate' => 'invalid-private-value',
+            ]),
+            '*career/industries*' => Http::response($this->careerPayload()),
+        ]);
+
+        $this->assertSame(1, Artisan::call('public-content:probe-delivery', [
+            '--all' => true,
+            '--json' => true,
+        ]));
+        $items = collect($this->jsonOutput()['items'])->keyBy('target_id');
+
+        $this->assertSame('content_authority_invalid', $items['l1_mbti_intj_a_en']['error_code']);
+        $this->assertSame('unknown', $items['l1_mbti_intj_a_en']['content_authority']);
+        $this->assertSame('content_aggregate_invalid', $items['l2_big_five_hub_en']['error_code']);
+        $this->assertNull($items['l2_big_five_hub_en']['content_aggregate_sha256']);
+        $this->assertStringNotContainsString(
+            'invalid-private-value',
+            json_encode($items->all(), JSON_THROW_ON_ERROR),
+        );
     }
 
     public function test_private_or_tenant_scoped_config_fails_before_any_request(): void
@@ -210,10 +238,25 @@ final class ProbePublicContentDeliveryCommandTest extends TestCase
     {
         return [
             'profile' => [
-                'published_at' => '2026-07-01T00:00:00Z',
-                'updated_at' => '2026-07-13T00:00:00Z',
+                'schema_version' => 'v2',
+                'slug' => 'intj',
+                'locale' => 'en',
             ],
             'mbti_public_projection_v1' => ['display_type' => 'INTJ-A'],
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    private function bigFivePayload(): array
+    {
+        return [
+            'personality_public_content_asset_v1' => [
+                'contract_version' => 'personality_public_asset.v1',
+                'launch_state' => 'published',
+                'source_hash' => str_repeat('b', 64),
+                'locale' => 'en',
+                'canonical_path' => '/en/personality/big-five',
+            ],
         ];
     }
 
@@ -226,6 +269,21 @@ final class ProbePublicContentDeliveryCommandTest extends TestCase
             'locale' => 'en',
             'public_detail_indexable_count' => 1048,
             'industry_count' => 23,
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    private function currentPayload(string $framework, string $pageKind, string $entityKey): array
+    {
+        return app(PersonalityCurrentPageReader::class)->payload($framework, $pageKind, $entityKey, 'en');
+    }
+
+    /** @return array<string, string> */
+    private function currentAuthorityHeaders(): array
+    {
+        return [
+            'X-Fermat-Content-Authority' => 'personality.page.content.v1',
+            'X-Fermat-Content-Aggregate' => app(PersonalityCurrentPageReader::class)->aggregateSha256(),
         ];
     }
 

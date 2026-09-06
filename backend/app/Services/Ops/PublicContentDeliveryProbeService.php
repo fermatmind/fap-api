@@ -90,14 +90,20 @@ final class PublicContentDeliveryProbeService
             $body = $this->boundedBody($response);
             $bytes = strlen($body);
             $cacheState = $this->cacheState($response);
+            $contentAuthority = $this->contentAuthority($response);
+            $contentAggregate = $this->contentAggregate($response);
             $statusCode = $response->status();
             $readback = $bytes <= $this->payloadBudgetBytes()
                 ? $this->readback->extract((string) $target['readback_profile'], $body)
                 : $this->emptyReadback((string) $target['readback_profile']);
             $cacheReady = in_array($cacheState, (array) $target['allowed_cache_states'], true);
+            $authorityReady = $this->authorityReady($target, $contentAuthority);
+            $aggregateReady = $this->aggregateReady($target, $contentAggregate);
             $ok = $statusCode >= 200
                 && $statusCode < 300
                 && $bytes <= $this->payloadBudgetBytes()
+                && $authorityReady
+                && $aggregateReady
                 && $cacheReady
                 && $readback['ok'] === true;
 
@@ -107,8 +113,17 @@ final class PublicContentDeliveryProbeService
                 'status_class' => $this->statusClass($statusCode),
                 'bytes' => $bytes,
                 'cache_state' => $cacheState,
+                'content_authority' => $contentAuthority,
+                'content_aggregate_sha256' => $contentAggregate,
                 'readback' => $readback,
-                'error_code' => $this->failureCode($statusCode, $bytes, $cacheReady, $readback['ok']),
+                'error_code' => $this->failureCode(
+                    $statusCode,
+                    $bytes,
+                    $authorityReady,
+                    $aggregateReady,
+                    $cacheReady,
+                    $readback['ok'],
+                ),
             ]);
         } catch (ConnectionException) {
             $result = $this->failureEnvelope($target, $observedAt, $startedAt, 'connection_failed');
@@ -163,6 +178,8 @@ final class PublicContentDeliveryProbeService
             'status_class' => 'network_error',
             'bytes' => 0,
             'cache_state' => 'unknown',
+            'content_authority' => 'unknown',
+            'content_aggregate_sha256' => null,
             'readback' => $this->emptyReadback((string) $target['readback_profile']),
             'error_code' => $errorCode,
         ]);
@@ -179,13 +196,25 @@ final class PublicContentDeliveryProbeService
         ];
     }
 
-    private function failureCode(int $statusCode, int $bytes, bool $cacheReady, bool $readbackReady): ?string
-    {
+    private function failureCode(
+        int $statusCode,
+        int $bytes,
+        bool $authorityReady,
+        bool $aggregateReady,
+        bool $cacheReady,
+        bool $readbackReady,
+    ): ?string {
         if ($statusCode < 200 || $statusCode >= 300) {
             return 'http_status';
         }
         if ($bytes > $this->payloadBudgetBytes()) {
             return 'payload_budget_exceeded';
+        }
+        if (! $authorityReady) {
+            return 'content_authority_invalid';
+        }
+        if (! $aggregateReady) {
+            return 'content_aggregate_invalid';
         }
         if (! $cacheReady) {
             return 'cache_state_degraded';
@@ -202,6 +231,34 @@ final class PublicContentDeliveryProbeService
         $state = strtolower(trim((string) $response->header('X-Fermat-Public-Read-Cache', 'unknown')));
 
         return in_array($state, ['miss', 'fresh', 'stale', 'bypass'], true) ? $state : 'unknown';
+    }
+
+    private function contentAuthority(Response $response): string
+    {
+        $authority = strtolower(trim((string) $response->header('X-Fermat-Content-Authority', 'unknown')));
+
+        return preg_match('/^[a-z0-9][a-z0-9._-]{0,79}$/D', $authority) === 1 ? $authority : 'unknown';
+    }
+
+    private function contentAggregate(Response $response): ?string
+    {
+        $aggregate = strtolower(trim((string) $response->header('X-Fermat-Content-Aggregate', '')));
+
+        return preg_match('/^[a-f0-9]{64}$/D', $aggregate) === 1 ? $aggregate : null;
+    }
+
+    /** @param array<string, mixed> $target */
+    private function authorityReady(array $target, string $authority): bool
+    {
+        $required = $target['required_content_authority'] ?? null;
+
+        return $required === null || (is_string($required) && hash_equals($required, $authority));
+    }
+
+    /** @param array<string, mixed> $target */
+    private function aggregateReady(array $target, ?string $aggregate): bool
+    {
+        return ($target['require_content_aggregate_sha256'] ?? false) !== true || $aggregate !== null;
     }
 
     private function statusClass(int $statusCode): string
@@ -280,6 +337,15 @@ final class PublicContentDeliveryProbeService
                 || array_diff($allowedCacheStates, ['miss', 'fresh', 'unknown']) !== []) {
                 throw new RuntimeException('public content delivery probe cache states are unsafe.');
             }
+            $requiredAuthority = $target['required_content_authority'] ?? null;
+            if ($requiredAuthority !== null
+                && (! is_string($requiredAuthority)
+                    || preg_match('/^[a-z0-9][a-z0-9._-]{0,79}$/D', $requiredAuthority) !== 1)) {
+                throw new RuntimeException('public content delivery probe authority is invalid.');
+            }
+            if (($target['require_content_aggregate_sha256'] ?? false) === true && $requiredAuthority === null) {
+                throw new RuntimeException('public content delivery probe aggregate authority is incomplete.');
+            }
             $ids[$id] = true;
         }
         if (array_column($targets, 'priority') !== ['L1', 'L2', 'L3']) {
@@ -306,7 +372,7 @@ final class PublicContentDeliveryProbeService
     {
         return max(1024, min(1048576, (int) config(
             'public_content_observability.probe.payload_budget_bytes',
-            524288,
+            1048576,
         )));
     }
 

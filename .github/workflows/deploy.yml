@@ -1267,36 +1267,99 @@ jobs:
             and .business_write_enabled == false' <<<"$begun" >/dev/null
           historical_pause_adopted="$(jq -r .historical_pause_adopted <<<"$begun")"
           generation="$(jq -r .generation <<<"$begun")"
+          failure_stage="public_probe"
+          public_probe_exit=null
+          probe_summary='{"item_count":0,"target_ids":[],"healthy_count":0,"readback_count":0,"error_codes":[]}'
+          results='[]'
+          source_connected=false
+          notification_delivery_verified=false
+          receipt_to_ui_verified=false
+          pause_resume_verified=false
+          write_hold_receipt() {
+            jq -n --arg sha "$DEPLOY_SHA" --arg run "$GITHUB_RUN_ID" --arg attempt "$GITHUB_RUN_ATTEMPT" \
+              --arg stage "$failure_stage" --arg source_connected "$source_connected" \
+              --arg notification "$notification_delivery_verified" --arg readback "$receipt_to_ui_verified" \
+              --arg pause_resume "$pause_resume_verified" --argjson probe_exit "$public_probe_exit" \
+              --argjson probe_summary "$probe_summary" --argjson missions "$results" \
+              '{schema_version:"seo.platform12_a08_staging_acceptance.v2",sha:$sha,deploy_run_id:($run|tonumber),deploy_run_attempt:($attempt|tonumber),
+                status:"hold",reason:"A08_SOURCE_ACCEPTANCE_HOLD",failure_stage:$stage,
+                trigger_mode:"controlled_acceptance",natural_slot_receipt:false,
+                source_connected:($source_connected == "true"),
+                notification_delivery_verified:($notification == "true"),
+                pause_resume_verified:($pause_resume == "true"),receipt_to_ui_verified:($readback == "true"),
+                probe_exit_code:$probe_exit,probe_summary:$probe_summary,
+                mission_count:($missions|length),missions:$missions,
+                model_calls:0,tool_calls:0,external_calls:0,business_writes:0}' \
+              > artifacts/seo-council-a08-staging/receipt.json
+          }
           abort_acceptance() {
+            local exit_code=$?
+            trap - ERR
+            set +e
+            write_hold_receipt
             "${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-runtime acceptance-abort --operation-ref='$operation' --expected-generation='$generation' --no-interaction --no-ansi" >/dev/null || true
+            exit "$exit_code"
           }
           trap abort_acceptance ERR
+          trap - ERR
+          set +e
           public_probe="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan public-content:probe-delivery --all --json --no-interaction --no-ansi")"
-          jq -e '.ok == true and .scope == "fixed_anonymous_public_allowlist"
-            and .mode == "all" and (.items | type == "array" and length > 0)
-            and (.items | all(.ok == true and .status_code >= 200 and .status_code < 300
-              and .readback.ok == true))' <<<"$public_probe" >/dev/null
-          results='[]'
+          public_probe_exit=$?
+          set -e
+          trap abort_acceptance ERR
+          failure_stage="public_probe_observation"
+          jq -e '((keys | sort) == (["ok","scope","mode","items"] | sort))
+            and .scope == "fixed_anonymous_public_allowlist" and .mode == "all" and (.ok | type == "boolean")
+            and (.items | type == "array" and length == 3)
+            and ([.items[].target_id] | sort) == ["l1_mbti_intj_a_en","l2_big_five_hub_en","l3_career_industries_en"]
+            and all(.items[];
+              ((keys | sort) == (["target_id","family","priority","locale","observed_at","duration_ms","ok",
+                "status_code","status_class","bytes","cache_state","content_authority",
+                "content_aggregate_sha256","readback","error_code"] | sort))
+              and (.target_id | type == "string") and (.family | type == "string")
+              and (.priority | type == "string") and (.locale | type == "string")
+              and (.observed_at | type == "string") and (.ok | type == "boolean")
+              and (.status_code | type == "number") and (.status_code >= 0 and .status_code < 600)
+              and (.bytes | type == "number") and (.bytes >= 0 and .bytes <= 1048577)
+              and (.duration_ms | type == "number") and .duration_ms >= 0
+              and (.status_class | IN("success","redirect","client_error","server_error","network_error","unknown"))
+              and (.cache_state | IN("miss","fresh","stale","bypass","unknown"))
+              and (.content_authority | test("^[a-z0-9][a-z0-9._-]{0,79}$"))
+              and ((.content_aggregate_sha256 == null) or (.content_aggregate_sha256 | test("^[a-f0-9]{64}$")))
+              and (.readback | type == "object")
+              and ((.readback | keys | sort) == (["ok","profile","fields","version_fingerprint"] | sort))
+              and (.readback.ok | type == "boolean") and (.readback.profile | type == "string")
+              and (.readback.fields | type == "object")
+              and ((.readback.version_fingerprint == null)
+                or (.readback.version_fingerprint | test("^[a-f0-9]{64}$")))
+              and ((.error_code == null) or (.error_code | test("^[a-z0-9_]{1,80}$"))))' <<<"$public_probe" >/dev/null
+          probe_now_epoch="$(date -u +%s)"
+          while IFS= read -r observed_at; do
+            observed_epoch="$(date -u -d "$observed_at" +%s)"
+            test "$observed_epoch" -le "$probe_now_epoch"
+            test "$observed_epoch" -ge "$((probe_now_epoch - 1800))"
+          done < <(jq -r '.items[].observed_at' <<<"$public_probe")
+          probe_summary="$(jq -c '{item_count:(.items|length),target_ids:([.items[].target_id]|sort),
+            healthy_count:([.items[]|select(.ok == true)]|length),
+            readback_count:([.items[]|select(.readback.ok == true)]|length),
+            error_codes:([.items[].error_code|select(type == "string")]|unique)}' <<<"$public_probe")"
+          source_connected=true
           for mission in \
             seo.platform12.daily_gsc_core_runtime \
             seo.platform12.daily_url_truth_reconciliation \
             seo.platform12.daily_private_policy_evidence_drift; do
+            failure_stage="mission_${mission//./_}"
             result="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-scheduled --acceptance=$mission --acceptance-operation='$operation' --json --no-interaction --no-ansi")"
             results="$(jq -c --argjson result "$result" '. + [$result]' <<<"$results")"
             if ! jq -e '.status == "TERMINAL_COMMITTED" and .terminal_committed == true
-              and .source_gaps == [] and (.mission_verdict | type == "string")
+              and (.receipt_hash | test("^[a-f0-9]{64}$")) and .source_gaps == []
+              and (.mission_verdict | type == "string")
               and .execution_allowed == false and .business_write_enabled == false' <<<"$result" >/dev/null; then
-              jq -n --arg sha "$DEPLOY_SHA" --arg run "$GITHUB_RUN_ID" --arg attempt "$GITHUB_RUN_ATTEMPT" --argjson missions "$results" \
-                '{schema_version:"seo.platform12_a08_staging_acceptance.v2",sha:$sha,deploy_run_id:($run|tonumber),deploy_run_attempt:($attempt|tonumber),
-                  status:"hold",reason:"A08_SOURCE_ACCEPTANCE_HOLD",trigger_mode:"controlled_acceptance",natural_slot_receipt:false,
-                  source_connected:false,notification_delivery_verified:false,pause_resume_verified:false,
-                  receipt_to_ui_verified:false,
-                  mission_count:($missions|length),missions:$missions,model_calls:0,tool_calls:0,external_calls:0,business_writes:0}' \
-                > artifacts/seo-council-a08-staging/receipt.json
               jq -c '{status,mission_id,terminal_committed,mission_verdict,source_gaps,execution_allowed,business_write_enabled}' <<<"$result" >&2
-              exit 1
+              false
             fi
           done
+          failure_stage="receipt_readback"
           hashes="$(jq -c '[.[].receipt_hash]' <<<"$results")"
           hash_csv="$(jq -r 'join(",")' <<<"$hashes")"
           readback="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-acceptance-readback --receipt-hashes='$hash_csv' --no-interaction --no-ansi")"
@@ -1304,21 +1367,29 @@ jobs:
             and .notification_configuration_verified == true
             and .controlled_acceptance_verified == true and .receipt_count == 3
             and .business_write_enabled == false' <<<"$readback" >/dev/null
+          receipt_to_ui_verified=true
+          failure_stage="notification_delivery"
           notification="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-notification-acceptance --operation-ref='$operation' --json --no-interaction --no-ansi")"
           jq -e '.status == "sent" and .business_write_enabled == false' <<<"$notification" >/dev/null
+          notification_delivery_verified=true
+          failure_stage="notification_deduplication"
           duplicate="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-notification-acceptance --operation-ref='$operation' --json --no-interaction --no-ansi")"
           jq -e '.status == "DEDUPLICATED" and .business_write_enabled == false' <<<"$duplicate" >/dev/null
+          failure_stage="acceptance_complete"
           completed="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-runtime acceptance-complete --operation-ref='$operation' --expected-generation='$generation' --no-interaction --no-ansi")"
           jq -e '.state == "ACTIVE_READ_ONLY" and .controlled_acceptance_enabled == false
             and .business_write_enabled == false' <<<"$completed" >/dev/null
+          pause_resume_verified=true
           trap - ERR
           jq -n --arg sha "$DEPLOY_SHA" --arg run "$GITHUB_RUN_ID" --arg attempt "$GITHUB_RUN_ATTEMPT" \
-            --arg historical_pause_adopted "$historical_pause_adopted" --argjson missions "$results" \
+            --arg historical_pause_adopted "$historical_pause_adopted" --argjson probe_exit "$public_probe_exit" \
+            --argjson probe_summary "$probe_summary" --argjson missions "$results" \
             '{schema_version:"seo.platform12_a08_staging_acceptance.v2",sha:$sha,deploy_run_id:($run|tonumber),deploy_run_attempt:($attempt|tonumber),
-              status:"pass",source_connected:true,notification_delivery_verified:true,pause_resume_verified:true,
+              status:"pass",failure_stage:null,source_connected:true,notification_delivery_verified:true,pause_resume_verified:true,
               receipt_to_ui_verified:true,
               historical_pause_adopted:($historical_pause_adopted == "true"),
               trigger_mode:"controlled_acceptance",natural_slot_receipt:false,mission_count:3,
+              probe_exit_code:$probe_exit,probe_summary:$probe_summary,
               missions:$missions,model_calls:0,tool_calls:0,external_calls:0,business_writes:0}' \
             > artifacts/seo-council-a08-staging/receipt.json
       - name: Record staging timing

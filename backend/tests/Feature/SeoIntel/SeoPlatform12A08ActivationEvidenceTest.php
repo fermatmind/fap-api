@@ -146,6 +146,41 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
         $this->assertSame($next, $status['activation_bound_sha']);
     }
 
+    public function test_staging_workflow_preserves_unhealthy_probe_as_business_evidence_and_always_writes_receipt(): void
+    {
+        $workflow = (string) file_get_contents(base_path('../.github/workflows/deploy.yml'));
+        $start = strpos($workflow, 'name: Validate three A08 sources through controlled read-only Missions');
+        $end = strpos($workflow, 'name: Record staging timing', $start ?: 0);
+        $this->assertIsInt($start);
+        $this->assertIsInt($end);
+        $step = substr($workflow, $start, $end - $start);
+
+        $this->assertStringContainsString('set +e', $step);
+        $this->assertStringContainsString('public_probe_exit=$?', $step);
+        $this->assertStringContainsString('write_hold_receipt', $step);
+        $this->assertStringContainsString('failure_stage="public_probe_observation"', $step);
+        $this->assertStringContainsString('failure_stage="acceptance_complete"', $step);
+        $this->assertStringContainsString('probe_exit_code:$probe_exit', $step);
+        $this->assertStringContainsString('probe_summary:$probe_summary', $step);
+        $this->assertStringContainsString('source_connected=true', $step);
+        $this->assertStringContainsString('length == 3', $step);
+        $this->assertStringContainsString(
+            '["l1_mbti_intj_a_en","l2_big_five_hub_en","l3_career_industries_en"]',
+            $step,
+        );
+        $this->assertStringContainsString('((keys | sort) ==', $step);
+        $this->assertStringContainsString('probe_now_epoch - 1800', $step);
+        foreach (['receipt_readback', 'notification_delivery', 'notification_deduplication', 'acceptance_complete'] as $stage) {
+            $this->assertStringContainsString('failure_stage="'.$stage.'"', $step);
+        }
+        $this->assertStringNotContainsString('.ok == true and .scope', $step);
+        $this->assertStringNotContainsString('.items | all(.ok == true', $step);
+        $this->assertMatchesRegularExpression(
+            '/abort_acceptance\(\).*?write_hold_receipt.*?acceptance-abort/s',
+            $step,
+        );
+    }
+
     /** @return array<string,mixed> */
     private function manifest(string $sourceSha, string $productionSha, string $state = 'ACTIVE_READ_ONLY'): array
     {

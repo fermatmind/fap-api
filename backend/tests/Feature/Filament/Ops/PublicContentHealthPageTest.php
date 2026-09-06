@@ -83,23 +83,16 @@ final class PublicContentHealthPageTest extends TestCase
 
         Http::fake(function (Request $request) {
             return match (true) {
-                str_contains($request->url(), '/personality/intj-a') => Http::response([
-                    'profile' => [
-                        'published_at' => '2026-07-01T00:00:00Z',
-                        'updated_at' => '2026-07-13T00:00:00Z',
-                    ],
-                    'mbti_public_projection_v1' => ['display_type' => 'INTJ-A'],
-                    'private_payload' => 'must-not-render',
-                ], 200, ['X-Fermat-Public-Read-Cache' => 'fresh']),
-                str_contains($request->url(), '/personality-content-assets/') => Http::response([
-                    'personality_public_content_asset_v1' => [
-                        'contract_version' => 'personality.public_content_asset.v1',
-                        'launch_state' => 'published',
-                        'review_state' => 'approved',
-                        'published_at' => '2026-07-01T00:00:00Z',
-                        'updated_at' => '2026-07-13T00:00:00Z',
-                    ],
-                ], 200, ['X-Fermat-Public-Read-Cache' => 'miss']),
+                str_contains($request->url(), '/personality/intj-a') => Http::response(
+                    $this->mbtiPayload(['private_payload' => 'must-not-render']),
+                    200,
+                    $this->currentAuthorityHeaders(),
+                ),
+                str_contains($request->url(), '/personality-content-assets/') => Http::response(
+                    $this->bigFivePayload(),
+                    200,
+                    $this->currentAuthorityHeaders(),
+                ),
                 default => Http::response([
                     'authority_version' => 'career.industry_directory.v1',
                     'bundle_version' => 'career.industry_directory.v1',
@@ -130,7 +123,7 @@ final class PublicContentHealthPageTest extends TestCase
             ->assertSee('Big Five')
             ->assertSee('Career industries')
             ->assertSee('INTJ-A')
-            ->assertSee('personality.public_content_asset.v1')
+            ->assertSee('personality_public_asset.v1')
             ->assertSee('career.industry_directory.v1')
             ->assertDontSee('must-not-render')
             ->assertDontSee('probe.example.test');
@@ -157,18 +150,16 @@ final class PublicContentHealthPageTest extends TestCase
     {
         Http::fake(function (Request $request) {
             return match (true) {
-                str_contains($request->url(), '/personality/intj-a') => Http::response([
-                    'profile' => [
-                        'published_at' => '2026-07-01T00:00:00Z',
-                        'updated_at' => '2026-07-13T00:00:00Z',
-                    ],
-                    'mbti_public_projection_v1' => ['display_type' => 'INTJ-A'],
-                ], 200, ['X-Fermat-Public-Read-Cache' => 'fresh']),
+                str_contains($request->url(), '/personality/intj-a') => Http::response(
+                    $this->mbtiPayload(),
+                    200,
+                    $this->currentAuthorityHeaders(),
+                ),
                 str_contains($request->url(), '/personality-content-assets/') => Http::response([
                     'personality_public_content_asset_v1' => [
-                        'contract_version' => 'personality.public_content_asset.v1',
+                        'contract_version' => 'personality_public_asset.v1',
                     ],
-                ], 200, ['X-Fermat-Public-Read-Cache' => 'fresh']),
+                ], 200, $this->currentAuthorityHeaders()),
                 default => Http::response([
                     'authority_version' => 'career.industry_directory.v1',
                     'bundle_version' => 'career.industry_directory.v1',
@@ -200,13 +191,7 @@ final class PublicContentHealthPageTest extends TestCase
 
         try {
             Http::fake([
-                '*' => Http::response([
-                    'profile' => [
-                        'published_at' => '2026-07-01T00:00:00Z',
-                        'updated_at' => '2026-07-13T00:00:00Z',
-                    ],
-                    'mbti_public_projection_v1' => ['display_type' => 'INTJ-A'],
-                ], 200, ['X-Fermat-Public-Read-Cache' => 'fresh']),
+                '*' => Http::response($this->mbtiPayload(), 200, $this->currentAuthorityHeaders()),
             ]);
 
             $this->assertSame(0, Artisan::call('public-content:probe-delivery', ['--json' => true]));
@@ -239,6 +224,39 @@ final class PublicContentHealthPageTest extends TestCase
         foreach (['warm', 'purge', 'publish', 'retryWrite', 'grantPermission', 'deploy'] as $method) {
             $this->assertFalse(method_exists(PublicContentHealthPage::class, $method));
         }
+    }
+
+    /** @param array<string, mixed> $extra @return array<string, mixed> */
+    private function mbtiPayload(array $extra = []): array
+    {
+        return [
+            'profile' => ['schema_version' => 'v2', 'slug' => 'intj', 'locale' => 'en'],
+            'mbti_public_projection_v1' => ['display_type' => 'INTJ-A'],
+            ...$extra,
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    private function bigFivePayload(): array
+    {
+        return [
+            'personality_public_content_asset_v1' => [
+                'contract_version' => 'personality_public_asset.v1',
+                'launch_state' => 'published',
+                'source_hash' => str_repeat('b', 64),
+                'locale' => 'en',
+                'canonical_path' => '/en/personality/big-five',
+            ],
+        ];
+    }
+
+    /** @return array<string, string> */
+    private function currentAuthorityHeaders(): array
+    {
+        return [
+            'X-Fermat-Content-Authority' => 'personality.page.content.v1',
+            'X-Fermat-Content-Aggregate' => str_repeat('a', 64),
+        ];
     }
 
     /** @param list<string> $permissions */

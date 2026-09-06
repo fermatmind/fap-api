@@ -19,7 +19,7 @@ return [
         'cache_store' => env('PUBLIC_CONTENT_DELIVERY_PROBE_STORE', env('PUBLIC_CONTENT_RUNTIME_METRICS_STORE', 'redis')),
         'connect_timeout_seconds' => 3,
         'timeout_seconds' => 8,
-        'payload_budget_bytes' => 524288,
+        'payload_budget_bytes' => 1048576,
         'retention_seconds' => 7 * 24 * 60 * 60,
         'targets' => [
             [
@@ -30,7 +30,9 @@ return [
                 'path' => '/api/v0.5/personality/intj-a',
                 'query' => ['locale' => 'en', 'org_id' => 0, 'scale_code' => 'MBTI'],
                 'readback_profile' => 'mbti_detail',
-                'allowed_cache_states' => ['miss', 'fresh'],
+                'allowed_cache_states' => ['unknown'],
+                'required_content_authority' => 'personality.page.content.v1',
+                'require_content_aggregate_sha256' => true,
             ],
             [
                 'id' => 'l2_big_five_hub_en',
@@ -40,7 +42,9 @@ return [
                 'path' => '/api/v0.5/personality-content-assets/big_five/hub/big-five',
                 'query' => ['locale' => 'en', 'org_id' => 0],
                 'readback_profile' => 'personality_asset_detail',
-                'allowed_cache_states' => ['miss', 'fresh'],
+                'allowed_cache_states' => ['unknown'],
+                'required_content_authority' => 'personality.page.content.v1',
+                'require_content_aggregate_sha256' => true,
             ],
             [
                 'id' => 'l3_career_industries_en',

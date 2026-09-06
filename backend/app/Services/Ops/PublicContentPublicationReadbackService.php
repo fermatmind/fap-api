@@ -39,9 +39,10 @@ final class PublicContentPublicationReadbackService
     private function mbtiFields(array $payload): array
     {
         return [
+            'schema_version' => $this->boundedString(data_get($payload, 'profile.schema_version')),
+            'slug' => $this->boundedString(data_get($payload, 'profile.slug')),
+            'locale' => $this->boundedString(data_get($payload, 'profile.locale')),
             'display_type' => $this->boundedString(data_get($payload, 'mbti_public_projection_v1.display_type')),
-            'published_at' => $this->boundedString(data_get($payload, 'profile.published_at')),
-            'updated_at' => $this->boundedString(data_get($payload, 'profile.updated_at')),
         ];
     }
 
@@ -57,17 +58,17 @@ final class PublicContentPublicationReadbackService
                 $payload,
                 'personality_public_content_asset_v1.launch_state',
             )),
-            'review_state' => $this->boundedString(data_get(
+            'source_hash' => $this->boundedSha256(data_get(
                 $payload,
-                'personality_public_content_asset_v1.review_state',
+                'personality_public_content_asset_v1.source_hash',
             )),
-            'published_at' => $this->boundedString(data_get(
+            'locale' => $this->boundedString(data_get(
                 $payload,
-                'personality_public_content_asset_v1.published_at',
+                'personality_public_content_asset_v1.locale',
             )),
-            'updated_at' => $this->boundedString(data_get(
+            'canonical_path' => $this->boundedString(data_get(
                 $payload,
-                'personality_public_content_asset_v1.updated_at',
+                'personality_public_content_asset_v1.canonical_path',
             )),
         ];
     }
@@ -104,6 +105,17 @@ final class PublicContentPublicationReadbackService
         }
 
         return $value;
+    }
+
+    private function boundedSha256(mixed $value): ?string
+    {
+        if (! is_string($value)) {
+            return null;
+        }
+
+        $value = strtolower(trim($value));
+
+        return preg_match('/^[a-f0-9]{64}$/D', $value) === 1 ? $value : null;
     }
 
     /** @return array{ok: false, profile: string, fields: array{}, version_fingerprint: null} */

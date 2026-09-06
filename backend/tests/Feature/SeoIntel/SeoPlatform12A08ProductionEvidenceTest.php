@@ -9,6 +9,7 @@ use App\Services\SeoCouncil\Platform12\Platform12DailyMissionSet;
 use App\Services\SeoCouncil\Platform12\Platform12ProductionEvidenceReader;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -110,6 +111,61 @@ final class SeoPlatform12A08ProductionEvidenceTest extends TestCase
         Http::assertNothingSent();
     }
 
+    public function test_complete_unhealthy_public_observations_remain_connected_without_a_source_gap(): void
+    {
+        Http::fake([
+            '*personality/intj-a*' => Http::response($this->mbtiPayload(), 200, $this->currentAuthorityHeaders()),
+            '*personality-content-assets*' => Http::response(
+                $this->bigFivePayload(),
+                200,
+                $this->currentAuthorityHeaders(),
+            ),
+            '*career/industries*' => Http::response(['ok' => false], 503),
+        ]);
+
+        $this->assertSame(1, Artisan::call('public-content:probe-delivery', ['--all' => true, '--json' => true]));
+        $capture = app(Platform12ProductionEvidenceReader::class)->capture(Platform12DailyMissionSet::IDS[0]);
+
+        $this->assertNotContains('public_api_health', $capture['source_gaps']);
+        $this->assertSame('UNAVAILABLE', $capture['input']['runtime']['public_api_state']);
+        $this->assertSame('UNAVAILABLE', $capture['input']['runtime']['readback_state']);
+    }
+
+    public function test_stale_and_future_public_observations_fail_closed(): void
+    {
+        $at = CarbonImmutable::parse('2026-09-06T12:00:00Z');
+        CarbonImmutable::setTestNow($at);
+        try {
+            Http::fake([
+                '*personality/intj-a*' => Http::response($this->mbtiPayload(), 200, $this->currentAuthorityHeaders()),
+                '*personality-content-assets*' => Http::response(
+                    $this->bigFivePayload(),
+                    200,
+                    $this->currentAuthorityHeaders(),
+                ),
+                '*career/industries*' => Http::response($this->careerPayload()),
+            ]);
+            $this->assertSame(0, Artisan::call('public-content:probe-delivery', ['--all' => true, '--json' => true]));
+
+            foreach ([$at->subMinutes(31), $at->addSecond()] as $invalidTime) {
+                $key = 'public_content_delivery_probe:v1:latest:l1_mbti_intj_a_en';
+                $item = Cache::store('array')->get($key);
+                $this->assertIsArray($item);
+                $item['observed_at'] = $invalidTime->toIso8601String();
+                Cache::store('array')->put($key, $item, 3600);
+
+                try {
+                    $this->read('publicApi', $at);
+                    $this->fail('Invalid observation time must fail closed.');
+                } catch (\RuntimeException $error) {
+                    $this->assertSame('PUBLIC_API_OBSERVATION_STALE', $error->getMessage());
+                }
+            }
+        } finally {
+            CarbonImmutable::setTestNow();
+        }
+    }
+
     public function test_d1_uses_current_revision_observations_with_a_fixed_24_to_48_hour_cohort(): void
     {
         Schema::connection('seo_intel')->create('seo_current_decision_cards', function (Blueprint $table): void {
@@ -163,5 +219,49 @@ final class SeoPlatform12A08ProductionEvidenceTest extends TestCase
     {
         return (new \ReflectionMethod(Platform12ProductionEvidenceReader::class, $method))
             ->invoke(app(Platform12ProductionEvidenceReader::class), ...$arguments);
+    }
+
+    /** @return array<string, mixed> */
+    private function mbtiPayload(): array
+    {
+        return [
+            'profile' => ['schema_version' => 'v2', 'slug' => 'intj', 'locale' => 'en'],
+            'mbti_public_projection_v1' => ['display_type' => 'INTJ-A'],
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    private function bigFivePayload(): array
+    {
+        return [
+            'personality_public_content_asset_v1' => [
+                'contract_version' => 'personality_public_asset.v1',
+                'launch_state' => 'published',
+                'source_hash' => str_repeat('b', 64),
+                'locale' => 'en',
+                'canonical_path' => '/en/personality/big-five',
+            ],
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    private function careerPayload(): array
+    {
+        return [
+            'authority_version' => 'career.industry_directory.v1',
+            'bundle_version' => 'career.industry_directory.v1',
+            'locale' => 'en',
+            'public_detail_indexable_count' => 1048,
+            'industry_count' => 23,
+        ];
+    }
+
+    /** @return array<string, string> */
+    private function currentAuthorityHeaders(): array
+    {
+        return [
+            'X-Fermat-Content-Authority' => 'personality.page.content.v1',
+            'X-Fermat-Content-Aggregate' => str_repeat('a', 64),
+        ];
     }
 }
