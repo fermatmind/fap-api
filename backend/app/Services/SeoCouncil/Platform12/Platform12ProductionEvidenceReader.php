@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\SeoCouncil\Platform12;
 
-use App\Http\Controllers\API\V0_5\SEO\SitemapSourceController;
 use App\Services\Ops\PublicContentDeliveryProbeService;
+use App\Services\SEO\SitemapCache;
 use App\Services\SeoAgentEvidence\Bundle\SeoEvidenceBundleVerifier;
 use App\Services\SeoAgentEvidence\Privacy\SeoQueryHmac;
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
@@ -27,7 +27,7 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         private TechnicalPrivateNegativeSetEvaluator $privateRoutes,
     ) {}
 
-    public function capture(string $missionId, string $triggerMode = 'natural'): array
+    public function capture(string $missionId): array
     {
         $restore = [];
         try {
@@ -48,7 +48,7 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
                 }
             }
 
-            return $this->captureReadModels($missionId, $triggerMode);
+            return $this->captureReadModels($missionId);
         } catch (Throwable) {
             return ['input' => ['evaluated_at' => now('UTC')->format('Y-m-d\TH:i:s\Z')],
                 'sources' => [], 'source_gaps' => ['bounded_read_unavailable'],
@@ -65,7 +65,7 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         }
     }
 
-    private function captureReadModels(string $missionId, string $triggerMode): array
+    private function captureReadModels(string $missionId): array
     {
         if (! in_array($missionId, Platform12DailyMissionSet::IDS, true)) {
             throw new \InvalidArgumentException('DAILY_MISSION_UNKNOWN');
@@ -74,7 +74,6 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         $input = ['evaluated_at' => $at->format('Y-m-d\TH:i:s\Z')];
         $sources = [];
         $gaps = [];
-        $runtimeTriggerMode = $triggerMode === 'controlled_acceptance' ? 'manual' : 'scheduled';
         $read = function (string $name, callable $loader) use (&$sources, &$gaps, $at): ?array {
             try {
                 $data = $loader();
@@ -93,13 +92,9 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
             }
         };
         if ($missionId === Platform12DailyMissionSet::IDS[0]) {
-            $controlledStaging = $triggerMode === 'controlled_acceptance' && app()->environment('staging');
-            $gsc = $read(
-                $controlledStaging ? 'gsc_controlled_acceptance_receipt' : 'gsc_scheduled_receipt',
-                fn (): array => $this->gsc($at, $controlledStaging ? 'manual' : 'scheduled'),
-            );
+            $gsc = $read('gsc_scheduled_receipt', fn (): array => $this->gsc($at));
             $input['gsc'] = $gsc === null ? null : array_diff_key($gsc, ['observed_at' => true, 'source_hash' => true]);
-            $probe = $read('scheduled_runtime_probe', fn (): array => $this->runtimeWindow($at, $runtimeTriggerMode));
+            $probe = $read('scheduled_runtime_probe', fn (): array => $this->runtimeWindow($at));
             $api = $read('public_api_health', fn (): array => $this->publicApi($at));
             $input['runtime'] = [
                 'core_runtime_state' => ($probe['state'] ?? null) === 'complete' ? 'AVAILABLE' : 'UNAVAILABLE',
@@ -123,14 +118,14 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
                 'false_noindex_count' => data_get($truth, 'difference_classification.private_or_noindex_included')] : ['availability' => 'UNAVAILABLE'];
             $input['clustering'] = $read('issue_cluster', fn (): array => $this->clusters());
             $input['d1_observation'] = $read('d1_observation', fn (): array => $this->d1($at));
-            $probe = $read('scheduled_runtime_probe', fn (): array => $this->runtimeWindow($at, $runtimeTriggerMode));
+            $probe = $read('scheduled_runtime_probe', fn (): array => $this->runtimeWindow($at));
             $input['runtime_observation'] = ($probe['state'] ?? null) === 'complete'
                 ? ['availability' => 'AVAILABLE', 'observation_count' => $probe['slot_count']]
                 : ['availability' => 'UNAVAILABLE'];
             $input['sitemap_observation'] = $read('sitemap_observation', fn (): array => $this->sitemap());
         } else {
-            $negative = $read('private_route_negative_set', function () use ($at, $runtimeTriggerMode): array {
-                $window = $this->runtimeWindow($at, $runtimeTriggerMode);
+            $negative = $read('private_route_negative_set', function () use ($at): array {
+                $window = $this->runtimeWindow($at);
                 $negative = data_get($window, 'receipts.0.production_calibration.private_negative_set');
                 if (($window['fresh'] ?? false) !== true || ! is_array($negative)
                     || ($negative['checked'] ?? false) !== true) {
@@ -179,15 +174,11 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
             'expires_at' => $at->addMinutes(10)->format('Y-m-d\TH:i:s\Z')];
     }
 
-    private function gsc(CarbonImmutable $now, string $sourceTriggerMode = 'scheduled'): array
+    private function gsc(CarbonImmutable $now): array
     {
-        if (! in_array($sourceTriggerMode, ['scheduled', 'manual'], true)) {
-            throw new \InvalidArgumentException('GSC_RECEIPT_TRIGGER_INVALID');
-        }
-        // Natural and production acceptance reads only the latest scheduled attempt.
-        // Staging controlled acceptance reads the already-validated manual readiness
-        // attempt and preserves that distinction in the frozen Mission input.
-        $row = $this->connection()->table('seo_gsc_sync_runs')->where('trigger_mode', $sourceTriggerMode)
+        // Read the latest scheduled attempt, including a failure; never hide it
+        // by falling back to an older successful run.
+        $row = $this->connection()->table('seo_gsc_sync_runs')->where('trigger_mode', 'scheduled')
             ->orderByDesc('started_at')->first(['status', 'finished_at', 'receipt_json']);
         if ($row === null || ! is_string($row->receipt_json) || strlen($row->receipt_json) > 262144) {
             throw new \RuntimeException('GSC_RECEIPT_UNAVAILABLE');
@@ -195,14 +186,13 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         $receipt = json_decode($row->receipt_json, true, 32, JSON_THROW_ON_ERROR);
         $finished = CarbonImmutable::parse($row->finished_at, 'UTC');
         if (($receipt['schema_version'] ?? null) !== 'seo.gsc_refresh_receipt.v2'
-            || ($receipt['trigger_mode'] ?? null) !== $sourceTriggerMode
             || $finished->gt($now) || $finished->lt($now->subHours(26))) {
             throw new \RuntimeException('GSC_RECEIPT_STALE');
         }
 
         return ['availability' => 'AVAILABLE', 'scheduled_receipt_status' => $row->status,
             'observed_at' => $finished->format('Y-m-d\TH:i:s\Z'), 'source_hash' => $this->hasher->hash($receipt),
-            'trigger_mode' => $sourceTriggerMode === 'manual' ? 'controlled_acceptance' : 'scheduled',
+            'trigger_mode' => $receipt['trigger_mode'] ?? null,
             'mapping_state' => ($receipt['unmapped_rows'] ?? null) === 0 ? 'READY' : 'FAILED',
             'data_quality_state' => $row->status === 'success' && data_get($receipt, 'quality_gate.status') === 'pass' ? 'READY' : 'HOLD',
             'window_state' => $row->status === 'success' ? 'COMPLETE' : 'INCOMPLETE',
@@ -221,20 +211,14 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
             'dedupe_unique_count' => (clone $query)->distinct()->count('issue_uid')];
     }
 
-    private function runtimeWindow(CarbonImmutable $at, string $sourceTriggerMode = 'scheduled'): array
+    private function runtimeWindow(CarbonImmutable $at): array
     {
-        $window = $this->runtime->readWindow($at->toAtomString(), $sourceTriggerMode);
+        $window = $this->runtime->readWindow($at->toAtomString());
         foreach ($window['receipts'] ?? [] as $receipt) {
             if (! is_string($receipt['receipt_hash'] ?? null)
                 || ! hash_equals(ScheduledRuntimeProbeReceiptService::contentHash(array_diff_key($receipt, ['receipt_hash' => true])), $receipt['receipt_hash'])
                 || CarbonImmutable::parse($receipt['completed_at'])->gt($at)) {
                 throw new \RuntimeException('RUNTIME_RECEIPT_INVALID');
-            }
-        }
-        if ($sourceTriggerMode === 'manual') {
-            $revision = data_get($window, 'receipts.0.production_calibration.deploy_revision');
-            if (! is_string($revision) || ! hash_equals((string) $this->releaseSha(), $revision)) {
-                throw new \RuntimeException('RUNTIME_RECEIPT_REVISION_MISMATCH');
             }
         }
 
@@ -308,30 +292,26 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
 
     private function sitemap(): array
     {
-        // Observe the same bounded projection that deploy warms and verifies at
-        // /api/v0.5/seo/sitemap-source. The rendered XML cache is populated by
-        // a different consumer and is not a deployment source contract.
-        $cached = Cache::get(SitemapSourceController::CACHE_KEY_FRESH);
-        if (! is_array($cached) || array_is_list($cached)
-            || array_keys($cached) !== ['ok', 'source', 'count', 'items']
-            || ($cached['ok'] ?? false) !== true
-            || ($cached['source'] ?? null) !== 'backend_sitemap_generator'
-            || ! is_int($cached['count'] ?? null) || $cached['count'] < 1
-            || ! is_array($cached['items'] ?? null) || ! array_is_list($cached['items'])
-            || count($cached['items']) !== $cached['count']) {
+        $identity = Cache::get(SitemapCache::IDENTITY_CACHE_KEY);
+        $cached = is_string($identity) ? app(SitemapCache::class)->get($identity) : null;
+        $xml = $cached['xml'] ?? null;
+        if (! is_string($xml) || strlen($xml) > 5242880 || preg_match('/<!DOCTYPE|<!ENTITY/i', $xml)) {
             throw new \RuntimeException('SITEMAP_OBSERVATION_UNAVAILABLE');
         }
-
-        foreach ($cached['items'] as $item) {
-            if (! is_array($item) || array_keys($item) !== ['loc', 'lastmod']
-                || ! is_string($item['loc'] ?? null) || trim($item['loc']) === ''
-                || ! is_string($item['lastmod'] ?? null) || trim($item['lastmod']) === '') {
+        $previous = libxml_use_internal_errors(true);
+        try {
+            $document = simplexml_load_string($xml, \SimpleXMLElement::class, LIBXML_NONET);
+            if ($document === false || $document->getName() !== 'urlset') {
                 throw new \RuntimeException('SITEMAP_OBSERVATION_INVALID');
             }
+            $count = count($document->xpath('//*[local-name()="url"]') ?: []);
+        } finally {
+            libxml_clear_errors();
+            libxml_use_internal_errors($previous);
         }
 
         // This is a cached observation count, never the public authority denominator.
-        return ['availability' => 'AVAILABLE', 'observation_count' => $cached['count']];
+        return ['availability' => 'AVAILABLE', 'observation_count' => $count];
     }
 
     private function evidenceSafety(CarbonImmutable $at): array

@@ -95,7 +95,7 @@ final class CouncilRunRepository
             && $scheduled->request->requestHash === ($receipt['request_hash'] ?? null)
             && ($receipt['execution_allowed'] ?? null) === false
             && data_get($receipt, 'caller_provenance.caller_type') === 'scheduler'
-            && in_array(app(Platform12RuntimeControl::class)->prerequisite(), ['READY', 'CONTROLLED_ACCEPTANCE_ONLY'], true);
+            && app(Platform12RuntimeControl::class)->prerequisite() === 'READY';
         if (! $this->gatesOpen() && ! $scheduledAudit) {
             return ['decision' => 'DISABLED', 'receipt' => $receipt];
         }

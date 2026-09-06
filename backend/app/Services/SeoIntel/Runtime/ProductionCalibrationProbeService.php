@@ -20,8 +20,6 @@ final class ProductionCalibrationProbeService
 
     private const MAX_CONCURRENCY = 4;
 
-    private const CONTROLLED_NEGATIVE_SET_MAX_CONCURRENCY = 24;
-
     public function __construct(
         private readonly UrlTruthInventorySource $source,
         private readonly PageFamilyPolicyRegistry $registry,
@@ -53,31 +51,6 @@ final class ProductionCalibrationProbeService
             'expected_cell_count' => $expectedCount,
             'observed_cell_count' => count($cells),
             'cells' => $cells,
-            'private_negative_set' => $negativeSet,
-            'deploy_revision' => $this->releaseSha(),
-            'observed_at' => now('UTC')->toIso8601String(),
-            'boundaries' => $this->boundaries(),
-        ];
-    }
-
-    /** @return array<string,mixed> */
-    public function observePrivateNegativeSet(): array
-    {
-        try {
-            $negativeSet = $this->observeNegativeSet(self::CONTROLLED_NEGATIVE_SET_MAX_CONCURRENCY);
-        } catch (Throwable) {
-            return $this->unavailable('private_negative_set_unavailable');
-        }
-
-        return [
-            'schema_version' => self::SCHEMA_VERSION,
-            'state' => UnifiedRuntimeProbeEvaluator::MEASUREMENT_HOLD,
-            'policy_version' => PageFamilyPolicyRegistry::VERSION,
-            'policy_hash' => $this->registry->policyHash(),
-            'cohort_hash' => null,
-            'expected_cell_count' => 12,
-            'observed_cell_count' => 0,
-            'cells' => [],
             'private_negative_set' => $negativeSet,
             'deploy_revision' => $this->releaseSha(),
             'observed_at' => now('UTC')->toIso8601String(),
@@ -177,7 +150,7 @@ final class ProductionCalibrationProbeService
     }
 
     /** @return array<string,mixed> */
-    private function observeNegativeSet(int $maxConcurrency = self::MAX_CONCURRENCY): array
+    private function observeNegativeSet(): array
     {
         $classifier = new PageFamilyClassifier($this->registry);
         $contractProbes = $this->registry->negativeSetProbes();
@@ -193,10 +166,10 @@ final class ProductionCalibrationProbeService
                     ->withUserAgent('FermatMind-SEO-Platform-07-Negative-Set/1.0')
                     ->connectTimeout(4)
                     ->timeout(self::TIMEOUT_SECONDS)
-                    ->withOptions(['allow_redirects' => false, 'stream' => true])
+                    ->withOptions(['allow_redirects' => false])
                     ->get($base.'/en/'.$segment.'/seo-platform-07-negative-set');
             }
-        }, $maxConcurrency);
+        }, self::MAX_CONCURRENCY);
 
         $acceptedCount = 0;
         $acceptedNoindexCount = 0;
@@ -244,15 +217,9 @@ final class ProductionCalibrationProbeService
 
     private function releaseSha(): ?string
     {
-        $activeRevisionPath = dirname(base_path()).'/REVISION';
-        $revisionPath = (string) config(
-            'seo_council.release_revision_path',
-            $activeRevisionPath,
-        );
         foreach ([
-            is_file($activeRevisionPath) ? trim((string) file_get_contents($activeRevisionPath)) : '',
-            is_file($revisionPath) ? trim((string) file_get_contents($revisionPath)) : '',
             trim((string) config('app.git_sha', '')),
+            is_file(dirname(base_path()).'/REVISION') ? trim((string) file_get_contents(dirname(base_path()).'/REVISION')) : '',
         ] as $candidate) {
             if (preg_match('/^[a-f0-9]{40}$/i', $candidate) === 1) {
                 return strtolower($candidate);

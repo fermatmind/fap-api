@@ -86,34 +86,28 @@ final readonly class Platform12NotificationOutbox
     }
 
     /** @return array<string, mixed> */
-    public function claim(string $workerToken, ?int $leaseSeconds = null, ?string $notificationId = null): array
+    public function claim(string $workerToken, ?int $leaseSeconds = null): array
     {
         $this->validateWorkerToken($workerToken);
-        if ($notificationId !== null && preg_match('/^[a-f0-9]{64}$/D', $notificationId) !== 1) {
-            throw new InvalidArgumentException('NOTIFICATION_ID_INVALID');
-        }
         $ttl = $leaseSeconds ?? (int) config('seo_council.notification_lease_seconds', 60);
         if ($ttl < 1 || $ttl > (int) config('seo_council.notification_max_lease_seconds', 300)) {
             throw new InvalidArgumentException('NOTIFICATION_LEASE_INVALID');
         }
 
         try {
-            return $this->connection()->transaction(function () use ($workerToken, $ttl, $notificationId): array {
+            return $this->connection()->transaction(function () use ($workerToken, $ttl): array {
                 $connection = $this->connection();
                 $now = $this->databaseNow($connection);
                 $timestamp = $this->timestamp($now);
-                $query = $connection->table('seo_council_notification_outbox')
+                $row = $connection->table('seo_council_notification_outbox')
                     ->where(function ($query) use ($timestamp): void {
                         $query->where(function ($pending) use ($timestamp): void {
                             $pending->where('status', 'pending')->where('available_at', '<=', $timestamp);
                         })->orWhere(function ($expired) use ($timestamp): void {
                             $expired->where('status', 'sending')->where('lease_expires_at', '<=', $timestamp);
                         });
-                    });
-                if ($notificationId !== null) {
-                    $query->where('notification_id', $notificationId);
-                }
-                $row = $query->orderBy('id')
+                    })
+                    ->orderBy('id')
                     ->lockForUpdate()
                     ->first();
                 if (! is_object($row)) {
@@ -176,22 +170,18 @@ final readonly class Platform12NotificationOutbox
     public function dispatch(array $claim, string $missionVerdict): array
     {
         $this->validateMissionVerdict($missionVerdict);
+        $dailyActive = config('seo_council.daily_read_only_enabled', false)
+            && app(\App\Services\SeoCouncil\Platform12\Platform12RuntimeControl::class)->status()['computation_enabled'];
+        if ((! (bool) config('seo_council.notification_dispatch_enabled', false) && ! $dailyActive)
+            || (config('seo_council.daily_read_only_enabled', false) && ! $dailyActive)) {
+            return $this->dispatchResult('DISABLED', 'NOTIFICATION_DISPATCH_DISABLED', $missionVerdict);
+        }
         $notificationId = (string) ($claim['notification_id'] ?? '');
         $workerToken = (string) ($claim['worker_token'] ?? '');
         $payload = $claim['payload'] ?? null;
         $this->validateWorkerToken($workerToken);
         if (preg_match('/^[a-f0-9]{64}$/D', $notificationId) !== 1 || ! is_array($payload)) {
             throw new InvalidArgumentException('NOTIFICATION_CLAIM_INVALID');
-        }
-        $runtime = app(\App\Services\SeoCouncil\Platform12\Platform12RuntimeControl::class)->status();
-        $dailyActive = config('seo_council.daily_read_only_enabled', false)
-            && ($runtime['computation_enabled'] ?? false);
-        $stagingAcceptance = app()->environment('staging')
-            && ($runtime['controlled_acceptance_enabled'] ?? false)
-            && ($payload['event_type'] ?? null) === 'STAGING_ACCEPTANCE';
-        if ((! (bool) config('seo_council.notification_dispatch_enabled', false) && ! $dailyActive && ! $stagingAcceptance)
-            || (config('seo_council.daily_read_only_enabled', false) && ! $dailyActive && ! $stagingAcceptance)) {
-            return $this->dispatchResult('DISABLED', 'NOTIFICATION_DISPATCH_DISABLED', $missionVerdict);
         }
 
         $connection = $this->connection();

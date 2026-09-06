@@ -27,10 +27,7 @@ final class ScheduledRuntimeProbeReceiptService
 
         $observedAt = $now === null ? CarbonImmutable::now('UTC') : CarbonImmutable::parse($now)->utc();
         $scheduledFor = $observedAt->startOfMinute()->subMinutes($observedAt->minute % self::SLOT_MINUTES);
-        $releaseIdentity = $triggerMode === 'manual' && preg_match('/^[a-f0-9]{40}$/', (string) ($calibration['deploy_revision'] ?? '')) === 1
-            ? '|'.(string) $calibration['deploy_revision']
-            : '';
-        $slotKey = $triggerMode.$releaseIdentity.'|'.$scheduledFor->format('Y-m-d\TH:i:00\Z');
+        $slotKey = $triggerMode.'|'.$scheduledFor->format('Y-m-d\TH:i:00\Z');
         $crawler = $this->crawlerSourceReceipt($observedAt);
         $calibration ??= $this->missingCalibration();
         $status = ($crawler['complete'] ?? false) === true && ($calibration['state'] ?? null) === 'success'
@@ -83,12 +80,8 @@ final class ScheduledRuntimeProbeReceiptService
     }
 
     /** @return array<string,mixed> */
-    public function readWindow(?string $now = null, string $triggerMode = 'scheduled'): array
+    public function readWindow(?string $now = null): array
     {
-        if (! in_array($triggerMode, ['manual', 'scheduled'], true)) {
-            throw new InvalidArgumentException('Runtime probe trigger mode is invalid.');
-        }
-
         $observedAt = $now === null ? CarbonImmutable::now('UTC') : CarbonImmutable::parse($now)->utc();
         $schema = Schema::connection($this->connection()->getName());
         if (! \App\Support\SchemaBaseline::tableExists('seo_runtime_probe_receipts', $schema->getConnection()->getName())) {
@@ -107,10 +100,8 @@ final class ScheduledRuntimeProbeReceiptService
             ];
         }
         $rows = $this->connection()->table('seo_runtime_probe_receipts')
-            ->where('trigger_mode', $triggerMode)
+            ->where('trigger_mode', 'scheduled')
             ->orderByDesc('scheduled_for')
-            ->orderByDesc('completed_at')
-            ->orderByDesc('id')
             ->limit(3)
             ->get();
         $receipts = $rows->map(fn (object $row): array => $this->decode((string) $row->receipt_json))->all();
@@ -124,9 +115,7 @@ final class ScheduledRuntimeProbeReceiptService
         $fresh = $latestAt !== null && $latestAt->diffInMinutes($observedAt, false) <= self::SLOT_MINUTES * 2;
         $successful = count($receipts) === 3
             && collect($receipts)->every(static fn (array $receipt): bool => ($receipt['status'] ?? null) === 'success');
-        // Manual receipts may support a bounded controlled acceptance, but they
-        // never complete the natural three-slot production observation window.
-        $complete = $triggerMode === 'scheduled' && $consecutive && $fresh && $successful;
+        $complete = $consecutive && $fresh && $successful;
 
         return [
             'state' => $complete ? 'complete' : UnifiedRuntimeProbeEvaluator::MEASUREMENT_HOLD,
@@ -136,8 +125,7 @@ final class ScheduledRuntimeProbeReceiptService
             'successful' => $successful,
             'receipts' => $receipts,
             'boundaries' => [
-                'manual_receipts_excluded' => $triggerMode === 'scheduled',
-                'manual_receipts_count_as_natural_slots' => false,
+                'manual_receipts_excluded' => true,
                 'fixtures_count_as_production_evidence' => false,
                 'raw_sensitive_evidence_emitted' => false,
             ],

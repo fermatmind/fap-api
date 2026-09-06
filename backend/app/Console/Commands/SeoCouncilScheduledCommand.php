@@ -10,9 +10,7 @@ use Throwable;
 
 final class SeoCouncilScheduledCommand extends Command
 {
-    protected $signature = 'seo:council-scheduled {--json}
-        {--acceptance= : One allowlisted Mission; never a natural slot}
-        {--acceptance-operation= : Exact controlled acceptance operation reference}';
+    protected $signature = 'seo:council-scheduled {--json} {--acceptance= : One allowlisted Mission; never a natural slot}';
 
     protected $description = 'Discover at most one due read-only Council Mission from the versioned Catalog';
 
@@ -41,11 +39,7 @@ final class SeoCouncilScheduledCommand extends Command
         }
         try {
             $acceptance = $this->option('acceptance');
-            $operation = $this->option('acceptance-operation');
-            $this->line(json_encode($scheduler->tick(
-                is_string($acceptance) && $acceptance !== '' ? $acceptance : null,
-                is_string($operation) && $operation !== '' ? $operation : null,
-            ), JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
+            $this->line(json_encode($scheduler->tick(is_string($acceptance) && $acceptance !== '' ? $acceptance : null), JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
 
             return self::SUCCESS;
         } catch (Throwable) {

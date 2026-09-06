@@ -65,8 +65,7 @@ final readonly class Platform12DailyGscCoreRuntimeEvaluator
             || ! is_int($rowCount) || $rowCount < 0 || $rowCount > 100000000) {
             return $this->unavailableGsc();
         }
-        if ($availability !== 'AVAILABLE' || $receiptStatus !== 'success'
-            || ! in_array($triggerMode, ['scheduled', 'controlled_acceptance'], true)) {
+        if ($availability !== 'AVAILABLE' || $receiptStatus !== 'success' || $triggerMode !== 'scheduled') {
             return $this->unavailableGsc();
         }
 

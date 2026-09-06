@@ -49,56 +49,6 @@ final class SeoPlatform07ProductionCalibrationCloseoutTest extends TestCase
     }
 
     #[Test]
-    public function deployed_revision_file_precedes_a_stale_cached_ci_sha(): void
-    {
-        $revisionPath = tempnam(sys_get_temp_dir(), 'seo-runtime-revision-');
-        $this->assertIsString($revisionPath);
-        file_put_contents($revisionPath, str_repeat('b', 40));
-        config([
-            'app.git_sha' => str_repeat('a', 40),
-            'seo_council.release_revision_path' => $revisionPath,
-        ]);
-        $this->app->instance(UrlTruthInventorySource::class, $this->authoritySource());
-        Http::fake(fn (Request $request) => Http::response(
-            '',
-            str_contains($request->url(), 'seo-platform-07-negative-set') ? 404 : 200,
-        ));
-
-        try {
-            $result = app(ProductionCalibrationProbeService::class)->observe();
-        } finally {
-            unlink($revisionPath);
-        }
-
-        $this->assertSame(str_repeat('b', 40), $result['deploy_revision']);
-    }
-
-    #[Test]
-    public function controlled_acceptance_can_observe_only_the_live_private_negative_set(): void
-    {
-        config(['app.git_sha' => str_repeat('a', 40)]);
-        Http::fake(fn () => Http::response('', 404));
-
-        $privatePaths = (new PageFamilyPolicyRegistry)->privatePathSegments();
-        $controlledConcurrency = (new \ReflectionClass(ProductionCalibrationProbeService::class))
-            ->getConstant('CONTROLLED_NEGATIVE_SET_MAX_CONCURRENCY');
-        $source = (string) file_get_contents(app_path('Services/SeoIntel/Runtime/ProductionCalibrationProbeService.php'));
-
-        $result = app(ProductionCalibrationProbeService::class)->observePrivateNegativeSet();
-
-        $this->assertSame('MEASUREMENT_HOLD', $result['state']);
-        $this->assertSame(0, $result['observed_cell_count']);
-        $this->assertSame([], $result['cells']);
-        $this->assertTrue(data_get($result, 'private_negative_set.checked'));
-        $this->assertTrue(data_get($result, 'private_negative_set.accepted'));
-        $this->assertSame(str_repeat('a', 40), $result['deploy_revision']);
-        $this->assertIsInt($controlledConcurrency);
-        $this->assertGreaterThanOrEqual(count($privatePaths), $controlledConcurrency);
-        $this->assertStringContainsString("['allow_redirects' => false, 'stream' => true]", $source);
-        Http::assertSentCount(count($privatePaths));
-    }
-
-    #[Test]
     public function three_complete_natural_slots_bound_to_one_deploy_prove_production(): void
     {
         $storedWindow = json_decode(json_encode($this->window(), JSON_THROW_ON_ERROR), true, 512, JSON_THROW_ON_ERROR);

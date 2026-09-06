@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SeoIntel;
 
-use App\Http\Controllers\API\V0_5\SEO\SitemapSourceController;
+use App\Services\SEO\SitemapCache;
 use App\Services\SeoCouncil\Platform12\Platform12DailyMissionSet;
 use App\Services\SeoCouncil\Platform12\Platform12ProductionEvidenceReader;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -60,48 +59,6 @@ final class SeoPlatform12A08ProductionEvidenceTest extends TestCase
         Http::assertNothingSent();
     }
 
-    public function test_staging_controlled_acceptance_reads_manual_readiness_without_weakening_natural_source(): void
-    {
-        Schema::connection('seo_intel')->create('seo_gsc_sync_runs', function (Blueprint $table): void {
-            $table->id();
-            foreach (['trigger_mode', 'status', 'started_at', 'finished_at', 'receipt_json'] as $field) {
-                $table->text($field)->nullable();
-            }
-        });
-        $at = CarbonImmutable::now('UTC');
-        DB::connection('seo_intel')->table('seo_gsc_sync_runs')->insert([
-            'trigger_mode' => 'manual',
-            'status' => 'success',
-            'started_at' => $at->subMinutes(2),
-            'finished_at' => $at->subMinute(),
-            'receipt_json' => json_encode([
-                'schema_version' => 'seo.gsc_refresh_receipt.v2',
-                'trigger_mode' => 'manual',
-                'unmapped_rows' => 0,
-                'rows_seen' => 1,
-                'data_max_date' => $at->subDay()->toDateString(),
-                'quality_gate' => ['status' => 'pass'],
-            ], JSON_THROW_ON_ERROR),
-        ]);
-        $this->app->instance('env', 'staging');
-
-        try {
-            $controlled = app(Platform12ProductionEvidenceReader::class)->capture(
-                Platform12DailyMissionSet::IDS[0],
-                'controlled_acceptance',
-            );
-            $natural = app(Platform12ProductionEvidenceReader::class)->capture(Platform12DailyMissionSet::IDS[0]);
-        } finally {
-            $this->app->instance('env', 'testing');
-        }
-
-        $this->assertSame('controlled_acceptance', $controlled['input']['gsc']['trigger_mode']);
-        $this->assertNotContains('gsc_controlled_acceptance_receipt', $controlled['source_gaps']);
-        $this->assertNull($natural['input']['gsc']);
-        $this->assertContains('gsc_scheduled_receipt', $natural['source_gaps']);
-        Http::assertNothingSent();
-    }
-
     public function test_missing_source_is_not_a_zero_or_fabricated_healthy_result(): void
     {
         $capture = app(Platform12ProductionEvidenceReader::class)->capture(Platform12DailyMissionSet::IDS[0]);
@@ -109,61 +66,6 @@ final class SeoPlatform12A08ProductionEvidenceTest extends TestCase
         $this->assertSame('UNAVAILABLE', $capture['input']['runtime']['public_api_state']);
         $this->assertContains('public_api_health', $capture['source_gaps']);
         Http::assertNothingSent();
-    }
-
-    public function test_complete_unhealthy_public_observations_remain_connected_without_a_source_gap(): void
-    {
-        Http::fake([
-            '*personality/intj-a*' => Http::response($this->mbtiPayload(), 200, $this->currentAuthorityHeaders()),
-            '*personality-content-assets*' => Http::response(
-                $this->bigFivePayload(),
-                200,
-                $this->currentAuthorityHeaders(),
-            ),
-            '*career/industries*' => Http::response(['ok' => false], 503),
-        ]);
-
-        $this->assertSame(1, Artisan::call('public-content:probe-delivery', ['--all' => true, '--json' => true]));
-        $capture = app(Platform12ProductionEvidenceReader::class)->capture(Platform12DailyMissionSet::IDS[0]);
-
-        $this->assertNotContains('public_api_health', $capture['source_gaps']);
-        $this->assertSame('UNAVAILABLE', $capture['input']['runtime']['public_api_state']);
-        $this->assertSame('UNAVAILABLE', $capture['input']['runtime']['readback_state']);
-    }
-
-    public function test_stale_and_future_public_observations_fail_closed(): void
-    {
-        $at = CarbonImmutable::parse('2026-09-06T12:00:00Z');
-        CarbonImmutable::setTestNow($at);
-        try {
-            Http::fake([
-                '*personality/intj-a*' => Http::response($this->mbtiPayload(), 200, $this->currentAuthorityHeaders()),
-                '*personality-content-assets*' => Http::response(
-                    $this->bigFivePayload(),
-                    200,
-                    $this->currentAuthorityHeaders(),
-                ),
-                '*career/industries*' => Http::response($this->careerPayload()),
-            ]);
-            $this->assertSame(0, Artisan::call('public-content:probe-delivery', ['--all' => true, '--json' => true]));
-
-            foreach ([$at->subMinutes(31), $at->addSecond()] as $invalidTime) {
-                $key = 'public_content_delivery_probe:v1:latest:l1_mbti_intj_a_en';
-                $item = Cache::store('array')->get($key);
-                $this->assertIsArray($item);
-                $item['observed_at'] = $invalidTime->toIso8601String();
-                Cache::store('array')->put($key, $item, 3600);
-
-                try {
-                    $this->read('publicApi', $at);
-                    $this->fail('Invalid observation time must fail closed.');
-                } catch (\RuntimeException $error) {
-                    $this->assertSame('PUBLIC_API_OBSERVATION_STALE', $error->getMessage());
-                }
-            }
-        } finally {
-            CarbonImmutable::setTestNow();
-        }
     }
 
     public function test_d1_uses_current_revision_observations_with_a_fixed_24_to_48_hour_cohort(): void
@@ -186,46 +88,13 @@ final class SeoPlatform12A08ProductionEvidenceTest extends TestCase
         $this->assertSame(['availability' => 'AVAILABLE', 'candidate_count' => 2, 'observed_count' => 1], $this->read('d1', $at));
     }
 
-    public function test_sitemap_reads_deploy_verified_source_cache_without_warming(): void
+    public function test_sitemap_reads_existing_cache_without_warming_and_blocks_entities(): void
     {
-        Cache::put(SitemapSourceController::CACHE_KEY_FRESH, [
-            'ok' => true,
-            'source' => 'backend_sitemap_generator',
-            'count' => 1,
-            'items' => [['loc' => 'https://fermatmind.com/en', 'lastmod' => '2026-09-06T00:00:00Z']],
-        ]);
+        app(SitemapCache::class)->put('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://example.test/en</loc></url></urlset>', 'etag', 'test-identity');
         $this->assertSame(['availability' => 'AVAILABLE', 'observation_count' => 1], $this->read('sitemap'));
-
-        Cache::put(SitemapSourceController::CACHE_KEY_FRESH, [
-            'ok' => true,
-            'source' => 'backend_sitemap_generator',
-            'count' => 1,
-            'items' => [['loc' => '', 'lastmod' => '2026-09-06T00:00:00Z']],
-        ]);
+        Cache::put(SitemapCache::XML_CACHE_KEY, '<!DOCTYPE urlset [<!ENTITY x SYSTEM "file:///unreadable">]><urlset>&x;</urlset>');
         $this->expectException(\RuntimeException::class);
         $this->read('sitemap');
-    }
-
-    public function test_sitemap_rejects_fallback_or_malformed_source_cache(): void
-    {
-        foreach ([
-            null,
-            ['ok' => true, 'source' => 'backend_sitemap_generator_fallback', 'count' => 1, 'items' => []],
-            ['ok' => true, 'source' => 'backend_sitemap_generator', 'count' => 2,
-                'items' => [['loc' => 'https://fermatmind.com/en', 'lastmod' => '2026-09-06T00:00:00Z']]],
-        ] as $invalid) {
-            Cache::forget(SitemapSourceController::CACHE_KEY_FRESH);
-            if ($invalid !== null) {
-                Cache::put(SitemapSourceController::CACHE_KEY_FRESH, $invalid);
-            }
-
-            try {
-                $this->read('sitemap');
-                $this->fail('Missing, fallback, or malformed sitemap observations must fail closed.');
-            } catch (\RuntimeException $error) {
-                $this->assertSame('SITEMAP_OBSERVATION_UNAVAILABLE', $error->getMessage());
-            }
-        }
     }
 
     public function test_empty_minimized_evidence_is_counted_but_missing_hmac_capability_is_not_passed(): void
@@ -252,49 +121,5 @@ final class SeoPlatform12A08ProductionEvidenceTest extends TestCase
     {
         return (new \ReflectionMethod(Platform12ProductionEvidenceReader::class, $method))
             ->invoke(app(Platform12ProductionEvidenceReader::class), ...$arguments);
-    }
-
-    /** @return array<string, mixed> */
-    private function mbtiPayload(): array
-    {
-        return [
-            'profile' => ['schema_version' => 'v2', 'slug' => 'intj', 'locale' => 'en'],
-            'mbti_public_projection_v1' => ['display_type' => 'INTJ-A'],
-        ];
-    }
-
-    /** @return array<string, mixed> */
-    private function bigFivePayload(): array
-    {
-        return [
-            'personality_public_content_asset_v1' => [
-                'contract_version' => 'personality_public_asset.v1',
-                'launch_state' => 'published',
-                'source_hash' => str_repeat('b', 64),
-                'locale' => 'en',
-                'canonical_path' => '/en/personality/big-five',
-            ],
-        ];
-    }
-
-    /** @return array<string, mixed> */
-    private function careerPayload(): array
-    {
-        return [
-            'authority_version' => 'career.industry_directory.v1',
-            'bundle_version' => 'career.industry_directory.v1',
-            'locale' => 'en',
-            'public_detail_indexable_count' => 1048,
-            'industry_count' => 23,
-        ];
-    }
-
-    /** @return array<string, string> */
-    private function currentAuthorityHeaders(): array
-    {
-        return [
-            'X-Fermat-Content-Authority' => 'personality.page.content.v1',
-            'X-Fermat-Content-Aggregate' => str_repeat('a', 64),
-        ];
     }
 }
