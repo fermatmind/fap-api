@@ -62,7 +62,8 @@ final readonly class Platform12DailyScheduler
             if ($row === null) {
                 $slot = $acceptanceMission === null ? $this->nextSlot($state) : [
                     'mission_id' => $acceptanceMission,
-                    'slot_key' => $acceptanceMission.':'.CarbonImmutable::now('Asia/Shanghai')->toDateString().':acceptance',
+                    'slot_key' => 'a08:acceptance:'.array_search($acceptanceMission, Platform12DailyMissionSet::IDS, true)
+                        .':'.CarbonImmutable::now('Asia/Shanghai')->toDateString().':'.$this->releaseSha(),
                     'scheduled_for' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
                     'trigger_mode' => 'controlled_acceptance',
                 ];
@@ -158,8 +159,12 @@ final readonly class Platform12DailyScheduler
                     }
                 }, $storeVector);
 
+            $evaluation = collect($receipt['route_plan'] ?? [])->firstWhere('kind', 'daily_evaluation')['output'] ?? [];
+
             return $this->result($result['status'], ['mission_id' => $row->mission_id,
                 'terminal_committed' => $result['terminal_committed'] ?? false,
+                'mission_verdict' => is_array($evaluation) ? ($evaluation['state'] ?? null) : null,
+                'source_gaps' => $mission->envelope['evidence']['source_gaps'],
                 'receipt_hash' => ($result['terminal_committed'] ?? false) ? $receipt['receipt_hash'] : null]);
         } catch (Throwable) {
             return $this->result('DAILY_RUNTIME_HOLD');
@@ -173,7 +178,7 @@ final readonly class Platform12DailyScheduler
         $activated = CarbonImmutable::parse($state['activated_at']);
         $now = CarbonImmutable::now('UTC');
         $last = $this->deliveries()->whereIn('mission_id', Platform12DailyMissionSet::IDS)
-            ->where('slot_key', 'not like', '%:acceptance')->max('scheduled_for');
+            ->where('slot_key', 'not like', 'a08:acceptance:%')->max('scheduled_for');
         $date = $last === null ? $activated : CarbonImmutable::parse($last, 'UTC');
         // Bounded lookback: one date per tick, with missed slots retained rather than replayed.
         foreach ([$date, $date->addDay()] as $day) {
@@ -192,6 +197,20 @@ final readonly class Platform12DailyScheduler
         $current = $this->control->status();
 
         return $current['computation_enabled'] && $current['generation'] === $started['generation'];
+    }
+
+    private function releaseSha(): string
+    {
+        $path = (string) config('seo_council.release_revision_path', dirname(base_path()).'/REVISION');
+        $sha = is_file($path) ? strtolower(trim((string) file_get_contents($path))) : '';
+        if (preg_match('/^[a-f0-9]{40}$/D', $sha) !== 1) {
+            if (app()->environment('testing')) {
+                return str_repeat('0', 12);
+            }
+            throw new \RuntimeException('RELEASE_REVISION_HOLD');
+        }
+
+        return substr($sha, 0, 12);
     }
 
     private function storeVector(Platform12FrozenMission $mission): array

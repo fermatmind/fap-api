@@ -145,6 +145,33 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
         $this->assertSame(0, app(Platform12SystemHealthReadService::class)->snapshot()['daily_missions']['actionable_count']);
     }
 
+    public function test_controlled_acceptance_is_idempotent_per_release_without_consuming_natural_slot(): void
+    {
+        $this->startAtSlot();
+        $reader = $this->fixtureReader();
+        $revision = tempnam(sys_get_temp_dir(), 'a08-revision-');
+        $this->assertIsString($revision);
+        config()->set('seo_council.release_revision_path', $revision);
+        try {
+            file_put_contents($revision, str_repeat('a', 40)."\n");
+            $scheduler = app(Platform12DailyScheduler::class);
+            $this->assertSame('TERMINAL_COMMITTED', $scheduler->tick(Platform12DailyMissionSet::IDS[0])['status']);
+            $this->assertSame('ACCEPTANCE_ALREADY_RECORDED', $scheduler->tick(Platform12DailyMissionSet::IDS[0])['status']);
+            file_put_contents($revision, str_repeat('b', 40)."\n");
+            $this->assertSame('TERMINAL_COMMITTED', $scheduler->tick(Platform12DailyMissionSet::IDS[0])['status']);
+            $this->assertSame(2, $reader->reads);
+            $this->assertSame(2, DB::connection('seo_intel')->table('seo_council_schedule_deliveries')
+                ->where('slot_key', 'like', 'a08:acceptance:%')->count());
+            $clock = CarbonImmutable::now('Asia/Shanghai')->setTime(6, 20);
+            CarbonImmutable::setTestNow($clock);
+            \Carbon\Carbon::setTestNow($clock);
+            $this->assertSame('TERMINAL_COMMITTED', $scheduler->tick()['status']);
+            $this->assertSame(3, $reader->reads);
+        } finally {
+            unlink($revision);
+        }
+    }
+
     public function test_transaction_failure_recovers_frozen_input_once_without_partial_audit(): void
     {
         $this->startAtSlot();
@@ -189,6 +216,10 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
         $mission = Platform12DailyMissionSet::IDS[1];
         $this->assertSame('TERMINAL_COMMITTED', $scheduler->tick($mission)['status']);
         $this->assertSame('HELD', DB::connection('seo_intel')->table('seo_council_schedule_deliveries')->value('status'));
+        $heldItem = app(Platform12SystemHealthReadService::class)->snapshot()['daily_missions']['items'][1];
+        $this->assertSame('HOLD', $heldItem['state']);
+        $this->assertSame('WRONG_CANONICAL_HOLD', $heldItem['reason_code']);
+        $this->assertSame('seo-council.reasons.WRONG_CANONICAL_HOLD.recommendation', $heldItem['recommendation_key']);
         for ($day = 1; $day <= 3; $day++) {
             $clock = CarbonImmutable::now()->addDay();
             CarbonImmutable::setTestNow($clock);
@@ -200,6 +231,11 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
         $this->assertSame(1, (clone $events)->where('event_type', 'AUTHORITY_INDEXABILITY_P0')->count());
         $this->assertSame(1, (clone $events)->where('event_type', 'AUTHORITY_INDEXABILITY_P0_RECOVERY')->count());
         $this->assertSame(2, $events->count());
+        $item = app(Platform12SystemHealthReadService::class)->snapshot()['daily_missions']['items'][1];
+        $this->assertContains($item['state'], ['READY', 'STALE']);
+        $this->assertSame($item['state'] === 'STALE' ? 'STALE_EVIDENCE_HOLD' : 'READY', $item['reason_code']);
+        $this->assertSame('AVAILABLE', $item['source_checks'][0]['state']);
+        $this->assertNotNull($item['source_checks'][0]['observed_at']);
     }
 
     public function test_mysql_json_key_reordering_replays_but_tampering_is_rejected(): void
@@ -275,8 +311,17 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
                     $input['url_truth']['current_url_truth_count'] = 99;
                 }
 
+                $sourceId = match ($missionId) {
+                    Platform12DailyMissionSet::IDS[0] => 'gsc_scheduled_receipt',
+                    Platform12DailyMissionSet::IDS[1] => 'url_truth_reconciliation',
+                    Platform12DailyMissionSet::IDS[2] => 'private_route_negative_set',
+                };
+
                 return ['input' => ['evaluated_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'), ...$input],
-                    'sources' => [], 'source_gaps' => [], 'captured_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
+                    'sources' => [['id' => $sourceId, 'hash' => str_repeat('d', 64),
+                        'read_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
+                        'observed_at' => now('UTC')->subMinute()->format('Y-m-d\TH:i:s\Z')]],
+                    'source_gaps' => [], 'captured_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
                     'expires_at' => now('UTC')->addMinutes(10)->format('Y-m-d\TH:i:s\Z')];
             }
         };

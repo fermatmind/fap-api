@@ -82,6 +82,8 @@ final class SeoPlatform12B02DailyUrlTruthTest extends TestCase
 
         $this->assertIsArray($mission);
         $this->assertSame('daily:ALL:06:25', $mission['natural_slot']);
+        $this->assertSame(2, $mission['max_attempts']);
+        $this->assertSame('none', $mission['failure_policy']['retry_strategy']);
         $this->assertSame(0, array_sum($mission['budgets']));
         $this->assertFalse($catalog['runtime_activation_allowed']);
         $this->assertSame($catalog, app(Platform12MissionCatalogValidator::class)->validate($catalog));

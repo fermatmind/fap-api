@@ -146,14 +146,19 @@ final readonly class Platform12FrozenMission
     private static function requestMissionId(array $slot): string
     {
         $index = array_search($slot['mission_id'] ?? null, Platform12DailyMissionSet::IDS, true);
-        if ($index === false || ! is_string($slot['slot_key'] ?? null)
-            || ! preg_match('/^'.preg_quote($slot['mission_id'], '/').':(\d{4}-\d{2}-\d{2})(:acceptance)?$/D', $slot['slot_key'], $matches)) {
+        if ($index === false || ! is_string($slot['slot_key'] ?? null)) {
+            throw new InvalidArgumentException('FROZEN_MISSION_SLOT_INVALID');
+        }
+        $natural = preg_match('/^'.preg_quote($slot['mission_id'], '/').':(\d{4}-\d{2}-\d{2})$/D', $slot['slot_key'], $matches) === 1;
+        $acceptance = preg_match('/^a08:acceptance:'.preg_quote((string) $index, '/').':(\d{4}-\d{2}-\d{2}):([a-f0-9]{12})$/D', $slot['slot_key'], $acceptanceMatches) === 1;
+        if (! $natural && ! $acceptance) {
             throw new InvalidArgumentException('FROZEN_MISSION_SLOT_INVALID');
         }
 
         // An opaque closed ID avoids treating a catalog's safety vocabulary as
         // private payload; the ordinary request privacy validator stays unchanged.
-        return 'seo.platform12.daily_check_'.$index.':'.$matches[1].($matches[2] ?? '');
+        return 'seo.platform12.daily_check_'.$index.':'.($natural
+            ? $matches[1] : $acceptanceMatches[1].':acceptance:'.$acceptanceMatches[2]);
     }
 
     private static function opaqueDigest(string $hash): string

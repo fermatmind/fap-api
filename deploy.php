@@ -190,6 +190,12 @@ function deploySeoIntelRuntimeEnvironment(): array
         throw new \RuntimeException('SEO_INTEL_DB_PORT is invalid.');
     }
 
+    $values += [
+        'SEO_COUNCIL_SCHEDULER_ENABLED' => 'true',
+        'SEO_COUNCIL_DAILY_READ_ONLY_ENABLED' => 'true',
+        'SEO_COUNCIL_RUNTIME_CACHE_STORE' => 'redis',
+    ];
+
     return $values;
 }
 
@@ -971,6 +977,9 @@ $allowed = [
     'SEO_INTEL_COLLECTORS_ENABLED',
     'SEO_INTEL_DRY_RUN_DEFAULT',
     'SEO_INTEL_ALLOW_EXTERNAL_API_CALLS',
+    'SEO_COUNCIL_SCHEDULER_ENABLED',
+    'SEO_COUNCIL_DAILY_READ_ONLY_ENABLED',
+    'SEO_COUNCIL_RUNTIME_CACHE_STORE',
 ];
 
 if ($environmentPath === '' || $patchPath === '' || is_link($environmentPath) || ! is_file($environmentPath)) {
@@ -1112,7 +1121,12 @@ try {
         && config("seo_intel.write_enabled") === false
         && config("seo_intel.collectors_enabled") === false
         && config("seo_intel.dry_run_default") === true
-        && config("seo_intel.allow_external_api_calls") === false;
+        && config("seo_intel.allow_external_api_calls") === false
+        && config("seo_council.scheduler_enabled") === true
+        && config("seo_council.daily_read_only_enabled") === true
+        && config("seo_council.runtime_cache_store") === "redis"
+        && config("seo_council.model_runtime_enabled") === false
+        && config("seo_council.tool_broker_enabled") === false;
     if (! $valid) {
         throw new RuntimeException("invalid");
     }

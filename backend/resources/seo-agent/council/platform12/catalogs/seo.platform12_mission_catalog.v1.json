@@ -1,7 +1,7 @@
 {
     "schema_version": "seo.platform12_mission_catalog.v1",
     "catalog_id": "fermatmind.seo.platform12_mission_catalog",
-    "catalog_version": "1.10.0",
+    "catalog_version": "1.11.0",
     "catalog_state": "FOUNDATION_ONLY",
     "dependency_refs": {
         "role_registry": {
@@ -31,7 +31,7 @@
         },
         "schema_vector": {
             "id": "seo.platform12_mission_catalog_schema_vector",
-            "version": "1.10.0",
+            "version": "1.11.0",
             "hash": "4c0bfb7fe3eca5e38a9e47135e0f10063152c83ed7555c14c8cd96065acad01d"
         }
     },
@@ -55,7 +55,7 @@
             "eligible_capability": "seo.runtime_health_review",
             "priority": "high",
             "timeout_seconds": 120,
-            "max_attempts": 1,
+            "max_attempts": 2,
             "budgets": {
                 "model_calls": 0,
                 "model_input_tokens": 0,
@@ -96,7 +96,7 @@
             "eligible_capability": "seo.runtime_health_review",
             "priority": "high",
             "timeout_seconds": 120,
-            "max_attempts": 1,
+            "max_attempts": 2,
             "budgets": {
                 "model_calls": 0,
                 "model_input_tokens": 0,
@@ -138,7 +138,7 @@
             "eligible_capability": "seo.release_separation_policy",
             "priority": "critical",
             "timeout_seconds": 120,
-            "max_attempts": 1,
+            "max_attempts": 2,
             "budgets": {
                 "model_calls": 0,
                 "model_input_tokens": 0,
@@ -440,5 +440,5 @@
         }
     ],
     "runtime_activation_allowed": false,
-    "catalog_hash": "60d1a3d134e3edddfdd0caad3e7644af0d20eb103fa71bc96555de1e86e49fbb"
+    "catalog_hash": "a5d1e880765dfa1206e9410c39740ed739d67219551277aa9420e56232302d60"
 }

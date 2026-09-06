@@ -24,7 +24,12 @@ final class Platform12DailyMissionSet
         foreach ($this->contracts->missionCatalog()['missions'] as $mission) {
             if (in_array($mission['mission_id'], self::IDS, true)) {
                 if ($mission['cadence'] !== 'daily' || $mission['timezone'] !== 'Asia/Shanghai'
-                    || array_sum($mission['budgets']) !== 0 || $mission['timeout_seconds'] !== 120) {
+                    || array_sum($mission['budgets']) !== 0 || $mission['timeout_seconds'] !== 120
+                    || $mission['max_attempts'] !== 2
+                    || $mission['failure_policy'] !== [
+                        'terminal_state' => 'HOLD', 'retry_strategy' => 'none',
+                        'initial_backoff_seconds' => 0, 'max_backoff_seconds' => 0,
+                    ]) {
                     throw new InvalidArgumentException('DAILY_MISSION_SCOPE_DRIFT');
                 }
                 $missions[] = $mission;

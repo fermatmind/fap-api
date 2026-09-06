@@ -13,7 +13,7 @@ use App\Services\SeoCouncil\Platform12\Tool\Platform12ToolManifest;
 
 final class Platform12ContractRegistry
 {
-    public const MISSION_CATALOG_VERSION = '1.10.0';
+    public const MISSION_CATALOG_VERSION = '1.11.0';
 
     public function __construct(
         private readonly SeoRegistryHasher $hasher,
@@ -686,7 +686,7 @@ final class Platform12ContractRegistry
             'eligible_capability' => 'seo.runtime_health_review',
             'priority' => 'high',
             'timeout_seconds' => 120,
-            'max_attempts' => 1,
+            'max_attempts' => 2,
             'budgets' => [
                 'model_calls' => 0,
                 'model_input_tokens' => 0,
@@ -729,7 +729,7 @@ final class Platform12ContractRegistry
             'eligible_capability' => 'seo.runtime_health_review',
             'priority' => 'high',
             'timeout_seconds' => 120,
-            'max_attempts' => 1,
+            'max_attempts' => 2,
             'budgets' => [
                 'model_calls' => 0,
                 'model_input_tokens' => 0,
@@ -773,7 +773,7 @@ final class Platform12ContractRegistry
             'eligible_capability' => 'seo.release_separation_policy',
             'priority' => 'critical',
             'timeout_seconds' => 120,
-            'max_attempts' => 1,
+            'max_attempts' => 2,
             'budgets' => [
                 'model_calls' => 0,
                 'model_input_tokens' => 0,

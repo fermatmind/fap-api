@@ -18,7 +18,10 @@ final readonly class Platform12SystemHealthReadService
 
     private const HOLD_DELIVERY_STATES = ['HELD', 'FAILED'];
 
-    public function __construct(private Platform12SanitizedOperationsProjector $projector) {}
+    public function __construct(
+        private Platform12SanitizedOperationsProjector $projector,
+        private Platform12IssueExplanation $explanations,
+    ) {}
 
     /** @return array<string, mixed> */
     public function snapshot(): array
@@ -37,7 +40,8 @@ final readonly class Platform12SystemHealthReadService
             try {
                 $daily = $this->dailyMissions($connection);
             } catch (Throwable) {
-                $daily = ['runtime_state' => 'UNAVAILABLE', 'enabled' => false, 'actionable_count' => null, 'items' => []];
+                $daily = ['runtime_state' => 'UNAVAILABLE', 'enabled' => false, 'audit_enabled' => false,
+                    'business_write_enabled' => false, 'actionable_count' => null, 'items' => []];
             }
 
             return [...$this->projector->systemHealth([
@@ -209,11 +213,12 @@ final readonly class Platform12SystemHealthReadService
                     ? 'UNAVAILABLE' : (in_array('DRIFT', $states, true) ? 'HOLD' : 'READY'));
             }
             $sourceGaps = $scheduled['source_gaps'] ?? null;
+            $explanation = $this->explanations->for($output, $status, is_array($sourceGaps) && $sourceGaps !== []);
             $items[] = [
                 'label_key' => 'seo-council.missions.'.$index,
                 'state' => $status,
-                'reason_key' => is_array($sourceGaps) && $sourceGaps !== [] ? 'seo-council.source_gap'
-                    : ($status === 'HOLD' ? 'seo-council.inspect_trace' : 'seo-council.states.'.$status),
+                ...$explanation,
+                'source_checks' => $this->sourceChecks($scheduled),
                 'observed_at' => $row !== null ? CarbonImmutable::parse($row->updated_at, 'UTC')->toAtomString() : null,
                 'next_run' => $set->nextRun($mission, CarbonImmutable::now('UTC')),
                 'receipt_hash' => preg_match('/^[a-f0-9]{64}$/D', (string) $row?->terminal_receipt_hash) === 1
@@ -223,8 +228,41 @@ final readonly class Platform12SystemHealthReadService
 
         $health['trace'] = $terminal === 0 ? 'UNAVAILABLE' : ($verified === $terminal ? 'READY' : 'HOLD');
 
-        return ['runtime_state' => $runtime['state'], 'enabled' => $runtime['computation_enabled'], 'health' => $health,
+        return ['runtime_state' => $runtime['state'], 'enabled' => $runtime['computation_enabled'],
+            'audit_enabled' => $runtime['audit_enabled'], 'business_write_enabled' => false, 'health' => $health,
             'actionable_count' => count(array_filter($items, static fn (array $item): bool => in_array($item['state'], ['HOLD', 'STALE', 'UNAVAILABLE'], true))),
             'items' => $items];
+    }
+
+    /** @return list<array{label_key:string,state:string,observed_at:?string,hash:string}> */
+    private function sourceChecks(mixed $scheduled): array
+    {
+        if (! is_array($scheduled)) {
+            return [];
+        }
+        $allowed = ['gsc_scheduled_receipt', 'scheduled_runtime_probe', 'public_api_health',
+            'url_truth_reconciliation', 'issue_cluster', 'd1_observation', 'sitemap_observation',
+            'private_route_negative_set', 'evidence_expiry', 'registry_version_vector',
+            'stored_evidence_safety', 'council_tool_audit'];
+        $items = [];
+        foreach (array_slice($scheduled['source_refs'] ?? [], 0, 8) as $source) {
+            if (! is_array($source) || ! in_array($source['id'] ?? null, $allowed, true)) {
+                continue;
+            }
+            $observed = $source['observed_at'] ?? null;
+            $items[] = ['label_key' => 'seo-council.sources.'.$source['id'], 'state' => 'AVAILABLE',
+                'observed_at' => is_string($observed) ? $observed : null,
+                'hash' => preg_match('/^[a-f0-9]{64}$/D', (string) ($source['hash'] ?? '')) === 1 ? $source['hash'] : 'unavailable'];
+        }
+        foreach (array_slice($scheduled['source_gaps'] ?? [], 0, 8 - count($items)) as $gap) {
+            $stale = is_string($gap) && str_ends_with($gap, '_stale');
+            $id = $stale ? substr($gap, 0, -6) : $gap;
+            if (in_array($id, $allowed, true)) {
+                $items[] = ['label_key' => 'seo-council.sources.'.$id, 'state' => $stale ? 'STALE' : 'UNAVAILABLE',
+                    'observed_at' => null, 'hash' => 'unavailable'];
+            }
+        }
+
+        return $items;
     }
 }

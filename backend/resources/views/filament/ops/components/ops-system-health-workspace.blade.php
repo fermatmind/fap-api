@@ -25,7 +25,9 @@
     </div>
 
     <p class="ops-control-hint" data-scheduler-activation="{{ ($snapshot['daily_missions']['enabled'] ?? false) ? 'read-only' : 'disabled' }}">
-        {{ ($snapshot['daily_missions']['enabled'] ?? false) ? 'ACTIVE_READ_ONLY · business_write=false' : __($copy.'.scheduler_disabled') }}
+        {{ __('seo-council.capabilities.computation') }}={{ ($snapshot['daily_missions']['enabled'] ?? false) ? 'ACTIVE_READ_ONLY' : 'HOLD' }} ·
+        {{ __('seo-council.capabilities.audit') }}={{ ($snapshot['daily_missions']['audit_enabled'] ?? false) ? 'ENABLED' : 'DISABLED' }} ·
+        {{ __('seo-council.capabilities.business_write') }}={{ ($snapshot['daily_missions']['business_write_enabled'] ?? false) ? 'ENABLED' : 'DISABLED' }}
     </p>
 
     @if (isset($snapshot['daily_missions']))
@@ -35,7 +37,19 @@
                 <div class="ops-metric">
                     <strong>{{ __($mission['label_key']) }}</strong>
                     <span>{{ __('seo-council.states.'.$mission['state']) }}</span>
-                    <small>{{ __($mission['reason_key']) }}</small>
+                    <small><code>{{ $mission['reason_code'] }}</code> · {{ __($mission['problem_key']) }}</small>
+                    <small>{{ __('seo-council.impact') }}：{{ __($mission['impact_key']) }}</small>
+                    <small>{{ __('seo-council.recommendation') }}：{{ __($mission['recommendation_key']) }}</small>
+                    @foreach ($mission['source_checks'] as $source)
+                        <small>
+                            {{ __($source['label_key']) }} · {{ $source['state'] }} ·
+                            @if ($source['observed_at'])
+                                <time datetime="{{ $source['observed_at'] }}">{{ $source['observed_at'] }}</time>
+                            @else
+                                {{ __('seo-council.time_unknown') }}
+                            @endif
+                        </small>
+                    @endforeach
                     @if ($mission['observed_at'])
                         <time datetime="{{ $mission['observed_at'] }}">{{ $mission['observed_at'] }}</time>
                     @endif
