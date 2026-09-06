@@ -82,6 +82,10 @@ final class SeoPlatform07ProductionCalibrationCloseoutTest extends TestCase
         $privatePaths = (new PageFamilyPolicyRegistry)->privatePathSegments();
         $controlledConcurrency = (new \ReflectionClass(ProductionCalibrationProbeService::class))
             ->getConstant('CONTROLLED_NEGATIVE_SET_MAX_CONCURRENCY');
+        $controlledConnectTimeout = (new \ReflectionClass(ProductionCalibrationProbeService::class))
+            ->getConstant('CONTROLLED_NEGATIVE_SET_CONNECT_TIMEOUT_SECONDS');
+        $controlledTimeout = (new \ReflectionClass(ProductionCalibrationProbeService::class))
+            ->getConstant('CONTROLLED_NEGATIVE_SET_TIMEOUT_SECONDS');
 
         $result = app(ProductionCalibrationProbeService::class)->observePrivateNegativeSet();
 
@@ -93,6 +97,8 @@ final class SeoPlatform07ProductionCalibrationCloseoutTest extends TestCase
         $this->assertSame(str_repeat('a', 40), $result['deploy_revision']);
         $this->assertIsInt($controlledConcurrency);
         $this->assertGreaterThanOrEqual(count($privatePaths), $controlledConcurrency);
+        $this->assertSame(2, $controlledConnectTimeout);
+        $this->assertSame(4, $controlledTimeout);
         Http::assertSentCount(count($privatePaths));
     }
 

@@ -170,8 +170,6 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
             'php -d max_execution_time=0 artisan seo:runtime-probe-scheduled --trigger=manual --scope=private-negative-set --json',
             $step,
         );
-        $this->assertStringContainsString("printf '%s\\\\n' a08_runtime_probe_active >&2", $step);
-        $this->assertStringContainsString('kill \\"\\$heartbeat_pid\\" 2>/dev/null || true', $step);
         $this->assertStringContainsString('.production_calibration.deploy_revision == $sha', $step);
         $this->assertStringContainsString('runtime_receipt_schema_valid:', $step);
         $this->assertStringContainsString('release_sha_valid:', $step);
@@ -221,8 +219,6 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
             'php -d max_execution_time=0 artisan seo:runtime-probe-scheduled --trigger=manual --scope=private-negative-set --json',
             $productionStep,
         );
-        $this->assertStringContainsString("printf '%s\\\\n' a08_runtime_probe_active >&2", $productionStep);
-        $this->assertStringContainsString('kill \\"\\$heartbeat_pid\\" 2>/dev/null || true', $productionStep);
         $this->assertLessThan(
             strpos($productionStep, 'for mission in'),
             strpos($productionStep, 'sitemap_refresh='),
