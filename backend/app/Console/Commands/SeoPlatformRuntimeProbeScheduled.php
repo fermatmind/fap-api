@@ -12,6 +12,7 @@ final class SeoPlatformRuntimeProbeScheduled extends Command
 {
     protected $signature = 'seo:runtime-probe-scheduled
         {--trigger=manual : Receipt provenance; the scheduler supplies scheduled}
+        {--scope=full : Full natural calibration or private-negative-set for controlled acceptance}
         {--json : Emit the sanitized receipt as JSON}';
 
     protected $description = 'Record a bounded, sanitized SEO runtime probe scheduler receipt';
@@ -20,9 +21,19 @@ final class SeoPlatformRuntimeProbeScheduled extends Command
         ScheduledRuntimeProbeReceiptService $service,
         ProductionCalibrationProbeService $calibration,
     ): int {
+        $trigger = (string) $this->option('trigger');
+        $scope = (string) $this->option('scope');
+        if (! in_array($scope, ['full', 'private-negative-set'], true)
+            || ($scope === 'private-negative-set' && $trigger !== 'manual')) {
+            $this->error('Runtime probe scope is invalid for the selected trigger.');
+
+            return self::INVALID;
+        }
         $receipt = $service->record(
-            (string) $this->option('trigger'),
-            calibration: $calibration->observe(),
+            $trigger,
+            calibration: $scope === 'private-negative-set'
+                ? $calibration->observePrivateNegativeSet()
+                : $calibration->observe(),
         );
         if ((bool) $this->option('json')) {
             $this->line(json_encode($receipt, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));

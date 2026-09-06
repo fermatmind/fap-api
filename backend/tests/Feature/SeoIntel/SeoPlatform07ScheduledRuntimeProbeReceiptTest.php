@@ -206,6 +206,16 @@ final class SeoPlatform07ScheduledRuntimeProbeReceiptTest extends TestCase
     }
 
     #[Test]
+    public function private_negative_set_scope_is_reserved_for_manual_controlled_acceptance(): void
+    {
+        $this->artisan('seo:runtime-probe-scheduled', [
+            '--trigger' => 'scheduled',
+            '--scope' => 'private-negative-set',
+            '--json' => true,
+        ])->expectsOutputToContain('Runtime probe scope is invalid')->assertExitCode(2);
+    }
+
+    #[Test]
     public function expand_only_migration_creates_the_receipt_store_and_never_drops_it(): void
     {
         $source = (string) file_get_contents(database_path('migrations/seo_intel/2026_08_26_090000_create_runtime_probe_receipts.php'));

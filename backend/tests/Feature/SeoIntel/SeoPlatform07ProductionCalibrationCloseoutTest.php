@@ -74,6 +74,23 @@ final class SeoPlatform07ProductionCalibrationCloseoutTest extends TestCase
     }
 
     #[Test]
+    public function controlled_acceptance_can_observe_only_the_live_private_negative_set(): void
+    {
+        config(['app.git_sha' => str_repeat('a', 40)]);
+        Http::fake(fn () => Http::response('', 404));
+
+        $result = app(ProductionCalibrationProbeService::class)->observePrivateNegativeSet();
+
+        $this->assertSame('MEASUREMENT_HOLD', $result['state']);
+        $this->assertSame(0, $result['observed_cell_count']);
+        $this->assertSame([], $result['cells']);
+        $this->assertTrue(data_get($result, 'private_negative_set.checked'));
+        $this->assertTrue(data_get($result, 'private_negative_set.accepted'));
+        $this->assertSame(str_repeat('a', 40), $result['deploy_revision']);
+        Http::assertSentCount(count((new PageFamilyPolicyRegistry)->privatePathSegments()));
+    }
+
+    #[Test]
     public function three_complete_natural_slots_bound_to_one_deploy_prove_production(): void
     {
         $storedWindow = json_decode(json_encode($this->window(), JSON_THROW_ON_ERROR), true, 512, JSON_THROW_ON_ERROR);

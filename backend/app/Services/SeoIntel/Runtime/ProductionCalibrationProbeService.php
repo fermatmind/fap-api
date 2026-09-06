@@ -58,6 +58,31 @@ final class ProductionCalibrationProbeService
         ];
     }
 
+    /** @return array<string,mixed> */
+    public function observePrivateNegativeSet(): array
+    {
+        try {
+            $negativeSet = $this->observeNegativeSet();
+        } catch (Throwable) {
+            return $this->unavailable('private_negative_set_unavailable');
+        }
+
+        return [
+            'schema_version' => self::SCHEMA_VERSION,
+            'state' => UnifiedRuntimeProbeEvaluator::MEASUREMENT_HOLD,
+            'policy_version' => PageFamilyPolicyRegistry::VERSION,
+            'policy_hash' => $this->registry->policyHash(),
+            'cohort_hash' => null,
+            'expected_cell_count' => 12,
+            'observed_cell_count' => 0,
+            'cells' => [],
+            'private_negative_set' => $negativeSet,
+            'deploy_revision' => $this->releaseSha(),
+            'observed_at' => now('UTC')->toIso8601String(),
+            'boundaries' => $this->boundaries(),
+        ];
+    }
+
     /** @param array<string,mixed> $cells @return array<string,array<string,mixed>> */
     private function targets(array $cells): array
     {
