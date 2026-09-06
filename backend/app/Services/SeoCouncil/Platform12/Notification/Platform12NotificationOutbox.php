@@ -432,12 +432,12 @@ final readonly class Platform12NotificationOutbox
 
     private function databaseNow(ConnectionInterface $connection): CarbonImmutable
     {
-        $row = $connection->selectOne('SELECT CURRENT_TIMESTAMP AS current_time');
-        if (! is_object($row) || trim((string) ($row->current_time ?? '')) === '') {
+        $row = $connection->selectOne('SELECT CURRENT_TIMESTAMP AS database_time');
+        if (! is_object($row) || trim((string) ($row->database_time ?? '')) === '') {
             throw new InvalidArgumentException('NOTIFICATION_DATABASE_CLOCK_UNAVAILABLE');
         }
 
-        return CarbonImmutable::parse((string) $row->current_time, 'UTC')->utc();
+        return CarbonImmutable::parse((string) $row->database_time, 'UTC')->utc();
     }
 
     private function timestamp(CarbonImmutable $value): string

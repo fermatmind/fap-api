@@ -659,12 +659,12 @@ final readonly class Platform12SchedulerStore
 
     private function databaseNow(ConnectionInterface $connection): CarbonImmutable
     {
-        $row = $connection->selectOne('SELECT CURRENT_TIMESTAMP AS current_time');
-        if (! is_object($row) || trim((string) ($row->current_time ?? '')) === '') {
+        $row = $connection->selectOne('SELECT CURRENT_TIMESTAMP AS database_time');
+        if (! is_object($row) || trim((string) ($row->database_time ?? '')) === '') {
             throw new InvalidArgumentException('SCHEDULER_DATABASE_CLOCK_UNAVAILABLE');
         }
 
-        return $this->parseTimestamp((string) $row->current_time);
+        return $this->parseTimestamp((string) $row->database_time);
     }
 
     private function parseTimestamp(string $value): CarbonImmutable

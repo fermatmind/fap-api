@@ -89,6 +89,22 @@ final class SeoPlatform12F02NotificationOutboxTest extends TestCase
         $this->assertSame('sent', DB::connection('seo_intel')->table('seo_council_notification_outbox')->value('status'));
     }
 
+    public function test_database_clock_query_uses_a_mysql_safe_alias(): void
+    {
+        $outbox = app(Platform12NotificationOutbox::class);
+        $outbox->enqueue($this->classification('database-clock'), 'failed', 'HOLD');
+        $queries = [];
+        DB::listen(static function ($query) use (&$queries): void {
+            $queries[] = $query->sql;
+        });
+
+        $claim = $outbox->claim('worker:database-clock');
+
+        $this->assertSame('CLAIMED', $claim['status']);
+        $this->assertContains('SELECT CURRENT_TIMESTAMP AS database_time', $queries);
+        $this->assertNotContains('SELECT CURRENT_TIMESTAMP AS current_time', $queries);
+    }
+
     public function test_expired_worker_claim_is_recovered_and_does_not_duplicate_send(): void
     {
         $outbox = app(Platform12NotificationOutbox::class);

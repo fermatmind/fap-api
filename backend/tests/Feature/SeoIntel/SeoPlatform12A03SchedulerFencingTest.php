@@ -69,6 +69,21 @@ final class SeoPlatform12A03SchedulerFencingTest extends TestCase
         $this->assertSame(1, DB::connection('seo_intel')->table('seo_council_scheduler_leases')->count());
     }
 
+    public function test_database_clock_query_uses_a_mysql_safe_alias(): void
+    {
+        $queries = [];
+        DB::listen(static function ($query) use (&$queries): void {
+            $queries[] = $query->sql;
+        });
+
+        $decision = app(Platform12SchedulerStore::class)
+            ->acquire(self::LEASE_KEY, self::OWNER_A, 60);
+
+        $this->assertSame('LEASE_ACQUIRED', $decision['status']);
+        $this->assertContains('SELECT CURRENT_TIMESTAMP AS database_time', $queries);
+        $this->assertNotContains('SELECT CURRENT_TIMESTAMP AS current_time', $queries);
+    }
+
     public function test_fencing_expansion_is_backward_compatible_and_scheduler_stays_disabled(): void
     {
         $schema = DB::connection('seo_intel')->getSchemaBuilder();
