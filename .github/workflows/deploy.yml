@@ -1273,10 +1273,18 @@ jobs:
             seo.platform12.daily_url_truth_reconciliation \
             seo.platform12.daily_private_policy_evidence_drift; do
             result="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-scheduled --acceptance=$mission --json --no-interaction --no-ansi")"
-            jq -e '.status == "TERMINAL_COMMITTED" and .terminal_committed == true
-              and .source_gaps == [] and (.mission_verdict | type == "string")
-              and .execution_allowed == false and .business_write_enabled == false' <<<"$result" >/dev/null
             results="$(jq -c --argjson result "$result" '. + [$result]' <<<"$results")"
+            if ! jq -e '.status == "TERMINAL_COMMITTED" and .terminal_committed == true
+              and .source_gaps == [] and (.mission_verdict | type == "string")
+              and .execution_allowed == false and .business_write_enabled == false' <<<"$result" >/dev/null; then
+              jq -n --arg sha "$DEPLOY_SHA" --arg run "$GITHUB_RUN_ID" --arg attempt "$GITHUB_RUN_ATTEMPT" --argjson missions "$results" \
+                '{schema_version:"seo.platform12_a08_staging_acceptance.v1",sha:$sha,deploy_run_id:($run|tonumber),deploy_run_attempt:($attempt|tonumber),
+                  status:"hold",reason:"A08_SOURCE_ACCEPTANCE_HOLD",trigger_mode:"controlled_acceptance",natural_slot_receipt:false,
+                  mission_count:($missions|length),missions:$missions,model_calls:0,tool_calls:0,external_calls:0,business_writes:0}' \
+                > artifacts/seo-council-a08-staging/receipt.json
+              jq -c '{status,mission_id,terminal_committed,mission_verdict,source_gaps,execution_allowed,business_write_enabled}' <<<"$result" >&2
+              exit 1
+            fi
           done
           jq -n --arg sha "$DEPLOY_SHA" --arg run "$GITHUB_RUN_ID" --arg attempt "$GITHUB_RUN_ATTEMPT" --argjson missions "$results" \
             '{schema_version:"seo.platform12_a08_staging_acceptance.v1",sha:$sha,deploy_run_id:($run|tonumber),deploy_run_attempt:($attempt|tonumber),
