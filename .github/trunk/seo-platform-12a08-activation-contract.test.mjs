@@ -60,6 +60,7 @@ test("deploy uses only successful CI releases and preserves controlled acceptanc
   assert.match(deploy, /A08_SCOPED_READ_ONLY_ACCEPTANCE/);
   assert.match(deploy, /seo:council-notification-acceptance/);
   assert.match(deploy, /seo:council-acceptance-readback/);
+  assert.match(deploy, /public-content:probe-delivery --all --json/);
   assert.match(deploy, /notification_configuration_verified:true/);
   assert.match(deploy, /receipt_to_ui_verified:true/);
   assert.match(deploy, /natural_slot_receipt:false/);

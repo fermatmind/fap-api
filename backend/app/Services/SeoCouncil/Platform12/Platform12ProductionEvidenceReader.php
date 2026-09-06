@@ -27,7 +27,7 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         private TechnicalPrivateNegativeSetEvaluator $privateRoutes,
     ) {}
 
-    public function capture(string $missionId): array
+    public function capture(string $missionId, string $triggerMode = 'natural'): array
     {
         $restore = [];
         try {
@@ -48,7 +48,7 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
                 }
             }
 
-            return $this->captureReadModels($missionId);
+            return $this->captureReadModels($missionId, $triggerMode);
         } catch (Throwable) {
             return ['input' => ['evaluated_at' => now('UTC')->format('Y-m-d\TH:i:s\Z')],
                 'sources' => [], 'source_gaps' => ['bounded_read_unavailable'],
@@ -65,7 +65,7 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         }
     }
 
-    private function captureReadModels(string $missionId): array
+    private function captureReadModels(string $missionId, string $triggerMode): array
     {
         if (! in_array($missionId, Platform12DailyMissionSet::IDS, true)) {
             throw new \InvalidArgumentException('DAILY_MISSION_UNKNOWN');
@@ -92,7 +92,11 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
             }
         };
         if ($missionId === Platform12DailyMissionSet::IDS[0]) {
-            $gsc = $read('gsc_scheduled_receipt', fn (): array => $this->gsc($at));
+            $controlledStaging = $triggerMode === 'controlled_acceptance' && app()->environment('staging');
+            $gsc = $read(
+                $controlledStaging ? 'gsc_controlled_acceptance_receipt' : 'gsc_scheduled_receipt',
+                fn (): array => $this->gsc($at, $controlledStaging ? 'manual' : 'scheduled'),
+            );
             $input['gsc'] = $gsc === null ? null : array_diff_key($gsc, ['observed_at' => true, 'source_hash' => true]);
             $probe = $read('scheduled_runtime_probe', fn (): array => $this->runtimeWindow($at));
             $api = $read('public_api_health', fn (): array => $this->publicApi($at));
@@ -174,11 +178,15 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
             'expires_at' => $at->addMinutes(10)->format('Y-m-d\TH:i:s\Z')];
     }
 
-    private function gsc(CarbonImmutable $now): array
+    private function gsc(CarbonImmutable $now, string $sourceTriggerMode = 'scheduled'): array
     {
-        // Read the latest scheduled attempt, including a failure; never hide it
-        // by falling back to an older successful run.
-        $row = $this->connection()->table('seo_gsc_sync_runs')->where('trigger_mode', 'scheduled')
+        if (! in_array($sourceTriggerMode, ['scheduled', 'manual'], true)) {
+            throw new \InvalidArgumentException('GSC_RECEIPT_TRIGGER_INVALID');
+        }
+        // Natural and production acceptance reads only the latest scheduled attempt.
+        // Staging controlled acceptance reads the already-validated manual readiness
+        // attempt and preserves that distinction in the frozen Mission input.
+        $row = $this->connection()->table('seo_gsc_sync_runs')->where('trigger_mode', $sourceTriggerMode)
             ->orderByDesc('started_at')->first(['status', 'finished_at', 'receipt_json']);
         if ($row === null || ! is_string($row->receipt_json) || strlen($row->receipt_json) > 262144) {
             throw new \RuntimeException('GSC_RECEIPT_UNAVAILABLE');
@@ -186,13 +194,14 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         $receipt = json_decode($row->receipt_json, true, 32, JSON_THROW_ON_ERROR);
         $finished = CarbonImmutable::parse($row->finished_at, 'UTC');
         if (($receipt['schema_version'] ?? null) !== 'seo.gsc_refresh_receipt.v2'
+            || ($receipt['trigger_mode'] ?? null) !== $sourceTriggerMode
             || $finished->gt($now) || $finished->lt($now->subHours(26))) {
             throw new \RuntimeException('GSC_RECEIPT_STALE');
         }
 
         return ['availability' => 'AVAILABLE', 'scheduled_receipt_status' => $row->status,
             'observed_at' => $finished->format('Y-m-d\TH:i:s\Z'), 'source_hash' => $this->hasher->hash($receipt),
-            'trigger_mode' => $receipt['trigger_mode'] ?? null,
+            'trigger_mode' => $sourceTriggerMode === 'manual' ? 'controlled_acceptance' : 'scheduled',
             'mapping_state' => ($receipt['unmapped_rows'] ?? null) === 0 ? 'READY' : 'FAILED',
             'data_quality_state' => $row->status === 'success' && data_get($receipt, 'quality_gate.status') === 'pass' ? 'READY' : 'HOLD',
             'window_state' => $row->status === 'success' ? 'COMPLETE' : 'INCOMPLETE',

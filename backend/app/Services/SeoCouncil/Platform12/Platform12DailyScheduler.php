@@ -84,7 +84,7 @@ final readonly class Platform12DailyScheduler
                     ? ['input' => [], 'sources' => [], 'source_gaps' => ['missed_slot'],
                         'captured_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
                         'expires_at' => now('UTC')->addMinutes(10)->format('Y-m-d\TH:i:s\Z')]
-                    : $this->evidence->capture($slot['mission_id']);
+                    : $this->evidence->capture($slot['mission_id'], $slot['trigger_mode']);
                 if (! $this->sameGeneration($state, $acceptanceMission !== null)) {
                     return $this->result('PAUSED_BEFORE_RESERVATION');
                 }

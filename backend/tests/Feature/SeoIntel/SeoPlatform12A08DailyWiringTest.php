@@ -93,7 +93,7 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
         {
             public int $reads = 0;
 
-            public function capture(string $missionId): array
+            public function capture(string $missionId, string $triggerMode = 'natural'): array
             {
                 $this->reads++;
 
@@ -326,7 +326,7 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
 
             public bool $canonicalFault = false;
 
-            public function capture(string $missionId): array
+            public function capture(string $missionId, string $triggerMode = 'natural'): array
             {
                 $this->reads++;
                 $input = match ($missionId) {

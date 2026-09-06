@@ -59,6 +59,48 @@ final class SeoPlatform12A08ProductionEvidenceTest extends TestCase
         Http::assertNothingSent();
     }
 
+    public function test_staging_controlled_acceptance_reads_manual_readiness_without_weakening_natural_source(): void
+    {
+        Schema::connection('seo_intel')->create('seo_gsc_sync_runs', function (Blueprint $table): void {
+            $table->id();
+            foreach (['trigger_mode', 'status', 'started_at', 'finished_at', 'receipt_json'] as $field) {
+                $table->text($field)->nullable();
+            }
+        });
+        $at = CarbonImmutable::now('UTC');
+        DB::connection('seo_intel')->table('seo_gsc_sync_runs')->insert([
+            'trigger_mode' => 'manual',
+            'status' => 'success',
+            'started_at' => $at->subMinutes(2),
+            'finished_at' => $at->subMinute(),
+            'receipt_json' => json_encode([
+                'schema_version' => 'seo.gsc_refresh_receipt.v2',
+                'trigger_mode' => 'manual',
+                'unmapped_rows' => 0,
+                'rows_seen' => 1,
+                'data_max_date' => $at->subDay()->toDateString(),
+                'quality_gate' => ['status' => 'pass'],
+            ], JSON_THROW_ON_ERROR),
+        ]);
+        $this->app->instance('env', 'staging');
+
+        try {
+            $controlled = app(Platform12ProductionEvidenceReader::class)->capture(
+                Platform12DailyMissionSet::IDS[0],
+                'controlled_acceptance',
+            );
+            $natural = app(Platform12ProductionEvidenceReader::class)->capture(Platform12DailyMissionSet::IDS[0]);
+        } finally {
+            $this->app->instance('env', 'testing');
+        }
+
+        $this->assertSame('controlled_acceptance', $controlled['input']['gsc']['trigger_mode']);
+        $this->assertNotContains('gsc_controlled_acceptance_receipt', $controlled['source_gaps']);
+        $this->assertNull($natural['input']['gsc']);
+        $this->assertContains('gsc_scheduled_receipt', $natural['source_gaps']);
+        Http::assertNothingSent();
+    }
+
     public function test_missing_source_is_not_a_zero_or_fabricated_healthy_result(): void
     {
         $capture = app(Platform12ProductionEvidenceReader::class)->capture(Platform12DailyMissionSet::IDS[0]);

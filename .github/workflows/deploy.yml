@@ -1271,6 +1271,11 @@ jobs:
             "${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-runtime acceptance-abort --operation-ref='$operation' --expected-generation='$generation' --no-interaction --no-ansi" >/dev/null || true
           }
           trap abort_acceptance ERR
+          public_probe="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan public-content:probe-delivery --all --json --no-interaction --no-ansi")"
+          jq -e '.ok == true and .scope == "fixed_anonymous_public_allowlist"
+            and .mode == "all" and (.items | type == "array" and length > 0)
+            and (.items | all(.ok == true and .status_code >= 200 and .status_code < 300
+              and .readback.ok == true))' <<<"$public_probe" >/dev/null
           results='[]'
           for mission in \
             seo.platform12.daily_gsc_core_runtime \

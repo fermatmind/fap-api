@@ -100,7 +100,7 @@ final readonly class Platform12TraceDrilldownReadService
         if ($scheduled === null || ! hash_equals(app(\App\Services\SeoAgentGovernance\SeoRegistryHasher::class)->hashWithout($receipt, 'receipt_hash'), $hash)) {
             return [];
         }
-        $allowed = ['gsc_scheduled_receipt', 'scheduled_runtime_probe', 'public_api_health',
+        $allowed = ['gsc_scheduled_receipt', 'gsc_controlled_acceptance_receipt', 'scheduled_runtime_probe', 'public_api_health',
             'url_truth_reconciliation', 'issue_cluster', 'd1_observation', 'sitemap_observation',
             'private_route_negative_set', 'evidence_expiry', 'registry_version_vector', 'stored_evidence_safety', 'council_tool_audit'];
         $items = [];

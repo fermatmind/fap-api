@@ -51,6 +51,16 @@ final class SeoPlatform12B01DailyGscCoreRuntimeTest extends TestCase
         $this->assertSame('DATA_FRESHNESS_HOLD', $held['state']);
     }
 
+    public function test_controlled_acceptance_source_is_valid_but_unlabelled_manual_source_holds(): void
+    {
+        $evidence = $this->readyEvidence();
+        $evidence['gsc']['trigger_mode'] = 'controlled_acceptance';
+        $this->assertSame('READY', app(Platform12DailyGscCoreRuntimeEvaluator::class)->evaluate($evidence)['state']);
+
+        $evidence['gsc']['trigger_mode'] = 'manual';
+        $this->assertSame('GSC_UNAVAILABLE_HOLD', app(Platform12DailyGscCoreRuntimeEvaluator::class)->evaluate($evidence)['state']);
+    }
+
     public function test_catalog_adds_definition_without_runtime_or_schedule_activation(): void
     {
         $contracts = app(Platform12ContractRegistry::class);

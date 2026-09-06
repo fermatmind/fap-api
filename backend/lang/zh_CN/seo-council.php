@@ -7,7 +7,7 @@ return [
     'next_run' => '下次运行（UTC）',
     'source_gap' => '来源缺失或过期。展开 Trace 核对来源状态与时间；缺少必要来源时不算完成接线验收。',
     'time_unknown' => '源时间不可用',
-    'sources' => ['gsc_scheduled_receipt' => 'GSC 调度回执', 'scheduled_runtime_probe' => '运行探测回执',
+    'sources' => ['gsc_scheduled_receipt' => 'GSC 调度回执', 'gsc_controlled_acceptance_receipt' => 'Staging 受控 GSC 回执', 'scheduled_runtime_probe' => '运行探测回执',
         'public_api_health' => '公开 API 探测', 'url_truth_reconciliation' => 'URL Truth 对账', 'issue_cluster' => '问题聚类',
         'd1_observation' => 'D1 观测', 'sitemap_observation' => 'Sitemap 缓存观测', 'private_route_negative_set' => '私有路由负向检查',
         'evidence_expiry' => '证据过期检查', 'registry_version_vector' => '版本向量', 'stored_evidence_safety' => '脱敏证据校验', 'council_tool_audit' => '工具调用审计'],
