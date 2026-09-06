@@ -27,7 +27,10 @@ final class ScheduledRuntimeProbeReceiptService
 
         $observedAt = $now === null ? CarbonImmutable::now('UTC') : CarbonImmutable::parse($now)->utc();
         $scheduledFor = $observedAt->startOfMinute()->subMinutes($observedAt->minute % self::SLOT_MINUTES);
-        $slotKey = $triggerMode.'|'.$scheduledFor->format('Y-m-d\TH:i:00\Z');
+        $releaseIdentity = $triggerMode === 'manual' && preg_match('/^[a-f0-9]{40}$/', (string) ($calibration['deploy_revision'] ?? '')) === 1
+            ? '|'.(string) $calibration['deploy_revision']
+            : '';
+        $slotKey = $triggerMode.$releaseIdentity.'|'.$scheduledFor->format('Y-m-d\TH:i:00\Z');
         $crawler = $this->crawlerSourceReceipt($observedAt);
         $calibration ??= $this->missingCalibration();
         $status = ($crawler['complete'] ?? false) === true && ($calibration['state'] ?? null) === 'success'
@@ -106,6 +109,8 @@ final class ScheduledRuntimeProbeReceiptService
         $rows = $this->connection()->table('seo_runtime_probe_receipts')
             ->where('trigger_mode', $triggerMode)
             ->orderByDesc('scheduled_for')
+            ->orderByDesc('completed_at')
+            ->orderByDesc('id')
             ->limit(3)
             ->get();
         $receipts = $rows->map(fn (object $row): array => $this->decode((string) $row->receipt_json))->all();

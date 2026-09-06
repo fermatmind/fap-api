@@ -49,6 +49,31 @@ final class SeoPlatform07ProductionCalibrationCloseoutTest extends TestCase
     }
 
     #[Test]
+    public function deployed_revision_file_precedes_a_stale_cached_ci_sha(): void
+    {
+        $revisionPath = tempnam(sys_get_temp_dir(), 'seo-runtime-revision-');
+        $this->assertIsString($revisionPath);
+        file_put_contents($revisionPath, str_repeat('b', 40));
+        config([
+            'app.git_sha' => str_repeat('a', 40),
+            'seo_council.release_revision_path' => $revisionPath,
+        ]);
+        $this->app->instance(UrlTruthInventorySource::class, $this->authoritySource());
+        Http::fake(fn (Request $request) => Http::response(
+            '',
+            str_contains($request->url(), 'seo-platform-07-negative-set') ? 404 : 200,
+        ));
+
+        try {
+            $result = app(ProductionCalibrationProbeService::class)->observe();
+        } finally {
+            unlink($revisionPath);
+        }
+
+        $this->assertSame(str_repeat('b', 40), $result['deploy_revision']);
+    }
+
+    #[Test]
     public function three_complete_natural_slots_bound_to_one_deploy_prove_production(): void
     {
         $storedWindow = json_decode(json_encode($this->window(), JSON_THROW_ON_ERROR), true, 512, JSON_THROW_ON_ERROR);

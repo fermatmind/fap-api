@@ -155,6 +155,32 @@ final class SeoPlatform07ScheduledRuntimeProbeReceiptTest extends TestCase
     }
 
     #[Test]
+    public function manual_receipts_in_the_same_slot_are_isolated_by_exact_release(): void
+    {
+        DB::connection(self::CONNECTION)->table('seo_crawler_log_daily_aggregates')->insert([
+            'hit_count' => 7,
+            'last_seen_at' => '2026-08-26 09:00:00',
+            'updated_at' => '2026-08-26 09:00:00',
+        ]);
+        $service = $this->service();
+        $service->record('manual', '2026-08-26T09:01:00Z', [
+            'state' => 'success',
+            'deploy_revision' => str_repeat('a', 40),
+        ]);
+        $latest = $service->record('manual', '2026-08-26T09:02:00Z', [
+            'state' => 'success',
+            'deploy_revision' => str_repeat('b', 40),
+        ]);
+
+        $window = $service->readWindow('2026-08-26T09:03:00Z', 'manual');
+
+        $this->assertSame(2, DB::connection(self::CONNECTION)->table('seo_runtime_probe_receipts')->count());
+        $this->assertSame(str_repeat('b', 40), data_get($latest, 'production_calibration.deploy_revision'));
+        $this->assertSame(str_repeat('b', 40), data_get($window, 'receipts.0.production_calibration.deploy_revision'));
+        $this->assertFalse(data_get($window, 'boundaries.manual_receipts_count_as_natural_slots'));
+    }
+
+    #[Test]
     public function scheduler_contract_uses_existing_control_plane_guards(): void
     {
         $bootstrap = file_get_contents(base_path('bootstrap/app.php'));

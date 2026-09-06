@@ -217,9 +217,13 @@ final class ProductionCalibrationProbeService
 
     private function releaseSha(): ?string
     {
+        $revisionPath = (string) config(
+            'seo_council.release_revision_path',
+            dirname(base_path()).'/REVISION',
+        );
         foreach ([
+            is_file($revisionPath) ? trim((string) file_get_contents($revisionPath)) : '',
             trim((string) config('app.git_sha', '')),
-            is_file(dirname(base_path()).'/REVISION') ? trim((string) file_get_contents(dirname(base_path()).'/REVISION')) : '',
         ] as $candidate) {
             if (preg_match('/^[a-f0-9]{40}$/i', $candidate) === 1) {
                 return strtolower($candidate);
