@@ -167,7 +167,7 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
         $this->assertStringContainsString('IN("verified_unchanged","rebuilt")', $step);
         $this->assertStringContainsString('failure_stage="runtime_observation_refresh"', $step);
         $this->assertStringContainsString(
-            'seo:runtime-probe-scheduled --trigger=manual --scope=private-negative-set --json',
+            'php -d max_execution_time=0 artisan seo:runtime-probe-scheduled --trigger=manual --scope=private-negative-set --json',
             $step,
         );
         $this->assertStringContainsString('.production_calibration.deploy_revision == $sha', $step);
@@ -216,7 +216,7 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
             $productionStep,
         );
         $this->assertStringContainsString(
-            'seo:runtime-probe-scheduled --trigger=manual --scope=private-negative-set --json',
+            'php -d max_execution_time=0 artisan seo:runtime-probe-scheduled --trigger=manual --scope=private-negative-set --json',
             $productionStep,
         );
         $this->assertLessThan(
