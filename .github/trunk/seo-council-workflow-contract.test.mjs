@@ -77,7 +77,10 @@ test("A08 runtime persistence uses the existing isolated writer and keeps generi
   assert.match(deployer, /'council' => 'SEO_COUNCIL_APPROVED'/);
   assert.match(deployer, /'runtime' => 'SEO_COUNCIL_RUNTIME'/);
   assert.match(deployer, /'migration' => 'SEO_COUNCIL_MIGRATION'/);
-  assert.match(deployer, /SEO_COUNCIL_RUNTIME_WRITER_UNAVAILABLE/);
+  assert.match(
+    deployer,
+    /SEO_COUNCIL_RUNTIME_WRITER_UNAVAILABLE: configure SEO_COUNCIL_DB_USERNAME and SEO_COUNCIL_DB_PASSWORD/,
+  );
   assert.match(deployer, /SEO Council unavailable writer aliases removed/);
   assert.match(deployer, /\.seo-council-env-scrub-/);
   assert.match(deployer, /'council' => 'SEO_COUNCIL_APPROVED_DB_USERNAME'/);
