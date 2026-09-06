@@ -375,6 +375,7 @@ final class SecurityGuardrailsTest extends TestCase
         $ci = file_get_contents($repoRoot.'/.github/workflows/ci.yml');
         $agents = file_get_contents($repoRoot.'/AGENTS.md');
         $deploy = file_get_contents($repoRoot.'/.github/workflows/deploy.yml');
+        $deployer = file_get_contents($repoRoot.'/deploy.php');
 
         $this->assertIsString($ci);
         $this->assertStringContainsString("push:\n    branches: [main]", $ci);
@@ -392,6 +393,22 @@ final class SecurityGuardrailsTest extends TestCase
         $this->assertStringContainsString('workflows: [CI, Nightly]', $deploy);
         $this->assertStringContainsString("github.event.workflow_run.name == 'CI'", $deploy);
         $this->assertStringContainsString("github.event.workflow_run.name == 'Nightly'", $deploy);
+        $this->assertIsString($deployer);
+        $this->assertStringContainsString('GRANT SELECT, INSERT, UPDATE ON', $deployer);
+        $this->assertStringNotContainsString('GRANT ALL', $deployer);
+        $this->assertStringContainsString('SEO_COUNCIL_RUNTIME_DB_GRANT_FAILED', $deployer);
+        foreach ([
+            'seo_council_scheduler_leases',
+            'seo_council_schedule_deliveries',
+            'seo_council_schedule_receipts',
+            'seo_council_runs',
+            'seo_council_run_steps',
+            'seo_council_conflicts',
+            'seo_council_run_receipts',
+            'seo_council_notification_outbox',
+        ] as $councilTable) {
+            $this->assertStringContainsString("'{$councilTable}'", $deployer);
+        }
         $this->assertStringContainsString('cancel-in-progress: false', $deploy);
         $this->assertStringContainsString('automatically restore LKG', $deploy);
     }

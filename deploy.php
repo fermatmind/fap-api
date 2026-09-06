@@ -1331,6 +1331,101 @@ BASH);
     });
 });
 
+task('seo:council-runtime-db-grants', function () {
+    if (! deployBooleanOption('seo_council_orchestration', false)) {
+        writeln('<comment>Skip unchanged SEO Council runtime grants.</comment>');
+
+        return;
+    }
+
+    $migration = deploySeoIntelMigrationEnvironment();
+    if ($migration === []) {
+        throw new \RuntimeException('SEO_COUNCIL_RUNTIME_DB_GRANT_AUTHORITY_UNAVAILABLE');
+    }
+
+    within('{{release_path}}/backend', function () use ($migration): void {
+        $script = <<<'PHP'
+$runtime = null;
+try {
+    require 'vendor/autoload.php';
+    $app = require 'bootstrap/app.php';
+    $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+    $kernel->bootstrap();
+
+    $connectionName = (string) config('seo_council.connection', 'seo_intel');
+    if ($connectionName !== 'seo_intel' || config('seo_intel.write_enabled') !== false) {
+        throw new RuntimeException('SEO_COUNCIL_RUNTIME_DB_BOUNDARY_INVALID');
+    }
+    $connectionConfig = config('database.connections.'.$connectionName);
+    $database = is_array($connectionConfig) ? (string) ($connectionConfig['database'] ?? '') : '';
+    if (preg_match('/\A[A-Za-z0-9_]{1,64}\z/D', $database) !== 1) {
+        throw new RuntimeException('SEO_COUNCIL_RUNTIME_DB_BOUNDARY_INVALID');
+    }
+
+    $runtime = Illuminate\Support\Facades\DB::connection($connectionName);
+    $identity = $runtime->selectOne('SELECT CURRENT_USER() AS principal');
+    $principal = is_object($identity) ? (string) ($identity->principal ?? '') : '';
+    if (preg_match('/\A([A-Za-z0-9_.-]{1,64})@([A-Za-z0-9.%_:-]{1,255})\z/D', $principal, $parts) !== 1) {
+        throw new RuntimeException('SEO_COUNCIL_RUNTIME_DB_BOUNDARY_INVALID');
+    }
+
+    $username = getenv('SEO_INTEL_MIGRATION_DB_USERNAME');
+    $password = getenv('SEO_INTEL_MIGRATION_DB_PASSWORD');
+    if (! is_string($username) || $username === '' || ! is_string($password) || $password === '') {
+        throw new RuntimeException('SEO_COUNCIL_RUNTIME_DB_GRANT_AUTHORITY_UNAVAILABLE');
+    }
+    config(['database.connections.seo_council_grant' => [
+        ...$connectionConfig,
+        'username' => $username,
+        'password' => $password,
+    ]]);
+    $admin = Illuminate\Support\Facades\DB::connection('seo_council_grant');
+    $quotedPrincipal = $admin->getPdo()->quote($parts[1]).'@'.$admin->getPdo()->quote($parts[2]);
+    $tables = [
+        'seo_council_scheduler_leases',
+        'seo_council_schedule_deliveries',
+        'seo_council_schedule_receipts',
+        'seo_council_runs',
+        'seo_council_run_steps',
+        'seo_council_conflicts',
+        'seo_council_run_receipts',
+        'seo_council_notification_outbox',
+    ];
+    foreach ($tables as $table) {
+        $admin->unprepared(sprintf(
+            'GRANT SELECT, INSERT, UPDATE ON `%s`.`%s` TO %s',
+            $database,
+            $table,
+            $quotedPrincipal,
+        ));
+    }
+
+    $runtime->beginTransaction();
+    $now = now('UTC')->format('Y-m-d H:i:s');
+    $runtime->table('seo_council_scheduler_leases')->insert([
+        'lease_key' => 'deploy:grant-probe:'.bin2hex(random_bytes(12)),
+        'owner_token_hash' => hash('sha256', random_bytes(32)),
+        'fencing_token' => 1,
+        'lease_expires_at' => $now,
+        'created_at' => $now,
+        'updated_at' => $now,
+    ]);
+    $runtime->rollBack();
+    echo "SEO Council runtime table grants verified.\n";
+    exit(0);
+} catch (Throwable) {
+    if ($runtime instanceof Illuminate\Database\ConnectionInterface && $runtime->transactionLevel() > 0) {
+        $runtime->rollBack();
+    }
+    fwrite(STDERR, "SEO_COUNCIL_RUNTIME_DB_GRANT_FAILED\n");
+    exit(1);
+}
+PHP;
+
+        run('{{bin/php}} -d display_errors=0 -r '.deployShellArg($script), ['env' => $migration]);
+    });
+});
+
 task('seo:platform-10-material-backfill', function () {
     if (! deployBooleanOption('seo_platform_10_closeout', false)) {
         writeln('<comment>Skip SEO Platform 10 bounded material backfill.</comment>');
@@ -4456,7 +4551,8 @@ after('artisan:migrate', 'guard:no-pending-migrations');
 after('guard:no-pending-migrations', 'career:recover-data');
 after('career:recover-data', 'artisan:migrate-seo-intel');
 after('artisan:migrate-seo-intel', 'guard:no-pending-seo-intel-migrations');
-after('guard:no-pending-seo-intel-migrations', 'seo:platform-10-material-backfill');
+after('guard:no-pending-seo-intel-migrations', 'seo:council-runtime-db-grants');
+after('seo:council-runtime-db-grants', 'seo:platform-10-material-backfill');
 after('seo:platform-10-material-backfill', 'seo:detector-foundation-receipt');
 after('seo:detector-foundation-receipt', 'artisan:scales:seed-default');
 after('artisan:scales:seed-default', 'big5:publish-private-result-authority');

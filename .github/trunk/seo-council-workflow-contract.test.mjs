@@ -69,3 +69,23 @@ test("11D through 11L deployment stays disabled and writes immutable exact-SHA c
   assert.match(deployer, /task\('healthcheck:seo-council-anonymous'/);
   assert.doesNotMatch(`${ci}\n${deploy}`, /seo-agent:/);
 });
+
+test("A08 runtime persistence grants stay table-scoped and keep generic SEO writes disabled", () => {
+  assert.equal((deployer.match(/task\('seo:council-runtime-db-grants'/g) || []).length, 1);
+  assert.match(deployer, /GRANT SELECT, INSERT, UPDATE ON/);
+  assert.doesNotMatch(deployer, /GRANT ALL|GRANT DELETE/);
+  assert.match(deployer, /config\('seo_intel\.write_enabled'\) !== false/);
+  for (const table of [
+    "seo_council_scheduler_leases",
+    "seo_council_schedule_deliveries",
+    "seo_council_schedule_receipts",
+    "seo_council_runs",
+    "seo_council_run_steps",
+    "seo_council_conflicts",
+    "seo_council_run_receipts",
+    "seo_council_notification_outbox",
+  ]) assert.match(deployer, new RegExp(`'${table}'`));
+  assert.match(deployer, /\$runtime->beginTransaction\(\)/);
+  assert.match(deployer, /\$runtime->rollBack\(\)/);
+  assert.match(deployer, /after\('guard:no-pending-seo-intel-migrations', 'seo:council-runtime-db-grants'\)/);
+});
