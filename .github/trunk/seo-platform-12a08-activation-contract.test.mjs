@@ -54,6 +54,7 @@ test("deploy uses only successful CI releases and preserves controlled acceptanc
   assert.match(deploy, /workflows: \[CI\]/);
   assert.doesNotMatch(deploy, /SOURCE_WORKFLOW|verify-nightly|FULL_NIGHTLY_EVIDENCE_READY/);
   assert.match(deploy, /acceptance-begin/);
+  assert.match(deploy, /--adopt-historical-pause/);
   assert.match(deploy, /acceptance-complete/);
   assert.match(deploy, /expected-generation/);
   assert.match(deploy, /A08_SCOPED_READ_ONLY_ACCEPTANCE/);

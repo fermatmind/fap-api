@@ -75,6 +75,7 @@ final class Platform12RuntimeControl
                 'changed_at' => $state['changed_at'] ?? null,
                 'operation_ref' => $state['operation_ref'] ?? null,
                 'generation' => $state['generation'] ?? null,
+                'historical_pause_adopted' => (bool) ($state['historical_pause_adopted'] ?? false),
                 'catalog_hash' => $state['catalog_hash'] ?? null,
                 'activation_source_sha' => data_get($activation, 'manifest.compatibility.source_sha'),
                 'activation_bound_sha' => data_get($activation, 'manifest.bound_production_sha'),
@@ -89,7 +90,8 @@ final class Platform12RuntimeControl
                 'audit_enabled' => false, 'business_write_enabled' => false,
                 'activated_at' => null, 'pause_intent' => 'UNSET', 'pause_source' => null,
                 'pause_reason' => null, 'changed_at' => null, 'operation_ref' => null,
-                'generation' => null, 'catalog_hash' => null, 'activation_source_sha' => null,
+                'generation' => null, 'historical_pause_adopted' => false,
+                'catalog_hash' => null, 'activation_source_sha' => null,
                 'activation_bound_sha' => null, 'activation_basis' => null,
                 'notification_configuration_verified' => false,
                 'version_vector' => null, 'version_vector_hash' => null];
@@ -126,30 +128,35 @@ final class Platform12RuntimeControl
         }
     }
 
-    public function beginControlledAcceptance(string $operationRef): array
+    public function beginControlledAcceptance(string $operationRef, bool $adoptHistoricalPause = false): array
     {
         if (! $this->validOperationRef($operationRef)
+            || ($adoptHistoricalPause && ! app()->environment(['staging', 'testing']))
             || ! in_array($this->prerequisite(), ['READY', 'CONTROLLED_ACCEPTANCE_ONLY'], true)) {
             return $this->status();
         }
         try {
             $store = $this->store();
-            $store->lock(self::CACHE_KEY.':lock', 5)->get(function () use ($store, $operationRef): void {
+            $store->lock(self::CACHE_KEY.':lock', 5)->get(function () use ($store, $operationRef, $adoptHistoricalPause): void {
                 $old = $this->normalizedState($store->get(self::CACHE_KEY));
-                if (in_array($old['pause_source'] ?? null, [self::PAUSE_MANUAL, self::PAUSE_LEGACY], true)) {
+                $pauseSource = $old['pause_source'] ?? null;
+                if ($pauseSource === self::PAUSE_MANUAL
+                    || ($pauseSource === self::PAUSE_LEGACY && ! $adoptHistoricalPause)) {
                     return;
                 }
-                if (($old['pause_source'] ?? null) === self::PAUSE_ACCEPTANCE
+                if ($pauseSource === self::PAUSE_ACCEPTANCE
                     && ($old['operation_ref'] ?? null) === $operationRef) {
                     return;
                 }
-                $restore = ($old['pause_source'] ?? null) === self::PAUSE_ACCEPTANCE
+                $restore = $pauseSource === self::PAUSE_ACCEPTANCE
                     ? ($old['acceptance_restore'] ?? ['paused' => false, 'pause_source' => null, 'pause_reason' => null])
-                    : ['paused' => (bool) ($old['paused'] ?? false), 'pause_source' => $old['pause_source'] ?? null,
-                        'pause_reason' => $old['pause_reason'] ?? null];
+                    : ['paused' => $pauseSource === self::PAUSE_LEGACY ? false : (bool) ($old['paused'] ?? false),
+                        'pause_source' => $pauseSource === self::PAUSE_LEGACY ? null : $pauseSource,
+                        'pause_reason' => $pauseSource === self::PAUSE_LEGACY ? null : ($old['pause_reason'] ?? null)];
                 $payload = $this->statePayload(true, $old, self::PAUSE_ACCEPTANCE,
                     'CONTROLLED_ACCEPTANCE_IN_PROGRESS', $operationRef);
                 $payload['acceptance_restore'] = $restore;
+                $payload['historical_pause_adopted'] = $pauseSource === self::PAUSE_LEGACY;
                 $store->forever(self::CACHE_KEY, $payload);
             });
 

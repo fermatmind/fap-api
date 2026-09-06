@@ -12,6 +12,7 @@ final class SeoCouncilRuntimeCommand extends Command
     protected $signature = 'seo:council-runtime
         {operation=status : status, pause, resume, acceptance-begin, acceptance-complete, or acceptance-abort}
         {--operation-ref= : Exact deploy run/attempt/SHA reference for controlled acceptance}
+        {--adopt-historical-pause : Staging-only authorization to replace one legacy unknown pause during acceptance}
         {--expected-generation= : Generation read after acceptance-begin}';
 
     protected $description = 'Inspect or pause/resume Council-only read-only computation; never enables business writes';
@@ -27,7 +28,10 @@ final class SeoCouncilRuntimeCommand extends Command
         $result = match ($operation) {
             'status' => $runtime->status(),
             'pause', 'resume' => $runtime->change($operation === 'pause'),
-            'acceptance-begin' => $runtime->beginControlledAcceptance((string) $this->option('operation-ref')),
+            'acceptance-begin' => $runtime->beginControlledAcceptance(
+                (string) $this->option('operation-ref'),
+                (bool) $this->option('adopt-historical-pause'),
+            ),
             'acceptance-complete', 'acceptance-abort' => $runtime->finishControlledAcceptance(
                 (string) $this->option('operation-ref'),
                 (string) $this->option('expected-generation'),

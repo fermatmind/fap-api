@@ -97,13 +97,32 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
         $this->assertSame($manual['generation'], $after['generation']);
     }
 
-    public function test_legacy_boolean_pause_is_unknown_but_legacy_running_state_can_be_protected(): void
+    public function test_legacy_boolean_pause_requires_explicit_staging_adoption_and_legacy_running_can_be_protected(): void
     {
         $this->write($this->manifest($this->sha, $this->sha, 'CONTROLLED_ACCEPTANCE_ONLY'));
         $runtime = app(Platform12RuntimeControl::class);
         Cache::store('array')->forever(Platform12RuntimeControl::CACHE_KEY, ['paused' => true, 'generation' => str_repeat('a', 32)]);
         $this->assertSame('HISTORICAL_PAUSE_UNKNOWN_HOLD', $runtime->status()['state']);
         $this->assertFalse($runtime->beginControlledAcceptance('deploy:12:1:'.$this->sha)['controlled_acceptance_enabled']);
+        $this->assertFalse($runtime->beginControlledAcceptance('deploy:12:1:'.$this->sha, true)['controlled_acceptance_enabled']);
+
+        $this->app->instance('env', 'staging');
+        $begun = $runtime->beginControlledAcceptance('deploy:12:1:'.$this->sha, true);
+        $this->assertTrue($begun['controlled_acceptance_enabled']);
+        $this->assertTrue($begun['historical_pause_adopted']);
+        $finished = $runtime->finishControlledAcceptance(
+            'deploy:12:1:'.$this->sha,
+            $begun['generation'],
+            true,
+        );
+        $this->assertSame('ACTIVE_READ_ONLY', $finished['state']);
+        $this->assertNull($finished['pause_source']);
+        $this->assertNull($finished['pause_reason']);
+        $this->assertFalse($finished['historical_pause_adopted']);
+
+        $manual = $runtime->change(true);
+        $this->assertSame(Platform12RuntimeControl::PAUSE_MANUAL, $manual['pause_source']);
+        $this->assertFalse($runtime->beginControlledAcceptance('deploy:13:1:'.$this->sha, true)['controlled_acceptance_enabled']);
 
         Cache::store('array')->forever(Platform12RuntimeControl::CACHE_KEY, ['paused' => false, 'generation' => str_repeat('b', 32)]);
         $this->assertTrue($runtime->beginControlledAcceptance('deploy:12:1:'.$this->sha)['controlled_acceptance_enabled']);

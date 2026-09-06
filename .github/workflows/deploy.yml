@@ -1260,11 +1260,12 @@ jobs:
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST")
           operation="deploy:${GITHUB_RUN_ID}:${GITHUB_RUN_ATTEMPT}:${DEPLOY_SHA}"
           mkdir -p artifacts/seo-council-a08-staging
-          begun="$("${ssh_base[@]}" "set -euo pipefail; test \"\$(tr -d '\\r\\n' < $q_path/current/REVISION)\" = $q_sha; cd $q_path/current/backend; php artisan seo:council-runtime acceptance-begin --operation-ref='$operation' --no-interaction --no-ansi")"
+          begun="$("${ssh_base[@]}" "set -euo pipefail; test \"\$(tr -d '\\r\\n' < $q_path/current/REVISION)\" = $q_sha; cd $q_path/current/backend; php artisan seo:council-runtime acceptance-begin --operation-ref='$operation' --adopt-historical-pause --no-interaction --no-ansi")"
           jq -e --arg operation "$operation" '.state == "CONTROLLED_ACCEPTANCE_ONLY"
             and .controlled_acceptance_enabled == true and .operation_ref == $operation
             and .pause_source == "acceptance_protection" and (.generation | test("^[a-f0-9]{32}$"))
             and .business_write_enabled == false' <<<"$begun" >/dev/null
+          historical_pause_adopted="$(jq -r .historical_pause_adopted <<<"$begun")"
           generation="$(jq -r .generation <<<"$begun")"
           abort_acceptance() {
             "${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-runtime acceptance-abort --operation-ref='$operation' --expected-generation='$generation' --no-interaction --no-ansi" >/dev/null || true
@@ -1306,10 +1307,12 @@ jobs:
           jq -e '.state == "ACTIVE_READ_ONLY" and .controlled_acceptance_enabled == false
             and .business_write_enabled == false' <<<"$completed" >/dev/null
           trap - ERR
-          jq -n --arg sha "$DEPLOY_SHA" --arg run "$GITHUB_RUN_ID" --arg attempt "$GITHUB_RUN_ATTEMPT" --argjson missions "$results" \
+          jq -n --arg sha "$DEPLOY_SHA" --arg run "$GITHUB_RUN_ID" --arg attempt "$GITHUB_RUN_ATTEMPT" \
+            --arg historical_pause_adopted "$historical_pause_adopted" --argjson missions "$results" \
             '{schema_version:"seo.platform12_a08_staging_acceptance.v2",sha:$sha,deploy_run_id:($run|tonumber),deploy_run_attempt:($attempt|tonumber),
               status:"pass",source_connected:true,notification_delivery_verified:true,pause_resume_verified:true,
               receipt_to_ui_verified:true,
+              historical_pause_adopted:($historical_pause_adopted == "true"),
               trigger_mode:"controlled_acceptance",natural_slot_receipt:false,mission_count:3,
               missions:$missions,model_calls:0,tool_calls:0,external_calls:0,business_writes:0}' \
             > artifacts/seo-council-a08-staging/receipt.json
