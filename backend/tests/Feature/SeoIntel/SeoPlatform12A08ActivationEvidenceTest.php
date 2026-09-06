@@ -170,6 +170,10 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
             'php -d max_execution_time=0 artisan seo:runtime-probe-scheduled --trigger=manual --scope=private-negative-set --json',
             $step,
         );
+        $this->assertStringContainsString('run_detached_runtime_probe()', $step);
+        $this->assertStringContainsString('nohup sh -c', $step);
+        $this->assertStringContainsString('for ((attempt = 1; attempt <= 18; attempt++))', $step);
+        $this->assertStringContainsString('runtime_probe="$(run_detached_runtime_probe)"', $step);
         $this->assertStringContainsString('.production_calibration.deploy_revision == $sha', $step);
         $this->assertStringContainsString('runtime_receipt_schema_valid:', $step);
         $this->assertStringContainsString('release_sha_valid:', $step);
@@ -219,6 +223,10 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
             'php -d max_execution_time=0 artisan seo:runtime-probe-scheduled --trigger=manual --scope=private-negative-set --json',
             $productionStep,
         );
+        $this->assertStringContainsString('run_detached_runtime_probe()', $productionStep);
+        $this->assertStringContainsString('nohup sh -c', $productionStep);
+        $this->assertStringContainsString('for ((attempt = 1; attempt <= 18; attempt++))', $productionStep);
+        $this->assertStringContainsString('runtime_probe="$(run_detached_runtime_probe)"', $productionStep);
         $this->assertLessThan(
             strpos($productionStep, 'for mission in'),
             strpos($productionStep, 'sitemap_refresh='),

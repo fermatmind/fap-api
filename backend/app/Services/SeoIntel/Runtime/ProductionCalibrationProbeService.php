@@ -22,10 +22,6 @@ final class ProductionCalibrationProbeService
 
     private const CONTROLLED_NEGATIVE_SET_MAX_CONCURRENCY = 24;
 
-    private const CONTROLLED_NEGATIVE_SET_CONNECT_TIMEOUT_SECONDS = 2;
-
-    private const CONTROLLED_NEGATIVE_SET_TIMEOUT_SECONDS = 4;
-
     public function __construct(
         private readonly UrlTruthInventorySource $source,
         private readonly PageFamilyPolicyRegistry $registry,
@@ -68,11 +64,7 @@ final class ProductionCalibrationProbeService
     public function observePrivateNegativeSet(): array
     {
         try {
-            $negativeSet = $this->observeNegativeSet(
-                self::CONTROLLED_NEGATIVE_SET_MAX_CONCURRENCY,
-                self::CONTROLLED_NEGATIVE_SET_CONNECT_TIMEOUT_SECONDS,
-                self::CONTROLLED_NEGATIVE_SET_TIMEOUT_SECONDS,
-            );
+            $negativeSet = $this->observeNegativeSet(self::CONTROLLED_NEGATIVE_SET_MAX_CONCURRENCY);
         } catch (Throwable) {
             return $this->unavailable('private_negative_set_unavailable');
         }
@@ -185,11 +177,8 @@ final class ProductionCalibrationProbeService
     }
 
     /** @return array<string,mixed> */
-    private function observeNegativeSet(
-        int $maxConcurrency = self::MAX_CONCURRENCY,
-        int $connectTimeoutSeconds = 4,
-        int $timeoutSeconds = self::TIMEOUT_SECONDS,
-    ): array {
+    private function observeNegativeSet(int $maxConcurrency = self::MAX_CONCURRENCY): array
+    {
         $classifier = new PageFamilyClassifier($this->registry);
         $contractProbes = $this->registry->negativeSetProbes();
         $contractAccepted = collect($contractProbes)->every(
@@ -197,13 +186,13 @@ final class ProductionCalibrationProbeService
         );
         $base = rtrim((string) config('seo_intel.public_canonical_host', 'https://fermatmind.com'), '/');
         $paths = $this->registry->privatePathSegments();
-        $responses = Http::pool(function (Pool $pool) use ($base, $paths, $connectTimeoutSeconds, $timeoutSeconds): void {
+        $responses = Http::pool(function (Pool $pool) use ($base, $paths): void {
             foreach ($paths as $segment) {
                 $pool->as(hash('sha256', $segment))
                     ->accept('text/html')
                     ->withUserAgent('FermatMind-SEO-Platform-07-Negative-Set/1.0')
-                    ->connectTimeout($connectTimeoutSeconds)
-                    ->timeout($timeoutSeconds)
+                    ->connectTimeout(4)
+                    ->timeout(self::TIMEOUT_SECONDS)
                     ->withOptions(['allow_redirects' => false])
                     ->get($base.'/en/'.$segment.'/seo-platform-07-negative-set');
             }
