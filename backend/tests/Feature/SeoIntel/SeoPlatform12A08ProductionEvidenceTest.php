@@ -108,6 +108,15 @@ final class SeoPlatform12A08ProductionEvidenceTest extends TestCase
         Http::assertNothingSent();
     }
 
+    public function test_unexpected_private_probe_response_is_not_invented_as_a_private_leak(): void
+    {
+        $this->assertSame(['tested_count' => 10, 'rejected_count' => 9], $this->read('negativeSetCounts',
+            ['http_probe_count' => 10, 'accepted_http_probe_count' => 9, 'exposure_count' => 1, 'unobserved_count' => 0]));
+        $this->expectExceptionMessage('LIVE_NEGATIVE_SET_UNEXPECTED_RESPONSE');
+        $this->read('negativeSetCounts',
+            ['http_probe_count' => 10, 'accepted_http_probe_count' => 9, 'exposure_count' => 0, 'unobserved_count' => 0]);
+    }
+
     private function read(string $method, mixed ...$arguments): array
     {
         return (new \ReflectionMethod(Platform12ProductionEvidenceReader::class, $method))

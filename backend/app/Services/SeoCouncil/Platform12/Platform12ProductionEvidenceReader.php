@@ -128,17 +128,15 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
                 $window = $this->runtimeWindow($at);
                 $negative = data_get($window, 'receipts.0.production_calibration.private_negative_set');
                 if (($window['fresh'] ?? false) !== true || ! is_array($negative)
-                    || ($negative['checked'] ?? false) !== true
-                    || ! is_int($negative['http_probe_count'] ?? null) || $negative['http_probe_count'] < 1
-                    || ! is_int($negative['accepted_http_probe_count'] ?? null)
-                    || ($negative['unobserved_count'] ?? null) !== 0) {
+                    || ($negative['checked'] ?? false) !== true) {
                     throw new \RuntimeException('LIVE_NEGATIVE_SET_UNAVAILABLE');
                 }
+                $counts = $this->negativeSetCounts($negative);
                 $guards = $this->privateRoutes->evaluate();
                 $violations = array_sum(array_diff_key($guards, ['probe_total' => true]));
 
-                return ['tested_count' => $negative['http_probe_count'],
-                    'rejected_count' => $violations === 0 ? $negative['accepted_http_probe_count'] : 0,
+                return ['tested_count' => $counts['tested_count'],
+                    'rejected_count' => $violations === 0 ? $counts['rejected_count'] : 0,
                     'observed_at' => data_get($window, 'receipts.0.completed_at')];
             });
             if ($negative !== null) {
@@ -225,6 +223,24 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         }
 
         return $window;
+    }
+
+    private function negativeSetCounts(array $negative): array
+    {
+        $tested = $negative['http_probe_count'] ?? null;
+        $rejected = $negative['accepted_http_probe_count'] ?? null;
+        $exposed = $negative['exposure_count'] ?? null;
+        if (! is_int($tested) || $tested < 1 || ! is_int($rejected) || $rejected < 0 || $rejected > $tested
+            || ! is_int($exposed) || $exposed < 0 || $exposed > $tested
+            || ($negative['unobserved_count'] ?? null) !== 0) {
+            throw new \RuntimeException('LIVE_NEGATIVE_SET_INCOMPLETE');
+        }
+        if ($rejected < $tested && $exposed === 0) {
+            // A 5xx, redirect or other unexpected response is not proof of a leak.
+            throw new \RuntimeException('LIVE_NEGATIVE_SET_UNEXPECTED_RESPONSE');
+        }
+
+        return ['tested_count' => $tested, 'rejected_count' => min($rejected, $tested - $exposed)];
     }
 
     private function publicApi(CarbonImmutable $at): array
