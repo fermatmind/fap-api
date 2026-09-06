@@ -193,7 +193,7 @@ final class ProductionCalibrationProbeService
                     ->withUserAgent('FermatMind-SEO-Platform-07-Negative-Set/1.0')
                     ->connectTimeout(4)
                     ->timeout(self::TIMEOUT_SECONDS)
-                    ->withOptions(['allow_redirects' => false])
+                    ->withOptions(['allow_redirects' => false, 'stream' => true])
                     ->get($base.'/en/'.$segment.'/seo-platform-07-negative-set');
             }
         }, $maxConcurrency);
