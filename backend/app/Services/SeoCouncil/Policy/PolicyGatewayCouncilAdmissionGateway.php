@@ -8,6 +8,7 @@ use App\Services\SeoAgentPolicyGateway\PolicyDecisionFactory;
 use App\Services\SeoAgentPolicyGateway\PolicyGatewayCallerGuard;
 use App\Services\SeoCouncil\Governance\RuntimeCapabilitySnapshotBuilder;
 use App\Services\SeoCouncil\Platform12\Platform12ReadOnlyRuntimeGate;
+use App\Services\SeoCouncil\Platform12\Platform12RuntimeControl;
 
 final class PolicyGatewayCouncilAdmissionGateway implements CouncilAdmissionGateway
 {
@@ -16,6 +17,7 @@ final class PolicyGatewayCouncilAdmissionGateway implements CouncilAdmissionGate
         private readonly PolicyDecisionFactory $decisions,
         private readonly RuntimeCapabilitySnapshotBuilder $runtime,
         private readonly Platform12ReadOnlyRuntimeGate $readOnlyGate,
+        private readonly Platform12RuntimeControl $dailyRuntime,
     ) {}
 
     public function admission(string $callerType, array $request): array
@@ -31,6 +33,11 @@ final class PolicyGatewayCouncilAdmissionGateway implements CouncilAdmissionGate
         if (($decision['decision'] ?? null) !== 'HOLD'
             || ($decision['reason_codes'] ?? null) !== ['ROLE_CAPABILITY_BINDING_UNAVAILABLE']) {
             return $decision;
+        }
+        if ($this->dailyRuntime->admits($callerType, $request)
+            && ($request['requested_role_id'] ?? null) === 'seo.expert.technical_search_authority') {
+            return $this->decisions->make('admission', 'ALLOW', ['DAILY_READ_ONLY_ADMITTED'],
+                $request['requested_role_id'], ['family' => $request['family'], 'locale' => $request['locale'], 'action' => null]);
         }
         if (($snapshot['read_only_runtime_test_switch'] ?? null) !== true || ! app()->environment('testing')) {
             return $decision;

@@ -280,6 +280,35 @@ final class SeoPlatform12A03SchedulerFencingTest extends TestCase
         $service->hash($vector);
     }
 
+    public function test_terminal_evidence_callback_is_fenced_and_rolls_back_with_delivery(): void
+    {
+        $store = app(Platform12SchedulerStore::class);
+        $delivery = $this->delivery('f', 'daily:atomic');
+        $vector = $this->vector('a');
+        $store->reserveDelivery($delivery, $vector);
+        $lease = $store->acquire(self::LEASE_KEY, self::OWNER_A, 180);
+        $store->claimDelivery($delivery['delivery_id'], self::LEASE_KEY, self::OWNER_A, $lease['fencing_token'], $vector);
+        $calls = 0;
+        $callback = function ($connection) use (&$calls): void {
+            $calls++;
+            $connection->table('seo_council_schedule_deliveries')->update(['status' => 'CLOSED']);
+            throw new \RuntimeException('simulated_atomic_audit_failure');
+        };
+        $result = $store->completeDelivery($delivery['delivery_id'], self::LEASE_KEY, self::OWNER_A,
+            $lease['fencing_token'], 'receipt:atomic', str_repeat('b', 64), 'CLOSED', $callback, $vector);
+        $this->assertSame(1, $calls);
+        $this->assertFalse($result['accepted']);
+        $this->assertSame('CLAIMED', DB::connection('seo_intel')->table('seo_council_schedule_deliveries')->value('status'));
+        $this->assertNull(DB::connection('seo_intel')->table('seo_council_schedule_deliveries')->value('terminal_receipt_hash'));
+
+        $store->release(self::LEASE_KEY, self::OWNER_A, $lease['fencing_token']);
+        $store->acquire(self::LEASE_KEY, self::OWNER_B, 180);
+        $stale = $store->completeDelivery($delivery['delivery_id'], self::LEASE_KEY, self::OWNER_A,
+            $lease['fencing_token'], 'receipt:atomic', str_repeat('b', 64), 'CLOSED', $callback, $vector);
+        $this->assertSame('STALE_FENCE', $stale['status']);
+        $this->assertSame(1, $calls, 'An old owner must not write even a temporary Council row.');
+    }
+
     /** @return array<string, mixed> */
     private function delivery(string $seed, string $slotKey): array
     {

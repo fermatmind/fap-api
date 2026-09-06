@@ -59,7 +59,7 @@ final class SeoPlatform12B01DailyGscCoreRuntimeTest extends TestCase
 
         $this->assertIsArray($mission);
         $this->assertSame('daily', $mission['cadence']);
-        $this->assertSame('daily:ALL:02:00', $mission['natural_slot']);
+        $this->assertSame('daily:ALL:06:20', $mission['natural_slot']);
         $this->assertSame(0, array_sum($mission['budgets']));
         $this->assertFalse($catalog['runtime_activation_allowed']);
         $this->assertFalse((bool) config('seo_council.scheduler_enabled', false));

@@ -33,6 +33,9 @@
         "state": {
             "enum": [
                 "READY",
+                "WRONG_CANONICAL_HOLD",
+                "FALSE_NOINDEX_HOLD",
+                "RECONCILIATION_INCOMPLETE_HOLD",
                 "URL_TRUTH_UNAVAILABLE_HOLD",
                 "CLUSTER_DEDUPE_UNAVAILABLE_HOLD",
                 "D1_OBSERVATION_HOLD",
@@ -91,5 +94,5 @@
             "pattern": "^[a-f0-9]{64}$"
         }
     },
-    "schema_hash": "104a0a1b474af277a95b6ceec7b318d570cd5e12a360c2ac61fbc01c3a6797ff"
+    "schema_hash": "626e28bd53855832d25a80c743f6a2a05d3c367e9071cb161b884f6ded77ac34"
 }

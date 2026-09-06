@@ -2,7 +2,7 @@
     "fixture_set_id": "seo.platform12_daily_url_truth.v1",
     "cases": [
         {
-            "id": "ready-with-candidates",
+            "id": "canonical-fault-requires-hold",
             "evidence": {
                 "evaluated_at": "2026-09-04T02:10:00Z",
                 "authority": {"availability": "AVAILABLE", "revision_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "current_public_count": 100},
@@ -12,7 +12,7 @@
                 "runtime_observation": {"availability": "AVAILABLE", "observation_count": 100},
                 "sitemap_observation": {"availability": "AVAILABLE", "observation_count": 100}
             },
-            "expected_state": "READY"
+            "expected_state": "WRONG_CANONICAL_HOLD"
         },
         {
             "id": "url-truth-unavailable",

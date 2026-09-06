@@ -73,7 +73,8 @@ final readonly class Platform12DailyUrlTruthEvaluator
         $truthCount = $this->count($urlTruth, 'current_url_truth_count');
         $wrongCanonical = $this->count($urlTruth, 'wrong_canonical_count');
         $falseNoindex = $this->count($urlTruth, 'false_noindex_count');
-        if ($wrongCanonical + $falseNoindex > $denominator || $truthCount > $denominator) {
+        // One URL can have both faults; the two populations are not disjoint.
+        if ($wrongCanonical > $denominator || $falseNoindex > $denominator || $truthCount > $denominator) {
             throw new \InvalidArgumentException('URL_TRUTH_DENOMINATOR_INVALID');
         }
 
@@ -155,6 +156,9 @@ final readonly class Platform12DailyUrlTruthEvaluator
     {
         return match (true) {
             $authority['availability'] !== 'AVAILABLE' => 'URL_TRUTH_UNAVAILABLE_HOLD',
+            $authority['wrong_canonical']['candidate_count'] > 0 => 'WRONG_CANONICAL_HOLD',
+            $authority['false_noindex']['candidate_count'] > 0 => 'FALSE_NOINDEX_HOLD',
+            $authority['url_truth_count'] !== $authority['fixed_denominator'] => 'RECONCILIATION_INCOMPLETE_HOLD',
             $clustering['availability'] !== 'AVAILABLE' => 'CLUSTER_DEDUPE_UNAVAILABLE_HOLD',
             $d1['availability'] !== 'AVAILABLE' => 'D1_OBSERVATION_HOLD',
             $observations['runtime_state'] !== 'AVAILABLE' || $observations['sitemap_state'] !== 'AVAILABLE' => 'OBSERVATION_UNAVAILABLE_HOLD',

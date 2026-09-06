@@ -22,6 +22,9 @@ use App\Services\SeoCouncil\Persistence\CouncilRunRepository;
 use App\Services\SeoCouncil\Platform11\Platform11Coordinator;
 use App\Services\SeoCouncil\Platform11\Platform11MissionRequestData;
 use App\Services\SeoCouncil\Platform12\Platform12ContractRegistry;
+use App\Services\SeoCouncil\Platform12\Platform12DailyEvaluator;
+use App\Services\SeoCouncil\Platform12\Platform12FrozenMission;
+use App\Services\SeoCouncil\Platform12\Platform12RuntimeControl;
 use App\Services\SeoCouncil\Policy\CouncilAdmissionGateway;
 use App\Services\SeoCouncil\Policy\CouncilAdmissionRequestFactory;
 use App\Services\SeoCouncil\Routing\CouncilConflictResolver;
@@ -73,6 +76,8 @@ final class SeoCouncilOrchestrator
         private readonly CouncilRunRepository $repository,
         private readonly Platform11Coordinator $platform11,
         private readonly Platform12ContractRegistry $platform12Contracts,
+        private readonly Platform12DailyEvaluator $dailyEvaluator,
+        private readonly Platform12RuntimeControl $dailyControl,
     ) {}
 
     /** @return array<string, mixed> */
@@ -81,9 +86,18 @@ final class SeoCouncilOrchestrator
         return $this->platform11->run($request);
     }
 
-    /** @return array<string, mixed> */
-    public function run(MissionRequestData $request): array
+    public function stoppedScheduled(Platform12FrozenMission $mission, string $reason): array
     {
+        return $this->terminalReceipt($mission->request, 'DAILY_STOPPED_HOLD', $reason, [], [],
+            ['defer_persistence' => true], false);
+    }
+
+    /** @return array<string, mixed> */
+    public function run(MissionRequestData $request, ?Platform12FrozenMission $scheduled = null): array
+    {
+        if ($scheduled === null && str_starts_with($request->missionId(), 'seo.platform12.daily_check_')) {
+            return $this->terminalReceipt($request, 'POLICY_HOLD', 'frozen_daily_mission_required', [], [], ['defer_persistence' => true], false);
+        }
         $existing = $this->repository->findByIdempotencyKey($request->idempotencyKey());
         if (is_array($existing)) {
             return hash_equals((string) $existing['request_hash'], $request->requestHash)
@@ -101,6 +115,7 @@ final class SeoCouncilOrchestrator
         $measurementRuntime = $this->measurementMode->capabilitySnapshot();
         $competitiveRuntime = $this->competitiveMode->capabilitySnapshot();
         $baseContext = [
+            'defer_persistence' => $scheduled !== null,
             'registry' => $registry,
             'binding' => $binding,
             'runtime' => $runtime,
@@ -186,6 +201,32 @@ final class SeoCouncilOrchestrator
             && $runtime['career_runtime'] !== 'available') {
             $status = 'SOURCE_CAPABILITY_UNAVAILABLE';
             $stopReason = 'career_manifest_validator_risk_open';
+        } elseif ($scheduled !== null) {
+            $envelope = $scheduled->envelope;
+            $status = 'DAILY_MISSION_HOLD';
+            $stopReason = 'daily_runtime_gate_hold';
+            if ($request->requestHash !== $scheduled->request->requestHash
+                || ! $this->dailyControl->admits($request->callerType, $request->payload)) {
+                $stopReason = 'daily_scope_or_runtime_hold';
+            } elseif ($envelope['catalog_hash'] !== $catalog['catalog_hash']
+                || $envelope['version_vector'] !== $runtime['version_vector']) {
+                $stopReason = 'daily_version_drift';
+            } elseif (\Carbon\CarbonImmutable::parse($envelope['evidence']['expires_at'])->lte(now('UTC'))) {
+                $stopReason = 'daily_evidence_expired';
+            } else {
+                $output = $this->dailyEvaluator->evaluate($scheduled);
+                $gaps = $envelope['evidence']['source_gaps'];
+                $status = $output['state'] === 'READY' && $gaps === [] ? 'DAILY_MISSION_READY' : 'DAILY_MISSION_HOLD';
+                $stopReason = $gaps !== [] ? 'daily_source_connection_incomplete' : strtolower($output['state']);
+                $routePlan[] = ['kind' => 'daily_evaluation', 'mission_id' => $envelope['slot']['mission_id'],
+                    'trigger_mode' => $envelope['slot']['trigger_mode'], 'scheduled_for' => $envelope['slot']['scheduled_for'],
+                    'source_gaps' => $gaps, 'sources' => $envelope['evidence']['sources'], 'output' => $output];
+            }
+            // Final veto is rechecked after deterministic work. No role can undo it.
+            if (! $this->dailyControl->admits($request->callerType, $request->payload)) {
+                $status = 'DAILY_MISSION_HOLD';
+                $stopReason = 'daily_stopped_before_commit';
+            }
         } elseif ($technicalMission && $this->technicalGate->allows($technicalRuntime)) {
             $handoff = $routePlan[0] ?? null;
             if (! is_array($handoff) || ($handoff['kind'] ?? null) !== 'role_handoff') {
@@ -362,7 +403,7 @@ final class SeoCouncilOrchestrator
             'supersedes_receipt_hash' => is_array($resume) ? $resume['receipt_hash'] : null,
         ];
         $receipt['receipt_hash'] = $this->hasher->hash($receipt);
-        if ($status !== 'IDEMPOTENCY_CONFLICT' && $persist) {
+        if ($status !== 'IDEMPOTENCY_CONFLICT' && $persist && ! ($context['defer_persistence'] ?? false)) {
             $result = $this->repository->persist($receipt, $request->idempotencyKey());
             if ($result['decision'] === 'REPLAY') {
                 return $result['receipt'];
@@ -403,7 +444,9 @@ final class SeoCouncilOrchestrator
             'EVIDENCE_HOLD', 'MEASUREMENT_HOLD', 'COMPETITIVE_HOLD' => 'evidence_context_verification',
             'unresolved_conflict' => 'evidence_context_verification',
             'STALE_RESUME_HOLD' => 'validate_privacy_scan',
+            'DAILY_STOPPED_HOLD' => 'validate_privacy_scan',
             'PERSISTENCE_HOLD' => 'run_receipt',
+            'DAILY_MISSION_READY', 'DAILY_MISSION_HOLD' => 'run_receipt',
             'TECHNICAL_DIAGNOSIS_READY', 'MEASUREMENT_READY', 'COMPETITIVE_READY' => 'run_receipt',
             default => 'technical_mode_selection',
         };

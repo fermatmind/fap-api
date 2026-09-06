@@ -24,9 +24,29 @@
         <span class="ops-tag">{{ $snapshot['status'] }}</span>
     </div>
 
-    <p class="ops-control-hint" data-scheduler-activation="disabled">
-        {{ __($copy.'.scheduler_disabled') }}
+    <p class="ops-control-hint" data-scheduler-activation="{{ ($snapshot['daily_missions']['enabled'] ?? false) ? 'read-only' : 'disabled' }}">
+        {{ ($snapshot['daily_missions']['enabled'] ?? false) ? 'ACTIVE_READ_ONLY · business_write=false' : __($copy.'.scheduler_disabled') }}
     </p>
+
+    @if (isset($snapshot['daily_missions']))
+        <div class="ops-data-strip" aria-label="{{ __('seo-council.overview') }}">
+            <p>{{ $snapshot['daily_missions']['runtime_state'] }} · {{ __('seo-council.actionable') }}: {{ $snapshot['daily_missions']['actionable_count'] }}</p>
+            @foreach ($snapshot['daily_missions']['items'] as $mission)
+                <div class="ops-metric">
+                    <strong>{{ __($mission['label_key']) }}</strong>
+                    <span>{{ __('seo-council.states.'.$mission['state']) }}</span>
+                    <small>{{ __($mission['reason_key']) }}</small>
+                    @if ($mission['observed_at'])
+                        <time datetime="{{ $mission['observed_at'] }}">{{ $mission['observed_at'] }}</time>
+                    @endif
+                    <small>{{ __('seo-council.next_run') }}: {{ $mission['next_run'] }}</small>
+                    @if ($mission['receipt_hash'])
+                        <a href="#trace-drilldown-title">{{ __('seo-council.trace') }} · {{ substr($mission['receipt_hash'], 0, 12) }}</a>
+                    @endif
+                </div>
+            @endforeach
+        </div>
+    @endif
 
     @if ($snapshot['status'] === 'UNAVAILABLE')
         <x-filament-ops::ops-state-message

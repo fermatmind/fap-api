@@ -16,26 +16,39 @@ final readonly class Platform12DailySecurityDriftEvaluator
     /** @param array<string,mixed> $evidence @return array<string,mixed> */
     public function evaluate(array $evidence): array
     {
+        $missing = false;
+        $read = function (callable $reader, array $fallback) use (&$missing): array {
+            try {
+                return $reader();
+            } catch (Throwable) {
+                $missing = true;
+
+                return $fallback;
+            }
+        };
         try {
             $evaluatedAt = $this->evaluatedAt($evidence);
-            $privateRoutes = $this->privateRoutes($evidence['private_routes'] ?? null);
-            $query = $this->querySecurity($evidence['query_security'] ?? null);
-            $drift = $this->drift($evidence['drift'] ?? null);
-            $freshness = $this->freshness($evidence['evidence_freshness'] ?? null);
-            $injection = $this->injection($evidence['injection'] ?? null);
-            $tools = $this->tools($evidence['tools'] ?? null);
-            $posture = $this->posture($evidence['posture'] ?? null);
-            $decision = $this->decision($privateRoutes, $query, $drift, $freshness, $injection, $tools, $posture);
         } catch (Throwable) {
             $evaluatedAt = '1970-01-01T00:00:00Z';
-            $privateRoutes = ['tested_count' => null, 'rejected_count' => null, 'rejection_rate_ppm' => null, 'state' => 'UNAVAILABLE'];
-            $query = ['hmac_state' => 'UNAVAILABLE', 'key_version_state' => 'UNAVAILABLE', 'pii_state' => 'UNKNOWN'];
-            $drift = array_fill_keys(self::DRIFT_FIELDS, 'UNAVAILABLE');
-            $freshness = ['total_count' => null, 'fresh_count' => null, 'expired_count' => null, 'model_evidence_count' => 0, 'stale_evidence_model_allowed' => false];
-            $injection = ['prompt_state' => 'UNAVAILABLE', 'tool_metadata_state' => 'UNAVAILABLE'];
-            $tools = ['requested_count' => null, 'authorized_count' => null, 'unauthorized_count' => null];
-            $posture = ['retention_state' => 'UNAVAILABLE', 'egress_state' => 'UNAVAILABLE'];
-            $decision = ['state' => 'DENY', 'reason_codes' => ['INPUT_UNAVAILABLE']];
+            $missing = true;
+        }
+        // Validate independently: a missing source must not erase a proven safety fault.
+        $privateRoutes = $read(fn () => $this->privateRoutes($evidence['private_routes'] ?? null),
+            ['tested_count' => null, 'rejected_count' => null, 'rejection_rate_ppm' => null, 'state' => 'UNAVAILABLE']);
+        $query = $read(fn () => $this->querySecurity($evidence['query_security'] ?? null),
+            ['hmac_state' => 'UNAVAILABLE', 'key_version_state' => 'UNAVAILABLE', 'pii_state' => 'UNKNOWN']);
+        $drift = $read(fn () => $this->drift($evidence['drift'] ?? null), array_fill_keys(self::DRIFT_FIELDS, 'UNAVAILABLE'));
+        $freshness = $read(fn () => $this->freshness($evidence['evidence_freshness'] ?? null),
+            ['total_count' => null, 'fresh_count' => null, 'expired_count' => null, 'model_evidence_count' => 0, 'stale_evidence_model_allowed' => false]);
+        $injection = $read(fn () => $this->injection($evidence['injection'] ?? null),
+            ['prompt_state' => 'UNAVAILABLE', 'tool_metadata_state' => 'UNAVAILABLE']);
+        $tools = $read(fn () => $this->tools($evidence['tools'] ?? null),
+            ['requested_count' => null, 'authorized_count' => null, 'unauthorized_count' => null]);
+        $posture = $read(fn () => $this->posture($evidence['posture'] ?? null),
+            ['retention_state' => 'UNAVAILABLE', 'egress_state' => 'UNAVAILABLE']);
+        $decision = $this->decision($privateRoutes, $query, $drift, $freshness, $injection, $tools, $posture);
+        if ($missing && $decision['state'] !== 'DENY') {
+            $decision = ['state' => 'HOLD', 'reason_codes' => ['INPUT_UNAVAILABLE', ...$decision['reason_codes']]];
         }
 
         $receipt = [
@@ -176,10 +189,10 @@ final readonly class Platform12DailySecurityDriftEvaluator
     {
         $deny = [];
         $hold = [];
-        if ($private['state'] !== 'REJECTED_100_PERCENT') {
+        if (! in_array($private['state'], ['REJECTED_100_PERCENT', 'UNAVAILABLE'], true)) {
             $deny[] = 'PRIVATE_NEGATIVE_SET_LEAK';
         }
-        if ($query['hmac_state'] !== 'VALID' || $query['pii_state'] !== 'ABSENT') {
+        if ($query['hmac_state'] === 'INVALID' || $query['pii_state'] === 'PRESENT') {
             $deny[] = 'QUERY_SECURITY_DENY';
         }
         if (in_array('DETECTED', $injection, true)) {
@@ -197,7 +210,7 @@ final readonly class Platform12DailySecurityDriftEvaluator
         if ($freshness['expired_count'] > 0) {
             $hold[] = 'STALE_EVIDENCE_HOLD';
         }
-        if (in_array('UNAVAILABLE', $query, true) || in_array('UNAVAILABLE', $injection, true) || in_array('UNAVAILABLE', $posture, true)) {
+        if ($query['pii_state'] === 'UNKNOWN' || in_array('UNAVAILABLE', $query, true) || in_array('UNAVAILABLE', $injection, true) || in_array('UNAVAILABLE', $posture, true)) {
             $hold[] = 'SECURITY_EVIDENCE_UNAVAILABLE';
         }
 

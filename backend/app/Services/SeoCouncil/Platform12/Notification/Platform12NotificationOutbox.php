@@ -113,6 +113,16 @@ final readonly class Platform12NotificationOutbox
                 if (! is_object($row)) {
                     return ['status' => 'EMPTY', 'claim' => null];
                 }
+                if ($row->status === 'sending' && $row->last_error_code === 'DISPATCH_IN_FLIGHT') {
+                    // The webhook has no recipient-side idempotency contract. An
+                    // interrupted send cannot safely be retried as if unsent.
+                    $connection->table('seo_council_notification_outbox')->where('id', $row->id)->update([
+                        'status' => 'failed', 'last_error_code' => 'DELIVERY_ACK_UNKNOWN',
+                        'lease_token_hash' => null, 'lease_expires_at' => null, 'updated_at' => $timestamp,
+                    ]);
+
+                    return ['status' => 'DELIVERY_ACK_UNKNOWN', 'claim' => null];
+                }
                 if ((int) $row->attempt >= (int) $row->max_attempts) {
                     $connection->table('seo_council_notification_outbox')->where('id', (int) $row->id)->update([
                         'status' => 'failed',
@@ -160,7 +170,10 @@ final readonly class Platform12NotificationOutbox
     public function dispatch(array $claim, string $missionVerdict): array
     {
         $this->validateMissionVerdict($missionVerdict);
-        if (! (bool) config('seo_council.notification_dispatch_enabled', false)) {
+        $dailyActive = config('seo_council.daily_read_only_enabled', false)
+            && app(\App\Services\SeoCouncil\Platform12\Platform12RuntimeControl::class)->status()['computation_enabled'];
+        if ((! (bool) config('seo_council.notification_dispatch_enabled', false) && ! $dailyActive)
+            || (config('seo_council.daily_read_only_enabled', false) && ! $dailyActive)) {
             return $this->dispatchResult('DISABLED', 'NOTIFICATION_DISPATCH_DISABLED', $missionVerdict);
         }
         $notificationId = (string) ($claim['notification_id'] ?? '');
@@ -180,13 +193,15 @@ final readonly class Platform12NotificationOutbox
             ->where('status', 'sending')
             ->where('lease_token_hash', $claimHash)
             ->where('lease_expires_at', '>', $this->timestamp($now))
-            ->update(['lease_token_hash' => $dispatchHash, 'updated_at' => $this->timestamp($now)]);
+            ->update(['lease_token_hash' => $dispatchHash, 'last_error_code' => 'DISPATCH_IN_FLIGHT', 'updated_at' => $this->timestamp($now)]);
         if ($claimed !== 1) {
             return $this->dispatchResult('suppressed', 'DUPLICATE_OR_STALE_DELIVERY', $missionVerdict);
         }
 
+        $acknowledged = false;
         try {
             $this->transport->send($notificationId, $payload);
+            $acknowledged = true;
             $updated = $connection->table('seo_council_notification_outbox')
                 ->where('notification_id', $notificationId)
                 ->where('status', 'sending')
@@ -205,7 +220,25 @@ final readonly class Platform12NotificationOutbox
                 $updated === 1 ? 'DELIVERED' : 'DELIVERY_STATE_LOST',
                 $missionVerdict,
             );
+        } catch (\Illuminate\Http\Client\ConnectionException|\Illuminate\Http\Client\RequestException) {
+            $connection->table('seo_council_notification_outbox')
+                ->where('notification_id', $notificationId)->where('lease_token_hash', $dispatchHash)
+                ->update(['status' => 'failed', 'last_error_code' => 'DELIVERY_ACK_UNKNOWN',
+                    'lease_token_hash' => null, 'lease_expires_at' => null]);
+
+            return $this->dispatchResult('failed', 'DELIVERY_ACK_UNKNOWN', $missionVerdict);
         } catch (Throwable) {
+            if ($acknowledged) {
+                // The receiver already acknowledged. A local persistence failure
+                // must never turn this into a second external send.
+                $connection->table('seo_council_notification_outbox')
+                    ->where('notification_id', $notificationId)->where('lease_token_hash', $dispatchHash)
+                    ->update(['status' => 'failed', 'last_error_code' => 'DELIVERY_ACK_UNKNOWN',
+                        'lease_token_hash' => null, 'lease_expires_at' => null]);
+
+                return $this->dispatchResult('failed', 'DELIVERY_ACK_UNKNOWN', $missionVerdict);
+            }
+
             return $this->recordFailure($connection, $notificationId, $dispatchHash, $missionVerdict);
         }
     }

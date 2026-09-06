@@ -305,6 +305,15 @@ final readonly class Platform12SchedulerStore
                 if ($delivery->fencing_token === null || (int) $delivery->fencing_token >= $fencingToken) {
                     return $this->deliveryDecision('STALE_RECOVERY_HOLD', false, (string) $delivery->delivery_id);
                 }
+                if ((int) $delivery->attempt >= 2) {
+                    // Take ownership only to persist a stopped terminal receipt;
+                    // the computation must not be retried a third time.
+                    $connection->table('seo_council_schedule_deliveries')->where('id', $delivery->id)
+                        ->update(['lease_key' => $leaseKey, 'fencing_token' => $fencingToken,
+                            'status' => 'RECOVERED', 'updated_at' => $this->timestamp($now)]);
+
+                    return $this->deliveryDecision('RECOVERY_EXHAUSTED_HOLD', true, (string) $delivery->delivery_id);
+                }
 
                 $updated = $connection->table('seo_council_schedule_deliveries')
                     ->where('id', (int) $delivery->id)
@@ -336,6 +345,8 @@ final readonly class Platform12SchedulerStore
         string $terminalReceiptReference,
         string $terminalReceiptHash,
         string $terminalStatus = 'CLOSED',
+        ?callable $persistEvidence = null,
+        ?array $expectedVector = null,
     ): array {
         if (! in_array($terminalStatus, self::TERMINAL_STATES, true)
             || preg_match(self::HASH_PATTERN, $terminalReceiptHash) !== 1
@@ -350,7 +361,7 @@ final readonly class Platform12SchedulerStore
                 $leaseKey,
                 $ownerToken,
                 $fencingToken,
-                function (ConnectionInterface $connection, object $delivery, CarbonImmutable $now) use ($leaseKey, $fencingToken, $terminalReceiptReference, $terminalReceiptHash, $terminalStatus): array {
+                function (ConnectionInterface $connection, object $delivery, CarbonImmutable $now) use ($leaseKey, $ownerToken, $fencingToken, $terminalReceiptReference, $terminalReceiptHash, $terminalStatus, $persistEvidence, $expectedVector): array {
                     if (in_array((string) $delivery->status, self::TERMINAL_STATES, true)) {
                         $same = hash_equals((string) $delivery->terminal_receipt_hash, $terminalReceiptHash)
                             && hash_equals((string) $delivery->terminal_receipt_reference, $terminalReceiptReference);
@@ -366,6 +377,9 @@ final readonly class Platform12SchedulerStore
                         || (int) $delivery->fencing_token !== $fencingToken) {
                         return $this->terminalDecision('STALE_FENCE', false, (string) $delivery->delivery_id);
                     }
+                    if ($expectedVector !== null && ! $this->storedVectorMatches($delivery, $this->versionVector->hash($expectedVector))) {
+                        return $this->terminalDecision('VERSION_VECTOR_HOLD', false, (string) $delivery->delivery_id);
+                    }
 
                     $receiptOwner = $connection->table('seo_council_schedule_deliveries')
                         ->where('terminal_receipt_hash', $terminalReceiptHash)
@@ -373,6 +387,16 @@ final readonly class Platform12SchedulerStore
                         ->first();
                     if (is_object($receiptOwner) && (int) $receiptOwner->id !== (int) $delivery->id) {
                         return $this->terminalDecision('TERMINAL_CONFLICT', false, (string) $delivery->delivery_id);
+                    }
+
+                    // Council rows and outbox must be written only after the locked
+                    // delivery admits this owner, on this same database connection.
+                    if ($persistEvidence !== null) {
+                        $persistEvidence($connection, $delivery);
+                    }
+                    $now = $this->databaseNow($connection);
+                    if ($this->currentFence($connection, $leaseKey, $ownerToken, $fencingToken, $now)['status'] !== 'FENCE_CURRENT') {
+                        throw new \RuntimeException('FENCE_EXPIRED_DURING_TERMINAL_COMMIT');
                     }
 
                     $updated = $connection->table('seo_council_schedule_deliveries')

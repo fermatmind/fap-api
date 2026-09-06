@@ -58,6 +58,22 @@ final class SeoPlatform12B02DailyUrlTruthTest extends TestCase
         $this->assertSame('INPUT_HOLD', app(Platform12DailyUrlTruthEvaluator::class)->evaluate($invalid)['state']);
     }
 
+    public function test_fault_priority_and_incomplete_reconciliation_never_report_ready(): void
+    {
+        $evidence = $this->readyEvidence();
+        $evaluator = app(Platform12DailyUrlTruthEvaluator::class);
+        $this->assertSame('WRONG_CANONICAL_HOLD', $evaluator->evaluate($evidence)['state']);
+        $evidence['url_truth']['wrong_canonical_count'] = 0;
+        $this->assertSame('FALSE_NOINDEX_HOLD', $evaluator->evaluate($evidence)['state']);
+        $evidence['url_truth']['false_noindex_count'] = 0;
+        $this->assertSame('RECONCILIATION_INCOMPLETE_HOLD', $evaluator->evaluate($evidence)['state']);
+        $evidence['url_truth']['current_url_truth_count'] = 100;
+        $this->assertSame('READY', $evaluator->evaluate($evidence)['state']);
+        $evidence['url_truth']['wrong_canonical_count'] = 100;
+        $evidence['url_truth']['false_noindex_count'] = 100;
+        $this->assertSame('WRONG_CANONICAL_HOLD', $evaluator->evaluate($evidence)['state'], 'Fault populations may overlap.');
+    }
+
     public function test_catalog_declares_zero_budget_daily_evaluator_without_registration(): void
     {
         $contracts = app(Platform12ContractRegistry::class);
@@ -65,7 +81,7 @@ final class SeoPlatform12B02DailyUrlTruthTest extends TestCase
         $mission = collect($catalog['missions'])->firstWhere('mission_id', 'seo.platform12.daily_url_truth_reconciliation');
 
         $this->assertIsArray($mission);
-        $this->assertSame('daily:ALL:02:10', $mission['natural_slot']);
+        $this->assertSame('daily:ALL:06:25', $mission['natural_slot']);
         $this->assertSame(0, array_sum($mission['budgets']));
         $this->assertFalse($catalog['runtime_activation_allowed']);
         $this->assertSame($catalog, app(Platform12MissionCatalogValidator::class)->validate($catalog));

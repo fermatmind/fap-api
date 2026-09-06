@@ -13,7 +13,7 @@ use App\Services\SeoCouncil\Platform12\Tool\Platform12ToolManifest;
 
 final class Platform12ContractRegistry
 {
-    public const MISSION_CATALOG_VERSION = '1.9.0';
+    public const MISSION_CATALOG_VERSION = '1.10.0';
 
     public function __construct(
         private readonly SeoRegistryHasher $hasher,
@@ -257,7 +257,7 @@ final class Platform12ContractRegistry
                 'receipt_version' => ['const' => 'seo.platform12_daily_url_truth.v1'],
                 'mission_id' => ['const' => 'seo.platform12.daily_url_truth_reconciliation'],
                 'evaluated_at' => ['type' => 'string', 'format' => 'date-time'],
-                'state' => ['enum' => ['READY', 'URL_TRUTH_UNAVAILABLE_HOLD', 'CLUSTER_DEDUPE_UNAVAILABLE_HOLD', 'D1_OBSERVATION_HOLD', 'OBSERVATION_UNAVAILABLE_HOLD', 'INPUT_HOLD']],
+                'state' => ['enum' => ['READY', 'WRONG_CANONICAL_HOLD', 'FALSE_NOINDEX_HOLD', 'RECONCILIATION_INCOMPLETE_HOLD', 'URL_TRUTH_UNAVAILABLE_HOLD', 'CLUSTER_DEDUPE_UNAVAILABLE_HOLD', 'D1_OBSERVATION_HOLD', 'OBSERVATION_UNAVAILABLE_HOLD', 'INPUT_HOLD']],
                 'authority_reconciliation' => ['type' => 'object'],
                 'clustering_dedupe' => ['type' => 'object'],
                 'd1_observation' => ['type' => 'object'],
@@ -675,7 +675,7 @@ final class Platform12ContractRegistry
             'mission_id' => 'seo.platform12.daily_gsc_core_runtime',
             'cadence' => 'daily',
             'timezone' => 'Asia/Shanghai',
-            'natural_slot' => 'daily:ALL:02:00',
+            'natural_slot' => 'daily:ALL:06:20',
             'family' => 'other_public',
             'locale' => 'zh-CN',
             'review_domain' => 'runtime_health',
@@ -717,7 +717,7 @@ final class Platform12ContractRegistry
             'mission_id' => 'seo.platform12.daily_url_truth_reconciliation',
             'cadence' => 'daily',
             'timezone' => 'Asia/Shanghai',
-            'natural_slot' => 'daily:ALL:02:10',
+            'natural_slot' => 'daily:ALL:06:25',
             'family' => 'other_public',
             'locale' => 'zh-CN',
             'review_domain' => 'technical',
@@ -760,7 +760,7 @@ final class Platform12ContractRegistry
             'mission_id' => 'seo.platform12.daily_private_policy_evidence_drift',
             'cadence' => 'daily',
             'timezone' => 'Asia/Shanghai',
-            'natural_slot' => 'daily:ALL:02:20',
+            'natural_slot' => 'daily:ALL:06:30',
             'family' => 'other_public',
             'locale' => 'zh-CN',
             'review_domain' => 'stability',

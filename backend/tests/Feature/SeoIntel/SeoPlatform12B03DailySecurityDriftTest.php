@@ -25,6 +25,18 @@ final class SeoPlatform12B03DailySecurityDriftTest extends TestCase
         $this->assertContains('PRIVATE_NEGATIVE_SET_LEAK', $denied['reason_codes']);
     }
 
+    public function test_missing_source_cannot_erase_a_proven_private_fault_or_become_a_fake_incident(): void
+    {
+        $evidence = $this->readyEvidence();
+        unset($evidence['query_security']);
+        $evaluator = app(Platform12DailySecurityDriftEvaluator::class);
+        $this->assertSame('HOLD', $evaluator->evaluate($evidence)['state']);
+        $evidence['private_routes']['rejected_count'] = 9;
+        $result = $evaluator->evaluate($evidence);
+        $this->assertSame('DENY', $result['state']);
+        $this->assertContains('PRIVATE_NEGATIVE_SET_LEAK', $result['reason_codes']);
+    }
+
     public function test_stale_evidence_and_any_authority_hash_drift_hold(): void
     {
         $evidence = $this->readyEvidence();
@@ -77,7 +89,7 @@ final class SeoPlatform12B03DailySecurityDriftTest extends TestCase
         $mission = collect($catalog['missions'])->firstWhere('mission_id', 'seo.platform12.daily_private_policy_evidence_drift');
 
         $this->assertIsArray($mission);
-        $this->assertSame('daily:ALL:02:20', $mission['natural_slot']);
+        $this->assertSame('daily:ALL:06:30', $mission['natural_slot']);
         $this->assertSame(0, array_sum($mission['budgets']));
         $this->assertFalse($catalog['runtime_activation_allowed']);
         $this->assertSame($catalog, app(Platform12MissionCatalogValidator::class)->validate($catalog));

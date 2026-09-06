@@ -83,6 +83,10 @@ const SEO_CLASSIFIER_CONTROL_PLANE_PATHS = new Set([
 
 const isSeoCouncilOrchestrationBoundary = (path) =>
   /^backend\/(?:app\/Services\/SeoCouncil\/|app\/Console\/Commands\/SeoCouncil[^/]+\.php$|app\/Http\/Controllers\/API\/V0_5\/Ops\/SeoIntel\/SeoCouncilMissionController\.php$|app\/Http\/Middleware\/EnsureSeoCouncilMissionAuthorized\.php$|app\/Http\/Middleware\/OpsAccessControl\.php$|app\/Filament\/Ops\/Support\/SeoAgentCouncilUiContract\.php$|app\/Providers\/SeoCouncilServiceProvider\.php$|bootstrap\/(?:app|providers)\.php$|config\/seo_council\.php$|resources\/seo-agent\/council\/|resources\/views\/filament\/ops\/components\/ops-agent-council-workspace\.blade\.php$|lang\/(?:en|zh_CN)\/ops\.php$|docs\/(?:seo\/generated\/(?:seo-council-contract-manifest\.v[1-9]|seo-technical-diagnosis-contract-manifest\.v[12]|seo-measurement-contract-manifest\.v[123])\.json$|contracts\/openapi\.snapshot\.json$)|scripts\/seo\/(?:export_seo_council_contracts|submit_seo_council_mission)\.php$|database\/migrations\/seo_intel\/\d{4}_\d{2}_\d{2}_\d+_(?:create|expand)_seo_council_[a-z0-9_]+\.php$|tests\/Feature\/(?:SeoIntel\/SeoPlatform11[D-L]|Ops\/SeoUxImpl06AgentCouncilTest\.php$)|routes\/(?:api|web)\.php$)/.test(path)
+  || /^backend\/tests\/Feature\/SeoIntel\/SeoPlatform12[^/]+\.php$/.test(path)
+  || /^backend\/lang\/(?:en|zh_CN)\/seo-council\.php$/.test(path)
+  || /^backend\/resources\/views\/filament\/ops\/components\/ops-(?:system-health|trace-drilldown)-workspace\.blade\.php$/.test(path)
+  || path === "backend/app/Services/Ops/OpsAlertService.php"
   || path === "backend/app/Services/SeoAgentEvidence/Sources/SeoPlatformDependencyEvidenceAdapter.php"
   || path === ".agents/skills/fermatmind-global-seo-geo-growth-scan/SKILL.md"
   || SEO_COUNCIL_CONTROL_PLANE_PATHS.has(path);

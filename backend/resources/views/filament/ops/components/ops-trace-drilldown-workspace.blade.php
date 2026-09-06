@@ -19,7 +19,16 @@
                 <span>{{ $item['mission'] }}</span><span>{{ $item['mode'] }}</span><span>{{ $item['role'] }}</span>
                 <span title="{{ $item['evidence_hash'] }}">{{ substr($item['evidence_hash'], 0, 12) }}</span>
                 <span title="{{ $item['receipt_hash'] }}">{{ substr($item['receipt_hash'], 0, 12) }}</span>
-                <span>{{ $item['status'] }} · {{ $item['stop_reason'] }}<small>{{ $item['cost_microusd'] ?? 'unavailable' }} μUSD · {{ $item['latency_ms'] }} ms · {{ $item['catalog_version'] }}</small></span>
+                <span>{{ $item['status'] }} · {{ $item['stop_reason'] }}<small>{{ $item['cost_microusd'] ?? 'unavailable' }} μUSD · {{ $item['latency_ms'] }} ms · {{ $item['catalog_version'] }}</small>
+                    @if ($item['source_checks'] !== [])
+                        <details><summary>{{ __('seo-council.trace') }}</summary>
+                            @foreach ($item['source_checks'] as $source)
+                                <small>{{ __($source['label_key']) }} · {{ $source['state'] }} · {{ $source['observed_at'] ?? __('seo-council.time_unknown') }} · {{ substr($source['hash'], 0, 12) }}</small>
+                            @endforeach
+                            <small>{{ __('seo-council.inspect_trace') }}</small>
+                        </details>
+                    @endif
+                </span>
             </article>
         @empty
             <x-filament-ops::ops-state-message :state="$snapshot['state']" :title="__($copy.'.states.'.$snapshot['state'])" :description="''" />

@@ -9,6 +9,20 @@ import {
 
 const has = (paths, flag) => classifyPaths(paths).flags[flag];
 
+test("daily Council wiring and its tests retain the Council validation boundary", () => {
+  for (const path of [
+    "backend/tests/Feature/SeoIntel/SeoPlatform12A08DailyWiringTest.php",
+    "backend/lang/en/seo-council.php",
+    "backend/lang/zh_CN/seo-council.php",
+    "backend/app/Services/Ops/OpsAlertService.php",
+    "backend/resources/views/filament/ops/components/ops-system-health-workspace.blade.php",
+    "backend/resources/views/filament/ops/components/ops-trace-drilldown-workspace.blade.php",
+  ]) {
+    assert.equal(classifyPaths([path]).operations.seo_council_orchestration, true, path);
+    assert.equal(has([path], "seo_discoverability"), false, path);
+  }
+});
+
 test("classifies docs, rules, and tests without deployment", () => {
   const result = classifyPaths(["AGENTS.md", "docs/ops/trunk.md", "backend/tests/Feature/FooTest.php"]);
   assert.deepEqual(result.categories, ["docs_rules_tests_only"]);

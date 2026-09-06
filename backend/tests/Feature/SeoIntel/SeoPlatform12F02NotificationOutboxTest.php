@@ -167,6 +167,19 @@ final class SeoPlatform12F02NotificationOutboxTest extends TestCase
             ->where('incident_state', 'healthy')->count());
     }
 
+    public function test_interrupted_in_flight_send_is_visible_failure_not_a_duplicate_webhook(): void
+    {
+        $outbox = app(Platform12NotificationOutbox::class);
+        $outbox->enqueue($this->classification('ambiguous'), 'failed', 'HOLD');
+        $claim = $outbox->claim('worker:interrupted')['claim'];
+        DB::connection('seo_intel')->table('seo_council_notification_outbox')
+            ->where('notification_id', $claim['notification_id'])
+            ->update(['last_error_code' => 'DISPATCH_IN_FLIGHT', 'lease_expires_at' => '2000-01-01 00:00:00']);
+        $this->assertSame('DELIVERY_ACK_UNKNOWN', $outbox->claim('worker:recovery')['status']);
+        $this->assertSame('TERMINAL_FAILURE', $outbox->health()['state']);
+        $this->assertCount(0, $this->transport->deliveries);
+    }
+
     public function test_no_council_event_produces_no_notification_and_non_immediate_event_is_not_persisted(): void
     {
         $outbox = app(Platform12NotificationOutbox::class);

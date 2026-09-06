@@ -42,6 +42,8 @@ final class SeoCouncilServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
+        $this->app->bind(\App\Services\SeoCouncil\Platform12\Platform12EvidenceReader::class,
+            \App\Services\SeoCouncil\Platform12\Platform12ProductionEvidenceReader::class);
         $this->app->bind(CouncilAdmissionGateway::class, PolicyGatewayCouncilAdmissionGateway::class);
         $this->app->bind(CompetitiveRunner::class, CompetitiveCoordinator::class);
         $this->app->bind(CompetitiveRuntimeGate::class, DenyOnlyCompetitiveRuntimeGate::class);

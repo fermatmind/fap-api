@@ -3,6 +3,7 @@
     use App\Filament\Ops\Support\SeoOperationsUiState;
 
     $snapshot = SeoAgentCouncilUiContract::unavailableSnapshot();
+    $dailyRuntime = app(\App\Services\SeoCouncil\Platform12\Platform12RuntimeControl::class)->status();
     $copy = 'ops.custom_pages.seo_operations.agent_council';
 @endphp
 
@@ -35,7 +36,7 @@
         <span class="ops-tag">{{ __($copy.'.boundaries.evidence_bundle') }}</span>
         <span class="ops-tag">{{ __($copy.'.boundaries.no_authority') }}</span>
         <span class="ops-tag">registry={{ $snapshot['registry_metadata']['registry_status'] }} · v{{ $snapshot['registry_metadata']['registry_version'] }}</span>
-        <span class="ops-tag">state=DEPLOYED_DISABLED</span>
+        <span class="ops-tag">state={{ $dailyRuntime['state'] }}</span>
         <span class="ops-tag">mode={{ $snapshot['policy_mode'] }}</span>
         <span class="ops-tag">runtime_mode={{ $snapshot['runtime_mode'] }}</span>
         <span class="ops-tag">decision={{ $snapshot['policy_decision'] }}</span>

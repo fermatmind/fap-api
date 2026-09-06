@@ -72,24 +72,57 @@ final readonly class Platform12TraceDrilldownReadService
         $receipt = $this->decode((string) $row->receipt_json);
         $handoff = collect($receipt['route_plan'] ?? [])->firstWhere('kind', 'role_handoff');
         $modeOutput = collect($receipt['route_plan'] ?? [])->firstWhere('kind', 'mode_output');
+        $scheduled = collect($receipt['route_plan'] ?? [])->firstWhere('kind', 'scheduled_delivery');
         $created = CarbonImmutable::parse((string) $row->created_at, 'UTC');
         $updated = CarbonImmutable::parse((string) $row->updated_at, 'UTC');
 
         return [
-            'mission' => $this->safeCode(data_get($handoff, 'scope.mission_type')),
-            'mode' => $this->safeCode(data_get($modeOutput, 'mode_id')),
+            'mission' => $this->safeCode($scheduled['mission_id'] ?? data_get($handoff, 'scope.mission_type')),
+            'mode' => $scheduled !== null ? 'daily_deterministic' : $this->safeCode(data_get($modeOutput, 'mode_id')),
             'role' => $this->safeCode(data_get($handoff, 'target_role_id')),
             'status' => $this->safeCode($row->status),
             'stop_reason' => $this->safeCode($row->stop_reason),
             'cost_microusd' => is_int($receipt['cost_microusd'] ?? null) ? $receipt['cost_microusd'] : null,
-            'latency_ms' => max(0, $created->diffInMilliseconds($updated)),
+            'latency_ms' => is_int($scheduled['elapsed_ms'] ?? null)
+                ? max(0, $scheduled['elapsed_ms']) : max(0, $created->diffInMilliseconds($updated)),
             'catalog_version' => $this->safeVersion(data_get($receipt, 'catalog_ref.version')),
             'catalog_hash' => $this->safeHash(data_get($receipt, 'catalog_ref.hash')),
             'policy_hash' => $this->safeHash($row->policy_hash),
             'binding_hash' => $this->safeHash($row->binding_hash),
             'evidence_hash' => $this->safeHash($row->evidence_hash),
             'receipt_hash' => $this->safeHash($row->receipt_hash),
+            'source_checks' => $this->sourceChecks($scheduled, $receipt, (string) $row->receipt_hash),
         ];
+    }
+
+    private function sourceChecks(?array $scheduled, array $receipt, string $hash): array
+    {
+        if ($scheduled === null || ! hash_equals(app(\App\Services\SeoAgentGovernance\SeoRegistryHasher::class)->hashWithout($receipt, 'receipt_hash'), $hash)) {
+            return [];
+        }
+        $allowed = ['gsc_scheduled_receipt', 'scheduled_runtime_probe', 'public_api_health',
+            'url_truth_reconciliation', 'issue_cluster', 'd1_observation', 'sitemap_observation',
+            'private_route_negative_set', 'evidence_expiry', 'registry_version_vector', 'stored_evidence_safety', 'council_tool_audit'];
+        $items = [];
+        foreach (array_slice($scheduled['source_refs'] ?? [], 0, 8) as $source) {
+            if (! in_array($source['id'] ?? null, $allowed, true)) {
+                continue;
+            }
+            $observed = $source['observed_at'] ?? null;
+            $items[] = ['label_key' => 'seo-council.sources.'.$source['id'], 'state' => 'AVAILABLE',
+                'observed_at' => is_string($observed) && preg_match('/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})$/D', $observed) ? $observed : null,
+                'hash' => $this->safeHash($source['hash'] ?? null)];
+        }
+        foreach (array_slice($scheduled['source_gaps'] ?? [], 0, 8 - count($items)) as $gap) {
+            $stale = is_string($gap) && str_ends_with($gap, '_stale');
+            $name = $stale ? substr($gap, 0, -6) : $gap;
+            if (in_array($name, $allowed, true)) {
+                $items[] = ['label_key' => 'seo-council.sources.'.$name, 'state' => $stale ? 'STALE' : 'UNAVAILABLE',
+                    'observed_at' => null, 'hash' => 'unavailable'];
+            }
+        }
+
+        return $items;
     }
 
     /** @param list<array<string,mixed>> $items @return array<string,mixed> */

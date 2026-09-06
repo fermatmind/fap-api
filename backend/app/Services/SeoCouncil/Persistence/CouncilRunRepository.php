@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\SeoCouncil\Persistence;
 
+use App\Services\SeoCouncil\Platform12\Platform12FrozenMission;
+use App\Services\SeoCouncil\Platform12\Platform12RuntimeControl;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\Facades\DB;
 use Throwable;
@@ -86,9 +88,15 @@ final class CouncilRunRepository
      * @param  array<string, mixed>  $receipt
      * @return array{decision:string, receipt:array<string, mixed>}
      */
-    public function persist(array $receipt, string $idempotencyKey): array
+    public function persist(array $receipt, string $idempotencyKey, ?Platform12FrozenMission $scheduled = null): array
     {
-        if (! $this->gatesOpen()) {
+        $scheduledAudit = $scheduled !== null
+            && $scheduled->request->idempotencyKey() === $idempotencyKey
+            && $scheduled->request->requestHash === ($receipt['request_hash'] ?? null)
+            && ($receipt['execution_allowed'] ?? null) === false
+            && data_get($receipt, 'caller_provenance.caller_type') === 'scheduler'
+            && app(Platform12RuntimeControl::class)->prerequisite() === 'READY';
+        if (! $this->gatesOpen() && ! $scheduledAudit) {
             return ['decision' => 'DISABLED', 'receipt' => $receipt];
         }
         if (! $this->storageReady()) {

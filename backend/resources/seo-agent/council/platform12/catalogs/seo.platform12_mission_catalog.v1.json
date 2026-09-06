@@ -1,7 +1,7 @@
 {
     "schema_version": "seo.platform12_mission_catalog.v1",
     "catalog_id": "fermatmind.seo.platform12_mission_catalog",
-    "catalog_version": "1.9.0",
+    "catalog_version": "1.10.0",
     "catalog_state": "FOUNDATION_ONLY",
     "dependency_refs": {
         "role_registry": {
@@ -31,8 +31,8 @@
         },
         "schema_vector": {
             "id": "seo.platform12_mission_catalog_schema_vector",
-            "version": "1.9.0",
-            "hash": "a0fc42f7a11e4b54eeaa1c5306922cc3bedd01b533493924d37d33833307a0b8"
+            "version": "1.10.0",
+            "hash": "4c0bfb7fe3eca5e38a9e47135e0f10063152c83ed7555c14c8cd96065acad01d"
         }
     },
     "missions": [
@@ -40,7 +40,7 @@
             "mission_id": "seo.platform12.daily_gsc_core_runtime",
             "cadence": "daily",
             "timezone": "Asia/Shanghai",
-            "natural_slot": "daily:ALL:02:00",
+            "natural_slot": "daily:ALL:06:20",
             "family": "other_public",
             "locale": "zh-CN",
             "review_domain": "runtime_health",
@@ -79,7 +79,7 @@
             "mission_id": "seo.platform12.daily_url_truth_reconciliation",
             "cadence": "daily",
             "timezone": "Asia/Shanghai",
-            "natural_slot": "daily:ALL:02:10",
+            "natural_slot": "daily:ALL:06:25",
             "family": "other_public",
             "locale": "zh-CN",
             "review_domain": "technical",
@@ -113,14 +113,14 @@
             "output_schema": {
                 "id": "seo.platform12_daily_url_truth_output.v1",
                 "version": "1.0.0",
-                "hash": "104a0a1b474af277a95b6ceec7b318d570cd5e12a360c2ac61fbc01c3a6797ff"
+                "hash": "626e28bd53855832d25a80c743f6a2a05d3c367e9071cb161b884f6ded77ac34"
             }
         },
         {
             "mission_id": "seo.platform12.daily_private_policy_evidence_drift",
             "cadence": "daily",
             "timezone": "Asia/Shanghai",
-            "natural_slot": "daily:ALL:02:20",
+            "natural_slot": "daily:ALL:06:30",
             "family": "other_public",
             "locale": "zh-CN",
             "review_domain": "stability",
@@ -440,5 +440,5 @@
         }
     ],
     "runtime_activation_allowed": false,
-    "catalog_hash": "939f484fa8c29fe56a95b1a539978855e3757bc07a045dbbf1fa9f380ef53639"
+    "catalog_hash": "60d1a3d134e3edddfdd0caad3e7644af0d20eb103fa71bc96555de1e86e49fbb"
 }
