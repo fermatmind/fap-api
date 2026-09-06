@@ -979,12 +979,11 @@ try {
 } catch (Throwable) {
     // The fixed error below is the only externally visible diagnostic.
 }
-fwrite(STDERR, "SEO_COUNCIL_RUNTIME_WRITER_UNAVAILABLE\n");
-exit(1);
+echo "unavailable";
+exit(0);
 PHP;
-    try {
-        $selected = trim(run('{{bin/php}} -d display_errors=0 -r '.deployShellArg($selector), ['env' => $candidates]));
-    } catch (Throwable) {
+    $selected = trim(run('{{bin/php}} -d display_errors=0 -r '.deployShellArg($selector), ['env' => $candidates]));
+    if (! in_array($selected, ['runtime', 'migration'], true)) {
         $scrubber = <<<'PHP'
 $path = $argv[1] ?? '';
 $keys = ['SEO_COUNCIL_DB_CONNECTION', 'SEO_COUNCIL_DB_USERNAME', 'SEO_COUNCIL_DB_PASSWORD'];
@@ -1040,9 +1039,6 @@ fclose($handle);
 echo "SEO Council unavailable writer aliases removed.\n";
 PHP;
         run('{{bin/php}} -d display_errors=0 -r '.deployShellArg($scrubber).' '.deployPlaceholderPathArg('{{deploy_path}}', 'shared/backend/.env'));
-        throw new \RuntimeException('SEO_COUNCIL_RUNTIME_WRITER_UNAVAILABLE');
-    }
-    if (! in_array($selected, ['runtime', 'migration'], true)) {
         throw new \RuntimeException('SEO_COUNCIL_RUNTIME_WRITER_UNAVAILABLE');
     }
     $runtime += [
