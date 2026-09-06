@@ -755,6 +755,9 @@ final class ScaleRegistrySeeder extends Seeder
             $attributes['content_i18n_json']['zh'][$key] = $value;
         }
 
+        $entryPackage = json_decode(file_get_contents(database_path('data/assessment_entry_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
+        $attributes['content_i18n_json']['zh']['landing_entry'] = $entryPackage['scales'][$attributes['code']]['landing_entry'];
+
         return DB::transaction(function () use ($writer, $attributes) {
             $published = [];
             foreach (['scales_registry', 'scales_registry_v2'] as $table) {
@@ -763,7 +766,7 @@ final class ScaleRegistrySeeder extends Seeder
                 }
                 $row = DB::table($table)->where('org_id', 0)->where('code', $attributes['code'])->lockForUpdate()->first();
                 $content = json_decode($row->content_i18n_json ?? '{}', true, 512, JSON_THROW_ON_ERROR);
-                foreach (['faq', 'why_choose', 'version_comparison'] as $key) {
+                foreach (['faq', 'why_choose', 'version_comparison', 'landing_entry'] as $key) {
                     if (array_key_exists($key, $content['zh'] ?? [])) {
                         $published[$table][$key] = $content['zh'][$key];
                     }
@@ -790,6 +793,9 @@ final class ScaleRegistrySeeder extends Seeder
         $methods = json_decode(file_get_contents(database_path('data/assessment_methods_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
         $base = json_decode(file_get_contents(database_path('data/mbti_landing_zh_20260905.json')), true, 512, JSON_THROW_ON_ERROR);
         $attributes['content_i18n_json']['zh'] = array_replace($attributes['content_i18n_json']['zh'] ?? [], $base['content'], $methods['scales']['MBTI']);
+
+        $entryPackage = json_decode(file_get_contents(database_path('data/assessment_entry_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
+        $attributes['content_i18n_json']['zh']['landing_entry'] = $entryPackage['scales'][$attributes['code']]['landing_entry'];
 
         return DB::transaction(function () use ($writer, $attributes) {
             $published = [];
