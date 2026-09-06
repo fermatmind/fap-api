@@ -242,7 +242,7 @@ final class ScaleRegistrySeeder extends Seeder
 
         $big5 = DB::transaction(function () use ($big5Payload, $writer) {
             $preservedBigFiveContent = $this->bigFiveContentToPreserve();
-            $scale = $writer->upsertScale($big5Payload);
+            $scale = $this->upsertAssessmentPreservingFaq($writer, $big5Payload);
             $this->restoreBigFiveContent($preservedBigFiveContent);
 
             return $scale;
@@ -251,7 +251,7 @@ final class ScaleRegistrySeeder extends Seeder
         $writer->syncSlugsForScale($big5);
         $this->command?->info('ScaleRegistrySeeder: BIG5_OCEAN scale upserted.');
 
-        $enneagram = $writer->upsertScale([
+        $enneagram = $this->upsertAssessmentPreservingFaq($writer, [
             'code' => 'ENNEAGRAM',
             'org_id' => 0,
             'primary_slug' => 'enneagram-personality-test-nine-types',
@@ -330,7 +330,7 @@ final class ScaleRegistrySeeder extends Seeder
         $writer->syncSlugsForScale($enneagram);
         $this->command?->info('ScaleRegistrySeeder: ENNEAGRAM scale upserted.');
 
-        $riasec = $writer->upsertScale([
+        $riasec = $this->upsertAssessmentPreservingFaq($writer, [
             'code' => 'RIASEC',
             'org_id' => 0,
             'primary_slug' => 'holland-career-interest-test-riasec',
@@ -575,7 +575,7 @@ final class ScaleRegistrySeeder extends Seeder
         if ($demoPackId === '') {
             $demoPackId = $defaultPackId;
         }
-        $iqRaven = $writer->upsertScale([
+        $iqRaven = $this->upsertAssessmentPreservingFaq($writer, [
             'code' => 'IQ_RAVEN',
             'org_id' => 0,
             'primary_slug' => 'iq-test-intelligence-quotient-assessment',
@@ -652,7 +652,7 @@ final class ScaleRegistrySeeder extends Seeder
         $writer->syncSlugsForScale($iqRaven);
         $this->command?->info('ScaleRegistrySeeder: IQ public slug scale upserted with IQ_RAVEN legacy identity and IQ_INTELLIGENCE_QUOTIENT canonical pack metadata.');
 
-        $eq60 = $writer->upsertScale([
+        $eq60 = $this->upsertAssessmentPreservingFaq($writer, [
             'code' => 'EQ_60',
             'org_id' => 0,
             'primary_slug' => 'eq-test-emotional-intelligence-assessment',
@@ -738,6 +738,38 @@ final class ScaleRegistrySeeder extends Seeder
 
         $writer->syncSlugsForScale($eq60);
         $this->command?->info('ScaleRegistrySeeder: EQ_60 scale upserted.');
+    }
+
+    private function upsertAssessmentPreservingFaq(ScaleRegistryWriter $writer, array $attributes): \App\Models\ScaleRegistry
+    {
+        $package = json_decode(file_get_contents(database_path('data/assessment_faq_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
+        $entry = $package['scales'][$attributes['code']];
+        $attributes['content_i18n_json']['zh']['faq'] = $entry['faq'];
+
+        return DB::transaction(function () use ($writer, $attributes) {
+            $published = [];
+            foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+                if (! Schema::hasTable($table)) {
+                    continue;
+                }
+                $row = DB::table($table)->where('org_id', 0)->where('code', $attributes['code'])->lockForUpdate()->first();
+                $content = json_decode($row->content_i18n_json ?? '{}', true, 512, JSON_THROW_ON_ERROR);
+                if (isset($content['zh']['faq'])) {
+                    $published[$table] = $content['zh']['faq'];
+                }
+            }
+            $scale = $writer->upsertScale($attributes);
+            foreach ($published as $table => $faq) {
+                $row = DB::table($table)->where('org_id', 0)->where('code', $attributes['code'])->first();
+                $content = json_decode($row->content_i18n_json, true, 512, JSON_THROW_ON_ERROR);
+                $content['zh']['faq'] = $faq;
+                DB::table($table)->where('org_id', 0)->where('code', $attributes['code'])->update([
+                    'content_i18n_json' => json_encode($content, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
+                ]);
+            }
+
+            return $scale;
+        });
     }
 
     private function upsertMbtiPreservingPublishedContent(ScaleRegistryWriter $writer, array $attributes): \App\Models\ScaleRegistry
