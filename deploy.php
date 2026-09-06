@@ -185,6 +185,15 @@ function deploySeoIntelRuntimeEnvironment(): array
         }
     }
 
+    $expectedDatabase = match ($hostAlias) {
+        'staging' => 'seo_intel_staging',
+        'production' => 'seo_intel',
+        default => throw new \RuntimeException('SEO Intel deployment environment is unsupported.'),
+    };
+    if (! hash_equals($expectedDatabase, $values['SEO_INTEL_DB_DATABASE'])) {
+        throw new \RuntimeException('SEO_INTEL_DB_ENVIRONMENT_BOUNDARY_INVALID');
+    }
+
     if (preg_match('/\A[1-9][0-9]{0,4}\z/', $values['SEO_INTEL_DB_PORT']) !== 1
         || (int) $values['SEO_INTEL_DB_PORT'] > 65535) {
         throw new \RuntimeException('SEO_INTEL_DB_PORT is invalid.');
@@ -228,6 +237,15 @@ function deploySeoIntelMigrationEnvironment(): array
 
     if (hash_equals($runtime['SEO_INTEL_DB_USERNAME'], $username)) {
         throw new \RuntimeException('SEO_INTEL_MIGRATION_RUNTIME_ACCOUNT_COLLISION');
+    }
+
+    $expectedUsername = match (currentHost()->getAlias()) {
+        'staging' => 'seo_intel_staging_migrator',
+        'production' => 'seo_intel_migrator',
+        default => throw new \RuntimeException('SEO_INTEL_MIGRATION_ENVIRONMENT_UNSUPPORTED'),
+    };
+    if (! hash_equals($expectedUsername, $username)) {
+        throw new \RuntimeException('SEO_INTEL_MIGRATION_ENVIRONMENT_BOUNDARY_INVALID');
     }
 
     return [
@@ -946,13 +964,15 @@ task('artisan:config:cache', function () {
 
 task('runtime:configure-seo-intel', function (): void {
     $runtime = deploySeoIntelRuntimeEnvironment();
+    $expectedWriter = match (currentHost()->getAlias()) {
+        'staging' => 'seo_intel_staging_writer',
+        'production' => 'seo_intel_writer',
+        default => throw new \RuntimeException('SEO_COUNCIL_RUNTIME_ENVIRONMENT_UNSUPPORTED'),
+    };
     $candidates = [
         'SEO_COUNCIL_APPROVED_DB_USERNAME' => (string) (getenv('SEO_COUNCIL_DB_USERNAME') ?: ''),
         'SEO_COUNCIL_APPROVED_DB_PASSWORD' => (string) (getenv('SEO_COUNCIL_DB_PASSWORD') ?: ''),
-        'SEO_COUNCIL_RUNTIME_DB_USERNAME' => $runtime['SEO_INTEL_DB_USERNAME'],
-        'SEO_COUNCIL_RUNTIME_DB_PASSWORD' => $runtime['SEO_INTEL_DB_PASSWORD'],
-        'SEO_COUNCIL_MIGRATION_DB_USERNAME' => (string) (getenv('SEO_INTEL_MIGRATION_DB_USERNAME') ?: ''),
-        'SEO_COUNCIL_MIGRATION_DB_PASSWORD' => (string) (getenv('SEO_INTEL_MIGRATION_DB_PASSWORD') ?: ''),
+        'SEO_COUNCIL_EXPECTED_DB_USERNAME' => $expectedWriter,
         'SEO_COUNCIL_DB_HOST' => $runtime['SEO_INTEL_DB_HOST'],
         'SEO_COUNCIL_DB_PORT' => $runtime['SEO_INTEL_DB_PORT'],
         'SEO_COUNCIL_DB_DATABASE' => $runtime['SEO_INTEL_DB_DATABASE'],
@@ -961,23 +981,18 @@ task('runtime:configure-seo-intel', function (): void {
 try {
     $dsn = sprintf('mysql:host=%s;port=%s;dbname=%s;charset=utf8mb4',
         getenv('SEO_COUNCIL_DB_HOST'), getenv('SEO_COUNCIL_DB_PORT'), getenv('SEO_COUNCIL_DB_DATABASE'));
-    foreach (['council' => 'SEO_COUNCIL_APPROVED', 'runtime' => 'SEO_COUNCIL_RUNTIME',
-        'migration' => 'SEO_COUNCIL_MIGRATION'] as $name => $prefix) {
-        $username = getenv($prefix.'_DB_USERNAME');
-        $password = getenv($prefix.'_DB_PASSWORD');
-        if (! is_string($username) || $username === '' || ! is_string($password) || $password === '') {
-            continue;
-        }
-        try {
-            $pdo = new PDO($dsn, $username, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-            $principal = (string) $pdo->query('SELECT CURRENT_USER()')->fetchColumn();
-            if (preg_match('/\Aseo_intel_writer@[A-Za-z0-9.%_:-]{1,255}\z/D', $principal) === 1) {
-                echo $name;
-                exit(0);
-            }
-        } catch (Throwable) {
-            continue;
-        }
+    $username = getenv('SEO_COUNCIL_APPROVED_DB_USERNAME');
+    $password = getenv('SEO_COUNCIL_APPROVED_DB_PASSWORD');
+    $expected = getenv('SEO_COUNCIL_EXPECTED_DB_USERNAME');
+    if (! is_string($username) || ! is_string($password) || ! is_string($expected)
+        || $username === '' || $password === '' || $expected === '' || ! hash_equals($expected, $username)) {
+        throw new RuntimeException('SEO_COUNCIL_APPROVED_WRITER_INVALID');
+    }
+    $pdo = new PDO($dsn, $username, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+    $principal = (string) $pdo->query('SELECT CURRENT_USER()')->fetchColumn();
+    if (preg_match('/\A'.preg_quote($expected, '/').'@[A-Za-z0-9.%_:-]{1,255}\z/D', $principal) === 1) {
+        echo 'council';
+        exit(0);
     }
 } catch (Throwable) {
     // The fixed error below is the only externally visible diagnostic.
@@ -986,7 +1001,7 @@ echo "unavailable";
 exit(0);
 PHP;
     $selected = trim(run('{{bin/php}} -d display_errors=0 -r '.deployShellArg($selector), ['env' => $candidates]));
-    if (! in_array($selected, ['council', 'runtime', 'migration'], true)) {
+    if ($selected !== 'council') {
         $scrubber = <<<'PHP'
 $path = $argv[1] ?? '';
 $keys = ['SEO_COUNCIL_DB_CONNECTION', 'SEO_COUNCIL_DB_USERNAME', 'SEO_COUNCIL_DB_PASSWORD'];
@@ -1048,16 +1063,8 @@ PHP;
     }
     $runtime += [
         'SEO_COUNCIL_DB_CONNECTION' => 'seo_council',
-        'SEO_COUNCIL_DB_USERNAME' => $candidates[match ($selected) {
-            'council' => 'SEO_COUNCIL_APPROVED_DB_USERNAME',
-            'runtime' => 'SEO_COUNCIL_RUNTIME_DB_USERNAME',
-            default => 'SEO_COUNCIL_MIGRATION_DB_USERNAME',
-        }],
-        'SEO_COUNCIL_DB_PASSWORD' => $candidates[match ($selected) {
-            'council' => 'SEO_COUNCIL_APPROVED_DB_PASSWORD',
-            'runtime' => 'SEO_COUNCIL_RUNTIME_DB_PASSWORD',
-            default => 'SEO_COUNCIL_MIGRATION_DB_PASSWORD',
-        }],
+        'SEO_COUNCIL_DB_USERNAME' => $candidates['SEO_COUNCIL_APPROVED_DB_USERNAME'],
+        'SEO_COUNCIL_DB_PASSWORD' => $candidates['SEO_COUNCIL_APPROVED_DB_PASSWORD'],
     ];
     $localPatch = tempnam(sys_get_temp_dir(), 'seo-intel-runtime-');
     if (! is_string($localPatch)) {
@@ -1217,6 +1224,7 @@ task('guard:seo-intel-runtime-config', function (): void {
         run(<<<'BASH'
 set -euo pipefail
 {{bin/php}} -d display_errors=0 -r '
+$phase = "configuration";
 try {
     require "vendor/autoload.php";
     $app = require "bootstrap/app.php";
@@ -1250,10 +1258,12 @@ try {
     if (! $valid) {
         throw new RuntimeException("invalid");
     }
+    $phase = "reader";
     $probe = Illuminate\Support\Facades\DB::connection("seo_intel")->selectOne("SELECT 1 AS probe");
     if ((int) ($probe->probe ?? 0) !== 1) {
         throw new RuntimeException("probe");
     }
+    $phase = "writer";
     $councilProbe = Illuminate\Support\Facades\DB::connection("seo_council")->selectOne("SELECT 1 AS probe");
     if ((int) ($councilProbe->probe ?? 0) !== 1) {
         throw new RuntimeException("council_probe");
@@ -1272,7 +1282,12 @@ try {
         in_array($driverCode, [2002, 2003, 2005, 2006], true) => "transport",
         default => "configuration",
     };
-    fwrite(STDERR, "SEO Intel isolated read-only runtime guard failed (".$category.").\n");
+    $component = match ($phase) {
+        "reader" => "SEO_INTEL_RUNTIME_READER",
+        "writer" => "SEO_COUNCIL_RUNTIME_WRITER",
+        default => "SEO_INTEL_RUNTIME_CONFIGURATION",
+    };
+    fwrite(STDERR, $component."_GUARD_FAILED_".strtoupper($category)."\n");
     exit(1);
 }
 '
@@ -1462,7 +1477,13 @@ task('seo:council-runtime-db-access', function () {
         return;
     }
 
-    within('{{release_path}}/backend', function (): void {
+    $expectedWriter = match (currentHost()->getAlias()) {
+        'staging' => 'seo_intel_staging_writer',
+        'production' => 'seo_intel_writer',
+        default => throw new \RuntimeException('SEO_COUNCIL_RUNTIME_ENVIRONMENT_UNSUPPORTED'),
+    };
+
+    within('{{release_path}}/backend', function () use ($expectedWriter): void {
         $script = <<<'PHP'
 $council = null;
 try {
@@ -1477,16 +1498,20 @@ try {
     }
     $connectionConfig = config('database.connections.'.$connectionName);
     $database = is_array($connectionConfig) ? (string) ($connectionConfig['database'] ?? '') : '';
+    $username = is_array($connectionConfig) ? (string) ($connectionConfig['username'] ?? '') : '';
     $seoIntelDatabase = (string) config('database.connections.seo_intel.database', '');
+    $expectedUsername = getenv('SEO_COUNCIL_EXPECTED_DB_USERNAME');
     if (preg_match('/\A[A-Za-z0-9_]{1,64}\z/D', $database) !== 1
-        || ! hash_equals($seoIntelDatabase, $database)) {
+        || ! hash_equals($seoIntelDatabase, $database)
+        || ! is_string($expectedUsername) || $expectedUsername === ''
+        || ! hash_equals($expectedUsername, $username)) {
         throw new RuntimeException('SEO_COUNCIL_RUNTIME_DB_BOUNDARY_INVALID');
     }
 
     $council = Illuminate\Support\Facades\DB::connection($connectionName);
     $identity = $council->selectOne('SELECT CURRENT_USER() AS principal');
     $principal = is_object($identity) ? (string) ($identity->principal ?? '') : '';
-    if (preg_match('/\Aseo_intel_writer@[A-Za-z0-9.%_:-]{1,255}\z/D', $principal) !== 1) {
+    if (preg_match('/\A'.preg_quote($expectedUsername, '/').'@[A-Za-z0-9.%_:-]{1,255}\z/D', $principal) !== 1) {
         throw new RuntimeException('SEO_COUNCIL_RUNTIME_DB_WRITER_IDENTITY_INVALID');
     }
 
@@ -1524,7 +1549,9 @@ try {
 }
 PHP;
 
-        run('{{bin/php}} -d display_errors=0 -r '.deployShellArg($script));
+        run('{{bin/php}} -d display_errors=0 -r '.deployShellArg($script), [
+            'env' => ['SEO_COUNCIL_EXPECTED_DB_USERNAME' => $expectedWriter],
+        ]);
     });
 });
 

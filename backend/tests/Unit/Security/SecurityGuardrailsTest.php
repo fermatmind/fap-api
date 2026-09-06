@@ -403,7 +403,17 @@ final class SecurityGuardrailsTest extends TestCase
         );
         $this->assertStringContainsString('SEO Council unavailable writer aliases removed.', $deployer);
         $this->assertStringContainsString("['SEO_COUNCIL_DB_CONNECTION', 'SEO_COUNCIL_DB_USERNAME', 'SEO_COUNCIL_DB_PASSWORD']", $deployer);
-        $this->assertStringContainsString("'council' => 'SEO_COUNCIL_APPROVED'", $deployer);
+        $this->assertStringContainsString('SEO_COUNCIL_APPROVED_DB_USERNAME', $deployer);
+        $this->assertStringContainsString('SEO_COUNCIL_APPROVED_DB_PASSWORD', $deployer);
+        $this->assertStringContainsString("'staging' => 'seo_intel_staging_writer'", $deployer);
+        $this->assertStringContainsString("'production' => 'seo_intel_writer'", $deployer);
+        $this->assertStringContainsString('SEO_INTEL_DB_ENVIRONMENT_BOUNDARY_INVALID', $deployer);
+        $this->assertStringContainsString('SEO_INTEL_MIGRATION_ENVIRONMENT_BOUNDARY_INVALID', $deployer);
+        $this->assertStringNotContainsString('SEO_COUNCIL_RUNTIME_DB_USERNAME', $deployer);
+        $this->assertStringNotContainsString('SEO_COUNCIL_MIGRATION_DB_USERNAME', $deployer);
+        $this->assertStringContainsString('"reader" => "SEO_INTEL_RUNTIME_READER"', $deployer);
+        $this->assertStringContainsString('"writer" => "SEO_COUNCIL_RUNTIME_WRITER"', $deployer);
+        $this->assertStringContainsString('_GUARD_FAILED_', $deployer);
         $this->assertSame(3, substr_count($deploy, 'SEO_COUNCIL_DB_USERNAME: ${{ secrets.SEO_COUNCIL_DB_USERNAME }}'));
         $this->assertSame(3, substr_count($deploy, 'SEO_COUNCIL_DB_PASSWORD: ${{ secrets.SEO_COUNCIL_DB_PASSWORD }}'));
         $this->assertStringContainsString('SEO_COUNCIL_RUNTIME_DB_WRITE_PRIVILEGE_MISSING', $deployer);

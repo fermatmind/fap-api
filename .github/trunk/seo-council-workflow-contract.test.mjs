@@ -74,20 +74,28 @@ test("A08 runtime persistence uses the existing isolated writer and keeps generi
   assert.equal((deployer.match(/task\('seo:council-runtime-db-access'/g) || []).length, 1);
   assert.doesNotMatch(deployer, /GRANT (?:SELECT|ALL|DELETE)/);
   assert.match(deployer, /SEO_COUNCIL_DB_CONNECTION' => 'seo_council'/);
-  assert.match(deployer, /'council' => 'SEO_COUNCIL_APPROVED'/);
-  assert.match(deployer, /'runtime' => 'SEO_COUNCIL_RUNTIME'/);
-  assert.match(deployer, /'migration' => 'SEO_COUNCIL_MIGRATION'/);
+  assert.match(deployer, /SEO_COUNCIL_APPROVED_DB_USERNAME/);
+  assert.match(deployer, /SEO_COUNCIL_APPROVED_DB_PASSWORD/);
+  assert.match(deployer, /'staging' => 'seo_intel_staging_writer'/);
+  assert.match(deployer, /'production' => 'seo_intel_writer'/);
+  assert.match(deployer, /'staging' => 'seo_intel_staging_migrator'/);
+  assert.match(deployer, /'production' => 'seo_intel_migrator'/);
+  assert.match(deployer, /SEO_INTEL_DB_ENVIRONMENT_BOUNDARY_INVALID/);
+  assert.match(deployer, /SEO_INTEL_MIGRATION_ENVIRONMENT_BOUNDARY_INVALID/);
+  assert.doesNotMatch(deployer, /SEO_COUNCIL_RUNTIME_DB_USERNAME/);
+  assert.doesNotMatch(deployer, /SEO_COUNCIL_MIGRATION_DB_USERNAME/);
   assert.match(
     deployer,
     /SEO_COUNCIL_RUNTIME_WRITER_UNAVAILABLE: verify SEO_COUNCIL_DB credentials and SEO_INTEL_DB target/,
   );
   assert.match(deployer, /SEO Council unavailable writer aliases removed/);
   assert.match(deployer, /\.seo-council-env-scrub-/);
-  assert.match(deployer, /'council' => 'SEO_COUNCIL_APPROVED_DB_USERNAME'/);
-  assert.match(deployer, /'council' => 'SEO_COUNCIL_APPROVED_DB_PASSWORD'/);
+  assert.match(deployer, /"reader" => "SEO_INTEL_RUNTIME_READER"/);
+  assert.match(deployer, /"writer" => "SEO_COUNCIL_RUNTIME_WRITER"/);
+  assert.match(deployer, /_GUARD_FAILED_/);
   assert.equal((deploy.match(/SEO_COUNCIL_DB_USERNAME: \$\{\{ secrets\.SEO_COUNCIL_DB_USERNAME \}\}/g) || []).length, 3);
   assert.equal((deploy.match(/SEO_COUNCIL_DB_PASSWORD: \$\{\{ secrets\.SEO_COUNCIL_DB_PASSWORD \}\}/g) || []).length, 3);
-  assert.match(deployer, /seo_intel_writer@/);
+  assert.match(deployer, /preg_quote\(\$expectedUsername/);
   assert.match(deployer, /config\('seo_intel\.write_enabled'\) !== false/);
   assert.match(deployer, /\$council->beginTransaction\(\)/);
   assert.match(deployer, /\$council->rollBack\(\)/);
