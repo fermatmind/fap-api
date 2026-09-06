@@ -74,8 +74,10 @@ test("A08 runtime persistence uses the existing isolated writer and keeps generi
   assert.equal((deployer.match(/task\('seo:council-runtime-db-access'/g) || []).length, 1);
   assert.doesNotMatch(deployer, /GRANT (?:SELECT|ALL|DELETE)/);
   assert.match(deployer, /SEO_COUNCIL_DB_CONNECTION' => 'seo_council'/);
-  assert.match(deployer, /SEO_COUNCIL_DB_USERNAME' => \$councilUsername/);
-  assert.match(deployer, /SEO_COUNCIL_DB_PASSWORD' => \$councilPassword/);
+  assert.match(deployer, /\['runtime' => 'SEO_COUNCIL_RUNTIME', 'migration' => 'SEO_COUNCIL_MIGRATION'\]/);
+  assert.match(deployer, /SEO_COUNCIL_RUNTIME_WRITER_UNAVAILABLE/);
+  assert.match(deployer, /SEO_COUNCIL_DB_USERNAME' => \$selected === 'runtime'/);
+  assert.match(deployer, /SEO_COUNCIL_DB_PASSWORD' => \$selected === 'runtime'/);
   assert.match(deployer, /seo_intel_writer@/);
   assert.match(deployer, /config\('seo_intel\.write_enabled'\) !== false/);
   assert.match(deployer, /\$council->beginTransaction\(\)/);

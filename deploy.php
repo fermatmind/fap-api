@@ -190,23 +190,10 @@ function deploySeoIntelRuntimeEnvironment(): array
         throw new \RuntimeException('SEO_INTEL_DB_PORT is invalid.');
     }
 
-    $councilUsername = getenv('SEO_INTEL_MIGRATION_DB_USERNAME');
-    $councilPassword = getenv('SEO_INTEL_MIGRATION_DB_PASSWORD');
-    if (! is_string($councilUsername) || $councilUsername === ''
-        || ! is_string($councilPassword) || $councilPassword === ''
-        || preg_match('/[\x00\r\n]/', $councilUsername)
-        || preg_match('/[\x00\r\n]/', $councilPassword)
-        || hash_equals($values['SEO_INTEL_DB_USERNAME'], $councilUsername)) {
-        throw new \RuntimeException('SEO_COUNCIL_RUNTIME_WRITER_IDENTITY_INVALID');
-    }
-
     $values += [
         'SEO_COUNCIL_SCHEDULER_ENABLED' => 'true',
         'SEO_COUNCIL_DAILY_READ_ONLY_ENABLED' => 'true',
         'SEO_COUNCIL_RUNTIME_CACHE_STORE' => 'redis',
-        'SEO_COUNCIL_DB_CONNECTION' => 'seo_council',
-        'SEO_COUNCIL_DB_USERNAME' => $councilUsername,
-        'SEO_COUNCIL_DB_PASSWORD' => $councilPassword,
     ];
 
     return $values;
@@ -959,6 +946,53 @@ task('artisan:config:cache', function () {
 
 task('runtime:configure-seo-intel', function (): void {
     $runtime = deploySeoIntelRuntimeEnvironment();
+    $candidates = [
+        'SEO_COUNCIL_RUNTIME_DB_USERNAME' => $runtime['SEO_INTEL_DB_USERNAME'],
+        'SEO_COUNCIL_RUNTIME_DB_PASSWORD' => $runtime['SEO_INTEL_DB_PASSWORD'],
+        'SEO_COUNCIL_MIGRATION_DB_USERNAME' => (string) (getenv('SEO_INTEL_MIGRATION_DB_USERNAME') ?: ''),
+        'SEO_COUNCIL_MIGRATION_DB_PASSWORD' => (string) (getenv('SEO_INTEL_MIGRATION_DB_PASSWORD') ?: ''),
+        'SEO_COUNCIL_DB_HOST' => $runtime['SEO_INTEL_DB_HOST'],
+        'SEO_COUNCIL_DB_PORT' => $runtime['SEO_INTEL_DB_PORT'],
+        'SEO_COUNCIL_DB_DATABASE' => $runtime['SEO_INTEL_DB_DATABASE'],
+    ];
+    $selector = <<<'PHP'
+try {
+    $dsn = sprintf('mysql:host=%s;port=%s;dbname=%s;charset=utf8mb4',
+        getenv('SEO_COUNCIL_DB_HOST'), getenv('SEO_COUNCIL_DB_PORT'), getenv('SEO_COUNCIL_DB_DATABASE'));
+    foreach (['runtime' => 'SEO_COUNCIL_RUNTIME', 'migration' => 'SEO_COUNCIL_MIGRATION'] as $name => $prefix) {
+        $username = getenv($prefix.'_DB_USERNAME');
+        $password = getenv($prefix.'_DB_PASSWORD');
+        if (! is_string($username) || $username === '' || ! is_string($password) || $password === '') {
+            continue;
+        }
+        try {
+            $pdo = new PDO($dsn, $username, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+            $principal = (string) $pdo->query('SELECT CURRENT_USER()')->fetchColumn();
+            if (preg_match('/\Aseo_intel_writer@[A-Za-z0-9.%_:-]{1,255}\z/D', $principal) === 1) {
+                echo $name;
+                exit(0);
+            }
+        } catch (Throwable) {
+            continue;
+        }
+    }
+} catch (Throwable) {
+    // The fixed error below is the only externally visible diagnostic.
+}
+fwrite(STDERR, "SEO_COUNCIL_RUNTIME_WRITER_UNAVAILABLE\n");
+exit(1);
+PHP;
+    $selected = trim(run('{{bin/php}} -d display_errors=0 -r '.deployShellArg($selector), ['env' => $candidates]));
+    if (! in_array($selected, ['runtime', 'migration'], true)) {
+        throw new \RuntimeException('SEO_COUNCIL_RUNTIME_WRITER_UNAVAILABLE');
+    }
+    $runtime += [
+        'SEO_COUNCIL_DB_CONNECTION' => 'seo_council',
+        'SEO_COUNCIL_DB_USERNAME' => $selected === 'runtime'
+            ? $candidates['SEO_COUNCIL_RUNTIME_DB_USERNAME'] : $candidates['SEO_COUNCIL_MIGRATION_DB_USERNAME'],
+        'SEO_COUNCIL_DB_PASSWORD' => $selected === 'runtime'
+            ? $candidates['SEO_COUNCIL_RUNTIME_DB_PASSWORD'] : $candidates['SEO_COUNCIL_MIGRATION_DB_PASSWORD'],
+    ];
     $localPatch = tempnam(sys_get_temp_dir(), 'seo-intel-runtime-');
     if (! is_string($localPatch)) {
         throw new \RuntimeException('Unable to allocate the SEO Intel runtime patch.');
@@ -1143,7 +1177,6 @@ try {
         && config("seo_council.runtime_cache_store") === "redis"
         && config("seo_council.connection") === "seo_council"
         && (config("database.connections.seo_council.database") ?? null) === ($seo["database"] ?? null)
-        && (config("database.connections.seo_council.username") ?? null) !== ($seo["username"] ?? null)
         && trim((string) (config("database.connections.seo_council.username") ?? "")) !== ""
         && (string) (config("database.connections.seo_council.password") ?? "") !== ""
         && config("seo_council.model_runtime_enabled") === false
