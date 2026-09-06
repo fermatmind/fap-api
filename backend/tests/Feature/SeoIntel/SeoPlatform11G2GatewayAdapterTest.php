@@ -108,7 +108,7 @@ final class SeoPlatform11G2GatewayAdapterTest extends TestCase
         );
     }
 
-    public function test_competitive_gateway_auto_reviews_expiry_and_safe_hash_drift_with_one_shared_read(): void
+    public function test_competitive_gateway_retries_timeout_once_and_auto_reviews_safe_policy_drift(): void
     {
         $hasher = app(\App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher::class);
         $transport = new class implements ExternalContentTransport
@@ -122,7 +122,7 @@ final class SeoPlatform11G2GatewayAdapterTest extends TestCase
             {
                 $this->requests[] = $url;
                 if ($url === 'https://example.com/facts' && $this->sourceFailures++ === 0) {
-                    throw new ExternalContentGatewayException('TRANSPORT_TLS_FAILED', 'transport', true);
+                    throw new ExternalContentGatewayException('TRANSPORT_TIMEOUT', 'transport', true);
                 }
                 $body = match ($url) {
                     'https://example.com/robots.txt' => "User-agent: *\nDisallow:",

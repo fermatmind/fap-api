@@ -90,7 +90,7 @@ final class PinnedTlsExternalContentTransport implements ExternalContentTranspor
                     CURLE_RECV_ERROR, CURLE_SEND_ERROR, CURLE_GOT_NOTHING => 'TRANSPORT_CONNECTION_RESET',
                     default => 'TRANSPORT_REQUEST_FAILED',
                 };
-                $retryable = in_array($reason, ['TRANSPORT_CONNECT_FAILED', 'TRANSPORT_TLS_FAILED', 'TRANSPORT_CONNECTION_RESET'], true)
+                $retryable = in_array($reason, ['TRANSPORT_TIMEOUT', 'TRANSPORT_CONNECT_FAILED', 'TRANSPORT_TLS_FAILED', 'TRANSPORT_CONNECTION_RESET'], true)
                     && $status === 0;
                 throw new ExternalContentGatewayException($reason, 'transport', $retryable);
             }
