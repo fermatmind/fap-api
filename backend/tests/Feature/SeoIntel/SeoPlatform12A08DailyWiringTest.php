@@ -153,6 +153,59 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
         $this->assertSame(0, app(Platform12SystemHealthReadService::class)->snapshot()['daily_missions']['actionable_count']);
     }
 
+    public function test_url_truth_acceptance_commits_a_bounded_real_reader_hold(): void
+    {
+        $this->startAtSlot();
+        $operation = $this->beginAcceptance();
+
+        $result = app(Platform12DailyScheduler::class)->tick(
+            Platform12DailyMissionSet::IDS[1],
+            $operation,
+        );
+
+        $this->assertSame('TERMINAL_COMMITTED', $result['status'], json_encode($result));
+        $this->assertTrue($result['terminal_committed']);
+        $this->assertSame('URL_TRUTH_UNAVAILABLE_HOLD', $result['mission_verdict']);
+        $this->assertSame(['issue_cluster', 'd1_observation', 'sitemap_observation'], $result['source_gaps']);
+    }
+
+    public function test_runtime_failure_returns_only_a_sanitized_error_code_and_fingerprint(): void
+    {
+        $this->startAtSlot();
+        $operation = $this->beginAcceptance();
+        $this->app->instance(Platform12EvidenceReader::class, new class implements Platform12EvidenceReader
+        {
+            public function capture(string $missionId, string $triggerMode = 'natural'): array
+            {
+                return [
+                    'input' => ['evaluated_at' => now('UTC')->format('Y-m-d\TH:i:s\Z')],
+                    'sources' => [[
+                        'id' => 'invalid-source',
+                        'hash' => str_repeat('a', 64),
+                        'read_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
+                        'observed_at' => null,
+                    ]],
+                    'source_gaps' => [],
+                    'captured_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
+                    'expires_at' => now('UTC')->addMinutes(10)->format('Y-m-d\TH:i:s\Z'),
+                ];
+            }
+        });
+
+        $result = app(Platform12DailyScheduler::class)->tick(Platform12DailyMissionSet::IDS[1], $operation);
+
+        $this->assertSame('DAILY_RUNTIME_HOLD', $result['status']);
+        $this->assertSame('FROZEN_MISSION_INVALID', $result['runtime_error_code']);
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/D', $result['runtime_error_fingerprint']);
+        $this->assertSame([
+            'status',
+            'runtime_error_code',
+            'runtime_error_fingerprint',
+            'execution_allowed',
+            'business_write_enabled',
+        ], array_keys($result));
+    }
+
     public function test_staging_notification_acceptance_sends_once_and_deduplicates(): void
     {
         $this->startAtSlot();
@@ -162,15 +215,30 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
         config()->set('seo_council.notification_dispatch_enabled', true);
         config()->set('ops.alert.webhook', 'https://alerts.example.test/hook');
         Http::fake(['*' => Http::response('', 200)]);
+        $reader = $this->fixtureReader();
+        $reader->canonicalFault = true;
+        $revision = tempnam(sys_get_temp_dir(), 'a08-staging-revision-');
+        $this->assertIsString($revision);
+        file_put_contents($revision, str_repeat('a', 40)."\n");
+        config()->set('seo_council.release_revision_path', $revision);
 
-        $exit = Artisan::call('seo:council-notification-acceptance', ['--operation-ref' => $operation]);
-        $this->assertSame(0, $exit, Artisan::output());
-        $this->assertSame('sent', DB::connection('seo_intel')->table('seo_council_notification_outbox')->value('status'));
-        $this->assertSame(0, Artisan::call('seo:council-notification-acceptance', ['--operation-ref' => $operation]));
-        $this->assertSame(1, DB::connection('seo_intel')->table('seo_council_notification_outbox')->count());
-        Http::assertSentCount(1);
-        Http::assertSent(static fn ($request): bool => str_contains((string) $request['text'], 'STAGING 验收')
-            && str_contains((string) $request['text'], '这不是生产告警'));
+        try {
+            $mission = app(Platform12DailyScheduler::class)->tick(Platform12DailyMissionSet::IDS[1], $operation);
+            $this->assertSame('TERMINAL_COMMITTED', $mission['status'], json_encode($mission));
+            $this->assertSame('WRONG_CANONICAL_HOLD', $mission['mission_verdict']);
+            $this->assertSame(0, DB::connection('seo_intel')->table('seo_council_notification_outbox')->count());
+
+            $exit = Artisan::call('seo:council-notification-acceptance', ['--operation-ref' => $operation]);
+            $this->assertSame(0, $exit, Artisan::output());
+            $this->assertSame('sent', DB::connection('seo_intel')->table('seo_council_notification_outbox')->value('status'));
+            $this->assertSame(0, Artisan::call('seo:council-notification-acceptance', ['--operation-ref' => $operation]));
+            $this->assertSame(1, DB::connection('seo_intel')->table('seo_council_notification_outbox')->count());
+            Http::assertSentCount(1);
+            Http::assertSent(static fn ($request): bool => str_contains((string) $request['text'], 'STAGING 验收')
+                && str_contains((string) $request['text'], '这不是生产告警'));
+        } finally {
+            unlink($revision);
+        }
     }
 
     public function test_controlled_acceptance_is_idempotent_per_release_without_consuming_natural_slot(): void

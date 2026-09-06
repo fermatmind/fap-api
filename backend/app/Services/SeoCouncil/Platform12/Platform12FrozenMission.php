@@ -89,7 +89,7 @@ final readonly class Platform12FrozenMission
         }
         foreach ($evidence['sources'] as $source) {
             if (! is_array($source) || ! self::exactKeys($source, ['id', 'hash', 'read_at', 'observed_at'])
-                || ! is_string($source['id']) || preg_match('/^[a-z][a-z_]{0,63}$/D', $source['id']) !== 1
+                || ! is_string($source['id']) || preg_match('/^[a-z][a-z0-9_]{0,63}$/D', $source['id']) !== 1
                 || ! is_string($source['hash']) || preg_match('/^[a-f0-9]{64}$/D', $source['hash']) !== 1
                 || ! is_string($source['read_at'])
                 || ($source['observed_at'] !== null && ! is_string($source['observed_at']))) {
@@ -97,7 +97,7 @@ final readonly class Platform12FrozenMission
             }
         }
         foreach ($evidence['source_gaps'] as $gap) {
-            if (! is_string($gap) || preg_match('/^[a-z][a-z_]{0,63}$/D', $gap) !== 1) {
+            if (! is_string($gap) || preg_match('/^[a-z][a-z0-9_]{0,63}$/D', $gap) !== 1) {
                 return false;
             }
         }

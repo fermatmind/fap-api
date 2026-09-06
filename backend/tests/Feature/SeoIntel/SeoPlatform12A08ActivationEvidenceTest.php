@@ -162,6 +162,8 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
         $this->assertStringContainsString('failure_stage="acceptance_complete"', $step);
         $this->assertStringContainsString('probe_exit_code:$probe_exit', $step);
         $this->assertStringContainsString('probe_summary:$probe_summary', $step);
+        $this->assertStringContainsString('runtime_error_code', $step);
+        $this->assertStringContainsString('runtime_error_fingerprint', $step);
         $this->assertStringContainsString('source_connected=true', $step);
         $this->assertStringContainsString('length == 3', $step);
         $this->assertStringContainsString(

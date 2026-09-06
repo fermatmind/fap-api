@@ -173,8 +173,15 @@ final readonly class Platform12DailyScheduler
                 'mission_verdict' => is_array($evaluation) ? ($evaluation['state'] ?? null) : null,
                 'source_gaps' => $mission->envelope['evidence']['source_gaps'],
                 'receipt_hash' => ($result['terminal_committed'] ?? false) ? $receipt['receipt_hash'] : null]);
-        } catch (Throwable) {
-            return $this->result('DAILY_RUNTIME_HOLD');
+        } catch (Throwable $error) {
+            $message = $error->getMessage();
+            $errorCode = preg_match('/^[A-Z][A-Z0-9_]{0,79}$/D', $message) === 1
+                ? $message : 'DAILY_RUNTIME_INTERNAL_ERROR';
+
+            return $this->result('DAILY_RUNTIME_HOLD', [
+                'runtime_error_code' => $errorCode,
+                'runtime_error_fingerprint' => hash('sha256', $error::class.'|'.$errorCode),
+            ]);
         } finally {
             $this->store->release(self::LEASE, $owner, $fence);
         }

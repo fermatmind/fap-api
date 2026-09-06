@@ -21,6 +21,13 @@ final readonly class Platform12DailyNotifications
         if ($receipt['status'] === 'DAILY_STOPPED_HOLD') {
             return;
         }
+        // Controlled staging acceptance has one dedicated, clearly labelled
+        // notification. Business HOLD observations from that synthetic run must
+        // never enter the ordinary daily alert stream.
+        if (app()->environment('staging')
+            && ($mission->envelope['slot']['trigger_mode'] ?? null) === 'controlled_acceptance') {
+            return;
+        }
         $evaluation = collect($receipt['route_plan'])->firstWhere('kind', 'daily_evaluation');
         $output = $evaluation['output'] ?? [];
         // Report unavailable observations honestly; notification delivery never

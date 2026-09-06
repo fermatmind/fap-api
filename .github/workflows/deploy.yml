@@ -1355,7 +1355,8 @@ jobs:
               and (.receipt_hash | test("^[a-f0-9]{64}$")) and .source_gaps == []
               and (.mission_verdict | type == "string")
               and .execution_allowed == false and .business_write_enabled == false' <<<"$result" >/dev/null; then
-              jq -c '{status,mission_id,terminal_committed,mission_verdict,source_gaps,execution_allowed,business_write_enabled}' <<<"$result" >&2
+              jq -c '{status,mission_id,terminal_committed,mission_verdict,source_gaps,runtime_error_code,
+                runtime_error_fingerprint,execution_allowed,business_write_enabled}' <<<"$result" >&2
               false
             fi
           done

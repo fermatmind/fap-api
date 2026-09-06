@@ -89,6 +89,23 @@ final class SeoPlatform12F02NotificationOutboxTest extends TestCase
         $this->assertSame('sent', DB::connection('seo_intel')->table('seo_council_notification_outbox')->value('status'));
     }
 
+    public function test_claim_can_target_one_notification_without_consuming_an_older_pending_event(): void
+    {
+        $outbox = app(Platform12NotificationOutbox::class);
+        $older = $outbox->enqueue($this->classification('older'), 'failed', 'HOLD');
+        $target = $outbox->enqueue($this->classification('target'), 'failed', 'HOLD');
+
+        $claim = $outbox->claim(
+            'worker:exact:target',
+            notificationId: $target['notification_id'],
+        );
+
+        $this->assertSame('CLAIMED', $claim['status']);
+        $this->assertSame($target['notification_id'], $claim['claim']['notification_id']);
+        $this->assertSame('pending', DB::connection('seo_intel')->table('seo_council_notification_outbox')
+            ->where('notification_id', $older['notification_id'])->value('status'));
+    }
+
     public function test_database_clock_query_uses_a_mysql_safe_alias(): void
     {
         $outbox = app(Platform12NotificationOutbox::class);

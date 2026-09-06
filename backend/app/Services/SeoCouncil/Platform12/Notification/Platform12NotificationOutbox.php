@@ -86,28 +86,34 @@ final readonly class Platform12NotificationOutbox
     }
 
     /** @return array<string, mixed> */
-    public function claim(string $workerToken, ?int $leaseSeconds = null): array
+    public function claim(string $workerToken, ?int $leaseSeconds = null, ?string $notificationId = null): array
     {
         $this->validateWorkerToken($workerToken);
+        if ($notificationId !== null && preg_match('/^[a-f0-9]{64}$/D', $notificationId) !== 1) {
+            throw new InvalidArgumentException('NOTIFICATION_ID_INVALID');
+        }
         $ttl = $leaseSeconds ?? (int) config('seo_council.notification_lease_seconds', 60);
         if ($ttl < 1 || $ttl > (int) config('seo_council.notification_max_lease_seconds', 300)) {
             throw new InvalidArgumentException('NOTIFICATION_LEASE_INVALID');
         }
 
         try {
-            return $this->connection()->transaction(function () use ($workerToken, $ttl): array {
+            return $this->connection()->transaction(function () use ($workerToken, $ttl, $notificationId): array {
                 $connection = $this->connection();
                 $now = $this->databaseNow($connection);
                 $timestamp = $this->timestamp($now);
-                $row = $connection->table('seo_council_notification_outbox')
+                $query = $connection->table('seo_council_notification_outbox')
                     ->where(function ($query) use ($timestamp): void {
                         $query->where(function ($pending) use ($timestamp): void {
                             $pending->where('status', 'pending')->where('available_at', '<=', $timestamp);
                         })->orWhere(function ($expired) use ($timestamp): void {
                             $expired->where('status', 'sending')->where('lease_expires_at', '<=', $timestamp);
                         });
-                    })
-                    ->orderBy('id')
+                    });
+                if ($notificationId !== null) {
+                    $query->where('notification_id', $notificationId);
+                }
+                $row = $query->orderBy('id')
                     ->lockForUpdate()
                     ->first();
                 if (! is_object($row)) {

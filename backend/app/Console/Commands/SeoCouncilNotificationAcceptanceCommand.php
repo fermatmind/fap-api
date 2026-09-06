@@ -50,7 +50,10 @@ final class SeoCouncilNotificationAcceptanceCommand extends Command
 
             return self::SUCCESS;
         }
-        $claim = $outbox->claim('staging-a08:'.substr($subject, 0, 16));
+        $notificationId = $enqueued['notification_id'] ?? null;
+        $claim = is_string($notificationId)
+            ? $outbox->claim('staging-a08:'.substr($subject, 0, 16), notificationId: $notificationId)
+            : ['status' => 'CLAIM_FAILED', 'claim' => null];
         $result = is_array($claim['claim'] ?? null)
             ? $outbox->dispatch($claim['claim'], 'DAILY_MISSION_READY')
             : ['status' => 'failed', 'reason_code' => $claim['status'] ?? 'CLAIM_FAILED'];
