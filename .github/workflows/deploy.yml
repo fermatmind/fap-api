@@ -1307,6 +1307,16 @@ jobs:
             and (.status | IN("verified_unchanged","rebuilt"))
             and (.count | type == "number" and . >= 1)
             and (.elapsed_seconds | type == "number" and . >= 0)' <<<"$sitemap_refresh" >/dev/null
+          failure_stage="runtime_observation_refresh"
+          runtime_probe="$("${ssh_base[@]}" "set -euo pipefail; test \"\$(tr -d '\\r\\n' < $q_path/current/REVISION)\" = $q_sha; cd $q_path/current/backend; php artisan seo:runtime-probe-scheduled --trigger=manual --json --no-interaction --no-ansi")"
+          jq -e --arg sha "$DEPLOY_SHA" '.schema_version == "seo-platform-07-scheduled-receipt.v2"
+            and .trigger_mode == "manual" and .production_calibration.deploy_revision == $sha
+            and (.production_calibration.private_negative_set.checked | type == "boolean")
+            and (.receipt_hash | test("^[a-f0-9]{64}$"))
+            and .boundaries.raw_url_emitted == false and .boundaries.query_emitted == false
+            and .boundaries.response_body_emitted == false and .boundaries.raw_topology_emitted == false
+            and .boundaries.search_submission_allowed == false
+            and .boundaries.write_authorization_granted == false' <<<"$runtime_probe" >/dev/null
           trap - ERR
           set +e
           public_probe="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan public-content:probe-delivery --all --json --no-interaction --no-ansi")"
@@ -2792,6 +2802,15 @@ jobs:
             and (.status | IN("verified_unchanged","rebuilt"))
             and (.count | type == "number" and . >= 1)
             and (.elapsed_seconds | type == "number" and . >= 0)' <<<"$sitemap_refresh" >/dev/null
+          runtime_probe="$("${ssh_base[@]}" "set -euo pipefail; test \"\$(tr -d '\\r\\n' < $q_path/current/REVISION)\" = $q_sha; cd $q_path/current/backend; php artisan seo:runtime-probe-scheduled --trigger=manual --json --no-interaction --no-ansi")"
+          jq -e --arg sha "$SOURCE_SHA" '.schema_version == "seo-platform-07-scheduled-receipt.v2"
+            and .trigger_mode == "manual" and .production_calibration.deploy_revision == $sha
+            and (.production_calibration.private_negative_set.checked | type == "boolean")
+            and (.receipt_hash | test("^[a-f0-9]{64}$"))
+            and .boundaries.raw_url_emitted == false and .boundaries.query_emitted == false
+            and .boundaries.response_body_emitted == false and .boundaries.raw_topology_emitted == false
+            and .boundaries.search_submission_allowed == false
+            and .boundaries.write_authorization_granted == false' <<<"$runtime_probe" >/dev/null
           begun="$("${ssh_base[@]}" "cd $q_path/current/backend && php artisan seo:council-runtime acceptance-begin --operation-ref='$operation' --no-interaction --no-ansi")"
           jq -e --arg operation "$operation" '.state == "CONTROLLED_ACCEPTANCE_ONLY"
             and .controlled_acceptance_enabled == true and .operation_ref == $operation

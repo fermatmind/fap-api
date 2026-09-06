@@ -164,6 +164,12 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
             $step,
         );
         $this->assertStringContainsString('IN("verified_unchanged","rebuilt")', $step);
+        $this->assertStringContainsString('failure_stage="runtime_observation_refresh"', $step);
+        $this->assertStringContainsString(
+            'seo:runtime-probe-scheduled --trigger=manual --json',
+            $step,
+        );
+        $this->assertStringContainsString('.production_calibration.deploy_revision == $sha', $step);
         $this->assertStringContainsString('failure_stage="public_probe_observation"', $step);
         $this->assertStringContainsString('failure_stage="acceptance_complete"', $step);
         $this->assertStringContainsString('probe_exit_code:$probe_exit', $step);
@@ -199,6 +205,10 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
         $productionStep = substr($workflow, $productionStart, $productionEnd - $productionStart);
         $this->assertStringContainsString(
             'seo:warm-sitemap-source-cache --refresh-if-changed --json',
+            $productionStep,
+        );
+        $this->assertStringContainsString(
+            'seo:runtime-probe-scheduled --trigger=manual --json',
             $productionStep,
         );
         $this->assertLessThan(

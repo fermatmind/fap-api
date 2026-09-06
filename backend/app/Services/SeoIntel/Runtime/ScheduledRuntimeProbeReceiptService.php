@@ -80,8 +80,12 @@ final class ScheduledRuntimeProbeReceiptService
     }
 
     /** @return array<string,mixed> */
-    public function readWindow(?string $now = null): array
+    public function readWindow(?string $now = null, string $triggerMode = 'scheduled'): array
     {
+        if (! in_array($triggerMode, ['manual', 'scheduled'], true)) {
+            throw new InvalidArgumentException('Runtime probe trigger mode is invalid.');
+        }
+
         $observedAt = $now === null ? CarbonImmutable::now('UTC') : CarbonImmutable::parse($now)->utc();
         $schema = Schema::connection($this->connection()->getName());
         if (! \App\Support\SchemaBaseline::tableExists('seo_runtime_probe_receipts', $schema->getConnection()->getName())) {
@@ -100,7 +104,7 @@ final class ScheduledRuntimeProbeReceiptService
             ];
         }
         $rows = $this->connection()->table('seo_runtime_probe_receipts')
-            ->where('trigger_mode', 'scheduled')
+            ->where('trigger_mode', $triggerMode)
             ->orderByDesc('scheduled_for')
             ->limit(3)
             ->get();
@@ -115,7 +119,9 @@ final class ScheduledRuntimeProbeReceiptService
         $fresh = $latestAt !== null && $latestAt->diffInMinutes($observedAt, false) <= self::SLOT_MINUTES * 2;
         $successful = count($receipts) === 3
             && collect($receipts)->every(static fn (array $receipt): bool => ($receipt['status'] ?? null) === 'success');
-        $complete = $consecutive && $fresh && $successful;
+        // Manual receipts may support a bounded controlled acceptance, but they
+        // never complete the natural three-slot production observation window.
+        $complete = $triggerMode === 'scheduled' && $consecutive && $fresh && $successful;
 
         return [
             'state' => $complete ? 'complete' : UnifiedRuntimeProbeEvaluator::MEASUREMENT_HOLD,
@@ -125,7 +131,8 @@ final class ScheduledRuntimeProbeReceiptService
             'successful' => $successful,
             'receipts' => $receipts,
             'boundaries' => [
-                'manual_receipts_excluded' => true,
+                'manual_receipts_excluded' => $triggerMode === 'scheduled',
+                'manual_receipts_count_as_natural_slots' => false,
                 'fixtures_count_as_production_evidence' => false,
                 'raw_sensitive_evidence_emitted' => false,
             ],

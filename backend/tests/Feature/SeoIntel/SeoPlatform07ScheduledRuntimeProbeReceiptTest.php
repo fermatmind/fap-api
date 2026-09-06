@@ -129,6 +129,32 @@ final class SeoPlatform07ScheduledRuntimeProbeReceiptTest extends TestCase
     }
 
     #[Test]
+    public function controlled_acceptance_can_read_a_fresh_manual_receipt_without_completing_the_natural_window(): void
+    {
+        DB::connection(self::CONNECTION)->table('seo_crawler_log_daily_aggregates')->insert([
+            'hit_count' => 7,
+            'last_seen_at' => '2026-08-26 09:00:00',
+            'updated_at' => '2026-08-26 09:00:00',
+        ]);
+        $service = $this->service();
+        $receipt = $service->record('manual', '2026-08-26T09:01:00Z', [
+            'state' => 'MEASUREMENT_HOLD',
+            'deploy_revision' => str_repeat('a', 40),
+            'private_negative_set' => ['checked' => true],
+        ]);
+
+        $manual = $service->readWindow('2026-08-26T09:02:00Z', 'manual');
+        $natural = $service->readWindow('2026-08-26T09:02:00Z');
+
+        $this->assertTrue($manual['fresh']);
+        $this->assertSame($receipt['receipt_hash'], data_get($manual, 'receipts.0.receipt_hash'));
+        $this->assertSame('MEASUREMENT_HOLD', $manual['state']);
+        $this->assertFalse(data_get($manual, 'boundaries.manual_receipts_count_as_natural_slots'));
+        $this->assertSame(0, $natural['slot_count']);
+        $this->assertTrue(data_get($natural, 'boundaries.manual_receipts_excluded'));
+    }
+
+    #[Test]
     public function scheduler_contract_uses_existing_control_plane_guards(): void
     {
         $bootstrap = file_get_contents(base_path('bootstrap/app.php'));

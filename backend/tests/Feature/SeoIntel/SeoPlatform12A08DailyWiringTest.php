@@ -166,7 +166,10 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
         $this->assertSame('TERMINAL_COMMITTED', $result['status'], json_encode($result));
         $this->assertTrue($result['terminal_committed']);
         $this->assertSame('URL_TRUTH_UNAVAILABLE_HOLD', $result['mission_verdict']);
-        $this->assertSame(['issue_cluster', 'd1_observation', 'sitemap_observation'], $result['source_gaps']);
+        $this->assertSame(
+            ['issue_cluster', 'd1_observation', 'scheduled_runtime_probe', 'sitemap_observation'],
+            $result['source_gaps'],
+        );
     }
 
     public function test_runtime_failure_returns_only_a_sanitized_error_code_and_fingerprint(): void

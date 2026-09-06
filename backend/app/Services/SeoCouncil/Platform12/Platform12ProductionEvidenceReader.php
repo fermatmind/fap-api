@@ -74,6 +74,7 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         $input = ['evaluated_at' => $at->format('Y-m-d\TH:i:s\Z')];
         $sources = [];
         $gaps = [];
+        $runtimeTriggerMode = $triggerMode === 'controlled_acceptance' ? 'manual' : 'scheduled';
         $read = function (string $name, callable $loader) use (&$sources, &$gaps, $at): ?array {
             try {
                 $data = $loader();
@@ -98,7 +99,7 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
                 fn (): array => $this->gsc($at, $controlledStaging ? 'manual' : 'scheduled'),
             );
             $input['gsc'] = $gsc === null ? null : array_diff_key($gsc, ['observed_at' => true, 'source_hash' => true]);
-            $probe = $read('scheduled_runtime_probe', fn (): array => $this->runtimeWindow($at));
+            $probe = $read('scheduled_runtime_probe', fn (): array => $this->runtimeWindow($at, $runtimeTriggerMode));
             $api = $read('public_api_health', fn (): array => $this->publicApi($at));
             $input['runtime'] = [
                 'core_runtime_state' => ($probe['state'] ?? null) === 'complete' ? 'AVAILABLE' : 'UNAVAILABLE',
@@ -122,14 +123,14 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
                 'false_noindex_count' => data_get($truth, 'difference_classification.private_or_noindex_included')] : ['availability' => 'UNAVAILABLE'];
             $input['clustering'] = $read('issue_cluster', fn (): array => $this->clusters());
             $input['d1_observation'] = $read('d1_observation', fn (): array => $this->d1($at));
-            $probe = $read('scheduled_runtime_probe', fn (): array => $this->runtimeWindow($at));
+            $probe = $read('scheduled_runtime_probe', fn (): array => $this->runtimeWindow($at, $runtimeTriggerMode));
             $input['runtime_observation'] = ($probe['state'] ?? null) === 'complete'
                 ? ['availability' => 'AVAILABLE', 'observation_count' => $probe['slot_count']]
                 : ['availability' => 'UNAVAILABLE'];
             $input['sitemap_observation'] = $read('sitemap_observation', fn (): array => $this->sitemap());
         } else {
-            $negative = $read('private_route_negative_set', function () use ($at): array {
-                $window = $this->runtimeWindow($at);
+            $negative = $read('private_route_negative_set', function () use ($at, $runtimeTriggerMode): array {
+                $window = $this->runtimeWindow($at, $runtimeTriggerMode);
                 $negative = data_get($window, 'receipts.0.production_calibration.private_negative_set');
                 if (($window['fresh'] ?? false) !== true || ! is_array($negative)
                     || ($negative['checked'] ?? false) !== true) {
@@ -220,14 +221,20 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
             'dedupe_unique_count' => (clone $query)->distinct()->count('issue_uid')];
     }
 
-    private function runtimeWindow(CarbonImmutable $at): array
+    private function runtimeWindow(CarbonImmutable $at, string $sourceTriggerMode = 'scheduled'): array
     {
-        $window = $this->runtime->readWindow($at->toAtomString());
+        $window = $this->runtime->readWindow($at->toAtomString(), $sourceTriggerMode);
         foreach ($window['receipts'] ?? [] as $receipt) {
             if (! is_string($receipt['receipt_hash'] ?? null)
                 || ! hash_equals(ScheduledRuntimeProbeReceiptService::contentHash(array_diff_key($receipt, ['receipt_hash' => true])), $receipt['receipt_hash'])
                 || CarbonImmutable::parse($receipt['completed_at'])->gt($at)) {
                 throw new \RuntimeException('RUNTIME_RECEIPT_INVALID');
+            }
+        }
+        if ($sourceTriggerMode === 'manual') {
+            $revision = data_get($window, 'receipts.0.production_calibration.deploy_revision');
+            if (! is_string($revision) || ! hash_equals((string) $this->releaseSha(), $revision)) {
+                throw new \RuntimeException('RUNTIME_RECEIPT_REVISION_MISMATCH');
             }
         }
 
