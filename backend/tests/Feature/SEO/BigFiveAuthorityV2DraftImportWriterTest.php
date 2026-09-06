@@ -17,6 +17,8 @@ final class BigFiveAuthorityV2DraftImportWriterTest extends TestCase
 {
     use UsesIsolatedSqliteDatabase;
 
+    private const FROZEN_LANDING_SURFACE_KEY = 'test_detail_big_five_personality_test_ocean_model';
+
     private const PACKAGE = '../generated/big-five-authority-v2/big5-authority-v2-release-gate-37/draft-import-package.json';
 
     private const AUTHORIZATION = '../generated/big-five-authority-v2/big5-authority-v2-release-gate-37/production-authorization-packet.json';
@@ -72,7 +74,7 @@ final class BigFiveAuthorityV2DraftImportWriterTest extends TestCase
         $this->assertSame(231, $this->primaryRecordCount());
         $this->assertSame(109, Article::query()->withoutGlobalScopes()->count());
         $this->assertSame(4, ContentPage::query()->withoutGlobalScopes()->count());
-        $this->assertSame(2, LandingSurface::query()->withoutGlobalScopes()->count());
+        $this->assertSame(3, LandingSurface::query()->withoutGlobalScopes()->count());
         $this->assertSame(114, PersonalityPublicContentAsset::query()->withoutGlobalScopes()->count());
         $this->assertSame(2, TopicProfile::query()->withoutGlobalScopes()->count());
 
@@ -118,7 +120,9 @@ final class BigFiveAuthorityV2DraftImportWriterTest extends TestCase
     {
         return Article::query()->withoutGlobalScopes()->withTrashed()->count()
             + ContentPage::query()->withoutGlobalScopes()->count()
-            + LandingSurface::query()->withoutGlobalScopes()->count()
+            + LandingSurface::query()->withoutGlobalScopes()
+                ->where('surface_key', '!=', self::FROZEN_LANDING_SURFACE_KEY)
+                ->count()
             + PersonalityPublicContentAsset::query()->withoutGlobalScopes()->count()
             + TopicProfile::query()->withoutGlobalScopes()->count();
     }

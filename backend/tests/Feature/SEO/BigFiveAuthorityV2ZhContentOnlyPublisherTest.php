@@ -25,6 +25,8 @@ final class BigFiveAuthorityV2ZhContentOnlyPublisherTest extends TestCase
 {
     use UsesIsolatedSqliteDatabase;
 
+    private const RELEASE_LANDING_SURFACE_KEY = 'test_big_five_personality_test_ocean_model';
+
     private const RELEASE = '../generated/big-five-authority-v2/big5-authority-v2-zh-content-only-release/release-package.json';
 
     private const BASE = '../generated/big-five-authority-v2/big5-authority-v2-release-gate-37/draft-import-package.json';
@@ -118,7 +120,10 @@ final class BigFiveAuthorityV2ZhContentOnlyPublisherTest extends TestCase
         $this->assertSame(1, LandingSurface::query()->withoutGlobalScopes()->where('locale', 'zh-CN')->publishedPublic()->where('is_indexable', true)->count());
         $this->assertSame(
             BigFiveZhContentOnlyPublisher::LANDING_SCHEMA_VERSION,
-            LandingSurface::query()->withoutGlobalScopes()->where('locale', 'zh-CN')->value('schema_version'),
+            LandingSurface::query()->withoutGlobalScopes()
+                ->where('locale', 'zh-CN')
+                ->where('surface_key', self::RELEASE_LANDING_SURFACE_KEY)
+                ->value('schema_version'),
         );
         $this->assertSame(1, TopicProfile::query()->withoutGlobalScopes()->where('locale', 'zh-CN')->publishedPublic()->where('is_indexable', true)->count());
         $this->assertSame(
@@ -209,7 +214,11 @@ final class BigFiveAuthorityV2ZhContentOnlyPublisherTest extends TestCase
         );
         $this->assertSame(112, $result['public_release_count']);
         $this->assertSame(111, array_sum($this->releaseRevisionCounts()));
-        $this->assertSame(1, LandingSurface::query()->withoutGlobalScopes()->where('locale', 'zh-CN')->publishedPublic()->count());
+        $this->assertSame(1, LandingSurface::query()->withoutGlobalScopes()
+            ->where('locale', 'zh-CN')
+            ->where('surface_key', self::RELEASE_LANDING_SURFACE_KEY)
+            ->publishedPublic()
+            ->count());
     }
 
     public function test_console_defaults_to_preflight_and_execute_is_testing_guarded(): void
