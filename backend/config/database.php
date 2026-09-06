@@ -96,6 +96,21 @@ return [
             'engine' => null,
         ],
 
+        'seo_council' => [
+            'driver' => 'mysql',
+            'host' => env('SEO_INTEL_DB_HOST'),
+            'port' => env('SEO_INTEL_DB_PORT', '3306'),
+            'database' => env('SEO_INTEL_DB_DATABASE'),
+            'username' => env('SEO_COUNCIL_DB_USERNAME'),
+            'password' => env('SEO_COUNCIL_DB_PASSWORD'),
+            'charset' => env('SEO_INTEL_DB_CHARSET', 'utf8mb4'),
+            'collation' => env('SEO_INTEL_DB_COLLATION', 'utf8mb4_unicode_ci'),
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+        ],
+
         'mariadb' => [
             'driver' => 'mariadb',
             'url' => env('DB_URL'),

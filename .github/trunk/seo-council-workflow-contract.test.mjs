@@ -70,22 +70,16 @@ test("11D through 11L deployment stays disabled and writes immutable exact-SHA c
   assert.doesNotMatch(`${ci}\n${deploy}`, /seo-agent:/);
 });
 
-test("A08 runtime persistence grants stay table-scoped and keep generic SEO writes disabled", () => {
-  assert.equal((deployer.match(/task\('seo:council-runtime-db-grants'/g) || []).length, 1);
-  assert.match(deployer, /GRANT SELECT, INSERT, UPDATE ON/);
-  assert.doesNotMatch(deployer, /GRANT ALL|GRANT DELETE/);
+test("A08 runtime persistence uses the existing isolated writer and keeps generic SEO writes disabled", () => {
+  assert.equal((deployer.match(/task\('seo:council-runtime-db-access'/g) || []).length, 1);
+  assert.doesNotMatch(deployer, /GRANT (?:SELECT|ALL|DELETE)/);
+  assert.match(deployer, /SEO_COUNCIL_DB_CONNECTION' => 'seo_council'/);
+  assert.match(deployer, /SEO_COUNCIL_DB_USERNAME' => \$councilUsername/);
+  assert.match(deployer, /SEO_COUNCIL_DB_PASSWORD' => \$councilPassword/);
+  assert.match(deployer, /seo_intel_writer@/);
   assert.match(deployer, /config\('seo_intel\.write_enabled'\) !== false/);
-  for (const table of [
-    "seo_council_scheduler_leases",
-    "seo_council_schedule_deliveries",
-    "seo_council_schedule_receipts",
-    "seo_council_runs",
-    "seo_council_run_steps",
-    "seo_council_conflicts",
-    "seo_council_run_receipts",
-    "seo_council_notification_outbox",
-  ]) assert.match(deployer, new RegExp(`'${table}'`));
-  assert.match(deployer, /\$runtime->beginTransaction\(\)/);
-  assert.match(deployer, /\$runtime->rollBack\(\)/);
-  assert.match(deployer, /after\('guard:no-pending-seo-intel-migrations', 'seo:council-runtime-db-grants'\)/);
+  assert.match(deployer, /\$council->beginTransaction\(\)/);
+  assert.match(deployer, /\$council->rollBack\(\)/);
+  assert.match(deployer, /SEO_COUNCIL_RUNTIME_DB_WRITE_PRIVILEGE_MISSING/);
+  assert.match(deployer, /after\('guard:no-pending-seo-intel-migrations', 'seo:council-runtime-db-access'\)/);
 });

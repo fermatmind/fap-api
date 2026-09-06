@@ -190,10 +190,23 @@ function deploySeoIntelRuntimeEnvironment(): array
         throw new \RuntimeException('SEO_INTEL_DB_PORT is invalid.');
     }
 
+    $councilUsername = getenv('SEO_INTEL_MIGRATION_DB_USERNAME');
+    $councilPassword = getenv('SEO_INTEL_MIGRATION_DB_PASSWORD');
+    if (! is_string($councilUsername) || $councilUsername === ''
+        || ! is_string($councilPassword) || $councilPassword === ''
+        || preg_match('/[\x00\r\n]/', $councilUsername)
+        || preg_match('/[\x00\r\n]/', $councilPassword)
+        || hash_equals($values['SEO_INTEL_DB_USERNAME'], $councilUsername)) {
+        throw new \RuntimeException('SEO_COUNCIL_RUNTIME_WRITER_IDENTITY_INVALID');
+    }
+
     $values += [
         'SEO_COUNCIL_SCHEDULER_ENABLED' => 'true',
         'SEO_COUNCIL_DAILY_READ_ONLY_ENABLED' => 'true',
         'SEO_COUNCIL_RUNTIME_CACHE_STORE' => 'redis',
+        'SEO_COUNCIL_DB_CONNECTION' => 'seo_council',
+        'SEO_COUNCIL_DB_USERNAME' => $councilUsername,
+        'SEO_COUNCIL_DB_PASSWORD' => $councilPassword,
     ];
 
     return $values;
@@ -980,6 +993,9 @@ $allowed = [
     'SEO_COUNCIL_SCHEDULER_ENABLED',
     'SEO_COUNCIL_DAILY_READ_ONLY_ENABLED',
     'SEO_COUNCIL_RUNTIME_CACHE_STORE',
+    'SEO_COUNCIL_DB_CONNECTION',
+    'SEO_COUNCIL_DB_USERNAME',
+    'SEO_COUNCIL_DB_PASSWORD',
 ];
 
 if ($environmentPath === '' || $patchPath === '' || is_link($environmentPath) || ! is_file($environmentPath)) {
@@ -1125,6 +1141,11 @@ try {
         && config("seo_council.scheduler_enabled") === true
         && config("seo_council.daily_read_only_enabled") === true
         && config("seo_council.runtime_cache_store") === "redis"
+        && config("seo_council.connection") === "seo_council"
+        && (config("database.connections.seo_council.database") ?? null) === ($seo["database"] ?? null)
+        && (config("database.connections.seo_council.username") ?? null) !== ($seo["username"] ?? null)
+        && trim((string) (config("database.connections.seo_council.username") ?? "")) !== ""
+        && (string) (config("database.connections.seo_council.password") ?? "") !== ""
         && config("seo_council.model_runtime_enabled") === false
         && config("seo_council.tool_broker_enabled") === false;
     if (! $valid) {
@@ -1133,6 +1154,10 @@ try {
     $probe = Illuminate\Support\Facades\DB::connection("seo_intel")->selectOne("SELECT 1 AS probe");
     if ((int) ($probe->probe ?? 0) !== 1) {
         throw new RuntimeException("probe");
+    }
+    $councilProbe = Illuminate\Support\Facades\DB::connection("seo_council")->selectOne("SELECT 1 AS probe");
+    if ((int) ($councilProbe->probe ?? 0) !== 1) {
+        throw new RuntimeException("council_probe");
     }
     echo "SEO Intel isolated read-only runtime guard passed.\n";
 } catch (Throwable $throwable) {
@@ -1331,21 +1356,16 @@ BASH);
     });
 });
 
-task('seo:council-runtime-db-grants', function () {
+task('seo:council-runtime-db-access', function () {
     if (! deployBooleanOption('seo_council_orchestration', false)) {
-        writeln('<comment>Skip unchanged SEO Council runtime grants.</comment>');
+        writeln('<comment>Skip unchanged SEO Council runtime access probe.</comment>');
 
         return;
     }
 
-    $migration = deploySeoIntelMigrationEnvironment();
-    if ($migration === []) {
-        throw new \RuntimeException('SEO_COUNCIL_RUNTIME_DB_GRANT_AUTHORITY_UNAVAILABLE');
-    }
-
-    within('{{release_path}}/backend', function () use ($migration): void {
+    within('{{release_path}}/backend', function (): void {
         $script = <<<'PHP'
-$runtime = null;
+$council = null;
 try {
     require 'vendor/autoload.php';
     $app = require 'bootstrap/app.php';
@@ -1353,76 +1373,59 @@ try {
     $kernel->bootstrap();
 
     $connectionName = (string) config('seo_council.connection', 'seo_intel');
-    if ($connectionName !== 'seo_intel' || config('seo_intel.write_enabled') !== false) {
+    if ($connectionName !== 'seo_council' || config('seo_intel.write_enabled') !== false) {
         throw new RuntimeException('SEO_COUNCIL_RUNTIME_DB_BOUNDARY_INVALID');
     }
     $connectionConfig = config('database.connections.'.$connectionName);
     $database = is_array($connectionConfig) ? (string) ($connectionConfig['database'] ?? '') : '';
-    if (preg_match('/\A[A-Za-z0-9_]{1,64}\z/D', $database) !== 1) {
+    $seoIntelDatabase = (string) config('database.connections.seo_intel.database', '');
+    if (preg_match('/\A[A-Za-z0-9_]{1,64}\z/D', $database) !== 1
+        || ! hash_equals($seoIntelDatabase, $database)) {
         throw new RuntimeException('SEO_COUNCIL_RUNTIME_DB_BOUNDARY_INVALID');
     }
 
-    $runtime = Illuminate\Support\Facades\DB::connection($connectionName);
-    $identity = $runtime->selectOne('SELECT CURRENT_USER() AS principal');
+    $council = Illuminate\Support\Facades\DB::connection($connectionName);
+    $identity = $council->selectOne('SELECT CURRENT_USER() AS principal');
     $principal = is_object($identity) ? (string) ($identity->principal ?? '') : '';
-    if (preg_match('/\A([A-Za-z0-9_.-]{1,64})@([A-Za-z0-9.%_:-]{1,255})\z/D', $principal, $parts) !== 1) {
-        throw new RuntimeException('SEO_COUNCIL_RUNTIME_DB_BOUNDARY_INVALID');
+    if (preg_match('/\Aseo_intel_writer@[A-Za-z0-9.%_:-]{1,255}\z/D', $principal) !== 1) {
+        throw new RuntimeException('SEO_COUNCIL_RUNTIME_DB_WRITER_IDENTITY_INVALID');
     }
 
-    $username = getenv('SEO_INTEL_MIGRATION_DB_USERNAME');
-    $password = getenv('SEO_INTEL_MIGRATION_DB_PASSWORD');
-    if (! is_string($username) || $username === '' || ! is_string($password) || $password === '') {
-        throw new RuntimeException('SEO_COUNCIL_RUNTIME_DB_GRANT_AUTHORITY_UNAVAILABLE');
-    }
-    config(['database.connections.seo_council_grant' => [
-        ...$connectionConfig,
-        'username' => $username,
-        'password' => $password,
-    ]]);
-    $admin = Illuminate\Support\Facades\DB::connection('seo_council_grant');
-    $quotedPrincipal = $admin->getPdo()->quote($parts[1]).'@'.$admin->getPdo()->quote($parts[2]);
-    $tables = [
-        'seo_council_scheduler_leases',
-        'seo_council_schedule_deliveries',
-        'seo_council_schedule_receipts',
-        'seo_council_runs',
-        'seo_council_run_steps',
-        'seo_council_conflicts',
-        'seo_council_run_receipts',
-        'seo_council_notification_outbox',
-    ];
-    foreach ($tables as $table) {
-        $admin->unprepared(sprintf(
-            'GRANT SELECT, INSERT, UPDATE ON `%s`.`%s` TO %s',
-            $database,
-            $table,
-            $quotedPrincipal,
-        ));
-    }
-
-    $runtime->beginTransaction();
+    $council->beginTransaction();
     $now = now('UTC')->format('Y-m-d H:i:s');
-    $runtime->table('seo_council_scheduler_leases')->insert([
-        'lease_key' => 'deploy:grant-probe:'.bin2hex(random_bytes(12)),
+    $council->table('seo_council_scheduler_leases')->insert([
+        'lease_key' => 'deploy:access-probe:'.bin2hex(random_bytes(12)),
         'owner_token_hash' => hash('sha256', random_bytes(32)),
         'fencing_token' => 1,
         'lease_expires_at' => $now,
         'created_at' => $now,
         'updated_at' => $now,
     ]);
-    $runtime->rollBack();
-    echo "SEO Council runtime table grants verified.\n";
+    $council->rollBack();
+    echo "SEO Council isolated audit persistence access verified.\n";
     exit(0);
-} catch (Throwable) {
-    if ($runtime instanceof Illuminate\Database\ConnectionInterface && $runtime->transactionLevel() > 0) {
-        $runtime->rollBack();
+} catch (Throwable $failure) {
+    if ($council instanceof Illuminate\Database\ConnectionInterface && $council->transactionLevel() > 0) {
+        $council->rollBack();
     }
-    fwrite(STDERR, "SEO_COUNCIL_RUNTIME_DB_GRANT_FAILED\n");
+    $databaseFailure = $failure instanceof Illuminate\Database\QueryException ? $failure->getPrevious() : $failure;
+    $driverCode = $databaseFailure instanceof PDOException && is_array($databaseFailure->errorInfo)
+        ? (int) ($databaseFailure->errorInfo[1] ?? 0) : 0;
+    $reason = match (true) {
+        in_array($driverCode, [1044, 1045], true) => 'SEO_COUNCIL_RUNTIME_DB_WRITER_CREDENTIALS_INVALID',
+        in_array($driverCode, [1142, 1143], true) => 'SEO_COUNCIL_RUNTIME_DB_WRITE_PRIVILEGE_MISSING',
+        $driverCode === 1146 => 'SEO_COUNCIL_RUNTIME_DB_TABLE_MISSING',
+        in_array($driverCode, [2002, 2003, 2005, 2006], true) => 'SEO_COUNCIL_RUNTIME_DB_TRANSPORT_UNAVAILABLE',
+        $failure->getMessage() === 'SEO_COUNCIL_RUNTIME_DB_WRITER_IDENTITY_INVALID'
+            => 'SEO_COUNCIL_RUNTIME_DB_WRITER_IDENTITY_INVALID',
+        default => 'SEO_COUNCIL_RUNTIME_DB_ACCESS_FAILED',
+    };
+    fwrite(STDERR, $reason."\n");
     exit(1);
 }
 PHP;
 
-        run('{{bin/php}} -d display_errors=0 -r '.deployShellArg($script), ['env' => $migration]);
+        run('{{bin/php}} -d display_errors=0 -r '.deployShellArg($script));
     });
 });
 
@@ -4551,8 +4554,8 @@ after('artisan:migrate', 'guard:no-pending-migrations');
 after('guard:no-pending-migrations', 'career:recover-data');
 after('career:recover-data', 'artisan:migrate-seo-intel');
 after('artisan:migrate-seo-intel', 'guard:no-pending-seo-intel-migrations');
-after('guard:no-pending-seo-intel-migrations', 'seo:council-runtime-db-grants');
-after('seo:council-runtime-db-grants', 'seo:platform-10-material-backfill');
+after('guard:no-pending-seo-intel-migrations', 'seo:council-runtime-db-access');
+after('seo:council-runtime-db-access', 'seo:platform-10-material-backfill');
 after('seo:platform-10-material-backfill', 'seo:detector-foundation-receipt');
 after('seo:detector-foundation-receipt', 'artisan:scales:seed-default');
 after('artisan:scales:seed-default', 'big5:publish-private-result-authority');
