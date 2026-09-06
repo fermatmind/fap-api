@@ -947,6 +947,8 @@ task('artisan:config:cache', function () {
 task('runtime:configure-seo-intel', function (): void {
     $runtime = deploySeoIntelRuntimeEnvironment();
     $candidates = [
+        'SEO_COUNCIL_APPROVED_DB_USERNAME' => (string) (getenv('SEO_COUNCIL_DB_USERNAME') ?: ''),
+        'SEO_COUNCIL_APPROVED_DB_PASSWORD' => (string) (getenv('SEO_COUNCIL_DB_PASSWORD') ?: ''),
         'SEO_COUNCIL_RUNTIME_DB_USERNAME' => $runtime['SEO_INTEL_DB_USERNAME'],
         'SEO_COUNCIL_RUNTIME_DB_PASSWORD' => $runtime['SEO_INTEL_DB_PASSWORD'],
         'SEO_COUNCIL_MIGRATION_DB_USERNAME' => (string) (getenv('SEO_INTEL_MIGRATION_DB_USERNAME') ?: ''),
@@ -959,7 +961,8 @@ task('runtime:configure-seo-intel', function (): void {
 try {
     $dsn = sprintf('mysql:host=%s;port=%s;dbname=%s;charset=utf8mb4',
         getenv('SEO_COUNCIL_DB_HOST'), getenv('SEO_COUNCIL_DB_PORT'), getenv('SEO_COUNCIL_DB_DATABASE'));
-    foreach (['runtime' => 'SEO_COUNCIL_RUNTIME', 'migration' => 'SEO_COUNCIL_MIGRATION'] as $name => $prefix) {
+    foreach (['council' => 'SEO_COUNCIL_APPROVED', 'runtime' => 'SEO_COUNCIL_RUNTIME',
+        'migration' => 'SEO_COUNCIL_MIGRATION'] as $name => $prefix) {
         $username = getenv($prefix.'_DB_USERNAME');
         $password = getenv($prefix.'_DB_PASSWORD');
         if (! is_string($username) || $username === '' || ! is_string($password) || $password === '') {
@@ -983,7 +986,7 @@ echo "unavailable";
 exit(0);
 PHP;
     $selected = trim(run('{{bin/php}} -d display_errors=0 -r '.deployShellArg($selector), ['env' => $candidates]));
-    if (! in_array($selected, ['runtime', 'migration'], true)) {
+    if (! in_array($selected, ['council', 'runtime', 'migration'], true)) {
         $scrubber = <<<'PHP'
 $path = $argv[1] ?? '';
 $keys = ['SEO_COUNCIL_DB_CONNECTION', 'SEO_COUNCIL_DB_USERNAME', 'SEO_COUNCIL_DB_PASSWORD'];
@@ -1043,10 +1046,16 @@ PHP;
     }
     $runtime += [
         'SEO_COUNCIL_DB_CONNECTION' => 'seo_council',
-        'SEO_COUNCIL_DB_USERNAME' => $selected === 'runtime'
-            ? $candidates['SEO_COUNCIL_RUNTIME_DB_USERNAME'] : $candidates['SEO_COUNCIL_MIGRATION_DB_USERNAME'],
-        'SEO_COUNCIL_DB_PASSWORD' => $selected === 'runtime'
-            ? $candidates['SEO_COUNCIL_RUNTIME_DB_PASSWORD'] : $candidates['SEO_COUNCIL_MIGRATION_DB_PASSWORD'],
+        'SEO_COUNCIL_DB_USERNAME' => $candidates[match ($selected) {
+            'council' => 'SEO_COUNCIL_APPROVED_DB_USERNAME',
+            'runtime' => 'SEO_COUNCIL_RUNTIME_DB_USERNAME',
+            default => 'SEO_COUNCIL_MIGRATION_DB_USERNAME',
+        }],
+        'SEO_COUNCIL_DB_PASSWORD' => $candidates[match ($selected) {
+            'council' => 'SEO_COUNCIL_APPROVED_DB_PASSWORD',
+            'runtime' => 'SEO_COUNCIL_RUNTIME_DB_PASSWORD',
+            default => 'SEO_COUNCIL_MIGRATION_DB_PASSWORD',
+        }],
     ];
     $localPatch = tempnam(sys_get_temp_dir(), 'seo-intel-runtime-');
     if (! is_string($localPatch)) {

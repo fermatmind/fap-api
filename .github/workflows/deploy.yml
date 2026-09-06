@@ -507,6 +507,8 @@ jobs:
           SEO_INTEL_DB_PASSWORD: ${{ secrets.SEO_INTEL_DB_PASSWORD }}
           SEO_INTEL_MIGRATION_DB_USERNAME: ${{ secrets.SEO_INTEL_MIGRATION_DB_USERNAME }}
           SEO_INTEL_MIGRATION_DB_PASSWORD: ${{ secrets.SEO_INTEL_MIGRATION_DB_PASSWORD }}
+          SEO_COUNCIL_DB_USERNAME: ${{ secrets.SEO_COUNCIL_DB_USERNAME }}
+          SEO_COUNCIL_DB_PASSWORD: ${{ secrets.SEO_COUNCIL_DB_PASSWORD }}
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$DEPLOY_SHA"
@@ -533,6 +535,8 @@ jobs:
           SEO_INTEL_DB_PASSWORD: ${{ secrets.SEO_INTEL_DB_PASSWORD }}
           SEO_INTEL_MIGRATION_DB_USERNAME: ${{ secrets.SEO_INTEL_MIGRATION_DB_USERNAME }}
           SEO_INTEL_MIGRATION_DB_PASSWORD: ${{ secrets.SEO_INTEL_MIGRATION_DB_PASSWORD }}
+          SEO_COUNCIL_DB_USERNAME: ${{ secrets.SEO_COUNCIL_DB_USERNAME }}
+          SEO_COUNCIL_DB_PASSWORD: ${{ secrets.SEO_COUNCIL_DB_PASSWORD }}
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$DEPLOY_SHA"
@@ -1419,6 +1423,8 @@ jobs:
           SEO_INTEL_DB_PASSWORD: ${{ secrets.SEO_INTEL_DB_PASSWORD }}
           SEO_INTEL_MIGRATION_DB_USERNAME: ${{ secrets.SEO_INTEL_MIGRATION_DB_USERNAME }}
           SEO_INTEL_MIGRATION_DB_PASSWORD: ${{ secrets.SEO_INTEL_MIGRATION_DB_PASSWORD }}
+          SEO_COUNCIL_DB_USERNAME: ${{ secrets.SEO_COUNCIL_DB_USERNAME }}
+          SEO_COUNCIL_DB_PASSWORD: ${{ secrets.SEO_COUNCIL_DB_PASSWORD }}
           GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON }}
           GSC_PROPERTY_URL: ${{ secrets.SEO_INTEL_GSC_PROPERTY_URL }}
           GSC_ENABLED: ${{ vars.SEO_INTEL_GSC_ENABLED }}
