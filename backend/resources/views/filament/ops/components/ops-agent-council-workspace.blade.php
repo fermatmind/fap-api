@@ -2,14 +2,24 @@
     use App\Filament\Ops\Support\SeoAgentCouncilUiContract;
     use App\Filament\Ops\Support\SeoOperationsUiState;
 
-    $snapshot = SeoAgentCouncilUiContract::unavailableSnapshot();
-    $dailyRuntime = app(\App\Services\SeoCouncil\Platform12\Platform12RuntimeControl::class)->status();
+    try {
+        $snapshot = SeoAgentCouncilUiContract::unavailableSnapshot();
+    } catch (\Throwable) {
+        $snapshot = null;
+    }
+    try {
+        $dailyRuntime = app(\App\Services\SeoCouncil\Platform12\Platform12RuntimeControl::class)->status();
+    } catch (\Throwable) {
+        $dailyRuntime = ['state' => 'UNAVAILABLE', 'computation_enabled' => false, 'audit_enabled' => false, 'business_write_enabled' => false];
+    }
+    $roleSnapshot = app(\App\Filament\Ops\Support\SeoAgentRolePresentation::class)->snapshot();
     $copy = 'ops.custom_pages.seo_operations.agent_council';
 @endphp
 
 <section
     class="ops-agent-council"
     aria-labelledby="agent-council-title"
+    @if ($snapshot !== null)
     data-contract-state="{{ $snapshot['state'] }}"
     data-access-level="{{ $snapshot['access_level'] }}"
     data-read-only-gsc="{{ $snapshot['read_only_gsc'] ? 'true' : 'false' }}"
@@ -20,6 +30,7 @@
     data-policy-mode="{{ $snapshot['policy_mode'] }}"
     data-runtime-mode="{{ $snapshot['runtime_mode'] }}"
     data-active-manifest-count="{{ $snapshot['active_manifest_count'] }}"
+    @endif
 >
     <div class="ops-seo-section-heading">
         <div>
@@ -27,9 +38,16 @@
             <h2 id="agent-council-title">{{ __($copy.'.title') }}</h2>
             <p>{{ __($copy.'.description') }}</p>
         </div>
-        <span class="ops-tag">#11 · {{ __($copy.'.access_levels.'.$snapshot['access_level']) }}</span>
+        @if ($snapshot !== null)
+            <span class="ops-tag">#11 · {{ __($copy.'.access_levels.'.$snapshot['access_level']) }}</span>
+        @endif
     </div>
 
+    <x-filament-ops::ops-agent-role-overview :snapshot="$roleSnapshot" :runtime="$dailyRuntime" />
+
+    @if ($snapshot === null)
+        <p role="status">{{ __('seo-agent-roles.snapshot_unavailable') }}</p>
+    @else
     <div class="ops-agent-council__boundaries" aria-label="{{ __($copy.'.boundaries.label') }}">
         <span class="ops-tag">read_only_gsc=true</span>
         <span class="ops-tag">search_submission_allowed=false</span>
@@ -48,7 +66,7 @@
         <span class="ops-tag">binding=v{{ $snapshot['binding_metadata']['version'] }} · {{ $snapshot['binding_metadata']['hash'] }}</span>
     </div>
 
-    <x-filament-ops::ops-system-health-workspace />
+    <x-filament-ops::ops-system-health-workspace :runtime="$dailyRuntime" />
     <x-filament-ops::ops-trace-drilldown-workspace />
 
     <div class="ops-agent-council__layout">
@@ -103,4 +121,5 @@
     </section>
 
     <p class="ops-control-hint">{{ __($copy.'.privacy_note') }}</p>
+    @endif
 </section>

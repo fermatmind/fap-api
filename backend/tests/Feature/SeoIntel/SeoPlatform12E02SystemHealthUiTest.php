@@ -68,6 +68,20 @@ final class SeoPlatform12E02SystemHealthUiTest extends TestCase
         $this->assertFalse($snapshot['write_allowed']);
     }
 
+    public function test_health_reuses_the_provided_page_runtime_snapshot(): void
+    {
+        config()->set('seo_council.scheduler_enabled', true);
+        // The actual runtime is still disabled; a supplied UI snapshot must not be reread.
+        config()->set('seo_council.daily_read_only_enabled', false);
+        $snapshot = app(Platform12SystemHealthReadService::class)->snapshot([
+            'state' => 'ACTIVE_READ_ONLY', 'computation_enabled' => true,
+            'audit_enabled' => true, 'business_write_enabled' => false,
+        ]);
+        $this->assertSame('READY', collect($snapshot['items'])->keyBy('component')['scheduler']['state']);
+        $this->assertFalse($snapshot['write_allowed']);
+        $this->assertFalse((bool) config('seo_council.daily_read_only_enabled'));
+    }
+
     public function test_hold_and_stale_backlog_states_are_rendered_without_actions(): void
     {
         $this->insertDelivery('HELD', now()->utc());

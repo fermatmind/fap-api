@@ -42,6 +42,37 @@ final class SeoOperationsPageTest extends TestCase
         Filament::setCurrentPanel(app(PanelRegistry::class)->get('ops'));
     }
 
+    public function test_council_roles_preserve_read_and_write_access_without_execution_controls(): void
+    {
+        foreach ([PermissionNames::ADMIN_CONTENT_READ, PermissionNames::ADMIN_CONTENT_WRITE, PermissionNames::ADMIN_OWNER, PermissionNames::ADMIN_OPS_READ] as $permission) {
+            $admin = $this->createAdminWithPermissions([$permission]);
+            $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+            $context = app(OrgContext::class);
+            $context->set((int) $this->createOrganization('Council Roles')->id, (int) $admin->id, 'admin');
+            app()->instance(OrgContext::class, $context);
+
+            Livewire::test(SeoOperationsPage::class)
+                ->set('activeAutomationSection', 'agents')
+                ->set('activeWorkspace', 'automation')
+                ->assertSee('Council roles')
+                ->assertSee('Not authorized to run')
+                ->assertSee('data-role-id="career.content_agent"', false)
+                ->assertSee('data-role-id="seo.orchestrator"', false)
+                ->assertDontSee('wire:poll', false);
+        }
+    }
+
+    public function test_council_workspace_is_not_accessible_without_content_permission(): void
+    {
+        $admin = $this->createAdminWithPermissions([]);
+        $org = $this->createOrganization('Denied Council');
+        $this->withSession($this->opsSession($admin, $org))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/seo-operations?workspace=automation')
+            ->assertForbidden()
+            ->assertDontSee('data-role-id=', false);
+    }
+
     public function test_seo_operations_page_requires_org_selection(): void
     {
         $admin = $this->createAdminWithPermissions([

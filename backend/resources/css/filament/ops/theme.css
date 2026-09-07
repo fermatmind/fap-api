@@ -5973,6 +5973,54 @@
         box-shadow: var(--ops-shadow-surface);
     }
 
+    .fi-body.fi-panel-ops .ops-agent-roles__grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: .75rem;
+        margin-top: 1rem;
+        list-style: none;
+        padding: 0;
+    }
+
+    .fi-body.fi-panel-ops .ops-agent-roles__card {
+        display: flex;
+        align-items: flex-start;
+        gap: .75rem;
+        min-width: 0;
+        padding: 1rem;
+        border: 1px solid var(--ops-border-default);
+        border-radius: var(--ops-radius-card);
+        background: var(--ops-bg-surface-subtle);
+    }
+
+    .fi-body.fi-panel-ops .ops-agent-roles__avatar {
+        display: grid;
+        place-items: center;
+        flex: 0 0 2.5rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: var(--ops-radius-card);
+        background: var(--ops-bg-surface);
+        color: var(--ops-text-secondary);
+    }
+
+    .fi-body.fi-panel-ops .ops-agent-roles__avatar[data-tone="accent"] { color: var(--ops-electric); }
+    .fi-body.fi-panel-ops .ops-agent-roles__avatar[data-tone="info"] { color: var(--ops-state-info); }
+    .fi-body.fi-panel-ops .ops-agent-roles__avatar svg { width: 1.375rem; height: 1.375rem; }
+    .fi-body.fi-panel-ops .ops-agent-roles__body { min-width: 0; overflow-wrap: anywhere; }
+    .fi-body.fi-panel-ops .ops-agent-roles__body h4 { color: var(--ops-text-primary); font-weight: 600; }
+    .fi-body.fi-panel-ops .ops-agent-roles__body p { margin-top: .375rem; color: var(--ops-text-secondary); }
+    .fi-body.fi-panel-ops .ops-agent-roles__state { display: block; margin-top: .75rem; color: var(--ops-text-secondary); font-size: .75rem; }
+    .fi-body.fi-panel-ops .ops-agent-roles__body code { display: block; margin-top: .25rem; color: var(--ops-text-secondary); font-size: .6875rem; }
+
+    @media (max-width: 1024px) {
+        .fi-body.fi-panel-ops .ops-agent-roles__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 640px) {
+        .fi-body.fi-panel-ops .ops-agent-roles__grid { grid-template-columns: minmax(0, 1fr); }
+    }
+
     .fi-body.fi-panel-ops .ops-agent-council__boundaries {
         display: flex;
         flex-wrap: wrap;

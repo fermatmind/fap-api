@@ -1,9 +1,9 @@
-@props(['snapshot' => null])
+@props(['snapshot' => null, 'runtime' => null])
 
 @php
     use App\Services\SeoCouncil\Platform12\Operations\Platform12SystemHealthReadService;
 
-    $snapshot = is_array($snapshot) ? $snapshot : app(Platform12SystemHealthReadService::class)->snapshot();
+    $snapshot = is_array($snapshot) ? $snapshot : app(Platform12SystemHealthReadService::class)->snapshot($runtime);
     $copy = 'ops.custom_pages.seo_operations.system_health';
 @endphp
 

@@ -24,9 +24,10 @@ final readonly class Platform12SystemHealthReadService
     ) {}
 
     /** @return array<string, mixed> */
-    public function snapshot(): array
+    public function snapshot(?array $runtime = null): array
     {
         try {
+            $runtime ??= app(Platform12RuntimeControl::class)->status();
             $connection = DB::connection((string) config('seo_council.connection', 'seo_intel'));
             $now = CarbonImmutable::now('UTC');
             $activeLeases = $connection->table('seo_council_scheduler_leases')
@@ -38,7 +39,7 @@ final readonly class Platform12SystemHealthReadService
                 ->orderByDesc('updated_at')
                 ->first();
             try {
-                $daily = $this->dailyMissions($connection);
+                $daily = $this->dailyMissions($connection, $runtime);
             } catch (Throwable) {
                 $daily = ['runtime_state' => 'UNAVAILABLE', 'enabled' => false, 'audit_enabled' => false,
                     'business_write_enabled' => false, 'actionable_count' => null, 'items' => []];
@@ -47,7 +48,7 @@ final readonly class Platform12SystemHealthReadService
             return [...$this->projector->systemHealth([
                 'availability' => 'AVAILABLE',
                 'freshness' => 'FRESH',
-                'records' => $this->records($now, $activeLeases, $deliveryCounts, $latest, $daily),
+                'records' => $this->records($now, $activeLeases, $deliveryCounts, $latest, $daily, $runtime),
             ]), 'daily_missions' => $daily];
         } catch (Throwable) {
             return $this->unavailableSnapshot();
@@ -82,7 +83,7 @@ final readonly class Platform12SystemHealthReadService
      * @param  array<string, int>  $deliveryCounts
      * @return list<array<string, mixed>>
      */
-    private function records(CarbonImmutable $now, int $activeLeases, array $deliveryCounts, ?object $latest, array $daily): array
+    private function records(CarbonImmutable $now, int $activeLeases, array $deliveryCounts, ?object $latest, array $daily, array $control): array
     {
         $schedulerEnabled = (bool) config('seo_council.scheduler_enabled', false);
         $activeDeliveries = $this->sumStates($deliveryCounts, self::ACTIVE_DELIVERY_STATES);
@@ -95,7 +96,6 @@ final readonly class Platform12SystemHealthReadService
             $activeLeases + $activeDeliveries === 0 => 'VALID_ZERO',
             default => 'READY',
         };
-        $control = app(Platform12RuntimeControl::class)->status();
         $runtimeState = ! $schedulerEnabled ? 'DISABLED'
             : ($control['computation_enabled'] ? 'READY' : 'HOLD');
         $freshnessState = match (true) {
@@ -160,9 +160,8 @@ final readonly class Platform12SystemHealthReadService
         return app(Platform12RuntimeControl::class)->businessGuardsClosed();
     }
 
-    private function dailyMissions(ConnectionInterface $connection): array
+    private function dailyMissions(ConnectionInterface $connection, array $runtime): array
     {
-        $runtime = app(Platform12RuntimeControl::class)->status();
         $latest = $connection->table('seo_council_schedule_deliveries')
             ->selectRaw('MAX(id) AS id')->whereIn('mission_id', Platform12DailyMissionSet::IDS)->groupBy('mission_id');
         $rows = $connection->table('seo_council_schedule_deliveries AS d')
