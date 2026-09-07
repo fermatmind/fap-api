@@ -966,6 +966,12 @@ task('artisan:config:cache', function () {
 });
 
 task('runtime:configure-seo-intel', function (): void {
+    if (deploySkipsAuthorityMutations()) {
+        writeln('<comment>Skipping SEO Intel runtime configuration for a non-authority deployment.</comment>');
+
+        return;
+    }
+
     $runtime = deploySeoIntelRuntimeEnvironment();
     $expectedWriter = match (currentHost()->getAlias()) {
         'staging' => 'seo_intel_staging_writer',
@@ -1299,6 +1305,12 @@ BASH);
 });
 
 task('crawler:configure-aggregate-runtime', function () {
+    if (deploySkipsAuthorityMutations()) {
+        writeln('<comment>Skipping crawler aggregate runtime configuration for a non-authority deployment.</comment>');
+
+        return;
+    }
+
     if (currentHost()->getAlias() !== 'production') {
         writeln('<comment>Skipping crawler aggregate runtime configuration outside production.</comment>');
 

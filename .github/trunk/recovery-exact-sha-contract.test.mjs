@@ -3,6 +3,15 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 
 const recovery = readFileSync(new URL("../workflows/recovery.yml", import.meta.url), "utf8");
+const deployer = readFileSync(new URL("../../deploy.php", import.meta.url), "utf8");
+
+function taskBody(name) {
+  const start = deployer.indexOf(`task('${name}'`);
+  const next = deployer.indexOf("\ntask('", start + 1);
+
+  assert.notEqual(start, -1);
+  return deployer.slice(start, next === -1 ? undefined : next);
+}
 
 test("exact-SHA recovery remains usable when the active symlink is unreadable", () => {
   const caseStart = recovery.indexOf('case "$MODE" in');
@@ -18,4 +27,9 @@ test("exact-SHA recovery remains usable when the active symlink is unreadable", 
   assert.match(beforeExact, /lkg\)[\s\S]*current\/REVISION/);
   assert.doesNotMatch(exact, /current\/REVISION|active=/);
   assert.match(exact, /deploy:code-only production/);
+});
+
+test("code-only recovery skips runtime authority configuration hooks", () => {
+  assert.match(taskBody("crawler:configure-aggregate-runtime"), /deploySkipsAuthorityMutations\(\)/);
+  assert.match(taskBody("runtime:configure-seo-intel"), /deploySkipsAuthorityMutations\(\)/);
 });
