@@ -111,3 +111,20 @@ test('real source artifacts retain business HOLD while fixtures and forged termi
   assert.throws(()=>bindControlled(manifest,seal({...terminalBody,...extra}),artifact),/CONTROLLED/);
  }
 });
+
+
+test('mixed content release retains its gates without invoking old Council ingestion for A08',()=>{
+ const wiring='backend/app/Services/SeoCouncil/Platform12/Platform12ProductionEvidenceReader.php';
+ const mixed=[wiring,'backend/database/migrations/2026_09_07_160000_publish_assessment_landing_en.php','backend/database/data/assessment_landing_en_20260907.json','.github/workflows/deploy.yml'];
+ const result=classifyPaths(mixed);
+ assert.equal(result.operations.a08_gate_only,false);
+ assert.equal(result.operations.a08_readonly_wiring,true);
+ assert.equal(result.operations.a08_scoped_checks,true);
+ assert.equal(result.operations.seo_council_orchestration,true);
+ assert.equal(result.flags.backward_compatible_migration,true);
+ for(const path of ['backend/app/Services/SeoCouncil/Measurement/ReadOnlyMeasurementEvidenceBundleLoader.php','backend/routes/api.php','backend/app/Services/SeoCouncil/Platform12/Platform12ModelRuntime.php']) {
+  assert.equal(classifyPaths([...mixed,path]).operations.a08_readonly_wiring,false);
+ }
+ const deploy=readFileSync(new URL('../workflows/deploy.yml',import.meta.url),'utf8');
+ assert.match(deploy,/and \.classification\.operations\.a08_readonly_wiring != true/);
+});

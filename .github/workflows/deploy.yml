@@ -337,6 +337,7 @@ jobs:
             .classification.operations.seo_council_orchestration == true
             and .classification.operations.seo_ops_presentation_only != true
             and .classification.operations.a08_gate_only != true
+            and .classification.operations.a08_readonly_wiring != true
           ' "$receipt")"
           seo_competitive_evidence="$(jq -r '.classification.operations.seo_competitive_evidence == true' "$receipt")"
           private_result_authority_publish_required="$(jq -r '
