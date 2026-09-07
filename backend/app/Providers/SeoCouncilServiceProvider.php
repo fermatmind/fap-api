@@ -69,7 +69,11 @@ final class SeoCouncilServiceProvider extends ServiceProvider
         $this->app->singleton(DisabledSeoCouncilModelClient::class);
         $this->app->singleton(HttpSeoCouncilModelClient::class);
         $this->app->singleton(FakeSeoCouncilModelClient::class);
-        $this->app->bind(Platform12NotificationTransport::class, OpsAlertNotificationTransport::class);
+        $this->app->bind(Platform12NotificationTransport::class, static fn ($app) => match (config('seo_council_mail.channel', 'webhook')) {
+            'webhook' => $app->make(OpsAlertNotificationTransport::class),
+            'email' => $app->make(\App\Services\SeoCouncil\Platform12\Notification\Platform12MailNotificationTransport::class),
+            default => throw new \RuntimeException('NOTIFICATION_CHANNEL_INVALID'),
+        });
         $this->app->singleton(
             SeoCouncilModelClient::class,
             static function ($app): SeoCouncilModelClient {

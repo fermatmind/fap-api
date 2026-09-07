@@ -220,7 +220,7 @@ final readonly class Platform12NotificationOutbox
                 $updated === 1 ? 'DELIVERED' : 'DELIVERY_STATE_LOST',
                 $missionVerdict,
             );
-        } catch (\Illuminate\Http\Client\ConnectionException|\Illuminate\Http\Client\RequestException) {
+        } catch (Platform12DeliveryAcknowledgementUnknown|\Illuminate\Http\Client\ConnectionException|\Illuminate\Http\Client\RequestException) {
             $connection->table('seo_council_notification_outbox')
                 ->where('notification_id', $notificationId)->where('lease_token_hash', $dispatchHash)
                 ->update(['status' => 'failed', 'last_error_code' => 'DELIVERY_ACK_UNKNOWN',

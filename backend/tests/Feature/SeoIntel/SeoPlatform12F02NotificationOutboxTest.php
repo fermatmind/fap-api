@@ -213,6 +213,49 @@ final class SeoPlatform12F02NotificationOutboxTest extends TestCase
         $this->assertCount(0, $this->transport->deliveries);
     }
 
+    public function test_mail_unknown_acknowledgement_is_terminal_and_does_not_retry(): void
+    {
+        $this->app->instance(Platform12NotificationTransport::class, new class implements Platform12NotificationTransport
+        {
+            public function send(string $notificationId, array $sanitizedPayload): void
+            {
+                throw new \App\Services\SeoCouncil\Platform12\Notification\Platform12DeliveryAcknowledgementUnknown;
+            }
+        });
+        $outbox = app(Platform12NotificationOutbox::class);
+        $outbox->enqueue($this->classification('mail-unknown'), 'failed', 'HOLD');
+        $claim = $outbox->claim('worker:mail:unknown');
+        $result = $outbox->dispatch($claim['claim'], 'HOLD');
+        $this->assertSame('DELIVERY_ACK_UNKNOWN', $result['reason_code']);
+        $this->assertSame('HOLD', $result['mission_verdict']);
+        $this->assertSame('failed', DB::connection('seo_intel')->table('seo_council_notification_outbox')->value('status'));
+        $this->assertSame('EMPTY', $outbox->claim('worker:mail:retry')['status']);
+    }
+
+    public function test_paused_daily_runtime_does_not_dispatch_mail_or_consume_pending_event(): void
+    {
+        config()->set(['seo_council.daily_read_only_enabled' => true, 'seo_council.scheduler_enabled' => false]);
+        $outbox = app(Platform12NotificationOutbox::class);
+        $outbox->enqueue($this->classification('paused-mail'), 'failed', 'HOLD');
+        $claim = $outbox->claim('worker:mail:paused');
+        $this->assertSame('DISABLED', $outbox->dispatch($claim['claim'], 'HOLD')['status']);
+        $this->assertCount(0, $this->transport->deliveries);
+    }
+
+    public function test_mail_accepted_then_database_failure_never_becomes_retry(): void
+    {
+        $outbox = app(Platform12NotificationOutbox::class);
+        $outbox->enqueue($this->classification('mail-persistence'), 'failed', 'HOLD');
+        $claim = $outbox->claim('worker:mail:persistence');
+        $this->assertSame('EMPTY', $outbox->claim('worker:mail:competing')['status']);
+        DB::connection('seo_intel')->unprepared("CREATE TRIGGER fail_sent BEFORE UPDATE ON seo_council_notification_outbox WHEN NEW.status = 'sent' BEGIN SELECT RAISE(ABORT, 'test rollback'); END");
+        $result = $outbox->dispatch($claim['claim'], 'HOLD');
+        $this->assertSame('DELIVERY_ACK_UNKNOWN', $result['reason_code']);
+        $this->assertSame('HOLD', $result['mission_verdict']);
+        $this->assertCount(1, $this->transport->deliveries);
+        $this->assertSame('EMPTY', $outbox->claim('worker:mail:after-failure')['status']);
+    }
+
     /** @return array<string, mixed> */
     private function classification(string $suffix): array
     {
