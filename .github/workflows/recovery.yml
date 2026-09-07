@@ -70,13 +70,15 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          active="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'")"
-          [[ "$active" =~ ^[0-9a-f]{40}$ ]]
           case "$MODE" in
             diagnose)
+              active="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'")"
+              [[ "$active" =~ ^[0-9a-f]{40}$ ]]
               echo "Active revision is a valid exact SHA; no write performed."
               ;;
             lkg)
+              active="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'")"
+              [[ "$active" =~ ^[0-9a-f]{40}$ ]]
               export DEPLOY_SHA="$active"
               php /tmp/dep.phar rollback production -f deploy.php --no-interaction
               ;;
