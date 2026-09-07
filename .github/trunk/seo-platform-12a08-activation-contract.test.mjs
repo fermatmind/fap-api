@@ -40,21 +40,14 @@ test("compatibility scope is conservative and carry-forward requires identical f
   assert.equal(mayCarry(manifest, { fingerprint: fp, version_vector: { role: "0".repeat(64) }, production_sha: "f".repeat(40) }), false);
 });
 
-test("deploy uses one workflow for CI release and Nightly activation with no manual entry", () => {
+test("deploy keeps A08 activation and controlled acceptance disabled for CI and Nightly", () => {
   const deploy = readFileSync(new URL("../workflows/deploy.yml", import.meta.url), "utf8");
   assert.match(deploy, /workflows: \[CI, Nightly\]/);
   assert.doesNotMatch(deploy, /workflow_dispatch:/);
-  assert.match(deploy, /council-a08-activation:/);
-  assert.match(deploy, /pause_intent/);
-  assert.match(deploy, /verify-nightly/);
-  assert.match(deploy, /A08_SOURCE_ACCEPTANCE_HOLD/);
-  assert.match(deploy, /status,mission_id,terminal_committed,mission_verdict,source_gaps/);
-  const stagingAcceptance = deploy.split("- name: Validate three A08 sources through controlled read-only Missions")[1].split("shell: bash")[0];
-  const activationJob = deploy.split("  council-a08-activation:")[1].split("    runs-on:")[0];
-  for (const disabledEntry of [stagingAcceptance, activationJob]) {
-    assert.match(disabledEntry, /if: \$\{\{ false \}\}/);
-    assert.equal((disabledEntry.match(/\bif:/g) ?? []).length, 1);
-  }
+  assert.doesNotMatch(deploy, /council-a08-activation:/);
+  assert.doesNotMatch(deploy, /Validate three A08 sources through controlled read-only Missions/);
+  assert.doesNotMatch(deploy, /seo:council-runtime resume|seo:council-scheduled --acceptance/);
+  assert.doesNotMatch(deploy, /artifacts\/seo-council-a08/);
   assert.match(deploy, /production_council_closeout=false/);
   assert.match(deploy, /-o seo_council_orchestration="\$production_council_closeout"/);
   assert.match(deploy, /Read production SEO Council closeout receipt\n\s+if: [^\n]+seo_council_orchestration == 'true' && needs\.policy\.outputs\.seo_competitive_evidence == 'true'/);

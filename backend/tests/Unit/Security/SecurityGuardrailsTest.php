@@ -392,8 +392,9 @@ final class SecurityGuardrailsTest extends TestCase
         $this->assertIsString($deploy);
         $this->assertStringContainsString('workflows: [CI, Nightly]', $deploy);
         $this->assertStringContainsString("github.event.workflow_run.name == 'CI'", $deploy);
-        $activationJob = explode('    runs-on:', explode('  council-a08-activation:', $deploy, 2)[1], 2)[0];
-        $this->assertStringContainsString('if: ${{ false }}', $activationJob);
+        $this->assertStringNotContainsString('council-a08-activation:', $deploy);
+        $this->assertStringNotContainsString('seo:council-runtime resume', $deploy);
+        $this->assertStringNotContainsString('seo:council-scheduled --acceptance', $deploy);
         $this->assertIsString($deployer);
         $this->assertStringNotContainsString('GRANT SELECT, INSERT, UPDATE ON', $deployer);
         $this->assertStringNotContainsString('GRANT ALL', $deployer);
