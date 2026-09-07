@@ -69,3 +69,11 @@ test('Current package body digests may change while schema, authority and identi
  const body=structuredClone(manifest);body.aggregate_sha256='new';body.files[0].sha256='new';body.files[0].bytes=2;body.set_hashes.source_semantic_aggregate_sha256='new';
  assert.deepEqual(contentIdentity(manifest,true),contentIdentity(body,true));body.files[0].canonical_slug='two';assert.notDeepEqual(contentIdentity(manifest,true),contentIdentity(body,true));
 });
+test('staging read-only transport uses the existing host identity instead of the repository agent key',()=>{
+ const root=mkdtempSync(`${tmpdir()}/a08-ssh-`);
+ try {
+  const ssh=`#!/bin/sh\nfound=false\nfor arg do test "$arg" != fixture-host-key || found=true; done\n$found || exit 73\ncat >/dev/null\nprintf '{}\\n'\n`;
+  writeFileSync(`${root}/ssh`,ssh,{mode:0o755});
+  execFileSync('bash',['backend/scripts/deploy/seo_a08_transport.sh','state',`${root}/state.json`],{env:{...process.env,PATH:`${root}:${process.env.PATH}`,TARGET:'staging',DEPLOY_IDENTITY_FILE_STG:'fixture-host-key',DEPLOY_PATH:'/fixture',DEPLOY_PORT:'22',DEPLOY_USER:'fixture',DEPLOY_HOST:'example.test',A08_GATE_ONLY:'true'}});
+ }finally{rmSync(root,{recursive:true,force:true});}
+});

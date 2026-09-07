@@ -5,6 +5,9 @@ mode="${1:?}"; output="${2:?}"
 [[ "$mode" = state || "$mode" = install ]]
 printf -v q_path '%q' "$DEPLOY_PATH"
 ssh_args=(-o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o ServerAliveInterval=15 -o ServerAliveCountMax=4 -p "$DEPLOY_PORT")
+if [[ "${TARGET:?}" = staging ]]; then
+  ssh_args+=(-o IdentitiesOnly=yes -i "${DEPLOY_IDENTITY_FILE_STG:?}")
+fi
 identity=()
 if [[ "${TARGET:?}" = production ]]; then identity=(sudo -n -u www-data --); fi
 printf -v identity_cmd '%q ' "${identity[@]}"
