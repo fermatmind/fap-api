@@ -758,6 +758,9 @@ final class ScaleRegistrySeeder extends Seeder
         $entryPackage = json_decode(file_get_contents(database_path('data/assessment_entry_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
         $attributes['content_i18n_json']['zh']['landing_entry'] = $entryPackage['scales'][$attributes['code']]['landing_entry'];
 
+        $english = json_decode(file_get_contents(database_path('data/assessment_landing_en_20260907.json')), true, 512, JSON_THROW_ON_ERROR);
+        $attributes['content_i18n_json']['en'] = array_replace($attributes['content_i18n_json']['en'] ?? [], $english['scales'][$attributes['code']]['content']);
+
         return DB::transaction(function () use ($writer, $attributes) {
             $published = [];
             foreach (['scales_registry', 'scales_registry_v2'] as $table) {
@@ -766,9 +769,11 @@ final class ScaleRegistrySeeder extends Seeder
                 }
                 $row = DB::table($table)->where('org_id', 0)->where('code', $attributes['code'])->lockForUpdate()->first();
                 $content = json_decode($row->content_i18n_json ?? '{}', true, 512, JSON_THROW_ON_ERROR);
-                foreach (['faq', 'why_choose', 'version_comparison', 'landing_entry'] as $key) {
-                    if (array_key_exists($key, $content['zh'] ?? [])) {
-                        $published[$table][$key] = $content['zh'][$key];
+                foreach (['zh', 'en'] as $locale) {
+                    foreach (['faq', 'why_choose', 'version_comparison', 'landing_entry'] as $key) {
+                        if (array_key_exists($key, $content[$locale] ?? [])) {
+                            $published[$table][$locale][$key] = $content[$locale][$key];
+                        }
                     }
                 }
             }
@@ -776,8 +781,10 @@ final class ScaleRegistrySeeder extends Seeder
             foreach ($published as $table => $fields) {
                 $row = DB::table($table)->where('org_id', 0)->where('code', $attributes['code'])->first();
                 $content = json_decode($row->content_i18n_json, true, 512, JSON_THROW_ON_ERROR);
-                foreach ($fields as $key => $value) {
-                    $content['zh'][$key] = $value;
+                foreach ($fields as $locale => $localizedFields) {
+                    foreach ($localizedFields as $key => $value) {
+                        $content[$locale][$key] = $value;
+                    }
                 }
                 DB::table($table)->where('org_id', 0)->where('code', $attributes['code'])->update([
                     'content_i18n_json' => json_encode($content, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
@@ -796,6 +803,9 @@ final class ScaleRegistrySeeder extends Seeder
 
         $entryPackage = json_decode(file_get_contents(database_path('data/assessment_entry_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
         $attributes['content_i18n_json']['zh']['landing_entry'] = $entryPackage['scales'][$attributes['code']]['landing_entry'];
+
+        $english = json_decode(file_get_contents(database_path('data/assessment_landing_en_20260907.json')), true, 512, JSON_THROW_ON_ERROR);
+        $attributes['content_i18n_json']['en'] = array_replace($attributes['content_i18n_json']['en'] ?? [], $english['scales'][$attributes['code']]['content']);
 
         return DB::transaction(function () use ($writer, $attributes) {
             $published = [];

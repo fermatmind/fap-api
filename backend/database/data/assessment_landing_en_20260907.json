@@ -1,0 +1,2386 @@
+{
+  "source_commit": "25ccf135192f923f99a6525c95be0e0f9a909cf4",
+  "source_locale": "zh",
+  "locale": "en",
+  "scales": {
+    "MBTI": {
+      "slug": "mbti-personality-test-16-personality-types",
+      "source_zh": {
+        "why_choose": {
+          "title": "为什么选择费马 MBTI 测试？",
+          "intro": "费马提供两种 MBTI 题量选择，并把免费结果、偏好解释、方法说明与后续探索入口放在同一条阅读路径中。你可以先比较版本，完成测试，再结合真实经历理解结果。",
+          "items": [
+            {
+              "title": "理解 MBTI，从有依据的方法开始",
+              "body": "费马 MBTI 测试提供 E/I、S/N、T/F、J/P 四组核心偏好的解释，并提供方法与证据说明入口。你可以核对题目所观察的偏好，以及结果适合怎样使用。\n\n方法说明区分人格模型与具体题本：外部研究用于理解 MBTI，本站版本的测量质量仍需对应验证支持。有关信度、效度和使用边界的详细解释见下方常见问题。",
+              "link": {
+                "label": "了解测量证据与使用边界",
+                "href": "#faq-validity"
+              },
+              "id": "method"
+            },
+            {
+              "id": "mbti-scoring-method",
+              "title": "偏好百分比怎样计算：定向、聚合与线性映射",
+              "body": "后端先把五点作答映射到 −2 至 2，再按题目方向与对应偏好极统一符号。设某轴 n 题定向后的分数之和为 S，则第一极展示比例 P = round[100 × (S + 2n) ÷ (4n)]；第二极为 100 − P。当前基础算法等权聚合；兼容的加权计分版本使用 P = round[50 + 25 × Σ(w × x) ÷ Σw]，以该次计分版本为准。\n\n例如某轴有 10 题、定向分数之和为 8，则第一极比例为 70、第二极为 30。70 表示回答在该偏好轴上的位置，不是人群百分位、能力水平或类型准确率。这里的定向分数 x 已包含正反向处理，不能直接用选项字母求和。",
+              "link": {
+                "label": "查看计分方法问答",
+                "href": "#faq-mbti-calculation"
+              }
+            },
+            {
+              "id": "mbti-type-method",
+              "title": "四字母怎样生成：阈值、接近中点与附加轴",
+              "body": "E/I、S/N、T/F、J/P 四轴分别比较两极，再组合成四字母类型。50 是轴的中点；恰好并列时采用该计分版本的预设规则，因此接近中点的小变化可能改变字母，而不代表人格突然转变。后端兼容版本还用 2 × |P − 50| 表示偏好清晰度，它不是统计置信概率。\n\n若结果包含 A/T，它属于本站的附加描述轴，不是经典 MBTI 四轴之一。确定性的转换公式可以复算，但不能替代题本在目标人群中的信度、效度和跨版本可比性研究；也不能把其他官方产品的验证结论直接套用于本测试。",
+              "link": {
+                "label": "查看计分方法问答",
+                "href": "#faq-mbti-calculation"
+              }
+            },
+            {
+              "title": "围绕偏好结构解读，而不止于 MBTI 类型名称",
+              "body": "费马的结果阅读路径从类型概览延伸到四组核心偏好解释，并配有结果阅读指南。你可以逐项观察信息获取、决策与生活安排的习惯，再用自己的经历核对描述。\n\n例如，得到 I 后可以回顾自己是否偏好先独立整理想法；这个字母并不等于不善表达。具体维度与例子帮助你理解结果，而不是仅记住一个类型名称。",
+              "link": {
+                "label": "了解四组偏好与结果解读",
+                "href": "/zh/articles/mbti-full-report-career-relationship-communication"
+              },
+              "id": "interpretation"
+            },
+            {
+              "title": "让探索延伸到职业、学习与关系",
+              "body": "本页提供职业方向、专业选择与团队协作等探索入口，还可继续阅读职业档案与相关指南。测试之后，你可以把感兴趣的偏好对应到岗位任务、学习安排或沟通情境。\n\n这些入口帮助你形成可检验的问题，例如自己是否喜欢阶段目标清晰的任务。是否适合一份工作仍需结合兴趣、技能与实际体验，类型不替你决定职业。",
+              "link": {
+                "label": "继续探索职业与生活应用",
+                "href": "#use-in-life"
+              },
+              "id": "applications"
+            },
+            {
+              "title": "93 题与 144 题：不同投入，同一套核心偏好框架",
+              "body": "两种版本使用同一套核心偏好与报告解释框架，你可以按可用时间和愿意投入的作答量选择。下面的对照表说明当前版本的共同点与差异。",
+              "link": {
+                "label": "选择适合你的测试版本",
+                "href": "#choose-version"
+              },
+              "id": "versions"
+            },
+            {
+              "title": "容易开始，也有清晰的下一步",
+              "body": "费马当前两种版本均提供免费测试与结果入口，开始前即可查看题量和预计用时。完成后可查看类型、核心偏好解释与后续探索建议，具体范围见免费结果问答。\n\n你可以选择一条与自己有关的偏好，结合一次会议、一周学习安排或一段沟通经历进行观察，再回到指南继续阅读。",
+              "link": {
+                "label": "查看免费结果范围",
+                "href": "#faq-free"
+              },
+              "id": "free-results"
+            }
+          ]
+        },
+        "version_comparison": {
+          "caption": "费马 MBTI 93 题与 144 题版本对照",
+          "columns": [
+            "比较项目",
+            "93 题快速版",
+            "144 题深度版"
+          ],
+          "rows": [
+            [
+              "题量",
+              "93 题",
+              "144 题"
+            ],
+            [
+              "预计用时",
+              "约 10 分钟",
+              "约 15 分钟"
+            ],
+            [
+              "题目关系",
+              "从当前 144 题题本中选取 93 个条目",
+              "包含快速版条目，另有 51 个条目"
+            ],
+            [
+              "结果范围",
+              "免费查看类型、核心偏好解释与后续探索建议",
+              "免费查看类型、核心偏好解释与后续探索建议"
+            ],
+            [
+              "适合场景",
+              "可用时间较短，希望先完成一次自我观察",
+              "愿意投入更多时间，对更多行为描述作答"
+            ]
+          ],
+          "note": "预计用时仅供参考。更多题目不自动等于更高准确率；两版的测量质量需要对应证据验证。"
+        },
+        "faq": [
+          {
+            "q": "MBTI 测试免费吗？免费结果包含哪些内容？",
+            "a": "费马当前的 93 题和 144 题 MBTI 测试均可免费完成，并查看 16 型人格结果、四组核心偏好解释与后续探索建议。当前测试及结果入口没有报告解锁费用。\n\n这里的免费范围指费马本页提供的测试与结果，不代表其他平台、官方 MBTI 测评或人工咨询服务也免费。开始前可查看版本和预计用时；完成后先阅读结果概览，再按需要进入结果指南与职业探索内容。",
+            "id": "faq-free",
+            "references": [],
+            "related_links": [
+              {
+                "label": "费马测试 · 当前版本与开始入口",
+                "href": "#choose-version"
+              }
+            ]
+          },
+          {
+            "q": "MBTI 完整结果怎么看？四个字母分别代表什么？",
+            "a": "MBTI 的四个字母分别来自四组偏好：E/I 关注注意力与互动取向，S/N 关注信息获取方式，T/F 关注决策时的侧重，J/P 关注组织外部生活的方式。四组组合形成 16 种类型代码，但四个字母不能概括一个人的全部经历、能力与价值观。\n\n建议按“类型概览—维度解释—现实例子—行动尝试”的顺序阅读。比如，看见 I 时可以回顾自己是否更喜欢先独立整理想法，而不是直接得出“不善社交”的结论；看见 F 也不能推断逻辑能力较弱。如果报告显示分数，应依据本站该指标的定义解读，不能自行把它当作能力百分位、诊断概率或未来成功率。",
+            "id": "faq-results",
+            "references": [
+              {
+                "label": "The Myers-Briggs Company · MBTI Facts",
+                "href": "https://www.themyersbriggs.com/en-US/Support/MBTI-Facts"
+              }
+            ],
+            "related_links": [
+              {
+                "label": "费马测试 · MBTI 结果阅读指南",
+                "href": "/zh/articles/mbti-full-report-career-relationship-communication"
+              }
+            ]
+          },
+          {
+            "q": "MBTI 测试一般多久？93 题和 144 题怎么选？",
+            "a": "费马 93 题快速版预计约 10 分钟，144 题深度版预计约 15 分钟。优先选择你能专注完成的版本：时间较少可选 93 题，愿意对更多行为描述作答可选 144 题。题目更多不能直接证明结果更准确。\n\n两版沿用相同的核心偏好与报告解释框架，详细题量、题目关系和结果范围见版本对照表。预计用时不是限时要求，阅读速度、思考习惯和中途干扰都会影响实际时间。\n\n作答时以平时自然的反应为依据，不要按理想中的自己反推答案。两版的信度、效度需要各自的验证证据；比较两次结果时尽量使用同一版本，并记录当时的情境，不把跨版本差异全部解释为人格变化。",
+            "id": "faq-versions",
+            "references": [],
+            "related_links": [
+              {
+                "label": "93 题与 144 题版本对照",
+                "href": "#version-comparison"
+              },
+              {
+                "label": "费马测试 · 当前版本与开始入口",
+                "href": "#choose-version"
+              },
+              {
+                "label": "费马测试 · 信度效度说明",
+                "href": "/zh/reliability-validity"
+              }
+            ]
+          },
+          {
+            "q": "MBTI 测试科学吗、准吗？应该看哪些证据？",
+            "a": "判断 MBTI 测试是否可靠，需要区分测量是否稳定、测到了什么，以及是否适合你的用途。信度关注测量的一致性；效度关注对分数的某种解释或使用是否有证据支持。“读起来很像我”可以成为自我观察的起点，但不能单独证明量表具备心理测量学质量。\n\n类型边界也存在研究争议。McCrae 与 Costa 的研究没有支持把 MBTI 偏好理解为彼此截然分开的类别，同时发现其维度与五因素人格中的部分维度相关。这意味着类型标签应谨慎使用，尤其不能把边界附近的细小分数差异夸大为两种完全不同的人。\n\n评估本站或其他在线版本时，应查看对应题本、语言、样本、计分方法、重测研究和验证用途。官方 MBTI 工具的研究不能自动证明所有同名在线测试有效；本页不以其他版本的数据承诺本站“准确率”，也不把类型结果用于能力排名或诊断。",
+            "id": "faq-validity",
+            "references": [
+              {
+                "label": "McCrae & Costa（1989）· 类型与五因素模型研究",
+                "href": "https://pubmed.ncbi.nlm.nih.gov/2709300/"
+              },
+              {
+                "label": "The Myers-Briggs Company · MBTI Facts",
+                "href": "https://www.themyersbriggs.com/en-US/Support/MBTI-Facts"
+              }
+            ],
+            "related_links": [
+              {
+                "label": "费马测试 · 信度效度说明",
+                "href": "/zh/reliability-validity"
+              }
+            ]
+          },
+          {
+            "q": "MBTI 能决定职业、专业或招聘结果吗？",
+            "a": "不能仅凭 MBTI 类型决定职业、专业或录用。它可以帮助讨论偏好的沟通方式、决策习惯与工作环境，但岗位胜任还涉及专业知识、技能、兴趣、价值观、训练机会和现实条件。某类人在某种职业中较常见，也不意味着其他类型无法胜任，或属于该类型的人一定适合。\n\n更实用的做法是把人格结果转成待验证的问题：我偏好独立分析还是频繁协作？喜欢清晰流程还是开放探索？再通过岗位任务、作品练习、实习或从业者访谈检验。职业兴趣可以配合 RIASEC 作为另一种观察视角。Myers & Briggs Foundation 明确指出 MBTI 不应被用于招聘筛选；不宜据此淘汰求职者、限制专业选择或承诺职业成功。",
+            "id": "faq-career",
+            "references": [
+              {
+                "label": "Myers & Briggs Foundation · 使用伦理",
+                "href": "https://www.myersbriggs.org/unique-features-of-myers-briggs/ethical-use-of-the-mbti/"
+              }
+            ],
+            "related_links": [
+              {
+                "label": "费马测试 · 职业探索",
+                "href": "/zh/career"
+              }
+            ]
+          },
+          {
+            "q": "MBTI 是心理诊断吗？能判断抑郁、焦虑或人格障碍吗？",
+            "a": "MBTI 不是心理诊断工具，不能凭类型判断抑郁、焦虑或人格障碍。它讨论人格偏好，临床评估则需要围绕症状、持续时间、生活功能、个人经历及其他可能原因进行专业判断。内向不等于社交焦虑，偏好计划不等于强迫症，情感取向也不等于情绪不稳定。\n\n因此，不应把一个类型当成病名，也不应把结果用于决定是否治疗、选择药物或停止已有治疗。如果情绪、睡眠或行为问题持续影响学习、工作与关系，应咨询合格的心理健康专业人员。MBTI 最多可以提供谈论日常习惯的词汇，不能替代诊断和个体化专业意见。",
+            "id": "faq-diagnosis",
+            "references": [
+              {
+                "label": "The Myers-Briggs Company · MBTI Facts",
+                "href": "https://www.themyersbriggs.com/en-US/Support/MBTI-Facts"
+              },
+              {
+                "label": "NIMH · 心理健康与何时寻求帮助",
+                "href": "https://www.nimh.nih.gov/health/topics/caring-for-your-mental-health"
+              }
+            ],
+            "related_links": [
+              {
+                "label": "费马测试 · 方法边界",
+                "href": "/zh/method-boundaries"
+              }
+            ]
+          },
+          {
+            "q": "为什么两次 MBTI 结果不同？16 型人格会变化吗？",
+            "a": "两次测得的类型不同，不足以证明整个人格发生了彻底改变。自评问卷反映你对题目的理解和当时的作答；测试版本、语言、作答环境与对自身经历的回忆都可能影响结果。若某个维度接近分类边界，较小的分数波动也可能改变一个字母，因此应先看具体维度，而不是只比较类型名称。\n\n复盘时可以记录两次使用的版本、间隔和变化的维度，再寻找近期生活中的具体行为例子。人的行为与习惯也可能随学习和环境改变，但仅凭两个标签无法区分真实变化与测量波动。不建议反复作答直到得到喜欢的类型；更有价值的是确认哪些描述持续适用，哪些需要结合场景修正。",
+            "id": "faq-result-changes",
+            "references": [
+              {
+                "label": "McCrae & Costa（1989）· 类型与五因素模型研究",
+                "href": "https://pubmed.ncbi.nlm.nih.gov/2709300/"
+              },
+              {
+                "label": "Myers & Briggs Foundation · 使用伦理",
+                "href": "https://www.myersbriggs.org/unique-features-of-myers-briggs/ethical-use-of-the-mbti/"
+              }
+            ],
+            "related_links": []
+          },
+          {
+            "q": "MBTI 和大五人格有什么区别？可以相互换算吗？",
+            "a": "MBTI 通常用四组偏好组合成类型代码；大五人格以外向性、宜人性、尽责性、负性情绪或神经质、开放性等连续维度描述个体差异。以 BFI-2 为例，其结构包含五个领域和十五个更具体的侧面，强调同一维度上不同程度的差异。\n\n两类模型并非毫无关联，但相关不等于能够一一换算。不能仅凭 INFP 等代码推算大五分数，也不能把大五某个维度简单翻译为一个 MBTI 字母。若想用便于记忆的语言开启自我讨论，可以阅读类型解释；若想更细致地描述程度差异，可以参考经过相应人群验证的连续特质测量。两者都应结合行为证据，不能替代诊断或直接给出职业结论。",
+            "id": "faq-big-five",
+            "references": [
+              {
+                "label": "Soto & John（2017）· BFI-2 原始研究",
+                "href": "https://pubmed.ncbi.nlm.nih.gov/27055049/"
+              },
+              {
+                "label": "McCrae & Costa（1989）· 类型与五因素模型研究",
+                "href": "https://pubmed.ncbi.nlm.nih.gov/2709300/"
+              }
+            ],
+            "related_links": []
+          },
+          {
+            "q": "做完 MBTI 后怎样把结果用到生活里？",
+            "a": "建议把 MBTI 结果转成一个小的行为观察与改进计划，而不是只保存类型截图。先选择最有共鸣的一条偏好，写下支持它和不支持它的实际例子；再选一个具体场景，例如会议表达、学习安排或关系沟通，明确想改善的行为。\n\n例如，如果你经常需要先整理想法，可以尝试会前写提纲、提前阅读议程，再观察是否更容易表达；如果你习惯快速做决定，可以试着在重要讨论中增加一次观点核对。这些是可尝试的策略，并非某类人的固定处方。持续记录效果，与熟悉你的人的反馈交叉核对，并根据真实表现调整。职业探索还应继续查看岗位任务、技能要求与工作条件。",
+            "id": "faq-next-steps",
+            "references": [
+              {
+                "label": "Myers & Briggs Foundation · 使用伦理",
+                "href": "https://www.myersbriggs.org/unique-features-of-myers-briggs/ethical-use-of-the-mbti/"
+              }
+            ],
+            "related_links": [
+              {
+                "label": "费马测试 · MBTI 基础与边界",
+                "href": "/zh/articles/mbti-basics"
+              },
+              {
+                "label": "费马测试 · 职业档案",
+                "href": "/zh/career"
+              }
+            ]
+          },
+          {
+            "id": "faq-mbti-calculation",
+            "q": "MBTI测试的计分公式是什么？能举例说明吗？",
+            "a": "后端先把五点作答映射到 −2 至 2，再按题目方向与对应偏好极统一符号。设某轴 n 题定向后的分数之和为 S，则第一极展示比例 P = round[100 × (S + 2n) ÷ (4n)]；第二极为 100 − P。当前基础算法等权聚合；兼容的加权计分版本使用 P = round[50 + 25 × Σ(w × x) ÷ Σw]，以该次计分版本为准。\n\n例如某轴有 10 题、定向分数之和为 8，则第一极比例为 70、第二极为 30。70 表示回答在该偏好轴上的位置，不是人群百分位、能力水平或类型准确率。这里的定向分数 x 已包含正反向处理，不能直接用选项字母求和。"
+          }
+        ]
+      },
+      "expected_en": {
+        "why_choose": null,
+        "version_comparison": null,
+        "faq": [
+          {
+            "a": "Most users finish in about 15 minutes.",
+            "q": "How long does it take?"
+          },
+          {
+            "a": "Yes. The scoring flow expects all 144 items for a complete result.",
+            "q": "Do I need to answer every question?"
+          },
+          {
+            "a": "Yes. Retaking can help you compare changes across time or context.",
+            "q": "Can I retake it?"
+          },
+          {
+            "a": "No. This is an educational self-understanding tool and does not replace professional advice.",
+            "q": "Is this a diagnosis?"
+          }
+        ]
+      },
+      "content": {
+        "why_choose": {
+          "title": "Why choose the FermatMind MBTI personality test?",
+          "intro": "Choose a 93-question or 144-question personality test, then explore your free results, preference explanations, scoring methods and practical next steps. Compare the versions first and use real experiences to assess what your results mean.",
+          "items": [
+            {
+              "title": "Understand the four MBTI preference pairs",
+              "body": "FermatMind explains E/I, S/N, T/F and J/P, with links to methods and evidence. Check which preferences the questions describe and how the results can be used.\n\nA personality model and a particular questionnaire are different things. External research helps explain MBTI; the measurement quality of this version requires its own validation. The FAQ discusses reliability, validity and appropriate uses.",
+              "link": {
+                "label": "Is the MBTI test accurate? What reliability and validity evidence matters?",
+                "href": "#faq-validity"
+              },
+              "id": "method"
+            },
+            {
+              "id": "mbti-scoring-method",
+              "title": "How preference percentages are calculated",
+              "body": "Five-point answers are mapped to −2 through 2, then oriented using each item’s direction and preference pole. For an axis with n items and an oriented score sum S, the first pole is P = round[100 × (S + 2n) ÷ (4n)]; the other pole is 100 − P. The current base algorithm weights items equally. A compatible weighted version uses P = round[50 + 25 × Σ(w × x) ÷ Σw]; the scoring version for the attempt determines which formula applies.\n\nFor 10 items with an oriented sum of 8, the two percentages are 70 and 30. This describes the position of your answers on a preference axis, not a population percentile, ability level or type accuracy. The oriented x already accounts for reverse scoring; answer-option letters cannot simply be added together.",
+              "link": {
+                "label": "How is the MBTI preference score calculated? Can you show an example?",
+                "href": "#faq-mbti-calculation"
+              }
+            },
+            {
+              "id": "mbti-type-method",
+              "title": "How your four-letter type is assigned",
+              "body": "The two poles of each E/I, S/N, T/F and J/P axis are compared and combined into a four-letter type. The midpoint is 50. Exact ties use the scoring version’s predefined rule, so a small change near the midpoint can change a letter without a sudden change in personality. A compatible backend version also reports preference clarity as 2 × |P − 50|; this is not a statistical confidence probability.\n\nIf A/T appears in your results, it is an additional descriptive axis used by FermatMind, not one of the four classic MBTI axes. Reproducible calculations do not replace reliability, validity or cross-version comparability studies in the intended population. Evidence for an official product cannot automatically validate this test.",
+              "link": {
+                "label": "How is the MBTI preference score calculated? Can you show an example?",
+                "href": "#faq-mbti-calculation"
+              }
+            },
+            {
+              "title": "Read beyond the four-letter personality type",
+              "body": "The results lead from a type overview to the four core preference pairs and a reading guide. Consider how you gather information, make decisions and organize daily life, then compare the descriptions with your experience.\n\nFor example, I may prompt you to consider whether you prefer to organize your thoughts independently before speaking. It does not mean you communicate poorly. Dimensions and examples offer more useful information than a type name alone.",
+              "link": {
+                "label": "Guide to reading MBTI results",
+                "href": "/en/articles/mbti-full-report-career-relationship-communication"
+              },
+              "id": "interpretation"
+            },
+            {
+              "title": "Explore careers, learning and relationships",
+              "body": "This page links to career directions, study choices, teamwork, occupation profiles and related guides. After the test, connect a preference with actual job tasks, learning arrangements or communication situations.\n\nUse these links to form questions you can test, such as whether you enjoy tasks with clear milestones. Career fit also depends on interests, skills and experience; a personality type does not choose a career for you.",
+              "link": {
+                "label": "Explore everyday applications",
+                "href": "#use-in-life"
+              },
+              "id": "applications"
+            },
+            {
+              "title": "93 or 144 questions: the same core preference framework",
+              "body": "Both versions use the same core preferences and report interpretation framework. Choose according to your available time and how many descriptions you want to consider. The comparison table explains their current similarities and differences.",
+              "link": {
+                "label": "Compare versions and start the test",
+                "href": "#choose-version"
+              },
+              "id": "versions"
+            },
+            {
+              "title": "Free results with practical next steps",
+              "body": "Both versions currently offer free testing and results. Check the question count and estimated time before starting. Afterward, explore your type, core preferences and suggestions for further reflection; the free-results FAQ describes the scope.\n\nChoose one relevant preference and examine it during a meeting, a week of study or a conversation, then return to the guides for more context.",
+              "link": {
+                "label": "Is this MBTI personality test free, including the results?",
+                "href": "#faq-free"
+              },
+              "id": "free-results"
+            }
+          ]
+        },
+        "version_comparison": {
+          "caption": "FermatMind MBTI: 93-question and 144-question versions",
+          "columns": [
+            "Feature",
+            "93-question short version",
+            "144-question extended version"
+          ],
+          "rows": [
+            [
+              "Questions",
+              "93",
+              "144"
+            ],
+            [
+              "Estimated time",
+              "About 10 minutes",
+              "About 15 minutes"
+            ],
+            [
+              "Item relationship",
+              "93 items selected from the current 144-item questionnaire",
+              "Includes the short-version items plus 51 additional items"
+            ],
+            [
+              "Results",
+              "Free type, core preference explanations and next steps",
+              "Free type, core preference explanations and next steps"
+            ],
+            [
+              "Best suited to",
+              "A shorter session for initial self-reflection",
+              "More time to consider a wider set of behavioral descriptions"
+            ]
+          ],
+          "note": "Times are estimates. More questions do not automatically mean greater accuracy; each version needs corresponding measurement evidence."
+        },
+        "faq": [
+          {
+            "q": "Is this MBTI personality test free, including the results?",
+            "a": "FermatMind’s 93-question and 144-question versions are currently free to complete. You can view your 16-personality type result, explanations of the four core preference pairs and suggestions for further exploration. The current test and result pages have no report-unlock fee.\n\nThis applies to the tests on this page, not to other providers, the official MBTI assessment or individual consultation services. Compare versions and estimated times before starting, then read your overview before exploring the result guide and career resources.",
+            "id": "faq-free",
+            "references": [],
+            "related_links": [
+              {
+                "label": "Compare versions and start the test",
+                "href": "#choose-version"
+              }
+            ]
+          },
+          {
+            "q": "What do the four MBTI letters mean, and how should I read my results?",
+            "a": "Each letter comes from a preference pair: Extraversion/Introversion (E/I) concerns attention and interaction; Sensing/Intuition (S/N) concerns taking in information; Thinking/Feeling (T/F) concerns decision-making priorities; Judging/Perceiving (J/P) concerns organizing external life. Their combinations produce 16 type codes, but four letters cannot summarize all your experiences, abilities or values.\n\nRead the type overview, then the dimensions, real-life examples and possible actions. I may suggest a preference for thinking independently first, not poor social skills; F does not imply weak reasoning. Interpret any scores according to the metric defined in this report, not as ability percentiles, diagnostic probabilities or chances of future success.",
+            "id": "faq-results",
+            "references": [
+              {
+                "label": "The Myers-Briggs Company: MBTI facts",
+                "href": "https://www.themyersbriggs.com/en-US/Support/MBTI-Facts"
+              }
+            ],
+            "related_links": [
+              {
+                "label": "Guide to reading MBTI results",
+                "href": "/en/articles/mbti-full-report-career-relationship-communication"
+              }
+            ]
+          },
+          {
+            "q": "How long does the MBTI test take? Should I choose 93 or 144 questions?",
+            "a": "Allow about 10 minutes for the 93-question version and about 15 minutes for the 144-question version. Choose the one you can complete attentively: 93 questions for a shorter session, or 144 to consider more behavioral descriptions. More questions alone do not establish greater accuracy.\n\nBoth use the same core preference and report framework. See the comparison table for item overlap and result coverage. These are estimates, not time limits; reading pace, reflection and interruptions affect actual duration.\n\nAnswer as you usually behave, rather than as your ideal self. Each version needs its own reliability and validity evidence. For repeat comparisons, use the same version where possible and note your circumstances; cross-version differences are not necessarily personality changes.",
+            "id": "faq-versions",
+            "references": [],
+            "related_links": [
+              {
+                "label": "Compare questionnaire versions",
+                "href": "#version-comparison"
+              },
+              {
+                "label": "Compare versions and start the test",
+                "href": "#choose-version"
+              },
+              {
+                "label": "Reliability and validity",
+                "href": "/en/reliability-validity"
+              }
+            ]
+          },
+          {
+            "q": "Is the MBTI test accurate? What reliability and validity evidence matters?",
+            "a": "Separate consistency, what a test measures and whether it suits your purpose. Reliability concerns consistency; validity concerns evidence supporting a particular interpretation or use of scores. A description feeling familiar may prompt reflection, but that alone does not establish psychometric quality.\n\nType boundaries are debated. McCrae and Costa’s research did not support interpreting MBTI preferences as sharply separate categories, while finding associations with some Five-Factor Model dimensions. Small differences near a boundary should not be exaggerated into two fundamentally different kinds of person.\n\nFor any online version, check the questionnaire, language, sample, scoring, retest research and validated uses. Research on official MBTI instruments does not validate every online test with a similar name. FermatMind does not borrow another version’s data to promise an accuracy rate or use type results for ability rankings or diagnosis.",
+            "id": "faq-validity",
+            "references": [
+              {
+                "label": "McCrae and Costa (1989): MBTI and the Five-Factor Model",
+                "href": "https://pubmed.ncbi.nlm.nih.gov/2709300/"
+              },
+              {
+                "label": "The Myers-Briggs Company: MBTI facts",
+                "href": "https://www.themyersbriggs.com/en-US/Support/MBTI-Facts"
+              }
+            ],
+            "related_links": [
+              {
+                "label": "Reliability and validity",
+                "href": "/en/reliability-validity"
+              }
+            ]
+          },
+          {
+            "q": "Can MBTI determine my career, college major or hiring suitability?",
+            "a": "A type alone cannot determine a career, major or hiring decision. It can support discussion of communication preferences, decision habits and work environments, but job performance also involves knowledge, skills, interests, values, training and practical conditions. A type being common in an occupation does not mean others cannot succeed or that everyone of that type is suited to it.\n\nTurn results into questions: do I prefer independent analysis or frequent collaboration, clear procedures or open exploration? Test these through job tasks, projects, internships or informational interviews. RIASEC offers a separate perspective on vocational interests. The Myers & Briggs Foundation states that MBTI should not be used for hiring selection; do not use it to exclude applicants, restrict study choices or promise career success.",
+            "id": "faq-career",
+            "references": [
+              {
+                "label": "Myers & Briggs Foundation: ethical use of MBTI",
+                "href": "https://www.myersbriggs.org/unique-features-of-myers-briggs/ethical-use-of-the-mbti/"
+              }
+            ],
+            "related_links": [
+              {
+                "label": "Explore occupation profiles",
+                "href": "/en/career"
+              }
+            ]
+          },
+          {
+            "q": "Is MBTI a mental health diagnosis?",
+            "a": "No. MBTI describes personality preferences; it cannot diagnose depression, anxiety or personality disorders. Clinical assessment considers symptoms, duration, daily functioning, history and alternative explanations. Introversion is not social anxiety, a preference for planning is not obsessive-compulsive disorder, and a Feeling preference does not mean emotional instability.\n\nA type is not a diagnosis and should not determine treatment, medication or stopping existing care. If emotional, sleep or behavioral difficulties persistently affect study, work or relationships, consult a qualified mental health professional. MBTI can supply vocabulary for everyday habits, not individualized clinical advice.",
+            "id": "faq-diagnosis",
+            "references": [
+              {
+                "label": "The Myers-Briggs Company: MBTI facts",
+                "href": "https://www.themyersbriggs.com/en-US/Support/MBTI-Facts"
+              },
+              {
+                "label": "NIMH: caring for your mental health",
+                "href": "https://www.nimh.nih.gov/health/topics/caring-for-your-mental-health"
+              }
+            ],
+            "related_links": [
+              {
+                "label": "Assessment methods and limitations",
+                "href": "/en/method-boundaries"
+              }
+            ]
+          },
+          {
+            "q": "Why did my MBTI result change? Can my personality type change?",
+            "a": "A different result does not prove that your whole personality has changed. A self-report reflects how you understand the questions and answer at that time. Version, language, setting and recollection of your experiences can affect it. Near a classification boundary, a small score fluctuation can change a letter, so compare dimensions before type names.\n\nRecord the versions, interval and dimensions that changed, then look for concrete examples. Habits can change through learning and circumstances, but two labels cannot distinguish real change from measurement variation. Avoid retaking until you get a preferred type; identify which descriptions remain useful and which depend on context.",
+            "id": "faq-result-changes",
+            "references": [
+              {
+                "label": "McCrae and Costa (1989): MBTI and the Five-Factor Model",
+                "href": "https://pubmed.ncbi.nlm.nih.gov/2709300/"
+              },
+              {
+                "label": "Myers & Briggs Foundation: ethical use of MBTI",
+                "href": "https://www.myersbriggs.org/unique-features-of-myers-briggs/ethical-use-of-the-mbti/"
+              }
+            ],
+            "related_links": []
+          },
+          {
+            "q": "MBTI vs. Big Five: what is the difference, and can scores be converted?",
+            "a": "MBTI typically combines four preference pairs into a type code. Big Five describes continuous differences in Extraversion, Agreeableness, Conscientiousness, Neuroticism or negative emotionality, and Openness. For example, the BFI-2 has five domains and 15 narrower facets, emphasizing differences in degree.\n\nThe models have associations, but correlation does not permit one-to-one conversion. An INFP code cannot determine Big Five scores, and a Big Five dimension cannot simply be translated into an MBTI letter. Type language can start a discussion; validated continuous-trait measures can describe degrees of difference. Use either alongside behavioral evidence, not for diagnosis or a direct career verdict.",
+            "id": "faq-big-five",
+            "references": [
+              {
+                "label": "Soto and John (2017): the BFI-2 study",
+                "href": "https://pubmed.ncbi.nlm.nih.gov/27055049/"
+              },
+              {
+                "label": "McCrae and Costa (1989): MBTI and the Five-Factor Model",
+                "href": "https://pubmed.ncbi.nlm.nih.gov/2709300/"
+              }
+            ],
+            "related_links": []
+          },
+          {
+            "q": "What should I do after taking the MBTI personality test?",
+            "a": "Turn a result into a small observation and action plan. Pick one resonant preference and write down examples that support and challenge it. Then choose a specific setting, such as meetings, study or relationship communication, and define a behavior you want to improve.\n\nIf you need time to organize your thoughts, try a meeting outline or reading the agenda beforehand. If you decide quickly, add a check of other perspectives before important decisions. These are experiments, not prescriptions for a type. Track outcomes, compare feedback from people who know you and adjust. For career exploration, also review real tasks, skills and working conditions.",
+            "id": "faq-next-steps",
+            "references": [
+              {
+                "label": "Myers & Briggs Foundation: ethical use of MBTI",
+                "href": "https://www.myersbriggs.org/unique-features-of-myers-briggs/ethical-use-of-the-mbti/"
+              }
+            ],
+            "related_links": [
+              {
+                "label": "MBTI foundations and limitations",
+                "href": "/en/articles/mbti-basics"
+              },
+              {
+                "label": "Explore occupation profiles",
+                "href": "/en/career"
+              }
+            ]
+          },
+          {
+            "id": "faq-mbti-calculation",
+            "q": "How is the MBTI preference score calculated? Can you show an example?",
+            "a": "Five-point answers are mapped to −2 through 2, then oriented using each item’s direction and preference pole. For an axis with n items and an oriented score sum S, the first pole is P = round[100 × (S + 2n) ÷ (4n)]; the other pole is 100 − P. The current base algorithm weights items equally. A compatible weighted version uses P = round[50 + 25 × Σ(w × x) ÷ Σw]; the scoring version for the attempt determines which formula applies.\n\nFor 10 items with an oriented sum of 8, the two percentages are 70 and 30. This describes the position of your answers on a preference axis, not a population percentile, ability level or type accuracy. The oriented x already accounts for reverse scoring; answer-option letters cannot simply be added together."
+          }
+        ]
+      }
+    },
+    "BIG5_OCEAN": {
+      "slug": "big-five-personality-test-ocean-model",
+      "source_zh": {
+        "why_choose": {
+          "title": "为什么选择费马大五人格测试？",
+          "intro": "大五人格测试用五个连续维度描述你的日常倾向。费马提供 120 题与 90 题两个入口，帮助你从特质组合出发理解行为，再把结果放回学习、工作与人际情境中检验。",
+          "items": [
+            {
+              "id": "big5-model",
+              "title": "认识 OCEAN：看五个维度，也看它们的组合",
+              "body": "开放性关注对新经验与想法的接纳；尽责性涉及计划、自律与目标推进；外倾性涉及社交参与和活跃程度；宜人性涉及合作与对他人的体谅；神经质描述对压力和负面情绪的敏感程度。每个人都同时具有这五方面特质，只是程度不同。\n\n这些维度没有统一的最佳配置。例如，较低的外倾性可以与稳定的合作能力并存，较高的开放性也不等于每次都喜欢冒险。理解一个人，需要把特质组合与实际环境一起看。",
+              "link": {
+                "label": "了解五因素测量工具与 IPIP 资料",
+                "href": "https://ipip.ori.org/newMultipleconstructs.htm"
+              }
+            },
+            {
+              "id": "big5-scoring",
+              "title": "从题目到五维分数：先计算 30 个侧面",
+              "body": "作答按 1–5 分记录，正向题 y = x，反向题 y = 6 − x。后端先对每个侧面内的计分题取平均，再对一个领域下的 6 个侧面均分取平均，得到 O、C、E、A、N 五个领域分数。两个版本都保留 30 个侧面结构。\n\n侧面均分 F = Σy ÷ 该侧面题数；领域均分 D = (F₁ + … + F₆) ÷ 6。后端在侧面和领域层分别保留两位小数。例如某侧面的计分值为 2、3、4、5，F = 3.50。这种聚合先保证方向一致，再让各侧面等权参与领域计算，不能把未经反向处理的选项直接相加。",
+              "link": {
+                "label": "查看计分方法问答",
+                "href": "#faq-big5-calculation"
+              }
+            },
+            {
+              "id": "big5-standardization",
+              "title": "z 分、T 分与百分位：三种数字不是同一含义",
+              "body": "有可用常模均值 μ 和标准差 σ 时，后端按 z = (D − μ) ÷ σ 标准化，再计算 T = 50 + 10z、百分位估计 = 100 × Φ(z)。Φ 是标准正态累计分布；默认将 z 限定在 −3.5 到 3.5，T 分与百分位取整。侧面采用相同流程，但使用各自的参照参数。\n\n例如仅为演算，假设 D = 3.50、μ = 3.00、σ = 0.50，则 z = 1、T = 60、正态近似百分位约 84。若常模不可用，计分器的兼容路径采用 100 × (D − 1) ÷ 4 的线性分数；这个分数不能作为真实人群百分位。必须结合 CALIBRATED、PROVISIONAL 或 MISSING 状态和来源阅读。",
+              "link": {
+                "label": "查看计分方法问答",
+                "href": "#faq-big5-scores"
+              }
+            },
+            {
+              "id": "big5-method",
+              "title": "科学框架与题本证据：五因素、侧面和版本常模",
+              "body": "本测试采用五因素及 30 侧面的自评计分结构，与 IPIP-NEO 系列测量思路相关。120 题版和 90 题版分别加载自己的题目、计分策略及常模版本；常模选择还会考虑语言、地区及适用的人群条件。版本不同的结果不能只凭数字直接换算。\n\n模型研究、软件计算正确性和本题本的心理测量验证是三层不同证据。正反向处理和明确公式能让计算可核查，但不能替代题本样本中的内部一致性、重测信度、因素结构和跨群体可比性。常模记录的状态标签也不等于独立发表的验证研究。",
+              "link": {
+                "label": "查看 IPIP 五因素及侧面测量资料",
+                "href": "https://ipip.ori.org/newMultipleconstructs.htm"
+              }
+            },
+            {
+              "id": "versions",
+              "title": "120 题与 90 题：按可投入的时间选择",
+              "body": "两个入口围绕同一套大五人格维度，分别适合能安排较完整作答时间和希望减少作答负担的情况。先选择自己能够认真完成的版本，比单纯追求题量更有价值。\n\n题量与预计用时见下表。更多题目不自动意味着更高准确率；比较两个版本的结果，还需要考虑题目构成、计分及参照标准，不能把不同版本的数字直接当作变化幅度。"
+            },
+            {
+              "id": "big5-application",
+              "title": "把结果转成一个小行动，再观察是否有效",
+              "body": "选择一个最影响日常生活的维度，安排一项可观察的尝试。例如，容易被打断时，可以尝试固定专注时段；社交后容易疲惫时，可以调整会议密度和恢复时间。记录实际效果，再决定是否保留。\n\n用于职业或团队讨论时，把特质与具体任务、技能、兴趣和工作条件相结合。测试可以帮助提出问题，但不能单凭分数决定录用、专业选择或人与人的适配。",
+              "link": {
+                "label": "查看职业使用建议",
+                "href": "#faq-big5-career"
+              }
+            }
+          ]
+        },
+        "version_comparison": {
+          "caption": "费马大五人格 120 题与 90 题版本对照",
+          "columns": [
+            "比较项目",
+            "120 题版",
+            "90 题版"
+          ],
+          "rows": [
+            [
+              "题量",
+              "120 题",
+              "90 题"
+            ],
+            [
+              "预计用时",
+              "约 15 分钟",
+              "约 11 分钟"
+            ],
+            [
+              "测量框架",
+              "OCEAN 五个特质维度",
+              "OCEAN 五个特质维度"
+            ],
+            [
+              "选择参考",
+              "能够安排较完整的作答时间",
+              "希望减少作答负担"
+            ],
+            [
+              "重测建议",
+              "尽量使用同一版本和相近条件",
+              "尽量使用同一版本和相近条件"
+            ]
+          ],
+          "note": "用时仅为参考。分数解释以结果页的量尺、参照群体和证据说明为准。"
+        },
+        "faq": [
+          {
+            "id": "faq-big5-model",
+            "q": "大五人格测试测什么？OCEAN 五个维度分别是什么意思？",
+            "a": "大五人格用连续维度描述人格差异：开放性关注对新观念与体验的接纳，尽责性关注计划与自我管理，外倾性关注社交与活动倾向，宜人性关注合作与人际取向，神经质关注负性情绪的易感性。OCEAN 是这五个英文名称的首字母。\n\n结果不是把人分成五种类型，也没有统一的“最好人格”。阅读时应看五个维度的组合，再用工作、学习和关系中的具体经历核对；某一维度高低不等于能力、道德或个人价值高低。",
+            "references": [
+              {
+                "label": "IPIP：五因素人格量表与研究文献",
+                "href": "https://ipip.ori.org/newMultipleconstructs.htm"
+              }
+            ]
+          },
+          {
+            "id": "faq-big5-forms",
+            "q": "大五人格 90 题和 120 题怎么选？测试需要多久？",
+            "a": "费马当前提供 120 题与 90 题两个版本，页面预计用时分别约 15 分钟和 11 分钟。时间充足可选 120 题；希望降低作答负担可选 90 题。请完成所选版本的全部题目，并按通常的自己回答。\n\n题量较多不自动意味着“更准确”。版本质量还取决于题目设计、计分和验证证据。比较两次结果时，优先使用同一版本，并记录作答情境；不要把不同版本的分数差直接解释为人格改变。",
+            "related_links": [
+              {
+                "label": "选择大五人格版本",
+                "href": "#choose-version"
+              }
+            ]
+          },
+          {
+            "id": "faq-big5-evidence",
+            "q": "大五人格测试科学吗？模型证据和本站准确性有什么区别？",
+            "a": "大五人格有持续的量表开发研究，IPIP 公布了多种五因素量表、计分键和研究文献。但“采用大五模型”与“本站这份题本、译文和计分已经过验证”是两件事，外部量表的结论不能直接移植到费马 90 题或 120 题版本。\n\n判断具体测试，应核对适用人群、语言版本、信度、效度以及常模来源。信度涉及分数的一致性，效度涉及特定解释和用途是否得到证据支持；没有对应材料时，不宜给出一个笼统的准确率。",
+            "references": [
+              {
+                "label": "IPIP：五因素人格量表与研究文献",
+                "href": "https://ipip.ori.org/newMultipleconstructs.htm"
+              },
+              {
+                "label": "AERA／APA／NCME：教育与心理测验标准",
+                "href": "https://www.testingstandards.net/"
+              }
+            ],
+            "related_links": [
+              {
+                "label": "查看信度与效度说明",
+                "href": "/zh/reliability-validity"
+              }
+            ]
+          },
+          {
+            "id": "faq-big5-scores",
+            "q": "大五人格分数和百分位怎么看？分数越高越好吗？",
+            "a": "有可用常模均值 μ 和标准差 σ 时，后端按 z = (D − μ) ÷ σ 标准化，再计算 T = 50 + 10z、百分位估计 = 100 × Φ(z)。Φ 是标准正态累计分布；默认将 z 限定在 −3.5 到 3.5，T 分与百分位取整。侧面采用相同流程，但使用各自的参照参数。\n\n例如仅为演算，假设 D = 3.50、μ = 3.00、σ = 0.50，则 z = 1、T = 60、正态近似百分位约 84。若常模不可用，计分器的兼容路径采用 100 × (D − 1) ÷ 4 的线性分数；这个分数不能作为真实人群百分位。必须结合 CALIBRATED、PROVISIONAL 或 MISSING 状态和来源阅读。",
+            "references": [
+              {
+                "label": "AERA／APA／NCME：教育与心理测验标准",
+                "href": "https://www.testingstandards.net/"
+              }
+            ]
+          },
+          {
+            "id": "faq-big5-mbti",
+            "q": "大五人格和 MBTI 有什么区别？两个结果冲突怎么办？",
+            "a": "大五人格主要描述五个连续维度；MBTI 用四组偏好组织类型语言。两者提问、计分和结果表达不同，不能把某个大五分数直接换算成一个 MBTI 类型。\n\n若结果看起来矛盾，先比较它们描述的具体行为、时间范围和作答处境，再找现实例子核对。把两种工具作为不同角度的自我观察，比强行追求唯一人格标签更有用。",
+            "related_links": [
+              {
+                "label": "了解 MBTI 测试",
+                "href": "/zh/tests/mbti-personality-test-16-personality-types"
+              }
+            ]
+          },
+          {
+            "id": "faq-big5-neuroticism",
+            "q": "神经质分数高，是否代表有心理疾病？",
+            "a": "不代表。大五人格中的神经质是人格维度名称，用于描述负性情绪体验的倾向；它不是临床诊断，也不能仅凭一项分数判断焦虑症、抑郁症或其他疾病。\n\n可以结合结果观察自己在压力下的触发点、恢复方式和支持资源。如果持续困扰已影响睡眠、工作或日常生活，应寻求合格专业人员的评估，而不是用人格测试自行诊断。",
+            "related_links": [
+              {
+                "label": "测评的适用边界",
+                "href": "/zh/method-boundaries"
+              }
+            ]
+          },
+          {
+            "id": "faq-big5-free",
+            "q": "费马大五人格测试免费吗？完成后如何阅读结果？",
+            "a": "费马当前的 90 题和 120 题大五人格测试均可免费完成并查看结果。免费范围指本站当前提供的测试与结果，不代表其他平台或专业心理评估也免费；具体展示内容以所选版本的结果页为准。\n\n建议先读五个维度的整体分布，再阅读维度解释和页面提供的细分内容，最后选一个真实情境记录观察。不要仅凭一个总分或一段描述作职业、关系或健康决定。"
+          },
+          {
+            "id": "faq-big5-retest",
+            "q": "大五人格结果会变吗？多久重测才有意义？",
+            "a": "一次结果会受到自我认识、近期情境、题目理解和作答方式影响。没有一个适用于所有人的固定重测间隔；短时间反复做题并挑选满意的结果，不能证明哪一次更真实。\n\n需要比较时，使用同一版本、相近环境和相同作答标准，并记录重要生活变化。先观察现实行为是否持续改变，再结合测量误差理解分数变化；不把一次升降当成人格已经改变的定论。"
+          },
+          {
+            "id": "faq-big5-career",
+            "q": "大五人格可以用来选职业、专业或判断关系吗？",
+            "a": "可以作为探索线索，不能单独决定选择。人格偏好与技能、兴趣、价值观、机会条件并不相同；测试不能保证职业胜任、录用结果或关系质量。\n\n把结果转化成可验证的问题，例如“我更适应明确计划还是频繁变化的任务？”再通过课程、项目、访谈或短期实践收集证据。若主要关心喜欢什么工作活动，可结合职业兴趣测评继续探索。",
+            "related_links": [
+              {
+                "label": "霍兰德职业兴趣测试",
+                "href": "/zh/tests/holland-career-interest-test-riasec"
+              }
+            ]
+          },
+          {
+            "id": "faq-big5-calculation",
+            "q": "大五人格测试的计分公式是什么？能举例说明吗？",
+            "a": "作答按 1–5 分记录，正向题 y = x，反向题 y = 6 − x。后端先对每个侧面内的计分题取平均，再对一个领域下的 6 个侧面均分取平均，得到 O、C、E、A、N 五个领域分数。两个版本都保留 30 个侧面结构。\n\n侧面均分 F = Σy ÷ 该侧面题数；领域均分 D = (F₁ + … + F₆) ÷ 6。后端在侧面和领域层分别保留两位小数。例如某侧面的计分值为 2、3、4、5，F = 3.50。这种聚合先保证方向一致，再让各侧面等权参与领域计算，不能把未经反向处理的选项直接相加。"
+          },
+          {
+            "id": "faq-big5-method",
+            "q": "大五人格采用什么测量方法？公式公开代表已经科学验证了吗？",
+            "a": "本测试采用五因素及 30 侧面的自评计分结构，与 IPIP-NEO 系列测量思路相关。120 题版和 90 题版分别加载自己的题目、计分策略及常模版本；常模选择还会考虑语言、地区及适用的人群条件。版本不同的结果不能只凭数字直接换算。\n\n模型研究、软件计算正确性和本题本的心理测量验证是三层不同证据。正反向处理和明确公式能让计算可核查，但不能替代题本样本中的内部一致性、重测信度、因素结构和跨群体可比性。常模记录的状态标签也不等于独立发表的验证研究。",
+            "references": [
+              {
+                "label": "查看 IPIP 五因素及侧面测量资料",
+                "href": "https://ipip.ori.org/newMultipleconstructs.htm"
+              }
+            ]
+          }
+        ]
+      },
+      "expected_en": {
+        "why_choose": null,
+        "version_comparison": null,
+        "faq": [
+          {
+            "a": "Most users finish in about 15 minutes.",
+            "q": "How long does it take?"
+          },
+          {
+            "a": "Yes. The scoring flow expects all 120 items for a complete result.",
+            "q": "Do I need to answer every question?"
+          },
+          {
+            "a": "Yes. Retaking can help you compare changes across time or context.",
+            "q": "Can I retake it?"
+          },
+          {
+            "a": "No. This is an educational self-understanding tool and does not replace professional advice.",
+            "q": "Is this a diagnosis?"
+          }
+        ]
+      },
+      "content": {
+        "why_choose": {
+          "title": "Why choose the FermatMind Big Five personality test?",
+          "intro": "Explore everyday tendencies across five continuous traits. FermatMind offers 120-question and 90-question versions so you can examine the combination of your traits and relate it to learning, work and relationships.",
+          "items": [
+            {
+              "id": "big5-model",
+              "title": "Understand OCEAN and your combination of traits",
+              "body": "Openness concerns new ideas and experiences; Conscientiousness involves planning, self-discipline and pursuing goals; Extraversion concerns social engagement and activity; Agreeableness concerns cooperation and consideration for others; Neuroticism describes sensitivity to stress and negative emotions. Everyone has all five traits, in different degrees.\n\nThere is no universally best profile. Lower Extraversion can coexist with effective collaboration, and higher Openness does not mean always enjoying risk. Interpret the combination alongside the situation.",
+              "link": {
+                "label": "IPIP: Five-Factor Model scales and research",
+                "href": "https://ipip.ori.org/newMultipleconstructs.htm"
+              }
+            },
+            {
+              "id": "big5-scoring",
+              "title": "How 30 facets become five domain scores",
+              "body": "Responses run from 1 to 5. Positively keyed items use y = x; reverse-keyed items use y = 6 − x. Scored items are averaged within each facet, then the six facet means in each domain are averaged to obtain O, C, E, A and N. Both versions retain the 30-facet structure.\n\nFacet mean F = Σy ÷ number of facet items; domain mean D = (F₁ + … + F₆) ÷ 6. Facet and domain values are rounded to two decimal places. For scored values 2, 3, 4 and 5, F = 3.50. This aligns item direction and gives facets equal weight within a domain; do not add raw answers without reverse scoring.",
+              "link": {
+                "label": "How are Big Five trait and facet scores calculated?",
+                "href": "#faq-big5-calculation"
+              }
+            },
+            {
+              "id": "big5-standardization",
+              "title": "Big Five z-scores, T-scores and percentiles explained",
+              "body": "When a reference mean μ and standard deviation σ are available, z = (D − μ) ÷ σ, T = 50 + 10z, and estimated percentile = 100 × Φ(z). Φ is the standard normal cumulative distribution. By default z is limited to −3.5 through 3.5, and T-scores and percentiles are rounded. Facets follow the same process using their own reference parameters.\n\nFor an illustrative D = 3.50, μ = 3.00 and σ = 0.50, z = 1, T = 60 and the normal-approximation percentile is about 84. Without usable norms, a compatibility path uses the linear score 100 × (D − 1) ÷ 4; that is not a real population percentile. Read the source and CALIBRATED, PROVISIONAL or MISSING status alongside the number.",
+              "link": {
+                "label": "How do I interpret Big Five scores and percentiles?",
+                "href": "#faq-big5-scores"
+              }
+            },
+            {
+              "id": "big5-method",
+              "title": "The Five-Factor Model, IPIP-NEO and version-specific evidence",
+              "body": "This self-report uses five factors and 30 facets, related to the IPIP-NEO measurement approach. The 120-question and 90-question versions load their own items, scoring policies and norm versions. Norm selection also considers language, region and applicable population conditions. Numbers from different versions cannot simply be converted.\n\nModel research, correct software calculations and validation of this questionnaire are distinct kinds of evidence. Clear scoring rules permit checking the calculation, but do not replace internal consistency, test–retest reliability, factor structure or cross-group comparability studies. A norm-status label is not an independently published validation study.",
+              "link": {
+                "label": "IPIP: Five-Factor Model scales and research",
+                "href": "https://ipip.ori.org/newMultipleconstructs.htm"
+              }
+            },
+            {
+              "id": "versions",
+              "title": "Choose 120 or 90 questions for the time you have",
+              "body": "Both versions address the same Big Five dimensions. Choose a longer session or a lower response burden according to what you can complete carefully, rather than question count alone.\n\nThe table lists questions and estimated times. More items do not automatically improve accuracy. Item composition, scoring and reference standards also matter; a difference between versions is not directly a measure of personality change."
+            },
+            {
+              "id": "big5-application",
+              "title": "Use your results to try one practical change",
+              "body": "Choose a trait that affects daily life and plan an observable experiment. Try a protected focus period if you are frequently interrupted, or adjust meeting density and recovery time if social interaction is tiring. Record the effect before deciding whether to keep the change.\n\nFor career or team discussions, combine traits with tasks, skills, interests and working conditions. Scores can prompt questions, but should not decide hiring, study choices or interpersonal compatibility by themselves.",
+              "link": {
+                "label": "Can Big Five results help with careers, majors or relationships?",
+                "href": "#faq-big5-career"
+              }
+            }
+          ]
+        },
+        "version_comparison": {
+          "caption": "FermatMind Big Five: compare 120 and 90 questions",
+          "columns": [
+            "Feature",
+            "120-question version",
+            "90-question version"
+          ],
+          "rows": [
+            [
+              "Questions",
+              "120",
+              "90"
+            ],
+            [
+              "Estimated time",
+              "About 15 minutes",
+              "About 11 minutes"
+            ],
+            [
+              "Framework",
+              "Five OCEAN trait dimensions",
+              "Five OCEAN trait dimensions"
+            ],
+            [
+              "Choosing a version",
+              "More time for a full session",
+              "A lower response burden"
+            ],
+            [
+              "Retesting",
+              "Use the same version and similar conditions",
+              "Use the same version and similar conditions"
+            ]
+          ],
+          "note": "Times are estimates. Interpret results using the scale definitions, reference population and evidence stated on the results page."
+        },
+        "faq": [
+          {
+            "id": "faq-big5-model",
+            "q": "What does the Big Five personality test measure? What does OCEAN mean?",
+            "a": "OCEAN stands for Openness, Conscientiousness, Extraversion, Agreeableness and Neuroticism. These continuous dimensions describe receptiveness to ideas and experiences, planning and self-management, social activity, cooperation, and susceptibility to negative emotions.\n\nThey are not five personality types, and there is no universally best personality. Read the combination and compare it with examples from work, study and relationships. A higher or lower trait score is not a ranking of ability, morality or personal worth.",
+            "references": [
+              {
+                "label": "IPIP: Five-Factor Model scales and research",
+                "href": "https://ipip.ori.org/newMultipleconstructs.htm"
+              }
+            ]
+          },
+          {
+            "id": "faq-big5-forms",
+            "q": "Should I take the 90-question or 120-question Big Five test?",
+            "a": "The 120-question version takes about 15 minutes and the 90-question version about 11 minutes. Choose 120 if you have more time, or 90 to reduce the response burden. Complete every item in your selected version and answer as you usually are.\n\nMore questions alone do not establish accuracy; design, scoring and validation matter. For repeat comparisons, use the same version and record your circumstances. Do not interpret a cross-version score difference directly as personality change.",
+            "related_links": [
+              {
+                "label": "Compare versions and start the test",
+                "href": "#choose-version"
+              }
+            ]
+          },
+          {
+            "id": "faq-big5-evidence",
+            "q": "Is the Big Five test scientifically valid?",
+            "a": "The Big Five has an ongoing history of scale development. IPIP publishes Five-Factor Model scales, scoring keys and research. Using the model, however, does not mean that this particular questionnaire, translation and scoring have been validated. Evidence from another scale cannot be transferred directly to FermatMind’s 90-question or 120-question version.\n\nCheck the intended population, language, reliability, validity and norm sources. Reliability concerns consistency; validity concerns evidence for a specific interpretation or use. Without corresponding evidence, a generic accuracy percentage is not justified.",
+            "references": [
+              {
+                "label": "IPIP: Five-Factor Model scales and research",
+                "href": "https://ipip.ori.org/newMultipleconstructs.htm"
+              },
+              {
+                "label": "AERA, APA and NCME: Standards for Educational and Psychological Testing",
+                "href": "https://www.testingstandards.net/"
+              }
+            ],
+            "related_links": [
+              {
+                "label": "Reliability and validity",
+                "href": "/en/reliability-validity"
+              }
+            ]
+          },
+          {
+            "id": "faq-big5-scores",
+            "q": "How do I interpret Big Five scores and percentiles?",
+            "a": "When a reference mean μ and standard deviation σ are available, z = (D − μ) ÷ σ, T = 50 + 10z, and estimated percentile = 100 × Φ(z). Φ is the standard normal cumulative distribution. By default z is limited to −3.5 through 3.5, and T-scores and percentiles are rounded. Facets follow the same process using their own reference parameters.\n\nFor an illustrative D = 3.50, μ = 3.00 and σ = 0.50, z = 1, T = 60 and the normal-approximation percentile is about 84. Without usable norms, a compatibility path uses the linear score 100 × (D − 1) ÷ 4; that is not a real population percentile. Read the source and CALIBRATED, PROVISIONAL or MISSING status alongside the number.",
+            "references": [
+              {
+                "label": "AERA, APA and NCME: Standards for Educational and Psychological Testing",
+                "href": "https://www.testingstandards.net/"
+              }
+            ]
+          },
+          {
+            "id": "faq-big5-mbti",
+            "q": "Big Five vs. MBTI: why do my results seem different?",
+            "a": "Big Five primarily describes five continuous traits; MBTI organizes type language around four preference pairs. Questions, scoring and result formats differ, so a Big Five score cannot directly determine an MBTI type.\n\nIf results seem inconsistent, compare the particular behaviors, time frames and circumstances they describe, then look for examples. Different perspectives on self-observation are more useful than forcing a single definitive label.",
+            "related_links": [
+              {
+                "label": "Explore the MBTI personality test",
+                "href": "/en/tests/mbti-personality-test-16-personality-types"
+              }
+            ]
+          },
+          {
+            "id": "faq-big5-neuroticism",
+            "q": "Does high Neuroticism mean a mental health condition?",
+            "a": "No. Neuroticism is a personality dimension describing a tendency to experience negative emotions, not a clinical diagnosis. A score alone cannot establish anxiety, depression or another condition.\n\nYou can use it to reflect on stress triggers, recovery and support. If persistent distress affects sleep, work or daily life, seek an assessment from a qualified professional instead of diagnosing yourself with a personality test.",
+            "related_links": [
+              {
+                "label": "Assessment methods and limitations",
+                "href": "/en/method-boundaries"
+              }
+            ]
+          },
+          {
+            "id": "faq-big5-free",
+            "q": "Is the Big Five test free, and what should I read in the results?",
+            "a": "FermatMind’s current 90-question and 120-question Big Five tests and results are free. This does not mean other providers or professional assessments are free; the selected version’s results page defines the available detail.\n\nStart with the five-trait profile, then read dimension explanations and any facet detail provided. Choose a real setting to observe. One score or description should not decide a career, relationship or health question."
+          },
+          {
+            "id": "faq-big5-retest",
+            "q": "Can Big Five results change, and when should I retake the test?",
+            "a": "Self-awareness, recent circumstances, interpretation and response habits can affect a result. There is no single retest interval for everyone. Repeating questions rapidly and choosing a preferred score does not establish which result is more accurate.\n\nUse the same version, similar conditions and the same response standard when comparing. Note major life changes and look for sustained behavioral change, while allowing for measurement error. One rise or fall is not definitive proof that personality changed."
+          },
+          {
+            "id": "faq-big5-career",
+            "q": "Can Big Five results help with careers, majors or relationships?",
+            "a": "They can inform exploration, but cannot decide on their own. Traits differ from skills, interests, values and opportunities; the test cannot guarantee job performance, hiring or relationship quality.\n\nTranslate results into a question, such as whether you work better with clear plans or frequent change. Gather evidence through courses, projects, interviews or short practical experiences. For preferred work activities, explore a career interest assessment.",
+            "related_links": [
+              {
+                "label": "Explore the Holland Code career interest test",
+                "href": "/en/tests/holland-career-interest-test-riasec"
+              }
+            ]
+          },
+          {
+            "id": "faq-big5-calculation",
+            "q": "How are Big Five trait and facet scores calculated?",
+            "a": "Responses run from 1 to 5. Positively keyed items use y = x; reverse-keyed items use y = 6 − x. Scored items are averaged within each facet, then the six facet means in each domain are averaged to obtain O, C, E, A and N. Both versions retain the 30-facet structure.\n\nFacet mean F = Σy ÷ number of facet items; domain mean D = (F₁ + … + F₆) ÷ 6. Facet and domain values are rounded to two decimal places. For scored values 2, 3, 4 and 5, F = 3.50. This aligns item direction and gives facets equal weight within a domain; do not add raw answers without reverse scoring."
+          },
+          {
+            "id": "faq-big5-method",
+            "q": "Does an open scoring formula mean this Big Five test is validated?",
+            "a": "This self-report uses five factors and 30 facets, related to the IPIP-NEO measurement approach. The 120-question and 90-question versions load their own items, scoring policies and norm versions. Norm selection also considers language, region and applicable population conditions. Numbers from different versions cannot simply be converted.\n\nModel research, correct software calculations and validation of this questionnaire are distinct kinds of evidence. Clear scoring rules permit checking the calculation, but do not replace internal consistency, test–retest reliability, factor structure or cross-group comparability studies. A norm-status label is not an independently published validation study.",
+            "references": [
+              {
+                "label": "IPIP: Five-Factor Model scales and research",
+                "href": "https://ipip.ori.org/newMultipleconstructs.htm"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "ENNEAGRAM": {
+      "slug": "enneagram-personality-test-nine-types",
+      "source_zh": {
+        "why_choose": {
+          "title": "为什么选择费马九型人格测试？",
+          "intro": "九型人格关注行为背后的动机与习惯性应对。费马提供 105 题五点量表版和 144 题二选一迫选版，让你比较九种类型的相对倾向，并用真实经历核对这些解释。",
+          "items": [
+            {
+              "id": "enneagram-model",
+              "title": "从“我做了什么”追问“我为什么这样做”",
+              "body": "在九型人格框架中，同一种行为可能出于不同动机：主动承担任务，可能是重视标准、希望帮助别人，也可能是追求成就或安全感。类型描述的作用，是帮助你提出更具体的自我观察问题。\n\n阅读结果时，既看认同的部分，也留意不符合的部分。某一类型排在前面，只表示这次作答与相关描述更接近，不等于已经证实你有一个固定不变的本质。",
+              "link": {
+                "label": "查看九型人格的定义",
+                "href": "#faq-enneagram-model"
+              }
+            },
+            {
+              "id": "enneagram-likert-scoring",
+              "title": "105 题算法：带正负权重的类型强度",
+              "body": "五点作答先映射为 x ∈ {−2, −1, 0, 1, 2}。每道题对相关类型有预设权重 w，某一类型的原始强度 R = Σ(x × w) ÷ Σ|w|，范围为 −2 到 2。负权重改变该题对该类型的计分方向；分母采用权重绝对值之和。\n\n展示分 Profile100 = round[25 × (R + 2)]，范围 0–100。另计算 D = R − 九种类型 R 的平均值，用于描述个人内部的相对突出程度。例如 R = 0.8 时展示分为 70。这是原始强度的线性映射，不是第 70 百分位，也不是属于该类型的 70% 概率。",
+              "link": {
+                "label": "查看计分方法问答",
+                "href": "#faq-enneagram-calculation"
+              }
+            },
+            {
+              "id": "enneagram-forced-scoring",
+              "title": "144 题算法：比较选择次数与出现次数",
+              "body": "每题在两种类型对应的描述中选一项，被选择的类型记一次获选，同时记录两种类型各一次出现。当前成对题本中每个类型出现 32 次，类型原始分 W 为获选次数；展示分 Preference100 = round(100 × W ÷ E)，E 为该类型的实际出现次数。\n\n例如某类型在 32 次出现中获选 20 次，比例为 62.5%，整数展示分为 63。总分并不是九种类型加起来等于 100 的概率分布。排序还保留类型间的直接比较信息，供并列或接近时解释；105 题的强度分与这个相对获选比例不能直接当成同一量尺。",
+              "link": {
+                "label": "查看计分方法问答",
+                "href": "#faq-enneagram-calculation"
+              }
+            },
+            {
+              "id": "enneagram-science",
+              "title": "算法能复算，类型理论仍需独立证据",
+              "body": "105 题使用加权自评，144 题使用成对迫选，两者都属于预先定义规则的确定性计分。类型分离度描述靠前类型有多接近，不是经过校准的“类型判断准确率”；出现并列或接近时，应保留不确定性。\n\nHook 等的 2021 年系统综述发现九型人格的信度与效度证据并不一致，翼型、成长线与压力线等延伸理论的支持有限。公开算法说明了分数怎样产生，但不能因此把九型人格称为已经得到充分验证的精确分类系统。",
+              "link": {
+                "label": "阅读九型人格系统综述",
+                "href": "https://pubmed.ncbi.nlm.nih.gov/33332604/"
+              }
+            },
+            {
+              "id": "versions",
+              "title": "105 题与 144 题：差别也在作答方式",
+              "body": "105 题版通过五点量表表达每条描述与你的符合程度；144 题版要求在两项描述之间作相对选择。你可以根据自己更习惯的表达方式和可用时间选择。\n\n迫选题两项都符合时，比较哪一项更经常、更自然地出现；两项都不符合时，选择相对更接近的一项。不同作答形式会影响分数分布，因此不宜直接比较两个版本的分数高低。"
+            },
+            {
+              "id": "enneagram-application",
+              "title": "用动机假设改善沟通，而不是给别人定型",
+              "body": "选择一个反复发生的场景，记录触发事件、当时最在意的事、自己的反应和后果。例如，收到修改意见时，是担心做得不够好，还是担心不被认可？下一次可以先询问具体标准，再观察自己的反应是否改变。\n\n讨论他人时，用“这次你更在意什么”代替替对方判定类型。涉及职业或亲密关系，要结合技能、价值观、边界和实际相处；类型只是对话线索。",
+              "link": {
+                "label": "查看重测与实际应用问答",
+                "href": "#faq-enneagram-retest"
+              }
+            }
+          ]
+        },
+        "version_comparison": {
+          "caption": "费马九型人格 105 题与 144 题版本对照",
+          "columns": [
+            "比较项目",
+            "105 题版",
+            "144 题版"
+          ],
+          "rows": [
+            [
+              "作答形式",
+              "五点量表",
+              "二选一迫选"
+            ],
+            [
+              "题量",
+              "105 题",
+              "144 题"
+            ],
+            [
+              "预计用时",
+              "约 12 分钟",
+              "约 18 分钟"
+            ],
+            [
+              "选择参考",
+              "希望表达符合程度",
+              "希望在两个描述间比较"
+            ],
+            [
+              "结果阅读",
+              "结合九型排序与真实经历",
+              "结合九型排序与真实经历"
+            ]
+          ],
+          "note": "两个版本的数字不宜直接比较。预计用时不是限时要求，题量也不是准确率证明。"
+        },
+        "faq": [
+          {
+            "id": "faq-enneagram-model",
+            "q": "九型人格测试是什么？九种类型代表什么？",
+            "a": "九型人格用九种类型语言讨论习惯性的关注点、动机与应对方式。费马测试依据你对题目的回答提供自我探索线索；类型名称不是临床诊断，也不是人的固定身份或优劣等级。\n\n阅读结果时，既看描述是否贴近自己，也主动寻找不符合的例子。同一种行为可能出于不同动机，仅凭“喜欢帮助别人”或“做事认真”等单个特征，不能确定一个人的类型。"
+          },
+          {
+            "id": "faq-enneagram-forms",
+            "q": "九型人格 105 题和 144 题有什么区别？分别需要多久？",
+            "a": "费马当前提供 105 题五点量表版，预计约 12 分钟；144 题二选一迫选版，预计约 18 分钟。前者回答每条描述有多符合自己，后者在两条描述中选更接近自己的一条。\n\n两种版本的作答任务不同，不能把题量直接当成准确性排名。选你能理解并专注完成的版本；重测比较时保留同一版本，避免把题型差异当作类型变化。",
+            "related_links": [
+              {
+                "label": "选择九型人格版本",
+                "href": "#choose-version"
+              }
+            ]
+          },
+          {
+            "id": "faq-enneagram-evidence",
+            "q": "九型人格测试有科学依据吗？研究结论有哪些限制？",
+            "a": "九型人格存在实证研究，但证据并不一致。Hook 等人在 2021 年发表的系统综述覆盖 104 个独立样本，发现信度与效度证据混合；翼型和类型间移动等次级理论的研究支持较少。\n\n因此不能把九型人格描述成已被完全证实的精确分类系统。这份综述也不等于对费马 105 题或 144 题版本的验证。本站结果更适合作为反思与交流的起点，而非诊断、招聘筛选或决定人生方向的依据。",
+            "references": [
+              {
+                "label": "Hook 等（2021）：九型人格研究系统综述",
+                "href": "https://pubmed.ncbi.nlm.nih.gov/33332604/"
+              }
+            ]
+          },
+          {
+            "id": "faq-enneagram-interpretation",
+            "q": "九型人格结果怎么看？多个类型分数接近怎么办？",
+            "a": "先阅读结果中较突出的类型描述，再比较其核心关注点和典型应对方式。多个类型接近时，应保留不确定性，不必只因最高分多一点就认定自己必然属于该类型。\n\n可以各记录一件支持与不支持候选类型的真实经历，特别注意同一行为背后的不同原因。若结果页提供分数或排序，只按该版本标注的含义解释，不把它当成属于某类型的统计概率。"
+          },
+          {
+            "id": "faq-enneagram-wings",
+            "q": "九型人格的翼型、成长线和压力线应该如何理解？",
+            "a": "翼型、成长线和压力线是九型人格体系中的进一步解释，不宜当作必然发生的心理规律。相关研究证据有限，不能据此预测某人在压力下必然变成另一种类型。\n\n若结果提供这些内容，可把它们转化成具体观察问题：在压力下我会出现什么行为、什么支持有帮助？实际经历与描述不符时，应优先相信可观察的事实，不为匹配理论而修改自我叙述。",
+            "references": [
+              {
+                "label": "Hook 等（2021）：九型人格研究系统综述",
+                "href": "https://pubmed.ncbi.nlm.nih.gov/33332604/"
+              }
+            ]
+          },
+          {
+            "id": "faq-enneagram-answer",
+            "q": "九型人格题目两项都符合或都不符合，应该怎么选？",
+            "a": "105 题五点量表版按通常的自己选择符合程度；144 题迫选版比较两项，选择相对更接近自己的一项。迫选题并不要求另一项完全不符合。\n\n尽量参考一段时间内反复出现的行为，而不是理想中的自己或某一次极端事件。不要先决定想得到什么类型再倒推答案；若频繁无法理解题目，结果也应更谨慎地解释。"
+          },
+          {
+            "id": "faq-enneagram-free",
+            "q": "费马九型人格测试免费吗？可以查看哪些结果？",
+            "a": "费马当前 105 题与 144 题九型人格测试均可免费完成并查看结果。具体类型解释及延伸内容以所选版本结果页为准；本站免费范围不代表其他九型人格产品或咨询服务也免费。\n\n建议先读主要结果与相邻候选描述，再结合具体经历做记录。任何类型解释都不能替代对真实行为、处境和个人需要的了解，也不应成为评价他人的标签。"
+          },
+          {
+            "id": "faq-enneagram-mbti",
+            "q": "九型人格和 MBTI、大五人格有什么区别？",
+            "a": "九型人格侧重类型化的动机与应对叙述，MBTI 侧重四组偏好的类型组合，大五人格侧重连续维度。三者的理论、题型和证据基础不同，不能一一换算，也不应假设它们具有相同的科学支持程度。\n\n根据你的问题选择工具：想讨论沟通偏好、观察连续人格特质，或反思重复出现的应对模式，关注点并不一样。结果不同不必强行统一，可回到具体情境检验哪些描述有帮助。",
+            "related_links": [
+              {
+                "label": "大五人格测试",
+                "href": "/zh/tests/big-five-personality-test-ocean-model"
+              }
+            ]
+          },
+          {
+            "id": "faq-enneagram-retest",
+            "q": "九型人格重测变了怎么办？可以据此选择职业或伴侣吗？",
+            "a": "重测变化可能反映题目理解、情境、自我认识或版本差异，不能只凭一次变化认定人格发生转型。比较时先核对版本，再检查哪些回答和现实经历发生了变化。\n\n九型人格不能单独决定适合的职业或伴侣。把结果用于提出沟通和自我观察的问题，再结合兴趣、技能、价值观与实际相处经验判断；不要据此排除某一类人或机会。"
+          },
+          {
+            "id": "faq-enneagram-calculation",
+            "q": "九型人格测试的计分公式是什么？能举例说明吗？",
+            "a": "五点作答先映射为 x ∈ {−2, −1, 0, 1, 2}。每道题对相关类型有预设权重 w，某一类型的原始强度 R = Σ(x × w) ÷ Σ|w|，范围为 −2 到 2。负权重改变该题对该类型的计分方向；分母采用权重绝对值之和。\n\n展示分 Profile100 = round[25 × (R + 2)]，范围 0–100。另计算 D = R − 九种类型 R 的平均值，用于描述个人内部的相对突出程度。例如 R = 0.8 时展示分为 70。这是原始强度的线性映射，不是第 70 百分位，也不是属于该类型的 70% 概率。\n\n每题在两种类型对应的描述中选一项，被选择的类型记一次获选，同时记录两种类型各一次出现。当前成对题本中每个类型出现 32 次，类型原始分 W 为获选次数；展示分 Preference100 = round(100 × W ÷ E)，E 为该类型的实际出现次数。\n\n例如某类型在 32 次出现中获选 20 次，比例为 62.5%，整数展示分为 63。总分并不是九种类型加起来等于 100 的概率分布。排序还保留类型间的直接比较信息，供并列或接近时解释；105 题的强度分与这个相对获选比例不能直接当成同一量尺。"
+          },
+          {
+            "id": "faq-enneagram-method",
+            "q": "九型人格采用什么测量方法？公式公开代表已经科学验证了吗？",
+            "a": "105 题使用加权自评，144 题使用成对迫选，两者都属于预先定义规则的确定性计分。类型分离度描述靠前类型有多接近，不是经过校准的“类型判断准确率”；出现并列或接近时，应保留不确定性。\n\nHook 等的 2021 年系统综述发现九型人格的信度与效度证据并不一致，翼型、成长线与压力线等延伸理论的支持有限。公开算法说明了分数怎样产生，但不能因此把九型人格称为已经得到充分验证的精确分类系统。",
+            "references": [
+              {
+                "label": "阅读九型人格系统综述",
+                "href": "https://pubmed.ncbi.nlm.nih.gov/33332604/"
+              }
+            ]
+          }
+        ]
+      },
+      "expected_en": {
+        "why_choose": null,
+        "version_comparison": null,
+        "faq": [
+          {
+            "a": "Most users finish in about 12 minutes.",
+            "q": "How long does it take?"
+          },
+          {
+            "a": "Yes. The scoring flow expects all 105 items for a complete result.",
+            "q": "Do I need to answer every question?"
+          },
+          {
+            "a": "Yes. Retaking can help you compare changes across time or context.",
+            "q": "Can I retake it?"
+          },
+          {
+            "a": "No. This is an educational self-understanding tool and does not replace professional advice.",
+            "q": "Is this a diagnosis?"
+          }
+        ]
+      },
+      "content": {
+        "why_choose": {
+          "title": "Why choose the FermatMind Enneagram test?",
+          "intro": "Explore motivations and habitual responses with the 105-question rating scale or the 144-question forced-choice version. Compare your relative patterns across nine types and check the explanations against real experiences.",
+          "items": [
+            {
+              "id": "enneagram-model",
+              "title": "Look beyond behavior to possible motivations",
+              "body": "In the Enneagram framework, the same action may have different motives. Taking on a task could reflect concern for standards, a wish to help, achievement or security. Type descriptions help you ask more specific questions about yourself.\n\nNotice both what fits and what does not. A type ranking first means these answers were closer to its descriptions, not that a fixed inner identity has been proven.",
+              "link": {
+                "label": "What is the Enneagram test, and what do the nine types mean?",
+                "href": "#faq-enneagram-model"
+              }
+            },
+            {
+              "id": "enneagram-likert-scoring",
+              "title": "How the 105-question Enneagram test is scored",
+              "body": "Five-point responses are mapped to x ∈ {−2, −1, 0, 1, 2}. Each item has predefined weights w for relevant types. Raw intensity R = Σ(x × w) ÷ Σ|w|, ranging from −2 to 2. Negative weights reverse an item’s contribution to a type; the denominator sums absolute weights.\n\nProfile100 = round[25 × (R + 2)] produces a 0–100 display score. D = R − mean R across the nine types describes relative prominence within your profile. For R = 0.8, the display score is 70. This is a linear transformation, not the 70th percentile or a 70% probability of belonging to a type.",
+              "link": {
+                "label": "How are Enneagram scores calculated in each version?",
+                "href": "#faq-enneagram-calculation"
+              }
+            },
+            {
+              "id": "enneagram-forced-scoring",
+              "title": "How the 144-question forced-choice version is scored",
+              "body": "Each question compares two descriptions associated with two types. The selected type gains one choice, and both types gain one appearance. Each type appears 32 times in the current paired questionnaire. Its raw score W is the number of selections; Preference100 = round(100 × W ÷ E), where E is the actual number of appearances.\n\nA type selected 20 out of 32 times has a 62.5% selection rate, displayed as 63. The nine scores are not probabilities that sum to 100. Direct comparisons between types are retained to interpret close scores or ties. These relative selection rates and the 105-question intensity scores are not interchangeable scales.",
+              "link": {
+                "label": "How are Enneagram scores calculated in each version?",
+                "href": "#faq-enneagram-calculation"
+              }
+            },
+            {
+              "id": "enneagram-science",
+              "title": "Reproducible scoring and the limits of Enneagram evidence",
+              "body": "The 105-question version uses weighted self-report; the 144-question version uses paired forced choice. Both apply predefined deterministic scoring. Type separation describes how close the leading scores are, not a calibrated classification accuracy. Retain uncertainty when scores are close or tied.\n\nHook and colleagues’ 2021 systematic review found mixed reliability and validity evidence, with limited support for extensions such as wings, growth lines and stress lines. Publishing an algorithm explains score production; it does not establish a fully validated, precise classification system.",
+              "link": {
+                "label": "Hook et al. (2021): systematic review of Enneagram research",
+                "href": "https://pubmed.ncbi.nlm.nih.gov/33332604/"
+              }
+            },
+            {
+              "id": "versions",
+              "title": "105 or 144 questions: choose the response format",
+              "body": "The 105-question version lets you rate how well each statement describes you on a five-point scale. The 144-question version asks which of two statements is closer to you. Choose the format and time commitment you can manage comfortably.\n\nIf both forced-choice options fit, choose what happens more naturally or often; if neither fits, choose the closer one. Response formats affect distributions, so do not directly compare scores across versions."
+            },
+            {
+              "id": "enneagram-application",
+              "title": "Use motivation hypotheses to improve communication",
+              "body": "Record a recurring situation: the trigger, what mattered most, your reaction and its consequences. When receiving criticism, for example, are you concerned about standards or recognition? Next time, ask for specific expectations and observe whether your reaction changes.\n\nAsk others what mattered in a situation instead of assigning them a type. Career and relationship decisions also need skills, values, boundaries and actual experience; types are prompts for conversation.",
+              "link": {
+                "label": "Why did my Enneagram type change, and can it guide careers or relationships?",
+                "href": "#faq-enneagram-retest"
+              }
+            }
+          ]
+        },
+        "version_comparison": {
+          "caption": "FermatMind Enneagram: compare 105 and 144 questions",
+          "columns": [
+            "Feature",
+            "105-question version",
+            "144-question version"
+          ],
+          "rows": [
+            [
+              "Response format",
+              "Five-point rating scale",
+              "Paired forced choice"
+            ],
+            [
+              "Questions",
+              "105",
+              "144"
+            ],
+            [
+              "Estimated time",
+              "About 12 minutes",
+              "About 18 minutes"
+            ],
+            [
+              "Choosing a version",
+              "Rate how well descriptions fit",
+              "Compare two descriptions at a time"
+            ],
+            [
+              "Reading results",
+              "Compare nine-type rankings with experience",
+              "Compare nine-type rankings with experience"
+            ]
+          ],
+          "note": "Scores from these versions are not directly comparable. Times are estimates, not limits; question count is not proof of accuracy."
+        },
+        "faq": [
+          {
+            "id": "faq-enneagram-model",
+            "q": "What is the Enneagram test, and what do the nine types mean?",
+            "a": "The Enneagram uses nine type descriptions to discuss habitual attention, motivations and coping patterns. FermatMind uses your responses to offer prompts for self-exploration. Types are not diagnoses, fixed identities or rankings of personal worth.\n\nLook for examples that challenge a description as well as those that fit. The same behavior can have different motivations; being helpful or conscientious alone cannot determine a type."
+          },
+          {
+            "id": "faq-enneagram-forms",
+            "q": "What is the difference between the 105-question and 144-question Enneagram tests?",
+            "a": "The 105-question version uses a five-point rating scale and takes about 12 minutes. The 144-question paired forced-choice version takes about 18 minutes. One asks how well each description fits; the other asks which of two descriptions fits better.\n\nDifferent response tasks mean question counts cannot rank accuracy. Choose a format you understand and can complete attentively. Use the same version for retesting to avoid mistaking format differences for type changes.",
+            "related_links": [
+              {
+                "label": "Compare versions and start the test",
+                "href": "#choose-version"
+              }
+            ]
+          },
+          {
+            "id": "faq-enneagram-evidence",
+            "q": "Is the Enneagram scientifically supported?",
+            "a": "There is empirical research, but the evidence is mixed. Hook and colleagues’ 2021 systematic review covered 104 independent samples and found mixed reliability and validity evidence. Secondary theories such as wings and movement between types had less research support.\n\nIt should not be described as a fully proven, precise classification system. The review also does not validate FermatMind’s 105-question or 144-question version. Use results to begin reflection and conversation, not for diagnosis, hiring selection or determining your life direction.",
+            "references": [
+              {
+                "label": "Hook et al. (2021): systematic review of Enneagram research",
+                "href": "https://pubmed.ncbi.nlm.nih.gov/33332604/"
+              }
+            ]
+          },
+          {
+            "id": "faq-enneagram-interpretation",
+            "q": "How do I interpret my Enneagram results when several types score similarly?",
+            "a": "Read the leading descriptions and compare their central concerns and habitual responses. Close scores warrant uncertainty; a small lead does not prove you belong to one type.\n\nRecord an experience supporting and challenging each candidate, paying attention to different motives behind the same action. Interpret scores and rankings using your version’s definitions, not as statistical probabilities of type membership."
+          },
+          {
+            "id": "faq-enneagram-wings",
+            "q": "What are Enneagram wings, growth lines and stress lines?",
+            "a": "These are further interpretations within the Enneagram system, not inevitable psychological laws. Supporting evidence is limited; they cannot predict that a person must become another type under stress.\n\nIf your results include them, translate them into observations: what do I do under pressure, and what support helps? Prefer observable experience when a description does not fit rather than rewriting your self-understanding to match a theory.",
+            "references": [
+              {
+                "label": "Hook et al. (2021): systematic review of Enneagram research",
+                "href": "https://pubmed.ncbi.nlm.nih.gov/33332604/"
+              }
+            ]
+          },
+          {
+            "id": "faq-enneagram-answer",
+            "q": "How should I answer if both Enneagram options fit, or neither does?",
+            "a": "For the 105-question rating scale, rate how well each statement describes your usual self. For the 144-question forced-choice version, choose the closer option; the other option does not have to be completely false.\n\nUse recurring behavior over time, not your ideal self or one extreme event. Do not reverse-engineer answers to obtain a preferred type. If questions are repeatedly hard to understand, interpret the results with additional caution."
+          },
+          {
+            "id": "faq-enneagram-free",
+            "q": "Is the Enneagram test free, including the results?",
+            "a": "FermatMind’s current 105-question and 144-question tests and results are free. The selected results page defines its type explanations and further content. This does not cover other Enneagram products or consultation services.\n\nRead the main result and nearby candidates, then record relevant experiences. A description cannot replace understanding actual behavior, circumstances and needs, or justify labeling other people."
+          },
+          {
+            "id": "faq-enneagram-mbti",
+            "q": "Enneagram vs. MBTI vs. Big Five: how are they different?",
+            "a": "Enneagram focuses on type-based accounts of motivation and coping, MBTI on combinations of four preference pairs, and Big Five on continuous traits. Their theories, question formats and evidence differ. They cannot be converted one-to-one or assumed to have equal scientific support.\n\nChoose according to the question you want to explore: communication preferences, continuous traits or recurring responses. Different results do not need to be forced together; check which descriptions help in specific situations.",
+            "related_links": [
+              {
+                "label": "Explore the Big Five personality test",
+                "href": "/en/tests/big-five-personality-test-ocean-model"
+              }
+            ]
+          },
+          {
+            "id": "faq-enneagram-retest",
+            "q": "Why did my Enneagram type change, and can it guide careers or relationships?",
+            "a": "A change may reflect interpretation, circumstances, self-awareness or version differences, not a personality transformation. Check versions first, then which answers and experiences changed.\n\nEnneagram cannot independently determine a suitable career or partner. Use it to ask questions about communication and behavior alongside interests, skills, values and experience. Do not exclude people or opportunities on the basis of a type."
+          },
+          {
+            "id": "faq-enneagram-calculation",
+            "q": "How are Enneagram scores calculated in each version?",
+            "a": "Five-point responses are mapped to x ∈ {−2, −1, 0, 1, 2}. Each item has predefined weights w for relevant types. Raw intensity R = Σ(x × w) ÷ Σ|w|, ranging from −2 to 2. Negative weights reverse an item’s contribution to a type; the denominator sums absolute weights.\n\nProfile100 = round[25 × (R + 2)] produces a 0–100 display score. D = R − mean R across the nine types describes relative prominence within your profile. For R = 0.8, the display score is 70. This is a linear transformation, not the 70th percentile or a 70% probability of belonging to a type.\n\nEach question compares two descriptions associated with two types. The selected type gains one choice, and both types gain one appearance. Each type appears 32 times in the current paired questionnaire. Its raw score W is the number of selections; Preference100 = round(100 × W ÷ E), where E is the actual number of appearances.\n\nA type selected 20 out of 32 times has a 62.5% selection rate, displayed as 63. The nine scores are not probabilities that sum to 100. Direct comparisons between types are retained to interpret close scores or ties. These relative selection rates and the 105-question intensity scores are not interchangeable scales."
+          },
+          {
+            "id": "faq-enneagram-method",
+            "q": "Does publishing the Enneagram scoring method establish its validity?",
+            "a": "The 105-question version uses weighted self-report; the 144-question version uses paired forced choice. Both apply predefined deterministic scoring. Type separation describes how close the leading scores are, not a calibrated classification accuracy. Retain uncertainty when scores are close or tied.\n\nHook and colleagues’ 2021 systematic review found mixed reliability and validity evidence, with limited support for extensions such as wings, growth lines and stress lines. Publishing an algorithm explains score production; it does not establish a fully validated, precise classification system.",
+            "references": [
+              {
+                "label": "Hook et al. (2021): systematic review of Enneagram research",
+                "href": "https://pubmed.ncbi.nlm.nih.gov/33332604/"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IQ_RAVEN": {
+      "slug": "iq-test-intelligence-quotient-assessment",
+      "source_zh": {
+        "why_choose": {
+          "title": "为什么选择费马 IQ 矩阵推理测试？",
+          "intro": "这份测试通过图形规律题观察矩阵推理、模式识别与抽象问题解决表现。开始前了解题目测量的范围，完成后区分答题表现与标准化智商，能让结果更有解释价值。",
+          "items": [
+            {
+              "id": "iq-scope",
+              "title": "看图形之间的关系，观察抽象推理表现",
+              "body": "矩阵推理通常需要比较图形在行、列或位置之间如何变化，再用这些规律判断缺失部分。作答可能涉及数量、方向、组合与变化规则的识别。\n\n这类任务提供的是特定推理活动的表现线索，不能完整覆盖语言理解、知识、记忆、处理速度、创造力或现实问题解决能力。擅长或不擅长这一种题目，都不足以概括一个人的全部认知能力。",
+              "link": {
+                "label": "了解矩阵推理与完整智力评估的区别",
+                "href": "#faq-iq-scope"
+              }
+            },
+            {
+              "id": "iq-scoring",
+              "title": "原始成绩怎样计算：按答案键逐题计分",
+              "body": "当前 30 题矩阵推理题本采用客观题计分。原始成绩 R = Σ[pᵢ × I(答对第 i 题)]，pᵢ 为题本规定的题目分值，I 在答对时为 1、答错时为 0。当前原创 30 题按每题 1 分计算，原始成绩范围为 0–30，没有答错倒扣分。\n\n分维度成绩按题目所属维度聚合，答对比例 = 答对题数 ÷ 该维度题数 × 100%。例如全卷答对 18 题，原始成绩为 18，答对率为 60%；这只表示这套题上的表现，不能直接读作 IQ 60 或第 60 百分位。",
+              "link": {
+                "label": "查看计分方法问答",
+                "href": "#faq-iq-calculation"
+              }
+            },
+            {
+              "id": "iq-beta-method",
+              "title": "Beta 分的公式与来源：随机模拟基线，不是人群 IQ",
+              "body": "当前原创 30 题的 Beta 标准分使用随机模拟基线：μ = 5.096、σ = 2.034，z = (R − 5.096) ÷ 2.034；Beta 分 = round(100 + 15z)，并截取到 55–145。这里的参数描述模拟随机作答基线，不是代表性受测人群的智力分布。\n\n例如 R = 8 时，z ≈ 1.428，Beta 分为 121；这个 121 不能称为常模 IQ 121，也不能推断“超过多少人”。后端明确将该指标标为未进行生产人群常模化、不可用于人群百分位或正式 IQ 宣称。矩阵推理原始成绩与 Beta 指标必须分开解释。",
+              "link": {
+                "label": "查看计分方法问答",
+                "href": "#faq-iq-score"
+              }
+            },
+            {
+              "id": "iq-science-method",
+              "title": "使用什么科学方法，还缺少什么验证",
+              "body": "本页采用图形矩阵推理任务、客观答案计分与题目维度汇总。任务形式用于观察发现规律和抽象推理表现；要进一步解释成标准化 IQ，需要目标人群的代表性常模、适用年龄、可靠性和效度证据，以及受控的施测条件。\n\n随机模拟可以描述随机猜测基线，不能替代真实人群校准；套用均值 100、标准差 15 的形式也不会自动产生有效 IQ。当前结果不等同于韦氏、官方 Raven 或门萨认证，重复做同一题本还应考虑练习与记忆效应。",
+              "link": {
+                "label": "了解教育与心理测验标准",
+                "href": "https://www.testingstandards.net/"
+              }
+            },
+            {
+              "id": "iq-application",
+              "title": "复盘解题过程，比反复追逐一个数字更有用",
+              "body": "完成后可以回想：是没有找到规则，还是发现规则后没有核对其他位置？尝试把观察、提出假设、排除冲突和验证答案分开，有助于理解自己的问题解决过程。\n\n重复接触同一批题目会带来熟悉和记忆效应，提分不能直接证明一般智力提高。如果要比较不同时间的表现，应记录是否见过题目、作答条件和使用版本，保留这些解释限制。",
+              "link": {
+                "label": "查看练习效应与重测建议",
+                "href": "#faq-iq-practice"
+              }
+            }
+          ]
+        },
+        "faq": [
+          {
+            "id": "faq-iq-scope",
+            "q": "费马 IQ 测试测什么？是否等于完整智力测验？",
+            "a": "费马当前开放原创 30 题矩阵推理测评，主要考察图形规律识别与抽象推理任务中的表现。它不能覆盖语言理解、记忆、处理速度等所有认知领域，也不能仅凭一次在线结果概括一个人的全部智力。\n\n页面使用“智商／IQ 测试”作为入口名称，不代表它与专业人员实施的综合智力测验等同。结果适合用于了解本次任务表现；正式教育、临床或高风险用途需要相应的标准化评估。",
+            "related_links": [
+              {
+                "label": "测评方法与使用边界",
+                "href": "/zh/method-boundaries"
+              }
+            ]
+          },
+          {
+            "id": "faq-iq-form",
+            "q": "IQ 测试有多少题、需要多久？是不是瑞文原版或门萨测试？",
+            "a": "费马当前公开入口是原创 30 题版本，预计约 20 分钟。请以本页实际开放的版本为准；它不应被当作瑞文原版、门萨入会测试或这些机构的官方授权证明。\n\n建议留出连续时间，在能清楚看见图形的设备上独立完成。预计用时不是诊断阈值，也不表示越快越聪明；作答与提交要求以题页实际提示为准。",
+            "related_links": [
+              {
+                "label": "进入原创 30 题测试",
+                "href": "#choose-version"
+              }
+            ]
+          },
+          {
+            "id": "faq-iq-score",
+            "q": "IQ 分数、正确率与百分位有什么区别？能直接比较不同网站吗？",
+            "a": "当前原创 30 题的 Beta 标准分使用随机模拟基线：μ = 5.096、σ = 2.034，z = (R − 5.096) ÷ 2.034；Beta 分 = round(100 + 15z)，并截取到 55–145。这里的参数描述模拟随机作答基线，不是代表性受测人群的智力分布。\n\n例如 R = 8 时，z ≈ 1.428，Beta 分为 121；这个 121 不能称为常模 IQ 121，也不能推断“超过多少人”。后端明确将该指标标为未进行生产人群常模化、不可用于人群百分位或正式 IQ 宣称。矩阵推理原始成绩与 Beta 指标必须分开解释。",
+            "references": [
+              {
+                "label": "AERA／APA／NCME：教育与心理测验标准",
+                "href": "https://www.testingstandards.net/"
+              }
+            ]
+          },
+          {
+            "id": "faq-iq-evidence",
+            "q": "在线 IQ 测试准不准？应看哪些科学证据？",
+            "a": "评价在线认知测评，不能只看题目像不像经典智力题。需要核对内容覆盖、计分规则、适用年龄与语言、样本来源、信度和针对具体用途的效度证据。矩阵推理研究也不能自动替代费马原创题本的验证。\n\n心理测验标准强调分数解释与使用目的相匹配。若本站结果缺少某一用途所需的常模或证据，应保留这一限制；不要用一个未经说明的准确率来替代验证材料。",
+            "references": [
+              {
+                "label": "AERA／APA／NCME：教育与心理测验标准",
+                "href": "https://www.testingstandards.net/"
+              }
+            ],
+            "related_links": [
+              {
+                "label": "查看信度与效度说明",
+                "href": "/zh/reliability-validity"
+              }
+            ]
+          },
+          {
+            "id": "faq-iq-answer",
+            "q": "做 IQ 测试时可以查答案、用 AI 或别人帮忙吗？",
+            "a": "若希望结果反映自己的本次独立表现，应自行观察并作答，不使用搜索、AI 解题或他人提示。接受帮助后的结果反映的是不同的作答条件，不能与独立完成时直接比较。\n\n保持图形清晰可见，并尽量减少中断。若设备、疲劳或明显干扰影响了作答，可记录这些因素，在解释结果时说明，而不是把这次表现当作能力上限。"
+          },
+          {
+            "id": "faq-iq-practice",
+            "q": "重复做 IQ 测试分数提高，是否说明智力提高了？",
+            "a": "不一定。重做相同或相似题目会增加对题型、规律和答案的熟悉程度；这种练习收益与一般认知能力的变化不是同一件事。一次提高不能单独证明整体智力增长。\n\n若想观察学习效果，可记录解题策略和错误类型，而不是只追逐分数。需要正式比较认知表现时，应使用有相应解释依据的工具和程序，不把不同网站或反复刷题的结果拼成一条能力增长曲线。"
+          },
+          {
+            "id": "faq-iq-free",
+            "q": "费马 IQ 测试免费吗？测试结果可以作为证书吗？",
+            "a": "费马当前原创 30 题 IQ 测试可免费完成并查看结果。免费范围指本站提供的测试与结果，不包括其他机构的考试、鉴定或专业评估服务。\n\n在线结果不是门萨资格、学校鉴定、招聘证明或临床诊断证书。若某机构要求正式材料，应直接核对它接受的测验、实施人员和评估流程，不用本页结果代替。"
+          },
+          {
+            "id": "faq-iq-meaning",
+            "q": "IQ 测试分数低，是否代表不聪明或没有发展潜力？",
+            "a": "不能这样推断。这份测试观察的是特定矩阵推理任务中的表现，并不测量一个人的全部知识、创造力、实际经验或个人价值；单次结果还需要结合测量误差与作答条件解释。\n\n可以回顾哪些规律识别或策略需要练习，并结合真实学习表现制定下一步。如果认知困难持续影响日常生活，应由合格专业人员综合评估，不能依靠在线分数自行下结论。"
+          },
+          {
+            "id": "faq-iq-age",
+            "q": "儿童、不同年龄的人可以用同一份 IQ 结果比较吗？",
+            "a": "不宜直接比较。认知测评分数的解释依赖工具适用范围和相应年龄常模；能打开网页作答，不等于该测评已适用于所有年龄或发展阶段。\n\n在没有明确适龄验证与常模说明时，不把本页结果用于儿童智力鉴定、教育安置或跨年龄排名。需要此类评估时，应选择适龄、证据充分并由合格人员实施的工具。",
+            "references": [
+              {
+                "label": "AERA／APA／NCME：教育与心理测验标准",
+                "href": "https://www.testingstandards.net/"
+              }
+            ]
+          },
+          {
+            "id": "faq-iq-calculation",
+            "q": "IQ 矩阵推理测试的计分公式是什么？能举例说明吗？",
+            "a": "当前 30 题矩阵推理题本采用客观题计分。原始成绩 R = Σ[pᵢ × I(答对第 i 题)]，pᵢ 为题本规定的题目分值，I 在答对时为 1、答错时为 0。当前原创 30 题按每题 1 分计算，原始成绩范围为 0–30，没有答错倒扣分。\n\n分维度成绩按题目所属维度聚合，答对比例 = 答对题数 ÷ 该维度题数 × 100%。例如全卷答对 18 题，原始成绩为 18，答对率为 60%；这只表示这套题上的表现，不能直接读作 IQ 60 或第 60 百分位。"
+          },
+          {
+            "id": "faq-iq-method",
+            "q": "IQ 矩阵推理采用什么测量方法？公式公开代表已经科学验证了吗？",
+            "a": "本页采用图形矩阵推理任务、客观答案计分与题目维度汇总。任务形式用于观察发现规律和抽象推理表现；要进一步解释成标准化 IQ，需要目标人群的代表性常模、适用年龄、可靠性和效度证据，以及受控的施测条件。\n\n随机模拟可以描述随机猜测基线，不能替代真实人群校准；套用均值 100、标准差 15 的形式也不会自动产生有效 IQ。当前结果不等同于韦氏、官方 Raven 或门萨认证，重复做同一题本还应考虑练习与记忆效应。",
+            "references": [
+              {
+                "label": "了解教育与心理测验标准",
+                "href": "https://www.testingstandards.net/"
+              }
+            ]
+          }
+        ]
+      },
+      "expected_en": {
+        "why_choose": null,
+        "faq": [
+          {
+            "a": "Most users finish in about 20 minutes.",
+            "q": "How long does it take?"
+          },
+          {
+            "a": "Yes. The scoring flow expects all 30 items for a complete result.",
+            "q": "Do I need to answer every question?"
+          },
+          {
+            "a": "Yes. Retaking can help you compare changes across time or context.",
+            "q": "Can I retake it?"
+          },
+          {
+            "a": "No. This is an educational self-understanding tool and does not replace professional advice.",
+            "q": "Is this a diagnosis?"
+          }
+        ]
+      },
+      "content": {
+        "why_choose": {
+          "title": "Explore the FermatMind matrix reasoning test",
+          "intro": "Use visual pattern problems to explore matrix reasoning, pattern recognition and abstract problem-solving performance. Understand the task’s scope before starting, and distinguish your task score from standardized IQ when reading the results.",
+          "items": [
+            {
+              "id": "iq-scope",
+              "title": "Recognize relationships between visual patterns",
+              "body": "Matrix reasoning involves comparing changes across rows, columns or positions and using those rules to identify a missing element. Problems may involve quantity, orientation, combinations and transformations.\n\nThese tasks describe performance on particular reasoning activities. They do not cover all verbal comprehension, knowledge, memory, processing speed, creativity or practical problem solving. Strength or difficulty in this format cannot summarize all cognitive ability.",
+              "link": {
+                "label": "What does this online IQ test measure? Is it a complete intelligence assessment?",
+                "href": "#faq-iq-scope"
+              }
+            },
+            {
+              "id": "iq-scoring",
+              "title": "How the raw matrix reasoning score is calculated",
+              "body": "The current 30-question test uses an objective answer key. Raw score R = Σ[pᵢ × I(item i correct)], where pᵢ is the item’s assigned value and I is 1 for a correct answer and 0 otherwise. Each item in the current original form is worth 1 point, giving a 0–30 range with no deduction for wrong answers.\n\nDimension scores aggregate their assigned items. Percentage correct = correct items ÷ items in that dimension × 100%. Answering 18 of 30 correctly gives a raw score of 18 and 60% correct; it does not mean IQ 60 or the 60th percentile.",
+              "link": {
+                "label": "How is the matrix reasoning score calculated?",
+                "href": "#faq-iq-calculation"
+              }
+            },
+            {
+              "id": "iq-beta-method",
+              "title": "The Beta score uses a simulated baseline, not population IQ norms",
+              "body": "For the current original 30-question form, the Beta score uses a random-response simulation baseline: μ = 5.096, σ = 2.034 and z = (R − 5.096) ÷ 2.034. Beta score = round(100 + 15z), limited to 55–145. These parameters describe simulated random answering, not the intelligence distribution of a representative population.\n\nFor R = 8, z ≈ 1.428 and the Beta score is 121. That is not a normed IQ of 121 and cannot establish how many people you outperform. This metric is explicitly not normed on the production population and is not suitable for population percentiles or formal IQ claims. Interpret raw performance and the Beta indicator separately.",
+              "link": {
+                "label": "What is the difference between an IQ score, percentage correct and a percentile?",
+                "href": "#faq-iq-score"
+              }
+            },
+            {
+              "id": "iq-science-method",
+              "title": "What would be required for a standardized IQ interpretation?",
+              "body": "This assessment combines visual matrix tasks, objective scoring and item-dimension summaries to observe pattern recognition and abstract reasoning. A standardized IQ interpretation would additionally require representative population norms, defined age applicability, reliability and validity evidence, and controlled administration.\n\nRandom simulation describes guessing, not real-population calibration. Applying a mean of 100 and standard deviation of 15 does not create a valid IQ score. These results are not a Wechsler assessment, official Raven assessment or Mensa certification. Repeated exposure also introduces practice and memory effects.",
+              "link": {
+                "label": "AERA, APA and NCME: Standards for Educational and Psychological Testing",
+                "href": "https://www.testingstandards.net/"
+              }
+            },
+            {
+              "id": "iq-application",
+              "title": "Review your reasoning process, not just the number",
+              "body": "Consider whether you missed a rule or found one without checking the other positions. Separate observation, forming a hypothesis, ruling out contradictions and checking the answer to understand your problem-solving process.\n\nRepeated exposure brings familiarity and memory effects, so score gains do not directly demonstrate higher general intelligence. When comparing sessions, record previous exposure, conditions and version, and retain those limits in your interpretation.",
+              "link": {
+                "label": "Does a higher score after practice mean my intelligence increased?",
+                "href": "#faq-iq-practice"
+              }
+            }
+          ]
+        },
+        "faq": [
+          {
+            "id": "faq-iq-scope",
+            "q": "What does this online IQ test measure? Is it a complete intelligence assessment?",
+            "a": "FermatMind currently offers an original 30-question matrix reasoning assessment focused on visual pattern recognition and abstract reasoning tasks. It does not cover every cognitive domain, including verbal comprehension, memory and processing speed. One online result cannot summarize all intelligence.\n\n“IQ test” is the entry-page name, not a claim of equivalence to a comprehensive assessment administered by a professional. Use results to understand this task performance. Formal educational, clinical or other high-stakes uses require an appropriate standardized assessment.",
+            "related_links": [
+              {
+                "label": "Assessment methods and limitations",
+                "href": "/en/method-boundaries"
+              }
+            ]
+          },
+          {
+            "id": "faq-iq-form",
+            "q": "How many questions are there? Is this an official Raven or Mensa test?",
+            "a": "The current public form contains 30 original questions and takes about 20 minutes. Check the version actually offered on this page. It is not the original Raven test, a Mensa admission test or proof of authorization by those organizations.\n\nSet aside uninterrupted time and use a device that displays the patterns clearly. Estimated time is not a diagnostic threshold, and faster does not necessarily mean smarter. Follow the actual question-page instructions for answering and submitting.",
+            "related_links": [
+              {
+                "label": "Compare versions and start the test",
+                "href": "#choose-version"
+              }
+            ]
+          },
+          {
+            "id": "faq-iq-score",
+            "q": "What is the difference between an IQ score, percentage correct and a percentile?",
+            "a": "For the current original 30-question form, the Beta score uses a random-response simulation baseline: μ = 5.096, σ = 2.034 and z = (R − 5.096) ÷ 2.034. Beta score = round(100 + 15z), limited to 55–145. These parameters describe simulated random answering, not the intelligence distribution of a representative population.\n\nFor R = 8, z ≈ 1.428 and the Beta score is 121. That is not a normed IQ of 121 and cannot establish how many people you outperform. This metric is explicitly not normed on the production population and is not suitable for population percentiles or formal IQ claims. Interpret raw performance and the Beta indicator separately.",
+            "references": [
+              {
+                "label": "AERA, APA and NCME: Standards for Educational and Psychological Testing",
+                "href": "https://www.testingstandards.net/"
+              }
+            ]
+          },
+          {
+            "id": "faq-iq-evidence",
+            "q": "Are online IQ tests accurate? What evidence should I look for?",
+            "a": "Classic-looking puzzles do not establish measurement quality. Check content coverage, scoring rules, intended ages and languages, sample sources, reliability and validity for the proposed use. Matrix reasoning research does not automatically validate FermatMind’s original questionnaire.\n\nTesting standards emphasize matching interpretations to their intended uses. If appropriate norms or evidence are missing, keep that limitation explicit instead of replacing it with an unexplained accuracy percentage.",
+            "references": [
+              {
+                "label": "AERA, APA and NCME: Standards for Educational and Psychological Testing",
+                "href": "https://www.testingstandards.net/"
+              }
+            ],
+            "related_links": [
+              {
+                "label": "Reliability and validity",
+                "href": "/en/reliability-validity"
+              }
+            ]
+          },
+          {
+            "id": "faq-iq-answer",
+            "q": "Can I use AI, search for answers or ask someone for help?",
+            "a": "To observe your own independent performance, solve the patterns without search, AI solutions or hints from others. Assisted results reflect different conditions and are not directly comparable with independent completion.\n\nKeep the patterns clearly visible and reduce interruptions. Record any device issues, fatigue or substantial distractions and consider them when interpreting the result; one session does not define your ability ceiling."
+          },
+          {
+            "id": "faq-iq-practice",
+            "q": "Does a higher score after practice mean my intelligence increased?",
+            "a": "Not necessarily. Repeating similar or identical items builds familiarity with formats, rules and answers. Practice gains are different from changes in general cognitive ability, and one improvement does not establish broader intellectual growth.\n\nTrack strategies and error types to understand learning. Formal comparisons need tools and procedures with suitable evidence; do not combine repeated practice scores or scores from different websites into an assumed ability-growth curve."
+          },
+          {
+            "id": "faq-iq-free",
+            "q": "Is this IQ test free? Can I use the result as a certificate?",
+            "a": "The current original 30-question FermatMind test and results are free. This does not include other organizations’ examinations, certification or professional assessments.\n\nAn online result is not a Mensa qualification, school assessment, hiring credential or clinical diagnostic certificate. If an institution requests formal evidence, check its accepted tests, practitioners and procedures directly."
+          },
+          {
+            "id": "faq-iq-meaning",
+            "q": "Does a low result mean I am not intelligent or lack potential?",
+            "a": "No. This assessment observes particular matrix reasoning tasks, not all knowledge, creativity, practical experience or personal worth. Interpret a single result with measurement error and the conditions of answering.\n\nReview which patterns or strategies could benefit from practice and use real learning experiences to plan next steps. Persistent cognitive difficulties affecting daily life call for a qualified professional assessment, not a conclusion from an online score."
+          },
+          {
+            "id": "faq-iq-age",
+            "q": "Can children or people of different ages compare these IQ results?",
+            "a": "Not directly. Cognitive score interpretation depends on the tool’s scope and appropriate age norms. Being able to open and complete a test does not establish validity for every age or developmental stage.\n\nWithout clear age-specific validation and norms, do not use this result for childhood intelligence assessment, educational placement or cross-age ranking. Such decisions require an age-appropriate, well-supported assessment administered by qualified personnel.",
+            "references": [
+              {
+                "label": "AERA, APA and NCME: Standards for Educational and Psychological Testing",
+                "href": "https://www.testingstandards.net/"
+              }
+            ]
+          },
+          {
+            "id": "faq-iq-calculation",
+            "q": "How is the matrix reasoning score calculated?",
+            "a": "The current 30-question test uses an objective answer key. Raw score R = Σ[pᵢ × I(item i correct)], where pᵢ is the item’s assigned value and I is 1 for a correct answer and 0 otherwise. Each item in the current original form is worth 1 point, giving a 0–30 range with no deduction for wrong answers.\n\nDimension scores aggregate their assigned items. Percentage correct = correct items ÷ items in that dimension × 100%. Answering 18 of 30 correctly gives a raw score of 18 and 60% correct; it does not mean IQ 60 or the 60th percentile."
+          },
+          {
+            "id": "faq-iq-method",
+            "q": "Does an open formula make this a validated IQ test?",
+            "a": "This assessment combines visual matrix tasks, objective scoring and item-dimension summaries to observe pattern recognition and abstract reasoning. A standardized IQ interpretation would additionally require representative population norms, defined age applicability, reliability and validity evidence, and controlled administration.\n\nRandom simulation describes guessing, not real-population calibration. Applying a mean of 100 and standard deviation of 15 does not create a valid IQ score. These results are not a Wechsler assessment, official Raven assessment or Mensa certification. Repeated exposure also introduces practice and memory effects.",
+            "references": [
+              {
+                "label": "AERA, APA and NCME: Standards for Educational and Psychological Testing",
+                "href": "https://www.testingstandards.net/"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "EQ_60": {
+      "slug": "eq-test-emotional-intelligence-assessment",
+      "source_zh": {
+        "why_choose": {
+          "title": "为什么选择费马情商 EQ 测试？",
+          "intro": "情商自评的价值，在于把模糊的“会不会处理情绪”拆成能够观察和练习的日常行为。费马 60 题测试围绕情绪觉察、情绪调节、共情与人际沟通倾向，帮助你找到具体的反思入口。",
+          "items": [
+            {
+              "id": "eq-domains",
+              "title": "从四个方面理解情绪与人际互动",
+              "body": "情绪觉察涉及能否识别和描述自己的感受；情绪调节涉及如何应对这些感受；共情涉及理解他人处境与情绪；人际沟通涉及怎样表达、倾听和回应。四个方面可以分别观察，不必把自己简单分为“高情商”或“低情商”。\n\n例如，能发现自己生气，并不代表当下就能清楚表达需要；能理解别人的情绪，也不意味着应当牺牲自己的边界。把维度放进真实场景，才能看清哪些环节值得练习。",
+              "link": {
+                "label": "查看测量范围",
+                "href": "#faq-eq-model"
+              }
+            },
+            {
+              "id": "eq-scoring",
+              "title": "60 题怎样计分：反向计分、四维求和与 0–100 换算",
+              "body": "本测试使用 1–5 分的五点作答，分为情绪觉察 SA、情绪调节 ER、共情 EM、关系管理 RM，四个维度各 15 题。正向题计分 y = x；反向题计分 y = 6 − x。例如某道反向题选择 2 分，进入维度计算的是 4 分。\n\n每个维度原始分 S = Σy，范围 15–75；维度均分 = S ÷ 15；0–100 展示分 POMP = 100 × (S − 15) ÷ 60。总原始分 G 为四维原始分之和，范围 60–300；总 POMP = 100 × (G − 60) ÷ 240。这里的 0–100 是量尺转换，不是在人群中超过多少人的百分位。",
+              "link": {
+                "label": "查看计分方法问答",
+                "href": "#faq-eq-calculation"
+              }
+            },
+            {
+              "id": "eq-standardization",
+              "title": "标准分怎样得到：明确参照参数与暂定状态",
+              "body": "后端先尝试选择适用的常模记录，再按 z = (S − μ) ÷ σ 转换各维度，其中 μ 为参照均值、σ 为参照标准差。标准分 = 100 + 15z，并截取到 55–145；全局标准分使用四个维度 z 分的平均值进行同样转换。百分位估计为 100 × Φ(z)，Φ 表示标准正态分布的累计概率。\n\n没有可用记录时，当前配置使用暂定参数 μ = 53.5、σ = 7.5，标记为 PROVISIONAL。举例：S = 60 时，POMP = 75；使用这组暂定参数时 z ≈ 0.867，标准分 = 113。113 不是智商，也不能因为采用了标准分公式就证明常模具有代表性。解释应同时看常模来源、样本和校准状态。",
+              "link": {
+                "label": "查看计分方法问答",
+                "href": "#faq-eq-scores"
+              }
+            },
+            {
+              "id": "eq-quality",
+              "title": "采用什么测量方法，怎样识别作答质量问题",
+              "body": "这是四维自我报告量表：先统一正反向题，再聚合维度分数，并附带作答质量检查。后端会检查作答速度、连续相同选项、极端与中间选项比例，以及成对题目的一致性；这些指标提示结果是否需要谨慎使用，不是情商高低或“是否诚实”的诊断。\n\n本测试不同于用任务表现测情绪识别与理解能力的 MSCEIT。反向计分、标准化和质量检查属于测量程序；题本是否可靠，还要看内部一致性、重测稳定性、结构效度和目标人群样本。不能把别的量表的研究结果当成本题本的验证结论。",
+              "link": {
+                "label": "对照能力型情绪智力测量研究",
+                "href": "https://scholars.unh.edu/psych_facpub/385/"
+              }
+            },
+            {
+              "id": "eq-practice",
+              "title": "把结果转成可以练习的沟通动作",
+              "body": "如果难以识别感受，可以先记录事件、身体反应与情绪词；如果冲突时容易立即反击，可以尝试暂停片刻，描述事实并说出需要；如果经常误解他人，可以先复述对方的意思，再确认理解是否准确。\n\n一次只选一个动作，在几次真实互动中记录效果。观察的是表达是否更清晰、冲突是否更容易修复，而不只是下一次测试分数有没有变高。",
+              "link": {
+                "label": "查看具体练习建议",
+                "href": "#faq-eq-growth"
+              }
+            }
+          ]
+        },
+        "faq": [
+          {
+            "id": "faq-eq-model",
+            "q": "情商 EQ 测试测什么？情商高就是会说话、会讨好别人吗？",
+            "a": "费马 EQ 60 题测评关注情绪觉察、情绪调节、共情和人际沟通相关倾向。情商不等于外向、永远情绪稳定或总让别人满意，也不意味着可以忽略自己的边界。\n\n阅读时应回到具体行为：能否识别情绪、理解触发原因、选择适当表达并听取反馈。不同场景的表现可能不同，不能仅凭一句“高情商”或“低情商”概括一个人。"
+          },
+          {
+            "id": "faq-eq-method",
+            "q": "自评情商测试与能力型情绪智力测验有什么区别？",
+            "a": "自评量表询问你通常怎样理解和处理情绪，回答会受到自我认识和作答倾向影响；能力型测验则通过情绪相关任务评价表现。两种方式测量的角度与计分依据不同，不能把分数直接等同。\n\n费马当前 60 题入口使用自评作答方式，不等于 MSCEIT 等能力型工具。引用情绪智力研究是为了说明测量区别，并不意味着本站使用了该工具、获得其授权或具有相同验证结果。",
+            "references": [
+              {
+                "label": "Mayer、Salovey、Caruso 等（2003）：情绪智力能力测量研究",
+                "href": "https://scholars.unh.edu/psych_facpub/385/"
+              }
+            ]
+          },
+          {
+            "id": "faq-eq-forms",
+            "q": "费马情商测试多少题、需要多久？应该怎样作答？",
+            "a": "当前为 60 题、约 10 分钟，采用 1–5 分五点自评。四个维度各 15 题；先按题目方向计分，再求维度原始和、均分及 POMP。正向题 y = x，反向题 y = 6 − x。\n\n请按通常的真实行为作答。用时、连续相同选项、反应比例和成对题目一致性用于作答质量提示，不给情商分额外加分，也不等于心理测量信度或效度。",
+            "related_links": [
+              {
+                "label": "开始 EQ 60 题测试",
+                "href": "#choose-version"
+              }
+            ]
+          },
+          {
+            "id": "faq-eq-evidence",
+            "q": "情商测试科学吗？怎样判断结果是否可信？",
+            "a": "情绪智力有不同理论与测量方法，不能因为都叫“EQ”就认为量表彼此等价。判断费马 60 题结果，应查看对应题本、语言、人群和用途的验证材料，而不是借用其他量表的研究结论。\n\n可信的解释需要交代分数定义、信度、效度与限制。自评结果尤其需要现实行为和反馈来补充；觉得描述“很像自己”可以作为继续观察的线索，但不是对量表准确性的科学验证。",
+            "references": [
+              {
+                "label": "Mayer、Salovey、Caruso 等（2003）：情绪智力能力测量研究",
+                "href": "https://scholars.unh.edu/psych_facpub/385/"
+              },
+              {
+                "label": "AERA／APA／NCME：教育与心理测验标准",
+                "href": "https://www.testingstandards.net/"
+              }
+            ],
+            "related_links": [
+              {
+                "label": "查看信度与效度说明",
+                "href": "/zh/reliability-validity"
+              }
+            ]
+          },
+          {
+            "id": "faq-eq-scores",
+            "q": "情商测试结果怎么看？可以和 IQ 或他人的分数比较吗？",
+            "a": "后端先尝试选择适用的常模记录，再按 z = (S − μ) ÷ σ 转换各维度，其中 μ 为参照均值、σ 为参照标准差。标准分 = 100 + 15z，并截取到 55–145；全局标准分使用四个维度 z 分的平均值进行同样转换。百分位估计为 100 × Φ(z)，Φ 表示标准正态分布的累计概率。\n\n没有可用记录时，当前配置使用暂定参数 μ = 53.5、σ = 7.5，标记为 PROVISIONAL。举例：S = 60 时，POMP = 75；使用这组暂定参数时 z ≈ 0.867，标准分 = 113。113 不是智商，也不能因为采用了标准分公式就证明常模具有代表性。解释应同时看常模来源、样本和校准状态。",
+            "references": [
+              {
+                "label": "AERA／APA／NCME：教育与心理测验标准",
+                "href": "https://www.testingstandards.net/"
+              }
+            ]
+          },
+          {
+            "id": "faq-eq-growth",
+            "q": "情商可以提高吗？做完测试后可以怎样练习？",
+            "a": "情绪相关行为可以作为练习目标，但测试本身不能保证情商提高，也不能用短期分数上升证明练习有效。建议选择具体、可观察的行为，而不是给自己设定抽象的“变高情商”目标。\n\n例如在一次有分歧的对话后，记录触发事件、自己的感受、采取的行动和对方反馈；下次尝试先澄清对方意思，再表达自己的需要。持续比较现实互动的变化，必要时寻求合适的支持。"
+          },
+          {
+            "id": "faq-eq-free",
+            "q": "费马情商测试免费吗？低分是否需要付费才能改善？",
+            "a": "费马当前 EQ 60 题测试可免费完成并查看结果。分数高低不会决定你是否有资格查看本站当前提供的结果，也不意味着必须购买某种服务才能改善。\n\n先理解结果定义和自身情境，再决定需要哪些学习或支持资源。本站免费测试不代表其他课程、咨询或专业评估免费；不要仅因一次在线分数就作消费或健康决定。"
+          },
+          {
+            "id": "faq-eq-diagnosis",
+            "q": "情商低是否意味着有心理疾病，或不适合做管理和建立关系？",
+            "a": "不意味着。EQ 自评结果不是临床诊断，也不能单独判定一个人的领导能力、关系质量或道德水平。个体行为会受到角色要求、压力、技能和环境等多种因素影响。\n\n把结果用于发现具体需要支持的情境，避免用“低情商”给自己或别人贴标签。如果情绪困扰持续影响生活，应寻求合格专业人员评估，而不是让情商测评分数代替诊断。",
+            "related_links": [
+              {
+                "label": "测评的适用边界",
+                "href": "/zh/method-boundaries"
+              }
+            ]
+          },
+          {
+            "id": "faq-eq-retest",
+            "q": "情商重测分数变化，怎样判断是否真的进步？",
+            "a": "先核对是否使用同一版本、相近环境和相同作答标准。自我认识改变、近期事件、想呈现良好形象或记住题目，都可能影响自评分数；一次变化不能直接证明能力增长或退步。\n\n更有意义的是把分数与行为记录结合：在类似压力或冲突中是否作出了不同选择，沟通反馈是否持续改善。不要为了得到满意分数连续刷题，也不把小幅波动视为确定结论。"
+          },
+          {
+            "id": "faq-eq-calculation",
+            "q": "EQ 情商测试的计分公式是什么？能举例说明吗？",
+            "a": "本测试使用 1–5 分的五点作答，分为情绪觉察 SA、情绪调节 ER、共情 EM、关系管理 RM，四个维度各 15 题。正向题计分 y = x；反向题计分 y = 6 − x。例如某道反向题选择 2 分，进入维度计算的是 4 分。\n\n每个维度原始分 S = Σy，范围 15–75；维度均分 = S ÷ 15；0–100 展示分 POMP = 100 × (S − 15) ÷ 60。总原始分 G 为四维原始分之和，范围 60–300；总 POMP = 100 × (G − 60) ÷ 240。这里的 0–100 是量尺转换，不是在人群中超过多少人的百分位。"
+          },
+          {
+            "id": "faq-eq-60-scoring-science",
+            "q": "EQ 情商采用什么测量方法？公式公开代表已经科学验证了吗？",
+            "a": "这是四维自我报告量表：先统一正反向题，再聚合维度分数，并附带作答质量检查。后端会检查作答速度、连续相同选项、极端与中间选项比例，以及成对题目的一致性；这些指标提示结果是否需要谨慎使用，不是情商高低或“是否诚实”的诊断。\n\n本测试不同于用任务表现测情绪识别与理解能力的 MSCEIT。反向计分、标准化和质量检查属于测量程序；题本是否可靠，还要看内部一致性、重测稳定性、结构效度和目标人群样本。不能把别的量表的研究结果当成本题本的验证结论。",
+            "references": [
+              {
+                "label": "对照能力型情绪智力测量研究",
+                "href": "https://scholars.unh.edu/psych_facpub/385/"
+              }
+            ]
+          }
+        ]
+      },
+      "expected_en": {
+        "why_choose": null,
+        "faq": [
+          {
+            "a": "Most users finish in about 10 minutes.",
+            "q": "How long does it take?"
+          },
+          {
+            "a": "Yes. The scoring flow expects all 60 items for a complete result.",
+            "q": "Do I need to answer every question?"
+          },
+          {
+            "a": "Yes. Retaking can help you compare changes across time or context.",
+            "q": "Can I retake it?"
+          },
+          {
+            "a": "No. This is an educational self-understanding tool and does not replace professional advice.",
+            "q": "Is this a diagnosis?"
+          }
+        ]
+      },
+      "content": {
+        "why_choose": {
+          "title": "Why choose the FermatMind emotional intelligence test?",
+          "intro": "Break emotional self-reflection into everyday behaviors you can observe and practice. This 60-question self-report explores emotional awareness, regulation, empathy and interpersonal communication tendencies.",
+          "items": [
+            {
+              "id": "eq-domains",
+              "title": "Explore four areas of emotional intelligence",
+              "body": "Emotional awareness concerns recognizing and describing feelings; regulation concerns responding to them; empathy concerns understanding others’ situations and emotions; interpersonal communication concerns expressing, listening and responding. Consider each area separately instead of reducing yourself to “high EQ” or “low EQ.”\n\nNoticing anger does not guarantee you can express a need clearly in that moment. Understanding another person’s feelings does not require sacrificing your boundaries. Real situations help identify which behaviors to practice.",
+              "link": {
+                "label": "What does an EQ test measure? Is emotional intelligence just being sociable?",
+                "href": "#faq-eq-model"
+              }
+            },
+            {
+              "id": "eq-scoring",
+              "title": "How 60 questions become four scores and a 0–100 profile",
+              "body": "Responses use a five-point scale from 1 to 5, across self-awareness SA, emotion regulation ER, empathy EM and relationship management RM, with 15 items each. Positive items use y = x; reverse-keyed items use y = 6 − x. A response of 2 on a reverse-keyed item contributes 4 points.\n\nEach dimension’s raw sum S = Σy ranges from 15–75; its mean = S ÷ 15; POMP = 100 × (S − 15) ÷ 60 is the 0–100 display score. The overall raw sum G ranges from 60–300; overall POMP = 100 × (G − 60) ÷ 240. This rescales the questionnaire range and is not a population percentile.",
+              "link": {
+                "label": "How is the emotional intelligence score calculated?",
+                "href": "#faq-eq-calculation"
+              }
+            },
+            {
+              "id": "eq-standardization",
+              "title": "Standard scores, reference parameters and provisional norms",
+              "body": "The scorer first tries to select an applicable norm record. Each dimension uses z = (S − μ) ÷ σ, where μ is the reference mean and σ the reference standard deviation. Standard score = 100 + 15z, limited to 55–145. The overall score applies the same transformation to the mean of the four dimension z-scores. Estimated percentile = 100 × Φ(z), using the standard normal cumulative distribution.\n\nWithout an applicable record, the current provisional parameters are μ = 53.5 and σ = 7.5, marked PROVISIONAL. For S = 60, POMP = 75; under these parameters z ≈ 0.867 and the standard score is 113. This is not IQ. A standard-score formula does not establish representative norms; consider their source, sample and calibration status.",
+              "link": {
+                "label": "How should I interpret EQ scores? Are they comparable to IQ?",
+                "href": "#faq-eq-scores"
+              }
+            },
+            {
+              "id": "eq-quality",
+              "title": "Self-report scoring and response-quality checks",
+              "body": "This four-dimension self-report aligns positive and reverse-keyed items, aggregates scores and checks response quality. Checks include response speed, repeated identical options, proportions of extreme and midpoint responses, and consistency between paired items. They flag reasons for caution, not diagnoses of EQ or honesty.\n\nThis differs from MSCEIT, which uses performance tasks to assess emotional perception and understanding. Reverse scoring, standardization and quality checks are measurement procedures; reliability still requires evidence such as internal consistency, retest stability, structural validity and target-population samples. Another instrument’s research does not validate this one.",
+              "link": {
+                "label": "Mayer, Salovey and Caruso: ability-based emotional intelligence research",
+                "href": "https://scholars.unh.edu/psych_facpub/385/"
+              }
+            },
+            {
+              "id": "eq-practice",
+              "title": "Turn results into a communication practice",
+              "body": "If naming feelings is difficult, record an event, physical reactions and emotion words. If you react immediately in conflict, try pausing, describing the facts and expressing a need. If misunderstandings recur, paraphrase the other person’s meaning and check your understanding.\n\nChoose one action at a time and record several real interactions. Look for clearer expression and better conflict repair, not merely a higher score at your next test.",
+              "link": {
+                "label": "Can emotional intelligence improve? What can I practice after the test?",
+                "href": "#faq-eq-growth"
+              }
+            }
+          ]
+        },
+        "faq": [
+          {
+            "id": "faq-eq-model",
+            "q": "What does an EQ test measure? Is emotional intelligence just being sociable?",
+            "a": "FermatMind’s 60-question EQ assessment explores emotional awareness, regulation, empathy and interpersonal communication tendencies. Emotional intelligence is not simply Extraversion, always remaining calm or pleasing everyone, and it does not require ignoring your boundaries.\n\nLook at specific behaviors: identifying emotions, understanding triggers, choosing an appropriate expression and listening to feedback. Behavior varies by situation; one “high EQ” or “low EQ” label cannot summarize a person."
+          },
+          {
+            "id": "faq-eq-method",
+            "q": "How is a self-report EQ test different from an ability-based emotional intelligence test?",
+            "a": "Self-reports ask how you usually understand and handle emotions, so self-awareness and response tendencies influence answers. Ability-based tests assess performance on emotion-related tasks. Their measurement perspectives and scoring differ, and their scores are not equivalent.\n\nFermatMind’s current 60-question form is a self-report, not MSCEIT. Citing emotional intelligence research explains the distinction; it does not imply use, authorization or equivalent validation of that instrument.",
+            "references": [
+              {
+                "label": "Mayer, Salovey and Caruso: ability-based emotional intelligence research",
+                "href": "https://scholars.unh.edu/psych_facpub/385/"
+              }
+            ]
+          },
+          {
+            "id": "faq-eq-forms",
+            "q": "How long does the EQ test take, and how should I answer?",
+            "a": "Allow about 10 minutes for 60 items on a 1–5 self-report scale. Each of the four dimensions has 15 items. After item direction is applied, the scorer calculates raw sums, means and POMP scores. Positive items use y = x and reverse-keyed items y = 6 − x.\n\nAnswer according to your usual actual behavior. Timing, repeated options, response proportions and paired-item consistency inform response-quality flags. They do not add EQ points or establish psychometric reliability or validity.",
+            "related_links": [
+              {
+                "label": "Compare versions and start the test",
+                "href": "#choose-version"
+              }
+            ]
+          },
+          {
+            "id": "faq-eq-evidence",
+            "q": "Is this emotional intelligence test scientifically valid?",
+            "a": "Emotional intelligence has different theories and measurement methods. Sharing the name EQ does not make instruments equivalent. Evaluate evidence for FermatMind’s specific questionnaire, language, population and intended use, rather than borrowing another scale’s conclusions.\n\nA credible interpretation defines scores, reliability, validity and limitations. Self-report results particularly need behavioral observations and feedback. A familiar-sounding description can prompt reflection but is not scientific validation of accuracy.",
+            "references": [
+              {
+                "label": "Mayer, Salovey and Caruso: ability-based emotional intelligence research",
+                "href": "https://scholars.unh.edu/psych_facpub/385/"
+              },
+              {
+                "label": "AERA, APA and NCME: Standards for Educational and Psychological Testing",
+                "href": "https://www.testingstandards.net/"
+              }
+            ],
+            "related_links": [
+              {
+                "label": "Reliability and validity",
+                "href": "/en/reliability-validity"
+              }
+            ]
+          },
+          {
+            "id": "faq-eq-scores",
+            "q": "How should I interpret EQ scores? Are they comparable to IQ?",
+            "a": "The scorer first tries to select an applicable norm record. Each dimension uses z = (S − μ) ÷ σ, where μ is the reference mean and σ the reference standard deviation. Standard score = 100 + 15z, limited to 55–145. The overall score applies the same transformation to the mean of the four dimension z-scores. Estimated percentile = 100 × Φ(z), using the standard normal cumulative distribution.\n\nWithout an applicable record, the current provisional parameters are μ = 53.5 and σ = 7.5, marked PROVISIONAL. For S = 60, POMP = 75; under these parameters z ≈ 0.867 and the standard score is 113. This is not IQ. A standard-score formula does not establish representative norms; consider their source, sample and calibration status.",
+            "references": [
+              {
+                "label": "AERA, APA and NCME: Standards for Educational and Psychological Testing",
+                "href": "https://www.testingstandards.net/"
+              }
+            ]
+          },
+          {
+            "id": "faq-eq-growth",
+            "q": "Can emotional intelligence improve? What can I practice after the test?",
+            "a": "Emotional behaviors can be practice goals, but taking a test does not guarantee improvement, and a short-term score increase does not establish effectiveness. Choose a concrete observable behavior instead of an abstract goal of “higher EQ.”\n\nAfter a disagreement, record the trigger, feelings, action and feedback. Next time, try clarifying the other person’s meaning before expressing your needs. Compare changes in real interactions over time and seek appropriate support when useful."
+          },
+          {
+            "id": "faq-eq-free",
+            "q": "Is the EQ test free? Does a low score mean I need to buy help?",
+            "a": "FermatMind’s current 60-question EQ test and results are free. Your score does not determine eligibility to see the currently provided results or mean you must buy a service to improve.\n\nUnderstand the score and your circumstances before choosing learning or support resources. Free testing here does not make other courses, consultations or professional assessments free. Do not base a spending or health decision solely on one online score."
+          },
+          {
+            "id": "faq-eq-diagnosis",
+            "q": "Does low EQ indicate a mental health condition or poor leadership potential?",
+            "a": "No. An EQ self-report is not a clinical diagnosis and cannot independently determine leadership ability, relationship quality or morality. Roles, stress, skills and environment also influence behavior.\n\nUse results to identify situations where support may help, avoiding labels for yourself or others. Persistent emotional distress affecting life warrants qualified assessment; an EQ score cannot replace a diagnosis.",
+            "related_links": [
+              {
+                "label": "Assessment methods and limitations",
+                "href": "/en/method-boundaries"
+              }
+            ]
+          },
+          {
+            "id": "faq-eq-retest",
+            "q": "How can I tell whether a change in my EQ score reflects progress?",
+            "a": "First check that version, conditions and response standards are comparable. Changed self-awareness, recent events, impression management or remembering items can affect scores; one change does not establish growth or decline.\n\nCombine scores with behavior records: are your choices different under similar stress or conflict, and is communication feedback consistently improving? Avoid repeated testing for a preferred score or treating small fluctuations as firm conclusions."
+          },
+          {
+            "id": "faq-eq-calculation",
+            "q": "How is the emotional intelligence score calculated?",
+            "a": "Responses use a five-point scale from 1 to 5, across self-awareness SA, emotion regulation ER, empathy EM and relationship management RM, with 15 items each. Positive items use y = x; reverse-keyed items use y = 6 − x. A response of 2 on a reverse-keyed item contributes 4 points.\n\nEach dimension’s raw sum S = Σy ranges from 15–75; its mean = S ÷ 15; POMP = 100 × (S − 15) ÷ 60 is the 0–100 display score. The overall raw sum G ranges from 60–300; overall POMP = 100 × (G − 60) ÷ 240. This rescales the questionnaire range and is not a population percentile."
+          },
+          {
+            "id": "faq-eq-60-scoring-science",
+            "q": "Do open EQ scoring formulas establish scientific validity?",
+            "a": "This four-dimension self-report aligns positive and reverse-keyed items, aggregates scores and checks response quality. Checks include response speed, repeated identical options, proportions of extreme and midpoint responses, and consistency between paired items. They flag reasons for caution, not diagnoses of EQ or honesty.\n\nThis differs from MSCEIT, which uses performance tasks to assess emotional perception and understanding. Reverse scoring, standardization and quality checks are measurement procedures; reliability still requires evidence such as internal consistency, retest stability, structural validity and target-population samples. Another instrument’s research does not validate this one.",
+            "references": [
+              {
+                "label": "Mayer, Salovey and Caruso: ability-based emotional intelligence research",
+                "href": "https://scholars.unh.edu/psych_facpub/385/"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "RIASEC": {
+      "slug": "holland-career-interest-test-riasec",
+      "source_zh": {
+        "faq": [
+          {
+            "id": "faq-riasec-model",
+            "q": "霍兰德职业兴趣测试测什么？RIASEC 六个字母是什么意思？",
+            "a": "霍兰德 RIASEC 模型描述六类工作活动兴趣：R 实际型、I 研究型、A 艺术型、S 社会型、E 企业型、C 常规型。它关注你倾向于喜欢哪些活动，而不是仅凭兴趣判断你已经具备哪些能力。\n\n例如喜欢分析问题不等于已掌握研究技能，喜欢组织协调也不等于一定适合管理岗位。应把六类兴趣组合与真实任务联系起来理解，避免只记住一个字母标签。",
+            "references": [
+              {
+                "label": "O*NET Interest Profiler 技术手册",
+                "href": "https://www.onetcenter.org/reports/IP_Manual.html"
+              }
+            ]
+          },
+          {
+            "id": "faq-riasec-forms",
+            "q": "霍兰德 60 题和 140 题怎么选？需要多久？",
+            "a": "费马当前提供 60 题标准版和 140 题增强版，预计用时分别约 8 分钟与 18 分钟。想先获得兴趣轮廓可选 60 题；愿意投入更多时间可选 140 题。请按对活动本身的喜欢程度回答。\n\n不要因为某项活动收入高、听起来体面或自己暂时不会，就改变对“是否感兴趣”的判断。更多题目并不自动保证更准确；跨时间比较应优先保持同一题本和作答标准。",
+            "related_links": [
+              {
+                "label": "选择霍兰德测试版本",
+                "href": "#choose-version"
+              }
+            ]
+          },
+          {
+            "id": "faq-riasec-evidence",
+            "q": "霍兰德职业兴趣测试科学吗？是否等于官方 O*NET 测试？",
+            "a": "RIASEC 是职业兴趣研究中使用的模型，O*NET Interest Profiler 技术手册公开了基于该模型的题目开发、信度、效度和职业关联研究。模型研究可以帮助理解兴趣结构，但不能直接证明所有使用 RIASEC 名称的测试质量相同。\n\n费马 60 题和 140 题版本应按本站对应题本、语言和样本证据评价，不能因为引用 O*NET 就认为它们是同一测试或获得官方背书。解释结果时，区分理论依据、具体量表证据与职业建议。",
+            "references": [
+              {
+                "label": "O*NET Interest Profiler 技术手册",
+                "href": "https://www.onetcenter.org/reports/IP_Manual.html"
+              }
+            ],
+            "related_links": [
+              {
+                "label": "信度与效度说明",
+                "href": "/zh/reliability-validity"
+              }
+            ]
+          },
+          {
+            "id": "faq-riasec-code",
+            "q": "霍兰德三字代码怎么看？三个分数接近怎么办？",
+            "a": "三字代码通常用相对突出的三类兴趣帮助概括结果，但仍应阅读完整六维分布。若几个维度接近，排序可能对细小差异敏感，不宜把第三名与第四名之间当成严格职业分界。\n\n把每个高兴趣维度转译成任务偏好，再找真实例子。例如同时偏好研究和艺术活动，可以探索需要分析与创意的工作任务；这不是对某个职业的保证。分数或匹配度必须按页面定义解释，不能自行理解成录用概率。"
+          },
+          {
+            "id": "faq-riasec-choice",
+            "q": "霍兰德测试能直接决定专业、职业或转行方向吗？",
+            "a": "不能。职业兴趣是决策的一部分，还需要考虑能力与技能、价值观、教育要求、工作条件和现实机会。兴趣相近的职业，其日常任务、进入门槛和劳动环境也可能差别很大。\n\n建议先选出两三个候选方向，阅读真实岗位任务，再通过课程、访谈或短期项目验证。做专业选择时同时检查课程内容和培养要求；转行时还应评估学习投入与现有经验的可迁移性。",
+            "related_links": [
+              {
+                "label": "探索职业信息",
+                "href": "/zh/career"
+              }
+            ]
+          },
+          {
+            "id": "faq-riasec-flat",
+            "q": "六类职业兴趣都高、都低或很平均，结果还有用吗？",
+            "a": "这些分布不直接等于“全能”“没有兴趣”或测试失败。整体高低可能同时受到经历范围、对题目用词的理解以及使用评分选项的习惯影响，需要结合回答过程解释。\n\n兴趣较平均时，可以先比较愿意长期投入的活动与只是偶尔觉得新鲜的活动；若许多活动从未接触过，先安排低成本体验，再回看兴趣变化。不要为了得到鲜明三字代码而刻意拉大答案差异。"
+          },
+          {
+            "id": "faq-riasec-free",
+            "q": "费马霍兰德职业兴趣测试免费吗？结果如何使用？",
+            "a": "费马当前 60 题与 140 题霍兰德职业兴趣测试均可免费完成并查看结果。具体兴趣解释和职业探索入口以所选版本结果页为准；本站测试不提供录用、薪资或职业成功保证。\n\n先读六类兴趣及其相对分布，再把结果当作检索职业任务的线索。职业推荐应与最新岗位信息、个人条件和实践反馈一起使用，不能因为一个推荐列表就排除其他可能。"
+          },
+          {
+            "id": "faq-riasec-personality",
+            "q": "霍兰德和 MBTI、大五人格测试有什么区别？",
+            "a": "霍兰德主要回答“我喜欢哪些工作活动”，MBTI 和大五人格主要提供人格偏好或特质的观察角度。喜欢做什么、习惯怎样做、是否具备相应技能，是不同的问题，不能互相替代。\n\n例如一个人可以偏好独立工作，同时对帮助他人的专业活动感兴趣。职业探索时先分清兴趣、人格和能力，再结合岗位任务判断，不要用人格标签否定兴趣结果。",
+            "related_links": [
+              {
+                "label": "大五人格测试",
+                "href": "/zh/tests/big-five-personality-test-ocean-model"
+              }
+            ]
+          },
+          {
+            "id": "faq-riasec-retest",
+            "q": "职业兴趣会改变吗？学生或转行者何时值得重测？",
+            "a": "当你接触新的课程、工作任务或生活阶段，兴趣认识可能发生变化。是否重测取决于是否获得了新的相关经验，而不是必须隔固定天数重新做一次。\n\n学生可以在课程或项目体验后回看结果，转行者可以在了解候选岗位后比较。尽量使用同一版本，记录变化对应的实际体验；若只是短期情绪或作答标准不同，不宜解释为职业方向已经彻底改变。"
+          },
+          {
+            "id": "faq-riasec-calculation",
+            "q": "霍兰德 RIASEC测试的计分公式是什么？能举例说明吗？",
+            "a": "RIASEC 分为实作 R、研究 I、艺术 A、社会 S、企业 E、常规 C 六类兴趣。60 题版采用 1–5 分作答，每个维度 10 题。先求原始和 S（10–50），再换算展示分 P = 100 × (S − 10) ÷ 40。\n\n例如某维度原始和为 38，展示分就是 70。这里的 70 表示在题目量尺上的相对位置，不是职业能力、就业成功率或在人群中的百分位。六个维度分开计算，因此可以同时对多类活动感兴趣。\n\n140 题增强版分别计算各维度的活动兴趣、环境偏好和角色偏好均分，再用 P = 100 × (均分 − 1) ÷ 4 换算到 0–100。最终维度分 = 0.70 × 活动分 + 0.15 × 环境分 + 0.15 × 角色分。作答质量题用于检查注意与一致性，不作为新增兴趣维度。\n\n例如活动分 80、环境分 60、角色分 40，综合分为 71。70%／15%／15% 是费马当前增强版的计分权重，不是霍兰德理论或 O*NET 对所有问卷规定的统一系数。60 题与 140 题的综合分也不能无条件等同。"
+          },
+          {
+            "id": "faq-riasec-method",
+            "q": "霍兰德 RIASEC采用什么测量方法？公式公开代表已经科学验证了吗？",
+            "a": "RIASEC 来源于霍兰德职业兴趣框架，O*NET Interest Profiler 手册提供另一套基于该框架的工具及其研究方法。共享六维框架，不代表费马题目、权重和计分与 O*NET 官方工具相同。\n\n公开计算方式能说明结果如何产生；是否适用于特定年龄、语言或职业决策，还需要本题本的内部一致性、重测信度和效度证据。结果用于探索任务偏好，不作为招聘筛选或职业准入结论。",
+            "references": [
+              {
+                "label": "阅读 O*NET Interest Profiler 手册",
+                "href": "https://www.onetcenter.org/reports/IP_Manual.html"
+              }
+            ]
+          }
+        ],
+        "why_choose": {
+          "title": "霍兰德职业兴趣测试：计分方法与结果解读",
+          "intro": "费马采用 RIASEC 六维兴趣框架。下面公开 60 题与 140 题的实际计算方式，说明分数、前三码与职业探索之间的关系。",
+          "items": [
+            {
+              "id": "riasec-scoring",
+              "title": "60 题计分：六个兴趣维度分别换算",
+              "body": "RIASEC 分为实作 R、研究 I、艺术 A、社会 S、企业 E、常规 C 六类兴趣。60 题版采用 1–5 分作答，每个维度 10 题。先求原始和 S（10–50），再换算展示分 P = 100 × (S − 10) ÷ 40。\n\n例如某维度原始和为 38，展示分就是 70。这里的 70 表示在题目量尺上的相对位置，不是职业能力、就业成功率或在人群中的百分位。六个维度分开计算，因此可以同时对多类活动感兴趣。",
+              "link": {
+                "label": "查看计分方法问答",
+                "href": "#faq-riasec-calculation"
+              }
+            },
+            {
+              "id": "riasec-enhanced-method",
+              "title": "140 题计分：活动、环境和角色按权重组合",
+              "body": "140 题增强版分别计算各维度的活动兴趣、环境偏好和角色偏好均分，再用 P = 100 × (均分 − 1) ÷ 4 换算到 0–100。最终维度分 = 0.70 × 活动分 + 0.15 × 环境分 + 0.15 × 角色分。作答质量题用于检查注意与一致性，不作为新增兴趣维度。\n\n例如活动分 80、环境分 60、角色分 40，综合分为 71。70%／15%／15% 是费马当前增强版的计分权重，不是霍兰德理论或 O*NET 对所有问卷规定的统一系数。60 题与 140 题的综合分也不能无条件等同。",
+              "link": {
+                "label": "查看计分方法问答",
+                "href": "#faq-riasec-calculation"
+              }
+            },
+            {
+              "id": "riasec-ranking",
+              "title": "前三码怎样得到：排序、差距与分化程度",
+              "body": "将六个维度分从高到低排序，前三个字母组成兴趣代码。后端同时计算第一与第二名的差值作为清晰度，六维平均值作为兴趣广度，六维分数的总体标准差作为分化程度。完全同分时按 R、I、A、S、E、C 的固定顺序展示，固定顺序不表示真实偏好已经分出高低。\n\n前三码用来缩小探索范围；当各维度接近时，更适合比较具体工作任务。最终职业判断还需要兴趣以外的技能、价值观、工作条件和真实体验。兴趣分不能单独预测职业胜任力。",
+              "link": {
+                "label": "查看计分方法问答",
+                "href": "#faq-riasec-code"
+              }
+            },
+            {
+              "id": "riasec-science",
+              "title": "理论来源与本题本的方法边界",
+              "body": "RIASEC 来源于霍兰德职业兴趣框架，O*NET Interest Profiler 手册提供另一套基于该框架的工具及其研究方法。共享六维框架，不代表费马题目、权重和计分与 O*NET 官方工具相同。\n\n公开计算方式能说明结果如何产生；是否适用于特定年龄、语言或职业决策，还需要本题本的内部一致性、重测信度和效度证据。结果用于探索任务偏好，不作为招聘筛选或职业准入结论。",
+              "link": {
+                "label": "阅读 O*NET Interest Profiler 手册",
+                "href": "https://www.onetcenter.org/reports/IP_Manual.html"
+              }
+            }
+          ]
+        }
+      },
+      "expected_en": {
+        "faq": [
+          {
+            "a": "Most users finish in about 8 minutes.",
+            "q": "How long does it take?"
+          },
+          {
+            "a": "Yes. The scoring flow expects all 60 items for a complete result.",
+            "q": "Do I need to answer every question?"
+          },
+          {
+            "a": "Yes. Retaking can help you compare changes across time or context.",
+            "q": "Can I retake it?"
+          },
+          {
+            "a": "No. This is an educational self-understanding tool and does not replace professional advice.",
+            "q": "Is this a diagnosis?"
+          }
+        ],
+        "why_choose": null
+      },
+      "content": {
+        "faq": [
+          {
+            "id": "faq-riasec-model",
+            "q": "What is a Holland Code test? What do the RIASEC letters mean?",
+            "a": "Holland’s RIASEC model describes six work-activity interests: Realistic, Investigative, Artistic, Social, Enterprising and Conventional. It concerns activities you tend to enjoy, not abilities you have already demonstrated.\n\nEnjoying analysis does not mean you have research skills, and enjoying organization does not guarantee management suitability. Connect your combination of interests to real tasks rather than remembering only a letter label.",
+            "references": [
+              {
+                "label": "O*NET Interest Profiler technical manual",
+                "href": "https://www.onetcenter.org/reports/IP_Manual.html"
+              }
+            ]
+          },
+          {
+            "id": "faq-riasec-forms",
+            "q": "Should I take the 60-question or 140-question career interest test?",
+            "a": "FermatMind currently offers a 60-question standard version, about 8 minutes, and a 140-question extended version, about 18 minutes. Choose 60 for an initial interest profile or 140 if you want to invest more time. Answer according to how much the activity itself appeals to you.\n\nDo not substitute salary, prestige or current skill for interest. More questions do not automatically guarantee accuracy. For comparisons over time, keep the questionnaire and response standard consistent.",
+            "related_links": [
+              {
+                "label": "Compare versions and start the test",
+                "href": "#choose-version"
+              }
+            ]
+          },
+          {
+            "id": "faq-riasec-evidence",
+            "q": "Is the RIASEC test scientifically supported? Is it the official O*NET test?",
+            "a": "RIASEC is used in vocational interest research. The O*NET Interest Profiler manual documents item development, reliability, validity and occupational linkage research for its instrument. Evidence for a model does not establish equal quality for every RIASEC test.\n\nEvaluate FermatMind’s 60-question and 140-question versions using their own questionnaire, language and sample evidence. Citing O*NET does not make these the same test or imply official endorsement. Separate theory, instrument-specific evidence and career suggestions.",
+            "references": [
+              {
+                "label": "O*NET Interest Profiler technical manual",
+                "href": "https://www.onetcenter.org/reports/IP_Manual.html"
+              }
+            ],
+            "related_links": [
+              {
+                "label": "Reliability and validity",
+                "href": "/en/reliability-validity"
+              }
+            ]
+          },
+          {
+            "id": "faq-riasec-code",
+            "q": "How do I interpret my three-letter Holland Code if scores are close?",
+            "a": "A three-letter code summarizes your relatively strongest interests, but read all six dimensions. Close scores can make rankings sensitive to small differences; third and fourth place are not strict career boundaries.\n\nTranslate higher interests into task preferences and find examples. Investigative and Artistic interests together may suggest exploring tasks involving analysis and creativity, not a guarantee about an occupation. Interpret scores or match indicators according to their definitions, not as hiring probabilities."
+          },
+          {
+            "id": "faq-riasec-choice",
+            "q": "Can a Holland Code test choose my career, college major or career change?",
+            "a": "No. Interests are one part of a decision alongside abilities, skills, values, education, working conditions and opportunities. Careers with similar interests may have very different tasks, entry requirements and environments.\n\nShortlist two or three directions, read actual job tasks and try courses, interviews or short projects. For a major, review the curriculum and training requirements. For a career change, also assess learning time and transferable experience.",
+            "related_links": [
+              {
+                "label": "Explore occupation profiles",
+                "href": "/en/career"
+              }
+            ]
+          },
+          {
+            "id": "faq-riasec-flat",
+            "q": "What if all six RIASEC interests are high, low or similar?",
+            "a": "These profiles do not automatically mean you are good at everything, have no interests or failed the test. Overall levels can reflect exposure to activities, interpretation and response habits; consider how you answered.\n\nFor a flat profile, distinguish activities you would sustain from occasional novelty. If many are unfamiliar, try low-cost experiences and revisit your interests. Do not exaggerate answer differences just to obtain a distinct three-letter code."
+          },
+          {
+            "id": "faq-riasec-free",
+            "q": "Is the Holland Code career test free, and how can I use the results?",
+            "a": "FermatMind’s current 60-question and 140-question tests and results are free. The selected results page defines available explanations and career-exploration links. Testing does not guarantee hiring, salary or career success.\n\nRead all six interests and their relative pattern, then use them to research occupational tasks. Combine suggestions with current job information, personal circumstances and practical feedback instead of excluding alternatives because of a recommendation list."
+          },
+          {
+            "id": "faq-riasec-personality",
+            "q": "Holland Code vs. MBTI and Big Five: what is different?",
+            "a": "Holland Code asks which work activities you enjoy. MBTI and Big Five offer perspectives on preferences or traits. Enjoying an activity, habitually approaching it a certain way and possessing the skill are separate questions.\n\nSomeone may prefer independent work while enjoying activities that help others. Distinguish interest, personality and ability, then consider job tasks; do not use a personality label to dismiss your interests.",
+            "related_links": [
+              {
+                "label": "Explore the Big Five personality test",
+                "href": "/en/tests/big-five-personality-test-ocean-model"
+              }
+            ]
+          },
+          {
+            "id": "faq-riasec-retest",
+            "q": "Can career interests change? When should students or career changers retest?",
+            "a": "New courses, work activities and life stages can change your understanding of your interests. Retesting is useful when you have relevant new experiences, not because a fixed number of days has passed.\n\nStudents can revisit results after courses or projects; career changers after learning about candidate roles. Use the same version where possible and connect changes to actual experiences. Short-term mood or a changed response standard does not establish a complete change of direction."
+          },
+          {
+            "id": "faq-riasec-calculation",
+            "q": "How are RIASEC career interest scores calculated?",
+            "a": "RIASEC covers Realistic R, Investigative I, Artistic A, Social S, Enterprising E and Conventional C interests. The 60-question form has 10 items per dimension, answered from 1 to 5. Raw sum S ranges from 10–50 and is rescaled as P = 100 × (S − 10) ÷ 40.\n\nFor S = 38, the display score is 70. This locates your answers within the questionnaire range, not occupational ability, chances of employment or a population percentile. Dimensions are scored separately, so several interest areas can be high together.\n\nThe extended form calculates mean activity-interest, environment-preference and role-preference scores for each dimension, then converts each with P = 100 × (mean − 1) ÷ 4. Final dimension score = 0.70 × activity score + 0.15 × environment score + 0.15 × role score. Response-quality items check attention and consistency; they are not extra interest dimensions.\n\nActivity 80, environment 60 and role 40 yield a combined score of 71. The 70% / 15% / 15% weights belong to FermatMind’s current extended form, not a universal rule from Holland’s theory or O*NET. Scores from the 60-question and 140-question forms are not automatically equivalent."
+          },
+          {
+            "id": "faq-riasec-method",
+            "q": "Does an open Holland Code scoring formula establish validation?",
+            "a": "RIASEC comes from Holland’s vocational interest framework. The O*NET Interest Profiler manual describes another instrument and research program using it. Sharing six dimensions does not mean FermatMind’s items, weights or scoring are the same as the official O*NET tool.\n\nAn open calculation explains where a score comes from. Suitability for a particular age, language or career decision still requires this questionnaire’s internal consistency, test–retest reliability and validity evidence. Use results to explore tasks, not for hiring selection or occupational eligibility.",
+            "references": [
+              {
+                "label": "O*NET Interest Profiler technical manual",
+                "href": "https://www.onetcenter.org/reports/IP_Manual.html"
+              }
+            ]
+          }
+        ],
+        "why_choose": {
+          "title": "Holland Code career interest test: scoring and results",
+          "intro": "FermatMind uses the six RIASEC interest areas. Explore how the 60-question and 140-question versions calculate scores, how your three-letter Holland Code is formed and how to use it for career exploration.",
+          "items": [
+            {
+              "id": "riasec-scoring",
+              "title": "How the 60-question RIASEC test is scored",
+              "body": "RIASEC covers Realistic R, Investigative I, Artistic A, Social S, Enterprising E and Conventional C interests. The 60-question form has 10 items per dimension, answered from 1 to 5. Raw sum S ranges from 10–50 and is rescaled as P = 100 × (S − 10) ÷ 40.\n\nFor S = 38, the display score is 70. This locates your answers within the questionnaire range, not occupational ability, chances of employment or a population percentile. Dimensions are scored separately, so several interest areas can be high together.",
+              "link": {
+                "label": "How are RIASEC career interest scores calculated?",
+                "href": "#faq-riasec-calculation"
+              }
+            },
+            {
+              "id": "riasec-enhanced-method",
+              "title": "How the 140-question version combines activities, environments and roles",
+              "body": "The extended form calculates mean activity-interest, environment-preference and role-preference scores for each dimension, then converts each with P = 100 × (mean − 1) ÷ 4. Final dimension score = 0.70 × activity score + 0.15 × environment score + 0.15 × role score. Response-quality items check attention and consistency; they are not extra interest dimensions.\n\nActivity 80, environment 60 and role 40 yield a combined score of 71. The 70% / 15% / 15% weights belong to FermatMind’s current extended form, not a universal rule from Holland’s theory or O*NET. Scores from the 60-question and 140-question forms are not automatically equivalent.",
+              "link": {
+                "label": "How are RIASEC career interest scores calculated?",
+                "href": "#faq-riasec-calculation"
+              }
+            },
+            {
+              "id": "riasec-ranking",
+              "title": "How your three-letter Holland Code is selected",
+              "body": "The six scores are ranked, and the top three letters form the interest code. The scorer also calculates clarity as the gap between the first two scores, breadth as the six-score mean and differentiation as their population standard deviation. Exact ties display in the fixed order R, I, A, S, E, C; that order does not establish a real preference difference.\n\nThe code narrows exploration. When dimensions are close, compare concrete work activities. Career decisions also require skills, values, working conditions and experience; interest scores alone cannot predict job competence.",
+              "link": {
+                "label": "How do I interpret my three-letter Holland Code if scores are close?",
+                "href": "#faq-riasec-code"
+              }
+            },
+            {
+              "id": "riasec-science",
+              "title": "Holland’s framework and the evidence for this questionnaire",
+              "body": "RIASEC comes from Holland’s vocational interest framework. The O*NET Interest Profiler manual describes another instrument and research program using it. Sharing six dimensions does not mean FermatMind’s items, weights or scoring are the same as the official O*NET tool.\n\nAn open calculation explains where a score comes from. Suitability for a particular age, language or career decision still requires this questionnaire’s internal consistency, test–retest reliability and validity evidence. Use results to explore tasks, not for hiring selection or occupational eligibility.",
+              "link": {
+                "label": "O*NET Interest Profiler technical manual",
+                "href": "https://www.onetcenter.org/reports/IP_Manual.html"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
