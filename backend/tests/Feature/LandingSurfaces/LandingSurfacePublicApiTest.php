@@ -26,6 +26,8 @@ final class LandingSurfacePublicApiTest extends TestCase
 
     public function test_baseline_import_creates_home_tests_and_career_surfaces(): void
     {
+        $before = LandingSurface::query()->withoutGlobalScopes()->orderBy('id')->get()->map->getRawOriginal()->all();
+
         $this->artisan('landing-surfaces:import-local-baseline', [
             '--upsert' => true,
             '--status' => 'published',
@@ -36,7 +38,7 @@ final class LandingSurfacePublicApiTest extends TestCase
             ->expectsOutputToContain('will_create=10')
             ->assertExitCode(0);
 
-        $this->assertSame(10, LandingSurface::query()->withoutGlobalScopes()->count());
+        $this->assertBaselineImportPreservesExistingSurfaces($before);
         $this->assertGreaterThan(0, PageBlock::query()->count());
 
         $home = LandingSurface::query()
@@ -192,6 +194,8 @@ final class LandingSurfacePublicApiTest extends TestCase
 
     public function test_baseline_import_accepts_absolute_source_directory(): void
     {
+        $before = LandingSurface::query()->withoutGlobalScopes()->orderBy('id')->get()->map->getRawOriginal()->all();
+
         $sourceDir = realpath(base_path('../content_baselines/landing_surfaces'));
         $this->assertIsString($sourceDir);
 
@@ -205,7 +209,29 @@ final class LandingSurfacePublicApiTest extends TestCase
             ->expectsOutputToContain('will_create=10')
             ->assertExitCode(0);
 
-        $this->assertSame(10, LandingSurface::query()->withoutGlobalScopes()->count());
+        $this->assertBaselineImportPreservesExistingSurfaces($before);
+    }
+
+    /** @param list<array<string, mixed>> $before */
+    private function assertBaselineImportPreservesExistingSurfaces(array $before): void
+    {
+        $existingIds = array_column($before, 'id');
+        $this->assertSame($before, LandingSurface::query()->withoutGlobalScopes()
+            ->whereIn('id', $existingIds)->orderBy('id')->get()->map->getRawOriginal()->all());
+
+        $expected = [];
+        foreach (glob(base_path('../content_baselines/landing_surfaces/*.json')) as $file) {
+            $surface = json_decode(file_get_contents($file), true, 512, JSON_THROW_ON_ERROR);
+            $expected[] = [0, $surface['surface_key'], $surface['locale']];
+        }
+        $actual = LandingSurface::query()->withoutGlobalScopes()->whereNotIn('id', $existingIds)
+            ->get()->map(static fn (LandingSurface $surface): array => [
+                (int) $surface->org_id, $surface->surface_key, $surface->locale,
+            ])->all();
+        $this->assertCount(10, $expected);
+        sort($expected);
+        sort($actual);
+        $this->assertSame($expected, $actual);
     }
 
     public function test_iq_landing_baseline_is_cms_authoritative_and_claim_safe(): void

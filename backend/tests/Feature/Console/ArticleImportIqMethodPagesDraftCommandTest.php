@@ -21,6 +21,7 @@ final class ArticleImportIqMethodPagesDraftCommandTest extends TestCase
 
     public function test_dry_run_accepts_iq_method_package_without_database_writes(): void
     {
+        $surfacesBefore = LandingSurface::query()->withoutGlobalScopes()->orderBy('id')->get()->map->getRawOriginal()->all();
         $package = $this->writeIqMethodPackage();
 
         $exitCode = Artisan::call('articles:import-iq-method-pages-draft', [
@@ -45,7 +46,7 @@ final class ArticleImportIqMethodPagesDraftCommandTest extends TestCase
         $this->assertSame(0, ArticleSeoMeta::query()->withoutGlobalScopes()->count());
         $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
         $this->assertSame(0, TopicProfileEntry::query()->count());
-        $this->assertSame(0, LandingSurface::query()->withoutGlobalScopes()->count());
+        $this->assertSame($surfacesBefore, LandingSurface::query()->withoutGlobalScopes()->orderBy('id')->get()->map->getRawOriginal()->all());
         $this->assertSame(0, PageBlock::query()->count());
     }
 

@@ -44,7 +44,7 @@ final class BigFiveLandingSurfaceMigrationTest extends TestCase
         $this->assertFalse($surface->is_indexable);
         $this->assertNull($surface->published_at);
         $this->assertNull($surface->scheduled_at);
-        $this->assertSame($this->expectedPayload(), $surface->payload_json);
+        $this->assertJsonValueSame($this->expectedPayload(), $surface->payload_json);
         $this->assertFalse(LandingSurface::query()->withoutGlobalScopes()
             ->where('org_id', 0)->where('surface_key', self::SURFACE_KEY)->where('locale', 'en')->exists());
         $this->assertSame('Tenant authority', LandingSurface::query()->withoutGlobalScopes()
@@ -81,7 +81,7 @@ final class BigFiveLandingSurfaceMigrationTest extends TestCase
 
     public function test_public_api_projects_every_reviewed_field(): void
     {
-        $this->getJson('/api/v0.5/landing-surfaces/'.self::SURFACE_KEY.'?locale=zh-CN&org_id=0')
+        $response = $this->getJson('/api/v0.5/landing-surfaces/'.self::SURFACE_KEY.'?locale=zh-CN&org_id=0')
             ->assertOk()
             ->assertJsonPath('ok', true)
             ->assertJsonPath('surface.surface_key', self::SURFACE_KEY)
@@ -93,8 +93,9 @@ final class BigFiveLandingSurfaceMigrationTest extends TestCase
             ->assertJsonPath('surface.is_public', true)
             ->assertJsonPath('surface.is_indexable', false)
             ->assertJsonPath('surface.published_at', null)
-            ->assertJsonPath('surface.payload_json', $this->expectedPayload())
             ->assertJsonPath('surface.page_blocks', []);
+
+        $this->assertJsonValueSame($this->expectedPayload(), $response->json('surface.payload_json'));
 
         $this->getJson('/api/v0.5/landing-surfaces/'.self::SURFACE_KEY.'?locale=en&org_id=0')
             ->assertNotFound();

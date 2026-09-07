@@ -40,17 +40,7 @@ final class ScalesLookupSeoMetadataTest extends TestCase
         $faq = $response->json('content_i18n_json.zh.faq');
 
         $this->assertIsArray($faq);
-        $this->assertCount(9, $faq);
-        $this->assertSame([
-            'faq-free', 'faq-results', 'faq-versions', 'faq-validity', 'faq-career',
-            'faq-diagnosis', 'faq-result-changes', 'faq-big-five', 'faq-next-steps',
-        ], array_column($faq, 'id'));
-        $this->assertStringContainsString('没有报告解锁费用', $faq[0]['a']);
-        $this->assertStringContainsString('题目更多不能直接证明结果更准确', $faq[2]['a']);
-        $this->assertStringContainsString('不能仅凭 MBTI 类型决定职业', $faq[4]['a']);
-        $this->assertStringContainsString('MBTI 不是心理诊断工具', $faq[5]['a']);
-        $this->assertSame([], $faq[0]['references']);
-        $this->assertNotEmpty($faq[3]['references']);
+        $this->assertJsonValueSame($this->reviewedFaq('MBTI'), $faq);
         $this->assertCount(5, $response->json('content_i18n_json.zh.version_comparison.rows'));
 
     }
@@ -96,9 +86,7 @@ final class ScalesLookupSeoMetadataTest extends TestCase
             );
 
         $faq = $response->json('content_i18n_json.zh.faq');
-        $duration = collect($faq)->firstWhere('q', '需要多久？');
-
-        $this->assertSame('120题完整版约15分钟，90题标准版约11分钟。', $duration['a'] ?? null);
+        $this->assertJsonValueSame($this->reviewedFaq('BIG5_OCEAN'), $faq);
     }
 
     public function test_big_five_lookup_keeps_form_minutes_and_en_content_in_sync(): void
@@ -164,5 +152,13 @@ final class ScalesLookupSeoMetadataTest extends TestCase
                     ->value('content_i18n_json')
             );
         }
+    }
+
+    /** @return list<array<string, mixed>> */
+    private function reviewedFaq(string $code): array
+    {
+        $package = json_decode(file_get_contents(database_path('data/assessment_methods_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
+
+        return $package['scales'][$code]['faq'];
     }
 }

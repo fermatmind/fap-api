@@ -16,6 +16,8 @@ final class CmsBaselineOperationCommandTest extends TestCase
 
     public function test_explicit_mode_and_environment_are_required_before_any_operation(): void
     {
+        $before = $this->baselineRecords();
+
         $this->assertSame([
             'initialization',
             'db-recovery',
@@ -35,12 +37,13 @@ final class CmsBaselineOperationCommandTest extends TestCase
             ->expectsOutputToContain('A valid explicit --environment is required.')
             ->assertFailed();
 
-        $this->assertSame(0, LandingSurface::query()->withoutGlobalScopes()->count());
-        $this->assertSame(0, ContentPage::query()->withoutGlobalScopes()->count());
+        $this->assertSame($before, $this->baselineRecords());
     }
 
     public function test_valid_explicit_operation_defaults_to_dry_run_without_writes(): void
     {
+        $before = $this->baselineRecords();
+
         $this->artisan('cms:baseline-operation', [
             '--mode' => 'initialization',
             '--environment' => 'testing',
@@ -55,12 +58,13 @@ final class CmsBaselineOperationCommandTest extends TestCase
             ->expectsOutputToContain('dry-run complete')
             ->assertSuccessful();
 
-        $this->assertSame(0, LandingSurface::query()->withoutGlobalScopes()->count());
-        $this->assertSame(0, ContentPage::query()->withoutGlobalScopes()->count());
+        $this->assertSame($before, $this->baselineRecords());
     }
 
     public function test_apply_rejects_environment_mismatch_before_import(): void
     {
+        $before = $this->baselineRecords();
+
         $this->artisan('cms:baseline-operation', [
             '--mode' => 'db-recovery',
             '--environment' => 'staging',
@@ -69,8 +73,7 @@ final class CmsBaselineOperationCommandTest extends TestCase
             ->expectsOutputToContain('declared environment staging does not match runtime environment testing')
             ->assertFailed();
 
-        $this->assertSame(0, LandingSurface::query()->withoutGlobalScopes()->count());
-        $this->assertSame(0, ContentPage::query()->withoutGlobalScopes()->count());
+        $this->assertSame($before, $this->baselineRecords());
     }
 
     public function test_explicit_testing_apply_preserves_initialization_and_recovery_capability(): void
@@ -94,6 +97,8 @@ final class CmsBaselineOperationCommandTest extends TestCase
 
     public function test_low_level_importers_refuse_unauthorized_direct_writes_outside_testing(): void
     {
+        $before = $this->baselineRecords();
+
         $this->app->detectEnvironment(static fn (): string => 'staging');
 
         foreach ([
@@ -105,12 +110,13 @@ final class CmsBaselineOperationCommandTest extends TestCase
                 ->assertFailed();
         }
 
-        $this->assertSame(0, LandingSurface::query()->withoutGlobalScopes()->count());
-        $this->assertSame(0, ContentPage::query()->withoutGlobalScopes()->count());
+        $this->assertSame($before, $this->baselineRecords());
     }
 
     public function test_production_apply_requires_exact_mode_bound_authorization(): void
     {
+        $before = $this->baselineRecords();
+
         $this->artisan('cms:baseline-operation', [
             '--mode' => 'disaster-recovery',
             '--environment' => 'production',
@@ -137,8 +143,7 @@ final class CmsBaselineOperationCommandTest extends TestCase
             ->expectsOutputToContain('declared environment production does not match runtime environment testing')
             ->assertFailed();
 
-        $this->assertSame(0, LandingSurface::query()->withoutGlobalScopes()->count());
-        $this->assertSame(0, ContentPage::query()->withoutGlobalScopes()->count());
+        $this->assertSame($before, $this->baselineRecords());
     }
 
     public function test_ordinary_deploy_has_no_baseline_import_task_or_hook(): void
@@ -153,5 +158,14 @@ final class CmsBaselineOperationCommandTest extends TestCase
             "after('guard:career-detail-cache-coverage', 'career:warm-public-authority-cache');",
             $deploy,
         );
+    }
+
+    /** @return array<string, array> */
+    private function baselineRecords(): array
+    {
+        return [
+            'surfaces' => LandingSurface::query()->withoutGlobalScopes()->orderBy('id')->get()->map->getRawOriginal()->all(),
+            'pages' => ContentPage::query()->withoutGlobalScopes()->orderBy('id')->get()->map->getRawOriginal()->all(),
+        ];
     }
 }

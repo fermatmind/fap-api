@@ -164,7 +164,9 @@ final class SeoPlatform09ScheduledCloseoutTest extends TestCase
 
         $bootstrap = (string) file_get_contents(base_path('bootstrap/app.php'));
         $this->assertMatchesRegularExpression('/withSchedule[\s\S]+seo:weekly-decisions --trigger=scheduled --json[\s\S]+weeklyOn\(4, \'13:45\'\)[\s\S]+withoutOverlapping\(120\)[\s\S]+name\(\'seo-weekly-decisions:v2:\'[\s\S]+onOneServer\(\)/', $bootstrap);
-        $this->assertStringNotContainsString('runInBackground()', $bootstrap);
+        $matched = preg_match('/\$schedule->command\(\'seo:weekly-decisions --trigger=scheduled --json\'\)[^;]+;/', $bootstrap, $weeklySchedule);
+        $this->assertSame(1, $matched);
+        $this->assertStringNotContainsString('runInBackground()', $weeklySchedule[0]);
         $this->assertSame(1, substr_count($bootstrap, 'seo:weekly-decisions --trigger=scheduled --json'));
         $this->assertLessThan(
             strpos($bootstrap, 'email:outbox-send --limit=50'),

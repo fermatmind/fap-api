@@ -22,7 +22,8 @@ final class SeoPlatform10ProductionCloseoutContractTest extends TestCase
         $this->assertSame(2, substr_count($deployWorkflow, "-o seo_platform_10_closeout='\${{ needs.policy.outputs.seo_platform_10_closeout }}'"));
         $this->assertStringContainsString("task('seo:platform-10-material-backfill'", $deployer);
         $this->assertStringContainsString("task('seo:platform-10-public-closeout'", $deployer);
-        $this->assertStringContainsString("after('guard:no-pending-seo-intel-migrations', 'seo:platform-10-material-backfill')", $deployer);
+        $this->assertStringContainsString("after('guard:no-pending-seo-intel-migrations', 'seo:council-runtime-db-access')", $deployer);
+        $this->assertStringContainsString("after('seo:council-runtime-db-access', 'seo:platform-10-material-backfill')", $deployer);
         $this->assertStringContainsString("after('seo:url-truth-reconciliation-receipt', 'seo:platform-10-public-closeout')", $deployer);
         $this->assertStringContainsString('idempotent_rerun', $deployer);
         $this->assertStringContainsString('projection_digest', $deployer);

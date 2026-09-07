@@ -34,6 +34,16 @@ final class MigrationPurityGateTest extends TestCase
         '2026_08_13_130000_add_wechat_membership_skus.php',
         // Published bounded content migration; its transaction and scope are covered by MbtiLandingContentMigrationTest.
         '2026_09_05_120000_publish_mbti_landing_zh_content.php',
+        // Bounded publications: AssessmentFaqContentMigrationTest covers exact scope and transaction rollback.
+        '2026_09_06_140000_publish_assessment_faq_zh.php',
+        // AssessmentIntroContentMigrationTest covers locale/tenant preservation and conflict rollback.
+        '2026_09_06_150000_publish_assessment_intro_zh.php',
+        // AssessmentMethodsPublicationTest covers the six-page scope and conflict rollback.
+        '2026_09_06_160000_publish_assessment_methods_zh.php',
+        // AssessmentEntryPublicationTest covers the six-page scope and conflict rollback.
+        '2026_09_06_170000_publish_assessment_entry_zh.php',
+        // BigFiveLandingSurfaceMigrationTest covers identity, conflict rejection, and rollback compatibility.
+        '2026_09_06_180000_publish_big_five_landing_surface_zh.php',
     ];
 
     private const BASELINE_CUTOFF_MIGRATION = '2026_04_21_000000';
