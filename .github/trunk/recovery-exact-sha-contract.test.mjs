@@ -46,3 +46,11 @@ test("incident recovery bypasses only the unhealthy pre-activation DNS guard", (
   assert.match(guard, /deployMode\(\) !== 'code_only'/);
   assert.match(guard, /post-activation health checks remain required/);
 });
+
+test("incident recovery bypasses only the stale pre-activation queue topology check", () => {
+  const guard = taskBody("guard:queue-reload-capability");
+
+  assert.match(guard, /DEPLOY_INCIDENT_RECOVERY/);
+  assert.match(guard, /deployMode\(\) !== 'code_only'/);
+  assert.match(guard, /post-activation process reload remains required/);
+});

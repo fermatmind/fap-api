@@ -3313,6 +3313,16 @@ task('guard:deploy-shell-config', function () {
 });
 
 task('guard:queue-reload-capability', function () {
+    if (getenv('DEPLOY_INCIDENT_RECOVERY') === 'true') {
+        if (deployMode() !== 'code_only') {
+            throw new \RuntimeException('Incident recovery may bypass queue preflight only in code_only mode');
+        }
+
+        writeln('<comment>Skipping pre-activation queue capability during incident recovery; post-activation process reload remains required.</comment>');
+
+        return;
+    }
+
     $codeOnly = deployIsCodeOnly();
     $reloadRequired = deployBooleanOption('queue_reload_required', true);
     $manager = strtolower(trim((string) get('queue_manager', 'supervisor')));
