@@ -10,6 +10,7 @@ use App\Services\SeoCouncil\Platform12\Platform12DailyScheduler;
 use App\Services\SeoCouncil\Platform12\Platform12EvidenceReader;
 use App\Services\SeoCouncil\Platform12\Platform12FrozenMission;
 use App\Services\SeoCouncil\Platform12\Platform12RuntimeControl;
+use App\Services\SeoCouncil\Platform12\Platform12SourceCheck;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -374,16 +375,10 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
                     $input['url_truth']['current_url_truth_count'] = 99;
                 }
 
-                $sourceId = match ($missionId) {
-                    Platform12DailyMissionSet::IDS[0] => 'gsc_scheduled_receipt',
-                    Platform12DailyMissionSet::IDS[1] => 'url_truth_reconciliation',
-                    Platform12DailyMissionSet::IDS[2] => 'private_route_negative_set',
-                };
-
                 return ['input' => ['evaluated_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'), ...$input],
-                    'sources' => [['id' => $sourceId, 'hash' => str_repeat('d', 64),
+                    'sources' => array_map(static fn (string $id): array => ['id' => $id, 'hash' => str_repeat('d', 64),
                         'read_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
-                        'observed_at' => now('UTC')->subMinute()->format('Y-m-d\TH:i:s\Z')]],
+                        'observed_at' => now('UTC')->subMinute()->format('Y-m-d\TH:i:s\Z')], Platform12SourceCheck::SOURCES[$missionId]),
                     'source_gaps' => [], 'captured_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
                     'expires_at' => now('UTC')->addMinutes(10)->format('Y-m-d\TH:i:s\Z')];
             }
