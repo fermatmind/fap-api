@@ -36,6 +36,7 @@ jobs:
     timeout-minutes: 5
     outputs:
       deploy: ${{ steps.receipt.outputs.deploy }}
+      infrastructure: ${{ steps.receipt.outputs.infrastructure }}
       classification: ${{ steps.receipt.outputs.classification }}
       artifact_digest: ${{ steps.artifact.outputs.digest }}
       config_fingerprint: ${{ steps.receipt.outputs.config_fingerprint }}
@@ -347,6 +348,7 @@ jobs:
           fi
           {
             echo "deploy=$(jq -r .classification.deploy "$receipt")"
+            echo "infrastructure=$(jq -r .classification.flags.infrastructure_deployment "$receipt")"
             echo "classification=$classification"
             echo "config_fingerprint=$(sha256sum "$receipt" | awk '{print $1}')"
             echo "career_current=$career_current"
@@ -1546,6 +1548,7 @@ jobs:
           set +e
           timeout --signal=TERM --kill-after=30s "$deploy_timeout" php /tmp/dep.phar deploy production -f deploy.php --revision "$DEPLOY_SHA" \
             -o release_name="$release" -o deploy_mode=standard \
+            -o verify_api_certbot_renewal='${{ needs.policy.outputs.infrastructure }}' \
             -o career_current_parity_required='${{ needs.policy.outputs.career_current }}' \
             -o career_data_recovery='${{ needs.policy.outputs.career_data_recovery }}' \
             -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' \

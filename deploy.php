@@ -72,6 +72,8 @@ set('healthcheck_scheme', 'https');
 set('healthcheck_use_resolve', true);
 set('static_media_healthcheck_use_resolve', false);
 set('nginx_site', '/etc/nginx/sites-enabled/fap-api');
+set('api_http_redirect_host', 'api.fermatmind.com');
+set('verify_api_certbot_renewal', false);
 set('php_fpm_service', 'php8.4-fpm');
 set('queue_manager', 'supervisor');
 set('queue_reload_required', true);
@@ -3955,6 +3957,153 @@ BASH, [
     run($command);
 });
 
+task('ensure:nginx-api-http-redirect', function () {
+    if (currentHost()->getAlias() !== 'production') {
+        writeln('<comment>Skip production API HTTP redirect convergence outside production</comment>');
+
+        return;
+    }
+
+    if (deploySkipsAuthorityMutations()) {
+        writeln('<comment>Skip API HTTP redirect convergence in authority-mutation-free deploy mode</comment>');
+
+        return;
+    }
+
+    $host = deploySafeHost((string) get('api_http_redirect_host'), 'api_http_redirect_host');
+    $site = deploySafeAbsolutePath((string) get('nginx_site'), 'nginx_site');
+    $deployPath = rtrim(deploySafeAbsolutePath((string) get('deploy_path'), 'deploy_path'), '/');
+    $webroot = $deployPath.'/current/backend/public';
+    $transformer = deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/ensure_api_http_redirect.php');
+    $quotedHost = deployShellArg($host);
+    $quotedSite = deployShellArg($site);
+    $quotedWebroot = deployShellArg($webroot);
+    $quotedRenewal = deployShellArg('/etc/letsencrypt/renewal/'.$host.'.conf');
+    $verifyRenewal = deployBooleanOption('verify_api_certbot_renewal', false) ? '1' : '0';
+
+    $command = strtr(<<<'BASH'
+set -euo pipefail
+site_path=__SITE__
+api_host=__HOST__
+certbot_webroot=__WEBROOT__
+renewal_config=__RENEWAL__
+verify_renewal=__VERIFY_RENEWAL__
+tmp_source="$(mktemp)"
+tmp_candidate="$(mktemp)"
+tmp_headers="$(mktemp)"
+site_backup="$(mktemp /tmp/fap-api-http-vhost-backup.XXXXXX.conf)"
+trap 'rm -f "$tmp_source" "$tmp_candidate" "$tmp_headers"; sudo -n rm -f "$site_backup" 2>/dev/null || true' EXIT
+
+sudo -n test -f "$site_path"
+sudo -n /usr/bin/cat "$site_path" > "$tmp_source"
+php __TRANSFORMER__ "$tmp_source" "$api_host" "$certbot_webroot" > "$tmp_candidate"
+test -s "$tmp_candidate"
+sudo -n cp -p "$site_path" "$site_backup"
+echo "API HTTP redirect: site backup created"
+
+restore_api_http_vhost() {
+    status="$1"
+    echo "API HTTP redirect: restoring previous site config" >&2
+    sudo -n cp -p "$site_backup" "$site_path"
+    sudo -n /usr/sbin/nginx -t
+    sudo -n /usr/bin/systemctl reload nginx
+    exit "$status"
+}
+
+sudo -n cp "$tmp_candidate" "$site_path"
+set +e
+sudo -n /usr/sbin/nginx -t
+status=$?
+set -e
+if [ "$status" -ne 0 ]; then
+    restore_api_http_vhost "$status"
+fi
+set +e
+sudo -n /usr/bin/systemctl reload nginx
+status=$?
+set -e
+if [ "$status" -ne 0 ]; then
+    restore_api_http_vhost "$status"
+fi
+
+probe_redirect() {
+    method="$1"
+    path="$2"
+    expected_location="https://${api_host}${path}"
+    : > "$tmp_headers"
+
+    if [ "$method" = HEAD ]; then
+        status="$(curl -sS --max-time 15 --max-redirs 0 --head -o /dev/null -D "$tmp_headers" -w '%{http_code}' "http://${api_host}${path}")"
+    elif [ "$method" = POST ]; then
+        status="$(curl -sS --max-time 15 --max-redirs 0 -X POST --data '' -o /dev/null -D "$tmp_headers" -w '%{http_code}' "http://${api_host}${path}")"
+    else
+        status="$(curl -sS --max-time 15 --max-redirs 0 -o /dev/null -D "$tmp_headers" -w '%{http_code}' "http://${api_host}${path}")"
+    fi
+
+    location="$(awk 'BEGIN{IGNORECASE=1} /^location:/{sub(/\r$/, ""); print substr($0, index($0, ":") + 2)}' "$tmp_headers" | tail -n 1)"
+    test "$status" = 308
+    test "$location" = "$expected_location"
+}
+
+set +e
+probe_redirect GET '/api/v0.3/flags?redirect_probe=1' \
+    && probe_redirect HEAD '/api/v0.3/flags?redirect_probe=1' \
+    && probe_redirect POST '/api/v0.3/flags?redirect_probe=1'
+status=$?
+set -e
+if [ "$status" -ne 0 ]; then
+    echo "API HTTP redirect: public redirect probe failed" >&2
+    restore_api_http_vhost "$status"
+fi
+
+set +e
+challenge_status="$(curl -sS --max-time 15 --max-redirs 0 -o /dev/null -w '%{http_code}' "http://${api_host}/.well-known/acme-challenge/fap-api-route-probe-not-found")"
+challenge_curl_status=$?
+set -e
+if [ "$challenge_curl_status" -ne 0 ] || [ "$challenge_status" != 404 ]; then
+    echo "API HTTP redirect: ACME webroot probe returned ${challenge_status}, expected 404" >&2
+    restore_api_http_vhost 1
+fi
+
+if [ "$verify_renewal" = 1 ]; then
+    verify_certbot_renewal() {
+        sudo -n /usr/bin/systemctl is-enabled --quiet certbot.timer || return $?
+        sudo -n /usr/bin/systemctl is-active --quiet certbot.timer || return $?
+        next_run="$(sudo -n /usr/bin/systemctl show certbot.timer --property=NextElapseUSecRealtime --value)" || return $?
+        test -n "$next_run" || return $?
+        test "$next_run" != n/a || return $?
+        sudo -n test -f "$renewal_config" || return $?
+        sudo -n grep -Eq '^[[:space:]]*authenticator[[:space:]]*=[[:space:]]*webroot[[:space:]]*$' "$renewal_config" || return $?
+        sudo -n grep -Fq "webroot_path = ${certbot_webroot}," "$renewal_config" || return $?
+        sudo -n find /etc/letsencrypt/renewal-hooks/deploy -maxdepth 1 -type f -perm -111 \
+            -exec grep -El 'systemctl[[:space:]]+reload[[:space:]]+nginx|nginx[[:space:]]+-s[[:space:]]+reload' {} + | grep -q . || return $?
+        sudo -n /usr/bin/certbot renew --cert-name "$api_host" --dry-run --non-interactive || return $?
+    }
+
+    set +e
+    verify_certbot_renewal
+    renewal_status=$?
+    set -e
+    if [ "$renewal_status" -ne 0 ]; then
+        echo "API Certbot renewal verification failed" >&2
+        restore_api_http_vhost "$renewal_status"
+    fi
+    echo "API Certbot renewal: timer, webroot, reload hook, and dry-run verified"
+fi
+
+echo "API HTTP redirect: 308, fixed host, method coverage, and ACME route verified"
+BASH, [
+        '__HOST__' => $quotedHost,
+        '__SITE__' => $quotedSite,
+        '__WEBROOT__' => $quotedWebroot,
+        '__RENEWAL__' => $quotedRenewal,
+        '__VERIFY_RENEWAL__' => $verifyRenewal,
+        '__TRANSFORMER__' => $transformer,
+    ]);
+
+    run($command);
+});
+
 /**
  * ======================================================
  * Healthcheck
@@ -4699,8 +4848,9 @@ after('seo:warm-sitemap-source-cache', 'guard:career-discoverability-post-sitema
 after('guard:career-discoverability-post-sitemap', 'guard:public-content-release');
 after('guard:public-content-release', 'prepare:release-bootstrap-cache-access');
 after('deploy:symlink', 'ensure:nginx-public-static-media-route');
+after('ensure:nginx-public-static-media-route', 'ensure:nginx-api-http-redirect');
 after('deploy:symlink', 'reload:php-fpm');
-after('deploy:symlink', 'reload:nginx');
+after('ensure:nginx-api-http-redirect', 'reload:nginx');
 after('deploy:symlink', 'queue:reload-workers');
 after('deploy:symlink', 'healthcheck:public');
 after('healthcheck:public', 'healthcheck:sitemap-source');
