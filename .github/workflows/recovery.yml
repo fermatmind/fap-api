@@ -38,6 +38,9 @@ jobs:
       DEPLOY_PATH_PROD: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
       MODE: ${{ inputs.mode }}
       EXACT_SHA: ${{ inputs.exact_sha }}
+      DEPLOY_LOCK_RUN_ID: ${{ github.run_id }}
+      DEPLOY_LOCK_RUN_ATTEMPT: ${{ github.run_attempt }}
+      TRUNK_DEPLOY_SERIALIZED: "true"
       DEPLOYER_VERSION: "7.5.12"
       DEPLOYER_SHA256: "b55c6609653e888c672d327c407f8bba6324b9c9cc24f9dcfb3f4b3922760632"
     steps:

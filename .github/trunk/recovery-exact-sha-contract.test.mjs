@@ -27,6 +27,9 @@ test("exact-SHA recovery remains usable when the active symlink is unreadable", 
   assert.match(beforeExact, /lkg\)[\s\S]*current\/REVISION/);
   assert.doesNotMatch(exact, /current\/REVISION|active=/);
   assert.match(exact, /deploy:code-only production/);
+  assert.match(recovery, /DEPLOY_LOCK_RUN_ID: \$\{\{ github\.run_id \}\}/);
+  assert.match(recovery, /DEPLOY_LOCK_RUN_ATTEMPT: \$\{\{ github\.run_attempt \}\}/);
+  assert.match(recovery, /TRUNK_DEPLOY_SERIALIZED: "true"/);
 });
 
 test("code-only recovery skips runtime authority configuration hooks", () => {
