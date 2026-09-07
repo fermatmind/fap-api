@@ -757,6 +757,8 @@ final class ScaleRegistrySeeder extends Seeder
 
         $entryPackage = json_decode(file_get_contents(database_path('data/assessment_entry_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
         $attributes['content_i18n_json']['zh']['landing_entry'] = $entryPackage['scales'][$attributes['code']]['landing_entry'];
+        $heroTitles = json_decode(file_get_contents(database_path('data/assessment_hero_titles_zh_20260907.json')), true, 512, JSON_THROW_ON_ERROR);
+        $attributes['content_i18n_json']['zh']['landing_entry']['title'] = $heroTitles['scales'][$attributes['code']]['title'];
 
         return DB::transaction(function () use ($writer, $attributes) {
             $published = [];
@@ -796,6 +798,8 @@ final class ScaleRegistrySeeder extends Seeder
 
         $entryPackage = json_decode(file_get_contents(database_path('data/assessment_entry_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
         $attributes['content_i18n_json']['zh']['landing_entry'] = $entryPackage['scales'][$attributes['code']]['landing_entry'];
+        $heroTitles = json_decode(file_get_contents(database_path('data/assessment_hero_titles_zh_20260907.json')), true, 512, JSON_THROW_ON_ERROR);
+        $attributes['content_i18n_json']['zh']['landing_entry']['title'] = $heroTitles['scales'][$attributes['code']]['title'];
 
         return DB::transaction(function () use ($writer, $attributes) {
             $published = [];
