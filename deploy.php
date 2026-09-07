@@ -4040,9 +4040,11 @@ probe_redirect() {
         status="$(curl -sS --max-time 15 --max-redirs 0 -o /dev/null -D "$tmp_headers" -w '%{http_code}' "http://${api_host}${path}")"
     fi
 
-    location="$(awk 'BEGIN{IGNORECASE=1} /^location:/{sub(/\r$/, ""); print substr($0, index($0, ":") + 2)}' "$tmp_headers" | tail -n 1)"
-    test "$status" = 308
-    test "$location" = "$expected_location"
+    location="$(awk 'tolower($1) == "location:" {sub(/\r$/, ""); print substr($0, index($0, ":") + 2)}' "$tmp_headers" | tail -n 1)"
+    if [ "$status" != 308 ] || [ "$location" != "$expected_location" ]; then
+        echo "API HTTP redirect: ${method} probe status=${status} location_match=$([ "$location" = "$expected_location" ] && echo yes || echo no)" >&2
+        return 1
+    fi
 }
 
 set +e
