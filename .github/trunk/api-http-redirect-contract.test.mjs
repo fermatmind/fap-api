@@ -47,6 +47,7 @@ test("infrastructure releases verify Certbot renewal through the protected deplo
   assert.match(task, /renewal-hooks\/deploy/);
   assert.match(task, /certbot renew[\s\S]*--cert-name "\$api_host" --dry-run --non-interactive/);
   assert.match(task, /timeout --signal=TERM --kill-after=15s 600s sudo -n \/usr\/bin\/certbot renew/);
+  assert.match(task, /--no-random-sleep-on-renew/);
   assert.match(task, /> "\$tmp_certbot" 2>&1/);
 });
 

@@ -4127,7 +4127,8 @@ if [ "$verify_renewal" = 1 ]; then
         sudo -n find /etc/letsencrypt/renewal-hooks/deploy -maxdepth 1 -type f -perm -111 \
             -exec grep -El 'systemctl[[:space:]]+reload[[:space:]]+nginx|nginx[[:space:]]+-s[[:space:]]+reload' {} + | grep -q . || return $?
         timeout --signal=TERM --kill-after=15s 600s sudo -n /usr/bin/certbot renew \
-            --cert-name "$api_host" --dry-run --non-interactive > "$tmp_certbot" 2>&1 || return $?
+            --cert-name "$api_host" --dry-run --non-interactive \
+            --no-random-sleep-on-renew > "$tmp_certbot" 2>&1 || return $?
     }
 
     set +e
