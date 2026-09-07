@@ -74,6 +74,12 @@ NGINX;
     {
         return [
             'missing exact host' => ['server { listen 80; server_name *.fermatmind.com; }'],
+            'https-only exact host' => [implode("\n", [
+                'server {',
+                '  listen 443 ssl;',
+                '  server_name api.fermatmind.com;',
+                '}',
+            ])],
             'duplicate exact host' => [implode("\n", [
                 'server {',
                 '  listen 80;',
