@@ -107,6 +107,24 @@ class AssessmentEnglishLandingPublicationTest extends TestCase
         }
     }
 
+    public function test_adds_missing_english_fields_to_historical_fresh_database_rows(): void
+    {
+        $this->seedBaseline();
+        foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+            foreach ($this->package() as $code => $entry) {
+                DB::table($table)->where('org_id', 0)->where('code', $code)->update(['content_i18n_json' => json_encode(['zh' => $entry['source_zh'], 'en' => ['title' => 'Existing title']])]);
+            }
+        }
+        $this->publish();
+        foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+            foreach ($this->package() as $code => $entry) {
+                $value = json_decode(DB::table($table)->where('org_id', 0)->where('code', $code)->value('content_i18n_json'), true);
+                $this->assertSame($entry['content']['faq'], $value['en']['faq']);
+                $this->assertSame('Existing title', $value['en']['title']);
+            }
+        }
+    }
+
     public function test_refuses_changed_english_and_rolls_back_all_scales(): void
     {
         $this->assertDriftRejected('en');

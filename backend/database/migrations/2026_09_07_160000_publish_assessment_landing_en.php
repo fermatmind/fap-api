@@ -27,7 +27,8 @@ return new class extends Migration
                             throw new RuntimeException($code.' Chinese translation source changed; refusing publication.');
                         }
                         $current = $content['en'][$key] ?? null;
-                        if ($current != $value && $current != $entry['expected_en'][$key]) {
+                        // Historical fresh-database rows may not have English fields yet.
+                        if ($current !== null && $current != $value && $current != $entry['expected_en'][$key]) {
                             throw new RuntimeException($code.' English landing content changed; refusing overwrite.');
                         }
                         $content['en'][$key] = $value;
