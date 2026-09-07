@@ -45,7 +45,9 @@ test("infrastructure releases verify Certbot renewal through the protected deplo
   assert.match(task, /NextElapseUSecRealtime/);
   assert.match(task, /authenticator.*webroot/);
   assert.match(task, /renewal-hooks\/deploy/);
-  assert.match(task, /certbot renew --cert-name "\$api_host" --dry-run --non-interactive/);
+  assert.match(task, /certbot renew[\s\S]*--cert-name "\$api_host" --dry-run --non-interactive/);
+  assert.match(task, /timeout --signal=TERM --kill-after=15s 600s sudo -n \/usr\/bin\/certbot renew/);
+  assert.match(task, /> "\$tmp_certbot" 2>&1/);
 });
 
 test("the API redirect runs before the ordinary Nginx reload", () => {
@@ -57,4 +59,5 @@ test("both deploy targets use strict GitHub SSH over the reachable TLS port", ()
   const command = "ssh -o BatchMode=yes -o IdentitiesOnly=no -o StrictHostKeyChecking=yes -o Hostname=ssh.github.com -o Port=443 -o HostKeyAlias=github.com -o ConnectTimeout=10 -o ConnectionAttempts=3";
 
   assert.equal(deployer.split(`->set('git_ssh_command', '${command}')`).length - 1, 2);
+  assert.equal(deployer.split("->setSshArguments(['-o ServerAliveInterval=15', '-o ServerAliveCountMax=8', '-o TCPKeepAlive=yes'])").length - 1, 2);
 });

@@ -579,6 +579,7 @@ $productionHost = host('production')
     ->setHostname(getenv('DEPLOY_HOST_PROD') ?: '139.224.130.204')
     ->setRemoteUser(getenv('DEPLOY_USER_PROD') ?: 'ubuntu')
     ->setPort((int) (getenv('DEPLOY_PORT_PROD') ?: 22))
+    ->setSshArguments(['-o ServerAliveInterval=15', '-o ServerAliveCountMax=8', '-o TCPKeepAlive=yes'])
     ->set('git_ssh_command', 'ssh -o BatchMode=yes -o IdentitiesOnly=no -o StrictHostKeyChecking=yes -o Hostname=ssh.github.com -o Port=443 -o HostKeyAlias=github.com -o ConnectTimeout=10 -o ConnectionAttempts=3')
     ->set('deploy_path', getenv('DEPLOY_PATH_PROD') ?: '/var/www/fap-api')
     ->set('healthcheck_host', getenv('HEALTHCHECK_HOST_PROD') ?: 'api.fermatmind.com')
@@ -601,6 +602,7 @@ $stagingHost = host('staging')
     ->setHostname(getenv('DEPLOY_HOST_STG') ?: 'staging.fermatmind.com')
     ->setRemoteUser(getenv('DEPLOY_USER_STG') ?: 'ubuntu')
     ->setPort((int) (getenv('DEPLOY_PORT_STG') ?: 22))
+    ->setSshArguments(['-o ServerAliveInterval=15', '-o ServerAliveCountMax=8', '-o TCPKeepAlive=yes'])
     ->setForwardAgent(true)
     ->set('git_ssh_command', 'ssh -o BatchMode=yes -o IdentitiesOnly=no -o StrictHostKeyChecking=yes -o Hostname=ssh.github.com -o Port=443 -o HostKeyAlias=github.com -o ConnectTimeout=10 -o ConnectionAttempts=3')
     ->set('deploy_path', getenv('DEPLOY_PATH_STG') ?: '/var/www/fap-api-staging')
@@ -4024,8 +4026,9 @@ verify_renewal=__VERIFY_RENEWAL__
 tmp_source="$(mktemp)"
 tmp_candidate="$(mktemp)"
 tmp_headers="$(mktemp)"
+tmp_certbot="$(mktemp)"
 site_backup="$(mktemp /tmp/fap-api-http-vhost-backup.XXXXXX.conf)"
-trap 'rm -f "$tmp_source" "$tmp_candidate" "$tmp_headers"; sudo -n rm -f "$site_backup" 2>/dev/null || true' EXIT
+trap 'rm -f "$tmp_source" "$tmp_candidate" "$tmp_headers" "$tmp_certbot"; sudo -n rm -f "$site_backup" 2>/dev/null || true' EXIT
 
 sudo -n test -f "$site_path"
 sudo -n /usr/bin/cat "$site_path" > "$tmp_source"
@@ -4123,7 +4126,8 @@ if [ "$verify_renewal" = 1 ]; then
         sudo -n grep -Fq "webroot_path = ${certbot_webroot}," "$renewal_config" || return $?
         sudo -n find /etc/letsencrypt/renewal-hooks/deploy -maxdepth 1 -type f -perm -111 \
             -exec grep -El 'systemctl[[:space:]]+reload[[:space:]]+nginx|nginx[[:space:]]+-s[[:space:]]+reload' {} + | grep -q . || return $?
-        sudo -n /usr/bin/certbot renew --cert-name "$api_host" --dry-run --non-interactive || return $?
+        timeout --signal=TERM --kill-after=15s 600s sudo -n /usr/bin/certbot renew \
+            --cert-name "$api_host" --dry-run --non-interactive > "$tmp_certbot" 2>&1 || return $?
     }
 
     set +e
