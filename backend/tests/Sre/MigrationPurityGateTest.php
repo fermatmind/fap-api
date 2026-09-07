@@ -44,6 +44,8 @@ final class MigrationPurityGateTest extends TestCase
         '2026_09_06_170000_publish_assessment_entry_zh.php',
         // BigFiveLandingSurfaceMigrationTest covers identity, conflict rejection, and rollback compatibility.
         '2026_09_06_180000_publish_big_five_landing_surface_zh.php',
+        // AssessmentEnglishLandingPublicationTest covers source binding, tenant preservation and atomic conflict rejection.
+        '2026_09_07_160000_publish_assessment_landing_en.php',
     ];
 
     private const BASELINE_CUTOFF_MIGRATION = '2026_04_21_000000';

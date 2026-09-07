@@ -109,12 +109,11 @@ final class ScalesLookupSeoMetadataTest extends TestCase
             );
 
         $faq = $response->json('content_i18n_json.en.faq');
-        $duration = collect($faq)->firstWhere('q', 'How long does it take?');
-
-        $this->assertSame(
-            'The 120-question full version takes about 15 minutes; the 90-question standard version takes about 11 minutes.',
-            $duration['a'] ?? null
-        );
+        $duration = collect($faq)->firstWhere('id', 'faq-big5-forms');
+        $this->assertStringContainsString('120-question version takes about 15 minutes', $duration['a'] ?? '');
+        $this->assertStringContainsString('90-question version about 11 minutes', $duration['a'] ?? '');
+        $package = json_decode(file_get_contents(database_path('data/assessment_landing_en_20260907.json')), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertJsonValueSame($package['scales']['BIG5_OCEAN']['content']['faq'], $faq);
     }
 
     public function test_default_scale_seed_preserves_existing_big_five_editorial_content_bytes(): void
