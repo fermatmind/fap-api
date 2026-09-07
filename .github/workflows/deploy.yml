@@ -59,6 +59,7 @@ jobs:
       seo_agent_evidence_boundary: ${{ steps.receipt.outputs.seo_agent_evidence_boundary }}
       seo_agent_policy_gateway: ${{ steps.receipt.outputs.seo_agent_policy_gateway }}
       seo_council_orchestration: ${{ steps.receipt.outputs.seo_council_orchestration }}
+      seo_council_runtime_closeout: ${{ steps.receipt.outputs.seo_council_runtime_closeout }}
       seo_competitive_evidence: ${{ steps.receipt.outputs.seo_competitive_evidence }}
       private_result_authority_publish_required: ${{ steps.receipt.outputs.private_result_authority_publish_required }}
     steps:
@@ -328,6 +329,11 @@ jobs:
           seo_agent_evidence_boundary="$(jq -r '.classification.operations.seo_agent_evidence_boundary == true' "$receipt")"
           seo_agent_policy_gateway="$(jq -r '.classification.operations.seo_agent_policy_gateway == true' "$receipt")"
           seo_council_orchestration="$(jq -r '.classification.operations.seo_council_orchestration == true' "$receipt")"
+          # Missing/old classification never grants the presentation exemption.
+          seo_council_runtime_closeout="$(jq -r '
+            .classification.operations.seo_council_orchestration == true
+            and .classification.operations.seo_ops_presentation_only != true
+          ' "$receipt")"
           seo_competitive_evidence="$(jq -r '.classification.operations.seo_competitive_evidence == true' "$receipt")"
           private_result_authority_publish_required="$(jq -r '
             if .classification.operations.seo_council_orchestration == true
@@ -355,6 +361,7 @@ jobs:
             echo "seo_agent_evidence_boundary=$seo_agent_evidence_boundary"
             echo "seo_agent_policy_gateway=$seo_agent_policy_gateway"
             echo "seo_council_orchestration=$seo_council_orchestration"
+            echo "seo_council_runtime_closeout=$seo_council_runtime_closeout"
             echo "seo_competitive_evidence=$seo_competitive_evidence"
             echo "private_result_authority_publish_required=$private_result_authority_publish_required"
           } >> "$GITHUB_OUTPUT"
@@ -512,7 +519,7 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$DEPLOY_SHA"
-          council_orchestration='${{ needs.policy.outputs.seo_council_orchestration }}'
+          council_orchestration='${{ needs.policy.outputs.seo_council_runtime_closeout }}'
           deploy_timeout=30m
           if test "$council_orchestration" = true; then deploy_timeout=60m; fi
           timeout --signal=TERM --kill-after=30s "$deploy_timeout" php /tmp/dep.phar deploy staging -f deploy.php --revision "$DEPLOY_SHA" \
@@ -526,7 +533,7 @@ jobs:
             -o seo_competitive_evidence='${{ needs.policy.outputs.seo_competitive_evidence }}' \
             -o seo_council_closeout_deferred="$council_orchestration" --no-interaction
       - name: Materialize inactive staging measurement candidate
-        if: needs.policy.outputs.seo_council_orchestration == 'true'
+        if: needs.policy.outputs.seo_council_runtime_closeout == 'true'
         env:
           SEO_INTEL_DB_HOST: ${{ secrets.SEO_INTEL_DB_HOST }}
           SEO_INTEL_DB_PORT: ${{ secrets.SEO_INTEL_DB_PORT }}
@@ -545,7 +552,7 @@ jobs:
             -o private_result_authority_publish_required=false --no-interaction
       - name: Verify staging measurement source readiness
         id: measurement_source_readiness
-        if: needs.policy.outputs.seo_council_orchestration == 'true'
+        if: needs.policy.outputs.seo_council_runtime_closeout == 'true'
         continue-on-error: true
         shell: bash
         env:
@@ -874,7 +881,7 @@ jobs:
             }
           ' > artifacts/measurement-source-readiness/receipt.json
       - name: Upload sanitized staging measurement source receipt
-        if: needs.policy.outputs.seo_council_orchestration == 'true' && steps.measurement_source_readiness.outcome == 'success'
+        if: needs.policy.outputs.seo_council_runtime_closeout == 'true' && steps.measurement_source_readiness.outcome == 'success'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: measurement-source-readiness-${{ github.event.workflow_run.head_sha }}
@@ -882,12 +889,12 @@ jobs:
           if-no-files-found: error
           retention-days: 90
       - name: Enforce staging measurement source readiness
-        if: needs.policy.outputs.seo_council_orchestration == 'true' && steps.measurement_source_readiness.outcome != 'success'
+        if: needs.policy.outputs.seo_council_runtime_closeout == 'true' && steps.measurement_source_readiness.outcome != 'success'
         run: |
           printf 'staging_closeout=HOLD reason=MEASUREMENT_SOURCE_READINESS_HOLD\n' >&2
           exit 1
       - name: Finalize staging SEO Council closeout
-        if: needs.policy.outputs.seo_council_orchestration == 'true'
+        if: needs.policy.outputs.seo_council_runtime_closeout == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -899,7 +906,7 @@ jobs:
           timeout --signal=TERM --kill-after=30s 15m php /tmp/dep.phar seo:council-orchestration-closeout staging \
             -f deploy.php -o seo_council_orchestration=true --no-interaction
       - name: Finalize staging competitive evidence after 11F readiness
-        if: needs.policy.outputs.seo_competitive_evidence == 'true' && needs.policy.outputs.seo_council_orchestration == 'true'
+        if: needs.policy.outputs.seo_competitive_evidence == 'true' && needs.policy.outputs.seo_council_runtime_closeout == 'true'
         shell: bash
         env:
           SEO_INTEL_EVIDENCE_DB_USERNAME: ${{ secrets.SEO_INTEL_MIGRATION_DB_USERNAME }}
@@ -1062,7 +1069,7 @@ jobs:
             and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
       - name: Read staging SEO Council closeout receipt
-        if: needs.policy.outputs.seo_council_orchestration == 'true'
+        if: needs.policy.outputs.seo_council_runtime_closeout == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -1252,7 +1259,9 @@ jobs:
         if: always()
         run: |
           jq -n --arg sha "$DEPLOY_SHA" --arg run "$GITHUB_RUN_ID" --arg at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
-            '{schema_version:"fermatmind.trunk-deploy-timing.v1",sha:$sha,phase:"staging",run_id:$run,completed_at:$at}' > staging-timing.json
+            --arg council_closeout '${{ needs.policy.outputs.seo_council_runtime_closeout }}' \
+            --arg source_readiness '${{ steps.measurement_source_readiness.outcome }}' \
+            '{schema_version:"fermatmind.trunk-deploy-timing.v1",sha:$sha,phase:"staging",run_id:$run,completed_at:$at,council_runtime_closeout_required:($council_closeout == "true"),measurement_source_readiness:$source_readiness}' > staging-timing.json
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         if: always()
         with:
@@ -1394,7 +1403,7 @@ jobs:
             exit 1
           }
           competitive_evidence='${{ needs.policy.outputs.seo_competitive_evidence }}'
-          council_orchestration='${{ needs.policy.outputs.seo_council_orchestration }}'
+          council_orchestration='${{ needs.policy.outputs.seo_council_runtime_closeout }}'
           production_council_closeout=false
           if [ "$competitive_evidence" = true ] && [ "$council_orchestration" = true ]; then
             production_council_closeout=true
@@ -1732,7 +1741,7 @@ jobs:
             and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
       - name: Read production SEO Council closeout receipt
-        if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.seo_council_orchestration == 'true' && needs.policy.outputs.seo_competitive_evidence == 'true'
+        if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.seo_council_runtime_closeout == 'true' && needs.policy.outputs.seo_competitive_evidence == 'true'
         shell: bash
         run: |
           set -euo pipefail

@@ -4,10 +4,65 @@ import test from "node:test";
 import {
   CAREER_PUBLISHER_BOUNDARY_MATRIX,
   PERSONALITY_CURRENT_BOUNDARY_MATRIX,
+  SEO_OPS_PRESENTATION_PATHS,
   classifyPaths,
 } from "./classify-paths.mjs";
 
 const has = (paths, flag) => classifyPaths(paths).flags[flag];
+
+test("reviewed Ops presentation keeps CI and deployment without live Council source readiness", () => {
+  for (const path of SEO_OPS_PRESENTATION_PATHS) {
+    const result = classifyPaths([path]);
+    assert.equal(result.operations.seo_ops_presentation_only, true, path);
+    assert.equal(result.operations.seo_council_orchestration, true, path);
+    assert.equal(result.operations.seo_agent_policy_gateway, true, path);
+    assert.equal(result.flags.seo_discoverability, false, path);
+    assert.equal(result.flags.application_code, true, path);
+    assert.equal(result.deploy, true, path);
+  }
+});
+
+test("presentation exemption covers the unreleased UI union, not just the latest workflow-only push", () => {
+  const delivery = [".github/trunk/classify-paths.mjs", ".github/trunk/classify-paths.test.mjs",
+    ".github/trunk/seo-ops-presentation-deploy-contract.test.mjs", ".github/workflows/ci.yml", ".github/workflows/deploy.yml"];
+  const result = classifyPaths([...SEO_OPS_PRESENTATION_PATHS, ...delivery,
+    "backend/tests/Feature/Ops/SeoOperationsPageTest.php",
+    "backend/tests/Feature/Console/CmsBaselineOperationCommandTest.php",
+    "docs/ops/display.md"]);
+  assert.equal(result.operations.seo_ops_presentation_only, true);
+  assert.equal(result.operations.seo_council_orchestration, true);
+  assert.equal(result.deploy, true);
+  assert.equal(classifyPaths(delivery).operations.seo_ops_presentation_only, false);
+  assert.equal(classifyPaths(["backend/tests/Feature/Ops/SeoOperationsPageTest.php"]).deploy, false);
+});
+
+test("mixed runtime, security, sources, authorities and unknown paths retain real readiness gates", () => {
+  for (const path of [
+    "backend/app/Services/SeoCouncil/Platform12/Platform12RuntimeControl.php",
+    "backend/app/Services/SeoCouncil/Platform12/Platform12SchedulerStore.php",
+    "backend/app/Services/SeoCouncil/Platform12/Operations/NewSourceReader.php",
+    "backend/app/Services/SeoAgentGovernance/SeoRoleCapabilityRegistry.php",
+    "backend/app/Services/SeoCouncil/Measurement/ReadOnlyMeasurementEvidenceBundleLoader.php",
+    "backend/app/Services/SeoIntel/GscReadModelSyncService.php",
+    "backend/app/Services/Ops/OpsAlertService.php",
+    "backend/app/Filament/Ops/Support/SeoAgentCouncilUiContract.php",
+    "backend/app/Http/Middleware/OpsAccessControl.php",
+    "backend/app/Http/Middleware/FmTokenAuth.php",
+    "backend/app/Providers/SeoCouncilServiceProvider.php",
+    "backend/config/database.php", "backend/config/cache.php", "backend/config/seo_council.php",
+    "backend/composer.lock", "backend/routes/web.php", "backend/routes/api.php", "deploy.php",
+    "backend/database/migrations/seo_intel/2026_09_04_010000_create_seo_council_scheduler_storage.php",
+    "backend/resources/seo-agent/council/platform12/catalogs/seo.platform12_mission_catalog.v1.json",
+    "backend/docs/seo/generated/seo-council-contract-manifest.v1.json",
+    "backend/lang/en/seo-council.php", ".github/trunk/seo-platform-12a08-activation.mjs",
+    "backend/app/Services/Unknown.php", "backend/app/Filament/Ops/Pages/Unknown.php",
+  ]) {
+    const result = classifyPaths([...SEO_OPS_PRESENTATION_PATHS, path]);
+    assert.equal(result.operations.seo_ops_presentation_only, false, path);
+    assert.equal(result.operations.seo_council_orchestration, true, path);
+    assert.equal(result.deploy, true, path);
+  }
+});
 
 test("daily Council wiring and its tests retain the Council validation boundary", () => {
   for (const path of [

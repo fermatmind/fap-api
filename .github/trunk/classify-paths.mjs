@@ -81,6 +81,29 @@ const SEO_CLASSIFIER_CONTROL_PLANE_PATHS = new Set([
   ".github/trunk/classify-paths.test.mjs",
 ]);
 
+// Reviewed presentation/read-projection files, not the Ops namespace as a whole.
+// Admission, registry, permissions, collectors and runtime controls are excluded.
+export const SEO_OPS_PRESENTATION_PATHS = new Set([
+  "backend/app/Filament/Ops/Support/SeoAgentRolePresentation.php",
+  "backend/app/Services/SeoCouncil/Platform12/Operations/Platform12SystemHealthReadService.php",
+  "backend/resources/views/filament/ops/components/ops-agent-council-workspace.blade.php",
+  "backend/resources/views/filament/ops/components/ops-agent-role-overview.blade.php",
+  "backend/resources/views/filament/ops/components/ops-system-health-workspace.blade.php",
+  "backend/resources/views/filament/ops/components/ops-trace-drilldown-workspace.blade.php",
+  "backend/resources/css/filament/ops/theme.css",
+  "backend/resources/css/filament/ops/theme.compiled.css",
+  "backend/lang/en/seo-agent-roles.php",
+  "backend/lang/zh_CN/seo-agent-roles.php",
+]);
+
+const isPresentationCompanion = (path) =>
+  /^backend\/tests\//.test(path)
+  || /^(?:docs\/|backend\/docs\/).+\.md$/.test(path)
+  || SEO_CLASSIFIER_CONTROL_PLANE_PATHS.has(path)
+  || /^\.github\/trunk\/[^/]+\.test\.mjs$/.test(path)
+  || path === ".github/workflows/ci.yml"
+  || path === ".github/workflows/deploy.yml";
+
 const isSeoCouncilOrchestrationBoundary = (path) =>
   /^backend\/(?:app\/Services\/SeoCouncil\/|app\/Console\/Commands\/SeoCouncil[^/]+\.php$|app\/Http\/Controllers\/API\/V0_5\/Ops\/SeoIntel\/SeoCouncilMissionController\.php$|app\/Http\/Middleware\/EnsureSeoCouncilMissionAuthorized\.php$|app\/Http\/Middleware\/OpsAccessControl\.php$|app\/Filament\/Ops\/Support\/SeoAgentCouncilUiContract\.php$|app\/Providers\/SeoCouncilServiceProvider\.php$|bootstrap\/(?:app|providers)\.php$|config\/seo_council\.php$|resources\/seo-agent\/council\/|resources\/views\/filament\/ops\/components\/ops-agent-council-workspace\.blade\.php$|lang\/(?:en|zh_CN)\/ops\.php$|docs\/(?:seo\/generated\/(?:seo-council-contract-manifest\.v[1-9]|seo-technical-diagnosis-contract-manifest\.v[12]|seo-measurement-contract-manifest\.v[123])\.json$|contracts\/openapi\.snapshot\.json$)|scripts\/seo\/(?:export_seo_council_contracts|submit_seo_council_mission)\.php$|database\/migrations\/seo_intel\/\d{4}_\d{2}_\d{2}_\d+_(?:create|expand)_seo_council_[a-z0-9_]+\.php$|tests\/Feature\/(?:SeoIntel\/SeoPlatform11[D-L]|Ops\/SeoUxImpl06AgentCouncilTest\.php$)|routes\/(?:api|web)\.php$)/.test(path)
   || /^backend\/tests\/Feature\/SeoIntel\/SeoPlatform12[^/]+\.php$/.test(path)
@@ -126,6 +149,10 @@ export function classifyPaths(inputPaths) {
   const seoCompetitiveEvidenceAffected = paths.some(isSeoCompetitiveEvidenceBoundary);
   const seoCompetitiveEvidence = SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE === "ACTIVE"
     && seoCompetitiveEvidenceAffected;
+  const opsPresentation = paths.some((path) => SEO_OPS_PRESENTATION_PATHS.has(path));
+  const opsPresentationOnly = opsPresentation && paths.every((path) =>
+    SEO_OPS_PRESENTATION_PATHS.has(path) || isPresentationCompanion(path),
+  );
   const operations = {
     publisher_required: publisherRequired,
     career_current_authority_release: paths.some(isCareerAuthorityReleaseBoundary),
@@ -143,10 +170,11 @@ export function classifyPaths(inputPaths) {
       || path === "backend/app/Services/SeoIntel/GscSearchAnalyticsRowNormalizer.php"
       || path === "backend/app/Services/SeoIntel/GscReadModelSyncService.php",
     ),
-    seo_agent_policy_gateway: paths.some((path) =>
+    seo_ops_presentation_only: opsPresentationOnly,
+    seo_agent_policy_gateway: opsPresentation || paths.some((path) =>
       /^backend\/(?:app\/Services\/SeoAgentPolicyGateway\/|app\/Console\/Commands\/SeoPolicyGatewayCloseout\.php$|resources\/seo-agent\/policy-gateway\/|docs\/(?:seo\/generated\/seo-policy-gateway-contract-manifest\.v1\.json$|contracts\/openapi\.snapshot\.json$)|scripts\/seo\/export_seo_policy_gateway_contracts\.php$|tests\/Feature\/SeoIntel\/SeoPlatform11C|tests\/Feature\/Ops\/SeoUxImpl06AgentCouncilTest\.php$|app\/Filament\/Ops\/Support\/SeoAgentCouncilUiContract\.php$|resources\/views\/filament\/ops\/components\/ops-agent-council-workspace\.blade\.php$|app\/Http\/Controllers\/API\/V0_5\/Ops\/SeoIntel\/SeoIntelDashboardController\.php$|routes\/api\.php$)/.test(path)
     ),
-    seo_council_orchestration: paths.some((path) =>
+    seo_council_orchestration: opsPresentation || paths.some((path) =>
       isSeoCouncilOrchestrationBoundary(path)
       && !(SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE === "DEFERRED_NON_BLOCKING"
         && isDeferredCompetitiveCouncilBoundary(path))
@@ -192,7 +220,7 @@ export function classifyPaths(inputPaths) {
       /^backend\/app\/Services\/Ops\//,
       /^backend\/app\/Services\/SeoIntel\/OpsDashboard\//,
       /^backend\/resources\/(?:css|views)\/filament\/ops\//,
-    ]);
+    ]) || SEO_OPS_PRESENTATION_PATHS.has(path);
     const opsExecutionMigration = /^backend\/database\/migrations\/seo_intel\/\d{4}_\d{2}_\d{2}_\d+_expand_seo_execution_workflow\.php$/.test(path);
     const opsReadonlyGsc = matches(path, [
       /^backend\/app\/Http\/Controllers\/API\/V0_5\/Ops\/SeoIntel\/SeoIntelDashboardController\.php$/,
