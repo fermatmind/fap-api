@@ -8,16 +8,13 @@ ssh_args=(-o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o 
 if [[ "${TARGET:?}" = staging ]]; then
   ssh_args+=(-o IdentitiesOnly=yes -i "${DEPLOY_IDENTITY_FILE_STG:?}")
 fi
-identity=()
-if [[ "${TARGET:?}" = production ]]; then identity=(sudo -n -u www-data --); fi
-printf -v identity_cmd '%q ' "${identity[@]}"
+identity_cmd=''
+if [[ "${TARGET:?}" = production ]]; then identity_cmd='sudo -n -u www-data --'; fi
 if [[ "$mode" = state ]]; then
-  if [[ "${TARGET}" = staging ]]; then identity_cmd=''; fi
   ssh "${ssh_args[@]}" "$DEPLOY_USER@$DEPLOY_HOST" "set -e; cd $q_path/current/backend; $identity_cmd env A08_GATE_ONLY=${A08_GATE_ONLY:-false} php" \
     < backend/scripts/deploy/seo_a08_state.php > "$output"
 else
   [[ "$DEPLOY_SHA" =~ ^[a-f0-9]{40}$ ]]
   # The deployed installer validates exact SHA/hash/schema and never changes runtime cache.
-  if [[ "${TARGET}" = staging ]]; then identity_cmd=''; fi
   ssh "${ssh_args[@]}" "$DEPLOY_USER@$DEPLOY_HOST" "set -e; cd $q_path/current/backend; $identity_cmd php scripts/deploy/seo_a08_install.php" < "$output"
 fi
