@@ -149,3 +149,32 @@ test('HMAC bootstrap atomically installs the fixed pair and refuses existing-key
  const deploy=readFileSync(new URL('../workflows/deploy.yml',import.meta.url),'utf8');
  for(const key of Object.keys(pair)) assert.equal(deploy.split(`${key}: \${{ secrets.${key} }}`).length-1,2);
 });
+
+test('authorized M3 requires safe source and terminal artifacts plus preceding mission acceptance',async()=>{
+ const {bindControlled}=await import('./seo-platform-12a08-release.mjs');
+ const {digest}=await import('./seo-platform-12a08-activation.mjs');
+ const sha='a'.repeat(40),id=MISSIONS[2], vector={policy:'b'.repeat(64)}, fingerprint='c'.repeat(64), receipt='d'.repeat(64);
+ const proof=()=>({bound_production_sha:sha,runtime:{version_vector:vector},missions:Object.fromEntries(MISSIONS.map(m=>[m,{checks:{fingerprint},source_acceptance:{status:'pass',receipt_digest:receipt,observed_verdict:'READY'},end_to_end_acceptance:{status:m===id?'pending':'pass'}}]))});
+ const body={schema_version:'seo.a08_controlled_acceptance.v1',environment:'production',sha,mission_id:id,version_vector:vector,
+  fingerprint,source_receipt_digest:receipt,terminal_committed:true,receipt_hash:'e'.repeat(64),receipt_to_ui_verified:true,runtime_boundaries_verified:true,business_write_enabled:false,observed_verdict:'READY'};
+ const seal=x=>({...x,receipt_digest:digest(JSON.stringify(x))});
+ assert.equal(bindControlled(proof(),seal(body),'sha256:'+'f'.repeat(64)).missions[id].end_to_end_acceptance.status,'pass');
+ assert.throws(()=>bindControlled(proof(),seal({...body,observed_verdict:'HOLD'}),'sha256:'+'f'.repeat(64)),/CONTROLLED/);
+ const unsafe=proof();unsafe.missions[id].source_acceptance.observed_verdict='HOLD';
+ assert.throws(()=>bindControlled(unsafe,seal(body),'sha256:'+'f'.repeat(64)),/CONTROLLED/);
+ const dir=mkdtempSync(`${tmpdir()}/a08-m3-`), output=`${dir}/output`;
+ const state={paused:false,generation:'1'.repeat(32),selected_missions:MISSIONS.slice(0,2)};
+ const command=new URL('./seo-platform-12a08-transition.mjs',import.meta.url).pathname;
+ const run=(manifest,pause=false)=>{
+  writeFileSync(`${dir}/activation.json`,JSON.stringify(manifest));writeFileSync(`${dir}/a08-install-after.json`,JSON.stringify({...state,paused:pause}));writeFileSync(output,'');
+  execFileSync(process.execPath,[command,'prepare','2'],{cwd:dir,env:{...process.env,GITHUB_OUTPUT:output}});
+  return readFileSync(output,'utf8').trim();
+ };
+ try {
+  assert.equal(run(proof()),'ready=true');
+  assert.equal(JSON.parse(readFileSync(`${dir}/transition-2.json`)).expected_generation,state.generation);
+  assert.equal(run(proof(),true),'ready=false');
+  assert.equal(run(unsafe),'ready=false');
+  const missing=proof();missing.missions[MISSIONS[1]].end_to_end_acceptance.status='pending';assert.equal(run(missing),'ready=false');
+ }finally{rmSync(dir,{recursive:true,force:true});}
+});

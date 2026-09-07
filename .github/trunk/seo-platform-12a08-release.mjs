@@ -34,11 +34,12 @@ export function sourceAcceptance(report, sha, id, print, vector, artifact) {
 export function bindControlled(manifest, report, artifact) {
   verifyReport(report);
   const id=report.mission_id, proof=manifest.missions?.[id];
-  if (!MISSIONS.slice(0,2).includes(id) || report.schema_version !== 'seo.a08_controlled_acceptance.v1'
+  if (!MISSIONS.includes(id) || report.schema_version !== 'seo.a08_controlled_acceptance.v1'
     || report.environment !== 'production' || report.sha !== manifest.bound_production_sha
     || proof?.source_acceptance?.status !== 'pass' || report.source_receipt_digest !== proof.source_acceptance.receipt_digest
     || report.fingerprint !== proof.checks.fingerprint || JSON.stringify(report.version_vector) !== JSON.stringify(manifest.runtime.version_vector)
     || report.terminal_committed !== true || report.receipt_to_ui_verified !== true || report.runtime_boundaries_verified !== true
+    || (id === MISSIONS[2] && (proof.source_acceptance.observed_verdict !== 'READY' || report.observed_verdict !== 'READY'))
     || report.business_write_enabled !== false || !/^[a-f0-9]{64}$/.test(report.receipt_hash)
     || !/^sha256:[a-f0-9]{64}$/.test(artifact ?? '')) throw new Error('A08_CONTROLLED_BINDING_HOLD');
   proof.end_to_end_acceptance={...report,status:'pass',stage:'controlled_mission_terminal_and_ui',bound_sha:report.sha,artifact_digest:artifact};

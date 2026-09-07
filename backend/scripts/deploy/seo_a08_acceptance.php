@@ -10,7 +10,7 @@ use App\Services\SeoCouncil\Platform12\Platform12RuntimeControl;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 
-// Fixed M1/M2 rollout under the A08 task's prior authorization. M3 is absent.
+// Fixed M1/M2/M3 rollout; M3 was separately authorized after production safety acceptance.
 // Each transition is compare-and-set against the caller's last observed generation.
 try {
     require getcwd().'/vendor/autoload.php';
@@ -20,7 +20,7 @@ try {
     $id = $request['mission_id'] ?? null;
     $mode = $request['mode'] ?? null;
     $expected = $request['expected_generation'] ?? null;
-    if (! app()->environment('production') || ! in_array($id, array_slice(Platform12DailyMissionSet::IDS, 0, 2), true)
+    if (! app()->environment('production') || ! in_array($id, Platform12DailyMissionSet::IDS, true)
         || ! in_array($mode, ['controlled', 'enable'], true)
         || ! is_string($expected) || preg_match('/^[a-f0-9]{32}$/D', $expected) !== 1) {
         throw new RuntimeException('A08_ACCEPTANCE_SCOPE_HOLD');
@@ -33,15 +33,20 @@ try {
         || ! $control->businessGuardsClosed() || ! ($before['missions'][$id]['source_accepted'] ?? false)) {
         throw new RuntimeException('A08_ACCEPTANCE_PREREQUISITE_HOLD');
     }
-    $selection = array_slice(Platform12DailyMissionSet::IDS, 0, $id === Platform12DailyMissionSet::IDS[0] ? 1 : 2);
+    $index = array_search($id, Platform12DailyMissionSet::IDS, true);
+    $required = array_slice(Platform12DailyMissionSet::IDS, 0, $index + 1);
+    $selection = array_values(array_filter(Platform12DailyMissionSet::IDS,
+        static fn ($mission) => in_array($mission, $required, true) || in_array($mission, $before['selected_missions'], true)));
     // The initial pause is the one observed before this task. A newer pause wins.
     if ($before['pause_intent'] === 'PAUSED'
         && ($expected !== '50bc7eec1b1d0aa3277d6237b9f37fa9' || $before['selected_missions'] !== [])) {
         throw new RuntimeException('NEW_OPERATOR_PAUSE_HOLD');
     }
-    if ($id === Platform12DailyMissionSet::IDS[1]
-        && ! in_array(Platform12DailyMissionSet::IDS[0], $before['effective_mission_ids'], true)) {
-        throw new RuntimeException('M1_MUST_REMAIN_ENABLED');
+    if (array_diff(array_slice($required, 0, -1), $before['effective_mission_ids']) !== []) {
+        throw new RuntimeException('A08_PREDECESSORS_MUST_REMAIN_ENABLED');
+    }
+    if ($index === 2 && ($manifest['missions'][$id]['source_acceptance']['observed_verdict'] ?? null) !== 'READY') {
+        throw new RuntimeException('A08_M3_SAFETY_HOLD');
     }
     if ($mode === 'enable' && ! ($before['missions'][$id]['end_to_end_accepted'] ?? false)) {
         throw new RuntimeException('END_TO_END_ACCEPTANCE_PENDING');
@@ -51,11 +56,12 @@ try {
         throw new RuntimeException('A08_CONCURRENT_CONTROL_CHANGE');
     }
     if ($mode === 'enable') {
-        if ($state['effective_mission_ids'] !== $selection) {
+        if (array_diff($required, $state['effective_mission_ids']) !== []
+            || array_diff($before['effective_mission_ids'], $state['effective_mission_ids']) !== []) {
             throw new RuntimeException('A08_NATURAL_GATE_HOLD');
         }
         echo json_encode(['status' => 'ENABLED', 'sha' => $sha, 'mission_id' => $id,
-            'generation' => $state['generation'], 'effective_mission_ids' => $selection,
+            'generation' => $state['generation'], 'effective_mission_ids' => $state['effective_mission_ids'],
             'first_enabled_at' => $state['missions'][$id]['first_enabled_at'],
             'business_write_enabled' => false], JSON_THROW_ON_ERROR)."\n";
         exit(0);
@@ -68,6 +74,9 @@ try {
     if ($exit !== 0 || ($result['terminal_committed'] ?? null) !== true
         || $control->status()['generation'] !== $state['generation']) {
         throw new RuntimeException('A08_CONTROLLED_TERMINAL_HOLD');
+    }
+    if ($index === 2 && ($result['mission_verdict'] ?? null) !== 'READY') {
+        throw new RuntimeException('A08_M3_SAFETY_HOLD');
     }
     $row = DB::connection(config('seo_council.connection', 'seo_intel'))
         ->table('seo_council_schedule_deliveries AS d')

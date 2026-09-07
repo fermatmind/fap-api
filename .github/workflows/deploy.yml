@@ -2441,7 +2441,7 @@ jobs:
           retention-days: 90
 
   a08-evidence:
-    name: Publish scoped A08 evidence and authorized M1 M2 acceptance
+    name: Publish scoped A08 evidence and authorized daily acceptance
     needs: [policy, staging, production]
     if: needs.production.result == 'success' && needs.production.outputs.skipped != 'true'
     runs-on: ubuntu-latest
@@ -2535,6 +2535,30 @@ jobs:
           bash backend/scripts/deploy/seo_a08_transport.sh install activation.json
           node .github/trunk/seo-platform-12a08-transition.mjs enable 1
           bash backend/scripts/deploy/seo_a08_transport.sh acceptance transition-1.json enabled-1.json
+      - name: Prepare authorized M3 controlled transition
+        id: a08_m3
+        run: node .github/trunk/seo-platform-12a08-transition.mjs prepare 2
+      - name: Execute only M3 through the Orchestrator and verify receipt UI
+        if: steps.a08_m3.outputs.ready == 'true'
+        run: bash backend/scripts/deploy/seo_a08_transport.sh acceptance transition-2.json controlled-2.json
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        id: a08_m3_artifact
+        if: steps.a08_m3.outputs.ready == 'true'
+        with:
+          name: seo-council-a08-controlled-m3-${{ github.event.workflow_run.head_sha }}
+          path: controlled-2.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Bind M3 artifact then open its natural gate
+        if: steps.a08_m3.outputs.ready == 'true'
+        env:
+          ACCEPTANCE_ARTIFACT_DIGEST: ${{ steps.a08_m3_artifact.outputs.artifact-digest }}
+        run: |
+          set -euo pipefail
+          node .github/trunk/seo-platform-12a08-release.mjs bind-controlled controlled-2.json
+          bash backend/scripts/deploy/seo_a08_transport.sh install activation.json
+          node .github/trunk/seo-platform-12a08-transition.mjs enable 2
+          bash backend/scripts/deploy/seo_a08_transport.sh acceptance transition-2.json enabled-2.json
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         if: hashFiles('activation.json') != ''
         with:
