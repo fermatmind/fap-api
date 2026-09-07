@@ -22,7 +22,7 @@ try {
     $raw = Cache::store(config('seo_council.runtime_cache_store'))->get(Platform12RuntimeControl::CACHE_KEY);
     $raw = is_array($raw) ? $raw : [];
     $selected = $raw['selected_missions'] ?? [];
-    if ((getenv('A08_GATE_ONLY') === 'true' && (($raw['paused'] ?? true) !== true || $selected !== [])) || ! $runtime->businessGuardsClosed()) {
+    if (! $runtime->businessGuardsClosed()) {
         throw new RuntimeException('A08_PAUSE_OR_WRITE_GUARD_HOLD');
     }
     $connection = DB::connection(config('seo_council.connection', 'seo_intel'));
@@ -39,7 +39,7 @@ try {
     $capability = app(App\Services\SeoCouncil\Governance\RuntimeCapabilitySnapshotBuilder::class)->snapshot();
     echo json_encode(['schema_version' => 'seo.a08_readonly_state.v2', 'environment' => app()->environment(),
         'sha' => trim(file_get_contents(dirname(getcwd()).'/REVISION')), 'paused' => $raw['paused'] ?? true,
-        'gate_only' => getenv('A08_GATE_ONLY') === 'true',
+        'gate_only' => getenv('A08_GATE_ONLY') === 'true' && ($raw['paused'] ?? true) && $selected === [],
         'generation' => $raw['generation'] ?? null, 'selected_missions' => $selected, 'counts' => $counts,
         'business_guards_closed' => true, 'operations_readonly' => true,
         'model_runtime_enabled' => false, 'tool_broker_enabled' => false, 'business_write_enabled' => false,

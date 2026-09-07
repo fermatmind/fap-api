@@ -15,7 +15,7 @@ final readonly class Platform12ActivationEvidence
     public const REQUIRED_TESTS = [
         'public' => ['SeoPlatform12A01MissionCatalogTest', 'SeoPlatform12A02SchedulerStorageTest',
             'SeoPlatform12A03SchedulerFencingTest', 'SeoPlatform12A04ProductionPersistenceTest',
-            'SeoPlatform12A05ReadOnlyRuntimeGateTest', 'SeoPlatform12A08ActivationEvidenceTest',
+            'SeoPlatform12A05ReadOnlyRuntimeGateTest', 'SeoPlatform12A08ActivationEvidenceTest', 'SeoPlatform12A08SourceCheckTest',
             'SeoPlatform12A08DailyWiringTest', 'SeoPlatform12A08LegacyScheduleContractTest', 'MigrationPurityGateTest',
             'SeoPlatform12F01NotificationPolicyContractTest', 'SeoPlatform12F02NotificationOutboxTest',
             'SeoPlatform11C', 'SeoOperationsPageTest', 'SeoUxImpl06AgentCouncilTest',
@@ -77,9 +77,24 @@ final readonly class Platform12ActivationEvidence
                 && ($source['version_vector'] ?? null) === $manifest['runtime']['version_vector']
                 && (($source['source_sha'] ?? null) === $productionSha
                     || ($source['ancestor_verified'] ?? null) === true);
-            $missions[$id] = ['acceptance_ready' => $code, 'source_accepted' => $accepted,
+            $terminal = $proof['end_to_end_acceptance'] ?? [];
+            $endToEnd = $accepted && ($terminal['status'] ?? null) === 'pass'
+                && ($terminal['stage'] ?? null) === 'controlled_mission_terminal_and_ui'
+                && ($terminal['environment'] ?? null) === 'production'
+                && ($terminal['mission_id'] ?? null) === $id
+                && ($terminal['bound_sha'] ?? null) === $productionSha
+                && ($terminal['source_receipt_digest'] ?? null) === $source['receipt_digest']
+                && ($terminal['fingerprint'] ?? null) === $proof['checks']['fingerprint']
+                && ($terminal['version_vector'] ?? null) === $manifest['runtime']['version_vector']
+                && ($terminal['terminal_committed'] ?? null) === true
+                && ($terminal['receipt_to_ui_verified'] ?? null) === true
+                && ($terminal['runtime_boundaries_verified'] ?? null) === true
+                && $this->digest($terminal['receipt_hash'] ?? null)
+                && $this->digest($terminal['receipt_digest'] ?? null)
+                && $this->artifactDigest($terminal['artifact_digest'] ?? null);
+            $missions[$id] = ['end_to_end_accepted' => $endToEnd, 'acceptance_ready' => $code, 'source_accepted' => $accepted,
                 'source_receipt_digest' => $accepted ? $source['receipt_digest'] : null,
-                'reason' => ! $code ? 'MISSION_SCOPED_EVIDENCE_HOLD' : ($accepted ? 'READY' : 'MISSION_SOURCE_ACCEPTANCE_PENDING')];
+                'reason' => ! $code ? 'MISSION_SCOPED_EVIDENCE_HOLD' : ($endToEnd ? 'READY' : ($accepted ? 'MISSION_END_TO_END_PENDING' : 'MISSION_SOURCE_ACCEPTANCE_PENDING'))];
         }
 
         return ['state' => 'READY', 'manifest' => $manifest, 'production_sha' => $productionSha, 'missions' => $missions];

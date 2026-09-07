@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\SeoCouncil\Platform12;
 
+use App\Http\Controllers\API\V0_5\SEO\SitemapSourceController;
 use App\Services\Ops\PublicContentDeliveryProbeService;
 use App\Services\SEO\SitemapCache;
 use App\Services\SeoAgentEvidence\Bundle\SeoEvidenceBundleVerifier;
@@ -29,6 +30,9 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
 
     public function capture(string $missionId): array
     {
+        if (! in_array($missionId, Platform12DailyMissionSet::IDS, true)) {
+            throw new \InvalidArgumentException('DAILY_MISSION_UNKNOWN');
+        }
         $restore = [];
         try {
             $names = [(string) config('seo_intel.connection', 'seo_intel')];
@@ -179,14 +183,27 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         // Read the latest scheduled attempt, including a failure; never hide it
         // by falling back to an older successful run.
         $row = $this->connection()->table('seo_gsc_sync_runs')->where('trigger_mode', 'scheduled')
-            ->orderByDesc('started_at')->first(['status', 'finished_at', 'receipt_json']);
+            ->orderByDesc('started_at')->first(['status', 'started_at', 'finished_at', 'receipt_json', 'rows_seen', 'failure_code']);
+        if ($row !== null && in_array($row->status, ['failed', 'quality_failed', 'running'], true)) {
+            $observed = CarbonImmutable::parse($row->finished_at ?? $row->started_at, 'UTC');
+            if ($observed->gt($now)) {
+                throw new \RuntimeException('GSC_RECEIPT_INVALID');
+            }
+
+            // Failed scheduled attempts are durable source records even though
+            // the sync writer intentionally does not persist receipt_json.
+            return ['availability' => 'AVAILABLE', 'scheduled_receipt_status' => $row->status,
+                'observed_at' => $observed->toAtomString(), 'trigger_mode' => 'scheduled',
+                'mapping_state' => 'UNAVAILABLE', 'data_quality_state' => 'HOLD',
+                'window_state' => 'INCOMPLETE', 'row_count' => (int) $row->rows_seen, 'data_max_date' => null];
+        }
         if ($row === null || ! is_string($row->receipt_json) || strlen($row->receipt_json) > 262144) {
             throw new \RuntimeException('GSC_RECEIPT_UNAVAILABLE');
         }
         $receipt = json_decode($row->receipt_json, true, 32, JSON_THROW_ON_ERROR);
         $finished = CarbonImmutable::parse($row->finished_at, 'UTC');
         if (($receipt['schema_version'] ?? null) !== 'seo.gsc_refresh_receipt.v2'
-            || $finished->gt($now) || $finished->lt($now->subHours(26))) {
+            || $finished->gt($now)) {
             throw new \RuntimeException('GSC_RECEIPT_STALE');
         }
 
@@ -195,7 +212,7 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
             'trigger_mode' => $receipt['trigger_mode'] ?? null,
             'mapping_state' => ($receipt['unmapped_rows'] ?? null) === 0 ? 'READY' : 'FAILED',
             'data_quality_state' => $row->status === 'success' && data_get($receipt, 'quality_gate.status') === 'pass' ? 'READY' : 'HOLD',
-            'window_state' => $row->status === 'success' ? 'COMPLETE' : 'INCOMPLETE',
+            'window_state' => $row->status === 'success' && $finished->gte($now->subHours(26)) ? 'COMPLETE' : 'INCOMPLETE',
             'row_count' => $receipt['rows_seen'] ?? null, 'data_max_date' => $receipt['data_max_date'] ?? null,
         ];
     }
@@ -214,8 +231,13 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
     private function runtimeWindow(CarbonImmutable $at): array
     {
         $window = $this->runtime->readWindow($at->toAtomString());
+        if (($window['receipts'] ?? []) === []) {
+            throw new \RuntimeException('RUNTIME_OBSERVATION_MISSING');
+        }
         foreach ($window['receipts'] ?? [] as $receipt) {
-            if (! is_string($receipt['receipt_hash'] ?? null)
+            if (($receipt['schema_version'] ?? null) !== ScheduledRuntimeProbeReceiptService::SCHEMA_VERSION
+                || ($receipt['trigger_mode'] ?? null) !== 'scheduled'
+                || ! is_string($receipt['receipt_hash'] ?? null)
                 || ! hash_equals(ScheduledRuntimeProbeReceiptService::contentHash(array_diff_key($receipt, ['receipt_hash' => true])), $receipt['receipt_hash'])
                 || CarbonImmutable::parse($receipt['completed_at'])->gt($at)) {
                 throw new \RuntimeException('RUNTIME_RECEIPT_INVALID');
@@ -252,17 +274,26 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
             throw new \RuntimeException('PUBLIC_API_OBSERVATION_MISSING');
         }
         $readback = true;
+        $fresh = true;
+        $expectedIds = array_column($service->catalog(), 'id');
+        $actualIds = array_column($result['items'], 'target_id');
+        sort($expectedIds);
+        sort($actualIds);
+        if ($actualIds !== $expectedIds) {
+            throw new \RuntimeException('PUBLIC_API_MAPPING_INVALID');
+        }
         $observations = [];
         foreach ($result['items'] as $item) {
             $observed = CarbonImmutable::parse($item['observed_at']);
-            if ($observed->gt($at) || $observed->lt($at->subMinutes(30))) {
-                throw new \RuntimeException('PUBLIC_API_OBSERVATION_STALE');
+            if ($observed->gt($at)) {
+                throw new \RuntimeException('PUBLIC_API_OBSERVATION_INVALID');
             }
+            $fresh = $fresh && $observed->gte($at->subMinutes(30));
             $readback = $readback && data_get($item, 'readback.ok') === true;
             $observations[] = ['observed_at' => $observed->toAtomString(), 'hash' => $this->hasher->hash($item)];
         }
 
-        return ['healthy' => $result['ok'], 'readback' => $readback, 'observations' => $observations,
+        return ['healthy' => $result['ok'] && $fresh, 'readback' => $readback && $fresh, 'observations' => $observations,
             'observed_at' => min(array_column($observations, 'observed_at'))];
     }
 
@@ -292,8 +323,25 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
 
     private function sitemap(): array
     {
+        // Consume the existing backend projection used by the web sitemap.
+        // No controller invocation, generator, warm, reconcile or cache write.
+        $projection = Cache::get(SitemapSourceController::CACHE_KEY_FRESH);
+        if (is_array($projection)) {
+            if (($projection['ok'] ?? null) !== true || ($projection['source'] ?? null) !== 'backend_sitemap_generator'
+                || ! is_int($projection['count'] ?? null) || ! is_array($projection['items'] ?? null)
+                || $projection['count'] !== count($projection['items']) || $projection['count'] > 20000) {
+                throw new \RuntimeException('SITEMAP_PROJECTION_INVALID');
+            }
+
+            return ['availability' => 'AVAILABLE', 'observation_count' => $projection['count']];
+        }
         $identity = Cache::get(SitemapCache::IDENTITY_CACHE_KEY);
-        $cached = is_string($identity) ? app(SitemapCache::class)->get($identity) : null;
+        $cached = is_string($identity) ? ['xml' => Cache::get(SitemapCache::XML_CACHE_KEY),
+            'etag' => Cache::get(SitemapCache::ETAG_CACHE_KEY)] : null;
+        if (! is_string($identity) || $identity !== Cache::get(SitemapCache::IDENTITY_CACHE_KEY)
+            || ! is_string($cached['etag'] ?? null)) {
+            throw new \RuntimeException('SITEMAP_OBSERVATION_UNAVAILABLE');
+        }
         $xml = $cached['xml'] ?? null;
         if (! is_string($xml) || strlen($xml) > 5242880 || preg_match('/<!DOCTYPE|<!ENTITY/i', $xml)) {
             throw new \RuntimeException('SITEMAP_OBSERVATION_UNAVAILABLE');

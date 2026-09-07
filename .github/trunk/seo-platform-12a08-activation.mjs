@@ -11,6 +11,7 @@ export const MISSION_DEPENDENCIES = {
   [MISSIONS[2]]: [`${base}Evaluation/Platform12DailySecurityDriftEvaluator.php`, 'backend/resources/seo-agent/council/platform12/daily/security'],
 };
 export const COMMON_DEPENDENCIES = [
+  'backend/app/Console/Commands/SeoCouncil', 'backend/app/Http/Controllers/API/V0_5/SEO/SitemapSourceController.php',
   'backend/composer.json', 'backend/composer.lock', 'backend/bootstrap/', 'backend/config/', 'backend/routes/',
   'backend/database/migrations/', 'backend/app/Http/Middleware/', 'backend/app/Policies/', 'backend/app/Models/',
   'backend/app/Support/', 'backend/app/Services/Auth/', 'backend/app/Providers/', 'backend/app/Services/SeoAgentPolicyGateway/', 'backend/app/Services/SeoAgentGovernance/',
@@ -83,7 +84,7 @@ export function validateNightly(receipt, metadata) {
   return true;
 }
 export const CHECKS = {
-  public: ['SeoPlatform12A01MissionCatalogTest','SeoPlatform12A02SchedulerStorageTest','SeoPlatform12A03SchedulerFencingTest','SeoPlatform12A04ProductionPersistenceTest','SeoPlatform12A05ReadOnlyRuntimeGateTest','SeoPlatform12A08ActivationEvidenceTest','SeoPlatform12A08DailyWiringTest','SeoPlatform12A08LegacyScheduleContractTest','MigrationPurityGateTest','SeoPlatform12F01NotificationPolicyContractTest','SeoPlatform12F02NotificationOutboxTest','SeoPlatform11C','SeoOperationsPageTest','SeoUxImpl06AgentCouncilTest','SeoPlatform12E02SystemHealthUiTest','SeoPlatform12E04TraceDrilldownUiSafetyTest'],
+  public: ['SeoPlatform12A01MissionCatalogTest','SeoPlatform12A02SchedulerStorageTest','SeoPlatform12A03SchedulerFencingTest','SeoPlatform12A04ProductionPersistenceTest','SeoPlatform12A05ReadOnlyRuntimeGateTest','SeoPlatform12A08ActivationEvidenceTest','SeoPlatform12A08SourceCheckTest','SeoPlatform12A08DailyWiringTest','SeoPlatform12A08LegacyScheduleContractTest','MigrationPurityGateTest','SeoPlatform12F01NotificationPolicyContractTest','SeoPlatform12F02NotificationOutboxTest','SeoPlatform11C','SeoOperationsPageTest','SeoUxImpl06AgentCouncilTest','SeoPlatform12E02SystemHealthUiTest','SeoPlatform12E04TraceDrilldownUiSafetyTest'],
   [MISSIONS[0]]: ['SeoPlatform12B01DailyGscCoreRuntimeTest','SeoPlatform12A08ProductionEvidenceTest'],
   [MISSIONS[1]]: ['SeoPlatform12B02DailyUrlTruthTest','SeoPlatform12A08ProductionEvidenceTest'],
   [MISSIONS[2]]: ['SeoPlatform12B03DailySecurityDriftTest','SeoPlatform12A08ProductionEvidenceTest'],

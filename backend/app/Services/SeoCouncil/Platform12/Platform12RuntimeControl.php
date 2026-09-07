@@ -52,8 +52,12 @@ final class Platform12RuntimeControl
             foreach (Platform12DailyMissionSet::IDS as $id) {
                 $gate = $activation['missions'][$id] ?? ['acceptance_ready' => false, 'source_accepted' => false,
                     'reason' => $activation['state']];
+                if (app()->environment('staging')) {
+                    $gate = ['acceptance_ready' => true, 'source_accepted' => false, 'end_to_end_accepted' => false,
+                        'reason' => 'STAGING_CONTROLLED_ONLY'];
+                }
                 if (app()->environment('testing')) {
-                    $gate = ['acceptance_ready' => true, 'source_accepted' => true, 'source_receipt_digest' => str_repeat('f', 64), 'reason' => 'OFFLINE_FIXTURE_ONLY'];
+                    $gate = ['acceptance_ready' => true, 'source_accepted' => true, 'end_to_end_accepted' => true, 'source_receipt_digest' => str_repeat('f', 64), 'reason' => 'OFFLINE_FIXTURE_ONLY'];
                 }
                 $chosen = in_array($id, $selected, true);
                 $first = $state['mission_activated_at'][$id] ?? null;
@@ -64,7 +68,7 @@ final class Platform12RuntimeControl
                 if ($allowed && $gate['acceptance_ready']) {
                     $acceptance[] = $id;
                 }
-                $naturalAllowed = $allowed && $gate['source_accepted'] && is_string($first) && strtotime($first) !== false
+                $naturalAllowed = $allowed && ($gate['end_to_end_accepted'] ?? false) && is_string($first) && strtotime($first) !== false
                     && ($state['mission_source_hash'][$id] ?? null) === ($gate['source_receipt_digest'] ?? 'unproven');
                 if ($naturalAllowed) {
                     $effective[] = $id;
@@ -109,7 +113,7 @@ final class Platform12RuntimeControl
         }
     }
 
-    public function change(bool $pause, array $missions = []): array
+    public function change(bool $pause, array $missions = [], ?string $expectedGeneration = null): array
     {
         if (! $pause && ($missions === [] || $this->selection($missions) === [])) {
             return ['state' => 'MISSION_SELECTION_DENIED', 'computation_enabled' => false, 'business_write_enabled' => false];
@@ -119,13 +123,16 @@ final class Platform12RuntimeControl
                 return $this->status();
             }
             $store = $this->store();
-            $changed = $store->lock(self::CACHE_KEY.':lock', 5)->get(function () use ($store, $pause, $missions): bool {
+            $changed = $store->lock(self::CACHE_KEY.':lock', 5)->get(function () use ($store, $pause, $missions, $expectedGeneration): bool {
                 $old = $store->get(self::CACHE_KEY);
                 if (! $pause && $this->prerequisite() !== 'READY') {
                     return false;
                 }
 
                 $old = is_array($old) ? $old : [];
+                if ($expectedGeneration !== null && ($old['generation'] ?? null) !== $expectedGeneration) {
+                    return false;
+                }
                 $first = is_array($old['mission_activated_at'] ?? null) ? $old['mission_activated_at'] : [];
                 $sources = is_array($old['mission_source_hash'] ?? null) ? $old['mission_source_hash'] : [];
                 if (! $pause) {
@@ -134,7 +141,7 @@ final class Platform12RuntimeControl
                         if (! ($gates[$id]['acceptance_ready'] ?? false)) {
                             return false;
                         }
-                        if ($gates[$id]['source_accepted']) {
+                        if ($gates[$id]['end_to_end_accepted'] ?? false) {
                             $first[$id] ??= now('UTC')->format('Y-m-d\TH:i:s\Z');
                             $sources[$id] = $gates[$id]['source_receipt_digest'];
                         }

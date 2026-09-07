@@ -85,3 +85,29 @@ test('gate-only releases omit only the skipped sitemap warm postcondition',()=>{
  for(const name of ['guard:career-runtime-projection-authority','guard:career-discoverability-pre-sitemap']) assert.doesNotMatch(task(name),/a08_gate_only/);
  assert.match(recipe,/after\('guard:career-discoverability-post-sitemap', 'guard:public-content-release'\)/);
 });
+
+test('real source artifacts retain business HOLD while fixtures and forged terminal evidence fail closed', async()=>{
+ const {sourceAcceptance,bindControlled}=await import('./seo-platform-12a08-release.mjs');
+ const {digest}=await import('./seo-platform-12a08-activation.mjs');
+ const sha='a'.repeat(40), id=MISSIONS[0], print='b'.repeat(64), vector={policy:'c'.repeat(64)}, artifact='sha256:'+'d'.repeat(64);
+ const seal=body=>({...body,receipt_digest:digest(JSON.stringify(body))});
+ const source=seal({schema_version:'seo.a08_source_check.v1',repository:'fermatmind/fap-api',environment:'production',sha,mission_id:id,
+  real_runtime:true,mission_submitted:false,notification_sent:false,business_write_enabled:false,version_vector:vector,
+  source_wiring_status:'VERIFIED',source_gaps:[],observed_verdict:'DATA_FRESHNESS_HOLD',sources:[],
+  captured_at:new Date(Date.now()-1000).toISOString(),expires_at:new Date(Date.now()+60000).toISOString()});
+ const acceptance=sourceAcceptance(source,sha,id,print,vector,artifact);
+ assert.equal(acceptance.status,'pass');assert.equal(acceptance.observed_verdict,'DATA_FRESHNESS_HOLD');
+ const {receipt_digest,...body}=source;
+ assert.throws(()=>sourceAcceptance(seal({...body,real_runtime:false}),sha,id,print,vector,artifact),/BINDING/);
+ assert.equal(sourceAcceptance(seal({...body,source_wiring_status:'HOLD',source_gaps:['missing']}),sha,id,print,vector,artifact).status,'pending');
+ const manifest={bound_production_sha:sha,runtime:{version_vector:vector},missions:{[id]:{checks:{fingerprint:print},source_acceptance:acceptance}}};
+ assert.throws(()=>bindControlled(manifest,source,artifact),/CONTROLLED/);
+ const terminal=seal({schema_version:'seo.a08_controlled_acceptance.v1',environment:'production',sha,mission_id:id,
+  source_receipt_digest:source.receipt_digest,version_vector:vector,fingerprint:print,terminal_committed:true,
+  receipt_hash:'e'.repeat(64),receipt_to_ui_verified:true,runtime_boundaries_verified:true,business_write_enabled:false});
+ assert.equal(bindControlled(manifest,terminal,artifact).missions[id].end_to_end_acceptance.status,'pass');
+ const {receipt_digest:ignored,...terminalBody}=terminal;
+ for (const extra of [{mission_id:MISSIONS[2]},{receipt_to_ui_verified:false},{terminal_committed:false},{source_receipt_digest:'f'.repeat(64)}]) {
+  assert.throws(()=>bindControlled(manifest,seal({...terminalBody,...extra}),artifact),/CONTROLLED/);
+ }
+});

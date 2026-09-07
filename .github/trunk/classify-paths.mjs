@@ -155,7 +155,7 @@ export function classifyPaths(inputPaths) {
     SEO_OPS_PRESENTATION_PATHS.has(path) || isPresentationCompanion(path),
   );
   const a08GateOnly = paths.some(path => /Platform12|seo[_-].*a08/.test(path)) && paths.every(path =>
-    /^(?:backend\/(?:app\/Services\/SeoCouncil\/|app\/Console\/Commands\/SeoCouncilRuntimeCommand.php|scripts\/deploy\/seo_a08_|lang\/(?:en|zh_CN)\/seo-council.php|resources\/views\/filament\/ops\/components\/ops-system-health-workspace.blade.php|tests\/|docs\/)|\.github\/trunk\/|\.github\/workflows\/(?:ci|deploy).yml$|deploy.php$)/.test(path));
+    /^(?:backend\/(?:app\/Services\/SeoCouncil\/|app\/Console\/Commands\/SeoCouncil(?:Runtime|SourceCheck)Command.php|scripts\/deploy\/seo_a08_|lang\/(?:en|zh_CN)\/seo-council.php|resources\/views\/filament\/ops\/components\/ops-system-health-workspace.blade.php|tests\/|docs\/)|\.github\/trunk\/|\.github\/workflows\/(?:ci|deploy).yml$|deploy.php$)/.test(path));
   const operations = {
     a08_gate_only: a08GateOnly,
     a08_scoped_checks: paths.some(inRuntimeScope),

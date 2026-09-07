@@ -38,7 +38,7 @@ final class SeoPlatform12A08ProductionEvidenceTest extends TestCase
     {
         Schema::connection('seo_intel')->create('seo_gsc_sync_runs', function (Blueprint $table): void {
             $table->id();
-            foreach (['trigger_mode', 'status', 'started_at', 'finished_at', 'receipt_json'] as $field) {
+            foreach (['trigger_mode', 'status', 'started_at', 'finished_at', 'receipt_json', 'rows_seen', 'failure_code'] as $field) {
                 $table->text($field)->nullable();
             }
         });
@@ -54,8 +54,8 @@ final class SeoPlatform12A08ProductionEvidenceTest extends TestCase
         $table->insert(['trigger_mode' => 'scheduled', 'status' => 'failed', 'started_at' => $at->subMinute(),
             'finished_at' => $at, 'receipt_json' => null]);
         $capture = app(Platform12ProductionEvidenceReader::class)->capture(Platform12DailyMissionSet::IDS[0]);
-        $this->assertNull($capture['input']['gsc']);
-        $this->assertContains('gsc_scheduled_receipt', $capture['source_gaps']);
+        $this->assertSame('failed', $capture['input']['gsc']['scheduled_receipt_status']);
+        $this->assertNotContains('gsc_scheduled_receipt', $capture['source_gaps']);
         Http::assertNothingSent();
     }
 

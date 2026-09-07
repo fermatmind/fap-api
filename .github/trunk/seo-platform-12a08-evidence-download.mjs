@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process';
-import { writeFileSync, readFileSync, mkdirSync } from 'node:fs';
+import { writeFileSync, readFileSync, mkdirSync, existsSync } from 'node:fs';
 import { digest, mayCarry, MISSIONS } from './seo-platform-12a08-activation.mjs';
 import { verifyState, assessNightly } from './seo-platform-12a08-release.mjs';
 const repo = process.env.GITHUB_REPOSITORY;
@@ -22,6 +22,10 @@ for (const [kind,run,name] of [['checks',ci.id,`a08-scoped-checks-${sha}`],['sta
 const read = path => JSON.parse(readFileSync(path,'utf8'));
 const staging = read('staging/a08-staging-after.json');
 const production = read('production/a08-production-after.json');
+const safety=read('staging/a08-staging-safety.json');
+if (safety.sha !== sha || safety.environment !== 'staging' || (safety.state !== 'OPERATOR_STATE_CHANGED'
+  && (safety.pause_resume_verified !== true || safety.shared_cache_contention_verified !== true
+    || safety.transaction_rollback_verified !== true || safety.fencing_verified !== true))) throw new Error('A08_STAGING_SAFETY_HOLD');
 production.activation = read('production/a08-production-before.json').activation;
 verifyState(read('staging/a08-staging-before.json'),staging,sha);
 verifyState(read('production/a08-production-before.json'),production,sha);
@@ -42,4 +46,5 @@ for (const run of nightlyRuns) {
   break;
 }
 if (!nightly) nightly = {status:'unavailable',disposition:'CURRENT_CANDIDATE_SCOPED_CHECKS_ONLY',candidate_sha:sha};
-writeFileSync('a08-release-input.json',JSON.stringify({nightly,checks:artifactDigests.checks ? read('checks/a08-scoped-checks.json') : null,sha,ci,jobs,staging,production,artifactDigests}));
+const sources = Object.fromEntries(MISSIONS.map((id,index)=>[id,existsSync(`production/a08-production-sources/source-${index}.json`) ? read(`production/a08-production-sources/source-${index}.json`) : null]));
+writeFileSync('a08-release-input.json',JSON.stringify({stagingSafety:safety,sources,nightly,checks:artifactDigests.checks ? read('checks/a08-scoped-checks.json') : null,sha,ci,jobs,staging,production,artifactDigests}));

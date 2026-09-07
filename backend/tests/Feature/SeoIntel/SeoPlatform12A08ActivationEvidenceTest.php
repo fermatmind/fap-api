@@ -117,6 +117,17 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
         $this->write($manifest);
         $this->assertSame(0, $runtime->status()['effective_enabled_missions']);
         $this->assertSame($before['generation'], $runtime->status()['generation']);
+        $this->assertSame(0, $runtime->change(false, [$id])['effective_enabled_missions']);
+        $manifest['missions'][$id]['end_to_end_acceptance'] = [
+            'status' => 'pass', 'stage' => 'controlled_mission_terminal_and_ui', 'environment' => 'production',
+            'mission_id' => $id, 'bound_sha' => $this->sha, 'source_receipt_digest' => str_repeat('f', 64),
+            'fingerprint' => $manifest['missions'][$id]['checks']['fingerprint'],
+            'version_vector' => $manifest['runtime']['version_vector'], 'terminal_committed' => true,
+            'receipt_to_ui_verified' => true, 'runtime_boundaries_verified' => true,
+            'receipt_hash' => str_repeat('b', 64), 'receipt_digest' => str_repeat('c', 64),
+            'artifact_digest' => 'sha256:'.str_repeat('d', 64),
+        ];
+        $this->write($manifest);
         $after = $runtime->change(false, [$id]);
         $this->assertSame(1, $after['effective_enabled_missions']);
         $this->assertNotNull($after['missions'][$id]['first_enabled_at']);

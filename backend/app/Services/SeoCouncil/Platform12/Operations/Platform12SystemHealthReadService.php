@@ -218,7 +218,7 @@ final readonly class Platform12SystemHealthReadService
                 $status = 'NOT_AUTHORIZED';
             } elseif (($runtime['pause_intent'] ?? null) === 'PAUSED') {
                 $status = 'PAUSED';
-            } elseif (! ($gate['source_accepted'] ?? false)) {
+            } elseif ($row === null && ! ($gate['end_to_end_accepted'] ?? false)) {
                 $status = 'PENDING_ACCEPTANCE';
             }
             $sourceGaps = $scheduled['source_gaps'] ?? null;
@@ -227,7 +227,7 @@ final readonly class Platform12SystemHealthReadService
                 'label_key' => 'seo-council.missions.'.$index,
                 'state' => $status,
                 ...$explanation,
-                'source_checks' => $this->sourceChecks($scheduled),
+                'source_checks' => $this->sourceChecks($scheduled, $output),
                 'observed_at' => $row !== null ? CarbonImmutable::parse($row->updated_at, 'UTC')->toAtomString() : null,
                 'next_run' => $runAllowed ? $set->nextRun($mission, CarbonImmutable::now('UTC')) : null,
                 'planned_time' => $set->nextRun($mission, CarbonImmutable::now('UTC')),
@@ -252,7 +252,7 @@ final readonly class Platform12SystemHealthReadService
     }
 
     /** @return list<array{label_key:string,state:string,observed_at:?string,hash:string}> */
-    private function sourceChecks(mixed $scheduled): array
+    private function sourceChecks(mixed $scheduled, array $output = []): array
     {
         if (! is_array($scheduled)) {
             return [];
@@ -266,8 +266,15 @@ final readonly class Platform12SystemHealthReadService
             if (! is_array($source) || ! in_array($source['id'] ?? null, $allowed, true)) {
                 continue;
             }
-            $observed = $source['observed_at'] ?? null;
-            $items[] = ['label_key' => 'seo-council.sources.'.$source['id'], 'state' => 'AVAILABLE',
+            $observed = $source['observed_at'] ?? $source['read_at'] ?? null;
+            $count = match ($source['id']) {
+                'gsc_scheduled_receipt' => data_get($output, 'gsc.row_count'),
+                'd1_observation' => data_get($output, 'd1_observation.candidate_denominator'),
+                'issue_cluster' => data_get($output, 'clustering_dedupe.issue_denominator'),
+                'evidence_expiry' => data_get($output, 'evidence_freshness.total_count'),
+                default => null,
+            };
+            $items[] = ['label_key' => 'seo-council.sources.'.$source['id'], 'state' => $count === 0 ? 'VALID_ZERO' : 'AVAILABLE',
                 'observed_at' => is_string($observed) ? $observed : null,
                 'hash' => preg_match('/^[a-f0-9]{64}$/D', (string) ($source['hash'] ?? '')) === 1 ? $source['hash'] : 'unavailable'];
         }
