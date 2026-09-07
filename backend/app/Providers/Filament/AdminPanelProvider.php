@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Ops\Pages\OpsDashboard;
 use App\Filament\Ops\Pages\OpsLogin;
+use App\Filament\Ops\Support\OpsTheme;
 use App\Http\Middleware\BindOpsLoginResponse;
 use App\Http\Middleware\EnsureAdminTotpVerified;
 use App\Http\Middleware\LocalizeOpsUiResponse;
@@ -60,7 +61,7 @@ class AdminPanelProvider extends PanelProvider
             ->font('Inter')
             ->darkMode(true)
             ->defaultThemeMode(ThemeMode::Light)
-            ->theme('ops-theme')
+            ->theme(OpsTheme::make('ops-theme', resource_path('css/filament/ops/theme.compiled.css'))->package('app'))
             ->sidebarWidth('14.75rem')
             ->collapsedSidebarWidth('4rem')
             ->sidebarCollapsibleOnDesktop()
