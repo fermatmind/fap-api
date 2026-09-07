@@ -6,6 +6,7 @@ namespace App\Console\Commands;
 
 use App\Services\SeoCouncil\Platform12\Platform12DailyScheduler;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Process;
 use Throwable;
 
 final class SeoCouncilScheduledCommand extends Command
@@ -23,6 +24,33 @@ final class SeoCouncilScheduledCommand extends Command
         }
         if (! app()->environment('testing') && ! function_exists('pcntl_alarm')) {
             $this->line('{"status":"EXECUTION_DEADLINE_UNAVAILABLE_HOLD","execution_allowed":false}');
+
+            return self::FAILURE;
+        }
+        // Managed cron runs as the deploy identity; the application owns the
+        // private activation files. Delegate only this fixed natural tick, using
+        // the existing non-interactive PHP capability, without changing file ACLs.
+        if (app()->environment('production')
+            && (! function_exists('posix_geteuid') || ! function_exists('posix_getpwuid') || (posix_getpwuid(posix_geteuid())['name'] ?? null) !== 'www-data')) {
+            if ($this->option('acceptance') !== null) {
+                $this->line('{"status":"SCHEDULED_IDENTITY_HOLD","execution_allowed":false}');
+
+                return self::FAILURE;
+            }
+            try {
+                $result = Process::timeout(120)->run([
+                    '/usr/bin/sudo', '-n', '-u', 'www-data', '--', PHP_BINARY,
+                    base_path('artisan'), 'seo:council-scheduled', '--json',
+                ]);
+                if ($result->successful()) {
+                    $this->line(trim($result->output()));
+
+                    return self::SUCCESS;
+                }
+            } catch (Throwable) {
+                // No stderr, private paths or environment values enter receipts.
+            }
+            $this->line('{"status":"SCHEDULED_IDENTITY_HOLD","execution_allowed":false}');
 
             return self::FAILURE;
         }

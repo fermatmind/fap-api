@@ -502,3 +502,14 @@ test("mixed scope is the validation union", () => {
 });
 
 test("refuses an indeterminate empty diff", () => assert.throws(() => classifyPaths([]), /must not be empty/));
+
+test("natural Council identity fix retains the A08 gate-only deployment", () => {
+  const result = classifyPaths([
+    "backend/app/Console/Commands/SeoCouncilScheduledCommand.php",
+    "backend/tests/Feature/SeoIntel/SeoPlatform12A08LegacyScheduleContractTest.php",
+    ".github/trunk/classify-paths.mjs", ".github/trunk/classify-paths.test.mjs",
+  ]);
+  assert.equal(result.operations.a08_gate_only, true);
+  assert.equal(result.operations.a08_readonly_wiring, true);
+  assert.equal(result.deploy, true);
+});
