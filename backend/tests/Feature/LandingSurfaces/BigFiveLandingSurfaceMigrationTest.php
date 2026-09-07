@@ -14,16 +14,6 @@ final class BigFiveLandingSurfaceMigrationTest extends TestCase
 
     private const SURFACE_KEY = 'test_detail_big_five_personality_test_ocean_model';
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        // Exercise this historical publication from its own baseline, before later title revisions.
-        LandingSurface::query()->withoutGlobalScopes()
-            ->where('org_id', 0)->where('surface_key', self::SURFACE_KEY)->where('locale', 'zh-CN')->delete();
-        $this->migration()->up();
-    }
-
     public function test_missing_reviewed_surface_is_created_without_creating_english_or_tenant_content(): void
     {
         LandingSurface::query()->withoutGlobalScopes()
