@@ -427,8 +427,8 @@ jobs:
             | jq -r .content | base64 --decode > "$manifest"
           jq -e '
             .contract_version == "mbti.zh_result_authority_release.v1"
-            and .package_id == "mbti-zh-result-41755da0ed35dc35"
-            and .package_hash == "41755da0ed35dc35d8ef4de68582506a9615924bfbb3548c037c004f34b520c4"
+            and .package_id == "mbti-zh-result-9e53e1a2acf24ad6"
+            and .package_hash == "9e53e1a2acf24ad6fe9abb396a6ce085d09d8a2a6f5087ebb4dbc83fa57eac75"
             and .locale == "zh-CN"
             and .template_key == "mbti_desktop_clone_v1"
             and .record_count == 32

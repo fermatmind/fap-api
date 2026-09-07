@@ -47,6 +47,43 @@ final class MbtiZhResultContentPackageTest extends TestCase
         $this->assertSame(224, $disabledSlots);
     }
 
+    public function test_restored_traits_keep_distinct_meanings_and_stable_identifiers(): void
+    {
+        $package = app(MbtiZhResultContentPackage::class)->compile();
+        $manifest = json_decode(
+            (string) file_get_contents(base_path('content_assets/personality_public/mbti_zh_result_authority_release.v1.json')),
+            true,
+            flags: JSON_THROW_ON_ERROR,
+        );
+        $this->assertSame($manifest['package_hash'], $package['package_hash']);
+        $this->assertSame($manifest['package_id'], $package['package_id']);
+
+        $count = 0;
+        foreach ($package['rows'] as $row) {
+            $this->assertSame($row['full_code'], data_get($row, 'content_json.hero.profile_identity.code'));
+            foreach (['career', 'growth', 'relationships'] as $chapter) {
+                $prefix = $chapter === 'relationships' ? 'relationship' : $chapter;
+                $content = $row['content_json']['chapters'][$chapter];
+                $this->assertCount(4, $content['traits_unlock']['items']);
+                foreach ($content['traits_unlock']['items'] as $index => $item) {
+                    $context = $row['full_code'].'.'.$chapter.'.'.$item['id'];
+                    $this->assertSame($prefix.'_trait_'.($index + 1), $item['id'], $context);
+                    $this->assertSame($content['influentialTraits'][$index]['label'], $item['label'], $context);
+                    $fields = array_map('trim', [
+                        $item['why_it_matters'],
+                        $item[$prefix.'_expression'],
+                        $item[$prefix.'_advantage'],
+                        $item['real_world_signal'],
+                    ]);
+                    $this->assertNotContains('', $fields, $context);
+                    $this->assertCount(4, array_unique($fields), $context);
+                    $count++;
+                }
+            }
+        }
+        $this->assertSame(384, $count);
+    }
+
     public function test_cross_type_content_similarity_stays_below_frozen_thresholds(): void
     {
         $rows = app(MbtiZhResultContentPackage::class)->compile()['rows'];
