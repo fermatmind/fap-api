@@ -90,9 +90,14 @@ jobs:
               git fetch --no-tags origin "$EXACT_SHA"
               git merge-base --is-ancestor "$EXACT_SHA" origin/main
               # Exact-SHA recovery is intentionally code-only; schema/content/search writes are forbidden.
-              export DEPLOY_SHA="$EXACT_SHA" DEPLOY_REVISION="$EXACT_SHA" DEPLOY_MODE=code_only
+              export DEPLOY_SHA="$EXACT_SHA" DEPLOY_REVISION="$EXACT_SHA" DEPLOY_MODE=code_only DEPLOY_INCIDENT_RECOVERY=true
+              cleanup_lock() {
+                php /tmp/dep.phar fap:deploy-unlock-owned production -f deploy.php --no-interaction || true
+              }
+              trap cleanup_lock EXIT
               php /tmp/dep.phar deploy:code-only production -f deploy.php --revision "$EXACT_SHA" \
                 -o release_name="recovery-${EXACT_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode=code_only --no-interaction
+              trap - EXIT
               ;;
             *) exit 2 ;;
           esac

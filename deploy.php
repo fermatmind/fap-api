@@ -704,6 +704,16 @@ before('deploy:prepare', 'guard:ci-parity-receipt');
  * cannot prove that the public edge and origin routing reach this service.
  */
 task('guard:public-dns-health', function () {
+    if (getenv('DEPLOY_INCIDENT_RECOVERY') === 'true') {
+        if (deployMode() !== 'code_only') {
+            throw new \RuntimeException('Incident recovery may bypass pre-activation public DNS health only in code_only mode');
+        }
+
+        writeln('<comment>Skipping pre-activation public DNS health during incident recovery; post-activation health checks remain required.</comment>');
+
+        return;
+    }
+
     runProductionPublicDnsBusinessEvidence('{{release_path}}');
 });
 

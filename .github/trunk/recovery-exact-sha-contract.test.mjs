@@ -27,6 +27,8 @@ test("exact-SHA recovery remains usable when the active symlink is unreadable", 
   assert.match(beforeExact, /lkg\)[\s\S]*current\/REVISION/);
   assert.doesNotMatch(exact, /current\/REVISION|active=/);
   assert.match(exact, /deploy:code-only production/);
+  assert.match(exact, /DEPLOY_INCIDENT_RECOVERY=true/);
+  assert.match(exact, /trap cleanup_lock EXIT/);
   assert.match(recovery, /DEPLOY_LOCK_RUN_ID: \$\{\{ github\.run_id \}\}/);
   assert.match(recovery, /DEPLOY_LOCK_RUN_ATTEMPT: \$\{\{ github\.run_attempt \}\}/);
   assert.match(recovery, /TRUNK_DEPLOY_SERIALIZED: "true"/);
@@ -35,4 +37,12 @@ test("exact-SHA recovery remains usable when the active symlink is unreadable", 
 test("code-only recovery skips runtime authority configuration hooks", () => {
   assert.match(taskBody("crawler:configure-aggregate-runtime"), /deploySkipsAuthorityMutations\(\)/);
   assert.match(taskBody("runtime:configure-seo-intel"), /deploySkipsAuthorityMutations\(\)/);
+});
+
+test("incident recovery bypasses only the unhealthy pre-activation DNS guard", () => {
+  const guard = taskBody("guard:public-dns-health");
+
+  assert.match(guard, /DEPLOY_INCIDENT_RECOVERY/);
+  assert.match(guard, /deployMode\(\) !== 'code_only'/);
+  assert.match(guard, /post-activation health checks remain required/);
 });
