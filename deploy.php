@@ -848,7 +848,9 @@ task('guard:career-discoverability-pre-sitemap', function () {
 });
 
 task('guard:career-discoverability-post-sitemap', function () {
-    if (deployMode() !== 'standard') {
+    // This postcondition belongs to the sitemap warm operation. A08 gate-only
+    // releases preserve that cache and still run the authority and pre-sitemap checks.
+    if (deployBooleanOption('a08_gate_only', false) || deployMode() !== 'standard') {
         return;
     }
 

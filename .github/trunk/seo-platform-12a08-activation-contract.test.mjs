@@ -77,3 +77,11 @@ test('staging read-only transport uses the existing host identity instead of the
   execFileSync('bash',['backend/scripts/deploy/seo_a08_transport.sh','state',`${root}/state.json`],{env:{...process.env,PATH:`${root}:${process.env.PATH}`,TARGET:'staging',DEPLOY_IDENTITY_FILE_STG:'fixture-host-key',DEPLOY_PATH:'/fixture',DEPLOY_PORT:'22',DEPLOY_USER:'fixture',DEPLOY_HOST:'example.test',A08_GATE_ONLY:'true'}});
  }finally{rmSync(root,{recursive:true,force:true});}
 });
+
+test('gate-only releases omit only the skipped sitemap warm postcondition',()=>{
+ const recipe=readFileSync(new URL('../../deploy.php',import.meta.url),'utf8');
+ const task=name=>recipe.split(`task('${name}', function () {`)[1].split("\n});")[0];
+ assert.match(task('guard:career-discoverability-post-sitemap'),/a08_gate_only/);
+ for(const name of ['guard:career-runtime-projection-authority','guard:career-discoverability-pre-sitemap']) assert.doesNotMatch(task(name),/a08_gate_only/);
+ assert.match(recipe,/after\('guard:career-discoverability-post-sitemap', 'guard:public-content-release'\)/);
+});
