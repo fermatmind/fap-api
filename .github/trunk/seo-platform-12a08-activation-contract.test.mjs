@@ -128,3 +128,24 @@ test('mixed content release retains its gates without invoking old Council inges
  const deploy=readFileSync(new URL('../workflows/deploy.yml',import.meta.url),'utf8');
  assert.match(deploy,/and \.classification\.operations\.a08_readonly_wiring != true/);
 });
+
+test('HMAC bootstrap atomically installs the fixed pair and refuses existing-key rotation',()=>{
+ const deployer=readFileSync(new URL('../../deploy.php',import.meta.url),'utf8');
+ const section=deployer.slice(deployer.indexOf('function deployInstallSeoIntelRuntimeEnvironment'),deployer.indexOf("task('runtime:configure-seo-intel'"));
+ const script=section.match(/\$script = <<<'PHP'\n([\s\S]+?)\nPHP;/)[1];
+ const dir=mkdtempSync(`${tmpdir()}/a08-hmac-`), env=`${dir}/env`, patch=`${dir}/patch`;
+ const pair={SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY:'a'.repeat(64),SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY_VERSION:'v1-test'};
+ const run=()=>execFileSync('php',['-d','display_errors=0','-r',script,env,patch],{stdio:['pipe','pipe','pipe']});
+ try {
+  writeFileSync(env,'UNRELATED="preserved"\n');writeFileSync(patch,JSON.stringify(pair));
+  run();const initialized=readFileSync(env,'utf8');assert.match(initialized,/UNRELATED="preserved"/);
+  run();assert.equal(readFileSync(env,'utf8'),initialized);
+  writeFileSync(patch,JSON.stringify({...pair,SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY:'b'.repeat(64)}));
+  assert.throws(run);assert.equal(readFileSync(env,'utf8'),initialized);
+  writeFileSync(patch,JSON.stringify({...pair,UNAPPROVED:'value'}));assert.throws(run);
+  assert.equal(readFileSync(env,'utf8'),initialized);
+ } finally {rmSync(dir,{recursive:true,force:true});}
+ assert.match(deployer,/if \(deployBooleanOption\('a08_gate_only', false\)\) \{\n        deployInstallSeoIntelRuntimeEnvironment\(deploySeoQueryHmacEnvironment\(\)\);\n\n        return;/);
+ const deploy=readFileSync(new URL('../workflows/deploy.yml',import.meta.url),'utf8');
+ for(const key of Object.keys(pair)) assert.equal(deploy.split(`${key}: \${{ secrets.${key} }}`).length-1,2);
+});

@@ -528,6 +528,8 @@ jobs:
           SEO_INTEL_MIGRATION_DB_PASSWORD: ${{ secrets.SEO_INTEL_MIGRATION_DB_PASSWORD }}
           SEO_COUNCIL_DB_USERNAME: ${{ secrets.SEO_COUNCIL_DB_USERNAME }}
           SEO_COUNCIL_DB_PASSWORD: ${{ secrets.SEO_COUNCIL_DB_PASSWORD }}
+          SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY: ${{ secrets.SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY }}
+          SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY_VERSION: ${{ secrets.SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY_VERSION }}
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$DEPLOY_SHA"
@@ -1430,6 +1432,8 @@ jobs:
           GSC_SYNC_WINDOW_DAYS: ${{ vars.SEO_INTEL_GSC_SYNC_WINDOW_DAYS }}
           GSC_SYNC_SEARCH_TYPES: ${{ vars.SEO_INTEL_GSC_SYNC_SEARCH_TYPES }}
           PROXY_PORT: "18445"
+          SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY: ${{ secrets.SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY }}
+          SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY_VERSION: ${{ secrets.SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY_VERSION }}
         run: |
           set -euo pipefail
           fail() {

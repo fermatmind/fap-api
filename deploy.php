@@ -984,7 +984,189 @@ task('artisan:config:cache', function () {
     run('{{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' config:cache --ansi');
 });
 
+function deploySeoQueryHmacEnvironment(): array
+{
+    $key = (string) (getenv('SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY') ?: '');
+    $version = (string) (getenv('SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY_VERSION') ?: '');
+    if (strlen($key) < 32 || preg_match('/[\x00\r\n]/', $key)
+        || preg_match('/^[a-z0-9][a-z0-9._-]{0,31}$/D', $version) !== 1) {
+        throw new \RuntimeException('SEO_QUERY_HMAC_CONFIGURATION_UNAVAILABLE');
+    }
+
+    return ['SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY' => $key,
+        'SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY_VERSION' => $version];
+}
+
+function deployInstallSeoIntelRuntimeEnvironment(array $runtime): void
+{
+    $localPatch = tempnam(sys_get_temp_dir(), 'seo-intel-runtime-');
+    if (! is_string($localPatch)) {
+        throw new \RuntimeException('Unable to allocate the SEO Intel runtime patch.');
+    }
+
+    $remotePatch = '{{release_path}}/.seo-intel-runtime.json';
+    try {
+        if (file_put_contents($localPatch, json_encode($runtime, JSON_THROW_ON_ERROR)) === false
+            || ! chmod($localPatch, 0600)) {
+            throw new \RuntimeException('Unable to stage the SEO Intel runtime patch.');
+        }
+        upload($localPatch, $remotePatch);
+    } finally {
+        @unlink($localPatch);
+    }
+
+    $script = <<<'PHP'
+$environmentPath = $argv[1] ?? '';
+$patchPath = $argv[2] ?? '';
+$allowed = [
+    'SEO_INTEL_ENABLED',
+    'SEO_INTEL_DB_CONNECTION',
+    'SEO_INTEL_DB_HOST',
+    'SEO_INTEL_DB_PORT',
+    'SEO_INTEL_DB_DATABASE',
+    'SEO_INTEL_DB_USERNAME',
+    'SEO_INTEL_DB_PASSWORD',
+    'SEO_INTEL_WRITE_ENABLED',
+    'SEO_INTEL_COLLECTORS_ENABLED',
+    'SEO_INTEL_DRY_RUN_DEFAULT',
+    'SEO_INTEL_ALLOW_EXTERNAL_API_CALLS',
+    'SEO_COUNCIL_SCHEDULER_ENABLED',
+    'SEO_COUNCIL_DAILY_READ_ONLY_ENABLED',
+    'SEO_COUNCIL_RUNTIME_CACHE_STORE',
+    'SEO_COUNCIL_DB_CONNECTION',
+    'SEO_COUNCIL_DB_USERNAME',
+    'SEO_COUNCIL_DB_PASSWORD',
+    'SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY',
+    'SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY_VERSION',
+];
+$hmacKeys = ['SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY', 'SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY_VERSION'];
+
+if ($environmentPath === '' || $patchPath === '' || is_link($environmentPath) || ! is_file($environmentPath)) {
+    throw new RuntimeException('SEO_INTEL_ENVIRONMENT_PATH_INVALID');
+}
+$patch = json_decode((string) file_get_contents($patchPath), true, flags: JSON_THROW_ON_ERROR);
+if (! is_array($patch) || (array_keys($patch) !== $allowed && array_keys($patch) !== $hmacKeys)) {
+    throw new RuntimeException('SEO_INTEL_PATCH_SCOPE_INVALID');
+}
+foreach ($patch as $value) {
+    if (! is_string($value) || $value === '' || preg_match('/[\x00\r\n]/', $value)) {
+        throw new RuntimeException('SEO_INTEL_PATCH_VALUE_INVALID');
+    }
+}
+
+$quote = static fn (string $value): string => '"'.strtr($value, [
+    '\\' => '\\\\',
+    '"' => '\\"',
+    '$' => '\\$',
+]).'"';
+$expectedLines = [];
+foreach ($patch as $key => $value) {
+    $expectedLines[$key] = $key.'='.$quote($value);
+}
+
+$handle = fopen($environmentPath, 'c+b');
+if ($handle === false || ! flock($handle, LOCK_EX)) {
+    throw new RuntimeException('SEO_INTEL_ENVIRONMENT_LOCK_FAILED');
+}
+$stat = fstat($handle);
+$pathStat = lstat($environmentPath);
+if (! is_array($stat) || ! is_array($pathStat) || $stat['ino'] !== $pathStat['ino'] || $stat['dev'] !== $pathStat['dev']) {
+    throw new RuntimeException('SEO_INTEL_ENVIRONMENT_CHANGED_BEFORE_WRITE');
+}
+rewind($handle);
+$original = stream_get_contents($handle);
+if (! is_string($original)) {
+    throw new RuntimeException('SEO_INTEL_ENVIRONMENT_READ_FAILED');
+}
+
+$seen = [];
+$segments = preg_split('/(?<=\n)/', $original, -1, PREG_SPLIT_NO_EMPTY) ?: [];
+$updated = '';
+foreach ($segments as $segment) {
+    $body = preg_replace('/\r?\n\z/', '', $segment);
+    $eol = substr($segment, strlen((string) $body));
+    if (preg_match('/\A\s*([A-Z0-9_]+)\s*=/', (string) $body, $matches) === 1
+        && array_key_exists($matches[1], $expectedLines)) {
+        $key = $matches[1];
+        // Initialization is authorized; an existing nonempty key/version must never rotate silently.
+        $oldValue = trim(substr((string) $body, strpos((string) $body, '=') + 1));
+        if (in_array($key, $hmacKeys, true) && ! in_array($oldValue, ['', '""', "''"], true)
+            && $oldValue !== $quote($patch[$key]) && $oldValue !== $patch[$key]) {
+            throw new RuntimeException('SEO_QUERY_HMAC_EXISTING_VALUE_CONFLICT');
+        }
+        if (! isset($seen[$key])) {
+            $updated .= $expectedLines[$key].$eol;
+            $seen[$key] = true;
+        }
+        continue;
+    }
+    $updated .= $segment;
+}
+foreach ($expectedLines as $key => $line) {
+    if (isset($seen[$key])) {
+        continue;
+    }
+    if ($updated !== '' && ! str_ends_with($updated, "\n")) {
+        $updated .= "\n";
+    }
+    $updated .= $line."\n";
+}
+
+$atomicWrite = static function (string $bytes) use ($environmentPath, $stat): void {
+    $temporary = tempnam(dirname($environmentPath), '.seo-intel-env-');
+    if (! is_string($temporary)) {
+        throw new RuntimeException('SEO_INTEL_ENVIRONMENT_TEMP_FAILED');
+    }
+    try {
+        if (file_put_contents($temporary, $bytes, LOCK_EX) === false) {
+            throw new RuntimeException('SEO_INTEL_ENVIRONMENT_TEMP_WRITE_FAILED');
+        }
+        chmod($temporary, $stat['mode'] & 0777);
+        $temporaryHandle = fopen($temporary, 'rb');
+        if ($temporaryHandle === false || ! fsync($temporaryHandle)) {
+            throw new RuntimeException('SEO_INTEL_ENVIRONMENT_FSYNC_FAILED');
+        }
+        fclose($temporaryHandle);
+        if (! rename($temporary, $environmentPath)) {
+            throw new RuntimeException('SEO_INTEL_ENVIRONMENT_RENAME_FAILED');
+        }
+    } finally {
+        if (is_file($temporary)) {
+            @unlink($temporary);
+        }
+    }
+};
+
+$atomicWrite($updated);
+clearstatcache(true, $environmentPath);
+$readback = (string) file_get_contents($environmentPath);
+$valid = ! is_link($environmentPath) && is_file($environmentPath);
+foreach ($expectedLines as $line) {
+    $valid = $valid && preg_match('/^'.preg_quote($line, '/').'$/m', $readback) === 1;
+}
+if (! $valid) {
+    $atomicWrite($original);
+    throw new RuntimeException('SEO_INTEL_ENVIRONMENT_READBACK_FAILED');
+}
+flock($handle, LOCK_UN);
+fclose($handle);
+echo "SEO Intel runtime environment configured atomically.\n";
+PHP;
+
+    run(sprintf(
+        'set -euo pipefail; patch=%s; trap \'rm -f "$patch"\' EXIT; chmod 600 "$patch"; {{bin/php}} -d display_errors=0 -r %s %s "$patch"',
+        deployPlaceholderPathArg($remotePatch),
+        deployShellArg($script),
+        deployPlaceholderPathArg('{{deploy_path}}', 'shared/backend/.env'),
+    ));
+}
+
 task('runtime:configure-seo-intel', function (): void {
+    if (deployBooleanOption('a08_gate_only', false)) {
+        deployInstallSeoIntelRuntimeEnvironment(deploySeoQueryHmacEnvironment());
+
+        return;
+    }
     if (deploySkipsAuthorityMutations()) {
         writeln('<comment>Skipping SEO Intel runtime configuration for a non-authority deployment.</comment>');
 
@@ -1094,157 +1276,7 @@ PHP;
         'SEO_COUNCIL_DB_USERNAME' => $candidates['SEO_COUNCIL_APPROVED_DB_USERNAME'],
         'SEO_COUNCIL_DB_PASSWORD' => $candidates['SEO_COUNCIL_APPROVED_DB_PASSWORD'],
     ];
-    $localPatch = tempnam(sys_get_temp_dir(), 'seo-intel-runtime-');
-    if (! is_string($localPatch)) {
-        throw new \RuntimeException('Unable to allocate the SEO Intel runtime patch.');
-    }
-
-    $remotePatch = '{{release_path}}/.seo-intel-runtime.json';
-    try {
-        if (file_put_contents($localPatch, json_encode($runtime, JSON_THROW_ON_ERROR)) === false
-            || ! chmod($localPatch, 0600)) {
-            throw new \RuntimeException('Unable to stage the SEO Intel runtime patch.');
-        }
-        upload($localPatch, $remotePatch);
-    } finally {
-        @unlink($localPatch);
-    }
-
-    $script = <<<'PHP'
-$environmentPath = $argv[1] ?? '';
-$patchPath = $argv[2] ?? '';
-$allowed = [
-    'SEO_INTEL_ENABLED',
-    'SEO_INTEL_DB_CONNECTION',
-    'SEO_INTEL_DB_HOST',
-    'SEO_INTEL_DB_PORT',
-    'SEO_INTEL_DB_DATABASE',
-    'SEO_INTEL_DB_USERNAME',
-    'SEO_INTEL_DB_PASSWORD',
-    'SEO_INTEL_WRITE_ENABLED',
-    'SEO_INTEL_COLLECTORS_ENABLED',
-    'SEO_INTEL_DRY_RUN_DEFAULT',
-    'SEO_INTEL_ALLOW_EXTERNAL_API_CALLS',
-    'SEO_COUNCIL_SCHEDULER_ENABLED',
-    'SEO_COUNCIL_DAILY_READ_ONLY_ENABLED',
-    'SEO_COUNCIL_RUNTIME_CACHE_STORE',
-    'SEO_COUNCIL_DB_CONNECTION',
-    'SEO_COUNCIL_DB_USERNAME',
-    'SEO_COUNCIL_DB_PASSWORD',
-];
-
-if ($environmentPath === '' || $patchPath === '' || is_link($environmentPath) || ! is_file($environmentPath)) {
-    throw new RuntimeException('SEO_INTEL_ENVIRONMENT_PATH_INVALID');
-}
-$patch = json_decode((string) file_get_contents($patchPath), true, flags: JSON_THROW_ON_ERROR);
-if (! is_array($patch) || array_keys($patch) !== $allowed) {
-    throw new RuntimeException('SEO_INTEL_PATCH_SCOPE_INVALID');
-}
-foreach ($patch as $value) {
-    if (! is_string($value) || $value === '' || preg_match('/[\x00\r\n]/', $value)) {
-        throw new RuntimeException('SEO_INTEL_PATCH_VALUE_INVALID');
-    }
-}
-
-$quote = static fn (string $value): string => '"'.strtr($value, [
-    '\\' => '\\\\',
-    '"' => '\\"',
-    '$' => '\\$',
-]).'"';
-$expectedLines = [];
-foreach ($patch as $key => $value) {
-    $expectedLines[$key] = $key.'='.$quote($value);
-}
-
-$handle = fopen($environmentPath, 'c+b');
-if ($handle === false || ! flock($handle, LOCK_EX)) {
-    throw new RuntimeException('SEO_INTEL_ENVIRONMENT_LOCK_FAILED');
-}
-$stat = fstat($handle);
-$pathStat = lstat($environmentPath);
-if (! is_array($stat) || ! is_array($pathStat) || $stat['ino'] !== $pathStat['ino'] || $stat['dev'] !== $pathStat['dev']) {
-    throw new RuntimeException('SEO_INTEL_ENVIRONMENT_CHANGED_BEFORE_WRITE');
-}
-rewind($handle);
-$original = stream_get_contents($handle);
-if (! is_string($original)) {
-    throw new RuntimeException('SEO_INTEL_ENVIRONMENT_READ_FAILED');
-}
-
-$seen = [];
-$segments = preg_split('/(?<=\n)/', $original, -1, PREG_SPLIT_NO_EMPTY) ?: [];
-$updated = '';
-foreach ($segments as $segment) {
-    $body = preg_replace('/\r?\n\z/', '', $segment);
-    $eol = substr($segment, strlen((string) $body));
-    if (preg_match('/\A\s*([A-Z0-9_]+)\s*=/', (string) $body, $matches) === 1
-        && array_key_exists($matches[1], $expectedLines)) {
-        $key = $matches[1];
-        if (! isset($seen[$key])) {
-            $updated .= $expectedLines[$key].$eol;
-            $seen[$key] = true;
-        }
-        continue;
-    }
-    $updated .= $segment;
-}
-foreach ($expectedLines as $key => $line) {
-    if (isset($seen[$key])) {
-        continue;
-    }
-    if ($updated !== '' && ! str_ends_with($updated, "\n")) {
-        $updated .= "\n";
-    }
-    $updated .= $line."\n";
-}
-
-$atomicWrite = static function (string $bytes) use ($environmentPath, $stat): void {
-    $temporary = tempnam(dirname($environmentPath), '.seo-intel-env-');
-    if (! is_string($temporary)) {
-        throw new RuntimeException('SEO_INTEL_ENVIRONMENT_TEMP_FAILED');
-    }
-    try {
-        if (file_put_contents($temporary, $bytes, LOCK_EX) === false) {
-            throw new RuntimeException('SEO_INTEL_ENVIRONMENT_TEMP_WRITE_FAILED');
-        }
-        chmod($temporary, $stat['mode'] & 0777);
-        $temporaryHandle = fopen($temporary, 'rb');
-        if ($temporaryHandle === false || ! fsync($temporaryHandle)) {
-            throw new RuntimeException('SEO_INTEL_ENVIRONMENT_FSYNC_FAILED');
-        }
-        fclose($temporaryHandle);
-        if (! rename($temporary, $environmentPath)) {
-            throw new RuntimeException('SEO_INTEL_ENVIRONMENT_RENAME_FAILED');
-        }
-    } finally {
-        if (is_file($temporary)) {
-            @unlink($temporary);
-        }
-    }
-};
-
-$atomicWrite($updated);
-clearstatcache(true, $environmentPath);
-$readback = (string) file_get_contents($environmentPath);
-$valid = ! is_link($environmentPath) && is_file($environmentPath);
-foreach ($expectedLines as $line) {
-    $valid = $valid && preg_match('/^'.preg_quote($line, '/').'$/m', $readback) === 1;
-}
-if (! $valid) {
-    $atomicWrite($original);
-    throw new RuntimeException('SEO_INTEL_ENVIRONMENT_READBACK_FAILED');
-}
-flock($handle, LOCK_UN);
-fclose($handle);
-echo "SEO Intel runtime environment configured atomically.\n";
-PHP;
-
-    run(sprintf(
-        'set -euo pipefail; patch=%s; trap \'rm -f "$patch"\' EXIT; chmod 600 "$patch"; {{bin/php}} -d display_errors=0 -r %s %s "$patch"',
-        deployPlaceholderPathArg($remotePatch),
-        deployShellArg($script),
-        deployPlaceholderPathArg('{{deploy_path}}', 'shared/backend/.env'),
-    ));
+    deployInstallSeoIntelRuntimeEnvironment($runtime + deploySeoQueryHmacEnvironment());
 });
 
 task('guard:seo-intel-runtime-config', function (): void {
@@ -1282,7 +1314,8 @@ try {
         && trim((string) (config("database.connections.seo_council.username") ?? "")) !== ""
         && (string) (config("database.connections.seo_council.password") ?? "") !== ""
         && config("seo_council.model_runtime_enabled") === false
-        && config("seo_council.tool_broker_enabled") === false;
+        && config("seo_council.tool_broker_enabled") === false
+        && app(App\Services\SeoAgentEvidence\Privacy\SeoQueryHmac::class)->identify("deployment capability self check")["status"] === "available";
     if (! $valid) {
         throw new RuntimeException("invalid");
     }
