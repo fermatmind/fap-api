@@ -95,8 +95,10 @@ final class CouncilRunRepository
             && $scheduled->request->requestHash === ($receipt['request_hash'] ?? null)
             && ($receipt['execution_allowed'] ?? null) === false
             && data_get($receipt, 'caller_provenance.caller_type') === 'scheduler'
-            && app(Platform12RuntimeControl::class)->prerequisite() === 'READY';
-        if (! $this->gatesOpen() && ! $scheduledAudit) {
+            && app(Platform12RuntimeControl::class)->allowsMission($scheduled->envelope['slot']['mission_id'],
+                $scheduled->envelope['slot']['trigger_mode'] === 'controlled_acceptance',
+                $scheduled->envelope['slot']['runtime_generation'] ?? 'legacy');
+        if (($scheduled !== null && ! $scheduledAudit) || (! $this->gatesOpen() && ! $scheduledAudit)) {
             return ['decision' => 'DISABLED', 'receipt' => $receipt];
         }
         if (! $this->storageReady()) {

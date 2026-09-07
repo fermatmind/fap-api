@@ -41,6 +41,9 @@ final readonly class Platform12DailyScheduler
         if (! $state['computation_enabled']) {
             return $this->result($state['state']);
         }
+        if ($acceptanceMission !== null && ! $this->control->allowsMission($acceptanceMission, true)) {
+            return $this->result('MISSION_NOT_AUTHORIZED');
+        }
         $owner = bin2hex(random_bytes(24));
         $lease = $this->store->acquire(self::LEASE, $owner, 180);
         if (! $lease['acquired']) {
@@ -50,10 +53,13 @@ final readonly class Platform12DailyScheduler
         $start = hrtime(true);
         try {
             // One outbox claim per tick; successful checks create no notification.
-            $this->notifications->drain();
+            if ($acceptanceMission === null) {
+                $this->notifications->drain();
+            }
             $catalog = $this->contracts->missionCatalog();
             $vector = $this->capabilities->snapshot()['version_vector'];
-            $row = $this->deliveries()->whereIn('mission_id', Platform12DailyMissionSet::IDS)
+            $row = $this->deliveries()->whereIn('mission_id', $acceptanceMission === null ? $state['effective_mission_ids'] : [$acceptanceMission])
+                ->where('mission_request_json->slot->runtime_generation', $state['generation'])
                 ->whereNotIn('status', ['CLOSED', 'HELD', 'FAILED'])
                 ->orderBy('scheduled_for')->first();
             if ($row !== null && $acceptanceMission !== null) {
@@ -78,7 +84,7 @@ final readonly class Platform12DailyScheduler
                         'captured_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
                         'expires_at' => now('UTC')->addMinutes(10)->format('Y-m-d\TH:i:s\Z')]
                     : $this->evidence->capture($slot['mission_id']);
-                if (! $this->sameGeneration($state)) {
+                if (! $this->sameGeneration($state) || ! $this->control->allowsMission($slot['mission_id'], $acceptanceMission !== null, $state['generation'])) {
                     return $this->result('PAUSED_BEFORE_RESERVATION');
                 }
                 $mission = Platform12FrozenMission::freeze($slot, $evidence, $vector, $catalog['catalog_hash']);
@@ -101,6 +107,9 @@ final readonly class Platform12DailyScheduler
                 || $row->slot_key !== $mission->envelope['slot']['slot_key']
                 || $row->catalog_hash !== $mission->envelope['catalog_hash']) {
                 return $this->result('FROZEN_DELIVERY_INTEGRITY_HOLD');
+            }
+            if (! $this->missionAllowed($mission, $state)) {
+                return $this->result('MISSION_NOT_AUTHORIZED');
             }
             $storeVector = $this->storeVector($mission);
             $claimed = $row->status === 'PLANNED'
@@ -139,12 +148,12 @@ final readonly class Platform12DailyScheduler
                 'elapsed_ms' => (int) ((hrtime(true) - $start) / 1e6),
             ];
             $receipt['receipt_hash'] = $this->hasher->hashWithout($receipt, 'receipt_hash');
-            $result = $this->store->completeDelivery($row->delivery_id, self::LEASE, $owner, $fence,
+            $result = $this->control->withControlLock(fn () => $this->store->completeDelivery($row->delivery_id, self::LEASE, $owner, $fence,
                 $receipt['receipt_id'], $receipt['receipt_hash'], $receipt['status'] === 'DAILY_MISSION_READY' ? 'CLOSED' : 'HELD',
                 function ($connection) use ($mission, $receipt, $state, $vector): void {
                     if ($connection->getName() !== config('seo_council.connection', 'seo_intel')
-                        || ($receipt['status'] !== 'DAILY_STOPPED_HOLD' && (! $this->sameGeneration($state)
-                            || $vector !== $this->capabilities->snapshot()['version_vector']))) {
+                        || ! $this->missionAllowed($mission, $state)
+                        || $vector !== $this->capabilities->snapshot()['version_vector']) {
                         throw new \RuntimeException('TERMINAL_RUNTIME_OR_VERSION_HOLD');
                     }
                     $persisted = $this->runs->persist($receipt, $mission->request->idempotencyKey(), $mission);
@@ -153,11 +162,11 @@ final readonly class Platform12DailyScheduler
                         throw new \RuntimeException('TERMINAL_AUDIT_PERSISTENCE_HOLD');
                     }
                     $this->notifications->enqueue($mission, $receipt);
-                    if ($receipt['status'] !== 'DAILY_STOPPED_HOLD' && (! $this->sameGeneration($state)
-                        || $vector !== $this->capabilities->snapshot()['version_vector'])) {
+                    if (! $this->missionAllowed($mission, $state)
+                        || $vector !== $this->capabilities->snapshot()['version_vector']) {
                         throw new \RuntimeException('TERMINAL_RUNTIME_CHANGED');
                     }
-                }, $storeVector);
+                }, $storeVector));
 
             $evaluation = collect($receipt['route_plan'] ?? [])->firstWhere('kind', 'daily_evaluation')['output'] ?? [];
 
@@ -175,21 +184,32 @@ final readonly class Platform12DailyScheduler
 
     private function nextSlot(array $state): ?array
     {
-        $activated = CarbonImmutable::parse($state['activated_at']);
         $now = CarbonImmutable::now('UTC');
-        $last = $this->deliveries()->whereIn('mission_id', Platform12DailyMissionSet::IDS)
-            ->where('slot_key', 'not like', 'a08:acceptance:%')->max('scheduled_for');
-        $date = $last === null ? $activated : CarbonImmutable::parse($last, 'UTC');
-        // Bounded lookback: one date per tick, with missed slots retained rather than replayed.
-        foreach ([$date, $date->addDay()] as $day) {
-            foreach ($this->missions->slots($day, $activated, $now) as $slot) {
-                if (! $this->deliveries()->where('slot_key', $slot['slot_key'])->exists()) {
-                    return $slot;
+        $candidates = [];
+        foreach ($state['effective_mission_ids'] as $id) {
+            $activated = CarbonImmutable::parse($state['missions'][$id]['first_enabled_at']);
+            $last = $this->deliveries()->where('mission_id', $id)
+                ->where('slot_key', 'not like', 'a08:acceptance:%')->max('scheduled_for');
+            $date = $last === null ? $activated : CarbonImmutable::parse($last, 'UTC')->max($activated);
+            foreach ([$date, $date->addDay()] as $day) {
+                foreach ($this->missions->slots($day, $activated, $now) as $slot) {
+                    if ($slot['mission_id'] === $id && ! $this->deliveries()->where('slot_key', $slot['slot_key'])->exists()) {
+                        $candidates[] = $slot;
+                        break 2;
+                    }
                 }
             }
         }
+        usort($candidates, static fn (array $a, array $b): int => strcmp($a['scheduled_for'], $b['scheduled_for']));
 
-        return null;
+        return $candidates[0] ?? null;
+    }
+
+    private function missionAllowed(Platform12FrozenMission $mission, array $state): bool
+    {
+        return ($mission->envelope['slot']['runtime_generation'] ?? null) === $state['generation']
+            && $this->control->allowsMission($mission->envelope['slot']['mission_id'],
+                $mission->envelope['slot']['trigger_mode'] === 'controlled_acceptance', $state['generation']);
     }
 
     private function sameGeneration(array $started): bool

@@ -63,18 +63,18 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
     public function test_production_requires_full_exact_sha_evidence_even_when_switches_are_enabled(): void
     {
         $this->app->instance('env', 'production');
-        $this->assertSame('FULL_NIGHTLY_EVIDENCE_HOLD', app(Platform12RuntimeControl::class)->prerequisite());
-        $this->assertFalse(app(Platform12RuntimeControl::class)->change(false)['computation_enabled']);
+        $this->assertSame('ACTIVATION_EVIDENCE_MISSING', app(Platform12RuntimeControl::class)->prerequisite());
+        $this->assertFalse(app(Platform12RuntimeControl::class)->change(false, Platform12DailyMissionSet::IDS)['computation_enabled']);
         $this->assertSame(0, DB::connection('seo_intel')->table('seo_council_runs')->count());
     }
 
     public function test_pause_resume_changes_generation_and_never_enables_business_writes(): void
     {
         $runtime = app(Platform12RuntimeControl::class);
-        $active = $runtime->change(false);
+        $active = $runtime->change(false, Platform12DailyMissionSet::IDS);
         $this->assertSame('ACTIVE_READ_ONLY', $active['state']);
         $this->assertSame('PAUSED', $runtime->change(true)['state']);
-        $resumed = $runtime->change(false);
+        $resumed = $runtime->change(false, Platform12DailyMissionSet::IDS);
         $this->assertNotSame($active['generation'], $resumed['generation']);
         $this->assertSame($active['activated_at'], $resumed['activated_at']);
         $this->assertFalse($resumed['business_write_enabled']);
@@ -85,7 +85,7 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
         $clock = CarbonImmutable::now('Asia/Shanghai')->setTime(6, 19);
         CarbonImmutable::setTestNow($clock);
         \Carbon\Carbon::setTestNow($clock);
-        app(Platform12RuntimeControl::class)->change(false);
+        app(Platform12RuntimeControl::class)->change(false, Platform12DailyMissionSet::IDS);
         CarbonImmutable::setTestNow($clock->addMinute());
         \Carbon\Carbon::setTestNow($clock->addMinute());
         $this->app->instance(Platform12EvidenceReader::class, new class implements Platform12EvidenceReader
@@ -201,7 +201,7 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
         $this->assertSame(0, DB::connection('seo_intel')->table('seo_council_schedule_deliveries')->count());
         $this->assertSame('PAUSED', app(Platform12DailyScheduler::class)->tick()['status']);
         $reader->pauseAfterRead = false;
-        app(Platform12RuntimeControl::class)->change(false);
+        app(Platform12RuntimeControl::class)->change(false, Platform12DailyMissionSet::IDS);
         $this->assertSame('TERMINAL_COMMITTED', app(Platform12DailyScheduler::class)->tick(Platform12DailyMissionSet::IDS[0])['status']);
     }
 
@@ -262,12 +262,75 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
         Platform12FrozenMission::restore($envelope);
     }
 
+    public function test_selection_is_complete_and_all_disabled_entrypoints_stay_closed(): void
+    {
+        $this->startAtSlot();
+        $reader = $this->fixtureReader();
+        $runtime = app(Platform12RuntimeControl::class);
+        $state = $runtime->change(false, [Platform12DailyMissionSet::IDS[0]]);
+        $this->assertSame([Platform12DailyMissionSet::IDS[0]], $state['selected_missions']);
+        foreach ([1, 2] as $index) {
+            $this->assertSame('MISSION_NOT_AUTHORIZED', app(Platform12DailyScheduler::class)->tick(Platform12DailyMissionSet::IDS[$index])['status']);
+            $this->assertFalse($runtime->admits('scheduler', ['mission_id' => 'seo.platform12.daily_check_'.$index.':'.now()->toDateString(),
+                'mission_type' => 'bounded_review', 'autonomy' => 'L0', 'family' => 'other_public', 'locale' => 'zh-CN', 'tool_scope' => [], 'egress_scope' => [], 'requested_role' => null]));
+        }
+        $this->assertSame(0, $reader->reads);
+        $runtime->change(true);
+        $this->assertSame('PAUSED', app(Platform12DailyScheduler::class)->tick(Platform12DailyMissionSet::IDS[0])['status']);
+        $legacy = Cache::store('array')->get(Platform12RuntimeControl::CACHE_KEY);
+        unset($legacy['selected_missions']);
+        $legacy['paused'] = false;
+        Cache::store('array')->forever(Platform12RuntimeControl::CACHE_KEY, $legacy);
+        $this->assertSame([], $runtime->status()['effective_mission_ids']);
+    }
+
+    public function test_later_enabled_mission_uses_own_first_time_and_cursor_without_pre_enable_misses(): void
+    {
+        $this->startAtSlot();
+        $this->fixtureReader();
+        $runtime = app(Platform12RuntimeControl::class);
+        // Establish the old-cache empty-set case before first activation of mission 2.
+        Cache::store('array')->forget(Platform12RuntimeControl::CACHE_KEY);
+        $runtime->change(false, [Platform12DailyMissionSet::IDS[0]]);
+        $clock = CarbonImmutable::now()->addDays(3);
+        CarbonImmutable::setTestNow($clock);
+        \Carbon\Carbon::setTestNow($clock);
+        $state = $runtime->change(false, [Platform12DailyMissionSet::IDS[0], Platform12DailyMissionSet::IDS[1]]);
+        $this->assertSame($clock->utc()->format('Y-m-d\TH:i:s\Z'), $state['missions'][Platform12DailyMissionSet::IDS[1]]['first_enabled_at']);
+        for ($i = 0; $i < 8; $i++) {
+            app(Platform12DailyScheduler::class)->tick();
+        }
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_council_schedule_deliveries')
+            ->where('mission_id', Platform12DailyMissionSet::IDS[1])->where('scheduled_for', '<', $clock->utc()->format('Y-m-d H:i:s'))->count());
+    }
+
+    public function test_disabled_stale_delivery_and_old_generation_do_not_block_selected_mission(): void
+    {
+        $this->startAtSlot();
+        $this->fixtureReader();
+        $runtime = app(Platform12RuntimeControl::class);
+        $fail = true;
+        DB::connection('seo_intel')->listen(function ($event) use (&$fail): void {
+            if ($fail && str_starts_with($event->sql, 'insert into "seo_council_runs"')) {
+                $fail = false;
+                throw new \RuntimeException('fixture rollback');
+            }
+        });
+        app(Platform12DailyScheduler::class)->tick(Platform12DailyMissionSet::IDS[2]);
+        $old = $runtime->status()['generation'];
+        $runtime->change(false, [Platform12DailyMissionSet::IDS[0]]);
+        $this->assertFalse($runtime->allowsMission(Platform12DailyMissionSet::IDS[0], true, $old));
+        $this->assertSame('TERMINAL_COMMITTED', app(Platform12DailyScheduler::class)->tick(Platform12DailyMissionSet::IDS[0])['status']);
+        $this->assertSame(1, DB::connection('seo_intel')->table('seo_council_runs')->count());
+        $this->assertSame(1, DB::connection('seo_intel')->table('seo_council_schedule_deliveries')->where('mission_id', Platform12DailyMissionSet::IDS[2])->whereNull('terminal_receipt_hash')->count());
+    }
+
     private function startAtSlot(): void
     {
         $clock = CarbonImmutable::now('Asia/Shanghai')->setTime(6, 19);
         CarbonImmutable::setTestNow($clock);
         \Carbon\Carbon::setTestNow($clock);
-        app(Platform12RuntimeControl::class)->change(false);
+        app(Platform12RuntimeControl::class)->change(false, Platform12DailyMissionSet::IDS);
     }
 
     private function fixtureReader(): Platform12EvidenceReader

@@ -188,6 +188,9 @@ final readonly class Platform12SchedulerStore
         try {
             return $this->connection()->transaction(function () use ($payload): array {
                 $connection = $this->connection();
+                if (! $this->dailyMissionAllowed($payload)) {
+                    return $this->deliveryDecision('MISSION_NOT_AUTHORIZED', false, $payload['delivery_id']);
+                }
                 if ($connection->table('seo_council_schedule_deliveries')->insertOrIgnore($payload) === 1) {
                     return $this->deliveryDecision('DELIVERY_RESERVED', true, (string) $payload['delivery_id']);
                 }
@@ -491,6 +494,23 @@ final readonly class Platform12SchedulerStore
      * @param  callable(ConnectionInterface, object, CarbonImmutable): array<string, mixed>  $mutation
      * @return array<string, mixed>
      */
+    private function dailyMissionAllowed(array $delivery): bool
+    {
+        if (! in_array($delivery['mission_id'] ?? null, Platform12DailyMissionSet::IDS, true)) {
+            return true;
+        }
+        try {
+            $mission = Platform12FrozenMission::restore(json_decode($delivery['mission_request_json'], true, 64, JSON_THROW_ON_ERROR));
+
+            return $mission->envelope['slot']['mission_id'] === $delivery['mission_id']
+                && app(Platform12RuntimeControl::class)->allowsMission($delivery['mission_id'],
+                    $mission->envelope['slot']['trigger_mode'] === 'controlled_acceptance',
+                    $mission->envelope['slot']['runtime_generation'] ?? 'legacy');
+        } catch (Throwable) {
+            return false;
+        }
+    }
+
     private function mutateDeliveryWithFence(
         string $deliveryId,
         string $leaseKey,
@@ -521,7 +541,15 @@ final readonly class Platform12SchedulerStore
                     return $this->deliveryDecision('DELIVERY_NOT_FOUND', false, $deliveryId);
                 }
 
-                return $mutation($connection, $delivery, $now);
+                if (! $this->dailyMissionAllowed((array) $delivery)) {
+                    return $this->deliveryDecision('MISSION_NOT_AUTHORIZED', false, $deliveryId);
+                }
+                $result = $mutation($connection, $delivery, $now);
+                if (! $this->dailyMissionAllowed((array) $delivery)) {
+                    throw new \RuntimeException('MISSION_CHANGED_DURING_COMMIT');
+                }
+
+                return $result;
             });
         } catch (QueryException $exception) {
             if ($rethrowQueryException) {

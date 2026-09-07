@@ -32,6 +32,7 @@
 
     @if (isset($snapshot['daily_missions']))
         <div class="ops-data-strip" aria-label="{{ __('seo-council.overview') }}">
+            <p>{{ __('seo-council.public_gate') }}: {{ $snapshot['daily_missions']['public_gate'] ?? 'UNAVAILABLE' }} · {{ __('seo-council.pause') }}: {{ $snapshot['daily_missions']['pause_intent'] ?? 'UNSET' }}</p>
             <p>{{ $snapshot['daily_missions']['runtime_state'] }} · {{ __('seo-council.actionable') }}: {{ $snapshot['daily_missions']['actionable_count'] }}</p>
             @foreach ($snapshot['daily_missions']['items'] as $mission)
                 <div class="ops-metric">
@@ -53,7 +54,10 @@
                     @if ($mission['observed_at'])
                         <time datetime="{{ $mission['observed_at'] }}">{{ $mission['observed_at'] }}</time>
                     @endif
-                    <small>{{ __('seo-council.next_run') }}: {{ $mission['next_run'] }}</small>
+                    <small>{{ __('seo-council.acceptance_ready') }}: {{ ($mission['acceptance_ready'] ?? false) ? 'READY' : 'HOLD' }} · {{ $mission['gate_reason'] ?? 'UNAVAILABLE' }}</small>
+                    <small>{{ __('seo-council.'.($mission['gate_next_step'] ?? 'public_checks_required')) }}</small>
+                    <small>{{ __('seo-council.selected') }}: {{ ($mission['selected'] ?? false) ? 'YES' : 'NO' }} · {{ __('seo-council.run_allowed') }}: {{ ($mission['run_allowed'] ?? false) ? 'YES' : 'NO' }}</small>
+                    <small>{{ __($mission['next_run'] ? 'seo-council.next_run' : 'seo-council.planned_disabled') }}: {{ $mission['next_run'] ?? $mission['planned_time'] ?? '—' }}</small>
                     @if ($mission['receipt_hash'])
                         <a href="#trace-drilldown-title">{{ __('seo-council.trace') }} · {{ substr($mission['receipt_hash'], 0, 12) }}</a>
                     @endif

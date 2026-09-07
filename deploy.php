@@ -20,6 +20,7 @@ set('seo_platform_10_closeout', false);
 set('seo_agent_evidence_boundary', false);
 set('seo_agent_policy_gateway', false);
 set('seo_council_orchestration', false);
+set('a08_gate_only', false);
 set('seo_competitive_evidence', false);
 set('seo_measurement_sync_env', '');
 set('seo_competitive_writer_env', '');
@@ -407,7 +408,8 @@ function deployCareerDetailMinimumTargets(string $hostAlias): int
 
 function deploySkipsAuthorityMutations(): bool
 {
-    return in_array(deployMode(), ['code_only', 'candidate_only', 'schema_only'], true);
+    return deployBooleanOption('a08_gate_only', false)
+        || in_array(deployMode(), ['code_only', 'candidate_only', 'schema_only'], true);
 }
 
 function deploySchemaOnlyMigration(): string
@@ -819,6 +821,9 @@ BASH,
  * gate, even when the broader warm fingerprint was unchanged.
  */
 task('career:rebuild-directory-after-detail-repair', function () {
+    if (deployBooleanOption('a08_gate_only', false)) {
+        return;
+    }
     if (deployMode() !== 'standard') {
         writeln('<comment>Skipping Career directory-only rebuild outside standard deploy.</comment>');
 
@@ -3049,6 +3054,11 @@ task('career:public-authority-cache-rebuilt', function () {
 });
 
 task('career:warm-public-authority-cache', function () {
+    if (deployBooleanOption('a08_gate_only', false)) {
+        writeln('<info>A08 gate-only delivery: no cache warm.</info>');
+
+        return;
+    }
     $timeoutSeconds = (int) (getenv('DEPLOY_CAREER_WARM_CACHE_TIMEOUT') ?: 600);
     $timeoutSeconds = max(180, $timeoutSeconds);
     $killAfterSeconds = (int) (getenv('DEPLOY_CAREER_WARM_CACHE_KILL_AFTER') ?: 30);
@@ -3207,6 +3217,11 @@ task('seo:sitemap-source-cache-rebuilt', function () {
 });
 
 task('seo:warm-sitemap-source-cache', function () {
+    if (deployBooleanOption('a08_gate_only', false)) {
+        writeln('<info>A08 gate-only delivery: no cache warm.</info>');
+
+        return;
+    }
     $timeoutSeconds = (string) (getenv('DEPLOY_SEO_SITEMAP_SOURCE_WARM_TIMEOUT') ?: '180');
     $killAfterSeconds = (string) (getenv('DEPLOY_SEO_SITEMAP_SOURCE_WARM_KILL_AFTER') ?: '30');
     $strict = (string) (getenv('DEPLOY_SEO_SITEMAP_SOURCE_WARM_STRICT') ?: 'false');

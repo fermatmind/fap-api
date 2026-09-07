@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { inRuntimeScope } from './seo-platform-12a08-activation.mjs';
 import { readFileSync } from "node:fs";
 
 export const CATEGORIES = [
@@ -153,7 +154,11 @@ export function classifyPaths(inputPaths) {
   const opsPresentationOnly = opsPresentation && paths.every((path) =>
     SEO_OPS_PRESENTATION_PATHS.has(path) || isPresentationCompanion(path),
   );
+  const a08GateOnly = paths.some(path => /Platform12|seo[_-].*a08/.test(path)) && paths.every(path =>
+    /^(?:backend\/(?:app\/Services\/SeoCouncil\/|app\/Console\/Commands\/SeoCouncilRuntimeCommand.php|scripts\/deploy\/seo_a08_|lang\/(?:en|zh_CN)\/seo-council.php|resources\/views\/filament\/ops\/components\/ops-system-health-workspace.blade.php|tests\/|docs\/)|\.github\/trunk\/|\.github\/workflows\/(?:ci|deploy).yml$|deploy.php$)/.test(path));
   const operations = {
+    a08_gate_only: a08GateOnly,
+    a08_scoped_checks: paths.some(inRuntimeScope),
     publisher_required: publisherRequired,
     career_current_authority_release: paths.some(isCareerAuthorityReleaseBoundary),
     personality_current_authority_release: paths.some(isPersonalityCurrentBoundary),

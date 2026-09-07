@@ -1,6 +1,17 @@
 <?php
 
 return [
+    'public_checks_required' => '先补齐专项证据，再开展受控验收。',
+    'source_acceptance_required' => '补齐此 Mission 的独立只读来源验收；保持未启用。',
+    'explicit_selection_required' => '等待明确选择此 Mission，且 Council 未暂停。',
+
+    'public_gate' => '公共专项门禁',
+    'pause' => 'Council 暂停状态',
+    'acceptance_ready' => '验收就绪',
+    'selected' => '已选择',
+    'run_allowed' => '允许运行',
+    'planned_disabled' => '计划时间，尚未启用',
+
     'missions' => ['GSC 数据新鲜度与运行状态', 'URL Truth、聚类去重与 D1', '隐私、Policy 与证据漂移'],
     'overview' => '每日只读检查',
     'actionable' => '待处理异常',
@@ -44,6 +55,9 @@ return [
         'INPUT_UNAVAILABLE' => ['problem' => '输入结构不可验证。', 'impact' => 'Mission 只能给出 HOLD。', 'recommendation' => '在 Trace 定位无效来源字段。'],
         'UNCLASSIFIED_HOLD' => ['problem' => '检查进入未分类 HOLD。', 'impact' => '当前结果不可用于运营决策。', 'recommendation' => '打开 Trace 查看固定输出与来源。'],
     ],
-    'states' => ['READY' => '本次检查正常', 'HOLD' => '需要检查', 'NOT_STARTED' => '尚未开始',
+    'states' => [
+        'NOT_AUTHORIZED' => '未授权',
+        'PAUSED' => '已暂停',
+        'PENDING_ACCEPTANCE' => '待验收', 'READY' => '本次检查正常', 'HOLD' => '需要检查', 'NOT_STARTED' => '尚未开始',
         'RUNNING' => '运行中', 'UNAVAILABLE' => '证据不可用', 'STALE' => '检查结果已过期'],
 ];

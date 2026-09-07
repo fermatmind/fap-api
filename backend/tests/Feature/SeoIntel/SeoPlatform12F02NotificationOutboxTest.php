@@ -15,6 +15,8 @@ final class SeoPlatform12F02NotificationOutboxTest extends TestCase
 {
     private RecordingPlatform12NotificationTransport $transport;
 
+    private string $terminalHash;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -30,7 +32,27 @@ final class SeoPlatform12F02NotificationOutboxTest extends TestCase
         config()->set('seo_council.notification_max_attempts', 3);
         DB::purge('seo_intel');
         DB::connection('seo_intel')->getPdo();
+        foreach (['2026_08_29_030000_create_seo_council_runtime_tables.php',
+            '2026_09_04_010000_create_seo_council_scheduler_storage.php',
+            '2026_09_04_020000_expand_seo_council_scheduler_fencing.php',
+            '2026_09_04_030000_expand_seo_council_run_receipts.php'] as $migration) {
+            (require database_path('migrations/seo_intel/'.$migration))->up();
+        }
         $this->migration()->up();
+        config()->set(['seo_council.scheduler_enabled' => true, 'seo_council.daily_read_only_enabled' => true, 'seo_council.runtime_cache_store' => 'array']);
+        \Illuminate\Support\Facades\Cache::store('array')->forget(\App\Services\SeoCouncil\Platform12\Platform12RuntimeControl::CACHE_KEY);
+        app(\App\Services\SeoCouncil\Platform12\Platform12RuntimeControl::class)->change(false, [\App\Services\SeoCouncil\Platform12\Platform12DailyMissionSet::IDS[0]]);
+        $this->app->instance(\App\Services\SeoCouncil\Platform12\Platform12EvidenceReader::class, new class implements \App\Services\SeoCouncil\Platform12\Platform12EvidenceReader
+        {
+            public function capture(string $missionId): array
+            {
+                return ['input' => [], 'sources' => [], 'source_gaps' => [], 'captured_at' => now('UTC')->toAtomString(), 'expires_at' => now('UTC')->addHour()->toAtomString()];
+            }
+        });
+        $result = app(\App\Services\SeoCouncil\Platform12\Platform12DailyScheduler::class)->tick(\App\Services\SeoCouncil\Platform12\Platform12DailyMissionSet::IDS[0]);
+        $this->assertSame('TERMINAL_COMMITTED', $result['status']);
+        $this->terminalHash = $result['receipt_hash'];
+        DB::connection('seo_intel')->table('seo_council_notification_outbox')->delete();
 
         $this->transport = new RecordingPlatform12NotificationTransport;
         $this->app->instance(Platform12NotificationTransport::class, $this->transport);
@@ -238,7 +260,9 @@ final class SeoPlatform12F02NotificationOutboxTest extends TestCase
         $outbox = app(Platform12NotificationOutbox::class);
         $outbox->enqueue($this->classification('paused-mail'), 'failed', 'HOLD');
         $claim = $outbox->claim('worker:mail:paused');
-        $this->assertSame('DISABLED', $outbox->dispatch($claim['claim'], 'HOLD')['status']);
+        $this->assertSame('PAUSED', $claim['status']);
+        $this->assertNull($claim['claim']);
+        $this->assertSame('pending', DB::connection('seo_intel')->table('seo_council_notification_outbox')->value('status'));
         $this->assertCount(0, $this->transport->deliveries);
     }
 
@@ -254,6 +278,25 @@ final class SeoPlatform12F02NotificationOutboxTest extends TestCase
         $this->assertSame('HOLD', $result['mission_verdict']);
         $this->assertCount(1, $this->transport->deliveries);
         $this->assertSame('EMPTY', $outbox->claim('worker:mail:after-failure')['status']);
+    }
+
+    public function test_unattributed_or_unselected_backlog_does_not_block_proven_selected_events(): void
+    {
+        $outbox = app(Platform12NotificationOutbox::class);
+        $unknown = $this->event('DATA_FAILURE', 'P1', 'unknown');
+        $unknown['evidence_refs'] = [['id' => 'historical', 'hash' => str_repeat('b', 64)]];
+        $outbox->enqueue(app(Platform12NotificationPolicyContract::class)->evaluate($unknown), 'failed', 'HOLD');
+        $known = $outbox->enqueue($this->classification('known'), 'failed', 'HOLD');
+        $claim = $outbox->claim('worker:scoped:one')['claim'];
+        $this->assertSame($known['notification_id'], $claim['notification_id']);
+        $this->assertSame('sent', $outbox->dispatch($claim, 'HOLD')['status']);
+        $this->assertSame(1, DB::connection('seo_intel')->table('seo_council_notification_outbox')->where('status', 'pending')->count());
+        $outbox->enqueue($this->classification('deselected'), 'failed', 'HOLD');
+        $claim = $outbox->claim('worker:scoped:two')['claim'];
+        app(\App\Services\SeoCouncil\Platform12\Platform12RuntimeControl::class)->change(false, [\App\Services\SeoCouncil\Platform12\Platform12DailyMissionSet::IDS[1]]);
+        $this->assertSame('DISABLED', $outbox->dispatch($claim, 'HOLD')['status']);
+        $this->assertSame('EMPTY', $outbox->claim('worker:scoped:three')['status']);
+        $this->assertCount(1, $this->transport->deliveries);
     }
 
     /** @return array<string, mixed> */
@@ -272,8 +315,8 @@ final class SeoPlatform12F02NotificationOutboxTest extends TestCase
             'severity' => $severity,
             'subject_hash' => hash('sha256', 'outbox-subject-'.$suffix),
             'evidence_refs' => [[
-                'id' => 'public-evidence-'.$suffix,
-                'hash' => hash('sha256', 'outbox-evidence-'.$suffix),
+                'id' => 'council:daily-terminal',
+                'hash' => $this->terminalHash,
             ]],
             'policy_revision' => app(Platform12NotificationPolicyContract::class)->reference()['hash'],
             'state' => 'ACTIVE',

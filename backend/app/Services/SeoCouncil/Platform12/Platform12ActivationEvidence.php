@@ -10,14 +10,19 @@ use App\Services\SeoCouncil\Governance\RuntimeCapabilitySnapshotBuilder;
 /** Validates the deploy-installed, data-only A08 activation manifest. */
 final readonly class Platform12ActivationEvidence
 {
-    public const SCHEMA = 'seo.platform12_a08_activation.v1';
+    public const SCHEMA = 'seo.platform12_a08_activation.v2';
 
-    private const REQUIRED_DOMAINS = [
-        'authority_contract',
-        'full_phpunit',
-        'dependency_audit',
-        'workflow_contracts',
-        'security_scan',
+    public const REQUIRED_TESTS = [
+        'public' => ['SeoPlatform12A01MissionCatalogTest', 'SeoPlatform12A02SchedulerStorageTest',
+            'SeoPlatform12A03SchedulerFencingTest', 'SeoPlatform12A04ProductionPersistenceTest',
+            'SeoPlatform12A05ReadOnlyRuntimeGateTest', 'SeoPlatform12A08ActivationEvidenceTest',
+            'SeoPlatform12A08DailyWiringTest', 'SeoPlatform12A08LegacyScheduleContractTest', 'MigrationPurityGateTest',
+            'SeoPlatform12F01NotificationPolicyContractTest', 'SeoPlatform12F02NotificationOutboxTest',
+            'SeoPlatform11C', 'SeoOperationsPageTest', 'SeoUxImpl06AgentCouncilTest',
+            'SeoPlatform12E02SystemHealthUiTest', 'SeoPlatform12E04TraceDrilldownUiSafetyTest'],
+        Platform12DailyMissionSet::IDS[0] => ['SeoPlatform12B01DailyGscCoreRuntimeTest', 'SeoPlatform12A08ProductionEvidenceTest'],
+        Platform12DailyMissionSet::IDS[1] => ['SeoPlatform12B02DailyUrlTruthTest', 'SeoPlatform12A08ProductionEvidenceTest'],
+        Platform12DailyMissionSet::IDS[2] => ['SeoPlatform12B03DailySecurityDriftTest', 'SeoPlatform12A08ProductionEvidenceTest'],
     ];
 
     public function __construct(
@@ -35,7 +40,7 @@ final readonly class Platform12ActivationEvidence
             || ! is_file($path) || ! is_readable($path) || filesize($path) > 65536
             || ! is_file($digestPath) || ! is_readable($digestPath) || filesize($digestPath) > 128
             || is_link($revisionPath) || ! is_file($revisionPath) || ! is_readable($revisionPath)) {
-            return $this->hold();
+            return $this->hold(null, 'ACTIVATION_EVIDENCE_MISSING');
         }
 
         $bytes = file_get_contents($path);
@@ -43,87 +48,94 @@ final readonly class Platform12ActivationEvidence
         $productionSha = strtolower(trim((string) file_get_contents($revisionPath)));
         $manifest = is_string($bytes) ? json_decode($bytes, true) : null;
         if (! is_string($bytes) || ! is_array($manifest)
-            || preg_match('/^[a-f0-9]{64}$/D', $expectedDigest) !== 1
-            || ! hash_equals($expectedDigest, hash('sha256', $bytes))
-            || preg_match('/^[a-f0-9]{40}$/D', $productionSha) !== 1
-            || ! $this->valid($manifest, $productionSha)) {
-            return $this->hold($productionSha);
+            || ! $this->digest($expectedDigest) || ! hash_equals($expectedDigest, hash('sha256', $bytes))) {
+            return $this->hold($productionSha, 'ACTIVATION_EVIDENCE_CORRUPT');
+        }
+        if (($manifest['schema_version'] ?? null) !== self::SCHEMA) {
+            return $this->hold($productionSha, ($manifest['schema_version'] ?? null) === 'seo.platform12_a08_activation.v1'
+                ? 'LEGACY_EVIDENCE_NOT_AUTHORIZATION' : 'ACTIVATION_VERSION_HOLD');
+        }
+        $reason = $this->validate($manifest, $productionSha);
+        if ($reason !== 'READY') {
+            return $this->hold($productionSha, $reason);
+        }
+        $missions = [];
+        foreach (Platform12DailyMissionSet::IDS as $id) {
+            $proof = $manifest['missions'][$id] ?? [];
+            $code = $this->scopedCheck($proof['checks'] ?? null, $productionSha, $id);
+            $source = $proof['source_acceptance'] ?? [];
+            // A fixture or a natural receipt is never a real source acceptance.
+            $accepted = $code && ($source['status'] ?? null) === 'pass'
+                && ($source['stage'] ?? null) === 'controlled_source_acceptance'
+                && ($source['environment'] ?? null) === 'production'
+                && ($source['mission_id'] ?? null) === $id
+                && ($source['bound_sha'] ?? null) === $productionSha
+                && $this->sha($source['source_sha'] ?? null)
+                && $this->digest($source['receipt_digest'] ?? null)
+                && $this->artifactDigest($source['artifact_digest'] ?? null)
+                && ($source['fingerprint'] ?? null) === ($proof['checks']['fingerprint'] ?? null)
+                && ($source['version_vector'] ?? null) === $manifest['runtime']['version_vector']
+                && (($source['source_sha'] ?? null) === $productionSha
+                    || ($source['ancestor_verified'] ?? null) === true);
+            $missions[$id] = ['acceptance_ready' => $code, 'source_accepted' => $accepted,
+                'source_receipt_digest' => $accepted ? $source['receipt_digest'] : null,
+                'reason' => ! $code ? 'MISSION_SCOPED_EVIDENCE_HOLD' : ($accepted ? 'READY' : 'MISSION_SOURCE_ACCEPTANCE_PENDING')];
         }
 
-        return ['state' => 'READY', 'manifest' => $manifest, 'production_sha' => $productionSha];
+        return ['state' => 'READY', 'manifest' => $manifest, 'production_sha' => $productionSha, 'missions' => $missions];
     }
 
-    private function valid(array $manifest, string $productionSha): bool
+    public function validate(array $manifest, string $productionSha): string
     {
-        if (($manifest['schema_version'] ?? null) !== self::SCHEMA
-            || ($manifest['repository'] ?? null) !== 'fermatmind/fap-api'
-            || ($manifest['bound_production_sha'] ?? null) !== $productionSha
-            || ! $this->permissionsClosed($manifest['permissions'] ?? null)
+        if (! $this->sha($productionSha) || ($manifest['repository'] ?? null) !== 'fermatmind/fap-api'
+            || ($manifest['bound_production_sha'] ?? null) !== $productionSha) {
+            return 'RELEASE_SHA_HOLD';
+        }
+        if (! $this->permissionsClosed($manifest['permissions'] ?? null)
             || data_get($manifest, 'measurement.day_28_started') !== false
             || data_get($manifest, 'measurement.efficiency_claim_allowed') !== false) {
-            return false;
+            return 'WRITE_GUARD_HOLD';
         }
-
-        $nightly = data_get($manifest, 'validation.nightly');
-        if (! is_array($nightly)
-            || ($nightly['repository'] ?? null) !== 'fermatmind/fap-api'
-            || ($nightly['workflow_name'] ?? null) !== 'Nightly'
-            || ($nightly['workflow_path'] ?? null) !== '.github/workflows/nightly.yml'
-            || ($nightly['head_branch'] ?? null) !== 'main'
-            || ($nightly['event'] ?? null) !== 'schedule'
-            || ($nightly['run_attempt'] ?? null) !== 1
-            || ! $this->positiveInteger($nightly['run_id'] ?? null)
-            || ! $this->sha($nightly['sha'] ?? null)
-            || ! $this->artifactDigest($nightly['artifact_digest'] ?? null)
-            || ! $this->digest($nightly['receipt_digest'] ?? null)
-            || ($nightly['check_scope'] ?? null) !== 'weekly_full_checks'
-            || ($nightly['status'] ?? null) !== 'pass') {
-            return false;
+        if (! $this->scopedCheck(data_get($manifest, 'validation.public_checks'), $productionSha, 'public')) {
+            return 'PUBLIC_SCOPED_EVIDENCE_HOLD';
         }
-        foreach (self::REQUIRED_DOMAINS as $domain) {
-            if (data_get($nightly, 'domains.'.$domain.'.required') !== true
-                || data_get($nightly, 'domains.'.$domain.'.result') !== 'success') {
-                return false;
+        if (! $this->releaseReceipt(data_get($manifest, 'validation.ci'), 'CI', '.github/workflows/ci.yml', 'push', $productionSha)) {
+            return 'CI_RELEASE_EVIDENCE_HOLD';
+        }
+        foreach (['staging', 'production'] as $environment) {
+            $receipt = data_get($manifest, 'validation.'.$environment);
+            if (! is_array($receipt) || ($receipt['sha'] ?? null) !== $productionSha
+                || ($receipt['environment'] ?? null) !== $environment
+                || ($receipt['check_scope'] ?? null) !== 'deployment_smoke_and_readonly_state'
+                || ($receipt['status'] ?? null) !== 'pass'
+                || ($receipt['completed_job'] ?? null) !== true
+                || ! $this->positiveInteger($receipt['run_id'] ?? null)
+                || ! $this->artifactDigest($receipt['artifact_digest'] ?? null)
+                || ($receipt['pause_preserved'] ?? null) !== true
+                || ($receipt['business_guards_closed'] ?? null) !== true) {
+                return 'DEPLOYMENT_SMOKE_EVIDENCE_HOLD';
             }
         }
-
-        $ci = data_get($manifest, 'validation.ci');
-        $deploy = data_get($manifest, 'validation.deploy');
-        $staging = data_get($manifest, 'validation.staging_acceptance');
-        if (! $this->releaseReceipt($ci, 'CI', '.github/workflows/ci.yml', 'push', $productionSha)
-            || ! $this->releaseReceipt($deploy, 'Deploy', '.github/workflows/deploy.yml', 'workflow_run', $productionSha)
-            || ! is_array($staging) || ($staging['sha'] ?? null) !== $nightly['sha']
-            || ($staging['status'] ?? null) !== 'pass'
-            || ($staging['mission_count'] ?? null) !== 3
-            || ! $this->positiveInteger($staging['deploy_run_id'] ?? null)
-            || ($staging['deploy_run_attempt'] ?? null) !== 1
-            || ! $this->artifactDigest($staging['artifact_digest'] ?? null)) {
-            return false;
-        }
-
-        $compatibility = $manifest['compatibility'] ?? null;
-        $sourceSha = $nightly['sha'];
-        if (! is_array($compatibility)
-            || ! in_array($compatibility['mode'] ?? null, ['exact_sha', 'compatible_descendant'], true)
-            || ($compatibility['source_sha'] ?? null) !== $sourceSha
-            || ($compatibility['bound_sha'] ?? null) !== $productionSha
-            || ! $this->digest(data_get($compatibility, 'fingerprint.sha256'))
-            || ! $this->positiveInteger(data_get($compatibility, 'fingerprint.file_count'))
-            || data_get($compatibility, 'fingerprint.scope_version') !== 'seo-council-a08-runtime.v1'
-            || (($compatibility['mode'] ?? null) === 'exact_sha' && $sourceSha !== $productionSha)
-            || (($compatibility['mode'] ?? null) === 'compatible_descendant' && $sourceSha === $productionSha)) {
-            return false;
-        }
-
         $expectedVector = data_get($manifest, 'runtime.version_vector');
         $observed = $this->capabilities->snapshot()['version_vector'];
+        if (! is_array($expectedVector) || count($expectedVector) !== count(Platform12ReadOnlyRuntimeGate::VERSION_DIMENSIONS)
+            || ! $this->sameVector($expectedVector, $observed)
+            || data_get($manifest, 'runtime.version_vector_hash') !== $this->hasher->hash($observed)) {
+            return 'PUBLIC_VERSION_VECTOR_HOLD';
+        }
 
-        return is_array($expectedVector)
-            && array_diff(array_keys($expectedVector), Platform12ReadOnlyRuntimeGate::VERSION_DIMENSIONS) === []
-            && array_diff(Platform12ReadOnlyRuntimeGate::VERSION_DIMENSIONS, array_keys($expectedVector)) === []
-            && count($expectedVector) === count(Platform12ReadOnlyRuntimeGate::VERSION_DIMENSIONS)
-            && $this->sameVector($expectedVector, $observed)
-            && data_get($manifest, 'runtime.version_vector_hash') === $this->hasher->hash($observed);
+        return 'READY';
+    }
+
+    private function scopedCheck(mixed $check, string $sha, string $scope): bool
+    {
+        return is_array($check) && ($check['scope_id'] ?? null) === $scope && ($check['check_scope'] ?? null) === 'a08_scoped_checks'
+            && ($check['sha'] ?? null) === $sha && ($check['status'] ?? null) === 'pass'
+            && ($check['scope_version'] ?? null) === 'seo-council-a08-dependencies.v2'
+            && $this->digest($check['fingerprint'] ?? null)
+            && $this->digest($check['result_digest'] ?? null)
+            && is_array($check['tests'] ?? null)
+            && array_diff(self::REQUIRED_TESTS[$scope], $check['tests']) === [];
     }
 
     private function permissionsClosed(mixed $permissions): bool
@@ -187,8 +199,8 @@ final readonly class Platform12ActivationEvidence
     }
 
     /** @return array{state:string,manifest:null,production_sha:?string} */
-    private function hold(?string $productionSha = null): array
+    private function hold(?string $productionSha = null, string $reason = 'ACTIVATION_EVIDENCE_HOLD'): array
     {
-        return ['state' => 'FULL_NIGHTLY_EVIDENCE_HOLD', 'manifest' => null, 'production_sha' => $productionSha];
+        return ['state' => $reason, 'manifest' => null, 'production_sha' => $productionSha, 'missions' => []];
     }
 }

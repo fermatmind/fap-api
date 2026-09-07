@@ -211,6 +211,16 @@ final readonly class Platform12SystemHealthReadService
                 $health['registry'] = $stale ? 'STALE' : (count($states) !== 3 || in_array('UNAVAILABLE', $states, true)
                     ? 'UNAVAILABLE' : (in_array('DRIFT', $states, true) ? 'HOLD' : 'READY'));
             }
+            $gate = $runtime['missions'][$mission['mission_id']] ?? [];
+            $selected = $gate['selected'] ?? false;
+            $runAllowed = $gate['run_allowed'] ?? false;
+            if (! $selected) {
+                $status = 'NOT_AUTHORIZED';
+            } elseif (($runtime['pause_intent'] ?? null) === 'PAUSED') {
+                $status = 'PAUSED';
+            } elseif (! ($gate['source_accepted'] ?? false)) {
+                $status = 'PENDING_ACCEPTANCE';
+            }
             $sourceGaps = $scheduled['source_gaps'] ?? null;
             $explanation = $this->explanations->for($output, $status, is_array($sourceGaps) && $sourceGaps !== []);
             $items[] = [
@@ -219,7 +229,14 @@ final readonly class Platform12SystemHealthReadService
                 ...$explanation,
                 'source_checks' => $this->sourceChecks($scheduled),
                 'observed_at' => $row !== null ? CarbonImmutable::parse($row->updated_at, 'UTC')->toAtomString() : null,
-                'next_run' => $set->nextRun($mission, CarbonImmutable::now('UTC')),
+                'next_run' => $runAllowed ? $set->nextRun($mission, CarbonImmutable::now('UTC')) : null,
+                'planned_time' => $set->nextRun($mission, CarbonImmutable::now('UTC')),
+                'selected' => $selected, 'run_allowed' => $runAllowed,
+                'acceptance_ready' => $gate['acceptance_ready'] ?? false,
+                'source_accepted' => $gate['source_accepted'] ?? false,
+                'gate_reason' => $gate['reason'] ?? 'ACTIVATION_EVIDENCE_MISSING',
+                'gate_next_step' => ! ($gate['acceptance_ready'] ?? false) ? 'public_checks_required'
+                    : (! ($gate['source_accepted'] ?? false) ? 'source_acceptance_required' : 'explicit_selection_required'),
                 'receipt_hash' => preg_match('/^[a-f0-9]{64}$/D', (string) $row?->terminal_receipt_hash) === 1
                     ? $row->terminal_receipt_hash : null,
             ];
@@ -227,7 +244,8 @@ final readonly class Platform12SystemHealthReadService
 
         $health['trace'] = $terminal === 0 ? 'UNAVAILABLE' : ($verified === $terminal ? 'READY' : 'HOLD');
 
-        return ['runtime_state' => $runtime['state'], 'enabled' => $runtime['computation_enabled'],
+        return ['public_gate' => $runtime['public_gate'] ?? 'UNAVAILABLE', 'pause_intent' => $runtime['pause_intent'] ?? 'UNSET',
+            'runtime_state' => $runtime['state'], 'enabled' => $runtime['computation_enabled'],
             'audit_enabled' => $runtime['audit_enabled'], 'business_write_enabled' => false, 'health' => $health,
             'actionable_count' => count(array_filter($items, static fn (array $item): bool => in_array($item['state'], ['HOLD', 'STALE', 'UNAVAILABLE'], true))),
             'items' => $items];

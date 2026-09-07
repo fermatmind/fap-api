@@ -1,36 +1,51 @@
-# Platform 12A-08: daily read-only runtime
+# Platform 12A-08: scoped evidence and Mission isolation
 
-## Scope
+## Delivery boundary
 
-Only the three versioned daily Catalog Missions are admitted through the frozen-input Scheduler path. They run at 06:20, 06:25 and 06:30 Asia/Shanghai. The existing GSC, funnel, URL Truth reconciliation, runtime probe and weekly decision schedules are unchanged.
+This release delivers gate software, not A08 activation. Council pause, generation, Mission selection and existing staging mail acknowledgement are preserved. No Mission acceptance, natural receipt, notification drain, GSC synchronization or business write is performed by this gate classification. The 28-day clock remains NOT_STARTED. Model runtime, Tool Broker and post12 business permissions remain closed.
 
-The minute tick discovers at most one Mission, drains at most one notification, and exits when idle. It uses the existing shared lease/fencing store and Council tables; no new worker, queue or authority database is introduced. The command has a 120-second hard deadline and a 180-second lease. A nonterminal delivery can compute at most twice, always with its original sanitized input. Earlier-than-activation slots are excluded; subsequent missed slots remain HOLD evidence rather than historical replay.
+Catalog retains all three IDs:
 
-Council computation and Council audit persistence are distinct from business execution. Model, Tool Broker, CMS, publication, canonical, robots, URL Truth and search writes remain disabled. Neither this change nor runtime resume starts the 28-day measurement clock or signs Day 0 enablement.
+- `seo.platform12.daily_gsc_core_runtime`
+- `seo.platform12.daily_url_truth_reconciliation`
+- `seo.platform12.daily_private_policy_evidence_drift`
 
-## Evidence and acceptance boundaries
+Their Catalog times are planned times, not enabled schedules. Existing GSC, funnel, URL Truth, weekly decision and runtime-probe schedules remain unchanged.
 
-- GSC reads the latest scheduled refresh receipt, including failures. Public API health reads only the existing fixed anonymous delivery-probe cache. Runtime calibration binds production readback to the active revision.
-- URL Truth compares the existing public authority inventory and URL Truth read model. Cached sitemap counts are observations, never authority. D1 derives a fixed 24-to-48-hour cohort from current decision-card revisions and their first/last observations.
-- Safety combines the actual scheduled HTTP negative-set receipt with the existing deterministic guard validator. It scans the bounded active minimized Evidence set and the past-day Council tool audit, not raw queries, identities or private result tables. Empty queried sets are valid zero; missing tables, stale probes, invalid bundles and query-budget overflow are unavailable/HOLD.
-- A missing Query HMAC capability is not healthy evidence. Unknown PII state is HOLD. Historical expired Evidence remains visible; no retention deletion is performed.
-- Source reference hashes, read times and available source observation times are frozen with the Mission. Replay does not read fresh evidence under an old request identity.
-- Terminal delivery, Council audit and notification outbox writes share a fenced database transaction. A revoked generation, stale fence or transaction failure cannot leave a successful partial audit.
+## Activation file v2
 
-## Operator surface
+The existing `seo_council.activation_receipt_path` and adjacent `.sha256` file carry `seo.platform12_a08_activation.v2`. V1 can be recognized as historical evidence but never grants authorization. Missing, corrupt, legacy, SHA, public-scope, version-vector, deployment and per-Mission gaps have separate hold codes. A manual pause is presented independently of public readiness.
 
-Use the existing `/ops/seo-operations` Automation workspace. It shows runtime state, three recent Mission results, next scheduled times, actionable count and sanitized Trace navigation. There are no run, permission or business-write buttons. Success is receipt-only. Repeated identical incidents are quiet; recovery is emitted once.
+The file separates:
 
-The single operational command is `seo:council-runtime status|pause|resume`. Pause affects Council only and retains all evidence. Shared cache failure fails closed. Pause takes effect at the next computation/commit checkpoint, bounded by the command deadline. It also stops Council notification sending. Resume rechecks the same prerequisites and never replays terminal deliveries.
+1. `validation.public_checks`: `a08_scoped_checks`, exact SHA, scope ID/version, dependency fingerprint, completed JUnit digest and explicit required tests. It covers Policy, privacy, authentication/RBAC, transactional persistence, shared-cache control, lease/fencing, idempotency, pause and write guards.
+2. `missions[formal ID].checks` and `.source_acceptance`: focused code tests never imply live wiring. Source acceptance is production `controlled_source_acceptance`, scoped to one Mission with SHA, receipt/artifact digest, fingerprint and version vector. Missing real source evidence stays pending.
+3. `validation.ci`, `.staging`, `.production`: the candidate's successful CI and completed deployment jobs, verified artifact digests, smoke and read-only Operations/state checks. The running Deploy workflow is never represented as already completed.
 
-The existing webhook transport cannot prove recipient-side exactly-once delivery after an ambiguous network acknowledgement. Such a send becomes a visible `DELIVERY_ACK_UNKNOWN` terminal failure, not a blind resend. A crash before dispatch can be recovered. Transport outcomes never change Mission verdicts.
+Evidence installation writes only the existing activation file pair. It does not call runtime pause/resume or change shared-cache state. The final job in `deploy.yml` archives the installed bytes and before/after state in an immutable exact-SHA artifact.
 
-## Rollout and rollback
+## Admission stages
 
-The shipped configuration remains disabled. Development/offline tests are not production activation evidence. Staging and testing permit explicit read-only configuration; production additionally requires the existing immutable full Nightly artifact, with a verified artifact-derived file digest and the active release SHA. `daily_operations` cannot replace `weekly_full_checks`.
+`seo:council-runtime status|pause|resume` remains the single operational command. Future `resume` requires repeated `--mission=<formal ID>` options specifying the **complete target set**. Empty, unknown, duplicate and wildcard values fail closed. All selected Missions must have scoped code readiness; the set updates atomically, or remains unchanged.
 
-The release workflow's existing CI, staging, production and smoke receipts remain deployment authority. Transporting the verified Nightly artifact, enabling the production read-only configuration, verifying staging pause/resume, and observing all three production natural slots are still required before declaring A08 complete. No manual or alternate deployment route is authorized by this document.
+Selection with code readiness permits only explicitly requested controlled acceptance while unpaused. Natural scheduling additionally requires verified real source acceptance and an explicit resume that binds that source receipt. Installing newly passing evidence alone cannot promote a selected Mission into natural scheduling. The first natural enablement timestamp is saved per Mission when that explicit selection occurs. Pause retains the selection, source bindings, original timestamps and evidence.
 
-Controlled acceptance calls use the existing scheduled command's `--acceptance` option with one allowlisted Catalog ID. They are recorded separately and never count as natural slots. A HOLD caused by a genuinely connected failing source is a valid diagnosis; a missing necessary source is not completed wiring acceptance.
+Scheduler reservation/claim/recovery/terminal commit, Orchestrator admission, frozen generation, Council persistence and notification dispatch check the same boundary. Existing serial lease, fencing, transaction and replay controls remain in force. Each Mission advances its own cursor; pre-enable slots are excluded. Disabled or obsolete-generation deliveries are retained and excluded from active recovery selection.
 
-Pause is the runtime rollback. Application rollback remains with the existing deployment/LKG workflow. No schema is removed, audit is retained, and old business schedules remain independent.
+## Dependency and Nightly policy
+
+The explicit common/Mission path lists and fingerprint implementation live in `.github/trunk/seo-platform-12a08-activation.mjs`. Common framework, authentication, permissions, database/cache, Council and privacy changes require common revalidation. Mission evaluator/source changes require the affected Mission. Ordinary copy outside identity/authority/schema/contracts is observation data, not a blanket runtime dependency.
+
+Inherited evidence requires actual Git ancestry, identical common and Mission fingerprints and the same runtime version vector. Every descendant still needs its own CI and deployment smoke. Evidence of source acceptance is carried only within that proven boundary. V1 cannot be carried into v2 authorization.
+
+Nightly remains independent. `daily_operations`, `weekly_full_checks` and `a08_scoped_checks` remain distinct. Known full-regression failures are accepted only when the current candidate's completed focused tests cover the failed boundary. The old global prohibition of `runInBackground()` and old direct hook assertion are checked through the current per-command scheduling and intervening database guard contract. Unknown failure relevance or other unresolved high-risk domains remain a hold, never a silent exclusion. Absence of an historical full Nightly pass is not itself an activation prerequisite.
+
+## Notifications and Operations
+
+Outbox eligibility uses the existing `council:daily-terminal` evidence hash, the committed delivery and a verified terminal receipt to prove Mission ownership. Unknown historical ownership remains unsent without deletion. Unselected events do not consume the claim head or block eligible work. Dispatch rechecks selection and generation under the same control lock; ambiguous transport acknowledgements retain the existing no-blind-retry rule.
+
+System Health separately shows public scoped readiness, pause, selection, acceptance/source readiness, effective run permission, missing evidence and the next step. Disabled schedules show “planned time; not enabled.” No execution button or new page is added; existing RBAC, sanitization and bounded queries are retained.
+
+## Next task
+
+Mission 1 independent read-only source wiring acceptance and trial operation. Supplement only its real source evidence, then explicitly select Mission 1 when authorized. Missions 2 and 3 remain closed. This software release does not declare A08 complete.

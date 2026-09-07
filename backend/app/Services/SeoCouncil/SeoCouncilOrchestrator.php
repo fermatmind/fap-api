@@ -205,7 +205,8 @@ final class SeoCouncilOrchestrator
             $envelope = $scheduled->envelope;
             $status = 'DAILY_MISSION_HOLD';
             $stopReason = 'daily_runtime_gate_hold';
-            if ($request->requestHash !== $scheduled->request->requestHash
+            if (($envelope['slot']['runtime_generation'] ?? null) !== ($this->dailyControl->status()['generation'] ?? null)
+                || $request->requestHash !== $scheduled->request->requestHash
                 || ! $this->dailyControl->admits($request->callerType, $request->payload)) {
                 $stopReason = 'daily_scope_or_runtime_hold';
             } elseif ($envelope['catalog_hash'] !== $catalog['catalog_hash']

@@ -38,6 +38,7 @@ jobs:
       seo_agent_evidence_boundary: ${{ steps.classify.outputs.seo_agent_evidence_boundary }}
       seo_agent_policy_gateway: ${{ steps.classify.outputs.seo_agent_policy_gateway }}
       seo_council_orchestration: ${{ steps.classify.outputs.seo_council_orchestration }}
+      a08_scoped_checks: ${{ steps.classify.outputs.a08_scoped_checks }}
       seo_competitive_evidence: ${{ steps.classify.outputs.seo_competitive_evidence }}
       classification: ${{ steps.classify.outputs.classification }}
     steps:
@@ -87,6 +88,7 @@ jobs:
             echo "seo_platform_11a_closeout=$(jq -r .operations.seo_platform_11a_closeout "$RUNNER_TEMP/classification.json")"
             echo "seo_agent_evidence_boundary=$(jq -r .operations.seo_agent_evidence_boundary "$RUNNER_TEMP/classification.json")"
             echo "seo_agent_policy_gateway=$(jq -r .operations.seo_agent_policy_gateway "$RUNNER_TEMP/classification.json")"
+            echo "a08_scoped_checks=$(jq -r .operations.a08_scoped_checks "$RUNNER_TEMP/classification.json")"
             echo "seo_council_orchestration=$(jq -r .operations.seo_council_orchestration "$RUNNER_TEMP/classification.json")"
             echo "seo_competitive_evidence=$(jq -r .operations.seo_competitive_evidence "$RUNNER_TEMP/classification.json")"
             echo "classification=$compact"
@@ -568,7 +570,7 @@ jobs:
   seo-council-orchestration:
     name: SEO Platform 11D-11L deterministic Council orchestration
     needs: classify
-    if: needs.classify.outputs.seo_council_orchestration == 'true'
+    if: needs.classify.outputs.seo_council_orchestration == 'true' || needs.classify.outputs.a08_scoped_checks == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -607,7 +609,7 @@ jobs:
           touch "$RUNNER_TEMP/seo-council.sqlite"
           php artisan migrate --database=seo_intel --path=database/migrations/seo_intel --force --no-interaction --ansi
           rm -f "$APP_CONFIG_CACHE"
-          php artisan test --compact \
+          php artisan test --compact --log-junit="$RUNNER_TEMP/a08-scoped-junit.xml" \
             tests/Feature/SeoIntel/SeoPlatform11D*.php \
             tests/Feature/SeoIntel/SeoPlatform11E*.php \
             tests/Feature/SeoIntel/SeoPlatform11F*.php \
@@ -618,6 +620,12 @@ jobs:
             tests/Feature/SeoIntel/SeoPlatform11K*.php \
             tests/Feature/SeoIntel/SeoPlatform11L*.php \
             tests/Feature/SeoIntel/SeoPlatform12*.php \
+            tests/Feature/Console/ArticleImportIqMethodPagesDraftCommandTest.php \
+            tests/Feature/Console/CmsBaselineOperationCommandTest.php \
+            tests/Feature/LandingSurfaces/BigFiveLandingSurfaceMigrationTest.php \
+            tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php \
+            tests/Feature/V0_3/ScalesLookupSeoMetadataTest.php \
+            tests/Sre/MigrationPurityGateTest.php \
             tests/Feature/SeoIntel/SeoPlatform11A*.php \
             tests/Feature/SeoIntel/SeoPlatform11B*.php \
             tests/Feature/SeoIntel/SeoPlatform11C*.php \
@@ -851,6 +859,15 @@ jobs:
         with:
           name: seo-council-orchestration-${{ github.sha }}
           path: seo-council-orchestration-closeout.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Bind completed A08 scoped test results
+        run: node .github/trunk/seo-platform-12a08-activation.mjs scoped-receipt "$RUNNER_TEMP/a08-scoped-junit.xml" "$GITHUB_SHA" a08-scoped-checks.json
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: a08-scoped-checks-${{ github.sha }}
+          path: a08-scoped-checks.json
           if-no-files-found: error
           retention-days: 90
 

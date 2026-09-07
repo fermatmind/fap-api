@@ -1,62 +1,71 @@
-import assert from "node:assert/strict";
-import test from "node:test";
-import { readFileSync } from "node:fs";
-import { fingerprint, inRuntimeScope, mayCarry, validateNightly } from "./seo-platform-12a08-activation.mjs";
-
-const sha = "a".repeat(40);
-const digest = `sha256:${"b".repeat(64)}`;
-const domains = Object.fromEntries([
-  "authority_contract", "full_phpunit", "dependency_audit", "workflow_contracts", "security_scan",
-].map((name) => [name, { required: true, result: "success" }]));
-const receipt = { schema_version: "nightly-failure-domain-summary.v2", workflow_sha: sha,
-  check_scope: "weekly_full_checks", status: "pass", domains };
-const metadata = { repository: "fermatmind/fap-api", workflow_name: "Nightly",
-  workflow_path: ".github/workflows/nightly.yml", head_branch: "main", event: "schedule",
-  run_id: 123, run_attempt: 1, sha, artifact_digest: digest };
-
-test("weekly exact-SHA evidence is accepted while daily, forged SHA, digest, or domain is rejected", () => {
-  assert.equal(validateNightly(receipt, metadata), true);
-  for (const [changedReceipt, changedMetadata] of [
-    [{ ...receipt, check_scope: "daily_checks" }, metadata],
-    [{ ...receipt, workflow_sha: "c".repeat(40) }, metadata],
-    [receipt, { ...metadata, artifact_digest: "b".repeat(64) }],
-    [{ ...receipt, domains: { ...domains, full_phpunit: { required: true, result: "failure" } } }, metadata],
-  ]) assert.throws(() => validateNightly(changedReceipt, changedMetadata), /FULL_NIGHTLY_EVIDENCE_HOLD/);
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import {mkdtempSync,writeFileSync,readFileSync,rmSync,mkdirSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {execFileSync} from 'node:child_process';
+import {fingerprint,scopeFor,mayCarry,MISSIONS,scopedReceipt,CHECKS} from './seo-platform-12a08-activation.mjs';
+import {verifyState} from './seo-platform-12a08-release.mjs';
+import {classifyPaths} from './classify-paths.mjs';
+test('explicit shared versus mission dependencies exclude ordinary copy, retain identities and authority',()=>{
+ for(const path of ['backend/routes/api.php','backend/composer.lock','backend/app/Http/Middleware/Auth.php','backend/content_assets/personality_public/current/manifest.json']) assert.deepEqual(scopeFor(path),['public']);
+ assert.deepEqual(scopeFor('backend/docs/example.md'),[]);
+ assert.deepEqual(scopeFor('backend/content_assets/personality_public/current/page/zh-CN.md'),[]);
+ assert.deepEqual(scopeFor('backend/app/Services/SeoCouncil/Platform12/Evaluation/Platform12DailySecurityDriftEvaluator.php'),[MISSIONS[2]]);
+ const result=classifyPaths(['backend/app/Services/SeoCouncil/Platform12/Platform12RuntimeControl.php','.github/workflows/deploy.yml']);
+ assert.equal(result.operations.a08_gate_only,true);
+ assert.equal(classifyPaths(['backend/app/Services/SeoCouncil/Platform12/Platform12RuntimeControl.php','backend/app/Services/Payments/Order.php']).operations.a08_gate_only,false);
 });
-
-test("compatibility scope is conservative and carry-forward requires identical fingerprint and vector", () => {
-  assert.equal(inRuntimeScope("backend/app/Foo.php"), true);
-  assert.equal(inRuntimeScope("backend/routes/api.php"), true);
-  assert.equal(inRuntimeScope("backend/database/migrations/x.php"), true);
-  assert.equal(inRuntimeScope("backend/composer.lock"), true);
-  assert.equal(inRuntimeScope(".github/workflows/deploy.yml"), true);
-  assert.equal(inRuntimeScope("README.md"), false);
-  const fp = { scope_version: "seo-council-a08-runtime.v1", sha256: "d".repeat(64), file_count: 12 };
-  const vector = { role: "e".repeat(64) };
-  const manifest = { schema_version: "seo.platform12_a08_activation.v1", repository: "fermatmind/fap-api",
-    bound_production_sha: sha, compatibility: { fingerprint: fp }, runtime: { version_vector: vector } };
-  assert.equal(mayCarry(manifest, { fingerprint: fp, version_vector: vector, production_sha: "f".repeat(40) }), true);
-  assert.equal(mayCarry(manifest, { fingerprint: { ...fp, sha256: "0".repeat(64) }, version_vector: vector, production_sha: "f".repeat(40) }), false);
-  assert.equal(mayCarry(manifest, { fingerprint: fp, version_vector: { role: "0".repeat(64) }, production_sha: "f".repeat(40) }), false);
+test('carry requires real Git ancestry, both fingerprints and equal vectors; v1 never authorizes',()=>{
+ const root=mkdtempSync(`${tmpdir()}/a08-git-`); const git=(...args)=>execFileSync('git',args,{cwd:root}).toString().trim();
+ try {
+  git('init','-q');git('config','user.email','test@example.test');git('config','user.name','Test');
+  mkdirSync(`${root}/backend/routes`,{recursive:true});writeFileSync(`${root}/backend/routes/api.php`,'a');git('add','.');git('commit','-qm','initial');
+  const source=git('rev-parse','HEAD'),fp=fingerprint(root,source),vector={policy:'x'};
+  const manifest={schema_version:'seo.platform12_a08_activation.v2',repository:'fermatmind/fap-api',bound_production_sha:source,validation:{public_checks:{fingerprint:fp.public}},missions:{[MISSIONS[0]]:{checks:{fingerprint:fp[MISSIONS[0]]}}},runtime:{version_vector:vector}};
+  writeFileSync(`${root}/README.md`,'copy');git('add','.');git('commit','-qm','copy');
+  const candidate={production_sha:git('rev-parse','HEAD'),version_vector:vector};
+  assert.equal(mayCarry(manifest,candidate,MISSIONS[0],root),true);
+  assert.equal(mayCarry({...manifest,schema_version:'seo.platform12_a08_activation.v1'},candidate,MISSIONS[0],root),false);
+  assert.equal(mayCarry(manifest,{...candidate,version_vector:{policy:'changed'}},MISSIONS[0],root),false);
+  writeFileSync(`${root}/backend/routes/api.php`,'permissions changed');git('add','.');git('commit','-qm','auth');
+  assert.equal(mayCarry(manifest,{...candidate,production_sha:git('rev-parse','HEAD')},MISSIONS[0],root),false);
+  assert.equal(mayCarry({...manifest,bound_production_sha:git('rev-parse','HEAD')},candidate,MISSIONS[0],root),false);
+ } finally {rmSync(root,{recursive:true,force:true});}
 });
-
-test("deploy keeps A08 activation and controlled acceptance disabled for CI and Nightly", () => {
-  const deploy = readFileSync(new URL("../workflows/deploy.yml", import.meta.url), "utf8");
-  assert.match(deploy, /workflows: \[CI, Nightly\]/);
-  assert.doesNotMatch(deploy, /workflow_dispatch:/);
-  assert.doesNotMatch(deploy, /council-a08-activation:/);
-  assert.doesNotMatch(deploy, /Validate three A08 sources through controlled read-only Missions/);
-  assert.doesNotMatch(deploy, /seo:council-runtime resume|seo:council-scheduled --acceptance/);
-  assert.doesNotMatch(deploy, /artifacts\/seo-council-a08/);
-  assert.match(deploy, /production_council_closeout=false/);
-  assert.match(deploy, /-o seo_council_orchestration="\$production_council_closeout"/);
-  assert.match(deploy, /Read production SEO Council closeout receipt\n\s+if: [^\n]+seo_council_runtime_closeout == 'true' && needs\.policy\.outputs\.seo_competitive_evidence == 'true'/);
+test('offline receipts cannot omit test scope or manufacture real source evidence',()=>{
+ assert.throws(()=>scopedReceipt('<testcase name="unrelated"/>',execFileSync('git',['rev-parse','HEAD']).toString().trim()),/COVERAGE|RESULTS/);
+ assert.throws(()=>scopedReceipt('<testcase/><failure/>','a'.repeat(40)),/RESULTS/);
 });
-
-test("current checkout produces a non-empty deterministic fingerprint", () => {
-  const first = fingerprint(new URL("../..", import.meta.url).pathname);
-  const second = fingerprint(new URL("../..", import.meta.url).pathname);
-  assert.deepEqual(first, second);
-  assert.ok(first.file_count > 100);
-  assert.match(first.sha256, /^[a-f0-9]{64}$/);
+test('pause, generation, pending counts and exact SHA must be preserved',()=>{
+ const state={gate_only:true,sha:'a'.repeat(40),paused:true,generation:'x',counts:{runs:0},selected_missions:[],business_guards_closed:true,operations_readonly:true};
+ assert.equal(verifyState(state,state,state.sha),true);
+ for(const extra of [{generation:'y'},{paused:false},{counts:{runs:1}},{selected_missions:[MISSIONS[0]]},{sha:'b'.repeat(40)}]) assert.throws(()=>verifyState(state,{...state,...extra},state.sha));
+});
+test('existing workflows publish completed scoped evidence without runtime operations',()=>{
+ const deploy=readFileSync(new URL('../workflows/deploy.yml',import.meta.url),'utf8');
+ assert.doesNotMatch(deploy,/workflow_dispatch:|seo:council-runtime (?:resume|pause)|seo:council-scheduled --acceptance/);
+ assert.match(deploy,/needs: \[policy, staging, production\]/);
+ assert.match(deploy,/a08_gate_only != true/);
+ assert.match(deploy,/seo-council-a08-activation-\$\{\{/);
+ const ci=readFileSync(new URL('../workflows/ci.yml',import.meta.url),'utf8');
+ assert.match(ci,/--log-junit=/);assert.match(ci,/scoped-receipt/);
+});
+test('Nightly high-risk or unknown failures cannot hide behind daily or unrelated scoped tests',async()=>{
+ const {assessNightly}=await import('./seo-platform-12a08-release.mjs');
+ const run={id:1,head_sha:'a'.repeat(40)};
+ const full=[{name:'Full PHPUnit regression and performance contracts',conclusion:'failure'}];
+ assert.throws(()=>assessNightly(run,[{name:'CodeQL and Semgrep security scan',conclusion:'failure'}],'',{}),/HIGH_RISK/);
+ assert.throws(()=>assessNightly(run,full,'FAILED  Test at tests/Feature/UnknownTest.php:12',{covered_classes:[]}),/UNKNOWN/);
+ const result=assessNightly(run,full,'FAILED  Test at tests/Feature/PermissionTest.php:12',{sha:'b'.repeat(40),covered_classes:['Tests\\Feature\\PermissionTest']});
+ assert.equal(result.disposition,'CURRENT_CANDIDATE_FOCUSED_REVALIDATION');
+ assert.equal(result.check_scope,'weekly_full_checks');
+});
+test('Current package body digests may change while schema, authority and identity stay bound',async()=>{
+ const {contentIdentity}=await import('./seo-platform-12a08-activation.mjs');
+ const page={schema_version:'v1',identity:{slug:'one'},authority:'repository',blocks:[{text:'before'}]};
+ assert.deepEqual(contentIdentity(page),contentIdentity({...page,blocks:[{text:'after'}]}));
+ for(const change of [{schema_version:'v2'},{authority:'database'},{identity:{slug:'two'}}]) assert.notDeepEqual(contentIdentity(page),contentIdentity({...page,...change}));
+ const manifest={aggregate_sha256:'old',schema_version:'v1',files:[{path:'one',canonical_slug:'one',sha256:'old',bytes:1}],set_hashes:{slug_set_sha256:'identity',source_semantic_aggregate_sha256:'old'}};
+ const body=structuredClone(manifest);body.aggregate_sha256='new';body.files[0].sha256='new';body.files[0].bytes=2;body.set_hashes.source_semantic_aggregate_sha256='new';
+ assert.deepEqual(contentIdentity(manifest,true),contentIdentity(body,true));body.files[0].canonical_slug='two';assert.notDeepEqual(contentIdentity(manifest,true),contentIdentity(body,true));
 });

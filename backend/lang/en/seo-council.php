@@ -1,6 +1,17 @@
 <?php
 
 return [
+    'public_checks_required' => 'Complete scoped evidence before controlled acceptance.',
+    'source_acceptance_required' => 'Complete this Mission’s read-only source acceptance; keep it disabled.',
+    'explicit_selection_required' => 'Await explicit selection of this Mission and an unpaused Council.',
+
+    'public_gate' => 'Public scoped gate',
+    'pause' => 'Council pause',
+    'acceptance_ready' => 'Acceptance readiness',
+    'selected' => 'Selected',
+    'run_allowed' => 'Run allowed',
+    'planned_disabled' => 'Planned time; not enabled',
+
     'missions' => ['GSC freshness and runtime', 'URL Truth, cluster/dedupe and D1', 'Privacy, Policy and Evidence drift'],
     'overview' => 'Daily read-only checks',
     'actionable' => 'Issues requiring attention',
@@ -44,6 +55,9 @@ return [
         'INPUT_UNAVAILABLE' => ['problem' => 'The input structure cannot be verified.', 'impact' => 'The Mission can only return HOLD.', 'recommendation' => 'Locate the invalid source field in Trace.'],
         'UNCLASSIFIED_HOLD' => ['problem' => 'The check entered an unclassified HOLD.', 'impact' => 'The result is not actionable.', 'recommendation' => 'Inspect the fixed output and sources in Trace.'],
     ],
-    'states' => ['READY' => 'Check healthy', 'HOLD' => 'Review required', 'NOT_STARTED' => 'Not started',
+    'states' => [
+        'NOT_AUTHORIZED' => 'Not authorized',
+        'PAUSED' => 'Paused',
+        'PENDING_ACCEPTANCE' => 'Pending acceptance', 'READY' => 'Check healthy', 'HOLD' => 'Review required', 'NOT_STARTED' => 'Not started',
         'RUNNING' => 'Running', 'UNAVAILABLE' => 'Evidence unavailable', 'STALE' => 'Result is stale'],
 ];

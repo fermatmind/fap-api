@@ -35,6 +35,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:
+      a08_scoped_checks: ${{ steps.receipt.outputs.a08_scoped_checks }}
+      a08_gate_only: ${{ steps.receipt.outputs.a08_gate_only }}
       deploy: ${{ steps.receipt.outputs.deploy }}
       infrastructure: ${{ steps.receipt.outputs.infrastructure }}
       classification: ${{ steps.receipt.outputs.classification }}
@@ -334,6 +336,7 @@ jobs:
           seo_council_runtime_closeout="$(jq -r '
             .classification.operations.seo_council_orchestration == true
             and .classification.operations.seo_ops_presentation_only != true
+            and .classification.operations.a08_gate_only != true
           ' "$receipt")"
           seo_competitive_evidence="$(jq -r '.classification.operations.seo_competitive_evidence == true' "$receipt")"
           private_result_authority_publish_required="$(jq -r '
@@ -363,6 +366,8 @@ jobs:
             echo "seo_agent_evidence_boundary=$seo_agent_evidence_boundary"
             echo "seo_agent_policy_gateway=$seo_agent_policy_gateway"
             echo "seo_council_orchestration=$seo_council_orchestration"
+            echo "a08_scoped_checks=$(jq -r .classification.operations.a08_scoped_checks "$receipt")"
+            echo "a08_gate_only=$(jq -r .classification.operations.a08_gate_only "$receipt")"
             echo "seo_council_runtime_closeout=$seo_council_runtime_closeout"
             echo "seo_competitive_evidence=$seo_competitive_evidence"
             echo "private_result_authority_publish_required=$private_result_authority_publish_required"
@@ -507,6 +512,10 @@ jobs:
           echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
           echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
           printf '%s\n' "$STAGING_REPO_READ_SSH_KEY" | ssh-add - >/dev/null 2>&1
+      - name: Read staging A08 state before deployment
+        env:
+          A08_GATE_ONLY: ${{ needs.policy.outputs.a08_gate_only }}
+        run: bash backend/scripts/deploy/seo_a08_transport.sh state a08-staging-before.json
       - name: Deploy staging and run repository smoke chain
         env:
           SEO_INTEL_DB_HOST: ${{ secrets.SEO_INTEL_DB_HOST }}
@@ -532,6 +541,7 @@ jobs:
             -o private_result_authority_publish_required='${{ needs.policy.outputs.private_result_authority_publish_required }}' \
             -o career_data_recovery='${{ needs.policy.outputs.career_data_recovery }}' \
             -o seo_council_orchestration="$council_orchestration" \
+            -o a08_gate_only='${{ needs.policy.outputs.a08_gate_only }}' \
             -o seo_competitive_evidence='${{ needs.policy.outputs.seo_competitive_evidence }}' \
             -o seo_council_closeout_deferred="$council_orchestration" --no-interaction
       - name: Materialize inactive staging measurement candidate
@@ -1257,6 +1267,12 @@ jobs:
             and .platform11_lifecycle.execution_allowed == false
             and .execution_allowed == false and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
+      - name: Verify staging A08 pause and read-only Operations preservation
+        env:
+          A08_GATE_ONLY: ${{ needs.policy.outputs.a08_gate_only }}
+        run: |
+          bash backend/scripts/deploy/seo_a08_transport.sh state a08-staging-after.json
+          node .github/trunk/seo-platform-12a08-release.mjs verify-state a08-staging-before.json a08-staging-after.json "$DEPLOY_SHA"
       - name: Record staging timing
         if: always()
         run: |
@@ -1270,6 +1286,8 @@ jobs:
           name: trunk-staging-${{ github.event.workflow_run.head_sha }}
           path: |
             staging-timing.json
+            a08-staging-before.json
+            a08-staging-after.json
             seo-agent-evidence-boundary-staging.json
             seo-agent-policy-gateway-staging.json
             seo-council-orchestration-staging.json
@@ -1278,6 +1296,8 @@ jobs:
 
   production:
     name: Production exact-SHA activation, smoke, and LKG fallback
+    outputs:
+      skipped: ${{ steps.baseline.outputs.skip }}
     needs: [policy, staging]
     if: needs.staging.result == 'success'
     runs-on: ubuntu-latest
@@ -1375,6 +1395,11 @@ jobs:
           test "$active" != "$DEPLOY_SHA"
           echo "skip=false" >> "$GITHUB_OUTPUT"
           echo "active=$active" >> "$GITHUB_OUTPUT"
+      - name: Read production A08 state before deployment
+        if: steps.baseline.outputs.skip != 'true'
+        env:
+          A08_GATE_ONLY: ${{ needs.policy.outputs.a08_gate_only }}
+        run: bash backend/scripts/deploy/seo_a08_transport.sh state a08-production-before.json
       - name: Deploy once and automatically restore LKG after committed smoke failure
         if: steps.baseline.outputs.skip != 'true'
         env:
@@ -1556,6 +1581,7 @@ jobs:
             -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' \
             -o private_result_authority_publish_required='${{ needs.policy.outputs.private_result_authority_publish_required }}' \
             -o seo_council_orchestration="$production_council_closeout" \
+            -o a08_gate_only='${{ needs.policy.outputs.a08_gate_only }}' \
             -o seo_competitive_evidence='${{ needs.policy.outputs.seo_competitive_evidence }}' \
             -o seo_measurement_sync_env="$remote_env" \
             -o seo_competitive_writer_env="$remote_writer_env" --no-interaction
@@ -1990,6 +2016,13 @@ jobs:
               and ([.write_counts[]] | all(. == 0))
               and (.receipt_digest | test("^[0-9a-f]{64}$"))
             ' "$receipt" >/dev/null
+      - name: Verify production A08 pause and read-only Operations preservation
+        if: steps.baseline.outputs.skip != 'true'
+        env:
+          A08_GATE_ONLY: ${{ needs.policy.outputs.a08_gate_only }}
+        run: |
+          bash backend/scripts/deploy/seo_a08_transport.sh state a08-production-after.json
+          node .github/trunk/seo-platform-12a08-release.mjs verify-state a08-production-before.json a08-production-after.json "$DEPLOY_SHA"
       - name: Persist push-to-production timing receipt
         if: always()
         env:
@@ -2006,6 +2039,8 @@ jobs:
           name: trunk-production-${{ github.event.workflow_run.head_sha }}
           path: |
             trunk-delivery-timing.json
+            a08-production-before.json
+            a08-production-after.json
             career-current-authority-production-preactivation-parity.json
             seo-agent-evidence-boundary-production.json
             seo-agent-policy-gateway-production.json
@@ -2387,6 +2422,65 @@ jobs:
         with:
           name: career-current-authority-publish-${{ github.run_id }}-${{ github.run_attempt }}
           path: artifacts/career-current-authority-publish
+          if-no-files-found: error
+          retention-days: 90
+
+  a08-evidence:
+    name: Publish scoped A08 evidence without enabling Council
+    needs: [policy, staging, production]
+    if: needs.production.result == 'success' && needs.production.outputs.skipped != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: production
+    env:
+      TARGET: production
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      GH_TOKEN: ${{ github.token }}
+      A08_GATE_ONLY: ${{ needs.policy.outputs.a08_gate_only }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 0
+      - name: Fetch exact-SHA completed job and artifact evidence
+        env:
+          CI_RUN_ID: ${{ github.event.workflow_run.id }}
+        run: node .github/trunk/seo-platform-12a08-evidence-download.mjs
+      - name: Build scoped activation v2 with pending real source acceptance
+        run: node .github/trunk/seo-platform-12a08-release.mjs build a08-release-input.json
+      - name: Start existing production transport
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          eval "$(ssh-agent -s)" >/dev/null
+          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
+          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
+          printf '%s\n' "$SSH_PRIVATE_KEY" | ssh-add - >/dev/null 2>&1
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+      - name: Publish validated data-only evidence and verify unchanged runtime
+        run: |
+          set -euo pipefail
+          if ! test -f activation.json; then exit 0; fi
+          bash backend/scripts/deploy/seo_a08_transport.sh state a08-install-before.json
+          bash backend/scripts/deploy/seo_a08_transport.sh install activation.json
+          bash backend/scripts/deploy/seo_a08_transport.sh state a08-install-after.json
+          node .github/trunk/seo-platform-12a08-release.mjs verify-state a08-install-before.json a08-install-after.json "$DEPLOY_SHA"
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: hashFiles('activation.json') != ''
+        with:
+          name: seo-council-a08-activation-${{ github.event.workflow_run.head_sha }}
+          path: |
+            activation.json
+            activation.json.sha256
+            a08-install-before.json
+            a08-install-after.json
           if-no-files-found: error
           retention-days: 90
 

@@ -88,6 +88,10 @@ final readonly class Platform12NotificationOutbox
     /** @return array<string, mixed> */
     public function claim(string $workerToken, ?int $leaseSeconds = null): array
     {
+        $runtime = app(\App\Services\SeoCouncil\Platform12\Platform12RuntimeControl::class)->status();
+        if (! $runtime['computation_enabled']) {
+            return ['status' => 'PAUSED', 'claim' => null];
+        }
         $this->validateWorkerToken($workerToken);
         $ttl = $leaseSeconds ?? (int) config('seo_council.notification_lease_seconds', 60);
         if ($ttl < 1 || $ttl > (int) config('seo_council.notification_max_lease_seconds', 300)) {
@@ -95,11 +99,20 @@ final readonly class Platform12NotificationOutbox
         }
 
         try {
-            return $this->connection()->transaction(function () use ($workerToken, $ttl): array {
+            return $this->connection()->transaction(function () use ($workerToken, $ttl, $runtime): array {
                 $connection = $this->connection();
                 $now = $this->databaseNow($connection);
                 $timestamp = $this->timestamp($now);
                 $row = $connection->table('seo_council_notification_outbox')
+                    ->whereExists(function ($query) use ($connection, $runtime): void {
+                        $match = $connection->getDriverName() === 'sqlite'
+                            ? "EXISTS (SELECT 1 FROM json_each(seo_council_notification_outbox.payload_json, '$.evidence_refs') AS ref WHERE json_extract(ref.value, '$.id') = 'council:daily-terminal' AND json_extract(ref.value, '$.hash') = d.terminal_receipt_hash)"
+                            : "JSON_CONTAINS(seo_council_notification_outbox.payload_json, JSON_OBJECT('id', 'council:daily-terminal', 'hash', d.terminal_receipt_hash), '$.evidence_refs')";
+                        $query->selectRaw('1')->from('seo_council_schedule_deliveries AS d')
+                            ->whereIn('d.mission_id', $runtime['effective_mission_ids'])
+                            ->whereIn('d.status', ['CLOSED', 'HELD', 'FAILED'])
+                            ->whereRaw($match);
+                    })
                     ->where(function ($query) use ($timestamp): void {
                         $query->where(function ($pending) use ($timestamp): void {
                             $pending->where('status', 'pending')->where('available_at', '<=', $timestamp);
@@ -112,6 +125,9 @@ final readonly class Platform12NotificationOutbox
                     ->first();
                 if (! is_object($row)) {
                     return ['status' => 'EMPTY', 'claim' => null];
+                }
+                if (! $this->payloadAllowed(json_decode((string) $row->payload_json, true) ?? [], $runtime['generation'])) {
+                    return ['status' => 'MISSION_NOT_AUTHORIZED', 'claim' => null];
                 }
                 if ($row->status === 'sending' && $row->last_error_code === 'DISPATCH_IN_FLIGHT') {
                     // The webhook has no recipient-side idempotency contract. An
@@ -155,6 +171,7 @@ final readonly class Platform12NotificationOutbox
                     'status' => 'CLAIMED',
                     'claim' => [
                         'notification_id' => (string) $row->notification_id,
+                        'generation' => $runtime['generation'],
                         'worker_token' => $workerToken,
                         'attempt' => (int) $row->attempt + 1,
                         'payload' => json_decode((string) $row->payload_json, true, 32, JSON_THROW_ON_ERROR),
@@ -170,11 +187,9 @@ final readonly class Platform12NotificationOutbox
     public function dispatch(array $claim, string $missionVerdict): array
     {
         $this->validateMissionVerdict($missionVerdict);
-        $dailyActive = config('seo_council.daily_read_only_enabled', false)
-            && app(\App\Services\SeoCouncil\Platform12\Platform12RuntimeControl::class)->status()['computation_enabled'];
-        if ((! (bool) config('seo_council.notification_dispatch_enabled', false) && ! $dailyActive)
-            || (config('seo_council.daily_read_only_enabled', false) && ! $dailyActive)) {
-            return $this->dispatchResult('DISABLED', 'NOTIFICATION_DISPATCH_DISABLED', $missionVerdict);
+        if (! is_string($claim['generation'] ?? null)
+            || ! $this->payloadAllowed($claim['payload'] ?? [], $claim['generation'])) {
+            return $this->dispatchResult('DISABLED', 'MISSION_NOT_AUTHORIZED', $missionVerdict);
         }
         $notificationId = (string) ($claim['notification_id'] ?? '');
         $workerToken = (string) ($claim['worker_token'] ?? '');
@@ -188,6 +203,11 @@ final readonly class Platform12NotificationOutbox
         $claimHash = $this->claimHash($workerToken, $notificationId);
         $dispatchHash = hash('sha256', $claimHash.'|dispatch');
         $now = $this->databaseNow($connection);
+        $stored = $connection->table('seo_council_notification_outbox')->where('notification_id', $notificationId)->value('payload_json');
+        if (! is_string($stored) || app(\App\Services\SeoAgentGovernance\SeoRegistryHasher::class)->hash(json_decode($stored, true))
+                !== app(\App\Services\SeoAgentGovernance\SeoRegistryHasher::class)->hash($payload)) {
+            return $this->dispatchResult('DISABLED', 'NOTIFICATION_PAYLOAD_HOLD', $missionVerdict);
+        }
         $claimed = $connection->table('seo_council_notification_outbox')
             ->where('notification_id', $notificationId)
             ->where('status', 'sending')
@@ -200,7 +220,13 @@ final readonly class Platform12NotificationOutbox
 
         $acknowledged = false;
         try {
-            $this->transport->send($notificationId, $payload);
+            $runtime = app(\App\Services\SeoCouncil\Platform12\Platform12RuntimeControl::class);
+            $runtime->withControlLock(function () use ($notificationId, $payload, $claim): void {
+                if (! $this->payloadAllowed($payload, $claim['generation'])) {
+                    throw new \RuntimeException('MISSION_NOT_AUTHORIZED');
+                }
+                $this->transport->send($notificationId, $payload);
+            });
             $acknowledged = true;
             $updated = $connection->table('seo_council_notification_outbox')
                 ->where('notification_id', $notificationId)
@@ -241,6 +267,34 @@ final readonly class Platform12NotificationOutbox
 
             return $this->recordFailure($connection, $notificationId, $dispatchHash, $missionVerdict);
         }
+    }
+
+    private function payloadAllowed(array $payload, ?string $generation): bool
+    {
+        $refs = $payload['evidence_refs'] ?? [];
+        $hashes = [];
+        foreach ($refs as $ref) {
+            if (($ref['id'] ?? null) === 'council:daily-terminal'
+                && preg_match('/^[a-f0-9]{64}$/D', (string) ($ref['hash'] ?? '')) === 1) {
+                $hashes[] = $ref['hash'];
+            }
+        }
+        if (count($hashes) !== 1) {
+            return false;
+        }
+        $row = $this->connection()->table('seo_council_schedule_deliveries AS d')
+            ->join('seo_council_run_receipts AS r', 'd.terminal_receipt_reference', '=', 'r.receipt_id')
+            ->where('d.terminal_receipt_hash', $hashes[0])->whereIn('d.status', ['CLOSED', 'HELD', 'FAILED'])
+            ->first(['d.mission_id', 'r.receipt_json']);
+        if ($row === null) {
+            return false;
+        }
+        $receipt = json_decode((string) $row->receipt_json, true);
+        $scheduled = is_array($receipt) ? collect($receipt['route_plan'] ?? [])->firstWhere('kind', 'scheduled_delivery') : null;
+
+        return is_array($receipt) && ($scheduled['mission_id'] ?? null) === $row->mission_id
+            && hash_equals($hashes[0], app(\App\Services\SeoAgentGovernance\SeoRegistryHasher::class)->hashWithout($receipt, 'receipt_hash'))
+            && app(\App\Services\SeoCouncil\Platform12\Platform12RuntimeControl::class)->allowsMission($row->mission_id, false, $generation);
     }
 
     /** @return array<string, mixed> */

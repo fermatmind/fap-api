@@ -16,6 +16,7 @@ final readonly class Platform12FrozenMission
 
     public static function freeze(array $slot, array $evidence, array $vector, string $catalogHash): self
     {
+        $slot['runtime_generation'] = app(Platform12RuntimeControl::class)->status()['generation'];
         $hasher = app(SeoRegistryHasher::class);
         $evidenceHash = $hasher->hash($evidence);
         $request = [
