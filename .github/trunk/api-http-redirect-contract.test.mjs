@@ -49,3 +49,9 @@ test("the API redirect runs before the ordinary Nginx reload", () => {
   assert.match(deployer, /after\('ensure:nginx-public-static-media-route', 'ensure:nginx-api-http-redirect'\);/);
   assert.match(deployer, /after\('ensure:nginx-api-http-redirect', 'reload:nginx'\);/);
 });
+
+test("both deploy targets use strict GitHub SSH over the reachable TLS port", () => {
+  const command = "ssh -o BatchMode=yes -o IdentitiesOnly=no -o StrictHostKeyChecking=yes -o Hostname=ssh.github.com -o Port=443 -o HostKeyAlias=github.com -o ConnectTimeout=10 -o ConnectionAttempts=3";
+
+  assert.equal(deployer.split(`->set('git_ssh_command', '${command}')`).length - 1, 2);
+});
