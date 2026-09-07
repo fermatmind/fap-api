@@ -4062,26 +4062,37 @@ fi
 probe_redirect() {
     method="$1"
     path="$2"
+    route="${3:-public}"
     expected_location="https://${api_host}${path}"
-    : > "$tmp_headers"
-
-    if [ "$method" = HEAD ]; then
-        status="$(curl -sS --max-time 15 --max-redirs 0 --head -o /dev/null -D "$tmp_headers" -w '%{http_code}' "http://${api_host}${path}")"
-    elif [ "$method" = POST ]; then
-        status="$(curl -sS --max-time 15 --max-redirs 0 -X POST --data '' -o /dev/null -D "$tmp_headers" -w '%{http_code}' "http://${api_host}${path}")"
-    else
-        status="$(curl -sS --max-time 15 --max-redirs 0 -o /dev/null -D "$tmp_headers" -w '%{http_code}' "http://${api_host}${path}")"
+    resolve=()
+    if [ "$route" = origin ]; then
+        resolve=(--resolve "${api_host}:80:127.0.0.1")
     fi
 
-    location="$(awk 'tolower($1) == "location:" {sub(/\r$/, ""); print substr($0, index($0, ":") + 2)}' "$tmp_headers" | tail -n 1)"
-    if [ "$status" != 308 ] || [ "$location" != "$expected_location" ]; then
-        echo "API HTTP redirect: ${method} probe status=${status} location_match=$([ "$location" = "$expected_location" ] && echo yes || echo no)" >&2
-        return 1
-    fi
+    for attempt in 1 2 3 4 5; do
+        : > "$tmp_headers"
+        if [ "$method" = HEAD ]; then
+            status="$(curl -sS --max-time 15 --max-redirs 0 "${resolve[@]}" --head -o /dev/null -D "$tmp_headers" -w '%{http_code}' "http://${api_host}${path}")"
+        elif [ "$method" = POST ]; then
+            status="$(curl -sS --max-time 15 --max-redirs 0 "${resolve[@]}" -X POST --data '' -o /dev/null -D "$tmp_headers" -w '%{http_code}' "http://${api_host}${path}")"
+        else
+            status="$(curl -sS --max-time 15 --max-redirs 0 "${resolve[@]}" -o /dev/null -D "$tmp_headers" -w '%{http_code}' "http://${api_host}${path}")"
+        fi
+
+        location="$(awk 'tolower($1) == "location:" {sub(/\r$/, ""); print substr($0, index($0, ":") + 2)}' "$tmp_headers" | tail -n 1)"
+        if [ "$status" = 308 ] && [ "$location" = "$expected_location" ]; then
+            return 0
+        fi
+        sleep 1
+    done
+
+    echo "API HTTP redirect: ${route} ${method} probe status=${status} location_match=$([ "$location" = "$expected_location" ] && echo yes || echo no)" >&2
+    return 1
 }
 
 set +e
-probe_redirect GET '/api/v0.3/flags?redirect_probe=1' \
+probe_redirect GET '/api/v0.3/flags?redirect_probe=1' origin \
+    && probe_redirect GET '/api/v0.3/flags?redirect_probe=1' \
     && probe_redirect HEAD '/api/v0.3/flags?redirect_probe=1' \
     && probe_redirect POST '/api/v0.3/flags?redirect_probe=1'
 status=$?

@@ -85,12 +85,14 @@ test("normal deploy keeps release-bound public health ordering", () => {
   );
 });
 
-test("rollback always re-reads REVISION and emits a sanitized exact-SHA receipt", () => {
-  const rollbackStart = workflow.indexOf("php /tmp/dep.phar rollback production");
+test("LKG recovery rebuilds the exact revision, re-reads REVISION, and emits a sanitized receipt", () => {
+  const rollbackStart = workflow.indexOf("rebuilding and restoring the exact LKG once");
   assert.notEqual(rollbackStart, -1);
   const rollbackFlow = workflow.slice(rollbackStart, workflow.indexOf("      - name: Read production SEO Evidence", rollbackStart));
 
   assert.match(rollbackFlow, /rollback_rc=\$\?/);
+  assert.match(rollbackFlow, /--revision "\$lkg_sha"/);
+  assert.match(rollbackFlow, /DEPLOY_INCIDENT_RECOVERY=true/);
   assert.match(rollbackFlow, /restored=.*current\/REVISION/);
   assert.match(rollbackFlow, /safe_restored=""/);
   assert.match(rollbackFlow, /\[\[ "\$restored" =~ \^\[0-9a-f\]\{40\}\$ \]\]/);

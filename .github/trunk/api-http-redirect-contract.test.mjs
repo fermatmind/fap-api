@@ -25,6 +25,9 @@ test("production API HTTP convergence is atomic and fail-closed", () => {
   assert.match(task, /probe_redirect GET/);
   assert.match(task, /probe_redirect HEAD/);
   assert.match(task, /probe_redirect POST/);
+  assert.match(task, /probe_redirect GET .* origin/);
+  assert.match(task, /--resolve "\$\{api_host\}:80:127\.0\.0\.1"/);
+  assert.match(task, /for attempt in 1 2 3 4 5/);
   assert.match(task, /tolower\(\$1\) == "location:"/);
   assert.match(task, /location_match=/);
   assert.match(task, /challenge_status/);

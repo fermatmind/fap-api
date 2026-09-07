@@ -1565,10 +1565,12 @@ jobs:
           current="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o ConnectionAttempts=3 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'" || true)"
           if [ "$current" = "$DEPLOY_SHA" ]; then
-            echo "Production activation committed but smoke failed; restoring previous LKG once."
-            export DEPLOY_SHA="$lkg_sha"
+            echo "Production activation committed but smoke failed; rebuilding and restoring the exact LKG once."
+            export DEPLOY_SHA="$lkg_sha" DEPLOY_REVISION="$lkg_sha" DEPLOY_MODE=code_only DEPLOY_INCIDENT_RECOVERY=true
             set +e
-            php /tmp/dep.phar rollback production -f deploy.php --no-interaction
+            php /tmp/dep.phar deploy:code-only production -f deploy.php --revision "$lkg_sha" \
+              -o release_name="lkg-${lkg_sha:0:12}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+              -o deploy_mode=code_only --no-interaction
             rollback_rc=$?
             set -e
 
