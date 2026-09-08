@@ -50,6 +50,8 @@ final class MigrationPurityGateTest extends TestCase
         '2026_09_08_090000_refine_mbti_landing_copy_zh.php',
         // RiasecEnneagramLandingCopyRefinementTest covers exact scope, idempotence, preservation, and atomic conflict rejection.
         '2026_09_08_100000_refine_riasec_enneagram_landing_copy_zh.php',
+        // AssessmentProfessionalIntrosTest covers six-scale field scope, idempotence, and atomic conflict rollback.
+        '2026_09_08_120000_refine_assessment_professional_intros_zh.php',
     ];
 
     private const BASELINE_CUTOFF_MIGRATION = '2026_04_21_000000';
