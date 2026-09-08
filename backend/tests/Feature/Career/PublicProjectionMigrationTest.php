@@ -133,6 +133,43 @@ final class PublicProjectionMigrationTest extends TestCase
         $this->assertNull(Projection::get($base.':active'));
     }
 
+    public function test_periodic_maintenance_repairs_a_failed_mirror_without_switching_reads(): void
+    {
+        $base = $this->seedProjections();
+        $migration = new PublicProjectionMigration;
+        $migration->prepare();
+        config(['public_projection_cache.phase' => 'activate']);
+        $migration->activate();
+        $migration->accept(str_repeat('a', 40));
+        $before = Projection::state();
+        Cache::forever($base.':versions:v1', ['body' => 'stale mirror']);
+        $withdrawn = 'career:public-authority:first-wave-next-step:v1:withdrawn-role:en:active';
+        Cache::forever($withdrawn, ['body' => 'withdrawn']);
+        Projection::mutation(fn () => Projection::changed(true));
+        $this->assertSame('observing', $migration->retire()['status']);
+        $this->assertSame('primary', Projection::state()['mode']);
+        $this->assertFalse(Projection::state()['mirror_dirty']);
+        $this->assertSame($before['primary_since'], Projection::state()['primary_since']);
+        $this->assertSame($before['accepted_releases'], Projection::state()['accepted_releases']);
+        $this->assertSame(['body' => '完整正文'], Cache::get($base.':versions:v1'));
+        $this->assertSame(['body' => '完整正文'], Projection::get($base.':versions:v1'));
+        $this->assertNull(Cache::get($withdrawn));
+        $this->assertSame('untouched-task', app('redis')->connection('default')->lindex('queues:default', 0));
+    }
+
+    public function test_activation_refuses_lost_state_without_falling_back_to_legacy_content(): void
+    {
+        $base = $this->seedProjections();
+        config(['public_projection_cache.phase' => 'activate']);
+        try {
+            Projection::get($base.':active');
+            $this->fail('Activation must not silently use an unverified original cache.');
+        } catch (\RuntimeException $error) {
+            $this->assertSame('Public projection migration state unavailable.', $error->getMessage());
+        }
+        $this->assertSame('v1', Cache::get($base.':active'));
+    }
+
     public function test_retirement_requires_seven_days_two_releases_and_verified_content(): void
     {
         $base = $this->seedProjections();
@@ -158,6 +195,13 @@ final class PublicProjectionMigrationTest extends TestCase
         }
         Cache::store('public_projection')->forever($base.':active', 'v1');
         $this->assertSame('isolated', $migration->retire()['status']);
+        $this->assertSame('isolated', $migration->activate()['status']);
+        try {
+            $migration->synchronize(true);
+            $this->fail('Retired legacy content must not become a rollback target.');
+        } catch (\RuntimeException $error) {
+            $this->assertStringContainsString('Legacy cache retired', $error->getMessage());
+        }
         $this->assertNull(Cache::get($base.':active'));
         $this->assertSame('keep', Cache::get('career:public-authority:unclassified-state'));
         $this->assertSame('keep-lock', Cache::get('career:public-authority:directory-read-model:v2:en:rebuild-lock'));

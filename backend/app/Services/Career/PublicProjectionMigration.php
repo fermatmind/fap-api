@@ -85,7 +85,7 @@ final class PublicProjectionMigration
     {
         $state = Projection::mutation(function () use ($rollback): array {
             $state = Projection::state();
-            if ($state['mode'] === 'isolated') {
+            if ($rollback && $state['mode'] === 'isolated') {
                 throw new \RuntimeException('Legacy cache retired; code rollback must retain the public store.');
             }
             if (! $rollback && $state['mode'] === 'legacy') {
@@ -95,8 +95,11 @@ final class PublicProjectionMigration
 
             return $state;
         }, true);
+        if ($state['mode'] === 'isolated') {
+            return ['status' => 'isolated'];
+        }
         $reverse = $state['mode'] === 'primary';
-        if ((! $rollback && $reverse) || ($rollback && ! $reverse)) {
+        if ((! $rollback && $reverse && ! ($state['mirror_dirty'] ?? true)) || ($rollback && ! $reverse)) {
             return ['status' => $state['mode']];
         }
         [$source, $prefix] = self::connection($reverse);
@@ -140,8 +143,8 @@ final class PublicProjectionMigration
                 }
             });
         }
-        // Exercise durable compaction before switching reads. The original remains
-        // live throughout; reserve a full destination RSS for copy-on-write.
+        // Exercise durable compaction before accepting synchronization. The serving
+        // source stays live; reserve a full destination RSS for copy-on-write.
         $rss = (int) ($destination->info('memory')['used_memory_rss'] ?? 0);
         self::headroom($rss);
         $persistence = $destination->info('persistence');
@@ -158,17 +161,19 @@ final class PublicProjectionMigration
         } while ($persistence['aof_rewrite_in_progress'] ?? 0);
         if (($persistence['aof_last_bgrewrite_status'] ?? null) !== 'ok'
             || ($persistence['aof_last_write_status'] ?? null) !== 'ok') {
-            throw new \RuntimeException('Public projection persistence failed; original store retained.');
+            throw new \RuntimeException('Public projection persistence failed; serving store retained.');
         }
         $epoch = $this->verify($source, $prefix, $destination, $targetPrefix, $deadline);
-        Projection::mutation(function () use ($epoch, $rollback): void {
+        Projection::mutation(function () use ($epoch, $rollback, $reverse): void {
             $state = Projection::state();
             if (($state['mirror_dirty'] ?? true) || (int) ($state['epoch'] ?? 0) !== $epoch) {
+                Projection::changed(true);
                 throw new \RuntimeException('Concurrent publication changed migration snapshot; switch refused.');
             }
             self::headroom();
             Projection::writeState([...$state, 'mode' => $rollback ? 'mirror' : 'primary',
-                'primary_since' => $rollback ? null : time(), 'accepted_releases' => []]);
+                'primary_since' => $rollback ? null : ($reverse ? $state['primary_since'] : time()),
+                'accepted_releases' => ! $rollback && $reverse ? ($state['accepted_releases'] ?? []) : []]);
         });
 
         return ['status' => $rollback ? 'mirror' : 'primary', 'verified_keys' => $count, 'destination_rss_bytes' => $rss,
@@ -183,33 +188,39 @@ final class PublicProjectionMigration
 
             return (int) ($state['epoch'] ?? 0);
         });
-        foreach ([[$source, $prefix, $destination, $targetPrefix], [$destination, $targetPrefix, $source, $prefix]] as [$left, $leftPrefix, $right, $rightPrefix]) {
-            foreach ($this->keys($left, $leftPrefix) as $key) {
-                if (microtime(true) >= $deadline) {
-                    throw new \RuntimeException('Public projection verification budget exhausted.');
-                }
-                Projection::mutation(function () use ($left, $right, $key, $leftPrefix, $rightPrefix): void {
-                    $other = $rightPrefix.substr($key, strlen($leftPrefix));
-                    $logical = substr($key, strlen($leftPrefix));
-                    if (($pointerBase = Projection::pointerBase($logical)) !== null) {
-                        $raw = $left->rawCommand('GET', $key);
-                        $version = is_string($raw) ? @unserialize($raw, ['allowed_classes' => false]) : null;
-                        if (! is_string($version) || ! $left->rawCommand('EXISTS', $leftPrefix.$pointerBase.':versions:'.$version)) {
-                            throw new \RuntimeException('Public projection active/LKG payload missing.');
+        try {
+            foreach ([[$source, $prefix, $destination, $targetPrefix], [$destination, $targetPrefix, $source, $prefix]] as [$left, $leftPrefix, $right, $rightPrefix]) {
+                foreach ($this->keys($left, $leftPrefix) as $key) {
+                    if (microtime(true) >= $deadline) {
+                        throw new \RuntimeException('Public projection verification budget exhausted.');
+                    }
+                    Projection::mutation(function () use ($left, $right, $key, $leftPrefix, $rightPrefix): void {
+                        $other = $rightPrefix.substr($key, strlen($leftPrefix));
+                        $logical = substr($key, strlen($leftPrefix));
+                        if (($pointerBase = Projection::pointerBase($logical)) !== null) {
+                            $raw = $left->rawCommand('GET', $key);
+                            $version = is_string($raw) ? @unserialize($raw, ['allowed_classes' => false]) : null;
+                            if (! is_string($version) || ! $left->rawCommand('EXISTS', $leftPrefix.$pointerBase.':versions:'.$version)) {
+                                throw new \RuntimeException('Public projection active/LKG payload missing.');
+                            }
                         }
-                    }
 
-                    $dump = $left->rawCommand('DUMP', $key);
-                    if ($dump !== $right->rawCommand('DUMP', $other)) {
-                        throw new \RuntimeException('Public projection mirror differs; switch refused.');
-                    }
-                    $a = $left->rawCommand('PTTL', $key);
-                    $b = $right->rawCommand('PTTL', $other);
-                    if (($a < 0 || $b < 0) ? $a !== $b : abs($a - $b) > 1000) {
-                        throw new \RuntimeException('Public projection expiry differs; switch refused.');
-                    }
-                });
+                        $dump = $left->rawCommand('DUMP', $key);
+                        if ($dump !== $right->rawCommand('DUMP', $other)) {
+                            throw new \RuntimeException('Public projection mirror differs; switch refused.');
+                        }
+                        $a = $left->rawCommand('PTTL', $key);
+                        $b = $right->rawCommand('PTTL', $other);
+                        if (($a < 0 || $b < 0) ? $a !== $b : abs($a - $b) > 1000) {
+                            throw new \RuntimeException('Public projection expiry differs; switch refused.');
+                        }
+                    });
+                }
             }
+
+        } catch (\Throwable $error) {
+            Projection::mutation(fn () => Projection::changed(true));
+            throw $error;
         }
 
         return $epoch;
@@ -259,6 +270,12 @@ final class PublicProjectionMigration
                 }
                 if ($references === 0) {
                     throw new \RuntimeException('Public projection references are missing.');
+                }
+                if ($initial['mode'] === 'primary' && ($initial['mirror_dirty'] ?? true)) {
+                    // Rebuild the rollback mirror from the validated serving copy.
+                    // Keep reads on the new store and retain the observation window.
+                    $this->synchronize(false);
+                    $initial = Projection::state();
                 }
                 app(\App\Services\Ops\CacheLifecycleAlerts::class)->observe('projection_integrity', true);
             } catch (\Throwable $error) {
