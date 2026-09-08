@@ -387,6 +387,7 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
 
         try {
             $cacheMock = Cache::partialMock();
+            $cacheMock->shouldReceive('put')->andReturnUsing(fn (...$args) => $cacheManager->put(...$args));
             $cacheMock->shouldReceive('get')
                 ->andReturnUsing(static fn (string $key, mixed $default = null): mixed => $cacheManager->get($key, $default));
             $cacheMock->shouldReceive('has')
@@ -431,6 +432,7 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
 
         try {
             $cacheMock = Cache::partialMock();
+            $cacheMock->shouldReceive('put')->andReturnUsing(fn (...$args) => $cacheManager->put(...$args));
             $cacheMock->shouldReceive('lock')
                 ->andReturnUsing(static fn (string $key, int $seconds) => $cacheManager->lock($key, $seconds));
             $cacheMock->shouldReceive('get')
@@ -481,6 +483,7 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
 
         try {
             $cacheMock = Cache::partialMock();
+            $cacheMock->shouldReceive('put')->andReturnUsing(fn (...$args) => $cacheManager->put(...$args));
             $cacheMock->shouldReceive('lock')
                 ->andReturnUsing(static fn (string $key, int $seconds) => $cacheManager->lock($key, $seconds));
             $cacheMock->shouldReceive('get')
@@ -568,6 +571,7 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
 
         try {
             $cacheMock = Cache::partialMock();
+            $cacheMock->shouldReceive('put')->andReturnUsing(fn (...$args) => $cacheManager->put(...$args));
             $cacheMock->shouldReceive('lock')
                 ->andReturnUsing(static fn (string $key, int $seconds) => $cacheManager->lock($key, $seconds));
             $cacheMock->shouldReceive('get')
@@ -651,6 +655,7 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
 
         try {
             $cacheMock = Cache::partialMock();
+            $cacheMock->shouldReceive('put')->andReturnUsing(fn (...$args) => $cacheManager->put(...$args));
             $cacheMock->shouldReceive('lock')
                 ->twice()
                 ->andReturnUsing(static function (string $key, int $seconds) use ($lockState): object {
