@@ -46,12 +46,15 @@ async function main() {
   for (const pagePath of selected) {
     if (!known.has(pagePath)) throw new Error(`PAGE_NOT_IN_MANIFEST:${relative(ROOT, pagePath)}`);
     const page = JSON.parse(await readFile(pagePath, "utf8"));
+    page.content_state = "enhanced";
     page.source_content_sha256 = hash(page.payload);
     await writeFile(pagePath, encode(page), "utf8");
   }
 
   const semanticHashes = [];
   const compatibilityHashes = [];
+  let baselinePages = 0;
+  let enhancedPages = 0;
   for (const entry of manifest.files) {
     const pagePath = resolve(ROOT, entry.path);
     const bytes = await readFile(pagePath, "utf8");
@@ -64,12 +67,17 @@ async function main() {
     entry.sha256 = hash(bytes);
     entry.source_content_sha256 = projectionHash;
     entry.compatibility_projection_sha256 = projectionHash;
+    entry.content_state = page.content_state;
+    if (page.content_state === "enhanced") enhancedPages += 1;
+    else baselinePages += 1;
     semanticHashes.push(projectionHash);
     compatibilityHashes.push(projectionHash);
   }
 
   manifest.set_hashes.source_semantic_aggregate_sha256 = hash(semanticHashes);
   manifest.set_hashes.compatibility_projection_aggregate_sha256 = hash(compatibilityHashes);
+  manifest.coverage.baseline_locale_pages = baselinePages;
+  manifest.coverage.enhanced_locale_pages = enhancedPages;
   manifest.aggregate_sha256 = hash(withoutKey(manifest, "aggregate_sha256"));
   await writeFile(MANIFEST_PATH, encode(manifest), "utf8");
   process.stdout.write(`${JSON.stringify({ status: "PASS", pages: selected.size, aggregate_sha256: manifest.aggregate_sha256 })}\n`);

@@ -1,10 +1,10 @@
 {
-  "aggregate_sha256": "431154de6629161695a151ba30946fd08345e811058bf4410e622012e5c743c9",
+  "aggregate_sha256": "92e3e4a6e5b78cb41967c90c3a456d84d09a82d1506418b4d423b5bf8bb4ddf6",
   "authority_path": "backend/content_assets/personality_public/current",
   "compiler_version": "personality.page.per_page.compiler.v1",
   "contract_version": "personality.page.content.current.manifest.v1",
   "coverage": {
-    "baseline_locale_pages": 364,
+    "baseline_locale_pages": 353,
     "by_framework": {
       "big_five": 104,
       "enneagram": 116,
@@ -25,7 +25,7 @@
       "variant": 64,
       "wing": 36
     },
-    "enhanced_locale_pages": 0,
+    "enhanced_locale_pages": 11,
     "files": 364,
     "locale_pages": 364,
     "locales": 2,
@@ -4499,8 +4499,8 @@
     {
       "bytes": 43531,
       "canonical_path": "/zh/personality/esfp",
-      "compatibility_projection_sha256": "ba5a909341bb03ca8790b871995e31de38bcc95c853b1d86c6d9a28247186403",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "6bb0930eacb3717306abaf6a1064f6d3c34da63c0440bbd21aca1e672369f6cd",
+      "content_state": "enhanced",
       "entity_key": "esfp",
       "entity_type": "profile",
       "framework": "mbti",
@@ -4508,9 +4508,9 @@
       "locale": "zh-CN",
       "page_kind": "profile",
       "path": "pages/mbti/profile/esfp/zh-CN.json",
-      "sha256": "dc07293b0bcfbf8f02897c7edc59d09d3dd14890a0783a0ea6ef65c6af93aa46",
+      "sha256": "88789e59f5fe6ef5141067de6a598691d3ab0114e7c8391d8777915486b96c8a",
       "slug": "esfp",
-      "source_content_sha256": "ba5a909341bb03ca8790b871995e31de38bcc95c853b1d86c6d9a28247186403"
+      "source_content_sha256": "6bb0930eacb3717306abaf6a1064f6d3c34da63c0440bbd21aca1e672369f6cd"
     },
     {
       "bytes": 41423,
@@ -4835,8 +4835,8 @@
     {
       "bytes": 591420,
       "canonical_path": "/en/personality/enfj-a",
-      "compatibility_projection_sha256": "8f5f8d1771751c71d23871ce592c53ed7cf5cf138da8601f232285e8bb640b58",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "97db5c4f9b4f00f6622105e79e7376c6d7cbe7ba1f9bdf2ea893ff42cb82ef7a",
+      "content_state": "enhanced",
       "entity_key": "enfj-a",
       "entity_type": "variant",
       "framework": "mbti",
@@ -4844,9 +4844,9 @@
       "locale": "en",
       "page_kind": "variant",
       "path": "pages/mbti/variant/enfj-a/en.json",
-      "sha256": "44181445a2b61d50225c4347b4448c1c2a2e92ae0f55f32468cabd4be2e642e6",
+      "sha256": "b717ed71c3e0b5257a196526a449b4c84a7131b57a819fee895386b76bf90156",
       "slug": "enfj-a",
-      "source_content_sha256": "8f5f8d1771751c71d23871ce592c53ed7cf5cf138da8601f232285e8bb640b58"
+      "source_content_sha256": "97db5c4f9b4f00f6622105e79e7376c6d7cbe7ba1f9bdf2ea893ff42cb82ef7a"
     },
     {
       "bytes": 556627,
@@ -5107,8 +5107,8 @@
     {
       "bytes": 529567,
       "canonical_path": "/zh/personality/esfj-a",
-      "compatibility_projection_sha256": "375b382ac7974dda9a950419a2f07f9cc1e1813251282fc42463e03ecd710a3c",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "c68bac6a616ef586a18acf82cb45b96f2850e25bcf6c6ef9c55171820cf94803",
+      "content_state": "enhanced",
       "entity_key": "esfj-a",
       "entity_type": "variant",
       "framework": "mbti",
@@ -5116,15 +5116,15 @@
       "locale": "zh-CN",
       "page_kind": "variant",
       "path": "pages/mbti/variant/esfj-a/zh-CN.json",
-      "sha256": "302341bd51259fa15c2bfedc959e7042e0ad2bbc6d154048697a2aaaa7ad705d",
+      "sha256": "06b78b034b327ba75695a9b40b623ff9c15de18348bcb30866ad360d63585421",
       "slug": "esfj-a",
-      "source_content_sha256": "375b382ac7974dda9a950419a2f07f9cc1e1813251282fc42463e03ecd710a3c"
+      "source_content_sha256": "c68bac6a616ef586a18acf82cb45b96f2850e25bcf6c6ef9c55171820cf94803"
     },
     {
       "bytes": 599026,
       "canonical_path": "/en/personality/esfj-t",
-      "compatibility_projection_sha256": "cf8bbe6addcd725b23b9cd8e1d124f95a3f79f6eaddc4e163659fd9fde060298",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "75f5648c9881329c35fe321203d1efba0c39c33fb2ac9b93dbc66f53709f6046",
+      "content_state": "enhanced",
       "entity_key": "esfj-t",
       "entity_type": "variant",
       "framework": "mbti",
@@ -5132,9 +5132,9 @@
       "locale": "en",
       "page_kind": "variant",
       "path": "pages/mbti/variant/esfj-t/en.json",
-      "sha256": "dd1a9a5563974c8968f2910ef872422f53d9312cac8daa8ea57b1c4e12d51168",
+      "sha256": "f5447596be0124450585bce86d2157397746d7a8d15e6839d6869d8d755a0aca",
       "slug": "esfj-t",
-      "source_content_sha256": "cf8bbe6addcd725b23b9cd8e1d124f95a3f79f6eaddc4e163659fd9fde060298"
+      "source_content_sha256": "75f5648c9881329c35fe321203d1efba0c39c33fb2ac9b93dbc66f53709f6046"
     },
     {
       "bytes": 706334,
@@ -5187,8 +5187,8 @@
     {
       "bytes": 606486,
       "canonical_path": "/en/personality/esfp-t",
-      "compatibility_projection_sha256": "8ef107357136db78d899fd9fded5ccb0a509b0d7504c1146cbf0441b56c55530",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "a454b8326d6c467e9905cbd52b5a580d3ce10ef9926d5eddf43ce6bd81ea1b95",
+      "content_state": "enhanced",
       "entity_key": "esfp-t",
       "entity_type": "variant",
       "framework": "mbti",
@@ -5196,9 +5196,9 @@
       "locale": "en",
       "page_kind": "variant",
       "path": "pages/mbti/variant/esfp-t/en.json",
-      "sha256": "0f8bc5deab34f4ea786ae9268227487ad1b739cfff77d1b6c836d1707043885c",
+      "sha256": "076811c588c2e31117ce6f5f91e9d6ddff552ee56e937e89484b609b38c41ccb",
       "slug": "esfp-t",
-      "source_content_sha256": "8ef107357136db78d899fd9fded5ccb0a509b0d7504c1146cbf0441b56c55530"
+      "source_content_sha256": "a454b8326d6c467e9905cbd52b5a580d3ce10ef9926d5eddf43ce6bd81ea1b95"
     },
     {
       "bytes": 742020,
@@ -5443,8 +5443,8 @@
     {
       "bytes": 594404,
       "canonical_path": "/en/personality/infp-t",
-      "compatibility_projection_sha256": "3f543c254964d6375959a13821ffbac890332eb7592dfbae4ac7e0aa6397ef5c",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "b662ab9417b6230369515c9b0161b17af3b843cf626b5a602653657daaeb28ac",
+      "content_state": "enhanced",
       "entity_key": "infp-t",
       "entity_type": "variant",
       "framework": "mbti",
@@ -5452,9 +5452,9 @@
       "locale": "en",
       "page_kind": "variant",
       "path": "pages/mbti/variant/infp-t/en.json",
-      "sha256": "e1d9990ceab5466add942d1b06c24dca1e81ce8cb925bd3736920b150ac03dda",
+      "sha256": "5826f9f53ab80e32f5d1cc3079d1abf9d9faa6115e7574ba240836c0b70d490b",
       "slug": "infp-t",
-      "source_content_sha256": "3f543c254964d6375959a13821ffbac890332eb7592dfbae4ac7e0aa6397ef5c"
+      "source_content_sha256": "b662ab9417b6230369515c9b0161b17af3b843cf626b5a602653657daaeb28ac"
     },
     {
       "bytes": 544248,
@@ -5539,8 +5539,8 @@
     {
       "bytes": 620613,
       "canonical_path": "/en/personality/intp-a",
-      "compatibility_projection_sha256": "5b898df8e42bd83599097e641ed6acfdfabd7b9d34334d783adc4b73df923f30",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "ef9e6fc6ed4b73a5f093beb4e40aac984bfaf453928a3ad468633ebaffce0956",
+      "content_state": "enhanced",
       "entity_key": "intp-a",
       "entity_type": "variant",
       "framework": "mbti",
@@ -5548,15 +5548,15 @@
       "locale": "en",
       "page_kind": "variant",
       "path": "pages/mbti/variant/intp-a/en.json",
-      "sha256": "a6e96855c02a95fe87632fd78129fda453f6cc2653af540a93e3ddb134b17a40",
+      "sha256": "20586b39ef18af4eede53880e0796f0f3cc3da07d9c37776401fa5f826c8fcbc",
       "slug": "intp-a",
-      "source_content_sha256": "5b898df8e42bd83599097e641ed6acfdfabd7b9d34334d783adc4b73df923f30"
+      "source_content_sha256": "ef9e6fc6ed4b73a5f093beb4e40aac984bfaf453928a3ad468633ebaffce0956"
     },
     {
       "bytes": 511733,
       "canonical_path": "/zh/personality/intp-a",
-      "compatibility_projection_sha256": "28a8261af5b99d19eabf9897da470dd060885ed718c9f931a0545c4dc7ac6bfb",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "f4a9e6c44b38ce22c323ab958146908c3d47980fbba3e9fb81bb275eac6978ae",
+      "content_state": "enhanced",
       "entity_key": "intp-a",
       "entity_type": "variant",
       "framework": "mbti",
@@ -5564,9 +5564,9 @@
       "locale": "zh-CN",
       "page_kind": "variant",
       "path": "pages/mbti/variant/intp-a/zh-CN.json",
-      "sha256": "deea466ddd8487978bd94ded812e0157ba26e25c9a1a3149e9cf2f9cb4c1b940",
+      "sha256": "098c5d53ebad7e87598a5c4062083aea1cbadacba069d8733b0a1ae1bb4bdddb",
       "slug": "intp-a",
-      "source_content_sha256": "28a8261af5b99d19eabf9897da470dd060885ed718c9f931a0545c4dc7ac6bfb"
+      "source_content_sha256": "f4a9e6c44b38ce22c323ab958146908c3d47980fbba3e9fb81bb275eac6978ae"
     },
     {
       "bytes": 623235,
@@ -5683,8 +5683,8 @@
     {
       "bytes": 601196,
       "canonical_path": "/zh/personality/isfp-a",
-      "compatibility_projection_sha256": "78e9ba813fef35b0bc7d43c9680b758aca622f43229985f2e30c2e640cb971ab",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "5665cac32b352341d83301c633511626d0aa3ad485c1d59e9cc10f5845b22dd8",
+      "content_state": "enhanced",
       "entity_key": "isfp-a",
       "entity_type": "variant",
       "framework": "mbti",
@@ -5692,9 +5692,9 @@
       "locale": "zh-CN",
       "page_kind": "variant",
       "path": "pages/mbti/variant/isfp-a/zh-CN.json",
-      "sha256": "54ca4b644a154254a444453588d6f8a5f02dbd9334634dfeee9cac4b9ac8abba",
+      "sha256": "96824844599e389c4df35bde826552482933714f25d03afd856c26a368052e46",
       "slug": "isfp-a",
-      "source_content_sha256": "78e9ba813fef35b0bc7d43c9680b758aca622f43229985f2e30c2e640cb971ab"
+      "source_content_sha256": "5665cac32b352341d83301c633511626d0aa3ad485c1d59e9cc10f5845b22dd8"
     },
     {
       "bytes": 610120,
@@ -5747,8 +5747,8 @@
     {
       "bytes": 574842,
       "canonical_path": "/zh/personality/istj-a",
-      "compatibility_projection_sha256": "882f6ca18830a78a6dbabaf1e419e0e448f1b2de0e0ca379b2e1f2481d3a9f58",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "36781ddac7384e639cd466b3fb580554999f2f24cedf0f3aae595a1ab96725dd",
+      "content_state": "enhanced",
       "entity_key": "istj-a",
       "entity_type": "variant",
       "framework": "mbti",
@@ -5756,9 +5756,9 @@
       "locale": "zh-CN",
       "page_kind": "variant",
       "path": "pages/mbti/variant/istj-a/zh-CN.json",
-      "sha256": "94de44b09c67986e89eee2fdfff94e31ebc1977cb42e51c6e2fa37986ebdb950",
+      "sha256": "068ccc22b0df2595650becb395bc8b5caeccaefcfcbf5a936848b1f9f4f70da3",
       "slug": "istj-a",
-      "source_content_sha256": "882f6ca18830a78a6dbabaf1e419e0e448f1b2de0e0ca379b2e1f2481d3a9f58"
+      "source_content_sha256": "36781ddac7384e639cd466b3fb580554999f2f24cedf0f3aae595a1ab96725dd"
     },
     {
       "bytes": 596145,
@@ -5811,8 +5811,8 @@
     {
       "bytes": 573050,
       "canonical_path": "/zh/personality/istp-a",
-      "compatibility_projection_sha256": "4c969e408faaa20d871a9add3fd4a4e2ebbc1dd4d114a6a801783dc3c9a06d06",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "b8bb07d92367acf44f6c9f3c75d25244e5ce33d2582e97cc2ac450b3f7bef67b",
+      "content_state": "enhanced",
       "entity_key": "istp-a",
       "entity_type": "variant",
       "framework": "mbti",
@@ -5820,9 +5820,9 @@
       "locale": "zh-CN",
       "page_kind": "variant",
       "path": "pages/mbti/variant/istp-a/zh-CN.json",
-      "sha256": "f550de3eb7cdee67eceacc563b6290d42dd20362162647f8c638dba70dfc6a42",
+      "sha256": "fe5fbe7a4e953a6949995981093b2d4746f947cc8c250c8d8fe1be99f3370a38",
       "slug": "istp-a",
-      "source_content_sha256": "4c969e408faaa20d871a9add3fd4a4e2ebbc1dd4d114a6a801783dc3c9a06d06"
+      "source_content_sha256": "b8bb07d92367acf44f6c9f3c75d25244e5ce33d2582e97cc2ac450b3f7bef67b"
     },
     {
       "bytes": 604434,
@@ -5863,9 +5863,9 @@
   ],
   "schema_version": "personality.page.content.v1",
   "set_hashes": {
-    "compatibility_projection_aggregate_sha256": "8847990ac68fc7646b2b7b67f92dd0137a60b9eda03d4da183f043a75d15044a",
+    "compatibility_projection_aggregate_sha256": "e9199c3b155415ccb7c28eb4490d43e1611fed2be8f7f5222d8d47635654bf86",
     "locale_page_identity_set_sha256": "8227ad2bf9e0a4689d810b41dc8250e0fd802218a84d6a7c21cfcdfc338bd23f",
     "route_set_sha256": "59ad54623c9a1392c2446dc67767179180e6feeaa0fedd3b537f664c9611f9ca",
-    "source_semantic_aggregate_sha256": "8847990ac68fc7646b2b7b67f92dd0137a60b9eda03d4da183f043a75d15044a"
+    "source_semantic_aggregate_sha256": "e9199c3b155415ccb7c28eb4490d43e1611fed2be8f7f5222d8d47635654bf86"
   }
 }
