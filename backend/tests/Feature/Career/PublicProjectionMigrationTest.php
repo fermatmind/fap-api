@@ -66,6 +66,9 @@ final class PublicProjectionMigrationTest extends TestCase
         Projection::forever($base.':lkg', 'v1');
         Projection::forever($base.':versions:v1', ['body' => '完整正文']);
         Projection::put('seo:sitemap-source:v1:fresh', ['urls' => ['/zh/career/jobs/test-role']], 600);
+        Projection::put('career:public-authority:job-index:v3:en:public:pins:v1', true, 172800);
+        Projection::put('career:public-authority:directory-read-model:v2:en:pins:v1', true, 172800);
+        Projection::forever('career:public-authority:job-index:v3:en:public:activated-at', 1700000000);
         Cache::forever('limiter:sentinel', 3);
         Cache::forever('career:public-authority:unclassified-state', 'keep');
         Cache::forever('career:public-authority:directory-read-model:v2:en:rebuild-lock', 'keep-lock');
@@ -91,6 +94,9 @@ final class PublicProjectionMigrationTest extends TestCase
         $this->assertNull(Cache::store('public_projection')->get('career:public-authority:unclassified-state'));
         $this->assertNull(Cache::store('public_projection')->get('career:public-authority:directory-read-model:v2:en:rebuild-lock'));
         $this->assertSame(['inline' => 'public payload'], Projection::get('career:public-authority:first-wave-next-step:v1:test-role:en:active'));
+        $this->assertTrue(Cache::store('public_projection')->get('career:public-authority:job-index:v3:en:public:pins:v1'));
+        $this->assertTrue(Cache::store('public_projection')->get('career:public-authority:directory-read-model:v2:en:pins:v1'));
+        $this->assertSame(Cache::get('career:public-authority:job-index:v3:en:public:activated-at'), Cache::store('public_projection')->get('career:public-authority:job-index:v3:en:public:activated-at'));
         $this->assertFalse(Projection::lock('publication:sentinel', 60)->get());
         Projection::forever($base.':versions:v2', ['body' => 'updated']);
         Projection::forever($base.':active', 'v2');

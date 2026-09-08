@@ -21,9 +21,9 @@ final class PublicProjectionCache
             .'job-detail:v1:[a-z0-9-]+:(?:en|zh-CN)'
             .'|job-detail:v3:[a-z0-9-]+:(?:en|zh-CN):(?:active|lkg|negative|(?:versions|exposure-projections|pins):[^:]+)'
             .'|job-index:v2:(?:en|zh-CN):(?:public|with-non-indexable)'
-            .'|job-index:v3:(?:en|zh-CN):(?:public|with-non-indexable):(?:active|lkg|versions:[^:]+)'
+            .'|job-index:v3:(?:en|zh-CN):(?:public|with-non-indexable):(?:active|lkg|activated-at|(?:versions|pins):[^:]+)'
             .'|directory-read-model:v1:(?:en|zh-CN)'
-            .'|directory-read-model:v2:(?:en|zh-CN):(?:active|lkg|activated-at|last-rebuild-ms|versions:[^:]+)'
+            .'|directory-read-model:v2:(?:en|zh-CN):(?:active|lkg|activated-at|last-rebuild-ms|(?:versions|pins):[^:]+)'
             .'|first-wave-next-step:v1:[a-z0-9-]+:(?:en|zh-CN):(?:active|lkg|negative)'
             .')$~D', $key) === 1;
     }
