@@ -1,10 +1,10 @@
 {
-  "aggregate_sha256": "b0627dda9a357ef7d20bc2a5f325412c5454c464cc509dbdd535cb597bfc2bd9",
+  "aggregate_sha256": "77db535a96d8035d080c1568d8401205d2b71e1286b1e9019ba80d34b92cab4d",
   "authority_path": "backend/content_assets/personality_public/current",
   "compiler_version": "personality.page.per_page.compiler.v1",
   "contract_version": "personality.page.content.current.manifest.v1",
   "coverage": {
-    "baseline_locale_pages": 348,
+    "baseline_locale_pages": 345,
     "by_framework": {
       "big_five": 104,
       "enneagram": 116,
@@ -25,7 +25,7 @@
       "variant": 64,
       "wing": 36
     },
-    "enhanced_locale_pages": 16,
+    "enhanced_locale_pages": 19,
     "files": 364,
     "locale_pages": 364,
     "locales": 2,
@@ -145,10 +145,10 @@
       "source_content_sha256": "158ccba8dd97ffb96065a036a3c75dafbbf0c06397ae04898b67c9488cbe12b0"
     },
     {
-      "bytes": 32971,
+      "bytes": 32528,
       "canonical_path": "/zh/personality/big-five/neuroticism",
-      "compatibility_projection_sha256": "eab911c774222fae0f882aeae67ff94dc0800bb7d7148f6b78cf38481dfe8da4",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "7863565024a02af1bfb2a73f79c8a927c94d7d5e9aecc95f5835ea776ad0c737",
+      "content_state": "enhanced",
       "entity_key": "neuroticism",
       "entity_type": "domain",
       "framework": "big_five",
@@ -156,9 +156,9 @@
       "locale": "zh-CN",
       "page_kind": "domain",
       "path": "pages/big-five/domain/neuroticism/zh-CN.json",
-      "sha256": "17cf2b5b90ffbed232ce9d1dbbe5448d7fa217893f39b9456ef8b6412a605895",
+      "sha256": "c57e7fdc30b79377bc27f903c326201d7bcd0d24702b13f8c6f04b52ca71a3a1",
       "slug": "big-five/neuroticism",
-      "source_content_sha256": "eab911c774222fae0f882aeae67ff94dc0800bb7d7148f6b78cf38481dfe8da4"
+      "source_content_sha256": "7863565024a02af1bfb2a73f79c8a927c94d7d5e9aecc95f5835ea776ad0c737"
     },
     {
       "bytes": 26628,
@@ -1265,10 +1265,10 @@
       "source_content_sha256": "3f148c94a6149f49cdd3f874c13dc0a897979e2c72355463cd6ad3a659803bba"
     },
     {
-      "bytes": 20602,
+      "bytes": 20843,
       "canonical_path": "/zh/personality/big-five/agreeableness-low",
-      "compatibility_projection_sha256": "f69834c34ad059467a8094fbd716aac8c335ef3facf8b356fb905ec9f308309b",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "8f43e3d90ffdf94d36d8f12740bd5bfba726603799329a77b935c9a9e72f06a4",
+      "content_state": "enhanced",
       "entity_key": "agreeableness-low",
       "entity_type": "polarity",
       "framework": "big_five",
@@ -1276,9 +1276,9 @@
       "locale": "zh-CN",
       "page_kind": "polarity",
       "path": "pages/big-five/polarity/agreeableness-low/zh-CN.json",
-      "sha256": "0c00d584d0295ac92d3d0607e7b95765c482536d5c178697f8d61e699c43d5df",
+      "sha256": "d9812c5f519732e6bb63c907e75224158819ef9bc30de83f47fdf609aba7c1ff",
       "slug": "big-five/agreeableness-low",
-      "source_content_sha256": "f69834c34ad059467a8094fbd716aac8c335ef3facf8b356fb905ec9f308309b"
+      "source_content_sha256": "8f43e3d90ffdf94d36d8f12740bd5bfba726603799329a77b935c9a9e72f06a4"
     },
     {
       "bytes": 13473,
@@ -1617,10 +1617,10 @@
       "source_content_sha256": "f8b6f14def830e81eea6d99dc35bafd77dcb9c505a715fde7d50b998e34b1eec"
     },
     {
-      "bytes": 20138,
+      "bytes": 20376,
       "canonical_path": "/zh/personality/big-five/openness-high",
-      "compatibility_projection_sha256": "d0507c3107d4751e7bb8900e04826bb547e60504c7eba9e65e3dc549303325a6",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "7894252e72a93822caeaedc12afe428593c28c3a3a2160aac1afaf3f9b8dfe8d",
+      "content_state": "enhanced",
       "entity_key": "openness-high",
       "entity_type": "polarity",
       "framework": "big_five",
@@ -1628,9 +1628,9 @@
       "locale": "zh-CN",
       "page_kind": "polarity",
       "path": "pages/big-five/polarity/openness-high/zh-CN.json",
-      "sha256": "a818ea85d5d57fe00aead89c835cdd801ca11fc74b2b7210562a1a03e1e28408",
+      "sha256": "49157e9293d1d81d046937c7b167d9bd28e6ff8d972cf3c97d25c660cbb51a18",
       "slug": "big-five/openness-high",
-      "source_content_sha256": "d0507c3107d4751e7bb8900e04826bb547e60504c7eba9e65e3dc549303325a6"
+      "source_content_sha256": "7894252e72a93822caeaedc12afe428593c28c3a3a2160aac1afaf3f9b8dfe8d"
     },
     {
       "bytes": 13979,
@@ -5863,9 +5863,9 @@
   ],
   "schema_version": "personality.page.content.v1",
   "set_hashes": {
-    "compatibility_projection_aggregate_sha256": "e02e652188c91cfba324d9e6f2bf33a7b182bdc396b01aefb3c65c0759adc9a0",
+    "compatibility_projection_aggregate_sha256": "b161956d828701e6a2cd7932790651a1dd97c8425c9ccd5edcdda0c703d13941",
     "locale_page_identity_set_sha256": "8227ad2bf9e0a4689d810b41dc8250e0fd802218a84d6a7c21cfcdfc338bd23f",
     "route_set_sha256": "59ad54623c9a1392c2446dc67767179180e6feeaa0fedd3b537f664c9611f9ca",
-    "source_semantic_aggregate_sha256": "e02e652188c91cfba324d9e6f2bf33a7b182bdc396b01aefb3c65c0759adc9a0"
+    "source_semantic_aggregate_sha256": "b161956d828701e6a2cd7932790651a1dd97c8425c9ccd5edcdda0c703d13941"
   }
 }
