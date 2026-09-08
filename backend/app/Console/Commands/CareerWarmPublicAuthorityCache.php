@@ -201,7 +201,9 @@ final class CareerWarmPublicAuthorityCache extends Command
                 $this->line(sprintf('career_warm_phase=%s state=%s', $phase, $state));
             }
         };
-        $summary = $cache->warm($reporter);
+        // An authority/schema/compiler change must rotate versions even when the
+        // rendered payload happens to match. Ordinary identical warms may reuse.
+        $summary = $cache->warm($reporter, reuseVersions: false);
         $cacheReadiness = $this->publicAuthorityCacheReadiness($cache);
         if (($cacheReadiness['ready'] ?? false) !== true) {
             throw new \RuntimeException('Career public authority cache rebuild did not produce a readable cache set.');

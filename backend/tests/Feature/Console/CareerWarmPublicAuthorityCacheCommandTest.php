@@ -48,6 +48,10 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
         $this->assertSame($first['fingerprint_sha256'], $second['fingerprint_sha256']);
         $this->assertSame($versions['en'], $cache->directoryCacheStatus('en')['active_version']);
         $this->assertSame($versions['zh-CN'], $cache->directoryCacheStatus('zh-CN')['active_version']);
+        for ($attempt = 0; $attempt < 20; $attempt++) {
+            $this->assertSame(0, Artisan::call('career:warm-public-authority-cache', ['--refresh-if-changed' => true, '--json' => true]));
+            $this->assertSame($versions['en'], $cache->directoryCacheStatus('en')['active_version']);
+        }
 
         $this->artisan('career:warm-public-authority-cache', [
             '--refresh-if-changed' => true,

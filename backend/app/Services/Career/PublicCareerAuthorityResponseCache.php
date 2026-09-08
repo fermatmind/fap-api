@@ -67,6 +67,8 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
 
     private const DIRECTORY_REBUILD_LOCK_WORK_LEASE_SECONDS = 120;
 
+    private bool $reuseImmutableVersions = true;
+
     public function __construct(
         private readonly CareerPublicDatasetContractBuilder $datasetContractBuilder,
         private readonly CareerLaunchGovernanceClosureService $launchGovernanceClosureService,
@@ -1187,7 +1189,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         $activeKey = $this->jobDetailActiveVersionKey($normalizedSlug, $normalizedLocale);
         $previousVersion = Cache::get($activeKey);
         $storedPayload = $this->withoutDerivedContentV3($payload, $normalizedSlug, $normalizedLocale);
-        if (is_string($previousVersion) && $previousVersion !== ''
+        if ($this->reuseImmutableVersions && is_string($previousVersion) && $previousVersion !== ''
             && $this->readStoredJobDetailPayload($this->jobDetailVersionPayloadKey($normalizedSlug, $normalizedLocale, $previousVersion)) === $storedPayload
             && Cache::get($this->jobDetailExposureProjectionVersionKey($normalizedSlug, $normalizedLocale, $previousVersion)) === $exposureProjectionItem) {
             // Reuse only the complete current payload AND its publication discriminator.
@@ -1380,7 +1382,18 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     /**
      * @return array<string, array{cache_key: string, member_count?: int, status: string}>
      */
-    public function warm(?callable $reporter = null): array
+    public function warm(?callable $reporter = null, bool $reuseVersions = true): array
+    {
+        $previous = $this->reuseImmutableVersions;
+        $this->reuseImmutableVersions = $reuseVersions;
+        try {
+            return $this->warmPayloads($reporter);
+        } finally {
+            $this->reuseImmutableVersions = $previous;
+        }
+    }
+
+    private function warmPayloads(?callable $reporter): array
     {
         $reporter?->__invoke('dataset_payloads', 'starting');
         [$datasetHub, $datasetMethod] = $this->refreshDatasetPayloads();
@@ -1613,7 +1626,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         $snapshots = [];
         foreach ($payloadsByLocale as $locale => $payload) {
             $current = Cache::get($this->jobIndexActiveVersionKey($locale, $includeNonIndexable));
-            $version = is_string($current) && $current !== '' && Cache::get($this->jobIndexVersionPayloadKey($locale, $includeNonIndexable, $current)) === $payload
+            $version = $this->reuseImmutableVersions && is_string($current) && $current !== '' && Cache::get($this->jobIndexVersionPayloadKey($locale, $includeNonIndexable, $current)) === $payload
                 ? $current : (string) Str::ulid();
             $payloadKey = $this->jobIndexVersionPayloadKey($locale, $includeNonIndexable, $version);
             Cache::forever($payloadKey, $payload);
@@ -1927,7 +1940,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         $version = (string) Str::ulid();
         $activeKey = $this->directoryActiveVersionKey($normalizedLocale);
         $previousVersion = Cache::get($activeKey);
-        if (is_string($previousVersion) && $previousVersion !== ''
+        if ($this->reuseImmutableVersions && is_string($previousVersion) && $previousVersion !== ''
             && Cache::get($this->directoryVersionPayloadKey($normalizedLocale, $previousVersion)) === $payload) {
             Cache::forever($this->directoryActivatedAtKey($normalizedLocale), now()->timestamp);
 
@@ -1957,7 +1970,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
 
         foreach ($payloadsByLocale as $locale => $payload) {
             $current = Cache::get($this->directoryActiveVersionKey($locale));
-            $version = is_string($current) && $current !== '' && Cache::get($this->directoryVersionPayloadKey($locale, $current)) === $payload
+            $version = $this->reuseImmutableVersions && is_string($current) && $current !== '' && Cache::get($this->directoryVersionPayloadKey($locale, $current)) === $payload
                 ? $current : (string) Str::ulid();
             $payloadKey = $this->directoryVersionPayloadKey($locale, $version);
             Cache::forever($payloadKey, $payload);
