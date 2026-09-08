@@ -23,8 +23,8 @@ final class CareerCurrentAuthorityParityTest extends TestCase
         self::assertSame(CareerCurrentAuthorityParity::MODE_PACKAGE, $receipt['mode']);
         self::assertSame('pass', $receipt['status']);
         self::assertSame(4, $receipt['architecture_slice']['counts']['locale_pages']);
-        self::assertSame(2, $receipt['architecture_slice']['content_states']['enhanced']);
-        self::assertSame(2, $receipt['architecture_slice']['content_states']['legacy']);
+        self::assertSame(3, $receipt['architecture_slice']['content_states']['enhanced']);
+        self::assertSame(1, $receipt['architecture_slice']['content_states']['legacy']);
         self::assertSame(1046, $receipt['full_scan']['counts']['slugs']);
         self::assertSame(2092, $receipt['full_scan']['counts']['locale_pages']);
         self::assertSame(2092, $receipt['full_scan']['counts']['encoded']);

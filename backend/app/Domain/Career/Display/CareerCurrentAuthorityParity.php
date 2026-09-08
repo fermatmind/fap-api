@@ -92,9 +92,11 @@ final class CareerCurrentAuthorityParity
             ? $full
             : $this->scanPages($authority, self::PACKAGE_SLICE_SLUGS, false, 'none');
         unset($slice['database_row_set_sha256']);
+        // Accountant remains bilingual enhanced; the reviewed Chinese actor page
+        // is enhanced while its English page still exercises the legacy path.
         $expectedSlice = $mode === self::MODE_PRODUCTION_PREACTIVATION
             ? ['enhanced' => 2, 'legacy' => 0, 'locale_pages' => 2]
-            : ['enhanced' => 2, 'legacy' => 2, 'locale_pages' => 4];
+            : ['enhanced' => 3, 'legacy' => 1, 'locale_pages' => 4];
         if (($slice['content_states']['enhanced'] ?? null) !== $expectedSlice['enhanced']
             || ($slice['content_states']['legacy'] ?? null) !== $expectedSlice['legacy']
             || ($slice['counts']['locale_pages'] ?? null) !== $expectedSlice['locale_pages']) {
