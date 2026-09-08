@@ -34,6 +34,26 @@ final class CareerWarmFingerprintDeployTest extends TestCase
             $source,
         );
         $this->assertStringContainsString(
+            "set('career_detail_cache_repair_executed', \$repairReport['repair']['write_executed'])",
+            $source,
+        );
+        $this->assertStringContainsString(
+            "(\$repairReport['status'] ?? null) !== 'sync_repair_completed'",
+            $source,
+        );
+        $this->assertStringContainsString(
+            "! is_bool(\$repairReport['repair']['write_executed'] ?? null)",
+            $source,
+        );
+        $this->assertStringContainsString(
+            "get('career_detail_cache_repair_executed', false) !== true",
+            $source,
+        );
+        $this->assertStringContainsString(
+            'Skipping Career directory-only rebuild because detail cache coverage required no repairs.',
+            $source,
+        );
+        $this->assertStringContainsString(
             "after('career:warm-public-authority-cache', 'career:rebuild-directory-after-detail-repair')",
             $source,
         );

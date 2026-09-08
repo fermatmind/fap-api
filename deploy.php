@@ -778,13 +778,23 @@ task('career:repair-published-detail-cache-coverage', function () {
         ? ' --confirm-production-write'
         : '';
 
-    run(sprintf(
+    $repairOutput = run(sprintf(
         'timeout 300 {{bin/php}} %s career:verify-job-detail-cache-coverage --repair-missing-sync --locales=en,zh-CN --minimum-targets=%d --maximum-sync-repairs=%d --json --no-interaction --no-ansi%s',
         deployPlaceholderPathArg('{{release_path}}', 'backend/artisan'),
         $minimumTargets,
         (int) $maximumRepairsRaw,
         $productionConfirmation,
     ));
+
+    $repairReport = json_decode(trim($repairOutput), true, flags: JSON_THROW_ON_ERROR);
+    if (! is_array($repairReport)
+        || ($repairReport['status'] ?? null) !== 'sync_repair_completed'
+        || ! is_array($repairReport['repair'] ?? null)
+        || ! is_bool($repairReport['repair']['write_executed'] ?? null)) {
+        throw new \RuntimeException('Career detail cache repair returned an invalid completion report.');
+    }
+
+    set('career_detail_cache_repair_executed', $repairReport['repair']['write_executed']);
 });
 
 before('deploy:symlink', 'guard:queue-reload-capability');
@@ -816,9 +826,10 @@ BASH,
 });
 
 /**
- * Detail coverage changes which Career links are reader-safe. Always rebuild
- * both directory locales after the bounded detail repair and complete coverage
- * gate, even when the broader warm fingerprint was unchanged.
+ * Detail coverage changes which Career links are reader-safe. Rebuild both
+ * directory locales only when the bounded repair actually wrote a detail
+ * cache entry; a verified no-op repair must not duplicate unchanged directory
+ * candidates or consume production Redis capacity.
  */
 task('career:rebuild-directory-after-detail-repair', function () {
     if (deployBooleanOption('a08_gate_only', false)) {
@@ -826,6 +837,11 @@ task('career:rebuild-directory-after-detail-repair', function () {
     }
     if (deployMode() !== 'standard') {
         writeln('<comment>Skipping Career directory-only rebuild outside standard deploy.</comment>');
+
+        return;
+    }
+    if (get('career_detail_cache_repair_executed', false) !== true) {
+        writeln('<comment>Skipping Career directory-only rebuild because detail cache coverage required no repairs.</comment>');
 
         return;
     }
