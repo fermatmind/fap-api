@@ -63,3 +63,21 @@ test("production publisher is bound to the preactivation receipt digest", () => 
   assert.match(publisher, /CareerJobDetailCanonicalCacheReader::compilerDigest\(\)/);
   assert.match(publisher, /CareerJobDetailCanonicalCacheReader::codecDigest\(\)/);
 });
+
+
+test("Career publisher respects the resolved publication decision for mixed cache/control releases", () => {
+  const expression = deploy.match(/career-current-publish:[\s\S]*?\n    if: ([^\n]+)/)?.[1];
+  assert.ok(expression);
+  for (const [production, boundary, authorized, expected] of [
+    ["success", "true", "false", false],
+    ["success", "true", "true", true],
+    ["failure", "true", "true", false],
+    ["success", "false", "true", false],
+  ]) {
+    const resolved = expression
+      .replaceAll("needs.production.result", JSON.stringify(production))
+      .replaceAll("needs.policy.outputs.career_current_release", JSON.stringify(boundary))
+      .replaceAll("needs.policy.outputs.career_current", JSON.stringify(authorized));
+    assert.equal(Function(`return (${resolved})`)(), expected);
+  }
+});
