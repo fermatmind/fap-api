@@ -24,8 +24,11 @@ final class CareerPrunePublicCacheVersions extends Command
         }
         $deadline = microtime(true) + $seconds;
         $root = storage_path('app/private/career-cache-retention');
-        File::ensureDirectoryExists($root, 0700);
+        File::ensureDirectoryExists($root, 0770);
         $lease = fopen(storage_path('app/private/career-cache-retention.lock'), 'c');
+        if ($lease !== false) {
+            chmod(storage_path('app/private/career-cache-retention.lock'), 0660);
+        }
         if ($lease === false || ! flock($lease, LOCK_EX | LOCK_NB)) {
             $this->line('{"status":"busy"}');
 
@@ -93,9 +96,9 @@ final class CareerPrunePublicCacheVersions extends Command
         $backups->assertHeadroom($backupBytes, 1048576);
         $prefix = (string) $redis->getOption(\Redis::OPT_PREFIX).$store->getPrefix();
         $directory = $root.'/'.gmdate('Ymd-His').'-'.bin2hex(random_bytes(4));
-        File::ensureDirectoryExists($directory, 0700);
+        File::ensureDirectoryExists($directory, 0770);
         $plan = fopen($directory.'/plan.jsonl', 'xb');
-        chmod($directory.'/plan.jsonl', 0600);
+        chmod($directory.'/plan.jsonl', 0660);
         $cursorPath = storage_path('app/private/career-cache-retention-cursor.json');
         $scanState = is_file($cursorPath) ? json_decode((string) file_get_contents($cursorPath), true) : null;
         $cursor = $this->option('pressure') && is_array($scanState) && ($scanState['prefix'] ?? null) === $prefix
@@ -165,7 +168,7 @@ final class CareerPrunePublicCacheVersions extends Command
             throw new \RuntimeException('Insufficient disk headroom for durable Career cache backups.');
         }
         $backup = fopen($directory.'/removed.jsonl', 'xb');
-        chmod($directory.'/removed.jsonl', 0600);
+        chmod($directory.'/removed.jsonl', 0660);
         $protected = [];
         $removed = 0;
         $freed = 0;

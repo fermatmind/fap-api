@@ -18,8 +18,11 @@ final class CacheLifecycleAlerts
             throw new \InvalidArgumentException('Unknown cache lifecycle component.');
         }
         $root = storage_path('app/ops/cache-lifecycle');
-        File::ensureDirectoryExists($root, 0700);
+        File::ensureDirectoryExists($root, 0770);
         $lease = fopen($root.'/'.$component.'.lock', 'c');
+        if ($lease !== false) {
+            chmod($root.'/'.$component.'.lock', 0660);
+        }
         if ($lease === false || ! flock($lease, LOCK_EX | LOCK_NB)) {
             throw new \RuntimeException('Cache lifecycle observation lock unavailable.');
         }
@@ -49,7 +52,7 @@ final class CacheLifecycleAlerts
                 || ! rename($temporary, $path)) {
                 throw new \RuntimeException('Cache lifecycle observation write failed.');
             }
-            chmod($path, 0600);
+            chmod($path, 0660);
         } finally {
             flock($lease, LOCK_UN);
             fclose($lease);

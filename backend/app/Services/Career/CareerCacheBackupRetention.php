@@ -13,7 +13,7 @@ final class CareerCacheBackupRetention
 
     public function rotateAndMeasure(string $root, int $now, bool $apply = true): int
     {
-        File::ensureDirectoryExists($root, 0700);
+        File::ensureDirectoryExists($root, 0770);
         $total = 0;
         foreach (new \DirectoryIterator($root) as $entry) {
             if ($entry->isDot()) {

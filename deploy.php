@@ -3104,6 +3104,12 @@ task('career:public-authority-cache-rebuilt', function () {
     writeln('<info>Career public authority cache rebuilt for a changed fingerprint.</info>');
 });
 
+task('prepare:cache-lifecycle-storage', function () {
+    $script = deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/prepare_cache_lifecycle_storage.py');
+    $storage = deployPlaceholderPathArg('{{deploy_path}}', 'shared/backend/storage');
+    run('sudo -n python3 '.$script.' --storage-root '.$storage, ['timeout' => 60]);
+});
+
 task('career:prune-public-cache-versions', function () {
     within('{{release_path}}/backend', function (): void {
         run('timeout --kill-after=30s 900 {{bin/php}} artisan career:prune-public-cache-versions --apply --no-interaction --no-ansi', ['timeout' => 960]);
@@ -4961,7 +4967,8 @@ after('big5:publish-private-result-authority', 'riasec:publish-private-result-au
 after('riasec:publish-private-result-authority', 'enneagram:publish-private-result-authority');
 after('enneagram:publish-private-result-authority', 'eq60:publish-private-result-authority');
 after('eq60:publish-private-result-authority', 'guard:career-runtime-projection-authority');
-after('guard:career-runtime-projection-authority', 'career:prune-public-cache-versions');
+after('guard:career-runtime-projection-authority', 'prepare:cache-lifecycle-storage');
+after('prepare:cache-lifecycle-storage', 'career:prune-public-cache-versions');
 after('career:prune-public-cache-versions', 'career:repair-published-detail-cache-coverage');
 after('career:repair-published-detail-cache-coverage', 'guard:career-detail-cache-coverage');
 after('guard:career-detail-cache-coverage', 'career:warm-public-authority-cache');
