@@ -25,7 +25,7 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "ac469e7dac6c0ae3ffa815339bb8c15618bdfe04",
+      "answer_fingerprint": "4e7f822cd1ae65e0822a84f1ab11c824da210dad",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [
@@ -45,8 +45,8 @@
         }
       ],
       "evidence_refs": [
-        "791eb5ed9a246f05d539789bc38ede2683fe46ca",
-        "59dbb5d1b8d6efb269785b8a7a70f5a9e272e062",
+        "36a83cdcd65776462027e13f3e5748e553ea9017",
+        "e07a6abd71d7984d195518f7bd04a0f6d789efa8",
         "mbti_public_projection_v1",
         "projection_dimensions",
         "personality_sections",
@@ -55,7 +55,7 @@
       ],
       "faq_blocks": [
         {
-          "answer": "ISTJ-A 指 ISTJ 的 A 型表达，描述的是 责任感、经验校准和可靠执行 这类偏好与压力反馈方式，不是能力等级或诊断标签。",
+          "answer": "ISTJ-A 指 ISTJ 四组偏好与 A 型身份风格的组合，常见表现是重视事实、流程与可靠交付，面对反馈时自我确认较稳定。A/T 不是官方 MBTI 原生维度，也不是能力等级或诊断标签。",
           "key": "mbti_content15_faq-0",
           "question": "ISTJ-A 是什么意思？"
         },
@@ -76,28 +76,28 @@
         }
       ],
       "indexability_state": "indexable",
-      "landing_surface_ref": "59dbb5d1b8d6efb269785b8a7a70f5a9e272e062",
+      "landing_surface_ref": "e07a6abd71d7984d195518f7bd04a0f6d789efa8",
       "next_step_blocks": [
         {
           "body": null,
           "href": "/zh/personality/istj-t",
           "key": "mbti-content15-profile-link-0",
           "kind": "content_continue",
-          "title": "ISTJ T"
+          "title": "ISTJ-T 人格特点"
         },
         {
           "body": null,
           "href": "/zh/personality/istj-a-vs-istj-t",
           "key": "mbti-content15-profile-link-1",
           "kind": "content_continue",
-          "title": "ISTJ A VS ISTJ T"
+          "title": "ISTJ-A 与 ISTJ-T 对比"
         },
         {
           "body": null,
           "href": "/zh/personality/istj-vs-isfj",
           "key": "mbti-content15-profile-link-2",
           "kind": "content_continue",
-          "title": "ISTJ VS ISFJ"
+          "title": "ISTJ 与 ISFJ 对比"
         },
         {
           "body": null,
@@ -160,10 +160,10 @@
           "title": "成长建议"
         }
       ],
-      "seo_surface_ref": "791eb5ed9a246f05d539789bc38ede2683fe46ca",
+      "seo_surface_ref": "36a83cdcd65776462027e13f3e5748e553ea9017",
       "summary_blocks": [
         {
-          "body": "ISTJ-A 表示内向、实感、思考、判断四组偏好，并加入 FermatMind 的 A 型扩展：常见表现是重视事实、流程与可靠交付，面对反馈时自我确认较稳定。",
+          "body": "ISTJ-A 表示内向、实感、思考、判断四组偏好，并用 A 后缀描述面对反馈时较稳定的自我确认。A/T 不是官方 MBTI 原生维度。",
           "href": null,
           "key": "type_summary",
           "kind": "answer_first",
@@ -178,21 +178,21 @@
         "href": "/zh/personality/istj-t",
         "key": "mbti-content15-profile-link-0",
         "kind": "content_continue",
-        "label": "ISTJ T",
+        "label": "ISTJ-T 人格特点",
         "locale": "zh-CN"
       },
       {
         "href": "/zh/personality/istj-a-vs-istj-t",
         "key": "mbti-content15-profile-link-1",
         "kind": "content_continue",
-        "label": "ISTJ A VS ISTJ T",
+        "label": "ISTJ-A 与 ISTJ-T 对比",
         "locale": "zh-CN"
       },
       {
         "href": "/zh/personality/istj-vs-isfj",
         "key": "mbti-content15-profile-link-2",
         "kind": "content_continue",
-        "label": "ISTJ VS ISFJ",
+        "label": "ISTJ 与 ISFJ 对比",
         "locale": "zh-CN"
       },
       {
@@ -249,7 +249,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "59dbb5d1b8d6efb269785b8a7a70f5a9e272e062",
+      "landing_fingerprint": "e07a6abd71d7984d195518f7bd04a0f6d789efa8",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "ISTJ-A",
       "public_surface_ref": null,
@@ -264,7 +264,7 @@
       "start_test_target": "/zh/tests/mbti-personality-test-16-personality-types",
       "summary_blocks": [
         {
-          "body": "ISTJ-A 表示内向、实感、思考、判断四组偏好，并加入 FermatMind 的 A 型扩展：常见表现是重视事实、流程与可靠交付，面对反馈时自我确认较稳定。",
+          "body": "ISTJ-A 表示内向、实感、思考、判断四组偏好，并用 A 后缀描述面对反馈时较稳定的自我确认。A/T 不是官方 MBTI 原生维度。",
           "key": "hero",
           "kind": "answer_first",
           "title": "ISTJ - 物流师"
@@ -504,7 +504,7 @@
           },
           "render": "letters_intro",
           "source": "variant",
-          "title": "Letter-by-letter introduction"
+          "title": "四字母与 A 型含义"
         },
         {
           "body_md": "在费马测试 / FermatMind 的逻辑模型里，ISTJ-A 经常被视作“安静却不可或缺的秩序守护者”。你不喜欢夸张的场面，却愿意在所有人转身之后，继续把细节收拾好、把流程走完、把标准落实到位。\n\n对你来说，最舒服的状态是：规则清晰、分工明确、信息可靠，每个人都按约定做好自己那一份。在这样的环境里，你可以用稳定的节奏，一件件完成任务，建立起别人对你“交给他就放心”的长期信任。\n\n你的人生追求往往并不华丽，你更在意的是：事情有没有按照应有的标准完成？承诺是不是被兑现了？体系是否经得起时间和压力的检验。",
@@ -513,7 +513,7 @@
           "payload": [],
           "render": "rich_text",
           "source": "variant",
-          "title": "Overview"
+          "title": "概览"
         },
         {
           "body_md": "建议与小程序中 5 条维度进度条搭配展示：外向 / 内向｜天马行空 / 求真务实｜情感细腻 / 理性思考｜运筹帷幄 / 随机应变｜情绪易波动 / 自信果断。",
@@ -571,7 +571,7 @@
           },
           "render": "trait_dimension_grid",
           "source": "variant",
-          "title": "Trait overview"
+          "title": "人格特点概览"
         },
         {
           "body_md": "你的职业选择，通常会围绕“稳定”“可靠”“有明确规则”展开。只要有清晰的职责边界和可执行的标准，你就能用长期、一致的表现，让别人看到你的价值。\n\n你不太享受天天变方向、今天一个说法明天一个决策的环境；一旦目标前后不一致、规则说变就变，你会感到非常疲惫和不信任。\n\n相反，当一份工作允许你：踏实把事情做好、维护秩序、优化流程、守住底线，并在细节中持续打磨品质时，你会很有安全感，也更愿意在其中长期深耕。",
@@ -580,7 +580,7 @@
           "payload": [],
           "render": "rich_text",
           "source": "variant",
-          "title": "Career summary"
+          "title": "职业场景概览"
         },
         {
           "body_md": null,
@@ -608,7 +608,7 @@
           },
           "render": "bullets",
           "source": "variant",
-          "title": "Career advantages"
+          "title": "职业优势"
         },
         {
           "body_md": null,
@@ -636,7 +636,7 @@
           },
           "render": "bullets",
           "source": "variant",
-          "title": "Career weaknesses"
+          "title": "职业风险"
         },
         {
           "body_md": null,
@@ -686,7 +686,7 @@
           },
           "render": "preferred_role_list",
           "source": "variant",
-          "title": "Preferred roles"
+          "title": "偏好任务"
         },
         {
           "body_md": "对 ISTJ-A 来说，真正的升级，不是变成一个完全不一样的人，而是在保留你“可靠、稳、能托底”这些优势的基础上，给自己增加一点弹性与表达，让别人更容易看见你的价值。\n\n下面这几条，可以作为你在职场中持续微调的“小公式”。",
@@ -714,7 +714,7 @@
           },
           "render": "bullets",
           "source": "variant",
-          "title": "Career upgrade suggestions"
+          "title": "职业成长建议"
         },
         {
           "body_md": "对 ISTJ-A 来说，成长往往不是“轰轰烈烈的大转变”，而是一点点优化：在保持自己可靠、务实、守信用的前提下，让自己在变化中也不至于僵硬，在关系中也不至于孤立。\n\n这一章节，会从你的强项、短板，以及能量来源与消耗点几个角度，帮你看清自己的成长轨迹。",
@@ -723,7 +723,7 @@
           "payload": [],
           "render": "rich_text",
           "source": "variant",
-          "title": "Growth summary"
+          "title": "成长概览"
         },
         {
           "body_md": null,
@@ -789,7 +789,7 @@
           },
           "render": "bullets",
           "source": "variant",
-          "title": "Growth strengths"
+          "title": "成长优势"
         },
         {
           "body_md": null,
@@ -817,7 +817,7 @@
           },
           "render": "bullets",
           "source": "variant",
-          "title": "Growth weaknesses"
+          "title": "成长风险"
         },
         {
           "body_md": "在关系世界里，你更像一位“安静可靠的守护者”。你不一定擅长甜言蜜语，但会通过实际行动、一贯的负责和稳定的陪伴，来表达在乎。\n\n你最看重的，不是表面有多热闹，而是：这个人靠不靠谱？这段关系是否长期？我们彼此是不是都在守信用、有底线？",
@@ -826,7 +826,7 @@
           "payload": [],
           "render": "rich_text",
           "source": "variant",
-          "title": "Relationships summary"
+          "title": "关系模式概览"
         },
         {
           "body_md": null,
@@ -854,7 +854,7 @@
           },
           "render": "bullets",
           "source": "variant",
-          "title": "Relationships strengths"
+          "title": "关系优势"
         },
         {
           "body_md": null,
@@ -882,7 +882,7 @@
           },
           "render": "bullets",
           "source": "variant",
-          "title": "Relationships weaknesses"
+          "title": "关系风险"
         }
       ],
       "seo": {
@@ -891,12 +891,12 @@
         "jsonld": [],
         "og_description": "ISTJ-A 是什么？了解 物流师 的核心特点、适合谁、不适合谁、常见误解、A/T 差异、职业关系压力场景和 FAQ。",
         "og_image_url": null,
-        "og_title": "ISTJ-A 物流师人格：特点、职业、关系与 A/T 差异 | FermatMind",
+        "og_title": "ISTJ-A 是什么？人格特点与 A 型含义 | FermatMind",
         "robots": "index,follow",
-        "title": "ISTJ-A 物流师人格：特点、职业、关系与 A/T 差异 | FermatMind",
+        "title": "ISTJ-A 是什么？人格特点与 A 型含义 | FermatMind",
         "twitter_description": "ISTJ-A 是什么？了解 物流师 的核心特点、适合谁、不适合谁、常见误解、A/T 差异、职业关系压力场景和 FAQ。",
         "twitter_image_url": null,
-        "twitter_title": "ISTJ-A 物流师人格：特点、职业、关系与 A/T 差异 | FermatMind"
+        "twitter_title": "ISTJ-A 是什么？人格特点与 A 型含义 | FermatMind"
       },
       "summary_card": {
         "public_tags": [
@@ -908,7 +908,7 @@
           "长期主义"
         ],
         "subtitle": null,
-        "summary": "ISTJ-A 表示内向、实感、思考、判断四组偏好，并加入 FermatMind 的 A 型扩展：常见表现是重视事实、流程与可靠交付，面对反馈时自我确认较稳定。",
+        "summary": "ISTJ-A 表示内向、实感、思考、判断四组偏好，并用 A 后缀描述面对反馈时较稳定的自我确认。A/T 不是官方 MBTI 原生维度。",
         "tagline": "秩序守护者",
         "title": "ISTJ - 物流师"
       },
@@ -916,7 +916,7 @@
     },
     "profile": {
       "canonical_type_code": "ISTJ",
-      "excerpt": "ISTJ-A 表示内向、实感、思考、判断四组偏好，并加入 FermatMind 的 A 型扩展：常见表现是重视事实、流程与可靠交付，面对反馈时自我确认较稳定。",
+      "excerpt": "ISTJ-A 表示内向、实感、思考、判断四组偏好，并用 A 后缀描述面对反馈时较稳定的自我确认。A/T 不是官方 MBTI 原生维度。",
       "hero_image_url": null,
       "hero_kicker": "物流师",
       "hero_quote": null,
@@ -981,7 +981,7 @@
         "render_variant": "letters_intro",
         "section_key": "letters_intro",
         "sort_order": 10,
-        "title": "Letter-by-letter introduction"
+        "title": "四字母与 A 型含义"
       },
       {
         "body_html": null,
@@ -1080,7 +1080,7 @@
         "render_variant": "trait_dimension_grid",
         "section_key": "trait_overview",
         "sort_order": 30,
-        "title": "Trait overview"
+        "title": "人格特点概览"
       },
       {
         "body_html": null,
@@ -1091,7 +1091,7 @@
             "at_difference": "与 ISTJ-T 相比，ISTJ-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。",
             "not_for": "这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。",
             "relationship_pattern": "在关系沟通中，ISTJ-A 常会用可靠、守时和实际承担表达在意。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
-            "what_is": "ISTJ-A 通常指 物流师 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+            "what_is": "ISTJ-A 指 ISTJ 四组偏好与 A 型身份风格的组合，常见表现是重视事实、流程与可靠交付，面对反馈时自我确认较稳定。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
             "work_pattern": "在工作中，ISTJ-A 往往适合流程维护、风险复查、责任履行和长期稳定交付。如果目标、反馈和责任边界模糊，优势可能变成摩擦。"
           },
           "body": "- not for: 这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。\n- what is: ISTJ-A 通常指 物流师 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。\n- work pattern: 在工作中，ISTJ-A 往往适合流程维护、风险复查、责任履行和长期稳定交付。如果目标、反馈和责任边界模糊，优势可能变成摩擦。\n- at difference: 与 ISTJ-T 相比，ISTJ-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。\n- relationship pattern: 在关系沟通中，ISTJ-A 常会用可靠、守时和实际承担表达在意。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
@@ -1099,16 +1099,16 @@
             "at_difference": "与 ISTJ-T 相比，ISTJ-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。",
             "not_for": "这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。",
             "relationship_pattern": "在关系沟通中，ISTJ-A 常会用可靠、守时和实际承担表达在意。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
-            "what_is": "ISTJ-A 通常指 物流师 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+            "what_is": "ISTJ-A 指 ISTJ 四组偏好与 A 型身份风格的组合，常见表现是重视事实、流程与可靠交付，面对反馈时自我确认较稳定。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
             "work_pattern": "在工作中，ISTJ-A 往往适合流程维护、风险复查、责任履行和长期稳定交付。如果目标、反馈和责任边界模糊，优势可能变成摩擦。"
           },
           "source": "mbti64_v8_5_v5_first_class_render_section",
-          "title": "AI/Search answer"
+          "title": "快速解读"
         },
         "render_variant": "callout",
         "section_key": "v8_5_ai_search_answer",
         "sort_order": 30,
-        "title": "AI/Search answer"
+        "title": "快速解读"
       },
       {
         "body_html": null,
@@ -1135,7 +1135,7 @@
               "title": "愿意为重要关系或目标持续投入"
             }
           ],
-          "title": "Strengths and watch-outs",
+          "title": "优势与留意点",
           "watch_outs": [
             {
               "detail": "把过去有效的方法当成当前唯一安全路径。当他们只相信自己熟悉的判断路径，就容易错过别人提供的现场信息。",
@@ -1158,7 +1158,7 @@
         "render_variant": "cards",
         "section_key": "v8_5_strengths_watchouts",
         "sort_order": 40,
-        "title": "Strengths and watch-outs"
+        "title": "优势与留意点"
       },
       {
         "body_html": null,
@@ -1172,12 +1172,12 @@
             "work": "在工作场景里，ISTJ-A 的 更稳定的自我确认 会影响他们如何处理 deadline、反馈和责任：压力下更容易先保持判断和行动节奏，再回头检查别人是否跟上。"
           },
           "source": "mbti64_v8_5_v5_first_class_render_section",
-          "title": "A/T difference scenarios"
+          "title": "A/T 场景差异"
         },
         "render_variant": "cards",
         "section_key": "v8_5_at_difference_scenarios",
         "sort_order": 50,
-        "title": "A/T difference scenarios"
+        "title": "A/T 场景差异"
       },
       {
         "body_html": null,
@@ -2159,7 +2159,7 @@
               "at_difference": "与 ISTJ-T 相比，ISTJ-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。",
               "not_for": "这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。",
               "relationship_pattern": "在关系沟通中，ISTJ-A 常会用可靠、守时和实际承担表达在意。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
-              "what_is": "ISTJ-A 通常指 物流师 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+              "what_is": "ISTJ-A 指 ISTJ 四组偏好与 A 型身份风格的组合，常见表现是重视事实、流程与可靠交付，面对反馈时自我确认较稳定。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
               "work_pattern": "在工作中，ISTJ-A 往往适合流程维护、风险复查、责任履行和长期稳定交付。如果目标、反馈和责任边界模糊，优势可能变成摩擦。"
             }
           },
@@ -2183,12 +2183,12 @@
             "likely_stuck": "容易卡在权责含混、反馈绕圈、只看态度不看证据，或要求他们长期扮演不自然社交角色的环境。"
           },
           "source": "mbti64_v8_5_v5_first_class_render_section",
-          "title": "Work decision card"
+          "title": "工作场景判断"
         },
         "render_variant": "cards",
         "section_key": "v8_5_work_decision",
         "sort_order": 160,
-        "title": "Work decision card"
+        "title": "工作场景判断"
       },
       {
         "body_html": null,
@@ -2202,12 +2202,12 @@
             "misread": "别人可能把他们误读成冷淡、强势、回避或多虑；更准确的看法，是观察他们在压力下如何保护判断、关系和责任。"
           },
           "source": "mbti64_v8_5_v5_first_class_render_section",
-          "title": "Relationship communication card"
+          "title": "关系沟通提示"
         },
         "render_variant": "cards",
         "section_key": "v8_5_relationship_communication",
         "sort_order": 170,
-        "title": "Relationship communication card"
+        "title": "关系沟通提示"
       },
       {
         "body_html": null,
@@ -2222,12 +2222,12 @@
             "weekly_experiment": "本周可以做一个小实验：在一个真实场景中，把“我看到的事实、我的担心、我希望的下一步”分开说出来，并观察对方反馈。"
           },
           "source": "mbti64_v8_5_v5_first_class_render_section",
-          "title": "Pressure and growth card"
+          "title": "压力与成长提示"
         },
         "render_variant": "cards",
         "section_key": "v8_5_pressure_growth",
         "sort_order": 180,
-        "title": "Pressure and growth card"
+        "title": "压力与成长提示"
       },
       {
         "body_html": null,
@@ -2243,12 +2243,12 @@
             "最后通过 MBTI 测试、A/T 对照、Big Five、RIASEC 和职业探索交叉验证"
           ],
           "source": "mbti64_v8_5_v5_first_class_render_section",
-          "title": "Search user paths"
+          "title": "继续探索"
         },
         "render_variant": "list",
         "section_key": "v8_5_search_user_paths",
         "sort_order": 190,
-        "title": "Search user paths"
+        "title": "继续探索"
       },
       {
         "body_html": null,
@@ -2633,7 +2633,7 @@
         "payload_json": {
           "items": [
             {
-              "answer": "ISTJ-A 指 ISTJ 的 A 型表达，描述的是 责任感、经验校准和可靠执行 这类偏好与压力反馈方式，不是能力等级或诊断标签。",
+              "answer": "ISTJ-A 指 ISTJ 四组偏好与 A 型身份风格的组合，常见表现是重视事实、流程与可靠交付，面对反馈时自我确认较稳定。A/T 不是官方 MBTI 原生维度，也不是能力等级或诊断标签。",
               "question": "ISTJ-A 是什么意思？"
             },
             {
@@ -2682,19 +2682,19 @@
         "payload_json": {
           "items": [
             {
-              "anchor_text": "ISTJ T",
+              "anchor_text": "ISTJ-T 人格特点",
               "href": "/zh/personality/istj-t",
               "reason": "Connect same-cluster public personality assets without private result routes.",
               "safe_public_route": true
             },
             {
-              "anchor_text": "ISTJ A VS ISTJ T",
+              "anchor_text": "ISTJ-A 与 ISTJ-T 对比",
               "href": "/zh/personality/istj-a-vs-istj-t",
               "reason": "Connect same-cluster public personality assets without private result routes.",
               "safe_public_route": true
             },
             {
-              "anchor_text": "ISTJ VS ISFJ",
+              "anchor_text": "ISTJ 与 ISFJ 对比",
               "href": "/zh/personality/istj-vs-isfj",
               "reason": "Connect same-cluster public personality assets without private result routes.",
               "safe_public_route": true
@@ -2815,7 +2815,7 @@
                 "at_difference": "与 ISTJ-T 相比，ISTJ-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。",
                 "not_for": "这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。",
                 "relationship_pattern": "在关系沟通中，ISTJ-A 常会用可靠、守时和实际承担表达在意。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
-                "what_is": "ISTJ-A 通常指 物流师 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+                "what_is": "ISTJ-A 指 ISTJ 四组偏好与 A 型身份风格的组合，常见表现是重视事实、流程与可靠交付，面对反馈时自我确认较稳定。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
                 "work_pattern": "在工作中，ISTJ-A 往往适合流程维护、风险复查、责任履行和长期稳定交付。如果目标、反馈和责任边界模糊，优势可能变成摩擦。"
               },
               "answer_entities": [
@@ -2842,7 +2842,7 @@
                 "安全使用边界"
               ],
               "citation_boundary": "来源只用于限定方法边界和交叉验证，不用于夸大 MBTI 或 A/T 效度。",
-              "direct_answer": "ISTJ-A 通常指 物流师 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+              "direct_answer": "ISTJ-A 指 ISTJ 四组偏好与 A 型身份风格的组合，常见表现是重视事实、流程与可靠交付，面对反馈时自我确认较稳定。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
               "site_path": [
                 "免费 16 型人格测试",
                 "ISTJ-A 人格页",
@@ -3523,7 +3523,7 @@
                   "at_difference": "与 ISTJ-T 相比，ISTJ-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。",
                   "not_for": "这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。",
                   "relationship_pattern": "在关系沟通中，ISTJ-A 常会用可靠、守时和实际承担表达在意。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
-                  "what_is": "ISTJ-A 通常指 物流师 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+                  "what_is": "ISTJ-A 指 ISTJ 四组偏好与 A 型身份风格的组合，常见表现是重视事实、流程与可靠交付，面对反馈时自我确认较稳定。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
                   "work_pattern": "在工作中，ISTJ-A 往往适合流程维护、风险复查、责任履行和长期稳定交付。如果目标、反馈和责任边界模糊，优势可能变成摩擦。"
                 }
               }
@@ -3703,7 +3703,7 @@
                   "at_difference": "与 ISTJ-T 相比，ISTJ-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。",
                   "not_for": "这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。",
                   "relationship_pattern": "在关系沟通中，ISTJ-A 常会用可靠、守时和实际承担表达在意。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
-                  "what_is": "ISTJ-A 通常指 物流师 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+                  "what_is": "ISTJ-A 指 ISTJ 四组偏好与 A 型身份风格的组合，常见表现是重视事实、流程与可靠交付，面对反馈时自我确认较稳定。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
                   "work_pattern": "在工作中，ISTJ-A 往往适合流程维护、风险复查、责任履行和长期稳定交付。如果目标、反馈和责任边界模糊，优势可能变成摩擦。"
                 },
                 "answer_entities": [
@@ -3730,7 +3730,7 @@
                   "安全使用边界"
                 ],
                 "citation_boundary": "来源只用于限定方法边界和交叉验证，不用于夸大 MBTI 或 A/T 效度。",
-                "direct_answer": "ISTJ-A 通常指 物流师 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+                "direct_answer": "ISTJ-A 指 ISTJ 四组偏好与 A 型身份风格的组合，常见表现是重视事实、流程与可靠交付，面对反馈时自我确认较稳定。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
                 "site_path": [
                   "免费 16 型人格测试",
                   "ISTJ-A 人格页",
@@ -4411,7 +4411,7 @@
                     "at_difference": "与 ISTJ-T 相比，ISTJ-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。",
                     "not_for": "这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。",
                     "relationship_pattern": "在关系沟通中，ISTJ-A 常会用可靠、守时和实际承担表达在意。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
-                    "what_is": "ISTJ-A 通常指 物流师 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+                    "what_is": "ISTJ-A 指 ISTJ 四组偏好与 A 型身份风格的组合，常见表现是重视事实、流程与可靠交付，面对反馈时自我确认较稳定。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
                     "work_pattern": "在工作中，ISTJ-A 往往适合流程维护、风险复查、责任履行和长期稳定交付。如果目标、反馈和责任边界模糊，优势可能变成摩擦。"
                   }
                 }
@@ -4472,7 +4472,7 @@
                   "at_difference": "与 ISTJ-T 相比，ISTJ-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。",
                   "not_for": "这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。",
                   "relationship_pattern": "在关系沟通中，ISTJ-A 常会用可靠、守时和实际承担表达在意。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
-                  "what_is": "ISTJ-A 通常指 物流师 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+                  "what_is": "ISTJ-A 指 ISTJ 四组偏好与 A 型身份风格的组合，常见表现是重视事实、流程与可靠交付，面对反馈时自我确认较稳定。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
                   "work_pattern": "在工作中，ISTJ-A 往往适合流程维护、风险复查、责任履行和长期稳定交付。如果目标、反馈和责任边界模糊，优势可能变成摩擦。"
                 },
                 "at_difference_scenarios": {
@@ -4556,7 +4556,7 @@
                 "public_profile_only": true
               },
               "seo": {
-                "description": "了解 ISTJ-A 物流师人格的核心特点、A/T 差异、工作与关系沟通、压力模式、常见误区和安全使用边界。用于自我理解，不作诊断或职业定论。",
+                "description": "了解 ISTJ-A 的名称含义、人格特点，以及 A 型在反馈、压力、工作和关系场景中的常见表现。A/T 不是官方 MBTI 原生维度，不代表能力高低或确定性职业结论。",
                 "geo_answer_targets": [
                   "ISTJ-A 是什么",
                   "ISTJ-A 和 ISTJ-T 的区别",
@@ -4663,7 +4663,7 @@
                 "at_difference": "与 ISTJ-T 相比，ISTJ-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。",
                 "not_for": "这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。",
                 "relationship_pattern": "在关系沟通中，ISTJ-A 常会用可靠、守时和实际承担表达在意。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
-                "what_is": "ISTJ-A 通常指 物流师 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+                "what_is": "ISTJ-A 指 ISTJ 四组偏好与 A 型身份风格的组合，常见表现是重视事实、流程与可靠交付，面对反馈时自我确认较稳定。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
                 "work_pattern": "在工作中，ISTJ-A 往往适合流程维护、风险复查、责任履行和长期稳定交付。如果目标、反馈和责任边界模糊，优势可能变成摩擦。"
               },
               "at_difference_scenarios": {
@@ -4748,7 +4748,7 @@
               "public_profile_only": true
             },
             "seo": {
-              "description": "了解 ISTJ-A 物流师人格的核心特点、A/T 差异、工作与关系沟通、压力模式、常见误区和安全使用边界。用于自我理解，不作诊断或职业定论。",
+              "description": "了解 ISTJ-A 的名称含义、人格特点，以及 A 型在反馈、压力、工作和关系场景中的常见表现。A/T 不是官方 MBTI 原生维度，不代表能力高低或确定性职业结论。",
               "geo_answer_targets": [
                 "ISTJ-A 是什么",
                 "ISTJ-A 和 ISTJ-T 的区别",
@@ -4865,7 +4865,7 @@
                 "at_difference": "与 ISTJ-T 相比，ISTJ-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。",
                 "not_for": "这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。",
                 "relationship_pattern": "在关系沟通中，ISTJ-A 常会用可靠、守时和实际承担表达在意。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
-                "what_is": "ISTJ-A 通常指 物流师 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+                "what_is": "ISTJ-A 指 ISTJ 四组偏好与 A 型身份风格的组合，常见表现是重视事实、流程与可靠交付，面对反馈时自我确认较稳定。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
                 "work_pattern": "在工作中，ISTJ-A 往往适合流程维护、风险复查、责任履行和长期稳定交付。如果目标、反馈和责任边界模糊，优势可能变成摩擦。"
               },
               "answer_entities": [
@@ -4892,7 +4892,7 @@
                 "安全使用边界"
               ],
               "citation_boundary": "来源只用于限定方法边界和交叉验证，不用于夸大 MBTI 或 A/T 效度。",
-              "direct_answer": "ISTJ-A 通常指 物流师 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+              "direct_answer": "ISTJ-A 指 ISTJ 四组偏好与 A 型身份风格的组合，常见表现是重视事实、流程与可靠交付，面对反馈时自我确认较稳定。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
               "site_path": [
                 "免费 16 型人格测试",
                 "ISTJ-A 人格页",
@@ -4975,7 +4975,7 @@
                 "at_difference": "与 ISTJ-T 相比，ISTJ-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。",
                 "not_for": "这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。",
                 "relationship_pattern": "在关系沟通中，ISTJ-A 常会用可靠、守时和实际承担表达在意。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
-                "what_is": "ISTJ-A 通常指 物流师 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+                "what_is": "ISTJ-A 指 ISTJ 四组偏好与 A 型身份风格的组合，常见表现是重视事实、流程与可靠交付，面对反馈时自我确认较稳定。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
                 "work_pattern": "在工作中，ISTJ-A 往往适合流程维护、风险复查、责任履行和长期稳定交付。如果目标、反馈和责任边界模糊，优势可能变成摩擦。"
               },
               "at_difference_scenarios": {
@@ -5129,13 +5129,13 @@
       "jsonld_overrides_json": null,
       "og_description": "ISTJ-A 是什么？了解 物流师 的核心特点、适合谁、不适合谁、常见误解、A/T 差异、职业关系压力场景和 FAQ。",
       "og_image_url": null,
-      "og_title": "ISTJ-A 物流师人格：特点、职业、关系与 A/T 差异 | FermatMind",
+      "og_title": "ISTJ-A 是什么？人格特点与 A 型含义 | FermatMind",
       "robots": "index,follow",
       "seo_description": "ISTJ-A 是什么？了解 物流师 的核心特点、适合谁、不适合谁、常见误解、A/T 差异、职业关系压力场景和 FAQ。",
-      "seo_title": "ISTJ-A 物流师人格：特点、职业、关系与 A/T 差异 | FermatMind",
+      "seo_title": "ISTJ-A 是什么？人格特点与 A 型含义 | FermatMind",
       "twitter_description": "ISTJ-A 是什么？了解 物流师 的核心特点、适合谁、不适合谁、常见误解、A/T 差异、职业关系压力场景和 FAQ。",
       "twitter_image_url": null,
-      "twitter_title": "ISTJ-A 物流师人格：特点、职业、关系与 A/T 差异 | FermatMind"
+      "twitter_title": "ISTJ-A 是什么？人格特点与 A 型含义 | FermatMind"
     },
     "seo_surface_v1": {
       "alternates": {
@@ -5147,11 +5147,11 @@
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "791eb5ed9a246f05d539789bc38ede2683fe46ca",
+      "metadata_fingerprint": "36a83cdcd65776462027e13f3e5748e553ea9017",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
         "description": "ISTJ-A 是什么？了解 物流师 的核心特点、适合谁、不适合谁、常见误解、A/T 差异、职业关系压力场景和 FAQ。",
-        "title": "ISTJ-A 物流师人格：特点、职业、关系与 A/T 差异 | FermatMind",
+        "title": "ISTJ-A 是什么？人格特点与 A 型含义 | FermatMind",
         "type": "article",
         "url": "https://fermatmind.com/zh/personality/istj-a"
       },
@@ -5165,15 +5165,15 @@
         "DefinedTerm"
       ],
       "surface_type": "mbti_personality_public_detail",
-      "title": "ISTJ-A 物流师人格：特点、职业、关系与 A/T 差异 | FermatMind",
+      "title": "ISTJ-A 是什么？人格特点与 A 型含义 | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
         "description": "ISTJ-A 是什么？了解 物流师 的核心特点、适合谁、不适合谁、常见误解、A/T 差异、职业关系压力场景和 FAQ。",
-        "title": "ISTJ-A 物流师人格：特点、职业、关系与 A/T 差异 | FermatMind"
+        "title": "ISTJ-A 是什么？人格特点与 A 型含义 | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "36781ddac7384e639cd466b3fb580554999f2f24cedf0f3aae595a1ab96725dd"
+  "source_content_sha256": "7d81d41cf2e31d7387b76c91678429f676ae57c3b37f1481acdfad85bb22e804"
 }

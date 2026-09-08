@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Services\PublicSurface\AnswerSurfaceContractService;
 use App\Services\PublicSurface\LandingSurfaceContractService;
+use App\Services\PublicSurface\SeoSurfaceContractService;
 
 require __DIR__.'/../../vendor/autoload.php';
 
@@ -29,6 +30,7 @@ foreach ($manifest['files'] as $entry) {
     }
 }
 
+$seoService = new SeoSurfaceContractService;
 $landingService = new LandingSurfaceContractService;
 $answerService = new AnswerSurfaceContractService;
 
@@ -41,41 +43,56 @@ foreach ($requestedPaths as $path) {
 
     $path = $resolvedPath;
     $page = json_decode((string) file_get_contents($path), true, flags: JSON_THROW_ON_ERROR);
-    if (($page['identity']['framework'] ?? null) !== 'mbti' || ! in_array($page['identity']['page_kind'] ?? null, ['profile', 'variant'], true)) {
+    $pageKind = $page['identity']['page_kind'] ?? null;
+    if (($page['identity']['framework'] ?? null) !== 'mbti' || ! in_array($pageKind, ['profile', 'variant', 'comparison_at'], true)) {
         fwrite(STDERR, json_encode(['status' => 'FAIL', 'safe_error_code' => 'MBTI_PAGE_REQUIRED']).PHP_EOL);
         exit(1);
     }
-    if (! isset($page['payload']['landing_surface_v1'], $page['payload']['answer_surface_v1'])) {
+    if (! isset($page['payload']['seo_surface_v1'], $page['payload']['landing_surface_v1'], $page['payload']['answer_surface_v1'])) {
         fwrite(STDERR, json_encode(['status' => 'FAIL', 'safe_error_code' => 'SURFACE_CONTRACT_REQUIRED']).PHP_EOL);
         exit(1);
     }
+    $seo = $page['payload']['seo_surface_v1'];
     $landing = $page['payload']['landing_surface_v1'];
     $answer = $page['payload']['answer_surface_v1'];
-    $runtimeTypeCode = $page['identity']['page_kind'] === 'variant' ? (string) $landing['primary_content_ref'] : '';
-    $seed = [
-        'slug' => (string) $page['payload']['profile']['slug'],
-        'runtime_type_code' => $runtimeTypeCode,
-        'locale' => (string) $page['locale'],
-        'scale_code' => strtoupper((string) $page['payload']['profile']['scale_code']),
-    ];
+    $seoContext = array_diff_key($seo, array_flip(['version', 'metadata_contract_version', 'metadata_fingerprint', 'structured_data_keys']));
+    $seoContext['structured_data'] = array_map(
+        static fn (string $type): array => ['@type' => $type],
+        $seo['structured_data_keys'],
+    );
+    $expectedSeo = $seoService->build($seoContext);
+    $seed = $pageKind === 'comparison_at'
+        ? [
+            'comparison_slug' => (string) $page['identity']['slug'],
+            'locale' => (string) $page['locale'],
+            'scale_code' => 'MBTI',
+            'overlay_source' => 'mbti64_comparison_a_vs_t',
+        ]
+        : [
+            'slug' => (string) $page['payload']['profile']['slug'],
+            'runtime_type_code' => $pageKind === 'variant' ? (string) $landing['primary_content_ref'] : '',
+            'locale' => (string) $page['locale'],
+            'scale_code' => strtoupper((string) $page['payload']['profile']['scale_code']),
+        ];
     $landingContext = array_diff_key($landing, array_flip(['version', 'landing_contract_version', 'landing_fingerprint']));
     $landingContext['fingerprint_seed'] = $seed;
     $expectedLanding = $landingService->build($landingContext);
+    $oldSeoFingerprint = (string) $answer['seo_surface_ref'];
     $oldLandingFingerprint = (string) $answer['landing_surface_ref'];
+    $answer['seo_surface_ref'] = $expectedSeo['metadata_fingerprint'];
     $answer['landing_surface_ref'] = $expectedLanding['landing_fingerprint'];
     $answer['evidence_refs'] = array_map(
-        static fn (string $value): string => $value === $oldLandingFingerprint ? $expectedLanding['landing_fingerprint'] : $value,
+        static fn (string $value): string => match ($value) {
+            $oldSeoFingerprint => $expectedSeo['metadata_fingerprint'],
+            $oldLandingFingerprint => $expectedLanding['landing_fingerprint'],
+            default => $value,
+        },
         $answer['evidence_refs'],
     );
-    $answerSeed = [
-        'slug' => (string) $page['payload']['profile']['slug'],
-        'locale' => (string) $page['locale'],
-        'runtime_type_code' => $runtimeTypeCode,
-        'scale_code' => strtoupper((string) $page['payload']['profile']['scale_code']),
-    ];
     $answerContext = array_diff_key($answer, array_flip(['version', 'answer_contract_version', 'answer_fingerprint']));
-    $answerContext['fingerprint_seed'] = $answerSeed;
+    $answerContext['fingerprint_seed'] = $seed;
     $expectedAnswer = $answerService->build($answerContext);
+    $page['payload']['seo_surface_v1'] = $expectedSeo;
     $page['payload']['landing_surface_v1'] = $expectedLanding;
     $page['payload']['answer_surface_v1'] = $expectedAnswer;
     $sort = static function (mixed $value) use (&$sort): mixed {

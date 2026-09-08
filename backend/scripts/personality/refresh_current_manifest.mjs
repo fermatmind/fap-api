@@ -41,11 +41,25 @@ async function main() {
   if (requested.length === 0) throw new Error("PAGE_PATH_REQUIRED");
   const selected = new Set(requested.map(resolvePage));
   const manifest = JSON.parse(await readFile(MANIFEST_PATH, "utf8"));
-  const known = new Set(manifest.files.map((entry) => resolve(ROOT, entry.path)));
+  const known = new Map(manifest.files.map((entry) => [resolve(ROOT, entry.path), entry]));
 
   for (const pagePath of selected) {
-    if (!known.has(pagePath)) throw new Error(`PAGE_NOT_IN_MANIFEST:${relative(ROOT, pagePath)}`);
+    const entry = known.get(pagePath);
+    if (!entry) throw new Error(`PAGE_NOT_IN_MANIFEST:${relative(ROOT, pagePath)}`);
     const page = JSON.parse(await readFile(pagePath, "utf8"));
+    if (page.contract_version !== "personality.page.content.v1") {
+      throw new Error(`PAGE_CONTRACT_INVALID:${entry.path}`);
+    }
+    if (!page.payload_contract || !page.payload || typeof page.payload !== "object" || Array.isArray(page.payload)) {
+      throw new Error(`PAGE_PAYLOAD_INVALID:${entry.path}`);
+    }
+    if (!["baseline", "enhanced"].includes(page.content_state)) {
+      throw new Error(`PAGE_CONTENT_STATE_INVALID:${entry.path}`);
+    }
+    for (const key of ["canonical_path", "entity_key", "entity_type", "framework", "page_kind", "slug"]) {
+      if (page.identity?.[key] !== entry[key]) throw new Error(`PAGE_IDENTITY_MISMATCH:${entry.path}:${key}`);
+    }
+    if (page.locale !== entry.locale) throw new Error(`PAGE_LOCALE_MISMATCH:${entry.path}`);
     page.content_state = "enhanced";
     page.source_content_sha256 = hash(page.payload);
     await writeFile(pagePath, encode(page), "utf8");
@@ -64,6 +78,7 @@ async function main() {
       throw new Error(`SOURCE_HASH_MISMATCH:${entry.path}`);
     }
     entry.bytes = Buffer.byteLength(bytes);
+    entry.content_state = page.content_state;
     entry.sha256 = hash(bytes);
     entry.source_content_sha256 = projectionHash;
     entry.compatibility_projection_sha256 = projectionHash;

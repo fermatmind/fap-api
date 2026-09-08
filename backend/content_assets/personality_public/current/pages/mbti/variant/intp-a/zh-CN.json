@@ -25,7 +25,7 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "6b4eff47361d95b017dd919f13c47277c9818c51",
+      "answer_fingerprint": "e3362138b70a226d1c7f63820e1fa5fbed3cf4c3",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [
@@ -45,8 +45,8 @@
         }
       ],
       "evidence_refs": [
-        "bf1dbb333f078d8bc024981574524eb66caccff8",
-        "88deb717977752d923cbdfff71e9bae7244d69c3",
+        "f7d392f8f6335cfaadcbb27eeb8ef4263adb48d8",
+        "3a079113c27604005efa5f8643ed7327a7e9d271",
         "mbti_public_projection_v1",
         "projection_dimensions",
         "personality_sections",
@@ -76,7 +76,7 @@
         }
       ],
       "indexability_state": "indexable",
-      "landing_surface_ref": "88deb717977752d923cbdfff71e9bae7244d69c3",
+      "landing_surface_ref": "3a079113c27604005efa5f8643ed7327a7e9d271",
       "next_step_blocks": [
         {
           "body": null,
@@ -160,10 +160,10 @@
           "title": "成长建议"
         }
       ],
-      "seo_surface_ref": "bf1dbb333f078d8bc024981574524eb66caccff8",
+      "seo_surface_ref": "f7d392f8f6335cfaadcbb27eeb8ef4263adb48d8",
       "summary_blocks": [
         {
-          "body": "INTP-A 表示内向、直觉、思考、感知四组偏好，并加入 FermatMind 的 A 型扩展：常见表现是独立分析、开放探索，以及面对反馈时较稳定的自我确认。",
+          "body": "INTP-A 表示内向、直觉、思考、感知四组偏好，并用 A 后缀描述面对反馈时较稳定的自我确认。A/T 不是官方 MBTI 原生维度。",
           "href": null,
           "key": "type_summary",
           "kind": "answer_first",
@@ -249,7 +249,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "88deb717977752d923cbdfff71e9bae7244d69c3",
+      "landing_fingerprint": "3a079113c27604005efa5f8643ed7327a7e9d271",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "INTP-A",
       "public_surface_ref": null,
@@ -264,7 +264,7 @@
       "start_test_target": "/zh/tests/mbti-personality-test-16-personality-types",
       "summary_blocks": [
         {
-          "body": "INTP-A 表示内向、直觉、思考、感知四组偏好，并加入 FermatMind 的 A 型扩展：常见表现是独立分析、开放探索，以及面对反馈时较稳定的自我确认。",
+          "body": "INTP-A 表示内向、直觉、思考、感知四组偏好，并用 A 后缀描述面对反馈时较稳定的自我确认。A/T 不是官方 MBTI 原生维度。",
           "key": "hero",
           "kind": "answer_first",
           "title": "INTP - 逻辑学家"
@@ -504,7 +504,7 @@
           },
           "render": "letters_intro",
           "source": "variant",
-          "title": "Letter-by-letter introduction"
+          "title": "四字母与 A 型含义"
         },
         {
           "body_md": "在费马测试 / FermatMind 的逻辑模型里，INTP-A 往往被视作“安静却锋利的理性解构者”。你不一定爱说大道理，但一旦开口，往往直指问题的核心假设。你习惯从系统层面看世界，用模型、结构和推理去理解一切。\n\n对你来说，最舒服的状态是：有足够的认知自由、一块可以任意实验的思维沙盘，以及几个能听得懂你抽象比喻的人。你不害怕复杂，反而会因为问题够难、够新鲜而兴奋。\n\n你的人生追求，很少停留在“照做就好”，而更像是在寻找：有没有更优雅、更高效、更有逻辑美感的解法。",
@@ -513,7 +513,7 @@
           "payload": [],
           "render": "rich_text",
           "source": "variant",
-          "title": "Overview"
+          "title": "概览"
         },
         {
           "body_md": "建议与小程序中 5 条维度进度条搭配展示：外向 / 内向｜天马行空 / 求真务实｜情感细腻 / 理性思考｜运筹帷幄 / 随机应变｜情绪易波动 / 自信果断。",
@@ -571,7 +571,7 @@
           },
           "render": "trait_dimension_grid",
           "source": "variant",
-          "title": "Trait overview"
+          "title": "人格特点概览"
         },
         {
           "body_md": "你的职业成就感，很大一部分来自：有没有足够的思考空间，问题本身值不值得解，以及解法是否优雅。有挑战、有难度、有创新空间的工作，更容易点燃你的兴趣。\n\n你不适合长期做高度重复、纯执行、缺乏思考价值的事务工作；当一份工作只剩下「按流程点按钮」时，你的注意力就会自然逃离。\n\n相反，当一份工作允许你：搭建模型、优化系统、拆解复杂问题、用新思路重写旧规则时，你就会进入高度专注的「心流状态」。",
@@ -580,7 +580,7 @@
           "payload": [],
           "render": "rich_text",
           "source": "variant",
-          "title": "Career summary"
+          "title": "职业场景概览"
         },
         {
           "body_md": null,
@@ -608,7 +608,7 @@
           },
           "render": "bullets",
           "source": "variant",
-          "title": "Career advantages"
+          "title": "职业优势"
         },
         {
           "body_md": null,
@@ -636,7 +636,7 @@
           },
           "render": "bullets",
           "source": "variant",
-          "title": "Career weaknesses"
+          "title": "职业风险"
         },
         {
           "body_md": null,
@@ -686,7 +686,7 @@
           },
           "render": "preferred_role_list",
           "source": "variant",
-          "title": "Preferred roles"
+          "title": "偏好任务"
         },
         {
           "body_md": "对 INTP-A 来说，真正的瓶颈往往不在「想得不够深」，而在「不够早动手」「不够善用他人」以及「忽略沟通带来的复利」。\n\n你可以把下面这些小公式，当作自己的职场升级提示器。",
@@ -714,7 +714,7 @@
           },
           "render": "bullets",
           "source": "variant",
-          "title": "Career upgrade suggestions"
+          "title": "职业成长建议"
         },
         {
           "body_md": "对 INTP-A 而言，成长并不只是「学更多知识」，而是逐渐学会：让自己的聪明真正落地，既服务于现实目标，也照顾到关系与自我状态。\n\n这一部分会从你的强项、短板，以及能量的来源与消耗点几个角度，帮你更理性地看懂自己的成长路径。",
@@ -723,7 +723,7 @@
           "payload": [],
           "render": "rich_text",
           "source": "variant",
-          "title": "Growth summary"
+          "title": "成长概览"
         },
         {
           "body_md": null,
@@ -781,7 +781,7 @@
           },
           "render": "bullets",
           "source": "variant",
-          "title": "Growth strengths"
+          "title": "成长优势"
         },
         {
           "body_md": null,
@@ -809,7 +809,7 @@
           },
           "render": "bullets",
           "source": "variant",
-          "title": "Growth weaknesses"
+          "title": "成长风险"
         },
         {
           "body_md": "在人际世界里，你不像那种到处社交的人，更像是少数人圈子里的“深度对话伙伴”。你会为真正投缘的人打开一个广阔而有层次的精神世界：从科学、哲学到人生系统。\n\n你在意的不是“关系看起来多热闹”，而是：我们能不能在同一个频率上思考？能不能彼此尊重对方的边界？这段关系能不能让彼此变得更清晰、更自由？",
@@ -818,7 +818,7 @@
           "payload": [],
           "render": "rich_text",
           "source": "variant",
-          "title": "Relationships summary"
+          "title": "关系模式概览"
         },
         {
           "body_md": null,
@@ -846,7 +846,7 @@
           },
           "render": "bullets",
           "source": "variant",
-          "title": "Relationships strengths"
+          "title": "关系优势"
         },
         {
           "body_md": null,
@@ -874,25 +874,25 @@
           },
           "render": "bullets",
           "source": "variant",
-          "title": "Relationships weaknesses"
+          "title": "关系风险"
         }
       ],
       "seo": {
         "canonical_url": "https://fermatmind.com/zh/personality/intp-a",
-        "description": "了解 INTP-A 的分析建模、可能性探索和独立解题、适合与不适合的场景、A/T 差异、职业、关系、压力应对、常见误解与 FAQ。内容仅用于自我理解和成长复盘。",
+        "description": "了解 INTP-A 的名称含义、人格特点，以及 A 型在反馈、压力、工作和关系场景中的常见表现。A/T 不是官方 MBTI 原生维度，不代表能力高低或确定性职业结论。",
         "jsonld": {
-          "description": "了解 INTP-A 的分析建模、可能性探索和独立解题、适合与不适合的场景、A/T 差异、职业、关系、压力应对、常见误解与 FAQ。内容仅用于自我理解和成长复盘。",
+          "description": "了解 INTP-A 的名称含义、人格特点，以及 A 型在反馈、压力、工作和关系场景中的常见表现。A/T 不是官方 MBTI 原生维度，不代表能力高低或确定性职业结论。",
           "name": "INTP-A 人格特点",
           "url": "https://fermatmind.com/zh/personality/intp-a"
         },
-        "og_description": "了解 INTP-A 的分析建模、可能性探索和独立解题、适合与不适合的场景、A/T 差异、职业、关系、压力应对、常见误解与 FAQ。内容仅用于自我理解和成长复盘。",
+        "og_description": "了解 INTP-A 的名称含义、人格特点，以及 A 型在反馈、压力、工作和关系场景中的常见表现。A/T 不是官方 MBTI 原生维度，不代表能力高低或确定性职业结论。",
         "og_image_url": null,
-        "og_title": "INTP-A 人格特点：分析建模、可能性探索和独立解题 | FermatMind",
+        "og_title": "INTP-A 是什么？人格特点与 A 型含义 | FermatMind",
         "robots": "index,follow",
-        "title": "INTP-A 人格特点：分析建模、可能性探索和独立解题 | FermatMind",
-        "twitter_description": "了解 INTP-A 的分析建模、可能性探索和独立解题、适合与不适合的场景、A/T 差异、职业、关系、压力应对、常见误解与 FAQ。内容仅用于自我理解和成长复盘。",
+        "title": "INTP-A 是什么？人格特点与 A 型含义 | FermatMind",
+        "twitter_description": "了解 INTP-A 的名称含义、人格特点，以及 A 型在反馈、压力、工作和关系场景中的常见表现。A/T 不是官方 MBTI 原生维度，不代表能力高低或确定性职业结论。",
         "twitter_image_url": null,
-        "twitter_title": "INTP-A 人格特点：分析建模、可能性探索和独立解题 | FermatMind"
+        "twitter_title": "INTP-A 是什么？人格特点与 A 型含义 | FermatMind"
       },
       "summary_card": {
         "public_tags": [
@@ -904,7 +904,7 @@
           "冷静自信"
         ],
         "subtitle": null,
-        "summary": "INTP-A 表示内向、直觉、思考、感知四组偏好，并加入 FermatMind 的 A 型扩展：常见表现是独立分析、开放探索，以及面对反馈时较稳定的自我确认。",
+        "summary": "INTP-A 表示内向、直觉、思考、感知四组偏好，并用 A 后缀描述面对反馈时较稳定的自我确认。A/T 不是官方 MBTI 原生维度。",
         "tagline": "理性解构者",
         "title": "INTP - 逻辑学家"
       },
@@ -912,7 +912,7 @@
     },
     "profile": {
       "canonical_type_code": "INTP",
-      "excerpt": "INTP-A 表示内向、直觉、思考、感知四组偏好，并加入 FermatMind 的 A 型扩展：常见表现是独立分析、开放探索，以及面对反馈时较稳定的自我确认。",
+      "excerpt": "INTP-A 表示内向、直觉、思考、感知四组偏好，并用 A 后缀描述面对反馈时较稳定的自我确认。A/T 不是官方 MBTI 原生维度。",
       "hero_image_url": null,
       "hero_kicker": "逻辑学家",
       "hero_quote": null,
@@ -977,7 +977,7 @@
         "render_variant": "letters_intro",
         "section_key": "letters_intro",
         "sort_order": 10,
-        "title": "Letter-by-letter introduction"
+        "title": "四字母与 A 型含义"
       },
       {
         "body_html": null,
@@ -1076,7 +1076,7 @@
         "render_variant": "trait_dimension_grid",
         "section_key": "trait_overview",
         "sort_order": 30,
-        "title": "Trait overview"
+        "title": "人格特点概览"
       },
       {
         "body_html": null,
@@ -1087,7 +1087,7 @@
             "at_difference": "与 INTP-T 相比，INTP-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。",
             "not_for": "这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。",
             "relationship_pattern": "在关系沟通中，INTP-A 常会把在意表达成理解、讨论和共同探索。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
-            "what_is": "INTP-A 通常指 逻辑学家 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+            "what_is": "INTP-A 指 INTP 四组偏好与 A 型身份风格的组合，常见表现是独立分析、开放探索，以及面对反馈时较稳定的自我确认。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
             "work_pattern": "在工作中，INTP-A 往往适合定义问题、建立模型、发现逻辑漏洞和解释复杂系统。如果目标、反馈和责任边界模糊，优势可能变成摩擦。"
           },
           "body": "- not for: 这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。\n- what is: INTP-A 通常指 逻辑学家 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。\n- work pattern: 在工作中，INTP-A 往往适合定义问题、建立模型、发现逻辑漏洞和解释复杂系统。如果目标、反馈和责任边界模糊，优势可能变成摩擦。\n- at difference: 与 INTP-T 相比，INTP-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。\n- relationship pattern: 在关系沟通中，INTP-A 常会把在意表达成理解、讨论和共同探索。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
@@ -1095,16 +1095,16 @@
             "at_difference": "与 INTP-T 相比，INTP-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。",
             "not_for": "这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。",
             "relationship_pattern": "在关系沟通中，INTP-A 常会把在意表达成理解、讨论和共同探索。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
-            "what_is": "INTP-A 通常指 逻辑学家 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+            "what_is": "INTP-A 指 INTP 四组偏好与 A 型身份风格的组合，常见表现是独立分析、开放探索，以及面对反馈时较稳定的自我确认。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
             "work_pattern": "在工作中，INTP-A 往往适合定义问题、建立模型、发现逻辑漏洞和解释复杂系统。如果目标、反馈和责任边界模糊，优势可能变成摩擦。"
           },
           "source": "mbti64_v8_5_v5_first_class_render_section",
-          "title": "AI/Search answer"
+          "title": "快速解读"
         },
         "render_variant": "callout",
         "section_key": "v8_5_ai_search_answer",
         "sort_order": 30,
-        "title": "AI/Search answer"
+        "title": "快速解读"
       },
       {
         "body_html": null,
@@ -1131,7 +1131,7 @@
               "title": "愿意为重要关系或目标持续投入"
             }
           ],
-          "title": "Strengths and watch-outs",
+          "title": "优势与留意点",
           "watch_outs": [
             {
               "detail": "停在分析而没有把结论翻译成行动。当他们只相信自己熟悉的判断路径，就容易错过别人提供的现场信息。",
@@ -1154,7 +1154,7 @@
         "render_variant": "cards",
         "section_key": "v8_5_strengths_watchouts",
         "sort_order": 40,
-        "title": "Strengths and watch-outs"
+        "title": "优势与留意点"
       },
       {
         "body_html": null,
@@ -1168,12 +1168,12 @@
             "work": "在工作场景里，INTP-A 的 更稳定的自我确认 会影响他们如何处理 deadline、反馈和责任：压力下更容易先保持判断和行动节奏，再回头检查别人是否跟上。"
           },
           "source": "mbti64_v8_5_v5_first_class_render_section",
-          "title": "A/T difference scenarios"
+          "title": "A/T 场景差异"
         },
         "render_variant": "cards",
         "section_key": "v8_5_at_difference_scenarios",
         "sort_order": 50,
-        "title": "A/T difference scenarios"
+        "title": "A/T 场景差异"
       },
       {
         "body_html": null,
@@ -2161,7 +2161,7 @@
               "at_difference": "与 INTP-T 相比，INTP-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。",
               "not_for": "这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。",
               "relationship_pattern": "在关系沟通中，INTP-A 常会把在意表达成理解、讨论和共同探索。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
-              "what_is": "INTP-A 通常指 逻辑学家 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+              "what_is": "INTP-A 指 INTP 四组偏好与 A 型身份风格的组合，常见表现是独立分析、开放探索，以及面对反馈时较稳定的自我确认。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
               "work_pattern": "在工作中，INTP-A 往往适合定义问题、建立模型、发现逻辑漏洞和解释复杂系统。如果目标、反馈和责任边界模糊，优势可能变成摩擦。"
             }
           },
@@ -2205,12 +2205,12 @@
             "likely_stuck": "容易卡在权责含混、反馈绕圈、只看态度不看证据，或要求他们长期扮演不自然社交角色的环境。"
           },
           "source": "mbti64_v8_5_v5_first_class_render_section",
-          "title": "Work decision card"
+          "title": "工作场景判断"
         },
         "render_variant": "cards",
         "section_key": "v8_5_work_decision",
         "sort_order": 160,
-        "title": "Work decision card"
+        "title": "工作场景判断"
       },
       {
         "body_html": null,
@@ -2244,12 +2244,12 @@
             "misread": "别人可能把他们误读成冷淡、强势、回避或多虑；更准确的看法，是观察他们在压力下如何保护判断、关系和责任。"
           },
           "source": "mbti64_v8_5_v5_first_class_render_section",
-          "title": "Relationship communication card"
+          "title": "关系沟通提示"
         },
         "render_variant": "cards",
         "section_key": "v8_5_relationship_communication",
         "sort_order": 170,
-        "title": "Relationship communication card"
+        "title": "关系沟通提示"
       },
       {
         "body_html": null,
@@ -2284,12 +2284,12 @@
             "weekly_experiment": "本周可以做一个小实验：在一个真实场景中，把“我看到的事实、我的担心、我希望的下一步”分开说出来，并观察对方反馈。"
           },
           "source": "mbti64_v8_5_v5_first_class_render_section",
-          "title": "Pressure and growth card"
+          "title": "压力与成长提示"
         },
         "render_variant": "cards",
         "section_key": "v8_5_pressure_growth",
         "sort_order": 180,
-        "title": "Pressure and growth card"
+        "title": "压力与成长提示"
       },
       {
         "body_html": null,
@@ -2305,12 +2305,12 @@
             "最后通过 MBTI 测试、A/T 对照、Big Five、RIASEC 和职业探索交叉验证"
           ],
           "source": "mbti64_v8_5_v5_first_class_render_section",
-          "title": "Search user paths"
+          "title": "继续探索"
         },
         "render_variant": "list",
         "section_key": "v8_5_search_user_paths",
         "sort_order": 190,
-        "title": "Search user paths"
+        "title": "继续探索"
       },
       {
         "body_html": null,
@@ -2746,7 +2746,7 @@
                 "at_difference": "与 INTP-T 相比，INTP-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。",
                 "not_for": "这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。",
                 "relationship_pattern": "在关系沟通中，INTP-A 常会把在意表达成理解、讨论和共同探索。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
-                "what_is": "INTP-A 通常指 逻辑学家 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+                "what_is": "INTP-A 指 INTP 四组偏好与 A 型身份风格的组合，常见表现是独立分析、开放探索，以及面对反馈时较稳定的自我确认。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
                 "work_pattern": "在工作中，INTP-A 往往适合定义问题、建立模型、发现逻辑漏洞和解释复杂系统。如果目标、反馈和责任边界模糊，优势可能变成摩擦。"
               },
               "answer_entities": [
@@ -2771,7 +2771,7 @@
                 "安全使用边界"
               ],
               "citation_boundary": "来源只用于限定方法边界和交叉验证，不用于夸大 MBTI 或 A/T 效度。",
-              "direct_answer": "INTP-A 通常指 逻辑学家 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+              "direct_answer": "INTP-A 指 INTP 四组偏好与 A 型身份风格的组合，常见表现是独立分析、开放探索，以及面对反馈时较稳定的自我确认。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
               "site_path": [
                 "免费 16 型人格测试",
                 "INTP-A 人格页",
@@ -3383,7 +3383,7 @@
                   "at_difference": "与 INTP-T 相比，INTP-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。",
                   "not_for": "这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。",
                   "relationship_pattern": "在关系沟通中，INTP-A 常会把在意表达成理解、讨论和共同探索。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
-                  "what_is": "INTP-A 通常指 逻辑学家 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+                  "what_is": "INTP-A 指 INTP 四组偏好与 A 型身份风格的组合，常见表现是独立分析、开放探索，以及面对反馈时较稳定的自我确认。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
                   "work_pattern": "在工作中，INTP-A 往往适合定义问题、建立模型、发现逻辑漏洞和解释复杂系统。如果目标、反馈和责任边界模糊，优势可能变成摩擦。"
                 }
               }
@@ -3551,7 +3551,7 @@
                   "at_difference": "与 INTP-T 相比，INTP-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。",
                   "not_for": "这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。",
                   "relationship_pattern": "在关系沟通中，INTP-A 常会把在意表达成理解、讨论和共同探索。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
-                  "what_is": "INTP-A 通常指 逻辑学家 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+                  "what_is": "INTP-A 指 INTP 四组偏好与 A 型身份风格的组合，常见表现是独立分析、开放探索，以及面对反馈时较稳定的自我确认。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
                   "work_pattern": "在工作中，INTP-A 往往适合定义问题、建立模型、发现逻辑漏洞和解释复杂系统。如果目标、反馈和责任边界模糊，优势可能变成摩擦。"
                 },
                 "answer_entities": [
@@ -3576,7 +3576,7 @@
                   "安全使用边界"
                 ],
                 "citation_boundary": "来源只用于限定方法边界和交叉验证，不用于夸大 MBTI 或 A/T 效度。",
-                "direct_answer": "INTP-A 通常指 逻辑学家 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+                "direct_answer": "INTP-A 指 INTP 四组偏好与 A 型身份风格的组合，常见表现是独立分析、开放探索，以及面对反馈时较稳定的自我确认。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
                 "site_path": [
                   "免费 16 型人格测试",
                   "INTP-A 人格页",
@@ -4188,7 +4188,7 @@
                     "at_difference": "与 INTP-T 相比，INTP-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。",
                     "not_for": "这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。",
                     "relationship_pattern": "在关系沟通中，INTP-A 常会把在意表达成理解、讨论和共同探索。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
-                    "what_is": "INTP-A 通常指 逻辑学家 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+                    "what_is": "INTP-A 指 INTP 四组偏好与 A 型身份风格的组合，常见表现是独立分析、开放探索，以及面对反馈时较稳定的自我确认。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
                     "work_pattern": "在工作中，INTP-A 往往适合定义问题、建立模型、发现逻辑漏洞和解释复杂系统。如果目标、反馈和责任边界模糊，优势可能变成摩擦。"
                   }
                 }
@@ -4250,7 +4250,7 @@
                   "at_difference": "与 INTP-T 相比，INTP-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。",
                   "not_for": "这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。",
                   "relationship_pattern": "在关系沟通中，INTP-A 常会把在意表达成理解、讨论和共同探索。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
-                  "what_is": "INTP-A 通常指 逻辑学家 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+                  "what_is": "INTP-A 指 INTP 四组偏好与 A 型身份风格的组合，常见表现是独立分析、开放探索，以及面对反馈时较稳定的自我确认。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
                   "work_pattern": "在工作中，INTP-A 往往适合定义问题、建立模型、发现逻辑漏洞和解释复杂系统。如果目标、反馈和责任边界模糊，优势可能变成摩擦。"
                 },
                 "at_difference_scenarios": {
@@ -4415,7 +4415,7 @@
                 "at_difference": "与 INTP-T 相比，INTP-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。",
                 "not_for": "这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。",
                 "relationship_pattern": "在关系沟通中，INTP-A 常会把在意表达成理解、讨论和共同探索。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
-                "what_is": "INTP-A 通常指 逻辑学家 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+                "what_is": "INTP-A 指 INTP 四组偏好与 A 型身份风格的组合，常见表现是独立分析、开放探索，以及面对反馈时较稳定的自我确认。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
                 "work_pattern": "在工作中，INTP-A 往往适合定义问题、建立模型、发现逻辑漏洞和解释复杂系统。如果目标、反馈和责任边界模糊，优势可能变成摩擦。"
               },
               "at_difference_scenarios": {
@@ -4591,7 +4591,7 @@
                 "at_difference": "与 INTP-T 相比，INTP-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。",
                 "not_for": "这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。",
                 "relationship_pattern": "在关系沟通中，INTP-A 常会把在意表达成理解、讨论和共同探索。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
-                "what_is": "INTP-A 通常指 逻辑学家 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+                "what_is": "INTP-A 指 INTP 四组偏好与 A 型身份风格的组合，常见表现是独立分析、开放探索，以及面对反馈时较稳定的自我确认。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
                 "work_pattern": "在工作中，INTP-A 往往适合定义问题、建立模型、发现逻辑漏洞和解释复杂系统。如果目标、反馈和责任边界模糊，优势可能变成摩擦。"
               },
               "answer_entities": [
@@ -4616,7 +4616,7 @@
                 "安全使用边界"
               ],
               "citation_boundary": "来源只用于限定方法边界和交叉验证，不用于夸大 MBTI 或 A/T 效度。",
-              "direct_answer": "INTP-A 通常指 逻辑学家 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+              "direct_answer": "INTP-A 指 INTP 四组偏好与 A 型身份风格的组合，常见表现是独立分析、开放探索，以及面对反馈时较稳定的自我确认。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
               "site_path": [
                 "免费 16 型人格测试",
                 "INTP-A 人格页",
@@ -4699,7 +4699,7 @@
                 "at_difference": "与 INTP-T 相比，INTP-A 更需要从“更稳定的自我确认”理解：通常较少被外部评价牵动，能在压力下维持方向，但也可能低估早期反馈。",
                 "not_for": "这个结果不能用于临床诊断、招聘筛选、智商判断、职业承诺或关系定论；它只适合作为自我理解、沟通和交叉验证的入口。",
                 "relationship_pattern": "在关系沟通中，INTP-A 常会把在意表达成理解、讨论和共同探索。更好的沟通方式，是把在意、边界和期待说成对方能接住的语言。",
-                "what_is": "INTP-A 通常指 逻辑学家 人格中带有更稳定的自我确认的一种表现。它描述的是人如何形成判断、处理压力和与他人协作，不是能力、诊断或命运结论。",
+                "what_is": "INTP-A 指 INTP 四组偏好与 A 型身份风格的组合，常见表现是独立分析、开放探索，以及面对反馈时较稳定的自我确认。A/T 不是官方 MBTI 原生维度，也不是能力、诊断或命运结论。",
                 "work_pattern": "在工作中，INTP-A 往往适合定义问题、建立模型、发现逻辑漏洞和解释复杂系统。如果目标、反馈和责任边界模糊，优势可能变成摩擦。"
               },
               "at_difference_scenarios": {
@@ -4823,19 +4823,19 @@
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/zh/personality/intp-a",
       "jsonld_overrides_json": {
-        "description": "了解 INTP-A 的分析建模、可能性探索和独立解题、适合与不适合的场景、A/T 差异、职业、关系、压力应对、常见误解与 FAQ。内容仅用于自我理解和成长复盘。",
+        "description": "了解 INTP-A 的名称含义、人格特点，以及 A 型在反馈、压力、工作和关系场景中的常见表现。A/T 不是官方 MBTI 原生维度，不代表能力高低或确定性职业结论。",
         "name": "INTP-A 人格特点",
         "url": "https://fermatmind.com/zh/personality/intp-a"
       },
-      "og_description": "了解 INTP-A 的分析建模、可能性探索和独立解题、适合与不适合的场景、A/T 差异、职业、关系、压力应对、常见误解与 FAQ。内容仅用于自我理解和成长复盘。",
+      "og_description": "了解 INTP-A 的名称含义、人格特点，以及 A 型在反馈、压力、工作和关系场景中的常见表现。A/T 不是官方 MBTI 原生维度，不代表能力高低或确定性职业结论。",
       "og_image_url": null,
-      "og_title": "INTP-A 人格特点：分析建模、可能性探索和独立解题 | FermatMind",
+      "og_title": "INTP-A 是什么？人格特点与 A 型含义 | FermatMind",
       "robots": "index,follow",
-      "seo_description": "了解 INTP-A 的分析建模、可能性探索和独立解题、适合与不适合的场景、A/T 差异、职业、关系、压力应对、常见误解与 FAQ。内容仅用于自我理解和成长复盘。",
-      "seo_title": "INTP-A 人格特点：分析建模、可能性探索和独立解题 | FermatMind",
-      "twitter_description": "了解 INTP-A 的分析建模、可能性探索和独立解题、适合与不适合的场景、A/T 差异、职业、关系、压力应对、常见误解与 FAQ。内容仅用于自我理解和成长复盘。",
+      "seo_description": "了解 INTP-A 的名称含义、人格特点，以及 A 型在反馈、压力、工作和关系场景中的常见表现。A/T 不是官方 MBTI 原生维度，不代表能力高低或确定性职业结论。",
+      "seo_title": "INTP-A 是什么？人格特点与 A 型含义 | FermatMind",
+      "twitter_description": "了解 INTP-A 的名称含义、人格特点，以及 A 型在反馈、压力、工作和关系场景中的常见表现。A/T 不是官方 MBTI 原生维度，不代表能力高低或确定性职业结论。",
       "twitter_image_url": null,
-      "twitter_title": "INTP-A 人格特点：分析建模、可能性探索和独立解题 | FermatMind"
+      "twitter_title": "INTP-A 是什么？人格特点与 A 型含义 | FermatMind"
     },
     "seo_surface_v1": {
       "alternates": {
@@ -4843,15 +4843,15 @@
         "zh-CN": "https://fermatmind.com/zh/personality/intp-a"
       },
       "canonical_url": "https://fermatmind.com/zh/personality/intp-a",
-      "description": "了解 INTP-A 的分析建模、可能性探索和独立解题、适合与不适合的场景、A/T 差异、职业、关系、压力应对、常见误解与 FAQ。内容仅用于自我理解和成长复盘。",
+      "description": "了解 INTP-A 的名称含义、人格特点，以及 A 型在反馈、压力、工作和关系场景中的常见表现。A/T 不是官方 MBTI 原生维度，不代表能力高低或确定性职业结论。",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "bf1dbb333f078d8bc024981574524eb66caccff8",
+      "metadata_fingerprint": "f7d392f8f6335cfaadcbb27eeb8ef4263adb48d8",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
-        "description": "了解 INTP-A 的分析建模、可能性探索和独立解题、适合与不适合的场景、A/T 差异、职业、关系、压力应对、常见误解与 FAQ。内容仅用于自我理解和成长复盘。",
-        "title": "INTP-A 人格特点：分析建模、可能性探索和独立解题 | FermatMind",
+        "description": "了解 INTP-A 的名称含义、人格特点，以及 A 型在反馈、压力、工作和关系场景中的常见表现。A/T 不是官方 MBTI 原生维度，不代表能力高低或确定性职业结论。",
+        "title": "INTP-A 是什么？人格特点与 A 型含义 | FermatMind",
         "type": "article",
         "url": "https://fermatmind.com/zh/personality/intp-a"
       },
@@ -4865,15 +4865,15 @@
         "DefinedTerm"
       ],
       "surface_type": "mbti_personality_public_detail",
-      "title": "INTP-A 人格特点：分析建模、可能性探索和独立解题 | FermatMind",
+      "title": "INTP-A 是什么？人格特点与 A 型含义 | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
-        "description": "了解 INTP-A 的分析建模、可能性探索和独立解题、适合与不适合的场景、A/T 差异、职业、关系、压力应对、常见误解与 FAQ。内容仅用于自我理解和成长复盘。",
-        "title": "INTP-A 人格特点：分析建模、可能性探索和独立解题 | FermatMind"
+        "description": "了解 INTP-A 的名称含义、人格特点，以及 A 型在反馈、压力、工作和关系场景中的常见表现。A/T 不是官方 MBTI 原生维度，不代表能力高低或确定性职业结论。",
+        "title": "INTP-A 是什么？人格特点与 A 型含义 | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "f4a9e6c44b38ce22c323ab958146908c3d47980fbba3e9fb81bb275eac6978ae"
+  "source_content_sha256": "b2ef248a5bd1e017a63dc1cded2a3ca4c2783775fc35247b89a92934b702527f"
 }
