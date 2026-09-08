@@ -1,10 +1,53 @@
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
 import { readFileSync, readdirSync } from "node:fs";
 import test from "node:test";
 
 const ci = readFileSync(new URL("../workflows/ci.yml", import.meta.url), "utf8");
 const deploy = readFileSync(new URL("../workflows/deploy.yml", import.meta.url), "utf8");
 const deployer = readFileSync(new URL("../../deploy.php", import.meta.url), "utf8");
+
+test("A08-only exact-SHA receipts require successful scoped checks without a legacy closeout", () => {
+  const branch = ci.match(/          elif \[ "\$\(jq -r \.operations\.a08_scoped_checks trunk-path-classification\.json\)" = true \]; then[\s\S]*?          fi/);
+  assert.ok(branch, "receipt aggregation must distinguish A08-only checks");
+  const script = `set -e\njq() { printf '%s' "$SCOPED"; }\n${branch[0].replace("elif", "if")}\nprintf '%s' "$council"`;
+  for (const scoped of ["true", "false"]) {
+    for (const result of ["success", "skipped", "failure", "cancelled"]) {
+      const run = spawnSync("bash", ["-c", script], {
+        encoding: "utf8",
+        env: { ...process.env, SCOPED: scoped, SEO_COUNCIL_ORCHESTRATION_RESULT: result },
+      });
+      const accepted = scoped === "true" ? result === "success" : result === "skipped";
+      assert.equal(run.status === 0, accepted, `${scoped}/${result}: ${run.stderr}`);
+      if (accepted) {
+        assert.deepEqual(JSON.parse(run.stdout), scoped === "true"
+          ? { required: false, result: "success", check_scope: "a08_scoped_checks" }
+          : { required: false, result: "skipped" });
+      }
+    }
+  }
+});
+
+test("deployment accepts only the matching A08-only receipt scope and result", () => {
+  const branch = deploy.match(/or \(\.seo_council_orchestration\.required == false[\s\S]*?\n            and /);
+  assert.ok(branch);
+  const predicate = branch[0].slice(3).replace(/\)\s+and $/, "").trim();
+  for (const scoped of [true, false]) {
+    for (const result of ["success", "skipped", "failure"]) {
+      for (const checkScope of ["a08_scoped_checks", "weekly_full_checks", null]) {
+        const run = spawnSync("jq", ["-e", predicate], {
+          encoding: "utf8",
+          input: JSON.stringify({
+            classification: { operations: { a08_scoped_checks: scoped } },
+            seo_council_orchestration: { required: false, result, check_scope: checkScope },
+          }),
+        });
+        const accepted = scoped ? result === "success" && checkScope === "a08_scoped_checks" : result === "skipped";
+        assert.equal(run.status === 0, accepted, `${scoped}/${result}/${checkScope}: ${run.stderr}`);
+      }
+    }
+  }
+});
 
 test("11D through 11L extend only the permanent CI and deploy control plane", () => {
   const workflows = readdirSync(new URL("../workflows", import.meta.url)).filter((name) => name.endsWith(".yml")).sort();

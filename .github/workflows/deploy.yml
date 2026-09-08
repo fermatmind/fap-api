@@ -307,7 +307,11 @@ jobs:
                 and .seo_council_orchestration.platform11_lifecycle.execution_allowed == false
                 and .seo_council_orchestration.execution_allowed == false)
               or (.seo_council_orchestration.required == false
-                and .seo_council_orchestration.result == "skipped"))
+                and ((.classification.operations.a08_scoped_checks == true
+                    and .seo_council_orchestration.result == "success"
+                    and .seo_council_orchestration.check_scope == "a08_scoped_checks")
+                  or (.classification.operations.a08_scoped_checks == false
+                    and .seo_council_orchestration.result == "skipped"))))
             and ((.seo_competitive_evidence.required == true
                 and .seo_competitive_evidence.receipt_version == "seo.competitive_evidence_closeout.v3"
                 and .seo_competitive_evidence.closeout_state == "OFFLINE_EVAL_READY"
