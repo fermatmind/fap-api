@@ -14,7 +14,7 @@ final class CacheLifecycleAlerts
 {
     public function observe(string $component, bool $healthy, bool $urgent = false): void
     {
-        if (! in_array($component, ['career_retention', 'sitemap_refresh', 'llms_refresh', 'redis_capacity'], true)) {
+        if (! in_array($component, ['career_retention', 'sitemap_refresh', 'llms_refresh', 'redis_capacity', 'projection_integrity'], true)) {
             throw new \InvalidArgumentException('Unknown cache lifecycle component.');
         }
         $root = storage_path('app/ops/cache-lifecycle');
@@ -79,7 +79,11 @@ final class CacheLifecycleAlerts
     public function health(): array
     {
         $checks = [];
-        foreach (['career_retention' => 900, 'sitemap_refresh' => 900, 'llms_refresh' => 2400] as $component => $maximumAge) {
+        $components = ['career_retention' => 900, 'sitemap_refresh' => 900, 'llms_refresh' => 2400];
+        if (is_file(storage_path('app/ops/cache-lifecycle/projection_integrity.json'))) {
+            $components['projection_integrity'] = 900;
+        }
+        foreach ($components as $component => $maximumAge) {
             $path = storage_path('app/ops/cache-lifecycle/'.$component.'.json');
             try {
                 $state = is_file($path) && filesize($path) < 65536

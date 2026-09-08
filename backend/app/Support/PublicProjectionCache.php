@@ -113,7 +113,25 @@ final class PublicProjectionCache
             return Cache::$method(...$arguments);
         }
         if (in_array($method, ['get', 'has', 'missing'], true)) {
-            return self::state()['mode'] === 'legacy' ? Cache::$method(...$arguments) : self::store()->$method(...$arguments);
+            if (self::state()['mode'] === 'legacy') {
+                return Cache::$method(...$arguments);
+            }
+            try {
+                $store = self::store();
+                $value = $store->$method(...$arguments);
+                if ($method === 'get' && $value === null && preg_match('/^career:public-authority:job-index:v3:(en|zh-CN):public:active$/D', $key)) {
+                    app(\App\Services\Ops\CacheLifecycleAlerts::class)->observe('projection_integrity', false, true);
+                }
+                if ($method === 'get' && $value === null && preg_match('/^(career:public-authority:.*):versions:([^:]+)$/D', $key, $version)
+                    && ($store->get($version[1].':active') === $version[2] || $store->get($version[1].':lkg') === $version[2])) {
+                    app(\App\Services\Ops\CacheLifecycleAlerts::class)->observe('projection_integrity', false, true);
+                }
+
+                return $value;
+            } catch (\Throwable $error) {
+                app(\App\Services\Ops\CacheLifecycleAlerts::class)->observe('projection_integrity', false, true);
+                throw $error;
+            }
         }
         if (! in_array($method, ['put', 'forever', 'forget', 'add'], true)) {
             throw new \LogicException('Unsupported public projection cache operation.');

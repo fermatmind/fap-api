@@ -230,4 +230,27 @@ final class PublicProjectionMigrationTest extends TestCase
         $this->assertFalse($production->isSuccessful());
         (new Process([...$command, '--staging']))->mustRun();
     }
+
+    public function test_missing_referenced_payload_alerts_immediately_and_periodic_verification_detects_recovery(): void
+    {
+        $base = $this->seedProjections();
+        $migration = new PublicProjectionMigration;
+        $migration->prepare();
+        config(['public_projection_cache.phase' => 'activate']);
+        $migration->activate();
+        Cache::store('public_projection')->forget($base.':versions:v1');
+        $this->assertNull(Projection::get($base.':versions:v1'));
+        $statePath = storage_path('app/ops/cache-lifecycle/projection_integrity.json');
+        $state = json_decode(file_get_contents($statePath), true);
+        $this->assertFalse($state['healthy']);
+        $this->assertTrue($state['pending_fault']);
+        Cache::store('public_projection')->forever($base.':versions:v1', ['body' => '完整正文']);
+        $migration->retire();
+        $state = json_decode(file_get_contents($statePath), true);
+        $this->assertTrue($state['healthy']);
+        [$target] = PublicProjectionMigration::connection(true);
+        $target->flushDB(); // Disposable test instance only.
+        $this->expectException(\RuntimeException::class);
+        $migration->retire();
+    }
 }

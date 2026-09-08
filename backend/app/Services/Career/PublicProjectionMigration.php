@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Cache;
 /** Same-host public namespace migration. Never changes the default connection. */
 final class PublicProjectionMigration
 {
+    public const INTEGRITY_FAILURE = 1001;
+
     public static function headroom(int $additionalBytes = 0): void
     {
         if (PHP_OS_FAMILY !== 'Linux' && app()->environment('testing')) {
@@ -124,6 +126,9 @@ final class PublicProjectionMigration
             });
             $count++;
         }
+        if ($count === 0) {
+            throw new \RuntimeException('Empty public projection source; switch refused.');
+        }
         // A withdrawal during a previous interrupted copy must not survive as an orphan.
         foreach ($this->keys($destination, $targetPrefix) as $key) {
             if (microtime(true) >= $deadline) {
@@ -228,6 +233,39 @@ final class PublicProjectionMigration
     public function retire(): array
     {
         $initial = Projection::state();
+        if (in_array($initial['mode'], ['primary', 'isolated'], true)) {
+            try {
+                [$current, $prefix] = self::connection(true);
+                $deadline = microtime(true) + 20;
+                $references = 0;
+                foreach ($this->keys($current, $prefix) as $key) {
+                    if (microtime(true) >= $deadline) {
+                        throw new \RuntimeException('Public integrity verification exceeded budget.');
+                    }
+                    $logical = substr($key, strlen($prefix));
+                    if (preg_match('/^(career:public-authority:.*):(active|lkg)$/D', $logical, $pointer)) {
+                        $references++;
+                        Projection::mutation(function () use ($current, $prefix, $key, $pointer): void {
+                            $raw = $current->rawCommand('GET', $key);
+                            if ($raw === false) {
+                                return; // Concurrent withdrawal removed this reference.
+                            }
+                            $version = @unserialize($raw, ['allowed_classes' => false]);
+                            if (! is_string($version) || ! $current->rawCommand('EXISTS', $prefix.$pointer[1].':versions:'.$version)) {
+                                throw new \RuntimeException('Public active/LKG payload missing.');
+                            }
+                        });
+                    }
+                }
+                if ($references === 0) {
+                    throw new \RuntimeException('Public projection references are missing.');
+                }
+                app(\App\Services\Ops\CacheLifecycleAlerts::class)->observe('projection_integrity', true);
+            } catch (\Throwable $error) {
+                app(\App\Services\Ops\CacheLifecycleAlerts::class)->observe('projection_integrity', false, true);
+                throw new \RuntimeException('Public projection integrity failed.', self::INTEGRITY_FAILURE, $error);
+            }
+        }
         $epoch = null;
         if ($initial['mode'] === 'primary' && count(array_unique($initial['accepted_releases'] ?? [])) >= 2
             && time() - (int) ($initial['primary_since'] ?? time()) >= (int) config('public_projection_cache.observation_seconds')) {

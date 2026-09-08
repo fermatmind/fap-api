@@ -200,6 +200,10 @@ jobs:
         if: needs.classify.outputs.deploy == 'true' || needs.classify.outputs.tests_changed == 'true'
         working-directory: backend
         run: |
+          if [ '${{ needs.classify.outputs.cache }}' = 'true' ] || git diff --name-only '${{ needs.classify.outputs.base_sha }}' '${{ github.sha }}' -- ':(top)backend/tests/Feature/Career/PublicProjectionMigrationTest.php' ':(top)backend/tests/Feature/Career/CareerCacheVersionRetentionTest.php' | grep -q 'Test.php$'; then
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends redis-server
+          fi
           composer install --no-interaction --prefer-dist --no-progress
           cp -n .env.example .env || true
           php artisan key:generate --force

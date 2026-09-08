@@ -32,8 +32,10 @@ final class ManagePublicProjectionCache extends Command
             $this->line(json_encode($result, JSON_THROW_ON_ERROR));
 
             return self::SUCCESS;
-        } catch (\Throwable) {
-            app(CacheLifecycleAlerts::class)->observe('redis_capacity', false, true);
+        } catch (\Throwable $error) {
+            if ($error->getCode() !== PublicProjectionMigration::INTEGRITY_FAILURE) {
+                app(CacheLifecycleAlerts::class)->observe('redis_capacity', false, true);
+            }
             $this->error('Public projection operation failed; automatic read switch was not accepted.');
 
             return self::FAILURE;
