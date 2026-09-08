@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Ops;
 
+use App\Domain\Personality\Current\PersonalityCurrentPageReader;
 use Carbon\CarbonImmutable;
 use Illuminate\Cache\Repository;
 use Illuminate\Http\Client\ConnectionException;
@@ -95,6 +96,14 @@ final class PublicContentDeliveryProbeService
                 ? $this->readback->extract((string) $target['readback_profile'], $body)
                 : $this->emptyReadback((string) $target['readback_profile']);
             $cacheReady = in_array($cacheState, (array) $target['allowed_cache_states'], true);
+            if ($response->header('X-Fermat-Content-Authority') === 'personality.page.content.v1') {
+                // Current bypasses the legacy DB cache and exposes no cache header.
+                // Only an exact local package/target readback can accept that absence.
+                $readback = $bytes <= $this->payloadBudgetBytes()
+                    ? $this->currentReadback($target, $body, (string) $response->header('X-Fermat-Content-Aggregate'))
+                    : $this->emptyReadback((string) $target['readback_profile']);
+                $cacheReady = $cacheReady || ($response->header('X-Fermat-Public-Read-Cache', '') === '' && $readback['ok']);
+            }
             $ok = $statusCode >= 200
                 && $statusCode < 300
                 && $bytes <= $this->payloadBudgetBytes()
@@ -119,6 +128,26 @@ final class PublicContentDeliveryProbeService
         $this->store()->put($this->latestKey((string) $target['id']), $result, $this->ttlSeconds());
 
         return $result;
+    }
+
+    private function currentReadback(array $target, string $body, string $aggregate): array
+    {
+        $identity = match ($target['path']) {
+            '/api/v0.5/personality/intj-a' => ['mbti', 'variant', 'intj-a', 'mbti_detail'],
+            '/api/v0.5/personality-content-assets/big_five/hub/big-five' => ['big_five', 'hub', 'big-five', 'personality_asset_detail'],
+            default => null,
+        };
+        if ($identity === null || $target['readback_profile'] !== $identity[3]
+            || ($target['query']['locale'] ?? null) !== $target['locale']) {
+            return $this->emptyReadback((string) $target['readback_profile']);
+        }
+        $reader = app(PersonalityCurrentPageReader::class);
+
+        return $this->readback->extractCurrent(
+            $identity[3], $body, $aggregate,
+            $reader->payload($identity[0], $identity[1], $identity[2], $target['locale']),
+            $reader->aggregateSha256(),
+        );
     }
 
     private function boundedBody(Response $response): string

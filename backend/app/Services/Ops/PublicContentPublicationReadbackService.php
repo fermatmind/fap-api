@@ -6,6 +6,57 @@ namespace App\Services\Ops;
 
 final class PublicContentPublicationReadbackService
 {
+    /** Current pages have package provenance, not CMS publication timestamps. */
+    public function extractCurrent(string $profile, string $body, string $aggregate, array $expected, string $expectedAggregate): array
+    {
+        $payload = json_decode($body, true);
+        if (! is_array($payload) || ($payload['ok'] ?? null) !== true
+            || preg_match('/^[a-f0-9]{64}$/D', $aggregate) !== 1
+            || ! hash_equals($expectedAggregate, $aggregate)) {
+            return $this->failed($profile);
+        }
+        $fields = $this->currentFields($profile, $payload);
+        if ($fields === [] || in_array(null, $fields, true)
+            || $fields !== $this->currentFields($profile, $expected)) {
+            return $this->failed($profile);
+        }
+        $fields = ['authority_contract' => 'personality.page.content.v1', 'aggregate_sha256' => $aggregate, ...$fields];
+
+        return ['ok' => true, 'profile' => $profile, 'fields' => $fields,
+            'version_fingerprint' => hash('sha256', json_encode($fields, JSON_THROW_ON_ERROR))];
+    }
+
+    private function currentFields(string $profile, array $payload): array
+    {
+        $paths = match ($profile) {
+            'mbti_detail' => ['display_type' => 'mbti_public_projection_v1.display_type',
+                'type_code' => 'profile.type_code', 'locale' => 'profile.locale',
+                'schema_version' => 'profile.schema_version', 'status' => 'profile.status'],
+            'personality_asset_detail' => ['contract_version' => 'personality_public_content_asset_v1.contract_version',
+                'framework' => 'personality_public_content_asset_v1.framework',
+                'entity_type' => 'personality_public_content_asset_v1.entity_type',
+                'code' => 'personality_public_content_asset_v1.code',
+                'locale' => 'personality_public_content_asset_v1.locale',
+                'launch_state' => 'personality_public_content_asset_v1.launch_state',
+                'source_hash' => 'personality_public_content_asset_v1.source_hash'],
+            default => [],
+        };
+        if ($paths === []) {
+            return [];
+        }
+        $fields = [];
+        foreach ($paths as $key => $path) {
+            $fields[$key] = $this->boundedString(data_get($payload, $path));
+        }
+        $publicPath = $profile === 'mbti_detail' ? 'profile.is_public' : 'personality_public_content_asset_v1.is_public';
+        if (data_get($payload, $publicPath) !== true
+            || (isset($fields['source_hash']) && preg_match('/^[a-f0-9]{64}$/D', $fields['source_hash']) !== 1)) {
+            return [];
+        }
+
+        return $fields;
+    }
+
     /**
      * @return array{ok: bool, profile: string, fields: array<string, bool|int|string|null>, version_fingerprint: string|null}
      */

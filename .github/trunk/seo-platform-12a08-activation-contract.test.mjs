@@ -32,6 +32,16 @@ test('carry requires real Git ancestry, both fingerprints and equal vectors; v1 
   assert.equal(mayCarry({...manifest,bound_production_sha:git('rev-parse','HEAD')},candidate,MISSIONS[0],root),false);
  } finally {rmSync(root,{recursive:true,force:true});}
 });
+test('Current probe readback dependencies require M1 revalidation without content publication',()=>{
+ const paths=['backend/app/Services/Ops/PublicContentDeliveryProbeService.php','backend/app/Services/Ops/PublicContentPublicationReadbackService.php'];
+ for(const path of [...paths,'backend/app/Domain/Personality/Current/PersonalityCurrentPageReader.php']) assert.deepEqual(scopeFor(path),[MISSIONS[0]]);
+ const result=classifyPaths([...paths,'backend/tests/Feature/Console/ProbePublicContentDeliveryCommandTest.php']);
+ assert.equal(result.operations.a08_scoped_checks,true);
+ assert.equal(result.deploy,true);
+ assert.equal(result.operations.publisher_required,false);
+ assert.equal(result.operations.seo_council_orchestration,false);
+ assert.equal(result.flags.seo_discoverability,false);
+});
 test('offline receipts cannot omit test scope or manufacture real source evidence',()=>{
  assert.throws(()=>scopedReceipt('<testcase name="unrelated"/>',execFileSync('git',['rev-parse','HEAD']).toString().trim()),/COVERAGE|RESULTS/);
  assert.throws(()=>scopedReceipt('<testcase/><failure/>','a'.repeat(40)),/RESULTS/);

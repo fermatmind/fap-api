@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Console;
 
+use App\Domain\Personality\Current\PersonalityCurrentPageReader;
 use App\Services\Ops\PublicContentDeliveryProbeService;
+use App\Services\Ops\PublicContentPublicationReadbackService;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -118,6 +120,71 @@ final class ProbePublicContentDeliveryCommandTest extends TestCase
         $this->assertSame('cache_state_degraded', $items['l1_mbti_intj_a_en']['error_code']);
         $this->assertSame('publication_readback_failed', $items['l2_big_five_hub_en']['error_code']);
         $this->assertTrue($items['l3_career_industries_en']['ok']);
+    }
+
+    public function test_current_big_five_uses_package_provenance_without_legacy_cache_or_cms_fields(): void
+    {
+        $reader = app(PersonalityCurrentPageReader::class);
+        $payload = ['ok' => true, ...$reader->payload('big_five', 'hub', 'big-five', 'en')];
+        $headers = ['X-Fermat-Content-Authority' => 'personality.page.content.v1',
+            'X-Fermat-Content-Aggregate' => $reader->aggregateSha256()];
+        Http::fake([
+            '*personality/intj-a*' => Http::response($this->mbtiPayload(), 200, ['X-Fermat-Public-Read-Cache' => 'fresh']),
+            '*personality-content-assets*' => Http::response($payload, 200, $headers),
+            '*career/industries*' => Http::response($this->careerPayload()),
+        ]);
+        $items = app(PublicContentDeliveryProbeService::class)->probeAll();
+        $this->assertTrue($items[1]['ok']);
+        $this->assertSame('unknown', $items[1]['cache_state']);
+        $fields = $items[1]['readback']['fields'];
+        $this->assertSame($reader->aggregateSha256(), $fields['aggregate_sha256']);
+        $this->assertSame($payload['personality_public_content_asset_v1']['source_hash'], $fields['source_hash']);
+        $this->assertArrayNotHasKey('sections', $fields);
+        $this->assertArrayNotHasKey('published_at', $fields);
+    }
+
+    public function test_current_readback_rejects_stale_headers_wrong_aggregate_and_wrong_identity(): void
+    {
+        $reader = app(PersonalityCurrentPageReader::class);
+        $payload = ['ok' => true, ...$reader->payload('big_five', 'hub', 'big-five', 'en')];
+        foreach (['aggregate', 'locale', 'source_hash', 'stale', 'missing_authority'] as $fault) {
+            $body = $payload;
+            $headers = ['X-Fermat-Content-Authority' => 'personality.page.content.v1',
+                'X-Fermat-Content-Aggregate' => $reader->aggregateSha256()];
+            if ($fault === 'aggregate') {
+                $headers['X-Fermat-Content-Aggregate'] = str_repeat('0', 64);
+            } elseif (in_array($fault, ['locale', 'source_hash'], true)) {
+                $body['personality_public_content_asset_v1'][$fault] = $fault === 'locale' ? 'zh-CN' : str_repeat('0', 64);
+            } elseif ($fault === 'stale') {
+                $headers['X-Fermat-Public-Read-Cache'] = 'stale';
+            } else {
+                unset($headers['X-Fermat-Content-Authority']);
+            }
+            Http::fake(['*' => Http::response($body, 200, $headers)]);
+            $items = app(PublicContentDeliveryProbeService::class)->probeAll();
+            $this->assertFalse($items[1]['ok'], $fault);
+        }
+    }
+
+    public function test_current_mbti_readback_accepts_package_identity_but_never_bypasses_payload_budget(): void
+    {
+        $reader = app(PersonalityCurrentPageReader::class);
+        $payload = ['ok' => true, ...$reader->payload('mbti', 'variant', 'intj-a', 'en')];
+        $body = json_encode($payload, JSON_THROW_ON_ERROR);
+        $result = app(PublicContentPublicationReadbackService::class)->extractCurrent(
+            'mbti_detail', $body, $reader->aggregateSha256(), $payload, $reader->aggregateSha256(),
+        );
+        $this->assertTrue($result['ok']);
+        $this->assertSame('INTJ-A', $result['fields']['display_type']);
+        config()->set('public_content_observability.probe.payload_budget_bytes', 1024);
+        Http::fake(['*' => Http::response($payload, 200, [
+            'X-Fermat-Content-Authority' => 'personality.page.content.v1',
+            'X-Fermat-Content-Aggregate' => $reader->aggregateSha256(),
+        ])]);
+        $item = app(PublicContentDeliveryProbeService::class)->probeNext();
+        $this->assertFalse($item['ok']);
+        $this->assertSame(1025, $item['bytes']);
+        $this->assertSame('payload_budget_exceeded', $item['error_code']);
     }
 
     public function test_payload_budget_and_connection_failures_are_bounded_without_exception_details(): void

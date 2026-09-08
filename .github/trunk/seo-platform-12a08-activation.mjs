@@ -6,7 +6,7 @@ export const SCOPE_VERSION = 'seo-council-a08-dependencies.v2';
 export const MISSIONS = ['seo.platform12.daily_gsc_core_runtime', 'seo.platform12.daily_url_truth_reconciliation', 'seo.platform12.daily_private_policy_evidence_drift'];
 const base = 'backend/app/Services/SeoCouncil/Platform12/';
 export const MISSION_DEPENDENCIES = {
-  [MISSIONS[0]]: [`${base}Evaluation/Platform12DailyGscCoreRuntimeEvaluator.php`, 'backend/app/Services/SeoIntel/Gsc', 'backend/app/Services/SeoIntel/Runtime', 'backend/app/Services/Ops/PublicContentDeliveryProbeService.php', 'backend/resources/seo-agent/council/platform12/daily/gsc'],
+  [MISSIONS[0]]: [`${base}Evaluation/Platform12DailyGscCoreRuntimeEvaluator.php`, 'backend/app/Services/SeoIntel/Gsc', 'backend/app/Services/SeoIntel/Runtime', 'backend/app/Services/Ops/PublicContentDeliveryProbeService.php', 'backend/app/Services/Ops/PublicContentPublicationReadbackService.php', 'backend/app/Domain/Personality/Current/', 'backend/resources/seo-agent/council/platform12/daily/gsc'],
   [MISSIONS[1]]: [`${base}Evaluation/Platform12DailyUrlTruthEvaluator.php`, 'backend/app/Services/SeoIntel/UrlTruth', 'backend/app/Services/SeoIntel/Sitemap', 'backend/app/Services/SEO/Sitemap', 'backend/resources/seo-agent/council/platform12/daily/url'],
   [MISSIONS[2]]: [`${base}Evaluation/Platform12DailySecurityDriftEvaluator.php`, 'backend/resources/seo-agent/council/platform12/daily/security'],
 };
