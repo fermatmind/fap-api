@@ -740,6 +740,26 @@ final class ScaleRegistrySeeder extends Seeder
         $this->command?->info('ScaleRegistrySeeder: EQ_60 scale upserted.');
     }
 
+    private function applyProfessionalIntros(array &$attributes): void
+    {
+        $copyPackage = json_decode(file_get_contents(database_path('data/assessment_professional_intros_zh_20260908.json')), true, 512, JSON_THROW_ON_ERROR);
+        foreach ($copyPackage['scales'][$attributes['code']]['updates'] ?? [] as $update) {
+            if (isset($update['path'])) {
+                data_set($attributes['content_i18n_json']['zh'], $update['path'], $update['value']);
+
+                continue;
+            }
+
+            $collection = data_get($attributes['content_i18n_json']['zh'], $update['collection']);
+            $index = is_array($collection) ? array_search($update['id'], array_column($collection, 'id'), true) : false;
+            if ($index === false) {
+                throw new \RuntimeException($attributes['code'].'.'.$update['collection'].'.'.$update['id'].' is missing from the seed baseline.');
+            }
+            $collection[$index][$update['field']] = $update['value'];
+            data_set($attributes['content_i18n_json']['zh'], $update['collection'], $collection);
+        }
+    }
+
     private function upsertAssessmentPreservingFaq(ScaleRegistryWriter $writer, array $attributes): \App\Models\ScaleRegistry
     {
         $package = json_decode(file_get_contents(database_path('data/assessment_faq_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
@@ -771,6 +791,8 @@ final class ScaleRegistrySeeder extends Seeder
             $collection[$index][$update['field']] = $update['value'];
             data_set($attributes['content_i18n_json']['zh'], $update['collection'], $collection);
         }
+
+        $this->applyProfessionalIntros($attributes);
 
         $entryPackage = json_decode(file_get_contents(database_path('data/assessment_entry_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
         $attributes['content_i18n_json']['zh']['landing_entry'] = $entryPackage['scales'][$attributes['code']]['landing_entry'];
@@ -834,6 +856,8 @@ final class ScaleRegistrySeeder extends Seeder
             $collection[$index][$update['field']] = $update['value'];
             data_set($attributes['content_i18n_json']['zh'], $update['collection'], $collection);
         }
+
+        $this->applyProfessionalIntros($attributes);
 
         $entryPackage = json_decode(file_get_contents(database_path('data/assessment_entry_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
         $attributes['content_i18n_json']['zh']['landing_entry'] = $entryPackage['scales'][$attributes['code']]['landing_entry'];

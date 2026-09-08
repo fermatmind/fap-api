@@ -21,6 +21,22 @@ final class ScalesLookupSeoMetadataTest extends TestCase
         $this->artisan('fap:scales:sync-slugs');
     }
 
+    public function test_six_assessment_lookups_publish_professional_intros_after_fresh_seed(): void
+    {
+        $package = json_decode(file_get_contents(database_path('data/assessment_professional_intros_zh_20260908.json')), true, 512, JSON_THROW_ON_ERROR);
+        foreach ($package['scales'] as $code => $scale) {
+            $slug = DB::table('scales_registry')->where('org_id', 0)->where('code', $code)->value('primary_slug');
+            $response = $this->getJson('/api/v0.3/scales/lookup?slug='.$slug.'&locale=zh')->assertOk();
+            $zh = $response->json('content_i18n_json.zh');
+            foreach ($scale['updates'] as $update) {
+                $actual = isset($update['path'])
+                    ? data_get($zh, $update['path'])
+                    : collect(data_get($zh, $update['collection']))->firstWhere('id', $update['id'])[$update['field']];
+                $this->assertSame($update['value'], $actual, $code);
+            }
+        }
+    }
+
     public function test_mbti_zh_lookup_uses_conservative_free_test_metadata(): void
     {
         $this->getJson('/api/v0.3/scales/lookup?slug=mbti-personality-test-16-personality-types&locale=zh')
