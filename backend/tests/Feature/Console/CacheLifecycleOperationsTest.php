@@ -33,6 +33,29 @@ final class CacheLifecycleOperationsTest extends TestCase
         parent::tearDown();
     }
 
+    public function test_maintenance_mutexes_work_when_default_redis_is_unavailable(): void
+    {
+        config(['cache.default' => 'redis', 'cache.stores.file.path' => $this->testStorage.'/locks',
+            'cache.stores.file.lock_path' => $this->testStorage.'/locks',
+            'database.redis.cache.host' => '127.0.0.1', 'database.redis.cache.port' => 1]);
+        \Illuminate\Support\Facades\Artisan::all(); // Run the real Artisan::starting scheduler registration.
+        $schedule = app(\Illuminate\Console\Scheduling\Schedule::class);
+        foreach (['career:prune-public-cache-versions', 'seo:refresh-llms-full-cache', 'cache:public-projection retire', 'seo:warm-sitemap-source-cache'] as $command) {
+            $event = collect($schedule->events())->first(fn ($event) => str_contains($event->command, $command));
+            $this->assertNotNull($event);
+            $this->assertTrue($event->withoutOverlapping);
+            $this->assertSame('file', $event->mutex->store);
+            $this->assertTrue($event->mutex->create($event));
+            $this->assertFalse($event->mutex->create($event));
+            $event->mutex->forget($event);
+            $this->assertTrue($event->mutex->create($event));
+            $event->mutex->forget($event);
+        }
+        $business = collect($schedule->events())->first(fn ($event) => str_contains($event->command, 'email:outbox-send'));
+        $this->assertNotSame('file', $business->mutex->store);
+        $this->assertSame('redis', config('cache.default'));
+    }
+
     public function test_direct_email_retries_failed_delivery_then_deduplicates_fault_and_recovery(): void
     {
         config(['ops.cache_lifecycle.mail_recipient' => 'ops@example.test', 'mail.from.address' => 'sender@example.test']);
