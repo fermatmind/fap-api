@@ -12,7 +12,7 @@ final class PublicProjectionDeployTest extends TestCase
     public function test_existing_pre_activation_guard_refuses_an_unaware_reader_after_migration(): void
     {
         $deploy = file_get_contents(dirname(__DIR__, 3).'/deploy.php');
-        preg_match("/<<<'PYTHON'\n(import json, pathlib, sys.*?)\nPY\nPYTHON/s", $deploy, $match);
+        preg_match("/<<<'PYTHON'\n(import json, pathlib, sys.*?)\nPYTHON;/s", $deploy, $match);
         $this->assertNotEmpty($match[1] ?? null);
         $directory = sys_get_temp_dir().'/projection-guard-'.bin2hex(random_bytes(5));
         mkdir($directory);
@@ -21,7 +21,9 @@ final class PublicProjectionDeployTest extends TestCase
         try {
             foreach (['legacy' => true, 'mirror' => false, 'primary' => false, 'isolated' => false, 'unknown' => false] as $mode => $expected) {
                 file_put_contents($state, json_encode(['version' => 1, 'mode' => $mode]));
-                $process = new Process(['python3', '-c', $match[1], $state, $reader]);
+                // Exercise the enclosing shell used by Deployer as well as Python.
+                $command = 'python3 -c '.escapeshellarg($match[1]).' '.escapeshellarg($state).' '.escapeshellarg($reader);
+                $process = new Process(['bash', '-c', 'export SEO_PUBLIC_SITEMAP_AUTHORITY=backend; ('.$command.');']);
                 $process->run();
                 $this->assertSame($expected, $process->isSuccessful(), $mode);
             }

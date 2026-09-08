@@ -636,7 +636,7 @@ if ($stagingIdentityFile !== null) {
 task('guard:expected-release-revision', function () {
     $state = deployPlaceholderPathArg('{{deploy_path}}', 'shared/backend/storage/app/ops/cache-lifecycle/public_projection.json');
     $compatible = deployPlaceholderPathArg('{{release_path}}', 'backend/app/Support/PublicProjectionCache.php');
-    run('python3 - '.$state.' '.$compatible." <<'PY'\n".<<<'PYTHON'
+    $compatibilityCheck = <<<'PYTHON'
 import json, pathlib, sys
 state, compatible = map(pathlib.Path, sys.argv[1:])
 if state.exists():
@@ -645,8 +645,8 @@ if state.exists():
         raise SystemExit('cache_rollback_compatibility=invalid_state')
     if value['mode'] != 'legacy' and not compatible.is_file():
         raise SystemExit('cache_rollback_compatibility=unverified_legacy_reader')
-PY
-PYTHON);
+PYTHON;
+    run('python3 -c '.deployShellArg($compatibilityCheck).' '.$state.' '.$compatible);
     if (currentHost()->getAlias() !== 'production') {
         return;
     }
