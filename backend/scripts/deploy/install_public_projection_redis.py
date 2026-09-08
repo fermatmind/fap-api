@@ -3,6 +3,7 @@
 import argparse
 import os
 import pwd
+import socket
 import subprocess
 from pathlib import Path
 
@@ -36,7 +37,7 @@ def validate(candidate: Path, staging: bool = False) -> str:
         raise ValueError('invalid public Redis candidate')
     content = candidate.read_text()
     lines = content.splitlines()
-    expected = {'bind': '127.0.0.1', 'protected-mode': 'yes', 'port': '6380', 'daemonize': 'no',
+    expected = {'bind': '127.0.0.1', 'protected-mode': 'yes', 'port': '6381', 'daemonize': 'no',
                 'supervised': 'no', 'dir': '/var/lib/redis-public-projection', 'dbfilename': 'dump.rdb',
                 'save': '""', 'appendonly': 'yes', 'appendfsync': 'everysec', 'auto-aof-rewrite-percentage': '100',
                 'auto-aof-rewrite-min-size': '64mb', 'maxmemory': '2147483648', 'maxmemory-policy': 'noeviction', 'logfile': '""'}
@@ -66,6 +67,10 @@ def install(candidate: Path, staging: bool = False) -> None:
         raise ValueError('existing public Redis configuration differs')
     if unit.exists() and unit.read_text() != UNIT:
         raise ValueError('existing public Redis unit differs')
+    if not unit.exists():
+        # Refuse an occupied port before creating any persistent service files.
+        with socket.socket() as probe:
+            probe.bind(('127.0.0.1', 6381))
     redis = pwd.getpwnam('redis')
     directory.mkdir(mode=0o700, exist_ok=True)
     os.chown(directory, redis.pw_uid, redis.pw_gid)

@@ -72,7 +72,7 @@ final class ManagePublicProjectionCache extends Command
         if (! is_string($password) || ($password === '' && ! app()->environment(['staging', 'testing'])) || preg_match('/[\r\n\x00]/', $password)) {
             throw new \RuntimeException('Existing Redis credential unavailable.');
         }
-        $text = "bind 127.0.0.1\nprotected-mode yes\nport 6380\ndaemonize no\nsupervised no\n"
+        $text = "bind 127.0.0.1\nprotected-mode yes\nport 6381\ndaemonize no\nsupervised no\n"
             ."dir /var/lib/redis-public-projection\ndbfilename dump.rdb\nsave \"\"\n"
             ."appendonly yes\nappendfsync everysec\nauto-aof-rewrite-percentage 100\nauto-aof-rewrite-min-size 64mb\n"
             ."maxmemory 2147483648\nmaxmemory-policy noeviction\nlogfile \"\"\n"

@@ -34,6 +34,20 @@ final class CareerCacheLifecycleTest extends TestCase
         $this->assertNotSame($detail, $cache->publishJobDetailReadModel('test-role', 'en', $payload));
     }
 
+    public function test_equivalent_records_reuse_versions_but_list_order_and_scalar_types_do_not(): void
+    {
+        config(['cache.default' => 'array']);
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $version = $cache->publishDirectoryReadModel('en', ['source_version' => 'v1', 'items' => [['name' => 'one', 'score' => 1], ['name' => 'two', 'score' => 2]]]);
+        $same = ['items' => [['score' => 1, 'name' => 'one'], ['score' => 2, 'name' => 'two']], 'source_version' => 'v1'];
+        $this->assertSame($version, $cache->publishDirectoryReadModel('en', $same));
+        $same['items'] = array_reverse($same['items']);
+        $reordered = $cache->publishDirectoryReadModel('en', $same);
+        $this->assertNotSame($version, $reordered);
+        $same['items'][0]['score'] = '2';
+        $this->assertNotSame($reordered, $cache->publishDirectoryReadModel('en', $same));
+    }
+
     public function test_backup_rotation_preserves_unfinished_and_recent_backups_and_enforces_capacity(): void
     {
         $root = sys_get_temp_dir().'/career-backups-'.bin2hex(random_bytes(6));

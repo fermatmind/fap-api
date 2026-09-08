@@ -1193,8 +1193,8 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         $previousVersion = Cache::get($activeKey);
         $storedPayload = $this->withoutDerivedContentV3($payload, $normalizedSlug, $normalizedLocale);
         if ($this->reuseImmutableVersions && is_string($previousVersion) && $previousVersion !== ''
-            && $this->readStoredJobDetailPayload($this->jobDetailVersionPayloadKey($normalizedSlug, $normalizedLocale, $previousVersion)) === $storedPayload
-            && Cache::get($this->jobDetailExposureProjectionVersionKey($normalizedSlug, $normalizedLocale, $previousVersion)) === $exposureProjectionItem) {
+            && $this->sameCachedValue($this->readStoredJobDetailPayload($this->jobDetailVersionPayloadKey($normalizedSlug, $normalizedLocale, $previousVersion)), $storedPayload)
+            && $this->sameCachedValue(Cache::get($this->jobDetailExposureProjectionVersionKey($normalizedSlug, $normalizedLocale, $previousVersion)), $exposureProjectionItem)) {
             // Reuse only the complete current payload AND its publication discriminator.
             // ULIDs and LKG remain unchanged; these immutable payloads have no TTL.
             return $previousVersion;
@@ -1629,7 +1629,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         $snapshots = [];
         foreach ($payloadsByLocale as $locale => $payload) {
             $current = Cache::get($this->jobIndexActiveVersionKey($locale, $includeNonIndexable));
-            $version = $this->reuseImmutableVersions && is_string($current) && $current !== '' && Cache::get($this->jobIndexVersionPayloadKey($locale, $includeNonIndexable, $current)) === $payload
+            $version = $this->reuseImmutableVersions && is_string($current) && $current !== '' && $this->sameCachedValue(Cache::get($this->jobIndexVersionPayloadKey($locale, $includeNonIndexable, $current)), $payload)
                 ? $current : (string) Str::ulid();
             $payloadKey = $this->jobIndexVersionPayloadKey($locale, $includeNonIndexable, $version);
             Cache::forever($payloadKey, $payload);
@@ -1944,7 +1944,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         $activeKey = $this->directoryActiveVersionKey($normalizedLocale);
         $previousVersion = Cache::get($activeKey);
         if ($this->reuseImmutableVersions && is_string($previousVersion) && $previousVersion !== ''
-            && Cache::get($this->directoryVersionPayloadKey($normalizedLocale, $previousVersion)) === $payload) {
+            && $this->sameCachedValue(Cache::get($this->directoryVersionPayloadKey($normalizedLocale, $previousVersion)), $payload)) {
             Cache::forever($this->directoryActivatedAtKey($normalizedLocale), now()->timestamp);
 
             return $previousVersion;
@@ -1973,7 +1973,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
 
         foreach ($payloadsByLocale as $locale => $payload) {
             $current = Cache::get($this->directoryActiveVersionKey($locale));
-            $version = $this->reuseImmutableVersions && is_string($current) && $current !== '' && Cache::get($this->directoryVersionPayloadKey($locale, $current)) === $payload
+            $version = $this->reuseImmutableVersions && is_string($current) && $current !== '' && $this->sameCachedValue(Cache::get($this->directoryVersionPayloadKey($locale, $current)), $payload)
                 ? $current : (string) Str::ulid();
             $payloadKey = $this->directoryVersionPayloadKey($locale, $version);
             Cache::forever($payloadKey, $payload);
@@ -2682,5 +2682,24 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             'cache_state' => $state,
             'version' => $version,
         ]);
+    }
+
+    /** Record key order is immaterial; sequence order and scalar types are not. */
+    private function sameCachedValue(mixed $left, mixed $right): bool
+    {
+        if ($left === $right) {
+            return true;
+        }
+        if (! is_array($left) || ! is_array($right) || count($left) !== count($right)
+            || array_is_list($left) !== array_is_list($right)) {
+            return false;
+        }
+        foreach ($left as $key => $value) {
+            if (! array_key_exists($key, $right) || ! $this->sameCachedValue($value, $right[$key])) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

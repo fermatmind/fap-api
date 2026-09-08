@@ -213,7 +213,7 @@ return [
 
         'public_projection' => [
             'host' => '127.0.0.1',
-            'port' => 6380,
+            'port' => 6381,
             'password' => env('REDIS_PASSWORD'),
             'database' => 1,
             'timeout' => 2,

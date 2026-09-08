@@ -21,7 +21,10 @@ final class CacheLifecycleAlerts
         File::ensureDirectoryExists($root, 0770);
         $lease = fopen($root.'/'.$component.'.lock', 'c');
         if ($lease !== false) {
-            chmod($root.'/'.$component.'.lock', 0660);
+            clearstatcache(true, $root.'/'.$component.'.lock');
+            if ((fileperms($root.'/'.$component.'.lock') & 0777) !== 0660) {
+                chmod($root.'/'.$component.'.lock', 0660);
+            }
         }
         if ($lease === false || ! flock($lease, LOCK_EX | LOCK_NB)) {
             throw new \RuntimeException('Cache lifecycle observation lock unavailable.');
@@ -68,7 +71,10 @@ final class CacheLifecycleAlerts
                 || ! rename($temporary, $path)) {
                 throw new \RuntimeException('Cache lifecycle observation write failed.');
             }
-            chmod($path, 0660);
+            clearstatcache(true, $path);
+            if ((fileperms($path) & 0777) !== 0660) {
+                chmod($path, 0660);
+            }
         } finally {
             flock($lease, LOCK_UN);
             fclose($lease);
@@ -107,7 +113,10 @@ final class CacheLifecycleAlerts
         if ($lock === false || ! flock($lock, LOCK_EX | LOCK_NB)) {
             throw new \RuntimeException('Mail verification lock unavailable.');
         }
-        chmod($root.'/mail_verification.lock', 0660);
+        clearstatcache(true, $root.'/mail_verification.lock');
+        if ((fileperms($root.'/mail_verification.lock') & 0777) !== 0660) {
+            chmod($root.'/mail_verification.lock', 0660);
+        }
         try {
             $path = $root.'/mail_verification.json';
             $identity = hash('sha256', json_encode([config('ops.cache_lifecycle.mail_recipient'), config('mail.from.address'),
@@ -127,7 +136,10 @@ final class CacheLifecycleAlerts
                     || ! rename($path.'.tmp', $path)) {
                     throw new \RuntimeException('Mail verification state write failed.');
                 }
-                chmod($path, 0660);
+                clearstatcache(true, $path);
+                if ((fileperms($path) & 0777) !== 0660) {
+                    chmod($path, 0660);
+                }
             }
         } finally {
             flock($lock, LOCK_UN);

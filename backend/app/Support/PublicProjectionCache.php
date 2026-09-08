@@ -48,7 +48,10 @@ final class PublicProjectionCache
         if (file_put_contents($temporary, json_encode($state, JSON_THROW_ON_ERROR), LOCK_EX) === false) {
             throw new \RuntimeException('Public projection state write failed.');
         }
-        chmod($temporary, 0660);
+        clearstatcache(true, $temporary);
+        if ((fileperms($temporary) & 0777) !== 0660) {
+            chmod($temporary, 0660);
+        }
         if (! rename($temporary, $path)) {
             throw new \RuntimeException('Public projection state activation failed.');
         }
@@ -76,7 +79,10 @@ final class PublicProjectionCache
         if ($lease === false) {
             throw new \RuntimeException('Public projection mutation lock unavailable.');
         }
-        chmod($path, 0660);
+        clearstatcache(true, $path);
+        if ((fileperms($path) & 0777) !== 0660) {
+            chmod($path, 0660);
+        }
         $deadline = microtime(true) + 10;
         try {
             while (! flock($lease, LOCK_EX | LOCK_NB)) {
