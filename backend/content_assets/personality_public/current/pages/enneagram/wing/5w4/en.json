@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/wings/5w4",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-5",
-          "label": "core_type:type-5",
+          "label": "Enneagram Type 5",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-5"
         },
         {
           "href": "/en/personality/enneagram/type-4",
-          "label": "core_type:type-4",
+          "label": "Enneagram Type 4",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-4"
         },
         {
           "href": "/en/personality/enneagram/wings/5w6",
-          "label": "wing:5w6",
+          "label": "5w6 wing",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:5w6"
         }
@@ -213,15 +213,15 @@
         }
       ],
       "seo": {
-        "description": "5w4 is an evidence-limited wing hypothesis: Type Five knowledge, competence, privacy, and capacity concerns remain primary, while Four may modify how ideas receive personal synthesis, meaning, and originality. Distinctive work does not establish 5w4 because creative training, specialization, culture, audience, and project ownership can look similar.",
-        "title": "5w4: a core-first hypothesis about personal synthesis and meaning"
+        "description": "5w4 is an evidence-limited Enneagram hypothesis with Type Five as the core and Type Four as an adjacent wing influence. Start with knowledge, competence, privacy, and capacity, then consider personal meaning; distinctive work alone cannot confirm a wing.",
+        "title": "5w4: Type Five Core, Four Wing, and Common Misreads"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/5w4",
       "source_hash": "15f06c5ad4bdef747b3784452e656f12e3fcd884ed08694c2716385da69a2bf6",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "5w4 is an evidence-limited wing hypothesis: Type Five knowledge, competence, privacy, and capacity concerns remain primary, while Four may modify how ideas receive personal synthesis, meaning, and originality. Distinctive work does not establish 5w4 because creative training, specialization, culture, audience, and project ownership can look similar.",
-      "title": "5w4: a core-first hypothesis about personal synthesis and meaning"
+      "summary": "5w4 is an evidence-limited Enneagram hypothesis with Type Five as the core and Type Four as an adjacent wing influence. Start with knowledge, competence, privacy, and capacity, then consider personal meaning; distinctive work alone cannot confirm a wing.",
+      "title": "5w4: Type Five Core, Four Wing, and Common Misreads"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "504a0873890adbb5a24c1cc391fa3087a9662309cada7a386fb66ab5641fc33f"
+  "source_content_sha256": "f35a80c5abea04979832baf2a82f874676c9313965c8cb85dd133abd6e80e86a"
 }

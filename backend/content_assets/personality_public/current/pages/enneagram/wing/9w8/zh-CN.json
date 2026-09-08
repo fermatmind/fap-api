@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/wings/9w8",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-9",
-          "label": "core_type:type-9",
+          "label": "九型人格 9 号核心型",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-9"
         },
         {
           "href": "/zh/personality/enneagram/type-8",
-          "label": "core_type:type-8",
+          "label": "九型人格 8 号核心型",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-8"
         },
         {
           "href": "/zh/personality/enneagram/wings/9w1",
-          "label": "wing:9w1",
+          "label": "9w1 翼型",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:9w1"
         }
@@ -213,15 +213,15 @@
         }
       ],
       "seo": {
-        "description": "9w8是证据有限的翼型观察假设，应先确认九号对稳定与连接的关注，再把八号式扎根抵抗、边界发力和保护倾向作为次要修饰。安静后变得强硬不能单独证明9w8；岗位授权、财产责任、危险、训练、反复侵害或权力不平等都可能产生相同顺序。",
-        "title": "9w8：以九号稳定为核心的边界发力观察"
+        "description": "9w8 指以九号为核心、八号为相邻翼影响的九型人格观察假设。重点先看对稳定与连接的关注，再观察边界和保护倾向；单一的强硬表现不能确认翼型。",
+        "title": "9w8：九号核心、八号翼影响与常见误判"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/9w8",
       "source_hash": "1b32fa600e000abe86399a5c3ff68f4ca2ac55265f33539e4ab9c1df695d1a1a",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "9w8是证据有限的翼型观察假设，应先确认九号对稳定与连接的关注，再把八号式扎根抵抗、边界发力和保护倾向作为次要修饰。安静后变得强硬不能单独证明9w8；岗位授权、财产责任、危险、训练、反复侵害或权力不平等都可能产生相同顺序。",
-      "title": "9w8：以九号稳定为核心的边界发力观察"
+      "summary": "9w8 指以九号为核心、八号为相邻翼影响的九型人格观察假设。重点先看对稳定与连接的关注，再观察边界和保护倾向；单一的强硬表现不能确认翼型。",
+      "title": "9w8：九号核心、八号翼影响与常见误判"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "983c85c578f75f76efb80b143eb9a76114d05a4fc000461b4c7103b3baa5a070"
+  "source_content_sha256": "7f43ecbf1b3b9230f34a767cdeee757b996e28065e38a270b87eb813c56b7f6d"
 }

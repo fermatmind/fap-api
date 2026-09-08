@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/wings/5w6",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-5",
-          "label": "core_type:type-5",
+          "label": "九型人格 5 号核心型",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-5"
         },
         {
           "href": "/zh/personality/enneagram/type-6",
-          "label": "core_type:type-6",
+          "label": "九型人格 6 号核心型",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-6"
         },
         {
           "href": "/zh/personality/enneagram/wings/5w4",
-          "label": "wing:5w4",
+          "label": "5w4 翼型",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:5w4"
         }
@@ -213,15 +213,15 @@
         }
       ],
       "seo": {
-        "description": "5w6 是证据有限的翼型假设：第五型的知识、胜任准备、隐私与精力边界仍是核心，第六型只可能修饰为验证、可靠方法与风险核对。谨慎流程不能证明 5w6，因为合规工作、质量保证、安全岗位、团队规范与问责结构都可能要求同样行为。本页直接比较知识胜任准备精力如何保持核心、验证可靠方法风险如何作为修饰，以及合规质量保证安全岗位如何形成替代解释。",
-        "title": "5w6：以第五型为主、关注验证与可靠方法的翼型假设"
+        "description": "5w6 指以五号为核心、六号为相邻翼影响的九型人格观察假设。重点先看知识、胜任准备与精力边界，再观察验证和风险核对倾向；谨慎流程不能单独确认翼型。",
+        "title": "5w6：五号核心、六号翼影响与常见误判"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/5w6",
       "source_hash": "1a899b06966ddaaf33e7810688cb0e186b82593ed7ef7f1111065a421815e828",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "5w6 是证据有限的翼型假设：第五型的知识、胜任准备、隐私与精力边界仍是核心，第六型只可能修饰为验证、可靠方法与风险核对。谨慎流程不能证明 5w6，因为合规工作、质量保证、安全岗位、团队规范与问责结构都可能要求同样行为。本页直接比较知识胜任准备精力如何保持核心、验证可靠方法风险如何作为修饰，以及合规质量保证安全岗位如何形成替代解释。",
-      "title": "5w6：以第五型为主、关注验证与可靠方法的翼型假设"
+      "summary": "5w6 指以五号为核心、六号为相邻翼影响的九型人格观察假设。重点先看知识、胜任准备与精力边界，再观察验证和风险核对倾向；谨慎流程不能单独确认翼型。",
+      "title": "5w6：五号核心、六号翼影响与常见误判"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "416dcbd79709ddd3f8626e12a0a84e6673c6f5b337dd2ac068ae45ff10cee42b"
+  "source_content_sha256": "2cbc9e4f5c2fa57610baf1cc09783b8a222ead7eea1a98fd9a30962823832fbe"
 }

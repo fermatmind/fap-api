@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/wings/5w4",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-5",
-          "label": "core_type:type-5",
+          "label": "九型人格 5 号核心型",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-5"
         },
         {
           "href": "/zh/personality/enneagram/type-4",
-          "label": "core_type:type-4",
+          "label": "九型人格 4 号核心型",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-4"
         },
         {
           "href": "/zh/personality/enneagram/wings/5w6",
-          "label": "wing:5w6",
+          "label": "5w6 翼型",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:5w6"
         }
@@ -213,15 +213,15 @@
         }
       ],
       "seo": {
-        "description": "5w4 是证据有限的翼型假设：第五型的知识、胜任准备、隐私与精力边界仍是核心，第四型只可能修饰为个人综合、意义感与原创表达。独特作品不能证明 5w4，因为创意训练、专业细分、文化语境、受众要求与项目署名也会产生相似结果。本页直接比较知识胜任准备隐私如何保持核心、个人综合意义原创如何作为修饰，以及创意训练专业细分文化如何形成替代解释。",
-        "title": "5w4：以第五型为主、关注个人综合与意义的翼型假设"
+        "description": "5w4 指以五号为核心、四号为相邻翼影响的九型人格观察假设。重点先看知识、胜任准备、隐私与精力边界，再观察个人意义倾向；独特作品不能单独确认翼型。",
+        "title": "5w4：五号核心、四号翼影响与常见误判"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/5w4",
       "source_hash": "1347e522857b409cfdf09cb5771527e0df5c4c714250180ec321c4597629e276",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "5w4 是证据有限的翼型假设：第五型的知识、胜任准备、隐私与精力边界仍是核心，第四型只可能修饰为个人综合、意义感与原创表达。独特作品不能证明 5w4，因为创意训练、专业细分、文化语境、受众要求与项目署名也会产生相似结果。本页直接比较知识胜任准备隐私如何保持核心、个人综合意义原创如何作为修饰，以及创意训练专业细分文化如何形成替代解释。",
-      "title": "5w4：以第五型为主、关注个人综合与意义的翼型假设"
+      "summary": "5w4 指以五号为核心、四号为相邻翼影响的九型人格观察假设。重点先看知识、胜任准备、隐私与精力边界，再观察个人意义倾向；独特作品不能单独确认翼型。",
+      "title": "5w4：五号核心、四号翼影响与常见误判"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "74607b4340a2c1c6e7f5b89543aa13d87c22020523e9f58c0a35e644c84fac6e"
+  "source_content_sha256": "ead66abd820e171211e8e1fad867cce4485fbe79b769733180bf71c47d4bf8d2"
 }

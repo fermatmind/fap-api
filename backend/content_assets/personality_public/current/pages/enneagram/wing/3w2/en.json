@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/wings/3w2",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-3",
-          "label": "core_type:type-3",
+          "label": "Enneagram Type 3",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-3"
         },
         {
           "href": "/en/personality/enneagram/type-2",
-          "label": "core_type:type-2",
+          "label": "Enneagram Type 2",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-2"
         },
         {
           "href": "/en/personality/enneagram/wings/3w4",
-          "label": "wing:3w4",
+          "label": "3w4 wing",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:3w4"
         }
@@ -213,15 +213,15 @@
         }
       ],
       "seo": {
-        "description": "The 3w2 wing is a core-first, evidence-limited hypothesis: Type Three attention to valued results may be modified by Two-adjacent connection, usefulness, and audience response. Warm presentation or networking cannot establish a wing because service roles, sales incentives, and collaboration norms can look the same.",
-        "title": "3w2: relational visibility as a core-first wing hypothesis"
+        "description": "3w2 is an evidence-limited Enneagram hypothesis with Type Three as the core and Type Two as an adjacent wing influence. Start with attention to valued results, then consider connection and usefulness; warmth or networking alone cannot confirm a wing.",
+        "title": "3w2: Type Three Core, Two Wing, and Common Misreads"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/3w2",
       "source_hash": "07dc93e1be586628a7d978805f5fe268b23de9df6828ea9f0a3dd08a35d78495",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "The 3w2 wing is a core-first, evidence-limited hypothesis: Type Three attention to valued results may be modified by Two-adjacent connection, usefulness, and audience response. Warm presentation or networking cannot establish a wing because service roles, sales incentives, and collaboration norms can look the same.",
-      "title": "3w2: relational visibility as a core-first wing hypothesis"
+      "summary": "3w2 is an evidence-limited Enneagram hypothesis with Type Three as the core and Type Two as an adjacent wing influence. Start with attention to valued results, then consider connection and usefulness; warmth or networking alone cannot confirm a wing.",
+      "title": "3w2: Type Three Core, Two Wing, and Common Misreads"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "0e222b4a842c32c27d4580301216a8406d93b4e448cedd3941335520c64e1fd6"
+  "source_content_sha256": "802c88b4848702ab1c410a76f4655a9be6c630b7d00df9bb647d5c97dfef05a7"
 }
