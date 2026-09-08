@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Services\Career\CareerCacheBackupRetention;
 use App\Services\Career\CareerCacheVersionRetention;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
@@ -11,12 +12,37 @@ use Illuminate\Support\Facades\File;
 
 final class CareerPrunePublicCacheVersions extends Command
 {
-    protected $signature = 'career:prune-public-cache-versions {--apply : Reclaim only the inspected, backed-up immutable projections} {--max-bytes=536870912 : Maximum estimated bytes to reclaim per invocation}';
+    protected $signature = 'career:prune-public-cache-versions {--pressure : Skip below 70 percent and stop at 60 percent memory use} {--max-seconds=60 : Wall-clock budget including scan and backup} {--apply : Reclaim only the inspected, backed-up immutable projections} {--max-bytes=536870912 : Maximum estimated bytes to reclaim per invocation}';
 
     protected $description = 'Inventory and retain active/LKG/pinned Career cache versions; dry-run by default.';
 
     public function handle(CareerCacheVersionRetention $policy): int
     {
+        $seconds = filter_var($this->option('max-seconds'), FILTER_VALIDATE_INT);
+        if ($seconds === false || $seconds < 1 || $seconds > 60) {
+            return self::INVALID;
+        }
+        $deadline = microtime(true) + $seconds;
+        $root = storage_path('app/private/career-cache-retention');
+        File::ensureDirectoryExists($root, 0700);
+        $lease = fopen(storage_path('app/private/career-cache-retention.lock'), 'c');
+        if ($lease === false || ! flock($lease, LOCK_EX | LOCK_NB)) {
+            $this->line('{"status":"busy"}');
+
+            return self::SUCCESS;
+        }
+        try {
+            return $this->prune($policy, $root, $deadline);
+        } finally {
+            flock($lease, LOCK_UN);
+            fclose($lease);
+        }
+    }
+
+    private function prune(CareerCacheVersionRetention $policy, string $root, float $deadline): int
+    {
+        $backups = new CareerCacheBackupRetention;
+        $backupBytes = $backups->rotateAndMeasure($root, time(), (bool) $this->option('apply'));
         $store = Cache::store()->getStore();
         if (! $store instanceof \Illuminate\Cache\RedisStore) {
             $this->error('Career retention requires the configured Redis cache store.');
@@ -38,20 +64,43 @@ final class CareerPrunePublicCacheVersions extends Command
         if ($limit === false || $limit < 1 || $limit > 2147483648) {
             return self::INVALID;
         }
+        if ($this->option('pressure')) {
+            $memory = $redis->info('memory');
+            $maximum = (int) ($memory['maxmemory'] ?? 0);
+            if ($maximum <= 0) {
+                throw new \RuntimeException('Career cache memory budget unavailable.');
+            }
+            if ((int) $memory['used_memory'] < $maximum * 0.7) {
+                $this->line('{"status":"below_threshold"}');
+
+                return self::SUCCESS;
+            }
+        }
+        $backups->assertHeadroom($backupBytes, 1048576);
         $prefix = (string) $redis->getOption(\Redis::OPT_PREFIX).$store->getPrefix();
-        $directory = storage_path('app/private/career-cache-retention/'.gmdate('Ymd-His').'-'.bin2hex(random_bytes(4)));
+        $directory = $root.'/'.gmdate('Ymd-His').'-'.bin2hex(random_bytes(4));
         File::ensureDirectoryExists($directory, 0700);
         $plan = fopen($directory.'/plan.jsonl', 'xb');
         chmod($directory.'/plan.jsonl', 0600);
-        $cursor = null;
+        $cursorPath = storage_path('app/private/career-cache-retention-cursor.json');
+        $scanState = is_file($cursorPath) ? json_decode((string) file_get_contents($cursorPath), true) : null;
+        $cursor = $this->option('pressure') && is_array($scanState) && ($scanState['prefix'] ?? null) === $prefix
+            ? (int) ($scanState['cursor'] ?? 0) : null;
         $seen = [];
         $count = 0;
         $bytes = 0;
         $now = time();
         try {
             do {
+                if (microtime(true) >= $deadline - (int) $this->option('max-seconds') / 2) {
+                    break;
+                }
                 $keys = $redis->scan($cursor, $prefix.'career:public-authority:*', 500);
                 foreach ($keys ?: [] as $physicalKey) {
+                    // Leave at least half the budget for durable backups and deletion.
+                    if (microtime(true) >= $deadline - (int) $this->option('max-seconds') / 2 || $bytes >= $limit) {
+                        break 2;
+                    }
                     if (! str_starts_with($physicalKey, $prefix) || isset($seen[$physicalKey])) {
                         continue;
                     }
@@ -70,7 +119,12 @@ final class CareerPrunePublicCacheVersions extends Command
                     }
                     $size = (int) $redis->rawCommand('MEMORY', 'USAGE', $physicalKey);
                     $entry = ['key' => $key, ...$identity, 'active' => $active, 'lkg' => $lkg, 'bytes' => $size, 'idle_seconds' => $idle];
-                    fwrite($plan, json_encode($entry, JSON_THROW_ON_ERROR)."\n");
+                    $record = json_encode($entry, JSON_THROW_ON_ERROR)."\n";
+                    $backups->assertHeadroom($backupBytes, strlen($record) + 64);
+                    if (fwrite($plan, $record) !== strlen($record)) {
+                        throw new \RuntimeException('Career retention plan write failed.');
+                    }
+                    $backupBytes += strlen($record);
                     $count++;
                     $bytes += $size;
                 }
@@ -78,9 +132,18 @@ final class CareerPrunePublicCacheVersions extends Command
         } finally {
             fclose($plan);
         }
+        if ($this->option('apply') && $this->option('pressure')) {
+            $temporary = $cursorPath.'.tmp';
+            if (file_put_contents($temporary, json_encode(['prefix' => $prefix, 'cursor' => $cursor], JSON_THROW_ON_ERROR), LOCK_EX) === false
+                || ! rename($temporary, $cursorPath)) {
+                throw new \RuntimeException('Career retention scan progress write failed.');
+            }
+        }
         unset($seen);
         $this->line(json_encode(['status' => 'planned', 'candidates' => $count, 'estimated_bytes' => $bytes, 'plan_sha256' => hash_file('sha256', $directory.'/plan.jsonl')], JSON_THROW_ON_ERROR));
         if (! $this->option('apply') || $count === 0) {
+            file_put_contents($directory.'/complete', (string) time());
+
             return self::SUCCESS;
         }
 
@@ -95,6 +158,12 @@ final class CareerPrunePublicCacheVersions extends Command
         try {
             $rows = new \SplFileObject($directory.'/plan.jsonl');
             foreach ($rows as $line) {
+                if (microtime(true) >= $deadline) {
+                    break;
+                }
+                if ($this->option('pressure') && (int) ($redis->info('memory')['used_memory'] ?? PHP_INT_MAX) <= $maximum * 0.6) {
+                    break;
+                }
                 if (trim($line) === '') {
                     continue;
                 }
@@ -134,9 +203,11 @@ final class CareerPrunePublicCacheVersions extends Command
                     continue;
                 }
                 $record = json_encode(['key' => $entry['key'], 'dump' => base64_encode($dump), 'ttl_ms' => $redis->rawCommand('PTTL', $key)], JSON_THROW_ON_ERROR)."\n";
+                $backups->assertHeadroom($backupBytes, strlen($record) + 64);
                 if (fwrite($backup, $record) !== strlen($record) || ! fflush($backup) || ! fsync($backup)) {
                     throw new \RuntimeException('Career retention backup write failed.');
                 }
+                $backupBytes += strlen($record);
                 // Compare-and-delete is one Redis operation, so a concurrent pointer switch or pin wins.
                 $deleted = $redis->rawCommand('EVAL', <<<'LUA'
 #!lua flags=allow-oom
@@ -160,6 +231,7 @@ LUA, 4, $key, $base.':active', $base.':lkg', $base.':pins:'.$entry['version'], $
                 throw new \RuntimeException('Career protected payload readback failed.');
             }
         }
+        file_put_contents($directory.'/complete', (string) time());
         $this->line(json_encode(['status' => 'reclaimed', 'protected_readbacks' => count($protected), 'removed' => $removed, 'estimated_bytes' => $freed, 'backup_sha256' => hash_file('sha256', $directory.'/removed.jsonl')], JSON_THROW_ON_ERROR));
 
         return self::SUCCESS;

@@ -1186,6 +1186,14 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         $version = (string) Str::ulid();
         $activeKey = $this->jobDetailActiveVersionKey($normalizedSlug, $normalizedLocale);
         $previousVersion = Cache::get($activeKey);
+        $storedPayload = $this->withoutDerivedContentV3($payload, $normalizedSlug, $normalizedLocale);
+        if (is_string($previousVersion) && $previousVersion !== ''
+            && $this->readStoredJobDetailPayload($this->jobDetailVersionPayloadKey($normalizedSlug, $normalizedLocale, $previousVersion)) === $storedPayload
+            && Cache::get($this->jobDetailExposureProjectionVersionKey($normalizedSlug, $normalizedLocale, $previousVersion)) === $exposureProjectionItem) {
+            // Reuse only the complete current payload AND its publication discriminator.
+            // ULIDs and LKG remain unchanged; these immutable payloads have no TTL.
+            return $previousVersion;
+        }
 
         $this->writeStoredJobDetailPayload(
             $this->jobDetailVersionPayloadKey($normalizedSlug, $normalizedLocale, $version),
@@ -1604,7 +1612,9 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         $versions = [];
         $snapshots = [];
         foreach ($payloadsByLocale as $locale => $payload) {
-            $version = (string) Str::ulid();
+            $current = Cache::get($this->jobIndexActiveVersionKey($locale, $includeNonIndexable));
+            $version = is_string($current) && $current !== '' && Cache::get($this->jobIndexVersionPayloadKey($locale, $includeNonIndexable, $current)) === $payload
+                ? $current : (string) Str::ulid();
             $payloadKey = $this->jobIndexVersionPayloadKey($locale, $includeNonIndexable, $version);
             Cache::forever($payloadKey, $payload);
             if (Cache::get($payloadKey) !== $payload) {
@@ -1622,10 +1632,12 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             foreach ($versions as $locale => $version) {
                 $attempted[] = $locale;
                 $previousVersion = $snapshots[$locale]['active']['value'];
-                Cache::forever(
-                    $this->jobIndexLkgVersionKey($locale, $includeNonIndexable),
-                    is_string($previousVersion) && $previousVersion !== '' ? $previousVersion : $version,
-                );
+                if ($previousVersion !== $version) {
+                    Cache::forever(
+                        $this->jobIndexLkgVersionKey($locale, $includeNonIndexable),
+                        is_string($previousVersion) && $previousVersion !== '' ? $previousVersion : $version,
+                    );
+                }
                 Cache::forever($this->jobIndexActiveVersionKey($locale, $includeNonIndexable), $version);
                 if (Cache::get($this->jobIndexActiveVersionKey($locale, $includeNonIndexable)) !== $version) {
                     throw new \RuntimeException(sprintf(
@@ -1915,6 +1927,12 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         $version = (string) Str::ulid();
         $activeKey = $this->directoryActiveVersionKey($normalizedLocale);
         $previousVersion = Cache::get($activeKey);
+        if (is_string($previousVersion) && $previousVersion !== ''
+            && Cache::get($this->directoryVersionPayloadKey($normalizedLocale, $previousVersion)) === $payload) {
+            Cache::forever($this->directoryActivatedAtKey($normalizedLocale), now()->timestamp);
+
+            return $previousVersion;
+        }
 
         Cache::forever($this->directoryVersionPayloadKey($normalizedLocale, $version), $payload);
         if (is_string($previousVersion) && $previousVersion !== '') {
@@ -1938,7 +1956,9 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         $snapshots = [];
 
         foreach ($payloadsByLocale as $locale => $payload) {
-            $version = (string) Str::ulid();
+            $current = Cache::get($this->directoryActiveVersionKey($locale));
+            $version = is_string($current) && $current !== '' && Cache::get($this->directoryVersionPayloadKey($locale, $current)) === $payload
+                ? $current : (string) Str::ulid();
             $payloadKey = $this->directoryVersionPayloadKey($locale, $version);
             Cache::forever($payloadKey, $payload);
             if (! is_array(Cache::get($payloadKey))) {
@@ -2002,7 +2022,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
 
     private function activateStagedDirectoryReadModel(string $locale, string $version, mixed $previousVersion): void
     {
-        if (is_string($previousVersion) && $previousVersion !== '') {
+        if (is_string($previousVersion) && $previousVersion !== '' && $previousVersion !== $version) {
             Cache::forever($this->directoryLkgVersionKey($locale), $previousVersion);
         }
         Cache::forever($this->directoryActiveVersionKey($locale), $version);

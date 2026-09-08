@@ -69,6 +69,13 @@ final class CareerCacheVersionRetentionTest extends TestCase
                 $dump = $redis->dump($physical);
                 $redis->rawCommand('RESTORE', $physical, 0, $dump, 'REPLACE', 'IDLETIME', 259200);
             }
+            $redis->config('SET', 'maxmemory', '2147483648');
+            $this->artisan('career:prune-public-cache-versions --apply --pressure')->assertSuccessful();
+            $this->assertSame([], glob(storage_path('app/private/career-cache-retention/*/plan.jsonl')));
+            $this->assertNotNull(Cache::get($base.':versions:'.$old));
+            // Reading the candidate resets idle time; restore its original retention age.
+            $physical = 'retention-test:'.$base.':versions:'.$old;
+            $redis->rawCommand('RESTORE', $physical, 0, $redis->dump($physical), 'REPLACE', 'IDLETIME', 259200);
             // The deletion-only Lua must remain usable while normal writes fail.
             $redis->config('SET', 'maxmemory', '1');
             $this->artisan('career:prune-public-cache-versions --apply')->assertSuccessful();
