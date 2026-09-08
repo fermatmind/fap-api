@@ -224,15 +224,16 @@ final class CareerColdCacheDiscoverabilityValidator
                 self::fail('DETAIL_CACHE_COVERAGE_INCOMPLETE');
             }
 
+            $publicAuthority = self::requiredSnapshot($snapshot, 'public_authority');
             foreach (self::LOCALES as $locale) {
                 self::assertSameLocaleSnapshot(
-                    $authority,
+                    $publicAuthority,
                     self::requiredSnapshot($snapshot, 'jobs_'.$locale),
                     $locale,
                     'JOB_INDEX_AUTHORITY_MISMATCH',
                 );
                 self::assertSameLocaleSnapshot(
-                    $authority,
+                    $publicAuthority,
                     self::requiredSnapshot($snapshot, 'directory_'.$locale),
                     $locale,
                     'DIRECTORY_AUTHORITY_MISMATCH',
@@ -441,6 +442,12 @@ final class CareerColdCacheDiscoverabilityRunner
             ];
 
             if ($phase !== 'authority') {
+                $identity = $app->make('App\\Domain\\Career\\Display\\CareerCurrentIdentity');
+                // Compatibility coverage retains every directory; public inventories exclude aliases.
+                $snapshot['public_authority'] = CareerColdCacheDiscoverabilityValidator::discoverabilitySnapshot(
+                    $artifact['payload']['items'],
+                    static fn (string $slug, string $locale): bool => ! $identity->isAlias($slug),
+                );
                 $coverage = $app->make('App\\Services\\Career\\CareerJobDetailCacheCoverageService');
                 $cache = $app->make('App\\Services\\Career\\PublicCareerAuthorityResponseCache');
                 $snapshot['coverage'] = (array) (($coverage->inspect(['en', 'zh-CN'], 0)['report'] ?? []));

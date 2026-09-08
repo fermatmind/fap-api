@@ -150,6 +150,24 @@ final class CareerColdCacheDiscoverabilityGateTest extends TestCase
         CareerColdCacheDiscoverabilityValidator::validate('post_sitemap', $snapshot);
     }
 
+    #[Test]
+    public function retained_alias_is_required_in_storage_but_excluded_from_public_inventory(): void
+    {
+        $snapshot = $this->completePreSitemapSnapshot();
+        $snapshot['public_authority'] = CareerColdCacheDiscoverabilityValidator::discoverabilitySnapshot(
+            $this->projection()['items'],
+            static fn (string $slug, string $locale): bool => $slug === 'actuaries',
+        );
+        foreach (['en', 'zh-CN'] as $locale) {
+            $snapshot['jobs_'.$locale] = CareerColdCacheDiscoverabilityValidator::jobIndexSnapshot(['items' => [['slug' => 'actuaries']]], $locale);
+            $snapshot['directory_'.$locale] = CareerColdCacheDiscoverabilityValidator::directorySnapshot(['items' => [['slug' => 'actuaries', 'indexable' => true, 'detail_ready' => true]]], $locale);
+        }
+        self::assertSame('pass', CareerColdCacheDiscoverabilityValidator::validate('pre_sitemap', $snapshot)['status']);
+        $snapshot['jobs_en'] = CareerColdCacheDiscoverabilityValidator::jobIndexSnapshot(['items' => [['slug' => 'actuaries'], ['slug' => 'accountants-and-auditors']]], 'en');
+        $this->expectFailureCode('JOB_INDEX_AUTHORITY_MISMATCH');
+        CareerColdCacheDiscoverabilityValidator::validate('pre_sitemap', $snapshot);
+    }
+
     /** @return array<string, mixed> */
     private function completePreSitemapSnapshot(bool $discoverabilityReleased = true): array
     {
@@ -176,6 +194,7 @@ final class CareerColdCacheDiscoverabilityGateTest extends TestCase
         return [
             'authority_artifact_sha256' => str_repeat('b', 64),
             'authority' => $authority,
+            'public_authority' => $authority,
             'runtime' => CareerColdCacheDiscoverabilityValidator::runtimeSnapshot($runtimeItems),
             'discoverability' => CareerColdCacheDiscoverabilityValidator::discoverabilitySnapshot(
                 $runtimeItems,
