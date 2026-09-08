@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-6/instincts/self-preservation",
@@ -126,25 +126,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-6",
-          "label": "core_type:type-6",
+          "label": "Enneagram Type 6",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-6"
         },
         {
           "href": "/en/personality/enneagram/type-6/instincts/social",
-          "label": "instinctual_subtype:type-6/social",
+          "label": "Type 6 social subtype",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-6/social"
         },
         {
           "href": "/en/personality/enneagram/type-6/instincts/one-to-one",
-          "label": "instinctual_subtype:type-6/one-to-one",
+          "label": "Type 6 one-to-one subtype",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-6/one-to-one"
         }
@@ -233,15 +233,15 @@
         }
       ],
       "seo": {
-        "description": "Type Six self-preservation is a traditional subtype hypothesis about attention to practical safety, warm alliances, and resource continuity. This pattern does not establish subtype because scarcity, housing insecurity, disability access, caregiving, unsafe work, and mutual-aid needs may shape the same behavior. Matched resource access, practical stakes, consent, and household power guide this comparison.",
-        "title": "Type Six self-preservation: a practical safety, warm alliances, and resource continuity hypothesis"
+        "description": "Type Six self-preservation is an evidence-limited subtype hypothesis: Type Six concerns about uncertainty and trust remain central, while practical safety, supportive alliances, and resource continuity may receive added focus. These behaviors alone do not confirm this subtype because scarcity, housing insecurity, disability access, caregiving, unsafe work, and mutual-aid needs can look the same.",
+        "title": "Type 6 Self-Preservation: Safety, Support, and Contingency"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/type-6/instincts/self-preservation",
       "source_hash": "24b64a7b6647dc83bbc10ed70721f4fe6d980dec00665f449ebc8e5c5a65383d",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Type Six self-preservation is a traditional subtype hypothesis about attention to practical safety, warm alliances, and resource continuity. This pattern does not establish subtype because scarcity, housing insecurity, disability access, caregiving, unsafe work, and mutual-aid needs may shape the same behavior. Matched resource access, practical stakes, consent, and household power guide this comparison.",
-      "title": "Type Six self-preservation: a practical safety, warm alliances, and resource continuity hypothesis"
+      "summary": "Type Six self-preservation is an evidence-limited subtype hypothesis: Type Six concerns about uncertainty and trust remain central, while practical safety, supportive alliances, and resource continuity may receive added focus. These behaviors alone do not confirm this subtype because scarcity, housing insecurity, disability access, caregiving, unsafe work, and mutual-aid needs can look the same.",
+      "title": "Type 6 Self-Preservation: Safety, Support, and Contingency"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -331,5 +331,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "158b3e41adac737fa05e15532df546479d2e986d8e1984b6fc6540c9faa2bb5b"
+  "source_content_sha256": "933f19f762049dbad480a2129511d8fc5875619ff230fa6bb7115657ef1a8fe9"
 }

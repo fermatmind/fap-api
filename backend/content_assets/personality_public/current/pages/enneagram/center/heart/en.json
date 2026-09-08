@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/centers/heart",
@@ -110,25 +110,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-2",
-          "label": "core_type:type-2",
+          "label": "Enneagram Type 2",
           "relationship": "center_member",
           "target_identity_key": "core_type:type-2"
         },
         {
           "href": "/en/personality/enneagram/type-3",
-          "label": "core_type:type-3",
+          "label": "Enneagram Type 3",
           "relationship": "center_member",
           "target_identity_key": "core_type:type-3"
         },
         {
           "href": "/en/personality/enneagram/type-4",
-          "label": "core_type:type-4",
+          "label": "Enneagram Type 4",
           "relationship": "center_member",
           "target_identity_key": "core_type:type-4"
         }
@@ -201,15 +201,15 @@
         }
       ],
       "seo": {
-        "description": "The heart center traditionally groups Types Two, Three, and Four. A heart-center observation compares how connection, recognition, and self-presentation become relevant in a social moment; it does not imply that emotion overrides thinking or action, and Two, Three, and Four may organize the same interaction in distinct ways.",
-        "title": "Heart center: examine connection and self-presentation"
+        "description": "The Enneagram heart center groups Types Two, Three, and Four. Use it to compare how connection, recognition, and self-presentation show up in the same social situation—not to assume that emotion overrides thought or action.",
+        "title": "Heart Center: Types 2, 3, and 4 in Relationships"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/centers/heart",
       "source_hash": "73a500009574139e6aabb09fb600853e8fa732340995c062eedd5caa686e4bd0",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "The heart center traditionally groups Types Two, Three, and Four. A heart-center observation compares how connection, recognition, and self-presentation become relevant in a social moment; it does not imply that emotion overrides thinking or action, and Two, Three, and Four may organize the same interaction in distinct ways.",
-      "title": "Heart center: examine connection and self-presentation"
+      "summary": "The Enneagram heart center groups Types Two, Three, and Four. Use it to compare how connection, recognition, and self-presentation show up in the same social situation—not to assume that emotion overrides thought or action.",
+      "title": "Heart Center: Types 2, 3, and 4 in Relationships"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -283,5 +283,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "19f91a4f66b09d749606d29643089576f0e6fefd374610f8f8604850e39b6fb0"
+  "source_content_sha256": "a808f9cb87fd638d025c4536b94e1e36fbb045122608904321e97cc5e952c176"
 }

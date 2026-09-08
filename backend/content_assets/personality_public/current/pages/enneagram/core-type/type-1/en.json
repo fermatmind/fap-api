@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-1",
@@ -133,43 +133,43 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/centers/gut",
-          "label": "center:gut",
+          "label": "Gut center",
           "relationship": "center_membership",
           "target_identity_key": "center:gut"
         },
         {
           "href": "/en/personality/enneagram/wings/1w9",
-          "label": "wing:1w9",
+          "label": "1w9 wing",
           "relationship": "wing_variant",
           "target_identity_key": "wing:1w9"
         },
         {
           "href": "/en/personality/enneagram/wings/1w2",
-          "label": "wing:1w2",
+          "label": "1w2 wing",
           "relationship": "wing_variant",
           "target_identity_key": "wing:1w2"
         },
         {
           "href": "/en/personality/enneagram/type-1/instincts/self-preservation",
-          "label": "instinctual_subtype:type-1/self-preservation",
+          "label": "Type 1 self-preservation subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-1/self-preservation"
         },
         {
           "href": "/en/personality/enneagram/type-1/instincts/social",
-          "label": "instinctual_subtype:type-1/social",
+          "label": "Type 1 social subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-1/social"
         },
         {
           "href": "/en/personality/enneagram/type-1/instincts/one-to-one",
-          "label": "instinctual_subtype:type-1/one-to-one",
+          "label": "Type 1 one-to-one subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-1/one-to-one"
         }
@@ -264,15 +264,15 @@
         }
       ],
       "seo": {
-        "description": "Type One is a traditional Enneagram hypothesis about attention returning to standards, discrepancies, and responsible correction. Observing Type One attention means comparing what a person notices, what they actually revise, and whether the same pattern survives different roles; it does not turn conscientious behavior into proof of a fixed type.",
-        "title": "Type One: standards, correction, and a revisable attention hypothesis"
+        "description": "Enneagram Type One is a traditional, evidence-limited hypothesis about attention returning to standards, discrepancies, and responsible correction. Compare what a person notices and actually revises across different roles; conscientious behavior alone does not confirm a fixed type.",
+        "title": "Enneagram Type 1: Standards, Responsibility, and Correction"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/type-1",
       "source_hash": "0a1117425efe7ae94c36ab2ca81a160d754a7d1b095012b6a16361e02e1162e1",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Type One is a traditional Enneagram hypothesis about attention returning to standards, discrepancies, and responsible correction. Observing Type One attention means comparing what a person notices, what they actually revise, and whether the same pattern survives different roles; it does not turn conscientious behavior into proof of a fixed type.",
-      "title": "Type One: standards, correction, and a revisable attention hypothesis"
+      "summary": "Enneagram Type One is a traditional, evidence-limited hypothesis about attention returning to standards, discrepancies, and responsible correction. Compare what a person notices and actually revises across different roles; conscientious behavior alone does not confirm a fixed type.",
+      "title": "Enneagram Type 1: Standards, Responsibility, and Correction"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -369,5 +369,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "4ac015336e75ba851c10caf8cece77461e30e6d7e54a913440c6dfe67548b405"
+  "source_content_sha256": "a44571aef3276e8aa1547730f9bcb77c1c9ba201ea4d8ca09cca35087beb5601"
 }

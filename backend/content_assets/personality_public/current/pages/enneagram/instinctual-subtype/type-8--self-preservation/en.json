@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-8/instincts/self-preservation",
@@ -126,25 +126,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-8",
-          "label": "core_type:type-8",
+          "label": "Enneagram Type 8",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-8"
         },
         {
           "href": "/en/personality/enneagram/type-8/instincts/social",
-          "label": "instinctual_subtype:type-8/social",
+          "label": "Type 8 social subtype",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-8/social"
         },
         {
           "href": "/en/personality/enneagram/type-8/instincts/one-to-one",
-          "label": "instinctual_subtype:type-8/one-to-one",
+          "label": "Type 8 one-to-one subtype",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-8/one-to-one"
         }
@@ -233,15 +233,15 @@
         }
       ],
       "seo": {
-        "description": "Type Eight self-preservation is a traditional, evidence-limited hypothesis combining Type Eight autonomy with material control, territory, direct needs, resource access, survival, and practical autonomy. Provisioning or guarding does not establish subtype because scarcity, housing risk, disability access, caregiving, dangerous work, property duty, and prior theft may require the same behavior.",
-        "title": "Type Eight self-preservation: a material control, territory, and direct-needs hypothesis"
+        "description": "Type Eight self-preservation is an evidence-limited subtype hypothesis: Type Eight autonomy remains central, while attention may turn toward resources, territory, direct needs, and practical independence. Provisioning or guarding alone does not confirm this subtype because scarcity, housing risk, disability access, caregiving, dangerous work, property duties, and prior theft can look the same.",
+        "title": "Type 8 Self-Preservation: Autonomy, Resources, and Boundaries"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/type-8/instincts/self-preservation",
       "source_hash": "30c721322ced387d789760be0cf8bb0ed65c88ec4e0c4e976dfdeb7aaf341887",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Type Eight self-preservation is a traditional, evidence-limited hypothesis combining Type Eight autonomy with material control, territory, direct needs, resource access, survival, and practical autonomy. Provisioning or guarding does not establish subtype because scarcity, housing risk, disability access, caregiving, dangerous work, property duty, and prior theft may require the same behavior.",
-      "title": "Type Eight self-preservation: a material control, territory, and direct-needs hypothesis"
+      "summary": "Type Eight self-preservation is an evidence-limited subtype hypothesis: Type Eight autonomy remains central, while attention may turn toward resources, territory, direct needs, and practical independence. Provisioning or guarding alone does not confirm this subtype because scarcity, housing risk, disability access, caregiving, dangerous work, property duties, and prior theft can look the same.",
+      "title": "Type 8 Self-Preservation: Autonomy, Resources, and Boundaries"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -331,5 +331,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "d97853a5ab134f04c57ca26ed5e95bca05e2f2fe0dbf0cfd4fbe3f02c8db59fb"
+  "source_content_sha256": "26166ac72e4e8b4a96b2c007e2ebb4db8d74209db9f0cfb47e82e31a0c7e36fa"
 }

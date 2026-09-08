@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-1/instincts/self-preservation",
@@ -126,25 +126,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-1",
-          "label": "core_type:type-1",
+          "label": "Enneagram Type 1",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-1"
         },
         {
           "href": "/en/personality/enneagram/type-1/instincts/social",
-          "label": "instinctual_subtype:type-1/social",
+          "label": "Type 1 social subtype",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-1/social"
         },
         {
           "href": "/en/personality/enneagram/type-1/instincts/one-to-one",
-          "label": "instinctual_subtype:type-1/one-to-one",
+          "label": "Type 1 one-to-one subtype",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-1/one-to-one"
         }
@@ -233,15 +233,15 @@
         }
       ],
       "seo": {
-        "description": "Self-preservation Type One is a traditional type-by-instinct hypothesis in which One attention to standards may become especially visible in preparation, maintenance, error prevention, and resource stewardship. One preparation is an observation target, not proof of a biological drive or a universal subtype.",
-        "title": "Self-preservation Type One: preparation under an evidence limit"
+        "description": "Type One self-preservation is an evidence-limited subtype hypothesis: Type One attention to standards remains central, while preparation, maintenance, error prevention, and resource stewardship may receive added focus. Careful preparation alone does not prove a biological drive, a fixed type, or a universal subtype.",
+        "title": "Type 1 Self-Preservation: Preparation, Maintenance, and Standards"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/type-1/instincts/self-preservation",
       "source_hash": "373ab5415bf36cac0ecc3ecb7bef84470ac989b0f489e521184bacd6a8baa3be",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Self-preservation Type One is a traditional type-by-instinct hypothesis in which One attention to standards may become especially visible in preparation, maintenance, error prevention, and resource stewardship. One preparation is an observation target, not proof of a biological drive or a universal subtype.",
-      "title": "Self-preservation Type One: preparation under an evidence limit"
+      "summary": "Type One self-preservation is an evidence-limited subtype hypothesis: Type One attention to standards remains central, while preparation, maintenance, error prevention, and resource stewardship may receive added focus. Careful preparation alone does not prove a biological drive, a fixed type, or a universal subtype.",
+      "title": "Type 1 Self-Preservation: Preparation, Maintenance, and Standards"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -331,5 +331,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "8e9dd5c5f03a1e3d2064309ec2bfe73f56b28abb21c2f6b70d2665047268e85e"
+  "source_content_sha256": "2b41db08f512b1aef7be818bd8cdcd7efdbf79664aa1bb6011aee45dcf6878a3"
 }

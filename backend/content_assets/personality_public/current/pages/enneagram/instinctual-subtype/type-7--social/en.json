@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-7/instincts/social",
@@ -126,25 +126,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-7",
-          "label": "core_type:type-7",
+          "label": "Enneagram Type 7",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-7"
         },
         {
           "href": "/en/personality/enneagram/type-7/instincts/self-preservation",
-          "label": "instinctual_subtype:type-7/self-preservation",
+          "label": "Type 7 self-preservation subtype",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-7/self-preservation"
         },
         {
           "href": "/en/personality/enneagram/type-7/instincts/one-to-one",
-          "label": "instinctual_subtype:type-7/one-to-one",
+          "label": "Type 7 one-to-one subtype",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-7/one-to-one"
         }
@@ -233,15 +233,15 @@
         }
       ],
       "seo": {
-        "description": "Type Seven social is a traditional, evidence-limited hypothesis combining Type Seven possibility with contribution, shared possibility, group ideals, and tension around recognition. Service or sacrifice does not establish subtype because unpaid labor, professional duty, community survival, status incentives, discrimination, and role expectations can create similar behavior.",
-        "title": "Type Seven social: a contribution, shared possibility, and recognition tension hypothesis"
+        "description": "Type Seven social is an evidence-limited subtype hypothesis: Type Seven attention to possibility remains central, while contribution, group ideals, shared options, and recognition may receive added focus. Service or sacrifice alone does not confirm this subtype because unpaid labor, professional duty, community survival, status incentives, discrimination, and role expectations can look the same.",
+        "title": "Type 7 Social: Contribution, Possibility, and Group Roles"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/type-7/instincts/social",
       "source_hash": "acc0603b201d8fb43284bfc0c274ba4375beb11ad4f899879ef35a57a214d621",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Type Seven social is a traditional, evidence-limited hypothesis combining Type Seven possibility with contribution, shared possibility, group ideals, and tension around recognition. Service or sacrifice does not establish subtype because unpaid labor, professional duty, community survival, status incentives, discrimination, and role expectations can create similar behavior.",
-      "title": "Type Seven social: a contribution, shared possibility, and recognition tension hypothesis"
+      "summary": "Type Seven social is an evidence-limited subtype hypothesis: Type Seven attention to possibility remains central, while contribution, group ideals, shared options, and recognition may receive added focus. Service or sacrifice alone does not confirm this subtype because unpaid labor, professional duty, community survival, status incentives, discrimination, and role expectations can look the same.",
+      "title": "Type 7 Social: Contribution, Possibility, and Group Roles"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -331,5 +331,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "ab3032ecb596e1edf7b8aac379dc7438badc066d8094f636256f5149393e0c55"
+  "source_content_sha256": "fe15e3108abadbd3ac3f237634d3bdd1857d4a76961bc6e4d2317ac06c1e9584"
 }

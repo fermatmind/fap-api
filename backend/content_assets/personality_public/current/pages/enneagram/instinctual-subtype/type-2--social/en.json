@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-2/instincts/social",
@@ -126,25 +126,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-2",
-          "label": "core_type:type-2",
+          "label": "Enneagram Type 2",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-2"
         },
         {
           "href": "/en/personality/enneagram/type-2/instincts/self-preservation",
-          "label": "instinctual_subtype:type-2/self-preservation",
+          "label": "Type 2 self-preservation subtype",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-2/self-preservation"
         },
         {
           "href": "/en/personality/enneagram/type-2/instincts/one-to-one",
-          "label": "instinctual_subtype:type-2/one-to-one",
+          "label": "Type 2 one-to-one subtype",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-2/one-to-one"
         }
@@ -233,15 +233,15 @@
         }
       ],
       "seo": {
-        "description": "Social Type Two is a traditional type-by-instinct hypothesis in which Two attention to needs and connection may appear through group roles, networks, contribution, and being useful to a wider circle. Two group usefulness is observable, but position, leadership duty, or community incentives may explain it.",
-        "title": "Social Type Two: group usefulness as a provisional subtype hypothesis"
+        "description": "Type Two social is an evidence-limited subtype hypothesis: Type Two attention to needs and connection remains central, while group roles, networks, contribution, and usefulness to a wider circle may receive added focus. Group usefulness alone does not confirm this subtype because position, leadership duties, and community incentives can look the same.",
+        "title": "Type 2 Social: Connection, Contribution, and Group Roles"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/type-2/instincts/social",
       "source_hash": "54302b6212671590b3f9822f01c599bea3f2a77ed41a2ba59e08fc3c55d238af",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Social Type Two is a traditional type-by-instinct hypothesis in which Two attention to needs and connection may appear through group roles, networks, contribution, and being useful to a wider circle. Two group usefulness is observable, but position, leadership duty, or community incentives may explain it.",
-      "title": "Social Type Two: group usefulness as a provisional subtype hypothesis"
+      "summary": "Type Two social is an evidence-limited subtype hypothesis: Type Two attention to needs and connection remains central, while group roles, networks, contribution, and usefulness to a wider circle may receive added focus. Group usefulness alone does not confirm this subtype because position, leadership duties, and community incentives can look the same.",
+      "title": "Type 2 Social: Connection, Contribution, and Group Roles"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -331,5 +331,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "420fdace72aa702f1ba4465d145b31533b46f2c0d0c3bf5192ae945f700b9c20"
+  "source_content_sha256": "ce7fd0dbcf293208837e0028f19783eeadb1bf01e5693e3af76ad22c4ba9aedc"
 }
