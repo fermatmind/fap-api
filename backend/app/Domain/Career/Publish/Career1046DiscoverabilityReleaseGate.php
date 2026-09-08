@@ -56,7 +56,7 @@ final class Career1046DiscoverabilityReleaseGate
 
     public function cacheIdentity(): string
     {
-        return hash('sha256', $this->snapshot()['identity'].'|'.json_encode(app(CareerCurrentIdentity::class)->aliases(), JSON_THROW_ON_ERROR));
+        return hash('sha256', $this->snapshot()['identity'].'|'.json_encode([app(CareerCurrentIdentity::class)->aliases(), app(CareerCurrentIdentity::class)->scopes()], JSON_THROW_ON_ERROR));
     }
 
     public function validationCount(): int

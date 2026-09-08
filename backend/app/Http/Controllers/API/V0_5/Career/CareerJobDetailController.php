@@ -70,6 +70,7 @@ final class CareerJobDetailController extends Controller
             }
 
             $payload = $this->reviewEvidenceBridge->projectDetailPayload($slug, $payload, ! $verifyOnly);
+            $payload = app(CareerCurrentIdentity::class)->projectPayload($payload, $publicLocale);
 
             return response()->json($this->projectReaderSafePayload($payload))
                 ->header(self::PUBLIC_READ_CACHE_HEADER, $read['state']);

@@ -16,7 +16,7 @@ final class CareerContentV3PageUpdater
     ) {}
 
     /** @return array<string,mixed> */
-    public function update(string $backendRoot, string $slug, string $locale, bool $write, ?array $identityAliases = null): array
+    public function update(string $backendRoot, string $slug, string $locale, bool $write, ?array $identityAliases = null, ?array $identityScopes = null): array
     {
         $slug = strtolower(trim($slug));
         $locale = $this->locale($locale);
@@ -34,6 +34,14 @@ final class CareerContentV3PageUpdater
                 unset($manifest['identity_aliases']);
             } else {
                 $manifest['identity_aliases'] = $identityAliases;
+            }
+        }
+        if ($identityScopes !== null) {
+            ksort($identityScopes, SORT_STRING);
+            if ($identityScopes === []) {
+                unset($manifest['identity_scopes']);
+            } else {
+                $manifest['identity_scopes'] = $identityScopes;
             }
         }
         $targetIndex = null;
@@ -73,7 +81,7 @@ final class CareerContentV3PageUpdater
         $manifest['coverage']['legacy_locale_pages'] = $sourceSummary['legacy'];
         $projection = array_intersect_key($manifest, array_flip([
             'authority_path', 'compiler_version', 'contract_version', 'coverage', 'files', 'locales',
-            'schema_version', 'set_hashes', 'source_registry_sha256', 'identity_aliases',
+            'schema_version', 'set_hashes', 'source_registry_sha256', 'identity_aliases', 'identity_scopes',
         ]));
         $manifest['aggregate_sha256'] = CareerCurrentAuthorityPackage::hashValue($projection);
         $manifestBytes = CareerCurrentAuthorityPackage::encodePrettyCanonical($manifest);

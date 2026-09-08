@@ -1,12 +1,1580 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：机械保温隔热工把图纸、规格和现场对象转成测量、裁切、成形、敷设与可复核成品。愿意做精确尺寸工作、手工成形并在条件不全时暂停的人，值得先做纸面试验。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "可观察信号：能从规格中提取尺寸和限制；计算时写明单位与假设；材料或现场条件未知时不硬猜；复核结果并把异常交给受训且获授权人员。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全工作样本（60分钟，仅纸面）：材料E-17给出一段虚构直风管，长3.0米、横截面0.6米×0.4米，四个外表面均计入；忽略端面和开口；计划余量10%；虚构材料每卷名义覆盖5.0平方米。计算展开面积、含余量面积和整卷数，再列出不能据此决定的事项。不得接触真实材料、工具或现场。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考推演：周长2×(0.6+0.4)=2.0米；展开面积2.0×3.0=6.0平方米；含余量6.6平方米；6.6÷5.0=1.32，纸面取整为2卷。题面没有温度、材料类型与厚度、防护层、接口、现场条件和采购规则，不能据此选材、施工或真实采购。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业边界：本页是O*NET 47-2132.00所指的机械保温隔热工，给管道、风管或其他机械系统敷设保温材料，以帮助控制和维持温度。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.profile.definition-block.1",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "投入对象：图纸与规格、管道和风管、换热器和储罐等机械系统、表面形状、位置与用途、保温材料、保护层和密封材料。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "可检查产出：尺寸与用量记录、裁切和成形件、贴合的保温层、封闭或保护表面、检查出的缝隙或损伤，以及交接记录。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.profile.responsibilities-block.2",
+          "source_refs": [
+            "editorial-decision",
+            "onet-target"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "完整流程：读图和确认要求，测量表面，按条件选择数量与方法，裁切成形，绕障碍贴合，覆盖密封或加保护层，检查并记录异常。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.profile.responsibilities-block.3",
+          "source_refs": [
+            "editorial-decision",
+            "onet-target"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断：材料保温特性是否适配，数量和安装方法是否符合位置、形状与设备用途，障碍处如何成形，以及成品是否连续、密封并受保护。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.profile.work-context-block.1",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "环境与节奏：可能在室内外、狭窄位置或高低温环境工作，常需站立、弯曲、攀爬和反复手工操作；具体频率取决于项目。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.profile.work-context-block.2",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "工具与材料：卷尺、手锯、刀剪等裁切工具，以及玻璃纤维、泡沫或软木等保温材料、密封剂和金属保护层；工具名称不等于已受训。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "协作链：从项目或班组取得图纸、区域和施工边界，与管道、设备或其他工种协调接口，把尺寸冲突、表面问题和未决条件交给现场授权角色。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "editorial-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量标准：尺寸和材料与规格一致，障碍处贴合，接缝和开口按要求封闭，保护层连续，异常和未完成项可追溯。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "相邻边界：砖瓦、地毯、其他地面、瓷砖石材和石膏板安装也处理建筑材料，但成品对象分别是砌体、地面或墙顶面，不是机械系统保温层。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.profile.definition-block.2",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "brickmasons-and-blockmasons",
+                "id": "insulation-workers.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/brickmasons-and-blockmasons"
+              },
+              {
+                "entity": "carpet-installers",
+                "id": "insulation-workers.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/carpet-installers"
+              },
+              {
+                "entity": "floor-layers-except-carpet-wood-and-hard-tiles",
+                "id": "insulation-workers.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/floor-layers-except-carpet-wood-and-hard-tiles"
+              },
+              {
+                "entity": "tile-and-stone-setters",
+                "id": "insulation-workers.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/tile-and-stone-setters"
+              },
+              {
+                "entity": "drywall-and-ceiling-tile-installers",
+                "id": "insulation-workers.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/drywall-and-ceiling-tile-installers"
+              }
+            ]
+          },
+          "id": "insulation-workers-mechanical.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-brick",
+            "onet-carpet",
+            "onet-drywall",
+            "onet-floor",
+            "onet-tile"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "砖瓦工用砂浆把砖或砌块构成墙体、隔墙和其他结构；机械保温隔热工围绕管道、风管和机械设备形成保温与保护层。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-brick"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "地毯安装工处理地面地毯、垫层和修边；其他地面铺设工处理减震、降噪或装饰性地面覆盖，两者都不以机械系统保温为交付。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-carpet",
+            "onet-floor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "瓷砖与石材铺设工处理墙、地、顶棚、台面或屋面板上的硬质面层；其材料、基层和表面验收与保温层不同。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-tile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "石膏板与吊顶板安装工处理内墙和顶棚的板材或吸声材料；若更想做建筑表面成品可比较这些方向，若更想围绕温控机械系统则本职业更接近。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-drywall"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助任务：整理图纸尺寸、检查单位、生成裁切清单草稿和比对记录。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用条件：输入图纸、规格、版本、单位和对象编号必须清楚，草稿须能追到原始资料。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数据门槛：尺寸缺失、表面形状不明、材料规格不全或现场变更未同步时，工具输出只能标为待核。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工控制：人要核对版本与单位、抽算关键尺寸、检查真实对象并记录例外。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "剩余责任：工具不能确认真实表面、材料适配、现场风险、施工质量或授权。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "失败风险：旧版图纸、单位混淆、忽略障碍或把名义覆盖率当实耗，会产生错误清单。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业证据边界：任务可辅助不等于企业已采用，也不等于生产率或岗位数量变化。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "实践响应：先在E-17等虚构纸面材料上比较手算与工具结果，记录差异后再讨论受控使用。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial-ai"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：中国大陆暂无可安全使用的数据来表示与O*NET 47-2132.00精确对应的全国职业工资分布。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：国家统计局2025资料按行业和宽泛岗位类别发布，不能替代同期机械保温隔热工职业中位数。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "计量口径：资料中的平均工资是单位工资总额除以单位平均就业人数，且为税前口径；不能直接换成个人月薪或到手收入。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "求职用法：比较岗位时统一地区、项目类型、班次、工时、学徒阶段、技能范围、福利和税前口径，不用行业均值填补职业缺口。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：BLS报告美国机械保温工的全国工资统计。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：数值对应2025年5月。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数：年工资中位数为58,340美元，不是起薪。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "计量单位：这是年工资统计；个人总收入还会受工时、加班和项目安排影响。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "覆盖人群：全国中位数不代表每个州、地区、工会、承包商或学徒阶段。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "决策限制：工资统计不能保证个人报价、录用或未来收入。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "任务信号：愿意先读图和规格，再测量、裁切、成形、贴合、封闭和复核。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "空间信号：能把管道或风管的三维表面转成清楚的尺寸与展开计算。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "精度信号：会写单位、假设和取整规则，能发现尺寸或版本冲突。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "手工信号：愿意长期做站立、弯曲、攀爬和反复手工操作，并核真实岗位条件。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial-decision",
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "质量信号：重视接缝、障碍处贴合、保护层连续和未完成项记录。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：若倾向在温度、材料或现场条件未知时直接选材，应先训练保留未知与升级。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "验证方法：独立完成E-17及两个只改变长度或卷面积的固定变体，比较计算和未知项清单。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "人格边界：现实型兴趣可能帮助探索，但不证明测量、施工质量、安全判断或岗位胜任。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial-decision"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "高处与狭窄位置：先在岗位调查中确认进入条件、培训、保护和停止权限；本页不提供现场作业步骤。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.risk.career-risk-cards.1",
+          "source_refs": [
+            "editorial-risk",
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "污染物与材料：材料、表面或粉尘性质不明时不在纸面建议处理方式，应交给现场安全与技术责任人。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial-risk",
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "相邻设备与温度：设备状态、隔离、表面温度或作业窗口不清楚时，不能把面积计算当成开工许可。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.risk.career-risk-cards.3",
+          "source_refs": [
+            "editorial-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "切割与搬运：工具、材料重量、姿势和空间会改变风险，必须接受对应训练并遵守项目程序。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial-risk",
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同边界：图纸、材料、现场条件、培训或授权任一不明，就记录未知并升级；纸面练习不授予现场权限。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial-risk"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "现实入口：BLS说明机械保温工通常在高中毕业或同等学历后，可通过学徒项目学习；具体入口以当地项目和雇主为准。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.path.career-path-block.1",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "雇主证据：核实第一阶段任务、监督方式、图纸训练、材料与工具培训、工作地点、班次、保护要求和验收责任。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.path.career-path-block.2",
+          "source_refs": [
+            "editorial-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品：提交E-17的一页纸，包含题面、周长与面积计算、取整规则、未知条件和禁止外推事项。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.path.career-path-block.3",
+          "source_refs": [
+            "editorial-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "面试与试用：解释为何6.6平方米可以支持虚构卷数计算，却不能决定材料类型、厚度、现场施工或真实采购。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.path.career-path-block.4",
+          "source_refs": [
+            "editorial-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七天试验：第1天职业边界，第2天图纸尺寸，第3天E-17手算，第4天固定变体，第5天质量清单，第6天职位样本比较，第7天复盘。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.path.career-path-block.5",
+          "source_refs": [
+            "editorial-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "资格决策：课程、学徒和证书是学习线索；真实材料选择、设备使用、现场进入、施工和验收权限须分别核验。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.path.career-path-block.6",
+          "source_refs": [
+            "editorial-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "能力阶梯：先稳定读图、测量、记录和纸面估算，再在监督下学习材料与工具，最后逐步承担复杂形状、保护层和质量交接。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.path.career-path-block.7",
+          "source_refs": [
+            "editorial-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转型路径：可比较砖瓦、地毯、其他地面、瓷砖石材或石膏板安装；共享测量与手工技能，但对象、材料、成品和训练不同。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.path.career-path-block.8",
+          "source_refs": [
+            "editorial-path",
+            "onet-brick",
+            "onet-carpet",
+            "onet-drywall",
+            "onet-floor",
+            "onet-tile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "固定变体仍仅纸面：A仅把E-17长度改为5.0米，其余不变，面积10.0平方米、含余量11.0平方米、2.2卷向上取整3卷；B仅把每卷覆盖改为3.0平方米，其余不变，6.6÷3.0=2.2卷，向上取整3卷。两题都不能决定真实选材或施工。",
+              "第6天用以下两条虚构岗位卡练习比较，无须自行寻找材料：A为受监督学徒，首阶段读图、测量和记录，材料与工具训练由导师安排，班次和进入条件待核；B要求已有机械保温经验，任务含复杂形状和保护层交接，培训证明、验收权限及班次待核。两卡均未给工资、项目地点和具体授权，不得推定待遇或把B视为自动晋级。请列出已知、未知和应向雇主核实的问题。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.path.career-path-block.9",
+          "source_refs": [
+            "editorial-path"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "官方信号：BLS提供美国工资与预测，O*NET提供职业任务与情境；两者都不证明本地正在招聘。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.market-signals.market-signal-card.1",
+          "source_refs": [
+            "editorial-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "就业预测：BLS预计机械保温工在2025—2035年增长5%，这不是个人录用概率。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.market-signals.market-signal-card.2",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "需求因素：BLS把提高新建与既有建筑和系统能效的持续需要列为需求驱动因素。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.market-signals.market-signal-card.3",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "招聘信号：单条职位只代表采样时间、地区、项目、班次、学徒阶段和技能范围。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.market-signals.market-signal-card.4",
+          "source_refs": [
+            "editorial-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "转型信号：相邻工种共享测量、裁切或表面处理能力，不等于其材料、工具、训练和验收责任已掌握。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editorial-market"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "职业任务包括读图纸和规格、测量裁切材料、按位置与表面形状选择数量和安装方法、绕障碍成形，并覆盖密封或加保护层。",
+                "id": "insulation-workers-mechanical.faq.1",
+                "question_key": "career.faq.insulation-workers-mechanical.daily-work",
+                "source_refs": [
+                  "onet-target"
+                ]
+              },
+              {
+                "answer": "砖瓦工用砂浆铺砌砖、结构砖、混凝土砌块等来建造或修复墙体、隔墙、拱券等结构；核心交付不是机械系统保温层；地毯安装工在地面铺装卷材或块状地毯，并安装垫层和修整地面材料；核心对象不是管道、风管或机械设备；其他地面铺设工把减震、降噪或装饰性块材、条材或片材铺到地面；其交付面与机械系统保温不同；瓷砖与石材铺设工把硬质瓷砖、石材等铺到墙、地、顶棚、台面或屋面板；其材料与成品面不同；石膏板与吊顶板安装工在建筑内墙或顶棚安装墙板、吸声板等；其结构表面交付不同于管道、风管和机械系统保温。",
+                "id": "insulation-workers-mechanical.faq.2",
+                "question_key": "career.faq.insulation-workers-mechanical.role-comparison",
+                "source_refs": [
+                  "onet-brick",
+                  "onet-carpet",
+                  "onet-drywall",
+                  "onet-floor",
+                  "onet-tile"
+                ]
+              },
+              {
+                "answer": "可观察适配信号包括精确测量、空间展开、手工成形、按规格复核、清楚记录未知条件，以及在安全或权限不明时停止；兴趣测评只用于探索。",
+                "id": "insulation-workers-mechanical.faq.3",
+                "question_key": "career.faq.insulation-workers-mechanical.fit",
+                "source_refs": [
+                  "editorial-decision"
+                ]
+              },
+              {
+                "answer": "数字工具可辅助整理图纸尺寸、检查单位、生成裁切清单草稿和比对记录；它不能观察真实表面、确认材料适配、替代现场风险判断或授予安装权限。",
+                "id": "insulation-workers-mechanical.faq.4",
+                "question_key": "career.faq.insulation-workers-mechanical.ai-impact",
+                "source_refs": [
+                  "editorial-ai"
+                ]
+              },
+              {
+                "answer": "人工控制点是核对版本和单位、确认输入完整、抽算关键尺寸、记录例外，并由受训且获授权人员判断现场条件、材料选择和验收。",
+                "id": "insulation-workers-mechanical.faq.5",
+                "question_key": "career.faq.insulation-workers-mechanical.human-control",
+                "source_refs": [
+                  "editorial-ai"
+                ]
+              },
+              {
+                "answer": "国家统计局2025工资资料按行业和宽泛岗位类别发布，未给出与O*NET 47-2132.00精确对应的中国大陆全国职业工资分布；国家统计局的平均工资是报告期单位工资总额除以单位平均就业人数，并含税前工资与个人承担的社保、公积金；这一口径不能替代该职业的月薪或到手收入。",
+                "id": "insulation-workers-mechanical.faq.6",
+                "question_key": "career.faq.insulation-workers-mechanical.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "BLS报告机械保温工2025年5月美国年工资中位数为58,340美元；该中位数是美国机械保温工总体统计，不是起薪、个人报价或任何地区与雇主的保证。",
+                "id": "insulation-workers-mechanical.faq.7",
+                "question_key": "career.faq.insulation-workers-mechanical.us-pay",
+                "source_refs": [
+                  "bls-ooh"
+                ]
+              },
+              {
+                "answer": "BLS说明机械保温工通常在取得高中毕业或同等学历后，可通过学徒项目学习；具体招聘与培训要求仍由项目和雇主决定；课程、学徒和证书是学习或能力线索；真实材料选择、设备使用、现场进入、施工和验收权限必须由培训项目、适用规则与雇主分别核验。",
+                "id": "insulation-workers-mechanical.faq.8",
+                "question_key": "career.faq.insulation-workers-mechanical.education-path",
+                "source_refs": [
+                  "bls-ooh",
+                  "editorial-path"
+                ]
+              },
+              {
+                "answer": "职业决策层面应识别高处、狭窄空间、污染物、噪声、高低温、切割工具和相邻设备等风险；本页只要求纸面识别和升级，不提供现场控制步骤。",
+                "id": "insulation-workers-mechanical.faq.9",
+                "question_key": "career.faq.insulation-workers-mechanical.risk-boundary",
+                "source_refs": [
+                  "editorial-risk"
+                ]
+              },
+              {
+                "answer": "BLS预测机械保温工就业在2025—2035年增长5%；预测值不是个人录用概率；BLS将新建与既有建筑和系统提高能效的持续需要列为机械保温工需求驱动因素。",
+                "id": "insulation-workers-mechanical.faq.10",
+                "question_key": "career.faq.insulation-workers-mechanical.outlook-transition",
+                "source_refs": [
+                  "bls-ooh"
+                ]
+              },
+              {
+                "answer": "全国工资、就业预测、行业需求、单条招聘信息和个人录用是不同信号；求职判断必须统一地区、时期、任务范围和雇主条件；可观察适配信号包括精确测量、空间展开、手工成形、按规格复核、清楚记录未知条件，以及在安全或权限不明时停止；兴趣测评只用于探索。",
+                "id": "insulation-workers-mechanical.faq.11",
+                "question_key": "career.faq.insulation-workers-mechanical.career-worth",
+                "source_refs": [
+                  "editorial-decision",
+                  "editorial-market"
+                ]
+              }
+            ]
+          },
+          "id": "insulation-workers-mechanical.sources.faq.1",
+          "source_refs": [
+            "bls-ooh",
+            "editorial-ai",
+            "editorial-decision",
+            "editorial-market",
+            "editorial-path",
+            "editorial-risk",
+            "nbs-wages",
+            "onet-brick",
+            "onet-carpet",
+            "onet-drywall",
+            "onet-floor",
+            "onet-target",
+            "onet-tile"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "O*NET职业事实、BLS美国统计、国家统计局工资边界和编辑练习分别陈述，不跨市场或时期外推。",
+              "E-17只用于纸面职业试做，不构成真实选材、采购、切割、施工、设备操作或现场授权。"
+            ]
+          },
+          "id": "insulation-workers-mechanical.sources.boundary.1",
+          "source_refs": [
+            "bls-ooh",
+            "editorial-ai",
+            "editorial-decision",
+            "editorial-exercise",
+            "editorial-market",
+            "editorial-path",
+            "editorial-risk",
+            "nbs-wages",
+            "onet-brick",
+            "onet-carpet",
+            "onet-drywall",
+            "onet-floor",
+            "onet-target",
+            "onet-tile"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "机械保温隔热工",
+                "id": "insulation-workers-mechanical.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "机械保温隔热工",
+                "id": "insulation-workers-mechanical.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "机械保温隔热工",
+                "id": "insulation-workers-mechanical.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "机械保温隔热工",
+                "id": "insulation-workers-mechanical.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "机械保温隔热工",
+                "id": "insulation-workers-mechanical.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "机械保温隔热工",
+                "id": "insulation-workers-mechanical.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "机械保温隔热工",
+                "id": "insulation-workers-mechanical.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "机械保温隔热工",
+                "id": "insulation-workers-mechanical.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "机械保温隔热工",
+                "id": "insulation-workers-mechanical.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "机械保温隔热工",
+                "id": "insulation-workers-mechanical.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "机械保温隔热工",
+                "id": "insulation-workers-mechanical.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "insulation-workers-mechanical.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "核对机械保温工工作环境、入门、2025工资与2025—2035预测。",
+                  "页面同时覆盖两类保温工；仅使用明确标为mechanical的工资、预测和入门表述。"
+                ],
+                "evidence_type": "official occupational handbook",
+                "id": "bls-ooh",
+                "limitation": "页面同时覆盖两类保温工；仅使用明确标为mechanical的工资、预测和入门表述。",
+                "market": "美国",
+                "name": "Insulation Workers - Occupational Outlook Handbook",
+                "period": "2025 wage and 2025-2035 outlook; accessed 2026-09-07",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/construction-and-extraction/insulation-workers.htm"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "承载数字工具使用与人工复核建议。",
+                  "不构成真实施工、材料采购、设备操作、职业资格或雇主授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-ai",
+                "limitation": "不构成真实施工、材料采购、设备操作、职业资格或雇主授权。",
+                "market": "全球",
+                "name": "机械保温隔热工数字工具边界",
+                "period": "current task analysis; reviewed 2026-09-07",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "承载基于已核职业任务的适配判断。",
+                  "不构成真实施工、材料采购、设备操作、职业资格或雇主授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-decision",
+                "limitation": "不构成真实施工、材料采购、设备操作、职业资格或雇主授权。",
+                "market": "全球",
+                "name": "机械保温隔热工职业决策",
+                "period": "current task analysis; reviewed 2026-09-07",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "承载完全虚构、低风险、可独立推演的纸面练习与答案。",
+                  "不构成真实施工、材料采购、设备操作、职业资格或雇主授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-exercise",
+                "limitation": "不构成真实施工、材料采购、设备操作、职业资格或雇主授权。",
+                "market": "全球",
+                "name": "机械保温隔热工纸面估算练习",
+                "period": "current task analysis; reviewed 2026-09-07",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "承载统计、招聘与个人决策的区分。",
+                  "不构成真实施工、材料采购、设备操作、职业资格或雇主授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-market",
+                "limitation": "不构成真实施工、材料采购、设备操作、职业资格或雇主授权。",
+                "market": "全球",
+                "name": "机械保温隔热工市场信号边界",
+                "period": "current task analysis; reviewed 2026-09-07",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "承载七日试做、雇主核验和能力阶梯建议。",
+                  "不构成真实施工、材料采购、设备操作、职业资格或雇主授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-path",
+                "limitation": "不构成真实施工、材料采购、设备操作、职业资格或雇主授权。",
+                "market": "全球",
+                "name": "机械保温隔热工入门试做路径",
+                "period": "current task analysis; reviewed 2026-09-07",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "承载纸面职业决策中的停止与升级建议。",
+                  "不构成真实施工、材料采购、设备操作、职业资格或雇主授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-risk",
+                "limitation": "不构成真实施工、材料采购、设备操作、职业资格或雇主授权。",
+                "market": "全球",
+                "name": "机械保温隔热工非现场风险建议",
+                "period": "current task analysis; reviewed 2026-09-07",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "核对中国城镇单位2025行业与宽泛岗位工资口径及统计定义。",
+                  "没有机械保温隔热工全国精确职业工资分布，不能作为该职业薪资数值。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "nbs-wages",
+                "limitation": "没有机械保温隔热工全国精确职业工资分布，不能作为该职业薪资数值。",
+                "market": "中国大陆",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual wages; published 2026-05-16; accessed 2026-09-07",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "核对砖瓦工相邻职业范围。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-brick",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "47-2021.00 - Brickmasons and Blockmasons",
+                "period": "current page; accessed 2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-2021.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "核对地毯安装工相邻职业范围。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-carpet",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "47-2041.00 - Carpet Installers",
+                "period": "current page; accessed 2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-2041.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "核对石膏板与吊顶板安装工相邻职业范围。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-drywall",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "47-2081.00 - Drywall and Ceiling Tile Installers",
+                "period": "current page; accessed 2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-2081.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "核对其他地面铺设工相邻职业范围。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-floor",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "47-2042.00 - Floor Layers, Except Carpet, Wood, and Hard Tiles",
+                "period": "current page; accessed 2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-2042.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "核对身份、任务、工作活动、工作情境、教育与兴趣。",
+                  "仅限美国O*NET 47-2132.00；不证明中国工资、所在地资格或雇主授权。"
+                ],
+                "evidence_type": "official occupation detail",
+                "id": "onet-target",
+                "limitation": "仅限美国O*NET 47-2132.00；不证明中国工资、所在地资格或雇主授权。",
+                "market": "美国",
+                "name": "47-2132.00 - Insulation Workers, Mechanical",
+                "period": "current page; accessed 2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-2132.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "核对瓷砖与石材铺设工相邻职业范围。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-tile",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "47-2044.00 - Tile and Stone Setters",
+                "period": "current page; accessed 2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-2044.00"
+              }
+            ]
+          },
+          "id": "insulation-workers-mechanical.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "O*NET 47-2132.00机械系统保温",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业身份",
+        "occupation_scope": "机械保温隔热工 / O*NET 47-2132.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-07",
+        "source_refs": [
+          "onet-target"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "读图、测量、选量与方法、裁切成形、敷设保护、检查记录",
+        "fact_id": "task-object",
+        "market": "美国",
+        "measure": "任务闭环",
+        "occupation_scope": "机械保温隔热工 / O*NET 47-2132.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-07",
+        "source_refs": [
+          "onet-target"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "58,340美元",
+        "fact_id": "us-median",
+        "market": "美国",
+        "measure": "美国年工资中位数",
+        "occupation_scope": "机械保温隔热工 / O*NET 47-2132.00（精确职业数据）",
+        "period": "2025 wage and 2025-2035 outlook; accessed 2026-09-07",
+        "source_refs": [
+          "bls-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025—2035年5%",
+        "fact_id": "market-growth",
+        "market": "美国",
+        "measure": "美国就业预测增长",
+        "occupation_scope": "机械保温隔热工 / O*NET 47-2132.00（精确职业数据）",
+        "period": "2025 wage and 2025-2035 outlook; accessed 2026-09-07",
+        "source_refs": [
+          "bls-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "当前资料未提供",
+        "fact_id": "cn-wage-boundary",
+        "market": "中国大陆",
+        "measure": "中国精确职业工资",
+        "occupation_scope": "中国大陆机械保温隔热工行业代理数据仅用于证明精确职业工资缺口",
+        "period": "2025 annual wages; published 2026-05-16; accessed 2026-09-07",
+        "source_refs": [
+          "nbs-wages"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "8e043c8ba1892e241fbf1c191b004bbd417bf9da042498293590b53d67d39a4e",
+  "source_content_sha256": "a014ff55eb73be4cb89275d098435adcd74a364a812018534e0e853ccaedc99a",
   "subject": {
     "canonical_slug": "insulation-workers-mechanical",
-    "name": "机械绝缘工",
-    "summary": null
+    "name": "机械保温隔热工",
+    "summary": "依据图纸与规格测量机械系统表面，裁切、成形并敷设保温和保护材料，复核接缝与异常；入行前要验证体力环境、培训、现场安全边界和实际授权。"
   }
 }

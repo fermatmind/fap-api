@@ -103,13 +103,14 @@ final class CareerContentV3AuthorityPackage
         }
         $aggregateProjection = array_intersect_key($manifest, array_flip([
             'authority_path', 'compiler_version', 'contract_version', 'coverage', 'files', 'locales',
-            'schema_version', 'set_hashes', 'source_registry_sha256', 'identity_aliases',
+            'schema_version', 'set_hashes', 'source_registry_sha256', 'identity_aliases', 'identity_scopes',
         ]));
         if (! hash_equals($manifest['aggregate_sha256'], CareerCurrentAuthorityPackage::hashValue($aggregateProjection))) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_AGGREGATE_MISMATCH');
         }
 
         $this->assertIdentityAliases($manifest, $entries, $resolvedRoot);
+        $this->validateIdentityScopes($manifest);
 
         return ['root' => $resolvedRoot, 'manifest' => $manifest, 'entries' => $entries, 'slugs' => $slugs];
     }
@@ -262,13 +263,14 @@ final class CareerContentV3AuthorityPackage
 
         $aggregateProjection = array_intersect_key($manifest, array_flip([
             'authority_path', 'compiler_version', 'contract_version', 'coverage', 'files', 'locales',
-            'schema_version', 'set_hashes', 'source_registry_sha256', 'identity_aliases',
+            'schema_version', 'set_hashes', 'source_registry_sha256', 'identity_aliases', 'identity_scopes',
         ]));
         if (! hash_equals($manifest['aggregate_sha256'], CareerCurrentAuthorityPackage::hashValue($aggregateProjection))) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_AGGREGATE_MISMATCH');
         }
 
         $this->assertIdentityAliases($manifest, $this->aliasEntries($manifest), $root);
+        $this->validateIdentityScopes($manifest);
 
         return [
             'manifest' => $manifest,
@@ -306,7 +308,7 @@ final class CareerContentV3AuthorityPackage
             || ($this->expectedEnhancedLocalePages !== null && $enhanced !== $this->expectedEnhancedLocalePages)) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_MANIFEST_INVALID');
         }
-        $keys = array_keys(array_diff_key($manifest, ['identity_aliases' => true]));
+        $keys = array_keys(array_diff_key($manifest, ['identity_aliases' => true, 'identity_scopes' => true]));
         sort($keys, SORT_STRING);
         if ($keys !== [
             'aggregate_sha256', 'authority_path', 'compiler_version', 'contract_version', 'coverage',
@@ -362,6 +364,38 @@ final class CareerContentV3AuthorityPackage
     public function validateIdentityAliases(array $manifest, string $root): void
     {
         $this->assertIdentityAliases($manifest, $this->aliasEntries($manifest), $root);
+        $this->validateIdentityScopes($manifest);
+    }
+
+    public function validateIdentityScopes(array $manifest): void
+    {
+        $scopes = array_key_exists('identity_scopes', $manifest) ? $manifest['identity_scopes'] : [];
+        if (! is_array($scopes) || ($scopes !== [] && array_is_list($scopes))) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_IDENTITY_SCOPES_INVALID');
+        }
+        $entries = $this->aliasEntries($manifest);
+        foreach ($scopes as $slug => $definition) {
+            if (! isset($entries[$slug]) || isset($manifest['identity_aliases'][$slug]) || ! is_array($definition)
+                || ! in_array($definition['scope_type'] ?? null, ['exact_official_occupation', 'bounded_official_combination'], true)
+                || ! is_array($definition['occupations'] ?? null) || ! array_is_list($definition['occupations'])
+                || $definition['occupations'] === [] || count($definition) !== 3
+                || preg_match('/\A[0-9a-f]{64}\z/', (string) ($definition['source_route_sha256'] ?? '')) !== 1) {
+                throw new CareerCurrentAuthorityPackageFailure('CURRENT_IDENTITY_SCOPES_INVALID');
+            }
+            $codes = [];
+            foreach ($definition['occupations'] as $occupation) {
+                if (! is_array($occupation) || count($occupation) !== 2
+                    || ! is_string($occupation['title'] ?? null) || trim($occupation['title']) === ''
+                    || preg_match('/\A[0-9]{2}-[0-9]{4}\.[0-9]{2}\z/', (string) ($occupation['code'] ?? '')) !== 1
+                    || isset($codes[$occupation['code']])) {
+                    throw new CareerCurrentAuthorityPackageFailure('CURRENT_IDENTITY_SCOPES_INVALID');
+                }
+                $codes[$occupation['code']] = true;
+            }
+            if (($definition['scope_type'] === 'exact_official_occupation') !== (count($codes) === 1)) {
+                throw new CareerCurrentAuthorityPackageFailure('CURRENT_IDENTITY_SCOPES_INVALID');
+            }
+        }
     }
 
     private function assertIdentityAliases(array $manifest, array $entries, string $root): void

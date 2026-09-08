@@ -37,7 +37,7 @@ final class CareerDirectoryAuthorityService
 
         $readModel = $this->responseCache->directoryReadModelPayload($publicLocale, $recordCacheState);
         $items = $this->readyIndexableItems(
-            is_array($readModel['items'] ?? null) ? $readModel['items'] : [],
+            app(CareerCurrentIdentity::class)->projectPayload(is_array($readModel['items'] ?? null) ? $readModel['items'] : [], $publicLocale),
         );
         $publicDetailIndexableCount = count($items);
         $queryNormalized = $this->normalizeFilter($query);
@@ -103,7 +103,7 @@ final class CareerDirectoryAuthorityService
         $publicLocale = $this->normalizePublicLocale($locale);
         $readModel = $this->responseCache->directoryReadModelPayload($publicLocale, $recordCacheState);
         $items = $this->readyIndexableItems(
-            is_array($readModel['items'] ?? null) ? $readModel['items'] : [],
+            app(CareerCurrentIdentity::class)->projectPayload(is_array($readModel['items'] ?? null) ? $readModel['items'] : [], $publicLocale),
         );
 
         return array_map(fn (array $item): array => $this->publicItem($item), $items);

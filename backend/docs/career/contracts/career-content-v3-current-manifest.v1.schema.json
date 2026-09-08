@@ -3,6 +3,55 @@
   "$id": "career-content-v3-current-manifest.v1.schema.json",
   "additionalProperties": false,
   "properties": {
+    "identity_scopes": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "scope_type",
+          "occupations",
+          "source_route_sha256"
+        ],
+        "properties": {
+          "scope_type": {
+            "enum": [
+              "exact_official_occupation",
+              "bounded_official_combination"
+            ]
+          },
+          "source_route_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "occupations": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "code",
+                "title"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "pattern": "^[0-9]{2}-[0-9]{4}\\.[0-9]{2}$"
+                },
+                "title": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "identity_aliases": {
       "type": "object",
       "propertyNames": { "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },

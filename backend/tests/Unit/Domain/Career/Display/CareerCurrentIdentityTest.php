@@ -52,6 +52,51 @@ final class CareerCurrentIdentityTest extends TestCase
         self::assertSame('unmatched query', $identity->canonicalQuery('unmatched query'));
     }
 
+    public function test_public_scope_overrides_stale_names_codes_and_statistics_without_mutating_input(): void
+    {
+        $slug = 'drywall-and-ceiling-tile-installers-and-tapers';
+        $identity = app(CareerCurrentIdentity::class);
+        $old = [
+            'identity' => ['canonical_slug' => $slug, 'occupation_uuid' => 'retained-id'],
+            'titles' => ['canonical_en' => 'Old installer', 'canonical_zh' => '旧安装工'],
+            'ontology' => ['crosswalks' => [['source_system' => 'onet_soc_2019', 'source_code' => '47-2081.00']]],
+            'truth_layer' => ['median_pay_usd_annual' => 1, 'jobs_2024' => 2, 'source_refs' => ['old']],
+            'structured_data' => ['occupation' => ['name' => 'Old installer', 'estimatedSalary' => 1]],
+        ];
+        $public = $identity->projectPayload($old, 'zh-CN');
+        self::assertSame('retained-id', $public['identity']['occupation_uuid']);
+        self::assertSame('石膏板与吊顶板安装工及接缝处理工', $public['titles']['canonical_zh']);
+        self::assertSame('Drywall and Ceiling Tile Installers and Tapers', $public['titles']['canonical_en']);
+        self::assertSame(['47-2081.00', '47-2081', '47-2082.00', '47-2082'], array_column($public['ontology']['crosswalks'], 'source_code'));
+        self::assertNull($public['truth_layer']['jobs_2024']);
+        self::assertArrayNotHasKey('estimatedSalary', $public['structured_data']['occupation']);
+        self::assertSame(1, $old['truth_layer']['median_pay_usd_annual']);
+        self::assertSame($public, $identity->projectPayload($public, 'zh-CN'));
+        self::assertSame($slug, $identity->canonicalQuery($public['titles']['canonical_zh']));
+    }
+
+    public function test_invalid_scope_definitions_are_rejected(): void
+    {
+        $package = app(CareerContentV3AuthorityPackage::class);
+        $manifest = $package->load(base_path())['manifest'];
+        $slug = 'drywall-and-ceiling-tile-installers-and-tapers';
+        $valid = $manifest['identity_scopes'][$slug];
+        foreach ([
+            [$slug => array_replace($valid, ['scope_type' => 'exact_official_occupation'])],
+            [$slug => array_replace($valid, ['occupations' => [$valid['occupations'][0], $valid['occupations'][0]]])],
+            [$slug => array_replace($valid, ['source_route_sha256' => 'invalid'])],
+            ['missing-target' => $valid],
+            ['insulation-workers' => $valid],
+        ] as $scopes) {
+            try {
+                $package->validateIdentityScopes(array_replace($manifest, ['identity_scopes' => $scopes]));
+                self::fail('Invalid scope must not publish');
+            } catch (CareerCurrentAuthorityPackageFailure $failure) {
+                self::assertSame('CURRENT_IDENTITY_SCOPES_INVALID', $failure->getMessage());
+            }
+        }
+    }
+
     public function test_invalid_alias_updates_restore_page_manifest_and_intent_exactly(): void
     {
         $root = sys_get_temp_dir().'/career-alias-rollback-'.bin2hex(random_bytes(8));

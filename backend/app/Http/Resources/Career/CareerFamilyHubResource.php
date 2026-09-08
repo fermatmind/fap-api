@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Resources\Career;
 
+use App\Domain\Career\Display\CareerCurrentIdentity;
 use App\DTO\Career\CareerFamilyHubBundle;
 use App\Services\Career\StructuredData\CareerStructuredDataBuilder;
 use Illuminate\Http\Request;
@@ -24,9 +25,9 @@ final class CareerFamilyHubResource extends JsonResource
         /** @var CareerFamilyHubBundle $bundle */
         $bundle = $this->resource;
 
-        return array_merge($bundle->toArray(), [
+        return app(CareerCurrentIdentity::class)->projectPayload(array_merge($bundle->toArray(), [
             'structured_data' => $this->buildStructuredData($bundle),
-        ]);
+        ]), (string) $request->query('locale', 'en'));
     }
 
     /**

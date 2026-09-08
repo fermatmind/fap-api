@@ -60,6 +60,21 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
         $this->getJson('/api/v0.5/career/jobs/'.$alias.'?locale=zh-CN')->assertNotFound();
     }
 
+    public function test_current_combination_names_reach_detail_directory_and_name_search(): void
+    {
+        $slug = 'drywall-and-ceiling-tile-installers-and-tapers';
+        $title = '石膏板与吊顶板安装工及接缝处理工';
+        $this->createDirectoryOccupation($slug, 'Old installer', '旧安装工', 'construction', 'Construction');
+        $this->publishRuntimeProjection([$slug]);
+        $this->warmDirectoryAuthority();
+        $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
+            ->assertOk()->assertJsonPath('titles.canonical_zh', $title)
+            ->assertJsonPath('ontology.crosswalks.2.source_code', '47-2082.00');
+        $this->getJson('/api/v0.5/career/directory?locale=zh-CN&q='.urlencode($title))
+            ->assertOk()->assertJsonPath('pagination.total', 1)
+            ->assertJsonPath('items.0.title', $title);
+    }
+
     public function test_it_returns_paginated_lightweight_directory_authority(): void
     {
         $this->createDirectoryOccupation('accountants-and-auditors', 'Accountants and Auditors', '会计师与审计师', 'business-finance', 'Business and Finance');
@@ -383,6 +398,8 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
             foreach (['en', 'zh-CN'] as $locale) {
                 $responseCache->publishJobDetailReadModel($item['slug'], $locale, $this->detailCacheFixture([
                     'identity' => ['canonical_slug' => $item['slug']],
+                    'titles' => ['canonical_en' => 'Fixture title', 'canonical_zh' => '测试旧名称'],
+                    'ontology' => ['crosswalks' => []],
                     'locale' => $locale,
                     'fixture' => true,
                 ], $item['slug'], $locale));

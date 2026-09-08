@@ -182,7 +182,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
 
                 $payload['items'] = array_values(array_filter($payload['items'] ?? [], static fn (array $item): bool => ! app(CareerCurrentIdentity::class)->isAlias((string) data_get($item, 'identity.canonical_slug', ''))));
 
-                return $payload;
+                return app(CareerCurrentIdentity::class)->projectPayload($payload, $normalizedLocale);
             }
         }
 

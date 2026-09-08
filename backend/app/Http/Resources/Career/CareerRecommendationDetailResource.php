@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Resources\Career;
 
+use App\Domain\Career\Display\CareerCurrentIdentity;
 use App\DTO\Career\CareerRecommendationDetailBundle;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -23,6 +24,6 @@ final class CareerRecommendationDetailResource extends JsonResource
         /** @var CareerRecommendationDetailBundle $bundle */
         $bundle = $this->resource;
 
-        return $bundle->toArray();
+        return app(CareerCurrentIdentity::class)->projectPayload($bundle->toArray(), (string) $request->query('locale', 'zh-CN'));
     }
 }

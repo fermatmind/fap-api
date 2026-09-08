@@ -14,6 +14,33 @@ final class CareerJobSeoServiceTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_current_scope_owns_bilingual_metadata_and_codes(): void
+    {
+        $job = $this->createJob(['slug' => 'drywall-and-ceiling-tile-installers-and-tapers', 'title' => 'Old installer']);
+        $this->createSeoMeta($job, ['seo_title' => 'Old title', 'og_title' => 'Old share title', 'jsonld_overrides_json' => ['estimatedSalary' => 1]]);
+        $service = app(CareerJobSeoService::class);
+        foreach (['en' => 'Drywall and Ceiling Tile Installers and Tapers', 'zh-CN' => '石膏板与吊顶板安装工及接缝处理工'] as $locale => $title) {
+            $meta = $service->buildMeta($job, $locale, true);
+            self::assertSame($title, $meta['title']);
+            self::assertSame($title, $meta['og']['title']);
+            self::assertSame($title, $meta['twitter']['title']);
+            $schema = $service->buildJsonLd($job, $locale, true);
+            self::assertSame($title, $schema['name']);
+            self::assertSame(['47-2081.00', '47-2082.00'], $schema['occupationalCategory']);
+            self::assertArrayNotHasKey('estimatedSalary', $schema);
+        }
+    }
+
+    public function test_alias_metadata_only_points_to_canonical_target(): void
+    {
+        $job = $this->createJob(['slug' => 'preschool-teachers']);
+        $this->createSeoMeta($job, ['canonical_url' => 'https://fermatmind.com/en/career/jobs/preschool-teachers']);
+        $meta = app(CareerJobSeoService::class)->buildMeta($job, 'zh-CN', true);
+        self::assertSame('noindex,follow', $meta['robots']);
+        self::assertSame('https://fermatmind.com/zh/career/jobs/preschool-teachers-except-special-education', $meta['canonical']);
+        self::assertSame('https://fermatmind.com/en/career/jobs/preschool-teachers-except-special-education', $meta['alternates']['en']);
+    }
+
     public function test_frontend_unavailable_public_job_is_forced_noindex(): void
     {
         $job = $this->createJob([

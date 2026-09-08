@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Cms;
 
+use App\Domain\Career\Display\CareerCurrentIdentity;
 use App\Models\CareerJob;
 use App\Models\CareerJobSeoMeta;
 use App\Services\Career\Bundles\CareerJobDetailBundleBuilder;
@@ -36,8 +37,16 @@ final class CareerJobSeoService
             (string) ($job->subtitle ?? null),
             (string) $job->title
         ) ?? (string) $job->title;
+        $currentName = app(CareerCurrentIdentity::class)->name((string) $job->slug, $resolvedLocale);
+        if ($currentName !== null) {
+            $title = $currentName;
+            $description = $resolvedLocale === 'en' ? 'Career overview and next steps for '.$currentName.'.' : $currentName.'的职业范围、工作内容与发展路径。';
+        }
         $canonical = CanonicalFrontendUrl::normalizeAbsoluteUrl($seoMeta?->canonical_url)
             ?? $this->buildCanonicalUrl($job, $resolvedLocale);
+        if (app(CareerCurrentIdentity::class)->isAlias((string) $job->slug)) {
+            $canonical = $this->buildCanonicalUrl($job, $resolvedLocale);
+        }
         $robotsOverride = $this->fallbackText($seoMeta?->robots);
         $robots = $indexable
             ? ($robotsOverride ?? 'index,follow')
@@ -53,15 +62,15 @@ final class CareerJobSeoService
                 'zh-CN' => $this->buildCanonicalUrl($job, 'zh-CN'),
             ],
             'og' => [
-                'title' => $this->fallbackText($seoMeta?->og_title, $title),
-                'description' => $this->fallbackText($seoMeta?->og_description, $description),
+                'title' => $currentName !== null ? $title : $this->fallbackText($seoMeta?->og_title, $title),
+                'description' => $currentName !== null ? $description : $this->fallbackText($seoMeta?->og_description, $description),
                 'image' => $image,
                 'type' => 'article',
             ],
             'twitter' => [
                 'card' => 'summary_large_image',
-                'title' => $this->fallbackText($seoMeta?->twitter_title, $seoMeta?->og_title, $title),
-                'description' => $this->fallbackText(
+                'title' => $currentName !== null ? $title : $this->fallbackText($seoMeta?->twitter_title, $seoMeta?->og_title, $title),
+                'description' => $currentName !== null ? $description : $this->fallbackText(
                     $seoMeta?->twitter_description,
                     $seoMeta?->og_description,
                     $description
@@ -83,13 +92,19 @@ final class CareerJobSeoService
         $jsonLd = [
             '@context' => 'https://schema.org',
             '@type' => 'Occupation',
-            'name' => (string) $job->title,
+            'name' => app(CareerCurrentIdentity::class)->name((string) $job->slug, $resolvedLocale) ?? (string) $job->title,
             'description' => $meta['description'],
             'inLanguage' => $resolvedLocale,
             'url' => $meta['canonical'],
             'mainEntityOfPage' => $meta['canonical'],
         ];
 
+        $definition = app(CareerCurrentIdentity::class)->definition((string) $job->slug);
+        if ($definition !== null) {
+            $jsonLd['occupationalCategory'] = array_column($definition['occupations'], 'code');
+
+            return CanonicalFrontendUrl::normalizeNestedUrls($jsonLd);
+        }
         $skills = $this->flattenSkills($job->skills_json);
         if ($skills !== []) {
             $jsonLd['skills'] = $skills;
@@ -108,7 +123,7 @@ final class CareerJobSeoService
     public function buildCanonicalUrl(CareerJob $job, string $locale): ?string
     {
         $baseUrl = CanonicalFrontendUrl::fromConfig();
-        $slug = trim((string) $job->slug);
+        $slug = app(CareerCurrentIdentity::class)->canonicalSlug((string) $job->slug);
 
         if ($baseUrl === '' || $slug === '') {
             return null;
@@ -131,7 +146,7 @@ final class CareerJobSeoService
         ?bool $frontendDetailAvailable = null,
         ?CareerJobSeoMeta $seoMeta = null
     ): bool {
-        if (! (bool) $job->is_indexable) {
+        if (app(CareerCurrentIdentity::class)->isAlias((string) $job->slug) || ! (bool) $job->is_indexable) {
             return false;
         }
 
