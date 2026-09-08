@@ -134,7 +134,7 @@ final class WarmSitemapSourceCacheCommand extends Command
      *   environment_identity_sha256: string
      * }
      */
-    private function buildFingerprint(array $authorityUrls): array
+    public function buildFingerprint(array $authorityUrls): array
     {
         $authoritySummary = collect($authorityUrls)
             ->map(static function (array $url): array {
@@ -284,6 +284,8 @@ final class WarmSitemapSourceCacheCommand extends Command
 
     private function emitResult(string $status, int $count, float $elapsed, ?string $error = null): int
     {
+        app(\App\Services\Ops\CacheLifecycleAlerts::class)->observe('sitemap_refresh',
+            ! in_array($status, ['failed', 'locked'], true), $error === 'REDIS_OOM');
         if ((bool) $this->option('json')) {
             $payload = [
                 'status' => $status,

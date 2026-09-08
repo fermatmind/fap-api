@@ -42,6 +42,10 @@ return [
         'webhook' => env('OPS_ALERT_WEBHOOK'),
     ],
 
+    'cache_lifecycle' => [
+        'mail_recipient' => env('OPS_CACHE_LIFECYCLE_MAIL_RECIPIENT', env('SEO_COUNCIL_MAIL_RECIPIENT', '')),
+    ],
+
     'career_runtime_slo' => [
         'site_url' => env('CAREER_RUNTIME_SLO_SITE_URL', env('FRONTEND_URL', 'https://fermatmind.com')),
         'api_url' => env('CAREER_RUNTIME_SLO_API_URL', env('APP_URL', 'https://api.fermatmind.com')),

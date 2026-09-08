@@ -32,7 +32,21 @@ final class CareerPrunePublicCacheVersions extends Command
             return self::SUCCESS;
         }
         try {
-            return $this->prune($policy, $root, $deadline);
+            $result = $this->prune($policy, $root, $deadline);
+            if ($this->option('pressure') && $result === self::SUCCESS) {
+                $memory = Cache::store()->getStore()->connection()->client()->info('memory');
+                app(\App\Services\Ops\CacheLifecycleAlerts::class)->observe('redis_capacity',
+                    (int) ($memory['maxmemory'] ?? 0) > 0 && (int) ($memory['used_memory'] ?? PHP_INT_MAX) < (int) $memory['maxmemory'] * 0.85, true);
+            }
+            app(\App\Services\Ops\CacheLifecycleAlerts::class)->observe('career_retention', $result === self::SUCCESS);
+
+            return $result;
+        } catch (\Throwable $error) {
+            app(\App\Services\Ops\CacheLifecycleAlerts::class)->observe('career_retention', false,
+                str_contains($error->getMessage(), 'OOM') || str_contains($error->getMessage(), 'protected payload'));
+            $this->error('Career retention failed; active content retained.');
+
+            return self::FAILURE;
         } finally {
             flock($lease, LOCK_UN);
             fclose($lease);

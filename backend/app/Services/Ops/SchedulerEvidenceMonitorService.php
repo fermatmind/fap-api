@@ -33,7 +33,9 @@ final class SchedulerEvidenceMonitorService
         $heartbeat = $this->heartbeat->check(self::HEARTBEAT_MAX_AGE_SECONDS, $now);
         $weekly = $this->evaluateWeekly($now);
         $alerts = $this->updateAlertState($heartbeat, $weekly, $notify);
-        $healthy = ($heartbeat['ok'] ?? false) === true
+        $cacheLifecycle = app()->environment('production')
+            ? app(CacheLifecycleAlerts::class)->health() : ['ok' => true, 'checks' => []];
+        $healthy = $cacheLifecycle['ok'] && ($heartbeat['ok'] ?? false) === true
             && in_array($weekly['state'] ?? null, ['not_due', 'healthy'], true);
 
         return [
@@ -41,6 +43,7 @@ final class SchedulerEvidenceMonitorService
             'status' => $healthy ? 'pass' : 'fail',
             'observed_at' => $now->format('Y-m-d\TH:i:s\Z'),
             'heartbeat' => $heartbeat,
+            'cache_lifecycle' => $cacheLifecycle,
             'weekly' => $weekly,
             'alerts' => $alerts,
             'read_only' => true,
