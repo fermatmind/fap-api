@@ -51,6 +51,16 @@ final class CacheLifecycleStoragePermissionsTest extends TestCase
             foreach (['', '/shared', '/shared/backend', '/shared/backend/storage', '/shared/backend/storage/app', '/shared/backend/storage/app/private', '/shared/backend/storage/app/ops'] as $part) {
                 File::ensureDirectoryExists($root.$part, 0711);
             }
+            // Give the second actor a disposable readable runtime; runner checkout parents
+            // may be private and must not have their permissions broadened by this test.
+            $runtime = $root.'/runtime';
+            File::ensureDirectoryExists($runtime, 0755);
+            (new Process(['cp', '-R', base_path('vendor'), $runtime.'/vendor']))->mustRun();
+            foreach (['Services/Ops/CacheLifecycleAlerts.php', 'Support/PublicProjectionCache.php'] as $source) {
+                File::ensureDirectoryExists(dirname($runtime.'/app/'.$source), 0755);
+                File::copy(app_path($source), $runtime.'/app/'.$source);
+            }
+            (new Process(['chmod', '-R', 'a+rX', $runtime]))->mustRun();
             $nobody = posix_getpwnam('nobody');
             (new Process(['sudo', '-n', 'chown', posix_getuid().':'.$nobody['gid'], $root.'/shared']))->mustRun();
             (new Process(['sudo', '-n', 'python3', base_path('scripts/deploy/prepare_cache_lifecycle_storage.py'), '--storage-root', $storage]))->mustRun();
@@ -68,7 +78,7 @@ App\Support\PublicProjectionCache::mutation(static function() {
 }, true);
 PHP;
             foreach ([[], ['sudo', '-n', '-u', 'nobody', '--'], []] as $prefix) {
-                (new Process([...$prefix, PHP_BINARY, '-r', $code, base_path(), $storage]))->mustRun();
+                (new Process([...$prefix, PHP_BINARY, '-r', $code, $runtime, $storage]))->mustRun();
             }
             $state = json_decode(file_get_contents($storage.'/app/ops/cache-lifecycle/career_retention.json'), true);
             $this->assertTrue($state['healthy']);

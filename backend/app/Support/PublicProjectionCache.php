@@ -11,8 +11,28 @@ final class PublicProjectionCache
 {
     public static function selected(string $key): bool
     {
-        return (str_starts_with($key, 'career:public-authority:') && ! str_ends_with($key, ':warm-dispatch'))
-            || in_array($key, ['seo:sitemap-source:v1:fresh', 'seo:sitemap-source:v1:stale', 'seo:sitemap-source:warm-fingerprint:v1'], true);
+        if (in_array($key, ['seo:sitemap-source:v1:fresh', 'seo:sitemap-source:v1:stale', 'seo:sitemap-source:warm-fingerprint:v1',
+            'career:public-authority:dataset-hub:v3', 'career:public-authority:dataset-method:v3',
+            'career:public-authority:launch-governance-closure:v1', 'career:public-authority:warm-fingerprint:v1'], true)) {
+            return true;
+        }
+
+        return preg_match('~^career:public-authority:(?:'
+            .'job-detail:v1:[a-z0-9-]+:(?:en|zh-CN)'
+            .'|job-detail:v3:[a-z0-9-]+:(?:en|zh-CN):(?:active|lkg|negative|(?:versions|exposure-projections|pins):[^:]+)'
+            .'|job-index:v2:(?:en|zh-CN):(?:public|with-non-indexable)'
+            .'|job-index:v3:(?:en|zh-CN):(?:public|with-non-indexable):(?:active|lkg|versions:[^:]+)'
+            .'|directory-read-model:v1:(?:en|zh-CN)'
+            .'|directory-read-model:v2:(?:en|zh-CN):(?:active|lkg|activated-at|last-rebuild-ms|versions:[^:]+)'
+            .'|first-wave-next-step:v1:[a-z0-9-]+:(?:en|zh-CN):(?:active|lkg|negative)'
+            .')$~D', $key) === 1;
+    }
+
+    public static function pointerBase(string $key): ?string
+    {
+        return preg_match('~^(career:public-authority:(?:job-detail:v3:[a-z0-9-]+:(?:en|zh-CN)'
+            .'|job-index:v3:(?:en|zh-CN):(?:public|with-non-indexable)'
+            .'|directory-read-model:v2:(?:en|zh-CN))):(?:active|lkg)$~D', $key, $match) === 1 ? $match[1] : null;
     }
 
     public static function statePath(): string

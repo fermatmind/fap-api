@@ -191,10 +191,10 @@ final class PublicProjectionMigration
                 Projection::mutation(function () use ($left, $right, $key, $leftPrefix, $rightPrefix): void {
                     $other = $rightPrefix.substr($key, strlen($leftPrefix));
                     $logical = substr($key, strlen($leftPrefix));
-                    if (preg_match('/^(career:public-authority:.*):(active|lkg)$/D', $logical, $pointer)) {
+                    if (($pointerBase = Projection::pointerBase($logical)) !== null) {
                         $raw = $left->rawCommand('GET', $key);
                         $version = is_string($raw) ? @unserialize($raw, ['allowed_classes' => false]) : null;
-                        if (! is_string($version) || ! $left->rawCommand('EXISTS', $leftPrefix.$pointer[1].':versions:'.$version)) {
+                        if (! is_string($version) || ! $left->rawCommand('EXISTS', $leftPrefix.$pointerBase.':versions:'.$version)) {
                             throw new \RuntimeException('Public projection active/LKG payload missing.');
                         }
                     }
@@ -243,15 +243,15 @@ final class PublicProjectionMigration
                         throw new \RuntimeException('Public integrity verification exceeded budget.');
                     }
                     $logical = substr($key, strlen($prefix));
-                    if (preg_match('/^(career:public-authority:.*):(active|lkg)$/D', $logical, $pointer)) {
+                    if (($pointerBase = Projection::pointerBase($logical)) !== null) {
                         $references++;
-                        Projection::mutation(function () use ($current, $prefix, $key, $pointer): void {
+                        Projection::mutation(function () use ($current, $prefix, $key, $pointerBase): void {
                             $raw = $current->rawCommand('GET', $key);
                             if ($raw === false) {
                                 return; // Concurrent withdrawal removed this reference.
                             }
                             $version = @unserialize($raw, ['allowed_classes' => false]);
-                            if (! is_string($version) || ! $current->rawCommand('EXISTS', $prefix.$pointer[1].':versions:'.$version)) {
+                            if (! is_string($version) || ! $current->rawCommand('EXISTS', $prefix.$pointerBase.':versions:'.$version)) {
                                 throw new \RuntimeException('Public active/LKG payload missing.');
                             }
                         });

@@ -67,6 +67,9 @@ final class PublicProjectionMigrationTest extends TestCase
         Projection::forever($base.':versions:v1', ['body' => '完整正文']);
         Projection::put('seo:sitemap-source:v1:fresh', ['urls' => ['/zh/career/jobs/test-role']], 600);
         Cache::forever('limiter:sentinel', 3);
+        Cache::forever('career:public-authority:unclassified-state', 'keep');
+        Cache::forever('career:public-authority:directory-read-model:v2:en:rebuild-lock', 'keep-lock');
+        Projection::forever('career:public-authority:first-wave-next-step:v1:test-role:en:active', ['inline' => 'public payload']);
         app('redis')->connection('default')->rpush('queues:default', 'untouched-task');
 
         return $base;
@@ -85,6 +88,9 @@ final class PublicProjectionMigrationTest extends TestCase
         $this->assertSame('primary', $migration->activate()['status']);
         $this->assertSame(['body' => '完整正文'], Projection::get($base.':versions:v1'));
         $this->assertNull(Cache::store('public_projection')->get('limiter:sentinel'));
+        $this->assertNull(Cache::store('public_projection')->get('career:public-authority:unclassified-state'));
+        $this->assertNull(Cache::store('public_projection')->get('career:public-authority:directory-read-model:v2:en:rebuild-lock'));
+        $this->assertSame(['inline' => 'public payload'], Projection::get('career:public-authority:first-wave-next-step:v1:test-role:en:active'));
         $this->assertFalse(Projection::lock('publication:sentinel', 60)->get());
         Projection::forever($base.':versions:v2', ['body' => 'updated']);
         Projection::forever($base.':active', 'v2');
@@ -147,6 +153,8 @@ final class PublicProjectionMigrationTest extends TestCase
         Cache::store('public_projection')->forever($base.':active', 'v1');
         $this->assertSame('isolated', $migration->retire()['status']);
         $this->assertNull(Cache::get($base.':active'));
+        $this->assertSame('keep', Cache::get('career:public-authority:unclassified-state'));
+        $this->assertSame('keep-lock', Cache::get('career:public-authority:directory-read-model:v2:en:rebuild-lock'));
         $this->assertSame('v1', Projection::get($base.':active'));
         $this->assertSame('3', Cache::get('limiter:sentinel'));
         $this->assertSame(['untouched-task'], app('redis')->connection('default')->lrange('queues:default', 0, -1));
@@ -183,7 +191,7 @@ final class PublicProjectionMigrationTest extends TestCase
         $migration->prepare();
         Projection::mutation(fn () => Projection::writeState([...Projection::state(), 'mode' => 'mirror']), true);
         for ($i = 0; $i < 80; $i++) {
-            Projection::forever('career:public-authority:test-fixture:'.$i, str_repeat('x', 65536));
+            Projection::forever('career:public-authority:job-detail:v3:fixture-'.$i.':en:versions:v1', str_repeat('x', 65536));
         }
         $pid = pcntl_fork();
         if ($pid === 0) {
