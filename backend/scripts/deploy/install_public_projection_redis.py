@@ -51,10 +51,22 @@ def validate(candidate: Path, staging: bool = False) -> str:
     return content
 
 
+def redis_binary() -> Path:
+    # Reuse the installed host binary. Staging uses /usr/local/bin while
+    # production uses the distro package; never install/upgrade the original.
+    for candidate in [Path('/usr/bin/redis-server'), Path('/usr/local/bin/redis-server')]:
+        if candidate.is_file() and candidate.lstat().st_uid == 0:
+            stat = candidate.stat()
+            if stat.st_uid == 0 and stat.st_mode & 0o022 == 0 and os.access(candidate, os.X_OK):
+                return candidate
+    raise ValueError('trusted installed Redis binary unavailable')
+
+
 def install(candidate: Path, staging: bool = False) -> None:
     if os.geteuid() != 0:
         raise ValueError('root installation required')
     content = validate(candidate, staging)
+    unit_text = UNIT.replace('/usr/bin/redis-server', str(redis_binary()))
     destination = Path('/etc/redis/fermatmind-public-projection.conf')
     unit = Path('/etc/systemd/system/fermatmind-public-projection.service')
     directory = Path('/var/lib/redis-public-projection')
@@ -65,7 +77,7 @@ def install(candidate: Path, staging: bool = False) -> None:
     # a separately verified rolling path, not an implicit restart during a UI release.
     if destination.exists() and destination.read_text() != content:
         raise ValueError('existing public Redis configuration differs')
-    if unit.exists() and unit.read_text() != UNIT:
+    if unit.exists() and unit.read_text() != unit_text:
         raise ValueError('existing public Redis unit differs')
     if not unit.exists():
         # Refuse an occupied port before creating any persistent service files.
@@ -75,13 +87,14 @@ def install(candidate: Path, staging: bool = False) -> None:
     directory.mkdir(mode=0o700, exist_ok=True)
     os.chown(directory, redis.pw_uid, redis.pw_gid)
     directory.chmod(0o700)
+    destination.parent.mkdir(mode=0o755, exist_ok=True)
     if not destination.exists():
         with os.fdopen(os.open(destination, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o640), 'w') as stream:
             stream.write(content)
         os.chown(destination, 0, redis.pw_gid)
         destination.chmod(0o640)
     if not unit.exists():
-        unit.write_text(UNIT)
+        unit.write_text(unit_text)
         unit.chmod(0o644)
     subprocess.run(['systemd-analyze', 'verify', str(unit)], check=True, capture_output=True, timeout=20)
     subprocess.run(['systemctl', 'daemon-reload'], check=True, capture_output=True, timeout=20)

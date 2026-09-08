@@ -16,12 +16,13 @@ final class CacheLifecycleStoragePermissionsTest extends TestCase
         $storage = $root.'/shared/backend/storage';
         try {
             File::ensureDirectoryExists($storage.'/app/private/career-cache-retention/20260908-000000-aaaaaaaa', 0700);
-            File::ensureDirectoryExists($storage.'/app/ops', 0770);
+            // Staging may not have any previous Ops files or parent directory.
             file_put_contents($storage.'/app/private/career-cache-retention/20260908-000000-aaaaaaaa/removed.jsonl', 'backup');
             $command = ['python3', base_path('scripts/deploy/prepare_cache_lifecycle_storage.py'), '--storage-root', $storage];
             $process = new Process($command);
             $process->mustRun();
             clearstatcache();
+            $this->assertSame(02770, fileperms($storage.'/app/ops/cache-lifecycle') & 07777);
             $this->assertSame(02770, fileperms($storage.'/app/private/career-cache-retention') & 07777);
             $this->assertSame(0660, fileperms($storage.'/app/private/career-cache-retention/20260908-000000-aaaaaaaa/removed.jsonl') & 0777);
             file_put_contents($root.'/unrelated', 'untouched');

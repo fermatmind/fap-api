@@ -43,8 +43,14 @@ def prepare(root: Path) -> int:
     directories = list(roots)
     files = []
     for directory in roots:
-        if directory.is_symlink() or directory.parent.is_symlink() or not directory.parent.is_dir():
+        if directory.is_symlink() or directory.parent.is_symlink():
             raise ValueError('unsafe maintenance directory')
+        if not directory.parent.exists():
+            if not directory.parent.parent.is_dir() or directory.parent.parent.is_symlink():
+                raise ValueError('unsafe maintenance parent')
+            directories.insert(0, directory.parent)
+        elif not directory.parent.is_dir():
+            raise ValueError('unsafe maintenance parent')
         if not directory.exists():
             continue
         for entry in directory.iterdir():
@@ -70,15 +76,15 @@ def prepare(root: Path) -> int:
             if not item.is_file():
                 raise ValueError('invalid retention lock')
             files.append(item)
-    lock = root / 'app/private/career-cache-retention.lock'
-    if not lock.exists():
-        lock.touch(mode=0o660, exist_ok=False)
-        files.append(lock)
     for target in directories:
         target.mkdir(mode=0o2770, exist_ok=True)
         os.chown(target, shared.st_uid, shared.st_gid)
         target.chmod(0o2770)
         access(target, shared.st_uid, True)
+    lock = root / 'app/private/career-cache-retention.lock'
+    if not lock.exists():
+        lock.touch(mode=0o660, exist_ok=False)
+        files.append(lock)
     for target in files:
         os.chown(target, shared.st_uid, shared.st_gid)
         target.chmod(0o660)
